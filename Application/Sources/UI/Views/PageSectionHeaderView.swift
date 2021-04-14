@@ -10,7 +10,7 @@ struct PageSectionHeaderView: View {
     let section: PageModel.Section
     let pageTitle: String?
     
-    @Environment(\.accessibilityEnabled) private var accessibilityEnabled
+    @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
         
     private var accessibilityLabel: String {
         if let summary = section.properties.summary {
@@ -33,7 +33,7 @@ struct PageSectionHeaderView: View {
                 .opacity(0.8)
         }
         VStack(alignment: .leading) {
-            if let title = accessibilityEnabled ? section.properties.accessibilityTitle : section.properties.title {
+            if let title = isVoiceOverRunning ? section.properties.accessibilityTitle : section.properties.title {
                 Text(title)
                     .srgFont(.H2)
                     .lineLimit(1)

@@ -1729,6 +1729,16 @@
 		6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
 		6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
 		6FF8F15A250609CF009A741F /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
+		6FF9EC4E2626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC4F2626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC502626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC512626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC532626C9CC00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC542626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC552626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC562626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
+		6FF9EC572626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
 		6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
@@ -2576,6 +2586,7 @@
 		6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSelectorCell.m; sourceTree = "<group>"; };
 		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
 		6FF8F155250609CF009A741F /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
+		6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
 		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTracker.swift; sourceTree = "<group>"; };
@@ -3015,6 +3026,7 @@
 			children = (
 				6F4760181EB37BD1003021EA /* Categories */,
 				08C33ED323CB5C6500D422C1 /* Protocols */,
+				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
 				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
@@ -7238,6 +7250,7 @@
 				6F9122BF1DC8708400725EEB /* PlayErrors.m in Sources */,
 				6FE1B9191FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F93DE0D20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
+				6FF9EC4E2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				6FAAF78820CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */,
@@ -7511,6 +7524,7 @@
 				08DD9D5E1FFE6EF800115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FF9EC4F2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9A2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
@@ -7695,6 +7709,7 @@
 				08DD9D621FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FF9EC502626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9B2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
@@ -7879,6 +7894,7 @@
 				08DD9D661FFE6EF900115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FF9EC512626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9C2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
@@ -8063,6 +8079,7 @@
 				08DD9D6A1FFE6EFA00115906 /* ModuleHeaderView.m in Sources */,
 				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9D2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
@@ -8277,6 +8294,7 @@
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F0850F926256A7700B4E410 /* Reachability.m in Sources */,
 				0809813F2622195900AA586B /* Badges.swift in Sources */,
+				6FF9EC532626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				6FDB2AC524E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DE261C9D3C003FFDCF /* PageViewController.swift in Sources */,
 				6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
@@ -8371,6 +8389,7 @@
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6F0850FA26256A7700B4E410 /* Reachability.m in Sources */,
 				080981402622195900AA586B /* Badges.swift in Sources */,
+				6FF9EC542626C9CD00A2E11A /* Accessibility.swift in Sources */,
 				6FDB2AC624E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2DF261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
@@ -8465,6 +8484,7 @@
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F0850FB26256A7700B4E410 /* Reachability.m in Sources */,
 				080981412622195900AA586B /* Badges.swift in Sources */,
+				6FF9EC552626C9CD00A2E11A /* Accessibility.swift in Sources */,
 				6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */,
 				6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
@@ -8559,6 +8579,7 @@
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6F0850FC26256A7700B4E410 /* Reachability.m in Sources */,
 				080981422622195900AA586B /* Badges.swift in Sources */,
+				6FF9EC562626C9CD00A2E11A /* Accessibility.swift in Sources */,
 				6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FA261C9D3E003FFDCF /* PageViewController.swift in Sources */,
 				6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
@@ -8653,6 +8674,7 @@
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6F0850FD26256A7700B4E410 /* Reachability.m in Sources */,
 				080981432622195900AA586B /* Badges.swift in Sources */,
+				6FF9EC572626C9CD00A2E11A /* Accessibility.swift in Sources */,
 				6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */,
 				6FA8E2FB261C9D3E003FFDCF /* PageViewController.swift in Sources */,
 				6FF129C8256C0A9F0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,

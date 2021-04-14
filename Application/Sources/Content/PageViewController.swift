@@ -416,7 +416,7 @@ class PageViewController: DataViewController {
             }
             .store(in: &refreshCancellables)
         
-        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification, object: nil)
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .sink { [weak self] _ in
                 self?.refresh()
             }
