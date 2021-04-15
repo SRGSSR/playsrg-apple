@@ -471,6 +471,7 @@ fileprivate extension SRGDataProvider {
     /// Publishes radio livestreams, replacing regional radio channels. Updates are published down the pipeline as they
     /// are retrieved.
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
+        #if os(iOS)
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
             .flatMap { result -> AnyPublisher<[SRGMedia], Error> in
                 var regionalizedMedias = result.medias
@@ -502,6 +503,11 @@ fileprivate extension SRGDataProvider {
                 .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
+        #else
+        return radioLivestreams(for: vendor, contentProviders: contentProviders)
+            .map { $0.medias }
+            .eraseToAnyPublisher()
+        #endif
     }
     
     func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
