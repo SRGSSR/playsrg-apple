@@ -84,8 +84,7 @@ extension PageViewController {
                 TopicCell(topic: topic)
             #if os(iOS)
             case .showAccess:
-                // FIXME: Restore actions
-                ShowAccessCell(action: { _ in })
+                ShowAccessCell()
             #endif
             }
         }

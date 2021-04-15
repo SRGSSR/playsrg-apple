@@ -432,6 +432,22 @@ extension PageViewController: DZNEmptyDataSetDelegate {
 }
 
 #if os(iOS)
+extension PageViewController: ShowAccessCellActions {
+    func openShowAZ() {
+        if let navigationController = navigationController {
+            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            navigationController.pushViewController(showsViewController, animated: true)
+        }
+    }
+    
+    func openShowByDate() {
+        if let navigationController = navigationController {
+            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            navigationController.pushViewController(showsViewController, animated: true)
+        }
+    }
+}
+
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
         collectionView.play_scrollToTop(animated: animated)
