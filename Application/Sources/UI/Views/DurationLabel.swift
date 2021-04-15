@@ -9,29 +9,29 @@ import SwiftUI
 struct DurationLabel: View {
     let media: SRGMedia?
     
-    private var properties: (text: String, color: Color)? {
+    private var isLivestream: Bool {
+        guard let media = media else { return false }
+        return media.contentType == .livestream || media.contentType == .scheduledLivestream
+    }
+    
+    private var duration: String? {
         guard let media = media else { return nil }
-        if media.contentType == .livestream || media.contentType == .scheduledLivestream {
-            if media.blockingReason(at: Date()) == .startDate {
-                return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(white: 0, opacity: 0.5))
-            }
-            else {
-                return (NSLocalizedString("Live", comment: "Short label identifying a livestream."), Color(.play_red))
-            }
+        if isLivestream {
+            return NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.")
         }
         else {
-            return (PlayShortFormattedMinutes(media.duration / 1000), Color(white: 0, opacity: 0.5))
+            return PlayShortFormattedMinutes(media.duration / 1000)
         }
     }
     
     var body: some View {
-        if let properties = properties {
-            Text(properties.text)
+        if let duration = duration {
+            Text(duration)
                 .srgFont(.caption)
                 .foregroundColor(.white)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 8)
-                .background(properties.color)
+                .background(isLivestream ? Color(.play_liveRed) : Color(white: 0, opacity: 0.5))
                 .cornerRadius(4)
         }
     }
