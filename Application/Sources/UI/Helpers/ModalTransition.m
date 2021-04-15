@@ -58,8 +58,10 @@
     dimmingView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5f];
     self.dimmingView = dimmingView;
     
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
     if (self.presentation) {
-        __unused UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
         NSAssert(toViewController.modalPresentationStyle == UIModalPresentationCustom, @"A custom modal presentation style must be used");
         
         UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
@@ -72,6 +74,10 @@
         NSAssert(fromView != nil, @"Dismissed view must be available");
         [containerView insertSubview:dimmingView belowSubview:fromView];
     }
+    
+    // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
+    [fromViewController beginAppearanceTransition:NO animated:transitionContext.animated];
+    [toViewController beginAppearanceTransition:YES animated:transitionContext.animated];
     
     [self updateTransition:transitionContext withProgress:0.f];
 }
@@ -114,6 +120,14 @@
     if (! success) {
         UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
         [toView removeFromSuperview];
+    }
+    else {
+        // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
+        UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+        [fromViewController endAppearanceTransition];
+        
+        UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+        [toViewController endAppearanceTransition];
     }
     
     [self.dimmingView removeFromSuperview];

@@ -205,7 +205,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             Playlist *playlist = PlaylistForURN(media.URN);
             letterboxController.playlistDataSource = playlist;
             letterboxController.playbackTransitionDelegate = playlist;
-            [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+            [topViewController play_presentViewController:mediaPlayerViewController animated:animated completion:completion];
         };
         
         if (@available(iOS 13, *)) {
@@ -356,6 +356,31 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 #endif
 
+- (void)play_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion
+{
+    // Not animated: The system takes care of sending transition appearance events (and thus view lifecycle events).
+    // Custom transition: Retrieved from the delegate only when animated. Must take care of implementing transition
+    //                    appearance events (most notably for interactive transitions which otherwise would not be
+    //                    covered).
+    if (animated || ! viewController.transitioningDelegate) {
+        [self presentViewController:viewController animated:YES completion:completion];
+    }
+    else {
+        UIViewController *fromViewController = self;
+        UIViewController *toViewController = viewController;
+        
+        [fromViewController beginAppearanceTransition:NO animated:NO];
+        [toViewController beginAppearanceTransition:YES animated:NO];
+        
+        [self presentViewController:viewController animated:NO completion:^{
+            [fromViewController endAppearanceTransition];
+            [toViewController endAppearanceTransition];
+            
+            completion ? completion() : nil;
+        }];
+    }
+}
+
 - (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
 #if TARGET_OS_IOS
@@ -378,7 +403,25 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         }
     }
 #endif
-    [self dismissViewControllerAnimated:animated completion:completion];
+    
+    // See `-play_presentViewController:animated:completion:`
+    if (animated || ! self.transitioningDelegate) {
+        [self dismissViewControllerAnimated:animated completion:completion];
+    }
+    else {
+        UIViewController *fromViewController = self;
+        UIViewController *toViewController = self.presentingViewController;
+        
+        [fromViewController beginAppearanceTransition:NO animated:NO];
+        [toViewController beginAppearanceTransition:YES animated:NO];
+        
+        [self dismissViewControllerAnimated:NO completion:^{
+            [fromViewController endAppearanceTransition];
+            [toViewController endAppearanceTransition];
+            
+            completion ? completion() : nil;
+        }];
+    }
 }
 
 @end
