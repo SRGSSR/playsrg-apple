@@ -432,12 +432,12 @@ extension ConfiguredSection: PageSectionProperties {
                 .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioLive:
-            return dataProvider.radioLivestreams(for: vendor, contentProviders: .default)
-                .map { $0.medias.map { .media($0, section: section) } }
+            return dataProvider.regionalizedRadioLivestreams(for: vendor)
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioLiveSatellite:
-            return dataProvider.radioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
-                .map { $0.medias.map { .media($0, section: section) } }
+            return dataProvider.regionalizedRadioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .tvLiveCenter:
             return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
@@ -452,8 +452,8 @@ extension ConfiguredSection: PageSectionProperties {
 }
 
 fileprivate extension SRGDataProvider {
+    /// Publishes the latest 30 episodes for a show URN list
     func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
-        /* Load latest 15 medias for each 3 shows, get last 30 episodes */
         return urns.publisher
             .collect(3)
             .flatMap { urns in
@@ -464,6 +464,42 @@ fileprivate extension SRGDataProvider {
             }
             .map { medias in
                 return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    /// Publishes radio livestreams, replacing regional radio channels. Updates are published down the pipeline as they
+    /// are retrieved.
+    func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
+        return radioLivestreams(for: vendor, contentProviders: contentProviders)
+            .flatMap { result -> AnyPublisher<[SRGMedia], Error> in
+                var regionalizedMedias = result.medias
+                return Publishers.MergeMany(regionalizedMedias.compactMap { media -> AnyPublisher<[SRGMedia], Error>? in
+                    guard let channelUid = media.channel?.uid else { return nil }
+                    
+                    // If a regional stream has been selected by the user, replace the main channel media with it
+                    let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid)
+                    if selectedLivestreamUrn != nil && media.urn != selectedLivestreamUrn {
+                        return self.radioLivestreams(for: vendor, channelUid: channelUid)
+                            .map { result in
+                                if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, result.medias) {
+                                    guard let index = regionalizedMedias.firstIndex(of: media) else { return result.medias }
+                                    regionalizedMedias[index] = selectedMedia
+                                    return regionalizedMedias
+                                }
+                                else {
+                                    return result.medias
+                                }
+                            }
+                            .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Just(regionalizedMedias)
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    }
+                })
+                .eraseToAnyPublisher()
             }
             .eraseToAnyPublisher()
     }

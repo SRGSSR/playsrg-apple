@@ -106,7 +106,8 @@ class PageModel: Identifiable, ObservableObject {
 }
 
 fileprivate extension SRGDataProvider {
-    /// Publishes rows associated with a page id, starting from the provided rows and updating them as they are retrieved
+    /// Publishes rows associated with a page id, starting from the provided rows. Updates are published down the pipeline
+    /// as they are retrieved.
     func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row]) -> AnyPublisher<[PageModel.Row], Error> {
         return sectionsPublisher(id: id)
             // For each section create a publisher which updates the associated row and publishes the entire updated
@@ -114,7 +115,7 @@ fileprivate extension SRGDataProvider {
             .flatMap { sections -> AnyPublisher<[PageModel.Row], Never> in
                 var rows = Self.reusableRows(from: existingRows, for: sections)
                 return Publishers.MergeMany(sections.map { section in
-                    self.rowPublisher(id: id, section: section)
+                    return self.rowPublisher(id: id, section: section)
                         .map { row in
                             guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
                             rows[index] = row

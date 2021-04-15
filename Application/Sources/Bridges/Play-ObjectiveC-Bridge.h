@@ -8,6 +8,7 @@
 // Objective-C headers will be automatically exposed to all Swift source files.
 
 #import "ApplicationConfiguration.h"
+#import "ApplicationSettings.h"
 #import "BaseViewController.h"
 #import "CalendarViewController.h"
 #import "ChannelService.h"
