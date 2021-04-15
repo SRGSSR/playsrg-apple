@@ -223,191 +223,26 @@ class PageViewController: DataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let pageSectionHeaderViewIdentifier = "PageSectionHeaderView"
-        collectionView.register(HostSupplementaryView<PageSectionHeaderView>.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: pageSectionHeaderViewIdentifier)
-        
-        let mediaCellIdentifier = "MediaCell"
-        collectionView.register(HostCollectionViewCell<MediaCell>.self, forCellWithReuseIdentifier: mediaCellIdentifier)
-        
-        let liveMediaCellIdentifier = "LiveMediaCell"
-        collectionView.register(HostCollectionViewCell<LiveMediaCell>.self, forCellWithReuseIdentifier: liveMediaCellIdentifier)
-       
-        let showCellIdentifier = "ShowCell"
-        collectionView.register(HostCollectionViewCell<ShowCell>.self, forCellWithReuseIdentifier: showCellIdentifier)
-        
-        let topicCellIdentifier = "TopicCell"
-        collectionView.register(HostCollectionViewCell<TopicCell>.self, forCellWithReuseIdentifier: topicCellIdentifier)
-        
-        #if os(iOS)
-        let showAccessCellIdentifier = "ShowAccessCell"
-        collectionView.register(HostCollectionViewCell<ShowAccessCell>.self, forCellWithReuseIdentifier: showAccessCellIdentifier)
-        #else
-        let featuredMediaCellIdentifier = "FeaturedMediaCell"
-        collectionView.register(HostCollectionViewCell<FeaturedMediaCell>.self, forCellWithReuseIdentifier: featuredMediaCellIdentifier)
-        
-        let featuredShowCellIdentifier = "FeaturedShowCell"
-        collectionView.register(HostCollectionViewCell<FeaturedShowCell>.self, forCellWithReuseIdentifier: featuredShowCellIdentifier)
-        #endif
-        
-        // TODO: Factor out cell dequeue code per type
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { [weak self] collectionView, indexPath, item in
-            switch item {
-            #if os(iOS)
-            case let .media(media, section):
-                if section.properties.presentationType == .livestreams {
-                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                        let liveMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: liveMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<LiveMediaCell>
-                        liveMediaCell?.content = LiveMediaCell(media: media)
-                        return liveMediaCell
-                    }
-                    else {
-                        let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                        mediaCell?.content = MediaCell(media: media)
-                        return mediaCell
-                    }
-                }
-                else {
-                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                    mediaCell?.content = MediaCell(media: media, style: .show)
-                    return mediaCell
-                }
-            #else
-            case let .media(media, section):
-                if section.properties.layout == .hero {
-                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
-                    featuredMediaCell?.content = FeaturedMediaCell(media: media, layout: .hero)
-                    return featuredMediaCell
-                }
-                else if section.properties.layout == .highlight {
-                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
-                    featuredMediaCell?.content = FeaturedMediaCell(media: media, layout: .highlighted)
-                    return featuredMediaCell
-                }
-                else if section.properties.presentationType == .livestreams {
-                    if media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                        let liveMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: liveMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<LiveMediaCell>
-                        liveMediaCell?.content = LiveMediaCell(media: media)
-                        return liveMediaCell
-                    }
-                    else {
-                        let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                        mediaCell?.content = MediaCell(media: media)
-                        return mediaCell
-                    }
-                }
-                else {
-                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                    mediaCell?.content = MediaCell(media: media, style: .show)
-                    return mediaCell
-                }
-            #endif
-            #if os(iOS)
-            case .mediaPlaceholder:
-                let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                mediaCell?.content = MediaCell(media: nil)
-                return mediaCell
-            #else
-            case let .mediaPlaceholder(_, section):
-                if section.properties.layout == .hero {
-                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
-                    featuredMediaCell?.content = FeaturedMediaCell(media: nil, layout: .hero)
-                    return featuredMediaCell
-                }
-                else if section.properties.layout == .highlight {
-                    let featuredMediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredMediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedMediaCell>
-                    featuredMediaCell?.content = FeaturedMediaCell(media: nil, layout: .highlighted)
-                    return featuredMediaCell
-                }
-                else {
-                    let mediaCell = collectionView.dequeueReusableCell(withReuseIdentifier: mediaCellIdentifier, for: indexPath) as? HostCollectionViewCell<MediaCell>
-                    mediaCell?.content = MediaCell(media: nil)
-                    return mediaCell
-                }
-            #endif
-            #if os(iOS)
-            case let .show(show, _):
-                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
-                showCell?.content = ShowCell(show: show)
-                return showCell
-            #else
-            case let .show(show, section):
-                if section.properties.layout == .hero {
-                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
-                    featuredShowCell?.content = FeaturedShowCell(show: show, layout: .hero)
-                    return featuredShowCell
-                }
-                else if section.properties.layout == .highlight {
-                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
-                    featuredShowCell?.content = FeaturedShowCell(show: show, layout: .highlighted)
-                    return featuredShowCell
-                }
-                else {
-                    let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
-                    showCell?.content = ShowCell(show: show)
-                    return showCell
-                }
-            #endif
-            #if os(iOS)
-            case .showPlaceholder:
-                let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
-                showCell?.content = ShowCell(show: nil)
-                return showCell
-            #else
-            case let .showPlaceholder(_, section):
-                if section.properties.layout == .hero {
-                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
-                    featuredShowCell?.content = FeaturedShowCell(show: nil, layout: .hero)
-                    return featuredShowCell
-                }
-                else if section.properties.layout == .highlight {
-                    let featuredShowCell = collectionView.dequeueReusableCell(withReuseIdentifier: featuredShowCellIdentifier, for: indexPath) as? HostCollectionViewCell<FeaturedShowCell>
-                    featuredShowCell?.content = FeaturedShowCell(show: nil, layout: .highlighted)
-                    return featuredShowCell
-                }
-                else {
-                    let showCell = collectionView.dequeueReusableCell(withReuseIdentifier: showCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowCell>
-                    showCell?.content = ShowCell(show: nil)
-                    return showCell
-                }
-            #endif
-            case let .topic(topic, _):
-                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
-                topicCell?.content = TopicCell(topic: topic)
-                return topicCell
-            case .topicPlaceholder:
-                let topicCell = collectionView.dequeueReusableCell(withReuseIdentifier: topicCellIdentifier, for: indexPath) as? HostCollectionViewCell<TopicCell>
-                topicCell?.content = TopicCell(topic: nil)
-                return topicCell
-            #if os(iOS)
-            case let .showAccess(radioChannel, _):
-                let showAccessCell = collectionView.dequeueReusableCell(withReuseIdentifier: showAccessCellIdentifier, for: indexPath) as? HostCollectionViewCell<ShowAccessCell>
-                showAccessCell?.content = ShowAccessCell(radioChannel: radioChannel) { [weak self] type in
-                    if let navigationController = self?.navigationController {
-                        switch type {
-                        case .aToZ:
-                            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
-                            navigationController.pushViewController(showsViewController, animated: true)
-                        case .date:
-                            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-                            navigationController.pushViewController(calendarViewController, animated: true)
-                        }
-                    }
-                }
-                return showAccessCell
-            #endif
-            }
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
+            cell.content = PageCell(item: item)
         }
         
-        dataSource.supplementaryViewProvider = { [weak self] collectionView, kind, indexPath in
-            guard let self = self, kind == UICollectionView.elementKindSectionHeader else { return nil }
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+        
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             let pageTitle = indexPath.section == 0 ? self.model.title : nil
             
-            let sectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: pageSectionHeaderViewIdentifier, for: indexPath) as! HostSupplementaryView<PageSectionHeaderView>
-            sectionHeaderView.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
-            return sectionHeaderView
+            view.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
+        }
+        
+        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
         }
         
         model.$state
@@ -618,7 +453,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
 
 #endif
 
-extension PageViewController {
+private extension PageViewController {
     /**
      *  A collection view applying a stronger deceleration rate to horizontally scrollable sections.
      */

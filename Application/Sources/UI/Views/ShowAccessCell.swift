@@ -13,7 +13,6 @@ struct ShowAccessCell: View {
         case date
     }
     
-    let radioChannel: RadioChannel?
     let action: (ButtonType) -> Void
     
     var body: some View {
@@ -52,7 +51,7 @@ struct ShowAccessCell: View {
 struct ShowAccessCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ShowAccessCell(radioChannel: nil, action: { _ in })
+            ShowAccessCell(action: { _ in })
                 .previewLayout(.fixed(width: 375, height: 400))
                 .previewDisplayName("TV show access")
         }

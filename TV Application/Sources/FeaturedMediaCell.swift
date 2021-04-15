@@ -10,7 +10,7 @@ import SwiftUI
 struct FeaturedMediaCell: View {
     enum Layout {
         case hero
-        case highlighted
+        case highlight
     }
     
     let media: SRGMedia?
@@ -50,11 +50,11 @@ struct FeaturedMediaCell: View {
         let layout: Layout
         
         private func textAlignment() -> TextAlignment {
-            return layout == .highlighted ? .leading : .center
+            return layout == .highlight ? .leading : .center
         }
         
         private func alignment() -> Alignment {
-            return layout == .highlighted ? .leading : .center
+            return layout == .highlight ? .leading : .center
         }
 
         var body: some View {
@@ -110,7 +110,7 @@ struct FeaturedMediaCell_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 1740, height: 680))
                 .previewDisplayName("RTS media, hero layout")
             
-            FeaturedMediaCell(media: mediaPreview, layout: .highlighted)
+            FeaturedMediaCell(media: mediaPreview, layout: .highlight)
                 .previewLayout(.fixed(width: 1740, height: 480))
                 .previewDisplayName("RTS media, highlighted layout")
         }
