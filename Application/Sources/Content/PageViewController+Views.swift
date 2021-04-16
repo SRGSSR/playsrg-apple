@@ -16,14 +16,14 @@ extension PageViewController {
                 #if os(tvOS)
                 FeaturedMediaCell(media: media, layout: .hero)
                 #else
-                MediaCell(media: media, style: .show)
+                MediaCell(media: media, style: .show, layout: .vertical)
                 #endif
             }
             else if section.properties.layout == .highlight {
                 #if os(tvOS)
                 FeaturedMediaCell(media: media, layout: .hero)
                 #else
-                MediaCell(media: media, style: .show)
+                MediaCell(media: media, style: .show, layout: .vertical)
                 #endif
             }
             else if section.properties.presentationType == .livestreams {
@@ -31,11 +31,11 @@ extension PageViewController {
                     LiveMediaCell(media: media)
                 }
                 else {
-                    MediaCell(media: media)
+                    MediaCell(media: media, layout: .vertical)
                 }
             }
             else {
-                MediaCell(media: media, style: .show)
+                MediaCell(media: media, style: .show, layout: .vertical)
             }
         }
     }

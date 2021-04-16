@@ -8,17 +8,29 @@ import SRGAppearance
 import SwiftUI
 
 struct MediaCell: View {
+    enum Layout {
+        case vertical
+        case horizontal
+        case adaptive
+    }
+    
     let media: SRGMedia?
     let style: MediaDescription.Style
+    let layout: Layout
     let action: (() -> Void)?
     
     fileprivate var onFocusAction: ((Bool) -> Void)? = nil
     
     @State private var isFocused = false
     
-    init(media: SRGMedia?, style: MediaDescription.Style = .date, action: (() -> Void)? = nil) {
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
+    init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
+        self.layout = layout
         self.action = action
     }
         
@@ -59,12 +71,25 @@ struct MediaCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
-            VStack {
-                MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                    .cornerRadius(LayoutStandardViewCornerRadius)
-                DescriptionView(media: media, style: style)
-                    .frame(width: geometry.size.width, alignment: .leading)
+            Group {
+                if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
+                    HStack {
+                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                            .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                            .cornerRadius(LayoutStandardViewCornerRadius)
+                        DescriptionView(media: media, style: style)
+                            .frame(height: geometry.size.height, alignment: .top)
+                    }
+                }
+                else {
+                    VStack {
+                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
+                            .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
+                            .cornerRadius(LayoutStandardViewCornerRadius)
+                        DescriptionView(media: media, style: style)
+                            .frame(width: geometry.size.width, alignment: .leading)
+                    }
+                }
             }
             .accessibilityElement()
             .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
