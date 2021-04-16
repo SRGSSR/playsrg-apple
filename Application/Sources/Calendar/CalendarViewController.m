@@ -11,7 +11,6 @@
 #import "ApplicationSection.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
-#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"

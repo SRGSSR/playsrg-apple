@@ -835,16 +835,6 @@
 		6F475FFC1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
 		6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
 		6F475FFE1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
-		6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */; };
-		6F4760001EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */; };
-		6F4760011EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */; };
-		6F4760021EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */; };
-		6F4760031EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */; };
-		6F4760041EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */; };
-		6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */; };
-		6F4760061EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */; };
-		6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */; };
-		6F4760081EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */; };
 		6F4760091EB37BC6003021EA /* TranslucentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */; };
 		6F47600A1EB37BC6003021EA /* TranslucentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */; };
 		6F47600B1EB37BC6003021EA /* TranslucentTitleHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */; };
@@ -2355,9 +2345,6 @@
 		6F475FA91EB37BC6003021EA /* CollectionLoadMoreFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionLoadMoreFooterView.h; sourceTree = "<group>"; };
 		6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionLoadMoreFooterView.m; sourceTree = "<group>"; };
 		6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionLoadMoreFooterView.xib; sourceTree = "<group>"; };
-		6F475FAC1EB37BC6003021EA /* MediaCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaCollectionViewCell.h; sourceTree = "<group>"; };
-		6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaCollectionViewCell.m; sourceTree = "<group>"; };
-		6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MediaCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F475FAF1EB37BC6003021EA /* TranslucentTitleHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TranslucentTitleHeaderView.h; sourceTree = "<group>"; };
 		6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TranslucentTitleHeaderView.m; sourceTree = "<group>"; };
 		6F475FB11EB37BC6003021EA /* TranslucentTitleHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TranslucentTitleHeaderView.xib; sourceTree = "<group>"; };
@@ -3753,9 +3740,6 @@
 				6FDB2AB824E5916F00FF286E /* ImageView.swift */,
 				0809812E2622195900AA586B /* LiveMediaCell.swift */,
 				6FDB2AC424E5923600FF286E /* MediaCell.swift */,
-				6F475FAC1EB37BC6003021EA /* MediaCollectionViewCell.h */,
-				6F475FAD1EB37BC6003021EA /* MediaCollectionViewCell.m */,
-				6F475FAE1EB37BC6003021EA /* MediaCollectionViewCell.xib */,
 				6F3F1AB925060496000FF4DD /* MediaVisualView.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6F0EDA642448B0D800F0FED2 /* RefreshControl.h */,
@@ -5240,7 +5224,6 @@
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				0863210F2258C6D000C719A6 /* WatchLaterTableViewCell.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
-				6F4760041EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				0832BF1522BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
@@ -5299,7 +5282,6 @@
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
-				6F4760051EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F12E4E822D8676600BC1718 /* SearchHeaderView.xib in Resources */,
@@ -5356,7 +5338,6 @@
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
-				6F4760061EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				086F8D6122984B29001BE2F4 /* FavoriteTableViewCell.xib in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -5409,7 +5390,6 @@
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
-				6F4760071EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -5470,7 +5450,6 @@
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
 				081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
-				6F4760081EB37BC6003021EA /* MediaCollectionViewCell.xib in Resources */,
 				08DD9D6B1FFE6EFA00115906 /* ModuleHeaderView.xib in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F12E4EB22D8676600BC1718 /* SearchHeaderView.xib in Resources */,
@@ -7217,7 +7196,6 @@
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
-				6F475FFF1EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
@@ -7562,7 +7540,6 @@
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9D22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
-				6F4760001EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -7748,7 +7725,6 @@
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9E22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
-				6F4760011EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -7934,7 +7910,6 @@
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9F22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
-				6F4760021EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
@@ -8120,7 +8095,6 @@
 				E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BBA022A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F488ACF22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
-				6F4760031EB37BC6003021EA /* MediaCollectionViewCell.m in Sources */,
 				6F9FFB4D261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8722D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,

@@ -9,11 +9,11 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "SearchBar.h"
 #import "SearchHeaderView.h"
 #import "SearchLoadingCollectionViewCell.h"
@@ -110,10 +110,6 @@
     collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:collectionView];
     self.collectionView = collectionView;
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
     NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
     UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
@@ -476,8 +472,7 @@
                                                          forIndexPath:indexPath];
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
-                                                         forIndexPath:indexPath];
+        return [collectionView mediaCellFor:indexPath media:self.items[indexPath.row]];
     }
     else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchShowListCollectionViewCell.class)
@@ -512,10 +507,6 @@
         MostSearchedShowCollectionViewCell *mostSearchedShowCell = (MostSearchedShowCollectionViewCell *)cell;
         SRGShow *show = self.items[indexPath.row];
         mostSearchedShowCell.show = show;
-    }
-    else if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
-        MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
-        mediaCell.media = self.items[indexPath.row];
     }
     else if ([cell isKindOfClass:SearchShowListCollectionViewCell.class]) {
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;

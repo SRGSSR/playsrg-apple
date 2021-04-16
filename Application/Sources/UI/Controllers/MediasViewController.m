@@ -7,7 +7,7 @@
 #import "MediasViewController.h"
 
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
+#import "Play-Swift-Bridge.h"
 #import "UIViewController+PlaySRG.h"
 
 @import SRGAppearance;
@@ -21,10 +21,6 @@
     [super viewDidLoad];
     
     self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
-    
-    NSString *cellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -41,16 +37,10 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
-                                                     forIndexPath:indexPath];
+    return [collectionView mediaCellFor:indexPath media:self.items[indexPath.row]];
 }
 
 #pragma mark UICollectionViewDelegate protocol
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(MediaCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [cell setMedia:self.items[indexPath.row] withDateFormatter:self.dateFormatter];
-}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

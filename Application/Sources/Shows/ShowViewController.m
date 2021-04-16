@@ -12,7 +12,6 @@
 #import "Banner.h"
 #import "Favorites.h"
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "ShowHeaderView.h"

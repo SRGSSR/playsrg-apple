@@ -11,7 +11,6 @@
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
 #import "ModuleHeaderView.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"

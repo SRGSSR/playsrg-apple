@@ -99,6 +99,15 @@ extension MediaCell {
     }
 }
 
+extension UICollectionView {
+    @objc func mediaCell(for indexPath: IndexPath, media: SRGMedia) -> UICollectionViewCell {
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia> { cell, _, media in
+            cell.content = MediaCell(media: media)
+        }
+        return dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: media)
+    }
+}
+
 struct MediaCell_Previews: PreviewProvider {
     static var mediaPreview: SRGMedia {
         let asset = NSDataAsset(name: "media-rts-tv")!
