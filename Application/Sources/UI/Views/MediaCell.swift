@@ -125,11 +125,14 @@ extension MediaCell {
 }
 
 extension UICollectionView {
-    @objc func mediaCell(for indexPath: IndexPath, media: SRGMedia) -> UICollectionViewCell {
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia> { cell, _, media in
+    private static let mediaCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia> = {
+        return UICollectionView.CellRegistration { cell, _, media in
             cell.content = MediaCell(media: media)
         }
-        return dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: media)
+    }()
+    
+    @objc func mediaCell(for indexPath: IndexPath, media: SRGMedia) -> UICollectionViewCell {
+        return dequeueConfiguredReusableCell(using: Self.mediaCellRegistration, for: indexPath, item: media)
     }
 }
 

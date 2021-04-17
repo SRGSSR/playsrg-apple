@@ -223,23 +223,25 @@ class PageViewController: DataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
+            cell.content = PageCell(item: item)
+        }
+        
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
-            let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
-                cell.content = PageCell(item: item)
-            }
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            let pageTitle = indexPath.section == 0 ? self.model.title : nil
+            
+            view.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
+        }
+        
         dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
-            let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-                guard let self = self else { return }
-                
-                let snapshot = self.dataSource.snapshot()
-                let section = snapshot.sectionIdentifiers[indexPath.section]
-                let pageTitle = indexPath.section == 0 ? self.model.title : nil
-                
-                view.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
-            }
             return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
         }
         
