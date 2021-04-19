@@ -13,7 +13,7 @@
 #import "Layout.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
-#import "Notification.h"
+#import "NotificationTableViewCell.h"
 #import "PlayErrors.h"
 #import "PushService.h"
 #import "RefreshControl.h"
@@ -272,19 +272,6 @@
     return VerticalOffsetForEmptyDataSet(scrollView);
 }
 
-#pragma mark NotificationTableViewDeletionDelegate protocol
-
-- (void)notificationTableViewCell:(NotificationTableViewCell *)cell willDeleteNotification:(Notification *)notification
-{
-    NSInteger index = [self.notifications indexOfObject:notification];
-    if (index != NSNotFound) {
-        self.notifications = [self.notifications play_arrayByRemovingObjectAtIndex:index];
-        [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:index inSection:0] ]
-                              withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView reloadEmptyDataSet];
-    }
-}
-
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -319,7 +306,6 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(NotificationTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.notification = self.notifications[indexPath.row];
-    cell.deletionDelegate = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -327,6 +313,24 @@
     Notification *notification = self.notifications[indexPath.row];
     [NotificationsViewController openNotification:notification fromViewController:self];
     [tableView reloadData];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        Notification *notification = self.notifications[indexPath.row];
+        
+        [Notification removeNotification:notification];
+        
+        self.notifications = [self.notifications play_arrayByRemovingObjectAtIndex:indexPath.row];
+        [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:indexPath.row inSection:0] ]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.tableView reloadEmptyDataSet];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
 #pragma mark Actions

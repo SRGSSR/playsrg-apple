@@ -15,7 +15,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 
-@import libextobjc;
 @import SRGAnalytics;
 @import SRGAppearance;
 @import SRGUserData;
@@ -48,16 +47,6 @@
     self.wrapperView.layer.masksToBounds = YES;
     
     self.thumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
-    
-    @weakify(self)
-    MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
-        @strongify(self)
-        [self.cellDelegate favoriteTableViewCell:self deleteShow:self.show];
-        return YES;
-    }];
-    deleteButton.tintColor = UIColor.whiteColor;
-    deleteButton.buttonWidth = 60.f;
-    self.rightButtons = @[deleteButton];
 }
 
 - (void)prepareForReuse
@@ -85,28 +74,11 @@
     }
 }
 
-- (void)didMoveToWindow
-{
-    [super didMoveToWindow];
-    
-    [self play_registerForPreview];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self play_registerForPreview];
-}
-
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
     
     self.selectionStyle = editing ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
-    if (editing && self.swipeState != MGSwipeStateNone) {
-        [self hideSwipeAnimated:animated];
-    }
 }
 
 #pragma mark Getters and setters
@@ -144,13 +116,6 @@
         [self.subscriptionButton setImage:[UIImage imageNamed:@"subscription_disabled-22"] forState:UIControlStateNormal];
         self.subscriptionButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
     }
-}
-
-#pragma mark Previewing protocol
-
-- (id)previewObject
-{
-    return ! self.editing ? self.show : nil;
 }
 
 #pragma mark Actions

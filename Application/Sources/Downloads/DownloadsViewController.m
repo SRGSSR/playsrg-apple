@@ -161,11 +161,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.downloads.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -286,6 +282,23 @@
     }
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        Download *download = self.downloads[indexPath.row];
+        [Download removeDownload:download];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = download.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return self.downloads.count != 0 ? 40.f : 0.f;
@@ -376,10 +389,13 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]

@@ -208,26 +208,6 @@ body:
                    …
 version: 2.0.0
 
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.11
-
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.11
-
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.11
-
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.11
-
-name: MGSwipeTableCell, nameSpecified: 
-body: The MIT License (MIT…
-version: 1.6.11
-
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
 version: 3.14.0

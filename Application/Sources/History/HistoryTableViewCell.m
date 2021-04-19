@@ -21,7 +21,6 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-@import libextobjc;
 @import SRGAnalytics;
 @import SRGAppearance;
 @import SRGUserData;
@@ -87,16 +86,6 @@
     self.progressView.progressTintColor = UIColor.play_progressRedColor;
     
     self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
-    
-    @weakify(self)
-    MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
-        @strongify(self)
-        [self.cellDelegate historyTableViewCell:self deleteHistoryEntryForMedia:self.media];
-        return YES;
-    }];
-    deleteButton.tintColor = UIColor.whiteColor;
-    deleteButton.buttonWidth = 60.f;
-    self.rightButtons = @[deleteButton];
 }
 
 - (void)prepareForReuse
@@ -137,28 +126,11 @@
     }
 }
 
-- (void)didMoveToWindow
-{
-    [super didMoveToWindow];
-    
-    [self play_registerForPreview];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self play_registerForPreview];
-}
-
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
     
     self.selectionStyle = editing ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
-    if (editing && self.swipeState != MGSwipeStateNone) {
-        [self hideSwipeAnimated:animated];
-    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -360,13 +332,6 @@
         self.progressView.hidden = (progress == 0.f);
         self.progressView.progress = progress;
     });
-}
-
-#pragma mark Previewing protocol
-
-- (id)previewObject
-{
-    return ! self.editing ? self.media : nil;
 }
 
 #pragma mark Notifications

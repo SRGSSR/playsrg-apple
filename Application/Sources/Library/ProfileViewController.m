@@ -13,6 +13,7 @@
 #import "HistoryViewController.h"
 #import "Layout.h"
 #import "NavigationController.h"
+#import "NotificationTableViewCell.h"
 #import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "ProfileAccountHeaderView.h"

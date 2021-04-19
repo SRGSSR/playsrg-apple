@@ -23,7 +23,7 @@
 @import SRGAnalytics;
 @import SRGUserData;
 
-@interface HistoryViewController () <HistoryTableViewCellDelegate>
+@interface HistoryViewController ()
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
@@ -144,11 +144,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.items.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -160,25 +156,6 @@
 - (UIEdgeInsets)play_paddingContentInsets
 {
     return LayoutStandardTableViewPaddingInsets;
-}
-
-#pragma mark HistoryTableViewCellDelegate protocol
-
-- (void)historyTableViewCell:(HistoryTableViewCell *)historyTableViewCell deleteHistoryEntryForMedia:(SRGMedia *)media
-{
-    [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [self hideItems:@[media]];
-                [self updateInterfaceForEditionAnimated:YES];
-            }
-        });
-    }];
-    
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = media.URN;
-    labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -219,7 +196,6 @@
     //        items is empty. This of course crashes.
     if (indexPath.row < self.items.count) {
         cell.media = self.items[indexPath.row];
-        cell.cellDelegate = self;
     }
 }
 
@@ -235,6 +211,31 @@
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = media.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryOpenMedia labels:labels];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        SRGMedia *media = self.items[indexPath.row];
+        
+        [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (! error) {
+                    [self hideItems:@[media]];
+                    [self updateInterfaceForEditionAnimated:YES];
+                }
+            });
+        }];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = media.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
 #pragma mark Actions
@@ -310,21 +311,18 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)toggleEdition:(id)sender
-{
-    BOOL editing = !self.tableView.isEditing;
-    [self setEditing:editing animated:YES];
-}
-
 #pragma mark Edit mode
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
