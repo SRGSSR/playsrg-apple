@@ -91,13 +91,13 @@ extension PageModel {
     // that each item is truly unique.
     enum Item: Hashable {
         case mediaPlaceholder(index: Int, section: Section)
-        case media(_ media: SRGMedia, index: Int, section: Section)
+        case media(_ media: SRGMedia, section: Section)
         
         case showPlaceholder(index: Int, section: Section)
-        case show(_ show: SRGShow, index: Int, section: Section)
+        case show(_ show: SRGShow, section: Section)
         
         case topicPlaceholder(index: Int, section: Section)
-        case topic(_ topic: SRGTopic, index: Int, section: Section)
+        case topic(_ topic: SRGTopic, section: Section)
         
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?, section: Section)
@@ -229,28 +229,28 @@ extension SRGContentSection: PageSectionProperties {
         switch type {
         case .medias:
             return dataProvider.medias(for: vendor, contentSectionUid: uid, pageSize: pageSize)
-                .map { self.filterItems($0.medias).enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { self.filterItems($0.medias).map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .showAndMedias:
             return dataProvider.showAndMedias(for: vendor, contentSectionUid: uid, pageSize: pageSize)
                 .map {
                     var items = [PageModel.Item]()
                     if let show = $0.showAndMedias.show {
-                        items.append(.show(show, index: 0, section: section))
+                        items.append(.show(show, section: section))
                     }
-                    items.append(contentsOf: $0.showAndMedias.medias.enumerated().map { (index, media) in .media(media, index: index + 1, section: section) })
+                    items.append(contentsOf: $0.showAndMedias.medias.map { .media($0, section: section) })
                     return items
                 }
                 .eraseToAnyPublisher()
         case .shows:
             return dataProvider.shows(for: vendor, contentSectionUid: uid, pageSize: pageSize)
-                .map { self.filterItems($0.shows).enumerated().map { (index, show) in .show(show, index: index, section: section) } }
+                .map { self.filterItems($0.shows).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .predefined:
             switch presentation.type {
             case .favoriteShows:
                 return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                    .map { id.compatibleShows($0).enumerated().map { (index, show) in .show(show, index: index, section: section) } }
+                    .map { id.compatibleShows($0).map { .show($0, section: section) } }
                     .eraseToAnyPublisher()
             case .personalizedProgram:
                 return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
@@ -258,23 +258,23 @@ extension SRGContentSection: PageSectionProperties {
                     .flatMap { urns in
                         return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
                     }
-                    .map { $0.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                    .map { $0.map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .livestreams:
                 return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                    .map { $0.medias.map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .topicSelector:
                 return dataProvider.tvTopics(for: vendor)
-                    .map { $0.topics.enumerated().map { (index, topic) in .topic(topic, index: index, section: section) } }
+                    .map { $0.topics.map { .topic($0, section: section) } }
                     .eraseToAnyPublisher()
             case .resumePlayback:
                 return dataProvider.historyPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .watchLater:
                 return dataProvider.laterPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .showAccess:
                 #if os(iOS)
@@ -397,27 +397,27 @@ extension ConfiguredSection: PageSectionProperties {
         switch self.type {
         case let .radioLatestEpisodes(channelUid: channelUid):
             return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioMostPopular(channelUid: channelUid):
             return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioLatest(channelUid: channelUid):
             return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioLatestVideos(channelUid: channelUid):
             return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioAllShows(channelUid):
             return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
-                .map { $0.shows.enumerated().map { (index, show) in .show(show, index: index, section: section) } }
+                .map { $0.shows.map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
             return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                .map { id.compatibleShows($0).enumerated().map { (index, show) in .show(show, index: index, section: section) } }
+                .map { id.compatibleShows($0).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioShowAccess(channelUid):
             #if os(iOS)
@@ -429,23 +429,23 @@ extension ConfiguredSection: PageSectionProperties {
             #endif
         case .tvLive:
             return dataProvider.tvLivestreams(for: vendor)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioLive:
             return dataProvider.regionalizedRadioLivestreams(for: vendor)
-                .map { $0.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioLiveSatellite:
             return dataProvider.regionalizedRadioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
-                .map { $0.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .tvLiveCenter:
             return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .tvScheduledLivestreams:
             return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
-                .map { $0.medias.enumerated().map { (index, media) in .media(media, index: index, section: section) } }
+                .map { $0.medias.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         }
     }

@@ -320,14 +320,14 @@ extension PageViewController: UICollectionViewDelegate {
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
         switch item {
-        case let .media(media, index: _, section: _):
+        case let .media(media, section: _):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show, index: _, section: _):
+        case let .show(show, section: _):
             if let navigationController = navigationController {
                 let showViewController = ShowViewController(show: show, fromPushNotification: false)
                 navigationController.pushViewController(showViewController, animated: true)
             }
-        case let .topic(topic, index: _, section: _):
+        case let .topic(topic, section: _):
             if let navigationController = navigationController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
                 // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,

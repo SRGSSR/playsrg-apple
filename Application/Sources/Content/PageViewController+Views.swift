@@ -72,15 +72,15 @@ extension PageViewController {
             switch item {
             case let .mediaPlaceholder(index: _, section: section):
                 PageMediaCell(media: nil, section: section)
-            case let .media(media, index: _, section: section):
+            case let .media(media, section: section):
                 PageMediaCell(media: media, section: section)
             case let .showPlaceholder(index: _, section: section):
                 PageShowCell(show: nil, section: section)
-            case let .show(show, index: _, section: section):
+            case let .show(show, section: section):
                 PageShowCell(show: show, section: section)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
-            case let .topic(topic, index: _, section: _):
+            case let .topic(topic, section: _):
                 TopicCell(topic: topic)
             #if os(iOS)
             case .showAccess:
