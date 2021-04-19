@@ -1817,16 +1817,6 @@
 		E6DB5F1D1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1E1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
 		E6DB5F1F1D66E0890057094B /* ShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F1A1D66E0890057094B /* ShowsViewController.m */; };
-		E6DB5F281D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
-		E6DB5F291D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
-		E6DB5F2A1D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
-		E6DB5F2B1D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
-		E6DB5F2C1D66E1550057094B /* ShowCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */; };
-		E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */; };
-		E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */; };
-		E6DB5F301D66E1640057094B /* ShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */; };
-		E6DB5F311D66E1640057094B /* ShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */; };
-		E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */; };
 		E6E2DF1A1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
 		E6E2DF1B1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
 		E6E2DF1C1D6ACA8B00791EDE /* ShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */; };
@@ -2630,9 +2620,6 @@
 		E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayApplicationError.m; sourceTree = "<group>"; };
 		E6DB5F191D66E0890057094B /* ShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowsViewController.h; sourceTree = "<group>"; };
 		E6DB5F1A1D66E0890057094B /* ShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowsViewController.m; sourceTree = "<group>"; };
-		E6DB5F261D66E1550057094B /* ShowCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowCollectionViewCell.h; sourceTree = "<group>"; };
-		E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowCollectionViewCell.m; sourceTree = "<group>"; };
-		E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		E6E2DF171D6ACA8B00791EDE /* ShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowViewController.h; sourceTree = "<group>"; };
 		E6E2DF181D6ACA8B00791EDE /* ShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowViewController.m; sourceTree = "<group>"; };
 		E6E2DF241D6AD32800791EDE /* ShowHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowHeaderView.h; sourceTree = "<group>"; };
@@ -4182,9 +4169,6 @@
 		E6DB5F181D66E07A0057094B /* Shows */ = {
 			isa = PBXGroup;
 			children = (
-				E6DB5F261D66E1550057094B /* ShowCollectionViewCell.h */,
-				E6DB5F271D66E1550057094B /* ShowCollectionViewCell.m */,
-				E6DB5F2D1D66E1640057094B /* ShowCollectionViewCell.xib */,
 				E6E2DF241D6AD32800791EDE /* ShowHeaderView.h */,
 				E6E2DF251D6AD32800791EDE /* ShowHeaderView.m */,
 				E6E2DF2B1D6AD33400791EDE /* ShowHeaderView.xib */,
@@ -5217,7 +5201,6 @@
 				6FD88F7C22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				08C690551D38E0BE00BB8AAA /* iTunesArtwork@2x in Resources */,
 				6FC0C69A245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				E6DB5F2E1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
 				6FE28773248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
@@ -5273,7 +5256,6 @@
 				6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */,
 				08C691291D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69B245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				E6DB5F2F1D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
@@ -5329,7 +5311,6 @@
 				08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				08DD9D631FFE6EF900115906 /* ModuleHeaderView.xib in Resources */,
 				6FC0C69C245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				E6DB5F301D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6FE28775248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F12E4DA22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
 				0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
@@ -5383,7 +5364,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
-				E6DB5F311D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -5440,7 +5420,6 @@
 			files = (
 				08C6912C1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69E245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				E6DB5F321D66E1640057094B /* ShowCollectionViewCell.xib in Resources */,
 				6FE28777248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
@@ -7205,7 +7184,6 @@
 				6FD68618246052A100B8018A /* GradientView.m in Sources */,
 				6FD88F8322D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
-				E6DB5F281D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				0806E7B81D50D918002ED406 /* SettingsViewController.m in Sources */,
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F0506E7245468EE0053253E /* SplitViewController.m in Sources */,
@@ -7394,7 +7372,6 @@
 				6FD633EB1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				086321062258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E6E2DF271D6AD32800791EDE /* ShowHeaderView.m in Sources */,
-				E6DB5F291D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				086F8D5B22984B29001BE2F4 /* FavoritesViewController.m in Sources */,
 				6F54D3C826051010008B46FF /* ProgressBar.swift in Sources */,
 				086320FC2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
@@ -7579,7 +7556,6 @@
 				6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				086321072258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E6E2DF281D6AD32800791EDE /* ShowHeaderView.m in Sources */,
-				E6DB5F2A1D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				086F8D5C22984B29001BE2F4 /* FavoritesViewController.m in Sources */,
 				6F54D3C926051010008B46FF /* ProgressBar.swift in Sources */,
 				086320FD2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
@@ -7764,7 +7740,6 @@
 				6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				086321082258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E6E2DF291D6AD32800791EDE /* ShowHeaderView.m in Sources */,
-				E6DB5F2B1D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				086F8D5D22984B29001BE2F4 /* FavoritesViewController.m in Sources */,
 				6F54D3CA26051011008B46FF /* ProgressBar.swift in Sources */,
 				086320FE2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
@@ -7949,7 +7924,6 @@
 				6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				086321092258C6D000C719A6 /* WatchLaterTableViewCell.m in Sources */,
 				E6E2DF2A1D6AD32800791EDE /* ShowHeaderView.m in Sources */,
-				E6DB5F2C1D66E1550057094B /* ShowCollectionViewCell.m in Sources */,
 				086F8D5E22984B29001BE2F4 /* FavoritesViewController.m in Sources */,
 				6F54D3CB26051011008B46FF /* ProgressBar.swift in Sources */,
 				086320FF2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,

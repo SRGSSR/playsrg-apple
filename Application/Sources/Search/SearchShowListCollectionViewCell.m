@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Layout.h"
-#import "ShowCollectionViewCell.h"
+#import "Play-Swift-Bridge.h"
 #import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIView+PlaySRG.h"
@@ -64,10 +64,6 @@ static const CGFloat kBottomInset = 15.f;
         collectionView.dataSource = self;
         [self.contentView addSubview:collectionView];
         self.collectionView = collectionView;
-        
-        NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-        UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-        [collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
     }
     return self;
 }
@@ -114,15 +110,10 @@ static const CGFloat kBottomInset = 15.f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(ShowCollectionViewCell.class) forIndexPath:indexPath];
+    return [collectionView showCellFor:indexPath show:self.shows[indexPath.row]];
 }
 
 #pragma mark UICollectionViewDelegate protocol
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [cell setShow:self.shows[indexPath.row] featured:YES];
-}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

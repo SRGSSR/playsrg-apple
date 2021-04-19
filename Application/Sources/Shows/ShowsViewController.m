@@ -11,7 +11,7 @@
 #import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "ShowCollectionViewCell.h"
+#import "Play-Swift-Bridge.h"
 #import "ShowViewController.h"
 #import "TranslucentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
@@ -99,10 +99,6 @@
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
-    
-    NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
@@ -277,8 +273,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(ShowCollectionViewCell.class)
-                                                     forIndexPath:indexPath];
+    NSString *indexLetter = self.indexLetters[indexPath.section];
+    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
+    return [collectionView showCellFor:indexPath show:show];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -294,13 +291,6 @@
 }
 
 #pragma mark UICollectionViewDelegate protocol
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *indexLetter = self.indexLetters[indexPath.section];
-    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
-    [cell setShow:show featured:NO];
-}
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {

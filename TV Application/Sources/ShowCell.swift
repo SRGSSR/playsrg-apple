@@ -71,6 +71,18 @@ struct ShowCell: View {
     }
 }
 
+extension UICollectionView {
+    private static let showCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
+        return UICollectionView.CellRegistration { cell, _, show in
+            cell.content = ShowCell(show: show)
+        }
+    }()
+    
+    @objc func showCell(for indexPath: IndexPath, show: SRGShow) -> UICollectionViewCell {
+            return dequeueConfiguredReusableCell(using: Self.showCellRegistration, for: indexPath, item: show)
+    }
+}
+
 struct ShowCell_Previews: PreviewProvider {
     static var showPreview: SRGShow {
         let asset = NSDataAsset(name: "show-srf-tv")!
