@@ -482,6 +482,21 @@
 		08F386A025FA9AE800E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08F386A125FA9AE800E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08F386A425FA9AE800E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB71240DC39100BDFAEA /* Configuration.plist */; };
+		08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */; };
+		08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */; };
+		08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */; };
+		08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */; };
+		08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */; };
+		08F5DB10262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB11262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB12262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB13262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB14262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
+		08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
 		0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 624E718ECC7F02E540440901 /* libPods-Play SRG-tvOS-Play RTR TV.a */; };
 		2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3780F919C25BC0944528A5FD /* libPods-Play SRG-iOS-Play RSI.a */; };
 		2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C7CC3BC704FD48424BB497B2 /* libPods-Play SRG-tvOS-Play RTS TV.a */; };
@@ -1684,11 +1699,6 @@
 		6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A73256C58BB0042F446 /* SRGLoggerSwift */; };
 		6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A75256C58C40042F446 /* SRGLoggerSwift */; };
 		6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */; };
-		6FF12AA2256C58FE0042F446 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF12AA1256C58FE0042F446 /* Logger.swift */; };
-		6FF12AA3256C58FE0042F446 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF12AA1256C58FE0042F446 /* Logger.swift */; };
-		6FF12AA4256C58FE0042F446 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF12AA1256C58FE0042F446 /* Logger.swift */; };
-		6FF12AA5256C58FE0042F446 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF12AA1256C58FE0042F446 /* Logger.swift */; };
-		6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF12AA1256C58FE0042F446 /* Logger.swift */; };
 		6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
@@ -2193,6 +2203,7 @@
 		08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08F5DB0F262DC7F700F717D0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		08FCE82525BA11C00031C512 /* TV-Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TV-Application.entitlements"; sourceTree = "<group>"; };
 		096E5AC5C979FBF1F072A888 /* Pods-Play SRG-iOS-Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
 		0A4B38B692D4F377D70590D1 /* Pods-Play SRG-iOS-Play SWI.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
@@ -2560,7 +2571,6 @@
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
 		6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableLoadMoreFooterView.h; sourceTree = "<group>"; };
 		6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableLoadMoreFooterView.m; sourceTree = "<group>"; };
-		6FF12AA1256C58FE0042F446 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIVisualEffectView+PlaySRG.h"; sourceTree = "<group>"; };
 		6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIVisualEffectView+PlaySRG.m"; sourceTree = "<group>"; };
 		6FF60CC824F2FA8D006013C2 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
@@ -2676,6 +2686,7 @@
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
+				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
@@ -2698,6 +2709,7 @@
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
 				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */,
 				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
@@ -2720,6 +2732,7 @@
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
 				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */,
 				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
@@ -2742,6 +2755,7 @@
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
 				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */,
 				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
@@ -2764,6 +2778,7 @@
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
 				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */,
 				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
@@ -3034,6 +3049,7 @@
 				6F8144132008FA970075F52F /* GoogleCast.m */,
 				6F9897CB2412582400B390A2 /* Layout.h */,
 				6F9897CC2412582400B390A2 /* Layout.m */,
+				08F5DB0F262DC7F700F717D0 /* Logger.swift */,
 				6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */,
 				6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */,
 				6F80106720443230009FE197 /* PlayApplication.h */,
@@ -3823,7 +3839,6 @@
 				0800ED35260F88B70097B17B /* FeaturedShowCell.swift */,
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
 				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
-				6FF12AA1256C58FE0042F446 /* Logger.swift */,
 				6FFFB9B6252CA310004E40AE /* MediaDetailModel.swift */,
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
@@ -4326,6 +4341,7 @@
 				6F30ABCF2604B77500457331 /* FetchImage */,
 				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
 				6FEC8979261F165600FF9762 /* DZNEmptyDataSet */,
+				08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4373,6 +4389,7 @@
 				6F30ABD12604B77D00457331 /* FetchImage */,
 				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
 				6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */,
+				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4420,6 +4437,7 @@
 				6F30ABD32604B78700457331 /* FetchImage */,
 				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
 				6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */,
+				08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4467,6 +4485,7 @@
 				6F30ABD52604B78E00457331 /* FetchImage */,
 				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
 				6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */,
+				08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4514,6 +4533,7 @@
 				6F30ABD72604B79500457331 /* FetchImage */,
 				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
 				6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */,
+				08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -7340,6 +7360,7 @@
 				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F16C80C26025945006F685A /* PageModel.swift in Sources */,
+				08F5DB10262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF77C20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */,
 				089EA011201148180070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -7380,6 +7401,7 @@
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
+				08F5DB11262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF78A20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -7564,6 +7586,7 @@
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
+				08F5DB12262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF78C20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -7748,6 +7771,7 @@
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
+				08F5DB13262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF78E20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -7932,6 +7956,7 @@
 				6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9C1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08E0218B126700B2AF2C /* Recommendation.m in Sources */,
+				08F5DB14262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -8216,6 +8241,7 @@
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80662508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
+				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13A257A372800223F22 /* PlayErrors.m in Sources */,
@@ -8239,7 +8265,6 @@
 				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6125DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				080981352622195900AA586B /* LiveMediaCell.swift in Sources */,
-				6FF12AA2256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCB25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1632250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B142567FC6F00DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -8312,6 +8337,7 @@
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80672508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
+				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13B257A372800223F22 /* PlayErrors.m in Sources */,
@@ -8335,7 +8361,6 @@
 				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6225DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				080981362622195900AA586B /* LiveMediaCell.swift in Sources */,
-				6FF12AA3256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCC25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1633250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B292567FC7000DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -8408,6 +8433,7 @@
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80682508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
+				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13C257A372800223F22 /* PlayErrors.m in Sources */,
@@ -8431,7 +8457,6 @@
 				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6325DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				080981372622195900AA586B /* LiveMediaCell.swift in Sources */,
-				6FF12AA4256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCD25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1634250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2A2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -8504,6 +8529,7 @@
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F80692508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
+				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F151E2A256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13D257A372900223F22 /* PlayErrors.m in Sources */,
@@ -8527,7 +8553,6 @@
 				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6425DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				080981382622195900AA586B /* LiveMediaCell.swift in Sources */,
-				6FF12AA5256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCE25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1635250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2B2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -8600,6 +8625,7 @@
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6F1F806A2508ECA800FD8FE7 /* ShowsView.swift in Sources */,
 				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
+				08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */,
 				6F151E2B256BF5CF009082F8 /* ProgressBar.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13E257A372900223F22 /* PlayErrors.m in Sources */,
@@ -8623,7 +8649,6 @@
 				6F3D680D256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6525DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
-				6FF12AA6256C58FE0042F446 /* Logger.swift in Sources */,
 				6F9DDCCF25B1A07E001D5688 /* SearchViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -13652,6 +13677,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
+		};
+		08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
+			productName = SRGLoggerSwift;
+		};
+		08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
+			productName = SRGLoggerSwift;
+		};
+		08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
+			productName = SRGLoggerSwift;
+		};
+		08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
+			productName = SRGLoggerSwift;
+		};
+		08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
+			productName = SRGLoggerSwift;
 		};
 		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;

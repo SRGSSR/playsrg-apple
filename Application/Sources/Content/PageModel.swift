@@ -155,12 +155,29 @@ fileprivate extension SRGDataProvider {
         if let publisher = section.properties.publisher(for: id) {
             return publisher
                 .replaceError(with: section.properties.placeholderItems)
-                .map { PageModel.Row(section: section, items: $0) }
+                .map { PageModel.Row(section: section, items: Self.removeDuplicateItems($0)) }
                 .eraseToAnyPublisher()
         }
         else {
             return Just(PageModel.Row(section: section, items: []))
                 .eraseToAnyPublisher()
+        }
+    }
+    
+    /**
+     *  Unique items: remove duplicated items. Items must not appear more than one time in the same row.
+     *
+     *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
+     */
+    private static func removeDuplicateItems<T:Hashable>(_ items: [T]) -> [T] {
+        var itemDictionnary = [T: Bool]()
+        
+        return items.filter {
+            let isNew = itemDictionnary.updateValue(true, forKey: $0) == nil
+            if !isNew {
+                PlayLogWarning(category: "collection", message: "A duplicate item has been removed: \($0)")
+            }
+            return isNew
         }
     }
     
