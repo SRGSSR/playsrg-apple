@@ -97,12 +97,12 @@ class PageViewController: DataViewController {
             func layoutGroupSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .hero:
-                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width)
-                    let size = LayoutMediaStandardCollectionItemSize(width, .hero)
+                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .hero)
+                    let size = LayoutMediaFeaturedCollectionItemSize(width, .hero)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .highlight:
-                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width)
-                    let size = LayoutMediaStandardCollectionItemSize(width, .highlight)
+                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .highlight)
+                    let size = LayoutMediaFeaturedCollectionItemSize(width, .highlight)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .topicSelector:
                     let size = LayoutTopicCollectionItemSize()

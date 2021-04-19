@@ -12,6 +12,8 @@ const CGFloat LayoutStandardViewCornerRadius = 4.f;
 #if TARGET_OS_TV
 const CGFloat LayoutStandardMargin = 40.f;
 
+const CGFloat LayoutFeaturedSpacerHeight = 10.f;
+
 const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 20.f, 0.f, 20.f, 0.f };
 const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 40.f, 0.f, 40.f, 0.f };
 
@@ -22,6 +24,8 @@ const CGFloat LayoutProgressBarHeight = 8.f;
 
 #else
 const CGFloat LayoutStandardMargin = 10.f;
+
+const CGFloat LayoutFeaturedSpacerHeight = 5.f;
 
 const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets = { 10.f, 10.f, 10.f, 10.f };
 const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 20.f, 10.f, 20.f, 10.f };
@@ -50,20 +54,24 @@ CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat l
     return (availableWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth)
+CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
 {
 #if TARGET_OS_TV
     return 1740;
 #else
-    // Ensure cells never fill the entire width of the parent, so that the fact that content can be scrolled
-    // is always obvious to the user
-    static const CGFloat kHorizontalFillRatio = 0.9f;
-    
-    // Do not make cells unnecessarily large
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
-    CGFloat maxWidth = (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) ? 300.f : 450.f;
-    
-    return fmin(layoutWidth * kHorizontalFillRatio, maxWidth);
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+            // TODO: Could be only 2 if hero section has only 1 item.
+            return itemWidth - 4 * LayoutStandardMargin;
+            break;
+        case LayoutCollectionItemTypeHighlight:
+            return itemWidth - 2 * LayoutStandardMargin;
+            break;
+        case LayoutCollectionItemTypeSwimlane:
+            return LayoutStandardCellWidth;
+            break;
+    }
+    return itemWidth - 2 * LayoutStandardMargin;
 #endif
 }
 
@@ -138,17 +146,7 @@ CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, 
 CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
 {
 #if TARGET_OS_TV
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
-            return CGSizeMake(itemWidth, 680.f);
-            break;
-        case LayoutCollectionItemTypeHighlight:
-            return CGSizeMake(itemWidth, 480.f);
-            break;
-        case LayoutCollectionItemTypeSwimlane:
-            return CGSizeMake(itemWidth, 360.f);
-            break;
-    }
+    return CGSizeMake(itemWidth, 360.f);
 #else
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
@@ -185,6 +183,38 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollection
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
+#endif
+}
+
+CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+{
+#if TARGET_OS_TV
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+            return CGSizeMake(itemWidth, 680.f);
+            break;
+        case LayoutCollectionItemTypeHighlight:
+            return CGSizeMake(itemWidth, 480.f);
+            break;
+        case LayoutCollectionItemTypeSwimlane:
+            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
+            break;
+    }
+#else
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    BOOL isCompact = (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact);
+    
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+            return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 3.f / 5.f * 9.f / 16.f);
+            break;
+        case LayoutCollectionItemTypeHighlight:
+            return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 2.f / 5.f * 9.f / 16.f);
+            break;
+        case LayoutCollectionItemTypeSwimlane:
+            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
+            break;
+    }
 #endif
 }
 

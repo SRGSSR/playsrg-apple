@@ -33,6 +33,11 @@ OBJC_EXPORT const CGFloat LayoutStandardCellHeight API_UNAVAILABLE(tvos);
 OBJC_EXPORT const CGFloat LayoutStandardMargin;
 
 /**
+ *  Featured spacer height.
+ */
+OBJC_EXPORT const CGFloat LayoutFeaturedSpacerHeight;
+
+/**
  *  Standard collection view padding.
  */
 OBJC_EXPORT const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets;
@@ -43,7 +48,7 @@ OBJC_EXPORT const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets;
 OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
 
 /**
- *  Media standard collection item types
+ *  Layout collection item types
  */
 typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
     /**
@@ -84,7 +89,7 @@ OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidt
  *
  *  @param layoutWidth The total available width for layout.
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
+OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
 
 /**
  *  Return the standard height for a collection section header title
@@ -113,6 +118,14 @@ OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFlo
  *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlane).
  */
 OBJC_EXPORT CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
+
+/**
+ *  Featured media cell (16:9 artwork + text area) size for collection layouts, for a given item width and collection layout type.
+ *
+ *  @param itemWidth The width of the item.
+ *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlane).
+ */
+OBJC_EXPORT CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
 
 /**
  *  Live media cell (16:9 artwork + progress area) size for collection layouts, for a given item width.

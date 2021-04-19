@@ -13,18 +13,10 @@ extension PageViewController {
         
         var body: some View {
             if section.properties.layout == .hero {
-                #if os(tvOS)
                 FeaturedMediaCell(media: media, layout: .hero)
-                #else
-                MediaCell(media: media, style: .show, layout: .vertical)
-                #endif
             }
             else if section.properties.layout == .highlight {
-                #if os(tvOS)
                 FeaturedMediaCell(media: media, layout: .hero)
-                #else
-                MediaCell(media: media, style: .show, layout: .vertical)
-                #endif
             }
             else if section.properties.presentationType == .livestreams {
                 if let media = media, media.contentType == .livestream || media.contentType == .scheduledLivestream {
@@ -46,18 +38,10 @@ extension PageViewController {
         
         var body: some View {
             if section.properties.layout == .hero {
-                #if os(tvOS)
                 FeaturedShowCell(show: show, layout: .hero)
-                #else
-                ShowCell(show: show)
-                #endif
             }
             else if section.properties.layout == .highlight {
-                #if os(tvOS)
                 FeaturedShowCell(show: show, layout: .highlight)
-                #else
-                ShowCell(show: show)
-                #endif
             }
             else {
                 ShowCell(show: show)

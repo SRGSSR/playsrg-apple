@@ -15,6 +15,10 @@ struct FeaturedShowCell: View {
     
     let show: SRGShow?
     let layout: Layout
+    
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
 
     private var redactionReason: RedactionReasons {
         return show == nil ? .placeholder : .init()
@@ -26,6 +30,7 @@ struct FeaturedShowCell: View {
     
     var body: some View {
         GeometryReader { geometry in
+            #if os(tvOS)
             Button(action: {
                 if let show = show {
                     navigateToShow(show)
@@ -40,16 +45,76 @@ struct FeaturedShowCell: View {
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .cornerRadius(LayoutStandardViewCornerRadius)
                 .redacted(reason: redactionReason)
                 .accessibilityElement()
                 .accessibilityLabel(show?.title ?? "")
                 .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
+            #else
+            if horizontalSizeClass == .compact {
+                VStack(spacing: 0) {
+                    ImageView(url: imageUrl)
+                        .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                    DescriptionView(show: show, layout: layout)
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .cornerRadius(LayoutStandardViewCornerRadius)
+                .redacted(reason: redactionReason)
+                .accessibilityElement()
+                .accessibilityLabel(show?.title ?? "")
+                .accessibility(addTraits: .isButton)
+            }
+            else {
+            HStack(spacing: 0) {
+                ImageView(url: imageUrl)
+                    .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                DescriptionView(show: show, layout: layout)
+                    .padding()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
+            .frame(width: geometry.size.width, height: geometry.size.height)
+            .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+            .cornerRadius(LayoutStandardViewCornerRadius)
+            .redacted(reason: redactionReason)
+            .accessibilityElement()
+            .accessibilityLabel(show?.title ?? "")
+            .accessibility(addTraits: .isButton)
+            }
+            #endif
         }
     }
     
     private struct DescriptionView: View {
+        let show: SRGShow?
+        let layout: Layout
+        
+        #if os(iOS)
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+        #endif
+        
+        var body: some View {
+            #if os(iOS)
+            if horizontalSizeClass == .compact {
+                CompactDescriptionView(show: show, layout: layout)
+                    .padding(0)
+            }
+            else {
+                LargeDescriptionView(show: show, layout: layout)
+                    .padding(0)
+            }
+            #else
+            LargeDescriptionView(show: show, layout: layout)
+                .padding(0)
+            #endif
+        }
+    }
+    
+    private struct LargeDescriptionView: View {
         let show: SRGShow?
         let layout: Layout
         
@@ -72,7 +137,7 @@ struct FeaturedShowCell: View {
                     .padding()
                 if let lead = show?.lead {
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height:LayoutFeaturedSpacerHeight * 2)
                     Text(lead)
                         .srgFont(.body)
                         .lineLimit(4)
@@ -88,6 +153,30 @@ struct FeaturedShowCell: View {
                 Spacer()
             }
             .foregroundColor(.white)
+        }
+    }
+    
+    private struct CompactDescriptionView: View {
+        let show: SRGShow?
+        let layout: Layout
+        
+        private var title: String {
+            guard let show = show else { return String(repeating: " ", count: .random(in: 10..<20)) }
+            return show.title
+        }
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(title)
+                    .srgFont(.H2)
+                    .lineLimit(2)
+                if let lead = show?.lead {
+                    Text(lead)
+                        .srgFont(.body)
+                        .lineLimit(2)
+                        .layoutPriority(1)
+                }
+            }
         }
     }
 }
