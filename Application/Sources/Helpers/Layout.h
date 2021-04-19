@@ -52,17 +52,25 @@ OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
  */
 typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
     /**
-     *  Swimlane layout.
-     */
-    LayoutCollectionItemTypeSwimlane = 0,
-    /**
      *  Hero layout.
      */
-    LayoutCollectionItemTypeHero,
+    LayoutCollectionItemTypeHero = 0,
     /**
      *  Highlight layout.
      */
-    LayoutCollectionItemTypeHighlight
+    LayoutCollectionItemTypeHighlight,
+    /**
+     *  Media swimlane layout.
+     */
+    LayoutCollectionItemTypeMediaSwimlaneOrGrid,
+    /**
+     *  Show swimlane layout.
+     */
+    LayoutCollectionItemTypeShowSwimlaneOrGrid,
+    /**
+     *  Live media grid layout (iOS)
+     */
+    LayoutCollectionItemTypeLiveMediaGrid
 };
 
 /**
@@ -87,7 +95,7 @@ OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidt
  *  Calculate the width to apply to featured items in a collection. Featured items attempt occupying (almost) the full width
  *  of narrow layouts, but still have bounded (larger) size on wide layouts.
  *
- *  @param layoutWidth The total available width for layout.
+ *  @param itemWidth The total available width for layout.
  */
 OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
 
@@ -112,35 +120,12 @@ OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
 OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems);
 
 /**
- *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
+ *  Collection cell (16:9 artwork + text area) size for collection layouts, for a given item width and collection layout type.
  *
  *  @param itemWidth The width of the item.
- *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlane).
+ *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlanes).
  */
-OBJC_EXPORT CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
-
-/**
- *  Featured media cell (16:9 artwork + text area) size for collection layouts, for a given item width and collection layout type.
- *
- *  @param itemWidth The width of the item.
- *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlane).
- */
-OBJC_EXPORT CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
-
-/**
- *  Live media cell (16:9 artwork + progress area) size for collection layouts, for a given item width.
- *
- *  @param itemWidth The width of the item.
- */
-OBJC_EXPORT CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth);
-
-/**
- *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
- *
- *  @param itemWidth                     The width of the item.
- *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlane).
- */
-OBJC_EXPORT CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
+OBJC_EXPORT CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
 
 /**
  *  Topic cell (16:9 artwork) size for collection layouts.

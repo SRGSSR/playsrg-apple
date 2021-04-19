@@ -67,11 +67,10 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionIte
         case LayoutCollectionItemTypeHighlight:
             return itemWidth - 2 * LayoutStandardMargin;
             break;
-        case LayoutCollectionItemTypeSwimlane:
+        default:
             return LayoutStandardCellWidth;
             break;
     }
-    return itemWidth - 2 * LayoutStandardMargin;
 #endif
 }
 
@@ -143,7 +142,7 @@ CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, 
     }
 }
 
-CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
 #if TARGET_OS_TV
     return CGSizeMake(itemWidth, 360.f);
@@ -179,7 +178,6 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, LayoutCollection
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
     });
     
-    BOOL large = (collectionItemType == LayoutCollectionItemTypeHero || collectionItemType == LayoutCollectionItemTypeHighlight);
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
@@ -196,8 +194,8 @@ CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollection
         case LayoutCollectionItemTypeHighlight:
             return CGSizeMake(itemWidth, 480.f);
             break;
-        case LayoutCollectionItemTypeSwimlane:
-            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
+        default:
+            return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
     }
 #else
@@ -211,8 +209,8 @@ CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollection
         case LayoutCollectionItemTypeHighlight:
             return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 2.f / 5.f * 9.f / 16.f);
             break;
-        case LayoutCollectionItemTypeSwimlane:
-            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
+        default:
+            return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
     }
 #endif
@@ -223,20 +221,10 @@ CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + 11.f));
 }
 
-CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 {
 #if TARGET_OS_TV
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
-            return CGSizeMake(itemWidth, 680.f);
-            break;
-        case LayoutCollectionItemTypeHighlight:
-            return CGSizeMake(itemWidth, 480.f);
-            break;
-        case LayoutCollectionItemTypeSwimlane:
-            return CGSizeMake(itemWidth, 280.f);
-            break;
-    }
+    return CGSizeMake(itemWidth, 280.f);
 #else
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
     static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
@@ -269,11 +257,29 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, LayoutCollectionI
                                    UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
     });
     
-    BOOL large = (collectionItemType == LayoutCollectionItemTypeHero || collectionItemType == LayoutCollectionItemTypeHighlight);
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
     CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
     return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
 #endif
+}
+
+CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+{
+    switch (collectionItemType) {
+        case LayoutCollectionItemTypeHero:
+        case LayoutCollectionItemTypeHighlight:
+            return LayoutMediaFeaturedCollectionItemSize(itemWidth, collectionItemType);
+            break;
+        case LayoutCollectionItemTypeShowSwimlaneOrGrid:
+            return LayoutShowStandardCollectionItemSize(itemWidth, false);
+            break;
+        case LayoutCollectionItemTypeMediaSwimlaneOrGrid:
+            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
+            break;
+        case LayoutCollectionItemTypeLiveMediaGrid:
+            return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
+            break;
+    }
 }
 
 CGSize LayoutTopicCollectionItemSize(void)

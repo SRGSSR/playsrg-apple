@@ -64,7 +64,7 @@
     // Grid layout
     else {
         CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
-        return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
+        return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeMediaSwimlaneOrGrid);
     }
 }
 

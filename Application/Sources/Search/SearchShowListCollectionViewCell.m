@@ -36,7 +36,7 @@ static const CGFloat kBottomInset = 15.f;
 
 + (CGSize)itemSize
 {
-    return LayoutShowStandardCollectionItemSize(300.f, NO);
+    return LayoutCollectionItemSize(300.f, LayoutCollectionItemTypeShowSwimlaneOrGrid);
 }
 
 #pragma mark Object lifecycle

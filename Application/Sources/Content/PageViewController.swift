@@ -98,20 +98,20 @@ class PageViewController: DataViewController {
                 switch section.properties.layout {
                 case .hero:
                     let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .hero)
-                    let size = LayoutMediaFeaturedCollectionItemSize(width, .hero)
+                    let size = LayoutCollectionItemSize(width, .hero)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .highlight:
                     let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .highlight)
-                    let size = LayoutMediaFeaturedCollectionItemSize(width, .highlight)
+                    let size = LayoutCollectionItemSize(width, .highlight)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .topicSelector:
                     let size = LayoutTopicCollectionItemSize()
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .shows:
-                    let size = LayoutShowStandardCollectionItemSize(LayoutStandardCellWidth, .swimlane)
+                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .medias:
-                    let size = LayoutMediaStandardCollectionItemSize(LayoutStandardCellWidth, .swimlane)
+                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
                     let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
