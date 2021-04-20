@@ -79,9 +79,11 @@ extension PageModel {
     enum SectionLayout: Hashable {
         case hero
         case highlight
+        case mediaGrid
+        case mediaSwimlane
+        case showGrid
+        case showSwimlane
         case topicSelector
-        case shows
-        case medias
         
         @available(tvOS, unavailable)
         case showAccess
@@ -188,14 +190,16 @@ extension SRGContentSection: PageSectionProperties {
             return .showAccess
             #else
             // Not supported
-            return .medias
+            return .mediaSwimlane
             #endif
         case .favoriteShows:
-            return .shows
-        case .swimlane, .grid:
-            return (type == .shows) ? .shows : .medias
+            return .showSwimlane
+        case .swimlane:
+            return (type == .shows) ? .showSwimlane : .mediaSwimlane
+        case .grid:
+            return (type == .shows) ? .showGrid : .mediaGrid
         case .none, .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
-            return .medias
+            return .mediaSwimlane
         }
     }
     
@@ -357,15 +361,17 @@ extension ConfiguredSection: PageSectionProperties {
     var layout: PageModel.SectionLayout {
         switch self.type {
         case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return (self.contentPresentationType == .hero) ? .hero : .medias
-        case .radioAllShows, .radioFavoriteShows:
-            return .shows
+            return (self.contentPresentationType == .hero) ? .hero : .mediaSwimlane
+        case .radioFavoriteShows:
+            return .showSwimlane
+        case .radioAllShows:
+            return .showGrid
         case .radioShowAccess:
             #if os(iOS)
             return .showAccess
             #else
             // Not supported
-            return .medias
+            return .mediaSwimlane
             #endif
         }
     }
@@ -382,8 +388,7 @@ extension ConfiguredSection: PageSectionProperties {
     }
     
     var canOpenDetailPage: Bool {
-        // TODO: Probably a grid media and show layouts
-        return (layout == .medias || layout == .shows) && presentationType != .grid
+        return layout == .mediaSwimlane
     }
     
     func publisher(for id: PageModel.Id) -> AnyPublisher<[PageModel.Item], Error>? {

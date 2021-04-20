@@ -84,7 +84,7 @@ class PageViewController: DataViewController {
                 return height
             }
             
-            func supplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 guard let headerHeight = sectionHeaderHeight(for: section, index: index, pageTitle: pageTitle) else { return [] }
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
@@ -107,15 +107,23 @@ class PageViewController: DataViewController {
                 case .topicSelector:
                     let size = LayoutTopicCollectionItemSize()
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-                case .shows:
+                case .showSwimlane:
                     let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-                case .medias:
+                case .mediaSwimlane:
                     let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
                     let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                case .showGrid:
+                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid)
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+                case .mediaGrid:
+                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                    let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid)
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 }
             }
             
@@ -129,10 +137,20 @@ class PageViewController: DataViewController {
                 #else
                     return .continuousGroupLeadingBoundary
                 #endif
-                case .highlight, .showAccess:
+                case .highlight, .showAccess, .mediaGrid, .showGrid:
                     return .none
                 default:
                     return .continuousGroupLeadingBoundary
+                }
+            }
+            
+            func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
+                switch section.properties.layout {
+                case .mediaGrid, .showGrid:
+                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                default:
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 }
             }
             
@@ -147,19 +165,22 @@ class PageViewController: DataViewController {
             
             guard let self = self else { return nil }
             
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
+            
+            let itemSize = layoutItemSize(for: section, layoutEnvironment: layoutEnvironment)
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            
             let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
+
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+            group.interItemSpacing = NSCollectionLayoutSpacing.flexible(LayoutStandardMargin)
             
             let layoutSection = NSCollectionLayoutSection(group: group)
             layoutSection.orthogonalScrollingBehavior = orthogonalScrollingBehavior(for: section)
             layoutSection.interGroupSpacing = LayoutStandardMargin
             layoutSection.contentInsets = contentInsets(for: section)
-            layoutSection.boundarySupplementaryItems = supplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
             return layoutSection
         }
     }
