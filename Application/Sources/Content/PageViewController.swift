@@ -94,6 +94,32 @@ class PageViewController: DataViewController {
                 return [header]
             }
             
+            func sectionOrthogonalScrollingBehavior(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+                switch section.properties.layout {
+                case .hero:
+                #if os(tvOS)
+                    // Do not use .continuousGroupLeadingBoundary for full-width items on tvOS, otherwise items will
+                    // be skipped when navigating the group
+                    return .continuous
+                #else
+                    return .continuousGroupLeadingBoundary
+                #endif
+                case .highlight, .showAccess, .mediaGrid, .showGrid:
+                    return .none
+                default:
+                    return .continuousGroupLeadingBoundary
+                }
+            }
+            
+            func sectionContentInsets(for section: PageModel.Section) -> NSDirectionalEdgeInsets {
+                switch section.properties.layout {
+                case .topicSelector:
+                    return LayoutTopicSectionContentInsets
+                default:
+                    return LayoutStandardSectionContentInsets
+                }
+            }
+            
             func layoutGroupSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .hero:
@@ -132,23 +158,6 @@ class PageViewController: DataViewController {
                 }
             }
             
-            func orthogonalScrollingBehavior(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
-                switch section.properties.layout {
-                case .hero:
-                #if os(tvOS)
-                    // Do not use .continuousGroupLeadingBoundary for full-width items on tvOS, otherwise items will
-                    // be skipped when navigating the group
-                    return .continuous
-                #else
-                    return .continuousGroupLeadingBoundary
-                #endif
-                case .highlight, .showAccess, .mediaGrid, .showGrid:
-                    return .none
-                default:
-                    return .continuousGroupLeadingBoundary
-                }
-            }
-            
             func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .mediaGrid, .showGrid:
@@ -161,15 +170,6 @@ class PageViewController: DataViewController {
                     }
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-                }
-            }
-            
-            func contentInsets(for section: PageModel.Section) -> NSDirectionalEdgeInsets {
-                switch section.properties.layout {
-                case .topicSelector:
-                    return LayoutTopicSectionContentInsets
-                default:
-                    return LayoutStandardSectionContentInsets
                 }
             }
             
@@ -193,9 +193,9 @@ class PageViewController: DataViewController {
             group.interItemSpacing = NSCollectionLayoutSpacing.flexible(LayoutStandardMargin)
             
             let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = orthogonalScrollingBehavior(for: section)
+            layoutSection.orthogonalScrollingBehavior = sectionOrthogonalScrollingBehavior(for: section)
             layoutSection.interGroupSpacing = LayoutStandardMargin
-            layoutSection.contentInsets = contentInsets(for: section)
+            layoutSection.contentInsets = sectionContentInsets(for: section)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
             return layoutSection
         }
