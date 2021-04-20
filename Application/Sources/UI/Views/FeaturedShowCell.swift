@@ -19,7 +19,7 @@ struct FeaturedShowCell: View {
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
-
+    
     private var redactionReason: RedactionReasons {
         return show == nil ? .placeholder : .init()
     }
@@ -70,20 +70,20 @@ struct FeaturedShowCell: View {
                 .accessibility(addTraits: .isButton)
             }
             else {
-            HStack(spacing: 0) {
-                ImageView(url: imageUrl)
-                    .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                DescriptionView(show: show, layout: layout)
-                    .padding()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-            }
-            .frame(width: geometry.size.width, height: geometry.size.height)
-            .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-            .cornerRadius(LayoutStandardViewCornerRadius)
-            .redacted(reason: redactionReason)
-            .accessibilityElement()
-            .accessibilityLabel(show?.title ?? "")
-            .accessibility(addTraits: .isButton)
+                HStack(spacing: 0) {
+                    ImageView(url: imageUrl)
+                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                    DescriptionView(show: show, layout: layout)
+                        .padding()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .cornerRadius(LayoutStandardViewCornerRadius)
+                .redacted(reason: redactionReason)
+                .accessibilityElement()
+                .accessibilityLabel(show?.title ?? "")
+                .accessibility(addTraits: .isButton)
             }
             #endif
         }
@@ -125,7 +125,7 @@ struct FeaturedShowCell: View {
         private func alignment() -> Alignment {
             return layout == .highlight ? .leading : .center
         }
-
+        
         var body: some View {
             VStack {
                 Spacer()

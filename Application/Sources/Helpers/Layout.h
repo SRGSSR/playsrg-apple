@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
      */
     LayoutCollectionItemTypeShowSwimlaneOrGrid,
     /**
-     *  Live media grid layout (iOS)
+     *  Live media grid layout (iOS).
      */
     LayoutCollectionItemTypeLiveMediaGrid
 };
