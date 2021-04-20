@@ -26,6 +26,9 @@ extension PageViewController {
                     MediaCell(media: media, layout: .vertical)
                 }
             }
+            else if section.properties.layout == .mediaGrid {
+                MediaCell(media: media)
+            }
             else {
                 MediaCell(media: media, style: .show, layout: .vertical)
             }

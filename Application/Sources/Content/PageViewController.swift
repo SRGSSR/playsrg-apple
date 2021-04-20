@@ -121,9 +121,14 @@ class PageViewController: DataViewController {
                     let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 case .mediaGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-                    let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid)
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+                    if isHorizontalCompact() {
+                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardSimpleTableCellHeight()))
+                    }
+                    else {
+                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                        let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid)
+                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+                    }
                 }
             }
             
@@ -147,8 +152,13 @@ class PageViewController: DataViewController {
             func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .mediaGrid, .showGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                    if isHorizontalCompact() {
+                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                    }
+                    else {
+                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                        return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                    }
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 }
@@ -161,6 +171,12 @@ class PageViewController: DataViewController {
                 default:
                     return LayoutStandardSectionContentInsets
                 }
+            }
+            
+            func isHorizontalCompact() -> Bool {
+                guard let traitCollection = UIApplication.shared.keyWindow?.traitCollection else { return true }
+
+                return (traitCollection.horizontalSizeClass == .compact);
             }
             
             guard let self = self else { return nil }
