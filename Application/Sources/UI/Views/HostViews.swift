@@ -85,6 +85,21 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
 class HostTableViewCell<Content: View>: UITableViewCell {
     private var hostController: UIHostingController<Content>?
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        self.tintColor = .red
+        self.backgroundColor = .clear
+        
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = .clear
+        self.selectedBackgroundView = selectedBackgroundView
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     private func addHostController(for content: Content?) {
         guard let rootView = content else { return }
         hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
