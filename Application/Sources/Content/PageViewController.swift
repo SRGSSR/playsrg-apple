@@ -160,7 +160,7 @@ class PageViewController: DataViewController {
             
             func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
-                case .mediaGrid, .showGrid:
+                case .mediaGrid:
                     if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                     }
@@ -168,6 +168,9 @@ class PageViewController: DataViewController {
                         let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin);
                         return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
                     }
+                case .showGrid:
+                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin);
+                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 }
