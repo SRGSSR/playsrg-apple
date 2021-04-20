@@ -143,7 +143,7 @@ class PageViewController: DataViewController {
                     let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin);
                     let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 case .mediaGrid:
@@ -151,7 +151,7 @@ class PageViewController: DataViewController {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardSimpleTableCellHeight()))
                     }
                     else {
-                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin);
                         let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid)
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                     }
@@ -165,7 +165,7 @@ class PageViewController: DataViewController {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                     }
                     else {
-                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin);
                         return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
                     }
                 default:
@@ -190,7 +190,7 @@ class PageViewController: DataViewController {
             let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
 
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            group.interItemSpacing = NSCollectionLayoutSpacing.flexible(LayoutStandardMargin)
+            group.interItemSpacing = NSCollectionLayoutSpacing.fixed(LayoutStandardMargin)
             
             let layoutSection = NSCollectionLayoutSection(group: group)
             layoutSection.orthogonalScrollingBehavior = sectionOrthogonalScrollingBehavior(for: section)

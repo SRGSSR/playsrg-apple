@@ -637,7 +637,7 @@
             return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardCellHeight);
         }
         else {
-            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
+            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, collectionViewLayout.minimumInteritemSpacing);
             return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeMediaSwimlaneOrGrid);
         }
     }
