@@ -7,7 +7,18 @@
 import SwiftUI
 
 struct ShowCell: View {
+    enum Layout {
+        case vertical
+        case horizontal
+    }
+    
     let show: SRGShow?
+    let layout: Layout
+    
+    init(show: SRGShow?, layout: Layout = .vertical) {
+        self.show = show
+        self.layout = layout
+    }
     
     private var imageUrl: URL? {
         return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
@@ -39,13 +50,27 @@ struct ShowCell: View {
                     .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
-            VStack {
-                ImageView(url: imageUrl)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
-                DescriptionView(show: show)
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 8)
-                    .frame(width: geometry.size.width, alignment: .leading)
+            Group {
+                if layout == .horizontal {
+                    HStack {
+                        ImageView(url: imageUrl)
+                            .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                        DescriptionView(show: show)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal, 8)
+                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height, alignment: .topLeading)
+                    }
+                }
+                else {
+                    VStack {
+                        ImageView(url: imageUrl)
+                            .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                        DescriptionView(show: show)
+                            .padding(.bottom, 5)
+                            .padding(.horizontal, 8)
+                            .frame(width: geometry.size.width, alignment: .leading)
+                    }
+                }
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)

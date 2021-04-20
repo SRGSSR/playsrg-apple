@@ -17,3 +17,27 @@ extension UICollectionView {
         return dequeueConfiguredReusableCell(using: Self.showCellRegistration, for: indexPath, item: show)
     }
 }
+
+@objc protocol ShowSettable {
+    var show: SRGShow? { get set }
+}
+
+extension UITableView {
+    class ShowTableViewCell: HostTableViewCell<ShowCell>, ShowSettable {
+        var show: SRGShow? {
+            willSet {
+                content = ShowCell(show: newValue, layout: .horizontal)
+            }
+        }
+    }
+    
+    private static let reuseIdentifier = "ShowCell"
+    
+    @objc func registerReusableShowCell() {
+        register(ShowTableViewCell.self, forCellReuseIdentifier: Self.reuseIdentifier)
+    }
+    
+    @objc func dequeueReusableShowCell(for indexPath: IndexPath) -> UITableViewCell & ShowSettable {
+        return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! ShowTableViewCell
+    }
+}

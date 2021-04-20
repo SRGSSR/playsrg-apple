@@ -78,7 +78,7 @@ struct MediaCell: View {
                             .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
                             .cornerRadius(LayoutStandardViewCornerRadius)
                         DescriptionView(media: media, style: style)
-                            .frame(height: geometry.size.height, alignment: .top)
+                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height, alignment: .topLeading)
                     }
                 }
                 else {
