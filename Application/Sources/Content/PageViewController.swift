@@ -147,7 +147,7 @@ class PageViewController: DataViewController {
                     let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid)
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 case .mediaGrid:
-                    if isHorizontalCompact() {
+                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardSimpleTableCellHeight()))
                     }
                     else {
@@ -161,7 +161,7 @@ class PageViewController: DataViewController {
             func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
                 switch section.properties.layout {
                 case .mediaGrid, .showGrid:
-                    if isHorizontalCompact() {
+                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                     }
                     else {
@@ -171,12 +171,6 @@ class PageViewController: DataViewController {
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 }
-            }
-            
-            func isHorizontalCompact() -> Bool {
-                guard let traitCollection = UIApplication.shared.keyWindow?.traitCollection else { return true }
-
-                return (traitCollection.horizontalSizeClass == .compact);
             }
             
             guard let self = self else { return nil }
