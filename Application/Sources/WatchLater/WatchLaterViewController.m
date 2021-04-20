@@ -11,13 +11,13 @@
 #import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "WatchLater.h"
-#import "WatchLaterTableViewCell.h"
 
 @import libextobjc;
 @import SRGAnalytics;
@@ -65,9 +65,7 @@
     self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device does not support 3D touch");
     self.emptyCollectionImage = [UIImage imageNamed:@"watch_later-90"];
     
-    NSString *cellIdentifier = NSStringFromClass(WatchLaterTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableMediaCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
@@ -183,7 +181,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(WatchLaterTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableMediaCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
@@ -193,7 +191,7 @@
     return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.items.count);
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // FIXME: Work around crash. To reproduce, logout with the watch later view visible, with a slow network (repeat a few
     //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
