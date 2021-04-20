@@ -10,9 +10,9 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSection.h"
 #import "History.h"
-#import "HistoryTableViewCell.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
 #import "TableView.h"
@@ -65,9 +65,7 @@
     self.emptyTableSubtitle = NSLocalizedString(@"Recently played medias will be displayed here", @"Hint displayed when no history is available");
     self.emptyCollectionImage = [UIImage imageNamed:@"history-90"];
     
-    NSString *cellIdentifier = NSStringFromClass(HistoryTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableMediaCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(historyEntriesDidChange:)
@@ -177,9 +175,9 @@
     return self.items.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView<MediaSettable> *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(HistoryTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableMediaCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
@@ -189,7 +187,7 @@
     return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.items.count);
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(HistoryTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableView<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // FIXME: Work around crash. To reproduce, logout with the history view visible, with a slow network (repeat a few
     //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
