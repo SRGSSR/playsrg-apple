@@ -59,13 +59,18 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionIte
 #if TARGET_OS_TV
     return 1740;
 #else
+    // Ensure hero cells never fill the entire width of the parent, so that the fact that content can be scrolled
+    // is always obvious to the user
+    static const CGFloat kSupplementaryHorizontalPadding = 2 * LayoutStandardMargin;
+    
     switch (collectionItemType) {
         case LayoutCollectionItemTypeHero:
-            // TODO: Could be only 2 if hero section has only 1 item.
-            return itemWidth - 4 * LayoutStandardMargin;
+            
+            // TODO: Could remove the kSupplementaryHorizontalPadding if hero section has only 1 item.
+            return itemWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing - kSupplementaryHorizontalPadding;
             break;
         case LayoutCollectionItemTypeHighlight:
-            return itemWidth - 2 * LayoutStandardMargin;
+            return itemWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
             break;
         default:
             return LayoutStandardCellWidth;
