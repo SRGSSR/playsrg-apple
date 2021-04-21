@@ -96,8 +96,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
-@property (nonatomic, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-
+@property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 
@@ -295,8 +294,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;
     
     self.downloadsHintsHidden = [firebaseConfiguration boolForKey:@"downloadsHintsHidden"];
-    self.moreEpisodesHidden = [firebaseConfiguration boolForKey:@"moreEpisodesHidden"];
-    
+    self.showsUnavailable = [firebaseConfiguration boolForKey:@"showsUnavailable"];
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
     

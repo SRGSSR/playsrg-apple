@@ -205,7 +205,7 @@ static void commonInit(BaseViewController *self);
         [menuActions addObject:shareAction];
     }
     
-    if (self.navigationController && ! ApplicationConfiguration.sharedApplicationConfiguration.moreEpisodesHidden && media.show) {
+    if (self.navigationController && ! ApplicationConfiguration.sharedApplicationConfiguration.showsUnavailable && media.show) {
         UIAction *moreEpisodesAction = [UIAction actionWithTitle:NSLocalizedString(@"More episodes", @"Context menu action to open more episodes associated with a media") image:[UIImage imageNamed:@"episodes-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
             ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:media.show fromPushNotification:NO];
             [self.navigationController pushViewController:showViewController animated:YES];

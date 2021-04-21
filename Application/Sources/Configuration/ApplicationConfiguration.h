@@ -53,8 +53,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
-@property (nonatomic, readonly, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-
+@property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 

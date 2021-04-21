@@ -11,7 +11,7 @@
   "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",
   "whatsNewURL": "https://pastebin.com/raw/BRC1hPbt",
   "downloadsHintsHidden": true,
-  "moreEpisodesHidden": true,
+  "showsUnavailable": true,
   "continuousPlaybackPlayerViewTransitionDuration": 10,
   "continuousPlaybackForegroundTransitionDuration": 0,
   "continuousPlaybackBackgroundTransitionDuration": 0,
