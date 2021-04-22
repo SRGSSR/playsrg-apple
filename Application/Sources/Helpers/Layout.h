@@ -25,7 +25,7 @@ OBJC_EXPORT const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets;
  */
 OBJC_EXPORT const CGFloat LayoutStandardCellWidth;
 OBJC_EXPORT const CGFloat LayoutTopicCellWidth;
-OBJC_EXPORT const CGFloat LayoutStandardCellHeight API_UNAVAILABLE(tvos);
+OBJC_EXPORT const CGFloat LayoutStandardCellHeight;
 
 /**
  *  Standard margin.

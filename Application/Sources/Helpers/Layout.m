@@ -19,6 +19,7 @@ const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets = { 40.f, 0.f, 40.
 
 const CGFloat LayoutStandardCellWidth = 375.f;
 const CGFloat LayoutTopicCellWidth = 250.f;
+const CGFloat LayoutStandardCellHeight = 150.f;
 
 const CGFloat LayoutProgressBarHeight = 8.f;
 
