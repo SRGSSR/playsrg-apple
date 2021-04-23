@@ -109,7 +109,9 @@ struct TopicCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TopicCell(data: MockData())
+                .previewDisplayName("Cell")
             TopicCell(data: TopicCell.Data(topic: nil))
+                .previewDisplayName("Placeholder")
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }

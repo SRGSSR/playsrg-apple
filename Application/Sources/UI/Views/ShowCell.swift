@@ -126,7 +126,9 @@ struct ShowCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ShowCell(data: MockData())
+                .previewDisplayName("Cell")
             ShowCell(data: ShowCell.Data(show: nil))
+                .previewDisplayName("Placeholder")
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
     }
