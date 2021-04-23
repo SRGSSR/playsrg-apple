@@ -6,65 +6,108 @@
 
 import SwiftUI
 
-struct TopicCell: View {
-    let topic: SRGTopic?
-    
-    private var accessibilityLabel: String {
-        return topic?.title ?? ""
-    }
+protocol TopicCellData {
+    var title: String? { get }
+    var imageUrl: URL? { get }
+    var redactionReason: RedactionReasons { get }
     
     #if os(tvOS)
-    private func action() {
-        if let topic = topic {
-            navigateToTopic(topic)
-        }
-    }
+    func action()
     #endif
+}
+
+struct TopicCell: View {
+    let data: TopicCellData
     
     var body: some View {
         #if os(tvOS)
-        CardButton(action: action) {
-            MainView(topic: topic)
+        CardButton(action: data.action) {
+            MainView(data: data)
                 .accessibilityElement()
-                .accessibilityLabel(accessibilityLabel)
+                .accessibilityLabel(data.title ?? "")
                 .accessibility(addTraits: .isButton)
         }
         #else
-        MainView(topic: topic)
+        MainView(data: data)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
-            .accessibilityLabel(accessibilityLabel)
+            .accessibilityLabel(data.title ?? "")
         #endif
     }
     
     private struct MainView: View {
-        let topic: SRGTopic?
-        
-        private var title: String {
-            return topic?.title ?? ""
-        }
-        
-        private var imageUrl: URL? {
-            return topic?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
-        }
-        
-        private var redactionReason: RedactionReasons {
-            return topic == nil ? .placeholder : .init()
-        }
+        let data: TopicCellData
         
         var body: some View {
             ZStack {
-                ImageView(url: imageUrl)
+                ImageView(url: data.imageUrl)
                     .aspectRatio(contentMode: .fill)
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.2))
-                Text(title)
+                Text(data.title ?? "")
                     .srgFont(.overline)
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .padding(20)
             }
-            .redacted(reason: redactionReason)
+            .redacted(reason: data.redactionReason)
         }
+    }
+}
+
+extension TopicCell {
+    struct Data: TopicCellData {
+        let topic: SRGTopic?
+        
+        var title: String? {
+            return topic?.title
+        }
+        
+        var imageUrl: URL? {
+            return topic?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
+        }
+        
+        var redactionReason: RedactionReasons {
+            return topic == nil ? .placeholder : .init()
+        }
+        
+        #if os(tvOS)
+        func action() {
+            if let topic = topic {
+                navigateToTopic(topic)
+            }
+        }
+        #endif
+    }
+    
+    init(topic: SRGTopic?) {
+        self.init(data: Data(topic: topic))
+    }
+}
+
+struct TopicCell_Previews: PreviewProvider {
+    private struct MockData: TopicCellData {
+        var title: String? {
+            return "Documentaires"
+        }
+        
+        var imageUrl: URL? {
+            return URL(string: "https://www.rts.ch/2020/05/01/22/16/11093091.image/16x9/scale/width/320")
+        }
+        
+        var redactionReason: RedactionReasons {
+            return .init()
+        }
+        
+        #if os(tvOS)
+        func action() {}
+        #endif
+    }
+    
+    static private let size = LayoutTopicCollectionItemSize()
+    
+    static var previews: some View {
+        TopicCell(data: MockData())
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
