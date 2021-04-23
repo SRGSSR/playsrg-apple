@@ -13,22 +13,21 @@ struct TopicCell: View {
         return topic?.title ?? ""
     }
     
+    #if os(tvOS)
     private func action() {
         if let topic = topic {
             navigateToTopic(topic)
         }
     }
+    #endif
     
     var body: some View {
         #if os(tvOS)
-        GeometryReader { geometry in
-            CardButton(action: action) {
-                MainView(topic: topic)
-                    .frame(width: geometry.size.width, height: geometry.size.height)
-                    .accessibilityElement()
-                    .accessibilityLabel(accessibilityLabel)
-                    .accessibility(addTraits: .isButton)
-            }
+        CardButton(action: action) {
+            MainView(topic: topic)
+                .accessibilityElement()
+                .accessibilityLabel(accessibilityLabel)
+                .accessibility(addTraits: .isButton)
         }
         #else
         MainView(topic: topic)
@@ -56,6 +55,7 @@ struct TopicCell: View {
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl)
+                    .aspectRatio(contentMode: .fill)
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.2))
                 Text(title)
@@ -63,7 +63,6 @@ struct TopicCell: View {
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .padding(20)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             }
             .redacted(reason: redactionReason)
         }

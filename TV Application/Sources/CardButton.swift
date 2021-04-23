@@ -9,7 +9,10 @@ import SwiftUI
 /**
  *  A wrapper view for adding a card appearance to any view.
  *
- *  @discussion Behaves like a button from content sizing. Use a parent geometry reader if needed.
+ *  Behavior: h-cha, v-cha
+ *
+ *  @discussion Also fixes an issue with tvOS card buttons applying the `View/fixedSize(width:height:)` modifier
+ *              to the content.
  */
 struct CardButton<Content: View>: View {
     private let action: (() -> Void)?
@@ -22,19 +25,22 @@ struct CardButton<Content: View>: View {
     }
     
     var body: some View {
-        Button(action: {
-            if let action = action {
-                action()
-            }
-        }) {
-            content()
-                .onParentFocusChange { focused in
-                    if let onFocusAction = self.onFocusChangeAction {
-                        onFocusAction(focused)
-                    }
+        GeometryReader { geometry in
+            Button(action: {
+                if let action = action {
+                    action()
                 }
+            }) {
+                content()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .onParentFocusChange { focused in
+                        if let onFocusAction = self.onFocusChangeAction {
+                            onFocusAction(focused)
+                        }
+                    }
+            }
+            .buttonStyle(CardButtonStyle())
         }
-        .buttonStyle(CardButtonStyle())
     }
 }
 
