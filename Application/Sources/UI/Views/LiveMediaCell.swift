@@ -21,7 +21,13 @@ extension LiveMediaData {
 }
 
 struct LiveMediaCell: View, LiveMediaData {
+    enum Layout {
+        case grid
+        case swimlane
+    }
+    
     let media: SRGMedia?
+    let layout: Layout
     
     @State var programComposition: SRGProgramComposition?
     @State private var channelObserver: Any?
@@ -67,7 +73,7 @@ struct LiveMediaCell: View, LiveMediaData {
                     navigateToMedia(media, play: true)
                 }
             }) {
-                VisualView(media: media, programComposition: programComposition, date: date)
+                VisualView(media: media, programComposition: programComposition, date: date, layout: .swimlane)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .onParentFocusChange { isFocused = $0 }
                     .accessibilityElement()
@@ -82,10 +88,14 @@ struct LiveMediaCell: View, LiveMediaData {
             }
             #else
             VStack {
-                VisualView(media: media, programComposition: programComposition, date: date)
+                VisualView(media: media, programComposition: programComposition, date: date, layout: layout)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 ProgressView(media: media, programComposition: programComposition, date: date)
+                if layout == .swimlane {
+                    DescriptionView(media: media, programComposition: programComposition, date: date)
+                        .frame(width: geometry.size.width, alignment: .leading)
+                }
             }
             .accessibilityElement()
             .accessibilityLabel(accessibilityLabel)
@@ -104,6 +114,7 @@ struct LiveMediaCell: View, LiveMediaData {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
         let date: Date
+        let layout: Layout
         
         private var imageUrl: URL? {
             let width = SizeForImageScale(.small).width
@@ -139,8 +150,10 @@ struct LiveMediaCell: View, LiveMediaData {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
                     #if os(iOS)
-                    DescriptionView(media: media, programComposition: programComposition, date: date)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    if layout == .grid {
+                        DescriptionView(media: media, programComposition: programComposition, date: date)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    }
                     #endif
                 }
                 .padding()

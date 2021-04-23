@@ -20,7 +20,7 @@ extension PageViewController {
             }
             else if section.properties.presentationType == .livestreams {
                 if let media = media, media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                    LiveMediaCell(media: media)
+                    LiveMediaCell(media: media, layout: section.properties.layout == .liveMediaGrid ? .grid : .swimlane)
                 }
                 else {
                     MediaCell(media: media, layout: .vertical)
