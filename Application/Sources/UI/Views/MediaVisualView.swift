@@ -37,7 +37,7 @@ struct MediaVisualView: View {
     
     var body: some View {
         ZStack {
-            ImageView(url: imageUrl, contentMode: contentMode)
+            ImageView(url: imageUrl)
             BlockingOverlay(media: media)
             
             HStack(spacing: 4) {
