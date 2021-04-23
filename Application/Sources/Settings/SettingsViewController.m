@@ -28,7 +28,6 @@
 
 @import AppCenterDistribute;
 @import FLEX;
-@import libextobjc;
 @import SafariServices;
 @import SRGAppearance;
 @import SRGDataProviderNetwork;
@@ -346,9 +345,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [self presentViewController:alertController animated:YES completion:nil];
         
-        @weakify(self)
+        weakify(self)
         self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-            @strongify(self)
+            strongify(self)
             
             if (finished) {
                 [self dismissViewControllerAnimated:YES completion:^{
@@ -366,7 +365,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         SRGVendor vendor = applicationConfiguration.vendor;
         
         SRGPageRequest *tvRequest = [[SRGDataProvider.currentDataProvider tvShowsForVendor:vendor withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            @strongify(self)
+            strongify(self)
             
             [self.requestQueue reportError:error];
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -380,7 +379,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         for (RadioChannel *radioChannel in applicationConfiguration.radioChannels) {
             SRGPageRequest *radioRequest = [[SRGDataProvider.currentDataProvider radioShowsForVendor:vendor channelUid:radioChannel.uid withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                @strongify(self)
+                strongify(self)
                 
                 [self.requestQueue reportError:error];
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
