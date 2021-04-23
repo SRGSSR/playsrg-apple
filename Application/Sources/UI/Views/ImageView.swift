@@ -20,7 +20,10 @@ struct ImageView: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIImageView, context: Context) {
         if let url = url {
-            Nuke.loadImage(with: url, into: uiView)
+            let options = ImageLoadingOptions(
+                transition: .fadeIn(duration: 0.5)
+            )
+            Nuke.loadImage(with: url, options: options, into: uiView)
         }
         else {
             Nuke.cancelRequest(for: uiView)
