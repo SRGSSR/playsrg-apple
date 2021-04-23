@@ -32,43 +32,44 @@ struct ShowCell: View {
         return show?.title ?? ""
     }
     
+    #if os(tvOS)
+    private func action() {
+        if let show = show {
+            navigateToShow(show)
+        }
+    }
+    #endif
+    
     var body: some View {
         GeometryReader { geometry in
             #if os(tvOS)
-            LabeledCardButton(action: {
-                if let show = show {
-                    navigateToShow(show)
-                }
-            }) {
+            LabeledCardButton(action: action) {
                 ImageView(url: imageUrl)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                    .aspectRatio(contentMode: .fill)
                     .accessibilityElement()
                     .accessibilityLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(show: show)
-                    .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
             Group {
                 if layout == .horizontal {
                     HStack {
                         ImageView(url: imageUrl)
-                            .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
+                            .aspectRatio(contentMode: .fill)
                         DescriptionView(show: show)
                             .padding(.bottom, 5)
                             .padding(.horizontal, 8)
-                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height, alignment: .topLeading)
                     }
                 }
                 else {
                     VStack {
                         ImageView(url: imageUrl)
-                            .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
+                            .aspectRatio(contentMode: .fill)
                         DescriptionView(show: show)
                             .padding(.bottom, 5)
                             .padding(.horizontal, 8)
-                            .frame(width: geometry.size.width, alignment: .leading)
                     }
                 }
             }
@@ -92,6 +93,7 @@ struct ShowCell: View {
         var body: some View {
             Text(title)
                 .srgFont(.subtitle)
+                .frame(maxWidth: .infinity, alignment: .topLeading)
         }
     }
 }
