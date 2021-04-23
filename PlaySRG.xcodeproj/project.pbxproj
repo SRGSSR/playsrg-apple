@@ -694,7 +694,6 @@
 		6F30ACB52604CDFD00457331 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* CardButton.swift */; };
 		6F30ACB62604CDFD00457331 /* CardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* CardButton.swift */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
-		6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F340F52220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F53220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F54220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
@@ -925,10 +924,6 @@
 		6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
-		6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
-		6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F331CED24D06B8400C096AB /* Preview Assets.xcassets */; };
 		6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */; };
 		6F54D2B92604FB16008B46FF /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
 		6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */; };
@@ -1355,6 +1350,26 @@
 		6FB89A0626335B090012F1B0 /* Stacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stacks.swift */; };
 		6FB89A0726335B090012F1B0 /* Stacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stacks.swift */; };
 		6FB89A0826335B090012F1B0 /* Stacks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stacks.swift */; };
+		6FB89A0B26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A0E26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A1026336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A1126336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89A2D26336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A2E26336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A2F26336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3026336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3126336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3226336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3326336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3426336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3526336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
+		6FB89A3626336FB30012F1B0 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A2C26336FB30012F1B0 /* Images */; };
 		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
@@ -2290,7 +2305,6 @@
 		6F30ACB12604CDFD00457331 /* CardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardButton.swift; sourceTree = "<group>"; };
 		6F331CE424D06B8200C096AB /* Play SRF.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SRF.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331CE624D06B8200C096AB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6F331CED24D06B8400C096AB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6F331CF224D06B8400C096AB /* TV-Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TV-Application-Info.plist"; sourceTree = "<group>"; };
 		6F331CFC24D06BA200C096AB /* Play RTS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331D1424D06BB800C096AB /* Play RSI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RSI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2498,6 +2512,8 @@
 		6FB3C1A61DBCE783008160B4 /* MediaPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPreviewViewController.m; sourceTree = "<group>"; };
 		6FB3C1A71DBCE783008160B4 /* MediaPreviewViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPreviewViewController.storyboard; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stacks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stacks.swift; sourceTree = "<group>"; };
+		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6FB89A2C26336FB30012F1B0 /* Images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Images; sourceTree = "<group>"; };
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
 		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
 		6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramHeaderView.xib; sourceTree = "<group>"; };
@@ -3279,6 +3295,7 @@
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
 				6F331CE524D06B8200C096AB /* TV Application */,
 				6F93962120CA5AE1003ECC1B /* Extensions */,
+				6FB89A0926336E9D0012F1B0 /* Preview Content */,
 				08B77A512409C1AA00A3BC3B /* UITests */,
 				6F0136DF21395B8400B95405 /* Xcode */,
 				E65311E31D3E6FD100B4B8BB /* Frameworks */,
@@ -3648,19 +3665,10 @@
 			children = (
 				6F4FCB1124D07069002675EF /* Sources */,
 				6F4FCB1224D07077002675EF /* Resources */,
-				6F331CEC24D06B8400C096AB /* Preview Content */,
 				6F331CF224D06B8400C096AB /* TV-Application-Info.plist */,
 				08FCE82525BA11C00031C512 /* TV-Application.entitlements */,
 			);
 			path = "TV Application";
-			sourceTree = "<group>";
-		};
-		6F331CEC24D06B8400C096AB /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				6F331CED24D06B8400C096AB /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		6F475F8B1EB37BC6003021EA /* Controllers */ = {
@@ -4026,6 +4034,15 @@
 				6FD1204A24D19268008CB2F8 /* SRFAssets.xcassets */,
 			);
 			path = "Play SRF";
+			sourceTree = "<group>";
+		};
+		6FB89A0926336E9D0012F1B0 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				6FB89A2C26336FB30012F1B0 /* Images */,
+				6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		6FDF08C4218B126700B2AF2C /* Model */ = {
@@ -5214,6 +5231,7 @@
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
+				6FB89A0B26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				0832BF1522BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
@@ -5244,6 +5262,7 @@
 				6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */,
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				6FD2CBC31DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
+				6FB89A2D26336FB30012F1B0 /* Images in Resources */,
 				084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F47600E1EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
@@ -5266,6 +5285,7 @@
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F12E4D822D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
+				6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
@@ -5296,6 +5316,7 @@
 				0832BF1622BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */,
 				086BDE181EA63D5A00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				08754F48201BB00400458F3A /* InfoPlist.strings in Resources */,
+				6FB89A2E26336FB30012F1B0 /* Images in Resources */,
 				08C6901D1D38E08C00BB8AAA /* LaunchScreen.xib in Resources */,
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
@@ -5318,6 +5339,7 @@
 				0875851F23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
+				6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
@@ -5348,6 +5370,7 @@
 				086BDE1A1EA63D5B00965F45 /* PlayMiniPlayerView.xib in Resources */,
 				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FAA1D38DF8300BB8AAA /* iTunesArtwork in Resources */,
+				6FB89A2F26336FB30012F1B0 /* Images in Resources */,
 				6FD2CBC51DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
 				6F4760101EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
 				6F40920F22DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib in Resources */,
@@ -5370,6 +5393,7 @@
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
+				6FB89A0E26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F12E4DC22D866F200BC1718 /* MostSearchedShowsHeaderView.xib in Resources */,
@@ -5400,6 +5424,7 @@
 				6F2961FF2006186100CAB0E4 /* placeholder_media_list-180.pdf in Resources */,
 				08C68FE81D38E04B00BB8AAA /* LaunchScreen.xib in Resources */,
 				6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
+				6FB89A3026336FB30012F1B0 /* Images in Resources */,
 				6FB0BB3A20AEF5B8007C5D87 /* Onboarding.strings in Resources */,
 				6FD2CBC61DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
 				6F4760111EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
@@ -5422,6 +5447,7 @@
 				6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
+				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
 				081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
@@ -5452,6 +5478,7 @@
 				0875852123A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FD2CBC71DD19B0200B44958 /* placeholder_media-180.pdf in Resources */,
 				6F4760121EB37BC6003021EA /* TranslucentTitleHeaderView.xib in Resources */,
+				6FB89A3126336FB30012F1B0 /* Images in Resources */,
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
@@ -5506,13 +5533,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB89A3226336FB30012F1B0 /* Images in Resources */,
 				08B961D625E8281C00E8AC1B /* Settings.strings in Resources */,
+				6FB89A1026336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
 				6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
-				6F331CEE24D06B8400C096AB /* Preview Assets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
 				08777DB724EC39AE006F2EC7 /* Accessibility.strings in Resources */,
 			);
@@ -5522,12 +5550,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB89A3326336FB30012F1B0 /* Images in Resources */,
 				08B9618025E81BE200E8AC1B /* Settings.strings in Resources */,
+				6FB89A1126336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
-				6F4FCB0924D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
 				08777DB124EC3340006F2EC7 /* Accessibility.strings in Resources */,
@@ -5538,13 +5567,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB89A3426336FB30012F1B0 /* Images in Resources */,
 				08B961AA25E827EF00E8AC1B /* Settings.strings in Resources */,
+				6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F4FCB0A24D07040002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
 				08777DB324EC3997006F2EC7 /* Accessibility.strings in Resources */,
 			);
@@ -5554,11 +5584,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB89A3526336FB30012F1B0 /* Images in Resources */,
 				08B961D425E8280900E8AC1B /* Settings.strings in Resources */,
+				6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F4FCB0B24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -5570,13 +5601,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FB89A3626336FB30012F1B0 /* Images in Resources */,
 				08B961EC25E8283F00E8AC1B /* Settings.strings in Resources */,
+				6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
 				6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				6F4FCB0C24D07041002675EF /* Preview Assets.xcassets in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
 				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
 			);
@@ -9690,8 +9722,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9716,8 +9750,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = JA876HZNN2;
 				DOMAIN = "*.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9741,8 +9777,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9767,8 +9805,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 8779C367VK;
 				DOMAIN = "*.rts.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9792,8 +9832,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9818,8 +9860,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = Y7342J76KH;
 				DOMAIN = "*.rsi.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9843,8 +9887,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9869,8 +9915,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "*.rtr.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9893,8 +9941,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -9918,8 +9968,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = R36WF3S37T;
 				DOMAIN = "*.swissinfo.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10009,8 +10061,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-srf.stage.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10035,8 +10089,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rts.stage.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10061,8 +10117,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rsi.stage.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10087,8 +10145,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rtr.stage.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10112,8 +10172,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.stage.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10203,8 +10265,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-srf.test.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10231,8 +10295,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rts.test.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10259,8 +10325,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rsi.test.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10287,8 +10355,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rtr.test.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -10314,8 +10384,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.test.srf.ch";
+				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -11985,7 +12057,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12041,7 +12113,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = JA876HZNN2;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12108,7 +12180,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12175,7 +12247,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12216,7 +12288,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12272,7 +12344,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 8779C367VK;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12339,7 +12411,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12406,7 +12478,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12447,7 +12519,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12503,7 +12575,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = Y7342J76KH;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12570,7 +12642,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12637,7 +12709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12678,7 +12750,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12734,7 +12806,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12801,7 +12873,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12868,7 +12940,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -12909,7 +12981,7 @@
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -12965,7 +13037,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = R36WF3S37T;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -13032,7 +13104,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
@@ -13099,7 +13171,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_ASSET_PATHS = "\"TV Application/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;

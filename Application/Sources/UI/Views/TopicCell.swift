@@ -92,7 +92,7 @@ struct TopicCell_Previews: PreviewProvider {
         }
         
         var imageUrl: URL? {
-            return URL(string: "https://www.rts.ch/2020/05/01/22/16/11093091.image/16x9/scale/width/320")
+            return Bundle.main.url(forResource: "topic_documentaires", withExtension: "jpg", subdirectory: "Images")
         }
         
         var redactionReason: RedactionReasons {

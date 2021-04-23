@@ -109,7 +109,7 @@ struct ShowCell_Previews: PreviewProvider {
         }
         
         var imageUrl: URL? {
-            return URL(string: "https://www.rts.ch/2019/08/28/11/33/10667272.image/16x9/scale/width/960")
+            return Bundle.main.url(forResource: "show_19h30", withExtension: "jpg", subdirectory: "Images")
         }
         
         var redactionReason: RedactionReasons {
