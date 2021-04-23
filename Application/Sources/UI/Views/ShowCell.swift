@@ -46,20 +46,12 @@ struct ShowCell: View {
             Group {
                 if layout == .horizontal {
                     HStack {
-                        ImageView(url: data.imageUrl)
-                            .aspectRatio(contentMode: .fill)
-                        DescriptionView(data: data)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal, 8)
+                        MainView(data: data)
                     }
                 }
                 else {
                     VStack {
-                        ImageView(url: data.imageUrl)
-                            .aspectRatio(contentMode: .fill)
-                        DescriptionView(data: data)
-                            .padding(.bottom, 5)
-                            .padding(.horizontal, 8)
+                        MainView(data: data)
                     }
                 }
             }
@@ -72,6 +64,20 @@ struct ShowCell: View {
         .redacted(reason: data.redactionReason)
     }
     
+    #if os(iOS)
+    private struct MainView: View {
+        let data: ShowCellData
+        
+        var body: some View {
+            ImageView(url: data.imageUrl)
+                .aspectRatio(contentMode: .fill)
+            DescriptionView(data: data)
+                .padding(.bottom, 5)
+                .padding(.horizontal, 8)
+        }
+    }
+    #endif
+    
     private struct DescriptionView: View {
         let data: ShowCellData
         
@@ -82,6 +88,7 @@ struct ShowCell: View {
         var body: some View {
             Text(title)
                 .srgFont(.subtitle)
+                .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
         }
     }
