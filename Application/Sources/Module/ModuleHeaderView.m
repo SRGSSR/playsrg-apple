@@ -22,7 +22,7 @@
 + (CGFloat)heightForModule:(SRGModule *)module withSize:(CGSize)size
 {
     // No header displayed on compact vertical layouts
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.delegate.window.traitCollection;
     if (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
         return 0.f;
     }

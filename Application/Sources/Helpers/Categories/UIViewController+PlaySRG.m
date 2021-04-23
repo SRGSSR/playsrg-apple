@@ -178,7 +178,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
         MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
         SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
@@ -228,7 +228,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentNativeMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController withAirPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
         MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
         if (mediaPlayerViewController.letterboxController == letterboxController) {
@@ -277,7 +277,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentGoogleCastControlsAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         completion ? completion() : nil;
         return;
@@ -289,7 +289,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         mediaControlsViewController.hideStreamPositionControlsForLiveContent = YES;
         
         // The top view controller might have changed if dismissal occurred
-        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
         [topViewController presentViewController:mediaControlsViewController animated:animated completion:completion];
         
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];

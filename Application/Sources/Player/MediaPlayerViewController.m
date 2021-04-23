@@ -1723,13 +1723,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)letterboxShouldRestoreUserInterfaceForPictureInPicture
 {
     // Present the media player view controller again if needed
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     return ! [topViewController isKindOfClass:MediaPlayerViewController.class];
 }
 
 - (void)letterboxRestoreUserInterfaceForPictureInPictureWithCompletionHandler:(void (^)(BOOL))completionHandler
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     [topViewController presentViewController:self animated:YES completion:^{
         completionHandler(YES);
     }];
@@ -2413,7 +2413,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
-        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
         if (topViewController != self) {
             return;
         }

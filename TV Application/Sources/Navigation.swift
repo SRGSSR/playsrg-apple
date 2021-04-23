@@ -87,7 +87,7 @@ func showText(_ text: String, animated: Bool = true) {
 }
 
 fileprivate func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+    guard let topViewController = UIApplication.shared.delegate?.window??.topViewController else { return }
     
     isPresenting = true
     topViewController.present(viewController, animated: animated) {

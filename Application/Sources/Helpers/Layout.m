@@ -208,7 +208,7 @@ CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollection
             break;
     }
 #else
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.delegate.window.traitCollection;
     BOOL isCompact = (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact);
     
     switch (collectionItemType) {

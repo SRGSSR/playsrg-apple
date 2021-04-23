@@ -45,7 +45,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 + (CGFloat)heightForShow:(SRGShow *)show withSize:(CGSize)size
 {
     // No header displayed on compact vertical layouts
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.delegate.window.traitCollection;
     if (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassCompact) {
         return 0.f;
     }
@@ -176,7 +176,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateAspectRatioWithSize:(CGSize)size
 {
     BOOL isLandscape = (size.width > size.height);
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.keyWindow.traitCollection;
+    UITraitCollection *traitCollection = UIApplication.sharedApplication.delegate.window.traitCollection;
     if (traitCollection.verticalSizeClass == UIUserInterfaceSizeClassRegular
             && traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular
             && isLandscape) {
