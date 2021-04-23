@@ -618,7 +618,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.statusBarOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation;
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
@@ -1572,7 +1572,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
-        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
+        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation)) {
             rotate(UIInterfaceOrientationPortrait);
             return;
         }
@@ -1590,7 +1590,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (@available(iOS 13 , *)) {
         // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
         // to avoid incorrect safe area insets after returning from landscape orientation.
-        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
+        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation));
     }
     else {
         self.statusBarHidden = fullScreen;
