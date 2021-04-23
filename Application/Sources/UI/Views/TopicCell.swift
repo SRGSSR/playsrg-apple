@@ -107,7 +107,10 @@ struct TopicCell_Previews: PreviewProvider {
     static private let size = LayoutTopicCollectionItemSize()
     
     static var previews: some View {
-        TopicCell(data: MockData())
-            .previewLayout(.fixed(width: size.width, height: size.height))
+        Group {
+            TopicCell(data: MockData())
+            TopicCell(data: TopicCell.Data(topic: nil))
+        }
+        .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
