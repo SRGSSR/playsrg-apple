@@ -22,8 +22,8 @@ extension LiveMediaData {
 
 struct LiveMediaCell: View, LiveMediaData {
     enum Layout {
-        case grid
-        case swimlane
+        case applicate
+        case vertical
     }
     
     let media: SRGMedia?
@@ -73,7 +73,7 @@ struct LiveMediaCell: View, LiveMediaData {
                     navigateToMedia(media, play: true)
                 }
             }) {
-                VisualView(media: media, programComposition: programComposition, date: date, layout: .swimlane)
+                VisualView(media: media, programComposition: programComposition, date: date, layout: .vertical)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .onParentFocusChange { isFocused = $0 }
                     .accessibilityElement()
@@ -92,7 +92,7 @@ struct LiveMediaCell: View, LiveMediaData {
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 ProgressView(media: media, programComposition: programComposition, date: date)
-                if layout == .swimlane {
+                if layout == .vertical {
                     DescriptionView(media: media, programComposition: programComposition, date: date)
                         .frame(width: geometry.size.width, alignment: .leading)
                 }
@@ -150,7 +150,7 @@ struct LiveMediaCell: View, LiveMediaData {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
                     #if os(iOS)
-                    if layout == .grid {
+                    if layout == .applicate {
                         DescriptionView(media: media, programComposition: programComposition, date: date)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
