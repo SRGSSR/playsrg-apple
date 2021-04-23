@@ -17,15 +17,10 @@ protocol ShowCellData {
 }
 
 struct ShowCell: View {
-    enum Layout {
-        case vertical
-        case horizontal
-    }
-    
     let data: ShowCellData
-    let layout: Layout
+    let layout: StackLayout
     
-    init(data: ShowCellData, layout: Layout = .vertical) {
+    init(data: ShowCellData, layout: StackLayout = .vertical) {
         self.data = data
         self.layout = layout
     }
@@ -44,15 +39,12 @@ struct ShowCell: View {
             }
             #else
             Group {
-                if layout == .horizontal {
-                    HStack {
-                        MainView(data: data)
-                    }
-                }
-                else {
-                    VStack {
-                        MainView(data: data)
-                    }
+                Stack(layout: layout) {
+                    ImageView(url: data.imageUrl)
+                        .aspectRatio(contentMode: .fill)
+                    DescriptionView(data: data)
+                        .padding(.bottom, 5)
+                        .padding(.horizontal, 8)
                 }
             }
             .background(Color(.play_cardGrayBackground))
@@ -63,20 +55,6 @@ struct ShowCell: View {
         }
         .redacted(reason: data.redactionReason)
     }
-    
-    #if os(iOS)
-    private struct MainView: View {
-        let data: ShowCellData
-        
-        var body: some View {
-            ImageView(url: data.imageUrl)
-                .aspectRatio(contentMode: .fill)
-            DescriptionView(data: data)
-                .padding(.bottom, 5)
-                .padding(.horizontal, 8)
-        }
-    }
-    #endif
     
     private struct DescriptionView: View {
         let data: ShowCellData
@@ -119,7 +97,7 @@ extension ShowCell {
         #endif
     }
     
-    init(show: SRGShow?, layout: Layout = .vertical) {
+    init(show: SRGShow?, layout: StackLayout = .vertical) {
         self.init(data: Data(show: show), layout: layout)
     }
 }
