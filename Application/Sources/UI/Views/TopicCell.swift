@@ -13,14 +13,16 @@ struct TopicCell: View {
         return topic?.title ?? ""
     }
     
+    private func action() {
+        if let topic = topic {
+            navigateToTopic(topic)
+        }
+    }
+    
     var body: some View {
         #if os(tvOS)
         GeometryReader { geometry in
-            CardButton(action: {
-                if let topic = topic {
-                    navigateToTopic(topic)
-                }
-            }) {
+            CardButton(action: action) {
                 MainView(topic: topic)
                     .frame(width: geometry.size.width, height: geometry.size.height)
                     .accessibilityElement()
