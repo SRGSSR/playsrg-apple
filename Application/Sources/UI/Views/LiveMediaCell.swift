@@ -74,16 +74,18 @@ struct LiveMediaCell: View, LiveMediaData {
                     .accessibilityLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             } label: {
-                DescriptionView(media: media, programComposition: programComposition, date: date)
-                    .frame(width: geometry.size.width, alignment: .leading)
+                VStack {
+                    ProgressView(media: media, programComposition: programComposition, date: date)
+                    DescriptionView(media: media, programComposition: programComposition, date: date)
+                        .frame(width: geometry.size.width, alignment: .leading)
+                }
             }
             #else
             VStack {
                 VisualView(media: media, programComposition: programComposition, date: date)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .cornerRadius(LayoutStandardViewCornerRadius)
-                DescriptionView(media: media, programComposition: programComposition, date: date)
-                    .frame(width: geometry.size.width, alignment: .leading)
+                ProgressView(media: media, programComposition: programComposition, date: date)
             }
             .accessibilityElement()
             .accessibilityLabel(accessibilityLabel)
@@ -129,21 +131,25 @@ struct LiveMediaCell: View, LiveMediaData {
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl)
-                if let logoImage = logoImage {
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.6))
-                    Image(uiImage: logoImage)
+                Rectangle()
+                    .fill(Color(white: 0, opacity: 0.6))
+                VStack {
+                    if let logoImage = logoImage {
+                        Image(uiImage: logoImage)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                    }
+                    #if os(iOS)
+                    DescriptionView(media: media, programComposition: programComposition, date: date)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .padding()
+                    #endif
                 }
-                else if let media = media, media.timeAvailability(at: Date()) == .notYetAvailable {
-                    Rectangle()
-                        .fill(Color(white: 0, opacity: 0.6))
+                .padding()
+                BlockingOverlay(media: media)
+                if let media = media, media.timeAvailability(at: Date()) == .notYetAvailable {
                     Badge(text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), color: Color(.play_gray))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding([.leading, .top], 8)
                 }
-                BlockingOverlay(media: media)
             }
         }
     }
@@ -174,6 +180,26 @@ struct LiveMediaCell: View, LiveMediaData {
             }
         }
         
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(title)
+                    .srgFont(.subtitle)
+                    .lineLimit(2)
+                
+                if let subtitle = subtitle {
+                    Text(subtitle)
+                        .srgFont(.overline)
+                        .lineLimit(2)
+                }
+            }
+        }
+    }
+    
+    private struct ProgressView: View, LiveMediaData {
+        let media: SRGMedia?
+        let programComposition: SRGProgramComposition?
+        let date: Date
+        
         private var progress: Double? {
             if channel != nil {
                 guard let currentProgram = program(at: date) else { return 1 }
@@ -191,21 +217,10 @@ struct LiveMediaCell: View, LiveMediaData {
         }
         
         var body: some View {
-            VStack(alignment: .leading) {
-                if let progress = progress {
-                    ProgressBar(value: progress)
-                        .frame(maxWidth: .infinity, maxHeight: LayoutProgressBarHeight)
-                        .cornerRadius(4)
-                }
-                Text(title)
-                    .srgFont(.subtitle)
-                    .lineLimit(2)
-                
-                if let subtitle = subtitle {
-                    Text(subtitle)
-                        .srgFont(.overline)
-                        .lineLimit(2)
-                }
+            if let progress = progress {
+                ProgressBar(value: progress)
+                    .frame(maxWidth: .infinity, maxHeight: LayoutProgressBarHeight)
+                    .cornerRadius(4)
             }
         }
     }
