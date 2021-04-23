@@ -165,7 +165,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 {
     [UAirship takeOff:self.configuration];
     
-    [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
+    [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
     [UAirship push].pushNotificationDelegate = self;
     [UAirship push].autobadgeEnabled = YES;
 }
