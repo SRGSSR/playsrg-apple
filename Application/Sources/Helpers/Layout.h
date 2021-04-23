@@ -28,6 +28,12 @@ OBJC_EXPORT const CGFloat LayoutTopicCellWidth;
 OBJC_EXPORT const CGFloat LayoutStandardCellHeight;
 
 /**
+ *  Live media grid large dimensions (iOS).
+ */
+OBJC_EXPORT const CGFloat LayoutLiveMediaGridLargeBoundWidth;
+OBJC_EXPORT const CGFloat LayoutLiveMediaGridLargeCellWidth;
+
+/**
  *  Standard margin.
  */
 OBJC_EXPORT const CGFloat LayoutStandardMargin;

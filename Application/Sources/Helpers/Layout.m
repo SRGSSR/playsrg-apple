@@ -39,6 +39,9 @@ const CGFloat LayoutProgressBarHeight = 2.f;
 
 #endif
 
+const CGFloat LayoutLiveMediaGridLargeBoundWidth = 1000.f;
+const CGFloat LayoutLiveMediaGridLargeCellWidth = 275.f;
+
 const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets = { 0.f, 0.f, 0.f, 0.f };
 
 const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };

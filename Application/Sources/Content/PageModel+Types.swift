@@ -87,6 +87,7 @@ extension PageModel {
         
         @available(tvOS, unavailable)
         case showAccess
+        case liveMediaGrid
     }
     
     // Items can appear in several sections, which is why a section parameter must be provided for each of them so
@@ -360,8 +361,16 @@ extension ConfiguredSection: PageSectionProperties {
     
     var layout: PageModel.SectionLayout {
         switch self.type {
-        case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (self.contentPresentationType == .hero) ? .hero : .mediaSwimlane
+        case .tvLive, .radioLive, .radioLiveSatellite:
+            #if os(iOS)
+            return .liveMediaGrid
+            #else
+            return .mediaSwimlane
+            #endif
+        case .tvLiveCenter, .tvScheduledLivestreams:
+            return .mediaSwimlane
         case .radioFavoriteShows:
             return .showSwimlane
         case .radioAllShows:
