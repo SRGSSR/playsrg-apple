@@ -8,6 +8,7 @@ import SRGDataProviderCombine
 import SRGUserData
 
 fileprivate let defaultNumberOfPlaceholders = 10
+fileprivate let defaultNumberOfLivestreamPlaceholders = 4
 
 /// Common abstraction for properties associated with a section
 protocol PageSectionProperties {
@@ -212,8 +213,10 @@ extension SRGContentSection: PageSectionProperties {
             return [.showPlaceholder(index: 0, section: .content(self))]
         case .topicSelector:
             return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0, section: .content(self)) }
-        case .swimlane, .hero, .grid, .livestreams:
+        case .swimlane, .hero, .grid:
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .content(self)) }
+        case .livestreams:
+            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0, section: .content(self)) }
         case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
             return []
         }
@@ -387,8 +390,10 @@ extension ConfiguredSection: PageSectionProperties {
     
     var placeholderItems: [PageModel.Item] {
         switch self.type {
-        case .tvLive, .radioLive, .radioLiveSatellite, .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+        case .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .configured(self)) }
+        case .tvLive, .radioLive, .radioLiveSatellite:
+            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0, section: .configured(self)) }
         case .radioAllShows:
             return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0, section: .configured(self)) }
         case .radioFavoriteShows, .radioShowAccess:
