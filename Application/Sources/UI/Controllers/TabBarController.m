@@ -336,7 +336,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
     
     SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];
-    profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeOneBesideSecondary;
     profileSplitViewController.viewControllers = @[ profileNavigationController ];
     profileSplitViewController.tabBarItem = profileTabBarItem;
     return profileSplitViewController;
