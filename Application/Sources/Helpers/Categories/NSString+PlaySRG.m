@@ -37,9 +37,16 @@ static NSString* digest(NSString *string, unsigned char *(*cc_digest)(const void
     return [firstUppercaseCharacter stringByAppendingString:[self substringFromIndex:1]];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 - (NSString *)play_md5hash
 {
+    // MD5 is deprecated, but still used by gravatar.com
+    // https://en.gravatar.com/site/implement
     return digest(self, CC_MD5, CC_MD5_DIGEST_LENGTH);
 }
+
+#pragma clang diagnostic pop
 
 @end
