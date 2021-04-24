@@ -22,7 +22,7 @@ extension LiveMediaData {
 
 struct LiveMediaCell: View, LiveMediaData {
     enum Layout {
-        case applicate
+        case overprint
         case vertical
     }
     
@@ -150,7 +150,7 @@ struct LiveMediaCell: View, LiveMediaData {
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
                     #if os(iOS)
-                    if layout == .applicate {
+                    if layout == .overprint {
                         DescriptionView(media: media, programComposition: programComposition, date: date)
                             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                     }
