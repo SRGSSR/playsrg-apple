@@ -60,13 +60,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
         
         /// Data source for the collection view.
-        fileprivate var dataSource: DataSource? = nil
+        fileprivate var dataSource: DataSource?
         
         /// Provider for the section layout.
         fileprivate var sectionLayoutProvider: ((Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
-        fileprivate var rowsHash: Int? = nil
+        fileprivate var rowsHash: Int?
         
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
@@ -92,10 +92,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     let supplementaryView: (String, IndexPath, Section, Item) -> SupplementaryView
     
     /// The view controller (child of a tab bar controller) which should be moved when scrolling occurs.
-    fileprivate weak var parentViewController: UIViewController? = nil
+    fileprivate weak var parentViewController: UIViewController?
     
     /// The parent search controller to move the collection with, if any.
-    fileprivate weak var parentSearchController: UISearchController? = nil
+    fileprivate weak var parentSearchController: UISearchController?
     
     /**
      *  Remove item duplicates. As items can be moved between sections no item must appear multiple times, whether in

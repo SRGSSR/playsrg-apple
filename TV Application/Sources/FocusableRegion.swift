@@ -9,7 +9,7 @@ import SwiftUI
 /**
  *  A view able to catch focus.
  */
-fileprivate struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
+private struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
     private let content: () -> Content
     
     init(@ViewBuilder content: @escaping () -> Content) {

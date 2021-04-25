@@ -57,7 +57,7 @@ open class SwiftMessagesBridge: NSObject {
                 break
             }
             
-            presentationController = presentationController?.parent;
+            presentationController = presentationController?.parent
         }
         
         if let presentationController = presentationController {

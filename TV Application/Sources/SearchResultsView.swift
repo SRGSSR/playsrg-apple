@@ -125,7 +125,7 @@ struct SearchResultsView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, indexPath, section, _ in
+            } supplementaryView: { _, _, section, _ in
                 if section == .shows {
                     Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
                         .srgFont(.H2)

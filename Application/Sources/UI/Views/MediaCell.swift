@@ -19,7 +19,7 @@ struct MediaCell: View {
     let layout: Layout
     let action: (() -> Void)?
     
-    fileprivate var onFocusAction: ((Bool) -> Void)? = nil
+    fileprivate var onFocusAction: ((Bool) -> Void)?
     
     @State private var isFocused = false
     

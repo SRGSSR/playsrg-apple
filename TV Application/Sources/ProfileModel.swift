@@ -11,7 +11,7 @@ import SRGUserData
 
 class ProfileModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
-    @Published private(set) var account: SRGAccount? = nil
+    @Published private(set) var account: SRGAccount?
     
     private(set) var hasHistoryEntries = false {
         willSet {
@@ -37,7 +37,7 @@ class ProfileModel: ObservableObject {
         }
     }
     
-    @Published private(set) var synchronizationDate: Date? = nil
+    @Published private(set) var synchronizationDate: Date?
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -130,7 +130,7 @@ class ProfileModel: ObservableObject {
     }
     
     func removeFavorites() {
-        FavoritesRemoveShows(nil);
+        FavoritesRemoveShows(nil)
     }
     
     func removeWatchLaterItems() {
@@ -143,7 +143,7 @@ class ProfileModel: ObservableObject {
     }
     
     private func updateHistoryInformation() {
-        SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil) { historyEntries, error in
+        SRGUserData.current?.history.historyEntries(matching: nil, sortedWith: nil) { historyEntries, _ in
             guard let isEmpty = historyEntries?.isEmpty else { return }
             DispatchQueue.main.async {
                 self.hasHistoryEntries = !isEmpty
@@ -156,7 +156,7 @@ class ProfileModel: ObservableObject {
     }
     
     private func updateWatchLaterInformation() {
-        SRGUserData.current?.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: nil) { entries, error in
+        SRGUserData.current?.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: nil) { entries, _ in
             guard let isEmpty = entries?.isEmpty else { return }
             DispatchQueue.main.async {
                 self.hasWatchLaterItems = !isEmpty

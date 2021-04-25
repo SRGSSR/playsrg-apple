@@ -28,8 +28,8 @@ extension MediaPlayerViewController {
         
         if let programsTableView = self.programsTableView {
             let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: MediaPlayerViewController.contentHeight, right: 0.0)
-            programsTableView.contentInset = insets;
-            programsTableView.scrollIndicatorInsets = insets;
+            programsTableView.contentInset = insets
+            programsTableView.scrollIndicatorInsets = insets
         }
         
         let collapsed = (songsViewStyle == .collapsed)
@@ -149,7 +149,7 @@ private extension MediaPlayerViewController {
             configuration.margins = NSDirectionalEdgeInsets(top: 0.0, leading: 10.0, bottom: 0.0, trailing: 10.0)
         }
         else {
-            configuration.position = .bottom;
+            configuration.position = .bottom
             configuration.positionLogic[.bottom] = .ignoreSafeArea
             configuration.margins = .zero
         }
@@ -206,7 +206,7 @@ private extension MediaPlayerViewController {
     }
 }
 
-extension MediaPlayerViewController : PanelSizeDelegate {
+extension MediaPlayerViewController: PanelSizeDelegate {
     
     public func panel(_ panel: Panel, sizeForMode mode: Panel.Configuration.Mode) -> CGSize {
         // Width ignored when for .bottom position, takes parent width
@@ -228,7 +228,7 @@ extension MediaPlayerViewController : PanelSizeDelegate {
     }
 }
 
-extension MediaPlayerViewController : PanelResizeDelegate {
+extension MediaPlayerViewController: PanelResizeDelegate {
     
     public func panelDidStartResizing(_ panel: Panel) {
         // Trick to avoid the tap gesture triggered at the same time as the resizing one for small finger movements.
@@ -246,7 +246,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     public func panel(_ panel: Panel, willTransitionFrom oldMode: Panel.Configuration.Mode?, to newMode: Panel.Configuration.Mode, with coordinator: PanelTransitionCoordinator) {
         if let tableView = self.songTableView() {
             coordinator.animateAlongsideTransition({
-                if (oldMode == .compact) {
+                if oldMode == .compact {
                     UIView.performWithoutAnimation {
                         self.scrollToSong(at: self.letterboxController.currentDate, animated: false)
                     }
@@ -258,7 +258,7 @@ extension MediaPlayerViewController : PanelResizeDelegate {
     }
 }
 
-extension MediaPlayerViewController : PanelAccessibilityDelegate {
+extension MediaPlayerViewController: PanelAccessibilityDelegate {
     
     public func panel(_ panel: Panel, accessibilityLabelForResizeHandle resizeHandle: ResizeHandle) -> String {
         if panel.configuration.mode == .compact {

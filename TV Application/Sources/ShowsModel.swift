@@ -26,7 +26,7 @@ class ShowsModel: ObservableObject {
     func loadPage() {
         SRGDataProvider.current!.tvShows(for: ApplicationConfiguration.shared.vendor, pageSize: SRGDataProviderUnlimitedPageSize)
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveRequest:  { _ in
+            .handleEvents(receiveRequest: { _ in
                 if self.alphabeticalShows.isEmpty {
                     self.state = .loading
                 }

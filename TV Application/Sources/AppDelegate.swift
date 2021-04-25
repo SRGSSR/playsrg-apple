@@ -123,7 +123,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         let configuration = ApplicationConfiguration.shared
-        application.accessibilityLanguage = configuration.voiceOverLanguageCode;
+        application.accessibilityLanguage = configuration.voiceOverLanguageCode
         
         if let identityWebserviceURL = configuration.identityWebserviceURL,
            let identityWebsiteURL = configuration.identityWebsiteURL {
@@ -187,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // See URL_SCHEMES.md
-    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let deeplinkAction = url.host else { return false }
         
         if deeplinkAction == "media" {

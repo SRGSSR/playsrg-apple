@@ -137,7 +137,7 @@ struct FeaturedShowCell: View {
                     .padding()
                 if let lead = show?.lead {
                     Spacer()
-                        .frame(height:LayoutFeaturedSpacerHeight * 2)
+                        .frame(height: LayoutFeaturedSpacerHeight * 2)
                     Text(lead)
                         .srgFont(.body)
                         .lineLimit(4)

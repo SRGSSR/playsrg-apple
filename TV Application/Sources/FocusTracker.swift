@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-fileprivate struct FocusTracker<Content: View>: View {
+private struct FocusTracker<Content: View>: View {
     private let action: (Bool) -> Void
     private let content: () -> Content
     

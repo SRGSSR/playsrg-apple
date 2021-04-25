@@ -19,7 +19,7 @@ class ShowDetailModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var medias: [SRGMedia] = []
-    private var nextPage: SRGDataProvider.LatestMediasForShow.Page? = nil
+    private var nextPage: SRGDataProvider.LatestMediasForShow.Page?
     
     init(show: SRGShow) {
         self.show = show
@@ -37,7 +37,7 @@ class ShowDetailModel: ObservableObject {
         guard let publisher = publisher(from: media) else { return }
         publisher
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveRequest:  { _ in
+            .handleEvents(receiveRequest: { _ in
                 if self.medias.isEmpty {
                     self.state = .loading
                 }

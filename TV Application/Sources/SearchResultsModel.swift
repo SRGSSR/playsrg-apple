@@ -32,14 +32,14 @@ class SearchResultsModel: ObservableObject {
     
     @Published private(set) var state = State.loading
     
-    weak var searchController: UISearchController? = nil
-    weak var viewController: UIViewController? = nil
+    weak var searchController: UISearchController?
+    weak var viewController: UIViewController?
     
     private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     
     private var medias: [SRGMedia] = []
-    private var nextPage: Medias.Page? = nil
+    private var nextPage: Medias.Page?
     
     init() {
         querySubject

@@ -7,7 +7,7 @@
 import PaperOnboarding
 import SRGAppearance
 
-@objc(OnboardingViewController) public class OnboardingViewController : BaseViewController {
+@objc(OnboardingViewController) public class OnboardingViewController: BaseViewController {
     final var onboarding: Onboarding!
     
     private weak var paperOnboarding: PaperOnboarding!
@@ -78,7 +78,7 @@ import SRGAppearance
     // MARK: Rotation
     
     public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if (UIDevice.current.userInterfaceIdiom == .pad) {
+        if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
         }
         else {
@@ -105,7 +105,7 @@ import SRGAppearance
         self.closeButton.titleLabel?.font = SRGFont.font(family: .text, weight: .medium, fixedSize: largeFontSize)
         self.nextButton.titleLabel?.font = SRGFont.font(family: .text, weight: .medium, fixedSize: smallFontSize)
         
-        self.buttonBottomConstraint.constant = 0.19 * self.view.frame.height;
+        self.buttonBottomConstraint.constant = 0.19 * self.view.frame.height
     }
     
     // MARK: User interface
@@ -114,7 +114,7 @@ import SRGAppearance
         let isFirstPage = (index == 0)
         let isLastPage = (index == self.onboarding.pages.count - 1)
         
-        let animations: () -> (Void) = {
+        let animations: () -> Void = {
             self.closeButton.alpha = isLastPage ? 1.0 : 0.0
             
             let voiceOverEnabled = UIAccessibility.isVoiceOverRunning
@@ -137,10 +137,10 @@ import SRGAppearance
     }
     
     @IBAction private func close(_ sender: UIButton) {
-        if (self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account") {
+        if self.onboarding.uid == "favorites" || self.onboarding.uid == "favorites_account" {
             PushService.shared?.presentSystemAlertForPushNotifications()
         }
-        self.dismiss(animated: true, completion: nil);
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction private func nextPage(_ sender: UIButton) {
@@ -154,7 +154,7 @@ import SRGAppearance
     }
 }
 
-extension OnboardingViewController : PaperOnboardingDataSource {
+extension OnboardingViewController: PaperOnboardingDataSource {
     public func onboardingItemsCount() -> Int {
         return self.onboarding.pages.count
     }
@@ -183,18 +183,18 @@ extension OnboardingViewController : PaperOnboardingDataSource {
     }
 }
 
-extension OnboardingViewController : PaperOnboardingDelegate {
+extension OnboardingViewController: PaperOnboardingDelegate {
     public func onboardingWillTransitonToIndex(_ index: Int) {
         self.updateUserInterface(index: index, animated: true)
     }
     
     public func onboardingDidTransitonToIndex(_: Int) {
-        UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: self.paperOnboarding);
+        UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: self.paperOnboarding)
     }
     
     public func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index _: Int) {
-        item.titleLabel?.numberOfLines = 2;
-        item.descriptionLabel?.numberOfLines = 0;
+        item.titleLabel?.numberOfLines = 2
+        item.descriptionLabel?.numberOfLines = 0
         
         let constant = CGFloat(self.isTall ? 200.0 : 120.0)
         item.informationImageWidthConstraint?.constant = constant
@@ -204,7 +204,7 @@ extension OnboardingViewController : PaperOnboardingDelegate {
     }
 }
 
-extension OnboardingViewController : SRGAnalyticsViewTracking {
+extension OnboardingViewController: SRGAnalyticsViewTracking {
     public var srg_pageViewTitle: String {
         return self.onboarding.title
     }

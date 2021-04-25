@@ -13,7 +13,7 @@ struct MediaVisualView: View {
     let contentMode: ContentMode
     
     @State private var progress: Double = 0
-    @State private var taskHandle: String? = nil
+    @State private var taskHandle: String?
     
     init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = .fit) {
         self.media = media

@@ -169,7 +169,7 @@ fileprivate extension SRGDataProvider {
      *
      *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
      */
-    private static func removeDuplicateItems<T:Hashable>(_ items: [T]) -> [T] {
+    private static func removeDuplicateItems<T: Hashable>(_ items: [T]) -> [T] {
         var itemDictionnary = [T: Bool]()
         
         return items.filter {

@@ -7,8 +7,8 @@
 import SRGDataProviderCombine
 import SRGUserData
 
-fileprivate let defaultNumberOfPlaceholders = 10
-fileprivate let defaultNumberOfLivestreamPlaceholders = 4
+private let defaultNumberOfPlaceholders = 10
+private let defaultNumberOfLivestreamPlaceholders = 4
 
 /// Common abstraction for properties associated with a section
 protocol PageSectionProperties {

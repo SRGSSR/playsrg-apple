@@ -44,7 +44,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
                 labels.value = upcomingMedia.urn
                 
                 if let playlist = controller.playlistDataSource as? Playlist {
-                    labels.extraValue1 = playlist.recommendationUid;
+                    labels.extraValue1 = playlist.recommendationUid
                 }
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
             }
@@ -86,7 +86,7 @@ func showText(_ text: String, animated: Bool = true) {
     present(textViewController, animated: animated)
 }
 
-fileprivate func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+private func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
     guard let topViewController = UIApplication.shared.delegate?.window??.topViewController else { return }
     
     isPresenting = true
@@ -98,11 +98,11 @@ fileprivate func present(_ viewController: UIViewController, animated: Bool, com
     }
 }
 
-fileprivate func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
+private func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
     controller.serviceURL = SRGDataProvider.current?.serviceURL
     controller.globalParameters = SRGDataProvider.current?.globalParameters
     
     let applicationConfiguration = ApplicationConfiguration.shared
-    controller.endTolerance = applicationConfiguration.endTolerance;
-    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio;
+    controller.endTolerance = applicationConfiguration.endTolerance
+    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio
 }
