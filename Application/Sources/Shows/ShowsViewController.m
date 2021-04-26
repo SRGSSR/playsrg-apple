@@ -319,7 +319,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, collectionViewLayout.minimumInteritemSpacing);
-    return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeShowSwimlaneOrGrid);
+    return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeShowSwimlaneOrGrid, self.traitCollection.horizontalSizeClass);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

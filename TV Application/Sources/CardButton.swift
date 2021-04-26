@@ -9,7 +9,7 @@ import SwiftUI
 /**
  *  A wrapper view for adding a card appearance to any view.
  *
- *  Sizing behavior: h-cha, v-cha
+ *  Sizing behavior: h-neu, v-neu
  *
  *  @discussion Fixes an issue with tvOS card buttons applying the `View/fixedSize(width:height:)`
  *              modifier to the content.
@@ -59,7 +59,7 @@ extension CardButton {
  *  A wrapper view created for adding a card appearance to any view, with a label underneath which automatically
  *  scales when the card is focused.
  *
- *  Sizing behavior: h-cha, v-cha
+ *  Sizing behavior: h-neu, v-neu
  */
 struct LabeledCardButton<Content: View, Label: View>: View {
     private let action: (() -> Void)?

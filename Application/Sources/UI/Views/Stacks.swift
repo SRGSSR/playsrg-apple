@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-enum StackLayout {
+enum StackDirection {
     case vertical
     case horizontal
 }
@@ -16,18 +16,18 @@ enum StackLayout {
  *  support alignment (centering only).
  */
 struct Stack<Content: View>: View {
-    let layout: StackLayout
+    let direction: StackDirection
     let spacing: CGFloat?
     private let content: () -> Content
     
-    init(layout: StackLayout, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> Content) {
-        self.layout = layout
+    init(direction: StackDirection, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> Content) {
+        self.direction = direction
         self.spacing = spacing
         self.content = content
     }
     
     var body: some View {
-        if layout == .horizontal {
+        if direction == .horizontal {
             HStack(spacing: spacing, content: content)
         }
         else {

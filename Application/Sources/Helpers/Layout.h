@@ -101,9 +101,9 @@ OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidt
  *  Calculate the width to apply to featured items in a collection. Featured items attempt occupying (almost) the full width
  *  of narrow layouts, but still have bounded (larger) size on wide layouts.
  *
- *  @param itemWidth The total available width for layout.
+ *  @param layoutWidth The total available width for layout.
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
+OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth, LayoutCollectionItemType collectionItemType);
 
 /**
  *  Return the standard height for a collection section header title
@@ -130,8 +130,9 @@ OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFlo
  *
  *  @param itemWidth The width of the item.
  *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlanes).
+ *  @param horizontalSizeClass The horizontal size class.
  */
-OBJC_EXPORT CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType);
+OBJC_EXPORT CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass);
 
 /**
  *  Topic cell (16:9 artwork) size for collection layouts.

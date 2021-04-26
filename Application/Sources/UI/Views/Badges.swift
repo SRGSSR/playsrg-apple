@@ -14,6 +14,7 @@ struct Badge: View {
     var body: some View {
         Text(text)
             .srgFont(.label)
+            .lineLimit(1)
             .foregroundColor(.white)
             .padding(.vertical, 5)
             .padding(.horizontal, 8)

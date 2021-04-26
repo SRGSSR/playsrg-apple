@@ -124,41 +124,44 @@ class PageViewController: DataViewController {
                 switch section.properties.layout {
                 case .hero:
                     let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .hero)
-                    let size = LayoutCollectionItemSize(width, .hero)
+                    let size = LayoutCollectionItemSize(width, .hero, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .highlight:
                     let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .highlight)
-                    let size = LayoutCollectionItemSize(width, .highlight)
+                    let size = LayoutCollectionItemSize(width, .highlight, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .topicSelector:
                     let size = LayoutTopicCollectionItemSize()
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showSwimlane:
-                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid)
+                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .mediaSwimlane:
-                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid)
+                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
                     let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showGrid:
                     let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid)
+                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 case .mediaGrid:
+                    // TODO: Layout.h API is probably not good enough, otherwise this check would be hidden. But maybe it would be
+                    //       better to have Layout.h only deliver layout values for types (hero, featured, compact, etc.), and
+                    //       to make the tests here to decide which cell should be used depending on the layout environment?
                     if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardCellHeight))
                     }
                     else {
                         let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                        let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid)
+                        let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                     }
                 case .liveMediaGrid:
                     let approximateWidth = (layoutEnvironment.container.effectiveContentSize.width < LayoutLiveMediaGridLargeBoundWidth) ? LayoutStandardCellWidth : LayoutLiveMediaGridLargeCellWidth
                     let itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .liveMediaGrid)
+                    let size = LayoutCollectionItemSize(itemWidth, .liveMediaGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
                 }
             }

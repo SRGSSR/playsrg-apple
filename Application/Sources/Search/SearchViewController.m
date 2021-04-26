@@ -631,7 +631,7 @@
         }
         else {
             CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, collectionViewLayout.minimumInteritemSpacing);
-            return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeMediaSwimlaneOrGrid);
+            return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeMediaSwimlaneOrGrid, self.traitCollection.horizontalSizeClass);
         }
     }
     // Search show list

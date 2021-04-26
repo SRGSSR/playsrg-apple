@@ -58,27 +58,29 @@ CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat l
     return (availableWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-CGFloat LayoutCollectionItemFeaturedWidth(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth, LayoutCollectionItemType collectionItemType)
 {
 #if TARGET_OS_TV
-    return 1740;
+    return layoutWidth;
 #else
-    // Ensure hero cells never fill the entire width of the parent, so that the fact that content can be scrolled
-    // is always obvious to the user
-    static const CGFloat kSupplementaryHorizontalPadding = 2 * LayoutStandardMargin;
-    
     switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
+        case LayoutCollectionItemTypeHero: {
+            // Ensure hero cells never fill the entire width of the parent, so that the fact that content can be scrolled
+            // is always obvious to the user
+            static const CGFloat kSupplementaryHorizontalPadding = 2 * LayoutStandardMargin;
             
             // TODO: Could remove the kSupplementaryHorizontalPadding if hero section has only 1 item.
-            return itemWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing - kSupplementaryHorizontalPadding;
+            return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing - kSupplementaryHorizontalPadding;
             break;
-        case LayoutCollectionItemTypeHighlight:
-            return itemWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
+        }
+        case LayoutCollectionItemTypeHighlight: {
+            return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
             break;
-        default:
+        }
+        default: {
             return LayoutStandardCellWidth;
             break;
+        }
     }
 #endif
 }
@@ -193,34 +195,38 @@ CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 #endif
 }
 
-CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass)
 {
 #if TARGET_OS_TV
     switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
+        case LayoutCollectionItemTypeHero: {
             return CGSizeMake(itemWidth, 680.f);
             break;
-        case LayoutCollectionItemTypeHighlight:
+        }
+        case LayoutCollectionItemTypeHighlight: {
             return CGSizeMake(itemWidth, 480.f);
             break;
-        default:
+        }
+        default: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
+        }
     }
 #else
-    UITraitCollection *traitCollection = UIApplication.sharedApplication.delegate.window.traitCollection;
-    BOOL isCompact = (traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact);
-    
+    BOOL isCompact = (horizontalSizeClass == UIUserInterfaceSizeClassCompact);
     switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
+        case LayoutCollectionItemTypeHero: {
             return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 3.f / 5.f * 9.f / 16.f);
             break;
-        case LayoutCollectionItemTypeHighlight:
+        }
+        case LayoutCollectionItemTypeHighlight: {
             return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 2.f / 5.f * 9.f / 16.f);
             break;
-        default:
+        }
+        default: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
+        }
     }
 #endif
 }
@@ -272,22 +278,26 @@ CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
 #endif
 }
 
-CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType)
+CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass)
 {
     switch (collectionItemType) {
         case LayoutCollectionItemTypeHero:
-        case LayoutCollectionItemTypeHighlight:
-            return LayoutMediaFeaturedCollectionItemSize(itemWidth, collectionItemType);
+        case LayoutCollectionItemTypeHighlight: {
+            return LayoutMediaFeaturedCollectionItemSize(itemWidth, collectionItemType, horizontalSizeClass);
             break;
-        case LayoutCollectionItemTypeShowSwimlaneOrGrid:
+        }
+        case LayoutCollectionItemTypeShowSwimlaneOrGrid: {
             return LayoutShowStandardCollectionItemSize(itemWidth, false);
             break;
-        case LayoutCollectionItemTypeMediaSwimlaneOrGrid:
+        }
+        case LayoutCollectionItemTypeMediaSwimlaneOrGrid: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, false);
             break;
-        case LayoutCollectionItemTypeLiveMediaGrid:
+        }
+        case LayoutCollectionItemTypeLiveMediaGrid: {
             return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
             break;
+        }
     }
 }
 

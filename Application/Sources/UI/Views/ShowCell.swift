@@ -18,11 +18,11 @@ protocol ShowCellData {
 
 struct ShowCell: View {
     let data: ShowCellData
-    let layout: StackLayout
+    let direction: StackDirection
     
-    init(data: ShowCellData, layout: StackLayout = .vertical) {
+    init(data: ShowCellData, direction: StackDirection = .vertical) {
         self.data = data
-        self.layout = layout
+        self.direction = direction
     }
     
     var body: some View {
@@ -38,14 +38,12 @@ struct ShowCell: View {
                 DescriptionView(data: data)
             }
             #else
-            Group {
-                Stack(layout: layout) {
-                    ImageView(url: data.imageUrl)
-                        .aspectRatio(contentMode: .fill)
-                    DescriptionView(data: data)
-                        .padding(.bottom, 5)
-                        .padding(.horizontal, 8)
-                }
+            Stack(direction: direction) {
+                ImageView(url: data.imageUrl)
+                    .aspectRatio(contentMode: .fill)
+                DescriptionView(data: data)
+                    .padding(.bottom, 5)
+                    .padding(.horizontal, 8)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
@@ -97,8 +95,8 @@ extension ShowCell {
         #endif
     }
     
-    init(show: SRGShow?, layout: StackLayout = .vertical) {
-        self.init(data: Data(show: show), layout: layout)
+    init(show: SRGShow?, direction: StackDirection = .vertical) {
+        self.init(data: Data(show: show), direction: direction)
     }
 }
 
@@ -121,7 +119,7 @@ struct ShowCell_Previews: PreviewProvider {
         #endif
     }
     
-    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid)
+    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, .regular)
     
     static var previews: some View {
         Group {

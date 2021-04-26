@@ -7,197 +7,244 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+protocol FeaturedShowCellData {
+    var title: String? { get }
+    var subtitle: String? { get }
+    var availability: String? { get }
+    var imageUrl: URL? { get }
+    var redactionReason: RedactionReasons { get }
+    
+    #if os(tvOS)
+    func action()
+    #endif
+}
+
+// FIXME: The `Layout.h` size for a featured show cell is not tall enough if a badge is displayed, see
+//        Xcode previews on iOS. Either move the badge or tweak the values
 struct FeaturedShowCell: View {
     enum Layout {
         case hero
         case highlight
     }
     
-    let show: SRGShow?
+    let data: FeaturedShowCellData
     let layout: Layout
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    
+    private var direction: StackDirection {
+        return horizontalSizeClass == .compact ? .vertical : .horizontal
+    }
     #endif
     
-    private var redactionReason: RedactionReasons {
-        return show == nil ? .placeholder : .init()
-    }
-    
-    private var imageUrl: URL? {
-        return show?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+    private var descriptionAlignment: DescriptionView.Alignment {
+        if layout == .hero {
+            #if os(iOS)
+            return  horizontalSizeClass == .regular ? .center : .leading
+            #else
+            return .center
+            #endif
+        }
+        else {
+            return .leading
+        }
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            #if os(tvOS)
-            Button(action: {
-                if let show = show {
-                    navigateToShow(show)
-                }
-            }) {
-                HStack(spacing: 0) {
-                    ImageView(url: imageUrl)
-                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(show: show, layout: layout)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-                .cornerRadius(LayoutStandardViewCornerRadius)
-                .redacted(reason: redactionReason)
-                .accessibilityElement()
-                .accessibilityLabel(show?.title ?? "")
-                .accessibility(addTraits: .isButton)
+        #if os(tvOS)
+        CardButton(action: data.action) {
+            HStack(spacing: 0) {
+                ImageView(url: data.imageUrl)
+                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .layoutPriority(1)
+                DescriptionView(data: data, alignment: descriptionAlignment)
             }
-            .buttonStyle(CardButtonStyle())
-            #else
-            if horizontalSizeClass == .compact {
-                VStack(spacing: 0) {
-                    ImageView(url: imageUrl)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 /  16)
-                    DescriptionView(show: show, layout: layout)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-                .cornerRadius(LayoutStandardViewCornerRadius)
-                .redacted(reason: redactionReason)
-                .accessibilityElement()
-                .accessibilityLabel(show?.title ?? "")
-                .accessibility(addTraits: .isButton)
-            }
-            else {
-                HStack(spacing: 0) {
-                    ImageView(url: imageUrl)
-                        .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                    DescriptionView(show: show, layout: layout)
-                        .padding()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
-                .cornerRadius(LayoutStandardViewCornerRadius)
-                .redacted(reason: redactionReason)
-                .accessibilityElement()
-                .accessibilityLabel(show?.title ?? "")
-                .accessibility(addTraits: .isButton)
-            }
-            #endif
+            .background(Color(.play_cardGrayBackground))
+            .cornerRadius(LayoutStandardViewCornerRadius)
+            .redacted(reason: data.redactionReason)
+            .accessibilityElement()
+            .accessibilityLabel(data.title ?? "")
+            .accessibility(addTraits: .isButton)
         }
-    }
-    
-    private struct DescriptionView: View {
-        let show: SRGShow?
-        let layout: Layout
-        
-        #if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+        #else
+        Stack(direction: direction, spacing: 0) {
+            ImageView(url: data.imageUrl)
+                .aspectRatio(16 / 9, contentMode: .fit)
+                .layoutPriority(1)
+            DescriptionView(data: data, alignment: descriptionAlignment)
+        }
+        .background(Color(.play_cardGrayBackground))
+        .cornerRadius(LayoutStandardViewCornerRadius)
+        .redacted(reason: data.redactionReason)
+        .accessibilityElement()
+        .accessibilityLabel(data.title ?? "")
         #endif
-        
-        var body: some View {
-            #if os(iOS)
-            if horizontalSizeClass == .compact {
-                CompactDescriptionView(show: show, layout: layout)
-                    .padding(0)
-            }
-            else {
-                LargeDescriptionView(show: show, layout: layout)
-                    .padding(0)
-            }
-            #else
-            LargeDescriptionView(show: show, layout: layout)
-                .padding(0)
-            #endif
-        }
     }
     
-    private struct LargeDescriptionView: View {
-        let show: SRGShow?
-        let layout: Layout
-        
-        private func textAlignment() -> TextAlignment {
-            return layout == .highlight ? .leading : .center
+    /// Behavior: h-exp, v-exp
+    private struct DescriptionView: View {
+        enum Alignment {
+            case leading
+            case center
         }
         
-        private func alignment() -> Alignment {
-            return layout == .highlight ? .leading : .center
+        let data: FeaturedShowCellData
+        let alignment: Alignment
+        
+        private var stackAlignment: HorizontalAlignment {
+            return alignment == .leading ? .leading : .center
+        }
+        
+        private var frameAlignment: SwiftUI.Alignment {
+            return alignment == .leading ? .leading : .center
+        }
+        
+        private var textAlignment: TextAlignment {
+            return alignment == .leading ? .leading : .center
         }
         
         var body: some View {
-            VStack {
-                Spacer()
-                Text(show?.title ?? "")
+            VStack(alignment: stackAlignment) {
+                Text(data.title ?? "")
                     .srgFont(.H2)
-                    .lineLimit(2)
-                    .multilineTextAlignment(textAlignment())
-                    .frame(maxWidth: .infinity, alignment: alignment())
-                    .padding()
-                if let lead = show?.lead {
-                    Spacer()
-                        .frame(height: LayoutFeaturedSpacerHeight * 2)
-                    Text(lead)
+                    .lineLimit(1)
+                    .multilineTextAlignment(textAlignment)
+                if let subtitle = data.subtitle {
+                    Text(subtitle)
                         .srgFont(.body)
-                        .lineLimit(4)
-                        .multilineTextAlignment(textAlignment())
-                        .frame(maxWidth: .infinity, alignment: alignment())
+                        .lineLimit(3)
+                        .multilineTextAlignment(textAlignment)
                         .opacity(0.8)
-                        .padding()
                 }
                 
-                if let broadcastInformationMessage = show?.broadcastInformation?.message {
-                    Badge(text: broadcastInformationMessage, color: Color(.play_gray))
+                if let availability = data.availability {
+                    Badge(text: availability, color: Color(.play_gray))
                 }
-                Spacer()
             }
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
             .foregroundColor(.white)
-        }
-    }
-    
-    private struct CompactDescriptionView: View {
-        let show: SRGShow?
-        let layout: Layout
-        
-        private var title: String {
-            guard let show = show else { return String(repeating: " ", count: .random(in: 10..<20)) }
-            return show.title
-        }
-        
-        var body: some View {
-            VStack(alignment: .leading) {
-                Text(title)
-                    .srgFont(.H2)
-                    .lineLimit(2)
-                if let lead = show?.lead {
-                    Text(lead)
-                        .srgFont(.body)
-                        .lineLimit(2)
-                        .layoutPriority(1)
-                }
-            }
         }
     }
 }
 
-struct FeaturedShowCell_Previews: PreviewProvider {
-    static var showPreview: SRGShow {
-        let asset = NSDataAsset(name: "show-srf-tv")!
-        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
+extension FeaturedShowCell {
+    struct Data: FeaturedShowCellData {
+        let show: SRGShow?
         
-        return try! MTLJSONAdapter(modelClass: SRGShow.self)?.model(fromJSONDictionary: jsonData) as! SRGShow
+        var title: String? {
+            return show?.title
+        }
+        
+        var subtitle: String? {
+            return show?.lead
+        }
+        
+        var availability: String? {
+            return show?.broadcastInformation?.message
+        }
+        
+        var imageUrl: URL? {
+            return show?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+        }
+        
+        var redactionReason: RedactionReasons {
+            return show == nil ? .placeholder : .init()
+        }
+        
+        #if os(tvOS)
+        func action() {
+            if let show = show {
+                navigateToShow(show)
+            }
+        }
+        #endif
+    }
+    
+    init(show: SRGShow?, layout: Layout) {
+        self.init(data: Data(show: show), layout: layout)
+    }
+}
+
+private extension View {
+    static private func size(for layout: FeaturedShowCell.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+        let itemType: LayoutCollectionItemType = (layout == .hero) ? .hero : .highlight
+        let width = LayoutCollectionItemFeaturedWidth(layoutWidth, itemType)
+        return LayoutCollectionItemSize(width, itemType, horizontalSizeClass)
+    }
+    
+    private func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
+        #if os(iOS)
+        return self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+        #else
+        return self
+        #endif
+    }
+    
+    func previewLayout(for layout: FeaturedShowCell.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+        let size = Self.size(for: layout, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        return self.previewLayout(.fixed(width: size.width, height: size.height))
+            .horizontalSizeClass(horizontalSizeClass)
+    }
+}
+
+struct FeaturedShowCell_Previews: PreviewProvider {
+    private struct MockData: FeaturedShowCellData {
+        var title: String? {
+            return "19h30"
+        }
+        
+        var subtitle: String? {
+            return "Le journal du soir de la RTS\nUn condensé de l'actualité du jour"
+        }
+        
+        var availability: String? {
+            return "Prochaine diffusion: Ce soir à 19h30"
+        }
+        
+        var imageUrl: URL? {
+            return Bundle.main.url(forResource: "show_19h30", withExtension: "jpg", subdirectory: "Images")
+        }
+        
+        var redactionReason: RedactionReasons {
+            return .init()
+        }
+        
+        #if os(tvOS)
+        func action() {}
+        #endif
     }
     
     static var previews: some View {
-        Group {
-            FeaturedShowCell(show: showPreview, layout: .hero)
-                .previewLayout(.fixed(width: 1740, height: 680))
-                .previewDisplayName("SRF show, hero layout")
-            
-            FeaturedShowCell(show: showPreview, layout: .highlight)
-                .previewLayout(.fixed(width: 1740, height: 480))
-                .previewDisplayName("SRF show, highlighted layout")
-        }
+        #if os(tvOS)
+        FeaturedShowCell(data: MockData(), layout: .hero)
+            .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
+            .previewDisplayName("Cell (hero)")
+        
+        FeaturedShowCell(data: MockData(), layout: .highlight)
+            .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
+            .previewDisplayName("Cell (highlight)")
+        #else
+        FeaturedShowCell(data: MockData(), layout: .hero)
+            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
+            .environment(\.horizontalSizeClass, .regular)
+            .previewDisplayName("Cell (hero, regular)")
+        
+        FeaturedShowCell(data: MockData(), layout: .hero)
+            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
+            .environment(\.horizontalSizeClass, .compact)
+            .previewDisplayName("Cell (hero, compact)")
+        
+        FeaturedShowCell(data: MockData(), layout: .highlight)
+            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
+            .environment(\.horizontalSizeClass, .regular)
+            .previewDisplayName("Cell (highlight, regular)")
+        
+        FeaturedShowCell(data: MockData(), layout: .highlight)
+            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
+            .environment(\.horizontalSizeClass, .compact)
+            .previewDisplayName("Cell (compact)")
+        #endif
     }
 }
