@@ -138,9 +138,8 @@
 {
     void (^animations)(void) = ^{
         UIStatusBarStyle darkStatusBarStyle = UIStatusBarStyleDefault;
-        if (@available(iOS 13, *)) {
-            darkStatusBarStyle = UIStatusBarStyleDarkContent;
-        }
+        darkStatusBarStyle = UIStatusBarStyleDarkContent;
+        
         UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
         [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color separator:YES statusBarStyle:statusBarStyle];
     };

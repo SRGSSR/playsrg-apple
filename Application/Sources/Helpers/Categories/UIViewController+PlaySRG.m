@@ -208,17 +208,12 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             [topViewController play_presentViewController:mediaPlayerViewController animated:animated completion:completion];
         };
         
-        if (@available(iOS 13, *)) {
-            if (airPlaySuggestions) {
-                [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
-                    if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
-                        openPlayer();
-                    }
-                }];
-            }
-            else {
-                openPlayer();
-            }
+        if (airPlaySuggestions) {
+            [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+                if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                    openPlayer();
+                }
+            }];
         }
         else {
             openPlayer();
@@ -245,17 +240,12 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
     };
     
-    if (@available(iOS 13, *)) {
-        if (airPlaySuggestions) {
-            [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
-                if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
-                    openPlayer();
-                }
-            }];
-        }
-        else {
-            openPlayer();
-        }
+    if (airPlaySuggestions) {
+        [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+            if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                openPlayer();
+            }
+        }];
     }
     else {
         openPlayer();

@@ -352,13 +352,6 @@
     if ([view isKindOfClass:ShowHeaderView.class]) {
         ShowHeaderView *headerView = (ShowHeaderView *)view;
         headerView.show = self.show;
-        
-        // iOS 11 - 12 bug: The header hides scroll indicators
-        // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-        if (@available(iOS 13, *)) {}
-        else {
-            headerView.layer.zPosition = 0;
-        }
     }
 }
 

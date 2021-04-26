@@ -1586,15 +1586,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
-    // we have reliable information to determine it.
-    if (@available(iOS 13 , *)) {
-        // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
-        // to avoid incorrect safe area insets after returning from landscape orientation.
-        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation));
-    }
-    else {
-        self.statusBarHidden = fullScreen;
-    }
+    // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden since iOS 13,
+    // in which case we must not hide it to avoid incorrect safe area insets after returning from landscape orientation.
+    self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation));
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];

@@ -13,20 +13,11 @@
 + (UIVisualEffectView *)play_blurView
 {
     UIBlurEffectStyle blurEffectStyle;
-    if (@available(iOS 13, *)) {
-        blurEffectStyle = UIBlurEffectStyleSystemMaterialDark;
-    }
-    else {
-        blurEffectStyle = UIBlurEffectStyleDark;
-    }
+    blurEffectStyle = UIBlurEffectStyleSystemMaterialDark;
+    
     UIVisualEffect *blurEffect = [UIBlurEffect effectWithStyle:blurEffectStyle];
     UIVisualEffectView *blurView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-    if (@available(iOS 13, *)) {
-        blurView.backgroundColor = nil;
-    }
-    else {
-        blurView.backgroundColor = [UIColor colorWithWhite:0.5f alpha:0.5f];
-    }
+    blurView.backgroundColor = nil;
     return blurView;
 }
 

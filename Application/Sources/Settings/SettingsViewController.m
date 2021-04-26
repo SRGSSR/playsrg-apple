@@ -424,12 +424,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([key isEqualToString:SettingsPermissionsGroup]) {
-        if (@available(iOS 14, *)) {
-            return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
-        }
-        else {
-            return nil;
-        }
+        return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
     }
     else {
         return nil;
