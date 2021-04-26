@@ -13,6 +13,7 @@ struct ImageView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(0), for: .horizontal)
         imageView.setContentCompressionResistancePriority(UILayoutPriority(0), for: .vertical)
         return imageView
