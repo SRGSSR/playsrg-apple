@@ -41,7 +41,7 @@ struct TopicCell: View {
         var body: some View {
             ZStack {
                 ImageView(url: data.imageUrl)
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(16 / 9, contentMode: .fit)
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.2))
                 Text(data.title ?? "")
@@ -107,12 +107,8 @@ struct TopicCell_Previews: PreviewProvider {
     static private let size = LayoutTopicCollectionItemSize()
     
     static var previews: some View {
-        Group {
-            TopicCell(data: MockData())
-                .previewDisplayName("Cell")
-            TopicCell(data: TopicCell.Data(topic: nil))
-                .previewDisplayName("Placeholder")
-        }
-        .previewLayout(.fixed(width: size.width, height: size.height))
+        TopicCell(data: MockData())
+            .previewDisplayName("Cell")
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

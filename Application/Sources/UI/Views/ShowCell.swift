@@ -30,7 +30,7 @@ struct ShowCell: View {
             #if os(tvOS)
             LabeledCardButton(action: data.action) {
                 ImageView(url: data.imageUrl)
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(16 / 9, contentMode: .fit)
                     .accessibilityElement()
                     .accessibilityLabel(data.title ?? "")
                     .accessibility(addTraits: .isButton)
@@ -40,10 +40,8 @@ struct ShowCell: View {
             #else
             Stack(direction: direction) {
                 ImageView(url: data.imageUrl)
-                    .aspectRatio(contentMode: .fill)
+                    .aspectRatio(16 / 9, contentMode: .fit)
                 DescriptionView(data: data)
-                    .padding(.bottom, 5)
-                    .padding(.horizontal, 8)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
@@ -122,12 +120,8 @@ struct ShowCell_Previews: PreviewProvider {
     static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, .regular)
     
     static var previews: some View {
-        Group {
-            ShowCell(data: MockData())
-                .previewDisplayName("Cell")
-            ShowCell(data: ShowCell.Data(show: nil))
-                .previewDisplayName("Placeholder")
-        }
-        .previewLayout(.fixed(width: size.width, height: size.height))
+        ShowCell(data: MockData())
+            .previewDisplayName("Cell")
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
