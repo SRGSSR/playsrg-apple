@@ -71,7 +71,6 @@ struct ShowCell_Previews: PreviewProvider {
     
     static var previews: some View {
         ShowCell(show: MockData.show())
-            .previewDisplayName("Cell")
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

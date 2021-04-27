@@ -58,7 +58,6 @@ struct TopicCell_Previews: PreviewProvider {
     
     static var previews: some View {
         TopicCell(topic: MockData.topic())
-            .previewDisplayName("Cell")
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

@@ -151,31 +151,25 @@ struct FeaturedShowCell_Previews: PreviewProvider {
         #if os(tvOS)
         FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
-            .previewDisplayName("Cell (hero)")
         
         FeaturedShowCell(show: MockData.show(), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
-            .previewDisplayName("Cell (highlight)")
         #else
         FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
-            .previewDisplayName("Cell (hero, regular)")
         
         FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
-            .previewDisplayName("Cell (hero, compact)")
         
         FeaturedShowCell(show: MockData.show(), layout: .highlight)
-            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
+            .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
-            .previewDisplayName("Cell (highlight, regular)")
         
         FeaturedShowCell(show: MockData.show(), layout: .highlight)
-            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
+            .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
-            .previewDisplayName("Cell (compact)")
         #endif
     }
 }
