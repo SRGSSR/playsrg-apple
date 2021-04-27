@@ -6,57 +6,55 @@
 
 import SwiftUI
 
-protocol ShowCellData {
-    var title: String? { get }
-    var imageUrl: URL? { get }
-    var redactionReason: RedactionReasons { get }
-    
-    #if os(tvOS)
-    func action()
-    #endif
-}
-
 struct ShowCell: View {
-    let data: ShowCellData
+    let show: SRGShow?
     let direction: StackDirection
     
-    init(data: ShowCellData, direction: StackDirection = .vertical) {
-        self.data = data
+    init(show: SRGShow?, direction: StackDirection = .vertical) {
+        self.show = show
         self.direction = direction
     }
     
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(action: data.action) {
-                ImageView(url: data.imageUrl)
+            LabeledCardButton(action: action) {
+                ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .accessibilityElement()
-                    .accessibilityLabel(data.title ?? "")
+                    .accessibilityOptionalLabel(show?.title)
                     .accessibility(addTraits: .isButton)
             } label: {
-                DescriptionView(data: data)
+                DescriptionView(show: show)
             }
             #else
             Stack(direction: direction) {
-                ImageView(url: data.imageUrl)
+                ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(16 / 9, contentMode: .fit)
-                DescriptionView(data: data)
+                DescriptionView(show: show)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
-            .accessibilityLabel(data.title ?? "")
+            .accessibilityOptionalLabel(show?.title)
             #endif
         }
-        .redacted(reason: data.redactionReason)
+        .redactedIfNil(show)
     }
     
+    #if os(tvOS)
+    func action() {
+        if let show = show {
+            navigateToShow(show)
+        }
+    }
+    #endif
+    
     private struct DescriptionView: View {
-        let data: ShowCellData
+        let show: SRGShow?
         
         private var title: String {
-            return data.title ?? String(repeating: " ", count: .random(in: 10..<20))
+            return show?.title ?? String(repeating: " ", count: .random(in: 10..<20))
         }
         
         var body: some View {
@@ -68,59 +66,11 @@ struct ShowCell: View {
     }
 }
 
-extension ShowCell {
-    struct Data: ShowCellData {
-        let show: SRGShow?
-        
-        var title: String? {
-            return show?.title
-        }
-        
-        var imageUrl: URL? {
-            return show?.imageURL(for: .width, withValue: SizeForImageScale(.small).width, type: .default)
-        }
-        
-        var redactionReason: RedactionReasons {
-            return show == nil ? .placeholder : .init()
-        }
-        
-        #if os(tvOS)
-        func action() {
-            if let show = show {
-                navigateToShow(show)
-            }
-        }
-        #endif
-    }
-    
-    init(show: SRGShow?, direction: StackDirection = .vertical) {
-        self.init(data: Data(show: show), direction: direction)
-    }
-}
-
 struct ShowCell_Previews: PreviewProvider {
-    private struct MockData: ShowCellData {
-        var title: String? {
-            return "19h30"
-        }
-        
-        var imageUrl: URL? {
-            return Bundle.main.url(forResource: "show_19h30", withExtension: "jpg", subdirectory: "Images")
-        }
-        
-        var redactionReason: RedactionReasons {
-            return .init()
-        }
-        
-        #if os(tvOS)
-        func action() {}
-        #endif
-    }
-    
     static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, .regular)
     
     static var previews: some View {
-        ShowCell(data: MockData())
+        ShowCell(show: MockData.show())
             .previewDisplayName("Cell")
             .previewLayout(.fixed(width: size.width, height: size.height))
     }

@@ -20,12 +20,30 @@ extension String {
     }
 }
 
+extension SRGImageMetadata {
+    func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
+        return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)
+    }
+}
+
 // Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
 extension Publisher where Failure == Never {
     func weakAssign<T: AnyObject>(to keyPath: ReferenceWritableKeyPath<T, Output>, on object: T) -> AnyCancellable {
         sink { [weak object] value in
             object?[keyPath: keyPath] = value
         }
+    }
+}
+
+extension View {
+    func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol {
+        return accessibilityLabel(label ?? "")
+    }
+}
+
+extension View {
+    func redactedIfNil(_ object: Any?) -> some View {
+        return redacted(reason: object == nil ? .placeholder : .init())
     }
 }
 

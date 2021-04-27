@@ -4,20 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGAppearanceSwift
 import SwiftUI
-
-protocol FeaturedShowCellData {
-    var title: String? { get }
-    var subtitle: String? { get }
-    var availability: String? { get }
-    var imageUrl: URL? { get }
-    var redactionReason: RedactionReasons { get }
-    
-    #if os(tvOS)
-    func action()
-    #endif
-}
 
 // FIXME: The `Layout.h` size for a featured show cell is not tall enough if a badge is displayed, see
 //        Xcode previews on iOS. Either move the badge or tweak the values
@@ -27,7 +14,7 @@ struct FeaturedShowCell: View {
         case highlight
     }
     
-    let data: FeaturedShowCellData
+    let show: SRGShow?
     let layout: Layout
     
     #if os(iOS)
@@ -53,34 +40,42 @@ struct FeaturedShowCell: View {
     
     var body: some View {
         #if os(tvOS)
-        CardButton(action: data.action) {
+        CardButton(action: action) {
             HStack(spacing: 0) {
-                ImageView(url: data.imageUrl)
+                ImageView(url: show?.imageUrl(for: .large))
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .layoutPriority(1)
-                DescriptionView(data: data, alignment: descriptionAlignment)
+                DescriptionView(show: show, alignment: descriptionAlignment)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .redacted(reason: data.redactionReason)
             .accessibilityElement()
-            .accessibilityLabel(data.title ?? "")
+            .accessibilityOptionalLabel(show?.title)
             .accessibility(addTraits: .isButton)
+            .redactedIfNil(show)
         }
         #else
         Stack(direction: direction, spacing: 0) {
-            ImageView(url: data.imageUrl)
+            ImageView(url: show?.imageUrl(for: .large))
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .layoutPriority(1)
-            DescriptionView(data: data, alignment: descriptionAlignment)
+            DescriptionView(show: show, alignment: descriptionAlignment)
         }
         .background(Color(.play_cardGrayBackground))
         .cornerRadius(LayoutStandardViewCornerRadius)
-        .redacted(reason: data.redactionReason)
         .accessibilityElement()
-        .accessibilityLabel(data.title ?? "")
+        .accessibilityOptionalLabel(show?.title)
+        .redactedIfNil(show)
         #endif
     }
+    
+    #if os(tvOS)
+    func action() {
+        if let show = show {
+            navigateToShow(show)
+        }
+    }
+    #endif
     
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
@@ -89,7 +84,7 @@ struct FeaturedShowCell: View {
             case center
         }
         
-        let data: FeaturedShowCellData
+        let show: SRGShow?
         let alignment: Alignment
         
         private var stackAlignment: HorizontalAlignment {
@@ -106,64 +101,26 @@ struct FeaturedShowCell: View {
         
         var body: some View {
             VStack(alignment: stackAlignment) {
-                Text(data.title ?? "")
+                Text(show?.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(1)
                     .multilineTextAlignment(textAlignment)
-                if let subtitle = data.subtitle {
-                    Text(subtitle)
+                if let lead = show?.lead {
+                    Text(lead)
                         .srgFont(.body)
                         .lineLimit(3)
                         .multilineTextAlignment(textAlignment)
                         .opacity(0.8)
                 }
                 
-                if let availability = data.availability {
-                    Badge(text: availability, color: Color(.play_gray))
+                if let message = show?.broadcastInformation?.message {
+                    Badge(text: message, color: Color(.play_gray))
                 }
             }
             .padding()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
             .foregroundColor(.white)
         }
-    }
-}
-
-extension FeaturedShowCell {
-    struct Data: FeaturedShowCellData {
-        let show: SRGShow?
-        
-        var title: String? {
-            return show?.title
-        }
-        
-        var subtitle: String? {
-            return show?.lead
-        }
-        
-        var availability: String? {
-            return show?.broadcastInformation?.message
-        }
-        
-        var imageUrl: URL? {
-            return show?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
-        }
-        
-        var redactionReason: RedactionReasons {
-            return show == nil ? .placeholder : .init()
-        }
-        
-        #if os(tvOS)
-        func action() {
-            if let show = show {
-                navigateToShow(show)
-            }
-        }
-        #endif
-    }
-    
-    init(show: SRGShow?, layout: Layout) {
-        self.init(data: Data(show: show), layout: layout)
     }
 }
 
@@ -190,58 +147,32 @@ private extension View {
 }
 
 struct FeaturedShowCell_Previews: PreviewProvider {
-    private struct MockData: FeaturedShowCellData {
-        var title: String? {
-            return "19h30"
-        }
-        
-        var subtitle: String? {
-            return "Le journal du soir de la RTS\nUn condensé de l'actualité du jour"
-        }
-        
-        var availability: String? {
-            return "Prochaine diffusion: Ce soir à 19h30"
-        }
-        
-        var imageUrl: URL? {
-            return Bundle.main.url(forResource: "show_19h30", withExtension: "jpg", subdirectory: "Images")
-        }
-        
-        var redactionReason: RedactionReasons {
-            return .init()
-        }
-        
-        #if os(tvOS)
-        func action() {}
-        #endif
-    }
-    
     static var previews: some View {
         #if os(tvOS)
-        FeaturedShowCell(data: MockData(), layout: .hero)
+        FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
             .previewDisplayName("Cell (hero)")
         
-        FeaturedShowCell(data: MockData(), layout: .highlight)
+        FeaturedShowCell(show: MockData.show(), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
             .previewDisplayName("Cell (highlight)")
         #else
-        FeaturedShowCell(data: MockData(), layout: .hero)
+        FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
             .previewDisplayName("Cell (hero, regular)")
         
-        FeaturedShowCell(data: MockData(), layout: .hero)
+        FeaturedShowCell(show: MockData.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
             .previewDisplayName("Cell (hero, compact)")
         
-        FeaturedShowCell(data: MockData(), layout: .highlight)
+        FeaturedShowCell(show: MockData.show(), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
             .previewDisplayName("Cell (highlight, regular)")
         
-        FeaturedShowCell(data: MockData(), layout: .highlight)
+        FeaturedShowCell(show: MockData.show(), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
             .previewDisplayName("Cell (compact)")
