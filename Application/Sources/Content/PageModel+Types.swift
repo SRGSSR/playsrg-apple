@@ -503,13 +503,10 @@ fileprivate extension SRGDataProvider {
                         return self.radioLivestreams(for: vendor, channelUid: channelUid)
                             .map { result in
                                 if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, result.medias) {
-                                    guard let index = regionalizedMedias.firstIndex(of: media) else { return result.medias }
+                                    guard let index = regionalizedMedias.firstIndex(of: media) else { return regionalizedMedias }
                                     regionalizedMedias[index] = selectedMedia
-                                    return regionalizedMedias
                                 }
-                                else {
-                                    return result.medias
-                                }
+                                return regionalizedMedias
                             }
                             .eraseToAnyPublisher()
                     }
