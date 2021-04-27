@@ -40,10 +40,10 @@ struct FeaturedMediaCell: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .background(Color(.play_cardGrayBackground))
                 .redacted(reason: redactionReason)
                 .accessibilityElement()
-                .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
                 .accessibility(addTraits: .isButton)
             }
             .buttonStyle(CardButtonStyle())
@@ -57,11 +57,11 @@ struct FeaturedMediaCell: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .background(Color(.play_cardGrayBackground))
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .redacted(reason: redactionReason)
                 .accessibilityElement()
-                .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
                 .accessibility(addTraits: .isButton)
             }
             else {
@@ -73,11 +73,11 @@ struct FeaturedMediaCell: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .frame(width: geometry.size.width, height: geometry.size.height)
-                .background(Color(.srg_color(fromHexadecimalString: "#232323")!))
+                .background(Color(.play_cardGrayBackground))
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .redacted(reason: redactionReason)
                 .accessibilityElement()
-                .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+                .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
                 .accessibility(addTraits: .isButton)
             }
             #endif

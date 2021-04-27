@@ -8,32 +8,45 @@ import SwiftUI
 
 #if DEBUG
 
-struct MockData {
-    enum Kind: String {
+struct Mock {
+    enum Media: String {
+        case standard
+        case rich
+        case overflow
+        case blocked
+        case fourThree
+        case fourFive
+        case nineSixteen
+        case square
+    }
+    
+    static func media(_ kind: Media? = .standard) -> SRGMedia? {
+        return mockObject(kind?.rawValue, type: SRGMedia.self)
+    }
+    
+    enum Show: String {
         case standard
         case overflow
-        
-        fileprivate func resource(named name: String) -> String {
-            return "\(name)-\(self)"
-        }
     }
     
-    private static func mockObject<T>(_ name: String, type: T.Type) -> T {
-        let asset = NSDataAsset(name: name)!
+    static func show(_ kind: Show? = .standard) -> SRGShow? {
+        return mockObject(kind?.rawValue, type: SRGShow.self)
+    }
+    
+    enum Topic: String {
+        case standard
+        case overflow
+    }
+    
+    static func topic(_ kind: Topic? = .standard) -> SRGTopic? {
+        return mockObject(kind?.rawValue, type: SRGTopic.self)
+    }
+    
+    private static func mockObject<T>(_ name: String?, type: T.Type) -> T? {
+        guard let name = name, let clazz = type as? AnyClass else { return nil }
+        let asset = NSDataAsset(name: "\(NSStringFromClass(clazz))_\(name)")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
-        return try! MTLJSONAdapter(modelClass: type as? AnyClass)?.model(fromJSONDictionary: jsonData) as! T
-    }
-    
-    static func show(_ kind: Kind = .standard) -> SRGShow {
-        return mockObject(kind.resource(named: "show"), type: SRGShow.self)
-    }
-    
-    static func media(_ kind: Kind = .standard) -> SRGMedia {
-        return mockObject(kind.resource(named: "media"), type: SRGMedia.self)
-    }
-    
-    static func topic(_ kind: Kind = .standard) -> SRGTopic {
-        return mockObject(kind.resource(named: "topic"), type: SRGTopic.self)
+        return try! MTLJSONAdapter(modelClass: clazz)?.model(fromJSONDictionary: jsonData) as! T
     }
 }
 

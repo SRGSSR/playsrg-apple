@@ -40,7 +40,7 @@ struct FeaturedShowCell: View {
     
     var body: some View {
         #if os(tvOS)
-        CardButton(action: action) {
+        ExpandingCardButton(action: action) {
             HStack(spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .large))
                     .aspectRatio(16 / 9, contentMode: .fit)
@@ -149,25 +149,25 @@ private extension View {
 struct FeaturedShowCell_Previews: PreviewProvider {
     static var previews: some View {
         #if os(tvOS)
-        FeaturedShowCell(show: MockData.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedShowCell(show: MockData.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedShowCell(show: MockData.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedShowCell(show: MockData.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedShowCell(show: MockData.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedShowCell(show: MockData.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif

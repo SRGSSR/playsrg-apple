@@ -6,22 +6,13 @@
 
 import SwiftUI
 
+// Behavior: h-hug, v-hug
 struct DurationLabel: View {
     let media: SRGMedia?
     
-    private var isLivestream: Bool {
-        guard let media = media else { return false }
-        return media.contentType == .livestream || media.contentType == .scheduledLivestream
-    }
-    
     private var duration: String? {
-        guard let media = media else { return nil }
-        if isLivestream {
-            return NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.")
-        }
-        else {
-            return PlayShortFormattedMinutes(media.duration / 1000)
-        }
+        guard let media = media, media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
+        return PlayShortFormattedMinutes(media.duration / 1000)
     }
     
     var body: some View {
@@ -31,8 +22,17 @@ struct DurationLabel: View {
                 .foregroundColor(.white)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 8)
-                .background(isLivestream ? Color(.play_liveRed) : Color(white: 0, opacity: 0.5))
+                .background(Color(white: 0, opacity: 0.5))
                 .cornerRadius(4)
         }
+    }
+}
+
+struct DurationLabel_Preview: PreviewProvider {
+    static var previews: some View {
+        DurationLabel(media: Mock.media())
+            .padding()
+            .background(Color.white)
+            .previewLayout(.sizeThatFits)
     }
 }

@@ -25,6 +25,15 @@ struct MediaCell: View {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
+    private var direction: StackDirection {
+        if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
+            return .horizontal
+        }
+        else {
+            return .vertical
+        }
+    }
     #endif
     
     init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
@@ -33,71 +42,51 @@ struct MediaCell: View {
         self.layout = layout
         self.action = action
     }
-        
-    private var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
-    }
     
     var body: some View {
-        GeometryReader { geometry in
+        Group {
             #if os(tvOS)
-            LabeledCardButton(action: action ?? {
-                if let media = media {
-                    navigateToMedia(media)
-                }
-            }) {
-                ZStack {
-                    MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                        .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                        .onParentFocusChange { focused in
-                            isFocused = focused
-                            
-                            if let onFocusAction = self.onFocusAction {
-                                onFocusAction(focused)
-                            }
-                        }
-                        .accessibilityElement()
-                        .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
-                        .accessibility(addTraits: .isButton)
-                        
-                    if let media = media {
-                        AvailabilityBadge(media: media)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                            .accessibility(hidden: true)
-                    }
-                }
+            LabeledCardButton(aspectRatio: 16 / 9, action: action ?? defaultAction) {
+                MediaVisualView(media: media, scale: .small)
+                    .onParentFocusChange(perform: onFocusChange)
+                    .accessibilityElement()
+                    .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
+                    .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(media: media, style: style)
-                    .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
-            Group {
-                if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
-                    HStack {
-                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                            .frame(width: geometry.size.height * 16 / 9, height: geometry.size.height)
-                            .cornerRadius(LayoutStandardViewCornerRadius)
-                        DescriptionView(media: media, style: style)
-                            .frame(maxWidth: .infinity, maxHeight: geometry.size.height, alignment: .topLeading)
-                    }
-                }
-                else {
-                    VStack {
-                        MediaVisualView(media: media, scale: .small, contentMode: .fit)
-                            .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                            .cornerRadius(LayoutStandardViewCornerRadius)
-                        DescriptionView(media: media, style: style)
-                            .frame(width: geometry.size.width, alignment: .leading)
-                    }
-                }
+            Stack(direction: direction) {
+                MediaVisualView(media: media, scale: .small)
+                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .layoutPriority(1)
+                    .cornerRadius(LayoutStandardViewCornerRadius)
+                DescriptionView(media: media, style: style)
             }
             .accessibilityElement()
-            .accessibilityLabel(MediaDescription.accessibilityLabel(for: media))
+            .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
             #endif
         }
-        .redacted(reason: redactionReason)
+        .redactedIfNil(media)
     }
     
+    #if os(tvOS)
+    private func defaultAction() {
+        if let media = media {
+            navigateToMedia(media)
+        }
+    }
+    
+    private func onFocusChange(focused: Bool) {
+        isFocused = focused
+        
+        if let onFocusAction = onFocusAction {
+            onFocusAction(focused)
+        }
+    }
+    #endif
+    
+    /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         let media: SRGMedia?
         let style: MediaDescription.Style
@@ -108,10 +97,11 @@ struct MediaCell: View {
                     .srgFont(.subtitle)
                     .lineLimit(2)
                 Text(MediaDescription.subtitle(for: media, style: style))
-                    .srgFont(style == .date ? .overline : .H4)
+                    .srgFont(.H4)
                     .lineLimit(2)
                     .layoutPriority(1)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
 }
@@ -125,22 +115,15 @@ extension MediaCell {
 }
 
 struct MediaCell_Previews: PreviewProvider {
-    static var mediaPreview: SRGMedia {
-        let asset = NSDataAsset(name: "media-rts-tv")!
-        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
-        
-        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
-    }
+    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid, .regular)
     
     static var previews: some View {
         Group {
-            MediaCell(media: mediaPreview)
-                .previewLayout(.fixed(width: 375, height: 400))
-                .previewDisplayName("RTS media, default date style")
-            
-            MediaCell(media: mediaPreview, style: .show)
-                .previewLayout(.fixed(width: 375, height: 400))
-                .previewDisplayName("RTS media, show style")
+            MediaCell(media: Mock.media(), layout: .vertical)
+            MediaCell(media: Mock.media(.rich), layout: .vertical)
+            MediaCell(media: Mock.media(.overflow), layout: .vertical)
+            MediaCell(media: Mock.media(.nineSixteen), layout: .vertical)
         }
+        .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

@@ -8,9 +8,9 @@ import SRGUserData
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject var model = ProfileModel()
+    @StateObject private var model = ProfileModel()
     
-    var synchronizationMessage: String? {
+    private var synchronizationMessage: String? {
         guard model.isLoggedIn else { return nil }
         let dateString = (model.synchronizationDate != nil) ? DateFormatter.play_relativeDateAndTime.string(from: model.synchronizationDate!) : NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), dateString)
@@ -58,7 +58,7 @@ struct ProfileView: View {
         @ObservedObject var model: ProfileModel
         @State var alertDisplayed = false
         
-        var text: String {
+        private var text: String {
             guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
             if let username = model.username {
                 return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
@@ -68,7 +68,7 @@ struct ProfileView: View {
             }
         }
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of the cancel button in the alert view when logout"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
                 model.logout()
@@ -79,15 +79,17 @@ struct ProfileView: View {
                          secondaryButton: secondaryButton)
         }
         
+        private func action() {
+            if model.isLoggedIn {
+                alertDisplayed = true
+            }
+            else {
+                model.login()
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.isLoggedIn {
-                    alertDisplayed = true
-                }
-                else {
-                    model.login()
-                }
-            }) {
+            Button(action: action) {
                 Text(text)
                     .srgFont(.button1)
             }
@@ -99,10 +101,12 @@ struct ProfileView: View {
     struct AutoplayListItem: View {
         @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
         
+        private func action() {
+            isAutoplayEnabled = !isAutoplayEnabled
+        }
+        
         var body: some View {
-            Button(action: {
-                isAutoplayEnabled = !isAutoplayEnabled
-            }) {
+            Button(action: action) {
                 HStack {
                     Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
                         .srgFont(.button1)
@@ -120,7 +124,7 @@ struct ProfileView: View {
         @ObservedObject var model: ProfileModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeHistory()
@@ -138,12 +142,14 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasHistoryEntries {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasHistoryEntries {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
@@ -157,7 +163,7 @@ struct ProfileView: View {
         @ObservedObject var model: ProfileModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeFavorites()
@@ -175,12 +181,14 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasFavorites {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasFavorites {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
@@ -194,7 +202,7 @@ struct ProfileView: View {
         @ObservedObject var model: ProfileModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeWatchLaterItems()
@@ -212,12 +220,14 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasWatchLaterItems {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasWatchLaterItems {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
                     .srgFont(.button1)
                     .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
@@ -231,7 +241,9 @@ struct ProfileView: View {
         var model: ProfileModel
         
         var body: some View {
-            Button(action: {}) {
+            Button {
+                // No action
+            } label: {
                 HStack {
                     Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
                         .srgFont(.button1)

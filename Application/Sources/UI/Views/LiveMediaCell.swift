@@ -38,7 +38,7 @@ struct LiveMediaCell: View, LiveMediaData {
         return media == nil ? .placeholder : .init()
     }
     
-    private var accessibilityLabel: String {
+    private var accessibilityLabel: String? {
         if let channel = channel {
             var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
             if let currentProgram = program(at: Date()) {
@@ -77,7 +77,7 @@ struct LiveMediaCell: View, LiveMediaData {
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .onParentFocusChange { isFocused = $0 }
                     .accessibilityElement()
-                    .accessibilityLabel(accessibilityLabel)
+                    .accessibilityOptionalLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             } label: {
                 VStack {
@@ -98,7 +98,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 }
             }
             .accessibilityElement()
-            .accessibilityLabel(accessibilityLabel)
+            .accessibilityOptionalLabel(accessibilityLabel)
             #endif
         }
         .redacted(reason: redactionReason)

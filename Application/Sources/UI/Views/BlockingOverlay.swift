@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+/// Behavior: h-exp, v-exp
 struct BlockingOverlay: View {
     let media: SRGMedia?
     
@@ -17,11 +18,18 @@ struct BlockingOverlay: View {
     var body: some View {
         if let blockingIconImage = blockingIconImage {
             ZStack {
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.6))
+                Color(white: 0, opacity: 0.6)
                 Image(uiImage: blockingIconImage)
                     .foregroundColor(.white)
             }
         }
+    }
+}
+
+struct BlockingOverlay_Previews: PreviewProvider {
+    static var previews: some View {
+        BlockingOverlay(media: Mock.media(.blocked))
+            .background(Color.white)
+            .previewLayout(.fixed(width: 600, height: 400))
     }
 }

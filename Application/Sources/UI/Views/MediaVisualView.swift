@@ -7,23 +7,13 @@
 import SRGUserData
 import SwiftUI
 
+/// Behavior: h-exp, v-exp
 struct MediaVisualView: View {
     let media: SRGMedia?
     let scale: ImageScale
-    let contentMode: ContentMode
     
     @State private var progress: Double = 0
     @State private var taskHandle: String?
-    
-    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = .fit) {
-        self.media = media
-        self.scale = scale
-        self.contentMode = contentMode
-    }
-    
-    private var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: .default)
-    }
     
     private var youthProtectionLogoImage: UIImage? {
         guard let youthProtectionColor = media?.youthProtectionColor else { return nil }
@@ -37,7 +27,7 @@ struct MediaVisualView: View {
     
     var body: some View {
         ZStack {
-            ImageView(url: imageUrl)
+            ImageView(url: media?.imageUrl(for: scale))
             BlockingOverlay(media: media)
             
             HStack(spacing: 4) {
@@ -66,10 +56,22 @@ struct MediaVisualView: View {
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange)) { notification in
             if let updatedUrns = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>,
-               let media = media,
-               updatedUrns.contains(media.urn) {
+               let media = media, updatedUrns.contains(media.urn) {
                 updateProgress()
             }
         }
+    }
+}
+
+struct MediaVisualView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MediaVisualView(media: Mock.media(.standard), scale: .small)
+            MediaVisualView(media: Mock.media(.rich), scale: .small)
+            MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
+            MediaVisualView(media: Mock.media(.blocked), scale: .small)
+        }
+        .frame(width: 500, height: 500)
+        .previewLayout(.sizeThatFits)
     }
 }

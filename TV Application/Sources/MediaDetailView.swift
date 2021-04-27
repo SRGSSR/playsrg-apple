@@ -151,16 +151,16 @@ struct MediaDetailView: View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
                     if let summary = model.media.play_fullSummary {
-                        Button(action: {
+                        Button {
                             showText(summary)
-                        }, label: {
+                        } label: {
                             Text(summary)
                                 .foregroundColor(.white)
                                 .srgFont(.body)
                                 .frame(width: geometry.size.width, alignment: .leading)
                                 .padding(.vertical, 5)
                                 .onParentFocusChange { isFocused = $0 }
-                        })
+                        }
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
                     

@@ -11,7 +11,7 @@ struct TopicCell: View {
     
     var body: some View {
         #if os(tvOS)
-        CardButton(action: action) {
+        ExpandingCardButton(action: action) {
             MainView(topic: topic)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(topic?.title)
@@ -57,7 +57,7 @@ struct TopicCell_Previews: PreviewProvider {
     static private let size = LayoutTopicCollectionItemSize()
     
     static var previews: some View {
-        TopicCell(topic: MockData.topic())
+        TopicCell(topic: Mock.topic())
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

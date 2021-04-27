@@ -35,7 +35,7 @@ const CGFloat LayoutStandardCellWidth = 210.f;
 const CGFloat LayoutTopicCellWidth = 150.f;
 const CGFloat LayoutStandardCellHeight = 84.f;
 
-const CGFloat LayoutProgressBarHeight = 2.f;
+const CGFloat LayoutProgressBarHeight = 3.f;
 
 #endif
 

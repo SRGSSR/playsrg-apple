@@ -16,9 +16,9 @@ struct ShowAccessCell: View {
     var body: some View {
         ResponderChain { firstResponder in
             HStack(spacing: 10) {
-                Button(action: {
+                Button {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
-                }) {
+                } label: {
                     HStack {
                         Image("atoz-22")
                         Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
@@ -31,9 +31,9 @@ struct ShowAccessCell: View {
                 .foregroundColor(.white)
                 .accessibilityLabel(PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
                 
-                Button(action: {
+                Button {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
-                }) {
+                } label: {
                     HStack {
                         Image("calendar-22")
                         Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))

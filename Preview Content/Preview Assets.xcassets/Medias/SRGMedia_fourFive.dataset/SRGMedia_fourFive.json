@@ -1,0 +1,42 @@
+{
+   "id" : "12106546",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:12106546",
+   "title" : "Famille Savary - Parents avant tout!",
+   "description" : "\"Je voulais faire la physio, je voulais faire les soins après j'ai dit: stop, je fais ce que je peux, mais maintenant je suis maman. Mais les soins qu'on fait tous les jours, je ne vais pas demander à une infirmière de venir, je reste maman malgré que je fais les soins pour mes enfants. \"\n\nEn apprenant la gravité du handicap d'Alycia, leur première fille, Roxanne et André ont un véritable choc. Mais fort d'un avis médical encourageant, ils décident d'avoir un second enfant. Léanne arrive et souffre de la même maladie que sa soeur. Toujours sans diagnostic pour leurs filles, le couple fait face, et profite de chaque instant, car l'avenir est incertain.",
+   "imageUrl" : "https://www.rts.ch/2021/04/12/16/23/12106564.image/4x5",
+   "imageTitle" : "Vignette \"Ma maladie rare\" - Famille Savary - Parents avant tout!",
+   "type" : "EPISODE",
+   "date" : "2021-04-12T07:00:00+02:00",
+   "duration" : 416800,
+   "validFrom" : "2021-04-12T07:00:00+02:00",
+   "validTo" : "2100-01-01T00:00:00+01:00",
+   "playableAbroad" : true,
+   "subtitlesAvailable" : false,
+   "episode" : {
+      "id" : "12106537",
+      "title" : "Ma maladie rare",
+      "imageUrl" : "https://www.rts.ch/2021/04/12/16/23/12106564.image/4x5",
+      "imageTitle" : "Vignette \"Ma maladie rare\" - Famille Savary - Parents avant tout!"
+   },
+   "show" : {
+      "id" : "11979924",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:11979924",
+      "title" : "Ma maladie rare",
+      "lead" : "A l'heure où la pandémie mondiale monopolise toute l'attention, quelques 300 millions de personnes vivent avec des maladies dont on ne parle jamais ou presque, parce qu'elles sont dites \"rares\". On en recense plus de 6'000 et elles sont le plus souvent graves et invalidantes.\n\nEntre errance diagnostique, absence de traitement ou traitements lourds, méconnaissance de la part des assurances et démarches sans fin pour obtenir de l’aide, les malades et leurs proches font face à bien des défis.\n\nDès le 28 février sur PLAY RTS, Facebook et Youtube. ",
+      "description" : "A l’heure où une pandémie mondiale monopolise toute l’attention parce qu’elle n’est qu’incertitude, quelques 300 millions de personnes apprennent à vivre avec des maladies dont on ne parle jamais ou presque, parce qu’elles sont dites « rares ». On en recense plus de 6000 et elles sont le plus souvent graves et invalidantes.  Entre errance diagnostique, absence de traitement ou traitements lourds, méconnaissance de la part des assurances et démarches sans fin pour obtenir de l’aide, les malades et leurs proches font face à bien des défis.",
+      "imageUrl" : "https://ws.srf.ch/asset/image/audio/8b32fd87-459e-40f1-9519-ba0cbb01f34e/NOT_SPECIFIED.jpg",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true
+   },
+   "presentation" : "DEFAULT",
+   "audioTrackList" : [ {
+      "locale" : "fr",
+      "language" : "Français",
+      "source" : "HLS"
+   } ],
+   "aspectRatio" : "4:5"
+}

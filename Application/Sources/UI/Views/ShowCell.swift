@@ -18,9 +18,8 @@ struct ShowCell: View {
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(action: action) {
+            LabeledCardButton(aspectRatio: 16 / 9, action: action) {
                 ImageView(url: show?.imageUrl(for: .small))
-                    .aspectRatio(16 / 9, contentMode: .fit)
                     .accessibilityElement()
                     .accessibilityOptionalLabel(show?.title)
                     .accessibility(addTraits: .isButton)
@@ -53,12 +52,8 @@ struct ShowCell: View {
     private struct DescriptionView: View {
         let show: SRGShow?
         
-        private var title: String {
-            return show?.title ?? String(repeating: " ", count: .random(in: 10..<20))
-        }
-        
         var body: some View {
-            Text(title)
+            Text(show?.title ?? "")
                 .srgFont(.subtitle)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
@@ -70,7 +65,7 @@ struct ShowCell_Previews: PreviewProvider {
     static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, .regular)
     
     static var previews: some View {
-        ShowCell(show: MockData.show())
+        ShowCell(show: Mock.show(.standard))
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
