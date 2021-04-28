@@ -30,8 +30,8 @@ struct MediaVisualView: View {
             ImageView(url: media?.imageUrl(for: scale))
             BlockingOverlay(media: media)
             
-            if let media = media {
-                AvailabilityBadge(media: media)
+            if let media = media, let availabilityBadgeProperties = MediaDescription.availabilityBadgeProperties(for: media) {
+                Badge(text: availabilityBadgeProperties.text, color: availabilityBadgeProperties.color)
                     .padding([.top, .leading], LayoutMediaBadgePadding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }

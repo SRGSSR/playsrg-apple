@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import Foundation
+import SwiftUI
 
 struct MediaDescription {
     enum Style {
@@ -14,16 +14,36 @@ struct MediaDescription {
         case date
     }
     
-    private static func formattedDuration(from: Date, to: Date) -> String? {
+    private enum FormattedDurationStyle {
+        /// Full duration format
+        case full
+        /// Short duration format
+        case short
+    }
+    
+    private static func formattedDuration(from: Date, to: Date, format: FormattedDurationStyle = .full) -> String? {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
-        switch days {
-        case 0:
-            // Minimum displayed is 1 hour
-            return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
-        case 1...30:
-            return PlayFormattedDays(to.timeIntervalSince(from))
-        default:
-            return nil
+        
+        if format == .short {
+            switch days {
+            case 0:
+                return PlayShortFormattedHours(to.timeIntervalSince(from))
+            case 1...3:
+                return PlayShortFormattedDays(to.timeIntervalSince(from))
+            default:
+                return nil
+            }
+        }
+        else {
+            switch days {
+            case 0:
+                // Minimum displayed is 1 hour
+                return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
+            case 1...30:
+                return PlayFormattedDays(to.timeIntervalSince(from))
+            default:
+                return nil
+            }
         }
     }
     
@@ -84,6 +104,39 @@ struct MediaDescription {
         }
         else {
             return media.title
+        }
+    }
+    
+    static func availabilityBadgeProperties(for media: SRGMedia?) -> (text: String, color: Color)? {
+        guard let media = media else { return nil }
+        
+        if media.contentType == .livestream {
+            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), Color(.play_liveRed))
+        }
+        else {
+            let now = Date()
+            let availability = media.timeAvailability(at: now)
+            switch availability {
+            case .notYetAvailable:
+                return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_green))
+            case .notAvailableAnymore:
+                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
+            case .available:
+                if media.contentType == .scheduledLivestream {
+                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), color: Color(.play_liveRed))
+                }
+                else if media.play_isWebFirst {
+                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), Color(.srg_blue))
+                }
+                else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
+                    return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))
+                }
+                else {
+                    return nil
+                }
+            default:
+                return nil
+            }
         }
     }
 }
