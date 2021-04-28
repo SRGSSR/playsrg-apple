@@ -85,9 +85,4 @@
     return [UIColor srg_colorFromHexadecimalString:@"#e4e4e4"];
 }
 
-+ (UIColor *)play_greenTagColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#347368"];
-}
-
 @end

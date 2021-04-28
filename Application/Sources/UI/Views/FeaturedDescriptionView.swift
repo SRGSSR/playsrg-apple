@@ -40,7 +40,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
         VStack(alignment: stackAlignment, spacing: 0) {
             HStack(spacing: 0) {
                 if let label = content.label {
-                    Badge(text: label, color: Color(.play_greenTag))
+                    Badge(text: label, color: Color(.play_green))
                 }
                 if let introduction = content.introduction {
                     Text(introduction)
