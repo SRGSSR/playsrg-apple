@@ -56,7 +56,7 @@ struct MediaCell: View {
                 DescriptionView(media: media, style: style)
             }
             #else
-            Stack(direction: direction) {
+            Stack(direction: direction, spacing: 0) {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .layoutPriority(1)
@@ -125,5 +125,13 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.nineSixteen), layout: .vertical)
         }
         .previewLayout(.fixed(width: size.width, height: size.height))
+        
+        Group {
+            MediaCell(media: Mock.media(), layout: .horizontal)
+            MediaCell(media: Mock.media(.rich), layout: .horizontal)
+            MediaCell(media: Mock.media(.overflow), layout: .horizontal)
+            MediaCell(media: Mock.media(.nineSixteen), layout: .horizontal)
+        }
+        .previewLayout(.fixed(width: 600, height: LayoutStandardCellHeight))
     }
 }

@@ -23,8 +23,6 @@ struct LabeledCardButton<Content: View, Label: View>: View {
     
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
     
-    let spacing: CGFloat = 10
-    
     @State private var isFocused = false
     
     init(aspectRatio: CGFloat? = nil, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: @escaping () -> Label) {
@@ -35,7 +33,7 @@ struct LabeledCardButton<Content: View, Label: View>: View {
     }
     
     var body: some View {
-        VStack(spacing: spacing) {
+        VStack(spacing: 0) {
             ExpandingCardButton(action: action) {
                 content()
             }
@@ -51,7 +49,7 @@ struct LabeledCardButton<Content: View, Label: View>: View {
                 
             label()
                 .opacity(isFocused ? 1 : 0.5)
-                .offset(x: 0, y: isFocused ? spacing : 0)
+                .offset(x: 0, y: isFocused ? 10 : 0)
                 .scaleEffect(isFocused ? 1.1 : 1, anchor: .top)
                 .animation(.easeInOut(duration: 0.1))
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

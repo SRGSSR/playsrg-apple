@@ -27,7 +27,7 @@ struct ShowCell: View {
                 DescriptionView(show: show)
             }
             #else
-            Stack(direction: direction) {
+            Stack(direction: direction, spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(16 / 9, contentMode: .fit)
                 DescriptionView(show: show)
