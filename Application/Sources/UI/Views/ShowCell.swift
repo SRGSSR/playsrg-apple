@@ -42,7 +42,7 @@ struct ShowCell: View {
     }
     
     #if os(tvOS)
-    func action() {
+    private func action() {
         if let show = show {
             navigateToShow(show)
         }

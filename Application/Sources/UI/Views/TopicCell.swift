@@ -26,7 +26,7 @@ struct TopicCell: View {
     }
     
     #if os(tvOS)
-    func action() {
+    private func action() {
         if let topic = topic {
             navigateToTopic(topic)
         }

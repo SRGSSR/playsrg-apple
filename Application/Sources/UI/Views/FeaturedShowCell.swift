@@ -6,8 +6,7 @@
 
 import SwiftUI
 
-// FIXME: The `Layout.h` size for a featured show cell is not tall enough if a badge is displayed, see
-//        Xcode previews on iOS. Either move the badge or tweak the values
+// TODO: Merge with FeaturedMediaCell
 struct FeaturedShowCell: View {
     enum Layout {
         case hero
@@ -25,7 +24,7 @@ struct FeaturedShowCell: View {
     }
     #endif
     
-    private var descriptionAlignment: DescriptionView.Alignment {
+    private var descriptionAlignment: FeaturedDescriptionView.Alignment {
         if layout == .hero {
             #if os(iOS)
             return  horizontalSizeClass == .regular ? .center : .leading
@@ -45,7 +44,7 @@ struct FeaturedShowCell: View {
                 ImageView(url: show?.imageUrl(for: .large))
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .layoutPriority(1)
-                DescriptionView(show: show, alignment: descriptionAlignment)
+                FeaturedDescriptionView(show: show, alignment: descriptionAlignment)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
@@ -59,7 +58,7 @@ struct FeaturedShowCell: View {
             ImageView(url: show?.imageUrl(for: .large))
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .layoutPriority(1)
-            DescriptionView(show: show, alignment: descriptionAlignment)
+            FeaturedDescriptionView(show: show, alignment: descriptionAlignment)
         }
         .background(Color(.play_cardGrayBackground))
         .cornerRadius(LayoutStandardViewCornerRadius)
@@ -70,58 +69,12 @@ struct FeaturedShowCell: View {
     }
     
     #if os(tvOS)
-    func action() {
+    private func action() {
         if let show = show {
             navigateToShow(show)
         }
     }
     #endif
-    
-    /// Behavior: h-exp, v-exp
-    private struct DescriptionView: View {
-        enum Alignment {
-            case leading
-            case center
-        }
-        
-        let show: SRGShow?
-        let alignment: Alignment
-        
-        private var stackAlignment: HorizontalAlignment {
-            return alignment == .leading ? .leading : .center
-        }
-        
-        private var frameAlignment: SwiftUI.Alignment {
-            return alignment == .leading ? .leading : .center
-        }
-        
-        private var textAlignment: TextAlignment {
-            return alignment == .leading ? .leading : .center
-        }
-        
-        var body: some View {
-            VStack(alignment: stackAlignment) {
-                Text(show?.title ?? "")
-                    .srgFont(.H2)
-                    .lineLimit(1)
-                    .multilineTextAlignment(textAlignment)
-                if let lead = show?.lead {
-                    Text(lead)
-                        .srgFont(.body)
-                        .lineLimit(3)
-                        .multilineTextAlignment(textAlignment)
-                        .opacity(0.8)
-                }
-                
-                if let message = show?.broadcastInformation?.message {
-                    Badge(text: message, color: Color(.play_gray))
-                }
-            }
-            .padding()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
-            .foregroundColor(.white)
-        }
-    }
 }
 
 private extension View {

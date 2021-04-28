@@ -9,6 +9,7 @@ import SwiftUI
 struct Mock {
     enum Media: String {
         case standard
+        case minimal
         case rich
         case overflow
         case blocked
