@@ -177,7 +177,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 return program(at: date)?.title ?? channel.title
             }
             else {
-                return MediaDescription.title(for: media)
+                return MediaDescription.title(for: media) ?? ""
             }
         }
         

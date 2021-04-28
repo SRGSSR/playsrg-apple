@@ -124,7 +124,7 @@ struct FeaturedMediaCell: View {
         var body: some View {
         VStack {
             Spacer()
-            Text(MediaDescription.title(for: media, style: .show))
+            Text(MediaDescription.title(for: media, style: .show) ?? "")
                 .srgFont(.subtitle)
                 .lineLimit(1)
                 .multilineTextAlignment(textAlignment())
@@ -133,7 +133,7 @@ struct FeaturedMediaCell: View {
                 .padding()
             Spacer()
                 .frame(height: LayoutFeaturedSpacerHeight)
-            Text(MediaDescription.subtitle(for: media, style: .show))
+            Text(MediaDescription.subtitle(for: media, style: .show) ?? "")
                 .srgFont(.H2)
                 .lineLimit(2)
                 .multilineTextAlignment(textAlignment())
@@ -165,10 +165,10 @@ struct FeaturedMediaCell: View {
 
         var body: some View {
             VStack(alignment: .leading) {
-                Text(MediaDescription.title(for: media, style: .show))
+                Text(MediaDescription.title(for: media, style: .show) ?? "")
                     .srgFont(.subtitle)
                     .lineLimit(2)
-                Text(MediaDescription.subtitle(for: media, style: .show))
+                Text(MediaDescription.subtitle(for: media, style: .show) ?? "")
                     .srgFont(.H4)
                     .lineLimit(2)
                     .layoutPriority(1)

@@ -14,10 +14,6 @@ struct MediaDescription {
         case date
     }
     
-    private static func placeholder(length: Int) -> String {
-        return String(repeating: " ", count: length)
-    }
-    
     private static func formattedDuration(from: Date, to: Date) -> String? {
         guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
         switch days {
@@ -31,8 +27,8 @@ struct MediaDescription {
         }
     }
     
-    static func title(for media: SRGMedia?, style: Style = .date) -> String {
-        guard let media = media else { return placeholder(length: 15) }
+    static func title(for media: SRGMedia?, style: Style = .date) -> String? {
+        guard let media = media else { return nil }
         
         switch style {
         case .show:
@@ -42,8 +38,8 @@ struct MediaDescription {
         }
     }
     
-    static func subtitle(for media: SRGMedia?, style: Style = .date) -> String {
-        guard let media = media else { return placeholder(length: 20) }
+    static func subtitle(for media: SRGMedia?, style: Style = .date) -> String? {
+        guard let media = media else { return nil }
         guard media.contentType != .livestream else { return "" }
         
         switch style {
@@ -60,12 +56,12 @@ struct MediaDescription {
     }
     
     static func summary(for media: SRGMedia?) -> String? {
-        guard let media = media else { return placeholder(length: 160) }
+        guard let media = media else { return nil }
         return media.summary
     }
     
     static func availability(for media: SRGMedia?) -> String? {
-        guard let media = media else { return placeholder(length: 25) }
+        guard let media = media else { return nil }
         let now = Date()
         switch media.timeAvailability(at: now) {
         case .notAvailableAnymore:
