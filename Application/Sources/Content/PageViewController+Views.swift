@@ -16,7 +16,7 @@ extension PageViewController {
                 FeaturedMediaCell(media: media, layout: .hero)
             }
             else if section.properties.layout == .highlight {
-                FeaturedMediaCell(media: media, layout: .hero)
+                FeaturedMediaCell(media: media, layout: .highlight)
             }
             else if section.properties.presentationType == .livestreams {
                 if section.properties.layout == .liveMediaGrid {
