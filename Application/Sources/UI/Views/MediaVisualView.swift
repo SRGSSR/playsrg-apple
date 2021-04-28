@@ -32,7 +32,7 @@ struct MediaVisualView: View {
             
             if let media = media {
                 AvailabilityBadge(media: media)
-                    .padding([.top, .leading], LayoutBadgeTopLeadingPadding)
+                    .padding([.top, .leading], LayoutMediaBadgePadding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             
@@ -47,7 +47,7 @@ struct MediaVisualView: View {
                 }
                 DurationLabel(media: media)
             }
-            .padding([.bottom, .horizontal], 8)
+            .padding([.bottom, .horizontal], LayoutMediaBadgePadding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
             if let progress = progress {

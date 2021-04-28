@@ -80,9 +80,9 @@ typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
 };
 
 /**
- *  Badge top leading padding.
+ *  Media badge padding.
  */
-OBJC_EXPORT const CGFloat LayoutBadgeTopLeadingPadding;
+OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
 
 /**
  *  Progress bar height.

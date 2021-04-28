@@ -21,7 +21,7 @@ const CGFloat LayoutStandardCellWidth = 375.f;
 const CGFloat LayoutTopicCellWidth = 250.f;
 const CGFloat LayoutStandardCellHeight = 150.f;
 
-const CGFloat LayoutBadgeTopLeadingPadding = 8.f;
+const CGFloat LayoutMediaBadgePadding = 8.f;
 const CGFloat LayoutProgressBarHeight = 8.f;
 
 #else
