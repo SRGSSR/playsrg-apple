@@ -14,6 +14,7 @@ private let defaultNumberOfLivestreamPlaceholders = 4
 protocol PageSectionProperties {
     var title: String? { get }
     var summary: String? { get }
+    var label: String? { get }
     var accessibilityTitle: String { get }
     var presentationType: SRGContentPresentationType { get }
     var layout: PageModel.SectionLayout { get }
@@ -137,6 +138,10 @@ extension SRGContentSection: PageSectionProperties {
     
     var summary: String? {
         return presentation.summary
+    }
+    
+    var label: String? {
+        return presentation.label
     }
     
     var accessibilityTitle: String {
@@ -346,6 +351,10 @@ extension ConfiguredSection: PageSectionProperties {
     }
     
     var summary: String? {
+        return nil
+    }
+    
+    var label: String? {
         return nil
     }
     
