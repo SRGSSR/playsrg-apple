@@ -161,7 +161,7 @@ struct LiveMediaCell: View, LiveMediaData {
                 if let media = media, media.timeAvailability(at: Date()) == .notYetAvailable {
                     Badge(text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), color: Color(.play_gray))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .padding([.leading, .top], 8)
+                        .padding([.top, .leading], 8)
                 }
             }
         }

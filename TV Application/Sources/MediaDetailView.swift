@@ -27,7 +27,7 @@ struct MediaDetailView: View {
                 .fill(Color(white: 0, opacity: 0.6))
             VStack {
                 DescriptionView(model: model)
-                    .padding([.top, .leading, .trailing], 100)
+                    .padding([.top, .horizontal], 100)
                     .padding(.bottom, 30)
                 RelatedMediasView(model: model)
                     .frame(maxWidth: .infinity, maxHeight: 350)
