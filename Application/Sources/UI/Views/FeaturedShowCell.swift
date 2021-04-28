@@ -18,22 +18,22 @@ struct FeaturedShowCell: View {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
-    private var direction: StackDirection {
-        return horizontalSizeClass == .compact ? .vertical : .horizontal
-    }
     #endif
     
+    private var direction: StackDirection {
+        #if os(iOS)
+        return horizontalSizeClass == .compact ? .vertical : .horizontal
+        #else
+        return .horizontal
+        #endif
+    }
+    
     private var descriptionAlignment: FeaturedDescriptionView.Alignment {
-        if layout == .hero {
-            #if os(iOS)
-            return  horizontalSizeClass == .regular ? .center : .leading
-            #else
-            return .center
-            #endif
+        if direction == .vertical {
+            return .topLeading
         }
         else {
-            return .leading
+            return layout == .hero ? .center : .leading
         }
     }
     
@@ -100,27 +100,29 @@ private extension View {
 }
 
 struct FeaturedShowCell_Previews: PreviewProvider {
+    static let kind: Mock.Show = .standard
+    
     static var previews: some View {
         #if os(tvOS)
-        FeaturedShowCell(show: Mock.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedShowCell(show: Mock.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(kind), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedShowCell(show: Mock.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedShowCell(show: Mock.show(), layout: .hero)
+        FeaturedShowCell(show: Mock.show(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedShowCell(show: Mock.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedShowCell(show: Mock.show(), layout: .highlight)
+        FeaturedShowCell(show: Mock.show(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif

@@ -18,22 +18,22 @@ struct FeaturedMediaCell: View {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    
-    private var direction: StackDirection {
-        return horizontalSizeClass == .compact ? .vertical : .horizontal
-    }
     #endif
     
+    private var direction: StackDirection {
+        #if os(iOS)
+        return horizontalSizeClass == .compact ? .vertical : .horizontal
+        #else
+        return .horizontal
+        #endif
+    }
+    
     private var descriptionAlignment: FeaturedDescriptionView.Alignment {
-        if layout == .hero {
-            #if os(iOS)
-            return  horizontalSizeClass == .regular ? .center : .leading
-            #else
-            return .center
-            #endif
+        if direction == .vertical {
+            return .topLeading
         }
         else {
-            return .leading
+            return layout == .hero ? .center : .leading
         }
     }
     
@@ -100,27 +100,29 @@ private extension View {
 }
 
 struct FeaturedMediaCell_Previews: PreviewProvider {
+    static let kind: Mock.Media = .standard
+    
     static var previews: some View {
         #if os(tvOS)
-        FeaturedMediaCell(media: Mock.media(), layout: .hero)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedMediaCell(media: Mock.media(), layout: .highlight)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedMediaCell(media: Mock.media(), layout: .hero)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedMediaCell(media: Mock.media(), layout: .hero)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedMediaCell(media: Mock.media(), layout: .highlight)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedMediaCell(media: Mock.media(), layout: .highlight)
+        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif

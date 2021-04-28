@@ -17,6 +17,7 @@ protocol FeaturedContent {
 struct FeaturedDescriptionView: View {
     enum Alignment {
         case leading
+        case topLeading
         case center
     }
     
@@ -29,15 +30,22 @@ struct FeaturedDescriptionView: View {
     let alignment: Alignment
     
     private var stackAlignment: HorizontalAlignment {
-        return alignment == .leading ? .leading : .center
+        return alignment == .center ? .center : .leading
     }
     
     private var frameAlignment: SwiftUI.Alignment {
-        return alignment == .leading ? .leading : .center
+        switch alignment {
+        case .leading:
+            return .leading
+        case .topLeading:
+            return .topLeading
+        case .center:
+            return .center
+        }
     }
     
     private var textAlignment: TextAlignment {
-        return alignment == .leading ? .leading : .center
+        return alignment == .center ? .center : .leading
     }
     
     var body: some View {
@@ -56,7 +64,6 @@ struct FeaturedDescriptionView: View {
                     .opacity(0.8)
             }
         }
-        .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
         .foregroundColor(.white)
     }
@@ -118,12 +125,14 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             FeaturedDescriptionView(show: Mock.show(), alignment: .leading)
+            FeaturedDescriptionView(show: Mock.show(), alignment: .topLeading)
             FeaturedDescriptionView(show: Mock.show(), alignment: .center)
         }
         .previewLayout(.fixed(width: 1000, height: 600))
         
         Group {
             FeaturedDescriptionView(media: Mock.media(), alignment: .leading)
+            FeaturedDescriptionView(media: Mock.media(), alignment: .topLeading)
             FeaturedDescriptionView(media: Mock.media(), alignment: .center)
         }
         .previewLayout(.fixed(width: 1000, height: 600))
