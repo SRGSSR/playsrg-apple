@@ -39,6 +39,10 @@ extension View {
     func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol {
         return accessibilityLabel(label ?? "")
     }
+    
+    func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol {
+        return accessibilityHint(hint ?? "")
+    }
 }
 
 extension View {

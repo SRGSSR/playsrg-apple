@@ -86,21 +86,6 @@ extension PageViewController {
         let section: PageModel.Section
         let pageTitle: String?
         
-        @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
-            
-        private var accessibilityLabel: String {
-            if let summary = section.properties.summary {
-                return section.properties.accessibilityTitle + ", " + summary
-            }
-            else {
-                return section.properties.accessibilityTitle
-            }
-        }
-        
-        private var accessibilityHint: String {
-            return section.properties.canOpenDetailPage ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : ""
-        }
-        
         var body: some View {
             if let pageTitle = pageTitle {
                 Text(pageTitle)
@@ -109,7 +94,7 @@ extension PageViewController {
                     .opacity(0.8)
             }
             VStack(alignment: .leading) {
-                if let title = isVoiceOverRunning ? section.properties.accessibilityTitle : section.properties.title {
+                if let title = section.properties.title {
                     Text(title)
                         .srgFont(.H2)
                         .lineLimit(1)
@@ -124,8 +109,8 @@ extension PageViewController {
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .accessibilityElement()
-            .accessibilityLabel(accessibilityLabel)
-            .accessibilityHint(accessibilityHint)
+            .accessibilityOptionalLabel(section.properties.title)
+            .accessibilityOptionalHint(section.properties.accessibilityHint)
             .accessibility(addTraits: .isHeader)
         }
     }

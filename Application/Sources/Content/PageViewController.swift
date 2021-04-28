@@ -13,7 +13,6 @@ import UIKit
 class PageViewController: DataViewController {
     private let model: PageModel
     private var refreshCancellables = Set<AnyCancellable>()
-    private var mainCancellables = Set<AnyCancellable>()
 
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
@@ -65,23 +64,20 @@ class PageViewController: DataViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
-                let title = UIAccessibility.isVoiceOverRunning ? section.properties.accessibilityTitle : section.properties.title
+                var height: CGFloat = 0
                 
-                if index == 0, title == nil, pageTitle == nil {
-                    return nil
-                }
-                
-                var height: CGFloat = LayoutStandardMargin
-                if let title = title, !title.isEmpty {
+                if let title = section.properties.title, !title.isEmpty {
                     height += LayoutCollectionSectionHeaderTitleHeight()
                 }
+                // TODO: Magic layout constant. Avoid
                 if let summary = section.properties.summary, !summary.isEmpty {
                     height += (LayoutCollectionSectionHeaderTitleHeight() * 2 / 3).rounded(.up)
                 }
                 if let pageTitle = pageTitle, !pageTitle.isEmpty {
                     height += LayoutCollectionSectionHeaderTitleHeight()
                 }
-                return height
+                
+                return height != 0 ? height + LayoutStandardMargin : 0
             }
             
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
@@ -296,12 +292,6 @@ class PageViewController: DataViewController {
                 self?.reloadData(with: state)
             }
             .store(in: &refreshCancellables)
-        
-        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
-            .sink { [weak self] _ in
-                self?.refresh()
-            }
-            .store(in: &mainCancellables)
     }
     
     override func viewWillLayoutSubviews() {
