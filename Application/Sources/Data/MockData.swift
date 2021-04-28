@@ -6,8 +6,6 @@
 
 import SwiftUI
 
-#if DEBUG
-
 struct Mock {
     enum Media: String {
         case standard
@@ -49,5 +47,3 @@ struct Mock {
         return try! MTLJSONAdapter(modelClass: clazz)?.model(fromJSONDictionary: jsonData) as! T
     }
 }
-
-#endif
