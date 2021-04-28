@@ -6,11 +6,6 @@
 
 import SwiftUI
 
-struct FeaturedContentTag {
-    let text: String
-    let color: UIColor
-}
-
 protocol FeaturedContent {
     associatedtype Content: View
     
@@ -20,7 +15,7 @@ protocol FeaturedContent {
     var title: String? { get }
     var summary: String? { get }
     var accessibilityLabel: String? { get }
-    var tags: [FeaturedContentTag] { get }
+    var label: String? { get }
     
     func visualView() -> Content
     
@@ -31,6 +26,7 @@ protocol FeaturedContent {
 
 struct FeaturedMediaContent: FeaturedContent {
     let media: SRGMedia?
+    let label: String?
     
     var isPlaceholder: Bool {
         return media == nil
@@ -52,10 +48,6 @@ struct FeaturedMediaContent: FeaturedContent {
         return MediaDescription.accessibilityLabel(for: media)
     }
     
-    var tags: [FeaturedContentTag] {
-        return []
-    }
-    
     func visualView() -> some View {
         return MediaVisualView(media: media, scale: .large)
     }
@@ -71,6 +63,7 @@ struct FeaturedMediaContent: FeaturedContent {
 
 struct FeaturedShowContent: FeaturedContent {
     let show: SRGShow?
+    let label: String?
     
     var isPlaceholder: Bool {
         return show == nil
@@ -90,10 +83,6 @@ struct FeaturedShowContent: FeaturedContent {
     
     var accessibilityLabel: String? {
         return show?.title
-    }
-    
-    var tags: [FeaturedContentTag] {
-        return []
     }
     
     func visualView() -> some View {

@@ -69,14 +69,14 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
 }
 
 extension FeaturedContentCell where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, layout: FeaturedContentLayout) {
-        self.init(content: FeaturedMediaContent(media: media), layout: layout)
+    init(media: SRGMedia?, label: String? = nil, layout: FeaturedContentLayout) {
+        self.init(content: FeaturedMediaContent(media: media, label: label), layout: layout)
     }
 }
 
 extension FeaturedContentCell where Content == FeaturedShowContent {
-    init(show: SRGShow?, layout: FeaturedContentLayout) {
-        self.init(content: FeaturedShowContent(show: show), layout: layout)
+    init(show: SRGShow?, label: String? = nil, layout: FeaturedContentLayout) {
+        self.init(content: FeaturedShowContent(show: show, label: label), layout: layout)
     }
 }
 
@@ -104,24 +104,25 @@ private extension View {
 
 struct FeaturedContentCell_Previews: PreviewProvider {
     static let kind: Mock.Media = .standard
+    static let label = "New"
     
     static var previews: some View {
         #if os(tvOS)
-        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         

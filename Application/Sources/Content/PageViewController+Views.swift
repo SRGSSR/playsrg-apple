@@ -13,10 +13,10 @@ extension PageViewController {
         
         var body: some View {
             if section.properties.layout == .hero {
-                FeaturedContentCell(media: media, layout: .hero)
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             }
             else if section.properties.layout == .highlight {
-                FeaturedContentCell(media: media, layout: .highlight)
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             }
             else if section.properties.presentationType == .livestreams {
                 if section.properties.layout == .liveMediaGrid {
@@ -44,10 +44,10 @@ extension PageViewController {
         
         var body: some View {
             if section.properties.layout == .hero {
-                FeaturedContentCell(show: show, layout: .hero)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             }
             else if section.properties.layout == .highlight {
-                FeaturedContentCell(show: show, layout: .highlight)
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             }
             else {
                 ShowCell(show: show)
