@@ -43,10 +43,14 @@ struct AvailabilityBadge: View {
         let availability = media.timeAvailability(at: now)
         switch availability {
         case .notYetAvailable:
-            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_gray))
+            return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_green))
         case .notAvailableAnymore:
             return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
         case .available:
+            if media.contentType == .scheduledLivestream {
+                return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), color: Color(.play_liveRed))
+            }
+            
             guard let endDate = media.endDate, media.contentType == .episode else { return nil }
             if let remainingTime = Self.formattedDuration(from: now, to: endDate) {
                 return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))
@@ -61,13 +65,15 @@ struct AvailabilityBadge: View {
     
     var body: some View {
         Group {
-            if media.play_isWebFirst {
+            if media.contentType == .livestream {
+                Badge(text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), color: Color(.play_liveRed))
+            }
+            else if media.play_isWebFirst {
                 Badge(text: NSLocalizedString("Web first", comment: "Web first label on media cells"), color: Color(.srg_blue))
             }
             else if let availabilityBadgeProperties = availabilityBadgeProperties() {
                 Badge(text: availabilityBadgeProperties.text, color: availabilityBadgeProperties.color)
             }
         }
-        .padding([.leading, .top], 8)
     }
 }

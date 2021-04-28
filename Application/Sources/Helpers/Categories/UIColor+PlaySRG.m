@@ -45,6 +45,11 @@
     return [UIColor srg_colorFromHexadecimalString:@"#979797"];
 }
 
++ (UIColor *)play_greenColor
+{
+    return [UIColor srg_colorFromHexadecimalString:@"#347368"];
+}
+
 + (UIColor *)play_orangeColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#df5200"];

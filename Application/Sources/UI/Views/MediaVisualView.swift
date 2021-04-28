@@ -30,6 +30,12 @@ struct MediaVisualView: View {
             ImageView(url: media?.imageUrl(for: scale))
             BlockingOverlay(media: media)
             
+            if let media = media {
+                AvailabilityBadge(media: media)
+                    .padding([.leading, .top], LayoutBadgeTopLeadingPadding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }
+            
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {
                     Image("360_media-25")
@@ -71,7 +77,8 @@ struct MediaVisualView_Previews: PreviewProvider {
             MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
             MediaVisualView(media: Mock.media(.blocked), scale: .small)
         }
-        .frame(width: 500, height: 500)
+        .frame(width: 500, height: .infinity)
+        .aspectRatio(16 / 9, contentMode: .fit)
         .previewLayout(.sizeThatFits)
     }
 }
