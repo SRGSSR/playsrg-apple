@@ -6,15 +6,14 @@
 
 import SwiftUI
 
-// TODO: Merge with FeaturedShowCell
-struct FeaturedMediaCell: View {
-    enum Layout {
-        case hero
-        case highlight
-    }
-    
-    let media: SRGMedia?
-    let layout: Layout
+enum FeaturedContentLayout {
+    case hero
+    case highlight
+}
+
+struct FeaturedContentCell<Content: FeaturedContent>: View {
+    let content: Content
+    let layout: FeaturedContentLayout
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -28,7 +27,7 @@ struct FeaturedMediaCell: View {
         #endif
     }
     
-    private var descriptionAlignment: FeaturedDescriptionView.Alignment {
+    private var descriptionAlignment: FeaturedDescriptionView<Content>.Alignment {
         if direction == .vertical {
             return .topLeading
         }
@@ -39,46 +38,50 @@ struct FeaturedMediaCell: View {
     
     var body: some View {
         #if os(tvOS)
-        ExpandingCardButton(action: action) {
+        ExpandingCardButton(action: content.action) {
             HStack(spacing: 0) {
-                MediaVisualView(media: media, scale: .large)
+                content.visualView()
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .layoutPriority(1)
-                FeaturedDescriptionView(media: media, alignment: descriptionAlignment)
+                FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
             }
             .background(Color(.play_cardGrayBackground))
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
-            .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
+            .accessibilityOptionalLabel(content.accessibilityLabel)
             .accessibility(addTraits: .isButton)
-            .redactedIfNil(media)
+            .redacted(reason: content.isPlaceholder ? .placeholder : .init())
         }
         #else
         Stack(direction: direction, spacing: 0) {
-            MediaVisualView(media: media, scale: .large)
+            content.visualView()
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .layoutPriority(1)
-            FeaturedDescriptionView(media: media, alignment: descriptionAlignment)
+            FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
         }
         .background(Color(.play_cardGrayBackground))
         .cornerRadius(LayoutStandardViewCornerRadius)
         .accessibilityElement()
-        .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
-        .redactedIfNil(media)
+        .accessibilityOptionalLabel(content.accessibilityLabel)
+        .redacted(reason: content.isPlaceholder ? .placeholder : .init())
         #endif
     }
-    
-    #if os(tvOS)
-    private func action() {
-        if let media = media {
-            navigateToMedia(media)
-        }
+}
+
+extension FeaturedContentCell where Content == FeaturedMediaContent {
+    init(media: SRGMedia?, layout: FeaturedContentLayout) {
+        self.init(content: FeaturedMediaContent(media: media), layout: layout)
     }
-    #endif
+}
+
+extension FeaturedContentCell where Content == FeaturedShowContent {
+    init(show: SRGShow?, layout: FeaturedContentLayout) {
+        self.init(content: FeaturedShowContent(show: show), layout: layout)
+    }
 }
 
 private extension View {
-    static private func size(for layout: FeaturedMediaCell.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+    static private func size(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         let itemType: LayoutCollectionItemType = (layout == .hero) ? .hero : .highlight
         let width = LayoutCollectionItemFeaturedWidth(layoutWidth, itemType)
         return LayoutCollectionItemSize(width, itemType, horizontalSizeClass)
@@ -92,37 +95,37 @@ private extension View {
         #endif
     }
     
-    func previewLayout(for layout: FeaturedMediaCell.Layout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+    func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size = Self.size(for: layout, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
         return self.previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }
 }
 
-struct FeaturedMediaCell_Previews: PreviewProvider {
+struct FeaturedContentCell_Previews: PreviewProvider {
     static let kind: Mock.Media = .standard
     
     static var previews: some View {
         #if os(tvOS)
-        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         
-        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedMediaCell(media: Mock.media(kind), layout: .hero)
+        FeaturedContentCell(media: Mock.media(kind), layout: .hero)
             .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
-        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedMediaCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif

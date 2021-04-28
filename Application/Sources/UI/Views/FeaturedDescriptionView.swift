@@ -6,27 +6,15 @@
 
 import SwiftUI
 
-protocol FeaturedContent {
-    var introduction: String? { get }
-    var title: String? { get }
-    var summary: String? { get }
-    var tags: [FeaturedDescriptionView.Tag] { get }
-}
-
 /// Behavior: h-exp, v-exp
-struct FeaturedDescriptionView: View {
+struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     enum Alignment {
         case leading
         case topLeading
         case center
     }
     
-    struct Tag {
-        let text: String
-        let color: UIColor
-    }
-    
-    let content: FeaturedContent
+    let content: Content
     let alignment: Alignment
     
     private var stackAlignment: HorizontalAlignment {
@@ -69,55 +57,15 @@ struct FeaturedDescriptionView: View {
     }
 }
 
-extension FeaturedDescriptionView {
-    struct MediaContent: FeaturedContent {
-        let media: SRGMedia?
-        
-        var introduction: String? {
-            return MediaDescription.title(for: media, style: .show)
-        }
-        
-        var title: String? {
-            return MediaDescription.subtitle(for: media, style: .show)
-        }
-        
-        var summary: String? {
-            return MediaDescription.summary(for: media)
-        }
-        
-        var tags: [FeaturedDescriptionView.Tag] {
-            return []
-        }
-    }
-    
+extension FeaturedDescriptionView where Content == FeaturedMediaContent {
     init(media: SRGMedia?, alignment: Alignment) {
-        self.init(content: MediaContent(media: media), alignment: alignment)
+        self.init(content: FeaturedMediaContent(media: media), alignment: alignment)
     }
 }
 
-extension FeaturedDescriptionView {
-    struct ShowContent: FeaturedContent {
-        let show: SRGShow?
-        
-        var introduction: String? {
-            return nil
-        }
-        
-        var title: String? {
-            return show?.title
-        }
-        
-        var summary: String? {
-            return show?.summary
-        }
-        
-        var tags: [FeaturedDescriptionView.Tag] {
-            return []
-        }
-    }
-    
+extension FeaturedDescriptionView where Content == FeaturedShowContent {
     init(show: SRGShow?, alignment: Alignment) {
-        self.init(content: ShowContent(show: show), alignment: alignment)
+        self.init(content: FeaturedShowContent(show: show), alignment: alignment)
     }
 }
 
