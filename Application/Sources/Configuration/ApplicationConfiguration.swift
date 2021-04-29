@@ -5,7 +5,7 @@
 //
 
 extension ApplicationConfiguration {
-    private static func liveConfiguredSectionType(from homeSection: HomeSection) -> ConfiguredSection.`Type`? {
+    private static func configuredSectionType(from homeSection: HomeSection) -> ConfiguredSection.`Type`? {
         switch homeSection {
         case .tvLive:
             return .tvLive
@@ -22,12 +22,22 @@ extension ApplicationConfiguration {
         }
     }
     
+    private static func contentPresentationType(from homeSection: HomeSection) -> SRGContentPresentationType {
+        switch homeSection {
+        case .tvLive, .radioLive, .radioLiveSatellite:
+            return .livestreams
+        default:
+            return .swimlane
+        }
+    }
+    
     func liveConfiguredSections() -> [ConfiguredSection] {
         var configuredSections = [ConfiguredSection]()
         for homeSection in liveHomeSections {
             if let homeSection = HomeSection(rawValue: homeSection.intValue),
-               let configuratedSectionType = Self.liveConfiguredSectionType(from: homeSection) {
-                configuredSections.append(ConfiguredSection(type: configuratedSectionType, contentPresentationType: .livestreams))
+               let configuratedSectionType = Self.configuredSectionType(from: homeSection) {
+                let contentPresentationType = Self.contentPresentationType(from: homeSection)
+                configuredSections.append(ConfiguredSection(type: configuratedSectionType, contentPresentationType: contentPresentationType))
             }
         }
         return configuredSections

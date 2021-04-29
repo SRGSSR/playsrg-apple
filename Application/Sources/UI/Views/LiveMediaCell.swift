@@ -6,31 +6,11 @@
 import SwiftUI
 
 struct LiveMediaCell: View, LiveMedia {
-    enum Layout {
-        case overprint
-        case vertical
-    }
-    
     let media: SRGMedia?
-    let layout: Layout
     
     @State var programComposition: SRGProgramComposition?
     @State private var channelObserver: Any?
     @State private var date = Date()
-    @State private var isFocused = false
-    
-    private var accessibilityLabel: String? {
-        if let channel = channel {
-            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
-            if let currentProgram = program(at: Date()) {
-                label.append(", \(currentProgram.title)")
-            }
-            return label
-        }
-        else {
-            return MediaDescription.accessibilityLabel(for: media)
-        }
-    }
     
     private func registerForChannelUpdates() {
         guard let media = media,
@@ -38,6 +18,7 @@ struct LiveMediaCell: View, LiveMedia {
               media.contentType == .livestream else { return }
         channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { composition in
             programComposition = composition
+            // TODO: Bad date updates. Use timer publisher
             date = Date()
         }
     }
@@ -47,31 +28,21 @@ struct LiveMediaCell: View, LiveMedia {
     }
     
     var body: some View {
-        GeometryReader { geometry in
+        Group {
             #if os(tvOS)
-            LabeledCardButton(action: action) {
-                VisualView(media: media, programComposition: programComposition, date: date, layout: .vertical)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                    .onParentFocusChange { isFocused = $0 }
+            ExpandingCardButton(action: action) {
+                VisualView(media: media, programComposition: programComposition, date: date)
+                    .aspectRatio(16 / 9, contentMode: .fit)
                     .accessibilityElement()
-                    .accessibilityOptionalLabel(accessibilityLabel)
+                    .accessibilityOptionalLabel(accessibilityLabel(at: date))
                     .accessibility(addTraits: .isButton)
-            } label: {
-                DescriptionView(media: media, programComposition: programComposition, date: date)
-                    .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
-            VStack {
-                VisualView(media: media, programComposition: programComposition, date: date, layout: layout)
-                    .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
-                    .cornerRadius(LayoutStandardViewCornerRadius)
-                if layout == .vertical {
-                    DescriptionView(media: media, programComposition: programComposition, date: date)
-                        .frame(width: geometry.size.width, alignment: .leading)
-                }
-            }
-            .accessibilityElement()
-            .accessibilityOptionalLabel(accessibilityLabel)
+            VisualView(media: media, programComposition: programComposition, date: date)
+                .aspectRatio(16 / 9, contentMode: .fit)
+                .cornerRadius(LayoutStandardViewCornerRadius)
+                .accessibilityElement()
+                .accessibilityOptionalLabel(accessibilityLabel(at: date))
             #endif
         }
         .redactedIfNil(media)
@@ -91,30 +62,17 @@ struct LiveMediaCell: View, LiveMedia {
     }
     #endif
     
+    /// Behavior: h-exp, v-exp
     private struct VisualView: View, LiveMedia {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
         let date: Date
-        let layout: Layout
         
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl(at: date, for: .small))
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.6))
-                VStack {
-                    if let logoImage = logoImage {
-                        Image(uiImage: logoImage)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    }
-                    #if os(iOS)
-                    if layout == .overprint {
-                        DescriptionView(media: media, programComposition: programComposition, date: date)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                    }
-                    #endif
-                }
-                .padding()
+                Color(white: 0, opacity: 0.6)
+                DescriptionView(media: media, programComposition: programComposition, date: date)
                 BlockingOverlay(media: media)
                 
                 if let progress = progress(at: date) {
@@ -127,6 +85,7 @@ struct LiveMediaCell: View, LiveMedia {
         }
     }
     
+    /// Behavior: h-exp, v-exp
     private struct DescriptionView: View, LiveMedia {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
@@ -134,6 +93,10 @@ struct LiveMediaCell: View, LiveMedia {
         
         var body: some View {
             VStack(alignment: .leading) {
+                if let logoImage = logoImage {
+                    Image(uiImage: logoImage)
+                }
+                
                 Text(title(at: date))
                     .srgFont(.subtitle)
                     .lineLimit(2)
@@ -144,6 +107,17 @@ struct LiveMediaCell: View, LiveMedia {
                         .lineLimit(2)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
+    }
+}
+
+struct LiveMediaCell_Previews: PreviewProvider {
+    static private let liveMedia = Mock.liveMedia()
+    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .liveMediaGrid, .regular)
+    
+    static var previews: some View {
+        LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

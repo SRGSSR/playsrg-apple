@@ -91,6 +91,7 @@ extension PageModel {
     enum SectionLayout: Hashable {
         case hero
         case highlight
+        case liveMediaGrid
         case mediaGrid
         case mediaSwimlane
         case showGrid
@@ -99,7 +100,6 @@ extension PageModel {
         
         @available(tvOS, unavailable)
         case showAccess
-        case liveMediaGrid
     }
     
     // Items can appear in several sections, which is why a section parameter must be provided for each of them so

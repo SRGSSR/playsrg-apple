@@ -127,7 +127,7 @@ class PageViewController: DataViewController {
                     let size = LayoutCollectionItemSize(width, .highlight, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .topicSelector:
-                    let size = LayoutTopicCollectionItemSize()
+                    let size = LayoutCollectionItemSize(LayoutTopicCellWidth, .topicSwimlane, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showSwimlane:
                     let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
@@ -136,7 +136,7 @@ class PageViewController: DataViewController {
                     let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showAccess:
-                    let size = LayoutShowAccessCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width)
+                    let size = LayoutCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width, .showAccess, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showGrid:
                     let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
@@ -193,7 +193,6 @@ class PageViewController: DataViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
             let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
-
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
             group.interItemSpacing = NSCollectionLayoutSpacing.fixed(LayoutStandardMargin)
             

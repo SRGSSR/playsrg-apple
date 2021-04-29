@@ -1779,16 +1779,16 @@
 		6FF9EC552626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
 		6FF9EC562626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
 		6FF9EC572626C9CD00A2E11A /* Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */; };
-		6FFA68332637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68342637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68352637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68362637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68372637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68382637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA68392637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA683A2637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA683B2637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
-		6FFA683C2637E99C00BCDA06 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* MockData.swift */; };
+		6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68342637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68352637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68362637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68372637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68382637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA68392637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA683A2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA683B2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
+		6FFA683C2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
 		6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
@@ -2622,7 +2622,7 @@
 		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
 		6FF8F155250609CF009A741F /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
 		6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
-		6FFA68322637E99C00BCDA06 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		6FFA68322637E99C00BCDA06 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
 		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTracker.swift; sourceTree = "<group>"; };
@@ -4125,7 +4125,7 @@
 			children = (
 				6F49EF92263A9F2200ED96D2 /* LiveMedia.swift */,
 				6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */,
-				6FFA68322637E99C00BCDA06 /* MockData.swift */,
+				6FFA68322637E99C00BCDA06 /* Mock.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -7371,7 +7371,7 @@
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6FF7BBA122A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
-				6FFA68332637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F4855A91E3A38D600B0141C /* SRGLetterboxDesignables.m in Sources */,
@@ -7574,7 +7574,7 @@
 				6FACC325262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
-				6FFA68342637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68342637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -7764,7 +7764,7 @@
 				6FACC326262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
-				6FFA68352637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68352637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -7954,7 +7954,7 @@
 				6FACC327262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BA1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
-				6FFA68362637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68362637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -8144,7 +8144,7 @@
 				6FACC328262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BB1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
-				6FFA68372637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68372637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
@@ -8333,7 +8333,7 @@
 				6F426B142567FC6F00DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAA256E419F00E42E31 /* History.m in Sources */,
 				6FA14535254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FFA68382637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68382637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413F724EF0DEA00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7AF2567ED2A00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8434,7 +8434,7 @@
 				6F426B292567FC7000DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAB256E419F00E42E31 /* History.m in Sources */,
 				6FA14536254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FFA68392637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA68392637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413F824EF0DEB00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C42567ED2B00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8535,7 +8535,7 @@
 				6F426B2A2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAC256E41A000E42E31 /* History.m in Sources */,
 				6FA14537254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FFA683A2637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA683A2637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413F924EF0DEC00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7C52567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8636,7 +8636,7 @@
 				6F426B2B2567FC7100DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F61CCAD256E41A000E42E31 /* History.m in Sources */,
 				6FA14538254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FFA683B2637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA683B2637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413FA24EF0DED00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DA2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */,
@@ -8737,7 +8737,7 @@
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
-				6FFA683C2637E99C00BCDA06 /* MockData.swift in Sources */,
+				6FFA683C2637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
 				6F85F7DB2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */,

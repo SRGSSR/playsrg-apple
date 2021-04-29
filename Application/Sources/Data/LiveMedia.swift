@@ -52,6 +52,19 @@ extension LiveMedia {
         }
     }
     
+    func accessibilityLabel(at date: Date) -> String? {
+        if let channel = channel {
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
+            if let currentProgram = program(at: date) {
+                label.append(", \(currentProgram.title)")
+            }
+            return label
+        }
+        else {
+            return MediaDescription.accessibilityLabel(for: media)
+        }
+    }
+    
     func imageUrl(at date: Date, for scale: ImageScale) -> URL? {
         if let channel = channel {
             return program(at: date)?.imageUrl(for: scale) ?? channel.imageUrl(for: scale)

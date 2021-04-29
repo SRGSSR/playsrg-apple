@@ -56,6 +56,9 @@ OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
 /**
  *  Layout collection item types
  */
+// TODO: Possible to reduce the number of types? To describe the layout (e.g. card, cell with text, 16/9, I don't know yet)
+//       instead of purpose? Also to have a single sizing function called from page view controller layout, with parameters
+//       type, layout width, size class => move section <-> relationship table to page model types
 typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
     /**
      *  Hero layout.
@@ -76,7 +79,15 @@ typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
     /**
      *  Live media grid layout (iOS).
      */
-    LayoutCollectionItemTypeLiveMediaGrid
+    LayoutCollectionItemTypeLiveMediaGrid,
+    /**
+     *  Topic swimlane layout.
+     */
+    LayoutCollectionItemTypeTopicSwimlane,
+    /**
+     *  Show access layout.
+     */
+    LayoutCollectionItemTypeShowAccess
 };
 
 /**
@@ -138,15 +149,5 @@ OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFlo
  *  @param horizontalSizeClass The horizontal size class.
  */
 OBJC_EXPORT CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass);
-
-/**
- *  Topic cell (16:9 artwork) size for collection layouts.
- */
-OBJC_EXPORT CGSize LayoutTopicCollectionItemSize(void);
-
-/**
- *  Show access cell size for collection layouts.
- */
-OBJC_EXPORT CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth);
 
 NS_ASSUME_NONNULL_END

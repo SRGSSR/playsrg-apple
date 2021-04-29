@@ -19,15 +19,7 @@ extension PageViewController {
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             }
             else if section.properties.presentationType == .livestreams {
-                if section.properties.layout == .liveMediaGrid {
-                    LiveMediaCell(media: media, layout: .overprint)
-                }
-                else if let media = media, media.contentType == .livestream || media.contentType == .scheduledLivestream {
-                    LiveMediaCell(media: media, layout: .vertical)
-                }
-                else {
-                    MediaCell(media: media, layout: .vertical)
-                }
+                LiveMediaCell(media: media)
             }
             else if section.properties.layout == .mediaGrid {
                 MediaCell(media: media)

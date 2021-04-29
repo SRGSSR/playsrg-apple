@@ -23,8 +23,7 @@ struct MediaDetailView: View {
     var body: some View {
         ZStack {
             ImageView(url: imageUrl)
-            Rectangle()
-                .fill(Color(white: 0, opacity: 0.6))
+            Color(white: 0, opacity: 0.6)
             VStack {
                 DescriptionView(model: model)
                     .padding([.top, .horizontal], 100)
@@ -215,8 +214,7 @@ struct MediaDetailView: View {
             ZStack {
                 if !model.relatedMedias.isEmpty {
                     ZStack {
-                        Rectangle()
-                            .fill(Color(.srg_color(fromHexadecimalString: "#222222")!))
+                        Color(.srg_color(fromHexadecimalString: "#222222")!)
                             .opacity(0.8)
                         ZStack {
                             Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))
@@ -246,8 +244,7 @@ struct MediaDetailView: View {
                     }
                 }
                 else {
-                    Rectangle()
-                        .fill(Color.clear)
+                    Color.clear
                 }
             }
         }

@@ -75,10 +75,12 @@ CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth, LayoutCollectionI
             return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing - kSupplementaryHorizontalPadding;
             break;
         }
+            
         case LayoutCollectionItemTypeHighlight: {
             return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
             break;
         }
+            
         default: {
             return LayoutStandardCellWidth;
             break;
@@ -205,10 +207,12 @@ CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollection
             return CGSizeMake(itemWidth, 680.f);
             break;
         }
+            
         case LayoutCollectionItemTypeHighlight: {
             return CGSizeMake(itemWidth, 480.f);
             break;
         }
+            
         default: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
@@ -221,21 +225,18 @@ CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollection
             return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 3.f / 5.f * 9.f / 16.f);
             break;
         }
+            
         case LayoutCollectionItemTypeHighlight: {
             return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 2.f / 5.f * 9.f / 16.f);
             break;
         }
+            
         default: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, true);
             break;
         }
     }
 #endif
-}
-
-CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth)
-{
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + 11.f));
 }
 
 CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
@@ -288,27 +289,26 @@ CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType coll
             return LayoutMediaFeaturedCollectionItemSize(itemWidth, collectionItemType, horizontalSizeClass);
             break;
         }
+            
         case LayoutCollectionItemTypeShowSwimlaneOrGrid: {
             return LayoutShowStandardCollectionItemSize(itemWidth, false);
             break;
         }
+            
         case LayoutCollectionItemTypeMediaSwimlaneOrGrid: {
             return LayoutMediaStandardCollectionItemSize(itemWidth, false);
             break;
         }
-        case LayoutCollectionItemTypeLiveMediaGrid: {
-            return LayoutLiveMediaStandardCollectionItemSize(itemWidth);
+            
+        case LayoutCollectionItemTypeLiveMediaGrid:
+        case LayoutCollectionItemTypeTopicSwimlane: {
+            return CGSizeMake(itemWidth, itemWidth * 9.f / 16.f);
+            break;
+        }
+        
+        case LayoutCollectionItemTypeShowAccess: {
+            return CGSizeMake(itemWidth - 2 * LayoutStandardMargin, 50.f);
             break;
         }
     }
-}
-
-CGSize LayoutTopicCollectionItemSize(void)
-{
-    return CGSizeMake(LayoutTopicCellWidth, LayoutTopicCellWidth * 9.f / 16.f);
-}
-
-CGSize LayoutShowAccessCollectionItemSize(CGFloat itemWidth)
-{
-    return CGSizeMake(itemWidth - 2 * LayoutStandardMargin, 50.f);
 }

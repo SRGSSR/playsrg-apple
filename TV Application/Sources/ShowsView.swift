@@ -103,8 +103,7 @@ struct ShowsView: View {
             } supplementaryView: { _, indexPath, _, _ in
                 switch model.state {
                 case .loading, .failed:
-                    Rectangle()
-                        .fill(Color.clear)
+                    Color.clear
                 case let .loaded(alphabeticalShows: alphabeticalShows):
                     let character = alphabeticalShows[indexPath.section].character
                     let title = (character == "#") ? "#0-9" : String(character)

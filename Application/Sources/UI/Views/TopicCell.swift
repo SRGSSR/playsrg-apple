@@ -40,8 +40,7 @@ struct TopicCell: View {
             ZStack {
                 ImageView(url: topic?.imageUrl(for: .small))
                     .aspectRatio(16 / 9, contentMode: .fit)
-                Rectangle()
-                    .fill(Color(white: 0, opacity: 0.2))
+                Color(white: 0, opacity: 0.2)
                 Text(topic?.title ?? "")
                     .srgFont(.overline)
                     .lineLimit(1)
@@ -54,7 +53,7 @@ struct TopicCell: View {
 }
 
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = LayoutTopicCollectionItemSize()
+    static private let size = LayoutCollectionItemSize(LayoutTopicCellWidth, .topicSwimlane, .regular)
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())
