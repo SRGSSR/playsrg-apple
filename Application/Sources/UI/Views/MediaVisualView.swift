@@ -15,9 +15,26 @@ struct MediaVisualView: View {
     @State private var progress: Double = 0
     @State private var taskHandle: String?
     
+    @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
+    @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
+    
+    @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
+    
     private var youthProtectionLogoImage: UIImage? {
         guard let youthProtectionColor = media?.youthProtectionColor else { return nil }
         return YouthProtectionImageForColor(youthProtectionColor)
+    }
+    
+    private var canDisplaySubtitleAvailability: Bool {
+        guard !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden else { return false }
+        
+        return isVoiceOverRunning || isSubtitleAvailabilityDisplayed
+    }
+    
+    private var canDisplayAudioDescriptionAvailability: Bool {
+        guard !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden else { return false }
+        
+        return isVoiceOverRunning || isAudioDescriptionAvailabilityDisplayed
     }
     
     private func updateProgress() {
@@ -42,10 +59,10 @@ struct MediaVisualView: View {
                         .foregroundColor(.white)
                 }
                 Spacer()
-                if let media = media, media.play_isAudioDescriptionAvailable {
+                if canDisplayAudioDescriptionAvailability, let media = media, media.play_isAudioDescriptionAvailable {
                     AudioDescriptionBadge()
                 }
-                if let media = media, media.play_areSubtitlesAvailable {
+                if canDisplaySubtitleAvailability, let media = media, media.play_areSubtitlesAvailable {
                     SubtitlesBadge()
                 }
                 if let youthProtectionLogoImage = youthProtectionLogoImage {
@@ -76,15 +93,23 @@ struct MediaVisualView: View {
 }
 
 struct MediaVisualView_Previews: PreviewProvider {
+    static func setUserDefaults() -> Bool {
+        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingSubtitleAvailabilityDisplayed)
+        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)
+        return true
+    }
+    
     static var previews: some View {
-        Group {
-            MediaVisualView(media: Mock.media(.standard), scale: .small)
-            MediaVisualView(media: Mock.media(.rich), scale: .small)
-            MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
-            MediaVisualView(media: Mock.media(.blocked), scale: .small)
+        if setUserDefaults() {
+            Group {
+                MediaVisualView(media: Mock.media(.standard), scale: .small)
+                MediaVisualView(media: Mock.media(.rich), scale: .small)
+                MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
+                MediaVisualView(media: Mock.media(.blocked), scale: .small)
+            }
+            .frame(width: 500, height: .infinity)
+            .aspectRatio(4 / 3, contentMode: .fit)
+            .previewLayout(.sizeThatFits)
         }
-        .frame(width: 500, height: .infinity)
-        .aspectRatio(16 / 9, contentMode: .fit)
-        .previewLayout(.sizeThatFits)
     }
 }
