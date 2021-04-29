@@ -22,7 +22,7 @@ struct DurationLabel: View {
                 .foregroundColor(.white)
                 .padding(.vertical, 5)
                 .padding(.horizontal, 8)
-                .background(Color(white: 0, opacity: 0.5))
+                .background(Color(.play_blackDurationLabelBackground))
                 .cornerRadius(4)
         }
     }

@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGDataProviderModel
 import SwiftUI
 
 struct Badge: View {
@@ -19,6 +18,32 @@ struct Badge: View {
             .padding(.vertical, 5)
             .padding(.horizontal, 8)
             .background(color)
+            .cornerRadius(4)
+    }
+}
+
+struct SubtitlesBadge: View {
+    var body: some View {
+        Text("ST")
+            .srgFont(.caption)
+            .lineLimit(1)
+            .foregroundColor(.black)
+            .padding(.vertical, 5)
+            .padding(.horizontal, 8)
+            .background(Color(.play_whiteBadge))
+            .cornerRadius(4)
+    }
+}
+
+struct AudioDescriptionBadge: View {
+    var body: some View {
+        Text("AD")
+            .srgFont(.caption)
+            .lineLimit(1)
+            .foregroundColor(.black)
+            .padding(.vertical, 5)
+            .padding(.horizontal, 8)
+            .background(Color(.play_whiteBadge))
             .cornerRadius(4)
     }
 }

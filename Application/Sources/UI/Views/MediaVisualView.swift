@@ -42,6 +42,12 @@ struct MediaVisualView: View {
                         .foregroundColor(.white)
                 }
                 Spacer()
+                if let media = media, media.play_isAudioDescriptionAvailable {
+                    AudioDescriptionBadge()
+                }
+                if let media = media, media.play_areSubtitlesAvailable {
+                    SubtitlesBadge()
+                }
                 if let youthProtectionLogoImage = youthProtectionLogoImage {
                     Image(uiImage: youthProtectionLogoImage)
                 }
