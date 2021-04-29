@@ -116,11 +116,6 @@ struct LiveMediaCell: View, LiveMedia {
                 }
                 .padding()
                 BlockingOverlay(media: media)
-                if let media = media, media.timeAvailability(at: Date()) == .notYetAvailable {
-                    Badge(text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), color: Color(.play_gray))
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                        .padding([.top, .leading], 8)
-                }
                 
                 if let progress = progress(at: date) {
                     ProgressBar(value: progress)
