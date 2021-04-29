@@ -5,22 +5,7 @@
 //
 import SwiftUI
 
-protocol LiveMediaData {
-    var media: SRGMedia? { get }
-    var programComposition: SRGProgramComposition? { get }
-}
-
-extension LiveMediaData {
-    var channel: SRGChannel? {
-        return programComposition?.channel ?? media?.channel
-    }
-    
-    func program(at date: Date) -> SRGProgram? {
-        return programComposition?.play_program(at: date)
-    }
-}
-
-struct LiveMediaCell: View, LiveMediaData {
+struct LiveMediaCell: View, LiveMedia {
     enum Layout {
         case overprint
         case vertical
@@ -33,10 +18,6 @@ struct LiveMediaCell: View, LiveMediaData {
     @State private var channelObserver: Any?
     @State private var date = Date()
     @State private var isFocused = false
-    
-    private var redactionReason: RedactionReasons {
-        return media == nil ? .placeholder : .init()
-    }
     
     private var accessibilityLabel: String? {
         if let channel = channel {
@@ -93,7 +74,7 @@ struct LiveMediaCell: View, LiveMediaData {
             .accessibilityOptionalLabel(accessibilityLabel)
             #endif
         }
-        .redacted(reason: redactionReason)
+        .redactedIfNil(media)
         .onAppear {
             registerForChannelUpdates()
         }
@@ -110,54 +91,15 @@ struct LiveMediaCell: View, LiveMediaData {
     }
     #endif
     
-    private struct VisualView: View, LiveMediaData {
+    private struct VisualView: View, LiveMedia {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
         let date: Date
         let layout: Layout
         
-        private var imageUrl: URL? {
-            let width = SizeForImageScale(.small).width
-            if let channel = channel {
-                return program(at: date)?.imageURL(for: .width, withValue: width, type: .default) ?? channel.imageURL(for: .width, withValue: width, type: .default)
-            }
-            else {
-                return media?.imageURL(for: .width, withValue: width, type: .default)
-            }
-        }
-        
-        private var logoImage: UIImage? {
-            if let channel = channel {
-                #if os(tvOS)
-                return channel.play_logo60Image
-                #else
-                return channel.play_logo32Image
-                #endif
-            }
-            else {
-                return nil
-            }
-        }
-        
-        private var progress: Double? {
-            if channel != nil {
-                guard let currentProgram = program(at: date) else { return 0 }
-                return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
-            }
-            else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
-                    let startDate = media.startDate,
-                    let endDate = media.endDate {
-                let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
-                return progress.clamped(to: 0...1)
-            }
-            else {
-                return nil
-            }
-        }
-        
         var body: some View {
             ZStack {
-                ImageView(url: imageUrl)
+                ImageView(url: imageUrl(at: date, for: .small))
                 Rectangle()
                     .fill(Color(white: 0, opacity: 0.6))
                 VStack {
@@ -180,7 +122,7 @@ struct LiveMediaCell: View, LiveMediaData {
                         .padding([.top, .leading], 8)
                 }
                 
-                if let progress = progress {
+                if let progress = progress(at: date) {
                     ProgressBar(value: progress)
                         .opacity(progress != 0 ? 1 : 0)
                         .frame(height: LayoutProgressBarHeight)
@@ -190,39 +132,18 @@ struct LiveMediaCell: View, LiveMediaData {
         }
     }
     
-    private struct DescriptionView: View, LiveMediaData {
+    private struct DescriptionView: View, LiveMedia {
         let media: SRGMedia?
         let programComposition: SRGProgramComposition?
         let date: Date
         
-        private var title: String {
-            if let channel = channel {
-                return program(at: date)?.title ?? channel.title
-            }
-            else {
-                return MediaDescription.title(for: media) ?? ""
-            }
-        }
-        
-        private var subtitle: String? {
-            if let media = media, media.contentType == .scheduledLivestream {
-                return MediaDescription.subtitle(for: media)
-            }
-            else {
-                guard let currentProgram = program(at: date) else { return nil }
-                let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
-                let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
-                return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
-            }
-        }
-        
         var body: some View {
             VStack(alignment: .leading) {
-                Text(title)
+                Text(title(at: date))
                     .srgFont(.subtitle)
                     .lineLimit(2)
                 
-                if let subtitle = subtitle {
+                if let subtitle = subtitle(at: date) {
                     Text(subtitle)
                         .srgFont(.overline)
                         .lineLimit(2)
