@@ -68,11 +68,7 @@ struct LiveMediaCell: View, LiveMediaData {
     var body: some View {
         GeometryReader { geometry in
             #if os(tvOS)
-            LabeledCardButton(action: {
-                if let media = media {
-                    navigateToMedia(media, play: true)
-                }
-            }) {
+            LabeledCardButton(action: action) {
                 VisualView(media: media, programComposition: programComposition, date: date, layout: .vertical)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .onParentFocusChange { isFocused = $0 }
@@ -80,18 +76,14 @@ struct LiveMediaCell: View, LiveMediaData {
                     .accessibilityOptionalLabel(accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             } label: {
-                VStack {
-                    ProgressView(media: media, programComposition: programComposition, date: date)
-                    DescriptionView(media: media, programComposition: programComposition, date: date)
-                        .frame(width: geometry.size.width, alignment: .leading)
-                }
+                DescriptionView(media: media, programComposition: programComposition, date: date)
+                    .frame(width: geometry.size.width, alignment: .leading)
             }
             #else
             VStack {
                 VisualView(media: media, programComposition: programComposition, date: date, layout: layout)
                     .frame(width: geometry.size.width, height: geometry.size.width * 9 / 16)
                     .cornerRadius(LayoutStandardViewCornerRadius)
-                ProgressView(media: media, programComposition: programComposition, date: date)
                 if layout == .vertical {
                     DescriptionView(media: media, programComposition: programComposition, date: date)
                         .frame(width: geometry.size.width, alignment: .leading)
@@ -109,6 +101,14 @@ struct LiveMediaCell: View, LiveMediaData {
             unregisterChannelUpdates()
         }
     }
+    
+    #if os(tvOS)
+    private func action() {
+        if let media = media {
+            navigateToMedia(media, play: true)
+        }
+    }
+    #endif
     
     private struct VisualView: View, LiveMediaData {
         let media: SRGMedia?
@@ -139,6 +139,22 @@ struct LiveMediaCell: View, LiveMediaData {
             }
         }
         
+        private var progress: Double? {
+            if channel != nil {
+                guard let currentProgram = program(at: date) else { return 0 }
+                return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+            }
+            else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
+                    let startDate = media.startDate,
+                    let endDate = media.endDate {
+                let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
+                return progress.clamped(to: 0...1)
+            }
+            else {
+                return nil
+            }
+        }
+        
         var body: some View {
             ZStack {
                 ImageView(url: imageUrl)
@@ -162,6 +178,13 @@ struct LiveMediaCell: View, LiveMediaData {
                     Badge(text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), color: Color(.play_gray))
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                         .padding([.top, .leading], 8)
+                }
+                
+                if let progress = progress {
+                    ProgressBar(value: progress)
+                        .opacity(progress != 0 ? 1 : 0)
+                        .frame(height: LayoutProgressBarHeight)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
             }
         }
@@ -204,36 +227,6 @@ struct LiveMediaCell: View, LiveMediaData {
                         .srgFont(.overline)
                         .lineLimit(2)
                 }
-            }
-        }
-    }
-    
-    private struct ProgressView: View, LiveMediaData {
-        let media: SRGMedia?
-        let programComposition: SRGProgramComposition?
-        let date: Date
-        
-        private var progress: Double? {
-            if channel != nil {
-                guard let currentProgram = program(at: date) else { return 1 }
-                return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
-            }
-            else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
-                    let startDate = media.startDate,
-                    let endDate = media.endDate {
-                let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
-                return progress.clamped(to: 0...1)
-            }
-            else {
-                return nil
-            }
-        }
-        
-        var body: some View {
-            if let progress = progress {
-                ProgressBar(value: progress)
-                    .frame(maxWidth: .infinity, maxHeight: LayoutProgressBarHeight)
-                    .cornerRadius(4)
             }
         }
     }
