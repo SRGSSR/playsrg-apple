@@ -37,10 +37,8 @@ struct SubtitlesBadge: View {
 
 struct AudioDescriptionBadge: View {
     var body: some View {
-        Text("AD")
-            .srgFont(.caption)
-            .lineLimit(1)
-            .foregroundColor(.black)
+        Image("audio_description-14")
+            .colorInvert()
             .padding(.vertical, 5)
             .padding(.horizontal, 8)
             .background(Color(.play_whiteBadge))
