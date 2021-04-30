@@ -139,26 +139,11 @@ class PageViewController: DataViewController {
                     let size = LayoutCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width, .showAccess, layoutEnvironment.traitCollection.horizontalSizeClass)
                     return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .showGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
                 case .mediaGrid:
-                    // TODO: Layout.h API is probably not good enough, otherwise this check would be hidden. But maybe it would be
-                    //       better to have Layout.h only deliver layout values for types (hero, featured, compact, etc.), and
-                    //       to make the tests here to decide which cell should be used depending on the layout environment?
-                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardCellHeight))
-                    }
-                    else {
-                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                        let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-                    }
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
                 case .liveMediaGrid:
-                    let approximateWidth = (layoutEnvironment.container.effectiveContentSize.width < LayoutLiveMediaGridLargeBoundWidth) ? LayoutStandardCellWidth : LayoutLiveMediaGridLargeCellWidth
-                    let itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .liveMediaGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .estimated(100))
                 }
             }
             
@@ -166,19 +151,22 @@ class PageViewController: DataViewController {
                 switch section.properties.layout {
                 case .showGrid:
                     let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 case .mediaGrid:
                     if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
                         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                     }
                     else {
                         let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                        return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                        let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
+                        return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                     }
                 case .liveMediaGrid:
                     let approximateWidth = (layoutEnvironment.container.effectiveContentSize.width < LayoutLiveMediaGridLargeBoundWidth) ? LayoutStandardCellWidth : LayoutLiveMediaGridLargeCellWidth
                     let itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
+                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
+                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 }
