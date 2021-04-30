@@ -25,6 +25,7 @@ struct ShowCell: View {
                     .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(show: show)
+                    .frame(maxHeight: .infinity, alignment: .top)
             }
             #else
             Stack(direction: direction, spacing: 0) {
@@ -36,6 +37,7 @@ struct ShowCell: View {
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
             .accessibilityOptionalLabel(show?.title)
+            .frame(maxHeight: .infinity, alignment: .top)
             #endif
         }
         .redactedIfNil(show)
@@ -49,6 +51,7 @@ struct ShowCell: View {
     }
     #endif
     
+    /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         let show: SRGShow?
         
@@ -62,7 +65,7 @@ struct ShowCell: View {
 }
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, .regular)
+    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 29)
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard))

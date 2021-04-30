@@ -84,3 +84,25 @@ extension UIHostingController {
         }
     }
 }
+
+extension NSCollectionLayoutSection {
+    static func horizontal(cellSize: CGSize) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .absolute(cellSize.height))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        return NSCollectionLayoutSection(group: group)
+    }
+    
+    static func grid(cellSize: CGSize) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .fractionalHeight(1))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(cellSize.height))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        return NSCollectionLayoutSection(group: group)
+    }
+}

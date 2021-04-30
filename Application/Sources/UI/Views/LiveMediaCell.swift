@@ -115,7 +115,7 @@ struct LiveMediaCell: View, LiveMedia {
 
 struct LiveMediaCell_Previews: PreviewProvider {
     static private let liveMedia = Mock.liveMedia()
-    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .liveMediaGrid, .regular)
+    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 70)
     
     static var previews: some View {
         LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)

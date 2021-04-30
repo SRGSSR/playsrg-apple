@@ -54,43 +54,6 @@ OBJC_EXPORT const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets;
 OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
 
 /**
- *  Layout collection item types
- */
-// TODO: Possible to reduce the number of types? To describe the layout (e.g. card, cell with text, 16/9, I don't know yet)
-//       instead of purpose? Also to have a single sizing function called from page view controller layout, with parameters
-//       type, layout width, size class => move section <-> relationship table to page model types
-typedef NS_ENUM(NSInteger, LayoutCollectionItemType) {
-    /**
-     *  Hero layout.
-     */
-    LayoutCollectionItemTypeHero = 0,
-    /**
-     *  Highlight layout.
-     */
-    LayoutCollectionItemTypeHighlight,
-    /**
-     *  Media swimlane layout.
-     */
-    LayoutCollectionItemTypeMediaSwimlaneOrGrid,
-    /**
-     *  Show swimlane layout.
-     */
-    LayoutCollectionItemTypeShowSwimlaneOrGrid,
-    /**
-     *  Live media grid layout (iOS).
-     */
-    LayoutCollectionItemTypeLiveMediaGrid,
-    /**
-     *  Topic swimlane layout.
-     */
-    LayoutCollectionItemTypeTopicSwimlane,
-    /**
-     *  Show access layout.
-     */
-    LayoutCollectionItemTypeShowAccess
-};
-
-/**
  *  Media badge padding.
  */
 OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
@@ -100,36 +63,33 @@ OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
  */
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
+/**
+ *  Return the size of a cell having the given width and aspect ratio, suited for display in horizontal layouts. An height
+ *  offset can be provided if more space is required vertically.
+ */
+OBJC_EXPORT CGSize LayoutHorizontalCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
 
 /**
- *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
- *  spacing between items.
+ *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required spacing. An
+ *  approximate width must be provided as a hint, so that the function can best determine the actual item size
+ *  best matching the desired result. A minimal number of columns can be provided (>= 1).
  *
- *  @param itemApproximateWidth The desired approximate width for items. The returned width might be smaller or bigger.
- *  @param layoutWidth          The total available width for layout.
- *  @param leadingInset         The leading layout inset.
- *  @param trailingInset        The trailing layout inset.
- *  @param spacing              The desired spacing.
+ *  As for `LayoutHorizontalCellSize`, an aspect ratio must be provided, as well as a height offset is more
+ *  space is required vertically.
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing);
+OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
 
 /**
- *  Calculate the width to apply to featured items in a collection. Featured items attempt occupying (almost) the full width
- *  of narrow layouts, but still have bounded (larger) size on wide layouts.
- *
- *  @param layoutWidth The total available width for layout.
+ *  Return the size of a hero cell (90% of the screen width, with different sizes for regular and compact layouts).
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth, LayoutCollectionItemType collectionItemType);
+OBJC_EXPORT CGSize LayoutHorizontalHeroCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass);
 
 /**
- *  Return the standard height for a collection section header title
+ *  Return the size of a highlight cell (100% of the screen width, with different sizes for regular and compact layouts).
  */
-OBJC_EXPORT CGFloat LayoutCollectionSectionHeaderTitleHeight(void);
+OBJC_EXPORT CGSize LayoutHorizontalHighlightCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass);
 
-/**
- *  Return the standard height for table view headers.
- */
-OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor);
+// TODO: Get rid of these somehow, or improve
 
 /**
  *  Return the standard height for simple table cells.
@@ -140,14 +100,5 @@ OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
  *  Return the height for a top-aligned table cell with given spacing.
  */
 OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems);
-
-/**
- *  Collection cell (16:9 artwork + text area) size for collection layouts, for a given item width and collection layout type.
- *
- *  @param itemWidth The width of the item.
- *  @param collectionItemType Collection item layout (e.g. hero, highlight or swimlanes).
- *  @param horizontalSizeClass The horizontal size class.
- */
-OBJC_EXPORT CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass);
 
 NS_ASSUME_NONNULL_END

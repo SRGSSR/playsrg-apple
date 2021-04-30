@@ -66,15 +66,16 @@ class PageViewController: DataViewController {
             func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
                 var height: CGFloat = 0
                 
+                // TODO: Layout constants?
                 if let title = section.properties.title, !title.isEmpty {
-                    height += LayoutCollectionSectionHeaderTitleHeight()
+                    height += 60
                 }
                 // TODO: Magic layout constant. Avoid
                 if let summary = section.properties.summary, !summary.isEmpty {
-                    height += (LayoutCollectionSectionHeaderTitleHeight() * 2 / 3).rounded(.up)
+                    height += (60 * 2 / 3).rounded(.up)
                 }
                 if let pageTitle = pageTitle, !pageTitle.isEmpty {
-                    height += LayoutCollectionSectionHeaderTitleHeight()
+                    height += 60
                 }
                 
                 return height != 0 ? height + LayoutStandardMargin : 0
@@ -90,97 +91,51 @@ class PageViewController: DataViewController {
                 return [header]
             }
             
-            func sectionOrthogonalScrollingBehavior(for section: PageModel.Section) -> UICollectionLayoutSectionOrthogonalScrollingBehavior {
+            func layoutSection(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 switch section.properties.layout {
                 case .hero:
-                #if os(tvOS)
-                    // Do not use .continuousGroupLeadingBoundary for full-width items on tvOS, otherwise items will
-                    // be skipped when navigating the group
-                    return .continuous
-                #else
-                    return .continuousGroupLeadingBoundary
-                #endif
-                case .highlight, .showAccess, .showGrid, .mediaGrid, .liveMediaGrid:
-                    return .none
-                default:
-                    return .continuousGroupLeadingBoundary
-                }
-            }
-            
-            func sectionContentInsets(for section: PageModel.Section) -> NSDirectionalEdgeInsets {
-                switch section.properties.layout {
-                case .topicSelector:
-                    return LayoutTopicSectionContentInsets
-                default:
-                    return LayoutStandardSectionContentInsets
-                }
-            }
-            
-            func layoutGroupSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
-                switch section.properties.layout {
-                case .hero:
-                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .hero)
-                    let size = LayoutCollectionItemSize(width, .hero, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                    let cellSize = LayoutHorizontalHeroCellSize(layoutEnvironment.container.effectiveContentSize.width, 16 / 9, layoutEnvironment.traitCollection.horizontalSizeClass)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
                 case .highlight:
-                    let width = LayoutCollectionItemFeaturedWidth(layoutEnvironment.container.effectiveContentSize.width, .highlight)
-                    let size = LayoutCollectionItemSize(width, .highlight, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-                case .topicSelector:
-                    let size = LayoutCollectionItemSize(LayoutTopicCellWidth, .topicSwimlane, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-                case .showSwimlane:
-                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                    let cellSize = LayoutHorizontalHighlightCellSize(layoutEnvironment.container.effectiveContentSize.width, 16 / 9, layoutEnvironment.traitCollection.horizontalSizeClass)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
+                    return layoutSection
                 case .mediaSwimlane:
-                    let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
+                    let cellSize = LayoutHorizontalCellSize(210, 16 / 9, 70)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
+                case .showSwimlane:
+                    let cellSize = LayoutHorizontalCellSize(210, 16 / 9, 29)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
+                case .topicSelector:
+                    let cellSize = LayoutHorizontalCellSize(150, 16 / 9, 0)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
+                case .mediaGrid:
+                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
+                        let cellSize = CGSize(width: layoutEnvironment.container.effectiveContentSize.width, height: 50)
+                        return NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    }
+                    else {
+                        let cellSize = LayoutGridCellSize(250, 16 / 9, 70, layoutEnvironment.container.effectiveContentSize.width, 0, 1)
+                        return NSCollectionLayoutSection.grid(cellSize: cellSize)
+                    }
+                case .liveMediaGrid:
+                    let cellSize = LayoutGridCellSize(250, 16 / 9, 70, layoutEnvironment.container.effectiveContentSize.width, 0, 1)
+                    return NSCollectionLayoutSection.grid(cellSize: cellSize)
+                case .showGrid:
+                    let cellSize = LayoutGridCellSize(250, 16 / 9, 29, layoutEnvironment.container.effectiveContentSize.width, 0, 2)
+                    return NSCollectionLayoutSection.grid(cellSize: cellSize)
                 case .showAccess:
-                    let size = LayoutCollectionItemSize(layoutEnvironment.container.effectiveContentSize.width, .showAccess, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(size.width), heightDimension: .absolute(size.height))
-                case .showGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .showSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-                case .mediaGrid:
-                    // TODO: Layout.h API is probably not good enough, otherwise this check would be hidden. But maybe it would be
-                    //       better to have Layout.h only deliver layout values for types (hero, featured, compact, etc.), and
-                    //       to make the tests here to decide which cell should be used depending on the layout environment?
-                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutStandardCellHeight))
-                    }
-                    else {
-                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                        let size = LayoutCollectionItemSize(itemWidth, .mediaSwimlaneOrGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-                    }
-                case .liveMediaGrid:
-                    let approximateWidth = (layoutEnvironment.container.effectiveContentSize.width < LayoutLiveMediaGridLargeBoundWidth) ? LayoutStandardCellWidth : LayoutLiveMediaGridLargeCellWidth
-                    let itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    let size = LayoutCollectionItemSize(itemWidth, .liveMediaGrid, layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
-                }
-            }
-            
-            func layoutItemSize(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSize {
-                switch section.properties.layout {
-                case .showGrid:
-                    let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
-                case .mediaGrid:
-                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-                    }
-                    else {
-                        let itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                        return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
-                    }
-                case .liveMediaGrid:
-                    let approximateWidth = (layoutEnvironment.container.effectiveContentSize.width < LayoutLiveMediaGridLargeBoundWidth) ? LayoutStandardCellWidth : LayoutLiveMediaGridLargeCellWidth
-                    let itemWidth = LayoutCollectionItemOptimalWidth(approximateWidth, layoutEnvironment.container.effectiveContentSize.width, LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, LayoutStandardMargin)
-                    return NSCollectionLayoutSize(widthDimension: .absolute(itemWidth), heightDimension: .fractionalHeight(1))
-                default:
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                    let cellSize = CGSize(width: layoutEnvironment.container.effectiveContentSize.width, height: 50)
+                    return NSCollectionLayoutSection.horizontal(cellSize: cellSize)
                 }
             }
             
@@ -189,17 +144,7 @@ class PageViewController: DataViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
-            let itemSize = layoutItemSize(for: section, layoutEnvironment: layoutEnvironment)
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-            let groupSize = layoutGroupSize(for: section, layoutEnvironment: layoutEnvironment)
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-            group.interItemSpacing = NSCollectionLayoutSpacing.fixed(LayoutStandardMargin)
-            
-            let layoutSection = NSCollectionLayoutSection(group: group)
-            layoutSection.orthogonalScrollingBehavior = sectionOrthogonalScrollingBehavior(for: section)
-            layoutSection.interGroupSpacing = LayoutStandardMargin
-            layoutSection.contentInsets = sectionContentInsets(for: section)
+            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
             return layoutSection
         }

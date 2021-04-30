@@ -115,7 +115,7 @@ extension MediaCell {
 }
 
 struct MediaCell_Previews: PreviewProvider {
-    static private let size = LayoutCollectionItemSize(LayoutStandardCellWidth, .mediaSwimlaneOrGrid, .regular)
+    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 70)
     
     static var previews: some View {
         Group {

@@ -36,8 +36,7 @@ static const CGFloat kBottomInset = 15.f;
 
 + (CGSize)itemSize
 {
-    UIUserInterfaceSizeClass horizontalSizeClass = UIApplication.sharedApplication.delegate.window.traitCollection.horizontalSizeClass;
-    return LayoutCollectionItemSize(300.f, LayoutCollectionItemTypeShowSwimlaneOrGrid, horizontalSizeClass);
+    return LayoutHorizontalCellSize(LayoutStandardCellWidth, 16.f / 9.f, 29.f);
 }
 
 #pragma mark Object lifecycle

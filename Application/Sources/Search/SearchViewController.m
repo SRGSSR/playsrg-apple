@@ -630,8 +630,8 @@
             return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardCellHeight);
         }
         else {
-            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutStandardCellWidth, CGRectGetWidth(collectionView.frame), LayoutStandardSectionContentInsets.leading, LayoutStandardSectionContentInsets.trailing, collectionViewLayout.minimumInteritemSpacing);
-            return LayoutCollectionItemSize(itemWidth, LayoutCollectionItemTypeMediaSwimlaneOrGrid, self.traitCollection.horizontalSizeClass);
+            CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
+            return LayoutGridCellSize(LayoutStandardCellWidth, 16.f / 9.f, 70.f, layoutWidth, collectionViewLayout.minimumInteritemSpacing, 1);
         }
     }
     // Search show list

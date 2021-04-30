@@ -48,81 +48,77 @@ const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets = { 0.f, 0.f, 0.f, 
 
 const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };
 
-CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing)
+static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {
-    CGFloat availableWidth = layoutWidth - leadingInset - trailingInset;
-    if (availableWidth <= 0.f) {
-        return 0.f;
-    }
-    
-    // For a grid, two items are required at least
-    NSInteger numberOfItemsPerRow = MAX((availableWidth + spacing) / (itemApproximateWidth + spacing), 2);
-    return (availableWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
+    NSCParameterAssert(minimumNumberOfColumns >= 1);
+    NSInteger numberOfItemsPerRow = MAX((layoutWidth + spacing) / (approximateWidth + spacing), minimumNumberOfColumns);
+    return (layoutWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth, LayoutCollectionItemType collectionItemType)
+/**
+ *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
+ *  content width only occupies a given fraction of the cell width.
+ *
+ *       ┌──────────────────────────────────────────────┬─────────────────────┐
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............                 ...............│                     │
+ *       │..............     Content     ...............│                     │
+ *       │..............                 ...............│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       └──────────────────────────────────────────────┴─────────────────────┘
+ *       ◀─────────────────────────────────────────────▶
+ *                        content width
+ *
+ *       ◀──────────────────────────────────────────────────────────────────▶
+ *                                   width
+ */
+static CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction)
 {
-#if TARGET_OS_TV
-    return layoutWidth;
-#else
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero: {
-            // Ensure hero cells never fill the entire width of the parent, so that the fact that content can be scrolled
-            // is always obvious to the user
-            static const CGFloat kSupplementaryHorizontalPadding = 2 * LayoutStandardMargin;
-            
-            // TODO: Could remove the kSupplementaryHorizontalPadding if hero section has only 1 item.
-            return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing - kSupplementaryHorizontalPadding;
-            break;
-        }
-            
-        case LayoutCollectionItemTypeHighlight: {
-            return layoutWidth - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-            break;
-        }
-            
-        default: {
-            return LayoutStandardCellWidth;
-            break;
-        }
-    }
-#endif
+    CGFloat height = width * fraction / contentAspectRatio;
+    return CGSizeMake(width, height);
 }
 
-OBJC_EXPORT CGFloat LayoutCollectionSectionHeaderTitleHeight()
+CGSize LayoutHorizontalCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
-#if TARGET_OS_TV
-    return 60.f;
-#else
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_headerHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_headerHeights = @{ UIContentSizeCategoryExtraSmall : @25,
-                             UIContentSizeCategorySmall : @30,
-                             UIContentSizeCategoryMedium : @35,
-                             UIContentSizeCategoryLarge : @35,
-                             UIContentSizeCategoryExtraLarge : @35,
-                             UIContentSizeCategoryExtraExtraLarge : @35,
-                             UIContentSizeCategoryExtraExtraExtraLarge : @40,
-                             UIContentSizeCategoryAccessibilityMedium : @40,
-                             UIContentSizeCategoryAccessibilityLarge : @40,
-                             UIContentSizeCategoryAccessibilityExtraLarge : @40,
-                             UIContentSizeCategoryAccessibilityExtraExtraLarge : @40,
-                             UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @40 };
-    });
-    
-    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    return s_headerHeights[contentSizeCategory].floatValue;
-#endif
+    return CGSizeMake(width, width / aspectRatio + heightOffset);
 }
 
-CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor)
+CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {
-    CGFloat headerHeight = LayoutCollectionSectionHeaderTitleHeight();
-    if (hasBackgroundColor) {
-        headerHeight += 6.f;
+    CGFloat width = LayoutOptimalGridCellWidth(approximateWidth, layoutWidth, spacing, minimumNumberOfColumns);
+    return LayoutHorizontalCellSize(width, aspectRatio, heightOffset);
+}
+
+CGSize LayoutHorizontalHeroCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass)
+{
+    if (horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        return LayoutHorizontalCellSize(0.9f * layoutWidth, aspectRatio, 89.f);
     }
-    return headerHeight;
+    else {
+        return LayoutFractionedCellSize(0.9f * layoutWidth, aspectRatio, 3.f / 5.f);
+    }
+}
+
+CGSize LayoutHorizontalHighlightCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass)
+{
+    if (horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+        return LayoutHorizontalCellSize(layoutWidth, aspectRatio, 89.f);
+    }
+    else {
+        return LayoutFractionedCellSize(layoutWidth, aspectRatio, 2.f / 5.f);
+    }
 }
 
 CGFloat LayoutStandardSimpleTableCellHeight(void)
@@ -154,161 +150,5 @@ CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, 
     }
     else {
         return contentHeight;
-    }
-}
-
-CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
-{
-#if TARGET_OS_TV
-    return CGSizeMake(itemWidth, 360.f);
-#else
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_largeTextHeights = @{ UIContentSizeCategoryExtraSmall : @79,
-                                UIContentSizeCategorySmall : @81,
-                                UIContentSizeCategoryMedium : @84,
-                                UIContentSizeCategoryLarge : @89,
-                                UIContentSizeCategoryExtraLarge : @94,
-                                UIContentSizeCategoryExtraExtraLarge : @102,
-                                UIContentSizeCategoryExtraExtraExtraLarge : @108,
-                                UIContentSizeCategoryAccessibilityMedium : @108,
-                                UIContentSizeCategoryAccessibilityLarge : @108,
-                                UIContentSizeCategoryAccessibilityExtraLarge : @108,
-                                UIContentSizeCategoryAccessibilityExtraExtraLarge : @108,
-                                UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @108 };
-        
-        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @63,
-                                   UIContentSizeCategorySmall : @65,
-                                   UIContentSizeCategoryMedium : @67,
-                                   UIContentSizeCategoryLarge : @70,
-                                   UIContentSizeCategoryExtraLarge : @75,
-                                   UIContentSizeCategoryExtraExtraLarge : @82,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityMedium : @90,
-                                   UIContentSizeCategoryAccessibilityLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @90,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @90 };
-    });
-    
-    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
-#endif
-}
-
-CGSize LayoutMediaFeaturedCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass)
-{
-#if TARGET_OS_TV
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero: {
-            return CGSizeMake(itemWidth, 680.f);
-            break;
-        }
-            
-        case LayoutCollectionItemTypeHighlight: {
-            return CGSizeMake(itemWidth, 480.f);
-            break;
-        }
-            
-        default: {
-            return LayoutMediaStandardCollectionItemSize(itemWidth, true);
-            break;
-        }
-    }
-#else
-    BOOL isCompact = (horizontalSizeClass == UIUserInterfaceSizeClassCompact);
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero: {
-            return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 3.f / 5.f * 9.f / 16.f);
-            break;
-        }
-            
-        case LayoutCollectionItemTypeHighlight: {
-            return isCompact ? LayoutMediaStandardCollectionItemSize(itemWidth, true) : CGSizeMake(itemWidth, itemWidth * 2.f / 5.f * 9.f / 16.f);
-            break;
-        }
-            
-        default: {
-            return LayoutMediaStandardCollectionItemSize(itemWidth, true);
-            break;
-        }
-    }
-#endif
-}
-
-CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large)
-{
-#if TARGET_OS_TV
-    return CGSizeMake(itemWidth, 280.f);
-#else
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_largeTextHeights;
-    static NSDictionary<UIContentSizeCategory, NSNumber *> *s_standardTextHeights;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_largeTextHeights = @{ UIContentSizeCategoryExtraSmall : @28,
-                                UIContentSizeCategorySmall : @28,
-                                UIContentSizeCategoryMedium : @29,
-                                UIContentSizeCategoryLarge : @31,
-                                UIContentSizeCategoryExtraLarge : @33,
-                                UIContentSizeCategoryExtraExtraLarge : @36,
-                                UIContentSizeCategoryExtraExtraExtraLarge : @38,
-                                UIContentSizeCategoryAccessibilityMedium : @38,
-                                UIContentSizeCategoryAccessibilityLarge : @38,
-                                UIContentSizeCategoryAccessibilityExtraLarge : @38,
-                                UIContentSizeCategoryAccessibilityExtraExtraLarge : @38,
-                                UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @38 };
-        
-        s_standardTextHeights = @{ UIContentSizeCategoryExtraSmall : @26,
-                                   UIContentSizeCategorySmall : @26,
-                                   UIContentSizeCategoryMedium : @27,
-                                   UIContentSizeCategoryLarge : @29,
-                                   UIContentSizeCategoryExtraLarge : @31,
-                                   UIContentSizeCategoryExtraExtraLarge : @34,
-                                   UIContentSizeCategoryExtraExtraExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityMedium : @36,
-                                   UIContentSizeCategoryAccessibilityLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraExtraLarge : @36,
-                                   UIContentSizeCategoryAccessibilityExtraExtraExtraLarge : @36 };
-    });
-    
-    UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;
-    CGFloat minTextHeight = large ? s_largeTextHeights[contentSizeCategory].floatValue : s_standardTextHeights[contentSizeCategory].floatValue;
-    return CGSizeMake(itemWidth, ceilf(itemWidth * 9.f / 16.f + minTextHeight));
-#endif
-}
-
-CGSize LayoutCollectionItemSize(CGFloat itemWidth, LayoutCollectionItemType collectionItemType, UIUserInterfaceSizeClass horizontalSizeClass)
-{
-    switch (collectionItemType) {
-        case LayoutCollectionItemTypeHero:
-        case LayoutCollectionItemTypeHighlight: {
-            return LayoutMediaFeaturedCollectionItemSize(itemWidth, collectionItemType, horizontalSizeClass);
-            break;
-        }
-            
-        case LayoutCollectionItemTypeShowSwimlaneOrGrid: {
-            return LayoutShowStandardCollectionItemSize(itemWidth, false);
-            break;
-        }
-            
-        case LayoutCollectionItemTypeMediaSwimlaneOrGrid: {
-            return LayoutMediaStandardCollectionItemSize(itemWidth, false);
-            break;
-        }
-            
-        case LayoutCollectionItemTypeLiveMediaGrid:
-        case LayoutCollectionItemTypeTopicSwimlane: {
-            return CGSizeMake(itemWidth, itemWidth * 9.f / 16.f);
-            break;
-        }
-        
-        case LayoutCollectionItemTypeShowAccess: {
-            return CGSizeMake(itemWidth - 2 * LayoutStandardMargin, 50.f);
-            break;
-        }
     }
 }

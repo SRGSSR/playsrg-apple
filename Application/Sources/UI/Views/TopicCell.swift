@@ -53,7 +53,7 @@ struct TopicCell: View {
 }
 
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = LayoutCollectionItemSize(LayoutTopicCellWidth, .topicSwimlane, .regular)
+    static private let size = LayoutHorizontalCellSize(150, 16 / 9, 0)
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())
