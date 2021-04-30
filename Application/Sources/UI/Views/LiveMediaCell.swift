@@ -3,6 +3,7 @@
 //
 //  License information is available from the LICENSE file.
 //
+
 import SwiftUI
 
 struct LiveMediaCell: View, LiveMedia {
