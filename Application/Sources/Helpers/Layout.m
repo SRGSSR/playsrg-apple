@@ -55,42 +55,7 @@ static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layo
     return (layoutWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-/**
- *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
- *  content width only occupies a given fraction of the cell width.
- *
- *       ┌──────────────────────────────────────────────┬─────────────────────┐
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............                 ...............│                     │
- *       │..............     Content     ...............│                     │
- *       │..............                 ...............│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       └──────────────────────────────────────────────┴─────────────────────┘
- *       ◀─────────────────────────────────────────────▶
- *                        content width
- *
- *       ◀──────────────────────────────────────────────────────────────────▶
- *                                   width
- */
-static CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction)
-{
-    CGFloat height = width * fraction / contentAspectRatio;
-    return CGSizeMake(width, height);
-}
-
-CGSize LayoutHorizontalCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
+CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
     return CGSizeMake(width, width / aspectRatio + heightOffset);
 }
@@ -98,27 +63,13 @@ CGSize LayoutHorizontalCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heig
 CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {
     CGFloat width = LayoutOptimalGridCellWidth(approximateWidth, layoutWidth, spacing, minimumNumberOfColumns);
-    return LayoutHorizontalCellSize(width, aspectRatio, heightOffset);
+    return LayoutSwimlaneCellSize(width, aspectRatio, heightOffset);
 }
 
-CGSize LayoutHorizontalHeroCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass)
+CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction)
 {
-    if (horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return LayoutHorizontalCellSize(0.9f * layoutWidth, aspectRatio, 89.f);
-    }
-    else {
-        return LayoutFractionedCellSize(0.9f * layoutWidth, aspectRatio, 3.f / 5.f);
-    }
-}
-
-CGSize LayoutHorizontalHighlightCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass)
-{
-    if (horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return LayoutHorizontalCellSize(layoutWidth, aspectRatio, 89.f);
-    }
-    else {
-        return LayoutFractionedCellSize(layoutWidth, aspectRatio, 2.f / 5.f);
-    }
+    CGFloat height = width * fraction / contentAspectRatio;
+    return CGSizeMake(width, height);
 }
 
 CGFloat LayoutStandardSimpleTableCellHeight(void)

@@ -36,7 +36,7 @@ static const CGFloat kBottomInset = 15.f;
 
 + (CGSize)itemSize
 {
-    return LayoutHorizontalCellSize(LayoutStandardCellWidth, 16.f / 9.f, 29.f);
+    return [ShowCellSize swimlane];
 }
 
 #pragma mark Object lifecycle

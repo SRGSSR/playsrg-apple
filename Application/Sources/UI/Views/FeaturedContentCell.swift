@@ -41,7 +41,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
         ExpandingCardButton(action: content.action) {
             HStack(spacing: 0) {
                 content.visualView()
-                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
             }
@@ -55,7 +55,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
         #else
         Stack(direction: direction, spacing: 0) {
             content.visualView()
-                .aspectRatio(16 / 9, contentMode: .fit)
+                .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                 .layoutPriority(1)
             FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
         }
@@ -80,6 +80,28 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
     }
 }
 
+class FeaturedContentCellSize: NSObject {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+        if horizontalSizeClass == .compact {
+            return LayoutSwimlaneCellSize(0.9 * layoutWidth, aspectRatio, 89);
+        }
+        else {
+            return LayoutFractionedCellSize(0.9 * layoutWidth, aspectRatio, 0.6);
+        }
+    }
+    
+    @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+        if horizontalSizeClass == .compact {
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 89);
+        }
+        else {
+            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4);
+        }
+    }
+}
+
 private extension View {
     private func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
         #if os(iOS)
@@ -90,7 +112,7 @@ private extension View {
     }
     
     func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
-        let size = (layout == .hero) ? LayoutHorizontalHeroCellSize(layoutWidth, 16 / 9, horizontalSizeClass) : LayoutHorizontalHighlightCellSize(layoutWidth, 16 / 9, horizontalSizeClass)
+        let size = (layout == .hero) ? FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass) : FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
         return self.previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }

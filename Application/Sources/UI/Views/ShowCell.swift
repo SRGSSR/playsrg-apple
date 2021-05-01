@@ -18,7 +18,7 @@ struct ShowCell: View {
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(aspectRatio: 16 / 9, action: action) {
+            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .accessibilityElement()
                     .accessibilityOptionalLabel(show?.title)
@@ -30,7 +30,7 @@ struct ShowCell: View {
             #else
             Stack(direction: direction, spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .small))
-                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
                 DescriptionView(show: show)
             }
             .background(Color(.play_cardGrayBackground))
@@ -64,8 +64,46 @@ struct ShowCell: View {
     }
 }
 
+class ShowCellSize: NSObject {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    #if os(tvOS)
+    private static let defaultItemWidth: CGFloat = 375
+    private static let defaultTableItemHeight: CGFloat = 84
+    private static let heightOffset: CGFloat = 29
+    #else
+    private static let defaultItemWidth: CGFloat = 210
+    private static let defaultTableItemHeight: CGFloat = 150
+    private static let heightOffset: CGFloat = 29
+    #endif
+    
+    @objc static func swimlane() -> CGSize {
+        return swimlane(itemWidth: defaultItemWidth)
+    }
+    
+    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+    }
+    
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    }
+    
+    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    }
+    
+    @objc static func fullWidth(layoutWidth: CGFloat) -> CGSize {
+        return fullWidth(itemHeight: defaultTableItemHeight, layoutWidth: layoutWidth)
+    }
+    
+    @objc static func fullWidth(itemHeight: CGFloat, layoutWidth: CGFloat) -> CGSize {
+        return CGSize(width: layoutWidth, height: itemHeight)
+    }
+}
+
 struct ShowCell_Previews: PreviewProvider {
-    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 29)
+    static private let size = ShowCellSize.swimlane()
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard))

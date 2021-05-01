@@ -12,10 +12,11 @@ import SwiftUI
     func openShowByDate()
 }
 
+/// Behavior: h-exp, v-exp
 struct ShowAccessCell: View {
     var body: some View {
         ResponderChain { firstResponder in
-            HStack(spacing: 10) {
+            HStack {
                 Button {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
                 } label: {
@@ -46,8 +47,13 @@ struct ShowAccessCell: View {
                 .foregroundColor(.white)
                 .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
             }
-            .frame(height: 38)
         }
+    }
+}
+
+class ShowAccessCellSize: NSObject {
+    @objc static func fullWidth(layoutWidth: CGFloat) -> CGSize {
+        return CGSize(width: layoutWidth, height: 38)
     }
 }
 
@@ -55,8 +61,7 @@ struct ShowAccessCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ShowAccessCell()
-                .previewLayout(.fixed(width: 375, height: 400))
-                .previewDisplayName("TV show access")
+                .previewLayout(.fixed(width: 375, height: 38))
         }
     }
 }

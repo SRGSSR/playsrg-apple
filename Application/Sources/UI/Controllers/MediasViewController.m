@@ -59,12 +59,13 @@
 {
     // Table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardCellHeight);
+        CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin;
+        return [MediaCellSize fullWidthWithLayoutWidth:layoutWidth];
     }
     // Grid layout
     else {
         CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-        return LayoutGridCellSize(LayoutStandardCellWidth, 16.f / 9.f, 70.f, layoutWidth, collectionViewLayout.minimumInteritemSpacing, 1);
+        return [MediaCellSize gridWithLayoutWidth:layoutWidth spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
     }
 }
 

@@ -33,14 +33,14 @@ struct LiveMediaCell: View, LiveMedia {
             #if os(tvOS)
             ExpandingCardButton(action: action) {
                 VisualView(media: media, programComposition: programComposition, date: date)
-                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                     .accessibilityElement()
                     .accessibilityOptionalLabel(accessibilityLabel(at: date))
                     .accessibility(addTraits: .isButton)
             }
             #else
             VisualView(media: media, programComposition: programComposition, date: date)
-                .aspectRatio(16 / 9, contentMode: .fit)
+                .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(accessibilityLabel(at: date))
@@ -113,9 +113,35 @@ struct LiveMediaCell: View, LiveMedia {
     }
 }
 
+class LiveMediaCellSize: NSObject {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    #if os(tvOS)
+    private static let defaultItemWidth: CGFloat = 375
+    #else
+    private static let defaultItemWidth: CGFloat = 210
+    #endif
+    
+    @objc static func swimlane() -> CGSize {
+        return swimlane(itemWidth: defaultItemWidth)
+    }
+    
+    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
+    }
+    
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    }
+    
+    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
+    }
+}
+
 struct LiveMediaCell_Previews: PreviewProvider {
     static private let liveMedia = Mock.liveMedia()
-    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 70)
+    static private let size = LiveMediaCellSize.swimlane()
     
     static var previews: some View {
         LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)

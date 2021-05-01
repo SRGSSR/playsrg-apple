@@ -64,30 +64,51 @@ OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
 /**
- *  Return the size of a cell having the given width and aspect ratio, suited for display in horizontal layouts. An height
+ *  Return the size of a cell having the given width and aspect ratio, suited for display in swimlanes. A height
  *  offset can be provided if more space is required vertically.
  */
-OBJC_EXPORT CGSize LayoutHorizontalCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
+OBJC_EXPORT CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
 
 /**
  *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required spacing. An
  *  approximate width must be provided as a hint, so that the function can best determine the actual item size
  *  best matching the desired result. A minimal number of columns can be provided (>= 1).
  *
- *  As for `LayoutHorizontalCellSize`, an aspect ratio must be provided, as well as a height offset is more
+ *  As for `LayoutSwimlaneCellSize`, an aspect ratio must be provided, as well as a height offset is more
  *  space is required vertically.
  */
 OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
 
 /**
- *  Return the size of a hero cell (90% of the screen width, with different sizes for regular and compact layouts).
+ *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
+ *  content width only occupies a given fraction of the cell width.
+ *
+ *       ┌──────────────────────────────────────────────┬─────────────────────┐
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............                 ...............│                     │
+ *       │..............     Content     ...............│                     │
+ *       │..............                 ...............│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       │..............................................│                     │
+ *       └──────────────────────────────────────────────┴─────────────────────┘
+ *       ◀─────────────────────────────────────────────▶
+ *                        content width
+ *
+ *       ◀──────────────────────────────────────────────────────────────────▶
+ *                                   width
  */
-OBJC_EXPORT CGSize LayoutHorizontalHeroCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass);
-
-/**
- *  Return the size of a highlight cell (100% of the screen width, with different sizes for regular and compact layouts).
- */
-OBJC_EXPORT CGSize LayoutHorizontalHighlightCellSize(CGFloat layoutWidth, CGFloat aspectRatio, UIUserInterfaceSizeClass horizontalSizeClass);
+OBJC_EXPORT CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
 
 // TODO: Get rid of these somehow, or improve
 

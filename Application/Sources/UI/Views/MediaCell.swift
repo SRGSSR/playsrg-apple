@@ -46,7 +46,7 @@ struct MediaCell: View {
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(aspectRatio: 16 / 9, action: action ?? defaultAction) {
+            LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
                     .accessibilityElement()
@@ -58,7 +58,7 @@ struct MediaCell: View {
             #else
             Stack(direction: direction, spacing: 0) {
                 MediaVisualView(media: media, scale: .small)
-                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 DescriptionView(media: media, style: style)
@@ -114,8 +114,47 @@ extension MediaCell {
     }
 }
 
+class MediaCellSize: NSObject {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    #if os(tvOS)
+    private static let defaultItemWidth: CGFloat = 375
+    private static let defaultTableItemHeight: CGFloat = 84
+    private static let heightOffset: CGFloat = 70
+    #else
+    private static let defaultItemWidth: CGFloat = 210
+    private static let defaultTableItemHeight: CGFloat = 150
+    private static let heightOffset: CGFloat = 70
+    #endif
+    
+    @objc static func swimlane() -> CGSize {
+        return swimlane(itemWidth: defaultItemWidth)
+    }
+    
+    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+    }
+    
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    }
+    
+    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+        return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    }
+    
+    @objc static func fullWidth(layoutWidth: CGFloat) -> CGSize {
+        return fullWidth(itemHeight: defaultTableItemHeight, layoutWidth: layoutWidth)
+    }
+    
+    @objc static func fullWidth(itemHeight: CGFloat, layoutWidth: CGFloat) -> CGSize {
+        return CGSize(width: layoutWidth, height: itemHeight)
+    }
+}
+
 struct MediaCell_Previews: PreviewProvider {
-    static private let size = LayoutHorizontalCellSize(210, 16 / 9, 70)
+    static private let verticalLayoutSize = MediaCellSize.swimlane()
+    static private let horizontalLayoutSize = MediaCellSize.fullWidth(layoutWidth: 600)
     
     static var previews: some View {
         Group {
@@ -124,7 +163,7 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.overflow), layout: .vertical)
             MediaCell(media: Mock.media(.nineSixteen), layout: .vertical)
         }
-        .previewLayout(.fixed(width: size.width, height: size.height))
+        .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
         
         Group {
             MediaCell(media: Mock.media(), layout: .horizontal)
@@ -132,6 +171,6 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.overflow), layout: .horizontal)
             MediaCell(media: Mock.media(.nineSixteen), layout: .horizontal)
         }
-        .previewLayout(.fixed(width: 600, height: LayoutStandardCellHeight))
+        .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
     }
 }

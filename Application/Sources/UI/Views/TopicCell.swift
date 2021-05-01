@@ -33,13 +33,14 @@ struct TopicCell: View {
     }
     #endif
     
+    /// Behavior: h-exp, v-exp
     private struct MainView: View {
         let topic: SRGTopic?
         
         var body: some View {
             ZStack {
                 ImageView(url: topic?.imageUrl(for: .small))
-                    .aspectRatio(16 / 9, contentMode: .fit)
+                    .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
                 Color(white: 0, opacity: 0.2)
                 Text(topic?.title ?? "")
                     .srgFont(.overline)
@@ -52,8 +53,26 @@ struct TopicCell: View {
     }
 }
 
+class TopicCellSize: NSObject {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    #if os(tvOS)
+    private static let defaultItemWidth: CGFloat = 250
+    #else
+    private static let defaultItemWidth: CGFloat = 150
+    #endif
+    
+    @objc static func swimlane() -> CGSize {
+        return swimlane(itemWidth: defaultItemWidth)
+    }
+    
+    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
+    }
+}
+
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = LayoutHorizontalCellSize(150, 16 / 9, 0)
+    static private let size = TopicCellSize.swimlane()
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())
