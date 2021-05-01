@@ -100,11 +100,13 @@ class PageViewController: DataViewController {
                     return layoutSection
                 case .highlight:
                     let cellSize = FeaturedContentCellSize.highlight(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
-                    layoutSection.orthogonalScrollingBehavior = .groupPagingCentered
-                    return layoutSection
+                    return NSCollectionLayoutSection.horizontal(cellSize: cellSize)
                 case .mediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: MediaCellSize.swimlane())
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
+                case .liveMediaSwimlane:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: LiveMediaCellSize.swimlane())
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
@@ -126,8 +128,10 @@ class PageViewController: DataViewController {
                     return NSCollectionLayoutSection.grid(cellSize: LiveMediaCellSize.grid(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, spacing: 0, minimumNumberOfColumns: 2))
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(cellSize: ShowCellSize.grid(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, spacing: 0, minimumNumberOfColumns: 2))
+                #if os(iOS)
                 case .showAccess:
                     return NSCollectionLayoutSection.horizontal(cellSize: ShowAccessCellSize.fullWidth(layoutWidth: layoutEnvironment.container.effectiveContentSize.width))
+                #endif
                 }
             }
             

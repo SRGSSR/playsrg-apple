@@ -92,6 +92,7 @@ extension PageModel {
         case hero
         case highlight
         case liveMediaGrid
+        case liveMediaSwimlane
         case mediaGrid
         case mediaSwimlane
         case showGrid
@@ -179,7 +180,9 @@ extension SRGContentSection: PageSectionProperties {
             return (type == .shows) ? .showSwimlane : .mediaSwimlane
         case .grid:
             return (type == .shows) ? .showGrid : .mediaGrid
-        case .none, .livestreams, .resumePlayback, .watchLater, .personalizedProgram:
+        case .livestreams:
+            return .liveMediaSwimlane
+        case .none, .resumePlayback, .watchLater, .personalizedProgram:
             return .mediaSwimlane
         }
     }
@@ -341,11 +344,7 @@ extension ConfiguredSection: PageSectionProperties {
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (self.contentPresentationType == .hero) ? .hero : .mediaSwimlane
         case .tvLive, .radioLive, .radioLiveSatellite:
-            #if os(iOS)
             return .liveMediaGrid
-            #else
-            return .mediaSwimlane
-            #endif
         case .tvLiveCenter, .tvScheduledLivestreams:
             return .mediaSwimlane
         case .radioFavoriteShows:
