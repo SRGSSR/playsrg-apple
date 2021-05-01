@@ -14,6 +14,7 @@
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "NotificationTableViewCell.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "PushService.h"
 #import "RefreshControl.h"
@@ -300,7 +301,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.notifications.count);
+    return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(NotificationTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

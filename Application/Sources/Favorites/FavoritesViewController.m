@@ -324,7 +324,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.shows.count);
+    return [ShowCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<ShowSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

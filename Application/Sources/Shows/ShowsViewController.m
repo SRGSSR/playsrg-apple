@@ -319,7 +319,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-    return LayoutGridCellSize(LayoutStandardCellWidth, 16.f / 9.f, 29.f, layoutWidth, collectionViewLayout.minimumInteritemSpacing, 2);
+    return [ShowCellSize gridWithLayoutWidth:layoutWidth spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

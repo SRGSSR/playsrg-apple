@@ -620,7 +620,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardSimpleTableCellHeight());
+        // TODO: Correctly scale this value
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 50.f);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);

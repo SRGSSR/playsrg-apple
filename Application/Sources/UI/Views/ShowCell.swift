@@ -69,11 +69,11 @@ class ShowCellSize: NSObject {
     
     #if os(tvOS)
     private static let defaultItemWidth: CGFloat = 375
-    private static let defaultTableItemHeight: CGFloat = 84
+    private static let defaultTableItemHeight: CGFloat = 50
     private static let heightOffset: CGFloat = 29
     #else
     private static let defaultItemWidth: CGFloat = 210
-    private static let defaultTableItemHeight: CGFloat = 150
+    private static let defaultTableItemHeight: CGFloat = 80
     private static let heightOffset: CGFloat = 29
     #endif
     

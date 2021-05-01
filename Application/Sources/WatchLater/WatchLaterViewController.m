@@ -188,7 +188,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.items.count);
+    return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

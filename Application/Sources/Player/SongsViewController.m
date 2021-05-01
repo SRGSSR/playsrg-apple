@@ -267,7 +267,9 @@
 {
     SRGSong *song = self.items[indexPath.row];
     CGFloat height = [SongTableViewCell heightForSong:song withCellWidth:CGRectGetWidth(tableView.frame)];
-    return LayoutTableTopAlignedCellHeight(height, 20.f, indexPath.row, self.items.count);
+    
+    // TODO: Fix layout / spacing
+    return height;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

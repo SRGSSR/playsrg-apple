@@ -15,6 +15,7 @@
 #import "DownloadTableViewCell.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
+#import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "RefreshControl.h"
 #import "TableView.h"
@@ -245,7 +246,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutStandardCellHeight, LayoutStandardMargin, indexPath.row, self.downloads.count);
+    return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(DownloadTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

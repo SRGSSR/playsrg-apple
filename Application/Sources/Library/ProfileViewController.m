@@ -381,7 +381,8 @@
         return LayoutStandardCellHeight + LayoutStandardMargin;
     }
     else {
-        return LayoutStandardSimpleTableCellHeight();
+        // TODO: Correctly scale this value
+        return 50.f;
     }
 }
 

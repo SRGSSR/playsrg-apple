@@ -23,15 +23,7 @@ OBJC_EXPORT const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets;
 /**
  *  Standard cell dimensions.
  */
-OBJC_EXPORT const CGFloat LayoutStandardCellWidth;
-OBJC_EXPORT const CGFloat LayoutTopicCellWidth;
 OBJC_EXPORT const CGFloat LayoutStandardCellHeight;
-
-/**
- *  Live media grid large dimensions (iOS).
- */
-OBJC_EXPORT const CGFloat LayoutLiveMediaGridLargeBoundWidth;
-OBJC_EXPORT const CGFloat LayoutLiveMediaGridLargeCellWidth;
 
 /**
  *  Standard margin.
@@ -88,15 +80,9 @@ OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRa
  *       │..............................................│                     │
  *       │..............................................│                     │
  *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
  *       │..............                 ...............│                     │
  *       │..............     Content     ...............│                     │
  *       │..............                 ...............│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
  *       │..............................................│                     │
  *       │..............................................│                     │
  *       │..............................................│                     │
@@ -109,17 +95,5 @@ OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRa
  *                                   width
  */
 OBJC_EXPORT CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
-
-// TODO: Get rid of these somehow, or improve
-
-/**
- *  Return the standard height for simple table cells.
- */
-OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
-
-/**
- *  Return the height for a top-aligned table cell with given spacing.
- */
-OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems);
 
 NS_ASSUME_NONNULL_END
