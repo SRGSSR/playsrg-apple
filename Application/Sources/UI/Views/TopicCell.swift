@@ -10,19 +10,24 @@ struct TopicCell: View {
     let topic: SRGTopic?
     
     var body: some View {
-        #if os(tvOS)
-        ExpandingCardButton(action: action) {
+        Group {
+            #if os(tvOS)
+            ExpandingCardButton(action: action) {
+                MainView(topic: topic)
+                    .unredactable()
+                    .accessibilityElement()
+                    .accessibilityOptionalLabel(topic?.title)
+                    .accessibility(addTraits: .isButton)
+            }
+            #else
             MainView(topic: topic)
+                .redactable()
+                .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(topic?.title)
-                .accessibility(addTraits: .isButton)
+            #endif
         }
-        #else
-        MainView(topic: topic)
-            .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement()
-            .accessibilityOptionalLabel(topic?.title)
-        #endif
+        .redactedIfNil(topic)
     }
     
     #if os(tvOS)
@@ -48,7 +53,6 @@ struct TopicCell: View {
                     .foregroundColor(.white)
                     .padding(20)
             }
-            .redactedIfNil(topic)
         }
     }
 }

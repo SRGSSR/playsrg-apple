@@ -34,6 +34,7 @@ struct LiveMediaCell: View, LiveMedia {
             ExpandingCardButton(action: action) {
                 VisualView(media: media, programComposition: programComposition, date: date)
                     .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
+                    .unredactable()
                     .accessibilityElement()
                     .accessibilityOptionalLabel(accessibilityLabel(at: date))
                     .accessibility(addTraits: .isButton)
@@ -41,6 +42,7 @@ struct LiveMediaCell: View, LiveMedia {
             #else
             VisualView(media: media, programComposition: programComposition, date: date)
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
+                .redactable()
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(accessibilityLabel(at: date))

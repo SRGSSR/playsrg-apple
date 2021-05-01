@@ -37,34 +37,37 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     }
     
     var body: some View {
-        #if os(tvOS)
-        ExpandingCardButton(action: content.action) {
-            HStack(spacing: 0) {
+        Group {
+            #if os(tvOS)
+            ExpandingCardButton(action: content.action) {
+                HStack(spacing: 0) {
+                    content.visualView()
+                        .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
+                        .layoutPriority(1)
+                    FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
+                }
+                .background(Color(.play_cardGrayBackground))
+                .cornerRadius(LayoutStandardViewCornerRadius)
+                .unredactable()
+                .accessibilityElement()
+                .accessibilityOptionalLabel(content.accessibilityLabel)
+                .accessibility(addTraits: .isButton)
+            }
+            #else
+            Stack(direction: direction, spacing: 0) {
                 content.visualView()
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
             }
             .background(Color(.play_cardGrayBackground))
+            .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
             .accessibilityOptionalLabel(content.accessibilityLabel)
-            .accessibility(addTraits: .isButton)
-            .redacted(reason: content.isPlaceholder ? .placeholder : .init())
+            #endif
         }
-        #else
-        Stack(direction: direction, spacing: 0) {
-            content.visualView()
-                .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
-                .layoutPriority(1)
-            FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
-        }
-        .background(Color(.play_cardGrayBackground))
-        .cornerRadius(LayoutStandardViewCornerRadius)
-        .accessibilityElement()
-        .accessibilityOptionalLabel(content.accessibilityLabel)
         .redacted(reason: content.isPlaceholder ? .placeholder : .init())
-        #endif
     }
 }
 

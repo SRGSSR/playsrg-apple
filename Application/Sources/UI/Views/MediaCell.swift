@@ -49,6 +49,7 @@ struct MediaCell: View {
             LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
+                    .unredactable()
                     .accessibilityElement()
                     .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
                     .accessibility(addTraits: .isButton)
@@ -59,8 +60,9 @@ struct MediaCell: View {
             Stack(direction: direction, spacing: 0) {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
-                    .layoutPriority(1)
                     .cornerRadius(LayoutStandardViewCornerRadius)
+                    .redactable()
+                    .layoutPriority(1)
                 DescriptionView(media: media, style: style)
             }
             .accessibilityElement()
@@ -93,10 +95,10 @@ struct MediaCell: View {
         
         var body: some View {
             VStack(alignment: .leading) {
-                Text(MediaDescription.title(for: media, style: style) ?? "")
+                Text(MediaDescription.title(for: media, style: style) ?? String.placeholder(length: 8))
                     .srgFont(.subtitle)
                     .lineLimit(2)
-                Text(MediaDescription.subtitle(for: media, style: style) ?? "")
+                Text(MediaDescription.subtitle(for: media, style: style) ?? String.placeholder(length: 15))
                     .srgFont(.H4)
                     .lineLimit(2)
                     .layoutPriority(1)

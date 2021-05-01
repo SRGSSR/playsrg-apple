@@ -20,6 +20,7 @@ struct ShowCell: View {
             #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
                 ImageView(url: show?.imageUrl(for: .small))
+                    .unredactable()
                     .accessibilityElement()
                     .accessibilityOptionalLabel(show?.title)
                     .accessibility(addTraits: .isButton)
@@ -34,6 +35,7 @@ struct ShowCell: View {
                 DescriptionView(show: show)
             }
             .background(Color(.play_cardGrayBackground))
+            .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()
             .accessibilityOptionalLabel(show?.title)

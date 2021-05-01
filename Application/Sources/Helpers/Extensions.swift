@@ -15,6 +15,10 @@ extension Comparable {
 }
 
 extension String {
+    static func placeholder(length: Int) -> String {
+        return String(repeating: " ", count: length)
+    }
+    
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
     }
@@ -42,12 +46,6 @@ extension View {
     
     func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol {
         return accessibilityHint(hint ?? "")
-    }
-}
-
-extension View {
-    func redactedIfNil(_ object: Any?) -> some View {
-        return redacted(reason: object == nil ? .placeholder : .init())
     }
 }
 

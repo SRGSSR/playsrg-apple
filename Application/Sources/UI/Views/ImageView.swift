@@ -7,7 +7,7 @@
 import Nuke
 import SwiftUI
 
-// Same behavior as Image().resizable()
+/// Behavior: h-exp, v-exp (like `Image/resizable()`)
 struct ImageView: UIViewRepresentable {
     let url: URL?
     
