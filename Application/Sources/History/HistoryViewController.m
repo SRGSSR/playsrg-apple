@@ -153,7 +153,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return UIEdgeInsetsZero;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

@@ -50,22 +50,13 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Table layout
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin;
-        return [MediaCellSize fullWidthWithLayoutWidth:layoutWidth];
+        return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(collectionView.frame)];
     }
-    // Grid layout
     else {
-        CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-        return [MediaCellSize gridWithLayoutWidth:layoutWidth spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
+        return [MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
     }
 }
 

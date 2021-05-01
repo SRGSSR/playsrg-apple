@@ -587,53 +587,21 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    if ([self shouldDisplayMostSearchedShows]) {
-        return UIEdgeInsetsZero;
-    }
-    else {
-        return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-    }
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    if ([self shouldDisplayMostSearchedShows]) {
-        return 0.f;
-    }
-    else {
-        return LayoutStandardMargin;
-    }
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    if ([self shouldDisplayMostSearchedShows]) {
-        return 0.f;
-    }
-    else {
-        return LayoutStandardMargin;
-    }
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: Fix layout and correctly scale values if needed
     if ([self shouldDisplayMostSearchedShows]) {
-        // TODO: Correctly scale this value
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 50.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 50.f);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin;
-            return [MediaCellSize fullWidthWithLayoutWidth:layoutWidth];
+            return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(collectionView.frame)];
         }
         else {
-            CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-            return [MediaCellSize gridWithLayoutWidth:layoutWidth spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
+            return [MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
         }
     }
     // Search show list
@@ -645,7 +613,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
         return CGSizeZero;

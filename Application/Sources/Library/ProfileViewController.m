@@ -322,7 +322,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutStandardTableViewPaddingInsets;
+    return UIEdgeInsetsZero;
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -377,11 +377,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // TODO: Fix layout and correctly scale values
     if ([self notificationAtIndexPath:indexPath]) {
-        return LayoutStandardCellHeight + LayoutStandardMargin;
+        return 84.f;
     }
     else {
-        // TODO: Correctly scale this value
         return 50.f;
     }
 }

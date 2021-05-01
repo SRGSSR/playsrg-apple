@@ -232,7 +232,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return UIEdgeInsetsZero;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol

@@ -78,7 +78,7 @@ class PageViewController: DataViewController {
                     height += 60
                 }
                 
-                return height != 0 ? height + LayoutStandardMargin : 0
+                return height
             }
             
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
@@ -284,7 +284,7 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return LayoutStandardCollectionViewPaddingInsets
+        return .zero
     }
 }
 

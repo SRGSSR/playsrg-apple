@@ -14,9 +14,6 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *leadingTitleLabelLayoutConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *trailingTitleLabelLayoutConstraint;
-
 @end
 
 @implementation SearchHeaderView
@@ -28,9 +25,6 @@
     [super awakeFromNib];
     
     self.titleLabel.textColor = UIColor.whiteColor;
-    
-    self.leadingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
-    self.trailingTitleLabelLayoutConstraint.constant = LayoutStandardMargin;
 }
 
 #pragma mark Getters and setters

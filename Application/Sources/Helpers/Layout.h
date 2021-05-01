@@ -15,37 +15,6 @@ OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;
 OBJC_EXPORT const CGFloat LayoutStandardViewCornerRadius;
 
 /**
- *  Section content insets.
- */
-OBJC_EXPORT const NSDirectionalEdgeInsets LayoutStandardSectionContentInsets;
-OBJC_EXPORT const NSDirectionalEdgeInsets LayoutTopicSectionContentInsets;
-
-/**
- *  Standard cell dimensions.
- */
-OBJC_EXPORT const CGFloat LayoutStandardCellHeight;
-
-/**
- *  Standard margin.
- */
-OBJC_EXPORT const CGFloat LayoutStandardMargin;
-
-/**
- *  Featured spacer height.
- */
-OBJC_EXPORT const CGFloat LayoutFeaturedSpacerHeight;
-
-/**
- *  Standard collection view padding.
- */
-OBJC_EXPORT const UIEdgeInsets LayoutStandardCollectionViewPaddingInsets;
-
-/**
- *  Standard table view padding.
- */
-OBJC_EXPORT const UIEdgeInsets LayoutStandardTableViewPaddingInsets;
-
-/**
  *  Media badge padding.
  */
 OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;

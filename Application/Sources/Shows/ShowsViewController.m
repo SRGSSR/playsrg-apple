@@ -77,8 +77,6 @@
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
-    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -311,20 +309,14 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
-}
-
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat layoutWidth = CGRectGetWidth(collectionView.frame) - LayoutStandardSectionContentInsets.leading - LayoutStandardSectionContentInsets.trailing;
-    return [ShowCellSize gridWithLayoutWidth:layoutWidth spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2];
+    return [ShowCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
