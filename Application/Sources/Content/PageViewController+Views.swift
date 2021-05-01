@@ -12,19 +12,16 @@ extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            if section.properties.layout == .hero {
+            switch section.properties.layout {
+            case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
-            }
-            else if section.properties.layout == .highlight {
+            case .highlight:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
-            }
-            else if section.properties.presentationType == .livestreams {
+            case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
-            }
-            else if section.properties.layout == .mediaGrid {
-                MediaCell(media: media)
-            }
-            else {
+            case .mediaGrid:
+                MediaCell(media: media, style: .show)
+            default:
                 MediaCell(media: media, style: .show, layout: .vertical)
             }
         }
@@ -35,13 +32,12 @@ extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            if section.properties.layout == .hero {
+            switch section.properties.layout {
+            case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
-            }
-            else if section.properties.layout == .highlight {
+            case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
-            }
-            else {
+            default:
                 ShowCell(show: show)
             }
         }

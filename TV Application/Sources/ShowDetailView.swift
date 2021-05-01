@@ -106,7 +106,7 @@ struct ShowDetailView: View {
                     .opacity(0.8)
                     .padding()
                 case let .media(media):
-                    MediaCell(media: media)
+                    MediaCell(media: media, style: .date)
                         .onAppear {
                             model.loadNextPage(from: media)
                         }
