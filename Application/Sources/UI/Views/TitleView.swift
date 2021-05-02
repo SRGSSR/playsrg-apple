@@ -23,9 +23,9 @@ struct TitleView: View {
 
 class TitleViewSize: NSObject {
     #if os(tvOS)
-    private static let recommendedHeight: CGFloat = 150
+    private static let recommendedHeight: CGFloat = 100
     #else
-    private static let recommendedHeight: CGFloat = 150
+    private static let recommendedHeight: CGFloat = 60
     #endif
     
     @objc static func recommended(text: String?, layoutWidth: CGFloat) -> CGSize {

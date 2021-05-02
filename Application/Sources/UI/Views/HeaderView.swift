@@ -29,15 +29,22 @@ struct HeaderView: View {
     }
 }
 
-// TODO: iOS / tvOS sizes
 class HeaderViewSize: NSObject {
+    #if os(tvOS)
+    static let smallHeight: CGFloat = 45
+    static let tallHeight: CGFloat = 90
+    #else
+    static let smallHeight: CGFloat = 25
+    static let tallHeight: CGFloat = 42
+    #endif
+    
     @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> CGSize {
         if let title = title, !title.isEmpty {
             if let subtitle = subtitle, !subtitle.isEmpty {
-                return CGSize(width: layoutWidth, height: 150)
+                return CGSize(width: layoutWidth, height: tallHeight)
             }
             else {
-                return CGSize(width: layoutWidth, height: 100)
+                return CGSize(width: layoutWidth, height: smallHeight)
             }
         }
         else {
