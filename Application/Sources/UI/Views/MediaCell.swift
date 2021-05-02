@@ -122,7 +122,7 @@ class MediaCellSize: NSObject {
     #if os(tvOS)
     private static let defaultItemWidth: CGFloat = 375
     private static let defaultTableItemHeight: CGFloat = 50
-    private static let heightOffset: CGFloat = 70
+    private static let heightOffset: CGFloat = 80
     #else
     private static let defaultItemWidth: CGFloat = 210
     private static let defaultTableItemHeight: CGFloat = 80
