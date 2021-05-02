@@ -67,7 +67,7 @@ class PageViewController: DataViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = PageSectionHeaderView.size(section: section, layoutWidth: layoutEnvironment.container.effectiveContentSize.width)
+                let headerSize = PageSectionHeaderView.size(section: section, layoutWidth: layoutEnvironment.container.effectiveContentSize.width, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
                     layoutSize: NSCollectionLayoutSize(widthDimension: .absolute(headerSize.width), heightDimension: .absolute(headerSize.height)),
                     elementKind: UICollectionView.elementKindSectionHeader,

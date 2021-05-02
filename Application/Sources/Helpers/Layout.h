@@ -25,8 +25,8 @@ OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
 /**
- *  Return the size of a cell whose contentas the given width and aspect ratio, suited for display in swimlanes. A
- *  height offset can be provided if more space is required vertically for additional content.
+ *  Return the size of a cell whose content has the given width and aspect ratio, suited for display in swimlanes. A
+ *  height offset can be provided if more space is required for displaying additional content.
  *
  *        ┌────────────────────────────────────┐
  *        │....................................│

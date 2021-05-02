@@ -103,8 +103,8 @@ extension PageViewController {
             }
         }
         
-        static func size(section: PageModel.Section, layoutWidth: CGFloat) -> CGSize {
-            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+        static func size(section: PageModel.Section, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
         }
     }
 }

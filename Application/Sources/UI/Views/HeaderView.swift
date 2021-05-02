@@ -11,12 +11,33 @@ struct HeaderView: View {
     let title: String?
     let subtitle: String?
     
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
+    
+    fileprivate static func displayableSubtitle(_ subtitle: String?, horizontalSizeClass: UIUserInterfaceSizeClass) -> String? {
+        if horizontalSizeClass == .regular, let subtitle = subtitle, !subtitle.isEmpty {
+            return subtitle
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private var displayableSubtitle: String? {
+        #if os(iOS)
+        return Self.displayableSubtitle(subtitle, horizontalSizeClass: UIUserInterfaceSizeClass(horizontalSizeClass))
+        #else
+        return Self.displayableSubtitle(subtitle, horizontalSizeClass: .regular)
+        #endif
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title ?? String.placeholder(length: 8))
                 .srgFont(.H2)
                 .lineLimit(1)
-            if let subtitle = subtitle {
+            if let subtitle = displayableSubtitle {
                 Text(subtitle)
                     .srgFont(.subtitle)
                     .lineLimit(1)
@@ -38,9 +59,9 @@ class HeaderViewSize: NSObject {
     static let tallHeight: CGFloat = 42
     #endif
     
-    @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> CGSize {
+    @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         if let title = title, !title.isEmpty {
-            if let subtitle = subtitle, !subtitle.isEmpty {
+            if HeaderView.displayableSubtitle(subtitle, horizontalSizeClass: horizontalSizeClass) != nil {
                 return CGSize(width: layoutWidth, height: tallHeight)
             }
             else {
