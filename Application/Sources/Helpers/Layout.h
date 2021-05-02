@@ -25,15 +25,33 @@ OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
 /**
- *  Return the size of a cell having the given width and aspect ratio, suited for display in swimlanes. A height
- *  offset can be provided if more space is required vertically.
+ *  Return the size of a cell whose contentas the given width and aspect ratio, suited for display in swimlanes. A
+ *  height offset can be provided if more space is required vertically for additional content.
+ *
+ *        ┌────────────────────────────────────┐
+ *        │....................................│
+ *        │....................................│
+ *        │....................................│
+ *        │.............          .............│
+ *        │............. Content  .............│
+ *        │.............          .............│
+ *        │....................................│
+ *        │....................................│
+ *        │....................................│
+ *        ├────────────────────────────────────┤    ▲
+ *        │                                    │    │
+ *        │                                    │    │ height
+ *        │                                    │    │ offset
+ *        └────────────────────────────────────┘    ▼
+ *        ◀────────────────────────────────────▶
+ *                       width
  */
 OBJC_EXPORT CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
 
 /**
- *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required spacing. An
+ *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required value. An
  *  approximate width must be provided as a hint, so that the function can best determine the actual item size
- *  best matching the desired result. A minimal number of columns can be provided (>= 1).
+ *  best matching the desired result. A minimal number of columns must also be provided (>= 1).
  *
  *  As for `LayoutSwimlaneCellSize`, an aspect ratio must be provided, as well as a height offset is more
  *  space is required vertically.
@@ -44,24 +62,24 @@ OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRa
  *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
  *  content width only occupies a given fraction of the cell width.
  *
- *       ┌──────────────────────────────────────────────┬─────────────────────┐
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............                 ...............│                     │
- *       │..............     Content     ...............│                     │
- *       │..............                 ...............│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       │..............................................│                     │
- *       └──────────────────────────────────────────────┴─────────────────────┘
- *       ◀─────────────────────────────────────────────▶
- *                        content width
+ *        ┌──────────────────────────────────────────────┬─────────────────────┐
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............                 ...............│                     │
+ *        │..............     Content     ...............│                     │
+ *        │..............                 ...............│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        └──────────────────────────────────────────────┴─────────────────────┘
+ *        ◀─────────────────────────────────────────────▶
+ *                         content width
  *
- *       ◀──────────────────────────────────────────────────────────────────▶
- *                                   width
+ *        ◀──────────────────────────────────────────────────────────────────▶
+ *                                    width
  */
 OBJC_EXPORT CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
 
