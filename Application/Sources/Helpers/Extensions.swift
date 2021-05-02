@@ -87,6 +87,18 @@ extension UIHostingController {
     }
 }
 
+extension UICollectionView.SupplementaryRegistration {
+    public typealias SectionHandler<SectionType: Hashable> = (Supplementary, String, SectionType, IndexPath) -> Void
+    
+    init<SectionType: Hashable, ItemType: Hashable>(dataSource: UICollectionViewDiffableDataSource<SectionType, ItemType>, elementKind: String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.SectionHandler<SectionType>) {
+        self.init(elementKind: elementKind) { view, kind, indexPath in
+            let snapshot = dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            handler(view, kind, section, indexPath)
+        }
+    }
+}
+
 extension NSCollectionLayoutSection {
     static func horizontal(cellSize: CGSize) -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))

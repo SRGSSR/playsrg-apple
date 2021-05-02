@@ -206,13 +206,7 @@ class PageViewController: DataViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        // TODO: Create custom registration method having the data source as parameter, and providing the section directly
-        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
-            
-            let snapshot = self.dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[indexPath.section]
-            
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(dataSource: dataSource, elementKind: UICollectionView.elementKindSectionHeader) { view, _, section, _ in
             view.content = PageSectionHeaderView(section: section)
         }
         
