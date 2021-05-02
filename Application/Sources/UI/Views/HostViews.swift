@@ -129,3 +129,35 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         }
     }
 }
+
+/**
+ *  Simple view hosting `SwiftUI` content.
+ */
+class HostView<Content: View>: UIView {
+    private var hostController: UIHostingController<Content>?
+    
+    private func addHostController(for content: Content?) {
+        guard let rootView = content else { return }
+        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+        if let hostView = hostController?.view {
+            hostView.frame = bounds
+            hostView.backgroundColor = .clear
+            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            addSubview(hostView)
+        }
+    }
+    
+    private func removeHostController() {
+        if let hostView = hostController?.view {
+            hostView.removeFromSuperview()
+        }
+        hostController = nil
+    }
+    
+    var content: Content? {
+        didSet {
+            removeHostController()
+            addHostController(for: content)
+        }
+    }
+}

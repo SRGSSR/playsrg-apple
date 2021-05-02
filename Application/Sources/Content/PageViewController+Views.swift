@@ -70,36 +70,41 @@ extension PageViewController {
 }
 
 extension PageViewController {
+    class PageTitleView: HostView<TitleView> {
+        var text: String? {
+            willSet {
+                content = TitleView(text: newValue)
+            }
+        }
+        
+        static func size(text: String?, layoutWidth: CGFloat) -> CGSize {
+            return TitleViewSize.recommended(text: text, layoutWidth: layoutWidth)
+        }
+    }
+    
     struct PageSectionHeaderView: View {
         let section: PageModel.Section
-        let pageTitle: String?
+        
+        private static func title(for section: PageModel.Section) -> String? {
+            return section.properties.title
+        }
+        
+        private static func subtitle(for section: PageModel.Section) -> String? {
+            return section.properties.summary
+        }
         
         var body: some View {
-            if let pageTitle = pageTitle {
-                Text(pageTitle)
-                    .srgFont(.H1)
-                    .foregroundColor(.white)
-                    .opacity(0.8)
+            if let title = Self.title(for: section) {
+                HeaderView(title: title, subtitle: Self.subtitle(for: section))
+                    .accessibilityElement()
+                    .accessibilityOptionalLabel(title)
+                    .accessibilityOptionalHint(section.properties.accessibilityHint)
+                    .accessibility(addTraits: .isHeader)
             }
-            VStack(alignment: .leading) {
-                if let title = section.properties.title {
-                    Text(title)
-                        .srgFont(.H2)
-                        .lineLimit(1)
-                }
-                if let summary = section.properties.summary {
-                    Text(summary)
-                        .srgFont(.subtitle)
-                        .lineLimit(1)
-                        .opacity(0.8)
-                }
-            }
-            .opacity(0.8)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            .accessibilityElement()
-            .accessibilityOptionalLabel(section.properties.title)
-            .accessibilityOptionalHint(section.properties.accessibilityHint)
-            .accessibility(addTraits: .isHeader)
+        }
+        
+        static func size(section: PageModel.Section, layoutWidth: CGFloat) -> CGSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
         }
     }
 }

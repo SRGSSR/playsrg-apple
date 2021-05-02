@@ -19,8 +19,11 @@ class PageViewController: DataViewController {
     private weak var collectionView: UICollectionView!
     private var loadingImageView: UIImageView!
     
-    @available (tvOS, unavailable)
+    #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
+    #else
+    private weak var titleView: PageTitleView!
+    #endif
     
     // Deal with intermediate collection view asynchronous reload state, which is not part of the model but an
     // an implementation detail. This helps `DZNEmptyDataSet` for which the collection might be empty while it
@@ -63,28 +66,10 @@ class PageViewController: DataViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
-            func sectionHeaderHeight(for section: PageModel.Section, index: Int, pageTitle: String?) -> CGFloat? {
-                var height: CGFloat = 0
-                
-                // TODO: Layout constants?
-                if let title = section.properties.title, !title.isEmpty {
-                    height += 60
-                }
-                // TODO: Magic layout constant. Avoid
-                if let summary = section.properties.summary, !summary.isEmpty {
-                    height += (60 * 2 / 3).rounded(.up)
-                }
-                if let pageTitle = pageTitle, !pageTitle.isEmpty {
-                    height += 60
-                }
-                
-                return height
-            }
-            
-            func sectionSupplementaryItems(for section: PageModel.Section, index: Int, pageTitle: String?) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                guard let headerHeight = sectionHeaderHeight(for: section, index: index, pageTitle: pageTitle) else { return [] }
+            func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+                let headerSize = PageSectionHeaderView.size(section: section, layoutWidth: layoutEnvironment.container.effectiveContentSize.width)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(headerHeight)),
+                    layoutSize: NSCollectionLayoutSize(widthDimension: .absolute(headerSize.width), heightDimension: .absolute(headerSize.height)),
                     elementKind: UICollectionView.elementKindSectionHeader,
                     alignment: .topLeading
                 )
@@ -141,7 +126,7 @@ class PageViewController: DataViewController {
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
             let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, pageTitle: self.model.title)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex)
             return layoutSection
         }
     }
@@ -194,6 +179,14 @@ class PageViewController: DataViewController {
         self.refreshControl = refreshControl
         #endif
         
+        #if os(tvOS)
+        // Add a global header view to the collection (like `tableHeaderView`), see https://stackoverflow.com/a/18015870/760435
+        let titleView = PageTitleView()
+        titleView.text = model.title
+        collectionView.insertSubview(titleView, at: 0)
+        self.titleView = titleView
+        #endif
+        
         // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
         // stretched
         loadingImageView = UIImageView.play_loadingImageView90(withTintColor: .play_lightGray)
@@ -213,14 +206,14 @@ class PageViewController: DataViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
+        // TODO: Create custom registration method having the data source as parameter, and providing the section directly
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self = self else { return }
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            let pageTitle = indexPath.section == 0 ? self.model.title : nil
             
-            view.content = PageSectionHeaderView(section: section, pageTitle: pageTitle)
+            view.content = PageSectionHeaderView(section: section)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
@@ -236,6 +229,13 @@ class PageViewController: DataViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        
+        #if os(tvOS)
+        let titleHeight = PageTitleView.size(text: model.title, layoutWidth: view.frame.width).height
+        titleView.frame = CGRect(x: 0, y: -titleHeight, width: view.frame.size.width, height: titleHeight)
+        titleView.isHidden = (titleHeight == 0)
+        #endif
+        
         collectionView.reloadEmptyDataSet()
     }
     
@@ -284,7 +284,8 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return .zero
+        let titleHeight = PageTitleView.size(text: model.title, layoutWidth: view.frame.width).height
+        return UIEdgeInsets(top: titleHeight, left: 0, bottom: 0, right: 0)
     }
 }
 
