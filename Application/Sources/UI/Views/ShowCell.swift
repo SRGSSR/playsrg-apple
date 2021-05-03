@@ -27,12 +27,15 @@ struct ShowCell: View {
             } label: {
                 DescriptionView(show: show)
                     .frame(maxHeight: .infinity, alignment: .top)
+                    .padding(.top, ShowCellSize.verticalPadding)
             }
             #else
             Stack(direction: direction, spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
                 DescriptionView(show: show)
+                    .padding(.horizontal, ShowCellSize.horizontalPadding)
+                    .padding(.vertical, ShowCellSize.verticalPadding)
             }
             .background(Color(.play_cardGrayBackground))
             .redactable()
@@ -60,6 +63,7 @@ struct ShowCell: View {
         var body: some View {
             Text(show?.title ?? "")
                 .srgFont(.H4)
+                .foregroundColor(.white)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
         }
@@ -69,9 +73,12 @@ struct ShowCell: View {
 class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
+    fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
+    fileprivate static let verticalPadding: CGFloat = constant(iOS: 10, tvOS: 7)
+    
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
-    private static let heightOffset: CGFloat = constant(iOS: 29, tvOS: 35)
+    private static let heightOffset: CGFloat = constant(iOS: 32, tvOS: 45)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)
