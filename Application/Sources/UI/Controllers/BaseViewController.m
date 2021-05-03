@@ -17,7 +17,6 @@
 #import "GoogleCast.h"
 #import "MediaPlayerViewController.h"
 #import "MediaPreviewViewController.h"
-#import "ModuleViewController.h"
 #import "Play-Swift-Bridge.h"
 #import "PlayErrors.h"
 #import "Previewing.h"
@@ -216,53 +215,6 @@ static void commonInit(BaseViewController *self);
     return [UIMenu menuWithTitle:@"" children:menuActions.copy];
 }
 
-- (UIMenu *)contextMenuForModule:(SRGModule *)module
-{
-    NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
-    
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForModule:module];
-    if (sharingURL) {
-        UIAction *shareAction = [UIAction actionWithTitle:NSLocalizedString(@"Share", @"Context menu action to share a module") image:[UIImage imageNamed:@"share-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-            ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithModule:module URL:sharingURL];
-            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-            activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                              UIActivityTypeAssignToContact,
-                                                              UIActivityTypeSaveToCameraRoll,
-                                                              UIActivityTypePostToFlickr,
-                                                              UIActivityTypePostToVimeo,
-                                                              UIActivityTypePostToTencentWeibo ];
-            activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                if (! completed) {
-                    return;
-                }
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.type = activityType;
-                labels.source = AnalyticsSourcePeekMenu;
-                labels.value = module.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingModule labels:labels];
-                
-                if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                    [Banner showWithStyle:BannerStyleInfo
-                                  message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                    image:nil
-                                   sticky:NO
-                         inViewController:self];
-                }
-            };
-            
-            UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-            popoverPresentationController.sourceView = self.view;
-            popoverPresentationController.delegate = self.presentationControllerDelegate;
-            
-            [self presentViewController:activityViewController animated:YES completion:nil];
-        }];
-        [menuActions addObject:shareAction];
-    }
-    
-    return [UIMenu menuWithTitle:@"" children:menuActions.copy];
-}
-
 - (UIMenu *)contextMenuForShow:(SRGShow *)show
 {
     NSMutableArray<UIMenuElement *> *menuActions = [NSMutableArray array];
@@ -349,13 +301,6 @@ static void commonInit(BaseViewController *self);
             return [self contextMenuForMedia:previewObject];
         }];
     }
-    else if ([previewObject isKindOfClass:SRGModule.class]) {
-        return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
-            return [[ModuleViewController alloc] initWithModule:previewObject];
-        } actionProvider:^UIMenu * _Nullable(NSArray<UIMenuElement *> * _Nonnull suggestedActions) {
-            return [self contextMenuForModule:previewObject];
-        }];
-    }
     else if ([previewObject isKindOfClass:SRGShow.class]) {
         return [UIContextMenuConfiguration configurationWithIdentifier:nil previewProvider:^UIViewController * _Nullable{
             return [[ShowViewController alloc] initWithShow:previewObject fromPushNotification:NO];
@@ -377,9 +322,8 @@ static void commonInit(BaseViewController *self);
             MediaPreviewViewController *mediaPreviewViewController = (MediaPreviewViewController *)viewController;
             [self play_presentMediaPlayerFromLetterboxController:mediaPreviewViewController.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
         }
-        else if ([viewController isKindOfClass:ModuleViewController.class]
-                    || [viewController isKindOfClass:ShowViewController.class]
-                    || [viewController isKindOfClass:PageViewController.class]) {
+        else if ([viewController isKindOfClass:ShowViewController.class]
+                 || [viewController isKindOfClass:PageViewController.class]) {
             [self.navigationController pushViewController:viewController animated:YES];
         }
     }];

@@ -20,7 +20,6 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 DeeplinkAction const DeeplinkActionMedia = @"media";
 DeeplinkAction const DeeplinkActionShow = @"show";
 DeeplinkAction const DeeplinkActionTopic = @"topic";
-DeeplinkAction const DeeplinkActionModule = @"module";
 DeeplinkAction const DeeplinkActionHome = @"home";
 DeeplinkAction const DeeplinkActionAZ = @"az";
 DeeplinkAction const DeeplinkActionByDate = @"bydate";

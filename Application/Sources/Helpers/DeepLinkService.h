@@ -16,7 +16,6 @@ typedef NSString * DeeplinkAction NS_STRING_ENUM;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionMedia;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionShow;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionTopic;
-OBJC_EXPORT DeeplinkAction const DeeplinkActionModule;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionHome;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionAZ;
 OBJC_EXPORT DeeplinkAction const DeeplinkActionByDate;

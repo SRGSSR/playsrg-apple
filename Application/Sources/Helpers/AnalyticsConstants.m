@@ -64,7 +64,6 @@ AnalyticsTitle const AnalyticsTitleOpenURL = @"open_url";
 AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleQuickActions = @"quick_actions";
 AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
-AnalyticsTitle const AnalyticsTitleSharingModule = @"module_share";
 AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
 AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";

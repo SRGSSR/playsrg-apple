@@ -17,7 +17,6 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Play-Swift-Bridge.h"
@@ -239,9 +238,8 @@ static void *s_kvoContext = &s_kvoContext;
 {
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     
-    NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionModule,
-                                                   DeeplinkActionHome, DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch,
-                                                   DeeplinkActionLink ];
+    NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionHome,
+                                                   DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch, DeeplinkActionLink ];
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
@@ -306,19 +304,6 @@ static void *s_kvoContext = &s_kvoContext;
                 labels.source = analyticsSource;
                 labels.type = AnalyticsTypeActionDisplayPage;
                 labels.value = topicURN;
-                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
-            }];
-            return YES;
-        }
-        
-        NSString *moduleURN = URLComponents.path.lastPathComponent;
-        if ([action isEqualToString:DeeplinkActionModule] && moduleURN) {
-            [self openModuleWithURN:moduleURN completionBlock:^{
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = analyticsSource;
-                labels.type = AnalyticsTypeActionDisplayPage;
-                labels.value = moduleURN;
                 labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
             }];
@@ -498,17 +483,6 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
         [self openTopicURN:topicURN];
-        completionBlock ? completionBlock() : nil;
-    }];
-}
-
-- (void)openModuleWithURN:(NSString *)moduleURN completionBlock:(void (^)(void))completionBlock
-{
-    NSParameterAssert(moduleURN);
-    
-    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
-    [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
-        [self openModuleURN:moduleURN];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -732,24 +706,6 @@ static void *s_kvoContext = &s_kvoContext;
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
                                              userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
-            [Banner showError:error inViewController:nil];
-        }
-    }] resume];
-}
-
-- (void)openModuleURN:(NSString *)moduleURN
-{
-    [[SRGDataProvider.currentDataProvider modulesForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor type:SRGModuleTypeEvent withCompletionBlock:^(NSArray<SRGModule *> * _Nullable modules, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGModule.new, URN), moduleURN];
-        SRGModule *module = [modules filteredArrayUsingPredicate:predicate].firstObject;
-        if (module) {
-            ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
-            [self.rootTabBarController pushViewController:moduleViewController animated:YES];
-        }
-        else {
-            NSError *error = [NSError errorWithDomain:PlayErrorDomain
-                                                 code:PlayErrorCodeNotFound
-                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];

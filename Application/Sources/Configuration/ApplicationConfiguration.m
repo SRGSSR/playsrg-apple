@@ -440,30 +440,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return URLComponents.URL;
 }
 
-- (NSURL *)sharingURLForModule:(SRGModule *)module
-{
-    if (! self.playURL || ! module) {
-        return nil;
-    }
-    
-    static NSDictionary<NSNumber *, NSString *> *s_moduleTypeNames;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_moduleTypeNames = @{ @(SRGModuleTypeEvent) : @"event" };
-    });
-    
-    NSString *moduleTypeName = s_moduleTypeNames[@(module.moduleType)];
-    if (! moduleTypeName) {
-        return nil;
-    }
-    
-    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
-    URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
-                           stringByAppendingPathComponent:moduleTypeName]
-                          stringByAppendingPathComponent:module.seoName];
-    return URLComponents.URL;
-}
-
 #pragma mark Description
 
 - (NSString *)description

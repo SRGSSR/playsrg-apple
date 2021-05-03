@@ -20,10 +20,6 @@
 
 @end
 
-@interface SRGModule (ActivityItemSource) <ActivityItemSource>
-
-@end
-
 @interface ActivityItemSource ()
 
 @property (nonatomic) id<ActivityItemSource> source;
@@ -48,15 +44,6 @@
 {
     if (self = [super init]) {
         self.source = show;
-        self.URL = URL;
-    }
-    return self;
-}
-
-- (instancetype)initWithModule:(SRGModule *)module URL:(NSURL *)URL
-{
-    if (self = [super init]) {
-        self.source = module;
         self.URL = URL;
     }
     return self;
@@ -106,15 +93,6 @@
 @end
 
 @implementation SRGShow (ActivityItemSource)
-
-- (NSString *)subject
-{
-    return self.title;
-}
-
-@end
-
-@implementation SRGModule (ActivityItemSource)
 
 - (NSString *)subject
 {
