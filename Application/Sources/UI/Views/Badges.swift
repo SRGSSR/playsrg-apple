@@ -32,24 +32,17 @@ struct Badge: View {
 
 // Behavior: h-hug, v-hug
 struct DurationBadge: View {
-    let media: SRGMedia?
-    
-    private var duration: String? {
-        guard let media = media, media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
-        return PlayShortFormattedMinutes(media.duration / 1000)
-    }
+    let text: String
     
     var body: some View {
-        if let duration = duration {
-            Text(duration)
-                .srgFont(.caption)
-                .lineLimit(1)
-                .foregroundColor(.white)
-                .padding(.horizontal, BadgeMetrics.horizontalPadding)
-                .frame(height: BadgeMetrics.length)
-                .background(Color(.play_blackDurationLabelBackground))
-                .cornerRadius(BadgeMetrics.cornerRadius)
-        }
+        Text(text)
+            .srgFont(.caption)
+            .lineLimit(1)
+            .foregroundColor(.white)
+            .padding(.horizontal, BadgeMetrics.horizontalPadding)
+            .frame(height: BadgeMetrics.length)
+            .background(Color(.play_blackDurationLabelBackground))
+            .cornerRadius(BadgeMetrics.cornerRadius)
     }
 }
 
@@ -111,7 +104,7 @@ struct Badges_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             Badge(text: "Badge", color: .orange)
-            DurationBadge(media: Mock.media())
+            DurationBadge(text: "68 min")
             SubtitlesBadge()
             AudioDescriptionBadge()
             MultiAudioBadge()

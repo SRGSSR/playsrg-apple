@@ -80,6 +80,11 @@ struct MediaDescription {
         return media.summary
     }
     
+    static func duration(for media: SRGMedia?) -> String? {
+        guard let media = media, media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
+        return PlayShortFormattedMinutes(media.duration / 1000)
+    }
+    
     static func availability(for media: SRGMedia?) -> String? {
         guard let media = media else { return nil }
         let now = Date()

@@ -63,7 +63,9 @@ struct MediaVisualView: View {
                     SubtitlesBadge()
                 }
                 YouthProtectionBadge(color: media?.youthProtectionColor)
-                DurationBadge(media: media)
+                if let duration = MediaDescription.duration(for: media) {
+                    DurationBadge(text: duration)
+                }
             }
             .padding([.bottom, .horizontal], Self.padding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
