@@ -135,14 +135,4 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.hidden = NO;
 }
 
-- (void)play_setMediaBadgeWithString:(NSString *)string
-{
-    self.backgroundColor = UIColor.play_whiteBadgeColor;
-    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
-    self.layer.masksToBounds = YES;
-    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
-    self.textColor = UIColor.blackColor;
-}
-
 @end
