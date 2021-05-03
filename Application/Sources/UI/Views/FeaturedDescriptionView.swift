@@ -44,12 +44,12 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 }
                 if let introduction = content.introduction {
                     Text(introduction)
-                        .srgFont(.H4)
+                        .srgFont(.caption)
                         .lineLimit(1)
                 }
             }
             Text(content.title ?? "")
-                .srgFont(.H2)
+                .srgFont(.H3)
                 .lineLimit(1)
             if let summary = content.summary {
                 Text(summary)
