@@ -20,11 +20,6 @@ struct MediaVisualView: View {
     
     @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
     
-    private var youthProtectionLogoImage: UIImage? {
-        guard let youthProtectionColor = media?.youthProtectionColor else { return nil }
-        return YouthProtectionImageForColor(youthProtectionColor)
-    }
-    
     private var canDisplaySubtitleAvailability: Bool {
         guard !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden else { return false }
         
@@ -55,8 +50,7 @@ struct MediaVisualView: View {
             
             HStack(spacing: 4) {
                 if media?.presentation == .presentation360 {
-                    Image("360_media-25")
-                        .foregroundColor(.white)
+                    ThreeSixtyBadge()
                 }
                 Spacer()
                 if canDisplayAudioDescriptionAvailability, let media = media, media.play_isAudioDescriptionAvailable {
@@ -65,9 +59,7 @@ struct MediaVisualView: View {
                 if canDisplaySubtitleAvailability, let media = media, media.play_areSubtitlesAvailable {
                     SubtitlesBadge()
                 }
-                if let youthProtectionLogoImage = youthProtectionLogoImage {
-                    Image(uiImage: youthProtectionLogoImage)
-                }
+                YouthProtectionBadge(color: media?.youthProtectionColor)
                 DurationBadge(media: media)
             }
             .padding([.bottom, .horizontal], LayoutMediaBadgePadding)

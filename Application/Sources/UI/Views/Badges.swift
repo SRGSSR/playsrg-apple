@@ -78,6 +78,30 @@ struct AudioDescriptionBadge: View {
     }
 }
 
+/// Behavior: h-hug, v-hug
+struct ThreeSixtyBadge: View {
+    var body: some View {
+        Image("360_media-25")
+            .resizable()
+            .foregroundColor(.white)
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
+    }
+}
+
+/// Behhavior: h-hug, v-hug
+struct YouthProtectionBadge: View {
+    let color: SRGYouthProtectionColor?
+    
+    var body: some View {
+        if let color = color, let image = YouthProtectionImageForColor(color) {
+            Image(uiImage: image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: BadgeMetrics.length)
+        }
+    }
+}
+
 struct Badges_Previews: PreviewProvider {
     static var previews: some View {
         Group {
@@ -85,9 +109,19 @@ struct Badges_Previews: PreviewProvider {
             DurationBadge(media: Mock.media())
             SubtitlesBadge()
             AudioDescriptionBadge()
+            ThreeSixtyBadge()
         }
         .padding()
         .background(Color.white)
+        .previewLayout(.sizeThatFits)
+        
+        Group {
+            YouthProtectionBadge(color: .yellow)
+            YouthProtectionBadge(color: .red)
+            ThreeSixtyBadge()
+        }
+        .padding()
+        .background(Color.black)
         .previewLayout(.sizeThatFits)
     }
 }
