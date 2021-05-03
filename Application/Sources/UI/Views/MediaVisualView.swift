@@ -62,7 +62,9 @@ struct MediaVisualView: View {
                 if canDisplaySubtitleAvailability, let media = media, media.play_areSubtitlesAvailable {
                     SubtitlesBadge()
                 }
-                YouthProtectionBadge(color: media?.youthProtectionColor)
+                if let youthProtectionColor = media?.youthProtectionColor {
+                    YouthProtectionBadge(color: youthProtectionColor)
+                }
                 if let duration = MediaDescription.duration(for: media) {
                     DurationBadge(text: duration)
                 }

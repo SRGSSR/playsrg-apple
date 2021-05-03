@@ -88,10 +88,10 @@ struct ThreeSixtyBadge: View {
 
 /// Behhavior: h-hug, v-hug
 struct YouthProtectionBadge: View {
-    let color: SRGYouthProtectionColor?
+    let color: SRGYouthProtectionColor
     
     var body: some View {
-        if let color = color, let image = YouthProtectionImageForColor(color) {
+        if let image = YouthProtectionImageForColor(color) {
             Image(uiImage: image)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -116,6 +116,7 @@ struct Badges_Previews: PreviewProvider {
         HStack {
             YouthProtectionBadge(color: .yellow)
             YouthProtectionBadge(color: .red)
+            YouthProtectionBadge(color: .none)
             ThreeSixtyBadge()
         }
         .padding()
