@@ -6,6 +6,13 @@
 
 import SwiftUI
 
+private enum BadgeMetrics {
+    static let length: CGFloat = constant(iOS: 19, tvOS: 33)
+    static let horizontalPadding: CGFloat = constant(iOS: 6, tvOS: 8)
+    static let verticalPadding: CGFloat = constant(iOS: 2, tvOS: 5)
+    static let cornerRadius: CGFloat = constant(iOS: 3, tvOS: 4)
+}
+
 /// Behavior: h-hug, v-hug
 struct Badge: View {
     let text: String
@@ -16,10 +23,33 @@ struct Badge: View {
             .srgFont(.label)
             .lineLimit(1)
             .foregroundColor(.white)
-            .padding(.vertical, 5)
-            .padding(.horizontal, 8)
+            .padding(.vertical, BadgeMetrics.verticalPadding)
+            .padding(.horizontal, BadgeMetrics.horizontalPadding)
             .background(color)
-            .cornerRadius(4)
+            .cornerRadius(BadgeMetrics.cornerRadius)
+    }
+}
+
+// Behavior: h-hug, v-hug
+struct DurationBadge: View {
+    let media: SRGMedia?
+    
+    private var duration: String? {
+        guard let media = media, media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
+        return PlayShortFormattedMinutes(media.duration / 1000)
+    }
+    
+    var body: some View {
+        if let duration = duration {
+            Text(duration)
+                .srgFont(.caption)
+                .lineLimit(1)
+                .foregroundColor(.white)
+                .padding(.horizontal, BadgeMetrics.horizontalPadding)
+                .frame(height: BadgeMetrics.length)
+                .background(Color(.play_blackDurationLabelBackground))
+                .cornerRadius(BadgeMetrics.cornerRadius)
+        }
     }
 }
 
@@ -30,22 +60,21 @@ struct SubtitlesBadge: View {
             .srgFont(.caption)
             .lineLimit(1)
             .foregroundColor(.black)
-            .padding(.vertical, 5)
-            .padding(.horizontal, 8)
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .background(Color(.play_whiteBadge))
-            .cornerRadius(4)
+            .cornerRadius(BadgeMetrics.cornerRadius)
     }
 }
 
 /// Behavior: h-hug, v-hug
 struct AudioDescriptionBadge: View {
     var body: some View {
-        Image("audio_description-14")
-            .colorInvert()
-            .padding(.vertical, 5)
-            .padding(.horizontal, 8)
+        Image("audio_description-24")
+            .resizable()
+            .foregroundColor(.black)
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .background(Color(.play_whiteBadge))
-            .cornerRadius(4)
+            .cornerRadius(BadgeMetrics.cornerRadius)
     }
 }
 
@@ -53,10 +82,12 @@ struct Badges_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Badge(text: "Badge", color: .orange)
+            DurationBadge(media: Mock.media())
             SubtitlesBadge()
             AudioDescriptionBadge()
         }
         .padding()
+        .background(Color.white)
         .previewLayout(.sizeThatFits)
     }
 }

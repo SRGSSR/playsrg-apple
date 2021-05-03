@@ -915,11 +915,6 @@
 		6F4EA13A1EE034D500BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1381EE034D500BEC4DA /* Accessibility.strings */; };
 		6F4EA13D1EE034E200BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13B1EE034E200BEC4DA /* Accessibility.strings */; };
 		6F4EA1401EE034EF00BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA13E1EE034EF00BEC4DA /* Accessibility.strings */; };
-		6F4F78AF252AF7670011DBCA /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
-		6F4F78B0252AF7670011DBCA /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
-		6F4F78B1252AF7670011DBCA /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
-		6F4F78B2252AF7670011DBCA /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
-		6F4F78B3252AF7670011DBCA /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F4FCAF724D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
@@ -951,15 +946,10 @@
 		6F54D3CA26051011008B46FF /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F54D3CB26051011008B46FF /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
-		6F54D3FF26051035008B46FF /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F54D40026051035008B46FF /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
-		6F54D40126051035008B46FF /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F54D40226051036008B46FF /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
-		6F54D40326051036008B46FF /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F54D40426051036008B46FF /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
-		6F54D40526051036008B46FF /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F54D40626051037008B46FF /* MediaDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF8F155250609CF009A741F /* MediaDescription.swift */; };
-		6F54D40726051037008B46FF /* DurationLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4F78AE252AF7670011DBCA /* DurationLabel.swift */; };
 		6F556B381DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
 		6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */; };
@@ -2439,7 +2429,6 @@
 		6F4EA13C1EE034E200BEC4DA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA13F1EE034EF00BEC4DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA1411EE0351B00BEC4DA /* NSBundle+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PlaySRG.h"; sourceTree = "<group>"; };
-		6F4F78AE252AF7670011DBCA /* DurationLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationLabel.swift; sourceTree = "<group>"; };
 		6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsBaseViewController.h; sourceTree = "<group>"; };
 		6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsBaseViewController.m; sourceTree = "<group>"; };
 		6F556DB020D1174100C3573A /* NotificationService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "NotificationService-Info.plist"; sourceTree = "<group>"; };
@@ -3785,7 +3774,6 @@
 				6F475FA91EB37BC6003021EA /* CollectionLoadMoreFooterView.h */,
 				6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */,
 				6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */,
-				6F4F78AE252AF7670011DBCA /* DurationLabel.swift */,
 				08F5DBB6262DF34400F717D0 /* FeaturedContentCell.swift */,
 				6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */,
 				6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */,
@@ -7367,7 +7355,6 @@
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
 				08DD9D5C1FFE6EDB00115906 /* ModuleHeaderView.m in Sources */,
 				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
-				6F54D3FF26051035008B46FF /* DurationLabel.swift in Sources */,
 				6F8D54422639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				6FF7BB9722A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
@@ -7571,7 +7558,6 @@
 				08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F8D54432639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE171EA63D5A00965F45 /* PlayMiniPlayerView.m in Sources */,
-				6F54D40126051035008B46FF /* DurationLabel.swift in Sources */,
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F901D38DEA100BB8AAA /* main.m in Sources */,
@@ -7764,7 +7750,6 @@
 				08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F8D54442639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE191EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
-				6F54D40326051036008B46FF /* DurationLabel.swift in Sources */,
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F911D38DEA100BB8AAA /* main.m in Sources */,
@@ -7957,7 +7942,6 @@
 				08AF9483217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F8D54452639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1B1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
-				6F54D40526051036008B46FF /* DurationLabel.swift in Sources */,
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F921D38DEA100BB8AAA /* main.m in Sources */,
@@ -8150,7 +8134,6 @@
 				08AF9484217D27E40028B082 /* ActivityItemSource.m in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
-				6F54D40726051037008B46FF /* DurationLabel.swift in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
@@ -8407,7 +8390,6 @@
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FE14E70263EA9B5004AD913 /* TitleView.swift in Sources */,
-				6F4F78AF252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				084EF77D26035BB10058A567 /* PageModel.swift in Sources */,
 				6FC9E86426163C4F0025A2ED /* PageModel+Types.swift in Sources */,
 				6F298860255ADDCD007A8E2B /* Errors.swift in Sources */,
@@ -8510,7 +8492,6 @@
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FE14E71263EA9B5004AD913 /* TitleView.swift in Sources */,
-				6F4F78B0252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				084EF77E26035BB10058A567 /* PageModel.swift in Sources */,
 				6FC9E86526163C4F0025A2ED /* PageModel+Types.swift in Sources */,
 				6F298861255ADDCD007A8E2B /* Errors.swift in Sources */,
@@ -8613,7 +8594,6 @@
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FE14E72263EA9B5004AD913 /* TitleView.swift in Sources */,
-				6F4F78B1252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				084EF77F26035BB30058A567 /* PageModel.swift in Sources */,
 				6FC9E86626163C4F0025A2ED /* PageModel+Types.swift in Sources */,
 				6F298862255ADDCD007A8E2B /* Errors.swift in Sources */,
@@ -8716,7 +8696,6 @@
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FE14E73263EA9B5004AD913 /* TitleView.swift in Sources */,
-				6F4F78B2252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				084EF78026035BB40058A567 /* PageModel.swift in Sources */,
 				6FC9E86726163C4F0025A2ED /* PageModel+Types.swift in Sources */,
 				6F298863255ADDCD007A8E2B /* Errors.swift in Sources */,
@@ -8819,7 +8798,6 @@
 				085C0DD7261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6F3F1ABE25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FE14E74263EA9B5004AD913 /* TitleView.swift in Sources */,
-				6F4F78B3252AF7670011DBCA /* DurationLabel.swift in Sources */,
 				084EF78126035BB50058A567 /* PageModel.swift in Sources */,
 				6FC9E86826163C4F0025A2ED /* PageModel+Types.swift in Sources */,
 				6F298864255ADDCD007A8E2B /* Errors.swift in Sources */,

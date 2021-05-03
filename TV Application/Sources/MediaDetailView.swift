@@ -108,7 +108,7 @@ struct MediaDetailView: View {
                     if let youthProtectionLogoImage = YouthProtectionImageForColor(model.media.youthProtectionColor) {
                         Image(uiImage: youthProtectionLogoImage)
                     }
-                    DurationLabel(media: model.media)
+                    DurationBadge(media: model.media)
                 }
                 
                 if let isWebFirst = model.media.play_isWebFirst, isWebFirst {

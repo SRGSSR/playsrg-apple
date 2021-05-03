@@ -68,7 +68,7 @@ struct MediaVisualView: View {
                 if let youthProtectionLogoImage = youthProtectionLogoImage {
                     Image(uiImage: youthProtectionLogoImage)
                 }
-                DurationLabel(media: media)
+                DurationBadge(media: media)
             }
             .padding([.bottom, .horizontal], LayoutMediaBadgePadding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
