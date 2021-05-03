@@ -12,6 +12,8 @@ struct MediaVisualView: View {
     let media: SRGMedia?
     let scale: ImageScale
     
+    static let padding: CGFloat = constant(iOS: 6, tvOS: 16)
+    
     @State private var progress: Double = 0
     @State private var taskHandle: String?
     
@@ -44,11 +46,11 @@ struct MediaVisualView: View {
             
             if let media = media, let availabilityBadgeProperties = MediaDescription.availabilityBadgeProperties(for: media) {
                 Badge(text: availabilityBadgeProperties.text, color: availabilityBadgeProperties.color)
-                    .padding([.top, .leading], LayoutMediaBadgePadding)
+                    .padding([.top, .leading], Self.padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             
-            HStack(spacing: 4) {
+            HStack(spacing: Self.padding) {
                 if media?.presentation == .presentation360 {
                     ThreeSixtyBadge()
                 }
@@ -62,7 +64,7 @@ struct MediaVisualView: View {
                 YouthProtectionBadge(color: media?.youthProtectionColor)
                 DurationBadge(media: media)
             }
-            .padding([.bottom, .horizontal], LayoutMediaBadgePadding)
+            .padding([.bottom, .horizontal], Self.padding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
             if let progress = progress {

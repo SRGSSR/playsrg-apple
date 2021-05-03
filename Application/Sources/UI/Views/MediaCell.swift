@@ -36,6 +36,14 @@ struct MediaCell: View {
     }
     #endif
     
+    private var horizontalPadding: CGFloat {
+        return layout == .vertical ? 0 : MediaCellSize.horizontalPadding
+    }
+    
+    private var verticalPadding: CGFloat {
+        return layout == .vertical ? MediaCellSize.verticalPadding : 0
+    }
+    
     init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -55,6 +63,7 @@ struct MediaCell: View {
                     .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(media: media, style: style)
+                    .padding(.top, MediaCellSize.verticalPadding)
             }
             #else
             Stack(direction: direction, spacing: 0) {
@@ -64,6 +73,8 @@ struct MediaCell: View {
                     .redactable()
                     .layoutPriority(1)
                 DescriptionView(media: media, style: style)
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.top, verticalPadding)
             }
             .accessibilityElement()
             .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
@@ -98,6 +109,7 @@ struct MediaCell: View {
                 Text(MediaDescription.title(for: media, style: style) ?? String.placeholder(length: 8))
                     .srgFont(.subtitle1)
                     .lineLimit(2)
+                    .foregroundColor(Color(.play_gray))
                 Text(MediaDescription.subtitle(for: media, style: style) ?? String.placeholder(length: 15))
                     .srgFont(.H4)
                     .lineLimit(2)
@@ -118,10 +130,12 @@ extension MediaCell {
 
 class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 15)
+    fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 20)
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
-    private static let heightOffset: CGFloat = constant(iOS: 60, tvOS: 80)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 95)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)
@@ -151,22 +165,25 @@ class MediaCellSize: NSObject {
 struct MediaCell_Previews: PreviewProvider {
     static private let verticalLayoutSize = MediaCellSize.swimlane()
     static private let horizontalLayoutSize = MediaCellSize.fullWidth(layoutWidth: 600)
+    static private let style = MediaDescription.Style.show
     
     static var previews: some View {
         Group {
-            MediaCell(media: Mock.media(), layout: .vertical)
-            MediaCell(media: Mock.media(.rich), layout: .vertical)
-            MediaCell(media: Mock.media(.overflow), layout: .vertical)
-            MediaCell(media: Mock.media(.nineSixteen), layout: .vertical)
+            MediaCell(media: Mock.media(), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(.rich), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .vertical)
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
         
+        #if os(iOS)
         Group {
-            MediaCell(media: Mock.media(), layout: .horizontal)
-            MediaCell(media: Mock.media(.rich), layout: .horizontal)
-            MediaCell(media: Mock.media(.overflow), layout: .horizontal)
-            MediaCell(media: Mock.media(.nineSixteen), layout: .horizontal)
+            MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
+            MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
+            MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
+            MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
         }
         .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+        #endif
     }
 }

@@ -10,10 +10,8 @@ const CGFloat LayoutStandardLabelCornerRadius = 2.f;
 const CGFloat LayoutStandardViewCornerRadius = 4.f;
 
 #if TARGET_OS_TV
-const CGFloat LayoutMediaBadgePadding = 8.f;
 const CGFloat LayoutProgressBarHeight = 8.f;
 #else
-const CGFloat LayoutMediaBadgePadding = 6.f;
 const CGFloat LayoutProgressBarHeight = 3.f;
 #endif
 

@@ -15,11 +15,6 @@ OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;
 OBJC_EXPORT const CGFloat LayoutStandardViewCornerRadius;
 
 /**
- *  Media badge padding.
- */
-OBJC_EXPORT const CGFloat LayoutMediaBadgePadding;
-
-/**
  *  Progress bar height.
  */
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
