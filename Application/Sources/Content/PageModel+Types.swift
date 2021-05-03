@@ -344,7 +344,11 @@ extension ConfiguredSection: PageSectionProperties {
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (self.contentPresentationType == .hero) ? .hero : .mediaSwimlane
         case .tvLive, .radioLive, .radioLiveSatellite:
+            #if os(iOS)
+            return .liveMediaGrid
+            #else
             return .liveMediaSwimlane
+            #endif
         case .tvLiveCenter, .tvScheduledLivestreams:
             return .mediaSwimlane
         case .radioFavoriteShows:
