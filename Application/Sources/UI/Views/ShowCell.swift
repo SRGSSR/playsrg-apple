@@ -72,9 +72,8 @@ struct ShowCell: View {
 
 class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
-    fileprivate static let verticalPadding: CGFloat = constant(iOS: 10, tvOS: 7)
+    fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
