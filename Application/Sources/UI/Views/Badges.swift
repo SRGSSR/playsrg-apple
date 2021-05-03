@@ -115,7 +115,6 @@ struct Badges_Previews: PreviewProvider {
             SubtitlesBadge()
             AudioDescriptionBadge()
             MultiAudioBadge()
-            ThreeSixtyBadge()
         }
         .padding()
         .background(Color.white)
