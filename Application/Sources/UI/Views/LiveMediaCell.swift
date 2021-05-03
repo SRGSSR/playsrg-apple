@@ -94,6 +94,26 @@ struct LiveMediaCell: View, LiveMedia {
         let programComposition: SRGProgramComposition?
         let date: Date
         
+        #if os(iOS)
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        #endif
+        
+        private var horizontalPadding: CGFloat {
+            #if os(iOS)
+            return horizontalSizeClass == .compact ? LiveMediaCellSize.compactHorizontalPadding : LiveMediaCellSize.regularPadding
+            #else
+            return LiveMediaCellSize.regularPadding
+            #endif
+        }
+        
+        private var verticalPadding: CGFloat {
+            #if os(iOS)
+            return horizontalSizeClass == .compact ? LiveMediaCellSize.compactVerticalPadding : LiveMediaCellSize.regularPadding
+            #else
+            return LiveMediaCellSize.regularPadding
+            #endif
+        }
+        
         var body: some View {
             VStack(alignment: .leading) {
                 if let logoImage = logoImage {
@@ -103,13 +123,18 @@ struct LiveMediaCell: View, LiveMedia {
                 Text(title(at: date))
                     .srgFont(.body)
                     .lineLimit(2)
+                    .foregroundColor(.white)
                 
                 if let subtitle = subtitle(at: date) {
                     Text(subtitle)
                         .srgFont(.caption)
-                        .lineLimit(2)
+                        .lineLimit(1)
+                        .foregroundColor(.white)
+                        .layoutPriority(1)
                 }
             }
+            .padding(.horizontal, horizontalPadding)
+            .padding(.vertical, verticalPadding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
@@ -117,6 +142,9 @@ struct LiveMediaCell: View, LiveMedia {
 
 class LiveMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let regularPadding: CGFloat = constant(iOS: 10, tvOS: 16)
+    fileprivate static let compactHorizontalPadding: CGFloat = 8
+    fileprivate static let compactVerticalPadding: CGFloat = 16
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
@@ -142,7 +170,18 @@ struct LiveMediaCell_Previews: PreviewProvider {
     static private let size = LiveMediaCellSize.swimlane()
     
     static var previews: some View {
+        #if os(tvOS)
         LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
             .previewLayout(.fixed(width: size.width, height: size.height))
+        #else
+        Group {
+            LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+                .previewLayout(.fixed(width: size.width, height: size.height))
+                .environment(\.horizontalSizeClass, .compact)
+            LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+                .previewLayout(.fixed(width: size.width, height: size.height))
+                .environment(\.horizontalSizeClass, .regular)
+        }
+        #endif
     }
 }
