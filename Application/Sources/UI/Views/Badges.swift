@@ -109,7 +109,7 @@ struct YouthProtectionBadge: View {
 
 struct Badges_Previews: PreviewProvider {
     static var previews: some View {
-        Group {
+        HStack {
             Badge(text: "Badge", color: .orange)
             DurationBadge(media: Mock.media())
             SubtitlesBadge()
@@ -121,7 +121,7 @@ struct Badges_Previews: PreviewProvider {
         .background(Color.white)
         .previewLayout(.sizeThatFits)
         
-        Group {
+        HStack {
             YouthProtectionBadge(color: .yellow)
             YouthProtectionBadge(color: .red)
             ThreeSixtyBadge()
