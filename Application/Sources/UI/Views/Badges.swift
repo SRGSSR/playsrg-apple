@@ -79,9 +79,8 @@ struct MultiAudioBadge: View {
 /// Behavior: h-hug, v-hug
 struct ThreeSixtyBadge: View {
     var body: some View {
-        Image("360_media-25")
+        Image("360_media-24")
             .resizable()
-            .foregroundColor(.white)
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
     }
 }
@@ -108,6 +107,7 @@ struct Badges_Previews: PreviewProvider {
             SubtitlesBadge()
             AudioDescriptionBadge()
             MultiAudioBadge()
+            ThreeSixtyBadge()
         }
         .padding()
         .background(Color.white)
@@ -117,10 +117,8 @@ struct Badges_Previews: PreviewProvider {
             YouthProtectionBadge(color: .yellow)
             YouthProtectionBadge(color: .red)
             YouthProtectionBadge(color: .none)
-            ThreeSixtyBadge()
         }
         .padding()
-        .background(Color.black)
         .previewLayout(.sizeThatFits)
     }
 }

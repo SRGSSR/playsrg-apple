@@ -31,7 +31,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
@@ -181,8 +180,6 @@
     self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:download];
-    
-    self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
     
     BOOL isWebFirst = download.media.play_isWebFirst;
     self.webFirstLabel.hidden = ! isWebFirst;
