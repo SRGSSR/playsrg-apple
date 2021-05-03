@@ -21,26 +21,29 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     
     private var direction: StackDirection {
         #if os(iOS)
-        return horizontalSizeClass == .compact ? .vertical : .horizontal
-        #else
-        return .horizontal
+        if horizontalSizeClass == .compact {
+            return .vertical
+        }
         #endif
+        return .horizontal
     }
     
     private var horizontalPadding: CGFloat {
         #if os(iOS)
-        return horizontalSizeClass == .compact ? FeaturedContentCellSize.compactHorizontalPadding : FeaturedContentCellSize.horizontalPadding
-        #else
-        return FeaturedContentCellSize.horizontalPadding
+        if horizontalSizeClass == .compact {
+            return FeaturedContentCellSize.compactHorizontalPadding
+        }
         #endif
+        return FeaturedContentCellSize.horizontalPadding
     }
     
     private var verticalPadding: CGFloat {
         #if os(iOS)
-        return horizontalSizeClass == .compact ? FeaturedContentCellSize.compactVerticalPadding : 0
-        #else
-        return 0
+        if horizontalSizeClass == .compact {
+            return FeaturedContentCellSize.compactVerticalPadding
+        }
         #endif
+        return 0
     }
     
     private var descriptionAlignment: FeaturedDescriptionView<Content>.Alignment {
@@ -105,6 +108,7 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
 
 class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let fraction: CGFloat = constant(iOS: 0.9, tvOS: 1)
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 50, tvOS: 60)
     fileprivate static let compactHorizontalPadding: CGFloat = 6
     fileprivate static let compactVerticalPadding: CGFloat = 10
@@ -112,10 +116,10 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(0.9 * layoutWidth, aspectRatio, compactHeightOffset);
+            return LayoutSwimlaneCellSize(fraction * layoutWidth, aspectRatio, compactHeightOffset);
         }
         else {
-            return LayoutFractionedCellSize(0.9 * layoutWidth, aspectRatio, 0.6);
+            return LayoutFractionedCellSize(fraction * layoutWidth, aspectRatio, 0.6);
         }
     }
     

@@ -100,18 +100,20 @@ struct LiveMediaCell: View, LiveMedia {
         
         private var horizontalPadding: CGFloat {
             #if os(iOS)
-            return horizontalSizeClass == .compact ? LiveMediaCellSize.compactHorizontalPadding : LiveMediaCellSize.regularPadding
-            #else
-            return LiveMediaCellSize.regularPadding
+            if horizontalSizeClass == .compact {
+                return LiveMediaCellSize.compactHorizontalPadding
+            }
             #endif
+            return LiveMediaCellSize.regularPadding
         }
         
         private var verticalPadding: CGFloat {
             #if os(iOS)
-            return horizontalSizeClass == .compact ? LiveMediaCellSize.compactVerticalPadding : LiveMediaCellSize.regularPadding
-            #else
-            return LiveMediaCellSize.regularPadding
+            if horizontalSizeClass == .compact {
+                return LiveMediaCellSize.compactVerticalPadding
+            }
             #endif
+            return LiveMediaCellSize.regularPadding
         }
         
         var body: some View {

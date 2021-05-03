@@ -97,7 +97,7 @@ extension UIHostingController {
 }
 
 extension UICollectionView.SupplementaryRegistration {
-    public typealias SectionHandler<SectionType: Hashable> = (Supplementary, String, SectionType, IndexPath) -> Void
+    typealias SectionHandler<SectionType: Hashable> = (Supplementary, String, SectionType, IndexPath) -> Void
     
     init<SectionType: Hashable, ItemType: Hashable>(dataSource: UICollectionViewDiffableDataSource<SectionType, ItemType>, elementKind: String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.SectionHandler<SectionType>) {
         self.init(elementKind: elementKind) { view, kind, indexPath in
@@ -109,23 +109,44 @@ extension UICollectionView.SupplementaryRegistration {
 }
 
 extension NSCollectionLayoutSection {
-    static func horizontal(cellSize: CGSize) -> NSCollectionLayoutSection {
+    typealias CellSizer = ((layoutWidth: CGFloat, spacing: CGFloat)) -> CGSize
+    
+    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat, top: CGFloat, bottom: CGFloat, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
+        
+        let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
+        let cellSize = cellSizer((effectiveLayoutWidth, spacing))
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .absolute(cellSize.height))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
-        return NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = spacing
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
+        return section
     }
     
-    static func grid(cellSize: CGSize) -> NSCollectionLayoutSection {
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat, top: CGFloat, bottom: CGFloat, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
+        
+        let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
+        let cellSize = cellSizer((effectiveLayoutWidth, spacing))
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(cellSize.height))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(cellSize.height))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        group.interItemSpacing = .fixed(spacing)
         
-        return NSCollectionLayoutSection(group: group)
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = spacing
+        
+        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
+        return section
     }
 }

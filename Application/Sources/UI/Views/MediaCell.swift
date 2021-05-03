@@ -25,16 +25,16 @@ struct MediaCell: View {
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
     
     private var direction: StackDirection {
+        #if os(iOS)
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
         }
-        else {
-            return .vertical
-        }
+        #endif
+        return .vertical
     }
-    #endif
     
     private var horizontalPadding: CGFloat {
         return direction == .vertical ? 0 : MediaCellSize.horizontalPadding

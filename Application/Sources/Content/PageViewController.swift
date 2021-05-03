@@ -31,6 +31,10 @@ class PageViewController: DataViewController {
     private var reloadCount = 0
     private var refreshTriggered = false
     
+    private static let spacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let top: CGFloat = constant(iOS: 3, tvOS: 20)
+    private static let bottom: CGFloat = constant(iOS: 35, tvOS: 60)
+    
     #if os(iOS)
     private typealias CollectionView = DampedCollectionView
     #else
@@ -77,45 +81,68 @@ class PageViewController: DataViewController {
             }
             
             func layoutSection(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+                let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+                let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
+                
                 switch section.properties.layout {
                 case .hero:
-                    let cellSize = FeaturedContentCellSize.hero(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                        return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .highlight:
-                    let cellSize = FeaturedContentCellSize.highlight(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
-                    return NSCollectionLayoutSection.horizontal(cellSize: cellSize)
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
                 case .mediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: MediaCellSize.swimlane())
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                        return MediaCellSize.swimlane()
+                    }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .liveMediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: LiveMediaCellSize.swimlane())
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                        return LiveMediaCellSize.swimlane()
+                    }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: ShowCellSize.swimlane())
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                        return ShowCellSize.swimlane()
+                    }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topicSelector:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(cellSize: TopicCellSize.swimlane())
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                        return TopicCellSize.swimlane()
+                    }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaGrid:
-                    if layoutEnvironment.traitCollection.horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(cellSize: MediaCellSize.fullWidth(layoutWidth: layoutEnvironment.container.effectiveContentSize.width))
+                    if horizontalSizeClass == .compact {
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                            return MediaCellSize.fullWidth(layoutWidth: layoutWidth)
+                        }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(cellSize: MediaCellSize.grid(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, spacing: 0, minimumNumberOfColumns: 1))
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 1)
+                        }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(cellSize: LiveMediaCellSize.grid(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, spacing: 0, minimumNumberOfColumns: 2))
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 2)
+                    }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(cellSize: ShowCellSize.grid(layoutWidth: layoutEnvironment.container.effectiveContentSize.width, spacing: 0, minimumNumberOfColumns: 2))
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
+                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 2)
+                    }
                 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(cellSize: ShowAccessCellSize.fullWidth(layoutWidth: layoutEnvironment.container.effectiveContentSize.width))
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                        return ShowAccessCellSize.fullWidth(layoutWidth: layoutWidth)
+                    }
                 #endif
                 }
             }
@@ -279,7 +306,7 @@ extension PageViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
         let titleHeight = PageTitleView.size(text: model.title, layoutWidth: view.frame.width).height
-        return UIEdgeInsets(top: titleHeight, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: titleHeight + Self.spacing, left: 0, bottom: 0, right: 0)
     }
 }
 
