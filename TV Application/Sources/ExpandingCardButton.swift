@@ -10,7 +10,7 @@ import SwiftUI
  *  A wrapper view for adding a card appearance to any view, expanding into all available space
  *  (unlike a usual card button which hugs its content).
  *
- *  Sizing behavior: h-exp, v-exp
+ *  Behavior: h-exp, v-exp
  */
 struct ExpandingCardButton<Content: View>: View {
     private let action: () -> Void

@@ -13,7 +13,7 @@ import SwiftUI
  *  Content is assigned to the button area and is provided all the space it needs. In the remaining space below
  *  a label can be displayed.
  *
- *  Sizing behavior: h-exp, v-exp
+ *  Behavior: h-exp, v-exp
  */
 struct LabeledCardButton<Content: View, Label: View>: View {
     private let aspectRatio: CGFloat?
