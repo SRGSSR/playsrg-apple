@@ -116,7 +116,7 @@ struct MediaDescription {
         guard let media = media else { return nil }
         
         if media.contentType == .livestream {
-            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), Color(.play_liveRed))
+            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), Color(.play_liveRed))
         }
         else {
             let now = Date()
