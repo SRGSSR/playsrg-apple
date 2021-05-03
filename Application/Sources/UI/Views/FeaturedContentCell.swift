@@ -27,6 +27,22 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
         #endif
     }
     
+    private var horizontalPadding: CGFloat {
+        #if os(iOS)
+        return horizontalSizeClass == .compact ? FeaturedContentCellSize.compactHorizontalPadding : FeaturedContentCellSize.horizontalPadding
+        #else
+        return FeaturedContentCellSize.horizontalPadding
+        #endif
+    }
+    
+    private var verticalPadding: CGFloat {
+        #if os(iOS)
+        return horizontalSizeClass == .compact ? FeaturedContentCellSize.compactVerticalPadding : 0
+        #else
+        return 0
+        #endif
+    }
+    
     private var descriptionAlignment: FeaturedDescriptionView<Content>.Alignment {
         if direction == .vertical {
             return .topLeading
@@ -45,6 +61,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
                     FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
+                        .padding(.horizontal, horizontalPadding)
+                        .padding(.vertical, verticalPadding)
                 }
                 .background(Color(.play_cardGrayBackground))
                 .cornerRadius(LayoutStandardViewCornerRadius)
@@ -59,6 +77,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
+                    .padding(.horizontal, horizontalPadding)
+                    .padding(.vertical, verticalPadding)
             }
             .background(Color(.play_cardGrayBackground))
             .redactable()
@@ -85,10 +105,14 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
 
 class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let horizontalPadding: CGFloat = constant(iOS: 50, tvOS: 60)
+    fileprivate static let compactHorizontalPadding: CGFloat = 6
+    fileprivate static let compactVerticalPadding: CGFloat = 10
+    fileprivate static let compactHeightOffset: CGFloat = 70
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(0.9 * layoutWidth, aspectRatio, 89);
+            return LayoutSwimlaneCellSize(0.9 * layoutWidth, aspectRatio, compactHeightOffset);
         }
         else {
             return LayoutFractionedCellSize(0.9 * layoutWidth, aspectRatio, 0.6);
@@ -97,7 +121,7 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 89);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, compactHeightOffset);
         }
         else {
             return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4);

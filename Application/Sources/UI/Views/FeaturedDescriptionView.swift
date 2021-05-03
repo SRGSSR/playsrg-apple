@@ -17,6 +17,9 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     let content: Content
     let alignment: Alignment
     
+    let spacing: CGFloat = 6
+    let largeSpacing: CGFloat = 10
+    
     private var stackAlignment: HorizontalAlignment {
         return alignment == .center ? .center : .leading
     }
@@ -37,8 +40,8 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     }
     
     var body: some View {
-        VStack(alignment: stackAlignment, spacing: 0) {
-            HStack(spacing: 0) {
+        VStack(alignment: stackAlignment, spacing: spacing) {
+            HStack(spacing: spacing) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.play_green))
                 }
@@ -46,21 +49,25 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     Text(introduction)
                         .srgFont(.caption)
                         .lineLimit(1)
+                        .foregroundColor(Color(.play_gray))
                 }
             }
-            Text(content.title ?? "")
-                .srgFont(.H3)
-                .lineLimit(1)
-            if let summary = content.summary {
-                Text(summary)
-                    .srgFont(.body)
-                    .lineLimit(3)
-                    .multilineTextAlignment(textAlignment)
-                    .opacity(0.8)
+            
+            VStack(alignment: stackAlignment, spacing: largeSpacing) {
+                Text(content.title ?? "")
+                    .srgFont(.H3)
+                    .lineLimit(2)
+                    .foregroundColor(.white)
+                if alignment != .topLeading, let summary = content.summary {
+                    Text(summary)
+                        .srgFont(.body)
+                        .lineLimit(3)
+                        .multilineTextAlignment(textAlignment)
+                        .foregroundColor(Color(.play_gray))
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
-        .foregroundColor(.white)
     }
 }
 
@@ -85,13 +92,13 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
             FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .topLeading)
             FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .center)
         }
-        .previewLayout(.fixed(width: 1000, height: 600))
+        .previewLayout(.fixed(width: 800, height: 300))
         
         Group {
             FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .leading)
             FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .topLeading)
             FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .center)
         }
-        .previewLayout(.fixed(width: 1000, height: 600))
+        .previewLayout(.fixed(width: 800, height: 300))
     }
 }
