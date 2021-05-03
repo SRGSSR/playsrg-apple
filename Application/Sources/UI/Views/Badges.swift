@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+/// Behavior: h-hug, v-hug
 struct Badge: View {
     let text: String
     let color: Color
@@ -22,6 +23,7 @@ struct Badge: View {
     }
 }
 
+/// Behavior: h-hug, v-hug
 struct SubtitlesBadge: View {
     var body: some View {
         Text("ST")
@@ -35,6 +37,7 @@ struct SubtitlesBadge: View {
     }
 }
 
+/// Behavior: h-hug, v-hug
 struct AudioDescriptionBadge: View {
     var body: some View {
         Image("audio_description-14")
@@ -43,5 +46,17 @@ struct AudioDescriptionBadge: View {
             .padding(.horizontal, 8)
             .background(Color(.play_whiteBadge))
             .cornerRadius(4)
+    }
+}
+
+struct Badges_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            Badge(text: "Badge", color: .orange)
+            SubtitlesBadge()
+            AudioDescriptionBadge()
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
