@@ -35,7 +35,7 @@ struct HeaderView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text(title ?? String.placeholder(length: 8))
-                .srgFont(.H2)
+                .srgFont(.H3)
                 .lineLimit(1)
             if let subtitle = displayableSubtitle {
                 Text(subtitle)
