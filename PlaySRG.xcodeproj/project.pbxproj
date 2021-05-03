@@ -3134,7 +3134,7 @@
 			path = Favorites;
 			sourceTree = "<group>";
 		};
-		087584C623A0008500FA7207 /* Library */ = {
+		087584C623A0008500FA7207 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
 				0875850423A0025E00FA7207 /* ProfileAccountHeaderView.h */,
@@ -3146,7 +3146,7 @@
 				0875850A23A0025E00FA7207 /* ProfileViewController.m */,
 				0875850923A0025E00FA7207 /* ProfileViewController.storyboard */,
 			);
-			path = Library;
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		0875853323A3DDB800FA7207 /* RadioChannels */ = {
@@ -3392,12 +3392,12 @@
 				086F8D4C22984B29001BE2F4 /* Favorites */,
 				08654B921D3CDA160040EF04 /* Helpers */,
 				6F9CEA6321884ACC007DE35F /* History */,
-				087584C623A0008500FA7207 /* Library */,
 				086BDE111EA63D3800965F45 /* MiniPlayer */,
 				6FDF08C4218B126700B2AF2C /* Model */,
 				6FA9ECA920C7A9F300D3D6C2 /* Notifications */,
 				6F00BFD320A9C630009795AF /* Onboarding */,
 				E66BEC181DA7FCC000AD4450 /* Player */,
+				087584C623A0008500FA7207 /* Profile */,
 				0875853323A3DDB800FA7207 /* RadioChannels */,
 				E694A9D61D65EFF300372DF0 /* Search */,
 				0806E7B41D50D8DD002ED406 /* Settings */,
