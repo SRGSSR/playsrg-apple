@@ -39,7 +39,7 @@ struct HeaderView: View {
                 .lineLimit(1)
             if let subtitle = displayableSubtitle {
                 Text(subtitle)
-                    .srgFont(.subtitle)
+                    .srgFont(.subtitle1)
                     .lineLimit(1)
                     .opacity(0.8)
             }

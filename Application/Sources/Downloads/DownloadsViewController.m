@@ -194,7 +194,7 @@
 {
     NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device does not support 3D touch");
     return [[NSAttributedString alloc] initWithString:description
-                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
                                                          NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
 }
 

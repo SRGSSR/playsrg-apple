@@ -137,7 +137,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     BOOL isFavorite = FavoritesContainsShow(self.show);
     [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full-22"] : [UIImage imageNamed:@"show_favorite-22"] forState:UIControlStateNormal];
     
-    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
     NSString *title = [isFavorite ? NSLocalizedString(@"Favorites", @"Label displayed in the show view when a show has been favorited") : NSLocalizedString(@"Add to favorites", @"Label displayed in the show view when a show can be favorited") uppercaseString];
     [self.favoriteLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
@@ -155,7 +155,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
         [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
         
-        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
         NSString *title = [subscribed ? NSLocalizedString(@"Notified", @"Subscription label when notification enabled in the show view") : NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString];
         [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:title
@@ -165,7 +165,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     else {
         [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
         
-        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
         [self.subscriptionLabelButton setAttributedTitle:[[NSAttributedString alloc] initWithString:[NSLocalizedString(@"Notify me", @"Subscription label to be notified in the show view") uppercaseString]
                                                                                          attributes:attributes] forState:UIControlStateNormal];

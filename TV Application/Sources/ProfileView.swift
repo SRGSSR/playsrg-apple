@@ -20,13 +20,13 @@ struct ProfileView: View {
         List {
             if model.supportsLogin {
                 Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.H3),
-                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
+                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
                 Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
-                        footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
+                        footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
@@ -41,7 +41,7 @@ struct ProfileView: View {
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
                 Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
-                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
+                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     AutoplayListItem()
                 }
             }
@@ -91,7 +91,7 @@ struct ProfileView: View {
         var body: some View {
             Button(action: action) {
                 Text(text)
-                    .srgFont(.button1)
+                    .srgFont(.button)
             }
             .padding()
             .alert(isPresented: $alertDisplayed, content: alert)
@@ -109,10 +109,10 @@ struct ProfileView: View {
             Button(action: action) {
                 HStack {
                     Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
-                        .srgFont(.button1)
+                        .srgFont(.button)
                     Spacer()
                     Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
-                        .srgFont(.button1)
+                        .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
             }
@@ -151,7 +151,7 @@ struct ProfileView: View {
         var body: some View {
             Button(action: action) {
                 Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
             }
             .padding()
@@ -190,7 +190,7 @@ struct ProfileView: View {
         var body: some View {
             Button(action: action) {
                 Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }
             .padding()
@@ -229,7 +229,7 @@ struct ProfileView: View {
         var body: some View {
             Button(action: action) {
                 Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
             }
             .padding()
@@ -246,10 +246,10 @@ struct ProfileView: View {
             } label: {
                 HStack {
                     Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
-                        .srgFont(.button1)
+                        .srgFont(.button)
                     Spacer()
                     Text(model.version)
-                        .srgFont(.button1)
+                        .srgFont(.button)
                 }
                 .foregroundColor(.secondary)
             }

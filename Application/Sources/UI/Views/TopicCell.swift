@@ -48,7 +48,7 @@ struct TopicCell: View {
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
                 Color(white: 0, opacity: 0.2)
                 Text(topic?.title ?? "")
-                    .srgFont(.overline)
+                    .srgFont(.button)
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .padding(20)

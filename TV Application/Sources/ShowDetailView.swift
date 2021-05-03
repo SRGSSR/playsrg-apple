@@ -189,7 +189,7 @@ struct ShowDetailView: View {
                     }
                     if let lead = show.lead {
                         Text(lead)
-                            .srgFont(.subtitle)
+                            .srgFont(.subtitle2)
                             .foregroundColor(.white)
                     }
                     Spacer()

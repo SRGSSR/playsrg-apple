@@ -372,7 +372,7 @@ extension PageViewController: DZNEmptyDataSetSource {
     func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
         return NSAttributedString(string: NSLocalizedString("Pull to reload", comment: "Text displayed to inform the user she can pull a list to reload it"),
                                   attributes: [
-                                    NSAttributedString.Key.font: SRGFont.font(.subtitle) as UIFont,
+                                    NSAttributedString.Key.font: SRGFont.font(.H4) as UIFont,
                                     NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
                                   ])
     }

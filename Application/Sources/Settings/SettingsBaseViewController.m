@@ -136,7 +136,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

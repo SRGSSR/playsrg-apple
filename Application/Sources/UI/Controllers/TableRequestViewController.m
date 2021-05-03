@@ -258,7 +258,7 @@
     NSString *description = (self.lastRequestError == nil) ? self.emptyTableSubtitle : NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
     if (description) {
         return [[NSAttributedString alloc] initWithString:description
-                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
     }
     else {

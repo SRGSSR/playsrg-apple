@@ -33,7 +33,7 @@ struct LabeledButton: View {
                     .accessibility(addTraits: .isButton)
             }
             Text(label)
-                .srgFont(.button2)
+                .srgFont(.subtitle2)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)

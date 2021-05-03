@@ -75,10 +75,10 @@
     self.unreadLabel.hidden = notification.read;
     
     self.subtitleLabel.text = notification.body;
-    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:notification.date];
-    self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     // Have content fit in (almost) constant size vertically by reducing the title number of lines when a tag is displayed
     UIContentSizeCategory contentSizeCategory = UIApplication.sharedApplication.preferredContentSizeCategory;

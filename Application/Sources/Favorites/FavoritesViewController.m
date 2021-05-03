@@ -256,7 +256,7 @@
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
     if (self.lastRequestError) {

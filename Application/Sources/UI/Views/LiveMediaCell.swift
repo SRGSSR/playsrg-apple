@@ -101,12 +101,12 @@ struct LiveMediaCell: View, LiveMedia {
                 }
                 
                 Text(title(at: date))
-                    .srgFont(.subtitle)
+                    .srgFont(.body)
                     .lineLimit(2)
                 
                 if let subtitle = subtitle(at: date) {
                     Text(subtitle)
-                        .srgFont(.overline)
+                        .srgFont(.caption)
                         .lineLimit(2)
                 }
             }

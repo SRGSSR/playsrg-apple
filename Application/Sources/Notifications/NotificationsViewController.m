@@ -247,7 +247,7 @@
 
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Subscribe to shows you like to be notified when a new episode is available.", @"Message displayed when no notifications have been received")
                                            attributes:attributes];

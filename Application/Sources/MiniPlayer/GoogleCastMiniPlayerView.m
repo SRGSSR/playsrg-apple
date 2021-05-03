@@ -115,7 +115,7 @@
 
 - (void)updateFonts
 {
-    self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 

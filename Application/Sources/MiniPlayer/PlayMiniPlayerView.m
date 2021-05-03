@@ -195,7 +195,7 @@
     
     SRGChannel *channel = self.programComposition.channel;
     if (channel) {
-        self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+        self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         if (! self.controller || self.controller.live) {
             self.titleLabel.numberOfLines = 1;
             self.liveLabel.hidden = NO;

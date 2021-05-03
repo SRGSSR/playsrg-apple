@@ -45,13 +45,13 @@
     _relatedContent = relatedContent;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:relatedContent.title
-                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
     
     NSString *text = relatedContent.lead ?: relatedContent.summary;
     if (text.length != 0) {
         [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
-                                                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle],
+                                                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
                                                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor }]];
     }
     

@@ -23,7 +23,7 @@ struct ShowAccessCell: View {
                     HStack {
                         Image("atoz-22")
                         Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
-                            .srgFont(.body)
+                            .srgFont(.button)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.opacity(0.1))
@@ -38,7 +38,7 @@ struct ShowAccessCell: View {
                     HStack {
                         Image("calendar-22")
                         Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))
-                            .srgFont(.body)
+                            .srgFont(.button)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.white.opacity(0.1))

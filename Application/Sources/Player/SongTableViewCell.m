@@ -40,7 +40,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 + (UIFont *)timeLabelFont
 {
-    return [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    return [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 + (UIFont *)titleLabelFont

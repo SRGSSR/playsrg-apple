@@ -190,7 +190,7 @@
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             
-            self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+            self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.channelLabel.text = channel.title;
             
             self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
@@ -222,7 +222,7 @@
     self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
-    self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

@@ -96,7 +96,7 @@ struct MediaCell: View {
         var body: some View {
             VStack(alignment: .leading) {
                 Text(MediaDescription.title(for: media, style: style) ?? String.placeholder(length: 8))
-                    .srgFont(.subtitle)
+                    .srgFont(.subtitle1)
                     .lineLimit(2)
                 Text(MediaDescription.subtitle(for: media, style: style) ?? String.placeholder(length: 15))
                     .srgFont(.H4)

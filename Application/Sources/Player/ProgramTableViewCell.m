@@ -87,7 +87,7 @@
     self.titleLabel.text = program.title;
     self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
-    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle];
+    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
     

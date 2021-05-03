@@ -93,7 +93,7 @@ struct MediaDetailView: View {
             HStack(spacing: 10) {
                 Image(icon)
                 Text(values.joined(separator: " - "))
-                    .srgFont(.overline)
+                    .srgFont(.subtitle2)
                     .foregroundColor(.white)
             }
         }
@@ -164,7 +164,7 @@ struct MediaDetailView: View {
                     }
                     
                     Text(availabilityInformation)
-                        .srgFont(.overline)
+                        .srgFont(.subtitle2)
                         .foregroundColor(.white)
                         .padding(.vertical, 5)
                 }
