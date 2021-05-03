@@ -136,7 +136,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *subtitlesImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
@@ -392,9 +392,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
-    
-    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
-    self.multiAudioImageView.tintColor = UIColor.play_whiteBadgeColor;
     
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
@@ -882,7 +879,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.propertiesTopLineSpacerView.hidden = NO;
             
             self.webFirstLabel.hidden = ! isWebFirst;
-            self.subtitlesLabel.hidden = ! hasSubtitles;
+            self.subtitlesImageView.hidden = ! hasSubtitles;
             self.audioDescriptionImageView.hidden = ! hasAudioDescription;
             self.multiAudioImageView.hidden = ! hasMultiAudio;
         }
@@ -892,7 +889,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
         
         [self.webFirstLabel play_setWebFirstBadge];
-        [self.subtitlesLabel play_setSubtitlesAvailableBadge];
         
         [self updateRadioHomeButton];
         self.radioHomeButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];

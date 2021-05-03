@@ -56,12 +56,9 @@ struct DurationBadge: View {
 /// Behavior: h-hug, v-hug
 struct SubtitlesBadge: View {
     var body: some View {
-        Text("ST")
-            .srgFont(.caption)
-            .lineLimit(1)
-            .foregroundColor(.black)
+        Image("subtitles-24")
+            .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
-            .background(Color(.play_whiteBadge))
             .cornerRadius(BadgeMetrics.cornerRadius)
     }
 }
@@ -71,9 +68,17 @@ struct AudioDescriptionBadge: View {
     var body: some View {
         Image("audio_description-24")
             .resizable()
-            .foregroundColor(.black)
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
-            .background(Color(.play_whiteBadge))
+            .cornerRadius(BadgeMetrics.cornerRadius)
+    }
+}
+
+/// Behavior: h-hug, v-hug
+struct MultiAudioBadge: View {
+    var body: some View {
+        Image("multiaudio-24")
+            .resizable()
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
     }
 }
@@ -109,6 +114,7 @@ struct Badges_Previews: PreviewProvider {
             DurationBadge(media: Mock.media())
             SubtitlesBadge()
             AudioDescriptionBadge()
+            MultiAudioBadge()
             ThreeSixtyBadge()
         }
         .padding()

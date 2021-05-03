@@ -22,11 +22,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
 
 /**
-*  Call to display the standard subtitle availability badge.
-*/
-- (void)play_setSubtitlesAvailableBadge;
-
-/**
  *  Call to display the standard "web first" badge.
 */
 - (void)play_setWebFirstBadge;

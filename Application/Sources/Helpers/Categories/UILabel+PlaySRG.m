@@ -85,12 +85,6 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
 }
 
-- (void)play_setSubtitlesAvailableBadge
-{
-    [self play_setMediaBadgeWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
-    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
-}
-
 - (void)play_setWebFirstBadge
 {
     self.backgroundColor = UIColor.srg_blueColor;
