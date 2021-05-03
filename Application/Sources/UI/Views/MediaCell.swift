@@ -37,11 +37,11 @@ struct MediaCell: View {
     #endif
     
     private var horizontalPadding: CGFloat {
-        return layout == .vertical ? 0 : MediaCellSize.horizontalPadding
+        return direction == .vertical ? 0 : MediaCellSize.horizontalPadding
     }
     
     private var verticalPadding: CGFloat {
-        return layout == .vertical ? MediaCellSize.verticalPadding : 0
+        return direction == .vertical ? MediaCellSize.verticalPadding : 0
     }
     
     init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
