@@ -119,15 +119,9 @@ extension MediaCell {
 class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    #if os(tvOS)
-    private static let defaultItemWidth: CGFloat = 375
-    private static let defaultTableItemHeight: CGFloat = 50
-    private static let heightOffset: CGFloat = 80
-    #else
-    private static let defaultItemWidth: CGFloat = 210
-    private static let defaultTableItemHeight: CGFloat = 80
-    private static let heightOffset: CGFloat = 70
-    #endif
+    private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
+    private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
+    private static let heightOffset: CGFloat = constant(iOS: 70, tvOS: 80)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)

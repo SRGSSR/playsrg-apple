@@ -22,11 +22,7 @@ struct TitleView: View {
 }
 
 class TitleViewSize: NSObject {
-    #if os(tvOS)
-    private static let recommendedHeight: CGFloat = 100
-    #else
-    private static let recommendedHeight: CGFloat = 60
-    #endif
+    private static let recommendedHeight: CGFloat = constant(iOS: 60, tvOS: 100)
     
     @objc static func recommended(text: String?, layoutWidth: CGFloat) -> CGSize {
         if let text = text, !text.isEmpty {

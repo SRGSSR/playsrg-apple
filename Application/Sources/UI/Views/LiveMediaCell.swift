@@ -118,11 +118,7 @@ struct LiveMediaCell: View, LiveMedia {
 class LiveMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    #if os(tvOS)
-    private static let defaultItemWidth: CGFloat = 375
-    #else
-    private static let defaultItemWidth: CGFloat = 210
-    #endif
+    private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)

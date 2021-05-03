@@ -51,13 +51,8 @@ struct HeaderView: View {
 }
 
 class HeaderViewSize: NSObject {
-    #if os(tvOS)
-    static let smallHeight: CGFloat = 45
-    static let tallHeight: CGFloat = 90
-    #else
-    static let smallHeight: CGFloat = 25
-    static let tallHeight: CGFloat = 42
-    #endif
+    static let smallHeight: CGFloat = constant(iOS: 25, tvOS: 45)
+    static let tallHeight: CGFloat = constant(iOS: 42, tvOS: 90)
     
     @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
         if let title = title, !title.isEmpty {

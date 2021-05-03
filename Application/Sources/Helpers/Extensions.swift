@@ -8,6 +8,15 @@ import Combine
 import Foundation
 import SwiftUI
 
+func constant<T: Numeric>(iOS: T, tvOS: T) -> T
+{
+    #if os(tvOS)
+    return tvOS
+    #else
+    return iOS
+    #endif
+}
+
 extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
         return min(max(self, range.lowerBound), range.upperBound)

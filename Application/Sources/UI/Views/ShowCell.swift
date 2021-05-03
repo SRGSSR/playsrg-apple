@@ -69,15 +69,9 @@ struct ShowCell: View {
 class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    #if os(tvOS)
-    private static let defaultItemWidth: CGFloat = 375
-    private static let defaultTableItemHeight: CGFloat = 50
-    private static let heightOffset: CGFloat = 35
-    #else
-    private static let defaultItemWidth: CGFloat = 210
-    private static let defaultTableItemHeight: CGFloat = 80
-    private static let heightOffset: CGFloat = 29
-    #endif
+    private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
+    private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
+    private static let heightOffset: CGFloat = constant(iOS: 29, tvOS: 35)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)

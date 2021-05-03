@@ -60,11 +60,7 @@ struct TopicCell: View {
 class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    #if os(tvOS)
-    private static let defaultItemWidth: CGFloat = 250
-    #else
-    private static let defaultItemWidth: CGFloat = 150
-    #endif
+    private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 250)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)
