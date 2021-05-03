@@ -184,7 +184,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             styleAttributes.captionTextColor = UIColor.whiteColor;
             styleAttributes.iconTintColor = UIColor.whiteColor;
             
-            styleAttributes.headingTextFont = [SRGFont fontWithStyle:SRGFontStyleH1];
+            styleAttributes.headingTextFont = [SRGFont fontWithStyle:SRGFontStyleH2];
             styleAttributes.bodyTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
             styleAttributes.buttonTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
             styleAttributes.captionTextFont = [SRGFont fontWithStyle:SRGFontStyleCaption];

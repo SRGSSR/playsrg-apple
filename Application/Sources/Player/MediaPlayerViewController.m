@@ -817,7 +817,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
         
-        self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+        self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
         self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];

@@ -239,7 +239,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                                              NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No notifications", @"Text displayed when no notifications are available")
                                            attributes:attributes];

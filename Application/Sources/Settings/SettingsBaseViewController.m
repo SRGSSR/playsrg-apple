@@ -130,7 +130,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     view.textLabel.textColor = UIColor.play_lightGrayColor;
 }
 

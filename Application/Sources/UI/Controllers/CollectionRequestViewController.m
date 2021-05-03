@@ -202,7 +202,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                   NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     
     if (self.lastRequestError) {

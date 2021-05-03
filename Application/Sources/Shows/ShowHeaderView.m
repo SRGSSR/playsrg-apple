@@ -118,7 +118,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 {
     _show = show;
     
-    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     self.titleLabel.text = show.title;
     
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];

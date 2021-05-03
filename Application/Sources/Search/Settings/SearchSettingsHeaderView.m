@@ -23,7 +23,7 @@
 {
     _title = title;
     
-    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     self.titleLabel.text = title;
 }
 

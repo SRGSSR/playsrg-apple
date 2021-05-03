@@ -390,7 +390,7 @@ extension PageViewController: DZNEmptyDataSetSource {
         }
         return NSAttributedString(string: titleString(),
                                   attributes: [
-                                    NSAttributedString.Key.font: SRGFont.font(.H1) as UIFont,
+                                    NSAttributedString.Key.font: SRGFont.font(.H2) as UIFont,
                                     NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
                                   ])
     }

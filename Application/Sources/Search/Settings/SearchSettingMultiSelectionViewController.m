@@ -115,7 +115,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No results", @"Default text displayed when no results are available")
-                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                                          NSForegroundColorAttributeName : UIColor.whiteColor }];
 }
 

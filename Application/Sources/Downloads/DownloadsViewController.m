@@ -185,7 +185,7 @@
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH1],
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                   NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No downloads", @"Text displayed when no downloads are available") attributes:attributes];
 }

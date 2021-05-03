@@ -217,7 +217,7 @@
 
 - (void)updateFonts
 {
-    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     

@@ -28,7 +28,7 @@
     
     self.iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_icon-22", onboarding.uid]];
     
-    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH1];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     self.titleLabel.text = PlaySRGOnboardingLocalizedString(onboarding.title, nil);
 }
 
