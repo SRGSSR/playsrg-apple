@@ -46,12 +46,13 @@ struct TopicCell: View {
             ZStack {
                 ImageView(url: topic?.imageUrl(for: .small))
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
-                Color(white: 0, opacity: 0.2)
+                Color(.play_cardGrayBackground)
+                    .opacity(0.3)
                 Text(topic?.title ?? "")
                     .srgFont(.button)
                     .lineLimit(1)
                     .foregroundColor(.white)
-                    .padding(20)
+                    .padding(TopicCellSize.padding)
             }
         }
     }
@@ -59,6 +60,7 @@ struct TopicCell: View {
 
 class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    fileprivate static let padding: CGFloat = 10
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 250)
     
