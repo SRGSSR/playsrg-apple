@@ -85,23 +85,22 @@ struct MediaVisualView: View {
 }
 
 struct MediaVisualView_Previews: PreviewProvider {
-    static func setUserDefaults() -> Bool {
-        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingSubtitleAvailabilityDisplayed)
-        UserDefaults.standard.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)
-        return true
-    }
+    static let userDefaults: UserDefaults = {
+        let userDefaults = UserDefaults()
+        userDefaults.setValue(true, forKey: PlaySRGSettingSubtitleAvailabilityDisplayed)
+        userDefaults.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)
+        return userDefaults
+    }()
     
     static var previews: some View {
-        if setUserDefaults() {
-            Group {
-                MediaVisualView(media: Mock.media(.standard), scale: .small)
-                MediaVisualView(media: Mock.media(.rich), scale: .small)
-                MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
-                MediaVisualView(media: Mock.media(.blocked), scale: .small)
-            }
-            .frame(width: 500, height: .infinity)
-            .aspectRatio(4 / 3, contentMode: .fit)
-            .previewLayout(.sizeThatFits)
+        Group {
+            MediaVisualView(media: Mock.media(.standard), scale: .small)
+            MediaVisualView(media: Mock.media(.rich), scale: .small)
+            MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
+            MediaVisualView(media: Mock.media(.blocked), scale: .small)
         }
+        .frame(width: 600, height: 500)
+        .previewLayout(.sizeThatFits)
+        .defaultAppStorage(userDefaults)
     }
 }
