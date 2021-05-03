@@ -26,7 +26,9 @@ static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layo
 
 CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
-    return CGSizeMake(width, width / aspectRatio + heightOffset);
+    // Use body as scaling curve
+    UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleBody];
+    return CGSizeMake(width, width / aspectRatio + [fontMetrics scaledValueForValue:heightOffset]);
 }
 
 CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
