@@ -109,7 +109,7 @@ struct MediaDetailView: View {
                         Image(uiImage: youthProtectionLogoImage)
                     }
                     if let duration = MediaDescription.duration(for: model.media) {
-                        DurationBadge(text: duration)
+                        DurationBadge(duration: duration)
                     }
                 }
                 

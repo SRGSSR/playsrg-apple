@@ -32,10 +32,10 @@ struct Badge: View {
 
 // Behavior: h-hug, v-hug
 struct DurationBadge: View {
-    let text: String
+    let duration: Double
     
     var body: some View {
-        Text(text)
+        Text(PlayShortFormattedMinutes(duration))
             .srgFont(.caption)
             .lineLimit(1)
             .foregroundColor(.white)
@@ -103,7 +103,7 @@ struct Badges_Previews: PreviewProvider {
     static var previews: some View {
         HStack {
             Badge(text: "Badge", color: .orange)
-            DurationBadge(text: "68 min")
+            DurationBadge(duration: 1234)
             SubtitlesBadge()
             AudioDescriptionBadge()
             MultiAudioBadge()
