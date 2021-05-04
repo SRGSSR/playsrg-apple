@@ -98,19 +98,10 @@ struct LiveMediaCell: View, LiveMedia {
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
         #endif
         
-        private var horizontalPadding: CGFloat {
+        private var padding: CGFloat {
             #if os(iOS)
             if horizontalSizeClass == .compact {
-                return LiveMediaCellSize.compactHorizontalPadding
-            }
-            #endif
-            return LiveMediaCellSize.regularPadding
-        }
-        
-        private var verticalPadding: CGFloat {
-            #if os(iOS)
-            if horizontalSizeClass == .compact {
-                return LiveMediaCellSize.compactVerticalPadding
+                return LiveMediaCellSize.compactPadding
             }
             #endif
             return LiveMediaCellSize.regularPadding
@@ -124,7 +115,7 @@ struct LiveMediaCell: View, LiveMedia {
                 
                 Text(title(at: date))
                     .srgFont(.body)
-                    .lineLimit(2)
+                    .lineLimit(1)
                     .foregroundColor(.white)
                 
                 if let subtitle = subtitle(at: date) {
@@ -135,8 +126,7 @@ struct LiveMediaCell: View, LiveMedia {
                         .layoutPriority(1)
                 }
             }
-            .padding(.horizontal, horizontalPadding)
-            .padding(.vertical, verticalPadding)
+            .padding([.horizontal, .vertical], padding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
     }
@@ -145,8 +135,7 @@ struct LiveMediaCell: View, LiveMedia {
 class LiveMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     fileprivate static let regularPadding: CGFloat = constant(iOS: 10, tvOS: 16)
-    fileprivate static let compactHorizontalPadding: CGFloat = 8
-    fileprivate static let compactVerticalPadding: CGFloat = 16
+    fileprivate static let compactPadding: CGFloat = 8
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
