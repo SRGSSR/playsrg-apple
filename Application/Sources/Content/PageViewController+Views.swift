@@ -77,8 +77,8 @@ extension PageViewController {
             }
         }
         
-        static func size(text: String?, layoutWidth: CGFloat) -> CGSize {
-            return TitleViewSize.recommended(text: text, layoutWidth: layoutWidth)
+        static func size(text: String?, in view: UIView) -> CGSize {
+            return TitleViewSize.recommended(text: text).constrained(by: view)
         }
     }
     
@@ -103,8 +103,8 @@ extension PageViewController {
             }
         }
         
-        static func size(section: PageModel.Section, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
-            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        static func size(section: PageModel.Section, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), horizontalSizeClass: horizontalSizeClass)
         }
     }
 }

@@ -114,7 +114,7 @@ class FeaturedContentCellSize: NSObject {
     fileprivate static let compactVerticalPadding: CGFloat = 10
     fileprivate static let compactHeightOffset: CGFloat = 70
     
-    @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+    @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
             return LayoutSwimlaneCellSize(fraction * layoutWidth, aspectRatio, compactHeightOffset);
         }
@@ -123,7 +123,7 @@ class FeaturedContentCellSize: NSObject {
         }
     }
     
-    @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+    @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
             return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, compactHeightOffset);
         }
@@ -143,7 +143,7 @@ private extension View {
     }
     
     func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
-        let size = (layout == .hero) ? FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass) : FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+        let size = (layout == .hero) ? FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize : FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
         return self.previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }

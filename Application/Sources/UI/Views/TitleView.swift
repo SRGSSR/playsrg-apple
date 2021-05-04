@@ -24,12 +24,12 @@ struct TitleView: View {
 class TitleViewSize: NSObject {
     private static let recommendedHeight: CGFloat = constant(iOS: 60, tvOS: 100)
     
-    @objc static func recommended(text: String?, layoutWidth: CGFloat) -> CGSize {
+    @objc static func recommended(text: String?) -> NSCollectionLayoutSize {
         if let text = text, !text.isEmpty {
-            return CGSize(width: layoutWidth, height: recommendedHeight)
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(recommendedHeight))
         }
         else {
-            return CGSize(width: layoutWidth, height: 0)
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(0))
         }
     }
 }

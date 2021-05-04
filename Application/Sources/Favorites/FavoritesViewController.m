@@ -324,7 +324,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [ShowCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
+    return [[ShowCellSize fullWidth] constrainedBy:tableView].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<ShowSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

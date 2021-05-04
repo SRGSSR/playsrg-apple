@@ -8,7 +8,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-func constant<T: Numeric>(iOS: T, tvOS: T) -> T
+func constant<T>(iOS: T, tvOS: T) -> T
 {
     #if os(tvOS)
     return tvOS
@@ -109,7 +109,7 @@ extension UICollectionView.SupplementaryRegistration {
 }
 
 extension NSCollectionLayoutSection {
-    typealias CellSizer = ((layoutWidth: CGFloat, spacing: CGFloat)) -> CGSize
+    typealias CellSizer = ((layoutWidth: CGFloat, spacing: CGFloat)) -> NSCollectionLayoutSize
     
     static func horizontal(layoutWidth: CGFloat, spacing: CGFloat, top: CGFloat, bottom: CGFloat, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
@@ -120,7 +120,7 @@ extension NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .absolute(cellSize.height))
+        let groupSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: cellSize.heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
@@ -136,10 +136,10 @@ extension NSCollectionLayoutSection {
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
         let cellSize = cellSizer((effectiveLayoutWidth, spacing))
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(cellSize.width), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(cellSize.height))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: cellSize.heightDimension)
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         group.interItemSpacing = .fixed(spacing)
         
@@ -148,5 +148,37 @@ extension NSCollectionLayoutSection {
         
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
+    }
+}
+
+extension NSCollectionLayoutDimension {
+    func constrained(to size: CGSize) -> CGFloat {
+        if isFractionalWidth {
+            return size.width * dimension
+        }
+        else if isFractionalHeight {
+            return size.height * dimension
+        }
+        else {
+            return dimension
+        }
+    }
+}
+
+extension NSCollectionLayoutSize {
+    private static let defaultSize: CGSize = constant(iOS: CGSize(width: 750, height: 1334), tvOS: CGSize(width: 1920, height: 1080))
+    
+    @objc func constrained(to size: CGSize) -> CGSize {
+        let width = widthDimension.constrained(to: size)
+        let height = heightDimension.constrained(to: size)
+        return CGSize(width: width, height: height)
+    }
+    
+    @objc func constrained(by view: UIView) -> CGSize {
+        return constrained(to: view.frame.size)
+    }
+    
+    var previewSize: CGSize {
+        return constrained(to: Self.defaultSize)
     }
 }

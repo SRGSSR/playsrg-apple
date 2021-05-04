@@ -52,16 +52,18 @@ struct ShowAccessCell: View {
 }
 
 class ShowAccessCellSize: NSObject {
-    @objc static func fullWidth(layoutWidth: CGFloat) -> CGSize {
-        return CGSize(width: layoutWidth, height: 38)
+    @objc static func fullWidth(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }
 
 struct ShowAccessCell_Previews: PreviewProvider {
+    static let size = ShowAccessCellSize.fullWidth(layoutWidth: 800).previewSize
+    
     static var previews: some View {
         Group {
             ShowAccessCell()
-                .previewLayout(.fixed(width: 375, height: 38))
+                .previewLayout(.fixed(width: size.width, height: size.height))
         }
     }
 }

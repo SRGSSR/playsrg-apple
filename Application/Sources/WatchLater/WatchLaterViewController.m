@@ -188,7 +188,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(tableView.frame)].height;
+    return [[MediaCellSize fullWidth] constrainedBy:tableView].height;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

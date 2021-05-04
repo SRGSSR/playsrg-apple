@@ -41,7 +41,7 @@ OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
  *        ◀────────────────────────────────────▶
  *                       width
  */
-OBJC_EXPORT CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
 
 /**
  *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required value. An
@@ -51,7 +51,7 @@ OBJC_EXPORT CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CG
  *  As for `LayoutSwimlaneCellSize`, an aspect ratio must be provided, as well as a height offset is more
  *  space is required vertically.
  */
-OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
 
 /**
  *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
@@ -76,6 +76,6 @@ OBJC_EXPORT CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRa
  *        ◀──────────────────────────────────────────────────────────────────▶
  *                                    width
  */
-OBJC_EXPORT CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
 
 NS_ASSUME_NONNULL_END

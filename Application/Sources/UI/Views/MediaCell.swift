@@ -137,34 +137,34 @@ class MediaCellSize: NSObject {
     private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
     
-    @objc static func swimlane() -> CGSize {
+    @objc static func swimlane() -> NSCollectionLayoutSize {
         return swimlane(itemWidth: defaultItemWidth)
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
     }
     
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
     }
     
-    @objc static func fullWidth(layoutWidth: CGFloat) -> CGSize {
-        return fullWidth(itemHeight: defaultTableItemHeight, layoutWidth: layoutWidth)
+    @objc static func fullWidth() -> NSCollectionLayoutSize {
+        return fullWidth(itemHeight: defaultTableItemHeight)
     }
     
-    @objc static func fullWidth(itemHeight: CGFloat, layoutWidth: CGFloat) -> CGSize {
-        return CGSize(width: layoutWidth, height: itemHeight)
+    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
     }
 }
 
 struct MediaCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = MediaCellSize.swimlane()
-    static private let horizontalLayoutSize = MediaCellSize.fullWidth(layoutWidth: 600)
+    static private let verticalLayoutSize = MediaCellSize.swimlane().previewSize
+    static private let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
     static private let style = MediaDescription.Style.show
     
     static var previews: some View {

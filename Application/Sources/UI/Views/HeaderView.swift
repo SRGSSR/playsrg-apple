@@ -51,20 +51,20 @@ struct HeaderView: View {
 }
 
 class HeaderViewSize: NSObject {
-    static let smallHeight: CGFloat = constant(iOS: 25, tvOS: 45)
+    static let standardHeight: CGFloat = constant(iOS: 25, tvOS: 45)
     static let tallHeight: CGFloat = constant(iOS: 42, tvOS: 90)
     
-    @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+    @objc static func recommended(title: String?, subtitle: String?, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
             if HeaderView.displayableSubtitle(subtitle, horizontalSizeClass: horizontalSizeClass) != nil {
-                return CGSize(width: layoutWidth, height: tallHeight)
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(tallHeight))
             }
             else {
-                return CGSize(width: layoutWidth, height: smallHeight)
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(standardHeight))
             }
         }
         else {
-            return CGSize(width: layoutWidth, height: 0)
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(0))
         }
     }
 }

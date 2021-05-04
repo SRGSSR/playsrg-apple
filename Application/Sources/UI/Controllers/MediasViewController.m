@@ -53,10 +53,10 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(collectionView.frame)];
+        return [[MediaCellSize fullWidth] constrainedBy:collectionView];
     }
     else {
-        return [MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
+        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
     }
 }
 

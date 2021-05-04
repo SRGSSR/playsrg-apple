@@ -16,9 +16,6 @@
 @import SRGAnalytics;
 @import SRGAppearance;
 
-// Small margin to avoid overlap with the horizontal scrolling indicator
-static const CGFloat kBottomInset = 15.f;
-
 @interface SearchShowListCollectionViewCell ()
 
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -26,18 +23,6 @@ static const CGFloat kBottomInset = 15.f;
 @end
 
 @implementation SearchShowListCollectionViewCell
-
-#pragma mark Class methods
-
-+ (CGFloat)height
-{
-    return self.itemSize.height + kBottomInset;
-}
-
-+ (CGSize)itemSize
-{
-    return [ShowCellSize swimlane];
-}
 
 #pragma mark Object lifecycle
 
@@ -133,7 +118,7 @@ static const CGFloat kBottomInset = 15.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.class.itemSize;
+    return [[ShowCellSize swimlane] constrainedBy:collectionView];
 }
 
 @end

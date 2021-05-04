@@ -71,12 +71,8 @@ class PageViewController: DataViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = PageSectionHeaderView.size(section: section, layoutWidth: layoutEnvironment.container.effectiveContentSize.width, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
-                let header = NSCollectionLayoutBoundarySupplementaryItem(
-                    layoutSize: NSCollectionLayoutSize(widthDimension: .absolute(headerSize.width), heightDimension: .absolute(headerSize.height)),
-                    elementKind: UICollectionView.elementKindSectionHeader,
-                    alignment: .topLeading
-                )
+                let headerSize = PageSectionHeaderView.size(section: section, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
             
@@ -121,8 +117,8 @@ class PageViewController: DataViewController {
                     return layoutSection
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
-                            return MediaCellSize.fullWidth(layoutWidth: layoutWidth)
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                            return MediaCellSize.fullWidth()
                         }
                     }
                     else {
@@ -252,9 +248,9 @@ class PageViewController: DataViewController {
         super.viewWillLayoutSubviews()
         
         #if os(tvOS)
-        let titleHeight = PageTitleView.size(text: model.title, layoutWidth: view.frame.width).height
-        titleView.frame = CGRect(x: 0, y: -titleHeight, width: view.frame.size.width, height: titleHeight)
-        titleView.isHidden = (titleHeight == 0)
+        let titleSize = PageTitleView.size(text: model.title, in: view)
+        titleView.frame = CGRect(x: 0, y: -titleSize.height, width: titleSize.width, height: titleSize.height)
+        titleView.isHidden = (titleSize.height == 0)
         #endif
         
         collectionView.reloadEmptyDataSet()
@@ -305,7 +301,7 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        let titleHeight = PageTitleView.size(text: model.title, layoutWidth: view.frame.width).height
+        let titleHeight = PageTitleView.size(text: model.title, in: view).height
         return UIEdgeInsets(top: titleHeight + Self.spacing, left: 0, bottom: 0, right: 0)
     }
 }

@@ -598,15 +598,17 @@
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return [MediaCellSize fullWidthWithLayoutWidth:CGRectGetWidth(collectionView.frame)];
+            return [[MediaCellSize fullWidth] constrainedBy:collectionView];
         }
         else {
-            return [MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1];
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
         }
     }
     // Search show list
     else {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), SearchShowListCollectionViewCell.height);
+        // Small margin to avoid overlap with the horizontal scrolling indicator
+        CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
 

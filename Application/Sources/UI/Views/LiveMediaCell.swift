@@ -139,26 +139,26 @@ class LiveMediaCellSize: NSObject {
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
-    @objc static func swimlane() -> CGSize {
+    @objc static func swimlane() -> NSCollectionLayoutSize {
         return swimlane(itemWidth: defaultItemWidth)
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
     }
     
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> CGSize {
+    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
     }
 }
 
 struct LiveMediaCell_Previews: PreviewProvider {
     static private let liveMedia = Mock.liveMedia()
-    static private let size = LiveMediaCellSize.swimlane()
+    static private let size = LiveMediaCellSize.swimlane().previewSize
     
     static var previews: some View {
         #if os(tvOS)

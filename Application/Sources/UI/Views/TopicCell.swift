@@ -64,17 +64,17 @@ class TopicCellSize: NSObject {
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 250)
     
-    @objc static func swimlane() -> CGSize {
+    @objc static func swimlane() -> NSCollectionLayoutSize {
         return swimlane(itemWidth: defaultItemWidth)
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> CGSize {
+    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
 }
 
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = TopicCellSize.swimlane()
+    static private let size = TopicCellSize.swimlane().previewSize
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())

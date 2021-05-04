@@ -22,21 +22,24 @@ static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layo
     return (layoutWidth - (numberOfItemsPerRow - 1) * spacing) / numberOfItemsPerRow;
 }
 
-CGSize LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
+NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
-    // Use body as scaling curve
+    // Use body as scaling curve; should offer pretty standard behavior covering all needs
     UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleBody];
-    return CGSizeMake(width, width / aspectRatio + [fontMetrics scaledValueForValue:heightOffset]);
+    CGFloat height = width / aspectRatio + [fontMetrics scaledValueForValue:heightOffset];
+    return [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension absoluteDimension:width]
+                                          heightDimension:[NSCollectionLayoutDimension absoluteDimension:height]];
 }
 
-CGSize LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
+NSCollectionLayoutSize *LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {
     CGFloat width = LayoutOptimalGridCellWidth(approximateWidth, layoutWidth, spacing, minimumNumberOfColumns);
     return LayoutSwimlaneCellSize(width, aspectRatio, heightOffset);
 }
 
-CGSize LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction)
+NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction)
 {
     CGFloat height = width * fraction / contentAspectRatio;
-    return CGSizeMake(width, height);
+    return [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension absoluteDimension:width]
+                                          heightDimension:[NSCollectionLayoutDimension absoluteDimension:height]];
 }
