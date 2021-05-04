@@ -301,8 +301,12 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
+        #if os(tvOS)
         let titleHeight = PageTitleView.size(text: model.title, in: view).height
         return UIEdgeInsets(top: titleHeight + Self.spacing, left: 0, bottom: 0, right: 0)
+        #else
+        return UIEdgeInsets(top: Self.spacing, left: 0, bottom: 0, right: 0)
+        #endif
     }
 }
 
