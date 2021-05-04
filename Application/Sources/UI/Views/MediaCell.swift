@@ -135,7 +135,7 @@ class MediaCellSize: NSObject {
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
-    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 95)
+    private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
     
     @objc static func swimlane() -> CGSize {
         return swimlane(itemWidth: defaultItemWidth)
