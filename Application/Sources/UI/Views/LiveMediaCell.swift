@@ -108,9 +108,10 @@ struct LiveMediaCell: View, LiveMedia {
         }
         
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 if let logoImage = logoImage {
                     Image(uiImage: logoImage)
+                        .padding(.bottom, 4)
                 }
                 
                 Text(title(at: date))
