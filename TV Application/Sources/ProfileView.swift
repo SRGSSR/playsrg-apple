@@ -45,6 +45,17 @@ struct ProfileView: View {
                     AutoplayListItem()
                 }
             }
+            if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden || !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")),
+                        footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
+                    if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+                        SubtitleAvailabilityListItem()
+                    }
+                    if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                        AudioDescriptionAvailabilityListItem()
+                    }
+                }
+            }
             Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
             }
@@ -112,6 +123,50 @@ struct ProfileView: View {
                         .srgFont(.button)
                     Spacer()
                     Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
+    struct SubtitleAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
+        
+        private func action() {
+            isSubtitleAvailabilityDisplayed = !isSubtitleAvailabilityDisplayed
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Subtitle availability", "Subtitle availability setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(isSubtitleAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
+    struct AudioDescriptionAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
+        
+        private func action() {
+            isAudioDescriptionAvailabilityDisplayed = !isAudioDescriptionAvailabilityDisplayed
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Audio description availability", "Audio description availability setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(isAudioDescriptionAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
