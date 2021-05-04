@@ -62,10 +62,10 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(3)
-                        .multilineTextAlignment(textAlignment)
                         .foregroundColor(Color(.play_gray))
                 }
             }
+            .multilineTextAlignment(textAlignment)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: frameAlignment)
     }
