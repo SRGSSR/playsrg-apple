@@ -52,10 +52,10 @@ struct MediaVisualView: View {
             }
             
             HStack(spacing: Self.spacing) {
+                Spacer()
                 if media?.presentation == .presentation360 {
                     ThreeSixtyBadge()
                 }
-                Spacer()
                 if canDisplayAudioDescriptionAvailability, let media = media, media.play_isAudioDescriptionAvailable {
                     AudioDescriptionBadge()
                 }
