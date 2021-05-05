@@ -70,18 +70,6 @@ extension PageViewController {
 }
 
 extension PageViewController {
-    class PageTitleView: HostView<TitleView> {
-        var text: String? {
-            willSet {
-                content = TitleView(text: newValue)
-            }
-        }
-        
-        static func size(text: String?, in view: UIView) -> CGSize {
-            return TitleViewSize.recommended(text: text).constrained(by: view)
-        }
-    }
-    
     struct PageSectionHeaderView: View {
         let section: PageModel.Section
         

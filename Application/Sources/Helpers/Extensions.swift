@@ -96,22 +96,10 @@ extension UIHostingController {
     }
 }
 
-extension UICollectionView.SupplementaryRegistration {
-    typealias SectionHandler<SectionType: Hashable> = (Supplementary, String, SectionType, IndexPath) -> Void
-    
-    init<SectionType: Hashable, ItemType: Hashable>(dataSource: UICollectionViewDiffableDataSource<SectionType, ItemType>, elementKind: String, handler: @escaping UICollectionView.SupplementaryRegistration<Supplementary>.SectionHandler<SectionType>) {
-        self.init(elementKind: elementKind) { view, kind, indexPath in
-            let snapshot = dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[indexPath.section]
-            handler(view, kind, section, indexPath)
-        }
-    }
-}
-
 extension NSCollectionLayoutSection {
     typealias CellSizer = ((layoutWidth: CGFloat, spacing: CGFloat)) -> NSCollectionLayoutSize
     
-    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat, top: CGFloat, bottom: CGFloat, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
         
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
@@ -125,12 +113,12 @@ extension NSCollectionLayoutSection {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        
+        section.contentInsetsReference = .layoutMargins
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }
     
-    static func grid(layoutWidth: CGFloat, spacing: CGFloat, top: CGFloat, bottom: CGFloat, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
         
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
@@ -145,7 +133,7 @@ extension NSCollectionLayoutSection {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        
+        section.contentInsetsReference = .layoutMargins
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }

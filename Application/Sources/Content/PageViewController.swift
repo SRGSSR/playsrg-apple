@@ -11,6 +11,10 @@ import SRGDataProviderModel
 import UIKit
 
 class PageViewController: DataViewController {
+    enum Header: String {
+        case global
+    }
+    
     private let model: PageModel
     private var refreshCancellables = Set<AnyCancellable>()
 
@@ -21,8 +25,6 @@ class PageViewController: DataViewController {
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
-    #else
-    private weak var titleView: PageTitleView!
     #endif
     
     // Deal with intermediate collection view asynchronous reload state, which is not part of the model but an
@@ -31,9 +33,9 @@ class PageViewController: DataViewController {
     private var reloadCount = 0
     private var refreshTriggered = false
     
-    private static let spacing: CGFloat = constant(iOS: 8, tvOS: 40)
-    private static let top: CGFloat = constant(iOS: 3, tvOS: 20)
-    private static let bottom: CGFloat = constant(iOS: 35, tvOS: 60)
+    private static let sectionSpacing: CGFloat = constant(iOS: 35, tvOS: 70)
+    private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let sectionTop: CGFloat = constant(iOS: 3, tvOS: 15)
     
     #if os(iOS)
     private typealias CollectionView = DampedCollectionView
@@ -68,8 +70,19 @@ class PageViewController: DataViewController {
         return snapshot
     }
     
+    private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
+        let configuration = UICollectionViewCompositionalLayoutConfiguration()
+        configuration.interSectionSpacing = Self.sectionSpacing
+        
+        let headerSize = TitleViewSize.recommended(text: model.title)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
+        configuration.boundarySupplementaryItems = [header]
+        
+        return configuration
+    }
+    
     private func layout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { [weak self] sectionIndex, layoutEnvironment in
+        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = PageSectionHeaderView.size(section: section, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
@@ -82,61 +95,61 @@ class PageViewController: DataViewController {
                 
                 switch section.properties.layout {
                 case .hero:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .highlight:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .mediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                         return MediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .liveMediaSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                         return LiveMediaCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .showSwimlane:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                         return ShowCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .topicSelector:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                         return TopicCellSize.swimlane()
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 1)
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 2)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, spacing) in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.spacing, minimumNumberOfColumns: 2)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.spacing, top: Self.top, bottom: Self.bottom) { (layoutWidth, _) in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return ShowAccessCellSize.fullWidth(layoutWidth: layoutWidth)
                     }
                 #endif
@@ -151,7 +164,7 @@ class PageViewController: DataViewController {
             let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex)
             return layoutSection
-        }
+        }, configuration: layoutConfiguration())
     }
     
     init(id: PageModel.Id) {
@@ -202,14 +215,6 @@ class PageViewController: DataViewController {
         self.refreshControl = refreshControl
         #endif
         
-        #if os(tvOS)
-        // Add a global header view to the collection (like `tableHeaderView`), see https://stackoverflow.com/a/18015870/760435
-        let titleView = PageTitleView()
-        titleView.text = model.title
-        collectionView.insertSubview(titleView, at: 0)
-        self.titleView = titleView
-        #endif
-        
         // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
         // stretched
         loadingImageView = UIImageView.play_loadingImageView90(withTintColor: .play_lightGray)
@@ -229,12 +234,25 @@ class PageViewController: DataViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(dataSource: dataSource, elementKind: UICollectionView.elementKindSectionHeader) { view, _, section, _ in
+        let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, section in
+            guard let self = self else { return }
+            view.content = self.model.title != nil ? TitleView(text: self.model.title) : nil
+        }
+        
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = PageSectionHeaderView(section: section)
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+            if kind == Header.global.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            }
+            else {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            }
         }
         
         model.$state
@@ -246,13 +264,6 @@ class PageViewController: DataViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        
-        #if os(tvOS)
-        let titleSize = PageTitleView.size(text: model.title, in: view)
-        titleView.frame = CGRect(x: 0, y: -titleSize.height, width: titleSize.width, height: titleSize.height)
-        titleView.isHidden = (titleSize.height == 0)
-        #endif
-        
         collectionView.reloadEmptyDataSet()
     }
     
@@ -301,12 +312,7 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        #if os(tvOS)
-        let titleHeight = PageTitleView.size(text: model.title, in: view).height
-        return UIEdgeInsets(top: titleHeight, left: 0, bottom: 0, right: 0)
-        #else
-        return UIEdgeInsets(top: Self.spacing, left: 0, bottom: 0, right: 0)
-        #endif
+        return .zero
     }
 }
 
