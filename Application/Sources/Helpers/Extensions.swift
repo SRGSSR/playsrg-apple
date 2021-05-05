@@ -113,7 +113,7 @@ extension NSCollectionLayoutSection {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.contentInsetsReference = .layoutMargins
+        section.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }
@@ -133,7 +133,7 @@ extension NSCollectionLayoutSection {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.contentInsetsReference = .layoutMargins
+        section.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
         return section
     }
