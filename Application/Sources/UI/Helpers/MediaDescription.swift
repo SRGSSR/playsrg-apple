@@ -128,7 +128,7 @@ struct MediaDescription {
                 return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color(.play_gray))
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase.").uppercased(), color: Color(.play_liveRed))
+                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: Color(.play_liveRed))
                 }
                 else if media.play_isWebFirst {
                     return (NSLocalizedString("Web first", comment: "Web first label on media cells"), Color(.srg_blue))
