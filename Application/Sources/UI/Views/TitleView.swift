@@ -11,13 +11,14 @@ struct TitleView: View {
     let text: String?
     
     var body: some View {
-        Text(text ?? String.placeholder(length: 8))
-            .srgFont(.H1)
-            .foregroundColor(.white)
-            .lineLimit(1)
-            .opacity(0.8)
-            .redactedIfNil(text)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        if let text = text {
+            Text(text)
+                .srgFont(.H1)
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .opacity(0.8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 

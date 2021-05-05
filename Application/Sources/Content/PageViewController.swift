@@ -135,7 +135,7 @@ class PageViewController: DataViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, section in
             guard let self = self else { return }
-            view.content = self.model.title != nil ? TitleView(text: self.model.title) : nil
+            view.content = TitleView(text: self.model.title)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in

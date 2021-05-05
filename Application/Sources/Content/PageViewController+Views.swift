@@ -82,13 +82,11 @@ extension PageViewController {
         }
         
         var body: some View {
-            if let title = Self.title(for: section) {
-                HeaderView(title: title, subtitle: Self.subtitle(for: section))
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(title)
-                    .accessibilityOptionalHint(section.properties.accessibilityHint)
-                    .accessibility(addTraits: .isHeader)
-            }
+            HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section))
+                .accessibilityElement()
+                .accessibilityOptionalLabel(Self.title(for: section))
+                .accessibilityOptionalHint(section.properties.accessibilityHint)
+                .accessibility(addTraits: .isHeader)
         }
         
         static func size(section: PageModel.Section, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {

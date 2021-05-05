@@ -33,20 +33,21 @@ struct HeaderView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(title ?? String.placeholder(length: 8))
-                .srgFont(.H3)
-                .lineLimit(1)
-            if let subtitle = displayableSubtitle {
-                Text(subtitle)
-                    .srgFont(.subtitle1)
+        if let title = title {
+            VStack(alignment: .leading, spacing: 0) {
+                Text(title)
+                    .srgFont(.H3)
                     .lineLimit(1)
-                    .opacity(0.8)
+                if let subtitle = displayableSubtitle {
+                    Text(subtitle)
+                        .srgFont(.subtitle1)
+                        .lineLimit(1)
+                        .opacity(0.8)
+                }
             }
+            .opacity(0.8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
-        .opacity(0.8)
-        .redactedIfNil(title)
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
     }
 }
 
