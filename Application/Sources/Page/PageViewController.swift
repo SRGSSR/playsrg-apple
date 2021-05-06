@@ -109,6 +109,10 @@ class PageViewController: DataViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
+        
+        if model.id.supportsCastButton, let navigationBar = navigationController?.navigationBar {
+            navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+        }
         #endif
         
         self.view = view

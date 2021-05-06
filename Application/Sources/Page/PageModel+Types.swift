@@ -41,6 +41,15 @@ extension PageModel {
         case live
         case topic(topic: SRGTopic)
         
+        var supportsCastButton: Bool {
+            switch self {
+            case .topic:
+                return false
+            default:
+                return true
+            }
+        }
+        
         func canContain(show: SRGShow) -> Bool {
             switch self {
             case .video:
