@@ -6,6 +6,10 @@
 
 import SwiftUI
 
+// Remark: It would be tempting to animate the view with SwiftUI directly (by animating its rotation angle, see for
+//         example https://sarunw.com/posts/animation-delay-and-repeatforever-in-swiftui/), but the animation hangs
+//         for a while at application startup for some reason. For the moment we simply wrap the animated view we have
+//         for a reliable result.
 struct ActivityIndicator: View {
     var body: some View {
         LoadingImageView()
