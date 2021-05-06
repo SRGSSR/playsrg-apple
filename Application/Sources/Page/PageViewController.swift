@@ -20,6 +20,7 @@ class PageViewController: DataViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
     private weak var collectionView: UICollectionView!
+    private weak var emptyView: HostView<EmptyView>!
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -84,8 +85,8 @@ class PageViewController: DataViewController {
         
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
-        
         collectionView.backgroundColor = .clear
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView
@@ -96,6 +97,10 @@ class PageViewController: DataViewController {
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        let emptyView = HostView<EmptyView>(frame: .zero)
+        collectionView.backgroundView = emptyView
+        self.emptyView = emptyView
         
         #if os(tvOS)
         self.tabBarObservedScrollView = collectionView
@@ -159,6 +164,15 @@ class PageViewController: DataViewController {
     }
     
     func reloadData(with state: PageModel.State) {
+        switch state {
+        case .loading:
+            emptyView.content = EmptyView(state: .loading)
+        case let .failed(error: error):
+            emptyView.content = EmptyView(state: .failed(error: error))
+        case let .loaded(rows: rows):
+            emptyView.content = rows.isEmpty ? EmptyView(state: .empty) : nil
+        }
+        
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
