@@ -5,7 +5,6 @@
 //
 
 import Combine
-import DZNEmptyDataSet
 import SRGAppearanceSwift
 import SRGDataProviderModel
 import UIKit
@@ -21,16 +20,11 @@ class PageViewController: DataViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private var loadingImageView: UIImageView!
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
     #endif
     
-    // Deal with intermediate collection view asynchronous reload state, which is not part of the model but an
-    // an implementation detail. This helps `DZNEmptyDataSet` for which the collection might be empty while it
-    // is in fact rendering data.
-    private var reloadCount = 0
     private var refreshTriggered = false
     
     #if os(iOS)
@@ -90,8 +84,6 @@ class PageViewController: DataViewController {
         
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
-        collectionView.emptyDataSetSource = self
-        collectionView.emptyDataSetDelegate = self
         
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -113,11 +105,6 @@ class PageViewController: DataViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
         #endif
-        
-        // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
-        // stretched
-        loadingImageView = UIImageView.play_loadingImageView90(withTintColor: .play_lightGray)
-        loadingImageView.contentMode = .center
         
         self.view = view
     }
@@ -161,11 +148,6 @@ class PageViewController: DataViewController {
             .store(in: &refreshCancellables)
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        collectionView.reloadEmptyDataSet()
-    }
-    
     #if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
@@ -177,13 +159,9 @@ class PageViewController: DataViewController {
     }
     
     func reloadData(with state: PageModel.State) {
-        reloadCount += 1
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-                self.reloadCount -= 1
-                self.collectionView.reloadEmptyDataSet()
-                
                 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
@@ -363,79 +341,6 @@ extension PageViewController: UIScrollViewDelegate {
             refresh()
             refreshTriggered = false
         }
-    }
-}
-
-extension PageViewController: DZNEmptyDataSetSource {
-    func customView(forEmptyDataSet scrollView: UIScrollView) -> UIView? {
-        // When the collection view is asynchronously refreshed (short and efficient, but still not instantaneous
-        // and thus noticeable), display nothing if we already have content loaded.
-        if reloadCount != 0 {
-            if case let .loaded(rows: rows) = model.state, rows.count != 0 {
-                return UIView()
-            }
-            else {
-                return loadingImageView
-            }
-        }
-        // No async collection refresh is being made. Relying on the view model suffices.
-        else {
-            if case .loading = model.state {
-                return loadingImageView
-            }
-            else {
-                return nil
-            }
-        }
-    }
-    
-    func title(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        func titleString() -> String {
-            if case let .failed(error: error) = model.state {
-                return error.localizedDescription
-            }
-            else {
-                return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
-            }
-        }
-        return NSAttributedString(string: titleString(),
-                                  attributes: [
-                                    NSAttributedString.Key.font: SRGFont.font(.H2) as UIFont,
-                                    NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
-                                  ])
-    }
-    
-    #if os(iOS)
-    func description(forEmptyDataSet scrollView: UIScrollView) -> NSAttributedString? {
-        return NSAttributedString(string: NSLocalizedString("Pull to reload", comment: "Text displayed to inform the user she can pull a list to reload it"),
-                                  attributes: [
-                                    NSAttributedString.Key.font: SRGFont.font(.H4) as UIFont,
-                                    NSAttributedString.Key.foregroundColor: UIColor.play_lightGray
-                                  ])
-    }
-    #endif
-    
-    func image(forEmptyDataSet scrollView: UIScrollView) -> UIImage? {
-        if case.failed = model.state {
-            return UIImage(named: "error-90")
-        }
-        else {
-            return UIImage(named: "media-90")
-        }
-    }
-    
-    func imageTintColor(forEmptyDataSet scrollView: UIScrollView) -> UIColor? {
-        return .play_lightGray
-    }
-    
-    func verticalOffset(forEmptyDataSet scrollView: UIScrollView) -> CGFloat {
-        return VerticalOffsetForEmptyDataSet(scrollView)
-    }
-}
-
-extension PageViewController: DZNEmptyDataSetDelegate {
-    func emptyDataSetShouldAllowScroll(_ scrollView: UIScrollView) -> Bool {
-        return true
     }
 }
 
