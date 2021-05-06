@@ -91,7 +91,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")].uppercaseString;
+    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")];
 }
 
 #pragma mark Private
