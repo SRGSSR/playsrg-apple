@@ -134,11 +134,26 @@ class HostTableViewCell<Content: View>: UITableViewCell {
  *  Simple view hosting `SwiftUI` content.
  */
 class HostView<Content: View>: UIView {
+    let ignoresSafeArea: Bool
+    
     private var hostController: UIHostingController<Content>?
+    
+    init(frame: CGRect, ignoresSafeArea: Bool) {
+        self.ignoresSafeArea = ignoresSafeArea
+        super.init(frame: frame)
+    }
+    
+    override convenience init(frame: CGRect) {
+        self.init(frame: frame, ignoresSafeArea: true)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     private func addHostController(for content: Content?) {
         guard let rootView = content else { return }
-        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: ignoresSafeArea)
         if let hostView = hostController?.view {
             hostView.frame = bounds
             hostView.backgroundColor = .clear
