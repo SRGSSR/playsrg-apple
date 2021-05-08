@@ -379,6 +379,15 @@ extension PageViewController: ShowAccessCellActions {
     }
 }
 
+extension PageViewController: SectionHeaderViewAction {
+    func openSection() {
+        if let navigationController = navigationController {
+            let sectionDetailViewController = SectionDetailViewController()
+            navigationController.pushViewController(sectionDetailViewController, animated: true)
+        }
+    }
+}
+
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
         collectionView.play_scrollToTop(animated: animated)

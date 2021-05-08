@@ -69,6 +69,10 @@ extension PageViewController {
     }
 }
 
+@objc protocol SectionHeaderViewAction: AnyObject {
+    func openSection()
+}
+
 extension PageViewController {
     struct PageSectionHeaderView: View {
         let section: PageModel.Section
@@ -82,11 +86,26 @@ extension PageViewController {
         }
         
         var body: some View {
+            #if os(tvOS)
             HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section))
+                .accessibilityElement()
+                .accessibilityOptionalLabel(Self.title(for: section))
+                .accessibility(addTraits: .isHeader)
+            #else
+            ResponderChain { firstResponder in
+                Button {
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection))
+                } label: {
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section))
+                }
+                .foregroundColor(.white)
+                .disabled(!section.properties.canOpenDetailPage)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibilityOptionalHint(section.properties.accessibilityHint)
                 .accessibility(addTraits: .isHeader)
+            }
+            #endif
         }
         
         static func size(section: PageModel.Section, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {

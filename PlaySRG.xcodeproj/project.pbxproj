@@ -312,6 +312,11 @@
 		08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
 		08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */; };
+		08A876C42646EE8900E02BB4 /* SectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */; };
+		08A876C52646EE8A00E02BB4 /* SectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */; };
+		08A876C62646EE8E00E02BB4 /* SectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */; };
+		08A876C72646EE9000E02BB4 /* SectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */; };
+		08A876C82646EE9200E02BB4 /* SectionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */; };
 		08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A51D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
 		08AA55A61D49EF8E00C5026E /* ApplicationConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */; };
@@ -2103,6 +2108,7 @@
 		0832BF0D22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoadingCollectionViewCell.h; sourceTree = "<group>"; };
 		0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLoadingCollectionViewCell.m; sourceTree = "<group>"; };
 		0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLoadingCollectionViewCell.xib; sourceTree = "<group>"; };
+		083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionDetailViewController.swift; sourceTree = "<group>"; };
 		0841E70422F0953A009D8304 /* SRGDay+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDay+PlaySRG.h"; sourceTree = "<group>"; };
 		0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDay+PlaySRG.m"; sourceTree = "<group>"; };
 		084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionViewController.h; sourceTree = "<group>"; };
@@ -3050,6 +3056,14 @@
 			path = Downloads;
 			sourceTree = "<group>";
 		};
+		083BF23826456B2800FD5BDE /* Section */ = {
+			isa = PBXGroup;
+			children = (
+				083BF23C26456B2800FD5BDE /* SectionDetailViewController.swift */,
+			);
+			path = Section;
+			sourceTree = "<group>";
+		};
 		086320F22258C6CF00C719A6 /* WatchLater */ = {
 			isa = PBXGroup;
 			children = (
@@ -3416,6 +3430,7 @@
 				087584C623A0008500FA7207 /* Profile */,
 				0875853323A3DDB800FA7207 /* RadioChannels */,
 				E694A9D61D65EFF300372DF0 /* Search */,
+				083BF23826456B2800FD5BDE /* Section */,
 				0806E7B41D50D8DD002ED406 /* Settings */,
 				E6DB5F181D66E07A0057094B /* Shows */,
 				08AA55971D49EC2300C5026E /* UI */,
@@ -7394,6 +7409,7 @@
 				6F12E4D622D866E600BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
 				6FD6861F2460670600B8018A /* Channel.m in Sources */,
 				0852539722073D5200BCF0B1 /* UIApplication+PlaySRG.m in Sources */,
+				08A876C42646EE8900E02BB4 /* SectionDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -7557,6 +7573,7 @@
 				0875851423A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506E8245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				08A876C52646EE8A00E02BB4 /* SectionDetailViewController.swift in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FC2F66C2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -7748,6 +7765,7 @@
 				0875851523A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506E9245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				08A876C62646EE8E00E02BB4 /* SectionDetailViewController.swift in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FC2F66D2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -7939,6 +7957,7 @@
 				0875851623A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EA245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				08A876C72646EE9000E02BB4 /* SectionDetailViewController.swift in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FC2F66E2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
@@ -8130,6 +8149,7 @@
 				0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
+				08A876C82646EE9200E02BB4 /* SectionDetailViewController.swift in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6FC2F66F2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
