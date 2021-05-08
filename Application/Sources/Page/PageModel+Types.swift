@@ -15,7 +15,6 @@ protocol PageSectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
-    var presentationType: SRGContentPresentationType { get }
     var layout: PageModel.SectionLayout { get }
     var placeholderItems: [PageModel.Item] { get }
     var canOpenDetailPage: Bool { get }
@@ -164,10 +163,6 @@ extension SRGContentSection: PageSectionProperties {
         return presentation.label
     }
     
-    var presentationType: SRGContentPresentationType {
-        return presentation.type
-    }
-    
     var layout: PageModel.SectionLayout {
         switch presentation.type {
         case .hero:
@@ -248,12 +243,12 @@ extension SRGContentSection: PageSectionProperties {
         case .predefined:
             switch presentation.type {
             case .favoriteShows:
-                return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                    .map { id.compatibleShows($0).map { .show($0, section: section) } }
+                return dataProvider.favoritesPublisher(for: id, section: section)
+                    .map { $0.map { .show($0, section: section) } }
                     .eraseToAnyPublisher()
             case .personalizedProgram:
-                return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                    .map { id.compatibleShows($0).map { $0.urn } }
+                return dataProvider.favoritesPublisher(for: id, section: section)
+                    .map { $0.map { $0.urn } }
                     .flatMap { urns in
                         return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
                     }
@@ -344,10 +339,6 @@ extension ConfiguredSection: PageSectionProperties {
         return nil
     }
     
-    var presentationType: SRGContentPresentationType {
-        return self.contentPresentationType
-    }
-    
     var layout: PageModel.SectionLayout {
         switch self.type {
         case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
@@ -421,8 +412,8 @@ extension ConfiguredSection: PageSectionProperties {
                 .map { $0.shows.map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
-            return dataProvider.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                .map { id.compatibleShows($0).map { .show($0, section: section) } }
+            return dataProvider.favoritesPublisher(for: id, section: section)
+                .map { $0.map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioShowAccess(channelUid):
             #if os(iOS)
@@ -513,54 +504,74 @@ fileprivate extension SRGDataProvider {
     }
     
     func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
-        // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
-        //       the main thread and with a single user data access each time. We could  instead use a currrently
-        //       private history API to combine the history entries we have and the associated medias we retrieve
-        //       with a network request, calculating the progress on a background thread and with only a single
-        //       user data access (the one made at the beginning). This optimization seems premature, though, so
-        //       for the moment a simpler implementation is used.
-        return Future<[SRGHistoryEntry], Error> { promise in
-            let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
-            SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                if let error = error {
-                    promise(.failure(error))
-                }
-                else {
-                    promise(.success(historyEntries ?? []))
+        // Drive updates with notifications, using `prepend(_:)` to trigger an initial update
+        // Inpsired from https://stackoverflow.com/questions/66075000/swift-combine-publishers-where-one-hasnt-sent-a-value-yet
+        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+            .map { _ in }
+            .prepend(())
+            .flatMap { _ in
+                return Future<[SRGHistoryEntry], Error> { promise in
+                    let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
+                    SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
+                        if let error = error {
+                            promise(.failure(error))
+                        }
+                        else {
+                            promise(.success(historyEntries ?? []))
+                        }
+                    }
                 }
             }
-        }
-        .map { historyEntries in
-            historyEntries.compactMap { $0.uid }
-        }
-        .flatMap { urns in
-            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-        }
-        .receive(on: DispatchQueue.main)
-        .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
-        .eraseToAnyPublisher()
+            .map { historyEntries in
+                historyEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
+            //       the main thread and with a single user data access each time. We could  instead use a currrently
+            //       private history API to combine the history entries we have and the associated medias we retrieve
+            //       with a network request, calculating the progress on a background thread and with only a single
+            //       user data access (the one made at the beginning). This optimization seems premature, though, so
+            //       for the moment a simpler implementation is used.
+            .receive(on: DispatchQueue.main)
+            .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
+            .eraseToAnyPublisher()
     }
     
     func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
-        return Future<[SRGPlaylistEntry], Error> { promise in
-            let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
-            SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
-                if let error = error {
-                    promise(.failure(error))
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .drop { notification in
+                if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
+                    return false
                 }
                 else {
-                    promise(.success(playlistEntries ?? []))
+                    return true
                 }
             }
-        }
-        .map { playlistEntries in
-            playlistEntries.compactMap { $0.uid }
-        }
-        .flatMap { urns in
-            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-        }
-        .map { $0.medias }
-        .eraseToAnyPublisher()
+            .map { _ in }
+            .prepend(())
+            .flatMap { _ in
+                return Future<[SRGPlaylistEntry], Error> { promise in
+                    let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
+                    SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
+                        if let error = error {
+                            promise(.failure(error))
+                        }
+                        else {
+                            promise(.success(playlistEntries ?? []))
+                        }
+                    }
+                }
+            }
+            .map { playlistEntries in
+                playlistEntries.compactMap { $0.uid }
+            }
+            .flatMap { urns in
+                return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            }
+            .map { $0.medias }
+            .eraseToAnyPublisher()
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
@@ -580,6 +591,25 @@ fileprivate extension SRGDataProvider {
             })
             .reduce([SRGShow]()) { collectedShows, result in
                 return collectedShows + result.shows
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func favoritesPublisher(for id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<[SRGShow], Error> {
+        return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+            .drop { notification in
+                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            }
+            .map { _ in }
+            .prepend(())
+            .flatMap { _ in
+                return self.showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                    .map { id.compatibleShows($0) }
             }
             .eraseToAnyPublisher()
     }

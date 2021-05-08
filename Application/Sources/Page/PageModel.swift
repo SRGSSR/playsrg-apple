@@ -44,38 +44,14 @@ class PageModel: Identifiable, ObservableObject {
         return rows.map { $0.section }
     }
     
-    private var mainCancellables = Set<AnyCancellable>()
-    private var refreshCancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
-        
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { [weak self] notification in
-                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .favoriteShows }),
-                      let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
-                self.refresh()
-            }
-            .store(in: &mainCancellables)
-        
-        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .sink { [weak self] _ in
-                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .resumePlayback }) else { return }
-                self.refresh()
-            }
-            .store(in: &mainCancellables)
-        
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .sink { [weak self] notification in
-                guard let self = self, self.sections.contains(where: { $0.properties.presentationType == .watchLater }),
-                      let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
-                self.refresh()
-            }
-            .store(in: &mainCancellables)
     }
     
     func refresh() {
-        refreshCancellables = []
+        cancellables = []
         
         Just((id: self.id, rows: rows))
             .throttle(for: 30, scheduler: RunLoop.main, latest: true)
@@ -88,11 +64,11 @@ class PageModel: Identifiable, ObservableObject {
             }
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.internalState, on: self)
-            .store(in: &refreshCancellables)
+            .store(in: &cancellables)
     }
     
     func cancelRefresh() {
-        refreshCancellables = []
+        cancellables = []
     }
     
     private static func state(from internalState: State) -> State {
