@@ -10,6 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     let title: String?
     let subtitle: String?
+    let canOpen: Bool
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -35,9 +36,15 @@ struct HeaderView: View {
     var body: some View {
         if let title = title {
             VStack(alignment: .leading, spacing: 0) {
-                Text(title)
-                    .srgFont(.H3)
-                    .lineLimit(1)
+                HStack(spacing: 0) {
+                    Text(title)
+                        .srgFont(.H3)
+                        .lineLimit(1)
+                    if canOpen {
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                }
                 if let subtitle = displayableSubtitle {
                     Text(subtitle)
                         .srgFont(.subtitle1)
@@ -73,10 +80,14 @@ class HeaderViewSize: NSObject {
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            HeaderView(title: "Title", subtitle: nil)
-            HeaderView(title: "Title", subtitle: "Subtitle")
-            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum)
-            HeaderView(title: nil, subtitle: nil)
+            HeaderView(title: "Title", subtitle: nil, canOpen: false)
+            HeaderView(title: "Title", subtitle: nil, canOpen: true)
+            HeaderView(title: "Title", subtitle: "Subtitle", canOpen: false)
+            HeaderView(title: "Title", subtitle: "Subtitle", canOpen: true)
+            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, canOpen: false)
+            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, canOpen: true)
+            HeaderView(title: nil, subtitle: nil, canOpen: false)
+            HeaderView(title: nil, subtitle: nil, canOpen: true)
         }
         .previewLayout(.fixed(width: 800, height: 200))
     }

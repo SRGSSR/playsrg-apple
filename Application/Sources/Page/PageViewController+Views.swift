@@ -87,7 +87,7 @@ extension PageViewController {
         
         var body: some View {
             #if os(tvOS)
-            HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section))
+            HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), canOpen: false)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibility(addTraits: .isHeader)
@@ -96,7 +96,7 @@ extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section))
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), canOpen: section.properties.canOpenDetailPage)
                 }
                 .foregroundColor(.white)
                 .disabled(!section.properties.canOpenDetailPage)
