@@ -10,12 +10,6 @@ import SRGIdentity
 import SwiftUI
 
 struct ShowDetailView: View {
-    // FIXME: Wrong! The instance must be owned higher up, otherwise it will be recreated with each redraw
-    // https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/
-    @ObservedObject var model: ShowDetailModel
-    
-    static let headerHeight: CGFloat = 450
-    
     enum Section: Hashable {
         case medias
         case information
@@ -27,11 +21,16 @@ struct ShowDetailView: View {
         case media(_ media: SRGMedia)
     }
     
-    typealias Row = CollectionRow<Section, Content>
+    @Binding var show: SRGShow?
+    @StateObject var model = ShowDetailModel()
     
-    init(show: SRGShow) {
-        model = ShowDetailModel(show: show)
+    static let headerHeight: CGFloat = 450
+    
+    init(show: SRGShow?) {
+        _show = .constant(show)
     }
+    
+    typealias Row = CollectionRow<Section, Content>
     
     private var rows: [Row] {
         switch model.state {
@@ -114,26 +113,23 @@ struct ShowDetailView: View {
                         }
                 }
             } supplementaryView: { _, _, _, _ in
-                HeaderView(show: model.show)
+                HeaderView(show: show)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.play_black))
             .edgesIgnoringSafeArea(.all)
             .onAppear {
-                model.refresh()
+                model.show = show
             }
-            .onDisappear {
-                model.cancelRefresh()
-            }
-            .onWake {
-                model.refresh()
+            .onChange(of: show) { newValue in
+                model.show = newValue
             }
             .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
     }
     
     private struct VisualView: View {
-        let show: SRGShow
+        let show: SRGShow?
         
         @State var isFavorite = false
         @State var favoriteRemovalAlertDisplayed = false
@@ -141,10 +137,12 @@ struct ShowDetailView: View {
         private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
-            return show.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
+            return show?.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
         }
         
         private func toggleFavorite() {
+            guard let show = show else { return }
+            
             FavoritesToggleShow(show)
             isFavorite = FavoritesContainsShow(show)
             
@@ -156,6 +154,8 @@ struct ShowDetailView: View {
         }
         
         private func toggleFavoriteAction() {
+            guard let show = show else { return }
+            
             if FavoritesIsSubscribedToShow(show) {
                 favoriteRemovalAlertDisplayed = true
             }
@@ -182,14 +182,14 @@ struct ShowDetailView: View {
                     .cornerRadius(10)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(show.title)
+                    Text(show?.title ?? .placeholder(length: 8))
                         .srgFont(.H1)
                         .lineLimit(3)
                         .foregroundColor(.white)
-                    if let broadcastInformationMessage = show.broadcastInformation?.message {
+                    if let broadcastInformationMessage = show?.broadcastInformation?.message {
                         Badge(text: broadcastInformationMessage, color: Color(.play_gray))
                     }
-                    if let lead = show.lead {
+                    if let lead = show?.lead {
                         Text(lead)
                             .srgFont(.subtitle2)
                             .foregroundColor(.white)
@@ -205,13 +205,15 @@ struct ShowDetailView: View {
                     .alert(isPresented: $favoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
             .onAppear {
-                isFavorite = FavoritesContainsShow(show)
+                if let show = show {
+                    isFavorite = FavoritesContainsShow(show)
+                }
             }
         }
     }
     
     private struct HeaderView: View {
-        let show: SRGShow
+        let show: SRGShow?
         
         var body: some View {
             VStack {
@@ -225,11 +227,12 @@ struct ShowDetailView: View {
 
 extension ShowDetailView {
     private var analyticsPageTitle: String {
-        return self.model.show.title
+        return show?.title ?? ""
     }
     
     private var analyticsPageLevels: [String] {
-        let level1: AnalyticsPageLevel = self.model.show.transmission == .radio ? .audio : .video
+        guard let show = show else { return [] }
+        let level1: AnalyticsPageLevel = show.transmission == .radio ? .audio : .video
         return [AnalyticsPageLevel.play.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
     }
 }
