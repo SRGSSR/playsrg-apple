@@ -10,6 +10,8 @@ import SRGLetterbox
 import SwiftUI
 
 struct MediaDetailView: View {
+    // FIXME: Wrong! The instance must be owned higher up, otherwise it will be recreated with each redraw
+    // https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/
     @ObservedObject var model: MediaDetailModel
     
     init(media: SRGMedia) {
@@ -260,19 +262,5 @@ extension MediaDetailView {
     
     private var analyticsPageLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue]
-    }
-}
-
-struct MediaDetailView_Previews: PreviewProvider {
-    static var mediaPreview: SRGMedia {
-        let asset = NSDataAsset(name: "media-rts-tv")!
-        let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
-        
-        return try! MTLJSONAdapter(modelClass: SRGMedia.self)?.model(fromJSONDictionary: jsonData) as! SRGMedia
-    }
-    
-    static var previews: some View {
-        MediaDetailView(media: mediaPreview)
-            .previewDisplayName("RTS media")
     }
 }
