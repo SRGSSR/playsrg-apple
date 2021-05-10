@@ -7,9 +7,12 @@
 import SwiftUI
 
 struct LiveMediaCell: View {
-    let media: SRGMedia?
-    
+    @Binding private(set) var media: SRGMedia?
     @StateObject private var model = LiveMediaModel()
+    
+    init(media: SRGMedia?) {
+        _media = Binding.constant(media)
+    }
     
     var body: some View {
         Group {
@@ -34,6 +37,9 @@ struct LiveMediaCell: View {
         .redactedIfNil(media)
         .onAppear {
             model.media = media
+        }
+        .onChange(of: media) { newValue in
+            model.media = newValue
         }
     }
     
