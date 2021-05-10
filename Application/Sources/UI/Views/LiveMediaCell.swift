@@ -11,7 +11,7 @@ struct LiveMediaCell: View {
     @StateObject private var model = LiveMediaModel()
     
     init(media: SRGMedia?) {
-        _media = Binding.constant(media)
+        _media = .constant(media)
     }
     
     var body: some View {

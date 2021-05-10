@@ -13,7 +13,11 @@ class MediaDetailModel: ObservableObject {
         let urns: [String]
     }
     
-    private let initialMedia: SRGMedia
+    var initialMedia: SRGMedia? = nil {
+        didSet {
+            refresh()
+        }
+    }
     
     @Published private(set) var relatedMedias: [SRGMedia] = []
     @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
@@ -26,25 +30,39 @@ class MediaDetailModel: ObservableObject {
     private var mainCancellables = Set<AnyCancellable>()
     private var refreshCancellables = Set<AnyCancellable>()
     
-    init(media: SRGMedia) {
-        self.initialMedia = media
-        
+    init() {
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .sink { notification in
-                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
-                guard let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, entriesUids.contains(media.urn) else { return }
+            .sink { [weak self] notification in
+                guard let self = self,
+                      let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue,
+                      let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, let mediaUrn = self.media?.urn, entriesUids.contains(mediaUrn) else {
+                    return
+                }
                 self.updateWatchLaterAllowedAction()
             }
             .store(in: &mainCancellables)
         updateWatchLaterAllowedAction()
     }
     
-    var media: SRGMedia {
+    var media: SRGMedia? {
         return selectedMedia ?? initialMedia
     }
     
-    func refresh() {
-        if initialMedia.contentType == .livestream { return }
+    var showTitle: String? {
+        if let showTitle = media?.show?.title, showTitle.lowercased() != media?.title.lowercased() {
+            return showTitle
+        }
+        else {
+            return nil
+        }
+    }
+    
+    var imageUrl: URL? {
+        return media?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+    }
+    
+    private func refresh() {
+        guard let initialMedia = initialMedia, initialMedia.contentType != .livestream else { return }
         
         let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
         
@@ -64,18 +82,15 @@ class MediaDetailModel: ObservableObject {
             .store(in: &refreshCancellables)
     }
     
-    func cancelRefresh() {
-        refreshCancellables = []
-    }
-    
     func toggleWatchLater() {
+        guard let media = media else { return }
         WatchLaterToggleMediaMetadata(media) { added, error in
             guard error == nil else { return }
             
             let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.button.rawValue
-            labels.value = self.media.urn
+            labels.value = media.urn
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
             
             self.updateWatchLaterAllowedAction()
@@ -83,6 +98,7 @@ class MediaDetailModel: ObservableObject {
     }
     
     private func updateWatchLaterAllowedAction() {
+        guard let media = media else { return }
         watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
     }
 }

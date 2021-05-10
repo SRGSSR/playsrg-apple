@@ -10,21 +10,16 @@ import SRGLetterbox
 import SwiftUI
 
 struct MediaDetailView: View {
-    // FIXME: Wrong! The instance must be owned higher up, otherwise it will be recreated with each redraw
-    // https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/
-    @ObservedObject var model: MediaDetailModel
+    @Binding var media: SRGMedia?
+    @StateObject var model = MediaDetailModel()
     
-    init(media: SRGMedia) {
-        model = MediaDetailModel(media: media)
-    }
-    
-    private var imageUrl: URL? {
-        return model.media.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+    init(media: SRGMedia?) {
+        _media = .constant(media)
     }
     
     var body: some View {
         ZStack {
-            ImageView(url: imageUrl)
+            ImageView(url: model.imageUrl)
             Color(white: 0, opacity: 0.6)
             VStack {
                 DescriptionView(model: model)
@@ -38,15 +33,13 @@ struct MediaDetailView: View {
         .background(Color(.play_black))
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            model.refresh()
+            model.initialMedia = media
         }
-        .onDisappear {
-            model.cancelRefresh()
-        }
-        .onWake {
-            model.refresh()
+        .onChange(of: media) { newValue in
+            model.initialMedia = newValue
         }
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
+        .redactedIfNil(media)
     }
     
     private struct DescriptionView: View {
@@ -57,11 +50,11 @@ struct MediaDetailView: View {
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
-                    Text(model.media.title)
+                    Text(model.media?.title ?? .placeholder(length: 8))
                         .srgFont(.H1)
                         .lineLimit(3)
                         .foregroundColor(.white)
-                    if let showTitle = model.media.show?.title, showTitle.lowercased() != model.media.title.lowercased() {
+                    if let showTitle = model.showTitle {
                         Text(showTitle)
                             .srgFont(.H3)
                             .foregroundColor(.white)
@@ -107,7 +100,7 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(spacing: 30) {
                 HStack(spacing: 4) {
-                    if let youthProtectionLogoImage = YouthProtectionImageForColor(model.media.youthProtectionColor) {
+                    if let youthProtectionColor = model.media?.youthProtectionColor, let youthProtectionLogoImage = YouthProtectionImageForColor(youthProtectionColor) {
                         Image(uiImage: youthProtectionLogoImage)
                     }
                     if let duration = MediaDescription.duration(for: model.media) {
@@ -115,13 +108,13 @@ struct MediaDetailView: View {
                     }
                 }
                 
-                if let isWebFirst = model.media.play_isWebFirst, isWebFirst {
+                if let isWebFirst = model.media?.play_isWebFirst, isWebFirst {
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color(.srg_blue))
                 }
-                if let subtitleLanguages = model.media.play_subtitleLanguages, !subtitleLanguages.isEmpty {
+                if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
                     AttributeView(icon: "subtitles_off-22", values: subtitleLanguages)
                 }
-                if let audioLanguages = model.media.play_audioLanguages, !audioLanguages.isEmpty {
+                if let audioLanguages = model.media?.play_audioLanguages, !audioLanguages.isEmpty {
                     AttributeView(icon: "audios-22", values: audioLanguages)
                 }
             }
@@ -143,8 +136,9 @@ struct MediaDetailView: View {
         @State var isFocused = false
         
         var availabilityInformation: String {
-            var publication = DateFormatter.play_dateAndTime.string(from: model.media.date)
-            if let availability = MediaDescription.availability(for: model.media) {
+            guard let media = model.media else { return .placeholder(length: 15)}
+            var publication = DateFormatter.play_dateAndTime.string(from: media.date)
+            if let availability = MediaDescription.availability(for: media) {
                 publication += " - " + availability
             }
             return publication
@@ -153,7 +147,7 @@ struct MediaDetailView: View {
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
-                    if let summary = model.media.play_fullSummary {
+                    if let summary = model.media?.play_fullSummary {
                         Button {
                             showText(summary)
                         } label: {
@@ -182,7 +176,7 @@ struct MediaDetailView: View {
         var playButtonLabel: String {
             let progress = HistoryPlaybackProgressForMediaMetadata(model.media)
             if progress == 0 || progress == 1 {
-                return model.media.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
+                return model.media?.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
             }
             else {
                 return NSLocalizedString("Resume", comment: "Resume playback button label")
@@ -193,16 +187,19 @@ struct MediaDetailView: View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
                 LabeledButton(icon: "play-50", label: playButtonLabel) {
-                    navigateToMedia(model.media, play: true)
+                    if let media = model.media {
+                        navigateToMedia(media, play: true)
+                    }
                 }
                 if let action = model.watchLaterAllowedAction, action != .none, let isRemoval = (action == .remove) {
+                    // TODO: Seriously? Cannot we write this in a better way?
                     LabeledButton(icon: isRemoval ? "watch_later_full-22" : "watch_later-22",
-                                  label: isRemoval ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list") : model.media.mediaType == .audio ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list") : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
-                                  accessibilityLabel: isRemoval ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", "Media deletion from later list label in the media detail view when a media is in the later list") : model.media.mediaType == .audio ? PlaySRGAccessibilityLocalizedString("Listen later", "Media addition to later list label in media detail view to add an audio to the later list") : PlaySRGAccessibilityLocalizedString("Watch later", "Media addition to later list label in media detail view to add a video to the later list")) {
+                                  label: isRemoval ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list") : model.media?.mediaType == .audio ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list") : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
+                                  accessibilityLabel: isRemoval ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", "Media deletion from later list label in the media detail view when a media is in the later list") : model.media?.mediaType == .audio ? PlaySRGAccessibilityLocalizedString("Listen later", "Media addition to later list label in media detail view to add an audio to the later list") : PlaySRGAccessibilityLocalizedString("Watch later", "Media addition to later list label in media detail view to add a video to the later list")) {
                         model.toggleWatchLater()
                     }
                 }
-                if let show = model.media.show {
+                if let show = model.media?.show {
                     LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
                     }
