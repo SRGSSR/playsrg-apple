@@ -38,6 +38,7 @@ class LiveMediaModel: ObservableObject {
     }
     
     private func unregisterChannelUpdates() {
+        programComposition = nil
         ChannelService.shared.removeObserver(channelObserver)
     }
 }

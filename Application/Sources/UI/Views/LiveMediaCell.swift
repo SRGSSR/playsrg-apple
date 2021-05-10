@@ -45,7 +45,7 @@ struct LiveMediaCell: View {
     
     #if os(tvOS)
     private func action() {
-        if let media = model.media {
+        if let media = media {
             navigateToMedia(media, play: true)
         }
     }
