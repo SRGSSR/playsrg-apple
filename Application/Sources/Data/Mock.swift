@@ -7,23 +7,13 @@
 import SwiftUI
 
 struct Mock {
-    enum LiveMedia: String {
-        case livestream
-    }
-    
-    static func liveMedia(_ kind: LiveMedia? = .livestream) -> (media: SRGMedia, programComposition: SRGProgramComposition)? {
-        guard let media = mockObject(kind?.rawValue, type: SRGMedia.self),
-              let programComposition = mockObject(kind?.rawValue, type: SRGProgramComposition.self) else { return nil }
-        // Provide labels otherwise code compiles but previews do not work (timeout)
-        return (media: media, programComposition: programComposition)
-    }
-    
     enum Media: String {
         case standard
         case minimal
         case rich
         case overflow
         case blocked
+        case livestream
         case fourThree
         case fourFive
         case nineSixteen

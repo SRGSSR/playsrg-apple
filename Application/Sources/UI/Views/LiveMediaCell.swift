@@ -6,79 +6,57 @@
 
 import SwiftUI
 
-struct LiveMediaCell: View, LiveMedia {
+struct LiveMediaCell: View {
     let media: SRGMedia?
     
-    @State var programComposition: SRGProgramComposition?
-    @State private var channelObserver: Any?
-    @State private var date = Date()
-    
-    private func registerForChannelUpdates() {
-        guard let media = media,
-              let channel = media.channel,
-              media.contentType == .livestream else { return }
-        channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { composition in
-            programComposition = composition
-            // TODO: Bad date updates. Use timer publisher
-            date = Date()
-        }
-    }
-    
-    private func unregisterChannelUpdates() {
-        ChannelService.shared.removeObserver(channelObserver)
-    }
+    @StateObject private var model = LiveMediaModel()
     
     var body: some View {
         Group {
             #if os(tvOS)
             ExpandingCardButton(action: action) {
-                VisualView(media: media, programComposition: programComposition, date: date)
+                VisualView(model: model)
                     .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                     .unredactable()
                     .accessibilityElement()
-                    .accessibilityOptionalLabel(accessibilityLabel(at: date))
+                    .accessibilityOptionalLabel(model.accessibilityLabel)
                     .accessibility(addTraits: .isButton)
             }
             #else
-            VisualView(media: media, programComposition: programComposition, date: date)
+            VisualView(model: model)
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .redactable()
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement()
-                .accessibilityOptionalLabel(accessibilityLabel(at: date))
+                .accessibilityOptionalLabel(model.accessibilityLabel)
             #endif
         }
         .redactedIfNil(media)
         .onAppear {
-            registerForChannelUpdates()
-        }
-        .onDisappear {
-            unregisterChannelUpdates()
+            model.media = media
         }
     }
     
     #if os(tvOS)
     private func action() {
-        if let media = media {
+        if let media = model.media {
             navigateToMedia(media, play: true)
         }
     }
     #endif
     
     /// Behavior: h-exp, v-exp
-    private struct VisualView: View, LiveMedia {
-        let media: SRGMedia?
-        let programComposition: SRGProgramComposition?
-        let date: Date
+    private struct VisualView: View {
+        @ObservedObject var model: LiveMediaModel
         
         var body: some View {
             ZStack {
-                ImageView(url: imageUrl(at: date, for: .small))
+                ImageView(url: model.imageUrl(for: .small))
                 Color(white: 0, opacity: 0.6)
-                DescriptionView(media: media, programComposition: programComposition, date: date)
-                BlockingOverlay(media: media)
+                DescriptionView(model: model)
+                BlockingOverlay(media: model.media)
                 
-                if let progress = progress(at: date) {
+                if let progress = model.progress {
                     ProgressBar(value: progress)
                         .opacity(progress != 0 ? 1 : 0)
                         .frame(height: LayoutProgressBarHeight)
@@ -89,10 +67,8 @@ struct LiveMediaCell: View, LiveMedia {
     }
     
     /// Behavior: h-exp, v-exp
-    private struct DescriptionView: View, LiveMedia {
-        let media: SRGMedia?
-        let programComposition: SRGProgramComposition?
-        let date: Date
+    private struct DescriptionView: View {
+        @ObservedObject var model: LiveMediaModel
         
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -109,17 +85,17 @@ struct LiveMediaCell: View, LiveMedia {
         
         var body: some View {
             VStack(alignment: .leading, spacing: 0) {
-                if let logoImage = logoImage {
+                if let logoImage = model.logoImage {
                     Image(uiImage: logoImage)
                         .padding(.bottom, 4)
                 }
                 
-                Text(title(at: date))
+                Text(model.title)
                     .srgFont(.body)
                     .lineLimit(1)
                     .foregroundColor(.white)
                 
-                if let subtitle = subtitle(at: date) {
+                if let subtitle = model.subtitle {
                     Text(subtitle)
                         .srgFont(.caption)
                         .lineLimit(1)
@@ -158,19 +134,19 @@ class LiveMediaCellSize: NSObject {
 }
 
 struct LiveMediaCell_Previews: PreviewProvider {
-    static private let liveMedia = Mock.liveMedia()
+    static private let media = Mock.media(.livestream)
     static private let size = LiveMediaCellSize.swimlane().previewSize
     
     static var previews: some View {
         #if os(tvOS)
-        LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+        LiveMediaCell(media: media)
             .previewLayout(.fixed(width: size.width, height: size.height))
         #else
         Group {
-            LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+            LiveMediaCell(media: media)
                 .previewLayout(.fixed(width: size.width, height: size.height))
                 .environment(\.horizontalSizeClass, .compact)
-            LiveMediaCell(media: liveMedia?.media, programComposition: liveMedia?.programComposition)
+            LiveMediaCell(media: media)
                 .previewLayout(.fixed(width: size.width, height: size.height))
                 .environment(\.horizontalSizeClass, .regular)
         }

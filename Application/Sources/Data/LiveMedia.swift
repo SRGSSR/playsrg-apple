@@ -4,12 +4,41 @@
 //  License information is available from the LICENSE file.
 //
 
-protocol LiveMedia {
-    var media: SRGMedia? { get }
-    var programComposition: SRGProgramComposition? { get }
+class LiveMediaModel: ObservableObject {
+    @Published var media: SRGMedia? {
+        didSet {
+            registerForChannelUpdates(for: media)
+        }
+    }
+    
+    @Published private(set) var programComposition: SRGProgramComposition?
+    @Published private(set) var date = Date()
+    
+    private var channelObserver: Any?
+    
+    deinit {
+        unregisterChannelUpdates()
+    }
+    
+    private func registerForChannelUpdates(for media: SRGMedia?) {
+        unregisterChannelUpdates()
+        
+        if let media = media, let channel = media.channel, media.contentType == .livestream {
+            channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { [weak self] composition in
+                guard let self = self else { return }
+                self.programComposition = composition
+                // TODO: Bad date updates. Use timer publisher
+                self.date = Date()
+            }
+        }
+    }
+    
+    private func unregisterChannelUpdates() {
+        ChannelService.shared.removeObserver(channelObserver)
+    }
 }
 
-extension LiveMedia {
+extension LiveMediaModel {
     var channel: SRGChannel? {
         return programComposition?.channel ?? media?.channel
     }
@@ -27,36 +56,36 @@ extension LiveMedia {
         }
     }
     
-    func program(at date: Date) -> SRGProgram? {
+    var program: SRGProgram? {
         return programComposition?.play_program(at: date)
     }
     
-    func title(at date: Date) -> String {
+    var title: String {
         if let channel = channel {
-            return program(at: date)?.title ?? channel.title
+            return program?.title ?? channel.title
         }
         else {
             return MediaDescription.title(for: media) ?? ""
         }
     }
     
-    func subtitle(at date: Date) -> String? {
+    var subtitle: String? {
         if let media = media, media.contentType == .scheduledLivestream {
             return MediaDescription.subtitle(for: media)
         }
         else {
-            guard let currentProgram = program(at: date) else { return nil }
-            let remainingTimeInterval = currentProgram.endDate.timeIntervalSince(date)
+            guard let program = program else { return nil }
+            let remainingTimeInterval = program.endDate.timeIntervalSince(date)
             let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
             return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
         }
     }
     
-    func accessibilityLabel(at date: Date) -> String? {
+    var accessibilityLabel: String? {
         if let channel = channel {
             var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
-            if let currentProgram = program(at: date) {
-                label.append(", \(currentProgram.title)")
+            if let program = program {
+                label.append(", \(program.title)")
             }
             return label
         }
@@ -65,19 +94,10 @@ extension LiveMedia {
         }
     }
     
-    func imageUrl(at date: Date, for scale: ImageScale) -> URL? {
-        if let channel = channel {
-            return program(at: date)?.imageUrl(for: scale) ?? channel.imageUrl(for: scale)
-        }
-        else {
-            return media?.imageUrl(for: scale)
-        }
-    }
-    
-    func progress(at date: Date) -> Double? {
+    var progress: Double? {
         if channel != nil {
-            guard let currentProgram = program(at: date) else { return 0 }
-            return date.timeIntervalSince(currentProgram.startDate) / currentProgram.endDate.timeIntervalSince(currentProgram.startDate)
+            guard let program = program else { return 0 }
+            return date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
         }
         else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
                 let startDate = media.startDate,
@@ -87,6 +107,15 @@ extension LiveMedia {
         }
         else {
             return nil
+        }
+    }
+    
+    func imageUrl(for scale: ImageScale) -> URL? {
+        if let channel = channel {
+            return program?.imageUrl(for: scale) ?? channel.imageUrl(for: scale)
+        }
+        else {
+            return media?.imageUrl(for: scale)
         }
     }
 }
