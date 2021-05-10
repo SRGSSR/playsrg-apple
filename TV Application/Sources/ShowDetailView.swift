@@ -10,6 +10,8 @@ import SRGIdentity
 import SwiftUI
 
 struct ShowDetailView: View {
+    // FIXME: Wrong! The instance must be owned higher up, otherwise it will be recreated with each redraw
+    // https://www.donnywals.com/whats-the-difference-between-stateobject-and-observedobject/
     @ObservedObject var model: ShowDetailModel
     
     static let headerHeight: CGFloat = 450

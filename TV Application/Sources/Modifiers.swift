@@ -6,6 +6,7 @@
 
 import SwiftUI
 
+// FIXME: Should be made by the view models themselves
 extension View {
     /**
      *  Called when the application is woken up, either by the user or network being reachable again.

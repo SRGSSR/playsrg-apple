@@ -23,8 +23,8 @@ class MediaDetailModel: ObservableObject {
         }
     }
     
-    var mainCancellables = Set<AnyCancellable>()
-    var refreshCancellables = Set<AnyCancellable>()
+    private var mainCancellables = Set<AnyCancellable>()
+    private var refreshCancellables = Set<AnyCancellable>()
     
     init(media: SRGMedia) {
         self.initialMedia = media
