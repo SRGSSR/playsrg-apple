@@ -21,7 +21,7 @@ private struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
         
         if let hostView = hostController.view {
             let focusGuide = UIFocusGuide()
-            focusGuide.preferredFocusEnvironments = [hostView]
+            focusGuide.preferredFocusEnvironments = [WeakFocusEnvironment(hostView)]
             hostView.addLayoutGuide(focusGuide)
             
             NSLayoutConstraint.activate([
@@ -37,6 +37,47 @@ private struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
     
     func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
         uiViewController.rootView = content()
+    }
+}
+
+extension FocusableRegion {
+    /**
+     *  A focus environment wrapper that avoids retaining its wrapped object.
+     */
+    class WeakFocusEnvironment: NSObject, UIFocusEnvironment {
+        weak var wrappedEnvironment: UIFocusEnvironment?
+        
+        init(_ wrappedEnvironment: UIFocusEnvironment) {
+            self.wrappedEnvironment = wrappedEnvironment
+        }
+        
+        var preferredFocusEnvironments: [UIFocusEnvironment] {
+            return wrappedEnvironment?.preferredFocusEnvironments ?? []
+        }
+        
+        var parentFocusEnvironment: UIFocusEnvironment? {
+            return wrappedEnvironment?.parentFocusEnvironment
+        }
+        
+        var focusItemContainer: UIFocusItemContainer? {
+            return wrappedEnvironment?.focusItemContainer
+        }
+        
+        func setNeedsFocusUpdate() {
+            wrappedEnvironment?.setNeedsFocusUpdate()
+        }
+        
+        func updateFocusIfNeeded() {
+            wrappedEnvironment?.updateFocusIfNeeded()
+        }
+        
+        func shouldUpdateFocus(in context: UIFocusUpdateContext) -> Bool {
+            return wrappedEnvironment?.shouldUpdateFocus(in: context) ?? false
+        }
+        
+        func didUpdateFocus(in context: UIFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+            wrappedEnvironment?.didUpdateFocus(in: context, with: coordinator)
+        }
     }
 }
 
