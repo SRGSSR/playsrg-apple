@@ -16,6 +16,12 @@ class LiveMediaModel: ObservableObject {
     
     private var channelObserver: Any?
     
+    init() {
+        Timer.publish(every: 10, on: .main, in: .common)
+            .autoconnect()
+            .assign(to: &$date)
+    }
+    
     deinit {
         unregisterChannelUpdates()
     }
@@ -27,8 +33,6 @@ class LiveMediaModel: ObservableObject {
             channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { [weak self] composition in
                 guard let self = self else { return }
                 self.programComposition = composition
-                // TODO: Bad date updates. Use timer publisher
-                self.date = Date()
             }
         }
     }
