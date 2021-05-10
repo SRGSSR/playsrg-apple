@@ -13,7 +13,7 @@ class ShowDetailModel: ObservableObject {
         case loaded(medias: [SRGMedia])
     }
     
-    var show: SRGShow? = nil {
+    @Published var show: SRGShow? = nil {
         willSet {
             if show != newValue {
                 medias.removeAll()

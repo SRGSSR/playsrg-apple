@@ -13,7 +13,7 @@ class MediaDetailModel: ObservableObject {
         let urns: [String]
     }
     
-    var initialMedia: SRGMedia? = nil {
+    @Published var initialMedia: SRGMedia? = nil {
         didSet {
             refresh()
         }
@@ -65,7 +65,6 @@ class MediaDetailModel: ObservableObject {
         guard let initialMedia = initialMedia, initialMedia.contentType != .livestream else { return }
         
         let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
-        
         let resourcePath = "api/v2/playlist/recommendation/relatedContent/" + initialMedia.urn
         let url = URL(string: resourcePath, relativeTo: middlewareUrl)!
         
