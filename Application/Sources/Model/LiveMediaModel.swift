@@ -115,12 +115,12 @@ extension LiveMediaModel {
         }
     }
     
-    func imageUrl(for scale: ImageScale) -> URL? {
+    var imageUrl: URL? {
         if let channel = channel {
-            return program?.imageUrl(for: scale) ?? channel.imageUrl(for: scale)
+            return program?.imageUrl(for: .small) ?? channel.imageUrl(for: .small)
         }
         else {
-            return media?.imageUrl(for: scale)
+            return media?.imageUrl(for: .small)
         }
     }
 }
