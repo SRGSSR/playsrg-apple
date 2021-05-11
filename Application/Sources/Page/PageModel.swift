@@ -58,8 +58,15 @@ class PageModel: Identifiable, ObservableObject {
             .flatMap { context in
                 return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows)
                     .map { State.loaded(rows: $0) }
-                    .catch { error in
-                        return Just(State.failed(error: error))
+                    .catch { error -> AnyPublisher<State, Never> in
+                        if context.rows.count != 0 {
+                            return Just(State.loaded(rows: context.rows))
+                                .eraseToAnyPublisher()
+                        }
+                        else {
+                            return Just(State.failed(error: error))
+                                .eraseToAnyPublisher()
+                        }
                     }
             }
             .receive(on: DispatchQueue.main)
