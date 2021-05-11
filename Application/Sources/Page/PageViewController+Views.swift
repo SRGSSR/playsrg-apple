@@ -74,9 +74,9 @@ extension PageViewController {
 }
 
 @objc class OpenSectionEvent: UIEvent {
-    let section: PageSectionProperties
+    let section: PageModel.Section
     
-    init(section: PageSectionProperties) {
+    init(section: PageModel.Section) {
         self.section = section
         super.init()
     }
@@ -107,7 +107,7 @@ extension PageViewController {
             #else
             ResponderChain { firstResponder in
                 Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent.init(section: section.properties))
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent.init(section: section))
                 } label: {
                     HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), canOpen: section.properties.canOpenDetailPage)
                 }

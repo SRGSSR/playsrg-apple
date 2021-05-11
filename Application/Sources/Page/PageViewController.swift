@@ -384,7 +384,7 @@ extension PageViewController: SectionHeaderViewAction {
         guard let openSectionEvent = event as? OpenSectionEvent else { return }
 
         if let navigationController = navigationController {
-            let sectionDetailViewController = SectionDetailViewController(section: openSectionEvent.section)
+            let sectionDetailViewController = SectionDetailViewController(section: openSectionEvent.section.properties)
             navigationController.pushViewController(sectionDetailViewController, animated: true)
         }
     }
