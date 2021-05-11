@@ -70,7 +70,20 @@ extension PageViewController {
 }
 
 @objc protocol SectionHeaderViewAction: AnyObject {
-    func openSection()
+    func openSection(sender: Any?, event: UIEvent?)
+}
+
+@objc class OpenSectionEvent: UIEvent {
+    let section: PageSectionProperties
+    
+    init(section: PageSectionProperties) {
+        self.section = section
+        super.init()
+    }
+    
+    override init() {
+        fatalError("init() Mut not be used to initialize OpenSectionEvent")
+    }
 }
 
 extension PageViewController {
@@ -94,7 +107,7 @@ extension PageViewController {
             #else
             ResponderChain { firstResponder in
                 Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection))
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent.init(section: section.properties))
                 } label: {
                     HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), canOpen: section.properties.canOpenDetailPage)
                 }

@@ -380,9 +380,11 @@ extension PageViewController: ShowAccessCellActions {
 }
 
 extension PageViewController: SectionHeaderViewAction {
-    func openSection() {
+    func openSection(sender: Any?, event: UIEvent?) {
+        guard let openSectionEvent = event as? OpenSectionEvent else { return }
+
         if let navigationController = navigationController {
-            let sectionDetailViewController = SectionDetailViewController()
+            let sectionDetailViewController = SectionDetailViewController(section: openSectionEvent.section)
             navigationController.pushViewController(sectionDetailViewController, animated: true)
         }
     }
