@@ -39,13 +39,14 @@ extension PageModel {
         case audio(channel: RadioChannel)
         case live
         case topic(topic: SRGTopic)
+        case section(section: PageModel.Section)
         
         var supportsCastButton: Bool {
             switch self {
-            case .topic:
-                return false
-            default:
+            case .video, .audio, .live:
                 return true
+            default:
+                return false
             }
         }
         
