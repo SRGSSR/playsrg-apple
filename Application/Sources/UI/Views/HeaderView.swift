@@ -10,7 +10,7 @@ import SwiftUI
 struct HeaderView: View {
     let title: String?
     let subtitle: String?
-    let canOpen: Bool
+    let hasDetailDisclosure: Bool
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
@@ -40,7 +40,7 @@ struct HeaderView: View {
                     Text(title)
                         .srgFont(.H3)
                         .lineLimit(1)
-                    if canOpen {
+                    if hasDetailDisclosure {
                         Spacer()
                         Image(systemName: "chevron.right")
                     }
@@ -80,14 +80,14 @@ class HeaderViewSize: NSObject {
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            HeaderView(title: "Title", subtitle: nil, canOpen: false)
-            HeaderView(title: "Title", subtitle: nil, canOpen: true)
-            HeaderView(title: "Title", subtitle: "Subtitle", canOpen: false)
-            HeaderView(title: "Title", subtitle: "Subtitle", canOpen: true)
-            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, canOpen: false)
-            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, canOpen: true)
-            HeaderView(title: nil, subtitle: nil, canOpen: false)
-            HeaderView(title: nil, subtitle: nil, canOpen: true)
+            HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: false)
+            HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: true)
+            HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: false)
+            HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: true)
+            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, hasDetailDisclosure: false)
+            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, hasDetailDisclosure: true)
+            HeaderView(title: nil, subtitle: nil, hasDetailDisclosure: false)
+            HeaderView(title: nil, subtitle: nil, hasDetailDisclosure: true)
         }
         .previewLayout(.fixed(width: 800, height: 200))
     }
