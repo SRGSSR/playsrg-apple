@@ -138,7 +138,7 @@ class PageViewController: DataViewController {
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = PageSectionHeaderView(section: section)
+            view.content = PageSectionHeaderView(section: section, pageId: self.model.id)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in

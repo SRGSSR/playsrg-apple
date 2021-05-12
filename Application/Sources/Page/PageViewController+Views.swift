@@ -89,6 +89,7 @@ extension PageViewController {
 extension PageViewController {
     struct PageSectionHeaderView: View {
         let section: PageModel.Section
+        let pageId: PageModel.Id
         
         private static func title(for section: PageModel.Section) -> String? {
             return section.properties.title
@@ -96,6 +97,15 @@ extension PageViewController {
         
         private static func subtitle(for section: PageModel.Section) -> String? {
             return section.properties.summary
+        }
+        
+        private static func detailDisclosure(for section: PageModel.Section, on pageId: PageModel.Id) -> Bool {
+            if case .section = pageId {
+                return false
+            }
+            else {
+                return section.properties.canOpenDetailPage
+            }
         }
         
         var body: some View {
@@ -109,10 +119,10 @@ extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent.init(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.properties.canOpenDetailPage)
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.detailDisclosure(for: section,on: pageId))
                 }
                 .foregroundColor(.white)
-                .disabled(!section.properties.canOpenDetailPage)
+                .disabled(!Self.detailDisclosure(for: section,on: pageId))
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibilityOptionalHint(section.properties.accessibilityHint)
