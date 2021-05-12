@@ -122,7 +122,7 @@ class PageViewController: DataViewController {
         super.viewDidLoad()
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
-            cell.content = PageCell(item: item)
+            cell.content = PageCell(item: item, pageId: self.model.id)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -231,7 +231,7 @@ extension PageViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.properties.layout {
+                switch section.properties.layout(for: self?.model.id ?? .video) {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)

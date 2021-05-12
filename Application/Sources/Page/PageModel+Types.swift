@@ -31,6 +31,32 @@ extension PageSectionProperties {
             return nil
         }
     }
+    
+    func layout(for id: PageModel.Id) -> PageModel.SectionLayout {
+        if case .section = id {
+            return self.sectionPageLayout
+        }
+        else {
+            return self.layout
+        }
+    }
+    
+    private var sectionPageLayout: PageModel.SectionLayout {
+        switch layout {
+        case .mediaSwimlane, .mediaGrid:
+            return .mediaGrid
+        case .showSwimlane, .showGrid:
+            return .showGrid
+        case .liveMediaSwimlane, .liveMediaGrid:
+            return .liveMediaGrid
+        case .hero:
+            return .mediaGrid
+        case .topicSelector:
+            return .showGrid
+        default:
+            return layout
+        }
+    }
 }
 
 extension PageModel {

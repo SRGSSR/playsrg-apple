@@ -10,9 +10,10 @@ extension PageViewController {
     struct PageMediaCell: View {
         let media: SRGMedia?
         let section: PageModel.Section
+        let pageId: PageModel.Id
         
         var body: some View {
-            switch section.properties.layout {
+            switch section.properties.layout(for: pageId) {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -30,9 +31,10 @@ extension PageViewController {
     struct PageShowCell: View {
         let show: SRGShow?
         let section: PageModel.Section
+        let pageId: PageModel.Id
         
         var body: some View {
-            switch section.properties.layout {
+            switch section.properties.layout(for: pageId) {
             case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -45,17 +47,18 @@ extension PageViewController {
 
     struct PageCell: View {
         let item: PageModel.Item
+        let pageId: PageModel.Id
         
         var body: some View {
             switch item {
             case let .mediaPlaceholder(index: _, section: section):
-                PageMediaCell(media: nil, section: section)
+                PageMediaCell(media: nil, section: section, pageId: pageId)
             case let .media(media, section: section):
-                PageMediaCell(media: media, section: section)
+                PageMediaCell(media: media, section: section, pageId: pageId)
             case let .showPlaceholder(index: _, section: section):
-                PageShowCell(show: nil, section: section)
+                PageShowCell(show: nil, section: section, pageId: pageId)
             case let .show(show, section: section):
-                PageShowCell(show: show, section: section)
+                PageShowCell(show: show, section: section, pageId: pageId)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
             case let .topic(topic, section: _):
