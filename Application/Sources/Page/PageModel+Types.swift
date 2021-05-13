@@ -250,22 +250,22 @@ extension SRGContentSection: PageSectionProperties {
         switch type {
         case .medias:
             return dataProvider.medias(for: vendor, contentSectionUid: uid, pageSize: pageSize)
-                .map { self.filterItems($0.medias).map { .media($0, section: section) } }
+                .map { self.filterItems($0).map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .showAndMedias:
             return dataProvider.showAndMedias(for: vendor, contentSectionUid: uid, pageSize: pageSize)
                 .map {
                     var items = [PageModel.Item]()
-                    if let show = $0.showAndMedias.show {
+                    if let show = $0.show {
                         items.append(.show(show, section: section))
                     }
-                    items.append(contentsOf: $0.showAndMedias.medias.map { .media($0, section: section) })
+                    items.append(contentsOf: $0.medias.map { .media($0, section: section) })
                     return items
                 }
                 .eraseToAnyPublisher()
         case .shows:
             return dataProvider.shows(for: vendor, contentSectionUid: uid, pageSize: pageSize)
-                .map { self.filterItems($0.shows).map { .show($0, section: section) } }
+                .map { self.filterItems($0).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .predefined:
             switch presentation.type {
@@ -283,11 +283,11 @@ extension SRGContentSection: PageSectionProperties {
                     .eraseToAnyPublisher()
             case .livestreams:
                 return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.medias.map { .media($0, section: section) } }
+                    .map { $0.map { .media($0, section: section) } }
                     .eraseToAnyPublisher()
             case .topicSelector:
                 return dataProvider.tvTopics(for: vendor)
-                    .map { $0.topics.map { .topic($0, section: section) } }
+                    .map { $0.map { .topic($0, section: section) } }
                     .eraseToAnyPublisher()
             case .resumePlayback:
                 return dataProvider.historyPublisher()
@@ -420,23 +420,23 @@ extension ConfiguredSection: PageSectionProperties {
         switch self.type {
         case let .radioLatestEpisodes(channelUid: channelUid):
             return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioMostPopular(channelUid: channelUid):
             return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioLatest(channelUid: channelUid):
             return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioLatestVideos(channelUid: channelUid):
             return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case let .radioAllShows(channelUid):
             return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize)
-                .map { $0.shows.map { .show($0, section: section) } }
+                .map { $0.map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
             return dataProvider.favoritesPublisher(for: id, section: section)
@@ -452,7 +452,7 @@ extension ConfiguredSection: PageSectionProperties {
             #endif
         case .tvLive:
             return dataProvider.tvLivestreams(for: vendor)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .radioLive:
             return dataProvider.regionalizedRadioLivestreams(for: vendor)
@@ -464,11 +464,11 @@ extension ConfiguredSection: PageSectionProperties {
                 .eraseToAnyPublisher()
         case .tvLiveCenter:
             return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .tvScheduledLivestreams:
             return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize)
-                .map { $0.medias.map { .media($0, section: section) } }
+                .map { $0.map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         }
     }
@@ -482,9 +482,7 @@ fileprivate extension SRGDataProvider {
             .flatMap { urns in
                 return self.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
             }
-            .reduce([SRGMedia]()) { collectedMedias, result in
-                return collectedMedias + result.medias
-            }
+            .scan([]) { $0 + $1 }
             .map { medias in
                 return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
             }
@@ -496,8 +494,8 @@ fileprivate extension SRGDataProvider {
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
         #if os(iOS)
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
-            .flatMap { result -> AnyPublisher<[SRGMedia], Error> in
-                var regionalizedMedias = result.medias
+            .flatMap { medias -> AnyPublisher<[SRGMedia], Error> in
+                var regionalizedMedias = medias
                 return Publishers.MergeMany(regionalizedMedias.compactMap { media -> AnyPublisher<[SRGMedia], Error>? in
                     guard let channelUid = media.channel?.uid else { return nil }
                     
@@ -506,7 +504,7 @@ fileprivate extension SRGDataProvider {
                     if selectedLivestreamUrn != nil && media.urn != selectedLivestreamUrn {
                         return self.radioLivestreams(for: vendor, channelUid: channelUid)
                             .map { result in
-                                if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, result.medias) {
+                                if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
                                     guard let index = regionalizedMedias.firstIndex(of: media) else { return regionalizedMedias }
                                     regionalizedMedias[index] = selectedMedia
                                 }
@@ -525,7 +523,6 @@ fileprivate extension SRGDataProvider {
             .eraseToAnyPublisher()
         #else
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
-            .map { $0.medias }
             .eraseToAnyPublisher()
         #endif
     }
@@ -562,7 +559,7 @@ fileprivate extension SRGDataProvider {
             //       user data access (the one made at the beginning). This optimization seems premature, though, so
             //       for the moment a simpler implementation is used.
             .receive(on: DispatchQueue.main)
-            .map { $0.medias.filter { HistoryCanResumePlaybackForMedia($0) } }
+            .map { $0.filter { HistoryCanResumePlaybackForMedia($0) } }
             .eraseToAnyPublisher()
     }
     
@@ -597,28 +594,21 @@ fileprivate extension SRGDataProvider {
             .flatMap { urns in
                 return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
             }
-            .map { $0.medias }
             .eraseToAnyPublisher()
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
-        let pagePublisher = CurrentValueSubject<SRGDataProvider.Shows.Page?, Never>(nil)
+        let trigger = Trigger()
         
-        return pagePublisher
-            .flatMap { page in
-                return page != nil ? self.shows(at: page!) : self.shows(withUrns: urns, pageSize: 50 /* Use largest page size */)
-            }
-            .handleEvents(receiveOutput: { result in
-                if let nextPage = result.nextPage {
-                    pagePublisher.value = nextPage
-                }
-                else {
-                    pagePublisher.send(completion: .finished)
+        return shows(withUrns: urns, pageSize: 3 /* Use largest page size */, trigger: trigger)
+            .handleEvents(receiveOutput: { shows in
+                // FIXME: There is probably a better way
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                    trigger.pull()
                 }
             })
-            .reduce([SRGShow]()) { collectedShows, result in
-                return collectedShows + result.shows
-            }
+            .reduce([]) { $0 + $1 }
+            .map { $0.sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending } }
             .eraseToAnyPublisher()
     }
     

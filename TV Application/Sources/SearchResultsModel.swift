@@ -14,11 +14,6 @@ class SearchResultsModel: ObservableObject {
         case loaded(medias: [SRGMedia], suggestions: [SRGSearchSuggestion])
     }
     
-    enum Medias {
-        public typealias Page = SRGDataProvider.MediasMatchingQuery.Page
-        public typealias Output = (medias: [SRGMedia], suggestions: [SRGSearchSuggestion], page: Page, nextPage: Page?, response: URLResponse)
-    }
-    
     private var querySubject = CurrentValueSubject<String, Never>("")
     
     var query: String {
@@ -32,6 +27,8 @@ class SearchResultsModel: ObservableObject {
     
     @Published private(set) var state = State.loading
     
+    private typealias MediaSearchOutput = (medias: [SRGMedia], suggestions: [SRGSearchSuggestion])
+    
     weak var searchController: UISearchController?
     weak var viewController: UIViewController?
     
@@ -39,7 +36,8 @@ class SearchResultsModel: ObservableObject {
     private var refreshCancellables = Set<AnyCancellable>()
     
     private var medias: [SRGMedia] = []
-    private var nextPage: Medias.Page?
+    
+    private let trigger = Trigger()
     
     init() {
         querySubject
@@ -47,20 +45,14 @@ class SearchResultsModel: ObservableObject {
             .debounce(for: 0.3, scheduler: RunLoop.main)
             .sink { _ in
                 self.medias.removeAll()
-                self.nextPage = nil
                 
                 self.cancelRefresh()
-                self.loadNextPage()
+                self.refresh()
             }
             .store(in: &mainCancellables)
     }
     
     func refresh() {
-        guard medias.isEmpty else { return }
-        loadNextPage()
-    }
-    
-    func loadNextPage(from media: SRGMedia? = nil) {
         guard !query.isEmpty else {
             if ApplicationConfiguration.shared.isShowsSearchHidden {
                 self.state = .loaded(medias: [], suggestions: [])
@@ -68,39 +60,50 @@ class SearchResultsModel: ObservableObject {
             else {
                 SRGDataProvider.current!.mostSearchedShows(for: ApplicationConfiguration.shared.vendor, matching: .TV)
                     .receive(on: DispatchQueue.main)
-                    .handleEvents(receiveRequest: { _ in
+                    .handleEvents(receiveRequest: { [weak self] _ in
+                        guard let self = self else { return }
                         self.state = .loading
                     })
-                    .sink { completion in
+                    .sink { [weak self] completion in
+                        guard let self = self else { return }
                         if case let .failure(error) = completion {
                             self.state = .failed(error: error)
                         }
-                    } receiveValue: { result in
-                        self.state = .mostSearched(shows: result.shows)
+                    } receiveValue: { [weak self] shows in
+                        guard let self = self else { return }
+                        self.state = .mostSearched(shows: shows)
                     }
                     .store(in: &refreshCancellables)
             }
             return
         }
         
-        guard let publisher = mediaPublisher(from: media) else { return }
+        guard let publisher = mediaPublisher else { return }
         publisher
             .receive(on: DispatchQueue.main)
-            .handleEvents(receiveRequest: { _ in
+            .handleEvents(receiveRequest: { [weak self] _ in
+                guard let self = self else { return }
                 if self.medias.isEmpty {
                     self.state = .loading
                 }
             })
-            .sink { completion in
+            .sink { [weak self] completion in
                 if case let .failure(error) = completion {
+                    guard let self = self else { return }
                     self.state = .failed(error: error)
                 }
-            } receiveValue: { result in
+            } receiveValue: { [weak self] result in
+                guard let self = self else { return }
                 self.medias.append(contentsOf: result.medias)
                 self.state = .loaded(medias: self.medias, suggestions: result.suggestions)
-                self.nextPage = result.nextPage
             }
             .store(in: &refreshCancellables)
+    }
+    
+    func loadNextPage(from media: SRGMedia) {
+        if media == medias.last {
+            trigger.pull()
+        }
     }
     
     func cancelRefresh() {
@@ -117,25 +120,17 @@ class SearchResultsModel: ObservableObject {
         return settings
     }
     
-    private func mediaPublisher(from media: SRGMedia?) -> AnyPublisher<Medias.Output, Error>? {
-        return mediaSearchPublisher(from: media)?
+    private var mediaPublisher: AnyPublisher<MediaSearchOutput, Error>? {
+        return mediaSearchPublisher?
             .flatMap { searchResult in
                 return SRGDataProvider.current!.medias(withUrns: searchResult.mediaUrns, pageSize: ApplicationConfiguration.shared.pageSize)
-                    .map { mediaResult in
-                        (mediaResult.medias, searchResult.suggestions ?? [], searchResult.page, searchResult.nextPage, searchResult.response)
-                    }
+                    .map { ($0, searchResult.suggestions ?? []) }
             }
             .eraseToAnyPublisher()
     }
     
-    private func mediaSearchPublisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.MediasMatchingQuery.Output, Error>? {
-        if media != nil {
-            guard let nextPage = nextPage, media == medias.last else { return nil }
-            return SRGDataProvider.current!.medias(at: nextPage)
-        }
-        else {
-            let applicationConfiguration = ApplicationConfiguration.shared
-            return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize)
-        }
+    private var mediaSearchPublisher: AnyPublisher<SRGDataProvider.MediasMatchingQuery.Output, Error>? {
+        let applicationConfiguration = ApplicationConfiguration.shared
+        return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize, trigger: trigger)
     }
 }

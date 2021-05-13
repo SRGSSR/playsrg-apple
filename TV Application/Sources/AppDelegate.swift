@@ -195,7 +195,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SRGDataProvider.current?.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
-                } receiveValue: { media, _ in
+                } receiveValue: { media in
                     navigateToMedia(media)
                 }
                 .store(in: &cancellables)
@@ -206,7 +206,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             SRGDataProvider.current?.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
-                } receiveValue: { show, _ in
+                } receiveValue: { show in
                     navigateToShow(show)
                 }
                 .store(in: &cancellables)

@@ -126,7 +126,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (7.4.0)</string>
+			<string>GoogleUtilities (7.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -198,7 +198,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Mantle</string>
 			<key>Title</key>
-			<string>Mantle (2.1.6)</string>
+			<string>Mantle (2.1.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

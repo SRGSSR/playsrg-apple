@@ -116,11 +116,11 @@ fileprivate extension SRGDataProvider {
         switch id {
         case .video:
             return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.contentPage.sections.map { PageModel.Section.content($0) } }
+                .map { $0.sections.map { PageModel.Section.content($0) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
             return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.contentPage.sections.map { PageModel.Section.content($0) } }
+                .map { $0.sections.map { PageModel.Section.content($0) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
             return Just(channel.configuredSections().map { PageModel.Section.configured($0) })

@@ -74,7 +74,6 @@ class MediaDetailModel: ObservableObject {
             .flatMap { recommendation in
                 return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
             }
-            .map { $0.medias }
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.relatedMedias, on: self)

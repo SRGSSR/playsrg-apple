@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "66f5945ac3a4c4ac268bf94c31f226116b14e327",
-          "version": "7.4.0"
+          "revision": "58359415d4ea29ebdc8fa5b41ce96c434d76d901",
+          "version": "7.4.1"
         }
       },
       {
@@ -168,8 +168,8 @@
         "repositoryURL": "https://github.com/Mantle/Mantle.git",
         "state": {
           "branch": null,
-          "revision": "eb4ad298d81c023bcba20810ceffba695378ded4",
-          "version": "2.1.6"
+          "revision": "bbe0cbe68582a18a6df7516778196ba3cf420ad3",
+          "version": "2.1.7"
         }
       },
       {
@@ -231,7 +231,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "cabd1e45126f3655114d2a13d381e67e96c21a11",
+          "revision": "31362a6f0f88ce22505f6413902f00d2d3d32351",
           "version": null
         }
       },
@@ -249,7 +249,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "feature/content-services",
-          "revision": "afa9eb358ceef44a0c93939bcbd11d771e46d908",
+          "revision": "b085cf8e894f9c94ef9e347a7a75622774573c58",
           "version": null
         }
       },
@@ -276,7 +276,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "4791f3224722600e22b0e8eec4fb128897bb6d2b",
+          "revision": "e50bb783509a7cc7b7b6d41c459a772737092ee7",
           "version": null
         }
       },

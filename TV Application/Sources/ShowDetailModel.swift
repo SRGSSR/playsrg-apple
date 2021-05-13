@@ -21,7 +21,7 @@ class ShowDetailModel: ObservableObject {
         }
         didSet {
             guard medias.isEmpty else { return }
-            loadNextPage()
+            refresh()
         }
     }
     
@@ -29,14 +29,12 @@ class ShowDetailModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     private var medias: [SRGMedia] = []
-    private var nextPage: SRGDataProvider.LatestMediasForShow.Page?
     
-    // Triggers a load only if the media is `nil` (first page) or the last one. We cannot observe scrolling yet,
-    // so cell appearance must trigger a reload, and the last cell is used to load more content.
-    // Also read https://www.donnywals.com/implementing-an-infinite-scrolling-list-with-swiftui-and-combine/
-    func loadNextPage(from media: SRGMedia? = nil) {
-        guard let publisher = publisher(from: media) else { return }
-        publisher
+    let trigger = Trigger()
+    
+    func refresh() {
+        guard let show = show else { return }
+        SRGDataProvider.current!.latestMediasForShow(withUrn: show.urn, pageSize: ApplicationConfiguration.shared.pageSize, trigger: trigger)
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveRequest: { [weak self] _ in
                 guard let self = self else { return }
@@ -49,25 +47,17 @@ class ShowDetailModel: ObservableObject {
                 if case let .failure(error) = completion {
                     self.state = .failed(error: error)
                 }
-            } receiveValue: { [weak self] result in
+            } receiveValue: { [weak self] medias in
                 guard let self = self else { return }
-                self.medias.append(contentsOf: result.medias)
+                self.medias.append(contentsOf: medias)
                 self.state = .loaded(medias: self.medias)
-                self.nextPage = result.nextPage
             }
             .store(in: &cancellables)
     }
     
-    private func publisher(from media: SRGMedia?) -> AnyPublisher<SRGDataProvider.LatestMediasForShow.Output, Error>? {
-        if media != nil {
-            guard let nextPage = nextPage, media == medias.last else { return nil }
-            return SRGDataProvider.current!.latestMediasForShow(at: nextPage)
-        }
-        else if let show = show {
-            return SRGDataProvider.current!.latestMediasForShow(withUrn: show.urn, pageSize: ApplicationConfiguration.shared.pageSize)
-        }
-        else {
-            return nil
+    func loadNextPage(from media: SRGMedia) {
+        if media == medias.last {
+            trigger.pull()
         }
     }
 }

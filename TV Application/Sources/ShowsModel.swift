@@ -35,8 +35,8 @@ class ShowsModel: ObservableObject {
                 if case let .failure(error) = completion {
                     self.state = .failed(error: error)
                 }
-            } receiveValue: { result in
-                self.alphabeticalShows = Dictionary(grouping: result.shows) { show in
+            } receiveValue: { shows in
+                self.alphabeticalShows = Dictionary(grouping: shows) { show in
                     // Remove accents / diacritics and extract the first character (for wide chars / emoji support)
                     guard let character = show.title.folding(options: .diacriticInsensitive, locale: .current).uppercased().first else { return "#" }
                     return !character.isLetter ? "#" : character

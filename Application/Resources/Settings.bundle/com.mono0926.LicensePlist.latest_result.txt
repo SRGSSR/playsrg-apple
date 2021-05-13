@@ -248,7 +248,7 @@ name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, 
 
 name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 8.4.0
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.4.0
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.4.1
 
 name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.4
 
@@ -262,7 +262,7 @@ name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3
 
 name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 1.0.0-srg5
 
-name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.6
+name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.7
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0
 
