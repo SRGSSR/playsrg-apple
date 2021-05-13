@@ -25,6 +25,8 @@ class PageModel: Identifiable, ObservableObject {
     
     @Published private(set) var state: State = .loading
     
+    private let trigger = Trigger()
+    
     private var internalState: State = .loading {
         didSet {
             state = Self.state(from: internalState)
@@ -53,10 +55,10 @@ class PageModel: Identifiable, ObservableObject {
     func refresh() {
         cancellables = []
         
-        Just((id: self.id, rows: rows))
+        Just((id: self.id, rows: rows, trigger: trigger))
             .throttle(for: 30, scheduler: RunLoop.main, latest: true)
             .flatMap { context in
-                return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows)
+                return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows, lastSectionTrigger: context.trigger)
                     .map { State.loaded(rows: $0) }
                     .catch { error -> AnyPublisher<State, Never> in
                         if context.rows.count != 0 {
@@ -74,6 +76,10 @@ class PageModel: Identifiable, ObservableObject {
             .store(in: &cancellables)
     }
     
+    func loadMore() {
+        trigger.pull()
+    }
+    
     func cancelRefresh() {
         cancellables = []
     }
@@ -89,16 +95,20 @@ class PageModel: Identifiable, ObservableObject {
 }
 
 fileprivate extension SRGDataProvider {
+    private static func hasLastSectionTrigger(for id: PageModel.Id, section: PageModel.Section, in sections: [PageModel.Section]) -> Bool {
+        return section.properties.isGridLayout(for: id) && section == sections.last
+    }
+    
     /// Publishes rows associated with a page id, starting from the provided rows. Updates are published down the pipeline
     /// as they are retrieved.
-    func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row]) -> AnyPublisher<[PageModel.Row], Error> {
+    func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row], lastSectionTrigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
         return sectionsPublisher(id: id)
             // For each section create a publisher which updates the associated row and publishes the entire updated
             // row list as a result. A value is sent down the pipeline with each update.
             .flatMap { sections -> AnyPublisher<[PageModel.Row], Never> in
                 var rows = Self.reusableRows(from: existingRows, for: sections)
                 return Publishers.MergeMany(sections.map { section in
-                    return self.rowPublisher(id: id, section: section)
+                    return self.rowPublisher(id: id, section: section, trigger: Self.hasLastSectionTrigger(for: id, section: section, in: sections) ? lastSectionTrigger : Trigger())
                         .map { row in
                             guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
                             rows[index] = row
@@ -138,8 +148,8 @@ fileprivate extension SRGDataProvider {
     }
     
     /// Publishes the row for content for a given section and page id
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<PageModel.Row, Never> {
-        if let publisher = section.properties.publisher(for: id) {
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
+        if let publisher = section.properties.publisher(for: id, trigger: trigger) {
             return publisher
                 .replaceError(with: section.properties.placeholderItems)
                 .map { PageModel.Row(section: section, items: Self.removeDuplicateItems($0)) }

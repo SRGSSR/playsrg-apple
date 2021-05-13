@@ -360,6 +360,13 @@ extension PageViewController: UIScrollViewDelegate {
             refreshTriggered = false
         }
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let numberOfScreens = 4
+        if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
+            model.loadMore()
+        }
+    }
 }
 
 #if os(iOS)
