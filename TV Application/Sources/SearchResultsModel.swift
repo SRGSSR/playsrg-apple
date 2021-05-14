@@ -37,6 +37,8 @@ class SearchResultsModel: ObservableObject {
     
     private var medias: [SRGMedia] = []
     
+    static let triggerIndex = 1
+    
     private let trigger = Trigger()
     
     init() {
@@ -102,7 +104,7 @@ class SearchResultsModel: ObservableObject {
     
     func loadNextPage(from media: SRGMedia) {
         if media == medias.last {
-            trigger.pull()
+            trigger.signal(Self.triggerIndex)
         }
     }
     
@@ -131,6 +133,6 @@ class SearchResultsModel: ObservableObject {
     
     private var mediaSearchPublisher: AnyPublisher<SRGDataProvider.MediasMatchingQuery.Output, Error>? {
         let applicationConfiguration = ApplicationConfiguration.shared
-        return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize, trigger: trigger)
+        return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize, triggerId: trigger.id(Self.triggerIndex))
     }
 }
