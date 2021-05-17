@@ -31,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet Calendar *calendar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
 
-@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator API_AVAILABLE(ios(10.0));
+@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
 @property (nonatomic, weak) UIPanGestureRecognizer *scopeGestureRecognizer;
 

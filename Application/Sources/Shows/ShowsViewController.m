@@ -35,7 +35,7 @@
 
 @property (nonatomic, weak) BDKCollectionIndexView *collectionIndexView;
 
-@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator API_AVAILABLE(ios(10.0));
+@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
 @end
 

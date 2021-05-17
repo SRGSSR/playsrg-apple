@@ -149,7 +149,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     return [self initWithRequest:notification.request date:notification.date];
 }
 
-- (instancetype)initWithRequest:(UNNotificationRequest *)notificationRequest date:(NSDate *)date API_AVAILABLE(ios(10.0))
+- (instancetype)initWithRequest:(UNNotificationRequest *)notificationRequest date:(NSDate *)date
 {
     if (self = [super init]) {
         self.identifier = notificationRequest.identifier;

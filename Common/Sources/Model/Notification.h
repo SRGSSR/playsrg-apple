@@ -60,12 +60,12 @@ OBJC_EXPORT NSString * NotificationTypeString(NotificationType notificationType)
 /**
  *  Create a notification from a system notification request.
  */
-- (instancetype)initWithRequest:(UNNotificationRequest *)notificationRequest API_AVAILABLE(ios(10.0));
+- (instancetype)initWithRequest:(UNNotificationRequest *)notificationRequest;
 
 /**
  *  Create a notification from a system notification.
  */
-- (instancetype)initWithNotification:(UNNotification *)notification API_AVAILABLE(ios(10.0));
+- (instancetype)initWithNotification:(UNNotification *)notification;
 
 /**
  *  The notification identifier.
