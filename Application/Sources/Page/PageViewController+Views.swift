@@ -72,7 +72,7 @@ extension PageViewController {
     }
 }
 
-@objc protocol SectionHeaderViewAction: AnyObject {
+@objc protocol SectionHeaderViewAction {
     func openSection(sender: Any?, event: UIEvent?)
 }
 
@@ -120,12 +120,12 @@ extension PageViewController {
             #else
             ResponderChain { firstResponder in
                 Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent.init(section: section))
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
                     HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.detailDisclosure(for: section,on: pageId))
                 }
                 .foregroundColor(.white)
-                .disabled(!Self.detailDisclosure(for: section,on: pageId))
+                .disabled(!Self.detailDisclosure(for: section, on: pageId))
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibilityOptionalHint(section.properties.accessibilityHint)
