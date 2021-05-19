@@ -4,15 +4,17 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import UIKit
 
-class SectionViewController: DataViewController {
+class SectionViewController: UIViewController {
     let model: SectionModel
-    let filter: SectionFiltering
+    
+    private var cancellables = Set<AnyCancellable>()
+    private weak var label: UILabel!
     
     init(section: Content.Section, filter: SectionFiltering) {
-        self.model = SectionModel(section: section)
-        self.filter = filter
+        self.model = SectionModel(section: section, filter: filter)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -25,16 +27,42 @@ class SectionViewController: DataViewController {
         view.backgroundColor = .play_black
         
         let label = UILabel(frame: view.bounds)
-        label.text = model.title
+        label.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         label.textAlignment = .center
         view.addSubview(label)
+        self.label = label
         
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = model.title
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(loadMore))
+        view.addGestureRecognizer(tapGestureRecognizer)
+        
+        model.$state
+            .sink { [weak self] state in
+                self?.reloadData(with: state)
+            }
+            .store(in: &cancellables)
+    }
+    
+    @objc func loadMore(_ sender: Any) {
+        model.loadMore()
+    }
+    
+    private func reloadData(with state: SectionModel.State) {
+        switch state {
+        case let .loaded(show: _, items: items):
+            label.text = "\(items.count) items"
+        case let .failed(error: error):
+            label.text = error.localizedDescription
+        case .loading:
+            label.text = "Loading"
+        }
     }
 }
 

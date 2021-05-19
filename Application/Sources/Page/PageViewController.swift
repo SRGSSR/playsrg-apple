@@ -15,7 +15,7 @@ class PageViewController: DataViewController {
     }
     
     private let model: PageModel
-    private var refreshCancellables = Set<AnyCancellable>()
+    private var cancellables = Set<AnyCancellable>()
 
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
     
@@ -154,7 +154,7 @@ class PageViewController: DataViewController {
             .sink { [weak self] state in
                 self?.reloadData(with: state)
             }
-            .store(in: &refreshCancellables)
+            .store(in: &cancellables)
     }
     
     #if os(iOS)
