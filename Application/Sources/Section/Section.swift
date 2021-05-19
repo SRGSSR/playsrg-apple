@@ -7,143 +7,25 @@
 import SRGDataProviderCombine
 import SRGUserData
 
-private let defaultNumberOfPlaceholders = 10
-private let defaultNumberOfLivestreamPlaceholders = 4
-
-protocol PageSectionProperties {
+protocol SectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
-    var layout: PageModel.SectionLayout { get }
-    var placeholderItems: [PageModel.Item] { get }
-    var canOpenDetailPage: Bool { get }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[PageModel.Item], Error>?
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>?
 }
 
-extension PageSectionProperties {
-    var accessibilityHint: String? {
-        if canOpenDetailPage {
-            return PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint")
-        }
-        else {
-            return nil
-        }
-    }
+enum Section: Hashable {
+    case content(SRGContentSection)
+    case configured(ConfiguredSection)
     
-    func isGridLayout(for id: PageModel.Id) -> Bool {
-        switch layout(for: id) {
-        case .mediaGrid, .showGrid, .liveMediaGrid:
-            return true
-        default:
-            return false
+    var properties: SectionProperties {
+        switch self {
+        case let .content(section):
+            return ContentSectionProperties(contentSection: section)
+        case let .configured(section):
+            return ConfiguredSectionProperties(configuredSection: section)
         }
-    }
-    
-    func layout(for id: PageModel.Id) -> PageModel.SectionLayout {
-        if case .section = id {
-            return self.sectionPageLayout
-        }
-        else {
-            return self.layout
-        }
-    }
-    
-    private var sectionPageLayout: PageModel.SectionLayout {
-        switch layout {
-        case .mediaSwimlane, .mediaGrid:
-            return .mediaGrid
-        case .showSwimlane, .showGrid:
-            return .showGrid
-        case .liveMediaSwimlane, .liveMediaGrid:
-            return .liveMediaGrid
-        case .hero:
-            return .mediaGrid
-        case .topicSelector:
-            return .showGrid
-        default:
-            return layout
-        }
-    }
-}
-
-extension PageModel {
-    enum Id {
-        case video
-        case audio(channel: RadioChannel)
-        case live
-        case topic(topic: SRGTopic)
-        case section(section: PageModel.Section)
-        
-        var supportsCastButton: Bool {
-            switch self {
-            case .video, .audio, .live:
-                return true
-            default:
-                return false
-            }
-        }
-        
-        func canContain(show: SRGShow) -> Bool {
-            switch self {
-            case .video:
-                return show.transmission == .TV
-            case let .audio(channel: channel):
-                return show.transmission == .radio && show.primaryChannelUid == channel.uid
-            default:
-                return false
-            }
-        }
-        
-        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
-            return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
-        }
-        
-        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
-            switch self {
-            case .video:
-                return medias.filter { $0.mediaType == .video }
-            case let .audio(channel: channel):
-                return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
-            default:
-                return medias
-            }
-        }
-    }
-    
-    enum State {
-        case loading
-        case failed(error: Error)
-        case loaded(rows: [Row])
-    }
-    
-    enum Section: Hashable {
-        case content(SRGContentSection)
-        case configured(ConfiguredSection)
-        
-        var properties: PageSectionProperties {
-            switch self {
-            case let .content(section):
-                return section
-            case let .configured(section):
-                return section
-            }
-        }
-    }
-    
-    enum SectionLayout: Hashable {
-        case hero
-        case highlight
-        case liveMediaGrid
-        case liveMediaSwimlane
-        case mediaGrid
-        case mediaSwimlane
-        case showGrid
-        case showSwimlane
-        case topicSelector
-        
-        @available(tvOS, unavailable)
-        case showAccess
     }
     
     // Items can appear in several sections, which is why a section parameter must be provided for each of them so
@@ -161,11 +43,15 @@ extension PageModel {
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?, section: Section)
     }
-    
-    typealias Row = CollectionRow<Section, Item>
 }
 
-extension SRGContentSection: PageSectionProperties {
+struct ContentSectionProperties: SectionProperties {
+    let contentSection: SRGContentSection
+    
+    private var presentation: SRGContentPresentation {
+        return contentSection.presentation
+    }
+    
     var title: String? {
         if let title = presentation.title {
             return title
@@ -198,76 +84,27 @@ extension SRGContentSection: PageSectionProperties {
         return presentation.label
     }
     
-    var layout: PageModel.SectionLayout {
-        switch presentation.type {
-        case .hero:
-            return .hero
-        case .mediaHighlight, .showHighlight:
-            return .highlight
-        case .topicSelector:
-            return .topicSelector
-        case .showAccess:
-            #if os(iOS)
-            return .showAccess
-            #else
-            // Not supported
-            return .mediaSwimlane
-            #endif
-        case .favoriteShows:
-            return .showSwimlane
-        case .swimlane:
-            return (type == .shows) ? .showSwimlane : .mediaSwimlane
-        case .grid:
-            return (type == .shows) ? .showGrid : .mediaGrid
-        case .livestreams:
-            return .liveMediaSwimlane
-        case .none, .resumePlayback, .watchLater, .personalizedProgram:
-            return .mediaSwimlane
-        }
-    }
-    
-    var placeholderItems: [PageModel.Item] {
-        switch presentation.type {
-        case .mediaHighlight:
-            return [.mediaPlaceholder(index: 0, section: .content(self))]
-        case .showHighlight:
-            return [.showPlaceholder(index: 0, section: .content(self))]
-        case .topicSelector:
-            return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0, section: .content(self)) }
-        case .swimlane, .hero, .grid:
-            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .content(self)) }
-        case .livestreams:
-            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0, section: .content(self)) }
-        case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
-            return []
-        }
-    }
-    
-    var canOpenDetailPage: Bool {
-        return presentation.hasDetailPage
-    }
-    
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[PageModel.Item], Error>? {
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
-        let section = PageModel.Section.content(self)
+        let section = Section.content(contentSection)
         
-        switch type {
+        switch contentSection.type {
         case .medias:
-            return dataProvider.medias(for: vendor, contentSectionUid: uid, pageSize: pageSize, triggerId: triggerId)
+            return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
                 .map { self.filterItems($0).map { .media($0, section: section) } }
                 .eraseToAnyPublisher()
         case .showAndMedias:
-            return dataProvider.showAndMedias(for: vendor, contentSectionUid: uid, pageSize: pageSize, triggerId: triggerId)
+            return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
                 .scan((show: nil as SRGShow?, medias: [SRGMedia]())) {
                     return (show: $0.show, medias: $0.medias + $1.medias)
                 }
                 .map {
-                    var items = [PageModel.Item]()
+                    var items = [Section.Item]()
                     if let show = $0.show {
                         items.append(.show(show, section: section))
                     }
@@ -276,7 +113,7 @@ extension SRGContentSection: PageSectionProperties {
                 }
                 .eraseToAnyPublisher()
         case .shows:
-            return dataProvider.shows(for: vendor, contentSectionUid: uid, pageSize: pageSize, triggerId: triggerId)
+            return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
                 .map { self.filterItems($0).map { .show($0, section: section) } }
                 .eraseToAnyPublisher()
@@ -341,9 +178,11 @@ extension SRGContentSection: PageSectionProperties {
     }
 }
 
-extension ConfiguredSection: PageSectionProperties {
+struct ConfiguredSectionProperties: SectionProperties {
+    let configuredSection: ConfiguredSection
+    
     var title: String? {
-        switch self.type {
+        switch configuredSection.type {
         case .radioLatestEpisodes:
             return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
         case .radioMostPopular:
@@ -379,58 +218,15 @@ extension ConfiguredSection: PageSectionProperties {
         return nil
     }
     
-    var layout: PageModel.SectionLayout {
-        switch self.type {
-        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return (self.contentPresentationType == .hero) ? .hero : .mediaSwimlane
-        case .tvLive, .radioLive, .radioLiveSatellite:
-            #if os(iOS)
-            return .liveMediaGrid
-            #else
-            return .liveMediaSwimlane
-            #endif
-        case .tvLiveCenter, .tvScheduledLivestreams:
-            return .mediaSwimlane
-        case .radioFavoriteShows:
-            return .showSwimlane
-        case .radioAllShows:
-            return .showGrid
-        case .radioShowAccess:
-            #if os(iOS)
-            return .showAccess
-            #else
-            // Not supported
-            return .mediaSwimlane
-            #endif
-        }
-    }
-    
-    var placeholderItems: [PageModel.Item] {
-        switch self.type {
-        case .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0, section: .configured(self)) }
-        case .tvLive, .radioLive, .radioLiveSatellite:
-            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0, section: .configured(self)) }
-        case .radioAllShows:
-            return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0, section: .configured(self)) }
-        case .radioFavoriteShows, .radioShowAccess:
-            return []
-        }
-    }
-    
-    var canOpenDetailPage: Bool {
-        return layout == .mediaSwimlane
-    }
-    
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[PageModel.Item], Error>? {
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
-        let section = PageModel.Section.configured(self)
+        let section = Section.configured(configuredSection)
         
-        switch self.type {
+        switch configuredSection.type {
         case let .radioLatestEpisodes(channelUid: channelUid):
             return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
@@ -632,7 +428,7 @@ fileprivate extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func favoritesPublisher(for id: PageModel.Id, section: PageModel.Section) -> AnyPublisher<[SRGShow], Error> {
+    func favoritesPublisher(for id: PageModel.Id, section: Section) -> AnyPublisher<[SRGShow], Error> {
         return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .drop { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
