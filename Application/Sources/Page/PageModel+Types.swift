@@ -50,7 +50,7 @@ extension PageSectionLayoutProperties {
 }
 
 extension PageModel {
-    enum Id {
+    enum Id: SectionFiltering {
         case video
         case audio(channel: RadioChannel)
         case live

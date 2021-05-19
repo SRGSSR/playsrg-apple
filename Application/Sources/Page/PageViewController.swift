@@ -391,7 +391,7 @@ extension PageViewController: SectionHeaderViewAction {
         guard let event = event as? OpenSectionEvent else { return }
 
         if let navigationController = navigationController {
-            let sectionViewController = SectionViewController(section: event.section.section)
+            let sectionViewController = SectionViewController(section: event.section.section, filter: model.id)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
     }

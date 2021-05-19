@@ -8,9 +8,11 @@ import UIKit
 
 class SectionViewController: DataViewController {
     let model: SectionModel
+    let filter: SectionFiltering
     
-    init(section: Section) {
-        model = SectionModel(section: section)
+    init(section: Section, filter: SectionFiltering) {
+        self.model = SectionModel(section: section)
+        self.filter = filter
         super.init(nibName: nil, bundle: nil)
     }
     

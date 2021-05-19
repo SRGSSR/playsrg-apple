@@ -10,14 +10,18 @@ import SRGUserData
 private let defaultNumberOfPlaceholders = 10
 private let defaultNumberOfLivestreamPlaceholders = 4
 
+protocol SectionFiltering {
+    func compatibleShows(_ shows: [SRGShow]) -> [SRGShow]
+    func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia]
+}
+
 protocol SectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
     var placeholderItems: [PlaySRG.Item] { get }
     
-    // TODO: Get rid of this Id
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>?
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>?
 }
 
 enum Section: Hashable {
@@ -106,7 +110,7 @@ struct ContentSectionProperties: SectionProperties {
         }
     }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -141,11 +145,11 @@ struct ContentSectionProperties: SectionProperties {
         case .predefined:
             switch presentation.type {
             case .favoriteShows:
-                return dataProvider.favoritesPublisher(for: id)
+                return dataProvider.favoritesPublisher(filter: filter)
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case .personalizedProgram:
-                return dataProvider.favoritesPublisher(for: id)
+                return dataProvider.favoritesPublisher(filter: filter)
                     .map { $0.map { $0.urn } }
                     .flatMap { urns in
                         return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
@@ -162,11 +166,11 @@ struct ContentSectionProperties: SectionProperties {
                     .eraseToAnyPublisher()
             case .resumePlayback:
                 return dataProvider.historyPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
+                    .map { filter.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .watchLater:
                 return dataProvider.laterPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
+                    .map { filter.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAccess:
                 #if os(iOS)
@@ -252,7 +256,7 @@ struct ConfiguredSectionProperties: SectionProperties {
         }
     }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -286,7 +290,7 @@ struct ConfiguredSectionProperties: SectionProperties {
                 .map { $0.map { .show($0) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
-            return dataProvider.favoritesPublisher(for: id)
+            return dataProvider.favoritesPublisher(filter: filter)
                 .map { $0.map { .show($0) } }
                 .eraseToAnyPublisher()
         case let .radioShowAccess(channelUid):
@@ -461,7 +465,7 @@ fileprivate extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func favoritesPublisher(for id: PageModel.Id) -> AnyPublisher<[SRGShow], Error> {
+    func favoritesPublisher(filter: SectionFiltering) -> AnyPublisher<[SRGShow], Error> {
         return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .drop { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
@@ -475,7 +479,7 @@ fileprivate extension SRGDataProvider {
             .prepend(())
             .flatMap { _ in
                 return self.showsPublisher(withUrns: Array(FavoritesShowURNs()))
-                    .map { id.compatibleShows($0) }
+                    .map { filter.compatibleShows($0) }
             }
             .eraseToAnyPublisher()
     }

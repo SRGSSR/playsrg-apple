@@ -143,7 +143,7 @@ fileprivate extension SRGDataProvider {
     
     /// Publishes the row for content for a given section and page id
     func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
-        if let publisher = section.properties.publisher(for: id, triggerId: trigger.id(section)) {
+        if let publisher = section.properties.publisher(filter: id, triggerId: trigger.id(section)) {
             return publisher
                 .replaceError(with: section.properties.placeholderItems)
                 .map { PageModel.Row(section: section, items: Self.items(Self.removeDuplicateItems($0), in: section)) }
