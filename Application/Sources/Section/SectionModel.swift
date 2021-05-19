@@ -20,9 +20,7 @@ class SectionModel: ObservableObject {
     
     let section: Section
     
-    private static var triggerId = 1
     private var trigger = Trigger()
-    
     @Published private(set) var state: State = .loading
     
     var title: String? {
@@ -32,7 +30,7 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering) {
         self.section = section
         
-        section.properties.publisher(filter: filter, triggerId: trigger.id(Self.triggerId))?
+        section.properties.publisher(filter: filter, triggerId: trigger.id(section))?
             .map { items in
                 let show = Self.show(from: items)
                 let items = Self.items(from: items)
@@ -47,7 +45,7 @@ class SectionModel: ObservableObject {
     }
     
     func loadMore() {
-        trigger.signal(Self.triggerId)
+        trigger.signal(section)
     }
     
     private static func show(from items: [Item]) -> SRGShow? {
