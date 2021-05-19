@@ -19,13 +19,13 @@ struct ProfileView: View {
     var body: some View {
         List {
             if model.supportsLogin {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.H3),
+                SwiftUI.Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.H3),
                         footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
+                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
                         footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
@@ -33,20 +33,20 @@ struct ProfileView: View {
                 }
             }
             else {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
+                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
                 }
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
-                Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
                         footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     AutoplayListItem()
                 }
             }
             if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden || !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
-                Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")),
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")),
                         footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
                         SubtitleAvailabilityListItem()
@@ -56,7 +56,7 @@ struct ProfileView: View {
                     }
                 }
             }
-            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
             }
         }
