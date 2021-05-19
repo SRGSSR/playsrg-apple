@@ -77,7 +77,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func loadMore() {
-        if let lastSection = sections.last, lastSection.properties.isGridLayout {
+        if let lastSection = sections.last, lastSection.layoutProperties.isGridLayout {
             trigger.signal(lastSection)
         }
     }
@@ -124,18 +124,18 @@ fileprivate extension SRGDataProvider {
         switch id {
         case .video:
             return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.sections.map { PageModel.Section.content($0) } }
+                .map { $0.sections.map { PageModel.Section(.content($0)) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
             return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.map { PageModel.Section.content($0) } }
+                .map { $0.sections.map { PageModel.Section(.content($0)) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().map { PageModel.Section.configured($0) })
+            return Just(channel.configuredSections().map { PageModel.Section(.configured($0)) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section.configured($0) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section(.configured($0)) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
@@ -146,13 +146,17 @@ fileprivate extension SRGDataProvider {
         if let publisher = section.properties.publisher(for: id, triggerId: trigger.id(section)) {
             return publisher
                 .replaceError(with: section.properties.placeholderItems)
-                .map { PageModel.Row(section: section, items: Self.removeDuplicateItems($0)) }
+                .map { PageModel.Row(section: section, items: Self.items(Self.removeDuplicateItems($0), in: section)) }
                 .eraseToAnyPublisher()
         }
         else {
             return Just(PageModel.Row(section: section, items: []))
                 .eraseToAnyPublisher()
         }
+    }
+    
+    private static func items(_ items: [PlaySRG.Item], in section: PageModel.Section) -> [PageModel.Item] {
+        return items.map { PageModel.Item($0, in: section) }
     }
     
     /**
@@ -178,7 +182,7 @@ fileprivate extension SRGDataProvider {
                 return existingRow
             }
             else {
-                return PageModel.Row(section: section, items: section.properties.placeholderItems)
+                return PageModel.Row(section: section, items: items(section.properties.placeholderItems, in: section))
             }
         }
     }

@@ -13,7 +13,7 @@
 #import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "SearchBar.h"
 #import "SearchHeaderView.h"
 #import "SearchLoadingCollectionViewCell.h"

@@ -7,12 +7,17 @@
 import SRGDataProviderCombine
 import SRGUserData
 
+private let defaultNumberOfPlaceholders = 10
+private let defaultNumberOfLivestreamPlaceholders = 4
+
 protocol SectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
+    var placeholderItems: [PlaySRG.Item] { get }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>?
+    // TODO: Get rid of this Id
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>?
 }
 
 enum Section: Hashable {
@@ -27,22 +32,22 @@ enum Section: Hashable {
             return ConfiguredSectionProperties(configuredSection: section)
         }
     }
+}
+
+// Items can appear in several sections, which is why a section parameter must be provided for each of them so
+// that each item is truly unique.
+enum Item: Hashable {
+    case mediaPlaceholder(index: Int)
+    case media(_ media: SRGMedia)
     
-    // Items can appear in several sections, which is why a section parameter must be provided for each of them so
-    // that each item is truly unique.
-    enum Item: Hashable {
-        case mediaPlaceholder(index: Int, section: Section)
-        case media(_ media: SRGMedia, section: Section)
-        
-        case showPlaceholder(index: Int, section: Section)
-        case show(_ show: SRGShow, section: Section)
-        
-        case topicPlaceholder(index: Int, section: Section)
-        case topic(_ topic: SRGTopic, section: Section)
-        
-        @available(tvOS, unavailable)
-        case showAccess(radioChannel: RadioChannel?, section: Section)
-    }
+    case showPlaceholder(index: Int)
+    case show(_ show: SRGShow)
+    
+    case topicPlaceholder(index: Int)
+    case topic(_ topic: SRGTopic)
+    
+    @available(tvOS, unavailable)
+    case showAccess(radioChannel: RadioChannel?)
 }
 
 struct ContentSectionProperties: SectionProperties {
@@ -84,19 +89,35 @@ struct ContentSectionProperties: SectionProperties {
         return presentation.label
     }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>? {
+    var placeholderItems: [PlaySRG.Item] {
+        switch presentation.type {
+        case .mediaHighlight:
+            return [.mediaPlaceholder(index: 0)]
+        case .showHighlight:
+            return [.showPlaceholder(index: 0)]
+        case .topicSelector:
+            return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
+        case .swimlane, .hero, .grid:
+            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+        case .livestreams:
+            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+        case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
+            return []
+        }
+    }
+    
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
-        let section = Section.content(contentSection)
         
         switch contentSection.type {
         case .medias:
             return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { self.filterItems($0).map { .media($0, section: section) } }
+                .map { self.filterItems($0).map { .media($0) } }
                 .eraseToAnyPublisher()
         case .showAndMedias:
             return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
@@ -104,52 +125,52 @@ struct ContentSectionProperties: SectionProperties {
                     return (show: $0.show, medias: $0.medias + $1.medias)
                 }
                 .map {
-                    var items = [Section.Item]()
+                    var items = [Item]()
                     if let show = $0.show {
-                        items.append(.show(show, section: section))
+                        items.append(.show(show))
                     }
-                    items.append(contentsOf: $0.medias.map { .media($0, section: section) })
+                    items.append(contentsOf: $0.medias.map { .media($0) })
                     return items
                 }
                 .eraseToAnyPublisher()
         case .shows:
             return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { self.filterItems($0).map { .show($0, section: section) } }
+                .map { self.filterItems($0).map { .show($0) } }
                 .eraseToAnyPublisher()
         case .predefined:
             switch presentation.type {
             case .favoriteShows:
-                return dataProvider.favoritesPublisher(for: id, section: section)
-                    .map { $0.map { .show($0, section: section) } }
+                return dataProvider.favoritesPublisher(for: id)
+                    .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case .personalizedProgram:
-                return dataProvider.favoritesPublisher(for: id, section: section)
+                return dataProvider.favoritesPublisher(for: id)
                     .map { $0.map { $0.urn } }
                     .flatMap { urns in
                         return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
                     }
-                    .map { $0.map { .media($0, section: section) } }
+                    .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .livestreams:
                 return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.map { .media($0, section: section) } }
+                    .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .topicSelector:
                 return dataProvider.tvTopics(for: vendor)
-                    .map { $0.map { .topic($0, section: section) } }
+                    .map { $0.map { .topic($0) } }
                     .eraseToAnyPublisher()
             case .resumePlayback:
                 return dataProvider.historyPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
+                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .watchLater:
                 return dataProvider.laterPublisher()
-                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0, section: section) } }
+                    .map { id.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAccess:
                 #if os(iOS)
-                return Just([.showAccess(radioChannel: nil, section: section)])
+                return Just([.showAccess(radioChannel: nil)])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
                 #else
@@ -218,47 +239,59 @@ struct ConfiguredSectionProperties: SectionProperties {
         return nil
     }
     
-    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Section.Item], Error>? {
+    var placeholderItems: [PlaySRG.Item] {
+        switch configuredSection.type {
+        case .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+        case .tvLive, .radioLive, .radioLiveSatellite:
+            return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+        case .radioAllShows:
+            return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+        case .radioFavoriteShows, .radioShowAccess:
+            return []
+        }
+    }
+    
+    func publisher(for id: PageModel.Id, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
         let vendor = configuration.vendor
         let pageSize = configuration.pageSize
-        let section = Section.configured(configuredSection)
         
         switch configuredSection.type {
         case let .radioLatestEpisodes(channelUid: channelUid):
             return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case let .radioMostPopular(channelUid: channelUid):
             return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case let .radioLatest(channelUid: channelUid):
             return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case let .radioLatestVideos(channelUid: channelUid):
             return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case let .radioAllShows(channelUid):
             return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .show($0, section: section) } }
+                .map { $0.map { .show($0) } }
                 .eraseToAnyPublisher()
         case .radioFavoriteShows:
-            return dataProvider.favoritesPublisher(for: id, section: section)
-                .map { $0.map { .show($0, section: section) } }
+            return dataProvider.favoritesPublisher(for: id)
+                .map { $0.map { .show($0) } }
                 .eraseToAnyPublisher()
         case let .radioShowAccess(channelUid):
             #if os(iOS)
-            return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid), section: section)])
+            return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
             #else
@@ -266,25 +299,25 @@ struct ConfiguredSectionProperties: SectionProperties {
             #endif
         case .tvLive:
             return dataProvider.tvLivestreams(for: vendor)
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case .radioLive:
             return dataProvider.regionalizedRadioLivestreams(for: vendor)
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case .radioLiveSatellite:
             return dataProvider.regionalizedRadioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case .tvLiveCenter:
             return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         case .tvScheduledLivestreams:
             return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, triggerId: triggerId)
                 .scan([]) { $0 + $1 }
-                .map { $0.map { .media($0, section: section) } }
+                .map { $0.map { .media($0) } }
                 .eraseToAnyPublisher()
         }
     }
@@ -428,7 +461,7 @@ fileprivate extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func favoritesPublisher(for id: PageModel.Id, section: Section) -> AnyPublisher<[SRGShow], Error> {
+    func favoritesPublisher(for id: PageModel.Id) -> AnyPublisher<[SRGShow], Error> {
         return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .drop { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {

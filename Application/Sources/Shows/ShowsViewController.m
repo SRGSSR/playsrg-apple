@@ -11,7 +11,7 @@
 #import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
 #import "TranslucentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"

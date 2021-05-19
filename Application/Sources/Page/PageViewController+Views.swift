@@ -12,7 +12,7 @@ extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.properties.layout {
+            switch section.layoutProperties.layout {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -32,7 +32,7 @@ extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.properties.layout {
+            switch section.layoutProperties.layout {
             case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -47,18 +47,18 @@ extension PageViewController {
         let item: PageModel.Item
         
         var body: some View {
-            switch item {
-            case let .mediaPlaceholder(index: _, section: section):
-                PageMediaCell(media: nil, section: section)
-            case let .media(media, section: section):
-                PageMediaCell(media: media, section: section)
-            case let .showPlaceholder(index: _, section: section):
-                PageShowCell(show: nil, section: section)
-            case let .show(show, section: section):
-                PageShowCell(show: show, section: section)
+            switch item.item {
+            case .mediaPlaceholder:
+                PageMediaCell(media: nil, section: item.section)
+            case let .media(media):
+                PageMediaCell(media: media, section: item.section)
+            case .showPlaceholder:
+                PageShowCell(show: nil, section: item.section)
+            case let .show(show):
+                PageShowCell(show: show, section: item.section)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
-            case let .topic(topic, section: _):
+            case let .topic(topic):
                 TopicCell(topic: topic)
             #if os(iOS)
             case .showAccess:
@@ -110,12 +110,12 @@ extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.properties.canOpenDetailPage)
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.layoutProperties.canOpenDetailPage)
                 }
-                .disabled(!section.properties.canOpenDetailPage)
+                .disabled(!section.layoutProperties.canOpenDetailPage)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
-                .accessibilityOptionalHint(section.properties.accessibilityHint)
+                .accessibilityOptionalHint(section.layoutProperties.accessibilityHint)
                 .accessibility(addTraits: .isHeader)
             }
             #endif

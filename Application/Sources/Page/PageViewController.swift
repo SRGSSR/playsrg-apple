@@ -231,7 +231,7 @@ extension PageViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.properties.layout {
+                switch section.layoutProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
@@ -323,15 +323,15 @@ extension PageViewController: UICollectionViewDelegate {
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
-        switch item {
-        case let .media(media, section: _):
+        switch item.item {
+        case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show, section: _):
+        case let .show(show):
             if let navigationController = navigationController {
                 let showViewController = ShowViewController(show: show, fromPushNotification: false)
                 navigationController.pushViewController(showViewController, animated: true)
             }
-        case let .topic(topic, section: _):
+        case let .topic(topic):
             if let navigationController = navigationController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
                 // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
@@ -390,12 +390,10 @@ extension PageViewController: SectionHeaderViewAction {
     func openSection(sender: Any?, event: UIEvent?) {
         guard let event = event as? OpenSectionEvent else { return }
 
-        #if false
         if let navigationController = navigationController {
-            let sectionViewController = SectionViewController(section: event.section)
+            let sectionViewController = SectionViewController(section: event.section.section)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
-        #endif
     }
 }
 

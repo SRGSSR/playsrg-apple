@@ -7,7 +7,7 @@
 #import "MediasViewController.h"
 
 #import "Layout.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "UIViewController+PlaySRG.h"
 
 @import SRGAppearance;

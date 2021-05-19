@@ -12,7 +12,7 @@
 #import "Layout.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"

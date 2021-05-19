@@ -9,7 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "Onboarding.h"
 #import "OnboardingTableViewCell.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"

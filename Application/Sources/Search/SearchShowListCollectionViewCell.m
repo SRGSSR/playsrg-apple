@@ -8,7 +8,7 @@
 
 #import "AnalyticsConstants.h"
 #import "Layout.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIView+PlaySRG.h"

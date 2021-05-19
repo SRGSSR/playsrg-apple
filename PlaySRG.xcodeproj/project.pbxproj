@@ -2465,7 +2465,7 @@
 		6F5F4FC11DB10CFD0011CCA3 /* RelatedContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelatedContentView.h; sourceTree = "<group>"; };
 		6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelatedContentView.m; sourceTree = "<group>"; };
 		6F5F4FC31DB10CFD0011CCA3 /* RelatedContentView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RelatedContentView.xib; sourceTree = "<group>"; };
-		6F661C9E1FBB632E008E345B /* Play-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Play-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
+		6F661C9E1FBB632E008E345B /* PlaySRG-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-ObjectiveC.h"; sourceTree = "<group>"; };
 		6F79E0A92541647400A28E79 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
@@ -2584,7 +2584,7 @@
 		6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedDescriptionView.swift; sourceTree = "<group>"; };
 		6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageViewController+Views.swift"; sourceTree = "<group>"; };
 		6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
-		6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Play-TV-ObjectiveC-Bridge.h"; sourceTree = "<group>"; };
+		6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-TV-ObjectiveC.h"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC9E85E26163C4F0025A2ED /* PageModel+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageModel+Types.swift"; sourceTree = "<group>"; };
@@ -2690,7 +2690,6 @@
 		D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-tvOS-Play SRF TV.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC9698F7CBD46B73BA105098 /* Pods-Play SRG-iOS-Play SWI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.debug.xcconfig"; sourceTree = "<group>"; };
 		E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBridge.swift; sourceTree = "<group>"; };
-		E62459F31D488DC300482BE9 /* Play-Swift-Bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Play-Swift-Bridge.h"; sourceTree = "<group>"; };
 		E64BA3F71D4A587E002C10D5 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E64BA3F81D4A587E002C10D5 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
@@ -3897,7 +3896,7 @@
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
-				6FC4140124EF11F400FDF806 /* Play-TV-ObjectiveC-Bridge.h */,
+				6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */,
 				6F83872F25E507DC00BDCB25 /* ProfileModel.swift */,
 				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
@@ -4161,8 +4160,7 @@
 		E62459EC1D488CEF00482BE9 /* Bridges */ = {
 			isa = PBXGroup;
 			children = (
-				6F661C9E1FBB632E008E345B /* Play-ObjectiveC-Bridge.h */,
-				E62459F31D488DC300482BE9 /* Play-Swift-Bridge.h */,
+				6F661C9E1FBB632E008E345B /* PlaySRG-ObjectiveC.h */,
 				E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */,
 			);
 			path = Bridges;
@@ -9772,6 +9770,7 @@
 				MARKETING_VERSION_SUFFIX = "-debug";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_MODULE_NAME = PlaySRG;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -9835,6 +9834,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION_SUFFIX = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = PlaySRG;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
@@ -10172,6 +10172,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION_SUFFIX = "-beta";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = PlaySRG;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = BETA;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -10376,6 +10377,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION_SUFFIX = "-nightly";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_MODULE_NAME = PlaySRG;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = NIGHTLY;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -11,7 +11,7 @@
 #import "ApplicationSection.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
 #import "Favorites.h"
 #import "Layout.h"

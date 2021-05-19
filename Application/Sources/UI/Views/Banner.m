@@ -7,7 +7,7 @@
 #import "Banner.h"
 
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 

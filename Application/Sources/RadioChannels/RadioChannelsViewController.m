@@ -10,7 +10,7 @@
 #import "GoogleCastBarButtonItem.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 
 @import libextobjc;
 @import SRGAppearance;
