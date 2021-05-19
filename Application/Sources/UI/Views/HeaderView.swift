@@ -41,8 +41,8 @@ struct HeaderView: View {
                         .srgFont(.H3)
                         .lineLimit(1)
                     if hasDetailDisclosure {
-                        Spacer()
                         Image(systemName: "chevron.right")
+                            .padding(.horizontal, constant(iOS: 6, tvOS: 8))
                     }
                 }
                 if let subtitle = displayableSubtitle {
