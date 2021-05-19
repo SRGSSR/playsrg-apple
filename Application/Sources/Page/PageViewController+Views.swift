@@ -124,7 +124,6 @@ extension PageViewController {
                 } label: {
                     HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.detailDisclosure(for: section,on: pageId))
                 }
-                .foregroundColor(.white)
                 .disabled(!Self.detailDisclosure(for: section, on: pageId))
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))

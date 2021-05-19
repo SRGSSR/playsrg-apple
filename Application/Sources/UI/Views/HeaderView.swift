@@ -53,6 +53,7 @@ struct HeaderView: View {
                 }
             }
             .opacity(0.8)
+            .foregroundColor(.white)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
         }
     }
