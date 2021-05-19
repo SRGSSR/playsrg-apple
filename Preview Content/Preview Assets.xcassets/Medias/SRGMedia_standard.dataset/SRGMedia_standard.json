@@ -35,10 +35,17 @@
       "posterImageIsFallbackUrl" : true
    },
    "presentation" : "DEFAULT",
-   "audioTrackList" : [ {
-      "locale" : "en",
-      "language" : "English",
-      "source" : "HLS"
-   } ],
-   "aspectRatio" : "16:9"
+  "audioTrackList": [
+    {
+      "locale": "fr",
+      "language": "Français",
+      "source": "HLS"
+    },
+    {
+      "locale": "en",
+      "language": "English",
+      "source": "HLS"
+    }
+  ],
+  "aspectRatio" : "16:9"
 }

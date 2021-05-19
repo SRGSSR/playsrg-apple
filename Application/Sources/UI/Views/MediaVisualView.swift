@@ -56,6 +56,9 @@ struct MediaVisualView: View {
                 if media?.presentation == .presentation360 {
                     ThreeSixtyBadge()
                 }
+                if let media = media, media.play_isMultiAudioAvailable {
+                    MultiAudioBadge()
+                }
                 if canDisplayAudioDescriptionAvailability, let media = media, media.play_isAudioDescriptionAvailable {
                     AudioDescriptionBadge()
                 }
