@@ -76,7 +76,7 @@ extension PageViewController {
     func openSection(sender: Any?, event: UIEvent?)
 }
 
-@objc class OpenSectionEvent: UIEvent {
+class OpenSectionEvent: UIEvent {
     let section: PageModel.Section
     
     init(section: PageModel.Section) {
@@ -102,7 +102,7 @@ extension PageViewController {
             return section.properties.summary
         }
         
-        private static func detailDisclosure(for section: PageModel.Section, on pageId: PageModel.Id) -> Bool {
+        private static func hasDetailDisclosure(for section: PageModel.Section, on pageId: PageModel.Id) -> Bool {
             if case .section = pageId {
                 return false
             }
@@ -122,9 +122,9 @@ extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.detailDisclosure(for: section,on: pageId))
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.hasDetailDisclosure(for: section,on: pageId))
                 }
-                .disabled(!Self.detailDisclosure(for: section, on: pageId))
+                .disabled(!Self.hasDetailDisclosure(for: section, on: pageId))
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibilityOptionalHint(section.properties.accessibilityHint)
