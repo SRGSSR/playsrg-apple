@@ -323,7 +323,7 @@ extension PageViewController: UICollectionViewDelegate {
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
-        switch item.item {
+        switch item.wrappedValue {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
@@ -391,7 +391,7 @@ extension PageViewController: SectionHeaderViewAction {
         guard let event = event as? OpenSectionEvent else { return }
 
         if let navigationController = navigationController {
-            let sectionViewController = SectionViewController(section: event.section.section, filter: model.id)
+            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
     }

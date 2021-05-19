@@ -114,19 +114,18 @@ extension PageModel {
     }
     
     struct Section: Hashable {
-        // TODO: Better name?
-        let section: PlaySRG.Section
+        let wrappedValue: PlaySRG.Section
         
-        init(_ section: PlaySRG.Section) {
-            self.section = section
+        init(_ wrappedValue: PlaySRG.Section) {
+            self.wrappedValue = wrappedValue
         }
         
         var properties: SectionProperties {
-            return section.properties
+            return wrappedValue.properties
         }
         
         var layoutProperties: PageSectionLayoutProperties {
-            switch section {
+            switch wrappedValue {
             case let .content(section):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
@@ -136,12 +135,11 @@ extension PageModel {
     }
     
     struct Item: Hashable {
-        // TODO: Better name?
-        let item: PlaySRG.Item
+        let wrappedValue: PlaySRG.Item
         let section: Section
         
-        init(_ item: PlaySRG.Item, in section: Section) {
-            self.item = item
+        init(_ wrappedValue: PlaySRG.Item, in section: Section) {
+            self.wrappedValue = wrappedValue
             self.section = section
         }
     }

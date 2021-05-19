@@ -47,7 +47,7 @@ extension PageViewController {
         let item: PageModel.Item
         
         var body: some View {
-            switch item.item {
+            switch item.wrappedValue {
             case .mediaPlaceholder:
                 PageMediaCell(media: nil, section: item.section)
             case let .media(media):

@@ -24,6 +24,7 @@ protocol SectionProperties {
     func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>?
 }
 
+// FIXME: Find less conflicting name or use namespace for Section & Item
 enum Section: Hashable {
     case content(SRGContentSection)
     case configured(ConfiguredSection)
