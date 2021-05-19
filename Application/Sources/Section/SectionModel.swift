@@ -7,13 +7,13 @@
 import Foundation
 
 class SectionModel: ObservableObject {
-    let section: Section
+    let section: Content.Section
     
     var title: String? {
         return section.properties.title
     }
     
-    init(section: Section) {
+    init(section: Content.Section) {
         self.section = section
     }
 }

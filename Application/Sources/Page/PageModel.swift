@@ -155,7 +155,7 @@ fileprivate extension SRGDataProvider {
         }
     }
     
-    private static func items(_ items: [PlaySRG.Item], in section: PageModel.Section) -> [PageModel.Item] {
+    private static func items(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         return items.map { PageModel.Item($0, in: section) }
     }
     

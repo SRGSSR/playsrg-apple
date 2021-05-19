@@ -114,9 +114,9 @@ extension PageModel {
     }
     
     struct Section: Hashable {
-        let wrappedValue: PlaySRG.Section
+        let wrappedValue: Content.Section
         
-        init(_ wrappedValue: PlaySRG.Section) {
+        init(_ wrappedValue: Content.Section) {
             self.wrappedValue = wrappedValue
         }
         
@@ -135,10 +135,10 @@ extension PageModel {
     }
     
     struct Item: Hashable {
-        let wrappedValue: PlaySRG.Item
+        let wrappedValue: Content.Item
         let section: Section
         
-        init(_ wrappedValue: PlaySRG.Item, in section: Section) {
+        init(_ wrappedValue: Content.Item, in section: Section) {
             self.wrappedValue = wrappedValue
             self.section = section
         }

@@ -10,7 +10,7 @@ class SectionViewController: DataViewController {
     let model: SectionModel
     let filter: SectionFiltering
     
-    init(section: Section, filter: SectionFiltering) {
+    init(section: Content.Section, filter: SectionFiltering) {
         self.model = SectionModel(section: section)
         self.filter = filter
         super.init(nibName: nil, bundle: nil)

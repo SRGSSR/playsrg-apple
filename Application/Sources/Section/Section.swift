@@ -19,40 +19,39 @@ protocol SectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
-    var placeholderItems: [PlaySRG.Item] { get }
+    var placeholderItems: [Content.Item] { get }
     
-    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>?
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>?
 }
 
-// FIXME: Find less conflicting name or use namespace for Section & Item
-enum Section: Hashable {
-    case content(SRGContentSection)
-    case configured(ConfiguredSection)
-    
-    var properties: SectionProperties {
-        switch self {
-        case let .content(section):
-            return ContentSectionProperties(contentSection: section)
-        case let .configured(section):
-            return ConfiguredSectionProperties(configuredSection: section)
+enum Content {
+    enum Section: Hashable {
+        case content(SRGContentSection)
+        case configured(ConfiguredSection)
+        
+        var properties: SectionProperties {
+            switch self {
+            case let .content(section):
+                return ContentSectionProperties(contentSection: section)
+            case let .configured(section):
+                return ConfiguredSectionProperties(configuredSection: section)
+            }
         }
     }
-}
-
-// Items can appear in several sections, which is why a section parameter must be provided for each of them so
-// that each item is truly unique.
-enum Item: Hashable {
-    case mediaPlaceholder(index: Int)
-    case media(_ media: SRGMedia)
     
-    case showPlaceholder(index: Int)
-    case show(_ show: SRGShow)
-    
-    case topicPlaceholder(index: Int)
-    case topic(_ topic: SRGTopic)
-    
-    @available(tvOS, unavailable)
-    case showAccess(radioChannel: RadioChannel?)
+    enum Item: Hashable {
+        case mediaPlaceholder(index: Int)
+        case media(_ media: SRGMedia)
+        
+        case showPlaceholder(index: Int)
+        case show(_ show: SRGShow)
+        
+        case topicPlaceholder(index: Int)
+        case topic(_ topic: SRGTopic)
+        
+        @available(tvOS, unavailable)
+        case showAccess(radioChannel: RadioChannel?)
+    }
 }
 
 struct ContentSectionProperties: SectionProperties {
@@ -94,7 +93,7 @@ struct ContentSectionProperties: SectionProperties {
         return presentation.label
     }
     
-    var placeholderItems: [PlaySRG.Item] {
+    var placeholderItems: [Content.Item] {
         switch presentation.type {
         case .mediaHighlight:
             return [.mediaPlaceholder(index: 0)]
@@ -111,7 +110,7 @@ struct ContentSectionProperties: SectionProperties {
         }
     }
     
-    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
@@ -130,7 +129,7 @@ struct ContentSectionProperties: SectionProperties {
                     return (show: $0.show, medias: $0.medias + $1.medias)
                 }
                 .map {
-                    var items = [Item]()
+                    var items = [Content.Item]()
                     if let show = $0.show {
                         items.append(.show(show))
                     }
@@ -244,7 +243,7 @@ struct ConfiguredSectionProperties: SectionProperties {
         return nil
     }
     
-    var placeholderItems: [PlaySRG.Item] {
+    var placeholderItems: [Content.Item] {
         switch configuredSection.type {
         case .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
             return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -257,7 +256,7 @@ struct ConfiguredSectionProperties: SectionProperties {
         }
     }
     
-    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Item], Error>? {
+    func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>? {
         let dataProvider = SRGDataProvider.current!
         let configuration = ApplicationConfiguration.shared
         
