@@ -249,7 +249,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "feature/content-services",
-          "revision": "76f55c7bd2e3331b735bd4de707ef58fe92deb0d",
+          "revision": "958b4d528620737a9b3dfe0dde8f8793445b76b3",
           "version": null
         }
       },
@@ -321,8 +321,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "bfe4255ff60f22a41cafa113059668571ed5d461",
-          "version": "1.16.0"
+          "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
+          "version": "1.17.0"
         }
       },
       {

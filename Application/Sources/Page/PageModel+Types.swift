@@ -503,7 +503,7 @@ fileprivate extension SRGDataProvider {
             .flatMap { urns in
                 return self.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
             }
-            .scan([]) { $0 + $1 }
+            .reduce([]) { $0 + $1 }
             .map { medias in
                 return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
             }
