@@ -122,7 +122,7 @@ class PageViewController: DataViewController {
         super.viewDidLoad()
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
-            cell.content = PageCell(item: item, pageId: self.model.id)
+            cell.content = PageCell(item: item)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -231,7 +231,7 @@ extension PageViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.properties.layout(for: self?.model.id ?? .video) {
+                switch section.properties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
@@ -390,11 +390,12 @@ extension PageViewController: SectionHeaderViewAction {
     func openSection(sender: Any?, event: UIEvent?) {
         guard let event = event as? OpenSectionEvent else { return }
 
+        #if false
         if let navigationController = navigationController {
-            let sectionViewController = PageViewController.init(id: .section(section: event.section))
-            sectionViewController.title = event.section.properties.title
+            let sectionViewController = SectionViewController(section: event.section)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
+        #endif
     }
 }
 

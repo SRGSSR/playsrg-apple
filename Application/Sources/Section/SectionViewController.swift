@@ -29,6 +29,11 @@ class SectionViewController: DataViewController {
         
         self.view = view
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = model.title
+    }
 }
 
 // TODO: Remaining protocols to implement

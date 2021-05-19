@@ -10,10 +10,9 @@ extension PageViewController {
     struct PageMediaCell: View {
         let media: SRGMedia?
         let section: PageModel.Section
-        let pageId: PageModel.Id
         
         var body: some View {
-            switch section.properties.layout(for: pageId) {
+            switch section.properties.layout {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -31,10 +30,9 @@ extension PageViewController {
     struct PageShowCell: View {
         let show: SRGShow?
         let section: PageModel.Section
-        let pageId: PageModel.Id
         
         var body: some View {
-            switch section.properties.layout(for: pageId) {
+            switch section.properties.layout {
             case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -47,18 +45,17 @@ extension PageViewController {
 
     struct PageCell: View {
         let item: PageModel.Item
-        let pageId: PageModel.Id
         
         var body: some View {
             switch item {
             case let .mediaPlaceholder(index: _, section: section):
-                PageMediaCell(media: nil, section: section, pageId: pageId)
+                PageMediaCell(media: nil, section: section)
             case let .media(media, section: section):
-                PageMediaCell(media: media, section: section, pageId: pageId)
+                PageMediaCell(media: media, section: section)
             case let .showPlaceholder(index: _, section: section):
-                PageShowCell(show: nil, section: section, pageId: pageId)
+                PageShowCell(show: nil, section: section)
             case let .show(show, section: section):
-                PageShowCell(show: show, section: section, pageId: pageId)
+                PageShowCell(show: show, section: section)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
             case let .topic(topic, section: _):
@@ -102,15 +99,6 @@ extension PageViewController {
             return section.properties.summary
         }
         
-        private static func hasDetailDisclosure(for section: PageModel.Section, on pageId: PageModel.Id) -> Bool {
-            if case .section = pageId {
-                return false
-            }
-            else {
-                return section.properties.canOpenDetailPage
-            }
-        }
-        
         var body: some View {
             #if os(tvOS)
             HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
@@ -122,9 +110,9 @@ extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: Self.hasDetailDisclosure(for: section,on: pageId))
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.properties.canOpenDetailPage)
                 }
-                .disabled(!Self.hasDetailDisclosure(for: section, on: pageId))
+                .disabled(!section.properties.canOpenDetailPage)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
                 .accessibilityOptionalHint(section.properties.accessibilityHint)

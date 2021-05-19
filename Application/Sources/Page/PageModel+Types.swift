@@ -31,21 +31,12 @@ extension PageSectionProperties {
         }
     }
     
-    func isGridLayout(for id: PageModel.Id) -> Bool {
-        switch layout(for: id) {
+    var isGridLayout: Bool {
+        switch layout {
         case .mediaGrid, .showGrid, .liveMediaGrid:
             return true
         default:
             return false
-        }
-    }
-    
-    func layout(for id: PageModel.Id) -> PageModel.SectionLayout {
-        if case .section = id {
-            return self.sectionPageLayout
-        }
-        else {
-            return self.layout
         }
     }
     
@@ -73,7 +64,6 @@ extension PageModel {
         case audio(channel: RadioChannel)
         case live
         case topic(topic: SRGTopic)
-        case section(section: PageModel.Section)
         
         var supportsCastButton: Bool {
             switch self {

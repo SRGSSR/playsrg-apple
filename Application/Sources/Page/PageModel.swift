@@ -12,7 +12,7 @@ class PageModel: Identifiable, ObservableObject {
     
     var title: String? {
         switch id {
-        case .video, .audio, .live, .section:
+        case .video, .audio, .live:
             return nil
         case let .topic(topic: topic):
             #if os(tvOS)
@@ -77,7 +77,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func loadMore() {
-        if let lastSection = sections.last, lastSection.properties.isGridLayout(for: id) {
+        if let lastSection = sections.last, lastSection.properties.isGridLayout {
             trigger.signal(lastSection)
         }
     }
@@ -136,10 +136,6 @@ fileprivate extension SRGDataProvider {
                 .eraseToAnyPublisher()
         case .live:
             return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section.configured($0) })
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        case let .section(section: section):
-            return Just([section])
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
