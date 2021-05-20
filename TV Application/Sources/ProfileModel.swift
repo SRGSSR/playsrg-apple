@@ -152,7 +152,7 @@ class ProfileModel: ObservableObject {
     }
     
     private func updateFavoritesInformation() {
-        hasFavorites = !FavoritesShowURNs().isEmpty
+        hasFavorites = (FavoritesShowURNs().count != 0)
     }
     
     private func updateWatchLaterInformation() {

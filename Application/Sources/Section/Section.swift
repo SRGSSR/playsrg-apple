@@ -479,7 +479,8 @@ fileprivate extension SRGDataProvider {
             .map { _ in }
             .prepend(())
             .flatMap { _ in
-                return self.showsPublisher(withUrns: Array(FavoritesShowURNs()))
+                // For some reason (compiler bug?) the type of the items is seen as [Any]
+                return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
                     .map { filter.compatibleShows($0) }
             }
             .eraseToAnyPublisher()

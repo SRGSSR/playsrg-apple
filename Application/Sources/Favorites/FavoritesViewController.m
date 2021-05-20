@@ -135,7 +135,7 @@
 {
     self.requestedShows = [NSArray array];
     
-    NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
+    NSArray<NSString *> *showURNs = FavoritesShowURNs().array;
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     
     __block SRGFirstPageRequest *firstRequest = nil;

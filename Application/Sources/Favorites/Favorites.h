@@ -41,7 +41,7 @@ OBJC_EXPORT void FavoritesToggleShow(SRGShow * _Nonnull show);
 /**
  *  Get all favorited show URNs.
  */
-OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
+OBJC_EXPORT NSOrderedSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 
 /**

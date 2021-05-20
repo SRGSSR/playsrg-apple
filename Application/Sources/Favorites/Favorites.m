@@ -121,7 +121,7 @@ void FavoritesRemoveShows(NSArray<SRGShow *> *shows)
         URNs = [shows valueForKeyPath:keyPath];
     }
     else {
-        URNs = FavoritesShowURNs().allObjects;
+        URNs = FavoritesShowURNs().array;
     }
     
     NSMutableArray<NSString *> *paths = NSMutableArray.array;
@@ -141,10 +141,10 @@ void FavoritesToggleShow(SRGShow *show)
     }
 }
 
-NSSet<NSString *> *FavoritesShowURNs(void)
+NSOrderedSet<NSString *> *FavoritesShowURNs(void)
 {
-    NSArray<NSString *> *URNs = [SRGUserData.currentUserData.preferences dictionaryAtPath:PlayFavoritesPath inDomain:PlayPreferencesDomain].allKeys;
-    return URNs ? [NSSet setWithArray:URNs] : [NSSet set];
+    NSArray<NSString *> *URNs = [[SRGUserData.currentUserData.preferences dictionaryAtPath:PlayFavoritesPath inDomain:PlayPreferencesDomain].allKeys sortedArrayUsingSelector:@selector(compare:)];
+    return URNs ? [NSOrderedSet orderedSetWithArray:URNs] : [NSOrderedSet orderedSet];
 }
 
 #pragma mark Notification subscriptions
