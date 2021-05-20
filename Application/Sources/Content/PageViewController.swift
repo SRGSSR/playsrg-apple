@@ -121,8 +121,8 @@ class PageViewController: DataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<PageCell>, PageModel.Item> { cell, _, item in
-            cell.content = PageCell(item: item)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { cell, _, item in
+            cell.content = ItemCell(item: item)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -134,11 +134,11 @@ class PageViewController: DataViewController {
             view.content = TitleView(text: self.model.title)
         }
         
-        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<PageSectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = PageSectionHeaderView(section: section, pageId: self.model.id)
+            view.content = SectionHeaderView(section: section, pageId: self.model.id)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -335,7 +335,7 @@ extension PageViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = PageSectionHeaderView.size(section: section, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
+                let headerSize = SectionHeaderView.size(section: section, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
@@ -422,7 +422,7 @@ extension PageViewController {
 // MARK: Cells
 
 private extension PageViewController {
-    struct PageMediaCell: View {
+    struct MediaCell: View {
         let media: SRGMedia?
         let section: PageModel.Section
         
@@ -435,14 +435,14 @@ private extension PageViewController {
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
-                MediaCell(media: media, style: .show)
+                PlaySRG.MediaCell(media: media, style: .show)
             default:
-                MediaCell(media: media, style: .show, layout: .vertical)
+                PlaySRG.MediaCell(media: media, style: .show, layout: .vertical)
             }
         }
     }
     
-    struct PageShowCell: View {
+    struct ShowCell: View {
         let show: SRGShow?
         let section: PageModel.Section
         
@@ -453,24 +453,24 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                ShowCell(show: show)
+                PlaySRG.ShowCell(show: show)
             }
         }
     }
     
-    struct PageCell: View {
+    struct ItemCell: View {
         let item: PageModel.Item
         
         var body: some View {
             switch item.wrappedValue {
             case .mediaPlaceholder:
-                PageMediaCell(media: nil, section: item.section)
+                MediaCell(media: nil, section: item.section)
             case let .media(media):
-                PageMediaCell(media: media, section: item.section)
+                MediaCell(media: media, section: item.section)
             case .showPlaceholder:
-                PageShowCell(show: nil, section: item.section)
+                ShowCell(show: nil, section: item.section)
             case let .show(show), let .showHeader(show):
-                PageShowCell(show: show, section: item.section)
+                ShowCell(show: show, section: item.section)
             case .topicPlaceholder:
                 TopicCell(topic: nil)
             case let .topic(topic):
@@ -504,7 +504,7 @@ private class OpenSectionEvent: UIEvent {
 }
 
 private extension PageViewController {
-    struct PageSectionHeaderView: View {
+    struct SectionHeaderView: View {
         let section: PageModel.Section
         let pageId: PageModel.Id
         
