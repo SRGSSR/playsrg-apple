@@ -54,7 +54,7 @@ extension PageViewController {
                 PageMediaCell(media: media, section: item.section)
             case .showPlaceholder:
                 PageShowCell(show: nil, section: item.section)
-            case let .show(show):
+            case let .show(show), let .showHeader(show):
                 PageShowCell(show: show, section: item.section)
             case .topicPlaceholder:
                 TopicCell(topic: nil)

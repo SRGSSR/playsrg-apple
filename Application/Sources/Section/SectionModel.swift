@@ -14,7 +14,7 @@ class SectionModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: Item?, items: [Item])
+        case loaded(items: [Item])
     }
     
     let section: Section
@@ -30,11 +30,7 @@ class SectionModel: ObservableObject {
         self.section = section
         
         section.properties.publisher(filter: filter, triggerId: trigger.id(section))?
-            .map { items in
-                let headerItem = Self.headerItem(from: items)
-                let items = Self.items(from: items)
-                return State.loaded(headerItem: headerItem, items: items)
-            }
+            .map { State.loaded(items: $0) }
             .catch { error -> AnyPublisher<State, Never> in
                 return Just(State.failed(error: error))
                     .eraseToAnyPublisher()
@@ -45,25 +41,5 @@ class SectionModel: ObservableObject {
     
     func loadMore() {
         trigger.signal(section)
-    }
-    
-    private static func headerItem(from items: [Item]) -> Item? {
-        if case .show = items.first {
-            return items.first
-        }
-        else {
-            return nil
-        }
-    }
-    
-    private static func items(from items: [Item]) -> [Item] {
-        return items.filter { item in
-            if case .media = item {
-                return true
-            }
-            else {
-                return false
-            }
-        }
     }
 }

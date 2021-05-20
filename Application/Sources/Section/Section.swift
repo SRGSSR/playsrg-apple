@@ -45,6 +45,7 @@ enum Content {
         
         case showPlaceholder(index: Int)
         case show(_ show: SRGShow)
+        case showHeader(_ show: SRGShow)
         
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
@@ -131,7 +132,7 @@ struct ContentSectionProperties: SectionProperties {
                 .map {
                     var items = [Content.Item]()
                     if let show = $0.show {
-                        items.append(.show(show))
+                        items.append(.showHeader(show))
                     }
                     items.append(contentsOf: $0.medias.map { .media($0) })
                     return items

@@ -56,7 +56,7 @@ class SectionViewController: UIViewController {
     
     private func reloadData(with state: SectionModel.State) {
         switch state {
-        case let .loaded(headerItem: _, items: items):
+        case let .loaded(items: items):
             label.text = "\(items.count) items"
         case let .failed(error: error):
             label.text = error.localizedDescription
