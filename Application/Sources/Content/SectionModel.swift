@@ -21,14 +21,19 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering) {
         self.section = section
         
-        section.properties.publisher(filter: filter, triggerId: trigger.id(section))?
-            .map { State.loaded(items: $0) }
-            .catch { error -> AnyPublisher<State, Never> in
-                return Just(State.failed(error: error))
-                    .eraseToAnyPublisher()
-            }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
+        if let publisher = section.properties.publisher(filter: filter, triggerId: trigger.id(section)) {
+            publisher
+                .map { State.loaded(items: $0) }
+                .catch { error -> AnyPublisher<State, Never> in
+                    return Just(State.failed(error: error))
+                        .eraseToAnyPublisher()
+                }
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$state)
+        }
+        else {
+            self.state = .loaded(items: [])
+        }
     }
     
     func loadMore() {
