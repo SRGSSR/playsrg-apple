@@ -34,15 +34,8 @@ class SectionModel: ObservableObject {
                     return publisher
                         .scan([]) { $0 + $1 }
                         .map { State.loaded(items: $0) }
-                        .catch { error -> AnyPublisher<State, Never> in
-                            if !self.state.isEmpty {
-                                return Just(self.state)
-                                    .eraseToAnyPublisher()
-                            }
-                            else {
-                                return Just(State.failed(error: error))
-                                    .eraseToAnyPublisher()
-                            }
+                        .catch { error in
+                            return Just(State.failed(error: error))
                         }
                 }
                 .receive(on: DispatchQueue.main)
