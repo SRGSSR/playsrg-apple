@@ -6,6 +6,8 @@
 
 import SRGDataProviderCombine
 
+// MARK: View model
+
 class SectionModel: ObservableObject {
     let section: Section
     
@@ -33,6 +35,8 @@ class SectionModel: ObservableObject {
         trigger.signal(section)
     }
 }
+
+// MARK: Types
 
 extension SectionModel {
     typealias Section = Content.Section

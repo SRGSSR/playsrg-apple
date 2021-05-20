@@ -7,6 +7,8 @@
 import SRGDataProviderCombine
 import SRGUserData
 
+// MARK: Publishers
+
 extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list
     func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {

@@ -6,6 +6,8 @@
 
 import SRGDataProviderCombine
 
+// MARK: View model
+
 class PageModel: Identifiable, ObservableObject {
     let id: Id
     
@@ -94,6 +96,8 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
 }
+
+// MARK: Types
 
 extension PageModel {
     enum Id: SectionFiltering {
@@ -192,6 +196,8 @@ extension PageModel {
     
     typealias Row = CollectionRow<Section, Item>
 }
+
+// MARK: Layout properties
 
 fileprivate extension PageModel {
     struct ContentSectionProperties: PageSectionLayoutProperties {

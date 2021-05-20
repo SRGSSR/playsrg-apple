@@ -9,6 +9,8 @@ import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
+// MARK: View controller
+
 class PageViewController: DataViewController {
     enum Header: String {
         case global
@@ -200,6 +202,8 @@ class PageViewController: DataViewController {
     }
     #endif
 }
+
+// MARK: Protocols
 
 extension PageViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {

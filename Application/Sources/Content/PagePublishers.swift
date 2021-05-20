@@ -6,6 +6,8 @@
 
 import SRGDataProviderCombine
 
+// MARK: Publishers
+
 extension SRGDataProvider {
     /// Publishes rows associated with a page id, starting from the provided rows. Updates are published down the pipeline
     /// as they are retrieved.
@@ -64,7 +66,11 @@ extension SRGDataProvider {
                 .eraseToAnyPublisher()
         }
     }
-    
+}
+
+// MARK: Helpers
+
+private extension SRGDataProvider {
     private static func items(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         return items.map { PageModel.Item($0, in: section) }
     }

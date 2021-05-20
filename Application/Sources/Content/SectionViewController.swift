@@ -7,6 +7,8 @@
 import Combine
 import UIKit
 
+// MARK: View controller
+
 class SectionViewController: UIViewController {
     let model: SectionModel
     
@@ -65,6 +67,8 @@ class SectionViewController: UIViewController {
         }
     }
 }
+
+// MARK: Protocols
 
 // TODO: Remaining protocols to implement
 

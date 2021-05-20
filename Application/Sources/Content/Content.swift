@@ -9,6 +9,8 @@ import SRGDataProviderCombine
 private let defaultNumberOfPlaceholders = 10
 private let defaultNumberOfLivestreamPlaceholders = 4
 
+// MARK: Types
+
 enum Content {
     enum Section: Hashable {
         case content(SRGContentSection)
@@ -39,6 +41,8 @@ enum Content {
         case showAccess(radioChannel: RadioChannel?)
     }
 }
+
+// MARK: Content section properties
 
 private extension Content {
     struct ContentSectionProperties: SectionProperties {
@@ -189,7 +193,11 @@ private extension Content {
             }
         }
     }
-    
+}
+
+// MARK: Configured section properties
+
+private extension Content {
     struct ConfiguredSectionProperties: SectionProperties {
         let configuredSection: ConfiguredSection
         
