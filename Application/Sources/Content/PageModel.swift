@@ -5,7 +5,6 @@
 //
 
 import SRGDataProviderCombine
-import SRGUserData
 
 class PageModel: Identifiable, ObservableObject {
     let id: Id
@@ -96,94 +95,176 @@ class PageModel: Identifiable, ObservableObject {
     }
 }
 
-fileprivate extension SRGDataProvider {
-    /// Publishes rows associated with a page id, starting from the provided rows. Updates are published down the pipeline
-    /// as they are retrieved.
-    func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row], trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
-        return sectionsPublisher(id: id)
-            // For each section create a publisher which updates the associated row and publishes the entire updated
-            // row list as a result. A value is sent down the pipeline with each update.
-            .flatMap { sections -> AnyPublisher<[PageModel.Row], Never> in
-                var rows = Self.reusableRows(from: existingRows, for: sections)
-                return Publishers.MergeMany(sections.map { section in
-                    return self.rowPublisher(id: id, section: section, trigger: trigger)
-                        .map { row in
-                            guard let index = rows.firstIndex(where: { $0.section == section }) else { return rows }
-                            rows[index] = row
-                            return rows
-                        }
-                        .eraseToAnyPublisher()
-                })
-                .eraseToAnyPublisher()
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    /// Publishes sections associated with a page id
-    func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
-        switch id {
-        case .video:
-            return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.sections.map { PageModel.Section(.content($0)) } }
-                .eraseToAnyPublisher()
-        case let .topic(topic: topic):
-            return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.map { PageModel.Section(.content($0)) } }
-                .eraseToAnyPublisher()
-        case let .audio(channel: channel):
-            return Just(channel.configuredSections().map { PageModel.Section(.configured($0)) })
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section(.configured($0)) })
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-    }
-    
-    /// Publishes the row for content for a given section and page id
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
-        if let publisher = section.properties.publisher(filter: id, triggerId: trigger.id(section)) {
-            return publisher
-                .replaceError(with: section.properties.placeholderItems)
-                .map { PageModel.Row(section: section, items: Self.items(Self.removeDuplicateItems($0), in: section)) }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Just(PageModel.Row(section: section, items: []))
-                .eraseToAnyPublisher()
-        }
-    }
-    
-    private static func items(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
-        return items.map { PageModel.Item($0, in: section) }
-    }
-    
-    /**
-     *  Unique items: remove duplicated items. Items must not appear more than one time in the same row.
-     *
-     *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
-     */
-    private static func removeDuplicateItems<T: Hashable>(_ items: [T]) -> [T] {
-        var itemDictionnary = [T: Bool]()
+extension PageModel {
+    enum Id: SectionFiltering {
+        case video
+        case audio(channel: RadioChannel)
+        case live
+        case topic(topic: SRGTopic)
         
-        return items.filter {
-            let isNew = itemDictionnary.updateValue(true, forKey: $0) == nil
-            if !isNew {
-                PlayLogWarning(category: "collection", message: "A duplicate item has been removed: \($0)")
+        var supportsCastButton: Bool {
+            switch self {
+            case .video, .audio, .live:
+                return true
+            default:
+                return false
             }
-            return isNew
+        }
+        
+        func canContain(show: SRGShow) -> Bool {
+            switch self {
+            case .video:
+                return show.transmission == .TV
+            case let .audio(channel: channel):
+                return show.transmission == .radio && show.primaryChannelUid == channel.uid
+            default:
+                return false
+            }
+        }
+        
+        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+            return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+        }
+        
+        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+            switch self {
+            case .video:
+                return medias.filter { $0.mediaType == .video }
+            case let .audio(channel: channel):
+                return medias.filter { $0.mediaType == .audio && $0.channel?.uid == channel.uid }
+            default:
+                return medias
+            }
         }
     }
     
-    private static func reusableRows(from existingRows: [PageModel.Row], for sections: [PageModel.Section]) -> [PageModel.Row] {
-        return sections.map { section in
-            if let existingRow = existingRows.first(where: { $0.section == section }) {
-                return existingRow
+    enum State {
+        case loading
+        case failed(error: Error)
+        case loaded(rows: [Row])
+    }
+    
+    enum SectionLayout: Hashable {
+        case hero
+        case highlight
+        case liveMediaGrid
+        case liveMediaSwimlane
+        case mediaGrid
+        case mediaSwimlane
+        case showGrid
+        case showSwimlane
+        case topicSelector
+        
+        @available(tvOS, unavailable)
+        case showAccess
+    }
+    
+    struct Section: Hashable {
+        let wrappedValue: Content.Section
+        
+        init(_ wrappedValue: Content.Section) {
+            self.wrappedValue = wrappedValue
+        }
+        
+        var properties: SectionProperties {
+            return wrappedValue.properties
+        }
+        
+        var layoutProperties: PageSectionLayoutProperties {
+            switch wrappedValue {
+            case let .content(section):
+                return ContentSectionProperties(contentSection: section)
+            case let .configured(section):
+                return ConfiguredSectionProperties(configuredSection: section)
             }
-            else {
-                return PageModel.Row(section: section, items: items(section.properties.placeholderItems, in: section))
+        }
+    }
+    
+    struct Item: Hashable {
+        let wrappedValue: Content.Item
+        let section: Section
+        
+        init(_ wrappedValue: Content.Item, in section: Section) {
+            self.wrappedValue = wrappedValue
+            self.section = section
+        }
+    }
+    
+    typealias Row = CollectionRow<Section, Item>
+}
+
+fileprivate extension PageModel {
+    struct ContentSectionProperties: PageSectionLayoutProperties {
+        let contentSection: SRGContentSection
+        
+        private var presentation: SRGContentPresentation {
+            return contentSection.presentation
+        }
+        
+        var layout: PageModel.SectionLayout {
+            switch presentation.type {
+            case .hero:
+                return .hero
+            case .mediaHighlight, .showHighlight:
+                return .highlight
+            case .topicSelector:
+                return .topicSelector
+            case .showAccess:
+                #if os(iOS)
+                return .showAccess
+                #else
+                // Not supported
+                return .mediaSwimlane
+                #endif
+            case .favoriteShows:
+                return .showSwimlane
+            case .swimlane:
+                return (contentSection.type == .shows) ? .showSwimlane : .mediaSwimlane
+            case .grid:
+                return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+            case .livestreams:
+                return .liveMediaSwimlane
+            case .none, .resumePlayback, .watchLater, .personalizedProgram:
+                return .mediaSwimlane
             }
+        }
+        
+        var canOpenDetailPage: Bool {
+            return presentation.hasDetailPage
+        }
+    }
+    
+    struct ConfiguredSectionProperties: PageSectionLayoutProperties {
+        let configuredSection: ConfiguredSection
+        
+        var layout: PageModel.SectionLayout {
+            switch configuredSection.type {
+            case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+                return (configuredSection.contentPresentationType == .hero) ? .hero : .mediaSwimlane
+            case .tvLive, .radioLive, .radioLiveSatellite:
+                #if os(iOS)
+                return .liveMediaGrid
+                #else
+                return .liveMediaSwimlane
+                #endif
+            case .tvLiveCenter, .tvScheduledLivestreams:
+                return .mediaSwimlane
+            case .radioFavoriteShows:
+                return .showSwimlane
+            case .radioAllShows:
+                return .showGrid
+            case .radioShowAccess:
+                #if os(iOS)
+                return .showAccess
+                #else
+                // Not supported
+                return .mediaSwimlane
+                #endif
+            }
+        }
+        
+        var canOpenDetailPage: Bool {
+            return layout == .mediaSwimlane
         }
     }
 }

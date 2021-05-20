@@ -6,7 +6,6 @@
 
 import Combine
 import SRGAppearanceSwift
-import SRGDataProviderModel
 import UIKit
 
 class PageViewController: DataViewController {

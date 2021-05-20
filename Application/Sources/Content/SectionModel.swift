@@ -4,19 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-import Foundation
 import SRGDataProviderCombine
 
 class SectionModel: ObservableObject {
-    typealias Section = Content.Section
-    typealias Item = Content.Item
-    
-    enum State {
-        case loading
-        case failed(error: Error)
-        case loaded(items: [Item])
-    }
-    
     let section: Section
     
     private var trigger = Trigger()
@@ -41,5 +31,16 @@ class SectionModel: ObservableObject {
     
     func loadMore() {
         trigger.signal(section)
+    }
+}
+
+extension SectionModel {
+    typealias Section = Content.Section
+    typealias Item = Content.Item
+    
+    enum State {
+        case loading
+        case failed(error: Error)
+        case loaded(items: [Item])
     }
 }
