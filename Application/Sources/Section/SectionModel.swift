@@ -10,12 +10,11 @@ import SRGDataProviderCombine
 class SectionModel: ObservableObject {
     typealias Section = Content.Section
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Section, Item>
     
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(show: SRGShow?, items: [Content.Item])
+        case loaded(headerItem: Item?, items: [Item])
     }
     
     let section: Section
@@ -32,9 +31,9 @@ class SectionModel: ObservableObject {
         
         section.properties.publisher(filter: filter, triggerId: trigger.id(section))?
             .map { items in
-                let show = Self.show(from: items)
+                let headerItem = Self.headerItem(from: items)
                 let items = Self.items(from: items)
-                return State.loaded(show: show, items: items)
+                return State.loaded(headerItem: headerItem, items: items)
             }
             .catch { error -> AnyPublisher<State, Never> in
                 return Just(State.failed(error: error))
@@ -48,9 +47,9 @@ class SectionModel: ObservableObject {
         trigger.signal(section)
     }
     
-    private static func show(from items: [Item]) -> SRGShow? {
-        if case let .show(show) = items.first {
-            return show
+    private static func headerItem(from items: [Item]) -> Item? {
+        if case .show = items.first {
+            return items.first
         }
         else {
             return nil
