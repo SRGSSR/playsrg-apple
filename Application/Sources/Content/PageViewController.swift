@@ -6,6 +6,7 @@
 
 import Combine
 import SRGAppearanceSwift
+import SwiftUI
 import UIKit
 
 class PageViewController: DataViewController {
@@ -200,7 +201,120 @@ class PageViewController: DataViewController {
     #endif
 }
 
-/// Layout setup
+extension PageViewController: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return collectionView != nil ? [collectionView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+    }
+}
+
+extension PageViewController: UICollectionViewDelegate {
+    #if os(iOS)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item.wrappedValue {
+        case let .media(media):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        case let .show(show):
+            if let navigationController = navigationController {
+                let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                navigationController.pushViewController(showViewController, animated: true)
+            }
+        case let .topic(topic):
+            if let navigationController = navigationController {
+                let pageViewController = PageViewController(id: .topic(topic: topic))
+                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
+                //       check -[PlayAppDelegate openTopicURN:]
+                pageViewController.title = topic.title
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+        default:
+            ()
+        }
+    }
+    #endif
+    
+    #if os(tvOS)
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    #endif
+}
+
+extension PageViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
+        if refreshTriggered {
+            refresh()
+            refreshTriggered = false
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let numberOfScreens = 4
+        if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
+            model.loadMore()
+        }
+    }
+}
+
+// TODO: Remaining protocols to implement, as was the case for HomeViewController
+
+#if false
+
+extension PageViewController: PlayApplicationNavigation {
+    
+}
+
+extension PageViewController: SRGAnalyticsViewTracking {
+    
+}
+
+#endif
+
+#if os(iOS)
+
+extension PageViewController: ShowAccessCellActions {
+    func openShowAZ() {
+        if let navigationController = navigationController {
+            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            navigationController.pushViewController(showsViewController, animated: true)
+        }
+    }
+    
+    func openShowByDate() {
+        if let navigationController = navigationController {
+            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
+            navigationController.pushViewController(calendarViewController, animated: true)
+        }
+    }
+}
+
+extension PageViewController: SectionHeaderViewAction {
+    fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
+        if let event = event, let navigationController = navigationController {
+            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
+            navigationController.pushViewController(sectionViewController, animated: true)
+        }
+    }
+}
+
+extension PageViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView.play_scrollToTop(animated: animated)
+    }
+}
+
+#endif
+
+// MARK: Layout
+
 extension PageViewController {
     private static let sectionSpacing: CGFloat = constant(iOS: 35, tvOS: 70)
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
@@ -305,114 +419,127 @@ extension PageViewController {
     }
 }
 
-extension PageViewController: ContentInsets {
-    var play_contentScrollViews: [UIScrollView]? {
-        return collectionView != nil ? [collectionView] : nil
-    }
-    
-    var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
-    }
-}
+// MARK: Cells
 
-extension PageViewController: UICollectionViewDelegate {
-    #if os(iOS)
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let snapshot = dataSource.snapshot()
-        let section = snapshot.sectionIdentifiers[indexPath.section]
-        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+private extension PageViewController {
+    struct PageMediaCell: View {
+        let media: SRGMedia?
+        let section: PageModel.Section
         
-        switch item.wrappedValue {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = ShowViewController(show: show, fromPushNotification: false)
-                navigationController.pushViewController(showViewController, animated: true)
+        var body: some View {
+            switch section.layoutProperties.layout {
+            case .hero:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
+            case .highlight:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
+            case .liveMediaSwimlane, .liveMediaGrid:
+                LiveMediaCell(media: media)
+            case .mediaGrid:
+                MediaCell(media: media, style: .show)
+            default:
+                MediaCell(media: media, style: .show, layout: .vertical)
             }
-        case let .topic(topic):
-            if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic: topic))
-                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
-                //       check -[PlayAppDelegate openTopicURN:]
-                pageViewController.title = topic.title
-                navigationController.pushViewController(pageViewController, animated: true)
+        }
+    }
+    
+    struct PageShowCell: View {
+        let show: SRGShow?
+        let section: PageModel.Section
+        
+        var body: some View {
+            switch section.layoutProperties.layout {
+            case .hero:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
+            case .highlight:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
+            default:
+                ShowCell(show: show)
             }
-        default:
-            ()
-        }
-    }
-    #endif
-    
-    #if os(tvOS)
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    #endif
-}
-
-extension PageViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
-        if refreshTriggered {
-            refresh()
-            refreshTriggered = false
         }
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let numberOfScreens = 4
-        if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
-            model.loadMore()
+    struct PageCell: View {
+        let item: PageModel.Item
+        
+        var body: some View {
+            switch item.wrappedValue {
+            case .mediaPlaceholder:
+                PageMediaCell(media: nil, section: item.section)
+            case let .media(media):
+                PageMediaCell(media: media, section: item.section)
+            case .showPlaceholder:
+                PageShowCell(show: nil, section: item.section)
+            case let .show(show), let .showHeader(show):
+                PageShowCell(show: show, section: item.section)
+            case .topicPlaceholder:
+                TopicCell(topic: nil)
+            case let .topic(topic):
+                TopicCell(topic: topic)
+            #if os(iOS)
+            case .showAccess:
+                ShowAccessCell()
+            #endif
+            }
         }
     }
 }
 
-#if os(iOS)
-extension PageViewController: ShowAccessCellActions {
-    func openShowAZ() {
-        if let navigationController = navigationController {
-            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
-            navigationController.pushViewController(showsViewController, animated: true)
-        }
+// MARK: Headers
+
+@objc private protocol SectionHeaderViewAction {
+    func openSection(sender: Any?, event: OpenSectionEvent?)
+}
+
+private class OpenSectionEvent: UIEvent {
+    let section: PageModel.Section
+    
+    init(section: PageModel.Section) {
+        self.section = section
+        super.init()
     }
     
-    func openShowByDate() {
-        if let navigationController = navigationController {
-            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-            navigationController.pushViewController(calendarViewController, animated: true)
+    override init() {
+        fatalError("init() is not available")
+    }
+}
+
+private extension PageViewController {
+    struct PageSectionHeaderView: View {
+        let section: PageModel.Section
+        let pageId: PageModel.Id
+        
+        private static func title(for section: PageModel.Section) -> String? {
+            return section.properties.title
+        }
+        
+        private static func subtitle(for section: PageModel.Section) -> String? {
+            return section.properties.summary
+        }
+        
+        var body: some View {
+            #if os(tvOS)
+            HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
+                .accessibilityElement()
+                .accessibilityOptionalLabel(Self.title(for: section))
+                .accessibility(addTraits: .isHeader)
+            #else
+            ResponderChain { firstResponder in
+                Button {
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                } label: {
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.layoutProperties.canOpenDetailPage)
+                }
+                .disabled(!section.layoutProperties.canOpenDetailPage)
+                .accessibilityElement()
+                .accessibilityOptionalLabel(Self.title(for: section))
+                .accessibilityOptionalHint(section.layoutProperties.accessibilityHint)
+                .accessibility(addTraits: .isHeader)
+            }
+            #endif
+        }
+        
+        static func size(section: PageModel.Section, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), horizontalSizeClass: horizontalSizeClass)
         }
     }
 }
-
-extension PageViewController: SectionHeaderViewAction {
-    func openSection(sender: Any?, event: UIEvent?) {
-        guard let event = event as? OpenSectionEvent else { return }
-
-        if let navigationController = navigationController {
-            let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
-            navigationController.pushViewController(sectionViewController, animated: true)
-        }
-    }
-}
-
-extension PageViewController: TabBarActionable {
-    func performActiveTabAction(animated: Bool) {
-        collectionView.play_scrollToTop(animated: animated)
-    }
-}
-#endif
-
-// TODO: Remaining protocols to implement, as was the case for HomeViewController
-
-#if false
-
-extension PageViewController: PlayApplicationNavigation {
-    
-}
-
-extension PageViewController: SRGAnalyticsViewTracking {
-    
-}
-
-#endif

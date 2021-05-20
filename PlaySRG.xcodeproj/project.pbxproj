@@ -1450,16 +1450,6 @@
 		6FC24A8526395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
 		6FC24A8626395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
 		6FC24A8726395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */; };
-		6FC2F66B2628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F66C2628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F66D2628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F66E2628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F66F2628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F6702628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F6712628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F6722628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F6732628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
-		6FC2F6742628968200BF6B19 /* PageViewController+Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */; };
 		6FC2F7DF2628F23600BF6B19 /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */; };
 		6FC2F7F92628F23700BF6B19 /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */; };
 		6FC2F7FA2628F23800BF6B19 /* FirstResponder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */; };
@@ -2621,7 +2611,6 @@
 		6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC1FA872292E3460036CB34 /* NSSet+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+PlaySRG.m"; sourceTree = "<group>"; };
 		6FC24A7D26395F3E00CACC20 /* FeaturedDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedDescriptionView.swift; sourceTree = "<group>"; };
-		6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageViewController+Views.swift"; sourceTree = "<group>"; };
 		6FC2F7932628F1B200BF6B19 /* FirstResponder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstResponder.swift; sourceTree = "<group>"; };
 		6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-TV-ObjectiveC.h"; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3749,7 +3738,6 @@
 				6F73BFCB265640C10032D742 /* PagePublishers.swift */,
 				6FC9E85E26163C4F0025A2ED /* PageSectionLayoutProperties.swift */,
 				6F16C7A226025698006F685A /* PageViewController.swift */,
-				6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */,
 				6F8A5470265510F900AE78FD /* SectionModel.swift */,
 				6F8A5465265510CF00AE78FD /* SectionProperties.swift */,
 				6F73BFC02656401A0032D742 /* SectionPublishers.swift */,
@@ -7384,7 +7372,6 @@
 				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF7BB9C22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
 				6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */,
-				6FC2F66B2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
 				6F1F929E22A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
 				6F54D2B92604FB16008B46FF /* ShowCell.swift in Sources */,
@@ -7649,7 +7636,6 @@
 				6F0506E8245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
-				6FC2F66C2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC325262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -7847,7 +7833,6 @@
 				6F0506E9245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
-				6FC2F66D2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC326262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -8045,7 +8030,6 @@
 				6F0506EA245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
-				6FC2F66E2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC327262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -8243,7 +8227,6 @@
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
-				6FC2F66F2628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC328262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -8478,7 +8461,6 @@
 				6FC9E86426163C4F0025A2ED /* PageSectionLayoutProperties.swift in Sources */,
 				6F298860255ADDCD007A8E2B /* Errors.swift in Sources */,
 				6F9FFB4E261662D900CDDC26 /* CollectionRow.swift in Sources */,
-				6FC2F6702628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8587,7 +8569,6 @@
 				6FC9E86526163C4F0025A2ED /* PageSectionLayoutProperties.swift in Sources */,
 				6F298861255ADDCD007A8E2B /* Errors.swift in Sources */,
 				6F9FFB4F261662D900CDDC26 /* CollectionRow.swift in Sources */,
-				6FC2F6712628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8696,7 +8677,6 @@
 				6FC9E86626163C4F0025A2ED /* PageSectionLayoutProperties.swift in Sources */,
 				6F298862255ADDCD007A8E2B /* Errors.swift in Sources */,
 				6F9FFB50261662D900CDDC26 /* CollectionRow.swift in Sources */,
-				6FC2F6722628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8805,7 +8785,6 @@
 				6FC9E86726163C4F0025A2ED /* PageSectionLayoutProperties.swift in Sources */,
 				6F298863255ADDCD007A8E2B /* Errors.swift in Sources */,
 				6F9FFB51261662D900CDDC26 /* CollectionRow.swift in Sources */,
-				6FC2F6732628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8914,7 +8893,6 @@
 				6FC9E86826163C4F0025A2ED /* PageSectionLayoutProperties.swift in Sources */,
 				6F298864255ADDCD007A8E2B /* Errors.swift in Sources */,
 				6F9FFB52261662D900CDDC26 /* CollectionRow.swift in Sources */,
-				6FC2F6742628968200BF6B19 /* PageViewController+Views.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
