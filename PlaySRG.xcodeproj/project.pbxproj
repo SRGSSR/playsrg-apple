@@ -3433,6 +3433,7 @@
 				E6E673221D4A423E000C3CB9 /* Browser */,
 				E694A9F11D65F02700372DF0 /* Calendar */,
 				08AA551A1D49EBF600C5026E /* Configuration */,
+				6F16C7A126025698006F685A /* Content */,
 				6F861AF61DAE65A600C46102 /* Designables */,
 				081220731DCCE70400BF8326 /* Downloads */,
 				086F8D4C22984B29001BE2F4 /* Favorites */,
@@ -3442,7 +3443,6 @@
 				6FDF08C4218B126700B2AF2C /* Model */,
 				6FA9ECA920C7A9F300D3D6C2 /* Notifications */,
 				6F00BFD320A9C630009795AF /* Onboarding */,
-				6F16C7A126025698006F685A /* Page */,
 				E66BEC181DA7FCC000AD4450 /* Player */,
 				087584C623A0008500FA7207 /* Profile */,
 				0875853323A3DDB800FA7207 /* RadioChannels */,
@@ -3702,15 +3702,18 @@
 			path = Calendar;
 			sourceTree = "<group>";
 		};
-		6F16C7A126025698006F685A /* Page */ = {
+		6F16C7A126025698006F685A /* Content */ = {
 			isa = PBXGroup;
 			children = (
 				6F16C80B26025945006F685A /* PageModel.swift */,
 				6FC9E85E26163C4F0025A2ED /* PageModel+Types.swift */,
 				6F16C7A226025698006F685A /* PageViewController.swift */,
 				6FC2F66A2628968200BF6B19 /* PageViewController+Views.swift */,
+				6F8A5465265510CF00AE78FD /* Section.swift */,
+				6F8A5470265510F900AE78FD /* SectionModel.swift */,
+				6F8A54592655100400AE78FD /* SectionViewController.swift */,
 			);
-			path = Page;
+			path = Content;
 			sourceTree = "<group>";
 		};
 		6F331CE524D06B8200C096AB /* TV Application */ = {
@@ -3945,9 +3948,6 @@
 		6F8A5464265510AD00AE78FD /* Section */ = {
 			isa = PBXGroup;
 			children = (
-				6F8A5465265510CF00AE78FD /* Section.swift */,
-				6F8A5470265510F900AE78FD /* SectionModel.swift */,
-				6F8A54592655100400AE78FD /* SectionViewController.swift */,
 			);
 			path = Section;
 			sourceTree = "<group>";
