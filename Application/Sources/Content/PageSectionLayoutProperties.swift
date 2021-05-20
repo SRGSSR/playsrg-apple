@@ -29,21 +29,4 @@ extension PageSectionLayoutProperties {
             return false
         }
     }
-    
-    private var sectionPageLayout: PageModel.SectionLayout {
-        switch layout {
-        case .mediaSwimlane, .mediaGrid:
-            return .mediaGrid
-        case .showSwimlane, .showGrid:
-            return .showGrid
-        case .liveMediaSwimlane, .liveMediaGrid:
-            return .liveMediaGrid
-        case .hero:
-            return .mediaGrid
-        case .topicSelector:
-            return .showGrid
-        default:
-            return layout
-        }
-    }
 }
