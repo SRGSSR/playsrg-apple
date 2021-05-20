@@ -199,7 +199,7 @@ extension PageModel {
 
 // MARK: Layout properties
 
-fileprivate extension PageModel {
+private extension PageModel {
     struct ContentSectionProperties: PageSectionLayoutProperties {
         let contentSection: SRGContentSection
         
