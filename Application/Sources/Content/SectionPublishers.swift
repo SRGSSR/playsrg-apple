@@ -100,12 +100,12 @@ extension SRGDataProvider {
     
     func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
         NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .drop { notification in
+            .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
-                    return false
+                    return true
                 }
                 else {
-                    return true
+                    return false
                 }
             }
             .map { _ in }
@@ -149,12 +149,12 @@ extension SRGDataProvider {
     
     func favoritesPublisher(filter: SectionFiltering) -> AnyPublisher<[SRGShow], Error> {
         return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .drop { notification in
+            .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
-                    return false
+                    return true
                 }
                 else {
-                    return true
+                    return false
                 }
             }
             .map { _ in }

@@ -57,6 +57,7 @@ extension SRGDataProvider {
     func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
         if let publisher = section.properties.publisher(filter: id, triggerId: trigger.id(section)) {
             return publisher
+                .scan([]) { $0 + $1 }
                 .replaceError(with: section.properties.placeholderItems)
                 .map { PageModel.Row(section: section, items: Self.items(Self.removeDuplicateItems($0), in: section)) }
                 .eraseToAnyPublisher()

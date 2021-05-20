@@ -111,14 +111,10 @@ private extension Content {
             switch contentSection.type {
             case .medias:
                 return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { self.filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
                 return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
-                    .scan((show: nil as SRGShow?, medias: [SRGMedia]())) {
-                        return (show: $0.show, medias: $0.medias + $1.medias)
-                    }
                     .map {
                         var items = [Content.Item]()
                         if let show = $0.show {
@@ -130,7 +126,6 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .shows:
                 return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { self.filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
@@ -261,27 +256,22 @@ private extension Content {
             switch configuredSection.type {
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioMostPopular(channelUid: channelUid):
                 return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioLatest(channelUid: channelUid):
                 return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioLatestVideos(channelUid: channelUid):
                 return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case .radioFavoriteShows:
@@ -310,12 +300,10 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .tvLiveCenter:
                 return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, triggerId: triggerId)
-                    .scan([]) { $0 + $1 }
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             }

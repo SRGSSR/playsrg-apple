@@ -26,6 +26,7 @@
 #import "PlayAppDelegate.h"
 #import "PlayDurationFormatter.h"
 #import "PushService.h"
+#import "Reachability.h"
 #import "RefreshControl.h"
 #import "ShowViewController.h"
 #import "ShowsViewController.h"
