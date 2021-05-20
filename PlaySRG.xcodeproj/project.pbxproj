@@ -3475,7 +3475,6 @@
 				087584C623A0008500FA7207 /* Profile */,
 				0875853323A3DDB800FA7207 /* RadioChannels */,
 				E694A9D61D65EFF300372DF0 /* Search */,
-				6F8A5464265510AD00AE78FD /* Section */,
 				0806E7B41D50D8DD002ED406 /* Settings */,
 				E6DB5F181D66E07A0057094B /* Shows */,
 				08AA55971D49EC2300C5026E /* UI */,
@@ -3974,13 +3973,6 @@
 				6F861AF71DAE65A600C46102 /* SRGMediaPlayerDesignables.m */,
 			);
 			path = Designables;
-			sourceTree = "<group>";
-		};
-		6F8A5464265510AD00AE78FD /* Section */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Section;
 			sourceTree = "<group>";
 		};
 		6F93962120CA5AE1003ECC1B /* Extensions */ = {
