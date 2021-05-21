@@ -78,7 +78,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func loadMore() {
-        if let lastSection = sections.last, lastSection.layoutProperties.isGridLayout {
+        if let lastSection = sections.last, lastSection.layoutProperties.hasGridLayout {
             trigger.signal(lastSection)
         }
     }
@@ -185,10 +185,15 @@ extension PageModel {
     }
     
     struct Item: Hashable {
-        let wrappedValue: Content.Item
+        enum WrappedValue: Hashable {
+            case item(Content.Item)
+            case more
+        }
+        
+        let wrappedValue: WrappedValue
         let section: Section
         
-        init(_ wrappedValue: Content.Item, in section: Section) {
+        init(_ wrappedValue: WrappedValue, in section: Section) {
             self.wrappedValue = wrappedValue
             self.section = section
         }

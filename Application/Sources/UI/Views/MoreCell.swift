@@ -1,0 +1,64 @@
+//
+//  Copyright (c) SRG SSR. All rights reserved.
+//
+//  License information is available from the LICENSE file.
+//
+
+import SwiftUI
+
+struct MoreCell: View {
+    let section: Content.Section
+    let filter: SectionFiltering
+    
+    static let textSize: CGFloat = constant(iOS: 60, tvOS: 100)
+    static let aspectRatio: CGFloat = 16 / 9
+    
+    var body: some View {
+        #if os(tvOS)
+        LabeledCardButton(aspectRatio: Self.aspectRatio, action: action) {
+            Text("+")
+                .srgFont(family: .display, weight: .bold, size: Self.textSize)
+                .foregroundColor(.white)
+                .accessibilityElement()
+                .accessibilityOptionalLabel(NSLocalizedString("More", comment: "More button accessibility label"))
+                .accessibility(addTraits: .isButton)
+        } label: {
+            Color.clear
+        }
+        #else
+        Text("+")
+            .srgFont(family: .display, weight: .bold, size: Self.textSize)
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .aspectRatio(Self.aspectRatio, contentMode: .fit)
+            .background(Color.white.opacity(0.1))
+            .cornerRadius(LayoutStandardViewCornerRadius)
+            .accessibilityElement()
+            .accessibilityOptionalLabel(NSLocalizedString("More", comment: "More button accessibility label"))
+            .frame(maxHeight: .infinity, alignment: .top)
+        #endif
+    }
+    
+    #if os(tvOS)
+    private func action() {
+        navigateToSection(section, filter: filter)
+    }
+    #endif
+}
+
+struct MoreCell_Previews: PreviewProvider {
+    private struct Filter: SectionFiltering {
+        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+            return shows
+        }
+        
+        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+            return medias
+        }
+    }
+    
+    static var previews: some View {
+        MoreCell(section: .configured(ConfiguredSection(type: .tvLive, contentPresentationType: .grid)), filter: Filter())
+            .previewLayout(.fixed(width: 400, height: 400))
+    }
+}

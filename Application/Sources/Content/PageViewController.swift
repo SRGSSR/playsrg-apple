@@ -98,8 +98,9 @@ class PageViewController: DataViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { cell, _, item in
-            cell.content = ItemCell(item: item)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { [weak self] cell, _, item in
+            guard let self = self else { return }
+            cell.content = ItemCell(item: item, id: self.model.id)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -232,23 +233,31 @@ extension PageViewController: UICollectionViewDelegate {
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
         switch item.wrappedValue {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = ShowViewController(show: show, fromPushNotification: false)
-                navigationController.pushViewController(showViewController, animated: true)
+        case let .item(wrappedItem):
+            switch wrappedItem {
+            case let .media(media):
+                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            case let .show(show):
+                if let navigationController = navigationController {
+                    let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                    navigationController.pushViewController(showViewController, animated: true)
+                }
+            case let .topic(topic):
+                if let navigationController = navigationController {
+                    let pageViewController = PageViewController(id: .topic(topic: topic))
+                    // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
+                    //       check -[PlayAppDelegate openTopicURN:]
+                    pageViewController.title = topic.title
+                    navigationController.pushViewController(pageViewController, animated: true)
+                }
+            default:
+                ()
             }
-        case let .topic(topic):
+        case .more:
             if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic: topic))
-                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
-                //       check -[PlayAppDelegate openTopicURN:]
-                pageViewController.title = topic.title
-                navigationController.pushViewController(pageViewController, animated: true)
+                let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                navigationController.pushViewController(sectionViewController, animated: true)
             }
-        default:
-            ()
         }
     }
     #endif
@@ -475,25 +484,31 @@ private extension PageViewController {
     
     struct ItemCell: View {
         let item: PageModel.Item
+        let id: PageModel.Id
         
         var body: some View {
             switch item.wrappedValue {
-            case .mediaPlaceholder:
-                MediaCell(media: nil, section: item.section)
-            case let .media(media):
-                MediaCell(media: media, section: item.section)
-            case .showPlaceholder:
-                ShowCell(show: nil, section: item.section)
-            case let .show(show), let .showHeader(show):
-                ShowCell(show: show, section: item.section)
-            case .topicPlaceholder:
-                TopicCell(topic: nil)
-            case let .topic(topic):
-                TopicCell(topic: topic)
-            #if os(iOS)
-            case .showAccess:
-                ShowAccessCell()
-            #endif
+            case let .item(wrappedItem):
+                switch wrappedItem {
+                case .mediaPlaceholder:
+                    MediaCell(media: nil, section: item.section)
+                case let .media(media):
+                    MediaCell(media: media, section: item.section)
+                case .showPlaceholder:
+                    ShowCell(show: nil, section: item.section)
+                case let .show(show), let .showHeader(show):
+                    ShowCell(show: show, section: item.section)
+                case .topicPlaceholder:
+                    TopicCell(topic: nil)
+                case let .topic(topic):
+                    TopicCell(topic: topic)
+                #if os(iOS)
+                case .showAccess:
+                    ShowAccessCell()
+                #endif
+                }
+            case .more:
+                MoreCell(section: item.section.wrappedValue, filter: id)
             }
         }
     }

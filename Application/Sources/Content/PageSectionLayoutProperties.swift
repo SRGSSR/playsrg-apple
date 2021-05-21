@@ -20,8 +20,17 @@ extension PageSectionLayoutProperties {
             return nil
         }
     }
+        
+    var hasSwimlaneLayout: Bool {
+        switch layout {
+        case .mediaSwimlane, .showSwimlane:
+            return true
+        default:
+            return false
+        }
+    }
     
-    var isGridLayout: Bool {
+    var hasGridLayout: Bool {
         switch layout {
         case .mediaGrid, .showGrid, .liveMediaGrid:
             return true

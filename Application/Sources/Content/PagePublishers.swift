@@ -59,7 +59,7 @@ extension SRGDataProvider {
             return publisher
                 .scan([]) { $0 + $1 }
                 .replaceError(with: section.properties.placeholderItems)
-                .map { PageModel.Row(section: section, items: Self.items(Self.removeDuplicateItems($0), in: section)) }
+                .map { PageModel.Row(section: section, items: Self.rowItems(Self.removeDuplicateItems($0), in: section)) }
                 .eraseToAnyPublisher()
         }
         else {
@@ -72,8 +72,12 @@ extension SRGDataProvider {
 // MARK: Helpers
 
 private extension SRGDataProvider {
-    private static func items(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
-        return items.map { PageModel.Item($0, in: section) }
+    private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
+        var rowItems = items.map { PageModel.Item(.item($0), in: section) }
+        if section.layoutProperties.canOpenDetailPage && section.layoutProperties.hasSwimlaneLayout {
+            rowItems.append(PageModel.Item(.more, in: section))
+        }
+        return rowItems
     }
     
     /**
@@ -99,7 +103,7 @@ private extension SRGDataProvider {
                 return existingRow
             }
             else {
-                return PageModel.Row(section: section, items: items(section.properties.placeholderItems, in: section))
+                return PageModel.Row(section: section, items: rowItems(section.properties.placeholderItems, in: section))
             }
         }
     }
