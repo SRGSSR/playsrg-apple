@@ -147,7 +147,7 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func favoritesPublisher(filter: SectionFiltering) -> AnyPublisher<[SRGShow], Error> {
+    func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
         return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
@@ -162,7 +162,7 @@ extension SRGDataProvider {
             .flatMap { _ in
                 // For some reason (compiler bug?) the type of the items is seen as [Any]
                 return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
-                    .map { filter.compatibleShows($0) }
+                    .map { filter?.compatibleShows($0) ?? $0 }
             }
             .eraseToAnyPublisher()
     }

@@ -101,7 +101,7 @@ private extension Content {
             }
         }
         
-        func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(triggerId: Trigger.Id, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             
@@ -152,11 +152,16 @@ private extension Content {
                         .eraseToAnyPublisher()
                 case .resumePlayback:
                     return dataProvider.historyPublisher()
-                        .map { filter.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
+                        .map { medias in
+                            let filteredMedias = filter?.compatibleMedias(medias) ?? medias
+                            return filteredMedias.prefix(Int(pageSize)).map { .media($0) }
+                        }
                         .eraseToAnyPublisher()
                 case .watchLater:
                     return dataProvider.laterPublisher()
-                        .map { filter.compatibleMedias($0).prefix(Int(pageSize)).map { .media($0) } }
+                        .map { medias in
+                            let filteredMedias = filter?.compatibleMedias(medias) ?? medias
+                            return filteredMedias.prefix(Int(pageSize)).map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .showAccess:
                     #if os(iOS)
@@ -246,7 +251,7 @@ private extension Content {
             }
         }
         
-        func publisher(filter: SectionFiltering, triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(triggerId: Trigger.Id, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             

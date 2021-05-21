@@ -20,10 +20,10 @@ class SectionModel: ObservableObject {
         return section.properties.title
     }
     
-    init(section: Section, filter: SectionFiltering) {
+    init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        if let publisher = section.properties.publisher(filter: filter, triggerId: trigger.id(section)) {
+        if let publisher = section.properties.publisher(triggerId: trigger.id(section), filter: filter) {
             // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
             //       In this case the model should just be provided to the notification pipeline, in a stateless
             //       way, avoiding capture issues

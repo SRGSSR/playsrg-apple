@@ -8,7 +8,7 @@ import SwiftUI
 
 struct MoreCell: View {
     let section: Content.Section
-    let filter: SectionFiltering
+    let filter: SectionFiltering?
     
     static let textSize: CGFloat = constant(iOS: 60, tvOS: 100)
     static let aspectRatio: CGFloat = 16 / 9
@@ -47,18 +47,8 @@ struct MoreCell: View {
 }
 
 struct MoreCell_Previews: PreviewProvider {
-    private struct Filter: SectionFiltering {
-        func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
-            return shows
-        }
-        
-        func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
-            return medias
-        }
-    }
-    
     static var previews: some View {
-        MoreCell(section: .configured(ConfiguredSection(type: .tvLive, contentPresentationType: .grid)), filter: Filter())
+        MoreCell(section: .configured(ConfiguredSection(type: .tvLive, contentPresentationType: .grid)), filter: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

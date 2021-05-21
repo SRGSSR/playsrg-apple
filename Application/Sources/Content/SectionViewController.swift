@@ -35,7 +35,7 @@ class SectionViewController: UIViewController {
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering) {
+    init(section: Content.Section, filter: SectionFiltering? = nil) {
         self.model = SectionModel(section: section, filter: filter)
         super.init(nibName: nil, bundle: nil)
         
