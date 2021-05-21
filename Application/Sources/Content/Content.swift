@@ -136,10 +136,8 @@ private extension Content {
                         .eraseToAnyPublisher()
                 case .personalizedProgram:
                     return dataProvider.favoritesPublisher(filter: filter)
-                        .map { $0.map { $0.urn } }
-                        .flatMap { urns in
-                            return dataProvider.latestMediasForShowsPublisher(withUrns: urns)
-                        }
+                        .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn)) }
+                        .switchToLatest()
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .livestreams:

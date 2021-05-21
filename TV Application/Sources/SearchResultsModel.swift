@@ -124,10 +124,11 @@ class SearchResultsModel: ObservableObject {
     
     private var mediaPublisher: AnyPublisher<MediaSearchOutput, Error>? {
         return mediaSearchPublisher?
-            .flatMap { searchResult in
+            .map { searchResult in
                 return SRGDataProvider.current!.medias(withUrns: searchResult.mediaUrns, pageSize: ApplicationConfiguration.shared.pageSize)
                     .map { ($0, searchResult.suggestions ?? []) }
             }
+            .switchToLatest()
             .eraseToAnyPublisher()
     }
     

@@ -69,11 +69,12 @@ class MediaDetailModel: ObservableObject {
         let url = URL(string: resourcePath, relativeTo: middlewareUrl)!
         
         URLSession.shared.dataTaskPublisher(for: url)
-            .map { $0.data }
+            .map(\.data)
             .decode(type: Recommendation.self, decoder: JSONDecoder())
-            .flatMap { recommendation in
+            .map { recommendation in
                 return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
             }
+            .switchToLatest()
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.relatedMedias, on: self)

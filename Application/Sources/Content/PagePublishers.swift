@@ -15,7 +15,7 @@ extension SRGDataProvider {
         return sectionsPublisher(id: id)
             // For each section create a publisher which updates the associated row and publishes the entire updated
             // row list as a result. A value is sent down the pipeline with each update.
-            .flatMap { sections -> AnyPublisher<[PageModel.Row], Never> in
+            .map { sections -> AnyPublisher<[PageModel.Row], Never> in
                 var rows = Self.reusableRows(from: existingRows, for: sections)
                 return Publishers.MergeMany(sections.map { section in
                     return self.rowPublisher(id: id, section: section, trigger: trigger)
@@ -28,6 +28,7 @@ extension SRGDataProvider {
                 })
                 .eraseToAnyPublisher()
             }
+            .switchToLatest()
             .eraseToAnyPublisher()
     }
     

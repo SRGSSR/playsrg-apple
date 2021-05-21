@@ -23,14 +23,14 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        if let publisher = section.properties.publisher(triggerId: trigger.id(section), filter: filter) {
+        if let publisher = section.properties.publisher(triggerId: trigger.id(TriggerId.loadMore), filter: filter) {
             publisher
                 .scan([]) { $0 + $1 }
                 .map { State.loaded(items: removeDuplicates(in: $0)) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .triggerable(by: signal())
+                .publishAgain(on: reloadSignal())
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
         }
@@ -40,40 +40,27 @@ class SectionModel: ObservableObject {
     }
     
     func loadMore() {
-        trigger.signal(section)
+        trigger.signal(TriggerId.loadMore)
     }
     
     func reload() {
-        
+        trigger.signal(TriggerId.reload)
     }
     
-    func signal() -> AnyPublisher<Void, Never> {
-        // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
-        //       In this case the model should just be provided to the notification pipeline, in a stateless
-        //       way, avoiding capture issues
-        return NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
-            .filter { [weak self] notification in
-                guard let self = self else { return false }
-                return ReachabilityBecameReachable(notification) && self.state.isEmpty
-            }
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-}
-
-extension Publisher {
-    /**
-     *  Make the whole pipeline above it triggerable additional times when a second signal publisher emits a value.
-     *  Note that the affected pipeline executes at least once normally.
-     */
-    public func triggerable<S>(by signal: S) -> AnyPublisher<Self.Output, Self.Failure> where S: Publisher, S.Failure == Never {
-        return signal
-            .map { _ in }
-            .prepend(())
-            .flatMap { _ in
-                return self
-            }
-            .eraseToAnyPublisher()
+    func reloadSignal() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
+            //       In this case the model should just be provided to the notification pipeline, in a stateless
+            //       way, avoiding capture issues
+            NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
+                .filter { [weak self] notification in
+                    guard let self = self else { return false }
+                    return ReachabilityBecameReachable(notification) && self.state.isEmpty
+                }
+                .map { _ in },
+            trigger.sentinel(for: TriggerId.reload)
+        )
+        .eraseToAnyPublisher()
     }
 }
 
@@ -96,5 +83,10 @@ extension SectionModel {
                 return true
             }
         }
+    }
+    
+    enum TriggerId {
+        case loadMore
+        case reload
     }
 }

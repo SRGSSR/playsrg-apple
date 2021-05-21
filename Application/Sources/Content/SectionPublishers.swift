@@ -29,7 +29,7 @@ extension SRGDataProvider {
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
         #if os(iOS)
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
-            .flatMap { medias -> AnyPublisher<[SRGMedia], Error> in
+            .map { medias -> AnyPublisher<[SRGMedia], Error> in
                 var regionalizedMedias = medias
                 return Publishers.MergeMany(regionalizedMedias.compactMap { media -> AnyPublisher<[SRGMedia], Error>? in
                     guard let channelUid = media.channel?.uid else { return nil }
@@ -55,6 +55,7 @@ extension SRGDataProvider {
                 })
                 .eraseToAnyPublisher()
             }
+            .switchToLatest()
             .eraseToAnyPublisher()
         #else
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
@@ -68,7 +69,7 @@ extension SRGDataProvider {
         NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .map { _ in }
             .prepend(())
-            .flatMap { _ in
+            .map { _ in
                 return Future<[SRGHistoryEntry], Error> { promise in
                     let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                     SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
@@ -81,12 +82,11 @@ extension SRGDataProvider {
                     }
                 }
             }
+            .switchToLatest()
             .map { historyEntries in
-                historyEntries.compactMap { $0.uid }
+                return self.medias(withUrns: historyEntries.compactMap(\.uid), pageSize: 50 /* Use largest page size */)
             }
-            .flatMap { urns in
-                return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-            }
+            .switchToLatest()
             // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
             //       the main thread and with a single user data access each time. We could  instead use a currrently
             //       private history API to combine the history entries we have and the associated medias we retrieve
@@ -110,7 +110,7 @@ extension SRGDataProvider {
             }
             .map { _ in }
             .prepend(())
-            .flatMap { _ in
+            .map { _ in
                 return Future<[SRGPlaylistEntry], Error> { promise in
                     let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                     SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
@@ -123,12 +123,11 @@ extension SRGDataProvider {
                     }
                 }
             }
+            .switchToLatest()
             .map { playlistEntries in
-                playlistEntries.compactMap { $0.uid }
+                return self.medias(withUrns: playlistEntries.compactMap(\.uid), pageSize: 50 /* Use largest page size */)
             }
-            .flatMap { urns in
-                return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
-            }
+            .switchToLatest()
             .eraseToAnyPublisher()
     }
     
@@ -159,11 +158,12 @@ extension SRGDataProvider {
             }
             .map { _ in }
             .prepend(())
-            .flatMap { _ in
+            .map { _ in
                 // For some reason (compiler bug?) the type of the items is seen as [Any]
                 return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
                     .map { filter?.compatibleShows($0) ?? $0 }
             }
+            .switchToLatest()
             .eraseToAnyPublisher()
     }
 }

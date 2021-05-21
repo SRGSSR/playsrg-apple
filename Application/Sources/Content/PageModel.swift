@@ -44,7 +44,7 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     private var sections: [Section] {
-        return rows.map { $0.section }
+        return rows.map(\.section)
     }
     
     private var cancellables = Set<AnyCancellable>()
@@ -58,7 +58,7 @@ class PageModel: Identifiable, ObservableObject {
         
         Just((id: self.id, rows: rows, trigger: trigger))
             .throttle(for: 30, scheduler: RunLoop.main, latest: true)
-            .flatMap { context in
+            .map { context in
                 return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows, trigger: context.trigger)
                     .map { State.loaded(rows: $0) }
                     .catch { error -> AnyPublisher<State, Never> in
@@ -72,6 +72,7 @@ class PageModel: Identifiable, ObservableObject {
                         }
                     }
             }
+            .switchToLatest()
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.internalState, on: self)
             .store(in: &cancellables)
