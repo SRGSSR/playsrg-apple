@@ -24,8 +24,12 @@ class SectionModel: ObservableObject {
         self.section = section
         
         if let publisher = section.properties.publisher(filter: filter, triggerId: trigger.id(section)) {
+            // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
+            //       In this case the model should just be provided to the notification pipeline, in a stateless
+            //       way, avoiding capture issues
             NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
-                .filter { notification in
+                .filter { [weak self] notification in
+                    guard let self = self else { return false }
                     return ReachabilityBecameReachable(notification) && self.state.isEmpty
                 }
                 .map { _ in }
