@@ -26,7 +26,7 @@ class SectionModel: ObservableObject {
         if let publisher = section.properties.publisher(triggerId: trigger.id(section), filter: filter) {
             publisher
                 .scan([]) { $0 + $1 }
-                .map { State.loaded(items: $0) }
+                .map { State.loaded(items: removeDuplicates(in: $0)) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
@@ -62,6 +62,10 @@ class SectionModel: ObservableObject {
 }
 
 extension Publisher {
+    /**
+     *  Make the whole pipeline above it triggerable additional times when a second signal publisher emits a value.
+     *  Note that the affected pipeline executes at least once normally.
+     */
     public func triggerable<S>(by signal: S) -> AnyPublisher<Self.Output, Self.Failure> where S: Publisher, S.Failure == Never {
         return signal
             .map { _ in }

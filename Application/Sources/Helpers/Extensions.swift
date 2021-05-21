@@ -8,13 +8,29 @@ import Combine
 import Foundation
 import SwiftUI
 
-func constant<T>(iOS: T, tvOS: T) -> T
-{
+func constant<T>(iOS: T, tvOS: T) -> T {
     #if os(tvOS)
     return tvOS
     #else
     return iOS
     #endif
+}
+
+/**
+ *  Unique items: remove duplicated items. Items must not appear more than one time in the same row.
+ *
+ *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
+ */
+func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
+    var itemDictionnary = [T: Bool]()
+    
+    return items.filter {
+        let isNew = itemDictionnary.updateValue(true, forKey: $0) == nil
+        if !isNew {
+            PlayLogWarning(category: "duplicates", message: "A duplicate item has been removed: \($0)")
+        }
+        return isNew
+    }
 }
 
 extension Comparable {

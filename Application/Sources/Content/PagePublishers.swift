@@ -59,7 +59,7 @@ extension SRGDataProvider {
             return publisher
                 .scan([]) { $0 + $1 }
                 .replaceError(with: section.properties.placeholderItems)
-                .map { PageModel.Row(section: section, items: Self.rowItems(Self.removeDuplicateItems($0), in: section)) }
+                .map { PageModel.Row(section: section, items: Self.rowItems(removeDuplicates(in: $0), in: section)) }
                 .eraseToAnyPublisher()
         }
         else {
@@ -78,23 +78,6 @@ private extension SRGDataProvider {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
-    }
-    
-    /**
-     *  Unique items: remove duplicated items. Items must not appear more than one time in the same row.
-     *
-     *  Idea borrowed from https://www.hackingwithswift.com/example-code/language/how-to-remove-duplicate-items-from-an-array
-     */
-    private static func removeDuplicateItems<T: Hashable>(_ items: [T]) -> [T] {
-        var itemDictionnary = [T: Bool]()
-        
-        return items.filter {
-            let isNew = itemDictionnary.updateValue(true, forKey: $0) == nil
-            if !isNew {
-                PlayLogWarning(category: "collection", message: "A duplicate item has been removed: \($0)")
-            }
-            return isNew
-        }
     }
     
     private static func reusableRows(from existingRows: [PageModel.Row], for sections: [PageModel.Section]) -> [PageModel.Row] {
