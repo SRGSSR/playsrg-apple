@@ -12,11 +12,8 @@ import UIKit
 // MARK: View controller
 
 class PageViewController: DataViewController {
-    enum Header: String {
-        case global
-    }
-    
     private let model: PageModel
+    
     private var cancellables = Set<AnyCancellable>()
 
     private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
@@ -30,31 +27,9 @@ class PageViewController: DataViewController {
     
     private var refreshTriggered = false
     
-    #if os(iOS)
-    private typealias CollectionView = DampedCollectionView
-    #else
-    private typealias CollectionView = UICollectionView
-    #endif
-    
-    @objc static func videosViewController() -> UIViewController {
-        return PageViewController(id: .video)
-    }
-    
-    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> UIViewController {
-        return PageViewController(id: .audio(channel: channel))
-    }
-    
-    @objc static func liveViewController() -> UIViewController {
-        return PageViewController(id: .live)
-    }
-    
-    @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
-        return PageViewController(id: .topic(topic: topic))
-    }
-    
-    private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
+    private static func snapshot(from model: PageModel) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
-        if case let .loaded(rows: rows) = state {
+        if case let .loaded(rows: rows) = model.state {
             for row in rows {
                 snapshot.appendSections([row.section])
                 snapshot.appendItems(row.items, toSection: row.section)
@@ -153,8 +128,8 @@ class PageViewController: DataViewController {
         }
         
         model.$state
-            .sink { [weak self] state in
-                self?.reloadData(with: state)
+            .sink { [weak self] _ in
+                self?.reloadData()
             }
             .store(in: &cancellables)
     }
@@ -169,8 +144,8 @@ class PageViewController: DataViewController {
         model.refresh()
     }
     
-    func reloadData(with state: PageModel.State) {
-        switch state {
+    func reloadData() {
+        switch model.state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
@@ -181,7 +156,7 @@ class PageViewController: DataViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
-            self.dataSource.apply(Self.snapshot(from: state)) {
+            self.dataSource.apply(Self.snapshot(from: self.model)) {
                 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
@@ -201,6 +176,40 @@ class PageViewController: DataViewController {
         refreshTriggered = true
     }
     #endif
+}
+
+// MARK: Types
+
+private extension PageViewController {
+    enum Header: String {
+        case global
+    }
+    
+    #if os(iOS)
+    private typealias CollectionView = DampedCollectionView
+    #else
+    private typealias CollectionView = UICollectionView
+    #endif
+}
+
+// MARK: Objective-C constructors
+
+extension PageViewController {
+    @objc static func videosViewController() -> UIViewController {
+        return PageViewController(id: .video)
+    }
+    
+    @objc static func audiosViewController(forRadioChannel channel: RadioChannel) -> UIViewController {
+        return PageViewController(id: .audio(channel: channel))
+    }
+    
+    @objc static func liveViewController() -> UIViewController {
+        return PageViewController(id: .live)
+    }
+    
+    @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
+        return PageViewController(id: .topic(topic: topic))
+    }
 }
 
 // MARK: Protocols
@@ -321,7 +330,7 @@ extension PageViewController: TabBarActionable {
 
 // MARK: Layout
 
-extension PageViewController {
+private extension PageViewController {
     private static let sectionSpacing: CGFloat = constant(iOS: 35, tvOS: 70)
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let sectionTop: CGFloat = constant(iOS: 3, tvOS: 15)
