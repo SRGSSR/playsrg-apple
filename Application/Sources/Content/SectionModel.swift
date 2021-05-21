@@ -24,24 +24,13 @@ class SectionModel: ObservableObject {
         self.section = section
         
         if let publisher = section.properties.publisher(triggerId: trigger.id(section), filter: filter) {
-            // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
-            //       In this case the model should just be provided to the notification pipeline, in a stateless
-            //       way, avoiding capture issues
-            NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
-                .filter { [weak self] notification in
-                    guard let self = self else { return false }
-                    return ReachabilityBecameReachable(notification) && self.state.isEmpty
+            publisher
+                .scan([]) { $0 + $1 }
+                .map { State.loaded(items: $0) }
+                .catch { error in
+                    return Just(State.failed(error: error))
                 }
-                .map { _ in }
-                .prepend(())
-                .flatMap {
-                    return publisher
-                        .scan([]) { $0 + $1 }
-                        .map { State.loaded(items: $0) }
-                        .catch { error in
-                            return Just(State.failed(error: error))
-                        }
-                }
+                .triggerable(by: signal())
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
         }
@@ -52,6 +41,35 @@ class SectionModel: ObservableObject {
     
     func loadMore() {
         trigger.signal(section)
+    }
+    
+    func reload() {
+        
+    }
+    
+    func signal() -> AnyPublisher<Void, Never> {
+        // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
+        //       In this case the model should just be provided to the notification pipeline, in a stateless
+        //       way, avoiding capture issues
+        return NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
+            .filter { [weak self] notification in
+                guard let self = self else { return false }
+                return ReachabilityBecameReachable(notification) && self.state.isEmpty
+            }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+}
+
+extension Publisher {
+    public func triggerable<S>(by signal: S) -> AnyPublisher<Self.Output, Self.Failure> where S: Publisher, S.Failure == Never {
+        return signal
+            .map { _ in }
+            .prepend(())
+            .flatMap { _ in
+                return self
+            }
+            .eraseToAnyPublisher()
     }
 }
 
