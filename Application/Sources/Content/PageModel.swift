@@ -241,7 +241,12 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
-            return presentation.hasDetailPage
+            switch presentation.type {
+            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
+                return true
+            default:
+                return presentation.hasDetailPage
+            }
         }
     }
     

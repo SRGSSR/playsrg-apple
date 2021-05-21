@@ -19,9 +19,3 @@ protocol SectionProperties {
     
     func publisher(triggerId: Trigger.Id, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>?
 }
-
-extension SectionProperties {
-    func publisher(triggerId: Trigger.Id) -> AnyPublisher<[Content.Item], Error>? {
-        return publisher(triggerId: triggerId, filter: nil)
-    }
-}
