@@ -64,71 +64,73 @@ extension SRGDataProvider {
     }
     
     func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
-        // Drive updates with notifications, using `prepend(_:)` to trigger an initial update
-        // Inpsired from https://stackoverflow.com/questions/66075000/swift-combine-publishers-where-one-hasnt-sent-a-value-yet
-        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .map { _ in }
-            .prepend(())
-            .map { _ in
-                return Future<[SRGHistoryEntry], Error> { promise in
-                    let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
-                    SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                        if let error = error {
-                            promise(.failure(error))
-                        }
-                        else {
-                            promise(.success(historyEntries ?? []))
-                        }
-                    }
+        func historyUpdateSignal() -> AnyPublisher<Void, Never> {
+            return NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+                .map { _ in }
+                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+                .eraseToAnyPublisher()
+        }
+        
+        return Future<[String], Error> { promise in
+            let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
+            SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
+                if let error = error {
+                    promise(.failure(error))
+                }
+                else {
+                    promise(.success(historyEntries?.compactMap(\.uid) ?? []))
                 }
             }
-            .switchToLatest()
-            .map { historyEntries in
-                return self.medias(withUrns: historyEntries.compactMap(\.uid), pageSize: 50 /* Use largest page size */)
-            }
-            .switchToLatest()
-            // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
-            //       the main thread and with a single user data access each time. We could  instead use a currrently
-            //       private history API to combine the history entries we have and the associated medias we retrieve
-            //       with a network request, calculating the progress on a background thread and with only a single
-            //       user data access (the one made at the beginning). This optimization seems premature, though, so
-            //       for the moment a simpler implementation is used.
-            .receive(on: DispatchQueue.main)
-            .map { $0.filter { HistoryCanResumePlaybackForMedia($0) } }
-            .eraseToAnyPublisher()
+        }
+        .publishAgain(on: historyUpdateSignal())
+        .map { urns in
+            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+        }
+        .switchToLatest()
+        // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
+        //       the main thread and with a single user data access each time. We could  instead use a currrently
+        //       private history API to combine the history entries we have and the associated medias we retrieve
+        //       with a network request, calculating the progress on a background thread and with only a single
+        //       user data access (the one made at the beginning). This optimization seems premature, though, so
+        //       for the moment a simpler implementation is used.
+        .receive(on: DispatchQueue.main)
+        .map { $0.filter { HistoryCanResumePlaybackForMedia($0) } }
+        .eraseToAnyPublisher()
     }
     
     func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .filter { notification in
-                if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
-                    return true
-                }
-                else {
-                    return false
-                }
-            }
-            .map { _ in }
-            .prepend(())
-            .map { _ in
-                return Future<[SRGPlaylistEntry], Error> { promise in
-                    let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
-                    SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
-                        if let error = error {
-                            promise(.failure(error))
-                        }
-                        else {
-                            promise(.success(playlistEntries ?? []))
-                        }
+        func laterUpdateSignal() -> AnyPublisher<Void, Never> {
+            return NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+                .filter { notification in
+                    if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
+                        return true
+                    }
+                    else {
+                        return false
                     }
                 }
+                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+                .map { _ in }
+                .eraseToAnyPublisher()
+        }
+        
+        return Future<[String], Error> { promise in
+            let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
+            SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
+                if let error = error {
+                    promise(.failure(error))
+                }
+                else {
+                    promise(.success(playlistEntries?.compactMap(\.uid) ?? []))
+                }
             }
-            .switchToLatest()
-            .map { playlistEntries in
-                return self.medias(withUrns: playlistEntries.compactMap(\.uid), pageSize: 50 /* Use largest page size */)
-            }
-            .switchToLatest()
-            .eraseToAnyPublisher()
+        }
+        .publishAgain(on: laterUpdateSignal())
+        .map { urns in
+            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+        }
+        .switchToLatest()
+        .eraseToAnyPublisher()
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
@@ -147,23 +149,25 @@ extension SRGDataProvider {
     }
     
     func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
-        return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .filter { notification in
-                if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
-                    return true
+        func favoriteUpdateSignal() -> AnyPublisher<Void, Never> {
+            return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+                .filter { notification in
+                    if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
+                        return true
+                    }
+                    else {
+                        return false
+                    }
                 }
-                else {
-                    return false
-                }
-            }
-            .map { _ in }
-            .prepend(())
-            .map { _ in
-                // For some reason (compiler bug?) the type of the items is seen as [Any]
-                return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
-                    .map { filter?.compatibleShows($0) ?? $0 }
-            }
-            .switchToLatest()
+                .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+                .map { _ in }
+                .eraseToAnyPublisher()
+        }
+        
+        // For some reason (compiler bug?) the type of the items is seen as [Any]
+        return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
+            .map { filter?.compatibleShows($0) ?? $0 }
+            .publishAgain(on: favoriteUpdateSignal())
             .eraseToAnyPublisher()
     }
 }
