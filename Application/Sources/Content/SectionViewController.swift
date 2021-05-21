@@ -102,8 +102,8 @@ class SectionViewController: UIViewController {
         }
                 
         model.$state
-            .sink { [weak self] _ in
-                self?.reloadData()
+            .sink { [weak self] state in
+                self?.reloadData(for: state)
             }
             .store(in: &cancellables)
     }
@@ -114,8 +114,8 @@ class SectionViewController: UIViewController {
     }
     #endif
     
-    func reloadData() {
-        switch model.state {
+    func reloadData(for state: SectionModel.State) {
+        switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):

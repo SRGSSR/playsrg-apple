@@ -128,8 +128,8 @@ class PageViewController: DataViewController {
         }
         
         model.$state
-            .sink { [weak self] _ in
-                self?.reloadData()
+            .sink { [weak self] state in
+                self?.reloadData(for: state)
             }
             .store(in: &cancellables)
     }
@@ -144,8 +144,8 @@ class PageViewController: DataViewController {
         model.refresh()
     }
     
-    func reloadData() {
-        switch model.state {
+    func reloadData(for state: PageModel.State) {
+        switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
