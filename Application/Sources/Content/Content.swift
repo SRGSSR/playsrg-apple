@@ -101,12 +101,9 @@ private extension Content {
             }
         }
         
-        func publisher(paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(pageSize: UInt, paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
-            let configuration = ApplicationConfiguration.shared
-            
-            let vendor = configuration.vendor
-            let pageSize = configuration.pageSize
+            let vendor = ApplicationConfiguration.shared.vendor
             
             switch contentSection.type {
             case .medias:
@@ -249,12 +246,11 @@ private extension Content {
             }
         }
         
-        func publisher(paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(pageSize: UInt, paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
-            let configuration = ApplicationConfiguration.shared
             
+            let configuration = ApplicationConfiguration.shared
             let vendor = configuration.vendor
-            let pageSize = configuration.pageSize
             
             switch configuredSection.type {
             case let .radioLatestEpisodes(channelUid: channelUid):

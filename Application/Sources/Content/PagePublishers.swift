@@ -9,6 +9,10 @@ import SRGDataProviderCombine
 // MARK: Publishers
 
 extension SRGDataProvider {
+    static func pageSize() -> UInt {
+        return ApplicationConfiguration.shared.pageSize
+    }
+    
     /// Publishes rows associated with a page id, starting from the provided rows. Updates are published down the pipeline
     /// as they are retrieved.
     func rowsPublisher(id: PageModel.Id, existingRows: [PageModel.Row], trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
@@ -56,7 +60,7 @@ extension SRGDataProvider {
     
     /// Publishes the row for content for a given section and page id
     func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
-        if let publisher = section.properties.publisher(paginatedBy: trigger.triggerable(activatedBy: section), filter: id) {
+        if let publisher = section.properties.publisher(pageSize: Self.pageSize(), paginatedBy: trigger.triggerable(activatedBy: section), filter: id) {
             return publisher
                 .scan([]) { $0 + $1 }
                 .replaceError(with: section.properties.placeholderItems)
@@ -75,7 +79,7 @@ extension SRGDataProvider {
 private extension SRGDataProvider {
     private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if !rowItems.isEmpty && section.layoutProperties.canOpenDetailPage && section.layoutProperties.hasSwimlaneLayout {
+        if rowItems.count >= Self.pageSize() && section.layoutProperties.canOpenDetailPage && section.layoutProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems

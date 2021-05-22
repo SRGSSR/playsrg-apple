@@ -23,7 +23,8 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        if let publisher = section.properties.publisher(paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore), filter: filter) {
+        let pageSize = ApplicationConfiguration.shared.pageSize
+        if let publisher = section.properties.publisher(pageSize: pageSize, paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore), filter: filter) {
             publisher
                 .scan([]) { $0 + $1 }
                 .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
