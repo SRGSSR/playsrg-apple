@@ -26,7 +26,7 @@ class SectionModel: ObservableObject {
         if let publisher = section.properties.publisher(paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore), filter: filter) {
             publisher
                 .scan([]) { $0 + $1 }
-                .map { State.loaded(items: removeDuplicates(in: $0)) }
+                .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
@@ -35,7 +35,7 @@ class SectionModel: ObservableObject {
                 .assign(to: &$state)
         }
         else {
-            self.state = .loaded(items: [])
+            self.state = .loaded(row: Row(section: section, items: []))
         }
     }
     
@@ -69,15 +69,16 @@ class SectionModel: ObservableObject {
 extension SectionModel {
     typealias Section = Content.Section
     typealias Item = Content.Item
+    typealias Row = CollectionRow<Section, Item>
     
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(items: [Item])
+        case loaded(row: Row)
         
         var isEmpty: Bool {
-            if case let .loaded(items) = self {
-                return items.isEmpty
+            if case let .loaded(row) = self {
+                return row.isEmpty
             }
             else {
                 return true

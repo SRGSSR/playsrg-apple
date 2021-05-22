@@ -26,11 +26,11 @@ class SectionViewController: UIViewController {
     
     private var refreshTriggered = false
     
-    private static func snapshot(from model: SectionModel) -> NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item> {
+    private static func snapshot(from state: SectionModel.State) -> NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item>()
-        if case let .loaded(items: items) = model.state {
-            snapshot.appendSections([model.section])
-            snapshot.appendItems(items, toSection: model.section)
+        if case let .loaded(row: row) = state {
+            snapshot.appendSections([row.section])
+            snapshot.appendItems(row.items, toSection: row.section)
         }
         return snapshot
     }
@@ -120,13 +120,13 @@ class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case let .loaded(items: items):
-            emptyView.content = items.isEmpty ? EmptyView(state: .empty) : nil
+        case let .loaded(row: row):
+            emptyView.content = row.isEmpty ? EmptyView(state: .empty) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
-            self.dataSource.apply(Self.snapshot(from: self.model)) {
+            self.dataSource.apply(Self.snapshot(from: state)) {
                 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435

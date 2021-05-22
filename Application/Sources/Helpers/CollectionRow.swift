@@ -14,4 +14,8 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     let section: Section
     /// Items contained within the section.
     let items: [Item]
+    
+    var isEmpty: Bool {
+        return items.isEmpty
+    }
 }

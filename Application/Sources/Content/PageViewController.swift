@@ -27,9 +27,9 @@ class PageViewController: DataViewController {
     
     private var refreshTriggered = false
     
-    private static func snapshot(from model: PageModel) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
+    private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
-        if case let .loaded(rows: rows) = model.state {
+        if case let .loaded(rows: rows) = state {
             for row in rows {
                 snapshot.appendSections([row.section])
                 snapshot.appendItems(row.items, toSection: row.section)
@@ -157,7 +157,7 @@ class PageViewController: DataViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
-            self.dataSource.apply(Self.snapshot(from: self.model)) {
+            self.dataSource.apply(Self.snapshot(from: state)) {
                 #if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435

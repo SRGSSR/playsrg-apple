@@ -90,7 +90,7 @@ class PageModel: Identifiable, ObservableObject {
     
     private static func state(from internalState: State) -> State {
         if case let .loaded(rows: rows) = internalState {
-            return .loaded(rows: rows.filter { !$0.items.isEmpty })
+            return .loaded(rows: rows.filter { !$0.isEmpty })
         }
         else {
             return internalState
