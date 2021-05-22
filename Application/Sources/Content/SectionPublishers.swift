@@ -136,11 +136,11 @@ extension SRGDataProvider {
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
         let trigger = Trigger()
         
-        return shows(withUrns: urns, pageSize: 50 /* Use largest page size */, triggeredBy: trigger.triggerable(with: 1))
+        return shows(withUrns: urns, pageSize: 50 /* Use largest page size */, triggeredBy: trigger.triggerable(activatedBy: 1))
             .handleEvents(receiveOutput: { shows in
                 // FIXME: There is probably a better way
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
-                    trigger.signal(1)
+                    trigger.activate(for: 1)
                 }
             })
             .reduce([]) { $0 + $1 }

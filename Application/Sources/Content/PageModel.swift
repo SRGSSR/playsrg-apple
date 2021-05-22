@@ -80,7 +80,7 @@ class PageModel: Identifiable, ObservableObject {
     
     func loadMore() {
         if let lastSection = sections.last, lastSection.layoutProperties.hasGridLayout {
-            trigger.signal(lastSection)
+            trigger.activate(for: lastSection)
         }
     }
     
