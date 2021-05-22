@@ -237,7 +237,7 @@ extension PageViewController: UICollectionViewDelegate {
             switch wrappedItem {
             case let .media(media):
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            case let .show(show):
+            case let .show(show), let .showHeader(show):
                 if let navigationController = navigationController {
                     let showViewController = ShowViewController(show: show, fromPushNotification: false)
                     navigationController.pushViewController(showViewController, animated: true)
