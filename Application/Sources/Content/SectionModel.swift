@@ -31,7 +31,7 @@ class SectionModel: ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .publishAgain(onOutputFrom: reloadSignal())
+                .repeat(onOutputFrom: reloadSignal())
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
         }
@@ -50,9 +50,6 @@ class SectionModel: ObservableObject {
     
     func reloadSignal() -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
-            // TODO: Model should probably conform to some protocol for models, with a method to tell if empty.
-            //       In this case the model should just be provided to the notification pipeline, in a stateless
-            //       way, avoiding capture issues
             NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
                 .filter { [weak self] notification in
                     guard let self = self else { return false }
