@@ -101,7 +101,7 @@ private extension Content {
             }
         }
         
-        func publisher(triggeredBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             
@@ -110,11 +110,11 @@ private extension Content {
             
             switch contentSection.type {
             case .medias:
-                return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { self.filterItems($0).map { .media($0) } }
                     .eraseToAnyPublisher()
             case .showAndMedias:
-                return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: triggerable)
                     .map {
                         var items = [Content.Item]()
                         if let show = $0.show {
@@ -125,7 +125,7 @@ private extension Content {
                     }
                     .eraseToAnyPublisher()
             case .shows:
-                return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { self.filterItems($0).map { .show($0) } }
                     .eraseToAnyPublisher()
             case .predefined:
@@ -249,7 +249,7 @@ private extension Content {
             }
         }
         
-        func publisher(triggeredBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
+        func publisher(paginatedBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>? {
             let dataProvider = SRGDataProvider.current!
             let configuration = ApplicationConfiguration.shared
             
@@ -258,23 +258,23 @@ private extension Content {
             
             switch configuredSection.type {
             case let .radioLatestEpisodes(channelUid: channelUid):
-                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioMostPopular(channelUid: channelUid):
-                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioLatest(channelUid: channelUid):
-                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioLatestVideos(channelUid: channelUid):
-                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
-                return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, triggeredBy: triggerable)
+                return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: triggerable)
                     .map { $0.map { .show($0) } }
                     .eraseToAnyPublisher()
             case .radioFavoriteShows:
@@ -302,11 +302,11 @@ private extension Content {
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvLiveCenter:
-                return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
-                return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, triggeredBy: triggerable)
+                return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: triggerable)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             }

@@ -134,6 +134,6 @@ class SearchResultsModel: ObservableObject {
     
     private var mediaSearchPublisher: AnyPublisher<SRGDataProvider.MediasMatchingQuery.Output, Error>? {
         let applicationConfiguration = ApplicationConfiguration.shared
-        return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize, triggeredBy: trigger.triggerable(activatedBy: Self.triggerIndex))
+        return SRGDataProvider.current!.medias(for: applicationConfiguration.vendor, matchingQuery: query, with: searchSettings, pageSize: applicationConfiguration.pageSize, paginatedBy: trigger.triggerable(activatedBy: Self.triggerIndex))
     }
 }
