@@ -30,7 +30,7 @@ class TitleViewSize: NSObject {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(recommendedHeight))
         }
         else {
-            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(0))
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(0.001))
         }
     }
 }
