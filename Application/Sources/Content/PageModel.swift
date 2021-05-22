@@ -28,73 +28,40 @@ class PageModel: Identifiable, ObservableObject {
     
     private let trigger = Trigger()
     
-    private var internalState: State = .loading {
-        didSet {
-            state = Self.state(from: internalState)
-        }
-    }
-    
-    private var rows: [Row] {
-        if case let .loaded(rows: rows) = internalState {
-            return rows
-        }
-        else {
-            return []
-        }
-    }
-    
-    private var sections: [Section] {
-        return rows.map(\.section)
-    }
-    
-    private var cancellables = Set<AnyCancellable>()
-    
     init(id: Id) {
         self.id = id
-    }
-    
-    func refresh() {
-        cancellables = []
         
-        Just((id: self.id, rows: rows, trigger: trigger))
-            .throttle(for: 30, scheduler: RunLoop.main, latest: true)
-            .map { context in
-                return SRGDataProvider.current!.rowsPublisher(id: context.id, existingRows: context.rows, trigger: context.trigger)
-                    .map { State.loaded(rows: $0) }
-                    .catch { error -> AnyPublisher<State, Never> in
-                        if context.rows.count != 0 {
-                            return Just(State.loaded(rows: context.rows))
-                                .eraseToAnyPublisher()
-                        }
-                        else {
-                            return Just(State.failed(error: error))
-                                .eraseToAnyPublisher()
-                        }
-                    }
+        SRGDataProvider.current!.rowsPublisher(id: id, trigger: trigger)
+            .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
+            .catch { error in
+                return Just(State.failed(error: error))
             }
-            .switchToLatest()
+            .repeat(onOutputFrom: reloadSignal())
             .receive(on: DispatchQueue.main)
-            .weakAssign(to: \.internalState, on: self)
-            .store(in: &cancellables)
+            .assign(to: &$state)
     }
     
     func loadMore() {
-        if let lastSection = sections.last, lastSection.layoutProperties.hasGridLayout {
+        if let lastSection = state.sections.last, lastSection.layoutProperties.hasGridLayout {
             trigger.activate(for: lastSection)
         }
     }
     
-    func cancelRefresh() {
-        cancellables = []
+    func reload() {
+        trigger.activate(for: TriggerId.reload)
     }
     
-    private static func state(from internalState: State) -> State {
-        if case let .loaded(rows: rows) = internalState {
-            return .loaded(rows: rows.filter { !$0.isEmpty })
-        }
-        else {
-            return internalState
-        }
+    func reloadSignal() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
+                .filter { [weak self] notification in
+                    guard let self = self else { return false }
+                    return ReachabilityBecameReachable(notification) && self.state.isEmpty
+                }
+                .map { _ in },
+            trigger.signal(activatedBy: TriggerId.reload)
+        )
+        .eraseToAnyPublisher()
     }
 }
 
@@ -147,6 +114,23 @@ extension PageModel {
         case loading
         case failed(error: Error)
         case loaded(rows: [Row])
+        
+        var rows: [Row] {
+            if case let .loaded(rows: rows) = self {
+                return rows
+            }
+            else {
+                return []
+            }
+        }
+        
+        var sections: [Section] {
+            return rows.map(\.section)
+        }
+        
+        var isEmpty: Bool {
+            return rows.isEmpty
+        }
     }
     
     enum SectionLayout: Hashable {
@@ -201,9 +185,119 @@ extension PageModel {
     }
     
     typealias Row = CollectionRow<Section, Item>
+    
+    enum TriggerId {
+        case reload
+    }
+}
+
+// MARK: Publishers
+
+extension SRGDataProvider {
+    static func pageSize() -> UInt {
+        return ApplicationConfiguration.shared.pageSize
+    }
+    
+    func rowsPublisher(id: PageModel.Id, trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
+        return sectionsPublisher(id: id)
+            .map { sections -> AnyPublisher<[PageModel.Row], Never> in
+                Publishers.AccumulateLatestMany(sections.map { section in
+                    return self.rowPublisher(id: id, section: section, trigger: trigger)
+                })
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
+    }
+    
+    func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
+        switch id {
+        case .video:
+            return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
+                .map { $0.sections.map { PageModel.Section(.content($0)) } }
+                .eraseToAnyPublisher()
+        case let .topic(topic: topic):
+            return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
+                .map { $0.sections.map { PageModel.Section(.content($0)) } }
+                .eraseToAnyPublisher()
+        case let .audio(channel: channel):
+            return Just(channel.configuredSections().map { PageModel.Section(.configured($0)) })
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        case .live:
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section(.configured($0)) })
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
+        if let publisher = section.properties.publisher(pageSize: Self.pageSize(), paginatedBy: trigger.triggerable(activatedBy: section), filter: id) {
+            return publisher
+                .replaceError(with: [])
+                .scan([]) { $0 + $1 }
+                .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
+                .prepend(Self.rowPlaceholderItems(for: section))
+                .map { PageModel.Row(section: section, items: $0) }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(PageModel.Row(section: section, items: []))
+                .eraseToAnyPublisher()
+        }
+    }
+}
+
+// MARK: Helpers
+
+private extension SRGDataProvider {
+    private static func rowPlaceholderItems(for section: PageModel.Section) -> [PageModel.Item] {
+        return section.properties.placeholderItems.map { PageModel.Item(.item($0), in: section) }
+    }
+    
+    private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
+        var rowItems = items.map { PageModel.Item(.item($0), in: section) }
+        if rowItems.count >= Self.pageSize() && section.layoutProperties.canOpenDetailPage && section.layoutProperties.hasSwimlaneLayout {
+            rowItems.append(PageModel.Item(.more, in: section))
+        }
+        return rowItems
+    }
 }
 
 // MARK: Layout properties
+
+protocol PageSectionLayoutProperties {
+    var layout: PageModel.SectionLayout { get }
+    var canOpenDetailPage: Bool { get }
+}
+
+extension PageSectionLayoutProperties {
+    var accessibilityHint: String? {
+        if canOpenDetailPage {
+            return PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint")
+        }
+        else {
+            return nil
+        }
+    }
+    
+    var hasSwimlaneLayout: Bool {
+        switch layout {
+        case .mediaSwimlane, .showSwimlane:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    var hasGridLayout: Bool {
+        switch layout {
+        case .mediaGrid, .showGrid, .liveMediaGrid:
+            return true
+        default:
+            return false
+        }
+    }
+}
 
 private extension PageModel {
     struct ContentSectionProperties: PageSectionLayoutProperties {

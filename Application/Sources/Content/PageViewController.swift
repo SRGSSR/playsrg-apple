@@ -11,7 +11,7 @@ import UIKit
 
 // MARK: View controller
 
-class PageViewController: DataViewController {
+class PageViewController: UIViewController {
     private let model: PageModel
     
     private var cancellables = Set<AnyCancellable>()
@@ -141,10 +141,6 @@ class PageViewController: DataViewController {
     }
     #endif
     
-    override func refresh() {
-        model.refresh()
-    }
-    
     func reloadData(for state: PageModel.State) {
         switch state {
         case .loading:
@@ -273,7 +269,7 @@ extension PageViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
-            refresh()
+            model.reload()
             refreshTriggered = false
         }
     }
