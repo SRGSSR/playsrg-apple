@@ -82,7 +82,7 @@ extension SRGDataProvider {
                 }
             }
         }
-        .publishAgain(on: historyUpdateSignal())
+        .publishAgain(onOutputFrom: historyUpdateSignal())
         .map { urns in
             return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
         }
@@ -125,7 +125,7 @@ extension SRGDataProvider {
                 }
             }
         }
-        .publishAgain(on: laterUpdateSignal())
+        .publishAgain(onOutputFrom: laterUpdateSignal())
         .map { urns in
             return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
         }
@@ -167,7 +167,7 @@ extension SRGDataProvider {
         // For some reason (compiler bug?) the type of the items is seen as [Any]
         return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
             .map { filter?.compatibleShows($0) ?? $0 }
-            .publishAgain(on: favoriteUpdateSignal())
+            .publishAgain(onOutputFrom: favoriteUpdateSignal())
             .eraseToAnyPublisher()
     }
 }

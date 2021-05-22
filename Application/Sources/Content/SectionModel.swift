@@ -31,7 +31,7 @@ class SectionModel: ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .publishAgain(on: reloadSignal())
+                .publishAgain(onOutputFrom: reloadSignal())
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$state)
         }
