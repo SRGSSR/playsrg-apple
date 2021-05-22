@@ -36,7 +36,7 @@ class ShowDetailModel: ObservableObject {
     
     func refresh() {
         guard let show = show else { return }
-        SRGDataProvider.current!.latestMediasForShow(withUrn: show.urn, pageSize: ApplicationConfiguration.shared.pageSize, triggerId: trigger.id(Self.triggerIndex))
+        SRGDataProvider.current!.latestMediasForShow(withUrn: show.urn, pageSize: ApplicationConfiguration.shared.pageSize, triggeredBy: trigger.triggerable(with: Self.triggerIndex))
             .receive(on: DispatchQueue.main)
             .handleEvents(receiveRequest: { [weak self] _ in
                 guard let self = self else { return }

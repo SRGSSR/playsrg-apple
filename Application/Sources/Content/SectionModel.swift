@@ -23,7 +23,7 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        if let publisher = section.properties.publisher(triggerId: trigger.id(TriggerId.loadMore), filter: filter) {
+        if let publisher = section.properties.publisher(triggeredBy: trigger.triggerable(with: TriggerId.loadMore), filter: filter) {
             publisher
                 .scan([]) { $0 + $1 }
                 .map { State.loaded(items: removeDuplicates(in: $0)) }
@@ -58,7 +58,7 @@ class SectionModel: ObservableObject {
                     return ReachabilityBecameReachable(notification) && self.state.isEmpty
                 }
                 .map { _ in },
-            trigger.sentinel(for: TriggerId.reload)
+            trigger.receiver(for: TriggerId.reload)
         )
         .eraseToAnyPublisher()
     }

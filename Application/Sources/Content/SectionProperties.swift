@@ -17,5 +17,5 @@ protocol SectionProperties {
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
     
-    func publisher(triggerId: Trigger.Id, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>?
+    func publisher(triggeredBy triggerable: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>?
 }

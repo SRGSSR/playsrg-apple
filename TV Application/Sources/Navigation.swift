@@ -72,7 +72,7 @@ func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
     present(pageViewController, animated: animated)
 }
 
-func navigateToSection(_ section: Content.Section, filter: SectionFiltering, animated: Bool = true) {
+func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
     guard !isPresenting else { return }
     
     let sectionViewController = SectionViewController(section: section, filter: filter)
