@@ -53,6 +53,20 @@ extension String {
     }
 }
 
+extension Array {
+    func appending(_ newElement: Element) -> Array {
+        var array = self
+        array.append(newElement)
+        return array
+    }
+    
+    func appending<S>(contentsOf newElements: S) -> Array where Element == S.Element, S: Sequence {
+        var array = self
+        array.append(contentsOf: newElements)
+        return array
+    }
+}
+
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
         return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)

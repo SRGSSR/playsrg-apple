@@ -33,7 +33,6 @@ enum Content {
         
         case showPlaceholder(index: Int)
         case show(_ show: SRGShow)
-        case showHeader(_ show: SRGShow)
         
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
@@ -108,7 +107,15 @@ private extension Content {
             case .topicSelector:
                 return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
             case .swimlane, .hero, .grid:
-                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                switch contentSection.type {
+                case .showAndMedias:
+                    let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
+                case .shows:
+                    return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                case .none, .medias, .predefined:
+                    return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
@@ -130,7 +137,7 @@ private extension Content {
                     .map {
                         var items = [Content.Item]()
                         if let show = $0.show {
-                            items.append(.showHeader(show))
+                            items.append(.show(show))
                         }
                         items.append(contentsOf: $0.medias.map { .media($0) })
                         return items

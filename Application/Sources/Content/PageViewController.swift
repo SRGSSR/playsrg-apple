@@ -233,7 +233,7 @@ extension PageViewController: UICollectionViewDelegate {
             switch wrappedItem {
             case let .media(media):
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            case let .show(show), let .showHeader(show):
+            case let .show(show):
                 if let navigationController = navigationController {
                     let showViewController = ShowViewController(show: show, fromPushNotification: false)
                     navigationController.pushViewController(showViewController, animated: true)
@@ -492,7 +492,7 @@ private extension PageViewController {
                     MediaCell(media: media, section: item.section)
                 case .showPlaceholder:
                     ShowCell(show: nil, section: item.section)
-                case let .show(show), let .showHeader(show):
+                case let .show(show):
                     ShowCell(show: show, section: item.section)
                 case .topicPlaceholder:
                     TopicCell(topic: nil)
