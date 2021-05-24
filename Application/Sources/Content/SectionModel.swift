@@ -23,9 +23,7 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        let pageSize = ApplicationConfiguration.shared.pageSize
-        
-        section.properties.publisher(pageSize: pageSize,
+        section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
                                      paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
                                      reloadedBy: trigger.triggerable(activatedBy: TriggerId.reload),
                                      filter: filter)

@@ -31,13 +31,20 @@ class PageModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         
-        SRGDataProvider.current!.rowsPublisher(id: id, trigger: trigger)
-            .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
-            .catch { error in
-                return Just(State.failed(error: error))
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) { [weak self] () -> AnyPublisher<[PageModel.Row], Error> in
+            guard let self = self else {
+                return Just([])
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
             }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
+            return SRGDataProvider.current!.rowsPublisher(id: id, currentRows: self.state.rows, trigger: self.trigger)
+        }
+        .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
+        .catch { error in
+            return Just(State.failed(error: error))
+        }
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$state)
     }
     
     func loadMore() {
@@ -181,17 +188,18 @@ extension PageModel {
 
 // MARK: Publishers
 
-extension SRGDataProvider {
-    func rowsPublisher(id: PageModel.Id, trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) {
-            return self.sectionsPublisher(id: id)
-                .map { sections in
-                    Publishers.AccumulateLatestMany(sections.map { section in
-                        return self.rowPublisher(id: id, section: section, trigger: trigger)
-                    })
-                }
-                .switchToLatest()
-        }
+private extension SRGDataProvider {
+    func rowsPublisher(id: PageModel.Id, currentRows: [PageModel.Row], trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
+        return self.sectionsPublisher(id: id)
+            .map { sections in
+                Publishers.AccumulateLatestMany(sections.map { section in
+                    return self.rowPublisher(id: id, section: section, trigger: trigger)
+                        .prepend(Self.placeholderRow(for: section, currentRows: currentRows))
+                        .eraseToAnyPublisher()
+                })
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
     
     func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
@@ -223,7 +231,6 @@ extension SRGDataProvider {
                                                 filter: id)
                 .replaceError(with: [])
                 .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
-                .prepend(Self.rowPlaceholderItems(for: section))
                 .map { PageModel.Row(section: section, items: $0) }
                 .eraseToAnyPublisher()
         }
@@ -233,16 +240,25 @@ extension SRGDataProvider {
 // MARK: Helpers
 
 private extension SRGDataProvider {
-    private static func rowPlaceholderItems(for section: PageModel.Section) -> [PageModel.Item] {
-        return section.properties.placeholderItems.map { PageModel.Item(.item($0), in: section) }
-    }
-    
-    private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
+    static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
         if rowItems.count > 0 && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
+    }
+    
+    static func placeholderRowItems(for section: PageModel.Section) -> [PageModel.Item] {
+        return section.properties.placeholderItems.map { PageModel.Item(.item($0), in: section) }
+    }
+    
+    static func placeholderRow(for section: PageModel.Section, currentRows: [PageModel.Row]) -> PageModel.Row {
+        if let row = currentRows.first(where: { $0.section == section }) {
+            return row
+        }
+        else {
+            return PageModel.Row(section: section, items: Self.placeholderRowItems(for: section))
+        }
     }
 }
 
