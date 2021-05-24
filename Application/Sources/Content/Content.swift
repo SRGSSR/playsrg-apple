@@ -371,6 +371,7 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
+    #if os(iOS)
     /// Publishes the regional media which corresponds to the specified media, if any.
     private func regionalizeRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
         if let channelUid = media.channel?.uid,
@@ -393,6 +394,7 @@ extension SRGDataProvider {
                 .eraseToAnyPublisher()
         }
     }
+    #endif
     
     /// Publishes radio livestreams, replacing regional radio channels. Updates are published down the pipeline as they
     /// are retrieved.
