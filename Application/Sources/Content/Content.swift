@@ -182,17 +182,17 @@ private extension Content {
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
                 case .resumePlayback:
-                    return dataProvider.historyPublisher()
+                    return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator)
                         .map { medias in
                             let filteredMedias = filter?.compatibleMedias(medias) ?? medias
-                            return filteredMedias.prefix(Int(pageSize)).map { .media($0) }
+                            return filteredMedias.map { .media($0) }
                         }
                         .eraseToAnyPublisher()
                 case .watchLater:
-                    return dataProvider.laterPublisher()
+                    return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator)
                         .map { medias in
                             let filteredMedias = filter?.compatibleMedias(medias) ?? medias
-                            return filteredMedias.prefix(Int(pageSize)).map { .media($0) } }
+                            return filteredMedias.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .showAccess:
                     #if os(iOS)
@@ -414,7 +414,7 @@ extension SRGDataProvider {
         #endif
     }
     
-    func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
+    func historyPublisher(pageSize: UInt, paginatedBy paginator: Triggerable) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -431,7 +431,7 @@ extension SRGDataProvider {
             }
         }
         .map { urns in
-            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
         }
         .switchToLatest()
         // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
@@ -445,7 +445,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher() -> AnyPublisher<[SRGMedia], Error> {
+    func laterPublisher(pageSize: UInt, paginatedBy paginator: Triggerable) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -462,7 +462,7 @@ extension SRGDataProvider {
             }
         }
         .map { urns in
-            return self.medias(withUrns: urns, pageSize: 50 /* Use largest page size */)
+            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
         }
         .switchToLatest()
         .eraseToAnyPublisher()
