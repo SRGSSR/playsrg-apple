@@ -24,20 +24,17 @@ class SectionModel: ObservableObject {
         self.section = section
         
         let pageSize = ApplicationConfiguration.shared.pageSize
-        if let publisher = section.properties.publisher(pageSize: pageSize, paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore), filter: filter) {
-            publisher
-                .scan([]) { $0 + $1 }
-                .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
-                .repeat(onOutputFrom: reloadSignal())
-                .receive(on: DispatchQueue.main)
-                .assign(to: &$state)
-        }
-        else {
-            self.state = .loaded(row: Row(section: section, items: []))
-        }
+        
+        section.properties.publisher(pageSize: pageSize,
+                                     paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
+                                     reloadedBy: trigger.triggerable(activatedBy: TriggerId.reload),
+                                     filter: filter)
+            .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
+            .catch { error in
+                return Just(State.failed(error: error))
+            }
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$state)
     }
     
     func loadMore() {
@@ -46,19 +43,6 @@ class SectionModel: ObservableObject {
     
     func reload() {
         trigger.activate(for: TriggerId.reload)
-    }
-    
-    func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
-            NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
-                .filter { [weak self] notification in
-                    guard let self = self else { return false }
-                    return ReachabilityBecameReachable(notification) && self.state.isEmpty
-                }
-                .map { _ in },
-            trigger.signal(activatedBy: TriggerId.reload)
-        )
-        .eraseToAnyPublisher()
     }
 }
 

@@ -36,32 +36,18 @@ class PageModel: Identifiable, ObservableObject {
             .catch { error in
                 return Just(State.failed(error: error))
             }
-            .repeat(onOutputFrom: reloadSignal())
             .receive(on: DispatchQueue.main)
             .assign(to: &$state)
     }
     
     func loadMore() {
-        if let lastSection = state.sections.last, lastSection.layoutProperties.hasGridLayout {
-            trigger.activate(for: lastSection)
+        if let lastSection = state.sections.last, lastSection.pageProperties.hasGridLayout {
+            trigger.activate(for: TriggerId.loadMore(section: lastSection))
         }
     }
     
     func reload() {
-        trigger.activate(for: TriggerId.reload)
-    }
-    
-    func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
-            NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange, object: nil)
-                .filter { [weak self] notification in
-                    guard let self = self else { return false }
-                    return ReachabilityBecameReachable(notification) && self.state.isEmpty
-                }
-                .map { _ in },
-            trigger.signal(activatedBy: TriggerId.reload)
-        )
-        .eraseToAnyPublisher()
+        trigger.activate(for: TriggerId.reloadAll)
     }
 }
 
@@ -159,7 +145,7 @@ extension PageModel {
             return wrappedValue.properties
         }
         
-        var layoutProperties: PageSectionLayoutProperties {
+        var pageProperties: PageSectionProperties {
             switch wrappedValue {
             case let .content(section):
                 return ContentSectionProperties(contentSection: section)
@@ -186,8 +172,10 @@ extension PageModel {
     
     typealias Row = CollectionRow<Section, Item>
     
-    enum TriggerId {
-        case reload
+    enum TriggerId: Hashable {
+        case reloadAll
+        case reload(section: Section)
+        case loadMore(section: Section)
     }
 }
 
@@ -199,14 +187,15 @@ extension SRGDataProvider {
     }
     
     func rowsPublisher(id: PageModel.Id, trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
-        return sectionsPublisher(id: id)
-            .map { sections -> AnyPublisher<[PageModel.Row], Never> in
-                Publishers.AccumulateLatestMany(sections.map { section in
-                    return self.rowPublisher(id: id, section: section, trigger: trigger)
-                })
-            }
-            .switchToLatest()
-            .eraseToAnyPublisher()
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) {
+            return self.sectionsPublisher(id: id)
+                .map { sections -> AnyPublisher<[PageModel.Row], Never> in
+                    Publishers.AccumulateLatestMany(sections.map { section in
+                        return self.rowPublisher(id: id, section: section, trigger: trigger)
+                    })
+                }
+                .switchToLatest()
+        }
     }
     
     func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
@@ -231,17 +220,15 @@ extension SRGDataProvider {
     }
     
     func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
-        if let publisher = section.properties.publisher(pageSize: Self.pageSize(), paginatedBy: trigger.triggerable(activatedBy: section), filter: id) {
-            return publisher
+        return Publishers.PublishAndRepeat(onOutputFrom: section.pageProperties.reloadSignal()) {
+            return section.properties.publisher(pageSize: Self.pageSize(),
+                                                paginatedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.loadMore(section: section)),
+                                                reloadedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.reload(section: section)),
+                                                filter: id)
                 .replaceError(with: [])
-                .scan([]) { $0 + $1 }
                 .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
                 .prepend(Self.rowPlaceholderItems(for: section))
                 .map { PageModel.Row(section: section, items: $0) }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Just(PageModel.Row(section: section, items: []))
                 .eraseToAnyPublisher()
         }
     }
@@ -256,21 +243,24 @@ private extension SRGDataProvider {
     
     private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if rowItems.count >= Self.pageSize() && section.layoutProperties.canOpenDetailPage && section.layoutProperties.hasSwimlaneLayout {
+        if rowItems.count >= Self.pageSize() && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
     }
 }
 
-// MARK: Layout properties
+// MARK: Page section properties
 
-protocol PageSectionLayoutProperties {
+protocol PageSectionProperties {
     var layout: PageModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
+    
+    /// Signal which can be used to reload the section entirely
+    func reloadSignal() -> AnyPublisher<Void, Never>
 }
 
-extension PageSectionLayoutProperties {
+extension PageSectionProperties {
     var accessibilityHint: String? {
         if canOpenDetailPage {
             return PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint")
@@ -300,7 +290,7 @@ extension PageSectionLayoutProperties {
 }
 
 private extension PageModel {
-    struct ContentSectionProperties: PageSectionLayoutProperties {
+    struct ContentSectionProperties: PageSectionProperties {
         let contentSection: SRGContentSection
         
         private var presentation: SRGContentPresentation {
@@ -343,9 +333,23 @@ private extension PageModel {
                 return presentation.hasDetailPage
             }
         }
+        
+        func reloadSignal() -> AnyPublisher<Void, Never> {
+            switch presentation.type {
+            case .favoriteShows, .personalizedProgram:
+                return Signal.favoritesUpdate()
+            case .resumePlayback:
+                return Signal.historyUpdate()
+            case .watchLater:
+                return Signal.laterUpdate()
+            default:
+                return PassthroughSubject<Void, Never>()
+                    .eraseToAnyPublisher()
+            }
+        }
     }
     
-    struct ConfiguredSectionProperties: PageSectionLayoutProperties {
+    struct ConfiguredSectionProperties: PageSectionProperties {
         let configuredSection: ConfiguredSection
         
         var layout: PageModel.SectionLayout {
@@ -376,6 +380,16 @@ private extension PageModel {
         
         var canOpenDetailPage: Bool {
             return layout == .mediaSwimlane
+        }
+        
+        func reloadSignal() -> AnyPublisher<Void, Never> {
+            switch configuredSection.type {
+            case .radioFavoriteShows:
+                return Signal.favoritesUpdate()
+            default:
+                return PassthroughSubject<Void, Never>()
+                    .eraseToAnyPublisher()
+            }
         }
     }
 }

@@ -364,7 +364,7 @@ private extension PageViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.layoutProperties.layout {
+                switch section.pageProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
@@ -447,7 +447,7 @@ private extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.layoutProperties.layout {
+            switch section.pageProperties.layout {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -467,7 +467,7 @@ private extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.layoutProperties.layout {
+            switch section.pageProperties.layout {
             case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -553,12 +553,12 @@ private extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.layoutProperties.canOpenDetailPage)
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.pageProperties.canOpenDetailPage)
                 }
-                .disabled(!section.layoutProperties.canOpenDetailPage)
+                .disabled(!section.pageProperties.canOpenDetailPage)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
-                .accessibilityOptionalHint(section.layoutProperties.accessibilityHint)
+                .accessibilityOptionalHint(section.pageProperties.accessibilityHint)
                 .accessibility(addTraits: .isHeader)
             }
             #endif
