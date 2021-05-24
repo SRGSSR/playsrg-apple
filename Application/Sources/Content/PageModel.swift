@@ -189,7 +189,7 @@ extension SRGDataProvider {
     func rowsPublisher(id: PageModel.Id, trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) {
             return self.sectionsPublisher(id: id)
-                .map { sections -> AnyPublisher<[PageModel.Row], Never> in
+                .map { sections in
                     Publishers.AccumulateLatestMany(sections.map { section in
                         return self.rowPublisher(id: id, section: section, trigger: trigger)
                     })

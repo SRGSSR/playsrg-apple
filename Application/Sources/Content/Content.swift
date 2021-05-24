@@ -357,7 +357,7 @@ private extension Content {
 // MARK: Publishers
 
 extension SRGDataProvider {
-    /// Publishes the latest 30 episodes for a show URN list
+    /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
         return urns.publisher
             .collect(3)
@@ -371,11 +371,47 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
+    /// Publishes the regional media which corresponds to the specified media, if any.
+    private func regionalizeRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
+        if let channelUid = media.channel?.uid,
+           let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
+           media.urn != selectedLivestreamUrn {
+            return radioLivestreams(for: media.vendor, channelUid: channelUid)
+                .map { medias in
+                    if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
+                        return selectedMedia
+                    }
+                    else {
+                        return media
+                    }
+                }
+                .replaceError(with: media)
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(media)
+                .eraseToAnyPublisher()
+        }
+    }
+    
     /// Publishes radio livestreams, replacing regional radio channels. Updates are published down the pipeline as they
     /// are retrieved.
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
+        #if os(iOS)
+        return radioLivestreams(for: vendor, contentProviders: contentProviders)
+            .map { medias in
+                return Publishers.AccumulateLatestMany(medias.map { media in
+                    return self.regionalizeRadioLivestreamMedia(for: media)
+                })
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
+        #else
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
             .eraseToAnyPublisher()
+        #endif
     }
     
     func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
