@@ -55,7 +55,8 @@ protocol SectionProperties {
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
     
-    /// Publisher providing content for the section, one page at a time
+    /// Publisher providing content for the section. Subscription must deliver a single result. Further
+    /// results can be retrieved (if any) using the paginator, page after page.
     func pagePublisher(pageSize: UInt, paginatedBy paginator: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
 }
 
@@ -373,40 +374,8 @@ extension SRGDataProvider {
     /// Publishes radio livestreams, replacing regional radio channels. Updates are published down the pipeline as they
     /// are retrieved.
     func regionalizedRadioLivestreams(for vendor: SRGVendor, contentProviders: SRGContentProviders = .default) -> AnyPublisher<[SRGMedia], Error> {
-        #if os(iOS)
-        return radioLivestreams(for: vendor, contentProviders: contentProviders)
-            .map { medias -> AnyPublisher<[SRGMedia], Error> in
-                var regionalizedMedias = medias
-                return Publishers.MergeMany(regionalizedMedias.compactMap { media -> AnyPublisher<[SRGMedia], Error>? in
-                    guard let channelUid = media.channel?.uid else { return nil }
-                    
-                    // If a regional stream has been selected by the user, replace the main channel media with it
-                    let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid)
-                    if selectedLivestreamUrn != nil && media.urn != selectedLivestreamUrn {
-                        return self.radioLivestreams(for: vendor, channelUid: channelUid)
-                            .map { result in
-                                if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
-                                    guard let index = regionalizedMedias.firstIndex(of: media) else { return regionalizedMedias }
-                                    regionalizedMedias[index] = selectedMedia
-                                }
-                                return regionalizedMedias
-                            }
-                            .eraseToAnyPublisher()
-                    }
-                    else {
-                        return Just(regionalizedMedias)
-                            .setFailureType(to: Error.self)
-                            .eraseToAnyPublisher()
-                    }
-                })
-                .eraseToAnyPublisher()
-            }
-            .switchToLatest()
-            .eraseToAnyPublisher()
-        #else
         return radioLivestreams(for: vendor, contentProviders: contentProviders)
             .eraseToAnyPublisher()
-        #endif
     }
     
     func historyPublisher() -> AnyPublisher<[SRGMedia], Error> {
