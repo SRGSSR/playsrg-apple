@@ -182,10 +182,6 @@ extension PageModel {
 // MARK: Publishers
 
 extension SRGDataProvider {
-    static func pageSize() -> UInt {
-        return ApplicationConfiguration.shared.pageSize
-    }
-    
     func rowsPublisher(id: PageModel.Id, trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) {
             return self.sectionsPublisher(id: id)
@@ -221,7 +217,7 @@ extension SRGDataProvider {
     
     func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
         return Publishers.PublishAndRepeat(onOutputFrom: section.pageProperties.reloadSignal()) {
-            return section.properties.publisher(pageSize: Self.pageSize(),
+            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
                                                 paginatedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.loadMore(section: section)),
                                                 reloadedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.reload(section: section)),
                                                 filter: id)
@@ -243,7 +239,7 @@ private extension SRGDataProvider {
     
     private static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if rowItems.count >= Self.pageSize() && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
+        if rowItems.count > 0 && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
