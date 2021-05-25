@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "d57938089a95f54468c32c9d8034a277a602d060",
-          "version": "6.7.1"
+          "revision": "51d689bd4f6a38d952773e055525a39203cc94ec",
+          "version": "6.8.0"
         }
       },
       {
@@ -222,7 +222,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "563e423e74e23d11e1fecf314cf1a09e9860f849",
+          "revision": "23407da654fac49ade7eddfed6d83bf8f1136aed",
           "version": null
         }
       },
