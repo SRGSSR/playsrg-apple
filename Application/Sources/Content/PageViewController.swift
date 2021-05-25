@@ -296,19 +296,32 @@ extension PageViewController: UIScrollViewDelegate {
     }
 }
 
-// TODO: Remaining protocols to implement, as was the case for HomeViewController
-
 #if false
 
 extension PageViewController: PlayApplicationNavigation {
     
 }
 
-extension PageViewController: SRGAnalyticsViewTracking {
-    
-}
-
 #endif
+
+extension PageViewController: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    var srg_pageViewLevels: [String]? {
+        switch model.id {
+        case .video:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+        case let .audio(channel: channel):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+        case .live:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+        case let .topic(topic: topic):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, topic.title]
+        }
+    }
+}
 
 #if os(iOS)
 
