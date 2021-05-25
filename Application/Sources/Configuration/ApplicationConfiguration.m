@@ -112,6 +112,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
 @property (nonatomic) NSUInteger pageSize;
+@property (nonatomic) NSUInteger detailPageSize;
 
 @property (nonatomic) NSTimeInterval continuousPlaybackPlayerViewTransitionDuration;
 @property (nonatomic) NSTimeInterval continuousPlaybackForegroundTransitionDuration;
@@ -308,6 +309,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
     self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
+    
+    NSNumber *detailPageSize = [firebaseConfiguration numberForKey:@"detailPageSize"];
+    self.detailPageSize = detailPageSize ? MAX(detailPageSize.unsignedIntegerValue, 1) : 40;
     
     NSNumber *continuousPlaybackPlayerViewTransitionDuration = [firebaseConfiguration numberForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
     self.continuousPlaybackPlayerViewTransitionDuration = continuousPlaybackPlayerViewTransitionDuration ? fmax(continuousPlaybackPlayerViewTransitionDuration.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;

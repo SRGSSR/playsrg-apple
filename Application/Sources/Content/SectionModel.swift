@@ -25,7 +25,7 @@ class SectionModel: ObservableObject {
         self.section = section
         
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
-            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
+            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                 paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                 .scan([]) { $0 + $1 }

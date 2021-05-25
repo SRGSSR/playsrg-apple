@@ -33,10 +33,14 @@ class PageModel: Identifiable, ObservableObject {
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
                         return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
-                            return SRGDataProvider.current!.rowPublisher(id: id, section: section, trigger: self?.trigger)
-                                .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
-                                .prepend(Self.placeholderRow(for: section, state: self?.state))
-                                .eraseToAnyPublisher()
+                            return SRGDataProvider.current!.rowPublisher(id: id,
+                                                                         section: section,
+                                                                         pageSize: Self.pageSize(for: section, in: sections),
+                                                                         paginatedBy: self?.trigger.triggerable(activatedBy: TriggerId.loadMore(section: section))
+                            )
+                            .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
+                            .prepend(Self.placeholderRow(for: section, state: self?.state))
+                            .eraseToAnyPublisher()
                         }
                     })
                     .eraseToAnyPublisher()
@@ -83,13 +87,18 @@ class PageModel: Identifiable, ObservableObject {
         .eraseToAnyPublisher()
     }
     
-    private static func hasLoadMore(for: Section, in sections: [Section]) -> Bool {
-        if let section = sections.last, section.pageProperties.hasGridLayout {
+    private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
+        if section == sections.last && section.pageProperties.hasGridLayout {
             return true
         }
         else {
             return false
         }
+    }
+    
+    private static func pageSize(for section: Section, in sections: [Section]) -> UInt {
+        let configuration = ApplicationConfiguration.shared
+        return hasLoadMore(for: section, in: sections) ? configuration.detailPageSize : configuration.pageSize
     }
     
     private static func placeholderRow(for section: Section, state: State?) -> Row {
@@ -258,10 +267,8 @@ private extension SRGDataProvider {
         }
     }
     
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger?) -> AnyPublisher<PageModel.Row, Error> {
-        return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
-                                            paginatedBy: trigger?.triggerable(activatedBy: PageModel.TriggerId.loadMore(section: section)),
-                                            filter: id)
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section, pageSize: UInt, paginatedBy paginator: Triggerable?) -> AnyPublisher<PageModel.Row, Error> {
+        return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
             .scan([]) { $0 + $1 }
             .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
             .map { PageModel.Row(section: section, items: $0) }
