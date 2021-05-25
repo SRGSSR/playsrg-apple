@@ -18,6 +18,8 @@ OBJC_EXPORT void HistoryUpdateLetterboxPlaybackProgress(SRGLetterboxController *
 /**
  *  Return the playback progress corresponding to the specified playback position and media duration. This takes
  *  into account end tolerance settings which might be applied.
+ *
+ *  @discussion Can be called on any thread.
  */
 OBJC_EXPORT float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds);
 
@@ -38,6 +40,13 @@ OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMe
  */
 OBJC_EXPORT SRGPosition * _Nullable HistoryResumePlaybackPositionForMediaMetadata(id<SRGMediaMetadata> _Nullable mediaMetadata);
 OBJC_EXPORT NSString *HistoryResumePlaybackPositionForMediaMetadataAsync(id<SRGMediaMetadata> _Nullable mediaMetadata, void (^completion)(SRGPosition * _Nullable position));
+
+/**
+ *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media metadata and position
+ *
+ *  *  @discussion Can be called on any thread.
+ */
+OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaMetadataAndPosition(NSTimeInterval playbackPosition, id<SRGMediaMetadata> _Nullable mediaMetadata);
 
 /**
  *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media metadata.

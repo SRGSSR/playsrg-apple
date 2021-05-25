@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Collections
 import SRGDataProviderCombine
 import SRGUserData
 
@@ -417,33 +418,43 @@ extension SRGDataProvider {
     }
     
     func historyPublisher(pageSize: UInt, paginatedBy paginator: Triggerable) -> AnyPublisher<[SRGMedia], Error> {
+        func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
+            guard let historyEntries = historyEntries else { return [:] }
+            
+            var playbackPositions = OrderedDictionary<String, TimeInterval>()
+            for historyEntry in historyEntries {
+                if let uid = historyEntry.uid {
+                    playbackPositions[uid] = CMTimeGetSeconds(historyEntry.lastPlaybackTime)
+                }
+            }
+            return playbackPositions
+        }
+        
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
-            Future<[String], Error> { promise in
+            Future<OrderedDictionary<String, TimeInterval>, Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
                     if let error = error {
                         promise(.failure(error))
                     }
                     else {
-                        promise(.success(historyEntries?.compactMap(\.uid) ?? []))
+                        promise(.success(playbackPositions(for: historyEntries)))
                     }
                 }
             }
         }
-        .map { urns in
-            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+        .map { playbackPositions in
+            return self.medias(withUrns: Array(playbackPositions.keys), pageSize: pageSize, paginatedBy: paginator)
+                .map {
+                    return $0.filter { media in
+                        guard let playbackPosition = playbackPositions[media.urn] else { return true }
+                        return HistoryCanResumePlaybackForMediaMetadataAndPosition(playbackPosition, media)
+                    }
+                }
         }
         .switchToLatest()
-        // TODO: Currently suboptimal: For each media we determine if playback can be resumed, an operation on
-        //       the main thread and with a single user data access each time. We could  instead use a currrently
-        //       private history API to combine the history entries we have and the associated medias we retrieve
-        //       with a network request, calculating the progress on a background thread and with only a single
-        //       user data access (the one made at the beginning). This optimization seems premature, though, so
-        //       for the moment a simpler implementation is used.
-        .receive(on: DispatchQueue.main)
-        .map { $0.filter { HistoryCanResumePlaybackForMediaMetadata($0) } }
         .eraseToAnyPublisher()
     }
     

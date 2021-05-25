@@ -80,6 +80,11 @@ NSString *HistoryResumePlaybackPositionForMediaMetadataAsync(id<SRGMediaMetadata
     }];
 }
 
+BOOL HistoryCanResumePlaybackForMediaMetadataAndPosition(NSTimeInterval playbackPosition, id<SRGMediaMetadata> mediaMetadata)
+{
+    return HistoryIsProgressForMediaMetadataTracked(mediaMetadata) && [mediaMetadata blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgress(playbackPosition, mediaMetadata.duration / 1000.) != 1.f;
+}
+
 BOOL HistoryCanResumePlaybackForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     return HistoryIsProgressForMediaMetadataTracked(mediaMetadata) && [mediaMetadata blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(mediaMetadata) != 1.f;
