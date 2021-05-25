@@ -28,17 +28,13 @@ class PageModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reloadAll)) { [weak self] () -> AnyPublisher<[PageModel.Row], Error> in
-            guard let self = self else {
-                return Just([])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-            }
-            return SRGDataProvider.current!.rowsPublisher(id: id, currentRows: self.state.rows, trigger: self.trigger)
-        }
-        .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
-        .catch { error in
-            return Just(State.failed(error: error))
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reloadAll)) { [weak self] in
+            return SRGDataProvider.current!.rowsPublisher(id: id, currentRows: self?.state.rows ?? [], trigger: self?.trigger ?? Trigger())
+                .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
+                .catch { error in
+                    return Just(State.failed(error: error))
+                }
+                .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
