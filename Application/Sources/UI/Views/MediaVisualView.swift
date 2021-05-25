@@ -36,8 +36,13 @@ struct MediaVisualView: View {
     }
     
     private func updateProgress() {
+        // TODO: Should be inside an observable object
         HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media, { progress = Double($0) })
+        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media, { progress in
+            DispatchQueue.main.async {
+                self.progress = Double(progress)
+            }
+        })
     }
     
     var body: some View {

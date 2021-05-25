@@ -38,21 +38,19 @@ float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationIn
     }
 }
 
-SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
+SRGPosition *HistoryResumePlaybackPositionForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
-    if (! HistoryIsProgressForMediaMetadataTracked(media)) {
+    if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata)) {
         return nil;
     }
     
-    // Allow faster seek to an earlier position, but not to a later position (playback for a history entry should not resume with
-    // content the user has not seen yet)
-    SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:media.URN];
+    SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN];
     if (! historyEntry) {
         return nil;
     }
     
     // Start at the default location if the content was played entirely.
-    if (HistoryPlaybackProgressForMediaMetadataHistoryEntry(historyEntry, media) == 1.f) {
+    if (HistoryPlaybackProgressForMediaMetadataHistoryEntry(historyEntry, mediaMetadata) == 1.f) {
         return nil;
     }
     
@@ -61,9 +59,42 @@ SRGPosition *HistoryResumePlaybackPositionForMedia(SRGMedia *media)
     return [SRGPosition positionAtTime:historyEntry.lastPlaybackTime];
 }
 
-BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media)
+NSString *HistoryResumePlaybackPositionForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^completion)(SRGPosition * _Nullable position))
 {
-    return HistoryIsProgressForMediaMetadataTracked(media) && [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(media) != 1.f;
+    if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata)) {
+        completion(nil);
+        return nil;
+    }
+    
+    return [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN completionBlock:^(SRGHistoryEntry * _Nullable historyEntry, NSError * _Nullable error) {
+        // Start at the default location if the content was played entirely.
+        if (HistoryPlaybackProgressForMediaMetadataHistoryEntry(historyEntry, mediaMetadata) == 1.f) {
+            completion(nil);
+            return;
+        }
+        
+        // TODO: Fix stream issues (see https://github.com/SRGSSR/srgletterbox-apple/issues/245) then restore `positionBeforeTime:`
+        //       which was the initially desired behavior.
+        SRGPosition *position = [SRGPosition positionAtTime:historyEntry.lastPlaybackTime];
+        completion(position);
+    }];
+}
+
+BOOL HistoryCanResumePlaybackForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+{
+    return HistoryIsProgressForMediaMetadataTracked(mediaMetadata) && [mediaMetadata blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMediaMetadata(mediaMetadata) != 1.f;
+}
+
+NSString *HistoryCanResumePlaybackForMediaMetadataAsync(id<SRGMediaMetadata> mediaMetadata, void (^completion)(BOOL canResume))
+{
+    if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata) || [mediaMetadata blockingReasonAtDate:NSDate.date] != SRGBlockingReasonNone) {
+        completion(NO);
+        return nil;
+    }
+    
+    return HistoryPlaybackProgressForMediaMetadataAsync(mediaMetadata, ^(float progress) {
+        completion(progress != 1.f);
+    });
 }
 
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
@@ -209,11 +240,8 @@ NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> medi
         }
         
         float progress = historyEntry ? HistoryPlaybackProgressForMediaMetadataHistoryEntry(historyEntry, mediaMetadata) : 0.f;
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            s_cachedProgresses[mediaMetadata.URN] = (progress > 0.f) ? @(progress) : nil;
-            update(progress);
-        });
+        s_cachedProgresses[mediaMetadata.URN] = (progress > 0.f) ? @(progress) : nil;
+        update(progress);
     }];
     
     NSNumber *cachedProgress = s_cachedProgresses[mediaMetadata.URN];

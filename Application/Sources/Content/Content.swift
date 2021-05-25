@@ -443,7 +443,7 @@ extension SRGDataProvider {
         //       user data access (the one made at the beginning). This optimization seems premature, though, so
         //       for the moment a simpler implementation is used.
         .receive(on: DispatchQueue.main)
-        .map { $0.filter { HistoryCanResumePlaybackForMedia($0) } }
+        .map { $0.filter { HistoryCanResumePlaybackForMediaMetadata($0) } }
         .eraseToAnyPublisher()
     }
     

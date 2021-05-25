@@ -264,8 +264,10 @@
 {
     HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
     self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.download, ^(float progress) {
-        self.progressView.hidden = (progress == 0.f);
-        self.progressView.progress = progress;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.progressView.hidden = (progress == 0.f);
+            self.progressView.progress = progress;
+        });
     });
 }
 

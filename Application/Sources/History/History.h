@@ -24,29 +24,33 @@ OBJC_EXPORT float HistoryPlaybackProgress(NSTimeInterval playbackPosition, doubl
 /**
  *  Current playback progress value for a media metadata.
  *
- *  @discussion Must be called from the main thread. The asynchronous variant calls the completion block on the main thread,
- *              and returns a handle with which the asynchronous request can be cancelled.
+ *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
+ *              any thread.
  */
 OBJC_EXPORT float HistoryPlaybackProgressForMediaMetadata(id<SRGMediaMetadata> _Nullable mediaMetadata);
 OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaMetadataAsync(id<SRGMediaMetadata> _Nullable mediaMetadata, void (^update)(float progress));
 
 /**
+ *  Return a recommended resume playback position for a media metadata.
+ *
+ *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
+ *              any thread.
+ */
+OBJC_EXPORT SRGPosition * _Nullable HistoryResumePlaybackPositionForMediaMetadata(id<SRGMediaMetadata> _Nullable mediaMetadata);
+OBJC_EXPORT NSString *HistoryResumePlaybackPositionForMediaMetadataAsync(id<SRGMediaMetadata> _Nullable mediaMetadata, void (^completion)(SRGPosition * _Nullable position));
+
+/**
+ *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media metadata.
+ *
+ *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
+ *              any thread.
+ */
+OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaMetadata(id<SRGMediaMetadata> _Nullable mediaMetadata);
+OBJC_EXPORT NSString *HistoryCanResumePlaybackForMediaMetadataAsync(id<SRGMediaMetadata> _Nullable mediaMetadata, void (^completion)(BOOL canResume));
+
+/**
  *  Cancel a progress async request.
  */
 OBJC_EXPORT void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);
-
-/**
- *  Return a recommended resume playback position for a media.
- *
- *  @discussion Must be called from the main thread
- */
-OBJC_EXPORT SRGPosition * _Nullable HistoryResumePlaybackPositionForMedia(SRGMedia *media);
-
-/**
- *  Return `YES` if playback can be resumed (or started, a special case of resuming).
- *
- *  @discussion Must be called from the main thread
- */
-OBJC_EXPORT BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media);
 
 NS_ASSUME_NONNULL_END

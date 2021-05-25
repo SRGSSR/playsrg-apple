@@ -368,7 +368,7 @@
         return;
     }
     
-    SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
+    SRGPosition *position = HistoryResumePlaybackPositionForMediaMetadata(media);
     SRGLetterboxController *controller = self.controller;
     
     // If a controller is readily available, use it
