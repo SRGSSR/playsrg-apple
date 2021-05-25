@@ -23,6 +23,7 @@ class PageModel: Identifiable, ObservableObject {
     @Published private(set) var state: State = .loading
     
     private let trigger = Trigger()
+    private var cancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
@@ -41,6 +42,12 @@ class PageModel: Identifiable, ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
+        
+        Signal.wokenUp()
+            .sink { [weak self] in
+                self?.reload()
+            }
+            .store(in: &cancellables)
     }
     
     func loadMore() {
@@ -49,8 +56,8 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    func reload(deep: Bool = true) {
-        if deep {
+    func reload(deep: Bool = false) {
+        if deep || state.sections.isEmpty {
             trigger.activate(for: TriggerId.reloadAll)
         }
         else {

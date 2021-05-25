@@ -137,7 +137,7 @@ class PageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        model.reload(deep: false)
+        model.reload()
     }
     
     #if os(iOS)
@@ -282,7 +282,7 @@ extension PageViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
-            model.reload()
+            model.reload(deep: true)
             refreshTriggered = false
         }
     }

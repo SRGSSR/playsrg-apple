@@ -45,4 +45,22 @@ enum Signal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
+    
+    static func reachable() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange)
+            .filter { ReachabilityBecameReachable($0) }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    static func foreground() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    static func wokenUp() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(reachable(), foreground())
+            .eraseToAnyPublisher()
+    }
 }
