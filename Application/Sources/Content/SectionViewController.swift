@@ -94,7 +94,7 @@ class SectionViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, section in
             guard let self = self else { return }
-            view.content = TitleView(text: self.model.title)
+            view.content = TitleView(text: self.globalHeaderTitle)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -153,6 +153,14 @@ class SectionViewController: UIViewController {
 private extension SectionViewController {
     enum Header: String {
         case global
+    }
+    
+    var globalHeaderTitle: String? {
+        #if os(tvOS)
+        return self.model.title
+        #else
+        return nil
+        #endif
     }
 }
 
@@ -221,7 +229,7 @@ private extension SectionViewController {
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         
-        let headerSize = TitleViewSize.recommended(text: model.title)
+        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
         configuration.boundarySupplementaryItems = [header]
         

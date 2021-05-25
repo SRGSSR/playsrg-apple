@@ -109,7 +109,7 @@ class PageViewController: UIViewController {
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, section in
             guard let self = self else { return }
-            view.content = TitleView(text: self.model.title)
+            view.content = TitleView(text: self.globalHeaderTitle)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
@@ -180,6 +180,14 @@ class PageViewController: UIViewController {
 private extension PageViewController {
     enum Header: String {
         case global
+    }
+    
+    var globalHeaderTitle: String? {
+        #if os(tvOS)
+        return self.model.title
+        #else
+        return nil
+        #endif
     }
     
     #if os(iOS)
@@ -345,7 +353,7 @@ private extension PageViewController {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = Self.sectionSpacing
         
-        let headerSize = TitleViewSize.recommended(text: model.title)
+        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
         configuration.boundarySupplementaryItems = [header]
         

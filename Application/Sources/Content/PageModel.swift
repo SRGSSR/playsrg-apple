@@ -16,11 +16,7 @@ class PageModel: Identifiable, ObservableObject {
         case .video, .audio, .live:
             return nil
         case let .topic(topic: topic):
-            #if os(tvOS)
             return topic.title
-            #else
-            return nil
-            #endif
         }
     }
     
