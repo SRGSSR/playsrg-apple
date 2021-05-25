@@ -172,7 +172,7 @@ extension SectionViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return .zero
+        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
@@ -226,6 +226,10 @@ extension SectionViewController: SRGAnalyticsViewTracking {
 // MARK: Layout
 
 private extension SectionViewController {
+    private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let sectionTop: CGFloat = constant(iOS: 3, tvOS: 15)
+    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
+    
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         
@@ -243,13 +247,13 @@ private extension SectionViewController {
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 if horizontalSizeClass == .compact {
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: 0, top: 0) { _ in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                         return MediaCellSize.fullWidth()
                     }
                 }
                 else {
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: 0, top: 0) { (layoutWidth, spacing) in
-                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: 0, minimumNumberOfColumns: 1)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
                     }
                 }
             }
