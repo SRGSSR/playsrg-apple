@@ -26,6 +26,14 @@ class SectionViewController: UIViewController {
     
     private var refreshTriggered = false
     
+    private var globalHeaderTitle: String? {
+        #if os(tvOS)
+        return model.title
+        #else
+        return nil
+        #endif
+    }
+    
     private static func snapshot(from state: SectionModel.State) -> NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item>()
         if case let .loaded(row: row) = state {
@@ -38,7 +46,6 @@ class SectionViewController: UIViewController {
     init(section: Content.Section, filter: SectionFiltering? = nil) {
         self.model = SectionModel(section: section, filter: filter)
         super.init(nibName: nil, bundle: nil)
-        
         self.title = model.title
     }
     
@@ -153,14 +160,6 @@ class SectionViewController: UIViewController {
 private extension SectionViewController {
     enum Header: String {
         case global
-    }
-    
-    var globalHeaderTitle: String? {
-        #if os(tvOS)
-        return self.model.title
-        #else
-        return nil
-        #endif
     }
 }
 

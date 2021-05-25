@@ -27,6 +27,14 @@ class PageViewController: UIViewController {
     
     private var refreshTriggered = false
     
+    private var globalHeaderTitle: String? {
+        #if os(tvOS)
+        return model.title
+        #else
+        return nil
+        #endif
+    }
+    
     private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
         if case let .loaded(rows: rows) = state {
@@ -184,14 +192,6 @@ class PageViewController: UIViewController {
 private extension PageViewController {
     enum Header: String {
         case global
-    }
-    
-    var globalHeaderTitle: String? {
-        #if os(tvOS)
-        return self.model.title
-        #else
-        return nil
-        #endif
     }
     
     #if os(iOS)
