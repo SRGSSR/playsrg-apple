@@ -28,8 +28,20 @@ class PageModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reloadAll)) { [weak self] in
-            return SRGDataProvider.current!.rowsPublisher(id: id, currentRows: self?.state.rows ?? [], trigger: self?.trigger ?? Trigger())
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
+            return SRGDataProvider.current!.sectionsPublisher(id: id)
+                .map { sections in
+                    return Publishers.AccumulateLatestMany(sections.map { section in
+                        return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
+                            return SRGDataProvider.current!.rowPublisher(id: id, section: section, trigger: self?.trigger)
+                                .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
+                                .prepend(Self.placeholderRow(for: section, state: self?.state))
+                                .eraseToAnyPublisher()
+                        }
+                    })
+                    .eraseToAnyPublisher()
+                }
+                .switchToLatest()
                 .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
                 .catch { error in
                     return Just(State.failed(error: error))
@@ -54,13 +66,21 @@ class PageModel: Identifiable, ObservableObject {
     
     func reload(deep: Bool = false) {
         if deep || state.sections.isEmpty {
-            trigger.activate(for: TriggerId.reloadAll)
+            trigger.activate(for: TriggerId.reload)
         }
         else {
             for section in state.sections where !Self.hasLoadMore(for: section, in: state.sections) {
-                trigger.activate(for: TriggerId.reload(section: section))
+                trigger.activate(for: TriggerId.reloadSection(section))
             }
         }
+    }
+    
+    private static func rowReloadSignal(for section: PageModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            section.pageProperties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
+            trigger?.signal(activatedBy: PageModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
+        )
+        .eraseToAnyPublisher()
     }
     
     private static func hasLoadMore(for: Section, in sections: [Section]) -> Bool {
@@ -70,6 +90,19 @@ class PageModel: Identifiable, ObservableObject {
         else {
             return false
         }
+    }
+    
+    private static func placeholderRow(for section: Section, state: State?) -> Row {
+        if let row = state?.rows.first(where: { $0.section == section }) {
+            return row
+        }
+        else {
+            return PageModel.Row(section: section, items: Self.placeholderRowItems(for: section))
+        }
+    }
+    
+    private static func placeholderRowItems(for section: Section) -> [Item] {
+        return section.properties.placeholderItems.map { Item(.item($0), in: section) }
     }
 }
 
@@ -195,8 +228,8 @@ extension PageModel {
     typealias Row = CollectionRow<Section, Item>
     
     enum TriggerId: Hashable {
-        case reloadAll
-        case reload(section: Section)
+        case reload
+        case reloadSection(Section)
         case loadMore(section: Section)
     }
 }
@@ -204,19 +237,6 @@ extension PageModel {
 // MARK: Publishers
 
 private extension SRGDataProvider {
-    func rowsPublisher(id: PageModel.Id, currentRows: [PageModel.Row], trigger: Trigger) -> AnyPublisher<[PageModel.Row], Error> {
-        return self.sectionsPublisher(id: id)
-            .map { sections in
-                Publishers.AccumulateLatestMany(sections.map { section in
-                    return self.rowPublisher(id: id, section: section, trigger: trigger)
-                        .prepend(Self.placeholderRow(for: section, currentRows: currentRows))
-                        .eraseToAnyPublisher()
-                })
-            }
-            .switchToLatest()
-            .eraseToAnyPublisher()
-    }
-    
     func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
         switch id {
         case .video:
@@ -238,42 +258,22 @@ private extension SRGDataProvider {
         }
     }
     
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger) -> AnyPublisher<PageModel.Row, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: section.pageProperties.reloadSignal()) {
-            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
-                                                paginatedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.loadMore(section: section)),
-                                                reloadedBy: trigger.triggerable(activatedBy: PageModel.TriggerId.reload(section: section)),
-                                                filter: id)
-                .replaceError(with: [])
-                .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
-                .map { PageModel.Row(section: section, items: $0) }
-                .eraseToAnyPublisher()
-        }
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section, trigger: Trigger?) -> AnyPublisher<PageModel.Row, Error> {
+        return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
+                                            paginatedBy: trigger?.triggerable(activatedBy: PageModel.TriggerId.loadMore(section: section)),
+                                            filter: id)
+            .scan([]) { $0 + $1 }
+            .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
+            .map { PageModel.Row(section: section, items: $0) }
+            .eraseToAnyPublisher()
     }
-}
-
-// MARK: Helpers
-
-private extension SRGDataProvider {
+    
     static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
         if rowItems.count > 0 && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
-    }
-    
-    static func placeholderRowItems(for section: PageModel.Section) -> [PageModel.Item] {
-        return section.properties.placeholderItems.map { PageModel.Item(.item($0), in: section) }
-    }
-    
-    static func placeholderRow(for section: PageModel.Section, currentRows: [PageModel.Row]) -> PageModel.Row {
-        if let row = currentRows.first(where: { $0.section == section }) {
-            return row
-        }
-        else {
-            return PageModel.Row(section: section, items: Self.placeholderRowItems(for: section))
-        }
     }
 }
 
@@ -284,7 +284,7 @@ protocol PageSectionProperties {
     var canOpenDetailPage: Bool { get }
     
     /// Signal which can be used to reload the section entirely
-    func reloadSignal() -> AnyPublisher<Void, Never>
+    func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
 extension PageSectionProperties {
@@ -361,7 +361,7 @@ private extension PageModel {
             }
         }
         
-        func reloadSignal() -> AnyPublisher<Void, Never> {
+        func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .personalizedProgram:
                 return Signal.favoritesUpdate()
@@ -370,8 +370,7 @@ private extension PageModel {
             case .watchLater:
                 return Signal.laterUpdate()
             default:
-                return PassthroughSubject<Void, Never>()
-                    .eraseToAnyPublisher()
+                return nil
             }
         }
     }
@@ -409,13 +408,12 @@ private extension PageModel {
             return layout == .mediaSwimlane
         }
         
-        func reloadSignal() -> AnyPublisher<Void, Never> {
+        func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection.type {
             case .radioFavoriteShows:
                 return Signal.favoritesUpdate()
             default:
-                return PassthroughSubject<Void, Never>()
-                    .eraseToAnyPublisher()
+                return nil
             }
         }
     }

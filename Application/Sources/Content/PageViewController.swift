@@ -98,9 +98,8 @@ class PageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { [weak self] cell, _, item in
-            guard let self = self else { return }
-            cell.content = ItemCell(item: item, id: self.model.id)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { [model] cell, _, item in
+            cell.content = ItemCell(item: item, id: model.id)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in

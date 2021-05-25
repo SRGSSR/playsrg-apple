@@ -15,6 +15,7 @@ class SectionModel: ObservableObject {
     @Published private(set) var state: State = .loading
     
     private var trigger = Trigger()
+    private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
         return section.properties.title
@@ -23,16 +24,24 @@ class SectionModel: ObservableObject {
     init(section: Section, filter: SectionFiltering?) {
         self.section = section
         
-        section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
-                                     paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
-                                     reloadedBy: trigger.triggerable(activatedBy: TriggerId.reload),
-                                     filter: filter)
-            .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
-            .catch { error in
-                return Just(State.failed(error: error))
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
+            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.pageSize,
+                                                paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
+                                                filter: filter)
+                .scan([]) { $0 + $1 }
+                .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
+                .catch { error in
+                    return Just(State.failed(error: error))
+                }
             }
             .receive(on: DispatchQueue.main)
             .assign(to: &$state)
+        
+        Signal.wokenUp()
+            .sink { [weak self] in
+                self?.reload()
+            }
+            .store(in: &cancellables)
     }
     
     func loadMore() {

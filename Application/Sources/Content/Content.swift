@@ -56,21 +56,9 @@ protocol SectionProperties {
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
     
-    /// Publisher providing content for the section. Subscription must deliver a single result. Further
-    /// results can be retrieved (if any) using the paginator, page after page.
-    func pagePublisher(pageSize: UInt, paginatedBy paginator: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
-}
-
-extension SectionProperties {
-    /// Publisher providing content for the section and accumulating results. A reload can be triggered for restarting from the
-    /// the first page.
-    func publisher(pageSize: UInt, paginatedBy paginator: Triggerable, reloadedBy reloader: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
-        return Publishers.PublishAndRepeat(onOutputFrom: reloader.signal()) {
-            return pagePublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
-                .scan([]) { $0 + $1 }
-                .eraseToAnyPublisher()
-        }
-    }
+    /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
+    /// results can be retrieved (if any) using a paginator, one page at a time.
+    func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
 }
 
 private extension Content {
@@ -138,7 +126,7 @@ private extension Content {
             }
         }
         
-        func pagePublisher(pageSize: UInt, paginatedBy paginator: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
             let vendor = ApplicationConfiguration.shared.vendor
             
@@ -183,17 +171,12 @@ private extension Content {
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
                 case .resumePlayback:
-                    return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator)
-                        .map { medias in
-                            let filteredMedias = filter?.compatibleMedias(medias) ?? medias
-                            return filteredMedias.map { .media($0) }
-                        }
+                    return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                        .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .watchLater:
-                    return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator)
-                        .map { medias in
-                            let filteredMedias = filter?.compatibleMedias(medias) ?? medias
-                            return filteredMedias.map { .media($0) } }
+                    return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                        .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .showAccess:
                     #if os(iOS)
@@ -289,7 +272,7 @@ private extension Content {
             }
         }
         
-        func pagePublisher(pageSize: UInt, paginatedBy paginator: Triggerable, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
             
             let configuration = ApplicationConfiguration.shared
@@ -417,7 +400,7 @@ extension SRGDataProvider {
         #endif
     }
     
-    func historyPublisher(pageSize: UInt, paginatedBy paginator: Triggerable) -> AnyPublisher<[SRGMedia], Error> {
+    func historyPublisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
             
@@ -447,6 +430,9 @@ extension SRGDataProvider {
         }
         .map { playbackPositions in
             return self.medias(withUrns: Array(playbackPositions.keys), pageSize: pageSize, paginatedBy: paginator)
+                .map { medias in
+                    return filter?.compatibleMedias(medias) ?? medias
+                }
                 .map {
                     return $0.filter { media in
                         guard let playbackPosition = playbackPositions[media.urn] else { return true }
@@ -458,7 +444,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt, paginatedBy paginator: Triggerable) -> AnyPublisher<[SRGMedia], Error> {
+    func laterPublisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -476,6 +462,9 @@ extension SRGDataProvider {
         }
         .map { urns in
             return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+                .map { medias in
+                    return filter?.compatibleMedias(medias) ?? medias
+                }
         }
         .switchToLatest()
         .eraseToAnyPublisher()
