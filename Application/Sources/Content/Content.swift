@@ -340,7 +340,7 @@ private extension Content {
 
 // MARK: Publishers
 
-extension SRGDataProvider {
+private extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
         return urns.publisher
