@@ -27,7 +27,7 @@ class PageModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: PageModel.TriggerId.reloadAll)) { [weak self] () -> AnyPublisher<[PageModel.Row], Error> in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reloadAll)) { [weak self] () -> AnyPublisher<[PageModel.Row], Error> in
             guard let self = self else {
                 return Just([])
                     .setFailureType(to: Error.self)
@@ -44,13 +44,29 @@ class PageModel: Identifiable, ObservableObject {
     }
     
     func loadMore() {
-        if let lastSection = state.sections.last, lastSection.pageProperties.hasGridLayout {
+        if let lastSection = state.sections.last, Self.hasLoadMore(for: lastSection, in: state.sections) {
             trigger.activate(for: TriggerId.loadMore(section: lastSection))
         }
     }
     
-    func reload() {
-        trigger.activate(for: TriggerId.reloadAll)
+    func reload(deep: Bool = true) {
+        if deep {
+            trigger.activate(for: TriggerId.reloadAll)
+        }
+        else {
+            for section in state.sections where !Self.hasLoadMore(for: section, in: state.sections) {
+                trigger.activate(for: TriggerId.reload(section: section))
+            }
+        }
+    }
+    
+    private static func hasLoadMore(for: Section, in sections: [Section]) -> Bool {
+        if let section = sections.last, section.pageProperties.hasGridLayout {
+            return true
+        }
+        else {
+            return false
+        }
     }
 }
 
