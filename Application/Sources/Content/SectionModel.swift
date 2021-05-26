@@ -98,6 +98,7 @@ extension SectionModel {
     enum SectionLayout: Hashable {
         case liveMediaGrid
         case mediaGrid
+        case showAndMediaGrid
         case showGrid
         case topicGrid
     }
@@ -119,18 +120,29 @@ private extension SectionModel {
         let contentSection: SRGContentSection
         
         var layout: SectionModel.SectionLayout {
-            switch contentSection.presentation.type {
-            case .hero, .mediaHighlight, .resumePlayback, .watchLater, .personalizedProgram:
+            switch contentSection.type {
+            case .medias:
                 return .mediaGrid
-            case .showHighlight, .favoriteShows:
+            case .shows:
                 return .showGrid
-            case .topicSelector:
-                return .topicGrid
-            case .livestreams:
-                return .liveMediaGrid
-            case .swimlane, .grid:
-                return (contentSection.type == .shows) ? .showGrid : .mediaGrid
-            case .none, .showAccess:
+            case .showAndMedias:
+                return .showAndMediaGrid
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .hero, .mediaHighlight, .resumePlayback, .watchLater, .personalizedProgram:
+                    return .mediaGrid
+                case .showHighlight, .favoriteShows:
+                    return .showGrid
+                case .topicSelector:
+                    return .topicGrid
+                case .livestreams:
+                    return .liveMediaGrid
+                case .swimlane, .grid:
+                    return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+                case .none, .showAccess:
+                    return .mediaGrid
+                }
+            case .none:
                 return .mediaGrid
             }
         }
