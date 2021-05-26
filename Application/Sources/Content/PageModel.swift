@@ -412,7 +412,7 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
-            return layout == .mediaSwimlane
+            return layout == .mediaSwimlane || layout == .showSwimlane
         }
         
         func reloadSignal() -> AnyPublisher<Void, Never>? {
