@@ -81,14 +81,14 @@ class PageModel: Identifiable, ObservableObject {
     
     private static func rowReloadSignal(for section: PageModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
-            section.pageProperties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
+            section.viewModelProperties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
             trigger?.signal(activatedBy: PageModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
         .eraseToAnyPublisher()
     }
     
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
-        if section == sections.last && section.pageProperties.hasGridLayout {
+        if section == sections.last && section.viewModelProperties.hasGridLayout {
             return true
         }
         else {
@@ -209,7 +209,7 @@ extension PageModel {
             return wrappedValue.properties
         }
         
-        var pageProperties: PageSectionProperties {
+        var viewModelProperties: PageViewModelProperties {
             switch wrappedValue {
             case let .content(section):
                 return ContentSectionProperties(contentSection: section)
@@ -277,16 +277,16 @@ private extension SRGDataProvider {
     
     static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if rowItems.count > 0 && section.pageProperties.canOpenDetailPage && section.pageProperties.hasSwimlaneLayout {
+        if rowItems.count > 0 && section.viewModelProperties.canOpenDetailPage && section.viewModelProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
     }
 }
 
-// MARK: Page section properties
+// MARK: Properties
 
-protocol PageSectionProperties {
+protocol PageViewModelProperties {
     var layout: PageModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
     
@@ -294,7 +294,7 @@ protocol PageSectionProperties {
     func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
-extension PageSectionProperties {
+extension PageViewModelProperties {
     var accessibilityHint: String? {
         if canOpenDetailPage {
             return PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint")
@@ -324,7 +324,7 @@ extension PageSectionProperties {
 }
 
 private extension PageModel {
-    struct ContentSectionProperties: PageSectionProperties {
+    struct ContentSectionProperties: PageViewModelProperties {
         let contentSection: SRGContentSection
         
         private var presentation: SRGContentPresentation {
@@ -382,7 +382,7 @@ private extension PageModel {
         }
     }
     
-    struct ConfiguredSectionProperties: PageSectionProperties {
+    struct ConfiguredSectionProperties: PageViewModelProperties {
         let configuredSection: ConfiguredSection
         
         var layout: PageModel.SectionLayout {

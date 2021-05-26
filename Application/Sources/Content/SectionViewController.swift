@@ -178,7 +178,30 @@ extension SectionViewController: ContentInsets {
 extension SectionViewController: UICollectionViewDelegate {
     #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Implement actions
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item {
+        case let .media(media):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        case let .show(show):
+            if let navigationController = navigationController {
+                let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                navigationController.pushViewController(showViewController, animated: true)
+            }
+        case let .topic(topic):
+            if let navigationController = navigationController {
+                let pageViewController = PageViewController(id: .topic(topic: topic))
+                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
+                //       check -[PlayAppDelegate openTopicURN:]
+                pageViewController.title = topic.title
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+        default:
+            ()
+        }
+            
     }
     #endif
     
@@ -245,14 +268,29 @@ private extension SectionViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                if horizontalSizeClass == .compact {
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
-                        return MediaCellSize.fullWidth()
+                switch section.viewModelProperties.layout {
+                case .mediaGrid:
+                    if horizontalSizeClass == .compact {
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
+                            return MediaCellSize.fullWidth()
+                        }
                     }
-                }
-                else {
+                    else {
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                        }
+                    }
+                case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
-                        return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                    }
+                case .showGrid:
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
+                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                    }
+                case .topicGrid:
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 }
             }
@@ -277,8 +315,12 @@ private extension SectionViewController {
             switch item {
             case let .media(media):
                 MediaCell(media: media, style: .show)
+            case let .show(show):
+                ShowCell(show: show)
+            case let .topic(topic: topic):
+                TopicCell(topic: topic)
             default:
-                Color.clear
+                MediaCell(media: nil)
             }
         }
     }

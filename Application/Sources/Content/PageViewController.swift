@@ -389,7 +389,7 @@ private extension PageViewController {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.pageProperties.layout {
+                switch section.viewModelProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
@@ -431,21 +431,21 @@ private extension PageViewController {
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
                         return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, spacing) in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
                         return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { (layoutWidth, _) in
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, _ in
                         return ShowAccessCellSize.fullWidth(layoutWidth: layoutWidth)
                     }
                 #endif
@@ -472,7 +472,7 @@ private extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.pageProperties.layout {
+            switch section.viewModelProperties.layout {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -492,7 +492,7 @@ private extension PageViewController {
         let section: PageModel.Section
         
         var body: some View {
-            switch section.pageProperties.layout {
+            switch section.viewModelProperties.layout {
             case .hero:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
             case .highlight:
@@ -578,12 +578,12 @@ private extension PageViewController {
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.pageProperties.canOpenDetailPage)
+                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.viewModelProperties.canOpenDetailPage)
                 }
-                .disabled(!section.pageProperties.canOpenDetailPage)
+                .disabled(!section.viewModelProperties.canOpenDetailPage)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(Self.title(for: section))
-                .accessibilityOptionalHint(section.pageProperties.accessibilityHint)
+                .accessibilityOptionalHint(section.viewModelProperties.accessibilityHint)
                 .accessibility(addTraits: .isHeader)
             }
             #endif

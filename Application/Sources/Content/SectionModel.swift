@@ -10,7 +10,7 @@ import SRGDataProviderCombine
 // MARK: View model
 
 class SectionModel: ObservableObject {
-    let section: Section
+    let section: Content.Section
     
     @Published private(set) var state: State = .loading
     
@@ -21,7 +21,7 @@ class SectionModel: ObservableObject {
         return section.properties.title
     }
     
-    init(section: Section, filter: SectionFiltering?) {
+    init(section: Content.Section, filter: SectionFiltering?) {
         self.section = section
         
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
@@ -29,7 +29,7 @@ class SectionModel: ObservableObject {
                                                 paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                 .scan([]) { $0 + $1 }
-                .map { State.loaded(row: Row(section: section, items: removeDuplicates(in: $0))) }
+                .map { State.loaded(row: Row(section: SectionModel.Section(section), items: removeDuplicates(in: $0))) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
@@ -56,7 +56,27 @@ class SectionModel: ObservableObject {
 // MARK: Types
 
 extension SectionModel {
-    typealias Section = Content.Section
+    struct Section: Hashable {
+        let wrappedValue: Content.Section
+        
+        init(_ wrappedValue: Content.Section) {
+            self.wrappedValue = wrappedValue
+        }
+        
+        var properties: SectionProperties {
+            return wrappedValue.properties
+        }
+        
+        var viewModelProperties: SectionViewModelProperties {
+            switch wrappedValue {
+            case let .content(section):
+                return ContentSectionProperties(contentSection: section)
+            case let .configured(section):
+                return ConfiguredSectionProperties(configuredSection: section)
+            }
+        }
+    }
+    
     typealias Item = Content.Item
     typealias Row = CollectionRow<Section, Item>
     
@@ -75,8 +95,61 @@ extension SectionModel {
         }
     }
     
+    enum SectionLayout: Hashable {
+        case liveMediaGrid
+        case mediaGrid
+        case showGrid
+        case topicGrid
+    }
+    
     enum TriggerId {
         case loadMore
         case reload
+    }
+}
+
+// MARK: Properties
+
+protocol SectionViewModelProperties {
+    var layout: SectionModel.SectionLayout { get }
+}
+
+private extension SectionModel {
+    struct ContentSectionProperties: SectionViewModelProperties {
+        let contentSection: SRGContentSection
+        
+        var layout: SectionModel.SectionLayout {
+            switch contentSection.presentation.type {
+            case .hero, .mediaHighlight, .resumePlayback, .watchLater, .personalizedProgram:
+                return .mediaGrid
+            case .showHighlight, .favoriteShows:
+                return .showGrid
+            case .topicSelector:
+                return .topicGrid
+            case .livestreams:
+                return .liveMediaGrid
+            case .swimlane, .grid:
+                return (contentSection.type == .shows) ? .showGrid : .mediaGrid
+            case .none, .showAccess:
+                return .mediaGrid
+            }
+        }
+    }
+    
+    struct ConfiguredSectionProperties: SectionViewModelProperties {
+        let configuredSection: ConfiguredSection
+        
+        var layout: SectionModel.SectionLayout {
+            switch configuredSection.type {
+            case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos, .tvLiveCenter, .tvScheduledLivestreams:
+                return .mediaGrid
+            case .tvLive, .radioLive, .radioLiveSatellite:
+                return .liveMediaGrid
+            case .radioFavoriteShows, .radioAllShows:
+                return .showGrid
+            case .radioShowAccess:
+                return .mediaGrid
+            }
+        }
     }
 }
