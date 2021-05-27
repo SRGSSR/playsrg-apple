@@ -73,7 +73,7 @@ class HeaderViewSize: NSObject {
             }
         }
         else {
-            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(0.001))
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }
 }

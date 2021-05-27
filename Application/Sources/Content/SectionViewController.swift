@@ -36,7 +36,7 @@ class SectionViewController: UIViewController {
     
     private static func snapshot(from state: SectionModel.State) -> NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionModel.Section, SectionModel.Item>()
-        if case let .loaded(row: row) = state {
+        if case let .loaded(headerItem: _, row: row) = state {
             snapshot.appendSections([row.section])
             snapshot.appendItems(row.items, toSection: row.section)
         }
@@ -104,8 +104,20 @@ class SectionViewController: UIViewController {
             view.content = TitleView(text: self.globalHeaderTitle)
         }
         
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = SectionHeaderView(section: section, headerItem: self.model.state.headerItem)
+        }
+        
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            if kind == Header.global.rawValue {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
+            }
+            else {
+                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            }
         }
                 
         model.$state
@@ -127,7 +139,7 @@ class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case let .loaded(row: row):
+        case let .loaded(headerItem: _, row: row):
             emptyView.content = row.isEmpty ? EmptyView(state: .empty) : nil
         }
         
@@ -265,24 +277,18 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+            func sectionSupplementaryItems(for section: SectionModel.Section, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+                let headerSize = SectionHeaderView.size(section: section, headerItem: self?.model.state.headerItem, layoutWidth: layoutEnvironment.container.effectiveContentSize.width)
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                return [header]
+            }
+            
             func layoutSection(for section: SectionModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section.viewModelProperties.layout {
                 case .mediaGrid:
-                    if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
-                            return MediaCellSize.fullWidth()
-                        }
-                    }
-                    else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
-                        }
-                    }
-                case .showAndMediaGrid:
-                    // TODO: Nested groups
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: Self.sectionTop) { _ in
                             return MediaCellSize.fullWidth()
@@ -313,7 +319,9 @@ private extension SectionViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
-            return layoutSection(for: section, layoutEnvironment: layoutEnvironment)
+            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            return layoutSection
         }, configuration: layoutConfiguration())
     }
 }
@@ -334,6 +342,33 @@ private extension SectionViewController {
                 TopicCell(topic: topic)
             default:
                 MediaCell(media: nil)
+            }
+        }
+    }
+}
+
+// MARK: Headers
+
+private extension SectionViewController {
+    struct SectionHeaderView: View {
+        let section: SectionModel.Section
+        let headerItem: SectionModel.Item?
+        
+        var body: some View {
+            switch headerItem {
+            case let .show(show):
+                SectionShowHeaderView(section: section.wrappedValue, show: show)
+            default:
+                Color.clear
+            }
+        }
+        
+        static func size(section: SectionModel.Section, headerItem: SectionModel.Item?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+            switch headerItem {
+            case let .show(show):
+                return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth)
+            default:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
     }

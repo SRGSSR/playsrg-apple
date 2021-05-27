@@ -63,9 +63,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     // Return the minimum size which satisfies the constraints. Put a strong requirement on width and properly let the height
     // adjust
     // For an explanation, see http://titus.io/2015/01/13/a-better-way-to-autosize-in-ios-8.html
-    CGSize fittingSize = UILayoutFittingCompressedSize;
-    fittingSize.width = size.width;
-    return [headerView systemLayoutSizeFittingSize:fittingSize
+    return [headerView systemLayoutSizeFittingSize:CGSizeMake(size.width, UILayoutFittingCompressedSize.height)
                      withHorizontalFittingPriority:UILayoutPriorityRequired
                            verticalFittingPriority:UILayoutPriorityFittingSizeLevel].height;
 }

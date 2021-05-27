@@ -20,6 +20,11 @@ OBJC_EXPORT const CGFloat LayoutStandardViewCornerRadius;
 OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
 /**
+ *  Zero header height.
+ */
+OBJC_EXPORT const CGFloat LayoutHeaderHeightZero;
+
+/**
  *  Return the size of a cell whose content has the given width and aspect ratio, suited for display in swimlanes. A
  *  height offset can be provided if more space is required for displaying additional content.
  *

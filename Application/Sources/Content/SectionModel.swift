@@ -29,7 +29,12 @@ class SectionModel: ObservableObject {
                                                 paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                 .scan([]) { $0 + $1 }
-                .map { State.loaded(row: Row(section: SectionModel.Section(section), items: removeDuplicates(in: $0))) }
+                .map { items in
+                    let rowSection = SectionModel.Section(section)
+                    let headerItem = rowSection.viewModelProperties.headerItem(from: items)
+                    let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
+                    return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+                }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
@@ -83,14 +88,23 @@ extension SectionModel {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(row: Row)
+        case loaded(headerItem: Item?, row: Row)
         
         var isEmpty: Bool {
-            if case let .loaded(row) = self {
+            if case let .loaded(headerItem: _, row: row) = self {
                 return row.isEmpty
             }
             else {
                 return true
+            }
+        }
+        
+        var headerItem: Item? {
+            if case let .loaded(headerItem: headerItem, row: _) = self {
+                return headerItem
+            }
+            else {
+                return nil
             }
         }
     }
@@ -98,7 +112,6 @@ extension SectionModel {
     enum SectionLayout: Hashable {
         case liveMediaGrid
         case mediaGrid
-        case showAndMediaGrid
         case showGrid
         case topicGrid
     }
@@ -113,6 +126,9 @@ extension SectionModel {
 
 protocol SectionViewModelProperties {
     var layout: SectionModel.SectionLayout { get }
+    
+    func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item?
+    func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item]
 }
 
 private extension SectionModel {
@@ -121,12 +137,10 @@ private extension SectionModel {
         
         var layout: SectionModel.SectionLayout {
             switch contentSection.type {
-            case .medias:
+            case .medias, .showAndMedias:
                 return .mediaGrid
             case .shows:
                 return .showGrid
-            case .showAndMedias:
-                return .showAndMediaGrid
             case .predefined:
                 switch contentSection.presentation.type {
                 case .hero, .mediaHighlight, .resumePlayback, .watchLater, .personalizedProgram:
@@ -146,6 +160,24 @@ private extension SectionModel {
                 return .mediaGrid
             }
         }
+        
+        func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item? {
+            if contentSection.type == .showAndMedias, case .show = items.first {
+                return items.first
+            }
+            else {
+                return nil
+            }
+        }
+        
+        func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item] {
+            if contentSection.type == .showAndMedias, case .show = items.first {
+                return Array(items.suffix(from: 1))
+            }
+            else {
+                return items
+            }
+        }
     }
     
     struct ConfiguredSectionProperties: SectionViewModelProperties {
@@ -162,6 +194,14 @@ private extension SectionModel {
             case .radioShowAccess:
                 return .mediaGrid
             }
+        }
+        
+        func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item? {
+            return nil
+        }
+        
+        func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item] {
+            return items
         }
     }
 }
