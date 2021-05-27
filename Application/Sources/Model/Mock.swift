@@ -13,7 +13,7 @@ struct Mock {
     }
     
     static func contentSection(_ kind: ContentSection = .standard) -> SRGContentSection {
-        return mockObject(kind.rawValue, type: SRGContentSection.self)!
+        return mockObject(kind.rawValue, type: SRGContentSection.self)
     }
     
     enum Media: String {
@@ -29,8 +29,8 @@ struct Mock {
         case square
     }
     
-    static func media(_ kind: Media? = .standard) -> SRGMedia? {
-        return mockObject(kind?.rawValue, type: SRGMedia.self)
+    static func media(_ kind: Media = .standard) -> SRGMedia {
+        return mockObject(kind.rawValue, type: SRGMedia.self)
     }
     
     enum Show: String {
@@ -38,8 +38,8 @@ struct Mock {
         case overflow
     }
     
-    static func show(_ kind: Show? = .standard) -> SRGShow? {
-        return mockObject(kind?.rawValue, type: SRGShow.self)
+    static func show(_ kind: Show = .standard) -> SRGShow {
+        return mockObject(kind.rawValue, type: SRGShow.self)
     }
     
     enum Topic: String {
@@ -47,12 +47,12 @@ struct Mock {
         case overflow
     }
     
-    static func topic(_ kind: Topic? = .standard) -> SRGTopic? {
-        return mockObject(kind?.rawValue, type: SRGTopic.self)
+    static func topic(_ kind: Topic = .standard) -> SRGTopic {
+        return mockObject(kind.rawValue, type: SRGTopic.self)
     }
     
-    private static func mockObject<T>(_ name: String?, type: T.Type) -> T? {
-        guard let name = name, let clazz = type as? AnyClass else { return nil }
+    private static func mockObject<T>(_ name: String, type: T.Type) -> T {
+        let clazz: AnyClass = type as! AnyClass
         let asset = NSDataAsset(name: "\(NSStringFromClass(clazz))_\(name)")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
         return try! MTLJSONAdapter(modelClass: clazz)?.model(fromJSONDictionary: jsonData) as! T
