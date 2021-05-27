@@ -7,6 +7,15 @@
 import SwiftUI
 
 struct Mock {
+    enum ContentSection: String {
+        case standard
+        case overflow
+    }
+    
+    static func contentSection(_ kind: ContentSection = .standard) -> SRGContentSection {
+        return mockObject(kind.rawValue, type: SRGContentSection.self)!
+    }
+    
     enum Media: String {
         case standard
         case minimal

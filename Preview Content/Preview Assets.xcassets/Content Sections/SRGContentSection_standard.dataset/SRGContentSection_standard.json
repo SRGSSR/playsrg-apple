@@ -1,0 +1,15 @@
+
+{
+   "id" : "62cfda5e-0b0a-4ef6-a0dc-369683106618",
+   "isPublished" : true,
+   "vendor" : "SRF",
+   "sectionType" : "MediaSectionWithShow",
+   "hasPersonalizedContent" : false,
+   "representation" : {
+      "name" : "Swimlane",
+      "properties" : {
+         "title" : "Abstimmungen vom 7. März 2021",
+      "description": "Ergebnisse und Präsidentenrunde"
+    }
+   }
+}
