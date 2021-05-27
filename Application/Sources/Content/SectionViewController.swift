@@ -258,6 +258,7 @@ private extension SectionViewController {
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
         configuration.boundarySupplementaryItems = [header]
+        configuration.contentInsetsReference = .layoutMargins
         
         return configuration
     }
