@@ -256,7 +256,7 @@ private extension SectionViewController {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         configuration.contentInsetsReference = .layoutMargins
         

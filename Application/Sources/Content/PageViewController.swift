@@ -372,7 +372,7 @@ private extension PageViewController {
         configuration.contentInsetsReference = .layoutMargins
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .top)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         
         return configuration
