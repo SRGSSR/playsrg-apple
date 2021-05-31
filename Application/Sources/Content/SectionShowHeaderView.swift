@@ -92,10 +92,8 @@ class SectionShowHeaderViewSize: NSObject {
     
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let show = show {
-            let hostViewController = UIHostingController(rootView: SectionShowHeaderView(section: section, show: show))
-            let size = hostViewController.view.systemLayoutSizeFitting(CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height),
-                                                                       withHorizontalFittingPriority: .required,
-                                                                       verticalFittingPriority: .fittingSizeLevel)
+            let hostController = UIHostingController(rootView: SectionShowHeaderView(section: section, show: show))
+            let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
         }
         else {
