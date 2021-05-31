@@ -249,7 +249,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "feature/content-services",
-          "revision": "5ab67337cf3406edbbf80a5b8be21b8d97edb5e7",
+          "revision": "c67d388b61b1d6b2740a6229a3107327c3b47591",
           "version": null
         }
       },
@@ -317,30 +317,12 @@
         }
       },
       {
-        "package": "swift-argument-parser",
-        "repositoryURL": "https://github.com/apple/swift-argument-parser",
-        "state": {
-          "branch": null,
-          "revision": "986d191f94cec88f6350056da59c2e59e83d1229",
-          "version": "0.4.3"
-        }
-      },
-      {
         "package": "swift-collections",
         "repositoryURL": "https://github.com/apple/swift-collections.git",
         "state": {
           "branch": null,
-          "revision": "2d719d75a2065f213e58a5164384a3d2fcf9b59a",
-          "version": "0.0.2"
-        }
-      },
-      {
-        "package": "swift-collections-benchmark",
-        "repositoryURL": "https://github.com/apple/swift-collections-benchmark",
-        "state": {
-          "branch": null,
-          "revision": "665cbb154a55f45bcedd2ab4faf17b1b7ac06de3",
-          "version": "0.0.2"
+          "revision": "d45e63421d3dff834949ac69d3c37691e994bd69",
+          "version": "0.0.3"
         }
       },
       {
@@ -350,15 +332,6 @@
           "branch": null,
           "revision": "1f62db409f2c9b0223a3f68567b4a01333aae778",
           "version": "1.17.0"
-        }
-      },
-      {
-        "package": "swift-system",
-        "repositoryURL": "https://github.com/apple/swift-system",
-        "state": {
-          "branch": null,
-          "revision": "2bc160bfe34d843ae5ff47168080add24dfd7eac",
-          "version": "0.0.2"
         }
       },
       {

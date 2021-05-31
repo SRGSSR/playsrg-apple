@@ -36,7 +36,7 @@ class PageModel: Identifiable, ObservableObject {
                             return SRGDataProvider.current!.rowPublisher(id: id,
                                                                          section: section,
                                                                          pageSize: Self.pageSize(for: section, in: sections),
-                                                                         paginatedBy: self?.trigger.triggerable(activatedBy: TriggerId.loadMore(section: section))
+                                                                         paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
                             )
                             .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
                             .prepend(Self.placeholderRow(for: section, state: self?.state))
@@ -267,7 +267,7 @@ private extension SRGDataProvider {
         }
     }
     
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section, pageSize: UInt, paginatedBy paginator: Triggerable?) -> AnyPublisher<PageModel.Row, Error> {
+    func rowPublisher(id: PageModel.Id, section: PageModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageModel.Row, Error> {
         return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
             .scan([]) { $0 + $1 }
             .map { Self.rowItems(removeDuplicates(in: $0), in: section) }

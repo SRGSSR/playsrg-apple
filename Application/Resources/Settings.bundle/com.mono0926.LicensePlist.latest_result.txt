@@ -294,15 +294,9 @@ name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.2
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 
 
-name: swift-argument-parser, nameSpecified: swift-argument-parser, owner: apple, version: 0.4.3
-
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.2
-
-name: swift-collections-benchmark, nameSpecified: swift-collections-benchmark, owner: apple, version: 0.0.2
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.3
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.17.0
-
-name: swift-system, nameSpecified: swift-system, owner: apple, version: 0.0.2
 
 name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.5
 

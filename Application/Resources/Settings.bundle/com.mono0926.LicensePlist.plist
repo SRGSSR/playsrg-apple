@@ -356,25 +356,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/swift-argument-parser</string>
-			<key>Title</key>
-			<string>swift-argument-parser (0.4.3)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (0.0.2)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/swift-collections-benchmark</string>
-			<key>Title</key>
-			<string>swift-collections-benchmark (0.0.2)</string>
+			<string>swift-collections (0.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -383,14 +367,6 @@
 			<string>com.mono0926.LicensePlist/swift-protobuf</string>
 			<key>Title</key>
 			<string>SwiftProtobuf (1.17.0)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
-			<string>com.mono0926.LicensePlist/swift-system</string>
-			<key>Title</key>
-			<string>swift-system (0.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

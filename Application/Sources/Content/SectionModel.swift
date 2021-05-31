@@ -26,7 +26,7 @@ class SectionModel: ObservableObject {
         
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
             return section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                                paginatedBy: trigger.triggerable(activatedBy: TriggerId.loadMore),
+                                                paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                 .scan([]) { $0 + $1 }
                 .map { items in

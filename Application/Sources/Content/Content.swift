@@ -58,7 +58,7 @@ protocol SectionProperties {
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
-    func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
+    func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
 }
 
 private extension Content {
@@ -126,7 +126,7 @@ private extension Content {
             }
         }
         
-        func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
             let vendor = ApplicationConfiguration.shared.vendor
             
@@ -272,7 +272,7 @@ private extension Content {
             }
         }
         
-        func publisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
+        func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
             
             let configuration = ApplicationConfiguration.shared
@@ -400,7 +400,7 @@ private extension SRGDataProvider {
         #endif
     }
     
-    func historyPublisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func historyPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
             
@@ -444,7 +444,7 @@ private extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt, paginatedBy paginator: Triggerable?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func laterPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -473,7 +473,7 @@ private extension SRGDataProvider {
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
         let trigger = Trigger()
         
-        return shows(withUrns: urns, pageSize: 50 /* Use largest page size */, paginatedBy: trigger.triggerable(activatedBy: 1))
+        return shows(withUrns: urns, pageSize: 50 /* Use largest page size */, paginatedBy: trigger.signal(activatedBy: 1))
             .handleEvents(receiveOutput: { shows in
                 // FIXME: There is probably a better way
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
