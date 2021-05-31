@@ -26,7 +26,7 @@ extension UITableView {
     class ShowTableViewCell: HostTableViewCell<ShowCell>, ShowSettable {
         var show: SRGShow? {
             willSet {
-                content = ShowCell(show: newValue, direction: .horizontal)
+                content = ShowCell(show: newValue, direction: .horizontal, hasSubscriptionButton: true)
             }
         }
     }

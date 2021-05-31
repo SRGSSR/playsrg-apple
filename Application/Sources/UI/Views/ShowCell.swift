@@ -9,10 +9,12 @@ import SwiftUI
 struct ShowCell: View {
     let show: SRGShow?
     let direction: StackDirection
+    let hasSubscriptionButton: Bool
     
-    init(show: SRGShow?, direction: StackDirection = .vertical) {
+    init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
         self.show = show
         self.direction = direction
+        self.hasSubscriptionButton = hasSubscriptionButton
     }
     
     var body: some View {
@@ -36,6 +38,11 @@ struct ShowCell: View {
                 DescriptionView(show: show)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)
+                if self.hasSubscriptionButton {
+                    Image("subscription-22")
+                        .padding(.horizontal, ShowCellSize.horizontalPadding)
+                        .padding(.vertical, ShowCellSize.verticalPadding)
+                }
             }
             .background(Color(.play_cardGrayBackground))
             .redactable()
@@ -105,10 +112,18 @@ class ShowCellSize: NSObject {
 }
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let size = ShowCellSize.swimlane().previewSize
+    static private let verticalLayoutSize = ShowCellSize.swimlane().previewSize
+    static private let horizontalLayoutSize = ShowCellSize.fullWidth().previewSize
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard))
-            .previewLayout(.fixed(width: size.width, height: size.height))
+            .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
+    
+        Group {
+            ShowCell(show: Mock.show(.standard), direction: .horizontal)
+                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+            ShowCell(show: Mock.show(.standard), direction: .horizontal, hasSubscriptionButton: true)
+                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
+        }
     }
 }
