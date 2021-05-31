@@ -153,6 +153,7 @@ class SectionViewController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
                 #endif
+                self.play_setNeedsContentInsetsUpdate()
             }
         }
     }
@@ -183,7 +184,8 @@ extension SectionViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let top = (model.state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
