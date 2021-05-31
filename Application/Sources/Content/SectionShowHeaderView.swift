@@ -69,14 +69,10 @@ struct SectionShowHeaderView: View {
                 Button {
                     firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
                 } label: {
-                    Label(
-                        title: {
-                            Text(show.title)
-                        },
-                        icon: {
-                            Image("episodes-22")
-                        }
-                    )
+                    HStack(spacing: 15) {
+                        Image("episodes-22")
+                        Text(show.title)
+                    }
                     .padding(.horizontal, SectionShowHeaderViewSize.horizontalPadding)
                     .padding(.vertical, SectionShowHeaderViewSize.verticalPadding)
                     .frame(maxWidth: .infinity, minHeight: 45, alignment: .leading)
