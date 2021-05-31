@@ -36,6 +36,7 @@ struct SectionShowHeaderView: View {
                 DescriptionView(section: section)
                 ShowAccessButton(show: show)
             }
+            .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
             .frame(maxWidth: .infinity)
         }
     }
@@ -87,6 +88,8 @@ struct SectionShowHeaderView: View {
 
 class SectionShowHeaderViewSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    static let horizontalMargin: CGFloat = constant(iOS: 8, tvOS: 40)
     static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 16)
     static let verticalPadding: CGFloat = constant(iOS: 8, tvOS: 12)
     
@@ -94,10 +97,10 @@ class SectionShowHeaderViewSize: NSObject {
         if let show = show {
             let hostController = UIHostingController(rootView: SectionShowHeaderView(section: section, show: show))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
-            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
+            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
         }
         else {
-            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(LayoutHeaderHeightZero))
         }
     }
 }
