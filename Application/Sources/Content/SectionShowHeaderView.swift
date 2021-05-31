@@ -6,6 +6,24 @@
 
 import SwiftUI
 
+@objc protocol SectionShowHeaderViewAction {
+    func openShow(sender: Any?, event: OpenShowEvent?)
+}
+
+class OpenShowEvent: UIEvent {
+    let show: SRGShow
+    
+    init(show: SRGShow) {
+        self.show = show
+        super.init()
+    }
+    
+    override init() {
+        fatalError("init() is not available")
+    }
+}
+
+// Behavior: h-hug, v-hug
 struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
@@ -22,6 +40,7 @@ struct SectionShowHeaderView: View {
         }
     }
     
+    // Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         let section: Content.Section
         
@@ -41,30 +60,31 @@ struct SectionShowHeaderView: View {
         }
     }
     
+    // Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
         
         var body: some View {
-            Button(action: action, label: {
-                Label(
-                    title: {
-                        Text(show.title)
-                    },
-                    icon: {
-                        Image("episodes-22")
-                    }
-                )
-                .padding(.horizontal, SectionShowHeaderViewSize.horizontalPadding)
-                .padding(.vertical, SectionShowHeaderViewSize.verticalPadding)
-                .frame(maxWidth: .infinity, minHeight: 45, alignment: .leading)
-                .foregroundColor(.gray)
-                .background(Color.white.opacity(0.1))
-                .cornerRadius(LayoutStandardViewCornerRadius)
-            })
-        }
-        
-        private func action() {
-            
+            ResponderChain { firstResponder in
+                Button {
+                    firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
+                } label: {
+                    Label(
+                        title: {
+                            Text(show.title)
+                        },
+                        icon: {
+                            Image("episodes-22")
+                        }
+                    )
+                    .padding(.horizontal, SectionShowHeaderViewSize.horizontalPadding)
+                    .padding(.vertical, SectionShowHeaderViewSize.verticalPadding)
+                    .frame(maxWidth: .infinity, minHeight: 45, alignment: .leading)
+                    .foregroundColor(.gray)
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(LayoutStandardViewCornerRadius)
+                }
+            }
         }
     }
 }

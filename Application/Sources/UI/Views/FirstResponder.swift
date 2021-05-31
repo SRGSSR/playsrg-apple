@@ -37,6 +37,7 @@ struct ResponderChain<Content: View>: UIViewControllerRepresentable {
         if let hostView = hostController.view {
             coordinator.view = hostView
             hostView.backgroundColor = .clear
+            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         }
         return hostController
     }

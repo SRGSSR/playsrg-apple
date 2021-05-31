@@ -257,6 +257,21 @@ extension SectionViewController: SRGAnalyticsViewTracking {
 
 #endif
 
+extension SectionViewController: SectionShowHeaderViewAction {
+    func openShow(sender: Any?, event: OpenShowEvent?) {
+        #if os(tvOS)
+        if let event = event {
+            navigateToShow(event.show)
+        }
+        #else
+        if let event = event, let navigationController = navigationController {
+            let showViewController = ShowViewController(show: event.show, fromPushNotification: false)
+            navigationController.pushViewController(showViewController, animated: true)
+        }
+        #endif
+    }
+}
+
 // MARK: Layout
 
 private extension SectionViewController {
