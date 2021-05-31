@@ -39,7 +39,7 @@ struct ShowCell: View {
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)
                 if self.hasSubscriptionButton {
-                    Image("subscription-22")
+                    SubscriptionButton(show: show)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }

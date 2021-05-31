@@ -70,6 +70,11 @@ static NSString *BannerShortenedName(NSString *name);
 
 @implementation Banner (Convenience)
 
++ (void)showError:(NSError *)error
+{
+    [self showError:error inViewController:nil];
+}
+
 + (void)showError:(NSError *)error inView:(UIView *)view
 {
     [self showError:error inViewController:view.play_nearestViewController];
@@ -94,6 +99,11 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleError message:error.localizedDescription image:nil sticky:NO inViewController:viewController];
 }
 
++ (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name
+{
+    [self showFavorite:isFavorite forItemWithName:name inViewController:nil];
+}
+
 + (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name inView:(UIView *)view
 {
     [self showFavorite:isFavorite forItemWithName:name inViewController:view.play_nearestViewController];
@@ -111,6 +121,11 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 
++ (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name
+{
+    [self showSubscription:subscribed forShowWithName:name inViewController:nil];
+}
+
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inView:(UIView *)view
 {
     [self showSubscription:subscribed forShowWithName:name inViewController:view.play_nearestViewController];
@@ -126,6 +141,11 @@ static NSString *BannerShortenedName(NSString *name);
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
     UIImage *image = subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
+}
+
++ (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name
+{
+    [self showWatchLaterAdded:added forItemWithName:name inViewController:nil];
 }
 
 + (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name inView:(UIView *)view
