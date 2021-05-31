@@ -9,12 +9,46 @@ import SwiftUI
 /**
  *  A view providing access to the `UIKit` responder chain. Use the `FirstResponder` parameter provided to its view
  *  builder to send an event to the responder chain.
+ *
+ *  Behavior: h-neu, v-neu
  */
-struct ResponderChain<Content: View>: UIViewControllerRepresentable {
+struct ResponderChain<Content: View>: UIViewRepresentable {
     private let content: (FirstResponder) -> Content
     
     init(@ViewBuilder content: @escaping (FirstResponder) -> Content) {
         self.content = content
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        let firstResponder = FirstResponder()
+        let hostController = UIHostingController(rootView: content(firstResponder), ignoreSafeArea: true)
+        return Coordinator(firstResponder: firstResponder, hostController: hostController)
+    }
+    
+    func makeUIView(context: Context) -> UIView {
+        let hostView = context.coordinator.hostController.view!
+        hostView.backgroundColor = .clear
+        context.coordinator.firstResponder.view = hostView
+        return hostView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        let coordinator = context.coordinator
+        
+        let hostController = coordinator.hostController
+        hostController.rootView = content(coordinator.firstResponder)
+        
+        // Implement size neutral behavior by matching the behavior of the embedded content
+        let size = hostController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
+        uiView.setContentHuggingPriority(size.width == UIView.layoutFittingExpandedSize.width ? UILayoutPriority(0) : .required, for: .horizontal)
+        uiView.setContentHuggingPriority(size.height == UIView.layoutFittingExpandedSize.height ? UILayoutPriority(0) : .required, for: .vertical)
+    }
+}
+
+extension ResponderChain {
+    struct Coordinator {
+        let firstResponder: FirstResponder
+        let hostController: UIHostingController<Content>
     }
     
     class FirstResponder {
@@ -25,24 +59,19 @@ struct ResponderChain<Content: View>: UIViewControllerRepresentable {
             return UIApplication.shared.sendAction(action, to: nil, from: view, for: event)
         }
     }
-    
-    func makeCoordinator() -> FirstResponder {
-        return FirstResponder()
-    }
-    
-    func makeUIViewController(context: Context) -> UIHostingController<Content> {
-        let coordinator = context.coordinator
-        let hostController = UIHostingController(rootView: content(coordinator), ignoreSafeArea: true)
-        
-        if let hostView = hostController.view {
-            coordinator.view = hostView
-            hostView.backgroundColor = .clear
-            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+}
+
+struct ResponderChain_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            ResponderChain { _ in
+                Color.red
+            }
+            ResponderChain { _ in
+                Text("Text")
+            }
         }
-        return hostController
-    }
-    
-    func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
-        uiViewController.rootView = content(context.coordinator)
+        .border(Color.blue, width: 3)
+        .previewLayout(.fixed(width: 400, height: 400))
     }
 }

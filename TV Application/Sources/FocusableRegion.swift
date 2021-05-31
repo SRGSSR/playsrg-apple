@@ -42,7 +42,7 @@ private struct FocusableRegion<Content: View>: UIViewRepresentable {
     
     func updateUIView(_ uiView: UIView, context: Context) {
         let hostController = context.coordinator
-        context.coordinator.rootView = content()
+        hostController.rootView = content()
         
         // Implement size neutral behavior by matching the behavior of the embedded content
         let size = hostController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
