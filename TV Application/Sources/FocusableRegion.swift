@@ -8,35 +8,46 @@ import SwiftUI
 
 /**
  *  A view able to catch focus.
+ *
+ *  Behavior: h-neu, v-neu
  */
-private struct FocusableRegion<Content: View>: UIViewControllerRepresentable {
+private struct FocusableRegion<Content: View>: UIViewRepresentable {
     private let content: () -> Content
     
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
     
-    func makeUIViewController(context: Context) -> UIHostingController<Content> {
-        let hostController = UIHostingController(rootView: content(), ignoreSafeArea: true)
-        
-        if let hostView = hostController.view {
-            let focusGuide = UIFocusGuide()
-            focusGuide.preferredFocusEnvironments = [WeakFocusEnvironment(hostView)]
-            hostView.addLayoutGuide(focusGuide)
-            
-            NSLayoutConstraint.activate([
-                focusGuide.topAnchor.constraint(equalTo: hostView.topAnchor),
-                focusGuide.bottomAnchor.constraint(equalTo: hostView.bottomAnchor),
-                focusGuide.leadingAnchor.constraint(equalTo: hostView.leadingAnchor),
-                focusGuide.trailingAnchor.constraint(equalTo: hostView.trailingAnchor)
-            ])
-        }
-        
-        return hostController
+    func makeCoordinator() -> UIHostingController<Content> {
+        return UIHostingController(rootView: content(), ignoreSafeArea: true)
     }
     
-    func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
-        uiViewController.rootView = content()
+    func makeUIView(context: Context) -> UIView {
+        let hostView = context.coordinator.view!
+        hostView.backgroundColor = .clear
+        
+        let focusGuide = UIFocusGuide()
+        focusGuide.preferredFocusEnvironments = [WeakFocusEnvironment(hostView)]
+        hostView.addLayoutGuide(focusGuide)
+        
+        NSLayoutConstraint.activate([
+            focusGuide.topAnchor.constraint(equalTo: hostView.topAnchor),
+            focusGuide.bottomAnchor.constraint(equalTo: hostView.bottomAnchor),
+            focusGuide.leadingAnchor.constraint(equalTo: hostView.leadingAnchor),
+            focusGuide.trailingAnchor.constraint(equalTo: hostView.trailingAnchor)
+        ])
+        
+        return hostView
+    }
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        let hostController = context.coordinator
+        context.coordinator.rootView = content()
+        
+        // Implement size neutral behavior by matching the behavior of the embedded content
+        let size = hostController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
+        uiView.setContentHuggingPriority(size.width == UIView.layoutFittingExpandedSize.width ? UILayoutPriority(0) : .required, for: .horizontal)
+        uiView.setContentHuggingPriority(size.height == UIView.layoutFittingExpandedSize.height ? UILayoutPriority(0) : .required, for: .vertical)
     }
 }
 
@@ -89,5 +100,20 @@ extension View {
         return FocusableRegion {
             self
         }
+    }
+}
+
+struct FocusableRegion_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            FocusableRegion {
+                Color.red
+            }
+            FocusableRegion {
+                Text("Text")
+            }
+        }
+        .border(Color.blue, width: 3)
+        .previewLayout(.fixed(width: 400, height: 400))
     }
 }
