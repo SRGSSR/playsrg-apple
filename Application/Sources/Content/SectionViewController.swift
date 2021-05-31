@@ -266,11 +266,11 @@ private extension SectionViewController {
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
+        configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
-        configuration.contentInsetsReference = .layoutMargins
         
         return configuration
     }
