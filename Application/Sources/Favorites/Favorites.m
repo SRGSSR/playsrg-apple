@@ -151,21 +151,13 @@ NSOrderedSet<NSString *> *FavoritesShowURNs(void)
 
 #if TARGET_OS_IOS
 
-BOOL FavoritesToggleSubscriptionForShow(SRGShow *show, UIView *view)
+BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
 {
     if (! FavoritesContainsShow(show)) {
         return NO;
     }
     
-    BOOL toggled = NO;
-    if (view) {
-        toggled = [PushService.sharedService toggleSubscriptionForShow:show inView:view];
-    }
-    else {
-        toggled = [PushService.sharedService toggleSubscriptionForShow:show];
-    }
-    
-    if (! toggled) {
+    if (! [PushService.sharedService toggleSubscriptionForShow:show]) {
         return NO;
     }
     

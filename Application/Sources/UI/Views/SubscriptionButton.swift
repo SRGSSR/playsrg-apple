@@ -38,7 +38,7 @@ struct SubscriptionButton: View {
         
     var body: some View {
         Button {
-            guard let show = show, FavoritesToggleSubscriptionForShow(show, nil) else { return }
+            guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
             
             let subscribed = FavoritesIsSubscribedToShow(show)
             

@@ -372,7 +372,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (! FavoritesIsSubscribedToShow(show)) {
                     FavoritesAddShow(show);
-                    FavoritesToggleSubscriptionForShow(show, nil);
+                    FavoritesToggleSubscriptionForShow(show);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -386,7 +386,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                     if (! FavoritesIsSubscribedToShow(show)) {
                         FavoritesAddShow(show);
-                        FavoritesToggleSubscriptionForShow(show, nil);
+                        FavoritesToggleSubscriptionForShow(show);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];

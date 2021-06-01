@@ -336,16 +336,6 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show
 {
-    return [self toggleSubscriptionForShow:show inViewController:nil];
-}
-
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(UIView *)view
-{
-    return [self toggleSubscriptionForShow:show inViewController:view.play_nearestViewController];
-}
-
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(UIViewController *)viewController
-{
     if (! show) {
         return NO;
     }
@@ -361,8 +351,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
             
-            UIViewController *presentingViewController = viewController ?: UIApplication.sharedApplication.delegate.window.play_topViewController;
-            [presentingViewController presentViewController:alertController animated:YES completion:nil];
+            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+            [topViewController presentViewController:alertController animated:YES completion:nil];
         }
         return NO;
     }

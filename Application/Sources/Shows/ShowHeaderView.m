@@ -205,7 +205,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 
 - (IBAction)toggleSubscription:(id)sender
 {
-    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show, self);
+    BOOL toggled = FavoritesToggleSubscriptionForShow(self.show);
     if (! toggled) {
         return;
     }

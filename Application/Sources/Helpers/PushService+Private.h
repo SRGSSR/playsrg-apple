@@ -42,13 +42,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  Toggle subscription for the specified show and notifified with a banner. Return `YES` if toggled. If notifications
  *  are not enabled an alert is presented to ask the user to enable push notifications instead. The toggle action is
  *  ignored and the method returns `NO`.
- *
- *  @discussion Use versions with a view or view controller parameter to provide a presentation context when possible.
- *              Only use the version without context if no such context can be found.
  */
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show;
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(nullable UIView *)view;
-- (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(nullable UIViewController *)viewController;
 
 @end
 

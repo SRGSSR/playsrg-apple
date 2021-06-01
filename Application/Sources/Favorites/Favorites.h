@@ -52,10 +52,8 @@ OBJC_EXPORT NSOrderedSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 /**
  *  Toggle a subscription for a favorited show.
- *
- *  @discussion The optional view gives the opportunity to provide a context for notification alert display.
  */
-OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show, UIView * _Nullable view);
+OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show);
 
 #endif
 
