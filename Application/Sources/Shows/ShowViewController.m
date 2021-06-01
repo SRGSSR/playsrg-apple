@@ -28,8 +28,6 @@
 
 @property (nonatomic) SRGShow *show;
 
-@property (nonatomic, weak) UIBarButtonItem *shareBarButtonItem;
-
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
 @end
@@ -83,8 +81,7 @@
                                                                               target:self
                                                                               action:@selector(shareContent:)];
         shareBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
-        self.navigationItem.rightBarButtonItems = @[ shareBarButtonItem ];
-        self.shareBarButtonItem = shareBarButtonItem;
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     }
     
     [self updateAppearanceForSize:self.view.frame.size];
@@ -273,7 +270,7 @@
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-    popoverPresentationController.barButtonItem = self.shareBarButtonItem;
+    popoverPresentationController.barButtonItem = barButtonItem;
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
