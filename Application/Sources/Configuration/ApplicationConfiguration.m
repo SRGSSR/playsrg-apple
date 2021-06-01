@@ -386,7 +386,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     
     if (PlayIsSwissTXTURN(mediaMetadata.URN)) {
-        return [NSURL URLWithString:[NSString stringWithFormat:@"https://tp.srgssr.ch/p/livecenter?urn=%@", mediaMetadata.URN]];
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:@"tv"]
+                                stringByAppendingPathComponent:@"-"]
+                               stringByAppendingPathComponent:@"video"]
+                              stringByAppendingPathComponent:@"sport"];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:mediaMetadata.URN] ];
+        return URLComponents.URL;
     }
     else {
         static NSDictionary<NSNumber *, NSString *> *s_mediaTypeNames;
