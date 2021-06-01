@@ -32,6 +32,7 @@ struct SectionShowHeaderView: View {
         VStack(spacing: 20) {
             ImageView(url: show.imageUrl(for: .large))
                 .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
+                .background(Color.white.opacity(0.1))
             VStack(spacing: 12) {
                 DescriptionView(section: section)
                 ShowAccessButton(show: show)

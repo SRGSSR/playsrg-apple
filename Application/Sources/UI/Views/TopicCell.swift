@@ -46,6 +46,7 @@ struct TopicCell: View {
             ZStack {
                 ImageView(url: topic?.imageUrl(for: .small))
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
+                    .background(Color.white.opacity(0.1))
                 Color(.play_cardGrayBackground)
                     .opacity(0.3)
                 Text(topic?.title ?? "")

@@ -78,6 +78,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             Stack(direction: direction, spacing: 0) {
                 content.visualView()
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
+                    .background(Color.white.opacity(0.1))
                     .layoutPriority(1)
                 FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
                     .padding(.horizontal, horizontalPadding)

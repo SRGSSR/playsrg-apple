@@ -35,6 +35,7 @@ struct ShowCell: View {
             Stack(direction: direction, spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
+                    .background(Color.white.opacity(0.1))
                 DescriptionView(show: show)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)

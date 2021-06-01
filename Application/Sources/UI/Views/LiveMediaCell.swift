@@ -28,6 +28,7 @@ struct LiveMediaCell: View {
             #else
             VisualView(model: model)
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
+                .background(Color.white.opacity(0.1))
                 .redactable()
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement()

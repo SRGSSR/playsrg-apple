@@ -69,6 +69,7 @@ struct MediaCell: View {
             Stack(direction: direction, spacing: 0) {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
+                    .background(Color.white.opacity(0.1))
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
