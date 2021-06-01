@@ -93,6 +93,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
  */
 - (nullable NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
 - (nullable NSURL *)sharingURLForShow:(SRGShow *)show;
+- (nullable NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 

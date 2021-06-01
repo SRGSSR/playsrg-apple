@@ -65,6 +65,7 @@ AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleQuickActions = @"quick_actions";
 AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
 AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
+AnalyticsTitle const AnalyticsTitleSharingSection = @"section_share";
 AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
 AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite_add";

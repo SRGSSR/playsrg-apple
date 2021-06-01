@@ -444,6 +444,24 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return URLComponents.URL;
 }
 
+- (NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection
+{
+    if (! self.playURL || ! contentSection) {
+        return nil;
+    }
+    
+    if (! contentSection.presentation.hasDetailPage) {
+        return nil;
+    }
+    
+    NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+    URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
+                           stringByAppendingPathComponent:@"detail"]
+                          stringByAppendingPathComponent:@"section"];
+    URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"id" value:contentSection.uid] ];
+    return URLComponents.URL;
+}
+
 #pragma mark Description
 
 - (NSString *)description

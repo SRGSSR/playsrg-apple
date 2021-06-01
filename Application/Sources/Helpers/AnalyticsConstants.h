@@ -143,6 +143,7 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleQuickActions;
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingSection;
 
 /**
  *  Title for events related to subscriptions

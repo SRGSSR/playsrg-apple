@@ -85,6 +85,17 @@ class SectionViewController: UIViewController {
         self.refreshControl = refreshControl
         #endif
         
+        #if os(iOS)
+        if let contentSection = model.section.properties.rawContentSection, let _ = ApplicationConfiguration.shared.sharingURL(for: contentSection) {
+            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share-22"),
+                                                  style: .plain,
+                                                  target: self,
+                                                  action: #selector(self.shareContent(_:)))
+            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", "Share button label on player view")
+            navigationItem.rightBarButtonItem = shareButtonItem
+        }
+        #endif
+        
         self.view = view
     }
     
@@ -164,6 +175,42 @@ class SectionViewController: UIViewController {
             refreshControl.endRefreshing()
         }
         refreshTriggered = true
+    }
+    
+    @objc func shareContent(_ barButtonItem: UIBarButtonItem) {
+        guard let contentSection = model.section.properties.rawContentSection, let sharingUrl = ApplicationConfiguration.shared.sharingURL(for: contentSection) else { return }
+        
+        let activityItemSource = ActivityItemSource.init(contentSection: contentSection, url: sharingUrl)
+        let activityViewController = UIActivityViewController.init(activityItems: [ activityItemSource ], applicationActivities: nil)
+        activityViewController.excludedActivityTypes = [ .print,
+                                                         .assignToContact,
+                                                         .saveToCameraRoll,
+                                                         .postToFlickr,
+                                                         .postToVimeo,
+                                                         .postToTencentWeibo ]
+        
+        activityViewController.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            guard completed else { return }
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.type = activityType?.rawValue
+            labels.source = AnalyticsSource.button.rawValue
+            labels.value = self.model.section.properties.rawContentSection?.uid
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.sharingSection.rawValue, labels: labels)
+            
+            if activityType == .copyToPasteboard {
+                Banner.show(with: .info,
+                            message: NSLocalizedString("The content has been copied to the clipboard.", comment: "Message displayed when some content (media, show, etc.) has been copied to the clipboard"),
+                            image: nil,
+                            sticky: false,
+                            in: self)
+            }
+        }
+        
+        let popoverPresentationController = activityViewController.popoverPresentationController
+        popoverPresentationController?.barButtonItem = barButtonItem
+        
+        self.present(activityViewController, animated: true, completion: nil)
     }
     #endif
 }

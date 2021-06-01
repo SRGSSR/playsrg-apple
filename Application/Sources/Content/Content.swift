@@ -55,6 +55,7 @@ protocol SectionProperties {
     var summary: String? { get }
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
+    var rawContentSection: SRGContentSection? { get }
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -124,6 +125,10 @@ private extension Content {
             case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
                 return []
             }
+        }
+        
+        var rawContentSection: SRGContentSection? {
+            return contentSection
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
@@ -270,6 +275,10 @@ private extension Content {
             case .radioFavoriteShows, .radioShowAccess:
                 return []
             }
+        }
+        
+        var rawContentSection: SRGContentSection? {
+            return nil
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {

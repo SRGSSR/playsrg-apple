@@ -20,6 +20,10 @@
 
 @end
 
+@interface SRGContentSection (ActivityItemSource) <ActivityItemSource>
+
+@end
+
 @interface ActivityItemSource ()
 
 @property (nonatomic) id<ActivityItemSource> source;
@@ -44,6 +48,15 @@
 {
     if (self = [super init]) {
         self.source = show;
+        self.URL = URL;
+    }
+    return self;
+}
+
+- (instancetype)initWithContentSection:(SRGContentSection *)contentSection URL:(NSURL *)URL
+{
+    if (self = [super init]) {
+        self.source = contentSection;
         self.URL = URL;
     }
     return self;
@@ -97,6 +110,15 @@
 - (NSString *)subject
 {
     return self.title;
+}
+
+@end
+
+@implementation SRGContentSection (ActivityItemSource)
+
+- (NSString *)subject
+{
+    return self.presentation.title;
 }
 
 @end
