@@ -12,6 +12,7 @@
 #import "PlayAppDelegate.h"
 #import "Notification.h"
 #import "UIView+PlaySRG.h"
+#import "UIWindow+PlaySRG.h"
 
 @import AirshipCore;
 @import libextobjc;
@@ -335,18 +336,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show
 {
-    if (! self.enabled || ! show) {
-        return NO;
-    }
-    
-    if ([self isSubscribedToShowURN:show.URN]) {
-        [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
-    }
-    else {
-        [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
-    }
-    
-    return YES;
+    return [self toggleSubscriptionForShow:show inViewController:nil];
 }
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inView:(UIView *)view
@@ -356,6 +346,10 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 
 - (BOOL)toggleSubscriptionForShow:(SRGShow *)show inViewController:(UIViewController *)viewController
 {
+    if (! show) {
+        return NO;
+    }
+    
     if (! self.enabled) {
         if (! [self presentSystemAlertForPushNotifications]) {
             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Enable notifications?", @"Question displayed at the top of an alert asking the user to enable notifications")
@@ -366,12 +360,19 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
                 [UIApplication.sharedApplication openURL:URL options:@{} completionHandler:nil];
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
-            [viewController presentViewController:alertController animated:YES completion:nil];
+            
+            UIViewController *presentingViewController = viewController ?: UIApplication.sharedApplication.delegate.window.play_topViewController;
+            [presentingViewController presentViewController:alertController animated:YES completion:nil];
         }
         return NO;
     }
     else {
-        [self toggleSubscriptionForShow:show];
+        if ([self isSubscribedToShowURN:show.URN]) {
+            [self unsubscribeFromShowURNs:[NSSet setWithObject:show.URN]];
+        }
+        else {
+            [self subscribeToShowURNs:[NSSet setWithObject:show.URN]];
+        }
         return YES;
     }
 }

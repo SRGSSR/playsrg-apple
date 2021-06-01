@@ -27,7 +27,7 @@ struct SubscriptionButton: View {
         }
     }
     
-    private var accessibilityLabelString: String {
+    private var accessibilityLabel: String {
         if isPushServiceEnabled, let show = show {
             return FavoritesIsSubscribedToShow(show) ? PlaySRGAccessibilityLocalizedString("Disable notifications for show", "Show unsubscription label") : PlaySRGAccessibilityLocalizedString("Enable notifications for show", "Show subscription label")
         }
@@ -53,7 +53,7 @@ struct SubscriptionButton: View {
             Image(imageName)
         }
         .foregroundColor(.white)
-        .accessibilityLabel(accessibilityLabelString)
+        .accessibilityLabel(accessibilityLabel)
     }
 }
 
