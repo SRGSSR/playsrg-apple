@@ -84,16 +84,16 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
-- (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
-- (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
-- (nullable __kindof Channel *)channelForUid:(NSString *)uid;
+- (nullable RadioChannel *)radioChannelForUid:(nullable NSString *)uid;
+- (nullable TVChannel *)tvChannelForUid:(nullable NSString *)uid;
+- (nullable __kindof Channel *)channelForUid:(nullable NSString *)uid;
 
 /**
  *  URLs to be used for sharing
  */
-- (nullable NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
-- (nullable NSURL *)sharingURLForShow:(SRGShow *)show;
-- (nullable NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection;
+- (nullable NSURL *)sharingURLForMediaMetadata:(nullable id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
+- (nullable NSURL *)sharingURLForShow:(nullable SRGShow *)show;
+- (nullable NSURL *)sharingURLForContentSection:(nullable SRGContentSection *)contentSection;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 

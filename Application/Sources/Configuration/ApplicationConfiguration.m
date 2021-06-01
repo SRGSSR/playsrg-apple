@@ -381,14 +381,14 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;
 {
+    if (! self.playURL || ! mediaMetadata) {
+        return nil;
+    }
+    
     if (PlayIsSwissTXTURN(mediaMetadata.URN)) {
         return [NSURL URLWithString:[NSString stringWithFormat:@"https://tp.srgssr.ch/p/livecenter?urn=%@", mediaMetadata.URN]];
     }
     else {
-        if (! self.playURL) {
-            return nil;
-        }
-        
         static NSDictionary<NSNumber *, NSString *> *s_mediaTypeNames;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
