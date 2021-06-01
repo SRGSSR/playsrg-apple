@@ -39,7 +39,7 @@ struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             TitleView(text: "Title")
-            TitleView(text: String.loremIpsum)
+            TitleView(text: .loremIpsum)
             TitleView(text: nil)
         }
         .previewLayout(.fixed(width: 800, height: 200))

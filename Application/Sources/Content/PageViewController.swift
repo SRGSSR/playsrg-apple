@@ -379,14 +379,15 @@ private extension PageViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+            let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            
             func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(section: section, horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
+                let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
             
-            func layoutSection(for section: PageModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-                let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            func layoutSection(for section: PageModel.Section) -> NSCollectionLayoutSection {
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section.viewModelProperties.layout {
@@ -457,7 +458,7 @@ private extension PageViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
-            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
+            let layoutSection = layoutSection(for: section)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex)
             return layoutSection
         }, configuration: layoutConfiguration())
@@ -568,29 +569,31 @@ private extension PageViewController {
         }
         
         var body: some View {
-            #if os(tvOS)
-            HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
-                .accessibilityElement()
-                .accessibilityOptionalLabel(Self.title(for: section))
-                .accessibility(addTraits: .isHeader)
-            #else
-            ResponderChain { firstResponder in
-                Button {
-                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
-                } label: {
-                    HeaderView(title: Self.title(for: section), subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.viewModelProperties.canOpenDetailPage)
+            if let title = Self.title(for: section) {
+                #if os(tvOS)
+                HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
+                    .accessibilityElement()
+                    .accessibilityOptionalLabel(Self.title(for: section))
+                    .accessibility(addTraits: .isHeader)
+                #else
+                ResponderChain { firstResponder in
+                    Button {
+                        firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                    } label: {
+                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.viewModelProperties.canOpenDetailPage)
+                    }
+                    .disabled(!section.viewModelProperties.canOpenDetailPage)
+                    .accessibilityElement()
+                    .accessibilityOptionalLabel(title)
+                    .accessibilityOptionalHint(section.viewModelProperties.accessibilityHint)
+                    .accessibility(addTraits: .isHeader)
                 }
-                .disabled(!section.viewModelProperties.canOpenDetailPage)
-                .accessibilityElement()
-                .accessibilityOptionalLabel(Self.title(for: section))
-                .accessibilityOptionalHint(section.viewModelProperties.accessibilityHint)
-                .accessibility(addTraits: .isHeader)
+                #endif
             }
-            #endif
         }
         
-        static func size(section: PageModel.Section, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), horizontalSizeClass: horizontalSizeClass)
+        static func size(section: PageModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
         }
     }
 }

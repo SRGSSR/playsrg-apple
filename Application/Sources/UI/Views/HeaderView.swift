@@ -6,9 +6,9 @@
 
 import SwiftUI
 
-/// Behavior: h-exp, v-exp
+/// Behavior: h-exp, v-hug
 struct HeaderView: View {
-    let title: String?
+    let title: String
     let subtitle: String?
     let hasDetailDisclosure: Bool
     
@@ -16,61 +16,52 @@ struct HeaderView: View {
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
     
-    fileprivate static func displayableSubtitle(_ subtitle: String?, horizontalSizeClass: UIUserInterfaceSizeClass) -> String? {
+    private var displayableSubtitle: String? {
+        #if os(iOS)
         if horizontalSizeClass == .regular, let subtitle = subtitle, !subtitle.isEmpty {
             return subtitle
         }
         else {
             return nil
         }
-    }
-    
-    private var displayableSubtitle: String? {
-        #if os(iOS)
-        return Self.displayableSubtitle(subtitle, horizontalSizeClass: UIUserInterfaceSizeClass(horizontalSizeClass))
         #else
-        return Self.displayableSubtitle(subtitle, horizontalSizeClass: .regular)
+        return subtitle
         #endif
     }
     
     var body: some View {
-        if let title = title {
-            VStack(alignment: .leading, spacing: 0) {
-                HStack(spacing: 0) {
-                    Text(title)
-                        .srgFont(.H3)
-                        .lineLimit(1)
-                    if hasDetailDisclosure {
-                        Image(systemName: "chevron.right")
-                            .padding(.horizontal, constant(iOS: 6, tvOS: 8))
-                    }
-                }
-                if let subtitle = displayableSubtitle {
-                    Text(subtitle)
-                        .srgFont(.subtitle1)
-                        .lineLimit(1)
-                        .opacity(0.8)
+        VStack(alignment: .leading, spacing: 0) {
+            HStack(spacing: 0) {
+                Text(title)
+                    .srgFont(.H3)
+                    .lineLimit(1)
+                if hasDetailDisclosure {
+                    Image(systemName: "chevron.right")
+                        .padding(.horizontal, constant(iOS: 6, tvOS: 8))
                 }
             }
-            .opacity(0.8)
-            .foregroundColor(.white)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+            if let subtitle = displayableSubtitle {
+                Text(subtitle)
+                    .srgFont(.subtitle1)
+                    .lineLimit(1)
+                    .opacity(0.8)
+            }
         }
+        .opacity(0.8)
+        .foregroundColor(.white)
+        .padding(.vertical, HeaderViewSize.verticalPadding)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 class HeaderViewSize: NSObject {
-    static let standardHeight: CGFloat = constant(iOS: 25, tvOS: 45)
-    static let tallHeight: CGFloat = constant(iOS: 42, tvOS: 90)
+    fileprivate static let verticalPadding: CGFloat = constant(iOS: 3, tvOS: 15)
     
-    @objc static func recommended(title: String?, subtitle: String?, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
-            if HeaderView.displayableSubtitle(subtitle, horizontalSizeClass: horizontalSizeClass) != nil {
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(tallHeight))
-            }
-            else {
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(standardHeight))
-            }
+            let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))
+            let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
         }
         else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
@@ -85,11 +76,10 @@ struct HeaderView_Previews: PreviewProvider {
             HeaderView(title: "Title", subtitle: nil, hasDetailDisclosure: true)
             HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: false)
             HeaderView(title: "Title", subtitle: "Subtitle", hasDetailDisclosure: true)
-            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, hasDetailDisclosure: false)
-            HeaderView(title: String.loremIpsum, subtitle: String.loremIpsum, hasDetailDisclosure: true)
-            HeaderView(title: nil, subtitle: nil, hasDetailDisclosure: false)
-            HeaderView(title: nil, subtitle: nil, hasDetailDisclosure: true)
+            HeaderView(title: .loremIpsum, subtitle: .loremIpsum, hasDetailDisclosure: false)
+            HeaderView(title: .loremIpsum, subtitle: .loremIpsum, hasDetailDisclosure: true)
         }
-        .previewLayout(.fixed(width: 800, height: 200))
+        .frame(width: 800)
+        .previewLayout(.sizeThatFits)
     }
 }
