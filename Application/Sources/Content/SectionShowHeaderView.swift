@@ -146,9 +146,10 @@ class SectionShowHeaderViewSize: NSObject {
     fileprivate static let horizontalButtonPadding: CGFloat = constant(iOS: 10, tvOS: 16)
     fileprivate static let verticalButtonPadding: CGFloat = constant(iOS: 8, tvOS: 12)
     
-    static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {
-            let hostController = UIHostingController(rootView: SectionShowHeaderView(section: section, show: show))
+            // TODO: Factor out as sizing method
+            let hostController = UIHostingController(rootView: SectionShowHeaderView(section: section, show: show).environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
         }

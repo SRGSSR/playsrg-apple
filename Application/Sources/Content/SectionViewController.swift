@@ -342,7 +342,10 @@ private extension SectionViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: SectionModel.Section, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(section: section, headerItem: self?.model.state.headerItem, layoutWidth: layoutEnvironment.container.effectiveContentSize.width)
+                let headerSize = SectionHeaderView.size(section: section,
+                                                        headerItem: self?.model.state.headerItem,
+                                                        layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
+                                                        horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
                 return [header]
             }
@@ -427,10 +430,10 @@ private extension SectionViewController {
             }
         }
         
-        static func size(section: SectionModel.Section, headerItem: SectionModel.Item?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        static func size(section: SectionModel.Section, headerItem: SectionModel.Item?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch headerItem {
             case let .show(show):
-                return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth)
+                return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             default:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
