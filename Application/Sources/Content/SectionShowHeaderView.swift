@@ -65,14 +65,20 @@ struct SectionShowHeaderView: View {
                 if let title = section.properties.title {
                     Text(title)
                         .srgFont(.H2)
+                        // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
+                        // when calculated with a `UIHostingController`, but without this the text does not occupy
+                        // all lines it could.
                         .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.white)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)
                         .srgFont(.body)
+                        // See above
                         .lineLimit(8)
+                        .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.gray)
                 }
