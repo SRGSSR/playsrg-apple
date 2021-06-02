@@ -38,10 +38,8 @@ struct ResponderChain<Content: View>: UIViewRepresentable {
         let hostController = coordinator.hostController
         hostController.rootView = content(coordinator.firstResponder)
         
-        // Implement size neutral behavior by matching the behavior of the embedded content
-        let size = hostController.sizeThatFits(in: UIView.layoutFittingExpandedSize)
-        uiView.setContentHuggingPriority(size.width == UIView.layoutFittingExpandedSize.width ? UILayoutPriority(0) : .required, for: .horizontal)
-        uiView.setContentHuggingPriority(size.height == UIView.layoutFittingExpandedSize.height ? UILayoutPriority(0) : .required, for: .vertical)
+        // Make layout neutral
+        uiView.applySizingBehavior(of: hostController)
     }
 }
 
