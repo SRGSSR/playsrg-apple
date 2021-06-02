@@ -98,7 +98,11 @@ extension View {
      *  all the provided space in this direction.
      */
     func adaptiveSizeThatFits(in size: CGSize, for horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+        #if os(iOS)
         let hostController = UIHostingController(rootView: self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
+        #else
+        let hostController = UIHostingController(rootView: self)
+        #endif
         return hostController.sizeThatFits(in: size)
     }
 }
