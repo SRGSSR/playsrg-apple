@@ -109,7 +109,6 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
 
 class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    fileprivate static let fraction: CGFloat = constant(iOS: 0.9, tvOS: 1)
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 50, tvOS: 60)
     fileprivate static let compactHorizontalPadding: CGFloat = 6
     fileprivate static let compactVerticalPadding: CGFloat = 10
@@ -117,10 +116,10 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(fraction * layoutWidth, aspectRatio, compactHeightOffset);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, compactHeightOffset);
         }
         else {
-            return LayoutFractionedCellSize(fraction * layoutWidth, aspectRatio, 0.6);
+            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6);
         }
     }
     
