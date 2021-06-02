@@ -90,6 +90,17 @@ extension View {
     func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S : StringProtocol {
         return accessibilityHint(hint ?? "")
     }
+    
+    /**
+     *  Calculate the size of a SwiftUI view provided with some parent size, and for the specified horizontal size class.
+     *
+     *  Most useful for views with hugging behavior in at least one direction. Expanding views in some direction takes
+     *  all the provided space in this direction.
+     */
+    func adaptiveSizeThatFits(in size: CGSize, for horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
+        let hostController = UIHostingController(rootView: self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
+        return hostController.sizeThatFits(in: size)
+    }
 }
 
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
