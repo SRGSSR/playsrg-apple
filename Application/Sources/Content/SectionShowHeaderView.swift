@@ -114,8 +114,8 @@ struct SectionShowHeaderView: View {
                     .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
                     .padding(.vertical, SectionShowHeaderViewSize.verticalButtonPadding)
                     .adaptiveFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(.gray)
-                    .background(Color.white.opacity(0.1))
+                    .foregroundColor(constant(iOS: .gray, tvOS: .white))
+                    .background(constant(iOS: Color.white.opacity(0.1), tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
             }
