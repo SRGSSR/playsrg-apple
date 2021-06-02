@@ -38,6 +38,7 @@ struct SectionShowHeaderView: View {
                 ShowAccessButton(show: show)
             }
             .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
+            .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
             .frame(maxWidth: .infinity)
         }
     }
@@ -75,8 +76,8 @@ struct SectionShowHeaderView: View {
                         Image("episodes-22")
                         Text(show.title)
                     }
-                    .padding(.horizontal, SectionShowHeaderViewSize.horizontalPadding)
-                    .padding(.vertical, SectionShowHeaderViewSize.verticalPadding)
+                    .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
+                    .padding(.vertical, SectionShowHeaderViewSize.verticalButtonPadding)
                     .frame(maxWidth: .infinity, minHeight: 45, alignment: .leading)
                     .foregroundColor(.gray)
                     .background(Color.white.opacity(0.1))
@@ -91,8 +92,9 @@ class SectionShowHeaderViewSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     fileprivate static let horizontalMargin: CGFloat = constant(iOS: 16, tvOS: 80)
-    fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 16)
-    fileprivate static let verticalPadding: CGFloat = constant(iOS: 8, tvOS: 12)
+    fileprivate static let verticalMargin: CGFloat = constant(iOS: 16, tvOS: 80)
+    fileprivate static let horizontalButtonPadding: CGFloat = constant(iOS: 10, tvOS: 16)
+    fileprivate static let verticalButtonPadding: CGFloat = constant(iOS: 8, tvOS: 12)
     
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let show = show {
