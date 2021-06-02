@@ -28,8 +28,24 @@ struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
     
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
+    private var direction: StackDirection {
+        #if os(iOS)
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        #else
+        return .horizontal
+        #endif
+    }
+    
+    private var spacing: CGFloat {
+        return (direction == .vertical) ? 20 : 0
+    }
+    
     var body: some View {
-        VStack(spacing: 20) {
+        Stack(direction: direction, spacing: spacing) {
             ImageView(url: show.imageUrl(for: .large))
                 .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
@@ -38,9 +54,9 @@ struct SectionShowHeaderView: View {
                 ShowAccessButton(show: show)
             }
             .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
-            .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
             .frame(maxWidth: .infinity)
         }
+        .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
     }
     
     // Behavior: h-hug, v-hug
@@ -92,7 +108,7 @@ class SectionShowHeaderViewSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     fileprivate static let horizontalMargin: CGFloat = constant(iOS: 16, tvOS: 80)
-    fileprivate static let verticalMargin: CGFloat = constant(iOS: 16, tvOS: 80)
+    fileprivate static let verticalMargin: CGFloat = constant(iOS: 50, tvOS: 80)
     fileprivate static let horizontalButtonPadding: CGFloat = constant(iOS: 10, tvOS: 16)
     fileprivate static let verticalButtonPadding: CGFloat = constant(iOS: 8, tvOS: 12)
     
@@ -110,7 +126,17 @@ class SectionShowHeaderViewSize: NSObject {
 
 struct SectionShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {
+        #if os(tvOS)
         SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
             .previewLayout(.sizeThatFits)
+        #else
+        SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
+            .previewLayout(.sizeThatFits)
+            .environment(\.horizontalSizeClass, .regular)
+        
+        SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
+            .previewLayout(.sizeThatFits)
+            .environment(\.horizontalSizeClass, .compact)
+        #endif
     }
 }
