@@ -28,32 +28,47 @@ struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
     
-    #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
-    
-    private var direction: StackDirection {
-        #if os(iOS)
-        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+    var body: some View {
+        #if os(tvOS)
+        MainView(section: section, show: show)
+            .focusable()
         #else
-        return .horizontal
+        MainView(section: section, show: show)
         #endif
     }
     
-    var body: some View {
-        Stack(direction: direction, spacing: 0) {
-            ImageView(url: show.imageUrl(for: .large))
-                .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
-                .background(Color.white.opacity(0.1))
-            VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
-                DescriptionView(section: section)
-                ShowAccessButton(show: show)
-            }
-            .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
-            .padding(.vertical)
-            .frame(maxWidth: .infinity)
+    // Behavior: h-hug, v-hug
+    private struct MainView: View {
+        let section: Content.Section
+        let show: SRGShow
+        
+        #if os(iOS)
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        #endif
+        
+        private var direction: StackDirection {
+            #if os(iOS)
+            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+            #else
+            return .horizontal
+            #endif
         }
-        .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
+        
+        var body: some View {
+            Stack(direction: direction, spacing: 0) {
+                ImageView(url: show.imageUrl(for: .large))
+                    .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
+                    .background(Color.white.opacity(0.1))
+                VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
+                    DescriptionView(section: section)
+                    ShowAccessButton(show: show)
+                }
+                .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
+            }
+            .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
+        }
     }
     
     // Behavior: h-hug, v-hug
