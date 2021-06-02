@@ -55,7 +55,10 @@ protocol SectionProperties {
     var summary: String? { get }
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
-    var rawContentSection: SRGContentSection? { get }
+    
+    #if os(iOS)
+    var sharingItem: SharingItem? { get }
+    #endif
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -127,9 +130,11 @@ private extension Content {
             }
         }
         
-        var rawContentSection: SRGContentSection? {
-            return contentSection
+        #if os(iOS)
+        var sharingItem: SharingItem? {
+            return SharingItem(for: contentSection)
         }
+        #endif
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
@@ -277,9 +282,11 @@ private extension Content {
             }
         }
         
-        var rawContentSection: SRGContentSection? {
+        #if os(iOS)
+        var sharingItem: SharingItem? {
             return nil
         }
+        #endif
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!

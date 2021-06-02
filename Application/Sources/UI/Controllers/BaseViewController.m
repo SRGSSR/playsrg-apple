@@ -8,7 +8,6 @@
 
 #if TARGET_OS_IOS
 
-#import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
@@ -20,6 +19,7 @@
 #import "PlayErrors.h"
 #import "PlaySRG-Swift.h"
 #import "Previewing.h"
+#import "SharingItem.h"
 #import "ShowViewController.h"
 #import "UIViewController+PlaySRG.h"
 #import "WatchLater.h"
@@ -163,11 +163,10 @@ static void commonInit(BaseViewController *self);
         [menuActions addObject:downloadAction];
     }
     
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
-    if (sharingURL) {
+    SharingItem *sharingItem = [SharingItem sharingItemForMedia:media atTime:kCMTimeZero];
+    if (sharingItem) {
         UIAction *shareAction = [UIAction actionWithTitle:NSLocalizedString(@"Share", @"Context menu action to share a media") image:[UIImage imageNamed:@"share-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-            ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithMedia:media URL:sharingURL];
-            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
+            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
             activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
                                                               UIActivityTypeAssignToContact,
                                                               UIActivityTypeSaveToCameraRoll,
@@ -237,11 +236,10 @@ static void commonInit(BaseViewController *self);
     }
     [menuActions addObject:favoriteAction];
     
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
-    if (sharingURL) {
+    SharingItem *sharingItem = [SharingItem sharingItemForShow:show];
+    if (sharingItem) {
         UIAction *shareAction = [UIAction actionWithTitle:NSLocalizedString(@"Share", @"Context menu action to share a show") image:[UIImage imageNamed:@"share-22"] identifier:nil handler:^(__kindof UIAction * _Nonnull action) {
-            ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithShow:show URL:sharingURL];
-            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
+            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
             activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
                                                               UIActivityTypeAssignToContact,
                                                               UIActivityTypeSaveToCameraRoll,

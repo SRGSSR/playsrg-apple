@@ -6,7 +6,6 @@
 
 #import "MediaPreviewViewController.h"
 
-#import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"

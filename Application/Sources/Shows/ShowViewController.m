@@ -6,7 +6,6 @@
 
 #import "ShowViewController.h"
 
-#import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
@@ -14,6 +13,7 @@
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
+#import "SharingItem.h"
 #import "ShowHeaderView.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -234,13 +234,12 @@
         return;
     }
     
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
-    if (! sharingURL) {
+    SharingItem *sharingItem = [SharingItem sharingItemForShow:self.show];
+    if (! sharingItem) {
         return;
     }
     
-    ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithShow:self.show URL:sharingURL];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
                                                       UIActivityTypeAssignToContact,
                                                       UIActivityTypeSaveToCameraRoll,
@@ -255,7 +254,7 @@
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.type = activityType;
         labels.source = AnalyticsSourceButton;
-        labels.value = self.show.URN;
+        labels.value = sharingItem.analyticsUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingShow labels:labels];
         
         if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {

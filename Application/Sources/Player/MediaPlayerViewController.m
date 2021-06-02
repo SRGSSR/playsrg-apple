@@ -7,7 +7,6 @@
 #import "MediaPlayerViewController.h"
 
 #import "AccessibilityIdentifierConstants.h"
-#import "ActivityItemSource.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
@@ -36,6 +35,7 @@
 #import "ProgramTableViewCell.h"
 #import "Reachability.h"
 #import "RelatedContentView.h"
+#import "SharingItem.h"
 #import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
@@ -2016,17 +2016,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         return;
     }
     
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    NSURL *mainMediaURL = [applicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:kCMTimeZero];
-    if (! mainMediaURL) {
-        return;
-    }
-    
     Float64 currentPosition = 0;
-    NSURL *currentPositionURL = nil;
-    
     SRGMedia *segmentMedia = nil;
-    NSURL *segmentMediaURL = nil;
     
     if (mainMedia.contentType != SRGContentTypeLivestream && mainMedia.contentType != SRGContentTypeScheduledLivestream) {
         CMTime time = self.letterboxController.currentTime;
@@ -2036,16 +2027,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             currentPosition = CMTimeGetSeconds(time);
-            currentPositionURL = [applicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:time];
         }
         
         segmentMedia = ! [mainMedia isEqual:self.letterboxController.media] ? self.letterboxController.media : nil;
-        segmentMediaURL = segmentMedia ? [applicationConfiguration sharingURLForMediaMetadata:segmentMedia atTime:kCMTimeZero] : nil;
     }
     
-    void (^sharingCompletionBlock)(SRGMedia *, NSURL *, AnalyticsValue) = ^(SRGMedia *sharingMedia, NSURL *sharingURL, AnalyticsValue analyticsExtraValue) {
-        ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithMedia:sharingMedia URL:sharingURL];
-        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
+    void (^sharingCompletionBlock)(SharingItem *, NSString *, AnalyticsValue) = ^(SharingItem *sharingItem, NSString *URN, AnalyticsValue analyticsExtraValue) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
         activityViewController.excludedActivityTypes = @[ UIActivityTypeAssignToContact,
                                                           UIActivityTypeSaveToCameraRoll,
                                                           UIActivityTypePostToFlickr,
@@ -2059,11 +2047,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.type = activityType;
             labels.source = AnalyticsSourceButton;
-            labels.value = sharingMedia.URN;
+            labels.value = sharingItem.analyticsUid;
             labels.extraValue1 = analyticsExtraValue;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
             
-            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
+            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing
@@ -2088,7 +2076,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:activityViewController animated:YES completion:nil];
     };
     
-    if (currentPositionURL || segmentMediaURL) {
+    if (currentPosition != 0. || segmentMedia) {
         NSString *message = mainMedia.title;
         if (mainMedia.show.title && ! [mainMedia.title containsString:mainMedia.show.title]) {
             message = [NSString stringWithFormat:@"%@ ─ %@", mainMedia.show.title, mainMedia.title];
@@ -2096,20 +2084,24 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Share", @"Title of the action view to choose a sharing action") message:message preferredStyle:UIAlertControllerStyleActionSheet];
         
-        if (segmentMediaURL) {
+        if (segmentMedia) {
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"\"%@\"", segmentMedia.title] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                sharingCompletionBlock(segmentMedia, segmentMediaURL, AnalyticsTypeValueSharingCurrentClip);
+                SharingItem *sharingItem = [SharingItem sharingItemForMedia:segmentMedia atTime:kCMTimeZero];
+                sharingCompletionBlock(sharingItem, segmentMedia.URN, AnalyticsTypeValueSharingCurrentClip);
             }]];
         }
-        NSString *maintTitle = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The entire episode", @"Button label to share the entire episode being played.") : NSLocalizedString(@"The content", @"Button label to share the content being played.");
-        [alertController addAction:[UIAlertAction actionWithTitle:maintTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            sharingCompletionBlock(mainMedia, mainMediaURL, AnalyticsTypeValueSharingContent);
+        
+        NSString *mainTitle = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The entire episode", @"Button label to share the entire episode being played.") : NSLocalizedString(@"The content", @"Button label to share the content being played.");
+        [alertController addAction:[UIAlertAction actionWithTitle:mainTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:kCMTimeZero];
+            sharingCompletionBlock(sharingItem, mainMedia.URN, AnalyticsTypeValueSharingContent);
         }]];
         
-        if (currentPositionURL) {
+        if (currentPosition != 0.) {
             NSString *positionTitleFormat = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The episode at %@", @"Button label to share the entire episode being played at time (hours / minutes / seconds).") : NSLocalizedString(@"The content at %@", @"Button label to share the content being played at time (hours / minutes / seconds).");
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:positionTitleFormat, PlayHumanReadableFormattedDuration(currentPosition)] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                sharingCompletionBlock(mainMedia, currentPositionURL, AnalyticsTypeValueSharingContentAtTime);
+                SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:CMTimeMakeWithSeconds(currentPosition, NSEC_PER_SEC)];
+                sharingCompletionBlock(sharingItem, mainMedia.URN, AnalyticsTypeValueSharingContentAtTime);
             }]];
         }
         
@@ -2123,7 +2115,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:alertController animated:YES completion:nil];
     }
     else {
-        sharingCompletionBlock(mainMedia, mainMediaURL, AnalyticsTypeValueSharingContent);
+        SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:kCMTimeZero];
+        sharingCompletionBlock(sharingItem, mainMedia.URN, AnalyticsTypeValueSharingContent);
     }
 }
 

@@ -327,11 +327,11 @@
 		08ADFB2125EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
 		08ADFB2225EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
 		08ADFB2325EE5729004662A8 /* LetterboxDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */; };
-		08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
-		08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
-		08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
-		08AF9483217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
-		08AF9484217D27E40028B082 /* ActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* ActivityItemSource.m */; };
+		08AF9480217D27E40028B082 /* SharingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* SharingItem.m */; };
+		08AF9481217D27E40028B082 /* SharingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* SharingItem.m */; };
+		08AF9482217D27E40028B082 /* SharingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* SharingItem.m */; };
+		08AF9483217D27E40028B082 /* SharingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* SharingItem.m */; };
+		08AF9484217D27E40028B082 /* SharingItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 08AF947F217D27E40028B082 /* SharingItem.m */; };
 		08B77A5D2409C48700A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
 		08B77A5E2409C48700A3BC3B /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08B77AA82409E0A300A3BC3B /* ApplicationScreenshots~ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */; };
@@ -2225,8 +2225,8 @@
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxDelegate.swift; sourceTree = "<group>"; };
-		08AF947E217D27E40028B082 /* ActivityItemSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ActivityItemSource.h; sourceTree = "<group>"; };
-		08AF947F217D27E40028B082 /* ActivityItemSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ActivityItemSource.m; sourceTree = "<group>"; };
+		08AF947E217D27E40028B082 /* SharingItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharingItem.h; sourceTree = "<group>"; };
+		08AF947F217D27E40028B082 /* SharingItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharingItem.m; sourceTree = "<group>"; };
 		08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Application.xcconfig"; sourceTree = "<group>"; };
 		08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApplicationScreenshots~ios.swift"; sourceTree = "<group>"; };
@@ -3147,8 +3147,6 @@
 				6F4760181EB37BD1003021EA /* Categories */,
 				08C33ED323CB5C6500D422C1 /* Protocols */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
-				08AF947E217D27E40028B082 /* ActivityItemSource.h */,
-				08AF947F217D27E40028B082 /* ActivityItemSource.m */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
@@ -3189,6 +3187,8 @@
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
 				6F0850F226256A7700B4E410 /* Reachability.h */,
 				6F0850F326256A7700B4E410 /* Reachability.m */,
+				08AF947E217D27E40028B082 /* SharingItem.h */,
+				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
@@ -7422,7 +7422,7 @@
 				E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCE7A38260359220037A861 /* Extensions.swift in Sources */,
-				08AF9480217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				08AF9480217D27E40028B082 /* SharingItem.m in Sources */,
 				6F73BFB026563ABD0032D742 /* DampedCollectionView.swift in Sources */,
 				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
@@ -7627,7 +7627,7 @@
 				6FB0AEFD217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				0827DA261F0D43BC00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6FB89A0026335B090012F1B0 /* Stacks.swift in Sources */,
-				08AF9481217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				08AF9481217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54432639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE171EA63D5A00965F45 /* PlayMiniPlayerView.m in Sources */,
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
@@ -7825,7 +7825,7 @@
 				6FB0AEFE217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				0827DA271F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6FB89A0126335B090012F1B0 /* Stacks.swift in Sources */,
-				08AF9482217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				08AF9482217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54442639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE191EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
@@ -8023,7 +8023,7 @@
 				6FB0AEFF217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				0827DA281F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6FB89A0226335B090012F1B0 /* Stacks.swift in Sources */,
-				08AF9483217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				08AF9483217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54452639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1B1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
@@ -8221,7 +8221,7 @@
 				6FB0AF00217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				0827DA291F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6FB89A0326335B090012F1B0 /* Stacks.swift in Sources */,
-				08AF9484217D27E40028B082 /* ActivityItemSource.m in Sources */,
+				08AF9484217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54462639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,

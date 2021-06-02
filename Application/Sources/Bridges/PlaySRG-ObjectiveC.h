@@ -7,7 +7,6 @@
 // This file lists all Objective-C headers which must be exposed to Swift code. Update the list as needed. All referenced
 // Objective-C headers will be automatically exposed to all Swift source files.
 
-#import "ActivityItemSource.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
@@ -30,6 +29,7 @@
 #import "PushService.h"
 #import "Reachability.h"
 #import "RefreshControl.h"
+#import "SharingItem.h"
 #import "ShowViewController.h"
 #import "ShowsViewController.h"
 #import "SongsViewController.h"
