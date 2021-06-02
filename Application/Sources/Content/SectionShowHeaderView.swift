@@ -109,6 +109,8 @@ struct SectionShowHeaderView: View {
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
         #endif
         
+        @State private var isFocused = false
+        
         var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
             #if os(iOS)
             return UIUserInterfaceSizeClass(horizontalSizeClass)
@@ -126,10 +128,11 @@ struct SectionShowHeaderView: View {
                         Image("episodes-22")
                         Text(show.title)
                     }
+                    .onParentFocusChange { isFocused = $0 }
                     .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
                     .padding(.vertical, SectionShowHeaderViewSize.verticalButtonPadding)
                     .adaptiveFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(constant(iOS: .gray, tvOS: .white))
+                    .foregroundColor(constant(iOS: .gray, tvOS: isFocused ? .darkGray : .white))
                     .background(constant(iOS: Color.white.opacity(0.1), tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
