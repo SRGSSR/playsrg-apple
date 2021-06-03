@@ -19,7 +19,8 @@
     NSInteger requestCount = [NSUserDefaults.standardUserDefaults integerForKey:kRequestCountUserDefaultsKey] + 1;
     static const NSInteger kRequestCountThreshold = 50;
     if (requestCount >= kRequestCountThreshold) {
-        [SKStoreReviewController requestReview];
+        UIWindowScene *windowScene = UIApplication.sharedApplication.delegate.window.windowScene;
+        [SKStoreReviewController requestReviewInScene:windowScene];
         requestCount = 0;
     }
     [NSUserDefaults.standardUserDefaults setInteger:requestCount forKey:kRequestCountUserDefaultsKey];
