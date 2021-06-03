@@ -256,6 +256,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Section page everywhere</string>
+			<key>Key</key>
+			<string>PlaySRGSettingSectionPageEverywhereEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
 			<string>Subscribe to all shows</string>

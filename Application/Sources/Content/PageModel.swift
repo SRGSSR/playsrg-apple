@@ -363,6 +363,9 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
+            #if DEBUG || NIGHTLY || BETA
+            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return true }
+            #endif
             switch presentation.type {
             case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
                 return true
@@ -415,6 +418,9 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
+            #if DEBUG || NIGHTLY || BETA
+            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return true }
+            #endif
             return layout == .mediaSwimlane || layout == .showSwimlane
         }
         

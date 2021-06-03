@@ -9,6 +9,7 @@
 NSString * const PlaySRGSettingHDOverCellularEnabled = @"PlaySRGSettingHDOverCellularEnabled";
 NSString * const PlaySRGSettingPresenterModeEnabled = @"PlaySRGSettingPresenterModeEnabled";
 NSString * const PlaySRGSettingStandaloneEnabled = @"PlaySRGSettingStandaloneEnabled";
+NSString * const PlaySRGSettingSectionPageEverywhereEnabled = @"PlaySRGSettingSectionPageEverywhereEnabled";
 NSString * const PlaySRGSettingAutoplayEnabled = @"PlaySRGSettingAutoplayEnabled";
 NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSettingBackgroundVideoPlaybackEnabled";
 NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
