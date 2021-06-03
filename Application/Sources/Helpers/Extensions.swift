@@ -253,9 +253,14 @@ extension UIView {
         applySizingBehavior(sizingBehavior, for: .vertical)
     }
     
+    /// Apply the same sizing behavior as the provided hosting controller in some directions (layout neutrality).
+    func applySizingBehavior<T>(of hostingController: UIHostingController<T>, for axis: NSLayoutConstraint.Axis) {
+        applySizingBehavior(sizingBehavior(of: hostingController, for: axis), for: axis)
+    }
+    
     /// Apply the same sizing behavior as the provided hosting controller in all directions (layout neutrality).
     func applySizingBehavior<T>(of hostingController: UIHostingController<T>) {
-        applySizingBehavior(sizingBehavior(of: hostingController, for: .horizontal), for: .horizontal)
-        applySizingBehavior(sizingBehavior(of: hostingController, for: .vertical), for: .vertical)
+        applySizingBehavior(of: hostingController, for: .horizontal)
+        applySizingBehavior(of: hostingController, for: .vertical)
     }
 }
