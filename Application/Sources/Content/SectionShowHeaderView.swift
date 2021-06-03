@@ -67,10 +67,11 @@ struct SectionShowHeaderView: View {
                 ImageView(url: show.imageUrl(for: .large))
                     .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
+                    .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .layoutPriority(1)
                 VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
                     DescriptionView(section: section)
-                    ShowAccessButton(show: show)
+                    ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
                 }
                 .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
                 .padding(.vertical)
@@ -78,6 +79,16 @@ struct SectionShowHeaderView: View {
             }
             .adaptiveMainFrame(for: uiHorizontalSizeClass)
             .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
+        }
+    }
+    
+    private struct ImageOverlay: View {
+        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
+        
+        var body: some View {
+            if uiHorizontalSizeClass == .regular {
+                LinearGradient(gradient: Gradient(colors: [.clear, .init(.play_black)]), startPoint: .center, endPoint: .trailing)
+            }
         }
     }
     
@@ -114,20 +125,9 @@ struct SectionShowHeaderView: View {
     // Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
-        
-        #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        #endif
+        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
         
         @State private var isFocused = false
-        
-        var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-            #if os(iOS)
-            return UIUserInterfaceSizeClass(horizontalSizeClass)
-            #else
-            return .regular
-            #endif
-        }
         
         var body: some View {
             ResponderChain { firstResponder in
@@ -157,7 +157,7 @@ struct SectionShowHeaderView: View {
 //       That means:
 //         - Remove this extension
 //         - Remove uiHorizontalSizeClass
-//         - Directly inline it above with a separate expression per platform
+//         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
     func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
         return Group {
