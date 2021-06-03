@@ -137,6 +137,7 @@ struct SectionShowHeaderView: View {
                     HStack(spacing: 15) {
                         Image("episodes-22")
                         Text(show.title)
+                            .srgFont(.button)
                     }
                     .onParentFocusChange { isFocused = $0 }
                     .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
