@@ -401,6 +401,12 @@ private extension PageViewController {
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { (layoutWidth, _) in
                         return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
+                case .highlightSwimlane:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { (layoutWidth, _) in
+                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
+                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    return layoutSection
                 case .mediaSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _ in
                         return MediaCellSize.swimlane()
@@ -476,7 +482,7 @@ private extension PageViewController {
             switch section.viewModelProperties.layout {
             case .hero:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
-            case .highlight:
+            case .highlight, .highlightSwimlane:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)

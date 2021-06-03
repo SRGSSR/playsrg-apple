@@ -186,6 +186,7 @@ extension PageModel {
     enum SectionLayout: Hashable {
         case hero
         case highlight
+        case highlightSwimlane
         case liveMediaGrid
         case liveMediaSwimlane
         case mediaGrid
@@ -337,6 +338,8 @@ private extension PageModel {
                 return .hero
             case .mediaHighlight, .showHighlight:
                 return .highlight
+            case .mediaHighlightSwimlane:
+                return .highlightSwimlane
             case .topicSelector:
                 return .topicSelector
             case .showAccess:

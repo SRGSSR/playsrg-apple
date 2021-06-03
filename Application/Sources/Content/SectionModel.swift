@@ -143,7 +143,7 @@ private extension SectionModel {
                 return .showGrid
             case .predefined:
                 switch contentSection.presentation.type {
-                case .hero, .mediaHighlight, .resumePlayback, .watchLater, .personalizedProgram:
+                case .hero, .mediaHighlight, .mediaHighlightSwimlane, .resumePlayback, .watchLater, .personalizedProgram:
                     return .mediaGrid
                 case .showHighlight, .favoriteShows:
                     return .showGrid

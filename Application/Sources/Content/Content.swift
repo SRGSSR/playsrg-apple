@@ -113,7 +113,7 @@ private extension Content {
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
                 return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
-            case .swimlane, .hero, .grid:
+            case .swimlane, .mediaHighlightSwimlane, .hero, .grid:
                 switch contentSection.type {
                 case .showAndMedias:
                     let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -198,7 +198,7 @@ private extension Content {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
                     #endif
-                case .none, .swimlane, .hero, .grid, .mediaHighlight, .showHighlight:
+                case .none, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
                     return Just([])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
