@@ -10,15 +10,18 @@ struct MoreCell: View {
     let section: Content.Section
     let filter: SectionFiltering?
     
-    static let textSize: CGFloat = constant(iOS: 60, tvOS: 100)
+    static let iconHeight: CGFloat = constant(iOS: 60, tvOS: 100)
     static let aspectRatio: CGFloat = 16 / 9
     
     var body: some View {
         #if os(tvOS)
         LabeledCardButton(aspectRatio: Self.aspectRatio, action: action) {
-            Text("+")
-                .srgFont(family: .display, weight: .bold, size: Self.textSize)
+            Image(systemName: "chevron.right")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(height: Self.iconHeight)
                 .foregroundColor(.white)
+                .opacity(0.8)
                 .accessibilityElement()
                 .accessibilityOptionalLabel(NSLocalizedString("More", comment: "More button accessibility label"))
                 .accessibility(addTraits: .isButton)
@@ -26,9 +29,12 @@ struct MoreCell: View {
             Color.clear
         }
         #else
-        Text("+")
-            .srgFont(family: .display, weight: .bold, size: Self.textSize)
+        Image(systemName: "chevron.right")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(height: Self.iconHeight)
             .foregroundColor(.white)
+            .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(Self.aspectRatio, contentMode: .fit)
             .background(Color.white.opacity(0.1))
