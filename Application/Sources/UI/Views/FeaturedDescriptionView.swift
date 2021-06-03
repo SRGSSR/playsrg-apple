@@ -47,7 +47,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 }
                 if let introduction = content.introduction {
                     Text(introduction)
-                        .srgFont(.caption)
+                        .srgFont(.subtitle2)
                         .lineLimit(1)
                         .foregroundColor(Color(.play_gray))
                 }
