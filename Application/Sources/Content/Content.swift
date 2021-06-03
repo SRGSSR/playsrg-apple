@@ -55,6 +55,7 @@ protocol SectionProperties {
     var summary: String? { get }
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
+    var displaysTitle: Bool { get }
     
     #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -128,6 +129,10 @@ private extension Content {
             case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
                 return []
             }
+        }
+        
+        var displaysTitle: Bool {
+            return contentSection.type != .showAndMedias
         }
         
         #if os(iOS)
@@ -280,6 +285,10 @@ private extension Content {
             case .radioFavoriteShows, .radioShowAccess:
                 return []
             }
+        }
+        
+        var displaysTitle: Bool {
+            return true
         }
         
         #if os(iOS)

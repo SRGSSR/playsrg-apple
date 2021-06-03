@@ -18,7 +18,7 @@ class SectionModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
-        return section.properties.title
+        return section.properties.displaysTitle ? section.properties.title : nil
     }
     
     init(section: Content.Section, filter: SectionFiltering?) {
