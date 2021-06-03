@@ -63,8 +63,8 @@ static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersi
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
-static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
+static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -143,8 +143,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsUserLocationSettingsButton];
     [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
-    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsResetGroup];
     [hiddenKeys addObject:SettingsClearWebCacheButton];
     [hiddenKeys addObject:SettingsClearVectorImageCacheButton];

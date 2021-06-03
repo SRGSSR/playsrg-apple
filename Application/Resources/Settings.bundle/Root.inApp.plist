@@ -258,17 +258,17 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Versions and release notes</string>
+			<string>Subscribe to all shows</string>
 			<key>Key</key>
-			<string>Button_VersionsAndReleaseNotes</string>
+			<string>Button_SubscribeToAllShows</string>
 		</dict>
 		<dict>
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Subscribe to all shows</string>
+			<string>Versions and release notes</string>
 			<key>Key</key>
-			<string>Button_SubscribeToAllShows</string>
+			<string>Button_VersionsAndReleaseNotes</string>
 		</dict>
 		<dict>
 			<key>Type</key>
