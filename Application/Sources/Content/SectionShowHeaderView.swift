@@ -46,6 +46,14 @@ struct SectionShowHeaderView: View {
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
         #endif
         
+        var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
+            #if os(iOS)
+            return UIUserInterfaceSizeClass(horizontalSizeClass)
+            #else
+            return .regular
+            #endif
+        }
+        
         private var direction: StackDirection {
             #if os(iOS)
             return (horizontalSizeClass == .compact) ? .vertical : .horizontal
@@ -59,6 +67,7 @@ struct SectionShowHeaderView: View {
                 ImageView(url: show.imageUrl(for: .large))
                     .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
+                    .layoutPriority(1)
                 VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
                     DescriptionView(section: section)
                     ShowAccessButton(show: show)
@@ -67,6 +76,7 @@ struct SectionShowHeaderView: View {
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
             }
+            .adaptiveMainFrame(for: uiHorizontalSizeClass)
             .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
         }
     }
@@ -92,7 +102,7 @@ struct SectionShowHeaderView: View {
                     Text(summary)
                         .srgFont(.body)
                         // See above
-                        .lineLimit(8)
+                        .lineLimit(6)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.gray)
@@ -131,7 +141,7 @@ struct SectionShowHeaderView: View {
                     .onParentFocusChange { isFocused = $0 }
                     .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
                     .padding(.vertical, SectionShowHeaderViewSize.verticalButtonPadding)
-                    .adaptiveFrame(height: 45, for: uiHorizontalSizeClass)
+                    .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
                     .foregroundColor(constant(iOS: .gray, tvOS: isFocused ? .darkGray : .white))
                     .background(constant(iOS: Color.white.opacity(0.1), tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
@@ -149,13 +159,24 @@ struct SectionShowHeaderView: View {
 //         - Remove uiHorizontalSizeClass
 //         - Directly inline it above with a separate expression per platform
 private extension View {
-    func adaptiveFrame(height: CGFloat, for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
+    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
+        return Group {
+            if horizontalSizeClass == .compact {
+                self
+            }
+            else {
+                self.frame(height: constant(iOS: 300, tvOS: 500), alignment: .top)
+            }
+        }
+    }
+    
+    func adaptiveButtonFrame(height: CGFloat, for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
         return Group {
             if horizontalSizeClass == .compact {
                 self.frame(maxWidth: .infinity, minHeight: height, alignment: .leading)
             }
             else {
-                self.frame(height: height)
+                self.frame(maxWidth: 300, minHeight: height, maxHeight: height)
             }
         }
     }
