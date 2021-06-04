@@ -13,7 +13,6 @@ struct MediaVisualView: View {
     let scale: ImageScale
     
     static let padding: CGFloat = constant(iOS: 6, tvOS: 16)
-    static let spacing: CGFloat = 6
     
     @State private var progress: Double = 0
     @State private var taskHandle: String?
@@ -56,7 +55,7 @@ struct MediaVisualView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             
-            HStack(spacing: Self.spacing) {
+            HStack(spacing: 6) {
                 Spacer()
                 if media?.presentation == .presentation360 {
                     ThreeSixtyBadge()

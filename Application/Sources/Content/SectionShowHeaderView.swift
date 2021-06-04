@@ -65,7 +65,7 @@ struct SectionShowHeaderView: View {
         var body: some View {
             Stack(direction: direction, spacing: 0) {
                 ImageView(url: show.imageUrl(for: .large))
-                    .aspectRatio(SectionShowHeaderViewSize.aspectRatio, contentMode: .fit)
+                    .aspectRatio(16 / 9, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .layoutPriority(1)
@@ -73,12 +73,12 @@ struct SectionShowHeaderView: View {
                     DescriptionView(section: section)
                     ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
                 }
-                .padding(.horizontal, SectionShowHeaderViewSize.horizontalMargin)
+                .padding(.horizontal, constant(iOS: 16, tvOS: 80))
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
             }
             .adaptiveMainFrame(for: uiHorizontalSizeClass)
-            .padding(.bottom, SectionShowHeaderViewSize.verticalMargin)
+            .padding(.bottom, constant(iOS: 50, tvOS: 80))
         }
     }
     
@@ -140,8 +140,8 @@ struct SectionShowHeaderView: View {
                             .srgFont(.button)
                     }
                     .onParentFocusChange { isFocused = $0 }
-                    .padding(.horizontal, SectionShowHeaderViewSize.horizontalButtonPadding)
-                    .padding(.vertical, SectionShowHeaderViewSize.verticalButtonPadding)
+                    .padding(.horizontal, constant(iOS: 10, tvOS: 16))
+                    .padding(.vertical, constant(iOS: 8, tvOS: 12))
                     .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
                     .foregroundColor(constant(iOS: .gray, tvOS: isFocused ? .darkGray : .white))
                     .background(constant(iOS: Color.white.opacity(0.1), tvOS: Color.clear))
@@ -184,13 +184,7 @@ private extension View {
 }
 
 class SectionShowHeaderViewSize: NSObject {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
-    
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
-    fileprivate static let horizontalMargin: CGFloat = constant(iOS: 16, tvOS: 80)
-    fileprivate static let verticalMargin: CGFloat = constant(iOS: 50, tvOS: 80)
-    fileprivate static let horizontalButtonPadding: CGFloat = constant(iOS: 10, tvOS: 16)
-    fileprivate static let verticalButtonPadding: CGFloat = constant(iOS: 8, tvOS: 12)
     
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {

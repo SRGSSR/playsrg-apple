@@ -37,11 +37,11 @@ struct MediaCell: View {
     }
     
     private var horizontalPadding: CGFloat {
-        return direction == .vertical ? 0 : MediaCellSize.horizontalPadding
+        return direction == .vertical ? 0 : constant(iOS: 10, tvOS: 20)
     }
     
     private var verticalPadding: CGFloat {
-        return direction == .vertical ? MediaCellSize.verticalPadding : 0
+        return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
     
     init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
@@ -63,7 +63,7 @@ struct MediaCell: View {
                     .accessibility(addTraits: .isButton)
             } label: {
                 DescriptionView(media: media, style: style)
-                    .padding(.top, MediaCellSize.verticalPadding)
+                    .padding(.top, verticalPadding)
             }
             #else
             Stack(direction: direction, spacing: 0) {
@@ -131,11 +131,8 @@ extension MediaCell {
 
 class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 15)
-    fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 20)
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
-    private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
     
     @objc static func swimlane() -> NSCollectionLayoutSize {
@@ -155,7 +152,7 @@ class MediaCellSize: NSObject {
     }
     
     @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: defaultTableItemHeight)
+        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
     }
     
     @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {

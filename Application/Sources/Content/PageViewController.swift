@@ -361,13 +361,12 @@ extension PageViewController: TabBarActionable {
 // MARK: Layout
 
 private extension PageViewController {
-    private static let sectionSpacing: CGFloat = constant(iOS: 35, tvOS: 70)
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
-        configuration.interSectionSpacing = Self.sectionSpacing
+        configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)

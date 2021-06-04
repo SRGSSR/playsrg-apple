@@ -84,7 +84,6 @@ class ShowCellSize: NSObject {
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
-    private static let defaultTableItemHeight: CGFloat = constant(iOS: 84, tvOS: 120)
     private static let heightOffset: CGFloat = constant(iOS: 32, tvOS: 45)
     
     @objc static func swimlane() -> NSCollectionLayoutSize {
@@ -104,7 +103,7 @@ class ShowCellSize: NSObject {
     }
     
     @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: defaultTableItemHeight)
+        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
     }
     
     @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {

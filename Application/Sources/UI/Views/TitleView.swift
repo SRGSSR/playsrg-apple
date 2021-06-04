@@ -23,11 +23,9 @@ struct TitleView: View {
 }
 
 class TitleViewSize: NSObject {
-    private static let recommendedHeight: CGFloat = constant(iOS: 60, tvOS: 100)
-    
     @objc static func recommended(text: String?) -> NSCollectionLayoutSize {
         if let text = text, !text.isEmpty {
-            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(recommendedHeight))
+            return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 60, tvOS: 100)))
         }
         else {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))

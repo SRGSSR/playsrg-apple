@@ -84,10 +84,10 @@ struct LiveMediaCell: View {
         private var padding: CGFloat {
             #if os(iOS)
             if horizontalSizeClass == .compact {
-                return LiveMediaCellSize.compactPadding
+                return 8
             }
             #endif
-            return LiveMediaCellSize.regularPadding
+            return constant(iOS: 10, tvOS: 16)
         }
         
         var body: some View {
@@ -118,8 +118,6 @@ struct LiveMediaCell: View {
 
 class LiveMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    fileprivate static let regularPadding: CGFloat = constant(iOS: 10, tvOS: 16)
-    fileprivate static let compactPadding: CGFloat = 8
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     

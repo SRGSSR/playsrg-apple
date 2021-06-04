@@ -49,14 +49,12 @@ struct HeaderView: View {
         }
         .opacity(0.8)
         .foregroundColor(.white)
-        .padding(.vertical, HeaderViewSize.verticalPadding)
+        .padding(.vertical, constant(iOS: 3, tvOS: 15))
         .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
 class HeaderViewSize: NSObject {
-    fileprivate static let verticalPadding: CGFloat = constant(iOS: 3, tvOS: 15)
-    
     @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
             let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))

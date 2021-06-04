@@ -9,7 +9,6 @@ import SwiftUI
 private enum BadgeMetrics {
     static let length: CGFloat = constant(iOS: 19, tvOS: 33)
     static let horizontalPadding: CGFloat = constant(iOS: 6, tvOS: 8)
-    static let verticalPadding: CGFloat = constant(iOS: 2, tvOS: 5)
     static let cornerRadius: CGFloat = constant(iOS: 3, tvOS: 4)
 }
 
@@ -23,7 +22,7 @@ struct Badge: View {
             .srgFont(.label)
             .lineLimit(1)
             .foregroundColor(.white)
-            .padding(.vertical, BadgeMetrics.verticalPadding)
+            .padding(.vertical, constant(iOS: 2, tvOS: 5))
             .padding(.horizontal, BadgeMetrics.horizontalPadding)
             .background(color)
             .cornerRadius(BadgeMetrics.cornerRadius)

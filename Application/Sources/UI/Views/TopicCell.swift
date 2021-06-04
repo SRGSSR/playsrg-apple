@@ -53,7 +53,7 @@ struct TopicCell: View {
                     .srgFont(.button)
                     .lineLimit(1)
                     .foregroundColor(.white)
-                    .padding(TopicCellSize.padding)
+                    .padding(10)
             }
         }
     }
@@ -61,7 +61,6 @@ struct TopicCell: View {
 
 class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
-    fileprivate static let padding: CGFloat = 10
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 250)
     
