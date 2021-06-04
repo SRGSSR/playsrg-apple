@@ -25,7 +25,6 @@
 "Off" = "Aus";
 "On" = "Ein";
 "Open system settings" = "Einstellungen anzeigen";
-"Original images only" = "Nur Originalbilder zeigen";
 "Outside Switzerland" = "Outside Switzerland";
 "Permissions" = "Berechtigungen";
 "Playback" = "Wiedergabe";
@@ -33,6 +32,7 @@
 "Production" = "Production";
 "Quality" = "Datenqualität";
 "Reset" = "Reset";
+"Section wide support" = "Section wide support";
 "Server" = "Server";
 "Source code" = "Quellcode";
 "Stage" = "Stage";
