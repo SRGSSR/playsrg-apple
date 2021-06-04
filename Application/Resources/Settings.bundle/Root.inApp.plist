@@ -258,9 +258,9 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Section page everywhere</string>
+			<string>Section wide support</string>
 			<key>Key</key>
-			<string>PlaySRGSettingSectionPageEverywhereEnabled</string>
+			<string>PlaySRGSettingSectionWideSupportEnabled</string>
 		</dict>
 		<dict>
 			<key>Type</key>

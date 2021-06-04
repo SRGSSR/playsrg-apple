@@ -6,6 +6,6 @@
 
 import Foundation
 
-func ApplicationSettingSectionPageEverywhereEnabled() -> Bool {
-    return UserDefaults.standard.bool(forKey: PlaySRGSettingSectionPageEverywhereEnabled)
+func ApplicationSettingSectionWideSupportEnabled() -> Bool {
+    return UserDefaults.standard.bool(forKey: PlaySRGSettingSectionWideSupportEnabled)
 }

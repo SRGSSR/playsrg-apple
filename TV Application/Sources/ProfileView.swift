@@ -59,7 +59,7 @@ struct ProfileView: View {
             #if DEBUG || NIGHTLY || BETA
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
-                SectionPageEverywhereItem()
+                SectionWideSupportItem()
             }
             #endif
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
@@ -299,20 +299,20 @@ struct ProfileView: View {
     }
     
     #if DEBUG || NIGHTLY || BETA
-    struct SectionPageEverywhereItem: View {
-        @AppStorage(PlaySRGSettingSectionPageEverywhereEnabled) var isSectionPageEverywhereEnabled = false
+    struct SectionWideSupportItem: View {
+        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         private func action() {
-            isSectionPageEverywhereEnabled = !isSectionPageEverywhereEnabled
+            isSectionWideSupportEnabled = !isSectionWideSupportEnabled
         }
         
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Section page everywhere", "Section page everywhere setting"))
+                    Text(PlaySRGSettingsLocalizedString("Section wide support", "Section wide support setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isSectionPageEverywhereEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                    Text(isSectionWideSupportEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
