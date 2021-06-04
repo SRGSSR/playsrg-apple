@@ -364,7 +364,7 @@ private extension PageModel {
         
         var canOpenDetailPage: Bool {
             #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionWideSupportEnabled() else { return hasSwimlaneLayout }
+            guard !ApplicationSettingSectionWideSupportEnabled() else { return true }
             #endif
             switch presentation.type {
             case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
@@ -419,7 +419,7 @@ private extension PageModel {
         
         var canOpenDetailPage: Bool {
             #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionWideSupportEnabled() else { return hasSwimlaneLayout }
+            guard !ApplicationSettingSectionWideSupportEnabled() else { return true }
             #endif
             return layout == .mediaSwimlane || layout == .showSwimlane
         }
