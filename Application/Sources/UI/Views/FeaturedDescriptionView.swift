@@ -16,6 +16,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     
     let content: Content
     let alignment: Alignment
+    let detailed: Bool
     
     let spacing: CGFloat = 6
     let largeSpacing: CGFloat = 10
@@ -41,7 +42,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     
     var body: some View {
         VStack(alignment: stackAlignment, spacing: spacing) {
-            HStack(spacing: spacing) {
+            HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.play_green))
                 }
@@ -58,7 +59,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     .srgFont(.H3)
                     .lineLimit(2)
                     .foregroundColor(.white)
-                if alignment != .topLeading, let summary = content.summary {
+                if detailed, let summary = content.summary {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(3)
@@ -72,14 +73,14 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
 }
 
 extension FeaturedDescriptionView where Content == FeaturedMediaContent {
-    init(media: SRGMedia?, label: String? = nil, alignment: Alignment) {
-        self.init(content: FeaturedMediaContent(media: media, label: label), alignment: alignment)
+    init(media: SRGMedia?, label: String? = nil, alignment: Alignment, detailed: Bool) {
+        self.init(content: FeaturedMediaContent(media: media, label: label), alignment: alignment, detailed: detailed)
     }
 }
 
 extension FeaturedDescriptionView where Content == FeaturedShowContent {
-    init(show: SRGShow?, label: String? = nil, alignment: Alignment) {
-        self.init(content: FeaturedShowContent(show: show, label: label), alignment: alignment)
+    init(show: SRGShow?, label: String? = nil, alignment: Alignment, detailed: Bool) {
+        self.init(content: FeaturedShowContent(show: show, label: label), alignment: alignment, detailed: detailed)
     }
 }
 
@@ -88,16 +89,16 @@ struct FeaturedDescriptionView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .leading)
-            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .topLeading)
-            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .center)
+            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .leading, detailed: true)
+            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .topLeading, detailed: true)
+            FeaturedDescriptionView(show: Mock.show(), label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
         
         Group {
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .leading)
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .topLeading)
-            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .center)
+            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .leading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .topLeading, detailed: true)
+            FeaturedDescriptionView(media: Mock.media(), label: label, alignment: .center, detailed: true)
         }
         .previewLayout(.fixed(width: 800, height: 300))
     }

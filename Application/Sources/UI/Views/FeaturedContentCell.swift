@@ -63,7 +63,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     content.visualView()
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
-                    FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
+                    FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: true)
                         .padding(.horizontal, horizontalPadding)
                         .padding(.vertical, verticalPadding)
                 }
@@ -80,7 +80,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .layoutPriority(1)
-                FeaturedDescriptionView(content: content, alignment: descriptionAlignment)
+                FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: layout == .highlight)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }
@@ -112,11 +112,10 @@ class FeaturedContentCellSize: NSObject {
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 50, tvOS: 60)
     fileprivate static let compactHorizontalPadding: CGFloat = 6
     fileprivate static let compactVerticalPadding: CGFloat = 10
-    fileprivate static let compactHeightOffset: CGFloat = 70
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, compactHeightOffset);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 70);
         }
         else {
             return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6);
@@ -125,7 +124,7 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, compactHeightOffset);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 152);
         }
         else {
             return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4);
@@ -173,7 +172,7 @@ struct FeaturedContentCell_Previews: PreviewProvider {
             .previewLayout(for: .highlight, layoutWidth: 1200, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), layout: .highlight)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)
             .previewLayout(for: .highlight, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         #endif
