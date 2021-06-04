@@ -13926,7 +13926,7 @@
 			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.6.1;
+				minimumVersion = 10.1.0;
 			};
 		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
