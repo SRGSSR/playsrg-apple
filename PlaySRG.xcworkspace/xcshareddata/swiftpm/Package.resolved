@@ -56,15 +56,6 @@
         }
       },
       {
-        "package": "FetchImage",
-        "repositoryURL": "https://github.com/kean/FetchImage.git",
-        "state": {
-          "branch": null,
-          "revision": "3b68b12f25d6060ed102523ebff394c4f8e31cec",
-          "version": "0.3.0"
-        }
-      },
-      {
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {

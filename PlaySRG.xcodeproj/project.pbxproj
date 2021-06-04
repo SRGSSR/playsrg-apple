@@ -598,6 +598,16 @@
 		6F16C80E26025945006F685A /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageModel.swift */; };
 		6F16C80F26025945006F685A /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageModel.swift */; };
 		6F16C81026025945006F685A /* PageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageModel.swift */; };
+		6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC15266AB81C009F74C6 /* Nuke */; };
+		6F17DC18266AB837009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC17266AB837009F74C6 /* Nuke */; };
+		6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC19266AB83E009F74C6 /* Nuke */; };
+		6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1B266AB846009F74C6 /* Nuke */; };
+		6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1D266AB84E009F74C6 /* Nuke */; };
+		6F17DC20266AB854009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1F266AB854009F74C6 /* Nuke */; };
+		6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC21266AB85B009F74C6 /* Nuke */; };
+		6F17DC24266AB862009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC23266AB862009F74C6 /* Nuke */; };
+		6F17DC26266AB867009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC25266AB867009F74C6 /* Nuke */; };
+		6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC27266AB86D009F74C6 /* Nuke */; };
 		6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382F1EFBFE8D0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */; };
@@ -673,11 +683,6 @@
 		6F30AB802604B66300457331 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
 		6F30AB812604B66400457331 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
 		6F30AB9C2604B66600457331 /* TopicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDFD88B24E6BC9200F20382 /* TopicCell.swift */; };
-		6F30ABD02604B77500457331 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F30ABCF2604B77500457331 /* FetchImage */; };
-		6F30ABD22604B77D00457331 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F30ABD12604B77D00457331 /* FetchImage */; };
-		6F30ABD42604B78700457331 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F30ABD32604B78700457331 /* FetchImage */; };
-		6F30ABD62604B78E00457331 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F30ABD52604B78E00457331 /* FetchImage */; };
-		6F30ABD82604B79500457331 /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6F30ABD72604B79500457331 /* FetchImage */; };
 		6F30ABD92604B7A700457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6F30ABDA2604B7A700457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6F30ABF42604B7A800457331 /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
@@ -1634,11 +1639,6 @@
 		6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
 		6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
 		6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD88F8922D4BC41008859EF /* UISearchBar+PlaySRG.m */; };
-		6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AA624E590EE00FF286E /* FetchImage */; };
-		6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AAA24E590F400FF286E /* FetchImage */; };
-		6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AAE24E590FC00FF286E /* FetchImage */; };
-		6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB224E5910400FF286E /* FetchImage */; };
-		6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 6FDB2AB624E5910B00FF286E /* FetchImage */; };
 		6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
 		6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AB824E5916F00FF286E /* ImageView.swift */; };
@@ -2808,6 +2808,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */,
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
@@ -2819,7 +2820,6 @@
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
-				6F30ABD02604B77500457331 /* FetchImage in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
@@ -2832,6 +2832,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F17DC18266AB837009F74C6 /* Nuke in Frameworks */,
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
@@ -2843,7 +2844,6 @@
 				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
-				6F30ABD22604B77D00457331 /* FetchImage in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
@@ -2856,6 +2856,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
@@ -2867,7 +2868,6 @@
 				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
-				6F30ABD42604B78700457331 /* FetchImage in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
@@ -2880,6 +2880,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */,
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
@@ -2891,7 +2892,6 @@
 				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
-				6F30ABD62604B78E00457331 /* FetchImage in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
@@ -2904,6 +2904,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
@@ -2915,7 +2916,6 @@
 				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
-				6F30ABD82604B79500457331 /* FetchImage in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
@@ -3008,11 +3008,11 @@
 				6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
-				6FDB2AA724E590EE00FF286E /* FetchImage in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC20266AB854009F74C6 /* Nuke in Frameworks */,
 				6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE82265CD70900A4882B /* Collections in Frameworks */,
@@ -3030,11 +3030,11 @@
 				6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */,
 				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
-				6FDB2AAB24E590F400FF286E /* FetchImage in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */,
 				6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE84265CD71000A4882B /* Collections in Frameworks */,
@@ -3052,11 +3052,11 @@
 				6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
-				6FDB2AAF24E590FC00FF286E /* FetchImage in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC24266AB862009F74C6 /* Nuke in Frameworks */,
 				6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE86265CD71700A4882B /* Collections in Frameworks */,
@@ -3074,11 +3074,11 @@
 				6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
-				6FDB2AB324E5910400FF286E /* FetchImage in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC26266AB867009F74C6 /* Nuke in Frameworks */,
 				6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE88265CD71E00A4882B /* Collections in Frameworks */,
@@ -3096,11 +3096,11 @@
 				6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */,
 				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
 				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
-				6FDB2AB724E5910B00FF286E /* FetchImage in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */,
 				6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				6FEEBE8A265CD72400A4882B /* Collections in Frameworks */,
@@ -4468,11 +4468,11 @@
 				6FD46CB825DAB76D00874EAF /* AppCenterCrashes */,
 				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
 				081A8BD62602B69600530FFF /* SRGDataProviderCombine */,
-				6F30ABCF2604B77500457331 /* FetchImage */,
 				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
 				6FEC8979261F165600FF9762 /* DZNEmptyDataSet */,
 				08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */,
 				6FEEBE77265CD6A700A4882B /* Collections */,
+				6F17DC15266AB81C009F74C6 /* Nuke */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -4517,11 +4517,11 @@
 				6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */,
 				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
 				081A8C222602C0EA00530FFF /* SRGDataProviderCombine */,
-				6F30ABD12604B77D00457331 /* FetchImage */,
 				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
 				6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */,
 				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 				6FEEBE79265CD6D300A4882B /* Collections */,
+				6F17DC17266AB837009F74C6 /* Nuke */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -4566,11 +4566,11 @@
 				6FD46CE825DAB7C300874EAF /* AppCenterCrashes */,
 				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
 				081A8C242602C0F800530FFF /* SRGDataProviderCombine */,
-				6F30ABD32604B78700457331 /* FetchImage */,
 				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
 				6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */,
 				08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */,
 				6FEEBE7B265CD6DB00A4882B /* Collections */,
+				6F17DC19266AB83E009F74C6 /* Nuke */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -4615,11 +4615,11 @@
 				6FD46D0025DAB80300874EAF /* AppCenterCrashes */,
 				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
 				081A8C262602C10300530FFF /* SRGDataProviderCombine */,
-				6F30ABD52604B78E00457331 /* FetchImage */,
 				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
 				6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */,
 				08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */,
 				6FEEBE7D265CD6E600A4882B /* Collections */,
+				6F17DC1B266AB846009F74C6 /* Nuke */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -4664,11 +4664,11 @@
 				6FD46D1825DAB80C00874EAF /* AppCenterCrashes */,
 				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
 				081A8C282602C10E00530FFF /* SRGDataProviderCombine */,
-				6F30ABD72604B79500457331 /* FetchImage */,
 				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
 				6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */,
 				08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */,
 				6FEEBE7F265CD70000A4882B /* Collections */,
+				6F17DC1D266AB84E009F74C6 /* Nuke */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -4881,7 +4881,6 @@
 			packageProductDependencies = (
 				6FA84A1724E44B6400B1A56E /* SRGLetterbox */,
 				6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */,
-				6FDB2AA624E590EE00FF286E /* FetchImage */,
 				6FF12A47256C58A70042F446 /* SRGLoggerSwift */,
 				6F61CCC2256E41EE00E42E31 /* SRGUserData */,
 				08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */,
@@ -4892,6 +4891,7 @@
 				6F3AED882614C5FA007D591F /* SRGAppearanceSwift */,
 				6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */,
 				6FEEBE81265CD70900A4882B /* Collections */,
+				6F17DC1F266AB854009F74C6 /* Nuke */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -4919,7 +4919,6 @@
 			packageProductDependencies = (
 				6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */,
 				6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */,
-				6FDB2AAA24E590F400FF286E /* FetchImage */,
 				6FF12A5D256C58B20042F446 /* SRGLoggerSwift */,
 				6F61CCC4256E41F500E42E31 /* SRGUserData */,
 				082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */,
@@ -4930,6 +4929,7 @@
 				6F3AEDA32614C601007D591F /* SRGAppearanceSwift */,
 				6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */,
 				6FEEBE83265CD71000A4882B /* Collections */,
+				6F17DC21266AB85B009F74C6 /* Nuke */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -4957,7 +4957,6 @@
 			packageProductDependencies = (
 				6FA84A1F24E44B7500B1A56E /* SRGLetterbox */,
 				6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */,
-				6FDB2AAE24E590FC00FF286E /* FetchImage */,
 				6FF12A73256C58BB0042F446 /* SRGLoggerSwift */,
 				6F61CCC6256E41FB00E42E31 /* SRGUserData */,
 				08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */,
@@ -4968,6 +4967,7 @@
 				6F3AEDA52614C607007D591F /* SRGAppearanceSwift */,
 				6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */,
 				6FEEBE85265CD71700A4882B /* Collections */,
+				6F17DC23266AB862009F74C6 /* Nuke */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -4995,7 +4995,6 @@
 			packageProductDependencies = (
 				6FA84A2324E44B7B00B1A56E /* SRGLetterbox */,
 				6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */,
-				6FDB2AB224E5910400FF286E /* FetchImage */,
 				6FF12A75256C58C40042F446 /* SRGLoggerSwift */,
 				6F61CCC8256E420200E42E31 /* SRGUserData */,
 				08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */,
@@ -5006,6 +5005,7 @@
 				6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */,
 				6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */,
 				6FEEBE87265CD71E00A4882B /* Collections */,
+				6F17DC25266AB867009F74C6 /* Nuke */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5033,7 +5033,6 @@
 			packageProductDependencies = (
 				6FA84A2724E44B8300B1A56E /* SRGLetterbox */,
 				6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */,
-				6FDB2AB624E5910B00FF286E /* FetchImage */,
 				6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */,
 				6F61CCCA256E420800E42E31 /* SRGUserData */,
 				08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */,
@@ -5044,6 +5043,7 @@
 				6F3AEDC22614C613007D591F /* SRGAppearanceSwift */,
 				6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */,
 				6FEEBE89265CD72400A4882B /* Collections */,
+				6F17DC27266AB86D009F74C6 /* Nuke */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -5266,7 +5266,6 @@
 			packageReferences = (
 				6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */,
 				6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */,
-				6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */,
 				6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */,
 				6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */,
 				6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */,
@@ -5280,6 +5279,7 @@
 				6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */,
 				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
+				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -13731,6 +13731,14 @@
 				kind = branch;
 			};
 		};
+		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.6.1;
+			};
+		};
 		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
@@ -13801,14 +13809,6 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.1.0;
-			};
-		};
-		6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kean/FetchImage.git";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.3.0;
 			};
 		};
 		6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
@@ -13996,6 +13996,56 @@
 			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
+		6F17DC15266AB81C009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC17266AB837009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC19266AB83E009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC1B266AB846009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC1D266AB84E009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC1F266AB854009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC21266AB85B009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC23266AB862009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC25266AB867009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
+		6F17DC27266AB86D009F74C6 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
+		};
 		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
@@ -14145,31 +14195,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
-		};
-		6F30ABCF2604B77500457331 /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6F30ABD12604B77D00457331 /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6F30ABD32604B78700457331 /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6F30ABD52604B78E00457331 /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6F30ABD72604B79500457331 /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
 		};
 		6F3AED332614C5B6007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -14445,31 +14470,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
-		};
-		6FDB2AA624E590EE00FF286E /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6FDB2AAA24E590F400FF286E /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6FDB2AAE24E590FC00FF286E /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6FDB2AB224E5910400FF286E /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
-		};
-		6FDB2AB624E5910B00FF286E /* FetchImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 6FDB2AA324E590DC00FF286E /* XCRemoteSwiftPackageReference "FetchImage" */;
-			productName = FetchImage;
 		};
 		6FEC8979261F165600FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
