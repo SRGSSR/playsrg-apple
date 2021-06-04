@@ -18,9 +18,6 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     let alignment: Alignment
     let detailed: Bool
     
-    let spacing: CGFloat = 6
-    let largeSpacing: CGFloat = 10
-    
     private var stackAlignment: HorizontalAlignment {
         return alignment == .center ? .center : .leading
     }
@@ -41,7 +38,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     }
     
     var body: some View {
-        VStack(alignment: stackAlignment, spacing: spacing) {
+        VStack(alignment: stackAlignment, spacing: 6) {
             HStack(spacing: constant(iOS: 8, tvOS: 12)) {
                 if let label = content.label {
                     Badge(text: label, color: Color(.play_green))
@@ -54,7 +51,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 }
             }
             
-            VStack(alignment: stackAlignment, spacing: largeSpacing) {
+            VStack(alignment: stackAlignment, spacing: 10) {
                 Text(content.title ?? "")
                     .srgFont(.H3)
                     .lineLimit(2)
