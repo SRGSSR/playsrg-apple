@@ -278,7 +278,7 @@ private extension SRGDataProvider {
     
     static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if rowItems.count > 0 && section.viewModelProperties.canOpenDetailPage {
+        if rowItems.count > 0 && section.viewModelProperties.canOpenDetailPage && section.viewModelProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
