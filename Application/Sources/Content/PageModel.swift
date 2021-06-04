@@ -307,7 +307,7 @@ extension PageViewModelProperties {
     
     var hasSwimlaneLayout: Bool {
         switch layout {
-        case .mediaSwimlane, .showSwimlane:
+        case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
             return true
         default:
             return false
@@ -364,7 +364,7 @@ private extension PageModel {
         
         var canOpenDetailPage: Bool {
             #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return true }
+            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return hasSwimlaneLayout }
             #endif
             switch presentation.type {
             case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
@@ -419,7 +419,7 @@ private extension PageModel {
         
         var canOpenDetailPage: Bool {
             #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return true }
+            guard !ApplicationSettingSectionPageEverywhereEnabled() else { return hasSwimlaneLayout }
             #endif
             return layout == .mediaSwimlane || layout == .showSwimlane
         }
