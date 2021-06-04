@@ -173,7 +173,7 @@ private extension Content {
                         .eraseToAnyPublisher()
                 case .personalizedProgram:
                     return dataProvider.favoritesPublisher(filter: filter)
-                        .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn)) }
+                        .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: pageSize) }
                         .switchToLatest()
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
@@ -367,7 +367,7 @@ private extension Content {
 
 private extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
-    func latestMediasForShowsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGMedia], Error> {
+    func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt) -> AnyPublisher<[SRGMedia], Error> {
         return urns.publisher
             .collect(3)
             .flatMap { urns in
@@ -375,7 +375,7 @@ private extension SRGDataProvider {
             }
             .reduce([]) { $0 + $1 }
             .map { medias in
-                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(30))
+                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(Int(pageSize)))
             }
             .eraseToAnyPublisher()
     }
