@@ -499,7 +499,7 @@ private extension SRGDataProvider {
         let trigger = Trigger()
         
         return shows(withUrns: urns, pageSize: 50 /* Use largest page size */, paginatedBy: trigger.signal(activatedBy: 1))
-            .handleEvents(receiveOutput: { shows in
+            .handleEvents(receiveOutput: { _ in
                 // FIXME: There is probably a better way
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
                     trigger.activate(for: 1)

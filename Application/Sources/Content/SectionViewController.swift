@@ -110,7 +110,7 @@ class SectionViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
-        let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, section in
+        let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
             guard let self = self else { return }
             view.content = TitleView(text: self.globalHeaderTitle)
         }
@@ -190,7 +190,7 @@ class SectionViewController: UIViewController {
             .postToTencentWeibo
         ]
         
-        activityViewController.completionWithItemsHandler = { activityType, completed, returnedItems, error in
+        activityViewController.completionWithItemsHandler = { activityType, completed, _, _ in
             guard completed else { return }
             
             let labels = SRGAnalyticsHiddenEventLabels()

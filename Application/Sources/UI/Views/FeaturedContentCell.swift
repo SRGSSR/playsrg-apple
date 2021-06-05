@@ -112,19 +112,19 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 70);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 70)
         }
         else {
-            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6);
+            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6)
         }
     }
     
     @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 145);
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 145)
         }
         else {
-            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4);
+            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
         }
     }
 }

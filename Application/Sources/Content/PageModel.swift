@@ -46,7 +46,7 @@ class PageModel: Identifiable, ObservableObject {
                     .eraseToAnyPublisher()
                 }
                 .switchToLatest()
-                .map { State.loaded(rows: $0.filter { !$0.isEmpty } ) }
+                .map { State.loaded(rows: $0.filter { !$0.isEmpty }) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
