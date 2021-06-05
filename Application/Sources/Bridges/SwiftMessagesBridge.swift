@@ -19,6 +19,7 @@ open class SwiftMessagesBridge: NSObject {
      *  @param viewController      The view controller context for which the notification must be displayed.
      *  @param backgroundColor     The notification banner color.
      *  @param foregroundColor     Text and image tint color.
+     *  @sticky                    The banner has to be removed by the user.
      *
      *  @discussion Provide the most accurate view controller context, as it ensures the notification behaves correctly
      *              for it (i.e. rotates consistently and appears under a parent navigation bar).
