@@ -198,8 +198,12 @@ struct ShowDetailView: View {
                 }
                 Spacer()
                 LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22",
-                              label: isFavorite ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited") : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
-                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
+                              label: isFavorite
+                                ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
+                                : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
+                              accessibilityLabel: isFavorite
+                                ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited")
+                                : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
                               action: toggleFavoriteAction)
                     .padding(.leading, 100)
                     .alert(isPresented: $favoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
