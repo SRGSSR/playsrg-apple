@@ -1,0 +1,35 @@
+disabled_rules:
+    - identifier_name
+    - force_cast
+    - force_try
+    - function_body_length
+    - multiple_closures_with_trailing_closure
+    - statement_position
+    - todo
+
+line_length: 300
+
+file_length: 620
+
+trailing_whitespace:
+  ignores_empty_lines: true
+  severity: warning
+
+type_name:
+  excluded:
+    - Id
+
+function_parameter_count:
+  warning: 8
+
+cyclomatic_complexity:
+  warning: 15
+
+nesting:
+  type_level: 2
+
+excluded:
+  - build
+  - Carthage
+  - Pods
+  - vendor
