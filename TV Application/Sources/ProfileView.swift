@@ -70,7 +70,11 @@ struct ProfileView: View {
         .frame(maxWidth: 1054)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
-    
+}
+
+// MARK: List items
+
+extension ProfileView {
     struct ProfileListItem: View {
         @ObservedObject var model: ProfileModel
         @State var alertDisplayed = false
