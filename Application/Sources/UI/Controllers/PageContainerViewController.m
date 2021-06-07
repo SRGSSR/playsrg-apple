@@ -116,7 +116,7 @@
     tabBar.items = tabBarItems.copy;
     
     tabBar.tintColor = UIColor.whiteColor;
-    tabBar.unselectedItemTintColor = UIColor.play_grayColor;
+    tabBar.unselectedItemTintColor = UIColor.srg_gray4Color;
     tabBar.selectedItemTintColor = UIColor.whiteColor;
         
     // Use ripple effect without color, so that there is no Material-like highlighting (we are NOT adopting Material)

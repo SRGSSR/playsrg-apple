@@ -187,7 +187,7 @@ struct ShowDetailView: View {
                         .lineLimit(3)
                         .foregroundColor(.white)
                     if let broadcastInformationMessage = show?.broadcastInformation?.message {
-                        Badge(text: broadcastInformationMessage, color: Color(.play_gray))
+                        Badge(text: broadcastInformationMessage, color: Color.srg_gray4)
                     }
                     if let lead = show?.lead {
                         Text(lead)

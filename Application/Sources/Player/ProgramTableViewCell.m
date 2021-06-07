@@ -132,10 +132,10 @@
         self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         
-        self.titleLabel.textColor = UIColor.play_grayColor;
+        self.titleLabel.textColor = UIColor.srg_gray4Color;
         
         self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
-        self.subtitleLabel.textColor = UIColor.play_grayColor;
+        self.subtitleLabel.textColor = UIColor.srg_gray4Color;
         
         self.disabledOverlayView.hidden = NO;
         self.userInteractionEnabled = NO;

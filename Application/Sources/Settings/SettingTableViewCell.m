@@ -6,13 +6,13 @@
 
 #import "SettingTableViewCell.h"
 
-#import "UIColor+PlaySRG.h"
+@import SRGAppearance;
 
 @implementation SettingTableViewCell
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    self.textLabel.textColor = highlighted ? UIColor.play_grayColor : UIColor.whiteColor;
+    self.textLabel.textColor = highlighted ? UIColor.srg_gray4Color : UIColor.whiteColor;
 }
 
 @end

@@ -20,11 +20,6 @@
     return UIColor.lightGrayColor;
 }
 
-+ (UIColor *)play_grayColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#979797"];
-}
-
 + (UIColor *)play_greenColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#347368"];

@@ -131,13 +131,13 @@ static const CGFloat SongTableViewMargin = 42.f;
     if ([dateInterval containsDate:self.song.date]) {
         self.timeLabel.textColor = UIColor.whiteColor;
         self.titleLabel.textColor = UIColor.whiteColor;
-        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.artistLabel.textColor = UIColor.srg_gray4Color;
         self.playable = YES;
     }
     else {
-        self.timeLabel.textColor = UIColor.play_grayColor;
-        self.titleLabel.textColor = UIColor.play_grayColor;
-        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.timeLabel.textColor = UIColor.srg_gray4Color;
+        self.titleLabel.textColor = UIColor.srg_gray4Color;
+        self.artistLabel.textColor = UIColor.srg_gray4Color;
         self.playable = NO;
     }
 }

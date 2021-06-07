@@ -47,7 +47,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     Text(introduction)
                         .srgFont(.subtitle2)
                         .lineLimit(1)
-                        .foregroundColor(Color(.play_gray))
+                        .foregroundColor(Color.srg_gray4)
                 }
             }
             
@@ -60,7 +60,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                     Text(summary)
                         .srgFont(.body)
                         .lineLimit(3)
-                        .foregroundColor(Color(.play_gray))
+                        .foregroundColor(Color.srg_gray4)
                 }
             }
             .multilineTextAlignment(textAlignment)

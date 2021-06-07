@@ -48,7 +48,7 @@
 {
     [super setHighlighted:highlighted animated:animated];
     
-    UIColor *color = highlighted ? UIColor.play_grayColor : UIColor.whiteColor;
+    UIColor *color = highlighted ? UIColor.srg_gray4Color : UIColor.whiteColor;
     self.titleLabel.textColor = color;
     self.iconImageView.tintColor = color;
 }
