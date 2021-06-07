@@ -455,9 +455,7 @@ private extension SRGDataProvider {
         }
         .map { playbackPositions in
             return self.medias(withUrns: Array(playbackPositions.keys), pageSize: pageSize, paginatedBy: paginator)
-                .map { medias in
-                    return filter?.compatibleMedias(medias) ?? medias
-                }
+                .map { filter?.compatibleMedias($0) ?? $0 }
                 .map {
                     return $0.filter { media in
                         guard let playbackPosition = playbackPositions[media.urn] else { return true }
@@ -487,9 +485,7 @@ private extension SRGDataProvider {
         }
         .map { urns in
             return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
-                .map { medias in
-                    return filter?.compatibleMedias(medias) ?? medias
-                }
+                .map { filter?.compatibleMedias($0) ?? $0 }
         }
         .switchToLatest()
         .eraseToAnyPublisher()

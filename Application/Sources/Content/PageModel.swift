@@ -145,7 +145,7 @@ extension PageModel {
         }
         
         func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
-            return shows.filter { canContain(show: $0) }.sorted(by: { $0.title < $1.title })
+            return shows.filter { canContain(show: $0) }
         }
         
         func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
