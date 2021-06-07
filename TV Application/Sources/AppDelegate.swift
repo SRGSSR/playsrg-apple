@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemAppearance.focused.iconColor = activeColor
         
         tabBarController.tabBar.standardAppearance = appearance
-        tabBarController.view.backgroundColor = .play_black
+        tabBarController.view.backgroundColor = .srg_gray1
     }
     
     private func applicationRootViewController() -> UIViewController {

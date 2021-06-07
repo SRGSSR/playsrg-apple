@@ -68,7 +68,7 @@
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     [self addChildViewController:self.pageViewController];
     

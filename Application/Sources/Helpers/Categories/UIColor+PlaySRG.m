@@ -15,11 +15,6 @@
     return [UIColor srg_colorFromHexadecimalString:@"#ed3323"];
 }
 
-+ (UIColor *)play_blackColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#161616"];
-}
-
 + (UIColor *)play_lightGrayColor
 {
     return UIColor.lightGrayColor;

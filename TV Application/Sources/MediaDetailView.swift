@@ -30,7 +30,7 @@ struct MediaDetailView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color(.play_black))
+        .background(Color.srg_gray1)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
             model.initialMedia = media

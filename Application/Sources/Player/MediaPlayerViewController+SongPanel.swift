@@ -4,8 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-import Foundation
 import Aiolos
+import Foundation
+import SRGAppearanceSwift
 
 private var panelKey: Void?
 private var tapGestureRecognizerKey: Void?

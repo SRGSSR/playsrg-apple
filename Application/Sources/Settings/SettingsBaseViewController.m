@@ -37,7 +37,7 @@
     self.tableView.estimatedSectionHeaderHeight = 0.f;
     self.tableView.estimatedSectionFooterHeight = 0.f;
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     self.tableView.separatorColor = UIColor.play_grayColor;
     
     self.delegate = self;

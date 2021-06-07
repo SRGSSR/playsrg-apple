@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 struct SearchResultsView: View {
@@ -136,7 +137,7 @@ struct SearchResultsView: View {
             .synchronizeSearchScrolling(with: model.searchController)
             .synchronizeTabBarScrolling(with: model.viewController)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srg_gray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()

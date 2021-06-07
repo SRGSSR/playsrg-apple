@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
@@ -55,7 +56,7 @@ class SectionViewController: UIViewController {
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .play_black
+        view.backgroundColor = .srg_gray1
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self

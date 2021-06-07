@@ -352,7 +352,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;

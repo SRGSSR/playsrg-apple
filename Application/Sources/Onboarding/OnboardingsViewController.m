@@ -35,7 +35,7 @@
     self.onboardings = Onboarding.onboardings;
     self.title = NSLocalizedString(@"Features", @"Title displayed at the top of the features list");
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
@@ -122,7 +122,7 @@
     view.textLabel.textColor = UIColor.play_lightGrayColor;
     
     UIView *backgroundView = [[UIView alloc] init];
-    backgroundView.backgroundColor = UIColor.play_blackColor;
+    backgroundView.backgroundColor = UIColor.srg_gray1Color;
     view.backgroundView = backgroundView;
 }
 

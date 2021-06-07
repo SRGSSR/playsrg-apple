@@ -73,7 +73,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];

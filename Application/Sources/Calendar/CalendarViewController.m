@@ -95,7 +95,7 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     blurView.translatesAutoresizingMaskIntoConstraints = NO;

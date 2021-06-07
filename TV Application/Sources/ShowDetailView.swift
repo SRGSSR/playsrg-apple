@@ -5,7 +5,7 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGAppearance
+import SRGAppearanceSwift
 import SRGIdentity
 import SwiftUI
 
@@ -116,7 +116,7 @@ struct ShowDetailView: View {
                 HeaderView(show: show)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srg_gray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.show = show

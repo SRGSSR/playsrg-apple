@@ -61,7 +61,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;

@@ -5,7 +5,7 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGAppearance
+import SRGAppearanceSwift
 import SwiftUI
 
 struct ShowsView: View {
@@ -112,7 +112,7 @@ struct ShowsView: View {
             }
             .synchronizeTabBarScrolling()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srg_gray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()

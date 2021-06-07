@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.srg_gray1Color;
     
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = UIColor.clearColor;

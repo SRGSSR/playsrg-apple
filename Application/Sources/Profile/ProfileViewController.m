@@ -63,7 +63,7 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;

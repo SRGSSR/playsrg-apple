@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 @objc protocol SectionShowHeaderViewAction {
@@ -87,7 +88,7 @@ struct SectionShowHeaderView: View {
         
         var body: some View {
             if uiHorizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .init(.play_black)]), startPoint: .center, endPoint: .trailing)
+                LinearGradient(gradient: Gradient(colors: [.clear, .srg_gray1]), startPoint: .center, endPoint: .trailing)
             }
         }
     }
