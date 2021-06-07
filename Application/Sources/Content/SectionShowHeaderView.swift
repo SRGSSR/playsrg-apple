@@ -88,7 +88,7 @@ struct SectionShowHeaderView: View {
         
         var body: some View {
             if uiHorizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srg_gray1]), startPoint: .center, endPoint: .trailing)
+                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray1]), startPoint: .center, endPoint: .trailing)
             }
         }
     }
@@ -108,7 +108,7 @@ struct SectionShowHeaderView: View {
                         .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srg_gray5)
+                        .foregroundColor(.srgGray5)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)
@@ -117,7 +117,7 @@ struct SectionShowHeaderView: View {
                         .lineLimit(6)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srg_gray4)
+                        .foregroundColor(.srgGray4)
                 }
             }
         }
@@ -144,8 +144,8 @@ struct SectionShowHeaderView: View {
                     .padding(.horizontal, constant(iOS: 10, tvOS: 16))
                     .padding(.vertical, constant(iOS: 8, tvOS: 12))
                     .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(constant(iOS: .srg_gray5, tvOS: isFocused ? .srg_gray2 : .srg_gray5))
-                    .background(constant(iOS: Color.srg_gray2, tvOS: Color.clear))
+                    .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
+                    .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
             }

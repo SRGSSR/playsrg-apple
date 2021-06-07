@@ -16,7 +16,7 @@ struct ProgressBar: View {
             ZStack(alignment: .leading) {
                 Color(white: 1, opacity: 0.3)
                     .frame(width: geometry.size.width, height: geometry.size.height)
-                Color.srg_lightRed
+                Color.srgLightRed
                     .frame(width: geometry.size.width * CGFloat(value), height: geometry.size.height)
             }
         }

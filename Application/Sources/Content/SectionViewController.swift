@@ -56,7 +56,7 @@ class SectionViewController: UIViewController {
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .srg_gray1
+        view.backgroundColor = .srgGray1
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self

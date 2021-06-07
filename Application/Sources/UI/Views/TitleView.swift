@@ -14,7 +14,7 @@ struct TitleView: View {
         if let text = text {
             Text(text)
                 .srgFont(.H1)
-                .foregroundColor(.srg_gray5)
+                .foregroundColor(.srgGray5)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

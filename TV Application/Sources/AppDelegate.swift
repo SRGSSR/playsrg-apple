@@ -22,15 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .srg_gray2
-        appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
+        appearance.backgroundColor = .srgGray2
+        appearance.selectionIndicatorTintColor = .hexadecimal("#979797")
         
         let itemAppearance = appearance.inlineLayoutAppearance
         itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: SRGFont.font(family: .text, weight: .medium, size: 28) as UIFont,
                                                      NSAttributedString.Key.foregroundColor: UIColor.white]
         itemAppearance.normal.iconColor = .white
         
-        let activeColor = UIColor.srg_color(fromHexadecimalString: "#161616")!
+        let activeColor = UIColor.hexadecimal("#161616")!
         let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: activeColor]
         itemAppearance.selected.titleTextAttributes = activeTitleTextAttributes
         itemAppearance.selected.iconColor = activeColor
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemAppearance.focused.iconColor = activeColor
         
         tabBarController.tabBar.standardAppearance = appearance
-        tabBarController.view.backgroundColor = .srg_gray1
+        tabBarController.view.backgroundColor = .srgGray1
     }
     
     private func applicationRootViewController() -> UIViewController {

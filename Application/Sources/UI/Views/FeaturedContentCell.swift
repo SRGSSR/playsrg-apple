@@ -68,7 +68,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                         .padding(.horizontal, horizontalPadding)
                         .padding(.vertical, verticalPadding)
                 }
-                .background(Color.srg_gray2)
+                .background(Color.srgGray2)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .unredactable()
                 .accessibilityElement()
@@ -85,7 +85,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }
-            .background(Color.srg_gray2)
+            .background(Color.srgGray2)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()

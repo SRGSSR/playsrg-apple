@@ -117,7 +117,7 @@ struct MediaDescription {
         guard let media = media else { return nil }
         
         if media.contentType == .livestream {
-            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), Color.srg_lightRed)
+            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), Color.srgLightRed)
         }
         else {
             let now = Date()
@@ -126,13 +126,13 @@ struct MediaDescription {
             case .notYetAvailable:
                 return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_green))
             case .notAvailableAnymore:
-                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color.srg_gray4)
+                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color.srgGray4)
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: Color.srg_lightRed)
+                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: Color.srgLightRed)
                 }
                 else if media.play_isWebFirst {
-                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), Color.srg_blue)
+                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), Color.srgBlue)
                 }
                 else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
                     return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))

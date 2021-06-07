@@ -66,7 +66,7 @@ class PageViewController: UIViewController {
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .srg_gray1
+        view.backgroundColor = .srgGray1
         
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self

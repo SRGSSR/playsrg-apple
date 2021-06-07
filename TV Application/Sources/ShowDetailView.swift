@@ -116,7 +116,7 @@ struct ShowDetailView: View {
                 HeaderView(show: show)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.srg_gray1)
+            .background(Color.srgGray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.show = show
@@ -187,7 +187,7 @@ struct ShowDetailView: View {
                         .lineLimit(3)
                         .foregroundColor(.white)
                     if let broadcastInformationMessage = show?.broadcastInformation?.message {
-                        Badge(text: broadcastInformationMessage, color: Color.srg_gray4)
+                        Badge(text: broadcastInformationMessage, color: Color.srgGray4)
                     }
                     if let lead = show?.lead {
                         Text(lead)
