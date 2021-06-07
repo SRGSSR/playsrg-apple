@@ -72,7 +72,7 @@ struct ShowCell: View {
         var body: some View {
             Text(show?.title ?? "")
                 .srgFont(.H4)
-                .foregroundColor(.white)
+                .foregroundColor(.srg_gray5)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
         }

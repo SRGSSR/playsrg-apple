@@ -108,7 +108,7 @@ struct SectionShowHeaderView: View {
                         .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
+                        .foregroundColor(.srg_gray5)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)
@@ -117,7 +117,7 @@ struct SectionShowHeaderView: View {
                         .lineLimit(6)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.gray)
+                        .foregroundColor(.srg_gray4)
                 }
             }
         }
@@ -144,8 +144,8 @@ struct SectionShowHeaderView: View {
                     .padding(.horizontal, constant(iOS: 10, tvOS: 16))
                     .padding(.vertical, constant(iOS: 8, tvOS: 12))
                     .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(constant(iOS: .gray, tvOS: isFocused ? .darkGray : .white))
-                    .background(constant(iOS: Color.white.opacity(0.1), tvOS: Color.clear))
+                    .foregroundColor(constant(iOS: .srg_gray5, tvOS: isFocused ? .srg_gray2 : .srg_gray5))
+                    .background(constant(iOS: Color.srg_gray2, tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
             }

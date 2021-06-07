@@ -44,11 +44,9 @@ struct HeaderView: View {
                 Text(subtitle)
                     .srgFont(.subtitle1)
                     .lineLimit(1)
-                    .opacity(0.8)
             }
         }
-        .opacity(0.8)
-        .foregroundColor(.white)
+        .foregroundColor(.srg_gray5)
         .padding(.vertical, constant(iOS: 3, tvOS: 15))
         .frame(maxWidth: .infinity, alignment: .leading)
     }

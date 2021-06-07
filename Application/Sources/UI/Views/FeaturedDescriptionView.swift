@@ -55,7 +55,7 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
                 Text(content.title ?? "")
                     .srgFont(.H3)
                     .lineLimit(2)
-                    .foregroundColor(.white)
+                    .foregroundColor(Color.srg_gray5)
                 if detailed, let summary = content.summary {
                     Text(summary)
                         .srgFont(.body)

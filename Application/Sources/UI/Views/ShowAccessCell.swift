@@ -26,10 +26,10 @@ struct ShowAccessCell: View {
                             .srgFont(.button)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white.opacity(0.1))
+                    .background(Color.srg_gray2)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.srg_gray5)
                 .accessibilityLabel(PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
                 
                 Button {
@@ -41,10 +41,10 @@ struct ShowAccessCell: View {
                             .srgFont(.button)
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white.opacity(0.1))
+                    .background(Color.srg_gray2)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
-                .foregroundColor(.white)
+                .foregroundColor(.srg_gray5)
                 .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
             }
         }

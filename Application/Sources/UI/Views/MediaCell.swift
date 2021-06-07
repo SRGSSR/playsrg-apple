@@ -114,6 +114,7 @@ struct MediaCell: View {
                 Text(MediaDescription.subtitle(for: media, style: style) ?? .placeholder(length: 15))
                     .srgFont(.H4)
                     .lineLimit(2)
+                    .foregroundColor(Color.srg_gray5)
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
