@@ -17,6 +17,7 @@
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
+@import SRGAppearance;
 
 @interface SongsViewController ()
 
@@ -57,7 +58,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    view.backgroundColor = UIColor.srg_gray2Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.dataSource = self;

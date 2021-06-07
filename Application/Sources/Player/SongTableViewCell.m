@@ -81,7 +81,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.backgroundColor = UIColor.srg_gray2Color;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [self.marginWidthConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {

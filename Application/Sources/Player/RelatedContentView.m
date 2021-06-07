@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.backgroundColor = UIColor.srg_gray2Color;
     self.layer.cornerRadius = LayoutStandardViewCornerRadius;
 }
 

@@ -109,7 +109,7 @@ struct MediaDetailView: View {
                 }
                 
                 if let isWebFirst = model.media?.play_isWebFirst, isWebFirst {
-                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color(.srg_blue))
+                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color.srg_blue)
                 }
                 if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
                     AttributeView(icon: "subtitles_off-22", values: subtitleLanguages)
@@ -223,7 +223,7 @@ struct MediaDetailView: View {
             ZStack {
                 if !model.relatedMedias.isEmpty {
                     ZStack {
-                        Color(.srg_color(fromHexadecimalString: "#222222")!)
+                        Color.srg_hexadecimal("#222222")
                             .opacity(0.8)
                         ZStack {
                             Text(NSLocalizedString("This might interest you", comment: "Related content media list title"))

@@ -47,7 +47,7 @@ struct TopicCell: View {
                 ImageView(url: topic?.imageUrl(for: .small))
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
-                Color(.play_cardGrayBackground)
+                Color.srg_gray2
                     .opacity(0.3)
                 Text(topic?.title ?? "")
                     .srgFont(.button)

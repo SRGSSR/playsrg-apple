@@ -65,11 +65,6 @@
     }
 }
 
-+ (UIColor *)play_cardGrayBackgroundColor
-{
-    return [UIColor srg_colorFromHexadecimalString:@"#232323"];
-}
-
 + (UIColor *)play_grayThumbnailImageViewBackgroundColor
 {
     return [UIColor srg_colorFromHexadecimalString:@"#202020"];

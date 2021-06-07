@@ -45,7 +45,7 @@ struct ShowCell: View {
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
             }
-            .background(Color(.play_cardGrayBackground))
+            .background(Color.srg_gray2)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement()

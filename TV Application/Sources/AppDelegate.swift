@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .play_cardGrayBackground
+        appearance.backgroundColor = .srg_gray2
         appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
         
         let itemAppearance = appearance.inlineLayoutAppearance

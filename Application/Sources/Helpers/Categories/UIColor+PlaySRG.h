@@ -21,7 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) UIColor *play_orangeColor;
 @property (class, nonatomic, readonly) UIColor *play_popoverGrayBackgroundColor;
 
-@property (class, nonatomic, readonly) UIColor *play_cardGrayBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_grayThumbnailImageViewBackgroundColor;
 @property (class, nonatomic, readonly) UIColor *play_blackDurationLabelBackgroundColor;
 
