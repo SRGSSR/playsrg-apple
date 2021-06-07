@@ -7,8 +7,9 @@
 #import "SearchLoadingCollectionViewCell.h"
 
 #import "NSBundle+PlaySRG.h"
-#import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+
+@import SRGAppearance;
 
 @interface SearchLoadingCollectionViewCell ()
 
@@ -25,7 +26,7 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.clearColor;
-    [self.imageView play_setLoadingAnimation90WithTintColor:UIColor.play_lightGrayColor];
+    [self.imageView play_setLoadingAnimation90WithTintColor:UIColor.srg_gray5Color];
     [self.imageView startAnimating];
 }
 

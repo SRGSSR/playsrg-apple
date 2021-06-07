@@ -11,7 +11,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIColor (PlaySRG)
 
 @property (class, nonatomic, readonly) UIColor *play_notificationRedColor;
-@property (class, nonatomic, readonly) UIColor *play_lightGrayColor;
 @property (class, nonatomic, readonly) UIColor *play_greenColor;
 @property (class, nonatomic, readonly) UIColor *play_orangeColor;
 @property (class, nonatomic, readonly) UIColor *play_popoverGrayBackgroundColor;

@@ -66,7 +66,7 @@
     
     self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
-    self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
+    self.downloadStatusImageView.tintColor = UIColor.srg_gray5Color;
 }
 
 - (void)prepareForReuse
@@ -212,7 +212,7 @@
 
 - (void)updateDownloadStatus
 {
-    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.play_lightGrayColor;
+    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.srg_gray5Color;
     
     self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];

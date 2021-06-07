@@ -52,7 +52,7 @@
     if (text.length != 0) {
         [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
                                                                                attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
-                                                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }]];
+                                                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color }]];
     }
     
     self.textLabel.attributedText = attributedText.copy;

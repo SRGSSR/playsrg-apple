@@ -240,7 +240,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No notifications", @"Text displayed when no notifications are available")
                                            attributes:attributes];
 }
@@ -248,7 +248,7 @@
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Subscribe to shows you like to be notified when a new episode is available.", @"Message displayed when no notifications have been received")
                                            attributes:attributes];
 }
@@ -260,7 +260,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.play_lightGrayColor;
+    return UIColor.srg_gray5Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView

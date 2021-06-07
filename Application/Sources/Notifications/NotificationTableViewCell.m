@@ -44,8 +44,8 @@
     self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
-    self.subtitleLabel.textColor = UIColor.play_lightGrayColor;
-    self.dateLabel.textColor = UIColor.play_lightGrayColor;
+    self.subtitleLabel.textColor = UIColor.srg_gray5Color;
+    self.dateLabel.textColor = UIColor.srg_gray5Color;
     self.unreadLabel.textColor = UIColor.play_notificationRedColor;
 }
 
