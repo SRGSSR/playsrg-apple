@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearance
 import SwiftUI
 
 /// Behavior: h-exp, v-exp
@@ -15,7 +16,7 @@ struct ProgressBar: View {
             ZStack(alignment: .leading) {
                 Color(white: 1, opacity: 0.3)
                     .frame(width: geometry.size.width, height: geometry.size.height)
-                Color(.play_progressRed)
+                Color.srg_lightRed
                     .frame(width: geometry.size.width * CGFloat(value), height: geometry.size.height)
             }
         }

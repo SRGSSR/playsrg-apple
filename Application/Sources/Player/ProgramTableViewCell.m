@@ -47,7 +47,7 @@
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.disabledOverlayView.hidden = YES;
-    self.progressView.progressTintColor = UIColor.play_progressRedColor;
+    self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
     [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;

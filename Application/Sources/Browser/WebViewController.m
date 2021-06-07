@@ -12,6 +12,7 @@
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
+@import SRGAppearance;
 @import SRGNetwork;
 
 static void *s_kvoContext = &s_kvoContext;
@@ -109,7 +110,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     self.errorLabel.text = nil;
     
-    self.progressView.progressTintColor = UIColor.play_redColor;
+    self.progressView.progressTintColor = UIColor.srg_redColor;
     
     [self.webView loadRequest:self.request];
     

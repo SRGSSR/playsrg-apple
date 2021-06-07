@@ -142,8 +142,8 @@
     calendarAppearance.titleSelectionColor = [UIColor.whiteColor colorWithAlphaComponent:0.8f];
     
     // Dot colors
-    calendarAppearance.selectionColor = UIColor.play_redColor;
-    calendarAppearance.todayColor = [UIColor.play_redColor colorWithAlphaComponent:0.4f];
+    calendarAppearance.selectionColor = UIColor.srg_redColor;
+    calendarAppearance.todayColor = [UIColor.srg_redColor colorWithAlphaComponent:0.4f];
     
     [self updateFonts];
     

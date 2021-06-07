@@ -124,7 +124,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
 {
-    self.backgroundColor = isLive ? UIColor.play_liveRedColor : UIColor.play_blackDurationLabelBackgroundColor;
+    self.backgroundColor = isLive ? UIColor.srg_lightRedColor : UIColor.play_blackDurationLabelBackgroundColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     

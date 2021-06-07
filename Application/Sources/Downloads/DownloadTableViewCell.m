@@ -64,7 +64,7 @@
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
     
-    self.progressView.progressTintColor = UIColor.play_progressRedColor;
+    self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
     self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
 }

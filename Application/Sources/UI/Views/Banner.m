@@ -52,7 +52,7 @@ static NSString *BannerShortenedName(NSString *name);
             
         case BannerStyleError: {
             accessibilityPrefix = PlaySRGAccessibilityLocalizedString(@"Error", @"Introductory title for error notifications");
-            backgroundColor = UIColor.play_redColor;
+            backgroundColor = UIColor.srg_redColor;
             foregroundColor = UIColor.whiteColor;
             break;
         }
