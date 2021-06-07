@@ -16,6 +16,7 @@ class MediaDetailModel: ObservableObject {
     @Published var initialMedia: SRGMedia? = nil {
         didSet {
             refresh()
+            updateWatchLaterAllowedAction()
         }
     }
     
@@ -41,7 +42,6 @@ class MediaDetailModel: ObservableObject {
                 self.updateWatchLaterAllowedAction()
             }
             .store(in: &mainCancellables)
-        updateWatchLaterAllowedAction()
     }
     
     var media: SRGMedia? {
