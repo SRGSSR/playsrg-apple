@@ -53,7 +53,12 @@ struct MediaDescription {
         
         switch style {
         case .show:
-            return media.show?.title ?? media.title
+            if let showTitle = media.show?.title, media.title.lowercased() != showTitle.lowercased() {
+                return media.title
+            }
+            else {
+                return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
+            }
         case .date:
             return media.title
         }
@@ -65,12 +70,7 @@ struct MediaDescription {
         
         switch style {
         case .show:
-            if let showTitle = media.show?.title, media.title.lowercased() != showTitle.lowercased() {
-                return media.title
-            }
-            else {
-                return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
-            }
+            return media.show?.title ?? media.title
         case .date:
             return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
         }

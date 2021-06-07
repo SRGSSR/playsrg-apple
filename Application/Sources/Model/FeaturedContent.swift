@@ -33,11 +33,11 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     var introduction: String? {
-        return MediaDescription.title(for: media, style: .show)
+        return MediaDescription.subtitle(for: media, style: .show)
     }
     
     var title: String? {
-        return MediaDescription.subtitle(for: media, style: .show)
+        return MediaDescription.title(for: media, style: .show)
     }
     
     var summary: String? {
