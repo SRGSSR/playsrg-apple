@@ -45,9 +45,9 @@ class SectionViewController: UIViewController {
     }
     
     init(section: Content.Section, filter: SectionFiltering? = nil) {
-        self.model = SectionModel(section: section, filter: filter)
+        model = SectionModel(section: section, filter: filter)
         super.init(nibName: nil, bundle: nil)
-        self.title = model.title
+        title = model.title
     }
     
     required init?(coder: NSCoder) {
@@ -256,9 +256,6 @@ extension SectionViewController: UICollectionViewDelegate {
         case let .topic(topic):
             if let navigationController = navigationController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
-                // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
-                //       check -[PlayAppDelegate openTopicURN:]
-                pageViewController.title = topic.title
                 navigationController.pushViewController(pageViewController, animated: true)
             }
         default:

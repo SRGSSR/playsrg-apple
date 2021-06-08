@@ -47,8 +47,9 @@ class PageViewController: UIViewController {
     }
     
     init(id: PageModel.Id) {
-        self.model = PageModel(id: id)
+        model = PageModel(id: id)
         super.init(nibName: nil, bundle: nil)
+        title = model.title
     }
     
     required init?(coder: NSCoder) {
@@ -253,9 +254,6 @@ extension PageViewController: UICollectionViewDelegate {
             case let .topic(topic):
                 if let navigationController = navigationController {
                     let pageViewController = PageViewController(id: .topic(topic: topic))
-                    // TODO: Should the title be managed based on the PageViewController id? Depending on the answer,
-                    //       check -[PlayAppDelegate openTopicURN:]
-                    pageViewController.title = topic.title
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             default:
