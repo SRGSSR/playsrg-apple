@@ -14,6 +14,7 @@
 #import "BaseViewController.h"
 #import "CalendarViewController.h"
 #import "ChannelService.h"
+#import "Download.h"
 #import "Favorites.h"
 #import "GoogleCastBarButtonItem.h"
 #import "History.h"
@@ -44,3 +45,4 @@
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
+#import "WatchLater.h"

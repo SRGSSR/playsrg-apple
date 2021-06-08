@@ -81,6 +81,8 @@ struct MediaCell: View {
             .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
             #endif
         }
+        .background(Color.clear)
+        .contextMenu(for: media)
         .redactedIfNil(media)
     }
     
