@@ -10,15 +10,22 @@ import SwiftUI
 /// Behavior: h-exp, v-exp (like `Image/resizable()`)
 struct ImageView: UIViewRepresentable {
     let url: URL?
+    let contentMode: ContentMode
+    
+    init(url: URL?, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
+        self.url = url
+        self.contentMode = contentMode
+    }
     
     func makeUIView(context: Context) -> UIImageView {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
         imageView.applySizingBehavior(.expanding)
         return imageView
     }
     
     func updateUIView(_ uiView: UIImageView, context: Context) {
+        uiView.contentMode = Self.contentMode(contentMode)
+        
         if let url = url {
             let options = ImageLoadingOptions(
                 transition: .fadeIn(duration: 0.5)
@@ -28,6 +35,15 @@ struct ImageView: UIViewRepresentable {
         else {
             Nuke.cancelRequest(for: uiView)
             uiView.image = nil
+        }
+    }
+    
+    private static func contentMode(_ contentMode: ContentMode) -> UIView.ContentMode {
+        switch contentMode {
+        case .fit:
+            return .scaleAspectFit
+        case .fill:
+            return .scaleAspectFill
         }
     }
 }
