@@ -392,7 +392,7 @@ private extension PageViewController {
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { (layoutWidth, _) in
                         return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
-                    layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
+                    layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .highlight:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { (layoutWidth, _) in
