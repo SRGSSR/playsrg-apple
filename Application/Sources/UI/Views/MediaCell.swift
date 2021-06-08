@@ -82,7 +82,6 @@ struct MediaCell: View {
             #endif
         }
         .background(Color.clear)
-        .contextMenu(for: media)
         .redactedIfNil(media)
     }
     
