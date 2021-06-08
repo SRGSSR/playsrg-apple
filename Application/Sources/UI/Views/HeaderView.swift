@@ -36,7 +36,7 @@ struct HeaderView: View {
                     .srgFont(.H3)
                     .lineLimit(1)
                 if hasDetailDisclosure {
-                    Image(systemName: "chevron.right")
+                    Image("chevron")
                         .padding(.horizontal, constant(iOS: 6, tvOS: 8))
                 }
             }

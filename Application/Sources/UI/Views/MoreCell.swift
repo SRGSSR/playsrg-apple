@@ -17,7 +17,7 @@ struct MoreCell: View {
     var body: some View {
         #if os(tvOS)
         LabeledCardButton(aspectRatio: Self.aspectRatio, action: action) {
-            Image(systemName: "chevron.right")
+            Image("chevron")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: Self.iconHeight)
@@ -30,7 +30,7 @@ struct MoreCell: View {
             Color.clear
         }
         #else
-        Image(systemName: "chevron.right")
+        Image("chevron")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: Self.iconHeight)
