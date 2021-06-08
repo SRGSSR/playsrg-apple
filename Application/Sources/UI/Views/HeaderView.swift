@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 /// Behavior: h-exp, v-hug
@@ -15,6 +16,8 @@ struct HeaderView: View {
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
+    
+    @Environment(\.sizeCategory) private var sizeCategory
     
     private var displayableSubtitle: String? {
         #if os(iOS)
@@ -37,6 +40,9 @@ struct HeaderView: View {
                     .lineLimit(1)
                 if hasDetailDisclosure {
                     Image("chevron")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 12))
                         .padding(.horizontal, constant(iOS: 6, tvOS: 8))
                 }
             }
