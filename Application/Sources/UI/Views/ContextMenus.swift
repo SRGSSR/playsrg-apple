@@ -7,46 +7,52 @@
 import SRGDataProviderModel
 import SwiftUI
 
-extension View {
-    func contextMenu(for media: SRGMedia?) -> some View {
-        return Group {
-            if let media = media {
-                self
-                    // Ensure correct frame for some reason
-                    .background(Color.clear)
-                    .contextMenu {
-                        if let action = WatchLaterAllowedActionForMediaMetadata(media), action != .none {
-                            Button(action: {}) {
-                                Self.labelForWatchLater(with: media, action: action)
-                            }
-                        }
-                        if Download.canDownloadMedia(media) {
-                            Button(action: {}) {
-                                Self.labelForDownload(with: media)
-                            }
-                        }
+private struct MediaContextMenu<Content: View>: View {
+    let media: SRGMedia?
+    let content: () -> Content
+    
+    init(media: SRGMedia?, @ViewBuilder content: @escaping () -> Content) {
+        self.media = media
+        self.content = content
+    }
+    
+    var body: some View {
+        if let media = media {
+            content()
+                // Ensure correct frame for some reason
+                .background(Color.clear)
+                .contextMenu {
+                    if let action = WatchLaterAllowedActionForMediaMetadata(media), action != .none {
                         Button(action: {}) {
-                            Label(
-                                NSLocalizedString("Share", comment: "Context menu action to share a media"),
-                                image: "share-22"
-                            )
-                        }
-                        if !ApplicationConfiguration.shared.areShowsUnavailable && media.show != nil {
-                            Button(action: {}) {
-                                Label(
-                                    NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
-                                    image: "episodes-22"
-                                )
-                            }
-                        }
-                        Button(action: {}) {
-                            Text("Open")
+                            Self.labelForWatchLater(with: media, action: action)
                         }
                     }
-            }
-            else {
-                self
-            }
+                    if Download.canDownloadMedia(media) {
+                        Button(action: {}) {
+                            Self.labelForDownload(with: media)
+                        }
+                    }
+                    Button(action: {}) {
+                        Label(
+                            NSLocalizedString("Share", comment: "Context menu action to share a media"),
+                            image: "share-22"
+                        )
+                    }
+                    if !ApplicationConfiguration.shared.areShowsUnavailable && media.show != nil {
+                        Button(action: {}) {
+                            Label(
+                                NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
+                                image: "episodes-22"
+                            )
+                        }
+                    }
+                    Button(action: {}) {
+                        Text("Open")
+                    }
+                }
+        }
+        else {
+            content()
         }
     }
     
@@ -85,6 +91,14 @@ extension View {
                 NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads"),
                 image: "downloadable-22"
             )
+        }
+    }
+}
+
+extension View {
+    func contextMenu(for media: SRGMedia?) -> some View {
+        return MediaContextMenu(media: media) {
+            self
         }
     }
 }
