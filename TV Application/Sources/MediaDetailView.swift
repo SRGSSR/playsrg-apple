@@ -192,7 +192,7 @@ struct MediaDetailView: View {
                     }
                 }
                 if let action = model.watchLaterAllowedAction, action != .none, let isRemoval = (action == .remove) {
-                    // TODO: Seriously? Cannot we write this in a better way?
+                    // TODO: Write in a better way
                     LabeledButton(icon: isRemoval ? "watch_later_full-22" : "watch_later-22",
                                   label: isRemoval
                                     ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
