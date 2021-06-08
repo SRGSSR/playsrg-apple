@@ -4,93 +4,126 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import SRGDataProviderModel
+import SRGUserData
 import SwiftUI
 
+private class MediaContextMenuModel: ObservableObject {
+    @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
+    @Published private(set) var downloaded: Bool = false
+    
+    private var mainCancellables = Set<AnyCancellable>()
+    
+    var media: SRGMedia? = nil {
+        didSet {
+            updateWatchLaterAllowedAction()
+            updateDownloaded()
+        }
+    }
+    
+    init() {
+        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .sink { [weak self] notification in
+                guard let self = self,
+                      let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue,
+                      let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, let mediaUrn = self.media?.urn, entriesUids.contains(mediaUrn) else {
+                    return
+                }
+                self.updateWatchLaterAllowedAction()
+            }
+            .store(in: &mainCancellables)
+    }
+    
+    private func updateWatchLaterAllowedAction() {
+        guard let media = media else { return }
+        watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
+    }
+    
+    private func updateDownloaded() {
+        guard let media = media else { return }
+        downloaded = (Download(for: media) != nil)
+    }
+}
+
 private struct MediaContextMenu<Content: View>: View {
-    let media: SRGMedia?
+    @Binding var media: SRGMedia?
+    @StateObject var model = MediaContextMenuModel()
+    
     let content: () -> Content
     
     init(media: SRGMedia?, @ViewBuilder content: @escaping () -> Content) {
-        self.media = media
+        _media = .constant(media)
         self.content = content
     }
     
     var body: some View {
-        if let media = media {
-            content()
-                // Ensure correct frame for some reason
-                .background(Color.clear)
-                .contextMenu {
-                    if let action = WatchLaterAllowedActionForMediaMetadata(media), action != .none {
-                        Button(action: {}) {
-                            Self.labelForWatchLater(with: media, action: action)
-                        }
-                    }
-                    if Download.canDownloadMedia(media) {
-                        Button(action: {}) {
-                            Self.labelForDownload(with: media)
-                        }
-                    }
-                    Button(action: {}) {
-                        Label(
-                            NSLocalizedString("Share", comment: "Context menu action to share a media"),
-                            image: "share-22"
-                        )
-                    }
-                    if !ApplicationConfiguration.shared.areShowsUnavailable && media.show != nil {
-                        Button(action: {}) {
+        content()
+            // This ensures the extruded view has a correct frame (for some reason to be determined)
+            .background(Color.clear)
+            .contextMenu {
+                WatchLaterMenuItem(model: model)
+                DownloadMenuItem(model: model)
+            }
+            .onAppear {
+                model.media = media
+            }
+            .onChange(of: media) { newValue in
+                model.media = newValue
+            }
+    }
+    
+    private struct WatchLaterMenuItem: View {
+        @ObservedObject var model: MediaContextMenuModel
+        
+        var body: some View {
+            if let media = model.media {
+                Button(action: {}) {
+                    if model.watchLaterAllowedAction == .add {
+                        if media.mediaType == .audio {
                             Label(
-                                NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
-                                image: "episodes-22"
+                                NSLocalizedString("Listen later", comment: "Context menu action to add an audio to the later list"),
+                                image: "watch_later-22"
+                            )
+                        }
+                        else {
+                            Label(
+                                NSLocalizedString("Watch later", comment: "Context menu action to add a video to the later list"),
+                                image: "watch_later-22"
                             )
                         }
                     }
-                    Button(action: {}) {
-                        Text("Open")
+                    else {
+                        Label(
+                            NSLocalizedString("Delete from \"Later\"", comment: "Context menu action to delete a media from the later list"),
+                            image: "watch_later_full-22"
+                        )
                     }
                 }
-        }
-        else {
-            content()
+            }
         }
     }
     
-    private static func labelForWatchLater(with media: SRGMedia, action: WatchLaterAction) -> some View {
-        if action == .add {
-            if media.mediaType == .audio {
-                return Label(
-                    NSLocalizedString("Listen later", comment: "Context menu action to add an audio to the later list"),
-                    image: "watch_later-22"
-                )
+    private struct DownloadMenuItem: View {
+        @ObservedObject var model: MediaContextMenuModel
+        
+        var body: some View {
+            Button(action: {}) {
+                if model.media != nil {
+                    if model.downloaded {
+                        Label(
+                            NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads"),
+                            image: "downloadable_full-22"
+                        )
+                    }
+                    else {
+                        Label(
+                            NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads"),
+                            image: "downloadable-22"
+                        )
+                    }
+                }
             }
-            else {
-                return Label(
-                    NSLocalizedString("Watch later", comment: "Context menu action to add a video to the later list"),
-                    image: "watch_later-22"
-                )
-            }
-        }
-        else {
-            return Label(
-                NSLocalizedString("Delete from \"Later\"", comment: "Context menu action to delete a media from the later list"),
-                image: "watch_later_full-22"
-            )
-        }
-    }
-    
-    private static func labelForDownload(with media: SRGMedia) -> some View {
-        if Download(for: media) != nil {
-            return Label(
-                NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads"),
-                image: "downloadable_full-22"
-            )
-        }
-        else {
-            return Label(
-                NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads"),
-                image: "downloadable-22"
-            )
         }
     }
 }
