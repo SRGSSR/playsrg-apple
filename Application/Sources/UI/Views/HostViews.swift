@@ -106,8 +106,15 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         if let hostView = hostController?.view {
             hostView.frame = contentView.bounds
             hostView.backgroundColor = .clear
-            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            hostView.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(hostView)
+            
+            NSLayoutConstraint.activate([
+                hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutTableViewdMargin / 2),
+                hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutTableViewdMargin / 2),
+                hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutTableViewdMargin),
+                hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutTableViewdMargin)
+            ])
         }
     }
     

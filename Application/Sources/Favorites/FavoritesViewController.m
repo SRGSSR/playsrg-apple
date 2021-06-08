@@ -217,7 +217,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return LayoutTableViewPaddingContentInsets();
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
@@ -324,7 +324,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[ShowCellSize fullWidth] constrainedBy:tableView].height;
+    return [[ShowCellSize fullWidth] constrainedBy:tableView].height + LayoutTableViewdMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<ShowSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
