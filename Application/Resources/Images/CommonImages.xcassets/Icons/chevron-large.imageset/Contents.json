@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "chevron-large-1.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "chevron-large-2.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "chevron-large-3.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}
