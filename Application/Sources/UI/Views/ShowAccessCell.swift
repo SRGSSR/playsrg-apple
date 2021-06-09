@@ -34,7 +34,7 @@ struct ShowAccessCell: View {
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
                 .foregroundColor(.srgGray5)
-                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
+                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."), traits: .isButton)
                 
                 Button {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
@@ -49,7 +49,7 @@ struct ShowAccessCell: View {
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
                 .foregroundColor(.srgGray5)
-                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
+                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."), traits: .isButton)
             }
         }
     }
