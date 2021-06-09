@@ -278,7 +278,10 @@ private extension SRGDataProvider {
     
     static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
         var rowItems = items.map { PageModel.Item(.item($0), in: section) }
-        if rowItems.count > 0 && section.viewModelProperties.canOpenDetailPage && section.viewModelProperties.hasSwimlaneLayout {
+        
+        if rowItems.count > 0
+            && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
+            && section.viewModelProperties.hasSwimlaneLayout {
             rowItems.append(PageModel.Item(.more, in: section))
         }
         return rowItems
@@ -296,15 +299,6 @@ protocol PageViewModelProperties {
 }
 
 extension PageViewModelProperties {
-    var accessibilityHint: String? {
-        if canOpenDetailPage {
-            return PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint")
-        }
-        else {
-            return nil
-        }
-    }
-    
     var hasSwimlaneLayout: Bool {
         switch layout {
         case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
@@ -363,9 +357,6 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
-            #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionWideSupportEnabled() else { return true }
-            #endif
             switch presentation.type {
             case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
                 return true
@@ -418,9 +409,6 @@ private extension PageModel {
         }
         
         var canOpenDetailPage: Bool {
-            #if DEBUG || NIGHTLY || BETA
-            guard !ApplicationSettingSectionWideSupportEnabled() else { return true }
-            #endif
             return layout == .mediaSwimlane || layout == .showSwimlane
         }
         

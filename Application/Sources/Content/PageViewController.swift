@@ -563,12 +563,18 @@ private extension PageViewController {
         let section: PageModel.Section
         let pageId: PageModel.Id
         
+        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+        
         private static func title(for section: PageModel.Section) -> String? {
             return section.properties.title
         }
         
         private static func subtitle(for section: PageModel.Section) -> String? {
             return section.properties.summary
+        }
+        
+        private var hasDetailDisclosure: Bool {
+            return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
         }
         
         var body: some View {
@@ -581,9 +587,9 @@ private extension PageViewController {
                     Button {
                         firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                     } label: {
-                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.viewModelProperties.canOpenDetailPage)
+                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
                     }
-                    .disabled(!section.viewModelProperties.canOpenDetailPage)
+                    .disabled(!hasDetailDisclosure)
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
                 }
                 #endif
@@ -604,6 +610,6 @@ private extension PageViewController.SectionHeaderView {
     }
     
     var accessibilityHint: String? {
-        return section.viewModelProperties.accessibilityHint
+        return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : nil
     }
 }
