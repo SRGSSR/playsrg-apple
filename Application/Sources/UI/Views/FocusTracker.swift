@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 private struct FocusTracker<Content: View>: View {
     private let action: (Bool) -> Void
     private let content: () -> Content
@@ -22,6 +24,8 @@ private struct FocusTracker<Content: View>: View {
             .onChange(of: isFocused) { action($0) }
     }
 }
+
+// MARK: Modifiers
 
 extension View {
     func onParentFocusChange(perform action: @escaping (Bool) -> Void) -> some View {

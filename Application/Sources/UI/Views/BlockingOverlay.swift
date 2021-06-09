@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
 struct BlockingOverlay: View {
     let media: SRGMedia?
@@ -25,6 +27,8 @@ struct BlockingOverlay: View {
         }
     }
 }
+
+// MARK: Preview
 
 struct BlockingOverlay_Previews: PreviewProvider {
     static var previews: some View {

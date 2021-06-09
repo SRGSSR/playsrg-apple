@@ -575,9 +575,7 @@ private extension PageViewController {
             if let title = Self.title(for: section) {
                 #if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(Self.title(for: section))
-                    .accessibility(addTraits: .isHeader)
+                    .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
                 #else
                 ResponderChain { firstResponder in
                     Button {
@@ -586,10 +584,7 @@ private extension PageViewController {
                         HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: section.viewModelProperties.canOpenDetailPage)
                     }
                     .disabled(!section.viewModelProperties.canOpenDetailPage)
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(title)
-                    .accessibilityOptionalHint(section.viewModelProperties.accessibilityHint)
-                    .accessibility(addTraits: .isHeader)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
                 }
                 #endif
             }
@@ -598,5 +593,17 @@ private extension PageViewController {
         static func size(section: PageModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
         }
+    }
+}
+
+// MARK: Accessibility
+
+private extension PageViewController.SectionHeaderView {
+    var accessibilityLabel: String? {
+        return Self.title(for: section)
+    }
+    
+    var accessibilityHint: String? {
+        return section.viewModelProperties.accessibilityHint
     }
 }

@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 struct ShowCell: View {
     let show: SRGShow?
     let direction: StackDirection
@@ -24,9 +26,7 @@ struct ShowCell: View {
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .unredactable()
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(show?.title)
-                    .accessibility(addTraits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
                 DescriptionView(show: show)
                     .frame(maxHeight: .infinity, alignment: .top)
@@ -49,8 +49,7 @@ struct ShowCell: View {
             .background(Color.srgGray2)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement()
-            .accessibilityOptionalLabel(show?.title)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             .frame(maxHeight: .infinity, alignment: .top)
             #endif
         }
@@ -78,6 +77,20 @@ struct ShowCell: View {
         }
     }
 }
+
+// MARK: Accessibility
+
+private extension ShowCell {
+    var accessibilityLabel: String? {
+        return show?.title
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens show details.", "Show cell hint")
+    }
+}
+
+// MARK: Size
 
 class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
@@ -111,6 +124,8 @@ class ShowCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
     }
 }
+
+// MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
     static private let verticalLayoutSize = ShowCellSize.swimlane().previewSize

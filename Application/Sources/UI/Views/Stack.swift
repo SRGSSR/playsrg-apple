@@ -6,16 +6,7 @@
 
 import SwiftUI
 
-enum StackDirection {
-    case vertical
-    case horizontal
-}
-
-enum StackAlignment {
-    case leading
-    case center
-    case trailing
-}
+// MARK: View
 
 /**
  *  A simple generic stack which can either layout views horizontally or vertically. Provide common alignment
@@ -65,4 +56,17 @@ struct Stack<Content: View>: View {
             VStack(alignment: Self.horizontalAlignment(for: alignment), spacing: spacing, content: content)
         }
     }
+}
+
+// MARK: Types
+
+enum StackDirection {
+    case vertical
+    case horizontal
+}
+
+enum StackAlignment {
+    case leading
+    case center
+    case trailing
 }

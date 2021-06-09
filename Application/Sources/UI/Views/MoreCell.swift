@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 // TODO: Improve implementation once we know what to do
 struct MoreCell: View {
     let section: Content.Section
@@ -23,9 +25,7 @@ struct MoreCell: View {
                 .frame(height: Self.iconHeight)
                 .foregroundColor(.srgGray5)
                 .opacity(0.8)
-                .accessibilityElement()
-                .accessibilityOptionalLabel(NSLocalizedString("More", comment: "More button accessibility label"))
-                .accessibility(addTraits: .isButton)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         } label: {
             Color.clear
         }
@@ -40,8 +40,7 @@ struct MoreCell: View {
             .aspectRatio(Self.aspectRatio, contentMode: .fit)
             .background(Color.white.opacity(0.1))
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement()
-            .accessibilityOptionalLabel(NSLocalizedString("More", comment: "More button accessibility label"))
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             .frame(maxHeight: .infinity, alignment: .top)
         #endif
     }
@@ -52,6 +51,20 @@ struct MoreCell: View {
     }
     #endif
 }
+
+// MARK: Accessibility
+
+private extension MoreCell {
+    var accessibilityLabel: String? {
+        return PlaySRGAccessibilityLocalizedString("More", "More button label")
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens details.", "More button hint")
+    }
+}
+
+// MARK: Preview
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {

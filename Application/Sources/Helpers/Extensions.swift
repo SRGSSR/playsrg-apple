@@ -93,11 +93,18 @@ extension Publisher where Failure == Never {
 }
 
 extension View {
-    func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
+    func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
+        return accessibilityElement()
+            .accessibilityOptionalLabel(label)
+            .accessibilityOptionalHint(hint)
+            .accessibilityAddTraits(traits)
+    }
+    
+    private func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
         return accessibilityLabel(label ?? "")
     }
     
-    func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
+    private func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
         return accessibilityHint(hint ?? "")
     }
     

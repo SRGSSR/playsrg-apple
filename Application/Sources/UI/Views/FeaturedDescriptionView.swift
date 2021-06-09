@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
 struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     enum Alignment {
@@ -69,6 +71,8 @@ struct FeaturedDescriptionView<Content: FeaturedContent>: View {
     }
 }
 
+// MARK: Initializers
+
 extension FeaturedDescriptionView where Content == FeaturedMediaContent {
     init(media: SRGMedia?, label: String? = nil, alignment: Alignment, detailed: Bool) {
         self.init(content: FeaturedMediaContent(media: media, label: label), alignment: alignment, detailed: detailed)
@@ -80,6 +84,8 @@ extension FeaturedDescriptionView where Content == FeaturedShowContent {
         self.init(content: FeaturedShowContent(show: show, label: label), alignment: alignment, detailed: detailed)
     }
 }
+
+// MARK: Preview
 
 struct FeaturedDescriptionView_Previews: PreviewProvider {
     static let label = "New"

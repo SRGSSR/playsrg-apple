@@ -7,10 +7,14 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: Contract
+
 @objc protocol ShowAccessCellActions: AnyObject {
     func openShowAZ()
     func openShowByDate()
 }
+
+// MARK: View
 
 /// Behavior: h-exp, v-exp
 struct ShowAccessCell: View {
@@ -30,7 +34,7 @@ struct ShowAccessCell: View {
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
                 .foregroundColor(.srgGray5)
-                .accessibilityLabel(PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
+                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("A to Z shows", "Title pronounced in home pages on shows A to Z button."))
                 
                 Button {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
@@ -45,17 +49,21 @@ struct ShowAccessCell: View {
                     .cornerRadius(LayoutStandardViewCornerRadius)
                 }
                 .foregroundColor(.srgGray5)
-                .accessibilityLabel(PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
+                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Shows by date", "Title pronounced in home pages on shows by date button."))
             }
         }
     }
 }
+
+// MARK: Size
 
 class ShowAccessCellSize: NSObject {
     @objc static func fullWidth(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }
+
+// MARK: Preview
 
 struct ShowAccessCell_Previews: PreviewProvider {
     static let size = ShowAccessCellSize.fullWidth(layoutWidth: 800).previewSize

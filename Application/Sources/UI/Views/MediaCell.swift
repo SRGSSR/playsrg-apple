@@ -7,6 +7,8 @@
 import SRGAppearance
 import SwiftUI
 
+// MARK: View
+
 struct MediaCell: View {
     enum Layout {
         case vertical
@@ -58,9 +60,7 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
                     .unredactable()
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
-                    .accessibility(addTraits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
                 DescriptionView(media: media, style: style)
                     .padding(.top, verticalPadding)
@@ -77,8 +77,7 @@ struct MediaCell: View {
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }
-            .accessibilityElement()
-            .accessibilityOptionalLabel(MediaDescription.accessibilityLabel(for: media))
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
         }
         .background(Color.clear)
@@ -123,6 +122,8 @@ struct MediaCell: View {
     }
 }
 
+// MARK: Modifiers
+
 extension MediaCell {
     func onFocus(perform action: @escaping (Bool) -> Void) -> MediaCell {
         var mediaCell = self
@@ -130,6 +131,20 @@ extension MediaCell {
         return mediaCell
     }
 }
+
+// MARK: Accessibility
+
+private extension MediaCell {
+    var accessibilityLabel: String? {
+        return MediaDescription.accessibilityLabel(for: media)
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Media cell hint")
+    }
+}
+
+// MARK: Size
 
 class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
@@ -161,6 +176,8 @@ class MediaCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
     }
 }
+
+// MARK: Preview
 
 struct MediaCell_Previews: PreviewProvider {
     static private let verticalLayoutSize = MediaCellSize.swimlane().previewSize

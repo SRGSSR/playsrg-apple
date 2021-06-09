@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 enum FeaturedContentLayout {
     case hero
     case highlight
@@ -71,9 +73,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                 .background(Color.srgGray2)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .unredactable()
-                .accessibilityElement()
-                .accessibilityOptionalLabel(content.accessibilityLabel)
-                .accessibility(addTraits: .isButton)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
             #else
             Stack(direction: direction, spacing: 0) {
@@ -88,13 +88,14 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             .background(Color.srgGray2)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement()
-            .accessibilityOptionalLabel(content.accessibilityLabel)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
         }
         .redacted(reason: content.isPlaceholder ? .placeholder : .init())
     }
 }
+
+// MARK: Initializers
 
 extension FeaturedContentCell where Content == FeaturedMediaContent {
     init(media: SRGMedia?, label: String? = nil, layout: FeaturedContentLayout) {
@@ -107,6 +108,20 @@ extension FeaturedContentCell where Content == FeaturedShowContent {
         self.init(content: FeaturedShowContent(show: show, label: label), layout: layout)
     }
 }
+
+// MARK: Accessibility
+
+private extension FeaturedContentCell {
+    var accessibilityLabel: String? {
+        return content.accessibilityLabel
+    }
+    
+    var accessibilityHint: String? {
+        return content.accessibilityLabel
+    }
+}
+
+// MARK: Size
 
 class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
@@ -129,6 +144,8 @@ class FeaturedContentCellSize: NSObject {
         }
     }
 }
+
+// MARK: Preview
 
 private extension View {
     private func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {

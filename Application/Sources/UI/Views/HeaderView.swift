@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-hug
 struct HeaderView: View {
     let title: String
@@ -58,6 +60,8 @@ struct HeaderView: View {
     }
 }
 
+// MARK: Size
+
 class HeaderViewSize: NSObject {
     @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
@@ -70,6 +74,8 @@ class HeaderViewSize: NSObject {
         }
     }
 }
+
+// MARK: Preview
 
 struct HeaderView_Previews: PreviewProvider {
     static var previews: some View {

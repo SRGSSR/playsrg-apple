@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 /**
  *  A view providing access to the `UIKit` responder chain. Use the `FirstResponder` parameter provided to its view
  *  builder to send an event to the responder chain.
@@ -43,6 +45,8 @@ struct ResponderChain<Content: View>: UIViewRepresentable {
     }
 }
 
+// MARK: Types
+
 extension ResponderChain {
     struct Coordinator {
         let firstResponder: FirstResponder
@@ -58,6 +62,8 @@ extension ResponderChain {
         }
     }
 }
+
+// MARK: Preview
 
 struct ResponderChain_Previews: PreviewProvider {
     static var previews: some View {

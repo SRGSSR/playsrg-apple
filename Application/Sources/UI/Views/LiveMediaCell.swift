@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 struct LiveMediaCell: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = LiveMediaModel()
@@ -21,9 +23,7 @@ struct LiveMediaCell: View {
                 VisualView(model: model)
                     .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                     .unredactable()
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(model.accessibilityLabel)
-                    .accessibility(addTraits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
             #else
             VisualView(model: model)
@@ -31,8 +31,7 @@ struct LiveMediaCell: View {
                 .background(Color.white.opacity(0.1))
                 .redactable()
                 .cornerRadius(LayoutStandardViewCornerRadius)
-                .accessibilityElement()
-                .accessibilityOptionalLabel(model.accessibilityLabel)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
         }
         .redactedIfNil(media)
@@ -116,6 +115,20 @@ struct LiveMediaCell: View {
     }
 }
 
+// MARK: Accessibility
+
+private extension LiveMediaCell {
+    var accessibilityLabel: String? {
+        return model.accessibilityLabel
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Media cell hint")
+    }
+}
+
+// MARK: Size
+
 class LiveMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
@@ -137,6 +150,8 @@ class LiveMediaCellSize: NSObject {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
     }
 }
+
+// MARK: Preview
 
 struct LiveMediaCell_Previews: PreviewProvider {
     static private let media = Mock.media(.livestream)

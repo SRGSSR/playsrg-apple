@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
 struct TitleView: View {
     let text: String?
@@ -21,6 +23,8 @@ struct TitleView: View {
     }
 }
 
+// MARK: Size
+
 class TitleViewSize: NSObject {
     @objc static func recommended(text: String?) -> NSCollectionLayoutSize {
         if let text = text, !text.isEmpty {
@@ -31,6 +35,8 @@ class TitleViewSize: NSObject {
         }
     }
 }
+
+// MARK: Preview
 
 struct TitleView_Previews: PreviewProvider {
     static var previews: some View {

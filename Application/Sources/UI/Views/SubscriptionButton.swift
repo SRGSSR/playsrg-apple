@@ -6,6 +6,9 @@
 
 import SwiftUI
 
+// MARK: View
+
+/// Behavior: h-hug, v-hug
 struct SubscriptionButton: View {
     var show: SRGShow?
     
@@ -56,6 +59,8 @@ struct SubscriptionButton: View {
         .accessibilityLabel(accessibilityLabel)
     }
 }
+
+// MARK: Preview
 
 struct SubscriptionButton_Previews: PreviewProvider {
     static var previews: some View {

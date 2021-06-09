@@ -7,6 +7,8 @@
 import SRGUserData
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
 struct MediaVisualView: View {
     let media: SRGMedia?
@@ -96,6 +98,8 @@ struct MediaVisualView: View {
         }
     }
 }
+
+// MARK: Preview
 
 struct MediaVisualView_Previews: PreviewProvider {
     static let userDefaults: UserDefaults = {

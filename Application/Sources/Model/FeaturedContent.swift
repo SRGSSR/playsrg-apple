@@ -14,8 +14,10 @@ protocol FeaturedContent {
     var introduction: String? { get }
     var title: String? { get }
     var summary: String? { get }
-    var accessibilityLabel: String? { get }
     var label: String? { get }
+    
+    var accessibilityLabel: String? { get }
+    var accessibilityHint: String? { get }
     
     func visualView() -> Content
     
@@ -46,6 +48,10 @@ struct FeaturedMediaContent: FeaturedContent {
     
     var accessibilityLabel: String? {
         return MediaDescription.accessibilityLabel(for: media)
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Featured media hint")
     }
     
     func visualView() -> some View {
@@ -83,6 +89,10 @@ struct FeaturedShowContent: FeaturedContent {
     
     var accessibilityLabel: String? {
         return show?.title
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens show details.", "Featured show hint")
     }
     
     func visualView() -> some View {

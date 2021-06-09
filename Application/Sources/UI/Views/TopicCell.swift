@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 struct TopicCell: View {
     let topic: SRGTopic?
     
@@ -16,16 +18,13 @@ struct TopicCell: View {
             ExpandingCardButton(action: action) {
                 MainView(topic: topic)
                     .unredactable()
-                    .accessibilityElement()
-                    .accessibilityOptionalLabel(topic?.title)
-                    .accessibility(addTraits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
             #else
             MainView(topic: topic)
                 .redactable()
                 .cornerRadius(LayoutStandardViewCornerRadius)
-                .accessibilityElement()
-                .accessibilityOptionalLabel(topic?.title)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
         }
         .redactedIfNil(topic)
@@ -60,6 +59,20 @@ struct TopicCell: View {
     }
 }
 
+// MARK: Accessibility
+
+private extension TopicCell {
+    var accessibilityLabel: String? {
+        return topic?.title
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens topic details.", "Show cell hint")
+    }
+}
+
+// MARK: Size
+
 class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
@@ -81,6 +94,8 @@ class TopicCellSize: NSObject {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
     }
 }
+
+// MARK: Preview
 
 struct TopicCell_Previews: PreviewProvider {
     static private let size = TopicCellSize.swimlane().previewSize

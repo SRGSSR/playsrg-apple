@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
 struct ProgressBar: View {
     let value: Double
@@ -26,6 +28,8 @@ struct ProgressBar: View {
         self.value = value.clamped(to: 0...1)
     }
 }
+
+// MARK: Preview
 
 struct ProgressBar_Previews: PreviewProvider {
     static var previews: some View {

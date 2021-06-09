@@ -7,6 +7,8 @@
 import Nuke
 import SwiftUI
 
+// MARK :View
+
 /// Behavior: h-exp, v-exp (like `Image/resizable()`)
 struct ImageView: UIViewRepresentable {
     let url: URL?
@@ -47,6 +49,8 @@ struct ImageView: UIViewRepresentable {
         }
     }
 }
+
+// MARK: Preview
 
 struct ImageView_Previews: PreviewProvider {
     static let contentMode: ContentMode = .fill

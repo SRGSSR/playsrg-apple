@@ -6,6 +6,8 @@
 
 import SwiftUI
 
+// MARK: View
+
 struct EmptyView: View {
     enum State {
         case loading
@@ -40,6 +42,8 @@ struct EmptyView: View {
         .padding()
     }
 }
+
+// MARK: Preview
 
 struct EmptyView_Previews: PreviewProvider {
     enum PreviewError: LocalizedError {
