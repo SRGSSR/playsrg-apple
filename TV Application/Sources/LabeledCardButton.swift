@@ -18,8 +18,8 @@ import SwiftUI
 struct LabeledCardButton<Content: View, Label: View>: View {
     private let aspectRatio: CGFloat?
     private let action: () -> Void
-    private let content: () -> Content
-    private let label: () -> Label
+    @Binding private var content: () -> Content
+    @Binding private var label: () -> Label
     
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
     
@@ -28,8 +28,8 @@ struct LabeledCardButton<Content: View, Label: View>: View {
     init(aspectRatio: CGFloat? = nil, action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content, @ViewBuilder label: @escaping () -> Label) {
         self.aspectRatio = aspectRatio
         self.action = action
-        self.content = content
-        self.label = label
+        _content = .constant(content)
+        _label = .constant(label)
     }
     
     var body: some View {

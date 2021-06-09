@@ -17,13 +17,13 @@ struct Stack<Content: View>: View {
     let alignment: StackAlignment
     let spacing: CGFloat?
     
-    private let content: () -> Content
+    @Binding private var content: () -> Content
     
     init(direction: StackDirection, alignment: StackAlignment = .center, spacing: CGFloat? = nil, @ViewBuilder content: @escaping () -> Content) {
         self.direction = direction
         self.alignment = alignment
         self.spacing = spacing
-        self.content = content
+        _content = .constant(content)
     }
     
     private static func horizontalAlignment(for alignment: StackAlignment) -> HorizontalAlignment {

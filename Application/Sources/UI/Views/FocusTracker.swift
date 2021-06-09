@@ -10,13 +10,13 @@ import SwiftUI
 
 private struct FocusTracker<Content: View>: View {
     private let action: (Bool) -> Void
-    private let content: () -> Content
+    @Binding private var content: () -> Content
     
     @Environment(\.isFocused) private var isFocused: Bool
     
     init(action: @escaping (Bool) -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.action = action
-        self.content = content
+        _content = .constant(content)
     }
     
     var body: some View {

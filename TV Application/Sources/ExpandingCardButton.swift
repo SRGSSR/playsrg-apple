@@ -14,13 +14,13 @@ import SwiftUI
  */
 struct ExpandingCardButton<Content: View>: View {
     private let action: () -> Void
-    private let content: () -> Content
+    @Binding private var content: () -> Content
     
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
     
     init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.action = action
-        self.content = content
+        _content = .constant(content)
     }
     
     var body: some View {

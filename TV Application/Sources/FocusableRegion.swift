@@ -12,10 +12,10 @@ import SwiftUI
  *  Behavior: h-neu, v-neu
  */
 private struct FocusableRegion<Content: View>: UIViewRepresentable {
-    private let content: () -> Content
+    @Binding private var content: () -> Content
     
     init(@ViewBuilder content: @escaping () -> Content) {
-        self.content = content
+        _content = .constant(content)
     }
     
     func makeCoordinator() -> UIHostingController<Content> {
