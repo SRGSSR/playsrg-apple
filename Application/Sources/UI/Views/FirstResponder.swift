@@ -15,10 +15,10 @@ import SwiftUI
  *  Behavior: h-neu, v-neu
  */
 struct ResponderChain<Content: View>: UIViewRepresentable {
-    private let content: (FirstResponder) -> Content
+    @Binding private var content: (FirstResponder) -> Content
     
     init(@ViewBuilder content: @escaping (FirstResponder) -> Content) {
-        self.content = content
+        _content = .constant(content)
     }
     
     func makeCoordinator() -> Coordinator {
