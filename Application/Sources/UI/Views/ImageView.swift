@@ -7,7 +7,7 @@
 import Nuke
 import SwiftUI
 
-// MARK :View
+// MARK: View
 
 /// Behavior: h-exp, v-exp (like `Image/resizable()`)
 struct ImageView: UIViewRepresentable {
