@@ -269,8 +269,7 @@
     SRGSong *song = self.items[indexPath.row];
     CGFloat height = [SongTableViewCell heightForSong:song withCellWidth:CGRectGetWidth(tableView.frame)];
     
-    // TODO: Fix layout / spacing
-    return height;
+    return height + 20.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
