@@ -83,7 +83,7 @@ struct SectionShowHeaderView: View {
                 .frame(maxWidth: .infinity)
             }
             .adaptiveMainFrame(for: uiHorizontalSizeClass)
-            .padding(.bottom, constant(iOS: 50, tvOS: 80))
+            .padding(.bottom, constant(iOS: 20, tvOS: 50))
         }
     }
     
