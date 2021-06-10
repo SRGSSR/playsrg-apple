@@ -29,7 +29,7 @@ struct Badge: View {
     }
 }
 
-// Behavior: h-hug, v-hug
+/// Behavior: h-hug, v-hug
 struct DurationBadge: View {
     let duration: Double
     

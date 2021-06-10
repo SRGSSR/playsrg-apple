@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: Contract
+
 @objc protocol SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?)
 }
@@ -24,7 +26,9 @@ class OpenShowEvent: UIEvent {
     }
 }
 
-// Behavior: h-hug, v-hug
+// MARK: View
+
+/// Behavior: h-hug, v-hug
 struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
@@ -38,7 +42,7 @@ struct SectionShowHeaderView: View {
         #endif
     }
     
-    // Behavior: h-hug, v-hug
+    /// Behavior: h-hug, v-hug
     private struct MainView: View {
         let section: Content.Section
         let show: SRGShow
@@ -93,7 +97,7 @@ struct SectionShowHeaderView: View {
         }
     }
     
-    // Behavior: h-hug, v-hug
+    /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         let section: Content.Section
         
@@ -123,12 +127,20 @@ struct SectionShowHeaderView: View {
         }
     }
     
-    // Behavior: h-hug, v-hug
+    /// Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
         let uiHorizontalSizeClass: UIUserInterfaceSizeClass
         
         @State private var isFocused = false
+        
+        var accessibilityLabel: String? {
+            return show.title
+        }
+        
+        var accessibilityHint: String? {
+            return PlaySRGAccessibilityLocalizedString("Opens show details.", "Show button hint")
+        }
         
         var body: some View {
             ResponderChain { firstResponder in
@@ -147,11 +159,14 @@ struct SectionShowHeaderView: View {
                     .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
                     .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
                     .cornerRadius(LayoutStandardViewCornerRadius)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
                 }
             }
         }
     }
 }
+
+// MARK: Helpers
 
 // TODO: With Swift 5.5 use #if support for postfix expressions
 //       See https://github.com/apple/swift-evolution/blob/main/proposals/0308-postfix-if-config-expressions.md
@@ -184,6 +199,8 @@ private extension View {
     }
 }
 
+// MARK: Size
+
 class SectionShowHeaderViewSize: NSObject {
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
@@ -198,6 +215,8 @@ class SectionShowHeaderViewSize: NSObject {
         }
     }
 }
+
+// MARK: Preview
 
 struct SectionShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {

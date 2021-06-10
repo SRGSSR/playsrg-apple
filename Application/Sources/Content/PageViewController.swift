@@ -559,7 +559,7 @@ private class OpenSectionEvent: UIEvent {
 }
 
 private extension PageViewController {
-    struct SectionHeaderView: View {
+    private struct SectionHeaderView: View {
         let section: PageModel.Section
         let pageId: PageModel.Id
         
@@ -575,6 +575,14 @@ private extension PageViewController {
         
         private var hasDetailDisclosure: Bool {
             return section.viewModelProperties.canOpenDetailPage || isSectionWideSupportEnabled
+        }
+        
+        var accessibilityLabel: String? {
+            return Self.title(for: section)
+        }
+        
+        var accessibilityHint: String? {
+            return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : nil
         }
         
         var body: some View {
@@ -599,17 +607,5 @@ private extension PageViewController {
         static func size(section: PageModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
         }
-    }
-}
-
-// MARK: Accessibility
-
-private extension PageViewController.SectionHeaderView {
-    var accessibilityLabel: String? {
-        return Self.title(for: section)
-    }
-    
-    var accessibilityHint: String? {
-        return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : nil
     }
 }
