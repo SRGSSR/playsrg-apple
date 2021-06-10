@@ -16,6 +16,7 @@
 #import "NotificationTableViewCell.h"
 #import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "ProfileAccountHeaderView.h"
 #import "ProfileTableViewCell.h"
 #import "PushService.h"
@@ -322,7 +323,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return UIEdgeInsetsZero;
+    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutOldTableViewPaddingContentInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -379,10 +380,11 @@
 {
     // TODO: Fix layout and correctly scale values
     if ([self notificationAtIndexPath:indexPath]) {
-        return 84.f;
+        return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutTableViewMargin;
     }
     else {
-        return 50.f;
+        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
+        return [fontMetrics scaledValueForValue:50.f];
     }
 }
 
