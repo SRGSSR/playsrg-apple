@@ -97,13 +97,13 @@ struct LiveMediaCell: View {
                 }
                 
                 Text(model.title)
-                    .srgFont(.body)
+                    .srgFont(.body, maximumSize: constant(iOS: 18, tvOS: CGFloat.infinity))
                     .lineLimit(1)
                     .foregroundColor(.white)
                 
                 if let subtitle = model.subtitle {
                     Text(subtitle)
-                        .srgFont(.caption)
+                        .srgFont(.caption, maximumSize: constant(iOS: 15, tvOS: CGFloat.infinity))
                         .lineLimit(1)
                         .foregroundColor(.white)
                         .layoutPriority(1)
