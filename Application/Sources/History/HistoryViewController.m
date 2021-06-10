@@ -154,7 +154,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutTableViewPaddingContentInsets();
+    return LayoutTableViewPaddingContentInsets;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -185,7 +185,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutTableViewdMargin;
+    return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutTableViewMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableView<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath

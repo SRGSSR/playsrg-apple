@@ -87,8 +87,7 @@ OBJC_EXPORT NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFl
  *  Table view constants.
  */
 
-OBJC_EXPORT const CGFloat LayoutTableViewdMargin;
-
-OBJC_EXPORT UIEdgeInsets LayoutTableViewPaddingContentInsets();
+OBJC_EXPORT const CGFloat LayoutTableViewMargin;
+OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
 
 NS_ASSUME_NONNULL_END
