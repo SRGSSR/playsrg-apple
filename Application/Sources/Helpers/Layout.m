@@ -6,6 +6,8 @@
 
 #import "Layout.h"
 
+@import SRGAppearance;
+
 const CGFloat LayoutStandardLabelCornerRadius = 2.f;
 const CGFloat LayoutStandardViewCornerRadius = 4.f;
 
@@ -27,7 +29,7 @@ static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layo
 NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset)
 {
     // Use body as scaling curve; should offer pretty standard behavior covering all needs
-    UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleBody];
+    UIFontMetrics *fontMetrics = [SRGFont metricsForFontWithStyle:SRGFontStyleBody];
     CGFloat height = width / aspectRatio + [fontMetrics scaledValueForValue:heightOffset];
     return [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension absoluteDimension:width]
                                           heightDimension:[NSCollectionLayoutDimension absoluteDimension:height]];
