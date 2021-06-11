@@ -80,7 +80,6 @@ struct MediaCell: View {
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
         }
-        .background(Color.clear)
         .redactedIfNil(media)
     }
     
