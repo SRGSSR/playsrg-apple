@@ -225,6 +225,14 @@ private extension SectionViewController {
     }
 }
 
+// MARK: Objective-C constructors
+
+extension SectionViewController {
+    @objc static func viewController(for contentSection: SRGContentSection) -> SectionViewController {
+        return SectionViewController(section: .content(contentSection))
+    }
+}
+
 // MARK: Protocols
 
 extension SectionViewController: ContentInsets {

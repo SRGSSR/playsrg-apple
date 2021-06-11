@@ -13,6 +13,7 @@ The available actions are:
 * Open a media within the player: `[scheme]://media/[media_urn]`. An optional `&start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
+* Open a section page: `[scheme]://section/[section_id]`.
 * Open a module page: `[scheme]://module/[module_urn]`.
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single character parameter can be provided to open the page at the specified index.

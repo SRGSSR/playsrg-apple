@@ -23,6 +23,7 @@ DeeplinkAction const DeeplinkActionTopic = @"topic";
 DeeplinkAction const DeeplinkActionHome = @"home";
 DeeplinkAction const DeeplinkActionAZ = @"az";
 DeeplinkAction const DeeplinkActionByDate = @"bydate";
+DeeplinkAction const DeeplinkActionSection = @"section";
 DeeplinkAction const DeeplinkActionSearch = @"search";
 DeeplinkAction const DeeplinkActionLink = @"link";
 

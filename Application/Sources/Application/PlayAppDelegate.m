@@ -231,6 +231,7 @@ static void *s_kvoContext = &s_kvoContext;
 // Open [scheme]://home (optional query parameters: channel_id=[channel_id])
 // Open [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
 // Open [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
+// Open [scheme]://section/[section_id]
 // Open [scheme]://search (optional query parameters: query=[query], media_type=[audio|video])
 // Open [scheme]://link?url=[url]
 // Open [scheme]://[play_website_url] (use "parsePlayUrl.js" to attempt transforming the URL)
@@ -239,7 +240,7 @@ static void *s_kvoContext = &s_kvoContext;
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     
     NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionHome,
-                                                   DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch, DeeplinkActionLink ];
+                                                   DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSection, DeeplinkActionSearch, DeeplinkActionLink ];
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
@@ -324,8 +325,20 @@ static void *s_kvoContext = &s_kvoContext;
             return YES;
         }
         
+        NSString *sectionUid = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionSection] && sectionUid) {
+            [self openSectionWithUid:sectionUid completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = sectionUid;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+        }
+        
         NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
-        NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
+        NSURL *URL = URLString ? [NSURL URLWithString:URLString] : nil;
         if ([action isEqualToString:DeeplinkActionLink] && URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -483,6 +496,17 @@ static void *s_kvoContext = &s_kvoContext;
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
         [self openTopicURN:topicURN];
+        completionBlock ? completionBlock() : nil;
+    }];
+}
+
+- (void)openSectionWithUid:(NSString *)sectionUid completionBlock:(void (^)(void))completionBlock
+{
+    NSParameterAssert(sectionUid);
+    
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
+    [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
+        [self openSectionUid:sectionUid];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -706,6 +730,22 @@ static void *s_kvoContext = &s_kvoContext;
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
                                              userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when a topic cannot be opened via Handoff, deep linking or a push notification") }];
+            [Banner showError:error inViewController:nil];
+        }
+    }] resume];
+}
+
+- (void)openSectionUid:(NSString *)sectionUid
+{
+    [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        if (contentSection) {
+            SectionViewController *sectionViewController = [SectionViewController viewControllerFor:contentSection];
+            [self.rootTabBarController pushViewController:sectionViewController animated:YES];
+        }
+        else {
+            NSError *error = [NSError errorWithDomain:PlayErrorDomain
+                                                 code:PlayErrorCodeNotFound
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The section cannot be opened.", @"Error message when a section cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];
