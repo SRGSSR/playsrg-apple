@@ -295,10 +295,6 @@ extension SectionViewController: UIScrollViewDelegate {
 
 #if false
 
-extension SectionViewController: PlayApplicationNavigation {
-    
-}
-
 extension SectionViewController: SRGAnalyticsViewTracking {
     
 }

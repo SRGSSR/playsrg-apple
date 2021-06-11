@@ -25,6 +25,7 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
 #import "PlayAppDelegate.h"
+#import "PlayApplicationNavigation.h"
 #import "PlayDurationFormatter.h"
 #import "PushService.h"
 #import "Reachability.h"

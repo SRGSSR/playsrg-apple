@@ -20,9 +20,9 @@ The available actions are:
 * Open search page: `[scheme]://search`. Optional `query` and `media_type` (with `video` or `audio` values) parameters can be provided.
 * Open a URL: `[scheme]://link?url=[url]`.
 
-For media, show and page links, an optional `&channel_id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
+For media, show and page links, an optional `channel_id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
-For a `Debug`, `Nightly` or a `Beta` build, `&server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
+For a `Debug`, `Nightly` or a `Beta` build, `server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
 
 ### URL generation
 

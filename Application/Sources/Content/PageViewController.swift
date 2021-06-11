@@ -294,10 +294,31 @@ extension PageViewController: UIScrollViewDelegate {
     }
 }
 
-#if false
+#if os(iOS)
 
 extension PageViewController: PlayApplicationNavigation {
-    
+    func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
+        guard radioChannel === applicationSectionInfo.radioChannel || radioChannel == applicationSectionInfo.radioChannel else { return false }
+        
+        switch applicationSectionInfo.applicationSection {
+        case .showByDate:
+            let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
+            if let navigationController = navigationController {
+                let calendarViewController = CalendarViewController(radioChannel: applicationSectionInfo.radioChannel, date: date)
+                navigationController.pushViewController(calendarViewController, animated: false)
+            }
+            return true
+        case .showAZ:
+            let index = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+            if let navigationController = navigationController {
+                let showsViewController = ShowsViewController(radioChannel: applicationSectionInfo.radioChannel, alphabeticalIndex: index)
+                navigationController.pushViewController(showsViewController, animated: false)
+            }
+            return true
+        default:
+            return applicationSectionInfo.applicationSection == .overview
+        }
+    }
 }
 
 #endif
