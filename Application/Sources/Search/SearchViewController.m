@@ -593,7 +593,7 @@
         return UIEdgeInsetsZero;
     }
     else {
-        return UIEdgeInsetsMake(0.f, LayoutMargin, 0.f, LayoutMargin);
+        return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 0.f, 2 * LayoutMargin);
     }
 }
 
@@ -632,7 +632,7 @@
             return [[MediaCellSize fullWidth] constrainedBy:collectionView];
         }
         else {
-            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 2 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
         }
     }
     // Search show list

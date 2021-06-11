@@ -52,7 +52,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, LayoutMargin, 0.f, LayoutMargin);
+    return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 0.f, 2 * LayoutMargin);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
@@ -71,7 +71,7 @@
         return [[MediaCellSize fullWidth] constrainedBy:collectionView];
     }
     else {
-        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 2 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
     }
 }
 
