@@ -9,7 +9,7 @@ disabled_rules:
 
 line_length: 300
 
-file_length: 620
+file_length: 1000
 
 trailing_whitespace:
   ignores_empty_lines: true
