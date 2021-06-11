@@ -57,6 +57,9 @@ protocol SectionProperties {
     var placeholderItems: [Content.Item] { get }
     var displaysTitle: Bool { get }
     
+    var analyticsTitle: String? { get }
+    var analyticsLevels: [String]? { get }
+    
     #if os(iOS)
     var sharingItem: SharingItem? { get }
     #endif
@@ -133,6 +136,32 @@ private extension Content {
         
         var displaysTitle: Bool {
             return contentSection.type != .showAndMedias
+        }
+        
+        var analyticsTitle: String? {
+            switch contentSection.type {
+            case .medias, .showAndMedias, .shows:
+                return contentSection.uid
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows:
+                    return AnalyticsPageTitle.favorites.rawValue
+                case .personalizedProgram:
+                    return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+                case .resumePlayback:
+                    return AnalyticsPageTitle.resumePlayback.rawValue
+                case .watchLater:
+                    return AnalyticsPageTitle.watchLater.rawValue
+                case .none, .livestreams, .topicSelector, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                    return nil
+                }
+            case .none:
+                return nil
+            }
+        }
+        
+        var analyticsLevels: [String]? {
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
         }
         
         #if os(iOS)
@@ -289,6 +318,50 @@ private extension Content {
         
         var displaysTitle: Bool {
             return true
+        }
+        
+        var analyticsTitle: String? {
+            switch configuredSection.type {
+            case .radioLatestEpisodes:
+                return AnalyticsPageTitle.latestEpisodes.rawValue
+            case .radioMostPopular:
+                return AnalyticsPageTitle.mostPopular.rawValue
+            case .radioLatest, .radioLatestVideos:
+                return AnalyticsPageTitle.latest.rawValue
+            case .radioAllShows:
+                return AnalyticsPageTitle.showsAZ.rawValue
+            case .radioFavoriteShows:
+                return AnalyticsPageTitle.favorites.rawValue
+            case .tvLiveCenter:
+                return AnalyticsPageTitle.sports.rawValue
+            case .tvScheduledLivestreams:
+                return AnalyticsPageTitle.events.rawValue
+            case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
+                return nil
+            }
+        }
+        
+        var analyticsLevels: [String]? {
+            switch configuredSection.type {
+            case let .radioLatestEpisodes(channelUid: channelUid),
+                 let .radioMostPopular(channelUid: channelUid),
+                 let .radioLatest(channelUid: channelUid),
+                 let .radioLatestVideos(channelUid: channelUid),
+                 let .radioAllShows(channelUid),
+                 let .radioFavoriteShows(channelUid: channelUid):
+                if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
+                    return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+                }
+                else {
+                    return nil
+                }
+            case .tvLiveCenter:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvScheduledLivestreams:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
+                return nil
+            }
         }
         
         #if os(iOS)

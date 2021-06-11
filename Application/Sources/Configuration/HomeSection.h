@@ -28,6 +28,4 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionTVScheduledLivestreams
 };
 
-OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
-
 NS_ASSUME_NONNULL_END

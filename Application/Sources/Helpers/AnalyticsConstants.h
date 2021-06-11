@@ -41,6 +41,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodesFromFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLogin;
@@ -50,6 +51,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleResumePlayback;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
@@ -260,7 +262,5 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContent;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
 OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
-
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
 
 NS_ASSUME_NONNULL_END

@@ -31,6 +31,7 @@ AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
 AnalyticsPageTitle const AnalyticsPageTitleHome = @"home";
 AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";
 AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
+AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodesFromFavorites = @"latest episodes from favorites";
 AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
 AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
 AnalyticsPageTitle const AnalyticsPageTitleLogin = @"login";
@@ -40,6 +41,7 @@ AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
 AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
+AnalyticsPageTitle const AnalyticsPageTitleResumePlayback = @"resume playback";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
@@ -114,25 +116,3 @@ AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
 AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";
 AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
-
-AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(HomeSectionTVLive) : AnalyticsPageTitleTV,
-                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
-                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
-                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
-                      @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
-                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
-                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
-    });
-    
-    NSString *title = s_titles[@(homeSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}

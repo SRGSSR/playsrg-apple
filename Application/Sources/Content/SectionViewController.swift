@@ -291,15 +291,15 @@ extension SectionViewController: UIScrollViewDelegate {
     }
 }
 
-// TODO: Remaining protocols to implement
-
-#if false
-
 extension SectionViewController: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return model.section.properties.analyticsTitle ?? ""
+    }
     
+    var srg_pageViewLevels: [String]? {
+        return model.section.properties.analyticsLevels
+    }
 }
-
-#endif
 
 extension SectionViewController: SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?) {
