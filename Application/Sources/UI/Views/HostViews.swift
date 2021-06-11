@@ -110,10 +110,10 @@ class HostTableViewCell<Content: View>: UITableViewCell {
             contentView.addSubview(hostView)
             
             NSLayoutConstraint.activate([
-                hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutTableViewMargin / 2),
-                hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutTableViewMargin / 2),
-                hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutTableViewMargin),
-                hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutTableViewMargin)
+                hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
+                hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
+                hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin),
+                hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin)
             ])
         }
     }

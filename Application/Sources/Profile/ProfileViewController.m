@@ -323,7 +323,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutOldTableViewPaddingContentInsets;
+    return SRGIdentityService.currentIdentityService ? UIEdgeInsetsZero : LayoutPaddingContentInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -380,7 +380,7 @@
 {
     // TODO: Fix layout and correctly scale values
     if ([self notificationAtIndexPath:indexPath]) {
-        return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutTableViewMargin;
+        return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
     }
     else {
         UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];

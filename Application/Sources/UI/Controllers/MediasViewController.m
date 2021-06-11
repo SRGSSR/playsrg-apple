@@ -50,14 +50,36 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0.f, LayoutMargin, 0.f, LayoutMargin);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return LayoutMargin;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return LayoutMargin;
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
         return [[MediaCellSize fullWidth] constrainedBy:collectionView];
     }
     else {
-        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 2 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
     }
+}
+
+#pragma mark ContentInsets protocol
+
+- (UIEdgeInsets)play_paddingContentInsets
+{
+    return LayoutPaddingContentInsets;
 }
 
 #pragma mark Notifications

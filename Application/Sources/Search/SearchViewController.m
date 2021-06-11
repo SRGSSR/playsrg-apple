@@ -587,11 +587,42 @@
 
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return UIEdgeInsetsZero;
+    }
+    else {
+        return UIEdgeInsetsMake(0.f, LayoutMargin, 0.f, LayoutMargin);
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutMargin;
+    }
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    if ([self shouldDisplayMostSearchedShows]) {
+        return 0.f;
+    }
+    else {
+        return LayoutMargin;
+    }
+}
+
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     // TODO: Fix layout and correctly scale values if needed
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), 50.f);
+        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), [fontMetrics scaledValueForValue:50.f]);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
@@ -601,7 +632,7 @@
             return [[MediaCellSize fullWidth] constrainedBy:collectionView];
         }
         else {
-            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 2 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
         }
     }
     // Search show list
