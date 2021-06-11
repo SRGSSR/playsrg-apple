@@ -22,7 +22,7 @@ struct ShowDetailView: View {
     }
     
     @Binding var show: SRGShow?
-    @StateObject var model = ShowDetailModel()
+    @StateObject var model = ShowDetailViewModel()
     
     static let headerHeight: CGFloat = 450
     

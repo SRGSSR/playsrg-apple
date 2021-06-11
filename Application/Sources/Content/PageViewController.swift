@@ -12,11 +12,11 @@ import UIKit
 // MARK: View controller
 
 class PageViewController: UIViewController {
-    private let model: PageModel
+    private let model: PageViewModel
     
     private var cancellables = Set<AnyCancellable>()
 
-    private var dataSource: UICollectionViewDiffableDataSource<PageModel.Section, PageModel.Item>!
+    private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -35,8 +35,8 @@ class PageViewController: UIViewController {
         #endif
     }
     
-    private static func snapshot(from state: PageModel.State) -> NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item> {
-        var snapshot = NSDiffableDataSourceSnapshot<PageModel.Section, PageModel.Item>()
+    private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item>()
         if case let .loaded(rows: rows) = state {
             for row in rows {
                 snapshot.appendSections([row.section])
@@ -46,8 +46,8 @@ class PageViewController: UIViewController {
         return snapshot
     }
     
-    init(id: PageModel.Id) {
-        model = PageModel(id: id)
+    init(id: PageViewModel.Id) {
+        model = PageViewModel(id: id)
         super.init(nibName: nil, bundle: nil)
         title = model.title
     }
@@ -107,7 +107,7 @@ class PageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageModel.Item> { [model] cell, _, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
             cell.content = ItemCell(item: item, id: model.id)
         }
         
@@ -154,7 +154,7 @@ class PageViewController: UIViewController {
     }
     #endif
     
-    func reloadData(for state: PageModel.State) {
+    func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
@@ -378,13 +378,13 @@ private extension PageViewController {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             
-            func sectionSupplementaryItems(for section: PageModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: PageViewModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
             }
             
-            func layoutSection(for section: PageModel.Section) -> NSCollectionLayoutSection {
+            func layoutSection(for section: PageViewModel.Section) -> NSCollectionLayoutSection {
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section.viewModelProperties.layout {
@@ -473,7 +473,7 @@ private extension PageViewController {
 private extension PageViewController {
     struct MediaCell: View {
         let media: SRGMedia?
-        let section: PageModel.Section
+        let section: PageViewModel.Section
         
         var body: some View {
             switch section.viewModelProperties.layout {
@@ -493,7 +493,7 @@ private extension PageViewController {
     
     struct ShowCell: View {
         let show: SRGShow?
-        let section: PageModel.Section
+        let section: PageViewModel.Section
         
         var body: some View {
             switch section.viewModelProperties.layout {
@@ -508,8 +508,8 @@ private extension PageViewController {
     }
     
     struct ItemCell: View {
-        let item: PageModel.Item
-        let id: PageModel.Id
+        let item: PageViewModel.Item
+        let id: PageViewModel.Id
         
         var body: some View {
             switch item.wrappedValue {
@@ -546,9 +546,9 @@ private extension PageViewController {
 }
 
 private class OpenSectionEvent: UIEvent {
-    let section: PageModel.Section
+    let section: PageViewModel.Section
     
-    init(section: PageModel.Section) {
+    init(section: PageViewModel.Section) {
         self.section = section
         super.init()
     }
@@ -560,16 +560,16 @@ private class OpenSectionEvent: UIEvent {
 
 private extension PageViewController {
     private struct SectionHeaderView: View {
-        let section: PageModel.Section
-        let pageId: PageModel.Id
+        let section: PageViewModel.Section
+        let pageId: PageViewModel.Id
         
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
-        private static func title(for section: PageModel.Section) -> String? {
+        private static func title(for section: PageViewModel.Section) -> String? {
             return section.properties.title
         }
         
-        private static func subtitle(for section: PageModel.Section) -> String? {
+        private static func subtitle(for section: PageViewModel.Section) -> String? {
             return section.properties.summary
         }
         
@@ -604,7 +604,7 @@ private extension PageViewController {
             }
         }
         
-        static func size(section: PageModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
         }
     }

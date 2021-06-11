@@ -6,7 +6,7 @@
 
 import SRGDataProviderCombine
 
-class ShowsModel: ObservableObject {
+class ShowsViewModel: ObservableObject {
     enum State {
         case loading
         case failed(error: Error)

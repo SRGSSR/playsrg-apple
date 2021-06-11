@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MediaDetailView: View {
     @Binding var media: SRGMedia?
-    @StateObject var model = MediaDetailModel()
+    @StateObject var model = MediaDetailViewModel()
     
     init(media: SRGMedia?) {
         _media = .constant(media)
@@ -43,7 +43,7 @@ struct MediaDetailView: View {
     }
     
     private struct DescriptionView: View {
-        @ObservedObject var model: MediaDetailModel
+        @ObservedObject var model: MediaDetailViewModel
         
         @Namespace private var namespace
         
@@ -95,7 +95,7 @@ struct MediaDetailView: View {
     }
     
     struct AttributesView: View {
-        @ObservedObject var model: MediaDetailModel
+        @ObservedObject var model: MediaDetailViewModel
         
         var body: some View {
             HStack(spacing: 30) {
@@ -132,7 +132,7 @@ struct MediaDetailView: View {
             }
         }
         
-        @ObservedObject var model: MediaDetailModel
+        @ObservedObject var model: MediaDetailViewModel
         @State var isFocused = false
         
         var availabilityInformation: String {
@@ -171,7 +171,7 @@ struct MediaDetailView: View {
     }
     
     struct ActionsView: View {
-        @ObservedObject var model: MediaDetailModel
+        @ObservedObject var model: MediaDetailViewModel
         
         var playButtonLabel: String {
             let progress = HistoryPlaybackProgressForMediaMetadata(model.media)
@@ -217,7 +217,7 @@ struct MediaDetailView: View {
     }
     
     private struct RelatedMediasView: View {
-        @ObservedObject var model: MediaDetailModel
+        @ObservedObject var model: MediaDetailViewModel
         
         var body: some View {
             ZStack {

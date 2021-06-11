@@ -8,7 +8,7 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class PageModel: Identifiable, ObservableObject {
+class PageViewModel: Identifiable, ObservableObject {
     let id: Id
     
     var title: String? {
@@ -79,10 +79,10 @@ class PageModel: Identifiable, ObservableObject {
         }
     }
     
-    private static func rowReloadSignal(for section: PageModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
+    private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
             section.viewModelProperties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
-            trigger?.signal(activatedBy: PageModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
+            trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
         .eraseToAnyPublisher()
     }
@@ -106,7 +106,7 @@ class PageModel: Identifiable, ObservableObject {
             return row
         }
         else {
-            return PageModel.Row(section: section, items: Self.placeholderRowItems(for: section))
+            return PageViewModel.Row(section: section, items: Self.placeholderRowItems(for: section))
         }
     }
     
@@ -117,7 +117,7 @@ class PageModel: Identifiable, ObservableObject {
 
 // MARK: Types
 
-extension PageModel {
+extension PageViewModel {
     enum Id: SectionFiltering {
         case video
         case audio(channel: RadioChannel)
@@ -247,42 +247,42 @@ extension PageModel {
 // MARK: Publishers
 
 private extension SRGDataProvider {
-    func sectionsPublisher(id: PageModel.Id) -> AnyPublisher<[PageModel.Section], Error> {
+    func sectionsPublisher(id: PageViewModel.Id) -> AnyPublisher<[PageViewModel.Section], Error> {
         switch id {
         case .video:
             return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.sections.map { PageModel.Section(.content($0)) } }
+                .map { $0.sections.map { PageViewModel.Section(.content($0)) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
             return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.map { PageModel.Section(.content($0)) } }
+                .map { $0.sections.map { PageViewModel.Section(.content($0)) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().map { PageModel.Section(.configured($0)) })
+            return Just(channel.configuredSections().map { PageViewModel.Section(.configured($0)) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageModel.Section(.configured($0)) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageViewModel.Section(.configured($0)) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
     }
     
-    func rowPublisher(id: PageModel.Id, section: PageModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageModel.Row, Error> {
+    func rowPublisher(id: PageViewModel.Id, section: PageViewModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageViewModel.Row, Error> {
         return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
             .scan([]) { $0 + $1 }
             .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
-            .map { PageModel.Row(section: section, items: $0) }
+            .map { PageViewModel.Row(section: section, items: $0) }
             .eraseToAnyPublisher()
     }
     
-    static func rowItems(_ items: [Content.Item], in section: PageModel.Section) -> [PageModel.Item] {
-        var rowItems = items.map { PageModel.Item(.item($0), in: section) }
+    static func rowItems(_ items: [Content.Item], in section: PageViewModel.Section) -> [PageViewModel.Item] {
+        var rowItems = items.map { PageViewModel.Item(.item($0), in: section) }
         
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasSwimlaneLayout {
-            rowItems.append(PageModel.Item(.more, in: section))
+            rowItems.append(PageViewModel.Item(.more, in: section))
         }
         return rowItems
     }
@@ -291,7 +291,7 @@ private extension SRGDataProvider {
 // MARK: Properties
 
 protocol PageViewModelProperties {
-    var layout: PageModel.SectionLayout { get }
+    var layout: PageViewModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
     
     /// Signal which can be used to reload the section entirely
@@ -318,7 +318,7 @@ extension PageViewModelProperties {
     }
 }
 
-private extension PageModel {
+private extension PageViewModel {
     struct ContentSectionProperties: PageViewModelProperties {
         let contentSection: SRGContentSection
         
@@ -326,7 +326,7 @@ private extension PageModel {
             return contentSection.presentation
         }
         
-        var layout: PageModel.SectionLayout {
+        var layout: PageViewModel.SectionLayout {
             switch presentation.type {
             case .hero:
                 return .hero
@@ -382,7 +382,7 @@ private extension PageModel {
     struct ConfiguredSectionProperties: PageViewModelProperties {
         let configuredSection: ConfiguredSection
         
-        var layout: PageModel.SectionLayout {
+        var layout: PageViewModel.SectionLayout {
             switch configuredSection.type {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
                 return (configuredSection.contentPresentationType == .hero) ? .hero : .mediaSwimlane

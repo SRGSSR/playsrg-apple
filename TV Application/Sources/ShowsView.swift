@@ -9,7 +9,7 @@ import SRGAppearanceSwift
 import SwiftUI
 
 struct ShowsView: View {
-    @StateObject var model = ShowsModel()
+    @StateObject var model = ShowsViewModel()
     
     enum Section: Hashable {
         case shows(character: Character)

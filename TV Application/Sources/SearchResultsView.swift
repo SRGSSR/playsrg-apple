@@ -8,7 +8,7 @@ import SRGAppearanceSwift
 import SwiftUI
 
 struct SearchResultsView: View {
-    @ObservedObject var model: SearchResultsModel
+    @ObservedObject var model: SearchResultsViewModel
     
     enum Section: Hashable {
         case medias

@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-class LiveMediaModel: ObservableObject {
+class LiveMediaViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             registerForChannelUpdates(for: media)
@@ -43,7 +43,7 @@ class LiveMediaModel: ObservableObject {
     }
 }
 
-extension LiveMediaModel {
+extension LiveMediaViewModel {
     var channel: SRGChannel? {
         return programComposition?.channel ?? media?.channel
     }

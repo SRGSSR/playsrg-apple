@@ -9,7 +9,7 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class SectionModel: ObservableObject {
+class SectionViewModel: ObservableObject {
     let section: Content.Section
     
     @Published private(set) var state: State = .loading
@@ -30,7 +30,7 @@ class SectionModel: ObservableObject {
                                                 filter: filter)
                 .scan([]) { $0 + $1 }
                 .map { items in
-                    let rowSection = SectionModel.Section(section)
+                    let rowSection = SectionViewModel.Section(section)
                     let headerItem = rowSection.viewModelProperties.headerItem(from: items)
                     let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
                     return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
@@ -38,9 +38,9 @@ class SectionModel: ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-            }
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
+        }
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$state)
         
         Signal.wokenUp()
             .sink { [weak self] in
@@ -60,7 +60,7 @@ class SectionModel: ObservableObject {
 
 // MARK: Types
 
-extension SectionModel {
+extension SectionViewModel {
     struct Section: Hashable {
         let wrappedValue: Content.Section
         
@@ -125,17 +125,17 @@ extension SectionModel {
 // MARK: Properties
 
 protocol SectionViewModelProperties {
-    var layout: SectionModel.SectionLayout { get }
+    var layout: SectionViewModel.SectionLayout { get }
     
-    func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item?
-    func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item]
+    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item?
+    func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
 }
 
-private extension SectionModel {
+private extension SectionViewModel {
     struct ContentSectionProperties: SectionViewModelProperties {
         let contentSection: SRGContentSection
         
-        var layout: SectionModel.SectionLayout {
+        var layout: SectionViewModel.SectionLayout {
             switch contentSection.type {
             case .medias, .showAndMedias:
                 return .mediaGrid
@@ -161,7 +161,7 @@ private extension SectionModel {
             }
         }
         
-        func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item? {
+        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item? {
             if contentSection.type == .showAndMedias, case .show = items.first {
                 return items.first
             }
@@ -170,7 +170,7 @@ private extension SectionModel {
             }
         }
         
-        func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item] {
+        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             if contentSection.type == .showAndMedias, case .show = items.first {
                 return Array(items.suffix(from: 1))
             }
@@ -183,7 +183,7 @@ private extension SectionModel {
     struct ConfiguredSectionProperties: SectionViewModelProperties {
         let configuredSection: ConfiguredSection
         
-        var layout: SectionModel.SectionLayout {
+        var layout: SectionViewModel.SectionLayout {
             switch configuredSection.type {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
@@ -196,11 +196,11 @@ private extension SectionModel {
             }
         }
         
-        func headerItem(from items: [SectionModel.Item]) -> SectionModel.Item? {
+        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item? {
             return nil
         }
         
-        func rowItems(from items: [SectionModel.Item]) -> [SectionModel.Item] {
+        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             return items
         }
     }

@@ -8,7 +8,7 @@ import SRGUserData
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject private var model = ProfileModel()
+    @StateObject private var model = ProfileViewModel()
     
     private var synchronizationMessage: String? {
         guard model.isLoggedIn else { return nil }
@@ -76,7 +76,7 @@ struct ProfileView: View {
 
 extension ProfileView {
     struct ProfileListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
         private var text: String {
@@ -186,7 +186,7 @@ extension ProfileView {
     }
     
     struct HistoryRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
         private func alert() -> Alert {
@@ -225,7 +225,7 @@ extension ProfileView {
     }
     
     struct FavoritesRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
         private func alert() -> Alert {
@@ -264,7 +264,7 @@ extension ProfileView {
     }
     
     struct WatchLaterRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
         private func alert() -> Alert {
@@ -327,7 +327,7 @@ extension ProfileView {
     #endif
     
     struct VersionListItem: View {
-        var model: ProfileModel
+        var model: ProfileViewModel
         
         var body: some View {
             Button {
