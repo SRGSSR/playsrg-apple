@@ -68,7 +68,8 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-        return [[MediaCellSize fullWidth] constrainedBy:collectionView];
+        CGSize size = [[MediaCellSize fullWidth] constrainedBy:collectionView];
+        return CGSizeMake(size.width - 4 * LayoutMargin, size.height);
     }
     else {
         return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
