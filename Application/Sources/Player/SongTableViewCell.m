@@ -50,7 +50,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 + (UIFont *)artistLabelFont
 {
-    return [SRGFont fontWithStyle:SRGFontStyleBody];
+    return [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 + (CGFloat)heightForSong:(SRGSong *)song withCellWidth:(CGFloat)width
