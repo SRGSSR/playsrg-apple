@@ -44,8 +44,8 @@ struct HeaderView: View {
                     Image("chevron")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 12))
-                        .padding(.horizontal, constant(iOS: 6, tvOS: 8))
+                        .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 18))
+                        .padding(.horizontal, 2)
                 }
             }
             if let subtitle = displayableSubtitle {
