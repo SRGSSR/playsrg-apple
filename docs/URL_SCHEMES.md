@@ -24,6 +24,8 @@ For media, show and page links, an optional `channel_id=[channel_id]` parameter 
 
 For a `Debug`, `Nightly` or a `Beta` build, `server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
 
+3.2.0 release introduced section page action and removed module page action, not available on the web portal and applications anymore.
+
 ### URL generation
 
 An [online tool](https://play-mmf.herokuapp.com/deeplink/index.html) is available for QR code generation of URLs with supported custom schemes.
