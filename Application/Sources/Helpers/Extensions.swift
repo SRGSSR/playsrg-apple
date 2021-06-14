@@ -94,10 +94,18 @@ extension Publisher where Failure == Never {
 
 extension View {
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
+        // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
+        //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
+        #if os(tvOS)
+        return accessibilityElement()
+            .accessibilityOptionalLabel(label)
+            .accessibilityAddTraits(traits)
+        #else
         return accessibilityElement()
             .accessibilityOptionalLabel(label)
             .accessibilityOptionalHint(hint)
             .accessibilityAddTraits(traits)
+        #endif
     }
     
     private func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
