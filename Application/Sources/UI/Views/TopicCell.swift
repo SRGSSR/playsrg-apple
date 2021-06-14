@@ -50,7 +50,7 @@ struct TopicCell: View {
                 Color.srgGray2
                     .opacity(0.3)
                 Text(topic?.title ?? "")
-                    .srgFont(.button)
+                    .srgFont(.button, maximumSize: constant(iOS: 16, tvOS: nil))
                     .lineLimit(1)
                     .foregroundColor(.white)
                     .padding(10)
@@ -76,7 +76,7 @@ private extension TopicCell {
 class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 250)
+    private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)
     
     @objc static func swimlane() -> NSCollectionLayoutSize {
         return swimlane(itemWidth: defaultItemWidth)
