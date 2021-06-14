@@ -24,6 +24,7 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSection;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTopic;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 

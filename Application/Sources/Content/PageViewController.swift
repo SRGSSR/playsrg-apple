@@ -337,7 +337,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
         case .live:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
         case let .topic(topic: topic):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, topic.title]
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue, topic.title]
         }
     }
 }
