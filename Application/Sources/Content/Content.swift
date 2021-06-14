@@ -161,7 +161,14 @@ private extension Content {
         }
         
         var analyticsLevels: [String]? {
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
+            switch contentSection.type {
+            case .medias, .showAndMedias, .shows:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
+            case .predefined:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+            case .none:
+                return nil
+            }
         }
         
         #if os(iOS)
