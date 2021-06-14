@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "35cd3fa3bcea8becf826d9610c1f5bba8f57b728",
-          "version": "10.2.0"
+          "revision": "69ae6d5b8c4b898450432f94bd35f863d3830cfc",
+          "version": "10.3.0"
         }
       },
       {
@@ -222,7 +222,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
           "branch": "feature/font-overhaul",
-          "revision": "04415e7a1032ba5ae8a56b68ee9ce124fa0ffb82",
+          "revision": "8b6ff16d2fc952abe76fd01621b356c26b776587",
           "version": null
         }
       },
