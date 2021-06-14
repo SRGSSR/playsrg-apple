@@ -621,7 +621,7 @@
 {
     if ([self shouldDisplayMostSearchedShows]) {
         UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), [fontMetrics scaledValueForValue:50.f]);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, [fontMetrics scaledValueForValue:50.f]);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
