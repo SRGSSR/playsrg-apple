@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -30,7 +29,7 @@
                                 </vibrancyEffect>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzr-J1-4az">
-                                <rect key="frame" x="9" y="16.5" width="508" height="24"/>
+                                <rect key="frame" x="16" y="18.5" width="494" height="20.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -41,9 +40,9 @@
                             <constraint firstAttribute="trailing" secondItem="8Xa-5N-yhT" secondAttribute="trailing" id="YIn-nd-WAX"/>
                             <constraint firstItem="8Xa-5N-yhT" firstAttribute="top" secondItem="5Jy-nx-d3N" secondAttribute="top" id="f9r-Kr-jrz"/>
                             <constraint firstItem="8Xa-5N-yhT" firstAttribute="leading" secondItem="5Jy-nx-d3N" secondAttribute="leading" id="irS-lh-7ll"/>
-                            <constraint firstItem="dzr-J1-4az" firstAttribute="leading" secondItem="5Jy-nx-d3N" secondAttribute="leading" constant="9" id="jY2-Ii-mOK"/>
+                            <constraint firstItem="dzr-J1-4az" firstAttribute="leading" secondItem="5Jy-nx-d3N" secondAttribute="leading" constant="16" id="jY2-Ii-mOK"/>
                             <constraint firstItem="dzr-J1-4az" firstAttribute="centerY" secondItem="5Jy-nx-d3N" secondAttribute="centerY" id="rQh-JV-Q2b"/>
-                            <constraint firstAttribute="trailing" secondItem="dzr-J1-4az" secondAttribute="trailing" constant="9" id="wQe-Xn-fvy"/>
+                            <constraint firstAttribute="trailing" secondItem="dzr-J1-4az" secondAttribute="trailing" constant="16" id="wQe-Xn-fvy"/>
                         </constraints>
                     </view>
                     <blurEffect style="dark"/>
