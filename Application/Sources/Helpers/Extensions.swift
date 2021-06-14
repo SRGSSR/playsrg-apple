@@ -98,22 +98,14 @@ extension View {
         //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
         #if os(tvOS)
         return accessibilityElement()
-            .accessibilityOptionalLabel(label)
+            .accessibilityLabel(label ?? "")
             .accessibilityAddTraits(traits)
         #else
         return accessibilityElement()
-            .accessibilityOptionalLabel(label)
-            .accessibilityOptionalHint(hint)
+            .accessibilityLabel(label ?? "")
+            .accessibilityHint(hint ?? "")
             .accessibilityAddTraits(traits)
         #endif
-    }
-    
-    private func accessibilityOptionalLabel<S>(_ label: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
-        return accessibilityLabel(label ?? "")
-    }
-    
-    private func accessibilityOptionalHint<S>(_ hint: S?) -> ModifiedContent<Self, AccessibilityAttachmentModifier> where S: StringProtocol {
-        return accessibilityHint(hint ?? "")
     }
     
     /**
