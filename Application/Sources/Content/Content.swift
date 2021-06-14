@@ -161,7 +161,7 @@ private extension Content {
         }
         
         var analyticsLevels: [String]? {
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
         }
         
         #if os(iOS)

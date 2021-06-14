@@ -17,6 +17,7 @@ AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
+AnalyticsPageLevel const AnalyticsPageLevelSection = @"section";
 AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
