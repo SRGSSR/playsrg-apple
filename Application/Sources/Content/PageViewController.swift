@@ -325,7 +325,12 @@ extension PageViewController: PlayApplicationNavigation {
 
 extension PageViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return AnalyticsPageTitle.home.rawValue
+        switch model.id {
+        case .video, .audio, .live:
+            return AnalyticsPageTitle.home.rawValue
+        case let .topic(topic: topic):
+            return topic.title
+        }
     }
     
     var srg_pageViewLevels: [String]? {
@@ -336,8 +341,8 @@ extension PageViewController: SRGAnalyticsViewTracking {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
         case .live:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-        case let .topic(topic: topic):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue, topic.title]
+        case .topic:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
         }
     }
 }
