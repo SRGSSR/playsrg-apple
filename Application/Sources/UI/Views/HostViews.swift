@@ -13,32 +13,30 @@ import UIKit
 class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     private var hostController: UIHostingController<Content>?
     
-    private func addHostController(for content: Content?) {
-        guard let rootView = content else { return }
-        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-        if let hostView = hostController?.view {
-            hostView.frame = contentView.bounds
-            hostView.backgroundColor = .clear
-            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            contentView.addSubview(hostView)
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController = hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            }
+            
+            if let hostView = hostController?.view, hostView.superview != contentView {
+                hostView.frame = contentView.bounds
+                hostView.backgroundColor = .clear
+                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                contentView.addSubview(hostView)
+            }
         }
-    }
-    
-    private func removeHostController() {
-        if let hostView = hostController?.view {
+        else if let hostView = hostController?.view {
             hostView.removeFromSuperview()
         }
-        hostController = nil
-    }
-    
-    override func prepareForReuse() {
-        removeHostController()
     }
     
     var content: Content? {
         didSet {
-            removeHostController()
-            addHostController(for: content)
+            update(with: content)
         }
     }
 }
@@ -49,32 +47,30 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
 class HostSupplementaryView<Content: View>: UICollectionReusableView {
     private var hostController: UIHostingController<Content>?
     
-    private func addHostController(for content: Content?) {
-        guard let rootView = content else { return }
-        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-        if let hostView = hostController?.view {
-            hostView.frame = bounds
-            hostView.backgroundColor = .clear
-            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            addSubview(hostView)
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController = hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            }
+            
+            if let hostView = hostController?.view, hostView.superview != self {
+                hostView.frame = bounds
+                hostView.backgroundColor = .clear
+                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                addSubview(hostView)
+            }
         }
-    }
-    
-    private func removeHostController() {
-        if let hostView = hostController?.view {
+        else if let hostView = hostController?.view {
             hostView.removeFromSuperview()
         }
-        hostController = nil
-    }
-    
-    override func prepareForReuse() {
-        removeHostController()
     }
     
     var content: Content? {
         didSet {
-            removeHostController()
-            addHostController(for: content)
+            update(with: content)
         }
     }
 }
@@ -100,39 +96,37 @@ class HostTableViewCell<Content: View>: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addHostController(for content: Content?) {
-        guard let rootView = content else { return }
-        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-        if let hostView = hostController?.view {
-            hostView.frame = contentView.bounds
-            hostView.backgroundColor = .clear
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(hostView)
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController = hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
+            }
             
-            NSLayoutConstraint.activate([
-                hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
-                hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
-                hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin),
-                hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin)
-            ])
+            if let hostView = hostController?.view, hostView.superview != contentView {
+                hostView.frame = contentView.bounds
+                hostView.backgroundColor = .clear
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                contentView.addSubview(hostView)
+                
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
+                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
+                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: LayoutMargin),
+                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -LayoutMargin)
+                ])
+            }
         }
-    }
-    
-    private func removeHostController() {
-        if let hostView = hostController?.view {
+        else if let hostView = hostController?.view {
             hostView.removeFromSuperview()
         }
-        hostController = nil
-    }
-    
-    override func prepareForReuse() {
-        removeHostController()
     }
     
     var content: Content? {
         didSet {
-            removeHostController()
-            addHostController(for: content)
+            update(with: content)
         }
     }
 }
@@ -158,28 +152,30 @@ class HostView<Content: View>: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addHostController(for content: Content?) {
-        guard let rootView = content else { return }
-        hostController = UIHostingController(rootView: rootView, ignoreSafeArea: ignoresSafeArea)
-        if let hostView = hostController?.view {
-            hostView.frame = bounds
-            hostView.backgroundColor = .clear
-            hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            addSubview(hostView)
+    private func update(with content: Content?) {
+        if let rootView = content {
+            if let hostController = hostController {
+                hostController.rootView = rootView
+            }
+            else {
+                hostController = UIHostingController(rootView: rootView, ignoreSafeArea: ignoresSafeArea)
+            }
+            
+            if let hostView = hostController?.view, hostView.superview != self {
+                hostView.frame = bounds
+                hostView.backgroundColor = .clear
+                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                addSubview(hostView)
+            }
         }
-    }
-    
-    private func removeHostController() {
-        if let hostView = hostController?.view {
+        else if let hostView = hostController?.view {
             hostView.removeFromSuperview()
         }
-        hostController = nil
     }
     
     var content: Content? {
         didSet {
-            removeHostController()
-            addHostController(for: content)
+            update(with: content)
         }
     }
 }
