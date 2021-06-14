@@ -619,7 +619,6 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Fix layout and correctly scale values if needed
     if ([self shouldDisplayMostSearchedShows]) {
         UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
         return CGSizeMake(CGRectGetWidth(collectionView.frame), [fontMetrics scaledValueForValue:50.f]);
@@ -640,7 +639,7 @@
     else {
         // Small margin to avoid overlap with the horizontal scrolling indicator
         CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, height);
     }
 }
 
