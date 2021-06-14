@@ -278,12 +278,13 @@ private extension SRGDataProvider {
     
     static func rowItems(_ items: [Content.Item], in section: PageViewModel.Section) -> [PageViewModel.Item] {
         var rowItems = items.map { PageViewModel.Item(.item($0), in: section) }
-        
+        #if os(tvOS)
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasSwimlaneLayout {
             rowItems.append(PageViewModel.Item(.more, in: section))
         }
+        #endif
         return rowItems
     }
 }
