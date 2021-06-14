@@ -14,7 +14,6 @@ The available actions are:
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
 * Open a section page: `[scheme]://section/[section_id]`.
-* Open a module page: `[scheme]://module/[module_urn]`.
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single character parameter can be provided to open the page at the specified index.
 * Open shows by date page: `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.

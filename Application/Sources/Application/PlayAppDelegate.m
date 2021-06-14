@@ -227,7 +227,6 @@ static void *s_kvoContext = &s_kvoContext;
 // Open [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
 // Open [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
 // Open [scheme]://topic/[topic_urn]
-// Open [scheme]://module/[module_urn]
 // Open [scheme]://home (optional query parameters: channel_id=[channel_id])
 // Open [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
 // Open [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
