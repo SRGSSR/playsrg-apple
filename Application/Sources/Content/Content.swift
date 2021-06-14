@@ -141,7 +141,7 @@ private extension Content {
         var analyticsTitle: String? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
-                return contentSection.uid
+                return contentSection.presentation.title ?? contentSection.uid
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
