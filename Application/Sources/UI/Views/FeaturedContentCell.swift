@@ -117,7 +117,7 @@ private extension FeaturedContentCell {
     }
     
     var accessibilityHint: String? {
-        return content.accessibilityLabel
+        return content.accessibilityHint
     }
 }
 
