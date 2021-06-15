@@ -28,9 +28,7 @@ struct LabeledButton: View {
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onParentFocusChange { isFocused = $0 }
-                    .accessibilityElement()
-                    .accessibilityLabel(accessibilityLabel)
-                    .accessibility(addTraits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, traits: .isButton)
             }
             Text(label)
                 .srgFont(.subtitle2)
