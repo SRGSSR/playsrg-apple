@@ -186,6 +186,7 @@ struct MediaCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.rich), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .vertical)
@@ -195,6 +196,7 @@ struct MediaCell_Previews: PreviewProvider {
         #if os(iOS)
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
+            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)

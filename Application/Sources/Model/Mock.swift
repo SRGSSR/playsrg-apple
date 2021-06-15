@@ -23,6 +23,7 @@ struct Mock {
         case overflow
         case blocked
         case livestream
+        case noShow
         case fourThree
         case fourFive
         case nineSixteen
