@@ -384,6 +384,13 @@
     return self.shows.count == 0 || section != 0;
 }
 
+#pragma mark ContentInsets protocol
+
+- (UIEdgeInsets)play_paddingContentInsets
+{
+    return LayoutPaddingContentInsets;
+}
+
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo

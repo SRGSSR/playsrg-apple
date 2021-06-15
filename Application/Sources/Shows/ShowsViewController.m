@@ -256,6 +256,13 @@
     [self setIndexHidden:NO animated:YES];
 }
 
+#pragma mark ContentInsets protocol
+
+- (UIEdgeInsets)play_paddingContentInsets
+{
+    return LayoutPaddingContentInsets;
+}
+
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
