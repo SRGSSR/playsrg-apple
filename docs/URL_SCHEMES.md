@@ -2,7 +2,7 @@
 
 Play applications can be opened with a custom URL scheme having the following format: `play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`.
 
-## Actions (v2 seen 2.9.6 release)
+## Actions
 
 The application supports Apple universal links. Replacing the `http`or `https` scheme of a Play website URL with the corresponding application scheme yields a link which can be opened with the application:
 
@@ -24,7 +24,10 @@ For media, show and page links, an optional `channel_id=[channel_id]` parameter 
 
 For a `Debug`, `Nightly` or a `Beta` build, `server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
 
-3.2.0 release introduced section page action and removed module page action, not available on the web portal and applications anymore.
+### Changelog
+
+- Version 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
+- Version 2.9.6: Version 2 of universal link support.
 
 ### URL generation
 
