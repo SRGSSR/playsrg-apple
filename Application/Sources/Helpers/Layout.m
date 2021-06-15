@@ -49,5 +49,5 @@ NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentA
 }
 
 const CGFloat LayoutMargin = 8.f;
-const UIEdgeInsets LayoutPaddingContentInsets = { LayoutMargin, 0., LayoutMargin, 0. };
-const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2., 0., LayoutMargin / 2., 0. };
+const UIEdgeInsets LayoutPaddingContentInsets = { LayoutMargin, 0.f, LayoutMargin, 0.f };
+const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0.f, LayoutMargin / 2.f, 0.f };

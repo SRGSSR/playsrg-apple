@@ -646,7 +646,7 @@
     else {
         // Small margin to avoid overlap with the horizontal scrolling indicator
         CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, height);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
 

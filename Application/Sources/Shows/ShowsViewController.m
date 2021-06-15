@@ -77,6 +77,8 @@
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    collectionViewLayout.minimumInteritemSpacing = LayoutMargin;
+    collectionViewLayout.minimumLineSpacing = LayoutMargin;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -256,13 +258,6 @@
     [self setIndexHidden:NO animated:YES];
 }
 
-#pragma mark ContentInsets protocol
-
-- (UIEdgeInsets)play_paddingContentInsets
-{
-    return LayoutPaddingContentInsets;
-}
-
 #pragma mark UICollectionViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -318,17 +313,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 0.f, 2 * LayoutMargin);
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
-{
-    return LayoutMargin;
-}
-
-- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
-{
-    return LayoutMargin;
+    return UIEdgeInsetsMake(LayoutMargin, 2 * LayoutMargin, LayoutMargin, 2 * LayoutMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

@@ -121,4 +121,9 @@
     return [[ShowCellSize swimlane] constrainedBy:collectionView];
 }
 
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 15.f, 2 * LayoutMargin);
+}
+
 @end
