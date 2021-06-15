@@ -17,6 +17,7 @@
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
+@import SRGAppearance;
 
 @interface SongsViewController ()
 
@@ -57,7 +58,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    view.backgroundColor = UIColor.srg_gray2Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.dataSource = self;
@@ -238,7 +239,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return UIEdgeInsetsZero;
 }
 
 #pragma mark UITableViewDataSource protocol
@@ -267,7 +268,8 @@
 {
     SRGSong *song = self.items[indexPath.row];
     CGFloat height = [SongTableViewCell heightForSong:song withCellWidth:CGRectGetWidth(tableView.frame)];
-    return LayoutTableTopAlignedCellHeight(height, 20.f, indexPath.row, self.items.count);
+    
+    return height + 20.f;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

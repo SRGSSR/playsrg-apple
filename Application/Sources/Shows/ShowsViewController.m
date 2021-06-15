@@ -11,7 +11,7 @@
 #import "ApplicationSection.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
-#import "ShowCollectionViewCell.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
 #import "TranslucentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
@@ -35,7 +35,7 @@
 
 @property (nonatomic, weak) BDKCollectionIndexView *collectionIndexView;
 
-@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator API_AVAILABLE(ios(10.0));
+@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
 @end
 
@@ -73,12 +73,12 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
-    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
+    collectionViewLayout.minimumInteritemSpacing = LayoutMargin;
+    collectionViewLayout.minimumLineSpacing = LayoutMargin;
     collectionViewLayout.sectionHeadersPinToVisibleBounds = YES;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
@@ -93,16 +93,12 @@
     BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
     collectionIndexView.translatesAutoresizingMaskIntoConstraints = NO;
     collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.4f];
-    collectionIndexView.tintColor = UIColor.play_lightGrayColor;
+    collectionIndexView.tintColor = UIColor.srg_gray5Color;
     collectionIndexView.alpha = 1.f;
     collectionIndexView.hidden = YES;
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];
     [view addSubview:collectionIndexView];
     self.collectionIndexView = collectionIndexView;
-    
-    NSString *cellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [collectionView registerNib:cellNib forCellWithReuseIdentifier:cellIdentifier];
     
     NSString *headerIdentifier = NSStringFromClass(TranslucentTitleHeaderView.class);
     UINib *headerNib = [UINib nibWithNibName:headerIdentifier bundle:nil];
@@ -277,8 +273,9 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(ShowCollectionViewCell.class)
-                                                     forIndexPath:indexPath];
+    NSString *indexLetter = self.indexLetters[indexPath.section];
+    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
+    return [collectionView showCellFor:indexPath show:show];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -294,13 +291,6 @@
 }
 
 #pragma mark UICollectionViewDelegate protocol
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *indexLetter = self.indexLetters[indexPath.section];
-    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
-    [cell setShow:show featured:NO];
-}
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplaySupplementaryView:(UICollectionReusableView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath
 {
@@ -323,18 +313,17 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+    return UIEdgeInsetsMake(LayoutMargin, 2 * LayoutMargin, LayoutMargin, 2 * LayoutMargin);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
-    return LayoutShowStandardCollectionItemSize(itemWidth, NO);
+    return [[ShowCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2] constrainedBy:collectionView];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
+    return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

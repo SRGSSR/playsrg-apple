@@ -5,15 +5,11 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGAppearance
+import SRGAppearanceSwift
 import SRGIdentity
 import SwiftUI
 
 struct ShowDetailView: View {
-    @ObservedObject var model: ShowDetailModel
-    
-    static let headerHeight: CGFloat = 450
-    
     enum Section: Hashable {
         case medias
         case information
@@ -25,11 +21,16 @@ struct ShowDetailView: View {
         case media(_ media: SRGMedia)
     }
     
-    typealias Row = CollectionRow<Section, Content>
+    @Binding var show: SRGShow?
+    @StateObject var model = ShowDetailViewModel()
     
-    init(show: SRGShow) {
-        model = ShowDetailModel(show: show)
+    static let headerHeight: CGFloat = 450
+    
+    init(show: SRGShow?) {
+        _show = .constant(show)
     }
+    
+    typealias Row = CollectionRow<Section, Content>
     
     private var rows: [Row] {
         switch model.state {
@@ -106,32 +107,29 @@ struct ShowDetailView: View {
                     .opacity(0.8)
                     .padding()
                 case let .media(media):
-                    MediaCell(media: media)
+                    MediaCell(media: media, style: .date)
                         .onAppear {
                             model.loadNextPage(from: media)
                         }
                 }
             } supplementaryView: { _, _, _, _ in
-                HeaderView(show: model.show)
+                HeaderView(show: show)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srgGray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
-                model.refresh()
+                model.show = show
             }
-            .onDisappear {
-                model.cancelRefresh()
-            }
-            .onWake {
-                model.refresh()
+            .onChange(of: show) { newValue in
+                model.show = newValue
             }
             .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         }
     }
     
     private struct VisualView: View {
-        let show: SRGShow
+        let show: SRGShow?
         
         @State var isFavorite = false
         @State var favoriteRemovalAlertDisplayed = false
@@ -139,10 +137,12 @@ struct ShowDetailView: View {
         private static let height: CGFloat = 300
         
         private var imageUrl: URL? {
-            return show.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
+            return show?.imageURL(for: .width, withValue: SizeForImageScale(.medium).width, type: .default)
         }
         
         private func toggleFavorite() {
+            guard let show = show else { return }
+            
             FavoritesToggleShow(show)
             isFavorite = FavoritesContainsShow(show)
             
@@ -154,6 +154,8 @@ struct ShowDetailView: View {
         }
         
         private func toggleFavoriteAction() {
+            guard let show = show else { return }
+            
             if FavoritesIsSubscribedToShow(show) {
                 favoriteRemovalAlertDisplayed = true
             }
@@ -180,61 +182,66 @@ struct ShowDetailView: View {
                     .cornerRadius(10)
                 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text(show.title)
-                        .srgFont(.title1)
+                    Text(show?.title ?? .placeholder(length: 8))
+                        .srgFont(.H1)
                         .lineLimit(3)
                         .foregroundColor(.white)
-                    if let broadcastInformationMessage = show.broadcastInformation?.message {
-                        Badge(text: broadcastInformationMessage, color: Color(.play_gray))
+                    if let broadcastInformationMessage = show?.broadcastInformation?.message {
+                        Badge(text: broadcastInformationMessage, color: Color.srgGray4)
                     }
-                    if let lead = show.lead {
+                    if let lead = show?.lead {
                         Text(lead)
-                            .srgFont(.subtitle)
+                            .srgFont(.subtitle2)
                             .foregroundColor(.white)
                     }
                     Spacer()
                 }
                 Spacer()
                 LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22",
-                              label: isFavorite ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited") : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
-                              accessibilityLabel: isFavorite ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited") : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
+                              label: isFavorite
+                                ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
+                                : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),
+                              accessibilityLabel: isFavorite
+                                ? PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited")
+                                : PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited"),
                               action: toggleFavoriteAction)
                     .padding(.leading, 100)
                     .alert(isPresented: $favoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
             .onAppear {
-                isFavorite = FavoritesContainsShow(show)
+                if let show = show {
+                    isFavorite = FavoritesContainsShow(show)
+                }
             }
         }
     }
     
     private struct HeaderView: View {
-        let show: SRGShow
+        let show: SRGShow?
         
         var body: some View {
-            FocusableRegion {
-                VStack {
-                    VisualView(show: show)
-                    Spacer()
-                }
+            VStack {
+                VisualView(show: show)
+                Spacer()
             }
+            .focusable()
         }
     }
 }
 
 extension ShowDetailView {
     private var analyticsPageTitle: String {
-        return self.model.show.title
+        return show?.title ?? ""
     }
     
     private var analyticsPageLevels: [String] {
-        let level1: AnalyticsPageLevel = self.model.show.transmission == .radio ? .audio : .video
+        guard let show = show else { return [] }
+        let level1: AnalyticsPageLevel = show.transmission == .radio ? .audio : .video
         return [AnalyticsPageLevel.play.rawValue, level1.rawValue, AnalyticsPageLevel.show.rawValue]
     }
 }
 
 struct ShowDetailView_Previews: PreviewProvider {
-    
     static var showPreview: SRGShow {
         let asset = NSDataAsset(name: "show-srf-tv")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]

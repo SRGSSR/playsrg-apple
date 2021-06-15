@@ -37,8 +37,8 @@
     self.tableView.estimatedSectionHeaderHeight = 0.f;
     self.tableView.estimatedSectionFooterHeight = 0.f;
     
-    self.view.backgroundColor = UIColor.play_blackColor;
-    self.tableView.separatorColor = UIColor.play_grayColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
+    self.tableView.separatorColor = UIColor.srg_gray4Color;
     
     self.delegate = self;
     self.neverShowPrivacySettings = YES;
@@ -122,21 +122,21 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.backgroundColor = [UIColor colorWithWhite:1.f alpha:0.02f];
-    cell.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    cell.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     cell.textLabel.textColor = UIColor.whiteColor;
-    cell.detailTextLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    cell.detailTextLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     cell.tintColor = UIColor.whiteColor;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    view.textLabel.textColor = UIColor.play_lightGrayColor;
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
+    view.textLabel.textColor = UIColor.srg_gray5Color;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

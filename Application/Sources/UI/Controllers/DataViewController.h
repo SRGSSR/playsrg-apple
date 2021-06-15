@@ -15,8 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  In addition to behaviors inherited from `BaseViewController`, this class provides the following features:
  *   - Automatic data refresh when the view is displayed for the first time or when the application wakes from the
  *     background with the view visible
- *   - A message is displayed when no connection is available. A refresh is performed automatically when the
- *     connection is restored
+ *   - A refresh is performed automatically when the connection is restored
  */
 @interface DataViewController : BaseViewController
 

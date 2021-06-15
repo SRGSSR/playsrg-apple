@@ -11,7 +11,6 @@
 #import "ApplicationSection.h"
 #import "Calendar.h"
 #import "DailyMediasViewController.h"
-#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -32,7 +31,7 @@
 @property (nonatomic, weak) IBOutlet Calendar *calendar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
 
-@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator API_AVAILABLE(ios(10.0));
+@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
 @property (nonatomic, weak) UIPanGestureRecognizer *scopeGestureRecognizer;
 
@@ -96,7 +95,7 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -143,8 +142,8 @@
     calendarAppearance.titleSelectionColor = [UIColor.whiteColor colorWithAlphaComponent:0.8f];
     
     // Dot colors
-    calendarAppearance.selectionColor = UIColor.play_redColor;
-    calendarAppearance.todayColor = [UIColor.play_redColor colorWithAlphaComponent:0.4f];
+    calendarAppearance.selectionColor = UIColor.srg_redColor;
+    calendarAppearance.todayColor = [UIColor.srg_redColor colorWithAlphaComponent:0.4f];
     
     [self updateFonts];
     
@@ -211,13 +210,13 @@
     FSCalendarAppearance *calendarAppearance = self.calendar.appearance;
     
     // Month / year
-    calendarAppearance.headerTitleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.headerTitleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Week days
-    calendarAppearance.weekdayFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.weekdayFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Days
-    calendarAppearance.titleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.titleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 #pragma mark Status bar
@@ -318,7 +317,7 @@
     NSDate *startDate = [self minimumDateForCalendar:calendar];
     NSDate *endDate = [self maximumDateForCalendar:calendar];
     NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    return [dateInterval containsDate:date] ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
+    return [dateInterval containsDate:date] ? UIColor.srg_gray5Color : [UIColor.srg_gray5Color colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol

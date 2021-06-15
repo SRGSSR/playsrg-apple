@@ -10,6 +10,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Manage a custom modal transition.
+ *
+ *  @discussion Use `play_`-prefixed methods available from `UIViewController+PlaySRG.h` when presenting view
+ *              controllers using custom modal transitions, otherwise the behavior is undefined.
  */
 @interface ModalTransition : NSObject <UIViewControllerAnimatedTransitioning, UIViewControllerInteractiveTransitioning>
 

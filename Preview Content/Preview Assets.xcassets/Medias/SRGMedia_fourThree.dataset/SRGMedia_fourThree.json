@@ -1,0 +1,60 @@
+{
+   "id" : "12143226",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:12143226",
+   "title" : "Le mystère des Cornouailles (Episode 5/11 - Saison 2)",
+   "description" : "Appelés d'urgence par madame Pengelley, qui se croit menacée de mort, Hercule Poirot et Hastings vont avoir un mal fou à faire parler les villageois...",
+   "imageUrl" : "https://www.rts.ch/2021/04/24/16/48/10146126.image/4x3",
+   "imageTitle" : "Le mystère des Cornouailles [RTS]",
+   "type" : "EPISODE",
+   "date" : "2021-04-24T15:22:59+02:00",
+   "duration" : 2869000,
+   "validFrom" : "2021-04-24T16:12:14+02:00",
+   "validTo" : "2021-05-01T16:12:14+02:00",
+   "playableAbroad" : false,
+   "subtitlesAvailable" : true,
+   "subtitleInformationList" : [ {
+      "locale" : "fr",
+      "language" : "Français (SDH)",
+      "source" : "HLS",
+      "type" : "SDH"
+   } ],
+   "episode" : {
+      "id" : "12047213",
+      "title" : "Agatha Christie's Poirot",
+      "imageUrl" : "https://www.rts.ch/2021/04/24/16/48/10146126.image/4x3",
+      "imageTitle" : "Le mystère des Cornouailles [RTS]"
+   },
+   "show" : {
+      "id" : "10875381",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:10875381",
+      "title" : "Agatha Christie's Poirot",
+      "lead" : "Hercule Poirot, détective belge, n'a pas son pareil pour résoudre les enquêtes les plus délicates.\n\nDiffusion les samedis dès le 6 mars 2021 vers 14h sur RTS Un, à revoir durant 7 jours après diffusion sur Play RTS.",
+      "description" : "Hercule Poirot, détective belge, n'a pas son pareil pour résoudre les enquêtes les plus délicates. Diffusion les samedis dès le 6 mars 2021 vers 14h sur RTS Un, à revoir durant 7 jours après diffusion sur Play RTS.",
+      "imageUrl" : "https://www.rts.ch/2019/01/07/14/11/10118776.image/16x9",
+      "imageTitle" : "David Suchet est Hercule Poirot. [DR]",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true,
+      "primaryChannelId" : "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "primaryChannelUrn" : "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b"
+   },
+   "channel" : {
+      "id" : "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "vendor" : "RTS",
+      "urn" : "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "title" : "RTS Un",
+      "imageUrl" : "https://www.rts.ch/2019/01/07/14/11/10118776.image/3x1",
+      "imageTitle" : "David Suchet est Hercule Poirot. [DR]",
+      "transmission" : "TV"
+   },
+   "presentation" : "DEFAULT",
+   "audioTrackList" : [ {
+      "locale" : "fr",
+      "language" : "Français",
+      "source" : "HLS"
+   } ],
+   "aspectRatio" : "4:3"
+}

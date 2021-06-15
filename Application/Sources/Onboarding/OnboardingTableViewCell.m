@@ -28,7 +28,7 @@
     
     self.iconImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_icon-22", onboarding.uid]];
     
-    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
     self.titleLabel.text = PlaySRGOnboardingLocalizedString(onboarding.title, nil);
 }
 
@@ -48,7 +48,7 @@
 {
     [super setHighlighted:highlighted animated:animated];
     
-    UIColor *color = highlighted ? UIColor.play_grayColor : UIColor.whiteColor;
+    UIColor *color = highlighted ? UIColor.srg_gray4Color : UIColor.whiteColor;
     self.titleLabel.textColor = color;
     self.iconImageView.tintColor = color;
 }

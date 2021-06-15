@@ -9,11 +9,11 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
 #import "MostSearchedShowCollectionViewCell.h"
 #import "MostSearchedShowsHeaderView.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "SearchBar.h"
 #import "SearchHeaderView.h"
 #import "SearchLoadingCollectionViewCell.h"
@@ -97,7 +97,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -110,10 +110,6 @@
     collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:collectionView];
     self.collectionView = collectionView;
-    
-    NSString *mediaCellIdentifier = NSStringFromClass(MediaCollectionViewCell.class);
-    UINib *mediaCellNib = [UINib nibWithNibName:mediaCellIdentifier bundle:nil];
-    [collectionView registerNib:mediaCellNib forCellWithReuseIdentifier:mediaCellIdentifier];
     
     NSString *mostSearchedShowCellIdentifier = NSStringFromClass(MostSearchedShowCollectionViewCell.class);
     UINib *mostSearchedShowCellNib = [UINib nibWithNibName:mostSearchedShowCellIdentifier bundle:nil];
@@ -145,14 +141,13 @@
     self.searchController.searchResultsUpdater = self;
     self.searchController.obscuresBackgroundDuringPresentation = NO;
     self.searchController.hidesNavigationBarDuringPresentation = NO;
-    self.searchController.delegate = self;
     
     UISearchBar *searchBar = self.searchController.searchBar;
     object_setClass(searchBar, SearchBar.class);
     
     searchBar.placeholder = NSLocalizedString(@"Search", @"Search placeholder text");
     searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
-    searchBar.play_textField.font = [UIFont srg_regularFontWithSize:18.f];
+    searchBar.play_textField.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:18.f];
     searchBar.delegate = self;
     searchBar.text = self.query;
     searchBar.tintColor = UIColor.whiteColor;
@@ -309,14 +304,6 @@
     return [super isLoading] || self.showsRequestQueue.running;
 }
 
-- (UIViewController *)previewContextViewController
-{
-    // The search results controller must be used as previewing context, see https://stackoverflow.com/a/42261971/760435.
-    // If no search results controller is used (`-[UISearchController initWithSearchResultsController:]` called with `nil`),
-    // the search controller must be used instead.
-    return self.searchController.active ? self.searchController : super.previewContextViewController;
-}
-
 #pragma mark UI
 
 - (void)updateSearchSettingsButton
@@ -327,7 +314,7 @@
             UIButton *filtersButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
             
-            filtersButton.titleLabel.font = [UIFont srg_regularFontWithSize:16.f];
+            filtersButton.titleLabel.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f];
             [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
             [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
             
@@ -395,6 +382,13 @@
 - (BOOL)isDisplayingMediasInSection:(NSInteger)section
 {
     return self.shows.count == 0 || section != 0;
+}
+
+#pragma mark ContentInsets protocol
+
+- (UIEdgeInsets)play_paddingContentInsets
+{
+    return LayoutPaddingContentInsets;
 }
 
 #pragma mark PlayApplicationNavigation protocol
@@ -485,8 +479,7 @@
                                                          forIndexPath:indexPath];
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
-        return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(MediaCollectionViewCell.class)
-                                                         forIndexPath:indexPath];
+        return [collectionView mediaCellFor:indexPath media:self.items[indexPath.row]];
     }
     else {
         return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(SearchShowListCollectionViewCell.class)
@@ -521,10 +514,6 @@
         MostSearchedShowCollectionViewCell *mostSearchedShowCell = (MostSearchedShowCollectionViewCell *)cell;
         SRGShow *show = self.items[indexPath.row];
         mostSearchedShowCell.show = show;
-    }
-    else if ([cell isKindOfClass:MediaCollectionViewCell.class]) {
-        MediaCollectionViewCell *mediaCell = (MediaCollectionViewCell *)cell;
-        mediaCell.media = self.items[indexPath.row];
     }
     else if ([cell isKindOfClass:SearchShowListCollectionViewCell.class]) {
         SearchShowListCollectionViewCell *showListCell = (SearchShowListCollectionViewCell *)cell;
@@ -578,13 +567,6 @@
             headerView.title = NSLocalizedString(@"Shows", @"Show search result header");
         }
     }
-    
-    // iOS 11 - 12 bug: The header hides scroll indicators
-    // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-    if (@available(iOS 13, *)) {}
-    else {
-        view.layer.zPosition = 0;
-    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
@@ -618,7 +600,7 @@
         return UIEdgeInsetsZero;
     }
     else {
-        return UIEdgeInsetsMake(LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin, LayoutStandardMargin);
+        return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 0.f, 2 * LayoutMargin);
     }
 }
 
@@ -628,7 +610,7 @@
         return 0.f;
     }
     else {
-        return LayoutStandardMargin;
+        return LayoutMargin;
     }
 }
 
@@ -638,37 +620,40 @@
         return 0.f;
     }
     else {
-        return LayoutStandardMargin;
+        return LayoutMargin;
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutStandardSimpleTableCellHeight());
+        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, [fontMetrics scaledValueForValue:50.f]);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 200.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
     }
     else if ([self isDisplayingMediasInSection:indexPath.section]) {
-         if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
-            return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, LayoutTableViewCellStandardHeight);
+        if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassCompact) {
+            CGSize size = [[MediaCellSize fullWidth] constrainedBy:collectionView];
+            return CGSizeMake(size.width - 4 * LayoutMargin, size.height);
         }
         else {
-            CGFloat itemWidth = LayoutCollectionItemOptimalWidth(LayoutCollectionViewCellStandardWidth, CGRectGetWidth(collectionView.frame), LayoutStandardMargin, LayoutStandardMargin, collectionViewLayout.minimumInteritemSpacing);
-            return LayoutMediaStandardCollectionItemSize(itemWidth, NO);
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
         }
     }
     // Search show list
     else {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame), SearchShowListCollectionViewCell.height);
+        // Small margin to avoid overlap with the horizontal scrolling indicator
+        CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if ([self isDisplayingMostSearchedShows] || [self isDisplayingObjectsInSection:section]) {
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 2 * LayoutStandardMargin, 44.f);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame), 44.f);
     }
     else {
         return CGSizeZero;
@@ -711,14 +696,6 @@
     popoverPresentationController.barButtonItem = self.filtersBarButtonItem;
     
     [self presentViewController:navigationController animated:YES completion:nil];
-}
-
-#pragma mark UISearchControllerDelegate protocol
-
-- (void)didPresentSearchController:(UISearchController *)searchController
-{
-    // Refresh preview registrations when the search controller has been displayed, see https://stackoverflow.com/a/42261971/760435.
-    [UIView play_updatePreviewRegistrationsInView:self.view];
 }
 
 #pragma mark UISearchResultsUpdating protocol

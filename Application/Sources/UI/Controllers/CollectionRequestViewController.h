@@ -8,7 +8,7 @@
 #import "ListRequestViewController.h"
 #import "TabBarActionable.h"
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+@import DZNEmptyDataSet;
 
 NS_ASSUME_NONNULL_BEGIN
 

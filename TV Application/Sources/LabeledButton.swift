@@ -27,13 +27,11 @@ struct LabeledButton: View {
                 Image(icon)
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
-                    .onFocusChange { isFocused = $0 }
-                    .accessibilityElement()
-                    .accessibilityLabel(accessibilityLabel)
-                    .accessibility(addTraits: .isButton)
+                    .onParentFocusChange { isFocused = $0 }
+                    .accessibilityElement(label: accessibilityLabel, traits: .isButton)
             }
             Text(label)
-                .srgFont(.button2)
+                .srgFont(.subtitle2)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)

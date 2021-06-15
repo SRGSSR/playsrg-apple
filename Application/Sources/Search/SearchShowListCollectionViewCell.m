@@ -8,16 +8,13 @@
 
 #import "AnalyticsConstants.h"
 #import "Layout.h"
-#import "ShowCollectionViewCell.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIView+PlaySRG.h"
 
 @import SRGAnalytics;
 @import SRGAppearance;
-
-// Small margin to avoid overlap with the horizontal scrolling indicator
-static const CGFloat kBottomInset = 15.f;
 
 @interface SearchShowListCollectionViewCell ()
 
@@ -26,18 +23,6 @@ static const CGFloat kBottomInset = 15.f;
 @end
 
 @implementation SearchShowListCollectionViewCell
-
-#pragma mark Class methods
-
-+ (CGFloat)height
-{
-    return self.itemSize.height + kBottomInset;
-}
-
-+ (CGSize)itemSize
-{
-    return LayoutShowStandardCollectionItemSize(300.f, NO);
-}
 
 #pragma mark Object lifecycle
 
@@ -48,8 +33,6 @@ static const CGFloat kBottomInset = 15.f;
         
         SwimlaneCollectionViewLayout *collectionViewLayout = [[SwimlaneCollectionViewLayout alloc] init];
         collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
-        collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
         
         UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:collectionViewLayout];
         collectionView.backgroundColor = UIColor.clearColor;
@@ -64,10 +47,6 @@ static const CGFloat kBottomInset = 15.f;
         collectionView.dataSource = self;
         [self.contentView addSubview:collectionView];
         self.collectionView = collectionView;
-        
-        NSString *showCellIdentifier = NSStringFromClass(ShowCollectionViewCell.class);
-        UINib *showCellNib = [UINib nibWithNibName:showCellIdentifier bundle:nil];
-        [collectionView registerNib:showCellNib forCellWithReuseIdentifier:showCellIdentifier];
     }
     return self;
 }
@@ -114,15 +93,10 @@ static const CGFloat kBottomInset = 15.f;
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView dequeueReusableCellWithReuseIdentifier:NSStringFromClass(ShowCollectionViewCell.class) forIndexPath:indexPath];
+    return [collectionView showCellFor:indexPath show:self.shows[indexPath.row]];
 }
 
 #pragma mark UICollectionViewDelegate protocol
-
-- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(ShowCollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [cell setShow:self.shows[indexPath.row] featured:YES];
-}
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -144,12 +118,12 @@ static const CGFloat kBottomInset = 15.f;
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return self.class.itemSize;
+    return [[ShowCellSize swimlane] constrainedBy:collectionView];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    return UIEdgeInsetsMake(0.f, LayoutStandardMargin, kBottomInset, LayoutStandardMargin);
+    return UIEdgeInsetsMake(0.f, 2 * LayoutMargin, 15.f, 2 * LayoutMargin);
 }
 
 @end

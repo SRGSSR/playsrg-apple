@@ -7,7 +7,7 @@
 #import "Banner.h"
 
 #import "NSBundle+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 
@@ -52,7 +52,7 @@ static NSString *BannerShortenedName(NSString *name);
             
         case BannerStyleError: {
             accessibilityPrefix = PlaySRGAccessibilityLocalizedString(@"Error", @"Introductory title for error notifications");
-            backgroundColor = UIColor.play_redColor;
+            backgroundColor = UIColor.srg_redColor;
             foregroundColor = UIColor.whiteColor;
             break;
         }
@@ -69,6 +69,11 @@ static NSString *BannerShortenedName(NSString *name);
 @end
 
 @implementation Banner (Convenience)
+
++ (void)showError:(NSError *)error
+{
+    [self showError:error inViewController:nil];
+}
 
 + (void)showError:(NSError *)error inView:(UIView *)view
 {
@@ -94,6 +99,11 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleError message:error.localizedDescription image:nil sticky:NO inViewController:viewController];
 }
 
++ (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name
+{
+    [self showFavorite:isFavorite forItemWithName:name inViewController:nil];
+}
+
 + (void)showFavorite:(BOOL)isFavorite forItemWithName:(NSString *)name inView:(UIView *)view
 {
     [self showFavorite:isFavorite forItemWithName:name inViewController:view.play_nearestViewController];
@@ -111,6 +121,11 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 
++ (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name
+{
+    [self showSubscription:subscribed forShowWithName:name inViewController:nil];
+}
+
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inView:(UIView *)view
 {
     [self showSubscription:subscribed forShowWithName:name inViewController:view.play_nearestViewController];
@@ -126,6 +141,11 @@ static NSString *BannerShortenedName(NSString *name);
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
     UIImage *image = subscribed ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
+}
+
++ (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name
+{
+    [self showWatchLaterAdded:added forItemWithName:name inViewController:nil];
 }
 
 + (void)showWatchLaterAdded:(BOOL)added forItemWithName:(NSString *)name inView:(UIView *)view

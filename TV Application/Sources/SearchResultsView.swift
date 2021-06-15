@@ -4,10 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 struct SearchResultsView: View {
-    @ObservedObject var model: SearchResultsModel
+    @ObservedObject var model: SearchResultsViewModel
     
     enum Section: Hashable {
         case medias
@@ -125,10 +126,10 @@ struct SearchResultsView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, indexPath, section, _ in
+            } supplementaryView: { _, _, section, _ in
                 if section == .shows {
                     Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
-                        .srgFont(.title2)
+                        .srgFont(.H2)
                         .opacity(0.8)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 }
@@ -136,7 +137,7 @@ struct SearchResultsView: View {
             .synchronizeSearchScrolling(with: model.searchController)
             .synchronizeTabBarScrolling(with: model.viewController)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srgGray1)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()

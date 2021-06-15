@@ -6,26 +6,13 @@
 
 #import "Notification.h"
 
-#import <MGSwipeTableCell/MGSwipeTableCell.h>
-
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NotificationTableViewCell;
-
-@protocol NotificationTableViewDeletionDelegate <NSObject>
-
-- (void)notificationTableViewCell:(NotificationTableViewCell *)cell willDeleteNotification:(Notification *)notification;
-
-@end
-
-@interface NotificationTableViewCell : MGSwipeTableCell
+@interface NotificationTableViewCell : UITableViewCell
 
 @property (nonatomic, nullable) Notification *notification;
-
-// If not set, deletion with a swipe is not available.
-@property (nonatomic, weak, nullable) id<NotificationTableViewDeletionDelegate> deletionDelegate;
 
 @end
 

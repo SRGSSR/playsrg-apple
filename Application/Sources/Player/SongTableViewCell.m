@@ -40,17 +40,17 @@ static const CGFloat SongTableViewMargin = 42.f;
 
 + (UIFont *)timeLabelFont
 {
-    return [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    return [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 + (UIFont *)titleLabelFont
 {
-    return [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    return [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 + (UIFont *)artistLabelFont
 {
-    return [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    return [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 + (CGFloat)heightForSong:(SRGSong *)song withCellWidth:(CGFloat)width
@@ -81,7 +81,7 @@ static const CGFloat SongTableViewMargin = 42.f;
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.backgroundColor = UIColor.srg_gray2Color;
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     
     [self.marginWidthConstraints enumerateObjectsUsingBlock:^(NSLayoutConstraint * _Nonnull constraint, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -131,13 +131,13 @@ static const CGFloat SongTableViewMargin = 42.f;
     if ([dateInterval containsDate:self.song.date]) {
         self.timeLabel.textColor = UIColor.whiteColor;
         self.titleLabel.textColor = UIColor.whiteColor;
-        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.artistLabel.textColor = UIColor.srg_gray4Color;
         self.playable = YES;
     }
     else {
-        self.timeLabel.textColor = UIColor.play_grayColor;
-        self.titleLabel.textColor = UIColor.play_grayColor;
-        self.artistLabel.textColor = UIColor.play_grayColor;
+        self.timeLabel.textColor = UIColor.srg_gray4Color;
+        self.titleLabel.textColor = UIColor.srg_gray4Color;
+        self.artistLabel.textColor = UIColor.srg_gray4Color;
         self.playable = NO;
     }
 }

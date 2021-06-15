@@ -16,9 +16,7 @@
 #import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
-#import "HomeTopicViewController.h"
 #import "MediaPlayerViewController.h"
-#import "ModuleViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayApplication.h"
@@ -26,6 +24,7 @@
 #import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
 #import "PlayLogger.h"
+#import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "ShowViewController.h"
 #import "ShowsViewController.h"
@@ -228,10 +227,10 @@ static void *s_kvoContext = &s_kvoContext;
 // Open [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
 // Open [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
 // Open [scheme]://topic/[topic_urn]
-// Open [scheme]://module/[module_urn]
 // Open [scheme]://home (optional query parameters: channel_id=[channel_id])
 // Open [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
 // Open [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
+// Open [scheme]://section/[section_id]
 // Open [scheme]://search (optional query parameters: query=[query], media_type=[audio|video])
 // Open [scheme]://link?url=[url]
 // Open [scheme]://[play_website_url] (use "parsePlayUrl.js" to attempt transforming the URL)
@@ -239,9 +238,8 @@ static void *s_kvoContext = &s_kvoContext;
 {
     AnalyticsSource analyticsSource = ([URL.scheme isEqualToString:@"http"] || [URL.scheme isEqualToString:@"https"]) ? AnalyticsSourceDeepLink : AnalyticsSourceSchemeURL;
     
-    NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionModule,
-                                                   DeeplinkActionHome, DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch,
-                                                   DeeplinkActionLink ];
+    NSArray<DeeplinkAction> *supportedActions = @[ DeeplinkActionMedia, DeeplinkActionShow, DeeplinkActionTopic, DeeplinkActionHome,
+                                                   DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSection, DeeplinkActionSearch, DeeplinkActionLink ];
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     if (! [supportedActions containsObject:URLComponents.host.lowercaseString]) {
@@ -312,19 +310,6 @@ static void *s_kvoContext = &s_kvoContext;
             return YES;
         }
         
-        NSString *moduleURN = URLComponents.path.lastPathComponent;
-        if ([action isEqualToString:DeeplinkActionModule] && moduleURN) {
-            [self openModuleWithURN:moduleURN completionBlock:^{
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.source = analyticsSource;
-                labels.type = AnalyticsTypeActionDisplayPage;
-                labels.value = moduleURN;
-                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
-            }];
-            return YES;
-        }
-        
         NSArray<DeeplinkAction> *pageActions = @[ DeeplinkActionHome, DeeplinkActionAZ, DeeplinkActionByDate, DeeplinkActionSearch ];
         if ([pageActions containsObject:action]) {
             NSString *channelUid = [self valueFromURLComponents:URLComponents withParameterName:@"channel_id"];
@@ -339,8 +324,20 @@ static void *s_kvoContext = &s_kvoContext;
             return YES;
         }
         
+        NSString *sectionUid = URLComponents.path.lastPathComponent;
+        if ([action isEqualToString:DeeplinkActionSection] && sectionUid) {
+            [self openSectionWithUid:sectionUid completionBlock:^{
+                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+                labels.source = analyticsSource;
+                labels.type = AnalyticsTypeActionDisplayPage;
+                labels.value = sectionUid;
+                labels.extraValue1 = options[UIApplicationOpenURLOptionsSourceApplicationKey];
+                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
+            }];
+        }
+        
         NSString *URLString = [self valueFromURLComponents:URLComponents withParameterName:@"url"];
-        NSURL *URL = (URLString) ? [NSURL URLWithString:URLString] : nil;
+        NSURL *URL = URLString ? [NSURL URLWithString:URLString] : nil;
         if ([action isEqualToString:DeeplinkActionLink] && URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -502,13 +499,13 @@ static void *s_kvoContext = &s_kvoContext;
     }];
 }
 
-- (void)openModuleWithURN:(NSString *)moduleURN completionBlock:(void (^)(void))completionBlock
+- (void)openSectionWithUid:(NSString *)sectionUid completionBlock:(void (^)(void))completionBlock
 {
-    NSParameterAssert(moduleURN);
+    NSParameterAssert(sectionUid);
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
-        [self openModuleURN:moduleURN];
+        [self openSectionUid:sectionUid];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -725,8 +722,8 @@ static void *s_kvoContext = &s_kvoContext;
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGTopic.new, URN), topicURN];
         SRGTopic *topic = [topics filteredArrayUsingPredicate:predicate].firstObject;
         if (topic) {
-            HomeTopicViewController *homeTopicViewController = [[HomeTopicViewController alloc] initWithTopic:topic];
-            [self.rootTabBarController pushViewController:homeTopicViewController animated:YES];
+            UIViewController *topicViewController = [PageViewController topicViewControllerFor:topic];
+            [self.rootTabBarController pushViewController:topicViewController animated:YES];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -737,19 +734,17 @@ static void *s_kvoContext = &s_kvoContext;
     }] resume];
 }
 
-- (void)openModuleURN:(NSString *)moduleURN
+- (void)openSectionUid:(NSString *)sectionUid
 {
-    [[SRGDataProvider.currentDataProvider modulesForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor type:SRGModuleTypeEvent withCompletionBlock:^(NSArray<SRGModule *> * _Nullable modules, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGModule.new, URN), moduleURN];
-        SRGModule *module = [modules filteredArrayUsingPredicate:predicate].firstObject;
-        if (module) {
-            ModuleViewController *moduleViewController = [[ModuleViewController alloc] initWithModule:module];
-            [self.rootTabBarController pushViewController:moduleViewController animated:YES];
+    [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        if (contentSection) {
+            SectionViewController *sectionViewController = [SectionViewController viewControllerFor:contentSection];
+            [self.rootTabBarController pushViewController:sectionViewController animated:YES];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                                  code:PlayErrorCodeNotFound
-                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The page cannot be opened.", @"Error message when an event module cannot be opened via Handoff, deep linking or a push notification") }];
+                                             userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"The section cannot be opened.", @"Error message when a section cannot be opened via Handoff, deep linking or a push notification") }];
             [Banner showError:error inViewController:nil];
         }
     }] resume];

@@ -79,9 +79,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
-#if TARGET_OS_IOS
-@property (nonatomic, copy) NSString *googleCastReceiverIdentifier;
-#endif
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic) NSURL *playURL;
@@ -99,24 +96,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *sourceCodeURL;
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
-@property (nonatomic, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-
+@property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 
-@property (nonatomic) NSArray<NSNumber *> *videoHomeSections;
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
-@property (nonatomic) BOOL tvTrendingEpisodesOnly;
-@property (nonatomic) NSNumber *tvTrendingEditorialLimit;
-@property (nonatomic) BOOL tvTrendingPrefersHeroStage;
-
-@property (nonatomic, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
-
 @property (nonatomic) NSInteger minimumSocialViewCount;
-
-@property (nonatomic) NSArray<NSNumber *> *topicSections;
-@property (nonatomic) NSArray<NSNumber *> *topicSectionsWithSubtopics;
 
 @property (nonatomic) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic) NSArray<NSNumber *> *audioHomeSections;                           // wrap `HomeSection` values
@@ -125,9 +111,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) NSArray<RadioChannel *> *satelliteRadioChannels;
 
-@property (nonatomic, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
-
 @property (nonatomic) NSUInteger pageSize;
+@property (nonatomic) NSUInteger detailPageSize;
 
 @property (nonatomic) NSTimeInterval continuousPlaybackPlayerViewTransitionDuration;
 @property (nonatomic) NSTimeInterval continuousPlaybackForegroundTransitionDuration;
@@ -137,8 +122,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) float endToleranceRatio;
 
 @property (nonatomic) NSArray<NSString *> *hiddenOnboardingUids;
-
-@property (nonatomic, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
 
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
@@ -312,29 +295,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;
     
     self.downloadsHintsHidden = [firebaseConfiguration boolForKey:@"downloadsHintsHidden"];
-    self.moreEpisodesHidden = [firebaseConfiguration boolForKey:@"moreEpisodesHidden"];
-    
+    self.showsUnavailable = [firebaseConfiguration boolForKey:@"showsUnavailable"];
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
     
-    self.videoHomeSections = [firebaseConfiguration homeSectionsForKey:@"videoHomeSections"];
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
     
-    self.tvTrendingEpisodesOnly = [firebaseConfiguration boolForKey:@"tvTrendingEpisodesOnly"];
-    
-    NSNumber *tvTrendingEditorialLimit = [firebaseConfiguration numberForKey:@"tvTrendingEditorialLimit"];
-    self.tvTrendingEditorialLimit = tvTrendingEditorialLimit ? @(MAX(tvTrendingEditorialLimit.integerValue, 0)) : nil;
-    
-    self.tvTrendingPrefersHeroStage = [firebaseConfiguration boolForKey:@"tvTrendingPrefersHeroStage"];
-    
-    self.tvFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"tvFeaturedHomeSectionHeaderHidden"];
-    
-    self.topicSections = [firebaseConfiguration topicSectionsForKey:@"topicSections"];
-    self.topicSectionsWithSubtopics = [firebaseConfiguration topicSectionsForKey:@"topicSectionsWithSubtopics"];
-    
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
-    
-    self.radioFeaturedHomeSectionHeaderHidden = [firebaseConfiguration boolForKey:@"radioFeaturedHomeSectionHeaderHidden"];
     
     self.radioChannels = [firebaseConfiguration radioChannelsForKey:@"radioChannels" defaultHomeSections:self.audioHomeSections];
     self.tvChannels = [firebaseConfiguration tvChannelsForKey:@"tvChannels"];
@@ -342,6 +309,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSNumber *pageSize = [firebaseConfiguration numberForKey:@"pageSize"];
     self.pageSize = pageSize ? MAX(pageSize.unsignedIntegerValue, 1) : 20;
+    
+    NSNumber *detailPageSize = [firebaseConfiguration numberForKey:@"detailPageSize"];
+    self.detailPageSize = detailPageSize ? MAX(detailPageSize.unsignedIntegerValue, 1) : 40;
     
     NSNumber *continuousPlaybackPlayerViewTransitionDuration = [firebaseConfiguration numberForKey:@"continuousPlaybackPlayerViewTransitionDuration"];
     self.continuousPlaybackPlayerViewTransitionDuration = continuousPlaybackPlayerViewTransitionDuration ? fmax(continuousPlaybackPlayerViewTransitionDuration.doubleValue, 0.) : SRGLetterboxContinuousPlaybackDisabled;
@@ -363,8 +333,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.searchSettingsHidden = [firebaseConfiguration boolForKey:@"searchSettingsHidden"];
     self.searchSettingSubtitledHidden = [firebaseConfiguration boolForKey:@"searchSettingSubtitledHidden"];
     self.showsSearchHidden = [firebaseConfiguration boolForKey:@"showsSearchHidden"];
-    
-    self.logoutMenuEnabled = [firebaseConfiguration boolForKey:@"logoutMenuEnabled"];
     
     [NSNotificationCenter.defaultCenter postNotificationName:ApplicationConfigurationDidChangeNotification
                                                       object:self];
@@ -413,14 +381,20 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;
 {
+    if (! self.playURL || ! mediaMetadata) {
+        return nil;
+    }
+    
     if (PlayIsSwissTXTURN(mediaMetadata.URN)) {
-        return [NSURL URLWithString:[NSString stringWithFormat:@"https://tp.srgssr.ch/p/livecenter?urn=%@", mediaMetadata.URN]];
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:@"tv"]
+                                stringByAppendingPathComponent:@"-"]
+                               stringByAppendingPathComponent:@"video"]
+                              stringByAppendingPathComponent:@"sport"];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:mediaMetadata.URN] ];
+        return URLComponents.URL;
     }
     else {
-        if (! self.playURL) {
-            return nil;
-        }
-        
         static NSDictionary<NSNumber *, NSString *> *s_mediaTypeNames;
         static dispatch_once_t s_onceToken;
         dispatch_once(&s_onceToken, ^{
@@ -476,27 +450,21 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return URLComponents.URL;
 }
 
-- (NSURL *)sharingURLForModule:(SRGModule *)module
+- (NSURL *)sharingURLForContentSection:(SRGContentSection *)contentSection
 {
-    if (! self.playURL || ! module) {
+    if (! self.playURL || ! contentSection) {
         return nil;
     }
     
-    static NSDictionary<NSNumber *, NSString *> *s_moduleTypeNames;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_moduleTypeNames = @{ @(SRGModuleTypeEvent) : @"event" };
-    });
-    
-    NSString *moduleTypeName = s_moduleTypeNames[@(module.moduleType)];
-    if (! moduleTypeName) {
+    if (! contentSection.presentation.hasDetailPage) {
         return nil;
     }
     
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
     URLComponents.path = [[[URLComponents.path stringByAppendingPathComponent:@"tv"]
-                           stringByAppendingPathComponent:moduleTypeName]
-                          stringByAppendingPathComponent:module.seoName];
+                           stringByAppendingPathComponent:@"detail"]
+                          stringByAppendingPathComponent:@"section"];
+    URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"id" value:contentSection.uid] ];
     return URLComponents.URL;
 }
 
@@ -504,10 +472,9 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@: %p; videoHomeSections = %@; liveHomeSections = %@; radioChannels = %@; audioHomeSections = %@>",
+    return [NSString stringWithFormat:@"<%@: %p; liveHomeSections = %@; radioChannels = %@; audioHomeSections = %@>",
             self.class,
             self,
-            self.videoHomeSections,
             self.liveHomeSections,
             self.radioChannels,
             self.audioHomeSections];

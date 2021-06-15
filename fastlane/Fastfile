@@ -29,7 +29,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 12.4')
+    xcversion(version: '~> 12.5')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
@@ -1075,7 +1075,7 @@ end
 
 def snapshot_ios_devices
   [
-    'iPhone 11 Pro Max', # 6.5 inch, required
+    'iPhone 12 Pro Max', # 6.5 inch, required
     'iPhone 8 Plus', # 5.5 inch, required
     'iPad Pro (12.9-inch) (4th generation)', # 12.9 inch, required
     'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required

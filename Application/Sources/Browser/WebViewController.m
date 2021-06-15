@@ -6,12 +6,13 @@
 
 #import "WebViewController.h"
 
+#import "Reachability.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
-@import FXReachability;
 @import libextobjc;
+@import SRGAppearance;
 @import SRGNetwork;
 
 static void *s_kvoContext = &s_kvoContext;
@@ -72,7 +73,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
@@ -92,7 +93,7 @@ static void *s_kvoContext = &s_kvoContext;
     ]];
     self.webView = webView;
     
-    UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     loadingImageView.hidden = YES;
     [self.view insertSubview:loadingImageView atIndex:0];
@@ -109,7 +110,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     self.errorLabel.text = nil;
     
-    self.progressView.progressTintColor = UIColor.play_redColor;
+    self.progressView.progressTintColor = UIColor.srg_redColor;
     
     [self.webView loadRequest:self.request];
     
@@ -245,7 +246,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)webViewController_reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         if (self.play_viewVisible) {
             [self.webView loadRequest:self.request];
         }

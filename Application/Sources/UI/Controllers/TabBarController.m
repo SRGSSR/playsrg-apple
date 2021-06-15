@@ -9,10 +9,10 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
-#import "HomeViewController.h"
 #import "Layout.h"
 #import "MiniPlayerView.h"
 #import "NavigationController.h"
+#import "PlaySRG-Swift.h"
 #import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
@@ -79,12 +79,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         self.viewControllers = viewControllers.copy;
         
-        if (@available(iOS 13, *)) {
-            self.tabBar.barTintColor = nil;
-        }
-        else {
-            self.tabBar.barTintColor = UIColor.play_blurTintColor;
-        }
+        self.tabBar.barTintColor = nil;
         
         TabBarItemIdentifier lastOpenTabBarItem = ApplicationSettingLastOpenedTabBarItemIdentifier();
         if (lastOpenTabBarItem) {
@@ -151,7 +146,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBar.appearance.tintColor = UIColor.whiteColor;
     
     for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:12.f] }
+        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f] }
                                                forState:controlState.integerValue];
     }
     
@@ -255,10 +250,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (UIViewController *)videosTabViewController
 {
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
-    ApplicationSectionInfo *videosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:nil];
-    UIViewController *videosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:videosApplicationSectionInfo homeSections:applicationConfiguration.videoHomeSections];
+    UIViewController *videosViewController = [PageViewController videosViewController];
     videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
     
     UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
@@ -286,8 +278,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     }
     else if (radioChannels.count == 1) {
         RadioChannel *radioChannel = radioChannels.firstObject;
-        ApplicationSectionInfo *audiosApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-        UIViewController *audiosViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:audiosApplicationSectionInfo homeSections:radioChannel.homeSections];
+        UIViewController *audiosViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
         audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         
         UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
@@ -309,14 +300,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     NSArray<NSNumber *> *liveHomeSections = applicationConfiguration.liveHomeSections;
     if (liveHomeSections.count != 0) {
-        ApplicationSectionInfo *liveApplicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
-        UIViewController *liveHomeViewController = [[HomeViewController alloc] initWithApplicationSectionInfo:liveApplicationSectionInfo homeSections:liveHomeSections];
-        liveHomeViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
+        UIViewController *liveViewController = [PageViewController liveViewController];
+        liveViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
         
-        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveHomeViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
         liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
         
-        NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveHomeViewController];
+        NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveViewController];
         liveNavigationController.tabBarItem = liveTabBarItem;
         return liveNavigationController;
     }
@@ -346,7 +336,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
     
     SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];
-    profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeAllVisible;
+    profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeOneBesideSecondary;
     profileSplitViewController.viewControllers = @[ profileNavigationController ];
     profileSplitViewController.tabBarItem = profileTabBarItem;
     return profileSplitViewController;

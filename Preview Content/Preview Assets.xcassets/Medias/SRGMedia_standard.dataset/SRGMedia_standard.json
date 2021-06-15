@@ -1,0 +1,51 @@
+{
+   "id" : "12139311",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:12139311",
+   "title" : "Vechnaya Pamyat - Vost (5/5)",
+   "description" : "Au procès des responsables de la catastrophe, Shcherbina, Khomyuk et Legasov viennent tour à tour expliquer le fonctionnement d’une centrale nucléaire et les raisons qui ont conduit à l’explosion du réacteur 4 de la centrale de Tchernobyl…",
+   "imageUrl" : "https://www.rts.ch/2021/04/28/11/33/11121830.image/16x9",
+   "imageTitle" : "Vechnaya Pamyat - Vost (5-5) [RTS]",
+   "youthProtectionColor" : "RED",
+   "type" : "EPISODE",
+   "date" : "2021-04-25T03:09:00+02:00",
+   "duration" : 4095680,
+   "validFrom" : "2021-04-25T03:09:00+02:00",
+   "validTo" : "2021-05-08T23:59:00+02:00",
+   "playableAbroad" : false,
+   "subtitlesAvailable" : false,
+   "episode" : {
+      "id" : "12139303",
+      "title" : "Chernobyl",
+      "imageUrl" : "https://www.rts.ch/2021/04/28/11/33/11121830.image/16x9",
+      "imageTitle" : "Vechnaya Pamyat - Vost (5-5) [RTS]"
+   },
+   "show" : {
+      "id" : "10895499",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:10895499",
+      "title" : "Chernobyl",
+      "lead" : "26 avril 1986, l'histoire vraie de la pire catastrophe causée par l'homme et de ceux qui ont sacrifié leur vie pour sauver l'Europe du drame.\n\nMini-série (5 épisodes) diffusée les 23 et 24 avril 2021, vers minuit sur RTS Un, à revoir en intégralité jusqu'au 8 mai sur Play RTS.",
+      "description" : "26 avril 1986, l'histoire vraie de la pire catastrophe causée par l'homme et de ceux qui ont sacrifié leur vie pour sauver l'Europe du drame. Mini-série (5 épisodes) diffusée les 23 et 24 avril 2021, vers minuit sur RTS Un, à revoir en intégralité jusqu'au 8 mai sur Play RTS.",
+      "imageUrl" : "https://www.rts.ch/2021/04/28/10/57/11047535.image/16x9",
+      "imageTitle" : "01:23:45 - Vost (1-5) [RTS]",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true
+   },
+   "presentation" : "DEFAULT",
+  "audioTrackList": [
+    {
+      "locale": "fr",
+      "language": "Français",
+      "source": "HLS"
+    },
+    {
+      "locale": "en",
+      "language": "English",
+      "source": "HLS"
+    }
+  ],
+  "aspectRatio" : "16:9"
+}

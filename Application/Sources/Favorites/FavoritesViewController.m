@@ -11,8 +11,8 @@
 #import "ApplicationSection.h"
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "ShowViewController.h"
-#import "FavoriteTableViewCell.h"
 #import "Favorites.h"
 #import "Layout.h"
 #import "RefreshControl.h"
@@ -26,7 +26,7 @@
 @import SRGDataProvider;
 @import SRGUserData;
 
-@interface FavoritesViewController () <FavoriteTableViewCellDelegate>
+@interface FavoritesViewController ()
 
 @property (nonatomic) NSArray<SRGShow *> *shows;
 
@@ -56,7 +56,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -83,13 +83,11 @@
     self.tableView.emptyDataSetSource = self;
     self.tableView.emptyDataSetDelegate = self;
     
-    NSString *cellIdentifier = NSStringFromClass(FavoriteTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableShowCell];
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
     
     [self updateInterfaceForEditionAnimated:NO];
@@ -137,7 +135,7 @@
 {
     self.requestedShows = [NSArray array];
     
-    NSArray<NSString *> *showURNs = FavoritesShowURNs().allObjects;
+    NSArray<NSString *> *showURNs = FavoritesShowURNs().array;
     NSUInteger pageSize = ApplicationConfiguration.sharedApplicationConfiguration.pageSize;
     
     __block SRGFirstPageRequest *firstRequest = nil;
@@ -203,11 +201,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.shows.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -223,7 +217,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return LayoutTableViewPaddingContentInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
@@ -241,8 +235,8 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
+                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
     
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
@@ -262,8 +256,8 @@
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
+                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
     
     if (self.lastRequestError) {
         return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it")
@@ -289,7 +283,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.play_lightGrayColor;
+    return UIColor.srg_gray5Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
@@ -300,19 +294,6 @@
 - (CGFloat)verticalOffsetForEmptyDataSet:(UIScrollView *)scrollView
 {
     return VerticalOffsetForEmptyDataSet(scrollView);
-}
-
-#pragma mark FavoriteTableViewCellDelegate protocol
-
-- (void)favoriteTableViewCell:(FavoriteTableViewCell *)favoriteTableViewCell deleteShow:(SRGShow *)show
-{
-    FavoritesRemoveShows(@[show]);
-    [self updateInterfaceForEditionAnimated:YES];
-    
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = show.URN;
-    labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -336,20 +317,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(FavoriteTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableShowCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.shows.count);
+    return [[ShowCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(FavoriteTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<ShowSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     cell.show = self.shows[indexPath.row];
-    cell.cellDelegate = self;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -365,6 +345,24 @@
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteOpen labels:labels];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        SRGShow *show = self.shows[indexPath.row];
+        FavoritesRemoveShows(@[show]);
+        [self updateInterfaceForEditionAnimated:YES];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = show.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleFavoriteRemove labels:labels];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
 #pragma mark Actions
@@ -438,21 +436,18 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)toggleEdition:(id)sender
-{
-    BOOL editing = !self.tableView.isEditing;
-    [self setEditing:editing animated:YES];
-}
-
 #pragma mark Edit mode
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
     UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]

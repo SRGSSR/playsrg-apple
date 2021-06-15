@@ -6,7 +6,7 @@
 PYTHON_NIGHTLIES_TAG="---->"
 PYTHON_NIGHTLIES_CLOSING_TAG="***********************"
 
-if [ "${CONFIGURATION}" == "AppStore" ]; then
+if [ "${CONFIGURATION}" == "AppStore" ] || [ $ENABLE_PREVIEWS == "YES" ]; then
     exit 0
 fi
 

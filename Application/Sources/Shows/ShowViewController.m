@@ -6,15 +6,14 @@
 
 #import "ShowViewController.h"
 
-#import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "Favorites.h"
 #import "Layout.h"
-#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayAppDelegate.h"
+#import "SharingItem.h"
 #import "ShowHeaderView.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
@@ -28,8 +27,6 @@
 @interface ShowViewController ()
 
 @property (nonatomic) SRGShow *show;
-
-@property (nonatomic, weak) UIBarButtonItem *shareBarButtonItem;
 
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
 
@@ -53,12 +50,10 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
-    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;
@@ -86,8 +81,7 @@
                                                                               target:self
                                                                               action:@selector(shareContent:)];
         shareBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
-        self.navigationItem.rightBarButtonItems = @[ shareBarButtonItem ];
-        self.shareBarButtonItem = shareBarButtonItem;
+        self.navigationItem.rightBarButtonItem = shareBarButtonItem;
     }
     
     [self updateAppearanceForSize:self.view.frame.size];
@@ -186,86 +180,6 @@
     [requestQueue addRequest:request resume:YES];
 }
 
-#pragma mark Peek and pop
-
-- (NSArray<id<UIPreviewActionItem>> *)previewActionItems
-{
-    NSMutableArray<id<UIPreviewActionItem>> *previewActionItems = [NSMutableArray array];
-    
-    BOOL isFavorite = FavoritesContainsShow(self.show);
-    
-    UIPreviewAction *favoriteAction = [UIPreviewAction actionWithTitle:isFavorite ? NSLocalizedString(@"Delete from favorites", @"Button label to delete a show from favorites in the show preview window") : NSLocalizedString(@"Add to favorites", @"Button label to add a show to favorites in the show preview window") style:isFavorite ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        FavoritesToggleShow(self.show);
-        
-        // Use !isFavorite since favorite status has been reversed
-        AnalyticsTitle analyticsTitle = ! isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourcePeekMenu;
-        labels.value = self.show.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-        
-        [Banner showFavorite:! isFavorite forItemWithName:self.show.title inViewController:nil /* Not 'self' since dismissed */];
-    }];
-    [previewActionItems addObject:favoriteAction];    
-    
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
-    if (sharingURL) {
-        UIPreviewAction *shareAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the show preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithShow:self.show URL:sharingURL];
-            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-            activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                              UIActivityTypeAssignToContact,
-                                                              UIActivityTypeSaveToCameraRoll,
-                                                              UIActivityTypePostToFlickr,
-                                                              UIActivityTypePostToVimeo,
-                                                              UIActivityTypePostToTencentWeibo ];
-            activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                if (! completed) {
-                    return;
-                }
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.type = activityType;
-                labels.source = AnalyticsSourcePeekMenu;
-                labels.value = self.show.URN;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingShow labels:labels];
-                
-                if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                    [Banner showWithStyle:BannerStyleInfo
-                                  message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                    image:nil
-                                   sticky:NO
-                         inViewController:nil /* Not 'self' since dismissed */];
-                }
-            };
-            
-            activityViewController.modalPresentationStyle = UIModalPresentationPopover;
-            
-            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
-            [viewController presentViewController:activityViewController animated:YES completion:nil];
-        }];
-        [previewActionItems addObject:shareAction];
-    }
-    
-    UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a show from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:self.show fromPushNotification:NO];
-        
-        UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
-        UINavigationController *navigationController = viewController.navigationController;
-        if (navigationController) {
-            [navigationController pushViewController:showViewController animated:YES];
-        }
-        else {
-            UIApplication *application = UIApplication.sharedApplication;
-            PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-            [appDelegate.rootTabBarController pushViewController:showViewController animated:YES];
-        }
-    }];
-    [previewActionItems addObject:openAction];
-    
-    return previewActionItems.copy;
-}
-
 #pragma mark UIResponder (ActivityContinuation)
 
 - (void)updateUserActivityState:(NSUserActivity *)userActivity
@@ -320,13 +234,12 @@
         return;
     }
     
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
-    if (! sharingURL) {
+    SharingItem *sharingItem = [SharingItem sharingItemForShow:self.show];
+    if (! sharingItem) {
         return;
     }
     
-    ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithShow:self.show URL:sharingURL];
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
     activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
                                                       UIActivityTypeAssignToContact,
                                                       UIActivityTypeSaveToCameraRoll,
@@ -341,7 +254,7 @@
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.type = activityType;
         labels.source = AnalyticsSourceButton;
-        labels.value = self.show.URN;
+        labels.value = sharingItem.analyticsUid;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingShow labels:labels];
         
         if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
@@ -356,7 +269,7 @@
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
-    popoverPresentationController.barButtonItem = self.shareBarButtonItem;
+    popoverPresentationController.barButtonItem = barButtonItem;
     
     [self presentViewController:activityViewController animated:YES completion:nil];
 }
@@ -372,7 +285,7 @@
 - (NSAttributedString *)buttonTitleForEmptyDataSet:(UIScrollView *)scrollView forState:(UIControlState)state
 {
     if (self.show.broadcastInformation.URL) {
-        NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+        NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
         return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Show more", @"Show more button label when a link is available for broadcast information.") attributes:attributes];
     }
@@ -433,13 +346,6 @@
     if ([view isKindOfClass:ShowHeaderView.class]) {
         ShowHeaderView *headerView = (ShowHeaderView *)view;
         headerView.show = self.show;
-        
-        // iOS 11 - 12 bug: The header hides scroll indicators
-        // See https://stackoverflow.com/questions/46747960/ios11-uicollectionsectionheader-clipping-scroll-indicator
-        if (@available(iOS 13, *)) {}
-        else {
-            headerView.layer.zPosition = 0;
-        }
     }
 }
 

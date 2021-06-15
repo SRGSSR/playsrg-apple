@@ -178,16 +178,16 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-            styleAttributes.backgroundColor = UIColor.play_blackColor;
+            styleAttributes.backgroundColor = UIColor.srg_gray1Color;
             styleAttributes.headingTextColor = UIColor.whiteColor;
             styleAttributes.bodyTextColor = UIColor.whiteColor;
             styleAttributes.captionTextColor = UIColor.whiteColor;
             styleAttributes.iconTintColor = UIColor.whiteColor;
             
-            styleAttributes.headingTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-            styleAttributes.bodyTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-            styleAttributes.buttonTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-            styleAttributes.captionTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+            styleAttributes.headingTextFont = [SRGFont fontWithStyle:SRGFontStyleH2];
+            styleAttributes.bodyTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
+            styleAttributes.buttonTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
+            styleAttributes.captionTextFont = [SRGFont fontWithStyle:SRGFontStyleCaption];
             
             styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
             styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
@@ -216,7 +216,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             
             // Transfer local playback to Google Cast
             if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-                [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                [UIApplication.sharedApplication.delegate.window.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                     if (playerType == PlayerTypeGoogleCast) {
                         [service disable];
                         [controller reset];
@@ -230,7 +230,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 // Perform manual tracking of Google cast views when the application returns from background
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }

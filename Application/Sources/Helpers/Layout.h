@@ -11,81 +11,84 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard corner radius constants.
  */
-static const CGFloat LayoutStandardLabelCornerRadius = 2.f;
-static const CGFloat LayoutStandardViewCornerRadius = 4.f;
+OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;
+OBJC_EXPORT const CGFloat LayoutStandardViewCornerRadius;
 
 /**
- *  Standard cell dimensions.
+ *  Progress bar height.
  */
-static const CGFloat LayoutCollectionViewCellStandardWidth = 210.f;
-static const CGFloat LayoutTableViewCellStandardHeight = 84.f;
+OBJC_EXPORT const CGFloat LayoutProgressBarHeight;
 
 /**
- *  Standard margin.
+ *  Zero header height.
  */
-static const CGFloat LayoutStandardMargin = 10.f;
+OBJC_EXPORT const CGFloat LayoutHeaderHeightZero;
 
 /**
- *  Standard table view padding.
- */
-static const UIEdgeInsets LayoutStandardTableViewPaddingInsets = { LayoutStandardMargin, 0.f, LayoutStandardMargin, 0.f };
-
-/**
- *  Calculate the width to apply to items within a collection so that they approach some desired size, ensuring constant
- *  spacing between items.
+ *  Return the size of a cell whose content has the given width and aspect ratio, suited for display in swimlanes. A
+ *  height offset can be provided if more space is required for displaying additional content.
  *
- *  @param itemApproximateWidth The desired approximate width for items. The returned width might be smaller or bigger.
- *  @param layoutWidth          The total available width for layout.
- *  @param leadingInset         The leading layout inset.
- *  @param trailingInset        The trailing layout inset.
- *  @param spacing              The desired spacing.
+ *        ┌────────────────────────────────────┐
+ *        │....................................│
+ *        │....................................│
+ *        │....................................│
+ *        │.............          .............│
+ *        │............. Content  .............│
+ *        │.............          .............│
+ *        │....................................│
+ *        │....................................│
+ *        │....................................│
+ *        ├────────────────────────────────────┤    ▲
+ *        │                                    │    │
+ *        │                                    │    │ height
+ *        │                                    │    │ offset
+ *        └────────────────────────────────────┘    ▼
+ *        ◀────────────────────────────────────▶
+ *                       width
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemOptimalWidth(CGFloat itemApproximateWidth, CGFloat layoutWidth, CGFloat leadingInset, CGFloat trailingInset, CGFloat spacing);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloat aspectRatio, CGFloat heightOffset);
 
 /**
- *  Calculate the width to apply to featured items in a collection. Featured items attempt occupying (almost) the full width
- *  of narrow layouts, but still have bounded (larger) size on wide layouts.
+ *  Return the size of a cell for a grid layout, so that cells are spaced with the exact required value. An
+ *  approximate width must be provided as a hint, so that the function can best determine the actual item size
+ *  best matching the desired result. A minimal number of columns must also be provided (>= 1).
  *
- *  @param layoutWidth The total available width for layout.
+ *  As for `LayoutSwimlaneCellSize`, an aspect ratio must be provided, as well as a height offset is more
+ *  space is required vertically.
  */
-OBJC_EXPORT CGFloat LayoutCollectionItemFeaturedWidth(CGFloat layoutWidth);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
 
 /**
- *  Return the standard height for table view headers.
- */
-OBJC_EXPORT CGFloat LayoutStandardTableSectionHeaderHeight(BOOL hasBackgroundColor);
-
-/**
- *  Return the standard height for simple table cells.
- */
-OBJC_EXPORT CGFloat LayoutStandardSimpleTableCellHeight(void);
-
-/**
- *  Return the height for a top-aligned table cell with given spacing.
- */
-OBJC_EXPORT CGFloat LayoutTableTopAlignedCellHeight(CGFloat contentHeight, CGFloat spacing, NSInteger row, NSInteger numberOfItems);
-
-/**
- *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
+ *  Return the size for a cell so that content with some aspect ratio is displayed in it, in such a way that the
+ *  content width only occupies a given fraction of the cell width.
  *
- *  @param itemWidth The width of the item.
- *  @param large     Large layout (e.g. featured).
+ *        ┌──────────────────────────────────────────────┬─────────────────────┐
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............                 ...............│                     │
+ *        │..............     Content     ...............│                     │
+ *        │..............                 ...............│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        │..............................................│                     │
+ *        └──────────────────────────────────────────────┴─────────────────────┘
+ *        ◀─────────────────────────────────────────────▶
+ *                         content width
+ *
+ *        ◀──────────────────────────────────────────────────────────────────▶
+ *                                    width
  */
-OBJC_EXPORT CGSize LayoutMediaStandardCollectionItemSize(CGFloat itemWidth, BOOL large);
+OBJC_EXPORT NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
 
 /**
- *  Live media cell (16:9 artwork + progress area) size for collection layouts, for a given item width.
- *
- *  @param itemWidth The width of the item.
+ *  Table and collection view constants.
  */
-OBJC_EXPORT CGSize LayoutLiveMediaStandardCollectionItemSize(CGFloat itemWidth);
 
-/**
- *  Standard media cell (16:9 artwork + text area) size for collection layouts, for a given item width.
- *
- *  @param itemWidth The width of the item.
- *  @param large     Large layout (e.g. featured).
- */
-OBJC_EXPORT CGSize LayoutShowStandardCollectionItemSize(CGFloat itemWidth, BOOL large);
+OBJC_EXPORT const CGFloat LayoutMargin;
+OBJC_EXPORT const UIEdgeInsets LayoutPaddingContentInsets;
+OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
 
 NS_ASSUME_NONNULL_END

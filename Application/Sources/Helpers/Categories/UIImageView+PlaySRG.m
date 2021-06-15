@@ -19,21 +19,6 @@
 
 #pragma mark Class methods
 
-+ (void)load
-{
-    if (@available(iOS 13, *)) {}
-    else {
-        // `-willMoveToWindow:` is not implemented on UIImageView on iOS 12, so attempt to add it first. Use swizzling if
-        // if some minor or patch version implements it.
-        Method injectedMethod = class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_injected_willMoveToWindow:));
-        BOOL added = class_addMethod(self, @selector(willMoveToWindow:), method_getImplementation(injectedMethod), method_getTypeEncoding(injectedMethod));
-        if (! added) {
-            method_exchangeImplementations(class_getInstanceMethod(self, @selector(willMoveToWindow:)),
-                                           class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_swizzled_willMoveToWindow:)));
-        }
-    }
-}
-
 + (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
 {
     return [self play_animatedImageViewNamed:@"loading-48" withTintColor:tintColor duration:1.];

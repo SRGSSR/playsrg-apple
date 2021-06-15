@@ -9,7 +9,7 @@
 #import "AnalyticsConstants.h"
 #import "Onboarding.h"
 #import "OnboardingTableViewCell.h"
-#import "Play-Swift-Bridge.h"
+#import "PlaySRG-Swift.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -35,7 +35,7 @@
     self.onboardings = Onboarding.onboardings;
     self.title = NSLocalizedString(@"Features", @"Title displayed at the top of the features list");
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray1Color;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
@@ -118,11 +118,11 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    view.textLabel.textColor = UIColor.play_lightGrayColor;
+    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
+    view.textLabel.textColor = UIColor.srg_gray5Color;
     
     UIView *backgroundView = [[UIView alloc] init];
-    backgroundView.backgroundColor = UIColor.play_blackColor;
+    backgroundView.backgroundColor = UIColor.srg_gray1Color;
     view.backgroundView = backgroundView;
 }
 

@@ -142,7 +142,7 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
             return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackBackgroundTransitionDuration;
         }
         else {
-            UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
             if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
                 return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
             }

@@ -14,7 +14,8 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 * `appStoreProductIdentifier` (mandatory, number): Application product identifier on the AppStore.
 * `businessUnit` (mandatory, string): The identifier of the business unit.
-* `pageSize` (optional, number): The page size to use for media lists in general, 20 if not set.
+* `pageSize` (optional, number): The page size to use for media or show lists in general, 20 if not set.
+* `detailPageSize` (optional, number): The page size to use for media or show lists in detail page with load more capability, 40 if not set.
 * `voiceOverLanguageCode` (optional, string): The code of the language associated with the application. If set, this language is used when reading texts for accessibility purposes, otherwise the device language is used.
 
 ## URLs
@@ -56,40 +57,6 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
-
-## Video homepage
-
-`videoHomeSections` (optional, string, multiple): The sections to be displayed on the videos homepage, in the order they must appear.
-
-### Home sections
-
-* `tvEvents`: Event modules (expand into a row per event).
-* `tvFavoriteShows`: TV shows added to the favorites.
-* `tvFavoriteLatestEpisodes`: The latest episodes from TV shows added to the favorites.
-* `tvLatest`: The latest medias.
-* `tvWebFirst`: Medias available first on Play.
-* `tvMostPopular`: The most popular videos.
-* `tvShowsAccess`: A-Z and By date access buttons.
-* `tvSoonExpiring`: Soon expiring videos.
-* `tvTopics`: Topics (expand into a row per topic).
-* `tvTopicsAccess`: Topic access.
-* `tvTrending`: Trending medias and editorial picks. See `tvTrendingEpisodesOnly`, `tvTrendingEditorialLimit` and `tvTrendingPrefersHeroStage` options.
-* `tvResumePlayback`: The videos from history that can be resumed.
-* `tvWatchLater`: The latest videos added to the watch later list.
-
-### Topic configuration
-
-* `topicSections` (optional, string, multiple): The sections to be displayed when opening a topic. If none is provided, latest medias are displayed. Available values are:
-   * `latest`: The latest medias.
-   * `mostPopular`: The most popular medias.
-* `topicSectionsWithSubtopics` (optional, string, multiple): The sections to be displayed when opening a topic with subtopics. If none is provided, only subtopics are displayed. Available values are the same as `topicSections`.
-
-### User interface options
-
-* `tvFeaturedHomeSectionHeaderHidden` (optional, boolean): If set to `true`, featured TV media lists will not display any title header.
-* `tvTrendingEpisodesOnly` (optional, boolean): If set to `true`, `tvTrending` only returns episodes.
-* `tvTrendingEditorialLimit` (optional, number): The maximum number of editorial recommendations returned by `tvTrending`. If not set, all are returned.
-* `tvTrendingPrefersHeroStage` (optional, boolean): If set to `true`, `tvTrending` returns hero stage content (`tvTrendingEpisodesOnly` and `tvTrendingEditorialLimit` are ignored).
 
 ## Audio homepage
 
@@ -141,5 +108,5 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `hiddenOnboardings` (optional, string, multiple): Identifier list of onboardings which must be hidden.
 * `historySynchronizationInterval` (optional, number): Duration in seconds for history synchronization. If omitted, defaults to 30 seconds. Miminum value is 10 seconds.
 * `minimumSocialViewCount` (optional, number): The threshold under which social view counts will not be displayed. If omitted, 0.
-* `moreEpisodesHidden` (optional, boolean): If set to `true`, the option to display more episodes for a media will not be available from the long-press and peek menus.
+* `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.

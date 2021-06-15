@@ -72,7 +72,7 @@
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
@@ -202,8 +202,8 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                  NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
+                                  NSForegroundColorAttributeName : UIColor.srg_gray5Color };
     
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
@@ -224,8 +224,8 @@
     NSString *description = (self.lastRequestError == nil) ? self.emptyCollectionSubtitle : NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
     if (description) {
         return [[NSAttributedString alloc] initWithString:description
-                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
+                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
+                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color }];
     }
     else {
         return nil;
@@ -246,7 +246,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.play_lightGrayColor;
+    return UIColor.srg_gray5Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView

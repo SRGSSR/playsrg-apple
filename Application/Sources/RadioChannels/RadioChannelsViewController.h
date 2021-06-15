@@ -4,13 +4,13 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "PageViewController.h"
+#import "PageContainerViewController.h"
 #import "PlayApplicationNavigation.h"
 #import "RadioChannel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RadioChannelsViewController : PageViewController <PlayApplicationNavigation>
+@interface RadioChannelsViewController : PageContainerViewController <PlayApplicationNavigation>
 
 - (instancetype)initWithRadioChannels:(NSArray<RadioChannel *> *)radioChannels;
 

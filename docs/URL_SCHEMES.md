@@ -2,7 +2,7 @@
 
 Play applications can be opened with a custom URL scheme having the following format: `play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`.
 
-## Actions (v2 seen 2.9.6 release)
+## Actions
 
 The application supports Apple universal links. Replacing the `http`or `https` scheme of a Play website URL with the corresponding application scheme yields a link which can be opened with the application:
 
@@ -13,16 +13,21 @@ The available actions are:
 * Open a media within the player: `[scheme]://media/[media_urn]`. An optional `&start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
-* Open a module page: `[scheme]://module/[module_urn]`.
+* Open a section page: `[scheme]://section/[section_id]`.
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single character parameter can be provided to open the page at the specified index.
 * Open shows by date page: `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
 * Open search page: `[scheme]://search`. Optional `query` and `media_type` (with `video` or `audio` values) parameters can be provided.
 * Open a URL: `[scheme]://link?url=[url]`.
 
-For media, show and page links, an optional `&channel_id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
+For media, show and page links, an optional `channel_id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
-For a `Debug`, `Nightly` or a `Beta` build, `&server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
+For a `Debug`, `Nightly` or a `Beta` build, `server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
+
+### Changelog
+
+- Version 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
+- Version 2.9.6: Version 2 of universal link support.
 
 ### URL generation
 

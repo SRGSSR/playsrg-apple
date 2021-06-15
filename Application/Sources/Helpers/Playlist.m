@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "History.h"
+#import "Reachability.h"
 #import "Recommendation.h"
 
 // TODO: For the moment settings on tvOS are limited so ApplicationSettings has not been split / refactored
@@ -18,7 +19,6 @@
 #import "ApplicationSettings.h"
 #endif
 
-@import FXReachability;
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
@@ -92,7 +92,7 @@ static Playlist *s_playlist;
             self.recommendationUid = recommendation.recommendationUid;
             
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGMedia * _Nullable media, NSDictionary<NSString *,id> * _Nullable bindings) {
-                return HistoryCanResumePlaybackForMedia(media);
+                return HistoryCanResumePlaybackForMediaMetadata(media);
             }];
             self.medias = [medias filteredArrayUsingPredicate:predicate];
         }] requestWithPageSize:50];
@@ -130,7 +130,7 @@ static Playlist *s_playlist;
 
 - (SRGPosition *)controller:(SRGLetterboxController *)controller startPositionForMedia:(SRGMedia *)media
 {
-    return HistoryResumePlaybackPositionForMedia(media);
+    return HistoryResumePlaybackPositionForMediaMetadata(media);
 }
 
 - (SRGLetterboxPlaybackSettings *)controller:(SRGLetterboxController *)controller preferredSettingsForMedia:(SRGMedia *)media
@@ -163,7 +163,7 @@ static Playlist *s_playlist;
 #if TARGET_OS_TV
 - (void)controllerDidEndPlaybackdWithoutTransition:(SRGLetterboxController *)controller
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.rootViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
     while (topViewController.presentedViewController) {
         topViewController = topViewController.presentedViewController;
     }
@@ -178,7 +178,7 @@ static Playlist *s_playlist;
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self load];
     }
 }

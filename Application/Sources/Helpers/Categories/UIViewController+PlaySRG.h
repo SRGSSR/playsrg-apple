@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-@import CoreMedia;
 @import SRGDataProvider;
 @import SRGLetterbox;
 @import UIKit;
@@ -15,7 +14,7 @@
 typedef NS_ENUM(NSInteger, PlayerType) {
     PlayerTypeNative,           // Native Letterbox-based player
     PlayerTypeGoogleCast        // Google Cast player interface
-};
+} API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Return the standard user interface orientations supported by the application. Useful when implementing the
  *  `-supportedInterfaceOrientations` of a view controller
  */
-@property (class, nonatomic, readonly) UIInterfaceOrientationMask play_supportedInterfaceOrientations;
+@property (class, nonatomic, readonly) UIInterfaceOrientationMask play_supportedInterfaceOrientations API_UNAVAILABLE(tvos);
 
 /**
  *  Convenience method to determine whether a view controller is appearing or disappearing. Take the parent view
@@ -41,11 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
  * Return YES iff the view is displayed and visible (appearing, appeared, or disappearing)
  */
 @property (nonatomic, readonly, getter=play_isViewVisible) BOOL play_viewVisible;
-
-/**
- *  The previewing context (peek) from which the view controller is presented, if any.
- */
-@property (nonatomic, readonly, nullable) id<UIViewControllerPreviewing> play_previewingContext;
 
 /**
  *  The top view controller of the receiver hierarchy.
@@ -73,7 +67,7 @@ NS_ASSUME_NONNULL_BEGIN
                       airPlaySuggestions:(BOOL)airPlaySuggestions
                     fromPushNotification:(BOOL)fromPushNotification
                                 animated:(BOOL)animated
-                              completion:(nullable void (^)(PlayerType playerType))completion;
+                              completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 
 /**
  *  Same as `-play_presentMediaPlayerWithMedia:atPosition:fromPushNotification:animated:completion:`, but resuming from
@@ -83,12 +77,20 @@ NS_ASSUME_NONNULL_BEGIN
                                 withAirPlaySuggestions:(BOOL)airPlaySuggestions
                                   fromPushNotification:(BOOL)fromPushNotification
                                               animated:(BOOL)animated
-                                            completion:(nullable void (^)(PlayerType playerType))completion;
+                                            completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 
 /**
- *  Dismiss the view controller, ensuring a compatible suitable orientation is applied to the revealed view controller.
+ *  Present the view controller, ensuring that view lifecycle events are properly forwarded if a custom transition is applied.
  *
- *  @discussion Useful when a custom modal presentation style is applied. In general use standard dismissal.
+ *  @discussion Useful when a custom modal presentation style is applied. In general you can use standard dismissal.
+ */
+- (void)play_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(nullable void (^)(void))completion;
+
+/**
+ *  Dismiss the view controller, ensuring a compatible suitable orientation is applied to the revealed view controller,
+ *  and that view lifecycle events are properly forwarded if a custom transition is applied.
+ *
+ *  @discussion Useful when a custom modal presentation style is applied. In general you can use standard dismissal.
  */
 - (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(nullable void (^)(void))completion;
 

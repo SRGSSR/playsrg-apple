@@ -13,6 +13,7 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
+@import SRGAppearance;
 @import SRGDataProviderNetwork;
 
 @interface DailyMediasViewController ()
@@ -42,12 +43,10 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray1Color;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-    collectionViewLayout.minimumLineSpacing = LayoutStandardMargin;
-    collectionViewLayout.minimumInteritemSpacing = LayoutStandardMargin;
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:view.bounds collectionViewLayout:collectionViewLayout];
     collectionView.backgroundColor = UIColor.clearColor;

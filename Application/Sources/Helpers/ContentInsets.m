@@ -8,7 +8,8 @@
 
 #import "UIView+PlaySRG.h"
 
-#import <DZNEmptyDataSet/UIScrollView+EmptyDataSet.h>
+@import DZNEmptyDataSet;
+
 #import <objc/runtime.h>
 
 static void UpdateContentInsetsForViewController(UIViewController *viewController);
