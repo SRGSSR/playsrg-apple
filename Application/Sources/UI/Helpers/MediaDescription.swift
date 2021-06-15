@@ -53,7 +53,8 @@ struct MediaDescription {
         
         switch style {
         case .show:
-            if let showTitle = media.show?.title, media.title.lowercased() != showTitle.lowercased() {
+            guard let showTitle = media.show?.title else { return media.title }
+            if media.title.lowercased() != showTitle.lowercased() {
                 return media.title
             }
             else {
