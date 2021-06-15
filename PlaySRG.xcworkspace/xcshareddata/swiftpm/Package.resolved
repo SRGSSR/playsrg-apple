@@ -212,8 +212,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "feature/font-overhaul",
-          "revision": "23407da654fac49ade7eddfed6d83bf8f1136aed",
+          "branch": "develop",
+          "revision": "f3854faf59ec6edcdd6d4db2f41204b84c68b16b",
           "version": null
         }
       },
@@ -221,8 +221,8 @@
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": "feature/font-overhaul",
-          "revision": "8b6ff16d2fc952abe76fd01621b356c26b776587",
+          "branch": "develop",
+          "revision": "960ce81ff9c6c180d9d6af765eb0ce8da2637572",
           "version": null
         }
       },
@@ -239,8 +239,8 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "feature/content-services",
-          "revision": "789871fcccb2cee01219dd256957cfe27c1cbb25",
+          "branch": "develop",
+          "revision": "2645e4d5bfd18b6c8377b03667bc7fbab794dc2e",
           "version": null
         }
       },
@@ -257,8 +257,8 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": "feature/font-overhaul",
-          "revision": "456661270d662cfd68ed7aac57247d561a44397b",
+          "branch": "develop",
+          "revision": "a64d28fcfbc550f4991b0d85762d8e7ad7da389f",
           "version": null
         }
       },
@@ -266,8 +266,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/font-overhaul",
-          "revision": "fe5a9034d72d075785474a84c8c3ef8f9e0e9947",
+          "branch": "develop",
+          "revision": "787e383fb15d287d3c872b55fc855df768ff7114",
           "version": null
         }
       },
@@ -302,8 +302,8 @@
         "package": "SRGUserData",
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
-          "branch": "feature/font-overhaul",
-          "revision": "bd74d52d7381e7bdcdd92eaf6afc1981160708e3",
+          "branch": "develop",
+          "revision": "c42f00a99d709426fc01db6c1caefa137f5dbd94",
           "version": null
         }
       },

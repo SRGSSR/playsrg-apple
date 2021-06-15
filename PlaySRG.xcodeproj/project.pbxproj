@@ -13855,7 +13855,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				branch = "feature/font-overhaul";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -13871,7 +13871,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				branch = "feature/font-overhaul";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -13887,7 +13887,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/font-overhaul";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -13895,7 +13895,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				branch = "feature/font-overhaul";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -13911,7 +13911,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/font-overhaul";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -13919,7 +13919,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/content-services";
+				branch = develop;
 				kind = branch;
 			};
 		};
