@@ -81,7 +81,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .layoutPriority(1)
-                FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: layout == .highlight)
+                FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: horizontalSizeClass == .regular)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }
