@@ -141,6 +141,14 @@ class PageViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+        
+        model.$serviceStatus
+            .sink { [weak self] status in
+                if let self = self, case let .bad(message) = status {
+                    Banner.show(with: .error, message: message.text, image: nil, sticky: true, in: self)
+                }
+            }
+            .store(in: &cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
