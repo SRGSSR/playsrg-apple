@@ -69,8 +69,11 @@ extension LiveMediaViewModel {
         if let channel = channel {
             return program?.title ?? channel.title
         }
+        else if let media = media {
+            return MediaDescription.title(for: media)
+        }
         else {
-            return MediaDescription.title(for: media) ?? ""
+            return ""
         }
     }
     
@@ -94,8 +97,11 @@ extension LiveMediaViewModel {
             }
             return label
         }
-        else {
+        else if let media = media {
             return MediaDescription.accessibilityLabel(for: media)
+        }
+        else {
+            return nil
         }
     }
     

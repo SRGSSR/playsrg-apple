@@ -48,9 +48,7 @@ struct MediaDescription {
         }
     }
     
-    static func title(for media: SRGMedia?, style: Style = .date) -> String? {
-        guard let media = media else { return nil }
-        
+    static func title(for media: SRGMedia, style: Style = .date) -> String {
         switch style {
         case .show:
             guard let showTitle = media.show?.title else { return media.title }
@@ -65,9 +63,8 @@ struct MediaDescription {
         }
     }
     
-    static func subtitle(for media: SRGMedia?, style: Style = .date) -> String? {
-        guard let media = media else { return nil }
-        guard media.contentType != .livestream else { return "" }
+    static func subtitle(for media: SRGMedia, style: Style = .date) -> String? {
+        guard media.contentType != .livestream else { return nil }
         
         switch style {
         case .show:
@@ -77,18 +74,16 @@ struct MediaDescription {
         }
     }
     
-    static func summary(for media: SRGMedia?) -> String? {
-        guard let media = media else { return nil }
+    static func summary(for media: SRGMedia) -> String? {
         return media.summary
     }
     
-    static func duration(for media: SRGMedia?) -> Double? {
-        guard let media = media, media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
+    static func duration(for media: SRGMedia) -> Double? {
+        guard media.contentType != .livestream && media.contentType != .scheduledLivestream else { return nil }
         return media.duration / 1000
     }
     
-    static func availability(for media: SRGMedia?) -> String? {
-        guard let media = media else { return nil }
+    static func availability(for media: SRGMedia) -> String? {
         let now = Date()
         switch media.timeAvailability(at: now) {
         case .notAvailableAnymore:
@@ -104,8 +99,7 @@ struct MediaDescription {
         }
     }
     
-    static func accessibilityLabel(for media: SRGMedia?) -> String? {
-        guard let media = media else { return nil }
+    static func accessibilityLabel(for media: SRGMedia) -> String? {
         if let showTitle = media.show?.title, !media.title.lowercased().contains(showTitle.lowercased()) {
             return showTitle.appending(", \(media.title)")
         }
@@ -114,9 +108,7 @@ struct MediaDescription {
         }
     }
     
-    static func availabilityBadgeProperties(for media: SRGMedia?) -> (text: String, color: Color)? {
-        guard let media = media else { return nil }
-        
+    static func availabilityBadgeProperties(for media: SRGMedia) -> (text: String, color: Color)? {
         if media.contentType == .livestream {
             return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), Color.srgLightRed)
         }
