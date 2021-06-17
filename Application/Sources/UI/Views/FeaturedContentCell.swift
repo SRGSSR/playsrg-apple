@@ -58,6 +58,14 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
         }
     }
     
+    private var detailed: Bool {
+        #if os(iOS)
+        return layout == .highlight || horizontalSizeClass == .regular
+        #else
+        return true
+        #endif
+    }
+    
     var body: some View {
         Group {
             #if os(tvOS)
@@ -66,7 +74,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     content.visualView()
                         .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                         .layoutPriority(1)
-                    FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: true)
+                    FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
                         .padding(.horizontal, horizontalPadding)
                         .padding(.vertical, verticalPadding)
                 }
@@ -81,7 +89,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .layoutPriority(1)
-                FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: horizontalSizeClass == .regular)
+                FeaturedDescriptionView(content: content, alignment: descriptionAlignment, detailed: detailed)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.vertical, verticalPadding)
             }
