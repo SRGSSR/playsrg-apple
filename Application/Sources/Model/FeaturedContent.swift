@@ -35,18 +35,22 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     var introduction: String? {
+        guard let media = media else { return nil }
         return MediaDescription.subtitle(for: media, style: .show)
     }
     
     var title: String? {
+        guard let media = media else { return nil }
         return MediaDescription.title(for: media, style: .show)
     }
     
     var summary: String? {
+        guard let media = media else { return nil }
         return MediaDescription.summary(for: media)
     }
     
     var accessibilityLabel: String? {
+        guard let media = media else { return nil }
         return MediaDescription.accessibilityLabel(for: media)
     }
     

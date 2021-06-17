@@ -73,7 +73,7 @@ struct MediaVisualView: View {
                 if let youthProtectionColor = media?.youthProtectionColor {
                     YouthProtectionBadge(color: youthProtectionColor)
                 }
-                if let duration = MediaDescription.duration(for: media) {
+                if let media = media, let duration = MediaDescription.duration(for: media) {
                     DurationBadge(duration: duration)
                 }
             }

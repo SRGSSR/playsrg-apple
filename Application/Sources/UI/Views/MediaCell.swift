@@ -104,13 +104,25 @@ struct MediaCell: View {
         let media: SRGMedia?
         let style: MediaDescription.Style
         
+        private var subtitle: String? {
+            guard let media = media else { return .placeholder(length: 15) }
+            return MediaDescription.subtitle(for: media, style: style)
+        }
+        
+        private var title: String {
+            guard let media = media else { return .placeholder(length: 8) }
+            return MediaDescription.title(for: media, style: style)
+        }
+        
         var body: some View {
             VStack(alignment: .leading) {
-                Text(MediaDescription.subtitle(for: media, style: style) ?? .placeholder(length: 15))
-                    .srgFont(.subtitle1)
-                    .lineLimit(2)
-                    .foregroundColor(Color.srgGray4)
-                Text(MediaDescription.title(for: media, style: style) ?? .placeholder(length: 8))
+                if let subtitle = subtitle {
+                    Text(subtitle)
+                        .srgFont(.subtitle1)
+                        .lineLimit(2)
+                        .foregroundColor(Color.srgGray4)
+                }
+                Text(title)
                     .srgFont(.H4)
                     .lineLimit(2)
                     .foregroundColor(Color.srgGray5)
@@ -135,6 +147,7 @@ extension MediaCell {
 
 private extension MediaCell {
     var accessibilityLabel: String? {
+        guard let media = media else { return nil }
         return MediaDescription.accessibilityLabel(for: media)
     }
     
@@ -186,6 +199,7 @@ struct MediaCell_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .vertical)
+            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.rich), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .vertical)
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .vertical)
@@ -195,6 +209,7 @@ struct MediaCell_Previews: PreviewProvider {
         #if os(iOS)
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
+            MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.rich), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.overflow), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
