@@ -42,17 +42,17 @@ NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
 {
     switch (imagePlaceholder) {
         case ImagePlaceholderMedia: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media" ofType:@"pdf"];
             break;
         }
             
         case ImagePlaceholderMediaList: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media_list-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media_list" ofType:@"pdf"];
             break;
         }
             
         case ImagePlaceholderNotification: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_notification-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_notification" ofType:@"pdf"];
             break;
         }
             
