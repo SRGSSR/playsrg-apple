@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RSI_Retedue.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RSI_Retedue-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_rsiDUE_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

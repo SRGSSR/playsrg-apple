@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_srf3.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "logo_srf3-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logo_srf3-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

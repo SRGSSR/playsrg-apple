@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RadioSwissJazz.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RadioSwissJazz-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "RadioSwissJazz_big.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

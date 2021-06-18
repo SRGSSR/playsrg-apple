@@ -1374,7 +1374,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     self.radioHomeView.hidden = (radioChannel == nil);
-    self.radioHomeButtonImageView.image = RadioChannelLogo22Image(radioChannel);
+    self.radioHomeButtonImageView.image = RadioChannelLogoImage(radioChannel);
     self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
     
     // Avoid ugly animation when setting the title, see https://stackoverflow.com/a/22101732/760435

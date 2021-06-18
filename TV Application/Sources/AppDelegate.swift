@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 7)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
         viewControllers.append(profileViewController)

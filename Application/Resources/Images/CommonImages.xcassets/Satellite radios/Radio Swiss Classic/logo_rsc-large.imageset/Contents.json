@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RadioSwissClassic.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RadioSwissClassic-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "RadioSwissClassic_big.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

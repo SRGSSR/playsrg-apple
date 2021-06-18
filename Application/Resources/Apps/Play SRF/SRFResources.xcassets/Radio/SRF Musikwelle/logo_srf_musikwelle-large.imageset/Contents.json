@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "SRF_radioMusicWelle.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "SRF_radioMusicWelle-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_MW_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

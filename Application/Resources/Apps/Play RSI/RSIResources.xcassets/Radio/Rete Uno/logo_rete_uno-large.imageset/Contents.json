@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RSI_Reteuno.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RSI_Reteuno-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_rsiUNO_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

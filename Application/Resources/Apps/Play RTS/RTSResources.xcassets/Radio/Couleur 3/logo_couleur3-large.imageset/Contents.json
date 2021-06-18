@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RTS_radio3.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RTS_radio3-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "SecondaryLogos - Couleur3_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
