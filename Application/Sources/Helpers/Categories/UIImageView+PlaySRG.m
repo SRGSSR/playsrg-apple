@@ -21,12 +21,12 @@
 
 + (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
 {
-    return [self play_animatedImageViewNamed:@"loading-48" withTintColor:tintColor duration:1.];
+    return [self play_animatedImageViewNamed:@"loading_animation" withTintColor:tintColor duration:1.];
 }
 
 + (UIImageView *)play_loadingImageView90WithTintColor:(UIColor *)tintColor
 {
-    return [self play_animatedImageViewNamed:@"loading-90" withTintColor:tintColor duration:1.];
+    return [self play_animatedImageViewNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 // Expect a sequence of images named "name-N", where N must begin at 0. Stops when no image is found for some N
@@ -64,36 +64,36 @@
 
 - (void)play_setLoadingAnimation90WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"loading-90" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Downloading animations
 
 - (void)play_setDownloadAnimation16WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-16" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
 }
 
 - (void)play_setDownloadAnimation22WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-22" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation" withTintColor:tintColor duration:1.];
 }
 
 - (void)play_setDownloadAnimation48WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-48" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Waveform animation
 
 - (void)play_setWaveformAnimation34WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"waveform-34" withTintColor:tintColor duration:0.96];
+    [self play_setAnimationImagesNamed:@"waveform_animation" withTintColor:tintColor duration:0.96];
 }
 
 - (void)play_setPlayAnimation34WithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"play-34" withTintColor:tintColor duration:1.52];
+    [self play_setAnimationImagesNamed:@"play_animation" withTintColor:tintColor duration:1.52];
 }
 
 #pragma mark Animation lifecycle
