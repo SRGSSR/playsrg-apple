@@ -25,7 +25,7 @@ struct ShowAccessCell: View {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
                 } label: {
                     HStack {
-                        Image("atoz-22")
+                        Image("a_to_z")
                         Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
                             .srgFont(.button)
                     }
@@ -40,7 +40,7 @@ struct ShowAccessCell: View {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
                 } label: {
                     HStack {
-                        Image("calendar-22")
+                        Image("calendar")
                         Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))
                             .srgFont(.button)
                     }

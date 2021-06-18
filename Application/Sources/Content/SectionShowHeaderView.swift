@@ -148,7 +148,7 @@ struct SectionShowHeaderView: View {
                     firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
                 } label: {
                     HStack(spacing: 15) {
-                        Image("episodes-22")
+                        Image("episodes")
                         Text(show.title)
                             .srgFont(.button)
                     }

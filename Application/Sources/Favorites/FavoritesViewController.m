@@ -274,10 +274,10 @@
 {
     // Remark: No test for self.loading since a custom view is used in such cases
     if (self.lastRequestError) {
-        return [UIImage imageNamed:@"error-90"];
+        return [UIImage imageNamed:@"error-background"];
     }
     else {
-        return [UIImage imageNamed:@"favorite-90"];
+        return [UIImage imageNamed:@"favorite-background"];
     }
 }
 
@@ -361,7 +361,7 @@
         
         completionHandler(YES);
     }];
-    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
     return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
@@ -450,7 +450,7 @@
         self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeSubscriptions:)];

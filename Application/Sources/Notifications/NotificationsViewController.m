@@ -255,7 +255,7 @@
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"subscription-90"];
+    return [UIImage imageNamed:@"subscription-background"];
 }
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
@@ -330,7 +330,7 @@
         
         completionHandler(YES);
     }];
-    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
     return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 

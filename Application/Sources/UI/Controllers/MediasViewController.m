@@ -20,7 +20,7 @@
 {
     [super viewDidLoad];
     
-    self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
+    self.emptyCollectionImage = [UIImage imageNamed:@"media-background"];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)

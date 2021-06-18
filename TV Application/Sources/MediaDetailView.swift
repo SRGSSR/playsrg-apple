@@ -112,10 +112,10 @@ struct MediaDetailView: View {
                     Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color.srgBlue)
                 }
                 if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
-                    AttributeView(icon: "subtitles_off-22", values: subtitleLanguages)
+                    AttributeView(icon: "subtitle_tracks", values: subtitleLanguages)
                 }
                 if let audioLanguages = model.media?.play_audioLanguages, !audioLanguages.isEmpty {
-                    AttributeView(icon: "audios-22", values: audioLanguages)
+                    AttributeView(icon: "audio_tracks", values: audioLanguages)
                 }
             }
         }
@@ -186,14 +186,14 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(alignment: .top, spacing: 30) {
                 // TODO: 22 icon?
-                LabeledButton(icon: "play-50", label: playButtonLabel) {
+                LabeledButton(icon: "play", label: playButtonLabel) {
                     if let media = model.media {
                         navigateToMedia(media, play: true)
                     }
                 }
                 if let action = model.watchLaterAllowedAction, action != .none, let isRemoval = (action == .remove) {
                     // TODO: Write in a better way
-                    LabeledButton(icon: isRemoval ? "watch_later_full-22" : "watch_later-22",
+                    LabeledButton(icon: isRemoval ? "watch_later_full" : "watch_later",
                                   label: isRemoval
                                     ? NSLocalizedString("Later", comment: "Watch later or listen later button label in media detail view when a media is in the later list")
                                     : model.media?.mediaType == .audio
@@ -208,7 +208,7 @@ struct MediaDetailView: View {
                     }
                 }
                 if let show = model.media?.show {
-                    LabeledButton(icon: "episodes-22", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
+                    LabeledButton(icon: "episodes", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the media detail view")) {
                         navigateToShow(show)
                     }
                 }

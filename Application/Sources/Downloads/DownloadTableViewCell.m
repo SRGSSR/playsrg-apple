@@ -221,7 +221,7 @@
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
@@ -239,7 +239,7 @@
             self.subtitleLabel.text = [NSByteCountFormatter stringFromByteCount:self.download.size countStyle:NSByteCountFormatterCountStyleFile];
             
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
@@ -247,7 +247,7 @@
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }

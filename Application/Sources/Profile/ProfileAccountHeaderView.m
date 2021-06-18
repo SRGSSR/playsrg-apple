@@ -125,7 +125,7 @@
     
     SRGIdentityService *identityService = SRGIdentityService.currentIdentityService;
     UIColor *color = identityService.loggedIn ? UIColor.whiteColor : UIColor.srg_gray4Color;
-    NSString *placeholderImageName = identityService.loggedIn ? @"account_logged_in_icon-60" : @"account_logged_out_icon-60";
+    NSString *placeholderImageName = identityService.loggedIn ? @"account_logged_in_icon" : @"account_logged_out_icon";
     UIImage *placeholderImage = [[UIImage imageNamed:placeholderImageName] srg_imageTintedWithColor:color];
     
     NSString *emailAddress = identityService.emailAddress;

@@ -76,7 +76,7 @@
     
     NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:self.show];
     if (sharingURL) {
-        UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share-22"]
+        UIBarButtonItem *shareBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"]
                                                                                style:UIBarButtonItemStylePlain
                                                                               target:self
                                                                               action:@selector(shareContent:)];
@@ -206,7 +206,7 @@
     // so that the show title can be read)
     if ([ShowHeaderView heightForShow:self.show withSize:size] == 0.f) {
         self.title = self.show.title;
-        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-background"];
     }
     else {
         self.title = UIAccessibilityIsVoiceOverRunning() ? self.show.title : nil;

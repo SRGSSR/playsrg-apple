@@ -271,7 +271,7 @@
     // Remark: No test for self.loading since a custom view is used in such cases. An error image is only displayed
     // when an empty image has been set (so that the empty layout always has images or not)
     if (self.lastRequestError && self.emptyCollectionImage) {
-        return [UIImage imageNamed:@"error-90"];
+        return [UIImage imageNamed:@"error-background"];
     }
     else {
         return self.emptyCollectionImage;

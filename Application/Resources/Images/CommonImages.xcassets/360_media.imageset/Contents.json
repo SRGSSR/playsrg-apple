@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "360-1.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "360-2.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "360-3.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

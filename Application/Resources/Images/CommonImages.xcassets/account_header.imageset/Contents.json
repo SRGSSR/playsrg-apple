@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "profile_header-91.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "profile_header-92.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

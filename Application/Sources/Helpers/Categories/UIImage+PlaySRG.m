@@ -89,18 +89,18 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
 {
     switch (blockingReason) {
         case SRGBlockingReasonGeoblocking: {
-            return [UIImage imageNamed:@"geoblocked-25"];
+            return [UIImage imageNamed:@"geoblocked"];
             break;
         }
             
         case SRGBlockingReasonLegal: {
-            return [UIImage imageNamed:@"legal-25"];
+            return [UIImage imageNamed:@"legal"];
             break;
         }
             
         case SRGBlockingReasonAgeRating12:
         case SRGBlockingReasonAgeRating18: {
-            return [UIImage imageNamed:@"age_rating-25"];
+            return [UIImage imageNamed:@"age_rating"];
             break;
         }
             
@@ -112,7 +112,7 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
         }
             
         default: {
-            return [UIImage imageNamed:@"generic_blocked-25"];
+            return [UIImage imageNamed:@"generic_blocked"];
             break;
         }
     }

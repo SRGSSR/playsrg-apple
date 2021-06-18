@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "nomedia.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "nomedia-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "genericerror.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

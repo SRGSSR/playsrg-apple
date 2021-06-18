@@ -23,10 +23,10 @@ struct SubscriptionButton: View {
     
     private var imageName: String {
         if isPushServiceEnabled, let show = show {
-            return FavoritesIsSubscribedToShow(show) ? "subscription_full-22" : "subscription-22"
+            return FavoritesIsSubscribedToShow(show) ? "subscription_full" : "subscription"
         }
         else {
-            return "subscription_disabled-22"
+            return "subscription_disabled"
         }
     }
     

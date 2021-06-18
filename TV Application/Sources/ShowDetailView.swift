@@ -37,14 +37,14 @@ struct ShowDetailView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-background")
             return [Row(section: .information, items: [item])]
         case let .loaded(medias: medias):
             if !medias.isEmpty {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-background")
                 return [Row(section: .information, items: [item])]
             }
         }
@@ -197,7 +197,7 @@ struct ShowDetailView: View {
                     Spacer()
                 }
                 Spacer()
-                LabeledButton(icon: isFavorite ? "favorite_full-22" : "favorite-22",
+                LabeledButton(icon: isFavorite ? "favorite_full" : "favorite",
                               label: isFavorite
                                 ? NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
                                 : NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited"),

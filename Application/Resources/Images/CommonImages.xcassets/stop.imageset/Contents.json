@@ -1,0 +1,19 @@
+{
+  "images" : [
+    {
+      "filename" : "stop_50.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "stop_50-1.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

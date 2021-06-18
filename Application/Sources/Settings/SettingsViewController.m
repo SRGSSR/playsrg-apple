@@ -95,7 +95,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self updateSettingsVisibility];
     
     if (self.navigationController.viewControllers.firstObject == self) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close"]
                                                                  landscapeImagePhone:nil
                                                                                style:UIBarButtonItemStyleDone
                                                                               target:self

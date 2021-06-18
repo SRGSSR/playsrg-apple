@@ -119,7 +119,7 @@
         self.emptyCollectionImage = nil;
     }
     else {
-        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-background"];
     }
     
     [self.collectionView reloadEmptyDataSet];

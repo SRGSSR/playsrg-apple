@@ -88,7 +88,7 @@ class SectionViewController: UIViewController {
         
         #if os(iOS)
         if model.section.properties.sharingItem != nil {
-            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share-22"),
+            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
                                                   style: .plain,
                                                   target: self,
                                                   action: #selector(self.shareContent(_:)))

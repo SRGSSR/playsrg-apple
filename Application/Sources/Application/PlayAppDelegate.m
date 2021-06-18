@@ -261,7 +261,7 @@ static void *s_kvoContext = &s_kvoContext;
                 
                 [Banner showWithStyle:BannerStyleInfo
                               message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
-                                image:[UIImage imageNamed:@"settings-22"]
+                                image:[UIImage imageNamed:@"settings"]
                                sticky:NO
                      inViewController:nil];
             }
@@ -938,7 +938,7 @@ static void *s_kvoContext = &s_kvoContext;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [Banner showWithStyle:BannerStyleWarning
                           message:NSLocalizedString(@"You have been automatically logged out. Login again to keep your data synchronized across devices.", @"Notification displayed when the user has been logged out unexpectedly.")
-                            image:[UIImage imageNamed:@"account-22"]
+                            image:[UIImage imageNamed:@"account"]
                            sticky:YES
                  inViewController:nil];
         });

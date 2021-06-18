@@ -64,7 +64,7 @@
     
     self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the later list");
     self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device does not support 3D touch");
-    self.emptyCollectionImage = [UIImage imageNamed:@"watch_later-90"];
+    self.emptyCollectionImage = [UIImage imageNamed:@"watch_later_background"];
     
     [self.tableView registerReusableMediaCell];
     
@@ -237,7 +237,7 @@
         
         completionHandler(YES);
     }];
-    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
     return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
@@ -328,7 +328,7 @@
         self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeWatchLater:)];

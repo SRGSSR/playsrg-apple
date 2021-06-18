@@ -1,0 +1,19 @@
+{
+  "images" : [
+    {
+      "filename" : "google_cast_connected-22.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "google_cast_connected-23.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

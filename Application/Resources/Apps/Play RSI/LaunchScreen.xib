@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,12 +13,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_play_rsi-160" translatesAutoresizingMaskIntoConstraints="NO" id="Dy3-kV-poJ" userLabel="Logo Image View">
-                    <rect key="frame" x="170" y="170" width="139" height="160"/>
+                    <rect key="frame" x="170.5" y="160" width="139" height="160"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_srgssr-26" translatesAutoresizingMaskIntoConstraints="NO" id="zo2-SA-ZKu" userLabel="SRGSSR Image View">
-                    <rect key="frame" x="202" y="446" width="76" height="26"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_srgssr" translatesAutoresizingMaskIntoConstraints="NO" id="zo2-SA-ZKu" userLabel="SRGSSR Image View">
+                    <rect key="frame" x="176" y="344" width="128" height="128"/>
                 </imageView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="sLI-Jm-tCh"/>
             <color key="backgroundColor" red="0.68627450980000004" green="0.01176470588" blue="0.1176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Dy3-kV-poJ" firstAttribute="centerX" secondItem="sLI-Jm-tCh" secondAttribute="centerX" id="PZ9-2c-Xhi"/>
@@ -32,12 +29,11 @@
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="sLI-Jm-tCh"/>
             <point key="canvasLocation" x="404" y="445"/>
         </view>
     </objects>
     <resources>
         <image name="logo_play_rsi-160" width="139" height="160"/>
-        <image name="logo_srgssr-26" width="76" height="26"/>
+        <image name="logo_srgssr" width="128" height="128"/>
     </resources>
 </document>

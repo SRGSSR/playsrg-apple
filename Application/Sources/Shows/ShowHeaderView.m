@@ -133,7 +133,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
 - (void)updateFavoriteStatus
 {
     BOOL isFavorite = FavoritesContainsShow(self.show);
-    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full-22"] : [UIImage imageNamed:@"show_favorite-22"] forState:UIControlStateNormal];
+    [self.favoriteImageButton setImage:isFavorite ? [UIImage imageNamed:@"show_favorite_full"] : [UIImage imageNamed:@"show_favorite"] forState:UIControlStateNormal];
     
     NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                   NSForegroundColorAttributeName : UIColor.whiteColor };
@@ -151,7 +151,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
     
     if (PushService.sharedService.enabled) {
         BOOL subscribed = FavoritesIsSubscribedToShow(self.show);
-        [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full-22"] : [UIImage imageNamed:@"show_subscription-22"] forState:UIControlStateNormal];
+        [self.subscriptionImageButton setImage:subscribed ? [UIImage imageNamed:@"show_subscription_full"] : [UIImage imageNamed:@"show_subscription"] forState:UIControlStateNormal];
         
         NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };
@@ -161,7 +161,7 @@ static const UILayoutPriority LogoImageViewAspectRatioConstraintLowPriority = 70
         self.subscriptionLabelButton.accessibilityLabel = subscribed ? PlaySRGAccessibilityLocalizedString(@"Disable notifications for show", @"Show unsubscription label") : PlaySRGAccessibilityLocalizedString(@"Enable notifications for show", @"Show subscription label");
     }
     else {
-        [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled-22"] forState:UIControlStateNormal];
+        [self.subscriptionImageButton setImage:[UIImage imageNamed:@"show_subscription_disabled"] forState:UIControlStateNormal];
         
         NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle2],
                                       NSForegroundColorAttributeName : UIColor.whiteColor };

@@ -63,7 +63,7 @@
 {
     if (self = [super init]) {
         self.settings = [self supportedMediaSearchSettingsFromSettings:nil];
-        self.emptyCollectionImage = [UIImage imageNamed:@"search-90"];
+        self.emptyCollectionImage = [UIImage imageNamed:@"search-background"];
     }
     return self;
 }
@@ -333,7 +333,7 @@
         NSAssert([customView isKindOfClass:UIButton.class], @"Expect a button by construction");
         
         UIButton *filtersButton = customView;
-        UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on-22"] : [UIImage imageNamed:@"filter_off-22"];
+        UIImage *image = [SearchViewController containsAdvancedSettings:self.settings] ? [UIImage imageNamed:@"filter_on"] : [UIImage imageNamed:@"filter_off"];
         [filtersButton setImage:image forState:UIControlStateNormal];
     }
     else {
