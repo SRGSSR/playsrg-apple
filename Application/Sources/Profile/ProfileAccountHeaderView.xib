@@ -23,8 +23,8 @@
                         <constraint firstAttribute="width" constant="79" id="wME-iy-LJV"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="identity_service_icon-35" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-jA-nYl" userLabel="Identity Service Image View">
-                    <rect key="frame" x="73" y="13" width="35" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="identity_service_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-jA-nYl" userLabel="Identity Service Image View">
+                    <rect key="frame" x="73" y="-80" width="128" height="128"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;account&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-1z-Zd3" userLabel="Account Label">
                     <rect key="frame" x="120" y="39.5" width="249" height="17"/>
@@ -59,6 +59,6 @@
     <resources>
         <image name="account_header" width="128" height="128"/>
         <image name="account_logged_out_icon" width="128" height="128"/>
-        <image name="identity_service_icon-35" width="35" height="35"/>
+        <image name="identity_service_icon" width="128" height="128"/>
     </resources>
 </document>

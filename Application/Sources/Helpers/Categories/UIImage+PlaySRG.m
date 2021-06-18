@@ -67,12 +67,12 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
 {
     switch (youthProtectionColor) {
         case SRGYouthProtectionColorYellow: {
-            return [UIImage imageNamed:@"youth_protection_yellow-18"];
+            return [UIImage imageNamed:@"youth_protection_yellow"];
             break;
         }
             
         case SRGYouthProtectionColorRed: {
-            return [UIImage imageNamed:@"youth_protection_red-18"];
+            return [UIImage imageNamed:@"youth_protection_red"];
             break;
         }
             

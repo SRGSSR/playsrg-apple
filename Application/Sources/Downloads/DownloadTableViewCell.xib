@@ -32,7 +32,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qiI-HV-VRc">
                                 <rect key="frame" x="84.5" y="61" width="60" height="18"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" image="youth_protection_yellow-18" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Kb-K7H">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="18" placeholderIntrinsicHeight="18" image="youth_protection_yellow" translatesAutoresizingMaskIntoConstraints="NO" id="waL-Kb-K7H">
                                         <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
@@ -143,6 +143,6 @@
     </objects>
     <resources>
         <image name="downloadable" width="128" height="128"/>
-        <image name="youth_protection_yellow-18" width="18" height="18"/>
+        <image name="youth_protection_yellow" width="128" height="128"/>
     </resources>
 </document>
