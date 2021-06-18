@@ -383,7 +383,7 @@
     else {
         UICollectionView *collectionView = currentDailyMediasViewController.collectionView;
         UIEdgeInsets contentInsets = ContentInsetsForScrollView(collectionView);
-        return velocity.y > 0 && (collectionView.contentOffset.y == -contentInsets.top);
+        return velocity.y > 0 && (collectionView.contentOffset.y - collectionView.contentInset.top == -contentInsets.top);
     }
 }
 
