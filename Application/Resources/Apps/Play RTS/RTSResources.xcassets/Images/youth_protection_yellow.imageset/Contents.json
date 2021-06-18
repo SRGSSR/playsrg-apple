@@ -1,11 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "youth_protection_yellow-18.pdf",
-      "idiom" : "universal"
+      "filename" : "carre_jaune.pdf",
+      "idiom" : "iphone"
     },
     {
-      "filename" : "carre_jaune.pdf",
+      "filename" : "carre_jaune-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "carre_jaune-2.pdf",
       "idiom" : "tv"
     }
   ],
