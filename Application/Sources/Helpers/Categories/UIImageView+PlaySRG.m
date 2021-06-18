@@ -19,12 +19,12 @@
 
 #pragma mark Class methods
 
-+ (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
++ (UIImageView *)play_loadingImageViewWithTintColor:(UIColor *)tintColor
 {
     return [self play_animatedImageViewNamed:@"loading_animation" withTintColor:tintColor duration:1.];
 }
 
-+ (UIImageView *)play_loadingImageView90WithTintColor:(UIColor *)tintColor
++ (UIImageView *)play_largeLoadingImageViewWithTintColor:(UIColor *)tintColor
 {
     return [self play_animatedImageViewNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
@@ -62,36 +62,36 @@
 
 #pragma mark Loading animations
 
-- (void)play_setLoadingAnimation90WithTintColor:(UIColor *)tintColor
+- (void)play_setLargeLoadingAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Downloading animations
 
-- (void)play_setDownloadAnimation16WithTintColor:(UIColor *)tintColor
+- (void)play_setSmallDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
 }
 
-- (void)play_setDownloadAnimation22WithTintColor:(UIColor *)tintColor
+- (void)play_setDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading_animation" withTintColor:tintColor duration:1.];
 }
 
-- (void)play_setDownloadAnimation48WithTintColor:(UIColor *)tintColor
+- (void)play_setLargeDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"downloading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Waveform animation
 
-- (void)play_setWaveformAnimation34WithTintColor:(UIColor *)tintColor
+- (void)play_setWaveformAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"waveform_animation" withTintColor:tintColor duration:0.96];
 }
 
-- (void)play_setPlayAnimation34WithTintColor:(UIColor *)tintColor
+- (void)play_setPlayAnimationWithTintColor:(UIColor *)tintColor
 {
     [self play_setAnimationImagesNamed:@"play_animation" withTintColor:tintColor duration:1.52];
 }

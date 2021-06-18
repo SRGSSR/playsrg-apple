@@ -91,7 +91,7 @@ static const CGFloat SongTableViewMargin = 42.f;
     self.waveformView.hidden = YES;
     self.rightMarginView.hidden = NO;
     
-    [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    [self.waveformImageView play_setWaveformAnimationWithTintColor:UIColor.whiteColor];
     
     UILongPressGestureRecognizer *longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(copySongToPasteboard:)];
     [self addGestureRecognizer:longPressGestureRecognizer];

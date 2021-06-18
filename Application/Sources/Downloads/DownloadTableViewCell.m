@@ -230,7 +230,7 @@
             NSProgress *progress = [Download currentlyKnownProgressForDownload:self.download] ?: [NSProgress progressWithTotalUnitCount:10]; // Display 0% if nothing
             self.subtitleLabel.text = [progress localizedDescription];
             
-            [self.downloadStatusImageView play_setDownloadAnimation16WithTintColor:tintColor];
+            [self.downloadStatusImageView play_setSmallDownloadAnimationWithTintColor:tintColor];
             [self.downloadStatusImageView startAnimating];
             break;
         }

@@ -87,7 +87,7 @@
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
+    self.loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_gray5Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
     
     [self updateInterfaceForEditionAnimated:NO];

@@ -1270,7 +1270,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
             
         case DownloadStateDownloading: {
-            [self.downloadButton.imageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
+            [self.downloadButton.imageView play_setLargeDownloadAnimationWithTintColor:UIColor.whiteColor];
             [self.downloadButton.imageView startAnimating];
             
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Stop downloading", @"A download button label");

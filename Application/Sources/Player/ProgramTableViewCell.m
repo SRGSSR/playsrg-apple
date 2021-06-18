@@ -49,7 +49,7 @@
     self.disabledOverlayView.hidden = YES;
     self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
-    [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    [self.waveformImageView play_setWaveformAnimationWithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
 }
 
@@ -92,10 +92,10 @@
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
     
     if (mediaType == SRGMediaTypeVideo) {
-        [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
+        [self.waveformImageView play_setPlayAnimationWithTintColor:UIColor.whiteColor];
     }
     else {
-        [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+        [self.waveformImageView play_setWaveformAnimationWithTintColor:UIColor.whiteColor];
     }
     
     [self updateWaveformAnimation];

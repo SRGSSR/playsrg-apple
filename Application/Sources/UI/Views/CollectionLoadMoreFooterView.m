@@ -18,7 +18,7 @@
     
     self.backgroundColor = UIColor.clearColor;
     
-    UIImageView *loadingImageView = [UIImageView play_loadingImageView48WithTintColor:UIColor.srg_gray5Color];
+    UIImageView *loadingImageView = [UIImageView play_loadingImageViewWithTintColor:UIColor.srg_gray5Color];
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:loadingImageView];
     
