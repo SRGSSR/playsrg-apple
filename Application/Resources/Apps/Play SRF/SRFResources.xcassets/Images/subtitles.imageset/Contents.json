@@ -1,15 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "subtitles-24.pdf",
+      "filename" : "subtitles-ge.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "subtitles-25.pdf",
+      "filename" : "subtitles-ge-1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "subtitles-26.pdf",
+      "filename" : "subtitles-ge-2.pdf",
       "idiom" : "tv"
     }
   ],
