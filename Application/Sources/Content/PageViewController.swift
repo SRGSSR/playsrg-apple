@@ -284,7 +284,7 @@ extension PageViewController: UICollectionViewDelegate {
         
         switch item.wrappedValue {
         case let .item(wrappedItem):
-            return ContextMenu.configuration(for: wrappedItem)
+            return ContextMenu.configuration(for: wrappedItem, in: self)
         default:
             return nil
         }
