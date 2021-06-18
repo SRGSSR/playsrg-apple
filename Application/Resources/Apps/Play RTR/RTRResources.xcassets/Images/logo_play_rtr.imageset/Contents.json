@@ -2,7 +2,11 @@
   "images" : [
     {
       "filename" : "playrtr_160.pdf",
-      "idiom" : "universal"
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "playrtr_160-1.pdf",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
