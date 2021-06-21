@@ -276,13 +276,6 @@ extension PageViewController: UICollectionViewDelegate {
             }
         }
     }
-    #endif
-    
-    #if os(tvOS)
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    #endif
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let snapshot = dataSource.snapshot()
@@ -296,6 +289,13 @@ extension PageViewController: UICollectionViewDelegate {
             return nil
         }
     }
+    #endif
+    
+    #if os(tvOS)
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    #endif
 }
 
 extension PageViewController: UIScrollViewDelegate {
