@@ -283,6 +283,19 @@ extension PageViewController: UICollectionViewDelegate {
         return false
     }
     #endif
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item.wrappedValue {
+        case let .item(wrappedItem):
+            return ContextMenu.configuration(for: wrappedItem)
+        default:
+            return nil
+        }
+    }
 }
 
 extension PageViewController: UIScrollViewDelegate {

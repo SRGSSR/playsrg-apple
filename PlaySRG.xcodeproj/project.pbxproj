@@ -533,6 +533,11 @@
 		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0E374C2680B13A008FC923 /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenus.swift */; };
+		6F0E374D2680B13A008FC923 /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenus.swift */; };
+		6F0E374E2680B13A008FC923 /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenus.swift */; };
+		6F0E374F2680B13A008FC923 /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenus.swift */; };
+		6F0E37502680B13A008FC923 /* ContextMenus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenus.swift */; };
 		6F0E39CD25558A0F004C3A12 /* ShowDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailViewModel.swift */; };
 		6F0E39CE25558A0F004C3A12 /* ShowDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailViewModel.swift */; };
 		6F0E39CF25558A0F004C3A12 /* ShowDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E39CC25558A0F004C3A12 /* ShowDetailViewModel.swift */; };
@@ -2337,6 +2342,7 @@
 		6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RSI notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTR notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play SWI notification service extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F0E374B2680B139008FC923 /* ContextMenus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextMenus.swift; sourceTree = "<group>"; };
 		6F0E39CC25558A0F004C3A12 /* ShowDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowDetailViewModel.swift; sourceTree = "<group>"; };
 		6F0E8D961F14F62F002014C3 /* SRGChannel+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGChannel+PlaySRG.h"; sourceTree = "<group>"; };
 		6F0E8D971F14F62F002014C3 /* SRGChannel+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGChannel+PlaySRG.m"; sourceTree = "<group>"; };
@@ -3792,6 +3798,7 @@
 		6F475F9E1EB37BC6003021EA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6F0E374B2680B139008FC923 /* ContextMenus.swift */,
 				6FF8F155250609CF009A741F /* MediaDescription.swift */,
 				6F475F9F1EB37BC6003021EA /* ModalTransition.h */,
 				6F475FA01EB37BC6003021EA /* ModalTransition.m */,
@@ -7488,6 +7495,7 @@
 				6FCE7AC0260367B90037A861 /* HostViews.swift in Sources */,
 				E6E2DF1A1D6ACA8B00791EDE /* ShowViewController.m in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
+				6F0E374C2680B13A008FC923 /* ContextMenus.swift in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
@@ -7687,6 +7695,7 @@
 				086320FC2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
 				6F8144152008FA970075F52F /* GoogleCast.m in Sources */,
 				086F8D5622984B29001BE2F4 /* Favorites.m in Sources */,
+				6F0E374D2680B13A008FC923 /* ContextMenus.swift in Sources */,
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -7884,6 +7893,7 @@
 				086320FD2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
 				6F8144162008FA970075F52F /* GoogleCast.m in Sources */,
 				086F8D5722984B29001BE2F4 /* Favorites.m in Sources */,
+				6F0E374E2680B13A008FC923 /* ContextMenus.swift in Sources */,
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -8081,6 +8091,7 @@
 				086320FE2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
 				6F8144172008FA970075F52F /* GoogleCast.m in Sources */,
 				086F8D5822984B29001BE2F4 /* Favorites.m in Sources */,
+				6F0E374F2680B13A008FC923 /* ContextMenus.swift in Sources */,
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -8278,6 +8289,7 @@
 				086320FF2258C6D000C719A6 /* WatchLaterViewController.m in Sources */,
 				6F8144182008FA970075F52F /* GoogleCast.m in Sources */,
 				086F8D5922984B29001BE2F4 /* Favorites.m in Sources */,
+				6F0E37502680B13A008FC923 /* ContextMenus.swift in Sources */,
 				6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9C1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08E0218B126700B2AF2C /* Recommendation.m in Sources */,
