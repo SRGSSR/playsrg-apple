@@ -750,7 +750,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self updateAppearanceWithDetailsExpanded:self.detailsExpanded];
     [self reloadDetailsWithMedia:media mainChapterMedia:mainChapterMedia];
     
-    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
+    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-large"] : [UIImage imageNamed:@"close-large"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
     self.relatedContentsTitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH3];
@@ -841,12 +841,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             if (media.mediaType == SRGMediaTypeAudio) {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio"];
             }
             else {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video"];
             }
             self.viewCountImageView.hidden = NO;
             self.viewCountLabel.hidden = NO;
@@ -1236,11 +1236,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.watchLaterButton.hidden = NO;
     
     if (action == WatchLaterActionRemove) {
-        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
+        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-large"] forState:UIControlStateNormal];
         self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete from \"Later\" list", @"Media deletion from later list label");
     }
     else {
-        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
+        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-large"] forState:UIControlStateNormal];
         self.watchLaterButton.accessibilityLabel = (media.mediaType == SRGMediaTypeAudio) ? PlaySRGAccessibilityLocalizedString(@"Listen later", @"Media addition for an audio to later list label") : PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition for a video to later list label");
     }
 }
@@ -1264,13 +1264,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended:{
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadButton.imageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
+            [self.downloadButton.imageView play_setLargeDownloadAnimationWithTintColor:UIColor.whiteColor];
             [self.downloadButton.imageView startAnimating];
             
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Stop downloading", @"A download button label");
@@ -1279,14 +1279,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             
         case DownloadStateDownloaded: {
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete download", @"A download button label");
             break;
         }
             
         default: {
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Download", @"A download button label");
             break;
         }
@@ -1296,7 +1296,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)updateFavoriteStatusForShow:(SRGShow *)show
 {
     BOOL isFavorite = FavoritesContainsShow(show);
-    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"];
+    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full"] : [UIImage imageNamed:@"favorite"];
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
@@ -1374,7 +1374,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     self.radioHomeView.hidden = (radioChannel == nil);
-    self.radioHomeButtonImageView.image = RadioChannelLogo22Image(radioChannel);
+    self.radioHomeButtonImageView.image = RadioChannelLogoImage(radioChannel);
     self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
     
     // Avoid ugly animation when setting the title, see https://stackoverflow.com/a/22101732/760435

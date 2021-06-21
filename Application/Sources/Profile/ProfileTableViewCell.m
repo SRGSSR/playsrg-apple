@@ -88,7 +88,7 @@
 {
     if (self.applicationSectionInfo.applicationSection == ApplicationSectionDownloads) {
         if (DownloadSession.sharedDownloadSession.state == DownloadSessionStateDownloading) {
-            [self.iconImageView play_setDownloadAnimation22WithTintColor:self.iconImageView.tintColor];
+            [self.iconImageView play_setDownloadAnimationWithTintColor:self.iconImageView.tintColor];
             [self.iconImageView startAnimating];
         }
         else {

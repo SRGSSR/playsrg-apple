@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_rete_tre.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "logo_rete_tre-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logo_rete_tre-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

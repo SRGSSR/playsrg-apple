@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "subtitles-ge.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "subtitles-ge-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "subtitles-ge-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

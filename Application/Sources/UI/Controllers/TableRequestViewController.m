@@ -72,7 +72,7 @@
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
+    self.loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_gray5Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
@@ -271,7 +271,7 @@
     // Remark: No test for self.loading since a custom view is used in such cases. An error image is only displayed
     // when an empty image has been set (so that the empty layout always has images or not)
     if (self.lastRequestError && self.emptyCollectionImage) {
-        return [UIImage imageNamed:@"error-90"];
+        return [UIImage imageNamed:@"error-background"];
     }
     else {
         return self.emptyCollectionImage;

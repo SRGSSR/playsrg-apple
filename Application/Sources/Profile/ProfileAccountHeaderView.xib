@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,10 +12,10 @@
             <rect key="frame" x="0.0" y="0.0" width="379" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_header-90" translatesAutoresizingMaskIntoConstraints="NO" id="KpX-sw-WEw" userLabel="Background Image View">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_header" translatesAutoresizingMaskIntoConstraints="NO" id="KpX-sw-WEw" userLabel="Background Image View">
                     <rect key="frame" x="0.0" y="0.0" width="379" height="90"/>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_logged_out_icon-60" translatesAutoresizingMaskIntoConstraints="NO" id="JxT-NN-OnA" userLabel="Avatar Image View">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_logged_out_icon" translatesAutoresizingMaskIntoConstraints="NO" id="JxT-NN-OnA" userLabel="Avatar Image View">
                     <rect key="frame" x="16" y="18" width="79" height="60"/>
                     <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -25,16 +23,17 @@
                         <constraint firstAttribute="width" constant="79" id="wME-iy-LJV"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="identity_service_icon-35" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-jA-nYl" userLabel="Identity Service Image View">
-                    <rect key="frame" x="73" y="13" width="35" height="35"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="identity_service_icon" translatesAutoresizingMaskIntoConstraints="NO" id="RWE-jA-nYl" userLabel="Identity Service Image View">
+                    <rect key="frame" x="73" y="-80" width="128" height="128"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;account&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjr-1z-Zd3" userLabel="Account Label">
-                    <rect key="frame" x="120" y="38" width="249" height="20.5"/>
+                    <rect key="frame" x="120" y="39.5" width="249" height="17"/>
                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="rlF-he-HSC"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="KpX-sw-WEw" secondAttribute="bottom" id="BJ0-xp-Leg"/>
@@ -50,7 +49,6 @@
                 <constraint firstItem="gjr-1z-Zd3" firstAttribute="leading" secondItem="JxT-NN-OnA" secondAttribute="trailing" constant="25" id="xon-pD-9xa"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="rlF-he-HSC"/>
             <connections>
                 <outlet property="accountLabel" destination="gjr-1z-Zd3" id="XX9-Zs-kP7"/>
                 <outlet property="avatarImageView" destination="JxT-NN-OnA" id="sSN-UD-sl8"/>
@@ -59,8 +57,8 @@
         </view>
     </objects>
     <resources>
-        <image name="account_header-90" width="304" height="192"/>
-        <image name="account_logged_out_icon-60" width="60" height="60"/>
-        <image name="identity_service_icon-35" width="35" height="35"/>
+        <image name="account_header" width="128" height="128"/>
+        <image name="account_logged_out_icon" width="128" height="128"/>
+        <image name="identity_service_icon" width="128" height="128"/>
     </resources>
 </document>

@@ -48,7 +48,7 @@ struct DurationBadge: View {
 /// Behavior: h-hug, v-hug
 struct SubtitlesBadge: View {
     var body: some View {
-        Image("subtitles-24")
+        Image("subtitles")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -58,7 +58,7 @@ struct SubtitlesBadge: View {
 /// Behavior: h-hug, v-hug
 struct AudioDescriptionBadge: View {
     var body: some View {
-        Image("audio_description-24")
+        Image("audio_description")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -68,7 +68,7 @@ struct AudioDescriptionBadge: View {
 /// Behavior: h-hug, v-hug
 struct MultiAudioBadge: View {
     var body: some View {
-        Image("multiaudio-24")
+        Image("multiaudio")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -78,7 +78,7 @@ struct MultiAudioBadge: View {
 /// Behavior: h-hug, v-hug
 struct ThreeSixtyBadge: View {
     var body: some View {
-        Image("360_media-24")
+        Image("360_media")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
     }

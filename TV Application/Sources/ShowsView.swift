@@ -29,7 +29,7 @@ struct ShowsView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-background")
             return [Row(section: .information, items: [item])]
         case let .loaded(alphabeticalShows: alphabeticalShows):
             if !alphabeticalShows.isEmpty {
@@ -38,7 +38,7 @@ struct ShowsView: View {
                 }
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-background")
                 return [Row(section: .information, items: [item])]
             }
         }

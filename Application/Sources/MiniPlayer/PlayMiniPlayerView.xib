@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,33 +34,33 @@
                     </constraints>
                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <inset key="imageEdgeInsets" minX="10" minY="10" maxX="10" maxY="10"/>
-                    <state key="normal" image="play-50"/>
+                    <state key="normal" image="play"/>
                     <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="image" keyPath="playImage" value="play-50"/>
-                        <userDefinedRuntimeAttribute type="image" keyPath="pauseImage" value="pause-50"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="playImage" value="play"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="pauseImage" value="pause"/>
                     </userDefinedRuntimeAttributes>
                 </button>
                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="cOr-X0-OJp">
                     <rect key="frame" x="61" y="1" width="511" height="50"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vmg-4C-7ZW" userLabel="Spacer View">
-                            <rect key="frame" x="0.0" y="0.0" width="511" height="7"/>
+                            <rect key="frame" x="0.0" y="0.0" width="511" height="10.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="&lt;live&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uwe-Iw-iYe">
-                            <rect key="frame" x="0.0" y="7" width="511" height="18"/>
+                            <rect key="frame" x="0.0" y="10.5" width="511" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;title&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oO5-25-JOn">
-                            <rect key="frame" x="0.0" y="25" width="511" height="18"/>
+                            <rect key="frame" x="0.0" y="25" width="511" height="14.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Cx-xZ-XT3" userLabel="Spacer View">
-                            <rect key="frame" x="0.0" y="43" width="511" height="7"/>
+                            <rect key="frame" x="0.0" y="39.5" width="511" height="10.5"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                     </subviews>
@@ -77,7 +76,7 @@
                         <constraint firstAttribute="width" secondItem="wKg-8I-Eaj" secondAttribute="height" multiplier="1:1" id="Ux0-a3-cpw"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" image="close-22"/>
+                    <state key="normal" image="close"/>
                     <connections>
                         <action selector="close:" destination="Bfa-82-k4k" eventType="touchUpInside" id="6Ff-r3-t7I"/>
                     </connections>
@@ -115,9 +114,14 @@
             <point key="canvasLocation" x="340" y="-30.584707646176913"/>
         </view>
     </objects>
+    <designables>
+        <designable name="iWC-hN-4pX">
+            <size key="intrinsicContentSize" width="48" height="48"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="close-22" width="22" height="22"/>
-        <image name="pause-50" width="50" height="50"/>
-        <image name="play-50" width="50" height="50"/>
+        <image name="close" width="22" height="22"/>
+        <image name="pause" width="48" height="48"/>
+        <image name="play" width="48" height="48"/>
     </resources>
 </document>

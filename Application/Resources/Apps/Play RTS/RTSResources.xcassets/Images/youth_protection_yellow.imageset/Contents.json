@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "carre_jaune.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "carre_jaune-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "carre_jaune-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

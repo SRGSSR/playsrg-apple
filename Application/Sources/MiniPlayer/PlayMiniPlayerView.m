@@ -226,7 +226,7 @@
     }
     
     BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
-    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
+    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop"] : [UIImage imageNamed:@"pause"];
     
     [self updateProgress];
 }

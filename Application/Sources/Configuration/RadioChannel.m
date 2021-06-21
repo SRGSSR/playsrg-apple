@@ -34,17 +34,12 @@
 
 @end
 
-UIImage *RadioChannelLogo22Image(RadioChannel *radioChannel)
+UIImage *RadioChannelLogoImage(RadioChannel *radioChannel)
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-22", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-22"];
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset"];
 }
 
-UIImage *RadioChannelLogo32Image(RadioChannel *radioChannel)
+UIImage *RadioChannelLargeLogoImage(RadioChannel *radioChannel)
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-32", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-32"];
-}
-
-UIImage *RadioChannelLogo60Image(RadioChannel *radioChannel)
-{
-    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-60", radioChannel.resourceUid]];
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@-large", radioChannel.resourceUid]] ?: [UIImage imageNamed:@"radioset-large"];
 }

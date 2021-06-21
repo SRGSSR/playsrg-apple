@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -24,32 +22,32 @@
                     <rect key="frame" x="10" y="216.5" width="351" height="95.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="&lt;title&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yyW-ox-kMV">
-                            <rect key="frame" x="0.0" y="0.0" width="351" height="27"/>
+                            <rect key="frame" x="0.0" y="0.0" width="351" height="30.5"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="Ick-GH-RRS">
-                            <rect key="frame" x="0.0" y="35" width="351" height="32"/>
+                            <rect key="frame" x="0.0" y="38.5" width="351" height="32"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgU-jf-vHw" userLabel="Spacer View">
-                                    <rect key="frame" x="0.0" y="0.0" width="41" height="32"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="56.5" height="32"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JMs-0z-bGJ" userLabel="Favorite Button">
-                                    <rect key="frame" x="43" y="0.0" width="32" height="32"/>
+                                    <rect key="frame" x="58.5" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="32" id="0y8-rZ-rqE"/>
                                         <constraint firstAttribute="height" constant="32" id="Cla-bu-Zod"/>
                                     </constraints>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="show_favorite-22"/>
+                                    <state key="normal" image="show_favorite"/>
                                     <connections>
                                         <action selector="toggleFavorite:" destination="7YI-iM-3v4" eventType="touchUpInside" id="GO4-La-rZa"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oK4-Ec-OyU">
-                                    <rect key="frame" x="77" y="0.0" width="109" height="32"/>
+                                    <rect key="frame" x="92.5" y="0.0" width="90" height="32"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="Add to favorites"/>
                                     <connections>
@@ -57,26 +55,26 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SN3-EK-n1t" userLabel="Spacer View">
-                                    <rect key="frame" x="188" y="0.0" width="10" height="32"/>
+                                    <rect key="frame" x="184.5" y="0.0" width="10" height="32"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="10" id="Kj2-dk-qBD"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5g-cj-1Y4" userLabel="Subscription Button">
-                                    <rect key="frame" x="200" y="0.0" width="32" height="32"/>
+                                    <rect key="frame" x="196.5" y="0.0" width="32" height="32"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="32" id="0U7-ZJ-Q8S"/>
                                         <constraint firstAttribute="width" constant="32" id="d3Y-aQ-rYy"/>
                                     </constraints>
                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <state key="normal" image="show_subscription-22"/>
+                                    <state key="normal" image="show_subscription"/>
                                     <connections>
                                         <action selector="toggleSubscription:" destination="7YI-iM-3v4" eventType="touchUpInside" id="n15-4H-JtK"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i3T-bJ-jqD">
-                                    <rect key="frame" x="234" y="0.0" width="74" height="32"/>
+                                    <rect key="frame" x="230.5" y="0.0" width="62" height="32"/>
                                     <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                     <state key="normal" title="Be notified"/>
                                     <connections>
@@ -84,7 +82,7 @@
                                     </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cZI-yr-xiA" userLabel="Spacer View">
-                                    <rect key="frame" x="310" y="0.0" width="41" height="32"/>
+                                    <rect key="frame" x="294.5" y="0.0" width="56.5" height="32"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </view>
                             </subviews>
@@ -93,7 +91,7 @@
                             </constraints>
                         </stackView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="&lt;subtitle&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ART-wi-iC6">
-                            <rect key="frame" x="0.0" y="75" width="351" height="20.5"/>
+                            <rect key="frame" x="0.0" y="78.5" width="351" height="17"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -126,7 +124,7 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="show_favorite-22" width="22" height="22"/>
-        <image name="show_subscription-22" width="22" height="22"/>
+        <image name="show_favorite" width="128" height="128"/>
+        <image name="show_subscription" width="128" height="128"/>
     </resources>
 </document>

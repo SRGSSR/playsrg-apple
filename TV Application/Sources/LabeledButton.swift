@@ -43,12 +43,12 @@ struct LabeledButton: View {
 struct LabeledButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LabeledButton(icon: "episodes-22", label: "Episodes", action: {})
+            LabeledButton(icon: "episodes", label: "Episodes", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Short label")
             
-            LabeledButton(icon: "favorite-22", label: "Watch later", action: {})
+            LabeledButton(icon: "favorite", label: "Watch later", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Long label")

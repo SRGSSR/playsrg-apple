@@ -56,9 +56,9 @@
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(openFullScreenPlayer:)];
     [self addGestureRecognizer:tapGestureRecognizer];
     
-    [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlay];
-    [self.playbackButton setImage:[UIImage imageNamed:@"pause-50"] forButtonState:GCKUIButtonStatePlayLive];
-    [self.playbackButton setImage:[UIImage imageNamed:@"play-50"] forButtonState:GCKUIButtonStatePause];
+    [self.playbackButton setImage:[UIImage imageNamed:@"pause"] forButtonState:GCKUIButtonStatePlay];
+    [self.playbackButton setImage:[UIImage imageNamed:@"pause"] forButtonState:GCKUIButtonStatePlayLive];
+    [self.playbackButton setImage:[UIImage imageNamed:@"play"] forButtonState:GCKUIButtonStatePause];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(contentSizeCategoryDidChange:)

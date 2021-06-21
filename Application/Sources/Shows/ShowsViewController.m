@@ -48,7 +48,7 @@
     if (self = [super init]) {
         self.radioChannel = radioChannel;
         self.initialAlphabeticalIndex = alphabeticalIndex;
-        self.emptyCollectionImage = [UIImage imageNamed:@"media-90"];
+        self.emptyCollectionImage = [UIImage imageNamed:@"media-background"];
         self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
         
         _previousAccessibilityHeadingSection = -1;

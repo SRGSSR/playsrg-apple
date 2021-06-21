@@ -49,16 +49,7 @@ extension LiveMediaViewModel {
     }
     
     var logoImage: UIImage? {
-        if let channel = channel {
-            #if os(tvOS)
-            return channel.play_logo60Image
-            #else
-            return channel.play_logo32Image
-            #endif
-        }
-        else {
-            return nil
-        }
+        return channel?.play_largeLogoImage
     }
     
     var program: SRGProgram? {

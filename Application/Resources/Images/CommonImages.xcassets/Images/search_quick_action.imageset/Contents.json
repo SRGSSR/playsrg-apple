@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "search-35.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "search-36.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -64,7 +64,7 @@
     
     self.emptyTableTitle = NSLocalizedString(@"No history", @"Text displayed when no history is available");
     self.emptyTableSubtitle = NSLocalizedString(@"Recently played medias will be displayed here", @"Hint displayed when no history is available");
-    self.emptyCollectionImage = [UIImage imageNamed:@"history-90"];
+    self.emptyCollectionImage = [UIImage imageNamed:@"history-background"];
     
     [self.tableView registerReusableMediaCell];
     
@@ -233,7 +233,7 @@
         
         completionHandler(YES);
     }];
-    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
     return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
@@ -324,7 +324,7 @@
         self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeHistory:)];

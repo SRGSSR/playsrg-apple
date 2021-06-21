@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "SRF_radioVirus.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "SRF_radioVirus-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_virus_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

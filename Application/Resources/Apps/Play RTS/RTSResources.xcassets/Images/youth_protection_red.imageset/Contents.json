@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "trait_rouge.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "trait_rouge-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "trait_rouge-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

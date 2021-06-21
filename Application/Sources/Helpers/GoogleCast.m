@@ -189,14 +189,14 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             styleAttributes.buttonTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
             styleAttributes.captionTextFont = [SRGFont fontWithStyle:SRGFontStyleCaption];
             
-            styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-            styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-            styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-            styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-            styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-            styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-            styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-            styleAttributes.stopImage = [UIImage imageNamed:@"pause-50"];
+            styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitle_tracks"];
+            styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"skip_forward"];
+            styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"skip_backward"];
+            styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute"];
+            styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute"];
+            styleAttributes.pauseImage = [UIImage imageNamed:@"pause"];
+            styleAttributes.playImage = [UIImage imageNamed:@"play"];
+            styleAttributes.stopImage = [UIImage imageNamed:@"pause"];
             // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
         });
     }

@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RTS_radioOM.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RTS_radioOM-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "SecondaryLogos - OptionMusique_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

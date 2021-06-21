@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -90,11 +88,11 @@
                                         </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvA-5F-Hlu" userLabel="Spacer View">
-                                        <rect key="frame" x="274.5" y="0.0" width="97.5" height="55"/>
+                                        <rect key="frame" x="274.5" y="0.0" width="3.5" height="55"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="waveform-34-0" translatesAutoresizingMaskIntoConstraints="NO" id="15d-xV-dLl">
-                                        <rect key="frame" x="380" y="0.0" width="34" height="55"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" image="waveform_animation-0" translatesAutoresizingMaskIntoConstraints="NO" id="15d-xV-dLl">
+                                        <rect key="frame" x="286" y="0.0" width="128" height="55"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
@@ -116,7 +114,7 @@
                     <constraint firstItem="mOp-Mu-Fmf" firstAttribute="top" secondItem="aQp-AH-n44" secondAttribute="top" id="T6z-t6-Tls"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+            <color key="backgroundColor" systemColor="darkTextColor"/>
             <connections>
                 <outlet property="disabledOverlayView" destination="VoZ-5C-Odi" id="apa-8E-WkB"/>
                 <outlet property="progressView" destination="V18-gx-Zyd" id="1Kg-u8-rhR"/>
@@ -130,6 +128,9 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="waveform-34-0" width="34" height="34"/>
+        <image name="waveform_animation-0" width="128" height="128"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

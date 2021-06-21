@@ -12,23 +12,13 @@
 
 @implementation SRGChannel (PlaySRG)
 
-- (UIImage *)play_logo32Image
+- (UIImage *)play_largeLogoImage
 {
     if (self.transmission == SRGTransmissionRadio) {
-        return RadioChannelLogo32Image([ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid]);
+        return RadioChannelLargeLogoImage([ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid]);
     }
     else {
-        return TVChannelLogo32Image([ApplicationConfiguration.sharedApplicationConfiguration tvChannelForUid:self.uid]);
-    }
-}
-
-- (UIImage *)play_logo60Image
-{
-    if (self.transmission == SRGTransmissionRadio) {
-        return RadioChannelLogo60Image([ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:self.uid]);
-    }
-    else {
-        return TVChannelLogo60Image([ApplicationConfiguration.sharedApplicationConfiguration tvChannelForUid:self.uid]);
+        return TVChannelLargeLogoImage([ApplicationConfiguration.sharedApplicationConfiguration tvChannelForUid:self.uid]);
     }
 }
 

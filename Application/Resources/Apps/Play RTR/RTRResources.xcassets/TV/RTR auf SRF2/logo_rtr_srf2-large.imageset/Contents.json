@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "SRF_zwei.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "SRF_zwei-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logos_srfzwei_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

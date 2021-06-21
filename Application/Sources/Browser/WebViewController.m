@@ -93,7 +93,7 @@ static void *s_kvoContext = &s_kvoContext;
     ]];
     self.webView = webView;
     
-    UIImageView *loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.srg_gray5Color];
+    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_gray5Color];
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     loadingImageView.hidden = YES;
     [self.view insertSubview:loadingImageView atIndex:0];

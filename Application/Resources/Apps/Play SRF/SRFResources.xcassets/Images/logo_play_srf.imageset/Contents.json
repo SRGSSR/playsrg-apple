@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "playsrf_160.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "playsrf_160-1.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

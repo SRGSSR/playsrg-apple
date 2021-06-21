@@ -24,13 +24,13 @@ struct EmptyView: View {
                 ActivityIndicator()
             case .empty:
                 VStack {
-                    Image("media-90")
+                    Image("media-background")
                     Text(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
                         .srgFont(.H2)
                 }
             case let .failed(error: error):
                 VStack {
-                    Image("error-90")
+                    Image("error-background")
                     Text(error.localizedDescription)
                         .srgFont(.H4)
                 }

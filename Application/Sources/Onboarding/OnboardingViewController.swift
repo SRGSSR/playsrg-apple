@@ -159,8 +159,8 @@ extension OnboardingViewController: PaperOnboardingDataSource {
     public func onboardingItem(at index: Int) -> OnboardingItemInfo {
         let page = onboarding.pages[index]
         
-        let informationImage = UIImage(named: "\(onboarding.uid)_\(page.uid)-200") ?? UIImage()
-        let pageIcon = UIImage(named: "\(onboarding.uid)_\(page.uid)-45") ?? UIImage()
+        let informationImage = UIImage(named: "\(onboarding.uid)_\(page.uid)") ?? UIImage()
+        let pageIcon = UIImage(named: "\(onboarding.uid)_\(page.uid)-small") ?? UIImage()
         
         let titleFontSize = CGFloat(isTall ? 24.0 : 20.0)
         let subtitleFontSize = CGFloat(isTall ? 15.0 : 14.0)

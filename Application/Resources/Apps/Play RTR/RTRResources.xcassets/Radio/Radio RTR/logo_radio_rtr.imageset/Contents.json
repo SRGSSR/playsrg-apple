@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_radiortr.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "logo_radiortr-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logo_radiortr-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

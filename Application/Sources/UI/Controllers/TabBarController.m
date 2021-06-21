@@ -253,7 +253,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UIViewController *videosViewController = [PageViewController videosViewController];
     videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
     
-    UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos-24"] tag:TabBarItemIdentifierVideos];
+    UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos_tab"] tag:TabBarItemIdentifierVideos];
     videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
     
     NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:videosViewController];
@@ -269,7 +269,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     if (radioChannels.count > 1) {
         UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
         
-        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannelsViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannelsViewController.title image:[UIImage imageNamed:@"audios_tab"] tag:TabBarItemIdentifierAudios];
         audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
         
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
@@ -281,7 +281,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         UIViewController *audiosViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
         audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
         
-        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios-24"] tag:TabBarItemIdentifierAudios];
+        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios_tab"] tag:TabBarItemIdentifierAudios];
         audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
         
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:audiosViewController];
@@ -303,7 +303,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         UIViewController *liveViewController = [PageViewController liveViewController];
         liveViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestream view");
         
-        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveViewController.title image:[UIImage imageNamed:@"livestreams-24"] tag:TabBarItemIdentifierLivestreams];
+        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveViewController.title image:[UIImage imageNamed:@"livestreams_tab"] tag:TabBarItemIdentifierLivestreams];
         liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
         
         NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveViewController];
@@ -319,7 +319,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     UIViewController *searchViewController = [[SearchViewController alloc] init];
     
-    UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search-24"] tag:TabBarItemIdentifierSearch];
+    UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search_tab"] tag:TabBarItemIdentifierSearch];
     searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
     
     NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
@@ -332,7 +332,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UIViewController *profileViewController = [[ProfileViewController alloc] init];
     NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
     
-    UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile-24"] tag:TabBarItemIdentifierProfile];
+    UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile_tab"] tag:TabBarItemIdentifierProfile];
     profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
     
     SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];

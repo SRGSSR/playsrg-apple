@@ -200,7 +200,7 @@
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"download-90"];
+    return [UIImage imageNamed:@"download-background"];
 }
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
@@ -296,7 +296,7 @@
         
         completionHandler(YES);
     }];
-    deleteAction.image = [UIImage imageNamed:@"delete-22"];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
     return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
@@ -399,7 +399,7 @@
         self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeDownloads:)];
