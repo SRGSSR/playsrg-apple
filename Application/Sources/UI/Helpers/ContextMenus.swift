@@ -24,7 +24,7 @@ enum ContextMenu {
         }
         
         func image(for action: WatchLaterAction) -> UIImage {
-            return (action == .add) ? UIImage(named: "watch_later_full-22")! : UIImage(named: "watch_later-22")!
+            return (action == .add) ? UIImage(named: "watch_later_full")! : UIImage(named: "watch_later")!
         }
         
         let action = WatchLaterAllowedActionForMediaMetadata(media)
@@ -55,7 +55,7 @@ enum ContextMenu {
               let show = media.show,
               let navigationController = viewController.navigationController else { return nil }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
-                        image: UIImage(named: "episodes-22")) { _ in
+                        image: UIImage(named: "episodes")) { _ in
             let showViewController = ShowViewController(show: show, fromPushNotification: false)
             navigationController.pushViewController(showViewController, animated: true)
         }
