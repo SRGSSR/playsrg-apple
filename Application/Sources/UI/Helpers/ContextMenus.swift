@@ -73,16 +73,30 @@ enum ContextMenu {
         return UIMenu(title: "", children: elements)
     }
     
-    static func configuration(for item: Content.Item, in viewController: UIViewController) -> UIContextMenuConfiguration {
-        return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { _ in
-            switch item {
-            case let .media(media):
+    static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        // `NSIndexPath` conforms to `NSCopying`
+        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+    }
+    
+    static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        switch item {
+        case let .media(media):
+            return UIContextMenuConfiguration(identifier: identifier) {
+                return MediaPreviewViewController(media: media)
+            } actionProvider: { _ in
                 return menu(for: media, in: viewController)
-            case let .show(show):
-                return menu(for: show, in: viewController)
-            default:
-                return nil
             }
+        case let .show(show):
+            return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+                return menu(for: show, in: viewController)
+            }
+        default:
+            return nil
         }
+    }
+    
+    static func interactionView(in collectionView: UICollectionView, withIdentifier identifier: NSCopying) -> UIView? {
+        guard let indexPath = identifier as? NSIndexPath else { return nil }
+        return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
     }
 }

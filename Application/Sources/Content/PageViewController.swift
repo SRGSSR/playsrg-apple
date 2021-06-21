@@ -284,10 +284,28 @@ extension PageViewController: UICollectionViewDelegate {
         
         switch item.wrappedValue {
         case let .item(wrappedItem):
-            return ContextMenu.configuration(for: wrappedItem, in: self)
+            return ContextMenu.configuration(for: wrappedItem, at: indexPath, in: self)
         default:
             return nil
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
     }
     #endif
     
