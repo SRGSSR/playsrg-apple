@@ -275,26 +275,32 @@ private extension Content {
         
         var title: String? {
             switch configuredSection.type {
-            case .radioLatestEpisodes:
-                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
-            case .radioMostPopular:
-                return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
-            case .radioLatest:
-                return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
-            case .radioLatestVideos:
-                return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
             case .radioAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
-            case .radioShowAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
-            case .tvLive:
-                return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
+            case .radioLatest:
+                return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
+            case .radioLatestEpisodes:
+                return NSLocalizedString("The latest episodes", comment: "Title label used to present the radio latest audio episodes")
+            case .radioLatestEpisodesFromFavorites:
+                return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from radio favorite shows")
+            case .radioLatestVideos:
+                return NSLocalizedString("Latest videos", comment: "Title label used to present the radio latest videos")
             case .radioLive:
                 return NSLocalizedString("Radio channels", comment: "Title label to present main radio livestreams")
             case .radioLiveSatellite:
                 return NSLocalizedString("Music radios", comment: "Title label to present musical Swiss satellite radios")
+            case .radioMostPopular:
+                return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
+            case .radioResumePlayback:
+                return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
+            case .radioShowAccess:
+                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+            case .radioWatchLater:
+                return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
+            case .tvLive:
+                return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenter:
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
@@ -312,13 +318,13 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch configuredSection.type {
-            case .tvLiveCenter, .tvScheduledLivestreams, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            case .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .radioAllShows:
                 return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-            case .radioFavoriteShows, .radioShowAccess:
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioShowAccess, .radioWatchLater:
                 return []
             }
         }
@@ -329,16 +335,20 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection.type {
-            case .radioLatestEpisodes:
-                return AnalyticsPageTitle.latestEpisodes.rawValue
-            case .radioMostPopular:
-                return AnalyticsPageTitle.mostPopular.rawValue
-            case .radioLatest, .radioLatestVideos:
-                return AnalyticsPageTitle.latest.rawValue
             case .radioAllShows:
                 return AnalyticsPageTitle.showsAZ.rawValue
             case .radioFavoriteShows:
                 return AnalyticsPageTitle.favorites.rawValue
+            case .radioLatest, .radioLatestVideos:
+                return AnalyticsPageTitle.latest.rawValue
+            case .radioLatestEpisodes, .radioLatestEpisodesFromFavorites:
+                return AnalyticsPageTitle.latestEpisodes.rawValue
+            case .radioMostPopular:
+                return AnalyticsPageTitle.mostPopular.rawValue
+            case .radioResumePlayback:
+                return AnalyticsPageTitle.resumePlayback.rawValue
+            case .radioWatchLater:
+                return AnalyticsPageTitle.watchLater.rawValue
             case .tvLiveCenter:
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
@@ -350,12 +360,15 @@ private extension Content {
         
         var analyticsLevels: [String]? {
             switch configuredSection.type {
-            case let .radioLatestEpisodes(channelUid: channelUid),
-                 let .radioMostPopular(channelUid: channelUid),
+            case let .radioAllShows(channelUid),
+                 let .radioFavoriteShows(channelUid: channelUid),
                  let .radioLatest(channelUid: channelUid),
+                 let .radioLatestEpisodes(channelUid: channelUid),
+                 let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
                  let .radioLatestVideos(channelUid: channelUid),
-                 let .radioAllShows(channelUid),
-                 let .radioFavoriteShows(channelUid: channelUid):
+                 let .radioMostPopular(channelUid: channelUid),
+                 let .radioResumePlayback(channelUid: channelUid),
+                 let .radioWatchLater(channelUid: channelUid):
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
                     return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
                 }
@@ -384,22 +397,6 @@ private extension Content {
             let vendor = configuration.vendor
             
             switch configuredSection.type {
-            case let .radioLatestEpisodes(channelUid: channelUid):
-                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
-            case let .radioMostPopular(channelUid: channelUid):
-                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
-            case let .radioLatest(channelUid: channelUid):
-                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
-            case let .radioLatestVideos(channelUid: channelUid):
-                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }
@@ -407,6 +404,40 @@ private extension Content {
             case .radioFavoriteShows:
                 return dataProvider.favoritesPublisher(filter: filter)
                     .map { $0.map { .show($0) } }
+                    .eraseToAnyPublisher()
+            case let .radioLatest(channelUid: channelUid):
+                return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case let .radioLatestEpisodes(channelUid: channelUid):
+                return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .radioLatestEpisodesFromFavorites:
+                return dataProvider.favoritesPublisher(filter: filter)
+                    .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: pageSize) }
+                    .switchToLatest()
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case let .radioLatestVideos(channelUid: channelUid):
+                return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .radioLive:
+                return dataProvider.regionalizedRadioLivestreams(for: vendor)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .radioLiveSatellite:
+                return dataProvider.regionalizedRadioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case let .radioMostPopular(channelUid: channelUid):
+                return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .radioResumePlayback:
+                return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                    .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioShowAccess(channelUid):
                 #if os(iOS)
@@ -418,16 +449,12 @@ private extension Content {
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
                 #endif
+            case .radioWatchLater:
+                return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
             case .tvLive:
                 return dataProvider.tvLivestreams(for: vendor)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
-            case .radioLive:
-                return dataProvider.regionalizedRadioLivestreams(for: vendor)
-                    .map { $0.map { .media($0) } }
-                    .eraseToAnyPublisher()
-            case .radioLiveSatellite:
-                return dataProvider.regionalizedRadioLivestreams(for: vendor, contentProviders: .swissSatelliteRadio)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvLiveCenter:

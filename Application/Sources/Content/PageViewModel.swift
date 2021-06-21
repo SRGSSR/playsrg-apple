@@ -393,7 +393,7 @@ private extension PageViewModel {
                 #else
                 return .liveMediaSwimlane
                 #endif
-            case .tvLiveCenter, .tvScheduledLivestreams:
+            case .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
             case .radioFavoriteShows:
                 return .showSwimlane
@@ -415,8 +415,12 @@ private extension PageViewModel {
         
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection.type {
-            case .radioFavoriteShows:
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
                 return Signal.favoritesUpdate()
+            case .radioResumePlayback:
+                return Signal.historyUpdate()
+            case .radioWatchLater:
+                return Signal.laterUpdate()
             default:
                 return nil
             }

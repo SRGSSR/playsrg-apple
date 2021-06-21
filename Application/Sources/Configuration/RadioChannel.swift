@@ -7,20 +7,26 @@
 extension RadioChannel {
     private static func configuredSectionType(from homeSection: HomeSection, withChannelUid channelUid: String) -> ConfiguredSection.`Type`? {
         switch homeSection {
-        case .radioLatestEpisodes:
-            return .radioLatestEpisodes(channelUid: channelUid)
-        case .radioMostPopular:
-            return .radioMostPopular(channelUid: channelUid)
-        case .radioLatest:
-            return .radioLatest(channelUid: channelUid)
-        case .radioLatestVideos:
-            return .radioLatestVideos(channelUid: channelUid)
         case .radioAllShows:
             return .radioAllShows(channelUid: channelUid)
         case .radioFavoriteShows:
             return .radioFavoriteShows(channelUid: channelUid)
+        case .radioLatest:
+            return .radioLatest(channelUid: channelUid)
+        case .radioLatestEpisodes:
+            return .radioLatestEpisodes(channelUid: channelUid)
+        case .radioLatestEpisodesFromFavorites:
+            return .radioLatestEpisodesFromFavorites(channelUid: channelUid)
+        case .radioLatestVideos:
+            return .radioLatestVideos(channelUid: channelUid)
+        case .radioMostPopular:
+            return .radioMostPopular(channelUid: channelUid)
+        case .radioResumePlayback:
+            return .radioResumePlayback(channelUid: channelUid)
         case .radioShowsAccess:
             return .radioShowAccess(channelUid: channelUid)
+        case .radioWatchLater:
+            return .radioWatchLater(channelUid: channelUid)
         default:
             return nil
         }
@@ -28,7 +34,7 @@ extension RadioChannel {
     
     private static func contentPresentationType(from configuredSectionType: ConfiguredSection.`Type`, index: Int) -> SRGContentPresentationType {
         switch configuredSectionType {
-        case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+        case .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater:
             return index == 0 ? .hero : .swimlane
         case .radioAllShows:
             return .grid
