@@ -271,6 +271,31 @@ extension SectionViewController: UICollectionViewDelegate {
         }
             
     }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        return ContextMenu.configuration(for: item, at: indexPath, in: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        ContextMenu.commitPreview(in: self, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
+    }
     #endif
     
     #if os(tvOS)
