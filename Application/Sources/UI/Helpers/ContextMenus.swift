@@ -99,4 +99,18 @@ enum ContextMenu {
         guard let indexPath = identifier as? NSIndexPath else { return nil }
         return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
     }
+    
+    static func commitPreview(in viewController: UIViewController, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.preferredCommitStyle = .pop
+        animator.addCompletion {
+            guard let previewViewController = animator.previewViewController else { return }
+            if let mediaPreviewViewController = previewViewController as? MediaPreviewViewController {
+                guard let letterboxController = mediaPreviewViewController.letterboxController else { return }
+                viewController.play_presentMediaPlayer(from: letterboxController, withAirPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+            else if let navigationController = viewController.navigationController {
+                navigationController.present(previewViewController, animated: true, completion: nil)
+            }
+        }
+    }
 }
