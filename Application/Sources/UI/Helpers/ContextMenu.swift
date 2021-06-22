@@ -10,30 +10,24 @@ import UIKit
 // MARK: Context menu management
 
 enum ContextMenu {
-    static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
-        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
-    }
-    
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch item {
         case let .media(media):
-            return UIContextMenuConfiguration(identifier: identifier) {
-                return MediaPreviewViewController(media: media)
-            } actionProvider: { _ in
-                return menu(for: media, in: viewController)
-            }
+            return configuration(for: media, identifier: identifier, in: viewController)
         case let .show(show):
-            return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
-                return menu(for: show, in: viewController)
-            }
+            return configuration(for: show, identifier: identifier, in: viewController)
         default:
             return nil
         }
     }
     
-    static func interactionView(in collectionView: UICollectionView, withIdentifier identifier: NSCopying) -> UIView? {
-        guard let indexPath = identifier as? NSIndexPath else { return nil }
+    static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
+        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+    }
+    
+    static func interactionView(in collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
+        guard let indexPath = configuration.identifier as? NSIndexPath else { return nil }
         return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
     }
     
@@ -51,6 +45,24 @@ enum ContextMenu {
         }
     }
     
+    fileprivate static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: identifier) {
+            return MediaPreviewViewController(media: media)
+        } actionProvider: { _ in
+            return menu(for: media, in: viewController)
+        }
+    }
+    
+    fileprivate static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+            return menu(for: show, in: viewController)
+        }
+    }
+}
+
+// MARK: Sharing
+
+private extension ContextMenu {
     private class ActivityPopoverPresentationDelegate: NSObject, UIPopoverPresentationControllerDelegate {
         func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
             return .formSheet
@@ -74,7 +86,7 @@ enum ContextMenu {
 // MARK: Media context menu
 
 private extension ContextMenu {
-    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
+    static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media, in: viewController),
             downloadAction(for: media, in: viewController),
@@ -183,7 +195,7 @@ private extension ContextMenu {
 // MARK: Show context menu
 
 private extension ContextMenu {
-    private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
+    static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             favoriteAction(for: show, in: viewController),
             sharingAction(for: show, in: viewController)
@@ -224,5 +236,28 @@ private extension ContextMenu {
                         image: UIImage(named: "share")!) { _ in
             shareItem(sharingItem, in: viewController)
         }
+    }
+}
+
+// MARK: Objective-C API
+
+@objc final class ContextMenuObjC: NSObject {
+    @objc static func configuration(for object: AnyObject, at indexPath: NSIndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        switch object {
+        case let media as SRGMedia:
+            return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
+        case let show as SRGShow:
+            return ContextMenu.configuration(for: show, identifier: indexPath, in: viewController)
+        default:
+            return nil
+        }
+    }
+    
+    @objc static func interactionView(in collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
+        return ContextMenu.interactionView(in: collectionView, with: configuration)
+    }
+    
+    @objc static func commitPreview(in viewController: UIViewController, animator: UIContextMenuInteractionCommitAnimating) {
+        ContextMenu.commitPreview(in: viewController, animator: animator)
     }
 }

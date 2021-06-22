@@ -259,14 +259,15 @@ extension SectionViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
-        let parameters = UIPreviewParameters()
-        parameters.backgroundColor = view.backgroundColor
-        return UITargetedPreview(view: interactionView, parameters: parameters)
+        return preview(for: configuration, in: collectionView)
     }
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
-        guard let interactionView = ContextMenu.interactionView(in: collectionView, withIdentifier: configuration.identifier) else { return nil }
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
         let parameters = UIPreviewParameters()
         parameters.backgroundColor = view.backgroundColor
         return UITargetedPreview(view: interactionView, parameters: parameters)

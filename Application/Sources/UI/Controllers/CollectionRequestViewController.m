@@ -8,6 +8,7 @@
 
 #import "Banner.h"
 #import "CollectionLoadMoreFooterView.h"
+#import "PlaySRG-Swift.h"
 #import "RefreshControl.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -300,6 +301,38 @@
     else {
         return CGSizeZero;
     }
+}
+
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.items[indexPath.row] at:indexPath in:self];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
+{
+    [ContextMenuObjC commitPreviewIn:self animator:animator];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inCollectionView:(UICollectionView *)collectionView
+{
+    UIView *interactionView = [ContextMenuObjC interactionViewIn:collectionView with:configuration];
+    if (! interactionView) {
+        return nil;
+    }
+    
+    UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
+    parameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
 }
 
 #pragma mark UIScrollViewDelegate protocol
