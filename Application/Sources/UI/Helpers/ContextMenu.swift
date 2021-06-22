@@ -99,7 +99,7 @@ private extension ContextMenu {
         }
         
         func image(for action: WatchLaterAction) -> UIImage {
-            return (action == .add) ? UIImage(named: "watch_later_full")! : UIImage(named: "watch_later")!
+            return (action == .add) ? UIImage(named: "watch_later")! : UIImage(named: "watch_later_full")!
         }
         
         let action = WatchLaterAllowedActionForMediaMetadata(media)
