@@ -325,7 +325,7 @@
 
 - (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inCollectionView:(UICollectionView *)collectionView
 {
-    UIView *interactionView = [ContextMenuObjC interactionViewIn:collectionView with:configuration];
+    UIView *interactionView = [ContextMenuObjC interactionViewInCollectionView:collectionView with:configuration];
     if (! interactionView) {
         return nil;
     }

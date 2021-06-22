@@ -26,6 +26,11 @@ enum ContextMenu {
         return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
     
+    static func interactionView(in tableView: UITableView, with configuration: UIContextMenuConfiguration) -> UIView? {
+        guard let indexPath = configuration.identifier as? NSIndexPath else { return nil }
+        return tableView.cellForRow(at: IndexPath(row: indexPath.row, section: indexPath.section))
+    }
+    
     static func interactionView(in collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
         guard let indexPath = configuration.identifier as? NSIndexPath else { return nil }
         return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
@@ -42,20 +47,6 @@ enum ContextMenu {
             else if let navigationController = viewController.navigationController {
                 navigationController.present(previewViewController, animated: true, completion: nil)
             }
-        }
-    }
-    
-    fileprivate static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: identifier) {
-            return MediaPreviewViewController(media: media)
-        } actionProvider: { _ in
-            return menu(for: media, in: viewController)
-        }
-    }
-    
-    fileprivate static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
-            return menu(for: show, in: viewController)
         }
     }
 }
@@ -86,7 +77,15 @@ private extension ContextMenu {
 // MARK: Media context menu
 
 private extension ContextMenu {
-    static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
+    static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: identifier) {
+            return MediaPreviewViewController(media: media)
+        } actionProvider: { _ in
+            return menu(for: media, in: viewController)
+        }
+    }
+    
+    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media, in: viewController),
             downloadAction(for: media, in: viewController),
@@ -195,7 +194,13 @@ private extension ContextMenu {
 // MARK: Show context menu
 
 private extension ContextMenu {
-    static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
+    static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+            return menu(for: show, in: viewController)
+        }
+    }
+    
+    private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             favoriteAction(for: show, in: viewController),
             sharingAction(for: show, in: viewController)
@@ -248,12 +253,23 @@ private extension ContextMenu {
             return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
         case let show as SRGShow:
             return ContextMenu.configuration(for: show, identifier: indexPath, in: viewController)
+        case let download as Download:
+            if let media = download.media {
+                return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
+            }
+            else {
+                return nil
+            }
         default:
             return nil
         }
     }
     
-    @objc static func interactionView(in collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
+    @objc static func interactionView(inTableView tableView: UITableView, with configuration: UIContextMenuConfiguration) -> UIView? {
+        return ContextMenu.interactionView(in: tableView, with: configuration)
+    }
+    
+    @objc static func interactionView(inCollectionView collectionView: UICollectionView, with configuration: UIContextMenuConfiguration) -> UIView? {
         return ContextMenu.interactionView(in: collectionView, with: configuration)
     }
     
