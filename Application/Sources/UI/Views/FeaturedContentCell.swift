@@ -136,7 +136,7 @@ class FeaturedContentCellSize: NSObject {
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 75)
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 100)
         }
         else {
             return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.6)
