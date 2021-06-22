@@ -261,8 +261,8 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 /**
  *  Values
  */
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContent;
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContent;
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContentAtTime;
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingCurrentClip;
 
 NS_ASSUME_NONNULL_END

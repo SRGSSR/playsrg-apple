@@ -115,6 +115,6 @@ AnalyticsType const AnalyticsTypeActionLogin = @"login";
 AnalyticsType const AnalyticsTypeActionLogout = @"logout";
 AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 
-AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
-AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";
-AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
+AnalyticsValue const AnalyticsValueSharingContent = @"content";
+AnalyticsValue const AnalyticsValueSharingContentAtTime = @"content_at_time";
+AnalyticsValue const AnalyticsValueSharingCurrentClip = @"current_clip";

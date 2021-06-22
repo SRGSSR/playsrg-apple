@@ -181,33 +181,8 @@ class SectionViewController: UIViewController {
     @objc func shareContent(_ barButtonItem: UIBarButtonItem) {
         guard let sharingItem = model.section.properties.sharingItem else { return }
         
-        let activityViewController = UIActivityViewController.init(activityItems: [sharingItem], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [
-            .print,
-            .assignToContact,
-            .saveToCameraRoll,
-            .postToFlickr,
-            .postToVimeo,
-            .postToTencentWeibo
-        ]
-        
-        activityViewController.completionWithItemsHandler = { activityType, completed, _, _ in
-            guard completed else { return }
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.type = activityType?.rawValue
-            labels.source = AnalyticsSource.button.rawValue
-            labels.value = sharingItem.analyticsUid
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.sharingSection.rawValue, labels: labels)
-            
-            if activityType == .copyToPasteboard {
-                Banner.show(with: .info,
-                            message: NSLocalizedString("The content has been copied to the clipboard.", comment: "Message displayed when some content (media, show, etc.) has been copied to the clipboard"),
-                            image: nil,
-                            sticky: false,
-                            in: self)
-            }
-        }
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
+        activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
         popoverPresentationController?.barButtonItem = barButtonItem

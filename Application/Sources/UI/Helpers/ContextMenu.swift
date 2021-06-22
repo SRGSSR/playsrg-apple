@@ -8,6 +8,25 @@ import SRGDataProviderModel
 import UIKit
 
 enum ContextMenu {
+    private class ActivityPopoverPresentationDelegate: NSObject, UIPopoverPresentationControllerDelegate {
+        func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+            return .formSheet
+        }
+    }
+    
+    private static let popoverPresentationDelegate = ActivityPopoverPresentationDelegate()
+    
+    private static func shareItem(_ sharingItem: SharingItem, in viewController: UIViewController) {
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .peekMenu, in: viewController)
+        activityViewController.modalPresentationStyle = .popover
+        
+        let popoverPresentationController = activityViewController.popoverPresentationController
+        popoverPresentationController?.sourceView = viewController.view
+        popoverPresentationController?.delegate = popoverPresentationDelegate
+        
+        viewController.present(activityViewController, animated: true, completion: nil)
+    }
+    
     private static func watchLaterAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         func title(for action: WatchLaterAction) -> String {
             if action == .add {
@@ -85,6 +104,14 @@ enum ContextMenu {
         return menuAction
     }
     
+    private static func sharingAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+        guard let sharingItem = SharingItem(for: media, at: CMTime.zero) else { return nil }
+        return UIAction(title: NSLocalizedString("Share", comment: "Context menu action to share a media"),
+                                  image: UIImage(named: "share")!) { _ in
+            shareItem(sharingItem, in: viewController)
+        }
+    }
+    
     private static func moreEpisodesAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard !ApplicationConfiguration.shared.areShowsUnavailable,
               let show = media.show,
@@ -100,6 +127,7 @@ enum ContextMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media, in: viewController),
             downloadAction(for: media, in: viewController),
+            sharingAction(for: media, in: viewController),
             moreEpisodesAction(for: media, in: viewController)
         ].compactMap { $0 })
     }
@@ -110,7 +138,7 @@ enum ContextMenu {
     }
     
     static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        // `NSIndexPath` conforms to `NSCopying`
+        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
         return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
     

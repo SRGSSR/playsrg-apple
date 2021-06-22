@@ -239,33 +239,10 @@
         return;
     }
     
-    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ sharingItem ] applicationActivities:nil];
-    activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                      UIActivityTypeAssignToContact,
-                                                      UIActivityTypeSaveToCameraRoll,
-                                                      UIActivityTypePostToFlickr,
-                                                      UIActivityTypePostToVimeo,
-                                                      UIActivityTypePostToTencentWeibo ];
-    activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-        if (! completed) {
-            return;
-        }
-        
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.type = activityType;
-        labels.source = AnalyticsSourceButton;
-        labels.value = sharingItem.analyticsUid;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingShow labels:labels];
-        
-        if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-            [Banner showWithStyle:BannerStyleInfo
-                          message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                            image:nil
-                           sticky:NO
-                 inViewController:self];
-        }
-    };
-    
+    UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem
+                                                                                                      source:AnalyticsSourceButton
+                                                                                            inViewController:self
+                                                                                         withCompletionBlock:nil];
     activityViewController.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
