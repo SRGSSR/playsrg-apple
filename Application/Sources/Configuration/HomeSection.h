@@ -12,20 +12,23 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionUnknown = 0,
     
     // Radio sections
-    HomeSectionRadioLatestEpisodes,
-    HomeSectionRadioMostPopular,
-    HomeSectionRadioLatest,
-    HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
-    HomeSectionRadioShowsAccess,
     HomeSectionRadioFavoriteShows,
+    HomeSectionRadioLatest,
+    HomeSectionRadioLatestEpisodes,
+    HomeSectionRadioLatestEpisodesFromFavorites,
+    HomeSectionRadioLatestVideos,
+    HomeSectionRadioMostPopular,
+    HomeSectionRadioResumePlayback,
+    HomeSectionRadioShowsAccess,
+    HomeSectionRadioWatchLater,
     
     // Live sections
     HomeSectionTVLive,
-    HomeSectionRadioLive,
-    HomeSectionRadioLiveSatellite,
     HomeSectionTVLiveCenter,
-    HomeSectionTVScheduledLivestreams
+    HomeSectionTVScheduledLivestreams,
+    HomeSectionRadioLive,
+    HomeSectionRadioLiveSatellite
 };
 
 NS_ASSUME_NONNULL_END

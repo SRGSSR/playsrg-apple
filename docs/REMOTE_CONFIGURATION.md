@@ -68,9 +68,12 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `radioFavoriteShows`: Radio shows added to the favorites.
 * `radioLatest`: The latest audios.
 * `radioLatestEpisodes`: The latest episodes.
+* `radioLatestFromFavorites`: The latest audios from the user favorite shows.
 * `radioLatestVideos`: The latest videos.
 * `radioMostPopular`: The most popular audios.
+* `radioResumePlayback`: Audios for which playback can be resumed.
 * `radioShowsAccess`: A-Z and By date access buttons.
+* `radioWatchLater`: Audios added to the Later list.
 
 ### User interface options
 

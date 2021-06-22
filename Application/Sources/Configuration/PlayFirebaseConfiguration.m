@@ -19,15 +19,19 @@ static HomeSection HomeSectionWithString(NSString *string)
         s_sections = @{ @"tvLive" : @(HomeSectionTVLive),
                         @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
                         @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
+                        @"radioAllShows" : @(HomeSectionRadioAllShows),
+                        @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows),
+                        @"radioLatest" : @(HomeSectionRadioLatest),
+                        @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
+                        @"radioLatestEpisodesFromFavorites" : @(HomeSectionRadioLatestEpisodesFromFavorites),
+                        @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
                         @"radioLive" : @(HomeSectionRadioLive),
                         @"radioLiveSatellite" : @(HomeSectionRadioLiveSatellite),
-                        @"radioLatestEpisodes" : @(HomeSectionRadioLatestEpisodes),
                         @"radioMostPopular" : @(HomeSectionRadioMostPopular),
-                        @"radioLatest" : @(HomeSectionRadioLatest),
-                        @"radioLatestVideos" : @(HomeSectionRadioLatestVideos),
-                        @"radioAllShows" : @(HomeSectionRadioAllShows),
+                        @"radioResumePlayback" : @(HomeSectionRadioResumePlayback),
                         @"radioShowsAccess" : @(HomeSectionRadioShowsAccess),
-                        @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows) };
+                        @"radioWatchLater" : @(HomeSectionRadioWatchLater)
+        };
     });
     NSNumber *section = s_sections[string];
     return section ? section.integerValue : HomeSectionUnknown;
