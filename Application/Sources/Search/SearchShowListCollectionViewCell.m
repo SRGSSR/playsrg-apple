@@ -114,6 +114,38 @@
     }] resume];
 }
 
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.shows[indexPath.row] at:indexPath in:self.play_nearestViewController];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
+{
+    [ContextMenuObjC commitPreviewIn:self.play_nearestViewController animator:animator];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inCollectionView:(UICollectionView *)collectionView
+{
+    UIView *interactionView = [ContextMenuObjC interactionViewInCollectionView:collectionView with:configuration];
+    if (! interactionView) {
+        return nil;
+    }
+    
+    UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
+    parameters.backgroundColor = UIColor.srg_gray1Color;
+    return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
+}
+
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
