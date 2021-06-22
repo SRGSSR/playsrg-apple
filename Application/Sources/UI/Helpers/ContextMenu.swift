@@ -45,7 +45,7 @@ enum ContextMenu {
                 viewController.play_presentMediaPlayer(from: letterboxController, withAirPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
             else if let navigationController = viewController.navigationController {
-                navigationController.present(previewViewController, animated: true, completion: nil)
+                navigationController.pushViewController(previewViewController, animated: true)
             }
         }
     }
@@ -195,7 +195,9 @@ private extension ContextMenu {
 
 private extension ContextMenu {
     static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+        return UIContextMenuConfiguration(identifier: identifier) {
+            return ShowViewController(show: show, fromPushNotification: false)
+        } actionProvider: { _ in
             return menu(for: show, in: viewController)
         }
     }
