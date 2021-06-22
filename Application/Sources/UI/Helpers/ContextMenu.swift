@@ -7,7 +7,50 @@
 import SRGDataProviderModel
 import UIKit
 
+// MARK: Context menu management
+
 enum ContextMenu {
+    static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
+        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
+    }
+    
+    static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        switch item {
+        case let .media(media):
+            return UIContextMenuConfiguration(identifier: identifier) {
+                return MediaPreviewViewController(media: media)
+            } actionProvider: { _ in
+                return menu(for: media, in: viewController)
+            }
+        case let .show(show):
+            return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
+                return menu(for: show, in: viewController)
+            }
+        default:
+            return nil
+        }
+    }
+    
+    static func interactionView(in collectionView: UICollectionView, withIdentifier identifier: NSCopying) -> UIView? {
+        guard let indexPath = identifier as? NSIndexPath else { return nil }
+        return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
+    }
+    
+    static func commitPreview(in viewController: UIViewController, animator: UIContextMenuInteractionCommitAnimating) {
+        animator.preferredCommitStyle = .pop
+        animator.addCompletion {
+            guard let previewViewController = animator.previewViewController else { return }
+            if let mediaPreviewViewController = previewViewController as? MediaPreviewViewController {
+                guard let letterboxController = mediaPreviewViewController.letterboxController else { return }
+                viewController.play_presentMediaPlayer(from: letterboxController, withAirPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+            else if let navigationController = viewController.navigationController {
+                navigationController.present(previewViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
     private class ActivityPopoverPresentationDelegate: NSObject, UIPopoverPresentationControllerDelegate {
         func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
             return .formSheet
@@ -25,6 +68,19 @@ enum ContextMenu {
         popoverPresentationController?.delegate = popoverPresentationDelegate
         
         viewController.present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: Media context menu
+
+private extension ContextMenu {
+    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
+        return UIMenu(title: "", children: [
+            watchLaterAction(for: media, in: viewController),
+            downloadAction(for: media, in: viewController),
+            sharingAction(for: media, in: viewController),
+            moreEpisodesAction(for: media, in: viewController)
+        ].compactMap { $0 })
     }
     
     private static func watchLaterAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
@@ -122,59 +178,51 @@ enum ContextMenu {
             navigationController.pushViewController(showViewController, animated: true)
         }
     }
-    
-    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
+}
+
+// MARK: Show context menu
+
+private extension ContextMenu {
+    private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
-            watchLaterAction(for: media, in: viewController),
-            downloadAction(for: media, in: viewController),
-            sharingAction(for: media, in: viewController),
-            moreEpisodesAction(for: media, in: viewController)
+            favoriteAction(for: show, in: viewController),
+            sharingAction(for: show, in: viewController)
         ].compactMap { $0 })
     }
     
-    private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
-        var elements: [UIMenuElement] = []
-        return UIMenu(title: "", children: elements)
-    }
-    
-    static func configuration(for item: Content.Item, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
-        return configuration(for: item, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
-    }
-    
-    static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
-        switch item {
-        case let .media(media):
-            return UIContextMenuConfiguration(identifier: identifier) {
-                return MediaPreviewViewController(media: media)
-            } actionProvider: { _ in
-                return menu(for: media, in: viewController)
-            }
-        case let .show(show):
-            return UIContextMenuConfiguration(identifier: identifier, previewProvider: nil) { _ in
-                return menu(for: show, in: viewController)
-            }
-        default:
-            return nil
+    private static func favoriteAction(for show: SRGShow, in viewController: UIViewController) -> UIAction? {
+        func title(isFavorite: Bool) -> String {
+            return isFavorite ? NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites") : NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
         }
+        
+        func image(isFavorite: Bool) -> UIImage {
+            return isFavorite ? UIImage(named: "favorite_full")! : UIImage(named: "favorite")!
+        }
+        
+        let isFavorite = FavoritesContainsShow(show)
+        let menuAction = UIAction(title: title(isFavorite: isFavorite), image: image(isFavorite: isFavorite)) { _ in
+            FavoritesToggleShow(show)
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.peekMenu.rawValue
+            labels.value = show.urn
+            
+            let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+            
+            Banner.showFavorite(!isFavorite, forItemWithName: show.title, in: viewController)
+        }
+        if isFavorite {
+            menuAction.attributes = .destructive
+        }
+        return menuAction
     }
     
-    static func interactionView(in collectionView: UICollectionView, withIdentifier identifier: NSCopying) -> UIView? {
-        guard let indexPath = identifier as? NSIndexPath else { return nil }
-        return collectionView.cellForItem(at: IndexPath(row: indexPath.row, section: indexPath.section))
-    }
-    
-    static func commitPreview(in viewController: UIViewController, animator: UIContextMenuInteractionCommitAnimating) {
-        animator.preferredCommitStyle = .pop
-        animator.addCompletion {
-            guard let previewViewController = animator.previewViewController else { return }
-            if let mediaPreviewViewController = previewViewController as? MediaPreviewViewController {
-                guard let letterboxController = mediaPreviewViewController.letterboxController else { return }
-                viewController.play_presentMediaPlayer(from: letterboxController, withAirPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            }
-            else if let navigationController = viewController.navigationController {
-                navigationController.present(previewViewController, animated: true, completion: nil)
-            }
+    private static func sharingAction(for show: SRGShow, in viewController: UIViewController) -> UIAction? {
+        guard let sharingItem = SharingItem(for: show) else { return nil }
+        return UIAction(title: NSLocalizedString("Share", comment: "Context menu action to share a show"),
+                        image: UIImage(named: "share")!) { _ in
+            shareItem(sharingItem, in: viewController)
         }
     }
 }
