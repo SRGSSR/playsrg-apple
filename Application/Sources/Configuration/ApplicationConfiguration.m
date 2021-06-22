@@ -7,6 +7,7 @@
 #import "ApplicationConfiguration.h"
 
 #import "ApplicationSettings.h"
+#import "ApplicationSettings+Common.h"
 #import "PlayFirebaseConfiguration.h"
 #import "PlayLogger.h"
 #import "SRGMedia+PlaySRG.h"
@@ -456,7 +457,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    if (! contentSection.presentation.hasDetailPage) {
+    if (! contentSection.presentation.hasDetailPage && !ApplicationSettingSectionWideSupportEnabled()) {
         return nil;
     }
     
