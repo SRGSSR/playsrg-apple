@@ -14,6 +14,7 @@
 #import "BaseViewController.h"
 #import "CalendarViewController.h"
 #import "ChannelService.h"
+#import "Download.h"
 #import "Favorites.h"
 #import "GoogleCastBarButtonItem.h"
 #import "History.h"

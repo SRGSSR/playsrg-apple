@@ -50,6 +50,41 @@ enum ContextMenu {
         return menuAction
     }
     
+    private static func downloadAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+        guard Download.canDownloadMedia(media) else { return nil}
+        
+        func title(for download: Download?) -> String {
+            return download != nil ? NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads") : NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+        }
+        
+        func image(for download: Download?) -> UIImage {
+            return download != nil ? UIImage(named: "downloadable_stop")! : UIImage(named: "downloadable")!
+        }
+        
+        let download = Download(for: media)
+        let menuAction = UIAction(title: title(for: download), image: image(for: download)) { _ in
+            if let download = download {
+                Download.removeDownload(download)
+            }
+            else {
+                Download.add(for: media)
+            }
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.peekMenu.rawValue
+            labels.value = media.urn
+            
+            let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+            
+            Banner.showDownload(download == nil, forItemWithName: media.title, in: viewController)
+        }
+        if download != nil {
+            menuAction.attributes = .destructive
+        }
+        return menuAction
+    }
+    
     private static func moreEpisodesAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard !ApplicationConfiguration.shared.areShowsUnavailable,
               let show = media.show,
@@ -64,6 +99,7 @@ enum ContextMenu {
     private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media, in: viewController),
+            downloadAction(for: media, in: viewController),
             moreEpisodesAction(for: media, in: viewController)
         ].compactMap { $0 })
     }
