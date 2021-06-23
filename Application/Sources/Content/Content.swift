@@ -341,8 +341,10 @@ private extension Content {
                 return AnalyticsPageTitle.favorites.rawValue
             case .radioLatest, .radioLatestVideos:
                 return AnalyticsPageTitle.latest.rawValue
-            case .radioLatestEpisodes, .radioLatestEpisodesFromFavorites:
+            case .radioLatestEpisodes:
                 return AnalyticsPageTitle.latestEpisodes.rawValue
+            case .radioLatestEpisodesFromFavorites:
+                return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
             case .radioMostPopular:
                 return AnalyticsPageTitle.mostPopular.rawValue
             case .radioResumePlayback:
