@@ -306,7 +306,6 @@ private extension Content {
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
             case .radioEpisodesForDay, .tvEpisodesForDay:
-                // TODO: Could build a title with the day, something like "Episodes for <day>". Requires formatting to be possible for SRGDay
                 return nil
             }
         }
@@ -358,10 +357,7 @@ private extension Content {
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.events.rawValue
-            case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
-                return nil
-            case .radioEpisodesForDay, .tvEpisodesForDay:
-                // TODO: Could maybe use the day string representation
+            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
                 return nil
             }
         }
@@ -387,10 +383,7 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-            case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
-                return nil
-            case .radioEpisodesForDay, .tvEpisodesForDay:
-                // TODO: To be defined
+            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
                 return nil
             }
         }
