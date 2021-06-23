@@ -408,7 +408,7 @@ private extension PageViewModel {
                 #else
                 return .liveMediaSwimlane
                 #endif
-            case .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvLiveCenter, .tvScheduledLivestreams:
+            case .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
             case .radioFavoriteShows:
                 return .showSwimlane

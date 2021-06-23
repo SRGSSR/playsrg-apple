@@ -18,7 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithDate:(nullable NSDate *)date radioChannel:(nullable RadioChannel *)radioChannel;
 
 @property (nonatomic, readonly, nullable) NSDate *date;
-@property (nonatomic, readonly, nullable) RadioChannel *radioChannel;
 
 @end
 

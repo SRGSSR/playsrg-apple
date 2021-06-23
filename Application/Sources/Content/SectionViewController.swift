@@ -200,7 +200,7 @@ private extension SectionViewController {
     }
 }
 
-// MARK: Objective-C constructors
+// MARK: Objective-C API
 
 extension SectionViewController {
     @objc static func viewController(for contentSection: SRGContentSection) -> SectionViewController {

@@ -212,7 +212,7 @@ private extension PageViewController {
     #endif
 }
 
-// MARK: Objective-C constructors
+// MARK: Objective-C API
 
 extension PageViewController {
     @objc static func videosViewController() -> UIViewController {

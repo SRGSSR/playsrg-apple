@@ -305,6 +305,9 @@ private extension Content {
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
+            case .radioEpisodesForDay, .tvEpisodesForDay:
+                // TODO: Could build a title with the day, something like "Episodes for <day>". Requires formatting to be possible for SRGDay
+                return nil
             }
         }
         
@@ -318,7 +321,7 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch configuredSection.type {
-            case .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvLiveCenter, .tvScheduledLivestreams:
+            case .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -357,6 +360,9 @@ private extension Content {
                 return AnalyticsPageTitle.events.rawValue
             case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
                 return nil
+            case .radioEpisodesForDay, .tvEpisodesForDay:
+                // TODO: Could maybe use the day string representation
+                return nil
             }
         }
         
@@ -383,6 +389,9 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .radioShowAccess, .tvLive, .radioLive, .radioLiveSatellite:
                 return nil
+            case .radioEpisodesForDay, .tvEpisodesForDay:
+                // TODO: To be defined
+                return nil
             }
         }
         
@@ -402,6 +411,10 @@ private extension Content {
             case let .radioAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }
+                    .eraseToAnyPublisher()
+            case let .radioEpisodesForDay(day, channelUid: channelUid):
+                return dataProvider.radioEpisodes(for: vendor, channelUid: channelUid, day: day, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .radioFavoriteShows:
                 return dataProvider.favoritesPublisher(filter: filter)
@@ -453,6 +466,10 @@ private extension Content {
                 #endif
             case .radioWatchLater:
                 return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case let .tvEpisodesForDay(day):
+                return dataProvider.tvEpisodes(for: vendor, day: day, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvLive:
