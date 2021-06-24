@@ -27,3 +27,4 @@ xcuserdata
 
 /vendor
 /.bundle
+.ruby-version

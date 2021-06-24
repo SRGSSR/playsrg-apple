@@ -135,5 +135,6 @@
   "3.1.8-356": "- Swiss Satellite radio channels have logos.",
   "3.1.8-357": "- Playback can be controlled using an external keyboard.\n- Crashes are always reported to AppCenter without the need for user consent.",
   "3.1.9-358": "- Allow removal of expired medias from the Later list.\n- Open website urls in the default browser application.",
-  "3.1.9-359": "- Fix deadlock at application start\n- Updated translations for all BUs.\n- [RTS] Fix resume playback not correctly working for some content."
+  "3.1.9-359": "- Fix deadlock at application start\n- Updated translations for all BUs.\n- [RTS] Fix resume playback not correctly working for some content.",
+  "3.1.10-361": "- Fix crash occurring when jumping in a media and a blocked segment covers the end of it."
 }
