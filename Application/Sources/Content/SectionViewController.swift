@@ -465,10 +465,17 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
-        let headerItem: SectionViewModel.Item?
+        let headerItem: SectionViewModel.HeaderItem?
         
         var body: some View {
             switch headerItem {
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    SectionShowHeaderView(section: section.wrappedValue, show: show)
+                default:
+                    Color.clear
+                }
             case let .show(show):
                 SectionShowHeaderView(section: section.wrappedValue, show: show)
             default:
@@ -476,8 +483,15 @@ private extension SectionViewController {
             }
         }
         
-        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.Item?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch headerItem {
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                default:
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                }
             case let .show(show):
                 return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             default:

@@ -90,13 +90,18 @@ extension SectionViewModel {
         }
     }
     
+    enum HeaderItem {
+        case item(Content.Item)
+        case show(SRGShow)
+    }
+    
     typealias Item = Content.Item
     typealias Row = CollectionRow<Section, Item>
     
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: Item?, row: Row)
+        case loaded(headerItem: HeaderItem?, row: Row)
         
         var isEmpty: Bool {
             if case let .loaded(headerItem: _, row: row) = self {
@@ -107,7 +112,7 @@ extension SectionViewModel {
             }
         }
         
-        var headerItem: Item? {
+        var headerItem: HeaderItem? {
             if case let .loaded(headerItem: headerItem, row: _) = self {
                 return headerItem
             }
@@ -135,7 +140,7 @@ extension SectionViewModel {
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     
-    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item?
+    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
     func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
 }
 
@@ -169,9 +174,9 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item? {
-            if contentSection.type == .showAndMedias, case .show = items.first {
-                return items.first
+        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
+            if contentSection.type == .showAndMedias, let firstItem = items.first, case .show = firstItem {
+                return .item(firstItem)
             }
             else {
                 return nil
@@ -204,8 +209,13 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item? {
-            return nil
+        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
+            switch configuredSection.type {
+            case let .show(show):
+                return .show(show)
+            default:
+                return nil
+            }
         }
         
         func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
