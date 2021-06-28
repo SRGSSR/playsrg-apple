@@ -29,7 +29,7 @@ class PageViewController: UIViewController {
     
     private var globalHeaderTitle: String? {
         #if os(tvOS)
-        return model.title
+        return tabBarController == nil ? model.title : nil
         #else
         return nil
         #endif
