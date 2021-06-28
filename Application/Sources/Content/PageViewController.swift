@@ -142,6 +142,7 @@ class PageViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        #if os(iOS)
         model.$serviceStatus
             .sink { [weak self] status in
                 if let self = self, case let .bad(message) = status {
@@ -149,6 +150,7 @@ class PageViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
