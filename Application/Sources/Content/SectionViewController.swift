@@ -477,7 +477,7 @@ private extension SectionViewController {
                     Color.clear
                 }
             case let .show(show):
-                SectionShowHeaderView(section: section.wrappedValue, show: show)
+                ShowHeaderView(show: show)
             default:
                 Color.clear
             }
@@ -493,7 +493,7 @@ private extension SectionViewController {
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
             case let .show(show):
-                return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             default:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
