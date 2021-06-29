@@ -10,14 +10,16 @@ struct LabeledButton: View {
     let icon: String
     let label: String
     let accessibilityLabel: String
+    let accessibilityHint: String?
     let action: () -> Void
     
     @State private var isFocused = false
     
-    init(icon: String, label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
+    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
         self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
         self.action = action
     }
     
@@ -28,7 +30,7 @@ struct LabeledButton: View {
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onParentFocusChange { isFocused = $0 }
-                    .accessibilityElement(label: accessibilityLabel, traits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
             Text(label)
                 .srgFont(.subtitle2)
