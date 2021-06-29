@@ -35,6 +35,8 @@ class SectionViewController: UIViewController {
         #endif
     }
     
+    private var contentInsets: UIEdgeInsets
+    
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
         if case let .loaded(headerItem: _, row: row) = state {
@@ -46,6 +48,7 @@ class SectionViewController: UIViewController {
     
     init(section: Content.Section, filter: SectionFiltering? = nil) {
         model = SectionViewModel(section: section, filter: filter)
+        contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
         title = model.title
     }
@@ -155,6 +158,9 @@ class SectionViewController: UIViewController {
             emptyView.content = row.isEmpty ? EmptyView(state: .empty) : nil
         }
         
+        contentInsets = Self.contentInsets(for: state)
+        play_setNeedsContentInsetsUpdate()
+        
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
@@ -165,9 +171,13 @@ class SectionViewController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
                 #endif
-                self.play_setNeedsContentInsetsUpdate()
             }
         }
+    }
+    
+    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
+        let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
     #if os(iOS)
@@ -259,8 +269,7 @@ extension SectionViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        let top = (model.state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
-        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        return contentInsets
     }
 }
 
