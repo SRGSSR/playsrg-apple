@@ -99,7 +99,7 @@ struct ShowHeaderView: View {
                 HStack(spacing: 20) {
                     Button(action: favoriteAction, label: {
                         HStack(spacing: 5) {
-                            Image("show_favorite")
+                            Image("favorite")
                             Text("Add to favorites")
                                 .srgFont(.button)
                         }
@@ -107,7 +107,7 @@ struct ShowHeaderView: View {
                     Button(action: subscriptionAction, label: {
                         HStack(spacing: 5) {
                             Image("show_subscription")
-                            Text("Subscribe")
+                            Text("Notify me")
                                 .srgFont(.button)
                         }
                     })
