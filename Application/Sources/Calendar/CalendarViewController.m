@@ -391,7 +391,7 @@
 {
     UIViewController<DailyMediasViewController> *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
     UIScrollView *scrollView = currentDailyMediasViewController.scrollView;
-    return otherGestureRecognizer.view == scrollView;
+    return otherGestureRecognizer.view == scrollView && [otherGestureRecognizer isKindOfClass:UIPanGestureRecognizer.class];
 }
 
 #pragma mark UIPageViewControllerDataSource protocol
