@@ -276,6 +276,38 @@ extension PageViewController: UICollectionViewDelegate {
             }
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item.wrappedValue {
+        case let .item(wrappedItem):
+            return ContextMenu.configuration(for: wrappedItem, at: indexPath, in: self)
+        default:
+            return nil
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        ContextMenu.commitPreview(in: self, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
+    }
     #endif
     
     #if os(tvOS)

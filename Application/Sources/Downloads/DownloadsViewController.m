@@ -310,6 +310,38 @@
     return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(DownloadFooterSectionView.class)];
 }
 
+- (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.downloads[indexPath.row] at:indexPath in:self];
+}
+
+- (void)tableView:(UITableView *)tableView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
+{
+    [ContextMenuObjC commitPreviewIn:self animator:animator];
+}
+
+- (UITargetedPreview *)tableView:(UITableView *)tableView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inTableView:tableView];
+}
+
+- (UITargetedPreview *)tableView:(UITableView *)tableView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inTableView:tableView];
+}
+
+- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inTableView:(UITableView *)tableView
+{
+    UIView *interactionView = [ContextMenuObjC interactionViewInTableView:tableView with:configuration];
+    if (! interactionView) {
+        return nil;
+    }
+    
+    UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
+    parameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
+}
+
 #pragma mark Actions
 
 - (void)refresh:(id)sender

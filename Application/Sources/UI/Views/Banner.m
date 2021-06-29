@@ -121,6 +121,28 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 
++ (void)showDownload:(BOOL)downloaded forItemWithName:(NSString *)name
+{
+    [self showDownload:downloaded forItemWithName:name inViewController:nil];
+}
+
++ (void)showDownload:(BOOL)downloaded forItemWithName:(NSString *)name inView:(UIView *)view
+{
+    [self showDownload:downloaded forItemWithName:name inViewController:view.play_nearestViewController];
+}
+
++ (void)showDownload:(BOOL)downloaded forItemWithName:(NSString *)name inViewController:(UIViewController *)viewController
+{
+    if (! name) {
+        name = NSLocalizedString(@"The selected content", @"Name of the download item, if no title or name to display");
+    }
+    
+    NSString *messageFormatString = downloaded ? NSLocalizedString(@"%@ has been added to downloads", @"Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application.") : NSLocalizedString(@"%@ has been deleted from downloads", @"Message displayed at the top of the screen when removing a media from downloads. Quotes are managed by the application.");
+    NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
+    UIImage *image = downloaded ? [UIImage imageNamed:@"downloadable"] : [UIImage imageNamed:@"downloadable_stop"];
+    [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
+}
+
 + (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name
 {
     [self showSubscription:subscribed forShowWithName:name inViewController:nil];

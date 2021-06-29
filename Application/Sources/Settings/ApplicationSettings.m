@@ -156,11 +156,6 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
     }
 }
 
-BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
-{
-    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
-}
-
 BOOL ApplicationSettingSubtitleAvailabilityDisplayed(void)
 {
     if (ApplicationConfiguration.sharedApplicationConfiguration.subtitleAvailabilityHidden) {
@@ -265,4 +260,9 @@ NSString *ApplicationSettingServiceNameForKey(NSString *key)
         return [string caseInsensitiveCompare:key] == NSOrderedSame;
     }];
     return [[specifier multipleTitles] filteredArrayUsingPredicate:predicate].firstObject;
+}
+
+BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
 }

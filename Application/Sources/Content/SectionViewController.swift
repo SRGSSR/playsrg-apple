@@ -181,33 +181,8 @@ class SectionViewController: UIViewController {
     @objc func shareContent(_ barButtonItem: UIBarButtonItem) {
         guard let sharingItem = model.section.properties.sharingItem else { return }
         
-        let activityViewController = UIActivityViewController.init(activityItems: [sharingItem], applicationActivities: nil)
-        activityViewController.excludedActivityTypes = [
-            .print,
-            .assignToContact,
-            .saveToCameraRoll,
-            .postToFlickr,
-            .postToVimeo,
-            .postToTencentWeibo
-        ]
-        
-        activityViewController.completionWithItemsHandler = { activityType, completed, _, _ in
-            guard completed else { return }
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.type = activityType?.rawValue
-            labels.source = AnalyticsSource.button.rawValue
-            labels.value = sharingItem.analyticsUid
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.sharingSection.rawValue, labels: labels)
-            
-            if activityType == .copyToPasteboard {
-                Banner.show(with: .info,
-                            message: NSLocalizedString("The content has been copied to the clipboard.", comment: "Message displayed when some content (media, show, etc.) has been copied to the clipboard"),
-                            image: nil,
-                            sticky: false,
-                            in: self)
-            }
-        }
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
+        activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
         popoverPresentationController?.barButtonItem = barButtonItem
@@ -270,6 +245,32 @@ extension SectionViewController: UICollectionViewDelegate {
             ()
         }
             
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        return ContextMenu.configuration(for: item, at: indexPath, in: self)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        ContextMenu.commitPreview(in: self, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
     }
     #endif
     

@@ -660,6 +660,19 @@
     }
 }
 
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    if ([self shouldDisplayMostSearchedShows] || [self isLoadingObjectsInSection:indexPath.section]) {
+        return nil;
+    }
+    else if ([self isDisplayingMediasInSection:indexPath.section]) {
+        return [super collectionView:collectionView contextMenuConfigurationForItemAtIndexPath:indexPath point:point];
+    }
+    else {
+        return nil;
+    }
+}
+
 #pragma mark UISearchBarDelegate protocol
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
