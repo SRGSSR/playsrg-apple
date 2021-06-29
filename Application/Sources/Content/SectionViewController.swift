@@ -202,9 +202,39 @@ private extension SectionViewController {
 
 // MARK: Objective-C API
 
+@objc protocol DailyMediasViewController {
+    var date: Date? { get }
+    var scrollView: UIScrollView { get }
+}
+
+extension SectionViewController: DailyMediasViewController {
+    var date: Date? {
+        guard case let .configured(section) = model.section else { return nil }
+        switch section.type {
+        case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
+            return day.date
+        default:
+            return nil
+        }
+    }
+    
+    var scrollView: UIScrollView {
+        return collectionView
+    }
+}
+
 extension SectionViewController {
-    @objc static func viewController(for contentSection: SRGContentSection) -> SectionViewController {
+    @objc static func viewController(forContentSection contentSection: SRGContentSection) -> SectionViewController {
         return SectionViewController(section: .content(contentSection))
+    }
+    
+    @objc static func viewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
+        if let channelUid = channelUid {
+            return SectionViewController(section: .configured(ConfiguredSection(type: .radioEpisodesForDay(day, channelUid: channelUid), contentPresentationType: .swimlane)))
+        }
+        else {
+            return SectionViewController(section: .configured(ConfiguredSection(type: .tvEpisodesForDay(day), contentPresentationType: .swimlane)))
+        }
     }
 }
 

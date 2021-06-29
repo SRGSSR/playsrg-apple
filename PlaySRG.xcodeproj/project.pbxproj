@@ -1912,11 +1912,6 @@
 		E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
-		E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
-		E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
-		E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
-		E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
-		E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E65FB2091D66D69700820696 /* DailyMediasViewController.m */; };
 		E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
@@ -2736,8 +2731,6 @@
 		E64BA3F71D4A587E002C10D5 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E64BA3F81D4A587E002C10D5 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
-		E65FB2081D66D69700820696 /* DailyMediasViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyMediasViewController.h; sourceTree = "<group>"; };
-		E65FB2091D66D69700820696 /* DailyMediasViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyMediasViewController.m; sourceTree = "<group>"; };
 		E66BEC191DA7FCED00AD4450 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
 		E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
@@ -4293,8 +4286,6 @@
 				E694A9F21D65F02700372DF0 /* CalendarViewController.h */,
 				E694A9F31D65F02700372DF0 /* CalendarViewController.m */,
 				E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */,
-				E65FB2081D66D69700820696 /* DailyMediasViewController.h */,
-				E65FB2091D66D69700820696 /* DailyMediasViewController.m */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -7614,7 +7605,6 @@
 				6FF7BB9722A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				E694A9F51D65F02700372DF0 /* CalendarViewController.m in Sources */,
 				6F80106920443230009FE197 /* PlayApplication.m in Sources */,
-				E65FB20B1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCE7A38260359220037A861 /* Extensions.swift in Sources */,
 				08AF9480217D27E40028B082 /* SharingItem.m in Sources */,
@@ -7836,7 +7826,6 @@
 				6FD88F8B22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
-				E65FB20C1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC4F2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9A2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -8035,7 +8024,6 @@
 				6FD88F8C22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
-				E65FB20D1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC502626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9B2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -8234,7 +8222,6 @@
 				6FD88F8D22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
-				E65FB20E1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC512626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9C2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -8433,7 +8420,6 @@
 				6FD88F8E22D4BC41008859EF /* UISearchBar+PlaySRG.m in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* Notification.m in Sources */,
-				E65FB20F1D66D69700820696 /* DailyMediasViewController.m in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9D2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -13959,7 +13945,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = develop;
+				branch = "feature/day-date";
 				kind = branch;
 			};
 		};
