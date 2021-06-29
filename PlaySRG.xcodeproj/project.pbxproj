@@ -3827,6 +3827,7 @@
 				085C0D982611F33E008E07C8 /* ShowAccessCell.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */,
+				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
 				0868055B26655C3E001919FD /* SubscriptionButton.swift */,
 				6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */,
@@ -3838,7 +3839,6 @@
 				6F475FAF1EB37BC6003021EA /* TranslucentTitleHeaderView.h */,
 				6F475FB01EB37BC6003021EA /* TranslucentTitleHeaderView.m */,
 				6F475FB11EB37BC6003021EA /* TranslucentTitleHeaderView.xib */,
-				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

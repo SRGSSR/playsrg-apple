@@ -97,20 +97,10 @@ struct ShowHeaderView: View {
                         .foregroundColor(.srgGray4)
                 }
                 HStack(spacing: 20) {
-                    Button(action: favoriteAction, label: {
-                        HStack(spacing: 5) {
-                            Image("favorite")
-                            Text("Add to favorites")
-                                .srgFont(.button)
-                        }
-                    })
-                    Button(action: subscriptionAction, label: {
-                        HStack(spacing: 5) {
-                            Image("show_subscription")
-                            Text("Notify me")
-                                .srgFont(.button)
-                        }
-                    })
+                    SimpleButton(icon: "favorite", label: "Add to favorites", action: favoriteAction)
+                    #if os(iOS)
+                    SimpleButton(icon: "subscription", label: "Notify me", action: subscriptionAction)
+                    #endif
                 }
                 .foregroundColor(.srgGray5)
             }

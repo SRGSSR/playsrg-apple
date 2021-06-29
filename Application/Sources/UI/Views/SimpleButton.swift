@@ -32,7 +32,6 @@ struct SimpleButton: View {
                 Text(label)
                     .srgFont(.button)
                     .onParentFocusChange { isFocused = $0 }
-                    .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
                     .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
