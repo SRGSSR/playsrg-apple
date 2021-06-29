@@ -159,7 +159,7 @@ struct SectionShowHeaderView: View {
                     .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
                     .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
                     .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
-                    .cornerRadius(LayoutStandardViewCornerRadius)
+                    .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
                 }
             }
