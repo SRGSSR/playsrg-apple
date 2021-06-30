@@ -31,6 +31,7 @@ struct SimpleButton: View {
                 Image(icon)
                 Text(label)
                     .srgFont(.button)
+                    .lineLimit(1)
             }
             .onParentFocusChange { isFocused = $0 }
             .padding(.horizontal, constant(iOS: 10, tvOS: 16))
