@@ -35,6 +35,66 @@ class ShowHeaderViewModel: ObservableObject {
         return show?.imageUrl(for: .large)
     }
     
+    var favoriteIcon: String {
+        return isFavorite ? "favorite_full" : "favorite"
+    }
+    
+    var favoriteLabel: String {
+        if isFavorite {
+            return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
+        }
+        else {
+            return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
+        }
+    }
+    
+    var favoriteAccessibilityLabel: String {
+        if isFavorite {
+            return PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited")
+        }
+        else {
+            return PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited")
+        }
+    }
+    
+    #if os(iOS)
+    var subscriptionIcon: String {
+        if isPushServiceEnabled {
+            return isSubscribed ? "subscription_full" : "subscription"
+        }
+        else {
+            return "subscription_disabled"
+        }
+    }
+    
+    var subscriptionLabel: String {
+        if isPushServiceEnabled && isSubscribed {
+            return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
+        }
+        else {
+            return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
+        }
+    }
+    
+    var subscriptionAccessibilityLabel: String {
+        if isPushServiceEnabled && isSubscribed {
+            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", "Show unsubscription label")
+        }
+        else {
+            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", "Show subscription label")
+        }
+    }
+    
+    private var isPushServiceEnabled: Bool {
+        if let pushService = PushService.shared {
+            return pushService.isEnabled
+        }
+        else {
+            return false
+        }
+    }
+    #endif
+    
     func toggleFavorite() {
         guard let show = show else { return }
         FavoritesToggleShow(show)

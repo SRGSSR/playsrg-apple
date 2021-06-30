@@ -84,52 +84,6 @@ struct ShowHeaderView: View {
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
         
-        private var isPushServiceEnabled: Bool {
-            #if os(iOS)
-            if let pushService = PushService.shared {
-                return pushService.isEnabled
-            }
-            else {
-                return false
-            }
-            #else
-            return false
-            #endif
-        }
-        
-        private var favoriteIcon: String {
-            return model.isFavorite ? "favorite_full" : "favorite"
-        }
-        
-        private var favoriteLabel: String {
-            if model.isFavorite {
-                return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
-            }
-            else {
-                return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
-            }
-        }
-        
-        #if os(iOS)
-        private var subscriptionIcon: String {
-            if isPushServiceEnabled {
-                return model.isSubscribed ? "subscription_full" : "subscription"
-            }
-            else {
-                return "subscription_disabled"
-            }
-        }
-        
-        private var subscriptionLabel: String {
-            if isPushServiceEnabled && model.isSubscribed {
-                return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
-            }
-            else {
-                return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
-            }
-        }
-        #endif
-        
         var body: some View {
             VStack {
                 if let broadcastInformation = model.broadcastInformation {
@@ -154,10 +108,10 @@ struct ShowHeaderView: View {
                         .foregroundColor(.srgGray4)
                 }
                 HStack(spacing: 20) {
-                    SimpleButton(icon: favoriteIcon, label: favoriteLabel, action: favoriteAction)
+                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
                     #if os(iOS)
                     if model.isFavorite {
-                        SimpleButton(icon: subscriptionIcon, label: subscriptionLabel, action: subscriptionAction)
+                        SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
                     }
                     #endif
                 }
