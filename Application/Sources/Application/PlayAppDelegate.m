@@ -695,15 +695,13 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)openShowURN:(NSString *)showURN show:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification
 {
     if (show) {
-        // FIXME: Push notif flag
-        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
+        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
         [self.rootTabBarController pushViewController:showViewController animated:YES];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (show) {
-                // FIXME: Push notif flag
-                SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
+                SectionViewController *showViewController = [SectionViewController showViewControllerFor:show fromPushNotification:fromPushNotification];
                 [self.rootTabBarController pushViewController:showViewController animated:YES];
             }
             else {

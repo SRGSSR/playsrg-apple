@@ -13,6 +13,7 @@ import UIKit
 
 class SectionViewController: UIViewController {
     let model: SectionViewModel
+    let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -46,8 +47,9 @@ class SectionViewController: UIViewController {
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering? = nil) {
+    init(section: Content.Section, filter: SectionFiltering? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
+        self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
         title = model.title
@@ -256,8 +258,12 @@ extension SectionViewController {
         }
     }
     
+    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
+        return SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)), fromPushNotification: fromPushNotification)
+    }
+    
     @objc static func showViewController(for show: SRGShow) -> SectionViewController {
-        return SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)))
+        return showViewController(for: show, fromPushNotification: false)
     }
 }
 
@@ -359,6 +365,10 @@ extension SectionViewController: SRGAnalyticsViewTracking {
     
     var srg_pageViewLevels: [String]? {
         return model.section.properties.analyticsLevels
+    }
+    
+    var srg_isOpenedFromPushNotification: Bool {
+        return fromPushNotification
     }
 }
 
