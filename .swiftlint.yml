@@ -23,7 +23,7 @@ function_parameter_count:
   warning: 8
 
 cyclomatic_complexity:
-  warning: 15
+  warning: 17
 
 nesting:
   type_level: 2
