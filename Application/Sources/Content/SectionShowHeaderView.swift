@@ -62,7 +62,7 @@ struct SectionShowHeaderView: View {
                 .layoutPriority(1)
             VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
                 DescriptionView(section: section)
-                ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
+                ShowAccessButton(show: show)
             }
             .padding(.horizontal, constant(iOS: 16, tvOS: 80))
             .padding(.vertical)
@@ -117,7 +117,6 @@ struct SectionShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
-        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
         
         @State private var isFocused = false
         
@@ -131,23 +130,10 @@ struct SectionShowHeaderView: View {
         
         var body: some View {
             ResponderChain { firstResponder in
-                Button {
+                SimpleButton(icon: "episodes", label: show.title) {
                     firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
-                } label: {
-                    HStack(spacing: 15) {
-                        Image("episodes")
-                        Text(show.title)
-                            .srgFont(.button)
-                    }
-                    .onParentFocusChange { isFocused = $0 }
-                    .padding(.horizontal, constant(iOS: 10, tvOS: 16))
-                    .padding(.vertical, constant(iOS: 8, tvOS: 12))
-                    .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
-                    .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
-                    .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
                 }
+                .frame(maxWidth: 350)
             }
         }
     }
@@ -170,17 +156,6 @@ private extension View {
             }
             else {
                 self.frame(height: constant(iOS: 300, tvOS: 500), alignment: .top)
-            }
-        }
-    }
-    
-    func adaptiveButtonFrame(height: CGFloat, for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
-        return Group {
-            if horizontalSizeClass == .compact {
-                self.frame(maxWidth: .infinity, minHeight: height, alignment: .leading)
-            }
-            else {
-                self.frame(maxWidth: 300, minHeight: height, maxHeight: height)
             }
         }
     }

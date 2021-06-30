@@ -158,7 +158,6 @@ struct ShowHeaderView: View {
                     }
                     #endif
                 }
-                .foregroundColor(.srgGray5)
             }
         }
         

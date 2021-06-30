@@ -31,11 +31,14 @@ struct SimpleButton: View {
                 Image(icon)
                 Text(label)
                     .srgFont(.button)
-                    .onParentFocusChange { isFocused = $0 }
-                    .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
+            .onParentFocusChange { isFocused = $0 }
+            .padding(.horizontal, constant(iOS: 10, tvOS: 16))
+            .padding(.vertical, constant(iOS: 8, tvOS: 12))
             .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
+            .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
+            .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
     }
 }
