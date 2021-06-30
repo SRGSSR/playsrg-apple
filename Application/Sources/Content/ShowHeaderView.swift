@@ -132,6 +132,9 @@ struct ShowHeaderView: View {
         
         var body: some View {
             VStack {
+                if let broadcastInformation = model.broadcastInformation {
+                    Badge(text: broadcastInformation, color: .srgGray3)
+                }
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)

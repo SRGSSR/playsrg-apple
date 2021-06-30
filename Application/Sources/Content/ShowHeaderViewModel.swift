@@ -27,6 +27,10 @@ class ShowHeaderViewModel: ObservableObject {
         return show?.lead
     }
     
+    var broadcastInformation: String? {
+        return show?.broadcastInformation?.message
+    }
+    
     var imageUrl: URL? {
         return show?.imageUrl(for: .large)
     }
