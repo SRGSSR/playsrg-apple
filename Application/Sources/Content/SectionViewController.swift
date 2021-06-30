@@ -156,8 +156,8 @@ class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case let .loaded(headerItem: _, row: row):
-            emptyView.content = row.isEmpty ? EmptyView(state: .empty) : nil
+        case let .loaded(headerItem: headerItem, row: row):
+            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty) : nil
         }
         
         contentInsets = Self.contentInsets(for: state)
