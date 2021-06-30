@@ -430,7 +430,12 @@ private extension Content {
         
         #if os(iOS)
         var sharingItem: SharingItem? {
-            return nil
+            switch configuredSection.type {
+            case let .show(show):
+                return SharingItem(for: show)
+            default:
+                return nil
+            }
         }
         #endif
         
