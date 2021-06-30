@@ -33,6 +33,8 @@ struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
     
+    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
+    
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
@@ -60,7 +62,7 @@ struct SectionShowHeaderView: View {
                 .background(Color.white.opacity(0.1))
                 .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                 .layoutPriority(1)
-            VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
+            VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 DescriptionView(section: section)
                 ShowAccessButton(show: show)
             }
@@ -89,7 +91,7 @@ struct SectionShowHeaderView: View {
         let section: Content.Section
         
         var body: some View {
-            VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
+            VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 if let title = section.properties.title {
                     Text(title)
                         .srgFont(.H2)
@@ -164,8 +166,6 @@ private extension View {
 // MARK: Size
 
 class SectionShowHeaderViewSize: NSObject {
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
-    
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)

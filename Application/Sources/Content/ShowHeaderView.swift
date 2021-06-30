@@ -13,6 +13,8 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
+    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
+    
     init(show: SRGShow) {
         _show = .constant(show)
     }
@@ -85,7 +87,7 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         
         var body: some View {
-            VStack {
+            VStack(spacing: ShowHeaderView.verticalSpacing) {
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: .srgGray3)
                 }
