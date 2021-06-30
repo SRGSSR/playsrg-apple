@@ -10,10 +10,10 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct ShowHeaderView: View {
-    @Binding private(set) var show: SRGShow?
+    @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
-    init(show: SRGShow?) {
+    init(show: SRGShow) {
         _show = .constant(show)
     }
     
