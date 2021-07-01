@@ -43,7 +43,8 @@
 /* A download button label */
 "Delete download" = "Supprimer le téléchargement";
 
-/* Media deletion from later list label */
+/* Media deletion from later list label
+   Media deletion from later list label in the media detail view when a media is in the later list */
 "Delete from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
 
 /* Favorite label in the player view when a show has been favorited
@@ -71,7 +72,8 @@
 /* Introductory title for information notifications */
 "Information" = "Information";
 
-/* Media addition for an audio to later list label */
+/* Media addition for an audio to later list label
+   Media addition to later list label in media detail view to add an audio to the later list */
 "Listen later" = "Écouter plus tard";
 
 /* Accessibility introductory text for the logged in user */
@@ -134,6 +136,9 @@
 /* Song cell hint */
 "Plays the music." = "Joue la musique.";
 
+/* Profile button label on home view */
+"Profile" = "Profil";
+
 /* Mini player label */
 "Recently played: %@" = "Joué récemment : %@";
 
@@ -170,5 +175,6 @@
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
 
-/* Media addition for a video to later list label */
+/* Media addition for a video to later list label
+   Media addition to later list label in media detail view to add a video to the later list */
 "Watch later" = "Regarder plus tard";
