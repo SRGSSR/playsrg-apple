@@ -46,7 +46,10 @@ extension ApplicationConfiguration {
 
 struct ConfiguredSection: Hashable {
     enum `Type`: Hashable {
+        case tvEpisodesForDay(_ day: SRGDay)
+        
         case radioAllShows(channelUid: String)
+        case radioEpisodesForDay(_ day: SRGDay, channelUid: String)
         case radioFavoriteShows(channelUid: String)
         case radioLatest(channelUid: String)
         case radioLatestEpisodes(channelUid: String)

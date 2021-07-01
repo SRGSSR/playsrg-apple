@@ -34,7 +34,7 @@ extension RadioChannel {
     
     private static func contentPresentationType(from configuredSectionType: ConfiguredSection.`Type`, index: Int) -> SRGContentPresentationType {
         switch configuredSectionType {
-        case .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater:
+        case .tvEpisodesForDay, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater:
             return index == 0 ? .hero : .swimlane
         case .radioAllShows:
             return .grid

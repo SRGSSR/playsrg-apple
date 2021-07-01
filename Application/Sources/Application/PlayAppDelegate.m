@@ -738,7 +738,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [[SRGDataProvider.currentDataProvider contentSectionForVendor:ApplicationConfiguration.sharedApplicationConfiguration.vendor uid:sectionUid published:YES withCompletionBlock:^(SRGContentSection * _Nullable contentSection, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         if (contentSection) {
-            SectionViewController *sectionViewController = [SectionViewController viewControllerFor:contentSection];
+            SectionViewController *sectionViewController = [SectionViewController viewControllerForContentSection:contentSection];
             [self.rootTabBarController pushViewController:sectionViewController animated:YES];
         }
         else {
