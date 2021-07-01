@@ -10,11 +10,17 @@
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Later\"" = "%@ a été ajouté à \"Plus tard\"";
 
+/* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
+"%@ has been added to downloads" = "%@ a été ajouté aux téléchargements";
+
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ a été ajouté aux favoris";
 
 /* Message displayed at the top of the screen when removing an item from the later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been deleted from \"Later\"" = "%@ a été supprimé de \"Plus tard\"";
+
+/* Message displayed at the top of the screen when removing a media from downloads. Quotes are managed by the application. */
+"%@ has been deleted from downloads" = "%@ a été supprimé des téléchargements";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been deleted from favorites" = "%@ a été supprimé des favoris";
@@ -46,14 +52,10 @@
 /* Short title displayed in home pages on a button. */
 "A to Z" = "De A à Z";
 
-/* Button label to add a download from the media long-press menu
-   Button label to add a download from the media preview window
-   Context menu action to add a media to the downloads */
+/* Context menu action to add a media to the downloads */
 "Add to downloads" = "Ajouter aux téléchargements";
 
-/* Button label to add a show to favorites in the show long-press menu
-   Button label to add a show to favorites in the show preview window
-   Context menu action to add a show to favorites
+/* Context menu action to add a show to favorites
    Label displayed in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
@@ -65,9 +67,6 @@
    Confirmation message displayed when the user is about to delete the later list
    Confirmation message displayed when the user is about to delete the whole history */
 "All items will be deleted." = "Tous les éléments seront supprimés.";
-
-/* Title label used to present already available videos, usually badged as web first */
-"Already available" = "Déjà disponible";
 
 /* Audios option
    Audios tab title
@@ -82,19 +81,13 @@
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "L'abonnement automatique a échoué. Veuillez réessayer.";
 
-/* Title label used to present the soon expiring videos */
-"Available for a limited time" = "Disponible pour un temps limité";
-
 /* Back to live shortcut label */
 "Back to live" = "Retourner au direct";
 
 /* Short title displayed in home pages on a button. */
 "By date" = "Par date";
 
-/* Label of the button to close the media long-press menu
-   Label of the button to close the media sharing menu
-   Label of the button to close the module long-press menu
-   Label of the button to close the show long-press menu
+/* Label of the button to close the media sharing menu
    Title of a cancel button
    Title of the cancel button in the alert view when deleting a download in the player view
    Title of the cancel button in the alert view when logout */
@@ -134,19 +127,13 @@
    Title of the message displayed when the user is about to delete all favorites */
 "Delete favorites" = "Supprimer les favoris";
 
-/* Button label to delete a media from the later list, from the media long-press menu
-   Button label to delete a media from the later list, from the media preview window
-   Context menu action to delete a media from the later list */
+/* Context menu action to delete a media from the later list */
 "Delete from \"Later\"" = "Supprimer de \"Plus tard\"";
 
-/* Button label to delete a download from the media long-press menu
-   Button label to delete a download from the media preview window
-   Context menu action to delete a media from the downloads */
+/* Context menu action to delete a media from the downloads */
 "Delete from downloads" = "Supprimer des téléchargements";
 
-/* Button label to delete a show from favorites in the show long-press menu
-   Button label to delete a show from favorites in the show preview window
-   Context menu action to delete a show from favorites
+/* Context menu action to delete a show from favorites
    Title of the confirmation pop-up displayed when the user is about to delete a favorite */
 "Delete from favorites" = "Supprimer des favoris";
 
@@ -194,7 +181,6 @@
 /* Label displayed in the show view when a show has been favorited
    Label to present Favorites
    Title label used to present the radio favorite shows
-   Title label used to present the TV favorite shows
    Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favoris";
 
@@ -216,10 +202,6 @@
 
 /* Full screen shortcut label */
 "Full screen" = "Plein écran";
-
-/* Title label used to present TV event modules while loading. It appears if no network connection is available and no cache is available
-   Title label used to present TV modules while loading. It appears if no network connection is available and no cache is available */
-"Highlights" = "Mises en avant";
 
 /* Label to present history */
 "History" = "Historique";
@@ -244,19 +226,18 @@
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Label to present the later list
+   Title Label used to present the audio later list
    Title Label used to present the video later list
    Watch later or listen later button label in media detail view when a media is in the later list */
 "Later" = "Plus tard";
 
-/* Title label used to present the latest episodes from TV favorite shows */
+/* Title label used to present the latest episodes from radio favorite shows
+   Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Derniers épisodes de vos favoris";
 
-/* Title label used to present the latest videos
+/* Short title for the most recent video topic list
    Title label used to present the radio latest videos */
 "Latest videos" = "Vidéos les plus récentes";
-
-/* Label inviting the user to learn more information about an issue */
-"Learn more" = "En savoir plus";
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
 "less than 1 hour" = "moins d'une heure";
@@ -265,8 +246,6 @@
 "Listen" = "Écouter";
 
 /* Button label in media detail view to add an audio to the later list
-   Button label to add an audio to the later list, from the media long-press menu
-   Button label to add an audio to the later list, from the media preview window
    Context menu action to add an audio to the later list */
 "Listen later" = "Écouter plus tard";
 
@@ -306,9 +285,7 @@
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Contenu non disponible";
 
-/* Button label to open the show episode page from the long-press menu
-   Button label to open the show episode page from the preview window
-   Button to access more episodes from the media detail view
+/* Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
 "More episodes" = "Autres épisodes";
 
@@ -318,12 +295,8 @@
 /* Title label used to present the radio most popular audio medias */
 "Most listened to" = "Les plus écoutés";
 
-/* Short title for the most clicked video topic list
-   Title label used to present the TV most popular videos */
+/* Short title for the most clicked video topic list */
 "Most popular" = "Les plus vues";
-
-/* Short title for the most recent video topic list */
-"Most recent" = "Les plus récentes";
 
 /* Most searched shows header */
 "Most searched shows" = "Émissions les plus recherchées";
@@ -389,17 +362,6 @@
    Title of the button when the user subscribed to all TV and radio shows
    Title of the search settings button to apply settings */
 "OK" = "OK";
-
-/* Button label to open a media from the start from the long-press menu
-   Button label to open a media from the start from the preview window
-   Button label to open a module from the from the long-press menu
-   Button label to open a module from the preview window
-   Button label to open a show from the from the long-press menu
-   Button label to open a show from the preview window */
-"Open" = "Ouvrir";
-
-/* Label on the editor or trending lists in the home page, for prefered contents. Known as the SRF-TIPP label. Display in uppercase. */
-"OUR PICK" = "Top";
 
 /* Label to present the main Videos / Audios views */
 "Overview" = "Accueil";
@@ -474,14 +436,7 @@
 /* No comment provided by engineer. */
 "Settings" = "Paramètres";
 
-/* Button label of the sharing choice in the media long-press menu
-   Button label of the sharing choice in the media preview window
-   Button label of the sharing choice in the module long-press menu
-   Button label of the sharing choice in the module preview window
-   Button label of the sharing choice in the show long-press menu
-   Button label of the sharing choice in the show preview window
-   Context menu action to share a media
-   Context menu action to share a module
+/* Context menu action to share a media
    Context menu action to share a show
    Title of the action view to choose a sharing action */
 "Share" = "Partager";
@@ -516,9 +471,6 @@
 
 /* Title label used to present live center medias */
 "Sport" = "Sport";
-
-/* Subtitles short label on media cells */
-"ST" = "ST";
 
 /* Start over shortcut label */
 "Start over" = "Reprendre au début";
@@ -585,11 +537,14 @@
    Error message when a media cannot be opened via Handoff, deep linking or a push notification */
 "The media cannot be opened." = "Le contenu ne peut être ouvert.";
 
-/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification
-   Error message when an event module cannot be opened via Handoff, deep linking or a push notification */
+/* Error message when a topic cannot be opened via Handoff, deep linking or a push notification */
 "The page cannot be opened." = "La page ne peut être ouverte.";
 
-/* Name of the favorite item, if no title or name to display
+/* Error message when a section cannot be opened via Handoff, deep linking or a push notification */
+"The section cannot be opened." = "La section ne peut être ouverte.";
+
+/* Name of the download item, if no title or name to display
+   Name of the favorite item, if no title or name to display
    Name of the later list item, if no title or name to display
    Name of the subscription item, if no title or name to display */
 "The selected content" = "Le contenu sélectionné";
@@ -621,16 +576,11 @@
 "Today" = "Aujourd'hui";
 
 /* Categories search setting option
-   Title label used to present TV topics
-   Title label used to present TV topics while loading. It appears if no network connection is available and no cache is available
    Topics search setting option list view title */
 "Topics" = "Catégories";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Capacité utilisée : %@";
-
-/* Title label used to present trending TV videos */
-"Trending videos" = "À la une";
 
 /* Title label to present main TV livestreams */
 "TV channels" = "Chaînes TV";
@@ -659,8 +609,6 @@
 "Watch %@" = "Regarder %@";
 
 /* Button label in media detail view to add a video to the later list
-   Button label to add a video to the later list, from the media long-press menu
-   Button label to add a video to the later list, from the media preview window
    Context menu action to add a video to the later list */
 "Watch later" = "Regarder plus tard";
 

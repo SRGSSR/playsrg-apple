@@ -7,8 +7,7 @@
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ écoutes";
 
-/* Live content label, with a channel title
-   Live content label, with a media title */
+/* Live content label, with a channel title */
 "%@ live" = "%@ en direct";
 
 /* Label displaying the number of views on the player */
@@ -21,8 +20,7 @@
    Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
-/* Accessibility label for a media cell with audio description
-   Accessibility label for the audio description badge */
+/* Accessibility label for the audio description badge */
 "Audio described" = "Audiodécrit";
 
 /* Close button label
@@ -45,8 +43,7 @@
 /* A download button label */
 "Delete download" = "Supprimer le téléchargement";
 
-/* Media deletion from later list label
-   Media deletion from later list label in the media detail view when a media is in the later list */
+/* Media deletion from later list label */
 "Delete from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
 
 /* Favorite label in the player view when a show has been favorited
@@ -74,8 +71,7 @@
 /* Introductory title for information notifications */
 "Information" = "Information";
 
-/* Media addition for an audio to later list label
-   Media addition to later list label in media detail view to add an audio to the later list */
+/* Media addition for an audio to later list label */
 "Listen later" = "Écouter plus tard";
 
 /* Accessibility introductory text for the logged in user */
@@ -86,6 +82,9 @@
 
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Gère les informations du compte";
+
+/* More button label */
+"More" = "Plus";
 
 /* A more episode button label */
 "More episodes" = "Autres épisodes";
@@ -99,13 +98,15 @@
 /* Mini player label */
 "Now playing: %@" = "A l'écoute : %@";
 
-/* Status header action hint */
+/* More button hint */
 "Opens details." = "Affiche plus de détails.";
 
 /* Hint for content opened in Safari */
 "Opens in Safari." = "Ouvre dans Safari.";
 
-/* Show cell hint */
+/* Featured show hint
+   Show button hint
+   Show cell hint */
 "Opens show details." = "Affiche le détail du programme.";
 
 /* Mini player action hint */
@@ -126,14 +127,12 @@
 /* Program cell hint */
 "Plays from the beginning." = "Joue depuis le début.";
 
-/* Media cell hint */
+/* Featured media hint
+   Media cell hint */
 "Plays the content." = "Joue le contenu.";
 
 /* Song cell hint */
 "Plays the music." = "Joue la musique.";
-
-/* Profile button label on home view */
-"Profile" = "Profil";
 
 /* Mini player label */
 "Recently played: %@" = "Joué récemment : %@";
@@ -171,6 +170,5 @@
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
 
-/* Media addition for a video to later list label
-   Media addition to later list label in media detail view to add a video to the later list */
+/* Media addition for a video to later list label */
 "Watch later" = "Regarder plus tard";
