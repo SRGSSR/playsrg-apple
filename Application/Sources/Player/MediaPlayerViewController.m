@@ -393,6 +393,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
+    self.subtitlesImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
+    self.subtitlesImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.subtitlesImageView.isAccessibilityElement = YES;
+    
+    self.audioDescriptionImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
+    self.audioDescriptionImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.audioDescriptionImageView.isAccessibilityElement = YES;
+    
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
     self.multiAudioImageView.isAccessibilityElement = YES;
