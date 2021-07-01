@@ -447,16 +447,8 @@ private extension Content {
             
             switch configuredSection.type {
             case let .show(show):
-                return dataProvider.latestEpisodesForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
-                    .map { result in
-                        result.episodes.flatMap { episode -> [SRGMedia] in
-                            return episode.medias ?? []
-                        }
-                        .filter { media in
-                            return media.contentType == .episode || media.contentType == .scheduledLivestream
-                        }
-                        .map { .media($0) }
-                    }
+                return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvAllShows:
                 return dataProvider.tvShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
