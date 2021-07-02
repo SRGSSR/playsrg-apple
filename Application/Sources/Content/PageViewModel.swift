@@ -284,11 +284,19 @@ private extension SRGDataProvider {
     }
     
     func rowPublisher(id: PageViewModel.Id, section: PageViewModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageViewModel.Row, Error> {
-        return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
-            .scan([]) { $0 + $1 }
-            .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
-            .map { PageViewModel.Row(section: section, items: $0) }
-            .eraseToAnyPublisher()
+        return Publishers.CombineLatest(
+            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                .scan([]) { $0 + $1 },
+            section.properties.removalPublisher()
+                .prepend(Just([]))
+                .setFailureType(to: Error.self)
+        )
+        .map { items, removedItems in
+            return items.filter { !removedItems.contains($0) }
+        }
+        .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
+        .map { PageViewModel.Row(section: section, items: $0) }
+        .eraseToAnyPublisher()
     }
     
     static func rowItems(_ items: [Content.Item], in section: PageViewModel.Section) -> [PageViewModel.Item] {
