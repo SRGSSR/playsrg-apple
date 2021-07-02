@@ -67,6 +67,12 @@ protocol SectionProperties {
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
+    
+    /// Publisher which can be used receive removed items (signaled with `Signal` removal methods).
+    func removalPublisher() -> AnyPublisher<[Content.Item], Never>
+    
+    /// Signal which can be used to reload the section entirely
+    func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
 private extension Content {
@@ -248,6 +254,35 @@ private extension Content {
                 return Just([])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
+            }
+        }
+        
+        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .watchLater:
+                    return Signal.laterRemoval()
+                case .favoriteShows:
+                    return Signal.favoriteRemoval()
+                default:
+                    return Just([]).eraseToAnyPublisher()
+                }
+            default:
+                return Just([]).eraseToAnyPublisher()
+            }
+        }
+        
+        func reloadSignal() -> AnyPublisher<Void, Never>? {
+            switch presentation.type {
+            case .favoriteShows, .personalizedProgram:
+                return Signal.favoritesUpdate()
+            case .resumePlayback:
+                return Signal.historyUpdate()
+            case .watchLater:
+                return Signal.laterUpdate()
+            default:
+                return nil
             }
         }
         
@@ -477,6 +512,30 @@ private extension Content {
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
+            }
+        }
+        
+        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+            switch configuredSection.type {
+            case .radioWatchLater:
+                return Signal.laterRemoval()
+            case .radioFavoriteShows:
+                return Signal.favoriteRemoval()
+            default:
+                return Just([]).eraseToAnyPublisher()
+            }
+        }
+        
+        func reloadSignal() -> AnyPublisher<Void, Never>? {
+            switch configuredSection.type {
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
+                return Signal.favoritesUpdate()
+            case .radioResumePlayback:
+                return Signal.historyUpdate()
+            case .radioWatchLater:
+                return Signal.laterUpdate()
+            default:
+                return nil
             }
         }
     }

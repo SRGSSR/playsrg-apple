@@ -91,7 +91,7 @@ class PageViewModel: Identifiable, ObservableObject {
     
     private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
-            section.viewModelProperties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
+            section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
             trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
         .eraseToAnyPublisher()
@@ -309,9 +309,6 @@ private extension SRGDataProvider {
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
-    
-    /// Signal which can be used to reload the section entirely
-    func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
 extension PageViewModelProperties {
@@ -380,19 +377,6 @@ private extension PageViewModel {
                 return presentation.hasDetailPage
             }
         }
-        
-        func reloadSignal() -> AnyPublisher<Void, Never>? {
-            switch presentation.type {
-            case .favoriteShows, .personalizedProgram:
-                return Signal.favoritesUpdate()
-            case .resumePlayback:
-                return Signal.historyUpdate()
-            case .watchLater:
-                return Signal.laterUpdate()
-            default:
-                return nil
-            }
-        }
     }
     
     struct ConfiguredSectionProperties: PageViewModelProperties {
@@ -426,19 +410,6 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             return layout == .mediaSwimlane || layout == .showSwimlane
-        }
-        
-        func reloadSignal() -> AnyPublisher<Void, Never>? {
-            switch configuredSection.type {
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesUpdate()
-            case .radioResumePlayback:
-                return Signal.historyUpdate()
-            case .radioWatchLater:
-                return Signal.laterUpdate()
-            default:
-                return nil
-            }
         }
     }
 }

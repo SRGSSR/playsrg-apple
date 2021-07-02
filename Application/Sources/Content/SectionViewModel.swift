@@ -31,7 +31,7 @@ class SectionViewModel: ObservableObject {
                                                 paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                     .scan([]) { $0 + $1 },
-                rowSection.viewModelProperties.removedItemsPublisher()
+                rowSection.properties.removalPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -137,9 +137,6 @@ protocol SectionViewModelProperties {
     
     func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item?
     func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
-    
-    /// Publisher which can be used to notify about items removed using the context menu
-    func removedItemsPublisher() -> AnyPublisher<[Content.Item], Never>
 }
 
 private extension SectionViewModel {
@@ -189,22 +186,6 @@ private extension SectionViewModel {
                 return items
             }
         }
-        
-        func removedItemsPublisher() -> AnyPublisher<[Content.Item], Never> {
-            switch contentSection.type {
-            case .predefined:
-                switch contentSection.presentation.type {
-                case .watchLater:
-                    return Signal.laterRemoval()
-                case .favoriteShows:
-                    return Signal.favoriteRemoval()
-                default:
-                    return Just([]).eraseToAnyPublisher()
-                }
-            default:
-                return Just([]).eraseToAnyPublisher()
-            }
-        }
     }
     
     struct ConfiguredSectionProperties: SectionViewModelProperties {
@@ -229,17 +210,6 @@ private extension SectionViewModel {
         
         func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             return items
-        }
-        
-        func removedItemsPublisher() -> AnyPublisher<[Content.Item], Never> {
-            switch configuredSection.type {
-            case .radioWatchLater:
-                return Signal.laterRemoval()
-            case .radioFavoriteShows:
-                return Signal.favoriteRemoval()
-            default:
-                return Just([]).eraseToAnyPublisher()
-            }
         }
     }
 }
