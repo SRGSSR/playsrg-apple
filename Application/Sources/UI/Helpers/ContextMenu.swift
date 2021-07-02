@@ -7,23 +7,9 @@
 import SRGDataProviderModel
 import UIKit
 
-import struct Foundation.Notification
-
-// MARK: Notifications
-
-extension Notification.Name {
-    static let didRemoveDownloadFromContextMenu = Notification.Name("ContextMenuDidRemoveDownloadNotification")
-    static let didRemoveFavoriteFromContextMenu = Notification.Name("ContextMenuDidRemoveFavoriteNotification")
-    static let didRemoveWatchLaterEntryFromContextMenu = Notification.Name("ContextMenuDidRemoveWatchLaterEntryNotification")
-}
-
 // MARK: Context menu management
 
 enum ContextMenu {
-    enum RemovalKey {
-        static let removedItem = "ContextMenuRemovedItemKey"
-    }
-    
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch item {
         case let .media(media):
@@ -136,9 +122,7 @@ private extension ContextMenu {
                 guard error == nil else { return }
                 
                 if !added, let item = item {
-                    NotificationCenter.default.post(name: .didRemoveWatchLaterEntryFromContextMenu, object: nil, userInfo: [
-                        RemovalKey.removedItem: item
-                    ])
+                    Signal.removeLater(for: item)
                 }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
@@ -172,12 +156,6 @@ private extension ContextMenu {
         let menuAction = UIAction(title: title(for: download), image: image(for: download)) { _ in
             if let download = download {
                 Download.removeDownload(download)
-                
-                if let item = item {
-                    NotificationCenter.default.post(name: .didRemoveDownloadFromContextMenu, object: nil, userInfo: [
-                        RemovalKey.removedItem: item
-                    ])
-                }
             }
             else {
                 Download.add(for: media)
@@ -251,9 +229,7 @@ private extension ContextMenu {
             FavoritesToggleShow(show)
             
             if isFavorite, let item = item {
-                NotificationCenter.default.post(name: .didRemoveFavoriteFromContextMenu, object: nil, userInfo: [
-                    RemovalKey.removedItem: item
-                ])
+                Signal.removeFavorite(for: item)
             }
             
             let labels = SRGAnalyticsHiddenEventLabels()

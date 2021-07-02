@@ -7,8 +7,25 @@
 import Combine
 import SRGUserData
 
-/// Signals which can be used to trigger reactive pipelines.
+import struct Foundation.Notification
+
+// MARK: Notifications
+
+/**
+ *  Internal notifications sent to signal item removal.
+ */
+private extension Notification.Name {
+    static let didRemoveFavorite = Notification.Name("SignalDidRemoveFavoriteNotification")
+    static let didRemoveWatchLaterEntry = Notification.Name("SignalDidRemoveWatchLaterEntryNotification")
+}
+
+// MARK: Signals which can be used in pipelines
+
 enum Signal {
+    enum RemovalKey {
+        static let removedItem = "SignalRemovedItemKey"
+    }
+    
     static func historyUpdate() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .map { _ in }
@@ -46,16 +63,16 @@ enum Signal {
             .eraseToAnyPublisher()
     }
     
-    static func contextMenuLaterRemoval() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didRemoveWatchLaterEntryFromContextMenu)
-            .compactMap { $0.userInfo?[ContextMenu.RemovalKey.removedItem] as? Content.Item }
+    static func laterRemoval() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didRemoveWatchLaterEntry)
+            .compactMap { $0.userInfo?[RemovalKey.removedItem] as? Content.Item }
             .scan([Content.Item]()) { $0.appending($1) }
             .eraseToAnyPublisher()
     }
     
-    static func contextMenuFavoriteRemoval() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didRemoveFavoriteFromContextMenu)
-            .compactMap { $0.userInfo?[ContextMenu.RemovalKey.removedItem] as? Content.Item }
+    static func favoriteRemoval() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didRemoveFavorite)
+            .compactMap { $0.userInfo?[RemovalKey.removedItem] as? Content.Item }
             .scan([Content.Item]()) { $0.appending($1) }
             .eraseToAnyPublisher()
     }
@@ -76,5 +93,23 @@ enum Signal {
     static func wokenUp() -> AnyPublisher<Void, Never> {
         return Publishers.Merge(reachable(), foreground())
             .eraseToAnyPublisher()
+    }
+}
+
+// MARK: Methods which can be used to declare item removal
+
+extension Signal {
+    static func removeLater(for item: Content.Item) {
+        guard case .media = item else { return }
+        NotificationCenter.default.post(name: .didRemoveWatchLaterEntry, object: nil, userInfo: [
+            RemovalKey.removedItem: item
+        ])
+    }
+    
+    static func removeFavorite(for item: Content.Item) {
+        guard case .show = item else { return }
+        NotificationCenter.default.post(name: .didRemoveFavorite, object: nil, userInfo: [
+            RemovalKey.removedItem: item
+        ])
     }
 }
