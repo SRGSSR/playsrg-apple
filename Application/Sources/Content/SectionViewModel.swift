@@ -24,20 +24,28 @@ class SectionViewModel: ObservableObject {
     init(section: Content.Section, filter: SectionFiltering?) {
         self.section = section
         
+        let rowSection = SectionViewModel.Section(section)
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
-            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+            return Publishers.CombineLatest(
+                rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                 paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
-                .scan([]) { $0 + $1 }
-                .map { items in
-                    let rowSection = SectionViewModel.Section(section)
-                    let headerItem = rowSection.viewModelProperties.headerItem(from: items)
-                    let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
-                    return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
-                }
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
+                    .scan([]) { $0 + $1 },
+                rowSection.viewModelProperties.contextMenuRemovedItemsPublisher()
+                    .prepend(Just([]))
+                    .setFailureType(to: Error.self)
+            )
+            .map { items, removedItems in
+                return items.filter { !removedItems.contains($0) }
+            }
+            .map { items in
+                let headerItem = rowSection.viewModelProperties.headerItem(from: items)
+                let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
+                return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+            }
+            .catch { error in
+                return Just(State.failed(error: error))
+            }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -129,6 +137,9 @@ protocol SectionViewModelProperties {
     
     func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.Item?
     func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
+    
+    /// Publisher which can be used to notify about items removed using the context menu
+    func contextMenuRemovedItemsPublisher() -> AnyPublisher<[Content.Item], Never>
 }
 
 private extension SectionViewModel {
@@ -178,6 +189,22 @@ private extension SectionViewModel {
                 return items
             }
         }
+        
+        func contextMenuRemovedItemsPublisher() -> AnyPublisher<[Content.Item], Never> {
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .watchLater:
+                    return Signal.contextMenuLaterRemoval()
+                case .favoriteShows:
+                    return Signal.contextMenuFavoriteRemoval()
+                default:
+                    return Just([]).eraseToAnyPublisher()
+                }
+            default:
+                return Just([]).eraseToAnyPublisher()
+            }
+        }
     }
     
     struct ConfiguredSectionProperties: SectionViewModelProperties {
@@ -202,6 +229,17 @@ private extension SectionViewModel {
         
         func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             return items
+        }
+        
+        func contextMenuRemovedItemsPublisher() -> AnyPublisher<[Content.Item], Never> {
+            switch configuredSection.type {
+            case .radioWatchLater:
+                return Signal.contextMenuLaterRemoval()
+            case .radioFavoriteShows:
+                return Signal.contextMenuFavoriteRemoval()
+            default:
+                return Just([]).eraseToAnyPublisher()
+            }
         }
     }
 }
