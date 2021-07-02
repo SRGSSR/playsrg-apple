@@ -68,10 +68,10 @@ protocol SectionProperties {
     /// results can be retrieved (if any) using a paginator, one page at a time.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
     
-    /// Publisher which can be used receive removed items (signaled with `Signal` removal methods).
+    /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
     func removalPublisher() -> AnyPublisher<[Content.Item], Never>
     
-    /// Signal which can be used to reload the section entirely
+    /// Signal which can be used to trigger a section reload.
     func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
