@@ -42,43 +42,43 @@ class ProfileViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+        NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
             .sink { _ in
                 self.updateIdentityInformation()
             }
             .store(in: &cancellables)
-        NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+        NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
             .sink { _ in
                 self.updateIdentityInformation()
             }
             .store(in: &cancellables)
-        NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)
+        NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)
             .sink { _ in
                 self.updateIdentityInformation()
             }
             .store(in: &cancellables)
-        NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+        NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
             .sink { _ in
                 self.updateIdentityInformation()
             }
             .store(in: &cancellables)
         updateIdentityInformation()
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
+        NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
             .sink { _ in
                 self.updateSynchronizationDate()
             }
             .store(in: &cancellables)
         updateSynchronizationDate()
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+        NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .sink { _ in
                 self.updateHistoryInformation()
             }
             .store(in: &cancellables)
         updateHistoryInformation()
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+        NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .sink { notification in
                 guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
                 self.updateWatchLaterInformation()
@@ -86,7 +86,7 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
         updateWatchLaterInformation()
         
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+        NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .sink { notification in
                 guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
                 self.updateFavoritesInformation()

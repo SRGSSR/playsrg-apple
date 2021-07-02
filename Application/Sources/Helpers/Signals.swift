@@ -10,14 +10,14 @@ import SRGUserData
 /// Signals which can be used to trigger reactive pipelines.
 enum Signal {
     static func historyUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
+        return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .map { _ in }
             .throttle(for: 10, scheduler: RunLoop.main, latest: true)
             .eraseToAnyPublisher()
     }
     
     static func laterUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+        return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
                     return true
@@ -32,7 +32,7 @@ enum Signal {
     }
     
     static func favoritesUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: Notification.Name.SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
+        return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
                     return true
@@ -47,7 +47,7 @@ enum Signal {
     }
     
     static func reachable() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange)
+        return NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
             .map { _ in }
             .eraseToAnyPublisher()

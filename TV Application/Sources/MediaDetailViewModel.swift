@@ -32,7 +32,7 @@ class MediaDetailViewModel: ObservableObject {
     private var refreshCancellables = Set<AnyCancellable>()
     
     init() {
-        NotificationCenter.default.publisher(for: Notification.Name.SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+        NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .sink { [weak self] notification in
                 guard let self = self,
                       let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue,
