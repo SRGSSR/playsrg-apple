@@ -12,9 +12,9 @@ import struct Foundation.Notification
 // MARK: Notifications
 
 extension Notification.Name {
-    static let didRemoveDownload = Notification.Name("ContextMenuDidRemoveDownloadNotification")
-    static let didRemoveFavorite = Notification.Name("ContextMenuDidRemoveFavoriteNotification")
-    static let didRemoveWatchLaterEntry = Notification.Name("ContextMenuDidRemoveWatchLaterEntryNotification")
+    static let didRemoveDownloadFromContextMenu = Notification.Name("ContextMenuDidRemoveDownloadNotification")
+    static let didRemoveFavoriteFromContextMenu = Notification.Name("ContextMenuDidRemoveFavoriteNotification")
+    static let didRemoveWatchLaterEntryFromContextMenu = Notification.Name("ContextMenuDidRemoveWatchLaterEntryNotification")
 }
 
 // MARK: Context menu management
@@ -136,7 +136,7 @@ private extension ContextMenu {
                 guard error == nil else { return }
                 
                 if !added, let item = item {
-                    NotificationCenter.default.post(name: .didRemoveWatchLaterEntry, object: nil, userInfo: [
+                    NotificationCenter.default.post(name: .didRemoveWatchLaterEntryFromContextMenu, object: nil, userInfo: [
                         RemovalKey.removedItem: item
                     ])
                 }
@@ -174,7 +174,7 @@ private extension ContextMenu {
                 Download.removeDownload(download)
                 
                 if let item = item {
-                    NotificationCenter.default.post(name: .didRemoveDownload, object: nil, userInfo: [
+                    NotificationCenter.default.post(name: .didRemoveDownloadFromContextMenu, object: nil, userInfo: [
                         RemovalKey.removedItem: item
                     ])
                 }
@@ -251,7 +251,7 @@ private extension ContextMenu {
             FavoritesToggleShow(show)
             
             if isFavorite, let item = item {
-                NotificationCenter.default.post(name: .didRemoveFavorite, object: nil, userInfo: [
+                NotificationCenter.default.post(name: .didRemoveFavoriteFromContextMenu, object: nil, userInfo: [
                     RemovalKey.removedItem: item
                 ])
             }

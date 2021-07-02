@@ -46,6 +46,20 @@ enum Signal {
             .eraseToAnyPublisher()
     }
     
+    static func contextMenuLaterRemoval() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didRemoveWatchLaterEntryFromContextMenu)
+            .compactMap { $0.userInfo?[ContextMenu.RemovalKey.removedItem] as? Content.Item }
+            .scan([Content.Item]()) { $0.appending($1) }
+            .eraseToAnyPublisher()
+    }
+    
+    static func contextMenuFavoriteRemoval() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didRemoveFavoriteFromContextMenu)
+            .compactMap { $0.userInfo?[ContextMenu.RemovalKey.removedItem] as? Content.Item }
+            .scan([Content.Item]()) { $0.appending($1) }
+            .eraseToAnyPublisher()
+    }
+    
     static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
