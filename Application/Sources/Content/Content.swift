@@ -261,10 +261,10 @@ private extension Content {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
+                case .favoriteShows, .personalizedProgram:
+                    return Signal.favoriteRemoval()
                 case .watchLater:
                     return Signal.laterRemoval()
-                case .favoriteShows:
-                    return Signal.favoriteRemoval()
                 default:
                     return Just([]).eraseToAnyPublisher()
                 }
@@ -517,10 +517,10 @@ private extension Content {
         
         func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch configuredSection.type {
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
+                return Signal.favoriteRemoval()
             case .radioWatchLater:
                 return Signal.laterRemoval()
-            case .radioFavoriteShows:
-                return Signal.favoriteRemoval()
             default:
                 return Just([]).eraseToAnyPublisher()
             }
