@@ -11,7 +11,7 @@
 "%@ has been added to \"Later\"" = "%@ wurde der \"Später\" Liste hinzugefügt";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
-"%@ has been added to downloads" = "%@ has been added to downloads";
+"%@ has been added to downloads" = "%@ wurde zu Meinen Downloads hinzugefügt";
 
 /* Message displayed at the top of the screen when adding a show to favorites. Quotes are managed by the application. */
 "%@ has been added to favorites" = "%@ wurde zu den Favoriten hinzugefügt";
@@ -20,7 +20,7 @@
 "%@ has been deleted from \"Later\"" = "%@ wurde von der \"Später\" Liste gelöscht";
 
 /* Message displayed at the top of the screen when removing a media from downloads. Quotes are managed by the application. */
-"%@ has been deleted from downloads" = "%@ has been deleted from downloads";
+"%@ has been deleted from downloads" = "%@ wurde aus den Downloads gelöscht";
 
 /* Message displayed at the top of the screen when removing a show from favorites. Quotes are managed by the application. */
 "%@ has been deleted from favorites" = "%@ wurde von den Favoriten gelöscht";
@@ -541,7 +541,7 @@
 "The page cannot be opened." = "Seite konnte nicht geöffnet werden.";
 
 /* Error message when a section cannot be opened via Handoff, deep linking or a push notification */
-"The section cannot be opened." = "The section cannot be opened.";
+"The section cannot be opened." = "Der Inhalt kann nicht geöffnet werden.";
 
 /* Name of the download item, if no title or name to display
    Name of the favorite item, if no title or name to display

@@ -86,7 +86,7 @@
 "Manages account information" = "Anmeldeinformationen verwalten";
 
 /* More button label */
-"More" = "More";
+"More" = "Mehr";
 
 /* A more episode button label */
 "More episodes" = "Mehr zur Sendung";
@@ -137,7 +137,7 @@
 "Plays the music." = "Spielt die Musik ab.";
 
 /* Profile button label on home view */
-"Profile" = "Profile";
+"Profile" = "Profil";
 
 /* Mini player label */
 "Recently played: %@" = "Kürzlich abgespielt: %@";
