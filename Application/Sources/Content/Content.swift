@@ -70,9 +70,6 @@ protocol SectionProperties {
     
     /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
     func removalPublisher() -> AnyPublisher<[Content.Item], Never>
-    
-    /// Signal which can be used to trigger a section reload.
-    func reloadSignal() -> AnyPublisher<Void, Never>?
 }
 
 private extension Content {
@@ -274,19 +271,6 @@ private extension Content {
                 }
             default:
                 return Just([]).eraseToAnyPublisher()
-            }
-        }
-        
-        func reloadSignal() -> AnyPublisher<Void, Never>? {
-            switch presentation.type {
-            case .favoriteShows, .personalizedProgram:
-                return Signal.favoritesUpdate()
-            case .resumePlayback:
-                return Signal.historyUpdate()
-            case .watchLater:
-                return Signal.laterUpdate()
-            default:
-                return nil
             }
         }
         
@@ -535,19 +519,6 @@ private extension Content {
                 return Signal.laterRemoval()
             default:
                 return Just([]).eraseToAnyPublisher()
-            }
-        }
-        
-        func reloadSignal() -> AnyPublisher<Void, Never>? {
-            switch configuredSection.type {
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesUpdate()
-            case .radioResumePlayback:
-                return Signal.historyUpdate()
-            case .radioWatchLater:
-                return Signal.laterUpdate()
-            default:
-                return nil
             }
         }
     }
