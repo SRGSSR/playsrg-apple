@@ -33,16 +33,14 @@ class PageViewModel: Identifiable, ObservableObject {
             return SRGDataProvider.current!.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
-                        return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
-                            return SRGDataProvider.current!.rowPublisher(id: id,
-                                                                         section: section,
-                                                                         pageSize: Self.pageSize(for: section, in: sections),
-                                                                         paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
-                            )
-                            .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
-                            .prepend(Self.placeholderRow(for: section, state: self?.state))
-                            .eraseToAnyPublisher()
-                        }
+                        return SRGDataProvider.current!.rowPublisher(id: id,
+                                                                     section: section,
+                                                                     pageSize: Self.pageSize(for: section, in: sections),
+                                                                     paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
+                        )
+                        .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
+                        .prepend(Self.placeholderRow(for: section, state: self?.state))
+                        .eraseToAnyPublisher()
                     })
                     .eraseToAnyPublisher()
                 }
@@ -87,14 +85,6 @@ class PageViewModel: Identifiable, ObservableObject {
                 trigger.activate(for: TriggerId.reloadSection(section))
             }
         }
-    }
-    
-    private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
-            section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
-            trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
-        )
-        .eraseToAnyPublisher()
     }
     
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
