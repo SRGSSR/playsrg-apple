@@ -90,7 +90,7 @@ struct MediaVisualView: View {
         .onAppear {
             updateProgress()
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name.SRGHistoryEntriesDidChange)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange)) { notification in
             if let updatedUrns = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>,
                let media = media, updatedUrns.contains(media.urn) {
                 updateProgress()

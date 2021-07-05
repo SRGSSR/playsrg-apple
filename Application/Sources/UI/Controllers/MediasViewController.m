@@ -48,6 +48,11 @@
     [self play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
 }
 
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.items[indexPath.row] at:indexPath in:self];
+}
+
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

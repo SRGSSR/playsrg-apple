@@ -309,6 +309,14 @@
     [self.navigationController pushViewController:showViewController animated:YES];
 }
 
+// Overridden because the layout is separated into sections
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    NSString *indexLetter = self.indexLetters[indexPath.section];
+    SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
+    return [ContextMenuObjC configurationFor:show at:indexPath in:self];
+}
+
 #pragma mark UICollectionViewDelegateFlowLayout protocol
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

@@ -24,20 +24,28 @@ class SectionViewModel: ObservableObject {
     init(section: Content.Section, filter: SectionFiltering?) {
         self.section = section
         
+        let rowSection = SectionViewModel.Section(section)
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
-            return section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+            return Publishers.CombineLatest(
+                rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                 paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
-                .scan([]) { $0 + $1 }
-                .map { items in
-                    let rowSection = SectionViewModel.Section(section)
-                    let headerItem = rowSection.viewModelProperties.headerItem(from: items)
-                    let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
-                    return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
-                }
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
+                    .scan([]) { $0 + $1 },
+                rowSection.properties.removalPublisher()
+                    .prepend(Just([]))
+                    .setFailureType(to: Error.self)
+            )
+            .map { items, removedItems in
+                return items.filter { !removedItems.contains($0) }
+            }
+            .map { items in
+                let headerItem = rowSection.viewModelProperties.headerItem(from: items)
+                let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
+                return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+            }
+            .catch { error in
+                return Just(State.failed(error: error))
+            }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)

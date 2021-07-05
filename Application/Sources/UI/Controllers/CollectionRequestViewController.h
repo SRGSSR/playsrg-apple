@@ -60,11 +60,6 @@ NS_ASSUME_NONNULL_BEGIN
 // See UICollectionView documentation for more information
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath NS_REQUIRES_SUPER;
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section NS_REQUIRES_SUPER;
-- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point NS_REQUIRES_SUPER;
-- (void)collectionView:(UICollectionView *)collectionView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator NS_REQUIRES_SUPER;
-- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration NS_REQUIRES_SUPER;
-- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration NS_REQUIRES_SUPER;
-- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inCollectionView:(UICollectionView *)collectionView NS_REQUIRES_SUPER;
 
 // See UIScrollView documentation for more information
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView NS_REQUIRES_SUPER;

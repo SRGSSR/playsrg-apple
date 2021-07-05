@@ -129,7 +129,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            let identityWebsiteURL = configuration.identityWebsiteURL {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -138,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -147,7 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
                 .sink { notification in
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
