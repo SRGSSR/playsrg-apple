@@ -64,8 +64,8 @@ protocol SectionProperties {
     var sharingItem: SharingItem? { get }
     #endif
     
-    /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
-    /// results can be retrieved (if any) using a paginator, one page at a time.
+    /// Publisher providing content for the section. An optional paginator can be used to load more results. No matter
+    /// whether a paginator is used the publisher must return ALL consolidated items with each update.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
     
     /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
@@ -191,6 +191,7 @@ private extension Content {
             case .medias:
                 return dataProvider.medias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
                     .map { self.filterItems($0).map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .showAndMedias:
                 return dataProvider.showAndMedias(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
@@ -202,10 +203,13 @@ private extension Content {
                         items.append(contentsOf: $0.medias.map { .media($0) })
                         return items
                     }
+                    // The show is returned only with the first page of results, which makes accumulation straightforward.
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .shows:
                 return dataProvider.shows(for: vendor, contentSectionUid: contentSection.uid, pageSize: pageSize, paginatedBy: paginator)
                     .map { self.filterItems($0).map { .show($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .predefined:
                 switch presentation.type {
@@ -443,6 +447,7 @@ private extension Content {
             case let .radioEpisodesForDay(day, channelUid: channelUid):
                 return dataProvider.radioEpisodes(for: vendor, channelUid: channelUid, day: day, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .radioFavoriteShows:
                 return dataProvider.favoritesPublisher(filter: filter)
@@ -451,10 +456,12 @@ private extension Content {
             case let .radioLatest(channelUid: channelUid):
                 return dataProvider.radioLatestMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case let .radioLatestEpisodes(channelUid: channelUid):
                 return dataProvider.radioLatestEpisodes(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .radioLatestEpisodesFromFavorites:
                 return dataProvider.favoritesPublisher(filter: filter)
@@ -465,6 +472,7 @@ private extension Content {
             case let .radioLatestVideos(channelUid: channelUid):
                 return dataProvider.radioLatestVideos(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .radioLive:
                 return dataProvider.regionalizedRadioLivestreams(for: vendor)
@@ -477,6 +485,7 @@ private extension Content {
             case let .radioMostPopular(channelUid: channelUid):
                 return dataProvider.radioMostPopularMedias(for: vendor, channelUid: channelUid, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .radioResumePlayback:
                 return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
@@ -499,6 +508,7 @@ private extension Content {
             case let .tvEpisodesForDay(day):
                 return dataProvider.tvEpisodes(for: vendor, day: day, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .tvLive:
                 return dataProvider.tvLivestreams(for: vendor)
@@ -507,10 +517,12 @@ private extension Content {
             case .tvLiveCenter:
                 return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
+                    .scan([]) { $0 + $1 }
                     .eraseToAnyPublisher()
             }
         }
@@ -603,7 +615,7 @@ private extension SRGDataProvider {
         #endif
     }
     
-    func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    private func playbackPositionsPublisher() -> AnyPublisher<OrderedDictionary<String, TimeInterval>, Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
             
@@ -631,21 +643,45 @@ private extension SRGDataProvider {
                 }
             }
         }
-        .map { playbackPositions in
-            return self.medias(withUrns: Array(playbackPositions.keys), pageSize: pageSize, paginatedBy: paginator)
-                .map { filter?.compatibleMedias($0) ?? $0 }
-                .map {
-                    return $0.filter { media in
-                        guard let playbackPosition = playbackPositions[media.urn] else { return true }
-                        return HistoryCanResumePlaybackForMediaMetadataAndPosition(playbackPosition, media)
-                    }
-                }
-        }
-        .switchToLatest()
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    private func resumableMedias(forPlaybackPositions playbackPositions: OrderedDictionary<String, TimeInterval>, pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        return medias(withUrns: Array(playbackPositions.keys), pageSize: pageSize, paginatedBy: paginator)
+            .map { filter?.compatibleMedias($0) ?? $0 }
+            .map {
+                return $0.filter { media in
+                    guard let playbackPosition = playbackPositions[media.urn] else { return true }
+                    return HistoryCanResumePlaybackForMediaMetadataAndPosition(playbackPosition, media)
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        if paginator != nil {
+            return playbackPositionsPublisher()
+                .map { playbackPositions in
+                    return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                }
+                .switchToLatest()
+                .scan([]) { $0 + $1 }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Publishers.PublishAndRepeat(onOutputFrom: Signal.historyUpdate()) {
+                return self.playbackPositionsPublisher()
+            }
+            .removeDuplicates { $0.keys == $1.keys }
+            .map { playbackPositions in
+                return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: nil, filter: filter)
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
+        }
+    }
+    
+    private func laterUrnsPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -661,12 +697,36 @@ private extension SRGDataProvider {
                 }
             }
         }
-        .map { urns in
-            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
-                .map { filter?.compatibleMedias($0) ?? $0 }
-        }
-        .switchToLatest()
         .eraseToAnyPublisher()
+    }
+    
+    private func medias(with urns: [String], pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        return medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+            .map { filter?.compatibleMedias($0) ?? $0 }
+            .eraseToAnyPublisher()
+    }
+    
+    func laterPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        if paginator != nil {
+            return laterUrnsPublisher()
+                .map { urns in
+                    return self.medias(with: urns, pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                }
+                .switchToLatest()
+                .scan([]) { $0 + $1 }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Publishers.PublishAndRepeat(onOutputFrom: Signal.laterUpdate()) {
+                return self.laterUrnsPublisher()
+            }
+            .removeDuplicates()
+            .map { urns in
+                return self.medias(with: urns, pageSize: pageSize, paginatedBy: nil, filter: filter)
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
+        }
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {

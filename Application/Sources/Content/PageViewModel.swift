@@ -33,10 +33,11 @@ class PageViewModel: Identifiable, ObservableObject {
             return SRGDataProvider.current!.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
+                        let paginator = section.viewModelProperties.paginated ? self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section)) : nil
                         return SRGDataProvider.current!.rowPublisher(id: id,
                                                                      section: section,
                                                                      pageSize: Self.pageSize(for: section, in: sections),
-                                                                     paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
+                                                                     paginatedBy: paginator
                         )
                         .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
                         .prepend(Self.placeholderRow(for: section, state: self?.state))
@@ -275,8 +276,7 @@ private extension SRGDataProvider {
     
     func rowPublisher(id: PageViewModel.Id, section: PageViewModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageViewModel.Row, Error> {
         return Publishers.CombineLatest(
-            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
-                .scan([]) { $0 + $1 },
+            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id),
             section.properties.removalPublisher()
                 .prepend(Just([]))
                 .setFailureType(to: Error.self)
@@ -307,6 +307,7 @@ private extension SRGDataProvider {
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
+    var paginated: Bool { get }
 }
 
 extension PageViewModelProperties {
@@ -375,6 +376,15 @@ private extension PageViewModel {
                 return presentation.hasDetailPage
             }
         }
+        
+        var paginated: Bool {
+            switch presentation.type {
+            case .resumePlayback, .watchLater:
+                return false
+            default:
+                return true
+            }
+        }
     }
     
     struct ConfiguredSectionProperties: PageViewModelProperties {
@@ -408,6 +418,15 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             return layout == .mediaSwimlane || layout == .showSwimlane
+        }
+        
+        var paginated: Bool {
+            switch configuredSection.type {
+            case .radioResumePlayback, .radioWatchLater:
+                return false
+            default:
+                return true
+            }
         }
     }
 }

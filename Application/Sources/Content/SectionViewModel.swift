@@ -29,8 +29,7 @@ class SectionViewModel: ObservableObject {
             return Publishers.CombineLatest(
                 rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                 paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                                filter: filter)
-                    .scan([]) { $0 + $1 },
+                                                filter: filter),
                 rowSection.properties.removalPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
