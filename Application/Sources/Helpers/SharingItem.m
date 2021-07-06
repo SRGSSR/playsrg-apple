@@ -26,7 +26,7 @@
 
 + (instancetype)sharingItemForMedia:(SRGMedia *)media atTime:(CMTime)time
 {
-    NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:time];
+    NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media channel: media.channel atTime:time];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
                        analyticsName:AnalyticsTitleSharingMedia
@@ -36,7 +36,7 @@
 
 + (instancetype)sharingItemForCurrentClip:(SRGMedia *)media
 {
-    NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero];
+    NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media channel:media.channel atTime:kCMTimeZero];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
                        analyticsName:AnalyticsTitleSharingMedia

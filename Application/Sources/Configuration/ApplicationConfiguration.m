@@ -380,7 +380,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return [self radioChannelForUid:uid] ?: [self tvChannelForUid:uid];
 }
 
-- (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;
+- (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata channel:(SRGChannel *)channel atTime:(CMTime)time
 {
     if (! self.playURL || ! mediaMetadata) {
         return nil;
@@ -392,6 +392,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
                                 stringByAppendingPathComponent:@"-"]
                                stringByAppendingPathComponent:@"video"]
                               stringByAppendingPathComponent:@"sport"];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:mediaMetadata.URN] ];
+        return URLComponents.URL;
+    }
+    else if (channel.vendor == SRGVendorSSATR) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        URLComponents.path = [URLComponents.path stringByAppendingPathComponent:@"embed"];
         URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:mediaMetadata.URN] ];
         return URLComponents.URL;
     }
