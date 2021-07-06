@@ -379,7 +379,7 @@ private extension PageViewModel {
         
         var paginated: Bool {
             switch presentation.type {
-            case .resumePlayback, .watchLater:
+            case .watchLater:
                 return false
             default:
                 return true
@@ -422,7 +422,7 @@ private extension PageViewModel {
         
         var paginated: Bool {
             switch configuredSection.type {
-            case .radioResumePlayback, .radioWatchLater:
+            case .radioWatchLater:
                 return false
             default:
                 return true

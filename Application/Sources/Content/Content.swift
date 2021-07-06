@@ -630,26 +630,13 @@ private extension SRGDataProvider {
     }
     
     func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
-        if paginator != nil {
-            return playbackPositionsPublisher()
-                .map { playbackPositions in
-                    return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: paginator, filter: filter)
-                }
-                .switchToLatest()
-                .scan([]) { $0 + $1 }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Publishers.PublishAndRepeat(onOutputFrom: Signal.historyUpdate()) {
-                return self.playbackPositionsPublisher()
-            }
-            .removeDuplicates { $0.keys == $1.keys }
+        return playbackPositionsPublisher()
             .map { playbackPositions in
-                return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: nil, filter: filter)
+                return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: paginator, filter: filter)
             }
             .switchToLatest()
+            .scan([]) { $0 + $1 }
             .eraseToAnyPublisher()
-        }
     }
     
     private func laterUrnsPublisher() -> AnyPublisher<[String], Error> {
