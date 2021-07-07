@@ -380,19 +380,25 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return [self radioChannelForUid:uid] ?: [self tvChannelForUid:uid];
 }
 
-- (NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time;
+- (NSURL *)sharingURLForMedia:(SRGMedia *)media atTime:(CMTime)time
 {
-    if (! self.playURL || ! mediaMetadata) {
+    if (! self.playURL || ! media) {
         return nil;
     }
     
-    if (PlayIsSwissTXTURN(mediaMetadata.URN)) {
+    if (PlayIsSwissTXTURN(media.URN)) {
         NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
         URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:@"tv"]
                                 stringByAppendingPathComponent:@"-"]
                                stringByAppendingPathComponent:@"video"]
                               stringByAppendingPathComponent:@"sport"];
-        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:mediaMetadata.URN] ];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:media.URN] ];
+        return URLComponents.URL;
+    }
+    else if (media.channel.vendor == SRGVendorSSATR) {
+        NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:self.playURL resolvingAgainstBaseURL:NO];
+        URLComponents.path = [URLComponents.path stringByAppendingPathComponent:@"embed"];
+        URLComponents.queryItems = @[ [NSURLQueryItem queryItemWithName:@"urn" value:media.URN] ];
         return URLComponents.URL;
     }
     else {
@@ -403,7 +409,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
                                   @(SRGMediaTypeAudio) : @"radio" };
         });
         
-        NSString *mediaTypeName = s_mediaTypeNames[@(mediaMetadata.mediaType)];
+        NSString *mediaTypeName = s_mediaTypeNames[@(media.mediaType)];
         if (! mediaTypeName) {
             return nil;
         }
@@ -412,7 +418,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         URLComponents.path = [[[[URLComponents.path stringByAppendingPathComponent:mediaTypeName]
                                 stringByAppendingPathComponent:@"redirect"]
                                stringByAppendingPathComponent:@"detail"]
-                              stringByAppendingPathComponent:mediaMetadata.uid];
+                              stringByAppendingPathComponent:media.uid];
         
         NSInteger position = CMTimeGetSeconds(time);
         if (position > 0) {

@@ -731,7 +731,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                           @"position" : position ?: [NSNull null],
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
-        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
+        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:mainChapterMedia atTime:currentTime];
         
         if (isLiveStream && mainChapterMedia.channel) {
             userActivity.eligibleForPrediction = YES;
@@ -1224,7 +1224,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.shareButton.hidden = YES;
     }
     else {
-        self.shareButton.hidden = ([ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero] == nil);
+        self.shareButton.hidden = ([ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:kCMTimeZero] == nil);
     }
 }
 

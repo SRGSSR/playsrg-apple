@@ -91,7 +91,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 /**
  *  URLs to be used for sharing
  */
-- (nullable NSURL *)sharingURLForMediaMetadata:(nullable id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
+- (nullable NSURL *)sharingURLForMedia:(nullable SRGMedia *)media atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
 - (nullable NSURL *)sharingURLForShow:(nullable SRGShow *)show;
 - (nullable NSURL *)sharingURLForContentSection:(nullable SRGContentSection *)contentSection;
 
