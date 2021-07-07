@@ -48,29 +48,26 @@ struct MediaDescription {
         }
     }
     
+    private static func formattedDate(for media: SRGMedia) -> String {
+        return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
+    }
+    
     static func title(for media: SRGMedia, style: Style = .date) -> String {
-        switch style {
-        case .show:
-            guard let showTitle = media.show?.title else { return media.title }
-            if media.title.lowercased() != showTitle.lowercased() {
-                return media.title
-            }
-            else {
-                return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
-            }
-        case .date:
+        if style == .show, let show = media.show, media.title.lowercased() == show.title.lowercased() {
+            return formattedDate(for: media)
+        }
+        else {
             return media.title
         }
     }
     
     static func subtitle(for media: SRGMedia, style: Style = .date) -> String? {
         guard media.contentType != .livestream else { return nil }
-        
-        switch style {
-        case .show:
-            return media.show?.title ?? media.title
-        case .date:
-            return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
+        if style == .show, let show = media.show {
+            return show.title
+        }
+        else {
+            return formattedDate(for: media)
         }
     }
     
