@@ -630,6 +630,10 @@ private extension SRGDataProvider {
     }
     
     func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        // TODO: We currently cannot respond to history changes with `Publishers.PublishAndRepeat` for performance reasons, as the change
+        //       information is limited and forces us to query the history each time, which can lead to a high CPU load. But if SRG User
+        //       Data is improved to return a diff set we could probably implement an efficient refresh here, as is done for the later
+        //       section.
         return playbackPositionsPublisher()
             .map { playbackPositions in
                 return self.resumableMedias(forPlaybackPositions: playbackPositions, pageSize: pageSize, paginatedBy: paginator, filter: filter)
@@ -703,9 +707,11 @@ private extension SRGDataProvider {
     }
     
     func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
-        // For some reason (compiler bug?) the type of the items is seen as [Any] and requires casting
-        return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
-            .map { filter?.compatibleShows($0) ?? $0 }
-            .eraseToAnyPublisher()
+        return Publishers.PublishAndRepeat(onOutputFrom: Signal.favoritesUpdate()) {
+            // For some reason (compiler bug?) the type of the items is seen as [Any] and requires casting
+            return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
+        }
+        .map { filter?.compatibleShows($0) ?? $0 }
+        .eraseToAnyPublisher()
     }
 }
