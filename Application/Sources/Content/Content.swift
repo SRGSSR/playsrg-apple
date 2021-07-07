@@ -65,7 +65,7 @@ protocol SectionProperties {
     #endif
     
     /// Publisher providing content for the section. An optional paginator can be used to load more results. No matter
-    /// whether a paginator is used the publisher must return ALL consolidated items with each update.
+    /// whether a paginator is used or not the publisher must return ALL consolidated items with each update.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
     
     /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
