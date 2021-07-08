@@ -33,15 +33,16 @@ class PageViewModel: Identifiable, ObservableObject {
             return SRGDataProvider.current!.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
-                        let paginator = section.viewModelProperties.paginated ? self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section)) : nil
-                        return SRGDataProvider.current!.rowPublisher(id: id,
-                                                                     section: section,
-                                                                     pageSize: Self.pageSize(for: section, in: sections),
-                                                                     paginatedBy: paginator
-                        )
-                        .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
-                        .prepend(Self.placeholderRow(for: section, state: self?.state))
-                        .eraseToAnyPublisher()
+                        return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
+                            return SRGDataProvider.current!.rowPublisher(id: id,
+                                                                         section: section,
+                                                                         pageSize: Self.pageSize(for: section, in: sections),
+                                                                         paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
+                            )
+                            .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
+                            .prepend(Self.placeholderRow(for: section, state: self?.state))
+                            .eraseToAnyPublisher()
+                        }
                     })
                     .eraseToAnyPublisher()
                 }
@@ -86,6 +87,14 @@ class PageViewModel: Identifiable, ObservableObject {
                 trigger.activate(for: TriggerId.reloadSection(section))
             }
         }
+    }
+    
+    private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
+            trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
+        )
+        .eraseToAnyPublisher()
     }
     
     private static func hasLoadMore(for section: Section, in sections: [Section]) -> Bool {
@@ -276,7 +285,8 @@ private extension SRGDataProvider {
     
     func rowPublisher(id: PageViewModel.Id, section: PageViewModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageViewModel.Row, Error> {
         return Publishers.CombineLatest(
-            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id),
+            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                .scan([]) { $0 + $1 },
             section.properties.removalPublisher()
                 .prepend(Just([]))
                 .setFailureType(to: Error.self)
@@ -307,7 +317,6 @@ private extension SRGDataProvider {
 protocol PageViewModelProperties {
     var layout: PageViewModel.SectionLayout { get }
     var canOpenDetailPage: Bool { get }
-    var paginated: Bool { get }
 }
 
 extension PageViewModelProperties {
@@ -376,15 +385,6 @@ private extension PageViewModel {
                 return presentation.hasDetailPage
             }
         }
-        
-        var paginated: Bool {
-            switch presentation.type {
-            case .watchLater:
-                return false
-            default:
-                return true
-            }
-        }
     }
     
     struct ConfiguredSectionProperties: PageViewModelProperties {
@@ -418,15 +418,6 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             return layout == .mediaSwimlane || layout == .showSwimlane
-        }
-        
-        var paginated: Bool {
-            switch configuredSection.type {
-            case .radioWatchLater:
-                return false
-            default:
-                return true
-            }
         }
     }
 }
