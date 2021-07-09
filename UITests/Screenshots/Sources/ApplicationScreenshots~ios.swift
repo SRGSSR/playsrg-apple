@@ -44,8 +44,8 @@ class ApplicationScreenshots: XCTestCase {
             sleep(10)
             snapshot("3-LiveHomeScreen")
             
-            if let firstRadioCell = gridCell(1, 0) {
-                firstRadioCell.tap()
+            if let radioCellIndex = Self.configuration["RadioCellIndex"] as? Int, let radioCell = collectionViewCell(radioCellIndex) {
+                radioCell.tap()
                 sleep(10)
                 snapshot("4-RadioLivePlayer")
                 
@@ -86,8 +86,8 @@ extension ApplicationScreenshots {
         return button.exists ? button : nil
     }
     
-    func gridCell(_ x: Int, _ y: Int) -> XCUIElement? {
-        let cell = XCUIApplication().tables.firstMatch.cells.element(boundBy: x).collectionViews.cells.element(boundBy: y)
+    func collectionViewCell(_ index: Int) -> XCUIElement? {
+        let cell = XCUIApplication().collectionViews.firstMatch.cells.element(boundBy: index)
         return cell.exists ? cell : nil
     }
 }

@@ -4,5 +4,7 @@
 <dict>
 	<key>SearchText</key>
 	<string>10vor10</string>
+	<key>RadioCellIndex</key>
+	<integer>3</integer>
 </dict>
 </plist>
