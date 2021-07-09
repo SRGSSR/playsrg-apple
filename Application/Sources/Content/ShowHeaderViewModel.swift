@@ -50,10 +50,10 @@ class ShowHeaderViewModel: ObservableObject {
     
     var favoriteAccessibilityLabel: String {
         if isFavorite {
-            return PlaySRGAccessibilityLocalizedString("Delete from favorites", "Favorite label in the show view when a show has been favorited")
+            return PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
         }
         else {
-            return PlaySRGAccessibilityLocalizedString("Add to favorites", "Favorite label in the show view when a show can be favorited")
+            return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
         }
     }
     
@@ -78,10 +78,10 @@ class ShowHeaderViewModel: ObservableObject {
     
     var subscriptionAccessibilityLabel: String {
         if isPushServiceEnabled && isSubscribed {
-            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", "Show unsubscription label")
+            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
         }
         else {
-            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", "Show subscription label")
+            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
     

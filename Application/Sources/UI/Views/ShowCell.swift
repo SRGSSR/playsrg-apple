@@ -86,7 +86,7 @@ private extension ShowCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", "Show cell hint")
+        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint")
     }
 }
 

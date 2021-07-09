@@ -651,7 +651,7 @@ private extension PageViewController {
         }
         
         var accessibilityHint: String? {
-            return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", "Homepage header action hint") : nil
+            return hasDetailDisclosure ? PlaySRGAccessibilityLocalizedString("Shows all contents.", comment: "Homepage header action hint") : nil
         }
         
         var body: some View {

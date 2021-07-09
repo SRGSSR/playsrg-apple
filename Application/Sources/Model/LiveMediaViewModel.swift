@@ -82,7 +82,7 @@ extension LiveMediaViewModel {
     
     var accessibilityLabel: String? {
         if let channel = channel {
-            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
             if let program = program {
                 label.append(", \(program.title)")
             }

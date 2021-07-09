@@ -125,7 +125,7 @@ struct SectionShowHeaderView: View {
         }
         
         var accessibilityHint: String? {
-            return PlaySRGAccessibilityLocalizedString("Opens show details.", "Show button hint")
+            return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
         }
         
         var body: some View {

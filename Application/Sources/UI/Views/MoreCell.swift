@@ -56,11 +56,11 @@ struct MoreCell: View {
 
 private extension MoreCell {
     var accessibilityLabel: String? {
-        return PlaySRGAccessibilityLocalizedString("More", "More button label")
+        return PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", "More button hint")
+        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "More button hint")
     }
 }
 
