@@ -338,7 +338,7 @@ private extension Content {
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
-            case .radioEpisodesForDay, .tvEpisodesForDay:
+            case .show, .radioEpisodesForDay, .tvEpisodesForDay:
                 return nil
             }
         }
@@ -353,7 +353,7 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch configuredSection.type {
-            case .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -370,6 +370,8 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection.type {
+            case let .show(show):
+                return show.title
             case .radioAllShows, .tvAllShows:
                 return AnalyticsPageTitle.showsAZ.rawValue
             case .radioFavoriteShows:
@@ -397,6 +399,9 @@ private extension Content {
         
         var analyticsLevels: [String]? {
             switch configuredSection.type {
+            case let .show(show):
+                let level1 = (show.transmission == .radio) ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
+                return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
             case let .radioAllShows(channelUid),
                  let .radioFavoriteShows(channelUid: channelUid),
                  let .radioLatest(channelUid: channelUid),
@@ -436,6 +441,18 @@ private extension Content {
             let vendor = configuration.vendor
             
             switch configuredSection.type {
+            case let .show(show):
+                return dataProvider.latestEpisodesForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
+                    .map { result in
+                        result.episodes.flatMap { episode -> [SRGMedia] in
+                            return episode.medias ?? []
+                        }
+                        .filter { media in
+                            return media.contentType == .episode || media.contentType == .scheduledLivestream
+                        }
+                        .map { .media($0) }
+                    }
+                    .eraseToAnyPublisher()
             case .tvAllShows:
                 return dataProvider.tvShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }

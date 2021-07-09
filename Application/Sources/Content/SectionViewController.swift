@@ -245,6 +245,10 @@ extension SectionViewController {
             return SectionViewController(section: .configured(ConfiguredSection(type: .tvAllShows, contentPresentationType: .swimlane)))
         }
     }
+    
+    @objc static func showViewController(for show: SRGShow) -> SectionViewController {
+        return SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)))
+    }
 }
 
 // MARK: Protocols
@@ -272,7 +276,7 @@ extension SectionViewController: UICollectionViewDelegate {
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
             if let navigationController = navigationController {
-                let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                let showViewController = SectionViewController.showViewController(for: show)
                 navigationController.pushViewController(showViewController, animated: true)
             }
         case let .topic(topic):
@@ -351,13 +355,13 @@ extension SectionViewController: SRGAnalyticsViewTracking {
 
 extension SectionViewController: SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?) {
+        guard let event = event else { return }
+        
         #if os(tvOS)
-        if let event = event {
-            navigateToShow(event.show)
-        }
+        navigateToShow(event.show)
         #else
-        if let event = event, let navigationController = navigationController {
-            let showViewController = ShowViewController(show: event.show, fromPushNotification: false)
+        if let navigationController = navigationController {
+            let showViewController = SectionViewController.showViewController(for: event.show)
             navigationController.pushViewController(showViewController, animated: true)
         }
         #endif

@@ -46,6 +46,8 @@ extension ApplicationConfiguration {
 
 struct ConfiguredSection: Hashable {
     enum `Type`: Hashable {
+        case show(SRGShow)
+        
         case tvAllShows
         case tvEpisodesForDay(_ day: SRGDay)
         

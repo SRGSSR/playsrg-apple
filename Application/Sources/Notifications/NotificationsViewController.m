@@ -18,7 +18,6 @@
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "RefreshControl.h"
-#import "ShowViewController.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -65,7 +64,7 @@
                 return;
             }
             
-            ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+            SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
             [viewController.navigationController pushViewController:showViewController animated:YES];
             
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

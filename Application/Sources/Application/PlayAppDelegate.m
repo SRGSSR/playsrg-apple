@@ -26,7 +26,6 @@
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
-#import "ShowViewController.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -696,13 +695,15 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)openShowURN:(NSString *)showURN show:(SRGShow *)show fromPushNotification:(BOOL)fromPushNotification
 {
     if (show) {
-        ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:fromPushNotification];
+        // FIXME: Push notif flag
+        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
         [self.rootTabBarController pushViewController:showViewController animated:YES];
     }
     else {
         [[SRGDataProvider.currentDataProvider showWithURN:showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (show) {
-                ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:fromPushNotification];
+                // FIXME: Push notif flag
+                SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
                 [self.rootTabBarController pushViewController:showViewController animated:YES];
             }
             else {

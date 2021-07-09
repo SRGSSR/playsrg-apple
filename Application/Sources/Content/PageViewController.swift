@@ -258,7 +258,7 @@ extension PageViewController: UICollectionViewDelegate {
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             case let .show(show):
                 if let navigationController = navigationController {
-                    let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                    let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: true)
                 }
             case let .topic(topic):

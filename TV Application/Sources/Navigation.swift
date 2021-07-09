@@ -61,8 +61,8 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let hostController = UIHostingController(rootView: ShowDetailView(show: show))
-    present(hostController, animated: animated)
+    let showViewController = SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)))
+    present(showViewController, animated: animated)
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {

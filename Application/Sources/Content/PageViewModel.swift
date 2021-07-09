@@ -392,7 +392,7 @@ private extension PageViewModel {
         
         var layout: PageViewModel.SectionLayout {
             switch configuredSection.type {
-            case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            case .show, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
                 return (configuredSection.contentPresentationType == .hero) ? .hero : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)

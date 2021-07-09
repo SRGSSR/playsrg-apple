@@ -193,7 +193,7 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection.type {
-            case .tvEpisodesForDay, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
