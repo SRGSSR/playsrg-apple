@@ -27,7 +27,6 @@
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "ShowViewController.h"
-#import "ShowsViewController.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -752,7 +751,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
 {
-    ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
+    // FIXME: Start on index
+    SectionViewController *showsViewController = [SectionViewController showsViewControllerForChannelUid:radioChannel.uid];
     [self.rootTabBarController pushViewController:showsViewController animated:YES];
 }
 

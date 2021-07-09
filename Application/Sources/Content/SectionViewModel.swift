@@ -197,7 +197,7 @@ private extension SectionViewModel {
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
-            case .radioFavoriteShows, .radioAllShows:
+            case .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid

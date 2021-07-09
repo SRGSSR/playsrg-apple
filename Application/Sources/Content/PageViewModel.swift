@@ -404,7 +404,7 @@ private extension PageViewModel {
                 return .mediaSwimlane
             case .radioFavoriteShows:
                 return .showSwimlane
-            case .radioAllShows:
+            case .radioAllShows, .tvAllShows:
                 return .showGrid
             case .radioShowAccess:
                 #if os(iOS)

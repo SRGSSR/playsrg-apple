@@ -353,7 +353,8 @@ extension PageViewController: PlayApplicationNavigation {
         case .showAZ:
             let index = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
             if let navigationController = navigationController {
-                let showsViewController = ShowsViewController(radioChannel: applicationSectionInfo.radioChannel, alphabeticalIndex: index)
+                // FIXME: Start on index
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -394,7 +395,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
         if let navigationController = navigationController {
-            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
             navigationController.pushViewController(showsViewController, animated: true)
         }
     }

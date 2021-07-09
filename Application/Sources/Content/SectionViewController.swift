@@ -131,7 +131,7 @@ class SectionViewController: UIViewController {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             }
         }
-                
+        
         model.$state
             .sink { [weak self] state in
                 self?.reloadData(for: state)
@@ -236,6 +236,15 @@ extension SectionViewController {
             return SectionViewController(section: .configured(ConfiguredSection(type: .tvEpisodesForDay(day), contentPresentationType: .swimlane)))
         }
     }
+    
+    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+        if let channelUid = channelUid {
+            return SectionViewController(section: .configured(ConfiguredSection(type: .radioAllShows(channelUid: channelUid), contentPresentationType: .swimlane)))
+        }
+        else {
+            return SectionViewController(section: .configured(ConfiguredSection(type: .tvAllShows, contentPresentationType: .swimlane)))
+        }
+    }
 }
 
 // MARK: Protocols
@@ -274,7 +283,7 @@ extension SectionViewController: UICollectionViewDelegate {
         default:
             ()
         }
-            
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {

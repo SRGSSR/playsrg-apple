@@ -308,7 +308,7 @@ private extension Content {
         
         var title: String? {
             switch configuredSection.type {
-            case .radioAllShows:
+            case .radioAllShows, .tvAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
@@ -357,7 +357,7 @@ private extension Content {
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .radioAllShows:
+            case .radioAllShows, .tvAllShows:
                 return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioShowAccess, .radioWatchLater:
                 return []
@@ -370,7 +370,7 @@ private extension Content {
         
         var analyticsTitle: String? {
             switch configuredSection.type {
-            case .radioAllShows:
+            case .radioAllShows, .tvAllShows:
                 return AnalyticsPageTitle.showsAZ.rawValue
             case .radioFavoriteShows:
                 return AnalyticsPageTitle.favorites.rawValue
@@ -412,6 +412,8 @@ private extension Content {
                 else {
                     return nil
                 }
+            case .tvAllShows:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .tvLiveCenter:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .tvScheduledLivestreams:
@@ -434,6 +436,10 @@ private extension Content {
             let vendor = configuration.vendor
             
             switch configuredSection.type {
+            case .tvAllShows:
+                return dataProvider.tvShows(for: vendor, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
+                    .map { $0.map { .show($0) } }
+                    .eraseToAnyPublisher()
             case let .radioAllShows(channelUid):
                 return dataProvider.radioShows(for: vendor, channelUid: channelUid, pageSize: SRGDataProviderUnlimitedPageSize, paginatedBy: paginator)
                     .map { $0.map { .show($0) } }

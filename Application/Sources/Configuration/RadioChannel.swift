@@ -36,7 +36,7 @@ extension RadioChannel {
         switch configuredSectionType {
         case .tvEpisodesForDay, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater:
             return index == 0 ? .hero : .swimlane
-        case .radioAllShows:
+        case .radioAllShows, .tvAllShows:
             return .grid
         case .radioFavoriteShows:
             return .favoriteShows
