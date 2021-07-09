@@ -197,7 +197,7 @@ __attribute__((constructor)) static void HistoryPlayerTrackerInit(void)
     s_cachedProgresses = [NSMutableDictionary dictionary];
     
 #if TARGET_OS_IOS
-    s_trackerTimer = [NSTimer play_timerWithTimeInterval:1. repeats:YES block:^(NSTimer * _Nonnull timer) {
+    s_trackerTimer = [NSTimer play_timerWithTimeInterval:5. repeats:YES block:^(NSTimer * _Nonnull timer) {
         if (HistoryUpdateGoogleCastPlaybackProgress()) {
             return;
         }

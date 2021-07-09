@@ -26,13 +26,6 @@ enum Signal {
         static let removedItem = "SignalRemovedItemKey"
     }
     
-    static func historyUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .map { _ in }
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
-            .eraseToAnyPublisher()
-    }
-    
     static func laterUpdate() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in

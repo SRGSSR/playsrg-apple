@@ -228,7 +228,7 @@ private extension Content {
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
                 case .resumePlayback:
-                    return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                    return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .watchLater:
@@ -277,8 +277,6 @@ private extension Content {
             switch presentation.type {
             case .favoriteShows, .personalizedProgram:
                 return Signal.favoritesUpdate()
-            case .resumePlayback:
-                return Signal.historyUpdate()
             case .watchLater:
                 return Signal.laterUpdate()
             default:
@@ -479,7 +477,7 @@ private extension Content {
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .radioResumePlayback:
-                return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
+                return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioShowAccess(channelUid):
@@ -530,8 +528,6 @@ private extension Content {
             switch configuredSection.type {
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
                 return Signal.favoritesUpdate()
-            case .radioResumePlayback:
-                return Signal.historyUpdate()
             case .radioWatchLater:
                 return Signal.laterUpdate()
             default:
@@ -603,7 +599,7 @@ private extension SRGDataProvider {
         #endif
     }
     
-    func historyPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
             

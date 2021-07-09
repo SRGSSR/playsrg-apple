@@ -40,13 +40,13 @@ struct ProfileView: View {
                 }
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")).srgFont(.H3),
                         footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     AutoplayListItem()
                 }
             }
             if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden || !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")),
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")).srgFont(.H3),
                         footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
                         SubtitleAvailabilityListItem()
