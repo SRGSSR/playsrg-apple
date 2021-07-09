@@ -56,7 +56,7 @@ struct SubscriptionButton: View {
             labels.value = show.urn
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
             
-            Banner.showSubscription(subscribed, forShowWithName: show.title)
+            Banner.showSubscription(subscribed, forItemWithName: show.title)
         } label: {
             Image(imageName)
         }
