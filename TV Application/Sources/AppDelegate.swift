@@ -68,7 +68,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         if !configuration.areShowsUnavailable {
-            let showsViewController = SectionViewController(section: .configured(ConfiguredSection(type: .tvAllShows, contentPresentationType: .swimlane)))
+            let showsViewController = UIHostingController(rootView: ShowsView())
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
             viewControllers.append(showsViewController)
