@@ -10,6 +10,7 @@ class MediaVisualViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             Self.progressPublisher(for: media)
+                .receive(on: DispatchQueue.main)
                 .assign(to: &$progress)
         }
     }
