@@ -307,7 +307,7 @@ private extension Content {
         let configuredSection: ConfiguredSection
         
         var title: String? {
-            switch configuredSection.type {
+            switch configuredSection {
             case .radioAllShows, .tvAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case .radioFavoriteShows:
@@ -352,7 +352,7 @@ private extension Content {
         }
         
         var placeholderItems: [Content.Item] {
-            switch configuredSection.type {
+            switch configuredSection {
             case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
@@ -369,7 +369,7 @@ private extension Content {
         }
         
         var analyticsTitle: String? {
-            switch configuredSection.type {
+            switch configuredSection {
             case let .show(show):
                 return show.title
             case .radioAllShows, .tvAllShows:
@@ -398,7 +398,7 @@ private extension Content {
         }
         
         var analyticsLevels: [String]? {
-            switch configuredSection.type {
+            switch configuredSection {
             case let .show(show):
                 let level1 = (show.transmission == .radio) ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
@@ -430,7 +430,7 @@ private extension Content {
         
         #if os(iOS)
         var sharingItem: SharingItem? {
-            switch configuredSection.type {
+            switch configuredSection {
             case let .show(show):
                 return SharingItem(for: show)
             default:
@@ -445,7 +445,7 @@ private extension Content {
             let configuration = ApplicationConfiguration.shared
             let vendor = configuration.vendor
             
-            switch configuredSection.type {
+            switch configuredSection {
             case let .show(show):
                 return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
@@ -534,7 +534,7 @@ private extension Content {
         }
         
         func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
-            switch configuredSection.type {
+            switch configuredSection {
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
                 return Signal.favoriteRemoval()
             case .radioWatchLater:
@@ -545,7 +545,7 @@ private extension Content {
         }
         
         func reloadSignal() -> AnyPublisher<Void, Never>? {
-            switch configuredSection.type {
+            switch configuredSection {
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
                 return Signal.favoritesUpdate()
             case .radioWatchLater:

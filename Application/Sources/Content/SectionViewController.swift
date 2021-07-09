@@ -222,7 +222,7 @@ private extension SectionViewController {
 extension SectionViewController: DailyMediasViewController {
     var date: Date? {
         guard case let .configured(section) = model.section else { return nil }
-        switch section.type {
+        switch section {
         case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
             return day.date
         default:
@@ -242,24 +242,24 @@ extension SectionViewController {
     
     @objc static func viewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .radioEpisodesForDay(day, channelUid: channelUid), contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         }
         else {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .tvEpisodesForDay(day), contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.tvEpisodesForDay(day)))
         }
     }
     
     @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .radioAllShows(channelUid: channelUid), contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)))
         }
         else {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .tvAllShows, contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.tvAllShows))
         }
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
-        return SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)), fromPushNotification: fromPushNotification)
+        return SectionViewController(section: .configured(.show(show)), fromPushNotification: fromPushNotification)
     }
     
     @objc static func showViewController(for show: SRGShow) -> SectionViewController {

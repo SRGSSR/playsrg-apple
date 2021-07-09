@@ -68,7 +68,7 @@ private extension MoreCell {
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {
-        MoreCell(section: .configured(ConfiguredSection(type: .tvLive, contentPresentationType: .grid)), filter: nil)
+        MoreCell(section: .configured(.tvLive), filter: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

@@ -197,7 +197,7 @@ private extension SectionViewModel {
         let configuredSection: ConfiguredSection
         
         var layout: SectionViewModel.SectionLayout {
-            switch configuredSection.type {
+            switch configuredSection {
             case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
@@ -210,7 +210,7 @@ private extension SectionViewModel {
         }
         
         func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
-            switch configuredSection.type {
+            switch configuredSection {
             case let .show(show):
                 return .show(show)
             default:

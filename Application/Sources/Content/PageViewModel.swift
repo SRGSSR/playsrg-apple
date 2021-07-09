@@ -216,9 +216,11 @@ extension PageViewModel {
     
     struct Section: Hashable {
         let wrappedValue: Content.Section
+        let index: Int      // TODO: Remove when all pages are configured with PAC
         
-        init(_ wrappedValue: Content.Section) {
+        init(_ wrappedValue: Content.Section, index: Int) {
             self.wrappedValue = wrappedValue
+            self.index = index
         }
         
         var properties: SectionProperties {
@@ -230,7 +232,7 @@ extension PageViewModel {
             case let .content(section):
                 return ContentSectionProperties(contentSection: section)
             case let .configured(section):
-                return ConfiguredSectionProperties(configuredSection: section)
+                return ConfiguredSectionProperties(configuredSection: section, index: index)
             }
         }
     }
@@ -266,18 +268,18 @@ private extension SRGDataProvider {
         switch id {
         case .video:
             return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.sections.map { PageViewModel.Section(.content($0)) } }
+                .map { $0.sections.enumeratedMap { PageViewModel.Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
             return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.map { PageViewModel.Section(.content($0)) } }
+                .map { $0.sections.enumeratedMap { PageViewModel.Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().map { PageViewModel.Section(.configured($0)) })
+            return Just(channel.configuredSections().enumeratedMap { PageViewModel.Section(.configured($0), index: $1) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().map { PageViewModel.Section(.configured($0)) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().enumeratedMap { PageViewModel.Section(.configured($0), index: $1) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
@@ -389,11 +391,12 @@ private extension PageViewModel {
     
     struct ConfiguredSectionProperties: PageViewModelProperties {
         let configuredSection: ConfiguredSection
+        let index: Int      // TODO: Remove when all pages are configured with PAC
         
         var layout: PageViewModel.SectionLayout {
-            switch configuredSection.type {
+            switch configuredSection {
             case .show, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-                return (configuredSection.contentPresentationType == .hero) ? .hero : .mediaSwimlane
+                return index == 0 ? .hero : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)
                 return .liveMediaGrid

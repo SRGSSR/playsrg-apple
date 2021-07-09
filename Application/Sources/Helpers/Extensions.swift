@@ -77,6 +77,17 @@ extension Array {
     }
 }
 
+extension Collection {
+    func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
+        var index = 0
+        return try map { element in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
+    }
+}
+
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
         return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)

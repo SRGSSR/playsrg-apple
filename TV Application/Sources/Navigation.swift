@@ -61,7 +61,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let showViewController = SectionViewController(section: .configured(ConfiguredSection(type: .show(show), contentPresentationType: .swimlane)))
+    let showViewController = SectionViewController(section: .configured(.show(show)))
     present(showViewController, animated: animated)
 }
 
