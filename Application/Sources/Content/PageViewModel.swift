@@ -395,7 +395,7 @@ private extension PageViewModel {
         
         var layout: PageViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
+            case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
                 return index == 0 ? .hero : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)
@@ -405,7 +405,7 @@ private extension PageViewModel {
                 #endif
             case .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
-            case .radioFavoriteShows:
+            case .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
