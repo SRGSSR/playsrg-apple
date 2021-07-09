@@ -99,6 +99,9 @@ class ShowHeaderViewModel: ObservableObject {
         guard let show = show else { return }
         FavoritesToggleShow(show)
         updateData()
+        #if os(iOS)
+        Banner.showFavorite(isFavorite, forItemWithName: show.title)
+        #endif
     }
     
     #if os(iOS)
@@ -106,6 +109,7 @@ class ShowHeaderViewModel: ObservableObject {
         guard let show = show else { return }
         FavoritesToggleSubscriptionForShow(show)
         updateData()
+        Banner.showSubscription(isSubscribed, forItemWithName: show.title)
     }
     #endif
     
