@@ -96,7 +96,7 @@ struct LiveMediaCell: View {
                         .padding(.bottom, 4)
                 }
                 
-                Text(model.title)
+                Text(model.title ?? "")
                     .srgFont(.body, maximumSize: constant(iOS: 18, tvOS: nil))
                     .lineLimit(1)
                     .foregroundColor(.white)

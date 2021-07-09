@@ -22,14 +22,18 @@ private extension Notification.Name {
 // MARK: Signals which can be used in pipelines
 
 enum Signal {
-    enum RemovalKey {
+enum RemovalKey {
         static let removedItem = "SignalRemovedItemKey"
     }
-    
-    static func laterUpdate() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+
+    /**
+     *  Emits a signal when the history is updated for some uid or, if omitted, when any history update occurs.
+     */
+    static func historyUpdate(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
-                if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
+                guard let uid = uid else { return true }
+                if let updatedUids = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>, updatedUids.contains(uid) {
                     return true
                 }
                 else {
@@ -41,6 +45,33 @@ enum Signal {
             .eraseToAnyPublisher()
     }
     
+    /**
+     *  Emits a signal when the watch later playlist is updated for some uid or, if omitted, when any watch later update occurs.
+     */
+    static func watchLaterUpdate(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .filter { notification in
+                if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
+                    guard let uid = uid else { return true }
+                    if let updatedUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, updatedUids.contains(uid) {
+                        return true
+                    }
+                    else {
+                        return false
+                    }
+                }
+                else {
+                    return false
+                }
+            }
+            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the favorite list is updated.
+     */
     static func favoritesUpdate() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
@@ -70,21 +101,25 @@ enum Signal {
             .eraseToAnyPublisher()
     }
     
-    static func reachable() -> AnyPublisher<Void, Never> {
+    /**
+     *
+     *  Emits a signal when the application is woken up (network reachable again or moved to the foreground).
+     */
+    static func wokenUp() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(reachable(), foreground())
+            .eraseToAnyPublisher()
+    }
+    
+    private static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
             .map { _ in }
             .eraseToAnyPublisher()
     }
     
-    static func foreground() -> AnyPublisher<Void, Never> {
+    private static func foreground() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    static func wokenUp() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(reachable(), foreground())
             .eraseToAnyPublisher()
     }
 }

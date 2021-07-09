@@ -33,58 +33,44 @@ struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
     
-    var body: some View {
-        #if os(tvOS)
-        MainView(section: section, show: show)
-            .focusable()
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
+    var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
+        #if os(iOS)
+        return UIUserInterfaceSizeClass(horizontalSizeClass)
         #else
-        MainView(section: section, show: show)
+        return .regular
         #endif
     }
     
-    /// Behavior: h-hug, v-hug
-    private struct MainView: View {
-        let section: Content.Section
-        let show: SRGShow
-        
+    private var direction: StackDirection {
         #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        #else
+        return .horizontal
         #endif
-        
-        var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-            #if os(iOS)
-            return UIUserInterfaceSizeClass(horizontalSizeClass)
-            #else
-            return .regular
-            #endif
-        }
-        
-        private var direction: StackDirection {
-            #if os(iOS)
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-            #else
-            return .horizontal
-            #endif
-        }
-        
-        var body: some View {
-            Stack(direction: direction, spacing: 0) {
-                ImageView(url: show.imageUrl(for: .large))
-                    .aspectRatio(16 / 9, contentMode: .fit)
-                    .background(Color.white.opacity(0.1))
-                    .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
-                    .layoutPriority(1)
-                VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
-                    DescriptionView(section: section)
-                    ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
-                }
-                .padding(.horizontal, constant(iOS: 16, tvOS: 80))
-                .padding(.vertical)
-                .frame(maxWidth: .infinity)
+    }
+    
+    var body: some View {
+        Stack(direction: direction, spacing: 0) {
+            ImageView(url: show.imageUrl(for: .large))
+                .aspectRatio(16 / 9, contentMode: .fit)
+                .background(Color.white.opacity(0.1))
+                .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
+                .layoutPriority(1)
+            VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
+                DescriptionView(section: section)
+                ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
             }
-            .adaptiveMainFrame(for: uiHorizontalSizeClass)
-            .padding(.bottom, constant(iOS: 20, tvOS: 50))
+            .padding(.horizontal, constant(iOS: 16, tvOS: 80))
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
         }
+        .adaptiveMainFrame(for: uiHorizontalSizeClass)
+        .padding(.bottom, constant(iOS: 20, tvOS: 50))
+        .focusable()
     }
     
     /// Behavior: h-exp, v-exp

@@ -278,7 +278,7 @@ private extension Content {
             case .favoriteShows, .personalizedProgram:
                 return Signal.favoritesUpdate()
             case .watchLater:
-                return Signal.laterUpdate()
+                return Signal.watchLaterUpdate()
             default:
                 return nil
             }
@@ -552,7 +552,7 @@ private extension Content {
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
                 return Signal.favoritesUpdate()
             case .radioWatchLater:
-                return Signal.laterUpdate()
+                return Signal.watchLaterUpdate()
             default:
                 return nil
             }

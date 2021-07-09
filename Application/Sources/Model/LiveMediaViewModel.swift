@@ -56,7 +56,7 @@ extension LiveMediaViewModel {
         return programComposition?.play_program(at: date)
     }
     
-    var title: String {
+    var title: String? {
         if let channel = channel {
             return program?.title ?? channel.title
         }
@@ -64,7 +64,7 @@ extension LiveMediaViewModel {
             return MediaDescription.title(for: media)
         }
         else {
-            return ""
+            return nil
         }
     }
     

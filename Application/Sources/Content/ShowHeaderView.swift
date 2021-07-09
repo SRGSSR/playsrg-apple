@@ -10,19 +10,26 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct ShowHeaderView: View {
-    let show: SRGShow
+    @Binding private(set) var show: SRGShow?
+    @StateObject private var model = ShowHeaderViewModel()
     
-    var body: some View {
-        #if os(tvOS)
-        MainView(show: show)
-            .focusable()
-        #else
-        MainView(show: show)
-        #endif
+    init(show: SRGShow?) {
+        _show = .constant(show)
     }
     
-    private struct MainView: View {
-        let show: SRGShow
+    var body: some View {
+        MainView(model: model)
+            .onAppear {
+                model.show = show
+            }
+            .onChange(of: show) { newValue in
+                model.show = newValue
+            }
+    }
+    
+    /// Behavior: h-hug, v-hug.
+    fileprivate struct MainView: View {
+        @ObservedObject var model: ShowHeaderViewModel
         
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -46,18 +53,19 @@ struct ShowHeaderView: View {
         
         var body: some View {
             Stack(direction: direction, spacing: 0) {
-                ImageView(url: show.imageUrl(for: .large))
+                ImageView(url: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .layoutPriority(1)
-                DescriptionView(show: show)
+                DescriptionView(model: model)
                     .padding(.horizontal, constant(iOS: 16, tvOS: 80))
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
             }
             .adaptiveMainFrame(for: uiHorizontalSizeClass)
             .padding(.bottom, constant(iOS: 20, tvOS: 50))
+            .focusable()
         }
     }
     
@@ -74,20 +82,66 @@ struct ShowHeaderView: View {
     
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
-        let show: SRGShow
+        @ObservedObject var model: ShowHeaderViewModel
+        
+        private var isPushServiceEnabled: Bool {
+            #if os(iOS)
+            if let pushService = PushService.shared {
+                return pushService.isEnabled
+            }
+            else {
+                return false
+            }
+            #else
+            return false
+            #endif
+        }
+        
+        private var favoriteIcon: String {
+            return model.isFavorite ? "favorite_full" : "favorite"
+        }
+        
+        private var favoriteLabel: String {
+            if model.isFavorite {
+                return NSLocalizedString("Favorites", comment: "Label displayed in the show view when a show has been favorited")
+            }
+            else {
+                return NSLocalizedString("Add to favorites", comment: "Label displayed in the show view when a show can be favorited")
+            }
+        }
+        
+        #if os(iOS)
+        private var subscriptionIcon: String {
+            if isPushServiceEnabled {
+                return model.isSubscribed ? "subscription_full" : "subscription"
+            }
+            else {
+                return "subscription_disabled"
+            }
+        }
+        
+        private var subscriptionLabel: String {
+            if isPushServiceEnabled && model.isSubscribed {
+                return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
+            }
+            else {
+                return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
+            }
+        }
+        #endif
         
         var body: some View {
             VStack {
-                Text(show.title)
+                Text(model.title ?? "")
                     .srgFont(.H2)
+                    .lineLimit(2)
                     // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                     // when calculated with a `UIHostingController`, but without this the text does not occupy
                     // all lines it could.
-                    .lineLimit(2)
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.srgGray5)
-                if let lead = show.lead {
+                if let lead = model.lead {
                     Text(lead)
                         .srgFont(.body)
                         .lineLimit(6)
@@ -97,9 +151,11 @@ struct ShowHeaderView: View {
                         .foregroundColor(.srgGray4)
                 }
                 HStack(spacing: 20) {
-                    SimpleButton(icon: "favorite", label: "Add to favorites", action: favoriteAction)
+                    SimpleButton(icon: favoriteIcon, label: favoriteLabel, action: favoriteAction)
                     #if os(iOS)
-                    SimpleButton(icon: "subscription", label: "Notify me", action: subscriptionAction)
+                    if model.isFavorite {
+                        SimpleButton(icon: subscriptionIcon, label: subscriptionLabel, action: subscriptionAction)
+                    }
                     #endif
                 }
                 .foregroundColor(.srgGray5)
@@ -107,12 +163,14 @@ struct ShowHeaderView: View {
         }
         
         private func favoriteAction() {
-            
+            model.toggleFavorite()
         }
         
+        #if os(iOS)
         private func subscriptionAction() {
-            
+            model.toggleSubscription()
         }
+        #endif
     }
 }
 
@@ -143,23 +201,31 @@ private extension View {
 class ShowHeaderViewSize: NSObject {
     static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
-        let size = ShowHeaderView(show: show).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
+        let model = ShowHeaderViewModel()
+        model.show = show
+        let size = ShowHeaderView.MainView(model: model).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))
     }
 }
 
 struct ShowHeaderView_Previews: PreviewProvider {
+    static let model: ShowHeaderViewModel = {
+        let model = ShowHeaderViewModel()
+        model.show = Mock.show()
+        return model
+    }()
+    
     static var previews: some View {
         #if os(tvOS)
-        ShowHeaderView(show: Mock.show())
+        ShowHeaderView.MainView(model: model)
             .previewLayout(.sizeThatFits)
         #else
-        ShowHeaderView(show: Mock.show())
+        ShowHeaderView.MainView(model: model)
             .frame(width: 1000)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .regular)
         
-        ShowHeaderView(show: Mock.show())
+        ShowHeaderView.MainView(model: model)
             .frame(width: 375)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .compact)
