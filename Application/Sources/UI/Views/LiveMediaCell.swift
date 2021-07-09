@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LiveMediaCell: View {
     @Binding private(set) var media: SRGMedia?
-    @StateObject private var model = LiveMediaViewModel()
+    @StateObject private var model = LiveMediaCellViewModel()
     
     init(media: SRGMedia?) {
         _media = .constant(media)
@@ -53,7 +53,7 @@ struct LiveMediaCell: View {
     
     /// Behavior: h-exp, v-exp
     private struct VisualView: View {
-        @ObservedObject var model: LiveMediaViewModel
+        @ObservedObject var model: LiveMediaCellViewModel
         
         var body: some View {
             ZStack {
@@ -74,7 +74,7 @@ struct LiveMediaCell: View {
     
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
-        @ObservedObject var model: LiveMediaViewModel
+        @ObservedObject var model: LiveMediaCellViewModel
         
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
