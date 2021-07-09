@@ -22,7 +22,7 @@ private extension Notification.Name {
 // MARK: Signals which can be used in pipelines
 
 enum Signal {
-enum RemovalKey {
+    enum RemovalKey {
         static let removedItem = "SignalRemovedItemKey"
     }
 
