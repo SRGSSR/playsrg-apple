@@ -212,8 +212,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "feature/performance",
-          "revision": "e3757cecf02af261b901e0d846da2f1d4396599d",
+          "branch": "develop",
+          "revision": "ba76c4599a37de5c07a46aa88f9f705f20c34a14",
           "version": null
         }
       },
@@ -221,8 +221,8 @@
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": "feature/performance",
-          "revision": "e28f98f898eb594b18819c7e65ba2f41b93aadac",
+          "branch": "develop",
+          "revision": "78013cf3b95b78af15b07df489a1befdb3270aaf",
           "version": null
         }
       },
@@ -257,8 +257,8 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": "feature/performance",
-          "revision": "19a83f45c067b48f2f5e651a0a893409c7a5e721",
+          "branch": "develop",
+          "revision": "6b2c3acd622514dd962abf4a9eff178bc0e2bd36",
           "version": null
         }
       },
@@ -266,8 +266,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/performance",
-          "revision": "1a93e5f3b6be5df303c70d2c57d706f1fd47aa8f",
+          "branch": "develop",
+          "revision": "827ab4f20c38570799e43d68437a42ca58d5ffe5",
           "version": null
         }
       },
@@ -302,8 +302,8 @@
         "package": "SRGUserData",
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
-          "branch": "feature/performance",
-          "revision": "cb335bd6c383cd3c55a26bda3a3ee348d5ec3382",
+          "branch": "develop",
+          "revision": "a2d58688c058a415b3758516120df03585e87ff5",
           "version": null
         }
       },
