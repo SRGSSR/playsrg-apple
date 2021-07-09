@@ -9,13 +9,18 @@ import Combine
 class MediaVisualViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
-            Self.progressPublisher(for: media)
-                .receive(on: DispatchQueue.main)
-                .assign(to: &$progress)
+            updatePublishers()
         }
     }
     
     @Published private(set) var progress: Double = 0
+    
+    private var taskHandle: String?
+    private var cancellables = Set<AnyCancellable>()
+    
+    deinit {
+        HistoryPlaybackProgressAsyncCancel(taskHandle)
+    }
     
     func imageUrl(for scale: ImageScale) -> URL? {
         return media?.imageUrl(for: scale)
@@ -54,22 +59,27 @@ class MediaVisualViewModel: ObservableObject {
         return MediaDescription.duration(for: media)
     }
     
-    private static func progressPublisher(for media: SRGMedia?) -> AnyPublisher<Double, Never> {
+    private func updatePublishers() {
+        cancellables = []
+        
         if let media = media {
-            return Publishers.PublishAndRepeat(onOutputFrom: Signal.historyUpdate(for: media.urn)) {
-                return Deferred {
-                    Future<Double, Never> { promise in
-                        HistoryPlaybackProgressForMediaMetadataAsync(media) { progress in
-                            promise(.success(Double(progress)))
-                        }
-                    }
+            Signal.historyUpdate(for: media.urn)
+                .sink { [weak self] _ in
+                    self?.updateProgress()
                 }
-            }
-            .eraseToAnyPublisher()
+                .store(in: &cancellables)
         }
-        else {
-            return Just(0)
-                .eraseToAnyPublisher()
+        
+        updateProgress()
+    }
+    
+    // Cannot be wrapped into Futures because the progress update block might be called several times
+    private func updateProgress() {
+        HistoryPlaybackProgressAsyncCancel(taskHandle)
+        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media) { progress in
+            DispatchQueue.main.async {
+                self.progress = Double(progress)
+            }
         }
     }
 }
