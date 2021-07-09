@@ -87,14 +87,14 @@ enum RemovalKey {
             .eraseToAnyPublisher()
     }
     
-    static func laterRemoval() -> AnyPublisher<[Content.Item], Never> {
+    static func watchLaterRemoval() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didRemoveWatchLaterEntry)
             .compactMap { $0.userInfo?[RemovalKey.removedItem] as? Content.Item }
             .scan([Content.Item]()) { $0.appending($1) }
             .eraseToAnyPublisher()
     }
     
-    static func favoriteRemoval() -> AnyPublisher<[Content.Item], Never> {
+    static func favoritesRemoval() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didRemoveFavorite)
             .compactMap { $0.userInfo?[RemovalKey.removedItem] as? Content.Item }
             .scan([Content.Item]()) { $0.appending($1) }
