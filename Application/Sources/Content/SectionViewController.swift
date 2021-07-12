@@ -29,6 +29,7 @@ class SectionViewController: UIViewController {
     private var refreshTriggered = false
     private var contentInsets: UIEdgeInsets
     private var selectedItems = Set<Content.Item>()
+    private var leftBarButtonItem: UIBarButtonItem?
     
     private var globalHeaderTitle: String? {
         #if os(tvOS)
@@ -164,10 +165,16 @@ class SectionViewController: UIViewController {
         collectionView.allowsMultipleSelectionDuringEditing = editing
         
         if editing {
-            // TODO: Display delete button
+            leftBarButtonItem = navigationItem.leftBarButtonItem
+            
+            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+            deleteBarButtonItem.tintColor = .red
+            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
         }
         else {
             selectedItems.removeAll()
+            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
         }
     }
     
@@ -227,6 +234,10 @@ class SectionViewController: UIViewController {
         popoverPresentationController?.barButtonItem = barButtonItem
         
         self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func deleteSelectedItems(_ barButtonItem: UIBarButtonItem) {
+        
     }
     #endif
 }
