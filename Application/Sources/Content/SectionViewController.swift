@@ -158,6 +158,11 @@ class SectionViewController: UIViewController {
     }
     #endif
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView.isEditing = editing
+    }
+    
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
