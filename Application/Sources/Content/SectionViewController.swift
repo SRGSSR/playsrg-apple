@@ -114,6 +114,7 @@ class SectionViewController: UIViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             cell.content = ItemCell(item: item, section: section)
+            cell.contentView.alpha = (!self.isEditing || self.selectedItems.contains(item)) ? 1 : 0.5
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -161,6 +162,7 @@ class SectionViewController: UIViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        
         collectionView.isEditing = editing
         collectionView.allowsMultipleSelectionDuringEditing = editing
         
@@ -176,6 +178,8 @@ class SectionViewController: UIViewController {
             selectedItems.removeAll()
             navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
         }
+        
+        reloadCells()
     }
     
     private func reloadData(for state: SectionViewModel.State) {
@@ -208,6 +212,16 @@ class SectionViewController: UIViewController {
                 }
                 #endif
             }
+        }
+    }
+    
+    private func reloadCells() {
+        var snapshot = dataSource.snapshot()
+        if case let .loaded(headerItem: _, row: row) = model.state {
+            snapshot.reloadSections([row.section])
+        }
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.dataSource.apply(snapshot)
         }
     }
     
