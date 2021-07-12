@@ -422,7 +422,7 @@ private extension SectionViewController {
                 switch section.viewModelProperties.layout {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
