@@ -114,8 +114,7 @@ class ShowHeaderViewModel: ObservableObject {
     
     #if os(iOS)
     func toggleSubscription() {
-        guard let show = show else { return }
-        guard FavoritesToggleSubscriptionForShow(show) else { return }
+        guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
         updateData()
         
         let labels = SRGAnalyticsHiddenEventLabels()
