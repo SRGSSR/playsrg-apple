@@ -382,6 +382,7 @@ extension SectionViewController: UICollectionViewDelegate {
             updateTitle()
         }
         else {
+            collectionView.deselectItem(at: indexPath, animated: true)
             open(item)
         }
     }
