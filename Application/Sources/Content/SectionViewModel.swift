@@ -61,8 +61,10 @@ class SectionViewModel: ObservableObject {
         trigger.activate(for: TriggerId.loadMore)
     }
     
-    func reload() {
-        trigger.activate(for: TriggerId.reload)
+    func reload(deep: Bool = false) {
+        if deep || state.isEmpty {
+            trigger.activate(for: TriggerId.reload)
+        }
     }
 }
 

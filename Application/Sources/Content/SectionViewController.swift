@@ -144,6 +144,11 @@ class SectionViewController: UIViewController {
             .store(in: &cancellables)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.reload()
+    }
+    
     #if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
@@ -343,7 +348,7 @@ extension SectionViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
-            model.reload()
+            model.reload(deep: true)
             refreshTriggered = false
         }
     }
