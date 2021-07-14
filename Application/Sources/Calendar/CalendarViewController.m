@@ -96,7 +96,7 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    self.view.backgroundColor = UIColor.srg_gray1Color;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -318,7 +318,7 @@
     NSDate *startDate = [self minimumDateForCalendar:calendar];
     NSDate *endDate = [self maximumDateForCalendar:calendar];
     NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    return [dateInterval containsDate:date] ? UIColor.srg_gray5Color : [UIColor.srg_gray5Color colorWithAlphaComponent:0.4f];
+    return [dateInterval containsDate:date] ? UIColor.srg_grayC7Color : [UIColor.srg_grayC7Color colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol

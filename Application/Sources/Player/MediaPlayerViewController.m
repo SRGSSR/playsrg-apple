@@ -351,12 +351,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.srg_gray1Color;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
     
-    self.currentProgramView.backgroundColor = UIColor.srg_gray2Color;
+    self.currentProgramView.backgroundColor = UIColor.srg_gray23Color;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
     
@@ -379,7 +379,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     UINib *programHeaderViewNib = [UINib nibWithNibName:programHeaderIdentifier bundle:nil];
     [self.programsTableView registerNib:programHeaderViewNib forHeaderFooterViewReuseIdentifier:programHeaderIdentifier];
     
-    self.showWrapperView.backgroundColor = UIColor.srg_gray2Color;
+    self.showWrapperView.backgroundColor = UIColor.srg_gray23Color;
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
@@ -411,7 +411,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
-    self.livestreamButton.backgroundColor = UIColor.srg_gray2Color;
+    self.livestreamButton.backgroundColor = UIColor.srg_gray23Color;
     self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.livestreamButton.layer.masksToBounds = YES;
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
@@ -420,7 +420,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.currentProgramView.accessibilityElements = @[ self.currentProgramTitleLabel, self.currentProgramMoreEpisodesButton, self.currentProgramFavoriteButton ];
     
-    self.radioHomeButton.backgroundColor = UIColor.srg_gray2Color;
+    self.radioHomeButton.backgroundColor = UIColor.srg_gray23Color;
     self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];

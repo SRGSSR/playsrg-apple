@@ -37,8 +37,8 @@
     self.tableView.estimatedSectionHeaderHeight = 0.f;
     self.tableView.estimatedSectionFooterHeight = 0.f;
     
-    self.view.backgroundColor = UIColor.srg_gray1Color;
-    self.tableView.separatorColor = UIColor.srg_gray4Color;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
+    self.tableView.separatorColor = UIColor.srg_gray96Color;
     
     self.delegate = self;
     self.neverShowPrivacySettings = YES;
@@ -131,7 +131,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
     view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
-    view.textLabel.textColor = UIColor.srg_gray5Color;
+    view.textLabel.textColor = UIColor.srg_grayC7Color;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section

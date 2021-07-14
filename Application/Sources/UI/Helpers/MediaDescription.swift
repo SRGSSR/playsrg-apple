@@ -115,7 +115,7 @@ struct MediaDescription {
             case .notYetAvailable:
                 return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), .play_green)
             case .notAvailableAnymore:
-                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .srgGray4)
+                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .srgGray96)
             case .available:
                 if media.contentType == .scheduledLivestream {
                     return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: .srgLightRed)

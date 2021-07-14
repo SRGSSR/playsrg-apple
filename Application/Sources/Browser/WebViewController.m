@@ -73,7 +73,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.srg_gray1Color;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
@@ -93,7 +93,7 @@ static void *s_kvoContext = &s_kvoContext;
     ]];
     self.webView = webView;
     
-    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_gray5Color];
+    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     loadingImageView.hidden = YES;
     [self.view insertSubview:loadingImageView atIndex:0];

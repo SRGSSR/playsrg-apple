@@ -72,7 +72,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.srg_gray1Color;
+    view.backgroundColor = UIColor.srg_gray16Color;
     
     UICollectionViewFlowLayout *collectionViewLayout = [[UICollectionViewFlowLayout alloc] init];
     collectionViewLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
@@ -92,7 +92,7 @@
     BDKCollectionIndexView *collectionIndexView = [[BDKCollectionIndexView alloc] initWithFrame:CGRectZero indexTitles:nil];
     collectionIndexView.translatesAutoresizingMaskIntoConstraints = NO;
     collectionIndexView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.4f];
-    collectionIndexView.tintColor = UIColor.srg_gray5Color;
+    collectionIndexView.tintColor = UIColor.srg_grayC7Color;
     collectionIndexView.alpha = 1.f;
     collectionIndexView.hidden = YES;
     [collectionIndexView addTarget:self action:@selector(collectionIndexChanged:) forControlEvents:UIControlEventValueChanged];

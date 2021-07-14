@@ -61,7 +61,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.srg_gray1Color;
+    view.backgroundColor = UIColor.srg_gray16Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -186,7 +186,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
-                                  NSForegroundColorAttributeName : UIColor.srg_gray5Color };
+                                  NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No downloads", @"Text displayed when no downloads are available") attributes:attributes];
 }
 
@@ -195,7 +195,7 @@
     NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device does not support 3D touch");
     return [[NSAttributedString alloc] initWithString:description
                                            attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
-                                                         NSForegroundColorAttributeName : UIColor.srg_gray5Color }];
+                                                         NSForegroundColorAttributeName : UIColor.srg_grayC7Color }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
@@ -205,7 +205,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.srg_gray5Color;
+    return UIColor.srg_grayC7Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView

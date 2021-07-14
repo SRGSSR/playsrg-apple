@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.srg_gray2Color;
+    self.backgroundColor = UIColor.srg_gray23Color;
     self.layer.cornerRadius = LayoutStandardViewCornerRadius;
 }
 
@@ -52,7 +52,7 @@
     if (text.length != 0) {
         [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
                                                                                attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
-                                                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color }]];
+                                                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color }]];
     }
     
     self.textLabel.attributedText = attributedText.copy;

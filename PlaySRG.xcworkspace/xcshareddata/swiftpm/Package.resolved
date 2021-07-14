@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "94f9ab80d39da19dd3a2492d5451e909333f0269",
-          "version": "7.4.3"
+          "revision": "beb713a16b50a4df3162b3f3ecdeffa16b74b773",
+          "version": "7.5.0"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "69ae6d5b8c4b898450432f94bd35f863d3830cfc",
-          "version": "10.3.0"
+          "revision": "83e1edaa5a30c567eb129c21c6d00f2f552d2c6f",
+          "version": "10.3.1"
         }
       },
       {
@@ -222,7 +222,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "78013cf3b95b78af15b07df489a1befdb3270aaf",
+          "revision": "afb1621985dc7e797609644b2f4e2a26043a3a48",
           "version": null
         }
       },
@@ -240,7 +240,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "64f19433edcef654b31e0c883d57b90c777ab40e",
+          "revision": "40cd892d79303e12816ab4d46fd9abfa66eb62a5",
           "version": null
         }
       },
@@ -312,8 +312,8 @@
         "repositoryURL": "https://github.com/apple/swift-collections.git",
         "state": {
           "branch": null,
-          "revision": "d45e63421d3dff834949ac69d3c37691e994bd69",
-          "version": "0.0.3"
+          "revision": "3426dba9ee5c9f8e4981b0fc9d39a818d36eec28",
+          "version": "0.0.4"
         }
       },
       {

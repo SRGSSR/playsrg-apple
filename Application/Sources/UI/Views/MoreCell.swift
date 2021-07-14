@@ -23,7 +23,7 @@ struct MoreCell: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: Self.iconHeight)
-                .foregroundColor(.srgGray5)
+                .foregroundColor(.srgGrayC7)
                 .opacity(0.8)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         } label: {
@@ -34,7 +34,7 @@ struct MoreCell: View {
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(height: Self.iconHeight)
-            .foregroundColor(.srgGray5)
+            .foregroundColor(.srgGrayC7)
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(Self.aspectRatio, contentMode: .fit)

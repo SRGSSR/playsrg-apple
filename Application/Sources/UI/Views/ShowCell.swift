@@ -46,7 +46,7 @@ struct ShowCell: View {
                         .padding(.vertical, ShowCellSize.verticalPadding)
                 }
             }
-            .background(Color.srgGray2)
+            .background(Color.srgGray23)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
@@ -71,7 +71,7 @@ struct ShowCell: View {
         var body: some View {
             Text(show?.title ?? "")
                 .srgFont(.H4)
-                .foregroundColor(.srgGray5)
+                .foregroundColor(.srgGrayC7)
                 .lineLimit(1)
                 .frame(maxWidth: .infinity, alignment: .topLeading)
         }

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .srgGray2
+        appearance.backgroundColor = .srgGray23
         appearance.selectionIndicatorTintColor = .hexadecimal("#979797")
         
         let itemAppearance = appearance.inlineLayoutAppearance
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemAppearance.focused.iconColor = activeColor
         
         tabBarController.tabBar.standardAppearance = appearance
-        tabBarController.view.backgroundColor = .srgGray1
+        tabBarController.view.backgroundColor = .srgGray16
     }
     
     private func applicationRootViewController() -> UIViewController {

@@ -73,7 +73,7 @@
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_gray5Color];
+    self.loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
@@ -204,7 +204,7 @@
 {
     // Remark: No test for self.loading since a custom view is used in such cases
     NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
-                                  NSForegroundColorAttributeName : UIColor.srg_gray5Color };
+                                  NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
@@ -226,7 +226,7 @@
     if (description) {
         return [[NSAttributedString alloc] initWithString:description
                                                attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
-                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color }];
+                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color }];
     }
     else {
         return nil;
@@ -247,7 +247,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.srg_gray5Color;
+    return UIColor.srg_grayC7Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView

@@ -112,7 +112,7 @@ struct ShowsView: View {
             }
             .synchronizeTabBarScrolling()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.srgGray1)
+            .background(Color.srgGray16)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()

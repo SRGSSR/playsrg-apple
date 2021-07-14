@@ -141,7 +141,7 @@
     }
     
     UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
-    parameters.backgroundColor = UIColor.srg_gray1Color;
+    parameters.backgroundColor = UIColor.srg_gray16Color;
     return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
 }
 

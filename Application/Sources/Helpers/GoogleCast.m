@@ -178,7 +178,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-            styleAttributes.backgroundColor = UIColor.srg_gray1Color;
+            styleAttributes.backgroundColor = UIColor.srg_gray16Color;
             styleAttributes.headingTextColor = UIColor.whiteColor;
             styleAttributes.bodyTextColor = UIColor.whiteColor;
             styleAttributes.captionTextColor = UIColor.whiteColor;

@@ -89,7 +89,7 @@ struct SectionShowHeaderView: View {
         
         var body: some View {
             if uiHorizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray1]), startPoint: .center, endPoint: .trailing)
+                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
             }
         }
     }
@@ -109,7 +109,7 @@ struct SectionShowHeaderView: View {
                         // all lines it could.
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray5)
+                        .foregroundColor(.srgGrayC7)
                 }
                 if let summary = section.properties.summary {
                     Text(summary)
@@ -118,7 +118,7 @@ struct SectionShowHeaderView: View {
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray4)
+                        .foregroundColor(.srgGray96)
                 }
             }
         }

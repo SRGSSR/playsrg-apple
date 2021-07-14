@@ -49,7 +49,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.srg_gray1Color;
+    self.backgroundColor = UIColor.srg_gray16Color;
     
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = UIColor.clearColor;
@@ -66,7 +66,7 @@
     
     self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
-    self.downloadStatusImageView.tintColor = UIColor.srg_gray5Color;
+    self.downloadStatusImageView.tintColor = UIColor.srg_grayC7Color;
 }
 
 - (void)prepareForReuse
@@ -212,7 +212,7 @@
 
 - (void)updateDownloadStatus
 {
-    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.srg_gray5Color;
+    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.srg_grayC7Color;
     
     self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];

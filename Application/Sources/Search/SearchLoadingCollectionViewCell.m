@@ -26,7 +26,7 @@
     [super awakeFromNib];
     
     self.backgroundColor = UIColor.clearColor;
-    [self.imageView play_setLargeLoadingAnimationWithTintColor:UIColor.srg_gray5Color];
+    [self.imageView play_setLargeLoadingAnimationWithTintColor:UIColor.srg_grayC7Color];
     [self.imageView startAnimating];
 }
 

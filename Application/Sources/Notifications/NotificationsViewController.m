@@ -105,7 +105,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.srg_gray1Color;
+    view.backgroundColor = UIColor.srg_gray16Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -239,7 +239,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
-                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
+                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No notifications", @"Text displayed when no notifications are available")
                                            attributes:attributes];
 }
@@ -247,7 +247,7 @@
 - (NSAttributedString *)descriptionForEmptyDataSet:(UIScrollView *)scrollView
 {
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
-                                                             NSForegroundColorAttributeName : UIColor.srg_gray5Color };
+                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"Subscribe to shows you like to be notified when a new episode is available.", @"Message displayed when no notifications have been received")
                                            attributes:attributes];
 }
@@ -259,7 +259,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.srg_gray5Color;
+    return UIColor.srg_grayC7Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView

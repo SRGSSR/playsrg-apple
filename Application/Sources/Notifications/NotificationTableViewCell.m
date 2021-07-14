@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.srg_gray1Color;
+    self.backgroundColor = UIColor.srg_gray16Color;
     
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = UIColor.clearColor;
@@ -44,8 +44,8 @@
     self.thumbnailImageView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.thumbnailImageView.layer.masksToBounds = YES;
     
-    self.subtitleLabel.textColor = UIColor.srg_gray5Color;
-    self.dateLabel.textColor = UIColor.srg_gray5Color;
+    self.subtitleLabel.textColor = UIColor.srg_grayC7Color;
+    self.dateLabel.textColor = UIColor.srg_grayC7Color;
     self.unreadLabel.textColor = UIColor.play_notificationRedColor;
 }
 

@@ -38,7 +38,7 @@ struct EmptyView: View {
         }
         .multilineTextAlignment(.center)
         .lineLimit(3)
-        .foregroundColor(Color.srgGray5)
+        .foregroundColor(Color.srgGrayC7)
         .padding()
     }
 }

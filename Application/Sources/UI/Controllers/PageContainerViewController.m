@@ -68,7 +68,7 @@
 - (void)loadView
 {
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    self.view.backgroundColor = UIColor.srg_gray1Color;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     [self addChildViewController:self.pageViewController];
     
@@ -116,7 +116,7 @@
     tabBar.items = tabBarItems.copy;
     
     tabBar.tintColor = UIColor.whiteColor;
-    tabBar.unselectedItemTintColor = UIColor.srg_gray4Color;
+    tabBar.unselectedItemTintColor = UIColor.srg_gray96Color;
     tabBar.selectedItemTintColor = UIColor.whiteColor;
         
     // Use ripple effect without color, so that there is no Material-like highlighting (we are NOT adopting Material)

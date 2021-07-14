@@ -12,7 +12,7 @@
 
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated
 {
-    self.textLabel.textColor = highlighted ? UIColor.srg_gray4Color : UIColor.whiteColor;
+    self.textLabel.textColor = highlighted ? UIColor.srg_gray96Color : UIColor.whiteColor;
 }
 
 @end

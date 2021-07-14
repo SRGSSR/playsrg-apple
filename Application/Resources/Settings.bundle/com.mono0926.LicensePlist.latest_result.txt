@@ -248,7 +248,7 @@ name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, 
 
 name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 8.4.0
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.4.3
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.5.0
 
 name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.4
 
@@ -294,7 +294,7 @@ name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.2
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 
 
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.3
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.4
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.17.0
 
