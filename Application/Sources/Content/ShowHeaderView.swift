@@ -103,7 +103,7 @@ struct ShowHeaderView: View {
                 if let lead = model.lead {
                     Text(lead)
                         .srgFont(.body)
-                        .lineLimit(6)
+                        .lineLimit(3)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
@@ -148,7 +148,7 @@ private extension View {
                 self
             }
             else {
-                self.frame(height: constant(iOS: 300, tvOS: 500), alignment: .top)
+                self.frame(height: constant(iOS: 200, tvOS: 500), alignment: .top)
             }
         }
     }
