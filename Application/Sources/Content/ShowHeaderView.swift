@@ -89,7 +89,7 @@ struct ShowHeaderView: View {
         var body: some View {
             VStack(spacing: ShowHeaderView.verticalSpacing) {
                 if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: .srgGray3)
+                    Badge(text: broadcastInformation, color: Color(.play_green))
                 }
                 Text(model.title ?? "")
                     .srgFont(.H2)
