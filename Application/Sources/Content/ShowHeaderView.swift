@@ -148,7 +148,7 @@ private extension View {
                 self
             }
             else {
-                self.frame(height: constant(iOS: 200, tvOS: 500), alignment: .top)
+                self.frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }
