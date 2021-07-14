@@ -13,6 +13,7 @@ import UIKit
 
 class SectionViewController: UIViewController {
     let model: SectionViewModel
+    let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -29,11 +30,13 @@ class SectionViewController: UIViewController {
     
     private var globalHeaderTitle: String? {
         #if os(tvOS)
-        return model.title
+        return tabBarController == nil ? model.title : nil
         #else
         return nil
         #endif
     }
+    
+    private var contentInsets: UIEdgeInsets
     
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
@@ -44,8 +47,10 @@ class SectionViewController: UIViewController {
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering? = nil) {
+    init(section: Content.Section, filter: SectionFiltering? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
+        self.fromPushNotification = fromPushNotification
+        contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
         title = model.title
     }
@@ -92,7 +97,7 @@ class SectionViewController: UIViewController {
                                                   style: .plain,
                                                   target: self,
                                                   action: #selector(self.shareContent(_:)))
-            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", "Share button label on player view")
+            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
             navigationItem.rightBarButtonItem = shareButtonItem
         }
         #endif
@@ -131,12 +136,17 @@ class SectionViewController: UIViewController {
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
             }
         }
-                
+        
         model.$state
             .sink { [weak self] state in
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.reload()
     }
     
     #if os(iOS)
@@ -151,9 +161,12 @@ class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case let .loaded(headerItem: _, row: row):
-            emptyView.content = row.isEmpty ? EmptyView(state: .empty) : nil
+        case let .loaded(headerItem: headerItem, row: row):
+            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty) : nil
         }
+        
+        contentInsets = Self.contentInsets(for: state)
+        play_setNeedsContentInsetsUpdate()
         
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
@@ -165,9 +178,13 @@ class SectionViewController: UIViewController {
                     self.refreshControl.endRefreshing()
                 }
                 #endif
-                self.play_setNeedsContentInsetsUpdate()
             }
         }
+    }
+    
+    private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
+        let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
     #if os(iOS)
@@ -210,7 +227,7 @@ private extension SectionViewController {
 extension SectionViewController: DailyMediasViewController {
     var date: Date? {
         guard case let .configured(section) = model.section else { return nil }
-        switch section.type {
+        switch section {
         case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
             return day.date
         default:
@@ -230,11 +247,28 @@ extension SectionViewController {
     
     @objc static func viewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .radioEpisodesForDay(day, channelUid: channelUid), contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         }
         else {
-            return SectionViewController(section: .configured(ConfiguredSection(type: .tvEpisodesForDay(day), contentPresentationType: .swimlane)))
+            return SectionViewController(section: .configured(.tvEpisodesForDay(day)))
         }
+    }
+    
+    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+        if let channelUid = channelUid {
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)))
+        }
+        else {
+            return SectionViewController(section: .configured(.tvAllShows))
+        }
+    }
+    
+    @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
+        return SectionViewController(section: .configured(.show(show)), fromPushNotification: fromPushNotification)
+    }
+    
+    @objc static func showViewController(for show: SRGShow) -> SectionViewController {
+        return showViewController(for: show, fromPushNotification: false)
     }
 }
 
@@ -246,8 +280,7 @@ extension SectionViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        let top = (model.state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
-        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        return contentInsets
     }
 }
 
@@ -263,7 +296,7 @@ extension SectionViewController: UICollectionViewDelegate {
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
             if let navigationController = navigationController {
-                let showViewController = ShowViewController(show: show, fromPushNotification: false)
+                let showViewController = SectionViewController.showViewController(for: show)
                 navigationController.pushViewController(showViewController, animated: true)
             }
         case let .topic(topic):
@@ -274,7 +307,7 @@ extension SectionViewController: UICollectionViewDelegate {
         default:
             ()
         }
-            
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
@@ -315,7 +348,7 @@ extension SectionViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
-            model.reload()
+            model.reload(deep: true)
             refreshTriggered = false
         }
     }
@@ -338,17 +371,21 @@ extension SectionViewController: SRGAnalyticsViewTracking {
     var srg_pageViewLevels: [String]? {
         return model.section.properties.analyticsLevels
     }
+    
+    var srg_isOpenedFromPushNotification: Bool {
+        return fromPushNotification
+    }
 }
 
 extension SectionViewController: SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?) {
+        guard let event = event else { return }
+        
         #if os(tvOS)
-        if let event = event {
-            navigateToShow(event.show)
-        }
+        navigateToShow(event.show)
         #else
-        if let event = event, let navigationController = navigationController {
-            let showViewController = ShowViewController(show: event.show, fromPushNotification: false)
+        if let navigationController = navigationController {
+            let showViewController = SectionViewController.showViewController(for: event.show)
             navigationController.pushViewController(showViewController, animated: true)
         }
         #endif
@@ -390,7 +427,7 @@ private extension SectionViewController {
                 switch section.viewModelProperties.layout {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
@@ -452,21 +489,35 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
-        let headerItem: SectionViewModel.Item?
+        let headerItem: SectionViewModel.HeaderItem?
         
         var body: some View {
             switch headerItem {
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    SectionShowHeaderView(section: section.wrappedValue, show: show)
+                default:
+                    Color.clear
+                }
             case let .show(show):
-                SectionShowHeaderView(section: section.wrappedValue, show: show)
+                ShowHeaderView(show: show)
             default:
                 Color.clear
             }
         }
         
-        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.Item?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch headerItem {
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                default:
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                }
             case let .show(show):
-                return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
             default:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }

@@ -19,7 +19,6 @@
 #import "SearchLoadingCollectionViewCell.h"
 #import "SearchSettingsViewController.h"
 #import "SearchShowListCollectionViewCell.h"
-#import "ShowViewController.h"
 #import "UIColor+PlaySRG.h"
 #import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -573,7 +572,7 @@
 {
     if ([self shouldDisplayMostSearchedShows]) {
         SRGShow *show = self.items[indexPath.row];
-        ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+        SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
         [self.navigationController pushViewController:showViewController animated:YES];
         
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

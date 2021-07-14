@@ -55,7 +55,7 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Featured media hint")
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Featured media hint")
     }
     
     func visualView() -> some View {
@@ -96,7 +96,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", "Featured show hint")
+        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Featured show hint")
     }
     
     func visualView() -> some View {

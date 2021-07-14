@@ -152,7 +152,7 @@ private extension MediaCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Media cell hint")
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
 }
 

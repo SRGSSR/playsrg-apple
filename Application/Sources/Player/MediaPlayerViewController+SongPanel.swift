@@ -254,10 +254,10 @@ extension MediaPlayerViewController: PanelAccessibilityDelegate {
     
     public func panel(_ panel: Panel, accessibilityLabelForResizeHandle resizeHandle: ResizeHandle) -> String {
         if panel.configuration.mode == .compact {
-            return PlaySRGAccessibilityLocalizedString("Show music list", "Accessibility label of the song list handle when closed")
+            return PlaySRGAccessibilityLocalizedString("Show music list", comment: "Accessibility label of the song list handle when closed")
         }
         else {
-            return PlaySRGAccessibilityLocalizedString("Hide music list", "Accessibility label of the song list handle when opened")
+            return PlaySRGAccessibilityLocalizedString("Hide music list", comment: "Accessibility label of the song list handle when opened")
         }
     }
     

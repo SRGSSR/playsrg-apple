@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LiveMediaCell: View {
     @Binding private(set) var media: SRGMedia?
-    @StateObject private var model = LiveMediaViewModel()
+    @StateObject private var model = LiveMediaCellViewModel()
     
     init(media: SRGMedia?) {
         _media = .constant(media)
@@ -53,7 +53,7 @@ struct LiveMediaCell: View {
     
     /// Behavior: h-exp, v-exp
     private struct VisualView: View {
-        @ObservedObject var model: LiveMediaViewModel
+        @ObservedObject var model: LiveMediaCellViewModel
         
         var body: some View {
             ZStack {
@@ -74,7 +74,7 @@ struct LiveMediaCell: View {
     
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
-        @ObservedObject var model: LiveMediaViewModel
+        @ObservedObject var model: LiveMediaCellViewModel
         
         #if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -96,7 +96,7 @@ struct LiveMediaCell: View {
                         .padding(.bottom, 4)
                 }
                 
-                Text(model.title)
+                Text(model.title ?? "")
                     .srgFont(.body, maximumSize: constant(iOS: 18, tvOS: nil))
                     .lineLimit(1)
                     .foregroundColor(.white)
@@ -123,7 +123,7 @@ private extension LiveMediaCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", "Media cell hint")
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
 }
 

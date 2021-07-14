@@ -19,6 +19,19 @@
     return supportedInterfaceOrientations;
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [super viewDidLayoutSubviews];
+    
+    for (UIViewController *viewController in self.viewControllers) {
+        UIUserInterfaceSizeClass horizontalSizeClass = CGRectGetWidth(viewController.view.frame) < 600.f ? UIUserInterfaceSizeClassCompact : UIUserInterfaceSizeClassRegular;
+        UITraitCollection *horizontalTraitCollection = [UITraitCollection traitCollectionWithHorizontalSizeClass:horizontalSizeClass];
+        UITraitCollection *verticalTraitCollection = [UITraitCollection traitCollectionWithVerticalSizeClass:self.traitCollection.verticalSizeClass];
+        UITraitCollection *traitCollection = [UITraitCollection traitCollectionWithTraitsFromCollections:@[horizontalTraitCollection, verticalTraitCollection]];
+        [self setOverrideTraitCollection:traitCollection forChildViewController:viewController];
+    }
+}
+
 #pragma mark Status bar
 
 - (BOOL)prefersStatusBarHidden

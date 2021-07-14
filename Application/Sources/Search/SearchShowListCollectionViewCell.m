@@ -9,7 +9,6 @@
 #import "AnalyticsConstants.h"
 #import "Layout.h"
 #import "PlaySRG-Swift.h"
-#import "ShowViewController.h"
 #import "SwimlaneCollectionViewLayout.h"
 #import "UIView+PlaySRG.h"
 
@@ -101,7 +100,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SRGShow *show = self.shows[indexPath.row];
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [self.play_nearestViewController.navigationController pushViewController:showViewController animated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

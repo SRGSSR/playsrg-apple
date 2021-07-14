@@ -190,7 +190,7 @@ private extension ContextMenu {
               let navigationController = viewController.navigationController else { return nil }
         return UIAction(title: NSLocalizedString("More episodes", comment: "Context menu action to open more episodes associated with a media"),
                         image: UIImage(named: "episodes")) { _ in
-            let showViewController = ShowViewController(show: show, fromPushNotification: false)
+            let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
         }
     }
@@ -202,7 +202,7 @@ private extension ContextMenu {
     // TODO: Make item mandatory when the ObjC API is not needed anymore
     static func configuration(for show: SRGShow, item: Content.Item?, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
-            return ShowViewController(show: show, fromPushNotification: false)
+            return SectionViewController.showViewController(for: show)
         } actionProvider: { _ in
             return menu(for: show, item: item, in: viewController)
         }

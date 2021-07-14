@@ -12,7 +12,6 @@
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "ShowViewController.h"
 #import "TranslucentTitleHeaderView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -305,7 +304,7 @@
     NSString *indexLetter = self.indexLetters[indexPath.section];
     SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
     
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [self.navigationController pushViewController:showViewController animated:YES];
 }
 

@@ -56,11 +56,11 @@ struct MoreCell: View {
 
 private extension MoreCell {
     var accessibilityLabel: String? {
-        return PlaySRGAccessibilityLocalizedString("More", "More button label")
+        return PlaySRGAccessibilityLocalizedString("More", comment: "More button label")
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens details.", "More button hint")
+        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "More button hint")
     }
 }
 
@@ -68,7 +68,7 @@ private extension MoreCell {
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {
-        MoreCell(section: .configured(ConfiguredSection(type: .tvLive, contentPresentationType: .grid)), filter: nil)
+        MoreCell(section: .configured(.tvLive), filter: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

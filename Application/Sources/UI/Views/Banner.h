@@ -80,13 +80,13 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
 + (void)showDownload:(BOOL)downloaded forItemWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
 
 /**
- *  Show a banner telling the user that the specified show has been added to or removed from the subscription list.
+ *  Show a banner telling the user that the specified item has been added to or removed from the subscription list.
  *
  *  @discussion If no name is provided, a standard description will be used.
  */
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(nullable NSString *)name;
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(nullable NSString *)name inView:(nullable UIView *)view;
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(nullable NSString *)name;
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(nullable NSString *)name inView:(nullable UIView *)view;
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(nullable NSString *)name inViewController:(nullable UIViewController *)viewController;
 
 /**
  *  Show a banner telling the user that the specified item has been added to or removed from the later list.

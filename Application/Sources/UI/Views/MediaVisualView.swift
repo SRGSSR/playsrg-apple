@@ -11,90 +11,78 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct MediaVisualView: View {
-    let media: SRGMedia?
+    @Binding private(set) var media: SRGMedia?
+    @StateObject private var model = MediaVisualViewModel()
+    
     let scale: ImageScale
     
     static let padding: CGFloat = constant(iOS: 6, tvOS: 16)
-    
-    @State private var progress: Double = 0
-    @State private var taskHandle: String?
     
     @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
     @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
     
     @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
     
+    init(media: SRGMedia?, scale: ImageScale) {
+        _media = .constant(media)
+        self.scale = scale
+    }
+    
     private var canDisplaySubtitleAvailability: Bool {
         guard !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden else { return false }
-        
         return isVoiceOverRunning || isSubtitleAvailabilityDisplayed
     }
     
     private var canDisplayAudioDescriptionAvailability: Bool {
         guard !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden else { return false }
-        
         return isVoiceOverRunning || isAudioDescriptionAvailabilityDisplayed
-    }
-    
-    private func updateProgress() {
-        HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media, { progress in
-            DispatchQueue.main.async {
-                self.progress = Double(progress)
-            }
-        })
     }
     
     var body: some View {
         ZStack {
-            ImageView(url: media?.imageUrl(for: scale))
+            ImageView(url: model.imageUrl(for: scale))
             BlockingOverlay(media: media)
             
-            if let media = media, let availabilityBadgeProperties = MediaDescription.availabilityBadgeProperties(for: media) {
-                Badge(text: availabilityBadgeProperties.text, color: availabilityBadgeProperties.color)
+            if let availabilityBadgeProperties = model.availabilityBadgeProperties {
+                Badge(text: availabilityBadgeProperties.text, color: Color(availabilityBadgeProperties.color))
                     .padding([.top, .leading], Self.padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
             
             HStack(spacing: 6) {
                 Spacer()
-                if media?.presentation == .presentation360 {
+                if model.is360 {
                     ThreeSixtyBadge()
                 }
-                if let media = media, media.play_isMultiAudioAvailable {
+                if model.isMultiAudioAvailable {
                     MultiAudioBadge()
                 }
-                if canDisplayAudioDescriptionAvailability, let media = media, media.play_isAudioDescriptionAvailable {
+                if canDisplayAudioDescriptionAvailability, model.isAudioDescriptionAvailable {
                     AudioDescriptionBadge()
                 }
-                if canDisplaySubtitleAvailability, let media = media, media.play_areSubtitlesAvailable {
+                if canDisplaySubtitleAvailability, model.areSubtitlesAvailable {
                     SubtitlesBadge()
                 }
-                if let youthProtectionColor = media?.youthProtectionColor {
+                if let youthProtectionColor = model.youthProtectionColor {
                     YouthProtectionBadge(color: youthProtectionColor)
                 }
-                if let media = media, let duration = MediaDescription.duration(for: media) {
+                if let duration = model.duration {
                     DurationBadge(duration: duration)
                 }
             }
             .padding([.bottom, .horizontal], Self.padding)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
-            if let progress = progress {
-                ProgressBar(value: progress)
-                    .opacity(progress != 0 ? 1 : 0)
-                    .frame(height: LayoutProgressBarHeight)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            }
+            ProgressBar(value: model.progress)
+                .opacity(model.progress != 0 ? 1 : 0)
+                .frame(height: LayoutProgressBarHeight)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .onAppear {
-            updateProgress()
+            model.media = media
         }
-        .onReceive(NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange)) { notification in
-            if let updatedUrns = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>,
-               let media = media, updatedUrns.contains(media.urn) {
-                updateProgress()
-            }
+        .onChange(of: media) { newValue in
+            model.media = newValue
         }
     }
 }

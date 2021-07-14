@@ -77,6 +77,17 @@ extension Array {
     }
 }
 
+extension Collection {
+    func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
+        var index = 0
+        return try map { element in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
+    }
+}
+
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
         return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)
@@ -159,13 +170,13 @@ extension UIHostingController {
 }
 
 extension NSCollectionLayoutSection {
-    typealias CellSizer = ((layoutWidth: CGFloat, spacing: CGFloat)) -> NSCollectionLayoutSize
+    typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
     
     static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
         let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
         
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
-        let cellSize = cellSizer((effectiveLayoutWidth, spacing))
+        let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -183,7 +194,7 @@ extension NSCollectionLayoutSection {
         let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
         
         let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
-        let cellSize = cellSizer((effectiveLayoutWidth, spacing))
+        let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)

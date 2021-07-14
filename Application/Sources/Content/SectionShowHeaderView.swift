@@ -33,60 +33,57 @@ struct SectionShowHeaderView: View {
     let section: Content.Section
     let show: SRGShow
     
-    var body: some View {
-        #if os(tvOS)
-        MainView(section: section, show: show)
-            .focusable()
-        #else
-        MainView(section: section, show: show)
-        #endif
-    }
+    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
-    /// Behavior: h-hug, v-hug
-    private struct MainView: View {
-        let section: Content.Section
-        let show: SRGShow
-        
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
+    var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
         #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        return UIUserInterfaceSizeClass(horizontalSizeClass)
+        #else
+        return .regular
         #endif
-        
-        var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-            #if os(iOS)
-            return UIUserInterfaceSizeClass(horizontalSizeClass)
-            #else
-            return .regular
-            #endif
-        }
-        
-        private var direction: StackDirection {
-            #if os(iOS)
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-            #else
-            return .horizontal
-            #endif
-        }
-        
-        var body: some View {
-            Stack(direction: direction, spacing: 0) {
-                ImageView(url: show.imageUrl(for: .large))
-                    .aspectRatio(16 / 9, contentMode: .fit)
-                    .background(Color.white.opacity(0.1))
-                    .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
-                    .layoutPriority(1)
-                VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
-                    DescriptionView(section: section)
-                    ShowAccessButton(show: show, uiHorizontalSizeClass: uiHorizontalSizeClass)
-                }
-                .padding(.horizontal, constant(iOS: 16, tvOS: 80))
-                .padding(.vertical)
-                .frame(maxWidth: .infinity)
-            }
-            .adaptiveMainFrame(for: uiHorizontalSizeClass)
-            .padding(.bottom, constant(iOS: 20, tvOS: 50))
-        }
     }
     
+    private var direction: StackDirection {
+        #if os(iOS)
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+        #else
+        return .horizontal
+        #endif
+    }
+    
+    private var alignment: StackAlignment {
+        #if os(iOS)
+        return (horizontalSizeClass == .compact) ? .center : .leading
+        #else
+        return .leading
+        #endif
+    }
+    
+    var body: some View {
+        Stack(direction: direction, alignment: alignment, spacing: 0) {
+            ImageView(url: show.imageUrl(for: .large))
+                .aspectRatio(16 / 9, contentMode: .fit)
+                .background(Color.white.opacity(0.1))
+                .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
+                .adaptiveMainFrame(for: uiHorizontalSizeClass)
+                .layoutPriority(1)
+            VStack(spacing: SectionShowHeaderView.verticalSpacing) {
+                DescriptionView(section: section)
+                ShowAccessButton(show: show)
+            }
+            .padding(.horizontal, constant(iOS: 16, tvOS: 80))
+            .padding(.vertical)
+            .frame(maxWidth: .infinity)
+        }
+        .padding(.bottom, constant(iOS: 20, tvOS: 50))
+        .focusable()
+    }
+    
+    /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
         let uiHorizontalSizeClass: UIUserInterfaceSizeClass
         
@@ -102,14 +99,14 @@ struct SectionShowHeaderView: View {
         let section: Content.Section
         
         var body: some View {
-            VStack(spacing: SectionShowHeaderViewSize.verticalSpacing) {
+            VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 if let title = section.properties.title {
                     Text(title)
                         .srgFont(.H2)
+                        .lineLimit(2)
                         // Fix sizing issue, see https://swiftui-lab.com/bug-linelimit-ignored/. The size is correct
                         // when calculated with a `UIHostingController`, but without this the text does not occupy
                         // all lines it could.
-                        .lineLimit(2)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray5)
@@ -117,8 +114,8 @@ struct SectionShowHeaderView: View {
                 if let summary = section.properties.summary {
                     Text(summary)
                         .srgFont(.body)
-                        // See above
                         .lineLimit(6)
+                        // See above
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray4)
@@ -130,7 +127,6 @@ struct SectionShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct ShowAccessButton: View {
         let show: SRGShow
-        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
         
         @State private var isFocused = false
         
@@ -139,28 +135,15 @@ struct SectionShowHeaderView: View {
         }
         
         var accessibilityHint: String? {
-            return PlaySRGAccessibilityLocalizedString("Opens show details.", "Show button hint")
+            return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show button hint")
         }
         
         var body: some View {
             ResponderChain { firstResponder in
-                Button {
+                SimpleButton(icon: "episodes", label: show.title) {
                     firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
-                } label: {
-                    HStack(spacing: 15) {
-                        Image("episodes")
-                        Text(show.title)
-                            .srgFont(.button)
-                    }
-                    .onParentFocusChange { isFocused = $0 }
-                    .padding(.horizontal, constant(iOS: 10, tvOS: 16))
-                    .padding(.vertical, constant(iOS: 8, tvOS: 12))
-                    .adaptiveButtonFrame(height: 45, for: uiHorizontalSizeClass)
-                    .foregroundColor(constant(iOS: .srgGray5, tvOS: isFocused ? .srgGray2 : .srgGray5))
-                    .background(constant(iOS: Color.srgGray2, tvOS: Color.clear))
-                    .cornerRadius(LayoutStandardViewCornerRadius)
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
                 }
+                .frame(maxWidth: 350)
             }
         }
     }
@@ -176,24 +159,13 @@ struct SectionShowHeaderView: View {
 //         - Remove uiHorizontalSizeClass
 //         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
-    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
+    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
         return Group {
             if horizontalSizeClass == .compact {
                 self
             }
             else {
-                self.frame(height: constant(iOS: 300, tvOS: 500), alignment: .top)
-            }
-        }
-    }
-    
-    func adaptiveButtonFrame(height: CGFloat, for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
-        return Group {
-            if horizontalSizeClass == .compact {
-                self.frame(maxWidth: .infinity, minHeight: height, alignment: .leading)
-            }
-            else {
-                self.frame(maxWidth: 300, minHeight: height, maxHeight: height)
+                self.frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }
@@ -202,8 +174,6 @@ private extension View {
 // MARK: Size
 
 class SectionShowHeaderViewSize: NSObject {
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
-    
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)

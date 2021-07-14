@@ -200,10 +200,10 @@ struct MediaDetailView: View {
                                     ? NSLocalizedString("Listen later", comment: "Button label in media detail view to add an audio to the later list")
                                     : NSLocalizedString("Watch later", comment: "Button label in media detail view to add a video to the later list"),
                                   accessibilityLabel: isRemoval
-                                    ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", "Media deletion from later list label in the media detail view when a media is in the later list")
+                                    ? PlaySRGAccessibilityLocalizedString("Delete from \"Later\" list", comment: "Media deletion from later list label in the media detail view when a media is in the later list")
                                     : model.media?.mediaType == .audio
-                                    ? PlaySRGAccessibilityLocalizedString("Listen later", "Media addition to later list label in media detail view to add an audio to the later list")
-                                    : PlaySRGAccessibilityLocalizedString("Watch later", "Media addition to later list label in media detail view to add a video to the later list")) {
+                                    ? PlaySRGAccessibilityLocalizedString("Listen later", comment: "Media addition to later list label in media detail view to add an audio to the later list")
+                                    : PlaySRGAccessibilityLocalizedString("Watch later", comment: "Media addition to later list label in media detail view to add a video to the later list")) {
                         model.toggleWatchLater()
                     }
                 }

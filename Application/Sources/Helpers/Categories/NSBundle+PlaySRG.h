@@ -11,17 +11,17 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Return an accessibility-oriented localized string from the main bundle.
  */
-OBJC_EXPORT NSString *PlaySRGAccessibilityLocalizedString(NSString *key, NSString * _Nullable comment);
+OBJC_EXPORT NSString *PlaySRGAccessibilityLocalizedString(NSString *key, NSString * _Nullable comment) NS_REFINED_FOR_SWIFT;
 
 /**
  *  Return an onboarding localized string from the main bundle.
  */
-OBJC_EXPORT NSString *PlaySRGOnboardingLocalizedString(NSString *key, NSString * _Nullable comment);
+OBJC_EXPORT NSString *PlaySRGOnboardingLocalizedString(NSString *key, NSString * _Nullable comment) NS_REFINED_FOR_SWIFT;
 
 /**
  *  Return a setting localized string from the settings bundle.
  */
-OBJC_EXPORT NSString *PlaySRGSettingsLocalizedString(NSString *key, NSString * _Nullable comment);
+OBJC_EXPORT NSString *PlaySRGSettingsLocalizedString(NSString *key, NSString * _Nullable comment) NS_REFINED_FOR_SWIFT;
 
 /**
  *  Use to avoid user-facing text analyzer warnings.

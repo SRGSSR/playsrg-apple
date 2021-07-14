@@ -18,7 +18,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "PlayErrors.h"
-#import "ShowViewController.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"

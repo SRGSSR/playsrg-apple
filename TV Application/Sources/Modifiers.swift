@@ -15,7 +15,7 @@ extension View {
         onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             action()
         }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange)) { notification in
+        .onReceive(NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)) { notification in
             if ReachabilityBecameReachable(notification) {
                 action()
             }

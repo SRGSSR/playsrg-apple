@@ -32,10 +32,15 @@ struct SubscriptionButton: View {
     
     private var accessibilityLabel: String {
         if isPushServiceEnabled, let show = show {
-            return FavoritesIsSubscribedToShow(show) ? PlaySRGAccessibilityLocalizedString("Disable notifications for show", "Show unsubscription label") : PlaySRGAccessibilityLocalizedString("Enable notifications for show", "Show subscription label")
+            if FavoritesIsSubscribedToShow(show) {
+                return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
+            }
+            else {
+                return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
+            }
         }
         else {
-            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", "Show subscription label")
+            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
         
@@ -51,7 +56,7 @@ struct SubscriptionButton: View {
             labels.value = show.urn
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
             
-            Banner.showSubscription(subscribed, forShowWithName: show.title)
+            Banner.showSubscription(subscribed, forItemWithName: show.title)
         } label: {
             Image(imageName)
         }

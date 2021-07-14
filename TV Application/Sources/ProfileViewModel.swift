@@ -43,53 +43,51 @@ class ProfileViewModel: ObservableObject {
     
     init() {
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
-            .sink { _ in
-                self.updateIdentityInformation()
+            .sink { [weak self] _ in
+                self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
-            .sink { _ in
-                self.updateIdentityInformation()
+            .sink { [weak self] _ in
+                self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)
-            .sink { _ in
-                self.updateIdentityInformation()
+            .sink { [weak self] _ in
+                self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
-            .sink { _ in
-                self.updateIdentityInformation()
+            .sink { [weak self] _ in
+                self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         updateIdentityInformation()
         
         NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
-            .sink { _ in
-                self.updateSynchronizationDate()
+            .sink { [weak self] _ in
+                self?.updateSynchronizationDate()
             }
             .store(in: &cancellables)
         updateSynchronizationDate()
         
-        NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
-            .sink { _ in
-                self.updateHistoryInformation()
+        Signal.historyUpdate()
+            .sink { [weak self] _ in
+                self?.updateHistoryInformation()
             }
             .store(in: &cancellables)
         updateHistoryInformation()
         
-        NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .sink { notification in
-                guard let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue else { return }
-                self.updateWatchLaterInformation()
+        Signal.watchLaterUpdate()
+            .sink { [weak self] _ in
+                self?.updateWatchLaterInformation()
             }
             .store(in: &cancellables)
         updateWatchLaterInformation()
         
-        NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
-            .sink { notification in
-                guard let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) else { return }
-                self.updateFavoritesInformation()
+        Signal.favoritesUpdate()
+            .sink { [weak self] _ in
+                self?.updateFavoritesInformation()
             }
             .store(in: &cancellables)
         updateFavoritesInformation()

@@ -40,14 +40,14 @@ struct ProfileView: View {
                 }
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")).srgFont(.H3),
-                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", comment: "Playback settings section header")).srgFont(.H3),
+                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     AutoplayListItem()
                 }
             }
             if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden || !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", "Display settings section header")).srgFont(.H3),
-                        footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", comment: "Display settings section header")).srgFont(.H3),
+                        footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", comment: "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
                         SubtitleAvailabilityListItem()
                     }
@@ -57,12 +57,12 @@ struct ProfileView: View {
                 }
             }
             #if DEBUG || NIGHTLY || BETA
-            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", "Advanced features section header")).srgFont(.H3),
-                            footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
+                            footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
                 SectionWideSupportItem()
             }
             #endif
-            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.H3)) {
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", comment: "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
             }
         }
@@ -129,10 +129,10 @@ extension ProfileView {
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
+                    Text(PlaySRGSettingsLocalizedString("Autoplay", comment: "Autoplay setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
@@ -151,10 +151,10 @@ extension ProfileView {
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Subtitle availability", "Subtitle availability setting"))
+                    Text(PlaySRGSettingsLocalizedString("Subtitle availability", comment: "Subtitle availability setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isSubtitleAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                    Text(isSubtitleAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
@@ -173,10 +173,10 @@ extension ProfileView {
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Audio description availability", "Audio description availability setting"))
+                    Text(PlaySRGSettingsLocalizedString("Audio description availability", comment: "Audio description availability setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isAudioDescriptionAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                    Text(isAudioDescriptionAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
@@ -313,10 +313,10 @@ extension ProfileView {
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Section wide support", "Section wide support setting"))
+                    Text(PlaySRGSettingsLocalizedString("Section wide support", comment: "Section wide support setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isSectionWideSupportEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
+                    Text(isSectionWideSupportEnabled ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
@@ -334,7 +334,7 @@ extension ProfileView {
                 // No action
             } label: {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
+                    Text(PlaySRGSettingsLocalizedString("Version", comment: "Version introductory label"))
                         .srgFont(.button)
                     Spacer()
                     Text(model.version)

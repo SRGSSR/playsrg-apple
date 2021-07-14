@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-class LiveMediaViewModel: ObservableObject {
+class LiveMediaCellViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             registerForChannelUpdates(for: media)
@@ -43,7 +43,7 @@ class LiveMediaViewModel: ObservableObject {
     }
 }
 
-extension LiveMediaViewModel {
+extension LiveMediaCellViewModel {
     var channel: SRGChannel? {
         return programComposition?.channel ?? media?.channel
     }
@@ -56,7 +56,7 @@ extension LiveMediaViewModel {
         return programComposition?.play_program(at: date)
     }
     
-    var title: String {
+    var title: String? {
         if let channel = channel {
             return program?.title ?? channel.title
         }
@@ -64,7 +64,7 @@ extension LiveMediaViewModel {
             return MediaDescription.title(for: media)
         }
         else {
-            return ""
+            return nil
         }
     }
     
@@ -82,7 +82,7 @@ extension LiveMediaViewModel {
     
     var accessibilityLabel: String? {
         if let channel = channel {
-            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", "Live content label, with a channel title"), channel.title)
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
             if let program = program {
                 label.append(", \(program.title)")
             }

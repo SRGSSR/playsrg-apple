@@ -36,7 +36,6 @@
 #import "Reachability.h"
 #import "RelatedContentView.h"
 #import "SharingItem.h"
-#import "ShowViewController.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
@@ -2120,7 +2119,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [appDelegate.rootTabBarController pushViewController:showViewController animated:NO];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }

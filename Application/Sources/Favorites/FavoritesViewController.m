@@ -12,7 +12,6 @@
 #import "NSArray+PlaySRG.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
-#import "ShowViewController.h"
 #import "Favorites.h"
 #import "Layout.h"
 #import "RefreshControl.h"
@@ -339,7 +338,7 @@
     }
     
     SRGShow *show = self.shows[indexPath.row];
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [self.navigationController pushViewController:showViewController animated:YES];
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

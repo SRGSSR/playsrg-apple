@@ -143,17 +143,17 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(NSString *)name
 {
-    [self showSubscription:subscribed forShowWithName:name inViewController:nil];
+    [self showSubscription:subscribed forItemWithName:name inViewController:nil];
 }
 
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inView:(UIView *)view
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(NSString *)name inView:(UIView *)view
 {
-    [self showSubscription:subscribed forShowWithName:name inViewController:view.play_nearestViewController];
+    [self showSubscription:subscribed forItemWithName:name inViewController:view.play_nearestViewController];
 }
 
-+ (void)showSubscription:(BOOL)subscribed forShowWithName:(NSString *)name inViewController:(UIViewController *)viewController
++ (void)showSubscription:(BOOL)subscribed forItemWithName:(NSString *)name inViewController:(UIViewController *)viewController
 {
     if (! name) {
         name = NSLocalizedString(@"The selected content", @"Name of the subscription item, if no title or name to display");

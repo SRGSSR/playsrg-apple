@@ -34,7 +34,6 @@
 #import "Reachability.h"
 #import "RefreshControl.h"
 #import "SharingItem.h"
-#import "ShowViewController.h"
 #import "ShowsViewController.h"
 #import "SongsViewController.h"
 #import "SRGChannel+PlaySRG.h"

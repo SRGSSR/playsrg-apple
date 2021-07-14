@@ -5,7 +5,6 @@
 //
 
 import SRGAppearanceSwift
-import SwiftUI
 
 struct MediaDescription {
     enum Style {
@@ -105,27 +104,27 @@ struct MediaDescription {
         }
     }
     
-    static func availabilityBadgeProperties(for media: SRGMedia) -> (text: String, color: Color)? {
+    static func availabilityBadgeProperties(for media: SRGMedia) -> (text: String, color: UIColor)? {
         if media.contentType == .livestream {
-            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), Color.srgLightRed)
+            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), .srgLightRed)
         }
         else {
             let now = Date()
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), Color(.play_green))
+                return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), .play_green)
             case .notAvailableAnymore:
-                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), Color.srgGray4)
+                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .srgGray4)
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: Color.srgLightRed)
+                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: .srgLightRed)
                 }
                 else if media.play_isWebFirst {
-                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), Color.srgBlue)
+                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), .srgBlue)
                 }
                 else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
-                    return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), Color(.play_orange))
+                    return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), .play_orange)
                 }
                 else {
                     return nil

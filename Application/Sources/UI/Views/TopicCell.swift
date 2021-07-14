@@ -67,7 +67,7 @@ private extension TopicCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens topic details.", "Show cell hint")
+        return PlaySRGAccessibilityLocalizedString("Opens topic details.", comment: "Show cell hint")
     }
 }
 
