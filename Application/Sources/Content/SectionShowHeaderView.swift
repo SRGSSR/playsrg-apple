@@ -55,12 +55,21 @@ struct SectionShowHeaderView: View {
         #endif
     }
     
+    private var alignment: StackAlignment {
+        #if os(iOS)
+        return (horizontalSizeClass == .compact) ? .center : .leading
+        #else
+        return .leading
+        #endif
+    }
+    
     var body: some View {
-        Stack(direction: direction, spacing: 0) {
+        Stack(direction: direction, alignment: alignment, spacing: 0) {
             ImageView(url: show.imageUrl(for: .large))
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
                 .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
+                .adaptiveMainFrame(for: uiHorizontalSizeClass)
                 .layoutPriority(1)
             VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 DescriptionView(section: section)
@@ -70,7 +79,6 @@ struct SectionShowHeaderView: View {
             .padding(.vertical)
             .frame(maxWidth: .infinity)
         }
-        .adaptiveMainFrame(for: uiHorizontalSizeClass)
         .padding(.bottom, constant(iOS: 20, tvOS: 50))
         .focusable()
     }
@@ -151,7 +159,7 @@ struct SectionShowHeaderView: View {
 //         - Remove uiHorizontalSizeClass
 //         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
-    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
+    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
         return Group {
             if horizontalSizeClass == .compact {
                 self

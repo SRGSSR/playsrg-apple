@@ -32,7 +32,6 @@
     }
 }
 
-
 #pragma mark Status bar
 
 - (BOOL)prefersStatusBarHidden

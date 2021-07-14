@@ -53,19 +53,27 @@ struct ShowHeaderView: View {
             #endif
         }
         
+        private var alignment: StackAlignment {
+            #if os(iOS)
+            return (horizontalSizeClass == .compact) ? .center : .leading
+            #else
+            return .leading
+            #endif
+        }
+        
         var body: some View {
-            Stack(direction: direction, spacing: 0) {
+            Stack(direction: direction, alignment: alignment, spacing: 0) {
                 ImageView(url: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
+                    .adaptiveMainFrame(for: uiHorizontalSizeClass)
                     .layoutPriority(1)
                 DescriptionView(model: model)
                     .padding(.horizontal, constant(iOS: 16, tvOS: 80))
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
             }
-            .adaptiveMainFrame(for: uiHorizontalSizeClass)
             .padding(.bottom, constant(iOS: 20, tvOS: 50))
             .focusable()
         }
@@ -103,7 +111,7 @@ struct ShowHeaderView: View {
                 if let lead = model.lead {
                     Text(lead)
                         .srgFont(.body)
-                        .lineLimit(3)
+                        .lineLimit(6)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
@@ -142,7 +150,7 @@ struct ShowHeaderView: View {
 //         - Remove uiHorizontalSizeClass
 //         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
-    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass? = .regular) -> some View {
+    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
         return Group {
             if horizontalSizeClass == .compact {
                 self
