@@ -12,7 +12,7 @@ import UIKit
 
 // MARK: View controller
 
-class SectionViewController: UIViewController {
+final class SectionViewController: UIViewController {
     let model: SectionViewModel
     let fromPushNotification: Bool
     
