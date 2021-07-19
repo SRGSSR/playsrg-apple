@@ -448,9 +448,7 @@ extension SectionViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
-            if !isEditing {
-                model.reload(deep: true)
-            }
+            model.reload(deep: true)
             refreshTriggered = false
         }
     }
