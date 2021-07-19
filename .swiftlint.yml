@@ -15,6 +15,8 @@ trailing_whitespace:
   ignores_empty_lines: true
   severity: warning
 
+type_body_length: 220
+
 type_name:
   excluded:
     - Id
@@ -23,7 +25,7 @@ function_parameter_count:
   warning: 8
 
 cyclomatic_complexity:
-  warning: 17
+  warning: 20
 
 nesting:
   type_level: 2
