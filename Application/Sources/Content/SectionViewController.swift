@@ -281,8 +281,15 @@ class SectionViewController: UIViewController {
     }
     
     @objc private func deleteSelectedItems(_ barButtonItem: UIBarButtonItem) {
-        model.deleteSelection()
-        setEditing(false, animated: true)
+        let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
+                                                message: NSLocalizedString("The selected items will be deleted.", comment: "Confirmation message displayed when the user is about to delete selected entries"),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: "Title of a delete button"), style: .destructive, handler: { _ in
+            self.model.deleteSelection()
+            self.setEditing(false, animated: true)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
     #endif
 }
