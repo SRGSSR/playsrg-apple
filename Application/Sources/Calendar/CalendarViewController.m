@@ -432,7 +432,7 @@
 {
     NSDate *date = nil;
     
-    if (!completed) {
+    if (! completed) {
         UIViewController<DailyMediasViewController> *previousDailyMediasViewController = (UIViewController<DailyMediasViewController> *)previousViewControllers.firstObject;
         date = previousDailyMediasViewController.date;
         [self.calendar selectDate:date];

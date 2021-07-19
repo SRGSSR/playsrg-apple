@@ -117,18 +117,22 @@
 {
     NSParameterAssert(transitionContext);
     
+    // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
+    UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
+    UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
+    
     if (! success) {
         UIView *toView = [transitionContext viewForKey:UITransitionContextToViewKey];
         [toView removeFromSuperview];
-    }
-    else {
-        // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
-        UIViewController *fromViewController = [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];
-        [fromViewController endAppearanceTransition];
         
-        UIViewController *toViewController = [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
-        [toViewController endAppearanceTransition];
+        // Revert appearance transitions when cancelling so that lifecycle events are correctly balanced,
+        // see https://stackoverflow.com/a/21309076/760435
+        [toViewController beginAppearanceTransition:NO animated:transitionContext.animated];
+        [fromViewController beginAppearanceTransition:YES animated:transitionContext.animated];
     }
+    
+    [fromViewController endAppearanceTransition];
+    [toViewController endAppearanceTransition];
     
     [self.dimmingView removeFromSuperview];
     
