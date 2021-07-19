@@ -58,6 +58,13 @@ OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaMetadata(id<SRGMediaMetadata> _
 OBJC_EXPORT NSString *HistoryCanResumePlaybackForMediaMetadataAsync(id<SRGMediaMetadata> _Nullable mediaMetadata, void (^completion)(BOOL canResume));
 
 /**
+ *  Remove a list of media metadata from the history.
+ *
+ *  @discussion Must be called from the main thread. The completion block is called on the main thread.
+ */
+OBJC_EXPORT void HistoryRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> *mediaMetadataList, void (^completion)(NSError * _Nullable error));
+
+/**
  *  Cancel a progress async request.
  */
 OBJC_EXPORT void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);

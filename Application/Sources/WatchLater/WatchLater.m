@@ -40,11 +40,6 @@ void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^compl
     [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
 }
 
-void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
-{
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
-}
-
 void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> * _Nonnull mediaMetadataList, void (^completion)(NSError * _Nullable error))
 {
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath([NSObject<SRGMediaMetadata> new], URN)];
@@ -56,7 +51,7 @@ void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, 
 {
     BOOL contained = WatchLaterContainsMediaMetadata(mediaMetadata);
     if (contained) {
-        WatchLaterRemoveMediaMetadata(mediaMetadata, ^(NSError * _Nullable error) {
+        WatchLaterRemoveMediaMetadataList(@[mediaMetadata], ^(NSError * _Nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(NO, error);
             });

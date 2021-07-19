@@ -699,9 +699,7 @@ private extension Content {
     }
     
     static func removeFromHistory(_ items: [Content.Item]) {
-        // TODO: API for History item removal
-        let urns = Content.medias(from: items).map(\.urn)
-        SRGUserData.current?.history.discardHistoryEntries(withUids: urns) { error in
+        HistoryRemoveMediaMetadataList(Content.medias(from: items)) { error in
             guard error == nil else { return }
             Signal.removeHistory(for: items)
         }
