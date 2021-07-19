@@ -109,6 +109,8 @@ class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        updateEditButton()
+
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
@@ -175,6 +177,7 @@ class SectionViewController: UIViewController {
         // Force a cell global appearance update
         collectionView.reloadData()
         
+        updateEditButton()
         updateNavigationBar(animated: animated)
     }
     
@@ -199,6 +202,15 @@ class SectionViewController: UIViewController {
         }
         else {
             title = model.title
+        }
+    }
+    
+    private func updateEditButton() {
+        if isEditing {
+            editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
+        }
+        else {
+            editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
         }
     }
     
