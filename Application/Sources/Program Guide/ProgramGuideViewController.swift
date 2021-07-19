@@ -97,7 +97,7 @@ final class ProgramGuideViewController: UIViewController {
             return
         }
         
-        let nextIndex = (index + 1) % channels.count
+        let nextIndex = index < channels.endIndex - 1 ? channels.index(after: index) : channels.startIndex
         self.selectedChannel = channels[nextIndex]
         currentViewController.channel = self.selectedChannel
         
