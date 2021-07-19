@@ -292,3 +292,27 @@ extension UIView {
         applySizingBehavior(of: hostingController, for: .vertical)
     }
 }
+
+extension UIViewController {
+    func deselectItems(in collectionView: UICollectionView) {
+        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
+        if let transitionCoordinator = transitionCoordinator {
+            transitionCoordinator.animate { context in
+                selectedIndexPaths.forEach { indexPath in
+                    collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
+                }
+            } completion: { context in
+                if context.isCancelled {
+                    selectedIndexPaths.forEach { indexPath in
+                        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                    }
+                }
+            }
+        }
+        else {
+            selectedIndexPaths.forEach { indexPath in
+                collectionView.deselectItem(at: indexPath, animated: false)
+            }
+        }
+    }
+}
