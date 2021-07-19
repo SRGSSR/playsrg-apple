@@ -14,10 +14,6 @@
 @import libextobjc;
 @import SRGUserData;
 
-NSString * const WatchLaterDidChangeNotification = @"WatchLaterDidChangeNotification";
-NSString * const WatchLaterMediaMetadataUidKey = @"WatchLaterMediaMetadataUid";
-NSString * const WatchLaterMediaMetadataStateKey = @"WatchLaterMediaMetadataState";
-
 #pragma mark Media metadata functions
 
 WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
@@ -41,32 +37,19 @@ BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 
 void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-         dispatch_async(dispatch_get_main_queue(), ^{
-             if (! error) {
-                 [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
-                                                                   object:nil
-                                                                 userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,
-                                                                             WatchLaterMediaMetadataStateKey : @(WatchLaterMediaMetadataStateAdded) }];
-             }
-             completion(error);
-         });
-    }];
+    [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
 }
 
 void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [NSNotificationCenter.defaultCenter postNotificationName:WatchLaterDidChangeNotification
-                                                                  object:nil
-                                                                userInfo:@{ WatchLaterMediaMetadataUidKey : mediaMetadata.URN,
-                                                                            WatchLaterMediaMetadataStateKey : @(WatchLaterMediaMetadataStateRemoved) }];
-            }
-            completion(error);
-        });
-    }];
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[mediaMetadata.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
+}
+
+void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> * _Nonnull mediaMetadataList, void (^completion)(NSError * _Nullable error))
+{
+    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath([NSObject<SRGMediaMetadata> new], URN)];
+    NSArray<NSString *> *URNs = [mediaMetadataList valueForKeyPath:keyPath];
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
 }
 
 void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error))

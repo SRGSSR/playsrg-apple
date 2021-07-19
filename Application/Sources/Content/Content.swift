@@ -692,9 +692,7 @@ private extension Content {
     }
     
     static func removeFromWatchLater(_ items: [Content.Item]) {
-        // TODO: API for WatchLater item removal
-        let urns = Content.medias(from: items).map(\.urn)
-        SRGUserData.current?.playlists.discardPlaylistEntries(withUids: urns, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue) { error in
+        WatchLaterRemoveMediaMetadataList(Content.medias(from: items)) { error in
             guard error == nil else { return }
             Signal.removeWatchLater(for: items)
         }
