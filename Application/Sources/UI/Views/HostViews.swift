@@ -40,9 +40,20 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
         }
     }
     
+    private var isEditing: Bool {
+        guard let collectionView = superview as? UICollectionView else { return false }
+        return collectionView.isEditing
+    }
+    
     override var isSelected: Bool {
         didSet {
-            contentView.alpha = isSelected ? 0.3 : 1
+            if isEditing {
+                // TODO: Other appearance
+                contentView.alpha = isSelected ? 0.3 : 1
+            }
+            else {
+                contentView.alpha = isSelected ? 0.3 : 1
+            }
         }
     }
 }

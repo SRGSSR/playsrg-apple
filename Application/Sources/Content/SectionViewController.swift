@@ -151,6 +151,7 @@ class SectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        deselectItems(in: collectionView)
     }
     
     #if os(iOS)
@@ -382,7 +383,6 @@ extension SectionViewController: UICollectionViewDelegate {
             updateTitle()
         }
         else {
-            collectionView.deselectItem(at: indexPath, animated: true)
             open(item)
         }
     }
