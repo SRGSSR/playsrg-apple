@@ -164,23 +164,23 @@ class SectionViewController: UIViewController {
         
         collectionView.isEditing = editing
         
+        if isEditing {
+            leftBarButtonItem = navigationItem.leftBarButtonItem
+        }
+        else {
+            leftBarButtonItem = nil
+            model.clearSelection()
+        }
+        
         // Force a cell global appearance update
         collectionView.reloadData()
         
-        if editing {
-            leftBarButtonItem = navigationItem.leftBarButtonItem
-            
-            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
-            deleteBarButtonItem.tintColor = .red
-            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
-            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
-        }
-        else {
-            model.clearSelection()
-            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
-        }
-        
+        updateNavigationBar(animated: animated)
+    }
+    
+    private func updateNavigationBar(animated: Bool) {
         updateTitle()
+        updateDeleteButton(animated: animated)
     }
     
     private func updateTitle() {
@@ -199,6 +199,18 @@ class SectionViewController: UIViewController {
         }
         else {
             title = model.title
+        }
+    }
+    
+    private func updateDeleteButton(animated: Bool) {
+        if isEditing && model.numberOfSelectedItem != 0 {
+            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+            deleteBarButtonItem.tintColor = .red
+            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
+        }
+        else {
+            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
         }
     }
     #endif
@@ -390,7 +402,7 @@ extension SectionViewController: UICollectionViewDelegate {
         
         if collectionView.isEditing {
             model.select(item)
-            updateTitle()
+            updateNavigationBar(animated: false)
         }
         else {
             open(item)
@@ -398,14 +410,12 @@ extension SectionViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard collectionView.isEditing else { return }
-        
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
         model.deselect(item)
-        updateTitle()
+        updateNavigationBar(animated: false)
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
