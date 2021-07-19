@@ -16,6 +16,11 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT void HistoryUpdateLetterboxPlaybackProgress(SRGLetterboxController *letterboxController);
 
 /**
+ *  Return `YES` iff the history contains an entry for the specified media metadata.
+ */
+OBJC_EXPORT BOOL HistoryContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata);
+
+/**
  *  Return the playback progress corresponding to the specified playback position and media duration. This takes
  *  into account end tolerance settings which might be applied.
  *
@@ -44,7 +49,7 @@ OBJC_EXPORT NSString *HistoryResumePlaybackPositionForMediaMetadataAsync(id<SRGM
 /**
  *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media metadata and position
  *
- *  *  @discussion Can be called on any thread.
+ *  @discussion Can be called on any thread.
  */
 OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaMetadataAndPosition(NSTimeInterval playbackPosition, id<SRGMediaMetadata> _Nullable mediaMetadata);
 

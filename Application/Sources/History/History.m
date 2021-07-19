@@ -40,6 +40,12 @@ float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationIn
     }
 }
 
+BOOL HistoryContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+{
+    SRGHistoryEntry *historyEntry = [SRGUserData.currentUserData.history historyEntryWithUid:mediaMetadata.URN];
+    return historyEntry != nil;
+}
+
 SRGPosition *HistoryResumePlaybackPositionForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
 {
     if (! HistoryIsProgressForMediaMetadataTracked(mediaMetadata)) {

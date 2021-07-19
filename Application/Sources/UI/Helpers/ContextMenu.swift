@@ -89,6 +89,7 @@ private extension ContextMenu {
     private static func menu(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
             watchLaterAction(for: media, item: item, in: viewController),
+            historyAction(for: media, item: item, in: viewController),
             downloadAction(for: media, item: item, in: viewController),
             sharingAction(for: media, in: viewController),
             moreEpisodesAction(for: media, in: viewController)
@@ -141,11 +142,39 @@ private extension ContextMenu {
         return menuAction
     }
     
+    private static func historyAction(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
+        guard HistoryContainsMediaMetadata(media) else { return nil }
+                
+        let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
+                                  image: UIImage(named: "history")!) { _ in
+            HistoryRemoveMediaMetadataList([media]) { error in
+                guard error == nil else { return }
+                
+                if let item = item {
+                    Signal.removeHistory(for: [item])
+                }
+                
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.value = media.urn
+                
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+            }
+        }
+        menuAction.attributes = .destructive
+        return menuAction
+    }
+    
     private static func downloadAction(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
         guard Download.canDownloadMedia(media) else { return nil}
         
         func title(for download: Download?) -> String {
-            return download != nil ? NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads") : NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+            if download != nil {
+                return NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads")
+            }
+            else {
+                return NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+            }
         }
         
         func image(for download: Download?) -> UIImage {
@@ -217,7 +246,12 @@ private extension ContextMenu {
     
     private static func favoriteAction(for show: SRGShow, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
         func title(isFavorite: Bool) -> String {
-            return isFavorite ? NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites") : NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
+            if isFavorite {
+                return NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites")
+            }
+            else {
+                return NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
+            }
         }
         
         func image(isFavorite: Bool) -> UIImage {
