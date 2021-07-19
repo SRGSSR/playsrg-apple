@@ -12,6 +12,8 @@
 #endif
 #import "NSTimer+PlaySRG.h"
 
+@import libextobjc;
+
 #if TARGET_OS_IOS
 @import GoogleCast;
 #endif
@@ -100,6 +102,13 @@ NSString *HistoryCanResumePlaybackForMediaMetadataAsync(id<SRGMediaMetadata> med
     return HistoryPlaybackProgressForMediaMetadataAsync(mediaMetadata, ^(float progress) {
         completion(progress != 1.f);
     });
+}
+
+void HistoryRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> *mediaMetadataList, void (^completion)(NSError * _Nullable error))
+{
+    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath([NSObject<SRGMediaMetadata> new], URN)];
+    NSArray<NSString *> *URNs = [mediaMetadataList valueForKeyPath:keyPath];
+    [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:completion];
 }
 
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)

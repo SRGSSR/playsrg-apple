@@ -43,35 +43,28 @@ OBJC_EXPORT WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMedia
  *
  *  @discussion Must be called from the main thread.
  */
-OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
+OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata);
 
 /**
  *  Add a media metadata to the later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(NSError * _Nullable error));
-
-/**
- *  Remove a media metadata from the later list.
- *
- *  @discussion Must be called from the main thread. The completion block is called on the main thread.
- */
-OBJC_EXPORT void WatchLaterRemoveMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error));
 
 /**
  *  Remove a list of media metadata from the later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> * _Nonnull mediaMetadataList, void (^completion)(NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> *mediaMetadataList, void (^completion)(NSError * _Nullable error));
 
 /**
  *  Toggle a media metadata in the watch later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error));
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking medias), if any, to the later playlist.
