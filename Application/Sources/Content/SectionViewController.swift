@@ -164,6 +164,9 @@ class SectionViewController: UIViewController {
         
         collectionView.isEditing = editing
         
+        // Force a cell global appearance update
+        collectionView.reloadData()
+        
         if editing {
             leftBarButtonItem = navigationItem.leftBarButtonItem
             
