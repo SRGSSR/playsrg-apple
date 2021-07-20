@@ -27,7 +27,6 @@
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
 @import AppCenterDistribute;
-@import FLEX;
 @import libextobjc;
 @import SafariServices;
 @import SRGAppearance;
@@ -36,6 +35,10 @@
 @import SRGIdentity;
 @import SRGLetterbox;
 @import YYWebImage;
+
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+@import FLEX;
+#endif
 
 // Autoplay group
 static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
