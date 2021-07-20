@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RSI_Retetre.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RSI_Retetre-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_rsiTRE_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

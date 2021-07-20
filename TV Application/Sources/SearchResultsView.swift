@@ -4,10 +4,11 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 struct SearchResultsView: View {
-    @ObservedObject var model: SearchResultsModel
+    @ObservedObject var model: SearchResultsViewModel
     
     enum Section: Hashable {
         case medias
@@ -29,14 +30,14 @@ struct SearchResultsView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-background")
             return [Row(section: .information, items: [item])]
         case let .mostSearched(shows: shows):
             if !shows.isEmpty {
                 return [Row(section: .shows, items: shows.map { .show($0) })]
             }
             else {
-                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-90")
+                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-background")
                 return [Row(section: .information, items: [item])]
             }
         case let .loaded(medias: medias, suggestions: _):
@@ -44,11 +45,11 @@ struct SearchResultsView: View {
                 return [Row(section: .medias, items: medias.map { .media($0) })]
             }
             else if model.query.isEmpty {
-                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-90")
+                let item = Content.message(NSLocalizedString("Type to start searching", comment: "Default text displayed when no search criterium has been entered"), iconName: "search-background")
                 return [Row(section: .information, items: [item])]
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-background")
                 return [Row(section: .information, items: [item])]
             }
         }
@@ -125,10 +126,10 @@ struct SearchResultsView: View {
                             model.loadNextPage(from: media)
                         }
                 }
-            } supplementaryView: { _, indexPath, section, _ in
+            } supplementaryView: { _, _, section, _ in
                 if section == .shows {
                     Text(NSLocalizedString("Most searched shows", comment: "Most searched shows header"))
-                        .srgFont(.title2)
+                        .srgFont(.H2)
                         .opacity(0.8)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                 }
@@ -136,7 +137,7 @@ struct SearchResultsView: View {
             .synchronizeSearchScrolling(with: model.searchController)
             .synchronizeTabBarScrolling(with: model.viewController)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srgGray16)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()

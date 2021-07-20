@@ -38,7 +38,7 @@
     self.backgroundView = [[UIView alloc] init];
     
     self.centerLabel.textColor = UIColor.whiteColor;
-    self.centerLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.centerLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
 }
 
 - (void)willMoveToWindow:(UIWindow *)window

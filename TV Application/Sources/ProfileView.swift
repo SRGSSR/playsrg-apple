@@ -8,9 +8,9 @@ import SRGUserData
 import SwiftUI
 
 struct ProfileView: View {
-    @StateObject var model = ProfileModel()
+    @StateObject private var model = ProfileViewModel()
     
-    var synchronizationMessage: String? {
+    private var synchronizationMessage: String? {
         guard model.isLoggedIn else { return nil }
         let dateString = (model.synchronizationDate != nil) ? DateFormatter.play_relativeDateAndTime.string(from: model.synchronizationDate!) : NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), dateString)
@@ -19,33 +19,50 @@ struct ProfileView: View {
     var body: some View {
         List {
             if model.supportsLogin {
-                Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.headline1),
-                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.overline).opacity(0.8)) {
+                SwiftUI.Section(header: Text(NSLocalizedString("Profile", comment: "Profile section header")).srgFont(.H3),
+                        footer: Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     ProfileListItem(model: model)
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1),
-                        footer: Text(synchronizationMessage).srgFont(.overline).opacity(0.8)) {
+                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
+                        footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
                 }
             }
             else {
-                Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.headline1)) {
+                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
                 }
             }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
-                Section(header: Text(PlaySRGSettingsLocalizedString("Playback", "Playback settings section header")),
-                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", "Playback description footer")).srgFont(.overline).opacity(0.8)) {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", comment: "Playback settings section header")).srgFont(.H3),
+                        footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
                     AutoplayListItem()
                 }
             }
-            Section(header: Text(PlaySRGSettingsLocalizedString("Information", "Information section header")).srgFont(.headline1)) {
+            if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden || !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Display", comment: "Display settings section header")).srgFont(.H3),
+                        footer: Text(PlaySRGSettingsLocalizedString("Always visible when VoiceOver is active.", comment: "Display description footer")).srgFont(.subtitle2).opacity(0.8)) {
+                    if !ApplicationConfiguration.shared.isSubtitleAvailabilityHidden {
+                        SubtitleAvailabilityListItem()
+                    }
+                    if !ApplicationConfiguration.shared.isAudioDescriptionAvailabilityHidden {
+                        AudioDescriptionAvailabilityListItem()
+                    }
+                }
+            }
+            #if DEBUG || NIGHTLY || BETA
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
+                            footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
+                SectionWideSupportItem()
+            }
+            #endif
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", comment: "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
             }
         }
@@ -53,12 +70,16 @@ struct ProfileView: View {
         .frame(maxWidth: 1054)
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
-    
+}
+
+// MARK: List items
+
+extension ProfileView {
     struct ProfileListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
-        var text: String {
+        private var text: String {
             guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
             if let username = model.username {
                 return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
@@ -68,7 +89,7 @@ struct ProfileView: View {
             }
         }
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of the cancel button in the alert view when logout"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
                 model.logout()
@@ -79,17 +100,19 @@ struct ProfileView: View {
                          secondaryButton: secondaryButton)
         }
         
+        private func action() {
+            if model.isLoggedIn {
+                alertDisplayed = true
+            }
+            else {
+                model.login()
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.isLoggedIn {
-                    alertDisplayed = true
-                }
-                else {
-                    model.login()
-                }
-            }) {
+            Button(action: action) {
                 Text(text)
-                    .srgFont(.button1)
+                    .srgFont(.button)
             }
             .padding()
             .alert(isPresented: $alertDisplayed, content: alert)
@@ -99,16 +122,62 @@ struct ProfileView: View {
     struct AutoplayListItem: View {
         @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
         
+        private func action() {
+            isAutoplayEnabled = !isAutoplayEnabled
+        }
+        
         var body: some View {
-            Button(action: {
-                isAutoplayEnabled = !isAutoplayEnabled
-            }) {
+            Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Autoplay", "Autoplay setting"))
-                        .srgFont(.button1)
+                    Text(PlaySRGSettingsLocalizedString("Autoplay", comment: "Autoplay setting"))
+                        .srgFont(.button)
                     Spacer()
-                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", "Disabled state label on Apple TV"))
-                        .srgFont(.button1)
+                    Text(isAutoplayEnabled ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
+    struct SubtitleAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
+        
+        private func action() {
+            isSubtitleAvailabilityDisplayed = !isSubtitleAvailabilityDisplayed
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Subtitle availability", comment: "Subtitle availability setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(isSubtitleAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
+    struct AudioDescriptionAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
+        
+        private func action() {
+            isAudioDescriptionAvailabilityDisplayed = !isAudioDescriptionAvailabilityDisplayed
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Audio description availability", comment: "Audio description availability setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(isAudioDescriptionAvailabilityDisplayed ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
+                        .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
             }
@@ -117,10 +186,10 @@ struct ProfileView: View {
     }
     
     struct HistoryRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeHistory()
@@ -138,14 +207,16 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasHistoryEntries {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasHistoryEntries {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
             }
             .padding()
@@ -154,10 +225,10 @@ struct ProfileView: View {
     }
     
     struct FavoritesRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeFavorites()
@@ -175,14 +246,16 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasFavorites {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasFavorites {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }
             .padding()
@@ -191,10 +264,10 @@ struct ProfileView: View {
     }
     
     struct WatchLaterRemovalListItem: View {
-        @ObservedObject var model: ProfileModel
+        @ObservedObject var model: ProfileViewModel
         @State var alertDisplayed = false
         
-        func alert() -> Alert {
+        private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeWatchLaterItems()
@@ -212,14 +285,16 @@ struct ProfileView: View {
             }
         }
         
+        private func action() {
+            if model.hasWatchLaterItems {
+                alertDisplayed = true
+            }
+        }
+        
         var body: some View {
-            Button(action: {
-                if model.hasWatchLaterItems {
-                    alertDisplayed = true
-                }
-            }) {
+            Button(action: action) {
                 Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
-                    .srgFont(.button1)
+                    .srgFont(.button)
                     .foregroundColor(model.hasWatchLaterItems ? .primary : .secondary)
             }
             .padding()
@@ -227,17 +302,43 @@ struct ProfileView: View {
         }
     }
     
-    struct VersionListItem: View {
-        var model: ProfileModel
+    #if DEBUG || NIGHTLY || BETA
+    struct SectionWideSupportItem: View {
+        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+        
+        private func action() {
+            isSectionWideSupportEnabled = !isSectionWideSupportEnabled
+        }
         
         var body: some View {
-            Button(action: {}) {
+            Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Version", "Version introductory label"))
-                        .srgFont(.button1)
+                    Text(PlaySRGSettingsLocalizedString("Section wide support", comment: "Section wide support setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(isSectionWideSupportEnabled ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    #endif
+    
+    struct VersionListItem: View {
+        var model: ProfileViewModel
+        
+        var body: some View {
+            Button {
+                // No action
+            } label: {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Version", comment: "Version introductory label"))
+                        .srgFont(.button)
                     Spacer()
                     Text(model.version)
-                        .srgFont(.button1)
+                        .srgFont(.button)
                 }
                 .foregroundColor(.secondary)
             }

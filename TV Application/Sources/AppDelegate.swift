@@ -8,7 +8,7 @@ import AppCenter
 import AppCenterCrashes
 import Firebase
 import SRGAnalyticsIdentity
-import SRGAppearance
+import SRGAppearanceSwift
 import SRGDataProviderCombine
 import SRGUserData
 import SwiftUI
@@ -22,15 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private static func configuredTabBarController(tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
-        appearance.backgroundColor = .play_cardGrayBackground
-        appearance.selectionIndicatorTintColor = .srg_color(fromHexadecimalString: "#979797")
+        appearance.backgroundColor = .srgGray23
+        appearance.selectionIndicatorTintColor = .hexadecimal("#979797")
         
         let itemAppearance = appearance.inlineLayoutAppearance
-        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.srg_mediumFont(withSize: 28),
+        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: SRGFont.font(family: .text, weight: .medium, size: 28) as UIFont,
                                                      NSAttributedString.Key.foregroundColor: UIColor.white]
         itemAppearance.normal.iconColor = .white
         
-        let activeColor = UIColor.srg_color(fromHexadecimalString: "#161616")!
+        let activeColor = UIColor.hexadecimal("#161616")!
         let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: activeColor]
         itemAppearance.selected.titleTextAttributes = activeTitleTextAttributes
         itemAppearance.selected.iconColor = activeColor
@@ -38,12 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         itemAppearance.focused.iconColor = activeColor
         
         tabBarController.tabBar.standardAppearance = appearance
+        tabBarController.view.backgroundColor = .srgGray16
     }
     
-    private func applicationRootViewController() -> UIViewController? {
+    private func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
-        let videosViewController = UIHostingController(rootView: VideosView())
+        let videosViewController = PageViewController(id: .video)
         videosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Home", comment: "Home tab title"), image: nil, tag: 0)
         videosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.videosTabBarItem.rawValue
         viewControllers.append(videosViewController)
@@ -51,8 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let configuration = ApplicationConfiguration.shared
         
         #if DEBUG
-        if !configuration.radioChannels.isEmpty {
-            let audiosViewController = UIHostingController(rootView: AudiosView())
+        if let firstChannel = configuration.radioChannels.first {
+            let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
             viewControllers.append(audiosViewController)
@@ -60,13 +61,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         #endif
         
         if !configuration.liveHomeSections.isEmpty {
-            let liveViewController = UIHostingController(rootView: LiveView())
+            let liveViewController = PageViewController(id: .live)
             liveViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), image: nil, tag: 2)
             liveViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.livestreamsTabBarItem.rawValue
             viewControllers.append(liveViewController)
         }
         
-        if configuration.videoHomeSections.contains(NSNumber(value: HomeSection.tvShowsAccess.rawValue)) {
+        if !configuration.areShowsUnavailable {
             let showsViewController = UIHostingController(rootView: ShowsView())
             showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
@@ -79,8 +80,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile-34")!.withRenderingMode(.alwaysTemplate), tag: 7)
-        profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", "Profile button label on home view")
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
         viewControllers.append(profileViewController)
         
@@ -91,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return tabBarController
         }
         else {
-            return viewControllers.first
+            return viewControllers.first!
         }
     }
     
@@ -122,13 +123,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         let configuration = ApplicationConfiguration.shared
-        application.accessibilityLanguage = configuration.voiceOverLanguageCode;
+        application.accessibilityLanguage = configuration.voiceOverLanguageCode
         
         if let identityWebserviceURL = configuration.identityWebserviceURL,
            let identityWebsiteURL = configuration.identityWebsiteURL {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -137,7 +138,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -146,7 +147,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: Notification.Name.SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
                 .sink { notification in
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
@@ -172,13 +173,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
         
-        let window = UIWindow(frame: UIScreen.main.bounds)
-        window.makeKeyAndVisible()
-        self.window = window
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.makeKeyAndVisible()
+        window!.rootViewController = applicationRootViewController()
         
-        let rootViewController = applicationRootViewController()!
-        rootViewController.view.backgroundColor = (UIScreen.main.traitCollection.userInterfaceStyle == .dark) ? .play_black : .play_lightGray
-        window.rootViewController = rootViewController
         return true
     }
     
@@ -189,17 +187,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     // See URL_SCHEMES.md
-    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
         guard let deeplinkAction = url.host else { return false }
         
         if deeplinkAction == "media" {
             let mediaUrn = url.lastPathComponent
             SRGDataProvider.current?.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { media, _ in
+                .sink { _ in
+                } receiveValue: { media in
                     navigateToMedia(media)
-                })
+                }
                 .store(in: &cancellables)
             return true
         }
@@ -207,10 +205,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let showUrn = url.lastPathComponent
             SRGDataProvider.current?.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { show, _ in
+                .sink { _ in
+                } receiveValue: { show in
                     navigateToShow(show)
-                })
+                }
                 .store(in: &cancellables)
             return true
         }

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "multiaudio-19.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "multiaudio-20.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "multiaudio-33.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "original"
+  }
+}

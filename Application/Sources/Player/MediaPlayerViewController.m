@@ -7,7 +7,6 @@
 #import "MediaPlayerViewController.h"
 
 #import "AccessibilityIdentifierConstants.h"
-#import "ActivityItemSource.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
@@ -25,17 +24,18 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
-#import "Play-Swift-Bridge.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayAppDelegate.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
 #import "Playlist.h"
+#import "PlaySRG-Swift.h"
 #import "ProgramHeaderView.h"
 #import "ProgramTableViewCell.h"
+#import "Reachability.h"
 #import "RelatedContentView.h"
-#import "ShowViewController.h"
+#import "SharingItem.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
@@ -57,7 +57,6 @@
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
 
-@import FXReachability;
 @import GoogleCast;
 @import Intents;
 @import libextobjc;
@@ -136,7 +135,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIView *propertiesTopLineSpacerView;
 @property (nonatomic, weak) IBOutlet UIStackView *propertiesStackView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
-@property (nonatomic, weak) IBOutlet UILabel *subtitlesLabel;
+@property (nonatomic, weak) IBOutlet UIImageView *subtitlesImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *audioDescriptionImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *multiAudioImageView;
 
@@ -352,12 +351,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
     
-    self.currentProgramView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.currentProgramView.backgroundColor = UIColor.srg_gray23Color;
     self.currentProgramView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.currentProgramView.layer.masksToBounds = YES;
     
@@ -380,7 +379,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     UINib *programHeaderViewNib = [UINib nibWithNibName:programHeaderIdentifier bundle:nil];
     [self.programsTableView registerNib:programHeaderViewNib forHeaderFooterViewReuseIdentifier:programHeaderIdentifier];
     
-    self.showWrapperView.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.showWrapperView.backgroundColor = UIColor.srg_gray23Color;
     self.showWrapperView.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.showWrapperView.layer.masksToBounds = YES;
     
@@ -393,8 +392,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // Start with an empty summary label, so that height calculations correctly detect when a summary has been assigned
     self.summaryLabel.text = nil;
     
-    self.audioDescriptionImageView.tintColor = UIColor.play_whiteBadgeColor;
-    self.multiAudioImageView.tintColor = UIColor.play_whiteBadgeColor;
+    self.subtitlesImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
+    self.subtitlesImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.subtitlesImageView.isAccessibilityElement = YES;
+    
+    self.audioDescriptionImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Audio described", @"Accessibility label for the audio description badge");
+    self.audioDescriptionImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
+    self.audioDescriptionImageView.isAccessibilityElement = YES;
     
     self.multiAudioImageView.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Original version", @"Accessibility label for the multi audio badge");
     self.multiAudioImageView.accessibilityTraits = UIAccessibilityTraitStaticText;
@@ -407,7 +411,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.collapsedDetailsLabelsHeightConstraint.priority = MediaPlayerDetailsLabelNormalPriority;
     
-    self.livestreamButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.livestreamButton.backgroundColor = UIColor.srg_gray23Color;
     self.livestreamButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.livestreamButton.layer.masksToBounds = YES;
     self.livestreamButton.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Select regional radio", @"Regional livestream selection hint");
@@ -416,7 +420,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.currentProgramView.accessibilityElements = @[ self.currentProgramTitleLabel, self.currentProgramMoreEpisodesButton, self.currentProgramFavoriteButton ];
     
-    self.radioHomeButton.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.radioHomeButton.backgroundColor = UIColor.srg_gray23Color;
     self.radioHomeButton.layer.cornerRadius = LayoutStandardViewCornerRadius;
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
@@ -618,7 +622,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.statusBarOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation;
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
@@ -726,7 +730,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                           @"position" : position ?: [NSNull null],
                                                           @"applicationVersion" : [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"] }];
         userActivity.requiredUserInfoKeys = [NSSet setWithArray:userActivity.userInfo.allKeys];
-        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:mainChapterMedia atTime:currentTime];
+        userActivity.webpageURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:mainChapterMedia atTime:currentTime];
         
         if (isLiveStream && mainChapterMedia.channel) {
             userActivity.eligibleForPrediction = YES;
@@ -753,10 +757,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [self updateAppearanceWithDetailsExpanded:self.detailsExpanded];
     [self reloadDetailsWithMedia:media mainChapterMedia:mainChapterMedia];
     
-    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-48"] : [UIImage imageNamed:@"close-48"];
+    UIImage *closeButtonImage = (media.mediaType == SRGMediaTypeAudio || AVAudioSession.srg_isAirPlayActive || ApplicationSettingBackgroundVideoPlaybackEnabled()) ? [UIImage imageNamed:@"arrow_down-large"] : [UIImage imageNamed:@"close-large"];
     [self.closeButton setImage:closeButtonImage forState:UIControlStateNormal];
     
-    self.relatedContentsTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.relatedContentsTitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH3];
     self.relatedContentsTitleLabel.text = NSLocalizedString(@"More on this subject", @"Title of the related content player section");
     
     // Cleanup related content views first
@@ -812,7 +816,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [self addSongPanelWithChannel:channel];
         }
         
-        self.livestreamButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.livestreamButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     }
     else {
         self.scrollView.hidden = NO;
@@ -820,10 +824,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
         
-        self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+        self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
-        self.dateLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         if (media.date) {
             self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
             self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
@@ -835,7 +839,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self removeSongPanel];
         
-        self.viewCountLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.viewCountLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         
         NSPredicate *socialViewsPredicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSocialCount.new, type), @(SRGSocialCountTypeSRGView)];
         SRGSocialCount *socialCount = [media.socialCounts filteredArrayUsingPredicate:socialViewsPredicate].firstObject;
@@ -844,12 +848,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             if (media.mediaType == SRGMediaTypeAudio) {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ listenings", @"Label displaying the number of listenings on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_audio"];
             }
             else {
                 self.viewCountLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
                 self.viewCountLabel.accessibilityLabel = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%@ views", @"Label displaying the number of views on the player"), viewCountString];
-                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video-16"];
+                self.viewCountImageView.image = [UIImage imageNamed:@"view_count_video"];
             }
             self.viewCountImageView.hidden = NO;
             self.viewCountLabel.hidden = NO;
@@ -869,7 +873,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
 #endif
         
-        self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.summaryLabel.text = media.play_fullSummary;
         
         BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
@@ -882,7 +886,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.propertiesTopLineSpacerView.hidden = NO;
             
             self.webFirstLabel.hidden = ! isWebFirst;
-            self.subtitlesLabel.hidden = ! hasSubtitles;
+            self.subtitlesImageView.hidden = ! hasSubtitles;
             self.audioDescriptionImageView.hidden = ! hasAudioDescription;
             self.multiAudioImageView.hidden = ! hasMultiAudio;
         }
@@ -892,15 +896,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
         
         [self.webFirstLabel play_setWebFirstBadge];
-        [self.subtitlesLabel play_setSubtitlesAvailableBadge];
         
         [self updateRadioHomeButton];
-        self.radioHomeButton.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.radioHomeButton.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         
         UIImage *youthProtectionColorImage = YouthProtectionImageForColor(media.youthProtectionColor);
         if (youthProtectionColorImage) {
             self.youthProtectionColorImageView.image = YouthProtectionImageForColor(media.youthProtectionColor);
-            self.youthProtectionColorLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.youthProtectionColorLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.youthProtectionColorLabel.text = SRGMessageForYouthProtectionColor(media.youthProtectionColor);
             self.youthProtectionColorSpacerView.hidden = NO;
             [self.youthProtectionColorStackView play_setHidden:NO];
@@ -914,7 +917,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         NSString *imageCopyright = media.imageCopyright;
         if (imageCopyright) {
-            self.imageCopyrightLabel.font = [UIFont srg_italicFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.imageCopyrightLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.imageCopyrightLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Image credit: %@", @"Image copyright introductory label"), imageCopyright];
             self.imageCopyrightSpacerView.hidden = NO;
         }
@@ -934,10 +937,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (show) {
         [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList unavailabilityHandler:nil];
         
-        self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.showLabel.text = show.title;
         
-        self.numberOfEpisodesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.numberOfEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         
         NSInteger numberOfEpisodes = show.numberOfEpisodes;
         if (numberOfEpisodes != 0) {
@@ -989,8 +992,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.currentProgramSubtitleLabel.textColor = foregroundColor;
     self.currentProgramFavoriteButton.tintColor = foregroundColor;
     
-    self.currentProgramTitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-    self.currentProgramSubtitleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.currentProgramTitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH3];
+    self.currentProgramSubtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     SRGProgram *currentProgram = [self currentProgram];
     if (currentProgram) {
@@ -1220,7 +1223,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.shareButton.hidden = YES;
     }
     else {
-        self.shareButton.hidden = ([ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:media atTime:kCMTimeZero] == nil);
+        self.shareButton.hidden = ([ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:kCMTimeZero] == nil);
     }
 }
 
@@ -1240,11 +1243,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.watchLaterButton.hidden = NO;
     
     if (action == WatchLaterActionRemove) {
-        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-48"] forState:UIControlStateNormal];
+        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later_full-large"] forState:UIControlStateNormal];
         self.watchLaterButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete from \"Later\" list", @"Media deletion from later list label");
     }
     else {
-        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-48"] forState:UIControlStateNormal];
+        [self.watchLaterButton setImage:[UIImage imageNamed:@"watch_later-large"] forState:UIControlStateNormal];
         self.watchLaterButton.accessibilityLabel = (media.mediaType == SRGMediaTypeAudio) ? PlaySRGAccessibilityLocalizedString(@"Listen later", @"Media addition for an audio to later list label") : PlaySRGAccessibilityLocalizedString(@"Watch later", @"Media addition for a video to later list label");
     }
 }
@@ -1268,13 +1271,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended:{
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
             break;
         }
             
         case DownloadStateDownloading: {
-            [self.downloadButton.imageView play_setDownloadAnimation48WithTintColor:UIColor.whiteColor];
+            [self.downloadButton.imageView play_setLargeDownloadAnimationWithTintColor:UIColor.whiteColor];
             [self.downloadButton.imageView startAnimating];
             
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Stop downloading", @"A download button label");
@@ -1283,14 +1286,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             
         case DownloadStateDownloaded: {
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_full-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Delete download", @"A download button label");
             break;
         }
             
         default: {
             [self.downloadButton.imageView stopAnimating];
-            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable-48"] forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"downloadable-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Download", @"A download button label");
             break;
         }
@@ -1300,7 +1303,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)updateFavoriteStatusForShow:(SRGShow *)show
 {
     BOOL isFavorite = FavoritesContainsShow(show);
-    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full-22"] : [UIImage imageNamed:@"favorite-22"];
+    UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full"] : [UIImage imageNamed:@"favorite"];
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
     
@@ -1378,7 +1381,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     self.radioHomeView.hidden = (radioChannel == nil);
-    self.radioHomeButtonImageView.image = RadioChannelLogo22Image(radioChannel);
+    self.radioHomeButtonImageView.image = RadioChannelLogoImage(radioChannel);
     self.radioHomeButton.titleEdgeInsets = UIEdgeInsetsMake(0.f, self.radioHomeButtonImageView.image.size.width + 2 * 10.f, 0.f, 10.f);
     
     // Avoid ugly animation when setting the title, see https://stackoverflow.com/a/22101732/760435
@@ -1572,7 +1575,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
-        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.statusBarOrientation)) {
+        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation)) {
             rotate(UIInterfaceOrientationPortrait);
             return;
         }
@@ -1586,15 +1589,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
-    // we have reliable information to determine it.
-    if (@available(iOS 13 , *)) {
-        // On iPhone in landscape orientation it is always hidden since iOS 13, in which case we must not hide it
-        // to avoid incorrect safe area insets after returning from landscape orientation.
-        self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.statusBarOrientation));
-    }
-    else {
-        self.statusBarHidden = fullScreen;
-    }
+    // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden since iOS 13,
+    // in which case we must not hide it to avoid incorrect safe area insets after returning from landscape orientation.
+    self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation));
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
@@ -1723,13 +1720,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)letterboxShouldRestoreUserInterfaceForPictureInPicture
 {
     // Present the media player view controller again if needed
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     return ! [topViewController isKindOfClass:MediaPlayerViewController.class];
 }
 
 - (void)letterboxRestoreUserInterfaceForPictureInPictureWithCompletionHandler:(void (^)(BOOL))completionHandler
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     [topViewController presentViewController:self animated:YES completion:^{
         completionHandler(YES);
     }];
@@ -1800,7 +1797,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 55.f + LayoutStandardMargin;
+    return 55.f + LayoutMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(ProgramTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -2025,17 +2022,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         return;
     }
     
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    NSURL *mainMediaURL = [applicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:kCMTimeZero];
-    if (! mainMediaURL) {
-        return;
-    }
-    
     Float64 currentPosition = 0;
-    NSURL *currentPositionURL = nil;
-    
     SRGMedia *segmentMedia = nil;
-    NSURL *segmentMediaURL = nil;
     
     if (mainMedia.contentType != SRGContentTypeLivestream && mainMedia.contentType != SRGContentTypeScheduledLivestream) {
         CMTime time = self.letterboxController.currentTime;
@@ -2045,49 +2033,20 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
                 && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             currentPosition = CMTimeGetSeconds(time);
-            currentPositionURL = [applicationConfiguration sharingURLForMediaMetadata:mainMedia atTime:time];
         }
         
         segmentMedia = ! [mainMedia isEqual:self.letterboxController.media] ? self.letterboxController.media : nil;
-        segmentMediaURL = segmentMedia ? [applicationConfiguration sharingURLForMediaMetadata:segmentMedia atTime:kCMTimeZero] : nil;
     }
     
-    void (^sharingCompletionBlock)(SRGMedia *, NSURL *, AnalyticsValue) = ^(SRGMedia *sharingMedia, NSURL *sharingURL, AnalyticsValue analyticsExtraValue) {
-        ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithMedia:sharingMedia URL:sharingURL];
-        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-        activityViewController.excludedActivityTypes = @[ UIActivityTypeAssignToContact,
-                                                          UIActivityTypeSaveToCameraRoll,
-                                                          UIActivityTypePostToFlickr,
-                                                          UIActivityTypePostToVimeo,
-                                                          UIActivityTypePostToTencentWeibo ];
-        activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-            if (! completed) {
-                return;
-            }
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.type = activityType;
-            labels.source = AnalyticsSourceButton;
-            labels.value = sharingMedia.URN;
-            labels.extraValue1 = analyticsExtraValue;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
-            
-            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:sharingMedia.URN];
+    void (^sharingCompletionBlock)(SharingItem *, NSString *) = ^(SharingItem *sharingItem, NSString *URN) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton inViewController:self withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
+            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing
                 }] resume];
             }
-            
-            if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                [Banner showWithStyle:BannerStyleInfo
-                              message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                image:nil
-                               sticky:NO
-                     inViewController:self];
-            }
-        };
-        
+        }];
         activityViewController.modalPresentationStyle = UIModalPresentationPopover;
         
         UIPopoverPresentationController *popoverPresentationController = activityViewController.popoverPresentationController;
@@ -2097,7 +2056,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:activityViewController animated:YES completion:nil];
     };
     
-    if (currentPositionURL || segmentMediaURL) {
+    if (currentPosition != 0. || segmentMedia) {
         NSString *message = mainMedia.title;
         if (mainMedia.show.title && ! [mainMedia.title containsString:mainMedia.show.title]) {
             message = [NSString stringWithFormat:@"%@ ─ %@", mainMedia.show.title, mainMedia.title];
@@ -2105,20 +2064,24 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Share", @"Title of the action view to choose a sharing action") message:message preferredStyle:UIAlertControllerStyleActionSheet];
         
-        if (segmentMediaURL) {
+        if (segmentMedia) {
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:@"\"%@\"", segmentMedia.title] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                sharingCompletionBlock(segmentMedia, segmentMediaURL, AnalyticsTypeValueSharingCurrentClip);
+                SharingItem *sharingItem = [SharingItem sharingItemForCurrentClip:segmentMedia];
+                sharingCompletionBlock(sharingItem, segmentMedia.URN);
             }]];
         }
-        NSString *maintTitle = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The entire episode", @"Button label to share the entire episode being played.") : NSLocalizedString(@"The content", @"Button label to share the content being played.");
-        [alertController addAction:[UIAlertAction actionWithTitle:maintTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            sharingCompletionBlock(mainMedia, mainMediaURL, AnalyticsTypeValueSharingContent);
+        
+        NSString *mainTitle = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The entire episode", @"Button label to share the entire episode being played.") : NSLocalizedString(@"The content", @"Button label to share the content being played.");
+        [alertController addAction:[UIAlertAction actionWithTitle:mainTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:kCMTimeZero];
+            sharingCompletionBlock(sharingItem, mainMedia.URN);
         }]];
         
-        if (currentPositionURL) {
+        if (currentPosition != 0.) {
             NSString *positionTitleFormat = (mainMedia.contentType == SRGContentTypeEpisode) ? NSLocalizedString(@"The episode at %@", @"Button label to share the entire episode being played at time (hours / minutes / seconds).") : NSLocalizedString(@"The content at %@", @"Button label to share the content being played at time (hours / minutes / seconds).");
             [alertController addAction:[UIAlertAction actionWithTitle:[NSString stringWithFormat:positionTitleFormat, PlayHumanReadableFormattedDuration(currentPosition)] style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                sharingCompletionBlock(mainMedia, currentPositionURL, AnalyticsTypeValueSharingContentAtTime);
+                SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:CMTimeMakeWithSeconds(currentPosition, NSEC_PER_SEC)];
+                sharingCompletionBlock(sharingItem, mainMedia.URN);
             }]];
         }
         
@@ -2132,7 +2095,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:alertController animated:YES completion:nil];
     }
     else {
-        sharingCompletionBlock(mainMedia, mainMediaURL, AnalyticsTypeValueSharingContent);
+        SharingItem *sharingItem = [SharingItem sharingItemForMedia:mainMedia atTime:kCMTimeZero];
+        sharingCompletionBlock(sharingItem, mainMedia.URN);
     }
 }
 
@@ -2155,7 +2119,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
-    ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:show fromPushNotification:NO];
+    SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
     [appDelegate.rootTabBarController pushViewController:showViewController animated:NO];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
@@ -2413,7 +2377,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
-        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
         if (topViewController != self) {
             return;
         }
@@ -2441,7 +2405,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
         
         if (self.livestreamMedias.count == 0) {

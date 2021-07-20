@@ -1,0 +1,43 @@
+{
+   "id" : "11490542",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:11490542",
+   "title" : "Charles randonne dans le Jura bernois",
+   "description" : "Vous avez envie de faire des randonnées peu connues mais qui valent la découvertes ? Dans ce 3ème épisode, Charles randonne dans le Jura bernois. Au menu: montres, Suze, averses et chocolat.",
+   "imageUrl" : "https://www.rts.ch/2020/07/25/16/58/11490534.image/9x16",
+   "imageTitle" : "Charles randonne dans le Jura bernois [RTS]",
+   "type" : "EPISODE",
+   "date" : "2020-07-25T17:00:00+02:00",
+   "duration" : 311520,
+   "validFrom" : "2020-07-25T17:00:00+02:00",
+   "validTo" : "2100-01-01T00:00:00+01:00",
+   "playableAbroad" : true,
+   "subtitlesAvailable" : false,
+   "episode" : {
+      "id" : "11490533",
+      "title" : "Aujourd'hui",
+      "imageUrl" : "https://www.rts.ch/2020/07/25/16/58/11490534.image/9x16",
+      "imageTitle" : "Charles randonne dans le Jura bernois [RTS]"
+   },
+   "show" : {
+      "id" : "8644940",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:8644940",
+      "title" : "Aujourd'hui",
+      "lead" : "Une aventure en bus solaire à la découverte d'initiatives écologiques.",
+      "description" : "Jonas Schneiter et l'écologiste Marc Muller embarquent faire le tour de Suisse romande dans un bus solaire qu'ils ont recyclé et adapté. Le début d'une singulière aventure! Durant deux mois, ils s'arrêtent chaque jour dans une nouvelle initiative positive. L'occasion pour Marc d'essayer de faire découvrir à Jonas l'ampleur des mouvements si actuels du développement durable ​en Suisse.",
+      "imageUrl" : "https://www.rts.ch/2017/06/05/10/51/8678032.image/16x9",
+      "imageTitle" : "AJD   RTS PLAY 2600x1463 [RTS]",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true
+   },
+   "presentation" : "DEFAULT",
+   "audioTrackList" : [ {
+      "locale" : "fr",
+      "language" : "Français",
+      "source" : "HLS"
+   } ],
+   "aspectRatio" : "9:16"
+}

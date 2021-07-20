@@ -23,10 +23,10 @@
 
 - (void)setName:(NSString *)name values:(NSArray<NSString *> *)values
 {
-    self.nameLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.nameLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
     self.nameLabel.text = name;
     
-    self.valuesLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.valuesLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     self.valuesLabel.text = [values componentsJoinedByString:@", "];
 }
 

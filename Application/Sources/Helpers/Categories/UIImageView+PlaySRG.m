@@ -19,29 +19,14 @@
 
 #pragma mark Class methods
 
-+ (void)load
++ (UIImageView *)play_loadingImageViewWithTintColor:(UIColor *)tintColor
 {
-    if (@available(iOS 13, *)) {}
-    else {
-        // `-willMoveToWindow:` is not implemented on UIImageView on iOS 12, so attempt to add it first. Use swizzling if
-        // if some minor or patch version implements it.
-        Method injectedMethod = class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_injected_willMoveToWindow:));
-        BOOL added = class_addMethod(self, @selector(willMoveToWindow:), method_getImplementation(injectedMethod), method_getTypeEncoding(injectedMethod));
-        if (! added) {
-            method_exchangeImplementations(class_getInstanceMethod(self, @selector(willMoveToWindow:)),
-                                           class_getInstanceMethod(self, @selector(UIImageView_PlaySRG_swizzled_willMoveToWindow:)));
-        }
-    }
+    return [self play_animatedImageViewNamed:@"loading_animation" withTintColor:tintColor duration:1.];
 }
 
-+ (UIImageView *)play_loadingImageView48WithTintColor:(UIColor *)tintColor
++ (UIImageView *)play_largeLoadingImageViewWithTintColor:(UIColor *)tintColor
 {
-    return [self play_animatedImageViewNamed:@"loading-48" withTintColor:tintColor duration:1.];
-}
-
-+ (UIImageView *)play_loadingImageView90WithTintColor:(UIColor *)tintColor
-{
-    return [self play_animatedImageViewNamed:@"loading-90" withTintColor:tintColor duration:1.];
+    return [self play_animatedImageViewNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 // Expect a sequence of images named "name-N", where N must begin at 0. Stops when no image is found for some N
@@ -77,38 +62,38 @@
 
 #pragma mark Loading animations
 
-- (void)play_setLoadingAnimation90WithTintColor:(UIColor *)tintColor
+- (void)play_setLargeLoadingAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"loading-90" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Downloading animations
 
-- (void)play_setDownloadAnimation16WithTintColor:(UIColor *)tintColor
+- (void)play_setSmallDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-16" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
 }
 
-- (void)play_setDownloadAnimation22WithTintColor:(UIColor *)tintColor
+- (void)play_setDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-22" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation" withTintColor:tintColor duration:1.];
 }
 
-- (void)play_setDownloadAnimation48WithTintColor:(UIColor *)tintColor
+- (void)play_setLargeDownloadAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"downloading-48" withTintColor:tintColor duration:1.];
+    [self play_setAnimationImagesNamed:@"downloading_animation-large" withTintColor:tintColor duration:1.];
 }
 
 #pragma mark Waveform animation
 
-- (void)play_setWaveformAnimation34WithTintColor:(UIColor *)tintColor
+- (void)play_setWaveformAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"waveform-34" withTintColor:tintColor duration:0.96];
+    [self play_setAnimationImagesNamed:@"waveform_animation" withTintColor:tintColor duration:0.96];
 }
 
-- (void)play_setPlayAnimation34WithTintColor:(UIColor *)tintColor
+- (void)play_setPlayAnimationWithTintColor:(UIColor *)tintColor
 {
-    [self play_setAnimationImagesNamed:@"play-34" withTintColor:tintColor duration:1.52];
+    [self play_setAnimationImagesNamed:@"play_animation" withTintColor:tintColor duration:1.52];
 }
 
 #pragma mark Animation lifecycle

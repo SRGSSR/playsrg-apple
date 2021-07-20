@@ -8,8 +8,8 @@
 
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayLogger.h"
+#import "Reachability.h"
 
-@import FXReachability;
 @import JavaScriptCore;
 @import SRGDiagnostics;
 @import SRGNetwork;
@@ -20,10 +20,10 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 DeeplinkAction const DeeplinkActionMedia = @"media";
 DeeplinkAction const DeeplinkActionShow = @"show";
 DeeplinkAction const DeeplinkActionTopic = @"topic";
-DeeplinkAction const DeeplinkActionModule = @"module";
 DeeplinkAction const DeeplinkActionHome = @"home";
 DeeplinkAction const DeeplinkActionAZ = @"az";
 DeeplinkAction const DeeplinkActionByDate = @"bydate";
+DeeplinkAction const DeeplinkActionSection = @"section";
 DeeplinkAction const DeeplinkActionSearch = @"search";
 DeeplinkAction const DeeplinkActionLink = @"link";
 
@@ -150,7 +150,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self updateDeepLinkScript];
     }
 }

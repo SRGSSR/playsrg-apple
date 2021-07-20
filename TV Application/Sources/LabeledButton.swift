@@ -10,14 +10,16 @@ struct LabeledButton: View {
     let icon: String
     let label: String
     let accessibilityLabel: String
+    let accessibilityHint: String?
     let action: () -> Void
     
     @State private var isFocused = false
     
-    init(icon: String, label: String, accessibilityLabel: String? = nil, action: @escaping () -> Void) {
+    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
         self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
         self.action = action
     }
     
@@ -27,13 +29,11 @@ struct LabeledButton: View {
                 Image(icon)
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
-                    .onFocusChange { isFocused = $0 }
-                    .accessibilityElement()
-                    .accessibilityLabel(accessibilityLabel)
-                    .accessibility(addTraits: .isButton)
+                    .onParentFocusChange { isFocused = $0 }
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
             Text(label)
-                .srgFont(.button2)
+                .srgFont(.subtitle2)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .foregroundColor(isFocused ? .white : .gray)
@@ -45,12 +45,12 @@ struct LabeledButton: View {
 struct LabeledButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            LabeledButton(icon: "episodes-22", label: "Episodes", action: {})
+            LabeledButton(icon: "episodes", label: "Episodes", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Short label")
             
-            LabeledButton(icon: "favorite-22", label: "Watch later", action: {})
+            LabeledButton(icon: "favorite", label: "Watch later", action: {})
                 .previewLayout(PreviewLayout.sizeThatFits)
                 .padding()
                 .previewDisplayName("Long label")

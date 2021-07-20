@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "SRF_radio1.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "SRF_radio1-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logosradio_srf1_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

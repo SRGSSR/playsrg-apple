@@ -7,8 +7,7 @@
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ tadlà";
 
-/* Live content label, with a channel title
-   Live content label, with a media title */
+/* Live content label, with a channel title */
 "%@ live" = "%@ live";
 
 /* Label displaying the number of views on the player */
@@ -21,8 +20,7 @@
    Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Agiunscher a favurits";
 
-/* Accessibility label for a media cell with audio description
-   Accessibility label for the audio description badge */
+/* Accessibility label for the audio description badge */
 "Audio described" = "Audio descrit";
 
 /* Close button label
@@ -87,6 +85,9 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Organisescha las infurmaziuns da l'account";
 
+/* More button label */
+"More" = "Dapli";
+
 /* A more episode button label */
 "More episodes" = "Dapli episodas";
 
@@ -99,13 +100,15 @@
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
 
-/* Status header action hint */
+/* More button hint */
 "Opens details." = "Avrir detagls.";
 
 /* Hint for content opened in Safari */
 "Opens in Safari." = "Avrir en Safari.";
 
-/* Show cell hint */
+/* Featured show hint
+   Show button hint
+   Show cell hint */
 "Opens show details." = "Arva detagls da program.";
 
 /* Mini player action hint */
@@ -126,7 +129,8 @@
 /* Program cell hint */
 "Plays from the beginning." = "Cumenza a l'entschatta.";
 
-/* Media cell hint */
+/* Featured media hint
+   Media cell hint */
 "Plays the content." = "Laschà ì il cuntegn.";
 
 /* Song cell hint */

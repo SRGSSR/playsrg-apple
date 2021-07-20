@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "STEP 3.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "STEP 3-1.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

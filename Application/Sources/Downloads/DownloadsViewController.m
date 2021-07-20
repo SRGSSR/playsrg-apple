@@ -16,6 +16,7 @@
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
+#import "PlaySRG-Swift.h"
 #import "RefreshControl.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
@@ -60,7 +61,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray16Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -161,11 +162,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.downloads.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -181,15 +178,15 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return LayoutPaddingContentInsets;
 }
 
 #pragma mark DZNEmptyDataSetSource protocol
 
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                  NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
+                                  NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No downloads", @"Text displayed when no downloads are available") attributes:attributes];
 }
 
@@ -197,18 +194,18 @@
 {
     NSString *description = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold an item to download it (not all items can be downloaded)", @"Hint displayed when no downloads are available and the device does not support 3D touch");
     return [[NSAttributedString alloc] initWithString:description
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                         NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
+                                                         NSForegroundColorAttributeName : UIColor.srg_grayC7Color }];
 }
 
 - (UIImage *)imageForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return [UIImage imageNamed:@"download-90"];
+    return [UIImage imageNamed:@"download-background"];
 }
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.play_lightGrayColor;
+    return UIColor.srg_grayC7Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
@@ -249,7 +246,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.downloads.count);
+    return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(DownloadTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -286,6 +283,23 @@
     }
 }
 
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        Download *download = self.downloads[indexPath.row];
+        [Download removeDownload:download];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = download.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
     return self.downloads.count != 0 ? 40.f : 0.f;
@@ -294,6 +308,38 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     return [tableView dequeueReusableHeaderFooterViewWithIdentifier:NSStringFromClass(DownloadFooterSectionView.class)];
+}
+
+- (UIContextMenuConfiguration *)tableView:(UITableView *)tableView contextMenuConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.downloads[indexPath.row] at:indexPath in:self];
+}
+
+- (void)tableView:(UITableView *)tableView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
+{
+    [ContextMenuObjC commitPreviewIn:self animator:animator];
+}
+
+- (UITargetedPreview *)tableView:(UITableView *)tableView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inTableView:tableView];
+}
+
+- (UITargetedPreview *)tableView:(UITableView *)tableView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inTableView:tableView];
+}
+
+- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inTableView:(UITableView *)tableView
+{
+    UIView *interactionView = [ContextMenuObjC interactionViewInTableView:tableView with:configuration];
+    if (! interactionView) {
+        return nil;
+    }
+    
+    UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
+    parameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
 }
 
 #pragma mark Actions
@@ -376,13 +422,16 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeDownloads:)];

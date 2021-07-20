@@ -27,7 +27,6 @@
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
 @import AppCenterDistribute;
-@import FLEX;
 @import libextobjc;
 @import SafariServices;
 @import SRGAppearance;
@@ -36,6 +35,10 @@
 @import SRGIdentity;
 @import SRGLetterbox;
 @import YYWebImage;
+
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+@import FLEX;
+#endif
 
 // Autoplay group
 static NSString * const SettingsAutoplayGroup = @"Group_Autoplay";
@@ -63,8 +66,8 @@ static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersi
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
-static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
+static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -95,7 +98,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self updateSettingsVisibility];
     
     if (self.navigationController.viewControllers.firstObject == self) {
-        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close-22"]
+        UIBarButtonItem *closeBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"close"]
                                                                  landscapeImagePhone:nil
                                                                                style:UIBarButtonItemStyleDone
                                                                               target:self
@@ -143,8 +146,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsUserLocationSettingsButton];
     [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
-    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    [hiddenKeys addObject:PlaySRGSettingSectionWideSupportEnabled];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsResetGroup];
     [hiddenKeys addObject:SettingsClearWebCacheButton];
     [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
@@ -372,7 +376,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                 if (! FavoritesIsSubscribedToShow(show)) {
                     FavoritesAddShow(show);
-                    FavoritesToggleSubscriptionForShow(show, nil);
+                    FavoritesToggleSubscriptionForShow(show);
                 }
             }];
         }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -386,7 +390,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
                     if (! FavoritesIsSubscribedToShow(show)) {
                         FavoritesAddShow(show);
-                        FavoritesToggleSubscriptionForShow(show, nil);
+                        FavoritesToggleSubscriptionForShow(show);
                     }
                 }];
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
@@ -425,12 +429,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([key isEqualToString:SettingsPermissionsGroup]) {
-        if (@available(iOS 14, *)) {
-            return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
-        }
-        else {
-            return nil;
-        }
+        return NSLocalizedString(@"Local network access must be allowed for Google Cast receiver discovery.", @"Setting footer message for system permission group. New rule for iOS 14 and more.");
     }
     else {
         return nil;

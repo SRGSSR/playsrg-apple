@@ -101,13 +101,7 @@
         navigationBar.translucent = NO;
     }
     else {
-        if (@available(iOS 13, *)) {
-            navigationBar.barTintColor = nil;
-        }
-        else {
-            navigationBar.barTintColor = UIColor.play_blurTintColor;
-        }
-        
+        navigationBar.barTintColor = nil;
         navigationBar.translucent = YES;
     }
     
@@ -126,11 +120,11 @@
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
     navigationBar.tintColor = foregroundColor;
-    navigationBar.titleTextAttributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithSize:18.f],
+    navigationBar.titleTextAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
                                            NSForegroundColorAttributeName : foregroundColor };
     
     for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [UIFont srg_regularFontWithSize:16.f] }
+        [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f] }
                                                                                                    forState:controlState.integerValue];
     }
     
@@ -144,9 +138,8 @@
 {
     void (^animations)(void) = ^{
         UIStatusBarStyle darkStatusBarStyle = UIStatusBarStyleDefault;
-        if (@available(iOS 13, *)) {
-            darkStatusBarStyle = UIStatusBarStyleDarkContent;
-        }
+        darkStatusBarStyle = UIStatusBarStyleDarkContent;
+        
         UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
         [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color separator:YES statusBarStyle:statusBarStyle];
     };

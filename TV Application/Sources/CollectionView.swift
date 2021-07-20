@@ -30,82 +30,25 @@ extension CollectionView {
 }
 
 /**
- *  Collection row.
- */
-struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
-    /// Section.
-    let section: Section
-    /// Items contained within the section.
-    let items: [Item]
-}
-
-/**
  *  A `UICollectionView`-powered SwiftUI collection, whose cells are provided as SwiftUI views.
  */
 struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, SupplementaryView: View>: UIViewRepresentable {
     /**
-     *  `UICollectionView` cell hosting a `SwiftUI` view.
+     *  `UICollectionView` subclass applying settings depending on the view hierarchy when displayed.
      */
-    private class HostCell: UICollectionViewCell {
-        private var hostController: UIHostingController<Cell>?
+    class WrappedCollectionView: UICollectionView {
+        weak var parentViewController: UIViewController?
         
-        private func addHostController(for cell: Cell?) {
-            guard let rootView = cell else { return }
-            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-            if let hostView = hostController?.view {
-                hostView.frame = contentView.bounds
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                contentView.addSubview(hostView)
-            }
-        }
-        
-        private func removeHostController() {
-            if let hostView = hostController?.view {
-                hostView.removeFromSuperview()
-            }
-            hostController = nil
-        }
-        
-        override func prepareForReuse() {
-            removeHostController()
-        }
-        
-        var hostedCell: Cell? {
-            willSet {
-                removeHostController()
-                addHostController(for: newValue)
-            }
-        }
-    }
-    
-    private class HostSupplementaryView: UICollectionReusableView {
-        private var hostController: UIHostingController<SupplementaryView>?
-        
-        private func addHostController(for supplementaryView: SupplementaryView?) {
-            guard let rootView = supplementaryView else { return }
-            hostController = UIHostingController(rootView: rootView, ignoreSafeArea: true)
-            if let hostView = hostController?.view {
-                hostView.frame = bounds
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                addSubview(hostView)
-            }
-        }
-        
-        private func removeHostController() {
-            if let hostView = hostController?.view {
-                hostView.removeFromSuperview()
-            }
-            hostController = nil
-        }
-        
-        override func prepareForReuse() {
-            removeHostController()
-        }
-        
-        var hostedSupplementaryView: SupplementaryView? {
-            willSet {
-                removeHostController()
-                addHostController(for: newValue)
+        override func didMoveToWindow() {
+            super.didMoveToWindow()
+            
+            if self.window != nil {
+                if parentViewController == NearestViewController.shared {
+                    play_nearestViewController?.tabBarObservedScrollView = self
+                }
+                else {
+                    parentViewController?.tabBarObservedScrollView = self
+                }
             }
         }
     }
@@ -117,13 +60,13 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         fileprivate typealias DataSource = UICollectionViewDiffableDataSource<Section, Item>
         
         /// Data source for the collection view.
-        fileprivate var dataSource: DataSource? = nil
+        fileprivate var dataSource: DataSource?
         
         /// Provider for the section layout.
         fileprivate var sectionLayoutProvider: ((Int, Section, NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection)?
         
         /// Hash of the data represented by the data source. Provides for a cheap way of checking when data changes.
-        fileprivate var rowsHash: Int? = nil
+        fileprivate var rowsHash: Int?
         
         /// Registered view kinds for supplementary views.
         fileprivate var registeredSupplementaryViewKinds: [String] = []
@@ -149,10 +92,10 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
     let supplementaryView: (String, IndexPath, Section, Item) -> SupplementaryView
     
     /// The view controller (child of a tab bar controller) which should be moved when scrolling occurs.
-    fileprivate weak var parentViewController: UIViewController? = nil
+    fileprivate weak var parentViewController: UIViewController?
     
     /// The parent search controller to move the collection with, if any.
-    fileprivate weak var parentSearchController: UISearchController? = nil
+    fileprivate weak var parentSearchController: UISearchController?
     
     /**
      *  Remove item duplicates. As items can be moved between sections no item must appear multiple times, whether in
@@ -218,6 +161,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         let rowsHash = rows.hashValue
         if coordinator.rowsHash != rowsHash {
             DispatchQueue.global(qos: .userInteractive).async {
+                // Can be triggered on a background thread. Layout is updated on the main thread.
                 dataSource.apply(snapshot(), animatingDifferences: animated) {
                     coordinator.focusable = true
                     collectionView.setNeedsFocusUpdate()
@@ -235,20 +179,20 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         return Coordinator()
     }
     
-    func makeUIView(context: Context) -> UICollectionView {
+    func makeUIView(context: Context) -> WrappedCollectionView {
         let cellIdentifier = "hostCell"
         let supplementaryViewIdentifier = "hostSupplementaryView"
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout(context: context))
+        let collectionView = WrappedCollectionView(frame: .zero, collectionViewLayout: layout(context: context))
         collectionView.delegate = context.coordinator
-        collectionView.register(HostCell.self, forCellWithReuseIdentifier: cellIdentifier)
+        collectionView.register(HostCollectionViewCell<Cell>.self, forCellWithReuseIdentifier: cellIdentifier)
         
         let dataSource = Coordinator.DataSource(collectionView: collectionView) { collectionView, indexPath, item in
             let snapshot = context.coordinator.dataSource!.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             
-            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCell
-            hostCell.hostedCell = cell(indexPath, section, item)
+            let hostCell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! HostCollectionViewCell<Cell>
+            hostCell.content = cell(indexPath, section, item)
             return hostCell
         }
         context.coordinator.dataSource = dataSource
@@ -256,7 +200,7 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
             let coordinator = context.coordinator
             if !coordinator.registeredSupplementaryViewKinds.contains(kind) {
-                collectionView.register(HostSupplementaryView.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: supplementaryViewIdentifier)
+                collectionView.register(HostSupplementaryView<SupplementaryView>.self, forSupplementaryViewOfKind: kind, withReuseIdentifier: supplementaryViewIdentifier)
                 coordinator.registeredSupplementaryViewKinds.append(kind)
             }
             
@@ -264,24 +208,19 @@ struct CollectionView<Section: Hashable, Item: Hashable, Cell: View, Supplementa
             let section = snapshot.sectionIdentifiers[indexPath.section]
             let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView
-            view.hostedSupplementaryView = supplementaryView(kind, indexPath, section, item)
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: supplementaryViewIdentifier, for: indexPath) as! HostSupplementaryView<SupplementaryView>
+            view.content = supplementaryView(kind, indexPath, section, item)
             return view
         }
+        
+        collectionView.parentViewController = parentViewController
+        parentSearchController?.searchControllerObservedScrollView = collectionView
         
         reloadData(in: collectionView, context: context)
         return collectionView
     }
     
-    func updateUIView(_ uiView: UICollectionView, context: Context) {
-        if parentViewController == NearestViewController.shared {
-            uiView.play_nearestViewController?.tabBarObservedScrollView = uiView
-        }
-        else {
-            parentViewController?.tabBarObservedScrollView = uiView
-        }
-        parentSearchController?.searchControllerObservedScrollView = uiView
-        
+    func updateUIView(_ uiView: WrappedCollectionView, context: Context) {
         reloadData(in: uiView, context: context, animated: true)
     }
 }

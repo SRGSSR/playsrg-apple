@@ -10,20 +10,21 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSection.h"
 #import "History.h"
-#import "HistoryTableViewCell.h"
 #import "Layout.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
+#import "PlaySRG-Swift.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
 @import SRGAnalytics;
+@import SRGAppearance;
 @import SRGUserData;
 
-@interface HistoryViewController () <HistoryTableViewCellDelegate>
+@interface HistoryViewController ()
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
@@ -45,7 +46,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray16Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -63,11 +64,9 @@
     
     self.emptyTableTitle = NSLocalizedString(@"No history", @"Text displayed when no history is available");
     self.emptyTableSubtitle = NSLocalizedString(@"Recently played medias will be displayed here", @"Hint displayed when no history is available");
-    self.emptyCollectionImage = [UIImage imageNamed:@"history-90"];
+    self.emptyCollectionImage = [UIImage imageNamed:@"history-background"];
     
-    NSString *cellIdentifier = NSStringFromClass(HistoryTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableMediaCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(historyEntriesDidChange:)
@@ -144,11 +143,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.items.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -159,26 +154,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
-}
-
-#pragma mark HistoryTableViewCellDelegate protocol
-
-- (void)historyTableViewCell:(HistoryTableViewCell *)historyTableViewCell deleteHistoryEntryForMedia:(SRGMedia *)media
-{
-    [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [self hideItems:@[media]];
-                [self updateInterfaceForEditionAnimated:YES];
-            }
-        });
-    }];
-    
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = media.URN;
-    labels.source = AnalyticsSourceSwipe;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
+    return LayoutTableViewPaddingContentInsets;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -200,26 +176,25 @@
     return self.items.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView<MediaSettable> *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(HistoryTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableMediaCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.items.count);
+    return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(HistoryTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableView<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // FIXME: Work around crash. To reproduce, logout with the history view visible, with a slow network (repeat a few
     //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
     //        items is empty. This of course crashes.
     if (indexPath.row < self.items.count) {
         cell.media = self.items[indexPath.row];
-        cell.cellDelegate = self;
     }
 }
 
@@ -235,6 +210,31 @@
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.value = media.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryOpenMedia labels:labels];
+}
+
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        SRGMedia *media = self.items[indexPath.row];
+        
+        [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:@[media.URN] completionBlock:^(NSError * _Nonnull error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (! error) {
+                    [self hideItems:@[media]];
+                    [self updateInterfaceForEditionAnimated:YES];
+                }
+            });
+        }];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = media.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleHistoryRemove labels:labels];
+        
+        completionHandler(YES);
+    }];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
 #pragma mark Actions
@@ -310,24 +310,21 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)toggleEdition:(id)sender
-{
-    BOOL editing = !self.tableView.isEditing;
-    [self setEditing:editing animated:YES];
-}
-
 #pragma mark Edit mode
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeHistory:)];

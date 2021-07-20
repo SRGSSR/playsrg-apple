@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Common protocol for view controllers supporting application navigation.
  */
+API_UNAVAILABLE(tvos)
 @protocol PlayApplicationNavigation <NSObject>
 
 /**

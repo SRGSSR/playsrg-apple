@@ -1,0 +1,43 @@
+{
+  "id": "11740064",
+  "mediaType": "VIDEO",
+  "vendor": "RTS",
+  "urn": "urn:rts:video:11740064",
+  "title": "19h30",
+  "imageUrl": "https://www.rts.ch/2020/11/09/21/08/11740063.image/16x9",
+  "imageTitle": "19h30 [RTS]",
+  "type": "EPISODE",
+  "date": "2020-11-09T19:30:00+01:00",
+  "duration": 1903000,
+  "validFrom": "2020-11-09T20:08:00+01:00",
+  "playableAbroad": true,
+  "subtitlesAvailable": false,
+  "episode": {
+    "id": "11637143",
+    "title": "19h30",
+    "imageUrl": "https://www.rts.ch/2020/11/09/21/08/11740063.image/16x9",
+    "imageTitle": "19h30 [RTS]"
+  },
+  "show": {
+    "id": "105932",
+    "vendor": "RTS",
+    "transmission": "TV",
+    "urn": "urn:rts:show:tv:105932",
+    "title": "19h30",
+    "imageUrl": "https://ws.srf.ch/asset/image/audio/8b32fd87-459e-40f1-9519-ba0cbb01f34e/NOT_SPECIFIED.jpg",
+    "posterImageUrl": "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+    "posterImageIsFallbackUrl": true,
+    "primaryChannelId": "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+    "primaryChannelUrn": "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b"
+  },
+  "channel": {
+    "id": "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+    "vendor": "RTS",
+    "urn": "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b",
+    "title": "RTS Un",
+    "imageUrl": "https://ws.srf.ch/asset/image/audio/8b32fd87-459e-40f1-9519-ba0cbb01f34e/NOT_SPECIFIED.jpg",
+    "transmission": "TV"
+  },
+  "presentation": "DEFAULT",
+  "aspectRatio": "16:9"
+}

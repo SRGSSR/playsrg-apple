@@ -6,7 +6,6 @@
 
 #import "MediaPreviewViewController.h"
 
-#import "ActivityItemSource.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
@@ -19,7 +18,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "PlayAppDelegate.h"
 #import "PlayErrors.h"
-#import "ShowViewController.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGMediaComposition+PlaySRG.h"
@@ -114,7 +112,7 @@
     };
     ApplicationConfigurationApplyControllerSettings(self.letterboxController);
     
-    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
+    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMediaMetadata(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
     [self.letterboxView setUserInterfaceHidden:YES animated:NO togglable:NO];
     [self.letterboxView setTimelineAlwaysHidden:YES animated:NO];
     
@@ -160,9 +158,7 @@
     if ([self play_isMovingFromParentViewController]) {
         [ChannelService.sharedService removeObserver:self.channelObserver];
         
-        // Restore playback on exit. Works well with cancelled peek, as well as with pop, without additional checks. Wait
-        // a little bit since peek view dismissal occurs just before an action item has been selected. Moreover, having
-        // a small delay sounds better.
+        // Restore playback on exit. Result is better with a small delay.
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             if (self.shouldRestoreServicePlayback) {
                 [[AVAudioSession sharedInstance] setCategory:self.previousAudioSessionCategory error:nil];
@@ -179,130 +175,6 @@
     return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
 }
 
-#pragma mark Peek and pop
-
-- (NSArray<id<UIPreviewActionItem>> *)previewActionItems
-{
-    NSMutableArray<id<UIPreviewActionItem>> *previewActionItems = [NSMutableArray array];
-    
-    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(self.media);
-    if (action != WatchLaterActionNone) {
-        BOOL isRemoval = (action == WatchLaterActionRemove);
-        NSString *addActionTitle = (self.media.mediaType == SRGMediaTypeAudio) ? NSLocalizedString(@"Listen later", @"Button label to add an audio to the later list, from the media preview window") : NSLocalizedString(@"Watch later", @"Button label to add a video to the later list, from the media preview window");
-        UIPreviewAction *watchLaterAction = [UIPreviewAction actionWithTitle:isRemoval ? NSLocalizedString(@"Delete from \"Later\"", @"Button label to delete a media from the later list, from the media preview window") : addActionTitle style:isRemoval ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            WatchLaterToggleMediaMetadata(self.media, ^(BOOL added, NSError * _Nullable error) {
-                if (! error) {
-                    AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
-                    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                    labels.source = AnalyticsSourcePeekMenu;
-                    labels.value = self.media.URN;
-                    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-                    
-                    [Banner showWatchLaterAdded:added forItemWithName:self.media.title inViewController:nil /* Not 'self' since dismissed */];
-                }
-            });
-        }];
-        [previewActionItems addObject:watchLaterAction];
-    }
-    
-    BOOL downloadable = [Download canDownloadMedia:self.media];
-    if (downloadable) {
-        Download *download = [Download downloadForMedia:self.media];
-        BOOL downloaded = (download != nil);
-        UIPreviewAction *downloadAction = [UIPreviewAction actionWithTitle:downloaded ? NSLocalizedString(@"Delete from downloads", @"Button label to delete a download from the media preview window") : NSLocalizedString(@"Add to downloads", @"Button label to add a download from the media preview window") style:downloaded ? UIPreviewActionStyleDestructive : UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            if (downloaded) {
-                [Download removeDownload:download];
-            }
-            else {
-                [Download addDownloadForMedia:self.media];
-            }
-            
-            // Use !downloaded since the status has been reversed
-            AnalyticsTitle analyticsTitle = ! downloaded ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourcePeekMenu;
-            labels.value = self.media.URN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
-        }];
-        [previewActionItems addObject:downloadAction];
-    }
-    
-    NSURL *sharingURL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMediaMetadata:self.media atTime:kCMTimeZero];
-    if (sharingURL) {
-        UIPreviewAction *shareAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Share", @"Button label of the sharing choice in the media preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            ActivityItemSource *activityItemSource = [[ActivityItemSource alloc] initWithMedia:self.media URL:sharingURL];
-            UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithActivityItems:@[ activityItemSource ] applicationActivities:nil];
-            activityViewController.excludedActivityTypes = @[ UIActivityTypePrint,
-                                                              UIActivityTypeAssignToContact,
-                                                              UIActivityTypeSaveToCameraRoll,
-                                                              UIActivityTypePostToFlickr,
-                                                              UIActivityTypePostToVimeo,
-                                                              UIActivityTypePostToTencentWeibo ];
-            activityViewController.completionWithItemsHandler = ^(UIActivityType __nullable activityType, BOOL completed, NSArray * __nullable returnedItems, NSError * __nullable activityError) {
-                if (! completed) {
-                    return;
-                }
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.type = activityType;
-                labels.source = AnalyticsSourcePeekMenu;
-                labels.value = self.media.URN;
-                labels.extraValue1 = AnalyticsTypeValueSharingContent;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleSharingMedia labels:labels];
-                
-                SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:self.media.URN];
-                if (subdivision.event) {
-                    [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                        // Nothing
-                    }] resume];
-                }
-                
-                if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
-                    [Banner showWithStyle:BannerStyleInfo
-                                  message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
-                                    image:nil
-                                   sticky:NO
-                         inViewController:nil /* Not 'self' since dismissed */];
-                }
-            };
-            
-            activityViewController.modalPresentationStyle = UIModalPresentationPopover;
-            
-            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
-            [viewController presentViewController:activityViewController animated:YES completion:nil];
-        }];
-        [previewActionItems addObject:shareAction];
-    }
-    
-    if (! ApplicationConfiguration.sharedApplicationConfiguration.moreEpisodesHidden && self.media.show) {
-        UIPreviewAction *showAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"More episodes", @"Button label to open the show episode page from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            ShowViewController *showViewController = [[ShowViewController alloc] initWithShow:self.media.show fromPushNotification:NO];
-            
-            UIViewController *viewController = self.play_previewingContext.sourceView.play_nearestViewController;
-            UINavigationController *navigationController = viewController.navigationController;
-            if (navigationController) {
-                [navigationController pushViewController:showViewController animated:YES];
-            }
-            else {
-                UIApplication *application = UIApplication.sharedApplication;
-                PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-                [appDelegate.rootTabBarController pushViewController:showViewController animated:YES];
-            }
-        }];
-        [previewActionItems addObject:showAction];
-    }
-    
-    UIPreviewAction *openAction = [UIPreviewAction actionWithTitle:NSLocalizedString(@"Open", @"Button label to open a media from the start from the preview window") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-        self.shouldRestoreServicePlayback = NO;
-        
-        UIView *sourceView = self.play_previewingContext.sourceView;
-        [sourceView.play_nearestViewController play_presentMediaPlayerFromLetterboxController:self.letterboxController withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:nil];
-    }];
-    [previewActionItems addObject:openAction];
-    
-    return previewActionItems.copy;
-}
-
 #pragma mark Data
 
 - (void)reloadData
@@ -316,10 +188,10 @@
         if (currentProgram) {
             self.titleLabel.text = currentProgram.title;
             
-            self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+            self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.channelLabel.text = channel.title;
             
-            self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+            self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
             self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         }
         else {
@@ -343,12 +215,12 @@
 
 - (void)updateFonts
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
-    self.showLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.summaryLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
+    self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
-    self.programTimeLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-    self.channelLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

@@ -102,32 +102,32 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
 {
     switch (self.applicationSection) {
         case ApplicationSectionSearch: {
-            return [UIImage imageNamed:@"search-22"];
+            return [UIImage imageNamed:@"search"];
             break;
         }
             
         case ApplicationSectionFavorites: {
-            return [UIImage imageNamed:@"favorite-22"];
+            return [UIImage imageNamed:@"favorite"];
             break;
         }
             
         case ApplicationSectionWatchLater: {
-            return [UIImage imageNamed:@"watch_later-22"];
+            return [UIImage imageNamed:@"watch_later"];
             break;
         }
             
         case ApplicationSectionDownloads: {
-            return [UIImage imageNamed:@"download-22"];
+            return [UIImage imageNamed:@"download"];
             break;
         }
             
         case ApplicationSectionHistory: {
-            return [UIImage imageNamed:@"history-22"];
+            return [UIImage imageNamed:@"history"];
             break;
         }
             
         case ApplicationSectionNotifications: {
-            return PushService.sharedService.enabled ? [UIImage imageNamed:@"subscription_full-22"] : [UIImage imageNamed:@"subscription-22"];
+            return PushService.sharedService.enabled ? [UIImage imageNamed:@"subscription_full"] : [UIImage imageNamed:@"subscription"];
             break;
         }
             

@@ -4,9 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-import FXReachability
 import SwiftUI
 
+// FIXME: Should be made by the view models themselves
 extension View {
     /**
      *  Called when the application is woken up, either by the user or network being reachable again.
@@ -15,8 +15,8 @@ extension View {
         onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
             action()
         }
-        .onReceive(NotificationCenter.default.publisher(for: NSNotification.Name.FXReachabilityStatusDidChange)) { _ in
-            if FXReachability.isReachable() {
+        .onReceive(NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)) { notification in
+            if ReachabilityBecameReachable(notification) {
                 action()
             }
         }

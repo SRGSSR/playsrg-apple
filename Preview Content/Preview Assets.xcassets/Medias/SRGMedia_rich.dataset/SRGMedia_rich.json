@@ -1,0 +1,65 @@
+{
+   "id" : "12144801",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:12144801",
+   "title" : "Les voyages extraordinaires d'Ella Maillart",
+   "description" : "Ella Maillart est l’aventurière la plus attachante de Suisse romande. Photographe, écrivaine et journaliste, elle a parcouru les régions les plus reculées de la planète en un temps où les femmes exploratrices étaient très rares. La très charismatique Ella raconte ses voyages balisés d’archives et de retours sur les lieux visités dans les années trente.",
+   "imageUrl" : "https://www.rts.ch/2021/04/27/17/00/10032183.image/16x9",
+   "imageTitle" : "Les voyages extraordinaires d'Ella Maillart [RTS]",
+   "type" : "EPISODE",
+   "date" : "2021-04-28T23:24:03+02:00",
+   "duration" : 4180400,
+   "validFrom" : "2021-04-27T00:36:04+02:00",
+   "validTo" : "2021-05-06T00:36:04+02:00",
+  "youthProtectionColor": "YELLOW",
+  "playableAbroad" : false,
+   "subtitlesAvailable" : true,
+   "subtitleInformationList" : [ {
+      "locale" : "fr",
+      "language" : "Français (SDH)",
+      "source" : "HLS",
+      "type" : "SDH"
+   } ],
+   "episode" : {
+      "id" : "12047342",
+      "title" : "Sur les Docs",
+      "imageUrl" : "https://www.rts.ch/2021/04/27/17/00/10032183.image/16x9",
+      "imageTitle" : "Les voyages extraordinaires d'Ella Maillart [RTS]"
+   },
+   "show" : {
+      "id" : "10560080",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:10560080",
+      "title" : "Sur les Docs",
+      "description" : "Documentaires divers du mercredi avec des thématiques se rapprochant du doc d'auteur. Fusion du doc ch, le doc et les docs hors case",
+      "imageUrl" : "https://www.rts.ch/2019/08/29/12/14/10670220.image/16x9",
+      "imageTitle" : "Vignette Play RTS",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true,
+      "primaryChannelId" : "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "primaryChannelUrn" : "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b"
+   },
+   "channel" : {
+      "id" : "143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "vendor" : "RTS",
+      "urn" : "urn:rts:channel:tv:143932a79bb5a123a646b68b1d1188d7ae493e5b",
+      "title" : "RTS Un",
+      "imageUrl" : "https://www.rts.ch/2019/08/29/12/14/10670220.image/3x1",
+      "imageTitle" : "Vignette Play RTS",
+      "transmission" : "TV"
+   },
+   "presentation" : "VIDEO_360",
+   "audioTrackList" : [ {
+      "locale" : "fr",
+      "language" : "Français",
+      "source" : "HLS"
+   }, {
+      "locale" : "fr",
+      "language" : "Français (AD)",
+      "source" : "HLS",
+      "type" : "AUDIO_DESCRIPTION"
+   } ],
+   "aspectRatio" : "16:9"
+}

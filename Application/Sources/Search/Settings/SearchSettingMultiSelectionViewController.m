@@ -83,7 +83,7 @@
     self.searchBar.delegate = self;
     
     UITextField *searchTextField = self.searchBar.play_textField;
-    searchTextField.font = [UIFont srg_regularFontWithSize:18.f];
+    searchTextField.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:18.f];
     searchTextField.textColor = UIColor.whiteColor;
 }
 
@@ -115,7 +115,7 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     return [[NSAttributedString alloc] initWithString:NSLocalizedString(@"No results", @"Default text displayed when no results are available")
-                                           attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
+                                           attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
                                                          NSForegroundColorAttributeName : UIColor.whiteColor }];
 }
 

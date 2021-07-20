@@ -19,8 +19,6 @@
 #import "UIColor+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 
-@import libextobjc;
-@import SRGAnalytics;
 @import SRGAppearance;
 @import SRGUserData;
 
@@ -33,7 +31,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *durationLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *youthProtectionColorImageView;
 @property (nonatomic, weak) IBOutlet UIImageView *downloadStatusImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *media360ImageView;
 @property (nonatomic, weak) IBOutlet UILabel *webFirstLabel;
 
 @property (nonatomic, weak) IBOutlet UIProgressView *progressView;
@@ -52,7 +49,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_blackColor;
+    self.backgroundColor = UIColor.srg_gray16Color;
     
     UIView *selectedBackgroundView = [[UIView alloc] init];
     selectedBackgroundView.backgroundColor = UIColor.clearColor;
@@ -67,26 +64,9 @@
     self.youthProtectionColorImageView.hidden = YES;
     self.webFirstLabel.hidden = YES;
     
-    self.progressView.progressTintColor = UIColor.play_progressRedColor;
+    self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
-    self.downloadStatusImageView.tintColor = UIColor.play_lightGrayColor;
-    
-    @weakify(self)
-    MGSwipeButton *deleteButton = [MGSwipeButton buttonWithTitle:@"" icon:[UIImage imageNamed:@"delete-22"] backgroundColor:UIColor.redColor callback:^BOOL(MGSwipeTableCell * _Nonnull cell) {
-        @strongify(self)
-        
-        [Download removeDownload:self.download];
-        
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.value = self.download.URN;
-        labels.source = AnalyticsSourceSwipe;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
-        
-        return YES;
-    }];
-    deleteButton.tintColor = UIColor.whiteColor;
-    deleteButton.buttonWidth = 60.f;
-    self.rightButtons = @[deleteButton];
+    self.downloadStatusImageView.tintColor = UIColor.srg_grayC7Color;
 }
 
 - (void)prepareForReuse
@@ -118,28 +98,11 @@
     }
 }
 
-- (void)didMoveToWindow
-{
-    [super didMoveToWindow];
-    
-    [self play_registerForPreview];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self play_registerForPreview];
-}
-
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
     
     self.selectionStyle = editing ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
-    if (editing && self.swipeState != MGSwipeStateNone) {
-        [self hideSwipeAnimated:animated];
-    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -214,11 +177,9 @@
     }
     
     self.titleLabel.text = download.title;
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     [self.durationLabel play_displayDurationLabelForMediaMetadata:download];
-    
-    self.media360ImageView.hidden = (download.presentation != SRGPresentation360);
     
     BOOL isWebFirst = download.media.play_isWebFirst;
     self.webFirstLabel.hidden = ! isWebFirst;
@@ -251,16 +212,16 @@
 
 - (void)updateDownloadStatus
 {
-    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.play_lightGrayColor;
+    UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.srg_grayC7Color;
     
     self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
-    self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     switch (self.download.state) {
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended: {
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_stop"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
@@ -269,7 +230,7 @@
             NSProgress *progress = [Download currentlyKnownProgressForDownload:self.download] ?: [NSProgress progressWithTotalUnitCount:10]; // Display 0% if nothing
             self.subtitleLabel.text = [progress localizedDescription];
             
-            [self.downloadStatusImageView play_setDownloadAnimation16WithTintColor:tintColor];
+            [self.downloadStatusImageView play_setSmallDownloadAnimationWithTintColor:tintColor];
             [self.downloadStatusImageView startAnimating];
             break;
         }
@@ -278,7 +239,7 @@
             self.subtitleLabel.text = [NSByteCountFormatter stringFromByteCount:self.download.size countStyle:NSByteCountFormatterCountStyleFile];
             
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable_full"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
@@ -286,7 +247,7 @@
         case DownloadStateDownloadable:
         case DownloadStateRemoved: {
             [self.downloadStatusImageView stopAnimating];
-            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable-16"];
+            self.downloadStatusImageView.image = [UIImage imageNamed:@"downloadable"];
             self.downloadStatusImageView.tintColor = tintColor;
             break;
         }
@@ -303,22 +264,11 @@
 {
     HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
     self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.download, ^(float progress) {
-        self.progressView.hidden = (progress == 0.f);
-        self.progressView.progress = progress;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.progressView.hidden = (progress == 0.f);
+            self.progressView.progress = progress;
+        });
     });
-}
-
-#pragma mark Previewing protocol
-
-- (id)previewObject
-{
-    return ! self.editing ? self.download.media : nil;
-}
-
-- (NSValue *)previewAnchorRect
-{
-    CGRect imageViewFrameInSelf = [self.thumbnailImageView convertRect:self.thumbnailImageView.bounds toView:self];
-    return [NSValue valueWithCGRect:imageViewFrameInSelf];
 }
 
 #pragma mark Notifications

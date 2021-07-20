@@ -8,7 +8,7 @@ import SRGAppearance
 import SwiftMessages
 import UIKit
 
-open class SwiftMessagesBridge : NSObject {
+open class SwiftMessagesBridge: NSObject {
     
     /**
      *  Display a notification message.
@@ -19,6 +19,7 @@ open class SwiftMessagesBridge : NSObject {
      *  @param viewController      The view controller context for which the notification must be displayed.
      *  @param backgroundColor     The notification banner color.
      *  @param foregroundColor     Text and image tint color.
+     *  @sticky                    The banner has to be removed by the user.
      *
      *  @discussion Provide the most accurate view controller context, as it ensures the notification behaves correctly
      *              for it (i.e. rotates consistently and appears under a parent navigation bar).
@@ -28,7 +29,7 @@ open class SwiftMessagesBridge : NSObject {
         
         let messageView = MessageView.viewFromNib(layout: .cardView)
         messageView.button?.isHidden = true
-        messageView.bodyLabel?.font = UIFont.srg_mediumFont(withTextStyle: SRGAppearanceFontTextStyle.body)
+        messageView.bodyLabel?.font = SRGFont.font(.body)
         messageView.configureDropShadow()
         
         messageView.configureContent(title: nil, body: message, iconImage: nil, iconText: nil, buttonImage: nil, buttonTitle: nil, buttonTapHandler: nil)
@@ -51,13 +52,13 @@ open class SwiftMessagesBridge : NSObject {
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the associated view controller.
-        var presentationController = viewController ?? UIApplication.shared.keyWindow?.play_topViewController
+        var presentationController = viewController ?? UIApplication.shared.delegate?.window??.play_topViewController
         while presentationController?.parent != nil {
             if presentationController is UINavigationController {
                 break
             }
             
-            presentationController = presentationController?.parent;
+            presentationController = presentationController?.parent
         }
         
         if let presentationController = presentationController {

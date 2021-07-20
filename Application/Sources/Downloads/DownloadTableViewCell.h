@@ -5,15 +5,12 @@
 //
 
 #import "Download.h"
-#import "Previewing.h"
-
-#import <MGSwipeTableCell/MGSwipeTableCell.h>
 
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DownloadTableViewCell : MGSwipeTableCell <Previewing>
+@interface DownloadTableViewCell : UITableViewCell
 
 @property (nonatomic, nullable) Download *download;
 

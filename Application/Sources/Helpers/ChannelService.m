@@ -8,9 +8,9 @@
 
 #import "ChannelServiceSetup.h"
 #import "ForegroundTimer.h"
+#import "Reachability.h"
 #import "SRGProgram+PlaySRG.h"
 
-@import FXReachability;
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
@@ -81,24 +81,27 @@
 
 - (id)addObserverForUpdatesWithChannel:(SRGChannel *)channel livestreamUid:(NSString *)livestreamUid block:(ChannelServiceUpdateBlock)block
 {
+    BOOL channelAdded = NO;
+    
     ChannelServiceSetup *setup = [[ChannelServiceSetup alloc] initWithChannel:channel livestreamUid:livestreamUid];
     NSMutableDictionary<NSString *, ChannelServiceUpdateBlock> *channelRegistrations = self.registrations[setup];
     if (! channelRegistrations) {
         channelRegistrations = [NSMutableDictionary dictionary];
         self.registrations[setup] = channelRegistrations;
+        channelAdded = YES;
     }
     
     NSString *identifier = NSUUID.UUID.UUIDString;
     channelRegistrations[identifier] = block;
     
-    // Return data immediately available from the cache, but still trigger an update
+    // Return data immediately available from the cache
     SRGProgramComposition *programComposition = self.programCompositions[setup];
     if (programComposition) {
         block(programComposition);
     }
     
-    // Only force an update the first time a media is added. Other updates will occur perodically afterwards.
-    if (channelRegistrations.count == 1) {
+    // Trigger an update the first time a channel is added. Other updates will occur perodically afterwards.
+    if (channelAdded) {
         [self refreshWithSetup:setup];
     }
     
@@ -162,7 +165,7 @@
 
 - (void)reachabilityDidChange:(NSNotification *)notification
 {
-    if ([FXReachability sharedInstance].reachable) {
+    if (ReachabilityBecameReachable(notification)) {
         [self updateChannels];
     }
 }

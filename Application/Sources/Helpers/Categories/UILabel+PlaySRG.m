@@ -57,7 +57,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object
 {
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     NSString *text = nil;
     NSDate *nowDate = NSDate.date;
@@ -85,26 +85,20 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
 }
 
-- (void)play_setSubtitlesAvailableBadge
-{
-    [self play_setMediaBadgeWithString:NSLocalizedString(@"ST", @"Subtitles short label on media cells")];
-    self.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Subtitled", @"Accessibility label for the subtitled badge");
-}
-
 - (void)play_setWebFirstBadge
 {
     self.backgroundColor = UIColor.srg_blueColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")].uppercaseString;
+    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
+    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")];
 }
 
 #pragma mark Private
 
 - (void)play_displayDurationLabelWithTimeAvailability:(SRGTimeAvailability)timeAvailability duration:(NSTimeInterval)duration isLivestreamOrScheduledLivestream:(BOOL)isLivestreamOrScheduledLivestream isLiveEvent:(BOOL)isLiveEvent
 {
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+    self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
     
     if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
         [self play_displayDurationLabelWithName:NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.") isLive:NO];
@@ -130,25 +124,15 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 
 - (void)play_displayDurationLabelWithName:(NSString *)name isLive:(BOOL)isLive
 {
-    self.backgroundColor = isLive ? UIColor.play_liveRedColor : UIColor.play_blackDurationLabelBackgroundColor;
+    self.backgroundColor = isLive ? UIColor.srg_lightRedColor : UIColor.play_blackDurationLabelBackgroundColor;
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"  %@  ", name].uppercaseString
-                                                                                       attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption],
+                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleCaption],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
     self.attributedText = attributedText.copy;
     self.hidden = NO;
-}
-
-- (void)play_setMediaBadgeWithString:(NSString *)string
-{
-    self.backgroundColor = UIColor.play_whiteBadgeColor;
-    self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
-    self.layer.masksToBounds = YES;
-    self.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", string].uppercaseString;
-    self.textColor = UIColor.blackColor;
 }
 
 @end

@@ -190,7 +190,7 @@
 	<array>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>favorites-35</string>
+			<string>favorites_quick_action</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Favorites</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -198,7 +198,7 @@
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>download-35</string>
+			<string>download_quick_action</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Downloads</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -206,7 +206,7 @@
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>history-35</string>
+			<string>history_quick_action</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>History</string>
 			<key>UIApplicationShortcutItemType</key>
@@ -214,7 +214,7 @@
 		</dict>
 		<dict>
 			<key>UIApplicationShortcutItemIconFile</key>
-			<string>search-35</string>
+			<string>search_quick_action</string>
 			<key>UIApplicationShortcutItemTitle</key>
 			<string>Search</string>
 			<key>UIApplicationShortcutItemType</key>

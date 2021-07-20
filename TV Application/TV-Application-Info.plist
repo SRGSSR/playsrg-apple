@@ -37,7 +37,7 @@
 		<string>arm64</string>
 	</array>
 	<key>UIUserInterfaceStyle</key>
-	<string>$(USER_INTERFACE_STYLE)</string>
+	<string>Dark</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

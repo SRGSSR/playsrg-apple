@@ -5,11 +5,11 @@
 //
 
 import SRGAnalyticsSwiftUI
-import SRGAppearance
+import SRGAppearanceSwift
 import SwiftUI
 
 struct ShowsView: View {
-    @ObservedObject var model = ShowsModel()
+    @StateObject var model = ShowsViewModel()
     
     enum Section: Hashable {
         case shows(character: Character)
@@ -29,7 +29,7 @@ struct ShowsView: View {
         case .loading:
             return [Row(section: .information, items: [.loading])]
         case let .failed(error: error):
-            let item = Content.message(friendlyMessage(for: error), iconName: "error-90")
+            let item = Content.message(friendlyMessage(for: error), iconName: "error-background")
             return [Row(section: .information, items: [item])]
         case let .loaded(alphabeticalShows: alphabeticalShows):
             if !alphabeticalShows.isEmpty {
@@ -38,7 +38,7 @@ struct ShowsView: View {
                 }
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-90")
+                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-background")
                 return [Row(section: .information, items: [item])]
             }
         }
@@ -103,8 +103,7 @@ struct ShowsView: View {
             } supplementaryView: { _, indexPath, _, _ in
                 switch model.state {
                 case .loading, .failed:
-                    Rectangle()
-                        .fill(Color.clear)
+                    Color.clear
                 case let .loaded(alphabeticalShows: alphabeticalShows):
                     let character = alphabeticalShows[indexPath.section].character
                     let title = (character == "#") ? "#0-9" : String(character)
@@ -113,7 +112,7 @@ struct ShowsView: View {
             }
             .synchronizeTabBarScrolling()
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(.play_black))
+            .background(Color.srgGray16)
             .edgesIgnoringSafeArea(.all)
             .onAppear {
                 model.refresh()
@@ -133,7 +132,7 @@ struct ShowsView: View {
         
         var body: some View {
             Text(title)
-                .srgFont(.title2)
+                .srgFont(.H2)
                 .lineLimit(1)
                 .foregroundColor(.white)
                 .opacity(0.8)
@@ -153,7 +152,6 @@ extension ShowsView {
 }
 
 struct ShowsView_Previews: PreviewProvider {
-    
     static var showPreview: SRGShow {
         let asset = NSDataAsset(name: "show-srf-tv")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]

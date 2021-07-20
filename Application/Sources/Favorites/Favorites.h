@@ -41,7 +41,7 @@ OBJC_EXPORT void FavoritesToggleShow(SRGShow * _Nonnull show);
 /**
  *  Get all favorited show URNs.
  */
-OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
+OBJC_EXPORT NSOrderedSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 
 /**
@@ -52,10 +52,8 @@ OBJC_EXPORT NSSet<NSString *> * _Nonnull FavoritesShowURNs(void);
 
 /**
  *  Toggle a subscription for a favorited show.
- *
- *  @discussion The optional view gives the opportunity to display an alert if push notifications are disabled.
  */
-OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show, UIView * _Nullable view);
+OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show);
 
 #endif
 

@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "Radio_icon.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "Radio_icon-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "Radio_icon-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

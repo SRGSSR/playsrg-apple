@@ -42,17 +42,17 @@ NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
 {
     switch (imagePlaceholder) {
         case ImagePlaceholderMedia: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media" ofType:@"pdf"];
             break;
         }
             
         case ImagePlaceholderMediaList: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_media_list-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_media_list" ofType:@"pdf"];
             break;
         }
             
         case ImagePlaceholderNotification: {
-            return [NSBundle.mainBundle pathForResource:@"placeholder_notification-180" ofType:@"pdf"];
+            return [NSBundle.mainBundle pathForResource:@"placeholder_notification" ofType:@"pdf"];
             break;
         }
             
@@ -67,12 +67,12 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
 {
     switch (youthProtectionColor) {
         case SRGYouthProtectionColorYellow: {
-            return [UIImage imageNamed:@"youth_protection_yellow-18"];
+            return [UIImage imageNamed:@"youth_protection_yellow"];
             break;
         }
             
         case SRGYouthProtectionColorRed: {
-            return [UIImage imageNamed:@"youth_protection_red-18"];
+            return [UIImage imageNamed:@"youth_protection_red"];
             break;
         }
             
@@ -89,18 +89,18 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
 {
     switch (blockingReason) {
         case SRGBlockingReasonGeoblocking: {
-            return [UIImage imageNamed:@"geoblocked-25"];
+            return [UIImage imageNamed:@"geoblocked"];
             break;
         }
             
         case SRGBlockingReasonLegal: {
-            return [UIImage imageNamed:@"legal-25"];
+            return [UIImage imageNamed:@"legal"];
             break;
         }
             
         case SRGBlockingReasonAgeRating12:
         case SRGBlockingReasonAgeRating18: {
-            return [UIImage imageNamed:@"age_rating-25"];
+            return [UIImage imageNamed:@"age_rating"];
             break;
         }
             
@@ -112,7 +112,7 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
         }
             
         default: {
-            return [UIImage imageNamed:@"generic_blocked-25"];
+            return [UIImage imageNamed:@"generic_blocked"];
             break;
         }
     }

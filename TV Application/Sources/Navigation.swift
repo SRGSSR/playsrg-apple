@@ -6,6 +6,7 @@
 
 import Combine
 import SRGAnalytics
+import SRGAppearanceSwift
 import TvOSTextViewer
 import SwiftUI
 
@@ -43,13 +44,13 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
                 labels.value = upcomingMedia.urn
                 
                 if let playlist = controller.playlistDataSource as? Playlist {
-                    labels.extraValue1 = playlist.recommendationUid;
+                    labels.extraValue1 = playlist.recommendationUid
                 }
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
             }
             .store(in: &cancellables)
         
-        let position = HistoryResumePlaybackPositionForMedia(media)
+        let position = HistoryResumePlaybackPositionForMediaMetadata(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
         present(letterboxViewController, animated: animated) {
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
@@ -60,15 +61,22 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let hostController = UIHostingController(rootView: ShowDetailView(show: show))
-    present(hostController, animated: animated)
+    let showViewController = SectionViewController(section: .configured(.show(show)))
+    present(showViewController, animated: animated)
 }
 
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let hostController = UIHostingController(rootView: TopicDetailView(topic: topic))
-    present(hostController, animated: animated)
+    let pageViewController = PageViewController(id: .topic(topic: topic))
+    present(pageViewController, animated: animated)
+}
+
+func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true) {
+    guard !isPresenting else { return }
+    
+    let sectionViewController = SectionViewController(section: section, filter: filter)
+    present(sectionViewController, animated: animated)
 }
 
 func showText(_ text: String, animated: Bool = true) {
@@ -78,15 +86,15 @@ func showText(_ text: String, animated: Bool = true) {
     textViewController.text = text
     textViewController.textAttributes = [
         .foregroundColor: UIColor.white,
-        .font: SRGFont.uiFont(.body)
+        .font: SRGFont.font(.body) as UIFont
     ]
     textViewController.textEdgeInsets = UIEdgeInsets(top: 100, left: 250, bottom: 100, right: 250)
     textViewController.modalPresentationStyle = .overFullScreen
     present(textViewController, animated: animated)
 }
 
-fileprivate func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    guard let topViewController = UIApplication.shared.keyWindow?.topViewController else { return }
+private func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
+    guard let topViewController = UIApplication.shared.delegate?.window??.topViewController else { return }
     
     isPresenting = true
     topViewController.present(viewController, animated: animated) {
@@ -97,11 +105,11 @@ fileprivate func present(_ viewController: UIViewController, animated: Bool, com
     }
 }
 
-fileprivate func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
+private func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
     controller.serviceURL = SRGDataProvider.current?.serviceURL
     controller.globalParameters = SRGDataProvider.current?.globalParameters
     
     let applicationConfiguration = ApplicationConfiguration.shared
-    controller.endTolerance = applicationConfiguration.endTolerance;
-    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio;
+    controller.endTolerance = applicationConfiguration.endTolerance
+    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio
 }

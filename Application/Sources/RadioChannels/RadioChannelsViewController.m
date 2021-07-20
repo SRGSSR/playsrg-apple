@@ -8,9 +8,9 @@
 
 #import "ApplicationSettings.h"
 #import "GoogleCastBarButtonItem.h"
-#import "HomeViewController.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 
 @import libextobjc;
 @import SRGAppearance;
@@ -34,9 +34,8 @@
     
     NSMutableArray<UIViewController *> *viewControllers = [NSMutableArray array];
     for (RadioChannel *radioChannel in radioChannels) {
-        ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-        HomeViewController *viewController = [[HomeViewController alloc] initWithApplicationSectionInfo:applicationSectionInfo homeSections:radioChannel.homeSections];
-        viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannel.name image:RadioChannelLogo22Image(radioChannel) tag:0];
+        UIViewController *viewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
+        viewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannel.name image:RadioChannelLogoImage(radioChannel) tag:0];
         [viewControllers addObject:viewController];
     }
     
@@ -66,8 +65,8 @@
 {
     [super didDisplayViewController:viewController animated:animated];
     
-    HomeViewController *homeViewController = (HomeViewController *)viewController;
-    RadioChannel *radioChannel = homeViewController.radioChannel;
+    PageViewController *pageViewController = (PageViewController *)viewController;
+    RadioChannel *radioChannel = pageViewController.radioChannel;
     self.subtitle = radioChannel.name;
     
     ApplicationSettingSetLastOpenedRadioChannel(radioChannel);
@@ -134,7 +133,7 @@
         return NO;
     }
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(HomeViewController.new, radioChannel), applicationSectionInfo.radioChannel];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(PageViewController.new, radioChannel), applicationSectionInfo.radioChannel];
     UIViewController *radioChannelViewController = [self.viewControllers filteredArrayUsingPredicate:predicate].firstObject;
     
     if (! radioChannelViewController || ! [radioChannelViewController conformsToProtocol:@protocol(PlayApplicationNavigation)]) {

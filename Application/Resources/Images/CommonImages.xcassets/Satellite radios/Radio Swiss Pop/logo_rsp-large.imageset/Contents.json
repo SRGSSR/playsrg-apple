@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RadioSwissPop.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RadioSwissPop-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "RadioSwissPop_big.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

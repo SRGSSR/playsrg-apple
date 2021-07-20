@@ -13,17 +13,18 @@
 #import "NSBundle+PlaySRG.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
+#import "PlaySRG-Swift.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "WatchLater.h"
-#import "WatchLaterTableViewCell.h"
 
 @import libextobjc;
 @import SRGAnalytics;
+@import SRGAppearance;
 @import SRGUserData;
 
-@interface WatchLaterViewController () <WatchLaterTableViewCellDelegate>
+@interface WatchLaterViewController ()
 
 @property (nonatomic) UIBarButtonItem *defaultLeftBarButtonItem;
 
@@ -45,7 +46,7 @@
 - (void)loadView
 {
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    view.backgroundColor = UIColor.play_blackColor;
+    view.backgroundColor = UIColor.srg_gray16Color;
         
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
@@ -63,11 +64,9 @@
     
     self.emptyTableTitle = NSLocalizedString(@"No content", @"Text displayed when no media added to the later list");
     self.emptyTableSubtitle = (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) ? NSLocalizedString(@"You can press on a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device supports 3D touch") : NSLocalizedString(@"You can tap and hold a content to add it to \"Later\"", @"Hint displayed when no media added to the later list and the device does not support 3D touch");
-    self.emptyCollectionImage = [UIImage imageNamed:@"watch_later-90"];
+    self.emptyCollectionImage = [UIImage imageNamed:@"watch_later_background"];
     
-    NSString *cellIdentifier = NSStringFromClass(WatchLaterTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableMediaCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(playlistEntriesDidChange:)
@@ -148,11 +147,7 @@
 - (void)updateInterfaceForEditionAnimated:(BOOL)animated
 {
     if (self.items.count != 0) {
-        UIBarButtonItem *rightBarButtonItem = ! self.tableView.editing ? self.editButtonItem : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button")
-                                                                                                                                style:UIBarButtonItemStylePlain
-                                                                                                                               target:self
-                                                                                                                               action:@selector(toggleEdition:)];
-        [self.navigationItem setRightBarButtonItem:rightBarButtonItem animated:animated];
+        [self.navigationItem setRightBarButtonItem:self.editButtonItem animated:animated];
     }
     else {
         [self.navigationItem setRightBarButtonItem:nil animated:animated];
@@ -163,7 +158,7 @@
 
 - (UIEdgeInsets)play_paddingContentInsets
 {
-    return LayoutStandardTableViewPaddingInsets;
+    return LayoutTableViewPaddingContentInsets;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol
@@ -187,24 +182,23 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(WatchLaterTableViewCell.class) forIndexPath:indexPath];
+    return [tableView dequeueReusableMediaCellFor:indexPath];
 }
 
 #pragma mark UITableViewDelegate protocol
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return LayoutTableTopAlignedCellHeight(LayoutTableViewCellStandardHeight, LayoutStandardMargin, indexPath.row, self.items.count);
+    return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(WatchLaterTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell<MediaSettable> *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // FIXME: Work around crash. To reproduce, logout with the watch later view visible, with a slow network (repeat a few
     //        times to trigger the crash). For reasons yet to be determined, this method is called with an index path, while
     //        items is empty. This of course crashes.
     if (indexPath.row < self.items.count) {
         cell.media = self.items[indexPath.row];
-        cell.cellDelegate = self;
     }
 }
 
@@ -222,23 +216,29 @@
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterOpenMedia labels:labels];
 }
 
-#pragma mark WatchLaterTableViewCellDelegate protocol
-
-- (void)watchLaterTableViewCell:(WatchLaterTableViewCell *)watchLaterTableViewCell deletePlaylistEntryForMedia:(SRGMedia *)media
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (! error) {
-                [self hideItems:@[media]];
-                [self updateInterfaceForEditionAnimated:YES];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = media.URN;
-                labels.source = AnalyticsSourceSwipe;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
-            }
-        });
+    UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        SRGMedia *media = self.items[indexPath.row];
+        
+        [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:@[media.URN] fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (! error) {
+                    [self hideItems:@[media]];
+                    [self updateInterfaceForEditionAnimated:YES];
+                }
+            });
+        }];
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.value = media.URN;
+        labels.source = AnalyticsSourceSwipe;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleWatchLaterRemove labels:labels];
+        
+        completionHandler(YES);
     }];
+    deleteAction.image = [UIImage imageNamed:@"delete"];
+    return [UISwipeActionsConfiguration configurationWithActions:@[deleteAction]];
 }
 
 #pragma mark Actions
@@ -314,24 +314,21 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)toggleEdition:(id)sender
-{
-    BOOL editing = !self.tableView.isEditing;
-    [self setEditing:editing animated:YES];
-}
-
 #pragma mark Edit mode
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
     [super setEditing:editing animated:animated];
+    
+    [self.tableView setEditing:NO animated:animated];
     [self.tableView setEditing:editing animated:animated];
     
     if (editing) {
         self.defaultLeftBarButtonItem = self.navigationItem.leftBarButtonItem;
+        self.editButtonItem.title = NSLocalizedString(@"Cancel", @"Title of a cancel button");
     }
     
-    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete-22"]
+    UIBarButtonItem *deleteBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"]
                                                                             style:UIBarButtonItemStylePlain
                                                                            target:self
                                                                            action:@selector(removeWatchLater:)];

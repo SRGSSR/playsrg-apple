@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "Open-favorites_35.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "Open-favorites_35-1.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

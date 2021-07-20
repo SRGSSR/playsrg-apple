@@ -6,8 +6,9 @@
 
 #import "CollectionLoadMoreFooterView.h"
 
-#import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
+
+@import SRGAppearance;
 
 @implementation CollectionLoadMoreFooterView
 
@@ -17,7 +18,7 @@
     
     self.backgroundColor = UIColor.clearColor;
     
-    UIImageView *loadingImageView = [UIImageView play_loadingImageView48WithTintColor:UIColor.play_lightGrayColor];
+    UIImageView *loadingImageView = [UIImageView play_loadingImageViewWithTintColor:UIColor.srg_grayC7Color];
     loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:loadingImageView];
     

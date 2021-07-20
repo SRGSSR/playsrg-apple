@@ -1,0 +1,26 @@
+{
+  "id": "3608517",
+  "mediaType": "VIDEO",
+  "vendor": "RTS",
+  "urn": "urn:rts:video:3608517",
+  "title": "EN DIRECT - L'arrivée du président américain Joe Biden à Genève",
+  "imageUrl": "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/e551ed52-9334-438a-a7ca-6a5f85f45b94.jpeg",
+  "imageTitle": "RTS Deux, qui remplace TSR2. [RTS]",
+  "type": "LIVESTREAM",
+  "date": "2011-11-25T14:22:50Z",
+  "duration": 0,
+  "assignedBy": "EDITOR",
+  "playableAbroad": false,
+  "subtitlesAvailable": false,
+  "channel": {
+    "id": "d7dfff28deee44e1d3c49a3d37d36d492b29671b",
+    "vendor": "RTS",
+    "urn": "urn:rts:channel:tv:d7dfff28deee44e1d3c49a3d37d36d492b29671b",
+    "title": "RTS Deux",
+    "imageUrl": "https://ws.srf.ch/asset/image/audio/8b32fd87-459e-40f1-9519-ba0cbb01f34e/NOT_SPECIFIED.jpg",
+    "imageTitle": "srg_responsive-rts-2",
+    "transmission": "TV"
+  },
+  "presentation": "DEFAULT",
+  "aspectRatio": "16:9"
+}

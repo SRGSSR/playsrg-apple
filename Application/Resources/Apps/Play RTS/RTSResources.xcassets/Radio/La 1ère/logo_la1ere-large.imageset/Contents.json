@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "RTS_radio1-1.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "RTS_radio1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "SecondaryLogo - Premiere_60.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

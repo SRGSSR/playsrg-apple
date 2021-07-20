@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "watchitlateron_22.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "watchitlateron_22-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "watchlater_full-38.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

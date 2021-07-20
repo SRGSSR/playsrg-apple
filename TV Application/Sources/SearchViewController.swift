@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 class SearchViewController: UIViewController {
-    private var model = SearchResultsModel()
+    private var model = SearchResultsViewModel()
     
     private let searchController: UISearchController
     private let searchContainerViewController: UISearchContainerViewController

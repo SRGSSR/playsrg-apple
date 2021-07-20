@@ -10,9 +10,8 @@
 #import "ApplicationConfiguration.h"
 #import "ApplicationSection.h"
 #import "Calendar.h"
-#import "DailyMediasViewController.h"
-#import "MediaCollectionViewCell.h"
 #import "NSBundle+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -21,6 +20,7 @@
 @import libextobjc;
 @import MAKVONotificationCenter;
 @import SRGAppearance;
+@import SRGDataProviderModel;
 
 @interface CalendarViewController ()
 
@@ -32,7 +32,7 @@
 @property (nonatomic, weak) IBOutlet Calendar *calendar;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
 
-@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator API_AVAILABLE(ios(10.0));
+@property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
 @property (nonatomic, weak) UIPanGestureRecognizer *scopeGestureRecognizer;
 
@@ -96,7 +96,7 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    self.view.backgroundColor = UIColor.play_blackColor;
+    self.view.backgroundColor = UIColor.srg_gray16Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -143,8 +143,8 @@
     calendarAppearance.titleSelectionColor = [UIColor.whiteColor colorWithAlphaComponent:0.8f];
     
     // Dot colors
-    calendarAppearance.selectionColor = UIColor.play_redColor;
-    calendarAppearance.todayColor = [UIColor.play_redColor colorWithAlphaComponent:0.4f];
+    calendarAppearance.selectionColor = UIColor.srg_redColor;
+    calendarAppearance.todayColor = [UIColor.srg_redColor colorWithAlphaComponent:0.4f];
     
     [self updateFonts];
     
@@ -211,13 +211,13 @@
     FSCalendarAppearance *calendarAppearance = self.calendar.appearance;
     
     // Month / year
-    calendarAppearance.headerTitleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.headerTitleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Week days
-    calendarAppearance.weekdayFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.weekdayFont = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     // Days
-    calendarAppearance.titleFont = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    calendarAppearance.titleFont = [SRGFont fontWithStyle:SRGFontStyleBody];
 }
 
 #pragma mark Status bar
@@ -234,7 +234,7 @@
     // Always scroll to the date, but does not switch the view controller if it hasn't changed
     [self.calendar selectDate:date];
     
-    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)self.pageViewController.viewControllers.firstObject;
+    UIViewController<DailyMediasViewController> *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
     
     UIPageViewControllerNavigationDirection navigationDirection = UIPageViewControllerNavigationDirectionForward;
     if (currentDailyMediasViewController) {
@@ -247,7 +247,7 @@
         }
     }
     
-    DailyMediasViewController *newDailyMediasViewController = [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    UIViewController *newDailyMediasViewController = [SectionViewController viewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
     [self.pageViewController setViewControllers:@[newDailyMediasViewController] direction:navigationDirection animated:animated completion:nil];
     
     [self setNavigationBarItemsHidden:[date isEqualToDate:self.calendar.today]];
@@ -302,7 +302,7 @@
 
 - (void)calendarCurrentPageDidChange:(FSCalendar *)calendar
 {
-    DailyMediasViewController *dailyMediasViewController = (DailyMediasViewController *)self.pageViewController.viewControllers.firstObject;
+    UIViewController<DailyMediasViewController> *dailyMediasViewController = self.pageViewController.viewControllers.firstObject;
     NSCalendarUnit unitGranularity = (calendar.scope == FSCalendarScopeMonth) ? NSCalendarUnitMonth : NSCalendarUnitWeekOfYear;
     
     // Hidden if in the same page as today and current date is not today
@@ -318,7 +318,7 @@
     NSDate *startDate = [self minimumDateForCalendar:calendar];
     NSDate *endDate = [self maximumDateForCalendar:calendar];
     NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
-    return [dateInterval containsDate:date] ? UIColor.play_lightGrayColor : [UIColor.play_lightGrayColor colorWithAlphaComponent:0.4f];
+    return [dateInterval containsDate:date] ? UIColor.srg_grayC7Color : [UIColor.srg_grayC7Color colorWithAlphaComponent:0.4f];
 }
 
 #pragma mark ContainerContentInsets protocol
@@ -349,8 +349,6 @@
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
-    DailyMediasViewController *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
-    
     // Disable the gesture altogether when VoiceOver is running
     if (UIAccessibilityIsVoiceOverRunning()) {
         return NO;
@@ -382,17 +380,18 @@
     // collection is bouncing at its top). If implemented with less care, pull-to-refresh would have been possible
     // only when the calendar is in monthly view, which is impractical on small screens
     else {
-        UICollectionView *collectionView = currentDailyMediasViewController.collectionView;
-        UIEdgeInsets contentInsets = ContentInsetsForScrollView(collectionView);
-        return velocity.y > 0 && (collectionView.contentOffset.y == -contentInsets.top);
+        UIViewController<DailyMediasViewController> *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
+        UIScrollView *scrollView = currentDailyMediasViewController.scrollView;
+        UIEdgeInsets contentInsets = ContentInsetsForScrollView(scrollView);
+        return velocity.y > 0 && (scrollView.contentOffset.y - scrollView.contentInset.top == -contentInsets.top);
     }
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(nonnull UIGestureRecognizer *)otherGestureRecognizer
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    DailyMediasViewController *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
-    UICollectionView *collectionView = currentDailyMediasViewController.collectionView;
-    return otherGestureRecognizer.view == collectionView;
+    UIViewController<DailyMediasViewController> *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
+    UIScrollView *scrollView = currentDailyMediasViewController.scrollView;
+    return otherGestureRecognizer.view == scrollView && [otherGestureRecognizer isKindOfClass:UIPanGestureRecognizer.class];
 }
 
 #pragma mark UIPageViewControllerDataSource protocol
@@ -402,14 +401,14 @@
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = -1;
     
-    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)viewController;
+    UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)viewController;
     NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
-    return [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    return [SectionViewController viewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
 }
 
 - (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
 {
-    DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)viewController;
+    UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)viewController;
     if ([currentDailyMediasViewController.date isEqualToDate:self.calendar.today]) {
         return nil;
     }
@@ -418,14 +417,14 @@
     dateComponents.day = 1;
     
     NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
-    return [[DailyMediasViewController alloc] initWithDate:date radioChannel:self.radioChannel];
+    return [SectionViewController viewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
 }
 
 #pragma mark UIPageViewControllerDelegate protocol
 
 - (void)pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray<UIViewController *> *)pendingViewControllers
 {
-    DailyMediasViewController *newDailyMediasViewController = (DailyMediasViewController *)pendingViewControllers.firstObject;
+    UIViewController<DailyMediasViewController> *newDailyMediasViewController = (UIViewController<DailyMediasViewController> *)pendingViewControllers.firstObject;
     [self.calendar selectDate:newDailyMediasViewController.date];
 }
 
@@ -434,12 +433,12 @@
     NSDate *date = nil;
     
     if (!completed) {
-        DailyMediasViewController *previousDailyMediasViewController = (DailyMediasViewController *)previousViewControllers.firstObject;
+        UIViewController<DailyMediasViewController> *previousDailyMediasViewController = (UIViewController<DailyMediasViewController> *)previousViewControllers.firstObject;
         date = previousDailyMediasViewController.date;
         [self.calendar selectDate:date];
     }
     else {
-        DailyMediasViewController *currentDailyMediasViewController = (DailyMediasViewController *)pageViewController.viewControllers.firstObject;
+        UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)pageViewController.viewControllers.firstObject;
         date = currentDailyMediasViewController.date;
     }
     

@@ -6,7 +6,6 @@
 
 #import "HomeSection.h"
 #import "RadioChannel.h"
-#import "TopicSection.h"
 #import "TVChannel.h"
 
 @import CoreMedia;
@@ -54,32 +53,20 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
-@property (nonatomic, readonly, getter=areMoreEpisodesHidden) BOOL moreEpisodesHidden;
-
+@property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
 
-@property (nonatomic, readonly) NSArray<NSNumber *> *videoHomeSections;                 // wrap `HomeSection` values
 @property (nonatomic, readonly) NSArray<NSNumber *> *liveHomeSections;                  // wrap `HomeSection` values
 
-@property (nonatomic, readonly) BOOL tvTrendingEpisodesOnly;
-@property (nonatomic, readonly, nullable) NSNumber *tvTrendingEditorialLimit;
-@property (nonatomic, readonly) BOOL tvTrendingPrefersHeroStage;
-
-@property (nonatomic, readonly, getter=isTvFeaturedHomeSectionHeaderHidden) BOOL tvFeaturedHomeSectionHeaderHidden;
-
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
-
-@property (nonatomic, readonly) NSArray<NSNumber *> *topicSections;                     // wrap `TopicSection` values
-@property (nonatomic, readonly) NSArray<NSNumber *> *topicSectionsWithSubtopics;        // wrap `TopicSection` values
 
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 @property (nonatomic, readonly) NSArray<RadioChannel *> *satelliteRadioChannels;
 
-@property (nonatomic, readonly, getter=isRadioFeaturedHomeSectionHeaderHidden) BOOL radioFeaturedHomeSectionHeaderHidden;
-
 @property (nonatomic, readonly) NSUInteger pageSize;                                    // page size to be used in general throughout the app
+@property (nonatomic, readonly) NSUInteger detailPageSize;                              // page size to be used in general throughout the app
 
 @property (nonatomic, readonly, getter=isContinuousPlaybackAvailable) BOOL continuousPlaybackAvailable;
 
@@ -92,23 +79,21 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (nonatomic, readonly) NSArray<NSString *> *hiddenOnboardingUids;
 
-@property (nonatomic, readonly, getter=isLogoutMenuEnabled) BOOL logoutMenuEnabled;
-
 @property (nonatomic, readonly, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, readonly, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
 @property (nonatomic, readonly, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
-- (nullable RadioChannel *)radioChannelForUid:(NSString *)uid;
-- (nullable TVChannel *)tvChannelForUid:(NSString *)uid;
-- (nullable __kindof Channel *)channelForUid:(NSString *)uid;
+- (nullable RadioChannel *)radioChannelForUid:(nullable NSString *)uid;
+- (nullable TVChannel *)tvChannelForUid:(nullable NSString *)uid;
+- (nullable __kindof Channel *)channelForUid:(nullable NSString *)uid;
 
 /**
  *  URLs to be used for sharing
  */
-- (nullable NSURL *)sharingURLForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
-- (nullable NSURL *)sharingURLForShow:(SRGShow *)show;
-- (nullable NSURL *)sharingURLForModule:(SRGModule *)module;
+- (nullable NSURL *)sharingURLForMedia:(nullable SRGMedia *)media atTime:(CMTime)time; // Use kCMTimeZero to start at the default location.
+- (nullable NSURL *)sharingURLForShow:(nullable SRGShow *)show;
+- (nullable NSURL *)sharingURLForContentSection:(nullable SRGContentSection *)contentSection;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 

@@ -8,6 +8,7 @@
 
 #import "Banner.h"
 #import "CollectionLoadMoreFooterView.h"
+#import "PlaySRG-Swift.h"
 #import "RefreshControl.h"
 #import "UIColor+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
@@ -72,7 +73,7 @@
     
     // DZNEmptyDataSet stretches custom views horizontally. Ensure the image stays centered and does not get
     // stretched
-    self.loadingImageView = [UIImageView play_loadingImageView90WithTintColor:UIColor.play_lightGrayColor];
+    self.loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
     self.loadingImageView.contentMode = UIViewContentModeCenter;
 }
 
@@ -202,8 +203,8 @@
 - (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView
 {
     // Remark: No test for self.loading since a custom view is used in such cases
-    NSDictionary *attributes = @{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle],
-                                  NSForegroundColorAttributeName : UIColor.play_lightGrayColor };
+    NSDictionary *attributes = @{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH2],
+                                  NSForegroundColorAttributeName : UIColor.srg_grayC7Color };
     
     if (self.lastRequestError) {
         // Multiple errors. Pick the first ones
@@ -224,8 +225,8 @@
     NSString *description = (self.lastRequestError == nil) ? self.emptyCollectionSubtitle : NSLocalizedString(@"Pull to reload", @"Text displayed to inform the user she can pull a list to reload it");
     if (description) {
         return [[NSAttributedString alloc] initWithString:description
-                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }];
+                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleH4],
+                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color }];
     }
     else {
         return nil;
@@ -237,7 +238,7 @@
     // Remark: No test for self.loading since a custom view is used in such cases. An error image is only displayed
     // when an empty image has been set (so that the empty layout always has images or not)
     if (self.lastRequestError && self.emptyCollectionImage) {
-        return [UIImage imageNamed:@"error-90"];
+        return [UIImage imageNamed:@"error-background"];
     }
     else {
         return self.emptyCollectionImage;
@@ -246,7 +247,7 @@
 
 - (UIColor *)imageTintColorForEmptyDataSet:(UIScrollView *)scrollView
 {
-    return UIColor.play_lightGrayColor;
+    return UIColor.srg_grayC7Color;
 }
 
 - (BOOL)emptyDataSetShouldAllowScroll:(UIScrollView *)scrollView
@@ -300,6 +301,38 @@
     else {
         return CGSizeZero;
     }
+}
+
+- (UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath point:(CGPoint)point
+{
+    return [ContextMenuObjC configurationFor:self.items[indexPath.row] at:indexPath in:self];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator
+{
+    [ContextMenuObjC commitPreviewIn:self animator:animator];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration
+{
+    return [self previewForConfiguration:configuration inCollectionView:collectionView];
+}
+
+- (UITargetedPreview *)previewForConfiguration:(UIContextMenuConfiguration *)configuration inCollectionView:(UICollectionView *)collectionView
+{
+    UIView *interactionView = [ContextMenuObjC interactionViewInCollectionView:collectionView with:configuration];
+    if (! interactionView) {
+        return nil;
+    }
+    
+    UIPreviewParameters *parameters = [[UIPreviewParameters alloc] init];
+    parameters.backgroundColor = self.view.backgroundColor;
+    return [[UITargetedPreview alloc] initWithView:interactionView parameters:parameters];
 }
 
 #pragma mark UIScrollViewDelegate protocol

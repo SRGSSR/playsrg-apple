@@ -191,11 +191,11 @@
 
 - (void)reloadData
 {
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
     SRGChannel *channel = self.programComposition.channel;
     if (channel) {
-        self.liveLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+        self.liveLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         if (! self.controller || self.controller.live) {
             self.titleLabel.numberOfLines = 1;
             self.liveLabel.hidden = NO;
@@ -226,7 +226,7 @@
     }
     
     BOOL isLiveOnly = (self.controller.mediaPlayerController.streamType == SRGMediaPlayerStreamTypeLive);
-    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop-50"] : [UIImage imageNamed:@"pause-50"];
+    self.playbackButton.pauseImage = isLiveOnly ? [UIImage imageNamed:@"stop"] : [UIImage imageNamed:@"pause"];
     
     [self updateProgress];
 }
@@ -368,7 +368,7 @@
         return;
     }
     
-    SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
+    SRGPosition *position = HistoryResumePlaybackPositionForMediaMetadata(media);
     SRGLetterboxController *controller = self.controller;
     
     // If a controller is readily available, use it

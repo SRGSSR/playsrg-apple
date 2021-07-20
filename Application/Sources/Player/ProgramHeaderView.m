@@ -32,7 +32,7 @@
     _title = title;
     
     self.titleLabel.text = title;
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleTitle];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
 }
 
 #pragma mark Accessibility

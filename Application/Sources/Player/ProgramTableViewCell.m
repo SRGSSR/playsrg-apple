@@ -47,9 +47,9 @@
     self.thumbnailWrapperView.layer.masksToBounds = YES;
     
     self.disabledOverlayView.hidden = YES;
-    self.progressView.progressTintColor = UIColor.play_progressRedColor;
+    self.progressView.progressTintColor = UIColor.srg_lightRedColor;
     
-    [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+    [self.waveformImageView play_setWaveformAnimationWithTintColor:UIColor.whiteColor];
     self.waveformImageView.hidden = YES;
 }
 
@@ -85,17 +85,17 @@
     self.playing = playing;
     
     self.titleLabel.text = program.title;
-    self.titleLabel.font = [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleBody];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
     
-    self.subtitleLabel.font = [UIFont srg_lightFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle];
+    self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
     
     if (mediaType == SRGMediaTypeVideo) {
-        [self.waveformImageView play_setPlayAnimation34WithTintColor:UIColor.whiteColor];
+        [self.waveformImageView play_setPlayAnimationWithTintColor:UIColor.whiteColor];
     }
     else {
-        [self.waveformImageView play_setWaveformAnimation34WithTintColor:UIColor.whiteColor];
+        [self.waveformImageView play_setWaveformAnimationWithTintColor:UIColor.whiteColor];
     }
     
     [self updateWaveformAnimation];
@@ -132,10 +132,10 @@
         self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         
-        self.titleLabel.textColor = UIColor.play_grayColor;
+        self.titleLabel.textColor = UIColor.srg_gray96Color;
         
         self.subtitleLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next, at %@", @"Introductory time for next program information"), [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate]];
-        self.subtitleLabel.textColor = UIColor.play_grayColor;
+        self.subtitleLabel.textColor = UIColor.srg_gray96Color;
         
         self.disabledOverlayView.hidden = NO;
         self.userInteractionEnabled = NO;

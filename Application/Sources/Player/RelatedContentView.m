@@ -34,7 +34,7 @@
 {
     [super awakeFromNib];
     
-    self.backgroundColor = UIColor.play_cardGrayBackgroundColor;
+    self.backgroundColor = UIColor.srg_gray23Color;
     self.layer.cornerRadius = LayoutStandardViewCornerRadius;
 }
 
@@ -45,14 +45,14 @@
     _relatedContent = relatedContent;
     
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:relatedContent.title
-                                                                                       attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
+                                                                                       attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
                                                                                                      NSForegroundColorAttributeName : UIColor.whiteColor }];
     
     NSString *text = relatedContent.lead ?: relatedContent.summary;
     if (text.length != 0) {
         [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
-                                                                               attributes:@{ NSFontAttributeName : [UIFont srg_mediumFontWithTextStyle:SRGAppearanceFontTextStyleSubtitle],
-                                                                                             NSForegroundColorAttributeName : UIColor.play_lightGrayColor }]];
+                                                                               attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
+                                                                                             NSForegroundColorAttributeName : UIColor.srg_grayC7Color }]];
     }
     
     self.textLabel.attributedText = attributedText.copy;

@@ -178,25 +178,25 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
         // afterwards, so that the associated performance impact is mitigated.
         dispatch_async(dispatch_get_main_queue(), ^{
             GCKUIStyleAttributes *styleAttributes = [GCKUIStyle sharedInstance].castViews;
-            styleAttributes.backgroundColor = UIColor.play_blackColor;
+            styleAttributes.backgroundColor = UIColor.srg_gray16Color;
             styleAttributes.headingTextColor = UIColor.whiteColor;
             styleAttributes.bodyTextColor = UIColor.whiteColor;
             styleAttributes.captionTextColor = UIColor.whiteColor;
             styleAttributes.iconTintColor = UIColor.whiteColor;
             
-            styleAttributes.headingTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
-            styleAttributes.bodyTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-            styleAttributes.buttonTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleBody];
-            styleAttributes.captionTextFont = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleCaption];
+            styleAttributes.headingTextFont = [SRGFont fontWithStyle:SRGFontStyleH4];
+            styleAttributes.bodyTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
+            styleAttributes.buttonTextFont = [SRGFont fontWithStyle:SRGFontStyleBody];
+            styleAttributes.captionTextFont = [SRGFont fontWithStyle:SRGFontStyleCaption];
             
-            styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitles_off-22"];
-            styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"forward-50"];
-            styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"backward-50"];
-            styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute-22"];
-            styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute-22"];
-            styleAttributes.pauseImage = [UIImage imageNamed:@"pause-50"];
-            styleAttributes.playImage = [UIImage imageNamed:@"play-50"];
-            styleAttributes.stopImage = [UIImage imageNamed:@"pause-50"];
+            styleAttributes.closedCaptionsImage = [UIImage imageNamed:@"subtitle_tracks"];
+            styleAttributes.forward30SecondsImage = [UIImage imageNamed:@"skip_forward"];
+            styleAttributes.rewind30SecondsImage = [UIImage imageNamed:@"skip_backward"];
+            styleAttributes.muteOffImage = [UIImage imageNamed:@"player_mute"];
+            styleAttributes.muteOnImage = [UIImage imageNamed:@"player_unmute"];
+            styleAttributes.pauseImage = [UIImage imageNamed:@"pause"];
+            styleAttributes.playImage = [UIImage imageNamed:@"play"];
+            styleAttributes.stopImage = [UIImage imageNamed:@"pause"];
             // The subtitlesTrackImage property is buggy (the original icon is displayed when highlighted)
         });
     }
@@ -216,7 +216,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             
             // Transfer local playback to Google Cast
             if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-                [UIApplication.sharedApplication.keyWindow.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                [UIApplication.sharedApplication.delegate.window.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                     if (playerType == PlayerTypeGoogleCast) {
                         [service disable];
                         [controller reset];
@@ -230,7 +230,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 // Perform manual tracking of Google cast views when the application returns from background
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }

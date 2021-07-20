@@ -17,7 +17,9 @@ AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
+AnalyticsPageLevel const AnalyticsPageLevelSection = @"section";
 AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
+AnalyticsPageLevel const AnalyticsPageLevelTopic = @"topic";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
@@ -31,6 +33,7 @@ AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
 AnalyticsPageTitle const AnalyticsPageTitleHome = @"home";
 AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";
 AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
+AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodesFromFavorites = @"latest episodes from favorites";
 AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
 AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
 AnalyticsPageTitle const AnalyticsPageTitleLogin = @"login";
@@ -40,15 +43,13 @@ AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
 AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
+AnalyticsPageTitle const AnalyticsPageTitleResumePlayback = @"resume playback";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
-AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring = @"soon expiring";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
-AnalyticsPageTitle const AnalyticsPageTitleTrending = @"trending";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
-AnalyticsPageTitle const AnalyticsPageTitleWebFirst = @"web first";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
@@ -67,8 +68,8 @@ AnalyticsTitle const AnalyticsTitleOpenURL = @"open_url";
 AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleQuickActions = @"quick_actions";
 AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
-AnalyticsTitle const AnalyticsTitleSharingModule = @"module_share";
 AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
+AnalyticsTitle const AnalyticsTitleSharingSection = @"section_share";
 AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
 AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
 AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite_add";
@@ -114,48 +115,6 @@ AnalyticsType const AnalyticsTypeActionLogin = @"login";
 AnalyticsType const AnalyticsTypeActionLogout = @"logout";
 AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
 
-AnalyticsValue const AnalyticsTypeValueSharingContent = @"content";
-AnalyticsValue const AnalyticsTypeValueSharingContentAtTime = @"content_at_time";
-AnalyticsValue const AnalyticsTypeValueSharingCurrentClip = @"current_clip";
-
-AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(HomeSectionTVTrending) : AnalyticsPageTitleTrending,
-                      @(HomeSectionTVLive) : AnalyticsPageTitleTV,
-                      @(HomeSectionTVLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionTVWebFirst) : AnalyticsPageTitleWebFirst,
-                      @(HomeSectionTVMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionTVSoonExpiring) : AnalyticsPageTitleSoonExpiring,
-                      @(HomeSectionTVScheduledLivestreams) : AnalyticsPageTitleEvents,
-                      @(HomeSectionTVLiveCenter) : AnalyticsPageTitleSports,
-                      @(HomeSectionTVFavoriteShows) : AnalyticsPageTitleFavorites,
-                      @(HomeSectionRadioLive) : AnalyticsPageTitleRadio,
-                      @(HomeSectionRadioLiveSatellite) : AnalyticsPageTitleRadioSatellite,
-                      @(HomeSectionRadioLatestEpisodes) : AnalyticsPageTitleLatestEpisodes,
-                      @(HomeSectionRadioMostPopular) : AnalyticsPageTitleMostPopular,
-                      @(HomeSectionRadioLatest) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioLatestVideos) : AnalyticsPageTitleLatest,
-                      @(HomeSectionRadioFavoriteShows) : AnalyticsPageTitleFavorites };
-    });
-    
-    NSString *title = s_titles[@(homeSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}
-
-AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection)
-{
-    static NSDictionary<NSNumber *, NSString *> *s_titles;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_titles = @{ @(TopicSectionLatest) : AnalyticsPageTitleLatest,
-                      @(TopicSectionMostPopular) : AnalyticsPageTitleMostPopular };
-    });
-    
-    NSString *title = s_titles[@(topicSection)];
-    NSCAssert(title != nil, @"Section with missing page title. Please fix");
-    return title ?: @"";
-}
+AnalyticsValue const AnalyticsValueSharingContent = @"content";
+AnalyticsValue const AnalyticsValueSharingContentAtTime = @"content_at_time";
+AnalyticsValue const AnalyticsValueSharingCurrentClip = @"current_clip";

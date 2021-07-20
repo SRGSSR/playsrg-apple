@@ -11,38 +11,24 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, HomeSection) {
     HomeSectionUnknown = 0,
     
-    // TV sections
-    HomeSectionTVTrending,
-    HomeSectionTVEvents,
-    HomeSectionTVTopics,
-    HomeSectionTVTopicsAccess,
-    HomeSectionTVLatest,
-    HomeSectionTVWebFirst,
-    HomeSectionTVMostPopular,
-    HomeSectionTVSoonExpiring,
-    HomeSectionTVShowsAccess,
-    HomeSectionTVFavoriteShows,
-    HomeSectionTVFavoriteLatestEpisodes API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
-    HomeSectionTVResumePlayback API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
-    HomeSectionTVWatchLater API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios),
-    
     // Radio sections
-    HomeSectionRadioLatestEpisodes,
-    HomeSectionRadioMostPopular,
-    HomeSectionRadioLatest,
-    HomeSectionRadioLatestVideos,
     HomeSectionRadioAllShows,
-    HomeSectionRadioShowsAccess,
     HomeSectionRadioFavoriteShows,
+    HomeSectionRadioLatest,
+    HomeSectionRadioLatestEpisodes,
+    HomeSectionRadioLatestEpisodesFromFavorites,
+    HomeSectionRadioLatestVideos,
+    HomeSectionRadioMostPopular,
+    HomeSectionRadioResumePlayback,
+    HomeSectionRadioShowsAccess,
+    HomeSectionRadioWatchLater,
     
     // Live sections
     HomeSectionTVLive,
-    HomeSectionRadioLive,
-    HomeSectionRadioLiveSatellite,
     HomeSectionTVLiveCenter,
-    HomeSectionTVScheduledLivestreams
+    HomeSectionTVScheduledLivestreams,
+    HomeSectionRadioLive,
+    HomeSectionRadioLiveSatellite
 };
-
-OBJC_EXPORT NSString *TitleForHomeSection(HomeSection homeSection);
 
 NS_ASSUME_NONNULL_END

@@ -32,40 +32,14 @@
     self.titleLabel.textColor = highlighted ? UIColor.lightGrayColor : UIColor.whiteColor;
 }
 
-- (void)didMoveToWindow
-{
-    [super didMoveToWindow];
-    
-    [self play_registerForPreview];
-}
-
-- (void)traitCollectionDidChange:(UITraitCollection *)previousTraitCollection
-{
-    [super traitCollectionDidChange:previousTraitCollection];
-    
-    [self play_registerForPreview];
-}
-
 #pragma mark Getters and setters
 
 - (void)setShow:(SRGShow *)show
 {
     _show = show;
     
-    self.titleLabel.font = [UIFont srg_regularFontWithTextStyle:SRGAppearanceFontTextStyleHeadline];
+    self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
     self.titleLabel.text = show.title;
-}
-
-#pragma mark Previewing protocol
-
-- (id)previewObject
-{
-    return self.show;
-}
-
-- (NSValue *)previewAnchorRect
-{
-    return [NSValue valueWithCGRect:CGRectMake(0.f, 0.f, 30.f, CGRectGetHeight(self.frame))];
 }
 
 @end

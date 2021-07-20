@@ -7,8 +7,7 @@
 /* Label displaying the number of listenings on the player */
 "%@ listenings" = "%@ gehört";
 
-/* Live content label, with a channel title
-   Live content label, with a media title */
+/* Live content label, with a channel title */
 "%@ live" = "%@ live";
 
 /* Label displaying the number of views on the player */
@@ -21,8 +20,7 @@
    Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Zu den Favoriten hinzufügen";
 
-/* Accessibility label for a media cell with audio description
-   Accessibility label for the audio description badge */
+/* Accessibility label for the audio description badge */
 "Audio described" = "Audiodeskription";
 
 /* Close button label
@@ -87,6 +85,9 @@
 /* Accessibility hint associated with the account header */
 "Manages account information" = "Anmeldeinformationen verwalten";
 
+/* More button label */
+"More" = "Mehr";
+
 /* A more episode button label */
 "More episodes" = "Mehr zur Sendung";
 
@@ -99,13 +100,15 @@
 /* Mini player label */
 "Now playing: %@" = "Jetzt spielt: %@";
 
-/* Status header action hint */
+/* More button hint */
 "Opens details." = "Details öffnen.";
 
 /* Hint for content opened in Safari */
 "Opens in Safari." = "Inhalt wird in Safari geöffnet.";
 
-/* Show cell hint */
+/* Featured show hint
+   Show button hint
+   Show cell hint */
 "Opens show details." = "Öffnet Sendungs-Detailseite.";
 
 /* Mini player action hint */
@@ -126,7 +129,8 @@
 /* Program cell hint */
 "Plays from the beginning." = "Spielt es von Anfang an ab.";
 
-/* Media cell hint */
+/* Featured media hint
+   Media cell hint */
 "Plays the content." = "Inhalt abspielen";
 
 /* Song cell hint */

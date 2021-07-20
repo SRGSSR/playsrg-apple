@@ -6,30 +6,26 @@
 
 #import "UIViewController+PlaySRG.h"
 
+#import <objc/runtime.h>
+
+#if TARGET_OS_IOS
+
 #import "AnalyticsConstants.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
-#import "PlayErrors.h"
 #import "Playlist.h"
-#import "Previewing.h"
-#import "PreviewingDelegate.h"
 #import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
-
-#import <objc/runtime.h>
 
 @import GoogleCast;
 @import libextobjc;
 @import SRGDataProviderNetwork;
 
-// We retain the presentation delegates with the view controller. If not unregistered, UIKit cleans them up when the
-// view controller is deallocated anyway. We must retain the delegates, otherwise they will get deallocated early
-static void *s_previewingDelegatesKey = &s_previewingDelegatesKey;
-static void *s_longPressGestureRecognizerKey = &s_longPressGestureRecognizerKey;
-static void *s_previewingContextKey = &s_previewingContextKey;
+#endif
+
 static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 @implementation UIViewController (PlaySRG)
@@ -42,9 +38,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewWillAppear:)));
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidDisappear:)),
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
-    method_exchangeImplementations(class_getInstanceMethod(self, @selector(registerForPreviewingWithDelegate:sourceView:)),
-                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:sourceView:)));
 }
+
+#if TARGET_OS_IOS
 
 + (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
 {
@@ -56,46 +52,9 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     }
 }
 
+#endif
+
 #pragma mark Swizzled methods
-
-// Only swizzle registration method. Unregistration is automatic, and associated objects are automatically cleaned up when the
-// object they are associated to is deallocated
-- (id<UIViewControllerPreviewing>)UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:(id<UIViewControllerPreviewingDelegate>)delegate sourceView:(UIView *)sourceView
-{
-    if ([delegate conformsToProtocol:@protocol(PreviewingDelegate)]) {
-        NSMutableSet<PreviewingDelegate *> *previewingDelegates = objc_getAssociatedObject(self, s_previewingDelegatesKey);
-        if (! previewingDelegates) {
-            previewingDelegates = [NSMutableSet set];
-            objc_setAssociatedObject(self, s_previewingDelegatesKey, previewingDelegates, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-        }
-        
-        PreviewingDelegate *previewingDelegate = [[PreviewingDelegate alloc] initWithRealDelegate:(id<PreviewingDelegate>)delegate];
-        [previewingDelegates addObject:previewingDelegate];
-        
-        id<UIViewControllerPreviewing> previewingViewController = nil;
-        
-        // Register for 3D Touch support if available
-        // Warning: FLEX lies about 3D touch support. When running the app in the simulator with FLEX linked, the following
-        //          condition is always true
-        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-            previewingViewController = [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:previewingDelegate sourceView:sourceView];
-        }
-
-        UIGestureRecognizer *longPressGestureRecognizer = [objc_getAssociatedObject(sourceView, s_longPressGestureRecognizerKey) nonretainedObjectValue];
-        if (longPressGestureRecognizer) {
-            [sourceView removeGestureRecognizer:longPressGestureRecognizer];
-        }
-        
-        longPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:previewingDelegate action:@selector(handleLongPress:)];
-        [sourceView addGestureRecognizer:longPressGestureRecognizer];
-        objc_setAssociatedObject(sourceView, s_longPressGestureRecognizerKey, [NSValue valueWithNonretainedObject:longPressGestureRecognizer], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-
-        return previewingViewController;
-    }
-    else {
-        return [self UIViewController_PlaySRG_swizzled_registerForPreviewingWithDelegate:delegate sourceView:sourceView];
-    }
-}
 
 - (void)UIViewController_PlaySRG_swizzled_viewWillAppear:(BOOL)animated
 {
@@ -182,24 +141,14 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     return topViewController;
 }
 
-#pragma mark Previewing
-
-- (void)setPlay_previewingContext:(id<UIViewControllerPreviewing>)previewingContext
-{
-    objc_setAssociatedObject(self, s_previewingContextKey, previewingContext, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (id<UIViewControllerPreviewing>)play_previewingContext
-{
-    return objc_getAssociatedObject(self, s_previewingContextKey);
-}
+#if TARGET_OS_IOS
 
 #pragma mark Media player presentation
 
 - (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(PlayerType))completion
 {
     if (! position) {
-        position = HistoryResumePlaybackPositionForMedia(media);
+        position = HistoryResumePlaybackPositionForMediaMetadata(media);
     }
     GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
     if (castSession) {
@@ -229,7 +178,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
         MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
         SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
@@ -256,20 +205,15 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             Playlist *playlist = PlaylistForURN(media.URN);
             letterboxController.playlistDataSource = playlist;
             letterboxController.playbackTransitionDelegate = playlist;
-            [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
+            [topViewController play_presentViewController:mediaPlayerViewController animated:animated completion:completion];
         };
         
-        if (@available(iOS 13, *)) {
-            if (airPlaySuggestions) {
-                [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
-                    if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
-                        openPlayer();
-                    }
-                }];
-            }
-            else {
-                openPlayer();
-            }
+        if (airPlaySuggestions) {
+            [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+                if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                    openPlayer();
+                }
+            }];
         }
         else {
             openPlayer();
@@ -279,7 +223,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentNativeMediaPlayerFromLetterboxController:(SRGLetterboxController *)letterboxController withAirPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
         MediaPlayerViewController *mediaPlayerViewController = (MediaPlayerViewController *)topViewController;
         if (mediaPlayerViewController.letterboxController == letterboxController) {
@@ -296,17 +240,12 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         [topViewController presentViewController:mediaPlayerViewController animated:animated completion:completion];
     };
     
-    if (@available(iOS 13, *)) {
-        if (airPlaySuggestions) {
-            [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
-                if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
-                    openPlayer();
-                }
-            }];
-        }
-        else {
-            openPlayer();
-        }
+    if (airPlaySuggestions) {
+        [AVAudioSession.sharedInstance prepareRouteSelectionForPlaybackWithCompletionHandler:^(BOOL shouldStartPlayback, AVAudioSessionRouteSelection routeSelection) {
+            if (shouldStartPlayback && routeSelection != AVAudioSessionRouteSelectionNone) {
+                openPlayer();
+            }
+        }];
     }
     else {
         openPlayer();
@@ -328,7 +267,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 
 - (void)play_presentGoogleCastControlsAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         completion ? completion() : nil;
         return;
@@ -340,7 +279,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
         mediaControlsViewController.hideStreamPositionControlsForLiveContent = YES;
         
         // The top view controller might have changed if dismissal occurred
-        UIViewController *topViewController = UIApplication.sharedApplication.keyWindow.play_topViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
         [topViewController presentViewController:mediaControlsViewController animated:animated completion:completion];
         
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
@@ -405,8 +344,36 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     return (self.supportedInterfaceOrientations & (1 << orientation)) != 0;
 }
 
+#endif
+
+- (void)play_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion
+{
+    // Not animated: The system takes care of sending transition appearance events (and thus view lifecycle events).
+    // Custom transition: Retrieved from the delegate only when animated. Must take care of implementing transition
+    //                    appearance events (most notably for interactive transitions which otherwise would not be
+    //                    covered).
+    if (animated || ! viewController.transitioningDelegate) {
+        [self presentViewController:viewController animated:YES completion:completion];
+    }
+    else {
+        UIViewController *fromViewController = self;
+        UIViewController *toViewController = viewController;
+        
+        [fromViewController beginAppearanceTransition:NO animated:NO];
+        [toViewController beginAppearanceTransition:YES animated:NO];
+        
+        [self presentViewController:viewController animated:NO completion:^{
+            [fromViewController endAppearanceTransition];
+            [toViewController endAppearanceTransition];
+            
+            completion ? completion() : nil;
+        }];
+    }
+}
+
 - (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
 {
+#if TARGET_OS_IOS
     UIViewController *topViewController = self.play_topViewController;
     
     // See https://stackoverflow.com/a/29560217
@@ -425,7 +392,26 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
             [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeRight) forKey:@keypath(UIDevice.new, orientation)];
         }
     }
-    [self dismissViewControllerAnimated:animated completion:completion];
+#endif
+    
+    // See `-play_presentViewController:animated:completion:`
+    if (animated || ! self.transitioningDelegate) {
+        [self dismissViewControllerAnimated:animated completion:completion];
+    }
+    else {
+        UIViewController *fromViewController = self;
+        UIViewController *toViewController = self.presentingViewController;
+        
+        [fromViewController beginAppearanceTransition:NO animated:NO];
+        [toViewController beginAppearanceTransition:YES animated:NO];
+        
+        [self dismissViewControllerAnimated:NO completion:^{
+            [fromViewController endAppearanceTransition];
+            [toViewController endAppearanceTransition];
+            
+            completion ? completion() : nil;
+        }];
+    }
 }
 
 @end

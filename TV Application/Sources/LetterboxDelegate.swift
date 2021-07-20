@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Foundation
 import Combine
 
 class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
@@ -12,7 +13,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
     var cancellables = Set<AnyCancellable>()
 
     override init() {
-        NotificationCenter.default.publisher(for: Notification.Name.SRGLetterboxPlaybackDidContinueAutomatically)
+        NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackDidContinueAutomatically)
             .sink { notification in
                 guard let media = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
 
@@ -22,7 +23,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
                 labels.value = media.urn
                 
                 if let controller = notification.object as? SRGLetterboxController, let playlist = controller.playlistDataSource as? Playlist {
-                    labels.extraValue1 = playlist.recommendationUid;
+                    labels.extraValue1 = playlist.recommendationUid
                 }
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
             }
@@ -38,7 +39,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
         labels.value = upcomingMedia.urn
         
         if let playlist = letterboxViewController.controller.playlistDataSource as? Playlist {
-            labels.extraValue1 = playlist.recommendationUid;
+            labels.extraValue1 = playlist.recommendationUid
         }
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
     }
@@ -50,7 +51,7 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
         labels.value = upcomingMedia.urn
         
         if let playlist = letterboxViewController.controller.playlistDataSource as? Playlist {
-            labels.extraValue1 = playlist.recommendationUid;
+            labels.extraValue1 = playlist.recommendationUid
         }
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
     }

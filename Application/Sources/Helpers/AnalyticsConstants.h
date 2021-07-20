@@ -5,7 +5,6 @@
 //
 
 #import "HomeSection.h"
-#import "TopicSection.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,7 +22,9 @@ OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSection;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelShow;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelTopic;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelUser;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelVideo;
 
@@ -42,6 +43,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodesFromFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicense;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLicenses;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLogin;
@@ -51,15 +53,13 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleResumePlayback;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSoonExpiring;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTrending;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWebFirst;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
 /**
@@ -146,8 +146,8 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleQuickActions;
  *  Title for sharing-related events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingModule;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingSection;
 
 /**
  *  Title for events related to subscriptions
@@ -261,11 +261,8 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 /**
  *  Values
  */
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContent;
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingContentAtTime;
-OBJC_EXPORT AnalyticsValue const AnalyticsTypeValueSharingCurrentClip;
-
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForHomeSection(HomeSection homeSection);
-OBJC_EXPORT AnalyticsPageTitle AnalyticsPageTitleForTopicSection(TopicSection topicSection);
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContent;
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContentAtTime;
+OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingCurrentClip;
 
 NS_ASSUME_NONNULL_END

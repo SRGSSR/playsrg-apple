@@ -4,8 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-@import CoreMedia;
-@import SRGLetterbox;
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN

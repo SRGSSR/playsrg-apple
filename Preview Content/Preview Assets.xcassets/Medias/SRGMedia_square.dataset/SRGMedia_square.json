@@ -1,0 +1,42 @@
+{
+   "id" : "11730396",
+   "mediaType" : "VIDEO",
+   "vendor" : "RTS",
+   "urn" : "urn:rts:video:11730396",
+   "title" : "Mission B: la mission se termine pour la RTS",
+   "description" : "Après 2 ans d'engagement en faveur de la biodiversité, le projet Mission B quitte la RTS pour passer dans les mains de la Fête de la Nature.\n\nEn 2 ans, nous avons créé ensemble près de 2 millions de m2 de biodiversité en plus dans toute la Suisse. \n\nMerci pour votre engagement, vos belles photos et vos centaines de questions sur le groupe Facebook, qui change de nom pour devenir le groupe Ma Planète - biodiversité. \n\nBravo et encore merci!",
+   "imageUrl" : "https://www.rts.ch/2020/11/05/15/24/11730395.image/1x1",
+   "imageTitle" : "Mission B: la mission se termine pour la RTS [RTS]",
+   "type" : "EPISODE",
+   "date" : "2020-11-05T15:11:55+01:00",
+   "duration" : 179520,
+   "validFrom" : "2020-11-05T15:11:55+01:00",
+   "playableAbroad" : true,
+   "subtitlesAvailable" : false,
+   "episode" : {
+      "id" : "11730387",
+      "title" : "Mission B",
+      "imageUrl" : "https://www.rts.ch/2020/11/05/15/24/11730395.image/1x1",
+      "imageTitle" : "Mission B: la mission se termine pour la RTS [RTS]"
+   },
+   "show" : {
+      "id" : "10302128",
+      "vendor" : "RTS",
+      "transmission" : "TV",
+      "urn" : "urn:rts:show:tv:10302128",
+      "title" : "Mission B",
+      "lead" : "Ensemble, fleurissons la Suisse.",
+      "description" : "Mission B, c'est une action qui vise à créer, sur nos balcons et dans nos jardins, un million de m2 d'espaces de biodiversité en plus dans notre pays.",
+      "imageUrl" : "https://www.rts.ch/2019/03/19/12/03/10301909.image/16x9",
+      "imageTitle" : "Mission B, une opération de la RTS pour la biodiversité. [RTS]",
+      "posterImageUrl" : "https://ws.srf.ch/asset/image/audio/e0322b37-5697-474d-93ac-19a4044a6a24/POSTER.jpg",
+      "posterImageIsFallbackUrl" : true
+   },
+   "presentation" : "DEFAULT",
+   "audioTrackList" : [ {
+      "locale" : "fr",
+      "language" : "Français",
+      "source" : "HLS"
+   } ],
+   "aspectRatio" : "1:1"
+}
