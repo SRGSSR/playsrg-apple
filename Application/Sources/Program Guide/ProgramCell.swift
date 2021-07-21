@@ -54,7 +54,7 @@ class ProgramCellSize: NSObject {
 // MARK: Preview
 
 struct ProgramCell_Previews: PreviewProvider {
-    static private let size = MediaCellSize.fullWidth().previewSize
+    static private let size = ProgramCellSize.fullWidth().previewSize
     
     static var previews: some View {
         ProgramCell(program: Mock.program(.overflow))
