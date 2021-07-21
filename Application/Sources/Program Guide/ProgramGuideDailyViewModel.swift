@@ -61,6 +61,10 @@ final class ProgramGuideDailyViewModel: ObservableObject {
 // MARK: Types
 
 extension ProgramGuideDailyViewModel {
+    enum Section {
+        case main
+    }
+    
     enum State {
         case loading
         case failed(error: Error)

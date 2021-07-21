@@ -21,10 +21,20 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     var programs: [SRGProgram] = []
     
-    // TODO: Just for quick data display
-    private weak var tableView: UITableView!
-    
     private var cancellables = Set<AnyCancellable>()
+    
+    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
+    
+    private weak var collectionView: UICollectionView!
+    
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
+        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
+        if case let .loaded(programs) = state {
+            snapshot.appendSections([.main])
+            snapshot.appendItems(programs, toSection: .main)
+        }
+        return snapshot
+    }
     
     init(day: SRGDay, parentModel: ProgramGuideViewModel) {
         self.model = ProgramGuideDailyViewModel(day: day, parentModel: parentModel)
@@ -39,11 +49,20 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         
-        let tableView = UITableView()
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        view.addSubview(tableView)
-        self.tableView = tableView
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+        collectionView.delegate = self
+        collectionView.backgroundColor = .clear
+        
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(collectionView)
+        self.collectionView = collectionView
+        
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
         self.view = view
     }
@@ -51,9 +70,13 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "programCell")
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
+            cell.content = ProgramCell(program: program)
+        }
+        
+        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
         
         model.$state
             .sink { [weak self] state in
@@ -69,7 +92,10 @@ final class ProgramGuideDailyViewController: UIViewController {
         default:
             self.programs = []
         }
-        tableView.reloadData()
+        
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.dataSource.apply(Self.snapshot(from: state))
+        }
     }
 }
 
@@ -77,7 +103,7 @@ final class ProgramGuideDailyViewController: UIViewController {
 
 extension ProgramGuideDailyViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
-        return tableView != nil ? [tableView] : nil
+        return collectionView != nil ? [collectionView] : nil
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
@@ -85,19 +111,23 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
 }
 
-extension ProgramGuideDailyViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return programs.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "programCell", for: indexPath)
+extension ProgramGuideDailyViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // TODO: Play content, but we only have the URN and we need a media object (to retrieve progress information).
+        //       Probably best to load with the detail sheet so that the media is readily available when the user
+        //       taps on it (and we probably need it anyway for displaying more information about the media)
     }
 }
 
-extension ProgramGuideDailyViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let program = programs[indexPath.row]
-        cell.textLabel?.text = program.title
+// MARK: Layout
+
+private extension ProgramGuideDailyViewController {
+    private func layout() -> UICollectionViewLayout {
+        return UICollectionViewCompositionalLayout { _, layoutEnvironment in
+            let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
+                return ProgramCellSize.fullWidth()
+            }
+        }
     }
 }
