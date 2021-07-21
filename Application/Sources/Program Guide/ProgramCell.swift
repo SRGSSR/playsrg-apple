@@ -4,12 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: Cell
 
 struct ProgramCell: View {
     let program: SRGProgram
+    
+    @SRGScaledMetric var timeRangeWidth: CGFloat = 90
     
     private var timeRange: String {
         let startTime = DateFormatter.play_time.string(from: program.startDate)
@@ -22,7 +25,7 @@ struct ProgramCell: View {
             Text(timeRange)
                 .srgFont(.subtitle1)
                 .foregroundColor(.srgGray96)
-                .frame(width: 130)
+                .frame(width: timeRangeWidth, alignment: .leading)
             if program.mediaURN != nil {
                 Image("play_circle")
                     .foregroundColor(.srgGrayC7)
@@ -32,8 +35,11 @@ struct ProgramCell: View {
                 .foregroundColor(.srgGrayC7)
             Spacer()
         }
-        .lineLimit(1)
+        .lineLimit(2)
         .padding(.horizontal, 16)
+        .frame(maxHeight: .infinity)
+        .background(Color.srgGray23)
+        .cornerRadius(4)
     }
 }
 

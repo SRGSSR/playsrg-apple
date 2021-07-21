@@ -60,8 +60,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
         self.view = view
@@ -125,9 +125,11 @@ private extension ProgramGuideDailyViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout { _, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
-            return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
+            let section = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
                 return ProgramCellSize.fullWidth()
             }
+            section.interGroupSpacing = 3
+            return section
         }
     }
 }
