@@ -34,6 +34,15 @@ struct Mock {
         return mockObject(kind.rawValue, type: SRGMedia.self)
     }
     
+    enum Program: String {
+        case standard
+        case overflow
+    }
+    
+    static func program(_ kind: Program = .standard) -> SRGProgram {
+        return mockObject(kind.rawValue, type: SRGProgram.self)
+    }
+    
     enum Show: String {
         case standard
         case overflow
