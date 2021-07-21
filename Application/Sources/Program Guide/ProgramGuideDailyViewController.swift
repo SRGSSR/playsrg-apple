@@ -73,6 +73,18 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
 }
 
+// MARK: Protocols
+
+extension ProgramGuideDailyViewController: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return tableView != nil ? [tableView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return .zero
+    }
+}
+
 extension ProgramGuideDailyViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return programs.count

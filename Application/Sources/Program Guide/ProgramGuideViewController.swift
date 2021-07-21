@@ -105,6 +105,8 @@ final class ProgramGuideViewController: UIViewController {
     }
 }
 
+// MARK: Protocols
+
 extension ProgramGuideViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
