@@ -59,8 +59,18 @@ extension ProgramGuideViewModel {
             }
         }
         
+        var isLoaded: Bool {
+            switch self {
+            case .loaded:
+                return true
+            default:
+                return false
+            }
+        }
+        
         static func channels(from states: [State]) -> [SRGChannel] {
-            return states.first?.channels ?? []
+            return states.filter { $0.isLoaded }
+                .first?.channels ?? []
         }
     }
 }
