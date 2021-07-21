@@ -11,8 +11,29 @@ import SwiftUI
 struct ProgramCell: View {
     let program: SRGProgram
     
+    private var timeRange: String {
+        let startTime = DateFormatter.play_time.string(from: program.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.endDate)
+        return "\(startTime) - \(endTime)"
+    }
+    
     var body: some View {
-        Text(program.title)
+        HStack(spacing: 10) {
+            Text(timeRange)
+                .srgFont(.subtitle1)
+                .foregroundColor(.srgGray96)
+                .frame(width: 130)
+            if program.mediaURN != nil {
+                Image("play_circle")
+                    .foregroundColor(.srgGrayC7)
+            }
+            Text(program.title)
+                .srgFont(.body)
+                .foregroundColor(.srgGrayC7)
+            Spacer()
+        }
+        .lineLimit(1)
+        .padding(.horizontal, 16)
     }
 }
 
@@ -30,7 +51,7 @@ struct ProgramCell_Previews: PreviewProvider {
     static private let size = MediaCellSize.fullWidth().previewSize
     
     static var previews: some View {
-        ProgramCell(program: Mock.program())
+        ProgramCell(program: Mock.program(.overflow))
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
