@@ -74,8 +74,12 @@ final class ProgramGuideViewController: UIViewController {
             navigationItem.rightBarButtonItem = nil
         }
         
-        if let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
-            currentViewController.channel = selectedChannel
+        // Update all view controllers, also those cached by `UIPageViewController`
+        // See https://stackoverflow.com/a/27984538/760435
+        for viewController in pageViewController.children {
+            if let dailyViewController = viewController as? ProgramGuideDailyViewController {
+                dailyViewController.channel = selectedChannel
+            }
         }
     }
     

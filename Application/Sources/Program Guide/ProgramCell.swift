@@ -10,7 +10,8 @@ import SwiftUI
 // MARK: Cell
 
 struct ProgramCell: View {
-    let program: SRGProgram
+    @Binding var program: SRGProgram
+    @StateObject var model = ProgramCellViewModel()
     
     @SRGScaledMetric var timeRangeWidth: CGFloat = 90
     
@@ -20,26 +21,44 @@ struct ProgramCell: View {
         return "\(startTime) - \(endTime)"
     }
     
+    init(program: SRGProgram) {
+        _program = .constant(program)
+    }
+    
     var body: some View {
-        HStack(spacing: 10) {
-            Text(timeRange)
-                .srgFont(.subtitle1)
-                .foregroundColor(.srgGray96)
-                .frame(width: timeRangeWidth, alignment: .leading)
-            if program.mediaURN != nil {
-                Image("play_circle")
+        ZStack {
+            HStack(spacing: 10) {
+                Text(timeRange)
+                    .srgFont(.subtitle1)
+                    .foregroundColor(.srgGray96)
+                    .frame(width: timeRangeWidth, alignment: .leading)
+                if program.mediaURN != nil {
+                    Image("play_circle")
+                        .foregroundColor(.srgGrayC7)
+                }
+                Text(program.title)
+                    .srgFont(.body)
                     .foregroundColor(.srgGrayC7)
+                Spacer()
             }
-            Text(program.title)
-                .srgFont(.body)
-                .foregroundColor(.srgGrayC7)
-            Spacer()
+            .lineLimit(2)
+            .padding(.horizontal, 16)
+            .frame(maxHeight: .infinity)
+            .background(Color.srgGray23)
+            
+            if let progress = model.progress {
+                ProgressBar(value: progress)
+                    .frame(height: LayoutProgressBarHeight)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
         }
-        .lineLimit(2)
-        .padding(.horizontal, 16)
-        .frame(maxHeight: .infinity)
-        .background(Color.srgGray23)
         .cornerRadius(4)
+        .onAppear {
+            model.program = program
+        }
+        .onChange(of: program) { newValue in
+            model.program = newValue
+        }
     }
 }
 

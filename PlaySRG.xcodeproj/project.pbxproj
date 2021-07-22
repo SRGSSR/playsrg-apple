@@ -1320,6 +1320,11 @@
 		6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3C20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
 		6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */ = {isa = PBXBuildFile; fileRef = 6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */; };
+		6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
+		6FA8479B26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
+		6FA8479C26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
+		6FA8479D26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
+		6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
 		6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1724E44B6400B1A56E /* SRGLetterbox */; };
 		6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */; };
 		6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */; };
@@ -2638,6 +2643,7 @@
 		6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGProgramComposition+PlaySRG.h"; sourceTree = "<group>"; };
 		6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGProgramComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
+		6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCellViewModel.swift; sourceTree = "<group>"; };
 		6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
 		6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
@@ -4088,6 +4094,7 @@
 			isa = PBXGroup;
 			children = (
 				6F2E160826A84ED200F3DC89 /* ProgramCell.swift */,
+				6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */,
 				6F362A8926A0706F00CBCC9D /* ProgramGuideDailyViewController.swift */,
 				6F362A8F26A089D100CBCC9D /* ProgramGuideDailyViewModel.swift */,
 				6F362A8326A0461B00CBCC9D /* ProgramGuideViewController.swift */,
@@ -7709,6 +7716,7 @@
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
 				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				0859ADC622D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F982B93244F1E1200C0386E /* TableView.m in Sources */,
@@ -7778,6 +7786,7 @@
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39126050FFF008B46FF /* BlockingOverlay.swift in Sources */,
+				6FA8479B26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -7983,6 +7992,7 @@
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39226050FFF008B46FF /* BlockingOverlay.swift in Sources */,
+				6FA8479C26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -8188,6 +8198,7 @@
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39326051000008B46FF /* BlockingOverlay.swift in Sources */,
+				6FA8479D26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
@@ -8393,6 +8404,7 @@
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
+				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
