@@ -120,9 +120,16 @@ extension ProgramGuideDailyViewController: ContentInsets {
 
 extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // TODO: Play content, but we only have the URN and we need a media object (to retrieve progress information).
-        //       Probably best to load with the detail sheet so that the media is readily available when the user
-        //       taps on it (and we probably need it anyway for displaying more information about the media)
+        let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
+        guard let mediaUrn = program.mediaURN else { return }
+        SRGDataProvider.current!.media(withUrn: mediaUrn)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { _ in
+                
+            }, receiveValue: { [weak self] media in
+                self?.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            })
+            .store(in: &cancellables)
     }
 }
 
