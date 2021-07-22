@@ -24,7 +24,9 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
+    
     private weak var collectionView: UICollectionView!
+    private weak var emptyView: HostView<EmptyView>!
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
@@ -61,6 +63,10 @@ final class ProgramGuideDailyViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
         ])
         
+        let emptyView = HostView<EmptyView>(frame: .zero)
+        collectionView.backgroundView = emptyView
+        self.emptyView = emptyView
+        
         self.view = view
     }
     
@@ -83,7 +89,17 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     func reloadData(for state: ProgramGuideDailyViewModel.State) {
-        guard let dataSource = dataSource else { return }
+        guard let emptyView = emptyView, let dataSource = dataSource else { return }
+        
+        switch state {
+        case .loading:
+            emptyView.content = EmptyView(state: .loading)
+        case let .failed(error: error):
+            emptyView.content = EmptyView(state: .failed(error: error))
+        case .loaded:
+            emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty) : nil
+        }
+        
         DispatchQueue.global(qos: .userInteractive).async {
             dataSource.apply(Self.snapshot(from: state, for: self.channel))
         }
