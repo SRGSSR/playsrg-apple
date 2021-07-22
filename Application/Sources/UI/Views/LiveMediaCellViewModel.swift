@@ -86,13 +86,14 @@ extension LiveMediaCellViewModel {
     
     var progress: Double? {
         if channel != nil {
-            guard let program = program else { return 0 }
-            return date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            guard let program = program else { return nil }
+            let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            return progress.clamped(to: 0...1)
         }
-        else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
+        else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: date) == .available,
                 let startDate = media.startDate,
                 let endDate = media.endDate {
-            let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
+            let progress = date.timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
             return progress.clamped(to: 0...1)
         }
         else {

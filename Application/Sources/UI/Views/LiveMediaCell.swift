@@ -67,7 +67,6 @@ struct LiveMediaCell: View {
                 
                 if let progress = model.progress {
                     ProgressBar(value: progress)
-                        .opacity(progress != 0 ? 1 : 0)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
