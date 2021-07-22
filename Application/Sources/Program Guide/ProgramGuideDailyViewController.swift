@@ -10,35 +10,32 @@ import UIKit
 // MARK: View controller
 
 final class ProgramGuideDailyViewController: UIViewController {
-    let day: SRGDay
-    private let model: ProgramGuideDailyViewModel
+    let model: ProgramGuideDailyViewModel
     
     var channel: SRGChannel? {
         didSet {
-            model.channel = channel
+            reloadData(for: model.state)
         }
     }
     
-    var programs: [SRGProgram] = []
+    var day: SRGDay {
+        return model.day
+    }
     
     private var cancellables = Set<AnyCancellable>()
-    
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
-    
     private weak var collectionView: UICollectionView!
     
-    private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
-        if case let .loaded(programs) = state {
-            snapshot.appendSections([.main])
-            snapshot.appendItems(programs, toSection: .main)
-        }
+        snapshot.appendSections([.main])
+        snapshot.appendItems(state.programs(for: channel), toSection: .main)
         return snapshot
     }
     
-    init(day: SRGDay, parentModel: ProgramGuideViewModel) {
-        self.model = ProgramGuideDailyViewModel(day: day, parentModel: parentModel)
-        self.day = day
+    init(day: SRGDay, channel: SRGChannel?) {
+        model = ProgramGuideDailyViewModel(day: day)
+        self.channel = channel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -86,15 +83,9 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     func reloadData(for state: ProgramGuideDailyViewModel.State) {
-        switch state {
-        case let .loaded(programs):
-            self.programs = programs
-        default:
-            self.programs = []
-        }
-        
+        guard let dataSource = dataSource else { return }
         DispatchQueue.global(qos: .userInteractive).async {
-            self.dataSource.apply(Self.snapshot(from: state))
+            dataSource.apply(Self.snapshot(from: state, for: self.channel))
         }
     }
 }

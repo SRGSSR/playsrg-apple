@@ -10,51 +10,26 @@ import Combine
 
 final class ProgramGuideDailyViewModel: ObservableObject {
     let day: SRGDay
-    private let parentModel: ProgramGuideViewModel
-    
-    var channel: SRGChannel? {
-        didSet {
-            updatePublishers()
-        }
-    }
     
     @Published private(set) var state: State = .loading
     
-    init(day: SRGDay, parentModel: ProgramGuideViewModel) {
+    init(day: SRGDay) {
         self.day = day
-        self.parentModel = parentModel
-        updatePublishers()
-        parentModel.loadDay(day)
-    }
-    
-    static func state(from state: ProgramGuideViewModel.State, for channel: SRGChannel?) -> ProgramGuideDailyViewModel.State {
-        switch state {
-        case .loading:
-            return .loading
-        case let .failed(error: error):
-            return .failed(error: error)
-        case let .loaded(programCompositions):
-            return .loaded(programs(from: programCompositions, for: channel) ?? [])
-        }
-    }
-    
-    static func programs(from programCompositions: [SRGProgramComposition], for channel: SRGChannel?) -> [SRGProgram]? {
-        if let channel = channel {
-            return programCompositions.first(where: { $0.channel == channel })?.programs
-        }
-        else {
-            return programCompositions.first?.programs
-        }
-    }
-    
-    private func updatePublishers() {
-        parentModel.$states
-            .compactMap { [weak self] states in
-                guard let self = self, let state = states[self.day] else { return nil }
-                return Self.state(from: state, for: self.channel)
-            }
+        
+        Self.tvPrograms(for: day)
             .receive(on: DispatchQueue.main)
             .assign(to: &$state)
+    }
+    
+    private static func tvPrograms(for day: SRGDay) -> AnyPublisher<State, Never> {
+        return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
+            .map { programCompositions in
+                return State.loaded(programCompositions)
+            }
+            .catch { error in
+                return Just(State.failed(error: error))
+            }
+            .eraseToAnyPublisher()
     }
 }
 
@@ -68,6 +43,20 @@ extension ProgramGuideDailyViewModel {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded([SRGProgram])
+        case loaded([SRGProgramComposition])
+        
+        func programs(for channel: SRGChannel?) -> [SRGProgram] {
+            if case let .loaded(programCompositions) = self {
+                if let channel = channel {
+                    return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
+                }
+                else {
+                    return programCompositions.first?.programs ?? []
+                }
+            }
+            else {
+                return []
+            }
+        }
     }
 }
