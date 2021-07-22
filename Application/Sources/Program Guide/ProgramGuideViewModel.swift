@@ -15,18 +15,22 @@ final class ProgramGuideViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init(day: SRGDay) {
-        SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
-            .map { $0.map(\.channel) }
-            .replaceError(with: channels)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] channels in
-                guard let self = self else { return }
-                self.channels = channels
-                if self.selectedChannel == nil {
-                    self.selectedChannel = channels.first
+        Publishers.PublishAndRepeat(onOutputFrom: Signal.wokenUp()) { [weak self] in
+            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
+                .map { $0.map(\.channel) }
+                .catch { _ in
+                    return Just(self?.channels ?? [])
                 }
+        }
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] channels in
+            guard let self = self else { return }
+            self.channels = channels
+            if self.selectedChannel == nil {
+                self.selectedChannel = channels.first
             }
-            .store(in: &cancellables)
+        }
+        .store(in: &cancellables)
     }
     
     func nextChannel() {

@@ -16,20 +16,17 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     init(day: SRGDay) {
         self.day = day
         
-        Self.tvPrograms(for: day)
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
-    }
-    
-    private static func tvPrograms(for day: SRGDay) -> AnyPublisher<State, Never> {
-        return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
-            .map { programCompositions in
-                return State.loaded(programCompositions)
-            }
-            .catch { error in
-                return Just(State.failed(error: error))
-            }
-            .eraseToAnyPublisher()
+        Publishers.PublishAndRepeat(onOutputFrom: Signal.wokenUp()) {
+            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
+                .map { programCompositions in
+                    return State.loaded(programCompositions)
+                }
+                .catch { error in
+                    return Just(State.failed(error: error))
+                }
+        }
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$state)
     }
 }
 
