@@ -109,8 +109,10 @@ class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        #if os(iOS)
         updateEditButton()
-
+        #endif
+        
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
