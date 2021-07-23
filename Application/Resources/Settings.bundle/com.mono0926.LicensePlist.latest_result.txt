@@ -70,48 +70,23 @@ version: 2.8.2
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.5.3
+version: 4.6.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.5.3
+version: 4.6.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.5.3
+version: 4.6.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.5.3
+version: 4.6.1
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.5.3
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.5.0
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.5.0
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.5.0
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.5.0
-
-name: GTMSessionFetcher, nameSpecified: 
-body: 
-                   …
-version: 1.5.0
+version: 4.6.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
@@ -161,72 +136,72 @@ version: 118.2.0
 name: MDFInternationalization, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 3.0.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 3.0.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 3.0.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 3.0.0
 
 name: MDFInternationalization, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 3.0.0
 
 name: MDFTextAccessibility, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 2.0.1
 
 name: MDFTextAccessibility, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 2.0.1
 
 name: MDFTextAccessibility, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 2.0.1
 
 name: MDFTextAccessibility, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 2.0.1
 
 name: MDFTextAccessibility, nameSpecified: 
 body: 
                    …
-version: 2.0.0
+version: 2.0.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.14.0
+version: 3.17.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.14.0
+version: 3.17.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.14.0
+version: 3.17.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.14.0
+version: 3.17.0
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.14.0
+version: 3.17.0
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20200225.4
 
