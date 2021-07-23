@@ -108,11 +108,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemove;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemoveAll;
 
 /**
- *  Title for events related to history playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryOpenMedia;
-
-/**
  *  Title for events related to identity login / logout
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleIdentity;
@@ -175,11 +170,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
 
 /**
- *  Title for events related to opening a show from favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpen;
-
-/**
  *  Title for events related to opening a media or show from search result
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchOpen;
@@ -208,11 +198,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
  *  Title for events related to deletion of all later list entries
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
-
-/**
- *  Title for events related to later list entry playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterOpenMedia;
 
 /**
  *  @name Analytics values
