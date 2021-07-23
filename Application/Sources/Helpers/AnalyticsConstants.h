@@ -88,11 +88,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemove;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemoveAll;
 
 /**
- *  Title for events related to download playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadOpenMedia;
-
-/**
  *  Title for Google Cast events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;

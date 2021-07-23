@@ -263,10 +263,6 @@
     Download *download = self.downloads[indexPath.row];
     if (download.media) {
         [self play_presentMediaPlayerWithMedia:download.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
-        
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.value = download.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadOpenMedia labels:labels];
     }
     else if (download.state == DownloadStateDownloading) {
         [Banner showWithStyle:BannerStyleInfo

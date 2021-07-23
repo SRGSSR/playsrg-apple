@@ -56,7 +56,6 @@ AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";
 AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
 AnalyticsTitle const AnalyticsTitleDownloadRemoveAll = @"download_remove_all";
-AnalyticsTitle const AnalyticsTitleDownloadOpenMedia = @"download_open";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
 AnalyticsTitle const AnalyticsTitleHistoryRemove = @"history_remove";
 AnalyticsTitle const AnalyticsTitleHistoryRemoveAll = @"history_remove_all";
