@@ -69,6 +69,11 @@ static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocati
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
+// Content group
+static NSString * const SettingsDeleteHistoryButton = @"Button_DeleteHistory";
+static NSString * const SettingsDeleteFavoritesButton = @"Button_DeleteFavorites";
+static NSString * const SettingsDeleteWatchLaterButton = @"Button_DeleteWatchLater";
+
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
 static NSString * const SettingsClearWebCacheButton = @"Button_ClearWebCache";
@@ -396,6 +401,36 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
             [self.requestQueue addRequest:radioRequest resume:YES];
         }
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteHistoryButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete history", @"Title of the message displayed when the user is about to delete the history")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"The history will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete the history") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:nil completionBlock:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteFavoritesButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete favorites", @"Title of the message displayed when the user is about to delete all favorites")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"Favorites and notification subscriptions will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete all favorites") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            FavoritesRemoveShows(nil);
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteWatchLaterButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete content saved for later", @"Title of the message displayed when the user is about to delete content saved for later")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"Content saved for later will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete content saved for later") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:nil fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else if ([specifier.key isEqualToString:SettingsClearWebCacheButton]) {
         [self clearWebCache];
