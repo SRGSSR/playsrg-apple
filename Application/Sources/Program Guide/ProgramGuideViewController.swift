@@ -56,8 +56,8 @@ final class ProgramGuideViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let todayViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
-        pageViewController.setViewControllers([todayViewController], direction: .forward, animated: false, completion: nil)
+        let dailyViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
+        pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false, completion: nil)
         
         model.$selectedChannel
             .sink { [weak self] selectedChannel in
