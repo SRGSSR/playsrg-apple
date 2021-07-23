@@ -433,7 +433,9 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
-    [self.selectedViewController pushViewController:viewController animated:animated];
+    if ([self.selectedViewController respondsToSelector:@selector(pushViewController:animated:)]) {
+        [self.selectedViewController pushViewController:viewController animated:animated];
+    }
 }
 
 #pragma mark ContainerContentInsets protocol
