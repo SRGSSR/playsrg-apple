@@ -83,11 +83,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemove;
 
 /**
- *  Title for events related to deletion of all downloads
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemoveAll;
-
-/**
  *  Title for Google Cast events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
@@ -96,11 +91,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
  *  Title for events related to deletion of an history entry
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemove;
-
-/**
- *  Title for events related to deletion of all history entries
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemoveAll;
 
 /**
  *  Title for events related to identity login / logout
@@ -160,11 +150,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 
 /**
- *  Title for events related to deletion of all favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
-
-/**
  *  Title for events related to opening a media or show from search result
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchOpen;
@@ -188,11 +173,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
  *  Title for events related to deletion of a later list entry
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
-
-/**
- *  Title for events related to deletion of all later list entries
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
 
 /**
  *  @name Analytics values

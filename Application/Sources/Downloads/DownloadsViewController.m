@@ -379,10 +379,6 @@
             [Download removeAllDownloads];
             self.downloads = nil;
             [self reloadDataAnimated:YES];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceSelection;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemoveAll labels:labels];
         }
         else {
             NSMutableArray<Download *> *downloadsToRemove = [NSMutableArray array];
@@ -392,13 +388,12 @@
             
             for (Download *download in downloadsToRemove) {
                 [Download removeDownload:download];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = download.URN;
-                labels.source = AnalyticsSourceSelection;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
             }
         }
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = AnalyticsSourceSelection;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
         
         if (self.tableView.isEditing) {
             [self setEditing:NO animated:YES];

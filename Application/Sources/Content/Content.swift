@@ -104,6 +104,7 @@ protocol SectionProperties {
     
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
+    var analyticsDeletionHiddenEventTitle: String? { get }
     
     #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -237,6 +238,19 @@ private extension Content {
             case .predefined:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
             case .none:
+                return nil
+            }
+        }
+        
+        var analyticsDeletionHiddenEventTitle: String? {
+            switch presentation.type {
+            case .favoriteShows:
+                return AnalyticsTitle.favoriteRemove.rawValue
+            case .watchLater:
+                return AnalyticsTitle.watchLaterRemove.rawValue
+            case .resumePlayback:
+                return AnalyticsTitle.historyRemove.rawValue
+            default:
                 return nil
             }
         }
@@ -487,6 +501,19 @@ private extension Content {
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.events.rawValue
             case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
+                return nil
+            }
+        }
+        
+        var analyticsDeletionHiddenEventTitle: String? {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return AnalyticsTitle.favoriteRemove.rawValue
+            case .radioWatchLater, .watchLater:
+                return AnalyticsTitle.watchLaterRemove.rawValue
+            case .history, .radioResumePlayback:
+                return AnalyticsTitle.historyRemove.rawValue
+            default:
                 return nil
             }
         }
