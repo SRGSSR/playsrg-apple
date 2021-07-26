@@ -46,7 +46,7 @@ struct MediaCell: View {
         return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
     
-    init(media: SRGMedia?, style: MediaDescription.Style = .date, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
+    init(media: SRGMedia?, style: MediaDescription.Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
         self.layout = layout

@@ -9,7 +9,7 @@ import UIKit
 extension UICollectionView {
     private static let mediaCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia> = {
         return UICollectionView.CellRegistration { cell, _, media in
-            cell.content = MediaCell(media: media)
+            cell.content = MediaCell(media: media, style: .show)
         }
     }()
     
@@ -26,7 +26,7 @@ extension UITableView {
     class MediaTableViewCell: HostTableViewCell<MediaCell>, MediaSettable {
         var media: SRGMedia? {
             willSet {
-                content = MediaCell(media: newValue, layout: .horizontal)
+                content = MediaCell(media: newValue, style: .show, layout: .horizontal)
             }
         }
     }

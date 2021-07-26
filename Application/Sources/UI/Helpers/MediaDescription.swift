@@ -51,7 +51,7 @@ struct MediaDescription {
         return DateFormatter.play_relative.string(from: media.date).capitalizedFirstLetter
     }
     
-    static func title(for media: SRGMedia, style: Style = .date) -> String {
+    static func title(for media: SRGMedia, style: Style) -> String {
         if style == .show, let show = media.show, media.title.lowercased() == show.title.lowercased() {
             return formattedDate(for: media)
         }
@@ -60,7 +60,7 @@ struct MediaDescription {
         }
     }
     
-    static func subtitle(for media: SRGMedia, style: Style = .date) -> String? {
+    static func subtitle(for media: SRGMedia, style: Style) -> String? {
         guard media.contentType != .livestream else { return nil }
         if style == .show, let show = media.show {
             return show.title
