@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 struct ProgramGuideHeaderView: View {
-    private(set) var day: SRGDay
+    let day: SRGDay
     
     init(day: SRGDay = .today) {
         self.day = day
