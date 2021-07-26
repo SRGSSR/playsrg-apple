@@ -52,7 +52,7 @@ struct MediaDescription {
     }
     
     static func title(for media: SRGMedia, style: Style) -> String {
-        if style == .show, let show = media.show, media.title.lowercased() == show.title.lowercased() {
+        if style == .show, let show = media.show, media.title.lowercased().contains(show.title.lowercased()) {
             return formattedDate(for: media)
         }
         else {
