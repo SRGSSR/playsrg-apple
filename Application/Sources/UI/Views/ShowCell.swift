@@ -14,6 +14,8 @@ struct ShowCell: View {
     let direction: StackDirection
     let hasSubscriptionButton: Bool
     
+    @Environment(\.isSelected) private var isSelected
+    
     init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
         self.show = show
         self.direction = direction
@@ -49,7 +51,7 @@ struct ShowCell: View {
             .background(Color.srgGray23)
             .redactable()
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             .frame(maxHeight: .infinity, alignment: .top)
             #endif
         }
@@ -87,6 +89,10 @@ private extension ShowCell {
     
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? [.isSelected] : []
     }
 }
 

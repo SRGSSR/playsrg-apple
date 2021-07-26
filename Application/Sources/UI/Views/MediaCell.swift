@@ -24,6 +24,7 @@ struct MediaCell: View {
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
     @State private var isFocused = false
+    @Environment(\.isSelected) private var isSelected
     
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
@@ -77,7 +78,7 @@ struct MediaCell: View {
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             #endif
         }
         .redactedIfNil(media)
@@ -153,6 +154,10 @@ private extension MediaCell {
     
     var accessibilityHint: String? {
         return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? [.isSelected] : []
     }
 }
 

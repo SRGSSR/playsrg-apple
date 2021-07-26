@@ -8,13 +8,32 @@ import SwiftUI
 import UIKit
 
 /**
+ *  Internal wrapper to bridge UIKit cell properties with SwiftUI environment.
+ */
+private struct HostCellView<Content: View>: View {
+    @Binding private var content: Content
+    @Binding var isSelected: Bool
+    
+    init(selected: Bool, content: Content) {
+        _isSelected = .constant(selected)
+        _content = .constant(content)
+    }
+    
+    var body: some View {
+        content
+            .environment(\.isSelected, isSelected)
+    }
+}
+
+/**
  *  Collection view cell hosting `SwiftUI` content.
  */
 class HostCollectionViewCell<Content: View>: UICollectionViewCell {
-    private var hostController: UIHostingController<Content>?
+    private var hostController: UIHostingController<HostCellView<Content>>?
     
-    private func update(with content: Content?) {
-        if let rootView = content {
+    private func update(with content: Content?, selected: Bool) {
+        if let content = content {
+            let rootView = HostCellView(selected: selected, content: content)
             if let hostController = hostController {
                 hostController.rootView = rootView
             }
@@ -36,7 +55,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     
     var content: Content? {
         didSet {
-            update(with: content)
+            update(with: content, selected: isSelected)
         }
     }
     
@@ -53,6 +72,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
             else {
                 contentView.alpha = isSelected ? 0.3 : 1
             }
+            update(with: content, selected: isSelected)
         }
     }
 }
