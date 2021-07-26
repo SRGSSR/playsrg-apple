@@ -48,7 +48,7 @@ struct MediaDescription {
     }
     
     private static func formattedDate(for media: SRGMedia) -> String {
-        return DateFormatter.play_relativeDateAndTime.string(from: media.date).capitalizedFirstLetter
+        return DateFormatter.play_relative.string(from: media.date).capitalizedFirstLetter
     }
     
     static func title(for media: SRGMedia, style: Style = .date) -> String {
