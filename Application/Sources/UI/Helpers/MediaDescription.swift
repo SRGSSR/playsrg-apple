@@ -63,8 +63,13 @@ struct MediaDescription {
     static func subtitle(for media: SRGMedia, style: Style) -> String? {
         guard media.contentType != .livestream else { return nil }
         if style == .show, let show = media.show {
-            // Unbreakable spaces before / after the separator
-            return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+            if media.title.lowercased().contains(show.title.lowercased()) {
+                return show.title
+            }
+            else {
+                // Unbreakable spaces before / after the separator
+                return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+            }
         }
         else {
             return formattedDate(for: media)
