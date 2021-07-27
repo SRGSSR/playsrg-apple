@@ -26,7 +26,7 @@
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
-        s_dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        s_dateFormatter.dateStyle = NSDateFormatterLongStyle;
         s_dateFormatter.timeStyle = NSDateFormatterShortStyle;
     });
     return s_dateFormatter;
