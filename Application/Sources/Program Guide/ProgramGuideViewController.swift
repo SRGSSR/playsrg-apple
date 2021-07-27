@@ -54,7 +54,7 @@ final class ProgramGuideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerView.content = ProgramGuideHeaderView()
+        headerView.content = ProgramGuideHeaderView(day: day)
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
