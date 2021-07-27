@@ -123,7 +123,7 @@ extension ProfileView {
         @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
         
         private func action() {
-            isAutoplayEnabled = !isAutoplayEnabled
+            isAutoplayEnabled.toggle()
         }
         
         var body: some View {
@@ -145,7 +145,7 @@ extension ProfileView {
         @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
         
         private func action() {
-            isSubtitleAvailabilityDisplayed = !isSubtitleAvailabilityDisplayed
+            isSubtitleAvailabilityDisplayed.toggle()
         }
         
         var body: some View {
@@ -167,7 +167,7 @@ extension ProfileView {
         @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
         
         private func action() {
-            isAudioDescriptionAvailabilityDisplayed = !isAudioDescriptionAvailabilityDisplayed
+            isAudioDescriptionAvailabilityDisplayed.toggle()
         }
         
         var body: some View {
@@ -307,7 +307,7 @@ extension ProfileView {
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         private func action() {
-            isSectionWideSupportEnabled = !isSectionWideSupportEnabled
+            isSectionWideSupportEnabled.toggle()
         }
         
         var body: some View {
