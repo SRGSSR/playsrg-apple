@@ -18,7 +18,8 @@ struct ProgramCell: View {
     private var timeRange: String {
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
-        return "\(startTime) - \(endTime)"
+        // Unbreakable spaces before / after the separator
+        return "\(startTime) - \(endTime)"
     }
     
     init(program: SRGProgram) {
