@@ -121,7 +121,8 @@
         
         self.titleLabel.textColor = UIColor.whiteColor;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        // Unbreakable spaces before / after the separator
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;
@@ -147,7 +148,8 @@
         
         self.titleLabel.textColor = UIColor.whiteColor;
         
-        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
+        // Unbreakable spaces before / after the separator
+        self.subtitleLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:program.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:program.endDate]];
         self.subtitleLabel.textColor = UIColor.whiteColor;
         
         self.disabledOverlayView.hidden = YES;

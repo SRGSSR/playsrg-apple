@@ -87,7 +87,8 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(spacing: 10) {
                 Image(icon)
-                Text(values.joined(separator: " - "))
+                // Unbreakable spaces before / after the separator
+                Text(values.joined(separator: " - "))
                     .srgFont(.subtitle2)
                     .foregroundColor(.white)
             }
@@ -139,7 +140,8 @@ struct MediaDetailView: View {
             guard let media = model.media else { return .placeholder(length: 15)}
             var publication = DateFormatter.play_dateAndTime.string(from: media.date)
             if let availability = MediaDescription.availability(for: media) {
-                publication += " - " + availability
+                // Unbreakable spaces before / after the separator
+                publication += " - " + availability
             }
             return publication
         }

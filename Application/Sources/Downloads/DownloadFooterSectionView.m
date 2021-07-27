@@ -99,7 +99,8 @@
     
     NSString *stringSeparator = @"\n";
     if (self.traitCollection.horizontalSizeClass == UIUserInterfaceSizeClassRegular) {
-        stringSeparator = @" - ";
+        // Unbreakable spaces before / after the separator
+        stringSeparator = @" - ";
     }
     
     NSString *totalFileSizeString = [s_byteCountFormatter stringFromByteCount:totalFilesSize];
