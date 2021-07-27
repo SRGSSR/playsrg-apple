@@ -11,11 +11,11 @@ import UIKit
  *  Internal wrapper to bridge UIKit cell properties with SwiftUI environment.
  */
 private struct HostCellView<Content: View>: View {
+    let isSelected: Bool
     @Binding private var content: Content
-    @Binding var isSelected: Bool
     
     init(selected: Bool, content: Content) {
-        _isSelected = .constant(selected)
+        isSelected = selected
         _content = .constant(content)
     }
     
