@@ -11,21 +11,54 @@ import SwiftUI
 struct EmptyView: View {
     enum State {
         case loading
-        case empty
+        case empty(contentType: ContentType)
         case failed(error: Error)
     }
     
+    enum ContentType {
+        case favoriteShows
+        case history
+        case watchLater
+        case any
+    }
+    
     let state: State
+    
+    private func imageName(for contentType: ContentType) -> String {
+        switch contentType {
+        case .favoriteShows:
+            return "favorite-background"
+        case .history:
+            return "history-background"
+        case .watchLater:
+            return "watch_later_background"
+        case .any:
+            return "media-background"
+        }
+    }
+    
+    private func emtpyTitle(for contentType: ContentType) -> String {
+        switch contentType {
+        case .favoriteShows:
+            return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
+        case .history:
+            return NSLocalizedString("No history", comment: "Text displayed when no history is available")
+        case .watchLater:
+            return NSLocalizedString("No content", comment: "Text displayed when no media added to the later list")
+        case .any:
+            return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
+        }
+    }
     
     var body: some View {
         Group {
             switch state {
             case .loading:
                 ActivityIndicator()
-            case .empty:
+            case let .empty(contentType: contentType):
                 VStack {
-                    Image("media-background")
-                    Text(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
+                    Image(imageName(for: contentType))
+                    Text(emtpyTitle(for: contentType))
                         .srgFont(.H2)
                 }
             case let .failed(error: error):
@@ -60,7 +93,10 @@ struct EmptyView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EmptyView(state: .loading)
-            EmptyView(state: .empty)
+            EmptyView(state: .empty(contentType: .favoriteShows))
+            EmptyView(state: .empty(contentType: .history))
+            EmptyView(state: .empty(contentType: .watchLater))
+            EmptyView(state: .empty(contentType: .any))
             EmptyView(state: .failed(error: PreviewError.kernel32))
         }
         .previewLayout(.fixed(width: 400, height: 400))

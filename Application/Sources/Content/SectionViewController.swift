@@ -14,6 +14,7 @@ import UIKit
 class SectionViewController: UIViewController {
     let model: SectionViewModel
     let fromPushNotification: Bool
+    let emptyViewContentType: EmptyView.ContentType
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -47,8 +48,9 @@ class SectionViewController: UIViewController {
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering? = nil, fromPushNotification: Bool = false) {
+    init(section: Content.Section, filter: SectionFiltering? = nil, emptyViewContentType: EmptyView.ContentType = .any, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
+        self.emptyViewContentType = emptyViewContentType
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
@@ -239,7 +241,7 @@ class SectionViewController: UIViewController {
             navigationItem.rightBarButtonItem = nil
         case let .loaded(headerItem: headerItem, row: row):
             let isEmpty = row.isEmpty
-            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty) : nil
+            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(contentType: emptyViewContentType)) : nil
             
             let hasEditButton = model.section.properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
@@ -357,15 +359,15 @@ extension SectionViewController {
     }
     
     @objc static func favoriteShowsViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.favoriteShows))
+        return SectionViewController(section: .configured(.favoriteShows), emptyViewContentType: .favoriteShows)
     }
     
     @objc static func historyViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.history))
+        return SectionViewController(section: .configured(.history), emptyViewContentType: .history)
     }
     
     @objc static func watchLaterViewController() -> SectionViewController {
-        return SectionViewController(section: .configured(.watchLater))
+        return SectionViewController(section: .configured(.watchLater), emptyViewContentType: .watchLater)
     }
     
     @objc static func mediasViewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
