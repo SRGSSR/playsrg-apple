@@ -105,6 +105,38 @@
 		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Content</string>
+			<key>Key</key>
+			<string>Group_Content</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Delete history</string>
+			<key>Key</key>
+			<string>Button_DeleteHistory</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Delete favorites</string>
+			<key>Key</key>
+			<string>Button_DeleteFavorites</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Delete content saved for later</string>
+			<key>Key</key>
+			<string>Button_DeleteWatchLater</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
 			<key>Key</key>
 			<string>Group_Information</string>
 			<key>Title</key>
@@ -277,38 +309,6 @@
 			<string>Versions and release notes</string>
 			<key>Key</key>
 			<string>Button_VersionsAndReleaseNotes</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Content</string>
-			<key>Key</key>
-			<string>Group_Content</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Delete history</string>
-			<key>Key</key>
-			<string>Button_DeleteHistory</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Delete favorites</string>
-			<key>Key</key>
-			<string>Button_DeleteFavorites</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Delete content saved for later</string>
-			<key>Key</key>
-			<string>Button_DeleteWatchLater</string>
 		</dict>
 		<dict>
 			<key>Type</key>

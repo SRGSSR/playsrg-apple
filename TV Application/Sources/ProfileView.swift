@@ -24,21 +24,6 @@ struct ProfileView: View {
                     ProfileListItem(model: model)
                 }
             }
-            if let synchronizationMessage = synchronizationMessage {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
-                        footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
-                    HistoryRemovalListItem(model: model)
-                    FavoritesRemovalListItem(model: model)
-                    WatchLaterRemovalListItem(model: model)
-                }
-            }
-            else {
-                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
-                    HistoryRemovalListItem(model: model)
-                    FavoritesRemovalListItem(model: model)
-                    WatchLaterRemovalListItem(model: model)
-                }
-            }
             if ApplicationConfiguration.shared.isContinuousPlaybackAvailable {
                 SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Playback", comment: "Playback settings section header")).srgFont(.H3),
                         footer: Text(PlaySRGSettingsLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Playback description footer")).srgFont(.subtitle2).opacity(0.8)) {
@@ -56,15 +41,30 @@ struct ProfileView: View {
                     }
                 }
             }
+            if let synchronizationMessage = synchronizationMessage {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
+                                footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
+                    HistoryRemovalListItem(model: model)
+                    FavoritesRemovalListItem(model: model)
+                    WatchLaterRemovalListItem(model: model)
+                }
+            }
+            else {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
+                    HistoryRemovalListItem(model: model)
+                    FavoritesRemovalListItem(model: model)
+                    WatchLaterRemovalListItem(model: model)
+                }
+            }
+            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", comment: "Information section header")).srgFont(.H3)) {
+                VersionListItem(model: model)
+            }
             #if DEBUG || NIGHTLY || BETA
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
                 SectionWideSupportItem()
             }
             #endif
-            SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", comment: "Information section header")).srgFont(.H3)) {
-                VersionListItem(model: model)
-            }
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
