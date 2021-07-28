@@ -51,7 +51,6 @@ static NSString * const SettingsPermissionsGroup = @"Group_Permissions";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
 
 // Information group
-static NSString * const SettingsInformationGroup = @"Group_Information";
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
@@ -70,6 +69,7 @@ static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeTo
 static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
 // Content group
+static NSString * const SettingsContentGroup = @"Group_Content";
 static NSString * const SettingsDeleteHistoryButton = @"Button_DeleteHistory";
 static NSString * const SettingsDeleteFavoritesButton = @"Button_DeleteFavorites";
 static NSString * const SettingsDeleteWatchLaterButton = @"Button_DeleteWatchLater";
@@ -453,7 +453,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (NSString *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController titleForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
-    if ([key isEqualToString:SettingsInformationGroup]) {
+    if ([key isEqualToString:SettingsContentGroup]) {
         if (SRGIdentityService.currentIdentityService.isLoggedIn) {
             NSDate *synchronizationDate = SRGUserData.currentUserData.user.synchronizationDate;
             NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
