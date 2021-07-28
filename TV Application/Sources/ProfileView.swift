@@ -25,7 +25,7 @@ struct ProfileView: View {
                 }
             }
             if let synchronizationMessage = synchronizationMessage {
-                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3),
                         footer: Text(synchronizationMessage).srgFont(.subtitle2).opacity(0.8)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
@@ -33,7 +33,7 @@ struct ProfileView: View {
                 }
             }
             else {
-                SwiftUI.Section(header: Text(NSLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
+                SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Content", comment: "Profile content section header")).srgFont(.H3)) {
                     HistoryRemovalListItem(model: model)
                     FavoritesRemovalListItem(model: model)
                     WatchLaterRemovalListItem(model: model)
@@ -215,7 +215,7 @@ extension ProfileView {
         
         var body: some View {
             Button(action: action) {
-                Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
+                Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
                     .srgFont(.button)
                     .foregroundColor(model.hasHistoryEntries ? .primary : .secondary)
             }
@@ -254,7 +254,7 @@ extension ProfileView {
         
         var body: some View {
             Button(action: action) {
-                Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
+                Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                     .srgFont(.button)
                     .foregroundColor(model.hasFavorites ? .primary : .secondary)
             }
@@ -279,7 +279,7 @@ extension ProfileView {
                              secondaryButton: secondaryButton)
             }
             else {
-                return Alert(title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                return Alert(title: Text(PlaySRGSettingsLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
                              primaryButton: primaryButton,
                              secondaryButton: secondaryButton)
             }
