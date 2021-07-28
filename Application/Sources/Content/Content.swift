@@ -44,6 +44,7 @@ enum Content {
     
     enum EmptyType: Hashable {
         case favoriteShows
+        case episodesFromFavorites
         case history
         case resumePlayback
         case watchLater
@@ -224,6 +225,8 @@ private extension Content {
                 switch contentSection.presentation.type {
                 case .favoriteShows:
                     return .favoriteShows
+                case .personalizedProgram:
+                    return .episodesFromFavorites
                 case .resumePlayback:
                     return .resumePlayback
                 case .watchLater:
@@ -505,6 +508,8 @@ private extension Content {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows
+            case .radioLatestEpisodes:
+                return .episodesFromFavorites
             case .radioWatchLater, .watchLater:
                 return .watchLater
             case .history:

@@ -19,7 +19,7 @@ struct EmptyView: View {
     
     private func imageName(for emptyType: Content.EmptyType) -> String {
         switch emptyType {
-        case .favoriteShows:
+        case .favoriteShows, .episodesFromFavorites:
             return "favorite-background"
         case .history, .resumePlayback:
             return "history-background"
@@ -36,8 +36,8 @@ struct EmptyView: View {
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
-        case .watchLater, .resumePlayback:
-            return NSLocalizedString("No content", comment: "Text displayed when no media added to the later list or resume playback list")
+        case .watchLater, .resumePlayback, .episodesFromFavorites:
+            return NSLocalizedString("No content", comment: "Text displayed when no media added or displayed in a list")
         case .any:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         }
@@ -87,7 +87,9 @@ struct EmptyView_Previews: PreviewProvider {
         Group {
             EmptyView(state: .loading)
             EmptyView(state: .empty(type: .favoriteShows))
+            EmptyView(state: .empty(type: .episodesFromFavorites))
             EmptyView(state: .empty(type: .history))
+            EmptyView(state: .empty(type: .resumePlayback))
             EmptyView(state: .empty(type: .watchLater))
             EmptyView(state: .empty(type: .any))
             EmptyView(state: .failed(error: PreviewError.kernel32))
