@@ -24,7 +24,7 @@ struct EmptyView: View {
         case .history, .resumePlayback:
             return "history-background"
         case .watchLater:
-            return "watch_later_background"
+            return "watch_later-background"
         case .any:
             return "media-background"
         }
