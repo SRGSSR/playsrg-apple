@@ -102,7 +102,7 @@ static NSArray<Download *> *s_sortedDownloads;
     }
     
     // If no backups, start an empty download list
-    if (!s_downloadsDictionary) {
+    if (! s_downloadsDictionary) {
         s_downloadsDictionary = [NSMutableDictionary dictionary];
     }
     
@@ -248,7 +248,7 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (NSArray<Download *> *)downloads
 {
-    if (!s_sortedDownloads) {
+    if (! s_sortedDownloads) {
         NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(Download.new, creationDate) ascending:NO];
         s_sortedDownloads = [s_downloadsDictionary.allValues sortedArrayUsingDescriptors:@[dateSortDescriptor]];
     }
@@ -264,7 +264,7 @@ static NSArray<Download *> *s_sortedDownloads;
 {
     if ([Download canDownloadMedia:media]) {
         Download *download = [self downloadForMedia:media];
-        if (!download) {
+        if (! download) {
             download = [[Download alloc] initWithMedia:media];
             s_downloadsDictionary[media.URN] = download;
             s_sortedDownloads = nil;            // Invalidate sorted download cache
@@ -286,7 +286,7 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (void)removeDownload:(Download *)download
 {
-    if (!download.URN || !s_downloadsDictionary[download.URN]) {
+    if (! download.URN || !s_downloadsDictionary[download.URN]) {
         return;
     }
     
@@ -305,7 +305,7 @@ static NSArray<Download *> *s_sortedDownloads;
     Download *download = s_downloadsDictionary[media.URN];
     
     // Update download with the object
-    if (download && (!download.media || ![media isEqual:download.media])) {
+    if (download && (! download.media || ! [media isEqual:download.media])) {
         [download updateWithMedia:media];
         [self saveDownloadsDictionary];
     }
@@ -346,7 +346,7 @@ static NSArray<Download *> *s_sortedDownloads;
     NSError *error;
     for (NSString *fileName in [NSFileManager.defaultManager contentsOfDirectoryAtPath:folderPath error:&error]) {
         NSURL *fileURL = [NSURL fileURLWithPath:[folderPath stringByAppendingPathComponent:fileName]];
-        if (![allDownloadedFilesURLs containsObject:fileURL]) {
+        if (! [allDownloadedFilesURLs containsObject:fileURL]) {
             [NSFileManager.defaultManager removeItemAtURL:fileURL error:&error];
         }
     }
@@ -496,7 +496,7 @@ static NSArray<Download *> *s_sortedDownloads;
     NSURL *localURL = [NSURL fileURLWithPath:localURLString];
     [NSFileManager.defaultManager removeItemAtURL:localURL error:nil];
     NSError *error = nil;
-    if (localURL && [NSFileManager.defaultManager moveItemAtURL:tmpFile toURL:localURL error:&error] && !error) {
+    if (localURL && [NSFileManager.defaultManager moveItemAtURL:tmpFile toURL:localURL error:&error] && ! error) {
         BOOL excludeFileFromBackup = [localURL setResourceValue:@YES
                                                          forKey:NSURLIsExcludedFromBackupKey
                                                           error:&error];
@@ -526,7 +526,7 @@ static NSArray<Download *> *s_sortedDownloads;
     NSURL *localURL = [NSURL fileURLWithPath:localURLString];
     [NSFileManager.defaultManager removeItemAtURL:localURL error:nil];
     NSError *error = nil;
-    if (localURL && [NSFileManager.defaultManager moveItemAtURL:tmpFile toURL:localURL error:&error] && !error) {
+    if (localURL && [NSFileManager.defaultManager moveItemAtURL:tmpFile toURL:localURL error:&error] && ! error) {
         self.localImageFileName = imageFileName;
         if ([Download downloadForMedia:self.media]) {
             [Download saveDownloadsDictionary];

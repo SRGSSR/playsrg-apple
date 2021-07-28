@@ -106,14 +106,14 @@ NSString * const DownloadProgressKey = @"DownloadProgress";
     
     BOOL added = NO;
     
-    if (!download.localImageFileURL) {
+    if (! download.localImageFileURL) {
         NSURLSessionDownloadTask *imageFileTask = [self.session downloadTaskWithURL:download.downloadImageURL];
         self.downloads[@(imageFileTask.taskIdentifier)] = download;
         [imageFileTask resume];
         added = YES;
     }
     
-    if (!download.localMediaFileURL) {
+    if (! download.localMediaFileURL) {
         NSURLSessionDownloadTask *mediaFileTask = [self.session downloadTaskWithURL:download.downloadMediaURL];
         self.downloads[@(mediaFileTask.taskIdentifier)] = download;
         [mediaFileTask resume];
