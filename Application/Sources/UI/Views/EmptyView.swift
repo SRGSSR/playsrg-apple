@@ -11,24 +11,17 @@ import SwiftUI
 struct EmptyView: View {
     enum State {
         case loading
-        case empty(contentType: ContentType)
+        case empty(type: Content.EmptyType)
         case failed(error: Error)
-    }
-    
-    enum ContentType {
-        case favoriteShows
-        case history
-        case watchLater
-        case any
     }
     
     let state: State
     
-    private func imageName(for contentType: ContentType) -> String {
-        switch contentType {
+    private func imageName(for emptyType: Content.EmptyType) -> String {
+        switch emptyType {
         case .favoriteShows:
             return "favorite-background"
-        case .history:
+        case .history, .resumePlayback:
             return "history-background"
         case .watchLater:
             return "watch_later_background"
@@ -37,14 +30,14 @@ struct EmptyView: View {
         }
     }
     
-    private func emtpyTitle(for contentType: ContentType) -> String {
-        switch contentType {
+    private func emtpyTitle(for emptyType: Content.EmptyType) -> String {
+        switch emptyType {
         case .favoriteShows:
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
-        case .watchLater:
-            return NSLocalizedString("No content", comment: "Text displayed when no media added to the later list")
+        case .watchLater, .resumePlayback:
+            return NSLocalizedString("No content", comment: "Text displayed when no media added to the later list or resume playback list")
         case .any:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         }
@@ -55,7 +48,7 @@ struct EmptyView: View {
             switch state {
             case .loading:
                 ActivityIndicator()
-            case let .empty(contentType: contentType):
+            case let .empty(type: contentType):
                 VStack {
                     Image(imageName(for: contentType))
                     Text(emtpyTitle(for: contentType))
@@ -93,10 +86,10 @@ struct EmptyView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EmptyView(state: .loading)
-            EmptyView(state: .empty(contentType: .favoriteShows))
-            EmptyView(state: .empty(contentType: .history))
-            EmptyView(state: .empty(contentType: .watchLater))
-            EmptyView(state: .empty(contentType: .any))
+            EmptyView(state: .empty(type: .favoriteShows))
+            EmptyView(state: .empty(type: .history))
+            EmptyView(state: .empty(type: .watchLater))
+            EmptyView(state: .empty(type: .any))
             EmptyView(state: .failed(error: PreviewError.kernel32))
         }
         .previewLayout(.fixed(width: 400, height: 400))

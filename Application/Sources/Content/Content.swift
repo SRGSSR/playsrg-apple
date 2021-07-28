@@ -42,6 +42,14 @@ enum Content {
         case showAccess(radioChannel: RadioChannel?)
     }
     
+    enum EmptyType: Hashable {
+        case favoriteShows
+        case history
+        case resumePlayback
+        case watchLater
+        case any
+    }
+    
     static func mediaItems(from items: [Content.Item]) -> [Content.Item] {
         return items.filter { item in
             if case .media = item {
@@ -101,6 +109,7 @@ protocol SectionProperties {
     var placeholderItems: [Content.Item] { get }
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
+    var emptyType: Content.EmptyType { get }
     
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
@@ -206,6 +215,24 @@ private extension Content {
                 }
             case .none:
                 return false
+            }
+        }
+        
+        var emptyType: Content.EmptyType {
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return .favoriteShows
+                case .resumePlayback:
+                    return .resumePlayback
+                case .watchLater:
+                    return .watchLater
+                default:
+                    return .any
+                }
+            default:
+                return .any
             }
         }
         
@@ -471,6 +498,21 @@ private extension Content {
                 return true
             default:
                 return false
+            }
+        }
+        
+        var emptyType: Content.EmptyType {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return .favoriteShows
+            case .radioWatchLater, .watchLater:
+                return .watchLater
+            case .history:
+                return .history
+            case .radioResumePlayback:
+                return .resumePlayback
+            default:
+                return .any
             }
         }
         
