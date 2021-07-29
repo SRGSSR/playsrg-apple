@@ -17,5 +17,5 @@
   "1.2.1-16": "- Fix potential crashes when empty list are refreshed on home pages.",
   "1.3.0-17": "- Home and topic pages are now editorialized.\n- New badges identify content for which alternate audio tracks are available.",
   "1.3.0-18": "- Modernize show detail page.\n- Fix incorrect progress information sometimes displayed to the user.",
-  "1.3.1-19": "- Restore displayed date in program pages and home page.\n- Fix potential crashes."
+  "1.3.1-19": "- Restore displayed dates in show pages and home page.\n- Fix potential crashes."
 }
