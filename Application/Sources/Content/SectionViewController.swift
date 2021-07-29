@@ -219,7 +219,8 @@ class SectionViewController: UIViewController {
     private func updateDeleteButton(animated: Bool) {
         if isEditing {
             let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
-            deleteBarButtonItem.tintColor = model.numberOfSelectedItem != 0 ? .red : .gray
+            deleteBarButtonItem.tintColor = .red
+            deleteBarButtonItem.isEnabled =  model.numberOfSelectedItem != 0
             deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
             navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
         }
@@ -307,24 +308,15 @@ class SectionViewController: UIViewController {
     }
     
     @objc private func deleteSelectedItems(_ barButtonItem: UIBarButtonItem) {
-        if model.numberOfSelectedItem != 0 {
-            let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
-                                                    message: NSLocalizedString("The selected items will be deleted.", comment: "Confirmation message displayed when the user is about to delete selected entries"),
-                                                    preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .default, handler: nil))
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: "Title of a delete button"), style: .destructive, handler: { _ in
-                self.model.deleteSelection()
-                self.setEditing(false, animated: true)
-            }))
-            present(alertController, animated: true, completion: nil)
-        }
-        else {
-            let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
-                                                    message: NSLocalizedString("Please select one or more items.", comment: "Message displayed when the user does not have selected items"),
-                                                    preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title button when no selected items"), style: .default, handler: nil))
-            present(alertController, animated: true, completion: nil)
-        }
+        let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
+                                                message: NSLocalizedString("The selected items will be deleted.", comment: "Confirmation message displayed when the user is about to delete selected entries"),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: "Title of a delete button"), style: .destructive, handler: { _ in
+            self.model.deleteSelection()
+            self.setEditing(false, animated: true)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
     #endif
 }
