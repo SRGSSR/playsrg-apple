@@ -320,7 +320,7 @@ class SectionViewController: UIViewController {
         }
         else {
             let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
-                                                    message: NSLocalizedString("Please select one or more items to delete.", comment: "Message displayed when the user does not have selected items to delete"),
+                                                    message: NSLocalizedString("Please select one or more items.", comment: "Message displayed when the user does not have selected items"),
                                                     preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Title button when no selected items"), style: .default, handler: nil))
             present(alertController, animated: true, completion: nil)
