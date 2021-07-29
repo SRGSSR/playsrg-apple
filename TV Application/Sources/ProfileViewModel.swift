@@ -5,7 +5,6 @@
 //
 
 import Combine
-import SwiftUI
 import SRGAnalytics
 import SRGUserData
 
