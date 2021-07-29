@@ -328,7 +328,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    // Ensures the state is updated after the user left the app to toggle notifications on or off in the Settings app.
+    // Ensures the state is updated after if the user returns to the app (push notification settings might have been
+    // changed)
     [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
         dispatch_async(dispatch_get_main_queue(), ^{
             BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);

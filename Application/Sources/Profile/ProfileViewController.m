@@ -454,19 +454,16 @@
 
 - (void)pushServiceDidReceiveNotification:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
     [self reloadData];
 }
 
 - (void)pushServiceBadgeDidChange:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
     [self reloadData];
 }
 
 - (void)pushServiceStatusDidChange:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed (if enabled)
     [self reloadData];
 }
 
