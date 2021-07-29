@@ -6,6 +6,7 @@
 
 import Combine
 import SRGDataProviderModel
+import SRGIdentity
 
 class ShowHeaderViewModel: ObservableObject {
     var show: SRGShow? {
@@ -16,6 +17,8 @@ class ShowHeaderViewModel: ObservableObject {
     
     @Published private(set) var isFavorite: Bool = false
     @Published private(set) var isSubscribed: Bool = false
+    
+    @Published var isFavoriteRemovalAlertDisplayed: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -55,6 +58,11 @@ class ShowHeaderViewModel: ObservableObject {
         else {
             return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
         }
+    }
+    
+    var shouldDisplayFavoriteRemovalAlert: Bool {
+        guard let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn, let show = show else { return false }
+        return FavoritesIsSubscribedToShow(show)
     }
     
     #if os(iOS)
@@ -99,6 +107,10 @@ class ShowHeaderViewModel: ObservableObject {
         guard let show = show else { return }
         FavoritesToggleShow(show)
         updateData()
+        
+        if !isFavorite {
+            Signal.removeFavorite(for: [.show(show)])
+        }
         
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue
