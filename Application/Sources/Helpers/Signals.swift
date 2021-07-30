@@ -9,6 +9,30 @@ import SRGUserData
 
 import struct Foundation.Notification
 
+/**
+ * TODO: User data is currently stored in SRG User Data, but sadly update notifications do not convey information about
+ *       what changed (we only know that an updated occurred, and which ids changed, but not what was inserted, deleted
+ *       or simply updated). Combined with the need for pagination in Play this creates two challenges:
+ *         - How can we apply updates to paginated lists of content in a reliable way?
+ *         - How can we avoid global refreshes for small changesets, i.e. how can we avoid responding to an opaque update
+ *           only by reloading all results from SRG User Data?
+ *
+ *       Proper SRG User Data support for such use cases should be made, but this is currently out of scope and costly
+ *       to implement:
+ *         - Supporting updates in paginated lists requires more metadata to be stored with items synchronized by user
+ *           data, so that no additional requests are required to locally enhance items which have newly be added.
+ *         - Opaque change notifications should provide diffsets so that we can apply changes incrementally.
+ *
+ *       A task exists (https://github.com/SRGSSR/srguserdata-apple/issues/3) to implement such improvements when we
+ *       have to rewrite data sync in SRG User Data (since we will use another service at some point in the future).
+ *
+ *       Until then we can mitigate such issues by publishing results in two ways using signal publishers:
+ *         - User interaction signals: We can apply changes to existing data manipulated by the user directly on device,
+ *           without having to request more data from the server.
+ *         - Throttled update signals: Throttling avoids changes to be ineffficiently applied too many times in a row,
+ *           especially during initial data sync.
+ */
+
 // MARK: Signals for throttled data updates
 
 enum ThrottledSignal {
