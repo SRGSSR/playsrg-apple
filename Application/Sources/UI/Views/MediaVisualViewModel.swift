@@ -63,7 +63,7 @@ class MediaVisualViewModel: ObservableObject {
         cancellables = []
         
         if let media = media {
-            Signal.historyUpdate(for: media.urn)
+            ThrottledSignal.historyUpdates(for: media.urn)
                 .sink { [weak self] _ in
                     self?.updateProgress()
                 }

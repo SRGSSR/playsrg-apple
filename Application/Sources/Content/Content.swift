@@ -102,8 +102,8 @@ protocol SectionProperties {
     /// results can be retrieved (if any) using a paginator, one page at a time.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
     
-    /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
-    func removalPublisher() -> AnyPublisher<[Content.Item], Never>
+    /// Publisher for interactive updates (addition / removal of items by the user).
+    func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never>
     
     /// Signal which can be used to trigger a section reload.
     func reloadSignal() -> AnyPublisher<Void, Never>?
@@ -343,16 +343,16 @@ private extension Content {
             }
         }
         
-        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+        func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows, .personalizedProgram:
-                    return Signal.favoritesRemoval()
+                    return UserInteractionSignal.favoriteUpdates()
                 case .resumePlayback:
-                    return Signal.historyRemoval()
+                    return UserInteractionSignal.historyUpdates()
                 case .watchLater:
-                    return Signal.watchLaterRemoval()
+                    return UserInteractionSignal.watchLaterUpdates()
                 default:
                     return Just([]).eraseToAnyPublisher()
                 }
@@ -364,9 +364,9 @@ private extension Content {
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .personalizedProgram:
-                return Signal.favoritesUpdate()
+                return ThrottledSignal.favoriteUpdates()
             case .watchLater:
-                return Signal.watchLaterUpdate()
+                return ThrottledSignal.watchLaterUpdates()
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
@@ -693,14 +693,14 @@ private extension Content {
             }
         }
         
-        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+        func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesRemoval()
+                return UserInteractionSignal.favoriteUpdates()
             case .history, .radioResumePlayback:
-                return Signal.historyRemoval()
+                return UserInteractionSignal.historyUpdates()
             case .radioWatchLater, .watchLater:
-                return Signal.watchLaterRemoval()
+                return UserInteractionSignal.watchLaterUpdates()
             default:
                 return Just([]).eraseToAnyPublisher()
             }
@@ -709,9 +709,9 @@ private extension Content {
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesUpdate()
+                return ThrottledSignal.favoriteUpdates()
             case .radioWatchLater, .watchLater:
-                return Signal.watchLaterUpdate()
+                return ThrottledSignal.watchLaterUpdates()
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
@@ -740,14 +740,14 @@ private extension Content {
     static func removeFromFavorites(_ items: [Content.Item]) {
         let shows = Content.shows(from: items)
         FavoritesRemoveShows(shows)
-        Signal.removeFavorite(for: shows)
+        UserInteractionEvent.removeFromFavorites(shows)
     }
     
     static func removeFromWatchLater(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         WatchLaterRemoveMediaMetadataList(medias) { error in
             guard error == nil else { return }
-            Signal.removeWatchLater(for: medias)
+            UserInteractionEvent.removeFromWatchLater(medias)
         }
     }
     
@@ -755,7 +755,7 @@ private extension Content {
         let medias = Content.medias(from: items)
         HistoryRemoveMediaMetadataList(medias) { error in
             guard error == nil else { return }
-            Signal.removeHistory(for: medias)
+            UserInteractionEvent.removeFromHistory(medias)
         }
     }
 }

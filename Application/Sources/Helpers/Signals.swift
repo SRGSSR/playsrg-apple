@@ -9,28 +9,13 @@ import SRGUserData
 
 import struct Foundation.Notification
 
-// MARK: Notifications
+// MARK: Signals for throttled data updates
 
-/**
- *  Internal notifications sent to signal item removal.
- */
-private extension Notification.Name {
-    static let didRemoveFavorites = Notification.Name("SignalDidRemoveFavoritesNotification")
-    static let didRemoveHistoryEntries = Notification.Name("SignalDidRemoveHistoryEntriesNotification")
-    static let didRemoveWatchLaterEntries = Notification.Name("SignalDidRemoveWatchLaterEntriesNotification")
-}
-
-// MARK: Signals which can be used in pipelines
-
-enum Signal {
-    enum RemovalKey {
-        static let removedItems = "SignalRemovedItemsKey"
-    }
-
+enum ThrottledSignal {
     /**
      *  Emits a signal when the history is updated for some uid or, if omitted, when any history update occurs.
      */
-    static func historyUpdate(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func historyUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
                 guard let uid = uid else { return true }
@@ -49,7 +34,7 @@ enum Signal {
     /**
      *  Emits a signal when the watch later playlist is updated for some uid or, if omitted, when any watch later update occurs.
      */
-    static func watchLaterUpdate(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func watchLaterUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
@@ -73,7 +58,7 @@ enum Signal {
     /**
      *  Emits a signal when the favorite list is updated.
      */
-    static func favoritesUpdate() -> AnyPublisher<Void, Never> {
+    static func favoriteUpdates() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
@@ -87,28 +72,11 @@ enum Signal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
-    
-    static func historyRemoval() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didRemoveHistoryEntries)
-            .compactMap { $0.userInfo?[RemovalKey.removedItems] as? [Content.Item] }
-            .scan([Content.Item]()) { $0 + $1 }
-            .eraseToAnyPublisher()
-    }
-    
-    static func watchLaterRemoval() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didRemoveWatchLaterEntries)
-            .compactMap { $0.userInfo?[RemovalKey.removedItems] as? [Content.Item] }
-            .scan([Content.Item]()) { $0 + $1 }
-            .eraseToAnyPublisher()
-    }
-    
-    static func favoritesRemoval() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didRemoveFavorites)
-            .compactMap { $0.userInfo?[RemovalKey.removedItems] as? [Content.Item] }
-            .scan([Content.Item]()) { $0 + $1 }
-            .eraseToAnyPublisher()
-    }
-    
+}
+
+// MARK: Signals for application events
+
+enum ApplicationSignal {
     /**
      *
      *  Emits a signal when the application is woken up (network reachable again or moved to the foreground).
@@ -132,27 +100,88 @@ enum Signal {
     }
 }
 
-// MARK: Methods which can be used to declare item removal
+// MARK: Notifications
 
-extension Signal {
-    static func removeHistory(for medias: [SRGMedia]) {
-        guard !medias.isEmpty else { return }
-        NotificationCenter.default.post(name: .didRemoveHistoryEntries, object: nil, userInfo: [
-            RemovalKey.removedItems: medias.map { Content.Item.media($0) }
+/**
+ *  Internal notifications sent to signal item updates resulting from user interaction.
+ */
+private extension Notification.Name {
+    static let didUpdateFavorites = Notification.Name("UserInteractionDidUpdateFavoritesNotification")
+    static let didUpdateHistoryEntries = Notification.Name("UserInteractionDidUpdateHistoryEntriesNotification")
+    static let didUpdateWatchLaterEntries = Notification.Name("UserInteractionDidUpdateWatchLaterEntriesNotification")
+}
+
+private enum UserInteractionUpdateKey {
+    static let addedItems = "UserInteractionAddedItemsKey"
+    static let removedItems = "UserInteractionRemovedItemsKey"
+}
+
+// MARK: Signals for immediate data updates resulting from user interaction
+
+enum UserInteractionSignal {
+    private static func consolidate(items: [Content.Item], with notification: Notification) -> [Content.Item] {
+        if let addedItems = notification.userInfo?[UserInteractionUpdateKey.removedItems] as? [Content.Item] {
+            return items + addedItems
+        }
+        else if let removedItems = notification.userInfo?[UserInteractionUpdateKey.addedItems] as? [Content.Item] {
+            return Array(Set(items).subtracting(removedItems))
+        }
+        else {
+            return items
+        }
+    }
+    
+    static func historyUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateHistoryEntries)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .eraseToAnyPublisher()
+    }
+    
+    static func watchLaterUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateWatchLaterEntries)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .eraseToAnyPublisher()
+    }
+    
+    static func favoriteUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateFavorites)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .eraseToAnyPublisher()
+    }
+}
+
+// MARK: Methods to notify data updates resulting from user interaction
+
+enum UserInteractionEvent {
+    private static func notify(_ name: Notification.Name, for items: [Content.Item], added: Bool) {
+        guard !items.isEmpty else { return }
+        let key = added ? UserInteractionUpdateKey.addedItems : UserInteractionUpdateKey.removedItems
+        NotificationCenter.default.post(name: name, object: nil, userInfo: [
+            key: items
         ])
     }
     
-    static func removeWatchLater(for medias: [SRGMedia]) {
-        guard !medias.isEmpty else { return }
-        NotificationCenter.default.post(name: .didRemoveWatchLaterEntries, object: nil, userInfo: [
-            RemovalKey.removedItems: medias.map { Content.Item.media($0) }
-        ])
+    static func addToHistory(_ medias: [SRGMedia]) {
+        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: true)
     }
     
-    static func removeFavorite(for shows: [SRGShow]) {
-        guard !shows.isEmpty else { return }
-        NotificationCenter.default.post(name: .didRemoveFavorites, object: nil, userInfo: [
-            RemovalKey.removedItems: shows.map { Content.Item.show($0) }
-        ])
+    static func removeFromHistory(_ medias: [SRGMedia]) {
+        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: false)
+    }
+    
+    static func addToWatchLater(_ medias: [SRGMedia]) {
+        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: true)
+    }
+    
+    static func removeFromWatchLater(_ medias: [SRGMedia]) {
+        notify(.didUpdateFavorites, for: medias.map { Content.Item.media($0) }, added: false)
+    }
+    
+    static func addToFavorites(_ shows: [SRGShow]) {
+        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: true)
+    }
+    
+    static func removeFromFavorites(_ shows: [SRGShow]) {
+        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
     }
 }

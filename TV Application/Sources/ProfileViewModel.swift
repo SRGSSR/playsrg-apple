@@ -70,21 +70,21 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
         updateSynchronizationDate()
         
-        Signal.historyUpdate()
+        ThrottledSignal.historyUpdates()
             .sink { [weak self] _ in
                 self?.updateHistoryInformation()
             }
             .store(in: &cancellables)
         updateHistoryInformation()
         
-        Signal.watchLaterUpdate()
+        ThrottledSignal.watchLaterUpdates()
             .sink { [weak self] _ in
                 self?.updateWatchLaterInformation()
             }
             .store(in: &cancellables)
         updateWatchLaterInformation()
         
-        Signal.favoritesUpdate()
+        ThrottledSignal.favoriteUpdates()
             .sink { [weak self] _ in
                 self?.updateFavoritesInformation()
             }

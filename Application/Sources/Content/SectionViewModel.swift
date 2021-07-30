@@ -36,7 +36,7 @@ class SectionViewModel: ObservableObject {
                                                 paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
                                                 filter: filter)
                     .scan([]) { $0 + $1 },
-                rowSection.properties.removalPublisher()
+                rowSection.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -55,7 +55,7 @@ class SectionViewModel: ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
             .sink { [weak self] in
                 self?.reload()
             }

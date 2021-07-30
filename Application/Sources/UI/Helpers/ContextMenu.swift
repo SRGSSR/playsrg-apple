@@ -122,7 +122,7 @@ private extension ContextMenu {
                 guard error == nil else { return }
                 
                 if !added {
-                    Signal.removeWatchLater(for: [media])
+                    UserInteractionEvent.removeFromWatchLater([media])
                 }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
@@ -149,7 +149,7 @@ private extension ContextMenu {
             HistoryRemoveMediaMetadataList([media]) { error in
                 guard error == nil else { return }
                 
-                Signal.removeHistory(for: [media])
+                UserInteractionEvent.removeFromHistory([media])
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.peekMenu.rawValue
@@ -259,7 +259,7 @@ private extension ContextMenu {
             FavoritesToggleShow(show)
             
             if isFavorite {
-                Signal.removeFavorite(for: [show])
+                UserInteractionEvent.removeFromFavorites([show])
             }
             
             let labels = SRGAnalyticsHiddenEventLabels()

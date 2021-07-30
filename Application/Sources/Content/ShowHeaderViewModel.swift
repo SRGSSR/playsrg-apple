@@ -109,7 +109,7 @@ class ShowHeaderViewModel: ObservableObject {
         updateData()
         
         if !isFavorite {
-            Signal.removeFavorite(for: [show])
+            UserInteractionEvent.removeFromFavorites([show])
         }
         
         let labels = SRGAnalyticsHiddenEventLabels()
@@ -143,7 +143,7 @@ class ShowHeaderViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        Publishers.Merge(Signal.favoritesUpdate(), Signal.wokenUp())
+        Publishers.Merge(ThrottledSignal.favoriteUpdates(), ApplicationSignal.wokenUp())
             .sink { [weak self] _ in
                 self?.updateData()
             }

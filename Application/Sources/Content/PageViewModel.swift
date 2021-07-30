@@ -65,7 +65,7 @@ class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceStatus)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
             .sink { [weak self] in
                 self?.reload()
             }
@@ -289,7 +289,7 @@ private extension SRGDataProvider {
         return Publishers.CombineLatest(
             section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .scan([]) { $0 + $1 },
-            section.properties.removalPublisher()
+            section.properties.interactiveUpdatesPublisher()
                 .prepend(Just([]))
                 .setFailureType(to: Error.self)
         )
