@@ -17,27 +17,3 @@ extension UICollectionView {
         return dequeueConfiguredReusableCell(using: Self.mediaCellRegistration, for: indexPath, item: media)
     }
 }
-
-@objc protocol MediaSettable {
-    var media: SRGMedia? { get set }
-}
-
-extension UITableView {
-    class MediaTableViewCell: HostTableViewCell<MediaCell>, MediaSettable {
-        var media: SRGMedia? {
-            willSet {
-                content = MediaCell(media: newValue, style: .show, layout: .horizontal)
-            }
-        }
-    }
-    
-    private static let reuseIdentifier = "MediaCell"
-    
-    @objc func registerReusableMediaCell() {
-        register(MediaTableViewCell.self, forCellReuseIdentifier: Self.reuseIdentifier)
-    }
-    
-    @objc func dequeueReusableMediaCell(for indexPath: IndexPath) -> UITableViewCell & MediaSettable {
-        return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! MediaTableViewCell
-    }
-}

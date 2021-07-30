@@ -10,17 +10,20 @@ import SwiftUI
 // MARK: View
 
 struct ShowCell: View {
+    enum Style {
+        case standard
+        case favorite
+    }
+    
     let show: SRGShow?
-    let direction: StackDirection
-    let hasSubscriptionButton: Bool
+    let style: Style
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
-    init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
+    init(show: SRGShow?, style: Style) {
         self.show = show
-        self.direction = direction
-        self.hasSubscriptionButton = hasSubscriptionButton
+        self.style = style
     }
     
     var body: some View {
@@ -36,18 +39,13 @@ struct ShowCell: View {
                     .padding(.top, ShowCellSize.verticalPadding)
             }
             #else
-            Stack(direction: direction, spacing: 0) {
+            VStack(spacing: 0) {
                 ImageView(url: show?.imageUrl(for: .small))
                     .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                 DescriptionView(show: show)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)
-                if self.hasSubscriptionButton {
-                    SubscriptionButton(show: show)
-                        .padding(.horizontal, ShowCellSize.horizontalPadding)
-                        .padding(.vertical, ShowCellSize.verticalPadding)
-                }
             }
             .background(Color.srgGray23)
             .redactable()
@@ -122,31 +120,17 @@ final class ShowCellSize: NSObject {
     @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
     }
-    
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
-    }
-    
-    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
-    }
 }
 
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = ShowCellSize.swimlane().previewSize
-    static private let horizontalLayoutSize = ShowCellSize.fullWidth().previewSize
+    static private let size = ShowCellSize.swimlane().previewSize
     
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard))
-            .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
-    
-        Group {
-            ShowCell(show: Mock.show(.standard), direction: .horizontal)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-            ShowCell(show: Mock.show(.standard), direction: .horizontal, hasSubscriptionButton: true)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-        }
+        ShowCell(show: Mock.show(.standard), style: .standard)
+            .previewLayout(.fixed(width: size.width, height: size.height))
+        ShowCell(show: Mock.show(.standard), style: .favorite)
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

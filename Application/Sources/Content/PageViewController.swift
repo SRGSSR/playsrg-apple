@@ -572,7 +572,7 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show)
+                PlaySRG.ShowCell(show: show, style: .standard)
             }
         }
     }

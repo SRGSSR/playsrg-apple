@@ -627,7 +627,7 @@ private extension SectionViewController {
                     MediaCell(media: media, style: .show)
                 }
             case let .show(show):
-                ShowCell(show: show)
+                ShowCell(show: show, style: .standard)
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
             default:
