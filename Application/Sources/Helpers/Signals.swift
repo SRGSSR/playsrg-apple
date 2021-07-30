@@ -145,7 +145,7 @@ private enum UserInteractionUpdateKey {
 enum UserInteractionSignal {
     private static func consolidate(items: [Content.Item], with notification: Notification) -> [Content.Item] {
         if let addedItems = notification.userInfo?[UserInteractionUpdateKey.removedItems] as? [Content.Item] {
-            return items + addedItems
+            return Array(Set(items).union(addedItems))
         }
         else if let removedItems = notification.userInfo?[UserInteractionUpdateKey.addedItems] as? [Content.Item] {
             return Array(Set(items).subtracting(removedItems))
