@@ -62,7 +62,7 @@ struct HeaderView: View {
 
 // MARK: Size
 
-class HeaderViewSize: NSObject {
+final class HeaderViewSize: NSObject {
     @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
             let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))

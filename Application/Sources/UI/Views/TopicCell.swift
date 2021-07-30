@@ -73,7 +73,7 @@ private extension TopicCell {
 
 // MARK: Size
 
-class TopicCellSize: NSObject {
+final class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)

@@ -131,7 +131,7 @@ private extension FeaturedContentCell {
 
 // MARK: Size
 
-class FeaturedContentCellSize: NSObject {
+final class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {

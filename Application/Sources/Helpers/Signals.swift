@@ -176,7 +176,7 @@ enum UserInteractionSignal {
 
 // MARK: Methods to notify data updates resulting from user interaction
 
-enum UserInteractionEvent {
+@objc final class UserInteractionEvent: NSObject {
     private static func notify(_ name: Notification.Name, for items: [Content.Item], added: Bool) {
         guard !items.isEmpty else { return }
         let key = added ? UserInteractionUpdateKey.addedItems : UserInteractionUpdateKey.removedItems
@@ -185,27 +185,27 @@ enum UserInteractionEvent {
         ])
     }
     
-    static func addToHistory(_ medias: [SRGMedia]) {
+    @objc static func addToHistory(_ medias: [SRGMedia]) {
         notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: true)
     }
     
-    static func removeFromHistory(_ medias: [SRGMedia]) {
+    @objc static func removeFromHistory(_ medias: [SRGMedia]) {
         notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: false)
     }
     
-    static func addToWatchLater(_ medias: [SRGMedia]) {
+    @objc static func addToWatchLater(_ medias: [SRGMedia]) {
         notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: true)
     }
     
-    static func removeFromWatchLater(_ medias: [SRGMedia]) {
+    @objc static func removeFromWatchLater(_ medias: [SRGMedia]) {
         notify(.didUpdateFavorites, for: medias.map { Content.Item.media($0) }, added: false)
     }
     
-    static func addToFavorites(_ shows: [SRGShow]) {
+    @objc static func addToFavorites(_ shows: [SRGShow]) {
         notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: true)
     }
     
-    static func removeFromFavorites(_ shows: [SRGShow]) {
+    @objc static func removeFromFavorites(_ shows: [SRGShow]) {
         notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
     }
 }

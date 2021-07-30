@@ -99,7 +99,7 @@ private extension ShowCell {
 
 // MARK: Size
 
-class ShowCellSize: NSObject {
+final class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)

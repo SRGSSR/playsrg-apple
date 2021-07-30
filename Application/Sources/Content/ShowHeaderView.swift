@@ -181,7 +181,7 @@ private extension View {
 
 // MARK: Size
 
-class ShowHeaderViewSize: NSObject {
+final class ShowHeaderViewSize: NSObject {
     static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()

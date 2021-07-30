@@ -164,7 +164,7 @@ private extension MediaCell {
 
 // MARK: Size
 
-class MediaCellSize: NSObject {
+final class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)

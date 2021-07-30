@@ -57,7 +57,7 @@ struct ShowAccessCell: View {
 
 // MARK: Size
 
-class ShowAccessCellSize: NSObject {
+final class ShowAccessCellSize: NSObject {
     @objc static func fullWidth(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
