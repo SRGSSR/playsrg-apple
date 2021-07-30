@@ -108,10 +108,6 @@ class ShowHeaderViewModel: ObservableObject {
         FavoritesToggleShow(show)
         updateData()
         
-        if !isFavorite {
-            UserInteractionEvent.removeFromFavorites([show])
-        }
-        
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue
         labels.value = show.urn

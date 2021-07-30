@@ -740,23 +740,16 @@ private extension Content {
     static func removeFromFavorites(_ items: [Content.Item]) {
         let shows = Content.shows(from: items)
         FavoritesRemoveShows(shows)
-        UserInteractionEvent.removeFromFavorites(shows)
     }
     
     static func removeFromWatchLater(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
-        WatchLaterRemoveMediaMetadataList(medias) { error in
-            guard error == nil else { return }
-            UserInteractionEvent.removeFromWatchLater(medias)
-        }
+        WatchLaterRemoveMediaMetadataList(medias) { _ in }
     }
     
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
-        HistoryRemoveMediaMetadataList(medias) { error in
-            guard error == nil else { return }
-            UserInteractionEvent.removeFromHistory(medias)
-        }
+        HistoryRemoveMediaMetadataList(medias) { _ in }
     }
 }
 

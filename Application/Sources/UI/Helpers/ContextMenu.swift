@@ -121,10 +121,6 @@ private extension ContextMenu {
             WatchLaterToggleMediaMetadata(media) { added, error in
                 guard error == nil else { return }
                 
-                if !added {
-                    UserInteractionEvent.removeFromWatchLater([media])
-                }
-                
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.peekMenu.rawValue
                 labels.value = media.urn
@@ -148,8 +144,6 @@ private extension ContextMenu {
                                   image: UIImage(named: "history")!) { _ in
             HistoryRemoveMediaMetadataList([media]) { error in
                 guard error == nil else { return }
-                
-                UserInteractionEvent.removeFromHistory([media])
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.peekMenu.rawValue
@@ -257,10 +251,6 @@ private extension ContextMenu {
         let isFavorite = FavoritesContainsShow(show)
         let menuAction = UIAction(title: title(isFavorite: isFavorite), image: image(isFavorite: isFavorite)) { _ in
             FavoritesToggleShow(show)
-            
-            if isFavorite {
-                UserInteractionEvent.removeFromFavorites([show])
-            }
             
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.peekMenu.rawValue
