@@ -14,6 +14,7 @@ struct ShowCell: View {
     let direction: StackDirection
     let hasSubscriptionButton: Bool
     
+    @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
     init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
@@ -88,7 +89,7 @@ private extension ShowCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Edits selection.", comment: "Show cell hint in edit mode")
     }
     
     var accessibilityTraits: AccessibilityTraits {

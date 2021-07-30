@@ -11,16 +11,19 @@ import UIKit
  *  Internal wrapper to bridge UIKit cell properties with SwiftUI environment.
  */
 private struct HostCellView<Content: View>: View {
+    let isEditing: Bool
     let isSelected: Bool
     @Binding private var content: Content
     
-    init(selected: Bool, content: Content) {
+    init(editing: Bool, selected: Bool, content: Content) {
+        isEditing = editing
         isSelected = selected
         _content = .constant(content)
     }
     
     var body: some View {
         content
+            .environment(\.isEditing, isEditing)
             .environment(\.isSelected, isSelected)
     }
 }
@@ -31,9 +34,9 @@ private struct HostCellView<Content: View>: View {
 class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     private var hostController: UIHostingController<HostCellView<Content>>?
     
-    private func update(with content: Content?, selected: Bool) {
+    private func update(with content: Content?, editing: Bool, selected: Bool) {
         if let content = content {
-            let rootView = HostCellView(selected: selected, content: content)
+            let rootView = HostCellView(editing: editing, selected: selected, content: content)
             if let hostController = hostController {
                 hostController.rootView = rootView
             }
@@ -55,7 +58,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     
     var content: Content? {
         didSet {
-            update(with: content, selected: isSelected)
+            update(with: content, editing: isEditing, selected: isSelected)
         }
     }
     
@@ -72,7 +75,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
             else {
                 contentView.alpha = isSelected ? 0.3 : 1
             }
-            update(with: content, selected: isSelected)
+            update(with: content, editing: isEditing, selected: isSelected)
         }
     }
 }

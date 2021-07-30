@@ -7,6 +7,13 @@
 import SwiftUI
 
 /**
+ *  Editing state internal environment key.
+ */
+private struct EditingKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+/**
  *  Selection state internal environment key.
  */
 private struct SelectedKey: EnvironmentKey {
@@ -17,6 +24,18 @@ private struct SelectedKey: EnvironmentKey {
  *  Custom environment keys.
  */
 extension EnvironmentValues {
+    /**
+     *  Editing state.
+     */
+    var isEditing: Bool {
+        get {
+            self[EditingKey.self]
+        }
+        set {
+            self[EditingKey.self] = newValue
+        }
+    }
+    
     /**
      *  Selection state.
      */

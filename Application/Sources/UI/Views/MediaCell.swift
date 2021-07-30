@@ -24,6 +24,7 @@ struct MediaCell: View {
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
     @State private var isFocused = false
+    @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
     #if os(iOS)
@@ -153,7 +154,7 @@ private extension MediaCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Edits selection.", comment: "Media cell hint in edit mode")
     }
     
     var accessibilityTraits: AccessibilityTraits {
