@@ -5,6 +5,7 @@
 //
 
 import Combine
+import Intents
 import SRGAppearanceSwift
 import SwiftUI
 import UIKit
@@ -156,6 +157,16 @@ class SectionViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView)
+        
+        if displayingUserActivityShow != nil, let bundleIdentifier = Bundle.main.bundleIdentifier {
+            userActivity = NSUserActivity.init(activityType: bundleIdentifier.appending(".displaying"))
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        userActivity = nil
     }
     
     #if os(iOS)
@@ -668,5 +679,44 @@ private extension SectionViewController {
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
+    }
+}
+
+// MARK: UIResponder (ActivityContinuation)
+
+extension SectionViewController {
+    private var displayingUserActivityShow: SRGShow? {
+        if case let .configured(.show(show)) = model.section {
+            return show
+        }
+        else {
+            return nil
+        }
+    }
+    
+    internal override func updateUserActivityState(_ userActivity: NSUserActivity) {
+        super.updateUserActivityState(userActivity)
+        
+        guard let show = displayingUserActivityShow, let shortVersionString = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else { return }
+        
+        userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+        userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+        
+        do {
+            userActivity.addUserInfoEntries(from: [
+                "URNString": show.urn,
+                "SRGShowData": try NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false),
+                "applicationVersion": shortVersionString
+            ])
+        } catch {
+            NSLog(error.localizedDescription)
+        }
+        
+        #if os(iOS)
+        userActivity.isEligibleForPrediction = true
+        userActivity.persistentIdentifier = show.urn
+        let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+        userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+        #endif
     }
 }
