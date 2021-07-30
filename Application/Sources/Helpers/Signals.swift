@@ -158,18 +158,21 @@ enum UserInteractionSignal {
     static func historyUpdates() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didUpdateHistoryEntries)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
     
     static func watchLaterUpdates() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didUpdateWatchLaterEntries)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
     
     static func favoriteUpdates() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didUpdateFavorites)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
             .eraseToAnyPublisher()
     }
 }

@@ -76,7 +76,7 @@ class MediaVisualViewModel: ObservableObject {
     // Cannot be wrapped into Futures because the progress update block might be called several times
     private func updateProgress() {
         HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media) { progress in
+        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress in
             DispatchQueue.main.async {
                 self.progress = Double(progress)
             }

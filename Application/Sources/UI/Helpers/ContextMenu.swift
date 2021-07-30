@@ -138,11 +138,11 @@ private extension ContextMenu {
     }
     
     private static func historyAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
-        guard HistoryContainsMediaMetadata(media) else { return nil }
+        guard HistoryContainsMedia(media) else { return nil }
                 
         let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
                                   image: UIImage(named: "history")!) { _ in
-            HistoryRemoveMediaMetadataList([media]) { error in
+            HistoryRemoveMedias([media]) { error in
                 guard error == nil else { return }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()

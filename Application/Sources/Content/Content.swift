@@ -749,7 +749,7 @@ private extension Content {
     
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
-        HistoryRemoveMediaMetadataList(medias) { _ in }
+        HistoryRemoveMedias(medias) { _ in }
     }
 }
 
@@ -873,7 +873,7 @@ private extension SRGDataProvider {
                 .map {
                     return $0.filter { media in
                         guard let playbackPosition = playbackPositions[media.urn] else { return true }
-                        return HistoryCanResumePlaybackForMediaMetadataAndPosition(playbackPosition, media)
+                        return HistoryCanResumePlaybackForMediaAndPosition(playbackPosition, media)
                     }
                 }
         }

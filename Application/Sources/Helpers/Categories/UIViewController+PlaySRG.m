@@ -148,7 +148,7 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 - (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(PlayerType))completion
 {
     if (! position) {
-        position = HistoryResumePlaybackPositionForMediaMetadata(media);
+        position = HistoryResumePlaybackPositionForMedia(media);
     }
     GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
     if (castSession) {

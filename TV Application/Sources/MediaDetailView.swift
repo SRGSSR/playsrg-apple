@@ -176,7 +176,7 @@ struct MediaDetailView: View {
         @ObservedObject var model: MediaDetailViewModel
         
         var playButtonLabel: String {
-            let progress = HistoryPlaybackProgressForMediaMetadata(model.media)
+            let progress = HistoryPlaybackProgressForMedia(model.media)
             if progress == 0 || progress == 1 {
                 return model.media?.mediaType == .audio ? NSLocalizedString("Listen", comment: "Play button label for audio in media detail view") : NSLocalizedString("Watch", comment: "Play button label for video in media detail view")
             }
