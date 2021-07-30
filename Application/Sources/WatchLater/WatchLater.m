@@ -38,12 +38,12 @@ BOOL WatchLaterContainsMedia(SRGMedia *media)
 void WatchLaterAddMedia(SRGMedia *media, void (^completion)(NSError * _Nullable error))
 {
     [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:media.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        if (! error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (! error) {
                 [UserInteractionEvent addToWatchLater:@[media]];
-            });
-        }
-        completion(error);
+            }
+            completion(error);
+        });
     }];
 }
 
@@ -52,12 +52,12 @@ void WatchLaterRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSEr
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
     NSArray<NSString *> *URNs = [medias valueForKeyPath:keyPath];
     [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-        if (! error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (! error) {
                 [UserInteractionEvent removeFromWatchLater:medias];
-            });
-        }
-        completion(error);
+            }
+            completion(error);
+        });
     }];
 }
 
@@ -66,16 +66,12 @@ void WatchLaterToggleMedia(SRGMedia *media, void (^completion)(BOOL added, NSErr
     BOOL contained = WatchLaterContainsMedia(media);
     if (contained) {
         WatchLaterRemoveMedias(@[media], ^(NSError * _Nullable error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(NO, error);
-            });
+            completion(NO, error);
         });
     }
     else {
         WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                completion(YES, error);
-            });
+            completion(YES, error);
         });
     }
 }

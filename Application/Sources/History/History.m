@@ -116,12 +116,12 @@ void HistoryRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSError
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
     NSArray<NSString *> *URNs = [medias valueForKeyPath:keyPath];
     [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:^(NSError * _Nullable error) {
-        if (! error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (! error) {
                 [UserInteractionEvent removeFromHistory:medias];
-            });
-        }
-        completion(error);
+            }
+            completion(error);
+        });
     }];
 }
 
