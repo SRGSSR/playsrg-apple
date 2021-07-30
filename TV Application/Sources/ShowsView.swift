@@ -38,7 +38,7 @@ struct ShowsView: View {
                 }
             }
             else {
-                let item = Content.message(NSLocalizedString("No results", comment: "Default text displayed when no results are available"), iconName: "media-background")
+                let item = Content.message(NSLocalizedString("No content", comment: "Default text displayed when no content is available"), iconName: "media-background")
                 return [Row(section: .information, items: [item])]
             }
         }

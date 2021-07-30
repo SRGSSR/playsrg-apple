@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak, nullable) IBOutlet UITableView *tableView;
 
 /**
- *  The title displayed when the table view is empty. If nil, a default "No results" text is displayed
+ *  The title displayed when the table view is empty. If nil, a default "No content" text is displayed
  */
 @property (nonatomic, copy, null_resettable) NSString *emptyTableTitle;
 

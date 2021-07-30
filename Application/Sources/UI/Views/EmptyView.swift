@@ -36,10 +36,8 @@ struct EmptyView: View {
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
-        case .watchLater, .resumePlayback, .episodesFromFavorites:
-            return NSLocalizedString("No content", comment: "Text displayed when no media added to or displayed in a list")
-        case .generic:
-            return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
+        case .watchLater, .resumePlayback, .episodesFromFavorites, .generic:
+            return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
         }
     }
     

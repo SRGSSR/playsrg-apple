@@ -63,6 +63,7 @@
     if (self = [super init]) {
         self.settings = [self supportedMediaSearchSettingsFromSettings:nil];
         self.emptyCollectionImage = [UIImage imageNamed:@"search-background"];
+        self.emptyCollectionTitle = NSLocalizedString(@"No results", @"Default text displayed when no results are available");
     }
     return self;
 }
