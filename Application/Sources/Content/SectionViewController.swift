@@ -108,8 +108,11 @@ class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { cell, _, item in
-            cell.content = ItemCell(item: item)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            cell.content = ItemCell(item: item, section: section)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -468,17 +471,23 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
+        let section: SectionViewModel.Section
         
         var body: some View {
             switch item {
             case let .media(media):
-                MediaCell(media: media, style: .show)
+                if case let .configured(section) = section.wrappedValue, case .show = section {
+                    MediaCell(media: media, style: .date)
+                }
+                else {
+                    MediaCell(media: media, style: .show)
+                }
             case let .show(show):
                 ShowCell(show: show)
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
             default:
-                MediaCell(media: nil)
+                MediaCell(media: nil, style: .show)
             }
         }
     }

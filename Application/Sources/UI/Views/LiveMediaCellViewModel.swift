@@ -61,7 +61,7 @@ extension LiveMediaCellViewModel {
             return program?.title ?? channel.title
         }
         else if let media = media {
-            return MediaDescription.title(for: media)
+            return MediaDescription.title(for: media, style: .date)
         }
         else {
             return nil
@@ -70,7 +70,7 @@ extension LiveMediaCellViewModel {
     
     var subtitle: String? {
         if let media = media, media.contentType == .scheduledLivestream {
-            return MediaDescription.subtitle(for: media)
+            return MediaDescription.subtitle(for: media, style: .date)
         }
         else {
             guard let program = program else { return nil }

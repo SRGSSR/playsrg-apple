@@ -114,7 +114,8 @@
         return self.URL;
     }
     else {
-        return [NSString stringWithFormat:@"%@ - %@", self.title, self.URL.absoluteString];
+        // Unbreakable spaces before / after the separator
+        return [NSString stringWithFormat:@"%@ - %@", self.title, self.URL.absoluteString];
     }
 }
 

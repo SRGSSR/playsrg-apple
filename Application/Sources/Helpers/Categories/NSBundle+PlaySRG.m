@@ -40,7 +40,8 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
     
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", versionString, bundleVersion];
     if ([self play_isTestFlightDistribution]) {
-        version = [version stringByAppendingString:@" - TestFlight"];
+        // Unbreakable spaces before / after the separator
+        version = [version stringByAppendingString:@" - TestFlight"];
     }
     return version;
 }

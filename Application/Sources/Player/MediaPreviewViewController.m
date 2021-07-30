@@ -191,8 +191,9 @@
             self.channelLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
             self.channelLabel.text = channel.title;
             
+            // Unbreakable spaces before / after the separator
             self.programTimeLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
-            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
+            self.programTimeLabel.text = [NSString stringWithFormat:@"%@ - %@", [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.startDate], [NSDateFormatter.play_timeFormatter stringFromDate:currentProgram.endDate]];
         }
         else {
             self.titleLabel.text = channel.title;

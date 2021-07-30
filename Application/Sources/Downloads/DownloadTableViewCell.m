@@ -214,7 +214,7 @@
 {
     UIColor *tintColor = (self.editing && (self.selected || self.highlighted)) ? UIColor.redColor : UIColor.srg_grayC7Color;
     
-    self.subtitleLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
+    self.subtitleLabel.text = [NSDateFormatter.play_relativeDateFormatter stringFromDate:self.download.date].play_localizedUppercaseFirstLetterString;
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
     switch (self.download.state) {

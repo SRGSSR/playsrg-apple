@@ -50,7 +50,8 @@
     
     NSString *text = relatedContent.lead ?: relatedContent.summary;
     if (text.length != 0) {
-        [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
+        // Unbreakable spaces before / after the separator
+        [attributedText appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@" - %@", text]
                                                                                attributes:@{ NSFontAttributeName : [SRGFont fontWithStyle:SRGFontStyleSubtitle1],
                                                                                              NSForegroundColorAttributeName : UIColor.srg_grayC7Color }]];
     }

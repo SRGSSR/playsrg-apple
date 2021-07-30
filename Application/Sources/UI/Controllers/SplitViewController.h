@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface SplitViewController : UISplitViewController <PlayApplicationNavigation, TabBarActionable>
 
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
+
 @end
 
 NS_ASSUME_NONNULL_END

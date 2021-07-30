@@ -63,6 +63,15 @@
     }
 }
 
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    UIViewController *lastViewController = self.viewControllers.lastObject;
+    if ([lastViewController isKindOfClass:UINavigationController.class]) {
+        UINavigationController *navigationTopViewController = (UINavigationController *)lastViewController;
+        [navigationTopViewController pushViewController:viewController animated:animated];
+    }
+}
+
 #pragma mark TabBarActionable protocol
 
 - (void)performActiveTabActionAnimated:(BOOL)animated
