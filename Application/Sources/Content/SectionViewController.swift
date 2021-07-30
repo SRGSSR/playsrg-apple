@@ -188,19 +188,22 @@ class SectionViewController: UIViewController {
         updateDeleteButton(animated: animated)
     }
     
+    private static func title(for numberOfSelectedItems: Int) -> String {
+        // TODO: Should use plural localization here but a bit costly (and not sure it is well integrated with CrowdIn)
+        //       See https://developer.apple.com/documentation/xcode/localizing-strings-that-contain-plurals
+        switch numberOfSelectedItems {
+        case 0:
+            return NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
+        case 1:
+            return NSLocalizedString("1 item selected", comment: "Title displayed when 1 item has been selected")
+        default:
+            return String(format: NSLocalizedString("%d items selected", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
+        }
+    }
+    
     private func updateTitle() {
         if isEditing {
-            // TODO: Should use plural localization here but a bit costly (and not sure it is well integrated with CrowdIn)
-            //       See https://developer.apple.com/documentation/xcode/localizing-strings-that-contain-plurals
-            if model.numberOfSelectedItem == 0 {
-                title = NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
-            }
-            else if model.numberOfSelectedItem == 1 {
-                title = NSLocalizedString("1 item selected", comment: "Title displayed when 1 item has been selected")
-            }
-            else {
-                title = String(format: NSLocalizedString("%d items selected", comment: "Title displayed when several items have been selected"), model.numberOfSelectedItem)
-            }
+            title = Self.title(for: model.numberOfSelectedItems)
         }
         else {
             title = model.title
@@ -218,12 +221,12 @@ class SectionViewController: UIViewController {
     
     private func updateDeleteButton(animated: Bool) {
         if isEditing {
+            let numberOfSelectedItems = model.numberOfSelectedItems
             let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
             deleteBarButtonItem.tintColor = .red
-            deleteBarButtonItem.isEnabled = (model.numberOfSelectedItem != 0)
+            deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
             deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
-            // Number of selected items in the title is updated before in `updateNavigationBar` method.
-            deleteBarButtonItem.accessibilityValue = (model.numberOfSelectedItem != 0) ? title : nil
+            deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: model.numberOfSelectedItems) : nil
             navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
         }
         else {

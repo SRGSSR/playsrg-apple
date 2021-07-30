@@ -22,7 +22,7 @@ class SectionViewModel: ObservableObject {
         return section.properties.displaysTitle ? section.properties.title : nil
     }
     
-    var numberOfSelectedItem: Int {
+    var numberOfSelectedItems: Int {
         return selectedItems.count
     }
     
