@@ -11,15 +11,15 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  WatchLater media metadata state.
  */
-typedef NS_ENUM(NSInteger, WatchLaterMediaMetadataState) {
+typedef NS_ENUM(NSInteger, WatchLaterState) {
     /**
      *  Added media metadata.
      */
-    WatchLaterMediaMetadataStateAdded = 0,
+    WatchLaterStateAdded = 0,
     /**
      *  Removed media metadata.
      */
-    WatchLaterMediaMetadataStateRemoved
+    WatchLaterStateRemoved
 };
 
 /**
@@ -32,39 +32,39 @@ typedef NS_ENUM(NSInteger, WatchLaterAction) {
 };
 
 /**
- *  Return the allowed watch later action for a given media metadata.
+ *  Return the allowed watch later action for a given media.
  *
  *  @discussion Must be called from the main thread.
  */
-OBJC_EXPORT WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata);
+OBJC_EXPORT WatchLaterAction WatchLaterAllowedActionForMedia(SRGMedia * _Nonnull media);
 
 /**
- *  Return `YES` if the media metadata is in the later list.
+ *  Return `YES` if the media is in the later list.
  *
  *  @discussion Must be called from the main thread.
  */
-OBJC_EXPORT BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata);
+OBJC_EXPORT BOOL WatchLaterContainsMedia(SRGMedia *media);
 
 /**
- *  Add a media metadata to the later list.
+ *  Add a media to the later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterAddMedia(SRGMedia *media, void (^completion)(NSError * _Nullable error));
 
 /**
- *  Remove a list of media metadata from the later list.
+ *  Remove a list of medias from the later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> *mediaMetadataList, void (^completion)(NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSError * _Nullable error));
 
 /**
- *  Toggle a media metadata in the watch later list.
+ *  Toggle a media in the watch later list.
  *
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
-OBJC_EXPORT void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error));
+OBJC_EXPORT void WatchLaterToggleMedia(SRGMedia *medias, void (^completion)(BOOL added, NSError * _Nullable error));
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking medias), if any, to the later playlist.

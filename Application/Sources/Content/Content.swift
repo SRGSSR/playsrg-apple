@@ -744,7 +744,7 @@ private extension Content {
     
     static func removeFromWatchLater(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
-        WatchLaterRemoveMediaMetadataList(medias) { _ in }
+        WatchLaterRemoveMedias(medias) { _ in }
     }
     
     static func removeFromHistory(_ items: [Content.Item]) {

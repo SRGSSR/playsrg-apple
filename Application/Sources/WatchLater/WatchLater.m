@@ -16,14 +16,12 @@
 @import libextobjc;
 @import SRGUserData;
 
-#pragma mark Media metadata functions
-
-WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+WatchLaterAction WatchLaterAllowedActionForMedia(SRGMedia *media)
 {    
-    if (WatchLaterContainsMediaMetadata(mediaMetadata)) {
+    if (WatchLaterContainsMedia(media)) {
         return WatchLaterActionRemove;
     }
-    else if (mediaMetadata.contentType != SRGContentTypeLivestream && [mediaMetadata timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore) {
+    else if (media.contentType != SRGContentTypeLivestream && [media timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore) {
         return WatchLaterActionAdd;
     }
     else {
@@ -31,36 +29,50 @@ WatchLaterAction WatchLaterAllowedActionForMediaMetadata(id<SRGMediaMetadata> me
     }
 }
 
-BOOL WatchLaterContainsMediaMetadata(id<SRGMediaMetadata> mediaMetadata)
+BOOL WatchLaterContainsMedia(SRGMedia *media)
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), mediaMetadata.URN];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), media.URN];
     return [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
 }
 
-void WatchLaterAddMediaMetadata(id<SRGMediaMetadata> mediaMetadata, void (^completion)(NSError * _Nullable error))
+void WatchLaterAddMedia(SRGMedia *media, void (^completion)(NSError * _Nullable error))
 {
-    [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:mediaMetadata.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
+    [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:media.URN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+        if (! error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UserInteractionEvent addToWatchLater:@[media]];
+            });
+        }
+        completion(error);
+    }];
 }
 
-void WatchLaterRemoveMediaMetadataList(NSArray<id<SRGMediaMetadata>> * _Nonnull mediaMetadataList, void (^completion)(NSError * _Nullable error))
+void WatchLaterRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSError * _Nullable error))
 {
-    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath([NSObject<SRGMediaMetadata> new], URN)];
-    NSArray<NSString *> *URNs = [mediaMetadataList valueForKeyPath:keyPath];
-    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:completion];
+    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
+    NSArray<NSString *> *URNs = [medias valueForKeyPath:keyPath];
+    [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:URNs fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
+        if (! error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UserInteractionEvent removeFromWatchLater:medias];
+            });
+        }
+        completion(error);
+    }];
 }
 
-void WatchLaterToggleMediaMetadata(id<SRGMediaMetadata> _Nonnull mediaMetadata, void (^completion)(BOOL added, NSError * _Nullable error))
+void WatchLaterToggleMedia(SRGMedia *media, void (^completion)(BOOL added, NSError * _Nullable error))
 {
-    BOOL contained = WatchLaterContainsMediaMetadata(mediaMetadata);
+    BOOL contained = WatchLaterContainsMedia(media);
     if (contained) {
-        WatchLaterRemoveMediaMetadataList(@[mediaMetadata], ^(NSError * _Nullable error) {
+        WatchLaterRemoveMedias(@[media], ^(NSError * _Nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(NO, error);
             });
         });
     }
     else {
-        WatchLaterAddMediaMetadata(mediaMetadata, ^(NSError * _Nullable error) {
+        WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
             dispatch_async(dispatch_get_main_queue(), ^{
                 completion(YES, error);
             });

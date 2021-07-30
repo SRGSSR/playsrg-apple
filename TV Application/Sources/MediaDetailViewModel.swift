@@ -83,7 +83,7 @@ class MediaDetailViewModel: ObservableObject {
     
     func toggleWatchLater() {
         guard let media = media else { return }
-        WatchLaterToggleMediaMetadata(media) { added, error in
+        WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
             
             let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
@@ -98,6 +98,6 @@ class MediaDetailViewModel: ObservableObject {
     
     private func updateWatchLaterAllowedAction() {
         guard let media = media else { return }
-        watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
+        watchLaterAllowedAction = WatchLaterAllowedActionForMedia(media)
     }
 }

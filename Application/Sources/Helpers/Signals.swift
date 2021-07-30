@@ -198,7 +198,7 @@ enum UserInteractionSignal {
     }
     
     @objc static func removeFromWatchLater(_ medias: [SRGMedia]) {
-        notify(.didUpdateFavorites, for: medias.map { Content.Item.media($0) }, added: false)
+        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: false)
     }
     
     @objc static func addToFavorites(_ shows: [SRGShow]) {

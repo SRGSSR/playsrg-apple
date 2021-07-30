@@ -1235,7 +1235,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    WatchLaterAction action = WatchLaterAllowedActionForMedia(media);
     if (action == WatchLaterActionNone || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
@@ -1703,7 +1703,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
         
     SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
-    WatchLaterAddMediaMetadata(media, ^(NSError * _Nullable error) {
+    WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
         if (! error) {
             [Banner showWatchLaterAdded:YES forItemWithName:media.title inViewController:self];
         }
@@ -1962,7 +1962,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         return;
     }
     
-    WatchLaterToggleMediaMetadata(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
+    WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

@@ -114,11 +114,11 @@ private extension ContextMenu {
             return (action == .add) ? UIImage(named: "watch_later")! : UIImage(named: "watch_later_full")!
         }
         
-        let action = WatchLaterAllowedActionForMediaMetadata(media)
+        let action = WatchLaterAllowedActionForMedia(media)
         guard action != .none else { return nil }
         
         let menuAction = UIAction(title: title(for: action), image: image(for: action)) { _ in
-            WatchLaterToggleMediaMetadata(media) { added, error in
+            WatchLaterToggleMedia(media) { added, error in
                 guard error == nil else { return }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
