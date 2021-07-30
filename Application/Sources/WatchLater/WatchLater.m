@@ -6,6 +6,8 @@
 
 #import "WatchLater.h"
 
+#import "PlaySRG-Swift.h"
+
 #if TARGET_OS_IOS
 #import "DeprecatedFavorite.h"
 #endif
