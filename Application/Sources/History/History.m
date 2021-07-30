@@ -115,8 +115,14 @@ void HistoryRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSError
 {
     NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
     NSArray<NSString *> *URNs = [medias valueForKeyPath:keyPath];
-    [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:completion];
-    [UserInteractionEvent removeFromHistory:medias];
+    [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:URNs completionBlock:^(NSError * _Nullable error) {
+        if (! error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UserInteractionEvent removeFromHistory:medias];
+            });
+        }
+        completion(error);
+    }];
 }
 
 static SRGMedia *HistoryChapterMedia(SRGLetterboxController *controller)
@@ -167,7 +173,15 @@ void HistoryUpdateLetterboxPlaybackProgress(SRGLetterboxController *letterboxCon
     // Save the main full-length position (update after the segment so that full-length entries are always more recent than corresponding
     // segment entries)
     [SRGUserData.currentUserData.history saveHistoryEntryWithUid:chapterMedia.URN lastPlaybackTime:chapterPlaybackTime deviceUid:deviceUid completionBlock:nil];
-    [UserInteractionEvent addToHistory:@[chapterMedia]];
+    
+    // TODO: For a perfect result we should also call -[UserInteractionEvent addToHistory:]` for the chapter (and segment, if any) here,
+    //       to ensure correct behavior in the following case:
+    //         - User plays some content with the mini player / in PiP
+    //         - User removes the history entry
+    //         - The history entry should reappear
+    //       This is an edge case, though, and for this reason it should probably be better solved at the SRG User Data level,
+    //       by having better update notification information, see comment in Signals.swift. Doing it here could introduce
+    //       unnecessary CPU work, potentially impacting battery life for all users for an edge case.
 }
 
 #if TARGET_OS_IOS

@@ -132,7 +132,6 @@ void FavoritesRemoveShows(NSArray<SRGShow *> *shows)
         [paths addObject:[PlayFavoritesPath stringByAppendingPathComponent:URN]];
     }
     [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferencesDomain];
-    
     [UserInteractionEvent removeFromFavorites:shows];
 }
 
