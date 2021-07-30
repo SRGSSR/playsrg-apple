@@ -109,7 +109,7 @@ class ShowHeaderViewModel: ObservableObject {
         updateData()
         
         if !isFavorite {
-            Signal.removeFavorite(for: [.show(show)])
+            Signal.removeFavorite(for: [show])
         }
         
         let labels = SRGAnalyticsHiddenEventLabels()

@@ -135,27 +135,24 @@ enum Signal {
 // MARK: Methods which can be used to declare item removal
 
 extension Signal {
-    static func removeHistory(for items: [Content.Item]) {
-        let removedItems = Content.mediaItems(from: items)
-        guard !removedItems.isEmpty else { return }
+    static func removeHistory(for medias: [SRGMedia]) {
+        guard !medias.isEmpty else { return }
         NotificationCenter.default.post(name: .didRemoveHistoryEntries, object: nil, userInfo: [
-            RemovalKey.removedItems: removedItems
+            RemovalKey.removedItems: medias.map { Content.Item.media($0) }
         ])
     }
     
-    static func removeWatchLater(for items: [Content.Item]) {
-        let removedItems = Content.mediaItems(from: items)
-        guard !removedItems.isEmpty else { return }
+    static func removeWatchLater(for medias: [SRGMedia]) {
+        guard !medias.isEmpty else { return }
         NotificationCenter.default.post(name: .didRemoveWatchLaterEntries, object: nil, userInfo: [
-            RemovalKey.removedItems: removedItems
+            RemovalKey.removedItems: medias.map { Content.Item.media($0) }
         ])
     }
     
-    static func removeFavorite(for items: [Content.Item]) {
-        let removedItems = Content.showItems(from: items)
-        guard !removedItems.isEmpty else { return }
+    static func removeFavorite(for shows: [SRGShow]) {
+        guard !shows.isEmpty else { return }
         NotificationCenter.default.post(name: .didRemoveFavorites, object: nil, userInfo: [
-            RemovalKey.removedItems: removedItems
+            RemovalKey.removedItems: shows.map { Content.Item.show($0) }
         ])
     }
 }

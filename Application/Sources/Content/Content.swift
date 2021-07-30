@@ -51,17 +51,6 @@ enum Content {
         case generic
     }
     
-    static func mediaItems(from items: [Content.Item]) -> [Content.Item] {
-        return items.filter { item in
-            if case .media = item {
-                return true
-            }
-            else {
-                return false
-            }
-        }
-    }
-    
     static func medias(from items: [Content.Item]) -> [SRGMedia] {
         return items.compactMap { item in
             if case let .media(media) = item {
@@ -69,17 +58,6 @@ enum Content {
             }
             else {
                 return nil
-            }
-        }
-    }
-    
-    static func showItems(from items: [Content.Item]) -> [Content.Item] {
-        return items.filter { item in
-            if case .show = item {
-                return true
-            }
-            else {
-                return false
             }
         }
     }
@@ -762,20 +740,22 @@ private extension Content {
     static func removeFromFavorites(_ items: [Content.Item]) {
         let shows = Content.shows(from: items)
         FavoritesRemoveShows(shows)
-        Signal.removeFavorite(for: items)
+        Signal.removeFavorite(for: shows)
     }
     
     static func removeFromWatchLater(_ items: [Content.Item]) {
-        WatchLaterRemoveMediaMetadataList(Content.medias(from: items)) { error in
+        let medias = Content.medias(from: items)
+        WatchLaterRemoveMediaMetadataList(medias) { error in
             guard error == nil else { return }
-            Signal.removeWatchLater(for: items)
+            Signal.removeWatchLater(for: medias)
         }
     }
     
     static func removeFromHistory(_ items: [Content.Item]) {
-        HistoryRemoveMediaMetadataList(Content.medias(from: items)) { error in
+        let medias = Content.medias(from: items)
+        HistoryRemoveMediaMetadataList(medias) { error in
             guard error == nil else { return }
-            Signal.removeHistory(for: items)
+            Signal.removeHistory(for: medias)
         }
     }
 }
