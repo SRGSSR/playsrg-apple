@@ -220,7 +220,7 @@ class SectionViewController: UIViewController {
         if isEditing {
             let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
             deleteBarButtonItem.tintColor = .red
-            deleteBarButtonItem.isEnabled =  model.numberOfSelectedItem != 0
+            deleteBarButtonItem.isEnabled = (model.numberOfSelectedItem != 0)
             deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
             navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
         }

@@ -30,7 +30,7 @@ struct EmptyView: View {
         }
     }
     
-    private func emtpyTitle(for emptyType: Content.EmptyType) -> String {
+    private func emptyTitle(for emptyType: Content.EmptyType) -> String {
         switch emptyType {
         case .favoriteShows:
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
@@ -51,7 +51,7 @@ struct EmptyView: View {
             case let .empty(type: contentType):
                 VStack {
                     Image(imageName(for: contentType))
-                    Text(emtpyTitle(for: contentType))
+                    Text(emptyTitle(for: contentType))
                         .srgFont(.H2)
                 }
             case let .failed(error: error):
