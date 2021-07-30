@@ -222,6 +222,8 @@ class SectionViewController: UIViewController {
             deleteBarButtonItem.tintColor = .red
             deleteBarButtonItem.isEnabled = (model.numberOfSelectedItem != 0)
             deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+            // Number of selected items in the title is updated before in `updateNavigationBar` method.
+            deleteBarButtonItem.accessibilityValue = (model.numberOfSelectedItem != 0) ? title : nil
             navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
         }
         else {
