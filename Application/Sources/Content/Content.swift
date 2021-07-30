@@ -48,7 +48,7 @@ enum Content {
         case history
         case resumePlayback
         case watchLater
-        case any
+        case generic
     }
     
     static func mediaItems(from items: [Content.Item]) -> [Content.Item] {
@@ -232,10 +232,10 @@ private extension Content {
                 case .watchLater:
                     return .watchLater
                 default:
-                    return .any
+                    return .generic
                 }
             default:
-                return .any
+                return .generic
             }
         }
         
@@ -517,7 +517,7 @@ private extension Content {
             case .radioResumePlayback:
                 return .resumePlayback
             default:
-                return .any
+                return .generic
             }
         }
         

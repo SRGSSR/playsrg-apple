@@ -25,7 +25,7 @@ struct EmptyView: View {
             return "history-background"
         case .watchLater:
             return "watch_later-background"
-        case .any:
+        case .generic:
             return "media-background"
         }
     }
@@ -38,7 +38,7 @@ struct EmptyView: View {
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
         case .watchLater, .resumePlayback, .episodesFromFavorites:
             return NSLocalizedString("No content", comment: "Text displayed when no media added to or displayed in a list")
-        case .any:
+        case .generic:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         }
     }
@@ -91,7 +91,7 @@ struct EmptyView_Previews: PreviewProvider {
             EmptyView(state: .empty(type: .history))
             EmptyView(state: .empty(type: .resumePlayback))
             EmptyView(state: .empty(type: .watchLater))
-            EmptyView(state: .empty(type: .any))
+            EmptyView(state: .empty(type: .generic))
             EmptyView(state: .failed(error: PreviewError.kernel32))
         }
         .previewLayout(.fixed(width: 400, height: 400))

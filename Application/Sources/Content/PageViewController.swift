@@ -172,7 +172,7 @@ class PageViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case let .loaded(rows: rows):
-            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .any)) : nil
+            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
