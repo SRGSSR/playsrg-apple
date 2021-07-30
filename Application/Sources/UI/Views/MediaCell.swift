@@ -154,7 +154,7 @@ private extension MediaCell {
     }
     
     var accessibilityHint: String? {
-        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Edits selection.", comment: "Media cell hint in edit mode")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
     }
     
     var accessibilityTraits: AccessibilityTraits {

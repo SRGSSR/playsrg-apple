@@ -89,7 +89,7 @@ private extension ShowCell {
     }
     
     var accessibilityHint: String? {
-        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Edits selection.", comment: "Show cell hint in edit mode")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Show cell hint in edit mode")
     }
     
     var accessibilityTraits: AccessibilityTraits {
