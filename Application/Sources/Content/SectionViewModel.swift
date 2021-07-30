@@ -9,7 +9,7 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class SectionViewModel: ObservableObject {
+final class SectionViewModel: ObservableObject {
     let section: SectionViewModel.Section
     
     @Published private(set) var state: State = .loading

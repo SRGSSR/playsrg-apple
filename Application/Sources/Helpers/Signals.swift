@@ -80,9 +80,9 @@ enum ThrottledSignal {
     }
     
     /**
-     *  Emits a signal when the favorite list is updated.
+     *  Emits a signal when the user preferences are updated.
      */
-    static func favoriteUpdates() -> AnyPublisher<Void, Never> {
+    static func preferenceUpdates() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {

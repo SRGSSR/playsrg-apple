@@ -364,7 +364,7 @@ private extension Content {
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .personalizedProgram:
-                return ThrottledSignal.favoriteUpdates()
+                return ThrottledSignal.preferenceUpdates()
             case .watchLater:
                 return ThrottledSignal.watchLaterUpdates()
             default:
@@ -709,7 +709,7 @@ private extension Content {
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return ThrottledSignal.favoriteUpdates()
+                return ThrottledSignal.preferenceUpdates()
             case .radioWatchLater, .watchLater:
                 return ThrottledSignal.watchLaterUpdates()
             default:

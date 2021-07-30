@@ -4,7 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-class LiveMediaCellViewModel: ObservableObject {
+// MARK: View model
+
+final class LiveMediaCellViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             registerForChannelUpdates(for: media)
@@ -43,6 +45,8 @@ class LiveMediaCellViewModel: ObservableObject {
     }
 }
 
+// MARK: Properties
+
 extension LiveMediaCellViewModel {
     var channel: SRGChannel? {
         return programComposition?.channel ?? media?.channel
@@ -80,22 +84,6 @@ extension LiveMediaCellViewModel {
         }
     }
     
-    var accessibilityLabel: String? {
-        if let channel = channel {
-            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
-            if let program = program {
-                label.append(", \(program.title)")
-            }
-            return label
-        }
-        else if let media = media {
-            return MediaDescription.accessibilityLabel(for: media)
-        }
-        else {
-            return nil
-        }
-    }
-    
     var progress: Double? {
         if channel != nil {
             guard let program = program else { return 0 }
@@ -118,6 +106,26 @@ extension LiveMediaCellViewModel {
         }
         else {
             return media?.imageUrl(for: .small)
+        }
+    }
+}
+
+// MARK: Accessibility
+
+extension LiveMediaCellViewModel {
+    var accessibilityLabel: String? {
+        if let channel = channel {
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
+            if let program = program {
+                label.append(", \(program.title)")
+            }
+            return label
+        }
+        else if let media = media {
+            return MediaDescription.accessibilityLabel(for: media)
+        }
+        else {
+            return nil
         }
     }
 }

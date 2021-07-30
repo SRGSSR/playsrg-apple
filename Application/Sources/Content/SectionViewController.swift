@@ -627,7 +627,12 @@ private extension SectionViewController {
                     MediaCell(media: media, style: .show)
                 }
             case let .show(show):
-                ShowCell(show: show, style: .standard)
+                if case let .configured(section) = section.wrappedValue, case .favoriteShows = section {
+                    ShowCell(show: show, style: .favorite)
+                }
+                else {
+                    ShowCell(show: show, style: .standard)
+                }
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
             default:

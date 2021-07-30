@@ -8,7 +8,9 @@ import Combine
 import SRGAnalytics
 import SRGUserData
 
-class ProfileViewModel: ObservableObject {
+// MARK: View model
+
+final class ProfileViewModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
     @Published private(set) var account: SRGAccount?
     
@@ -84,7 +86,7 @@ class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
         updateWatchLaterInformation()
         
-        ThrottledSignal.favoriteUpdates()
+        ThrottledSignal.preferenceUpdates()
             .sink { [weak self] _ in
                 self?.updateFavoritesInformation()
             }
