@@ -24,6 +24,7 @@ struct MediaCell: View {
     fileprivate var onFocusAction: ((Bool) -> Void)?
     
     @State private var isFocused = false
+    
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
@@ -72,10 +73,12 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
+                    .selectionAppearance(when: isSelected, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
                 DescriptionView(media: media, style: style)
+                    .selectionAppearance(.transluscent, when: isSelected, while: isEditing)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }

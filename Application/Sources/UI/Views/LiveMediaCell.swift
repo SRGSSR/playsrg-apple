@@ -12,6 +12,8 @@ struct LiveMediaCell: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = LiveMediaCellViewModel()
     
+    @Environment(\.isSelected) private var isSelected
+    
     init(media: SRGMedia?) {
         _media = .constant(media)
     }
@@ -30,6 +32,7 @@ struct LiveMediaCell: View {
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
                 .redactable()
+                .selectionAppearance(when: isSelected)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif

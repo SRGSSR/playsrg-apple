@@ -18,6 +18,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let content: Content
     let layout: FeaturedContentLayout
     
+    @Environment(\.isSelected) private var isSelected
+    
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -95,6 +97,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             }
             .background(Color.srgGray23)
             .redactable()
+            .selectionAppearance(when: isSelected)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
