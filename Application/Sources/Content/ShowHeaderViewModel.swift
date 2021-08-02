@@ -156,6 +156,7 @@ extension ShowHeaderViewModel {
         }
     }
     
+    #if os(iOS)
     var subscriptionAccessibilityLabel: String {
         if isPushServiceEnabled && isSubscribed {
             return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
@@ -164,4 +165,5 @@ extension ShowHeaderViewModel {
             return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
+    #endif
 }
