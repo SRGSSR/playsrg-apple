@@ -93,45 +93,6 @@
 {
     self.statusBarStyle = statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
-    
-    UINavigationBar *navigationBar = self.navigationBar;
-    
-    if (backgroundColor) {
-        navigationBar.barTintColor = backgroundColor;
-        navigationBar.translucent = NO;
-    }
-    else {
-        navigationBar.barTintColor = nil;
-        navigationBar.translucent = YES;
-    }
-    
-    // See https://stackoverflow.com/a/19227158/760435
-    if (separator) {
-        [navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        navigationBar.shadowImage = nil;
-    }
-    else {
-        [navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        navigationBar.shadowImage = [UIImage new];
-    }
-    
-    // Add a shadow for solid background to improve readability
-    navigationBar.layer.shadowOpacity = (separator && backgroundColor != nil) ? 1.f : 0.f;
-    
-    UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
-    navigationBar.tintColor = foregroundColor;
-    navigationBar.titleTextAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
-                                           NSForegroundColorAttributeName : foregroundColor };
-    
-    for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f] }
-                                                                                                   forState:controlState.integerValue];
-    }
-    
-    [navigationBar setNeedsDisplay];
-    
-    // See https://stackoverflow.com/a/39543669/760435
-    [navigationBar layoutIfNeeded];
 }
 
 - (void)updateWithRadioChannel:(RadioChannel *)radioChannel animated:(BOOL)animated
