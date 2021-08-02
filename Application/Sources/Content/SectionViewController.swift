@@ -627,11 +627,26 @@ private extension SectionViewController {
                     MediaCell(media: media, style: .show)
                 }
             case let .show(show):
-                if case let .configured(section) = section.wrappedValue, case .favoriteShows = section {
-                    ShowCell(show: show, style: .favorite)
-                }
-                else {
-                    ShowCell(show: show, style: .standard)
+                switch section.wrappedValue {
+                case let .content(contentSection):
+                    switch contentSection.type {
+                    case .predefined:
+                        switch contentSection.presentation.type {
+                        case .favoriteShows:
+                            ShowCell(show: show, style: .favorite)
+                        default:
+                            ShowCell(show: show, style: .standard)
+                        }
+                    default:
+                        ShowCell(show: show, style: .standard)
+                    }
+                case let .configured(configuredSection):
+                    switch configuredSection {
+                    case .favoriteShows, .radioFavoriteShows:
+                        ShowCell(show: show, style: .favorite)
+                    default:
+                        ShowCell(show: show, style: .standard)
+                    }
                 }
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
