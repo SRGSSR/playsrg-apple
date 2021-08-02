@@ -10,7 +10,7 @@ import SRGDataProviderCombine
 // MARK: View model
 
 class SectionViewModel: ObservableObject {
-    let section: Content.Section
+    let section: SectionViewModel.Section
     
     @Published private(set) var state: State = .loading
     
@@ -26,17 +26,16 @@ class SectionViewModel: ObservableObject {
         return selectedItems.count
     }
     
-    init(section: Content.Section, filter: SectionFiltering?) {
-        self.section = section
+    init(section contentSection: Content.Section, filter: SectionFiltering?) {
+        self.section = SectionViewModel.Section(contentSection)
         
-        let rowSection = SectionViewModel.Section(section)
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [section, trigger] in
             return Publishers.CombineLatest(
-                rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                                paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                                filter: filter)
+                section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                                             paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
+                                             filter: filter)
                     .scan([]) { $0 + $1 },
-                rowSection.properties.interactiveUpdatesPublisher()
+                section.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -44,9 +43,9 @@ class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = rowSection.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+                let headerItem = section.viewModelProperties.headerItem(from: items)
+                let rowItems = removeDuplicates(in: section.viewModelProperties.rowItems(from: items))
+                return State.loaded(headerItem: headerItem, row: Row(section: section, items: rowItems))
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -172,6 +171,8 @@ protocol SectionViewModelProperties {
     
     func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
     func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
+    
+    var userActivity: NSUserActivity? { get }
 }
 
 private extension SectionViewModel {
@@ -221,6 +222,10 @@ private extension SectionViewModel {
                 return items
             }
         }
+        
+        var userActivity: NSUserActivity? {
+            return nil
+        }
     }
     
     struct ConfiguredSectionProperties: SectionViewModelProperties {
@@ -250,6 +255,37 @@ private extension SectionViewModel {
         
         func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             return items
+        }
+        
+        var userActivity: NSUserActivity? {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
+                return nil
+            }
+            
+            switch configuredSection {
+            case let .show(show):
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
+                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
+                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+                userActivity.addUserInfoEntries(from: [
+                    "URNString": show.urn,
+                    "SRGShowData": data,
+                    "applicationVersion": applicationVersion
+                ])
+                
+                #if os(iOS)
+                userActivity.isEligibleForPrediction = true
+                userActivity.persistentIdentifier = show.urn
+                let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+                #endif
+                
+                return userActivity
+            default:
+                return nil
+            }
         }
     }
 }
