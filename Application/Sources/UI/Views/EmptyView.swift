@@ -11,21 +11,45 @@ import SwiftUI
 struct EmptyView: View {
     enum State {
         case loading
-        case empty
+        case empty(type: Content.EmptyType)
         case failed(error: Error)
     }
     
     let state: State
+    
+    private func imageName(for emptyType: Content.EmptyType) -> String {
+        switch emptyType {
+        case .favoriteShows, .episodesFromFavorites:
+            return "favorite-background"
+        case .history, .resumePlayback:
+            return "history-background"
+        case .watchLater:
+            return "watch_later-background"
+        case .generic:
+            return "media-background"
+        }
+    }
+    
+    private func emptyTitle(for emptyType: Content.EmptyType) -> String {
+        switch emptyType {
+        case .favoriteShows:
+            return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
+        case .history:
+            return NSLocalizedString("No history", comment: "Text displayed when no history is available")
+        case .watchLater, .resumePlayback, .episodesFromFavorites, .generic:
+            return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
+        }
+    }
     
     var body: some View {
         Group {
             switch state {
             case .loading:
                 ActivityIndicator()
-            case .empty:
+            case let .empty(type: contentType):
                 VStack {
-                    Image("media-background")
-                    Text(NSLocalizedString("No results", comment: "Default text displayed when no results are available"))
+                    Image(imageName(for: contentType))
+                    Text(emptyTitle(for: contentType))
                         .srgFont(.H2)
                 }
             case let .failed(error: error):
@@ -60,7 +84,12 @@ struct EmptyView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             EmptyView(state: .loading)
-            EmptyView(state: .empty)
+            EmptyView(state: .empty(type: .favoriteShows))
+            EmptyView(state: .empty(type: .episodesFromFavorites))
+            EmptyView(state: .empty(type: .history))
+            EmptyView(state: .empty(type: .resumePlayback))
+            EmptyView(state: .empty(type: .watchLater))
+            EmptyView(state: .empty(type: .generic))
             EmptyView(state: .failed(error: PreviewError.kernel32))
         }
         .previewLayout(.fixed(width: 400, height: 400))

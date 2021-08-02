@@ -463,7 +463,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    if (! contentSection.presentation.hasDetailPage && !ApplicationSettingSectionWideSupportEnabled()) {
+    if (! contentSection.presentation.hasDetailPage && ! ApplicationSettingSectionWideSupportEnabled()) {
         return nil;
     }
     

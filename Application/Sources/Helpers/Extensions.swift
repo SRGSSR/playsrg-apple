@@ -135,6 +135,35 @@ extension View {
     }
 }
 
+/**
+ *  Available selection styles.
+ */
+enum SelectionAppearance {
+    case dimmed                 // The view is dimmed.
+    case transluscent           // The view is slightly transluscent.
+}
+
+extension View {
+    /**
+     *  Adjust the selection appearance of the receiver, applying one of the available styles.
+     */
+    func selectionAppearance(_ appearance: SelectionAppearance = .dimmed, when selected: Bool, while editing: Bool = false) -> some View {
+        return Group {
+            if (!editing && selected) || (editing && !selected) {
+                switch appearance {
+                case .dimmed:
+                    overlay(Color.black.opacity(0.5))
+                case .transluscent:
+                    self.opacity(0.5)
+                }
+            }
+            else {
+                self
+            }
+        }
+    }
+}
+
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
     convenience public init(rootView: Content, ignoreSafeArea: Bool) {
@@ -290,5 +319,29 @@ extension UIView {
     func applySizingBehavior<T>(of hostingController: UIHostingController<T>) {
         applySizingBehavior(of: hostingController, for: .horizontal)
         applySizingBehavior(of: hostingController, for: .vertical)
+    }
+}
+
+extension UIViewController {
+    func deselectItems(in collectionView: UICollectionView) {
+        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
+        if let transitionCoordinator = transitionCoordinator {
+            transitionCoordinator.animate { context in
+                selectedIndexPaths.forEach { indexPath in
+                    collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
+                }
+            } completion: { context in
+                if context.isCancelled {
+                    selectedIndexPaths.forEach { indexPath in
+                        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                    }
+                }
+            }
+        }
+        else {
+            selectedIndexPaths.forEach { indexPath in
+                collectionView.deselectItem(at: indexPath, animated: false)
+            }
+        }
     }
 }

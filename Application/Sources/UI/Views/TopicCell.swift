@@ -12,6 +12,8 @@ import SwiftUI
 struct TopicCell: View {
     let topic: SRGTopic?
     
+    @Environment(\.isSelected) private var isSelected
+    
     var body: some View {
         Group {
             #if os(tvOS)
@@ -23,6 +25,7 @@ struct TopicCell: View {
             #else
             MainView(topic: topic)
                 .redactable()
+                .selectionAppearance(when: isSelected)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
@@ -73,7 +76,7 @@ private extension TopicCell {
 
 // MARK: Size
 
-class TopicCellSize: NSObject {
+final class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)

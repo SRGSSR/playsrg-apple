@@ -6,7 +6,9 @@
 
 import Combine
 
-class MediaVisualViewModel: ObservableObject {
+// MARK: View model
+
+final class MediaVisualViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             updatePublishers()
@@ -63,7 +65,8 @@ class MediaVisualViewModel: ObservableObject {
         cancellables = []
         
         if let media = media {
-            Signal.historyUpdate(for: media.urn)
+            ThrottledSignal.historyUpdates(for: media.urn)
+                .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
                     self?.updateProgress()
                 }
@@ -76,7 +79,7 @@ class MediaVisualViewModel: ObservableObject {
     // Cannot be wrapped into Futures because the progress update block might be called several times
     private func updateProgress() {
         HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media) { progress in
+        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress in
             DispatchQueue.main.async {
                 self.progress = Double(progress)
             }

@@ -14,7 +14,7 @@ private var tapGestureRecognizerKey: Void?
 extension MediaPlayerViewController {
     static let contentHeight: CGFloat = 64.0
     
-    @objc public func addSongPanel(channel: SRGChannel) {
+    @objc func addSongPanel(channel: SRGChannel) {
         guard let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle, songsViewStyle != .none else { return }
         
         if let contentNavigationController = panel?.contentViewController as? UINavigationController,
@@ -37,7 +37,7 @@ extension MediaPlayerViewController {
         updateSongTableVisibility(hidden: collapsed, animated: false)
     }
     
-    @objc public func removeSongPanel() {
+    @objc func removeSongPanel() {
         guard let panel = panel else { return }
         panel.removeFromParent(transition: .none, completion: nil)
         self.panel = nil
@@ -48,7 +48,7 @@ extension MediaPlayerViewController {
         }
     }
     
-    @objc public func updateSongPanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
+    @objc func updateSongPanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
         guard let panel = panel else { return }
         
         if fullScreen {
@@ -62,27 +62,27 @@ extension MediaPlayerViewController {
         }
     }
     
-    @objc public func reloadSongPanelSize() {
+    @objc func reloadSongPanelSize() {
         guard let panel = panel else { return }
         panel.reloadSize()
     }
     
-    @objc public func scrollToSong(at date: Date?, animated: Bool) {
+    @objc func scrollToSong(at date: Date?, animated: Bool) {
         guard let songsViewController = songsViewController() else { return }
         songsViewController.scrollToSong(at: date, animated: animated)
     }
     
-    @objc public func updateSelectionForSong(at date: Date?) {
+    @objc func updateSelectionForSong(at date: Date?) {
         guard let songsViewController = songsViewController() else { return }
         songsViewController.updateSelectionForSong(at: date)
     }
     
-    @objc public func updateSelectionForCurrentSong() {
+    @objc func updateSelectionForCurrentSong() {
         guard let songsViewController = songsViewController() else { return }
         songsViewController.updateSelectionForCurrentSong()
     }
     
-    @objc public func updateSongProgress() {
+    @objc func updateSongProgress() {
         guard let songsViewController = songsViewController() else { return }
         songsViewController.updateProgress(for: letterboxController.play_dateInterval)
     }
@@ -251,7 +251,6 @@ extension MediaPlayerViewController: PanelResizeDelegate {
 }
 
 extension MediaPlayerViewController: PanelAccessibilityDelegate {
-    
     public func panel(_ panel: Panel, accessibilityLabelForResizeHandle resizeHandle: ResizeHandle) -> String {
         if panel.configuration.mode == .compact {
             return PlaySRGAccessibilityLocalizedString("Show music list", comment: "Accessibility label of the song list handle when closed")

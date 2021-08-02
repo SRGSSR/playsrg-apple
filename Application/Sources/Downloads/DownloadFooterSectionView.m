@@ -68,7 +68,7 @@
     // Remove unused progresses
     [self.progresses.allKeys enumerateObjectsUsingBlock:^(NSString * _Nonnull URN, NSUInteger idx, BOOL * _Nonnull stop) {
         Download *download = [Download downloadForURN:URN];
-        if (!download || download.size) {
+        if (! download || download.size) {
             self.progresses[URN] = nil;
         }
     }];

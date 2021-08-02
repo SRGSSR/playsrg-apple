@@ -6,8 +6,11 @@
 
 import Combine
 import SRGDataProviderModel
+import SRGIdentity
 
-class ShowHeaderViewModel: ObservableObject {
+// MARK: View model
+
+final class ShowHeaderViewModel: ObservableObject {
     var show: SRGShow? {
         didSet {
             updatePublishers()
@@ -16,6 +19,8 @@ class ShowHeaderViewModel: ObservableObject {
     
     @Published private(set) var isFavorite: Bool = false
     @Published private(set) var isSubscribed: Bool = false
+    
+    @Published var isFavoriteRemovalAlertDisplayed: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -48,13 +53,9 @@ class ShowHeaderViewModel: ObservableObject {
         }
     }
     
-    var favoriteAccessibilityLabel: String {
-        if isFavorite {
-            return PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
-        }
-        else {
-            return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
-        }
+    var shouldDisplayFavoriteRemovalAlert: Bool {
+        guard let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn, let show = show else { return false }
+        return FavoritesIsSubscribedToShow(show)
     }
     
     #if os(iOS)
@@ -73,15 +74,6 @@ class ShowHeaderViewModel: ObservableObject {
         }
         else {
             return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
-        }
-    }
-    
-    var subscriptionAccessibilityLabel: String {
-        if isPushServiceEnabled && isSubscribed {
-            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
-        }
-        else {
-            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
         }
     }
     
@@ -131,7 +123,8 @@ class ShowHeaderViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        Publishers.Merge(Signal.favoritesUpdate(), Signal.wokenUp())
+        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp())
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
             }
@@ -149,4 +142,28 @@ class ShowHeaderViewModel: ObservableObject {
             isSubscribed = false
         }
     }
+}
+
+// MARK: Accessibility
+
+extension ShowHeaderViewModel {
+    var favoriteAccessibilityLabel: String {
+        if isFavorite {
+            return PlaySRGAccessibilityLocalizedString("Delete from favorites", comment: "Favorite label in the show view when a show has been favorited")
+        }
+        else {
+            return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
+        }
+    }
+    
+    #if os(iOS)
+    var subscriptionAccessibilityLabel: String {
+        if isPushServiceEnabled && isSubscribed {
+            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
+        }
+        else {
+            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
+        }
+    }
+    #endif
 }

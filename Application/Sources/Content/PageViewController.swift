@@ -156,6 +156,7 @@ class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        deselectItems(in: collectionView)
     }
     
     #if os(iOS)
@@ -164,14 +165,14 @@ class PageViewController: UIViewController {
     }
     #endif
     
-    func reloadData(for state: PageViewModel.State) {
+    private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case let .loaded(rows: rows):
-            emptyView.content = rows.isEmpty ? EmptyView(state: .empty) : nil
+            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -189,7 +190,7 @@ class PageViewController: UIViewController {
     }
     
     #if os(iOS)
-    @objc func pullToRefresh(_ refreshControl: RefreshControl) {
+    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
@@ -571,7 +572,7 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show)
+                PlaySRG.ShowCell(show: show, style: .standard)
             }
         }
     }

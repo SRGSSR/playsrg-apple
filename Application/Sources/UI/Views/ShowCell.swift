@@ -10,50 +10,60 @@ import SwiftUI
 // MARK: View
 
 struct ShowCell: View {
-    let show: SRGShow?
-    let direction: StackDirection
-    let hasSubscriptionButton: Bool
+    enum Style {
+        case standard
+        case favorite
+    }
     
-    init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
-        self.show = show
-        self.direction = direction
-        self.hasSubscriptionButton = hasSubscriptionButton
+    @Binding private(set) var show: SRGShow?
+    @StateObject private var model = ShowCellViewModel()
+    
+    let style: Style
+    
+    @Environment(\.isEditing) private var isEditing
+    @Environment(\.isSelected) private var isSelected
+    
+    init(show: SRGShow?, style: Style) {
+        _show = .constant(show)
+        self.style = style
     }
     
     var body: some View {
         Group {
             #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
-                ImageView(url: show?.imageUrl(for: .small))
+                ImageView(url: model.imageUrl)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
-                DescriptionView(show: show)
+                DescriptionView(model: model, style: style)
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, ShowCellSize.verticalPadding)
             }
             #else
-            Stack(direction: direction, spacing: 0) {
-                ImageView(url: show?.imageUrl(for: .small))
+            VStack(spacing: 0) {
+                ImageView(url: model.imageUrl)
                     .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
-                DescriptionView(show: show)
+                DescriptionView(model: model, style: style)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)
-                if self.hasSubscriptionButton {
-                    SubscriptionButton(show: show)
-                        .padding(.horizontal, ShowCellSize.horizontalPadding)
-                        .padding(.vertical, ShowCellSize.verticalPadding)
-                }
             }
             .background(Color.srgGray23)
             .redactable()
+            .selectionAppearance(when: isSelected, while: isEditing)
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             .frame(maxHeight: .infinity, alignment: .top)
             #endif
         }
         .redactedIfNil(show)
+        .onAppear {
+            model.show = show
+        }
+        .onChange(of: show) { newValue in
+            model.show = newValue
+        }
     }
     
     #if os(tvOS)
@@ -66,14 +76,20 @@ struct ShowCell: View {
     
     /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
-        let show: SRGShow?
+        @ObservedObject var model: ShowCellViewModel
+        let style: Style
         
         var body: some View {
-            Text(show?.title ?? "")
-                .srgFont(.H4)
-                .foregroundColor(.srgGrayC7)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
+            HStack {
+                Text(model.title ?? "")
+                    .srgFont(.H4)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                if style == .favorite, model.isSubscribed {
+                    Image("subscription_full")
+                }
+            }
+            .foregroundColor(.srgGrayC7)
         }
     }
 }
@@ -82,17 +98,21 @@ struct ShowCell: View {
 
 private extension ShowCell {
     var accessibilityLabel: String? {
-        return show?.title
+        return model.title
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Show cell hint in edit mode")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? [.isSelected] : []
     }
 }
 
 // MARK: Size
 
-class ShowCellSize: NSObject {
+final class ShowCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
@@ -115,31 +135,15 @@ class ShowCellSize: NSObject {
     @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
     }
-    
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
-    }
-    
-    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
-    }
 }
 
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = ShowCellSize.swimlane().previewSize
-    static private let horizontalLayoutSize = ShowCellSize.fullWidth().previewSize
+    static private let size = ShowCellSize.swimlane().previewSize
     
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard))
-            .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
-    
-        Group {
-            ShowCell(show: Mock.show(.standard), direction: .horizontal)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-            ShowCell(show: Mock.show(.standard), direction: .horizontal, hasSubscriptionButton: true)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-        }
+        ShowCell(show: Mock.show(.standard), style: .standard)
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

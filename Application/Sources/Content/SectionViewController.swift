@@ -5,6 +5,7 @@
 //
 
 import Combine
+import Intents
 import SRGAppearanceSwift
 import SwiftUI
 import UIKit
@@ -27,6 +28,8 @@ class SectionViewController: UIViewController {
     #endif
     
     private var refreshTriggered = false
+    private var contentInsets: UIEdgeInsets
+    private var leftBarButtonItem: UIBarButtonItem?
     
     private var globalHeaderTitle: String? {
         #if os(tvOS)
@@ -35,8 +38,6 @@ class SectionViewController: UIViewController {
         return nil
         #endif
     }
-    
-    private var contentInsets: UIEdgeInsets
     
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
@@ -66,6 +67,7 @@ class SectionViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
+        collectionView.allowsMultipleSelectionDuringEditing = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -107,6 +109,10 @@ class SectionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        #if os(iOS)
+        updateEditButton()
+        #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
             guard let self = self else { return }
@@ -150,22 +156,106 @@ class SectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        deselectItems(in: collectionView)
+        userActivity = model.section.viewModelProperties.userActivity
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        userActivity = nil
     }
     
     #if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        
+        collectionView.isEditing = editing
+        
+        if isEditing {
+            leftBarButtonItem = navigationItem.leftBarButtonItem
+        }
+        else {
+            leftBarButtonItem = nil
+            model.clearSelection()
+        }
+        
+        // Force a cell global appearance update
+        collectionView.reloadData()
+        
+        updateEditButton()
+        updateNavigationBar(animated: animated)
+    }
+    
+    private func updateNavigationBar(animated: Bool) {
+        updateTitle()
+        updateDeleteButton(animated: animated)
+    }
+    
+    private static func title(for numberOfSelectedItems: Int) -> String {
+        // TODO: Should use plural localization here but a bit costly (and not sure it is well integrated with CrowdIn)
+        //       See https://developer.apple.com/documentation/xcode/localizing-strings-that-contain-plurals
+        switch numberOfSelectedItems {
+        case 0:
+            return NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
+        case 1:
+            return NSLocalizedString("1 item selected", comment: "Title displayed when 1 item has been selected")
+        default:
+            return String(format: NSLocalizedString("%d items selected", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
+        }
+    }
+    
+    private func updateTitle() {
+        if isEditing {
+            title = Self.title(for: model.numberOfSelectedItems)
+        }
+        else {
+            title = model.title
+        }
+    }
+    
+    private func updateEditButton() {
+        if isEditing {
+            editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
+        }
+        else {
+            editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
+        }
+    }
+    
+    private func updateDeleteButton(animated: Bool) {
+        if isEditing {
+            let numberOfSelectedItems = model.numberOfSelectedItems
+            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+            deleteBarButtonItem.tintColor = .red
+            deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
+            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+            deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: model.numberOfSelectedItems) : nil
+            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
+        }
+        else {
+            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
+        }
+    }
     #endif
     
-    func reloadData(for state: SectionViewModel.State) {
+    private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
+            navigationItem.rightBarButtonItem = nil
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
+            navigationItem.rightBarButtonItem = nil
         case let .loaded(headerItem: headerItem, row: row):
-            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty) : nil
+            let isEmpty = row.isEmpty
+            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(type: model.section.properties.emptyType)) : nil
+            
+            let hasEditButton = model.section.properties.supportsEdition && !isEmpty
+            navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
         }
         
         contentInsets = Self.contentInsets(for: state)
@@ -191,14 +281,33 @@ class SectionViewController: UIViewController {
     }
     
     #if os(iOS)
-    @objc func pullToRefresh(_ refreshControl: RefreshControl) {
+    private func open(_ item: Content.Item) {
+        switch item {
+        case let .media(media):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        case let .show(show):
+            if let navigationController = navigationController {
+                let showViewController = SectionViewController.showViewController(for: show)
+                navigationController.pushViewController(showViewController, animated: true)
+            }
+        case let .topic(topic):
+            if let navigationController = navigationController {
+                let pageViewController = PageViewController(id: .topic(topic: topic))
+                navigationController.pushViewController(pageViewController, animated: true)
+            }
+        default:
+            ()
+        }
+    }
+    
+    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
         refreshTriggered = true
     }
     
-    @objc func shareContent(_ barButtonItem: UIBarButtonItem) {
+    @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
         guard let sharingItem = model.section.properties.sharingItem else { return }
         
         let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
@@ -208,6 +317,18 @@ class SectionViewController: UIViewController {
         popoverPresentationController?.barButtonItem = barButtonItem
         
         self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    @objc private func deleteSelectedItems(_ barButtonItem: UIBarButtonItem) {
+        let alertController = UIAlertController(title: NSLocalizedString("Delete", comment: "Title of the confirmation pop-up displayed when the user is about to delete items"),
+                                                message: NSLocalizedString("The selected items will be deleted.", comment: "Confirmation message displayed when the user is about to delete selected entries"),
+                                                preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .default, handler: nil))
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Delete", comment: "Title of a delete button"), style: .destructive, handler: { _ in
+            self.model.deleteSelection()
+            self.setEditing(false, animated: true)
+        }))
+        present(alertController, animated: true, completion: nil)
     }
     #endif
 }
@@ -229,7 +350,7 @@ private extension SectionViewController {
 
 extension SectionViewController: DailyMediasViewController {
     var date: Date? {
-        guard case let .configured(section) = model.section else { return nil }
+        guard case let .configured(section) = model.section.wrappedValue else { return nil }
         switch section {
         case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
             return day.date
@@ -248,7 +369,19 @@ extension SectionViewController {
         return SectionViewController(section: .content(contentSection))
     }
     
-    @objc static func viewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
+    @objc static func favoriteShowsViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.favoriteShows))
+    }
+    
+    @objc static func historyViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.history))
+    }
+    
+    @objc static func watchLaterViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.watchLater))
+    }
+    
+    @objc static func mediasViewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
         if let channelUid = channelUid {
             return SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         }
@@ -294,26 +427,37 @@ extension SectionViewController: UICollectionViewDelegate {
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
-        switch item {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = SectionViewController.showViewController(for: show)
-                navigationController.pushViewController(showViewController, animated: true)
-            }
-        case let .topic(topic):
-            if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic: topic))
-                navigationController.pushViewController(pageViewController, animated: true)
-            }
-        default:
-            ()
+        if collectionView.isEditing {
+            model.select(item)
+            updateNavigationBar(animated: false)
         }
+        else {
+            open(item)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
+        model.deselect(item)
+        updateNavigationBar(animated: false)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
+        if !isEditing {
+            setEditing(true, animated: true)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        guard !collectionView.isEditing else { return nil }
+        
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
@@ -483,7 +627,27 @@ private extension SectionViewController {
                     MediaCell(media: media, style: .show)
                 }
             case let .show(show):
-                ShowCell(show: show)
+                switch section.wrappedValue {
+                case let .content(contentSection):
+                    switch contentSection.type {
+                    case .predefined:
+                        switch contentSection.presentation.type {
+                        case .favoriteShows:
+                            ShowCell(show: show, style: .favorite)
+                        default:
+                            ShowCell(show: show, style: .standard)
+                        }
+                    default:
+                        ShowCell(show: show, style: .standard)
+                    }
+                case let .configured(configuredSection):
+                    switch configuredSection {
+                    case .favoriteShows, .radioFavoriteShows:
+                        ShowCell(show: show, style: .favorite)
+                    default:
+                        ShowCell(show: show, style: .standard)
+                    }
+                }
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
             default:

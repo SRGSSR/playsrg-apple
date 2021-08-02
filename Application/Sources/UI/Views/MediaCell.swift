@@ -25,6 +25,9 @@ struct MediaCell: View {
     
     @State private var isFocused = false
     
+    @Environment(\.isEditing) private var isEditing
+    @Environment(\.isSelected) private var isSelected
+    
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
@@ -70,14 +73,16 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
+                    .selectionAppearance(when: isSelected, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
                 DescriptionView(media: media, style: style)
+                    .selectionAppearance(.transluscent, when: isSelected, while: isEditing)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             #endif
         }
         .redactedIfNil(media)
@@ -152,13 +157,17 @@ private extension MediaCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? [.isSelected] : []
     }
 }
 
 // MARK: Size
 
-class MediaCellSize: NSObject {
+final class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)

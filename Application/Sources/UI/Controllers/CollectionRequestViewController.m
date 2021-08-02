@@ -35,7 +35,7 @@
 
 - (NSString *)emptyCollectionTitle
 {
-    return _emptyCollectionTitle ? _emptyCollectionTitle : NSLocalizedString(@"No results", @"Default text displayed when no results are available");
+    return _emptyCollectionTitle ? _emptyCollectionTitle : NSLocalizedString(@"No content", @"Default text displayed when no content is available");
 }
 
 - (NSString *)emptyCollectionSubtitle

@@ -9,11 +9,12 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class SectionViewModel: ObservableObject {
-    let section: Content.Section
+final class SectionViewModel: ObservableObject {
+    let section: SectionViewModel.Section
     
     @Published private(set) var state: State = .loading
     
+    private var selectedItems = Set<Content.Item>()
     private var trigger = Trigger()
     private var cancellables = Set<AnyCancellable>()
     
@@ -21,17 +22,20 @@ class SectionViewModel: ObservableObject {
         return section.properties.displaysTitle ? section.properties.title : nil
     }
     
-    init(section: Content.Section, filter: SectionFiltering?) {
-        self.section = section
+    var numberOfSelectedItems: Int {
+        return selectedItems.count
+    }
+    
+    init(section contentSection: Content.Section, filter: SectionFiltering?) {
+        self.section = SectionViewModel.Section(contentSection)
         
-        let rowSection = SectionViewModel.Section(section)
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [section, trigger] in
             return Publishers.CombineLatest(
-                rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                                paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                                filter: filter)
+                section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                                             paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
+                                             filter: filter)
                     .scan([]) { $0 + $1 },
-                rowSection.properties.removalPublisher()
+                section.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -39,9 +43,9 @@ class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = rowSection.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+                let headerItem = section.viewModelProperties.headerItem(from: items)
+                let rowItems = removeDuplicates(in: section.viewModelProperties.rowItems(from: items))
+                return State.loaded(headerItem: headerItem, row: Row(section: section, items: rowItems))
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -50,7 +54,8 @@ class SectionViewModel: ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }
@@ -64,6 +69,29 @@ class SectionViewModel: ObservableObject {
     func reload(deep: Bool = false) {
         if deep || state.isEmpty {
             trigger.activate(for: TriggerId.reload)
+        }
+    }
+    
+    func select(_ item: Content.Item) {
+        selectedItems.insert(item)
+    }
+    
+    func deselect(_ item: Content.Item) {
+        selectedItems.remove(item)
+    }
+    
+    func clearSelection() {
+        selectedItems.removeAll()
+    }
+    
+    func deleteSelection() {
+        section.properties.remove(Array(selectedItems))
+        selectedItems.removeAll()
+        
+        if let analyticsDeletionHiddenEventTitle = section.properties.analyticsDeletionHiddenEventTitle {
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.selection.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
         }
     }
 }
@@ -144,6 +172,8 @@ protocol SectionViewModelProperties {
     
     func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
     func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
+    
+    var userActivity: NSUserActivity? { get }
 }
 
 private extension SectionViewModel {
@@ -193,6 +223,10 @@ private extension SectionViewModel {
                 return items
             }
         }
+        
+        var userActivity: NSUserActivity? {
+            return nil
+        }
     }
     
     struct ConfiguredSectionProperties: SectionViewModelProperties {
@@ -200,11 +234,11 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
-            case .radioFavoriteShows, .radioAllShows, .tvAllShows:
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid
@@ -222,6 +256,37 @@ private extension SectionViewModel {
         
         func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
             return items
+        }
+        
+        var userActivity: NSUserActivity? {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
+                return nil
+            }
+            
+            switch configuredSection {
+            case let .show(show):
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
+                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
+                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+                userActivity.addUserInfoEntries(from: [
+                    "URNString": show.urn,
+                    "SRGShowData": data,
+                    "applicationVersion": applicationVersion
+                ])
+                
+                #if os(iOS)
+                userActivity.isEligibleForPrediction = true
+                userActivity.persistentIdentifier = show.urn
+                let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+                #endif
+                
+                return userActivity
+            default:
+                return nil
+            }
         }
     }
 }

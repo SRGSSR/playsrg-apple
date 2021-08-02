@@ -18,6 +18,8 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let content: Content
     let layout: FeaturedContentLayout
     
+    @Environment(\.isSelected) private var isSelected
+    
     #if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     #endif
@@ -95,6 +97,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             }
             .background(Color.srgGray23)
             .redactable()
+            .selectionAppearance(when: isSelected)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
@@ -131,7 +134,7 @@ private extension FeaturedContentCell {
 
 // MARK: Size
 
-class FeaturedContentCellSize: NSObject {
+final class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {

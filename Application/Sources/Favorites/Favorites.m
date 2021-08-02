@@ -6,6 +6,8 @@
 
 #import "Favorites.h"
 
+#import "PlaySRG-Swift.h"
+
 #if TARGET_OS_IOS
 #import "DeprecatedFavorite.h"
 #import "NSSet+PlaySRG.h"
@@ -111,6 +113,7 @@ BOOL FavoritesContainsShow(SRGShow *show)
 void FavoritesAddShow(SRGShow *show)
 {
     FavoritesAddShowURNWithDate(show.URN, NSDate.date);
+    [UserInteractionEvent addToFavorites:@[show]];
 }
 
 void FavoritesRemoveShows(NSArray<SRGShow *> *shows)
@@ -129,6 +132,7 @@ void FavoritesRemoveShows(NSArray<SRGShow *> *shows)
         [paths addObject:[PlayFavoritesPath stringByAppendingPathComponent:URN]];
     }
     [SRGUserData.currentUserData.preferences removeObjectsAtPaths:paths.copy inDomain:PlayPreferencesDomain];
+    [UserInteractionEvent removeFromFavorites:shows];
 }
 
 void FavoritesToggleShow(SRGShow *show)

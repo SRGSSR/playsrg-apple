@@ -263,7 +263,7 @@
 - (void)updateHistoryStatus
 {
     HistoryPlaybackProgressAsyncCancel(self.progressTaskHandle);
-    self.progressTaskHandle = HistoryPlaybackProgressForMediaMetadataAsync(self.download, ^(float progress) {
+    self.progressTaskHandle = HistoryPlaybackProgressForMediaAsync(self.download.media, ^(float progress) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.progressView.hidden = (progress == 0.f);
             self.progressView.progress = progress;

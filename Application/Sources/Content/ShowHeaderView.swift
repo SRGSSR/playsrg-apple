@@ -125,11 +125,28 @@ struct ShowHeaderView: View {
                     }
                     #endif
                 }
+                .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
         }
         
         private func favoriteAction() {
-            model.toggleFavorite()
+            if model.shouldDisplayFavoriteRemovalAlert {
+                model.isFavoriteRemovalAlertDisplayed = true
+            }
+            else {
+                model.toggleFavorite()
+            }
+        }
+        
+        private func favoriteRemovalAlert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.toggleFavorite()
+            }
+            return Alert(title: Text(NSLocalizedString("Delete from favorites", comment: "Title of the confirmation pop-up displayed when the user is about to delete a favorite")),
+                         message: Text(NSLocalizedString("The favorite and notification subscription will be deleted on all devices connected to your account.", comment: "Confirmation message displayed when a logged in user is about to delete a favorite")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
         }
         
         #if os(iOS)
@@ -164,7 +181,7 @@ private extension View {
 
 // MARK: Size
 
-class ShowHeaderViewSize: NSObject {
+final class ShowHeaderViewSize: NSObject {
     static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()

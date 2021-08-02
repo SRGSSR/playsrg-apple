@@ -92,7 +92,7 @@ static Playlist *s_playlist;
             self.recommendationUid = recommendation.recommendationUid;
             
             NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SRGMedia * _Nullable media, NSDictionary<NSString *,id> * _Nullable bindings) {
-                return HistoryCanResumePlaybackForMediaMetadata(media);
+                return HistoryCanResumePlaybackForMedia(media);
             }];
             self.medias = [medias filteredArrayUsingPredicate:predicate];
         }] requestWithPageSize:50];
@@ -130,7 +130,7 @@ static Playlist *s_playlist;
 
 - (SRGPosition *)controller:(SRGLetterboxController *)controller startPositionForMedia:(SRGMedia *)media
 {
-    return HistoryResumePlaybackPositionForMediaMetadata(media);
+    return HistoryResumePlaybackPositionForMedia(media);
 }
 
 - (SRGLetterboxPlaybackSettings *)controller:(SRGLetterboxController *)controller preferredSettingsForMedia:(SRGMedia *)media

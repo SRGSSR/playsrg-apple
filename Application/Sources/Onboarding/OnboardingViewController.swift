@@ -7,7 +7,7 @@
 import PaperOnboarding
 import SRGAppearance
 
-@objc(OnboardingViewController) public class OnboardingViewController: BaseViewController {
+@objc(OnboardingViewController) final class OnboardingViewController: BaseViewController {
     final var onboarding: Onboarding!
     
     private weak var paperOnboarding: PaperOnboarding!
@@ -24,7 +24,7 @@ import SRGAppearance
     
     // MARK: Object lifecycle
     
-    @objc public static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
+    @objc static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
         let storyboard = UIStoryboard(name: "OnboardingViewController", bundle: nil)
         let viewController = storyboard.instantiateInitialViewController() as! OnboardingViewController
         viewController.onboarding = onboarding
@@ -34,7 +34,7 @@ import SRGAppearance
     
     // MARK: View lifecycle
     
-    public override func viewDidLoad() {
+    override func viewDidLoad() {
         super.viewDidLoad()
         
         previousButton.setTitleColor(.white, for: .normal)
@@ -75,7 +75,7 @@ import SRGAppearance
     
     // MARK: Rotation
     
-    public func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
         }
@@ -86,13 +86,13 @@ import SRGAppearance
     
     // MARK: Status bar
     
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     
     // MARK: Overrides
     
-    public override func viewWillLayoutSubviews() {
+    override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
         let smallFontSize = CGFloat(isTall ? 20.0 : 14.0)
@@ -152,11 +152,11 @@ import SRGAppearance
 }
 
 extension OnboardingViewController: PaperOnboardingDataSource {
-    public func onboardingItemsCount() -> Int {
+    func onboardingItemsCount() -> Int {
         return onboarding.pages.count
     }
     
-    public func onboardingItem(at index: Int) -> OnboardingItemInfo {
+    func onboardingItem(at index: Int) -> OnboardingItemInfo {
         let page = onboarding.pages[index]
         
         let informationImage = UIImage(named: "\(onboarding.uid)_\(page.uid)") ?? UIImage()
@@ -180,15 +180,15 @@ extension OnboardingViewController: PaperOnboardingDataSource {
 }
 
 extension OnboardingViewController: PaperOnboardingDelegate {
-    public func onboardingWillTransitonToIndex(_ index: Int) {
+    func onboardingWillTransitonToIndex(_ index: Int) {
         updateUserInterface(index: index, animated: true)
     }
     
-    public func onboardingDidTransitonToIndex(_: Int) {
+    func onboardingDidTransitonToIndex(_: Int) {
         UIAccessibility.post(notification: UIAccessibility.Notification.screenChanged, argument: paperOnboarding)
     }
     
-    public func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index _: Int) {
+    func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index _: Int) {
         item.titleLabel?.numberOfLines = 2
         item.descriptionLabel?.numberOfLines = 0
         
@@ -201,11 +201,11 @@ extension OnboardingViewController: PaperOnboardingDelegate {
 }
 
 extension OnboardingViewController: SRGAnalyticsViewTracking {
-    public var srg_pageViewTitle: String {
+    var srg_pageViewTitle: String {
         return onboarding.title
     }
     
-    public var srg_pageViewLevels: [String]? {
+    var srg_pageViewLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue, AnalyticsPageLevel.feature.rawValue]
     }
 }

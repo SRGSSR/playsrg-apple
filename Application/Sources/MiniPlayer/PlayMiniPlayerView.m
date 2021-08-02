@@ -251,7 +251,7 @@
                 self.progressView.progress = CMTimeGetSeconds(CMTimeSubtract(currentTime, timeRange.start)) / CMTimeGetSeconds(timeRange.duration);
             }
             else {
-                self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+                self.progressView.progress = HistoryPlaybackProgressForMedia(self.media);
             }
             self.progressView.hidden = NO;
         }
@@ -261,7 +261,7 @@
             self.progressView.hidden = YES;
         }
         else {
-            self.progressView.progress = HistoryPlaybackProgressForMediaMetadata(self.media);
+            self.progressView.progress = HistoryPlaybackProgressForMedia(self.media);
             self.progressView.hidden = NO;
         }
     }
@@ -368,7 +368,7 @@
         return;
     }
     
-    SRGPosition *position = HistoryResumePlaybackPositionForMediaMetadata(media);
+    SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
     SRGLetterboxController *controller = self.controller;
     
     // If a controller is readily available, use it

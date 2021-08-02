@@ -5,11 +5,12 @@
 //
 
 import Combine
-import SwiftUI
 import SRGAnalytics
 import SRGUserData
 
-class ProfileViewModel: ObservableObject {
+// MARK: View model
+
+final class ProfileViewModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
     @Published private(set) var account: SRGAccount?
     
@@ -43,21 +44,25 @@ class ProfileViewModel: ObservableObject {
     
     init() {
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
@@ -65,27 +70,31 @@ class ProfileViewModel: ObservableObject {
         updateIdentityInformation()
         
         NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateSynchronizationDate()
             }
             .store(in: &cancellables)
         updateSynchronizationDate()
         
-        Signal.historyUpdate()
+        ThrottledSignal.historyUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateHistoryInformation()
             }
             .store(in: &cancellables)
         updateHistoryInformation()
         
-        Signal.watchLaterUpdate()
+        ThrottledSignal.watchLaterUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateWatchLaterInformation()
             }
             .store(in: &cancellables)
         updateWatchLaterInformation()
         
-        Signal.favoritesUpdate()
+        ThrottledSignal.preferenceUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateFavoritesInformation()
             }

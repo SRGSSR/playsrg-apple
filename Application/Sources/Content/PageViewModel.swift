@@ -8,7 +8,7 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class PageViewModel: Identifiable, ObservableObject {
+final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
     
     var title: String? {
@@ -65,7 +65,8 @@ class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceStatus)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }
@@ -289,7 +290,7 @@ private extension SRGDataProvider {
         return Publishers.CombineLatest(
             section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .scan([]) { $0 + $1 },
-            section.properties.removalPublisher()
+            section.properties.interactiveUpdatesPublisher()
                 .prepend(Just([]))
                 .setFailureType(to: Error.self)
         )
@@ -403,9 +404,9 @@ private extension PageViewModel {
                 #else
                 return .liveMediaSwimlane
                 #endif
-            case .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
-            case .radioFavoriteShows, .show:
+            case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
