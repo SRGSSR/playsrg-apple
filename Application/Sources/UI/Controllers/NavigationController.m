@@ -93,6 +93,43 @@
 {
     self.statusBarStyle = statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
+    
+    UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
+    
+    if (backgroundColor) {
+        [appearance configureWithOpaqueBackground];
+        appearance.backgroundColor = backgroundColor;
+    }
+    else {
+        [appearance configureWithDefaultBackground];
+    }
+    
+    UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
+                                                             NSForegroundColorAttributeName : foregroundColor };
+    appearance.titleTextAttributes = attributes;
+    appearance.largeTitleTextAttributes = attributes;
+    
+    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
+                                                                   NSForegroundColorAttributeName : foregroundColor };
+    
+    UIBarButtonItemAppearance *plainButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
+    plainButtonAppearance.normal.titleTextAttributes = buttonAttributes;
+    appearance.buttonAppearance = plainButtonAppearance;
+    
+    UIBarButtonItemAppearance *doneButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStyleDone];
+    doneButtonAppearance.normal.titleTextAttributes = buttonAttributes;
+    appearance.doneButtonAppearance = doneButtonAppearance;
+    
+    UINavigationBar *navigationBar = self.navigationBar;
+    navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
+    navigationBar.standardAppearance = appearance;
+    navigationBar.compactAppearance = appearance;
+    navigationBar.scrollEdgeAppearance = appearance;
+    
+    // Force appearance settings to be applied again, see https://stackoverflow.com/a/37668610/760435
+    self.navigationBarHidden = YES;
+    self.navigationBarHidden = NO;
 }
 
 - (void)updateWithRadioChannel:(RadioChannel *)radioChannel animated:(BOOL)animated
