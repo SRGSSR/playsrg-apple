@@ -55,6 +55,7 @@ final class SectionViewModel: ObservableObject {
         .assign(to: &$state)
         
         ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }

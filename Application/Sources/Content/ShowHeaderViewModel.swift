@@ -124,6 +124,7 @@ final class ShowHeaderViewModel: ObservableObject {
         cancellables = []
         
         Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp())
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
             }

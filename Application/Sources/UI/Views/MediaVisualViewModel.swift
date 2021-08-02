@@ -66,6 +66,7 @@ final class MediaVisualViewModel: ObservableObject {
         
         if let media = media {
             ThrottledSignal.historyUpdates(for: media.urn)
+                .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
                     self?.updateProgress()
                 }

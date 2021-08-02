@@ -44,21 +44,25 @@ final class ProfileViewModel: ObservableObject {
     
     init() {
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
             .store(in: &cancellables)
         NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateIdentityInformation()
             }
@@ -66,6 +70,7 @@ final class ProfileViewModel: ObservableObject {
         updateIdentityInformation()
         
         NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateSynchronizationDate()
             }
@@ -73,6 +78,7 @@ final class ProfileViewModel: ObservableObject {
         updateSynchronizationDate()
         
         ThrottledSignal.historyUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateHistoryInformation()
             }
@@ -80,6 +86,7 @@ final class ProfileViewModel: ObservableObject {
         updateHistoryInformation()
         
         ThrottledSignal.watchLaterUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateWatchLaterInformation()
             }
@@ -87,6 +94,7 @@ final class ProfileViewModel: ObservableObject {
         updateWatchLaterInformation()
         
         ThrottledSignal.preferenceUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateFavoritesInformation()
             }

@@ -23,6 +23,7 @@ class ShowCellViewModel: ObservableObject {
         cancellables = []
         
         ThrottledSignal.preferenceUpdates()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
             }

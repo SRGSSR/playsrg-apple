@@ -66,6 +66,7 @@ final class PageViewModel: Identifiable, ObservableObject {
         .assign(to: &$serviceStatus)
         
         ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }
