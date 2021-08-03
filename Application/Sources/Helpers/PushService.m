@@ -20,6 +20,9 @@
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
 NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidChangeNotification";
+NSString * const PushServiceStatusDidChangeNotification = @"PushServiceStatusDidChangeNotification";
+
+NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 @interface PushService () <UAPushNotificationDelegate>
 
@@ -27,6 +30,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 @property (nonatomic, readonly) NSString *environmentIdentifier;
 
 @property (nonatomic) UAConfig *configuration;
+
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 
 @end
 
@@ -74,6 +79,14 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
         }
         
         self.configuration = configuration;
+        
+        // Use status cached by Airship as initial value
+        self.enabled = ([UAirship push].authorizationStatus == UAAuthorizationStatusAuthorized);
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(applicationDidBecomeActive:)
+                                                   name:UIApplicationDidBecomeActiveNotification
+                                                 object:nil];
     }
     return self;
 }
@@ -141,25 +154,6 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     return URNs.copy;
 }
 
-- (BOOL)isEnabled
-{
-    // Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications` will still return
-    // `YES` if the target supports silent notifications. We must retrieve the proper authorization status from
-    // `UNUserNotificationCenter`, providing finer-grained information about notification settings.
-    
-    // Make asynchronous call synchronous
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
-    __block UNNotificationSettings *notificationSettings = nil;
-    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        notificationSettings = settings;
-        dispatch_semaphore_signal(semaphore);
-    }];
-    
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
-}
-
 #pragma mark Setup
 
 - (void)setup
@@ -184,7 +178,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     NSInteger unreadNotificationCount = Notification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        [[UAirship push] setBadgeNumber:unreadNotificationCount];
+        [UAirship push].badgeNumber = unreadNotificationCount;
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -328,6 +322,24 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler(UIBackgroundFetchResultNewData);
+}
+
+#pragma mark Notifications
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    // Ensures the state is updated after the user left the app to toggle notifications on or off in the Settings app.
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
+            if (enabled != self.enabled) {
+                self.enabled = enabled;
+                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
+                                                                  object:self
+                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
+            }
+        });
+    }];
 }
 
 @end
