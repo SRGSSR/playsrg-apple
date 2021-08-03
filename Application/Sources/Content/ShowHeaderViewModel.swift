@@ -78,16 +78,20 @@ final class ShowHeaderViewModel: ObservableObject {
             return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
         }
     }
+    #endif
     
     private static func subscriptionStatus(for show: SRGShow?) -> SubscriptionStatus {
+        #if os(iOS)
         if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
             return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
         }
         else {
             return .unavailable
         }
+        #else
+        return .unavailable
+        #endif
     }
-    #endif
     
     func toggleFavorite() {
         guard let show = show else { return }
@@ -144,9 +148,7 @@ final class ShowHeaderViewModel: ObservableObject {
         else {
             isFavorite = false
         }
-        #if os(iOS)
         subscriptionStatus = Self.subscriptionStatus(for: show)
-        #endif
     }
 }
 
