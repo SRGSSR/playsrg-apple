@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualisaziuns";
 
+/* Title displayed when several items have been selected */
+"%d items" = "%d items";
+
+/* Title displayed when 1 item has been selected */
+"1 item" = "1 item";
+
 /* Less than 5 min option */
 "< 5 min" = "< 5 min";
 
@@ -62,10 +68,7 @@
 /* All option */
 "All" = "Tut";
 
-/* Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete all favorites
-   Confirmation message displayed when the user is about to delete the later list
-   Confirmation message displayed when the user is about to delete the whole history */
+/* Confirmation message displayed when the user is about to delete all download items */
 "All items will be deleted." = "Tut ils elements vegnan allontanads";
 
 /* Audios option
@@ -97,8 +100,7 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Selecziunà tes radio regiunal";
 
-/* Profile content section header
-   Settings section header */
+/* Search settings section header */
 "Content" = "Cuntegn";
 
 /* Message displayed when the user is about to delete content saved for later */
@@ -108,11 +110,11 @@
 "Date" = "Data";
 
 /* Title of a delete button
+   Title of the confirmation pop-up displayed when the user is about to delete items
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Allontanar";
 
 /* Title of the button to delete content saved for later
-   Title of the confirmation pop-up displayed when the user is about to delete content from the later list
    Title of the message displayed when the user is about to delete content saved for later */
 "Delete content saved for later" = "Allontanar cuntegns arcunads per pli tard";
 
@@ -122,9 +124,7 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete download items */
 "Delete downloads" = "Allontanar downloads";
 
-/* Delete favorites button title
-   Title of the confirmation pop-up displayed when the user is about to delete favorite items
-   Title of the message displayed when the user is about to delete all favorites */
+/* Title of the message displayed when the user is about to delete all favorites */
 "Delete favorites" = "Allontanar favurits";
 
 /* Context menu action to delete a media from the later list */
@@ -137,9 +137,10 @@
    Title of the confirmation pop-up displayed when the user is about to delete a favorite */
 "Delete from favorites" = "Allontanar da favurits";
 
-/* Delete history button title
-   Title of the confirmation pop-up displayed when the user is about to delete history entries
-   Title of the message displayed when the user is about to delete the history */
+/* Context menu action to delete a media from the history */
+"Delete from history" = "Delete from history";
+
+/* Title of the message displayed when the user is about to delete the history */
 "Delete history" = "Allontanar cronologia";
 
 /* Label for the button disabling autoplay */
@@ -151,13 +152,16 @@
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Mussa las episodas %@";
 
+/* Done button title */
+"Done" = "Done";
+
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Stgargiabel";
 
 /* Label to present downloads */
 "Downloads" = "Telechargiadas";
 
-/* Settings section header */
+/* Search settings section header */
 "Duration" = "Durada";
 
 /* Label for the button keeping autoplay enabled */
@@ -203,7 +207,8 @@
 /* Full screen shortcut label */
 "Full screen" = "Monitur cumplain";
 
-/* Label to present history */
+/* Label to present history
+   Title label used to present the history */
 "History" = "Cronologia";
 
 /* Home tab title */
@@ -235,8 +240,7 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Novissimas episodas da voss favurits";
 
-/* Short title for the most recent video topic list
-   Title label used to present the radio latest videos */
+/* Title label used to present the radio latest videos */
 "Latest videos" = "Ils pli novs videos";
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
@@ -295,9 +299,6 @@
 /* Title label used to present the radio most popular audio medias */
 "Most listened to" = "Tadlà il pli savens";
 
-/* Short title for the most clicked video topic list */
-"Most popular" = "Il pli tschertgà";
-
 /* Most searched shows header */
 "Most searched shows" = "Emissiuns las pli tschertgadas";
 
@@ -319,7 +320,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "Proxim a las %@";
 
-/* Text displayed when no media added to the later list */
+/* Default text displayed when no content is available */
 "No content" = "Nagin cuntegn";
 
 /* Text displayed when no downloads are available */
@@ -352,7 +353,7 @@
 /* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
 "Notifications have been enabled for %@" = "Las notificaziuns èn activadas per %@";
 
-/* Subscription label when notification enabled in the show view */
+/* Subscription label when notification enabled in the show view */
 "Notified" = "Notifitgà";
 
 /* Subscription label to be notified in the show view */
@@ -366,7 +367,7 @@
 /* Label to present the main Videos / Audios views */
 "Overview" = "Survista";
 
-/* Settings section header */
+/* Search settings section header */
 "Period" = "Interval";
 
 /* Play / Pause shortcut label */
@@ -388,7 +389,7 @@
    Title displayed at the top of the profile view */
 "Profile" = "Profils";
 
-/* Settings section header */
+/* Search settings section header */
 "Properties" = "Funcziunalitads";
 
 /* Text displayed to inform the user she can pull a list to reload it */
@@ -399,9 +400,6 @@
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Receptur ord funcziun.";
-
-/* Hint displayed when no history is available */
-"Recently played medias will be displayed here" = "Qua chattais las medias consumadas ultimamain";
 
 /* Message title displayed when the user is recommended to update the application. */
 "Recommended update" = "Update recumandà";
@@ -430,6 +428,12 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Tschertga";
 
+/* Select button title */
+"Select" = "Select";
+
+/* Title displayed when no item has been selected */
+"Select items" = "Select items";
+
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
 
@@ -440,9 +444,6 @@
    Context menu action to share a show
    Title of the action view to choose a sharing action */
 "Share" = "Parter";
-
-/* Show more button label when a link is available for broadcast information. */
-"Show more" = "Dapli";
 
 /* Program list header in livestream view
    Show search result header
@@ -466,7 +467,7 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "Proximamain";
 
-/* Settings section header */
+/* Search settings section header */
 "Sort by" = "Sortar tenor";
 
 /* Title label used to present live center medias */
@@ -550,9 +551,7 @@
 "The selected content" = "Il cuntegn selecziunà";
 
 /* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected entries from favorites
-   Confirmation message displayed when the user is about to delete selected entries from the later list
-   Confirmation message displayed when the user is about to delete selected history entries */
+   Confirmation message displayed when the user is about to delete selected entries */
 "The selected items will be deleted." = "Ils elements selecziunads vegnan allontanads.";
 
 /* Error message when a show cannot be opened via Handoff
@@ -626,20 +625,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "Vus paudais puspe activar questa funcziun.";
 
-/* Hint displayed when no media added to the later list and the device supports 3D touch */
-"You can press on a content to add it to \"Later\"" = "Smatgar sin elements per agiuntar a \"pli tard\"";
-
-/* Hint displayed when no favorites are available and the device supports 3D touch */
-"You can press on an item to add it to favorites" = "Smatgar sin in element per aschuntar a Vos favurits";
-
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "Smatgar sin in element per telechargiar quel (betg tut po vegnir telechargià)";
-
-/* Hint displayed when no media added to the later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to \"Later\"" = "Tegnair smatgà in element per l'agiuntar a \"pli tard\"";
-
-/* Hint displayed when no favorites are available and the device does not support 3D touch */
-"You can tap and hold an item to add it to favorites" = "Vus pudais smatgar e tegnair Voss det sin in element per metter en Voss favurits";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "Smatgar e tegnair Voss det sin in element per telechargiar (tscherts elements na pon betg vegnir telechargiads)";

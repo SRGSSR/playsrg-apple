@@ -202,9 +202,9 @@ class SectionViewController: UIViewController {
         case 0:
             return NSLocalizedString("Select items", comment: "Title displayed when no item has been selected")
         case 1:
-            return NSLocalizedString("1 item selected", comment: "Title displayed when 1 item has been selected")
+            return NSLocalizedString("1 item", comment: "Title displayed when 1 item has been selected")
         default:
-            return String(format: NSLocalizedString("%d items selected", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
+            return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
         }
     }
     

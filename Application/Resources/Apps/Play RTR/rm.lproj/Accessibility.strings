@@ -17,7 +17,7 @@
 "A to Z shows" = "Emissiuns dad A fin Z";
 
 /* Favorite label in the player view when a show can be favorited
-   Favorite label in the show view when a show can be favorited */
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Agiunscher a favurits";
 
 /* Accessibility label for the audio description badge */
@@ -48,7 +48,7 @@
 "Delete from \"Later\" list" = "Allontanar da la glista \"pli tard\"";
 
 /* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
+   Favorite label in the show view when a show has been favorited */
 "Delete from favorites" = "Allontanar da favurits";
 
 /* Show unsubscription label */
@@ -171,6 +171,10 @@
 
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Suttitels";
+
+/* Media cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "Toggles selection.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

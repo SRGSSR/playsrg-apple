@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualizzazioni";
 
+/* Title displayed when several items have been selected */
+"%d items" = "%d elementi";
+
+/* Title displayed when 1 item has been selected */
+"1 item" = "1 elemento";
+
 /* Less than 5 min option */
 "< 5 min" = "< 5 min";
 
@@ -62,10 +68,7 @@
 /* All option */
 "All" = "Tutto";
 
-/* Confirmation message displayed when the user is about to delete all download items
-   Confirmation message displayed when the user is about to delete all favorites
-   Confirmation message displayed when the user is about to delete the later list
-   Confirmation message displayed when the user is about to delete the whole history */
+/* Confirmation message displayed when the user is about to delete all download items */
 "All items will be deleted." = "Tutti gli elementi saranno eliminati.";
 
 /* Audios option
@@ -97,8 +100,7 @@
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Scegli la radio locale";
 
-/* Profile content section header
-   Settings section header */
+/* Search settings section header */
 "Content" = "Contenuto";
 
 /* Message displayed when the user is about to delete content saved for later */
@@ -108,11 +110,11 @@
 "Date" = "Data";
 
 /* Title of a delete button
+   Title of the confirmation pop-up displayed when the user is about to delete items
    Title of the delete button in the alert view when deleting a download in the player view */
 "Delete" = "Eliminare";
 
 /* Title of the button to delete content saved for later
-   Title of the confirmation pop-up displayed when the user is about to delete content from the later list
    Title of the message displayed when the user is about to delete content saved for later */
 "Delete content saved for later" = "Eliminare il contenuto salvato per essere consultato più tardi";
 
@@ -122,9 +124,7 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete download items */
 "Delete downloads" = "Eliminare il download";
 
-/* Delete favorites button title
-   Title of the confirmation pop-up displayed when the user is about to delete favorite items
-   Title of the message displayed when the user is about to delete all favorites */
+/* Title of the message displayed when the user is about to delete all favorites */
 "Delete favorites" = "Eliminare i preferiti";
 
 /* Context menu action to delete a media from the later list */
@@ -137,9 +137,10 @@
    Title of the confirmation pop-up displayed when the user is about to delete a favorite */
 "Delete from favorites" = "Eliminare dai Preferiti";
 
-/* Delete history button title
-   Title of the confirmation pop-up displayed when the user is about to delete history entries
-   Title of the message displayed when the user is about to delete the history */
+/* Context menu action to delete a media from the history */
+"Delete from history" = "Delete from history";
+
+/* Title of the message displayed when the user is about to delete the history */
 "Delete history" = "Eliminare cronologia";
 
 /* Label for the button disabling autoplay */
@@ -151,13 +152,16 @@
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Mostra le puntate di %@";
 
+/* Done button title */
+"Done" = "Fine";
+
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Scaricabile";
 
 /* Label to present downloads */
 "Downloads" = "Download";
 
-/* Settings section header */
+/* Search settings section header */
 "Duration" = "Durata";
 
 /* Label for the button keeping autoplay enabled */
@@ -203,7 +207,8 @@
 /* Full screen shortcut label */
 "Full screen" = "Schermo intero";
 
-/* Label to present history */
+/* Label to present history
+   Title label used to present the history */
 "History" = "Cronologia";
 
 /* Home tab title */
@@ -235,8 +240,7 @@
    Title label used to present the latest episodes from TV favorite shows */
 "Latest episodes from your favorites" = "Episodi più recenti fra i programmi preferiti";
 
-/* Short title for the most recent video topic list
-   Title label used to present the radio latest videos */
+/* Title label used to present the radio latest videos */
 "Latest videos" = "I video più recenti";
 
 /* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
@@ -295,9 +299,6 @@
 /* Title label used to present the radio most popular audio medias */
 "Most listened to" = "I più ascoltati";
 
-/* Short title for the most clicked video topic list */
-"Most popular" = "I più visti";
-
 /* Most searched shows header */
 "Most searched shows" = "Programmi più ricercati";
 
@@ -319,7 +320,7 @@
 /* Introductory time for next program information */
 "Next, at %@" = "Prossimo alle %@";
 
-/* Text displayed when no media added to the later list */
+/* Default text displayed when no content is available */
 "No content" = "Nessun contenuto";
 
 /* Text displayed when no downloads are available */
@@ -352,7 +353,7 @@
 /* Message displayed at the top of the screen when enabling push notifications. Quotes around the content placeholder managed by the application. */
 "Notifications have been enabled for %@" = "Le notifiche sono state attivate per %@";
 
-/* Subscription label when notification enabled in the show view */
+/* Subscription label when notification enabled in the show view */
 "Notified" = "Notificato";
 
 /* Subscription label to be notified in the show view */
@@ -366,7 +367,7 @@
 /* Label to present the main Videos / Audios views */
 "Overview" = "Home";
 
-/* Settings section header */
+/* Search settings section header */
 "Period" = "Periodo";
 
 /* Play / Pause shortcut label */
@@ -388,7 +389,7 @@
    Title displayed at the top of the profile view */
 "Profile" = "Profilo";
 
-/* Settings section header */
+/* Search settings section header */
 "Properties" = "Proprietà";
 
 /* Text displayed to inform the user she can pull a list to reload it */
@@ -399,9 +400,6 @@
 
 /* Title displayed when no media is being played on the connected Google Cast receiver (name unknown) */
 "Receiver is idle." = "Ricevitore inattivo.";
-
-/* Hint displayed when no history is available */
-"Recently played medias will be displayed here" = "I media consultati di recente verranno mostrati qui";
 
 /* Message title displayed when the user is recommended to update the application. */
 "Recommended update" = "Aggiornamento consigliato";
@@ -430,6 +428,12 @@
    Title displayed when there is no search criterium entered */
 "Search" = "Ricerca";
 
+/* Select button title */
+"Select" = "Seleziona";
+
+/* Title displayed when no item has been selected */
+"Select items" = "Seleziona elementi";
+
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Server modificato in '%@'";
 
@@ -440,9 +444,6 @@
    Context menu action to share a show
    Title of the action view to choose a sharing action */
 "Share" = "Condividere";
-
-/* Show more button label when a link is available for broadcast information. */
-"Show more" = "Ulteriori informazioni";
 
 /* Program list header in livestream view
    Show search result header
@@ -466,7 +467,7 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "Presto";
 
-/* Settings section header */
+/* Search settings section header */
 "Sort by" = "Ordinare per";
 
 /* Title label used to present live center medias */
@@ -550,9 +551,7 @@
 "The selected content" = "Contenuto selezionato";
 
 /* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected entries from favorites
-   Confirmation message displayed when the user is about to delete selected entries from the later list
-   Confirmation message displayed when the user is about to delete selected history entries */
+   Confirmation message displayed when the user is about to delete selected entries */
 "The selected items will be deleted." = "L’elemento selezionato verrà eliminato";
 
 /* Error message when a show cannot be opened via Handoff
@@ -626,20 +625,8 @@
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "È possibile gestire questa funzionalità nelle impostazioni in qualsiasi momento.";
 
-/* Hint displayed when no media added to the later list and the device supports 3D touch */
-"You can press on a content to add it to \"Later\"" = "Premere su un contenuto per aggiungerlo a \"Dopo\"";
-
-/* Hint displayed when no favorites are available and the device supports 3D touch */
-"You can press on an item to add it to favorites" = "È possibile premere su qualsiasi elemento per aggiungerlo ai preferiti";
-
 /* Hint displayed when no downloads are available and the device supports 3D touch */
 "You can press on an item to download it (not all items can be downloaded)" = "È possibile premere su un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
-
-/* Hint displayed when no media added to the later list and the device does not support 3D touch */
-"You can tap and hold a content to add it to \"Later\"" = "Tenere premuto su un contenuto per aggiungerlo a \"Dopo\"";
-
-/* Hint displayed when no favorites are available and the device does not support 3D touch */
-"You can tap and hold an item to add it to favorites" = "È possibile toccare e tenere premuto un elemento per aggiungerlo ai preferiti";
 
 /* Hint displayed when no downloads are available and the device does not support 3D touch */
 "You can tap and hold an item to download it (not all items can be downloaded)" = "È possibile toccare e tenere premuto un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";

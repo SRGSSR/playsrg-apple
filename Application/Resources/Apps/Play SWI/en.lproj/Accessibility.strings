@@ -17,7 +17,7 @@
 "A to Z shows" = "A to Z topics";
 
 /* Favorite label in the player view when a show can be favorited
-   Favorite label in the show view when a show can be favorited */
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Add to favorites";
 
 /* Accessibility label for the audio description badge */
@@ -48,7 +48,7 @@
 "Delete from \"Later\" list" = "Delete from \"Later\" list";
 
 /* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
+   Favorite label in the show view when a show has been favorited */
 "Delete from favorites" = "Delete from favorites";
 
 /* Show unsubscription label */
@@ -171,6 +171,10 @@
 
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Subtitled";
+
+/* Media cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "Toggles selection.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Warning";

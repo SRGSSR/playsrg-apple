@@ -17,7 +17,7 @@
 "A to Z shows" = "Émissions de A à Z";
 
 /* Favorite label in the player view when a show can be favorited
-   Favorite label in the show view when a show can be favorited */
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Ajouter aux favoris";
 
 /* Accessibility label for the audio description badge */
@@ -48,7 +48,7 @@
 "Delete from \"Later\" list" = "Supprimer de la liste \"Plus tard\"";
 
 /* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
+   Favorite label in the show view when a show has been favorited */
 "Delete from favorites" = "Supprimer des favoris";
 
 /* Show unsubscription label */
@@ -171,6 +171,10 @@
 
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Sous-titré";
+
+/* Media cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "inverse la sélection.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
