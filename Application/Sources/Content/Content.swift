@@ -518,6 +518,7 @@ private extension Content {
         }
         
         var imageType: SRGImageType {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch configuredSection {
             case .tvAllShows:
                 return .showPoster
