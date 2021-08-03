@@ -52,7 +52,7 @@ extension ShowCellViewModel {
         return show?.title
     }
     
-    var imageUrl: URL? {
-        return show?.imageUrl(for: .small)
+    func imageUrl(with imageType: SRGImageType) -> URL? {
+        return show?.imageUrl(for: .small, with: imageType)
     }
 }

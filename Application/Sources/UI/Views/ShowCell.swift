@@ -35,7 +35,7 @@ struct ShowCell: View {
         Group {
             #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageType), action: action) {
-                ImageView(url: model.imageUrl)
+                ImageView(url: model.imageUrl(with: imageType))
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
@@ -45,7 +45,7 @@ struct ShowCell: View {
             }
             #else
             VStack(spacing: 0) {
-                ImageView(url: model.imageUrl)
+                ImageView(url: model.imageUrl(with: imageType))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                 DescriptionView(model: model, style: style)
