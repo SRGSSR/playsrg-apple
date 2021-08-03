@@ -43,7 +43,7 @@ final class ProgramGuideViewController: UIViewController {
                 
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 50),
+            headerView.heightAnchor.constraint(equalToConstant: 100),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -160,5 +160,16 @@ extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
         let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: currentViewController.day)
         switchToDay(nextDay)
+    }
+    
+    func yesterday() {
+        let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
+        switchToDay(yesterday)
+    }
+    
+    func now() {
+        switchToDay(SRGDay.today)
+
+        // TODO: Scroll to now time
     }
 }
