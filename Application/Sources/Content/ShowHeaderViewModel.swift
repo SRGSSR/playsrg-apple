@@ -128,7 +128,7 @@ final class ShowHeaderViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        Publishers.Merge3(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp(), ApplicationSignal.pushServiceStatusUpdate())
+        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.pushServiceStatusUpdate())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
