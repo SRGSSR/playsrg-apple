@@ -468,6 +468,16 @@
 		6F0506E9245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
 		6F0506EA245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
 		6F0506EB245468EE0053253E /* SplitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0506E6245468EE0053253E /* SplitViewController.m */; };
+		6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */; };
+		6F054FC126B98C33007A34F8 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */; };
+		6F054FC226B98C33007A34F8 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */; };
+		6F054FC326B98C33007A34F8 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */; };
+		6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */; };
+		6F054FC626B98C44007A34F8 /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FC526B98C44007A34F8 /* ProgramView.swift */; };
+		6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FC526B98C44007A34F8 /* ProgramView.swift */; };
+		6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FC526B98C44007A34F8 /* ProgramView.swift */; };
+		6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FC526B98C44007A34F8 /* ProgramView.swift */; };
+		6F054FCA26B98C44007A34F8 /* ProgramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F054FC526B98C44007A34F8 /* ProgramView.swift */; };
 		6F06E0A41DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
 		6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */; };
@@ -2392,6 +2402,8 @@
 		6F00875C219AA888004BD6FF /* StoreReview.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = StoreReview.m; sourceTree = "<group>"; };
 		6F0506E5245468EE0053253E /* SplitViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SplitViewController.h; sourceTree = "<group>"; };
 		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
+		6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
+		6F054FC526B98C44007A34F8 /* ProgramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramView.swift; sourceTree = "<group>"; };
 		6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
 		6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
 		6F0850F226256A7700B4E410 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -4106,6 +4118,8 @@
 				08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */,
 				6F362A8326A0461B00CBCC9D /* ProgramGuideViewController.swift */,
 				6F0ACF3226A97DD800CDE936 /* ProgramGuideViewModel.swift */,
+				6F054FC526B98C44007A34F8 /* ProgramView.swift */,
+				6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */,
 			);
 			path = "Program Guide";
 			sourceTree = "<group>";
@@ -7622,6 +7636,7 @@
 				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
 				6F362A9026A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
+				6F054FC626B98C44007A34F8 /* ProgramView.swift in Sources */,
 				6FE14E6B263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F4760791EB37D60003021EA /* UIDevice+PlaySRG.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -7724,6 +7739,7 @@
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
 				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				0859ADC622D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m in Sources */,
 				6F47607D1EB37D60003021EA /* UIViewController+PlaySRG.m in Sources */,
@@ -7797,6 +7813,7 @@
 				6F54D39126050FFF008B46FF /* BlockingOverlay.swift in Sources */,
 				6FA8479B26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA892292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6F054FC126B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE2873D2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA012201148250070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D722D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
@@ -7901,6 +7918,7 @@
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
+				6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8526A0461B00CBCC9D /* ProgramGuideViewController.swift in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -8004,6 +8022,7 @@
 				6F54D39226050FFF008B46FF /* BlockingOverlay.swift in Sources */,
 				6FA8479C26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8A2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6F054FC226B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE2873E2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4D922D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
@@ -8108,6 +8127,7 @@
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
+				6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8626A0461B00CBCC9D /* ProgramGuideViewController.swift in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -8211,6 +8231,7 @@
 				6F54D39326051000008B46FF /* BlockingOverlay.swift in Sources */,
 				6FA8479D26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8B2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6F054FC326B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE2873F2481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DB22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
@@ -8315,6 +8336,7 @@
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
+				6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8726A0461B00CBCC9D /* ProgramGuideViewController.swift in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
@@ -8418,6 +8440,7 @@
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
+				6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6F12E4DD22D866F200BC1718 /* MostSearchedShowsHeaderView.m in Sources */,
@@ -8522,6 +8545,7 @@
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
+				6F054FCA26B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8826A0461B00CBCC9D /* ProgramGuideViewController.swift in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,

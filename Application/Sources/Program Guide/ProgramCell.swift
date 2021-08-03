@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ProgramCell: View {
     @Binding var program: SRGProgram
-    @StateObject var model = ProgramCellViewModel()
+    @StateObject private var model = ProgramCellViewModel()
     
     @SRGScaledMetric var timeRangeWidth: CGFloat = 90
     
