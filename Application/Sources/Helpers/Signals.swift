@@ -123,7 +123,7 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
-    static func pushServiceStatusChange() -> AnyPublisher<Bool, Never> {
+    static func pushServiceStatusUpdate() -> AnyPublisher<Bool, Never> {
         return NotificationCenter.default.publisher(for: .PushServiceStatusDidChange)
             .map { notification in
                 if let enabled = notification.userInfo?[PushServiceEnabledKey] as? NSNumber {

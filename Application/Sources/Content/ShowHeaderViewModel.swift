@@ -26,7 +26,7 @@ final class ShowHeaderViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        ApplicationSignal.pushServiceStatusChange()
+        ApplicationSignal.pushServiceStatusUpdate()
             .receive(on: DispatchQueue.main)
             .map { [weak self] pushServiceEnabled in
                 return Self.subscriptionStatus(for: self?.show, pushServiceEnabled: pushServiceEnabled)
