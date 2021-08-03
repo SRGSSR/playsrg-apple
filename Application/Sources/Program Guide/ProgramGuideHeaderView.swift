@@ -6,6 +6,13 @@
 
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol ProgramGuideHeaderViewActions: AnyObject {
+    func previousDay()
+    func nextDay()
+}
+
 // MARK: View
 
 struct ProgramGuideHeaderView: View {
@@ -20,19 +27,21 @@ struct ProgramGuideHeaderView: View {
     }
     
     var body: some View {
-        HStack(spacing: 10) {
-            SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
-                // TODO
+        ResponderChain { firstResponder in
+            HStack(spacing: 10) {
+                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                    firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.previousDay))
+                }
+                Text(Self.formattedDate(for: day))
+                    .srgFont(.H2)
+                    .foregroundColor(.srgGrayC7)
+                    .frame(maxWidth: .infinity)
+                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                    firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.nextDay))
+                }
             }
-            Text(Self.formattedDate(for: day))
-                .srgFont(.H2)
-                .foregroundColor(.srgGrayC7)
-                .frame(maxWidth: .infinity)
-            SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
-                // TODO
-            }
+            .padding(.horizontal, 10)
         }
-        .padding(.horizontal, 10)
     }
 }
 
