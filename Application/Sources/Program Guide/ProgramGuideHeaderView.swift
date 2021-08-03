@@ -20,9 +20,19 @@ struct ProgramGuideHeaderView: View {
     }
     
     var body: some View {
-        Text(Self.formattedDate(for: day))
-            .srgFont(.H2)
-            .foregroundColor(.srgGrayC7)
+        HStack(spacing: 10) {
+            SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                // TODO
+            }
+            Text(Self.formattedDate(for: day))
+                .srgFont(.H2)
+                .foregroundColor(.srgGrayC7)
+                .frame(maxWidth: .infinity)
+            SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                // TODO
+            }
+        }
+        .padding(.horizontal, 10)
     }
 }
 
