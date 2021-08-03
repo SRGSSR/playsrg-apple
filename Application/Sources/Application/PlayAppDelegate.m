@@ -751,7 +751,8 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
 {
-    ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
+    // FIXME: Implement initial collection section selection based on index
+    SectionViewController *showsViewController = [SectionViewController showsViewControllerForChannelUid:radioChannel.uid];
     [self.rootTabBarController pushViewController:showsViewController animated:YES];
 }
 
