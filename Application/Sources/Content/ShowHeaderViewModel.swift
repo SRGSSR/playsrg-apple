@@ -13,7 +13,6 @@ import SRGIdentity
 final class ShowHeaderViewModel: ObservableObject {
     var show: SRGShow? {
         didSet {
-            subscriptionStatus = Self.subscriptionStatus(for: show, pushServiceEnabled: Self.pushServiceEnabled)
             updatePublishers()
         }
     }
@@ -24,15 +23,6 @@ final class ShowHeaderViewModel: ObservableObject {
     @Published var isFavoriteRemovalAlertDisplayed: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
-    
-    init() {
-        ApplicationSignal.pushServiceStatusUpdate()
-            .receive(on: DispatchQueue.main)
-            .map { [weak self] pushServiceEnabled in
-                return Self.subscriptionStatus(for: self?.show, pushServiceEnabled: pushServiceEnabled)
-            }
-            .assign(to: &$subscriptionStatus)
-    }
     
     var title: String? {
         return show?.title
@@ -88,10 +78,6 @@ final class ShowHeaderViewModel: ObservableObject {
             return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
         }
     }
-    
-    private static var pushServiceEnabled: Bool {
-        return PushService.shared?.isEnabled ?? false
-    }
     #endif
     
     func toggleFavorite() {
@@ -133,7 +119,7 @@ final class ShowHeaderViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp())
+        Publishers.Merge3(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp(), ApplicationSignal.pushServiceStatusUpdate())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
@@ -149,11 +135,11 @@ final class ShowHeaderViewModel: ObservableObject {
         else {
             isFavorite = false
         }
-        subscriptionStatus = Self.subscriptionStatus(for: show, pushServiceEnabled: Self.pushServiceEnabled)
+        subscriptionStatus = Self.subscriptionStatus(for: show)
     }
     
-    private static func subscriptionStatus(for show: SRGShow?, pushServiceEnabled: Bool) -> SubscriptionStatus {
-        if pushServiceEnabled, let show = show {
+    private static func subscriptionStatus(for show: SRGShow?) -> SubscriptionStatus {
+        if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
             return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
         }
         else {

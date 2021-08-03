@@ -22,7 +22,7 @@ class ShowCellViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        ThrottledSignal.preferenceUpdates()
+        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.pushServiceStatusUpdate())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
@@ -32,7 +32,7 @@ class ShowCellViewModel: ObservableObject {
     }
     
     private func updateData() {
-        if let show = show {
+        if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
             isSubscribed = FavoritesIsSubscribedToShow(show)
         }
         else {
