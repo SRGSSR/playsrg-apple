@@ -14,6 +14,8 @@ final class ProgramGuideViewController: UIViewController {
     private var model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
+    private weak var headerView: HostView<ProgramGuideHeaderView>!
+    
     private var cancellables = Set<AnyCancellable>()
     
     init(day: SRGDay = .today) {
@@ -33,11 +35,26 @@ final class ProgramGuideViewController: UIViewController {
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
+        
+        let headerView = HostView<ProgramGuideHeaderView>(frame: .zero)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerView)
+        self.headerView = headerView
+                
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            headerView.heightAnchor.constraint(equalToConstant: 50),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+                
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        headerView.content = ProgramGuideHeaderView()
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -48,7 +65,7 @@ final class ProgramGuideViewController: UIViewController {
             view.addSubview(pageView)
             
             NSLayoutConstraint.activate([
-                pageView.topAnchor.constraint(equalTo: view.topAnchor),
+                pageView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
                 pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -110,10 +127,13 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        // TODO: Update header
+        guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
+        self.headerView.content = ProgramGuideHeaderView(day: currentViewController.day)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        // TODO: Update header
+        guard !completed else { return }
+        guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
+        self.headerView.content = ProgramGuideHeaderView(day: currentViewController.day)
     }
 }

@@ -16,7 +16,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     init(day: SRGDay) {
         self.day = day
         
-        Publishers.PublishAndRepeat(onOutputFrom: Signal.wokenUp()) {
+        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
                 .map { programCompositions in
                     return State.loaded(programCompositions)

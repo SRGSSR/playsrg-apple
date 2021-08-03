@@ -15,7 +15,7 @@ final class ProgramGuideViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init(day: SRGDay) {
-        Publishers.PublishAndRepeat(onOutputFrom: Signal.wokenUp()) { [weak self] in
+        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
                 .map { $0.map(\.channel) }
                 .catch { _ in
