@@ -123,10 +123,16 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
+    /// Can be used on all platforms to minimize preprocessor need, but never emits
     static func pushServiceStatusUpdate() -> AnyPublisher<Void, Never> {
+        #if os(iOS)
         return NotificationCenter.default.publisher(for: .PushServiceStatusDidChange)
             .map { _ in }
             .eraseToAnyPublisher()
+        #else
+        return Empty(completeImmediately: false)
+            .eraseToAnyPublisher()
+        #endif
     }
 }
 
