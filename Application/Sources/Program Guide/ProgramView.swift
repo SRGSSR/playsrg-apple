@@ -22,7 +22,7 @@ struct ProgramView: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing: 10) {
             Handle()
             ImageView(url: model.imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
@@ -54,13 +54,32 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack {
-                if let formattedTimeAndDate = model.formattedTimeAndDate {
-                    Text(formattedTimeAndDate)
-                        .srgFont(.caption)
-                        .lineLimit(1)
+            VStack(spacing: 12) {
+                VStack(spacing: 6) {
+                    if let formattedTimeAndDate = model.formattedTimeAndDate {
+                        Text(formattedTimeAndDate)
+                            .srgFont(.caption)
+                            .lineLimit(1)
+                            .foregroundColor(.srgGray96)
+                    }
+                    TitleView(model: model)
+                }
+                if let summary = model.summary {
+                    Text(summary)
+                        .srgFont(.body)
                         .foregroundColor(.srgGray96)
                 }
+            }
+            .frame(maxWidth: .infinity)
+        }
+    }
+    
+    // Behavior: h-hug, v-hug
+    private struct TitleView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            VStack(spacing: 0) {
                 if let title = model.title {
                     Text(title)
                         .srgFont(.H2)
@@ -75,13 +94,7 @@ struct ProgramView: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray96)
                 }
-                if let summary = model.summary {
-                    Text(summary)
-                        .srgFont(.body)
-                        .foregroundColor(.srgGray96)
-                }
             }
-            .frame(maxWidth: .infinity)
         }
     }
 }
