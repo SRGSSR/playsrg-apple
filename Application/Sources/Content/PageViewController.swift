@@ -143,11 +143,10 @@ final class PageViewController: UIViewController {
             .store(in: &cancellables)
         
         #if os(iOS)
-        model.$serviceStatus
-            .sink { [weak self] status in
-                if let self = self, case let .bad(message) = status {
-                    Banner.show(with: .error, message: message.text, image: nil, sticky: true, in: self)
-                }
+        model.$serviceMessage
+            .sink { [weak self] serviceMessage in
+                guard let serviceMessage = serviceMessage else { return }
+                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
             }
             .store(in: &cancellables)
         #endif
