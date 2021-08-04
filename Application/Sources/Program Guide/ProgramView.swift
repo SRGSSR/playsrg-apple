@@ -49,18 +49,19 @@ struct ProgramView: View {
                     Text(title)
                         .srgFont(.H2)
                         .lineLimit(2)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.srgGrayC7)
                 }
                 if let lead = model.lead {
                     Text(lead)
                         .srgFont(.H4)
                         .lineLimit(2)
+                        .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray96)
                 }
                 if let summary = model.summary {
                     Text(summary)
                         .srgFont(.body)
-                        .multilineTextAlignment(.leading)
                         .foregroundColor(.srgGray96)
                 }
             }
