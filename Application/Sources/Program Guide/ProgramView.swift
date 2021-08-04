@@ -72,9 +72,15 @@ struct ProgramView: View {
                     Text(summary)
                         .srgFont(.body)
                         .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                if let imageCopyright = model.imageCopyright {
+                    Text(imageCopyright)
+                        .srgFont(.subtitle1)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .frame(maxWidth: .infinity)
         }
     }
     

@@ -34,4 +34,9 @@ final class ProgramViewModel: ObservableObject {
     var imageUrl: URL? {
         return program?.imageUrl(for: .medium)
     }
+    
+    var imageCopyright: String? {
+        guard let imageCopyright = program?.imageCopyright else { return nil }
+        return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
+    }
 }
