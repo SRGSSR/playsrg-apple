@@ -23,6 +23,14 @@ final class ProgramViewModel: ObservableObject {
         return program?.summary
     }
     
+    var formattedTimeAndDate: String? {
+        guard let program = program else { return nil }
+        let startTime = DateFormatter.play_time.string(from: program.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.endDate)
+        let day = DateFormatter.play_relative.string(from: program.startDate)
+        return "\(startTime) - \(endTime), \(day)"
+    }
+    
     var imageUrl: URL? {
         return program?.imageUrl(for: .medium)
     }

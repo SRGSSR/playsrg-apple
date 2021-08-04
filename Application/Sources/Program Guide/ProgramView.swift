@@ -45,6 +45,12 @@ struct ProgramView: View {
         
         var body: some View {
             VStack {
+                if let formattedTimeAndDate = model.formattedTimeAndDate {
+                    Text(formattedTimeAndDate)
+                        .srgFont(.caption)
+                        .lineLimit(1)
+                        .foregroundColor(.srgGray96)
+                }
                 if let title = model.title {
                     Text(title)
                         .srgFont(.H2)
