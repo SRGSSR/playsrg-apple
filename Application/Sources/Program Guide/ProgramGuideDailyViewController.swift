@@ -124,9 +124,9 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         if let mediaUrn = program.mediaURN {
             SRGDataProvider.current!.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
-                .sink { completion in
+                .sink { [weak self] completion in
                     if case let .failure(error) = completion {
-                        Banner.showError(error)
+                        Banner.showError(error, in: self)
                     }
                 } receiveValue: { [weak self] media in
                     self?.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
