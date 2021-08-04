@@ -35,6 +35,24 @@ final class ProgramViewModel: ObservableObject {
         return program?.imageUrl(for: .medium)
     }
     
+    var duration: Double? {
+        guard let program = program else { return nil }
+        let duration = program.endDate.timeIntervalSince(program.startDate)
+        return duration > 0 ? duration : nil
+    }
+    
+    var hasMultiAudio: Bool {
+        return program?.alternateAudioAvailable ?? false
+    }
+    
+    var hasAudioDescription: Bool {
+        return program?.audioDescriptionAvailable ?? false
+    }
+    
+    var hasSubtitles: Bool {
+        return program?.subtitlesAvailable ?? false
+    }
+    
     var imageCopyright: String? {
         guard let imageCopyright = program?.imageCopyright else { return nil }
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)

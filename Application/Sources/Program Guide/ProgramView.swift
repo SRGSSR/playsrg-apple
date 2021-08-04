@@ -26,7 +26,7 @@ struct ProgramView: View {
             Handle()
             ScrollView {
                 VStack(spacing: 10) {
-                    ImageView(url: model.imageUrl)
+                    VisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .background(Color.white.opacity(0.1))
                         .cornerRadius(LayoutStandardViewCornerRadius)
@@ -50,6 +50,35 @@ struct ProgramView: View {
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white)
                 .frame(width: 36, height: 4)
+        }
+    }
+    
+    // Behavior: h-exp, v-exp
+    private struct VisualView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            ZStack {
+                ImageView(url: model.imageUrl)
+                
+                HStack(spacing: 6) {
+                    Spacer()
+                    if model.hasMultiAudio {
+                        MultiAudioBadge()
+                    }
+                    if model.hasAudioDescription {
+                        AudioDescriptionBadge()
+                    }
+                    if model.hasSubtitles {
+                        SubtitlesBadge()
+                    }
+                    if let duration = model.duration {
+                        DurationBadge(duration: duration)
+                    }
+                }
+                .padding([.bottom, .horizontal], 6)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
         }
     }
     
