@@ -23,6 +23,7 @@ struct ProgramView: View {
     
     var body: some View {
         VStack {
+            Handle()
             ImageView(url: model.imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
@@ -36,6 +37,15 @@ struct ProgramView: View {
         }
         .onChange(of: program) { newValue in
             model.program = newValue
+        }
+    }
+    
+    // Behavior: h-hug, v-hug
+    private struct Handle: View {
+        var body: some View {
+            RoundedRectangle(cornerRadius: 4)
+                .fill(Color.white)
+                .frame(width: 36, height: 4)
         }
     }
     
