@@ -22,14 +22,18 @@ struct ProgramView: View {
     }
     
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 18) {
             Handle()
-            ImageView(url: model.imageUrl)
-                .aspectRatio(16 / 9, contentMode: .fit)
-                .background(Color.white.opacity(0.1))
-                .cornerRadius(LayoutStandardViewCornerRadius)
-            DescriptionView(model: model)
-            Spacer()
+            ScrollView {
+                VStack(spacing: 10) {
+                    ImageView(url: model.imageUrl)
+                        .aspectRatio(16 / 9, contentMode: .fit)
+                        .background(Color.white.opacity(0.1))
+                        .cornerRadius(LayoutStandardViewCornerRadius)
+                    DescriptionView(model: model)
+                    Spacer()
+                }
+            }
         }
         .padding([.horizontal, .top], 14)
         .onAppear {
