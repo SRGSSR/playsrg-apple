@@ -10,7 +10,6 @@ import UIKit
 // MARK: View controller
 
 final class ProgramGuideViewController: UIViewController {
-    private let day: SRGDay
     private var model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
@@ -21,7 +20,6 @@ final class ProgramGuideViewController: UIViewController {
     private var pageViewControllerAnimated: Bool = false
     
     init(day: SRGDay = .today) {
-        self.day = day
         model = ProgramGuideViewModel(day: day)
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
@@ -75,7 +73,7 @@ final class ProgramGuideViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
+        let dailyViewController = ProgramGuideDailyViewController(day: model.selectedDay, channel: model.selectedChannel)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false, completion: nil)
         
         model.$selectedChannel
