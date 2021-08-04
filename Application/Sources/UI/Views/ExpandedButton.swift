@@ -33,8 +33,8 @@ struct ExpandedButton: View {
                     .srgFont(.button)
                     .lineLimit(1)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .foregroundColor(.srgGrayC7)
         .background(Color.srgGray23)
         .cornerRadius(LayoutStandardViewCornerRadius)
