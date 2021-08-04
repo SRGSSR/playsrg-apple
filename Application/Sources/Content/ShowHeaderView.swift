@@ -192,7 +192,7 @@ final class ShowHeaderViewSize: NSObject {
 }
 
 struct ShowHeaderView_Previews: PreviewProvider {
-    static let model: ShowHeaderViewModel = {
+    private static let model: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
         model.show = Mock.show()
         return model

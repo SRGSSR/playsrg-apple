@@ -101,7 +101,7 @@ final class TopicCellSize: NSObject {
 // MARK: Preview
 
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = TopicCellSize.swimlane().previewSize
+    private static let size = TopicCellSize.swimlane().previewSize
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())

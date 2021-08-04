@@ -182,8 +182,8 @@ private extension View {
 }
 
 struct FeaturedContentCell_Previews: PreviewProvider {
-    static let kind: Mock.Media = .standard
-    static let label = "New"
+    private static let kind: Mock.Media = .standard
+    private static let label = "New"
     
     static var previews: some View {
         #if os(tvOS)

@@ -143,7 +143,7 @@ final class ShowCellSize: NSObject {
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let size = ShowCellSize.swimlane().previewSize
+    private static let size = ShowCellSize.swimlane().previewSize
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard), style: .standard)

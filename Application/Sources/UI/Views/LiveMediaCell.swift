@@ -156,8 +156,8 @@ class LiveMediaCellSize: NSObject {
 // MARK: Preview
 
 struct LiveMediaCell_Previews: PreviewProvider {
-    static private let media = Mock.media(.livestream)
-    static private let size = LiveMediaCellSize.swimlane().previewSize
+    private static let media = Mock.media(.livestream)
+    private static let size = LiveMediaCellSize.swimlane().previewSize
     
     static var previews: some View {
         #if os(tvOS)

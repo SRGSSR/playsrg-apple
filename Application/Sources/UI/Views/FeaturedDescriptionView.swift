@@ -88,7 +88,7 @@ extension FeaturedDescriptionView where Content == FeaturedShowContent {
 // MARK: Preview
 
 struct FeaturedDescriptionView_Previews: PreviewProvider {
-    static let label = "New"
+    private static let label = "New"
     
     static var previews: some View {
         Group {

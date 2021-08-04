@@ -66,7 +66,7 @@ final class ShowAccessCellSize: NSObject {
 // MARK: Preview
 
 struct ShowAccessCell_Previews: PreviewProvider {
-    static let size = ShowAccessCellSize.fullWidth(layoutWidth: 800).previewSize
+    private static let size = ShowAccessCellSize.fullWidth(layoutWidth: 800).previewSize
     
     static var previews: some View {
         Group {

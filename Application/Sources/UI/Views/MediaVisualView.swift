@@ -90,7 +90,7 @@ struct MediaVisualView: View {
 // MARK: Preview
 
 struct MediaVisualView_Previews: PreviewProvider {
-    static let userDefaults: UserDefaults = {
+    private static let userDefaults: UserDefaults = {
         let userDefaults = UserDefaults()
         userDefaults.setValue(true, forKey: PlaySRGSettingSubtitleAvailabilityDisplayed)
         userDefaults.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)
