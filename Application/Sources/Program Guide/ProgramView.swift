@@ -151,7 +151,6 @@ struct ProgramView: View {
                 if let lead = model.lead {
                     Text(lead)
                         .srgFont(.H4)
-                        .lineLimit(2)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray96)
                 }
