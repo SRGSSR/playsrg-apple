@@ -18,6 +18,8 @@ final class ProgramGuideViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
+    private var pageViewControllerAnimated: Bool = false
+    
     init(day: SRGDay = .today) {
         self.day = day
         model = ProgramGuideViewModel(day: day)
@@ -40,14 +42,14 @@ final class ProgramGuideViewController: UIViewController {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         self.headerView = headerView
-                
+        
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             headerView.heightAnchor.constraint(equalToConstant: 100),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-                
+        
         self.view = view
     }
     
@@ -81,6 +83,12 @@ final class ProgramGuideViewController: UIViewController {
                 self?.reloadData(with: selectedChannel)
             }
             .store(in: &cancellables)
+        
+        model.$selectedDay
+            .sink { [weak self] selectedDay in
+                self?.switchToDay(selectedDay)
+            }
+            .store(in: &cancellables)
     }
     
     private func reloadData(with selectedChannel: SRGChannel?) {
@@ -100,17 +108,19 @@ final class ProgramGuideViewController: UIViewController {
         }
     }
     
-    @objc private func changeChannel(_ sender: UIBarButtonItem) {
-        model.nextChannel()
-    }
-    
     private func switchToDay(_ day: SRGDay) {
+        guard !pageViewControllerAnimated else { return }
+        
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
         guard currentViewController.day != day else { return }
-                
+        
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
+    }
+    
+    @objc private func changeChannel(_ sender: UIBarButtonItem) {
+        model.nextChannel()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -136,37 +146,21 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        pageViewControllerAnimated = true
+        
         guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
-        model.day = currentViewController.day
+        model.selectedDay = currentViewController.day
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        guard !completed else { return }
-        guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
-        model.day = currentViewController.day
-    }
-}
-
-extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
-    func previousDay() {
-        model.previousDay()
-        switchToDay(model.day)
-    }
-    
-    func nextDay() {
-        model.nextDay()
-        switchToDay(model.day)
-    }
-    
-    func yesterday() {
-        model.yesterday()
-        switchToDay(model.day)
-    }
-    
-    func now() {
-        model.now()
-        switchToDay(model.day)
-
-        // TODO: Scroll to now time
+        if !completed {
+            pageViewControllerAnimated = true
+            
+            guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
+            model.selectedDay = currentViewController.day
+        }
+        else {
+            pageViewControllerAnimated = false
+        }
     }
 }

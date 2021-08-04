@@ -6,15 +6,6 @@
 
 import SwiftUI
 
-// MARK: Contract
-
-@objc protocol ProgramGuideHeaderViewActions: AnyObject {
-    func previousDay()
-    func nextDay()
-    func yesterday()
-    func now()
-}
-
 // MARK: View
 
 struct ProgramGuideHeaderView: View {
@@ -25,36 +16,34 @@ struct ProgramGuideHeaderView: View {
     }
     
     var body: some View {
-        ResponderChain { firstResponder in
-            VStack {
-                HStack(spacing: 10) {
-                    ExpandedButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.yesterday))
-                    }
-                    ExpandedButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                        // TODO
-                    }
-                    ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.now))
-                    }
+        VStack {
+            HStack(spacing: 10) {
+                ExpandedButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                    model.yesterday()
                 }
-                .frame(maxWidth: .infinity)
-                
-                HStack(spacing: 10) {
-                    SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
-                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.previousDay))
-                    }
-                    Text(Self.formattedDate(for: model.day))
-                        .srgFont(.H2)
-                        .foregroundColor(.srgGrayC7)
-                        .frame(maxWidth: .infinity)
-                    SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide")) {
-                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.nextDay))
-                    }
+                ExpandedButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
+                    // TODO
+                }
+                ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                    model.now()
                 }
             }
-            .padding(10)
+            .frame(maxWidth: .infinity)
+            
+            HStack(spacing: 10) {
+                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
+                    model.previousDay()
+                }
+                Text(Self.formattedDate(for: model.selectedDay))
+                    .srgFont(.H2)
+                    .foregroundColor(.srgGrayC7)
+                    .frame(maxWidth: .infinity)
+                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide")) {
+                    model.nextDay()
+                }
+            }
         }
+        .padding(10)
     }
 }
 

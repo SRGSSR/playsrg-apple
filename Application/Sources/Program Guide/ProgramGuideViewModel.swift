@@ -11,13 +11,12 @@ import Combine
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var channels: [SRGChannel] = []
     @Published var selectedChannel: SRGChannel?
-    @Published var day: SRGDay
-
+    @Published var selectedDay: SRGDay
     
     private var cancellables = Set<AnyCancellable>()
     
     init(day: SRGDay) {
-        self.day = day
+        self.selectedDay = day
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
                 .map { $0.map(\.channel) }
@@ -41,25 +40,25 @@ final class ProgramGuideViewModel: ObservableObject {
               let index = channels.firstIndex(of: selectedChannel) else {
             return
         }
-            
+        
         let nextIndex = index < channels.endIndex - 1 ? channels.index(after: index) : channels.startIndex
         self.selectedChannel = channels[nextIndex]
     }
     
     func previousDay() {
-        day = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
+        selectedDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: selectedDay)
     }
     
     func nextDay() {
-        day = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
+        selectedDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: selectedDay)
     }
     
     func yesterday() {
-        day = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
+        selectedDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
     }
     
     func now() {
-        day = SRGDay.today
+        selectedDay = SRGDay.today
         
         // TODO: Scroll to now time
     }
