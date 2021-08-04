@@ -28,6 +28,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
+    private var hasToScrollToCurrentTime: Bool = false
+    
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
         snapshot.appendSections([.main])
@@ -102,7 +104,37 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             dataSource.apply(Self.snapshot(from: state, for: self.channel))
+            
+            DispatchQueue.main.async {
+                if self.hasToScrollToCurrentTime, case .loaded = self.model.state, self.channel != nil {
+                    self.scrollToCurrentTime()
+                }
+            }
         }
+    }
+    
+    func needToScrollToCurrentTime() {
+        if case .loaded = model.state, channel != nil {
+            scrollToCurrentTime()
+        }
+        else {
+            hasToScrollToCurrentTime = true
+        }
+    }
+    
+    private func scrollToCurrentTime() {
+        let programs = model.state.programs(for: channel)
+        if !programs.isEmpty {
+            let program = programs.filter { $0.endDate > Self.currentTimeAtDay(model.day) }.first
+            let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
+            collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: true)
+        }
+        hasToScrollToCurrentTime = false
+    }
+    
+    static private func currentTimeAtDay(_ day: SRGDay) -> Date {
+        let timeIntervalSinceMidnight = Date().timeIntervalSince(SRGDay.today.date)
+        return day.date.addingTimeInterval(timeIntervalSinceMidnight)
     }
 }
 

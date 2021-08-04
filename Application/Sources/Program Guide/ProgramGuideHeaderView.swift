@@ -25,7 +25,7 @@ struct ProgramGuideHeaderView: View {
                     // TODO
                 }
                 ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                    model.now()
+                    model.todayAtCurrentTime()
                 }
             }
             .frame(maxWidth: .infinity)
@@ -34,7 +34,7 @@ struct ProgramGuideHeaderView: View {
                 SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
                     model.previousDay()
                 }
-                Text(Self.formattedDate(for: model.selectedDay))
+                Text(Self.formattedDate(for: model.selectedDay.day))
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
@@ -49,7 +49,7 @@ struct ProgramGuideHeaderView: View {
 
 struct ProgramGuideHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramGuideHeaderView(model: ProgramGuideViewModel(day: SRGDay.today))
+        ProgramGuideHeaderView(model: ProgramGuideViewModel(day: SRGDay.today, atCurrentTime: true))
             .previewLayout(.fixed(width: 375, height: 100))
     }
 }
