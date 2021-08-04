@@ -54,7 +54,7 @@ final class ProgramGuideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerView.content = ProgramGuideHeaderView(day: day)
+        headerView.content = ProgramGuideHeaderView(model: model)
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -107,9 +107,7 @@ final class ProgramGuideViewController: UIViewController {
     private func switchToDay(_ day: SRGDay) {
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
         guard currentViewController.day != day else { return }
-        
-        headerView.content = ProgramGuideHeaderView(day: day)
-        
+                
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
@@ -139,36 +137,35 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
 extension ProgramGuideViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
-        headerView.content = ProgramGuideHeaderView(day: currentViewController.day)
+        model.day = currentViewController.day
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard !completed else { return }
         guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
-        headerView.content = ProgramGuideHeaderView(day: currentViewController.day)
+        model.day = currentViewController.day
     }
 }
 
 extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
     func previousDay() {
-        guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
-        let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: currentViewController.day)
-        switchToDay(previousDay)
+        model.previousDay()
+        switchToDay(model.day)
     }
     
     func nextDay() {
-        guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
-        let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: currentViewController.day)
-        switchToDay(nextDay)
+        model.nextDay()
+        switchToDay(model.day)
     }
     
     func yesterday() {
-        let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
-        switchToDay(yesterday)
+        model.yesterday()
+        switchToDay(model.day)
     }
     
     func now() {
-        switchToDay(SRGDay.today)
+        model.now()
+        switchToDay(model.day)
 
         // TODO: Scroll to now time
     }

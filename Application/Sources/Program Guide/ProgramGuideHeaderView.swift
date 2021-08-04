@@ -18,11 +18,7 @@ import SwiftUI
 // MARK: View
 
 struct ProgramGuideHeaderView: View {
-    let day: SRGDay
-    
-    init(day: SRGDay = .today) {
-        self.day = day
-    }
+    @ObservedObject var model: ProgramGuideViewModel
     
     private static func formattedDate(for day: SRGDay) -> String {
         return DateFormatter.play_relative.string(from: day.date).capitalizedFirstLetter
@@ -48,7 +44,7 @@ struct ProgramGuideHeaderView: View {
                     SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
                         firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.previousDay))
                     }
-                    Text(Self.formattedDate(for: day))
+                    Text(Self.formattedDate(for: model.day))
                         .srgFont(.H2)
                         .foregroundColor(.srgGrayC7)
                         .frame(maxWidth: .infinity)
@@ -64,7 +60,7 @@ struct ProgramGuideHeaderView: View {
 
 struct ProgramGuideHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramGuideHeaderView()
+        ProgramGuideHeaderView(model: ProgramGuideViewModel(day: SRGDay.today))
             .previewLayout(.fixed(width: 375, height: 100))
     }
 }
