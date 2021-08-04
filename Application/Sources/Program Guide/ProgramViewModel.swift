@@ -4,12 +4,21 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import Foundation
 
 // MARK: View model
 
 final class ProgramViewModel: ObservableObject {
-    @Published var program: SRGProgram?
+    @Published var program: SRGProgram? {
+        didSet {
+            updatePublishers()
+        }
+    }
+    
+    @Published private var media: SRGMedia?
+    
+    private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
         return program?.title
@@ -56,5 +65,22 @@ final class ProgramViewModel: ObservableObject {
     var imageCopyright: String? {
         guard let imageCopyright = program?.imageCopyright else { return nil }
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
+    }
+    
+    var hasActions: Bool {
+        return media != nil
+    }
+    
+    private func updatePublishers() {
+        cancellables = []
+        media = nil
+        
+        if let mediaUrn = program?.mediaURN {
+            SRGDataProvider.current!.media(withUrn: mediaUrn)
+                .map { Optional($0) }
+                .replaceError(with: nil)
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$media)
+        }
     }
 }

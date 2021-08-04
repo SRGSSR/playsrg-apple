@@ -121,22 +121,8 @@ extension ProgramGuideDailyViewController: ContentInsets {
 extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
-        if let mediaUrn = program.mediaURN {
-            SRGDataProvider.current!.media(withUrn: mediaUrn)
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] completion in
-                    if case let .failure(error) = completion {
-                        Banner.showError(error, in: self)
-                    }
-                } receiveValue: { [weak self] media in
-                    self?.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-                }
-                .store(in: &cancellables)
-        }
-        else {
-            let programViewController = ProgramView.viewController(for: program)
-            present(programViewController, animated: true, completion: nil)
-        }
+        let programViewController = ProgramView.viewController(for: program)
+        present(programViewController, animated: true, completion: nil)
     }
 }
 

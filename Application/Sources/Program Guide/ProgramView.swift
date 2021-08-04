@@ -115,7 +115,9 @@ struct ProgramView: View {
                     TitleView(model: model)
                 }
                 
-                ActionsView(model: model)
+                if model.hasActions {
+                    ActionsView(model: model)
+                }
                 
                 if let summary = model.summary {
                     Text(summary)
