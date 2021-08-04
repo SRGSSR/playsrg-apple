@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Absolute time formatting.
+ *
+ *  @discussion Use `PlayAccessibilityTimeFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
@@ -38,13 +40,6 @@ NS_ASSUME_NONNULL_BEGIN
  *  the date in a short format.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateFormatter;
-
-/**
- *  Short time formatting.
- *
- * @discussion Use `PlayAccessibilityShortTimeFromDate` for accessibility-oriented formatting.
- */
-@property (class, nonatomic, readonly) NSDateFormatter *play_shortTimeFormatter;
 
 /**
  *  Formatter for URL date options.

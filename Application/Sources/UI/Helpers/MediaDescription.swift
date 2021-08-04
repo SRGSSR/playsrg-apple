@@ -12,6 +12,8 @@ struct MediaDescription {
         case show
         /// Date information emphasis
         case date
+        /// Time information emphasis
+        case time
     }
     
     private enum FormattedDurationStyle {
@@ -51,28 +53,49 @@ struct MediaDescription {
         return DateFormatter.play_relative.string(from: media.date).capitalizedFirstLetter
     }
     
+    private static func formattedTime(for media: SRGMedia) -> String {
+        return DateFormatter.play_time.string(from: media.date).capitalizedFirstLetter
+    }
+    
+    private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
+        return media.title.lowercased().contains(show.title.lowercased())
+    }
+    
     static func title(for media: SRGMedia, style: Style) -> String {
-        if style == .show, let show = media.show, media.title.lowercased().contains(show.title.lowercased()) {
-            return formattedDate(for: media)
-        }
-        else {
+        switch style {
+        case .show:
+            if let show = media.show, areRedundant(media: media, show: show) {
+                return formattedDate(for: media)
+            }
+            else {
+                return media.title
+            }
+        case .date, .time:
             return media.title
         }
     }
     
     static func subtitle(for media: SRGMedia, style: Style) -> String? {
         guard media.contentType != .livestream else { return nil }
-        if style == .show, let show = media.show {
-            if media.title.lowercased().contains(show.title.lowercased()) {
-                return show.title
+        
+        switch style {
+        case .show:
+            if let show = media.show {
+                if areRedundant(media: media, show: show) {
+                    return show.title
+                }
+                else {
+                    // Unbreakable spaces before / after the separator
+                    return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+                }
             }
             else {
-                // Unbreakable spaces before / after the separator
-                return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+                return formattedDate(for: media)
             }
-        }
-        else {
+        case .date:
             return formattedDate(for: media)
+        case .time:
+            return formattedTime(for: media)
         }
     }
     

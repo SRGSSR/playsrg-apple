@@ -20,11 +20,11 @@ NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
     });
     NSString *dateString = [s_dateFormatter stringFromDate:date];
     
-    NSString *timeString = PlayAccessibilityShortTimeFromDate(date);
+    NSString *timeString = PlayAccessibilityTimeFromDate(date);
     return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%1$@ at %2$@", @"Date at time label to spell a date and time value."), dateString, timeString];
 }
 
-NSString *PlayAccessibilityShortTimeFromDate(NSDate *date)
+NSString *PlayAccessibilityTimeFromDate(NSDate *date)
 {
     static NSDateComponentsFormatter *s_dateComponentsFormatter;
     static dispatch_once_t s_onceToken;

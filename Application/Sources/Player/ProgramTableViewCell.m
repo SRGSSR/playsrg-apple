@@ -115,7 +115,7 @@
     }
     
     if ([dateInterval containsDate:program.startDate]) {
-        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate)];
         self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
         
@@ -129,7 +129,7 @@
         self.userInteractionEnabled = YES;
     }
     else if ([dateInterval.endDate compare:program.startDate] == NSOrderedAscending) {
-        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next, at %@", @"Text providing next program time information."), PlayAccessibilityShortTimeFromDate(program.startDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"Next, at %@", @"Text providing next program time information."), PlayAccessibilityTimeFromDate(program.startDate)];
         self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         
@@ -142,7 +142,7 @@
         self.userInteractionEnabled = NO;
     }
     else {
-        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate)];
+        NSString *timeText = [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate)];
         self.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", timeText, program.title];
         self.accessibilityHint = nil;
         

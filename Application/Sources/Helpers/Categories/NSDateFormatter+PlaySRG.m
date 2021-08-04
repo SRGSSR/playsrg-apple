@@ -71,18 +71,6 @@
     return s_dateFormatter;
 }
 
-+ (NSDateFormatter *)play_shortTimeFormatter
-{
-    static NSDateFormatter *s_dateFormatter;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_dateFormatter = [[NSDateFormatter alloc] init];
-        s_dateFormatter.dateStyle = NSDateFormatterNoStyle;
-        s_dateFormatter.timeStyle = NSDateFormatterShortStyle;
-    });
-    return s_dateFormatter;
-}
-
 + (NSDateFormatter *)play_URLOptionDateFormatter
 {
     static NSDateFormatter *s_dateFormatter;
