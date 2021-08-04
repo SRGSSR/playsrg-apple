@@ -21,35 +21,12 @@ struct ShowAccessCell: View {
     var body: some View {
         ResponderChain { firstResponder in
             HStack {
-                Button {
+                ExpandedButton(icon: "a_to_z", label: NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."), accessibilityHint: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Title pronounced in home pages on shows A to Z button.")) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
-                } label: {
-                    HStack {
-                        Image("a_to_z")
-                        Text(NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."))
-                            .srgFont(.button)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.srgGray23)
-                    .cornerRadius(LayoutStandardViewCornerRadius)
                 }
-                .foregroundColor(.srgGrayC7)
-                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Title pronounced in home pages on shows A to Z button."), traits: .isButton)
-                
-                Button {
+                ExpandedButton(icon: "calendar", label: NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."), accessibilityHint: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Title pronounced in home pages on shows by date button.")) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
-                } label: {
-                    HStack {
-                        Image("calendar")
-                        Text(NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."))
-                            .srgFont(.button)
-                    }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.srgGray23)
-                    .cornerRadius(LayoutStandardViewCornerRadius)
                 }
-                .foregroundColor(.srgGrayC7)
-                .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Title pronounced in home pages on shows by date button."), traits: .isButton)
             }
         }
     }

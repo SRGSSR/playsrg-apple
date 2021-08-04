@@ -32,60 +32,27 @@ struct ProgramGuideHeaderView: View {
         ResponderChain { firstResponder in
             VStack {
                 HStack(spacing: 10) {
-                    Button {
+                    ExpandedButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
                         firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.yesterday))
-                    } label: {
-                        HStack {
-                            Text(NSLocalizedString("Yesterday", comment: "Yesterday button in program guide"))
-                                .srgFont(.button)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.srgGray23)
-                        .cornerRadius(LayoutStandardViewCornerRadius)
                     }
-                    .foregroundColor(.srgGrayC7)
-                    .accessibilityElement(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide"), traits: .isButton)
-                    
-                    Button {
+                    ExpandedButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                         // TODO
-                    } label: {
-                        HStack {
-                            Image("calendar")
-                            Text(NSLocalizedString("Calendar", comment: "Calendar button in program guide"))
-                                .srgFont(.button)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.srgGray23)
-                        .cornerRadius(LayoutStandardViewCornerRadius)
                     }
-                    .foregroundColor(.srgGrayC7)
-                    .accessibilityElement(label: NSLocalizedString("Calendar", comment: "Calendar button in program guide"), traits: .isButton)
-                    
-                    Button {
+                    ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                         firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.now))
-                    } label: {
-                        HStack {
-                            Text(NSLocalizedString("Now", comment: "Now button in program guide"))
-                                .srgFont(.button)
-                        }
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .background(Color.srgGray23)
-                        .cornerRadius(LayoutStandardViewCornerRadius)
                     }
-                    .foregroundColor(.srgGrayC7)
-                    .accessibilityElement(label: NSLocalizedString("Now", comment: "Now button in program guide"), traits: .isButton)
                 }
                 .frame(maxWidth: .infinity)
                 
                 HStack(spacing: 10) {
-                    SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                    SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
                         firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.previousDay))
                     }
                     Text(Self.formattedDate(for: day))
                         .srgFont(.H2)
                         .foregroundColor(.srgGrayC7)
                         .frame(maxWidth: .infinity)
-                    SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                    SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide")) {
                         firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.nextDay))
                     }
                 }
