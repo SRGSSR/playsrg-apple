@@ -83,11 +83,28 @@ struct ProgramView: View {
     }
     
     // Behavior: h-exp, v-hug
+    private struct ActionsView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            HStack(spacing: 7) {
+                ExpandedButton(icon: "watch_later", label: NSLocalizedString("Watch later", comment: "Button label on the program detail view to add a media to the later list")) {
+                    
+                }
+                ExpandedButton(icon: "episodes", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view")) {
+                    
+                }
+            }
+            .frame(height: 40)
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack(spacing: 12) {
+            VStack(spacing: 18) {
                 VStack(spacing: 6) {
                     if let formattedTimeAndDate = model.formattedTimeAndDate {
                         Text(formattedTimeAndDate)
@@ -97,6 +114,9 @@ struct ProgramView: View {
                     }
                     TitleView(model: model)
                 }
+                
+                ActionsView(model: model)
+                
                 if let summary = model.summary {
                     Text(summary)
                         .srgFont(.body)
