@@ -21,14 +21,24 @@ struct ChannelButton: View {
         self.action = action
     }
     
+    private var logoImage: Image? {
+        let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid)
+        return (tvChannel != nil) ? Image(tvChannel!.logoImageName()) : nil
+    }
+    
     var body: some View {
         Button(action: action) {
-            Text(channel.title)
-                .srgFont(.button)
-                .lineLimit(1)
+            if let image = logoImage {
+                image
+            }
+            else {
+                Text(channel.title)
+                    .srgFont(.button)
+                    .lineLimit(1)
+            }
         }
         .padding(.horizontal, 18)
-        .padding(.vertical, 10)
+        .padding(.vertical, 12)
         .foregroundColor(.srgGrayC7)
         .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
