@@ -7,6 +7,15 @@
 import SwiftUI
 
 struct Mock {
+    enum Channel: String {
+        case logo16_9
+        case logo3_1
+    }
+    
+    static func channel(_ kind: Channel = .logo16_9) -> SRGChannel {
+        return mockObject(kind.rawValue, type: SRGChannel.self)
+    }
+    
     enum ContentSection: String {
         case standard
         case overflow
