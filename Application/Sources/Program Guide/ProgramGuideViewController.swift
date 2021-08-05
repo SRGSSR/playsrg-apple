@@ -98,14 +98,6 @@ final class ProgramGuideViewController: UIViewController {
     }
     
     private func reloadData(with selectedChannel: SRGChannel?) {
-        if let title = selectedChannel?.title {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: title, style: .plain, target: self, action: #selector(changeChannel))
-        }
-        else {
-            navigationItem.rightBarButtonItem = nil
-        }
-        
-        // Update all view controllers, also those cached by `UIPageViewController`
         // See https://stackoverflow.com/a/27984538/760435
         for viewController in pageViewController.children {
             if let dailyViewController = viewController as? ProgramGuideDailyViewController {
@@ -130,10 +122,6 @@ final class ProgramGuideViewController: UIViewController {
         else if atCurrentTime {
             currentViewController.needToScrollToCurrentTime()
         }
-    }
-    
-    @objc private func changeChannel(_ sender: UIBarButtonItem) {
-        model.nextChannel()
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

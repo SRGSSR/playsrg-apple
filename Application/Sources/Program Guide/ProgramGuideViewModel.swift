@@ -35,16 +35,6 @@ final class ProgramGuideViewModel: ObservableObject {
         .store(in: &cancellables)
     }
     
-    func nextChannel() {
-        guard let selectedChannel = selectedChannel,
-              let index = channels.firstIndex(of: selectedChannel) else {
-            return
-        }
-        
-        let nextIndex = index < channels.endIndex - 1 ? channels.index(after: index) : channels.startIndex
-        self.selectedChannel = channels[nextIndex]
-    }
-    
     func previousDay() {
         selectedDay = (SRGDay(byAddingDays: -1, months: 0, years: 0, to: selectedDay.day), false)
     }
