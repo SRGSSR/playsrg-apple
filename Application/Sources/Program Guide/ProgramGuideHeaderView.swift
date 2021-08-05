@@ -36,6 +36,7 @@ struct ProgramGuideHeaderView: View {
                         ChannelButton(channel, accessibilityHint: PlaySRGAccessibilityLocalizedString("Displays the day's programs", comment: "Channel selector button hint.")) {
                             model.selectedChannel = channel
                         }
+                        .environment(\.isSelected, channel == model.selectedChannel)
                     }
                 }
             }

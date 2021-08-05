@@ -12,6 +12,8 @@ struct ChannelButton: View {
     let channel: SRGChannel
     let accessibilityHint: String?
     let action: () -> Void
+    
+    @Environment(\.isSelected) var isSelected
         
     init(_ channel: SRGChannel, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.channel = channel
@@ -28,7 +30,7 @@ struct ChannelButton: View {
         .padding(.horizontal, 18)
         .padding(.vertical, 10)
         .foregroundColor(.srgGrayC7)
-        .background(Color.srgGray23)
+        .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
         .accessibilityElement(label: channel.title, hint: accessibilityHint, traits: .isButton)
     }
