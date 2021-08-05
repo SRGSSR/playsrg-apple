@@ -152,7 +152,11 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
         let programViewController = ProgramView.viewController(for: program)
-        present(programViewController, animated: true, completion: nil)
+        present(programViewController, animated: true) {
+            // Deselects after presentation; the presentation does not hide the presenting controller, whose
+            // appearance lifecycle methods will not be called. Deselection must therefore be made directly.
+            self.deselectItems(in: collectionView)
+        }
     }
 }
 

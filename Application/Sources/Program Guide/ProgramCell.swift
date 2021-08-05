@@ -13,6 +13,7 @@ struct ProgramCell: View {
     @Binding var program: SRGProgram
     @StateObject private var model = ProgramCellViewModel()
     
+    @Environment(\.isSelected) private var isSelected
     @SRGScaledMetric var timeRangeWidth: CGFloat = 90
     
     private var timeRange: String {
@@ -53,6 +54,7 @@ struct ProgramCell: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
         }
+        .selectionAppearance(.dimmed, when: isSelected)
         .cornerRadius(4)
         .onAppear {
             model.program = program
