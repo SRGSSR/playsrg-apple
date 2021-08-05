@@ -89,14 +89,10 @@ struct ProgramView: View {
         var body: some View {
             HStack(spacing: 7) {
                 if let properties = model.watchLaterButtonProperties {
-                    ExpandedButton(icon: properties.icon,
-                                   label: properties.label,
-                                   action: model.toggleWatchLater)
+                    ExpandedButton(icon: properties.icon, label: properties.label, action: properties.action)
                 }
                 if let properties = model.episodeButtonProperties {
-                    ExpandedButton(icon: properties.icon,
-                                   label: properties.label,
-                                   action: model.showEpisodes)
+                    ExpandedButton(icon: properties.icon, label: properties.label, action: properties.action)
                 }
             }
             .frame(height: 40)
@@ -119,7 +115,9 @@ struct ProgramView: View {
                     TitleView(model: model)
                 }
                 
-                ActionsView(model: model)
+                if model.hasActions {
+                    ActionsView(model: model)
+                }
                 
                 if let summary = model.summary {
                     Text(summary)

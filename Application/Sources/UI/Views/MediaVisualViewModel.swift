@@ -28,7 +28,7 @@ final class MediaVisualViewModel: ObservableObject {
         return media?.imageUrl(for: scale)
     }
     
-    var availabilityBadgeProperties: (text: String, color: UIColor)? {
+    var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
         guard let media = media else { return nil }
         return MediaDescription.availabilityBadgeProperties(for: media)
     }

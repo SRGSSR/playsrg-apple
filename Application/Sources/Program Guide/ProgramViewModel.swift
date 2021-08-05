@@ -67,34 +67,53 @@ final class ProgramViewModel: ObservableObject {
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
     }
     
+    var hasActions: Bool {
+        return data.media?.show != nil
+    }
+    
+    var episodeButtonProperties: ButtonProperties? {
+        guard data.media?.show != nil else { return nil }
+        return ButtonProperties(
+            icon: "episodes",
+            label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
+            action: openEpisodes
+        )
+    }
+    
     private var watchLaterAllowedAction: WatchLaterAction {
         return data.watchLaterAllowedAction
     }
     
-    var watchLaterButtonProperties: (icon: String, label: String)? {
+    var watchLaterButtonProperties: ButtonProperties? {
         guard let media = data.media else { return nil }
         switch watchLaterAllowedAction {
         case .add:
             switch media.mediaType {
             case .audio:
-                return (icon: "watch_later", label: NSLocalizedString("Listen later", comment: "Button label in program detail view to add an audio to the later list"))
+                return ButtonProperties(
+                    icon: "watch_later",
+                    label: NSLocalizedString("Listen later", comment: "Button label in program detail view to add an audio to the later list"),
+                    action: toggleWatchLater
+                )
             default:
-                return (icon: "watch_later", label: NSLocalizedString("Watch later", comment: "Button label in program detail view to add a video to the later list"))
+                return ButtonProperties(
+                    icon: "watch_later",
+                    label: NSLocalizedString("Watch later", comment: "Button label in program detail view to add a video to the later list"),
+                    action: toggleWatchLater
+                )
             }
         case .remove:
-            return (icon: "watch_later_full", label: NSLocalizedString("Later", comment: "Watch later or listen later button label in program detail view when a media is in the later list"))
+            return ButtonProperties(
+                icon: "watch_later_full",
+                label: NSLocalizedString("Later", comment: "Watch later or listen later button label in program detail view when a media is in the later list"),
+                action: toggleWatchLater
+            )
         default:
             return nil
         }
     }
-    
-    var episodeButtonProperties: (icon: String, label: String)? {
-        guard data.media?.show != nil else { return nil }
-        return (icon: "episodes", label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"))
-        
-    }
  
-    func toggleWatchLater() {
+    private func toggleWatchLater() {
         guard let media = data.media else { return }
         WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
@@ -109,8 +128,7 @@ final class ProgramViewModel: ObservableObject {
         }
     }
     
-    func showEpisodes() {
-        guard let show = data.media?.show else { return }
+    private func openEpisodes() {
         
     }
     
@@ -140,5 +158,11 @@ extension ProgramViewModel {
     struct Data {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
+    }
+    
+    struct ButtonProperties {
+        let icon: String
+        let label: String
+        let action: () -> Void
     }
 }
