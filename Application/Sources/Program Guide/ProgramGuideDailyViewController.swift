@@ -103,9 +103,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state, for: self.channel))
-            
-            DispatchQueue.main.async {
+            dataSource.apply(Self.snapshot(from: state, for: self.channel)) {
                 if self.hasToScrollToCurrentTime, case .loaded = self.model.state, self.channel != nil {
                     self.scrollToCurrentTime()
                 }
