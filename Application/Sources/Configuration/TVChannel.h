@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Images associated with the TV channel.
  */
+OBJC_EXPORT UIImage *TVChannelLogoImage(TVChannel * _Nullable tvChannel);
 OBJC_EXPORT UIImage *TVChannelLargeLogoImage(TVChannel * _Nullable tvChannel);
 
 NS_ASSUME_NONNULL_END
