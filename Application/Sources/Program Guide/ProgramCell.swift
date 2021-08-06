@@ -16,13 +16,6 @@ struct ProgramCell: View {
     @Environment(\.isSelected) private var isSelected
     @SRGScaledMetric var timeRangeWidth: CGFloat = 90
     
-    private var timeRange: String {
-        let startTime = DateFormatter.play_time.string(from: program.startDate)
-        let endTime = DateFormatter.play_time.string(from: program.endDate)
-        // Unbreakable spaces before / after the separator
-        return "\(startTime) - \(endTime)"
-    }
-    
     init(program: SRGProgram) {
         _program = .constant(program)
     }
@@ -30,17 +23,21 @@ struct ProgramCell: View {
     var body: some View {
         ZStack {
             HStack(spacing: 10) {
-                Text(timeRange)
-                    .srgFont(.subtitle1)
-                    .foregroundColor(.srgGray96)
-                    .frame(width: timeRangeWidth, alignment: .leading)
-                if program.mediaURN != nil {
+                if let formattedTimeRange = model.formattedTimeRange {
+                    Text(formattedTimeRange)
+                        .srgFont(.subtitle1)
+                        .foregroundColor(.srgGray96)
+                        .frame(width: timeRangeWidth, alignment: .leading)
+                }
+                if model.canPlay {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
                 }
-                Text(program.title)
-                    .srgFont(.body)
-                    .foregroundColor(.srgGrayC7)
+                if let title = program.title {
+                    Text(title)
+                        .srgFont(.body)
+                        .foregroundColor(.srgGrayC7)
+                }
                 Spacer()
             }
             .lineLimit(2)

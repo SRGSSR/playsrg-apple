@@ -19,6 +19,22 @@ final class ProgramCellViewModel: ObservableObject {
             .assign(to: &$date)
     }
     
+    var title: String? {
+        return program?.title
+    }
+    
+    var formattedTimeRange: String? {
+        guard let program = program else { return nil }
+        let startTime = DateFormatter.play_time.string(from: program.startDate)
+        let endTime = DateFormatter.play_time.string(from: program.endDate)
+        // Unbreakable spaces before / after the separator
+        return "\(startTime) - \(endTime)"
+    }
+    
+    var canPlay: Bool {
+        return program?.mediaURN != nil
+    }
+    
     var progress: Double? {
         guard let program = program else { return nil }
         let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
