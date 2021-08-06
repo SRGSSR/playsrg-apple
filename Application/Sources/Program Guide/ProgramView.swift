@@ -26,7 +26,7 @@ struct ProgramView: View {
             Handle()
             ScrollView {
                 VStack(spacing: 10) {
-                    VisualView(model: model)
+                    InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .background(Color.white.opacity(0.1))
                         .cornerRadius(LayoutStandardViewCornerRadius)
@@ -50,6 +50,29 @@ struct ProgramView: View {
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color.white)
                 .frame(width: 36, height: 4)
+        }
+    }
+    
+    // Behavior: h-exp, v-exp
+    private struct InteractiveVisualView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            Group {
+                if let action = model.playAction {
+                    Button(action: action) {
+                        ZStack {
+                            VisualView(model: model)
+                            Color(white: 0, opacity: 0.2)
+                            Image("play")
+                                .foregroundColor(.white)
+                        }
+                    }
+                }
+                else {
+                    VisualView(model: model)
+                }
+            }
         }
     }
     

@@ -67,6 +67,10 @@ final class ProgramViewModel: ObservableObject {
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
     }
     
+    var playAction: (() -> Void)? {
+        return data.media != nil ? play : nil
+    }
+    
     var hasActions: Bool {
         return data.media?.show != nil
     }
@@ -133,6 +137,11 @@ final class ProgramViewModel: ObservableObject {
         let showViewController = SectionViewController.showViewController(for: show)
         appDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
         appDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
+    }
+    
+    private func play() {
+        guard let media = data.media, let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
     }
     
     private static func dataPublisher(for program: SRGProgram?) -> AnyPublisher<Data, Never> {
