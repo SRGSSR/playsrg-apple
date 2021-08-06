@@ -32,11 +32,13 @@ struct ProgramGuideHeaderView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(model.channels, id: \.uid) { channel in
-                        ChannelButton(channel, accessibilityHint: PlaySRGAccessibilityLocalizedString("Displays the day's programs", comment: "Channel selector button hint.")) {
-                            model.selectedChannel = channel
+                    ForEach(model.items, id: \.self) { channelItem in
+                        ChannelButton(channelItem.channel, accessibilityHint: (channelItem.channel != nil) ? PlaySRGAccessibilityLocalizedString("Displays the day's programs", comment: "Channel selector button hint.") : nil) {
+                            if let channel = channelItem.channel {
+                                model.selectedChannel = channel
+                            }
                         }
-                        .environment(\.isSelected, channel == model.selectedChannel)
+                        .environment(\.isSelected, channelItem.channel != nil && channelItem.channel == model.selectedChannel)
                     }
                 }
             }
