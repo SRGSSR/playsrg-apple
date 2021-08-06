@@ -131,6 +131,16 @@ final class ProgramGuideViewController: UIViewController {
 
 // MARK: Protocols
 
+extension ProgramGuideViewController: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return AnalyticsPageTitle.programGuide.rawValue
+    }
+    
+    var srg_pageViewLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+    }
+}
+
 extension ProgramGuideViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
