@@ -155,7 +155,7 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
-        deselectItems(in: collectionView)
+        deselectItems(in: collectionView, animated: animated)
     }
     
     #if os(iOS)

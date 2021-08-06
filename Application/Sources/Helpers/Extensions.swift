@@ -338,9 +338,9 @@ extension UIView {
 }
 
 extension UIViewController {
-    func deselectItems(in collectionView: UICollectionView) {
+    func deselectItems(in collectionView: UICollectionView, animated: Bool) {
         guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
-        guard let transitionCoordinator = transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
+        guard animated, let transitionCoordinator = transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
                 selectedIndexPaths.forEach { indexPath in
                     collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
                 }
@@ -353,7 +353,7 @@ extension UIViewController {
             })
         else {
             selectedIndexPaths.forEach { indexPath in
-                collectionView.deselectItem(at: indexPath, animated: false)
+                collectionView.deselectItem(at: indexPath, animated: animated)
             }
             return
         }

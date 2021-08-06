@@ -155,7 +155,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         present(programViewController, animated: true) {
             // Deselects after presentation; the presentation does not hide the presenting controller, whose
             // appearance lifecycle methods will not be called. Deselection must therefore be made directly.
-            self.deselectItems(in: collectionView)
+            self.deselectItems(in: collectionView, animated: true)
         }
     }
 }
