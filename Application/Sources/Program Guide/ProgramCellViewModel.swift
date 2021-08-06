@@ -23,6 +23,13 @@ final class ProgramCellViewModel: ObservableObject {
         return program?.title
     }
     
+    var accessibilityLabel: String? {
+        guard let program = program else { return nil }
+        return String(format: "From %1$@ to %2$@", PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate))
+            .appending(", ")
+            .appending(program.title)
+    }
+    
     var timeRange: String? {
         guard let program = program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)

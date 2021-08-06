@@ -53,12 +53,25 @@ struct ProgramCell: View {
         }
         .selectionAppearance(.dimmed, when: isSelected)
         .cornerRadius(4)
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
         .onAppear {
             model.program = program
         }
         .onChange(of: program) { newValue in
             model.program = newValue
         }
+    }
+}
+
+// MARK: Accessibility
+
+private extension ProgramCell {
+    var accessibilityLabel: String? {
+        return model.accessibilityLabel
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
     }
 }
 
