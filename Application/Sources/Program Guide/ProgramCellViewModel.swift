@@ -32,7 +32,7 @@ final class ProgramCellViewModel: ObservableObject {
     }
     
     var canPlay: Bool {
-        return program?.mediaURN != nil
+        return progress != nil || program?.mediaURN != nil
     }
     
     var progress: Double? {
