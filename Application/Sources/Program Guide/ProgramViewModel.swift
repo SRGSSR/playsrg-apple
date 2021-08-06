@@ -76,6 +76,10 @@ final class ProgramViewModel: ObservableObject {
         return (0...1).contains(progress) ? progress : nil
     }
     
+    private var isLive: Bool {
+        return progress != nil
+    }
+    
     var hasMultiAudio: Bool {
         return program?.alternateAudioAvailable ?? false
     }
@@ -94,7 +98,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var playAction: (() -> Void)? {
-        if progress != nil, let livestreamMedia = livestreamMedia {
+        if isLive, let livestreamMedia = livestreamMedia {
             return {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: livestreamMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
@@ -113,6 +117,18 @@ final class ProgramViewModel: ObservableObject {
     
     var hasActions: Bool {
         return mediaData.media?.show != nil
+    }
+    
+    var watchFromStartButtonProperties: ButtonProperties? {
+        guard isLive, let media = mediaData.media else { return nil }
+        return ButtonProperties(
+            icon: "start_over",
+            label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
+            action: {
+                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+        )
     }
     
     var episodeButtonProperties: ButtonProperties? {
@@ -134,7 +150,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var watchLaterButtonProperties: ButtonProperties? {
-        guard let media = mediaData.media else { return nil }
+        guard !isLive, let media = mediaData.media else { return nil }
         
         func toggleWatchLater() {
             WatchLaterToggleMedia(media) { added, error in

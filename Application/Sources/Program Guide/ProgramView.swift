@@ -120,6 +120,9 @@ struct ProgramView: View {
                 if let properties = model.watchLaterButtonProperties {
                     ExpandedButton(icon: properties.icon, label: properties.label, action: properties.action)
                 }
+                if let properties = model.watchFromStartButtonProperties {
+                    ExpandedButton(icon: properties.icon, label: properties.label, action: properties.action)
+                }
                 if let properties = model.episodeButtonProperties {
                     ExpandedButton(icon: properties.icon, label: properties.label, action: properties.action)
                 }
