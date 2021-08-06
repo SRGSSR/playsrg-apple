@@ -10,21 +10,34 @@ import Foundation
 // MARK: View model
 
 final class ProgramViewModel: ObservableObject {
-    @Published var program: SRGProgram? {
+    @Published var data: Data? {
         didSet {
-            Self.dataPublisher(for: program)
+            Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
-                .assign(to: &$data)
+                .assign(to: &$mediaData)
+            Self.livestreamMediaPublisher(for: data?.channel)
+                .receive(on: DispatchQueue.main)
+                .assign(to: &$livestreamMedia)
         }
     }
     
-    @Published private var data = Data(media: nil, watchLaterAllowedAction: .none)
+    @Published private var mediaData = MediaData(media: nil, watchLaterAllowedAction: .none)
+    @Published private var livestreamMedia: SRGMedia?
+    
     @Published private(set) var date: Date = Date()
     
     init() {
         Timer.publish(every: 10, on: .main, in: .common)
             .autoconnect()
             .assign(to: &$date)
+    }
+    
+    private var program: SRGProgram? {
+        return data?.program
+    }
+    
+    private var channel: SRGChannel? {
+        return data?.channel
     }
     
     var title: String? {
@@ -81,28 +94,62 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var playAction: (() -> Void)? {
-        return data.media != nil ? play : nil
+        if progress != nil, let livestreamMedia = livestreamMedia {
+            return {
+                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                appDelegate.rootTabBarController.play_presentMediaPlayer(with: livestreamMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+        }
+        else if let media = mediaData.media {
+            return {
+                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+        }
+        else {
+            return nil
+        }
     }
     
     var hasActions: Bool {
-        return data.media?.show != nil
+        return mediaData.media?.show != nil
     }
     
     var episodeButtonProperties: ButtonProperties? {
-        guard data.media?.show != nil else { return nil }
+        guard let show = mediaData.media?.show else { return nil }
         return ButtonProperties(
             icon: "episodes",
             label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
-            action: openEpisodes
+            action: {
+                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                let showViewController = SectionViewController.showViewController(for: show)
+                appDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
+                appDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
+            }
         )
     }
     
     private var watchLaterAllowedAction: WatchLaterAction {
-        return data.watchLaterAllowedAction
+        return mediaData.watchLaterAllowedAction
     }
     
     var watchLaterButtonProperties: ButtonProperties? {
-        guard let media = data.media else { return nil }
+        guard let media = mediaData.media else { return nil }
+        
+        func toggleWatchLater() {
+            WatchLaterToggleMedia(media) { added, error in
+                guard error == nil else { return }
+                
+                let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.button.rawValue
+                labels.value = media.urn
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+                
+                self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add)
+            }
+        }
+        
         switch watchLaterAllowedAction {
         case .add:
             switch media.mediaType {
@@ -129,49 +176,37 @@ final class ProgramViewModel: ObservableObject {
             return nil
         }
     }
- 
-    private func toggleWatchLater() {
-        guard let media = data.media else { return }
-        WatchLaterToggleMedia(media) { added, error in
-            guard error == nil else { return }
-            
-            let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.button.rawValue
-            labels.value = media.urn
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
-            
-            self.data = Data(media: media, watchLaterAllowedAction: added ? .remove : .add)
-        }
-    }
     
-    private func openEpisodes() {
-        guard let show = data.media?.show, let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
-        let showViewController = SectionViewController.showViewController(for: show)
-        appDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
-        appDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
-    }
-    
-    private func play() {
-        guard let media = data.media, let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
-        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-    }
-    
-    private static func dataPublisher(for program: SRGProgram?) -> AnyPublisher<Data, Never> {
+    private static func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
         if let mediaUrn = program?.mediaURN {
             return SRGDataProvider.current!.media(withUrn: mediaUrn)
-                .receive(on: DispatchQueue.main)
+                .receive(on: DispatchQueue.main)        // `WatchLaterAllowedActionForMedia` must currently be called on the main thread
                 .map { media in
                     return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
-                        return Just(Data(media: media, watchLaterAllowedAction: WatchLaterAllowedActionForMedia(media)))
+                        return Just(MediaData(media: media, watchLaterAllowedAction: WatchLaterAllowedActionForMedia(media)))
                     }
                 }
                 .switchToLatest()
-                .replaceError(with: Data(media: nil, watchLaterAllowedAction: .none))
+                .replaceError(with: MediaData(media: nil, watchLaterAllowedAction: .none))
+                .prepend(MediaData(media: nil, watchLaterAllowedAction: .none))
                 .eraseToAnyPublisher()
         }
         else {
-            return Just(Data(media: nil, watchLaterAllowedAction: .none))
+            return Just(MediaData(media: nil, watchLaterAllowedAction: .none))
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
+        if let channel = channel {
+            return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+                .map { $0.first(where: { $0.channel == channel }) }
+                .replaceError(with: nil)
+                .prepend(nil)
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(nil)
                 .eraseToAnyPublisher()
         }
     }
@@ -180,11 +215,19 @@ final class ProgramViewModel: ObservableObject {
 // MARK: Types
 
 extension ProgramViewModel {
-    struct Data {
+    /// Input data for the model
+    struct Data: Hashable {
+        let program: SRGProgram
+        let channel: SRGChannel
+    }
+    
+    /// Data related to the media stored by the model
+    private struct MediaData {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
     }
     
+    /// Common button properties
     struct ButtonProperties {
         let icon: String
         let label: String

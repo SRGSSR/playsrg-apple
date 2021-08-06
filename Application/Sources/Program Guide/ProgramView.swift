@@ -10,15 +10,15 @@ import SwiftUI
 
 // Behavior: h-exp, v-hug
 struct ProgramView: View {
-    @Binding var program: SRGProgram
+    @Binding var data: ProgramViewModel.Data
     @StateObject private var model = ProgramViewModel()
     
-    static func viewController(for program: SRGProgram) -> UIViewController {
-        return UIHostingController(rootView: ProgramView(program: program))
+    static func viewController(for program: SRGProgram, channel: SRGChannel) -> UIViewController {
+        return UIHostingController(rootView: ProgramView(program: program, channel: channel))
     }
     
-    init(program: SRGProgram) {
-        _program = .constant(program)
+    init(program: SRGProgram, channel: SRGChannel) {
+        _data = .constant(.init(program: program, channel: channel))
     }
     
     var body: some View {
@@ -37,10 +37,10 @@ struct ProgramView: View {
         }
         .padding([.horizontal, .top], 14)
         .onAppear {
-            model.program = program
+            model.data = data
         }
-        .onChange(of: program) { newValue in
-            model.program = newValue
+        .onChange(of: data) { newValue in
+            model.data = newValue
         }
     }
     
@@ -194,7 +194,7 @@ struct ProgramView_Previews: PreviewProvider {
     private static let size = CGSize(width: 320, height: 600)
     
     static var previews: some View {
-        ProgramView(program: Mock.program())
+        ProgramView(program: Mock.program(), channel: Mock.channel())
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

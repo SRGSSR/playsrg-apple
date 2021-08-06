@@ -150,11 +150,16 @@ extension ProgramGuideDailyViewController: ContentInsets {
 
 extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Deselection is managed here rather than in view appearance methods, as those are not called with the
+        // modal presentation we use.
+        guard let channel = channel else {
+            self.deselectItems(in: collectionView, animated: true)
+            return
+        }
+        
         let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
-        let programViewController = ProgramView.viewController(for: program)
+        let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
-            // Deselects after presentation; the presentation does not hide the presenting controller, whose
-            // appearance lifecycle methods will not be called. Deselection must therefore be made directly.
             self.deselectItems(in: collectionView, animated: true)
         }
     }
