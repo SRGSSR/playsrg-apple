@@ -109,7 +109,7 @@ private extension ShowCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? [.isSelected] : []
+        return isSelected ? .isSelected : []
     }
 }
 

@@ -23,8 +23,8 @@ struct ProgramCell: View {
     var body: some View {
         ZStack {
             HStack(spacing: 10) {
-                if let formattedTimeRange = model.formattedTimeRange {
-                    Text(formattedTimeRange)
+                if let timeRange = model.timeRange {
+                    Text(timeRange)
                         .srgFont(.subtitle1)
                         .foregroundColor(.srgGray96)
                         .frame(width: timeRangeWidth, alignment: .leading)

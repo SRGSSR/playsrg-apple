@@ -60,12 +60,19 @@ final class ProgramViewModel: ObservableObject {
         return program?.summary
     }
     
-    var formattedTimeAndDate: String? {
+    var timeAndDate: String? {
         guard let program = program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
         let day = DateFormatter.play_relative.string(from: program.startDate)
         return "\(startTime) - \(endTime), \(day)"
+    }
+    
+    var timeAndDateAccessibilityLabel: String? {
+        guard let program = program else { return nil }
+        return String(format: "From %1$@ to %2$@", PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate))
+            .appending(", ")
+            .appending(DateFormatter.play_relativeShort.string(from: program.startDate))
     }
     
     var imageUrl: URL? {

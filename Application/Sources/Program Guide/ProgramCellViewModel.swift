@@ -23,7 +23,7 @@ final class ProgramCellViewModel: ObservableObject {
         return program?.title
     }
     
-    var formattedTimeRange: String? {
+    var timeRange: String? {
         guard let program = program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)

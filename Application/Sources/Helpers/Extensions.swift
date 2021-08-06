@@ -120,18 +120,25 @@ extension Publisher where Failure == Never {
 
 extension View {
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
-        // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
-        //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-        #if os(tvOS)
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityAddTraits(traits)
-        #else
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityHint(hint ?? "")
-            .accessibilityAddTraits(traits)
-        #endif
+        Group {
+            if let label = label, !label.isEmpty {
+                // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
+                //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
+                #if os(tvOS)
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityAddTraits(traits)
+                #else
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityHint(hint ?? "")
+                    .accessibilityAddTraits(traits)
+                #endif
+            }
+            else {
+                accessibility(hidden: true)
+            }
+        }
     }
     
     /**

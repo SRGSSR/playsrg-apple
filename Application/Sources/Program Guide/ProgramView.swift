@@ -30,6 +30,7 @@ struct ProgramView: View {
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .background(Color.white.opacity(0.1))
                         .cornerRadius(LayoutStandardViewCornerRadius)
+                        .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
                     DescriptionView(model: model)
                     Spacer()
                 }
@@ -146,11 +147,12 @@ struct ProgramView: View {
         var body: some View {
             VStack(spacing: 18) {
                 VStack(spacing: 6) {
-                    if let formattedTimeAndDate = model.formattedTimeAndDate {
-                        Text(formattedTimeAndDate)
+                    if let timeAndDate = model.timeAndDate {
+                        Text(timeAndDate)
                             .srgFont(.caption)
                             .lineLimit(1)
                             .foregroundColor(.srgGray96)
+                            .accessibilityElement(label: model.timeAndDateAccessibilityLabel)
                     }
                     TitleView(model: model)
                 }
@@ -196,6 +198,18 @@ struct ProgramView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: Accessibility
+
+extension ProgramView {
+    var accessibilityLabel: String? {
+        return model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return .isButton
     }
 }
 

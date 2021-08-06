@@ -161,7 +161,7 @@ private extension MediaCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? [.isSelected] : []
+        return isSelected ? .isSelected : []
     }
 }
 
