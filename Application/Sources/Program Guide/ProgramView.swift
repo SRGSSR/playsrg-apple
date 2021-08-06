@@ -101,6 +101,12 @@ struct ProgramView: View {
                 }
                 .padding([.bottom, .horizontal], 6)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                
+                if let progress = model.progress {
+                    ProgressBar(value: progress)
+                        .frame(height: LayoutProgressBarHeight)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                }
             }
         }
     }

@@ -19,6 +19,13 @@ final class ProgramViewModel: ObservableObject {
     }
     
     @Published private var data = Data(media: nil, watchLaterAllowedAction: .none)
+    @Published private(set) var date: Date = Date()
+    
+    init() {
+        Timer.publish(every: 10, on: .main, in: .common)
+            .autoconnect()
+            .assign(to: &$date)
+    }
     
     var title: String? {
         return program?.title
@@ -48,6 +55,12 @@ final class ProgramViewModel: ObservableObject {
         guard let program = program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)
         return duration > 0 ? duration : nil
+    }
+    
+    var progress: Double? {
+        guard let program = program else { return nil }
+        let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+        return (0...1).contains(progress) ? progress : nil
     }
     
     var hasMultiAudio: Bool {
