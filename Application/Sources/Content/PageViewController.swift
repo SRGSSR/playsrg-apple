@@ -604,7 +604,12 @@ private extension PageViewController {
                     TopicCell(topic: topic)
                 #if os(iOS)
                 case .showAccess:
-                    ShowAccessCell()
+                    switch id {
+                    case .video:
+                        ShowAccessCell(style: .programGuide)
+                    default:
+                        ShowAccessCell(style: .calendar)
+                    }
                 #endif
                 }
             case .more:

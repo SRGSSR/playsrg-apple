@@ -18,16 +18,63 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct ShowAccessCell: View {
+    let style: Style
+    
+    private var showAZButtonProperties: ButtonProperties {
+        return ButtonProperties(
+            icon: "a_to_z",
+            label: NSLocalizedString("A to Z", comment: "Show A-Z short button title"),
+            accessibilityLabel: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Show A-Z button label")
+        )
+    }
+    
+    private var showByDateButtonProperties: ButtonProperties {
+        switch style {
+        case .calendar:
+            return ButtonProperties(
+                icon: "calendar",
+                label: NSLocalizedString("By date", comment: "Show by date short button title"),
+                accessibilityLabel: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Show by date button label")
+            )
+        case .programGuide:
+            return ButtonProperties(
+                icon: "tv_guide",
+                label: NSLocalizedString("TV guide", comment: "TV guide short button title")
+            )
+        }
+    }
+    
     var body: some View {
         ResponderChain { firstResponder in
             HStack {
-                ExpandedButton(icon: "a_to_z", label: NSLocalizedString("A to Z", comment: "Short title displayed in home pages on a button."), accessibilityHint: PlaySRGAccessibilityLocalizedString("A to Z shows", comment: "Title pronounced in home pages on shows A to Z button.")) {
+                ExpandedButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
                 }
-                ExpandedButton(icon: "calendar", label: NSLocalizedString("By date", comment: "Short title displayed in home pages on a button."), accessibilityHint: PlaySRGAccessibilityLocalizedString("Shows by date", comment: "Title pronounced in home pages on shows by date button.")) {
+                ExpandedButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
                 }
             }
+        }
+    }
+}
+
+// MARK: Types
+
+extension ShowAccessCell {
+    enum Style {
+        case calendar
+        case programGuide
+    }
+    
+    private struct ButtonProperties {
+        let icon: String
+        let label: String
+        let accessibilityLabel: String?
+        
+        init(icon: String, label: String, accessibilityLabel: String? = nil) {
+            self.icon = icon
+            self.label = label
+            self.accessibilityLabel = accessibilityLabel
         }
     }
 }
@@ -47,8 +94,9 @@ struct ShowAccessCell_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            ShowAccessCell()
-                .previewLayout(.fixed(width: size.width, height: size.height))
+            ShowAccessCell(style: .calendar)
+            ShowAccessCell(style: .programGuide)
         }
+        .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
