@@ -144,7 +144,7 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return .zero
+        return UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0)
     }
 }
 
