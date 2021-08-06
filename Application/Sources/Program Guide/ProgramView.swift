@@ -80,9 +80,17 @@ struct ProgramView: View {
     private struct VisualView: View {
         @ObservedObject var model: ProgramViewModel
         
+        static let padding: CGFloat = 6
+        
         var body: some View {
             ZStack {
                 ImageView(url: model.imageUrl)
+                
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                        .padding([.top, .leading], Self.padding)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }
                 
                 HStack(spacing: 6) {
                     Spacer()
@@ -99,7 +107,7 @@ struct ProgramView: View {
                         DurationBadge(duration: duration)
                     }
                 }
-                .padding([.bottom, .horizontal], 6)
+                .padding([.bottom, .horizontal], Self.padding)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 
                 if let progress = model.progress {

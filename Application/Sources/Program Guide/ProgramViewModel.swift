@@ -36,6 +36,14 @@ final class ProgramViewModel: ObservableObject {
         return data?.program
     }
     
+    private var media: SRGMedia? {
+        return mediaData.media
+    }
+    
+    private var show: SRGShow? {
+        return media?.show
+    }
+    
     private var channel: SRGChannel? {
         return data?.channel
     }
@@ -97,6 +105,11 @@ final class ProgramViewModel: ObservableObject {
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
     }
     
+    var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+        guard let media = media else { return nil }
+        return MediaDescription.availabilityBadgeProperties(for: media)
+    }
+    
     var playAction: (() -> Void)? {
         if isLive, let livestreamMedia = livestreamMedia {
             return {
@@ -104,7 +117,7 @@ final class ProgramViewModel: ObservableObject {
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: livestreamMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
         }
-        else if let media = mediaData.media {
+        else if let media = media {
             return {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
@@ -116,11 +129,11 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasActions: Bool {
-        return mediaData.media?.show != nil
+        return watchFromStartButtonProperties != nil || episodeButtonProperties != nil || watchLaterButtonProperties != nil
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
-        guard isLive, let media = mediaData.media else { return nil }
+        guard isLive, let media = media else { return nil }
         return ButtonProperties(
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
@@ -132,7 +145,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var episodeButtonProperties: ButtonProperties? {
-        guard let show = mediaData.media?.show else { return nil }
+        guard let show = show else { return nil }
         return ButtonProperties(
             icon: "episodes",
             label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
@@ -150,7 +163,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var watchLaterButtonProperties: ButtonProperties? {
-        guard !isLive, let media = mediaData.media else { return nil }
+        guard !isLive, let media = media else { return nil }
         
         func toggleWatchLater() {
             WatchLaterToggleMedia(media) { added, error in
