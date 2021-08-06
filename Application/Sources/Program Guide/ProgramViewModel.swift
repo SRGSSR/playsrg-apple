@@ -129,7 +129,10 @@ final class ProgramViewModel: ObservableObject {
     }
     
     private func openEpisodes() {
-        
+        guard let show = data.media?.show, let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+        let showViewController = SectionViewController.showViewController(for: show)
+        appDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
+        appDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
     }
     
     private static func dataPublisher(for program: SRGProgram?) -> AnyPublisher<Data, Never> {
