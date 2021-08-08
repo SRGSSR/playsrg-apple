@@ -11,6 +11,8 @@ import SwiftUI
 struct ProgramGuideHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
+    @State var isDatePickerPresented: Bool = false
+    
     private static func formattedDate(for day: SRGDay) -> String {
         return DateFormatter.play_relative.string(from: day.date).capitalizedFirstLetter
     }
@@ -22,7 +24,7 @@ struct ProgramGuideHeaderView: View {
                     model.yesterday()
                 }
                 ExpandedButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                    // TODO
+                    isDatePickerPresented.toggle()
                 }
                 ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.todayAtCurrentTime()
@@ -58,6 +60,14 @@ struct ProgramGuideHeaderView: View {
             }
         }
         .padding(10)
+        .fullScreenCover(isPresented: $isDatePickerPresented) {
+            ZStack {
+                Color.srgGray23
+                    .edgesIgnoringSafeArea(.all)
+                DatePickerView(isDatePickerPresented: $isDatePickerPresented, day: $model.selectedDay.day)
+                    .animation(.spring())
+            }
+        }
     }
 }
 
