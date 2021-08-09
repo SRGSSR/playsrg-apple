@@ -18,7 +18,7 @@ final class SectionViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Configuration, SectionViewModel.Item>!
+    private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Section, SectionViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -39,11 +39,13 @@ final class SectionViewController: UIViewController {
         #endif
     }
     
-    private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Configuration, SectionViewModel.Item> {
-        var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Configuration, SectionViewModel.Item>()
-        if case let .loaded(headerItem: _, row: row) = state {
-            snapshot.appendSections([row.section])
-            snapshot.appendItems(row.items, toSection: row.section)
+    private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
+        if case let .loaded(headerItem: _, rows: rows) = state {
+            for row in rows {
+                snapshot.appendSections([row.section])
+                snapshot.appendItems(row.items, toSection: row.section)
+            }
         }
         return snapshot
     }
@@ -114,11 +116,9 @@ final class SectionViewController: UIViewController {
         updateEditButton()
         #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
             guard let self = self else { return }
-            let snapshot = self.dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[indexPath.section]
-            cell.content = ItemCell(item: item, section: section)
+            cell.content = ItemCell(item: item, configuration: self.model.configuration)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -130,11 +130,9 @@ final class SectionViewController: UIViewController {
             view.content = TitleView(text: self.globalHeaderTitle)
         }
         
-        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, _ in
             guard let self = self else { return }
-            let snapshot = self.dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, headerItem: self.model.state.headerItem)
+            view.content = SectionHeaderView(headerItem: self.model.state.headerItem, configuration: self.model.configuration)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -250,9 +248,9 @@ final class SectionViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
             navigationItem.rightBarButtonItem = nil
-        case let .loaded(headerItem: headerItem, row: row):
-            let isEmpty = row.isEmpty
-            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
+        case let .loaded(headerItem: headerItem, rows: rows):
+            let isEmpty = rows.isEmpty
+            emptyView.content = (headerItem == nil && isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
             
             let hasEditButton = model.configuration.properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
@@ -558,8 +556,8 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(section: section,
+            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+                let headerSize = SectionHeaderView.size(configuration: configuration,
                                                         headerItem: self?.model.state.headerItem,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
@@ -567,11 +565,11 @@ private extension SectionViewController {
                 return [header]
             }
             
-            func layoutSection(for section: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+            func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
-                switch section.viewModelProperties.layout {
+                switch configuration.viewModelProperties.layout {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
                         return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
@@ -589,7 +587,7 @@ private extension SectionViewController {
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
@@ -602,9 +600,10 @@ private extension SectionViewController {
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
+            let configuration = self.model.configuration
             
-            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, index: sectionIndex, layoutEnvironment: layoutEnvironment)
             return layoutSection
         }, configuration: layoutConfiguration())
     }
@@ -615,12 +614,12 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
-        let section: SectionViewModel.Configuration
+        let configuration: SectionViewModel.Configuration
         
         var body: some View {
             switch item {
             case let .media(media):
-                switch section.wrappedValue {
+                switch configuration.wrappedValue {
                 case .content:
                     MediaCell(media: media, style: .show)
                 case let .configured(configuredSection):
@@ -634,8 +633,8 @@ private extension SectionViewController {
                     }
                 }
             case let .show(show):
-                let imageType = section.properties.imageType
-                switch section.wrappedValue {
+                let imageType = configuration.properties.imageType
+                switch configuration.wrappedValue {
                 case let .content(contentSection):
                     switch contentSection.type {
                     case .predefined:
@@ -669,15 +668,15 @@ private extension SectionViewController {
 
 private extension SectionViewController {
     struct SectionHeaderView: View {
-        let section: SectionViewModel.Configuration
         let headerItem: SectionViewModel.HeaderItem?
+        let configuration: SectionViewModel.Configuration
         
         var body: some View {
             switch headerItem {
             case let .item(item):
                 switch item {
                 case let .show(show):
-                    SectionShowHeaderView(section: section.wrappedValue, show: show)
+                    SectionShowHeaderView(section: configuration.wrappedValue, show: show)
                 default:
                     Color.clear
                 }
@@ -688,12 +687,12 @@ private extension SectionViewController {
             }
         }
         
-        static func size(section: SectionViewModel.Configuration, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        static func size(configuration: SectionViewModel.Configuration, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch headerItem {
             case let .item(item):
                 switch item {
                 case let .show(show):
-                    return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }

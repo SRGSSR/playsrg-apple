@@ -14,8 +14,8 @@ final class SectionViewModel: ObservableObject {
     
     @Published private(set) var state: State = .loading
     
+    private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
-    private var trigger = Trigger()
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
@@ -29,6 +29,8 @@ final class SectionViewModel: ObservableObject {
     init(section: Content.Section, filter: SectionFiltering?) {
         self.configuration = SectionViewModel.Configuration(section)
         
+        // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
+        // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
         Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
             return Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
@@ -43,9 +45,10 @@ final class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = configuration.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: configuration.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: configuration, items: rowItems))
+                let uniqueItems = removeDuplicates(in: items)
+                let headerItem = configuration.viewModelProperties.headerItem(from: uniqueItems)
+                let rows = configuration.viewModelProperties.rows(from: uniqueItems)
+                return State.loaded(headerItem: headerItem, rows: rows)
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -125,17 +128,31 @@ extension SectionViewModel {
         case show(SRGShow)
     }
     
+    struct Section: Hashable {
+        let id: String
+        let title: String?
+        
+        init(id: String, title: String? = nil) {
+            self.id = id
+            self.title = title
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
+    }
+    
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Configuration, Item>
+    typealias Row = CollectionRow<Section, Item>
     
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: HeaderItem?, row: Row)
+        case loaded(headerItem: HeaderItem?, rows: [Row])
         
         var isEmpty: Bool {
-            if case let .loaded(headerItem: _, row: row) = self {
-                return row.isEmpty
+            if case let .loaded(headerItem: _, rows: rows) = self {
+                return rows.isEmpty
             }
             else {
                 return true
@@ -143,7 +160,7 @@ extension SectionViewModel {
         }
         
         var headerItem: HeaderItem? {
-            if case let .loaded(headerItem: headerItem, row: _) = self {
+            if case let .loaded(headerItem: headerItem, rows: _) = self {
                 return headerItem
             }
             else {
@@ -171,7 +188,7 @@ protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     
     func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
-    func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
+    func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
     
     var userActivity: NSUserActivity? { get }
 }
@@ -215,12 +232,12 @@ private extension SectionViewModel {
             }
         }
         
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             if contentSection.type == .showAndMedias, case .show = items.first {
-                return Array(items.suffix(from: 1))
+                return [Row(section: Section(id: "main"), items: Array(items.suffix(from: 1)))]
             }
             else {
-                return items
+                return [Row(section: Section(id: "main"), items: items)]
             }
         }
         
@@ -254,8 +271,8 @@ private extension SectionViewModel {
             }
         }
         
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
-            return items
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            return [Row(section: Section(id: "main"), items: items)]
         }
         
         var userActivity: NSUserActivity? {
