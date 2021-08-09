@@ -40,6 +40,19 @@ enum Content {
         
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?)
+        
+        var title: String? {
+            switch self {
+            case let .media(media):
+                return media.title
+            case let .show(show):
+                return show.title
+            case let .topic(topic):
+                return topic.title
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess:
+                return nil
+            }
+        }
     }
     
     enum EmptyType: Hashable {

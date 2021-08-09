@@ -233,10 +233,25 @@ private extension SectionViewModel {
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
-            if contentSection.type == .showAndMedias, case .show = items.first {
-                return [Row(section: Section(id: "main"), items: Array(items.suffix(from: 1)))]
-            }
-            else {
+            switch contentSection.type {
+            case .showAndMedias:
+                if case .show = items.first {
+                    return [Row(section: Section(id: "main"), items: Array(items.suffix(from: 1)))]
+                }
+                else {
+                    return [Row(section: Section(id: "main"), items: items)]
+                }
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return items.groupedAlphabetically { $0.title }
+                        .map { character, items in
+                            return Row(section: Section(id: String(character)), items: items)
+                        }
+                default:
+                    return [Row(section: Section(id: "main"), items: items)]
+                }
+            default:
                 return [Row(section: Section(id: "main"), items: items)]
             }
         }
@@ -272,7 +287,15 @@ private extension SectionViewModel {
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
-            return [Row(section: Section(id: "main"), items: items)]
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return items.groupedAlphabetically { $0.title }
+                    .map { character, items in
+                        return Row(section: Section(id: String(character)), items: items)
+                    }
+            default:
+                return [Row(section: Section(id: "main"), items: items)]
+            }
         }
         
         var userActivity: NSUserActivity? {

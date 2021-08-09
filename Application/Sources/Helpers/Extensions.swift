@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Collections
 import Combine
 import Foundation
 import SwiftUI
@@ -98,12 +99,31 @@ extension Array {
 }
 
 extension Collection {
+    /**
+     *  Apply a transform to each item in a collection, providing an auto-increased index with each processed item.
+     */
     func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
         var index = 0
         return try map { element in
             let transformedElement = try transform(element, index)
             index += 1
             return transformedElement
+        }
+    }
+    
+    /**
+     *  Groups items from the receiver into an alphabetical dictionary (whose keys are letters in alphabetical order).
+     *  Preserves the initial ordering in each group. Group items starting with no letter under '#'.
+     */
+    func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> OrderedDictionary<Character, [Self.Element]> where S: StringProtocol {
+        return try OrderedDictionary<Character, [Self.Element]>(grouping: self) { element in
+            if let key = try keyForElement(element),
+               let character = key.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).first, character.isLetter {
+                return character
+            }
+            else {
+                return "#"
+            }
         }
     }
 }
