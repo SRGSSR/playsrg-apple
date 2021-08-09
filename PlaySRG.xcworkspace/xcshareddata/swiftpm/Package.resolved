@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "3e97c486b3d18a5270887527fea1c75ece1e2219",
-          "version": "14.6.0"
+          "revision": "40530d1a58ea55344df3e187ed8986b7bf8451f1",
+          "version": "14.6.1"
         }
       },
       {

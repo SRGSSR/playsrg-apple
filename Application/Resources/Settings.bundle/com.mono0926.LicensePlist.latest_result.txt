@@ -229,7 +229,7 @@ name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.4
 
 name: gtm-session-fetcher, nameSpecified: GTMSessionFetcher, owner: google, version: 1.6.1
 
-name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.6.0
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 14.6.1
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2
 
