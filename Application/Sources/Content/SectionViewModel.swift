@@ -132,7 +132,7 @@ extension SectionViewModel {
         let id: String
         
         var indexTitle: String {
-            return id
+            return id.uppercased()
         }
         
         func hash(into hasher: inout Hasher) {
