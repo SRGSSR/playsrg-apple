@@ -17,10 +17,10 @@ NS_ASSUME_NONNULL_BEGIN
 OBJC_EXPORT NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date);
 
 /**
- *  Formats only short time (hours and minutes) in a human readable way suited for accessibilty.
+ *  Formats time (hours and minutes) in a human readable way suited for accessibilty.
  *
- *  @discussion Similar to `+[NSDateFormatter play_shortTimeFormatter]`, but for accessibility purposes.
+ *  @discussion Similar to `NSDateFormatter.play_timeFormatter`, but for accessibility purposes.
  */
-OBJC_EXPORT NSString *PlayAccessibilityShortTimeFromDate(NSDate *date);
+OBJC_EXPORT NSString *PlayAccessibilityTimeFromDate(NSDate *date);
 
 NS_ASSUME_NONNULL_END

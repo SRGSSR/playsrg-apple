@@ -620,11 +620,18 @@ private extension SectionViewController {
         var body: some View {
             switch item {
             case let .media(media):
-                if case let .configured(section) = section.wrappedValue, case .show = section {
-                    MediaCell(media: media, style: .date)
-                }
-                else {
+                switch section.wrappedValue {
+                case .content:
                     MediaCell(media: media, style: .show)
+                case let .configured(configuredSection):
+                    switch configuredSection {
+                    case .show:
+                        MediaCell(media: media, style: .date)
+                    case .radioEpisodesForDay, .tvEpisodesForDay:
+                        MediaCell(media: media, style: .time)
+                    default:
+                        MediaCell(media: media, style: .show)
+                    }
                 }
             case let .show(show):
                 switch section.wrappedValue {
