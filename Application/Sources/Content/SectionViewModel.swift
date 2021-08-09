@@ -128,13 +128,11 @@ extension SectionViewModel {
         case show(SRGShow)
     }
     
-    struct Section: Hashable {
+    struct Section: Hashable, Indexable {
         let id: String
-        let title: String?
         
-        init(id: String, title: String? = nil) {
-            self.id = id
-            self.title = title
+        var indexTitle: String {
+            return id
         }
         
         func hash(into hasher: inout Hasher) {

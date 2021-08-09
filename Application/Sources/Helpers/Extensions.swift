@@ -74,6 +74,10 @@ extension String {
             """
     }
     
+    func unobfuscated() -> String {
+        return components(separatedBy: .decimalDigits).joined()
+    }
+    
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
     }

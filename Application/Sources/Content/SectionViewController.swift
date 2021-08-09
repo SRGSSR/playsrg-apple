@@ -121,7 +121,7 @@ final class SectionViewController: UIViewController {
             cell.content = ItemCell(item: item, configuration: self.model.configuration)
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
@@ -263,6 +263,10 @@ final class SectionViewController: UIViewController {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
                 #if os(iOS)
+                self.collectionView.reloadSectionIndexBar()
+                self.collectionView.setSectionBarAppearance(indexColor: .white,
+                                                            indexBackgroundColor: .init(white: 0, alpha: 0.3))
+                
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
                 if self.refreshControl.isRefreshing {
