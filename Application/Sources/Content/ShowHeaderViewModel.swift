@@ -18,7 +18,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     @Published private(set) var isFavorite: Bool = false
-    @Published private(set) var isSubscribed: Bool = false
+    @Published private(set) var subscriptionStatus: SubscriptionStatus = .unavailable
     
     @Published var isFavoriteRemovalAlertDisplayed: Bool = false
     
@@ -60,32 +60,38 @@ final class ShowHeaderViewModel: ObservableObject {
     
     #if os(iOS)
     var subscriptionIcon: String {
-        if isPushServiceEnabled {
-            return isSubscribed ? "subscription_full" : "subscription"
-        }
-        else {
+        switch subscriptionStatus {
+        case .unavailable:
             return "subscription_disabled"
+        case .unsubscribed:
+            return "subscription"
+        case .subscribed:
+            return "subscription_full"
         }
     }
     
     var subscriptionLabel: String {
-        if isPushServiceEnabled && isSubscribed {
-            return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
-        }
-        else {
+        switch subscriptionStatus {
+        case .unavailable, .unsubscribed:
             return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
-        }
-    }
-    
-    private var isPushServiceEnabled: Bool {
-        if let pushService = PushService.shared {
-            return pushService.isEnabled
-        }
-        else {
-            return false
+        case .subscribed:
+            return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
         }
     }
     #endif
+    
+    private static func subscriptionStatus(for show: SRGShow?) -> SubscriptionStatus {
+        #if os(iOS)
+        if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
+            return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
+        }
+        else {
+            return .unavailable
+        }
+        #else
+        return .unavailable
+        #endif
+    }
     
     func toggleFavorite() {
         guard let show = show else { return }
@@ -109,6 +115,9 @@ final class ShowHeaderViewModel: ObservableObject {
         guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
         updateData()
         
+        let isSubscribed = FavoritesIsSubscribedToShow(show)
+        subscriptionStatus = isSubscribed ? .subscribed : .unsubscribed
+        
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue
         labels.value = show.urn
@@ -123,7 +132,7 @@ final class ShowHeaderViewModel: ObservableObject {
     private func updatePublishers() {
         cancellables = []
         
-        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.wokenUp())
+        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.pushServiceStatusUpdate())
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.updateData()
@@ -135,12 +144,21 @@ final class ShowHeaderViewModel: ObservableObject {
     private func updateData() {
         if let show = show {
             isFavorite = FavoritesContainsShow(show)
-            isSubscribed = FavoritesIsSubscribedToShow(show)
         }
         else {
             isFavorite = false
-            isSubscribed = false
         }
+        subscriptionStatus = Self.subscriptionStatus(for: show)
+    }
+}
+
+// MARK: Types
+
+extension ShowHeaderViewModel {
+    enum SubscriptionStatus {
+        case unavailable
+        case unsubscribed
+        case subscribed
     }
 }
 
@@ -158,11 +176,11 @@ extension ShowHeaderViewModel {
     
     #if os(iOS)
     var subscriptionAccessibilityLabel: String {
-        if isPushServiceEnabled && isSubscribed {
-            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
-        }
-        else {
+        switch subscriptionStatus {
+        case .unavailable, .unsubscribed:
             return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
+        case .subscribed:
+            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
         }
     }
     #endif

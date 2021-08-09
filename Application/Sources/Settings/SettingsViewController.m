@@ -128,6 +128,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                            selector:@selector(userDataDidFinishSynchronization:)
                                                name:SRGUserDataDidStartSynchronizationNotification
                                              object:SRGUserData.currentUserData];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
+                                             object:nil];
 }
 
 #pragma mark Helpers
@@ -551,6 +555,11 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (void)userDataDidFinishSynchronization:(NSNotification *)notification
 {
     [self.tableView reloadData];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
+{
+    [self updateSettingsVisibility];
 }
 
 #pragma mark SFSafariViewControllerDelegate

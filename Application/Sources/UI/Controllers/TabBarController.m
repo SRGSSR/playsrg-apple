@@ -178,8 +178,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                name:PushServiceDidReceiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(badgeDidChange:)
+                                           selector:@selector(pushServiceBadgeDidChange:)
                                                name:PushServiceBadgeDidChangeNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
                                              object:nil];
     
     [self updateLayoutAnimated:NO];
@@ -478,9 +482,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    // Ensure correct notification button availability after:
-    //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-    //   - Returning from system settings, where the user might have updated push notification authorizations.
+    // Ensure correct notification button availability after dismissal of the initial system alert (displayed once at most),
+    // asking the user to enable push notifications.
     [self updateProfileTabBarItem];
 }
 
@@ -494,7 +497,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [self updateProfileTabBarItem];
 }
 
-- (void)badgeDidChange:(NSNotification *)notification
+- (void)pushServiceBadgeDidChange:(NSNotification *)notification
+{
+    [self updateProfileTabBarItem];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
 {
     [self updateProfileTabBarItem];
 }

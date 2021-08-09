@@ -80,10 +80,6 @@
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(didReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
@@ -92,8 +88,16 @@
                                                name:UIApplicationWillResignActiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(badgeDidChange:)
+                                           selector:@selector(pushServiceDidReceiveNotification:)
+                                               name:PushServiceDidReceiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceBadgeDidChange:)
                                                name:PushServiceBadgeDidChangeNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
                                              object:nil];
     
     UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
@@ -435,9 +439,8 @@
     if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
         
-        // Ensure correct notification badge on notification cell availability after:
-        //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-        //   - Returning from system settings, where the user might have updated push notification authorizations.
+        // Ensure correct notification badge on notification cell availability after dismissal of the initial system alert
+        // (displayed once at most), asking the user to enable push notifications.
         [self reloadData];
     }
 }
@@ -449,15 +452,18 @@
     }
 }
 
-- (void)didReceiveNotification:(NSNotification *)notification
+- (void)pushServiceDidReceiveNotification:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
     [self reloadData];
 }
 
-- (void)badgeDidChange:(NSNotification *)notification
+- (void)pushServiceBadgeDidChange:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
+    [self reloadData];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
+{
     [self reloadData];
 }
 

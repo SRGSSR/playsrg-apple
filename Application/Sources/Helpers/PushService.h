@@ -19,6 +19,16 @@ OBJC_EXPORT NSString * const PushServiceDidReceiveNotification;
 OBJC_EXPORT NSString * const PushServiceBadgeDidChangeNotification;
 
 /**
+ *  Notification sent when the status of the service changes (`enabled` property).
+ */
+OBJC_EXPORT NSString * const PushServiceStatusDidChangeNotification;
+
+/**
+ *  Key storing the status of the push service, as an `NSumber` containing a boolean.
+ */
+OBJC_EXPORT NSString * const PushServiceEnabledKey;
+
+/**
  *  Service for push notifications.
  */
 @interface PushService : NSObject

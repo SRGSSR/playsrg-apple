@@ -127,7 +127,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
         }
             
         case ApplicationSectionNotifications: {
-            return PushService.sharedService.enabled ? [UIImage imageNamed:@"subscription_full"] : [UIImage imageNamed:@"subscription"];
+            return [UIImage imageNamed:@"subscription"];
             break;
         }
             
