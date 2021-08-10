@@ -35,7 +35,7 @@ struct ProgramGuideHeaderView: View {
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
                     ForEach(model.items, id: \.self) { channelItem in
-                        ChannelButton(channelItem.channel, accessibilityHint: (channelItem.channel != nil) ? PlaySRGAccessibilityLocalizedString("Displays the day's programs", comment: "Channel selector button hint.") : nil) {
+                        ChannelButton(channel: channelItem.channel) {
                             if let channel = channelItem.channel {
                                 model.selectedChannel = channel
                             }

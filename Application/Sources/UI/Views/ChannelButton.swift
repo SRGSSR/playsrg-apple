@@ -12,16 +12,9 @@ import SwiftUI
 /// Behavior: h-hug, v-hug
 struct ChannelButton: View {
     let channel: SRGChannel?
-    let accessibilityHint: String?
     let action: () -> Void
     
     @Environment(\.isSelected) var isSelected
-        
-    init(_ channel: SRGChannel?, accessibilityHint: String? = nil, action: @escaping () -> Void) {
-        self.channel = channel
-        self.accessibilityHint = accessibilityHint
-        self.action = action
-    }
     
     private var logoImage: UIImage? {
         guard let channel = channel, let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
@@ -46,7 +39,19 @@ struct ChannelButton: View {
         .foregroundColor(.srgGrayC7)
         .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
-        .accessibilityElement(label: channel?.title, hint: accessibilityHint, traits: .isButton)
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+    }
+}
+
+// MARK: Accessibility
+
+extension ChannelButton {
+    var accessibilityLabel: String? {
+        return channel?.title
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Displays the channel programs", comment: "Channel selector button hint")
     }
 }
 
@@ -55,15 +60,11 @@ struct ChannelButton: View {
 struct ChannelButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ChannelButton(nil, action: {})
-                .padding()
-                .previewLayout(.sizeThatFits)
-            ChannelButton(Mock.channel(.logo16_9), action: {})
-                .padding()
-                .previewLayout(.sizeThatFits)
-            ChannelButton(Mock.channel(.logo3_1), action: {})
-                .padding()
-                .previewLayout(.sizeThatFits)
+            ChannelButton(channel: nil, action: {})
+            ChannelButton(channel: Mock.channel(.logo16_9), action: {})
+            ChannelButton(channel: Mock.channel(.logo3_1), action: {})
         }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
