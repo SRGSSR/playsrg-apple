@@ -25,7 +25,7 @@ final class ProgramCellViewModel: ObservableObject {
     
     var accessibilityLabel: String? {
         guard let program = program else { return nil }
-        return String(format: "From %1$@ to %2$@", PlayAccessibilityShortTimeFromDate(program.startDate), PlayAccessibilityShortTimeFromDate(program.endDate))
+        return String(format: "From %1$@ to %2$@", PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
             .appending(program.title)
     }
