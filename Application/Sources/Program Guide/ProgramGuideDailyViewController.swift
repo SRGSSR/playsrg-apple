@@ -85,13 +85,22 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$selectedChannel
             .sink { [weak self] _ in
-                guard let self = self else { return }
-                self.reloadData(for: self.model.state)
+                self?.reloadData()
+            }
+            .store(in: &cancellables)
+        
+        programGuideModel.$selectedDate
+            .sink { [weak self] _ in
+                self?.scrollToTime()
             }
             .store(in: &cancellables)
     }
     
-    func reloadData(for state: ProgramGuideDailyViewModel.State) {
+    private func reloadData() {
+        self.reloadData(for: model.state)
+    }
+    
+    private func reloadData(for state: ProgramGuideDailyViewModel.State) {
         guard let emptyView = emptyView, let dataSource = dataSource else { return }
         
         switch state {
@@ -112,14 +121,16 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
     }
     
-    func scrollToTime() {
+    private func scrollToTime() {
         guard SRGDay(from: programGuideModel.selectedDate) == model.day else { return }
         
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
         if !programs.isEmpty {
             let program = programs.filter { $0.endDate > programGuideModel.selectedDate }.first
             let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
-            collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
+            if !collectionView.indexPathsForVisibleItems.contains(IndexPath(row: row, section: 0)) {
+                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
+            }
         }
     }
 }
