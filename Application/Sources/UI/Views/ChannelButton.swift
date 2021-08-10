@@ -32,7 +32,8 @@ struct ChannelButton: View {
                     .lineLimit(1)
             }
         }
-        .frame(minWidth: 40, minHeight: 22)
+        .frame(minWidth: 40, maxWidth: 120, minHeight: 22)
+        .fixedSize(horizontal: true, vertical: false)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
         .foregroundColor(.srgGrayC7)
@@ -60,8 +61,9 @@ struct ChannelButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ChannelButton(channel: nil, action: {})
-            ChannelButton(channel: Mock.channel(.logo16_9), action: {})
-            ChannelButton(channel: Mock.channel(.logo3_1), action: {})
+            ChannelButton(channel: Mock.channel(), action: {})
+            ChannelButton(channel: Mock.channel(.unknown), action: {})
+            ChannelButton(channel: Mock.channel(.overflow), action: {})
         }
         .padding()
         .previewLayout(.sizeThatFits)

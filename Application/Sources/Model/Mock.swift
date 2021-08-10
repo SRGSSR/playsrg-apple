@@ -8,11 +8,12 @@ import SwiftUI
 
 struct Mock {
     enum Channel: String {
-        case logo16_9
-        case logo3_1
+        case standard
+        case unknown
+        case overflow
     }
     
-    static func channel(_ kind: Channel = .logo16_9) -> SRGChannel {
+    static func channel(_ kind: Channel = .standard) -> SRGChannel {
         return mockObject(kind.rawValue, type: SRGChannel.self)
     }
     
