@@ -62,11 +62,9 @@ struct SimpleButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SimpleButton(icon: "favorite", label: "Add to favorites", action: {})
-                .padding()
-                .previewLayout(.sizeThatFits)
             SimpleButton(icon: "favorite", accessibilityLabel: "Add to favorites", action: {})
-                .padding()
-                .previewLayout(.sizeThatFits)
         }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }
