@@ -23,7 +23,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
-        
+    
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
         snapshot.appendSections([.main])
@@ -84,24 +84,26 @@ final class ProgramGuideDailyViewController: UIViewController {
             .store(in: &cancellables)
         
         programGuideModel.$selectedChannel
-            .sink { [weak self] _ in
-                self?.reloadData()
+            .sink { [weak self] selectedChannel in
+                self?.reloadData(for: selectedChannel)
             }
             .store(in: &cancellables)
         
         programGuideModel.$selectedDate
-            .sink { [weak self] _ in
-                self?.scrollToTime()
+            .sink { [weak self] selectedDate in
+                self?.scrollToCurrentProgram(at: selectedDate)
             }
             .store(in: &cancellables)
     }
     
-    private func reloadData() {
-        self.reloadData(for: model.state)
+    private func reloadData(for channel: SRGChannel? = nil) {
+        self.reloadData(for: model.state, channel: channel)
     }
     
-    private func reloadData(for state: ProgramGuideDailyViewModel.State) {
+    private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
         guard let emptyView = emptyView, let dataSource = dataSource else { return }
+        
+        let channel = channel ?? programGuideModel.selectedChannel
         
         switch state {
         case .loading:
@@ -109,24 +111,25 @@ final class ProgramGuideDailyViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = state.programs(for: programGuideModel.selectedChannel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state, for: self.programGuideModel.selectedChannel)) {
+            dataSource.apply(Self.snapshot(from: state, for: channel)) {
                 if case .loaded = self.model.state {
-                    self.scrollToTime()
+                    self.scrollToCurrentProgram()
                 }
             }
         }
     }
     
-    private func scrollToTime() {
-        guard SRGDay(from: programGuideModel.selectedDate) == model.day else { return }
+    private func scrollToCurrentProgram(at date: Date? = nil) {
+        let date = date ?? programGuideModel.selectedDate
+        guard SRGDay(from: date) == model.day else { return }
         
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
         if !programs.isEmpty {
-            let program = programs.filter { $0.endDate > programGuideModel.selectedDate }.first
+            let program = programs.filter { $0.endDate > date }.first
             let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
             if !collectionView.indexPathsForVisibleItems.contains(IndexPath(row: row, section: 0)) {
                 collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
@@ -160,6 +163,20 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
+        }
+    }
+}
+
+extension ProgramGuideDailyViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        // Get centered vertically program
+        let indexPaths = collectionView.indexPathsForVisibleItems.sorted()
+        let index = indexPaths[Int(indexPaths.count / 2)].row
+        
+        let programs = model.state.programs(for: programGuideModel.selectedChannel)
+        if programs.count > index {
+            programGuideModel.selectedDate = programs[index].startDate
         }
     }
 }
