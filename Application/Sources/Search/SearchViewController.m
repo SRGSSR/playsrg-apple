@@ -315,6 +315,11 @@
             [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
             
             filtersButton.titleLabel.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f];
+            
+            // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
+            // See https://developer.apple.com/forums/thread/125492
+            filtersButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
+            
             [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
             [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
             
