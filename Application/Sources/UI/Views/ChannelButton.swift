@@ -33,7 +33,6 @@ struct ChannelButton: View {
             }
         }
         .frame(minWidth: 40, minHeight: 22)
-        .redactedIfNil(channel)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
         .foregroundColor(.srgGrayC7)
