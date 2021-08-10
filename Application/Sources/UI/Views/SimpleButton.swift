@@ -7,8 +7,6 @@
 import SRGAppearanceSwift
 import SwiftUI
 
-// MARK: View
-
 /// Behavior: h-hug, v-hug
 struct SimpleButton: View {
     let icon: String
@@ -19,18 +17,13 @@ struct SimpleButton: View {
     
     @State private var isFocused = false
     
-    init(icon: String, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
-        self.init(icon: icon, label: nil, accessibilityLabel: accessibilityLabel, accessibilityHint: accessibilityHint, action: action)
-    }
-    
-    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
-        self.init(icon: icon, accessibilityLabel: accessibilityLabel ?? label, accessibilityHint: accessibilityHint, action: action)
-    }
-    
-    private init(icon: String, label: String? = nil, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(icon: String, label: String? = nil, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        let accessibilityLabel = accessibilityLabel ?? label
+        assert(accessibilityLabel != nil, "Simple button must have an accessibility label.")
+        
         self.icon = icon
         self.label = label
-        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityLabel = accessibilityLabel ?? icon // Use icon name as dirty fallback.
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
@@ -56,15 +49,13 @@ struct SimpleButton: View {
     }
 }
 
-// MARK: Preview
-
 struct SimpleButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             SimpleButton(icon: "favorite", label: "Add to favorites", action: {})
                 .padding()
                 .previewLayout(.sizeThatFits)
-            SimpleButton(icon: "favorite", accessibilityLabel: "Add to favorites", action: {})
+            SimpleButton(icon: "favorite", action: {})
                 .padding()
                 .previewLayout(.sizeThatFits)
         }
