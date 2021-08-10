@@ -317,16 +317,6 @@
 		08B4650526BC07F900454A28 /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650226BC07F900454A28 /* ChannelButton.swift */; };
 		08B4650626BC07F900454A28 /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650226BC07F900454A28 /* ChannelButton.swift */; };
 		08B4650726BC07F900454A28 /* ChannelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650226BC07F900454A28 /* ChannelButton.swift */; };
-		08B4650926BC4B1C00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650A26BC4B1C00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650B26BC4B1C00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650C26BC4B1C00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650D26BC4B1C00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650E26BC4B1D00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4650F26BC4B1D00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4651026BC4B1D00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4651126BC4B1D00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
-		08B4651226BC4B1D00454A28 /* TVChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4650826BC4B1C00454A28 /* TVChannel.swift */; };
 		08B4651426BC58C800454A28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4651326BC58C800454A28 /* DatePickerView.swift */; };
 		08B4651526BC58C800454A28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4651326BC58C800454A28 /* DatePickerView.swift */; };
 		08B4651626BC58C800454A28 /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B4651326BC58C800454A28 /* DatePickerView.swift */; };
@@ -2322,7 +2312,6 @@
 		08AF947E217D27E40028B082 /* SharingItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharingItem.h; sourceTree = "<group>"; };
 		08AF947F217D27E40028B082 /* SharingItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharingItem.m; sourceTree = "<group>"; };
 		08B4650226BC07F900454A28 /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
-		08B4650826BC4B1C00454A28 /* TVChannel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVChannel.swift; sourceTree = "<group>"; };
 		08B4651326BC58C800454A28 /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Application.xcconfig"; sourceTree = "<group>"; };
 		08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3437,7 +3426,6 @@
 				085C0DCD261326C8008E07C8 /* RadioChannel.swift */,
 				088899442077627900242654 /* TVChannel.h */,
 				088899432077627900242654 /* TVChannel.m */,
-				08B4650826BC4B1C00454A28 /* TVChannel.swift */,
 			);
 			path = Configuration;
 			sourceTree = "<group>";
@@ -7607,7 +7595,6 @@
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				08AF2AED26BA83EE00C4745E /* ExpandedButton.swift in Sources */,
-				08B4650926BC4B1C00454A28 /* TVChannel.swift in Sources */,
 				6F12E4E222D8676600BC1718 /* SearchHeaderView.m in Sources */,
 				0832BF1022BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m in Sources */,
 				6F54D30926050FBA008B46FF /* MediaCell.swift in Sources */,
@@ -7990,7 +7977,6 @@
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				6F1EE836268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
-				08B4650A26BC4B1C00454A28 /* TVChannel.swift in Sources */,
 				6FFA68342637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FF0C84826B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
@@ -8203,7 +8189,6 @@
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				6F1EE837268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
-				08B4650B26BC4B1C00454A28 /* TVChannel.swift in Sources */,
 				6FFA68352637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FF0C84926B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
@@ -8416,7 +8401,6 @@
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BA1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				6F1EE838268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
-				08B4650C26BC4B1C00454A28 /* TVChannel.swift in Sources */,
 				6FFA68362637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FF0C84A26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
@@ -8629,7 +8613,6 @@
 				6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BB1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
 				6F1EE839268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
-				08B4650D26BC4B1C00454A28 /* TVChannel.swift in Sources */,
 				6FFA68372637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FF0C84B26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
@@ -8783,7 +8766,6 @@
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FDB2ABA24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
-				08B4650E26BC4B1D00454A28 /* TVChannel.swift in Sources */,
 				6FD9595926989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FFFB99D252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				08F5DBC6262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
@@ -8896,7 +8878,6 @@
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FDB2ABB24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
-				08B4650F26BC4B1D00454A28 /* TVChannel.swift in Sources */,
 				6FD9595A26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FFFB99E252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				08F5DBC7262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
@@ -9009,7 +8990,6 @@
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FDB2ABC24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
-				08B4651026BC4B1D00454A28 /* TVChannel.swift in Sources */,
 				6FD9595B26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FFFB99F252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				08F5DBC8262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
@@ -9122,7 +9102,6 @@
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FDB2ABD24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
-				08B4651126BC4B1D00454A28 /* TVChannel.swift in Sources */,
 				6FD9595C26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FFFB9A0252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				08F5DBC9262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
@@ -9235,7 +9214,6 @@
 				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,
 				6FDB2ABE24E5916F00FF286E /* ImageView.swift in Sources */,
 				6FC413F224EEEDCB00FDF806 /* RadioChannel.m in Sources */,
-				08B4651226BC4B1D00454A28 /* TVChannel.swift in Sources */,
 				6FD9595D26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FFFB9A1252C9EAC004E40AE /* UIKit+Extensions.swift in Sources */,
 				08F5DBCA262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,

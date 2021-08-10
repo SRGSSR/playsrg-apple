@@ -21,16 +21,16 @@ struct ChannelButton: View {
         self.action = action
     }
     
-    private var logoImage: Image? {
-        guard let channel = channel else { return Image("empty-logo") }
-        let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid)
-        return (tvChannel != nil) ? Image(tvChannel!.logoImageName()) : nil
+    private var logoImage: UIImage? {
+        guard let channel = channel else { return UIImage(named: "empty-logo") }
+        guard let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
+        return TVChannelLogoImage(tvChannel)
     }
     
     var body: some View {
         Button(action: action) {
             if let image = logoImage {
-                image
+                Image(uiImage: image)
             }
             else if let title = channel?.title {
                 Text(title)

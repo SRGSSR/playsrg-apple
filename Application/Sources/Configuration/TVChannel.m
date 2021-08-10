@@ -6,10 +6,6 @@
 
 #import "TVChannel.h"
 
-@interface TVChannel ()
-
-@end
-
 @implementation TVChannel
 
 @end
