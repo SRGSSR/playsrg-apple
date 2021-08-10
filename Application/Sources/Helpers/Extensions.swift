@@ -119,6 +119,9 @@ extension Publisher where Failure == Never {
 }
 
 extension View {
+    /**
+     *  Configure accessibility settings. If no hint is provided the item will not be enabled for accessibility.
+     */
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
         Group {
             if let label = label, !label.isEmpty {
