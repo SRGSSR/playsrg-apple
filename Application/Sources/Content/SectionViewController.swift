@@ -264,10 +264,12 @@ final class SectionViewController: UIViewController {
             self.dataSource.apply(Self.snapshot(from: state)) {
                 #if os(iOS)
                 self.collectionView.reloadSectionIndexBar()
-                self.collectionView.setSectionBarAppearance(indexColor: .white,
+                
+                // Apply colors when the section bar might be visible.
+                self.collectionView.setSectionBarAppearance(indexColor: .srgGray96,
                                                             indexBackgroundColor: .init(white: 0, alpha: 0.3))
                 
-                // Avoid stopping scrolling
+                // Avoid stopping scrolling.
                 // See http://stackoverflow.com/a/31681037/760435
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
