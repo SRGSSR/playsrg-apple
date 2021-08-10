@@ -11,7 +11,7 @@ import Combine
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var items: [Item] = []
     @Published var selectedChannel: SRGChannel?
-    @Published var selectedDay: (day: SRGDay, atCurrentTime: Bool)
+    @Published var selectedDate: Date
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -19,12 +19,12 @@ final class ProgramGuideViewModel: ObservableObject {
         return (0..<2).map { Item.channelPlaceholder(index: $0) }
     }
     
-    init(day: SRGDay, atCurrentTime: Bool) {
-        self.selectedDay = (day, atCurrentTime)
+    init(date: Date) {
+        self.selectedDate = date
         self.items = placeholderItems
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day)
+            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: SRGDay(from: date))
                 .map { $0.map(\.channel) }
                 .catch { _ in
                     return Just((self != nil) ? Item.channels(from: self!.items) : [])
@@ -47,19 +47,26 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func previousDay() {
-        selectedDay = (SRGDay(byAddingDays: -1, months: 0, years: 0, to: selectedDay.day), false)
+        selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) ?? selectedDate
     }
     
     func nextDay() {
-        selectedDay = (SRGDay(byAddingDays: 1, months: 0, years: 0, to: selectedDay.day), false)
+        selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? selectedDate
     }
     
     func yesterday() {
-        selectedDay = (SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today), false)
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: selectedDate)
+        let today = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: Date()) ?? Date()
+        selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: today) ?? today
     }
     
     func todayAtCurrentTime() {
-        selectedDay = (SRGDay.today, true)
+        selectedDate = Date()
+    }
+    
+    func atDay(_ day: SRGDay) {
+        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: selectedDate)
+        selectedDate = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: day.date) ?? day.date
     }
     
     enum Item: Hashable {

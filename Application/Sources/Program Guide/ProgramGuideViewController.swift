@@ -19,8 +19,8 @@ final class ProgramGuideViewController: UIViewController {
     
     private var pageViewControllerAnimated: Bool = false
     
-    init(day: SRGDay = .today) {
-        model = ProgramGuideViewModel(day: day, atCurrentTime: true)
+    init(date: Date = Date()) {
+        model = ProgramGuideViewModel(date: date)
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
@@ -73,54 +73,26 @@ final class ProgramGuideViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(day: model.selectedDay.day, channel: model.selectedChannel)
+        let dailyViewController = ProgramGuideDailyViewController(day: SRGDay(from: model.selectedDate), programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false, completion: nil)
         
-        model.$selectedChannel
-            .sink { [weak self] selectedChannel in
-                self?.reloadData(with: selectedChannel)
-            }
-            .store(in: &cancellables)
-        
-        model.$selectedDay
-            .sink { [weak self] selectedDay in
-                self?.switchToDay(selectedDay.day, atCurrentTime: selectedDay.atCurrentTime)
+        model.$selectedDate
+            .sink { [weak self] selectedDate in
+                guard let self = self else { return }
+                self.switchToDate(selectedDate)
             }
             .store(in: &cancellables)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if model.selectedDay.atCurrentTime, let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
-            currentViewController.needToScrollToCurrentTime()
-        }
-    }
-    
-    private func reloadData(with selectedChannel: SRGChannel?) {
-        // See https://stackoverflow.com/a/27984538/760435
-        for viewController in pageViewController.children {
-            if let dailyViewController = viewController as? ProgramGuideDailyViewController {
-                dailyViewController.channel = selectedChannel
-            }
-        }
-    }
-    
-    private func switchToDay(_ day: SRGDay, atCurrentTime: Bool) {
+    private func switchToDate(_ date: Date) {
         guard !pageViewControllerAnimated else { return }
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
         
+        let day = SRGDay(from: date)
         if currentViewController.day != day {
             let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
-            let dailyViewController = ProgramGuideDailyViewController(day: day, channel: model.selectedChannel)
-            pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true) { completed in
-                if completed, atCurrentTime {
-                    dailyViewController.needToScrollToCurrentTime()
-                }
-            }
-        }
-        else if atCurrentTime {
-            currentViewController.needToScrollToCurrentTime()
+            let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
+            pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true)
         }
     }
     
@@ -145,13 +117,13 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
         let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: currentViewController.day)
-        return ProgramGuideDailyViewController(day: previousDay, channel: model.selectedChannel)
+        return ProgramGuideDailyViewController(day: previousDay, programGuideModel: model)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
         let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: currentViewController.day)
-        return ProgramGuideDailyViewController(day: nextDay, channel: model.selectedChannel)
+        return ProgramGuideDailyViewController(day: nextDay, programGuideModel: model)
     }
 }
 
@@ -160,7 +132,7 @@ extension ProgramGuideViewController: UIPageViewControllerDelegate {
         pageViewControllerAnimated = true
         
         guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
-        model.selectedDay = (currentViewController.day, false)
+        model.atDay(currentViewController.day)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
@@ -168,7 +140,7 @@ extension ProgramGuideViewController: UIPageViewControllerDelegate {
             pageViewControllerAnimated = true
             
             guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
-            model.selectedDay = (currentViewController.day, false)
+            model.atDay(currentViewController.day)
         }
         else {
             pageViewControllerAnimated = false

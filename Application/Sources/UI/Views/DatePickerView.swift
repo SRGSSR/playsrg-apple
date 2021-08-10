@@ -9,7 +9,7 @@ import SwiftUI
 /// Behavior: h-hug, v-hug
 struct DatePickerView: View {
     @Binding var isDatePickerPresented: Bool
-    @Binding var day: SRGDay
+    @Binding var savedDate: Date
     @State private var selectedDate: Date = Date()
     
     var body: some View {
@@ -24,7 +24,7 @@ struct DatePickerView: View {
                     isDatePickerPresented = false
                 }
                 ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                    day = SRGDay(from: selectedDate)
+                    savedDate = selectedDate
                     isDatePickerPresented = false
                 }
             }
@@ -33,14 +33,14 @@ struct DatePickerView: View {
         .padding()
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
-            selectedDate = day.date
+            selectedDate = savedDate
         }
     }
 }
 
 struct DatePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DatePickerView(isDatePickerPresented: .constant(true), day: .constant(SRGDay.today))
+        DatePickerView(isDatePickerPresented: .constant(true), savedDate: .constant(Date()))
             .previewLayout(.sizeThatFits)
     }
 }

@@ -12,24 +12,18 @@ import UIKit
 final class ProgramGuideDailyViewController: UIViewController {
     let model: ProgramGuideDailyViewModel
     
-    var channel: SRGChannel? {
-        didSet {
-            reloadData(for: model.state)
-        }
-    }
-    
     var day: SRGDay {
         return model.day
     }
+    
+    private var programGuideModel: ProgramGuideViewModel
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
-    
-    private var hasToScrollToCurrentTime: Bool = false
-    
+        
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
         snapshot.appendSections([.main])
@@ -37,9 +31,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         return snapshot
     }
     
-    init(day: SRGDay, channel: SRGChannel?) {
+    init(day: SRGDay, programGuideModel: ProgramGuideViewModel) {
         model = ProgramGuideDailyViewModel(day: day)
-        self.channel = channel
+        self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -88,6 +82,13 @@ final class ProgramGuideDailyViewController: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+        
+        programGuideModel.$selectedChannel
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+                self.reloadData(for: self.model.state)
+            }
+            .store(in: &cancellables)
     }
     
     func reloadData(for state: ProgramGuideDailyViewModel.State) {
@@ -99,40 +100,27 @@ final class ProgramGuideDailyViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyView.content = state.programs(for: programGuideModel.selectedChannel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state, for: self.channel)) {
-                if self.hasToScrollToCurrentTime, case .loaded = self.model.state, self.channel != nil {
-                    self.scrollToCurrentTime()
+            dataSource.apply(Self.snapshot(from: state, for: self.programGuideModel.selectedChannel)) {
+                if case .loaded = self.model.state {
+                    self.scrollToTime()
                 }
             }
         }
     }
     
-    func needToScrollToCurrentTime() {
-        if case .loaded = model.state, channel != nil {
-            scrollToCurrentTime()
-        }
-        else {
-            hasToScrollToCurrentTime = true
-        }
-    }
-    
-    private func scrollToCurrentTime() {
-        let programs = model.state.programs(for: channel)
+    func scrollToTime() {
+        guard SRGDay(from: programGuideModel.selectedDate) == model.day else { return }
+        
+        let programs = model.state.programs(for: programGuideModel.selectedChannel)
         if !programs.isEmpty {
-            let program = programs.filter { $0.endDate > Self.currentTimeAtDay(model.day) }.first
+            let program = programs.filter { $0.endDate > programGuideModel.selectedDate }.first
             let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
-            collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: true)
+            collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
         }
-        hasToScrollToCurrentTime = false
-    }
-    
-    static private func currentTimeAtDay(_ day: SRGDay) -> Date {
-        let timeIntervalSinceMidnight = Date().timeIntervalSince(SRGDay.today.date)
-        return day.date.addingTimeInterval(timeIntervalSinceMidnight)
     }
 }
 
@@ -152,7 +140,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
-        guard let channel = channel else {
+        guard let channel = programGuideModel.selectedChannel else {
             self.deselectItems(in: collectionView, animated: true)
             return
         }

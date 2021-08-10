@@ -13,8 +13,8 @@ struct ProgramGuideHeaderView: View {
     
     @State var isDatePickerPresented: Bool = false
     
-    private static func formattedDate(for day: SRGDay) -> String {
-        return DateFormatter.play_relative.string(from: day.date).capitalizedFirstLetter
+    private static func formattedDate(for date: Date) -> String {
+        return DateFormatter.play_relative.string(from: date).capitalizedFirstLetter
     }
     
     var body: some View {
@@ -50,7 +50,7 @@ struct ProgramGuideHeaderView: View {
                 SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
                     model.previousDay()
                 }
-                Text(Self.formattedDate(for: model.selectedDay.day))
+                Text(Self.formattedDate(for: model.selectedDate))
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
@@ -64,8 +64,7 @@ struct ProgramGuideHeaderView: View {
             ZStack {
                 Color.srgGray23
                     .edgesIgnoringSafeArea(.all)
-                DatePickerView(isDatePickerPresented: $isDatePickerPresented, day: $model.selectedDay.day)
-                    .animation(.spring())
+                DatePickerView(isDatePickerPresented: $isDatePickerPresented, savedDate: $model.selectedDate)
             }
         }
     }
@@ -73,7 +72,7 @@ struct ProgramGuideHeaderView: View {
 
 struct ProgramGuideHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramGuideHeaderView(model: ProgramGuideViewModel(day: SRGDay.today, atCurrentTime: true))
+        ProgramGuideHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 375, height: 180))
     }
 }
