@@ -146,7 +146,22 @@ final class ProgramViewModel: ObservableObject {
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
-                appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                if HistoryCanResumePlaybackForMedia(media) {
+                    let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
+                                                            message: NSLocalizedString("You already played this content", comment: "Resume playback alert explanation"),
+                                                            preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume playback", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
+                        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    }))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
+                        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    }))
+                    alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
+                    appDelegate.rootTabBarController.play_top.present(alertController, animated: true, completion: nil)
+                }
+                else {
+                    appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                }
             }
         )
     }
