@@ -352,9 +352,8 @@ extension PageViewController: PlayApplicationNavigation {
             return true
         case .showAZ:
             if let navigationController = navigationController {
-                let index = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                // FIXME: Implement initial collection section selection based on index
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid)
+                let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -395,7 +394,6 @@ extension PageViewController: SRGAnalyticsViewTracking {
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
         if let navigationController = navigationController {
-            // FIXME: Implement initial collection section selection based on index
             let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
             navigationController.pushViewController(showsViewController, animated: true)
         }

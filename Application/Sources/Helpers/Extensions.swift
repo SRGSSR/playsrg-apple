@@ -116,8 +116,8 @@ extension Collection {
     }
     
     /**
-     *  Groups items from the receiver into an alphabetical dictionary (whose keys are letters in alphabetical order).
-     *  Preserves the initial ordering in each group. Group items starting with no letter under '#'.
+     *  Groups items from the receiver into an alphabetical dictionary (whose keys are lowercase letters in alphabetical
+     *  order). Preserves the initial ordering in each group. Group items starting with no letter under '#'.
      */
     func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> OrderedDictionary<Character, [Self.Element]> where S: StringProtocol {
         return try OrderedDictionary<Character, [Self.Element]>(grouping: self) { element in

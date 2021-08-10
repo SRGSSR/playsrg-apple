@@ -14,6 +14,7 @@ import UIKit
 
 final class SectionViewController: UIViewController {
     let model: SectionViewModel
+    var initialSectionId: String?
     let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
@@ -50,8 +51,13 @@ final class SectionViewController: UIViewController {
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering? = nil, fromPushNotification: Bool = false) {
+    /**
+     *  Use `startSectionId` to provide the collection view section id where the view should initially open. If not found or
+     *  specified the view opens at its top.
+     */
+    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
+        self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
@@ -268,6 +274,7 @@ final class SectionViewController: UIViewController {
                 // Apply colors when the section bar might be visible.
                 self.collectionView.setSectionBarAppearance(indexColor: .srgGray96,
                                                             indexBackgroundColor: .init(white: 0, alpha: 0.3))
+                self.scrollToInitialSection()
                 
                 // Avoid stopping scrolling.
                 // See http://stackoverflow.com/a/31681037/760435
@@ -277,6 +284,18 @@ final class SectionViewController: UIViewController {
                 #endif
             }
         }
+    }
+    
+    private func scrollToInitialSection() {
+        guard initialSectionId != nil else { return }
+        
+        let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
+        guard !sectionIdentifiers.isEmpty else { return }
+        
+        if let index = sectionIdentifiers.firstIndex(where: { $0.id == initialSectionId }) {
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
+        }
+        initialSectionId = nil
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
@@ -394,13 +413,17 @@ extension SectionViewController {
         }
     }
     
-    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)))
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         }
         else {
-            return SectionViewController(section: .configured(.tvAllShows))
+            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
+    }
+    
+    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+        return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {

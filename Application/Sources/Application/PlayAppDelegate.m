@@ -748,19 +748,6 @@ static void *s_kvoContext = &s_kvoContext;
     }] resume];
 }
 
-- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
-{
-    // FIXME: Implement initial collection section selection based on index
-    SectionViewController *showsViewController = [SectionViewController showsViewControllerForChannelUid:radioChannel.uid];
-    [self.rootTabBarController pushViewController:showsViewController animated:YES];
-}
-
-- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel
-{
-    CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
-    [self.rootTabBarController pushViewController:calendarViewController animated:YES];
-}
-
 #pragma mark Forced updates
 
 - (void)checkForForcedUpdates
