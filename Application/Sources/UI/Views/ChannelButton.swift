@@ -7,6 +7,8 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-hug, v-hug
 struct ChannelButton: View {
     let channel: SRGChannel?
@@ -22,8 +24,7 @@ struct ChannelButton: View {
     }
     
     private var logoImage: UIImage? {
-        guard let channel = channel else { return UIImage(named: "empty-logo") }
-        guard let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
+        guard let channel = channel, let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
         return TVChannelLogoImage(tvChannel)
     }
     
@@ -38,6 +39,7 @@ struct ChannelButton: View {
                     .lineLimit(1)
             }
         }
+        .frame(minWidth: 40, minHeight: 22)
         .redactedIfNil(channel)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
@@ -47,6 +49,8 @@ struct ChannelButton: View {
         .accessibilityElement(label: channel?.title, hint: accessibilityHint, traits: .isButton)
     }
 }
+
+// MARK: Preview
 
 struct ChannelButton_Previews: PreviewProvider {
     static var previews: some View {
