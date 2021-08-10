@@ -20,13 +20,13 @@ struct ProgramGuideHeaderView: View {
     var body: some View {
         VStack(spacing: 20) {
             HStack(spacing: 10) {
-                ExpandedButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
                     model.yesterday()
                 }
-                ExpandedButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
+                ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     isDatePickerPresented.toggle()
                 }
-                ExpandedButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.todayAtCurrentTime()
                 }
             }

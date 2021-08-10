@@ -47,10 +47,10 @@ struct ShowAccessCell: View {
     var body: some View {
         ResponderChain { firstResponder in
             HStack {
-                ExpandedButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
+                ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
                 }
-                ExpandedButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
+                ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
                     firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
                 }
             }

@@ -8,7 +8,6 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct DatePickerView: View {
-    
     @Binding var isDatePickerPresented: Bool
     @Binding var day: SRGDay
     @State private var selectedDate: Date = Date()
@@ -21,10 +20,10 @@ struct DatePickerView: View {
                 .accentColor(.srgRed)
             Divider()
             HStack {
-                ExpandedButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
+                ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
                     isDatePickerPresented = false
                 }
-                ExpandedButton(label: NSLocalizedString("Done", comment: "Done button title")) {
+                ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
                     day = SRGDay(from: selectedDate)
                     isDatePickerPresented = false
                 }

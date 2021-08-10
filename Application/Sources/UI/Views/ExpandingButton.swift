@@ -7,8 +7,10 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-exp, v-exp
-struct ExpandedButton: View {
+struct ExpandingButton: View {
     let icon: String?
     let label: String
     let accessibilityLabel: String
@@ -42,16 +44,18 @@ struct ExpandedButton: View {
     }
 }
 
-struct ExpandedButton_Previews: PreviewProvider {
+// MARK: Preview
+
+struct ExpandingButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ExpandedButton(icon: "a_to_z", label: "A to Z", action: {})
+            ExpandingButton(icon: "a_to_z", label: "A to Z", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 240, height: 120))
-            ExpandedButton(icon: "a_to_z", label: "A to Z", action: {})
+            ExpandingButton(icon: "a_to_z", label: "A to Z", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
-            ExpandedButton(label: "A to Z", action: {})
+            ExpandingButton(label: "A to Z", action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
         }
