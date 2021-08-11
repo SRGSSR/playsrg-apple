@@ -15,7 +15,7 @@ final class PageViewController: UIViewController {
     private let model: PageViewModel
     
     private var cancellables = Set<AnyCancellable>()
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
@@ -401,13 +401,13 @@ extension PageViewController: ShowAccessCellActions {
     
     func openShowByDate() {
         if let navigationController = navigationController {
-            if let radioChannel = radioChannel {
-                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-                navigationController.pushViewController(calendarViewController, animated: true)
-            }
-            else {
+            switch model.id {
+            case .video:
                 let programGuideViewController = ProgramGuideViewController()
                 navigationController.pushViewController(programGuideViewController, animated: true)
+            default:
+                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
+                navigationController.pushViewController(calendarViewController, animated: true)
             }
         }
     }
