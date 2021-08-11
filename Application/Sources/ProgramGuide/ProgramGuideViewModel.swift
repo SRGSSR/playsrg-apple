@@ -20,6 +20,10 @@ final class ProgramGuideViewModel: ObservableObject {
         return (0..<2).map { Item.channelPlaceholder(index: $0) }
     }
     
+    var dateString: String {
+        return DateFormatter.play_relative.string(from: selectedDate).capitalizedFirstLetter
+    }
+    
     init(date: Date) {
         self.selectedDate = date
         self.items = placeholderItems

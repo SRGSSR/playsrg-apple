@@ -11,10 +11,6 @@ import SwiftUI
 struct ProgramGuideHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
-    private static func formattedDate(for date: Date) -> String {
-        return DateFormatter.play_relative.string(from: date).capitalizedFirstLetter
-    }
-    
     var body: some View {
         VStack(spacing: 20) {
             HStack(spacing: 10) {
@@ -48,7 +44,7 @@ struct ProgramGuideHeaderView: View {
                 SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
                     model.previousDay()
                 }
-                Text(Self.formattedDate(for: model.selectedDate))
+                Text(model.dateString)
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
