@@ -8,6 +8,7 @@ import SwiftUI
 
 // MARK: View
 
+/// Behavior: h-exp, v-exp
 struct ProgramGuideHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
@@ -27,7 +28,7 @@ struct ProgramGuideHeaderView: View {
         }
     }
     
-    /// Behavior: h-exp, v-hug
+    /// Behavior: h-exp, v-exp
     private struct DaySelector: View {
         @ObservedObject var model: ProgramGuideViewModel
         
