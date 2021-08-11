@@ -25,7 +25,7 @@ struct ProgramGuideHeaderView: View {
                     model.isDatePickerPresented.toggle()
                 }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                    model.todayAtCurrentTime()
+                    model.now()
                 }
             }
             .frame(maxWidth: .infinity)

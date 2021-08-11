@@ -61,7 +61,7 @@ final class ProgramGuideViewModel: ObservableObject {
         selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: today) ?? today
     }
     
-    func todayAtCurrentTime() {
+    func now() {
         selectedDate = Date()
     }
     
