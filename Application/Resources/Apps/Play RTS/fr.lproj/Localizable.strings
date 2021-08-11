@@ -90,6 +90,8 @@
 /* Short title displayed in home pages on a button. */
 "By date" = "Par date";
 
+"Calendar" = "Calendrier";
+
 /* Label of the button to close the media sharing menu
    Title of a cancel button
    Title of the cancel button in the alert view when deleting a download in the player view
@@ -359,6 +361,8 @@
 /* Subscription label to be notified in the show view */
 "Notify me" = "Être notifié";
 
+"Now" = "Maintenant";
+
 /* Title of the button displayed at the end of an onboarding
    Title of the button when the user subscribed to all TV and radio shows
    Title of the search settings button to apply settings */
@@ -388,6 +392,8 @@
 /* Profile section header
    Title displayed at the top of the profile view */
 "Profile" = "Profil";
+
+"Program guide" = "Guide des programmes";
 
 /* Search settings section header */
 "Properties" = "Propriétés";
@@ -583,6 +589,8 @@
 
 /* Title label to present main TV livestreams */
 "TV channels" = "Chaînes TV";
+
+"TV guide" = "Guide TV";
 
 /* Default text displayed when no search criterium has been entered
    Message displayed when there is no search criterium entered */
