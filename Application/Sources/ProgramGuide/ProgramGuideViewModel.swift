@@ -12,6 +12,7 @@ final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var items: [Item] = []
     @Published var selectedChannel: SRGChannel?
     @Published var selectedDate: Date
+    @Published var isDatePickerPresented: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
     
