@@ -26,6 +26,7 @@ struct ProgramCell: View {
                 if let timeRange = model.timeRange {
                     Text(timeRange)
                         .srgFont(.subtitle1)
+                        .lineLimit(2)
                         .foregroundColor(.srgGray96)
                         .frame(width: timeRangeWidth, alignment: .leading)
                 }
@@ -36,11 +37,11 @@ struct ProgramCell: View {
                 if let title = program.title {
                     Text(title)
                         .srgFont(.body)
+                        .lineLimit(1)
                         .foregroundColor(.srgGrayC7)
                 }
                 Spacer()
             }
-            .lineLimit(2)
             .padding(.horizontal, 16)
             .frame(maxHeight: .infinity)
             .background(Color.srgGray23)
