@@ -10,19 +10,19 @@ import UIKit
 // MARK: View controller
 
 final class ProgramGuideDailyViewController: UIViewController {
-    let model: ProgramGuideDailyViewModel
+    private let model: ProgramGuideDailyViewModel
     
-    var day: SRGDay {
-        return model.day
-    }
-    
-    private var programGuideModel: ProgramGuideViewModel
+    private let programGuideModel: ProgramGuideViewModel
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
+    
+    var day: SRGDay {
+        return model.day
+    }
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
