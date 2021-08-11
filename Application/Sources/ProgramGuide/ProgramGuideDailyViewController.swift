@@ -132,7 +132,7 @@ final class ProgramGuideDailyViewController: UIViewController {
             let program = programs.filter { $0.endDate > dateSelection.date }.first
             let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
             if !collectionView.indexPathsForVisibleItems.contains(IndexPath(row: row, section: 0)) {
-                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
+                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: true)
             }
         }
     }
