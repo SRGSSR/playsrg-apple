@@ -3586,7 +3586,7 @@
 				6F00BFD320A9C630009795AF /* Onboarding */,
 				E66BEC181DA7FCC000AD4450 /* Player */,
 				087584C623A0008500FA7207 /* Profile */,
-				6F93D50726A00CC900711039 /* Program Guide */,
+				6F93D50726A00CC900711039 /* ProgramGuide */,
 				0875853323A3DDB800FA7207 /* RadioChannels */,
 				E694A9D61D65EFF300372DF0 /* Search */,
 				0806E7B41D50D8DD002ED406 /* Settings */,
@@ -4129,7 +4129,7 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		6F93D50726A00CC900711039 /* Program Guide */ = {
+		6F93D50726A00CC900711039 /* ProgramGuide */ = {
 			isa = PBXGroup;
 			children = (
 				6F2E160826A84ED200F3DC89 /* ProgramCell.swift */,
@@ -4142,7 +4142,7 @@
 				6F054FC526B98C44007A34F8 /* ProgramView.swift */,
 				6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */,
 			);
-			path = "Program Guide";
+			path = ProgramGuide;
 			sourceTree = "<group>";
 		};
 		6F9CEA6321884ACC007DE35F /* History */ = {
