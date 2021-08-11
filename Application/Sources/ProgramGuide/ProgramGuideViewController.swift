@@ -77,9 +77,9 @@ final class ProgramGuideViewController: UIViewController {
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
         
         model.$dateSelection
-            .sink { [weak self] selectedDate in
+            .sink { [weak self] dateSelection in
                 guard let self = self else { return }
-                self.switchToDay(selectedDate.day)
+                self.switchToDay(dateSelection.day)
             }
             .store(in: &cancellables)
     }
