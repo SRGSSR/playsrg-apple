@@ -38,9 +38,7 @@ final class ProgramGuideViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: SRGDay(from: date))
                 .map { $0.map(\.channel) }
-                .catch { _ in
-                    return Just(self?.channels ?? [])
-                }
+                .replaceError(with: self?.channels ?? [])
         }
         .map { [weak self] channels in
             if let selectedChannel = self?.selectedChannel, channels.contains(selectedChannel) {
@@ -79,6 +77,8 @@ final class ProgramGuideViewModel: ObservableObject {
     }
 }
 
+// MARK: Types
+
 extension ProgramGuideViewModel {
     struct Data {
         let channels: [SRGChannel]
@@ -87,7 +87,7 @@ extension ProgramGuideViewModel {
     
     struct DateSelection: Hashable {
         let day: SRGDay
-        let time: TimeInterval
+        let time: TimeInterval      // Offset from midnight
         
         var date: Date {
             return day.date.addingTimeInterval(time)
