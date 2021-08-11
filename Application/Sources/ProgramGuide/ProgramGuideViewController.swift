@@ -85,14 +85,15 @@ final class ProgramGuideViewController: UIViewController {
     }
     
     private func switchToDay(_ day: SRGDay) {
-        guard !pageViewControllerAnimated else { return }
-        guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
-        
-        if currentViewController.day != day {
-            let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
-            let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
-            pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true)
+        guard !pageViewControllerAnimated,
+              let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
+              currentViewController.day != day else {
+            return
         }
+        
+        let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
+        let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
+        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
