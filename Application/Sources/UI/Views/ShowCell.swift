@@ -87,6 +87,9 @@ struct ShowCell: View {
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 if style == .favorite, model.isSubscribed {
                     Image("subscription_full")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 16)
                 }
             }
             .foregroundColor(.srgGrayC7)
