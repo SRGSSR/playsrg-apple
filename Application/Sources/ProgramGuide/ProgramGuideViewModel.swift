@@ -9,15 +9,23 @@ import Combine
 // MARK: View model
 
 final class ProgramGuideViewModel: ObservableObject {
-    @Published private(set) var items: [Item] = []
-    @Published var selectedChannel: SRGChannel?
+    @Published private(set) var data = Data(channels: [], selectedChannel: nil)
     @Published private(set) var dateSelection: DateSelection
     @Published var isDatePickerPresented: Bool = false
     
-    private var cancellables = Set<AnyCancellable>()
+    var channels: [SRGChannel] {
+        return data.channels
+    }
     
-    private var placeholderItems: [Item] {
-        return (0..<2).map { Item.channelPlaceholder(index: $0) }
+    var selectedChannel: SRGChannel? {
+        get {
+            return data.selectedChannel
+        }
+        set {
+            if let newValue = newValue, channels.contains(newValue) {
+                data = Data(channels: channels, selectedChannel: newValue)
+            }
+        }
     }
     
     var dateString: String {
@@ -26,29 +34,24 @@ final class ProgramGuideViewModel: ObservableObject {
     
     init(date: Date) {
         self.dateSelection = DateSelection.atDate(date)
-        self.items = placeholderItems
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: SRGDay(from: date))
                 .map { $0.map(\.channel) }
                 .catch { _ in
-                    return Just((self != nil) ? Item.channels(from: self!.items) : [])
+                    return Just(self?.channels ?? [])
                 }
         }
-        .receive(on: DispatchQueue.main)
-        .sink { [weak self] channels in
-            guard let self = self else { return }
-            if !channels.isEmpty {
-                self.items = channels.map { Item.channel($0) }
-                if self.selectedChannel == nil {
-                    self.selectedChannel = channels.first
-                }
+        .map { [weak self] channels in
+            if let selectedChannel = self?.selectedChannel, channels.contains(selectedChannel) {
+                return Data(channels: channels, selectedChannel: selectedChannel)
             }
             else {
-                self.items = self.placeholderItems
+                return Data(channels: channels, selectedChannel: channels.first)
             }
         }
-        .store(in: &cancellables)
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$data)
     }
     
     func previousDay() {
@@ -74,34 +77,14 @@ final class ProgramGuideViewModel: ObservableObject {
     func atTime(of date: Date) {
         dateSelection = dateSelection.atTime(of: date)
     }
-    
-    enum Item: Hashable {
-        case channelPlaceholder(index: Int)
-        case channel(_ channel: SRGChannel)
-        
-        var channel: SRGChannel? {
-            if case let .channel(channel) = self {
-                return channel
-            }
-            else {
-                return nil
-            }
-        }
-        
-        static func channels(from items: [Item]) -> [SRGChannel] {
-            return items.compactMap { item in
-                if case let .channel(channel) = item {
-                    return channel
-                }
-                else {
-                    return nil
-                }
-            }
-        }
-    }
 }
 
 extension ProgramGuideViewModel {
+    struct Data {
+        let channels: [SRGChannel]
+        let selectedChannel: SRGChannel?
+    }
+    
     struct DateSelection: Hashable {
         let day: SRGDay
         let time: TimeInterval

@@ -83,9 +83,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$selectedChannel
-            .sink { [weak self] selectedChannel in
-                self?.reloadData(for: selectedChannel)
+        programGuideModel.$data
+            .sink { [weak self] data in
+                self?.reloadData(for: data.selectedChannel)
             }
             .store(in: &cancellables)
         
@@ -97,7 +97,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
-        self.reloadData(for: model.state, channel: channel)
+        reloadData(for: model.state, channel: channel)
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {

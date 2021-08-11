@@ -28,13 +28,18 @@ struct ProgramGuideHeaderView: View {
             
             ScrollView(.horizontal) {
                 HStack(spacing: 10) {
-                    ForEach(model.items, id: \.self) { channelItem in
-                        ChannelButton(channel: channelItem.channel) {
-                            if let channel = channelItem.channel {
+                    if !model.channels.isEmpty {
+                        ForEach(model.channels, id: \.uid) { channel in
+                            ChannelButton(channel: channel) {
                                 model.selectedChannel = channel
                             }
+                            .environment(\.isSelected, channel ==  model.selectedChannel)
                         }
-                        .environment(\.isSelected, channelItem.channel != nil && channelItem.channel == model.selectedChannel)
+                    }
+                    else {
+                        ForEach(0..<2) { _ in
+                            ChannelButton(channel: nil, action: {})
+                        }
                     }
                 }
             }
