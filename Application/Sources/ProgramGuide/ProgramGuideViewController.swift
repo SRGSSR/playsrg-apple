@@ -74,7 +74,7 @@ final class ProgramGuideViewController: UIViewController {
         pageViewController.didMove(toParent: self)
         
         let dailyViewController = ProgramGuideDailyViewController(day: model.dateSelection.day, programGuideModel: model)
-        pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false, completion: nil)
+        pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
         
         model.$dateSelection
             .sink { [weak self] selectedDate in
@@ -93,7 +93,9 @@ final class ProgramGuideViewController: UIViewController {
         
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
-        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true)
+        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: { [weak self] _ in
+            self?.pageViewControllerAnimated = false
+        })
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
