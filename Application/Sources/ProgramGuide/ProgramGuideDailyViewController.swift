@@ -89,9 +89,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$selectedDate
-            .sink { [weak self] selectedDate in
-                self?.scrollToCurrentProgram(at: selectedDate)
+        programGuideModel.$dateSelection
+            .sink { [weak self] dateSelection in
+                self?.scrollToCurrentProgram(at: dateSelection)
             }
             .store(in: &cancellables)
     }
@@ -123,13 +123,13 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
     }
     
-    private func scrollToCurrentProgram(at date: Date? = nil) {
-        let date = date ?? programGuideModel.selectedDate
-        guard SRGDay(from: date) == model.day else { return }
+    private func scrollToCurrentProgram(at dateSelection: ProgramGuideViewModel.DateSelection? = nil) {
+        let dateSelection = dateSelection ?? programGuideModel.dateSelection
+        guard dateSelection.day == model.day else { return }
         
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
         if !programs.isEmpty {
-            let program = programs.filter { $0.endDate > date }.first
+            let program = programs.filter { $0.endDate > dateSelection.date }.first
             let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
             if !collectionView.indexPathsForVisibleItems.contains(IndexPath(row: row, section: 0)) {
                 collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
@@ -176,7 +176,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
         
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
         if programs.count > index {
-            programGuideModel.selectedDate = programs[index].startDate
+            programGuideModel.atTime(of: programs[index].startDate)
         }
     }
 }

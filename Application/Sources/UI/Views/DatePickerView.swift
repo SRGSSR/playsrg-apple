@@ -8,8 +8,7 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct DatePickerView: View {
-    @Binding var isDatePickerPresented: Bool
-    @Binding var savedDate: Date
+    @ObservedObject var model: ProgramGuideViewModel
     @State private var selectedDate: Date = Date()
     
     var body: some View {
@@ -21,11 +20,11 @@ struct DatePickerView: View {
             Divider()
             HStack {
                 ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
-                    isDatePickerPresented = false
+                    model.isDatePickerPresented = false
                 }
                 ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                    savedDate = selectedDate
-                    isDatePickerPresented = false
+                    model.atDay(SRGDay(from: selectedDate))
+                    model.isDatePickerPresented = false
                 }
             }
             .frame(height: 40)
@@ -33,14 +32,14 @@ struct DatePickerView: View {
         .padding()
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
-            selectedDate = savedDate
+            selectedDate = model.dateSelection.day.date
         }
     }
 }
 
 struct DatePickerView_Previews: PreviewProvider {
     static var previews: some View {
-        DatePickerView(isDatePickerPresented: .constant(true), savedDate: .constant(Date()))
+        DatePickerView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.sizeThatFits)
     }
 }

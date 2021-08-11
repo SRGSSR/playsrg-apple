@@ -73,22 +73,21 @@ final class ProgramGuideViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(day: SRGDay(from: model.selectedDate), programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(day: model.dateSelection.day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false, completion: nil)
         
-        model.$selectedDate
+        model.$dateSelection
             .sink { [weak self] selectedDate in
                 guard let self = self else { return }
-                self.switchToDate(selectedDate)
+                self.switchToDay(selectedDate.day)
             }
             .store(in: &cancellables)
     }
     
-    private func switchToDate(_ date: Date) {
+    private func switchToDay(_ day: SRGDay) {
         guard !pageViewControllerAnimated else { return }
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController else { return }
         
-        let day = SRGDay(from: date)
         if currentViewController.day != day {
             let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
             let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)

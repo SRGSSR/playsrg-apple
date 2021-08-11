@@ -58,7 +58,7 @@ struct ProgramGuideHeaderView: View {
             ZStack {
                 Color.srgGray23
                     .edgesIgnoringSafeArea(.all)
-                DatePickerView(isDatePickerPresented: $model.isDatePickerPresented, savedDate: $model.selectedDate)
+                DatePickerView(model: model)
             }
         }
     }

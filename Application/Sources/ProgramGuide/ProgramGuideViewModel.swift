@@ -11,7 +11,7 @@ import Combine
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var items: [Item] = []
     @Published var selectedChannel: SRGChannel?
-    @Published var selectedDate: Date
+    @Published private(set) var dateSelection: DateSelection
     @Published var isDatePickerPresented: Bool = false
     
     private var cancellables = Set<AnyCancellable>()
@@ -21,11 +21,11 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     var dateString: String {
-        return DateFormatter.play_relative.string(from: selectedDate).capitalizedFirstLetter
+        return DateFormatter.play_relative.string(from: dateSelection.day.date).capitalizedFirstLetter
     }
     
     init(date: Date) {
-        self.selectedDate = date
+        self.dateSelection = DateSelection.atDate(date)
         self.items = placeholderItems
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
@@ -52,26 +52,27 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func previousDay() {
-        selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: selectedDate) ?? selectedDate
+        dateSelection = dateSelection.previousDay()
     }
     
     func nextDay() {
-        selectedDate = Calendar.current.date(byAdding: .day, value: 1, to: selectedDate) ?? selectedDate
+        dateSelection = dateSelection.nextDay()
     }
     
     func yesterday() {
-        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: selectedDate)
-        let today = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: Date()) ?? Date()
-        selectedDate = Calendar.current.date(byAdding: .day, value: -1, to: today) ?? today
+        dateSelection = dateSelection.yesterday()
     }
     
     func now() {
-        selectedDate = Date()
+        dateSelection = DateSelection.now()
     }
     
     func atDay(_ day: SRGDay) {
-        let components = Calendar.current.dateComponents([.hour, .minute, .second], from: selectedDate)
-        selectedDate = Calendar.current.date(bySettingHour: components.hour!, minute: components.minute!, second: components.second!, of: day.date) ?? day.date
+        dateSelection = dateSelection.atDay(day)
+    }
+    
+    func atTime(of date: Date) {
+        dateSelection = dateSelection.atTime(of: date)
     }
     
     enum Item: Hashable {
@@ -96,6 +97,49 @@ final class ProgramGuideViewModel: ObservableObject {
                     return nil
                 }
             }
+        }
+    }
+}
+
+extension ProgramGuideViewModel {
+    struct DateSelection: Hashable {
+        let day: SRGDay
+        let time: TimeInterval
+        
+        var date: Date {
+            return day.date.addingTimeInterval(time)
+        }
+        
+        fileprivate func previousDay() -> DateSelection {
+            let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
+            return DateSelection(day: previousDay, time: time)
+        }
+        
+        fileprivate func nextDay() -> DateSelection {
+            let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
+            return DateSelection(day: nextDay, time: time)
+        }
+        
+        fileprivate func yesterday() -> DateSelection {
+            let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
+            return DateSelection(day: yesterday, time: time)
+        }
+        
+        fileprivate func atDay(_ day: SRGDay) -> DateSelection {
+            return DateSelection(day: day, time: time)
+        }
+        
+        fileprivate func atTime(of date: Date) -> DateSelection {
+            return DateSelection(day: day, time: date.timeIntervalSince(day.date))
+        }
+        
+        static func now() -> DateSelection {
+            return DateSelection.atDate(Date())
+        }
+        
+        fileprivate static func atDate(_ date: Date) -> DateSelection {
+            let day = SRGDay(from: date)
+            return DateSelection(day: day, time: date.timeIntervalSince(day.date))
         }
     }
 }
