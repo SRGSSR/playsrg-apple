@@ -25,7 +25,7 @@ final class ProgramGuideViewController: UIViewController {
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
         super.init(nibName: nil, bundle: nil)
-        title = NSLocalizedString("Program guide", comment: "Program guide title")
+        title = NSLocalizedString("TV guide", comment: "TV program guide view title")
     }
     
     required init?(coder: NSCoder) {
