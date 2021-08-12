@@ -91,9 +91,16 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$dateSelection
             .sink { [weak self] dateSelection in
-                self?.scrollToDateSelection(dateSelection)
+                if dateSelection.animated {
+                    self?.scrollToTime(dateSelection.time, animated: true)
+                }
             }
             .store(in: &cancellables)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.scrollToTime(animated: false)
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -119,23 +126,16 @@ final class ProgramGuideDailyViewController: UIViewController {
                 // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
                 // when the content size has not yet been determined (still zero).
                 self.collectionView.layoutIfNeeded()
-                self.scrollToDateSelection()
+                self.scrollToTime(animated: false)
             }
         }
     }
     
-    private func scrollToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection? = nil) {
-        let dateSelection = dateSelection ?? programGuideModel.dateSelection
-        guard dateSelection.day == model.day else { return }
-        
+    private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
+        let date = model.day.date.addingTimeInterval(time ?? programGuideModel.dateSelection.time)
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
-        if !programs.isEmpty {
-            let program = programs.filter { $0.endDate > dateSelection.date }.first
-            let row = (program != nil) ? programs.firstIndex(of: program!)! : programs.endIndex
-            if !collectionView.indexPathsForVisibleItems.contains(IndexPath(row: row, section: 0)) {
-                collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredVertically, animated: false)
-            }
-        }
+        guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
+        collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
     }
 }
 
@@ -169,15 +169,20 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideDailyViewController: UIScrollViewDelegate {
+    private func updateTime() {
+        if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
+           let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
+            programGuideModel.atTime(of: program.startDate)
+        }
+    }
+    
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
-        // Get centered vertically program
-        let indexPaths = collectionView.indexPathsForVisibleItems.sorted()
-        let index = indexPaths[Int(indexPaths.count / 2)].row
-        
-        let programs = model.state.programs(for: programGuideModel.selectedChannel)
-        if programs.count > index {
-            programGuideModel.atTime(of: programs[index].startDate)
+        updateTime()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updateTime()
         }
     }
 }
