@@ -89,7 +89,7 @@ struct ShowCell: View {
                     Image("subscription_full")
                         .resizable()
                         .scaledToFit()
-                        .frame(height: 16)
+                        .frame(height: 12)
                 }
             }
             .foregroundColor(.srgGrayC7)
