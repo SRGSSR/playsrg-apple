@@ -117,18 +117,12 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
-        guard let media = media else { return nil }
+        guard let media = currentMedia else { return nil }
         return MediaDescription.availabilityBadgeProperties(for: media)
     }
     
     var playAction: (() -> Void)? {
-        if isLive, let livestreamMedia = livestreamMedia, livestreamMedia.blockingReason(at: Date()) == .none {
-            return {
-                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
-                appDelegate.rootTabBarController.play_presentMediaPlayer(with: livestreamMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            }
-        }
-        else if let media = media, media.blockingReason(at: Date()) == .none {
+        if let media = currentMedia, media.blockingReason(at: Date()) == .none {
             return {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
