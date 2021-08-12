@@ -118,13 +118,13 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var playAction: (() -> Void)? {
-        if isLive, let livestreamMedia = livestreamMedia {
+        if isLive, let livestreamMedia = livestreamMedia, livestreamMedia.blockingReason(at: Date()) == .none {
             return {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: livestreamMedia, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
         }
-        else if let media = media {
+        else if let media = media, media.blockingReason(at: Date()) == .none {
             return {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
