@@ -91,7 +91,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$dateSelection
             .sink { [weak self] dateSelection in
-                self?.scrollToCurrentProgram(at: dateSelection)
+                self?.scrollToDateSelection(dateSelection)
             }
             .store(in: &cancellables)
     }
@@ -116,17 +116,15 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             dataSource.apply(Self.snapshot(from: state, for: channel), animatingDifferences: false) {
-                if case .loaded = self.model.state {
-                    // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-                    // when the content size has not yet been determined (still zero).
-                    self.collectionView.layoutIfNeeded()
-                    self.scrollToCurrentProgram()
-                }
+                // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+                // when the content size has not yet been determined (still zero).
+                self.collectionView.layoutIfNeeded()
+                self.scrollToDateSelection()
             }
         }
     }
     
-    private func scrollToCurrentProgram(at dateSelection: ProgramGuideViewModel.DateSelection? = nil) {
+    private func scrollToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection? = nil) {
         let dateSelection = dateSelection ?? programGuideModel.dateSelection
         guard dateSelection.day == model.day else { return }
         
