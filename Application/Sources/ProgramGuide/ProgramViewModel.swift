@@ -79,6 +79,10 @@ final class ProgramViewModel: ObservableObject {
         return program?.imageUrl(for: .medium)
     }
     
+    var currentMedia: SRGMedia? {
+        return isLive ? livestreamMedia : media
+    }
+    
     var duration: Double? {
         guard let program = program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)

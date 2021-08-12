@@ -86,6 +86,7 @@ struct ProgramView: View {
         var body: some View {
             ZStack {
                 ImageView(url: model.imageUrl)
+                BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
                 if let properties = model.availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))

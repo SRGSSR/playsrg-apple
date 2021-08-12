@@ -11,18 +11,33 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct BlockingOverlay: View {
     let media: SRGMedia?
+    let messageDisplayed: Bool
     
-    private var blockingIconImage: UIImage? {
-        guard let blockingReason = media?.blockingReason(at: Date()) else { return nil }
-        return UIImage.play_image(for: blockingReason)
+    init(media: SRGMedia?, messageDisplayed: Bool = false) {
+        self.media = media
+        self.messageDisplayed = messageDisplayed
+    }
+    
+    private var blockingReason: SRGBlockingReason? {
+        return  media?.blockingReason(at: Date())
     }
     
     var body: some View {
-        if let blockingIconImage = blockingIconImage {
+        if let blockingReason = blockingReason, let blockingIconImage = UIImage.play_image(for: blockingReason) {
             ZStack {
                 Color(white: 0, opacity: 0.6)
-                Image(uiImage: blockingIconImage)
-                    .foregroundColor(.white)
+                VStack {
+                    Image(uiImage: blockingIconImage)
+                        .foregroundColor(.white)
+                    if messageDisplayed, let message = SRGMessageForBlockedMediaWithBlockingReason(blockingReason) {
+                        Text(message)
+                            .srgFont(.H4)
+                            .lineLimit(3)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.white)
+                            .padding(8)
+                    }
+                }
             }
         }
     }
@@ -32,8 +47,13 @@ struct BlockingOverlay: View {
 
 struct BlockingOverlay_Previews: PreviewProvider {
     static var previews: some View {
-        BlockingOverlay(media: Mock.media(.blocked))
-            .background(Color.white)
-            .previewLayout(.fixed(width: 600, height: 400))
+        Group {
+            BlockingOverlay(media: Mock.media(.blocked))
+                .background(Color.white)
+                .previewLayout(.fixed(width: 300, height: 200))
+            BlockingOverlay(media: Mock.media(.blocked), messageDisplayed: true)
+                .background(Color.white)
+                .previewLayout(.fixed(width: 300, height: 200))
+        }
     }
 }
