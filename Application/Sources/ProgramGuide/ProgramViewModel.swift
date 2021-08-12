@@ -48,6 +48,11 @@ final class ProgramViewModel: ObservableObject {
         return data?.channel
     }
     
+    private var isLive: Bool {
+        guard let program = program else { return false }
+        return (program.startDate...program.endDate).contains(date)
+    }
+    
     var title: String? {
         return program?.title
     }
@@ -79,24 +84,10 @@ final class ProgramViewModel: ObservableObject {
         return program?.imageUrl(for: .medium)
     }
     
-    var currentMedia: SRGMedia? {
-        return isLive ? livestreamMedia : media
-    }
-    
     var duration: Double? {
         guard let program = program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)
         return duration > 0 ? duration : nil
-    }
-    
-    var progress: Double? {
-        guard let program = program else { return nil }
-        let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
-        return (0...1).contains(progress) ? progress : nil
-    }
-    
-    private var isLive: Bool {
-        return progress != nil
     }
     
     var hasMultiAudio: Bool {
@@ -114,6 +105,21 @@ final class ProgramViewModel: ObservableObject {
     var imageCopyright: String? {
         guard let imageCopyright = program?.imageCopyright else { return nil }
         return String(format: NSLocalizedString("Image credit: %@", comment: "Image copyright introductory label"), imageCopyright)
+    }
+    
+    var progress: Double? {
+        if isLive, let program = program {
+            let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            return (0...1).contains(progress) ? progress : nil
+        }
+        else {
+            let progress = Double(HistoryPlaybackProgressForMedia(media))
+            return progress != 0 ? progress : nil
+        }
+    }
+    
+    var currentMedia: SRGMedia? {
+        return isLive ? livestreamMedia : media
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
