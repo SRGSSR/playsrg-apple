@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "program_guide.pdf",
+      "filename" : "TV_Guide.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "program_guide-1.pdf",
+      "filename" : "TV_Guide-1.pdf",
       "idiom" : "ipad"
     }
   ],
