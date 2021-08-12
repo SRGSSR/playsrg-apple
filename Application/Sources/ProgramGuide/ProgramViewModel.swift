@@ -140,7 +140,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
-        guard isLive, let media = media else { return nil }
+        guard isLive, let media = media, media.blockingReason(at: Date()) == .none else { return nil }
         return ButtonProperties(
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
