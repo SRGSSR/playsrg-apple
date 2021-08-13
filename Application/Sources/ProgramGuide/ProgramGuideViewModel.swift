@@ -11,7 +11,7 @@ import Combine
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var data = Data(channels: [], selectedChannel: nil)
     @Published private(set) var dateSelection: DateSelection
-    @Published var isDatePickerPresented: Bool = false
+    @Published var isCalendarViewPresented: Bool = false
     
     var channels: [SRGChannel] {
         return data.channels

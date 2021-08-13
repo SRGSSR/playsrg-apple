@@ -7,7 +7,7 @@
 import SwiftUI
 
 /// Behavior: h-hug, v-hug
-struct DatePickerView: View {
+struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
     @State private var selectedDate: Date = Date()
     
@@ -20,11 +20,11 @@ struct DatePickerView: View {
             Divider()
             HStack {
                 ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
-                    model.isDatePickerPresented = false
+                    model.isCalendarViewPresented = false
                 }
                 ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
                     model.switchToDay(SRGDay(from: selectedDate))
-                    model.isDatePickerPresented = false
+                    model.isCalendarViewPresented = false
                 }
             }
             .frame(height: 40)
@@ -37,9 +37,9 @@ struct DatePickerView: View {
     }
 }
 
-struct DatePickerView_Previews: PreviewProvider {
+struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        DatePickerView(model: ProgramGuideViewModel(date: Date()))
+        CalendarView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.sizeThatFits)
     }
 }

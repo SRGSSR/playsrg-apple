@@ -19,11 +19,11 @@ struct ProgramGuideHeaderView: View {
             NavigationBar(model: model)
         }
         .padding(10)
-        .fullScreenCover(isPresented: $model.isDatePickerPresented) {
+        .fullScreenCover(isPresented: $model.isCalendarViewPresented) {
             ZStack {
                 Color.srgGray23
                     .edgesIgnoringSafeArea(.all)
-                DatePickerView(model: model)
+                CalendarView(model: model)
             }
         }
     }
@@ -38,7 +38,7 @@ struct ProgramGuideHeaderView: View {
                     model.switchToYesterday()
                 }
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                    model.isDatePickerPresented.toggle()
+                    model.isCalendarViewPresented.toggle()
                 }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
