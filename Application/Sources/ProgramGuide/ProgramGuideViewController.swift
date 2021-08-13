@@ -127,11 +127,15 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        headerView.isUserInteractionEnabled = false
+        
         guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
         model.scrollToDay(currentViewController.day)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        headerView.isUserInteractionEnabled = true
+        
         if !completed {
             guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
             model.scrollToDay(currentViewController.day)
