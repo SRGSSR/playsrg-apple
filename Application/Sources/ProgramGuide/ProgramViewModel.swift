@@ -239,6 +239,9 @@ extension ProgramViewModel {
         if let mediaUrn = program?.mediaURN {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 return SRGDataProvider.current!.media(withUrn: mediaUrn)
+                    .catch { _ in
+                        return Empty()
+                    }
             }
             .map { media -> AnyPublisher<MediaData, Never> in
                 return Publishers.CombineLatest(Self.watchLaterPublisher(for: media), Self.historyPublisher(for: media))
