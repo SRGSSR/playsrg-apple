@@ -111,6 +111,13 @@ extension ProgramGuideViewController: SRGAnalyticsViewTracking {
     }
 }
 
+extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
+    func openCalendar() {
+        let calendarViewController = ProgramGuideCalendarViewController(model: model)
+        present(calendarViewController, animated: true)
+    }
+}
+
 extension ProgramGuideViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }

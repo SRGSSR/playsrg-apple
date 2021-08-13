@@ -6,6 +6,12 @@
 
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol ProgramGuideHeaderViewActions: AnyObject {
+    func openCalendar()
+}
+
 // MARK: View
 
 /// Behavior: h-exp, v-exp
@@ -19,13 +25,6 @@ struct ProgramGuideHeaderView: View {
             NavigationBar(model: model)
         }
         .padding(10)
-        .fullScreenCover(isPresented: $model.isCalendarViewPresented) {
-            ZStack {
-                Color.srgGray23
-                    .edgesIgnoringSafeArea(.all)
-                CalendarView(model: model)
-            }
-        }
     }
     
     /// Behavior: h-exp, v-exp
@@ -33,15 +32,17 @@ struct ProgramGuideHeaderView: View {
         @ObservedObject var model: ProgramGuideViewModel
         
         var body: some View {
-            HStack(spacing: 10) {
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                    model.switchToYesterday()
-                }
-                ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                    model.isCalendarViewPresented.toggle()
-                }
-                ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                    model.switchToNow()
+            ResponderChain { firstResponder in
+                HStack(spacing: 10) {
+                    ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                        model.switchToYesterday()
+                    }
+                    ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
+                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
+                    }
+                    ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                        model.switchToNow()
+                    }
                 }
             }
         }

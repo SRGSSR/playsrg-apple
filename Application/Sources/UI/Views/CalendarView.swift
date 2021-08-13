@@ -6,6 +6,12 @@
 
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol CalendarViewActions: AnyObject {
+    func close()
+}
+
 /// Behavior: h-hug, v-hug
 struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
@@ -18,16 +24,18 @@ struct CalendarView: View {
                 .colorMultiply(.white)
                 .accentColor(.srgRed)
             Divider()
-            HStack {
-                ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
-                    model.isCalendarViewPresented = false
+            ResponderChain { firstResponder in
+                HStack {
+                    ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
+                        firstResponder.sendAction(#selector(CalendarViewActions.close))
+                    }
+                    ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
+                        model.switchToDay(SRGDay(from: selectedDate))
+                        firstResponder.sendAction(#selector(CalendarViewActions.close))
+                    }
                 }
-                ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                    model.switchToDay(SRGDay(from: selectedDate))
-                    model.isCalendarViewPresented = false
-                }
+                .frame(height: 40)
             }
-            .frame(height: 40)
         }
         .frame(maxWidth: 400)
         .padding()
@@ -40,7 +48,12 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView(model: ProgramGuideViewModel(date: Date()))
-            .previewLayout(.sizeThatFits)
+        Group {
+            CalendarView(model: ProgramGuideViewModel(date: Date()))
+                .previewLayout(.sizeThatFits)
+            CalendarView(model: ProgramGuideViewModel(date: Date()))
+                .frame(width: 600, height: 600)
+                .previewLayout(.sizeThatFits)
+        }
     }
 }
