@@ -29,13 +29,15 @@ OBJC_EXPORT BOOL HistoryContainsMedia(SRGMedia *media);
 OBJC_EXPORT float HistoryPlaybackProgress(NSTimeInterval playbackPosition, double durationInSeconds);
 
 /**
- *  Current playback progress value for a media.
+ *  Current playback progress value for a media. The update block can be called several times to return cached values
+ *  early if available while still updating the cache. Once the update is finished the block is called with
+ *  the `completed` flag set to `YES`.
  *
  *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
  *              any thread.
  */
 OBJC_EXPORT float HistoryPlaybackProgressForMedia(SRGMedia * _Nullable media);
-OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia * _Nullable media, void (^update)(float progress));
+OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia * _Nullable media, void (^update)(float progress, BOOL completed));
 
 /**
  *  Return a recommended resume playback position for a media.
@@ -54,13 +56,15 @@ OBJC_EXPORT NSString *HistoryResumePlaybackPositionForMediaAsync(SRGMedia * _Nul
 OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaAndPosition(NSTimeInterval playbackPosition, SRGMedia * _Nullable media);
 
 /**
- *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media.
+ *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media. The update block
+ *  can be called several times to return cached values early if available while still updating the cache. Once the
+ *  update is finished the block is called with the `completed` flag set to `YES`.
  *
  *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
  *              any thread.
  */
 OBJC_EXPORT BOOL HistoryCanResumePlaybackForMedia(SRGMedia * _Nullable media);
-OBJC_EXPORT NSString *HistoryCanResumePlaybackForMediaAsync(SRGMedia * _Nullable media, void (^completion)(BOOL canResume));
+OBJC_EXPORT NSString *HistoryCanResumePlaybackForMediaAsync(SRGMedia * _Nullable media, void (^update)(BOOL canResume, BOOL completed));
 
 /**
  *  Remove a list of medias from the history.
@@ -72,6 +76,6 @@ OBJC_EXPORT void HistoryRemoveMedias(NSArray<SRGMedia *> *medias, void (^complet
 /**
  *  Cancel a progress async request.
  */
-OBJC_EXPORT void HistoryPlaybackProgressAsyncCancel(NSString * _Nullable handle);
+OBJC_EXPORT void HistoryAsyncCancel(NSString * _Nullable handle);
 
 NS_ASSUME_NONNULL_END

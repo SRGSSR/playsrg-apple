@@ -12,16 +12,16 @@ import Foundation
 final class ProgramViewModel: ObservableObject {
     @Published var data: Data? {
         didSet {
-            Self.mediaDataPublisher(for: data?.program)
+            mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
-            Self.livestreamMediaPublisher(for: data?.channel)
+            livestreamMediaPublisher(for: data?.channel)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
         }
     }
     
-    @Published private var mediaData = MediaData(media: nil, watchLaterAllowedAction: .none)
+    @Published private var mediaData: MediaData = .empty
     @Published private var livestreamMedia: SRGMedia?
     
     @Published private(set) var date: Date = Date()
@@ -113,8 +113,7 @@ final class ProgramViewModel: ObservableObject {
             return (0...1).contains(progress) ? progress : nil
         }
         else {
-            let progress = Double(HistoryPlaybackProgressForMedia(media))
-            return progress != 0 ? progress : nil
+            return mediaData.progress
         }
     }
     
@@ -201,7 +200,7 @@ final class ProgramViewModel: ObservableObject {
                 labels.value = media.urn
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
                 
-                self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add)
+                self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, progress: self.mediaData.progress)
             }
         }
         
@@ -231,34 +230,74 @@ final class ProgramViewModel: ObservableObject {
             return nil
         }
     }
-    
-    private static func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
+}
+
+// MARK: Publishers
+
+extension ProgramViewModel {
+    private func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
         if let mediaUrn = program?.mediaURN {
-            return SRGDataProvider.current!.media(withUrn: mediaUrn)
-                .receive(on: DispatchQueue.main)        // `WatchLaterAllowedActionForMedia` must currently be called on the main thread
-                .map { media in
-                    return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
-                        return Just(MediaData(media: media, watchLaterAllowedAction: WatchLaterAllowedActionForMedia(media)))
+            return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+                return SRGDataProvider.current!.media(withUrn: mediaUrn)
+            }
+            .map { media -> AnyPublisher<MediaData, Never> in
+                return Publishers.CombineLatest(Self.watchLaterPublisher(for: media), Self.historyPublisher(for: media))
+                    .map { action, progress in
+                        return MediaData(media: media, watchLaterAllowedAction: action, progress: progress)
                     }
-                }
-                .switchToLatest()
-                .replaceError(with: MediaData(media: nil, watchLaterAllowedAction: .none))
-                .prepend(MediaData(media: nil, watchLaterAllowedAction: .none))
-                .eraseToAnyPublisher()
+                    .eraseToAnyPublisher()
+            }
+            .switchToLatest()
+            .replaceError(with: mediaData)
+            .prepend(.empty)
+            .eraseToAnyPublisher()
         }
         else {
-            return Just(MediaData(media: nil, watchLaterAllowedAction: .none))
+            return Just(.empty)
                 .eraseToAnyPublisher()
         }
     }
     
-    private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
+    private static func watchLaterPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
+            return Deferred {
+                Future<WatchLaterAction, Never> { promise in
+                    WatchLaterAllowedActionForMediaAsync(media) { action in
+                        // TODO: Bug! The block can be called several times, but the promise is fulfilled the first time only!
+                        promise(.success(action))
+                    }
+                }
+            }
+        }
+        .prepend(.none)
+        .eraseToAnyPublisher()
+    }
+    
+    private static func historyPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
+            return Deferred {
+                Future<Double?, Never> { promise in
+                    HistoryPlaybackProgressForMediaAsync(media) { progress, completed in
+                        guard completed else { return }
+                        let progressValue = (progress != 0) ? Optional(Double(progress)) : nil
+                        promise(.success(progressValue))
+                    }
+                }
+            }
+        }
+        .prepend(nil)
+        .eraseToAnyPublisher()
+    }
+    
+    private func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel = channel {
-            return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
-                .map { $0.first(where: { $0.channel == channel }) }
-                .replaceError(with: nil)
-                .prepend(nil)
-                .eraseToAnyPublisher()
+            return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+                return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+            }
+            .map { $0.first(where: { $0.channel == channel }) }
+            .replaceError(with: livestreamMedia)
+            .prepend(nil)
+            .eraseToAnyPublisher()
         }
         else {
             return Just(nil)
@@ -280,6 +319,9 @@ extension ProgramViewModel {
     private struct MediaData {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
+        let progress: Double?
+        
+        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, progress: nil)
     }
     
     /// Common button properties

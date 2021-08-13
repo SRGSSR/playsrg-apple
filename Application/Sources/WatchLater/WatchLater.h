@@ -34,16 +34,20 @@ typedef NS_ENUM(NSInteger, WatchLaterAction) {
 /**
  *  Return the allowed watch later action for a given media.
  *
- *  @discussion Must be called from the main thread.
+ *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
+ *              any thread.
  */
 OBJC_EXPORT WatchLaterAction WatchLaterAllowedActionForMedia(SRGMedia * _Nonnull media);
+OBJC_EXPORT NSString *WatchLaterAllowedActionForMediaAsync(SRGMedia * _Nonnull media, void (^completion)(WatchLaterAction action));
 
 /**
  *  Return `YES` if the media is in the later list.
  *
- *  @discussion Must be called from the main thread.
+ *  @discussion The non-async variant must be called on the main thread. The async variant block can be called from
+ *              any thread.
  */
 OBJC_EXPORT BOOL WatchLaterContainsMedia(SRGMedia *media);
+OBJC_EXPORT NSString *WatchLaterContainsMediaAsync(SRGMedia *media, void (^completion)(BOOL contained));
 
 /**
  *  Add a media to the later list.
@@ -65,6 +69,11 @@ OBJC_EXPORT void WatchLaterRemoveMedias(NSArray<SRGMedia *> *medias, void (^comp
  *  @discussion Must be called from the main thread. The completion block is called on the main thread.
  */
 OBJC_EXPORT void WatchLaterToggleMedia(SRGMedia *medias, void (^completion)(BOOL added, NSError * _Nullable error));
+
+/**
+ *  Cancel a progress async request.
+ */
+OBJC_EXPORT void WatchLaterAsyncCancel(NSString * _Nullable handle);
 
 /**
  *  Migrate favorites (legacy plist-based way of bookmarking medias), if any, to the later playlist.

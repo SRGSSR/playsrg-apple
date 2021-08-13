@@ -21,7 +21,7 @@ final class MediaVisualViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     deinit {
-        HistoryPlaybackProgressAsyncCancel(taskHandle)
+        HistoryAsyncCancel(taskHandle)
     }
     
     func imageUrl(for scale: ImageScale) -> URL? {
@@ -78,8 +78,8 @@ final class MediaVisualViewModel: ObservableObject {
     
     // Cannot be wrapped into Futures because the progress update block might be called several times
     private func updateProgress() {
-        HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress in
+        HistoryAsyncCancel(taskHandle)
+        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress, _ in
             DispatchQueue.main.async {
                 self.progress = Double(progress)
             }
