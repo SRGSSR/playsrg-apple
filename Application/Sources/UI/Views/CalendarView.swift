@@ -29,6 +29,7 @@ struct CalendarView: View {
             }
             .frame(height: 40)
         }
+        .frame(maxWidth: 400)
         .padding()
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
