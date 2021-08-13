@@ -23,7 +23,7 @@ struct DatePickerView: View {
                     model.isDatePickerPresented = false
                 }
                 ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                    model.atDay(SRGDay(from: selectedDate))
+                    model.switchToDay(SRGDay(from: selectedDate))
                     model.isDatePickerPresented = false
                 }
             }

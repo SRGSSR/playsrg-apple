@@ -91,7 +91,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$dateSelection
             .sink { [weak self] dateSelection in
-                if dateSelection.animated {
+                if dateSelection.transition == .time {
                     self?.scrollToTime(dateSelection.time, animated: true)
                 }
             }
@@ -172,7 +172,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
            let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
-            programGuideModel.atTime(of: program.startDate)
+            programGuideModel.scrollToTime(of: program.startDate)
         }
     }
     

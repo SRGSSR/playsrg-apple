@@ -17,8 +17,6 @@ final class ProgramGuideViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var pageViewControllerAnimated: Bool = false
-    
     init(date: Date = Date()) {
         model = ProgramGuideViewModel(date: date)
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
@@ -78,24 +76,22 @@ final class ProgramGuideViewController: UIViewController {
         
         model.$dateSelection
             .sink { [weak self] dateSelection in
-                guard let self = self else { return }
-                self.switchToDay(dateSelection.day)
+                if dateSelection.transition == .day {
+                    self?.switchToDay(dateSelection.day)
+                }
             }
             .store(in: &cancellables)
     }
     
     private func switchToDay(_ day: SRGDay) {
-        guard !pageViewControllerAnimated,
-              let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
+        guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
               currentViewController.day != day else {
             return
         }
         
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
-        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: { [weak self] _ in
-            self?.pageViewControllerAnimated = false
-        })
+        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -131,21 +127,14 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        pageViewControllerAnimated = true
-        
         guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
-        model.atDay(currentViewController.day)
+        model.scrollToDay(currentViewController.day)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if !completed {
-            pageViewControllerAnimated = true
-            
             guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
-            model.atDay(currentViewController.day)
-        }
-        else {
-            pageViewControllerAnimated = false
+            model.scrollToDay(currentViewController.day)
         }
     }
 }

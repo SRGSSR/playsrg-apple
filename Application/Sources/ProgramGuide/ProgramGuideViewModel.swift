@@ -33,7 +33,7 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     init(date: Date) {
-        self.dateSelection = DateSelection.atDate(date, animated: false)
+        self.dateSelection = DateSelection.atDate(date, transition: .none)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: SRGDay(from: date))
@@ -52,28 +52,34 @@ final class ProgramGuideViewModel: ObservableObject {
         .assign(to: &$data)
     }
     
-    func previousDay() {
-        dateSelection = dateSelection.previousDay()
+    func switchToPreviousDay() {
+        dateSelection = dateSelection.previousDay(transition: .day)
     }
     
-    func nextDay() {
-        dateSelection = dateSelection.nextDay()
+    func switchToNextDay() {
+        dateSelection = dateSelection.nextDay(transition: .day)
     }
     
-    func yesterday() {
-        dateSelection = dateSelection.yesterday()
+    func switchToYesterday() {
+        dateSelection = dateSelection.yesterday(transition: .day)
     }
     
-    func now() {
-        dateSelection = DateSelection.now()
+    func switchToNow() {
+        let nowDateSelection = DateSelection.now(transition: .time)
+        let transition = dateSelection.isSameDayAs(nowDateSelection) ? DateSelection.Transition.time : DateSelection.Transition.day
+        dateSelection = DateSelection.now(transition: transition)
     }
     
-    func atDay(_ day: SRGDay) {
-        dateSelection = dateSelection.atDay(day)
+    func switchToDay(_ day: SRGDay) {
+        dateSelection = dateSelection.atDay(day, transition: .day)
     }
     
-    func atTime(of date: Date) {
-        dateSelection = dateSelection.atTime(of: date)
+    func scrollToDay(_ day: SRGDay) {
+        dateSelection = dateSelection.atDay(day, transition: .none)
+    }
+    
+    func scrollToTime(of date: Date) {
+        dateSelection = dateSelection.atTime(of: date, transition: .none)
     }
 }
 
@@ -86,44 +92,54 @@ extension ProgramGuideViewModel {
     }
     
     struct DateSelection: Hashable {
+        enum Transition {
+            case none
+            case day
+            case time
+        }
+        
         let day: SRGDay
         let time: TimeInterval      // Offset from midnight
-        let animated: Bool
+        let transition: Transition
         
         var date: Date {
             return day.date.addingTimeInterval(time)
         }
         
-        fileprivate func previousDay() -> DateSelection {
+        fileprivate func isSameDayAs(_ dateSelection: DateSelection) -> Bool {
+            return Calendar.current.isDate(date, inSameDayAs: dateSelection.date)
+        }
+        
+        fileprivate func previousDay(transition: Transition) -> DateSelection {
             let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
-            return DateSelection(day: previousDay, time: time, animated: false)
+            return DateSelection(day: previousDay, time: time, transition: transition)
         }
         
-        fileprivate func nextDay() -> DateSelection {
+        fileprivate func nextDay(transition: Transition) -> DateSelection {
             let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
-            return DateSelection(day: nextDay, time: time, animated: false)
+            return DateSelection(day: nextDay, time: time, transition: transition)
         }
         
-        fileprivate func yesterday() -> DateSelection {
+        fileprivate func yesterday(transition: Transition) -> DateSelection {
             let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
-            return DateSelection(day: yesterday, time: time, animated: false)
+            return DateSelection(day: yesterday, time: time, transition: transition)
         }
         
-        fileprivate func atDay(_ day: SRGDay) -> DateSelection {
-            return DateSelection(day: day, time: time, animated: false)
+        fileprivate func atDay(_ day: SRGDay, transition: Transition) -> DateSelection {
+            return DateSelection(day: day, time: time, transition: transition)
         }
         
-        fileprivate func atTime(of date: Date) -> DateSelection {
-            return DateSelection(day: day, time: date.timeIntervalSince(day.date), animated: false)
+        fileprivate func atTime(of date: Date, transition: Transition) -> DateSelection {
+            return DateSelection(day: day, time: date.timeIntervalSince(day.date), transition: transition)
         }
         
-        static func now() -> DateSelection {
-            return atDate(Date(), animated: true)
+        static func now(transition: Transition) -> DateSelection {
+            return atDate(Date(), transition: transition)
         }
         
-        fileprivate static func atDate(_ date: Date, animated: Bool) -> DateSelection {
+        fileprivate static func atDate(_ date: Date, transition: Transition) -> DateSelection {
             let day = SRGDay(from: date)
-            return DateSelection(day: day, time: date.timeIntervalSince(day.date), animated: animated)
+            return DateSelection(day: day, time: date.timeIntervalSince(day.date), transition: transition)
         }
     }
 }

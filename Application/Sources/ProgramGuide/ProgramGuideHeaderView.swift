@@ -34,11 +34,15 @@ struct ProgramGuideHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide"), action: model.yesterday)
+                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                    model.switchToYesterday()
+                }
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     model.isDatePickerPresented.toggle()
                 }
-                ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide"), action: model.now)
+                ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                    model.switchToNow()
+                }
             }
         }
     }
@@ -75,16 +79,16 @@ struct ProgramGuideHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                SimpleButton(icon: "chevron_previous",
-                             accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide"),
-                             action: model.previousDay)
+                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
+                    model.switchToPreviousDay()
+                }
                 Text(model.dateString)
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
-                SimpleButton(icon: "chevron_next",
-                             accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide"),
-                             action: model.nextDay)
+                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide")) {
+                    model.switchToNextDay()
+                }
             }
         }
     }
