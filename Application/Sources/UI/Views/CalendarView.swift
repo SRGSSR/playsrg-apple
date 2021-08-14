@@ -22,7 +22,7 @@ struct CalendarView: View {
             DatePicker("", selection: $selectedDate, displayedComponents: [.date])
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .colorMultiply(.white)
-                .accentColor(.srgRed)
+                .accentColor(.red)
             Divider()
             ResponderChain { firstResponder in
                 HStack {
