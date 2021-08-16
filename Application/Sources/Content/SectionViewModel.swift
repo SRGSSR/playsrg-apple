@@ -129,14 +129,16 @@ extension SectionViewModel {
     }
     
     struct Section: Hashable, Indexable {
-        let id: String
+        let indexTitle: String
+        let title: String?
         
-        var indexTitle: String {
-            return id.uppercased()
+        init(indexTitle: String, title: String? = nil) {
+            self.indexTitle = indexTitle
+            self.title = title
         }
-        
+                
         func hash(into hasher: inout Hasher) {
-            hasher.combine(id)
+            hasher.combine(indexTitle)
         }
     }
     
@@ -234,23 +236,24 @@ private extension SectionViewModel {
             switch contentSection.type {
             case .showAndMedias:
                 if case .show = items.first {
-                    return [Row(section: Section(id: "main"), items: Array(items.suffix(from: 1)))]
+                    return [Row(section: Section(indexTitle: "main"), items: Array(items.suffix(from: 1)))]
                 }
                 else {
-                    return [Row(section: Section(id: "main"), items: items)]
+                    return [Row(section: Section(indexTitle: "main"), items: items)]
                 }
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
                     return items.groupedAlphabetically { $0.title }
                         .map { character, items in
-                            return Row(section: Section(id: String(character)), items: items)
+                            let uppercaseCharacter = String(character).uppercased()
+                            return Row(section: Section(indexTitle: uppercaseCharacter, title: uppercaseCharacter), items: items)
                         }
                 default:
-                    return [Row(section: Section(id: "main"), items: items)]
+                    return [Row(section: Section(indexTitle: "main"), items: items)]
                 }
             default:
-                return [Row(section: Section(id: "main"), items: items)]
+                return [Row(section: Section(indexTitle: "main"), items: items)]
             }
         }
         
@@ -289,10 +292,11 @@ private extension SectionViewModel {
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return items.groupedAlphabetically { $0.title }
                     .map { character, items in
-                        return Row(section: Section(id: String(character)), items: items)
+                        let uppercaseCharacter = String(character).uppercased()
+                        return Row(section: Section(indexTitle: uppercaseCharacter, title: uppercaseCharacter), items: items)
                     }
             default:
-                return [Row(section: Section(id: "main"), items: items)]
+                return [Row(section: Section(indexTitle: "main"), items: items)]
             }
         }
         

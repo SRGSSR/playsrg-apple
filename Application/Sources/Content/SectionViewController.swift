@@ -14,7 +14,7 @@ import UIKit
 
 final class SectionViewController: UIViewController {
     let model: SectionViewModel
-    var initialSectionId: String?
+    var initialSectionIndexTitle: String?
     let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
@@ -55,9 +55,9 @@ final class SectionViewController: UIViewController {
      *  Use `startSectionId` to provide the collection view section id where the view should initially open. If not found or
      *  specified the view opens at its top.
      */
-    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
+    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionIndexTitle: String? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
-        self.initialSectionId = initialSectionId
+        self.initialSectionIndexTitle = initialSectionIndexTitle
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
@@ -136,9 +136,11 @@ final class SectionViewController: UIViewController {
             view.content = TitleView(text: self.globalHeaderTitle)
         }
         
-        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, _ in
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
             guard let self = self else { return }
-            view.content = SectionHeaderView(headerItem: self.model.state.headerItem, configuration: self.model.configuration)
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = SectionHeaderView(section: section, headerItem: self.model.state.headerItem, configuration: self.model.configuration)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -287,15 +289,15 @@ final class SectionViewController: UIViewController {
     }
     
     private func scrollToInitialSection() {
-        guard initialSectionId != nil else { return }
+        guard initialSectionIndexTitle != nil else { return }
         
         let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
         guard !sectionIdentifiers.isEmpty else { return }
         
-        if let index = sectionIdentifiers.firstIndex(where: { $0.id == initialSectionId }) {
+        if let index = sectionIdentifiers.firstIndex(where: { $0.indexTitle == initialSectionIndexTitle }) {
             collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
         }
-        initialSectionId = nil
+        initialSectionIndexTitle = nil
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
@@ -413,17 +415,17 @@ extension SectionViewController {
         }
     }
     
-    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
+    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionIndexTitle: String?) -> SectionViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionIndexTitle: initialSectionIndexTitle)
         }
         else {
-            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
+            return SectionViewController(section: .configured(.tvAllShows), initialSectionIndexTitle: initialSectionIndexTitle)
         }
     }
     
     @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
-        return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
+        return showsViewController(forChannelUid: channelUid, initialSectionIndexTitle: nil)
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
@@ -586,8 +588,9 @@ private extension SectionViewController {
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
-                let headerSize = SectionHeaderView.size(configuration: configuration,
+                let headerSize = SectionHeaderView.size(section: section,
                                                         headerItem: self?.model.state.headerItem,
+                                                        configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
@@ -697,37 +700,52 @@ private extension SectionViewController {
 
 private extension SectionViewController {
     struct SectionHeaderView: View {
+        let section: SectionViewModel.Section
         let headerItem: SectionViewModel.HeaderItem?
         let configuration: SectionViewModel.Configuration
         
         var body: some View {
-            switch headerItem {
-            case let .item(item):
-                switch item {
-                case let .show(show):
-                    SectionShowHeaderView(section: configuration.wrappedValue, show: show)
-                default:
+            Group {
+                if let headerItem = headerItem {
+                    switch headerItem {
+                    case let .item(item):
+                        switch item {
+                        case let .show(show):
+                            SectionShowHeaderView(section: configuration.wrappedValue, show: show)
+                        default:
+                            Color.clear
+                        }
+                    case let .show(show):
+                        ShowHeaderView(show: show)
+                    }
+                }
+                else if let title = section.title {
+                    SimpleHeaderView(title: title)
+                }
+                else {
                     Color.clear
                 }
-            case let .show(show):
-                ShowHeaderView(show: show)
-            default:
-                Color.clear
             }
         }
         
-        static func size(configuration: SectionViewModel.Configuration, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-            switch headerItem {
-            case let .item(item):
-                switch item {
+        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+            if let headerItem = headerItem {
+                switch headerItem {
+                case let .item(item):
+                    switch item {
+                    case let .show(show):
+                        return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    default:
+                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                    }
                 case let .show(show):
-                    return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-                default:
-                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                    return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                 }
-            case let .show(show):
-                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-            default:
+            }
+            else if let title = section.title {
+                return SimpleHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth)
+            }
+            else {
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }

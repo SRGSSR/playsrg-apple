@@ -7,6 +7,7 @@
 import UIKit
 
 protocol Indexable {
+    /// The title of the index entry corresponding to the section
     var indexTitle: String { get }
 }
 

@@ -1475,6 +1475,16 @@
 		6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB9B3D626CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3D726CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3D826CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3D926CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DA26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DB26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DC26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DD26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DE26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
+		6FB9B3DF26CA88AD0065092F /* SimpleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */; };
 		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
@@ -2696,6 +2706,7 @@
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleHeaderView.swift; sourceTree = "<group>"; };
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
 		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
 		6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramHeaderView.xib; sourceTree = "<group>"; };
@@ -3948,6 +3959,7 @@
 				6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
+				6FB9B3D526CA88AD0065092F /* SimpleHeaderView.swift */,
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
 				6FEC91A721A6B39A00AA50C8 /* TableLoadMoreFooterView.h */,
 				6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */,
@@ -7635,6 +7647,7 @@
 				6F74293D265BE52E0000538D /* Signals.swift in Sources */,
 				6FDF70002682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				085C0DC326132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
+				6FB9B3D626CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F47607B1EB37D60003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6F939F6F2090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */,
@@ -7771,6 +7784,7 @@
 				6FD88F7822D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F0AF6E5267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FD633DF1FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FB9B3D726CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F56F9F5247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB126563ABD0032D742 /* DampedCollectionView.swift in Sources */,
@@ -7983,6 +7997,7 @@
 				6FD88F7922D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F0AF6E6267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FD633E01FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FB9B3D826CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F56F9F6247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB226563ABD0032D742 /* DampedCollectionView.swift in Sources */,
@@ -8195,6 +8210,7 @@
 				6FD88F7A22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F0AF6E7267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FD633E11FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FB9B3D926CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F56F9F7247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C698245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB326563ABD0032D742 /* DampedCollectionView.swift in Sources */,
@@ -8407,6 +8423,7 @@
 				6FD88F7B22D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F0AF6E8267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
+				6FB9B3DA26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F73BFB426563ABD0032D742 /* DampedCollectionView.swift in Sources */,
@@ -8739,6 +8756,7 @@
 				6F83873025E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FF0C84C26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				6FB9B3DB26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F0850F926256A7700B4E410 /* Reachability.m in Sources */,
 				0809813F2622195900AA586B /* Badges.swift in Sources */,
 				6FF9EC532626C9CC00A2E11A /* Accessibility.swift in Sources */,
@@ -8850,6 +8868,7 @@
 				6F83873125E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FF0C84D26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				6FB9B3DC26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F0850FA26256A7700B4E410 /* Reachability.m in Sources */,
 				080981402622195900AA586B /* Badges.swift in Sources */,
 				6FF9EC542626C9CD00A2E11A /* Accessibility.swift in Sources */,
@@ -8961,6 +8980,7 @@
 				6F83873225E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FF0C84E26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				6FB9B3DD26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F0850FB26256A7700B4E410 /* Reachability.m in Sources */,
 				080981412622195900AA586B /* Badges.swift in Sources */,
 				6FF9EC552626C9CD00A2E11A /* Accessibility.swift in Sources */,
@@ -9072,6 +9092,7 @@
 				6F83873325E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FF0C84F26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				6FB9B3DE26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F0850FC26256A7700B4E410 /* Reachability.m in Sources */,
 				080981422622195900AA586B /* Badges.swift in Sources */,
 				6FF9EC562626C9CD00A2E11A /* Accessibility.swift in Sources */,
@@ -9183,6 +9204,7 @@
 				6F83873425E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6FF0C85026B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
+				6FB9B3DF26CA88AD0065092F /* SimpleHeaderView.swift in Sources */,
 				6F0850FD26256A7700B4E410 /* Reachability.m in Sources */,
 				080981432622195900AA586B /* Badges.swift in Sources */,
 				6FF9EC572626C9CD00A2E11A /* Accessibility.swift in Sources */,
