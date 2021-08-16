@@ -196,7 +196,17 @@ for_platform :ios do
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
 
-  for_lane :tvOSnightlyTester do
+  for_lane :iOSnightlies do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :iOSnightlyDSYMs do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :nightlyTester do
     itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end

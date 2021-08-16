@@ -31,11 +31,21 @@ Builds a new tvOS nightly on AppStore Connect and waits build processing.
 fastlane ios tvOSnightlyDSYMs
 ```
 Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
-### ios tvOSnightlyTester
+### ios iOSnightlies
 ```
-fastlane ios tvOSnightlyTester
+fastlane ios iOSnightlies
 ```
-Add tvOS nightly tester (email required)
+Builds a new iOS nightly on AppStore Connect and waits build processing.
+### ios iOSnightlyDSYMs
+```
+fastlane ios iOSnightlyDSYMs
+```
+Sends latest iOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios nightlyTester
+```
+fastlane ios nightlyTester
+```
+Add nightly TestFlight tester (email required)
 ### ios betas
 ```
 fastlane ios betas

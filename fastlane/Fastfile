@@ -42,6 +42,7 @@ platform :ios do
   desc 'Builds a new iOS nightly on App Center.'
   lane :nightlies do
     platform = 'iOS'
+    service = 'AppCenter'
 
     build_number = latest_appcenter_build_number(appcenter_nightly_names)
     build_number = xcode_override_build_number(platform, build_number + 1)
@@ -50,7 +51,7 @@ platform :ios do
 
     notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
 
-    changelog = default_changelog_for_nightlies(platform)
+    changelog = default_changelog_for_nightlies(platform, service)
 
     ios_schemes.each_index do |index|
       build_lane(
@@ -73,47 +74,12 @@ platform :ios do
       UI.message ios_schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
 
-    save_last_nightlies_success_git_commit_hash(platform)
+    save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
   desc 'Builds a new tvOS nightly on AppStore Connect and waits build processing.'
   lane :tvOSnightlies do
-    platform = 'tvOS'
-
-    build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
-    build_number = xcode_override_build_number(platform, build_number + 1)
-
-    branch_name = git_branch_name
-
-    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
-
-    changelog = default_changelog_for_nightlies(platform)
-
-    tvos_schemes.each_index do |index|
-      app_identifier = appstore_nightly_identifiers[index]
-      update_app_identifier_to_appstore(platform, app_identifier)
-
-      build_lane(
-        configuration: 'Nightly',
-        scheme: tvos_schemes[index],
-        display_name_suffix: nighlty_display_name_suffix(branch_name),
-        version_suffix: nightly_version_suffix(branch_name),
-        build_name_suffix: nightly_build_name_suffix(branch_name),
-        platform: platform,
-        export_to_appstore: true
-      )
-
-      srg_pilot(app_identifier, platform, changelog)
-
-      update_dsyms(app_identifier, platform, appcenter_tv_nightly_names[index], nil)
-
-      clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
-
-      UI.message tvos_schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
-    end
-
-    save_last_nightlies_success_git_commit_hash(platform)
+    testflight_nightlies(platform: 'tvOS')
   end
 
   desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -125,8 +91,22 @@ platform :ios do
     end
   end
 
-  desc 'Add tvOS nightly tester (email required)'
-  lane :tvOSnightlyTester do |options|
+  desc 'Builds a new iOS nightly on AppStore Connect and waits build processing.'
+  lane :iOSnightlies do
+    testflight_nightlies(platform: nil)
+  end
+
+  desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :iOSnightlyDSYMs do |options|
+    ios_schemes.each_index do |index|
+      app_identifier = appstore_nightly_identifiers[index]
+      appcenter_appname = appcenter_ios_nightly_names[index]
+      update_dsyms(app_identifier, 'iOS', appcenter_appname, options)
+    end
+  end
+
+  desc 'Add nightly TestFlight tester (email required)'
+  lane :nightlyTester do |options|
     addTestFlightTester(
       email: options[:email],
       first_name: options[:first_name],
@@ -479,6 +459,49 @@ platform :ios do
 
   # Private lanes
 
+  desc 'Builds a new nightly on AppStore Connect and waits build processing.'
+  private_lane :testflight_nightlies do |options|
+    platform = options[:platform] || 'iOS'
+    service = 'TestFlight'
+
+    build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
+    build_number = xcode_override_build_number(platform, build_number + 1)
+
+    branch_name = git_branch_name
+
+    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
+
+    changelog = default_changelog_for_nightlies(platform, service)
+
+    schemes = schemes(platform)
+    schemes.each_index do |index|
+      app_identifier = appstore_nightly_identifiers[index]
+      update_app_identifier_to_appstore(platform, app_identifier)
+
+      build_lane(
+        configuration: 'Nightly',
+        scheme: schemes[index],
+        display_name_suffix: nighlty_display_name_suffix(branch_name),
+        version_suffix: nightly_version_suffix(branch_name),
+        build_name_suffix: nightly_build_name_suffix(branch_name),
+        platform: platform,
+        export_to_appstore: true
+      )
+
+      srg_pilot(app_identifier, platform, changelog)
+
+      appcenter_appnames = appcenter_testflight_nightly_names(platform)
+      update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
+
+      clean_build_artifacts
+      reset_app_identifier_to_appstore(platform)
+
+      UI.message schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
+    end
+
+    save_last_nightlies_success_git_commit_hash(platform, service)
+  end
+
   desc 'Builds and uploads to TestFlight'
   private_lane :testflight_lane do |options|
     options[:platform] ||= 'iOS'
@@ -658,6 +681,16 @@ def tvos_schemes
   ['Play SWI TV', 'Play RTS TV', 'Play SRF TV', 'Play RSI TV', 'Play RTR TV']
 end
 
+def schemes(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    ios_schemes
+  else
+    tvos_schemes
+  end
+end
+
 def appcenter_nightly_names
   [ENV['PLAY_SWI_NIGHTLY_APPCENTER_APPNAME'],
    ENV['PLAY_RTS_NIGHTLY_APPCENTER_APPNAME'],
@@ -672,6 +705,24 @@ def appcenter_tv_nightly_names
    ENV['PLAY_SRF_TV_NIGHTLY_APPCENTER_APPNAME'],
    ENV['PLAY_RSI_TV_NIGHTLY_APPCENTER_APPNAME'],
    ENV['PLAY_RTR_TV_NIGHTLY_APPCENTER_APPNAME']]
+end
+
+def appcenter_ios_nightly_names
+  [ENV['PLAY_SWI_IOS_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RTS_IOS_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_SRF_IOS_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RSI_IOS_NIGHTLY_APPCENTER_APPNAME'],
+   ENV['PLAY_RTR_IOS_NIGHTLY_APPCENTER_APPNAME']]
+end
+
+def appcenter_testflight_nightly_names(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    appcenter_ios_nightly_names
+  else
+    appcenter_tv_nightly_names
+  end
 end
 
 def appcenter_beta_names
@@ -777,8 +828,8 @@ def nightly_build_name_suffix(branch_name)
 end
 
 # Return a default changelog for nightlies
-def default_changelog_for_nightlies(platform)
-  last_commit_hash = last_nightlies_success_git_commit_hash(platform)
+def default_changelog_for_nightlies(platform, service)
+  last_commit_hash = last_nightlies_success_git_commit_hash(platform, service)
   last_commit_hash = 'HEAD^^^^^' if last_commit_hash.length < 12
 
   changelog = changelog_from_git_commits(
@@ -793,18 +844,20 @@ def default_changelog_for_nightlies(platform)
 end
 
 # Save the git commit hash in a local text file for nightlies
-def save_last_nightlies_success_git_commit_hash(platform)
+def save_last_nightlies_success_git_commit_hash(platform, service)
   last = last_git_commit
-  unique_file = platform ? platform.downcase + '-' : ''
-  file_name = 'last-' + unique_file + 'nightlies-success-git-commit-hash.txt'
+  platform = platform ? platform.downcase + '-' : ''
+  service = service ? service.downcase + '-' : ''
+  file_name = 'last-' + service + platform + 'nightlies-success-git-commit-hash.txt'
   File.open(file_name, 'w') { |f| f.write(last[:commit_hash]) }
   last[:commit_hash]
 end
 
 # Read the git commit hash in a local text file for nightlies
-def last_nightlies_success_git_commit_hash(platform)
-  unique_file = platform ? platform.downcase + '-' : ''
-  file_name = 'last-' + unique_file + 'nightlies-success-git-commit-hash.txt'
+def last_nightlies_success_git_commit_hash(platform, service)
+  platform = platform ? platform.downcase + '-' : ''
+  service = service ? service.downcase + '-' : ''
+  file_name = 'last-' + service + platform + 'nightlies-success-git-commit-hash.txt'
   file = File.open(file_name, 'a+')
   nightlies_success_git_commit_hash = file.read
   file.close
@@ -853,14 +906,36 @@ def login_with_app_store_connect_api_key
   )
 end
 
-# Update only the app identifier for App Store Connect submit.
+# Update the app and app group identifiers for App Store Connect submit.
 def update_app_identifier_to_appstore(platform, app_identifier)
   update_xcconfig_value(
     path: 'Xcode/Play ' + platform + ' Application.xcconfig',
     name: 'PRODUCT_BUNDLE_IDENTIFIER',
     value: app_identifier
   )
+  set_xcconfig_value(
+    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
+    name: 'APP_GROUP_IDENTIFIER',
+    value: 'group.' + app_identifier
+  )
+  update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
   app_identifier
+end
+
+# Update the extension and app group identifiers for App Store Connect submit.
+def update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
+  return unless platform == 'iOS'
+
+  update_xcconfig_value(
+    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
+    name: 'PRODUCT_BUNDLE_IDENTIFIER',
+    value: app_identifier + '.notification-service-extension'
+  )
+  set_xcconfig_value(
+    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
+    name: 'APP_GROUP_IDENTIFIER',
+    value: 'group.' + app_identifier
+  )
 end
 
 def srg_pilot(app_identifier, platform, changelog)
@@ -881,6 +956,13 @@ def reset_app_identifier_to_appstore(platform)
   reset_git_repo(
     force: true,
     files: ['Xcode/Play ' + platform + ' Application.xcconfig']
+  )
+
+  return unless platform == 'iOS'
+
+  reset_git_repo(
+    force: true,
+    files: ['Xcode/Play ' + platform + ' Notification Service Extension.xcconfig']
   )
 end
 
