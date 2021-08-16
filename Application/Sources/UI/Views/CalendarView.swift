@@ -27,13 +27,8 @@ struct CalendarView: View {
                 .accentColor(.red)
             Divider()
             ResponderChain { firstResponder in
-                HStack {
-                    ExpandingButton(label: NSLocalizedString("Cancel", comment: "Title of a cancel button")) {
-                        firstResponder.sendAction(#selector(CalendarViewActions.close))
-                    }
-                    ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                        firstResponder.sendAction(#selector(CalendarViewActions.close))
-                    }
+                ExpandingButton(label: NSLocalizedString("OK", comment: "Title of the button to validate date settings")) {
+                    firstResponder.sendAction(#selector(CalendarViewActions.close))
                 }
                 .frame(height: 40)
             }
