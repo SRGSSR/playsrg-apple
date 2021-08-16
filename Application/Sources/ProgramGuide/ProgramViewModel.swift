@@ -251,7 +251,6 @@ extension ProgramViewModel {
                     .eraseToAnyPublisher()
             }
             .switchToLatest()
-            .replaceError(with: mediaData)
             .prepend(.empty)
             .eraseToAnyPublisher()
         }
@@ -266,7 +265,6 @@ extension ProgramViewModel {
             return Deferred {
                 Future<WatchLaterAction, Never> { promise in
                     WatchLaterAllowedActionForMediaAsync(media) { action in
-                        // TODO: Bug! The block can be called several times, but the promise is fulfilled the first time only!
                         promise(.success(action))
                     }
                 }
@@ -296,9 +294,11 @@ extension ProgramViewModel {
         if let channel = channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+                    .catch { _ in
+                        return Empty()
+                    }
             }
             .map { $0.first(where: { $0.channel == channel }) }
-            .replaceError(with: livestreamMedia)
             .prepend(nil)
             .eraseToAnyPublisher()
         }
