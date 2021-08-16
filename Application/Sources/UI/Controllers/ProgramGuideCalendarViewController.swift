@@ -42,8 +42,8 @@ final class ProgramGuideCalendarViewController: UIViewController {
         NSLayoutConstraint.activate([
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             calendarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            calendarView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            calendarView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
         
         self.view = view
@@ -51,7 +51,6 @@ final class ProgramGuideCalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         calendarView.content = CalendarView(model: model)
     }
     
@@ -64,6 +63,6 @@ final class ProgramGuideCalendarViewController: UIViewController {
 
 extension ProgramGuideCalendarViewController: CalendarViewActions {
     func close() {
-        self.dismiss(animated: true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 }
