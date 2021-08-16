@@ -14,7 +14,7 @@ import UIKit
 
 final class SectionViewController: UIViewController {
     let model: SectionViewModel
-    var initialSectionIndexTitle: String?
+    var initialSectionId: String?
     let fromPushNotification: Bool
     
     private var cancellables = Set<AnyCancellable>()
@@ -55,9 +55,9 @@ final class SectionViewController: UIViewController {
      *  Use `startSectionId` to provide the collection view section id where the view should initially open. If not found or
      *  specified the view opens at its top.
      */
-    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionIndexTitle: String? = nil, fromPushNotification: Bool = false) {
+    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
-        self.initialSectionIndexTitle = initialSectionIndexTitle
+        self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
@@ -289,15 +289,15 @@ final class SectionViewController: UIViewController {
     }
     
     private func scrollToInitialSection() {
-        guard initialSectionIndexTitle != nil else { return }
+        guard initialSectionId != nil else { return }
         
         let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
         guard !sectionIdentifiers.isEmpty else { return }
         
-        if let index = sectionIdentifiers.firstIndex(where: { $0.indexTitle == initialSectionIndexTitle }) {
+        if let index = sectionIdentifiers.firstIndex(where: { $0.id == initialSectionId }) {
             collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
         }
-        initialSectionIndexTitle = nil
+        initialSectionId = nil
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
@@ -415,17 +415,17 @@ extension SectionViewController {
         }
     }
     
-    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionIndexTitle: String?) -> SectionViewController {
+    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionIndexTitle: initialSectionIndexTitle)
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         }
         else {
-            return SectionViewController(section: .configured(.tvAllShows), initialSectionIndexTitle: initialSectionIndexTitle)
+            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
     }
     
     @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
-        return showsViewController(forChannelUid: channelUid, initialSectionIndexTitle: nil)
+        return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {

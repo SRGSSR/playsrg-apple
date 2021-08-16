@@ -352,8 +352,8 @@ extension PageViewController: PlayApplicationNavigation {
             return true
         case .showAZ:
             if let navigationController = navigationController {
-                let initialSectionIndexTitle = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionIndexTitle: initialSectionIndexTitle)
+                let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
