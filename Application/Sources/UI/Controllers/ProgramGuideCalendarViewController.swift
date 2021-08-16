@@ -17,7 +17,8 @@ final class ProgramGuideCalendarViewController: UIViewController {
         self.model = model
         super.init(nibName: nil, bundle: nil)
         
-        self.modalPresentationStyle = .overFullScreen
+        modalPresentationStyle = .overFullScreen
+        modalTransitionStyle = .crossDissolve
     }
     
     required init?(coder: NSCoder) {
