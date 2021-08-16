@@ -45,10 +45,8 @@ final class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let uniqueItems = removeDuplicates(in: items)
-                let headerItem = configuration.viewModelProperties.headerItem(from: uniqueItems)
-                let rows = configuration.viewModelProperties.rows(from: uniqueItems)
-                return State.loaded(headerItem: headerItem, rows: rows)
+                let rows = configuration.viewModelProperties.rows(from: removeDuplicates(in: items))
+                return State.loaded(rows: rows)
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -123,22 +121,23 @@ extension SectionViewModel {
         }
     }
     
-    enum HeaderItem {
+    enum Header: Hashable {
+        case none
+        case title(String)
         case item(Content.Item)
         case show(SRGShow)
     }
     
     struct Section: Hashable, Indexable {
-        let indexTitle: String
-        let title: String?
+        let id: String
+        let header: Header
         
-        init(indexTitle: String, title: String? = nil) {
-            self.indexTitle = indexTitle
-            self.title = title
+        var indexTitle: String {
+            return id.uppercased()
         }
-                
+        
         func hash(into hasher: inout Hasher) {
-            hasher.combine(indexTitle)
+            hasher.combine(id)
         }
     }
     
@@ -148,23 +147,14 @@ extension SectionViewModel {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: HeaderItem?, rows: [Row])
+        case loaded(rows: [Row])
         
         var isEmpty: Bool {
-            if case let .loaded(headerItem: _, rows: rows) = self {
+            if case let .loaded(rows: rows) = self {
                 return rows.isEmpty
             }
             else {
                 return true
-            }
-        }
-        
-        var headerItem: HeaderItem? {
-            if case let .loaded(headerItem: headerItem, rows: _) = self {
-                return headerItem
-            }
-            else {
-                return nil
             }
         }
     }
@@ -186,11 +176,9 @@ extension SectionViewModel {
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
-    
-    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
-    func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
-    
     var userActivity: NSUserActivity? { get }
+    
+    func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
 
 private extension SectionViewModel {
@@ -223,42 +211,35 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
-            if contentSection.type == .showAndMedias, let firstItem = items.first, case .show = firstItem {
-                return .item(firstItem)
-            }
-            else {
-                return nil
-            }
+        var userActivity: NSUserActivity? {
+            return nil
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             switch contentSection.type {
             case .showAndMedias:
-                if case .show = items.first {
-                    return [Row(section: Section(indexTitle: "main"), items: Array(items.suffix(from: 1)))]
+                if let firstItem = items.first, case .show = firstItem {
+                    return [Row(section: Section(id: "main", header: .item(firstItem)), items: Array(items.suffix(from: 1)))]
                 }
                 else {
-                    return [Row(section: Section(indexTitle: "main"), items: items)]
+                    return [Row(section: Section(id: "main", header: .none), items: items)]
                 }
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
                     return items.groupedAlphabetically { $0.title }
                         .map { character, items in
-                            let uppercaseCharacter = String(character).uppercased()
-                            return Row(section: Section(indexTitle: uppercaseCharacter, title: uppercaseCharacter), items: items)
+                            return Row(
+                                section: Section(id: String(character), header: .title(String(character).uppercased())),
+                                items: items
+                            )
                         }
                 default:
-                    return [Row(section: Section(indexTitle: "main"), items: items)]
+                    return [Row(section: Section(id: "main", header: .none), items: items)]
                 }
             default:
-                return [Row(section: Section(indexTitle: "main"), items: items)]
+                return [Row(section: Section(id: "main", header: .none), items: items)]
             }
-        }
-        
-        var userActivity: NSUserActivity? {
-            return nil
         }
     }
     
@@ -275,28 +256,6 @@ private extension SectionViewModel {
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid
-            }
-        }
-        
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
-            switch configuredSection {
-            case let .show(show):
-                return .show(show)
-            default:
-                return nil
-            }
-        }
-        
-        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
-            switch configuredSection {
-            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                return items.groupedAlphabetically { $0.title }
-                    .map { character, items in
-                        let uppercaseCharacter = String(character).uppercased()
-                        return Row(section: Section(indexTitle: uppercaseCharacter, title: uppercaseCharacter), items: items)
-                    }
-            default:
-                return [Row(section: Section(indexTitle: "main"), items: items)]
             }
         }
         
@@ -328,6 +287,23 @@ private extension SectionViewModel {
                 return userActivity
             default:
                 return nil
+            }
+        }
+        
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return items.groupedAlphabetically { $0.title }
+                    .map { character, items in
+                        return Row(
+                            section: Section(id: String(character), header: .title(String(character).uppercased())),
+                            items: items
+                        )
+                    }
+            case let .show(show):
+                return [Row(section: Section(id: "main", header: .show(show)), items: items)]
+            default:
+                return [Row(section: Section(id: "main", header: .none), items: items)]
             }
         }
     }

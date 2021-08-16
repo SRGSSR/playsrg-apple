@@ -42,7 +42,7 @@ final class SectionViewController: UIViewController {
     
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
-        if case let .loaded(headerItem: _, rows: rows) = state {
+        if case let .loaded(rows: rows) = state {
             for row in rows {
                 snapshot.appendSections([row.section])
                 snapshot.appendItems(row.items, toSection: row.section)
@@ -140,7 +140,7 @@ final class SectionViewController: UIViewController {
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, headerItem: self.model.state.headerItem, configuration: self.model.configuration)
+            view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -256,9 +256,10 @@ final class SectionViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
             navigationItem.rightBarButtonItem = nil
-        case let .loaded(headerItem: headerItem, rows: rows):
+        case let .loaded(rows: rows):
+            // FIXME: Add and used view model configuration for "empty view visible"
             let isEmpty = rows.isEmpty
-            emptyView.content = (headerItem == nil && isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
+            emptyView.content = isEmpty ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
             
             let hasEditButton = model.configuration.properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
@@ -301,7 +302,9 @@ final class SectionViewController: UIViewController {
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
-        let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        // FIXME: Add and used view model configuration for "empty view visible"
+        // let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        let top: CGFloat = 0
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
@@ -589,7 +592,6 @@ private extension SectionViewController {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
-                                                        headerItem: self?.model.state.headerItem,
                                                         configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
@@ -701,51 +703,40 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
-        let headerItem: SectionViewModel.HeaderItem?
         let configuration: SectionViewModel.Configuration
         
         var body: some View {
-            Group {
-                if let headerItem = headerItem {
-                    switch headerItem {
-                    case let .item(item):
-                        switch item {
-                        case let .show(show):
-                            SectionShowHeaderView(section: configuration.wrappedValue, show: show)
-                        default:
-                            Color.clear
-                        }
-                    case let .show(show):
-                        ShowHeaderView(show: show)
-                    }
-                }
-                else if let title = section.title {
-                    SimpleHeaderView(title: title)
-                }
-                else {
+            switch section.header {
+            case let .title(title):
+                SimpleHeaderView(title: title)
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    SectionShowHeaderView(section: configuration.wrappedValue, show: show)
+                default:
                     Color.clear
                 }
+            case let .show(show):
+                ShowHeaderView(show: show)
+            case .none:
+                Color.clear
             }
         }
         
-        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-            if let headerItem = headerItem {
-                switch headerItem {
-                case let .item(item):
-                    switch item {
-                    case let .show(show):
-                        return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-                    default:
-                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
-                    }
-                case let .show(show):
-                    return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-                }
-            }
-            else if let title = section.title {
+        static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+            switch section.header {
+            case let .title(title):
                 return SimpleHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth)
-            }
-            else {
+            case let .item(item):
+                switch item {
+                case let .show(show):
+                    return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                default:
+                    return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+                }
+            case let .show(show):
+                return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+            case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }
