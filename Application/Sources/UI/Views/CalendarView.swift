@@ -12,6 +12,8 @@ import SwiftUI
     func close()
 }
 
+// MARK: View
+
 /// Behavior: h-hug, v-hug
 struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
@@ -45,6 +47,8 @@ struct CalendarView: View {
         }
     }
 }
+
+// MARK: Preview
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
