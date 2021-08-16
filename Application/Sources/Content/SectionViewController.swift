@@ -594,7 +594,7 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -2 * Self.itemSpacing, bottom: 0, trailing: -2 * Self.itemSpacing)
+                header.contentInsets = section.header.contentInsets
                 header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
                 return [header]
             }
@@ -602,7 +602,7 @@ private extension SectionViewController {
             func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
-                let top = configuration.viewModelProperties.sectionTopInset
+                let top = section.header.sectionTopInset
                 
                 switch configuration.viewModelProperties.layout {
                 case .mediaGrid:
@@ -722,7 +722,8 @@ private extension SectionViewController {
                 // Header view insets provide a bit more space so that blur can reach the view boundaries. These
                 // insets are fixed so that the text is aligned with the content.
                 SimpleHeaderView(title: title)
-                    .padding(.horizontal, 2 * SectionViewController.itemSpacing)
+                    .padding(.leading, -section.header.contentInsets.leading)
+                    .padding(.trailing, -section.header.contentInsets.trailing)
                     .background(SectionBackgroundView())
             case let .item(item):
                 switch item {

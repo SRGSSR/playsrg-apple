@@ -132,6 +132,25 @@ extension SectionViewModel {
         case title(String)
         case item(Content.Item)
         case show(SRGShow)
+        
+        var sectionTopInset: CGFloat {
+            switch self {
+            case .title:
+                return constant(iOS: 8, tvOS: 12)
+            default:
+                return 0
+            }
+        }
+        
+        var contentInsets: NSDirectionalEdgeInsets {
+            switch self {
+            case .title:
+                let padding: CGFloat = 2 * constant(iOS: 8, tvOS: 40)
+                return NSDirectionalEdgeInsets(top: 0, leading: -padding, bottom: 0, trailing: -padding)
+            default:
+                return .zero
+            }
+        }
     }
     
     struct Section: Hashable, Indexable {
@@ -199,7 +218,6 @@ extension SectionViewModel {
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     var pinToVisibleBounds: Bool { get }
-    var sectionTopInset: CGFloat { get }
     var userActivity: NSUserActivity? { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
@@ -251,20 +269,6 @@ private extension SectionViewModel {
             #else
             return false
             #endif
-        }
-        
-        var sectionTopInset: CGFloat {
-            switch contentSection.type {
-            case .predefined:
-                switch contentSection.presentation.type {
-                case .favoriteShows:
-                    return constant(iOS: 8, tvOS: 12)
-                default:
-                    return 0
-                }
-            default:
-                return 0
-            }
         }
         
         var userActivity: NSUserActivity? {
@@ -326,15 +330,6 @@ private extension SectionViewModel {
             #else
             return false
             #endif
-        }
-        
-        var sectionTopInset: CGFloat {
-            switch configuredSection {
-            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                return constant(iOS: 8, tvOS: 12)
-            default:
-                return 0
-            }
         }
         
         var userActivity: NSUserActivity? {
