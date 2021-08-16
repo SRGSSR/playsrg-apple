@@ -121,6 +121,12 @@ extension SectionViewModel {
         }
     }
     
+    enum HeaderSize {
+        case zero
+        case small
+        case large
+    }
+    
     enum Header: Hashable {
         case none
         case title(String)
@@ -149,13 +155,29 @@ extension SectionViewModel {
         case failed(error: Error)
         case loaded(rows: [Row])
         
-        var isEmpty: Bool {
-            if case let .loaded(rows: rows) = self {
-                return rows.isEmpty
+        var topHeaderSize: HeaderSize {
+            if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
+                switch firstSection.header {
+                case .title:
+                    return .small
+                case .item, .show:
+                    return .large
+                case .none:
+                    return .zero
+                }
             }
             else {
-                return true
+                return .zero
             }
+        }
+        
+        var isEmpty: Bool {
+            if case let .loaded(rows: rows) = self {
+                for row in rows where !row.isEmpty {
+                    return false
+                }
+            }
+            return true
         }
     }
     

@@ -256,10 +256,9 @@ final class SectionViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
             navigationItem.rightBarButtonItem = nil
-        case let .loaded(rows: rows):
-            // FIXME: Add and used view model configuration for "empty view visible"
-            let isEmpty = rows.isEmpty
-            emptyView.content = isEmpty ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
+        case .loaded:
+            let isEmpty = state.isEmpty
+            emptyView.content = (state.topHeaderSize != .large && isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
             
             let hasEditButton = model.configuration.properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
@@ -302,9 +301,7 @@ final class SectionViewController: UIViewController {
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
-        // FIXME: Add and used view model configuration for "empty view visible"
-        // let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
-        let top: CGFloat = 0
+        let top = (state.topHeaderSize == .zero) ? Self.layoutVerticalMargin : 0
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
