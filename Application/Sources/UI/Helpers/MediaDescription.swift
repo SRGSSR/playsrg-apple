@@ -63,7 +63,7 @@ struct MediaDescription {
     }
     
     private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
-        return media.title.lowercased().contains(show.title.lowercased())
+        return media.title.lowercased() == show.title.lowercased()
     }
     
     static func title(for media: SRGMedia, style: Style) -> String {
