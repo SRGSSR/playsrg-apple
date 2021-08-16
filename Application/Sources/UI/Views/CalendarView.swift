@@ -54,10 +54,9 @@ struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             CalendarView(model: ProgramGuideViewModel(date: Date()))
-                .previewLayout(.sizeThatFits)
             CalendarView(model: ProgramGuideViewModel(date: Date()))
                 .frame(width: 600, height: 600)
-                .previewLayout(.sizeThatFits)
         }
+        .previewLayout(.sizeThatFits)
     }
 }
