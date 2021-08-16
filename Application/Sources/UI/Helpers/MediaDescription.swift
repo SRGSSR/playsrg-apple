@@ -130,8 +130,8 @@ struct MediaDescription {
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
-        if let showTitle = media.show?.title, !media.title.lowercased().contains(showTitle.lowercased()) {
-            return showTitle.appending(", \(media.title)")
+        if let show = media.show, !areRedundant(media: media, show: show) {
+            return show.title.appending(", \(media.title)")
         }
         else {
             return media.title
