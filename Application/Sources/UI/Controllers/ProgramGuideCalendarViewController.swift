@@ -59,6 +59,15 @@ final class ProgramGuideCalendarViewController: UIViewController {
     }
 }
 
+// MARK: Accessibility
+
+extension ProgramGuideCalendarViewController {
+    override func accessibilityPerformEscape() -> Bool {
+        dismiss(animated: true, completion: nil)
+        return true
+    }
+}
+
 // MARK: Protocols
 
 extension ProgramGuideCalendarViewController: CalendarViewActions {

@@ -32,7 +32,6 @@ struct CalendarView: View {
                         firstResponder.sendAction(#selector(CalendarViewActions.close))
                     }
                     ExpandingButton(label: NSLocalizedString("Done", comment: "Done button title")) {
-                        model.switchToDay(SRGDay(from: selectedDate))
                         firstResponder.sendAction(#selector(CalendarViewActions.close))
                     }
                 }
@@ -44,6 +43,9 @@ struct CalendarView: View {
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
             selectedDate = model.dateSelection.day.date
+        }
+        .onDisappear {
+            model.switchToDay(SRGDay(from: selectedDate))
         }
     }
 }
