@@ -12,10 +12,10 @@ import Foundation
 final class ProgramViewModel: ObservableObject {
     @Published var data: Data? {
         didSet {
-            mediaDataPublisher(for: data?.program)
+            Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
-            livestreamMediaPublisher(for: data?.channel)
+            Self.livestreamMediaPublisher(for: data?.channel)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
         }
@@ -235,7 +235,7 @@ final class ProgramViewModel: ObservableObject {
 // MARK: Publishers
 
 extension ProgramViewModel {
-    private func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
+    private static func mediaDataPublisher(for program: SRGProgram?) -> AnyPublisher<MediaData, Never> {
         if let mediaUrn = program?.mediaURN {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 return SRGDataProvider.current!.media(withUrn: mediaUrn)
@@ -290,7 +290,7 @@ extension ProgramViewModel {
         .eraseToAnyPublisher()
     }
     
-    private func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
+    private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel = channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
