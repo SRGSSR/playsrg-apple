@@ -26,7 +26,6 @@
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
-#import "ShowsViewController.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
