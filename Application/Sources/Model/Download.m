@@ -451,7 +451,7 @@ static NSArray<Download *> *s_sortedDownloads;
     
     self.presentation = media.presentation;
     
-    CGFloat imageWidth = SizeForImageScale(ImageScaleMedium).width;
+    CGFloat imageWidth = SizeForImageScale(ImageScaleMedium, SRGImageTypeDefault).width;
     self.downloadImageURL = [media imageURLForDimension:SRGImageDimensionWidth withValue:imageWidth type:SRGImageTypeDefault];
     
     self.uid = media.uid;

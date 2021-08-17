@@ -10,7 +10,7 @@
 
 @import SRGAppearance;
 
-CGSize SizeForImageScale(ImageScale imageScale)
+static CGSize DefaultSizeForImageScale(ImageScale imageScale)
 {
     static NSDictionary *s_widths;
     static dispatch_once_t s_onceToken;
@@ -35,7 +35,38 @@ CGSize SizeForImageScale(ImageScale imageScale)
     
     // Use 2x maximum as scale. Sufficient for a good result without having to load very large images
     CGFloat width = [s_widths[@(imageScale)] floatValue] * fminf(UIScreen.mainScreen.scale, 2.f);
+    return CGSizeMake(width, roundf(width * 3.f / 2.f));
+}
+
+static CGSize ShowPosterSizeForImageScale(ImageScale imageScale)
+{
+    static NSDictionary *s_widths;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+#if TARGET_OS_IOS
+        s_widths = @{ @(ImageScaleSmall) : @(150.f),
+                      @(ImageScaleMedium) : @(200.f),
+                      @(ImageScaleLarge) : @(300.f)};
+#else
+        s_widths = @{ @(ImageScaleSmall) : @(250.f),
+                      @(ImageScaleMedium) : @(300.f),
+                      @(ImageScaleLarge) : @(400.f)};
+#endif
+    });
+    
+    // Use 2x maximum as scale. Sufficient for a good result without having to load very large images
+    CGFloat width = [s_widths[@(imageScale)] floatValue] * fminf(UIScreen.mainScreen.scale, 2.f);
     return CGSizeMake(width, roundf(width * 9.f / 16.f));
+}
+
+CGSize SizeForImageScale(ImageScale imageScale, SRGImageType imageType)
+{
+    if ([imageType isEqualToString:SRGImageTypeShowPoster]) {
+        return ShowPosterSizeForImageScale(imageScale);
+    }
+    else {
+        return DefaultSizeForImageScale(imageScale);
+    }
 }
 
 NSString *FilePathForImagePlaceholder(ImagePlaceholder imagePlaceholder)
@@ -83,9 +114,7 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
     }
 }
 
-@implementation UIImage (PlaySRG)
-
-+ (UIImage *)play_imageForBlockingReason:(SRGBlockingReason)blockingReason
+UIImage *ImageForBlockingReason(SRGBlockingReason blockingReason)
 {
     switch (blockingReason) {
         case SRGBlockingReasonGeoblocking: {
@@ -117,10 +146,3 @@ UIImage *YouthProtectionImageForColor(SRGYouthProtectionColor youthProtectionCol
         }
     }
 }
-
-+ (UIImage *)play_vectorImageAtPath:(NSString *)filePath withScale:(ImageScale)imageScale
-{
-    return filePath ? [self srg_vectorImageAtPath:filePath withSize:SizeForImageScale(imageScale)] : nil;
-}
-
-@end

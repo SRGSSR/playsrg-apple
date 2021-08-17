@@ -110,7 +110,7 @@ extension Collection {
 
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)
+        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
     }
 }
 
