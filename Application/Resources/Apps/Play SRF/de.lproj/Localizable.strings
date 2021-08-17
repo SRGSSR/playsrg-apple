@@ -597,7 +597,7 @@
 
 /* TV guide short button title
    TV program guide view title */
-"TV guide" = "TV guide";
+"TV guide" = "TV-Programm";
 
 /* Default text displayed when no search criterium has been entered
    Message displayed when there is no search criterium entered */
