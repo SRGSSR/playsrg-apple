@@ -18,7 +18,7 @@ final class SectionViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Section, SectionViewModel.Item>!
+    private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Configuration, SectionViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -39,8 +39,8 @@ final class SectionViewController: UIViewController {
         #endif
     }
     
-    private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
-        var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
+    private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Configuration, SectionViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Configuration, SectionViewModel.Item>()
         if case let .loaded(headerItem: _, row: row) = state {
             snapshot.appendSections([row.section])
             snapshot.appendItems(row.items, toSection: row.section)
@@ -94,7 +94,7 @@ final class SectionViewController: UIViewController {
         #endif
         
         #if os(iOS)
-        if model.section.properties.sharingItem != nil {
+        if model.configuration.properties.sharingItem != nil {
             let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
                                                   style: .plain,
                                                   target: self,
@@ -157,7 +157,7 @@ final class SectionViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
-        userActivity = model.section.viewModelProperties.userActivity
+        userActivity = model.configuration.viewModelProperties.userActivity
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -252,9 +252,9 @@ final class SectionViewController: UIViewController {
             navigationItem.rightBarButtonItem = nil
         case let .loaded(headerItem: headerItem, row: row):
             let isEmpty = row.isEmpty
-            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(type: model.section.properties.emptyType)) : nil
+            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
             
-            let hasEditButton = model.section.properties.supportsEdition && !isEmpty
+            let hasEditButton = model.configuration.properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
         }
         
@@ -308,7 +308,7 @@ final class SectionViewController: UIViewController {
     }
     
     @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
-        guard let sharingItem = model.section.properties.sharingItem else { return }
+        guard let sharingItem = model.configuration.properties.sharingItem else { return }
         
         let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
         activityViewController.modalPresentationStyle = .popover
@@ -350,7 +350,7 @@ private extension SectionViewController {
 
 extension SectionViewController: DailyMediasViewController {
     var date: Date? {
-        guard case let .configured(section) = model.section.wrappedValue else { return nil }
+        guard case let .configured(section) = model.configuration.wrappedValue else { return nil }
         switch section {
         case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
             return day.date
@@ -512,11 +512,11 @@ extension SectionViewController: UIScrollViewDelegate {
 
 extension SectionViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return model.section.properties.analyticsTitle ?? ""
+        return model.configuration.properties.analyticsTitle ?? ""
     }
     
     var srg_pageViewLevels: [String]? {
-        return model.section.properties.analyticsLevels
+        return model.configuration.properties.analyticsLevels
     }
     
     var srg_isOpenedFromPushNotification: Bool {
@@ -558,7 +558,7 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Section, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
                                                         headerItem: self?.model.state.headerItem,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
@@ -567,7 +567,7 @@ private extension SectionViewController {
                 return [header]
             }
             
-            func layoutSection(for section: SectionViewModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+            func layoutSection(for section: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
@@ -615,7 +615,7 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
-        let section: SectionViewModel.Section
+        let section: SectionViewModel.Configuration
         
         var body: some View {
             switch item {
@@ -669,7 +669,7 @@ private extension SectionViewController {
 
 private extension SectionViewController {
     struct SectionHeaderView: View {
-        let section: SectionViewModel.Section
+        let section: SectionViewModel.Configuration
         let headerItem: SectionViewModel.HeaderItem?
         
         var body: some View {
@@ -688,7 +688,7 @@ private extension SectionViewController {
             }
         }
         
-        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        static func size(section: SectionViewModel.Configuration, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch headerItem {
             case let .item(item):
                 switch item {

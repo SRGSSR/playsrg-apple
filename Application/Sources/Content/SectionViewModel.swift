@@ -10,7 +10,7 @@ import SRGDataProviderCombine
 // MARK: View model
 
 final class SectionViewModel: ObservableObject {
-    let section: SectionViewModel.Section
+    let configuration: SectionViewModel.Configuration
     
     @Published private(set) var state: State = .loading
     
@@ -19,23 +19,23 @@ final class SectionViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
-        return section.properties.displaysTitle ? section.properties.title : nil
+        return configuration.properties.displaysTitle ? configuration.properties.title : nil
     }
     
     var numberOfSelectedItems: Int {
         return selectedItems.count
     }
     
-    init(section contentSection: Content.Section, filter: SectionFiltering?) {
-        self.section = SectionViewModel.Section(contentSection)
+    init(section: Content.Section, filter: SectionFiltering?) {
+        self.configuration = SectionViewModel.Configuration(section)
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [section, trigger] in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
             return Publishers.CombineLatest(
-                section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                             paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                             filter: filter)
+                configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                                                   paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
+                                                   filter: filter)
                     .scan([]) { $0 + $1 },
-                section.properties.interactiveUpdatesPublisher()
+                configuration.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -43,9 +43,9 @@ final class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = section.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: section.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: section, items: rowItems))
+                let headerItem = configuration.viewModelProperties.headerItem(from: items)
+                let rowItems = removeDuplicates(in: configuration.viewModelProperties.rowItems(from: items))
+                return State.loaded(headerItem: headerItem, row: Row(section: configuration, items: rowItems))
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -85,10 +85,10 @@ final class SectionViewModel: ObservableObject {
     }
     
     func deleteSelection() {
-        section.properties.remove(Array(selectedItems))
+        configuration.properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
-        if let analyticsDeletionHiddenEventTitle = section.properties.analyticsDeletionHiddenEventTitle {
+        if let analyticsDeletionHiddenEventTitle = configuration.properties.analyticsDeletionHiddenEventTitle {
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.selection.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
@@ -99,7 +99,7 @@ final class SectionViewModel: ObservableObject {
 // MARK: Types
 
 extension SectionViewModel {
-    struct Section: Hashable {
+    struct Configuration: Hashable {
         let wrappedValue: Content.Section
         
         init(_ wrappedValue: Content.Section) {
@@ -126,7 +126,7 @@ extension SectionViewModel {
     }
     
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Section, Item>
+    typealias Row = CollectionRow<Configuration, Item>
     
     enum State {
         case loading
