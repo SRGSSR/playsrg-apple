@@ -54,7 +54,7 @@ enum Content {
             }
         }
         
-        static func groupAlphabetically(_ items: [Item]) -> OrderedDictionary<Character, [Item]> {
+        static func groupAlphabetically(_ items: [Item]) -> [(key: Character, value: [Item])] {
             return items.groupedAlphabetically { $0.title }
         }
     }
