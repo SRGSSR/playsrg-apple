@@ -577,6 +577,7 @@ private extension SectionViewController {
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
+        configuration.interSectionSpacing = constant(iOS: 30, tvOS: 100)
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
@@ -593,35 +594,38 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -2 * Self.itemSpacing, bottom: 0, trailing: -2 * Self.itemSpacing)
+                header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
                 return [header]
             }
             
             func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
+                let top = configuration.viewModelProperties.sectionTopInset
                 
                 switch configuration.viewModelProperties.layout {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .topicGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 }
@@ -698,6 +702,16 @@ private extension SectionViewController {
 // MARK: Headers
 
 private extension SectionViewController {
+    struct SectionBackgroundView: View {
+        var body: some View {
+            #if os(iOS)
+            Blur(style: .systemThinMaterial)
+            #else
+            Color.clear
+            #endif
+        }
+    }
+    
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
         let configuration: SectionViewModel.Configuration
@@ -705,7 +719,11 @@ private extension SectionViewController {
         var body: some View {
             switch section.header {
             case let .title(title):
+                // Header view insets provide a bit more space so that blur can reach the view boundaries. These
+                // insets are fixed so that the text is aligned with the content.
                 SimpleHeaderView(title: title)
+                    .padding(.horizontal, 2 * SectionViewController.itemSpacing)
+                    .background(SectionBackgroundView())
             case let .item(item):
                 switch item {
                 case let .show(show):

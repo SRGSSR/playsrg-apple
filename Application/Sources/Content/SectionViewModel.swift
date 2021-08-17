@@ -121,13 +121,13 @@ extension SectionViewModel {
         }
     }
     
-    enum HeaderSize {
-        case zero
-        case small
-        case large
-    }
-    
     enum Header: Hashable {
+        enum Size {
+            case zero
+            case small
+            case large
+        }
+        
         case none
         case title(String)
         case item(Content.Item)
@@ -155,7 +155,7 @@ extension SectionViewModel {
         case failed(error: Error)
         case loaded(rows: [Row])
         
-        var topHeaderSize: HeaderSize {
+        var topHeaderSize: Header.Size {
             if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
                 switch firstSection.header {
                 case .title:
@@ -198,6 +198,8 @@ extension SectionViewModel {
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
+    var pinToVisibleBounds: Bool { get }
+    var sectionTopInset: CGFloat { get }
     var userActivity: NSUserActivity? { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
@@ -230,6 +232,38 @@ private extension SectionViewModel {
                 }
             case .none:
                 return .mediaGrid
+            }
+        }
+        
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return true
+                default:
+                    return false
+                }
+            default:
+                return false
+            }
+            #else
+            return false
+            #endif
+        }
+        
+        var sectionTopInset: CGFloat {
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return constant(iOS: 8, tvOS: 12)
+                default:
+                    return 0
+                }
+            default:
+                return 0
             }
         }
         
@@ -278,6 +312,28 @@ private extension SectionViewModel {
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid
+            }
+        }
+        
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return true
+            default:
+                return false
+            }
+            #else
+            return false
+            #endif
+        }
+        
+        var sectionTopInset: CGFloat {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return constant(iOS: 8, tvOS: 12)
+            default:
+                return 0
             }
         }
         
