@@ -55,7 +55,7 @@
 /* More than 3 min option */
 "> 30 min" = "> 30 min";
 
-/* Short title displayed in home pages on a button. */
+/* Show A-Z short button title */
 "A to Z" = "A bis Z";
 
 /* Context menu action to add a media to the downloads */
@@ -87,8 +87,11 @@
 /* Back to live shortcut label */
 "Back to live" = "Zurück zu live";
 
-/* Short title displayed in home pages on a button. */
+/* Show by date short button title */
 "By date" = "Nach Datum";
+
+/* Calendar button in program guide */
+"Calendar" = "Calendar";
 
 /* Label of the button to close the media sharing menu
    Title of a cancel button
@@ -233,7 +236,8 @@
    Label to present the later list
    Title Label used to present the audio later list
    Title Label used to present the video later list
-   Watch later or listen later button label in media detail view when a media is in the later list */
+   Watch later or listen later button label in media detail view when a media is in the later list
+   Watch later or listen later button label in program detail view when a media is in the later list */
 "Later" = "Später";
 
 /* Title label used to present the latest episodes from radio favorite shows
@@ -250,6 +254,7 @@
 "Listen" = "Abspielen";
 
 /* Button label in media detail view to add an audio to the later list
+   Button label in program detail view to add an audio to the later list
    Context menu action to add an audio to the later list */
 "Listen later" = "Später hören";
 
@@ -290,6 +295,7 @@
 "Media not available yet" = "Inhalt noch nicht verfügbar";
 
 /* Button to access more episodes from the media detail view
+   Button to access more episodes from the program detail view
    Context menu action to open more episodes associated with a media */
 "More episodes" = "Mehr zur Sendung";
 
@@ -359,7 +365,11 @@
 /* Subscription label to be notified in the show view */
 "Notify me" = "Mitteilungen aktivieren";
 
+/* Now button in program guide */
+"Now" = "Now";
+
 /* Title of the button displayed at the end of an onboarding
+   Title of the button to validate date settings
    Title of the button when the user subscribed to all TV and radio shows
    Title of the search settings button to apply settings */
 "OK" = "OK";
@@ -419,7 +429,8 @@
 /* Resume playback button label */
 "Resume" = "Weiter abspielen";
 
-/* Title label used to present medias whose playback can be resumed */
+/* Alert choice to resume playback
+   Title label used to present medias whose playback can be resumed */
 "Resume playback" = "Weiterschauen";
 
 /* Label to present the search view
@@ -584,6 +595,10 @@
 /* Title label to present main TV livestreams */
 "TV channels" = "TV-Sender";
 
+/* TV guide short button title
+   TV program guide view title */
+"TV guide" = "TV guide";
+
 /* Default text displayed when no search criterium has been entered
    Message displayed when there is no search criterium entered */
 "Type to start searching" = "Suchbegriff eingeben";
@@ -607,7 +622,15 @@
    User activity title when watching a video */
 "Watch %@" = "%@ schauen";
 
+/* Alert choice to watch content from start
+   Button to watch some program from the start */
+"Watch from start" = "Watch from start";
+
+/* Resume playback alert title */
+"Watch from start?" = "Watch from start?";
+
 /* Button label in media detail view to add a video to the later list
+   Button label in program detail view to add a video to the later list
    Context menu action to add a video to the later list */
 "Watch later" = "Später schauen";
 
@@ -618,8 +641,12 @@
 /* Title displayed at the top of the What's new view */
 "What's new" = "Neue Funktionen";
 
-/* Period setting option */
+/* Period setting option
+   Yesterday button in program guide */
 "Yesterday" = "Gestern";
+
+/* Resume playback alert explanation */
+"You already played this content." = "You already played this content.";
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */

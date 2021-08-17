@@ -151,7 +151,7 @@ final class ProgramViewModel: ObservableObject {
                 guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
                 if HistoryCanResumePlaybackForMedia(media) {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
-                                                            message: NSLocalizedString("You already played this content", comment: "Resume playback alert explanation"),
+                                                            message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume playback", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
                         appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)

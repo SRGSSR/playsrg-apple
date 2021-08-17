@@ -13,7 +13,7 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vues";
 
-/* Title pronounced in home pages on shows A to Z button. */
+/* Show A-Z button label */
 "A to Z shows" = "Émissions de A à Z";
 
 /* Favorite label in the player view when a show can be favorited
@@ -94,13 +94,17 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mon compte";
 
+/* Next day button label in program guide */
+"Next day" = "Jour suivant";
+
 /* Text providing next program time information. */
 "Next, at %@" = "À suivre à %@";
 
 /* Mini player label */
 "Now playing: %@" = "A l'écoute : %@";
 
-/* More button hint */
+/* More button hint
+   Program cell hint */
 "Opens details." = "Affiche plus de détails.";
 
 /* Hint for content opened in Safari */
@@ -136,6 +140,9 @@
 /* Song cell hint */
 "Plays the music." = "Joue la musique.";
 
+/* Previous day button label in program guide */
+"Previous day" = "Jour précédent";
+
 /* Profile button label on home view */
 "Profile" = "Profil";
 
@@ -160,8 +167,11 @@
 /* Homepage header action hint */
 "Shows all contents." = "Affiche tout le contenu.";
 
-/* Title pronounced in home pages on shows by date button. */
+/* Show by date button label */
 "Shows by date" = "Émissions par date";
+
+/* Channel selector button hint */
+"Shows the channel programs" = "Affiche les programmes de la chaîne";
 
 /* Stop button label */
 "Stop" = "Stop";
@@ -174,7 +184,7 @@
 
 /* Media cell hint in edit mode
    Show cell hint in edit mode */
-"Toggles selection." = "inverse la sélection.";
+"Toggles selection." = "Inverse la sélection.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attention";
