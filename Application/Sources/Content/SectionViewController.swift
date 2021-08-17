@@ -703,7 +703,7 @@ private extension SectionViewController {
 
 // MARK: Headers
 
-private extension SectionViewController {    
+private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
         let configuration: SectionViewModel.Configuration
