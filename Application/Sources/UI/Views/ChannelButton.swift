@@ -51,7 +51,7 @@ extension ChannelButton {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Displays the channel programs", comment: "Channel selector button hint")
+        return PlaySRGAccessibilityLocalizedString("Shows the channel programs", comment: "Channel selector button hint")
     }
 }
 

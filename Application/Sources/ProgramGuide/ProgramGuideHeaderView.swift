@@ -80,14 +80,14 @@ struct ProgramGuideHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day program", comment: "Previous day button label in program guide")) {
+                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     model.switchToPreviousDay()
                 }
                 Text(model.dateString)
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
-                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day program", comment: "Next day button label in program guide")) {
+                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     model.switchToNextDay()
                 }
             }
