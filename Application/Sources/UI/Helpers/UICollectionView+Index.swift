@@ -15,7 +15,7 @@ protocol Indexable {
  *  There is no built-in support for index titles with diffable data sources, but this can be fixed with a lightweight
  *  subclass, see https://developer.apple.com/forums/thread/117727.
  *
- *  This enables the collection index for iOS and tvOS.
+ *  This approach works both for iOS and tvOS.
  */
 class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDiffableDataSource<Section, Item> where Section: Hashable & Indexable, Item: Hashable {
     override func indexTitles(for collectionView: UICollectionView) -> [String]? {

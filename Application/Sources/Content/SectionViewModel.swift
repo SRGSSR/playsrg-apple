@@ -19,7 +19,8 @@ final class SectionViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
-        return configuration.properties.displaysTitle ? configuration.properties.title : nil
+        let properties = configuration.properties
+        return properties.displaysTitle ? properties.title : nil
     }
     
     var numberOfSelectedItems: Int {
@@ -86,10 +87,12 @@ final class SectionViewModel: ObservableObject {
     }
     
     func deleteSelection() {
-        configuration.properties.remove(Array(selectedItems))
+        let properties = configuration.properties
+        
+        properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
-        if let analyticsDeletionHiddenEventTitle = configuration.properties.analyticsDeletionHiddenEventTitle {
+        if let analyticsDeletionHiddenEventTitle = properties.analyticsDeletionHiddenEventTitle {
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.selection.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
@@ -278,7 +281,7 @@ private extension SectionViewModel {
                     return false
                 }
             default:
-                // Remark: `.shows` must not be sorted alphabetically because of pagination; no headers.
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination; no headers.
                 return false
             }
             #else
@@ -307,7 +310,7 @@ private extension SectionViewModel {
                     return SectionViewModel.row(with: items)
                 }
             default:
-                // Remark: `.shows` must not be sorted alphabetically because of pagination.
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
                 return SectionViewModel.row(with: items)
             }
         }

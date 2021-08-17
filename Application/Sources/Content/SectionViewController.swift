@@ -258,9 +258,10 @@ final class SectionViewController: UIViewController {
             navigationItem.rightBarButtonItem = nil
         case .loaded:
             let isEmpty = state.isEmpty
-            emptyView.content = (state.topHeaderSize != .large && isEmpty) ? EmptyView(state: .empty(type: model.configuration.properties.emptyType)) : nil
+            let properties = model.configuration.properties
+            emptyView.content = (state.topHeaderSize != .large && isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
             
-            let hasEditButton = model.configuration.properties.supportsEdition && !isEmpty
+            let hasEditButton = properties.supportsEdition && !isEmpty
             navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
         }
         
@@ -719,8 +720,8 @@ private extension SectionViewController {
         var body: some View {
             switch section.header {
             case let .title(title):
-                // Header view insets provide a bit more space so that blur can reach the view boundaries. These
-                // insets are fixed so that the text is aligned with the content.
+                // Header view insets provide a bit more horizontal space so that blur can reach the collection
+                // boundaries. These insets must be negated so that the text stays aligned with the section content underneath.
                 SimpleHeaderView(title: title)
                     .padding(.leading, -section.header.contentInsets.leading)
                     .padding(.trailing, -section.header.contentInsets.trailing)
