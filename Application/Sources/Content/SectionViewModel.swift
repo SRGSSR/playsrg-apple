@@ -145,13 +145,12 @@ extension SectionViewModel {
             }
         }
         
-        var contentInsets: NSDirectionalEdgeInsets {
+        var horizontalPadding: CGFloat {
             switch self {
             case .title:
-                let padding: CGFloat = 2 * constant(iOS: 8, tvOS: 40)
-                return NSDirectionalEdgeInsets(top: 0, leading: -padding, bottom: 0, trailing: -padding)
+                return 2 * SectionViewController.itemSpacing
             default:
-                return .zero
+                return 0
             }
         }
     }

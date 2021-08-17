@@ -9,26 +9,41 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-hug
-struct SimpleHeaderView: View {
+struct TransluscentHeaderView: View {
     let title: String
+    let horizontalPadding: CGFloat
     
     var body: some View {
         Text(title)
             .srgFont(.H3)
             .lineLimit(1)
             .foregroundColor(.srgGrayC7)
+            .padding(.horizontal, horizontalPadding)
             .padding(.vertical, constant(iOS: 3, tvOS: 15))
             .frame(maxWidth: .infinity, alignment: .leading)
+            .background(BackgroundView())
             .accessibilityElement(label: title.lowercased(), traits: .isHeader)
+    }
+    
+    /// Behavior: h-exp, v-exp
+    // TODO: Use native blur API on iOS 15 (see https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-visual-effect-blurs)
+    struct BackgroundView: View {
+        var body: some View {
+            #if os(iOS)
+            Blur(style: .systemThinMaterial)
+            #else
+            Color.clear
+            #endif
+        }
     }
 }
 
 // MARK: Size
 
-final class SimpleHeaderViewSize: NSObject {
-    @objc static func recommended(title: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+final class TransluscentHeaderViewSize: NSObject {
+    @objc static func recommended(title: String?, horizontalPadding: CGFloat, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
-            let hostController = UIHostingController(rootView: SimpleHeaderView(title: title))
+            let hostController = UIHostingController(rootView: TransluscentHeaderView(title: title, horizontalPadding: horizontalPadding))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))
         }
@@ -40,11 +55,11 @@ final class SimpleHeaderViewSize: NSObject {
 
 // MARK: Preview
 
-struct SimpleHeaderView_Previews: PreviewProvider {
+struct TransluscentHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            SimpleHeaderView(title: "Section title")
-            SimpleHeaderView(title: .loremIpsum)
+            TransluscentHeaderView(title: "Section title", horizontalPadding: 4)
+            TransluscentHeaderView(title: .loremIpsum, horizontalPadding: 16)
         }
         .frame(width: 800)
         .previewLayout(.sizeThatFits)

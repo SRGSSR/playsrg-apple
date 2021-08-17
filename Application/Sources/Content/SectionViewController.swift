@@ -17,6 +17,8 @@ final class SectionViewController: UIViewController {
     var initialSectionId: String?
     let fromPushNotification: Bool
     
+    static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    
     private var cancellables = Set<AnyCancellable>()
     
     private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Section, SectionViewModel.Item>!
@@ -572,7 +574,6 @@ extension SectionViewController: SectionShowHeaderViewAction {
 // MARK: Layout
 
 private extension SectionViewController {
-    private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
@@ -595,7 +596,7 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                header.contentInsets = section.header.contentInsets
+                header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -section.header.horizontalPadding, bottom: 0, trailing: -section.header.horizontalPadding)
                 header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
                 return [header]
             }
@@ -702,17 +703,7 @@ private extension SectionViewController {
 
 // MARK: Headers
 
-private extension SectionViewController {
-    struct SectionBackgroundView: View {
-        var body: some View {
-            #if os(iOS)
-            Blur(style: .systemThinMaterial)
-            #else
-            Color.clear
-            #endif
-        }
-    }
-    
+private extension SectionViewController {    
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
         let configuration: SectionViewModel.Configuration
@@ -720,12 +711,7 @@ private extension SectionViewController {
         var body: some View {
             switch section.header {
             case let .title(title):
-                // Header view insets provide a bit more horizontal space so that blur can reach the collection
-                // boundaries. These insets must be negated so that the text stays aligned with the section content underneath.
-                SimpleHeaderView(title: title)
-                    .padding(.leading, -section.header.contentInsets.leading)
-                    .padding(.trailing, -section.header.contentInsets.trailing)
-                    .background(SectionBackgroundView())
+                TransluscentHeaderView(title: title, horizontalPadding: section.header.horizontalPadding)
             case let .item(item):
                 switch item {
                 case let .show(show):
@@ -743,7 +729,7 @@ private extension SectionViewController {
         static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch section.header {
             case let .title(title):
-                return SimpleHeaderViewSize.recommended(title: title, layoutWidth: layoutWidth)
+                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: section.header.horizontalPadding, layoutWidth: layoutWidth)
             case let .item(item):
                 switch item {
                 case let .show(show):

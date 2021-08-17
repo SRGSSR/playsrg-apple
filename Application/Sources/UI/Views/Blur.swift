@@ -8,7 +8,7 @@ import SwiftUI
 
 // MARK: View
 
-// TODO: Native support is available on iOS / tvOS 15+: https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-visual-effect-blurs
+// TODO: Can be removed when iOS 15+ is required (see https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-visual-effect-blurs)
 
 /**
  *  A view which blurs content behind it.
