@@ -89,6 +89,7 @@ protocol SectionProperties {
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: Content.EmptyType { get }
+    var imageType: SRGImageType { get }
     
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
@@ -214,6 +215,23 @@ private extension Content {
                 }
             default:
                 return .generic
+            }
+        }
+
+        var imageType: SRGImageType {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            switch contentSection.type {
+            case .shows:
+                return .showPoster
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows:
+                    return .showPoster
+                default:
+                    return .default
+                }
+            default:
+                return .default
             }
         }
         
@@ -496,6 +514,15 @@ private extension Content {
                 return .resumePlayback
             default:
                 return .generic
+            }
+        }
+        
+        var imageType: SRGImageType {
+            switch configuredSection {
+            case .tvAllShows:
+                return .showPoster
+            default:
+                return .default
             }
         }
         

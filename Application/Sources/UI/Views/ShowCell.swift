@@ -16,22 +16,25 @@ struct ShowCell: View {
     }
     
     @Binding private(set) var show: SRGShow?
-    @StateObject private var model = ShowCellViewModel()
     
     let style: Style
+    let imageType: SRGImageType
+
+    @StateObject private var model = ShowCellViewModel()
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
-    init(show: SRGShow?, style: Style) {
+    init(show: SRGShow?, style: Style, imageType: SRGImageType) {
         _show = .constant(show)
         self.style = style
+        self.imageType = imageType
     }
     
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
+            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageType), action: action) {
                 ImageView(url: model.imageUrl)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
@@ -43,7 +46,7 @@ struct ShowCell: View {
             #else
             VStack(spacing: 0) {
                 ImageView(url: model.imageUrl)
-                    .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
+                    .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
                     .background(Color.white.opacity(0.1))
                 DescriptionView(model: model, style: style)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
@@ -116,37 +119,43 @@ private extension ShowCell {
 // MARK: Size
 
 final class ShowCellSize: NSObject {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
-    private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 32, tvOS: 45)
     
-    @objc static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
+    fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
+        return imageType == .showPoster ? 2 / 3 : 16 / 9
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+    fileprivate static func itemWidth(for imageType: SRGImageType) -> CGFloat {
+        return imageType == .showPoster ? constant(iOS: 158, tvOS: 276) : constant(iOS: 210, tvOS: 375)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    @objc static func swimlane(for imageType: SRGImageType) -> NSCollectionLayoutSize {
+        return swimlane(for: imageType, itemWidth: itemWidth(for: imageType))
     }
     
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func swimlane(for imageType: SRGImageType, itemWidth: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset)
+    }
+    
+    @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
+        return grid(for: imageType, approximateItemWidth: itemWidth(for: imageType), layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    }
+    
+    @objc static func grid(for imageType: SRGImageType, approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(approximateItemWidth, aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
     }
 }
 
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    private static let size = ShowCellSize.swimlane().previewSize
+    private static let size = ShowCellSize.swimlane(for: .default).previewSize
     
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard), style: .standard)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageType: .default)
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

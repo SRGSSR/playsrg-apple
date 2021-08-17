@@ -119,7 +119,7 @@ struct SearchResultsView: View {
                     .opacity(0.8)
                     .padding()
                 case let .show(show):
-                    ShowCell(show: show, style: .standard)
+                    ShowCell(show: show, style: .standard, imageType: .default)
                 case let .media(media):
                     MediaCell(media: media, style: .show)
                         .onAppear {

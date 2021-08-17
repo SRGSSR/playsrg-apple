@@ -589,7 +589,7 @@ private extension SectionViewController {
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
@@ -634,25 +634,26 @@ private extension SectionViewController {
                     }
                 }
             case let .show(show):
+                let imageType = section.properties.imageType
                 switch section.wrappedValue {
                 case let .content(contentSection):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite)
+                            ShowCell(show: show, style: .favorite, imageType: imageType)
                         default:
-                            ShowCell(show: show, style: .standard)
+                            ShowCell(show: show, style: .standard, imageType: imageType)
                         }
                     default:
-                        ShowCell(show: show, style: .standard)
+                        ShowCell(show: show, style: .standard, imageType: imageType)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite)
+                        ShowCell(show: show, style: .favorite, imageType: imageType)
                     default:
-                        ShowCell(show: show, style: .standard)
+                        ShowCell(show: show, style: .standard, imageType: imageType)
                     }
                 }
             case let .topic(topic: topic):

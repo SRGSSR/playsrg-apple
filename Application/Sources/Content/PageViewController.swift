@@ -493,7 +493,7 @@ private extension PageViewController {
                     return layoutSection
                 case .showSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
-                        return ShowCellSize.swimlane()
+                        return ShowCellSize.swimlane(for: section.properties.imageType)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -520,7 +520,7 @@ private extension PageViewController {
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
                     }
                 #if os(iOS)
                 case .showAccess:
@@ -577,7 +577,7 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard)
+                PlaySRG.ShowCell(show: show, style: .standard, imageType: section.properties.imageType)
             }
         }
     }
@@ -613,7 +613,7 @@ private extension PageViewController {
                 #endif
                 }
             case .more:
-                MoreCell(section: item.section.wrappedValue, filter: id)
+                MoreCell(section: item.section.wrappedValue, imageType: item.section.properties.imageType, filter: id)
             }
         }
     }

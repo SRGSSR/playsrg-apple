@@ -274,7 +274,8 @@
 {
     NSString *indexLetter = self.indexLetters[indexPath.section];
     SRGShow *show = self.showsAlphabeticalMap[indexLetter][indexPath.row];
-    return [collectionView showCellFor:indexPath show:show];
+    SRGImageType imageType = (ApplicationConfiguration.sharedApplicationConfiguration.posterImagesEnabled && ! self.radioChannel) ? SRGImageTypeShowPoster : SRGImageTypeDefault;
+    return [collectionView showCellFor:indexPath show:show imageType:imageType];
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -325,7 +326,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[ShowCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2] constrainedBy:collectionView];
+    SRGImageType imageType = (! self.radioChannel && ApplicationConfiguration.sharedApplicationConfiguration.posterImagesEnabled) ? SRGImageTypeShowPoster : SRGImageTypeDefault;
+    return [[ShowCellSize gridFor:imageType layoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:2] constrainedBy:collectionView];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section

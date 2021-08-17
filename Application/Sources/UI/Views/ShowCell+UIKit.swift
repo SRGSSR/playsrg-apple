@@ -7,13 +7,24 @@
 import UIKit
 
 extension UICollectionView {
-    private static let showCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
+    private static let defaultShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
         return UICollectionView.CellRegistration { cell, _, show in
-            cell.content = ShowCell(show: show, style: .standard)
+            cell.content = ShowCell(show: show, style: .standard, imageType: .default)
         }
     }()
     
-    @objc func showCell(for indexPath: IndexPath, show: SRGShow) -> UICollectionViewCell {
-        return dequeueConfiguredReusableCell(using: Self.showCellRegistration, for: indexPath, item: show)
+    private static let posterShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
+        return UICollectionView.CellRegistration { cell, _, show in
+            cell.content = ShowCell(show: show, style: .standard, imageType: .showPoster)
+        }
+    }()
+    
+    @objc func showCell(for indexPath: IndexPath, show: SRGShow, imageType: SRGImageType) -> UICollectionViewCell {
+        if imageType == .showPoster {
+            return dequeueConfiguredReusableCell(using: Self.posterShowCellRegistration, for: indexPath, item: show)
+        }
+        else {
+            return dequeueConfiguredReusableCell(using: Self.defaultShowCellRegistration, for: indexPath, item: show)
+        }
     }
 }

@@ -98,7 +98,7 @@ struct ShowsView: View {
                     .opacity(0.8)
                     .padding()
                 case let .show(show):
-                    ShowCell(show: show, style: .standard)
+                    ShowCell(show: show, style: .standard, imageType: .default)
                 }
             } supplementaryView: { _, indexPath, _, _ in
                 switch model.state {

@@ -649,8 +649,9 @@
     }
     // Search show list
     else {
-        // Small margin to avoid overlap with the horizontal scrolling indicator
-        CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
+        // Small margin to avoid overlap with the horizontal scrolling indicator; use default image type in all cases
+        // since search show results can mix TV and radio
+        CGFloat height = [[ShowCellSize swimlaneFor:SRGImageTypeDefault] constrainedBy:collectionView].height + 15.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
