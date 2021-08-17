@@ -41,7 +41,7 @@ enum Content {
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?)
         
-        var title: String? {
+        private var title: String? {
             switch self {
             case let .media(media):
                 return media.title
@@ -52,6 +52,10 @@ enum Content {
             case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess:
                 return nil
             }
+        }
+        
+        static func groupAlphabetically(_ items: [Item]) -> OrderedDictionary<Character, [Item]> {
+            return items.groupedAlphabetically { $0.title }
         }
     }
     

@@ -211,6 +211,20 @@ extension SectionViewModel {
         case loadMore
         case reload
     }
+    
+    fileprivate static func row(with items: [Item], header: Header = .none) -> [Row] {
+        return [Row(section: Section(id: "main", header: header), items: items)]
+    }
+    
+    fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
+        return Item.groupAlphabetically(items)
+            .map { character, items in
+                return Row(
+                    section: Section(id: String(character), header: .title(String(character).uppercased())),
+                    items: items
+                )
+            }
+    }
 }
 
 // MARK: Properties
@@ -264,6 +278,7 @@ private extension SectionViewModel {
                     return false
                 }
             default:
+                // Remark: `.shows` must not be sorted alphabetically because of pagination; no headers.
                 return false
             }
             #else
@@ -279,26 +294,21 @@ private extension SectionViewModel {
             switch contentSection.type {
             case .showAndMedias:
                 if let firstItem = items.first, case .show = firstItem {
-                    return [Row(section: Section(id: "main", header: .item(firstItem)), items: Array(items.suffix(from: 1)))]
+                    return SectionViewModel.row(with: Array(items.suffix(from: 1)), header: .item(firstItem))
                 }
                 else {
-                    return [Row(section: Section(id: "main", header: .none), items: items)]
+                    return SectionViewModel.row(with: items)
                 }
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
-                    return items.groupedAlphabetically { $0.title }
-                        .map { character, items in
-                            return Row(
-                                section: Section(id: String(character), header: .title(String(character).uppercased())),
-                                items: items
-                            )
-                        }
+                    return SectionViewModel.alphabeticalRows(from: items)
                 default:
-                    return [Row(section: Section(id: "main", header: .none), items: items)]
+                    return SectionViewModel.row(with: items)
                 }
             default:
-                return [Row(section: Section(id: "main", header: .none), items: items)]
+                // Remark: `.shows` must not be sorted alphabetically because of pagination.
+                return SectionViewModel.row(with: items)
             }
         }
     }
@@ -366,17 +376,11 @@ private extension SectionViewModel {
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                return items.groupedAlphabetically { $0.title }
-                    .map { character, items in
-                        return Row(
-                            section: Section(id: String(character), header: .title(String(character).uppercased())),
-                            items: items
-                        )
-                    }
+                return SectionViewModel.alphabeticalRows(from: items)
             case let .show(show):
-                return [Row(section: Section(id: "main", header: .show(show)), items: items)]
+                return SectionViewModel.row(with: items, header: .show(show))
             default:
-                return [Row(section: Section(id: "main", header: .none), items: items)]
+                return SectionViewModel.row(with: items)
             }
         }
     }
