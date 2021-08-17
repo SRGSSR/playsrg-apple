@@ -11,7 +11,7 @@ import SwiftUI
 
 struct MediaDetailView: View {
     @Binding var media: SRGMedia?
-    @StateObject var model = MediaDetailViewModel()
+    @StateObject private var model = MediaDetailViewModel()
     
     init(media: SRGMedia?) {
         _media = .constant(media)

@@ -46,15 +46,30 @@ extension String {
     
     static var loremIpsum: String {
         return """
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
     }
     
@@ -74,6 +89,11 @@ extension Array {
         var array = self
         array.append(contentsOf: newElements)
         return array
+    }
+    
+    subscript(safeIndex index: Int) -> Element? {
+        guard index >= 0, index < endIndex else { return nil }
+        return self[index]
     }
 }
 
@@ -104,19 +124,29 @@ extension Publisher where Failure == Never {
 }
 
 extension View {
+    /**
+     *  Configure accessibility settings. If no label is provided the item will not be enabled for accessibility.
+     */
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
-        // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
-        //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-        #if os(tvOS)
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityAddTraits(traits)
-        #else
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityHint(hint ?? "")
-            .accessibilityAddTraits(traits)
-        #endif
+        Group {
+            if let label = label, !label.isEmpty {
+                // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
+                //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
+                #if os(tvOS)
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityAddTraits(traits)
+                #else
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityHint(hint ?? "")
+                    .accessibilityAddTraits(traits)
+                #endif
+            }
+            else {
+                accessibility(hidden: true)
+            }
+        }
     }
     
     /**
@@ -323,25 +353,24 @@ extension UIView {
 }
 
 extension UIViewController {
-    func deselectItems(in collectionView: UICollectionView) {
+    func deselectItems(in collectionView: UICollectionView, animated: Bool) {
         guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
-        if let transitionCoordinator = transitionCoordinator {
-            transitionCoordinator.animate { context in
+        guard animated, let transitionCoordinator = transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
                 selectedIndexPaths.forEach { indexPath in
                     collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
                 }
-            } completion: { context in
+            }, completion: { context in
                 if context.isCancelled {
                     selectedIndexPaths.forEach { indexPath in
                         collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                     }
                 }
-            }
-        }
+            })
         else {
             selectedIndexPaths.forEach { indexPath in
-                collectionView.deselectItem(at: indexPath, animated: false)
+                collectionView.deselectItem(at: indexPath, animated: animated)
             }
+            return
         }
     }
 }

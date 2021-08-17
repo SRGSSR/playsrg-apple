@@ -29,10 +29,33 @@ WatchLaterAction WatchLaterAllowedActionForMedia(SRGMedia *media)
     }
 }
 
+NSString *WatchLaterAllowedActionForMediaAsync(SRGMedia * _Nonnull media, void (^completion)(WatchLaterAction action))
+{
+    return WatchLaterContainsMediaAsync(media, ^(BOOL contained) {
+        if (contained) {
+            completion(WatchLaterActionRemove);
+        }
+        else if (media.contentType != SRGContentTypeLivestream && [media timeAvailabilityAtDate:NSDate.date] != SRGTimeAvailabilityNotAvailableAnymore) {
+            completion(WatchLaterActionAdd);
+        }
+        else {
+            completion(WatchLaterActionNone);
+        }
+    });
+}
+
 BOOL WatchLaterContainsMedia(SRGMedia *media)
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), media.URN];
     return [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil].count > 0;
+}
+
+NSString *WatchLaterContainsMediaAsync(SRGMedia *media, void (^completion)(BOOL contained))
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGPlaylistEntry.new, uid), media.URN];
+    return [SRGUserData.currentUserData.playlists playlistEntriesInPlaylistWithUid:SRGPlaylistUidWatchLater matchingPredicate:predicate sortedWithDescriptors:nil completionBlock:^(NSArray<SRGPlaylistEntry *> * _Nullable playlistEntries, NSError * _Nullable error) {
+        completion(playlistEntries.count > 0);
+    }];
 }
 
 void WatchLaterAddMedia(SRGMedia *media, void (^completion)(NSError * _Nullable error))
@@ -73,6 +96,13 @@ void WatchLaterToggleMedia(SRGMedia *media, void (^completion)(BOOL added, NSErr
         WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
             completion(YES, error);
         });
+    }
+}
+
+void WatchLaterAsyncCancel(NSString *handle)
+{
+    if (handle) {
+        [SRGUserData.currentUserData.playlists cancelTaskWithHandle:handle];
     }
 }
 

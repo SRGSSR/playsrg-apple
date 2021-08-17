@@ -9,7 +9,7 @@ import SRGAppearanceSwift
 import SwiftUI
 
 struct ShowsView: View {
-    @StateObject var model = ShowsViewModel()
+    @StateObject private var model = ShowsViewModel()
     
     enum Section: Hashable {
         case shows(character: Character)
@@ -152,7 +152,7 @@ extension ShowsView {
 }
 
 struct ShowsView_Previews: PreviewProvider {
-    static var showPreview: SRGShow {
+    private static var showPreview: SRGShow {
         let asset = NSDataAsset(name: "show-srf-tv")!
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
         

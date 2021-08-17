@@ -41,6 +41,7 @@ AnalyticsPageTitle const AnalyticsPageTitleMedia = @"media";
 AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
 AnalyticsPageTitle const AnalyticsPageTitleNotifications = @"notifications";
 AnalyticsPageTitle const AnalyticsPageTitlePlayer = @"player";
+AnalyticsPageTitle const AnalyticsPageTitleProgramGuide = @"program guide";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
 AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
 AnalyticsPageTitle const AnalyticsPageTitleResumePlayback = @"resume playback";

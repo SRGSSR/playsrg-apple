@@ -161,7 +161,7 @@ private extension MediaCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
-        return isSelected ? [.isSelected] : []
+        return isSelected ? .isSelected : []
     }
 }
 
@@ -201,9 +201,9 @@ final class MediaCellSize: NSObject {
 // MARK: Preview
 
 struct MediaCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = MediaCellSize.swimlane().previewSize
-    static private let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
-    static private let style = MediaDescription.Style.show
+    private static let verticalLayoutSize = MediaCellSize.swimlane().previewSize
+    private static let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
+    private static let style = MediaDescription.Style.show
     
     static var previews: some View {
         Group {

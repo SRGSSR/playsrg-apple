@@ -43,8 +43,8 @@ struct MediaVisualView: View {
             ImageView(url: model.imageUrl(for: scale))
             BlockingOverlay(media: media)
             
-            if let availabilityBadgeProperties = model.availabilityBadgeProperties {
-                Badge(text: availabilityBadgeProperties.text, color: Color(availabilityBadgeProperties.color))
+            if let properties = model.availabilityBadgeProperties {
+                Badge(text: properties.text, color: Color(properties.color))
                     .padding([.top, .leading], Self.padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
@@ -90,7 +90,7 @@ struct MediaVisualView: View {
 // MARK: Preview
 
 struct MediaVisualView_Previews: PreviewProvider {
-    static let userDefaults: UserDefaults = {
+    private static let userDefaults: UserDefaults = {
         let userDefaults = UserDefaults()
         userDefaults.setValue(true, forKey: PlaySRGSettingSubtitleAvailabilityDisplayed)
         userDefaults.setValue(true, forKey: PlaySRGSettingAudioDescriptionAvailabilityDisplayed)

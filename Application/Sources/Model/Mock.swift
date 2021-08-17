@@ -7,6 +7,16 @@
 import SwiftUI
 
 struct Mock {
+    enum Channel: String {
+        case standard
+        case unknown
+        case overflow
+    }
+    
+    static func channel(_ kind: Channel = .standard) -> SRGChannel {
+        return mockObject(kind.rawValue, type: SRGChannel.self)
+    }
+    
     enum ContentSection: String {
         case standard
         case overflow
@@ -32,6 +42,15 @@ struct Mock {
     
     static func media(_ kind: Media = .standard) -> SRGMedia {
         return mockObject(kind.rawValue, type: SRGMedia.self)
+    }
+    
+    enum Program: String {
+        case standard
+        case overflow
+    }
+    
+    static func program(_ kind: Program = .standard) -> SRGProgram {
+        return mockObject(kind.rawValue, type: SRGProgram.self)
     }
     
     enum Show: String {

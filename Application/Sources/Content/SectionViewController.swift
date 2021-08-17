@@ -12,7 +12,7 @@ import UIKit
 
 // MARK: View controller
 
-class SectionViewController: UIViewController {
+final class SectionViewController: UIViewController {
     let model: SectionViewModel
     let fromPushNotification: Bool
     
@@ -156,7 +156,7 @@ class SectionViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
-        deselectItems(in: collectionView)
+        deselectItems(in: collectionView, animated: animated)
         userActivity = model.section.viewModelProperties.userActivity
     }
     

@@ -13,7 +13,7 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
-/* Title pronounced in home pages on shows A to Z button. */
+/* Show A-Z button label */
 "A to Z shows" = "A to Z topics";
 
 /* Favorite label in the player view when a show can be favorited
@@ -94,13 +94,17 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "My account";
 
+/* Next day button label in program guide */
+"Next day" = "Next day";
+
 /* Text providing next program time information. */
 "Next, at %@" = "Next, at %@";
 
 /* Mini player label */
 "Now playing: %@" = "Now playing: %@";
 
-/* More button hint */
+/* More button hint
+   Program cell hint */
 "Opens details." = "Opens details.";
 
 /* Hint for content opened in Safari */
@@ -136,6 +140,9 @@
 /* Song cell hint */
 "Plays the music." = "Plays the music.";
 
+/* Previous day button label in program guide */
+"Previous day" = "Previous day";
+
 /* Profile button label on home view */
 "Profile" = "Profile";
 
@@ -160,8 +167,11 @@
 /* Homepage header action hint */
 "Shows all contents." = "Shows all contents.";
 
-/* Title pronounced in home pages on shows by date button. */
+/* Show by date button label */
 "Shows by date" = "Topics by date";
+
+/* Channel selector button hint */
+"Shows the channel programs" = "Shows the channel programs";
 
 /* Stop button label */
 "Stop" = "Stop";

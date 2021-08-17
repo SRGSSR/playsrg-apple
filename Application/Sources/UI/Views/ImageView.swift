@@ -53,7 +53,7 @@ struct ImageView: UIViewRepresentable {
 // MARK: Preview
 
 struct ImageView_Previews: PreviewProvider {
-    static let contentMode: ContentMode = .fill
+    private static let contentMode: ContentMode = .fill
     
     static var previews: some View {
         Group {

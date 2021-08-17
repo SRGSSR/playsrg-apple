@@ -21,7 +21,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var serviceStatus: ServiceStatus = .good
+    @Published private(set) var serviceMessage: SRGServiceMessage?
     
     private let trigger = Trigger()
     private var cancellables = Set<AnyCancellable>()
@@ -56,14 +56,14 @@ final class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [serviceMessage] in
             return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
-                .map { ServiceStatus.bad($0) }
-                .replaceError(with: self?.serviceStatus ?? .good)
+                .map { Optional($0) }
+                .replaceError(with: serviceMessage)
                 .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
-        .assign(to: &$serviceStatus)
+        .assign(to: &$serviceMessage)
         
         ApplicationSignal.wokenUp()
             .receive(on: DispatchQueue.main)
@@ -192,11 +192,6 @@ extension PageViewModel {
         var isEmpty: Bool {
             return rows.isEmpty
         }
-    }
-    
-    enum ServiceStatus {
-        case good
-        case bad(SRGServiceMessage)
     }
     
     enum SectionLayout: Hashable {

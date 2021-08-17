@@ -11,11 +11,11 @@ import UIKit
 
 // MARK: View controller
 
-class PageViewController: UIViewController {
+final class PageViewController: UIViewController {
     private let model: PageViewModel
     
     private var cancellables = Set<AnyCancellable>()
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
@@ -143,11 +143,10 @@ class PageViewController: UIViewController {
             .store(in: &cancellables)
         
         #if os(iOS)
-        model.$serviceStatus
-            .sink { [weak self] status in
-                if let self = self, case let .bad(message) = status {
-                    Banner.show(with: .error, message: message.text, image: nil, sticky: true, in: self)
-                }
+        model.$serviceMessage
+            .sink { [weak self] serviceMessage in
+                guard let serviceMessage = serviceMessage else { return }
+                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
             }
             .store(in: &cancellables)
         #endif
@@ -156,7 +155,7 @@ class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
-        deselectItems(in: collectionView)
+        deselectItems(in: collectionView, animated: animated)
     }
     
     #if os(iOS)
@@ -402,8 +401,14 @@ extension PageViewController: ShowAccessCellActions {
     
     func openShowByDate() {
         if let navigationController = navigationController {
-            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-            navigationController.pushViewController(calendarViewController, animated: true)
+            switch model.id {
+            case .video:
+                let programGuideViewController = ProgramGuideViewController()
+                navigationController.pushViewController(programGuideViewController, animated: true)
+            default:
+                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
+                navigationController.pushViewController(calendarViewController, animated: true)
+            }
         }
     }
 }
@@ -599,7 +604,12 @@ private extension PageViewController {
                     TopicCell(topic: topic)
                 #if os(iOS)
                 case .showAccess:
-                    ShowAccessCell()
+                    switch id {
+                    case .video:
+                        ShowAccessCell(style: .programGuide)
+                    default:
+                        ShowAccessCell(style: .calendar)
+                    }
                 #endif
                 }
             case .more:

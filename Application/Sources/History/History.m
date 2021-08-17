@@ -99,15 +99,15 @@ BOOL HistoryCanResumePlaybackForMedia(SRGMedia *media)
     return HistoryIsProgressForMediaTracked(media) && [media blockingReasonAtDate:NSDate.date] == SRGBlockingReasonNone && HistoryPlaybackProgressForMedia(media) != 1.f;
 }
 
-NSString *HistoryCanResumePlaybackForMediaAsync(SRGMedia *media, void (^completion)(BOOL canResume))
+NSString *HistoryCanResumePlaybackForMediaAsync(SRGMedia *media, void (^update)(BOOL canResume, BOOL completed))
 {
     if (! HistoryIsProgressForMediaTracked(media) || [media blockingReasonAtDate:NSDate.date] != SRGBlockingReasonNone) {
-        completion(NO);
+        update(NO, YES);
         return nil;
     }
     
-    return HistoryPlaybackProgressForMediaAsync(media, ^(float progress) {
-        completion(progress != 1.f);
+    return HistoryPlaybackProgressForMediaAsync(media, ^(float progress, BOOL completed) {
+        update(progress != 1.f, completed);
     });
 }
 
@@ -264,10 +264,10 @@ float HistoryPlaybackProgressForMedia(SRGMedia *media)
     }
 }
 
-NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia *media, void (^update)(float progress))
+NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia *media, void (^update)(float progress, BOOL completed))
 {
     if (! HistoryIsProgressForMediaTracked(media)) {
-        update(0.f);
+        update(0.f, YES);
         return nil;
     }
     
@@ -278,16 +278,16 @@ NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia *media, void (^update)(f
         
         float progress = historyEntry ? HistoryPlaybackProgressForMediaHistoryEntry(historyEntry, media) : 0.f;
         s_cachedProgresses[media.URN] = (progress > 0.f) ? @(progress) : nil;
-        update(progress);
+        update(progress, YES);
     }];
     
     NSNumber *cachedProgress = s_cachedProgresses[media.URN];
-    update(cachedProgress.floatValue);
+    update(cachedProgress.floatValue, NO);
     
     return handle;
 }
 
-void HistoryPlaybackProgressAsyncCancel(NSString *handle)
+void HistoryAsyncCancel(NSString *handle)
 {
     if (handle) {
         [SRGUserData.currentUserData.history cancelTaskWithHandle:handle];
