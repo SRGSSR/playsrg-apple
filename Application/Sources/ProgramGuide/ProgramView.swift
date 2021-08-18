@@ -14,7 +14,7 @@ struct ProgramView: View {
     @StateObject private var model = ProgramViewModel()
     
     static func viewController(for program: SRGProgram, channel: SRGChannel) -> UIViewController {
-        return UIHostingController(rootView: ProgramView(program: program, channel: channel))
+        return ProgramViewController(program: program, channel: channel)
     }
     
     init(program: SRGProgram, channel: SRGChannel) {
@@ -199,6 +199,22 @@ struct ProgramView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: View controller
+
+private final class ProgramViewController: UIHostingController<ProgramView> {
+    init(program: SRGProgram, channel: SRGChannel) {
+        super.init(rootView: ProgramView(program: program, channel: channel))
+    }
+    
+    @objc required dynamic init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Self.play_supportedInterfaceOrientations
     }
 }
 
