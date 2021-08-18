@@ -95,7 +95,7 @@
 "My account" = "Il mio account";
 
 /* Next day button label in program guide */
-"Next day" = "Next day";
+"Next day" = "Giorno successivo";
 
 /* Text providing next program time information. */
 "Next, at %@" = "Prossimo alle %@";
@@ -141,7 +141,7 @@
 "Plays the music." = "Riprodurre la musica.";
 
 /* Previous day button label in program guide */
-"Previous day" = "Previous day";
+"Previous day" = "Giorno precedente";
 
 /* Profile button label on home view */
 "Profile" = "Profilo";
@@ -171,7 +171,7 @@
 "Shows by date" = "Programmi per data";
 
 /* Channel selector button hint */
-"Shows the channel programs" = "Shows the channel programs";
+"Shows the channel programs" = "Mostra i programmi";
 
 /* Stop button label */
 "Stop" = "Stop";
@@ -184,7 +184,7 @@
 
 /* Media cell hint in edit mode
    Show cell hint in edit mode */
-"Toggles selection." = "Toggles selection.";
+"Toggles selection." = "Inverti la selezione.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenzione";

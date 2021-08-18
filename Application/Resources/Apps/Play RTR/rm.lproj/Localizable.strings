@@ -44,10 +44,10 @@
 "%@ views" = "%@ visualisaziuns";
 
 /* Title displayed when several items have been selected */
-"%d items" = "%d items";
+"%d items" = "%d elements";
 
 /* Title displayed when 1 item has been selected */
-"1 item" = "1 item";
+"1 item" = "1 element";
 
 /* Less than 5 min option */
 "< 5 min" = "< 5 min";
@@ -91,7 +91,7 @@
 "By date" = "Tenor data";
 
 /* Calendar button in program guide */
-"Calendar" = "Calendar";
+"Calendar" = "Chalender";
 
 /* Label of the button to close the media sharing menu
    Title of a cancel button
@@ -141,7 +141,7 @@
 "Delete from favorites" = "Allontanar da favurits";
 
 /* Context menu action to delete a media from the history */
-"Delete from history" = "Delete from history";
+"Delete from history" = "Stizzar  da la cronologia";
 
 /* Title of the message displayed when the user is about to delete the history */
 "Delete history" = "Allontanar cronologia";
@@ -156,7 +156,7 @@
 "Display %@ episodes" = "Mussa las episodas %@";
 
 /* Done button title */
-"Done" = "Done";
+"Done" = "Fatg";
 
 /* Name of the search setting to filter downloadable content */
 "Downloadable" = "Stgargiabel";
@@ -366,7 +366,7 @@
 "Notify me" = "Trametta messadi a mai";
 
 /* Now button in program guide */
-"Now" = "Now";
+"Now" = "Ussa";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button to validate date settings
@@ -440,10 +440,10 @@
 "Search" = "Tschertga";
 
 /* Select button title */
-"Select" = "Select";
+"Select" = "Selecziunar";
 
 /* Title displayed when no item has been selected */
-"Select items" = "Select items";
+"Select items" = "Selecziunar elements";
 
 /* Notification message when the server URL changed due to a scheme URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
@@ -624,10 +624,10 @@
 
 /* Alert choice to watch content from start
    Button to watch some program from the start */
-"Watch from start" = "Watch from start";
+"Watch from start" = "Guardar da l'entschatta";
 
 /* Resume playback alert title */
-"Watch from start?" = "Watch from start?";
+"Watch from start?" = "Guardar da l'entschatta?";
 
 /* Button label in media detail view to add a video to the later list
    Button label in program detail view to add a video to the later list
@@ -646,7 +646,7 @@
 "Yesterday" = "Ier";
 
 /* Resume playback alert explanation */
-"You already played this content." = "You already played this content.";
+"You already played this content." = "Vus avais già consumà quest cuntegn.";
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */

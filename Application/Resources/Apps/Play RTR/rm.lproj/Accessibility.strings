@@ -95,7 +95,7 @@
 "My account" = "Mes conto";
 
 /* Next day button label in program guide */
-"Next day" = "Next day";
+"Next day" = "Di suandant";
 
 /* Text providing next program time information. */
 "Next, at %@" = "Proxim a las %@";
@@ -141,7 +141,7 @@
 "Plays the music." = "Lascha tadlar musica.";
 
 /* Previous day button label in program guide */
-"Previous day" = "Previous day";
+"Previous day" = "Di avant";
 
 /* Profile button label on home view */
 "Profile" = "Profils";
@@ -171,7 +171,7 @@
 "Shows by date" = "Emissiuns tenor data";
 
 /* Channel selector button hint */
-"Shows the channel programs" = "Shows the channel programs";
+"Shows the channel programs" = "Mussa il program dal chanal";
 
 /* Stop button label */
 "Stop" = "Stop";
@@ -184,7 +184,7 @@
 
 /* Media cell hint in edit mode
    Show cell hint in edit mode */
-"Toggles selection." = "Toggles selection.";
+"Toggles selection." = "Mida la selecziun.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";
