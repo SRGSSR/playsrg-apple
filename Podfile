@@ -10,11 +10,13 @@ abstract_target 'Play SRG' do
 
     pod 'AutoCoding'
     pod 'BDKCollectionIndexView'
-    pod 'FLEX', :configurations => ['Debug', 'Nightly', 'Beta']
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
     pod 'InAppSettingsKit', '3.3.0'
     pod 'MaterialComponents/Tabs', '118.2.0'   # Tabs replaced with new implementation as of 119.0.0
+    
+    pod 'Fingertips', :git => 'https://github.com/mapbox/Fingertips.git', :configurations => ['Debug', 'Nightly', 'Beta']
+    pod 'FLEX', :configurations => ['Debug', 'Nightly', 'Beta']
 
     target 'Play SRF' do
     end

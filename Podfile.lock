@@ -1,6 +1,7 @@
 PODS:
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.2.2)
+  - Fingertips (0.5.0)
   - FLEX (4.5.0)
   - FSCalendar (2.8.2)
   - google-cast-sdk-no-bluetooth (4.6.1):
@@ -55,6 +56,7 @@ PODS:
 DEPENDENCIES:
   - AutoCoding
   - BDKCollectionIndexView
+  - Fingertips (from `https://github.com/mapbox/Fingertips.git`)
   - FLEX
   - FSCalendar
   - google-cast-sdk-no-bluetooth
@@ -76,9 +78,19 @@ SPEC REPOS:
     - Protobuf
     - TvOSTextViewer
 
+EXTERNAL SOURCES:
+  Fingertips:
+    :git: https://github.com/mapbox/Fingertips.git
+
+CHECKOUT OPTIONS:
+  Fingertips:
+    :commit: cdffabac5506103a2c7cc5aedeed4021df2501da
+    :git: https://github.com/mapbox/Fingertips.git
+
 SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
+  Fingertips: 8e557eed25253fcb4bfa25ac4418f8e8add1ad9a
   FLEX: e51461dd6f0bfb00643c262acdfea5d5d12c596b
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   google-cast-sdk-no-bluetooth: b3037c14fdf07a794326502e799beb0875ab2029
@@ -89,6 +101,6 @@ SPEC CHECKSUMS:
   Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: 169292198689ae1e92737b081cde2388408c754c
+PODFILE CHECKSUM: 1f2a33fc4cc8e17d5b5637c9a62ed833fd6f9d76
 
 COCOAPODS: 1.10.2

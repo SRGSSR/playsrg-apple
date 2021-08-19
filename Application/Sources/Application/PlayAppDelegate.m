@@ -53,7 +53,7 @@
 @import SRGUserData;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-@import Fingertips;
+#import <Fingertips/Fingertips.h>
 #endif
 
 static void *s_kvoContext = &s_kvoContext;

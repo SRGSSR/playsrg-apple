@@ -7167,7 +7167,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Fingertips.framework",
 			);
 			name = "Embed Debugging Frameworks";
 			outputPaths = (
@@ -7182,7 +7181,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Fingertips.framework",
 			);
 			name = "Embed Debugging Frameworks";
 			outputPaths = (
@@ -7197,7 +7195,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Fingertips.framework",
 			);
 			name = "Embed Debugging Frameworks";
 			outputPaths = (
@@ -7212,7 +7209,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Fingertips.framework",
 			);
 			name = "Embed Debugging Frameworks";
 			outputPaths = (
@@ -7227,7 +7223,6 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/Fingertips.framework",
 			);
 			name = "Embed Debugging Frameworks";
 			outputPaths = (
