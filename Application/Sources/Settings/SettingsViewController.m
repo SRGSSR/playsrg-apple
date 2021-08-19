@@ -25,6 +25,7 @@
 #import "WebViewController.h"
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
+#import <InAppSettingsKit/IASKSpecifier.h>
 
 @import AppCenterDistribute;
 @import libextobjc;

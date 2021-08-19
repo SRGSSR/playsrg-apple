@@ -150,7 +150,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/InAppSettingsKit</string>
 			<key>Title</key>
-			<string>InAppSettingsKit (3.1.4)</string>
+			<string>InAppSettingsKit (3.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
