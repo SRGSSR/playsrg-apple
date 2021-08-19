@@ -2610,6 +2610,8 @@
 		6F7662C226984699001A4B22 /* ShowsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowsViewModel.swift; path = Sources/ShowsViewModel.swift; sourceTree = "<group>"; };
 		6F7662C326984699001A4B22 /* ShowsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowsView.swift; path = Sources/ShowsView.swift; sourceTree = "<group>"; };
 		6F79E0A92541647400A28E79 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		6F7C089426CE4E2A00166CE7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		6F7C089526CE4E4A00166CE7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
 		6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboardings.xcassets; sourceTree = "<group>"; };
@@ -3503,6 +3505,8 @@
 		08C68D461D38D49600BB8AAA = {
 			isa = PBXGroup;
 			children = (
+				6F7C089426CE4E2A00166CE7 /* Podfile */,
+				6F7C089526CE4E4A00166CE7 /* Cartfile */,
 				6FAAF77620CABA3A00BB58A3 /* Common */,
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
 				6F331CE524D06B8200C096AB /* TV Application */,
@@ -14105,7 +14109,7 @@
 			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.3;
+				minimumVersion = 9.0.3;
 			};
 		};
 		08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */ = {
@@ -14121,7 +14125,7 @@
 			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 10.1.0;
+				minimumVersion = 10.3.3;
 			};
 		};
 		6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */ = {
@@ -14136,8 +14140,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/IdeasOnCanvas/Aiolos.git";
 			requirement = {
-				kind = revision;
-				revision = 5405495ef59c719c28a72e92fa7e75129fc58981;
+				branch = main;
+				kind = branch;
 			};
 		};
 		6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */ = {
@@ -14161,7 +14165,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.6.0;
+				minimumVersion = 8.6.0;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */ = {
@@ -14193,7 +14197,7 @@
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.0;
+				minimumVersion = 4.2.0;
 			};
 		};
 		6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */ = {
@@ -14209,7 +14213,7 @@
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.0.2;
+				minimumVersion = 0.0.5;
 			};
 		};
 		6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */ = {
@@ -14225,7 +14229,7 @@
 			repositoryURL = "https://github.com/urbanairship/ios-library.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 14.6.0;
+				minimumVersion = 14.6.1;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
