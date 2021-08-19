@@ -38,7 +38,7 @@
 @import YYWebImage;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-@import FLEX;
+#import <FLEX/FLEX.h>
 #endif
 
 // Autoplay group

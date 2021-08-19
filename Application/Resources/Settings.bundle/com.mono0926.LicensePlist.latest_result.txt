@@ -241,6 +241,8 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.7
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0
 
+name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.3.3
+
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
 name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.9.0

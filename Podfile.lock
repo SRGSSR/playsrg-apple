@@ -1,6 +1,7 @@
 PODS:
   - AutoCoding (2.2.3)
   - BDKCollectionIndexView (2.2.2)
+  - FLEX (4.5.0)
   - FSCalendar (2.8.2)
   - google-cast-sdk-no-bluetooth (4.6.1):
     - google-cast-sdk-no-bluetooth/Core (= 4.6.1)
@@ -54,6 +55,7 @@ PODS:
 DEPENDENCIES:
   - AutoCoding
   - BDKCollectionIndexView
+  - FLEX
   - FSCalendar
   - google-cast-sdk-no-bluetooth
   - InAppSettingsKit (= 3.3.0)
@@ -64,6 +66,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AutoCoding
     - BDKCollectionIndexView
+    - FLEX
     - FSCalendar
     - google-cast-sdk-no-bluetooth
     - InAppSettingsKit
@@ -76,6 +79,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
   BDKCollectionIndexView: 489a0c57d27fafe6944ef61e5a4192902148ea84
+  FLEX: e51461dd6f0bfb00643c262acdfea5d5d12c596b
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   google-cast-sdk-no-bluetooth: b3037c14fdf07a794326502e799beb0875ab2029
   InAppSettingsKit: c636b2b41166d30f488d2c809664f289694d64d8
@@ -85,6 +89,6 @@ SPEC CHECKSUMS:
   Protobuf: 7327d4444215b5f18e560a97f879ff5503c4581c
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: 9dd639e3c098a0786030c0894ce894f2153ff3e6
+PODFILE CHECKSUM: 169292198689ae1e92737b081cde2388408c754c
 
 COCOAPODS: 1.10.2

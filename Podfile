@@ -10,6 +10,7 @@ abstract_target 'Play SRG' do
 
     pod 'AutoCoding'
     pod 'BDKCollectionIndexView'
+    pod 'FLEX', :configurations => ['Debug', 'Nightly', 'Beta']
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
     pod 'InAppSettingsKit', '3.3.0'

@@ -228,6 +228,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/Nuke</string>
+			<key>Title</key>
+			<string>Nuke (10.3.3)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/paper-onboarding</string>
 			<key>Title</key>
 			<string>PaperOnboarding (6.1.5)</string>
