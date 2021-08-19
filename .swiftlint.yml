@@ -29,6 +29,5 @@ nesting:
 
 excluded:
   - build
-  - Carthage
   - Pods
   - vendor

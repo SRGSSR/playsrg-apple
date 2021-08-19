@@ -2611,7 +2611,6 @@
 		6F7662C326984699001A4B22 /* ShowsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowsView.swift; path = Sources/ShowsView.swift; sourceTree = "<group>"; };
 		6F79E0A92541647400A28E79 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6F7C089426CE4E2A00166CE7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		6F7C089526CE4E4A00166CE7 /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
 		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
 		6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboardings.xcassets; sourceTree = "<group>"; };
@@ -3506,7 +3505,6 @@
 			isa = PBXGroup;
 			children = (
 				6F7C089426CE4E2A00166CE7 /* Podfile */,
-				6F7C089526CE4E4A00166CE7 /* Cartfile */,
 				6FAAF77620CABA3A00BB58A3 /* Common */,
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
 				6F331CE524D06B8200C096AB /* TV Application */,
@@ -4544,7 +4542,6 @@
 				6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */,
-				6FE1B4A41DCBCB390094D5BA /* Embed Debugging Frameworks */,
 				6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */,
 				43935C186E7C3FA3D9A3CC33 /* [CP] Copy Pods Resources */,
 				6F5E54992521E3C7004334E4 /* Extract Signing Identity */,
@@ -4594,7 +4591,6 @@
 				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
-				6FE1B4A31DCBCB310094D5BA /* Embed Debugging Frameworks */,
 				6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */,
 				61F7B1B1FC7E1DB00591868E /* [CP] Copy Pods Resources */,
 				6F5E549A2521E3D0004334E4 /* Extract Signing Identity */,
@@ -4644,7 +4640,6 @@
 				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
-				6FE1B4A21DCBCB290094D5BA /* Embed Debugging Frameworks */,
 				6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */,
 				8CB5D42DBD5EAABC62E8D1A4 /* [CP] Copy Pods Resources */,
 				6F5E549B2521E3D6004334E4 /* Extract Signing Identity */,
@@ -4694,7 +4689,6 @@
 				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
-				6FE1B4A11DCBCB210094D5BA /* Embed Debugging Frameworks */,
 				6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */,
 				F036A8D455D4D1988A3D0455 /* [CP] Copy Pods Resources */,
 				6F5E549C2521E3DE004334E4 /* Extract Signing Identity */,
@@ -4744,7 +4738,6 @@
 				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
-				6FE1B4A01DCBC8270094D5BA /* Embed Debugging Frameworks */,
 				6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */,
 				9C3D1D8DF4FF07B5A8C53C11 /* [CP] Copy Pods Resources */,
 				6F5E549D2521E3E7004334E4 /* Extract Signing Identity */,
@@ -7160,76 +7153,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/libexec/PlistBuddy -c \"Add :CFBundleURLTypes:0:CFBundleURLSchemes: string srfplayer${MARKETING_VERSION_SUFFIX}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Info.plist\"\n";
-		};
-		6FE1B4A01DCBC8270094D5BA /* Embed Debugging Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Debugging Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ] || [ \"$CONFIGURATION\" == \"Nightly\" ] || [ \"$CONFIGURATION\" == \"Beta\" ]; then\n  /usr/local/bin/carthage copy-frameworks\nfi\n";
-		};
-		6FE1B4A11DCBCB210094D5BA /* Embed Debugging Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Debugging Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ] || [ \"$CONFIGURATION\" == \"Nightly\" ] || [ \"$CONFIGURATION\" == \"Beta\" ]; then\n  /usr/local/bin/carthage copy-frameworks\nfi\n";
-		};
-		6FE1B4A21DCBCB290094D5BA /* Embed Debugging Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Debugging Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ] || [ \"$CONFIGURATION\" == \"Nightly\" ] || [ \"$CONFIGURATION\" == \"Beta\" ]; then\n  /usr/local/bin/carthage copy-frameworks\nfi\n";
-		};
-		6FE1B4A31DCBCB310094D5BA /* Embed Debugging Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Debugging Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ] || [ \"$CONFIGURATION\" == \"Nightly\" ] || [ \"$CONFIGURATION\" == \"Beta\" ]; then\n  /usr/local/bin/carthage copy-frameworks\nfi\n";
-		};
-		6FE1B4A41DCBCB390094D5BA /* Embed Debugging Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Debugging Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"$CONFIGURATION\" == \"Debug\" ] || [ \"$CONFIGURATION\" == \"Nightly\" ] || [ \"$CONFIGURATION\" == \"Beta\" ]; then\n  /usr/local/bin/carthage copy-frameworks\nfi\n";
 		};
 		6FE3C7C21F74EC5C00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -10350,10 +10273,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10378,10 +10297,6 @@
 				DEVELOPMENT_TEAM = JA876HZNN2;
 				DOMAIN = "*.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10405,10 +10320,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10433,10 +10344,6 @@
 				DEVELOPMENT_TEAM = 8779C367VK;
 				DOMAIN = "*.rts.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10460,10 +10367,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10488,10 +10391,6 @@
 				DEVELOPMENT_TEAM = Y7342J76KH;
 				DOMAIN = "*.rsi.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10515,10 +10414,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10543,10 +10438,6 @@
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "*.rtr.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10569,10 +10460,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10596,10 +10483,6 @@
 				DEVELOPMENT_TEAM = R36WF3S37T;
 				DOMAIN = "*.swissinfo.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10689,10 +10572,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-srf.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10717,10 +10596,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rts.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10745,10 +10620,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rsi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10773,10 +10644,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rtr.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10800,10 +10667,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10893,10 +10756,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-srf.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10923,10 +10782,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rts.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10953,10 +10808,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rsi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -10983,10 +10834,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-rtr.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -11012,10 +10859,6 @@
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				DOMAIN = "srgplayer-swi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
