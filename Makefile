@@ -20,10 +20,7 @@ define checkout_repository
 endef
 
 .PHONY: all
-all:
-	@echo "Building the project..."
-	@xcodebuild build
-	@echo "... done.\n"
+all: public.setup
 
 .PHONY: setup
 setup:
