@@ -95,13 +95,16 @@
     [self setNeedsStatusBarAppearanceUpdate];
     
     UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
-    
     if (backgroundColor) {
         [appearance configureWithOpaqueBackground];
         appearance.backgroundColor = backgroundColor;
     }
     else {
         [appearance configureWithDefaultBackground];
+    }
+    
+    if (! separator) {
+        appearance.shadowColor = UIColor.clearColor;
     }
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
