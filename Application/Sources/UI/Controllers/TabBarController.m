@@ -142,14 +142,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     [super viewDidLoad];
     
-    UITabBar.appearance.barStyle = UIBarStyleBlack;
-    UITabBar.appearance.tintColor = UIColor.whiteColor;
-    
-    for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f] }
-                                               forState:controlState.integerValue];
-    }
-    
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
     miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -259,6 +251,37 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     // Remove the separator (looks nicer)
     appearance.shadowColor = UIColor.clearColor;
+    
+    UIFont *font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f];
+    UIColor *normalForegroundColor = UIColor.srg_gray96Color;
+    UIColor *selectedForegroundColor = UIColor.whiteColor;
+    
+    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{ NSFontAttributeName : font,
+                                                                       NSForegroundColorAttributeName : normalForegroundColor };
+    
+    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{ NSFontAttributeName : font,
+                                                                         NSForegroundColorAttributeName : selectedForegroundColor };
+    
+    UITabBarItemAppearance *stackedItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleStacked];
+    stackedItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    stackedItemAppearance.normal.iconColor = normalForegroundColor;
+    stackedItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    stackedItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.stackedLayoutAppearance = stackedItemAppearance;
+    
+    UITabBarItemAppearance *inlineItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleInline];
+    inlineItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    inlineItemAppearance.normal.iconColor = normalForegroundColor;
+    inlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    inlineItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.inlineLayoutAppearance = inlineItemAppearance;
+    
+    UITabBarItemAppearance *compactInlineItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleCompactInline];
+    compactInlineItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    compactInlineItemAppearance.normal.iconColor = normalForegroundColor;
+    compactInlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    compactInlineItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.compactInlineLayoutAppearance = compactInlineItemAppearance;
     
     UITabBar *tabBar = self.tabBar;
     tabBar.standardAppearance = appearance;
