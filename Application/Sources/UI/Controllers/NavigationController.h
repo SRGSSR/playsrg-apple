@@ -23,13 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @param tintColor       The tint color applied to the title and icons.
  *  @param backgroundColor The background color to be applied. If none standard blur is applied, otherwise the navigation bar is opaque.
- *  @param separator       Whether a separator must be displayed or not.
  *  @param statusBarStyle  The style of the status bar when the navigation controller is displayed.
  */
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(nullable UIColor *)tintColor
                            backgroundColor:(nullable UIColor *)backgroundColor
-                                 separator:(BOOL)separator
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle;
 
 /**

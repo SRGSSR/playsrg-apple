@@ -24,21 +24,20 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(UIColor *)tintColor
                            backgroundColor:(UIColor *)backgroundColor
-                                 separator:(BOOL)separator
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
         UINavigationBar *navigationBar = self.navigationBar;
         navigationBar.barStyle = UIBarStyleBlack;
         
-        [self updateWithTintColor:tintColor backgroundColor:backgroundColor separator:separator statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
 }
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil separator:YES statusBarStyle:UIStatusBarStyleLightContent];
+    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil statusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma clang diagnostic push
@@ -89,7 +88,7 @@
 
 #pragma mark UI updates
 
-- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor separator:(BOOL)separator statusBarStyle:(UIStatusBarStyle)statusBarStyle
+- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     self.statusBarStyle = statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
@@ -103,9 +102,8 @@
         [appearance configureWithDefaultBackground];
     }
     
-    if (! separator) {
-        appearance.shadowColor = UIColor.clearColor;
-    }
+    // Remove the separator (looks nicer)
+    appearance.shadowColor = UIColor.clearColor;
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
     NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
@@ -142,7 +140,7 @@
         darkStatusBarStyle = UIStatusBarStyleDarkContent;
         
         UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
-        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color separator:YES statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
     };
     
     if (animated) {
