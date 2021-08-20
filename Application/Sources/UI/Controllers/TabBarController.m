@@ -79,12 +79,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         self.viewControllers = viewControllers.copy;
         
-        self.tabBar.barTintColor = nil;
-        
         TabBarItemIdentifier lastOpenTabBarItem = ApplicationSettingLastOpenedTabBarItemIdentifier();
         if (lastOpenTabBarItem) {
             self.selectedIndex = lastOpenTabBarItem;
         }
+        
+        [self customizeAppearance];
     }
     return self;
 }
@@ -248,6 +248,28 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [super setSelectedViewController:selectedViewController];
     
     ApplicationSettingSetLastOpenedTabBarItemIdentifier(selectedViewController.tabBarItem.tag);
+}
+
+#pragma mark Appearance
+
+- (void)customizeAppearance
+{
+    UITabBarAppearance *appearance = [[UITabBarAppearance alloc] init];
+    [appearance configureWithDefaultBackground];
+    
+    // Remove the separator (looks nicer)
+    appearance.shadowColor = UIColor.clearColor;
+    
+    UITabBar *tabBar = self.tabBar;
+    tabBar.standardAppearance = appearance;
+    
+    // Starting with iOS 15 the default behavior is to have a transparent tab bar appearance when reaching the
+    // scroll edge (the observed scroll view determined heuristically in most cases, but can be also set with
+    // `-setContentScrollView:` if the heuristic approach fails). We can preserve the old behavior (probably
+    // more readable) by just setting a common appearance for the standard and scroll edge cases.
+    if (@available(iOS 15.0, *)) {
+        tabBar.scrollEdgeAppearance = appearance;
+    }
 }
 
 #pragma mark View controllers
