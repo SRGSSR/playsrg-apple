@@ -91,7 +91,7 @@
 "By date" = "Nach Datum";
 
 /* Calendar button in program guide */
-"Calendar" = "Calendar";
+"Calendar" = "Kalender";
 
 /* Label of the button to close the media sharing menu
    Title of a cancel button
@@ -141,7 +141,7 @@
 "Delete from favorites" = "Aus den Favoriten löschen";
 
 /* Context menu action to delete a media from the history */
-"Delete from history" = "Delete from history";
+"Delete from history" = "Verlauf löschen";
 
 /* Title of the message displayed when the user is about to delete the history */
 "Delete history" = "Verlauf löschen";
@@ -366,7 +366,7 @@
 "Notify me" = "Mitteilungen aktivieren";
 
 /* Now button in program guide */
-"Now" = "Now";
+"Now" = "Jetzt";
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button to validate date settings
@@ -624,10 +624,10 @@
 
 /* Alert choice to watch content from start
    Button to watch some program from the start */
-"Watch from start" = "Watch from start";
+"Watch from start" = "Von Anfang an schauen";
 
 /* Resume playback alert title */
-"Watch from start?" = "Watch from start?";
+"Watch from start?" = "Von Anfang an schauen?";
 
 /* Button label in media detail view to add a video to the later list
    Button label in program detail view to add a video to the later list
@@ -646,7 +646,7 @@
 "Yesterday" = "Gestern";
 
 /* Resume playback alert explanation */
-"You already played this content." = "You already played this content.";
+"You already played this content." = "Sie haben diesen Inhalt bereits angeschaut";
 
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
