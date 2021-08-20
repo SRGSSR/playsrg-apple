@@ -34,7 +34,6 @@ platform :ios do
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
       clean_derived_data unless skip_clean_derived_data
-      Dir.chdir('..') { sh 'make bootstrap' }
     end
   end
 

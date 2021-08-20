@@ -40,12 +40,14 @@ If you want to contribute to the project, have a look at our [contributing guide
 
 ## Required tools
 
-Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
-	
-	brew install imagemagick ghostscript
-	brew install jq
-	
-Some project dependencies are retrieved using [Carthage](https://github.com/Carthage/Carthage) and [CocoaPods](https://cocoapods.org/). Be sure that these tools are available on your system.
+- Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
+
+```
+brew install imagemagick ghostscript
+brew install jq
+```
+
+- Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system.
 
 ## Building the project
 
@@ -86,13 +88,7 @@ This setup does not contain private configuration information we use for publish
 
 ### Running the project
 
-Dependencies must retrieve and built first:
-
-```
-make bootstrap
-```
-
-Then open Xcode to build and run the project.
+Simply open the project with Xcode and wait until all dependencies have been retrieved. Then build and run the project.
 
 ## Releasing binaries
 

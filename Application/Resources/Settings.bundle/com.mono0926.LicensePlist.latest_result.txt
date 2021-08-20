@@ -90,23 +90,23 @@ version: 4.6.1
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.1.4
+version: 3.3
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.1.4
+version: 3.3
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.1.4
+version: 3.3
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.1.4
+version: 3.3
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
-version: 3.1.4
+version: 3.3
 
 name: MaterialComponents, nameSpecified: 
 body: 
@@ -205,7 +205,7 @@ version: 3.17.0
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20200225.4
 
-name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 
+name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 1.7.1
 
 name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: microsoft, version: 4.2.0
 
@@ -215,15 +215,15 @@ name: Comscore-Swift-Package-Manager, nameSpecified: ComScore, owner: comScore, 
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: 
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 7.11.1
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.6.0
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 7.11.1
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 8.3.1
 
-name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 8.4.0
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.1.0
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.5.0
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.5.1
 
 name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.4
 
@@ -241,11 +241,13 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.7
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0
 
+name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.3.3
+
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
 name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version: 1.9.0
 
-name: promises, nameSpecified: Promises, owner: google, version: 1.2.12
+name: promises, nameSpecified: Promises, owner: google, version: 2.0.0
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.1.0
 
@@ -269,11 +271,11 @@ name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.2
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.1.0
 
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.4
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 0.0.5
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.17.0
 
-name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 8.0.5
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.3
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5
 
