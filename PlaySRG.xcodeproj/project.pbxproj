@@ -16408,8 +16408,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 9.0.3;
+				branch = work/9.0.4;
+				kind = branch;
 			};
 		};
 		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
