@@ -13,20 +13,32 @@ class SceneDelegate: UIResponder {
     
     private static func configureTabBarController(_ tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
         appearance.backgroundColor = .srgGray23
-        appearance.selectionIndicatorTintColor = .hexadecimal("#979797")
+        appearance.selectionIndicatorTintColor = .srgGray96
         
-        let itemAppearance = appearance.inlineLayoutAppearance
-        itemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: SRGFont.font(family: .text, weight: .medium, size: 28) as UIFont,
-                                                     NSAttributedString.Key.foregroundColor: UIColor.white]
-        itemAppearance.normal.iconColor = .white
+        let font: UIFont = SRGFont.font(family: .text, weight: .medium, size: 28)
+        let normalColor = UIColor.white
+        let activeColor = UIColor.srgGray16
         
-        let activeColor = UIColor.hexadecimal("#161616")!
-        let activeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: activeColor]
-        itemAppearance.selected.titleTextAttributes = activeTitleTextAttributes
-        itemAppearance.selected.iconColor = activeColor
-        itemAppearance.focused.titleTextAttributes = activeTitleTextAttributes
-        itemAppearance.focused.iconColor = activeColor
+        let normalItemAttributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: normalColor
+        ]
+        let activeItemAttributes = [
+            NSAttributedString.Key.font: font,
+            NSAttributedString.Key.foregroundColor: activeColor
+        ]
+        
+        let inlineItemAppearance = UITabBarItemAppearance(style: .inline)
+        inlineItemAppearance.normal.titleTextAttributes = normalItemAttributes
+        inlineItemAppearance.normal.iconColor = normalColor
+        inlineItemAppearance.selected.titleTextAttributes = activeItemAttributes
+        inlineItemAppearance.selected.iconColor = activeColor
+        inlineItemAppearance.focused.titleTextAttributes = activeItemAttributes
+        inlineItemAppearance.focused.iconColor = activeColor
+        appearance.inlineLayoutAppearance = inlineItemAppearance
         
         tabBarController.tabBar.standardAppearance = appearance
         tabBarController.view.backgroundColor = .srgGray16
