@@ -14,9 +14,9 @@
         "package": "Aiolos",
         "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
         "state": {
-          "branch": "main",
-          "revision": "45b1ee2188a318176370b623bac5b2df308193b5",
-          "version": null
+          "branch": null,
+          "revision": "7720559205c06ebc5c2660b3152922a39dd9a2fd",
+          "version": "1.7.1"
         }
       },
       {
