@@ -121,7 +121,7 @@ final class SectionViewController: UIViewController {
         super.viewDidLoad()
         
         #if os(iOS)
-        updateEditButton()
+        updateNavigationBar(animated: false)
         #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
@@ -194,13 +194,40 @@ final class SectionViewController: UIViewController {
         // Force a cell global appearance update
         collectionView.reloadData()
         
-        updateEditButton()
         updateNavigationBar(animated: animated)
     }
     
+    private func updateNavigationBar(for state: SectionViewModel.State, animated: Bool) {
+        if model.configuration.properties.supportsEdition && !state.isEmpty {
+            navigationItem.rightBarButtonItem = editButtonItem
+            
+            if isEditing {
+                title = Self.title(for: model.numberOfSelectedItems)
+                editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
+                
+                let numberOfSelectedItems = model.numberOfSelectedItems
+                let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+                deleteBarButtonItem.tintColor = .red
+                deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
+                deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+                deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: numberOfSelectedItems) : nil
+                navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
+            }
+            else {
+                title = model.title
+                editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
+                navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
+            }
+        }
+        else {
+            title = model.title
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
+        }
+    }
+    
     private func updateNavigationBar(animated: Bool) {
-        updateTitle()
-        updateDeleteButton(animated: animated)
+        updateNavigationBar(for: model.state, animated: animated)
     }
     
     private static func title(for numberOfSelectedItems: Int) -> String {
@@ -215,57 +242,20 @@ final class SectionViewController: UIViewController {
             return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
         }
     }
-    
-    private func updateTitle() {
-        if isEditing {
-            title = Self.title(for: model.numberOfSelectedItems)
-        }
-        else {
-            title = model.title
-        }
-    }
-    
-    private func updateEditButton() {
-        if isEditing {
-            editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
-        }
-        else {
-            editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
-        }
-    }
-    
-    private func updateDeleteButton(animated: Bool) {
-        if isEditing {
-            let numberOfSelectedItems = model.numberOfSelectedItems
-            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
-            deleteBarButtonItem.tintColor = .red
-            deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
-            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
-            deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: model.numberOfSelectedItems) : nil
-            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
-        }
-        else {
-            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
-        }
-    }
     #endif
     
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
-            navigationItem.rightBarButtonItem = nil
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-            navigationItem.rightBarButtonItem = nil
         case .loaded:
-            let isEmpty = state.isEmpty
             let properties = model.configuration.properties
-            emptyView.content = (state.topHeaderSize != .large && isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
-            
-            let hasEditButton = properties.supportsEdition && !isEmpty
-            navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
+            emptyView.content = (state.topHeaderSize != .large && state.isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
+        
+        updateNavigationBar(for: state, animated: true)
         
         contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
