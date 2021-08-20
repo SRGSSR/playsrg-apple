@@ -255,7 +255,9 @@ final class SectionViewController: UIViewController {
             emptyView.content = (state.topHeaderSize != .large && state.isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
         
+        #if os(iOS)
         updateNavigationBar(for: state)
+        #endif
         
         contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
