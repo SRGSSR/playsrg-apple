@@ -121,7 +121,7 @@ final class SectionViewController: UIViewController {
         super.viewDidLoad()
         
         #if os(iOS)
-        updateNavigationBar(animated: false)
+        updateNavigationBar()
         #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
@@ -194,10 +194,10 @@ final class SectionViewController: UIViewController {
         // Force a cell global appearance update
         collectionView.reloadData()
         
-        updateNavigationBar(animated: animated)
+        updateNavigationBar()
     }
     
-    private func updateNavigationBar(for state: SectionViewModel.State, animated: Bool) {
+    private func updateNavigationBar(for state: SectionViewModel.State) {
         if model.configuration.properties.supportsEdition && !state.isEmpty {
             navigationItem.rightBarButtonItem = editButtonItem
             
@@ -211,23 +211,23 @@ final class SectionViewController: UIViewController {
                 deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
                 deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
                 deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: numberOfSelectedItems) : nil
-                navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
+                navigationItem.leftBarButtonItem = deleteBarButtonItem
             }
             else {
                 title = model.title
                 editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
-                navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
+                navigationItem.leftBarButtonItem = leftBarButtonItem
             }
         }
         else {
             title = model.title
             navigationItem.rightBarButtonItem = nil
-            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
+            navigationItem.leftBarButtonItem = leftBarButtonItem
         }
     }
     
-    private func updateNavigationBar(animated: Bool) {
-        updateNavigationBar(for: model.state, animated: animated)
+    private func updateNavigationBar() {
+        updateNavigationBar(for: model.state)
     }
     
     private static func title(for numberOfSelectedItems: Int) -> String {
@@ -255,7 +255,7 @@ final class SectionViewController: UIViewController {
             emptyView.content = (state.topHeaderSize != .large && state.isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
         
-        updateNavigationBar(for: state, animated: true)
+        updateNavigationBar(for: state)
         
         contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
@@ -451,7 +451,7 @@ extension SectionViewController: UICollectionViewDelegate {
         
         if collectionView.isEditing {
             model.select(item)
-            updateNavigationBar(animated: false)
+            updateNavigationBar()
         }
         else {
             open(item)
@@ -464,7 +464,7 @@ extension SectionViewController: UICollectionViewDelegate {
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
         model.deselect(item)
-        updateNavigationBar(animated: false)
+        updateNavigationBar()
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
