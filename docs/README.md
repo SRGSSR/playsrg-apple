@@ -47,7 +47,12 @@ brew install imagemagick ghostscript
 brew install jq
 ```
 
-- Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system.
+- Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system:
+
+```
+which pod
+pod --version
+```
 
 ## Building the project
 
