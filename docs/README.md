@@ -18,7 +18,7 @@ The Play platform is more generally available on the web and on Android phones:
 
 The application provides a rich set of functionalities, among which:
 
-* Access to to our content, whether its is broadcast on TV, radio or online. 
+* Access to our content, whether its is broadcast on TV, radio or online. 
 * An audio mini player (iOS only).
 * Subscriptions with push notifications (iOS only).
 * Resume playback and continuous playback.
@@ -32,7 +32,7 @@ Depending on the business unit, some functionalities might not be available (e.g
 
 ## Compatibility
 
-The project runs on iOS 12, tvOS 14 and above and must be opened with the latest Xcode version.
+The project runs on iOS 14, tvOS 14 and above and must be opened with the latest Xcode version.
 
 ## Contributing
 
@@ -81,7 +81,7 @@ make setup
 If you are not part of the SRG SSR organization you can still build the project. Setup the project first:
 
 ```
-make public.setup
+make
 ```
 
 This setup does not contain private configuration information we use for publishing the applications, but otherwise works the same.
@@ -98,5 +98,5 @@ The proprietary project uses [fastlane](https://fastlane.tools/) for releasing b
 
 Follow the links below for feature specifications and technical details:
 
-* [Remote configuration](REMOTE_CONFIGURATION.md).
+* [Remote configuration](REMOTE_CONFIGURATION.md)
 * [URL schemes](URL_SCHEMES.md)
