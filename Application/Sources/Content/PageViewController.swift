@@ -511,16 +511,16 @@ private extension PageViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 #if os(iOS)
                 case .showAccess:

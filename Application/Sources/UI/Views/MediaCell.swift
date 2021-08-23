@@ -181,8 +181,8 @@ final class MediaCellSize: NSObject {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
     @objc static func fullWidth() -> NSCollectionLayoutSize {

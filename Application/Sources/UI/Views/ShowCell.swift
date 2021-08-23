@@ -140,8 +140,8 @@ final class ShowCellSize: NSObject {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset)
     }
     
-    @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, 2)
     }
 }
 

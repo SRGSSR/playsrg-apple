@@ -607,20 +607,20 @@ private extension SectionViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 }
             }

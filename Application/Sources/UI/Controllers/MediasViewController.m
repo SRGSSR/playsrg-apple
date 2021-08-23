@@ -77,7 +77,7 @@
         return CGSizeMake(size.width - 4 * LayoutMargin, size.height);
     }
     else {
-        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+        return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing] constrainedBy:collectionView];
     }
 }
 
