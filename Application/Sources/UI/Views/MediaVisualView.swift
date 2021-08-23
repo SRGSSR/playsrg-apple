@@ -10,19 +10,25 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct MediaVisualView: View {
+struct MediaVisualView<Content: View>: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = MediaVisualViewModel()
     
     let scale: ImageScale
     let contentMode: ContentMode
     
-    static let padding: CGFloat = constant(iOS: 6, tvOS: 16)
+    @Binding private var content: (SRGMedia?) -> Content
     
-    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
+    let padding: CGFloat = constant(iOS: 6, tvOS: 16)
+    
+    init(media: SRGMedia?,
+         scale: ImageScale,
+         contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill),
+         @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
         _media = .constant(media)
         self.scale = scale
         self.contentMode = contentMode
+        _content = .constant(content)
     }
     
     var body: some View {
@@ -33,16 +39,17 @@ struct MediaVisualView: View {
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .clipped()
                 
+                content(media)
                 BlockingOverlay(media: media)
                 
                 if let properties = model.availabilityBadgeProperties {
                     Badge(text: properties.text, color: Color(properties.color))
-                        .padding([.top, .leading], Self.padding)
+                        .padding([.top, .leading], padding)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
                 
                 AttributesView(model: model)
-                    .padding([.bottom, .horizontal], Self.padding)
+                    .padding([.bottom, .horizontal], padding)
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 
                 ProgressBar(value: model.progress)
@@ -100,6 +107,16 @@ struct MediaVisualView: View {
                     DurationBadge(duration: duration)
                 }
             }
+        }
+    }
+}
+
+// MARK: Extensions
+
+extension MediaVisualView where Content == SwiftUI.EmptyView {
+    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
+        self.init(media: media, scale: scale, contentMode: contentMode) { _ in
+            SwiftUI.EmptyView()
         }
     }
 }
