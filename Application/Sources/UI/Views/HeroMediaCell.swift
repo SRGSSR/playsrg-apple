@@ -14,7 +14,7 @@ struct HeroMediaCell: View {
     
     var body: some View {
         ZStack {
-            MediaVisualView(media: media, scale: .large)
+            MediaVisualView(media: media, scale: .large, contentMode: .fill)
             DescriptionView(media: media)
         }
     }

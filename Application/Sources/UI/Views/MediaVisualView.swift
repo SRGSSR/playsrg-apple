@@ -15,33 +15,41 @@ struct MediaVisualView: View {
     @StateObject private var model = MediaVisualViewModel()
     
     let scale: ImageScale
+    let contentMode: ContentMode
     
     static let padding: CGFloat = constant(iOS: 6, tvOS: 16)
     
-    init(media: SRGMedia?, scale: ImageScale) {
+    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
         _media = .constant(media)
         self.scale = scale
+        self.contentMode = contentMode
     }
     
     var body: some View {
-        ZStack {
-            ImageView(url: model.imageUrl(for: scale))
-            BlockingOverlay(media: media)
-            
-            if let properties = model.availabilityBadgeProperties {
-                Badge(text: properties.text, color: Color(properties.color))
-                    .padding([.top, .leading], Self.padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        GeometryReader { geometry in
+            ZStack {
+                ImageView(url: model.imageUrl(for: scale))
+                    .aspectRatio(contentMode: contentMode)
+                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+                    .clipped()
+                
+                BlockingOverlay(media: media)
+                
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                        .padding([.top, .leading], Self.padding)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }
+                
+                AttributesView(model: model)
+                    .padding([.bottom, .horizontal], Self.padding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                
+                ProgressBar(value: model.progress)
+                    .opacity(model.progress != 0 ? 1 : 0)
+                    .frame(height: LayoutProgressBarHeight)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            
-            AttributesView(model: model)
-                .padding([.bottom, .horizontal], Self.padding)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            
-            ProgressBar(value: model.progress)
-                .opacity(model.progress != 0 ? 1 : 0)
-                .frame(height: LayoutProgressBarHeight)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .onAppear {
             model.media = media
