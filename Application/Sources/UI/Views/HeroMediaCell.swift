@@ -18,12 +18,14 @@ struct HeroMediaCell: View {
         #if os(tvOS)
         ExpandingCardButton(action: action) {
             MainView(media: media, label: label)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
         #else
         MainView(media: media, label: label)
             .background(Color.white.opacity(0.1))
             .selectionAppearance(when: isSelected)
             .cornerRadius(LayoutStandardViewCornerRadius)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
         #endif
     }
     
@@ -86,6 +88,19 @@ struct HeroMediaCell: View {
             .padding(.horizontal, 18)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
+    }
+}
+
+// MARK: Accessibility
+
+private extension HeroMediaCell {
+    var accessibilityLabel: String? {
+        guard let media = media else { return nil }
+        return MediaDescription.accessibilityLabel(for: media)
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
     }
 }
 
