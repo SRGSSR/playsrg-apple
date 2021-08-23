@@ -14,7 +14,10 @@ import UIKit
 
 final class SectionViewController: UIViewController {
     let model: SectionViewModel
+    var initialSectionId: String?
     let fromPushNotification: Bool
+    
+    static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -41,15 +44,22 @@ final class SectionViewController: UIViewController {
     
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item>()
-        if case let .loaded(headerItem: _, row: row) = state {
-            snapshot.appendSections([row.section])
-            snapshot.appendItems(row.items, toSection: row.section)
+        if case let .loaded(rows: rows) = state {
+            for row in rows {
+                snapshot.appendSections([row.section])
+                snapshot.appendItems(row.items, toSection: row.section)
+            }
         }
         return snapshot
     }
     
-    init(section: Content.Section, filter: SectionFiltering? = nil, fromPushNotification: Bool = false) {
+    /**
+     *  Use `initialSectionId` to provide the collection view section id where the view should initially open. If not found or
+     *  specified the view opens at its top.
+     */
+    init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
         model = SectionViewModel(section: section, filter: filter)
+        self.initialSectionId = initialSectionId
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
@@ -94,7 +104,7 @@ final class SectionViewController: UIViewController {
         #endif
         
         #if os(iOS)
-        if model.section.properties.sharingItem != nil {
+        if model.configuration.properties.sharingItem != nil {
             let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
                                                   style: .plain,
                                                   target: self,
@@ -111,17 +121,15 @@ final class SectionViewController: UIViewController {
         super.viewDidLoad()
         
         #if os(iOS)
-        updateEditButton()
+        updateNavigationBar()
         #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, indexPath, item in
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
             guard let self = self else { return }
-            let snapshot = self.dataSource.snapshot()
-            let section = snapshot.sectionIdentifiers[indexPath.section]
-            cell.content = ItemCell(item: item, section: section)
+            cell.content = ItemCell(item: item, configuration: self.model.configuration)
         }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
@@ -134,7 +142,7 @@ final class SectionViewController: UIViewController {
             guard let self = self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
-            view.content = SectionHeaderView(section: section, headerItem: self.model.state.headerItem)
+            view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
         }
         
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
@@ -157,7 +165,7 @@ final class SectionViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
-        userActivity = model.section.viewModelProperties.userActivity
+        userActivity = model.configuration.viewModelProperties.userActivity
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -186,13 +194,40 @@ final class SectionViewController: UIViewController {
         // Force a cell global appearance update
         collectionView.reloadData()
         
-        updateEditButton()
-        updateNavigationBar(animated: animated)
+        updateNavigationBar()
     }
     
-    private func updateNavigationBar(animated: Bool) {
-        updateTitle()
-        updateDeleteButton(animated: animated)
+    private func updateNavigationBar(for state: SectionViewModel.State) {
+        if model.configuration.properties.supportsEdition && !state.isEmpty {
+            navigationItem.rightBarButtonItem = editButtonItem
+            
+            if isEditing {
+                title = Self.title(for: model.numberOfSelectedItems)
+                editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
+                
+                let numberOfSelectedItems = model.numberOfSelectedItems
+                let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
+                deleteBarButtonItem.tintColor = .red
+                deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
+                deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
+                deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: numberOfSelectedItems) : nil
+                navigationItem.leftBarButtonItem = deleteBarButtonItem
+            }
+            else {
+                title = model.title
+                editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
+                navigationItem.leftBarButtonItem = leftBarButtonItem
+            }
+        }
+        else {
+            title = model.title
+            navigationItem.rightBarButtonItem = nil
+            navigationItem.leftBarButtonItem = leftBarButtonItem
+        }
+    }
+    
+    private func updateNavigationBar() {
+        updateNavigationBar(for: model.state)
     }
     
     private static func title(for numberOfSelectedItems: Int) -> String {
@@ -207,56 +242,22 @@ final class SectionViewController: UIViewController {
             return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
         }
     }
-    
-    private func updateTitle() {
-        if isEditing {
-            title = Self.title(for: model.numberOfSelectedItems)
-        }
-        else {
-            title = model.title
-        }
-    }
-    
-    private func updateEditButton() {
-        if isEditing {
-            editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
-        }
-        else {
-            editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
-        }
-    }
-    
-    private func updateDeleteButton(animated: Bool) {
-        if isEditing {
-            let numberOfSelectedItems = model.numberOfSelectedItems
-            let deleteBarButtonItem = UIBarButtonItem(image: UIImage(named: "delete"), style: .plain, target: self, action: #selector(deleteSelectedItems))
-            deleteBarButtonItem.tintColor = .red
-            deleteBarButtonItem.isEnabled = (numberOfSelectedItems != 0)
-            deleteBarButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Delete", comment: "Delete button label")
-            deleteBarButtonItem.accessibilityValue = (numberOfSelectedItems != 0) ? Self.title(for: model.numberOfSelectedItems) : nil
-            navigationItem.setLeftBarButton(deleteBarButtonItem, animated: animated)
-        }
-        else {
-            navigationItem.setLeftBarButton(leftBarButtonItem, animated: animated)
-        }
-    }
     #endif
     
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
-            navigationItem.rightBarButtonItem = nil
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-            navigationItem.rightBarButtonItem = nil
-        case let .loaded(headerItem: headerItem, row: row):
-            let isEmpty = row.isEmpty
-            emptyView.content = (headerItem == nil && row.isEmpty) ? EmptyView(state: .empty(type: model.section.properties.emptyType)) : nil
-            
-            let hasEditButton = model.section.properties.supportsEdition && !isEmpty
-            navigationItem.rightBarButtonItem = hasEditButton ? editButtonItem : nil
+        case .loaded:
+            let properties = model.configuration.properties
+            emptyView.content = (state.topHeaderSize != .large && state.isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
+        
+        #if os(iOS)
+        updateNavigationBar(for: state)
+        #endif
         
         contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
@@ -265,7 +266,14 @@ final class SectionViewController: UIViewController {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
                 #if os(iOS)
-                // Avoid stopping scrolling
+                self.collectionView.reloadSectionIndexBar()
+                
+                // Apply colors when the section bar might be visible.
+                self.collectionView.setSectionBarAppearance(indexColor: .srgGray96,
+                                                            indexBackgroundColor: .init(white: 0, alpha: 0.3))
+                self.scrollToInitialSection()
+                
+                // Avoid stopping scrolling.
                 // See http://stackoverflow.com/a/31681037/760435
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
@@ -275,8 +283,20 @@ final class SectionViewController: UIViewController {
         }
     }
     
+    private func scrollToInitialSection() {
+        guard initialSectionId != nil else { return }
+        
+        let sectionIdentifiers = dataSource.snapshot().sectionIdentifiers
+        guard !sectionIdentifiers.isEmpty else { return }
+        
+        if let index = sectionIdentifiers.firstIndex(where: { $0.id == initialSectionId }) {
+            collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
+        }
+        initialSectionId = nil
+    }
+    
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
-        let top = (state.headerItem != nil) ? 0 : Self.layoutVerticalMargin
+        let top = (state.topHeaderSize == .zero) ? Self.layoutVerticalMargin : 0
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
@@ -308,7 +328,7 @@ final class SectionViewController: UIViewController {
     }
     
     @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
-        guard let sharingItem = model.section.properties.sharingItem else { return }
+        guard let sharingItem = model.configuration.properties.sharingItem else { return }
         
         let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
         activityViewController.modalPresentationStyle = .popover
@@ -350,7 +370,7 @@ private extension SectionViewController {
 
 extension SectionViewController: DailyMediasViewController {
     var date: Date? {
-        guard case let .configured(section) = model.section.wrappedValue else { return nil }
+        guard case let .configured(section) = model.configuration.wrappedValue else { return nil }
         switch section {
         case let .tvEpisodesForDay(day), let .radioEpisodesForDay(day, channelUid: _):
             return day.date
@@ -390,13 +410,17 @@ extension SectionViewController {
         }
     }
     
-    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+    @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
         if let channelUid = channelUid {
-            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)))
+            return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         }
         else {
-            return SectionViewController(section: .configured(.tvAllShows))
+            return SectionViewController(section: .configured(.tvAllShows), initialSectionId: initialSectionId)
         }
+    }
+    
+    @objc static func showsViewController(forChannelUid channelUid: String?) -> SectionViewController {
+        return showsViewController(forChannelUid: channelUid, initialSectionId: nil)
     }
     
     @objc static func showViewController(for show: SRGShow, fromPushNotification: Bool) -> SectionViewController {
@@ -429,7 +453,7 @@ extension SectionViewController: UICollectionViewDelegate {
         
         if collectionView.isEditing {
             model.select(item)
-            updateNavigationBar(animated: false)
+            updateNavigationBar()
         }
         else {
             open(item)
@@ -442,7 +466,7 @@ extension SectionViewController: UICollectionViewDelegate {
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         
         model.deselect(item)
-        updateNavigationBar(animated: false)
+        updateNavigationBar()
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
@@ -512,11 +536,11 @@ extension SectionViewController: UIScrollViewDelegate {
 
 extension SectionViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
-        return model.section.properties.analyticsTitle ?? ""
+        return model.configuration.properties.analyticsTitle ?? ""
     }
     
     var srg_pageViewLevels: [String]? {
-        return model.section.properties.analyticsLevels
+        return model.configuration.properties.analyticsLevels
     }
     
     var srg_isOpenedFromPushNotification: Bool {
@@ -542,12 +566,12 @@ extension SectionViewController: SectionShowHeaderViewAction {
 // MARK: Layout
 
 private extension SectionViewController {
-    private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
+        configuration.interSectionSpacing = constant(iOS: 30, tvOS: 100)
         
         let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
@@ -558,42 +582,45 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Section, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
-                                                        headerItem: self?.model.state.headerItem,
+                                                        configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -section.header.horizontalPadding, bottom: 0, trailing: -section.header.horizontalPadding)
+                header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
                 return [header]
             }
             
-            func layoutSection(for section: SectionViewModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+            func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
                 let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
+                let top = section.header.sectionTopInset
                 
-                switch section.viewModelProperties.layout {
+                switch configuration.viewModelProperties.layout {
                 case .mediaGrid:
                     if horizontalSizeClass == .compact {
-                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
                             return MediaCellSize.fullWidth()
                         }
                     }
                     else {
-                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                         }
                     }
                 case .liveMediaGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .showGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .topicGrid:
-                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                    return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 }
             }
@@ -602,9 +629,10 @@ private extension SectionViewController {
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
+            let configuration = self.model.configuration
             
-            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, index: sectionIndex, layoutEnvironment: layoutEnvironment)
             return layoutSection
         }, configuration: layoutConfiguration())
     }
@@ -615,12 +643,12 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct ItemCell: View {
         let item: SectionViewModel.Item
-        let section: SectionViewModel.Section
+        let configuration: SectionViewModel.Configuration
         
         var body: some View {
             switch item {
             case let .media(media):
-                switch section.wrappedValue {
+                switch configuration.wrappedValue {
                 case .content:
                     MediaCell(media: media, style: .show)
                 case let .configured(configuredSection):
@@ -634,25 +662,26 @@ private extension SectionViewController {
                     }
                 }
             case let .show(show):
-                switch section.wrappedValue {
+                let imageType = configuration.properties.imageType
+                switch configuration.wrappedValue {
                 case let .content(contentSection):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite)
+                            ShowCell(show: show, style: .favorite, imageType: imageType)
                         default:
-                            ShowCell(show: show, style: .standard)
+                            ShowCell(show: show, style: .standard, imageType: imageType)
                         }
                     default:
-                        ShowCell(show: show, style: .standard)
+                        ShowCell(show: show, style: .standard, imageType: imageType)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite)
+                        ShowCell(show: show, style: .favorite, imageType: imageType)
                     default:
-                        ShowCell(show: show, style: .standard)
+                        ShowCell(show: show, style: .standard, imageType: imageType)
                     }
                 }
             case let .topic(topic: topic):
@@ -669,36 +698,40 @@ private extension SectionViewController {
 private extension SectionViewController {
     struct SectionHeaderView: View {
         let section: SectionViewModel.Section
-        let headerItem: SectionViewModel.HeaderItem?
+        let configuration: SectionViewModel.Configuration
         
         var body: some View {
-            switch headerItem {
+            switch section.header {
+            case let .title(title):
+                TransluscentHeaderView(title: title, horizontalPadding: section.header.horizontalPadding)
             case let .item(item):
                 switch item {
                 case let .show(show):
-                    SectionShowHeaderView(section: section.wrappedValue, show: show)
+                    SectionShowHeaderView(section: configuration.wrappedValue, show: show)
                 default:
                     Color.clear
                 }
             case let .show(show):
                 ShowHeaderView(show: show)
-            default:
+            case .none:
                 Color.clear
             }
         }
         
-        static func size(section: SectionViewModel.Section, headerItem: SectionViewModel.HeaderItem?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-            switch headerItem {
+        static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+            switch section.header {
+            case let .title(title):
+                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: section.header.horizontalPadding, layoutWidth: layoutWidth)
             case let .item(item):
                 switch item {
                 case let .show(show):
-                    return SectionShowHeaderViewSize.recommended(for: section.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    return SectionShowHeaderViewSize.recommended(for: configuration.wrappedValue, show: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                 default:
                     return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
                 }
             case let .show(show):
                 return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
-            default:
+            case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
         }

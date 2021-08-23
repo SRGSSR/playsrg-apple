@@ -26,7 +26,6 @@
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
-#import "ShowsViewController.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -747,18 +746,6 @@ static void *s_kvoContext = &s_kvoContext;
             [Banner showError:error inViewController:nil];
         }
     }] resume];
-}
-
-- (void)openShowListWithRadioChannel:(RadioChannel *)radioChannel atIndex:(NSString *)index
-{
-    ShowsViewController *showsViewController = [[ShowsViewController alloc] initWithRadioChannel:radioChannel alphabeticalIndex:index];
-    [self.rootTabBarController pushViewController:showsViewController animated:YES];
-}
-
-- (void)openCalendarAtDate:(NSDate *)date withRadioChannel:(RadioChannel *)radioChannel
-{
-    CalendarViewController *calendarViewController = [[CalendarViewController alloc] initWithRadioChannel:radioChannel date:date];
-    [self.rootTabBarController pushViewController:calendarViewController animated:YES];
 }
 
 #pragma mark Forced updates

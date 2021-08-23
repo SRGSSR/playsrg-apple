@@ -644,13 +644,14 @@
             return CGSizeMake(size.width - 4 * LayoutMargin, size.height);
         }
         else {
-            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing] constrainedBy:collectionView];
         }
     }
     // Search show list
     else {
-        // Small margin to avoid overlap with the horizontal scrolling indicator
-        CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
+        // Small margin to avoid overlap with the horizontal scrolling indicator; use default image type in all cases
+        // since search show results can mix TV and radio
+        CGFloat height = [[ShowCellSize swimlaneFor:SRGImageTypeDefault] constrainedBy:collectionView].height + 15.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }

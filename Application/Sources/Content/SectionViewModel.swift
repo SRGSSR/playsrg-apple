@@ -10,32 +10,35 @@ import SRGDataProviderCombine
 // MARK: View model
 
 final class SectionViewModel: ObservableObject {
-    let section: SectionViewModel.Section
+    let configuration: SectionViewModel.Configuration
     
     @Published private(set) var state: State = .loading
     
+    private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
-    private var trigger = Trigger()
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
-        return section.properties.displaysTitle ? section.properties.title : nil
+        let properties = configuration.properties
+        return properties.displaysTitle ? properties.title : nil
     }
     
     var numberOfSelectedItems: Int {
         return selectedItems.count
     }
     
-    init(section contentSection: Content.Section, filter: SectionFiltering?) {
-        self.section = SectionViewModel.Section(contentSection)
+    init(section: Content.Section, filter: SectionFiltering?) {
+        self.configuration = SectionViewModel.Configuration(section)
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [section, trigger] in
+        // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
+        // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
             return Publishers.CombineLatest(
-                section.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                             paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                             filter: filter)
+                configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                                                   paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
+                                                   filter: filter)
                     .scan([]) { $0 + $1 },
-                section.properties.interactiveUpdatesPublisher()
+                configuration.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -43,9 +46,8 @@ final class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = section.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: section.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: section, items: rowItems))
+                let rows = configuration.viewModelProperties.rows(from: removeDuplicates(in: items))
+                return State.loaded(rows: rows)
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -85,10 +87,12 @@ final class SectionViewModel: ObservableObject {
     }
     
     func deleteSelection() {
-        section.properties.remove(Array(selectedItems))
+        let properties = configuration.properties
+        
+        properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
-        if let analyticsDeletionHiddenEventTitle = section.properties.analyticsDeletionHiddenEventTitle {
+        if let analyticsDeletionHiddenEventTitle = properties.analyticsDeletionHiddenEventTitle {
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.selection.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
@@ -99,7 +103,7 @@ final class SectionViewModel: ObservableObject {
 // MARK: Types
 
 extension SectionViewModel {
-    struct Section: Hashable {
+    struct Configuration: Hashable {
         let wrappedValue: Content.Section
         
         init(_ wrappedValue: Content.Section) {
@@ -120,9 +124,48 @@ extension SectionViewModel {
         }
     }
     
-    enum HeaderItem {
+    enum Header: Hashable {
+        enum Size {
+            case zero
+            case small
+            case large
+        }
+        
+        case none
+        case title(String)
         case item(Content.Item)
         case show(SRGShow)
+        
+        var sectionTopInset: CGFloat {
+            switch self {
+            case .title:
+                return constant(iOS: 8, tvOS: 12)
+            default:
+                return 0
+            }
+        }
+        
+        var horizontalPadding: CGFloat {
+            switch self {
+            case .title:
+                return 2 * SectionViewController.itemSpacing
+            default:
+                return 0
+            }
+        }
+    }
+    
+    struct Section: Hashable, Indexable {
+        let id: String
+        let header: Header
+        
+        var indexTitle: String {
+            return id.uppercased()
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     }
     
     typealias Item = Content.Item
@@ -131,24 +174,31 @@ extension SectionViewModel {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: HeaderItem?, row: Row)
+        case loaded(rows: [Row])
         
-        var isEmpty: Bool {
-            if case let .loaded(headerItem: _, row: row) = self {
-                return row.isEmpty
+        var topHeaderSize: Header.Size {
+            if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
+                switch firstSection.header {
+                case .title:
+                    return .small
+                case .item, .show:
+                    return .large
+                case .none:
+                    return .zero
+                }
             }
             else {
-                return true
+                return .zero
             }
         }
         
-        var headerItem: HeaderItem? {
-            if case let .loaded(headerItem: headerItem, row: _) = self {
-                return headerItem
+        var isEmpty: Bool {
+            if case let .loaded(rows: rows) = self {
+                for row in rows where !row.isEmpty {
+                    return false
+                }
             }
-            else {
-                return nil
-            }
+            return true
         }
     }
     
@@ -163,17 +213,30 @@ extension SectionViewModel {
         case loadMore
         case reload
     }
+    
+    fileprivate static func row(with items: [Item], header: Header = .none) -> [Row] {
+        return [Row(section: Section(id: "main", header: header), items: items)]
+    }
+    
+    fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
+        return Item.groupAlphabetically(items)
+            .map { character, items in
+                return Row(
+                    section: Section(id: String(character), header: .title(String(character).uppercased())),
+                    items: items
+                )
+            }
+    }
 }
 
 // MARK: Properties
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
-    
-    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
-    func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
-    
+    var pinToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
+    
+    func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
 
 private extension SectionViewModel {
@@ -206,26 +269,49 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
-            if contentSection.type == .showAndMedias, let firstItem = items.first, case .show = firstItem {
-                return .item(firstItem)
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return true
+                default:
+                    return false
+                }
+            default:
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination; no headers.
+                return false
             }
-            else {
-                return nil
-            }
-        }
-        
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
-            if contentSection.type == .showAndMedias, case .show = items.first {
-                return Array(items.suffix(from: 1))
-            }
-            else {
-                return items
-            }
+            #else
+            return false
+            #endif
         }
         
         var userActivity: NSUserActivity? {
             return nil
+        }
+        
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            switch contentSection.type {
+            case .showAndMedias:
+                if let firstItem = items.first, case .show = firstItem {
+                    return SectionViewModel.row(with: Array(items.suffix(from: 1)), header: .item(firstItem))
+                }
+                else {
+                    return SectionViewModel.row(with: items)
+                }
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return SectionViewModel.alphabeticalRows(from: items)
+                default:
+                    return SectionViewModel.row(with: items)
+                }
+            default:
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
+                return SectionViewModel.row(with: items)
+            }
         }
     }
     
@@ -245,17 +331,17 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
             switch configuredSection {
-            case let .show(show):
-                return .show(show)
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return true
             default:
-                return nil
+                return false
             }
-        }
-        
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
-            return items
+            #else
+            return false
+            #endif
         }
         
         var userActivity: NSUserActivity? {
@@ -286,6 +372,17 @@ private extension SectionViewModel {
                 return userActivity
             default:
                 return nil
+            }
+        }
+        
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return SectionViewModel.alphabeticalRows(from: items)
+            case let .show(show):
+                return SectionViewModel.row(with: items, header: .show(show))
+            default:
+                return SectionViewModel.row(with: items)
             }
         }
     }

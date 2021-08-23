@@ -100,6 +100,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
@@ -299,6 +300,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.showsUnavailable = [firebaseConfiguration boolForKey:@"showsUnavailable"];
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
     

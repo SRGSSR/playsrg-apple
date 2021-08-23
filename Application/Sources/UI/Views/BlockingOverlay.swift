@@ -23,7 +23,7 @@ struct BlockingOverlay: View {
     }
     
     var body: some View {
-        if let blockingReason = blockingReason, let blockingIconImage = UIImage.play_image(for: blockingReason) {
+        if let blockingReason = blockingReason, let blockingIconImage = ImageForBlockingReason(blockingReason) {
             ZStack {
                 Color(white: 0, opacity: 0.6)
                 VStack {

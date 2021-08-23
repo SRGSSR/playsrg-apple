@@ -11,14 +11,18 @@ import SwiftUI
 // TODO: Improve implementation once we know what to do
 struct MoreCell: View {
     let section: Content.Section
+    let imageType: SRGImageType
     let filter: SectionFiltering?
     
     static let iconHeight: CGFloat = constant(iOS: 60, tvOS: 100)
-    static let aspectRatio: CGFloat = 16 / 9
+    
+    fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
+        return imageType == .showPoster ? 2 / 3 : 16 / 9
+    }
     
     var body: some View {
         #if os(tvOS)
-        LabeledCardButton(aspectRatio: Self.aspectRatio, action: action) {
+        LabeledCardButton(aspectRatio: Self.aspectRatio(for: imageType), action: action) {
             Image("chevron-large")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -37,7 +41,7 @@ struct MoreCell: View {
             .foregroundColor(.srgGrayC7)
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .aspectRatio(Self.aspectRatio, contentMode: .fit)
+            .aspectRatio(Self.aspectRatio(for: imageType), contentMode: .fit)
             .background(Color.white.opacity(0.1))
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
@@ -68,7 +72,7 @@ private extension MoreCell {
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {
-        MoreCell(section: .configured(.tvLive), filter: nil)
+        MoreCell(section: .configured(.tvLive), imageType: .default, filter: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

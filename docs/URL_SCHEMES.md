@@ -15,7 +15,7 @@ The available actions are:
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
 * Open a section page: `[scheme]://section/[section_id]`.
 * Open a home page: `[scheme]://home`.
-* Open shows A to Z page: `[scheme]://az`. An optional `index` single character parameter can be provided to open the page at the specified index.
+* Open shows A to Z page: `[scheme]://az`. An optional `index` single lowercase character parameter can be provided to open the page at the specified index.
 * Open shows by date page: `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
 * Open search page: `[scheme]://search`. Optional `query` and `media_type` (with `video` or `audio` values) parameters can be provided.
 * Open a URL: `[scheme]://link?url=[url]`.

@@ -73,6 +73,10 @@ extension String {
             """
     }
     
+    func unobfuscated() -> String {
+        return components(separatedBy: .decimalDigits).joined()
+    }
+    
     var capitalizedFirstLetter: String {
         return prefix(1).capitalized + dropFirst()
     }
@@ -98,6 +102,9 @@ extension Array {
 }
 
 extension Collection {
+    /**
+     *  Apply a transform to each item in a collection, providing an auto-increased index with each processed item.
+     */
     func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
         var index = 0
         return try map { element in
@@ -106,11 +113,28 @@ extension Collection {
             return transformedElement
         }
     }
+    
+    /**
+     *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
+     *  and collects items starting with non-letter characters under '#'.
+     */
+    func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> [(key: Character, value: [Self.Element])] where S: StringProtocol {
+        let dictionary = try [Character: [Self.Element]](grouping: self) { element in
+            if let key = try keyForElement(element),
+               let character = key.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).first, character.isLetter {
+                return character
+            }
+            else {
+                return "#"
+            }
+        }
+        return dictionary.sorted { $0.key < $1.key }
+    }
 }
 
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)
+        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
     }
 }
 

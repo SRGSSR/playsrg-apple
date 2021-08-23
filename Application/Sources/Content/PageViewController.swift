@@ -351,9 +351,9 @@ extension PageViewController: PlayApplicationNavigation {
             }
             return true
         case .showAZ:
-            let index = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
             if let navigationController = navigationController {
-                let showsViewController = ShowsViewController(radioChannel: applicationSectionInfo.radioChannel, alphabeticalIndex: index)
+                let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -394,7 +394,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
         if let navigationController = navigationController {
-            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
             navigationController.pushViewController(showsViewController, animated: true)
         }
     }
@@ -493,7 +493,7 @@ private extension PageViewController {
                     return layoutSection
                 case .showSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
-                        return ShowCellSize.swimlane()
+                        return ShowCellSize.swimlane(for: section.properties.imageType)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -511,16 +511,16 @@ private extension PageViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 #if os(iOS)
                 case .showAccess:
@@ -577,7 +577,7 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard)
+                PlaySRG.ShowCell(show: show, style: .standard, imageType: section.properties.imageType)
             }
         }
     }
@@ -613,7 +613,7 @@ private extension PageViewController {
                 #endif
                 }
             case .more:
-                MoreCell(section: item.section.wrappedValue, filter: id)
+                MoreCell(section: item.section.wrappedValue, imageType: item.section.properties.imageType, filter: id)
             }
         }
     }

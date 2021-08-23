@@ -92,7 +92,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [collectionView showCellFor:indexPath show:self.shows[indexPath.row]];
+    return [collectionView showCellFor:indexPath show:self.shows[indexPath.row] imageType:SRGImageTypeDefault];
 }
 
 #pragma mark UICollectionViewDelegate protocol
@@ -149,7 +149,8 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[ShowCellSize swimlane] constrainedBy:collectionView];
+    // Use default image type in all cases since search show results can mix TV and radio
+    return [[ShowCellSize swimlaneFor:SRGImageTypeDefault] constrainedBy:collectionView];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section

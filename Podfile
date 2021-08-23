@@ -9,7 +9,6 @@ abstract_target 'Play SRG' do
     platform :ios, '12.0'
 
     pod 'AutoCoding'
-    pod 'BDKCollectionIndexView'
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
     pod 'InAppSettingsKit', '3.3.0'
