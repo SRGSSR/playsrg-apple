@@ -416,7 +416,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
-        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Subscribe", @"Title of a subscription button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Subscribe", @"Title of a subscription button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             [self subscribeToAllShows];
         }]];
         [self presentViewController:alertController animated:YES completion:nil];

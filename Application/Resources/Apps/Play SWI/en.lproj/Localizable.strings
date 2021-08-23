@@ -490,6 +490,12 @@
 /* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
 "Still available for %@" = "Still available for %@";
 
+/* Title of a subscription button */
+"Subscribe" = "Subscribe";
+
+/* Title of the message displayed when the user is about to subscribe to all shows */
+"Subscribe to all shows?" = "Subscribe to all topics";
+
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Subscribe to topics you like to be notified when a new content is available.";
 
