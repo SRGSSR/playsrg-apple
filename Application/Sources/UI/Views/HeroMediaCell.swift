@@ -60,7 +60,7 @@ struct HeroMediaCell: View {
 final class HeroMediaCellSize: NSObject {
     @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 1 : 16 / 9
-        let height = min(layoutWidth * aspectRatio, 400)
+        let height = min(layoutWidth * aspectRatio, constant(iOS: 450, tvOS: 600))
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
 }
