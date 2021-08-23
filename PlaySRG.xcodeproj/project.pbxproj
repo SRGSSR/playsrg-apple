@@ -1061,11 +1061,11 @@
 		6F61CCAB256E419F00E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F61CCAC256E41A000E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F61CCAD256E41A000E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
-		6F61CCC3256E41EE00E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC2256E41EE00E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC5256E41F500E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC4256E41F500E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC7256E41FB00E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC9256E420200E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCCB256E420800E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SwiftPackageProductDependency */; };
+		6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC2256E41EE00E42E31 /* SRGUserData */; };
+		6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC4256E41F500E42E31 /* SRGUserData */; };
+		6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SRGUserData */; };
+		6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SRGUserData */; };
+		6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SRGUserData */; };
 		6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
@@ -14007,7 +14007,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/specialized-images";
+				branch = develop;
 				kind = branch;
 			};
 		};

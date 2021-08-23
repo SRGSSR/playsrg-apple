@@ -239,8 +239,8 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "feature/specialized-images",
-          "revision": "79f0c46ca81b432caf1d0fc3ba6071a151d2a5cc",
+          "branch": "develop",
+          "revision": "2a5c052d7f6abe3f03dd6fddb9521d9adc6fb36d",
           "version": null
         }
       },
