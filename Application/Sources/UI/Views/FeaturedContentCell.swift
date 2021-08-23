@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: View
 
 enum FeaturedContentLayout {
-    case hero
+    case headline
     case highlight
 }
 
@@ -56,7 +56,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             return .topLeading
         }
         else {
-            return layout == .hero ? .center : .leading
+            return layout == .headline ? .center : .leading
         }
     }
     
@@ -137,7 +137,7 @@ private extension FeaturedContentCell {
 final class FeaturedContentCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    @objc static func hero(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    @objc static func headline(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
             return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 100)
         }
@@ -169,8 +169,8 @@ private extension View {
     
     func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size: CGSize = {
-            if layout == .hero {
-                return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
+            if layout == .headline {
+                return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
             }
             else {
                 return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
@@ -187,18 +187,18 @@ struct FeaturedContentCell_Previews: PreviewProvider {
     
     static var previews: some View {
         #if os(tvOS)
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
-            .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+            .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
         
         FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)
-            .previewLayout(for: .hero, layoutWidth: 1800, horizontalSizeClass: .regular)
+            .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
         #else
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
-            .previewLayout(for: .hero, layoutWidth: 1200, horizontalSizeClass: .regular)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+            .previewLayout(for: .headline, layoutWidth: 1200, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)
         
-        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .hero)
-            .previewLayout(for: .hero, layoutWidth: 800, horizontalSizeClass: .compact)
+        FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
+            .previewLayout(for: .headline, layoutWidth: 800, horizontalSizeClass: .compact)
             .environment(\.horizontalSizeClass, .compact)
         
         FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)

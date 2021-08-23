@@ -196,6 +196,7 @@ extension PageViewModel {
     
     enum SectionLayout: Hashable {
         case hero
+        case headline
         case highlight
         case highlightSwimlane
         case liveMediaGrid
@@ -392,7 +393,7 @@ private extension PageViewModel {
         var layout: PageViewModel.SectionLayout {
             switch configuredSection {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-                return index == 0 ? .hero : .mediaSwimlane
+                return index == 0 ? .headline : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)
                 return .liveMediaGrid

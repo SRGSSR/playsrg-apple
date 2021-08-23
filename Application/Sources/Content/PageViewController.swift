@@ -471,7 +471,13 @@ private extension PageViewController {
                 switch section.viewModelProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth)
+                    }
+                    layoutSection.orthogonalScrollingBehavior = .groupPaging
+                    return layoutSection
+                case .headline:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                        return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
@@ -559,7 +565,9 @@ private extension PageViewController {
         var body: some View {
             switch section.viewModelProperties.layout {
             case .hero:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
+                HeroMediaCell(media: media, label: section.properties.label)
+            case .headline:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
             case .highlight, .highlightSwimlane:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             case .liveMediaSwimlane, .liveMediaGrid:
@@ -578,8 +586,8 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
+            case .hero, .headline:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HeroMediaCell: View {
     let media: SRGMedia?
+    let label: String?
     
     var body: some View {
         ZStack {
@@ -48,7 +49,7 @@ struct HeroMediaCell: View {
             }
             .multilineTextAlignment(.center)
             .foregroundColor(.white)
-            .padding(.bottom, 50)
+            .padding(.bottom, 30)
             .padding(.horizontal, 18)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
@@ -71,7 +72,7 @@ struct HeroMediaCell_Previews: PreviewProvider {
     private static let size = HeroMediaCellSize.recommended(layoutWidth: 800).previewSize
     
     static var previews: some View {
-        HeroMediaCell(media: Mock.media())
+        HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
