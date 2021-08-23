@@ -12,6 +12,8 @@ struct HeroMediaCell: View {
     let media: SRGMedia?
     let label: String?
     
+    @Environment(\.isSelected) private var isSelected
+    
     var body: some View {
         #if os(tvOS)
         ExpandingCardButton(action: action) {
@@ -19,6 +21,9 @@ struct HeroMediaCell: View {
         }
         #else
         MainView(media: media)
+            .background(Color.white.opacity(0.1))
+            .selectionAppearance(when: isSelected)
+            .cornerRadius(LayoutStandardViewCornerRadius)
         #endif
     }
     
