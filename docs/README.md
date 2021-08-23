@@ -18,7 +18,7 @@ The Play platform is more generally available on the web and on Android phones:
 
 The application provides a rich set of functionalities, among which:
 
-* Access to our content, whether its is broadcast on TV, radio or online. 
+* Access to our content, whether it is broadcast on TV, radio or online. 
 * An audio mini player (iOS only).
 * Subscriptions with push notifications (iOS only).
 * Resume playback and continuous playback.
