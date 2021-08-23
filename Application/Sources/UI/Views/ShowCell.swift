@@ -141,11 +141,7 @@ final class ShowCellSize: NSObject {
     }
     
     @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(for: imageType, approximateItemWidth: itemWidth(for: imageType), layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
-    }
-    
-    @objc static func grid(for imageType: SRGImageType, approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
     }
 }
 
