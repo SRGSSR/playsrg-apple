@@ -13,9 +13,31 @@ struct HeroMediaCell: View {
     let label: String?
     
     var body: some View {
-        ZStack {
-            MediaVisualView(media: media, scale: .large, contentMode: .fill)
-            DescriptionView(media: media)
+        #if os(tvOS)
+        ExpandingCardButton(action: action) {
+            MainView(media: media)
+        }
+        #else
+        MainView(media: media)
+        #endif
+    }
+    
+    #if os(tvOS)
+    private func action() {
+        if let media = media {
+            navigateToMedia(media)
+        }
+    }
+    #endif
+    
+    private struct MainView: View {
+        let media: SRGMedia?
+        
+        var body: some View {
+            ZStack {
+                MediaVisualView(media: media, scale: .large, contentMode: .fill)
+                DescriptionView(media: media)
+            }
         }
     }
     
