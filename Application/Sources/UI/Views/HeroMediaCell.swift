@@ -17,10 +17,10 @@ struct HeroMediaCell: View {
     var body: some View {
         #if os(tvOS)
         ExpandingCardButton(action: action) {
-            MainView(media: media)
+            MainView(media: media, label: label)
         }
         #else
-        MainView(media: media)
+        MainView(media: media, label: label)
             .background(Color.white.opacity(0.1))
             .selectionAppearance(when: isSelected)
             .cornerRadius(LayoutStandardViewCornerRadius)
@@ -37,11 +37,12 @@ struct HeroMediaCell: View {
     
     private struct MainView: View {
         let media: SRGMedia?
+        let label: String?
         
         var body: some View {
             ZStack {
                 MediaVisualView(media: media, scale: .large, contentMode: .fill)
-                DescriptionView(media: media)
+                DescriptionView(media: media, label: label)
             }
         }
     }
@@ -49,6 +50,7 @@ struct HeroMediaCell: View {
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         let media: SRGMedia?
+        let label: String?
         
         private var subtitle: String? {
             guard let media = media else { return nil }
@@ -62,10 +64,15 @@ struct HeroMediaCell: View {
         
         var body: some View {
             VStack {
-                if let subtitle = subtitle {
-                    Text(subtitle)
-                        .srgFont(.subtitle1)
-                        .lineLimit(1)
+                HStack(spacing: constant(iOS: 8, tvOS: 12)) {
+                    if let label = label {
+                        Badge(text: label, color: Color(.play_green))
+                    }
+                    if let subtitle = subtitle {
+                        Text(subtitle)
+                            .srgFont(.subtitle1)
+                            .lineLimit(1)
+                    }
                 }
                 if let title = title {
                     Text(title)
