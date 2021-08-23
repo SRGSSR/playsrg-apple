@@ -302,9 +302,9 @@
         "package": "SRGUserData",
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
-          "branch": null,
-          "revision": "de8a85116810d26b1ad2f08cb4fd51aec318fcfb",
-          "version": "3.1.0"
+          "branch": "develop",
+          "revision": "4f034c45a16182bb818de52d887b9fb79c007763",
+          "version": null
         }
       },
       {
