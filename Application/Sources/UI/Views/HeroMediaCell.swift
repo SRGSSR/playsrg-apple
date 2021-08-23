@@ -14,8 +14,7 @@ struct HeroMediaCell: View {
     
     var body: some View {
         ZStack {
-            MediaVisualView(media: media, scale: .small)
-                .aspectRatio(HeroMediaCellSize.aspectRatio, contentMode: .fit)
+            MediaVisualView(media: media, scale: .large)
             DescriptionView(media: media)
         }
     }
@@ -59,20 +58,28 @@ struct HeroMediaCell: View {
 // MARK: Size
 
 final class HeroMediaCellSize: NSObject {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
-    
-    @objc static func recommended(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 0)
+    @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 1 : 16 / 9
+        let height = min(layoutWidth * aspectRatio, 400)
+        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
 }
 
 // MARK: Preview
 
+private extension View {
+    func previewLayout(for layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+        let size = HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
+        return previewLayout(.fixed(width: size.width, height: size.height))
+            .horizontalSizeClass(horizontalSizeClass)
+    }
+}
+
 struct HeroMediaCell_Previews: PreviewProvider {
-    private static let size = HeroMediaCellSize.recommended(layoutWidth: 800).previewSize
-    
     static var previews: some View {
         HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(.fixed(width: size.width, height: size.height))
+            .previewLayout(for: 375, horizontalSizeClass: .compact)
+        HeroMediaCell(media: Mock.media(), label: "New")
+            .previewLayout(for: 800, horizontalSizeClass: .regular)
     }
 }

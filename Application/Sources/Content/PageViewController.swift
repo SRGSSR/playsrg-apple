@@ -471,7 +471,7 @@ private extension PageViewController {
                 switch section.viewModelProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth)
+                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection

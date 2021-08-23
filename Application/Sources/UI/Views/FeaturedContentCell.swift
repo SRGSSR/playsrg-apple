@@ -159,14 +159,6 @@ final class FeaturedContentCellSize: NSObject {
 // MARK: Preview
 
 private extension View {
-    private func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
-        #if os(iOS)
-        return self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
-        #else
-        return self
-        #endif
-    }
-    
     func previewLayout(for layout: FeaturedContentLayout, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size: CGSize = {
             if layout == .headline {
@@ -176,7 +168,7 @@ private extension View {
                 return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
             }
         }()
-        return self.previewLayout(.fixed(width: size.width, height: size.height))
+        return previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }
 }
