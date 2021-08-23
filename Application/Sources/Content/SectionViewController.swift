@@ -54,7 +54,7 @@ final class SectionViewController: UIViewController {
     }
     
     /**
-     *  Use `startSectionId` to provide the collection view section id where the view should initially open. If not found or
+     *  Use `initialSectionId` to provide the collection view section id where the view should initially open. If not found or
      *  specified the view opens at its top.
      */
     init(section: Content.Section, filter: SectionFiltering? = nil, initialSectionId: String? = nil, fromPushNotification: Bool = false) {
