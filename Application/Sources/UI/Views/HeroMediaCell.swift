@@ -59,13 +59,19 @@ struct HeroMediaCell: View {
 
 final class HeroMediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    @objc static func recommended(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 0)
+    }
 }
 
 // MARK: Preview
 
 struct HeroMediaCell_Previews: PreviewProvider {
+    private static let size = HeroMediaCellSize.recommended(layoutWidth: 800).previewSize
+    
     static var previews: some View {
         HeroMediaCell(media: Mock.media())
-            .previewLayout(.fixed(width: 1000, height: 600))
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
