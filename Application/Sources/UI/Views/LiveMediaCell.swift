@@ -32,7 +32,7 @@ struct LiveMediaCell: View {
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
                 .redactable()
-                .selectionAppearance(when: isSelected)
+                .selectionAppearance(when: isSelected && media != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif

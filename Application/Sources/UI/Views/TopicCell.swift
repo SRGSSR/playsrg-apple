@@ -25,7 +25,7 @@ struct TopicCell: View {
             #else
             MainView(topic: topic)
                 .redactable()
-                .selectionAppearance(when: isSelected)
+                .selectionAppearance(when: isSelected && topic != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif

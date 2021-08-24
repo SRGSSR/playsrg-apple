@@ -97,7 +97,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             }
             .background(Color.srgGray23)
             .redactable()
-            .selectionAppearance(when: isSelected)
+            .selectionAppearance(when: isSelected && !content.isPlaceholder)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif

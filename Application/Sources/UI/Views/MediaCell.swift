@@ -49,6 +49,10 @@ struct MediaCell: View {
         return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
     
+    private var hasSelectionAppearance: Bool {
+        return isSelected && media != nil
+    }
+    
     init(media: SRGMedia?, style: MediaDescription.Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -73,12 +77,12 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
-                    .selectionAppearance(when: isSelected, while: isEditing)
+                    .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
                 DescriptionView(media: media, style: style)
-                    .selectionAppearance(.transluscent, when: isSelected, while: isEditing)
+                    .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }

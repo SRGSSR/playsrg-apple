@@ -54,7 +54,7 @@ struct ShowCell: View {
             }
             .background(Color.srgGray23)
             .redactable()
-            .selectionAppearance(when: isSelected, while: isEditing)
+            .selectionAppearance(when: isSelected && show != nil, while: isEditing)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             .frame(maxHeight: .infinity, alignment: .top)
