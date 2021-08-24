@@ -6,6 +6,8 @@
 
 #import "StoreReview.h"
 
+#import "SceneDelegate.h"
+
 @import StoreKit;
 
 @implementation StoreReview
@@ -19,7 +21,8 @@
     NSInteger requestCount = [NSUserDefaults.standardUserDefaults integerForKey:kRequestCountUserDefaultsKey] + 1;
     static const NSInteger kRequestCountThreshold = 50;
     if (requestCount >= kRequestCountThreshold) {
-        UIWindowScene *windowScene = UIApplication.sharedApplication.delegate.window.windowScene;
+        // FIXME: Dangerous cast
+        UIWindowScene *windowScene = (UIWindowScene *)UIApplication.sharedApplication.connectedScenes.anyObject;
         [SKStoreReviewController requestReviewInScene:windowScene];
         requestCount = 0;
     }

@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "PlayErrors.h"
+#import "SceneDelegate.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -210,7 +211,8 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             
             // Transfer local playback to Google Cast
             if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-                [UIApplication.sharedApplication.delegate.window.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
+                [sceneDelegate.window.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                     if (playerType == PlayerTypeGoogleCast) {
                         [service disable];
                         [controller reset];
@@ -224,7 +226,8 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 // Perform manual tracking of Google cast views when the application returns from background
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+    SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
+    UIViewController *topViewController = sceneDelegate.window.play_topViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }

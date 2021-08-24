@@ -9,7 +9,6 @@ import SwiftMessages
 import UIKit
 
 final class SwiftMessagesBridge: NSObject {
-    
     /**
      *  Display a notification message.
      *
@@ -52,7 +51,7 @@ final class SwiftMessagesBridge: NSObject {
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the associated view controller.
-        var presentationController = viewController ?? UIApplication.shared.delegate?.window??.play_topViewController
+        var presentationController = viewController ?? Self.window()?.play_topViewController
         while presentationController?.parent != nil {
             if presentationController is UINavigationController {
                 break
@@ -68,6 +67,11 @@ final class SwiftMessagesBridge: NSObject {
         // Remark: VoiceOver is supported natively, but with the system language (not the one we might set on the
         //         UIApplication instance)
         SwiftMessages.show(config: config, view: messageView)
+    }
+    
+    private static func window() -> UIWindow? {
+        guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else { return nil }
+        return sceneDelegate.window
     }
     
     /**
