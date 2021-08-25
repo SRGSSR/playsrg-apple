@@ -289,8 +289,8 @@ static void *s_kvoContext = &s_kvoContext;
                     [self showStorePage];
                 }]];
                 
-                SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-                [sceneDelegate.window.play_topViewController presentViewController:alertController animated:YES completion:nil];
+                UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+                [topViewController presentViewController:alertController animated:YES completion:nil];
                 break;
             }
                 
@@ -303,8 +303,8 @@ static void *s_kvoContext = &s_kvoContext;
                     [self showStorePage];
                 }]];
                 
-                SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-                [sceneDelegate.window.play_topViewController presentViewController:alertController animated:YES completion:nil];
+                UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+                [topViewController presentViewController:alertController animated:YES completion:nil];
                 break;
             }
                 
@@ -328,16 +328,16 @@ static void *s_kvoContext = &s_kvoContext;
         }
     }];
     
-    SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-    [sceneDelegate.window.play_topViewController presentViewController:productViewController animated:YES completion:nil];
+    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    [topViewController presentViewController:productViewController animated:YES completion:nil];
 }
 
 #pragma mark SKStoreProductViewControllerDelegate protocol
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
 {
-    SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-    [sceneDelegate.window.play_topViewController dismissViewControllerAnimated:YES completion:^{
+    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    [topViewController dismissViewControllerAnimated:YES completion:^{
         [self checkForForcedUpdates];
     }];
 }

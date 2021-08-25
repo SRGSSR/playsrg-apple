@@ -10,7 +10,7 @@
 #import "ApplicationSettingsConstants.h"
 #import "MediaPlayerViewController.h"
 #import "PlayApplication.h"
-#import "SceneDelegate.h"
+#import "PlaySRG-Swift.h"
 #import "UIWindow+PlaySRG.h"
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
@@ -143,8 +143,7 @@ NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void)
             return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackBackgroundTransitionDuration;
         }
         else {
-            SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-            UIViewController *topViewController = sceneDelegate.window.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
             if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
                 return ApplicationConfiguration.sharedApplicationConfiguration.continuousPlaybackPlayerViewTransitionDuration;
             }

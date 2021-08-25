@@ -10,7 +10,7 @@
 #import "AnalyticsConstants.h"
 #import "GoogleCastPlaybackButton.h"
 #import "NSBundle+PlaySRG.h"
-#import "SceneDelegate.h"
+#import "PlaySRG-Swift.h"
 #import "UIWindow+PlaySRG.h"
 
 @import SRGAnalytics;
@@ -159,8 +159,8 @@
         // Do not use -[GCKCastContext presentDefaultExpandedMediaControls] so that we can control the presentation style
         GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
         mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-        [sceneDelegate.window.play_topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
+        UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+        [topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
     else {

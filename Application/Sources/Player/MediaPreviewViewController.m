@@ -7,7 +7,6 @@
 #import "MediaPreviewViewController.h"
 
 #import "AnalyticsConstants.h"
-#import "AppDelegate.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"

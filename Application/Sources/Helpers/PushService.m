@@ -8,11 +8,10 @@
 #import "PushService+Private.h"
 
 #import "AnalyticsConstants.h"
-#import "AppDelegate.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Notification.h"
-#import "SceneDelegate.h"
+#import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
@@ -274,7 +273,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     if (notificationContent.notificationInfo[@"media"]) {
         NSString *mediaURN = notificationContent.notificationInfo[@"media"];
         NSInteger startTime = [notificationContent.notificationInfo[@"startTime"] integerValue];
-        SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
+        SceneDelegate *sceneDelegate = UIApplication.sharedApplication.activeSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = notificationContent.notificationInfo[@"show"] ?: AnalyticsSourceNotificationPush;
@@ -285,7 +284,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     }
     else if (notificationContent.notificationInfo[@"show"]) {
         NSString *showURN = notificationContent.notificationInfo[@"show"];
-        SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
+        SceneDelegate *sceneDelegate = UIApplication.sharedApplication.activeSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceNotificationPush;
@@ -364,8 +363,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
             
-            SceneDelegate *sceneDelegate = (SceneDelegate *)UIApplication.sharedApplication.connectedScenes.anyObject.delegate;
-            UIViewController *topViewController = sceneDelegate.window.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }
         return NO;

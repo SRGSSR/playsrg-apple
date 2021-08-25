@@ -6,7 +6,7 @@
 
 #import "StoreReview.h"
 
-#import "SceneDelegate.h"
+#import "PlaySRG-Swift.h"
 
 @import StoreKit;
 
@@ -21,8 +21,7 @@
     NSInteger requestCount = [NSUserDefaults.standardUserDefaults integerForKey:kRequestCountUserDefaultsKey] + 1;
     static const NSInteger kRequestCountThreshold = 50;
     if (requestCount >= kRequestCountThreshold) {
-        // FIXME: Dangerous cast
-        UIWindowScene *windowScene = (UIWindowScene *)UIApplication.sharedApplication.connectedScenes.anyObject;
+        UIWindowScene *windowScene = UIApplication.sharedApplication.activeWindowScene;
         [SKStoreReviewController requestReviewInScene:windowScene];
         requestCount = 0;
     }
