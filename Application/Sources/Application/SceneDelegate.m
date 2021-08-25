@@ -50,6 +50,8 @@
 @import SRGLetterbox;
 @import SRGUserData;
 
+static void *s_kvoContext = &s_kvoContext;
+
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import <Fingertips/Fingertips.h>
 #endif
@@ -106,6 +108,21 @@
     if (shortcutItem) {
         [self handleShortcutItem:shortcutItem];
     }
+    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+#endif
+}
+
+- (void)sceneDidDisconnect:(UIScene *)scene
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceURL];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
+#endif
 }
 
 - (void)windowScene:(UIWindowScene *)windowScene performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler
@@ -595,6 +612,21 @@
             [Banner showError:error inViewController:nil];
         }
     }] resume];
+}
+
+#pragma mark KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (s_kvoContext == context) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation]) {
+            // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the user interface
+            self.window.rootViewController = [[TabBarController alloc] init];
+        }
+    }
+    else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 @end
