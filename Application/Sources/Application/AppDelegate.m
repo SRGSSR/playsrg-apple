@@ -143,7 +143,14 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options
 {
-    return [[UISceneConfiguration alloc] initWithName:@"Default" sessionRole:connectingSceneSession.role];
+    if (connectingSceneSession.role == CPTemplateApplicationSceneSessionRoleApplication) {
+        UISceneConfiguration *sceneConfiguration = [[UISceneConfiguration alloc] initWithName:@"CarPlay" sessionRole:connectingSceneSession.role];
+        sceneConfiguration.delegateClass = CarPlaySceneDelegate.class;
+        return sceneConfiguration;
+    }
+    else {
+        return [[UISceneConfiguration alloc] initWithName:@"Default" sessionRole:connectingSceneSession.role];
+    }
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
