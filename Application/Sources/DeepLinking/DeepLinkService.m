@@ -17,16 +17,6 @@
 
 NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 
-DeeplinkAction const DeeplinkActionMedia = @"media";
-DeeplinkAction const DeeplinkActionShow = @"show";
-DeeplinkAction const DeeplinkActionTopic = @"topic";
-DeeplinkAction const DeeplinkActionHome = @"home";
-DeeplinkAction const DeeplinkActionAZ = @"az";
-DeeplinkAction const DeeplinkActionByDate = @"bydate";
-DeeplinkAction const DeeplinkActionSection = @"section";
-DeeplinkAction const DeeplinkActionSearch = @"search";
-DeeplinkAction const DeeplinkActionLink = @"link";
-
 @interface DeepLinkService ()
 
 @property (nonatomic) NSURL *serviceURL;

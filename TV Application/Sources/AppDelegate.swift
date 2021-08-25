@@ -188,9 +188,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // See URL_SCHEMES.md
     func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let deeplinkAction = url.host else { return false }
+        guard let deeplLinkAction = url.host else { return false }
         
-        if deeplinkAction == "media" {
+        if deeplLinkAction == "media" {
             let mediaUrn = url.lastPathComponent
             SRGDataProvider.current?.media(withUrn: mediaUrn)
                 .receive(on: DispatchQueue.main)
@@ -201,7 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 .store(in: &cancellables)
             return true
         }
-        else if deeplinkAction == "show" {
+        else if deeplLinkAction == "show" {
             let showUrn = url.lastPathComponent
             SRGDataProvider.current?.show(withUrn: showUrn)
                 .receive(on: DispatchQueue.main)
