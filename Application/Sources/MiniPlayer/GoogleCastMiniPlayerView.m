@@ -159,7 +159,7 @@
         // Do not use -[GCKCastContext presentDefaultExpandedMediaControls] so that we can control the presentation style
         GCKUIExpandedMediaControlsViewController *mediaControlsViewController = [GCKCastContext sharedInstance].defaultExpandedMediaControlsViewController;
         mediaControlsViewController.modalPresentationStyle = UIModalPresentationFullScreen;
-        UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
         [topViewController presentViewController:mediaControlsViewController animated:YES completion:nil];
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }

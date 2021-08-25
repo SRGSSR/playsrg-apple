@@ -211,7 +211,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             
             // Transfer local playback to Google Cast
             if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-                UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+                UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
                 [topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                     if (playerType == PlayerTypeGoogleCast) {
                         [service disable];
@@ -226,7 +226,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 // Perform manual tracking of Google cast views when the application returns from background
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }

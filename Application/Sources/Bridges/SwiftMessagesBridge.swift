@@ -51,7 +51,7 @@ final class SwiftMessagesBridge: NSObject {
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the associated view controller.
-        var presentationController = viewController ?? UIApplication.shared.activeTopViewController
+        var presentationController = viewController ?? UIApplication.shared.mainTopViewController
         while presentationController?.parent != nil {
             if presentationController is UINavigationController {
                 break

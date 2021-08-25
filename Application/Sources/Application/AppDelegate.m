@@ -289,7 +289,7 @@ static void *s_kvoContext = &s_kvoContext;
                     [self showStorePage];
                 }]];
                 
-                UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+                UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
                 [topViewController presentViewController:alertController animated:YES completion:nil];
                 break;
             }
@@ -303,7 +303,7 @@ static void *s_kvoContext = &s_kvoContext;
                     [self showStorePage];
                 }]];
                 
-                UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+                UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
                 [topViewController presentViewController:alertController animated:YES completion:nil];
                 break;
             }
@@ -328,7 +328,7 @@ static void *s_kvoContext = &s_kvoContext;
         }
     }];
     
-    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     [topViewController presentViewController:productViewController animated:YES completion:nil];
 }
 
@@ -336,7 +336,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)productViewControllerDidFinish:(SKStoreProductViewController *)viewController
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     [topViewController dismissViewControllerAnimated:YES completion:^{
         [self checkForForcedUpdates];
     }];

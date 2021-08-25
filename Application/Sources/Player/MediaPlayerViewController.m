@@ -621,7 +621,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.activeWindowScene.interfaceOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
@@ -1575,7 +1575,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.activeWindowScene.interfaceOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             rotate(UIInterfaceOrientationPortrait);
             return;
@@ -1592,7 +1592,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
     // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden since iOS 13,
     // in which case we must not hide it to avoid incorrect safe area insets after returning from landscape orientation.
-    UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.activeWindowScene.interfaceOrientation;
+    UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
     self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(interfaceOrientation));
     
     void (^animations)(void) = ^{
@@ -1722,13 +1722,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)letterboxShouldRestoreUserInterfaceForPictureInPicture
 {
     // Present the media player view controller again if needed
-    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     return ! [topViewController isKindOfClass:MediaPlayerViewController.class];
 }
 
 - (void)letterboxRestoreUserInterfaceForPictureInPictureWithCompletionHandler:(void (^)(BOOL))completionHandler
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     [topViewController presentViewController:self animated:YES completion:^{
         completionHandler(YES);
     }];
@@ -2119,7 +2119,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     
-    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.activeSceneDelegate;
+    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
     [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
     SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
@@ -2137,7 +2137,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     
-    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.activeSceneDelegate;
+    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
     [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
@@ -2380,7 +2380,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
-        UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
         if (topViewController != self) {
             return;
         }

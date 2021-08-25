@@ -414,30 +414,30 @@ extension UIViewController {
     }
 }
 
-// Inspired from  https://stackoverflow.com/a/57169802/760435 and https://developer.apple.com/wwdc19/212
 extension UIApplication {
-    /// Return the currently active window scene among all connected scenes, if any.
-    @objc var activeWindowScene: UIWindowScene? {
+    /// Return the main window scene among all connected scenes, if any.
+    @objc var mainWindowScene: UIWindowScene? {
         return connectedScenes
-            .filter { $0.activationState == .foregroundActive }
+            .filter { $0.delegate is SceneDelegate }
             .compactMap { $0 as? UIWindowScene }
             .first
     }
     
-    /// Return the currently active key window among all connected scenes, if any.
-    @objc var activeKeyWindow: UIWindow? {
-        return activeWindowScene?.windows
+    /// Return the main key window among all connected scenes, if any.
+    @objc var mainWindow: UIWindow? {
+        return mainWindowScene?.windows
             .first { $0.isKeyWindow }
     }
     
-    @objc var activeTopViewController: UIViewController? {
-        return activeKeyWindow?.play_topViewController
+    /// Return the main top view controller, if any.
+    @objc var mainTopViewController: UIViewController? {
+        return mainWindow?.play_topViewController
     }
     
-    /// Return the currently active scene delegate.
-    @objc var activeSceneDelegate: SceneDelegate? {
+    /// Return the main scene delegate, if any.
+    @objc var mainSceneDelegate: SceneDelegate? {
         #if os(iOS)
-        return activeWindowScene?.delegate as? SceneDelegate
+        return mainWindowScene?.delegate as? SceneDelegate
         #else
         // FIXME: Implement scenes for tvOS as well and return the associated scene delegate here.
         return nil

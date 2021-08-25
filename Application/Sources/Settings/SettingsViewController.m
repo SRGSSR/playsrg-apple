@@ -416,7 +416,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
         if (appCenterURL) {
             SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
-            UIViewController *topViewController = UIApplication.sharedApplication.activeTopViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }

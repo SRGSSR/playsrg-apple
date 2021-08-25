@@ -129,7 +129,7 @@ final class ProgramViewModel: ObservableObject {
     var playAction: (() -> Void)? {
         if let media = currentMedia, media.blockingReason(at: Date()) == .none {
             return {
-                guard let sceneDelegate = UIApplication.shared.activeSceneDelegate else { return }
+                guard let sceneDelegate = UIApplication.shared.mainSceneDelegate else { return }
                 sceneDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
         }
@@ -148,7 +148,7 @@ final class ProgramViewModel: ObservableObject {
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
-                guard let sceneDelegate = UIApplication.shared.activeSceneDelegate else { return }
+                guard let sceneDelegate = UIApplication.shared.mainSceneDelegate else { return }
                 if HistoryCanResumePlaybackForMedia(media) {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
                                                             message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
@@ -175,7 +175,7 @@ final class ProgramViewModel: ObservableObject {
             icon: "episodes",
             label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
             action: {
-                guard let sceneDelegate = UIApplication.shared.activeSceneDelegate else { return }
+                guard let sceneDelegate = UIApplication.shared.mainSceneDelegate else { return }
                 let showViewController = SectionViewController.showViewController(for: show)
                 sceneDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
                 sceneDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
