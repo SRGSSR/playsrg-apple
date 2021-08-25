@@ -56,9 +56,29 @@
 
 @implementation SceneDelegate
 
+#pragma mark Getters and setters
+
+- (TabBarController *)rootTabBarController
+{
+    return (TabBarController *)self.window.rootViewController;
+}
+
+- (void)setPresenterModeEnabled:(BOOL)presenterModeEnabled
+{
+    SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled;
+    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    NSAssert([self.window isKindOfClass:MBFingerTipWindow.class], @"MBFingerTipWindow expected");
+    MBFingerTipWindow *window = (MBFingerTipWindow *)self.window;
+    window.alwaysShowTouches = presenterModeEnabled;
+#endif
+}
+
+#pragma mark UIWindowSceneDelegate protocol
+
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions
 {
-    if (![scene isKindOfClass:UIWindowScene.class]) {
+    if (! [scene isKindOfClass:UIWindowScene.class]) {
         return;
     }
     
@@ -77,7 +97,6 @@
     self.window.backgroundColor = UIColor.blackColor;
     self.window.accessibilityIgnoresInvertColors = YES;
     
-    // Setup view controller hierarchy
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [[TabBarController alloc] init];
     
@@ -109,7 +128,7 @@
 - (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
 {
     UIOpenURLContext *openURLContext = URLContexts.anyObject;
-    if (!openURLContext) {
+    if (! openURLContext) {
         return;
     }
     NSURL *URL = openURLContext.URL;
@@ -235,27 +254,8 @@
         labels.type = AnalyticsTypeActionOpenPlayApp;
         labels.extraValue1 = openURLContext.options.sourceApplication;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:labels];
-        
         return;
     }
-}
-
-#pragma mark Getters and setters
-
-- (TabBarController *)rootTabBarController
-{
-    return (TabBarController *)self.window.rootViewController;
-}
-
-- (void)setPresenterModeEnabled:(BOOL)presenterModeEnabled
-{
-    SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled;
-    
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    NSAssert([self.window isKindOfClass:MBFingerTipWindow.class], @"MBFingerTipWindow expected");
-    MBFingerTipWindow *window = (MBFingerTipWindow *)self.window;
-    window.alwaysShowTouches = presenterModeEnabled;
-#endif
 }
 
 #pragma mark Notifications
@@ -495,6 +495,8 @@
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:nil];
     return YES;
 }
+
+#pragma mark Controlling the app
 
 // Reset the app view controller hierachy to display the specified application section, executing the provided completion block when done.
 - (void)resetWithApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo completionBlock:(void (^)(void))completionBlock
