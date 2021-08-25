@@ -414,6 +414,7 @@ extension UIViewController {
     }
 }
 
+#if os(iOS)
 extension UIApplication {
     /// Return the main window scene among all connected scenes, if any.
     @objc var mainWindowScene: UIWindowScene? {
@@ -436,11 +437,7 @@ extension UIApplication {
     
     /// Return the main scene delegate, if any.
     @objc var mainSceneDelegate: SceneDelegate? {
-        #if os(iOS)
         return mainWindowScene?.delegate as? SceneDelegate
-        #else
-        // FIXME: Implement scenes for tvOS as well and return the associated scene delegate here.
-        return nil
-        #endif
     }
 }
+#endif
