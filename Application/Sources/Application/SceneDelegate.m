@@ -105,10 +105,8 @@ static void *s_kvoContext = &s_kvoContext;
     
     [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
     
-    UIApplicationShortcutItem *shortcutItem = connectionOptions.shortcutItem;
-    if (shortcutItem) {
-        [self handleShortcutItem:shortcutItem];
-    }
+    [self handleShortcutItem:connectionOptions.shortcutItem];
+    [self handleURLContexts:connectionOptions.URLContexts];
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
@@ -132,9 +130,14 @@ static void *s_kvoContext = &s_kvoContext;
     completionHandler(handledShortcutItem);
 }
 
-#pragma mark Deep linking
-
 - (void)scene:(UIScene *)scene openURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
+{
+    [self handleURLContexts:URLContexts];
+}
+
+#pragma mark Custom URLs and universal links
+
+- (void)handleURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
 {
     UIOpenURLContext *URLContext = URLContexts.anyObject;
     if (! URLContext) {
@@ -398,6 +401,10 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (BOOL)handleShortcutItem:(UIApplicationShortcutItem *)shortcutItem
 {
+    if (! shortcutItem) {
+        return NO;
+    }
+    
     ApplicationSectionInfo *applicationSectionInfo = nil;
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     
