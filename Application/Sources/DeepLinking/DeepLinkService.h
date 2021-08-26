@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Service responsible for retrieving the deep link conversion file, and to convert web URLs into scheme URLs.
+ *  Service responsible for retrieving the deep link conversion file, and to convert web URLs into custom URLs.
  */
 @interface DeepLinkService : NSObject
 
@@ -24,9 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithServiceURL:(NSURL *)serviceURL;
 
 /**
- *  Converts a web URL into a scheme URL.
+ *  Converts a web URL into a custom URL.
  */
-- (nullable NSURL *)schemeURLFromWebURL:(NSURL *)URL;
+- (nullable NSURL *)customURLFromWebURL:(NSURL *)URL;
 
 @end
 

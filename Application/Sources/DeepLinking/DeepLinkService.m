@@ -77,7 +77,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 
 #pragma mark Getters and setters
 
-- (NSURL *)schemeURLFromWebURL:(NSURL *)URL
+- (NSURL *)customURLFromWebURL:(NSURL *)URL
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     

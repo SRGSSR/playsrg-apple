@@ -151,7 +151,7 @@ static void *s_kvoContext = &s_kvoContext;
             ApplicationSettingSetServiceURL(serviceURL);
             
             [Banner showWithStyle:BannerStyleInfo
-                          message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a scheme URL."), ApplicationSettingServiceNameForKey(server)]
+                          message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), ApplicationSettingServiceNameForKey(server)]
                             image:[UIImage imageNamed:@"settings"]
                            sticky:NO
                  inViewController:nil];

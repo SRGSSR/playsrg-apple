@@ -155,7 +155,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                                queryItems:URLComponents.queryItems];
     }
     else if ([source isEqualToString:AnalyticsSourceSchemeURL]) {
-        NSURL *translatedURL = [DeepLinkService.currentService schemeURLFromWebURL:URL];
+        NSURL *translatedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
         if (translatedURL) {
             return [self actionFromURL:translatedURL options:options source:AnalyticsSourceDeepLink];
         }
