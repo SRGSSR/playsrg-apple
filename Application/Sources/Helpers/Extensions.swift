@@ -99,6 +99,20 @@ extension Array {
         guard index >= 0, index < endIndex else { return nil }
         return self[index]
     }
+    
+    func median() -> Element? where Element: FloatingPoint {
+        guard !isEmpty else { return nil }
+        
+        let sortedSelf = sorted()
+        let count = sortedSelf.count
+        
+        if count.isMultiple(of: 2) {
+            return (sortedSelf[count / 2 - 1] + sortedSelf[count / 2]) / 2
+        }
+        else {
+            return sortedSelf[count / 2]
+        }
+    }
 }
 
 extension Collection {

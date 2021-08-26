@@ -219,13 +219,20 @@ extension SectionViewModel {
     }
     
     fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
-        return Item.groupAlphabetically(items)
-            .map { character, items in
+        let groups = Item.groupAlphabetically(items)
+        
+        // Group into different rows only if the median of all row lengths is larger than a given threshold
+        if let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
+            return groups.map { character, items in
                 return Row(
                     section: Section(id: String(character), header: .title(String(character).uppercased())),
                     items: items
                 )
             }
+        }
+        else {
+            return row(with: items)
+        }
     }
 }
 
