@@ -104,4 +104,4 @@ The proprietary project uses [fastlane](https://fastlane.tools/) for releasing b
 Follow the links below for feature specifications and technical details:
 
 * [Remote configuration](REMOTE_CONFIGURATION.md)
-* [URL schemes](URL_SCHEMES.md)
+* [Custom URL and Universal Link Support](CUSTOM_URLS_AND_UNIVERSAL_LINKS.md)

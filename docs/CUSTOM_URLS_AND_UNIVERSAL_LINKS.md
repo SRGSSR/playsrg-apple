@@ -1,14 +1,16 @@
-# URL schemes
+# Custom URL and Universal Link support
 
-Play applications can be opened with a custom URL scheme having the following format: `play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`.
+Play applications can be opened with custom URLs starting with a URL scheme defined for each app. They can also be opened with universal links, provided the associated business unit website has enabled support for it.
 
-## Actions
+## Custom URLs
 
-The application supports Apple universal links. Replacing the `http`or `https` scheme of a Play website URL with the corresponding application scheme yields a link which can be opened with the application:
+Play application can be started using [custom URLs](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) having a reserved scheme. The scheme to use depends on the business unit and build variant to use, and has the following format:
 
-`[scheme]://[play_website_url_without_the_original_scheme]`
+`play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`
 
-The available actions are:
+For example Play RTS can be opened with URLs starting with `playrts://...`, while Play SRF debug can be opened with URLs starting with `playsrf-debug://...`.
+
+The host name (first item after the `//` in the URL) describes the action which must be performed. Following actions are currently available:
 
 * Open a media within the player: `[scheme]://media/[media_urn]`. An optional `&start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://show/[show_urn]`.
@@ -22,14 +24,33 @@ The available actions are:
 
 For media, show and page links, an optional `channel_id=[channel_id]` parameter can be added, which resets the homepage to the specified radio channel homepage. If this parameter is not specified or does not match a valid channel, the homepage is reset to the TV one instead.
 
-For a `Debug`, `Nightly` or a `Beta` build, a `server=[server_title]` parameter can be added to force a server selection update. The available server list can be found under *Settings* > *Advanced features* > *Server*.
+For a debug, nightly or beta build, a `server=[server_title]` parameter can also be added to force a server selection update. The available server list can be found in the application under *Settings* > *Advanced features* > *Server*.
 
-### Changelog
+Refer to the _Testing_ section for more information about how custom URLs can be supplied to an application during tests.
+
+## Universal Links
+
+The application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case you can open most of URLs of a Play business unit portal in the associated Play application.
+
+For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to build a pseudo-universal link URL which the app is able to understand as universal link, by replacing the URL scheme in the original portal URL with the application custom URL scheme.
+
+For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false](https://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false](playrts-debug://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false)
+
+Refer to the _Testing_ section for more information about how universal URLs can be supplied to an application during tests.
+
+## Testing
+
+To test custom or universal links, you can either:
+
+- Use Safari (mobile or simulator) and copy / paste the URL in the address bar.
+- Start the app in the simulator and send the URL to it from the command line with `xcrun simctl openurl booted <url>`.
+
+## Changelog
 
 - Version 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
 - Version 2.9.6: Version 2 of universal link support.
 
-### URL generation
+## URL generation
 
 An [online tool](https://play-mmf.herokuapp.com/deeplink/index.html) is available for QR code generation of URLs with supported custom schemes.
 
