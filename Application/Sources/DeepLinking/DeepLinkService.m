@@ -15,6 +15,8 @@
 @import SRGNetwork;
 @import UIKit;
 
+static DeepLinkService *s_currentService;
+
 NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 
 @interface DeepLinkService ()
@@ -25,6 +27,18 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
 @end
 
 @implementation DeepLinkService
+
+#pragma mark Class methods
+
++ (DeepLinkService *)currentService
+{
+    return s_currentService;
+}
+
++ (void)setCurrentService:(DeepLinkService *)currentService
+{
+    s_currentService = currentService;
+}
 
 #pragma mark Object lifecycle
 

@@ -14,6 +14,11 @@ NS_ASSUME_NONNULL_BEGIN
 @interface DeepLinkService : NSObject
 
 /**
+ *  The service currently set as shared instance, if any.
+ */
+@property (class, nonatomic, nullable) DeepLinkService *currentService;
+
+/**
  *  Create a new instance update using the service available at the specified URL.
  */
 - (instancetype)initWithServiceURL:(NSURL *)serviceURL;

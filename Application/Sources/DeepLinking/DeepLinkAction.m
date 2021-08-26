@@ -7,7 +7,7 @@
 #import "DeepLinkAction.h"
 
 #import "AnalyticsConstants.h"
-#import "AppDelegate.h"
+#import "DeepLinkService.h"
 
 @import libextobjc;
 
@@ -155,8 +155,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                                queryItems:URLComponents.queryItems];
     }
     else if ([source isEqualToString:AnalyticsSourceSchemeURL]) {
-        AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication;
-        NSURL *translatedURL = [appDelegate.deepLinkService schemeURLFromWebURL:URL];
+        NSURL *translatedURL = [DeepLinkService.currentService schemeURLFromWebURL:URL];
         if (translatedURL) {
             return [self actionFromURL:translatedURL options:options source:AnalyticsSourceDeepLink];
         }

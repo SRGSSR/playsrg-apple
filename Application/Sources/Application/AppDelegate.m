@@ -11,6 +11,7 @@
 #import "ApplicationSettingsConstants.h"
 #import "Banner.h"
 #import "CalendarViewController.h"
+#import "DeepLinkService.h"
 #import "Download.h"
 #import "Favorites.h"
 #import "GoogleCast.h"
@@ -81,7 +82,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    self.deepLinkService = [[DeepLinkService alloc] initWithServiceURL:applicationConfiguration.middlewareURL];
+    DeepLinkService.currentService = [[DeepLinkService alloc] initWithServiceURL:applicationConfiguration.middlewareURL];
     
     NSURL *identityWebserviceURL = applicationConfiguration.identityWebserviceURL;
     NSURL *identityWebsiteURL = applicationConfiguration.identityWebsiteURL;
