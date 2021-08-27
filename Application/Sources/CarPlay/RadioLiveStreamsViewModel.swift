@@ -6,6 +6,8 @@
 
 import Foundation
 
+// MARK: - View Model
+
 final class RadioLiveStreamsViewModel: ObservableObject {
     @Published private(set) var medias: [SRGMedia] = []
 

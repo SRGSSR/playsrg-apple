@@ -10,10 +10,9 @@ import CarPlay
 class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     
     var interfaceController: CPInterfaceController?
-    private var radioLiveStreamsViewModel = RadioLiveStreamsViewModel()
+    private var model = RadioLiveStreamsViewModel()
     private var cancellables = Set<AnyCancellable>()
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: "Châines radio", sections: [])
-    let radioLiveStreamsGridTemplate: CPGridTemplate = CPGridTemplate(title: "Grid", gridButtons: [])
 
     // MARK: - Custom Functions
     func updateRadioLiveStreams(medias: [SRGMedia]) {
@@ -22,9 +21,19 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
 
         for media in medias {
             print(media)
-            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: media.channel?.uid)
-            let image = RadioChannelLogoImage(radioChannel)
-            let listItem = CPListItem(text: media.title, detailText: media.urn, image: image)
+                        
+//            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: media.channel?.uid)
+//            let image = RadioChannelLogoImage(radioChannel)
+//
+//            let listItem = CPListItem(text: media.title, detailText: media.urn, image: image)
+            
+            
+//            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: media.channel?.uid)
+//            let image = RadioChannelLogoImage(radioChannel)
+            
+            let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
+            
+            
             listItem.accessoryType = .disclosureIndicator
             items.append(listItem)
         }
@@ -38,25 +47,15 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         self.interfaceController = interfaceController
         
         // Get radio live streams
-        radioLiveStreamsViewModel.$medias
+        model.$medias
             .sink { [weak self] medias in
                 guard let strongSelf = self else { return }
                 strongSelf.updateRadioLiveStreams(medias: medias)
             }
             .store(in: &cancellables)
         
-        // Create a list
-//        let item = CPListItem(text: "title", detailText: "detail")
-//        item.accessoryType = .disclosureIndicator
-//        let section = CPListSection(items: [item])
-//        let listTemplate = CPListTemplate(title: "Section", sections: [section])
-//
-        
-        // Create a grid
-        
-        
         // Create a tab bar
-        let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate, radioLiveStreamsGridTemplate])
+        let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate])
         self.interfaceController?.setRootTemplate(tabBar, animated: true, completion: {_, _ in })
     }
     
@@ -66,3 +65,34 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     }
     
 }
+
+// MARK: - Properties
+
+extension CarPlaySceneDelegate {
+    
+    func channel(media: SRGMedia) -> SRGChannel? {
+        guard let channel = media.channel else { return nil }
+        return channel
+    }
+    
+    func logoImage(media: SRGMedia) -> UIImage? {
+        guard let channel = media.channel else { return nil }
+        return channel.play_largeLogoImage
+    }
+    
+    func title(media: SRGMedia) -> String? {
+        guard let channel = media.channel else { return nil }
+        print("channel.title", channel.title)
+        print("MediaDescription.title(for: media, style: .date)", MediaDescription.title(for: media, style: .date))
+        return channel.title
+    }
+    
+    func subtitle(media: SRGMedia) -> String? {
+        if media.contentType == .scheduledLivestream {
+            return MediaDescription.subtitle(for: media, style: .date)
+        }
+        return nil
+    }
+    
+}
+
