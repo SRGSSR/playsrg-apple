@@ -230,8 +230,9 @@ extension SectionViewModel {
     fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
         let groups = Item.groupAlphabetically(items)
         
-        // Group into different rows only if the median of all row lengths is larger than a given threshold
-        if let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
+        // Group into different rows only if we have several groups whose row length median is larger than a
+        // given threshold, so that we get a balanced result.
+        if groups.count > 1, let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
             return groups.compactMap { character, items in
                 return Row(
                     section: Section(id: String(character), header: .title(String(character).uppercased())),
@@ -239,6 +240,7 @@ extension SectionViewModel {
                 )
             }
         }
+        // Otherwise group all results into a single row.
         else {
             return row(with: items)
         }

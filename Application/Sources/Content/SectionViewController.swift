@@ -129,7 +129,7 @@ final class SectionViewController: UIViewController {
             cell.content = ItemCell(item: item, configuration: self.model.configuration)
         }
         
-        dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
+        dataSource = IndexedCollectionViewDiffableDataSource(collectionView: collectionView, minimumIndexTitlesCount: 4) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         

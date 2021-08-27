@@ -18,9 +18,20 @@ protocol Indexable {
  *  This approach works both for iOS and tvOS.
  */
 class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDiffableDataSource<Section, Item> where Section: Hashable & Indexable, Item: Hashable {
+    private let minimumIndexTitlesCount: Int
+    
+    init(collectionView: UICollectionView, minimumIndexTitlesCount: Int, cellProvider: @escaping CellProvider) {
+        self.minimumIndexTitlesCount = max(minimumIndexTitlesCount, 2)
+        super.init(collectionView: collectionView, cellProvider: cellProvider)
+    }
+    
+    override convenience init(collectionView: UICollectionView, cellProvider: @escaping CellProvider) {
+        self.init(collectionView: collectionView, minimumIndexTitlesCount: 2, cellProvider: cellProvider)
+    }
+    
     override func indexTitles(for collectionView: UICollectionView) -> [String]? {
         let sectionIdentifiers = snapshot().sectionIdentifiers
-        return (sectionIdentifiers.count > 1) ? sectionIdentifiers.map { $0.indexTitle } : nil
+        return (sectionIdentifiers.count >= minimumIndexTitlesCount) ? sectionIdentifiers.map { $0.indexTitle } : nil
     }
     
     override func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {
