@@ -13,7 +13,6 @@
 #import "CalendarViewController.h"
 #import "DeepLinkService.h"
 #import "Download.h"
-#import "Favorites.h"
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
@@ -149,8 +148,6 @@ static void *s_kvoContext = &s_kvoContext;
     
     [PushService.sharedService setup];
     [PushService.sharedService updateApplicationBadge];
-    
-    FavoritesSetup();
     
     // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {

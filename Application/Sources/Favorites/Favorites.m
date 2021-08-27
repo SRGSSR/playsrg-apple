@@ -9,7 +9,6 @@
 #import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
-#import "NSSet+PlaySRG.h"
 #import "PlayApplication.h"
 #import "PushService+Private.h"
 #endif
@@ -23,8 +22,6 @@ static NSString * const PlayFavoritesPath = @"favorites";
 static NSString * const PlayDatePath = @"date";
 static NSString * const PlayNotificationsPath = @"notifications";
 static NSString * const PlayNewOnDemandPath = @"newod";
-
-static NSString * const SubscriptionsToFavoritesMigrationDoneKey = @"SubscriptionsToFavoritesMigrationDone";
 
 #pragma mark Private
 
@@ -43,47 +40,6 @@ BOOL FavoritesIsSubscribedToShowURN(NSString * _Nonnull URN)
     NSString *path = [[[PlayFavoritesPath stringByAppendingPathComponent:URN] stringByAppendingPathComponent:PlayNotificationsPath] stringByAppendingPathComponent:PlayNewOnDemandPath];
     return [SRGUserData.currentUserData.preferences numberAtPath:path inDomain:PlayPreferencesDomain].boolValue;
 }
-
-#if TARGET_OS_IOS
-
-#pragma mark Push service synchronization
-
-void FavoritesUpdatePushService(void)
-{
-    if ([PlayApplicationRunOnceObjectForKey(SubscriptionsToFavoritesMigrationDoneKey) boolValue]) {
-        NSMutableSet<NSString *> *subscribedURNs = [NSMutableSet set];
-        for (NSString *URN in FavoritesShowURNs()) {
-            if (FavoritesIsSubscribedToShowURN(URN)) {
-                [subscribedURNs addObject:URN];
-            }
-        }
-        NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
-        
-        if (! [subscribedURNs isEqualToSet:subscribedPushServiceURNs]) {
-            NSSet<NSString *> *toSubscribeURNs = [subscribedURNs play_setByRemovingObjectsInSet:subscribedPushServiceURNs];
-            [PushService.sharedService subscribeToShowURNs:toSubscribeURNs];
-            
-            NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs play_setByRemovingObjectsInSet:subscribedURNs];
-            [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
-        }
-        
-        NSCAssert([subscribedURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed favorite shows have to be equal to Push Service subscribed shows");
-    }
-}
-
-void FavoritesSetup(void)
-{
-    FavoritesUpdatePushService();
-    
-    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
-        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
-        if ([domains containsObject:PlayPreferencesDomain]) {
-            FavoritesUpdatePushService();
-        }
-    }];
-}
-
-#endif
 
 #pragma mark Favorite entries
 
