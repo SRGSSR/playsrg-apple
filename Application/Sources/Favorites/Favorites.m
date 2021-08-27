@@ -9,7 +9,6 @@
 #import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
-#import "PlayApplication.h"
 #import "PushService+Private.h"
 #endif
 
