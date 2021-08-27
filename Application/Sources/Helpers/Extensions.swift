@@ -130,7 +130,8 @@ extension Collection {
     
     /**
      *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
-     *  and collects items starting with non-letter characters under '#'.
+     *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
+     *  array the array of associated items is guaranteed to contain at least 1 item.
      */
     func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> [(key: Character, value: [Self.Element])] where S: StringProtocol {
         let dictionary = try [Character: [Self.Element]](grouping: self) { element in

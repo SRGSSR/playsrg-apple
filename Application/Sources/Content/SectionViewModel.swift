@@ -169,7 +169,11 @@ extension SectionViewModel {
     }
     
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Section, Item>
+    
+    // Non-empty rows only. The section view namely supports optional header pinning, and the layout could raise an
+    // assertion if some collection section has no items, while its header height is smaller than the layout inter group
+    // spacing.
+    typealias Row = NonEmptyCollectionRow<Section, Item>
     
     enum State {
         case loading
@@ -194,11 +198,11 @@ extension SectionViewModel {
         
         var isEmpty: Bool {
             if case let .loaded(rows: rows) = self {
-                for row in rows where !row.isEmpty {
-                    return false
-                }
+                return rows.isEmpty
             }
-            return true
+            else {
+                return true
+            }
         }
     }
     
@@ -215,7 +219,12 @@ extension SectionViewModel {
     }
     
     fileprivate static func row(with items: [Item], header: Header = .none) -> [Row] {
-        return [Row(section: Section(id: "main", header: header), items: items)]
+        if let row = Row(section: Section(id: "main", header: header), items: items) {
+            return [row]
+        }
+        else {
+            return []
+        }
     }
     
     fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
@@ -223,7 +232,7 @@ extension SectionViewModel {
         
         // Group into different rows only if the median of all row lengths is larger than a given threshold
         if let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
-            return groups.map { character, items in
+            return groups.compactMap { character, items in
                 return Row(
                     section: Section(id: String(character), header: .title(String(character).uppercased())),
                     items: items
