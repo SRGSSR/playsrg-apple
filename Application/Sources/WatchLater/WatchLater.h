@@ -75,9 +75,4 @@ OBJC_EXPORT void WatchLaterToggleMedia(SRGMedia *medias, void (^completion)(BOOL
  */
 OBJC_EXPORT void WatchLaterAsyncCancel(NSString * _Nullable handle);
 
-/**
- *  Migrate favorites (legacy plist-based way of bookmarking medias), if any, to the later playlist.
- */
-OBJC_EXPORT void WatchLaterMigrate(void) API_UNAVAILABLE(tvos);
-
 NS_ASSUME_NONNULL_END

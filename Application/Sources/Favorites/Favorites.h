@@ -74,16 +74,6 @@ OBJC_EXPORT BOOL FavoritesIsSubscribedToShow(SRGShow * _Nonnull show);
  *  @discussion Needs to be called after the Push Service setup.
  */
 OBJC_EXPORT void FavoritesSetup(void);
-    
-
-/**
- *  @name Migration
- */
-
-/**
- *  Migrate depretaced favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to Favorites.
- */
-OBJC_EXPORT void FavoritesMigrate(void);
 
 #endif
 

@@ -8,11 +8,6 @@
 
 #import "PlaySRG-Swift.h"
 
-#if TARGET_OS_IOS
-#import "DeprecatedFavorite.h"
-#endif
-#import "NSArray+PlaySRG.h"
-
 @import libextobjc;
 @import SRGUserData;
 
@@ -105,46 +100,3 @@ void WatchLaterAsyncCancel(NSString *handle)
         [SRGUserData.currentUserData.playlists cancelTaskWithHandle:handle];
     }
 }
-
-#if TARGET_OS_IOS
-
-void WatchLaterMigrate(void)
-{
-    NSCAssert(SRGUserData.currentUserData != nil, @"User data storage must be available");
-    
-    SRGPlaylist *watchLaterPlaylist = [SRGUserData.currentUserData.playlists playlistWithUid:SRGPlaylistUidWatchLater];
-    if (watchLaterPlaylist) {
-        NSArray<DeprecatedFavorite *> *favorites = [DeprecatedFavorite mediaFavorites];
-        if (favorites.count == 0) {
-            return;
-        }
-        
-        // Don't add livestreams to the later list.
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(DeprecatedFavorite.new, mediaContentType), @(FavoriteMediaContentTypeLive)];
-        NSArray<DeprecatedFavorite *> *livestreamFavorites = [favorites filteredArrayUsingPredicate:predicate];
-        [DeprecatedFavorite finishMigrationForFavorites:livestreamFavorites];
-        
-        NSArray<DeprecatedFavorite *> *nonLivestreamFavorites = [favorites play_arrayByRemovingObjectsInArray:livestreamFavorites];
-        __block NSUInteger remainingFavoritesCount = nonLivestreamFavorites.count;
-        
-        for (DeprecatedFavorite *favorite in nonLivestreamFavorites) {
-            [SRGUserData.currentUserData.playlists savePlaylistEntryWithUid:favorite.mediaURN inPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:^(NSError * _Nullable error) {
-                --remainingFavoritesCount;
-                if (remainingFavoritesCount == 0) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [DeprecatedFavorite finishMigrationForFavorites:nonLivestreamFavorites];
-                    });
-                }
-            }];
-        }
-    }
-    else {
-        [NSNotificationCenter.defaultCenter addObserverForName:SRGPlaylistsDidChangeNotification object:SRGUserData.currentUserData.playlists queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
-            if ([notification.userInfo[SRGPlaylistUidKey] containsObject:SRGPlaylistUidWatchLater]) {
-                WatchLaterMigrate();
-            }
-        }];
-    }
-}
-
-#endif

@@ -31,7 +31,6 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "UpdateInfo.h"
-#import "WatchLater.h"
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
@@ -152,10 +151,6 @@ static void *s_kvoContext = &s_kvoContext;
     [PushService.sharedService updateApplicationBadge];
     
     FavoritesSetup();
-    
-    // Local objects migration
-    WatchLaterMigrate();
-    FavoritesMigrate();
     
     // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
