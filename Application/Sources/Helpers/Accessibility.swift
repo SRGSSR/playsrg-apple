@@ -25,6 +25,12 @@ struct Accessibility<T>: DynamicProperty {
 final class AccessibilitySettings: ObservableObject {
     static let shared = AccessibilitySettings()
     
+    // Remark: Some of these are readily accessible as environment values from SwiftUI:
+    //           - `accessibilityDifferentiateWithoutColor`,
+    //           - `accessibilityReduceTransparency`
+    //           - `accessibilityReduceMotion`
+    //           - `accessibilityInvertColors`
+    
     @Published var isVoiceOverRunning = UIAccessibility.isVoiceOverRunning
     @Published var isMonoAudioEnabled = UIAccessibility.isMonoAudioEnabled
     @Published var isClosedCaptioningEnabled = UIAccessibility.isClosedCaptioningEnabled
