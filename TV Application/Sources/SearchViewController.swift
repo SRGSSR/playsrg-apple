@@ -25,6 +25,7 @@ class SearchViewController: UIViewController {
         searchContainerViewController = UISearchContainerViewController(searchController: searchController)
         super.init(nibName: nil, bundle: nil)
         
+        addChild(searchContainerViewController)
         searchController.searchResultsUpdater = self
         
         model.viewController = self
@@ -49,7 +50,6 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addChild(searchContainerViewController)
         searchContainerViewController.view.frame = view.bounds
         view.addSubview(searchContainerViewController.view)
         searchContainerViewController.didMove(toParent: self)

@@ -24,6 +24,7 @@ final class ProgramGuideViewController: UIViewController {
         ])
         super.init(nibName: nil, bundle: nil)
         title = NSLocalizedString("TV guide", comment: "TV program guide view title")
+        addChild(pageViewController)
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +58,6 @@ final class ProgramGuideViewController: UIViewController {
         pageViewController.dataSource = self
         pageViewController.delegate = self
         
-        addChild(pageViewController)
         if let pageView = pageViewController.view {
             pageView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(pageView)

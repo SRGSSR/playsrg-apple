@@ -54,6 +54,8 @@
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
         pageViewController.delegate = self;
         self.pageViewController = pageViewController;
+        
+        [self addChildViewController:pageViewController];
     }
     return self;
 }
@@ -81,8 +83,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self addChildViewController:self.pageViewController];
     
     UIView *pageView = self.pageViewController.view;
     pageView.translatesAutoresizingMaskIntoConstraints = NO;

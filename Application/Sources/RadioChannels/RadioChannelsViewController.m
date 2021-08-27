@@ -145,8 +145,8 @@
     NSInteger pageIndex = [self.viewControllers indexOfObject:radioChannelViewController];
     [self switchToIndex:pageIndex animated:NO];
     
-    UIViewController<PlayApplicationNavigation> *navigableRootViewController = (UIViewController<PlayApplicationNavigation> *)radioChannelViewController;
-    return [navigableRootViewController openApplicationSectionInfo:applicationSectionInfo];
+    UIViewController<PlayApplicationNavigation> *navigableViewController = (UIViewController<PlayApplicationNavigation> *)radioChannelViewController;
+    return [navigableViewController openApplicationSectionInfo:applicationSectionInfo];
 }
 
 @end
