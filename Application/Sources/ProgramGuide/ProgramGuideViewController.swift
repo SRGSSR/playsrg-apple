@@ -17,8 +17,8 @@ final class ProgramGuideViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(date: Date = Date()) {
-        model = ProgramGuideViewModel(date: date)
+    init(date: Date? = nil) {
+        model = ProgramGuideViewModel(date: date ?? Date())
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
