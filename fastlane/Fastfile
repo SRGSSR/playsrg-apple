@@ -55,7 +55,7 @@ platform :ios do
 
     ios_schemes.each_index do |index|
       build_lane(
-        configuration: 'Nightly',
+        configuration: 'Nightly_AppCenter',
         scheme: ios_schemes[index],
         display_name_suffix: nighlty_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
@@ -126,7 +126,7 @@ platform :ios do
 
     ios_schemes.each_index do |index|
       build_lane(
-        configuration: 'Beta',
+        configuration: 'Beta_AppCenter',
         scheme: ios_schemes[index],
         display_name_suffix: ' 🎯',
         version_suffix: '-beta',
