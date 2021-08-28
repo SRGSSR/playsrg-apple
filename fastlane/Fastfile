@@ -93,7 +93,7 @@ platform :ios do
 
   desc 'Builds a new iOS nightly on AppStore Connect and waits build processing.'
   lane :iOSnightlies do
-    testflight_nightlies(platform: nil)
+    testflight_nightlies(platform: 'iOS')
   end
 
   desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
@@ -105,7 +105,7 @@ platform :ios do
     end
   end
 
-  desc 'Add nightly TestFlight tester (email required)'
+  desc 'Add a nightly TestFlight tester (email required)'
   lane :nightlyTester do |options|
     addTestFlightTester(
       email: options[:email],
@@ -148,44 +148,10 @@ platform :ios do
 
   desc 'Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
   lane :tvOSbetas do
-    platform = 'tvOS'
-
-    notify_build_number_to_ci(platform, nil)
-
-    build_number = xcode_build_number(platform)
-
-    tvos_schemes.each_index do |index|
-      app_identifier = appstore_beta_identifiers[index]
-
-      can_upload = can_upload_testflight_build(platform, app_identifier)
-      UI.message(tvos_schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
-      next unless can_upload
-
-      update_app_identifier_to_appstore(platform, app_identifier)
-
-      build_lane(
-        configuration: 'Beta',
-        scheme: tvos_schemes[index],
-        display_name_suffix: ' 🎯',
-        version_suffix: '-beta',
-        platform: platform,
-        export_to_appstore: true
-      )
-
-      srg_pilot(app_identifier, platform, what_s_new_for_beta(platform))
-
-      update_dsyms(app_identifier, platform, appcenter_tv_beta_names[index], nil)
-
-      clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
-
-      UI.message tvos_schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
-    end
-
-    bump_build_number_beta_workflow(platform)
+    testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS beta dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
   lane :tvOSbetaDSYMs do |options|
     tvos_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -194,8 +160,22 @@ platform :ios do
     end
   end
 
-  desc 'Add tvOS beta tester (email required)'
-  lane :tvOSbetaTester do |options|
+  desc 'Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
+  lane :iOSbetas do
+    testflight_betas(platform: 'iOS')
+  end
+
+  desc 'Sends latest iOS beta dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  lane :iOSbetaDSYMs do |options|
+    ios_schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+      appcenter_appname = appcenter_ios_beta_names[index]
+      update_dsyms(app_identifier, 'iOS', appcenter_appname, options)
+    end
+  end
+
+  desc 'Add a beta TestFlight tester (email required)'
+  lane :betaTester do |options|
     addTestFlightTester(
       email: options[:email],
       first_name: options[:first_name],
@@ -502,6 +482,47 @@ platform :ios do
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
+  desc 'Builds a new beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
+  private_lane :testflight_betas do |options|
+    platform = options[:platform] || 'iOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    build_number = xcode_build_number(platform)
+
+    schemes = schemes(platform)
+    schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+
+      can_upload = can_upload_testflight_build(platform, app_identifier)
+      UI.message(schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
+      next unless can_upload
+
+      update_app_identifier_to_appstore(platform, app_identifier)
+
+      build_lane(
+        configuration: 'Beta',
+        scheme: schemes[index],
+        display_name_suffix: ' 🎯',
+        version_suffix: '-beta',
+        platform: platform,
+        export_to_appstore: true
+      )
+
+      srg_pilot(app_identifier, platform, what_s_new_for_beta(platform))
+
+      appcenter_appnames = appcenter_testflight_beta_names(platform)
+      update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
+
+      clean_build_artifacts
+      reset_app_identifier_to_appstore(platform)
+
+      UI.message schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
+    end
+
+    bump_build_number_beta_workflow(platform)
+  end
+
   desc 'Builds and uploads to TestFlight'
   private_lane :testflight_lane do |options|
     options[:platform] ||= 'iOS'
@@ -587,7 +608,7 @@ platform :ios do
     end
   end
 
-  desc 'Add tester to TestFlight, by default for tvOS betas'
+  desc 'Add tester to TestFlight, by default for betas'
   private_lane :addTestFlightTester do |options|
     email = spaceship_email_required(options[:email])
     email ||= spaceship_email_required(prompt(text: 'email: '))
@@ -739,6 +760,24 @@ def appcenter_tv_beta_names
    ENV['PLAY_SRF_TV_BETA_APPCENTER_APPNAME'],
    ENV['PLAY_RSI_TV_BETA_APPCENTER_APPNAME'],
    ENV['PLAY_RTR_TV_BETA_APPCENTER_APPNAME']]
+end
+
+def appcenter_ios_beta_names
+  [ENV['PLAY_SWI_IOS_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RTS_IOS_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_SRF_IOS_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RSI_IOS_BETA_APPCENTER_APPNAME'],
+   ENV['PLAY_RTR_IOS_BETA_APPCENTER_APPNAME']]
+end
+
+def appcenter_testflight_beta_names(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    appcenter_ios_beta_names
+  else
+    appcenter_tv_beta_names
+  end
 end
 
 def appstore_nightly_identifiers

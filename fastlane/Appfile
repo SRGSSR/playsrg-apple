@@ -221,7 +221,17 @@ for_platform :ios do
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end
 
-  for_lane :tvOSbetaTester do
+  for_lane :iOSbetas do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :iOSbetaDSYMs do
+    itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRGSSR_TEAM_ID']}"
+  end
+
+  for_lane :betaTester do
     itc_team_id "#{ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRGSSR_TEAM_ID']}"
   end

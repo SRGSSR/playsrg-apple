@@ -45,7 +45,7 @@ Sends latest iOS nightly dSYMs to App Center. Optional 'version' or 'min_version
 ```
 fastlane ios nightlyTester
 ```
-Add nightly TestFlight tester (email required)
+Add a nightly TestFlight tester (email required)
 ### ios betas
 ```
 fastlane ios betas
@@ -60,12 +60,22 @@ Builds a new tvOS beta on AppStore Connect with the current build number and wai
 ```
 fastlane ios tvOSbetaDSYMs
 ```
-Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
-### ios tvOSbetaTester
+Sends latest tvOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios iOSbetas
 ```
-fastlane ios tvOSbetaTester
+fastlane ios iOSbetas
 ```
-Add tvOS beta tester (email required)
+Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+### ios iOSbetaDSYMs
+```
+fastlane ios iOSbetaDSYMs
+```
+Sends latest iOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios betaTester
+```
+fastlane ios betaTester
+```
+Add a beta TestFlight tester (email required)
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
