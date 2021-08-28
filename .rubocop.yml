@@ -38,3 +38,7 @@ Naming/FileName:
 Style/RedundantInterpolation:
   Exclude:
     - '**/Appfile'
+
+# CocoaPods usual word array
+Style/WordArray:
+  EnforcedStyle: brackets
