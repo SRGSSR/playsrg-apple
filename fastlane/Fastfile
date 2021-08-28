@@ -118,7 +118,7 @@ platform :ios do
 
   # Betas
 
-  desc 'Builds a new iOS beta on App Center with the current build number. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.'
+  desc 'Builds a new iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
   lane :betas do
     platform = 'iOS'
 
@@ -146,7 +146,7 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.'
+  desc 'Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
   lane :tvOSbetas do
     platform = 'tvOS'
 
@@ -770,6 +770,10 @@ def tag_version(platform)
   xcode_marketing_version(platform) + '-' + xcode_build_number(platform)
 end
 
+def srg_tag(platform)
+  platform.downcase + '/' + tag_version(platform)
+end
+
 # Returns the what's new text from WhatsNew-beta.json file in the repository
 def what_s_new_for_beta(platform)
   file = File.open('../WhatsNew-' + platform + '-beta.json', 'r')
@@ -1105,17 +1109,24 @@ def can_upload_testflight_build(platform, app_identifier)
   (appstore_build_number < local_build_number.to_i)
 end
 
-# Beta workflow: tag the new beta, bump build number and push to the repo,
-# only if we're not in a release process.
+# Beta workflow: tag the new beta, bump build number and push to the repository,
+# only if we are on the develop branch and the tag does not already exist.
 def bump_build_number_beta_workflow(platform)
-  branch_name = git_branch_name
-  is_in_release_process = (branch_name.include? 'master')
-  is_in_release_process ||= (branch_name.include? 'release/')
-  is_in_release_process ||= (branch_name.include? 'hotfix/')
+  return unless git_branch_name.include? 'develop'
 
-  return if is_in_release_process
+  tag = srg_tag(platform)
 
-  add_git_tag(tag: platform.downcase + '/' + tag_version(platform))
+  git_pull(only_tags: true)
+  if !git_tag_exists(tag: tag)
+    srg_add_tag_and_bump_build_number(platform, tag)
+    UI.message('Tag "' + tag + '" created. ✅')
+  else
+    UI.important('Tag "' + tag + '" already exists. Probably done by an other build (to AppCenter, to TestFlight or did it manually). ⚠️')
+  end
+end
+
+def srg_add_tag_and_bump_build_number(platform, tag)
+  add_git_tag(tag: tag)
   bump_build_number_commit(platform)
   git_pull(rebase: true)
   push_to_git_remote
