@@ -87,8 +87,8 @@ struct HeroMediaCell: View {
             }
             .multilineTextAlignment(.center)
             .foregroundColor(.white)
-            .padding(.bottom, 30)
-            .padding(.horizontal, 18)
+            .padding(.bottom, constant(iOS: 30, tvOS: 60))
+            .padding(.horizontal, constant(iOS: 18, tvOS: 30))
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
     }
@@ -136,9 +136,14 @@ private extension View {
 
 struct HeroMediaCell_Previews: PreviewProvider {
     static var previews: some View {
+        #if os(tvOS)
+        HeroMediaCell(media: Mock.media(), label: "New")
+            .previewLayout(for: 1920, horizontalSizeClass: .regular)
+        #else
         HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(for: 375, horizontalSizeClass: .compact)
         HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(for: 800, horizontalSizeClass: .regular)
+        #endif
     }
 }
