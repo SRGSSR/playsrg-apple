@@ -135,6 +135,19 @@ extension PageViewModel {
         case live
         case topic(topic: SRGTopic)
         
+        var topBarsHidden: Bool {
+            #if os(iOS)
+            switch self {
+            case .video:
+                return true
+            default:
+                return false
+            }
+            #else
+            return false
+            #endif
+        }
+        
         var supportsCastButton: Bool {
             switch self {
             case .video, .audio, .live:

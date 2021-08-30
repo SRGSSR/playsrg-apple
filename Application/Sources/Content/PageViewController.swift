@@ -156,6 +156,7 @@ final class PageViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
+        navigationController?.setNavigationBarHidden(model.id.topBarsHidden, animated: animated)
     }
     
     #if os(iOS)
@@ -240,7 +241,8 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let top = model.id.topBarsHidden ? -view.safeAreaInsets.top : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
