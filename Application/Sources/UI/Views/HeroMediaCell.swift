@@ -24,7 +24,6 @@ struct HeroMediaCell: View {
         MainView(media: media, label: label)
             .background(Color.white.opacity(0.1))
             .selectionAppearance(when: isSelected)
-            .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
         #endif
     }
@@ -111,10 +110,17 @@ private extension HeroMediaCell {
 // MARK: Size
 
 final class HeroMediaCellSize: NSObject {
+    static let aspectRatio: CGFloat = 16 / 9
+    
     @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 1 : 16 / 9
-        let height = min(layoutWidth * aspectRatio, constant(iOS: 450, tvOS: 600))
-        return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+        if horizontalSizeClass == .compact {
+            let height = min(layoutWidth, 400)
+            return NSCollectionLayoutSize(widthDimension: .absolute(aspectRatio * height), heightDimension: .absolute(height))
+        }
+        else {
+            let height = min(layoutWidth * aspectRatio, constant(iOS: 450, tvOS: 700))
+            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+        }
     }
 }
 

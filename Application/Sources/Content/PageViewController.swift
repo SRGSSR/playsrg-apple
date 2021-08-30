@@ -441,6 +441,7 @@ extension PageViewController: TabBarActionable {
 
 private extension PageViewController {
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let heroItemSpacing: CGFloat = constant(iOS: 0, tvOS: 40)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
@@ -470,10 +471,10 @@ private extension PageViewController {
                 
                 switch section.viewModelProperties.layout {
                 case .hero:
-                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.heroItemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
-                    layoutSection.orthogonalScrollingBehavior = .groupPaging
+                    layoutSection.orthogonalScrollingBehavior = constant(iOS: .groupPagingCentered, tvOS: .groupPaging)
                     return layoutSection
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
