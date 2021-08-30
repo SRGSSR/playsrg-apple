@@ -35,10 +35,18 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
 
 - (NSString *)play_friendlyVersionNumber
 {
-    NSString *versionString = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *shortVersionString = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleShortVersionString"];
+    NSString *marketingVersion = [shortVersionString componentsSeparatedByString:@"-"].firstObject ?: shortVersionString;
+    
     NSString *bundleVersion = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleVersion"];
     
-    NSString *version = [NSString stringWithFormat:@"%@ (%@)", versionString, bundleVersion];
+    NSString *buildName = [NSBundle.mainBundle.infoDictionary objectForKey:@"BuildName"];
+    NSString *bundleNameSuffix = [NSBundle.mainBundle.infoDictionary objectForKey:@"BundleNameSuffix"];
+    NSString *friendlyBuildName = [NSString stringWithFormat:@"%@%@",
+                                   buildName.length > 0 ? [@" " stringByAppendingString:buildName] : @"",
+                                   bundleNameSuffix.length > 0 ? [@" " stringByAppendingString:bundleNameSuffix] : @""];
+    
+    NSString *version = [NSString stringWithFormat:@"%@ (%@)%@", marketingVersion, bundleVersion, friendlyBuildName];
     if ([self play_isTestFlightDistribution]) {
         // Unbreakable spaces before / after the separator
         version = [version stringByAppendingString:@" - TF"];
