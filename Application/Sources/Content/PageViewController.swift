@@ -476,7 +476,7 @@ private extension PageViewController {
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.heroItemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
-                    layoutSection.orthogonalScrollingBehavior = constant(iOS: .groupPagingCentered, tvOS: .groupPaging)
+                    layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
