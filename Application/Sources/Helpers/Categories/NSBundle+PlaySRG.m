@@ -41,14 +41,14 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
     NSString *version = [NSString stringWithFormat:@"%@ (%@)", versionString, bundleVersion];
     if ([self play_isTestFlightDistribution]) {
         // Unbreakable spaces before / after the separator
-        version = [version stringByAppendingString:@" - TestFlight"];
+        version = [version stringByAppendingString:@" - TF"];
     }
     return version;
 }
 
 - (BOOL)play_isTestFlightDistribution
 {
-#if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
+#if !defined(DEBUG)
     return (self.appStoreReceiptURL.path && [self.appStoreReceiptURL.path rangeOfString:@"sandboxReceipt"].location != NSNotFound);
 #else
     return NO;
