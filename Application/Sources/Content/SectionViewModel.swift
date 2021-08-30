@@ -144,15 +144,6 @@ extension SectionViewModel {
                 return 0
             }
         }
-        
-        var horizontalPadding: CGFloat {
-            switch self {
-            case .title:
-                return 2 * SectionViewController.itemSpacing
-            default:
-                return 0
-            }
-        }
     }
     
     struct Section: Hashable, Indexable {

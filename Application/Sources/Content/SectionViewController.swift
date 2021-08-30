@@ -17,7 +17,8 @@ final class SectionViewController: UIViewController {
     var initialSectionId: String?
     let fromPushNotification: Bool
     
-    static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
+    private static let margin = constant(iOS: 2 * itemSpacing, tvOS: 0)
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -588,7 +589,6 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                header.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: -section.header.horizontalPadding, bottom: 0, trailing: -section.header.horizontalPadding)
                 header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
                 return [header]
             }
@@ -633,6 +633,7 @@ private extension SectionViewController {
             
             let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
         }, configuration: layoutConfiguration())
     }
@@ -703,7 +704,7 @@ private extension SectionViewController {
         var body: some View {
             switch section.header {
             case let .title(title):
-                TransluscentHeaderView(title: title, horizontalPadding: section.header.horizontalPadding)
+                TransluscentHeaderView(title: title, horizontalPadding: SectionViewController.margin)
             case let .item(item):
                 switch item {
                 case let .show(show):
@@ -721,7 +722,7 @@ private extension SectionViewController {
         static func size(section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
             switch section.header {
             case let .title(title):
-                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: section.header.horizontalPadding, layoutWidth: layoutWidth)
+                return TransluscentHeaderViewSize.recommended(title: title, horizontalPadding: SectionViewController.margin, layoutWidth: layoutWidth)
             case let .item(item):
                 switch item {
                 case let .show(show):
