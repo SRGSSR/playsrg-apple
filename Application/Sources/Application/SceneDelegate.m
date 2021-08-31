@@ -10,46 +10,16 @@
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "Banner.h"
-#import "CalendarViewController.h"
 #import "DeepLinkAction.h"
-#import "Download.h"
-#import "Favorites.h"
-#import "GoogleCast.h"
-#import "History.h"
-#import "MediaPlayerViewController.h"
-#import "NSBundle+PlaySRG.h"
-#import "NSDateFormatter+PlaySRG.h"
-#import "PlayApplication.h"
 #import "PlayErrors.h"
-#import "PlayFirebaseConfiguration.h"
-#import "Playlist.h"
 #import "PlayLogger.h"
 #import "PlaySRG-Swift.h"
-#import "PushService.h"
 #import "UIApplication+PlaySRG.h"
-#import "UIImage+PlaySRG.h"
-#import "UIViewController+PlaySRG.h"
-#import "UIWindow+PlaySRG.h"
-#import "UpdateInfo.h"
-#import "WatchLater.h"
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
 
-@import AirshipCore;
-@import AppCenter;
-@import AppCenterCrashes;
-@import AppCenterDistribute;
-@import AVFoundation;
-@import Firebase;
 @import libextobjc;
-@import Mantle;
-@import SafariServices;
-@import SRGAnalyticsIdentity;
-@import SRGAppearance;
 @import SRGDataProvider;
-@import SRGIdentity;
-@import SRGLetterbox;
-@import SRGUserData;
 
 static void *s_kvoContext = &s_kvoContext;
 
