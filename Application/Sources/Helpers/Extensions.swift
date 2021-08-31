@@ -414,7 +414,6 @@ extension UIViewController {
     }
 }
 
-#if os(iOS)
 extension UIApplication {
     /// Return the main window scene among all connected scenes, if any.
     @objc var mainWindowScene: UIWindowScene? {
@@ -430,19 +429,20 @@ extension UIApplication {
             .first { $0.isKeyWindow }
     }
     
-    /// Return the main tab bar root controller, if any.
-    @objc var mainTabBarController: TabBarController? {
-        return mainWindow?.rootViewController as? TabBarController
+    /// Return the main scene delegate, if any.
+    @objc var mainSceneDelegate: SceneDelegate? {
+        return mainWindowScene?.delegate as? SceneDelegate
     }
     
     /// Return the main top view controller, if any.
     @objc var mainTopViewController: UIViewController? {
         return mainWindow?.play_topViewController
     }
-    
-    /// Return the main scene delegate, if any.
-    @objc var mainSceneDelegate: SceneDelegate? {
-        return mainWindowScene?.delegate as? SceneDelegate
+
+    #if os(iOS)
+    /// Return the main tab bar root controller, if any.
+    @objc var mainTabBarController: TabBarController? {
+        return mainWindow?.rootViewController as? TabBarController
     }
+    #endif
 }
-#endif

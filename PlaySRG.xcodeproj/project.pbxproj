@@ -1126,6 +1126,16 @@
 		6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
 		6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
 		6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */; };
+		6F7C664A26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
+		6F7C664B26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
+		6F7C664C26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
+		6F7C664D26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
+		6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */; };
+		6F7C666F26DE809100B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
+		6F7C667026DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
+		6F7C667126DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
+		6F7C667226DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
+		6F7C667326DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */; };
 		6F7C89CF20AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
 		6F7C89D120AAFC6100255A54 /* Onboardings.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */; };
@@ -2647,6 +2657,7 @@
 		6F7C089426CE4E2A00166CE7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		6F7C35B323708E8A00259BE7 /* SRGResource+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGResource+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7C35B423708E8A00259BE7 /* SRGResource+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGResource+PlaySRG.m"; sourceTree = "<group>"; };
+		6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboardings.xcassets; sourceTree = "<group>"; };
 		6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLogger.h; sourceTree = "<group>"; };
 		6F7EEBDC22DC40B7005E5A97 /* SearchBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchBar.h; sourceTree = "<group>"; };
@@ -3957,8 +3968,8 @@
 		6F331CE524D06B8200C096AB /* TV Application */ = {
 			isa = PBXGroup;
 			children = (
-				6F4FCB1124D07069002675EF /* Sources */,
 				6F4FCB1224D07077002675EF /* Resources */,
+				6F4FCB1124D07069002675EF /* Sources */,
 				6F331CF224D06B8400C096AB /* TV-Application-Info.plist */,
 				08FCE82525BA11C00031C512 /* TV-Application.entitlements */,
 			);
@@ -4140,16 +4151,17 @@
 				6F0ED543252B00B000ECE97B /* LabeledButton.swift */,
 				6F8125E62638C37900EB029E /* LabeledCardButton.swift */,
 				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
-				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
+				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
 				6F5E63A4250CB32E00056160 /* Modifiers.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */,
-				6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */,
 				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
+				6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				6F9DDD2625B1ABD2001D5688 /* SearchResultsViewModel.swift */,
+				6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */,
 				6F9DDCF825B1ABB7001D5688 /* SearchResultsView.swift */,
+				6F9DDD2625B1ABD2001D5688 /* SearchResultsViewModel.swift */,
 				6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */,
 				6FFFB99C252C9EAC004E40AE /* UIKit+Extensions.swift */,
 			);
@@ -8797,6 +8809,7 @@
 				6F5FAA49268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */,
 				6FC44B3125DE54F800DE6E6F /* Playlist.m in Sources */,
+				6F7C664A26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				085C0DC826132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F7FD2628F23900BF6B19 /* FirstResponder.swift in Sources */,
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
@@ -8815,6 +8828,7 @@
 				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6FE14E65263EA83C004AD913 /* HeaderView.swift in Sources */,
+				6F7C666F26DE809100B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */,
 				08F5DB15262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -8910,6 +8924,7 @@
 				6F5FAA4A268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */,
 				6FC44B3225DE54F800DE6E6F /* Playlist.m in Sources */,
+				6F7C664B26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				085C0DC926132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F7FE2628F23A00BF6B19 /* FirstResponder.swift in Sources */,
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
@@ -8928,6 +8943,7 @@
 				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6FE14E66263EA83C004AD913 /* HeaderView.swift in Sources */,
+				6F7C667026DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB16262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -9023,6 +9039,7 @@
 				6F5FAA4B268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */,
 				6FC44B3325DE54F800DE6E6F /* Playlist.m in Sources */,
+				6F7C664C26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				085C0DCA26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F7FF2628F23B00BF6B19 /* FirstResponder.swift in Sources */,
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
@@ -9041,6 +9058,7 @@
 				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6FE14E67263EA83C004AD913 /* HeaderView.swift in Sources */,
+				6F7C667126DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */,
 				08F5DB17262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -9136,6 +9154,7 @@
 				6F5FAA4C268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BCF25E640A800F549E7 /* WatchLater.m in Sources */,
 				6FC44B3425DE54F900DE6E6F /* Playlist.m in Sources */,
+				6F7C664D26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				085C0DCB26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F8002628F23B00BF6B19 /* FirstResponder.swift in Sources */,
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
@@ -9154,6 +9173,7 @@
 				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6FE14E68263EA83C004AD913 /* HeaderView.swift in Sources */,
+				6F7C667226DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6FEC8A0B261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB18262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -9249,6 +9269,7 @@
 				6F5FAA4D268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
+				6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				085C0DCC26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F8012628F23C00BF6B19 /* FirstResponder.swift in Sources */,
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
@@ -9267,6 +9288,7 @@
 				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */,
+				6F7C667326DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
 				6FEC8A0C261F19A300FF9762 /* ContentInsets.m in Sources */,
 				08F5DB19262DC7F700F717D0 /* Logger.swift in Sources */,
