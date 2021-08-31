@@ -49,7 +49,7 @@ platform :ios do
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
+    notify_build_number_to_ci(platform, nightly_build_name(branch_name))
 
     changelog = default_changelog_for_nightlies(platform, service)
 
@@ -59,7 +59,7 @@ platform :ios do
         scheme: ios_schemes[index],
         display_name_suffix: nighlty_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
-        build_name_suffix: nightly_build_name_suffix(branch_name),
+        build_name: nightly_build_name(branch_name),
         platform: platform
       )
 
@@ -449,7 +449,7 @@ platform :ios do
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nightly_build_name_suffix(branch_name))
+    notify_build_number_to_ci(platform, nightly_build_name(branch_name))
 
     changelog = default_changelog_for_nightlies(platform, service)
 
@@ -463,7 +463,7 @@ platform :ios do
         scheme: schemes[index],
         display_name_suffix: nighlty_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
-        build_name_suffix: nightly_build_name_suffix(branch_name),
+        build_name: nightly_build_name(branch_name),
         platform: platform,
         export_to_appstore: true
       )
@@ -554,7 +554,7 @@ platform :ios do
     options[:export_to_appstore] ||= false
     options[:display_name_suffix] ||= ''
     options[:version_suffix] ||= ''
-    options[:build_name_suffix] ||= ''
+    options[:build_name] ||= ''
     options[:platform] ||= 'iOS'
     options[:version] = xcode_marketing_version(options[:platform])
 
@@ -831,8 +831,6 @@ def update_options_to_appstore(options)
   index = version.index('-')
   return options unless index
 
-  suffix = version[index..version.length - 1]
-  options[:build_name_suffix] = suffix + options[:build_name_suffix]
   options[:version] = version[0..index - 1]
   options
 end
@@ -843,7 +841,7 @@ def srg_xcargs(options)
   xcargs += " BUNDLE_DISPLAY_NAME_SUFFIX='#{options[:display_name_suffix]}'"
   xcargs += " MARKETING_VERSION='#{options[:version]}'"
   xcargs += " MARKETING_VERSION_SUFFIX='#{options[:version_suffix]}'"
-  xcargs += " BUILD_NAME_SUFFIX='#{options[:build_name_suffix]}'"
+  xcargs += " BUILD_NAME='#{options[:build_name]}'"
   xcargs += " DEVELOPMENT_TEAM='#{options[:team_id]}'"
   xcargs + ' -allowProvisioningUpdates'
 end
@@ -862,12 +860,12 @@ def nightly_version_suffix(branch_name)
   nightly_version_suffix
 end
 
-def nightly_build_name_suffix(branch_name)
-  nightly_build_name_suffix = ''
+def nightly_build_name(branch_name)
   if branch_name.include? 'feature/'
-    nightly_build_name_suffix = '+' + branch_name.sub('feature/', '').strip
+    branch_name.sub('feature/', '').strip
+  else
+    ''
   end
-  nightly_build_name_suffix
 end
 
 # Return a default changelog for nightlies
@@ -1062,14 +1060,12 @@ def upload_appcenter_dsyms(appcenter_appname)
 end
 
 # Share build number to the continuous integration
-def notify_build_number_to_ci(platform, suffix)
+def notify_build_number_to_ci(platform, build_name)
   return unless ENV['TEAMCITY_VERSION']
-
-  suffix ||= ''
 
   displayed_build_number = xcode_marketing_version(platform)
   displayed_build_number += '-' + xcode_build_number(platform)
-  displayed_build_number += suffix
+  displayed_build_number += '+' + build_name if build_name
   puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
 end
 

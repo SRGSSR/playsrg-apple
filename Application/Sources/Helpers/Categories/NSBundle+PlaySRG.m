@@ -40,11 +40,11 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
     
     NSString *bundleVersion = [NSBundle.mainBundle.infoDictionary objectForKey:@"CFBundleVersion"];
     
+    NSString *bundleDisplayNameSuffix = [NSBundle.mainBundle.infoDictionary objectForKey:@"BundleDisplayNameSuffix"];
     NSString *buildName = [NSBundle.mainBundle.infoDictionary objectForKey:@"BuildName"];
-    NSString *bundleNameSuffix = [NSBundle.mainBundle.infoDictionary objectForKey:@"BundleNameSuffix"];
     NSString *friendlyBuildName = [NSString stringWithFormat:@"%@%@",
-                                   buildName.length > 0 ? [@" " stringByAppendingString:buildName] : @"",
-                                   bundleNameSuffix.length > 0 ? [@" " stringByAppendingString:bundleNameSuffix] : @""];
+                                   bundleDisplayNameSuffix.length > 0 ? bundleDisplayNameSuffix : @"",
+                                   buildName.length > 0 ? [@" " stringByAppendingString:buildName] : @""];
     
     NSString *version = [NSString stringWithFormat:@"%@ (%@)%@", marketingVersion, bundleVersion, friendlyBuildName];
     if ([self play_isTestFlightDistribution]) {
