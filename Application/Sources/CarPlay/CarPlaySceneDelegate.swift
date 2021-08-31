@@ -6,13 +6,15 @@
 
 import Combine
 import CarPlay
+import SRGLetterbox
 
 class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     
     var interfaceController: CPInterfaceController?
     private var model = RadioLiveStreamsViewModel()
     private var cancellables = Set<AnyCancellable>()
-    let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: "Châines radio", sections: [])
+    let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
+    let letterboxController = SRGLetterboxController()
 
     // MARK: - Custom Functions
     func updateRadioLiveStreams(medias: [SRGMedia]) {
@@ -20,21 +22,22 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         var items: [CPListItem] = []
 
         for media in medias {
-            print(media)
-                        
-//            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: media.channel?.uid)
-//            let image = RadioChannelLogoImage(radioChannel)
-//
-//            let listItem = CPListItem(text: media.title, detailText: media.urn, image: image)
-            
-            
-//            let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: media.channel?.uid)
-//            let image = RadioChannelLogoImage(radioChannel)
-            
             let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
-            
-            
             listItem.accessoryType = .disclosureIndicator
+            listItem.handler = { [weak self] item, completion in
+                guard let strongSelf = self else { return }
+                print(media.urn)
+                
+                // Play letterbox
+                SRGLetterboxService.shared.controller?.playURN(media.urn, at: .none, withPreferredSettings: .none)
+                
+                // Create now playing template
+                let nowPlayingTemplate = CPNowPlayingTemplate.shared
+                strongSelf.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
+                    completion()
+                })
+            }
+
             items.append(listItem)
         }
         let section = CPListSection(items: items)
@@ -55,6 +58,7 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
             .store(in: &cancellables)
         
         // Create a tab bar
+        radioLiveStreamsListTemplate.tabImage = UIImage(named: "livestreams_tab")
         let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate])
         self.interfaceController?.setRootTemplate(tabBar, animated: true, completion: {_, _ in })
     }

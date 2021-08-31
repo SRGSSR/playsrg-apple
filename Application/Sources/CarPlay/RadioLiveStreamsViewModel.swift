@@ -13,7 +13,7 @@ final class RadioLiveStreamsViewModel: ObservableObject {
 
     init() {
         SRGDataProvider.current!
-            .radioLivestreams(for: .RTS)
+            .radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .all)
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: &$medias)
