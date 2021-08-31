@@ -430,6 +430,11 @@ extension UIApplication {
             .first { $0.isKeyWindow }
     }
     
+    /// Return the main tab bar root controller, if any.
+    @objc var mainTabBarController: TabBarController? {
+        return mainWindow?.rootViewController as? TabBarController
+    }
+    
     /// Return the main top view controller, if any.
     @objc var mainTopViewController: UIViewController? {
         return mainWindow?.play_topViewController
