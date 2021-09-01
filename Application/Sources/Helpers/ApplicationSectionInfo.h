@@ -57,4 +57,3 @@ OBJC_EXPORT ApplicationSectionOptionKey const ApplicationSectionOptionShowByDate
 @end
 
 NS_ASSUME_NONNULL_END
-
