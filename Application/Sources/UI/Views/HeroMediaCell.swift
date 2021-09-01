@@ -51,6 +51,7 @@ struct HeroMediaCell: View {
                     }
                 }
                 DescriptionView(media: media, label: label)
+                    .frame(maxWidth: constant(iOS: 600, tvOS: 1200))
             }
         }
     }
