@@ -45,9 +45,9 @@ struct HeroMediaCell: View {
                 MediaVisualView(media: media, scale: .large, contentMode: .fill) { media in
                     if media != nil {
                         #if os(iOS)
-                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.8)]), startPoint: .center, endPoint: .top)
+                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.6)]), startPoint: .center, endPoint: .top)
                         #endif
-                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.8)]), startPoint: .center, endPoint: .bottom)
+                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.6)]), startPoint: .center, endPoint: .bottom)
                     }
                 }
                 DescriptionView(media: media, label: label)
