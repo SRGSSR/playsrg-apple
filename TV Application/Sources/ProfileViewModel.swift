@@ -111,11 +111,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     var version: String {
-        let appVersion = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as? String ?? ""
-        let bundleNameSuffix = Bundle.main.infoDictionary!["BundleNameSuffix"] as? String ?? ""
-        let buildName = Bundle.main.infoDictionary!["BuildName"] as? String ?? ""
-        let buildString = Bundle.main.infoDictionary!["CFBundleVersion"] as? String ?? ""
-        return String(format: "%@%@%@ (%@)", appVersion, bundleNameSuffix.count > 0 ? " " + bundleNameSuffix : "", buildName.count > 0 ? " " + buildName : "", buildString)
+        return Bundle.main.play_friendlyVersionNumber
     }
     
     func login() {

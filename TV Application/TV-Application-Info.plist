@@ -4,7 +4,7 @@
 <dict>
 	<key>BuildName</key>
 	<string>$(BUILD_NAME)</string>
-	<key>BundleNameSuffix</key>
+	<key>BundleDisplayNameSuffix</key>
 	<string>$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>

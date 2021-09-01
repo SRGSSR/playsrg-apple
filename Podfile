@@ -16,9 +16,9 @@ abstract_target 'Play SRG' do
 
     pod 'Fingertips',
         git: 'https://github.com/mapbox/Fingertips.git',
-        configurations: ['Debug', 'Nightly', 'Beta']
+        configurations: ['Debug', 'Nightly', 'Nightly_AppCenter', 'Beta', 'Beta_AppCenter']
     pod 'FLEX',
-        configurations: ['Debug', 'Nightly', 'Beta']
+        configurations: ['Debug', 'Nightly_AppCenter', 'Beta_AppCenter']
 
     target 'Play SRF' do
     end
@@ -38,7 +38,9 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
+            'Nightly_AppCenter' => :release,
             'Beta' => :release,
+            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 
@@ -65,7 +67,9 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
+            'Nightly_AppCenter' => :release,
             'Beta' => :release,
+            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 end

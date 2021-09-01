@@ -31,31 +31,51 @@ Builds a new tvOS nightly on AppStore Connect and waits build processing.
 fastlane ios tvOSnightlyDSYMs
 ```
 Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
-### ios tvOSnightlyTester
+### ios iOSnightlies
 ```
-fastlane ios tvOSnightlyTester
+fastlane ios iOSnightlies
 ```
-Add tvOS nightly tester (email required)
+Builds a new iOS nightly on AppStore Connect and waits build processing.
+### ios iOSnightlyDSYMs
+```
+fastlane ios iOSnightlyDSYMs
+```
+Sends latest iOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios nightlyTester
+```
+fastlane ios nightlyTester
+```
+Add a nightly TestFlight tester (email required)
 ### ios betas
 ```
 fastlane ios betas
 ```
-Builds a new iOS beta on App Center with the current build number. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
+Builds a new iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios tvOSbetas
 ```
 fastlane ios tvOSbetas
 ```
-Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If not in a release/hotfix process (master, release/* or hotfix/*), tags the current version, bumps the build number and pushes.
+Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios tvOSbetaDSYMs
 ```
 fastlane ios tvOSbetaDSYMs
 ```
-Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
-### ios tvOSbetaTester
+Sends latest tvOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios iOSbetas
 ```
-fastlane ios tvOSbetaTester
+fastlane ios iOSbetas
 ```
-Add tvOS beta tester (email required)
+Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+### ios iOSbetaDSYMs
+```
+fastlane ios iOSbetaDSYMs
+```
+Sends latest iOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+### ios betaTester
+```
+fastlane ios betaTester
+```
+Add a beta TestFlight tester (email required)
 ### ios appStoreUploads
 ```
 fastlane ios appStoreUploads
