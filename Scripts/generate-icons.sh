@@ -90,14 +90,14 @@ do
             mkdir -p ${CACHE_APPICON_PATH}
         fi
 
-        if [ "${CONFIGURATION}" == "Beta" ]; then
+        if [ "${CONFIGURATION}" == "Beta" ] || [ "${CONFIGURATION}" == "Beta_AppCenter" ]; then
             TITLE="Beta"
-        elif [ "${CONFIGURATION}" == "Nightly" ]; then
+        elif [ "${CONFIGURATION}" == "Nightly" ] || [ "${CONFIGURATION}" == "Nightly_AppCenter" ]; then
     	    TITLE="Nightly"
         elif [ "${CONFIGURATION}" == "Debug" ]; then
             TITLE="Debug"
         else
-            TITLE="Dev"
+            TITLE="Und"
         fi
         
         SCRIPT_ICON_PATH="${CACHE_APPICON_PATH}/${TITLE}-${filename}"
