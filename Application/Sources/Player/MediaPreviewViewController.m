@@ -7,6 +7,7 @@
 #import "MediaPreviewViewController.h"
 
 #import "AnalyticsConstants.h"
+#import "AppDelegate.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "Banner.h"
@@ -16,7 +17,6 @@
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NSDateFormatter+PlaySRG.h"
-#import "PlayAppDelegate.h"
 #import "PlayErrors.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"

@@ -7,6 +7,7 @@
 // This file lists all Objective-C headers which must be exposed to Swift code. Update the list as needed. All referenced
 // Objective-C headers will be automatically exposed to all Swift source files.
 
+#import "AppDelegate.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettings+Common.h"
@@ -28,7 +29,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
 #import "PlayAccessibilityFormatter.h"
-#import "PlayAppDelegate.h"
 #import "PlayApplicationNavigation.h"
 #import "PlayDurationFormatter.h"
 #import "PushService.h"

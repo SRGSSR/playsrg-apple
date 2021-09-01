@@ -7,6 +7,7 @@
 #import "MediaPlayerViewController.h"
 
 #import "AccessibilityIdentifierConstants.h"
+#import "AppDelegate.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
 #import "AnalyticsConstants.h"
@@ -25,7 +26,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
-#import "PlayAppDelegate.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -2117,7 +2117,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
+    AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
     SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
@@ -2135,7 +2135,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     
-    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
+    AppDelegate *appDelegate = (AppDelegate *)UIApplication.sharedApplication.delegate;
     [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }

@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "PlayAppDelegate.h"
+#import "AppDelegate.h"
 
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
@@ -57,13 +57,13 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
-@interface PlayAppDelegate ()
+@interface AppDelegate ()
 
 @property (nonatomic) DeepLinkService *deepLinkService;
 
 @end
 
-@implementation PlayAppDelegate
+@implementation AppDelegate
 
 #pragma mark Getters and setters
 
@@ -212,6 +212,11 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     return shouldNotPerformAdditionalDelegateHandling;
+}
+
+- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options
+{
+    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
 }
 
 // Quick Actions with 3D Touch
@@ -834,13 +839,6 @@ static void *s_kvoContext = &s_kvoContext;
 }
 
 #pragma mark Actions
-
-- (void)closeWhatsNew:(id)sender
-{
-    [self.window.play_topViewController dismissViewControllerAnimated:YES completion:^{
-        [self checkForForcedUpdates];
-    }];
-}
 
 - (BOOL)handleShortcutItem:(UIApplicationShortcutItem *)shortcutItem
 {

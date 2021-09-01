@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface PlayAppDelegate : UIResponder <SKStoreProductViewControllerDelegate, UIApplicationDelegate>
+@interface AppDelegate : UIResponder <SKStoreProductViewControllerDelegate, UIApplicationDelegate>
 
 @property (nonatomic) UIWindow *window;
 

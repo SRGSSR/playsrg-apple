@@ -7,9 +7,9 @@
 #import "PushService.h"
 #import "PushService+Private.h"
 
+#import "AppDelegate.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
-#import "PlayAppDelegate.h"
 #import "Notification.h"
 #import "UIView+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -273,7 +273,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSString *mediaURN = notificationContent.notificationInfo[@"media"];
         NSInteger startTime = [notificationContent.notificationInfo[@"startTime"] integerValue];
         UIApplication *application = UIApplication.sharedApplication;
-        PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
+        AppDelegate *appDelegate = (AppDelegate *)application.delegate;
         [appDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = notificationContent.notificationInfo[@"show"] ?: AnalyticsSourceNotificationPush;
@@ -285,7 +285,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     else if (notificationContent.notificationInfo[@"show"]) {
         NSString *showURN = notificationContent.notificationInfo[@"show"];
         UIApplication *application = UIApplication.sharedApplication;
-        PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
+        AppDelegate *appDelegate = (AppDelegate *)application.delegate;
         [appDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceNotificationPush;

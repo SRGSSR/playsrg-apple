@@ -21,7 +21,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>$(BUNDLE_SHORT_VERSION)</string>
 	<key>CFBundleVersion</key>
-	<string>${CURRENT_PROJECT_VERSION}</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -52,6 +52,6 @@
 		</dict>
 	</array>
 	<key>AppCenterSecret</key>
-	<string>${APPCENTER_SECRET}</string>
+	<string>$(APPCENTER_SECRET)</string>
 </dict>
 </plist>
