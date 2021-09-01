@@ -26,7 +26,6 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
             listItem.accessoryType = .disclosureIndicator
             listItem.handler = { [weak self] item, completion in
                 guard let strongSelf = self else { return }
-                print(media.urn)
                 
                 // Play letterbox
                 SRGLetterboxService.shared.controller?.playURN(media.urn, at: .none, withPreferredSettings: .none)
@@ -74,20 +73,13 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
 
 extension CarPlaySceneDelegate {
     
-    func channel(media: SRGMedia) -> SRGChannel? {
-        guard let channel = media.channel else { return nil }
-        return channel
-    }
-    
     func logoImage(media: SRGMedia) -> UIImage? {
-        guard let channel = media.channel else { return nil }
-        return channel.play_largeLogoImage
+        guard let channel = media.channel, let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: channel.uid) else { return nil }
+        return RadioChannelLogoImageWithTraitCollection(radioChannel, UITraitCollection(userInterfaceIdiom: .carPlay))
     }
     
     func title(media: SRGMedia) -> String? {
         guard let channel = media.channel else { return nil }
-        print("channel.title", channel.title)
-        print("MediaDescription.title(for: media, style: .date)", MediaDescription.title(for: media, style: .date))
         return channel.title
     }
     
