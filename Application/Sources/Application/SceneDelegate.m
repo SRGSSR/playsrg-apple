@@ -53,10 +53,6 @@
 
 static void *s_kvoContext = &s_kvoContext;
 
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-#import <Fingertips/Fingertips.h>
-#endif
-
 @implementation SceneDelegate
 
 #pragma mark Getters and setters
@@ -64,17 +60,6 @@ static void *s_kvoContext = &s_kvoContext;
 - (TabBarController *)rootTabBarController
 {
     return (TabBarController *)self.window.rootViewController;
-}
-
-- (void)setPresenterModeEnabled:(BOOL)presenterModeEnabled
-{
-    SRGLetterboxService.sharedService.mirroredOnExternalScreen = presenterModeEnabled;
-    
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    NSAssert([self.window isKindOfClass:MBFingerTipWindow.class], @"MBFingerTipWindow expected");
-    MBFingerTipWindow *window = (MBFingerTipWindow *)self.window;
-    window.alwaysShowTouches = presenterModeEnabled;
-#endif
 }
 
 #pragma mark UIWindowSceneDelegate protocol
@@ -91,19 +76,14 @@ static void *s_kvoContext = &s_kvoContext;
                                              object:nil];
     
     UIWindowScene *windowScene = (UIWindowScene *)scene;
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    self.window = [[MBFingerTipWindow alloc] initWithWindowScene:windowScene];
-#else
     self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
-#endif
-    
     self.window.backgroundColor = UIColor.blackColor;
     self.window.accessibilityIgnoresInvertColors = YES;
     
     [self.window makeKeyAndVisible];
     self.window.rootViewController = [[TabBarController alloc] init];
     
-    [self setPresenterModeEnabled:ApplicationSettingPresenterModeEnabled()];
+    [PresenterMode enable:ApplicationSettingPresenterModeEnabled()];
     
     [self handleShortcutItem:connectionOptions.shortcutItem];
     [self handleURLContexts:connectionOptions.URLContexts];
@@ -245,7 +225,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
     NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
     if (presenterModeEnabled) {
-        [self setPresenterModeEnabled:presenterModeEnabled.boolValue];
+        [PresenterMode enable:presenterModeEnabled.boolValue];
     }
 }
 

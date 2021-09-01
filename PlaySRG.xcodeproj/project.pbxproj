@@ -1749,6 +1749,11 @@
 		6FDB2AC724E5923600FF286E /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AC424E5923600FF286E /* MediaCell.swift */; };
 		6FDB2AC824E5923600FF286E /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AC424E5923600FF286E /* MediaCell.swift */; };
 		6FDB2AC924E5923600FF286E /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDB2AC424E5923600FF286E /* MediaCell.swift */; };
+		6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEC19126DE307E0020A03F /* PresenterMode.swift */; };
+		6FDEC19326DE307E0020A03F /* PresenterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEC19126DE307E0020A03F /* PresenterMode.swift */; };
+		6FDEC19426DE307E0020A03F /* PresenterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEC19126DE307E0020A03F /* PresenterMode.swift */; };
+		6FDEC19526DE307E0020A03F /* PresenterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEC19126DE307E0020A03F /* PresenterMode.swift */; };
+		6FDEC19626DE307E0020A03F /* PresenterMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FDEC19126DE307E0020A03F /* PresenterMode.swift */; };
 		6FDF08D7218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D8218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
 		6FDF08D9218B126700B2AF2C /* Download.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C5218B126700B2AF2C /* Download.m */; };
@@ -2790,6 +2795,7 @@
 		6FDB2AB824E5916F00FF286E /* ImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6FDB2AB924E5916F00FF286E /* RedactingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RedactingView.swift; sourceTree = "<group>"; };
 		6FDB2AC424E5923600FF286E /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		6FDEC19126DE307E0020A03F /* PresenterMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterMode.swift; sourceTree = "<group>"; };
 		6FDF08C5218B126700B2AF2C /* Download.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Download.m; sourceTree = "<group>"; };
 		6FDF08C6218B126700B2AF2C /* Recommendation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recommendation.m; sourceTree = "<group>"; };
 		6FDF08C8218B126700B2AF2C /* Download+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Download+Private.h"; sourceTree = "<group>"; };
@@ -3322,6 +3328,7 @@
 				6F9D2741203AD99C00FDE899 /* Playlist.h */,
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
+				6FDEC19126DE307E0020A03F /* PresenterMode.swift */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -7704,6 +7711,7 @@
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				08F4683A26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
+				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6F0850F426256A7700B4E410 /* Reachability.m in Sources */,
 				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
@@ -7911,6 +7919,7 @@
 				6F4760141EB37BC6003021EA /* Banner.m in Sources */,
 				6F88139623D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB812604B66400457331 /* TopicCell.swift in Sources */,
+				6FDEC19326DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760351EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6F475FF61EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA45268CB88C007F0CA8 /* Localization.swift in Sources */,
@@ -8125,6 +8134,7 @@
 				6F4760151EB37BC6003021EA /* Banner.m in Sources */,
 				6F88139723D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB802604B66300457331 /* TopicCell.swift in Sources */,
+				6FDEC19426DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6F475FF71EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA46268CB88C007F0CA8 /* Localization.swift in Sources */,
@@ -8339,6 +8349,7 @@
 				6F4760161EB37BC6003021EA /* Banner.m in Sources */,
 				6F88139823D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB7F2604B66300457331 /* TopicCell.swift in Sources */,
+				6FDEC19526DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6F475FF81EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA47268CB88C007F0CA8 /* Localization.swift in Sources */,
@@ -8553,6 +8564,7 @@
 				6F4760171EB37BC6003021EA /* Banner.m in Sources */,
 				6F88139923D85DD600A00826 /* GoogleCastBarButtonItem.m in Sources */,
 				6F30AB7E2604B66200457331 /* TopicCell.swift in Sources */,
+				6FDEC19626DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6F475FF91EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA48268CB88C007F0CA8 /* Localization.swift in Sources */,
