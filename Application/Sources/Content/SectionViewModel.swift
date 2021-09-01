@@ -144,15 +144,6 @@ extension SectionViewModel {
                 return 0
             }
         }
-        
-        var horizontalPadding: CGFloat {
-            switch self {
-            case .title:
-                return 2 * SectionViewController.itemSpacing
-            default:
-                return 0
-            }
-        }
     }
     
     struct Section: Hashable, Indexable {
@@ -169,7 +160,11 @@ extension SectionViewModel {
     }
     
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Section, Item>
+    
+    // Non-empty rows only. The section view namely supports optional header pinning, and the layout could raise an
+    // assertion if some collection section has no items, while its header height is smaller than the layout inter group
+    // spacing.
+    typealias Row = NonEmptyCollectionRow<Section, Item>
     
     enum State {
         case loading
@@ -194,11 +189,11 @@ extension SectionViewModel {
         
         var isEmpty: Bool {
             if case let .loaded(rows: rows) = self {
-                for row in rows where !row.isEmpty {
-                    return false
-                }
+                return rows.isEmpty
             }
-            return true
+            else {
+                return true
+            }
         }
     }
     
@@ -214,18 +209,43 @@ extension SectionViewModel {
         case reload
     }
     
-    fileprivate static func row(with items: [Item], header: Header = .none) -> [Row] {
-        return [Row(section: Section(id: "main", header: header), items: items)]
+    fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
+        if let row = Row(section: Section(id: "main", header: header), items: items) {
+            return [row]
+        }
+        else {
+            return []
+        }
     }
     
-    fileprivate static func alphabeticalRows(from items: [Item]) -> [Row] {
-        return Item.groupAlphabetically(items)
-            .map { character, items in
-                return Row(
-                    section: Section(id: String(character), header: .title(String(character).uppercased())),
-                    items: items
-                )
+    private static func alphabeticalRows(from groups: [(key: Character, value: [Item])]) -> [Row] {
+        return groups.compactMap { character, items in
+            return Row(
+                section: Section(id: String(character), header: .title(String(character).uppercased())),
+                items: items
+            )
+        }
+    }
+    
+    /// Group items into alphabetical rows. If smart mode is enabled grouping is only performed when the result
+    /// of the grouping is well-balanced.
+    fileprivate static func alphabeticalRows(from items: [Item], smart: Bool) -> [Row] {
+        let groups = Item.groupAlphabetically(items)
+        guard groups.count > 1 else { return consolidatedRows(with: items) }
+        
+        if smart {
+            // Group into different rows only if we have several groups whose row length median is larger than a
+            // given threshold, so that we get a balanced result.
+            if let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
+                return alphabeticalRows(from: groups)
             }
+            else {
+                return consolidatedRows(with: items)
+            }
+        }
+        else {
+            return alphabeticalRows(from: groups)
+        }
     }
 }
 
@@ -296,21 +316,21 @@ private extension SectionViewModel {
             switch contentSection.type {
             case .showAndMedias:
                 if let firstItem = items.first, case .show = firstItem {
-                    return SectionViewModel.row(with: Array(items.suffix(from: 1)), header: .item(firstItem))
+                    return SectionViewModel.consolidatedRows(with: Array(items.suffix(from: 1)), header: .item(firstItem))
                 }
                 else {
-                    return SectionViewModel.row(with: items)
+                    return SectionViewModel.consolidatedRows(with: items)
                 }
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows:
-                    return SectionViewModel.alphabeticalRows(from: items)
+                    return SectionViewModel.alphabeticalRows(from: items, smart: true)
                 default:
-                    return SectionViewModel.row(with: items)
+                    return SectionViewModel.consolidatedRows(with: items)
                 }
             default:
                 // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
-                return SectionViewModel.row(with: items)
+                return SectionViewModel.consolidatedRows(with: items)
             }
         }
     }
@@ -377,12 +397,14 @@ private extension SectionViewModel {
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             switch configuredSection {
-            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
-                return SectionViewModel.alphabeticalRows(from: items)
+            case .favoriteShows, .radioFavoriteShows:
+                return SectionViewModel.alphabeticalRows(from: items, smart: true)
+            case .radioAllShows, .tvAllShows:
+                return SectionViewModel.alphabeticalRows(from: items, smart: false)
             case let .show(show):
-                return SectionViewModel.row(with: items, header: .show(show))
+                return SectionViewModel.consolidatedRows(with: items, header: .show(show))
             default:
-                return SectionViewModel.row(with: items)
+                return SectionViewModel.consolidatedRows(with: items)
             }
         }
     }

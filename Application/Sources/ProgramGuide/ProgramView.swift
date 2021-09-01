@@ -124,20 +124,29 @@ struct ProgramView: View {
     // Behavior: h-exp, v-hug
     private struct ActionsView: View {
         @ObservedObject var model: ProgramViewModel
+        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        
+        static let buttonHeight: CGFloat = 40
+        
+        private var direction: StackDirection {
+            return horizontalSizeClass == .compact ? .vertical : .horizontal
+        }
         
         var body: some View {
-            HStack(spacing: 7) {
+            Stack(direction: direction, spacing: 7) {
                 if let properties = model.watchLaterButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
+                        .frame(height: Self.buttonHeight)
                 }
                 if let properties = model.watchFromStartButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
+                        .frame(height: Self.buttonHeight)
                 }
                 if let properties = model.episodeButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
+                        .frame(height: Self.buttonHeight)
                 }
             }
-            .frame(height: 40)
         }
     }
     

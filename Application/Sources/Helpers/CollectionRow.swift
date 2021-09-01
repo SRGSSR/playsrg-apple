@@ -7,7 +7,7 @@
 import Foundation
 
 /**
- *  Collection row.
+ *  Collection row (might be empty).
  */
 struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     /// Section.
@@ -17,5 +17,21 @@ struct CollectionRow<Section: Hashable, Item: Hashable>: Hashable {
     
     var isEmpty: Bool {
         return items.isEmpty
+    }
+}
+
+/**
+ *  Collection row (never empty).
+ */
+struct NonEmptyCollectionRow<Section: Hashable, Item: Hashable>: Hashable {
+    /// Section.
+    let section: Section
+    /// Items contained within the section.
+    let items: [Item]
+    
+    init?(section: Section, items: [Item]) {
+        guard !items.isEmpty else { return nil }
+        self.section = section
+        self.items = items
     }
 }
