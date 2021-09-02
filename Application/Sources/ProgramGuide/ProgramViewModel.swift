@@ -91,15 +91,15 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasMultiAudio: Bool {
-        return media?.play_isMultiAudioAvailable ?? false
+        return currentMedia?.play_isMultiAudioAvailable ?? false
     }
     
     var hasAudioDescription: Bool {
-        return media?.play_isAudioDescriptionAvailable ?? false
+        return currentMedia?.play_isAudioDescriptionAvailable ?? false
     }
     
     var hasSubtitles: Bool {
-        return media?.play_areSubtitlesAvailable ?? false
+        return currentMedia?.play_areSubtitlesAvailable ?? false
     }
     
     var imageCopyright: String? {
