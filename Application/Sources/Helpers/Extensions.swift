@@ -270,10 +270,11 @@ extension UIHostingController {
 extension NSCollectionLayoutSection {
     typealias CellSizer = (_ layoutWidth: CGFloat, _ spacing: CGFloat) -> NSCollectionLayoutSize
     
-    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
+    /// `prefersStripAppearance` can be used to remove spacing between items on supported platforms
+    static func horizontal(layoutWidth: CGFloat, spacing: CGFloat = 0, prefersStripAppearance: Bool = false, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
+        let margin = constant(iOS: 2 * spacing, tvOS: 0)
         
-        let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
+        let effectiveLayoutWidth = layoutWidth - 2 * margin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
@@ -283,15 +284,15 @@ extension NSCollectionLayoutSection {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.interGroupSpacing = spacing
-        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
+        section.interGroupSpacing = constant(iOS: !prefersStripAppearance ? spacing : 0, tvOS: spacing)
+        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: margin, bottom: bottom, trailing: margin)
         return section
     }
     
     static func grid(layoutWidth: CGFloat, spacing: CGFloat = 0, top: CGFloat = 0, bottom: CGFloat = 0, cellSizer: CellSizer) -> NSCollectionLayoutSection {
-        let horizontalMargin = constant(iOS: 2 * spacing, tvOS: 0)
+        let margin = constant(iOS: 2 * spacing, tvOS: 0)
         
-        let effectiveLayoutWidth = layoutWidth - 2 * horizontalMargin
+        let effectiveLayoutWidth = layoutWidth - 2 * margin
         let cellSize = cellSizer(effectiveLayoutWidth, spacing)
         
         let itemSize = NSCollectionLayoutSize(widthDimension: cellSize.widthDimension, heightDimension: .fractionalHeight(1))
@@ -303,7 +304,7 @@ extension NSCollectionLayoutSection {
         
         let section = NSCollectionLayoutSection(group: group)
         section.interGroupSpacing = spacing
-        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: horizontalMargin, bottom: bottom, trailing: horizontalMargin)
+        section.contentInsets = NSDirectionalEdgeInsets(top: top, leading: margin, bottom: bottom, trailing: margin)
         return section
     }
 }
