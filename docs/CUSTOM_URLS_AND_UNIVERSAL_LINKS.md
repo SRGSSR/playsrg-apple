@@ -26,15 +26,20 @@ For media, show and page links, an optional `channel_id=[channel_id]` parameter 
 
 For a debug, nightly or beta build, a `server=[server_title]` parameter can also be added to force a server selection update. The available server list can be found in the application under *Settings* > *Advanced features* > *Server*.
 
+
+Play application also supports pseudo-universal link URL, by replacing the URL scheme in the original portal URL with the application custom URL scheme.
+
+For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l](playrts-debug://www.rts.ch/play/tv/emissions?index=l)
+
 Refer to the _Testing_ section for more information about how custom URLs can be supplied to an application during tests.
 
 ## Universal Links
 
 The application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case you can open most of URLs of a Play business unit portal in the associated Play application.
 
-For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to build a pseudo-universal link URL which the app is able to understand as universal link, by replacing the URL scheme in the original portal URL with the application custom URL scheme.
+For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to have universal link URLs for `Debug` configuration builds, using the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool to get an associated `https://play-mmf.herokuapp.com/[BU]/[…]` url.
 
-For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false](https://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false](playrts-debug://www.rts.ch/play/tv/emissions?index=l&onlyActiveShows=false)
+For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply decode this url with the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool and get the Play MMF associated url: [https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l](https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l).
 
 Refer to the _Testing_ section for more information about how universal URLs can be supplied to an application during tests.
 
@@ -45,14 +50,14 @@ To test custom or universal links, you can either:
 - Use Safari (mobile or simulator) and copy / paste the URL in the address bar.
 - Start the app in the simulator and send the URL to it from the command line with `xcrun simctl openurl booted <url>`.
 
+## URL generation
+
+The [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool is available for QR code generation of custom URLs with supported custom schemes. It can also generate universal links for the `Debug` configuration builds (associated with `https://play-mmf.herokuapp.com/[BU]/[…]` urls).
+
 ## Changelog
 
 - Version 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
 - Version 2.9.6: Version 2 of universal link support.
-
-## URL generation
-
-An [online tool](https://play-mmf.herokuapp.com/deeplink/index.html) is available for QR code generation of URLs with supported custom schemes.
 
 ## Examples
 
