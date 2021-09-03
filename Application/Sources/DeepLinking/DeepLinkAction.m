@@ -53,6 +53,11 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsSourceSchemeURL];
 }
 
++ (instancetype)actionFromUniversalLinkURL:(NSURL *)URL
+{
+    return [self actionFromURL:URL options:nil source:AnalyticsSourceSchemeURL];
+}
+
 + (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];

@@ -94,8 +94,11 @@ static void *s_kvoContext = &s_kvoContext;
         return;
     }
     
-    DeepLinkAction *action = [DeepLinkAction actionFromURLContext:URLContext];
-    
+    [self handleDeepLinkAction:[DeepLinkAction actionFromURLContext:URLContext]];
+}
+
+- (void)handleDeepLinkAction:(DeepLinkAction *)action
+{
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSString *server = [action parameterWithName:@"server"];
     if (server) {
@@ -337,7 +340,7 @@ static void *s_kvoContext = &s_kvoContext;
         }
     }
     else if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
-        return [UIApplication.sharedApplication openURL:userActivity.webpageURL options:@{} completionHandler:nil];
+        [self handleDeepLinkAction:[DeepLinkAction actionFromUniversalLinkURL:userActivity.webpageURL]];
     }
 }
 
