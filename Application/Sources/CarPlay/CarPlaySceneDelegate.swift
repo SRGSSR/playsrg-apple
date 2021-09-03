@@ -14,7 +14,6 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     private var model = RadioLiveStreamsViewModel()
     private var cancellables = Set<AnyCancellable>()
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
-    let letterboxController = SRGLetterboxController()
 
     // MARK: - Custom Functions
     func updateRadioLiveStreams(medias: [SRGMedia]) {
@@ -28,7 +27,13 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
                 guard let strongSelf = self else { return }
                 
                 // Play letterbox
-                SRGLetterboxService.shared.controller?.playURN(media.urn, at: .none, withPreferredSettings: .none)
+                if let controller = SRGLetterboxService.shared.controller {
+                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                } else {
+                    let controller = SRGLetterboxController()
+                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
+                    SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
+                }
                 
                 // Create now playing template
                 let nowPlayingTemplate = CPNowPlayingTemplate.shared
