@@ -57,6 +57,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     [self handleShortcutItem:connectionOptions.shortcutItem];
     [self handleURLContexts:connectionOptions.URLContexts];
+    [self handleUserActivities:connectionOptions.userActivities];
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
@@ -85,10 +86,11 @@ static void *s_kvoContext = &s_kvoContext;
     [self handleURLContexts:URLContexts];
 }
 
-#pragma mark Custom URLs and universal links
+#pragma mark Custom scheme urls
 
 - (void)handleURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
 {
+    // FIXME: As long as we only know the case of the user with one context, it works.
     UIOpenURLContext *URLContext = URLContexts.anyObject;
     if (! URLContext) {
         return;
@@ -290,9 +292,31 @@ static void *s_kvoContext = &s_kvoContext;
     }];
 }
 
-#pragma mark Handoff
+#pragma mark Handoff and universal links
 
 - (void)scene:(UIScene *)scene continueUserActivity:(NSUserActivity *)userActivity
+{
+    [self handleUserActivity:userActivity];
+}
+
+- (void)scene:(UIScene *)scene didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error
+{
+    PlayLogWarning(@"application", @"Could not retrieve user activity for %@. Reason: %@", userActivityType, error);
+    [Banner showError:error inViewController:nil];
+}
+
+- (void)handleUserActivities:(NSSet<NSUserActivity *> *)userActivities
+{
+    // FIXME: As long as we only know the case of the user with one context, it works.
+    NSUserActivity *userActivity = userActivities.anyObject;
+    if (! userActivity) {
+        return;
+    }
+    
+    [self handleUserActivity:userActivity];
+}
+
+- (void)handleUserActivity:(NSUserActivity *)userActivity
 {
     if ([userActivity.activityType isEqualToString:[NSBundle.mainBundle.bundleIdentifier stringByAppendingString:@".playing"]]) {
         NSString *mediaURN = userActivity.userInfo[@"URNString"];
@@ -342,12 +366,6 @@ static void *s_kvoContext = &s_kvoContext;
     else if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
         [self handleDeepLinkAction:[DeepLinkAction actionFromUniversalLinkURL:userActivity.webpageURL]];
     }
-}
-
-- (void)scene:(UIScene *)scene didFailToContinueUserActivityWithType:(NSString *)userActivityType error:(NSError *)error
-{
-    PlayLogWarning(@"application", @"Could not retrieve user activity for %@. Reason: %@", userActivityType, error);
-    [Banner showError:error inViewController:nil];
 }
 
 #pragma mark Actions

@@ -96,4 +96,3 @@ extension SceneDelegate: UIWindowSceneDelegate {
         window!.rootViewController = applicationRootViewController()
     }
 }
-
