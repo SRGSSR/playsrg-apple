@@ -90,7 +90,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)handleURLContexts:(NSSet<UIOpenURLContext *> *)URLContexts
 {
-    // FIXME: As long as we only know the case of the user with one context, it works.
+    // FIXME: Works as long as only one context is received
     UIOpenURLContext *URLContext = URLContexts.anyObject;
     if (! URLContext) {
         return;
@@ -307,7 +307,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)handleUserActivities:(NSSet<NSUserActivity *> *)userActivities
 {
-    // FIXME: As long as we only know the case of the user with one context, it works.
+    // FIXME: Works as long as only one activity is received
     NSUserActivity *userActivity = userActivities.anyObject;
     if (! userActivity) {
         return;
