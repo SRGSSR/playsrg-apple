@@ -50,12 +50,12 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)actionFromURLContext:(UIOpenURLContext *)URLContext
 {
-    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsSourceSchemeURL];
+    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsSourceCustomURL];
 }
 
 + (instancetype)actionFromUniversalLinkURL:(NSURL *)URL
 {
-    return [self actionFromURL:URL options:nil source:AnalyticsSourceSchemeURL];
+    return [self actionFromURL:URL options:nil source:AnalyticsSourceCustomURL];
 }
 
 + (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source
@@ -159,7 +159,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                           analyticsLabels:labels
                                queryItems:URLComponents.queryItems];
     }
-    else if ([source isEqualToString:AnalyticsSourceSchemeURL]) {
+    else if ([source isEqualToString:AnalyticsSourceCustomURL]) {
         NSURL *translatedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
         if (translatedURL) {
             return [self actionFromURL:translatedURL options:options source:AnalyticsSourceDeepLink];

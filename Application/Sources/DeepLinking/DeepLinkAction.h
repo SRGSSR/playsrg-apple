@@ -48,7 +48,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
 + (instancetype)actionFromURLContext:(UIOpenURLContext *)URLContext;
 
 /**
- *  Create an action from an universal link. Unsupported URLs are returned as action with the `DeepLinkTypeUnsupported`
+ *  Create an action from a universal link. Unsupported URLs are returned as action with the `DeepLinkTypeUnsupported`
  *  type.
  */
 + (instancetype)actionFromUniversalLinkURL:(NSURL *)URL;
