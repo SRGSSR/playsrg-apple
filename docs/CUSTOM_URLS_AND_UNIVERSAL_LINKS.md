@@ -38,7 +38,7 @@ The application supports Apple universal links, provided that the associated bus
 
 For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to have universal link URLs for `Debug` configuration builds using the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool to get an associated `https://play-mmf.herokuapp.com/[BU]/[…]` URL.
 
-For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply decode this url with the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool and get the Play MMF associated url: [https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l](https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l).
+For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply decode this URL with the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool and get the Play MMF associated URL: [https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l](https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l).
 
 Refer to the _Testing_ section for more information about how universal URLs can be supplied to an application during tests.
 
