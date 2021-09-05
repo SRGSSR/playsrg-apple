@@ -189,7 +189,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceAutomatic;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceDeepLink;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceLongPress;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
@@ -197,6 +196,7 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourcePeekMenu;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
 
 /**
  *  Actions

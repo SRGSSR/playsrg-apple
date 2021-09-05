@@ -50,15 +50,15 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)actionFromURLContext:(UIOpenURLContext *)URLContext
 {
-    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsSourceCustomURL];
+    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsSourceCustomURL canConvertURL:YES];
 }
 
 + (instancetype)actionFromUniversalLinkURL:(NSURL *)URL
 {
-    return [self actionFromURL:URL options:nil source:AnalyticsSourceCustomURL];
+    return [self actionFromURL:URL options:nil source:AnalyticsSourceUniversalLink canConvertURL:YES];
 }
 
-+ (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source
++ (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source canConvertURL:(BOOL)canConvertURL
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     NSString *type = URLComponents.host.lowercaseString;
@@ -159,10 +159,10 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                           analyticsLabels:labels
                                queryItems:URLComponents.queryItems];
     }
-    else if ([source isEqualToString:AnalyticsSourceCustomURL]) {
-        NSURL *translatedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
-        if (translatedURL) {
-            return [self actionFromURL:translatedURL options:options source:AnalyticsSourceDeepLink];
+    else if (canConvertURL) {
+        NSURL *convertedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
+        if (convertedURL) {
+            return [self actionFromURL:convertedURL options:options source:source canConvertURL:NO];
         }
         else {
             return [self unsupportedActionWithOptions:options source:source];
