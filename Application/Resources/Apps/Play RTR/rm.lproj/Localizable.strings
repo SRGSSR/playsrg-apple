@@ -378,7 +378,7 @@
 "Overview" = "Survista";
 
 /* Search settings section header */
-"Period" = "Interval";
+"Period" = "Spazi da temp";
 
 /* Play / Pause shortcut label */
 "Play / Pause" = "Play / Pausa";
@@ -491,10 +491,10 @@
 "Still available for %@" = "Anc accessibel per %@";
 
 /* Title of a subscription button */
-"Subscribe" = "Subscribe";
+"Subscribe" = "Abunar";
 
 /* Title of the message displayed when the user is about to subscribe to all shows */
-"Subscribe to all shows?" = "Subscribe to all shows?";
+"Subscribe to all shows?" = "Abunar tuttas emissiuns";
 
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Aboneschà la show che interessescha tai. Lasuenter retschaivas ti in messadi tar novas episodas.";

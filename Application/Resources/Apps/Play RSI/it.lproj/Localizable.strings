@@ -491,10 +491,10 @@
 "Still available for %@" = "Disponibile ancora per %@";
 
 /* Title of a subscription button */
-"Subscribe" = "Subscribe";
+"Subscribe" = "Abbonati";
 
 /* Title of the message displayed when the user is about to subscribe to all shows */
-"Subscribe to all shows?" = "Subscribe to all shows?";
+"Subscribe to all shows?" = "Abbonarsi a tutti i programmi?";
 
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Abbonati ai programmi che preferisci. Riceverai una notifica ogni volta che un nuovo episodio sarà disponibile.";

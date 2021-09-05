@@ -431,7 +431,7 @@
 "Resume" = "Weiter abspielen";
 
 /* Title label used to present medias whose playback can be resumed */
-"Resume playback" = "Weiterschauen";
+"Resume playback" = "Fortsetzen";
 
 /* Label to present the search view
    Search placeholder text
@@ -491,10 +491,10 @@
 "Still available for %@" = "Noch %@ online";
 
 /* Title of a subscription button */
-"Subscribe" = "Subscribe";
+"Subscribe" = "Abonnieren";
 
 /* Title of the message displayed when the user is about to subscribe to all shows */
-"Subscribe to all shows?" = "Subscribe to all shows?";
+"Subscribe to all shows?" = "Alle Sendungen Abonnieren";
 
 /* Message displayed when no notifications have been received */
 "Subscribe to shows you like to be notified when a new episode is available." = "Aktivieren Sie Push-Mitteilungen, damit Sie eine Mitteilung erhalten, wenn eine neue Episode einer Sendung verfügbar ist.";
