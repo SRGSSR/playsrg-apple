@@ -24,7 +24,7 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
             let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
             listItem.accessoryType = .disclosureIndicator
             listItem.handler = { [weak self] _, completion in
-                guard let strongSelf = self else { return }
+                guard let self = self else { return }
                 
                 // Play letterbox
                 if let controller = SRGLetterboxService.shared.controller {
@@ -37,7 +37,7 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
                 
                 // Create now playing template
                 let nowPlayingTemplate = CPNowPlayingTemplate.shared
-                strongSelf.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
+                self.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
                     completion()
                 })
             }
@@ -56,8 +56,8 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         // Get radio live streams
         model.$medias
             .sink { [weak self] medias in
-                guard let strongSelf = self else { return }
-                strongSelf.updateRadioLiveStreams(medias: medias)
+                guard let self = self else { return }
+                self.updateRadioLiveStreams(medias: medias)
             }
             .store(in: &cancellables)
         
