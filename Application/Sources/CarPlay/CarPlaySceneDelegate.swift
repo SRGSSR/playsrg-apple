@@ -23,7 +23,7 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         for media in medias {
             let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
             listItem.accessoryType = .disclosureIndicator
-            listItem.handler = { [weak self] item, completion in
+            listItem.handler = { [weak self] _, completion in
                 guard let strongSelf = self else { return }
                 
                 // Play letterbox
@@ -96,4 +96,3 @@ extension CarPlaySceneDelegate {
     }
     
 }
-
