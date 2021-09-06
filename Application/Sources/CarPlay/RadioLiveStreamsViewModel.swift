@@ -10,7 +10,7 @@ import Foundation
 
 final class RadioLiveStreamsViewModel: ObservableObject {
     @Published private(set) var medias: [SRGMedia] = []
-
+    
     init() {
         SRGDataProvider.current!
             .radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .all)

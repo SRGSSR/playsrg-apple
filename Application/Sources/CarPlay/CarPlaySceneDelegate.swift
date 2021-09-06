@@ -14,12 +14,12 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     private var model = RadioLiveStreamsViewModel()
     private var cancellables = Set<AnyCancellable>()
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
-
+    
     // MARK: - Custom Functions
     func updateRadioLiveStreams(medias: [SRGMedia]) {
         
         var items: [CPListItem] = []
-
+        
         for media in medias {
             let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
             listItem.accessoryType = .disclosureIndicator
@@ -41,7 +41,7 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
                     completion()
                 })
             }
-
+            
             items.append(listItem)
         }
         let section = CPListSection(items: items)
