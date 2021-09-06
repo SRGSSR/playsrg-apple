@@ -54,6 +54,8 @@
                                                                                                  options:@{ UIPageViewControllerOptionInterPageSpacingKey : @100.f }];
         pageViewController.delegate = self;
         self.pageViewController = pageViewController;
+        
+        [self addChildViewController:pageViewController];
     }
     return self;
 }
@@ -81,8 +83,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self addChildViewController:self.pageViewController];
     
     UIView *pageView = self.pageViewController.view;
     pageView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -148,8 +148,18 @@
     
     [self updateFonts];
     
-    NSDate *date = ([self.initialDate compare:self.calendar.today] == NSOrderedAscending) ? self.initialDate : self.calendar.today;
-    [self showMediasForDate:date animated:NO];
+    if (self.initialDate) {
+        // Minimum / maximum dates read from the calendar directly have an incorrect value
+        NSDate *minimumDate = [self minimumDateForCalendar:self.calendar];
+        NSDate *maximumDate = [self maximumDateForCalendar:self.calendar];
+        
+        NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:minimumDate endDate:maximumDate];
+        NSDate *date = [dateInterval containsDate:self.initialDate] ? self.initialDate : self.calendar.today;
+        [self showMediasForDate:date animated:NO];
+    }
+    else {
+        [self showMediasForDate:self.calendar.today animated:NO];
+    }
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)

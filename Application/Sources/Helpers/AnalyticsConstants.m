@@ -80,15 +80,15 @@ AnalyticsTitle const AnalyticsTitleWatchLaterRemove = @"watch_later_remove";
 AnalyticsSource const AnalyticsSourceAutomatic = @"automatic";
 AnalyticsSource const AnalyticsSourceButton = @"button";
 AnalyticsSource const AnalyticsSourceClose = @"close";
-AnalyticsSource const AnalyticsSourceDeepLink = @"deep_link";
+AnalyticsSource const AnalyticsSourceCustomURL = @"scheme_url";
 AnalyticsSource const AnalyticsSourceHandoff = @"handoff";
 AnalyticsSource const AnalyticsSourceLongPress = @"long_click";
 AnalyticsSource const AnalyticsSourceNotification = @"notification";
 AnalyticsSource const AnalyticsSourceNotificationPush = @"push_notification";
 AnalyticsSource const AnalyticsSourcePeekMenu = @"peek_menu";
-AnalyticsSource const AnalyticsSourceSchemeURL = @"scheme_url";
 AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
+AnalyticsSource const AnalyticsSourceUniversalLink = @"deep_link";
 
 AnalyticsType const AnalyticsTypeActionLive = @"openlive";
 AnalyticsType const AnalyticsTypeActionFavorites = @"openfavorites";

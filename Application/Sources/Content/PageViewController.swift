@@ -346,8 +346,14 @@ extension PageViewController: PlayApplicationNavigation {
         case .showByDate:
             let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
             if let navigationController = navigationController {
-                let calendarViewController = CalendarViewController(radioChannel: applicationSectionInfo.radioChannel, date: date)
-                navigationController.pushViewController(calendarViewController, animated: false)
+                if let radioChannel = applicationSectionInfo.radioChannel {
+                    let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: date)
+                    navigationController.pushViewController(calendarViewController, animated: false)
+                }
+                else {
+                    let programGuideViewController = ProgramGuideViewController(date: date)
+                    navigationController.pushViewController(programGuideViewController, animated: false)
+                }
             }
             return true
         case .showAZ:

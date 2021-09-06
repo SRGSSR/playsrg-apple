@@ -8,13 +8,6 @@
 
 @implementation NSArray (PlaySRG)
 
-- (NSArray *)play_arrayByInsertingObject:(id)object atIndex:(NSUInteger)index
-{
-    NSMutableArray *mutableArray = self.mutableCopy;
-    [mutableArray insertObject:object atIndex:index];
-    return mutableArray.copy;
-}
-
 - (NSArray *)play_arrayByRemovingObjectAtIndex:(NSUInteger)index
 {
     NSMutableArray *mutableArray = self.mutableCopy;

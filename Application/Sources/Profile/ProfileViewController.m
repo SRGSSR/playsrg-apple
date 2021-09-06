@@ -118,8 +118,9 @@
     [self reloadData];
     
     // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
-    // automatically onto the primary at startup for narrow layouts, which is not what we want).
-    if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    // automatically onto the primary at startup for narrow layouts, which is not what we want). We must still avoid
+    // overriding a section if already installed before by application shorcuts.
+    if (! self.currentSectionInfo && [self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
     }
 }

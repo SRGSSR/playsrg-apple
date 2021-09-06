@@ -54,6 +54,7 @@
         }
         
         self.pageViewController = pageViewController;
+        [self addChildViewController:pageViewController];
     }
     return self;
 }
@@ -69,8 +70,6 @@
 {
     self.view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.view.backgroundColor = UIColor.srg_gray16Color;
-    
-    [self addChildViewController:self.pageViewController];
     
     UIView *pageView = self.pageViewController.view;
     pageView.translatesAutoresizingMaskIntoConstraints = NO;

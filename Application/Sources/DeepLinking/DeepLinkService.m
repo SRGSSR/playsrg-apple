@@ -15,17 +15,9 @@
 @import SRGNetwork;
 @import UIKit;
 
-NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
+static DeepLinkService *s_currentService;
 
-DeeplinkAction const DeeplinkActionMedia = @"media";
-DeeplinkAction const DeeplinkActionShow = @"show";
-DeeplinkAction const DeeplinkActionTopic = @"topic";
-DeeplinkAction const DeeplinkActionHome = @"home";
-DeeplinkAction const DeeplinkActionAZ = @"az";
-DeeplinkAction const DeeplinkActionByDate = @"bydate";
-DeeplinkAction const DeeplinkActionSection = @"section";
-DeeplinkAction const DeeplinkActionSearch = @"search";
-DeeplinkAction const DeeplinkActionLink = @"link";
+NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceName";
 
 @interface DeepLinkService ()
 
@@ -35,6 +27,18 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 @end
 
 @implementation DeepLinkService
+
+#pragma mark Class methods
+
++ (DeepLinkService *)currentService
+{
+    return s_currentService;
+}
+
++ (void)setCurrentService:(DeepLinkService *)currentService
+{
+    s_currentService = currentService;
+}
 
 #pragma mark Object lifecycle
 
@@ -73,7 +77,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
 
 #pragma mark Getters and setters
 
-- (NSURL *)schemeURLFromWebURL:(NSURL *)URL
+- (NSURL *)customURLFromWebURL:(NSURL *)URL
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:NO];
     
@@ -94,7 +98,15 @@ DeeplinkAction const DeeplinkActionLink = @"link";
                                                      URLComponents.path ?: NSNull.null,
                                                      queryItems.copy,
                                                      URLComponents.fragment ?: NSNull.null ]];
-    NSURL *playURL = [NSURL URLWithString:result.toString];
+    NSString *resultString = result.toString;
+    if ([resultString isEqualToString:@"null"]) {
+        return nil;
+    }
+    
+    NSURL *playURL = [NSURL URLWithString:resultString];
+    if (! playURL) {
+        return nil;
+    }
     
     if ([playURL.host.lowercaseString isEqualToString:@"unsupported"]) {
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
@@ -104,7 +116,7 @@ DeeplinkAction const DeeplinkActionLink = @"link";
         [report setString:URL.absoluteString forKey:@"url"];
         [report finish];
         
-        playURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@://open", playURL.scheme]];
+        return nil;
     }
     
     return playURL;

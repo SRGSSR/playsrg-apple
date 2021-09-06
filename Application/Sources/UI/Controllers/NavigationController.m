@@ -175,7 +175,7 @@
 {
     [self popToRootViewControllerAnimated:NO];
     
-    UIViewController *rootViewController = self.viewControllers[0];
+    UIViewController *rootViewController = self.viewControllers.firstObject;
     if ([rootViewController conformsToProtocol:@protocol(PlayApplicationNavigation)]) {
         UIViewController<PlayApplicationNavigation> *navigableRootViewController = (UIViewController<PlayApplicationNavigation> *)rootViewController;
         return [navigableRootViewController openApplicationSectionInfo:applicationSectionInfo];

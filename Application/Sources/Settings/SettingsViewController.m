@@ -17,6 +17,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
+#import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -415,7 +416,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
         if (appCenterURL) {
             SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
-            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }

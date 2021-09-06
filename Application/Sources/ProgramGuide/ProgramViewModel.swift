@@ -129,8 +129,8 @@ final class ProgramViewModel: ObservableObject {
     var playAction: (() -> Void)? {
         if let media = currentMedia, media.blockingReason(at: Date()) == .none {
             return {
-                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
-                appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
+                tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
         }
         else {
@@ -148,22 +148,22 @@ final class ProgramViewModel: ObservableObject {
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
-                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
                 if HistoryCanResumePlaybackForMedia(media) {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
                                                             message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
-                        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
-                        appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                        tabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
-                    appDelegate.rootTabBarController.play_top.present(alertController, animated: true, completion: nil)
+                    tabBarController.play_top.present(alertController, animated: true, completion: nil)
                 }
                 else {
-                    appDelegate.rootTabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                    tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                 }
             }
         )
@@ -175,10 +175,13 @@ final class ProgramViewModel: ObservableObject {
             icon: "episodes",
             label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
             action: {
-                guard let appDelegate = UIApplication.shared.delegate as? PlayAppDelegate else { return }
+                guard let tabBarController = UIApplication.shared.mainTabBarController,
+                      let window = UIApplication.shared.mainWindow else {
+                    return
+                }
                 let showViewController = SectionViewController.showViewController(for: show)
-                appDelegate.rootTabBarController.pushViewController(showViewController, animated: false)
-                appDelegate.window.play_dismissAllViewControllers(animated: true, completion: nil)
+                tabBarController.pushViewController(showViewController, animated: false)
+                window.play_dismissAllViewControllers(animated: true, completion: nil)
             }
         )
     }

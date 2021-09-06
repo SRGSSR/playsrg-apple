@@ -7,7 +7,7 @@
 import Foundation
 import Combine
 
-class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
+class LetterboxDelegate: NSObject {
     static let shared = LetterboxDelegate()
     
     var cancellables = Set<AnyCancellable>()
@@ -29,9 +29,9 @@ class LetterboxDelegate: NSObject, SRGLetterboxViewControllerDelegate {
             }
             .store(in: &cancellables)
     }
+}
 
-    // MARK: - SRGLetterboxViewControllerDelegate protocol
-
+extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didEngageInContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue

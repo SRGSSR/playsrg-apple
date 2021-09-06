@@ -62,29 +62,4 @@ OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show);
  */
 OBJC_EXPORT BOOL FavoritesIsSubscribedToShow(SRGShow * _Nonnull show);
 
-#if TARGET_OS_IOS
-
-/**
- *  @name Setup
- */
-
-/**
- *  Setup Favorites to synchronize subscribed shows at any time.
- *
- *  @discussion Needs to be called after the Push Service setup.
- */
-OBJC_EXPORT void FavoritesSetup(void);
-    
-
-/**
- *  @name Migration
- */
-
-/**
- *  Migrate depretaced favorites (legacy plist-based way of bookmarking shows) and subscriptions, if any to Favorites.
- */
-OBJC_EXPORT void FavoritesMigrate(void);
-
-#endif
-
 NS_ASSUME_NONNULL_END

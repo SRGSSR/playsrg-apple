@@ -6,6 +6,8 @@
 
 #import "StoreReview.h"
 
+#import "PlaySRG-Swift.h"
+
 @import StoreKit;
 
 @implementation StoreReview
@@ -19,7 +21,7 @@
     NSInteger requestCount = [NSUserDefaults.standardUserDefaults integerForKey:kRequestCountUserDefaultsKey] + 1;
     static const NSInteger kRequestCountThreshold = 50;
     if (requestCount >= kRequestCountThreshold) {
-        UIWindowScene *windowScene = UIApplication.sharedApplication.delegate.window.windowScene;
+        UIWindowScene *windowScene = UIApplication.sharedApplication.mainWindowScene;
         [SKStoreReviewController requestReviewInScene:windowScene];
         requestCount = 0;
     }

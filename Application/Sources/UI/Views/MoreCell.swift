@@ -8,7 +8,6 @@ import SwiftUI
 
 // MARK: View
 
-// TODO: Improve implementation once we know what to do
 struct MoreCell: View {
     let section: Content.Section
     let imageType: SRGImageType

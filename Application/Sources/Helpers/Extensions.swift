@@ -413,3 +413,36 @@ extension UIViewController {
         }
     }
 }
+
+extension UIApplication {
+    /// Return the main window scene among all connected scenes, if any.
+    @objc var mainWindowScene: UIWindowScene? {
+        return connectedScenes
+            .filter { $0.delegate is SceneDelegate }
+            .compactMap { $0 as? UIWindowScene }
+            .first
+    }
+    
+    /// Return the main key window among all connected scenes, if any.
+    @objc var mainWindow: UIWindow? {
+        return mainWindowScene?.windows
+            .first { $0.isKeyWindow }
+    }
+    
+    /// Return the main scene delegate, if any.
+    @objc var mainSceneDelegate: SceneDelegate? {
+        return mainWindowScene?.delegate as? SceneDelegate
+    }
+    
+    /// Return the main top view controller, if any.
+    @objc var mainTopViewController: UIViewController? {
+        return mainWindow?.play_topViewController
+    }
+
+    #if os(iOS)
+    /// Return the main tab bar root controller, if any.
+    @objc var mainTabBarController: TabBarController? {
+        return mainWindow?.rootViewController as? TabBarController
+    }
+    #endif
+}

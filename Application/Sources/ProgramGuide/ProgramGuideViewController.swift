@@ -17,13 +17,14 @@ final class ProgramGuideViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(date: Date = Date()) {
-        model = ProgramGuideViewModel(date: date)
+    init(date: Date? = nil) {
+        model = ProgramGuideViewModel(date: date ?? Date())
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
         super.init(nibName: nil, bundle: nil)
         title = NSLocalizedString("TV guide", comment: "TV program guide view title")
+        addChild(pageViewController)
     }
     
     required init?(coder: NSCoder) {
@@ -57,7 +58,6 @@ final class ProgramGuideViewController: UIViewController {
         pageViewController.dataSource = self
         pageViewController.delegate = self
         
-        addChild(pageViewController)
         if let pageView = pageViewController.view {
             pageView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(pageView)
