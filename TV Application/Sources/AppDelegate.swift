@@ -101,33 +101,4 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default", sessionRole: connectingSceneSession.role)
     }
-    
-    // See URL_SCHEMES.md
-    func application(_ application: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        guard let deeplLinkAction = url.host else { return false }
-        
-        if deeplLinkAction == "media" {
-            let mediaUrn = url.lastPathComponent
-            SRGDataProvider.current?.media(withUrn: mediaUrn)
-                .receive(on: DispatchQueue.main)
-                .sink { _ in
-                } receiveValue: { media in
-                    navigateToMedia(media)
-                }
-                .store(in: &cancellables)
-            return true
-        }
-        else if deeplLinkAction == "show" {
-            let showUrn = url.lastPathComponent
-            SRGDataProvider.current?.show(withUrn: showUrn)
-                .receive(on: DispatchQueue.main)
-                .sink { _ in
-                } receiveValue: { show in
-                    navigateToShow(show)
-                }
-                .store(in: &cancellables)
-            return true
-        }
-        return false
-    }
 }

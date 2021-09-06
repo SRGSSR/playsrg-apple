@@ -86,6 +86,44 @@ class SceneDelegate: UIResponder {
             return viewControllers.first!
         }
     }
+    
+    private func handleURLContexts(_ urlContexts: Set<UIOpenURLContext>) {
+        // FIXME: Works as long as only one context is received
+        guard let urlContext = urlContexts.first else { return }
+        
+        actionFromURL(urlContext.url)
+    }
+    
+    /**
+     *  Describes a deep link action (also see CUSTOM_URLS_AND_UNIVERSAL_LINKS.md). The list of supported URLs currently includes:
+     *
+     *    [scheme]://media/[media_urn]
+     *    [scheme]://show/[show_urn]
+     */
+    private func actionFromURL(_ url: URL) {
+        guard let deeplLinkAction = url.host else { return }
+        
+        if deeplLinkAction == "media" {
+            let mediaUrn = url.lastPathComponent
+            SRGDataProvider.current?.media(withUrn: mediaUrn)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                } receiveValue: { media in
+                    navigateToMedia(media)
+                }
+                .store(in: &cancellables)
+        }
+        else if deeplLinkAction == "show" {
+            let showUrn = url.lastPathComponent
+            SRGDataProvider.current?.show(withUrn: showUrn)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                } receiveValue: { show in
+                    navigateToShow(show)
+                }
+                .store(in: &cancellables)
+        }
+    }
 }
 
 extension SceneDelegate: UIWindowSceneDelegate {
@@ -94,5 +132,11 @@ extension SceneDelegate: UIWindowSceneDelegate {
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
         window!.rootViewController = applicationRootViewController()
+        
+        handleURLContexts(connectionOptions.urlContexts)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        handleURLContexts(URLContexts)
     }
 }

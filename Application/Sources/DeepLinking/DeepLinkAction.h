@@ -26,7 +26,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeLink;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
 
 /**
- *  Describes a deep link action (also see URL_SCHEMES.md). The list of supported URLs currently includes:
+ *  Describes a deep link action (also see CUSTOM_URLS_AND_UNIVERSAL_LINKS.md). The list of supported URLs currently includes:
  *
  *    [scheme]://media/[media_urn] (optional query parameters: channel_id=[channel_id], start_time=[start_position_seconds])
  *    [scheme]://show/[show_urn] (optional query parameter: channel_id=[channel_id])
