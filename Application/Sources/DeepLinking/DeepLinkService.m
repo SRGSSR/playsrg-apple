@@ -98,10 +98,15 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
                                                      URLComponents.path ?: NSNull.null,
                                                      queryItems.copy,
                                                      URLComponents.fragment ?: NSNull.null ]];
-    NSURL *resultURL = [NSURL URLWithString:result.toString];
+    NSString *resultString = result.toString;
+    if ([resultString isEqualToString:@"null"]) {
+        return nil;
+    }
     
-    // JS result can return "null" or a JS error. Keep only URLs with a host.
-    NSURL *playURL = resultURL.host ? resultURL : nil;
+    NSURL *playURL = [NSURL URLWithString:resultString];
+    if (! playURL) {
+        return nil;
+    }
     
     if ([playURL.host.lowercaseString isEqualToString:@"unsupported"]) {
         SRGDiagnosticReport *report = [[SRGDiagnosticsService serviceWithName:DeepLinkDiagnosticsServiceName] reportWithName:URL.absoluteString];
@@ -111,7 +116,7 @@ NSString * const DeepLinkDiagnosticsServiceName = @"DeepLinkDiagnosticsServiceNa
         [report setString:URL.absoluteString forKey:@"url"];
         [report finish];
         
-        playURL = nil;
+        return nil;
     }
     
     return playURL;
