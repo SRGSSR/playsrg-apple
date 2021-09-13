@@ -8,7 +8,7 @@ import Combine
 import CarPlay
 import SRGLetterbox
 
-class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
+class CarPlaySceneDelegate: UIResponder {
     
     var interfaceController: CPInterfaceController?
     private var model = RadioLiveStreamsViewModel()
@@ -48,7 +48,11 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
         radioLiveStreamsListTemplate.updateSections([section])
     }
     
-    // MARK: - CPTemplateApplicationScene
+}
+
+// MARK : - CPTemplateApplicationSceneDelegate
+extension CarPlaySceneDelegate : CPTemplateApplicationSceneDelegate {
+    
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
         
         self.interfaceController = interfaceController
@@ -71,7 +75,6 @@ class CarPlaySceneDelegate: UIResponder, CPTemplateApplicationSceneDelegate {
     private func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnect interfaceController: CPInterfaceController) {
         self.interfaceController = nil
     }
-    
 }
 
 // MARK: - Properties
