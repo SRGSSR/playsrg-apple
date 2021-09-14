@@ -23,6 +23,7 @@ struct HeroMediaCell: View {
         #else
         MainView(media: media, label: label)
             .background(Color.white.opacity(0.1))
+            .cornerRadius(LayoutStandardViewCornerRadius)
             .selectionAppearance(when: isSelected)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
         #endif
