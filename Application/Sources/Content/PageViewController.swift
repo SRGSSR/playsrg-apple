@@ -461,8 +461,14 @@ extension PageViewController: ShowAccessCellActions {
         if let navigationController = navigationController {
             switch model.id {
             case .video:
-                let programGuideViewController = ProgramGuideViewController()
-                navigationController.pushViewController(programGuideViewController, animated: true)
+                if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+                    let programGuideViewController = ProgramGuideViewController()
+                    navigationController.pushViewController(programGuideViewController, animated: true)
+                }
+                else {
+                    let calendarViewController = CalendarViewController(radioChannel: nil, date: nil)
+                    navigationController.pushViewController(calendarViewController, animated: true)
+                }
             default:
                 let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
                 navigationController.pushViewController(calendarViewController, animated: true)
@@ -672,7 +678,8 @@ private extension PageViewController {
                 case .showAccess:
                     switch id {
                     case .video:
-                        ShowAccessCell(style: .programGuide)
+                        let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
+                        ShowAccessCell(style: style)
                     default:
                         ShowAccessCell(style: .calendar)
                     }
