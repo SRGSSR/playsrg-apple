@@ -9,6 +9,10 @@ import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
+#if os(iOS)
+import GoogleCast
+#endif
+
 // MARK: View controller
 
 final class PageViewController: UIViewController {
@@ -96,9 +100,7 @@ final class PageViewController: UIViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
         
-        if model.id.supportsCastButton, let navigationBar = navigationController?.navigationBar {
-            navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
-        }
+        addGoogleCastButton(to: view)
         #endif
         
         self.view = view
@@ -198,6 +200,45 @@ final class PageViewController: UIViewController {
     }
     #endif
 }
+
+// MARK: View construction
+
+#if os(iOS)
+private extension PageViewController {
+    static let googleCastButtonSide: CGFloat = 44
+    
+    private func addGoogleCastButton(to view: UIView) {
+        if model.id.supportsCastButton {
+            if model.id.navigationBarHidden {
+                let castButton = GCKUICastButton(frame: .zero)
+                castButton.tintColor = .white
+                castButton.backgroundColor = .srgGray23
+                castButton.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(castButton)
+                
+                let layer = castButton.layer
+                layer.cornerRadius = Self.googleCastButtonSide / 2
+                layer.shadowOpacity = 0.8
+                layer.shadowOffset = CGSize(width: 0, height: 3)
+                layer.shadowRadius = 5
+                
+                // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
+                // result (might be fragile but should be enough).
+                let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
+                NSLayoutConstraint.activate([
+                    castButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                    castButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                    castButton.widthAnchor.constraint(equalToConstant: Self.googleCastButtonSide),
+                    castButton.heightAnchor.constraint(equalToConstant: Self.googleCastButtonSide)
+                ])
+            }
+            else if let navigationBar = navigationController?.navigationBar {
+                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+            }
+        }
+    }
+}
+#endif
 
 // MARK: Types
 
