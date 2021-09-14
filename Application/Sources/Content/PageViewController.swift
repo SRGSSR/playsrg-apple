@@ -27,6 +27,7 @@ final class PageViewController: UIViewController {
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
+    private weak var googleCastButton: GCKUICastButton?
     #endif
     
     private var refreshTriggered = false
@@ -99,8 +100,6 @@ final class PageViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        
-        addGoogleCastButton(to: view)
         #endif
         
         self.view = view
@@ -151,6 +150,12 @@ final class PageViewController: UIViewController {
                 Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
             }
             .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+            .sink { [weak self] _ in
+                self?.updateNavigationBar(animated: true)
+            }
+            .store(in: &cancellables)
         #endif
     }
     
@@ -158,7 +163,9 @@ final class PageViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
-        navigationController?.setNavigationBarHidden(model.id.navigationBarHidden, animated: animated)
+        #if os(iOS)
+        updateNavigationBar(animated: animated)
+        #endif
     }
     
     #if os(iOS)
@@ -192,32 +199,26 @@ final class PageViewController: UIViewController {
     }
     
     #if os(iOS)
-    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-        refreshTriggered = true
-    }
-    #endif
-}
-
-// MARK: View construction
-
-#if os(iOS)
-private extension PageViewController {
-    static let googleCastButtonSide: CGFloat = 44
-    
-    private func addGoogleCastButton(to view: UIView) {
+    private func updateNavigationBar(animated: Bool) {
+        let isNavigationBarHidden = model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+        
         if model.id.supportsCastButton {
-            if model.id.navigationBarHidden {
-                let castButton = GCKUICastButton(frame: .zero)
-                castButton.tintColor = .white
-                castButton.backgroundColor = .srgGray23
-                castButton.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(castButton)
+            if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
+                self.googleCastButton?.removeFromSuperview()
+                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+            }
+            else if self.googleCastButton == nil {
+                let googleCastButtonSide: CGFloat = 44
                 
-                let layer = castButton.layer
-                layer.cornerRadius = Self.googleCastButtonSide / 2
+                let googleCastButton = GCKUICastButton(frame: .zero)
+                googleCastButton.tintColor = .white
+                googleCastButton.backgroundColor = .srgGray23
+                googleCastButton.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(googleCastButton)
+                self.googleCastButton = googleCastButton
+                
+                let layer = googleCastButton.layer
+                layer.cornerRadius = googleCastButtonSide / 2
                 layer.shadowOpacity = 0.8
                 layer.shadowOffset = CGSize(width: 0, height: 3)
                 layer.shadowRadius = 5
@@ -226,19 +227,28 @@ private extension PageViewController {
                 // result (might be fragile but should be enough).
                 let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
                 NSLayoutConstraint.activate([
-                    castButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
-                    castButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                    castButton.widthAnchor.constraint(equalToConstant: Self.googleCastButtonSide),
-                    castButton.heightAnchor.constraint(equalToConstant: Self.googleCastButtonSide)
+                    googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                    googleCastButton.widthAnchor.constraint(equalToConstant: googleCastButtonSide),
+                    googleCastButton.heightAnchor.constraint(equalToConstant: googleCastButtonSide)
                 ])
             }
-            else if let navigationBar = navigationController?.navigationBar {
-                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
-            }
         }
+        else {
+            self.googleCastButton?.removeFromSuperview()
+        }
+        
+        navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
     }
+    
+    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+        refreshTriggered = true
+    }
+    #endif
 }
-#endif
 
 // MARK: Types
 
