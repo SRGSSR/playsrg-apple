@@ -45,9 +45,6 @@ struct HeroMediaCell: View {
             ZStack {
                 MediaVisualView(media: media, scale: .large, contentMode: .fill) { media in
                     if media != nil {
-                        #if os(iOS)
-                        LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.6)]), startPoint: .center, endPoint: .top)
-                        #endif
                         LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.6)]), startPoint: .center, endPoint: .bottom)
                     }
                 }
