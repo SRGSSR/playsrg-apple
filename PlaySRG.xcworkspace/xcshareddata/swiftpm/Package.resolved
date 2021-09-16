@@ -312,8 +312,8 @@
         "repositoryURL": "https://github.com/apple/swift-collections.git",
         "state": {
           "branch": null,
-          "revision": "9d8719c8bebdc79740b6969c912ac706eb721d7a",
-          "version": "0.0.7"
+          "revision": "07e47b1e93e5a1e0ef0c50fcb2d6739fb6be4003",
+          "version": "1.0.0"
         }
       },
       {
