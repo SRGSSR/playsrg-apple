@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
         "state": {
           "branch": null,
-          "revision": "7720559205c06ebc5c2660b3152922a39dd9a2fd",
-          "version": "1.7.1"
+          "revision": "9b9a68ad1f73e838e9d8f9ea948f0ed83d0f8ccd",
+          "version": "1.7.2"
         }
       },
       {
@@ -24,8 +24,8 @@
         "repositoryURL": "https://github.com/microsoft/appcenter-sdk-apple.git",
         "state": {
           "branch": null,
-          "revision": "6d60d2361445e959b4fbb3a9d0dbae0e07eead1a",
-          "version": "4.2.0"
+          "revision": "25f64229373de97ff3920941cd52203193e5d8be",
+          "version": "4.3.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "d28849cb12de765d013b7222123bd3b8ae8c4f0a",
-          "version": "8.6.0"
+          "revision": "2f972249c520cbf87ac8856f176ebc994cb1c9a6",
+          "version": "8.7.0"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "06e74ef7ee7326e1af724d462091eed1e5c6fb4a",
-          "version": "8.3.1"
+          "revision": "4901bde146b0269da35470d261f741f0e910d8df",
+          "version": "8.7.0"
         }
       },
       {
@@ -87,8 +87,8 @@
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {
           "branch": null,
-          "revision": "9e79fd8deddbef5646fbb5dbb3eaf963e338f007",
-          "version": "9.1.0"
+          "revision": "7fb27ea49414b9c5483503cd06baa821c8654d1e",
+          "version": "9.1.1"
         }
       },
       {
@@ -96,8 +96,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "2e364ff22e952c3bcb202263a9a0d26e46c1b172",
-          "version": "7.5.1"
+          "revision": "616fac2626b6b2d1424d79a6f786b4e2ed1cfb49",
+          "version": "7.5.2"
         }
       },
       {
@@ -114,8 +114,8 @@
         "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
         "state": {
           "branch": null,
-          "revision": "424886f9336a71891aa81852d0c2c08d807d21aa",
-          "version": "1.6.1"
+          "revision": "bc6a19702ac76ac4e488b68148710eb815f9bc56",
+          "version": "1.7.0"
         }
       },
       {
@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "40530d1a58ea55344df3e187ed8986b7bf8451f1",
-          "version": "14.6.1"
+          "revision": "73a177dfc53a6e4ee26aa3cb4d90a4fbc7ee0553",
+          "version": "14.6.2"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "c0b32b0d7154afceb3fc08b199492f125ff4267e",
-          "version": "10.3.3"
+          "revision": "0db18dd34998cca18e9a28bcee136f84518007a0",
+          "version": "10.4.1"
         }
       },
       {
@@ -195,8 +195,8 @@
         "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
         "state": {
           "branch": null,
-          "revision": "d747ab5de269cd44022bbe96ff9609d8626694ab",
-          "version": "1.9.0"
+          "revision": "59513acde6194d93617afcf7b2c81c88638a6af2",
+          "version": "1.10.0"
         }
       },
       {
@@ -312,8 +312,8 @@
         "repositoryURL": "https://github.com/apple/swift-collections.git",
         "state": {
           "branch": null,
-          "revision": "0959ba76a1d4a98fd11163aa83fd49c25b93bfae",
-          "version": "0.0.5"
+          "revision": "9d8719c8bebdc79740b6969c912ac706eb721d7a",
+          "version": "0.0.7"
         }
       },
       {

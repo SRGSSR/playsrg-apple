@@ -22,7 +22,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Aiolos</string>
 			<key>Title</key>
-			<string>Aiolos (1.7.1)</string>
+			<string>Aiolos (1.7.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -30,7 +30,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/appcenter-sdk-apple</string>
 			<key>Title</key>
-			<string>AppCenter (4.2.0)</string>
+			<string>AppCenter (4.3.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (8.6.0)</string>
+			<string>Firebase (8.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (8.3.1)</string>
+			<string>GoogleAppMeasurement (8.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleDataTransport</string>
 			<key>Title</key>
-			<string>GoogleDataTransport (9.1.0)</string>
+			<string>GoogleDataTransport (9.1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -118,7 +118,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleUtilities</string>
 			<key>Title</key>
-			<string>GoogleUtilities (7.5.1)</string>
+			<string>GoogleUtilities (7.5.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/gtm-session-fetcher</string>
 			<key>Title</key>
-			<string>GTMSessionFetcher (1.6.1)</string>
+			<string>GTMSessionFetcher (1.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>Airship (14.6.1)</string>
+			<string>Airship (14.6.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -222,7 +222,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Nuke</string>
 			<key>Title</key>
-			<string>Nuke (10.3.3)</string>
+			<string>Nuke (10.4.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -238,7 +238,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/PLCrashReporter</string>
 			<key>Title</key>
-			<string>PLCrashReporter (1.9.0)</string>
+			<string>PLCrashReporter (1.10.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (0.0.5)</string>
+			<string>swift-collections (0.0.7)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
