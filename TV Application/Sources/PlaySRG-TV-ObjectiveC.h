@@ -30,6 +30,7 @@
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
+#import "UICollectionView+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIImageView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
