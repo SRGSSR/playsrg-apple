@@ -67,7 +67,7 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
                     .unredactable()
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             } label: {
                 DescriptionView(media: media, style: style)
                     .padding(.top, verticalPadding)
@@ -165,7 +165,11 @@ private extension MediaCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
+        #if os(tvOS)
+        return .isButton
+        #else
         return isSelected ? .isSelected : []
+        #endif
     }
 }
 

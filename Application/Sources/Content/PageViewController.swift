@@ -9,6 +9,10 @@ import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
+#if os(iOS)
+import GoogleCast
+#endif
+
 // MARK: View controller
 
 final class PageViewController: UIViewController {
@@ -23,6 +27,7 @@ final class PageViewController: UIViewController {
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
+    private weak var googleCastButton: GCKUICastButton?
     #endif
     
     private var refreshTriggered = false
@@ -95,10 +100,6 @@ final class PageViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        
-        if model.id.supportsCastButton, let navigationBar = navigationController?.navigationBar {
-            navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
-        }
         #endif
         
         self.view = view
@@ -149,6 +150,12 @@ final class PageViewController: UIViewController {
                 Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
             }
             .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+            .sink { [weak self] _ in
+                self?.updateNavigationBar(animated: true)
+            }
+            .store(in: &cancellables)
         #endif
     }
     
@@ -156,6 +163,9 @@ final class PageViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
+        #if os(iOS)
+        updateNavigationBar(animated: animated)
+        #endif
     }
     
     #if os(iOS)
@@ -189,6 +199,48 @@ final class PageViewController: UIViewController {
     }
     
     #if os(iOS)
+    private func updateNavigationBar(animated: Bool) {
+        let isNavigationBarHidden = model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+        
+        if model.id.supportsCastButton {
+            if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
+                self.googleCastButton?.removeFromSuperview()
+                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+            }
+            else if self.googleCastButton == nil {
+                let googleCastButtonSide: CGFloat = 44
+                
+                let googleCastButton = GCKUICastButton(frame: .zero)
+                googleCastButton.tintColor = .white
+                googleCastButton.backgroundColor = .srgGray23
+                googleCastButton.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(googleCastButton)
+                self.googleCastButton = googleCastButton
+                
+                let layer = googleCastButton.layer
+                layer.cornerRadius = googleCastButtonSide / 2
+                layer.shadowOpacity = 0.8
+                layer.shadowOffset = CGSize(width: 0, height: 3)
+                layer.shadowRadius = 5
+                
+                // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
+                // result (might be fragile but should be enough).
+                let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
+                NSLayoutConstraint.activate([
+                    googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+                    googleCastButton.widthAnchor.constraint(equalToConstant: googleCastButtonSide),
+                    googleCastButton.heightAnchor.constraint(equalToConstant: googleCastButtonSide)
+                ])
+            }
+        }
+        else {
+            self.googleCastButton?.removeFromSuperview()
+        }
+        
+        navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
+    }
+    
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
@@ -471,7 +523,13 @@ private extension PageViewController {
                 switch section.viewModelProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
+                    layoutSection.orthogonalScrollingBehavior = .groupPaging
+                    return layoutSection
+                case .headline:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                        return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
@@ -559,7 +617,9 @@ private extension PageViewController {
         var body: some View {
             switch section.viewModelProperties.layout {
             case .hero:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
+                HeroMediaCell(media: media, label: section.properties.label)
+            case .headline:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
             case .highlight, .highlightSwimlane:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             case .liveMediaSwimlane, .liveMediaGrid:
@@ -578,8 +638,8 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
+            case .hero, .headline:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:

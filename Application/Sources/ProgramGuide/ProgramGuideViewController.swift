@@ -83,6 +83,11 @@ final class ProgramGuideViewController: UIViewController {
             .store(in: &cancellables)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
     private func switchToDay(_ day: SRGDay) {
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
               currentViewController.day != day else {

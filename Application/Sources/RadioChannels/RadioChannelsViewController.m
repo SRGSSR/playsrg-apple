@@ -107,16 +107,12 @@
             self.navigationSubtitleLabel = navigationSubtitleLabel;
         }
         
-        NSDictionary<NSAttributedStringKey, id> *attributes = navigationBar.titleTextAttributes;
-        UIFont *font = attributes[NSFontAttributeName] ?: [UIFont systemFontOfSize:18.f];
-        
-        NSMutableDictionary<NSAttributedStringKey, id> *leadAttributes = attributes.mutableCopy;
-        leadAttributes[NSFontAttributeName] = [UIFont fontWithName:font.fontName size:14.f];
-        
         self.navigationTitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.title
-                                                                                   attributes:leadAttributes.copy];
+                                                                                   attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:14.f],
+                                                                                                 NSForegroundColorAttributeName : navigationBar.tintColor }];
         self.navigationSubtitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.subtitle
-                                                                                      attributes:attributes];
+                                                                                      attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
+                                                                                                    NSForegroundColorAttributeName : navigationBar.tintColor }];
         
         self.navigationItem.titleView.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", self.title, self.subtitle];
     }

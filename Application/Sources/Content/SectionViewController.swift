@@ -166,6 +166,7 @@ final class SectionViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         userActivity = model.configuration.viewModelProperties.userActivity
     }
     

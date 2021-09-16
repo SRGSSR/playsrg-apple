@@ -94,28 +94,37 @@ struct ProgramView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
                 
-                HStack(spacing: 6) {
-                    Spacer()
-                    if model.hasMultiAudio {
-                        MultiAudioBadge()
-                    }
-                    if model.hasAudioDescription {
-                        AudioDescriptionBadge()
-                    }
-                    if model.hasSubtitles {
-                        SubtitlesBadge()
-                    }
-                    if let duration = model.duration {
-                        DurationBadge(duration: duration)
-                    }
-                }
-                .padding([.bottom, .horizontal], Self.padding)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                AttributesView(model: model)
+                    .padding([.bottom, .horizontal], Self.padding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 
                 if let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                }
+            }
+        }
+    }
+    
+    /// Behavior: h-exp, v-hug
+    private struct AttributesView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            HStack(spacing: 6) {
+                Spacer()
+                if model.hasMultiAudio {
+                    MultiAudioBadge()
+                }
+                if model.hasAudioDescription {
+                    AudioDescriptionBadge()
+                }
+                if model.hasSubtitles {
+                    SubtitlesBadge()
+                }
+                if let duration = model.duration {
+                    DurationBadge(duration: duration)
                 }
             }
         }
