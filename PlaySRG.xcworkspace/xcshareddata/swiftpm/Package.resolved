@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "1bdfebcc54cef4ae96e3627f9014446218e806ca",
-          "version": "6.8.1"
+          "revision": "de8577f58200195a882d3b21f1270775b02b78e2",
+          "version": "6.9.0"
         }
       },
       {
@@ -212,8 +212,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "821d5613beecba55f1914c74706bbdd631760bba",
+          "branch": "feature/ios15-tvos15-xcode13",
+          "revision": "42743932f1a2ff6f1c4e92d47002f0d276393f89",
           "version": null
         }
       },
@@ -266,8 +266,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "b237418991361643f5c9afcacdeed4cb8487fde0",
+          "branch": "feature/ios15-tvos15-xcode13",
+          "revision": "a4b4a0232cd8c71b23eae9a540fc14007ad1c86d",
           "version": null
         }
       },
@@ -284,9 +284,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": null,
-          "revision": "4bab9588d7cd695a7a466c013c6019c3966c1e9d",
-          "version": "6.1.3"
+          "branch": "feature/ios15-tvos15-xcode13",
+          "revision": "6d40fa5b3458f6841b0abba5d54b9e53627c5bca",
+          "version": null
         }
       },
       {
