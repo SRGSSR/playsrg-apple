@@ -806,6 +806,23 @@ private extension Content {
 
 // MARK: Publishers
 
+
+public extension SRGDataProvider {
+    /// Publishes the latest 30 episodes for a show URN list.
+    func latestMediasForShowsPublisher2(withUrns urns: [String], pageSize: UInt) -> AnyPublisher<[SRGMedia], Error> {
+        return urns.publisher
+            .collect(3)
+            .flatMap { urns in
+                return self.latestMediasForShows(withUrns: urns, filter: .episodesOnly, pageSize: 15)
+            }
+            .reduce([]) { $0 + $1 }
+            .map { medias in
+                return Array(medias.sorted(by: { $0.date > $1.date }).prefix(Int(pageSize)))
+            }
+            .eraseToAnyPublisher()
+    }
+}
+    
 private extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt) -> AnyPublisher<[SRGMedia], Error> {

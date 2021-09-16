@@ -2066,6 +2066,11 @@
 		9EA78A3426D69656004DAC33 /* RadioLiveStreamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadioLiveStreamsViewModel.swift */; };
 		9EA78A3526D69656004DAC33 /* RadioLiveStreamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadioLiveStreamsViewModel.swift */; };
 		9EA78A3626D69656004DAC33 /* RadioLiveStreamsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadioLiveStreamsViewModel.swift */; };
+		9EC797BC26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
+		9EC797BD26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
+		9EC797BE26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
+		9EC797BF26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
+		9EC797C026F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
 		D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */; };
 		E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
@@ -2909,6 +2914,7 @@
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		9EA78A3126D69656004DAC33 /* RadioLiveStreamsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioLiveStreamsViewModel.swift; sourceTree = "<group>"; };
+		9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEpisodesViewModel.swift; sourceTree = "<group>"; };
 		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
 		AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RTS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4479,6 +4485,7 @@
 			isa = PBXGroup;
 			children = (
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
+				9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */,
 				9EA78A3126D69656004DAC33 /* RadioLiveStreamsViewModel.swift */,
 			);
 			path = CarPlay;
@@ -7853,6 +7860,7 @@
 				08D5990D26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				6F40920822DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m in Sources */,
+				9EC797BC26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6FF7BBA122A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
@@ -8099,6 +8107,7 @@
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9D22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
+				9EC797BD26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
@@ -8320,6 +8329,7 @@
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9E22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
+				9EC797BE26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
@@ -8541,6 +8551,7 @@
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9F22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
+				9EC797BF26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
@@ -8762,6 +8773,7 @@
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BBA022A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
+				9EC797C026F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACF22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4D261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */,
