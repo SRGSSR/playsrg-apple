@@ -292,7 +292,7 @@ final class SectionViewController: UIViewController {
         guard !sectionIdentifiers.isEmpty else { return }
         
         if let index = sectionIdentifiers.firstIndex(where: { $0.id == initialSectionId }) {
-            collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
+            collectionView.play_scrollToItem(at: IndexPath(row: 0, section: index), at: .top, animated: true)
         }
         initialSectionId = nil
     }

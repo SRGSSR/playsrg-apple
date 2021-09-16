@@ -64,9 +64,7 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func switchToNow() {
-        let nowDateSelection = DateSelection.now(transition: .time)
-        let transition = dateSelection.isSameDayAs(nowDateSelection) ? DateSelection.Transition.time : DateSelection.Transition.day
-        dateSelection = DateSelection.now(transition: transition)
+        dateSelection = DateSelection.now(from: dateSelection)
     }
     
     func switchToDay(_ day: SRGDay) {
@@ -105,10 +103,6 @@ extension ProgramGuideViewModel {
             return day.date.addingTimeInterval(time)
         }
         
-        fileprivate func isSameDayAs(_ dateSelection: DateSelection) -> Bool {
-            return Calendar.current.isDate(date, inSameDayAs: dateSelection.date)
-        }
-        
         fileprivate func previousDay(transition: Transition) -> DateSelection {
             let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
             return DateSelection(day: previousDay, time: time, transition: transition)
@@ -132,8 +126,10 @@ extension ProgramGuideViewModel {
             return DateSelection(day: day, time: date.timeIntervalSince(day.date), transition: transition)
         }
         
-        static func now(transition: Transition) -> DateSelection {
-            return atDate(Date(), transition: transition)
+        static func now(from dateSelection: DateSelection) -> DateSelection {
+            let now = Date()
+            let transition: Transition = Calendar.current.isDate(now, inSameDayAs: dateSelection.day.date) ? .time : .day
+            return atDate(now, transition: transition)
         }
         
         fileprivate static func atDate(_ date: Date, transition: Transition) -> DateSelection {

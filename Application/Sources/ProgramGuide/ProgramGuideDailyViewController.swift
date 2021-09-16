@@ -135,7 +135,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         let date = model.day.date.addingTimeInterval(time ?? programGuideModel.dateSelection.time)
         let programs = model.state.programs(for: programGuideModel.selectedChannel)
         guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
-        collectionView.scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
+        collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
     }
 }
 

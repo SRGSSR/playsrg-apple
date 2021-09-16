@@ -51,6 +51,7 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 #import "UIStackView+PlaySRG.h"
+#import "UITableView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -1461,10 +1462,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
         
         if (indexPath) {
-            @try {
-                [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
-            }
-            @catch (NSException *exception) {}
+            [self.programsTableView play_scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
         }
     };
     
