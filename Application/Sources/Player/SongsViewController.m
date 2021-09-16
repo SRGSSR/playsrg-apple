@@ -14,6 +14,7 @@
 #import "SRGProgramComposition+PlaySRG.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
+#import "UITableView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
@@ -133,10 +134,7 @@
     void (^animations)(void) = ^{
         NSIndexPath *indexPath = [self nearestSongIndexPathForDate:date];
         if (indexPath) {
-            @try {
-                [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
-            }
-            @catch (NSException *exception) {}
+            [self.tableView play_scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
         }
     };
     
