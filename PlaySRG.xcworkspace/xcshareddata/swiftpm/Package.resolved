@@ -212,8 +212,8 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "feature/ios15-tvos15-xcode13",
-          "revision": "42743932f1a2ff6f1c4e92d47002f0d276393f89",
+          "branch": "develop",
+          "revision": "d1a09f317e1d7f650634eeb5b0ef4c603e884002",
           "version": null
         }
       },
@@ -240,7 +240,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "a1d0758b96a78202a9b3a62d77fff91836839a8a",
+          "revision": "926f0c040e42515f7384dc7906a5799d04fcd38c",
           "version": null
         }
       },
@@ -266,8 +266,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/ios15-tvos15-xcode13",
-          "revision": "2948ab71efa9fde75a8290c2bfaa4a6abc719672",
+          "branch": "develop",
+          "revision": "b237418991361643f5c9afcacdeed4cb8487fde0",
           "version": null
         }
       },
@@ -284,8 +284,8 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": "feature/ios15-tvos15-xcode13",
-          "revision": "6d40fa5b3458f6841b0abba5d54b9e53627c5bca",
+          "branch": "develop",
+          "revision": "c3db516aef99ba58924f63cc8c8e24ca2392afaf",
           "version": null
         }
       },
@@ -303,7 +303,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "d776409c5456d7b633c997cb21ea56c249c87dc0",
+          "revision": "6c681b235d9cd728165a27e49f18194171408e2a",
           "version": null
         }
       },
