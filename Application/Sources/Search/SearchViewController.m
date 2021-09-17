@@ -130,6 +130,9 @@
     UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
     [collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
     
+    [UICollectionView registerMediaCell];
+    [UICollectionView registerShowCell];
+    
     self.view = view;
 }
 

@@ -7,17 +7,21 @@
 import UIKit
 
 extension UICollectionView {
-    private static let defaultShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
-        return UICollectionView.CellRegistration { cell, _, show in
-            cell.content = ShowCell(show: show, style: .standard, imageType: .default)
-        }
-    }()
+    private static var defaultShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow>!
+    private static var posterShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow>!
     
-    private static let posterShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
-        return UICollectionView.CellRegistration { cell, _, show in
-            cell.content = ShowCell(show: show, style: .standard, imageType: .showPoster)
+    @objc static func registerShowCell() {
+        if defaultShowCellRegistration == nil {
+            defaultShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
+                cell.content = ShowCell(show: show, style: .standard, imageType: .default)
+            }
         }
-    }()
+        if posterShowCellRegistration == nil {
+            posterShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
+                cell.content = ShowCell(show: show, style: .standard, imageType: .showPoster)
+            }
+        }
+    }
     
     @objc func showCell(for indexPath: IndexPath, show: SRGShow, imageType: SRGImageType) -> UICollectionViewCell {
         if imageType == .showPoster {
