@@ -28,6 +28,11 @@ final class PageViewController: UIViewController {
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
     private weak var googleCastButton: GCKUICastButton?
+    
+    private var isNavigationBarHidden: Bool {
+        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+    }
+    
     #endif
     
     private var refreshTriggered = false
@@ -200,8 +205,6 @@ final class PageViewController: UIViewController {
     
     #if os(iOS)
     private func updateNavigationBar(animated: Bool) {
-        let isNavigationBarHidden = model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
-        
         if model.id.supportsCastButton {
             if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
                 self.googleCastButton?.removeFromSuperview()
@@ -292,7 +295,8 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
