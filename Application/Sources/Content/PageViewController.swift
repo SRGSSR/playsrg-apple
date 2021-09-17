@@ -27,7 +27,7 @@ final class PageViewController: UIViewController {
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
-    private weak var googleCastButton: GCKUICastButton?
+    private weak var googleCastButton: GoogleCastFloatingButton?
     
     private var isNavigationBarHidden: Bool {
         return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
@@ -211,29 +211,16 @@ final class PageViewController: UIViewController {
                 navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
             }
             else if self.googleCastButton == nil {
-                let googleCastButtonSide: CGFloat = 44
-                
-                let googleCastButton = GCKUICastButton(frame: .zero)
-                googleCastButton.tintColor = .white
-                googleCastButton.backgroundColor = .srgGray23
-                googleCastButton.translatesAutoresizingMaskIntoConstraints = false
+                let googleCastButton = GoogleCastFloatingButton(frame: .zero)
                 view.addSubview(googleCastButton)
                 self.googleCastButton = googleCastButton
-                
-                let layer = googleCastButton.layer
-                layer.cornerRadius = googleCastButtonSide / 2
-                layer.shadowOpacity = 0.8
-                layer.shadowOffset = CGSize(width: 0, height: 3)
-                layer.shadowRadius = 5
                 
                 // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
                 // result (might be fragile but should be enough).
                 let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
                 NSLayoutConstraint.activate([
                     googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
-                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
-                    googleCastButton.widthAnchor.constraint(equalToConstant: googleCastButtonSide),
-                    googleCastButton.heightAnchor.constraint(equalToConstant: googleCastButtonSide)
+                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
                 ])
             }
         }
