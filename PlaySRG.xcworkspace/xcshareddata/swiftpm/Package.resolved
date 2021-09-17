@@ -267,7 +267,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "feature/ios15-tvos15-xcode13",
-          "revision": "a4b4a0232cd8c71b23eae9a540fc14007ad1c86d",
+          "revision": "2948ab71efa9fde75a8290c2bfaa4a6abc719672",
           "version": null
         }
       },
