@@ -33,8 +33,14 @@ extension View {
      */
     func transluscentBackground() -> some View {
 #if os(iOS)
-        // TODO: When iOS 15 is the minimum supported version, replace with background(.thinMaterial)
-        return background(Blur(style: .systemThinMaterial))
+        Group {
+            if #available(iOS 15, *) {
+                self.background(.thinMaterial)
+            }
+            else {
+                self.background(Blur(style: .systemThinMaterial))
+            }
+        }
 #else
         return background(Color.clear)
 #endif
