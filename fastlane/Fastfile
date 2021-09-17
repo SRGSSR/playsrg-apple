@@ -688,9 +688,6 @@ end
 def clean_derived_data
   Dir.chdir('..') { FileUtils.remove_entry(derived_data_path, true) }
   ENV['DERIVED_DATA_CLEANED'] = '1'
-
-  # Xcode 12 / 13 switch on the CI
-  sh 'rm -rf ~/Library/Caches/org.swift.swiftpm'
 end
 
 def derived_data_path
