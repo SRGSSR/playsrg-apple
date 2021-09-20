@@ -329,9 +329,9 @@
         "package": "SwiftMessages",
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
         "state": {
-          "branch": "work/9.0.4",
-          "revision": "7ef6043a9bd7e72308a27ef40645fd6df3942ba2",
-          "version": null
+          "branch": null,
+          "revision": "c5026484ff555db961ec549162e4026b017aa6c5",
+          "version": "9.0.4"
         }
       },
       {

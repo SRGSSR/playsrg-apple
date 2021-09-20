@@ -255,7 +255,7 @@ name: swift-collections, nameSpecified: swift-collections, owner: apple, version
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.17.0
 
-name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.4
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5
 
