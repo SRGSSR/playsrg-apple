@@ -135,18 +135,16 @@ extension PageViewModel {
         case live
         case topic(topic: SRGTopic)
         
+        #if os(iOS)
         var isNavigationBarHidden: Bool {
-            #if os(iOS)
             switch self {
             case .video:
                 return true
             default:
                 return false
             }
-            #else
-            return false
-            #endif
         }
+        #endif
         
         var supportsCastButton: Bool {
             switch self {

@@ -28,6 +28,10 @@ final class PageViewController: UIViewController {
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
     private weak var googleCastButton: GoogleCastFloatingButton?
+    
+    private var isNavigationBarHidden: Bool {
+        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+    }
     #endif
     
     private var refreshTriggered = false
@@ -38,10 +42,6 @@ final class PageViewController: UIViewController {
         #else
         return nil
         #endif
-    }
-    
-    private var isNavigationBarHidden: Bool {
-        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
     
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
@@ -281,7 +281,11 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
+        #if os(iOS)
         let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
+        #else
+        let top = Self.layoutVerticalMargin
+        #endif
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
