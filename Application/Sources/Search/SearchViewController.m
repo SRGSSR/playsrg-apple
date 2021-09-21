@@ -635,8 +635,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, [fontMetrics scaledValueForValue:50.f]);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, MostSearchedShowCollectionViewCell.height);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);

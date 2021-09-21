@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MostSearchedShowCollectionViewCell : UICollectionViewCell
 
+@property (class, nonatomic, readonly) CGFloat height;
+
 @property (nonatomic) SRGShow *show;
 
 @end
