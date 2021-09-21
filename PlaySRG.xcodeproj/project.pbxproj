@@ -16525,7 +16525,7 @@
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
+				minimumVersion = 1.0.1;
 			};
 		};
 		6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */ = {
