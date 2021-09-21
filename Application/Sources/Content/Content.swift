@@ -806,7 +806,7 @@ private extension Content {
 
 // MARK: Publishers
 
-
+// FIXME: Duplicate code, need to be improved
 public extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher2(withUrns urns: [String], pageSize: UInt) -> AnyPublisher<[SRGMedia], Error> {
