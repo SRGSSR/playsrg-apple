@@ -380,13 +380,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Fix layout and correctly scale values
     if ([self notificationAtIndexPath:indexPath]) {
         return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
     }
     else {
-        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
-        return [fontMetrics scaledValueForValue:50.f];
+        return ProfileTableViewCell.height;
     }
 }
 

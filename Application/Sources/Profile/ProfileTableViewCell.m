@@ -22,6 +22,14 @@
 
 @implementation ProfileTableViewCell
 
+#pragma mark Class methods
+
++ (CGFloat)height
+{
+    UIFontMetrics *fontMetrics = [SRGFont metricsForFontWithStyle:SRGFontStyleH4];
+    return [fontMetrics scaledValueForValue:50.f];
+}
+
 #pragma mark Getters and setters
 
 - (void)setApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo
