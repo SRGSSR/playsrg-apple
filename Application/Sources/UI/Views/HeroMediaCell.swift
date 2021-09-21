@@ -113,7 +113,12 @@ private extension HeroMediaCell {
 
 final class HeroMediaCellSize: NSObject {
     @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        let height = (horizontalSizeClass == .compact) ? min(layoutWidth * 9 / 11, 400) : min(layoutWidth * 9 / 16, constant(iOS: 550, tvOS: 700))
+        #if os(tvOS)
+        let height: CGFloat = 700
+        #else
+        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 1 / 2
+        let height = layoutWidth * aspectRatio
+        #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
 }
