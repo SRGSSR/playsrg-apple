@@ -39,7 +39,7 @@ final class GoogleCastFloatingButton: GCKUICastButton {
         let backgroundLayer = CALayer()
         backgroundLayer.frame = CGRect(x: Self.margin, y: Self.margin, width: backgroundSide, height: backgroundSide)
         backgroundLayer.backgroundColor = UIColor.srgGray23.cgColor
-        backgroundLayer.shadowOpacity = 0.8
+        backgroundLayer.shadowOpacity = 0.6
         backgroundLayer.shadowOffset = CGSize(width: 0, height: 3)
         backgroundLayer.shadowRadius = 4
         backgroundLayer.cornerRadius = backgroundSide / 2
