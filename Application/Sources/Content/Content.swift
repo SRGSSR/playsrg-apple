@@ -279,7 +279,7 @@ private extension Content {
             case .medias, .showAndMedias, .shows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .none:
                 return nil
             }
