@@ -229,27 +229,27 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.0.0
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.1.1
 
-name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 4.0.0
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 4.0.1
 
-name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.3
+name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.4
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 12.0.0
 
-name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.1
+name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.2
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.1.0
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.1.1
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.2.0
 
-name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.1
+name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.2
 
-name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.1.4
 
-name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.2
+name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.3
 
-name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 
+name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.1.1
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.1
 
