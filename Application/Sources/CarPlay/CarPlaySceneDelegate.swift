@@ -20,9 +20,9 @@ class CarPlaySceneDelegate: UIResponder {
  
 }
 
-// MARK : - CPTemplateApplicationSceneDelegate
+// MARK: - CPTemplateApplicationSceneDelegate
 
-extension CarPlaySceneDelegate : CPTemplateApplicationSceneDelegate {
+extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
     
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
         
@@ -82,7 +82,6 @@ extension CarPlaySceneDelegate: CPTabBarTemplateDelegate {
     }
 }
 
-
 // MARK: - Custom Properties
 
 extension CarPlaySceneDelegate {
@@ -137,80 +136,62 @@ extension CarPlaySceneDelegate {
             listItem.accessoryType = .disclosureIndicator
             listItem.handler = { [weak self] _, completion in
                 guard let self = self else { return }
-                
-                // Play letterbox
-                if let controller = SRGLetterboxService.shared.controller {
-                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                } else {
-                    let controller = SRGLetterboxController()
-                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                    SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
-                }
-                
-                // Create now playing template
-                let nowPlayingTemplate = CPNowPlayingTemplate.shared
-                self.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
-                    completion()
-                })
+                self.playMedia(media: media, completion: completion)
             }
-            
             items.append(listItem)
         }
         let section = CPListSection(items: items)
         radioLiveStreamsListTemplate.updateSections([section])
     }
     
-    func updateFavoriteEpisode(medias: [SRGMedia]) {
-        print("medias", medias)
-        
-        // TODO: need to be refactored
+    func updateFavoriteEpisode(medias: [FavoriteEpisodesViewModel.MediaData]) {
+
         var items: [CPListItem] = []
-        
-        for media in medias {
-            
+
+        for mediaData in medias {
+
             var title = ""
-            if let show = media.show {
+            if let show = mediaData.media.show {
                 title = show.title
             }
-            if let channel = media.channel {
+            if let channel = mediaData.media.channel {
                 title = "\(title) - \(channel.title)"
             }
-            
-            let detailText = (DateFormatter.play_relativeShort.string(from: media.date))
 
-            print("title", media.show?.title)
-            print("imageUrl", media.imageUrl(for: .small))
-            
-            var image = UIImage()
-            let webImageManager = YYWebImageManager.shared()
-            if let cache = webImageManager.cache, let imageUrl = media.imageUrl(for: .small) {
-                image = cache.getImageForKey(webImageManager.cacheKey(for: imageUrl)) ?? UIImage()
-            }
-            
-            let listItem = CPListItem(text: title, detailText: detailText, image: image)
+            let detailText = (DateFormatter.play_relativeShort.string(from: mediaData.media.date))
+            let listItem = CPListItem(text: title, detailText: detailText, image: mediaData.image)
             listItem.accessoryType = .disclosureIndicator
             listItem.handler = { [weak self] _, completion in
                 guard let self = self else { return }
-                
-                // Play letterbox
-                if let controller = SRGLetterboxService.shared.controller {
-                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                } else {
-                    let controller = SRGLetterboxController()
-                    controller.playMedia(media, at: nil, withPreferredSettings: nil)
-                    SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
-                }
-                
-                // Create now playing template
-                let nowPlayingTemplate = CPNowPlayingTemplate.shared
-                self.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
-                    completion()
-                })
+                self.playMedia(media: mediaData.media, completion: completion)
             }
-            
             items.append(listItem)
         }
         let section = CPListSection(items: items)
         favoriteEpisodesStreamsListTemplate.updateSections([section])
     }
+}
+
+// MARK: - Now Playing
+
+extension CarPlaySceneDelegate {
+    
+    func playMedia(media: SRGMedia, completion: @escaping () -> Void) {
+        
+        // Play letterbox
+        if let controller = SRGLetterboxService.shared.controller {
+            controller.playMedia(media, at: nil, withPreferredSettings: nil)
+        } else {
+            let controller = SRGLetterboxController()
+            controller.playMedia(media, at: nil, withPreferredSettings: nil)
+            SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
+        }
+
+        // Create now playing template
+        let nowPlayingTemplate = CPNowPlayingTemplate.shared
+        self.interfaceController?.pushTemplate(nowPlayingTemplate, animated: true, completion: { _, _ in
+            completion()
+        })
+    }
+    
 }
