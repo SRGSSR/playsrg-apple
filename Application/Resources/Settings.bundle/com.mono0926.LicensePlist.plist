@@ -270,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>SRGAppearance (4.0.1)</string>
+			<string>SRGAppearance</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox (7.2.0)</string>
+			<string>SRGLetterbox</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

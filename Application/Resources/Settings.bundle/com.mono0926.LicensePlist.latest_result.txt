@@ -231,7 +231,7 @@ name: promises, nameSpecified: Promises, owner: google, version: 2.0.0
 
 name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.1.1
 
-name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 4.0.1
+name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.4
 
@@ -241,7 +241,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.1.1
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.2.0
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.2
 
