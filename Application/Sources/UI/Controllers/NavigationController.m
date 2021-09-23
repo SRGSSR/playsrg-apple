@@ -27,9 +27,6 @@
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
-        UINavigationBar *navigationBar = self.navigationBar;
-        navigationBar.barStyle = UIBarStyleBlack;
-        
         [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
