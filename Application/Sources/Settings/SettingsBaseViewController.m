@@ -136,7 +136,13 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayFooterView:(UITableViewHeaderFooterView *)view forSection:(NSInteger)section
 {
-    view.textLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
+    // InAppSettingsKit footer scales to support the whole size range, we need to use uncapped fonts to fill the available
+    // space correctly when accessibility fonts are used.
+    SRGFontStyle fontStyle = SRGFontStyleSubtitle1;
+    view.textLabel.font = [SRGFont fontWithFamily:[SRGFont familyForFontStyle:fontStyle]
+                                           weight:[SRGFont weightForFontStyle:fontStyle]
+                                             size:[SRGFont sizeForFontStyle:fontStyle]
+                              relativeToTextStyle:[SRGFont textStyleForFontStyle:fontStyle]];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

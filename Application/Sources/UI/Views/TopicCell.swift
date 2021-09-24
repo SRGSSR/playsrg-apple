@@ -53,8 +53,10 @@ struct TopicCell: View {
                 Color.srgGray23
                     .opacity(0.3)
                 Text(topic?.title ?? "")
-                    .srgFont(.button, maximumSize: constant(iOS: 16, tvOS: nil))
-                    .lineLimit(1)
+                    .srgFont(.button)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(10)
             }

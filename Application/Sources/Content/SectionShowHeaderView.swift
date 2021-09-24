@@ -151,13 +151,6 @@ struct SectionShowHeaderView: View {
 
 // MARK: Helpers
 
-// TODO: With Swift 5.5 use #if support for postfix expressions
-//       See https://github.com/apple/swift-evolution/blob/main/proposals/0308-postfix-if-config-expressions.md
-//
-//       That means:
-//         - Remove this extension
-//         - Remove uiHorizontalSizeClass
-//         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
     func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
         return Group {
@@ -165,7 +158,7 @@ private extension View {
                 self
             }
             else {
-                self.frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
+                frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }

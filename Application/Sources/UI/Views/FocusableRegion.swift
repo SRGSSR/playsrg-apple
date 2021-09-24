@@ -90,6 +90,7 @@ extension FocusableRegion {
     }
 }
 
+// TODO: Remove when the project supports tvOS 15 and above, as focusSection can be used directly with the same results.
 extension View {
     /**
      *  Ensure the whole view area can catch focus (if focus is supported by the platform), redirecting it onto itself.
@@ -97,8 +98,15 @@ extension View {
     func focusable() -> some View {
         // Focus environments are available on iOS but not so useful. Do not wrap into a FocusableRegion unnecessarily.
         #if os(tvOS)
-        return FocusableRegion {
-            self
+        Group {
+            if #available(tvOS 15, *) {
+                self.focusSection()
+            }
+            else {
+                FocusableRegion {
+                    self
+                }
+            }
         }
         #else
         return self

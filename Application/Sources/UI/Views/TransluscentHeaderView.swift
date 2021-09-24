@@ -21,20 +21,8 @@ struct TransluscentHeaderView: View {
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, constant(iOS: 3, tvOS: 15))
             .frame(maxWidth: .infinity, alignment: .leading)
-            .background(BackgroundView())
+            .transluscentBackground()
             .accessibilityElement(label: title.lowercased(), traits: .isHeader)
-    }
-    
-    /// Behavior: h-exp, v-exp
-    // TODO: Use native blur API on iOS 15 (see https://www.hackingwithswift.com/quick-start/swiftui/how-to-add-visual-effect-blurs)
-    struct BackgroundView: View {
-        var body: some View {
-            #if os(iOS)
-            Blur(style: .systemThinMaterial)
-            #else
-            Color.clear
-            #endif
-        }
     }
 }
 

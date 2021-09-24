@@ -48,6 +48,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         
+        // Disable prefetching for faster scrolling to the current position
+        collectionView.isPrefetchingEnabled = false
+        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView

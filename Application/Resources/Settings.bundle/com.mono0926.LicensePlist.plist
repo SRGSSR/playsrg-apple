@@ -54,7 +54,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Comscore-Swift-Package-Manager</string>
 			<key>Title</key>
-			<string>ComScore (6.8.1)</string>
+			<string>ComScore (6.9.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -262,7 +262,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>SRGAnalytics</string>
+			<string>SRGAnalytics (7.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -270,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>SRGAppearance (4.0.0)</string>
+			<string>SRGAppearance (5.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -278,7 +278,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgcontentprotection-apple</string>
 			<key>Title</key>
-			<string>SRGContentProtection (3.0.3)</string>
+			<string>SRGContentProtection (3.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -286,7 +286,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>SRGDataProvider</string>
+			<string>SRGDataProvider (12.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -294,7 +294,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdiagnostics-apple</string>
 			<key>Title</key>
-			<string>SRGDiagnostics (3.0.1)</string>
+			<string>SRGDiagnostics (3.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -302,7 +302,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>SRGIdentity (3.1.0)</string>
+			<string>SRGIdentity (3.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox</string>
+			<string>SRGLetterbox (7.3.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -318,7 +318,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srglogger-apple</string>
 			<key>Title</key>
-			<string>SRGLogger (3.0.1)</string>
+			<string>SRGLogger (3.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -326,7 +326,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>SRGMediaPlayer (6.1.3)</string>
+			<string>SRGMediaPlayer (6.1.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -334,7 +334,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgnetwork-apple</string>
 			<key>Title</key>
-			<string>SRGNetwork (3.0.2)</string>
+			<string>SRGNetwork (3.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -342,7 +342,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srguserdata-apple</string>
 			<key>Title</key>
-			<string>SRGUserData</string>
+			<string>SRGUserData (3.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.0.0)</string>
+			<string>swift-collections (1.0.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -366,7 +366,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/SwiftMessages</string>
 			<key>Title</key>
-			<string>SwiftMessages (9.0.3)</string>
+			<string>SwiftMessages (9.0.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
