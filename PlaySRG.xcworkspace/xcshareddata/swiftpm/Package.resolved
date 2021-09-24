@@ -221,8 +221,8 @@
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": "feature/crash-fix",
-          "revision": "af88eae98ee0dcc42c9f6620a51b79267886e07f",
+          "branch": "develop",
+          "revision": "b3cd4b96c4db2cb1367808ff02790120b332b013",
           "version": null
         }
       },
@@ -266,8 +266,8 @@
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "feature/font-loading",
-          "revision": "f132d79c4415b02846748576ec3bbc257995dfbc",
+          "branch": "develop",
+          "revision": "130eb801b7674ac8cba377470bc63de093a99ee5",
           "version": null
         }
       },

@@ -16468,7 +16468,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				branch = "feature/crash-fix";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -16484,7 +16484,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/font-loading";
+				branch = develop;
 				kind = branch;
 			};
 		};
