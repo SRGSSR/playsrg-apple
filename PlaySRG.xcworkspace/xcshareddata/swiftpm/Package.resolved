@@ -213,17 +213,17 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": null,
-          "revision": "27d02f20bccd777ad107dc10778797c6866cf300",
-          "version": "7.1.1"
+          "revision": "77088eb09c546a4d98c40e990403dd1c222f9ad7",
+          "version": "7.2.0"
         }
       },
       {
         "package": "SRGAppearance",
         "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "b3cd4b96c4db2cb1367808ff02790120b332b013",
-          "version": null
+          "branch": null,
+          "revision": "cfd2b130277502b1355863ac4a105fd9922be752",
+          "version": "5.0.0"
         }
       },
       {
@@ -258,17 +258,17 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": null,
-          "revision": "0fb2c4015d1d711dfb3508fead4178ba26a91283",
-          "version": "3.1.1"
+          "revision": "c4eb6fbb3e84f8cdc340a55b50475eeddd1db011",
+          "version": "3.2.0"
         }
       },
       {
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "130eb801b7674ac8cba377470bc63de093a99ee5",
-          "version": null
+          "branch": null,
+          "revision": "1ef04daa5d3e5478cc8d6e05f8f315e0acca25d4",
+          "version": "7.3.0"
         }
       },
       {
@@ -303,8 +303,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
         "state": {
           "branch": null,
-          "revision": "077e88c1067082ea7c15bd2e6919b2b781c2e89d",
-          "version": "3.1.1"
+          "revision": "d93fddd6a95472c539675557dd8069e24fe79664",
+          "version": "3.2.0"
         }
       },
       {
