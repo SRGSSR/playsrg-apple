@@ -710,7 +710,7 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
-        @State private var firstResponder = FirstResponder()
+        @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         private static func title(for section: PageViewModel.Section) -> String? {

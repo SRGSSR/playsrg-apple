@@ -20,7 +20,7 @@ import SwiftUI
 struct ShowAccessCell: View {
     let style: Style
     
-    @State private var firstResponder = FirstResponder()
+    @FirstResponder private var firstResponder
     
     private var showAZButtonProperties: ButtonProperties {
         return ButtonProperties(

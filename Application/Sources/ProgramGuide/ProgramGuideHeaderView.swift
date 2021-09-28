@@ -30,7 +30,7 @@ struct ProgramGuideHeaderView: View {
     /// Behavior: h-exp, v-exp
     private struct DaySelector: View {
         @ObservedObject var model: ProgramGuideViewModel
-        @State private var firstResponder = FirstResponder()
+        @FirstResponder private var firstResponder
         
         var body: some View {
             HStack(spacing: 10) {

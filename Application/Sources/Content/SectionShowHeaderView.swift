@@ -129,7 +129,7 @@ struct SectionShowHeaderView: View {
         let show: SRGShow
         
         @State private var isFocused = false
-        @State private var firstResponder = FirstResponder()
+        @FirstResponder private var firstResponder
         
         var accessibilityLabel: String? {
             return show.title

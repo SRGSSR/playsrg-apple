@@ -18,7 +18,7 @@ import SwiftUI
 struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
     @State private var selectedDate: Date = Date()
-    @State private var firstResponder = FirstResponder()
+    @FirstResponder private var firstResponder
     
     var body: some View {
         VStack {
