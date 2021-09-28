@@ -12,8 +12,6 @@ import YYWebImage
 class CarPlaySceneDelegate: UIResponder {
     
     var interfaceController: CPInterfaceController?
-    private var radioLiveStreamsModel = RadioLiveStreamsViewModel()
-    private var favoriteEpisodesModel = FavoriteEpisodesViewModel()
     private var cancellables = Set<AnyCancellable>()
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
     let favoriteEpisodesStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Favorites", comment: "Favorites tab title"), sections: [])
@@ -110,6 +108,7 @@ extension CarPlaySceneDelegate {
 extension CarPlaySceneDelegate {
     
     func getRadioLiveStreams() {
+        let radioLiveStreamsModel = RadioLiveStreamsViewModel()
         radioLiveStreamsModel.$medias
             .sink { [weak self] medias in
                 guard let self = self else { return }
@@ -119,6 +118,7 @@ extension CarPlaySceneDelegate {
     }
     
     func getFavoriteEpisodes() {
+        let favoriteEpisodesModel = FavoriteEpisodesViewModel()
         favoriteEpisodesModel.$medias
             .sink { [weak self] medias in
                 guard let self = self else { return }
