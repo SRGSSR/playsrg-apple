@@ -290,9 +290,11 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     // scroll edge (the observed scroll view determined heuristically in most cases, but can be also set with
     // `-setContentScrollView:` if the heuristic approach fails). We can preserve the old behavior (probably
     // more readable) by just setting a common appearance for the standard and scroll edge cases.
+#ifdef __IPHONE_15_0
     if (@available(iOS 15.0, *)) {
         tabBar.scrollEdgeAppearance = appearance;
     }
+#endif
 }
 
 #pragma mark View controllers

@@ -1885,9 +1885,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                       action:@selector(skipForward:)];
         skipForwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
                                                     [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxForwardSkipInterval]];
+#ifdef __IPHONE_15_0
         if (@available(iOS 15, *)) {
             skipForwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
+#endif
         [keyCommands addObject:skipForwardCommand];
     }
     
@@ -1897,9 +1899,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                        action:@selector(skipBackward:)];
         skipBackwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxBackwardSkipInterval]];
+#ifdef __IPHONE_15_0
         if (@available(iOS 15, *)) {
             skipBackwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
+#endif
         [keyCommands addObject:skipBackwardCommand];
     }
     
