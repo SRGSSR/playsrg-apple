@@ -12,47 +12,37 @@ import SwiftUI
  *  A view providing access to the `UIKit` responder chain. Use the `FirstResponder` parameter provided to its view
  *  builder to send an event to the responder chain.
  *
- *  Behavior: h-neu, v-neu
+ *  Behavior: h-exp, v-exp
  */
-struct ResponderChain<Content: View>: UIViewRepresentable {
+struct ResponderChain<Content: View>: UIViewControllerRepresentable {
     @Binding private var content: (FirstResponder) -> Content
     
     init(@ViewBuilder content: @escaping (FirstResponder) -> Content) {
         _content = .constant(content)
     }
     
-    func makeCoordinator() -> Coordinator {
-        let firstResponder = FirstResponder()
-        let hostController = UIHostingController(rootView: content(firstResponder), ignoreSafeArea: true)
-        return Coordinator(firstResponder: firstResponder, hostController: hostController)
+    func makeCoordinator() -> FirstResponder {
+        return FirstResponder()
     }
     
-    func makeUIView(context: Context) -> UIView {
-        let hostView = context.coordinator.hostController.view!
-        hostView.backgroundColor = .clear
-        context.coordinator.firstResponder.view = hostView
-        return hostView
-    }
-    
-    func updateUIView(_ uiView: UIView, context: Context) {
+    func makeUIViewController(context: Context) -> UIHostingController<Content> {
         let coordinator = context.coordinator
-        
-        let hostController = coordinator.hostController
-        hostController.rootView = content(coordinator.firstResponder)
-        
-        // Make layout neutral
-        uiView.applySizingBehavior(of: hostController)
+        let hostController = UIHostingController(rootView: content(coordinator), ignoreSafeArea: true)
+        if let hostView = hostController.view {
+            hostView.backgroundColor = .clear
+            coordinator.view = hostView
+        }
+        return hostController
+    }
+    
+    func updateUIViewController(_ uiViewController: UIHostingController<Content>, context: Context) {
+        uiViewController.rootView = content(context.coordinator)
     }
 }
 
 // MARK: Types
 
 extension ResponderChain {
-    struct Coordinator {
-        let firstResponder: FirstResponder
-        let hostController: UIHostingController<Content>
-    }
-    
     class FirstResponder {
         fileprivate weak var view: UIView?
         
