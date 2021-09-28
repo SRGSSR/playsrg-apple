@@ -129,6 +129,7 @@ struct SectionShowHeaderView: View {
         let show: SRGShow
         
         @State private var isFocused = false
+        @State private var firstResponder = FirstResponder()
         
         var accessibilityLabel: String? {
             return show.title
@@ -139,12 +140,11 @@ struct SectionShowHeaderView: View {
         }
         
         var body: some View {
-            ResponderChain { firstResponder in
-                SimpleButton(icon: "episodes", label: show.title) {
-                    firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
-                }
-                .frame(maxWidth: 350)
+            SimpleButton(icon: "episodes", label: show.title) {
+                firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
             }
+            .frame(maxWidth: 350)
+            .responderChain(from: $firstResponder)
         }
     }
 }

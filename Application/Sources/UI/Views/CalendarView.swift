@@ -18,6 +18,7 @@ import SwiftUI
 struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
     @State private var selectedDate: Date = Date()
+    @State private var firstResponder = FirstResponder()
     
     var body: some View {
         VStack {
@@ -25,13 +26,14 @@ struct CalendarView: View {
                 .datePickerStyle(GraphicalDatePickerStyle())
                 .colorMultiply(.white)
                 .accentColor(.red)
+            
             Divider()
-            ResponderChain { firstResponder in
-                ExpandingButton(label: NSLocalizedString("OK", comment: "Title of the button to validate date settings")) {
-                    firstResponder.sendAction(#selector(CalendarViewActions.close))
-                }
-                .frame(height: 40)
+            
+            ExpandingButton(label: NSLocalizedString("OK", comment: "Title of the button to validate date settings")) {
+                firstResponder.sendAction(#selector(CalendarViewActions.close))
             }
+            .frame(height: 40)
+            .responderChain(from: $firstResponder)
         }
         .frame(maxWidth: 400)
         .padding()

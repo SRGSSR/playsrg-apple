@@ -30,21 +30,21 @@ struct ProgramGuideHeaderView: View {
     /// Behavior: h-exp, v-exp
     private struct DaySelector: View {
         @ObservedObject var model: ProgramGuideViewModel
+        @State private var firstResponder = FirstResponder()
         
         var body: some View {
-            ResponderChain { firstResponder in
-                HStack(spacing: 10) {
-                    ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                        model.switchToYesterday()
-                    }
-                    ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                        firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
-                    }
-                    ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                        model.switchToNow()
-                    }
+            HStack(spacing: 10) {
+                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                    model.switchToYesterday()
+                }
+                ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
+                    firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
+                }
+                ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                    model.switchToNow()
                 }
             }
+            .responderChain(from: $firstResponder)
         }
     }
     
