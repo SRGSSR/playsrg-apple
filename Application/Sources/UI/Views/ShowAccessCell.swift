@@ -82,7 +82,7 @@ extension ShowAccessCell {
 // MARK: Size
 
 final class ShowAccessCellSize: NSObject {
-    @objc static func fullWidth(layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+    @objc static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }
@@ -90,7 +90,7 @@ final class ShowAccessCellSize: NSObject {
 // MARK: Preview
 
 struct ShowAccessCell_Previews: PreviewProvider {
-    private static let size = ShowAccessCellSize.fullWidth(layoutWidth: 800).previewSize
+    private static let size = ShowAccessCellSize.fullWidth().previewSize
     
     static var previews: some View {
         Group {

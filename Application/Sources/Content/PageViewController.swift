@@ -588,8 +588,8 @@ private extension PageViewController {
                     }
                 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return ShowAccessCellSize.fullWidth(layoutWidth: layoutWidth)
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return ShowAccessCellSize.fullWidth()
                     }
                 #endif
                 }
