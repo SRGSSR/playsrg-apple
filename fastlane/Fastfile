@@ -29,7 +29,11 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 13')
+    if platform == 'iOS'
+      xcversion(version: '~> 12.5')
+    else
+      xcversion(version: '~> 13')
+    end
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
