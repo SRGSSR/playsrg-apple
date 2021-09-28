@@ -286,6 +286,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UITabBar *tabBar = self.tabBar;
     tabBar.standardAppearance = appearance;
     
+#ifdef __IPHONE_15_0
     // Starting with iOS 15 the default behavior is to have a transparent tab bar appearance when reaching the
     // scroll edge (the observed scroll view determined heuristically in most cases, but can be also set with
     // `-setContentScrollView:` if the heuristic approach fails). We can preserve the old behavior (probably
@@ -293,6 +294,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     if (@available(iOS 15.0, *)) {
         tabBar.scrollEdgeAppearance = appearance;
     }
+#endif
 }
 
 #pragma mark View controllers
