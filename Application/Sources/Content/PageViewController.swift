@@ -746,7 +746,7 @@ private extension PageViewController {
                 }
                 .disabled(!hasDetailDisclosure)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
-                .responderChain(from: $firstResponder)
+                .responderChain(from: firstResponder)
                 #endif
             }
         }

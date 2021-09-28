@@ -144,7 +144,7 @@ struct SectionShowHeaderView: View {
                 firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
             }
             .frame(maxWidth: 350)
-            .responderChain(from: $firstResponder)
+            .responderChain(from: firstResponder)
         }
     }
 }

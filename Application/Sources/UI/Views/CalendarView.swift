@@ -33,7 +33,7 @@ struct CalendarView: View {
                 firstResponder.sendAction(#selector(CalendarViewActions.close))
             }
             .frame(height: 40)
-            .responderChain(from: $firstResponder)
+            .responderChain(from: firstResponder)
         }
         .frame(maxWidth: 400)
         .padding()

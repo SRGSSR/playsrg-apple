@@ -44,7 +44,7 @@ struct ProgramGuideHeaderView: View {
                     model.switchToNow()
                 }
             }
-            .responderChain(from: $firstResponder)
+            .responderChain(from: firstResponder)
         }
     }
     

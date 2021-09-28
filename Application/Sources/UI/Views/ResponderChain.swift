@@ -15,7 +15,7 @@ extension View {
      *
      *  Behavior: h-neu, v-neu
      */
-    func responderChain(from firstResponder: Binding<FirstResponder>) -> some View {
+    func responderChain(from firstResponder: FirstResponder) -> some View {
         return background(ResponderChain(firstResponder: firstResponder))
     }
 }
@@ -23,10 +23,10 @@ extension View {
 // MARK: View
 
 /**
- *  A view providing access to the `UIKit` responder chain by binding to a `UIKit` first responder view.
+ *  A view providing access to the `UIKit` responder chain.
  */
 private struct ResponderChain: UIViewRepresentable {
-    @Binding var firstResponder: FirstResponder
+    let firstResponder: FirstResponder
     
     func makeUIView(context: Context) -> UIView {
         return UIView()
@@ -40,8 +40,7 @@ private struct ResponderChain: UIViewRepresentable {
 // MARK: Types
 
 /**
- *  Provide access to the responder chain by inserting a first responder where the `responderChain(from:)` modifier
- *  is applied.
+ *  Provide access to a first responder.
  */
 @propertyWrapper class FirstResponder {
     // `FirstResponder` is a class so that we can modify the view during UI updates without SwiftUI detecting a change
@@ -51,10 +50,6 @@ private struct ResponderChain: UIViewRepresentable {
     
     var wrappedValue: FirstResponder {
         return self
-    }
-    
-    var projectedValue: Binding<FirstResponder> {
-        return .constant(self)
     }
     
     @discardableResult

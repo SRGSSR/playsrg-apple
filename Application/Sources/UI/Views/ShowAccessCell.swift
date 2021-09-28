@@ -55,7 +55,7 @@ struct ShowAccessCell: View {
                 firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
             }
         }
-        .responderChain(from: $firstResponder)
+        .responderChain(from: firstResponder)
     }
 }
 
