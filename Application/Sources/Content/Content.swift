@@ -268,7 +268,9 @@ private extension Content {
                     return AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
                     return AnalyticsPageTitle.watchLater.rawValue
-                case .none, .livestreams, .topicSelector, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                case .topicSelector:
+                    return AnalyticsPageTitle.topics.rawValue
+                case .none, .livestreams, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
                     return nil
                 }
             case .none:

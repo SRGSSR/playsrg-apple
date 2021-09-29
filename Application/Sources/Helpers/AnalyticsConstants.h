@@ -59,6 +59,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTopics;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
