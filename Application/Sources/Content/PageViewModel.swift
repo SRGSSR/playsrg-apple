@@ -389,7 +389,7 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
+            case .favoriteShows, .personalizedProgram, .resumePlayback, .topicSelector, .watchLater:
                 return true
             default:
                 return presentation.hasDetailPage
