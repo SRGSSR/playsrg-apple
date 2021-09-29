@@ -103,18 +103,7 @@ final class SectionViewController: UIViewController {
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
         #endif
-        
-        #if os(iOS)
-        if model.configuration.properties.sharingItem != nil {
-            let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
-                                                  style: .plain,
-                                                  target: self,
-                                                  action: #selector(self.shareContent(_:)))
-            shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
-            navigationItem.rightBarButtonItem = shareButtonItem
-        }
-        #endif
-        
+                
         self.view = view
     }
     
@@ -223,7 +212,16 @@ final class SectionViewController: UIViewController {
         }
         else {
             title = model.title
-            navigationItem.rightBarButtonItem = nil
+            
+            if model.configuration.properties.sharingItem != nil {
+                let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
+                                                      style: .plain,
+                                                      target: self,
+                                                      action: #selector(self.shareContent(_:)))
+                shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
+                navigationItem.rightBarButtonItem = shareButtonItem
+            }
+            
             navigationItem.leftBarButtonItem = leftBarButtonItem
         }
     }
