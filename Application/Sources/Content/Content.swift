@@ -156,6 +156,8 @@ private extension Content {
                     return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case .showAccess:
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                case .topicSelector:
+                    return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
                     return nil
                 }
