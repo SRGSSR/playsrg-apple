@@ -107,15 +107,9 @@ final class AccessibilitySettings: ObservableObject {
         NotificationCenter.default.publisher(for: UIAccessibility.assistiveTouchStatusDidChangeNotification)
             .map { _ in UIAccessibility.isAssistiveTouchRunning }
             .assign(to: &$isAssistiveTouchRunning)
-        #if swift(>=5.5)
         NotificationCenter.default.publisher(for: UIAccessibility.differentiateWithoutColorDidChangeNotification)
             .map { _ in UIAccessibility.shouldDifferentiateWithoutColor }
             .assign(to: &$shouldDifferentiateWithoutColor)
-        #else
-        NotificationCenter.default.publisher(for: Notification.Name(rawValue: UIAccessibility.differentiateWithoutColorDidChangeNotification))
-            .map { _ in UIAccessibility.shouldDifferentiateWithoutColor }
-            .assign(to: &$shouldDifferentiateWithoutColor)
-        #endif
         NotificationCenter.default.publisher(for: UIAccessibility.onOffSwitchLabelsDidChangeNotification)
             .map { _ in UIAccessibility.isOnOffSwitchLabelsEnabled }
             .assign(to: &$isOnOffSwitchLabelsEnabled)
