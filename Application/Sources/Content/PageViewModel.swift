@@ -314,7 +314,7 @@ private extension SRGDataProvider {
         #if os(tvOS)
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
-            && section.viewModelProperties.hasSwimlaneLayout {
+            && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(PageViewModel.Item(.more, in: section))
         }
         #endif
@@ -330,7 +330,8 @@ protocol PageViewModelProperties {
 }
 
 extension PageViewModelProperties {
-    var hasSwimlaneLayout: Bool {
+    #if os(tvOS)
+    var hasMoreRowItem: Bool {
         switch layout {
         case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
             return true
@@ -338,6 +339,7 @@ extension PageViewModelProperties {
             return false
         }
     }
+    #endif
     
     var hasGridLayout: Bool {
         switch layout {
@@ -389,7 +391,7 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
+            case .favoriteShows, .personalizedProgram, .resumePlayback, .topicSelector, .watchLater:
                 return true
             default:
                 return presentation.hasDetailPage

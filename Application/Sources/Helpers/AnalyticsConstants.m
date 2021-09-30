@@ -49,6 +49,7 @@ AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";
 AnalyticsPageTitle const AnalyticsPageTitleSports = @"sports";
+AnalyticsPageTitle const AnalyticsPageTitleTopics = @"topics";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";

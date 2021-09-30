@@ -156,6 +156,8 @@ private extension Content {
                     return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case .showAccess:
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                case .topicSelector:
+                    return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
                     return nil
                 }
@@ -266,7 +268,9 @@ private extension Content {
                     return AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
                     return AnalyticsPageTitle.watchLater.rawValue
-                case .none, .livestreams, .topicSelector, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                case .topicSelector:
+                    return AnalyticsPageTitle.topics.rawValue
+                case .none, .livestreams, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
                     return nil
                 }
             case .none:
