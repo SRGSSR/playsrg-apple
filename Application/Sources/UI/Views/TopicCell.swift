@@ -12,6 +12,8 @@ import SwiftUI
 struct TopicCell: View {
     let topic: SRGTopic?
     
+    @Environment(\.isSelected) private var isSelected
+    
     var body: some View {
         Group {
             #if os(tvOS)
@@ -23,6 +25,7 @@ struct TopicCell: View {
             #else
             MainView(topic: topic)
                 .redactable()
+                .selectionAppearance(when: isSelected && topic != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
@@ -50,8 +53,10 @@ struct TopicCell: View {
                 Color.srgGray23
                     .opacity(0.3)
                 Text(topic?.title ?? "")
-                    .srgFont(.button, maximumSize: constant(iOS: 16, tvOS: nil))
-                    .lineLimit(1)
+                    .srgFont(.button)
+                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
                     .foregroundColor(.white)
                     .padding(10)
             }
@@ -73,7 +78,7 @@ private extension TopicCell {
 
 // MARK: Size
 
-class TopicCellSize: NSObject {
+final class TopicCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)
@@ -86,19 +91,15 @@ class TopicCellSize: NSObject {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
-    }
-    
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
     }
 }
 
 // MARK: Preview
 
 struct TopicCell_Previews: PreviewProvider {
-    static private let size = TopicCellSize.swimlane().previewSize
+    private static let size = TopicCellSize.swimlane().previewSize
     
     static var previews: some View {
         TopicCell(topic: Mock.topic())

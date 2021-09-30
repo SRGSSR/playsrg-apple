@@ -90,14 +90,14 @@ do
             mkdir -p ${CACHE_APPICON_PATH}
         fi
 
-        if [ "${CONFIGURATION}" == "Beta" ]; then
+        if [ "${CONFIGURATION}" == "Beta" ] || [ "${CONFIGURATION}" == "Beta_AppCenter" ]; then
             TITLE="Beta"
-        elif [ "${CONFIGURATION}" == "Nightly" ]; then
+        elif [ "${CONFIGURATION}" == "Nightly" ] || [ "${CONFIGURATION}" == "Nightly_AppCenter" ]; then
     	    TITLE="Nightly"
         elif [ "${CONFIGURATION}" == "Debug" ]; then
             TITLE="Debug"
         else
-            TITLE="Dev"
+            TITLE="Und"
         fi
         
         SCRIPT_ICON_PATH="${CACHE_APPICON_PATH}/${TITLE}-${filename}"
@@ -115,8 +115,16 @@ do
                 CAPTION="${TITLE}"
             fi
 
+            if [ "${CONFIGURATION}" == "Nightly_AppCenter" ] || [ "${CONFIGURATION}" == "Beta_AppCenter" ]; then
+                BACKGROUND="#FFFC"
+                FILL="black"
+            else
+                BACKGROUND="#0005"
+                FILL="white"
+            fi
+
             echo $PYTHON_NIGHTLIES_TAG "Making app icon ${CAPTION} | ${filename}"
-            convert -background '#0005' -fill white -gravity center -size ${WIDTH}x${HEIGHT} caption:"${CAPTION}" "${SOURCE_ICON_PATH}" +swap -gravity south -composite "${SCRIPT_ICON_PATH}"
+            convert -background "${BACKGROUND}" -fill "${FILL}" -gravity center -size ${WIDTH}x${HEIGHT} caption:"${CAPTION}" "${SOURCE_ICON_PATH}" +swap -gravity south -composite "${SCRIPT_ICON_PATH}"
         fi
 
         SOURCE_ICON_PATH="${SCRIPT_ICON_PATH}"

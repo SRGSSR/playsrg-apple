@@ -1,4 +1,5 @@
 disabled_rules:
+    - cyclomatic_complexity
     - identifier_name
     - force_cast
     - force_try
@@ -6,6 +7,7 @@ disabled_rules:
     - multiple_closures_with_trailing_closure
     - statement_position
     - todo
+    - type_body_length
 
 line_length: 300
 
@@ -15,8 +17,6 @@ trailing_whitespace:
   ignores_empty_lines: true
   severity: warning
 
-type_body_length: 220
-
 type_name:
   excluded:
     - Id
@@ -24,14 +24,10 @@ type_name:
 function_parameter_count:
   warning: 8
 
-cyclomatic_complexity:
-  warning: 20
-
 nesting:
   type_level: 2
 
 excluded:
   - build
-  - Carthage
   - Pods
   - vendor

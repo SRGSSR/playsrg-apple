@@ -5,7 +5,6 @@ inherit_mode:
 AllCops:
   Exclude:
     - 'build/**/*'
-    - 'Carthage/**/*'
     - 'vendor/**/*'
   Include:
     - 'fastlane/Pluginfile'
@@ -39,3 +38,7 @@ Naming/FileName:
 Style/RedundantInterpolation:
   Exclude:
     - '**/Appfile'
+
+# CocoaPods usual word array
+Style/WordArray:
+  EnforcedStyle: brackets

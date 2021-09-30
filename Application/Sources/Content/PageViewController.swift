@@ -9,13 +9,17 @@ import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
+#if os(iOS)
+import GoogleCast
+#endif
+
 // MARK: View controller
 
-class PageViewController: UIViewController {
+final class PageViewController: UIViewController {
     private let model: PageViewModel
     
     private var cancellables = Set<AnyCancellable>()
-
+    
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
@@ -23,6 +27,11 @@ class PageViewController: UIViewController {
     
     #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
+    private weak var googleCastButton: GoogleCastFloatingButton?
+    
+    private var isNavigationBarHidden: Bool {
+        return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
+    }
     #endif
     
     private var refreshTriggered = false
@@ -95,10 +104,6 @@ class PageViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        
-        if model.id.supportsCastButton, let navigationBar = navigationController?.navigationBar {
-            navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
-        }
         #endif
         
         self.view = view
@@ -143,11 +148,16 @@ class PageViewController: UIViewController {
             .store(in: &cancellables)
         
         #if os(iOS)
-        model.$serviceStatus
-            .sink { [weak self] status in
-                if let self = self, case let .bad(message) = status {
-                    Banner.show(with: .error, message: message.text, image: nil, sticky: true, in: self)
-                }
+        model.$serviceMessage
+            .sink { [weak self] serviceMessage in
+                guard let serviceMessage = serviceMessage else { return }
+                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
+            }
+            .store(in: &cancellables)
+        
+        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+            .sink { [weak self] _ in
+                self?.updateNavigationBar(animated: true)
             }
             .store(in: &cancellables)
         #endif
@@ -156,6 +166,10 @@ class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        deselectItems(in: collectionView, animated: animated)
+        #if os(iOS)
+        updateNavigationBar(animated: animated)
+        #endif
     }
     
     #if os(iOS)
@@ -164,14 +178,14 @@ class PageViewController: UIViewController {
     }
     #endif
     
-    func reloadData(for state: PageViewModel.State) {
+    private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case let .loaded(rows: rows):
-            emptyView.content = rows.isEmpty ? EmptyView(state: .empty) : nil
+            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -189,7 +203,34 @@ class PageViewController: UIViewController {
     }
     
     #if os(iOS)
-    @objc func pullToRefresh(_ refreshControl: RefreshControl) {
+    private func updateNavigationBar(animated: Bool) {
+        if model.id.supportsCastButton {
+            if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
+                self.googleCastButton?.removeFromSuperview()
+                navigationItem.rightBarButtonItem = GoogleCastBarButtonItem(for: navigationBar)
+            }
+            else if self.googleCastButton == nil {
+                let googleCastButton = GoogleCastFloatingButton(frame: .zero)
+                view.addSubview(googleCastButton)
+                self.googleCastButton = googleCastButton
+                
+                // Place the button where it would appear if a navigation bar was available. An offset is needed on iPads for a perfect
+                // result (might be fragile but should be enough).
+                let topOffset: CGFloat = (UIDevice.current.userInterfaceIdiom == .pad) ? 3 : 0
+                NSLayoutConstraint.activate([
+                    googleCastButton.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor, constant: topOffset),
+                    googleCastButton.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor)
+                ])
+            }
+        }
+        else {
+            self.googleCastButton?.removeFromSuperview()
+        }
+        
+        navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
+    }
+    
+    @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }
@@ -240,7 +281,12 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+        #if os(iOS)
+        let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
+        #else
+        let top = Self.layoutVerticalMargin
+        #endif
+        return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
@@ -346,14 +392,20 @@ extension PageViewController: PlayApplicationNavigation {
         case .showByDate:
             let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
             if let navigationController = navigationController {
-                let calendarViewController = CalendarViewController(radioChannel: applicationSectionInfo.radioChannel, date: date)
-                navigationController.pushViewController(calendarViewController, animated: false)
+                if let radioChannel = applicationSectionInfo.radioChannel {
+                    let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: date)
+                    navigationController.pushViewController(calendarViewController, animated: false)
+                }
+                else {
+                    let programGuideViewController = ProgramGuideViewController(date: date)
+                    navigationController.pushViewController(programGuideViewController, animated: false)
+                }
             }
             return true
         case .showAZ:
-            let index = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
             if let navigationController = navigationController {
-                let showsViewController = ShowsViewController(radioChannel: applicationSectionInfo.radioChannel, alphabeticalIndex: index)
+                let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -394,15 +446,27 @@ extension PageViewController: SRGAnalyticsViewTracking {
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
         if let navigationController = navigationController {
-            let showsViewController = ShowsViewController(radioChannel: radioChannel, alphabeticalIndex: nil)
+            let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
             navigationController.pushViewController(showsViewController, animated: true)
         }
     }
     
     func openShowByDate() {
         if let navigationController = navigationController {
-            let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-            navigationController.pushViewController(calendarViewController, animated: true)
+            switch model.id {
+            case .video:
+                if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+                    let programGuideViewController = ProgramGuideViewController()
+                    navigationController.pushViewController(programGuideViewController, animated: true)
+                }
+                else {
+                    let calendarViewController = CalendarViewController(radioChannel: nil, date: nil)
+                    navigationController.pushViewController(calendarViewController, animated: true)
+                }
+            default:
+                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
+                navigationController.pushViewController(calendarViewController, animated: true)
+            }
         }
     }
 }
@@ -459,7 +523,13 @@ private extension PageViewController {
                 switch section.viewModelProperties.layout {
                 case .hero:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.hero(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
+                    layoutSection.orthogonalScrollingBehavior = .groupPaging
+                    return layoutSection
+                case .headline:
+                    let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                        return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
@@ -487,7 +557,7 @@ private extension PageViewController {
                     return layoutSection
                 case .showSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
-                        return ShowCellSize.swimlane()
+                        return ShowCellSize.swimlane(for: section.properties.imageType)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -505,21 +575,21 @@ private extension PageViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 1)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, minimumNumberOfColumns: 2)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
                 #if os(iOS)
                 case .showAccess:
-                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return ShowAccessCellSize.fullWidth(layoutWidth: layoutWidth)
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
+                        return ShowAccessCellSize.fullWidth()
                     }
                 #endif
                 }
@@ -547,7 +617,9 @@ private extension PageViewController {
         var body: some View {
             switch section.viewModelProperties.layout {
             case .hero:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .hero)
+                HeroMediaCell(media: media, label: section.properties.label)
+            case .headline:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
             case .highlight, .highlightSwimlane:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
             case .liveMediaSwimlane, .liveMediaGrid:
@@ -566,12 +638,12 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .hero)
+            case .hero, .headline:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show)
+                PlaySRG.ShowCell(show: show, style: .standard, imageType: section.properties.imageType)
             }
         }
     }
@@ -598,11 +670,17 @@ private extension PageViewController {
                     TopicCell(topic: topic)
                 #if os(iOS)
                 case .showAccess:
-                    ShowAccessCell()
+                    switch id {
+                    case .video:
+                        let style: ShowAccessCell.Style = !ApplicationConfiguration.shared.isTvGuideUnavailable ? .programGuide : .calendar
+                        ShowAccessCell(style: style)
+                    default:
+                        ShowAccessCell(style: .calendar)
+                    }
                 #endif
                 }
             case .more:
-                MoreCell(section: item.section.wrappedValue, filter: id)
+                MoreCell(section: item.section.wrappedValue, imageType: item.section.properties.imageType, filter: id)
             }
         }
     }
@@ -632,6 +710,7 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
+        @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         private static func title(for section: PageViewModel.Section) -> String? {
@@ -660,15 +739,14 @@ private extension PageViewController {
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
                     .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
                 #else
-                ResponderChain { firstResponder in
-                    Button {
-                        firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
-                    } label: {
-                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
-                    }
-                    .disabled(!hasDetailDisclosure)
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
+                Button {
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                } label: {
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
                 }
+                .disabled(!hasDetailDisclosure)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
+                .responderChain(from: firstResponder)
                 #endif
             }
         }

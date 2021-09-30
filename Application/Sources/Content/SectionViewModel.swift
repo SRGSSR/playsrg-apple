@@ -9,29 +9,36 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class SectionViewModel: ObservableObject {
-    let section: Content.Section
+final class SectionViewModel: ObservableObject {
+    let configuration: SectionViewModel.Configuration
     
     @Published private(set) var state: State = .loading
     
-    private var trigger = Trigger()
+    private let trigger = Trigger()
+    private var selectedItems = Set<Content.Item>()
     private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
-        return section.properties.displaysTitle ? section.properties.title : nil
+        let properties = configuration.properties
+        return properties.displaysTitle ? properties.title : nil
+    }
+    
+    var numberOfSelectedItems: Int {
+        return selectedItems.count
     }
     
     init(section: Content.Section, filter: SectionFiltering?) {
-        self.section = section
+        self.configuration = SectionViewModel.Configuration(section)
         
-        let rowSection = SectionViewModel.Section(section)
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [trigger] in
+        // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
+        // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
             return Publishers.CombineLatest(
-                rowSection.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
-                                                paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
-                                                filter: filter)
+                configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
+                                                   paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
+                                                   filter: filter)
                     .scan([]) { $0 + $1 },
-                rowSection.properties.removalPublisher()
+                configuration.properties.interactiveUpdatesPublisher()
                     .prepend(Just([]))
                     .setFailureType(to: Error.self)
             )
@@ -39,9 +46,8 @@ class SectionViewModel: ObservableObject {
                 return items.filter { !removedItems.contains($0) }
             }
             .map { items in
-                let headerItem = rowSection.viewModelProperties.headerItem(from: items)
-                let rowItems = removeDuplicates(in: rowSection.viewModelProperties.rowItems(from: items))
-                return State.loaded(headerItem: headerItem, row: Row(section: rowSection, items: rowItems))
+                let rows = configuration.viewModelProperties.rows(from: removeDuplicates(in: items))
+                return State.loaded(rows: rows)
             }
             .catch { error in
                 return Just(State.failed(error: error))
@@ -50,7 +56,8 @@ class SectionViewModel: ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }
@@ -66,12 +73,37 @@ class SectionViewModel: ObservableObject {
             trigger.activate(for: TriggerId.reload)
         }
     }
+    
+    func select(_ item: Content.Item) {
+        selectedItems.insert(item)
+    }
+    
+    func deselect(_ item: Content.Item) {
+        selectedItems.remove(item)
+    }
+    
+    func clearSelection() {
+        selectedItems.removeAll()
+    }
+    
+    func deleteSelection() {
+        let properties = configuration.properties
+        
+        properties.remove(Array(selectedItems))
+        selectedItems.removeAll()
+        
+        if let analyticsDeletionHiddenEventTitle = properties.analyticsDeletionHiddenEventTitle {
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.source = AnalyticsSource.selection.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
+        }
+    }
 }
 
 // MARK: Types
 
 extension SectionViewModel {
-    struct Section: Hashable {
+    struct Configuration: Hashable {
         let wrappedValue: Content.Section
         
         init(_ wrappedValue: Content.Section) {
@@ -92,34 +124,75 @@ extension SectionViewModel {
         }
     }
     
-    enum HeaderItem {
+    enum Header: Hashable {
+        enum Size {
+            case zero
+            case small
+            case large
+        }
+        
+        case none
+        case title(String)
         case item(Content.Item)
         case show(SRGShow)
+        
+        var sectionTopInset: CGFloat {
+            switch self {
+            case .title:
+                return constant(iOS: 8, tvOS: 12)
+            default:
+                return 0
+            }
+        }
+    }
+    
+    struct Section: Hashable, Indexable {
+        let id: String
+        let header: Header
+        
+        var indexTitle: String {
+            return id.uppercased()
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(id)
+        }
     }
     
     typealias Item = Content.Item
-    typealias Row = CollectionRow<Section, Item>
+    
+    // Non-empty rows only. The section view namely supports optional header pinning, and the layout could raise an
+    // assertion if some collection section has no items, while its header height is smaller than the layout inter group
+    // spacing.
+    typealias Row = NonEmptyCollectionRow<Section, Item>
     
     enum State {
         case loading
         case failed(error: Error)
-        case loaded(headerItem: HeaderItem?, row: Row)
+        case loaded(rows: [Row])
         
-        var isEmpty: Bool {
-            if case let .loaded(headerItem: _, row: row) = self {
-                return row.isEmpty
+        var topHeaderSize: Header.Size {
+            if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
+                switch firstSection.header {
+                case .title:
+                    return .small
+                case .item, .show:
+                    return .large
+                case .none:
+                    return .zero
+                }
             }
             else {
-                return true
+                return .zero
             }
         }
         
-        var headerItem: HeaderItem? {
-            if case let .loaded(headerItem: headerItem, row: _) = self {
-                return headerItem
+        var isEmpty: Bool {
+            if case let .loaded(rows: rows) = self {
+                return rows.isEmpty
             }
             else {
-                return nil
+                return true
             }
         }
     }
@@ -135,15 +208,55 @@ extension SectionViewModel {
         case loadMore
         case reload
     }
+    
+    fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
+        if let row = Row(section: Section(id: "main", header: header), items: items) {
+            return [row]
+        }
+        else {
+            return []
+        }
+    }
+    
+    private static func alphabeticalRows(from groups: [(key: Character, value: [Item])]) -> [Row] {
+        return groups.compactMap { character, items in
+            return Row(
+                section: Section(id: String(character), header: .title(String(character).uppercased())),
+                items: items
+            )
+        }
+    }
+    
+    /// Group items into alphabetical rows. If smart mode is enabled grouping is only performed when the result
+    /// of the grouping is well-balanced.
+    fileprivate static func alphabeticalRows(from items: [Item], smart: Bool) -> [Row] {
+        let groups = Item.groupAlphabetically(items)
+        guard groups.count > 1 else { return consolidatedRows(with: items) }
+        
+        if smart {
+            // Group into different rows only if we have several groups whose row length median is larger than a
+            // given threshold, so that we get a balanced result.
+            if let medianCount = groups.map({ Double($0.value.count) }).median(), medianCount > 2 {
+                return alphabeticalRows(from: groups)
+            }
+            else {
+                return consolidatedRows(with: items)
+            }
+        }
+        else {
+            return alphabeticalRows(from: groups)
+        }
+    }
 }
 
 // MARK: Properties
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
+    var pinToVisibleBounds: Bool { get }
+    var userActivity: NSUserActivity? { get }
     
-    func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem?
-    func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item]
+    func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
 
 private extension SectionViewModel {
@@ -176,21 +289,48 @@ private extension SectionViewModel {
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
-            if contentSection.type == .showAndMedias, let firstItem = items.first, case .show = firstItem {
-                return .item(firstItem)
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return true
+                default:
+                    return false
+                }
+            default:
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination; no headers.
+                return false
             }
-            else {
-                return nil
-            }
+            #else
+            return false
+            #endif
         }
         
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
-            if contentSection.type == .showAndMedias, case .show = items.first {
-                return Array(items.suffix(from: 1))
-            }
-            else {
-                return items
+        var userActivity: NSUserActivity? {
+            return nil
+        }
+        
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            switch contentSection.type {
+            case .showAndMedias:
+                if let firstItem = items.first, case .show = firstItem {
+                    return SectionViewModel.consolidatedRows(with: Array(items.suffix(from: 1)), header: .item(firstItem))
+                }
+                else {
+                    return SectionViewModel.consolidatedRows(with: items)
+                }
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return SectionViewModel.alphabeticalRows(from: items, smart: true)
+                default:
+                    return SectionViewModel.consolidatedRows(with: items)
+                }
+            default:
+                // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
+                return SectionViewModel.consolidatedRows(with: items)
             }
         }
     }
@@ -200,28 +340,72 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
-            case .radioFavoriteShows, .radioAllShows, .tvAllShows:
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid
             }
         }
         
-        func headerItem(from items: [SectionViewModel.Item]) -> SectionViewModel.HeaderItem? {
+        var pinToVisibleBounds: Bool {
+            #if os(iOS)
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
+                return true
+            default:
+                return false
+            }
+            #else
+            return false
+            #endif
+        }
+        
+        var userActivity: NSUserActivity? {
+            guard let bundleIdentifier = Bundle.main.bundleIdentifier,
+                  let applicationVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") else {
+                return nil
+            }
+            
             switch configuredSection {
             case let .show(show):
-                return .show(show)
+                guard let data = try? NSKeyedArchiver.archivedData(withRootObject: show, requiringSecureCoding: false) else { return nil }
+                let userActivity = NSUserActivity(activityType: bundleIdentifier.appending(".displaying"))
+                userActivity.title = String(format: NSLocalizedString("Display %@ episodes", comment: "User activity title when displaying a show page"), show.title)
+                userActivity.webpageURL = ApplicationConfiguration.shared.sharingURL(for: show)
+                userActivity.addUserInfoEntries(from: [
+                    "URNString": show.urn,
+                    "SRGShowData": data,
+                    "applicationVersion": applicationVersion
+                ])
+                
+                #if os(iOS)
+                userActivity.isEligibleForPrediction = true
+                userActivity.persistentIdentifier = show.urn
+                let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
+                userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
+                #endif
+                
+                return userActivity
             default:
                 return nil
             }
         }
         
-        func rowItems(from items: [SectionViewModel.Item]) -> [SectionViewModel.Item] {
-            return items
+        func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return SectionViewModel.alphabeticalRows(from: items, smart: true)
+            case .radioAllShows, .tvAllShows:
+                return SectionViewModel.alphabeticalRows(from: items, smart: false)
+            case let .show(show):
+                return SectionViewModel.consolidatedRows(with: items, header: .show(show))
+            default:
+                return SectionViewModel.consolidatedRows(with: items)
+            }
         }
     }
 }

@@ -12,6 +12,8 @@ struct LiveMediaCell: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = LiveMediaCellViewModel()
     
+    @Environment(\.isSelected) private var isSelected
+    
     init(media: SRGMedia?) {
         _media = .constant(media)
     }
@@ -30,6 +32,7 @@ struct LiveMediaCell: View {
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .background(Color.white.opacity(0.1))
                 .redactable()
+                .selectionAppearance(when: isSelected && media != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             #endif
@@ -64,7 +67,6 @@ struct LiveMediaCell: View {
                 
                 if let progress = model.progress {
                     ProgressBar(value: progress)
-                        .opacity(progress != 0 ? 1 : 0)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 }
@@ -142,20 +144,16 @@ class LiveMediaCellSize: NSObject {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
-    }
-    
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio, 0, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
     }
 }
 
 // MARK: Preview
 
 struct LiveMediaCell_Previews: PreviewProvider {
-    static private let media = Mock.media(.livestream)
-    static private let size = LiveMediaCellSize.swimlane().previewSize
+    private static let media = Mock.media(.livestream)
+    private static let size = LiveMediaCellSize.swimlane().previewSize
     
     static var previews: some View {
         #if os(tvOS)

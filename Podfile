@@ -9,11 +9,15 @@ abstract_target 'Play SRG' do
     platform :ios, '12.0'
 
     pod 'AutoCoding'
-    pod 'BDKCollectionIndexView'
     pod 'FSCalendar'
     pod 'google-cast-sdk-no-bluetooth'
-    pod 'InAppSettingsKit', '3.1.4'            # 3.1.5 has a public header exposition issue
-    pod 'MaterialComponents/Tabs', '118.2.0'   # Tabs replaced with new implementation as of 119.0.0
+    pod 'InAppSettingsKit', '3.3.0'
+    pod 'MaterialComponents/Tabs', '118.2.0' # Tabs replaced with new implementation as of 119.0.0
+    
+    pod 'ShowTime',
+        configurations: ['Debug', 'Nightly', 'Nightly_AppCenter', 'Beta', 'Beta_AppCenter']
+    pod 'FLEX',
+        configurations: ['Debug', 'Nightly_AppCenter', 'Beta_AppCenter']
 
     target 'Play SRF' do
     end
@@ -33,7 +37,9 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
+            'Nightly_AppCenter' => :release,
             'Beta' => :release,
+            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 
@@ -60,7 +66,9 @@ abstract_target 'Play SRG' do
     project 'PlaySRG.xcodeproj',
             'Debug' => :debug,
             'Nightly' => :release,
+            'Nightly_AppCenter' => :release,
             'Beta' => :release,
+            'Beta_AppCenter' => :release,
             'AppStore' => :release
   end
 end

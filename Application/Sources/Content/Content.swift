@@ -40,6 +40,54 @@ enum Content {
         
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?)
+        
+        private var title: String? {
+            switch self {
+            case let .media(media):
+                return media.title
+            case let .show(show):
+                return show.title
+            case let .topic(topic):
+                return topic.title
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess:
+                return nil
+            }
+        }
+        
+        static func groupAlphabetically(_ items: [Item]) -> [(key: Character, value: [Item])] {
+            return items.groupedAlphabetically { $0.title }
+        }
+    }
+    
+    enum EmptyType: Hashable {
+        case favoriteShows
+        case episodesFromFavorites
+        case history
+        case resumePlayback
+        case watchLater
+        case generic
+    }
+    
+    static func medias(from items: [Content.Item]) -> [SRGMedia] {
+        return items.compactMap { item in
+            if case let .media(media) = item {
+                return media
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
+    static func shows(from items: [Content.Item]) -> [SRGShow] {
+        return items.compactMap { item in
+            if case let .show(show) = item {
+                return show
+            }
+            else {
+                return nil
+            }
+        }
     }
 }
 
@@ -56,9 +104,13 @@ protocol SectionProperties {
     var label: String? { get }
     var placeholderItems: [Content.Item] { get }
     var displaysTitle: Bool { get }
+    var supportsEdition: Bool { get }
+    var emptyType: Content.EmptyType { get }
+    var imageType: SRGImageType { get }
     
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
+    var analyticsDeletionHiddenEventTitle: String? { get }
     
     #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -68,11 +120,14 @@ protocol SectionProperties {
     /// results can be retrieved (if any) using a paginator, one page at a time.
     func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error>
     
-    /// Publisher which accumulates removed items during its lifetime (removals must be signaled with dedicated `Signal` methods).
-    func removalPublisher() -> AnyPublisher<[Content.Item], Never>
+    /// Publisher for interactive updates (addition / removal of items by the user).
+    func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never>
     
     /// Signal which can be used to trigger a section reload.
     func reloadSignal() -> AnyPublisher<Void, Never>?
+    
+    /// Method to be called for removing the specified items from an editable section.
+    func remove(_ items: [Content.Item])
 }
 
 private extension Content {
@@ -101,6 +156,8 @@ private extension Content {
                     return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
                 case .showAccess:
                     return NSLocalizedString("Shows", comment: "Title label used to present the TV shows AZ and TV shows by date access buttons")
+                case .topicSelector:
+                    return NSLocalizedString("Topics", comment: "Title label used to present the topic list")
                 default:
                     return nil
                 }
@@ -144,6 +201,59 @@ private extension Content {
             return contentSection.type != .showAndMedias
         }
         
+        var supportsEdition: Bool {
+            switch contentSection.type {
+            case .medias, .showAndMedias, .shows:
+                return false
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows, .resumePlayback, .watchLater:
+                    return true
+                default:
+                    return false
+                }
+            case .none:
+                return false
+            }
+        }
+        
+        var emptyType: Content.EmptyType {
+            switch contentSection.type {
+            case .predefined:
+                switch contentSection.presentation.type {
+                case .favoriteShows:
+                    return .favoriteShows
+                case .personalizedProgram:
+                    return .episodesFromFavorites
+                case .resumePlayback:
+                    return .resumePlayback
+                case .watchLater:
+                    return .watchLater
+                default:
+                    return .generic
+                }
+            default:
+                return .generic
+            }
+        }
+
+        var imageType: SRGImageType {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            switch contentSection.type {
+            case .shows:
+                return .showPoster
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows:
+                    return .showPoster
+                default:
+                    return .default
+                }
+            default:
+                return .default
+            }
+        }
+        
         var analyticsTitle: String? {
             switch contentSection.type {
             case .medias, .showAndMedias, .shows:
@@ -158,7 +268,9 @@ private extension Content {
                     return AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
                     return AnalyticsPageTitle.watchLater.rawValue
-                case .none, .livestreams, .topicSelector, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                case .topicSelector:
+                    return AnalyticsPageTitle.topics.rawValue
+                case .none, .livestreams, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
                     return nil
                 }
             case .none:
@@ -171,8 +283,21 @@ private extension Content {
             case .medias, .showAndMedias, .shows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.section.rawValue]
             case .predefined:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .none:
+                return nil
+            }
+        }
+        
+        var analyticsDeletionHiddenEventTitle: String? {
+            switch presentation.type {
+            case .favoriteShows:
+                return AnalyticsTitle.favoriteRemove.rawValue
+            case .watchLater:
+                return AnalyticsTitle.watchLaterRemove.rawValue
+            case .resumePlayback:
+                return AnalyticsTitle.historyRemove.rawValue
+            default:
                 return nil
             }
         }
@@ -257,14 +382,16 @@ private extension Content {
             }
         }
         
-        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+        func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
                 case .favoriteShows, .personalizedProgram:
-                    return Signal.favoritesRemoval()
+                    return UserInteractionSignal.favoriteUpdates()
+                case .resumePlayback:
+                    return UserInteractionSignal.historyUpdates()
                 case .watchLater:
-                    return Signal.watchLaterRemoval()
+                    return UserInteractionSignal.watchLaterUpdates()
                 default:
                     return Just([]).eraseToAnyPublisher()
                 }
@@ -276,11 +403,26 @@ private extension Content {
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
             case .favoriteShows, .personalizedProgram:
-                return Signal.favoritesUpdate()
+                return ThrottledSignal.preferenceUpdates()
             case .watchLater:
-                return Signal.watchLaterUpdate()
+                return ThrottledSignal.watchLaterUpdates()
             default:
+                // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
+                //       broadcast and apply history updates is available.
                 return nil
+            }
+        }
+        
+        func remove(_ items: [Content.Item]) {
+            switch presentation.type {
+            case .favoriteShows:
+                Content.removeFromFavorites(items)
+            case .watchLater:
+                Content.removeFromWatchLater(items)
+            case .resumePlayback:
+                Content.removeFromHistory(items)
+            default:
+                ()
             }
         }
         
@@ -308,9 +450,11 @@ private extension Content {
         
         var title: String? {
             switch configuredSection {
+            case .history:
+                return NSLocalizedString("History", comment: "Title label used to present the history")
             case .radioAllShows, .tvAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
-            case .radioFavoriteShows:
+            case .favoriteShows, .radioFavoriteShows:
                 return NSLocalizedString("Favorites", comment: "Title label used to present the radio favorite shows")
             case .radioLatest:
                 return NSLocalizedString("The latest audios", comment: "Title label used to present the radio latest audios")
@@ -330,7 +474,7 @@ private extension Content {
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
             case .radioShowAccess:
                 return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
-            case .radioWatchLater:
+            case .radioWatchLater, .watchLater:
                 return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
             case .tvLive:
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
@@ -353,11 +497,11 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch configuredSection {
-            case .show, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .radioAllShows, .tvAllShows:
+            case .favoriteShows, .radioAllShows, .tvAllShows:
                 return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioShowAccess, .radioWatchLater:
                 return []
@@ -368,13 +512,51 @@ private extension Content {
             return true
         }
         
+        var supportsEdition: Bool {
+            switch configuredSection {
+            case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var emptyType: Content.EmptyType {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return .favoriteShows
+            case .radioLatestEpisodes:
+                return .episodesFromFavorites
+            case .radioWatchLater, .watchLater:
+                return .watchLater
+            case .history:
+                return .history
+            case .radioResumePlayback:
+                return .resumePlayback
+            default:
+                return .generic
+            }
+        }
+        
+        var imageType: SRGImageType {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            switch configuredSection {
+            case .tvAllShows:
+                return .showPoster
+            default:
+                return .default
+            }
+        }
+        
         var analyticsTitle: String? {
             switch configuredSection {
             case let .show(show):
                 return show.title
+            case .history:
+                return AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
                 return AnalyticsPageTitle.showsAZ.rawValue
-            case .radioFavoriteShows:
+            case .favoriteShows, .radioFavoriteShows:
                 return AnalyticsPageTitle.favorites.rawValue
             case .radioLatest, .radioLatestVideos:
                 return AnalyticsPageTitle.latest.rawValue
@@ -386,13 +568,26 @@ private extension Content {
                 return AnalyticsPageTitle.mostPopular.rawValue
             case .radioResumePlayback:
                 return AnalyticsPageTitle.resumePlayback.rawValue
-            case .radioWatchLater:
+            case .radioWatchLater, .watchLater:
                 return AnalyticsPageTitle.watchLater.rawValue
             case .tvLiveCenter:
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.events.rawValue
             case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
+                return nil
+            }
+        }
+        
+        var analyticsDeletionHiddenEventTitle: String? {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return AnalyticsTitle.favoriteRemove.rawValue
+            case .radioWatchLater, .watchLater:
+                return AnalyticsTitle.watchLaterRemove.rawValue
+            case .history, .radioResumePlayback:
+                return AnalyticsTitle.historyRemove.rawValue
+            default:
                 return nil
             }
         }
@@ -425,6 +620,8 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
                 return nil
+            case .favoriteShows, .history, .watchLater:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
             }
         }
         
@@ -448,6 +645,18 @@ private extension Content {
             switch configuredSection {
             case let .show(show):
                 return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .favoriteShows:
+                return dataProvider.favoritesPublisher(filter: nil)
+                    .map { $0.map { .show($0) } }
+                    .eraseToAnyPublisher()
+            case .history:
+                return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: nil)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .watchLater:
+                return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: nil)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvAllShows:
@@ -533,12 +742,14 @@ private extension Content {
             }
         }
         
-        func removalPublisher() -> AnyPublisher<[Content.Item], Never> {
+        func interactiveUpdatesPublisher() -> AnyPublisher<[Content.Item], Never> {
             switch configuredSection {
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesRemoval()
-            case .radioWatchLater:
-                return Signal.watchLaterRemoval()
+            case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
+                return UserInteractionSignal.favoriteUpdates()
+            case .history, .radioResumePlayback:
+                return UserInteractionSignal.historyUpdates()
+            case .radioWatchLater, .watchLater:
+                return UserInteractionSignal.watchLaterUpdates()
             default:
                 return Just([]).eraseToAnyPublisher()
             }
@@ -546,14 +757,48 @@ private extension Content {
         
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch configuredSection {
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
-                return Signal.favoritesUpdate()
-            case .radioWatchLater:
-                return Signal.watchLaterUpdate()
+            case .favoriteShows, .radioFavoriteShows, .radioLatestEpisodesFromFavorites:
+                return ThrottledSignal.preferenceUpdates()
+            case .radioWatchLater, .watchLater:
+                return ThrottledSignal.watchLaterUpdates()
             default:
+                // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
+                //       broadcast and apply history updates is available.
                 return nil
             }
         }
+        
+        func remove(_ items: [Content.Item]) {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                Content.removeFromFavorites(items)
+            case .radioWatchLater, .watchLater:
+                Content.removeFromWatchLater(items)
+            case .history, .radioResumePlayback:
+                Content.removeFromHistory(items)
+            default:
+                ()
+            }
+        }
+    }
+}
+
+// MARK: Removal
+
+private extension Content {
+    static func removeFromFavorites(_ items: [Content.Item]) {
+        let shows = Content.shows(from: items)
+        FavoritesRemoveShows(shows)
+    }
+    
+    static func removeFromWatchLater(_ items: [Content.Item]) {
+        let medias = Content.medias(from: items)
+        WatchLaterRemoveMedias(medias) { _ in }
+    }
+    
+    static func removeFromHistory(_ items: [Content.Item]) {
+        let medias = Content.medias(from: items)
+        HistoryRemoveMedias(medias) { _ in }
     }
 }
 
@@ -619,6 +864,30 @@ private extension SRGDataProvider {
         #endif
     }
     
+    func historyPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        // Use a deferred future to make it repeatable on-demand
+        // See https://heckj.github.io/swiftui-notes/#reference-future
+        return Deferred {
+            Future<[String], Error> { promise in
+                let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
+                SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
+                    if let error = error {
+                        promise(.failure(error))
+                    }
+                    else {
+                        promise(.success(historyEntries?.compactMap(\.uid) ?? []))
+                    }
+                }
+            }
+        }
+        .map { urns in
+            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+                .map { filter?.compatibleMedias($0) ?? $0 }
+        }
+        .switchToLatest()
+        .eraseToAnyPublisher()
+    }
+    
     func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
@@ -653,7 +922,7 @@ private extension SRGDataProvider {
                 .map {
                     return $0.filter { media in
                         guard let playbackPosition = playbackPositions[media.urn] else { return true }
-                        return HistoryCanResumePlaybackForMediaMetadataAndPosition(playbackPosition, media)
+                        return HistoryCanResumePlaybackForMediaAndPosition(playbackPosition, media)
                     }
                 }
         }

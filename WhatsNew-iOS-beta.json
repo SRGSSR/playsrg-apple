@@ -139,5 +139,10 @@
   "3.2.0-360": "- Home and topic pages are now editorialized.\n- New badges identify content about to expire or content for which alternate audio tracks are available.\n- This version requires iOS 14 and above.",
   "3.1.10-361": "- Fix crash occurring when jumping in a media and a blocked segment covers the end of it.",
   "3.2.0-362": "- Restore context menu support.\n- Modernize show detail page.\n- Fix Swiss Satellite Radio sharing.\n- Fix battery consumption issue.\n- Fix incorrect progress information sometimes displayed to the user.",
-  "3.2.1-363": "- GoogleCast button always displayed on wifi network.\n- Restore displayed dates in show pages and home pages.\n- Fix potential crashes."
+  "3.2.1-363": "- GoogleCast button always displayed on wifi network.\n- Restore displayed dates in show pages and home pages.\n- Fix potential crashes.",
+  "3.3.0-364": "- A TV guide has been added to the Videos section.\n- Screens displaying user content (Watch later, history / resume playback, favorites) have been improved. Content can be edited from anywhere and edition now supports the multiselection gesture.\n- Information display on media cells has been improved.\n",
+  "3.3.0-365": "- Add TV show poster images support.\n- Fix incorrect TV guide layout when returning from player.\n- Shows A-Z always displays the alphabetical index.\n- Show favorite detail page displays alphabetical indexes.",
+  "3.3.0-366": "- Improve program layout on compact screen width.\n- Display ST, AD and multi audio badges depending on playbable media capabilities.\n- Group favorited shows only when rows are sufficiently filled in detail view.\n\nTechnical: scene support added (only one allowed).",
+  "3.3.0-367": "- Hero stage appearance for the Videos homepage.",
+  "3.3.0-368": "- Improved iOS 15 compatibility.\n- Add topics swimlane title and topics detail page.\n- Restore shared button on show page."
 }

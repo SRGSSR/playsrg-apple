@@ -29,9 +29,3 @@ void PlayApplicationRunOnce(void (NS_NOESCAPE ^block)(void (^completionHandler)(
         block(completionHandler);
     }
 }
-
-id PlayApplicationRunOnceObjectForKey(NSString *key)
-{
-    NSDictionary *runOnceDictionary = [NSUserDefaults.standardUserDefaults objectForKey:PlayApplicationRunOnceDictionaryKey];
-    return runOnceDictionary[key];
-}

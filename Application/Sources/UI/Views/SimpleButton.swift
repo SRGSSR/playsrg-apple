@@ -7,15 +7,25 @@
 import SRGAppearanceSwift
 import SwiftUI
 
+// MARK: View
+
 /// Behavior: h-hug, v-hug
 struct SimpleButton: View {
     let icon: String
-    let label: String
+    let label: String?
     let accessibilityLabel: String
     let accessibilityHint: String?
     let action: () -> Void
     
     @State private var isFocused = false
+    
+    init(icon: String, accessibilityLabel: String, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        self.icon = icon
+        self.label = nil
+        self.accessibilityLabel = accessibilityLabel
+        self.accessibilityHint = accessibilityHint
+        self.action = action
+    }
     
     init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
@@ -29,9 +39,11 @@ struct SimpleButton: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 Image(icon)
-                Text(label)
-                    .srgFont(.button)
-                    .lineLimit(1)
+                if let label = label {
+                    Text(label)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
             }
             .onParentFocusChange { isFocused = $0 }
             .padding(.horizontal, constant(iOS: 10, tvOS: 16))
@@ -44,10 +56,15 @@ struct SimpleButton: View {
     }
 }
 
+// MARK: Preview
+
 struct SimpleButton_Previews: PreviewProvider {
     static var previews: some View {
-        SimpleButton(icon: "favorite", label: "Add to favorites", action: {})
-            .padding()
-            .previewLayout(.sizeThatFits)
+        Group {
+            SimpleButton(icon: "favorite", label: "Add to favorites", action: {})
+            SimpleButton(icon: "favorite", accessibilityLabel: "Add to favorites", action: {})
+        }
+        .padding()
+        .previewLayout(.sizeThatFits)
     }
 }

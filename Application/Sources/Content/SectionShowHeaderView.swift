@@ -129,6 +129,7 @@ struct SectionShowHeaderView: View {
         let show: SRGShow
         
         @State private var isFocused = false
+        @FirstResponder private var firstResponder
         
         var accessibilityLabel: String? {
             return show.title
@@ -139,25 +140,17 @@ struct SectionShowHeaderView: View {
         }
         
         var body: some View {
-            ResponderChain { firstResponder in
-                SimpleButton(icon: "episodes", label: show.title) {
-                    firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
-                }
-                .frame(maxWidth: 350)
+            SimpleButton(icon: "episodes", label: show.title) {
+                firstResponder.sendAction(#selector(SectionShowHeaderViewAction.openShow(sender:event:)), for: OpenShowEvent(show: show))
             }
+            .frame(maxWidth: 350)
+            .responderChain(from: firstResponder)
         }
     }
 }
 
 // MARK: Helpers
 
-// TODO: With Swift 5.5 use #if support for postfix expressions
-//       See https://github.com/apple/swift-evolution/blob/main/proposals/0308-postfix-if-config-expressions.md
-//
-//       That means:
-//         - Remove this extension
-//         - Remove uiHorizontalSizeClass
-//         - Directly inline the modifiers above with a separate expression per platform
 private extension View {
     func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
         return Group {
@@ -165,7 +158,7 @@ private extension View {
                 self
             }
             else {
-                self.frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
+                frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }
@@ -173,7 +166,7 @@ private extension View {
 
 // MARK: Size
 
-class SectionShowHeaderViewSize: NSObject {
+final class SectionShowHeaderViewSize: NSObject {
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)

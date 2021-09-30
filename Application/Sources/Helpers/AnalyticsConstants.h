@@ -51,6 +51,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMedia;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleMostPopular;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleNotifications;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitlePlayer;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleProgramGuide;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleResumePlayback;
@@ -58,6 +59,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSports;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTopics;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
@@ -83,16 +85,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemove;
 
 /**
- *  Title for events related to deletion of all downloads
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemoveAll;
-
-/**
- *  Title for events related to download playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadOpenMedia;
-
-/**
  *  Title for Google Cast events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
@@ -101,16 +93,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
  *  Title for events related to deletion of an history entry
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemove;
-
-/**
- *  Title for events related to deletion of all history entries
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemoveAll;
-
-/**
- *  Title for events related to history playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryOpenMedia;
 
 /**
  *  Title for events related to identity login / logout
@@ -170,16 +152,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 
 /**
- *  Title for events related to deletion of all favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemoveAll;
-
-/**
- *  Title for events related to opening a show from favorites
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteOpen;
-
-/**
  *  Title for events related to opening a media or show from search result
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchOpen;
@@ -205,16 +177,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
 
 /**
- *  Title for events related to deletion of all later list entries
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemoveAll;
-
-/**
- *  Title for events related to later list entry playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterOpenMedia;
-
-/**
  *  @name Analytics values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
@@ -227,15 +189,15 @@ typedef NSString * AnalyticsValue NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceAutomatic;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceDeepLink;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceLongPress;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourcePeekMenu;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceSchemeURL;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
 
 /**
  *  Actions

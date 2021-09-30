@@ -10,8 +10,12 @@
 "Clear all contents" = "Allen Inhalt entfernen";
 "Clear vector image cache" = "Vektorgrafik-Cache leeren";
 "Clear web cache" = "Web-Cache leeren";
+"Content" = "Inhalt";
 "Data protection" = "Datenschutzerklärung";
 "Default (IP-based location)" = "Default (IP-based location)";
+"Delete content saved for later" = "Für später gespeicherte Inhalte löschen";
+"Delete favorites" = "Favoriten löschen";
+"Delete history" = "Verlauf löschen";
 "Developer" = "Entwickler";
 "Display" = "Anzeigen";
 "Enable / disable FLEX" = "Flex aktivieren/deaktivieren";

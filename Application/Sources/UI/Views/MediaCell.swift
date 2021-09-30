@@ -25,6 +25,9 @@ struct MediaCell: View {
     
     @State private var isFocused = false
     
+    @Environment(\.isEditing) private var isEditing
+    @Environment(\.isSelected) private var isSelected
+    
     #if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
     #endif
@@ -46,6 +49,10 @@ struct MediaCell: View {
         return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
     }
     
+    private var hasSelectionAppearance: Bool {
+        return isSelected && media != nil
+    }
+    
     init(media: SRGMedia?, style: MediaDescription.Style, layout: Layout = .adaptive, action: (() -> Void)? = nil) {
         self.media = media
         self.style = style
@@ -60,7 +67,7 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
                     .unredactable()
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             } label: {
                 DescriptionView(media: media, style: style)
                     .padding(.top, verticalPadding)
@@ -70,14 +77,16 @@ struct MediaCell: View {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.white.opacity(0.1))
+                    .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()
                     .layoutPriority(1)
                 DescriptionView(media: media, style: style)
+                    .selectionAppearance(.transluscent, when: hasSelectionAppearance, while: isEditing)
                     .padding(.horizontal, horizontalPadding)
                     .padding(.top, verticalPadding)
             }
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             #endif
         }
         .redactedIfNil(media)
@@ -152,13 +161,21 @@ private extension MediaCell {
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Media cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Media cell hint in edit mode")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        #if os(tvOS)
+        return .isButton
+        #else
+        return isSelected ? .isSelected : []
+        #endif
     }
 }
 
 // MARK: Size
 
-class MediaCellSize: NSObject {
+final class MediaCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
@@ -172,12 +189,8 @@ class MediaCellSize: NSObject {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
-    }
-    
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
     @objc static func fullWidth() -> NSCollectionLayoutSize {
@@ -192,9 +205,9 @@ class MediaCellSize: NSObject {
 // MARK: Preview
 
 struct MediaCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = MediaCellSize.swimlane().previewSize
-    static private let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
-    static private let style = MediaDescription.Style.show
+    private static let verticalLayoutSize = MediaCellSize.swimlane().previewSize
+    private static let horizontalLayoutSize = MediaCellSize.fullWidth().previewSize
+    private static let style = MediaDescription.Style.show
     
     static var previews: some View {
         Group {

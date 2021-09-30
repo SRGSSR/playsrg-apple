@@ -1,8 +1,6 @@
 # LicensePlist configuration file (https://github.com/mono0926/LicensePlist).
 
 exclude:
-  - FetchImage      # For tvOS builds
-  - Fingertips      # For development builds
-  - FLEX            # For development builds
-  - Nuke            # For tvOS builds
-  - TvOSTextViewer  # For tvOS builds
+  - ShowTime        # Development builds only
+  - FLEX            # Development builds only
+  - TvOSTextViewer  # tvOS builds only

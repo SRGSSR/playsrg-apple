@@ -6,7 +6,9 @@
 
 import Combine
 
-class MediaVisualViewModel: ObservableObject {
+// MARK: View model
+
+final class MediaVisualViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             updatePublishers()
@@ -19,14 +21,14 @@ class MediaVisualViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     deinit {
-        HistoryPlaybackProgressAsyncCancel(taskHandle)
+        HistoryAsyncCancel(taskHandle)
     }
     
     func imageUrl(for scale: ImageScale) -> URL? {
         return media?.imageUrl(for: scale)
     }
     
-    var availabilityBadgeProperties: (text: String, color: UIColor)? {
+    var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
         guard let media = media else { return nil }
         return MediaDescription.availabilityBadgeProperties(for: media)
     }
@@ -63,7 +65,8 @@ class MediaVisualViewModel: ObservableObject {
         cancellables = []
         
         if let media = media {
-            Signal.historyUpdate(for: media.urn)
+            ThrottledSignal.historyUpdates(for: media.urn)
+                .receive(on: DispatchQueue.main)
                 .sink { [weak self] _ in
                     self?.updateProgress()
                 }
@@ -75,8 +78,8 @@ class MediaVisualViewModel: ObservableObject {
     
     // Cannot be wrapped into Futures because the progress update block might be called several times
     private func updateProgress() {
-        HistoryPlaybackProgressAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaMetadataAsync(media) { progress in
+        HistoryAsyncCancel(taskHandle)
+        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress, _ in
             DispatchQueue.main.async {
                 self.progress = Double(progress)
             }

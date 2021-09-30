@@ -10,6 +10,7 @@
 #import "ApplicationConfiguration.h"
 #import "History.h"
 #import "PlayErrors.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -210,7 +211,8 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
             
             // Transfer local playback to Google Cast
             if (controller.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
-                [UIApplication.sharedApplication.delegate.window.play_topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
+                UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
+                [topViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:NO fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                     if (playerType == PlayerTypeGoogleCast) {
                         [service disable];
                         [controller reset];
@@ -224,7 +226,7 @@ BOOL GoogleCastPlayMediaComposition(SRGMediaComposition *mediaComposition, SRGPo
 // Perform manual tracking of Google cast views when the application returns from background
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     if ([topViewController isKindOfClass:GCKUIExpandedMediaControlsViewController.class]) {
         [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitlePlayer levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
     }
@@ -287,6 +289,33 @@ static void commonInit(GCKUICastButton *self)
 - (void)openGoogleCastDeviceSelection:(id)sender
 {
     [SRGAnalyticsTracker.sharedTracker trackPageViewWithTitle:AnalyticsPageTitleDevices levels:@[ AnalyticsPageLevelPlay, AnalyticsPageLevelGoogleCast ]];
+}
+
+@end
+
+// TODO: Remove when the Google Cast SDK has fixed its device connection navigation bar appearance
+@implementation UIViewController (GoogleCastScrollEdgeAppearanceFix)
+
+#pragma mark Class methods
+
++ (void)load
+{
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillAppear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_GoogleCastScrollEdgeAppearanceFix_swizzled_viewWillAppear:)));
+}
+
+#pragma mark Swizzled methods
+
+- (void)UIViewController_GoogleCastScrollEdgeAppearanceFix_swizzled_viewWillAppear:(BOOL)animated
+{
+    [self UIViewController_GoogleCastScrollEdgeAppearanceFix_swizzled_viewWillAppear:animated];
+    
+    // The scroll edge appearance is set to transparent by default starting with iOS 15. Google Cast SDK was not
+    // updated to take this change into account (at the time of this writing: version 4.6.1).
+    if ([self isKindOfClass:NSClassFromString(@"GCKUIDeviceConnectionViewController")]) {
+        UINavigationBar *navigationBar = self.navigationController.navigationBar;
+        navigationBar.scrollEdgeAppearance = navigationBar.standardAppearance;
+    }
 }
 
 @end

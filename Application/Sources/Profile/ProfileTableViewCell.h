@@ -10,6 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ProfileTableViewCell : UITableViewCell
 
+@property (class, nonatomic, readonly) CGFloat height;
+
 @property (nonatomic) ApplicationSectionInfo *applicationSectionInfo;
 
 @end

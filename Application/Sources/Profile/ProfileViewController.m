@@ -9,8 +9,6 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
 #import "DownloadsViewController.h"
-#import "FavoritesViewController.h"
-#import "HistoryViewController.h"
 #import "Layout.h"
 #import "NavigationController.h"
 #import "NotificationTableViewCell.h"
@@ -26,7 +24,6 @@
 #import "UIDevice+PlaySRG.h"
 #import "UIScrollView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
-#import "WatchLaterViewController.h"
 
 @import SRGAppearance;
 @import SRGIdentity;
@@ -83,10 +80,6 @@
                                                name:UIAccessibilityVoiceOverStatusDidChangeNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(didReceiveNotification:)
-                                               name:PushServiceDidReceiveNotification
-                                             object:nil];
-    [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(applicationDidBecomeActive:)
                                                name:UIApplicationDidBecomeActiveNotification
                                              object:nil];
@@ -95,8 +88,16 @@
                                                name:UIApplicationWillResignActiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(badgeDidChange:)
+                                           selector:@selector(pushServiceDidReceiveNotification:)
+                                               name:PushServiceDidReceiveNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceBadgeDidChange:)
                                                name:PushServiceBadgeDidChangeNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
                                              object:nil];
     
     UIBarButtonItem *settingsBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"settings"]
@@ -117,8 +118,9 @@
     [self reloadData];
     
     // On iPad where split screen can be used, load the secondary view afterwards (if loaded too early it will be collapsed
-    // automatically onto the primary at startup for narrow layouts, which is not what we want).
-    if ([self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
+    // automatically onto the primary at startup for narrow layouts, which is not what we want). We must still avoid
+    // overriding a section if already installed before by application shorcuts.
+    if (! self.currentSectionInfo && [self play_isMovingToParentViewController] && UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
         [self openApplicationSectionInfo:self.sectionInfos.firstObject interactive:NO animated:NO];
     }
 }
@@ -199,17 +201,17 @@
         }
             
         case ApplicationSectionHistory: {
-            viewController = [[HistoryViewController alloc] init];
+            viewController = [SectionViewController historyViewController];
             break;
         }
             
         case ApplicationSectionFavorites: {
-            viewController = [[FavoritesViewController alloc] init];
+            viewController = [SectionViewController favoriteShowsViewController];
             break;
         }
             
         case ApplicationSectionWatchLater: {
-            viewController = [[WatchLaterViewController alloc] init];
+            viewController = [SectionViewController watchLaterViewController];
             break;
         }
             
@@ -378,13 +380,11 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // TODO: Fix layout and correctly scale values
     if ([self notificationAtIndexPath:indexPath]) {
         return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
     }
     else {
-        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
-        return [fontMetrics scaledValueForValue:50.f];
+        return ProfileTableViewCell.height;
     }
 }
 
@@ -438,9 +438,8 @@
     if (self.play_viewVisible) {
         [PushService.sharedService resetApplicationBadge];
         
-        // Ensure correct notification badge on notification cell availability after:
-        //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-        //   - Returning from system settings, where the user might have updated push notification authorizations.
+        // Ensure correct notification badge on notification cell availability after dismissal of the initial system alert
+        // (displayed once at most), asking the user to enable push notifications.
         [self reloadData];
     }
 }
@@ -452,15 +451,18 @@
     }
 }
 
-- (void)didReceiveNotification:(NSNotification *)notification
+- (void)pushServiceDidReceiveNotification:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
     [self reloadData];
 }
 
-- (void)badgeDidChange:(NSNotification *)notification
+- (void)pushServiceBadgeDidChange:(NSNotification *)notification
 {
-    // Ensure correct latest notifications displayed
+    [self reloadData];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
+{
     [self reloadData];
 }
 

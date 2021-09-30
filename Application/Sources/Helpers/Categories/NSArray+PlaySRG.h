@@ -10,7 +10,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSArray<__covariant ObjectType> (PlaySRG)
 
-- (NSArray<ObjectType> *)play_arrayByInsertingObject:(ObjectType)object atIndex:(NSUInteger)index;
 - (NSArray<ObjectType> *)play_arrayByRemovingObjectAtIndex:(NSUInteger)index;
 - (NSArray<ObjectType> *)play_arrayByRemovingObjectsInArray:(NSArray<ObjectType> *)array;
 

@@ -98,8 +98,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
+@property (nonatomic, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;
+
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
+@property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
@@ -297,8 +300,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     self.downloadsHintsHidden = [firebaseConfiguration boolForKey:@"downloadsHintsHidden"];
     self.showsUnavailable = [firebaseConfiguration boolForKey:@"showsUnavailable"];
+    self.tvGuideUnavailable = [firebaseConfiguration boolForKey:@"tvGuideUnavailable"];
+    
     self.subtitleAvailabilityHidden = [firebaseConfiguration boolForKey:@"subtitleAvailabilityHidden"];
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
+    self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
     
@@ -463,7 +469,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return nil;
     }
     
-    if (! contentSection.presentation.hasDetailPage && !ApplicationSettingSectionWideSupportEnabled()) {
+    if (! contentSection.presentation.hasDetailPage && ! ApplicationSettingSectionWideSupportEnabled()) {
         return nil;
     }
     

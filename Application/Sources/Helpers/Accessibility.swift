@@ -22,8 +22,14 @@ struct Accessibility<T>: DynamicProperty {
     }
 }
 
-class AccessibilitySettings: ObservableObject {
+final class AccessibilitySettings: ObservableObject {
     static let shared = AccessibilitySettings()
+    
+    // Remark: Some of these are readily accessible as environment values from SwiftUI:
+    //           - `accessibilityDifferentiateWithoutColor`,
+    //           - `accessibilityReduceTransparency`
+    //           - `accessibilityReduceMotion`
+    //           - `accessibilityInvertColors`
     
     @Published var isVoiceOverRunning = UIAccessibility.isVoiceOverRunning
     @Published var isMonoAudioEnabled = UIAccessibility.isMonoAudioEnabled
@@ -101,7 +107,7 @@ class AccessibilitySettings: ObservableObject {
         NotificationCenter.default.publisher(for: UIAccessibility.assistiveTouchStatusDidChangeNotification)
             .map { _ in UIAccessibility.isAssistiveTouchRunning }
             .assign(to: &$isAssistiveTouchRunning)
-        NotificationCenter.default.publisher(for: Notification.Name(rawValue: UIAccessibility.differentiateWithoutColorDidChangeNotification))
+        NotificationCenter.default.publisher(for: UIAccessibility.differentiateWithoutColorDidChangeNotification)
             .map { _ in UIAccessibility.shouldDifferentiateWithoutColor }
             .assign(to: &$shouldDifferentiateWithoutColor)
         NotificationCenter.default.publisher(for: UIAccessibility.onOffSwitchLabelsDidChangeNotification)

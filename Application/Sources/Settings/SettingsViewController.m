@@ -17,6 +17,7 @@
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
 #import "Onboarding.h"
+#import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
@@ -25,6 +26,7 @@
 #import "WebViewController.h"
 
 #import <InAppSettingsKit/IASKSettingsReader.h>
+#import <InAppSettingsKit/IASKSpecifier.h>
 
 @import AppCenterDistribute;
 @import libextobjc;
@@ -36,8 +38,8 @@
 @import SRGLetterbox;
 @import YYWebImage;
 
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-@import FLEX;
+#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#import <FLEX/FLEX.h>
 #endif
 
 // Autoplay group
@@ -51,7 +53,6 @@ static NSString * const SettingsPermissionsGroup = @"Group_Permissions";
 static NSString * const SettingsSystemSettingsButton = @"Button_SystemSettings";
 
 // Information group
-static NSString * const SettingsInformationGroup = @"Group_Information";
 static NSString * const SettingsFeaturesButton = @"Button_Features";
 static NSString * const SettingsWhatsNewButton = @"Button_WhatsNew";
 static NSString * const SettingsTermsAndConditionsButton = @"Button_TermsAndConditions";
@@ -68,6 +69,12 @@ static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
+
+// Content group
+static NSString * const SettingsContentGroup = @"Group_Content";
+static NSString * const SettingsDeleteHistoryButton = @"Button_DeleteHistory";
+static NSString * const SettingsDeleteFavoritesButton = @"Button_DeleteFavorites";
+static NSString * const SettingsDeleteWatchLaterButton = @"Button_DeleteWatchLater";
 
 // Reset group
 static NSString * const SettingsResetGroup = @"Group_Reset";
@@ -123,6 +130,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                                            selector:@selector(userDataDidFinishSynchronization:)
                                                name:SRGUserDataDidStartSynchronizationNotification
                                              object:SRGUserData.currentUserData];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
+                                             object:nil];
 }
 
 #pragma mark Helpers
@@ -156,6 +167,14 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
+#elif !defined(NIGHTLY_APPCENTER) && !defined(BETA_APPCENTER)
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    [hiddenKeys addObject:SettingsDeveloperGroup];
+    [hiddenKeys addObject:SettingsFLEXButton];
+
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
 #else
     if (! MSACDistribute.isEnabled) {
         [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
@@ -255,6 +274,63 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }] resume];
 }
 
+#pragma mark Subscriptions
+
+- (void)subscribeToAllShows
+{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when subscribing to all TV and radio shows")
+                                                                             message:NSLocalizedString(@"Subscribing to all TV and radio shows…", @"Message description displayed when subscribing to all TV and radio shows")
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alertController animated:YES completion:nil];
+    
+    @weakify(self)
+    self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
+        @strongify(self)
+        
+        if (finished) {
+            [self dismissViewControllerAnimated:YES completion:^{
+                NSString *message = error ? NSLocalizedString(@"Automatic subscriptions failed. Please retry.", @"Message description displayed when the user could not be subscribed to all TV and radio shows") : NSLocalizedString(@"Subscribed to all TV and radio shows.", @"Message description displayed when the user was subscribed to all TV and radio shows");
+                UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when the user subscribed to all TV and radio shows")
+                                                                                         message:message
+                                                                                  preferredStyle:UIAlertControllerStyleAlert];
+                [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Title of the button when the user subscribed to all TV and radio shows") style:UIAlertActionStyleDefault handler:NULL]];
+                [self presentViewController:alertController animated:YES completion:nil];
+            }];
+        }
+    }];
+    
+    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
+    SRGVendor vendor = applicationConfiguration.vendor;
+    
+    SRGPageRequest *tvRequest = [[SRGDataProvider.currentDataProvider tvShowsForVendor:vendor withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+        @strongify(self)
+        
+        [self.requestQueue reportError:error];
+        [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (! FavoritesIsSubscribedToShow(show)) {
+                FavoritesAddShow(show);
+                FavoritesToggleSubscriptionForShow(show);
+            }
+        }];
+    }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
+    [self.requestQueue addRequest:tvRequest resume:YES];
+    
+    for (RadioChannel *radioChannel in applicationConfiguration.radioChannels) {
+        SRGPageRequest *radioRequest = [[SRGDataProvider.currentDataProvider radioShowsForVendor:vendor channelUid:radioChannel.uid withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
+            @strongify(self)
+            
+            [self.requestQueue reportError:error];
+            [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
+                if (! FavoritesIsSubscribedToShow(show)) {
+                    FavoritesAddShow(show);
+                    FavoritesToggleSubscriptionForShow(show);
+                }
+            }];
+        }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
+        [self.requestQueue addRequest:radioRequest resume:YES];
+    }
+}
+
 #pragma mark IASKSettingsDelegate protocol
 
 - (void)settingsViewController:(IASKAppSettingsViewController *)settingsViewController buttonTappedForSpecifier:(IASKSpecifier *)specifier
@@ -340,62 +416,49 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSURL *appCenterURL = (appCenterURLString.length > 0) ? [NSURL URLWithString:appCenterURLString] : nil;
         if (appCenterURL) {
             SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:appCenterURL];
-            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when subscribing to all TV and radio shows")
-                                                                                 message:NSLocalizedString(@"Subscribing to all TV and radio shows…", @"Message description displayed when subscribing to all TV and radio shows")
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subscribe to all shows?", @"Title of the message displayed when the user is about to subscribe to all shows")
+                                                                                 message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Subscribe", @"Title of a subscription button") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self subscribeToAllShows];
+        }]];
         [self presentViewController:alertController animated:YES completion:nil];
-        
-        @weakify(self)
-        self.requestQueue = [[SRGRequestQueue alloc] initWithStateChangeBlock:^(BOOL finished, NSError * _Nullable error) {
-            @strongify(self)
-            
-            if (finished) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    NSString *message = error ? NSLocalizedString(@"Automatic subscriptions failed. Please retry.", @"Message description displayed when the user could not be subscribed to all TV and radio shows") : NSLocalizedString(@"Subscribed to all TV and radio shows.", @"Message description displayed when the user was subscribed to all TV and radio shows");
-                    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Automatic subscriptions", @"Message title displayed when the user subscribed to all TV and radio shows")
-                                                                                             message:message
-                                                                                      preferredStyle:UIAlertControllerStyleAlert];
-                    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"OK", @"Title of the button when the user subscribed to all TV and radio shows") style:UIAlertActionStyleDefault handler:NULL]];
-                    [self presentViewController:alertController animated:YES completion:nil];
-                }];
-            }
-        }];
-        
-        ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-        SRGVendor vendor = applicationConfiguration.vendor;
-        
-        SRGPageRequest *tvRequest = [[SRGDataProvider.currentDataProvider tvShowsForVendor:vendor withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-            @strongify(self)
-            
-            [self.requestQueue reportError:error];
-            [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                if (! FavoritesIsSubscribedToShow(show)) {
-                    FavoritesAddShow(show);
-                    FavoritesToggleSubscriptionForShow(show);
-                }
-            }];
-        }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
-        [self.requestQueue addRequest:tvRequest resume:YES];
-        
-        for (RadioChannel *radioChannel in applicationConfiguration.radioChannels) {
-            SRGPageRequest *radioRequest = [[SRGDataProvider.currentDataProvider radioShowsForVendor:vendor channelUid:radioChannel.uid withCompletionBlock:^(NSArray<SRGShow *> * _Nullable shows, SRGPage * _Nonnull page, SRGPage * _Nullable nextPage, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
-                @strongify(self)
-                
-                [self.requestQueue reportError:error];
-                [shows enumerateObjectsUsingBlock:^(SRGShow * _Nonnull show, NSUInteger idx, BOOL * _Nonnull stop) {
-                    if (! FavoritesIsSubscribedToShow(show)) {
-                        FavoritesAddShow(show);
-                        FavoritesToggleSubscriptionForShow(show);
-                    }
-                }];
-            }] requestWithPageSize:SRGDataProviderUnlimitedPageSize];
-            [self.requestQueue addRequest:radioRequest resume:YES];
-        }
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteHistoryButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete history", @"Title of the message displayed when the user is about to delete the history")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"The history will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete the history") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SRGUserData.currentUserData.history discardHistoryEntriesWithUids:nil completionBlock:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteFavoritesButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete favorites", @"Title of the message displayed when the user is about to delete all favorites")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"Favorites and notification subscriptions will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete all favorites") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            FavoritesRemoveShows(nil);
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else if ([specifier.key isEqualToString:SettingsDeleteWatchLaterButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete content saved for later", @"Title of the message displayed when the user is about to delete content saved for later")
+                                                                                 message:SRGIdentityService.currentIdentityService.isLoggedIn ? NSLocalizedString(@"Content saved for later will be deleted on all devices connected to your account.", @"Message displayed when the user is about to delete content saved for later") : nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Delete", @"Title of a delete button") style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+            [SRGUserData.currentUserData.playlists discardPlaylistEntriesWithUids:nil fromPlaylistWithUid:SRGPlaylistUidWatchLater completionBlock:nil];
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else if ([specifier.key isEqualToString:SettingsClearWebCacheButton]) {
         [self clearWebCache];
@@ -408,7 +471,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [UIImage srg_clearVectorImageCache];
         [Download removeAllDownloads];
     }
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
     else if ([specifier.key isEqualToString:SettingsFLEXButton]) {
         [[FLEXManager sharedManager] toggleExplorer];
     }
@@ -418,7 +481,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (NSString *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController titleForFooterInSection:(NSInteger)section specifier:(IASKSpecifier *)specifier
 {
     NSString *key = [settingsViewController.settingsReader keyForSection:section];
-    if ([key isEqualToString:SettingsInformationGroup]) {
+    if ([key isEqualToString:SettingsContentGroup]) {
         if (SRGIdentityService.currentIdentityService.isLoggedIn) {
             NSDate *synchronizationDate = SRGUserData.currentUserData.user.synchronizationDate;
             NSString *dateString = synchronizationDate ? [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:synchronizationDate] : NSLocalizedString(@"Never", @"Text displayed when no data synchronization has been made yet");
@@ -516,6 +579,11 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (void)userDataDidFinishSynchronization:(NSNotification *)notification
 {
     [self.tableView reloadData];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
+{
+    [self updateSettingsVisibility];
 }
 
 #pragma mark SFSafariViewControllerDelegate

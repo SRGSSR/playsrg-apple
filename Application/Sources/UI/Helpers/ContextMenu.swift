@@ -13,9 +13,9 @@ enum ContextMenu {
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch item {
         case let .media(media):
-            return configuration(for: media, item: item, identifier: identifier, in: viewController)
+            return configuration(for: media, identifier: identifier, in: viewController)
         case let .show(show):
-            return configuration(for: show, item: item, identifier: identifier, in: viewController)
+            return configuration(for: show, identifier: identifier, in: viewController)
         default:
             return nil
         }
@@ -77,25 +77,25 @@ private extension ContextMenu {
 // MARK: Media context menu
 
 private extension ContextMenu {
-    // TODO: Make item mandatory when the ObjC API is not needed anymore
-    static func configuration(for media: SRGMedia, item: Content.Item?, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+    static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
             return MediaPreviewViewController(media: media)
         } actionProvider: { _ in
-            return menu(for: media, item: item, in: viewController)
+            return menu(for: media, in: viewController)
         }
     }
     
-    private static func menu(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIMenu {
+    private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
-            watchLaterAction(for: media, item: item, in: viewController),
-            downloadAction(for: media, item: item, in: viewController),
+            watchLaterAction(for: media, in: viewController),
+            historyAction(for: media, in: viewController),
+            downloadAction(for: media, in: viewController),
             sharingAction(for: media, in: viewController),
             moreEpisodesAction(for: media, in: viewController)
         ].compactMap { $0 })
     }
     
-    private static func watchLaterAction(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
+    private static func watchLaterAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         func title(for action: WatchLaterAction) -> String {
             if action == .add {
                 if media.mediaType == .audio {
@@ -114,16 +114,12 @@ private extension ContextMenu {
             return (action == .add) ? UIImage(named: "watch_later")! : UIImage(named: "watch_later_full")!
         }
         
-        let action = WatchLaterAllowedActionForMediaMetadata(media)
+        let action = WatchLaterAllowedActionForMedia(media)
         guard action != .none else { return nil }
         
         let menuAction = UIAction(title: title(for: action), image: image(for: action)) { _ in
-            WatchLaterToggleMediaMetadata(media) { added, error in
+            WatchLaterToggleMedia(media) { added, error in
                 guard error == nil else { return }
-                
-                if !added, let item = item {
-                    Signal.removeLater(for: item)
-                }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
                 labels.source = AnalyticsSource.peekMenu.rawValue
@@ -141,11 +137,35 @@ private extension ContextMenu {
         return menuAction
     }
     
-    private static func downloadAction(for media: SRGMedia, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
+    private static func historyAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+        guard HistoryContainsMedia(media) else { return nil }
+                
+        let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
+                                  image: UIImage(named: "history")!) { _ in
+            HistoryRemoveMedias([media]) { error in
+                guard error == nil else { return }
+                
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.value = media.urn
+                
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+            }
+        }
+        menuAction.attributes = .destructive
+        return menuAction
+    }
+    
+    private static func downloadAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard Download.canDownloadMedia(media) else { return nil}
         
         func title(for download: Download?) -> String {
-            return download != nil ? NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads") : NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+            if download != nil {
+                return NSLocalizedString("Delete from downloads", comment: "Context menu action to delete a media from the downloads")
+            }
+            else {
+                return NSLocalizedString("Add to downloads", comment: "Context menu action to add a media to the downloads")
+            }
         }
         
         func image(for download: Download?) -> UIImage {
@@ -199,25 +219,29 @@ private extension ContextMenu {
 // MARK: Show context menu
 
 private extension ContextMenu {
-    // TODO: Make item mandatory when the ObjC API is not needed anymore
-    static func configuration(for show: SRGShow, item: Content.Item?, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+    static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
             return SectionViewController.showViewController(for: show)
         } actionProvider: { _ in
-            return menu(for: show, item: item, in: viewController)
+            return menu(for: show, in: viewController)
         }
     }
     
-    private static func menu(for show: SRGShow, item: Content.Item?, in viewController: UIViewController) -> UIMenu {
+    private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
-            favoriteAction(for: show, item: item, in: viewController),
+            favoriteAction(for: show, in: viewController),
             sharingAction(for: show, in: viewController)
         ].compactMap { $0 })
     }
     
-    private static func favoriteAction(for show: SRGShow, item: Content.Item?, in viewController: UIViewController) -> UIAction? {
+    private static func favoriteAction(for show: SRGShow, in viewController: UIViewController) -> UIAction? {
         func title(isFavorite: Bool) -> String {
-            return isFavorite ? NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites") : NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
+            if isFavorite {
+                return NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites")
+            }
+            else {
+                return NSLocalizedString("Add to favorites", comment: "Context menu action to add a show to favorites")
+            }
         }
         
         func image(isFavorite: Bool) -> UIImage {
@@ -227,10 +251,6 @@ private extension ContextMenu {
         let isFavorite = FavoritesContainsShow(show)
         let menuAction = UIAction(title: title(isFavorite: isFavorite), image: image(isFavorite: isFavorite)) { _ in
             FavoritesToggleShow(show)
-            
-            if isFavorite, let item = item {
-                Signal.removeFavorite(for: item)
-            }
             
             let labels = SRGAnalyticsHiddenEventLabels()
             labels.source = AnalyticsSource.peekMenu.rawValue
@@ -262,12 +282,12 @@ private extension ContextMenu {
     @objc static func configuration(for object: AnyObject, at indexPath: NSIndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch object {
         case let media as SRGMedia:
-            return ContextMenu.configuration(for: media, item: nil, identifier: indexPath, in: viewController)
+            return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
         case let show as SRGShow:
-            return ContextMenu.configuration(for: show, item: nil, identifier: indexPath, in: viewController)
+            return ContextMenu.configuration(for: show, identifier: indexPath, in: viewController)
         case let download as Download:
             if let media = download.media {
-                return ContextMenu.configuration(for: media, item: nil, identifier: indexPath, in: viewController)
+                return ContextMenu.configuration(for: media, identifier: indexPath, in: viewController)
             }
             else {
                 return nil

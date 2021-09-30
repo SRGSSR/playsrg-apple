@@ -37,7 +37,7 @@
 
 - (NSString *)emptyTableTitle
 {
-    return _emptyTableTitle ? _emptyTableTitle : NSLocalizedString(@"No results", @"Default text displayed when no results are available");
+    return _emptyTableTitle ? _emptyTableTitle : NSLocalizedString(@"No content", @"Default text displayed when no content is available");
 }
 
 - (NSString *)emptyTableSubtitle

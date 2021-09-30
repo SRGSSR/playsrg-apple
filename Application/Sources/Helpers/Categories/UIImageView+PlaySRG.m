@@ -114,7 +114,7 @@
              unavailabilityHandler:(void (^)(void))unavailabilityHandler
 {
     NSString *filePath = FilePathForImagePlaceholder(placeholder);
-    CGSize size = SizeForImageScale(scale);
+    CGSize size = SizeForImageScale(scale, type);
     UIImage *placeholderImage = filePath ? [UIImage srg_vectorImageAtPath:filePath withSize:size] : nil;
     
     void (^handleUnavailableURL)(void) = ^{

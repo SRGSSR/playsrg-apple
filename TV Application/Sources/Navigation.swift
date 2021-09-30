@@ -50,7 +50,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
             }
             .store(in: &cancellables)
         
-        let position = HistoryResumePlaybackPositionForMediaMetadata(media)
+        let position = HistoryResumePlaybackPositionForMedia(media)
         controller.playMedia(media, at: position, withPreferredSettings: nil)
         present(letterboxViewController, animated: animated) {
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
@@ -94,7 +94,7 @@ func showText(_ text: String, animated: Bool = true) {
 }
 
 private func present(_ viewController: UIViewController, animated: Bool, completion: (() -> Void)? = nil) {
-    guard let topViewController = UIApplication.shared.delegate?.window??.topViewController else { return }
+    guard let topViewController = UIApplication.shared.mainTopViewController else { return }
     
     isPresenting = true
     topViewController.present(viewController, animated: animated) {

@@ -46,16 +46,35 @@ extension String {
     
     static var loremIpsum: String {
         return """
-            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
-            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet,
-            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
-            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no
-            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,
-            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
-            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est
-            Lorem ipsum dolor sit amet.
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est. \
+            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
+            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
+            Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
+            consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, \
+            sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no \
+            sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, \
+            sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
+            eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
+    }
+    
+    func unobfuscated() -> String {
+        return components(separatedBy: .decimalDigits).joined()
     }
     
     var capitalizedFirstLetter: String {
@@ -75,9 +94,31 @@ extension Array {
         array.append(contentsOf: newElements)
         return array
     }
+    
+    subscript(safeIndex index: Int) -> Element? {
+        guard index >= 0, index < endIndex else { return nil }
+        return self[index]
+    }
+    
+    func median() -> Element? where Element: FloatingPoint {
+        guard !isEmpty else { return nil }
+        
+        let sortedSelf = sorted()
+        let count = sortedSelf.count
+        
+        if count.isMultiple(of: 2) {
+            return (sortedSelf[count / 2 - 1] + sortedSelf[count / 2]) / 2
+        }
+        else {
+            return sortedSelf[count / 2]
+        }
+    }
 }
 
 extension Collection {
+    /**
+     *  Apply a transform to each item in a collection, providing an auto-increased index with each processed item.
+     */
     func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
         var index = 0
         return try map { element in
@@ -86,11 +127,29 @@ extension Collection {
             return transformedElement
         }
     }
+    
+    /**
+     *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
+     *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
+     *  array the array of associated items is guaranteed to contain at least 1 item.
+     */
+    func groupedAlphabetically<S>(by keyForElement: (Self.Element) throws -> S?) rethrows -> [(key: Character, value: [Self.Element])] where S: StringProtocol {
+        let dictionary = try [Character: [Self.Element]](grouping: self) { element in
+            if let key = try keyForElement(element),
+               let character = key.folding(options: [.caseInsensitive, .diacriticInsensitive], locale: nil).first, character.isLetter {
+                return character
+            }
+            else {
+                return "#"
+            }
+        }
+        return dictionary.sorted { $0.key < $1.key }
+    }
 }
 
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale).width, type: type)
+        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
     }
 }
 
@@ -104,19 +163,29 @@ extension Publisher where Failure == Never {
 }
 
 extension View {
+    /**
+     *  Configure accessibility settings. If no label is provided the item will not be enabled for accessibility.
+     */
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
-        // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
-        //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-        #if os(tvOS)
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityAddTraits(traits)
-        #else
-        return accessibilityElement()
-            .accessibilityLabel(label ?? "")
-            .accessibilityHint(hint ?? "")
-            .accessibilityAddTraits(traits)
-        #endif
+        Group {
+            if let label = label, !label.isEmpty {
+                // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
+                //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
+                #if os(tvOS)
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityAddTraits(traits)
+                #else
+                accessibilityElement()
+                    .accessibilityLabel(label)
+                    .accessibilityHint(hint ?? "")
+                    .accessibilityAddTraits(traits)
+                #endif
+            }
+            else {
+                accessibility(hidden: true)
+            }
+        }
     }
     
     /**
@@ -132,6 +201,35 @@ extension View {
         let hostController = UIHostingController(rootView: self)
         #endif
         return hostController.sizeThatFits(in: size)
+    }
+}
+
+/**
+ *  Available selection styles.
+ */
+enum SelectionAppearance {
+    case dimmed                 // The view is dimmed.
+    case transluscent           // The view is slightly transluscent.
+}
+
+extension View {
+    /**
+     *  Adjust the selection appearance of the receiver, applying one of the available styles.
+     */
+    func selectionAppearance(_ appearance: SelectionAppearance = .dimmed, when selected: Bool, while editing: Bool = false) -> some View {
+        return Group {
+            if (!editing && selected) || (editing && !selected) {
+                switch appearance {
+                case .dimmed:
+                    overlay(Color.black.opacity(0.5))
+                case .transluscent:
+                    self.opacity(0.5)
+                }
+            }
+            else {
+                self
+            }
+        }
     }
 }
 
@@ -242,6 +340,16 @@ extension NSCollectionLayoutSize {
     }
 }
 
+extension View {
+    func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
+        #if os(iOS)
+        return self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+        #else
+        return self
+        #endif
+    }
+}
+
 extension UIView {
     /// Sizing behaviors
     enum SizingBehavior {
@@ -291,4 +399,60 @@ extension UIView {
         applySizingBehavior(of: hostingController, for: .horizontal)
         applySizingBehavior(of: hostingController, for: .vertical)
     }
+}
+
+extension UIViewController {
+    func deselectItems(in collectionView: UICollectionView, animated: Bool) {
+        guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
+        guard animated, let transitionCoordinator = transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
+                selectedIndexPaths.forEach { indexPath in
+                    collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
+                }
+            }, completion: { context in
+                if context.isCancelled {
+                    selectedIndexPaths.forEach { indexPath in
+                        collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                    }
+                }
+            })
+        else {
+            selectedIndexPaths.forEach { indexPath in
+                collectionView.deselectItem(at: indexPath, animated: animated)
+            }
+            return
+        }
+    }
+}
+
+extension UIApplication {
+    /// Return the main window scene among all connected scenes, if any.
+    @objc var mainWindowScene: UIWindowScene? {
+        return connectedScenes
+            .filter { $0.delegate is SceneDelegate }
+            .compactMap { $0 as? UIWindowScene }
+            .first
+    }
+    
+    /// Return the main key window among all connected scenes, if any.
+    @objc var mainWindow: UIWindow? {
+        return mainWindowScene?.windows
+            .first { $0.isKeyWindow }
+    }
+    
+    /// Return the main scene delegate, if any.
+    @objc var mainSceneDelegate: SceneDelegate? {
+        return mainWindowScene?.delegate as? SceneDelegate
+    }
+    
+    /// Return the main top view controller, if any.
+    @objc var mainTopViewController: UIViewController? {
+        return mainWindow?.play_topViewController
+    }
+
+    #if os(iOS)
+    /// Return the main tab bar root controller, if any.
+    @objc var mainTabBarController: TabBarController? {
+        return mainWindow?.rootViewController as? TabBarController
+    }
+    #endif
 }

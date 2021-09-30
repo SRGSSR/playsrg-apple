@@ -79,12 +79,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         
         self.viewControllers = viewControllers.copy;
         
-        self.tabBar.barTintColor = nil;
-        
         TabBarItemIdentifier lastOpenTabBarItem = ApplicationSettingLastOpenedTabBarItemIdentifier();
         if (lastOpenTabBarItem) {
             self.selectedIndex = lastOpenTabBarItem;
         }
+        
+        [self customizeAppearance];
     }
     return self;
 }
@@ -142,14 +142,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     [super viewDidLoad];
     
-    UITabBar.appearance.barStyle = UIBarStyleBlack;
-    UITabBar.appearance.tintColor = UIColor.whiteColor;
-    
-    for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [UITabBarItem.appearance setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f] }
-                                               forState:controlState.integerValue];
-    }
-    
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
     miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -178,8 +170,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                name:PushServiceDidReceiveNotification
                                              object:nil];
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(badgeDidChange:)
+                                           selector:@selector(pushServiceBadgeDidChange:)
                                                name:PushServiceBadgeDidChangeNotification
+                                             object:nil];
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(pushServiceStatusDidChange:)
+                                               name:PushServiceStatusDidChangeNotification
                                              object:nil];
     
     [self updateLayoutAnimated:NO];
@@ -244,6 +240,59 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [super setSelectedViewController:selectedViewController];
     
     ApplicationSettingSetLastOpenedTabBarItemIdentifier(selectedViewController.tabBarItem.tag);
+}
+
+#pragma mark Appearance
+
+- (void)customizeAppearance
+{
+    UITabBarAppearance *appearance = [[UITabBarAppearance alloc] init];
+    [appearance configureWithDefaultBackground];
+    
+    // Remove the separator (looks nicer)
+    appearance.shadowColor = UIColor.clearColor;
+    
+    UIFont *font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:12.f];
+    UIColor *normalForegroundColor = UIColor.srg_gray96Color;
+    UIColor *selectedForegroundColor = UIColor.whiteColor;
+    
+    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{ NSFontAttributeName : font,
+                                                                       NSForegroundColorAttributeName : normalForegroundColor };
+    
+    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{ NSFontAttributeName : font,
+                                                                         NSForegroundColorAttributeName : selectedForegroundColor };
+    
+    UITabBarItemAppearance *stackedItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleStacked];
+    stackedItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    stackedItemAppearance.normal.iconColor = normalForegroundColor;
+    stackedItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    stackedItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.stackedLayoutAppearance = stackedItemAppearance;
+    
+    UITabBarItemAppearance *inlineItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleInline];
+    inlineItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    inlineItemAppearance.normal.iconColor = normalForegroundColor;
+    inlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    inlineItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.inlineLayoutAppearance = inlineItemAppearance;
+    
+    UITabBarItemAppearance *compactInlineItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleCompactInline];
+    compactInlineItemAppearance.normal.titleTextAttributes = normalItemAttributes;
+    compactInlineItemAppearance.normal.iconColor = normalForegroundColor;
+    compactInlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
+    compactInlineItemAppearance.selected.iconColor = selectedForegroundColor;
+    appearance.compactInlineLayoutAppearance = compactInlineItemAppearance;
+    
+    UITabBar *tabBar = self.tabBar;
+    tabBar.standardAppearance = appearance;
+    
+    // Starting with iOS 15 the default behavior is to have a transparent tab bar appearance when reaching the
+    // scroll edge (the observed scroll view determined heuristically in most cases, but can be also set with
+    // `-setContentScrollView:` if the heuristic approach fails). We can preserve the old behavior (probably
+    // more readable) by just setting a common appearance for the standard and scroll edge cases.
+    if (@available(iOS 15.0, *)) {
+        tabBar.scrollEdgeAppearance = appearance;
+    }
 }
 
 #pragma mark View controllers
@@ -478,9 +527,8 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification
 {
-    // Ensure correct notification button availability after:
-    //   - Dismissal of the initial system alert (displayed once at most), asking the user to enable push notifications.
-    //   - Returning from system settings, where the user might have updated push notification authorizations.
+    // Ensure correct notification button availability after dismissal of the initial system alert (displayed once at most),
+    // asking the user to enable push notifications.
     [self updateProfileTabBarItem];
 }
 
@@ -494,7 +542,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [self updateProfileTabBarItem];
 }
 
-- (void)badgeDidChange:(NSNotification *)notification
+- (void)pushServiceBadgeDidChange:(NSNotification *)notification
+{
+    [self updateProfileTabBarItem];
+}
+
+- (void)pushServiceStatusDidChange:(NSNotification *)notification
 {
     [self updateProfileTabBarItem];
 }

@@ -13,11 +13,11 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";
 
-/* Title pronounced in home pages on shows A to Z button. */
+/* Show A-Z button label */
 "A to Z shows" = "Emissiuns dad A fin Z";
 
 /* Favorite label in the player view when a show can be favorited
-   Favorite label in the show view when a show can be favorited */
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Agiunscher a favurits";
 
 /* Accessibility label for the audio description badge */
@@ -48,7 +48,7 @@
 "Delete from \"Later\" list" = "Allontanar da la glista \"pli tard\"";
 
 /* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
+   Favorite label in the show view when a show has been favorited */
 "Delete from favorites" = "Allontanar da favurits";
 
 /* Show unsubscription label */
@@ -94,13 +94,17 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mes conto";
 
+/* Next day button label in program guide */
+"Next day" = "Di suandant";
+
 /* Text providing next program time information. */
 "Next, at %@" = "Proxim a las %@";
 
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
 
-/* More button hint */
+/* More button hint
+   Program cell hint */
 "Opens details." = "Avrir detagls.";
 
 /* Hint for content opened in Safari */
@@ -136,6 +140,9 @@
 /* Song cell hint */
 "Plays the music." = "Lascha tadlar musica.";
 
+/* Previous day button label in program guide */
+"Previous day" = "Di avant";
+
 /* Profile button label on home view */
 "Profile" = "Profils";
 
@@ -160,8 +167,11 @@
 /* Homepage header action hint */
 "Shows all contents." = "Mussar tuts cuntegns.";
 
-/* Title pronounced in home pages on shows by date button. */
+/* Show by date button label */
 "Shows by date" = "Emissiuns tenor data";
+
+/* Channel selector button hint */
+"Shows the channel programs" = "Mussa il program dal chanal";
 
 /* Stop button label */
 "Stop" = "Stop";
@@ -171,6 +181,10 @@
 
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Suttitels";
+
+/* Media cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "Mida la selecziun.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Attenziun";

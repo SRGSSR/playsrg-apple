@@ -7,37 +7,28 @@
 import UIKit
 
 extension UICollectionView {
-    private static let showCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow> = {
-        return UICollectionView.CellRegistration { cell, _, show in
-            cell.content = ShowCell(show: show)
-        }
-    }()
+    private static var defaultShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow>!
+    private static var posterShowCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<ShowCell>, SRGShow>!
     
-    @objc func showCell(for indexPath: IndexPath, show: SRGShow) -> UICollectionViewCell {
-        return dequeueConfiguredReusableCell(using: Self.showCellRegistration, for: indexPath, item: show)
-    }
-}
-
-@objc protocol ShowSettable {
-    var show: SRGShow? { get set }
-}
-
-extension UITableView {
-    class ShowTableViewCell: HostTableViewCell<ShowCell>, ShowSettable {
-        var show: SRGShow? {
-            willSet {
-                content = ShowCell(show: newValue, direction: .horizontal, hasSubscriptionButton: true)
+    @objc static func registerShowCell() {
+        if defaultShowCellRegistration == nil {
+            defaultShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
+                cell.content = ShowCell(show: show, style: .standard, imageType: .default)
+            }
+        }
+        if posterShowCellRegistration == nil {
+            posterShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
+                cell.content = ShowCell(show: show, style: .standard, imageType: .showPoster)
             }
         }
     }
     
-    private static let reuseIdentifier = "ShowCell"
-    
-    @objc func registerReusableShowCell() {
-        register(ShowTableViewCell.self, forCellReuseIdentifier: Self.reuseIdentifier)
-    }
-    
-    @objc func dequeueReusableShowCell(for indexPath: IndexPath) -> UITableViewCell & ShowSettable {
-        return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! ShowTableViewCell
+    @objc func showCell(for indexPath: IndexPath, show: SRGShow, imageType: SRGImageType) -> UICollectionViewCell {
+        if imageType == .showPoster {
+            return dequeueConfiguredReusableCell(using: Self.posterShowCellRegistration, for: indexPath, item: show)
+        }
+        else {
+            return dequeueConfiguredReusableCell(using: Self.defaultShowCellRegistration, for: indexPath, item: show)
+        }
     }
 }

@@ -8,8 +8,7 @@ import SRGAppearance
 import SwiftMessages
 import UIKit
 
-open class SwiftMessagesBridge: NSObject {
-    
+final class SwiftMessagesBridge: NSObject {
     /**
      *  Display a notification message.
      *
@@ -52,12 +51,11 @@ open class SwiftMessagesBridge: NSObject {
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the associated view controller.
-        var presentationController = viewController ?? UIApplication.shared.delegate?.window??.play_topViewController
+        var presentationController = viewController ?? UIApplication.shared.mainTopViewController
         while presentationController?.parent != nil {
             if presentationController is UINavigationController {
                 break
             }
-            
             presentationController = presentationController?.parent
         }
         

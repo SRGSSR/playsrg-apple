@@ -263,10 +263,6 @@
     Download *download = self.downloads[indexPath.row];
     if (download.media) {
         [self play_presentMediaPlayerWithMedia:download.media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
-        
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.value = download.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadOpenMedia labels:labels];
     }
     else if (download.state == DownloadStateDownloading) {
         [Banner showWithStyle:BannerStyleInfo
@@ -383,10 +379,6 @@
             [Download removeAllDownloads];
             self.downloads = nil;
             [self reloadDataAnimated:YES];
-            
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceSelection;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemoveAll labels:labels];
         }
         else {
             NSMutableArray<Download *> *downloadsToRemove = [NSMutableArray array];
@@ -396,13 +388,12 @@
             
             for (Download *download in downloadsToRemove) {
                 [Download removeDownload:download];
-                
-                SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-                labels.value = download.URN;
-                labels.source = AnalyticsSourceSelection;
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
             }
         }
+        
+        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+        labels.source = AnalyticsSourceSelection;
+        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleDownloadRemove labels:labels];
         
         if (self.tableView.isEditing) {
             [self setEditing:NO animated:YES];

@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "logo_rtsInfo.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "logo_rtsInfo-1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "logo_rtsInfo-2.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

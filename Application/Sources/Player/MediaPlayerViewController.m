@@ -25,7 +25,6 @@
 #import "NSDateFormatter+PlaySRG.h"
 #import "NSString+PlaySRG.h"
 #import "PlayAccessibilityFormatter.h"
-#import "PlayAppDelegate.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -52,6 +51,7 @@
 #import "UIImageView+PlaySRG.h"
 #import "UILabel+PlaySRG.h"
 #import "UIStackView+PlaySRG.h"
+#import "UITableView+PlaySRG.h"
 #import "UIView+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -622,7 +622,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation;
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
         if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
         }
@@ -942,9 +942,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         self.numberOfEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
         
-        NSInteger numberOfEpisodes = show.numberOfEpisodes;
-        if (numberOfEpisodes != 0) {
-            NSString *numberOfEpisodesString = [NSNumberFormatter localizedStringFromNumber:@(numberOfEpisodes) numberStyle:NSNumberFormatterDecimalStyle];
+        NSNumber *numberOfEpisodes = show.numberOfEpisodes;
+        if (numberOfEpisodes) {
+            NSString *numberOfEpisodesString = [NSNumberFormatter localizedStringFromNumber:numberOfEpisodes numberStyle:NSNumberFormatterDecimalStyle];
             self.numberOfEpisodesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ episodes", @"The amount of episodes available for a show"), numberOfEpisodesString];
         }
         else {
@@ -1235,7 +1235,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateWatchLaterStatusForMedia:(SRGMedia *)media
 {
-    WatchLaterAction action = WatchLaterAllowedActionForMediaMetadata(media);
+    WatchLaterAction action = WatchLaterAllowedActionForMedia(media);
     if (action == WatchLaterActionNone || self.letterboxController.continuousPlaybackUpcomingMedia || ! media) {
         self.watchLaterButton.hidden = YES;
         return;
@@ -1462,10 +1462,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         }
         
         if (indexPath) {
-            @try {
-                [self.programsTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
-            }
-            @catch (NSException *exception) {}
+            [self.programsTableView play_scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionNone animated:NO];
         }
     };
     
@@ -1576,7 +1573,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
     // we force a rotation, which itself will perform the appropriate transition from or to full-screen
     if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
-        if (UIInterfaceOrientationIsLandscape(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation)) {
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
             rotate(UIInterfaceOrientationPortrait);
             return;
         }
@@ -1592,7 +1590,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
     // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden since iOS 13,
     // in which case we must not hide it to avoid incorrect safe area insets after returning from landscape orientation.
-    self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(UIApplication.sharedApplication.delegate.window.windowScene.interfaceOrientation));
+    UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
+    self.statusBarHidden = fullScreen && (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad || UIInterfaceOrientationIsPortrait(interfaceOrientation));
     
     void (^animations)(void) = ^{
         [self setFullScreen:fullScreen];
@@ -1703,7 +1702,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
         
     SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
-    WatchLaterAddMediaMetadata(media, ^(NSError * _Nullable error) {
+    WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
         if (! error) {
             [Banner showWatchLaterAdded:YES forItemWithName:media.title inViewController:self];
         }
@@ -1721,13 +1720,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)letterboxShouldRestoreUserInterfaceForPictureInPicture
 {
     // Present the media player view controller again if needed
-    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     return ! [topViewController isKindOfClass:MediaPlayerViewController.class];
 }
 
 - (void)letterboxRestoreUserInterfaceForPictureInPictureWithCompletionHandler:(void (^)(BOOL))completionHandler
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     [topViewController presentViewController:self animated:YES completion:^{
         completionHandler(YES);
     }];
@@ -1886,6 +1885,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                       action:@selector(skipForward:)];
         skipForwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
                                                     [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxForwardSkipInterval]];
+        if (@available(iOS 15, *)) {
+            skipForwardCommand.wantsPriorityOverSystemBehavior = YES;
+        }
         [keyCommands addObject:skipForwardCommand];
     }
     
@@ -1895,7 +1897,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                        action:@selector(skipBackward:)];
         skipBackwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxBackwardSkipInterval]];
-        
+        if (@available(iOS 15, *)) {
+            skipBackwardCommand.wantsPriorityOverSystemBehavior = YES;
+        }
         [keyCommands addObject:skipBackwardCommand];
     }
     
@@ -1962,7 +1966,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         return;
     }
     
-    WatchLaterToggleMediaMetadata(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
+    WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
@@ -2117,12 +2121,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
-    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
-    [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
+    
+    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
+    [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
     
     SectionViewController *showViewController = [SectionViewController showViewControllerFor:show];
-    [appDelegate.rootTabBarController pushViewController:showViewController animated:NO];
-    [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    [sceneDelegate.rootTabBarController pushViewController:showViewController animated:NO];
+    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
 
 - (IBAction)openRadioHome:(id)sender
@@ -2135,9 +2140,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     
-    PlayAppDelegate *appDelegate = (PlayAppDelegate *)UIApplication.sharedApplication.delegate;
-    [appDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
-    [appDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
+    SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
+    [sceneDelegate.rootTabBarController openApplicationSectionInfo:applicationSectionInfo];
+    [sceneDelegate.window play_dismissAllViewControllersAnimated:YES completion:nil];
 }
 
 - (IBAction)toggleFavorite:(id)sender
@@ -2378,7 +2383,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.displayBackgroundVideoPlaybackPrompt) {
         self.displayBackgroundVideoPlaybackPrompt = NO;
         
-        UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+        UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
         if (topViewController != self) {
             return;
         }

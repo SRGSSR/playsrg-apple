@@ -7,7 +7,9 @@
 import SRGDataProviderCombine
 import SRGUserData
 
-class MediaDetailViewModel: ObservableObject {
+// MARK: View model
+
+final class MediaDetailViewModel: ObservableObject {
     struct Recommendation: Codable {
         let recommendationId: String
         let urns: [String]
@@ -33,6 +35,7 @@ class MediaDetailViewModel: ObservableObject {
     
     init() {
         NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] notification in
                 guard let self = self,
                       let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue,
@@ -58,7 +61,7 @@ class MediaDetailViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: SizeForImageScale(.large).width, type: .default)
+        return media?.imageURL(for: .width, withValue: SizeForImageScale(.large, .default).width, type: .default)
     }
     
     private func refresh() {
@@ -83,7 +86,7 @@ class MediaDetailViewModel: ObservableObject {
     
     func toggleWatchLater() {
         guard let media = media else { return }
-        WatchLaterToggleMediaMetadata(media) { added, error in
+        WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
             
             let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
@@ -98,6 +101,6 @@ class MediaDetailViewModel: ObservableObject {
     
     private func updateWatchLaterAllowedAction() {
         guard let media = media else { return }
-        watchLaterAllowedAction = WatchLaterAllowedActionForMediaMetadata(media)
+        watchLaterAllowedAction = WatchLaterAllowedActionForMedia(media)
     }
 }

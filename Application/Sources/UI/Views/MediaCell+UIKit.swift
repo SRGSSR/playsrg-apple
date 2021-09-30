@@ -7,37 +7,17 @@
 import UIKit
 
 extension UICollectionView {
-    private static let mediaCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia> = {
-        return UICollectionView.CellRegistration { cell, _, media in
-            cell.content = MediaCell(media: media, style: .show)
-        }
-    }()
+    private static var mediaCellRegistration: UICollectionView.CellRegistration<HostCollectionViewCell<MediaCell>, SRGMedia>!
     
-    @objc func mediaCell(for indexPath: IndexPath, media: SRGMedia) -> UICollectionViewCell {
-        return dequeueConfiguredReusableCell(using: Self.mediaCellRegistration, for: indexPath, item: media)
-    }
-}
-
-@objc protocol MediaSettable {
-    var media: SRGMedia? { get set }
-}
-
-extension UITableView {
-    class MediaTableViewCell: HostTableViewCell<MediaCell>, MediaSettable {
-        var media: SRGMedia? {
-            willSet {
-                content = MediaCell(media: newValue, style: .show, layout: .horizontal)
+    @objc static func registerMediaCell() {
+        if mediaCellRegistration == nil {
+            mediaCellRegistration = UICollectionView.CellRegistration { cell, _, media in
+                cell.content = MediaCell(media: media, style: .show)
             }
         }
     }
     
-    private static let reuseIdentifier = "MediaCell"
-    
-    @objc func registerReusableMediaCell() {
-        register(MediaTableViewCell.self, forCellReuseIdentifier: Self.reuseIdentifier)
-    }
-    
-    @objc func dequeueReusableMediaCell(for indexPath: IndexPath) -> UITableViewCell & MediaSettable {
-        return dequeueReusableCell(withIdentifier: Self.reuseIdentifier, for: indexPath) as! MediaTableViewCell
+    @objc func mediaCell(for indexPath: IndexPath, media: SRGMedia) -> UICollectionViewCell {
+        return dequeueConfiguredReusableCell(using: Self.mediaCellRegistration, for: indexPath, item: media)
     }
 }

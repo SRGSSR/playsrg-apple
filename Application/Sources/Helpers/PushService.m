@@ -7,10 +7,11 @@
 #import "PushService.h"
 #import "PushService+Private.h"
 
+#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
-#import "PlayAppDelegate.h"
 #import "Notification.h"
+#import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
@@ -20,6 +21,9 @@
 
 NSString * const PushServiceDidReceiveNotification = @"PushServiceDidReceiveNotification";
 NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidChangeNotification";
+NSString * const PushServiceStatusDidChangeNotification = @"PushServiceStatusDidChangeNotification";
+
+NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 @interface PushService () <UAPushNotificationDelegate>
 
@@ -27,6 +31,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
 @property (nonatomic, readonly) NSString *environmentIdentifier;
 
 @property (nonatomic) UAConfig *configuration;
+
+@property (nonatomic, getter=isEnabled) BOOL enabled;
 
 @end
 
@@ -74,6 +80,14 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
         }
         
         self.configuration = configuration;
+        
+        // Use status cached by Airship as initial value
+        self.enabled = ([UAirship push].authorizationStatus == UAAuthorizationStatusAuthorized);
+        
+        [NSNotificationCenter.defaultCenter addObserver:self
+                                               selector:@selector(applicationDidBecomeActive:)
+                                                   name:UIApplicationDidBecomeActiveNotification
+                                                 object:nil];
     }
     return self;
 }
@@ -141,25 +155,6 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     return URNs.copy;
 }
 
-- (BOOL)isEnabled
-{
-    // Even if alerts have been disabled by the user, `UIApplication.registeredForRemoteNotifications` will still return
-    // `YES` if the target supports silent notifications. We must retrieve the proper authorization status from
-    // `UNUserNotificationCenter`, providing finer-grained information about notification settings.
-    
-    // Make asynchronous call synchronous
-    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
-    
-    __block UNNotificationSettings *notificationSettings = nil;
-    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        notificationSettings = settings;
-        dispatch_semaphore_signal(semaphore);
-    }];
-    
-    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-    return notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized;
-}
-
 #pragma mark Setup
 
 - (void)setup
@@ -184,7 +179,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     NSInteger unreadNotificationCount = Notification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        [[UAirship push] setBadgeNumber:unreadNotificationCount];
+        [UAirship push].badgeNumber = unreadNotificationCount;
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -278,9 +273,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     if (notificationContent.notificationInfo[@"media"]) {
         NSString *mediaURN = notificationContent.notificationInfo[@"media"];
         NSInteger startTime = [notificationContent.notificationInfo[@"startTime"] integerValue];
-        UIApplication *application = UIApplication.sharedApplication;
-        PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-        [appDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
+        SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
+        [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = notificationContent.notificationInfo[@"show"] ?: AnalyticsSourceNotificationPush;
             labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;
@@ -290,9 +284,8 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     }
     else if (notificationContent.notificationInfo[@"show"]) {
         NSString *showURN = notificationContent.notificationInfo[@"show"];
-        UIApplication *application = UIApplication.sharedApplication;
-        PlayAppDelegate *appDelegate = (PlayAppDelegate *)application.delegate;
-        [appDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
+        SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
+        [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceNotificationPush;
             labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionDisplayShow;
@@ -330,6 +323,25 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
     completionHandler(UIBackgroundFetchResultNewData);
 }
 
+#pragma mark Notifications
+
+- (void)applicationDidBecomeActive:(NSNotification *)notification
+{
+    // Ensures the state is updated after if the user returns to the app (push notification settings might have been
+    // changed)
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            BOOL enabled = (settings.authorizationStatus == UNAuthorizationStatusAuthorized);
+            if (enabled != self.enabled) {
+                self.enabled = enabled;
+                [NSNotificationCenter.defaultCenter postNotificationName:PushServiceStatusDidChangeNotification
+                                                                  object:self
+                                                                userInfo:@{ PushServiceEnabledKey : @(enabled) }];
+            }
+        });
+    }];
+}
+
 @end
 
 @implementation PushService (Helpers)
@@ -351,7 +363,7 @@ NSString * const PushServiceBadgeDidChangeNotification = @"PushServiceBadgeDidCh
             }]];
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
             
-            UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.play_topViewController;
+            UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
             [topViewController presentViewController:alertController animated:YES completion:nil];
         }
         return NO;

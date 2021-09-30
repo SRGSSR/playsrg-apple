@@ -12,6 +12,8 @@ struct MediaDescription {
         case show
         /// Date information emphasis
         case date
+        /// Time information emphasis
+        case time
     }
     
     private enum FormattedDurationStyle {
@@ -19,6 +21,11 @@ struct MediaDescription {
         case full
         /// Short duration format
         case short
+    }
+    
+    struct BadgeProperties {
+        let text: String
+        let color: UIColor
     }
     
     private static func formattedDuration(from: Date, to: Date, format: FormattedDurationStyle = .full) -> String? {
@@ -51,28 +58,49 @@ struct MediaDescription {
         return DateFormatter.play_relative.string(from: media.date).capitalizedFirstLetter
     }
     
+    private static func formattedTime(for media: SRGMedia) -> String {
+        return DateFormatter.play_time.string(from: media.date).capitalizedFirstLetter
+    }
+    
+    private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {
+        return media.title.lowercased() == show.title.lowercased()
+    }
+    
     static func title(for media: SRGMedia, style: Style) -> String {
-        if style == .show, let show = media.show, media.title.lowercased().contains(show.title.lowercased()) {
-            return formattedDate(for: media)
-        }
-        else {
+        switch style {
+        case .show:
+            if let show = media.show, areRedundant(media: media, show: show) {
+                return formattedDate(for: media)
+            }
+            else {
+                return media.title
+            }
+        case .date, .time:
             return media.title
         }
     }
     
     static func subtitle(for media: SRGMedia, style: Style) -> String? {
         guard media.contentType != .livestream else { return nil }
-        if style == .show, let show = media.show {
-            if media.title.lowercased().contains(show.title.lowercased()) {
-                return show.title
+        
+        switch style {
+        case .show:
+            if let show = media.show {
+                if areRedundant(media: media, show: show) {
+                    return show.title
+                }
+                else {
+                    // Unbreakable spaces before / after the separator
+                    return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+                }
             }
             else {
-                // Unbreakable spaces before / after the separator
-                return "\(show.title) · \(DateFormatter.play_relativeShort.string(from: media.date))"
+                return formattedDate(for: media)
             }
-        }
-        else {
+        case .date:
             return formattedDate(for: media)
+        case .time:
+            return formattedTime(for: media)
         }
     }
     
@@ -102,35 +130,53 @@ struct MediaDescription {
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
-        if let showTitle = media.show?.title, !media.title.lowercased().contains(showTitle.lowercased()) {
-            return showTitle.appending(", \(media.title)")
+        if let show = media.show, !areRedundant(media: media, show: show) {
+            return show.title.appending(", \(media.title)")
         }
         else {
             return media.title
         }
     }
     
-    static func availabilityBadgeProperties(for media: SRGMedia) -> (text: String, color: UIColor)? {
+    static func availabilityBadgeProperties(for media: SRGMedia) -> BadgeProperties? {
         if media.contentType == .livestream {
-            return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), .srgLightRed)
+            return BadgeProperties(
+                text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+                color: .srgLightRed
+            )
         }
         else {
             let now = Date()
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                return (NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."), .play_green)
+                return BadgeProperties(
+                    text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
+                    color: .play_green
+                )
             case .notAvailableAnymore:
-                return (NSLocalizedString("Expired", comment: "Short label identifying content which has expired."), .srgGray96)
+                return BadgeProperties(
+                    text: NSLocalizedString("Expired", comment: "Short label identifying content which has expired."),
+                    color: .srgGray96
+                )
             case .available:
                 if media.contentType == .scheduledLivestream {
-                    return (NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."), color: .srgLightRed)
+                    return BadgeProperties(
+                        text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+                        color: .srgLightRed
+                    )
                 }
                 else if media.play_isWebFirst {
-                    return (NSLocalizedString("Web first", comment: "Web first label on media cells"), .srgBlue)
+                    return BadgeProperties(
+                        text: NSLocalizedString("Web first", comment: "Web first label on media cells"),
+                        color: .srgBlue
+                    )
                 }
                 else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
-                    return (String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime), .play_orange)
+                    return BadgeProperties(
+                        text: String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime),
+                        color: .play_orange
+                    )
                 }
                 else {
                     return nil

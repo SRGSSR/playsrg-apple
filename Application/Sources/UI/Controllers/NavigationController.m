@@ -24,21 +24,17 @@
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
                                  tintColor:(UIColor *)tintColor
                            backgroundColor:(UIColor *)backgroundColor
-                                 separator:(BOOL)separator
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
-        UINavigationBar *navigationBar = self.navigationBar;
-        navigationBar.barStyle = UIBarStyleBlack;
-        
-        [self updateWithTintColor:tintColor backgroundColor:backgroundColor separator:separator statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
 }
 
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController
 {
-    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil separator:YES statusBarStyle:UIStatusBarStyleLightContent];
+    return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil statusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma clang diagnostic push
@@ -89,49 +85,49 @@
 
 #pragma mark UI updates
 
-- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor separator:(BOOL)separator statusBarStyle:(UIStatusBarStyle)statusBarStyle
+- (void)updateWithTintColor:(UIColor *)tintColor backgroundColor:(UIColor *)backgroundColor statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     self.statusBarStyle = statusBarStyle;
     [self setNeedsStatusBarAppearanceUpdate];
     
-    UINavigationBar *navigationBar = self.navigationBar;
-    
+    UINavigationBarAppearance *appearance = [[UINavigationBarAppearance alloc] init];
     if (backgroundColor) {
-        navigationBar.barTintColor = backgroundColor;
-        navigationBar.translucent = NO;
+        [appearance configureWithOpaqueBackground];
+        appearance.backgroundColor = backgroundColor;
     }
     else {
-        navigationBar.barTintColor = nil;
-        navigationBar.translucent = YES;
+        [appearance configureWithDefaultBackground];
     }
     
-    // See https://stackoverflow.com/a/19227158/760435
-    if (separator) {
-        [navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        navigationBar.shadowImage = nil;
-    }
-    else {
-        [navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        navigationBar.shadowImage = [UIImage new];
-    }
-    
-    // Add a shadow for solid background to improve readability
-    navigationBar.layer.shadowOpacity = (separator && backgroundColor != nil) ? 1.f : 0.f;
+    // Remove the separator (looks nicer)
+    appearance.shadowColor = UIColor.clearColor;
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
-    navigationBar.tintColor = foregroundColor;
-    navigationBar.titleTextAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
-                                           NSForegroundColorAttributeName : foregroundColor };
+    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
+                                                             NSForegroundColorAttributeName : foregroundColor };
+    appearance.titleTextAttributes = attributes;
+    appearance.largeTitleTextAttributes = attributes;
     
-    for (NSNumber *controlState in @[ @(UIControlStateNormal), @(UIControlStateHighlighted), @(UIControlStateDisabled) ]) {
-        [[UIBarButtonItem appearanceWhenContainedInInstancesOfClasses:@[self.class]] setTitleTextAttributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f] }
-                                                                                                   forState:controlState.integerValue];
-    }
+    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
+                                                                   NSForegroundColorAttributeName : foregroundColor };
     
-    [navigationBar setNeedsDisplay];
+    UIBarButtonItemAppearance *plainButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
+    plainButtonAppearance.normal.titleTextAttributes = buttonAttributes;
+    appearance.buttonAppearance = plainButtonAppearance;
     
-    // See https://stackoverflow.com/a/39543669/760435
-    [navigationBar layoutIfNeeded];
+    UIBarButtonItemAppearance *doneButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStyleDone];
+    doneButtonAppearance.normal.titleTextAttributes = buttonAttributes;
+    appearance.doneButtonAppearance = doneButtonAppearance;
+    
+    UINavigationBar *navigationBar = self.navigationBar;
+    navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
+    navigationBar.standardAppearance = appearance;
+    navigationBar.compactAppearance = appearance;
+    navigationBar.scrollEdgeAppearance = appearance;
+    
+    // Force appearance settings to be applied again, see https://stackoverflow.com/a/37668610/760435
+    self.navigationBarHidden = YES;
+    self.navigationBarHidden = NO;
 }
 
 - (void)updateWithRadioChannel:(RadioChannel *)radioChannel animated:(BOOL)animated
@@ -141,7 +137,7 @@
         darkStatusBarStyle = UIStatusBarStyleDarkContent;
         
         UIStatusBarStyle statusBarStyle = radioChannel.hasDarkStatusBar ? darkStatusBarStyle : UIStatusBarStyleLightContent;
-        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color separator:YES statusBarStyle:statusBarStyle];
+        [self updateWithTintColor:radioChannel.titleColor backgroundColor:radioChannel.color statusBarStyle:statusBarStyle];
     };
     
     if (animated) {
@@ -175,7 +171,7 @@
 {
     [self popToRootViewControllerAnimated:NO];
     
-    UIViewController *rootViewController = self.viewControllers[0];
+    UIViewController *rootViewController = self.viewControllers.firstObject;
     if ([rootViewController conformsToProtocol:@protocol(PlayApplicationNavigation)]) {
         UIViewController<PlayApplicationNavigation> *navigableRootViewController = (UIViewController<PlayApplicationNavigation> *)rootViewController;
         return [navigableRootViewController openApplicationSectionInfo:applicationSectionInfo];

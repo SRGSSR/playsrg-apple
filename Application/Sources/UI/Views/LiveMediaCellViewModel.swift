@@ -4,7 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
-class LiveMediaCellViewModel: ObservableObject {
+// MARK: View model
+
+final class LiveMediaCellViewModel: ObservableObject {
     @Published var media: SRGMedia? {
         didSet {
             registerForChannelUpdates(for: media)
@@ -43,6 +45,8 @@ class LiveMediaCellViewModel: ObservableObject {
     }
 }
 
+// MARK: Properties
+
 extension LiveMediaCellViewModel {
     var channel: SRGChannel? {
         return programComposition?.channel ?? media?.channel
@@ -80,31 +84,16 @@ extension LiveMediaCellViewModel {
         }
     }
     
-    var accessibilityLabel: String? {
-        if let channel = channel {
-            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
-            if let program = program {
-                label.append(", \(program.title)")
-            }
-            return label
-        }
-        else if let media = media {
-            return MediaDescription.accessibilityLabel(for: media)
-        }
-        else {
-            return nil
-        }
-    }
-    
     var progress: Double? {
         if channel != nil {
-            guard let program = program else { return 0 }
-            return date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            guard let program = program else { return nil }
+            let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
+            return progress.clamped(to: 0...1)
         }
-        else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: Date()) == .available,
+        else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: date) == .available,
                 let startDate = media.startDate,
                 let endDate = media.endDate {
-            let progress = Date().timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
+            let progress = date.timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
             return progress.clamped(to: 0...1)
         }
         else {
@@ -118,6 +107,26 @@ extension LiveMediaCellViewModel {
         }
         else {
             return media?.imageUrl(for: .small)
+        }
+    }
+}
+
+// MARK: Accessibility
+
+extension LiveMediaCellViewModel {
+    var accessibilityLabel: String? {
+        if let channel = channel {
+            var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
+            if let program = program {
+                label.append(", \(program.title)")
+            }
+            return label
+        }
+        else if let media = media {
+            return MediaDescription.accessibilityLabel(for: media)
+        }
+        else {
+            return nil
         }
     }
 }

@@ -13,11 +13,11 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ gesehen";
 
-/* Title pronounced in home pages on shows A to Z button. */
+/* Show A-Z button label */
 "A to Z shows" = "Sendungen A bis Z";
 
 /* Favorite label in the player view when a show can be favorited
-   Favorite label in the show view when a show can be favorited */
+   Favorite label in the show view when a show can be favorited */
 "Add to favorites" = "Zu den Favoriten hinzufügen";
 
 /* Accessibility label for the audio description badge */
@@ -48,7 +48,7 @@
 "Delete from \"Later\" list" = "Von \"Später\" Liste löschen";
 
 /* Favorite label in the player view when a show has been favorited
-   Favorite label in the show view when a show has been favorited */
+   Favorite label in the show view when a show has been favorited */
 "Delete from favorites" = "Aus den Favoriten löschen";
 
 /* Show unsubscription label */
@@ -94,13 +94,17 @@
 /* Text displayed when a user is logged in but no information has been retrieved yet */
 "My account" = "Mein Konto";
 
+/* Next day button label in program guide */
+"Next day" = "Nächster Tag";
+
 /* Text providing next program time information. */
 "Next, at %@" = "Es folgt um %@";
 
 /* Mini player label */
 "Now playing: %@" = "Jetzt spielt: %@";
 
-/* More button hint */
+/* More button hint
+   Program cell hint */
 "Opens details." = "Details öffnen.";
 
 /* Hint for content opened in Safari */
@@ -136,6 +140,9 @@
 /* Song cell hint */
 "Plays the music." = "Spielt die Musik ab.";
 
+/* Previous day button label in program guide */
+"Previous day" = "Vorheriger Tag";
+
 /* Profile button label on home view */
 "Profile" = "Profil";
 
@@ -160,8 +167,11 @@
 /* Homepage header action hint */
 "Shows all contents." = "Alle Inhalte anzeigen";
 
-/* Title pronounced in home pages on shows by date button. */
+/* Show by date button label */
 "Shows by date" = "Sendungen nach Datum";
+
+/* Channel selector button hint */
+"Shows the channel programs" = "Zeigt das Programm für den Sender";
 
 /* Stop button label */
 "Stop" = "Anhalten";
@@ -171,6 +181,10 @@
 
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Untertitelt";
+
+/* Media cell hint in edit mode
+   Show cell hint in edit mode */
+"Toggles selection." = "Auswahl aktivieren.";
 
 /* Introductory title for warning notifications */
 "Warning" = "Warnung";

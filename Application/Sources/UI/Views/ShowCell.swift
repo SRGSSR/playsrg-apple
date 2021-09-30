@@ -10,50 +10,63 @@ import SwiftUI
 // MARK: View
 
 struct ShowCell: View {
-    let show: SRGShow?
-    let direction: StackDirection
-    let hasSubscriptionButton: Bool
+    enum Style {
+        case standard
+        case favorite
+    }
     
-    init(show: SRGShow?, direction: StackDirection = .vertical, hasSubscriptionButton: Bool = false) {
-        self.show = show
-        self.direction = direction
-        self.hasSubscriptionButton = hasSubscriptionButton
+    @Binding private(set) var show: SRGShow?
+    
+    let style: Style
+    let imageType: SRGImageType
+
+    @StateObject private var model = ShowCellViewModel()
+    
+    @Environment(\.isEditing) private var isEditing
+    @Environment(\.isSelected) private var isSelected
+    
+    init(show: SRGShow?, style: Style, imageType: SRGImageType) {
+        _show = .constant(show)
+        self.style = style
+        self.imageType = imageType
     }
     
     var body: some View {
         Group {
             #if os(tvOS)
-            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio, action: action) {
-                ImageView(url: show?.imageUrl(for: .small))
+            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageType), action: action) {
+                ImageView(url: model.imageUrl(with: imageType))
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
-                DescriptionView(show: show)
+                DescriptionView(model: model, style: style)
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, ShowCellSize.verticalPadding)
             }
             #else
-            Stack(direction: direction, spacing: 0) {
-                ImageView(url: show?.imageUrl(for: .small))
-                    .aspectRatio(ShowCellSize.aspectRatio, contentMode: .fit)
+            VStack(spacing: 0) {
+                ImageView(url: model.imageUrl(with: imageType))
+                    .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
                     .background(Color.white.opacity(0.1))
-                DescriptionView(show: show)
+                DescriptionView(model: model, style: style)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)
-                if self.hasSubscriptionButton {
-                    SubscriptionButton(show: show)
-                        .padding(.horizontal, ShowCellSize.horizontalPadding)
-                        .padding(.vertical, ShowCellSize.verticalPadding)
-                }
             }
             .background(Color.srgGray23)
             .redactable()
+            .selectionAppearance(when: isSelected && show != nil, while: isEditing)
             .cornerRadius(LayoutStandardViewCornerRadius)
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             .frame(maxHeight: .infinity, alignment: .top)
             #endif
         }
         .redactedIfNil(show)
+        .onAppear {
+            model.show = show
+        }
+        .onChange(of: show) { newValue in
+            model.show = newValue
+        }
     }
     
     #if os(tvOS)
@@ -66,14 +79,23 @@ struct ShowCell: View {
     
     /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
-        let show: SRGShow?
+        @ObservedObject var model: ShowCellViewModel
+        let style: Style
         
         var body: some View {
-            Text(show?.title ?? "")
-                .srgFont(.H4)
-                .foregroundColor(.srgGrayC7)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .topLeading)
+            HStack {
+                Text(model.title ?? "")
+                    .srgFont(.H4)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                if style == .favorite, model.isSubscribed {
+                    Image("subscription_full")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height: 12)
+                }
+            }
+            .foregroundColor(.srgGrayC7)
         }
     }
 }
@@ -82,64 +104,54 @@ struct ShowCell: View {
 
 private extension ShowCell {
     var accessibilityLabel: String? {
-        return show?.title
+        return model.title
     }
     
     var accessibilityHint: String? {
-        return PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint")
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Opens show details.", comment: "Show cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Show cell hint in edit mode")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? .isSelected : []
     }
 }
 
 // MARK: Size
 
-class ShowCellSize: NSObject {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
+final class ShowCellSize: NSObject {
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
-    private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 32, tvOS: 45)
     
-    @objc static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
+    fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
+        return imageType == .showPoster ? 2 / 3 : 16 / 9
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
+    fileprivate static func itemWidth(for imageType: SRGImageType) -> CGFloat {
+        return imageType == .showPoster ? constant(iOS: 158, tvOS: 276) : constant(iOS: 210, tvOS: 375)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return grid(approximateItemWidth: defaultItemWidth, layoutWidth: layoutWidth, spacing: spacing, minimumNumberOfColumns: minimumNumberOfColumns)
+    @objc static func swimlane(for imageType: SRGImageType) -> NSCollectionLayoutSize {
+        return swimlane(for: imageType, itemWidth: itemWidth(for: imageType))
     }
     
-    @objc static func grid(approximateItemWidth: CGFloat, layoutWidth: CGFloat, spacing: CGFloat, minimumNumberOfColumns: Int) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(approximateItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, minimumNumberOfColumns)
+    @objc static func swimlane(for imageType: SRGImageType, itemWidth: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset)
     }
     
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
-    }
-    
-    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
+    @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, 2)
     }
 }
 
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    static private let verticalLayoutSize = ShowCellSize.swimlane().previewSize
-    static private let horizontalLayoutSize = ShowCellSize.fullWidth().previewSize
+    private static let size = ShowCellSize.swimlane(for: .default).previewSize
     
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard))
-            .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
-    
-        Group {
-            ShowCell(show: Mock.show(.standard), direction: .horizontal)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-            ShowCell(show: Mock.show(.standard), direction: .horizontal, hasSubscriptionButton: true)
-                .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-        }
+        ShowCell(show: Mock.show(.standard), style: .standard, imageType: .default)
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }

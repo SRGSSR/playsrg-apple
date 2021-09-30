@@ -8,7 +8,7 @@ import SRGDataProviderCombine
 
 // MARK: View model
 
-class PageViewModel: Identifiable, ObservableObject {
+final class PageViewModel: Identifiable, ObservableObject {
     let id: Id
     
     var title: String? {
@@ -21,7 +21,7 @@ class PageViewModel: Identifiable, ObservableObject {
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var serviceStatus: ServiceStatus = .good
+    @Published private(set) var serviceMessage: SRGServiceMessage?
     
     private let trigger = Trigger()
     private var cancellables = Set<AnyCancellable>()
@@ -56,16 +56,17 @@ class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
+        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [serviceMessage] in
             return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
-                .map { ServiceStatus.bad($0) }
-                .replaceError(with: self?.serviceStatus ?? .good)
+                .map { Optional($0) }
+                .replaceError(with: serviceMessage)
                 .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
-        .assign(to: &$serviceStatus)
+        .assign(to: &$serviceMessage)
         
-        Signal.wokenUp()
+        ApplicationSignal.wokenUp()
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] in
                 self?.reload()
             }
@@ -134,6 +135,17 @@ extension PageViewModel {
         case live
         case topic(topic: SRGTopic)
         
+        #if os(iOS)
+        var isNavigationBarHidden: Bool {
+            switch self {
+            case .video:
+                return true
+            default:
+                return false
+            }
+        }
+        #endif
+        
         var supportsCastButton: Bool {
             switch self {
             case .video, .audio, .live:
@@ -193,13 +205,9 @@ extension PageViewModel {
         }
     }
     
-    enum ServiceStatus {
-        case good
-        case bad(SRGServiceMessage)
-    }
-    
     enum SectionLayout: Hashable {
         case hero
+        case headline
         case highlight
         case highlightSwimlane
         case liveMediaGrid
@@ -289,7 +297,7 @@ private extension SRGDataProvider {
         return Publishers.CombineLatest(
             section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .scan([]) { $0 + $1 },
-            section.properties.removalPublisher()
+            section.properties.interactiveUpdatesPublisher()
                 .prepend(Just([]))
                 .setFailureType(to: Error.self)
         )
@@ -306,7 +314,7 @@ private extension SRGDataProvider {
         #if os(tvOS)
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
-            && section.viewModelProperties.hasSwimlaneLayout {
+            && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(PageViewModel.Item(.more, in: section))
         }
         #endif
@@ -322,7 +330,8 @@ protocol PageViewModelProperties {
 }
 
 extension PageViewModelProperties {
-    var hasSwimlaneLayout: Bool {
+    #if os(tvOS)
+    var hasMoreRowItem: Bool {
         switch layout {
         case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
             return true
@@ -330,6 +339,7 @@ extension PageViewModelProperties {
             return false
         }
     }
+    #endif
     
     var hasGridLayout: Bool {
         switch layout {
@@ -381,7 +391,7 @@ private extension PageViewModel {
         
         var canOpenDetailPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram:
+            case .favoriteShows, .personalizedProgram, .resumePlayback, .topicSelector, .watchLater:
                 return true
             default:
                 return presentation.hasDetailPage
@@ -396,16 +406,16 @@ private extension PageViewModel {
         var layout: PageViewModel.SectionLayout {
             switch configuredSection {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
-                return index == 0 ? .hero : .mediaSwimlane
+                return index == 0 ? .headline : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
                 #if os(iOS)
                 return .liveMediaGrid
                 #else
                 return .liveMediaSwimlane
                 #endif
-            case .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
-            case .radioFavoriteShows, .show:
+            case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid

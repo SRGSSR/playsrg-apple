@@ -18,7 +18,7 @@ The Play platform is more generally available on the web and on Android phones:
 
 The application provides a rich set of functionalities, among which:
 
-* Access to to our content, whether its is broadcast on TV, radio or online. 
+* Access to our content, whether it is broadcast on TV, radio or online. 
 * An audio mini player (iOS only).
 * Subscriptions with push notifications (iOS only).
 * Resume playback and continuous playback.
@@ -32,7 +32,7 @@ Depending on the business unit, some functionalities might not be available (e.g
 
 ## Compatibility
 
-The project runs on iOS 12, tvOS 14 and above and must be opened with the latest Xcode version.
+The project runs on iOS 14, tvOS 14 and above and must be opened with the latest Xcode version.
 
 ## Contributing
 
@@ -40,12 +40,19 @@ If you want to contribute to the project, have a look at our [contributing guide
 
 ## Required tools
 
-Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
-	
-	brew install imagemagick ghostscript
-	brew install jq
-	
-Some project dependencies are retrieved using [Carthage](https://github.com/Carthage/Carthage) and [CocoaPods](https://cocoapods.org/). Be sure that these tools are available on your system.
+- Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
+
+```
+brew install imagemagick ghostscript
+brew install jq
+```
+
+- Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system:
+
+```
+which pod
+pod --version
+```
 
 ## Building the project
 
@@ -79,20 +86,14 @@ make setup
 If you are not part of the SRG SSR organization you can still build the project. Setup the project first:
 
 ```
-make public.setup
+make
 ```
 
 This setup does not contain private configuration information we use for publishing the applications, but otherwise works the same.
 
 ### Running the project
 
-Dependencies must retrieve and built first:
-
-```
-make bootstrap
-```
-
-Then open Xcode to build and run the project.
+Simply open the project with Xcode and wait until all dependencies have been retrieved. Then build and run the project.
 
 ## Releasing binaries
 
@@ -102,5 +103,5 @@ The proprietary project uses [fastlane](https://fastlane.tools/) for releasing b
 
 Follow the links below for feature specifications and technical details:
 
-* [Remote configuration](REMOTE_CONFIGURATION.md).
-* [URL schemes](URL_SCHEMES.md)
+* [Remote configuration](REMOTE_CONFIGURATION.md)
+* [Custom URL and Universal Link Support](CUSTOM_URLS_AND_UNIVERSAL_LINKS.md)

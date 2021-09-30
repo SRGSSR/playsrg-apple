@@ -1,11 +1,7 @@
 #!/usr/bin/xcrun make -f
 
 CONFIGURATION_FOLDER=Configuration
-CONFIGURATION_COMMIT_SHA1=e154c674bf914abcf1a299776259db2b6488d32b
-
-CARTHAGE_FOLDER=Carthage
-CARTHAGE_RESOLUTION_FLAGS=--new-resolver --no-build
-CARTHAGE_BUILD_FLAGS=--platform iOS --cache-builds
+CONFIGURATION_COMMIT_SHA1=5707bfba84c5b1ad9925ac1f1ae160e76eb58ff2
 
 # Checkout a commit for a repository in the specified directory. Fails if the repository is dirty of if the
 # commit does not exist.  
@@ -24,24 +20,7 @@ define checkout_repository
 endef
 
 .PHONY: all
-all: bootstrap
-	@echo "Building the project..."
-	@xcodebuild build
-	@echo "... done.\n"
-
-.PHONY: bootstrap
-bootstrap:
-	@echo "Building dependencies..."
-	@carthage bootstrap $(CARTHAGE_RESOLUTION_FLAGS)
-	@Scripts/carthage.sh build $(CARTHAGE_BUILD_FLAGS)
-	@echo "... done.\n"
-
-.PHONY: update
-update:
-	@echo "Updating and building proprietary dependencies..."
-	@carthage update $(CARTHAGE_RESOLUTION_FLAGS)
-	@Scripts/carthage.sh build $(CARTHAGE_BUILD_FLAGS)
-	@echo "... done.\n"
+all: public.setup
 
 .PHONY: setup
 setup:
@@ -77,15 +56,12 @@ public.setup:
 clean:
 	@echo "Cleaning up build products..."
 	@xcodebuild clean
-	@rm -rf $(CARTHAGE_FOLDER)
 	@echo "... done.\n"
 
 .PHONY: help
 help:
 	@echo "The following targets are available:"
-	@echo "   all                         Build project dependencies and the project"
-	@echo "   bootstrap                   Build previously resolved dependencies"
-	@echo "   update                      Update and build dependencies"
+	@echo "   all                         Build the project"
 	@echo "   setup                       Setup project (internal SRG SSR use)"
 	@echo "   public.setup                Setup project (public)"
 	@echo "   help                        Display this message"

@@ -16,7 +16,6 @@
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NSDateFormatter+PlaySRG.h"
-#import "PlayAppDelegate.h"
 #import "PlayErrors.h"
 #import "SRGDataProvider+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
@@ -112,7 +111,7 @@
     };
     ApplicationConfigurationApplyControllerSettings(self.letterboxController);
     
-    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMediaMetadata(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
+    [self.letterboxController playMedia:self.media atPosition:HistoryResumePlaybackPositionForMedia(self.media) withPreferredSettings:ApplicationSettingPlaybackSettings()];
     [self.letterboxView setUserInterfaceHidden:YES animated:NO togglable:NO];
     [self.letterboxView setTimelineAlwaysHidden:YES animated:NO];
     

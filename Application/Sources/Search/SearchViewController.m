@@ -63,6 +63,7 @@
     if (self = [super init]) {
         self.settings = [self supportedMediaSearchSettingsFromSettings:nil];
         self.emptyCollectionImage = [UIImage imageNamed:@"search-background"];
+        self.emptyCollectionTitle = NSLocalizedString(@"No results", @"Default text displayed when no results are available");
     }
     return self;
 }
@@ -128,6 +129,9 @@
     NSString *searchHeaderIdentifier = NSStringFromClass(SearchHeaderView.class);
     UINib *searchHeaderNib = [UINib nibWithNibName:searchHeaderIdentifier bundle:nil];
     [collectionView registerNib:searchHeaderNib forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:searchHeaderIdentifier];
+    
+    [UICollectionView registerMediaCell];
+    [UICollectionView registerShowCell];
     
     self.view = view;
 }
@@ -314,6 +318,11 @@
             [filtersButton addTarget:self action:@selector(showSettings:) forControlEvents:UIControlEventTouchUpInside];
             
             filtersButton.titleLabel.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f];
+            
+            // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
+            // See https://developer.apple.com/forums/thread/125492
+            filtersButton.titleLabel.lineBreakMode = NSLineBreakByClipping;
+            
             [filtersButton setTitle:NSLocalizedString(@"Filters", @"Filters button title") forState:UIControlStateNormal];
             [filtersButton setTitleColor:UIColor.grayColor forState:UIControlStateHighlighted];
             
@@ -626,8 +635,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewFlowLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self shouldDisplayMostSearchedShows]) {
-        UIFontMetrics *fontMetrics = [UIFontMetrics metricsForTextStyle:UIFontTextStyleTitle2];
-        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, [fontMetrics scaledValueForValue:50.f]);
+        return CGSizeMake(CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin, MostSearchedShowCollectionViewCell.height);
     }
     else if ([self isLoadingObjectsInSection:indexPath.section]) {
         return CGSizeMake(CGRectGetWidth(collectionView.frame), 200.f);
@@ -638,13 +646,14 @@
             return CGSizeMake(size.width - 4 * LayoutMargin, size.height);
         }
         else {
-            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing minimumNumberOfColumns:1] constrainedBy:collectionView];
+            return [[MediaCellSize gridWithLayoutWidth:CGRectGetWidth(collectionView.frame) - 4 * LayoutMargin spacing:collectionViewLayout.minimumInteritemSpacing] constrainedBy:collectionView];
         }
     }
     // Search show list
     else {
-        // Small margin to avoid overlap with the horizontal scrolling indicator
-        CGFloat height = [[ShowCellSize swimlane] constrainedBy:collectionView].height + 15.f;
+        // Small margin to avoid overlap with the horizontal scrolling indicator; use default image type in all cases
+        // since search show results can mix TV and radio
+        CGFloat height = [[ShowCellSize swimlaneFor:SRGImageTypeDefault] constrainedBy:collectionView].height + 15.f;
         return CGSizeMake(CGRectGetWidth(collectionView.frame), height);
     }
 }
@@ -698,7 +707,6 @@
     NavigationController *navigationController = [[NavigationController alloc] initWithRootViewController:searchSettingsViewController
                                                                                                 tintColor:UIColor.whiteColor
                                                                                           backgroundColor:backgroundColor
-                                                                                                separator:YES
                                                                                            statusBarStyle:UIStatusBarStyleLightContent];
     navigationController.modalPresentationStyle = UIModalPresentationPopover;
     
