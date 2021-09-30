@@ -20,6 +20,8 @@ import SwiftUI
 struct ShowAccessCell: View {
     let style: Style
     
+    @FirstResponder private var firstResponder
+    
     private var showAZButtonProperties: ButtonProperties {
         return ButtonProperties(
             icon: "a_to_z",
@@ -45,16 +47,15 @@ struct ShowAccessCell: View {
     }
     
     var body: some View {
-        ResponderChain { firstResponder in
-            HStack {
-                ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
-                    firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
-                }
-                ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
-                    firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
-                }
+        HStack {
+            ExpandingButton(icon: showAZButtonProperties.icon, label: showAZButtonProperties.label, accessibilityLabel: showAZButtonProperties.accessibilityLabel) {
+                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowAZ))
+            }
+            ExpandingButton(icon: showByDateButtonProperties.icon, label: showByDateButtonProperties.label, accessibilityLabel: showByDateButtonProperties.accessibilityLabel) {
+                firstResponder.sendAction(#selector(ShowAccessCellActions.openShowByDate))
             }
         }
+        .responderChain(from: firstResponder)
     }
 }
 

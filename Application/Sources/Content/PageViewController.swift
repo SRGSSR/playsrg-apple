@@ -710,6 +710,7 @@ private extension PageViewController {
         let section: PageViewModel.Section
         let pageId: PageViewModel.Id
         
+        @FirstResponder private var firstResponder
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         private static func title(for section: PageViewModel.Section) -> String? {
@@ -738,15 +739,14 @@ private extension PageViewController {
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
                     .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
                 #else
-                ResponderChain { firstResponder in
-                    Button {
-                        firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
-                    } label: {
-                        HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
-                    }
-                    .disabled(!hasDetailDisclosure)
-                    .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
+                Button {
+                    firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
+                } label: {
+                    HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
                 }
+                .disabled(!hasDetailDisclosure)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
+                .responderChain(from: firstResponder)
                 #endif
             }
         }
