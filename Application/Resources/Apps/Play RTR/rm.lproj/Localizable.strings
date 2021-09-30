@@ -593,7 +593,7 @@
 
 /* Categories search setting option
    Topics search setting option list view title */
-"Topics" = "Themas";
+"Topics" = "Temas";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Spazi: %@";
