@@ -21,5 +21,6 @@
   "1.3.2-20": "- Screens displaying user content (Watch later, history / resume playback, favorites) have been improved.\n- Information display on media cells has been improved.",
   "1.3.2-21": "- Add TV show poster images support.\n- Shows A-Z displayed in grid and can display the alphabetical index.\n- Show favorite detail page displays alphabetical indexes.",
   "1.3.2-22": "- Group favorited shows only when rows are sufficiently filled in detail view.\n\nTechnical: scene support added (only one allowed).",
-  "1.3.2-23": "- Hero stage appearance for the Videos homepage.\n- Modernized player interface on tvOS 15.\n- Improved tvOS 15 compatibility."
+  "1.3.2-23": "- Hero stage appearance for the Videos homepage.\n- Modernized player interface on tvOS 15.\n- Improved tvOS 15 compatibility.",
+  "1.3.2-24": "- Add topics swimlane title."
 }
