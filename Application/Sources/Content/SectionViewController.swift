@@ -686,6 +686,8 @@ private extension SectionViewController {
                 }
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
+            case .empty:
+                Color.clear
             default:
                 MediaCell(media: nil, style: .show)
             }

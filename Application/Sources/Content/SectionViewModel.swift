@@ -144,6 +144,15 @@ extension SectionViewModel {
                 return 0
             }
         }
+        
+        var isAlwaysDisplayed: Bool {
+            switch self {
+            case .none, .title:
+                return false
+            case .item, .show:
+                return true
+            }
+        }
     }
     
     struct Section: Hashable, Indexable {
@@ -210,7 +219,8 @@ extension SectionViewModel {
     }
     
     fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
-        if let row = Row(section: Section(id: "main", header: header), items: items) {
+        let rowItems = (header.isAlwaysDisplayed && items.isEmpty) ? [.empty] : items
+        if let row = Row(section: Section(id: "main", header: header), items: rowItems) {
             return [row]
         }
         else {
