@@ -40,12 +40,6 @@ Always reproducible
 
 Difficult to reproduce
 
-### Code sample
-
-> The easiest way to understand your issue is with a simple code sample. If you can provide one, please add a link to it here
-
-[Code sample](https://github.com/username/repository)
-
 ### Steps to reproduce
 
 > Provide step-by-step instructions about how to reliably reproduce the issue (or if not possible, with a good probability)
