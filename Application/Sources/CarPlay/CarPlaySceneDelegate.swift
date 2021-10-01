@@ -15,6 +15,7 @@ class CarPlaySceneDelegate: UIResponder {
     private var cancellables = Set<AnyCancellable>()
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
     let favoriteEpisodesStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Favorites", comment: "Favorites tab title"), sections: [])
+    let trendsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Tendances", comment: ""), sections: [])
  
 }
 
@@ -26,16 +27,21 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         
         self.interfaceController = interfaceController
         
-        // Get radio live streams
+        // Configure Live Tab
         getRadioLiveStreams()
         
-        // Get favorite episodes
+        // Configure Favorite Tab
         getFavoriteEpisodes()
+        
+        // Configure Trending Tab
+        getTrends()
         
         // Create a tab bar
         radioLiveStreamsListTemplate.tabImage = UIImage(named: "livestreams_tab")
         favoriteEpisodesStreamsListTemplate.tabImage = UIImage(named: "favorite")
-        let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate, favoriteEpisodesStreamsListTemplate])
+        trendsListTemplate.tabImage = UIImage(named: "favorite")
+
+        let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate, favoriteEpisodesStreamsListTemplate, trendsListTemplate])
         tabBar.delegate = self
         self.interfaceController?.setRootTemplate(tabBar, animated: true, completion: {_, _ in })
     }
@@ -108,8 +114,8 @@ extension CarPlaySceneDelegate {
 extension CarPlaySceneDelegate {
     
     func getRadioLiveStreams() {
-        let radioLiveStreamsModel = RadioLiveStreamsViewModel()
-        radioLiveStreamsModel.$medias
+        let radiosViewModel = RadiosViewModel(with: .all)
+        radiosViewModel.$medias
             .sink { [weak self] medias in
                 guard let self = self else { return }
                 self.updateRadioLiveStreams(medias: medias)
@@ -123,6 +129,16 @@ extension CarPlaySceneDelegate {
             .sink { [weak self] medias in
                 guard let self = self else { return }
                 self.updateFavoriteEpisode(medias: medias)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getTrends() {
+        let radiosViewModel = RadiosViewModel(with: .default)
+        radiosViewModel.$medias
+            .sink { [weak self] medias in
+                guard let self = self else { return }
+                self.updateTrends(medias: medias)
             }
             .store(in: &cancellables)
     }
@@ -169,6 +185,23 @@ extension CarPlaySceneDelegate {
         }
         let section = CPListSection(items: items)
         favoriteEpisodesStreamsListTemplate.updateSections([section])
+    }
+    
+    func updateTrends(medias: [SRGMedia]) {
+        
+        var items: [CPListItem] = []
+        
+        for media in medias {
+            let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
+            listItem.accessoryType = .disclosureIndicator
+            listItem.handler = { [weak self] _, completion in
+//                guard let self = self else { return }
+//                self.playMedia(media: media, completion: completion)
+            }
+            items.append(listItem)
+        }
+        let section = CPListSection(items: items)
+        trendsListTemplate.updateSections([section])
     }
 }
 

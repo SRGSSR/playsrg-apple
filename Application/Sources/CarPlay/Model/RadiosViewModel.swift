@@ -8,12 +8,12 @@ import Foundation
 
 // MARK: - View Model
 
-final class RadioLiveStreamsViewModel: ObservableObject {
+final class RadiosViewModel: ObservableObject {
     @Published private(set) var medias: [SRGMedia] = []
     
-    init() {
+    init(with contentProvider: SRGContentProviders = .all) {
         SRGDataProvider.current!
-            .radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: .all)
+            .radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProvider)
             .replaceError(with: [])
             .receive(on: DispatchQueue.main)
             .assign(to: &$medias)
