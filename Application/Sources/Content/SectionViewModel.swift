@@ -198,7 +198,9 @@ extension SectionViewModel {
         
         var isEmpty: Bool {
             if case let .loaded(rows: rows) = self {
-                return rows.isEmpty
+                // Ignore `empty` Content.Item items.
+                let filteredRows = rows.filter { !$0.items.filter { $0 != .empty }.isEmpty }
+                return filteredRows.isEmpty
             }
             else {
                 return true
