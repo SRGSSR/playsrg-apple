@@ -25,6 +25,15 @@ final class ContentProvider: TVTopShelfContentProvider {
         return options
     }
     
+    private static func namedAttributes(from media: SRGMedia) -> [TVTopShelfNamedAttribute] {
+        var attributes = [TVTopShelfNamedAttribute]()
+        if let showTitle = media.show?.title {
+            attributes.append(TVTopShelfNamedAttribute(name: NSLocalizedString("Show", comment: "Show label displayed in the tvOS top shelf media description"),
+                                                       values: [showTitle]))
+        }
+        return attributes
+    }
+    
     private static func carouselItem(from media: SRGMedia) -> TVTopShelfCarouselItem {
         let item = TVTopShelfCarouselItem(identifier: media.urn)
         item.contextTitle = NSLocalizedString("Featured", comment: "Context title for items displayed in the tvOS top shelf")
@@ -34,6 +43,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.creationDate = media.date
         item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
         item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
+        item.namedAttributes = namedAttributes(from: media)
         return item
     }
     
