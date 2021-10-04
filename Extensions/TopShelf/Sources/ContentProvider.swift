@@ -20,6 +20,8 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.title = media.title
         item.summary = media.summary
         item.duration = media.duration / 1000
+        item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
+        item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
         return item
     }
     
