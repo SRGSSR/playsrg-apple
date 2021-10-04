@@ -16,7 +16,8 @@ class CarPlaySceneDelegate: UIResponder {
     let radioLiveStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Livestreams", comment: "Livestreams tab title"), sections: [])
     let favoriteEpisodesStreamsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Favorites", comment: "Favorites tab title"), sections: [])
     let trendsListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Tendances", comment: ""), sections: [])
- 
+    let latestTrendsByRadioListTemplate: CPListTemplate = CPListTemplate(title: NSLocalizedString("Tendances", comment: ""), sections: [])
+
 }
 
 // MARK: - CPTemplateApplicationSceneDelegate
@@ -33,7 +34,7 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         // Configure Favorite Tab
         getFavoriteEpisodes()
         
-        // Configure Trending Tab
+        // Configure Trends Tab
         getTrends()
         
         // Create a tab bar
@@ -43,6 +44,7 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
 
         let tabBar = CPTabBarTemplate.init(templates: [radioLiveStreamsListTemplate, favoriteEpisodesStreamsListTemplate, trendsListTemplate])
         tabBar.delegate = self
+        self.interfaceController?.delegate = self
         self.interfaceController?.setRootTemplate(tabBar, animated: true, completion: {_, _ in })
     }
     
@@ -70,6 +72,10 @@ extension CarPlaySceneDelegate: CPInterfaceControllerDelegate {
 
     func templateDidDisappear(_ aTemplate: CPTemplate, animated: Bool) {
         print("templateDidDisappear", aTemplate)
+        
+        if aTemplate == latestTrendsByRadioListTemplate {
+            latestTrendsByRadioListTemplate.updateSections([])
+        }
     }
 }
 
@@ -124,11 +130,11 @@ extension CarPlaySceneDelegate {
     }
     
     func getFavoriteEpisodes() {
-        let favoriteEpisodesModel = FavoriteEpisodesViewModel()
-        favoriteEpisodesModel.$medias
+        let favoriteEpisodesViewModel = FavoriteEpisodesViewModel()
+        favoriteEpisodesViewModel.$medias
             .sink { [weak self] medias in
                 guard let self = self else { return }
-                self.updateFavoriteEpisode(medias: medias)
+                self.updateFavoriteEpisodes(medias: medias)
             }
             .store(in: &cancellables)
     }
@@ -139,6 +145,16 @@ extension CarPlaySceneDelegate {
             .sink { [weak self] medias in
                 guard let self = self else { return }
                 self.updateTrends(medias: medias)
+            }
+            .store(in: &cancellables)
+    }
+    
+    func getTrendsByRadio(channelUid: String) {
+        let latestTrendsByRadioViewModel = LatestTrendsByRadioViewModel(for: channelUid)
+        latestTrendsByRadioViewModel.$medias
+            .sink { [weak self] medias in
+                guard let self = self else { return }
+                self.updateTrendsByRadio(medias: medias)
             }
             .store(in: &cancellables)
     }
@@ -160,7 +176,7 @@ extension CarPlaySceneDelegate {
         radioLiveStreamsListTemplate.updateSections([section])
     }
     
-    func updateFavoriteEpisode(medias: [FavoriteEpisodesViewModel.MediaData]) {
+    func updateFavoriteEpisodes(medias: [FavoriteEpisodesViewModel.MediaData]) {
 
         var items: [CPListItem] = []
 
@@ -195,13 +211,48 @@ extension CarPlaySceneDelegate {
             let listItem = CPListItem(text: title(media: media), detailText: subtitle(media: media), image: logoImage(media: media))
             listItem.accessoryType = .disclosureIndicator
             listItem.handler = { [weak self] _, completion in
-//                guard let self = self else { return }
-//                self.playMedia(media: media, completion: completion)
+                guard let self = self, let channelUid = media.channel?.uid else { return }
+                self.displayLatestTrendsByRadio(channelUid: channelUid, completion: completion)
             }
             items.append(listItem)
         }
         let section = CPListSection(items: items)
         trendsListTemplate.updateSections([section])
+    }
+    
+    func updateTrendsByRadio(medias: [LatestTrendsByRadioViewModel.MediaData]) {
+        var items: [CPListItem] = []
+        
+        for mediaData in medias {
+
+            var title = ""
+            if let show = mediaData.media.show {
+                title = show.title
+            }
+
+            let detailText = (DateFormatter.play_relativeShort.string(from: mediaData.media.date))
+            let listItem = CPListItem(text: title, detailText: detailText, image: mediaData.image)
+            listItem.accessoryType = .disclosureIndicator
+            listItem.handler = { [weak self] _, completion in
+                guard let self = self else { return }
+                self.playMedia(media: mediaData.media, completion: completion)
+            }
+            items.append(listItem)
+        }
+        let section = CPListSection(items: items)
+        latestTrendsByRadioListTemplate.updateSections([section])
+    }
+    
+    func displayLatestTrendsByRadio(channelUid: String, completion: @escaping () -> Void) {
+                
+        // Configure Trends Tab by radio
+        self.getTrendsByRadio(channelUid: channelUid)
+        
+        // Display
+        self.interfaceController?.pushTemplate(latestTrendsByRadioListTemplate, animated: true, completion: { [weak self] _, _ in
+            guard let self = self else { return }
+            completion()
+        })
     }
 }
 

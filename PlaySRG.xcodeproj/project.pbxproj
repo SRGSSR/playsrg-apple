@@ -2056,6 +2056,11 @@
 		6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */; };
 		70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */; };
 		8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */; };
+		9E39D17A27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
+		9E39D17B27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
+		9E39D17C27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
+		9E39D17D27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
+		9E39D17E27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
 		9EA78A2C26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2D26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2E26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
@@ -2912,6 +2917,7 @@
 		881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
 		92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
+		9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTrendsByRadioViewModel.swift; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
 		9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiosViewModel.swift; sourceTree = "<group>"; };
 		9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEpisodesViewModel.swift; sourceTree = "<group>"; };
@@ -4486,6 +4492,7 @@
 			children = (
 				9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */,
 				9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */,
+				9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -7727,6 +7734,7 @@
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
+				9E39D17A27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 				6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -8136,6 +8144,7 @@
 				6FD9595526989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */,
+				9E39D17B27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8358,6 +8367,7 @@
 				6FD9595626989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */,
+				9E39D17C27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8580,6 +8590,7 @@
 				6FD9595726989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */,
+				9E39D17D27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8802,6 +8813,7 @@
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */,
+				9E39D17E27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
