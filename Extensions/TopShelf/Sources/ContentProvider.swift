@@ -9,6 +9,7 @@ import TVServices
 
 final class ContentProvider: TVTopShelfContentProvider {
     static let dataProvider: SRGDataProvider = {
+        // FIXME: Use ApplicationSettingServiceURL (or maybe later; not currently set on tvOS)
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
@@ -44,6 +45,8 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
         item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
         item.namedAttributes = namedAttributes(from: media)
+        // FIXME: Use correct URL scheme associated with the app
+        item.displayAction = TVTopShelfAction(url: URL(string: "playsrf-debug://media/\(media.urn)")!)
         return item
     }
     
