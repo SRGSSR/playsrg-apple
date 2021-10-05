@@ -12,6 +12,7 @@ OBJC_EXPORT NSString * const PlaySRGSettingHDOverCellularEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingPresenterModeEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingStandaloneEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingSectionWideSupportEnabled;
+OBJC_EXPORT NSString * const PlaySRGSettingPosterImageWideSupportEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingAutoplayEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;

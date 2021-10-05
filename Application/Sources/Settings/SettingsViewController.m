@@ -158,6 +158,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
     [hiddenKeys addObject:PlaySRGSettingSectionWideSupportEnabled];
+    [hiddenKeys addObject:PlaySRGSettingPosterImageWideSupportEnabled];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsResetGroup];

@@ -296,6 +296,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Poster image wide support</string>
+			<key>Key</key>
+			<string>PlaySRGSettingPosterImageWideSupportEnabled</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
 			<string>Subscribe to all shows</string>

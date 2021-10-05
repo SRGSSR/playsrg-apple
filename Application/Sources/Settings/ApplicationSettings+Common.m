@@ -12,3 +12,8 @@ BOOL ApplicationSettingSectionWideSupportEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingSectionWideSupportEnabled];
 }
+
+BOOL ApplicationSettingPosterImageWideSupportEnabled(void)
+{
+    return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingPosterImageWideSupportEnabled];
+}

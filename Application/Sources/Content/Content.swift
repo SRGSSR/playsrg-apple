@@ -238,7 +238,7 @@ private extension Content {
         }
 
         var imageType: SRGImageType {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled || ApplicationSettingPosterImageWideSupportEnabled() else { return .default }
             switch contentSection.type {
             case .shows:
                 return .showPoster
@@ -539,7 +539,7 @@ private extension Content {
         }
         
         var imageType: SRGImageType {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled || ApplicationSettingPosterImageWideSupportEnabled() else { return .default }
             switch configuredSection {
             case .tvAllShows:
                 return .showPoster
