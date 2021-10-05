@@ -7,8 +7,7 @@
 import Combine
 import SwiftUI
 
-@propertyWrapper
-struct Accessibility<T>: DynamicProperty {
+@propertyWrapper struct Accessibility<T>: DynamicProperty {
     @ObservedObject private var settings = AccessibilitySettings.shared
     
     private let keyPath: KeyPath<AccessibilitySettings, T>
