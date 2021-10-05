@@ -1500,6 +1500,11 @@
 		6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
+		6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
+		6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
+		6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
+		6FB90D1C270D91020033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
 		6FB9B3D626CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
 		6FB9B3D726CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
 		6FB9B3D826CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
@@ -1869,6 +1874,16 @@
 		6FE374AE261D8F5A00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6FE374AF261D8F5B00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
+		6FE38A21270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A22270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A23270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A24270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A25270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A27270CF860004DD296 /* CarPlayListTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */; };
+		6FE38A28270CF860004DD296 /* CarPlayListTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */; };
+		6FE38A29270CF860004DD296 /* CarPlayListTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */; };
+		6FE38A2A270CF860004DD296 /* CarPlayListTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */; };
+		6FE38A2B270CF860004DD296 /* CarPlayListTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */; };
 		6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -2056,26 +2071,11 @@
 		6FFFB9BB252CA310004E40AE /* MediaDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */; };
 		70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */; };
 		8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D81BAFCE19BF2C2B612FE3A2 /* libPods-Play SRG-tvOS-Play SRF TV.a */; };
-		9E39D17A27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
-		9E39D17B27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
-		9E39D17C27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
-		9E39D17D27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
-		9E39D17E27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */; };
 		9EA78A2C26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2D26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2E26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A2F26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
 		9EA78A3026D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */; };
-		9EA78A3226D69656004DAC33 /* RadiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */; };
-		9EA78A3326D69656004DAC33 /* RadiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */; };
-		9EA78A3426D69656004DAC33 /* RadiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */; };
-		9EA78A3526D69656004DAC33 /* RadiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */; };
-		9EA78A3626D69656004DAC33 /* RadiosViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */; };
-		9EC797BC26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
-		9EC797BD26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
-		9EC797BE26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
-		9EC797BF26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
-		9EC797C026F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */; };
 		D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A39FE8CAE184E875FB2D868 /* libPods-Play SRG-iOS-Play RTR.a */; };
 		E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
@@ -2808,6 +2808,7 @@
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6FB90D17270D91010033D860 /* CarPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayList.swift; sourceTree = "<group>"; };
 		6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransluscentHeaderView.swift; sourceTree = "<group>"; };
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
 		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
@@ -2879,6 +2880,8 @@
 		6FE2876B2481687A00358CFF /* SongTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongTableViewCell.h; sourceTree = "<group>"; };
 		6FE2876C2481687A00358CFF /* SongTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongTableViewCell.m; sourceTree = "<group>"; };
 		6FE28772248168A100358CFF /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
+		6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CPInterfaceController+Extensions.swift"; sourceTree = "<group>"; };
+		6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayListTemplate.swift; sourceTree = "<group>"; };
 		6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
@@ -2917,10 +2920,7 @@
 		881AC8571743B65FBCF1192E /* Pods-Play SRG-iOS-Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
 		92B4B46D0768088FD67B3EFC /* Pods-Play SRG-iOS-Play RTR.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
 		95C2A04103A3A3F3A9B9291C /* Pods-Play SRG-iOS-Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
-		9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestTrendsByRadioViewModel.swift; sourceTree = "<group>"; };
 		9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlaySceneDelegate.swift; sourceTree = "<group>"; };
-		9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiosViewModel.swift; sourceTree = "<group>"; };
-		9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEpisodesViewModel.swift; sourceTree = "<group>"; };
 		A660CE9179B6F1E81374096F /* Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play SWI TV/Pods-Play SRG-tvOS-Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		A7E130D069D1EEFCAE9360BC /* Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTR TV/Pods-Play SRG-tvOS-Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
 		AB348106F5307D86C18CA361 /* libPods-Play SRG-iOS-Play RTS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Play SRG-iOS-Play RTS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -4487,21 +4487,13 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		9E39D1782705C435007D141E /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				9EC797BB26F0A02800EF791D /* FavoriteEpisodesViewModel.swift */,
-				9EA78A3126D69656004DAC33 /* RadiosViewModel.swift */,
-				9E39D17927074AD6007D141E /* LatestTrendsByRadioViewModel.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		9EA78A2A26D66E6D004DAC33 /* CarPlay */ = {
 			isa = PBXGroup;
 			children = (
+				6FB90D17270D91010033D860 /* CarPlayList.swift */,
+				6FE38A26270CF860004DD296 /* CarPlayListTemplate.swift */,
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
-				9E39D1782705C435007D141E /* Model */,
+				6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */,
 			);
 			path = CarPlay;
 			sourceTree = "<group>";
@@ -7719,7 +7711,6 @@
 				6F54D30926050FBA008B46FF /* MediaCell.swift in Sources */,
 				6FCE753526D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FACC343262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
-				9EA78A3226D69656004DAC33 /* RadiosViewModel.swift in Sources */,
 				082910AE239E90D200D168F4 /* TabBarController.m in Sources */,
 				6FD68618246052A100B8018A /* GradientView.m in Sources */,
 				6FCF57E0263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -7734,7 +7725,6 @@
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
-				9E39D17A27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 				6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -7753,6 +7743,7 @@
 				6F9897CD2412582400B390A2 /* Layout.m in Sources */,
 				6FA6C0632458064C00518DE6 /* SRGProgramComposition+PlaySRG.m in Sources */,
 				08AA551D1D49EBF600C5026E /* ApplicationConfiguration.m in Sources */,
+				6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F5FAA44268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6FDF08EB218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
@@ -7787,6 +7778,7 @@
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
+				6FE38A21270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
 				6F7EEBDE22DC40B7005E5A97 /* SearchBar.m in Sources */,
 				E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */,
 				0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */,
@@ -7873,10 +7865,10 @@
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
+				6FE38A27270CF860004DD296 /* CarPlayListTemplate.swift in Sources */,
 				08D5990D26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				6F40920822DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m in Sources */,
-				9EC797BC26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6FF7BBA122A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
 				E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
@@ -7959,6 +7951,7 @@
 				086F8D5622984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FE38A22270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8004,7 +7997,6 @@
 				6F54D32426050FBB008B46FF /* MediaCell.swift in Sources */,
 				6F4760841EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40026051035008B46FF /* MediaDescription.swift in Sources */,
-				9EA78A3326D69656004DAC33 /* RadiosViewModel.swift in Sources */,
 				E6971AEE1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F30ABDA2604B7A700457331 /* ImageView.swift in Sources */,
 				6FDF08F1218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -8051,6 +8043,7 @@
 				6F566E8124EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD68619246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8B26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
+				6FE38A28270CF860004DD296 /* CarPlayListTemplate.swift in Sources */,
 				6F7F2B07249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7F92628F23700BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE0E20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -8100,6 +8093,7 @@
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
+				6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */,
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
@@ -8123,7 +8117,6 @@
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9D22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
-				9EC797BD26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACC22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4A261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
@@ -8144,7 +8137,6 @@
 				6FD9595526989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */,
-				9E39D17B27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8182,6 +8174,7 @@
 				086F8D5722984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FE38A23270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8227,7 +8220,6 @@
 				6F54D32326050FBB008B46FF /* MediaCell.swift in Sources */,
 				6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40226051036008B46FF /* MediaDescription.swift in Sources */,
-				9EA78A3426D69656004DAC33 /* RadiosViewModel.swift in Sources */,
 				E6971AEF1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F30ABF42604B7A800457331 /* ImageView.swift in Sources */,
 				6FDF08F2218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -8274,6 +8266,7 @@
 				6F566E8224EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861A246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8C26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
+				6FE38A29270CF860004DD296 /* CarPlayListTemplate.swift in Sources */,
 				6F7F2B08249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FA2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE0F20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -8323,6 +8316,7 @@
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
+				6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */,
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
@@ -8346,7 +8340,6 @@
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9E22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
-				9EC797BE26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACD22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4B261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
@@ -8367,7 +8360,6 @@
 				6FD9595626989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */,
-				9E39D17C27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8405,6 +8397,7 @@
 				086F8D5822984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FE38A24270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8450,7 +8443,6 @@
 				6F54D32526050FBC008B46FF /* MediaCell.swift in Sources */,
 				6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40426051036008B46FF /* MediaDescription.swift in Sources */,
-				9EA78A3526D69656004DAC33 /* RadiosViewModel.swift in Sources */,
 				E6971AF01D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F30ABF52604B7A800457331 /* ImageView.swift in Sources */,
 				6FDF08F3218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -8497,6 +8489,7 @@
 				6F566E8324EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861B246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8D26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
+				6FE38A2A270CF860004DD296 /* CarPlayListTemplate.swift in Sources */,
 				6F7F2B09249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FB2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE1020AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -8546,6 +8539,7 @@
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
+				6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */,
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
@@ -8569,7 +8563,6 @@
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9F22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
-				9EC797BF26F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACE22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4C261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
@@ -8590,7 +8583,6 @@
 				6FD9595726989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */,
-				9E39D17D27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -8628,6 +8620,7 @@
 				086F8D5922984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E37502680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FE38A25270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
 				6F0E8D9C1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08E0218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753926D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8673,7 +8666,6 @@
 				6F54D32626050FBD008B46FF /* MediaCell.swift in Sources */,
 				6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40626051037008B46FF /* MediaDescription.swift in Sources */,
-				9EA78A3626D69656004DAC33 /* RadiosViewModel.swift in Sources */,
 				E6971AF11D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F30ABF62604B7A900457331 /* ImageView.swift in Sources */,
 				6FDF08F4218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -8720,6 +8712,7 @@
 				6F566E8424EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861C246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8E26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
+				6FE38A2B270CF860004DD296 /* CarPlayListTemplate.swift in Sources */,
 				6F7F2B0A249CD78E00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FC2628F23900BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE1120AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -8769,6 +8762,7 @@
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E4263DDA9D001C4615 /* RedactingView.swift in Sources */,
 				6FE686E51EB9D57400067D40 /* ChannelService.m in Sources */,
+				6FB90D1C270D91020033D860 /* CarPlayList.swift in Sources */,
 				6FDF08EF218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5475265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B97244F1E1200C0386E /* TableView.m in Sources */,
@@ -8792,7 +8786,6 @@
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BBA022A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
-				9EC797C026F0A02800EF791D /* FavoriteEpisodesViewModel.swift in Sources */,
 				6F488ACF22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
 				6F9FFB4D261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FCE7AC4260367B90037A861 /* HostViews.swift in Sources */,
@@ -8813,7 +8806,6 @@
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */,
-				9E39D17E27074AD6007D141E /* LatestTrendsByRadioViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
