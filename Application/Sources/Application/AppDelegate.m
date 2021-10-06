@@ -144,9 +144,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options
 {
     if (connectingSceneSession.role == CPTemplateApplicationSceneSessionRoleApplication) {
-        UISceneConfiguration *sceneConfiguration = [[UISceneConfiguration alloc] initWithName:@"CarPlay" sessionRole:connectingSceneSession.role];
-        sceneConfiguration.delegateClass = CarPlaySceneDelegate.class;
-        return sceneConfiguration;
+        return [[UISceneConfiguration alloc] initWithName:@"CarPlay" sessionRole:connectingSceneSession.role];
     }
     else {
         return [[UISceneConfiguration alloc] initWithName:@"Default" sessionRole:connectingSceneSession.role];
