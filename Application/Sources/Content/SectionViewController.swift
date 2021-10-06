@@ -221,6 +221,9 @@ final class SectionViewController: UIViewController {
                 shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
                 navigationItem.rightBarButtonItem = shareButtonItem
             }
+            else {
+                navigationItem.rightBarButtonItem = nil
+            }
             
             navigationItem.leftBarButtonItem = leftBarButtonItem
         }
