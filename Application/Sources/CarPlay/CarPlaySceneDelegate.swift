@@ -16,13 +16,13 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
         self.interfaceController = interfaceController
         
-        let livestreamsTemplate = CarPlayListTemplate.template(list: .livestreams(contentProviders: .all, action: .play), interfaceController: interfaceController)
+        let livestreamsTemplate = CPListTemplate(list: .livestreams(contentProviders: .all, action: .play), interfaceController: interfaceController)
         livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab")
         
-        let favoriteEpisodesTemplate = CarPlayListTemplate.template(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
+        let favoriteEpisodesTemplate = CPListTemplate(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
         favoriteEpisodesTemplate.tabImage = UIImage(named: "favorite")
         
-        let mostPopularTemplate = CarPlayListTemplate.template(list: .livestreams(contentProviders: .default, action: .displayMostPopular), interfaceController: interfaceController)
+        let mostPopularTemplate = CPListTemplate(list: .livestreams(contentProviders: .default, action: .displayMostPopular), interfaceController: interfaceController)
         mostPopularTemplate.tabTitle = NSLocalizedString("Trends", comment: "Trends tab title")
         mostPopularTemplate.tabImage = UIImage(named: "favorite")
         

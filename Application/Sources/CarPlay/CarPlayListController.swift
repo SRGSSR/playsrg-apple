@@ -7,21 +7,6 @@
 import CarPlay
 import SRGDataProviderCombine
 
-// MARK: Template
-
-private var controllerKey: Void?
-
-struct CarPlayListTemplate {
-    static func template(list: CarPlayList, interfaceController: CPInterfaceController) -> CPListTemplate {
-        let template = CPListTemplate(title: list.title, sections: [])
-        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
-        
-        let controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
-        objc_setAssociatedObject(template, &controllerKey, controller, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        return template
-    }
-}
-
 // MARK: Controller
 
 private final class CarPlayTemplateListController {
@@ -57,5 +42,19 @@ extension CarPlayTemplateListController {
     enum State {
         case failed(error: Error)
         case loaded(sections: [CPListSection])
+    }
+}
+
+// MARK: Template instantiation
+
+private var controllerKey: Void?
+
+extension CPListTemplate {
+    convenience init(list: CarPlayList, interfaceController: CPInterfaceController) {
+        self.init(title: list.title, sections: [])
+        emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
+        
+        let controller = CarPlayTemplateListController(list: list, template: self, interfaceController: interfaceController)
+        objc_setAssociatedObject(self, &controllerKey, controller, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }

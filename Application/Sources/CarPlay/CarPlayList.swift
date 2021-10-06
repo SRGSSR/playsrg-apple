@@ -65,7 +65,7 @@ extension CarPlayList {
                     return
                 }
                 
-                let template = CarPlayListTemplate.template(list: .mostPopularMedias(channelUid: channelUid), interfaceController: interfaceController)
+                let template = CPListTemplate(list: .mostPopularMedias(channelUid: channelUid), interfaceController: interfaceController)
                 interfaceController.pushTemplate(template, animated: true) { _, _ in
                     completion()
                 }
