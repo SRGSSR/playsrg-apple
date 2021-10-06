@@ -14,8 +14,7 @@ private var controllerKey: Void?
 struct CarPlayListTemplate {
     static func template(list: CarPlayList, interfaceController: CPInterfaceController) -> CPListTemplate {
         let template = CPListTemplate(title: list.title, sections: [])
-        template.emptyViewTitleVariants = []
-        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading...", comment: "Loading label")]
+        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
         
         let controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
         objc_setAssociatedObject(template, &controllerKey, controller, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -41,12 +40,10 @@ private final class CarPlayTemplateListController {
             guard let template = template else { return }
             switch state {
             case let .failed(error: error):
-                template.emptyViewTitleVariants = [NSLocalizedString("Error", comment: "Error label")]
                 template.emptyViewSubtitleVariants = [error.localizedDescription]
                 template.updateSections([])
             case let .loaded(sections: sections):
-                template.emptyViewTitleVariants = [NSLocalizedString("No results", comment: "No results label")]
-                template.emptyViewSubtitleVariants = []
+                template.emptyViewSubtitleVariants = [NSLocalizedString("No results", comment: "No results label")]
                 template.updateSections(sections)
             }
         }
