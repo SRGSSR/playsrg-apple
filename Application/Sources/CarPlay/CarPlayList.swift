@@ -29,11 +29,27 @@ enum CarPlayList {
     func publisher(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
         switch self {
         case .latestEpisodesFromFavorites:
-            return latestEpisodesFromFavoritesPublisher(with: interfaceController)
+            return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
+                return SRGDataProvider.current!.latestMediasForShowsPublisher2(withUrns: FavoritesShowURNs().array as? [String] ?? [], pageSize: 12)
+            }
+            .mapToSections(with: interfaceController)
         case let .livestreams(contentProviders: contentProviders, action: action):
-            return livestreamsPublisher(with: interfaceController, contentProviders: contentProviders, action: action)
+            return SRGDataProvider.current!.radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
+                .map { medias in
+                    let items = medias.map { media -> CPListItem in
+                        let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
+                        item.accessoryType = .disclosureIndicator
+                        item.handler = { _, completion in
+                            action.perform(for: media, interfaceController: interfaceController, completion: completion)
+                        }
+                        return item
+                    }
+                    return [CPListSection(items: items)]
+                }
+                .eraseToAnyPublisher()
         case let .mostPopularMedias(channelUid: channelUid):
-            return mostPopularMediasPublisher(with: interfaceController, channelUid: channelUid)
+            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
+                .mapToSections(with: interfaceController)
         }
     }
     
@@ -43,14 +59,7 @@ enum CarPlayList {
     }
 }
 
-// MARK: Associated types
-
 extension CarPlayList {
-    private struct MediaData {
-        let media: SRGMedia
-        let image: UIImage?
-    }
-    
     enum Action {
         case play
         case displayMostPopular
@@ -74,16 +83,34 @@ extension CarPlayList {
     }
 }
 
+private extension CarPlayList {
+    struct MediaData {
+        let media: SRGMedia
+        let image: UIImage?
+    }
+    
+    static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
+        if let imageUrl = media.imageUrl(for: .small) {
+            return ImagePipeline.shared.imagePublisher(with: imageUrl)
+                .map { Optional($0.image) }
+                .replaceError(with: UIImage(named: "media-background"))
+                .map { MediaData(media: media, image: $0) }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(MediaData(media: media, image: UIImage(named: "media-background")))
+                .eraseToAnyPublisher()
+        }
+    }
+}
+
 // MARK: Publishers
 
-extension CarPlayList {
-    private func latestEpisodesFromFavoritesPublisher(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
-            return SRGDataProvider.current!.latestMediasForShowsPublisher2(withUrns: FavoritesShowURNs().array as? [String] ?? [], pageSize: 12)
-        }
-        .map { medias in
+private extension Publisher where Output == [SRGMedia] {
+    func mapToSections(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Failure> {
+        return map { medias in
             return Publishers.AccumulateLatestMany(medias.map { media in
-                return self.mediaDataPublisher(for: media)
+                return CarPlayList.mediaDataPublisher(for: media)
             })
         }
         .switchToLatest()
@@ -101,60 +128,5 @@ extension CarPlayList {
             return [CPListSection(items: items)]
         }
         .eraseToAnyPublisher()
-    }
-    
-    private func livestreamsPublisher(with interfaceController: CPInterfaceController, contentProviders: SRGContentProviders, action: Action) -> AnyPublisher<[CPListSection], Error> {
-        return SRGDataProvider.current!.radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
-            .map { medias in
-                let items = medias.map { media -> CPListItem in
-                    let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
-                    item.accessoryType = .disclosureIndicator
-                    item.handler = { _, completion in
-                        action.perform(for: media, interfaceController: interfaceController, completion: completion)
-                    }
-                    return item
-                }
-                return [CPListSection(items: items)]
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    // TODO: Probably factor out common logic with latestEpisodesFromFavoritesPublisher
-    private func mostPopularMediasPublisher(with interfaceController: CPInterfaceController, channelUid: String) -> AnyPublisher<[CPListSection], Error> {
-        return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
-            .map { medias in
-                return Publishers.AccumulateLatestMany(medias.map { media in
-                    return self.mediaDataPublisher(for: media)
-                })
-            }
-            .switchToLatest()
-            .map { mediaDataList in
-                let items = mediaDataList.map { mediaData -> CPListItem in
-                    let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
-                                          detailText: MediaDescription.subtitle(for: mediaData.media, style: .show),
-                                          image: mediaData.image)
-                    item.accessoryType = .disclosureIndicator
-                    item.handler = { _, completion in
-                        interfaceController.play(media: mediaData.media, completion: completion)
-                    }
-                    return item
-                }
-                return [CPListSection(items: items)]
-            }
-            .eraseToAnyPublisher()
-    }
-    
-    private func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
-        if let imageUrl = media.imageUrl(for: .small) {
-            return ImagePipeline.shared.imagePublisher(with: imageUrl)
-                .map { Optional($0.image) }
-                .replaceError(with: UIImage(named: "media-background"))
-                .map { MediaData(media: media, image: $0) }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Just(MediaData(media: media, image: UIImage(named: "media-background")))
-                .eraseToAnyPublisher()
-        }
     }
 }
