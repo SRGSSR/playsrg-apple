@@ -26,7 +26,7 @@ private final class CarPlayTemplateListController {
     private var cancellables = Set<AnyCancellable>()
     
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
-        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
+        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.reachable()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
                 .catch { error in

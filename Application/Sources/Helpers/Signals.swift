@@ -102,7 +102,6 @@ enum ThrottledSignal {
 
 enum ApplicationSignal {
     /**
-     *
      *  Emits a signal when the application is woken up (network reachable again or moved to the foreground).
      */
     static func wokenUp() -> AnyPublisher<Void, Never> {
@@ -110,14 +109,20 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
-    private static func reachable() -> AnyPublisher<Void, Never> {
+    /**
+     *  Emits a signal when the network is reachable again.
+     */
+    static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
             .map { _ in }
             .eraseToAnyPublisher()
     }
     
-    private static func foreground() -> AnyPublisher<Void, Never> {
+    /**
+     *  Emits a signal when the application moves to the foreground.
+     */
+    static func foreground() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .map { _ in }
             .eraseToAnyPublisher()
