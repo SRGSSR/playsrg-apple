@@ -14,6 +14,9 @@ private var controllerKey: Void?
 struct CarPlayListTemplate {
     static func template(list: CarPlayList, interfaceController: CPInterfaceController) -> CPListTemplate {
         let template = CPListTemplate(title: list.title, sections: [])
+        template.emptyViewTitleVariants = []
+        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading...", comment: "Loading label")]
+        
         let controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
         objc_setAssociatedObject(template, &controllerKey, controller, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return template
