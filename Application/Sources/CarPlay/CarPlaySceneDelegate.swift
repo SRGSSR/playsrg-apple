@@ -24,7 +24,7 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         
         let mostPopularTemplate = CPListTemplate(list: .livestreams(contentProviders: .default, action: .displayMostPopular), interfaceController: interfaceController)
         mostPopularTemplate.tabTitle = NSLocalizedString("Trends", comment: "Trends tab title")
-        mostPopularTemplate.tabImage = UIImage(named: "favorite")
+        mostPopularTemplate.tabImage = UIImage(named: "trends_tab")
         
         let tabBarTemplate = CPTabBarTemplate(templates: [livestreamsTemplate, favoriteEpisodesTemplate, mostPopularTemplate])
         interfaceController.setRootTemplate(tabBarTemplate, animated: true, completion: nil)
