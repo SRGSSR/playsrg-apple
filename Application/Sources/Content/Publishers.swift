@@ -10,7 +10,7 @@ import SRGUserData
 
 extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
-    func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt) -> AnyPublisher<[SRGMedia], Error> {
+    func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt = SRGDataProviderDefaultPageSize) -> AnyPublisher<[SRGMedia], Error> {
         return urns.publisher
             .collect(3)
             .flatMap { urns in
@@ -68,7 +68,7 @@ extension SRGDataProvider {
 #endif
     }
     
-    func historyPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func historyPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -92,7 +92,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func resumePlaybackPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func resumePlaybackPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
             guard let historyEntries = historyEntries else { return [:] }
             
@@ -134,7 +134,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {

@@ -30,7 +30,7 @@ enum CarPlayList {
         switch self {
         case .latestEpisodesFromFavorites:
             return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
-                return SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [], pageSize: 12)
+                return SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
             }
             .mapToSections(with: interfaceController)
         case let .livestreams(contentProviders: contentProviders, action: action):
