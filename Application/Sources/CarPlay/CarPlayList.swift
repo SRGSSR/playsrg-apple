@@ -30,7 +30,9 @@ enum CarPlayList {
         switch self {
         case .latestEpisodesFromFavorites:
             return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
-                return SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
+                return SRGDataProvider.current!.favoritesPublisher(filter: self)
+                    .map { SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: $0.map(\.urn)) }
+                    .switchToLatest()
             }
             .mapToSections(with: interfaceController)
         case let .livestreams(contentProviders: contentProviders, action: action):
@@ -101,6 +103,18 @@ private extension CarPlayList {
             return Just(MediaData(media: media, image: UIImage(named: "media-background")))
                 .eraseToAnyPublisher()
         }
+    }
+}
+
+// MARK: Protocols
+
+extension CarPlayList: SectionFiltering {
+    func compatibleShows(_ shows: [SRGShow]) -> [SRGShow] {
+        return shows.filter { $0.transmission == .radio }
+    }
+    
+    func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
+        return medias.filter { $0.mediaType == .audio }
     }
 }
 
