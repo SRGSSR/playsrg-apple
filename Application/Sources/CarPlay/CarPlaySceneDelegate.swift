@@ -17,11 +17,9 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         self.interfaceController = interfaceController
         
         let livestreamsTemplate = CarPlayListTemplate.template(list: .livestreams(contentProviders: .all, action: .play), interfaceController: interfaceController)
-        livestreamsTemplate.tabTitle = NSLocalizedString("Livestreams", comment: "Livestreams tab title")
         livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab")
         
         let favoriteEpisodesTemplate = CarPlayListTemplate.template(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
-        favoriteEpisodesTemplate.tabTitle = NSLocalizedString("Favorites", comment: "Favorites tab title")
         favoriteEpisodesTemplate.tabImage = UIImage(named: "favorite")
         
         let mostPopularTemplate = CarPlayListTemplate.template(list: .livestreams(contentProviders: .default, action: .displayMostPopular), interfaceController: interfaceController)
@@ -29,7 +27,7 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         mostPopularTemplate.tabImage = UIImage(named: "favorite")
         
         let tabBarTemplate = CPTabBarTemplate(templates: [livestreamsTemplate, favoriteEpisodesTemplate, mostPopularTemplate])
-        self.interfaceController?.setRootTemplate(tabBarTemplate, animated: true, completion: nil)
+        interfaceController.setRootTemplate(tabBarTemplate, animated: true, completion: nil)
     }
     
     private func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnect interfaceController: CPInterfaceController) {
