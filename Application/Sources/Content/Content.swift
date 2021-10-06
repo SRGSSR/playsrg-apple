@@ -41,7 +41,7 @@ enum Content {
         @available(tvOS, unavailable)
         case showAccess(radioChannel: RadioChannel?)
         
-        case empty
+        case transparent
         
         private var title: String? {
             switch self {
@@ -51,7 +51,7 @@ enum Content {
                 return show.title
             case let .topic(topic):
                 return topic.title
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess, .empty:
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess, .transparent:
                 return nil
             }
         }

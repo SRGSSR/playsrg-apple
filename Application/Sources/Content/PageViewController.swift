@@ -678,7 +678,7 @@ private extension PageViewController {
                         ShowAccessCell(style: .calendar)
                     }
                 #endif
-                case .empty:
+                case .transparent:
                     Color.clear
                 }
             case .more:

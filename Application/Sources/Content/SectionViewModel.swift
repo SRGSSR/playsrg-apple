@@ -198,8 +198,8 @@ extension SectionViewModel {
         
         var isEmpty: Bool {
             if case let .loaded(rows: rows) = self {
-                // Ignore `empty` Content.Item items.
-                let filteredRows = rows.filter { !$0.items.filter { $0 != .empty }.isEmpty }
+                // Ignore `transparent` Content.Item items.
+                let filteredRows = rows.filter { !$0.items.filter { $0 != .transparent }.isEmpty }
                 return filteredRows.isEmpty
             }
             else {
@@ -221,7 +221,7 @@ extension SectionViewModel {
     }
     
     fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
-        let rowItems = (header.isAlwaysDisplayed && items.isEmpty) ? [.empty] : items
+        let rowItems = (header.isAlwaysDisplayed && items.isEmpty) ? [.transparent] : items
         if let row = Row(section: Section(id: "main", header: header), items: rowItems) {
             return [row]
         }
