@@ -78,27 +78,29 @@ extension CarPlayList {
 
 extension CarPlayList {
     private func latestEpisodesFromFavoritesPublisher(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        return SRGDataProvider.current!.latestMediasForShowsPublisher2(withUrns: FavoritesShowURNs().array as? [String] ?? [], pageSize: 12)
-            .map { medias in
-                return Publishers.AccumulateLatestMany(medias.map { media in
-                    return self.mediaDataPublisher(for: media)
-                })
-            }
-            .switchToLatest()
-            .map { mediaMetadataList in
-                let items = mediaMetadataList.map { mediaMetadata -> CPListItem in
-                    let item = CPListItem(text: MediaDescription.title(for: mediaMetadata.media, style: .show),
-                                          detailText: MediaDescription.subtitle(for: mediaMetadata.media, style: .show),
-                                          image: mediaMetadata.image)
-                    item.accessoryType = .disclosureIndicator
-                    item.handler = { _, completion in
-                        interfaceController.play(media: mediaMetadata.media, completion: completion)
-                    }
-                    return item
+        return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
+            return SRGDataProvider.current!.latestMediasForShowsPublisher2(withUrns: FavoritesShowURNs().array as? [String] ?? [], pageSize: 12)
+        }
+        .map { medias in
+            return Publishers.AccumulateLatestMany(medias.map { media in
+                return self.mediaDataPublisher(for: media)
+            })
+        }
+        .switchToLatest()
+        .map { mediaMetadataList in
+            let items = mediaMetadataList.map { mediaMetadata -> CPListItem in
+                let item = CPListItem(text: MediaDescription.title(for: mediaMetadata.media, style: .show),
+                                      detailText: MediaDescription.subtitle(for: mediaMetadata.media, style: .show),
+                                      image: mediaMetadata.image)
+                item.accessoryType = .disclosureIndicator
+                item.handler = { _, completion in
+                    interfaceController.play(media: mediaMetadata.media, completion: completion)
                 }
-                return [CPListSection(items: items)]
+                return item
             }
-            .eraseToAnyPublisher()
+            return [CPListSection(items: items)]
+        }
+        .eraseToAnyPublisher()
     }
     
     private func livestreamsPublisher(with interfaceController: CPInterfaceController, contentProviders: SRGContentProviders, action: Action) -> AnyPublisher<[CPListSection], Error> {
@@ -117,6 +119,7 @@ extension CarPlayList {
             .eraseToAnyPublisher()
     }
     
+    // TODO: Probably factor out common logic with latestEpisodesFromFavoritesPublisher
     private func mostPopularMediasPublisher(with interfaceController: CPInterfaceController, channelUid: String) -> AnyPublisher<[CPListSection], Error> {
         return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
             .map { medias in
