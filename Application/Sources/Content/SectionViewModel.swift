@@ -69,7 +69,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     func reload(deep: Bool = false) {
-        if deep || state.isEmpty {
+        if deep || state.hasNoContent {
             trigger.activate(for: TriggerId.reload)
         }
     }
@@ -196,7 +196,7 @@ extension SectionViewModel {
             }
         }
         
-        var isEmpty: Bool {
+        var hasNoContent: Bool {
             if case let .loaded(rows: rows) = self {
                 // Ignore `transparent` Content.Item items.
                 let filteredRows = rows.filter { !$0.items.filter { $0 != .transparent }.isEmpty }
