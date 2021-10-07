@@ -46,5 +46,5 @@ UIImage *RadioChannelLargeLogoImage(RadioChannel *radioChannel)
 
 UIImage *RadioChannelLogoImageWithTraitCollection(RadioChannel *radioChannel, UITraitCollection *traitCollection)
 {
-    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@", radioChannel.resourceUid] inBundle:NSBundle.mainBundle compatibleWithTraitCollection:traitCollection] ?: [UIImage imageNamed:@"radioset"];
+    return [UIImage imageNamed:[NSString stringWithFormat:@"logo_%@", radioChannel.resourceUid] inBundle:nil compatibleWithTraitCollection:traitCollection] ?: [UIImage imageNamed:@"radioset"];
 }

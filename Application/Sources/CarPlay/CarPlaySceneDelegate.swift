@@ -17,14 +17,14 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         self.interfaceController = interfaceController
         
         let livestreamsTemplate = CPListTemplate(list: .livestreams(contentProviders: .all, action: .play), interfaceController: interfaceController)
-        livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab")
+        livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))
         
         let favoriteEpisodesTemplate = CPListTemplate(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
-        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorite")
+        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorite_tab", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))
         
         let mostPopularTemplate = CPListTemplate(list: .livestreams(contentProviders: .default, action: .displayMostPopular), interfaceController: interfaceController)
         mostPopularTemplate.tabTitle = NSLocalizedString("Trends", comment: "Trends tab title")
-        mostPopularTemplate.tabImage = UIImage(named: "trends_tab")
+        mostPopularTemplate.tabImage = UIImage(named: "trends_tab", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))
         
         let tabBarTemplate = CPTabBarTemplate(templates: [livestreamsTemplate, favoriteEpisodesTemplate, mostPopularTemplate])
         interfaceController.setRootTemplate(tabBarTemplate, animated: true, completion: nil)
