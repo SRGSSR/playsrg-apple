@@ -18,9 +18,13 @@ extension MediaPlayerViewController {
         guard let songsViewStyle = ApplicationConfiguration.shared.channel(forUid: channel.uid)?.songsViewStyle, songsViewStyle != .none else { return }
         
         if let contentNavigationController = panel?.contentViewController as? UINavigationController,
-           let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController,
-           songsViewController.channel == channel {
-            return
+           let songsViewController = contentNavigationController.viewControllers.first as? SongsViewController {
+            if songsViewController.channel == channel {
+                return
+            }
+            else {
+                removeSongPanel()
+            }
         }
         
         if let programsTableView = programsTableView {
