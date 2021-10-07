@@ -85,15 +85,18 @@ private extension CarPlayList {
     }
     
     static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
-        if let imageUrl = media.imageUrl(for: .small) {
+        let imageScale = ImageScale.small
+        let placeholderImage = UIColor(white: 1, alpha: 0.1).image(ofSize: SizeForImageScale(imageScale, .default))
+        if let imageUrl = media.imageUrl(for: imageScale) {
             return ImagePipeline.shared.imagePublisher(with: imageUrl)
                 .map { Optional($0.image) }
-                .replaceError(with: UIImage(named: "media-background"))
+                .replaceError(with: placeholderImage)
+                .prepend(placeholderImage)
                 .map { MediaData(media: media, image: $0) }
                 .eraseToAnyPublisher()
         }
         else {
-            return Just(MediaData(media: media, image: UIImage(named: "media-background")))
+            return Just(MediaData(media: media, image: placeholderImage))
                 .eraseToAnyPublisher()
         }
     }
