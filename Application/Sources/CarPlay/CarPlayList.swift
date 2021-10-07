@@ -12,17 +12,25 @@ import Nuke
 
 enum CarPlayList {
     case latestEpisodesFromFavorites
-    case livestreams(contentProviders: SRGContentProviders, action: Action)
+    case livestreams
+    case mostPopular
     case mostPopularMedias(channelUid: String)
     
-    var title: String {
+    var title: String? {
         switch self {
         case .latestEpisodesFromFavorites:
             return NSLocalizedString("Favorites", comment: "Favorites screen title")
         case .livestreams:
             return NSLocalizedString("Livestreams", comment: "Livestreams screen title")
-        case .mostPopularMedias:
+        case .mostPopular:
             return NSLocalizedString("Trends", comment: "Trends screen title")
+        case let .mostPopularMedias(channelUid: channelUid):
+            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
+                return channel.name
+            }
+            else {
+                return nil
+            }
         }
     }
     
@@ -35,29 +43,14 @@ enum CarPlayList {
                     .switchToLatest()
             }
             .mapToSections(with: interfaceController)
-        case let .livestreams(contentProviders: contentProviders, action: action):
-            return SRGDataProvider.current!.radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
-                .map { medias in
-                    let items = medias.map { media -> CPListItem in
-                        let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
-                        item.accessoryType = .disclosureIndicator
-                        item.handler = { _, completion in
-                            action.perform(for: media, interfaceController: interfaceController, completion: completion)
-                        }
-                        return item
-                    }
-                    return [CPListSection(items: items)]
-                }
-                .eraseToAnyPublisher()
+        case .livestreams:
+            return SRGDataProvider.current!.livestreamsSections(for: .default, interfaceController: interfaceController, action: .play)
+        case .mostPopular:
+            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController, action: .displayMostPopular)
         case let .mostPopularMedias(channelUid: channelUid):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
                 .mapToSections(with: interfaceController)
         }
-    }
-    
-    private static func logoImage(for media: SRGMedia) -> UIImage? {
-        guard let channel = media.channel, let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: channel.uid) else { return nil }
-        return RadioChannelLogoImageWithTraitCollection(radioChannel, UITraitCollection(userInterfaceIdiom: .carPlay))
     }
 }
 
@@ -118,7 +111,59 @@ extension CarPlayList: SectionFiltering {
     }
 }
 
+extension CarPlayList: CarPlayTracking {
+    var pageViewTitle: String? {
+        switch self {
+        case .latestEpisodesFromFavorites:
+            return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+        case .livestreams:
+            return AnalyticsPageTitle.home.rawValue
+        case .mostPopular, .mostPopularMedias:
+            return AnalyticsPageTitle.mostPopular.rawValue
+        }
+    }
+    
+    var pageViewLevels: [String]? {
+        switch self {
+        case .latestEpisodesFromFavorites, .mostPopular:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
+        case .livestreams:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, AnalyticsPageLevel.live.rawValue]
+        case let .mostPopularMedias(channelUid):
+            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, channel.name]
+            }
+            else {
+                return nil
+            }
+        }
+    }
+}
+
 // MARK: Publishers
+
+private extension SRGDataProvider {
+    private static func logoImage(for media: SRGMedia) -> UIImage? {
+        guard let channel = media.channel, let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: channel.uid) else { return nil }
+        return RadioChannelLogoImageWithTraitCollection(radioChannel, UITraitCollection(userInterfaceIdiom: .carPlay))
+    }
+    
+    func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController, action: CarPlayList.Action) -> AnyPublisher<[CPListSection], Error> {
+        return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
+            .map { medias in
+                let items = medias.map { media -> CPListItem in
+                    let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
+                    item.accessoryType = .disclosureIndicator
+                    item.handler = { _, completion in
+                        action.perform(for: media, interfaceController: interfaceController, completion: completion)
+                    }
+                    return item
+                }
+                return [CPListSection(items: items)]
+            }
+            .eraseToAnyPublisher()
+    }
+}
 
 private extension Publisher where Output == [SRGMedia] {
     func mapToSections(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Failure> {

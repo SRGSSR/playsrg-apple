@@ -9,10 +9,15 @@ import SRGDataProviderCombine
 
 // MARK: Controller
 
-private final class CarPlayTemplateListController {
+final class CarPlayTemplateListController {
+    private let list: CarPlayList
     private var cancellables = Set<AnyCancellable>()
     
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
+        self.list = list
+        
+        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
+        
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.reachable()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
@@ -36,25 +41,23 @@ private final class CarPlayTemplateListController {
     }
 }
 
+// MARK: Protocols
+
+extension CarPlayTemplateListController: CarPlayTracking {
+    var pageViewTitle: String? {
+        return list.pageViewTitle
+    }
+    
+    var pageViewLevels: [String]? {
+        return list.pageViewLevels
+    }
+}
+
 // MARK: Types
 
 extension CarPlayTemplateListController {
     enum State {
         case failed(error: Error)
         case loaded(sections: [CPListSection])
-    }
-}
-
-// MARK: Template instantiation
-
-private var controllerKey: Void?
-
-extension CPListTemplate {
-    convenience init(list: CarPlayList, interfaceController: CPInterfaceController) {
-        self.init(title: list.title, sections: [])
-        emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
-        
-        let controller = CarPlayTemplateListController(list: list, template: self, interfaceController: interfaceController)
-        objc_setAssociatedObject(self, &controllerKey, controller, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
 }

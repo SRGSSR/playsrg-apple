@@ -15,6 +15,7 @@ typedef NSString * AnalyticsPageLevel NS_STRING_ENUM;
 
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelApplication;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelCarPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelGoogleCast;

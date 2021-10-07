@@ -10,6 +10,7 @@
 
 AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
 AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
+AnalyticsPageLevel const AnalyticsPageLevelCarPlay = @"carplay";
 AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
 AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";

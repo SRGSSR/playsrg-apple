@@ -829,6 +829,11 @@
 		6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
+		6F44F2CA270EFF64003DFF16 /* CarPlayTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */; };
+		6F44F2CB270EFF64003DFF16 /* CarPlayTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */; };
+		6F44F2CC270EFF64003DFF16 /* CarPlayTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */; };
+		6F44F2CD270EFF64003DFF16 /* CarPlayTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */; };
+		6F44F2CE270EFF64003DFF16 /* CarPlayTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */; };
 		6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
@@ -1884,11 +1889,11 @@
 		6FE374AE261D8F5A00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6FE374AF261D8F5B00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
-		6FE38A21270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
-		6FE38A22270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
-		6FE38A23270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
-		6FE38A24270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
-		6FE38A25270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */; };
+		6FE38A21270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
+		6FE38A22270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
+		6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
+		6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
+		6FE38A25270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
 		6FE38A27270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
 		6FE38A28270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
 		6FE38A29270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
@@ -2628,6 +2633,7 @@
 		6F40920622DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MostSearchedShowCollectionViewCell.m; sourceTree = "<group>"; };
 		6F40920722DCFE2B005F3850 /* MostSearchedShowCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MostSearchedShowCollectionViewCell.xib; sourceTree = "<group>"; };
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
+		6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayTracking.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionRequestViewController.h; sourceTree = "<group>"; };
@@ -2891,7 +2897,7 @@
 		6FE2876B2481687A00358CFF /* SongTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SongTableViewCell.h; sourceTree = "<group>"; };
 		6FE2876C2481687A00358CFF /* SongTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongTableViewCell.m; sourceTree = "<group>"; };
 		6FE28772248168A100358CFF /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
-		6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CPInterfaceController+Extensions.swift"; sourceTree = "<group>"; };
+		6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarPlay+Extensions.swift"; sourceTree = "<group>"; };
 		6FE38A26270CF860004DD296 /* CarPlayListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayListController.swift; sourceTree = "<group>"; };
 		6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
@@ -4502,10 +4508,11 @@
 		9EA78A2A26D66E6D004DAC33 /* CarPlay */ = {
 			isa = PBXGroup;
 			children = (
+				6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */,
 				6FB90D17270D91010033D860 /* CarPlayList.swift */,
 				6FE38A26270CF860004DD296 /* CarPlayListController.swift */,
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
-				6FE38A20270CBF63004DD296 /* CPInterfaceController+Extensions.swift */,
+				6F44F2C9270EFF64003DFF16 /* CarPlayTracking.swift */,
 			);
 			path = CarPlay;
 			sourceTree = "<group>";
@@ -7790,7 +7797,7 @@
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
-				6FE38A21270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
+				6FE38A21270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F7EEBDE22DC40B7005E5A97 /* SearchBar.m in Sources */,
 				E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */,
 				0827DA1E1F0D36D900A31A42 /* NSBundle+PlaySRG.m in Sources */,
@@ -7821,6 +7828,7 @@
 				6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */,
 				6FD9595426989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */,
+				6F44F2CA270EFF64003DFF16 /* CarPlayTracking.swift in Sources */,
 				6F1F929E22A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */,
 				6F54D2B92604FB16008B46FF /* ShowCell.swift in Sources */,
 				085C0D992611F33E008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -7964,7 +7972,7 @@
 				086F8D5622984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
-				6FE38A22270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
+				6FE38A22270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -7973,6 +7981,7 @@
 				6FAAF78A20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDD2664BFA90016B793 /* Colors.swift in Sources */,
 				6FAE561D26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F44F2CB270EFF64003DFF16 /* CarPlayTracking.swift in Sources */,
 				0806E7B91D50D918002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651526BC58C800454A28 /* CalendarView.swift in Sources */,
@@ -8188,7 +8197,7 @@
 				086F8D5722984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
-				6FE38A23270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
+				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8197,6 +8206,7 @@
 				6FAAF78C20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDE2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FAE561E26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F44F2CC270EFF64003DFF16 /* CarPlayTracking.swift in Sources */,
 				0806E7BA1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651626BC58C800454A28 /* CalendarView.swift in Sources */,
@@ -8412,7 +8422,7 @@
 				086F8D5822984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
-				6FE38A24270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
+				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8421,6 +8431,7 @@
 				6FAAF78E20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDF2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FAE561F26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F44F2CD270EFF64003DFF16 /* CarPlayTracking.swift in Sources */,
 				0806E7BB1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651726BC58C800454A28 /* CalendarView.swift in Sources */,
@@ -8636,7 +8647,7 @@
 				086F8D5922984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E37502680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
-				6FE38A25270CBF63004DD296 /* CPInterfaceController+Extensions.swift in Sources */,
+				6FE38A25270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9C1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08E0218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753926D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8645,6 +8656,7 @@
 				6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EE02664BFAB0016B793 /* Colors.swift in Sources */,
 				6FAE562026C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F44F2CE270EFF64003DFF16 /* CarPlayTracking.swift in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651826BC58C800454A28 /* CalendarView.swift in Sources */,
