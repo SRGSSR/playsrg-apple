@@ -44,9 +44,9 @@ enum CarPlayList {
             }
             .mapToSections(with: interfaceController)
         case .livestreams:
-            return SRGDataProvider.current!.livestreamsSections(for: .default, interfaceController: interfaceController, action: .play)
+            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController, action: .play)
         case .mostPopular:
-            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController, action: .displayMostPopular)
+            return SRGDataProvider.current!.livestreamsSections(for: .default, interfaceController: interfaceController, action: .displayMostPopular)
         case let .mostPopularMedias(channelUid: channelUid):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
                 .mapToSections(with: interfaceController)
