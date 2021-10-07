@@ -8,6 +8,7 @@ import SwiftUI
 
 extension Color {
     public static let darkGray = Color(.darkGray)
+    public static let placeholder = Color(.placeholder)
 }
 
 extension UIColor {
@@ -17,6 +18,8 @@ extension UIColor {
             context.fill(CGRect(origin: .zero, size: size))
         }
     }
+    
+    public static var placeholder = UIColor(white: 1, alpha: 0.1)
     
     #if DEBUG
     public static func random(alpha: CGFloat = 1) -> UIColor {
