@@ -42,10 +42,12 @@ extension ProgramGuideDailyViewModel {
         case failed(error: Error)
         case loaded([SRGProgramComposition])
         
-        private static func programs(from programComposition: SRGProgramComposition?) -> [SRGProgram] {
-            guard let programs = programComposition?.programs else { return [] }
-            return programs.flatMap { program in
-                return program.subprograms ?? [program]
+        var channels: [SRGChannel] {
+            if case let .loaded(programCompositions) = self {
+                return programCompositions.map { $0.channel }
+            }
+            else {
+                return []
             }
         }
         
@@ -60,6 +62,13 @@ extension ProgramGuideDailyViewModel {
             }
             else {
                 return []
+            }
+        }
+        
+        private static func programs(from programComposition: SRGProgramComposition?) -> [SRGProgram] {
+            guard let programs = programComposition?.programs else { return [] }
+            return programs.flatMap { program in
+                return program.subprograms ?? [program]
             }
         }
     }
