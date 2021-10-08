@@ -21,7 +21,9 @@ struct ProgramGuideHeaderView: View {
     var body: some View {
         VStack(spacing: 20) {
             DaySelector(model: model)
+            #if os(iOS)
             ChannelSelector(model: model)
+            #endif
             NavigationBar(model: model)
         }
         .padding(10)
@@ -48,6 +50,7 @@ struct ProgramGuideHeaderView: View {
         }
     }
     
+    #if os(iOS)
     /// Behavior: h-exp, v-hug
     private struct ChannelSelector: View {
         @ObservedObject var model: ProgramGuideViewModel
@@ -73,6 +76,7 @@ struct ProgramGuideHeaderView: View {
             .frame(height: 50)
         }
     }
+    #endif
     
     /// Behavior: h-exp, v-hug
     private struct NavigationBar: View {

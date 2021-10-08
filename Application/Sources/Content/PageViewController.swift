@@ -55,6 +55,25 @@ final class PageViewController: UIViewController {
         return snapshot
     }
     
+    #if os(iOS)
+    private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
+        if let radioChannel = radioChannel {
+            return CalendarViewController(radioChannel: radioChannel, date: date)
+        }
+        else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                return ProgramGuideGridViewController(date: date)
+            }
+            else {
+                return ProgramGuideListViewController(date: date)
+            }
+        }
+        else {
+            return CalendarViewController(radioChannel: nil, date: date)
+        }
+    }
+    #endif
+    
     init(id: PageViewModel.Id) {
         model = PageViewModel(id: id)
         super.init(nibName: nil, bundle: nil)
@@ -392,20 +411,14 @@ extension PageViewController: PlayApplicationNavigation {
         case .showByDate:
             let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
             if let navigationController = navigationController {
-                if let radioChannel = applicationSectionInfo.radioChannel {
-                    let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: date)
-                    navigationController.pushViewController(calendarViewController, animated: false)
-                }
-                else {
-                    let programGuideViewController = ProgramGuideViewController(date: date)
-                    navigationController.pushViewController(programGuideViewController, animated: false)
-                }
+                let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
+                navigationController.pushViewController(showByDateViewController, animated: false)
             }
             return true
         case .showAZ:
             if let navigationController = navigationController {
                 let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -453,20 +466,8 @@ extension PageViewController: ShowAccessCellActions {
     
     func openShowByDate() {
         if let navigationController = navigationController {
-            switch model.id {
-            case .video:
-                if !ApplicationConfiguration.shared.isTvGuideUnavailable {
-                    let programGuideViewController = ProgramGuideViewController()
-                    navigationController.pushViewController(programGuideViewController, animated: true)
-                }
-                else {
-                    let calendarViewController = CalendarViewController(radioChannel: nil, date: nil)
-                    navigationController.pushViewController(calendarViewController, animated: true)
-                }
-            default:
-                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-                navigationController.pushViewController(calendarViewController, animated: true)
-            }
+            let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
+            navigationController.pushViewController(showByDateViewController, animated: true)
         }
     }
 }

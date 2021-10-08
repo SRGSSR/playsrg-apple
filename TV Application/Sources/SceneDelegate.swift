@@ -76,20 +76,27 @@ class SceneDelegate: UIResponder {
             viewControllers.append(liveViewController)
         }
         
+        if !configuration.isTvGuideUnavailable {
+            let programGuideViewController = ProgramGuideGridViewController()
+            programGuideViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("TV guide", comment: "TV program guide view title"), image: nil, tag: 3)
+            programGuideViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.tvGuideTabBarItem.rawValue
+            viewControllers.append(programGuideViewController)
+        }
+        
         if !configuration.areShowsUnavailable {
             let showsViewController = SectionViewController.showsViewController(forChannelUid: nil)
-            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
+            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 4)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
             viewControllers.append(showsViewController)
         }
         
         let searchViewController = SearchViewController()
-        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
+        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 5)
         searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
         viewControllers.append(profileViewController)

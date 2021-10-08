@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: View controller
 
-final class ProgramGuideViewController: UIViewController {
+final class ProgramGuideListViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
@@ -106,7 +106,7 @@ final class ProgramGuideViewController: UIViewController {
 
 // MARK: Protocols
 
-extension ProgramGuideViewController: SRGAnalyticsViewTracking {
+extension ProgramGuideListViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
         return AnalyticsPageTitle.programGuide.rawValue
     }
@@ -116,14 +116,14 @@ extension ProgramGuideViewController: SRGAnalyticsViewTracking {
     }
 }
 
-extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
+extension ProgramGuideListViewController: ProgramGuideHeaderViewActions {
     func openCalendar() {
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
         present(calendarViewController, animated: true)
     }
 }
 
-extension ProgramGuideViewController: UIPageViewControllerDataSource {
+extension ProgramGuideListViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
         let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: currentViewController.day)
@@ -137,7 +137,7 @@ extension ProgramGuideViewController: UIPageViewControllerDataSource {
     }
 }
 
-extension ProgramGuideViewController: UIPageViewControllerDelegate {
+extension ProgramGuideListViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         headerView.isUserInteractionEnabled = false
         
