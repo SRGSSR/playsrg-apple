@@ -189,7 +189,7 @@ final class SectionViewController: UIViewController {
     }
     
     private func updateNavigationBar(for state: SectionViewModel.State) {
-        if model.configuration.properties.supportsEdition && !state.hasNoContent {
+        if model.configuration.properties.supportsEdition && state.hasContent {
             navigationItem.rightBarButtonItem = editButtonItem
             
             if isEditing {
@@ -252,7 +252,7 @@ final class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
             let properties = model.configuration.properties
-            emptyView.content = (state.topHeaderSize != .large && state.hasNoContent) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
+            emptyView.content = (state.topHeaderSize != .large && !state.hasContent) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
         
         #if os(iOS)
