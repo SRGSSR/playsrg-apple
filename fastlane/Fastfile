@@ -985,8 +985,8 @@ def srg_pilot(app_identifier, platform, changelog)
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
     changelog: changelog,
-    # distribute_external: true,
-    # groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    distribute_external: true,
+    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
   )
