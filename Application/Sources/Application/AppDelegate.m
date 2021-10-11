@@ -28,6 +28,7 @@
 @import AppCenterCrashes;
 @import AppCenterDistribute;
 @import AVFoundation;
+@import CarPlay;
 @import Firebase;
 @import Mantle;
 @import SRGAnalyticsIdentity;
