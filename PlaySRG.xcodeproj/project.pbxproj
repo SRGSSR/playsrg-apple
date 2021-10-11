@@ -2694,6 +2694,7 @@
 		6F566E9424EEC40A0024B4CA /* ApplicationSection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationSection.m; sourceTree = "<group>"; };
 		6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChannelServiceSetup.h; sourceTree = "<group>"; };
 		6F56F9F3247C407000B2387B /* ChannelServiceSetup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChannelServiceSetup.m; sourceTree = "<group>"; };
+		6F570D5E27149CA3007BDE68 /* Application-without-CarPlay.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Application-without-CarPlay.entitlements"; sourceTree = "<group>"; };
 		6F573D0226D644A000757CD5 /* DeepLinkAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeepLinkAction.h; sourceTree = "<group>"; };
 		6F573D0326D644A000757CD5 /* DeepLinkAction.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeepLinkAction.m; sourceTree = "<group>"; };
 		6F5866491DD226EE005DAFE4 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
@@ -4351,10 +4352,11 @@
 		6FAAF77520CAB6ED00BB58A3 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				08C68EC91D38DEA100BB8AAA /* Sources */,
-				08C68E981D38DEA100BB8AAA /* Resources */,
 				6FBA2ECF20D11A65005EB21D /* Application-Info.plist */,
+				6F570D5E27149CA3007BDE68 /* Application-without-CarPlay.entitlements */,
 				082092FC208E272E00711DE4 /* Application.entitlements */,
+				08C68E981D38DEA100BB8AAA /* Resources */,
+				08C68EC91D38DEA100BB8AAA /* Sources */,
 			);
 			path = Application;
 			sourceTree = "<group>";
