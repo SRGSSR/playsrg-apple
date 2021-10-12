@@ -2,3 +2,5 @@
 #include "Pods/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI.debug.xcconfig"
 #include "Xcode/Play iOS Application.xcconfig"
 #include "Xcode/Play SWI.xcconfig"
+
+CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/Application/Application-without-CarPlay.entitlements
