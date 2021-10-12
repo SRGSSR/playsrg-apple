@@ -10,6 +10,9 @@ import UIKit
 // MARK: Context menu management
 
 enum ContextMenu {
+    // See https://github.com/SRGSSR/playsrg-apple/issues/192
+    private static let actionDelay = DispatchTimeInterval.seconds(1)
+    
     static func configuration(for item: Content.Item, identifier: NSCopying? = nil, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         switch item {
         case let .media(media):
@@ -118,17 +121,19 @@ private extension ContextMenu {
         guard action != .none else { return nil }
         
         let menuAction = UIAction(title: title(for: action), image: image(for: action)) { _ in
-            WatchLaterToggleMedia(media) { added, error in
-                guard error == nil else { return }
-                
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.peekMenu.rawValue
-                labels.value = media.urn
-                
-                let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
-                
-                Banner.showWatchLaterAdded(added, forItemWithName: media.title, in: viewController)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
+                WatchLaterToggleMedia(media) { added, error in
+                    guard error == nil else { return }
+                    
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.peekMenu.rawValue
+                    labels.value = media.urn
+                    
+                    let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                    
+                    Banner.showWatchLaterAdded(added, forItemWithName: media.title, in: viewController)
+                }
             }
         }
         if action == .remove {
@@ -142,14 +147,16 @@ private extension ContextMenu {
                 
         let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
                                   image: UIImage(named: "history")!) { _ in
-            HistoryRemoveMedias([media]) { error in
-                guard error == nil else { return }
-                
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.peekMenu.rawValue
-                labels.value = media.urn
-                
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
+                HistoryRemoveMedias([media]) { error in
+                    guard error == nil else { return }
+                    
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.peekMenu.rawValue
+                    labels.value = media.urn
+                    
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+                }
             }
         }
         menuAction.attributes = .destructive
@@ -174,21 +181,23 @@ private extension ContextMenu {
         
         let download = Download(for: media)
         let menuAction = UIAction(title: title(for: download), image: image(for: download)) { _ in
-            if let download = download {
-                Download.removeDownload(download)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
+                if let download = download {
+                    Download.removeDownload(download)
+                }
+                else {
+                    Download.add(for: media)
+                }
+                
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.value = media.urn
+                
+                let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                
+                Banner.showDownload(download == nil, forItemWithName: media.title, in: viewController)
             }
-            else {
-                Download.add(for: media)
-            }
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.peekMenu.rawValue
-            labels.value = media.urn
-            
-            let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
-            
-            Banner.showDownload(download == nil, forItemWithName: media.title, in: viewController)
         }
         if download != nil {
             menuAction.attributes = .destructive
@@ -250,16 +259,18 @@ private extension ContextMenu {
         
         let isFavorite = FavoritesContainsShow(show)
         let menuAction = UIAction(title: title(isFavorite: isFavorite), image: image(isFavorite: isFavorite)) { _ in
-            FavoritesToggleShow(show)
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.peekMenu.rawValue
-            labels.value = show.urn
-            
-            let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
-            
-            Banner.showFavorite(!isFavorite, forItemWithName: show.title, in: viewController)
+            DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
+                FavoritesToggleShow(show)
+                
+                let labels = SRGAnalyticsHiddenEventLabels()
+                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.value = show.urn
+                
+                let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
+                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                
+                Banner.showFavorite(!isFavorite, forItemWithName: show.title, in: viewController)
+            }
         }
         if isFavorite {
             menuAction.attributes = .destructive

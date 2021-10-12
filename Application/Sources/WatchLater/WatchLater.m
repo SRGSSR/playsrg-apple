@@ -81,17 +81,20 @@ void WatchLaterRemoveMedias(NSArray<SRGMedia *> *medias, void (^completion)(NSEr
 
 void WatchLaterToggleMedia(SRGMedia *media, void (^completion)(BOOL added, NSError * _Nullable error))
 {
-    BOOL contained = WatchLaterContainsMedia(media);
-    if (contained) {
-        WatchLaterRemoveMedias(@[media], ^(NSError * _Nullable error) {
-            completion(NO, error);
+    WatchLaterContainsMediaAsync(media, ^(BOOL contained) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (contained) {
+                WatchLaterRemoveMedias(@[media], ^(NSError * _Nullable error) {
+                    completion(NO, error);
+                });
+            }
+            else {
+                WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
+                    completion(YES, error);
+                });
+            }
         });
-    }
-    else {
-        WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
-            completion(YES, error);
-        });
-    }
+    });
 }
 
 void WatchLaterAsyncCancel(NSString *handle)
