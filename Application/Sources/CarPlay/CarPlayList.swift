@@ -46,7 +46,7 @@ enum CarPlayList {
         case .livestreams:
             return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController, action: .play)
         case .mostPopular:
-            return SRGDataProvider.current!.livestreamsSections(for: .default, interfaceController: interfaceController, action: .displayMostPopular)
+            return SRGDataProvider.current!.mostPopular(for: .default, interfaceController: interfaceController, action: .displayMostPopular)
         case let .mostPopularMedias(channelUid: channelUid):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
                 .mapToSections(with: interfaceController)
@@ -152,6 +152,22 @@ private extension SRGDataProvider {
     }
     
     func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController, action: CarPlayList.Action) -> AnyPublisher<[CPListSection], Error> {
+        return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
+            .map { medias in
+                let items = medias.map { media -> CPListItem in
+                    let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
+                    item.accessoryType = .none
+                    item.handler = { _, completion in
+                        action.perform(for: media, interfaceController: interfaceController, completion: completion)
+                    }
+                    return item
+                }
+                return [CPListSection(items: items)]
+            }
+            .eraseToAnyPublisher()
+    }
+    
+    func mostPopular(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController, action: CarPlayList.Action) -> AnyPublisher<[CPListSection], Error> {
         return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
             .map { medias in
                 let items = medias.map { media -> CPListItem in
