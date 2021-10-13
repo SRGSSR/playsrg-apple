@@ -2320,8 +2320,6 @@
 		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
 		081220BF1DD0ADAC00BF8326 /* DownloadSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSession.h; sourceTree = "<group>"; };
 		081220C01DD0ADAC00BF8326 /* DownloadSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSession.m; sourceTree = "<group>"; };
-		0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS.xcconfig"; sourceTree = "<group>"; };
-		0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS.xcconfig"; sourceTree = "<group>"; };
 		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
 		081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFooterSectionView.m; sourceTree = "<group>"; };
 		081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadFooterSectionView.xib; sourceTree = "<group>"; };
@@ -2356,26 +2354,6 @@
 		085C0DC226132672008E07C8 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		085C0DCD261326C8008E07C8 /* RadioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioChannel.swift; sourceTree = "<group>"; };
 		086499B124F69FF20027373E /* MediaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailView.swift; sourceTree = "<group>"; };
-		0866AEAA26D97FFF00546BFE /* Play SWI TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEAB26D97FFF00546BFE /* Play SWI.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEAC26D97FFF00546BFE /* Play SWI TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEAD26D9800000546BFE /* Play SWI.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEAE26D99D2500546BFE /* Play RSI TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEAF26D99D2500546BFE /* Play SRF.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB026D99D2500546BFE /* Play SRF TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB126D99D2500546BFE /* Play SRF TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB226D99D2600546BFE /* Play RSI.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB326D99D2600546BFE /* Play RTR TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB426D99D2700546BFE /* Play RTS TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB526D99D2700546BFE /* Play RTS TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB626D99D2800546BFE /* Play RSI.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB726D99D2800546BFE /* Play RTS.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB826D99D2A00546BFE /* Play RTR.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEB926D99D2A00546BFE /* Play RSI TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEBA26D99D2B00546BFE /* Play SRF.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEBB26D99D2B00546BFE /* Play RTS.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEBC26D99D2B00546BFE /* Play RTR TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
-		0866AEBD26D99D2C00546BFE /* Play RTR.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
 		086BDE121EA63D3800965F45 /* PlayMiniPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayMiniPlayerView.h; sourceTree = "<group>"; };
 		086BDE131EA63D3800965F45 /* PlayMiniPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayMiniPlayerView.m; sourceTree = "<group>"; };
 		086BDE141EA63D3800965F45 /* PlayMiniPlayerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayMiniPlayerView.xib; sourceTree = "<group>"; };
@@ -2410,6 +2388,94 @@
 		089EA010201148180070E11A /* NSTimer+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED001FA2612B00A517EF /* SRGDataProvider+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDataProvider+PlaySRG.m"; sourceTree = "<group>"; };
 		08A3ED011FA2612B00A517EF /* SRGDataProvider+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDataProvider+PlaySRG.h"; sourceTree = "<group>"; };
+		08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.beta.xcconfig"; sourceTree = "<group>"; };
+		08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.debug.xcconfig"; sourceTree = "<group>"; };
+		08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.beta.xcconfig"; sourceTree = "<group>"; };
+		08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.debug.xcconfig"; sourceTree = "<group>"; };
+		08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
+		08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
+		08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913902717388E00774985 /* Play SRF.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913952717388E00774985 /* Play SWI.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913962717388E00774985 /* Play SRF.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913992717388E00774985 /* Play RSI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.debug.xcconfig"; sourceTree = "<group>"; };
+		08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.beta.xcconfig"; sourceTree = "<group>"; };
+		08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
+		08A913A12717388E00774985 /* Play RTR.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913A22717388E00774985 /* Play SWI.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.debug.xcconfig"; sourceTree = "<group>"; };
+		08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913A42717388E00774985 /* Play SRF.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
+		08A913A92717388E00774985 /* Play RTS.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.beta.xcconfig"; sourceTree = "<group>"; };
+		08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
+		08A913AE2717388E00774985 /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		08A913AF2717388E00774985 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		08A913B02717388E00774985 /* Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
+		08A913B12717388E00774985 /* Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screenshots.xcconfig; sourceTree = "<group>"; };
+		08A913B32717388E00774985 /* Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Application.xcconfig; sourceTree = "<group>"; };
+		08A913B42717388E00774985 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		08A913B52717388E00774985 /* Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Screenshots.xcconfig; sourceTree = "<group>"; };
+		08A913B62717388E00774985 /* Common.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Common.xcconfig; sourceTree = "<group>"; };
+		08A913B82717388E00774985 /* RTR.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RTR.xcconfig; sourceTree = "<group>"; };
+		08A913B92717388E00774985 /* RTS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RTS.xcconfig; sourceTree = "<group>"; };
+		08A913BA2717388E00774985 /* SRF.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SRF.xcconfig; sourceTree = "<group>"; };
+		08A913BB2717388E00774985 /* SWI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = SWI.xcconfig; sourceTree = "<group>"; };
+		08A913BC2717388E00774985 /* RSI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = RSI.xcconfig; sourceTree = "<group>"; };
 		08AA551B1D49EBF600C5026E /* ApplicationConfiguration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationConfiguration.h; sourceTree = "<group>"; };
 		08AA551C1D49EBF600C5026E /* ApplicationConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationConfiguration.m; sourceTree = "<group>"; };
 		08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterboxDelegate.swift; sourceTree = "<group>"; };
@@ -2418,7 +2484,6 @@
 		08AF947F217D27E40028B082 /* SharingItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharingItem.m; sourceTree = "<group>"; };
 		08B4650226BC07F900454A28 /* ChannelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelButton.swift; sourceTree = "<group>"; };
 		08B4651326BC58C800454A28 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
-		08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Application.xcconfig"; sourceTree = "<group>"; };
 		08B77A452409C06000A3BC3B /* Play SRF screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08B77A5A2409C48700A3BC3B /* ApplicationScreenshots~ios.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApplicationScreenshots~ios.swift"; sourceTree = "<group>"; };
 		08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapshotHelper.swift; sourceTree = "<group>"; };
@@ -2468,35 +2533,12 @@
 		08C691271D39089700BB8AAA /* CommonImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CommonImages.xcassets; sourceTree = "<group>"; };
 		08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideHeaderView.swift; sourceTree = "<group>"; };
 		08DADF8B20D92D6400291AD1 /* placeholder_notification.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placeholder_notification.pdf; sourceTree = "<group>"; };
-		08E7881C255B4D5B00E17515 /* Play RTR.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.xcconfig"; sourceTree = "<group>"; };
-		08E7881E255B4D5C00E17515 /* Play SWI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.xcconfig"; sourceTree = "<group>"; };
-		08E78820255B4D5D00E17515 /* Play SRF.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.xcconfig"; sourceTree = "<group>"; };
-		08E78822255B4D5D00E17515 /* Play RSI.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.xcconfig"; sourceTree = "<group>"; };
-		08E78823255B4D5E00E17515 /* Play RTS.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.xcconfig"; sourceTree = "<group>"; };
-		08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7890A255B59D800E17515 /* Play iOS Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Notification Service Extension.xcconfig"; sourceTree = "<group>"; };
-		08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08E7899D255B605E00E17515 /* Play iOS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play iOS Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08EA3EB6259E33C9008D412F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		08F384A225FA69BB00E1BCF0 /* Play SWI TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SWI TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		08F384D025FA6BA100E1BCF0 /* Play tvOS Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08F3866125FA9AD800E1BCF0 /* Play SRF TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTS TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RSI TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTR TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV Screenshots.xcconfig"; sourceTree = "<group>"; };
-		08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV Screenshots.xcconfig"; sourceTree = "<group>"; };
 		08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideCalendarViewController.swift; sourceTree = "<group>"; };
 		08F5DB0F262DC7F700F717D0 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		08F5DBB6262DF34400F717D0 /* FeaturedContentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeaturedContentCell.swift; sourceTree = "<group>"; };
@@ -2575,26 +2617,6 @@
 		6F1938351EFBFEBC0017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F1938371EFBFEC80017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F1A77822643CAB600A00EFC /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
-		6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.beta.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.beta.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.beta.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.beta.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.beta.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF.debug.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI.appstore.xcconfig"; sourceTree = "<group>"; };
 		6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHeaderView.swift; sourceTree = "<group>"; };
 		6F1F929C22A539D40026BFAC /* SearchShowListCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchShowListCollectionViewCell.h; sourceTree = "<group>"; };
 		6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchShowListCollectionViewCell.m; sourceTree = "<group>"; };
@@ -2742,27 +2764,6 @@
 		6F861AF71DAE65A600C46102 /* SRGMediaPlayerDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGMediaPlayerDesignables.m; sourceTree = "<group>"; };
 		6F88139323D85DD600A00826 /* GoogleCastBarButtonItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCastBarButtonItem.h; sourceTree = "<group>"; };
 		6F88139423D85DD600A00826 /* GoogleCastBarButtonItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCastBarButtonItem.m; sourceTree = "<group>"; };
-		6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.debug.xcconfig"; sourceTree = "<group>"; };
-		6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.debug.xcconfig"; sourceTree = "<group>"; };
-		6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.beta.xcconfig"; sourceTree = "<group>"; };
-		6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.debug.xcconfig"; sourceTree = "<group>"; };
-		6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.debug.xcconfig"; sourceTree = "<group>"; };
-		6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV.beta.xcconfig"; sourceTree = "<group>"; };
-		6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.appstore.xcconfig"; sourceTree = "<group>"; };
-		6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV.beta.xcconfig"; sourceTree = "<group>"; };
-		6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV.beta.xcconfig"; sourceTree = "<group>"; };
-		6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV.beta.xcconfig"; sourceTree = "<group>"; };
-		6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.nightly.xcconfig"; sourceTree = "<group>"; };
-		6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV.debug.xcconfig"; sourceTree = "<group>"; };
-		6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play tvOS Application.xcconfig"; sourceTree = "<group>"; };
 		6F8A54592655100400AE78FD /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		6F8A5470265510F900AE78FD /* SectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewModel.swift; sourceTree = "<group>"; };
 		6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedContent.swift; sourceTree = "<group>"; };
@@ -3545,41 +3546,183 @@
 			path = "Play RTS";
 			sourceTree = "<group>";
 		};
-		08A913542717029900774985 /* Shared */ = {
+		08A913592717388C00774985 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				08A913572717031900774985 /* Targets */,
-				08A913582717035000774985 /* BUs */,
-			);
-			path = Shared;
-			sourceTree = "<group>";
-		};
-		08A91355271702EB00774985 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = iOS;
-			sourceTree = "<group>";
-		};
-		08A913562717030000774985 /* tvOS */ = {
-			isa = PBXGroup;
-			children = (
+				08A9135A2717388C00774985 /* Screenshots */,
+				08A913602717388C00774985 /* Application */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
 		};
-		08A913572717031900774985 /* Targets */ = {
+		08A9135A2717388C00774985 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				08A91355271702EB00774985 /* iOS */,
-				08A913562717030000774985 /* tvOS */,
+				08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */,
+				08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */,
+				08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */,
+				08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */,
+				08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		08A913602717388C00774985 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */,
+				08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */,
+				08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */,
+				08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */,
+				08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */,
+				08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */,
+				08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */,
+				08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */,
+				08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */,
+				08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */,
+				08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */,
+				08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */,
+				08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */,
+				08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */,
+				08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */,
+				08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */,
+				08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */,
+				08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */,
+				08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */,
+				08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */,
+				08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */,
+				08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */,
+				08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */,
+				08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */,
+				08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */,
+				08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */,
+				08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */,
+				08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */,
+				08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */,
+				08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		08A9137F2717388E00774985 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				08A913802717388E00774985 /* Screenshots */,
+				08A913862717388E00774985 /* Notification Service Extension */,
+				08A9138C2717388E00774985 /* Application */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		08A913802717388E00774985 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */,
+				08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */,
+				08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */,
+				08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */,
+				08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
+		08A913862717388E00774985 /* Notification Service Extension */ = {
+			isa = PBXGroup;
+			children = (
+				08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */,
+				08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */,
+				08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */,
+				08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */,
+				08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */,
+			);
+			path = "Notification Service Extension";
+			sourceTree = "<group>";
+		};
+		08A9138C2717388E00774985 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */,
+				08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */,
+				08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */,
+				08A913902717388E00774985 /* Play SRF.nightly.xcconfig */,
+				08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */,
+				08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */,
+				08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */,
+				08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */,
+				08A913952717388E00774985 /* Play SWI.beta.xcconfig */,
+				08A913962717388E00774985 /* Play SRF.debug.xcconfig */,
+				08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */,
+				08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */,
+				08A913992717388E00774985 /* Play RSI.appstore.xcconfig */,
+				08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */,
+				08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */,
+				08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */,
+				08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */,
+				08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */,
+				08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */,
+				08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */,
+				08A913A12717388E00774985 /* Play RTR.debug.xcconfig */,
+				08A913A22717388E00774985 /* Play SWI.debug.xcconfig */,
+				08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */,
+				08A913A42717388E00774985 /* Play SRF.beta.xcconfig */,
+				08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */,
+				08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */,
+				08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */,
+				08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */,
+				08A913A92717388E00774985 /* Play RTS.beta.xcconfig */,
+				08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		08A913AB2717388E00774985 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				08A913AC2717388E00774985 /* Targets */,
+				08A913B62717388E00774985 /* Common.xcconfig */,
+				08A913B72717388E00774985 /* BUs */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		08A913AC2717388E00774985 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				08A913AD2717388E00774985 /* iOS */,
+				08A913B22717388E00774985 /* tvOS */,
 			);
 			path = Targets;
 			sourceTree = "<group>";
 		};
-		08A913582717035000774985 /* BUs */ = {
+		08A913AD2717388E00774985 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				08A913AE2717388E00774985 /* Application.xcconfig */,
+				08A913AF2717388E00774985 /* Common.xcconfig */,
+				08A913B02717388E00774985 /* Notification Service Extension.xcconfig */,
+				08A913B12717388E00774985 /* Screenshots.xcconfig */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		08A913B22717388E00774985 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				08A913B32717388E00774985 /* Application.xcconfig */,
+				08A913B42717388E00774985 /* Common.xcconfig */,
+				08A913B52717388E00774985 /* Screenshots.xcconfig */,
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		08A913B72717388E00774985 /* BUs */ = {
+			isa = PBXGroup;
+			children = (
+				08A913B82717388E00774985 /* RTR.xcconfig */,
+				08A913B92717388E00774985 /* RTS.xcconfig */,
+				08A913BA2717388E00774985 /* SRF.xcconfig */,
+				08A913BB2717388E00774985 /* SWI.xcconfig */,
+				08A913BC2717388E00774985 /* RSI.xcconfig */,
 			);
 			path = BUs;
 			sourceTree = "<group>";
@@ -3963,94 +4106,9 @@
 		6F0136DF21395B8400B95405 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
-				08A913542717029900774985 /* Shared */,
-				08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */,
-				08E7890A255B59D800E17515 /* Play iOS Notification Service Extension.xcconfig */,
-				08E7899D255B605E00E17515 /* Play iOS Screenshots.xcconfig */,
-				0814CE0924D85D8F0013D7A9 /* Play iOS.xcconfig */,
-				08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */,
-				08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */,
-				08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */,
-				6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */,
-				0866AEAE26D99D2500546BFE /* Play RSI TV.beta_appcenter.xcconfig */,
-				6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */,
-				6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */,
-				0866AEB926D99D2A00546BFE /* Play RSI TV.nightly_appcenter.xcconfig */,
-				6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */,
-				6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */,
-				0866AEB226D99D2600546BFE /* Play RSI.beta_appcenter.xcconfig */,
-				6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */,
-				6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */,
-				0866AEB626D99D2800546BFE /* Play RSI.nightly_appcenter.xcconfig */,
-				6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */,
-				08E78822255B4D5D00E17515 /* Play RSI.xcconfig */,
-				08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */,
-				08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */,
-				08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */,
-				6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */,
-				0866AEB326D99D2600546BFE /* Play RTR TV.beta_appcenter.xcconfig */,
-				6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */,
-				6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */,
-				0866AEBC26D99D2B00546BFE /* Play RTR TV.nightly_appcenter.xcconfig */,
-				6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */,
-				6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */,
-				0866AEBD26D99D2C00546BFE /* Play RTR.beta_appcenter.xcconfig */,
-				6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */,
-				6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */,
-				0866AEB826D99D2A00546BFE /* Play RTR.nightly_appcenter.xcconfig */,
-				6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */,
-				08E7881C255B4D5B00E17515 /* Play RTR.xcconfig */,
-				08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */,
-				08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */,
-				08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */,
-				6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */,
-				0866AEB526D99D2700546BFE /* Play RTS TV.beta_appcenter.xcconfig */,
-				6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */,
-				6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */,
-				0866AEB426D99D2700546BFE /* Play RTS TV.nightly_appcenter.xcconfig */,
-				6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */,
-				6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */,
-				0866AEBB26D99D2B00546BFE /* Play RTS.beta_appcenter.xcconfig */,
-				6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */,
-				6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */,
-				0866AEB726D99D2800546BFE /* Play RTS.nightly_appcenter.xcconfig */,
-				6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */,
-				08E78823255B4D5E00E17515 /* Play RTS.xcconfig */,
-				08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */,
-				08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */,
-				08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */,
-				6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */,
-				0866AEB126D99D2500546BFE /* Play SRF TV.beta_appcenter.xcconfig */,
-				6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */,
-				6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */,
-				0866AEB026D99D2500546BFE /* Play SRF TV.nightly_appcenter.xcconfig */,
-				6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */,
-				6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */,
-				0866AEAF26D99D2500546BFE /* Play SRF.beta_appcenter.xcconfig */,
-				6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */,
-				6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */,
-				0866AEBA26D99D2B00546BFE /* Play SRF.nightly_appcenter.xcconfig */,
-				6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */,
-				08E78820255B4D5D00E17515 /* Play SRF.xcconfig */,
-				08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */,
-				08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */,
-				08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */,
-				6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */,
-				0866AEAA26D97FFF00546BFE /* Play SWI TV.beta_appcenter.xcconfig */,
-				6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */,
-				6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */,
-				0866AEAC26D97FFF00546BFE /* Play SWI TV.nightly_appcenter.xcconfig */,
-				6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */,
-				6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */,
-				0866AEAB26D97FFF00546BFE /* Play SWI.beta_appcenter.xcconfig */,
-				6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */,
-				6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */,
-				0866AEAD26D9800000546BFE /* Play SWI.nightly_appcenter.xcconfig */,
-				6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */,
-				08E7881E255B4D5C00E17515 /* Play SWI.xcconfig */,
-				6F88409424EC05E4007463ED /* Play tvOS Application.xcconfig */,
-				08F384D025FA6BA100E1BCF0 /* Play tvOS Screenshots.xcconfig */,
-				0814CE0A24D85E0B0013D7A9 /* Play tvOS.xcconfig */,
+				08A9137F2717388E00774985 /* iOS */,
+				08A913AB2717388E00774985 /* Shared */,
+				08A913592717388C00774985 /* tvOS */,
 			);
 			path = Xcode;
 			sourceTree = "<group>";
@@ -5394,7 +5452,6 @@
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
 						CreatedOnToolsVersion = 11.3.1;
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 08C68D881D38D6F400BB8AAA;
@@ -5425,7 +5482,6 @@
 					};
 					08C68D881D38D6F400BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -5439,7 +5495,6 @@
 					};
 					08C68DBF1D38D70D00BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -5456,7 +5511,6 @@
 					};
 					08C68DF61D38D72000BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -5470,7 +5524,6 @@
 					};
 					08C68E2D1D38D73000BB8AAA = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = VMGRRW6SG7;
 						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
@@ -5511,7 +5564,6 @@
 					};
 					6F0CFB3120C94DF6006B2CE4 = {
 						CreatedOnToolsVersion = 9.4;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -5521,7 +5573,6 @@
 					};
 					6F0CFB4420C94E77006B2CE4 = {
 						CreatedOnToolsVersion = 9.4;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -5531,7 +5582,6 @@
 					};
 					6F0CFB5720C94E8E006B2CE4 = {
 						CreatedOnToolsVersion = 9.4;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -5541,7 +5591,6 @@
 					};
 					6F0CFB6A20C94EC8006B2CE4 = {
 						CreatedOnToolsVersion = 9.4;
-						DevelopmentTeam = VMGRRW6SG7;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -9874,7 +9923,7 @@
 		};
 		0866AE7726D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE18222EBB7D003E0722 /* Play SRF.nightly.xcconfig */;
+			baseConfigurationReference = 08A913902717388E00774985 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -9884,7 +9933,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-srf.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -9900,7 +9949,7 @@
 		};
 		0866AE7826D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE11222EBB7C003E0722 /* Play RTS.nightly.xcconfig */;
+			baseConfigurationReference = 08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -9910,7 +9959,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rts.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -9926,7 +9975,7 @@
 		};
 		0866AE7926D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE10222EBB7C003E0722 /* Play RSI.nightly.xcconfig */;
+			baseConfigurationReference = 08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -9936,7 +9985,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rsi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -9952,7 +10001,7 @@
 		};
 		0866AE7A26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE1D222EBB7E003E0722 /* Play RTR.nightly.xcconfig */;
+			baseConfigurationReference = 08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -9962,7 +10011,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rtr.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -9978,7 +10027,7 @@
 		};
 		0866AE7B26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE16222EBB7D003E0722 /* Play SWI.nightly.xcconfig */;
+			baseConfigurationReference = 08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -9987,7 +10036,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-swi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -10002,7 +10051,7 @@
 		};
 		0866AE7C26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88409224EBF930007463ED /* Play SRF TV.nightly.xcconfig */;
+			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10067,7 +10116,7 @@
 		};
 		0866AE7D26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408624EBF92C007463ED /* Play RTS TV.nightly.xcconfig */;
+			baseConfigurationReference = 08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10132,7 +10181,7 @@
 		};
 		0866AE7E26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408F24EBF92F007463ED /* Play RSI TV.nightly.xcconfig */;
+			baseConfigurationReference = 08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10197,7 +10246,7 @@
 		};
 		0866AE7F26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408324EBF92B007463ED /* Play RTR TV.nightly.xcconfig */;
+			baseConfigurationReference = 08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10262,7 +10311,7 @@
 		};
 		0866AE8026D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408524EBF92C007463ED /* Play SWI TV.nightly.xcconfig */;
+			baseConfigurationReference = 08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -10327,7 +10376,7 @@
 		};
 		0866AE8126D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10361,7 +10410,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10386,7 +10435,7 @@
 		};
 		0866AE8226D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10420,7 +10469,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10445,7 +10494,7 @@
 		};
 		0866AE8326D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10479,7 +10528,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10504,7 +10553,7 @@
 		};
 		0866AE8426D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10538,7 +10587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10563,7 +10612,7 @@
 		};
 		0866AE8526D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -10596,7 +10645,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -10621,7 +10670,7 @@
 		};
 		0866AE8626D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10652,7 +10701,7 @@
 		};
 		0866AE8726D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10683,7 +10732,7 @@
 		};
 		0866AE8826D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10714,7 +10763,7 @@
 		};
 		0866AE8926D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10745,7 +10794,7 @@
 		};
 		0866AE8A26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10776,7 +10825,7 @@
 		};
 		0866AE8B26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10808,7 +10857,7 @@
 		};
 		0866AE8C26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10840,7 +10889,7 @@
 		};
 		0866AE8D26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10872,7 +10921,7 @@
 		};
 		0866AE8E26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10904,7 +10953,7 @@
 		};
 		0866AE8F26D9762500546BFE /* Nightly */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10999,7 +11048,7 @@
 		};
 		0866AE9126D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE1B222EBB7D003E0722 /* Play SRF.beta.xcconfig */;
+			baseConfigurationReference = 08A913A42717388E00774985 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -11009,7 +11058,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-srf.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -11023,7 +11072,7 @@
 		};
 		0866AE9226D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE0D222EBB7C003E0722 /* Play RTS.beta.xcconfig */;
+			baseConfigurationReference = 08A913A92717388E00774985 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -11033,7 +11082,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rts.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -11047,7 +11096,7 @@
 		};
 		0866AE9326D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE13222EBB7C003E0722 /* Play RSI.beta.xcconfig */;
+			baseConfigurationReference = 08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -11057,7 +11106,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rsi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -11071,7 +11120,7 @@
 		};
 		0866AE9426D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE15222EBB7D003E0722 /* Play RTR.beta.xcconfig */;
+			baseConfigurationReference = 08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -11081,7 +11130,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-rtr.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -11095,7 +11144,7 @@
 		};
 		0866AE9526D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE12222EBB7C003E0722 /* Play SWI.beta.xcconfig */;
+			baseConfigurationReference = 08A913952717388E00774985 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -11104,7 +11153,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "srgplayer-swi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -11118,7 +11167,7 @@
 		};
 		0866AE9626D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408724EBF92C007463ED /* Play SRF TV.beta.xcconfig */;
+			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11183,7 +11232,7 @@
 		};
 		0866AE9726D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408C24EBF92E007463ED /* Play RTS TV.beta.xcconfig */;
+			baseConfigurationReference = 08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11248,7 +11297,7 @@
 		};
 		0866AE9826D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88409124EBF930007463ED /* Play RSI TV.beta.xcconfig */;
+			baseConfigurationReference = 08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11313,7 +11362,7 @@
 		};
 		0866AE9926D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88409024EBF930007463ED /* Play RTR TV.beta.xcconfig */;
+			baseConfigurationReference = 08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11378,7 +11427,7 @@
 		};
 		0866AE9A26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408E24EBF92F007463ED /* Play SWI TV.beta.xcconfig */;
+			baseConfigurationReference = 08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -11443,7 +11492,7 @@
 		};
 		0866AE9B26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11477,7 +11526,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11502,7 +11551,7 @@
 		};
 		0866AE9C26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11536,7 +11585,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11561,7 +11610,7 @@
 		};
 		0866AE9D26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11595,7 +11644,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11620,7 +11669,7 @@
 		};
 		0866AE9E26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11654,7 +11703,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11679,7 +11728,7 @@
 		};
 		0866AE9F26D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -11712,7 +11761,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -11737,7 +11786,7 @@
 		};
 		0866AEA026D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11768,7 +11817,7 @@
 		};
 		0866AEA126D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11799,7 +11848,7 @@
 		};
 		0866AEA226D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11830,7 +11879,7 @@
 		};
 		0866AEA326D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11861,7 +11910,7 @@
 		};
 		0866AEA426D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11892,7 +11941,7 @@
 		};
 		0866AEA526D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11924,7 +11973,7 @@
 		};
 		0866AEA626D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11956,7 +12005,7 @@
 		};
 		0866AEA726D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11988,7 +12037,7 @@
 		};
 		0866AEA826D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12020,7 +12069,7 @@
 		};
 		0866AEA926D9763200546BFE /* Beta */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12052,7 +12101,7 @@
 		};
 		08B77A4D2409C06000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12080,7 +12129,7 @@
 		};
 		08B77A4E2409C06000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12111,7 +12160,7 @@
 		};
 		08B77A4F2409C06000A3BC3B /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12142,7 +12191,7 @@
 		};
 		08B77A502409C06000A3BC3B /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12173,7 +12222,7 @@
 		};
 		08B77AAD2409E0A300A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12201,7 +12250,7 @@
 		};
 		08B77AAE2409E0A300A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12232,7 +12281,7 @@
 		};
 		08B77AAF2409E0A300A3BC3B /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12263,7 +12312,7 @@
 		};
 		08B77AB02409E0A300A3BC3B /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12294,7 +12343,7 @@
 		};
 		08B77ABF240A78F200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12322,7 +12371,7 @@
 		};
 		08B77AC0240A78F200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12353,7 +12402,7 @@
 		};
 		08B77AC1240A78F200A3BC3B /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12384,7 +12433,7 @@
 		};
 		08B77AC2240A78F200A3BC3B /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12415,7 +12464,7 @@
 		};
 		08B77AD0240A7E3200A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12443,7 +12492,7 @@
 		};
 		08B77AD1240A7E3200A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12474,7 +12523,7 @@
 		};
 		08B77AD2240A7E3200A3BC3B /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12505,7 +12554,7 @@
 		};
 		08B77AD3240A7E3200A3BC3B /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12536,7 +12585,7 @@
 		};
 		08B77ADF240A7E5000A3BC3B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12564,7 +12613,7 @@
 		};
 		08B77AE0240A7E5000A3BC3B /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12595,7 +12644,7 @@
 		};
 		08B77AE1240A7E5000A3BC3B /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12626,7 +12675,7 @@
 		};
 		08B77AE2240A7E5000A3BC3B /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
+			baseConfigurationReference = 08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12786,7 +12835,7 @@
 		};
 		08C68DB41D38D6F400BB8AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE1C222EBB7E003E0722 /* Play SRF.debug.xcconfig */;
+			baseConfigurationReference = 08A913962717388E00774985 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12795,7 +12844,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -12810,7 +12859,7 @@
 		};
 		08C68DB51D38D6F400BB8AAA /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE1A222EBB7D003E0722 /* Play SRF.appstore.xcconfig */;
+			baseConfigurationReference = 08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12833,7 +12882,7 @@
 		};
 		08C68DEB1D38D70E00BB8AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE0B222EBB7B003E0722 /* Play RTS.debug.xcconfig */;
+			baseConfigurationReference = 08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12842,7 +12891,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -12857,7 +12906,7 @@
 		};
 		08C68DEC1D38D70E00BB8AAA /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE0C222EBB7C003E0722 /* Play RTS.appstore.xcconfig */;
+			baseConfigurationReference = 08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12880,7 +12929,7 @@
 		};
 		08C68E221D38D72000BB8AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE0F222EBB7C003E0722 /* Play RSI.debug.xcconfig */;
+			baseConfigurationReference = 08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12889,7 +12938,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -12904,7 +12953,7 @@
 		};
 		08C68E231D38D72000BB8AAA /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE19222EBB7D003E0722 /* Play RSI.appstore.xcconfig */;
+			baseConfigurationReference = 08A913992717388E00774985 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12927,7 +12976,7 @@
 		};
 		08C68E591D38D73000BB8AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE0E222EBB7C003E0722 /* Play RTR.debug.xcconfig */;
+			baseConfigurationReference = 08A913A12717388E00774985 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12936,7 +12985,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -12951,7 +13000,7 @@
 		};
 		08C68E5A1D38D73000BB8AAA /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE17222EBB7D003E0722 /* Play RTR.appstore.xcconfig */;
+			baseConfigurationReference = 08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12974,7 +13023,7 @@
 		};
 		08C68E901D38D73D00BB8AAA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE14222EBB7D003E0722 /* Play SWI.debug.xcconfig */;
+			baseConfigurationReference = 08A913A22717388E00774985 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -12982,7 +13031,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
@@ -12997,7 +13046,7 @@
 		};
 		08C68E911D38D73D00BB8AAA /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F1EBE1E222EBB7E003E0722 /* Play SWI.appstore.xcconfig */;
+			baseConfigurationReference = 08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
@@ -13085,7 +13134,7 @@
 		};
 		08C690F31D3900C400BB8AAA /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAF26D99D2500546BFE /* Play SRF.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13109,7 +13158,7 @@
 		};
 		08C690F41D3900C400BB8AAA /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEBB26D99D2B00546BFE /* Play RTS.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13133,7 +13182,7 @@
 		};
 		08C690F51D3900C400BB8AAA /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB226D99D2600546BFE /* Play RSI.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13157,7 +13206,7 @@
 		};
 		08C690F61D3900C400BB8AAA /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEBD26D99D2C00546BFE /* Play RTR.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13181,7 +13230,7 @@
 		};
 		08C690F71D3900C400BB8AAA /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAB26D97FFF00546BFE /* Play SWI.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13270,7 +13319,7 @@
 		};
 		08C691031D3900CB00BB8AAA /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEBA26D99D2B00546BFE /* Play SRF.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13296,7 +13345,7 @@
 		};
 		08C691041D3900CB00BB8AAA /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB726D99D2800546BFE /* Play RTS.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13322,7 +13371,7 @@
 		};
 		08C691051D3900CB00BB8AAA /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB626D99D2800546BFE /* Play RSI.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13348,7 +13397,7 @@
 		};
 		08C691061D3900CB00BB8AAA /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB826D99D2A00546BFE /* Play RTR.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13374,7 +13423,7 @@
 		};
 		08C691071D3900CB00BB8AAA /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAD26D9800000546BFE /* Play SWI.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(APPCENTER_OWNER)/apps/$(APPCENTER_APPNAME)?skip_registration=true";
@@ -13398,7 +13447,7 @@
 		};
 		08F3849E25FA69BB00E1BCF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13427,7 +13476,7 @@
 		};
 		08F3849F25FA69BB00E1BCF0 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13459,7 +13508,7 @@
 		};
 		08F384A025FA69BB00E1BCF0 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13491,7 +13540,7 @@
 		};
 		08F384A125FA69BB00E1BCF0 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13523,7 +13572,7 @@
 		};
 		08F3865D25FA9AD800E1BCF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13552,7 +13601,7 @@
 		};
 		08F3865E25FA9AD800E1BCF0 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13584,7 +13633,7 @@
 		};
 		08F3865F25FA9AD800E1BCF0 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13616,7 +13665,7 @@
 		};
 		08F3866025FA9AD800E1BCF0 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13648,7 +13697,7 @@
 		};
 		08F3868425FA9AE000E1BCF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13677,7 +13726,7 @@
 		};
 		08F3868525FA9AE000E1BCF0 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13709,7 +13758,7 @@
 		};
 		08F3868625FA9AE000E1BCF0 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13741,7 +13790,7 @@
 		};
 		08F3868725FA9AE000E1BCF0 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13773,7 +13822,7 @@
 		};
 		08F3869525FA9AE400E1BCF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13802,7 +13851,7 @@
 		};
 		08F3869625FA9AE400E1BCF0 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13834,7 +13883,7 @@
 		};
 		08F3869725FA9AE400E1BCF0 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13866,7 +13915,7 @@
 		};
 		08F3869825FA9AE400E1BCF0 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13898,7 +13947,7 @@
 		};
 		08F386A625FA9AE800E1BCF0 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13927,7 +13976,7 @@
 		};
 		08F386A725FA9AE800E1BCF0 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13959,7 +14008,7 @@
 		};
 		08F386A825FA9AE800E1BCF0 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13991,7 +14040,7 @@
 		};
 		08F386A925FA9AE800E1BCF0 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
+			baseConfigurationReference = 08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -14023,7 +14072,7 @@
 		};
 		6F0CFB3B20C94DF6006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14032,7 +14081,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14046,7 +14095,7 @@
 		};
 		6F0CFB3C20C94DF6006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14105,7 +14154,7 @@
 		};
 		6F0CFB3D20C94DF6006B2CE4 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14164,7 +14213,7 @@
 		};
 		6F0CFB3E20C94DF6006B2CE4 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890B255B59D800E17515 /* Play SRF Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14223,7 +14272,7 @@
 		};
 		6F0CFB4F20C94E77006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14232,7 +14281,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14246,7 +14295,7 @@
 		};
 		6F0CFB5020C94E77006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14305,7 +14354,7 @@
 		};
 		6F0CFB5120C94E77006B2CE4 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14364,7 +14413,7 @@
 		};
 		6F0CFB5220C94E77006B2CE4 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890E255B59D800E17515 /* Play RTS Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14423,7 +14472,7 @@
 		};
 		6F0CFB6220C94E8E006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14432,7 +14481,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14446,7 +14495,7 @@
 		};
 		6F0CFB6320C94E8E006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14505,7 +14554,7 @@
 		};
 		6F0CFB6420C94E8E006B2CE4 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14564,7 +14613,7 @@
 		};
 		6F0CFB6520C94E8E006B2CE4 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890D255B59D800E17515 /* Play RSI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14623,7 +14672,7 @@
 		};
 		6F0CFB7520C94EC8006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14632,7 +14681,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14646,7 +14695,7 @@
 		};
 		6F0CFB7620C94EC8006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14705,7 +14754,7 @@
 		};
 		6F0CFB7720C94EC8006B2CE4 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14764,7 +14813,7 @@
 		};
 		6F0CFB7820C94EC8006B2CE4 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E7890C255B59D800E17515 /* Play RTR Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14823,7 +14872,7 @@
 		};
 		6F0CFB8820C94EE5006B2CE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14831,7 +14880,7 @@
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/NotificationService/NotificationService-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -14845,7 +14894,7 @@
 		};
 		6F0CFB8920C94EE5006B2CE4 /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14903,7 +14952,7 @@
 		};
 		6F0CFB8A20C94EE5006B2CE4 /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -14961,7 +15010,7 @@
 		};
 		6F0CFB8B20C94EE5006B2CE4 /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 08E78909255B59D700E17515 /* Play SWI Notification Service Extension.xcconfig */;
+			baseConfigurationReference = 08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -15019,7 +15068,7 @@
 		};
 		6F331CF324D06B8400C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88409324EBF931007463ED /* Play SRF TV.debug.xcconfig */;
+			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15047,7 +15096,7 @@
 		};
 		6F331CF424D06B8400C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408A24EBF92D007463ED /* Play SRF TV.appstore.xcconfig */;
+			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15112,7 +15161,7 @@
 		};
 		6F331CF524D06B8400C096AB /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB126D99D2500546BFE /* Play SRF TV.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15149,7 +15198,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15177,7 +15226,7 @@
 		};
 		6F331CF624D06B8400C096AB /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB026D99D2500546BFE /* Play SRF TV.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15214,7 +15263,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15242,7 +15291,7 @@
 		};
 		6F331D0C24D06BA300C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408424EBF92B007463ED /* Play RTS TV.debug.xcconfig */;
+			baseConfigurationReference = 08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15270,7 +15319,7 @@
 		};
 		6F331D0D24D06BA300C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408124EBF92A007463ED /* Play RTS TV.appstore.xcconfig */;
+			baseConfigurationReference = 08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15335,7 +15384,7 @@
 		};
 		6F331D0E24D06BA300C096AB /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB526D99D2700546BFE /* Play RTS TV.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15372,7 +15421,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15400,7 +15449,7 @@
 		};
 		6F331D0F24D06BA300C096AB /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB426D99D2700546BFE /* Play RTS TV.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15437,7 +15486,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15465,7 +15514,7 @@
 		};
 		6F331D2424D06BB800C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408924EBF92D007463ED /* Play RSI TV.debug.xcconfig */;
+			baseConfigurationReference = 08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15493,7 +15542,7 @@
 		};
 		6F331D2524D06BB800C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408024EBF92A007463ED /* Play RSI TV.appstore.xcconfig */;
+			baseConfigurationReference = 08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15558,7 +15607,7 @@
 		};
 		6F331D2624D06BB800C096AB /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAE26D99D2500546BFE /* Play RSI TV.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15595,7 +15644,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15623,7 +15672,7 @@
 		};
 		6F331D2724D06BB800C096AB /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB926D99D2A00546BFE /* Play RSI TV.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15660,7 +15709,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15688,7 +15737,7 @@
 		};
 		6F331D3C24D06BC700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408B24EBF92D007463ED /* Play RTR TV.debug.xcconfig */;
+			baseConfigurationReference = 08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15716,7 +15765,7 @@
 		};
 		6F331D3D24D06BC700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408824EBF92C007463ED /* Play RTR TV.appstore.xcconfig */;
+			baseConfigurationReference = 08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15781,7 +15830,7 @@
 		};
 		6F331D3E24D06BC700C096AB /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEB326D99D2600546BFE /* Play RTR TV.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15818,7 +15867,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15846,7 +15895,7 @@
 		};
 		6F331D3F24D06BC700C096AB /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEBC26D99D2B00546BFE /* Play RTR TV.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -15883,7 +15932,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
-				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -15911,7 +15960,7 @@
 		};
 		6F331D5424D06C2700C096AB /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408224EBF92A007463ED /* Play SWI TV.debug.xcconfig */;
+			baseConfigurationReference = 08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15939,7 +15988,7 @@
 		};
 		6F331D5524D06C2700C096AB /* AppStore */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6F88408D24EBF92E007463ED /* Play SWI TV.appstore.xcconfig */;
+			baseConfigurationReference = 08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -16004,7 +16053,7 @@
 		};
 		6F331D5624D06C2700C096AB /* Beta_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAA26D97FFF00546BFE /* Play SWI TV.beta_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
@@ -16069,7 +16118,7 @@
 		};
 		6F331D5724D06C2700C096AB /* Nightly_AppCenter */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0866AEAC26D97FFF00546BFE /* Play SWI TV.nightly_appcenter.xcconfig */;
+			baseConfigurationReference = 08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";

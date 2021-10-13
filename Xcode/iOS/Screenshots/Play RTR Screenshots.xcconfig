@@ -1,2 +1,2 @@
-#include "Xcode/Play iOS Screenshots.xcconfig"
-#include "Xcode/Play RTR.xcconfig"
+#include "Xcode/Shared/BUs/RTR.xcconfig"
+#include "Xcode/Shared/Targets/iOS/Screenshots.xcconfig"

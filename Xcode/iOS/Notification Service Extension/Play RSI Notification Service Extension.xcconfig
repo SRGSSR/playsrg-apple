@@ -1,2 +1,2 @@
-#include "Xcode/Play iOS Notification Service Extension.xcconfig"
-#include "Xcode/Play RSI.xcconfig"
+#include "Xcode/Shared/BUs/RSI.xcconfig"
+#include "Xcode/Shared/Targets/iOS/Notification Service Extension.xcconfig"
