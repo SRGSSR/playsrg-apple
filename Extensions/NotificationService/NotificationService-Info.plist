@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>${CURRENT_PROJECT_VERSION}</string>
 	<key>ApplicationGroupIdentifier</key>
-	<string>${APP_GROUP_IDENTIFIER}</string>
+	<string>${COMMON__APP_GROUP_IDENTIFIER}</string>
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionPointIdentifier</key>

@@ -16,7 +16,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "08C68D881D38D6F400BB8AAA"
-                     BuildableName = "Play SRF.app"
+                     BuildableName = ".app"
                      BlueprintName = "Play SRF"
                      ReferencedContainer = "container:PlaySRG.xcodeproj">
                   </BuildableReference>
@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "08C68D881D38D6F400BB8AAA"
-               BuildableName = "Play SRF.app"
+               BuildableName = ".app"
                BlueprintName = "Play SRF"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08C68D881D38D6F400BB8AAA"
-            BuildableName = "Play SRF.app"
+            BuildableName = ".app"
             BlueprintName = "Play SRF"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
@@ -81,7 +81,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08C68D881D38D6F400BB8AAA"
-            BuildableName = "Play SRF.app"
+            BuildableName = ".app"
             BlueprintName = "Play SRF"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>

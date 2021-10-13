@@ -3545,6 +3545,45 @@
 			path = "Play RTS";
 			sourceTree = "<group>";
 		};
+		08A913542717029900774985 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				08A913572717031900774985 /* Targets */,
+				08A913582717035000774985 /* BUs */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		08A91355271702EB00774985 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		08A913562717030000774985 /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tvOS;
+			sourceTree = "<group>";
+		};
+		08A913572717031900774985 /* Targets */ = {
+			isa = PBXGroup;
+			children = (
+				08A91355271702EB00774985 /* iOS */,
+				08A913562717030000774985 /* tvOS */,
+			);
+			path = Targets;
+			sourceTree = "<group>";
+		};
+		08A913582717035000774985 /* BUs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BUs;
+			sourceTree = "<group>";
+		};
 		08AA551A1D49EBF600C5026E /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -3924,6 +3963,7 @@
 		6F0136DF21395B8400B95405 /* Xcode */ = {
 			isa = PBXGroup;
 			children = (
+				08A913542717029900774985 /* Shared */,
 				08B77A402409BDF200A3BC3B /* Play iOS Application.xcconfig */,
 				08E7890A255B59D800E17515 /* Play iOS Notification Service Extension.xcconfig */,
 				08E7899D255B605E00E17515 /* Play iOS Screenshots.xcconfig */,
@@ -7086,7 +7126,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7100,7 +7140,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7114,7 +7154,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7128,7 +7168,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7142,7 +7182,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7424,7 +7464,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7442,7 +7482,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7460,7 +7500,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7478,7 +7518,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7496,7 +7536,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${APP_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
+			shellScript = "GOOGLE_SERVICE_FILE=\"${SRCROOT}/Configuration/GoogleService/GoogleService-Info-${BU__BUNDLE_IDENTIFIER}${COMMON__BUNDLE_IDENTIFIER_SUFFIX}.plist\"\nif [ -f \"${GOOGLE_SERVICE_FILE}\" ]; then\n    cp \"${GOOGLE_SERVICE_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/GoogleService-Info.plist\"\nfi\n";
 		};
 		78466A9B6015AEDBE68B70AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -9773,8 +9813,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = " 🌙";
 				BUNDLE_IDENTIFIER_SUFFIX = .nightly;
@@ -9829,7 +9867,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)-nightly";
+				URL_SCHEME = "$(BU__URL_SCHEME)-nightly";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -10585,7 +10623,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10617,7 +10654,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10649,7 +10685,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10681,7 +10716,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10713,7 +10747,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10745,7 +10778,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10778,7 +10810,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10811,7 +10842,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10844,7 +10874,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10877,7 +10906,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -10910,8 +10938,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = " 🎯";
 				BUNDLE_IDENTIFIER_SUFFIX = .beta;
@@ -10966,7 +10992,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)-beta";
+				URL_SCHEME = "$(BU__URL_SCHEME)-beta";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -11713,7 +11739,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11745,7 +11770,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11777,7 +11801,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11809,7 +11832,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11841,7 +11863,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11873,7 +11894,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11906,7 +11926,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11939,7 +11958,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -11972,7 +11990,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12005,7 +12022,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12038,7 +12054,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -12067,7 +12082,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12099,7 +12113,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12131,7 +12144,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899F255B605F00E17515 /* Play SRF Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12163,7 +12175,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -12192,7 +12203,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12224,7 +12234,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12256,7 +12265,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899E255B605E00E17515 /* Play RTS Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12288,7 +12296,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -12317,7 +12324,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12349,7 +12355,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12381,7 +12386,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899B255B605E00E17515 /* Play RSI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12413,7 +12417,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -12442,7 +12445,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12474,7 +12476,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12506,7 +12507,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E7899C255B605E00E17515 /* Play RTR Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12538,7 +12538,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -12567,7 +12566,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12599,7 +12597,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12631,7 +12628,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08E789A0255B605F00E17515 /* Play SWI Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -12663,8 +12659,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = " 🛠";
 				BUNDLE_IDENTIFIER_SUFFIX = .debug;
@@ -12725,7 +12719,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)-debug";
+				URL_SCHEME = "$(BU__URL_SCHEME)-debug";
 			};
 			name = Debug;
 		};
@@ -12733,8 +12727,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = "";
 				BUNDLE_IDENTIFIER_SUFFIX = "";
@@ -12787,7 +12779,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)";
+				URL_SCHEME = "$(BU__URL_SCHEME)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -13029,8 +13021,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = " 🎯";
 				BUNDLE_IDENTIFIER_SUFFIX = .beta;
@@ -13088,7 +13078,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)-beta";
+				URL_SCHEME = "$(BU__URL_SCHEME)-beta";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta_AppCenter;
@@ -13216,8 +13206,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				APP_BUNDLE_IDENTIFIER = "$(APP_BASE_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)";
-				APP_GROUP_IDENTIFIER = "group.$(APP_BUNDLE_IDENTIFIER)";
 				BUNDLE_DISPLAY_NAME = "${PRODUCT_NAME}$(BUNDLE_DISPLAY_NAME_SUFFIX)";
 				BUNDLE_DISPLAY_NAME_SUFFIX = " 🌙";
 				BUNDLE_IDENTIFIER_SUFFIX = .nightly;
@@ -13275,7 +13263,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(URL_BASE_SCHEME)-nightly";
+				URL_SCHEME = "$(BU__URL_SCHEME)-nightly";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly_AppCenter;
@@ -13412,7 +13400,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -13442,7 +13429,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13475,7 +13461,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13508,7 +13493,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F384D125FA6BA100E1BCF0 /* Play SWI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.swi.swiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13541,7 +13525,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -13571,7 +13554,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13604,7 +13586,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13637,7 +13618,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E225FA9C5E00E1BCF0 /* Play SRF TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.srf.srfplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13670,7 +13650,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -13700,7 +13679,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13733,7 +13711,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13766,7 +13743,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E125FA9C5E00E1BCF0 /* Play RTS TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rts.rtsplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13799,7 +13775,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -13829,7 +13804,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13862,7 +13836,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13895,7 +13868,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E325FA9C5E00E1BCF0 /* Play RSI TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rsi.rsiplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13928,7 +13900,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_ENABLE_MODULES = YES;
@@ -13958,7 +13929,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -13991,7 +13961,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -14024,7 +13993,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08F387E025FA9C5D00E1BCF0 /* Play RTR TV Screenshots.xcconfig */;
 			buildSettings = {
-				APP_BASE_IDENTIFIER = ch.rtr.rtrplayer;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

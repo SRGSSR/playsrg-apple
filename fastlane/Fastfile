@@ -956,7 +956,7 @@ def update_app_identifier_to_appstore(platform, app_identifier)
   )
   set_xcconfig_value(
     path: 'Xcode/Play ' + platform + ' Application.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
+    name: 'COMMON__APP_GROUP_IDENTIFIER',
     value: 'group.' + app_identifier
   )
   update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
@@ -974,7 +974,7 @@ def update_notification_service_extension_identifier_to_appstore(platform, app_i
   )
   set_xcconfig_value(
     path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
+    name: 'COMMON__APP_GROUP_IDENTIFIER',
     value: 'group.' + app_identifier
   )
 end

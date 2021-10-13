@@ -1,6 +1,0 @@
-#include "Xcode/Links/Play RSI TV.beta.xcconfig"
-#include "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RSI TV/Pods-Play SRG-tvOS-Play RSI TV.beta.xcconfig"
-#include "Xcode/Play tvOS Application.xcconfig"
-#include "Xcode/Play RSI.xcconfig"
-
-PRODUCT_BUNDLE_IDENTIFIER = ch.srgssr.$(APP_PLAYER_IDENTIFIER)$(BUNDLE_IDENTIFIER_SUFFIX)

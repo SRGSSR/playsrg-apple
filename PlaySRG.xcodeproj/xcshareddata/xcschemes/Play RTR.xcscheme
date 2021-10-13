@@ -16,7 +16,7 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "08C68E2D1D38D73000BB8AAA"
-                     BuildableName = "Play RTR.app"
+                     BuildableName = ".app"
                      BlueprintName = "Play RTR"
                      ReferencedContainer = "container:PlaySRG.xcodeproj">
                   </BuildableReference>
@@ -34,7 +34,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "08C68E2D1D38D73000BB8AAA"
-               BuildableName = "Play RTR.app"
+               BuildableName = ".app"
                BlueprintName = "Play RTR"
                ReferencedContainer = "container:PlaySRG.xcodeproj">
             </BuildableReference>
@@ -64,7 +64,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08C68E2D1D38D73000BB8AAA"
-            BuildableName = "Play RTR.app"
+            BuildableName = ".app"
             BlueprintName = "Play RTR"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>
@@ -81,7 +81,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "08C68E2D1D38D73000BB8AAA"
-            BuildableName = "Play RTR.app"
+            BuildableName = ".app"
             BlueprintName = "Play RTR"
             ReferencedContainer = "container:PlaySRG.xcodeproj">
          </BuildableReference>

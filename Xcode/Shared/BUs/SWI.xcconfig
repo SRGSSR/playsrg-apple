@@ -1,0 +1,9 @@
+BU__BUNDLE_IDENTIFIER = swiplayer
+BU__BUNDLE_IDENTIFIER_PREFIX = ch.swi.
+BU__BUNDLE_IDENTIFIER_PREFIX[config=Beta] = ch.srgssr.
+BU__BUNDLE_IDENTIFIER_PREFIX[config=Nightly] = ch.srgssr.
+BU__BUNDLE_IDENTIFIER_PREFIX[config=Debug] = ch.srgssr.
+BU__CODE_SIGN_ENTITLEMENTS_IOS_APP_FILE_NAME = Application-without-CarPlay.entitlements
+BU__PRODUCT_NAME = Play SWI
+BU__URL_SCHEME = playswi
+BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.swissinfo.ch

@@ -13,7 +13,7 @@
 	<key>AppCenterURL</key>
 	<string>$(APPCENTER_URL)</string>
 	<key>ApplicationGroupIdentifier</key>
-	<string>$(APP_GROUP_IDENTIFIER)</string>
+	<string>$(COMMON__APP_GROUP_IDENTIFIER)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(BUNDLE_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -43,7 +43,7 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(URL_SCHEME)</string>
+				<string>$(COMMON__URL_SCHEME)</string>
 				<string>appcenter-$(APPCENTER_SECRET)</string>
 			</array>
 		</dict>
