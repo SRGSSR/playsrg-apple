@@ -148,22 +148,29 @@ private extension SRGDataProvider {
     }
     
     func mostPopular(interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        return ApplicationConfiguration.shared.radioChannels.publisher
-            .map { channel in
-                let item = CPListItem(text: channel.name, detailText: nil, image: Self.logoImage(for: channel))
-                item.accessoryType = .disclosureIndicator
-                item.handler = { _, completion in
-                    let template = CPListTemplate(list: .mostPopularMedias(channelUid: channel.uid), interfaceController: interfaceController)
-                    interfaceController.pushTemplate(template, animated: true) { _, _ in
-                        completion()
+        let radioChannels = ApplicationConfiguration.shared.radioChannels
+        if radioChannels.count == 1, let radioChannel = radioChannels.first {
+            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
+                .mapToSections(with: interfaceController)
+        }
+        else {
+            return radioChannels.publisher
+                .map { channel in
+                    let item = CPListItem(text: channel.name, detailText: nil, image: Self.logoImage(for: channel))
+                    item.accessoryType = .disclosureIndicator
+                    item.handler = { _, completion in
+                        let template = CPListTemplate(list: .mostPopularMedias(channelUid: channel.uid), interfaceController: interfaceController)
+                        interfaceController.pushTemplate(template, animated: true) { _, _ in
+                            completion()
+                        }
                     }
+                    return item
                 }
-                return item
-            }
-            .collect()
-            .map { [CPListSection(items: $0)] }
-            .setFailureType(to: Error.self)
-            .eraseToAnyPublisher()
+                .collect()
+                .map { [CPListSection(items: $0)] }
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
     }
 }
 
