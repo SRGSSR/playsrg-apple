@@ -44,36 +44,12 @@ enum CarPlayList {
             }
             .mapToSections(with: interfaceController)
         case .livestreams:
-            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController, action: .play)
+            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController)
         case .mostPopular:
-            return SRGDataProvider.current!.mostPopular(for: .default, interfaceController: interfaceController, action: .displayMostPopular)
+            return SRGDataProvider.current!.mostPopular(interfaceController: interfaceController)
         case let .mostPopularMedias(channelUid: channelUid):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
                 .mapToSections(with: interfaceController)
-        }
-    }
-}
-
-extension CarPlayList {
-    enum Action {
-        case play
-        case displayMostPopular
-        
-        fileprivate func perform(for media: SRGMedia, interfaceController: CPInterfaceController, completion: @escaping () -> Void) {
-            switch self {
-            case .play:
-                interfaceController.play(media: media, completion: completion)
-            case .displayMostPopular:
-                guard let channelUid = media.channel?.uid else {
-                    completion()
-                    return
-                }
-                
-                let template = CPListTemplate(list: .mostPopularMedias(channelUid: channelUid), interfaceController: interfaceController)
-                interfaceController.pushTemplate(template, animated: true) { _, _ in
-                    completion()
-                }
-            }
         }
     }
 }
@@ -148,17 +124,21 @@ extension CarPlayList: CarPlayTracking {
 private extension SRGDataProvider {
     private static func logoImage(for media: SRGMedia) -> UIImage? {
         guard let channel = media.channel, let radioChannel = ApplicationConfiguration.shared.radioChannel(forUid: channel.uid) else { return nil }
-        return RadioChannelLogoImageWithTraitCollection(radioChannel, UITraitCollection(userInterfaceIdiom: .carPlay))
+        return logoImage(for: radioChannel)
     }
     
-    func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController, action: CarPlayList.Action) -> AnyPublisher<[CPListSection], Error> {
+    private static func logoImage(for channel: RadioChannel) -> UIImage? {
+        return RadioChannelLogoImageWithTraitCollection(channel, UITraitCollection(userInterfaceIdiom: .carPlay))
+    }
+    
+    func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
         return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
             .map { medias in
                 let items = medias.map { media -> CPListItem in
                     let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
                     item.accessoryType = .none
                     item.handler = { _, completion in
-                        action.perform(for: media, interfaceController: interfaceController, completion: completion)
+                        interfaceController.play(media: media, completion: completion)
                     }
                     return item
                 }
@@ -167,19 +147,22 @@ private extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func mostPopular(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController, action: CarPlayList.Action) -> AnyPublisher<[CPListSection], Error> {
-        return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
-            .map { medias in
-                let items = medias.map { media -> CPListItem in
-                    let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
-                    item.accessoryType = .disclosureIndicator
-                    item.handler = { _, completion in
-                        action.perform(for: media, interfaceController: interfaceController, completion: completion)
+    func mostPopular(interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
+        return ApplicationConfiguration.shared.radioChannels.publisher
+            .map { channel in
+                let item = CPListItem(text: channel.name, detailText: nil, image: Self.logoImage(for: channel))
+                item.accessoryType = .disclosureIndicator
+                item.handler = { _, completion in
+                    let template = CPListTemplate(list: .mostPopularMedias(channelUid: channel.uid), interfaceController: interfaceController)
+                    interfaceController.pushTemplate(template, animated: true) { _, _ in
+                        completion()
                     }
-                    return item
                 }
-                return [CPListSection(items: items)]
+                return item
             }
+            .collect()
+            .map { [CPListSection(items: $0)] }
+            .setFailureType(to: Error.self)
             .eraseToAnyPublisher()
     }
 }
