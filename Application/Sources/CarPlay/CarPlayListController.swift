@@ -5,6 +5,7 @@
 //
 
 import CarPlay
+import SRGAnalytics
 import SRGDataProviderCombine
 
 // MARK: Controller
@@ -13,12 +14,14 @@ final class CarPlayTemplateListController {
     private let list: CarPlayList
     private var cancellables = Set<AnyCancellable>()
     
+    private let trigger = Trigger()
+    
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
         self.list = list
         
         template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
         
-        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.reachable()) {
+        Publishers.PublishAndRepeat(onOutputFrom: reloadPublisher()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
                 .catch { error in
@@ -39,18 +42,31 @@ final class CarPlayTemplateListController {
         }
         .store(in: &cancellables)
     }
+    
+    private func reloadPublisher() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            ApplicationSignal.reachable(),
+            trigger.signal(activatedBy: TriggerId.reload)
+        ).eraseToAnyPublisher()
+    }
 }
 
 // MARK: Protocols
 
-extension CarPlayTemplateListController: CarPlayTracking {
-    var pageViewTitle: String? {
-        return list.pageViewTitle
+extension CarPlayTemplateListController: CarPlayTemplateController {
+    func willAppear(animated: Bool) {
+        trigger.activate(for: TriggerId.reload)
     }
     
-    var pageViewLevels: [String]? {
-        return list.pageViewLevels
+    func didAppear(animated: Bool) {
+        if let pageViewTitle = list.pageViewTitle {
+            SRGAnalyticsTracker.shared.uncheckedTrackPageView(withTitle: pageViewTitle, levels: list.pageViewLevels)
+        }
     }
+    
+    func willDisappear(animated: Bool) {}
+    
+    func didDisappear(animated: Bool) {}
 }
 
 // MARK: Types
@@ -59,5 +75,9 @@ extension CarPlayTemplateListController {
     enum State {
         case failed(error: Error)
         case loaded(sections: [CPListSection])
+    }
+    
+    enum TriggerId {
+        case reload
     }
 }

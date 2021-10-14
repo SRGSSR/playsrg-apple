@@ -212,9 +212,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "77088eb09c546a4d98c40e990403dd1c222f9ad7",
-          "version": "7.2.0"
+          "branch": "feature/unchecked-tracking",
+          "revision": "eb93b509f0fc9870daa283d99622ed5ddde5b791",
+          "version": null
         }
       },
       {

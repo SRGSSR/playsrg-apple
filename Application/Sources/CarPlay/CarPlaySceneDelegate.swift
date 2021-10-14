@@ -4,14 +4,15 @@
 //  License information is available from the LICENSE file.
 //
 
-import Combine
 import CarPlay
-import SRGAnalytics
-import SRGLetterbox
+
+// MARK: Class
 
 final class CarPlaySceneDelegate: UIResponder {
     var interfaceController: CPInterfaceController?
 }
+
+// MARK: Protocols
 
 extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
@@ -36,10 +37,26 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
     private func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didDisconnect interfaceController: CPInterfaceController) {
         self.interfaceController = nil
     }
+    
+    func sceneWillEnterForeground(_ scene: UIScene) {
+        interfaceController?.notifyWillEnterForeground()
+    }
 }
 
 extension CarPlaySceneDelegate: CPInterfaceControllerDelegate {
+    func templateWillAppear(_ aTemplate: CPTemplate, animated: Bool) {
+        aTemplate.notifyWillAppear(animated: animated)
+    }
+    
     func templateDidAppear(_ aTemplate: CPTemplate, animated: Bool) {
-        SRGAnalyticsTracker.shared.trackPageView(for: aTemplate)
+        aTemplate.notifyDidAppear(animated: animated)
+    }
+    
+    func templateWillDisappear(_ aTemplate: CPTemplate, animated: Bool) {
+        aTemplate.notifyWillDisappear(animated: animated)
+    }
+    
+    func templateDidDisappear(_ aTemplate: CPTemplate, animated: Bool) {
+        aTemplate.notifyDidDisappear(animated: animated)
     }
 }

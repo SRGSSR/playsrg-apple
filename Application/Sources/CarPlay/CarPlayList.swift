@@ -34,6 +34,33 @@ enum CarPlayList {
         }
     }
     
+    var pageViewTitle: String? {
+        switch self {
+        case .latestEpisodesFromFavorites:
+            return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
+        case .livestreams:
+            return AnalyticsPageTitle.home.rawValue
+        case .mostPopular, .mostPopularMedias:
+            return AnalyticsPageTitle.mostPopular.rawValue
+        }
+    }
+    
+    var pageViewLevels: [String]? {
+        switch self {
+        case .latestEpisodesFromFavorites, .mostPopular:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
+        case .livestreams:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, AnalyticsPageLevel.live.rawValue]
+        case let .mostPopularMedias(channelUid):
+            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, channel.name]
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
     func publisher(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
         switch self {
         case .latestEpisodesFromFavorites:
@@ -87,35 +114,6 @@ extension CarPlayList: SectionFiltering {
     
     func compatibleMedias(_ medias: [SRGMedia]) -> [SRGMedia] {
         return medias.filter { $0.mediaType == .audio }
-    }
-}
-
-extension CarPlayList: CarPlayTracking {
-    var pageViewTitle: String? {
-        switch self {
-        case .latestEpisodesFromFavorites:
-            return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
-        case .livestreams:
-            return AnalyticsPageTitle.home.rawValue
-        case .mostPopular, .mostPopularMedias:
-            return AnalyticsPageTitle.mostPopular.rawValue
-        }
-    }
-    
-    var pageViewLevels: [String]? {
-        switch self {
-        case .latestEpisodesFromFavorites, .mostPopular:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
-        case .livestreams:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, AnalyticsPageLevel.live.rawValue]
-        case let .mostPopularMedias(channelUid):
-            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, channel.name]
-            }
-            else {
-                return nil
-            }
-        }
     }
 }
 

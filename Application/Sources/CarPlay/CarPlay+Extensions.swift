@@ -6,22 +6,6 @@
 
 import CarPlay
 
-private var controllerKey: Void?
-
-extension CPTemplate {
-    /**
-     *  Associate a controller object to the template, with matching lifetime.
-     */
-    var controller: Any? {
-        get {
-            objc_getAssociatedObject(self, &controllerKey)
-        }
-        set {
-            objc_setAssociatedObject(self, &controllerKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-}
-
 extension CPListTemplate {
     convenience init(list: CarPlayList, interfaceController: CPInterfaceController) {
         self.init(title: list.title, sections: [])
@@ -40,7 +24,10 @@ extension CPInterfaceController {
             SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
         }
         
-        pushTemplate(CPNowPlayingTemplate.shared, animated: true) { _, _ in
+        let nowPlayingTemplate = CPNowPlayingTemplate.shared
+        nowPlayingTemplate.controller = CarPlayNowPlayingController()
+        
+        pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
             completion()
         }
     }
