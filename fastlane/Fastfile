@@ -255,7 +255,7 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
+  desc 'SRF: Makes iOS screenshots.'
   lane :srfScreenshots do
     platform = 'iOS'
 
