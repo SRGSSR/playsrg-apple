@@ -6,8 +6,8 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>${APP_LINKS_DOMAIN}</string>
-		<string>${ACTIVITY_CONTINUATION_DOMAIN}</string>
+		<string>${TARGET__APP_LINKS_DOMAIN}</string>
+		<string>${TARGET__ACTIVITY_CONTINUATION_DOMAIN}</string>
 		<string>${BU__WEB_CREDENTIALS_DOMAIN}</string>
 	</array>
 	<key>com.apple.developer.networking.wifi-info</key>

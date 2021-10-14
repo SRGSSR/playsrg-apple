@@ -9927,16 +9927,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913902717388E00774985 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-srf.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9953,16 +9950,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rts.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -9979,16 +9973,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rsi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -10005,16 +9996,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rtr.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -10031,15 +10019,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-swi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11052,16 +11037,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A42717388E00774985 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-srf.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11076,16 +11058,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A92717388E00774985 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rts.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11100,16 +11079,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rsi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11124,16 +11100,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-rtr.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -11148,15 +11121,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913952717388E00774985 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "srgplayer-swi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12839,15 +12809,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913962717388E00774985 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12863,15 +12830,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = JA876HZNN2;
-				DOMAIN = "*.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12886,15 +12850,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12910,15 +12871,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 8779C367VK;
-				DOMAIN = "*.rts.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12933,15 +12891,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12957,15 +12912,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913992717388E00774985 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = Y7342J76KH;
-				DOMAIN = "*.rsi.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -12980,15 +12932,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A12717388E00774985 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13004,15 +12953,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "*.rtr.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13027,14 +12973,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A22717388E00774985 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
-				DOMAIN = "play-mmf.herokuapp.com";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13050,14 +12993,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = R36WF3S37T;
-				DOMAIN = "*.swissinfo.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13138,16 +13078,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-srf.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13162,16 +13099,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rts.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13186,16 +13120,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rsi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13210,16 +13141,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rtr.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13234,15 +13162,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-swi.stage.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13323,16 +13248,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-srf.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13349,16 +13271,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rts.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13375,16 +13294,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rsi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13401,16 +13317,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-rtr.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -13427,15 +13340,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ACTIVITY_CONTINUATION_DOMAIN = "activitycontinuation:$(DOMAIN)";
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				APP_LINKS_DOMAIN = "applinks:$(DOMAIN)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
-				DOMAIN = "srgplayer-swi.test.srf.ch";
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "$(PROJECT_DIR)/Application/Application-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
