@@ -903,7 +903,7 @@ end
 # Returns the marketing version for a platform, without suffix
 def xcode_marketing_version(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'MARKETING_VERSION'
   )
 end
@@ -911,7 +911,7 @@ end
 # Returns the build number for a platform
 def xcode_build_number(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION'
   )
 end
@@ -919,11 +919,15 @@ end
 # Override build number for a platform (current project version)
 def xcode_override_build_number(platform, build_number)
   update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION',
     value: build_number.to_s
   )
   build_number.to_s
+end
+
+def srg_xcconfig_path(platform)
+  'Xcode/Shared/Targets/' + platform + '/Common.xcconfig'
 end
 
 def appstore_platform(platform)
@@ -1120,7 +1124,7 @@ def bump_build_number_commit(platform)
   commit_version_bump(
     xcodeproj: 'PlaySRG.xcodeproj',
     message: 'Bump ' + platform + ' build number to ' + build_number,
-    include: 'Xcode/Play ' + platform + '.xcconfig',
+    include: srg_xcconfig_path(platform),
     ignore: /.+/
   )
 end
