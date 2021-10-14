@@ -52,7 +52,7 @@
 		</dict>
 	</array>
 	<key>AppCenterSecret</key>
-	<string>$(APPCENTER_SECRET)</string>
+	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

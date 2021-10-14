@@ -9,7 +9,7 @@
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
 	<key>AppCenterSecret</key>
-	<string>$(APPCENTER_SECRET)</string>
+	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>AppCenterURL</key>
 	<string>$(APPCENTER_URL)</string>
 	<key>ApplicationGroupIdentifier</key>
@@ -44,7 +44,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>$(COMMON__URL_SCHEME)</string>
-				<string>appcenter-$(APPCENTER_SECRET)</string>
+				<string>appcenter-$(CONFIG__APPCENTER_SECRET)</string>
 			</array>
 		</dict>
 	</array>
