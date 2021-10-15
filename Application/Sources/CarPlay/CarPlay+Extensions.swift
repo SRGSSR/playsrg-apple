@@ -16,11 +16,11 @@ extension CPListTemplate {
 extension CPInterfaceController {
     func play(media: SRGMedia, completion: @escaping () -> Void) {
         if let controller = SRGLetterboxService.shared.controller {
-            controller.playMedia(media, at: nil, withPreferredSettings: nil)
+            controller.playMedia(media, at: nil, withPreferredSettings: ApplicationSettingPlaybackSettings())
         }
         else {
             let controller = SRGLetterboxController()
-            controller.playMedia(media, at: nil, withPreferredSettings: nil)
+            controller.playMedia(media, at: nil, withPreferredSettings: ApplicationSettingPlaybackSettings())
             SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
         }
         
