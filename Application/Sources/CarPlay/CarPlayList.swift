@@ -14,7 +14,7 @@ enum CarPlayList {
     case latestEpisodesFromFavorites
     case livestreams
     case mostPopular
-    case mostPopularMedias(channelUid: String)
+    case mostPopularMedias(radioChannel: RadioChannel)
     
     var title: String? {
         switch self {
@@ -24,13 +24,8 @@ enum CarPlayList {
             return NSLocalizedString("Livestreams", comment: "Livestreams screen title")
         case .mostPopular:
             return NSLocalizedString("Trends", comment: "Trends screen title")
-        case let .mostPopularMedias(channelUid: channelUid):
-            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
-                return channel.name
-            }
-            else {
-                return nil
-            }
+        case let .mostPopularMedias(radioChannel: radioChannel):
+            return radioChannel.name
         }
     }
     
@@ -51,13 +46,8 @@ enum CarPlayList {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
         case .livestreams:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, AnalyticsPageLevel.live.rawValue]
-        case let .mostPopularMedias(channelUid):
-            if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, channel.name]
-            }
-            else {
-                return nil
-            }
+        case let .mostPopularMedias(radioChannel):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, radioChannel.name]
         }
     }
     
@@ -74,8 +64,8 @@ enum CarPlayList {
             return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController)
         case .mostPopular:
             return SRGDataProvider.current!.mostPopular(interfaceController: interfaceController)
-        case let .mostPopularMedias(channelUid: channelUid):
-            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: channelUid)
+        case let .mostPopularMedias(radioChannel: radioChannel):
+            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
                 .mapToSections(with: interfaceController)
         }
     }
@@ -153,11 +143,11 @@ private extension SRGDataProvider {
         }
         else {
             return radioChannels.publisher
-                .map { channel in
-                    let item = CPListItem(text: channel.name, detailText: nil, image: Self.logoImage(for: channel))
+                .map { radioChannel in
+                    let item = CPListItem(text: radioChannel.name, detailText: nil, image: Self.logoImage(for: radioChannel))
                     item.accessoryType = .disclosureIndicator
                     item.handler = { _, completion in
-                        let template = CPListTemplate(list: .mostPopularMedias(channelUid: channel.uid), interfaceController: interfaceController)
+                        let template = CPListTemplate(list: .mostPopularMedias(radioChannel: radioChannel), interfaceController: interfaceController)
                         interfaceController.pushTemplate(template, animated: true) { _, _ in
                             completion()
                         }
