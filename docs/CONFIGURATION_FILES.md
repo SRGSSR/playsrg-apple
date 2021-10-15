@@ -53,8 +53,8 @@ Settings must be added to configuration files locatd in the `Shared` directory t
     - If the parameter is target-specific, add it to configuration files in the `Shared/Targets` directory.
 2. Pick an appropriate name for your setting and add it to all involved files at the level you chose. Please observe the following rules:
     - Custom settings must be prefixed to make them easier to distinguish from official Xcode build settings. The prefix must reflect to where the parameter is found in configuration file hierarchy:
-        - Top-level common settings must be prefixed with `COMMON__`.
-        - Target-specific settings must be prefixed with `TARGET__`.
+        - Top-level common settings in `Shared/Common.xcconfig` must be prefixed with `COMMON__`.
+        - Target-specific settings must be prefixed with `TARGET__`. Common settings in `Shared/Target/Common.xcconfig` must be prefixed with `TARGET_COMMON__`.
         - BU-specific settings must be prefixed with `BU__`.
     - If your setting value starts with a space, use a leading `$()` to preserve it:
         ```
