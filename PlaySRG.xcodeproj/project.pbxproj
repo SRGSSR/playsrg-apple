@@ -3559,11 +3559,11 @@
 		08A9135A2717388C00774985 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */,
-				08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */,
-				08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */,
-				08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */,
 				08A9135F2717388C00774985 /* Play RSI TV Screenshots.xcconfig */,
+				08A9135E2717388C00774985 /* Play RTR TV Screenshots.xcconfig */,
+				08A9135D2717388C00774985 /* Play RTS TV Screenshots.xcconfig */,
+				08A9135C2717388C00774985 /* Play SRF TV Screenshots.xcconfig */,
+				08A9135B2717388C00774985 /* Play SWI TV Screenshots.xcconfig */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -3571,35 +3571,35 @@
 		08A913602717388C00774985 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */,
 				08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */,
-				08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */,
-				08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */,
-				08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */,
-				08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */,
-				08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */,
+				08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */,
 				08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */,
-				08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */,
-				08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */,
 				08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */,
 				08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */,
-				08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */,
-				08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */,
-				08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */,
+				08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */,
+				08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */,
+				08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */,
+				08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */,
+				08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */,
+				08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */,
+				08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */,
 				08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */,
 				08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */,
-				08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */,
-				08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */,
-				08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */,
-				08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */,
-				08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */,
-				08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */,
-				08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */,
-				08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */,
-				08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */,
+				08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */,
 				08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */,
+				08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */,
+				08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */,
+				08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */,
+				08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */,
+				08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */,
+				08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */,
+				08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */,
+				08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */,
+				08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */,
+				08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */,
 				08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */,
 				08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */,
+				08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */,
 				08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */,
 			);
 			path = Application;
@@ -3618,11 +3618,11 @@
 		08A913802717388E00774985 /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
-				08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */,
 				08A913822717388E00774985 /* Play RSI Screenshots.xcconfig */,
-				08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */,
 				08A913842717388E00774985 /* Play RTR Screenshots.xcconfig */,
 				08A913852717388E00774985 /* Play RTS Screenshots.xcconfig */,
+				08A913832717388E00774985 /* Play SRF Screenshots.xcconfig */,
+				08A913812717388E00774985 /* Play SWI Screenshots.xcconfig */,
 			);
 			path = Screenshots;
 			sourceTree = "<group>";
@@ -3630,11 +3630,11 @@
 		08A913862717388E00774985 /* Notification Service Extension */ = {
 			isa = PBXGroup;
 			children = (
-				08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */,
-				08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */,
-				08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */,
-				08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */,
 				08A9138B2717388E00774985 /* Play RSI Notification Service Extension.xcconfig */,
+				08A913892717388E00774985 /* Play RTR Notification Service Extension.xcconfig */,
+				08A913882717388E00774985 /* Play RTS Notification Service Extension.xcconfig */,
+				08A913872717388E00774985 /* Play SRF Notification Service Extension.xcconfig */,
+				08A9138A2717388E00774985 /* Play SWI Notification Service Extension.xcconfig */,
 			);
 			path = "Notification Service Extension";
 			sourceTree = "<group>";
@@ -3642,36 +3642,36 @@
 		08A9138C2717388E00774985 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */,
-				08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */,
-				08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */,
-				08A913902717388E00774985 /* Play SRF.nightly.xcconfig */,
-				08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */,
-				08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */,
-				08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */,
-				08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */,
-				08A913952717388E00774985 /* Play SWI.beta.xcconfig */,
-				08A913962717388E00774985 /* Play SRF.debug.xcconfig */,
-				08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */,
-				08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */,
 				08A913992717388E00774985 /* Play RSI.appstore.xcconfig */,
-				08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */,
-				08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */,
-				08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */,
-				08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */,
-				08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */,
-				08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */,
 				08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */,
-				08A913A12717388E00774985 /* Play RTR.debug.xcconfig */,
-				08A913A22717388E00774985 /* Play SWI.debug.xcconfig */,
-				08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */,
-				08A913A42717388E00774985 /* Play SRF.beta.xcconfig */,
-				08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */,
-				08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */,
+				08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */,
+				08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */,
+				08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */,
 				08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */,
 				08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */,
+				08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */,
+				08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */,
+				08A913A12717388E00774985 /* Play RTR.debug.xcconfig */,
+				08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */,
+				08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */,
+				08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */,
+				08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */,
 				08A913A92717388E00774985 /* Play RTS.beta.xcconfig */,
+				08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */,
+				08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */,
 				08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */,
+				08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */,
+				08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */,
+				08A913A42717388E00774985 /* Play SRF.beta.xcconfig */,
+				08A913962717388E00774985 /* Play SRF.debug.xcconfig */,
+				08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */,
+				08A913902717388E00774985 /* Play SRF.nightly.xcconfig */,
+				08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */,
+				08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */,
+				08A913952717388E00774985 /* Play SWI.beta.xcconfig */,
+				08A913A22717388E00774985 /* Play SWI.debug.xcconfig */,
+				08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */,
+				08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */,
 			);
 			path = Application;
 			sourceTree = "<group>";
