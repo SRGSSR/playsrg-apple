@@ -26,24 +26,26 @@ extension SRGDataProvider {
 #if os(iOS)
     /// Publishes the regional media which corresponds to the specified media, if any.
     private func regionalizedRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
-        if let channelUid = media.channel?.uid,
-           let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
-           media.urn != selectedLivestreamUrn {
-            return radioLivestreams(for: media.vendor, channelUid: channelUid)
-                .map { medias in
-                    if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
-                        return selectedMedia
+        return Publishers.PublishAndRepeat(onOutputFrom: UserDefaults.standard.publisher(for: \.PlaySRGSettingSelectedLiveStreamURNForChannels)) { () -> AnyPublisher<SRGMedia, Never> in
+            if let channelUid = media.channel?.uid,
+               let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
+               media.urn != selectedLivestreamUrn {
+                return self.radioLivestreams(for: media.vendor, channelUid: channelUid)
+                    .map { medias in
+                        if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
+                            return selectedMedia
+                        }
+                        else {
+                            return media
+                        }
                     }
-                    else {
-                        return media
-                    }
-                }
-                .replaceError(with: media)
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Just(media)
-                .eraseToAnyPublisher()
+                    .replaceError(with: media)
+                    .eraseToAnyPublisher()
+            }
+            else {
+                return Just(media)
+                    .eraseToAnyPublisher()
+            }
         }
     }
 #endif
@@ -57,8 +59,8 @@ extension SRGDataProvider {
                 return Publishers.AccumulateLatestMany(medias.map { media in
                     return self.regionalizedRadioLivestreamMedia(for: media)
                 })
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
             }
             .switchToLatest()
             .eraseToAnyPublisher()
@@ -210,24 +212,5 @@ enum UserDataPublishers {
         }
         .prepend(.none)
         .eraseToAnyPublisher()
-    }
-}
-
-enum LetterboxServicePublishers {
-    static func currentMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
-        return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<SRGMedia?, Never> in
-                if let controller = controller {
-                    return controller.publisher(for: \.media)
-                        .eraseToAnyPublisher()
-                }
-                else {
-                    return Just(nil)
-                        .eraseToAnyPublisher()
-                }
-            }
-            .switchToLatest()
-            .removeDuplicates()
-            .eraseToAnyPublisher()
     }
 }

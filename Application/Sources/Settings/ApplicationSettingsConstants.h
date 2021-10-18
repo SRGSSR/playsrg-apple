@@ -17,6 +17,7 @@ OBJC_EXPORT NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled;
 OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;
 OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed;
 OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
+OBJC_EXPORT NSString * const PlaySRGSettingSelectedLiveStreamURNForChannels;
 OBJC_EXPORT NSString * const PlaySRGSettingServiceURL;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 

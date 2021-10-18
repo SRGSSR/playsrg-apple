@@ -1121,6 +1121,16 @@
 		6F73BFBD26563C830032D742 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73BFB526563C830032D742 /* Content.swift */; };
 		6F73BFBE26563C830032D742 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73BFB526563C830032D742 /* Content.swift */; };
 		6F73BFBF26563C830032D742 /* Content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73BFB526563C830032D742 /* Content.swift */; };
+		6F73C63A271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C63B271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C63C271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C63D271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C63E271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C63F271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C640271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C641271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C642271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
+		6F73C643271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */; };
 		6F74293D265BE52E0000538D /* Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F74293C265BE52E0000538D /* Signals.swift */; };
 		6F74293E265BE52E0000538D /* Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F74293C265BE52E0000538D /* Signals.swift */; };
 		6F74293F265BE52E0000538D /* Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F74293C265BE52E0000538D /* Signals.swift */; };
@@ -2737,6 +2747,7 @@
 		6F72E60626BA6B16001A890C /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6F73BFAF26563ABD0032D742 /* DampedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DampedCollectionView.swift; sourceTree = "<group>"; };
 		6F73BFB526563C830032D742 /* Content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Content.swift; sourceTree = "<group>"; };
+		6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationSettingsConstants.swift; sourceTree = "<group>"; };
 		6F74293C265BE52E0000538D /* Signals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signals.swift; sourceTree = "<group>"; };
 		6F79E0A92541647400A28E79 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6F7C089426CE4E2A00166CE7 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -3338,6 +3349,7 @@
 				6FDF6FFF2682022C0004437E /* ApplicationSettings+Common.m */,
 				6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */,
 				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
+				6F73C639271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift */,
 				6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */,
 				6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */,
 				0806E7B51D50D918002ED406 /* SettingsViewController.h */,
@@ -7989,6 +8001,7 @@
 				6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */,
+				6F73C63A271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F0ACF3326A97DD900CDE936 /* ProgramGuideViewModel.swift in Sources */,
 				6F4855A91E3A38D600B0141C /* SRGLetterboxDesignables.m in Sources */,
 				6F3CCE9926CAC7A2004039E2 /* Blur.swift in Sources */,
@@ -8212,6 +8225,7 @@
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */,
+				6F73C63B271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
@@ -8438,6 +8452,7 @@
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */,
+				6F73C63C271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
@@ -8664,6 +8679,7 @@
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */,
+				6F73C63D271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
@@ -8752,6 +8768,7 @@
 				6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EE02664BFAB0016B793 /* Colors.swift in Sources */,
 				6FAE562026C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F73C63E271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651826BC58C800454A28 /* CalendarView.swift in Sources */,
@@ -9050,6 +9067,7 @@
 				0805703E2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF98263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED544252B00B000ECE97B /* LabeledButton.swift in Sources */,
+				6F73C63F271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
@@ -9167,6 +9185,7 @@
 				0805703F2540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF99263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED545252B00B000ECE97B /* LabeledButton.swift in Sources */,
+				6F73C640271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
@@ -9284,6 +9303,7 @@
 				080570402540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9A263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED546252B00B000ECE97B /* LabeledButton.swift in Sources */,
+				6F73C641271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
@@ -9401,6 +9421,7 @@
 				080570412540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9B263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED547252B00B000ECE97B /* LabeledButton.swift in Sources */,
+				6F73C642271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
@@ -9518,6 +9539,7 @@
 				080570422540E0FC00A59C9D /* Navigation.swift in Sources */,
 				6F49EF9C263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6F0ED548252B00B000ECE97B /* LabeledButton.swift in Sources */,
+				6F73C643271DB5AE00DBDBFB /* ApplicationSettingsConstants.swift in Sources */,
 				6F30ACB62604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4C257C502C002F58AF /* Favorites.m in Sources */,

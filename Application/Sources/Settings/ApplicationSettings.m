@@ -22,7 +22,6 @@
 
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
-NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
 
 NSValueTransformer *SettingUserLocationTransformer(void)
 {
@@ -177,7 +176,7 @@ BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
 
 NSString *ApplicationSettingSelectedLivestreamURNForChannelUid(NSString *channelUid)
 {
-    NSDictionary *selectedLivestreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+    NSDictionary *selectedLivestreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
     return selectedLivestreamURNForChannels[channelUid];
 }
 
@@ -186,11 +185,11 @@ void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString *channelUi
     if (channelUid) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         
-        NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
         NSMutableDictionary *mutableSelectedLivestreamURNForChannels = selectedLivestreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
         mutableSelectedLivestreamURNForChannels[channelUid] = mediaURN;
         
-        [userDefaults setObject:mutableSelectedLivestreamURNForChannels.copy forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        [userDefaults setObject:mutableSelectedLivestreamURNForChannels.copy forKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
         [userDefaults synchronize];
     }
 }

@@ -107,7 +107,7 @@ private extension CarPlayList {
     }
     
     private static func playingPublisher(for media: SRGMedia) -> AnyPublisher<Bool, Never> {
-        return LetterboxServicePublishers.currentMediaPublisher()
+        return nowPlayingMediaPublisher()
             .map { media == $0 }
             .eraseToAnyPublisher()
     }
@@ -126,6 +126,32 @@ private extension CarPlayList {
             return Just(placeholderImage)
                 .eraseToAnyPublisher()
         }
+    }
+    
+    private static func nowPlayingMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
+        return SRGLetterboxService.shared.publisher(for: \.controller)
+            .map { controller -> AnyPublisher<SRGMedia?, Never> in
+                if let controller = controller {
+                    return NotificationCenter.default.publisher(for: NSNotification.Name.SRGLetterboxMetadataDidChange, object: controller)
+                        .map { notification in
+                            guard let controller = notification.object as? SRGLetterboxController else { return nil }
+                            if let fullLengthMedia = controller.fullLengthMedia, fullLengthMedia.contentType == .livestream || fullLengthMedia.contentType == .scheduledLivestream {
+                                return fullLengthMedia
+                            }
+                            else {
+                                return controller.media
+                            }
+                        }
+                        .eraseToAnyPublisher()
+                }
+                else {
+                    return Just(nil)
+                        .eraseToAnyPublisher()
+                }
+            }
+            .switchToLatest()
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 }
 
@@ -154,7 +180,7 @@ private extension SRGDataProvider {
     }
     
     func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
+        return regionalizedRadioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
             .map { medias in
                 return Publishers.AccumulateLatestMany(medias.map { media in
                     return CarPlayList.liveMediaDataPublisher(for: media)
