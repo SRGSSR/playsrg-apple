@@ -123,7 +123,6 @@ static void *s_kvoContext = &s_kvoContext;
     
     [self checkForForcedUpdates];
     
-    // Processes run once in the lifetime of the application
     __block BOOL firstLaunchDone = YES;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         firstLaunchDone = NO;
@@ -133,11 +132,18 @@ static void *s_kvoContext = &s_kvoContext;
     [PushService.sharedService setup];
     [PushService.sharedService updateApplicationBadge];
     
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
     }, @"ClearVectorImageCache2", nil);
+    
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        NSDictionary *value = [userDefaults dictionaryForKey:@"PlaySRGSettingSelectedLiveStreamURNForChannels"];
+        [userDefaults setObject:value forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        [userDefaults synchronize];
+        completionHandler(YES);
+    }, @"MigrateSelectedLiveStreamURNForChannels", nil);
     
     return YES;
 }

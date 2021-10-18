@@ -26,7 +26,7 @@ extension SRGDataProvider {
 #if os(iOS)
     /// Publishes the regional media which corresponds to the specified media, if any.
     private func regionalizedRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: UserDefaults.standard.publisher(for: \.PlaySRGSettingSelectedLiveStreamURNForChannels)) { () -> AnyPublisher<SRGMedia, Never> in
+        return Publishers.PublishAndRepeat(onOutputFrom: UserDefaults.standard.publisher(for: \.PlaySRGSettingSelectedLivestreamURNForChannels)) { () -> AnyPublisher<SRGMedia, Never> in
             if let channelUid = media.channel?.uid,
                let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
                media.urn != selectedLivestreamUrn {

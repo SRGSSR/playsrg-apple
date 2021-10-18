@@ -9,7 +9,7 @@ import Foundation
 // Extensions allowing the use of KVO to detect user default changes by key.
 // See https://stackoverflow.com/a/47856467/760435
 extension UserDefaults {
-    @objc dynamic var PlaySRGSettingSelectedLiveStreamURNForChannels: [String: Any]? {
-        return dictionary(forKey: PlaySRG.PlaySRGSettingSelectedLiveStreamURNForChannels)
+    @objc dynamic var PlaySRGSettingSelectedLivestreamURNForChannels: [String: Any]? {
+        return dictionary(forKey: PlaySRG.PlaySRGSettingSelectedLivestreamURNForChannels)
     }
 }

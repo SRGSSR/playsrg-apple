@@ -176,7 +176,7 @@ BOOL ApplicationSettingAudioDescriptionAvailabilityDisplayed(void)
 
 NSString *ApplicationSettingSelectedLivestreamURNForChannelUid(NSString *channelUid)
 {
-    NSDictionary *selectedLivestreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+    NSDictionary *selectedLivestreamURNForChannels = [NSUserDefaults.standardUserDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
     return selectedLivestreamURNForChannels[channelUid];
 }
 
@@ -185,11 +185,11 @@ void ApplicationSettingSetSelectedLivestreamURNForChannelUid(NSString *channelUi
     if (channelUid) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
         
-        NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+        NSDictionary *selectedLivestreamURNForChannels = [userDefaults dictionaryForKey:PlaySRGSettingSelectedLivestreamURNForChannels];
         NSMutableDictionary *mutableSelectedLivestreamURNForChannels = selectedLivestreamURNForChannels.mutableCopy ?: NSMutableDictionary.new;
         mutableSelectedLivestreamURNForChannels[channelUid] = mediaURN;
         
-        [userDefaults setObject:mutableSelectedLivestreamURNForChannels.copy forKey:PlaySRGSettingSelectedLiveStreamURNForChannels];
+        [userDefaults setObject:mutableSelectedLivestreamURNForChannels.copy forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
         [userDefaults synchronize];
     }
 }
