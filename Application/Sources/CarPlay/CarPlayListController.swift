@@ -15,6 +15,7 @@ final class CarPlayTemplateListController {
     private var cancellables = Set<AnyCancellable>()
     
     private let trigger = Trigger()
+    private var displayedOnce = false
     
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
         self.list = list
@@ -55,7 +56,12 @@ final class CarPlayTemplateListController {
 
 extension CarPlayTemplateListController: CarPlayTemplateController {
     func willAppear(animated: Bool) {
-        trigger.activate(for: TriggerId.reload)
+        if displayedOnce {
+            trigger.activate(for: TriggerId.reload)
+        }
+        else {
+            displayedOnce = true
+        }
     }
     
     func didAppear(animated: Bool) {
