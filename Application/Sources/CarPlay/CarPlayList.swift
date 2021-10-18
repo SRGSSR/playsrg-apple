@@ -33,21 +33,23 @@ enum CarPlayList {
         switch self {
         case .latestEpisodesFromFavorites:
             return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
-        case .livestreams:
+        case .livestreams, .mostPopular:
             return AnalyticsPageTitle.home.rawValue
-        case .mostPopular, .mostPopularMedias:
+        case .mostPopularMedias:
             return AnalyticsPageTitle.mostPopular.rawValue
         }
     }
     
     var pageViewLevels: [String]? {
         switch self {
-        case .latestEpisodesFromFavorites, .mostPopular:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
+        case .latestEpisodesFromFavorites:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue]
         case .livestreams:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, AnalyticsPageLevel.live.rawValue]
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, AnalyticsPageLevel.live.rawValue]
+        case .mostPopular:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, AnalyticsPageLevel.mostPopular.rawValue]
         case let .mostPopularMedias(radioChannel):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue, radioChannel.name]
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, radioChannel.name]
         }
     }
     

@@ -16,7 +16,7 @@ final class CarPlayNowPlayingController: CarPlayTemplateController {
     func didAppear(animated: Bool) {
         SRGAnalyticsTracker.shared.uncheckedTrackPageView(
             withTitle: AnalyticsPageTitle.player.rawValue,
-            levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.carPlay.rawValue]
+            levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue]
         )
     }
     
