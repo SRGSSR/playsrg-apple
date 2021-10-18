@@ -16503,7 +16503,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/unchecked-tracking";
+				branch = develop;
 				kind = branch;
 			};
 		};
