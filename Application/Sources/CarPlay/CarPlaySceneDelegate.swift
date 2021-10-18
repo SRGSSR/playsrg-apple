@@ -27,7 +27,7 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         templates.append(livestreamsTemplate)
         
         let favoriteEpisodesTemplate = CPListTemplate(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
-        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorite_tab", in: nil, compatibleWith: traitCollection)
+        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorites_tab", in: nil, compatibleWith: traitCollection)
         templates.append(favoriteEpisodesTemplate)
         
         #if DEBUG || NIGHTLY
