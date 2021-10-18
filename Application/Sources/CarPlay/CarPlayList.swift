@@ -16,6 +16,8 @@ enum CarPlayList {
     case mostPopular
     case mostPopularMedias(radioChannel: RadioChannel)
     
+    private static let pageSize: UInt = 20
+    
     var title: String? {
         switch self {
         case .latestEpisodesFromFavorites:
@@ -58,7 +60,7 @@ enum CarPlayList {
         case .latestEpisodesFromFavorites:
             return Publishers.PublishAndRepeat(onOutputFrom: UserInteractionSignal.favoriteUpdates()) {
                 return SRGDataProvider.current!.favoritesPublisher(filter: self)
-                    .map { SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: $0.map(\.urn)) }
+                    .map { SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: Self.pageSize) }
                     .switchToLatest()
             }
             .mapToSections(with: interfaceController)
@@ -67,7 +69,7 @@ enum CarPlayList {
         case .mostPopular:
             return SRGDataProvider.current!.mostPopular(interfaceController: interfaceController)
         case let .mostPopularMedias(radioChannel: radioChannel):
-            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
+            return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
                 .mapToSections(with: interfaceController)
         }
     }
