@@ -19,7 +19,7 @@ final class CarPlayTemplateListController {
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
         self.list = list
         
-        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Loading label")]
+        template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Default text displayed when loading")]
         
         Publishers.PublishAndRepeat(onOutputFrom: reloadPublisher()) {
             list.publisher(with: interfaceController)
@@ -36,7 +36,7 @@ final class CarPlayTemplateListController {
                 template.emptyViewSubtitleVariants = [error.localizedDescription]
                 template.updateSections([])
             case let .loaded(sections: sections):
-                template.emptyViewSubtitleVariants = [NSLocalizedString("No results", comment: "No results label")]
+                template.emptyViewSubtitleVariants = [NSLocalizedString("No results", comment: "Default text displayed when no results are available")]
                 template.updateSections(sections)
             }
         }
