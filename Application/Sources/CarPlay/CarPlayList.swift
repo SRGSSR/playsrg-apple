@@ -128,20 +128,26 @@ private extension CarPlayList {
         }
     }
     
+    private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> SRGMedia? {
+        guard let controller = controller else { return nil }
+        if let fullLengthMedia = controller.fullLengthMedia, fullLengthMedia.contentType == .livestream || fullLengthMedia.contentType == .scheduledLivestream {
+            return fullLengthMedia
+        }
+        else {
+            return controller.media
+        }
+    }
+    
     private static func nowPlayingMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
             .map { controller -> AnyPublisher<SRGMedia?, Never> in
                 if let controller = controller {
                     return NotificationCenter.default.publisher(for: NSNotification.Name.SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
-                            guard let controller = notification.object as? SRGLetterboxController else { return nil }
-                            if let fullLengthMedia = controller.fullLengthMedia, fullLengthMedia.contentType == .livestream || fullLengthMedia.contentType == .scheduledLivestream {
-                                return fullLengthMedia
-                            }
-                            else {
-                                return controller.media
-                            }
+                            let controller = notification.object as? SRGLetterboxController
+                            return nowPlayingMedia(for: controller)
                         }
+                        .prepend(nowPlayingMedia(for: controller))
                         .eraseToAnyPublisher()
                 }
                 else {
