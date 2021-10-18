@@ -36,7 +36,7 @@ final class CarPlayTemplateListController {
                 template.emptyViewSubtitleVariants = [error.localizedDescription]
                 template.updateSections([])
             case let .loaded(sections: sections):
-                template.emptyViewSubtitleVariants = [NSLocalizedString("No results", comment: "Default text displayed when no results are available")]
+                template.emptyViewSubtitleVariants = [NSLocalizedString("No content", comment: "Default text displayed when no content is available")]
                 template.updateSections(sections)
             }
         }

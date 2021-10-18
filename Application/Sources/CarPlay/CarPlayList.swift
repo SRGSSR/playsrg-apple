@@ -19,11 +19,11 @@ enum CarPlayList {
     var title: String? {
         switch self {
         case .latestEpisodesFromFavorites:
-            return NSLocalizedString("Favorites", comment: "Tab title to present the radio favorite shows on CarPlay")
+            return NSLocalizedString("Favorites", comment: "Tab title to present the latest episodes from favorite shows on CarPlay")
         case .livestreams:
-            return NSLocalizedString("Livestreams", comment: "Tab title to present the live on CarPlay")
+            return NSLocalizedString("Livestreams", comment: "Tab title to present the livestreams on CarPlay")
         case .mostPopular:
-            return NSLocalizedString("Trends", comment: "Tab title to present the most popular medias by radio on CarPlay")
+            return NSLocalizedString("Trends", comment: "Tab title to present the most popular medias by channel on CarPlay")
         case let .mostPopularMedias(radioChannel: radioChannel):
             return radioChannel.name
         }

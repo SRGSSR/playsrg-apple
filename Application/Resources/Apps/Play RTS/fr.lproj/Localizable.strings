@@ -187,9 +187,9 @@
 
 /* Label displayed in the show view when a show has been favorited
    Label to present Favorites
+   Tab title to present the latest episodes from favorite shows on CarPlay
    Title label used to present the radio favorite shows
-   Title label used to present the TV or radio favorite shows
-   Tab title to present the radio favorite shows on CarPlay */
+   Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favoris";
 
 /* Message displayed when the user is about to delete all favorites */
@@ -270,8 +270,8 @@
 
 /* Label to present the Livestreams view
    Livestreams tab title
-   Title displayed at the top of the livestream view
-   Tab title to present the live on CarPlay */
+   Tab title to present the livestreams on CarPlay
+   Title displayed at the top of the livestreams view */
 "Livestreams" = "Directs";
 
 /* Default text displayed when loading */
@@ -450,7 +450,7 @@
 /* Title displayed when no item has been selected */
 "Select items" = "Sélect. des éléments";
 
-/* Notification message when the server URL changed due to a scheme URL. */
+/* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Serveur réglé sur '%@'";
 
 /* No comment provided by engineer. */
@@ -597,13 +597,14 @@
 "Today" = "Aujourd'hui";
 
 /* Categories search setting option
+   Title label used to present the topic list
    Topics search setting option list view title */
 "Topics" = "Catégories";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Capacité utilisée : %@";
 
-/* Tab title to present the most popular medias by radio on CarPlay */
+/* Tab title to present the most popular medias by channel on CarPlay */
 "Trends" = "Tendances";
 
 /* Title label to present main TV livestreams */
