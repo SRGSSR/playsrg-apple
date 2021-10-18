@@ -74,22 +74,33 @@ enum CarPlayList {
 private extension CarPlayList {
     struct MediaData {
         let media: SRGMedia
-        let image: UIImage?
+        let image: UIImage
+        let progress: Double?
     }
     
     static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
+        return Publishers.CombineLatest(
+            imagePublisher(for: media),
+            UserDataPublishers.playbackProgressPublisher(for: media)
+        )
+        .map { image, progress in
+            return MediaData(media: media, image: image, progress: progress)
+        }
+        .eraseToAnyPublisher()
+    }
+    
+    private static func imagePublisher(for media: SRGMedia) -> AnyPublisher<UIImage, Never> {
         let imageScale = ImageScale.small
         let placeholderImage = UIColor.placeholder.image(ofSize: SizeForImageScale(imageScale, .default))
         if let imageUrl = media.imageUrl(for: imageScale) {
             return ImagePipeline.shared.imagePublisher(with: imageUrl)
-                .map { Optional($0.image) }
+                .map { $0.image }
                 .replaceError(with: placeholderImage)
                 .prepend(placeholderImage)
-                .map { MediaData(media: media, image: $0) }
                 .eraseToAnyPublisher()
         }
         else {
-            return Just(MediaData(media: media, image: placeholderImage))
+            return Just(placeholderImage)
                 .eraseToAnyPublisher()
         }
     }
@@ -175,6 +186,7 @@ private extension Publisher where Output == [SRGMedia] {
                 let item = CPListItem(text: MediaDescription.title(for: mediaMetadata.media, style: .show),
                                       detailText: MediaDescription.subtitle(for: mediaMetadata.media, style: .show),
                                       image: mediaMetadata.image)
+                item.playbackProgress = mediaMetadata.progress ?? 0
                 item.accessoryType = .disclosureIndicator
                 item.handler = { _, completion in
                     interfaceController.play(media: mediaMetadata.media, completion: completion)

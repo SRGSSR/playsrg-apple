@@ -247,7 +247,7 @@ extension ProgramViewModel {
                     }
             }
             .map { media -> AnyPublisher<MediaData, Never> in
-                return Publishers.CombineLatest(Self.watchLaterPublisher(for: media), Self.historyPublisher(for: media))
+                return Publishers.CombineLatest(UserDataPublishers.laterAllowedActionPublisher(for: media), UserDataPublishers.playbackProgressPublisher(for: media))
                     .map { action, progress in
                         return MediaData(media: media, watchLaterAllowedAction: action, progress: progress)
                     }
@@ -261,36 +261,6 @@ extension ProgramViewModel {
             return Just(.empty)
                 .eraseToAnyPublisher()
         }
-    }
-    
-    private static func watchLaterPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
-            return Deferred {
-                Future<WatchLaterAction, Never> { promise in
-                    WatchLaterAllowedActionForMediaAsync(media) { action in
-                        promise(.success(action))
-                    }
-                }
-            }
-        }
-        .prepend(.none)
-        .eraseToAnyPublisher()
-    }
-    
-    private static func historyPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
-            return Deferred {
-                Future<Double?, Never> { promise in
-                    HistoryPlaybackProgressForMediaAsync(media) { progress, completed in
-                        guard completed else { return }
-                        let progressValue = (progress != 0) ? Optional(Double(progress)) : nil
-                        promise(.success(progressValue))
-                    }
-                }
-            }
-        }
-        .prepend(nil)
-        .eraseToAnyPublisher()
     }
     
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {

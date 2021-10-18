@@ -180,3 +180,35 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
 }
+
+enum UserDataPublishers {
+    static func playbackProgressPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
+            return Deferred {
+                Future<Double?, Never> { promise in
+                    HistoryPlaybackProgressForMediaAsync(media) { progress, completed in
+                        guard completed else { return }
+                        let progressValue = (progress != 0) ? Optional(Double(progress)) : nil
+                        promise(.success(progressValue))
+                    }
+                }
+            }
+        }
+        .prepend(nil)
+        .eraseToAnyPublisher()
+    }
+    
+    static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
+            return Deferred {
+                Future<WatchLaterAction, Never> { promise in
+                    WatchLaterAllowedActionForMediaAsync(media) { action in
+                        promise(.success(action))
+                    }
+                }
+            }
+        }
+        .prepend(.none)
+        .eraseToAnyPublisher()
+    }
+}
