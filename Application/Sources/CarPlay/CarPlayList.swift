@@ -72,21 +72,42 @@ enum CarPlayList {
 }
 
 private extension CarPlayList {
+    struct LiveMediaData {
+        let media: SRGMedia
+        let playing: Bool
+    }
+    
     struct MediaData {
         let media: SRGMedia
         let image: UIImage
+        let playing: Bool
         let progress: Double?
     }
     
+    static func liveMediaDataPublisher(for media: SRGMedia) -> AnyPublisher<LiveMediaData, Never> {
+        return playingPublisher(for: media)
+            .map { playing in
+                return LiveMediaData(media: media, playing: playing)
+            }
+            .eraseToAnyPublisher()
+    }
+    
     static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
-        return Publishers.CombineLatest(
+        return Publishers.CombineLatest3(
             imagePublisher(for: media),
+            playingPublisher(for: media),
             UserDataPublishers.playbackProgressPublisher(for: media)
         )
-        .map { image, progress in
-            return MediaData(media: media, image: image, progress: progress)
+        .map { image, playing, progress in
+            return MediaData(media: media, image: image, playing: playing, progress: progress)
         }
         .eraseToAnyPublisher()
+    }
+    
+    private static func playingPublisher(for media: SRGMedia) -> AnyPublisher<Bool, Never> {
+        return LetterboxServicePublishers.currentMediaPublisher()
+            .map { media == $0 }
+            .eraseToAnyPublisher()
     }
     
     private static func imagePublisher(for media: SRGMedia) -> AnyPublisher<UIImage, Never> {
@@ -133,12 +154,19 @@ private extension SRGDataProvider {
     func livestreamsSections(for contentProviders: SRGContentProviders, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
         return radioLivestreams(for: ApplicationConfiguration.shared.vendor, contentProviders: contentProviders)
             .map { medias in
-                let items = medias.map { media -> CPListItem in
-                    let item = CPListItem(text: media.channel?.title, detailText: nil, image: Self.logoImage(for: media))
+                return Publishers.AccumulateLatestMany(medias.map { media in
+                    return CarPlayList.liveMediaDataPublisher(for: media)
+                })
+            }
+            .switchToLatest()
+            .map { mediaDataList in
+                let items = mediaDataList.map { mediaData -> CPListItem in
+                    let item = CPListItem(text: mediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: mediaData.media))
                     item.accessoryType = .none
                     item.handler = { _, completion in
-                        interfaceController.play(media: media, completion: completion)
+                        interfaceController.play(media: mediaData.media, completion: completion)
                     }
+                    item.isPlaying = mediaData.playing
                     return item
                 }
                 return [CPListSection(items: items)]
@@ -181,15 +209,16 @@ private extension Publisher where Output == [SRGMedia] {
             })
         }
         .switchToLatest()
-        .map { mediaMetadataList in
-            let items = mediaMetadataList.map { mediaMetadata -> CPListItem in
-                let item = CPListItem(text: MediaDescription.title(for: mediaMetadata.media, style: .show),
-                                      detailText: MediaDescription.subtitle(for: mediaMetadata.media, style: .show),
-                                      image: mediaMetadata.image)
-                item.playbackProgress = mediaMetadata.progress ?? 0
+        .map { mediaDataList in
+            let items = mediaDataList.map { mediaData -> CPListItem in
+                let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
+                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: .show),
+                                      image: mediaData.image)
+                item.isPlaying = mediaData.playing
+                item.playbackProgress = mediaData.progress ?? 0
                 item.accessoryType = .disclosureIndicator
                 item.handler = { _, completion in
-                    interfaceController.play(media: mediaMetadata.media, completion: completion)
+                    interfaceController.play(media: mediaData.media, completion: completion)
                 }
                 return item
             }

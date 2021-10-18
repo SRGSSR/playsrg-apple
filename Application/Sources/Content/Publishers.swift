@@ -212,3 +212,22 @@ enum UserDataPublishers {
         .eraseToAnyPublisher()
     }
 }
+
+enum LetterboxServicePublishers {
+    static func currentMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
+        return SRGLetterboxService.shared.publisher(for: \.controller)
+            .map { controller -> AnyPublisher<SRGMedia?, Never> in
+                if let controller = controller {
+                    return controller.publisher(for: \.media)
+                        .eraseToAnyPublisher()
+                }
+                else {
+                    return Just(nil)
+                        .eraseToAnyPublisher()
+                }
+            }
+            .switchToLatest()
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+}
