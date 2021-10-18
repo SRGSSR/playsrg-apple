@@ -69,7 +69,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     func reload(deep: Bool = false) {
-        if deep || state.isEmpty {
+        if deep || !state.hasContent {
             trigger.activate(for: TriggerId.reload)
         }
     }
@@ -144,6 +144,17 @@ extension SectionViewModel {
                 return 0
             }
         }
+        
+        var size: Size {
+            switch self {
+            case .title:
+                return .small
+            case .item, .show:
+                return .large
+            case .none:
+                return .zero
+            }
+        }
     }
     
     struct Section: Hashable, Indexable {
@@ -171,29 +182,27 @@ extension SectionViewModel {
         case failed(error: Error)
         case loaded(rows: [Row])
         
-        var topHeaderSize: Header.Size {
+        var hasContent: Bool {
+            if case let .loaded(rows: rows) = self {
+                let filteredRows = rows.filter { !$0.items.filter { $0 != .transparent }.isEmpty }
+                return !filteredRows.isEmpty
+            }
+            else {
+                return false
+            }
+        }
+        
+        var headerSize: Header.Size {
             if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
-                switch firstSection.header {
-                case .title:
-                    return .small
-                case .item, .show:
-                    return .large
-                case .none:
-                    return .zero
-                }
+                return firstSection.header.size
             }
             else {
                 return .zero
             }
         }
         
-        var isEmpty: Bool {
-            if case let .loaded(rows: rows) = self {
-                return rows.isEmpty
-            }
-            else {
-                return true
-            }
+        var displaysEmptyView: Bool {
+            return headerSize != .large && !hasContent
         }
     }
     
@@ -210,7 +219,8 @@ extension SectionViewModel {
     }
     
     fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
-        if let row = Row(section: Section(id: "main", header: header), items: items) {
+        let rowItems = (header.size == .large && items.isEmpty) ? [.transparent] : items
+        if let row = Row(section: Section(id: "main", header: header), items: rowItems) {
             return [row]
         }
         else {
