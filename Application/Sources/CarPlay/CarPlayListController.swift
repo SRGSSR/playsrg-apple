@@ -44,12 +44,20 @@ final class CarPlayTemplateListController {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge3(
+            Self.foreground(),
             ApplicationSignal.reachable(),
             trigger.signal(activatedBy: TriggerId.reload)
         )
         .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
         .eraseToAnyPublisher()
+    }
+    
+    private static func foreground() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: UIScene.willEnterForegroundNotification, object: nil)
+            .filter { $0.object is CPTemplateApplicationScene }
+            .map { _ in }
+            .eraseToAnyPublisher()
     }
 }
 

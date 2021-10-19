@@ -104,22 +104,3 @@ extension CPTabBarTemplate: CarPlayTemplateContainer {
         return selectedTemplate
     }
 }
-
-extension CPInterfaceController {
-    private func notifyWillEnterForeground(for template: CPTemplate) {
-        template.notifyWillAppear(animated: false, recursive: true)
-        template.notifyDidAppear(animated: false, recursive: true)
-    }
-    
-    func notifyWillEnterForeground() {
-        if let presentedTemplate = presentedTemplate {
-            notifyWillEnterForeground(for: presentedTemplate)
-        }
-        else if let topTemplate = topTemplate {
-            notifyWillEnterForeground(for: topTemplate)
-        }
-        else {
-            notifyWillEnterForeground(for: rootTemplate)
-        }
-    }
-}
