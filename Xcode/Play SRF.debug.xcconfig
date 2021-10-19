@@ -1,4 +1,0 @@
-#include "Xcode/Links/Play SRF.debug.xcconfig"
-#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.debug.xcconfig"
-#include "Xcode/Play iOS Application.xcconfig"
-#include "Xcode/Play SRF.xcconfig"

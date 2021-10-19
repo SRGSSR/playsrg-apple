@@ -15,10 +15,12 @@ typedef NSString * AnalyticsPageLevel NS_STRING_ENUM;
 
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelApplication;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAudio;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelAutomobile;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelEvent;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelFeature;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelGoogleCast;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelLive;
+OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelMostPopular;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPlay;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelPreview;
 OBJC_EXPORT AnalyticsPageLevel const AnalyticsPageLevelSearch;

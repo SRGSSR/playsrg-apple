@@ -255,7 +255,7 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
+  desc 'SRF: Makes iOS screenshots.'
   lane :srfScreenshots do
     platform = 'iOS'
 
@@ -456,7 +456,6 @@ platform :ios do
     schemes = schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
-      update_app_identifier_to_appstore(platform, app_identifier)
 
       build_lane(
         configuration: 'Nightly',
@@ -474,7 +473,6 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
 
       clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
 
       UI.message schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
@@ -498,8 +496,6 @@ platform :ios do
       UI.message(schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
       next unless can_upload
 
-      update_app_identifier_to_appstore(platform, app_identifier)
-
       build_lane(
         configuration: 'Beta',
         scheme: schemes[index],
@@ -515,7 +511,6 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
 
       clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
 
       UI.message schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
     end
@@ -908,7 +903,7 @@ end
 # Returns the marketing version for a platform, without suffix
 def xcode_marketing_version(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'MARKETING_VERSION'
   )
 end
@@ -916,7 +911,7 @@ end
 # Returns the build number for a platform
 def xcode_build_number(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION'
   )
 end
@@ -924,11 +919,15 @@ end
 # Override build number for a platform (current project version)
 def xcode_override_build_number(platform, build_number)
   update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION',
     value: build_number.to_s
   )
   build_number.to_s
+end
+
+def srg_xcconfig_path(platform)
+  'Xcode/Shared/Targets/' + platform + '/Common.xcconfig'
 end
 
 def appstore_platform(platform)
@@ -947,38 +946,6 @@ def login_with_app_store_connect_api_key
   )
 end
 
-# Update the app and app group identifiers for App Store Connect submit.
-def update_app_identifier_to_appstore(platform, app_identifier)
-  update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
-    name: 'PRODUCT_BUNDLE_IDENTIFIER',
-    value: app_identifier
-  )
-  set_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
-    value: 'group.' + app_identifier
-  )
-  update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
-  app_identifier
-end
-
-# Update the extension and app group identifiers for App Store Connect submit.
-def update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
-  return unless platform == 'iOS'
-
-  update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
-    name: 'PRODUCT_BUNDLE_IDENTIFIER',
-    value: app_identifier + '.notification-service-extension'
-  )
-  set_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
-    value: 'group.' + app_identifier
-  )
-end
-
 def srg_pilot(app_identifier, platform, changelog)
   login_with_app_store_connect_api_key
   pilot(
@@ -989,21 +956,6 @@ def srg_pilot(app_identifier, platform, changelog)
     groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
-  )
-end
-
-# Reset the updated app identifier after App Store Connect submission.
-def reset_app_identifier_to_appstore(platform)
-  reset_git_repo(
-    force: true,
-    files: ['Xcode/Play ' + platform + ' Application.xcconfig']
-  )
-
-  return unless platform == 'iOS'
-
-  reset_git_repo(
-    force: true,
-    files: ['Xcode/Play ' + platform + ' Notification Service Extension.xcconfig']
   )
 end
 
@@ -1172,7 +1124,7 @@ def bump_build_number_commit(platform)
   commit_version_bump(
     xcodeproj: 'PlaySRG.xcodeproj',
     message: 'Bump ' + platform + ' build number to ' + build_number,
-    include: 'Xcode/Play ' + platform + '.xcconfig',
+    include: srg_xcconfig_path(platform),
     ignore: /.+/
   )
 end

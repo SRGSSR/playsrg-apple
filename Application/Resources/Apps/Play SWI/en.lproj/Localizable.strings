@@ -187,6 +187,7 @@
 
 /* Label displayed in the show view when a show has been favorited
    Label to present Favorites
+   Tab title to present the latest episodes from favorite shows on CarPlay
    Title label used to present the radio favorite shows
    Title label used to present the TV or radio favorite shows */
 "Favorites" = "Favorites";
@@ -269,8 +270,12 @@
 
 /* Label to present the Livestreams view
    Livestreams tab title
-   Title displayed at the top of the livestream view */
+   Tab title to present the livestreams on CarPlay
+   Title displayed at the top of the livestreams view */
 "Livestreams" = "Live";
+
+/* Default text displayed when loading */
+"Loading…" = "Loading…";
 
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
 "Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
@@ -445,7 +450,7 @@
 /* Title displayed when no item has been selected */
 "Select items" = "Select items";
 
-/* Notification message when the server URL changed due to a scheme URL. */
+/* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Server changed to '%@'";
 
 /* No comment provided by engineer. */
@@ -592,11 +597,15 @@
 "Today" = "Today";
 
 /* Categories search setting option
+   Title label used to present the topic list
    Topics search setting option list view title */
 "Topics" = "Topics";
 
 /* Total space size, display at the bottom of download list */
 "Total space used: %@" = "Total space used: %@";
+
+/* Tab title to present the most popular medias by channel on CarPlay */
+"Trends" = "Trends";
 
 /* Title label to present main TV livestreams */
 "TV channels" = "TV channels";

@@ -28,6 +28,7 @@
 @import AppCenterCrashes;
 @import AppCenterDistribute;
 @import AVFoundation;
+@import CarPlay;
 @import Firebase;
 @import Mantle;
 @import SRGAnalyticsIdentity;
@@ -50,7 +51,6 @@ static void *s_kvoContext = &s_kvoContext;
     
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
@@ -122,7 +122,6 @@ static void *s_kvoContext = &s_kvoContext;
     
     [self checkForForcedUpdates];
     
-    // Processes run once in the lifetime of the application
     __block BOOL firstLaunchDone = YES;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         firstLaunchDone = NO;
@@ -132,18 +131,32 @@ static void *s_kvoContext = &s_kvoContext;
     [PushService.sharedService setup];
     [PushService.sharedService updateApplicationBadge];
     
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
     }, @"ClearVectorImageCache2", nil);
+    
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        NSString *previousKey = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
+        NSDictionary *value = [userDefaults dictionaryForKey:previousKey];
+        [userDefaults setObject:value forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        [userDefaults removeObjectForKey:previousKey];
+        [userDefaults synchronize];
+        completionHandler(YES);
+    }, @"MigrateSelectedLiveStreamURNForChannels", nil);
     
     return YES;
 }
 
 - (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options
 {
-    return [[UISceneConfiguration alloc] initWithName:@"Default" sessionRole:connectingSceneSession.role];
+    if (connectingSceneSession.role == CPTemplateApplicationSceneSessionRoleApplication) {
+        return [[UISceneConfiguration alloc] initWithName:@"CarPlay" sessionRole:connectingSceneSession.role];
+    }
+    else {
+        return [[UISceneConfiguration alloc] initWithName:@"Default" sessionRole:connectingSceneSession.role];
+    }
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging

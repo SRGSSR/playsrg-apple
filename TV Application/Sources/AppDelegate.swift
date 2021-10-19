@@ -28,7 +28,6 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         assert(NSClassFromString("ASIdentifierManager") == nil, "No implicit AdSupport.framework dependency must be found")
         
-        // Processes run once in the lifetime of the application
         PlayApplicationRunOnce({ completionHandler -> Void in
             PlayFirebaseConfiguration.clearCache()
             completionHandler(true)

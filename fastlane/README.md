@@ -105,7 +105,7 @@ SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ```
 fastlane ios srfScreenshots
 ```
-SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.
+SRF: Makes iOS screenshots.
 ### ios rtsScreenshots
 ```
 fastlane ios rtsScreenshots

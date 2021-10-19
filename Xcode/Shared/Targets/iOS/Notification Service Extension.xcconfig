@@ -1,0 +1,6 @@
+#include "Xcode/Shared/Targets/iOS/Common.xcconfig"
+
+CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/Extensions/NotificationService/NotificationService.entitlements
+
+TARGET__BUNDLE_IDENTIFIER_SUFFIX = .notification-service-extension
+TARGET__PRODUCT_NAME_SUFFIX = $() notification service extension

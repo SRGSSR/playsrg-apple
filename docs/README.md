@@ -24,11 +24,11 @@ The application provides a rich set of functionalities, among which:
 * Resume playback and continuous playback.
 * Favorites.
 * Downloads (iOS only).
-* AirPlay and Google Cast support (iOS only).
+* AirPlay, Google Cast and CarPlay support (iOS only).
 * VoiceOver and larger font support for better accessibility.
 * Handoff support (iOS only).
 
-Depending on the business unit, some functionalities might not be available (e.g. SWI has no radio content).
+Depending on the business unit some functionalities might not be available (e.g. SWI has no radio content).
 
 ## Compatibility
 
@@ -103,5 +103,6 @@ The proprietary project uses [fastlane](https://fastlane.tools/) for releasing b
 
 Follow the links below for feature specifications and technical details:
 
+* [Configuration files](CONFIGURATION_FILES.md)
 * [Remote configuration](REMOTE_CONFIGURATION.md)
 * [Custom URL and Universal Link Support](CUSTOM_URLS_AND_UNIVERSAL_LINKS.md)

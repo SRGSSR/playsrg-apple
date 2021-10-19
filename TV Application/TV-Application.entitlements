@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>${WEB_CREDENTIALS_DOMAIN}</string>
+		<string>${BU__WEB_CREDENTIALS_DOMAIN}</string>
 	</array>
 	<key>com.apple.developer.user-management</key>
 	<array>
