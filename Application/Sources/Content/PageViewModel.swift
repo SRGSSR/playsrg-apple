@@ -29,7 +29,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     init(id: Id) {
         self.id = id
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
+        Publishers.Publish(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
             return SRGDataProvider.current!.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in

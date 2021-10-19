@@ -235,7 +235,7 @@ name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version:
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.4
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 12.0.0
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.2
 

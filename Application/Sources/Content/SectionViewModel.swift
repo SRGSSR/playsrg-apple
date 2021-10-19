@@ -32,7 +32,7 @@ final class SectionViewModel: ObservableObject {
         
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
+        Publishers.Publish(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
             return Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),

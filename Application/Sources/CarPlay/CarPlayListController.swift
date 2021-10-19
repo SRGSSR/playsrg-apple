@@ -15,14 +15,13 @@ final class CarPlayTemplateListController {
     private var cancellables = Set<AnyCancellable>()
     
     private let trigger = Trigger()
-    private var displayedOnce = false
     
     init(list: CarPlayList, template: CPListTemplate, interfaceController: CPInterfaceController) {
         self.list = list
         
         template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Default text displayed when loading")]
         
-        Publishers.PublishAndRepeat(onOutputFrom: reloadPublisher()) {
+        Publishers.Publish(onOutputFrom: reloadPublisher()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
                 .catch { error in
@@ -56,12 +55,7 @@ final class CarPlayTemplateListController {
 
 extension CarPlayTemplateListController: CarPlayTemplateController {
     func willAppear(animated: Bool) {
-        if displayedOnce {
-            trigger.activate(for: TriggerId.reload)
-        }
-        else {
-            displayedOnce = true
-        }
+        trigger.activate(for: TriggerId.reload)
     }
     
     func didAppear(animated: Bool) {
