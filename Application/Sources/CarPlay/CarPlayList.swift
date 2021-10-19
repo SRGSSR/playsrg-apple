@@ -254,7 +254,7 @@ private extension Publisher where Output == [SRGMedia] {
                                       image: mediaData.image)
                 item.isPlaying = mediaData.playing
                 item.playbackProgress = mediaData.progress ?? 0
-                item.accessoryType = .disclosureIndicator
+                item.accessoryType = .none
                 item.handler = { _, completion in
                     interfaceController.play(media: mediaData.media, completion: completion)
                 }
