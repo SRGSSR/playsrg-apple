@@ -16,7 +16,6 @@ final class SectionViewModel: ObservableObject {
     
     private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
-    private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
         let properties = configuration.properties
@@ -32,7 +31,7 @@ final class SectionViewModel: ObservableObject {
         
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
-        Publishers.Publish(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
+        Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger] in
             return Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
@@ -55,13 +54,6 @@ final class SectionViewModel: ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
-        
-        ApplicationSignal.wokenUp()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.reload()
-            }
-            .store(in: &cancellables)
     }
     
     func loadMore() {
@@ -97,6 +89,15 @@ final class SectionViewModel: ObservableObject {
             labels.source = AnalyticsSource.selection.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
         }
+    }
+    
+    private func reloadSignal() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            trigger.signal(activatedBy: TriggerId.reload),
+            ApplicationSignal.wokenUp()
+        )
+        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .eraseToAnyPublisher()
     }
 }
 

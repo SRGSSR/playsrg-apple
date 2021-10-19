@@ -21,7 +21,7 @@ final class CarPlayTemplateListController {
         
         template.emptyViewSubtitleVariants = [NSLocalizedString("Loading…", comment: "Default text displayed when loading")]
         
-        Publishers.Publish(onOutputFrom: reloadPublisher()) {
+        Publishers.Publish(onOutputFrom: reloadSignal()) {
             list.publisher(with: interfaceController)
                 .map { State.loaded(sections: $0) }
                 .catch { error in
@@ -43,11 +43,13 @@ final class CarPlayTemplateListController {
         .store(in: &cancellables)
     }
     
-    private func reloadPublisher() -> AnyPublisher<Void, Never> {
+    private func reloadSignal() -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
             ApplicationSignal.reachable(),
             trigger.signal(activatedBy: TriggerId.reload)
-        ).eraseToAnyPublisher()
+        )
+        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .eraseToAnyPublisher()
     }
 }
 
