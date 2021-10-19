@@ -30,11 +30,9 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         favoriteEpisodesTemplate.tabImage = UIImage(named: "favorites_tab", in: nil, compatibleWith: traitCollection)
         templates.append(favoriteEpisodesTemplate)
         
-        #if DEBUG || NIGHTLY
         let mostPopularTemplate = CPListTemplate(list: .mostPopular, interfaceController: interfaceController)
         mostPopularTemplate.tabImage = UIImage(named: "trends_tab", in: nil, compatibleWith: traitCollection)
         templates.append(mostPopularTemplate)
-        #endif
         
         let tabBarTemplate = CPTabBarTemplate(templates: templates)
         interfaceController.setRootTemplate(tabBarTemplate, animated: true, completion: nil)
