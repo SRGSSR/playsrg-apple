@@ -144,5 +144,6 @@
   "3.3.0-365": "- Add TV show poster images support.\n- Fix incorrect TV guide layout when returning from player.\n- Shows A-Z always displays the alphabetical index.\n- Show favorite detail page displays alphabetical indexes.",
   "3.3.0-366": "- Improve program layout on compact screen width.\n- Display ST, AD and multi audio badges depending on playbable media capabilities.\n- Group favorited shows only when rows are sufficiently filled in detail view.\n\nTechnical: scene support added (only one allowed).",
   "3.3.0-367": "- Hero stage appearance for the Videos homepage.",
-  "3.3.0-368": "- Improved iOS 15 compatibility.\n- Add topics swimlane title and topics detail page.\n- Restore shared button on show page."
+  "3.3.0-368": "- Improved iOS 15 compatibility.\n- Add topics swimlane title and topics detail page.\n- Restore shared button on show page.",
+  "3.4.0-369": "### CarPlay\n\nAdd CarPlay support with:\n- Radio livestreams.\n- Latest episodes from your favorite shows.\n- Trending content per channels.\n\nImprovements and fixes:\n- Restore favorite and subscription buttons in empty show pages.\n- Fix player rotation issue in some scenarios.\n- Fix context menu glitches.\n\nCarPlay suport is only available in TestFlight betas, not in AppCenter ones."
 }
