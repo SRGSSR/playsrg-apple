@@ -96,6 +96,17 @@ enum ThrottledSignal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
+    
+    /**
+     *  Emits a signal when the user default setting at the specified key path changes. The key path must bear
+     *  the exact same name as the setting key. Key paths should be defined in `UserDefaults+ApplicationSettings.swift`.
+     */
+    static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
+        return UserDefaults.standard.publisher(for: keyPath)
+            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
 }
 
 // MARK: Signals for application events

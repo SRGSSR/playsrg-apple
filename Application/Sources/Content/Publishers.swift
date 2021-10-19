@@ -26,26 +26,24 @@ extension SRGDataProvider {
 #if os(iOS)
     /// Publishes the regional media which corresponds to the specified media, if any.
     private func regionalizedRadioLivestreamMedia(for media: SRGMedia) -> AnyPublisher<SRGMedia, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: UserDefaults.standard.publisher(for: \.PlaySRGSettingSelectedLivestreamURNForChannels)) { () -> AnyPublisher<SRGMedia, Never> in
-            if let channelUid = media.channel?.uid,
-               let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
-               media.urn != selectedLivestreamUrn {
-                return self.radioLivestreams(for: media.vendor, channelUid: channelUid)
-                    .map { medias in
-                        if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
-                            return selectedMedia
-                        }
-                        else {
-                            return media
-                        }
+        if let channelUid = media.channel?.uid,
+           let selectedLivestreamUrn = ApplicationSettingSelectedLivestreamURNForChannelUid(channelUid),
+           media.urn != selectedLivestreamUrn {
+            return self.radioLivestreams(for: media.vendor, channelUid: channelUid)
+                .map { medias in
+                    if let selectedMedia = ApplicationSettingSelectedLivestreamMediaForChannelUid(channelUid, medias) {
+                        return selectedMedia
                     }
-                    .replaceError(with: media)
-                    .eraseToAnyPublisher()
-            }
-            else {
-                return Just(media)
-                    .eraseToAnyPublisher()
-            }
+                    else {
+                        return media
+                    }
+                }
+                .replaceError(with: media)
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(media)
+                .eraseToAnyPublisher()
         }
     }
 #endif

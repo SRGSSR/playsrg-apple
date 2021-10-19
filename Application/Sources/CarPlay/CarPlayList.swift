@@ -65,7 +65,9 @@ enum CarPlayList {
             }
             .mapToSections(with: interfaceController)
         case .livestreams:
-            return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController)
+            return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)) {
+                return SRGDataProvider.current!.livestreamsSections(for: .all, interfaceController: interfaceController)
+            }
         case .mostPopular:
             return SRGDataProvider.current!.mostPopular(interfaceController: interfaceController)
         case let .mostPopularMedias(radioChannel: radioChannel):

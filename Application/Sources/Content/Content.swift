@@ -761,6 +761,8 @@ private extension Content {
                 return ThrottledSignal.preferenceUpdates()
             case .radioWatchLater, .watchLater:
                 return ThrottledSignal.watchLaterUpdates()
+            case .radioLive:
+                return ThrottledSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
