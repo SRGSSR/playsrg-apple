@@ -387,6 +387,7 @@
 		08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C6912C1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 08C97F88271E655D003AE4F3 /* SRGMediaPlayer */; };
 		08D5990D26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990E26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990F26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
@@ -3073,6 +3074,7 @@
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
+				08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
@@ -4921,6 +4923,7 @@
 				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 				6FEEBE79265CD6D300A4882B /* Collections */,
 				6F17DC17266AB837009F74C6 /* Nuke */,
+				08C97F88271E655D003AE4F3 /* SRGMediaPlayer */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5673,6 +5676,7 @@
 				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
 				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
+				08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -16467,6 +16471,14 @@
 				minimumVersion = 9.0.4;
 			};
 		};
+		08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/srgmediaplayer-apple.git";
+			requirement = {
+				branch = "feature/ios15-issues";
+				kind = branch;
+			};
+		};
 		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
@@ -16664,6 +16676,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
+		};
+		08C97F88271E655D003AE4F3 /* SRGMediaPlayer */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */;
+			productName = SRGMediaPlayer;
 		};
 		08EA3E77259D2AD6008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
