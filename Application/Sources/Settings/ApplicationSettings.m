@@ -84,7 +84,6 @@ SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(void)
 NSURL *ApplicationSettingServiceURL(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    // Processes run once in the lifetime of the application
     __block BOOL settingServiceURLReset = YES;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         settingServiceURLReset = NO;

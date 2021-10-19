@@ -51,7 +51,6 @@ static void *s_kvoContext = &s_kvoContext;
     
     [AVAudioSession.sharedInstance setCategory:AVAudioSessionCategoryPlayback error:NULL];
     
-    // Processes run once in the lifetime of the application
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
@@ -139,8 +138,10 @@ static void *s_kvoContext = &s_kvoContext;
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-        NSDictionary *value = [userDefaults dictionaryForKey:@"PlaySRGSettingSelectedLiveStreamURNForChannels"];
+        NSString *previousKey = @"PlaySRGSettingSelectedLiveStreamURNForChannels";
+        NSDictionary *value = [userDefaults dictionaryForKey:previousKey];
         [userDefaults setObject:value forKey:PlaySRGSettingSelectedLivestreamURNForChannels];
+        [userDefaults removeObjectForKey:previousKey];
         [userDefaults synchronize];
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels", nil);
