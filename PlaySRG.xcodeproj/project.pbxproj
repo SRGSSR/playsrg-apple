@@ -1543,6 +1543,9 @@
 		6FB9B3DD26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
 		6FB9B3DE26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
 		6FB9B3DF26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */; };
+		6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
+		6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6FBE5378271FFA9C00F90B68 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C697245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
@@ -2250,6 +2253,13 @@
 			remoteGlobalIDString = 6F0CFB7D20C94EE5006B2CE4;
 			remoteInfo = "Play SWI notification extension";
 		};
+		6FBE5359271FF94A00F90B68 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C68D471D38D49600BB8AAA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FBE5352271FF94A00F90B68;
+			remoteInfo = "Play SRF TV top shelf extension";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -2304,6 +2314,17 @@
 			dstSubfolderSpec = 13;
 			files = (
 				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FBE535C271FF94A00F90B68 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2842,6 +2863,15 @@
 		6FB90D17270D91010033D860 /* CarPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayList.swift; sourceTree = "<group>"; };
 		6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransluscentHeaderView.swift; sourceTree = "<group>"; };
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
+		6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play SRF top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6FBE5374271FFA9B00F90B68 /* TopShelf-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TopShelf-Info.plist"; sourceTree = "<group>"; };
+		6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentProvider.swift; sourceTree = "<group>"; };
+		6FBE537A271FFB4200F90B68 /* Play RSI TV Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RSI TV Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
+		6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SRF TV Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
+		6FBE537C271FFB4200F90B68 /* Play RTR TV Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTR TV Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
+		6FBE537D271FFB4200F90B68 /* Play SWI TV Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play SWI TV Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
+		6FBE537E271FFB4200F90B68 /* Play RTS TV Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Play RTS TV Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
+		6FBE537F271FFB5600F90B68 /* Top Shelf Extension.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Top Shelf Extension.xcconfig"; sourceTree = "<group>"; };
 		6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramHeaderView.m; sourceTree = "<group>"; };
 		6FC0C694245FF06D00B44CAE /* ProgramHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgramHeaderView.xib; sourceTree = "<group>"; };
 		6FC1FA862292E3460036CB34 /* NSSet+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+PlaySRG.h"; sourceTree = "<group>"; };
@@ -3337,6 +3367,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FBE5350271FF94A00F90B68 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -3562,8 +3600,9 @@
 		08A913592717388C00774985 /* tvOS */ = {
 			isa = PBXGroup;
 			children = (
-				08A9135A2717388C00774985 /* Screenshots */,
 				08A913602717388C00774985 /* Application */,
+				08A9135A2717388C00774985 /* Screenshots */,
+				6FBE5379271FFB4200F90B68 /* Top Shelf Extension */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -3724,6 +3763,7 @@
 				08A913B32717388E00774985 /* Application.xcconfig */,
 				08A913B42717388E00774985 /* Common.xcconfig */,
 				08A913B52717388E00774985 /* Screenshots.xcconfig */,
+				6FBE537F271FFB5600F90B68 /* Top Shelf Extension.xcconfig */,
 			);
 			path = tvOS;
 			sourceTree = "<group>";
@@ -3871,6 +3911,7 @@
 				08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */,
 				08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */,
 				08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */,
+				6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -4406,6 +4447,7 @@
 			isa = PBXGroup;
 			children = (
 				6F93962220CA5AE1003ECC1B /* NotificationService */,
+				6FBE5373271FFA9B00F90B68 /* TopShelf */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -4571,6 +4613,35 @@
 				6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		6FBE5373271FFA9B00F90B68 /* TopShelf */ = {
+			isa = PBXGroup;
+			children = (
+				6FBE5375271FFA9B00F90B68 /* Sources */,
+				6FBE5374271FFA9B00F90B68 /* TopShelf-Info.plist */,
+			);
+			path = TopShelf;
+			sourceTree = "<group>";
+		};
+		6FBE5375271FFA9B00F90B68 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		6FBE5379271FFB4200F90B68 /* Top Shelf Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6FBE537A271FFB4200F90B68 /* Play RSI TV Top Shelf Extension.xcconfig */,
+				6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */,
+				6FBE537C271FFB4200F90B68 /* Play RTR TV Top Shelf Extension.xcconfig */,
+				6FBE537D271FFB4200F90B68 /* Play SWI TV Top Shelf Extension.xcconfig */,
+				6FBE537E271FFB4200F90B68 /* Play RTS TV Top Shelf Extension.xcconfig */,
+			);
+			path = "Top Shelf Extension";
 			sourceTree = "<group>";
 		};
 		6FDF08C4218B126700B2AF2C /* Model */ = {
@@ -5272,10 +5343,12 @@
 				08C13558256B27AC002F67B8 /* Restore original icons */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
+				6FBE535C271FF94A00F90B68 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				6FBE535A271FF94A00F90B68 /* PBXTargetDependency */,
 			);
 			name = "Play SRF TV";
 			packageProductDependencies = (
@@ -5453,6 +5526,23 @@
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
 			productType = "com.apple.product-type.application";
 		};
+		6FBE5352271FF94A00F90B68 /* Play SRF TV top shelf extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6FBE5363271FF94A00F90B68 /* Build configuration list for PBXNativeTarget "Play SRF TV top shelf extension" */;
+			buildPhases = (
+				6FBE534F271FF94A00F90B68 /* Sources */,
+				6FBE5350271FF94A00F90B68 /* Frameworks */,
+				6FBE5351271FF94A00F90B68 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Play SRF TV top shelf extension";
+			productName = "Play SRF TV top shelf extension";
+			productReference = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -5460,7 +5550,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = "";
-				LastSwiftUpdateCheck = 1200;
+				LastSwiftUpdateCheck = 1310;
 				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
@@ -5641,6 +5731,9 @@
 						CreatedOnToolsVersion = 12.0;
 						ProvisioningStyle = Automatic;
 					};
+					6FBE5352271FF94A00F90B68 = {
+						CreatedOnToolsVersion = 13.1;
+					};
 				};
 			};
 			buildConfigurationList = 08C68D4A1D38D49600BB8AAA /* Build configuration list for PBXProject "PlaySRG" */;
@@ -5698,6 +5791,7 @@
 				08B77AB6240A78F200A3BC3B /* Play RSI screenshots */,
 				08B77AC7240A7E3200A3BC3B /* Play RTR screenshots */,
 				08B77AD6240A7E5000A3BC3B /* Play SWI screenshots */,
+				6FBE5352271FF94A00F90B68 /* Play SRF TV top shelf extension */,
 				08F3865225FA9AD800E1BCF0 /* Play SRF TV screenshots */,
 				08F3867925FA9AE000E1BCF0 /* Play RTS TV screenshots */,
 				08F3868A25FA9AE400E1BCF0 /* Play RSI TV screenshots */,
@@ -6115,6 +6209,13 @@
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
 				08777DB924EC39B7006F2EC7 /* Accessibility.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6FBE5351271FF94A00F90B68 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9638,6 +9739,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		6FBE534F271FF94A00F90B68 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6FBE5378271FFA9C00F90B68 /* ContentProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -9715,6 +9824,11 @@
 			isa = PBXTargetDependency;
 			target = 6F0CFB7D20C94EE5006B2CE4 /* Play SWI notification service extension */;
 			targetProxy = 6F0CFB8420C94EE5006B2CE4 /* PBXContainerItemProxy */;
+		};
+		6FBE535A271FF94A00F90B68 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FBE5352271FF94A00F90B68 /* Play SRF TV top shelf extension */;
+			targetProxy = 6FBE5359271FF94A00F90B68 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -10062,6 +10176,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -11163,6 +11278,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15004,6 +15120,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15032,6 +15149,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15097,6 +15215,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15162,6 +15281,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -16115,6 +16235,365 @@
 			};
 			name = Nightly_AppCenter;
 		};
+		6FBE535D271FF94A00F90B68 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		6FBE535E271FF94A00F90B68 /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = JA876HZNN2;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AppStore;
+		};
+		6FBE535F271FF94A00F90B68 /* Beta_AppCenter */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta_AppCenter;
+		};
+		6FBE5360271FF94A00F90B68 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta;
+		};
+		6FBE5361271FF94A00F90B68 /* Nightly_AppCenter */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = VMGRRW6SG7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Nightly_AppCenter;
+		};
+		6FBE5362271FF94A00F90B68 /* Nightly */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FBE537B271FFB4200F90B68 /* Play SRF TV Top Shelf Extension.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = ABW92QGFZ7;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "$(PROJECT_DIR)/Extensions/TopShelf/TopShelf-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Nightly;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -16452,6 +16931,19 @@
 				0866AE9A26D9763200546BFE /* Beta */,
 				6F331D5724D06C2700C096AB /* Nightly_AppCenter */,
 				0866AE8026D9762500546BFE /* Nightly */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Nightly;
+		};
+		6FBE5363271FF94A00F90B68 /* Build configuration list for PBXNativeTarget "Play SRF TV top shelf extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6FBE535D271FF94A00F90B68 /* Debug */,
+				6FBE535E271FF94A00F90B68 /* AppStore */,
+				6FBE535F271FF94A00F90B68 /* Beta_AppCenter */,
+				6FBE5360271FF94A00F90B68 /* Beta */,
+				6FBE5361271FF94A00F90B68 /* Nightly_AppCenter */,
+				6FBE5362271FF94A00F90B68 /* Nightly */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Nightly;

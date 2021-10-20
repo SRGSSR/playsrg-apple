@@ -1,0 +1,4 @@
+#include "Xcode/Shared/Targets/tvOS/Common.xcconfig"
+
+TARGET__BUNDLE_IDENTIFIER_SUFFIX = .top-shelf-extension
+TARGET__PRODUCT_NAME_SUFFIX = $() top shelf extension
