@@ -2610,6 +2610,7 @@
 		6F0506E6245468EE0053253E /* SplitViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SplitViewController.m; sourceTree = "<group>"; };
 		6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramViewModel.swift; sourceTree = "<group>"; };
 		6F054FC526B98C44007A34F8 /* ProgramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramView.swift; sourceTree = "<group>"; };
+		6F05D432272011410033DB4A /* PlaySRG-TopShelf-ObjectiveC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-TopShelf-ObjectiveC.h"; sourceTree = "<group>"; };
 		6F06E0A21DB7791300220FC6 /* ApplicationSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationSettings.h; sourceTree = "<group>"; };
 		6F06E0A31DB7791300220FC6 /* ApplicationSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettings.m; sourceTree = "<group>"; };
 		6F0850F226256A7700B4E410 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -4169,6 +4170,14 @@
 			path = Xcode;
 			sourceTree = "<group>";
 		};
+		6F05D431272011410033DB4A /* Bridges */ = {
+			isa = PBXGroup;
+			children = (
+				6F05D432272011410033DB4A /* PlaySRG-TopShelf-ObjectiveC.h */,
+			);
+			path = Bridges;
+			sourceTree = "<group>";
+		};
 		6F0A416C1F6FAB33000533E7 /* Calendar */ = {
 			isa = PBXGroup;
 			children = (
@@ -4629,6 +4638,7 @@
 		6FBE5375271FFA9B00F90B68 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6F05D431272011410033DB4A /* Bridges */,
 				6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */,
 			);
 			path = Sources;

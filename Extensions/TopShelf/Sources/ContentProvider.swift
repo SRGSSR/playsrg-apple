@@ -14,12 +14,24 @@ final class ContentProvider: TVTopShelfContentProvider {
     
     private var cancellables = Set<AnyCancellable>()
     
+    private static func mediaOptions(for media: SRGMedia) -> TVTopShelfCarouselItem.MediaOptions {
+        var options = TVTopShelfCarouselItem.MediaOptions()
+        if media.play_areSubtitlesAvailable {
+            options.formUnion(.audioTranscriptionClosedCaptioning)
+        }
+        if media.play_isAudioDescriptionAvailable {
+            options.formUnion(.audioDescription)
+        }
+        return options
+    }
+    
     private static func carouselItem(from media: SRGMedia) -> TVTopShelfCarouselItem {
         let item = TVTopShelfCarouselItem(identifier: media.urn)
         item.contextTitle = NSLocalizedString("Featured", comment: "Context title for items displayed in the tvOS top shelf")
         item.title = media.title
-        item.summary = media.summary
+        item.summary = media.lead ?? media.summary
         item.duration = media.duration / 1000
+        item.creationDate = media.date
         item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
         item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
         return item
