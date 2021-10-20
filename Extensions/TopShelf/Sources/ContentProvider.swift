@@ -74,6 +74,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.setImageURL(media.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
         item.namedAttributes = namedAttributes(from: media)
         item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://media/\(media.urn)")!)
+        item.playAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://play/\(media.urn)")!)
         return item
     }
     

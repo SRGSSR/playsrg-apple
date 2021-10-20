@@ -106,10 +106,21 @@ class SceneDelegate: UIResponder {
         actionFromURL(urlContext.url)
     }
     
+    private func openMedia(withUrn urn: String, play: Bool) {
+        SRGDataProvider.current?.media(withUrn: urn)
+            .receive(on: DispatchQueue.main)
+            .sink { _ in
+            } receiveValue: { media in
+                navigateToMedia(media, play: play)
+            }
+            .store(in: &cancellables)
+    }
+    
     /**
      *  Describes a deep link action (also see CUSTOM_URLS_AND_UNIVERSAL_LINKS.md). The list of supported URLs currently includes:
      *
      *    [scheme]://media/[media_urn]
+     *    [scheme]://play/[media_urn]
      *    [scheme]://show/[show_urn]
      */
     private func actionFromURL(_ url: URL) {
@@ -117,13 +128,11 @@ class SceneDelegate: UIResponder {
         
         if deeplLinkAction == "media" {
             let mediaUrn = url.lastPathComponent
-            SRGDataProvider.current?.media(withUrn: mediaUrn)
-                .receive(on: DispatchQueue.main)
-                .sink { _ in
-                } receiveValue: { media in
-                    navigateToMedia(media)
-                }
-                .store(in: &cancellables)
+            openMedia(withUrn: mediaUrn, play: false)
+        }
+        else if deeplLinkAction == "play" {
+            let mediaUrn = url.lastPathComponent
+            openMedia(withUrn: mediaUrn, play: true)
         }
         else if deeplLinkAction == "show" {
             let showUrn = url.lastPathComponent
