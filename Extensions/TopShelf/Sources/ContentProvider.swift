@@ -12,6 +12,8 @@ final class ContentProvider: TVTopShelfContentProvider {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
+    private static let imageWidth: CGFloat = 1200
+    
     private var cancellables = Set<AnyCancellable>()
     
     private static let vendor: SRGVendor = {
@@ -51,8 +53,12 @@ final class ContentProvider: TVTopShelfContentProvider {
     private static func namedAttributes(from media: SRGMedia) -> [TVTopShelfNamedAttribute] {
         var attributes = [TVTopShelfNamedAttribute]()
         if let showTitle = media.show?.title {
-            attributes.append(TVTopShelfNamedAttribute(name: NSLocalizedString("Show", comment: "Show label displayed in the tvOS top shelf media description"),
-                                                       values: [showTitle]))
+            attributes.append(
+                TVTopShelfNamedAttribute(
+                    name: NSLocalizedString("Show", comment: "Show label displayed in the tvOS top shelf media description"),
+                    values: [showTitle]
+                )
+            )
         }
         return attributes
     }
@@ -64,8 +70,8 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.summary = media.lead ?? media.summary
         item.duration = media.duration / 1000
         item.creationDate = media.date
-        item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
-        item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
+        item.setImageURL(media.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
+        item.setImageURL(media.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
         item.namedAttributes = namedAttributes(from: media)
         item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://media/\(media.urn)")!)
         return item
@@ -86,7 +92,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
         Self.carouselContentPublisher()
             .sink { content in
-                // Can be called from a background thread
+                // Can be called from a background thread according to `loadTopShelfContent(completionHandler:)` documentation.
                 completionHandler(content)
             }
             .store(in: &cancellables)
