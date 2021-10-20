@@ -1927,6 +1927,7 @@
 		6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
+		6FE553CA27200F8B00F506B9 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */; };
 		6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
@@ -3371,6 +3372,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6FE553CA27200F8B00F506B9 /* SRGDataProviderCombine in Frameworks */,
 				6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5539,6 +5541,9 @@
 			dependencies = (
 			);
 			name = "Play SRF TV top shelf extension";
+			packageProductDependencies = (
+				6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */,
+			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */;
 			productType = "com.apple.product-type.app-extension";
@@ -17706,6 +17711,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
+		};
+		6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
+			productName = SRGDataProviderCombine;
 		};
 		6FEC8979261F165600FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
