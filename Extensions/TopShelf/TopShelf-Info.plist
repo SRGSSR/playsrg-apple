@@ -31,5 +31,9 @@
 	<array>
 		<string>arm64</string>
 	</array>
+	<key>AppURLScheme</key>
+	<string>$(URL_SCHEME)</string>
+	<key>AppBusinessUnit</key>
+	<string>$(BU__IDENTIFIER)</string>
 </dict>
 </plist>

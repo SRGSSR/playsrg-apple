@@ -10,6 +10,7 @@ BU__DOMAIN[config=Beta_AppCenter] = srgplayer-rtr.stage.srf.ch
 BU__DOMAIN[config=Nightly] = srgplayer-rtr.test.srf.ch
 BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-rtr.test.srf.ch
 BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
+BU__IDENTIFIER = rtr
 BU__PRODUCT_NAME = Play RTR
 BU__URL_SCHEME = playrtr
 BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.rtr.ch

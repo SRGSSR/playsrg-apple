@@ -9,11 +9,33 @@ import TVServices
 
 final class ContentProvider: TVTopShelfContentProvider {
     static let dataProvider: SRGDataProvider = {
-        // FIXME: Use ApplicationSettingServiceURL (or maybe later; not currently set on tvOS)
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
     private var cancellables = Set<AnyCancellable>()
+    
+    private static let vendor: SRGVendor = {
+        let businessUnit = Bundle.main.infoDictionary?["AppBusinessUnit"] as! String
+        switch businessUnit {
+        case "rsi":
+            return .RSI
+        case "rtr":
+            return .RTR
+        case "rts":
+            return .RTS
+        case "srf":
+            return .SRF
+        case "swi":
+            return .SWI
+        default:
+            assertionFailure("Unsupported business unit")
+            return .SRF
+        }
+    }()
+    
+    private static let urlScheme: String = {
+        return Bundle.main.infoDictionary?["AppURLScheme"] as! String
+    }()
     
     private static func mediaOptions(for media: SRGMedia) -> TVTopShelfCarouselItem.MediaOptions {
         var options = TVTopShelfCarouselItem.MediaOptions()
@@ -45,8 +67,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         item.setImageURL(media.imageURL(for: .width, withValue: 1920, type: .default), for: .screenScale1x)
         item.setImageURL(media.imageURL(for: .width, withValue: 2 * 1920, type: .default), for: .screenScale2x)
         item.namedAttributes = namedAttributes(from: media)
-        // FIXME: Use correct URL scheme associated with the app
-        item.displayAction = TVTopShelfAction(url: URL(string: "playsrf-debug://media/\(media.urn)")!)
+        item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://media/\(media.urn)")!)
         return item
     }
     
@@ -56,8 +77,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     private static func carouselContentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
-        // FIXME: Use business unit associated with the application
-        return dataProvider.tvHeroStageMedias(for: .SRF)
+        return dataProvider.tvLatestMedias(for: vendor)
             .map { Optional(carouselContent(from: $0)) }
             .replaceError(with: nil)
             .eraseToAnyPublisher()
