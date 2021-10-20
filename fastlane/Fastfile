@@ -948,16 +948,21 @@ end
 
 def srg_pilot(app_identifier, platform, changelog)
   login_with_app_store_connect_api_key
-  pilot(
-    app_identifier: app_identifier,
-    app_platform: appstore_platform(platform),
-    changelog: changelog,
-    distribute_external: true,
-    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
-    reject_build_waiting_for_review: true,
-    demo_account_required: false,
-    beta_app_review_info: beta_app_review_info
-  )
+  begin
+    pilot(
+      app_identifier: app_identifier,
+      app_platform: appstore_platform(platform),
+      changelog: changelog,
+      distribute_external: true,
+      groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+      demo_account_required: false,
+      beta_app_review_info: beta_app_review_info
+    )
+  rescue StandardError => e
+    raise unless e.message.include? 'Another build is in review'
+
+    UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
+  end
 end
 
 # Update dSYMs from AppStore to App Center.
