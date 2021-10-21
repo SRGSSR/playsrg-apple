@@ -8,6 +8,7 @@
 
 #import "ApplicationConfiguration.h"
 #import "History.h"
+#import "PlaySRG-Swift.h"
 #import "Reachability.h"
 #import "Recommendation.h"
 
@@ -163,11 +164,7 @@ static Playlist *s_playlist;
 #if TARGET_OS_TV
 - (void)controllerDidEndPlaybackdWithoutTransition:(SRGLetterboxController *)controller
 {
-    UIViewController *topViewController = UIApplication.sharedApplication.delegate.window.rootViewController;
-    while (topViewController.presentedViewController) {
-        topViewController = topViewController.presentedViewController;
-    }
-    
+    UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     if ([topViewController isKindOfClass:SRGLetterboxViewController.class]) {
         [topViewController dismissViewControllerAnimated:YES completion:nil];
     }
