@@ -103,41 +103,30 @@ class SceneDelegate: UIResponder {
         // FIXME: Works as long as only one context is received
         guard let urlContext = urlContexts.first else { return }
         
-        actionFromURL(urlContext.url)
-    }
-    
-    private func openMedia(withUrn urn: String, play: Bool) {
-        SRGDataProvider.current?.media(withUrn: urn)
-            .receive(on: DispatchQueue.main)
-            .sink { _ in
-            } receiveValue: { media in
-                navigateToMedia(media, play: play)
-            }
-            .store(in: &cancellables)
-    }
-    
-    /**
-     *  Describes a deep link action (also see CUSTOM_URLS_AND_UNIVERSAL_LINKS.md). The list of supported URLs currently includes:
-     *
-     *    [scheme]://media/[media_urn]
-     *    [scheme]://show/[show_urn]
-     */
-    private func actionFromURL(_ url: URL) {
-        guard let deeplLinkAction = url.host else { return }
-        
-        if deeplLinkAction == "media" {
-            let mediaUrn = url.lastPathComponent
-            openMedia(withUrn: mediaUrn, play: false)
-        }
-        else if deeplLinkAction == "show" {
-            let showUrn = url.lastPathComponent
-            SRGDataProvider.current?.show(withUrn: showUrn)
+        let action = DeepLinkAction(from: urlContext)
+        switch action.type {
+        case .media:
+            SRGDataProvider.current!.media(withUrn: action.identifier)
+                .receive(on: DispatchQueue.main)
+                .sink { _ in
+                } receiveValue: { media in
+                    navigateToMedia(media)
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.openURL.rawValue,
+                                                                labels: action.analyticsLabels)
+                }
+                .store(in: &cancellables)
+        case .show:
+            SRGDataProvider.current!.show(withUrn: action.identifier)
                 .receive(on: DispatchQueue.main)
                 .sink { _ in
                 } receiveValue: { show in
                     navigateToShow(show)
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.openURL.rawValue,
+                                                                labels: action.analyticsLabels)
                 }
                 .store(in: &cancellables)
+        default:
+            ()
         }
     }
 }
