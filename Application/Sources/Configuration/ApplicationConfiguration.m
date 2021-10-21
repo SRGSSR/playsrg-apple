@@ -102,7 +102,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;
-@property (nonatomic, getter=arePosterImagesEnabled) BOOL posterImagesEnabled;
+@property (nonatomic) BOOL posterImagesEnabled;
 
 @property (nonatomic) NSArray<NSNumber *> *liveHomeSections;
 
@@ -185,6 +185,25 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         || self.continuousPlaybackPlayerViewTransitionDuration != SRGLetterboxContinuousPlaybackDisabled;
 #else
     return self.continuousPlaybackPlayerViewTransitionDuration != SRGLetterboxContinuousPlaybackDisabled;
+#endif
+}
+
+- (BOOL)arePosterImagesEnabled
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingPosterImages()) {
+        case SettingPosterImagesForced:
+            return YES;
+            break;
+        case SettingPosterImagesIgnored:
+            return NO;
+            break;
+        default:
+            return self.posterImagesEnabled;
+            break;
+    }
+#else
+    return self.posterImagesEnabled;
 #endif
 }
 

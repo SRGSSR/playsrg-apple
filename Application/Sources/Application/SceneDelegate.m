@@ -63,7 +63,7 @@ static void *s_kvoContext = &s_kvoContext;
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
-    [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImageWideSupportEnabled options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
 }
 
@@ -73,7 +73,7 @@ static void *s_kvoContext = &s_kvoContext;
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
     [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceURL];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
-    [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImageWideSupportEnabled];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImages];
 #endif
 }
 
@@ -513,7 +513,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImageWideSupportEnabled]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages]) {
             // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the user interface
             self.window.rootViewController = [[TabBarController alloc] init];
         }

@@ -296,11 +296,13 @@
 		</dict>
 		<dict>
 			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
+			<string>PSChildPaneSpecifier</string>
 			<key>Title</key>
-			<string>Poster image wide support</string>
+			<string>Poster images</string>
+			<key>File</key>
+			<string>Root.inApp.posterImages</string>
 			<key>Key</key>
-			<string>PlaySRGSettingPosterImageWideSupportEnabled</string>
+			<string>Button_PosterImagesSettings</string>
 		</dict>
 		<dict>
 			<key>Type</key>

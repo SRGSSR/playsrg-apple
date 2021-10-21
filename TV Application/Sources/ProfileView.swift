@@ -63,7 +63,7 @@ struct ProfileView: View {
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
                 SectionWideSupportItem()
-                PosterImageWideSupportItem()
+                PosterImagesItem()
             }
             #endif
         }
@@ -326,20 +326,31 @@ extension ProfileView {
         }
     }
     
-    struct PosterImageWideSupportItem: View {
-        @AppStorage(PlaySRGSettingPosterImageWideSupportEnabled) var isPosterImageWideSupportEnabled = false
+    struct PosterImagesItem: View {
+        @AppStorage(PlaySRGSettingPosterImages) var settingPosterImages = ""
         
         private func action() {
-            isPosterImageWideSupportEnabled.toggle()
+            // TODO:
+        }
+        
+        private func posterImageDescription(_ posterImages: SettingPosterImages) -> String {
+            switch posterImages {
+            case .forced:
+                return PlaySRGSettingsLocalizedString("Forced", comment: "Poster images setting state")
+            case .ignored:
+                return PlaySRGSettingsLocalizedString("Ignored", comment: "Poster images setting state")
+            default:
+                return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
+            }
         }
         
         var body: some View {
             Button(action: action) {
                 HStack {
-                    Text(PlaySRGSettingsLocalizedString("Poster image wide support", comment: "Poster image wide support setting"))
+                    Text(PlaySRGSettingsLocalizedString("Poster images", comment: "Poster images setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(isPosterImageWideSupportEnabled ? PlaySRGSettingsLocalizedString("On", comment: "Enabled state label on Apple TV") : PlaySRGSettingsLocalizedString("Off", comment: "Disabled state label on Apple TV"))
+                    Text(posterImageDescription(ApplicationSettingPosterImages()))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
