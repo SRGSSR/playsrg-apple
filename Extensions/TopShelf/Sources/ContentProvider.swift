@@ -39,69 +39,32 @@ final class ContentProvider: TVTopShelfContentProvider {
         return Bundle.main.infoDictionary?["AppURLScheme"] as! String
     }()
     
-    private static func summary(for media: SRGMedia) -> String {
-        if let description = media.lead ?? media.summary {
-            return "\(media.title)\n\n\(description)"
-        }
-        else {
-            return media.title
-        }
-    }
-    
-    private static func mediaOptions(for media: SRGMedia) -> TVTopShelfCarouselItem.MediaOptions {
-        var options = TVTopShelfCarouselItem.MediaOptions()
-        if media.play_areSubtitlesAvailable {
-            options.formUnion(.audioTranscriptionClosedCaptioning)
-        }
-        if media.play_isAudioDescriptionAvailable {
-            options.formUnion(.audioDescription)
-        }
-        return options
-    }
-    
-    private static func namedAttributes(from media: SRGMedia) -> [TVTopShelfNamedAttribute] {
-        var attributes = [TVTopShelfNamedAttribute]()
-        if let showTitle = media.show?.title {
-            attributes.append(
-                TVTopShelfNamedAttribute(
-                    name: NSLocalizedString("Show", comment: "Show label displayed in the tvOS top shelf media description"),
-                    values: [showTitle]
-                )
-            )
-        }
-        return attributes
-    }
-    
-    private static func carouselItem(from media: SRGMedia) -> TVTopShelfCarouselItem {
-        // The context and main titles are only displayed when the cinemagraph video is played. We display the title
-        // in the summary
-        let item = TVTopShelfCarouselItem(identifier: media.urn)
-        item.summary = summary(for: media)
-        item.duration = media.duration / 1000
-        item.creationDate = media.date
-        item.setImageURL(media.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
-        item.setImageURL(media.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
-        item.mediaOptions = mediaOptions(for: media)
-        item.namedAttributes = namedAttributes(from: media)
-        item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://media/\(media.urn)")!)
-        item.playAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://play/\(media.urn)")!)
+    private static func item(from show: SRGShow) -> TVTopShelfSectionedItem {
+        let item = TVTopShelfSectionedItem(identifier: show.urn)
+        item.title = show.title
+        item.imageShape = .hdtv
+        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
+        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
+        item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://show/\(show.urn)")!)
         return item
     }
     
-    private static func carouselContent(from medias: [SRGMedia]) -> TVTopShelfCarouselContent {
-        let items = medias.map { carouselItem(from: $0) }
-        return TVTopShelfCarouselContent(style: .details, items: items)
+    private static func content(from shows: [SRGShow]) -> TVTopShelfSectionedContent {
+        let items = shows.map { item(from: $0) }
+        let section = TVTopShelfItemCollection(items: items)
+        section.title = NSLocalizedString("Popular on Play SRG", comment: "Most poular shows on Play SRG, displayed in the tvOS top shelf")
+        return TVTopShelfSectionedContent(sections: [section])
     }
     
-    private static func carouselContentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
-        return dataProvider.tvLatestMedias(for: vendor)
-            .map { Optional(carouselContent(from: $0)) }
+    private static func contentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
+        return dataProvider.mostSearchedShows(for: vendor)
+            .map { Optional(content(from: $0)) }
             .replaceError(with: nil)
             .eraseToAnyPublisher()
     }
     
     override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
-        Self.carouselContentPublisher()
+        Self.contentPublisher()
             .sink { content in
                 // Can be called from a background thread according to `loadTopShelfContent(completionHandler:)` documentation.
                 completionHandler(content)
