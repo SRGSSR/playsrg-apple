@@ -12,7 +12,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
-    private static let imageWidth: CGFloat = 1200
+    private static let imageWidth: CGFloat = 700
     
     private var cancellables = Set<AnyCancellable>()
     
