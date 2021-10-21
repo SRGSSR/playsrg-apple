@@ -57,7 +57,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     private static func contentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
-        return dataProvider.mostSearchedShows(for: vendor)
+        return dataProvider.mostSearchedShows(for: vendor, matching: .TV)
             .map { Optional(content(from: $0)) }
             .replaceError(with: nil)
             .eraseToAnyPublisher()
