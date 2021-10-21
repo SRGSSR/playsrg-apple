@@ -39,6 +39,15 @@ final class ContentProvider: TVTopShelfContentProvider {
         return Bundle.main.infoDictionary?["AppURLScheme"] as! String
     }()
     
+    private static func summary(for media: SRGMedia) -> String {
+        if let description = media.lead ?? media.summary {
+            return "\(media.title)\n\n\(description)"
+        }
+        else {
+            return media.title
+        }
+    }
+    
     private static func mediaOptions(for media: SRGMedia) -> TVTopShelfCarouselItem.MediaOptions {
         var options = TVTopShelfCarouselItem.MediaOptions()
         if media.play_areSubtitlesAvailable {
@@ -64,10 +73,10 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     private static func carouselItem(from media: SRGMedia) -> TVTopShelfCarouselItem {
+        // The context and main titles are only displayed when the cinemagraph video is played. We display the title
+        // in the summary
         let item = TVTopShelfCarouselItem(identifier: media.urn)
-        item.contextTitle = NSLocalizedString("Featured", comment: "Context title for items displayed in the tvOS top shelf")
-        item.title = media.title
-        item.summary = media.lead ?? media.summary
+        item.summary = summary(for: media)
         item.duration = media.duration / 1000
         item.creationDate = media.date
         item.setImageURL(media.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
