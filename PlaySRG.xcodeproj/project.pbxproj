@@ -3907,11 +3907,11 @@
 		08A913B72717388E00774985 /* BUs */ = {
 			isa = PBXGroup;
 			children = (
+				08A913BC2717388E00774985 /* RSI.xcconfig */,
 				08A913B82717388E00774985 /* RTR.xcconfig */,
 				08A913B92717388E00774985 /* RTS.xcconfig */,
 				08A913BA2717388E00774985 /* SRF.xcconfig */,
 				08A913BB2717388E00774985 /* SWI.xcconfig */,
-				08A913BC2717388E00774985 /* RSI.xcconfig */,
 			);
 			path = BUs;
 			sourceTree = "<group>";

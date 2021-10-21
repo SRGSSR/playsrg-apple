@@ -17,7 +17,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     private var cancellables = Set<AnyCancellable>()
     
     private static let vendor: SRGVendor = {
-        let businessUnit = Bundle.main.infoDictionary?["AppBusinessUnit"] as! String
+        let businessUnit = Bundle.main.infoDictionary?["PlaySRGBusinessUnit"] as! String
         switch businessUnit {
         case "rsi":
             return .RSI
@@ -36,8 +36,23 @@ final class ContentProvider: TVTopShelfContentProvider {
     }()
     
     private static let urlScheme: String = {
-        return Bundle.main.infoDictionary?["AppURLScheme"] as! String
+        return Bundle.main.infoDictionary?["PlaySRGURLScheme"] as! String
     }()
+    
+    private static func contentPublisher() -> AnyPublisher<[SRGShow], Error> {
+        let contentRequest = Bundle.main.infoDictionary?["PlaySRGContentRequest"] as! String
+        switch contentRequest {
+        case "all_shows":
+            return dataProvider.tvShows(for: vendor)
+        case "popular_shows":
+            return dataProvider.mostSearchedShows(for: vendor)
+        default:
+            assertionFailure("Unsupported content request")
+            return Just([])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+    }
     
     private static func item(from show: SRGShow) -> TVTopShelfSectionedItem {
         let item = TVTopShelfSectionedItem(identifier: show.urn)
@@ -57,7 +72,7 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     private static func contentPublisher() -> AnyPublisher<TVTopShelfContent?, Never> {
-        return dataProvider.mostSearchedShows(for: vendor, matching: .TV)
+        return contentPublisher()
             .map { Optional(content(from: $0)) }
             .replaceError(with: nil)
             .eraseToAnyPublisher()

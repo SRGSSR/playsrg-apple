@@ -31,9 +31,11 @@
 	<array>
 		<string>arm64</string>
 	</array>
-	<key>AppURLScheme</key>
+	<key>PlaySRGURLScheme</key>
 	<string>$(URL_SCHEME)</string>
-	<key>AppBusinessUnit</key>
+	<key>PlaySRGBusinessUnit</key>
 	<string>$(BU__IDENTIFIER)</string>
+	<key>PlaySRGContentRequest</key>
+	<string>$(BU__TV_TOP_SHELF_CONTENT_REQUEST)</string>
 </dict>
 </plist>

@@ -12,5 +12,6 @@ BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-rsi.test.srf.ch
 BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
 BU__IDENTIFIER = rsi
 BU__PRODUCT_NAME = Play RSI
+BU__TV_TOP_SHELF_CONTENT_REQUEST = popular_shows
 BU__URL_SCHEME = playrsi
 BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.rsi.ch
