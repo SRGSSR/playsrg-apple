@@ -120,7 +120,6 @@ class SceneDelegate: UIResponder {
      *  Describes a deep link action (also see CUSTOM_URLS_AND_UNIVERSAL_LINKS.md). The list of supported URLs currently includes:
      *
      *    [scheme]://media/[media_urn]
-     *    [scheme]://play/[media_urn]
      *    [scheme]://show/[show_urn]
      */
     private func actionFromURL(_ url: URL) {
@@ -129,10 +128,6 @@ class SceneDelegate: UIResponder {
         if deeplLinkAction == "media" {
             let mediaUrn = url.lastPathComponent
             openMedia(withUrn: mediaUrn, play: false)
-        }
-        else if deeplLinkAction == "play" {
-            let mediaUrn = url.lastPathComponent
-            openMedia(withUrn: mediaUrn, play: true)
         }
         else if deeplLinkAction == "show" {
             let showUrn = url.lastPathComponent
