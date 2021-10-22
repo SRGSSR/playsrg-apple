@@ -24,12 +24,11 @@ final class PageViewModel: Identifiable, ObservableObject {
     @Published private(set) var serviceMessage: SRGServiceMessage?
     
     private let trigger = Trigger()
-    private var cancellables = Set<AnyCancellable>()
     
     init(id: Id) {
         self.id = id
         
-        Publishers.Publish(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [weak self] in
+        Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
             return SRGDataProvider.current!.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
@@ -64,13 +63,6 @@ final class PageViewModel: Identifiable, ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
-        
-        ApplicationSignal.wokenUp()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.reload()
-            }
-            .store(in: &cancellables)
     }
     
     func loadMore() {
@@ -88,6 +80,15 @@ final class PageViewModel: Identifiable, ObservableObject {
                 trigger.activate(for: TriggerId.reloadSection(section))
             }
         }
+    }
+    
+    private func reloadSignal() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            trigger.signal(activatedBy: TriggerId.reload),
+            ApplicationSignal.wokenUp()
+        )
+        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .eraseToAnyPublisher()
     }
     
     private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
