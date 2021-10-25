@@ -387,6 +387,11 @@
 		08C6912A1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		08C6912C1D39089700BB8AAA /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		08C6D1FC2727060700C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C68F9A1D38DF8300BB8AAA /* Localizable.strings */; };
+		08C6D1FD2727060E00C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C68FD71D38E04B00BB8AAA /* Localizable.strings */; };
+		08C6D1FE2727061400C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690041D38E08C00BB8AAA /* Localizable.strings */; };
+		08C6D1FF2727061F00C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
+		08C6D2002727062200C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
 		08D5990D26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990E26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990F26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
@@ -6465,6 +6470,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6D1FE2727061400C8BBB2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6472,6 +6478,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6D1FC2727060700C8BBB2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6479,6 +6486,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6D1FD2727060E00C8BBB2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6486,6 +6494,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6D2002727062200C8BBB2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6493,6 +6502,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08C6D1FF2727061F00C8BBB2 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
