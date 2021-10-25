@@ -45,7 +45,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         case "all_shows":
             return dataProvider.tvShows(for: vendor)
         case "popular_shows":
-            return dataProvider.mostSearchedShows(for: vendor)
+            return dataProvider.mostSearchedShows(for: vendor, matching: .TV)
         default:
             assertionFailure("Unsupported content request")
             return Just([])
