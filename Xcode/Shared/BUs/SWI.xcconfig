@@ -13,5 +13,6 @@ BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
 BU__IDENTIFIER = swi
 BU__PRODUCT_NAME = Play SWI
 BU__TV_TOP_SHELF_CONTENT_REQUEST = all_shows
+BU__TV_TOP_SHELF_IMAGE_LAYOUT = hdtv
 BU__URL_SCHEME = playswi
 BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.swissinfo.ch

@@ -12,8 +12,6 @@ final class ContentProvider: TVTopShelfContentProvider {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
-    private static let imageWidth: CGFloat = 700
-    
     private var cancellables = Set<AnyCancellable>()
     
     private static let vendor: SRGVendor = {
@@ -32,6 +30,16 @@ final class ContentProvider: TVTopShelfContentProvider {
         default:
             assertionFailure("Unsupported business unit")
             return .SRF
+        }
+    }()
+    
+    private static let imageLayout: (type: SRGImageType, shape: TVTopShelfSectionedItem.ImageShape, width: CGFloat)  = {
+        let imageLayout = Bundle.main.infoDictionary?["PlaySRGImageLayout"] as! String
+        switch imageLayout {
+        case "poster":
+            return (.showPoster, .poster, 300)
+        default:
+            return (.default, .hdtv, 840)
         }
     }()
     
@@ -57,9 +65,9 @@ final class ContentProvider: TVTopShelfContentProvider {
     private static func item(from show: SRGShow) -> TVTopShelfSectionedItem {
         let item = TVTopShelfSectionedItem(identifier: show.urn)
         item.title = show.title
-        item.imageShape = .hdtv
-        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
-        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
+        item.imageShape = Self.imageLayout.shape
+        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale1x)
+        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale2x)
         item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://show/\(show.urn)")!)
         return item
     }

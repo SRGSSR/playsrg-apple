@@ -37,5 +37,7 @@
 	<string>$(BU__IDENTIFIER)</string>
 	<key>PlaySRGContentRequest</key>
 	<string>$(BU__TV_TOP_SHELF_CONTENT_REQUEST)</string>
+	<key>PlaySRGImageLayout</key>
+	<string>$(BU__TV_TOP_SHELF_IMAGE_LAYOUT)</string>
 </dict>
 </plist>
