@@ -32,7 +32,7 @@
 		<string>arm64</string>
 	</array>
 	<key>PlaySRGURLScheme</key>
-	<string>$(URL_SCHEME)</string>
+	<string>$(COMMON__URL_SCHEME)</string>
 	<key>PlaySRGBusinessUnit</key>
 	<string>$(BU__IDENTIFIER)</string>
 	<key>PlaySRGContentRequest</key>

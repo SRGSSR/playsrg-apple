@@ -10393,7 +10393,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)-nightly";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly;
@@ -11504,7 +11503,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)-beta";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta;
@@ -13217,7 +13215,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)-debug";
 			};
 			name = Debug;
 		};
@@ -13277,7 +13274,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = AppStore;
@@ -13546,7 +13542,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)-beta";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Beta_AppCenter;
@@ -13716,7 +13711,6 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = "";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
-				URL_SCHEME = "$(BU__URL_SCHEME)-nightly";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Nightly_AppCenter;
