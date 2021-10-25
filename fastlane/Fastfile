@@ -969,23 +969,15 @@ end
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
+  min_version = options ? options[:min_version] : nil
+  version = options ? options[:version] : nil
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
-  try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
-end
+  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+  upload_appcenter_dsyms(appcenter_appname)
 
-def try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
-  min_version = options ? options[:min_version] : nil
-  version = options ? options[:version] : nil
-  begin
-    download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
-    upload_appcenter_dsyms(appcenter_appname)
-    lane_context.delete(SharedValues::DSYM_PATHS)
-  rescue StandardError => e
-    UI.important('Update dSYMs failed (' + platform + ' / ' + appcenter_appname + '). ⚠️')
-    UI.error(e.message)
-  end
+  lane_context.delete(SharedValues::DSYM_PATHS)
 end
 
 def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
@@ -993,9 +985,7 @@ def download_appstore_dsyms(app_identifier, platform, min_version, version, outp
   platform ||= 'iOS'
   version ||= 'latest'
 
-  # download_dsyms does not support api key token yet.
-  # See https://github.com/fastlane/fastlane/discussions/17485
-  # login_with_app_store_connect_api_key
+  login_with_app_store_connect_api_key
   download_dsyms(
     app_identifier: app_identifier,
     platform: appstore_platform(platform),
