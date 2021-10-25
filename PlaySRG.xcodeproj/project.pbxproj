@@ -1361,10 +1361,10 @@
 		6F9BF5EF2720293600945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6F9BF5F12720293600945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5EC2720293600945973 /* SRGDataProviderCombine */; };
 		6F9BF5F22720293600945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
-		6F9BF5FD2720299300945973 /* Play RTS TV top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS TV top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF601272029A400945973 /* Play RSI TV top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI TV top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF605272029AC00945973 /* Play RTR TV top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR TV top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF609272029B400945973 /* Play SWI TV top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI TV top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
@@ -2384,7 +2384,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF5FD2720299300945973 /* Play RTS TV top shelf extension.appex in Embed App Extensions */,
+				6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2395,7 +2395,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF601272029A400945973 /* Play RSI TV top shelf extension.appex in Embed App Extensions */,
+				6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2406,7 +2406,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF605272029AC00945973 /* Play RTR TV top shelf extension.appex in Embed App Extensions */,
+				6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2417,7 +2417,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF609272029B400945973 /* Play SWI TV top shelf extension.appex in Embed App Extensions */,
+				6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2921,10 +2921,10 @@
 		6F982B92244F1E1200C0386E /* TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		6F9897CB2412582400B390A2 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
 		6F9897CC2412582400B390A2 /* Layout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Layout.m; sourceTree = "<group>"; };
-		6F9BF5C52720292B00945973 /* Play RTS TV top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTS TV top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F9BF5D72720293100945973 /* Play RSI TV top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RSI TV top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F9BF5E92720293400945973 /* Play RTR TV top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTR TV top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F9BF5FB2720293600945973 /* Play SWI TV top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play SWI TV top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTS top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RSI top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play RTR top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Play SWI top shelf extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F9D2741203AD99C00FDE899 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
 		6F9D2742203AD99C00FDE899 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
 		6F9DDCCA25B1A07E001D5688 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -4058,10 +4058,10 @@
 				08F3869925FA9AE400E1BCF0 /* Play RSI TV screenshots.xctest */,
 				08F386AA25FA9AE800E1BCF0 /* Play RTR TV screenshots.xctest */,
 				6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */,
-				6F9BF5C52720292B00945973 /* Play RTS TV top shelf extension.appex */,
-				6F9BF5D72720293100945973 /* Play RSI TV top shelf extension.appex */,
-				6F9BF5E92720293400945973 /* Play RTR TV top shelf extension.appex */,
-				6F9BF5FB2720293600945973 /* Play SWI TV top shelf extension.appex */,
+				6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */,
+				6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */,
+				6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */,
+				6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -5710,7 +5710,7 @@
 				6F9BF5B62720292B00945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
-			productReference = 6F9BF5C52720292B00945973 /* Play RTS TV top shelf extension.appex */;
+			productReference = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		6F9BF5C72720293100945973 /* Play RSI TV top shelf extension */ = {
@@ -5730,7 +5730,7 @@
 				6F9BF5C82720293100945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
-			productReference = 6F9BF5D72720293100945973 /* Play RSI TV top shelf extension.appex */;
+			productReference = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		6F9BF5D92720293400945973 /* Play RTR TV top shelf extension */ = {
@@ -5750,7 +5750,7 @@
 				6F9BF5DA2720293400945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
-			productReference = 6F9BF5E92720293400945973 /* Play RTR TV top shelf extension.appex */;
+			productReference = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		6F9BF5EB2720293600945973 /* Play SWI TV top shelf extension */ = {
@@ -5770,7 +5770,7 @@
 				6F9BF5EC2720293600945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
-			productReference = 6F9BF5FB2720293600945973 /* Play SWI TV top shelf extension.appex */;
+			productReference = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
 		6FBE5352271FF94A00F90B68 /* Play SRF TV top shelf extension */ = {
@@ -16599,7 +16599,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -16663,7 +16662,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -16729,7 +16727,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -16795,7 +16792,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -16861,7 +16857,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -16927,7 +16922,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -16958,7 +16952,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -17022,7 +17015,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17088,7 +17080,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17154,7 +17145,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17220,7 +17210,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17286,7 +17275,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17317,7 +17305,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -17381,7 +17368,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17447,7 +17433,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17513,7 +17498,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17579,7 +17563,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17645,7 +17628,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17676,7 +17658,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -17740,7 +17721,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17806,7 +17786,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17872,7 +17851,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -17938,7 +17916,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -18004,7 +17981,6 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_EMIT_LOC_STRINGS = YES;
