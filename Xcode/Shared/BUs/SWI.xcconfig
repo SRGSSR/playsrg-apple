@@ -10,6 +10,8 @@ BU__DOMAIN[config=Beta_AppCenter] = srgplayer-swi.stage.srf.ch
 BU__DOMAIN[config=Nightly] = srgplayer-swi.test.srf.ch
 BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-swi.test.srf.ch
 BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
+BU__IDENTIFIER = swi
 BU__PRODUCT_NAME = Play SWI
+BU__TV_TOP_SHELF_CONTENT_REQUEST = all_shows
 BU__URL_SCHEME = playswi
 BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.swissinfo.ch

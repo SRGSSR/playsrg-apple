@@ -397,6 +397,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Wiedergabeverlauf, Favoriten und Inhalte, die für später gespeichert wurden, werden von diesem Apple TV gelöscht.";
 
+/* Most poular shows on Play SRG, displayed in the tvOS top shelf */
+"Popular on Play SRG" = "Popular on Play SRG";
+
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Zurück";
 

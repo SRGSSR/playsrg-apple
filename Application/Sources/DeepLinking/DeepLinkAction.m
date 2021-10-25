@@ -7,7 +7,10 @@
 #import "DeepLinkAction.h"
 
 #import "AnalyticsConstants.h"
+
+#if TARGET_OS_IOS
 #import "DeepLinkService.h"
+#endif
 
 @import libextobjc;
 
@@ -159,6 +162,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                           analyticsLabels:labels
                                queryItems:URLComponents.queryItems];
     }
+#if TARGET_OS_IOS
     else if (canConvertURL) {
         NSURL *convertedURL = [DeepLinkService.currentService customURLFromWebURL:URL];
         if (convertedURL) {
@@ -168,6 +172,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
     }
+#endif
     else {
         return [self unsupportedActionWithOptions:options source:source];
     }
