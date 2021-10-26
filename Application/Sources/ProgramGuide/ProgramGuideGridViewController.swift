@@ -117,7 +117,7 @@ final class ProgramGuideGridViewController: UIViewController {
     }
     
     private func switchToDay(_ day: SRGDay) {
-        
+        dailyModel.day = day
     }
     
     #if os(iOS)
