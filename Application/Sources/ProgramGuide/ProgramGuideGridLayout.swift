@@ -4,14 +4,19 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGDataProviderModel
 import UIKit
 
 final class ProgramGuideGridLayout: UICollectionViewLayout {
+    private struct Data {
+        let layoutAttrs: [UICollectionViewLayoutAttributes]
+        let dateInterval: DateInterval
+    }
+    
     static let scale: CGFloat = constant(iOS: 328, tvOS: 368) / (60 * 60)
     static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     
-    var layoutAttrs: [UICollectionViewLayoutAttributes] = []
-    var dateInterval: DateInterval?
+    private var data: Data?
     
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
         return snapshot.sectionIdentifiers.flatMap { channel in
@@ -30,24 +35,10 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return DateInterval(start: startDate, end: endDate)
     }
     
-    override func prepare() {
-        super.prepare()
-        
-        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<SRGChannel, SRGProgram> else {
-            dateInterval = nil
-            layoutAttrs = []
-            return
-        }
-        let snapshot = dataSource.snapshot()
-        
-        dateInterval = Self.dateInterval(from: snapshot)
-        guard let dateInterval = dateInterval else {
-            layoutAttrs = []
-            return
-        }
-        
-        layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
-            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item in
+    private static func data(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Data? {
+        guard let dateInterval = Self.dateInterval(from: snapshot) else { return nil }
+        let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
+            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
                 let attr = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
                 attr.frame = CGRect(
                     x: program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
@@ -58,21 +49,33 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 return attr
             }
         }
+        return Data(layoutAttrs: layoutAttrs, dateInterval: dateInterval)
+    }
+    
+    override func prepare() {
+        super.prepare()
+        
+        if let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<SRGChannel, SRGProgram> {
+            data = Self.data(from: dataSource.snapshot())
+        }
+        else {
+            data = nil
+        }
     }
     
     override var collectionViewContentSize: CGSize {
-        guard let collectionView = collectionView, let dateInterval = dateInterval else { return .zero }
+        guard let collectionView = collectionView, let data = data else { return .zero }
         return CGSize(
-            width: dateInterval.duration * Self.scale,
+            width: data.dateInterval.duration * Self.scale,
             height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight
         )
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return layoutAttrs.filter { $0.frame.intersects(rect) }
+        return data?.layoutAttrs.filter { $0.frame.intersects(rect) }
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return layoutAttrs.first { $0.indexPath == indexPath }
+        return data?.layoutAttrs.first { $0.indexPath == indexPath }
     }
 }
