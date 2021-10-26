@@ -13,8 +13,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let dateInterval: DateInterval
     }
     
-    static let scale: CGFloat = constant(iOS: 328, tvOS: 368) / (60 * 60)
-    static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
+    private static let scale: CGFloat = constant(iOS: 328, tvOS: 368) / (60 * 60)
+    private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     
     private var data: Data?
     
