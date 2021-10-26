@@ -18,6 +18,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     private weak var headerView: HostView<ProgramGuideHeaderView>!
     private weak var collectionView: UICollectionView!
+    private weak var emptyView: HostView<EmptyView>!
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>()
@@ -72,6 +73,10 @@ final class ProgramGuideGridViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
+        let emptyView = HostView<EmptyView>(frame: .zero)
+        collectionView.backgroundView = emptyView
+        self.emptyView = emptyView
+        
         self.view = view
     }
     
@@ -110,6 +115,15 @@ final class ProgramGuideGridViewController: UIViewController {
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
         guard let dataSource = dataSource else { return }
+        
+        switch state {
+        case .loading:
+            emptyView.content = EmptyView(state: .loading)
+        case let .failed(error: error):
+            emptyView.content = EmptyView(state: .failed(error: error))
+        case .loaded:
+            emptyView.content = nil
+        }
         
         DispatchQueue.global(qos: .userInteractive).async {
             dataSource.apply(Self.snapshot(from: state), animatingDifferences: true)

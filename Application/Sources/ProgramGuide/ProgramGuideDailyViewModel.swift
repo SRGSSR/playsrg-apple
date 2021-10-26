@@ -28,6 +28,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
                 .map { programCompositions in
                     return State.loaded(programCompositions)
                 }
+                .prepend(State.loading)
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
