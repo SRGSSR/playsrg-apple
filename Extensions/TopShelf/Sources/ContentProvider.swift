@@ -18,7 +18,7 @@ final class ContentProvider: TVTopShelfContentProvider {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellable: AnyCancellable?
     
     private static let vendor: SRGVendor = {
         let businessUnit = Bundle.main.infoDictionary?["PlaySRGBusinessUnit"] as! String
@@ -93,11 +93,10 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
-        Self.contentPublisher()
+        cancellable = Self.contentPublisher()
             .sink { content in
                 // Can be called from a background thread according to `loadTopShelfContent(completionHandler:)` documentation.
                 completionHandler(content)
             }
-            .store(in: &cancellables)
     }
 }
