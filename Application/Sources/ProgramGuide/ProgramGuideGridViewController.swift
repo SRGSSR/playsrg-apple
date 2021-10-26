@@ -163,5 +163,17 @@ extension ProgramGuideGridViewController: ProgramGuideHeaderViewActions {
 }
 
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
-    
+    #if os(iOS)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // Deselection is managed here rather than in view appearance methods, as those are not called with the
+        // modal presentation we use.
+        let snapshot = dataSource.snapshot()
+        let channel = snapshot.sectionIdentifiers[indexPath.section]
+        let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
+        let programViewController = ProgramView.viewController(for: program, channel: channel)
+        present(programViewController, animated: true) {
+            self.deselectItems(in: collectionView, animated: true)
+        }
+    }
+    #endif
 }
