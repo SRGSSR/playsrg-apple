@@ -13,7 +13,7 @@ final class ProgramGuideListViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
-    private weak var headerView: HostView<ProgramGuideHeaderView>!
+    private weak var headerView: HostView<ProgramGuideListHeaderView>!
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -35,7 +35,7 @@ final class ProgramGuideListViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let headerView = HostView<ProgramGuideHeaderView>(frame: .zero)
+        let headerView = HostView<ProgramGuideListHeaderView>(frame: .zero)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         self.headerView = headerView
@@ -53,7 +53,7 @@ final class ProgramGuideListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerView.content = ProgramGuideHeaderView(model: model)
+        headerView.content = ProgramGuideListHeaderView(model: model)
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -116,7 +116,7 @@ extension ProgramGuideListViewController: SRGAnalyticsViewTracking {
     }
 }
 
-extension ProgramGuideListViewController: ProgramGuideHeaderViewActions {
+extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
     func openCalendar() {
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
         present(calendarViewController, animated: true)

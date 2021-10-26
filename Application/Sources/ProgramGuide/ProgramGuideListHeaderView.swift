@@ -8,22 +8,20 @@ import SwiftUI
 
 // MARK: Contract
 
-@objc protocol ProgramGuideHeaderViewActions: AnyObject {
+@objc protocol ProgramGuideListHeaderViewActions: AnyObject {
     func openCalendar()
 }
 
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ProgramGuideHeaderView: View {
+struct ProgramGuideListHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
     var body: some View {
         VStack(spacing: 20) {
             DaySelector(model: model)
-            #if os(iOS)
             ChannelSelector(model: model)
-            #endif
             NavigationBar(model: model)
         }
         .padding(10)
@@ -40,7 +38,7 @@ struct ProgramGuideHeaderView: View {
                     model.switchToYesterday()
                 }
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                    firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
+                    firstResponder.sendAction(#selector(ProgramGuideListHeaderViewActions.openCalendar))
                 }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
@@ -50,7 +48,6 @@ struct ProgramGuideHeaderView: View {
         }
     }
     
-    #if os(iOS)
     /// Behavior: h-exp, v-hug
     private struct ChannelSelector: View {
         @ObservedObject var model: ProgramGuideViewModel
@@ -76,7 +73,6 @@ struct ProgramGuideHeaderView: View {
             .frame(height: 50)
         }
     }
-    #endif
     
     /// Behavior: h-exp, v-hug
     private struct NavigationBar: View {
@@ -99,9 +95,9 @@ struct ProgramGuideHeaderView: View {
     }
 }
 
-struct ProgramGuideHeaderView_Previews: PreviewProvider {
+struct ProgramGuideListHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramGuideHeaderView(model: ProgramGuideViewModel(date: Date()))
+        ProgramGuideListHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 375, height: 180))
     }
 }

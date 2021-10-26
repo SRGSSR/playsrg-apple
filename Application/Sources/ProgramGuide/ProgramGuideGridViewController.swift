@@ -16,7 +16,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<SRGChannel, SRGProgram>!
     
-    private weak var headerView: HostView<ProgramGuideHeaderView>!
+    private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
@@ -46,14 +46,14 @@ final class ProgramGuideGridViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let headerView = HostView<ProgramGuideHeaderView>(frame: .zero)
+        let headerView = HostView<ProgramGuideGridHeaderView>(frame: .zero)
         headerView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerView)
         self.headerView = headerView
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerView.heightAnchor.constraint(equalToConstant: 120),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -83,7 +83,7 @@ final class ProgramGuideGridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        headerView.content = ProgramGuideHeaderView(model: model)
+        headerView.content = ProgramGuideGridHeaderView(model: model)
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
             cell.content = ProgramCell(program: program)
@@ -153,7 +153,7 @@ extension ProgramGuideGridViewController: SRGAnalyticsViewTracking {
     }
 }
 
-extension ProgramGuideGridViewController: ProgramGuideHeaderViewActions {
+extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
     func openCalendar() {
     #if os(iOS)
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
