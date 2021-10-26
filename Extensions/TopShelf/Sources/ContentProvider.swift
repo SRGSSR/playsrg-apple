@@ -8,6 +8,12 @@ import SRGDataProviderCombine
 import TVServices
 
 final class ContentProvider: TVTopShelfContentProvider {
+    private struct ImageLayout {
+        let type: SRGImageType
+        let shape: TVTopShelfSectionedItem.ImageShape
+        let width: CGFloat
+    }
+    
     static let dataProvider: SRGDataProvider = {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
@@ -33,13 +39,13 @@ final class ContentProvider: TVTopShelfContentProvider {
         }
     }()
     
-    private static let imageLayout: (type: SRGImageType, shape: TVTopShelfSectionedItem.ImageShape, width: CGFloat)  = {
+    private static let imageLayout: ImageLayout = {
         let imageLayout = Bundle.main.infoDictionary?["PlaySRGImageLayout"] as! String
         switch imageLayout {
         case "poster":
-            return (.showPoster, .poster, 300)
+            return ImageLayout(type: .showPoster, shape: .poster, width: 300)
         default:
-            return (.default, .hdtv, 840)
+            return ImageLayout(type: .default, shape: .hdtv, width: 840)
         }
     }()
     
