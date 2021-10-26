@@ -13,5 +13,6 @@ BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
 BU__IDENTIFIER = rts
 BU__PRODUCT_NAME = Play RTS
 BU__TV_TOP_SHELF_CONTENT_REQUEST = popular_shows
+BU__TV_TOP_SHELF_IMAGE_LAYOUT = hdtv
 BU__URL_SCHEME = playrts
 BU__WEB_CREDENTIALS_DOMAIN = webcredentials:*.rts.ch

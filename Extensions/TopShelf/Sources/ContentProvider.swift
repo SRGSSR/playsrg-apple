@@ -8,13 +8,17 @@ import SRGDataProviderCombine
 import TVServices
 
 final class ContentProvider: TVTopShelfContentProvider {
+    private struct ImageLayout {
+        let type: SRGImageType
+        let shape: TVTopShelfSectionedItem.ImageShape
+        let width: CGFloat
+    }
+    
     static let dataProvider: SRGDataProvider = {
         return SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
     }()
     
-    private static let imageWidth: CGFloat = 700
-    
-    private var cancellables = Set<AnyCancellable>()
+    private var cancellable: AnyCancellable?
     
     private static let vendor: SRGVendor = {
         let businessUnit = Bundle.main.infoDictionary?["PlaySRGBusinessUnit"] as! String
@@ -32,6 +36,16 @@ final class ContentProvider: TVTopShelfContentProvider {
         default:
             assertionFailure("Unsupported business unit")
             return .SRF
+        }
+    }()
+    
+    private static let imageLayout: ImageLayout = {
+        let imageLayout = Bundle.main.infoDictionary?["PlaySRGImageLayout"] as! String
+        switch imageLayout {
+        case "poster":
+            return ImageLayout(type: .showPoster, shape: .poster, width: 300)
+        default:
+            return ImageLayout(type: .default, shape: .hdtv, width: 840)
         }
     }()
     
@@ -57,9 +71,9 @@ final class ContentProvider: TVTopShelfContentProvider {
     private static func item(from show: SRGShow) -> TVTopShelfSectionedItem {
         let item = TVTopShelfSectionedItem(identifier: show.urn)
         item.title = show.title
-        item.imageShape = .hdtv
-        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageWidth, type: .default), for: .screenScale1x)
-        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageWidth, type: .default), for: .screenScale2x)
+        item.imageShape = Self.imageLayout.shape
+        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale1x)
+        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale2x)
         item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://show/\(show.urn)")!)
         return item
     }
@@ -79,11 +93,10 @@ final class ContentProvider: TVTopShelfContentProvider {
     }
     
     override func loadTopShelfContent(completionHandler: @escaping (TVTopShelfContent?) -> Void) {
-        Self.contentPublisher()
+        cancellable = Self.contentPublisher()
             .sink { content in
                 // Can be called from a background thread according to `loadTopShelfContent(completionHandler:)` documentation.
                 completionHandler(content)
             }
-            .store(in: &cancellables)
     }
 }
