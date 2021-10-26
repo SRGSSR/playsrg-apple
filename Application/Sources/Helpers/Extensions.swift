@@ -117,7 +117,7 @@ extension Array {
 
 extension Collection {
     /**
-     *  Apply a transform to each item in a collection, providing an auto-increased index with each processed item.
+     *  Transform each item in a collection, providing an auto-increased index with each processed item.
      */
     func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
         var index = 0
@@ -144,6 +144,20 @@ extension Collection {
             }
         }
         return dictionary.sorted { $0.key < $1.key }
+    }
+}
+
+extension Sequence {
+    /**
+     *  Transform each items in a collection into a sequence and flattens the output, providing an auto-increased index with each processed item.
+     */
+    func enumeratedFlatMap<S>(_ transform: (Self.Element, Int) throws -> S) rethrows -> [S.Element] where S: Sequence {
+        var index = 0
+        return try flatMap { element -> S in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
     }
 }
 

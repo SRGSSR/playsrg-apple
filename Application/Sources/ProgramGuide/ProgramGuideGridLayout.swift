@@ -10,30 +10,49 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     static let scale: CGFloat = constant(iOS: 328, tvOS: 368) / (60 * 60)
     static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     
-    static let itemDuration: CGFloat = 3600
-    
     var layoutAttrs: [UICollectionViewLayoutAttributes] = []
+    var dateInterval: DateInterval?
     
-    static func maxNumberOfItemsForSections(in collectionView: UICollectionView) -> Int? {
-        let numberOfItemsInSections = (0..<collectionView.numberOfSections).map { section in
-            collectionView.numberOfItems(inSection: section)
-        }
-        return numberOfItemsInSections.max()
+    private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
+        return snapshot.sectionIdentifiers.flatMap { channel in
+            return snapshot.itemIdentifiers(inSection: channel).map(\.startDate)
+        }.min()
+    }
+    
+    private static func endDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
+        return snapshot.sectionIdentifiers.flatMap { channel in
+            return snapshot.itemIdentifiers(inSection: channel).map(\.endDate)
+        }.max()
+    }
+    
+    private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
+        guard let startDate = startDate(from: snapshot), let endDate = endDate(from: snapshot) else { return nil }
+        return DateInterval(start: startDate, end: endDate)
     }
     
     override func prepare() {
         super.prepare()
         
-        guard let collectionView = collectionView else { return }
+        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<SRGChannel, SRGProgram> else {
+            dateInterval = nil
+            layoutAttrs = []
+            return
+        }
+        let snapshot = dataSource.snapshot()
         
-        layoutAttrs = (0..<collectionView.numberOfSections).flatMap { section in
-            return (0..<collectionView.numberOfItems(inSection: section)).map { item in
-                let itemWidth = Self.scale * Self.itemDuration
+        dateInterval = Self.dateInterval(from: snapshot)
+        guard let dateInterval = dateInterval else {
+            layoutAttrs = []
+            return
+        }
+        
+        layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
+            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item in
                 let attr = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
                 attr.frame = CGRect(
-                    x: CGFloat(item) * itemWidth,
+                    x: program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
                     y: CGFloat(section) * Self.sectionHeight,
-                    width: itemWidth,
+                    width: program.endDate.timeIntervalSince(program.startDate) * Self.scale,
                     height: Self.sectionHeight
                 )
                 return attr
@@ -42,11 +61,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override var collectionViewContentSize: CGSize {
-        guard let collectionView = collectionView,
-              let maxNumberOfItems = Self.maxNumberOfItemsForSections(in: collectionView) else { return .zero }
-        
+        guard let collectionView = collectionView, let dateInterval = dateInterval else { return .zero }
         return CGSize(
-            width: CGFloat(maxNumberOfItems) * Self.scale * Self.itemDuration,
+            width: dateInterval.duration * Self.scale,
             height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight
         )
     }
