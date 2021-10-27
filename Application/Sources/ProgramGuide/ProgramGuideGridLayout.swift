@@ -19,6 +19,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static let scale: CGFloat = constant(iOS: 650, tvOS: 900) / (60 * 60)
     private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 160)
     private static let channelHeaderWidth: CGFloat = constant(iOS: 130, tvOS: 220)
+    private static let trailingMargin: CGFloat = 10
     
     private var layoutData: LayoutData?
     
@@ -85,7 +86,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView, let layoutData = layoutData else { return .zero }
         return CGSize(
-            width: layoutData.dateInterval.duration * Self.scale + Self.channelHeaderWidth + Self.horizontalSpacing,
+            width: layoutData.dateInterval.duration * Self.scale + Self.channelHeaderWidth + Self.horizontalSpacing + Self.trailingMargin,
             height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
         )
     }
