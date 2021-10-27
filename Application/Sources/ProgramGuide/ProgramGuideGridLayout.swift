@@ -8,7 +8,7 @@ import SRGDataProviderModel
 import UIKit
 
 final class ProgramGuideGridLayout: UICollectionViewLayout {
-    private struct Data {
+    private struct LayoutData {
         let layoutAttrs: [UICollectionViewLayoutAttributes]
         let supplementaryLayoutAttrs: [UICollectionViewLayoutAttributes]
         let dateInterval: DateInterval
@@ -20,7 +20,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     private static let channelHeaderWidth: CGFloat = 100
     
-    private var data: Data?
+    private var layoutData: LayoutData?
     
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
         return snapshot.sectionIdentifiers.flatMap { channel in
@@ -39,7 +39,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return DateInterval(start: startDate, end: endDate)
     }
     
-    private static func data(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> Data? {
+    private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> LayoutData? {
         guard let dateInterval = Self.dateInterval(from: snapshot) else { return nil }
         let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
             return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
@@ -64,17 +64,17 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             attrs.zIndex = 1
             return attrs
         }
-        return Data(layoutAttrs: layoutAttrs, supplementaryLayoutAttrs: supplementaryLayoutAttrs, dateInterval: dateInterval)
+        return LayoutData(layoutAttrs: layoutAttrs, supplementaryLayoutAttrs: supplementaryLayoutAttrs, dateInterval: dateInterval)
     }
     
     override func prepare() {
         super.prepare()
         
         if let collectionView = collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<SRGChannel, SRGProgram> {
-            data = Self.data(from: dataSource.snapshot(), in: collectionView)
+            layoutData = Self.layoutData(from: dataSource.snapshot(), in: collectionView)
         }
         else {
-            data = nil
+            layoutData = nil
         }
     }
     
@@ -83,25 +83,25 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override var collectionViewContentSize: CGSize {
-        guard let collectionView = collectionView, let data = data else { return .zero }
+        guard let collectionView = collectionView, let layoutData = layoutData else { return .zero }
         return CGSize(
-            width: data.dateInterval.duration * Self.scale + Self.channelHeaderWidth,
+            width: layoutData.dateInterval.duration * Self.scale + Self.channelHeaderWidth,
             height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
         )
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        guard let data = data else { return nil }
-        let layoutAttrs = data.layoutAttrs.filter { $0.frame.intersects(rect) }
-        let supplementaryLayoutAttrs = data.supplementaryLayoutAttrs.filter { $0.frame.intersects(rect) }
+        guard let layoutData = layoutData else { return nil }
+        let layoutAttrs = layoutData.layoutAttrs.filter { $0.frame.intersects(rect) }
+        let supplementaryLayoutAttrs = layoutData.supplementaryLayoutAttrs.filter { $0.frame.intersects(rect) }
         return layoutAttrs + supplementaryLayoutAttrs
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return data?.layoutAttrs.first { $0.indexPath == indexPath }
+        return layoutData?.layoutAttrs.first { $0.indexPath == indexPath }
     }
     
     override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        return data?.supplementaryLayoutAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
+        return layoutData?.supplementaryLayoutAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
 }
