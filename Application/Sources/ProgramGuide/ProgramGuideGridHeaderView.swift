@@ -18,13 +18,35 @@ import SwiftUI
 struct ProgramGuideGridHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
+    #if os(iOS)
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    #endif
+    
+    private var direction: StackDirection {
+    #if os(iOS)
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+    #else
+        return .horizontal
+    #endif
+    }
+    
     var body: some View {
-        HStack(spacing: 20) {
-            NavigationBar(model: model)
-            DaySelector(model: model)
+        if direction == .vertical {
+            VStack(spacing: 20) {
+                DaySelector(model: model)
+                    .frame(height: 40)
+                NavigationBar(model: model)
+            }
+            .padding(10)
         }
-        .frame(height: 40)
-        .padding(10)
+        else {
+            HStack(spacing: 20) {
+                NavigationBar(model: model)
+                DaySelector(model: model)
+                    .frame(height: 40)
+            }
+            .padding(10)
+        }
     }
     
     /// Behavior: h-exp, v-exp
@@ -34,14 +56,14 @@ struct ProgramGuideGridHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
+                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
+                    model.switchToYesterday()
+                }
                 #if os(iOS)
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideGridHeaderViewActions.openCalendar))
                 }
                 #endif
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                    model.switchToYesterday()
-                }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
                 }
@@ -73,7 +95,17 @@ struct ProgramGuideGridHeaderView: View {
 
 struct ProgramGuideGridHeaderView_Previews: PreviewProvider {
     static var previews: some View {
+        #if os(tvOS)
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
-            .previewLayout(.fixed(width: 1024, height: 120))
+            .previewLayout(.sizeThatFits)
+        #else
+        ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
+            .previewLayout(.fixed(width: 1000, height: 120))
+            .environment(\.horizontalSizeClass, .regular)
+        
+        ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
+            .previewLayout(.fixed(width: 375, height: 240))
+            .environment(\.horizontalSizeClass, .compact)
+        #endif
     }
 }
