@@ -12,4 +12,8 @@ extension UserDefaults {
     @objc dynamic var PlaySRGSettingSelectedLivestreamURNForChannels: [String: Any]? {
         return dictionary(forKey: PlaySRG.PlaySRGSettingSelectedLivestreamURNForChannels)
     }
+    
+    @objc dynamic var PlaySRGSettingPosterImages: String? {
+        return string(forKey: PlaySRG.PlaySRGSettingPosterImages)
+    }
 }

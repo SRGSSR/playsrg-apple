@@ -327,14 +327,28 @@ extension ProfileView {
     }
     
     struct PosterImagesItem: View {
-        @AppStorage(PlaySRGSettingPosterImages) var settingPosterImages = ""
+        @AppStorage(PlaySRGSettingPosterImages) var settingPosterImagesString = ""
         
-        private func action() {
-            // TODO:
+        enum SettingPosterImages: String {
+            case forced
+            case ignored
+            case _default = "default"
         }
         
-        private func posterImageDescription(_ posterImages: SettingPosterImages) -> String {
-            switch posterImages {
+        private func action() {
+            let settingPosterImages = SettingPosterImages(rawValue: settingPosterImagesString)
+            switch settingPosterImages {
+            case .forced:
+                settingPosterImagesString = SettingPosterImages.ignored.rawValue
+            case .ignored:
+                settingPosterImagesString = SettingPosterImages._default.rawValue
+            default:
+                settingPosterImagesString = SettingPosterImages.forced.rawValue
+            }
+        }
+        
+        private func posterImageDescription(posterImagesString: String) -> String {
+            switch SettingPosterImages(rawValue: settingPosterImagesString) {
             case .forced:
                 return PlaySRGSettingsLocalizedString("Forced", comment: "Poster images setting state")
             case .ignored:
@@ -350,7 +364,7 @@ extension ProfileView {
                     Text(PlaySRGSettingsLocalizedString("Poster images", comment: "Poster images setting"))
                         .srgFont(.button)
                     Spacer()
-                    Text(posterImageDescription(ApplicationSettingPosterImages()))
+                    Text(posterImageDescription(posterImagesString: settingPosterImagesString))
                         .srgFont(.button)
                         .foregroundColor(.secondary)
                 }
