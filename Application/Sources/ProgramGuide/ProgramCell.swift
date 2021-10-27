@@ -14,6 +14,7 @@ struct ProgramCell: View {
     let direction: StackDirection
     
     @StateObject private var model = ProgramCellViewModel()
+    @State private var availableSize: CGSize = .zero
     
     @Environment(\.isSelected) private var isSelected
     @SRGScaledMetric var timeRangeFixedWidth: CGFloat = 90
@@ -42,6 +43,10 @@ struct ProgramCell: View {
         return direction == .horizontal ? 0 : 2
     }
     
+    private var isCompact: Bool {
+        return availableSize.width < 100
+    }
+    
     init(program: SRGProgram, direction: StackDirection) {
         _program = .constant(program)
         self.direction = direction
@@ -57,7 +62,7 @@ struct ProgramCell: View {
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: timeRangeWidth, alignment: .leading)
                 }
-                TitleView(model: model)
+                TitleView(model: model, compact: isCompact)
                 Spacer()
             }
             .padding(.horizontal, horizontalPadding)
@@ -81,28 +86,30 @@ struct ProgramCell: View {
         .onChange(of: program) { newValue in
             model.program = newValue
         }
+        .readSize { size in
+            self.availableSize = size
+        }
     }
     
     /// Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramCellViewModel
-        @State private var availableSize: CGSize = .zero
+        let compact: Bool
         
         var body: some View {
             HStack(spacing: 10) {
-                if model.canPlay && availableSize.width > 100 {
+                #if os(iOS)
+                if !compact && model.canPlay {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
                 }
+                #endif
                 if let title = model.program?.title {
                     Text(title)
                         .srgFont(.body)
                         .lineLimit(1)
                         .foregroundColor(.srgGrayC7)
                 }
-            }
-            .readSize { size in
-                self.availableSize = size
             }
         }
     }
