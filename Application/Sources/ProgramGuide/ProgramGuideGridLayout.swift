@@ -45,7 +45,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
                 attrs.frame = CGRect(
-                    x: Self.channelHeaderWidth + program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
+                    x: Self.channelHeaderWidth + Self.horizontalSpacing + program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
                     y: CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
                     width: max(program.endDate.timeIntervalSince(program.startDate) * Self.scale - Self.horizontalSpacing, 0),
                     height: Self.sectionHeight
@@ -85,7 +85,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     override var collectionViewContentSize: CGSize {
         guard let collectionView = collectionView, let layoutData = layoutData else { return .zero }
         return CGSize(
-            width: layoutData.dateInterval.duration * Self.scale + Self.channelHeaderWidth,
+            width: layoutData.dateInterval.duration * Self.scale + Self.channelHeaderWidth + Self.horizontalSpacing,
             height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
         )
     }

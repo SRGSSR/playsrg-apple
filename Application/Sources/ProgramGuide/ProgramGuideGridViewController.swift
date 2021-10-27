@@ -203,9 +203,7 @@ private extension ProgramGuideGridViewController {
         }
         
         var body: some View {
-            ZStack {
-                Color.srgGray23
-                
+            Group {
                 if let image = logoImage {
                     Image(uiImage: image)
                 }
@@ -215,6 +213,14 @@ private extension ProgramGuideGridViewController {
                         .lineLimit(1)
                 }
             }
+            .padding(.horizontal, 8)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            // See https://stackoverflow.com/a/68765719/760435
+            .background(
+                Color.srgGray23
+                    .shadow(color: Color(white: 0, opacity: 0.6), radius: 10, x: 0, y: 0)
+                    .mask(Rectangle().padding(.trailing, -40))
+            )
         }
     }
 }
