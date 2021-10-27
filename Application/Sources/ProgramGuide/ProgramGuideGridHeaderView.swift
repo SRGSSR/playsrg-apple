@@ -34,9 +34,11 @@ struct ProgramGuideGridHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
+                #if os(iOS)
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideGridHeaderViewActions.openCalendar))
                 }
+                #endif
                 ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
                     model.switchToYesterday()
                 }
