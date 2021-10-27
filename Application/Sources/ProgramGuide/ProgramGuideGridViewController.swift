@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
@@ -196,8 +197,24 @@ private extension ProgramGuideGridViewController {
     struct ChannelHeaderView: View {
         let channel: SRGChannel
         
+        private var logoImage: UIImage? {
+            guard let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
+            return TVChannelLogoImage(tvChannel)
+        }
+        
         var body: some View {
-            Color.red
+            ZStack {
+                Color.srgGray23
+                
+                if let image = logoImage {
+                    Image(uiImage: image)
+                }
+                else {
+                    Text(channel.title)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
+            }
         }
     }
 }
