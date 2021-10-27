@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SwiftUI
 import UIKit
 
 // MARK: View controller
@@ -93,6 +94,17 @@ final class ProgramGuideGridViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
         
+        let headerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ChannelHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let channel = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = ChannelHeaderView(channel: channel)
+        }
+        
+        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
+        }
+        
         dailyModel.$state
             .sink { [weak self] state in
                 self?.reloadData(for: state)
@@ -176,4 +188,16 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         }
     }
     #endif
+}
+
+// MARK: Headers
+
+private extension ProgramGuideGridViewController {
+    struct ChannelHeaderView: View {
+        let channel: SRGChannel
+        
+        var body: some View {
+            Color.red
+        }
+    }
 }
