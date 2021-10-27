@@ -30,6 +30,18 @@ struct ProgramCell: View {
         return direction == .horizontal ? .center : .leading
     }
     
+    private var horizontalPadding: CGFloat {
+        return direction == .horizontal ? 16 : 8
+    }
+    
+    private var topPadding: CGFloat {
+        return direction == .horizontal ? 0 : 16
+    }
+    
+    private var bottomPadding: CGFloat {
+        return direction == .horizontal ? 0 : 2
+    }
+    
     init(program: SRGProgram, direction: StackDirection) {
         _program = .constant(program)
         self.direction = direction
@@ -48,7 +60,9 @@ struct ProgramCell: View {
                 TitleView(model: model)
                 Spacer()
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, horizontalPadding)
+            .padding(.top, topPadding)
+            .padding(.bottom, bottomPadding)
             .frame(maxHeight: .infinity)
             .background(Color.srgGray23)
             
@@ -72,10 +86,11 @@ struct ProgramCell: View {
     /// Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramCellViewModel
+        @State private var availableSize: CGSize = .zero
         
         var body: some View {
             HStack(spacing: 10) {
-                if model.canPlay {
+                if model.canPlay && availableSize.width > 100 {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
                 }
@@ -85,6 +100,9 @@ struct ProgramCell: View {
                         .lineLimit(1)
                         .foregroundColor(.srgGrayC7)
                 }
+            }
+            .readSize { size in
+                self.availableSize = size
             }
         }
     }
@@ -120,5 +138,7 @@ struct ProgramCell_Previews: PreviewProvider {
             .previewLayout(.fixed(width: size.width, height: size.height))
         ProgramCell(program: Mock.program(), direction: .vertical)
             .previewLayout(.fixed(width: 500, height: 105))
+        ProgramCell(program: Mock.program(), direction: .vertical)
+            .previewLayout(.fixed(width: 80, height: 105))
     }
 }

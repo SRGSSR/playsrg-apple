@@ -216,6 +216,26 @@ extension View {
         #endif
         return hostController.sizeThatFits(in: size)
     }
+    
+    /**
+     *  Execute the specified closure when the size of a view changes.
+     *
+     *  Borrowed from https://www.fivestars.blog/articles/flexible-swiftui/
+     */
+    func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: geometry.size)
+            }
+        )
+        .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    }
+}
+
+private struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
 /**
