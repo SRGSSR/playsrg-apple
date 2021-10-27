@@ -199,7 +199,7 @@ private extension ProgramGuideGridViewController {
         
         private var logoImage: UIImage? {
             guard let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
-            return TVChannelLogoImage(tvChannel)
+            return TVChannelLargeLogoImage(tvChannel)
         }
         
         var body: some View {
