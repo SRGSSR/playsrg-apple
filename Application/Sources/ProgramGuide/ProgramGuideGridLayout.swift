@@ -13,6 +13,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let dateInterval: DateInterval
     }
     
+    private static let horizontalSpacing: CGFloat = 2
+    private static let verticalSpacing: CGFloat = 3
     private static let scale: CGFloat = constant(iOS: 650, tvOS: 750) / (60 * 60)
     private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     
@@ -42,8 +44,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 let attr = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
                 attr.frame = CGRect(
                     x: program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
-                    y: CGFloat(section) * Self.sectionHeight,
-                    width: program.endDate.timeIntervalSince(program.startDate) * Self.scale,
+                    y: CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
+                    width: max(program.endDate.timeIntervalSince(program.startDate) * Self.scale - Self.horizontalSpacing, 0),
                     height: Self.sectionHeight
                 )
                 return attr
@@ -67,7 +69,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         guard let collectionView = collectionView, let data = data else { return .zero }
         return CGSize(
             width: data.dateInterval.duration * Self.scale,
-            height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight
+            height: CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
         )
     }
     
