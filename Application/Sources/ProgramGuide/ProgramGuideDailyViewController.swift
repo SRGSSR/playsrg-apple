@@ -75,7 +75,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         super.viewDidLoad()
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
-            cell.content = ProgramCell(program: program)
+            cell.content = ProgramCell(program: program, direction: .horizontal)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
