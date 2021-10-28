@@ -16,6 +16,8 @@ struct ExpandingButton: View {
     let accessibilityLabel: String
     let accessibilityHint: String?
     let action: () -> Void
+    
+    @State private var isFocused = false
         
     init(icon: String? = nil, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
@@ -37,9 +39,10 @@ struct ExpandingButton: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .foregroundColor(.srgGrayC7)
-        .background(Color.srgGray23)
-        .cornerRadius(LayoutStandardViewCornerRadius)
+        .onParentFocusChange { isFocused = $0 }
+        .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
+        .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
+        .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
 }
