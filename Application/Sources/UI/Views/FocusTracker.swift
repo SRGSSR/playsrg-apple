@@ -12,7 +12,7 @@ private struct FocusTracker<Content: View>: View {
     private let action: (Bool) -> Void
     @Binding private var content: () -> Content
     
-    @Environment(\.isFocused) private var isFocused: Bool
+    @Environment(\.isFocused) private var isFocused
     
     init(action: @escaping (Bool) -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.action = action

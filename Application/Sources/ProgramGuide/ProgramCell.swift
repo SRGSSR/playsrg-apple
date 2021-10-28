@@ -10,42 +10,19 @@ import SwiftUI
 // MARK: Cell
 
 struct ProgramCell: View {
+    private struct FlatButtonStyle: ButtonStyle {
+        func makeBody(configuration: Configuration) -> some View {
+            configuration.label
+                .scaleEffect(!configuration.isPressed ? 1 : 0.98)
+        }
+    }
+    
     @Binding var program: SRGProgram
     let direction: StackDirection
     
     @StateObject private var model = ProgramCellViewModel()
-    @State private var availableSize: CGSize = .zero
     
     @Environment(\.isSelected) private var isSelected
-    @SRGScaledMetric var timeRangeFixedWidth: CGFloat = 90
-    
-    private var timeRangeWidth: CGFloat {
-        return direction == .horizontal ? timeRangeFixedWidth : .infinity
-    }
-    
-    private var timeRangeLineLimit: Int {
-        return direction == .horizontal ? 2 : 1
-    }
-    
-    private var alignment: StackAlignment {
-        return direction == .horizontal ? .center : .leading
-    }
-    
-    private var horizontalPadding: CGFloat {
-        return direction == .horizontal ? 16 : 8
-    }
-    
-    private var topPadding: CGFloat {
-        return direction == .horizontal ? 0 : 16
-    }
-    
-    private var bottomPadding: CGFloat {
-        return direction == .horizontal ? 0 : 2
-    }
-    
-    private var isCompact: Bool {
-        return availableSize.width < 100
-    }
     
     init(program: SRGProgram, direction: StackDirection) {
         _program = .constant(program)
@@ -53,41 +30,100 @@ struct ProgramCell: View {
     }
     
     var body: some View {
-        ZStack {
-            Stack(direction: direction, alignment: alignment, spacing: 10) {
-                if let timeRange = model.timeRange {
-                    Text(timeRange)
-                        .srgFont(.subtitle1)
-                        .lineLimit(timeRangeLineLimit)
-                        .foregroundColor(.srgGray96)
-                        .frame(maxWidth: timeRangeWidth, alignment: .leading)
+        Group {
+#if os(tvOS)
+            GeometryReader { geometry in
+                Button(action: action) {
+                    MainView(model: model, direction: direction)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
                 }
-                TitleView(model: model, compact: isCompact)
-                Spacer()
+                .buttonStyle(FlatButtonStyle())
             }
-            .padding(.horizontal, horizontalPadding)
-            .padding(.top, topPadding)
-            .padding(.bottom, bottomPadding)
-            .frame(maxHeight: .infinity)
-            .background(Color.srgGray23)
-            
-            if let progress = model.progress {
-                ProgressBar(value: progress)
-                    .frame(height: LayoutProgressBarHeight)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            }
+#else
+            MainView(model: model, direction: direction)
+                .selectionAppearance(.dimmed, when: isSelected)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
+#endif
         }
-        .selectionAppearance(.dimmed, when: isSelected)
-        .cornerRadius(4)
-        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
         .onAppear {
             model.program = program
         }
         .onChange(of: program) { newValue in
             model.program = newValue
         }
-        .readSize { size in
-            self.availableSize = size
+    }
+    
+    private func action() {
+        
+    }
+    
+    /// Behavior: h-exp, v-exp
+    private struct MainView: View {
+        @ObservedObject var model: ProgramCellViewModel
+        let direction: StackDirection
+        
+        @SRGScaledMetric var timeRangeFixedWidth: CGFloat = 90
+        @State private var availableSize: CGSize = .zero
+        @Environment(\.isFocused) private var isFocused
+        
+        private var timeRangeWidth: CGFloat {
+            return direction == .horizontal ? timeRangeFixedWidth : .infinity
+        }
+        
+        private var timeRangeLineLimit: Int {
+            return direction == .horizontal ? 2 : 1
+        }
+        
+        private var alignment: StackAlignment {
+            return direction == .horizontal ? .center : .leading
+        }
+        
+        private var horizontalPadding: CGFloat {
+            return direction == .horizontal ? 16 : 8
+        }
+        
+        private var topPadding: CGFloat {
+            return direction == .horizontal ? 0 : 16
+        }
+        
+        private var bottomPadding: CGFloat {
+            return direction == .horizontal ? 0 : 2
+        }
+        
+        private var isCompact: Bool {
+            return availableSize.width < 100
+        }
+        
+        var body: some View {
+            ZStack {
+                Stack(direction: direction, alignment: alignment, spacing: 10) {
+                    if let timeRange = model.timeRange {
+                        Text(timeRange)
+                            .srgFont(.subtitle1)
+                            .lineLimit(timeRangeLineLimit)
+                            .foregroundColor(.srgGray96)
+                            .frame(maxWidth: timeRangeWidth, alignment: .leading)
+                    }
+                    TitleView(model: model, compact: isCompact)
+                    Spacer()
+                }
+                .padding(.horizontal, horizontalPadding)
+                .padding(.top, topPadding)
+                .padding(.bottom, bottomPadding)
+                .frame(maxHeight: .infinity)
+                .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
+                
+                if let progress = model.progress {
+                    ProgressBar(value: progress)
+                        .frame(height: LayoutProgressBarHeight)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                }
+            }
+            .cornerRadius(4)
+            .readSize { size in
+                self.availableSize = size
+            }
         }
     }
     

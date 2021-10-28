@@ -176,7 +176,7 @@ extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
 }
 
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
-    #if os(iOS)
+#if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
@@ -188,7 +188,13 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             self.deselectItems(in: collectionView, animated: true)
         }
     }
-    #endif
+#endif
+    
+#if os(tvOS)
+    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+#endif
 }
 
 // MARK: Headers

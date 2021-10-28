@@ -259,7 +259,7 @@ extension View {
                 case .dimmed:
                     overlay(Color.black.opacity(0.5))
                 case .transluscent:
-                    self.opacity(0.5)
+                    opacity(0.5)
                 }
             }
             else {
