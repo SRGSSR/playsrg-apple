@@ -60,7 +60,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 x: collectionView.contentOffset.x,
                 y: CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
                 width: Self.channelHeaderWidth,
-                height: Self.sectionHeight + Self.verticalSpacing
+                height: (section != snapshot.sectionIdentifiers.count - 1) ? Self.sectionHeight + Self.verticalSpacing : Self.sectionHeight
             )
             attrs.zIndex = 1
             return attrs
