@@ -23,15 +23,15 @@ extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
         var templates = [CPTemplate]()
         
         let livestreamsTemplate = CPListTemplate(list: .livestreams, interfaceController: interfaceController)
-        livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab_carplay", in: nil, compatibleWith: traitCollection)
+        livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab", in: nil, compatibleWith: traitCollection)
         templates.append(livestreamsTemplate)
         
         let favoriteEpisodesTemplate = CPListTemplate(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
-        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorites_tab_carplay", in: nil, compatibleWith: traitCollection)
+        favoriteEpisodesTemplate.tabImage = UIImage(named: "favorites_tab", in: nil, compatibleWith: traitCollection)
         templates.append(favoriteEpisodesTemplate)
         
         let mostPopularTemplate = CPListTemplate(list: .mostPopular, interfaceController: interfaceController)
-        mostPopularTemplate.tabImage = UIImage(named: "trends_tab_carplay", in: nil, compatibleWith: traitCollection)
+        mostPopularTemplate.tabImage = UIImage(named: "trends_tab", in: nil, compatibleWith: traitCollection)
         templates.append(mostPopularTemplate)
         
         let tabBarTemplate = CPTabBarTemplate(templates: templates)
