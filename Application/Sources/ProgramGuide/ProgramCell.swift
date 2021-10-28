@@ -54,9 +54,11 @@ struct ProgramCell: View {
         }
     }
     
+#if os(tvOS)
     private func action() {
-        
+        navigateToProgram(program)
     }
+#endif
     
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
@@ -134,12 +136,10 @@ struct ProgramCell: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                #if os(iOS)
                 if !compact && model.canPlay {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
                 }
-                #endif
                 if let title = model.program?.title {
                     Text(title)
                         .srgFont(.body)

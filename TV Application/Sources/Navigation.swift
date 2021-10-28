@@ -9,8 +9,11 @@ import SRGAnalytics
 import SRGAppearanceSwift
 import TvOSTextViewer
 import SwiftUI
+import SRGDataProviderModel
 
 private var isPresenting = false
+
+private var mediaCancellable: AnyCancellable?
 private var cancellables = Set<AnyCancellable>()
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
@@ -56,6 +59,16 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
         }
     }
+}
+
+func navigateToProgram(_ program: SRGProgram, animated: Bool = true) {
+    guard let mediaUrn = program.mediaURN else { return }
+    mediaCancellable = SRGDataProvider.current!.media(withUrn: mediaUrn)
+        .receive(on: DispatchQueue.main)
+        .sink { _ in
+        } receiveValue: { media in
+            navigateToMedia(media, animated: animated)
+        }
 }
 
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
