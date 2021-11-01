@@ -37,13 +37,13 @@ struct ExpandingButton: View {
                     .srgFont(.button)
                     .lineLimit(1)
             }
+            .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
+            .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
+            .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
-        .onParentFocusChange { isFocused = $0 }
-        .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
-        .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
-        .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
-        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
 }
 
