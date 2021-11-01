@@ -91,6 +91,13 @@ final class SearchViewController: UIViewController {
         super.viewWillAppear(animated)
         model.reload()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if play_isMovingFromParentViewController() {
+            searchController.searchBar.resignFirstResponder()
+        }
+    }
 }
 
 // MARK: Protocols

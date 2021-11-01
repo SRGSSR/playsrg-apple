@@ -184,11 +184,19 @@ extension SearchResultsViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        guard scrollView.contentSize.height > 0 else { return }
+#if os(iOS)
+        if scrollView.isDragging && !scrollView.isDecelerating {
+            if let searchController = parent as? UISearchController {
+                searchController.searchBar.resignFirstResponder()
+            }
+        }
+#endif
         
-        let numberOfScreens = 4
-        if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
-            model.loadMore()
+        if scrollView.contentSize.height > 0 {
+            let numberOfScreens = 4
+            if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
+                model.loadMore()
+            }
         }
     }
 }
