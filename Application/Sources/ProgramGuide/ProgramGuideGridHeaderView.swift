@@ -12,6 +12,8 @@ import SwiftUI
     func openCalendar()
 }
 
+private let ItemHeight: CGFloat = constant(iOS: 40, tvOS: 60)
+
 // MARK: View
 
 /// Behavior: h-exp, v-exp
@@ -32,20 +34,18 @@ struct ProgramGuideGridHeaderView: View {
     
     var body: some View {
         if direction == .vertical {
-            VStack(spacing: 20) {
+            VStack(spacing: constant(iOS: 20, tvOS: 40)) {
                 DaySelector(model: model)
-                    .frame(height: 40)
                 NavigationBar(model: model)
             }
-            .padding(10)
+            .padding(constant(iOS: 10, tvOS: 20))
         }
         else {
-            HStack(spacing: 20) {
+            HStack(spacing: constant(iOS: 20, tvOS: 40)) {
                 NavigationBar(model: model)
                 DaySelector(model: model)
-                    .frame(height: 40)
             }
-            .padding(10)
+            .padding(constant(iOS: 10, tvOS: 20))
         }
     }
     
@@ -55,7 +55,7 @@ struct ProgramGuideGridHeaderView: View {
         @FirstResponder private var firstResponder
         
         var body: some View {
-            HStack(spacing: 10) {
+            HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
                     model.switchToYesterday()
                 }
@@ -69,6 +69,7 @@ struct ProgramGuideGridHeaderView: View {
                 }
             }
             .responderChain(from: firstResponder)
+            .frame(height: ItemHeight)
         }
     }
     
@@ -77,7 +78,7 @@ struct ProgramGuideGridHeaderView: View {
         @ObservedObject var model: ProgramGuideViewModel
         
         var body: some View {
-            HStack(spacing: 10) {
+            HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     model.switchToPreviousDay()
                 }
@@ -89,6 +90,7 @@ struct ProgramGuideGridHeaderView: View {
                     model.switchToNextDay()
                 }
             }
+            .frame(height: ItemHeight)
         }
     }
 }
