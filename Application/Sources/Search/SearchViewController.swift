@@ -45,9 +45,10 @@ final class SearchViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchResultsUpdater = self
-        searchController.showsSearchResultsController = true
         
 #if os(iOS)
+        searchController.showsSearchResultsController = true
+        
         let searchBar = searchController.searchBar
         object_setClass(searchBar, SearchBar.self)
         
@@ -94,9 +95,11 @@ final class SearchViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        #if os (iOS)
         if play_isMovingFromParentViewController() {
             searchController.searchBar.resignFirstResponder()
         }
+        #endif
     }
 }
 
