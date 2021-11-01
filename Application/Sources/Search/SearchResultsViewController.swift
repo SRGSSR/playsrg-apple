@@ -71,9 +71,7 @@ final class SearchResultsViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
-#if os(tvOS)
-        self.tabBarObservedScrollView = collectionView
-#else
+#if os(iOS)
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
@@ -100,6 +98,17 @@ final class SearchResultsViewController: UIViewController {
             }
             .store(in: &cancellables)
     }
+    
+#if os(tvOS)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if let searchController = parent as? UISearchController {
+            searchController.tabBarObservedScrollView = collectionView
+            searchController.searchControllerObservedScrollView = collectionView
+        }
+    }
+#endif
     
 #if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
