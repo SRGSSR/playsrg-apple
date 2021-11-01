@@ -45,6 +45,7 @@ final class SearchViewController: UIViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchResultsUpdater = self
+        searchController.showsSearchResultsController = true
         
 #if os(iOS)
         let searchBar = searchController.searchBar
