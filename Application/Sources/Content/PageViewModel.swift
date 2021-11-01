@@ -55,7 +55,7 @@ final class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [serviceMessage] in
+        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [serviceMessage] in
             return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
                 .map { Optional($0) }
                 .replaceError(with: serviceMessage)
@@ -86,6 +86,10 @@ final class PageViewModel: Identifiable, ObservableObject {
         return Publishers.Merge(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
+                .filter { [weak self] in
+                    guard let self = self else { return false }
+                    return self.state.sections.isEmpty
+                }
         )
         .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
         .eraseToAnyPublisher()
