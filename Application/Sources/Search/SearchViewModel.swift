@@ -40,6 +40,17 @@ final class SearchViewModel: ObservableObject {
         }
     }
     
+    // TODO: Connect with custom settings on iOS
+    private static var searchSettings: SRGMediaSearchSettings? {
+        guard !ApplicationConfiguration.shared.areSearchSettingsHidden else { return nil }
+        
+        let settings = SRGMediaSearchSettings()
+        settings.aggregationsEnabled = false
+        settings.mediaType = constant(iOS: .none, tvOS: .video)
+        settings.suggestionsEnabled = true
+        return settings
+    }
+    
     private var querySubject = CurrentValueSubject<String, Never>("")
     
     func reload(deep: Bool = false) {
@@ -124,7 +135,7 @@ private extension SearchViewModel {
                         return SRGDataProvider.current!.shows(withUrns: output.showUrns)
                     }
                     .switchToLatest(),
-                SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: nil, pageSize: pageSize, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+                SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
                     .map { output in
                         return SRGDataProvider.current!.medias(withUrns: output.mediaUrns)
                     }
