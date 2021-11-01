@@ -15,20 +15,20 @@ final class SearchViewModel: ObservableObject {
     private let trigger = Trigger()
     
     init() {
-        querySubject
-            .debounce(for: 0.3, scheduler: RunLoop.main)
-            .map { [weak self, trigger] query in
-                Publishers.PublishAndRepeat(onOutputFrom: self?.reloadSignal() ?? Empty(completeImmediately: false).eraseToAnyPublisher()) {
+        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, trigger] in
+            querySubject
+                .debounce(for: 0.3, scheduler: RunLoop.main)
+                .map { query in
                     return Self.publisher(forQuery: query, trigger: trigger)
                 }
+                .switchToLatest()
                 .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-            }
-            .switchToLatest()
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$state)
+        }
+        .receive(on: DispatchQueue.main)
+        .assign(to: &$state)
     }
     
     var query: String {
