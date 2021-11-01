@@ -89,7 +89,7 @@ final class PageViewModel: Identifiable, ObservableObject {
                     return self.state.sections.isEmpty
                 }
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
     

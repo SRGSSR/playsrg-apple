@@ -17,7 +17,7 @@ final class SearchViewModel: ObservableObject {
     init() {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, trigger] in
             querySubject
-                .debounce(for: 0.3, scheduler: RunLoop.main)
+                .debounce(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query in
                     return Self.publisher(forQuery: query, trigger: trigger)
                 }
@@ -68,7 +68,7 @@ final class SearchViewModel: ObservableObject {
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
 }

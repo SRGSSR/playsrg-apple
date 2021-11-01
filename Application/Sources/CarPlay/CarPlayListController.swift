@@ -49,7 +49,7 @@ final class CarPlayTemplateListController {
             ApplicationSignal.reachable(),
             trigger.signal(activatedBy: TriggerId.reload)
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
     
