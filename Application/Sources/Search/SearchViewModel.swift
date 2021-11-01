@@ -25,6 +25,7 @@ final class SearchViewModel: ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
+                .prepend(State.loading)
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
