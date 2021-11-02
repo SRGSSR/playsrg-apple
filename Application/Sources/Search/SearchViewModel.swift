@@ -67,6 +67,10 @@ final class SearchViewModel: ObservableObject {
         return Publishers.Merge(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
+                .filter { [weak self] in
+                    guard let self = self else { return false }
+                    return !self.state.hasContent
+                }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
