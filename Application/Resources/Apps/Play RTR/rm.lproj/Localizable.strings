@@ -275,7 +275,7 @@
 "Livestreams" = "Live";
 
 /* Default text displayed when loading */
-"Loading…" = "Loading…";
+"Loading…" = "Chargiand…";
 
 /* Setting footer message for system permission group. New rule for iOS 14 and more. */
 "Local network access must be allowed for Google Cast receiver discovery." = "Il access a la rait locala è necessari per utilisar Google Cast. ";
@@ -398,7 +398,7 @@
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, favurits e cuntegns arcunads per pli tard vegnan allontanads da quest Apple TV.";
 
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
-"Popular on Play SRG" = "Popular on Play SRG";
+"Popular on Play SRG" = "Popular sin Play RTR";
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedent";
