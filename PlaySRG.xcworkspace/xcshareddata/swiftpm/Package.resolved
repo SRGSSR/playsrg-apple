@@ -212,9 +212,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "85cee9cedd17f55a00e5ba341a09d426f25a2131",
-          "version": null
+          "branch": null,
+          "revision": "d20dc0fb85e572c44e902c6c29dc810c611ca6ad",
+          "version": "7.3.0"
         }
       },
       {
@@ -239,9 +239,9 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "bbb86e22e169a3313966cced7ad6455d32607111",
-          "version": null
+          "branch": null,
+          "revision": "8b3f5e742a0ab28097e84520deec49320c1e9d9a",
+          "version": "12.1.0"
         }
       },
       {
@@ -284,9 +284,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "2801cdfbe03d0681e917307c63b5bd11d61f6ac1",
-          "version": null
+          "branch": null,
+          "revision": "fbd7ad3121c7112cf1ce55bb96638ef09a6cf5ec",
+          "version": "6.1.5"
         }
       },
       {
