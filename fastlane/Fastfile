@@ -1013,7 +1013,7 @@ def notify_build_number_to_ci(platform, build_name)
 
   displayed_build_number = xcode_marketing_version(platform)
   displayed_build_number += '-' + xcode_build_number(platform)
-  displayed_build_number += '+' + build_name if build_name
+  displayed_build_number += '+' + build_name unless build_name.length.zero?
   puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
 end
 
