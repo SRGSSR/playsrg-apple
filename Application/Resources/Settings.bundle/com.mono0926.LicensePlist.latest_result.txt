@@ -195,15 +195,15 @@ name: Comscore-Swift-Package-Manager, nameSpecified: ComScore, owner: comScore, 
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: 
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.7.0
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.9.0
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 8.7.0
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 8.9.0
 
-name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.1.1
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.1.2
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.5.2
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.6.0
 
 name: grpc-SwiftPM, nameSpecified: gRPC, owner: firebase, version: 1.28.4
 
@@ -221,7 +221,7 @@ name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.7
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0
 
-name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.4.1
+name: Nuke, nameSpecified: Nuke, owner: kean, version: 10.5.1
 
 name: paper-onboarding, nameSpecified: PaperOnboarding, owner: Ramotion, version: 6.1.5
 
@@ -241,7 +241,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.2.0
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.3.0
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.3.1
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.2
 
@@ -255,7 +255,7 @@ name: swift-collections, nameSpecified: swift-collections, owner: apple, version
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.18.0
 
-name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.4
+name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, version: 9.0.5
 
 name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5
 
