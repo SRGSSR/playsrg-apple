@@ -102,22 +102,11 @@ final class ProgramGuideGridViewController: UIViewController {
             view.content = ChannelHeaderView(channel: channel)
         }
         
-        let timelineViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TimelineView>>(elementKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue) { [weak self] view, _, _ in
-            guard let self = self else { return }
-            let snapshot = self.dataSource.snapshot()
-            view.content = TimelineView(dateInterval: snapshot.dateInterval)
+        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, elementKind, indexPath in
-            switch elementKind {
-            case UICollectionView.elementKindSectionHeader:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
-            case ProgramGuideGridLayout.ElementKind.timeline.rawValue:
-                return collectionView.dequeueConfiguredReusableSupplementary(using: timelineViewRegistration, for: indexPath)
-            default:
-                return nil
-            }
-        }
+        collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
         
         dailyModel.$state
             .sink { [weak self] state in
@@ -152,7 +141,7 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state), animatingDifferences: true)
+            dataSource.apply(Self.snapshot(from: state), animatingDifferences: false)
         }
     }
     
@@ -208,4 +197,13 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         return false
     }
 #endif
+}
+
+// MARK: Views
+
+final class TimelineDecorationView: HostSupplementaryView<TimelineView> {
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        guard let timelineAttributes = layoutAttributes as? TimelineLayoutAttributes else { return }
+        content = TimelineView(dateInterval: timelineAttributes.dateInterval)
+    }
 }
