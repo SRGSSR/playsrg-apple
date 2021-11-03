@@ -243,11 +243,61 @@ private extension ProgramGuideGridViewController {
         }
     }
     
+    // TODO: Extract & create preview
     struct TimelineView: View {
         let dateInterval: DateInterval?
         
+        // TODO: Factor out common constants, at the correct location
+        private static let scale: CGFloat = constant(iOS: 650, tvOS: 900) / (60 * 60)
+        private static let channelHeaderWidth: CGFloat = constant(iOS: 130, tvOS: 220)
+        private static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
+        
+        private static let dateComponents: DateComponents = {
+            var dateComponents = DateComponents()
+            dateComponents.minute = 0
+            return dateComponents
+        }()
+        
+        private static func label(for date: Date) -> String {
+            return DateFormatter.play_time.string(from: date)
+        }
+        
+        private func xPosition(for date: Date) -> CGFloat {
+            guard let dateInterval = dateInterval else { return 0 }
+            return Self.channelHeaderWidth + Self.horizontalSpacing + date.timeIntervalSince(dateInterval.start) * Self.scale
+        }
+        
+        private var dates: [Date] {
+            guard let dateInterval = dateInterval else { return [] }
+            
+            var dates = [Date]()
+            Calendar.current.enumerateDates(startingAfter: dateInterval.start, matching: Self.dateComponents, matchingPolicy: .nextTime) { date, _, stop in
+                guard let date = date else { return }
+                if dateInterval.contains(date) {
+                    dates.append(date)
+                }
+                else {
+                    stop = true
+                }
+            }
+            return dates
+        }
+        
         var body: some View {
-            Color.red
+            GeometryReader { geometry in
+                ForEach(dates, id: \.self) { date in
+                    VStack(spacing: 4) {
+                        Text(Self.label(for: date))
+                            .srgFont(.caption)
+                            .foregroundColor(.white)
+                        Rectangle()
+                            .fill(Color.srgGray96)
+                            .frame(width: 1, height: 15)
+                    }
+                    .position(x: xPosition(for: date), y: geometry.size.height / 2)
+                    .padding(.bottom, 8)
+                }
+            }
         }
     }
 }
