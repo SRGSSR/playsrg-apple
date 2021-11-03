@@ -875,7 +875,7 @@ def default_changelog_for_nightlies(platform, service)
 
   # HAX: strip emoji from changelog
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
-  changelog = 'No change log found for this build.' if changelog.length.zero?
+  changelog = 'No change log found for this build.' if changelog.empty?
   Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
 end
 
@@ -1011,9 +1011,10 @@ end
 def notify_build_number_to_ci(platform, build_name)
   return unless ENV['TEAMCITY_VERSION']
 
+  build_name ||= ''
   displayed_build_number = xcode_marketing_version(platform)
   displayed_build_number += '-' + xcode_build_number(platform)
-  displayed_build_number += '+' + build_name unless build_name.length.zero?
+  displayed_build_number += '+' + build_name unless build_name.empty?
   puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
 end
 
