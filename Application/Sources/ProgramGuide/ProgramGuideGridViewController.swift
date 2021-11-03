@@ -102,8 +102,21 @@ final class ProgramGuideGridViewController: UIViewController {
             view.content = ChannelHeaderView(channel: channel)
         }
         
-        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
-            return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
+        let timelineViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TimelineView>>(elementKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue) { [weak self] view, _, _ in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            view.content = TimelineView(dateInterval: snapshot.dateInterval)
+        }
+        
+        dataSource.supplementaryViewProvider = { collectionView, elementKind, indexPath in
+            switch elementKind {
+            case UICollectionView.elementKindSectionHeader:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
+            case ProgramGuideGridLayout.ElementKind.timeline.rawValue:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: timelineViewRegistration, for: indexPath)
+            default:
+                return nil
+            }
         }
         
         dailyModel.$state
@@ -227,6 +240,14 @@ private extension ProgramGuideGridViewController {
                     .shadow(color: Color(white: 0, opacity: 0.6), radius: 10, x: 0, y: 0)
                     .mask(Rectangle().padding(.trailing, -40))
             )
+        }
+    }
+    
+    struct TimelineView: View {
+        let dateInterval: DateInterval?
+        
+        var body: some View {
+            Color.red
         }
     }
 }

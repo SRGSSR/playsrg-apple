@@ -138,3 +138,22 @@ extension ProgramGuideViewModel {
         }
     }
 }
+
+extension NSDiffableDataSourceSnapshot where SectionIdentifierType == SRGChannel, ItemIdentifierType == SRGProgram {
+    var startDate: Date? {
+        return sectionIdentifiers.flatMap { channel in
+            return itemIdentifiers(inSection: channel).map(\.startDate)
+        }.min()
+    }
+    
+    var endDate: Date? {
+        return sectionIdentifiers.flatMap { channel in
+            return itemIdentifiers(inSection: channel).map(\.endDate)
+        }.max()
+    }
+    
+    var dateInterval: DateInterval? {
+        guard let startDate = startDate, let endDate = endDate else { return nil }
+        return DateInterval(start: startDate, end: endDate)
+    }
+}
