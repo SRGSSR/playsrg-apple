@@ -16,6 +16,7 @@
 #import "ChannelService.h"
 #import "ContentInsets.h"
 #import "DataViewController.h"
+#import "DeepLinkAction.h"
 #import "Favorites.h"
 #import "History.h"
 #import "Layout.h"

@@ -16,7 +16,6 @@ final class SectionViewModel: ObservableObject {
     
     private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
-    private var cancellables = Set<AnyCancellable>()
     
     var title: String? {
         let properties = configuration.properties
@@ -32,7 +31,7 @@ final class SectionViewModel: ObservableObject {
         
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
-        Publishers.PublishAndRepeat(onOutputFrom: trigger.signal(activatedBy: TriggerId.reload)) { [configuration, trigger] in
+        Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger] in
             return Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
@@ -55,13 +54,6 @@ final class SectionViewModel: ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
-        
-        ApplicationSignal.wokenUp()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] in
-                self?.reload()
-            }
-            .store(in: &cancellables)
     }
     
     func loadMore() {
@@ -69,7 +61,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     func reload(deep: Bool = false) {
-        if deep || state.isEmpty {
+        if deep || !state.hasContent {
             trigger.activate(for: TriggerId.reload)
         }
     }
@@ -97,6 +89,19 @@ final class SectionViewModel: ObservableObject {
             labels.source = AnalyticsSource.selection.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
         }
+    }
+    
+    private func reloadSignal() -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(
+            trigger.signal(activatedBy: TriggerId.reload),
+            ApplicationSignal.wokenUp()
+                .filter { [weak self] in
+                    guard let self = self else { return false }
+                    return !self.state.hasContent
+                }
+        )
+        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .eraseToAnyPublisher()
     }
 }
 
@@ -144,6 +149,17 @@ extension SectionViewModel {
                 return 0
             }
         }
+        
+        var size: Size {
+            switch self {
+            case .title:
+                return .small
+            case .item, .show:
+                return .large
+            case .none:
+                return .zero
+            }
+        }
     }
     
     struct Section: Hashable, Indexable {
@@ -171,29 +187,27 @@ extension SectionViewModel {
         case failed(error: Error)
         case loaded(rows: [Row])
         
-        var topHeaderSize: Header.Size {
+        var hasContent: Bool {
+            if case let .loaded(rows: rows) = self {
+                let filteredRows = rows.filter { !$0.items.filter { $0 != .transparent }.isEmpty }
+                return !filteredRows.isEmpty
+            }
+            else {
+                return false
+            }
+        }
+        
+        var headerSize: Header.Size {
             if case let .loaded(rows: rows) = self, let firstSection = rows.first?.section {
-                switch firstSection.header {
-                case .title:
-                    return .small
-                case .item, .show:
-                    return .large
-                case .none:
-                    return .zero
-                }
+                return firstSection.header.size
             }
             else {
                 return .zero
             }
         }
         
-        var isEmpty: Bool {
-            if case let .loaded(rows: rows) = self {
-                return rows.isEmpty
-            }
-            else {
-                return true
-            }
+        var displaysEmptyView: Bool {
+            return headerSize != .large && !hasContent
         }
     }
     
@@ -210,7 +224,8 @@ extension SectionViewModel {
     }
     
     fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
-        if let row = Row(section: Section(id: "main", header: header), items: items) {
+        let rowItems = (header.size == .large && items.isEmpty) ? [.transparent] : items
+        if let row = Row(section: Section(id: "main", header: header), items: rowItems) {
             return [row]
         }
         else {

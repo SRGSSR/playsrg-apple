@@ -37,7 +37,7 @@ echo $PYTHON_NIGHTLIES_TAG "Version found ${CONFIGURATION}-${VERSION_STRING}-${B
 echo $PYTHON_NIGHTLIES_TAG "Making ${CONFIGURATION} app icons..."
 
 LAST_RUN_FILE="${SRCROOT}/Scripts/generate-icons-caches/generate-icons-last-run.txt"
-CURRENT_RUN="${BUNDLE_IDENTIFIER}-${CONFIGURATION}-${BUILD_NUMBER}"
+CURRENT_RUN="${DEVELOPMENT_TEAM}-${BUNDLE_IDENTIFIER}-${CONFIGURATION}-${BUILD_NUMBER}"
 LAST_RUN=""
 
 if [ -f $LAST_RUN_FILE ]; then
@@ -115,7 +115,7 @@ do
                 CAPTION="${TITLE}"
             fi
 
-            if [ "${CONFIGURATION}" == "Nightly_AppCenter" ] || [ "${CONFIGURATION}" == "Beta_AppCenter" ]; then
+            if [ "${DEVELOPMENT_TEAM}" == "VMGRRW6SG7" ]; then
                 BACKGROUND="#FFFC"
                 FILL="black"
             else

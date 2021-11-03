@@ -1,4 +1,0 @@
-#include "Links/Play RTS.debug.xcconfig"
-#include "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.debug.xcconfig"
-#include "Xcode/Play iOS Application.xcconfig"
-#include "Xcode/Play RTS.xcconfig"

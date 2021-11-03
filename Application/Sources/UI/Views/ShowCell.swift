@@ -47,7 +47,7 @@ struct ShowCell: View {
             VStack(spacing: 0) {
                 ImageView(url: model.imageUrl(with: imageType))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
-                    .background(Color.white.opacity(0.1))
+                    .background(Color.placeholder)
                 DescriptionView(model: model, style: style)
                     .padding(.horizontal, ShowCellSize.horizontalPadding)
                     .padding(.vertical, ShowCellSize.verticalPadding)

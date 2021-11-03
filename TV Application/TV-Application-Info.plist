@@ -47,12 +47,12 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(URL_SCHEME)</string>
+				<string>$(COMMON__URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
 	<key>AppCenterSecret</key>
-	<string>$(APPCENTER_SECRET)</string>
+	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

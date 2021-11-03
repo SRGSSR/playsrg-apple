@@ -15,6 +15,7 @@ NSString * const PlaySRGSettingBackgroundVideoPlaybackEnabled = @"PlaySRGSetting
 NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingSubtitleAvailabilityDisplayed";
 NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
+NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
 NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 

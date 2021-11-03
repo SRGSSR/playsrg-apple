@@ -1566,7 +1566,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
         completionHandler(NO);
         
-        // User interface orientations are a subset of device orientations with matching values
+        // User interface orientations are a subset of device orientations with matching values. Trick: To avoid the
+        // system inhibiting some rotation attempts for which it would detect no meaningful change, we perform a
+        // change to portrait mode first).
+        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+        }
         [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
     };
     

@@ -678,6 +678,8 @@ private extension PageViewController {
                         ShowAccessCell(style: .calendar)
                     }
                 #endif
+                case .transparent:
+                    Color.clear
                 }
             case .more:
                 MoreCell(section: item.section.wrappedValue, imageType: item.section.properties.imageType, filter: id)

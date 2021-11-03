@@ -10,10 +10,12 @@
 
 AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
 AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
+AnalyticsPageLevel const AnalyticsPageLevelAutomobile = @"automobile";
 AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
 AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
+AnalyticsPageLevel const AnalyticsPageLevelMostPopular = @"most popular";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";

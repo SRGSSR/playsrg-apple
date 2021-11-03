@@ -9,11 +9,11 @@
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
 	<key>AppCenterSecret</key>
-	<string>$(APPCENTER_SECRET)</string>
+	<string>$(CONFIG__APPCENTER_SECRET)</string>
 	<key>AppCenterURL</key>
 	<string>$(APPCENTER_URL)</string>
 	<key>ApplicationGroupIdentifier</key>
-	<string>$(APP_GROUP_IDENTIFIER)</string>
+	<string>$(COMMON__APP_GROUP_IDENTIFIER)</string>
 	<key>CFBundleDisplayName</key>
 	<string>$(BUNDLE_DISPLAY_NAME)</string>
 	<key>CFBundleExecutable</key>
@@ -43,8 +43,8 @@
 			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(URL_SCHEME)</string>
-				<string>appcenter-$(APPCENTER_SECRET)</string>
+				<string>$(COMMON__URL_SCHEME)</string>
+				<string>appcenter-$(CONFIG__APPCENTER_SECRET)</string>
 			</array>
 		</dict>
 	</array>
@@ -205,6 +205,17 @@
 		<false/>
 		<key>UISceneConfigurations</key>
 		<dict>
+			<key>CPTemplateApplicationSceneSessionRoleApplication</key>
+			<array>
+				<dict>
+					<key>UISceneClassName</key>
+					<string>CPTemplateApplicationScene</string>
+					<key>UISceneConfigurationName</key>
+					<string>CarPlay</string>
+					<key>UISceneDelegateClassName</key>
+					<string>$(PRODUCT_MODULE_NAME).CarPlaySceneDelegate</string>
+				</dict>
+			</array>
 			<key>UIWindowSceneSessionRoleApplication</key>
 			<array>
 				<dict>

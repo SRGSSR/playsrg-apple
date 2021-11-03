@@ -255,7 +255,7 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
+  desc 'SRF: Makes iOS screenshots.'
   lane :srfScreenshots do
     platform = 'iOS'
 
@@ -456,7 +456,6 @@ platform :ios do
     schemes = schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
-      update_app_identifier_to_appstore(platform, app_identifier)
 
       build_lane(
         configuration: 'Nightly',
@@ -474,7 +473,6 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
 
       clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
 
       UI.message schemes[index] + ' (Nightly ' + build_number + ') delivered. ✅'
     end
@@ -498,8 +496,6 @@ platform :ios do
       UI.message(schemes[index] + ' (Beta ' + build_number + ') already uploaded 🔁 ✅') unless can_upload
       next unless can_upload
 
-      update_app_identifier_to_appstore(platform, app_identifier)
-
       build_lane(
         configuration: 'Beta',
         scheme: schemes[index],
@@ -515,7 +511,6 @@ platform :ios do
       update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
 
       clean_build_artifacts
-      reset_app_identifier_to_appstore(platform)
 
       UI.message schemes[index] + ' (Beta ' + build_number + ') delivered. ✅'
     end
@@ -880,7 +875,7 @@ def default_changelog_for_nightlies(platform, service)
 
   # HAX: strip emoji from changelog
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
-  changelog = 'No change log found for this build.' if changelog.length.zero?
+  changelog = 'No change log found for this build.' if changelog.empty?
   Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
 end
 
@@ -908,7 +903,7 @@ end
 # Returns the marketing version for a platform, without suffix
 def xcode_marketing_version(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'MARKETING_VERSION'
   )
 end
@@ -916,7 +911,7 @@ end
 # Returns the build number for a platform
 def xcode_build_number(platform)
   get_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION'
   )
 end
@@ -924,11 +919,15 @@ end
 # Override build number for a platform (current project version)
 def xcode_override_build_number(platform, build_number)
   update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + '.xcconfig',
+    path: srg_xcconfig_path(platform),
     name: 'CURRENT_PROJECT_VERSION',
     value: build_number.to_s
   )
   build_number.to_s
+end
+
+def srg_xcconfig_path(platform)
+  'Xcode/Shared/Targets/' + platform + '/Common.xcconfig'
 end
 
 def appstore_platform(platform)
@@ -947,87 +946,38 @@ def login_with_app_store_connect_api_key
   )
 end
 
-# Update the app and app group identifiers for App Store Connect submit.
-def update_app_identifier_to_appstore(platform, app_identifier)
-  update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
-    name: 'PRODUCT_BUNDLE_IDENTIFIER',
-    value: app_identifier
-  )
-  set_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Application.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
-    value: 'group.' + app_identifier
-  )
-  update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
-  app_identifier
-end
-
-# Update the extension and app group identifiers for App Store Connect submit.
-def update_notification_service_extension_identifier_to_appstore(platform, app_identifier)
-  return unless platform == 'iOS'
-
-  update_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
-    name: 'PRODUCT_BUNDLE_IDENTIFIER',
-    value: app_identifier + '.notification-service-extension'
-  )
-  set_xcconfig_value(
-    path: 'Xcode/Play ' + platform + ' Notification Service Extension.xcconfig',
-    name: 'APP_GROUP_IDENTIFIER',
-    value: 'group.' + app_identifier
-  )
-end
-
 def srg_pilot(app_identifier, platform, changelog)
   login_with_app_store_connect_api_key
-  pilot(
-    app_identifier: app_identifier,
-    app_platform: appstore_platform(platform),
-    changelog: changelog,
-    distribute_external: true,
-    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
-    demo_account_required: false,
-    beta_app_review_info: beta_app_review_info
-  )
-end
+  begin
+    pilot(
+      app_identifier: app_identifier,
+      app_platform: appstore_platform(platform),
+      changelog: changelog,
+      distribute_external: true,
+      groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+      demo_account_required: false,
+      beta_app_review_info: beta_app_review_info
+    )
+  rescue StandardError => e
+    raise unless e.message.include? 'Another build is in review'
 
-# Reset the updated app identifier after App Store Connect submission.
-def reset_app_identifier_to_appstore(platform)
-  reset_git_repo(
-    force: true,
-    files: ['Xcode/Play ' + platform + ' Application.xcconfig']
-  )
-
-  return unless platform == 'iOS'
-
-  reset_git_repo(
-    force: true,
-    files: ['Xcode/Play ' + platform + ' Notification Service Extension.xcconfig']
-  )
+    UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
+  end
 end
 
 # Update dSYMs from AppStore to App Center.
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
+  min_version = options ? options[:min_version] : nil
+  version = options ? options[:version] : nil
   output_directory = 'fastlane/export/' + lane_context[SharedValues::LANE_NAME]
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
-  try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
-end
+  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+  upload_appcenter_dsyms(appcenter_appname)
 
-def try_update_dsyms(app_identifier, platform, appcenter_appname, options, output_directory)
-  min_version = options ? options[:min_version] : nil
-  version = options ? options[:version] : nil
-  begin
-    download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
-    upload_appcenter_dsyms(appcenter_appname)
-    lane_context.delete(SharedValues::DSYM_PATHS)
-  rescue StandardError => e
-    UI.important('Update dSYMs failed (' + platform + ' / ' + appcenter_appname + '). ⚠️')
-    UI.error(e.message)
-  end
+  lane_context.delete(SharedValues::DSYM_PATHS)
 end
 
 def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
@@ -1035,9 +985,7 @@ def download_appstore_dsyms(app_identifier, platform, min_version, version, outp
   platform ||= 'iOS'
   version ||= 'latest'
 
-  # download_dsyms does not support api key token yet.
-  # See https://github.com/fastlane/fastlane/discussions/17485
-  # login_with_app_store_connect_api_key
+  login_with_app_store_connect_api_key
   download_dsyms(
     app_identifier: app_identifier,
     platform: appstore_platform(platform),
@@ -1063,9 +1011,10 @@ end
 def notify_build_number_to_ci(platform, build_name)
   return unless ENV['TEAMCITY_VERSION']
 
+  build_name ||= ''
   displayed_build_number = xcode_marketing_version(platform)
   displayed_build_number += '-' + xcode_build_number(platform)
-  displayed_build_number += '+' + build_name if build_name
+  displayed_build_number += '+' + build_name unless build_name.empty?
   puts '##teamcity[buildNumber \'' + displayed_build_number + '\']'
 end
 
@@ -1172,7 +1121,7 @@ def bump_build_number_commit(platform)
   commit_version_bump(
     xcodeproj: 'PlaySRG.xcodeproj',
     message: 'Bump ' + platform + ' build number to ' + build_number,
-    include: 'Xcode/Play ' + platform + '.xcconfig',
+    include: srg_xcconfig_path(platform),
     ignore: /.+/
   )
 end

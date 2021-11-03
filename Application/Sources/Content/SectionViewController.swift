@@ -189,7 +189,7 @@ final class SectionViewController: UIViewController {
     }
     
     private func updateNavigationBar(for state: SectionViewModel.State) {
-        if model.configuration.properties.supportsEdition && !state.isEmpty {
+        if model.configuration.properties.supportsEdition && state.hasContent {
             navigationItem.rightBarButtonItem = editButtonItem
             
             if isEditing {
@@ -220,6 +220,9 @@ final class SectionViewController: UIViewController {
                                                       action: #selector(self.shareContent(_:)))
                 shareButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Share", comment: "Share button label on player view")
                 navigationItem.rightBarButtonItem = shareButtonItem
+            }
+            else {
+                navigationItem.rightBarButtonItem = nil
             }
             
             navigationItem.leftBarButtonItem = leftBarButtonItem
@@ -252,7 +255,7 @@ final class SectionViewController: UIViewController {
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
             let properties = model.configuration.properties
-            emptyView.content = (state.topHeaderSize != .large && state.isEmpty) ? EmptyView(state: .empty(type: properties.emptyType)) : nil
+            emptyView.content = state.displaysEmptyView ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
         
         #if os(iOS)
@@ -296,7 +299,7 @@ final class SectionViewController: UIViewController {
     }
     
     private static func contentInsets(for state: SectionViewModel.State) -> UIEdgeInsets {
-        let top = (state.topHeaderSize == .zero) ? Self.layoutVerticalMargin : 0
+        let top = (state.headerSize == .zero) ? Self.layoutVerticalMargin : 0
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
@@ -686,6 +689,8 @@ private extension SectionViewController {
                 }
             case let .topic(topic: topic):
                 TopicCell(topic: topic)
+            case .transparent:
+                Color.clear
             default:
                 MediaCell(media: nil, style: .show)
             }

@@ -100,7 +100,7 @@ extension View {
         #if os(tvOS)
         Group {
             if #available(tvOS 15, *) {
-                self.focusSection()
+                focusSection()
             }
             else {
                 FocusableRegion {

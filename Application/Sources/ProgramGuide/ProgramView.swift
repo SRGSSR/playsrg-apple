@@ -28,7 +28,7 @@ struct ProgramView: View {
                 VStack(spacing: 10) {
                     InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
-                        .background(Color.white.opacity(0.1))
+                        .background(Color.placeholder)
                         .cornerRadius(LayoutStandardViewCornerRadius)
                         .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
                     DescriptionView(model: model)

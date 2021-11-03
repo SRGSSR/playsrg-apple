@@ -102,7 +102,6 @@ enum ThrottledSignal {
 
 enum ApplicationSignal {
     /**
-     *
      *  Emits a signal when the application is woken up (network reachable again or moved to the foreground).
      */
     static func wokenUp() -> AnyPublisher<Void, Never> {
@@ -110,14 +109,20 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
-    private static func reachable() -> AnyPublisher<Void, Never> {
+    /**
+     *  Emits a signal when the network is reachable again.
+     */
+    static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
             .map { _ in }
             .eraseToAnyPublisher()
     }
     
-    private static func foreground() -> AnyPublisher<Void, Never> {
+    /**
+     *  Emits a signal when the application moves to the foreground.
+     */
+    static func foreground() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)
             .map { _ in }
             .eraseToAnyPublisher()
@@ -133,6 +138,16 @@ enum ApplicationSignal {
         return Empty(completeImmediately: false)
             .eraseToAnyPublisher()
         #endif
+    }
+    
+    /**
+     *  Emits a signal when the user default setting at the specified key path changes. The key path must bear
+     *  the exact same name as the setting key. Key paths should be defined in `UserDefaults+ApplicationSettings.swift`.
+     */
+    static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
+        return UserDefaults.standard.publisher(for: keyPath)
+            .map { _ in }
+            .eraseToAnyPublisher()
     }
 }
 

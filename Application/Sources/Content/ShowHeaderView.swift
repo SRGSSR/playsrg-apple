@@ -65,7 +65,7 @@ struct ShowHeaderView: View {
             Stack(direction: direction, alignment: alignment, spacing: 0) {
                 ImageView(url: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
-                    .background(Color.white.opacity(0.1))
+                    .background(Color.placeholder)
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .adaptiveMainFrame(for: uiHorizontalSizeClass)
                     .layoutPriority(1)
