@@ -12,12 +12,6 @@ import SwiftUI
 struct TimelineView: View {
     let dateInterval: DateInterval?
     
-    private static let dateComponents: DateComponents = {
-        var dateComponents = DateComponents()
-        dateComponents.minute = 0
-        return dateComponents
-    }()
-    
     private static func label(for date: Date) -> String {
         return DateFormatter.play_time.string(from: date)
     }
@@ -27,11 +21,11 @@ struct TimelineView: View {
         return width * date.timeIntervalSince(dateInterval.start) / dateInterval.duration
     }
     
-    private var dates: [Date] {
+    private func enumerateDates(matching dateComponents: DateComponents) -> [Date] {
         guard let dateInterval = dateInterval else { return [] }
         
         var dates = [Date]()
-        Calendar.current.enumerateDates(startingAfter: dateInterval.start, matching: Self.dateComponents, matchingPolicy: .nextTime) { date, _, stop in
+        Calendar.current.enumerateDates(startingAfter: dateInterval.start, matching: dateComponents, matchingPolicy: .nextTime) { date, _, stop in
             guard let date = date else { return }
             if dateInterval.contains(date) {
                 dates.append(date)
@@ -41,6 +35,20 @@ struct TimelineView: View {
             }
         }
         return dates
+    }
+    
+    private var dates: [Date] {
+        var dates = [Date]()
+        
+        var hourDateComponents = DateComponents()
+        hourDateComponents.minute = 0
+        dates.append(contentsOf: enumerateDates(matching: hourDateComponents))
+        
+        var halfHourDateComponents = DateComponents()
+        halfHourDateComponents.minute = 30
+        dates.append(contentsOf: enumerateDates(matching: halfHourDateComponents))
+        
+        return dates.sorted()
     }
     
     var body: some View {
