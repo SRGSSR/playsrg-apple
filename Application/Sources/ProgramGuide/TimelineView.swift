@@ -76,6 +76,6 @@ struct TimelineView_Previews: PreviewProvider {
     
     static var previews: some View {
         TimelineView(dateInterval: dateInterval)
-            .previewLayout(.fixed(width: 2000, height: 100))
+            .previewLayout(.fixed(width: 4000, height: 100))
     }
 }
