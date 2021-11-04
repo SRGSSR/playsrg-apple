@@ -106,6 +106,7 @@ final class ProgramGuideGridViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
         }
         
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
         
         dailyModel.$state
