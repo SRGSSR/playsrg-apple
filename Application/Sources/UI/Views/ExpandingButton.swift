@@ -12,17 +12,17 @@ import SwiftUI
 /// Behavior: h-exp, v-exp
 struct ExpandingButton: View {
     let icon: String?
-    let label: String
+    let label: String?
     let accessibilityLabel: String
     let accessibilityHint: String?
     let action: () -> Void
     
     @State private var isFocused = false
         
-    init(icon: String? = nil, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(icon: String? = nil, label: String? = nil, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
-        self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityLabel = accessibilityLabel ?? label ?? ""
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
@@ -33,9 +33,11 @@ struct ExpandingButton: View {
                 if let icon = icon {
                     Image(icon)
                 }
-                Text(label)
-                    .srgFont(.button)
-                    .lineLimit(1)
+                if let label = label {
+                    Text(label)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -59,6 +61,12 @@ struct ExpandingButton_Previews: PreviewProvider {
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
             ExpandingButton(label: "A to Z", action: {})
+                .padding()
+                .previewLayout(.fixed(width: 120, height: 60))
+            ExpandingButton(icon: "a_to_z", action: {})
+                .padding()
+                .previewLayout(.fixed(width: 120, height: 60))
+            ExpandingButton(action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
         }

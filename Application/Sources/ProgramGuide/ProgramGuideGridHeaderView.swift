@@ -12,6 +12,7 @@ import SwiftUI
     func openCalendar()
 }
 
+private let ItemWidth: CGFloat = constant(iOS: 40, tvOS: 60)
 private let ItemHeight: CGFloat = constant(iOS: 40, tvOS: 60)
 
 // MARK: View
@@ -79,16 +80,18 @@ struct ProgramGuideGridHeaderView: View {
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
-                SimpleButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     model.switchToPreviousDay()
                 }
+                .frame(width: ItemWidth)
                 Text(model.dateString)
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
-                SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     model.switchToNextDay()
                 }
+                .frame(width: ItemWidth)
             }
             .frame(height: ItemHeight)
         }
