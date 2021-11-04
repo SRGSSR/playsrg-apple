@@ -13,11 +13,14 @@ import UIKit
 private struct HostCellView<Content: View>: View {
     let isEditing: Bool
     let isSelected: Bool
+    let isUIKitFocused: Bool
     @Binding private var content: Content
     
-    init(editing: Bool, selected: Bool, content: Content) {
+    init(editing: Bool, selected: Bool, UIKitFocused: Bool, content: Content) {
         isEditing = editing
         isSelected = selected
+        isUIKitFocused = UIKitFocused
+        
         _content = .constant(content)
     }
     
@@ -25,6 +28,7 @@ private struct HostCellView<Content: View>: View {
         content
             .environment(\.isEditing, isEditing)
             .environment(\.isSelected, isSelected)
+            .environment(\.isUIKitFocused, isUIKitFocused)
     }
 }
 
@@ -34,9 +38,9 @@ private struct HostCellView<Content: View>: View {
 class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     private var hostController: UIHostingController<HostCellView<Content>>?
     
-    private func update(with content: Content?, editing: Bool, selected: Bool) {
+    private func update(with content: Content?, editing: Bool, selected: Bool, UIKitFocused: Bool) {
         if let content = content {
-            let rootView = HostCellView(editing: editing, selected: selected, content: content)
+            let rootView = HostCellView(editing: editing, selected: selected, UIKitFocused: UIKitFocused, content: content)
             if let hostController = hostController {
                 hostController.rootView = rootView
             }
@@ -58,7 +62,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     
     var content: Content? {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected)
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
         }
     }
     
@@ -69,7 +73,13 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            update(with: content, editing: isEditing, selected: isSelected)
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
+        }
+    }
+    
+    var isUIKitFocused: Bool = false {
+        didSet {
+            update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
         }
     }
 }

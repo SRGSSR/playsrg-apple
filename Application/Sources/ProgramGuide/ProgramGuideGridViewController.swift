@@ -179,23 +179,30 @@ extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
 }
 
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
-#if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Deselection is managed here rather than in view appearance methods, as those are not called with the
-        // modal presentation we use.
         let snapshot = dataSource.snapshot()
         let channel = snapshot.sectionIdentifiers[indexPath.section]
         let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
+#if os(tvOS)
+        navigateToProgram(program)
+#else
+        // Deselection is managed here rather than in view appearance methods, as those are not called with the
+        // modal presentation we use.
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
         }
-    }
 #endif
+    }
     
 #if os(tvOS)
-    func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
-        return false
+    func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
+        if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath, let previouslyFocusedCell = collectionView.cellForItem(at: previouslyFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
+            previouslyFocusedCell.isUIKitFocused = false
+        }
+        if let nextFocusedIndexPath = context.nextFocusedIndexPath, let nextFocusedCell = collectionView.cellForItem(at: nextFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
+            nextFocusedCell.isUIKitFocused = true
+        }
     }
 #endif
 }

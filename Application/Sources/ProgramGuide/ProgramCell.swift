@@ -32,14 +32,8 @@ struct ProgramCell: View {
     var body: some View {
         Group {
 #if os(tvOS)
-            GeometryReader { geometry in
-                Button(action: action) {
-                    MainView(model: model, direction: direction)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
-                }
-                .buttonStyle(FlatButtonStyle())
-            }
+            MainView(model: model, direction: direction)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
 #else
             MainView(model: model, direction: direction)
                 .selectionAppearance(.dimmed, when: isSelected)
@@ -53,13 +47,7 @@ struct ProgramCell: View {
             model.program = newValue
         }
     }
-    
-#if os(tvOS)
-    private func action() {
-        navigateToProgram(program)
-    }
-#endif
-    
+        
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
         @ObservedObject var model: ProgramCellViewModel
@@ -67,7 +55,7 @@ struct ProgramCell: View {
         
         @SRGScaledMetric var timeRangeFixedWidth: CGFloat = 90
         @State private var availableSize: CGSize = .zero
-        @Environment(\.isFocused) private var isFocused
+        @Environment(\.isUIKitFocused) private var isFocused
         
         private var timeRangeWidth: CGFloat {
             return direction == .horizontal ? timeRangeFixedWidth : .infinity

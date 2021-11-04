@@ -379,7 +379,7 @@ extension NSCollectionLayoutSize {
 extension View {
     func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
         #if os(iOS)
-        return self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+        return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
         #else
         return self
         #endif
