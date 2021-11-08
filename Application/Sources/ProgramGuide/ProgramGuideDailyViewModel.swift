@@ -50,6 +50,15 @@ extension ProgramGuideDailyViewModel {
         case failed(error: Error)
         case loaded([SRGProgramComposition])
         
+        var hasContent: Bool {
+            switch self {
+            case let .loaded(programCompositions):
+                return !programCompositions.flatMap({ $0.programs ?? [] }).isEmpty
+            default:
+                return false
+            }
+        }
+        
         var channels: [SRGChannel] {
             if case let .loaded(programCompositions) = self {
                 return programCompositions.map { $0.channel }

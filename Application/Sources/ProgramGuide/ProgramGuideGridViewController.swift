@@ -137,8 +137,8 @@ final class ProgramGuideGridViewController: UIViewController {
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case let .loaded(programCompositions):
-            emptyView.content = programCompositions.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+        case .loaded:
+            emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
