@@ -102,7 +102,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 width: Self.channelHeaderWidth,
                 height: (section != snapshot.sectionIdentifiers.count - 1) ? Self.sectionHeight + Self.verticalSpacing : Self.sectionHeight
             )
-            attrs.zIndex = 1
+            attrs.zIndex = 2
             return attrs
         }
         

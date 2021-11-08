@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: View
@@ -66,6 +67,7 @@ struct TimelineView: View {
                 .padding(.bottom, 8)
             }
         }
+        .background(Color.srgGray16)
     }
 }
 
