@@ -80,13 +80,15 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> LayoutData? {
         guard let dateInterval = dateInterval(from: snapshot) else { return nil }
-        let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
-            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
+        let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section -> [UICollectionViewLayoutAttributes] in
+            let itemIdentifiers = snapshot.itemIdentifiers(inSection: channel)
+            return itemIdentifiers.enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
+                let endDate = (item != itemIdentifiers.count - 1) ? itemIdentifiers[item + 1].startDate : program.endDate
                 attrs.frame = CGRect(
                     x: Self.channelHeaderWidth + Self.horizontalSpacing + program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
                     y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
-                    width: max(program.endDate.timeIntervalSince(program.startDate) * Self.scale - Self.horizontalSpacing, 0),
+                    width: max(endDate.timeIntervalSince(program.startDate) * Self.scale - Self.horizontalSpacing, 0),
                     height: Self.sectionHeight
                 )
                 return attrs
