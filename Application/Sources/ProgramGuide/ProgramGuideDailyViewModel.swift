@@ -11,6 +11,7 @@ import Combine
 final class ProgramGuideDailyViewModel: ObservableObject {
     var day: SRGDay {
         didSet {
+            guard day != oldValue else { return }
             updatePublishers()
         }
     }
