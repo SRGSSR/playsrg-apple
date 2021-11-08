@@ -11,7 +11,6 @@ import UIKit
 
 final class ProgramGuideDailyViewController: UIViewController {
     private let model: ProgramGuideDailyViewModel
-    
     private let programGuideModel: ProgramGuideViewModel
     
     private var cancellables = Set<AnyCancellable>()
@@ -177,7 +176,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
            let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
-            programGuideModel.scrollToTime(of: program.startDate)
+            programGuideModel.didScrollToTime(of: program.startDate)
         }
     }
     

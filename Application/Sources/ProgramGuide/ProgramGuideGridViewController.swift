@@ -117,8 +117,13 @@ final class ProgramGuideGridViewController: UIViewController {
         
         model.$dateSelection
             .sink { [weak self] dateSelection in
-                if dateSelection.transition == .day {
+                switch dateSelection.transition {
+                case .day:
                     self?.switchToDay(dateSelection.day)
+                case .time:
+                    self?.scrollToTime(dateSelection.time, animated: true)
+                case .none:
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -128,6 +133,12 @@ final class ProgramGuideGridViewController: UIViewController {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+#if os(iOS)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Self.play_supportedInterfaceOrientations
+    }
+#endif
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
         guard let dataSource = dataSource else { return }
@@ -142,7 +153,12 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state), animatingDifferences: false)
+            dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
+                // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+                // when the content size has not yet been determined (still zero).
+                self.collectionView.layoutIfNeeded()
+                self.scrollToTime(animated: false)
+            }
         }
     }
     
@@ -150,11 +166,13 @@ final class ProgramGuideGridViewController: UIViewController {
         dailyModel.day = day
     }
     
-    #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
+    private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
+        let date = dailyModel.day.date.addingTimeInterval(time ?? model.dateSelection.time)
+        let channel = dailyModel.state.channels.first
+        let programs = dailyModel.state.programs(for: channel)
+        guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
+        collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredHorizontally, animated: animated)
     }
-    #endif
 }
 
 // MARK: Protocols
@@ -205,6 +223,26 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         }
     }
 #endif
+}
+
+extension ProgramGuideGridViewController: UIScrollViewDelegate {
+    private func updateTime() {
+        if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first,
+           let channel = dailyModel.state.channels[safeIndex: indexPath.section],
+           let program = dailyModel.state.programs(for: channel)[safeIndex: indexPath.row] {
+            model.didScrollToTime(of: program.startDate)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateTime()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updateTime()
+        }
+    }
 }
 
 // MARK: Views

@@ -75,7 +75,7 @@ final class ProgramGuideViewModel: ObservableObject {
         dateSelection = dateSelection.atDay(day, transition: .none)
     }
     
-    func scrollToTime(of date: Date) {
+    func didScrollToTime(of date: Date) {
         dateSelection = dateSelection.atTime(of: date, transition: .none)
     }
 }
