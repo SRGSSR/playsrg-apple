@@ -28,16 +28,16 @@ struct MediaCell: View {
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
-    #if os(iOS)
+#if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
+#endif
     
     private var direction: StackDirection {
-        #if os(iOS)
+#if os(iOS)
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
         }
-        #endif
+#endif
         return .vertical
     }
     
@@ -62,7 +62,7 @@ struct MediaCell: View {
     
     var body: some View {
         Group {
-            #if os(tvOS)
+#if os(tvOS)
             LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
                 MediaVisualView(media: media, scale: .small)
                     .onParentFocusChange(perform: onFocusChange)
@@ -72,7 +72,7 @@ struct MediaCell: View {
                 DescriptionView(media: media, style: style)
                     .padding(.top, verticalPadding)
             }
-            #else
+#else
             Stack(direction: direction, spacing: 0) {
                 MediaVisualView(media: media, scale: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
@@ -87,12 +87,12 @@ struct MediaCell: View {
                     .padding(.top, verticalPadding)
             }
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
-            #endif
+#endif
         }
         .redactedIfNil(media)
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func defaultAction() {
         if let media = media {
             navigateToMedia(media)
@@ -106,7 +106,7 @@ struct MediaCell: View {
             onFocusAction(focused)
         }
     }
-    #endif
+#endif
     
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
@@ -165,11 +165,11 @@ private extension MediaCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
-        #if os(tvOS)
+#if os(tvOS)
         return .isButton
-        #else
+#else
         return isSelected ? .isSelected : []
-        #endif
+#endif
     }
 }
 
@@ -219,7 +219,7 @@ struct MediaCell_Previews: PreviewProvider {
         }
         .previewLayout(.fixed(width: verticalLayoutSize.width, height: verticalLayoutSize.height))
         
-        #if os(iOS)
+#if os(iOS)
         Group {
             MediaCell(media: Mock.media(), style: Self.style, layout: .horizontal)
             MediaCell(media: Mock.media(.noShow), style: Self.style, layout: .horizontal)
@@ -228,6 +228,6 @@ struct MediaCell_Previews: PreviewProvider {
             MediaCell(media: Mock.media(.nineSixteen), style: Self.style, layout: .horizontal)
         }
         .previewLayout(.fixed(width: horizontalLayoutSize.width, height: horizontalLayoutSize.height))
-        #endif
+#endif
     }
 }

@@ -97,7 +97,7 @@ extension View {
      */
     func focusable() -> some View {
         // Focus environments are available on iOS but not so useful. Do not wrap into a FocusableRegion unnecessarily.
-        #if os(tvOS)
+#if os(tvOS)
         Group {
             if #available(tvOS 15, *) {
                 focusSection()
@@ -108,9 +108,9 @@ extension View {
                 }
             }
         }
-        #else
+#else
         return self
-        #endif
+#endif
     }
 }
 

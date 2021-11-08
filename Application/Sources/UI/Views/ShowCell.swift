@@ -33,7 +33,7 @@ struct ShowCell: View {
     
     var body: some View {
         Group {
-            #if os(tvOS)
+#if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageType), action: action) {
                 ImageView(url: model.imageUrl(with: imageType))
                     .unredactable()
@@ -43,7 +43,7 @@ struct ShowCell: View {
                     .frame(maxHeight: .infinity, alignment: .top)
                     .padding(.top, ShowCellSize.verticalPadding)
             }
-            #else
+#else
             VStack(spacing: 0) {
                 ImageView(url: model.imageUrl(with: imageType))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
@@ -58,7 +58,7 @@ struct ShowCell: View {
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
             .frame(maxHeight: .infinity, alignment: .top)
-            #endif
+#endif
         }
         .redactedIfNil(show)
         .onAppear {
@@ -69,13 +69,13 @@ struct ShowCell: View {
         }
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func action() {
         if let show = show {
             navigateToShow(show)
         }
     }
-    #endif
+#endif
     
     /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {

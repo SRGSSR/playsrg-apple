@@ -21,9 +21,9 @@ protocol FeaturedContent {
     
     func visualView() -> Content
     
-    #if os(tvOS)
+#if os(tvOS)
     func action()
-    #endif
+#endif
 }
 
 struct FeaturedMediaContent: FeaturedContent {
@@ -62,13 +62,13 @@ struct FeaturedMediaContent: FeaturedContent {
         return MediaVisualView(media: media, scale: .large)
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     func action() {
         if let media = media {
             navigateToMedia(media)
         }
     }
-    #endif
+#endif
 }
 
 struct FeaturedShowContent: FeaturedContent {
@@ -103,11 +103,11 @@ struct FeaturedShowContent: FeaturedContent {
         return ImageView(url: show?.imageUrl(for: .large))
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     func action() {
         if let show = show {
             navigateToShow(show)
         }
     }
-    #endif
+#endif
 }

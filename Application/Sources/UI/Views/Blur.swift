@@ -32,7 +32,7 @@ extension View {
      *  Apply a transluscent background.
      */
     func transluscentBackground() -> some View {
-        #if os(iOS)
+#if os(iOS)
         Group {
             if #available(iOS 15, *) {
                 self.background(.thinMaterial)
@@ -41,8 +41,8 @@ extension View {
                 self.background(Blur(style: .systemThinMaterial))
             }
         }
-        #else
+#else
         return background(Color.clear)
-        #endif
+#endif
     }
 }

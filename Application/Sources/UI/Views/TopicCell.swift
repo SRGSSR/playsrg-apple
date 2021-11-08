@@ -16,30 +16,30 @@ struct TopicCell: View {
     
     var body: some View {
         Group {
-            #if os(tvOS)
+#if os(tvOS)
             ExpandingCardButton(action: action) {
                 MainView(topic: topic)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
-            #else
+#else
             MainView(topic: topic)
                 .redactable()
                 .selectionAppearance(when: isSelected && topic != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-            #endif
+#endif
         }
         .redactedIfNil(topic)
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func action() {
         if let topic = topic {
             navigateToTopic(topic)
         }
     }
-    #endif
+#endif
     
     /// Behavior: h-exp, v-exp
     private struct MainView: View {

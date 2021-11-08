@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
-    #if os(tvOS)
+#if os(tvOS)
     return tvOS
-    #else
+#else
     return iOS
-    #endif
+#endif
 }
 
 /**
@@ -185,16 +185,16 @@ extension View {
             if let label = label, !label.isEmpty {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-                #if os(tvOS)
+#if os(tvOS)
                 accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityAddTraits(traits)
-                #else
+#else
                 accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityHint(hint ?? "")
                     .accessibilityAddTraits(traits)
-                #endif
+#endif
             }
             else {
                 accessibility(hidden: true)
@@ -209,11 +209,11 @@ extension View {
      *  all the provided space in this direction.
      */
     func adaptiveSizeThatFits(in size: CGSize, for horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
-        #if os(iOS)
+#if os(iOS)
         let hostController = UIHostingController(rootView: self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
-        #else
+#else
         let hostController = UIHostingController(rootView: self)
-        #endif
+#endif
         return hostController.sizeThatFits(in: size)
     }
     
@@ -378,11 +378,11 @@ extension NSCollectionLayoutSize {
 
 extension View {
     func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
-        #if os(iOS)
+#if os(iOS)
         return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
-        #else
+#else
         return self
-        #endif
+#endif
     }
 }
 
@@ -484,11 +484,11 @@ extension UIApplication {
     @objc var mainTopViewController: UIViewController? {
         return mainWindow?.play_topViewController
     }
-
-    #if os(iOS)
+    
+#if os(iOS)
     /// Return the main tab bar root controller, if any.
     @objc var mainTabBarController: TabBarController? {
         return mainWindow?.rootViewController as? TabBarController
     }
-    #endif
+#endif
 }

@@ -189,10 +189,10 @@ extension ProgramGuideGridViewController: SRGAnalyticsViewTracking {
 
 extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
     func openCalendar() {
-    #if os(iOS)
+#if os(iOS)
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
         present(calendarViewController, animated: true)
-    #endif
+#endif
     }
 }
 

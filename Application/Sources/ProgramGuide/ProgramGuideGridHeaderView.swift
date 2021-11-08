@@ -21,16 +21,16 @@ private let ItemHeight: CGFloat = constant(iOS: 40, tvOS: 60)
 struct ProgramGuideGridHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
-    #if os(iOS)
+#if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
+#endif
     
     private var direction: StackDirection {
-    #if os(iOS)
+#if os(iOS)
         return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-    #else
+#else
         return .horizontal
-    #endif
+#endif
     }
     
     var body: some View {
@@ -60,11 +60,11 @@ struct ProgramGuideGridHeaderView: View {
                 ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
                     model.switchToYesterday()
                 }
-                #if os(iOS)
+#if os(iOS)
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideGridHeaderViewActions.openCalendar))
                 }
-                #endif
+#endif
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
                 }
@@ -100,10 +100,10 @@ struct ProgramGuideGridHeaderView: View {
 
 struct ProgramGuideGridHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.sizeThatFits)
-        #else
+#else
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 1000, height: 120))
             .environment(\.horizontalSizeClass, .regular)
@@ -111,6 +111,6 @@ struct ProgramGuideGridHeaderView_Previews: PreviewProvider {
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 375, height: 240))
             .environment(\.horizontalSizeClass, .compact)
-        #endif
+#endif
     }
 }

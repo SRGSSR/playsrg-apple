@@ -33,32 +33,32 @@ struct ShowHeaderView: View {
     fileprivate struct MainView: View {
         @ObservedObject var model: ShowHeaderViewModel
         
-        #if os(iOS)
+#if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        #endif
+#endif
         
         var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-            #if os(iOS)
+#if os(iOS)
             return UIUserInterfaceSizeClass(horizontalSizeClass)
-            #else
+#else
             return .regular
-            #endif
+#endif
         }
         
         private var direction: StackDirection {
-            #if os(iOS)
+#if os(iOS)
             return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-            #else
+#else
             return .horizontal
-            #endif
+#endif
         }
         
         private var alignment: StackAlignment {
-            #if os(iOS)
+#if os(iOS)
             return (horizontalSizeClass == .compact) ? .center : .leading
-            #else
+#else
             return .leading
-            #endif
+#endif
         }
         
         var body: some View {
@@ -119,11 +119,11 @@ struct ShowHeaderView: View {
                 }
                 HStack(spacing: 20) {
                     SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
-                    #if os(iOS)
+#if os(iOS)
                     if model.isFavorite {
                         SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
                     }
-                    #endif
+#endif
                 }
                 .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
@@ -149,11 +149,11 @@ struct ShowHeaderView: View {
                          secondaryButton: secondaryButton)
         }
         
-        #if os(iOS)
+#if os(iOS)
         private func subscriptionAction() {
             model.toggleSubscription()
         }
-        #endif
+#endif
     }
 }
 
@@ -192,10 +192,10 @@ struct ShowHeaderView_Previews: PreviewProvider {
     }()
     
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         ShowHeaderView.MainView(model: model)
             .previewLayout(.sizeThatFits)
-        #else
+#else
         ShowHeaderView.MainView(model: model)
             .frame(width: 1000)
             .previewLayout(.sizeThatFits)
@@ -205,6 +205,6 @@ struct ShowHeaderView_Previews: PreviewProvider {
             .frame(width: 375)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .compact)
-        #endif
+#endif
     }
 }

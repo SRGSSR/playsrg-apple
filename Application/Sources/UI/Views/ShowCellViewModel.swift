@@ -32,16 +32,16 @@ class ShowCellViewModel: ObservableObject {
     }
     
     private func updateData() {
-        #if os(iOS)
+#if os(iOS)
         if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
             isSubscribed = FavoritesIsSubscribedToShow(show)
         }
         else {
             isSubscribed = false
         }
-        #else
+#else
         isSubscribed = false
-        #endif
+#endif
     }
 }
 
