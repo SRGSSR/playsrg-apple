@@ -110,7 +110,7 @@ struct ProgramGuideGridHeaderView_Previews: PreviewProvider {
     static var previews: some View {
 #if os(tvOS)
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
-            .previewLayout(.sizeThatFits)
+            .previewLayout(.fixed(width: 1000, height: 400))
 #else
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 1000, height: 120))
