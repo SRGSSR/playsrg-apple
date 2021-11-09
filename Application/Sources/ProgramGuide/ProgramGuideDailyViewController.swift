@@ -19,7 +19,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
-    static let margin: CGFloat = 10
+    private static let margin: CGFloat = 10
     
     var day: SRGDay {
         return model.day

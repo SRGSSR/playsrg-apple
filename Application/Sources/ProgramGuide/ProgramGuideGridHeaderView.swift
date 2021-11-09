@@ -22,6 +22,7 @@ struct ProgramGuideGridHeaderView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
     
+    private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 80)
     private static let spacing: CGFloat = constant(iOS: 20, tvOS: 40)
     
     private var direction: StackDirection {
@@ -37,16 +38,17 @@ struct ProgramGuideGridHeaderView: View {
             if direction == .vertical {
                 VStack(spacing: Self.spacing) {
                     DaySelector(model: model)
+                        .frame(height: Self.itemHeight)
                     NavigationBar(model: model)
+                        .frame(height: Self.itemHeight)
                 }
-                .frame(height: constant(iOS: 40, tvOS: 80))
             }
             else {
                 HStack(spacing: Self.spacing) {
                     NavigationBar(model: model)
                     DaySelector(model: model)
                 }
-                .frame(height: constant(iOS: 40, tvOS: 80))
+                .frame(height: Self.itemHeight)
             }
         }
         .padding(.horizontal, constant(iOS: 10, tvOS: 20))
@@ -81,14 +83,14 @@ struct ProgramGuideGridHeaderView: View {
     private struct NavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
         
-        private static let itemWidth: CGFloat = constant(iOS: 40, tvOS: 60)
+        private static let buttonWidth: CGFloat = constant(iOS: 40, tvOS: 60)
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     model.switchToPreviousDay()
                 }
-                .frame(width: Self.itemWidth)
+                .frame(width: Self.buttonWidth)
                 
                 Text(model.dateString)
                     .srgFont(.H2)
@@ -98,7 +100,7 @@ struct ProgramGuideGridHeaderView: View {
                 ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     model.switchToNextDay()
                 }
-                .frame(width: Self.itemWidth)
+                .frame(width: Self.buttonWidth)
             }
         }
     }
