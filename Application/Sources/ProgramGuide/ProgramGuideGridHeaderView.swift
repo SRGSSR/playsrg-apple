@@ -22,6 +22,8 @@ struct ProgramGuideGridHeaderView: View {
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
     
+    private static let spacing: CGFloat = constant(iOS: 20, tvOS: 40)
+    
     private var direction: StackDirection {
 #if os(iOS)
         return (horizontalSizeClass == .compact) ? .vertical : .horizontal
@@ -33,21 +35,22 @@ struct ProgramGuideGridHeaderView: View {
     var body: some View {
         Group {
             if direction == .vertical {
-                VStack(spacing: constant(iOS: 20, tvOS: 40)) {
+                VStack(spacing: Self.spacing) {
                     DaySelector(model: model)
                     NavigationBar(model: model)
                 }
                 .frame(height: constant(iOS: 40, tvOS: 80))
             }
             else {
-                HStack(spacing: constant(iOS: 20, tvOS: 40)) {
+                HStack(spacing: Self.spacing) {
                     NavigationBar(model: model)
                     DaySelector(model: model)
                 }
                 .frame(height: constant(iOS: 40, tvOS: 80))
             }
         }
-        .padding(constant(iOS: 10, tvOS: 20))
+        .padding(.horizontal, constant(iOS: 10, tvOS: 20))
+        .padding(.vertical, Self.spacing)
         .frame(maxHeight: .infinity, alignment: .bottom)
     }
     
