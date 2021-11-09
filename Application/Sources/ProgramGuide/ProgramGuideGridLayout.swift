@@ -6,7 +6,6 @@
 
 import SRGDataProviderModel
 import UIKit
-import AVFoundation
 
 // MARK: Layout
 
@@ -61,19 +60,19 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     private var layoutData: LayoutData?
     
-    static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
+    private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
         return snapshot.sectionIdentifiers.flatMap { channel in
             return snapshot.itemIdentifiers(inSection: channel).map(\.startDate)
         }.min()
     }
     
-    static func endDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
+    private static func endDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
         return snapshot.sectionIdentifiers.flatMap { channel in
             return snapshot.itemIdentifiers(inSection: channel).map(\.endDate)
         }.max()
     }
     
-    static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
+    private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
         guard let startDate = startDate(from: snapshot), let endDate = endDate(from: snapshot) else { return nil }
         return DateInterval(start: startDate, end: endDate)
     }
