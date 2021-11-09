@@ -18,11 +18,27 @@ struct ExpandingButton: View {
     let action: () -> Void
     
     @State private var isFocused = false
-        
-    init(icon: String? = nil, label: String? = nil, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    
+    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
-        self.accessibilityLabel = accessibilityLabel ?? label ?? ""
+        self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
+        self.action = action
+    }
+    
+    init(label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        self.icon = nil
+        self.label = label
+        self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
+        self.action = action
+    }
+    
+    init(icon: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        self.icon = icon
+        self.label = nil
+        self.accessibilityLabel = accessibilityLabel ?? ""
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
@@ -64,9 +80,6 @@ struct ExpandingButton_Previews: PreviewProvider {
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
             ExpandingButton(icon: "a_to_z", action: {})
-                .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
-            ExpandingButton(action: {})
                 .padding()
                 .previewLayout(.fixed(width: 120, height: 60))
         }
