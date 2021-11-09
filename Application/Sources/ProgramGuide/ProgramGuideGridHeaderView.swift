@@ -12,9 +12,6 @@ import SwiftUI
     func openCalendar()
 }
 
-private let ItemWidth: CGFloat = constant(iOS: 40, tvOS: 60)
-private let ItemHeight: CGFloat = constant(iOS: 40, tvOS: 60)
-
 // MARK: View
 
 /// Behavior: h-exp, v-exp
@@ -34,20 +31,24 @@ struct ProgramGuideGridHeaderView: View {
     }
     
     var body: some View {
-        if direction == .vertical {
-            VStack(spacing: constant(iOS: 20, tvOS: 40)) {
-                DaySelector(model: model)
-                NavigationBar(model: model)
+        Group {
+            if direction == .vertical {
+                VStack(spacing: constant(iOS: 20, tvOS: 40)) {
+                    DaySelector(model: model)
+                    NavigationBar(model: model)
+                }
+                .frame(height: constant(iOS: 40, tvOS: 80))
             }
-            .padding(constant(iOS: 10, tvOS: 20))
-        }
-        else {
-            HStack(spacing: constant(iOS: 20, tvOS: 40)) {
-                NavigationBar(model: model)
-                DaySelector(model: model)
+            else {
+                HStack(spacing: constant(iOS: 20, tvOS: 40)) {
+                    NavigationBar(model: model)
+                    DaySelector(model: model)
+                }
+                .frame(height: constant(iOS: 40, tvOS: 80))
             }
-            .padding(constant(iOS: 10, tvOS: 20))
         }
+        .padding(constant(iOS: 10, tvOS: 20))
+        .frame(maxHeight: .infinity, alignment: .bottom)
     }
     
     /// Behavior: h-exp, v-exp
@@ -70,30 +71,32 @@ struct ProgramGuideGridHeaderView: View {
                 }
             }
             .responderChain(from: firstResponder)
-            .frame(height: ItemHeight)
         }
     }
     
-    /// Behavior: h-exp, v-hug
+    /// Behavior: h-exp, v-exp
     private struct NavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
+        
+        private static let itemWidth: CGFloat = constant(iOS: 40, tvOS: 60)
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
                     model.switchToPreviousDay()
                 }
-                .frame(width: ItemWidth)
+                .frame(width: Self.itemWidth)
+                
                 Text(model.dateString)
                     .srgFont(.H2)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
+                
                 ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     model.switchToNextDay()
                 }
-                .frame(width: ItemWidth)
+                .frame(width: Self.itemWidth)
             }
-            .frame(height: ItemHeight)
         }
     }
 }
