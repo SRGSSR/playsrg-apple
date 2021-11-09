@@ -63,6 +63,7 @@ final class ProgramGuideGridViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ProgramGuideGridLayout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
+        collectionView.contentInsetAdjustmentBehavior = constant(iOS: .automatic, tvOS: .never)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -106,7 +107,6 @@ final class ProgramGuideGridViewController: UIViewController {
             return collectionView.dequeueConfiguredReusableSupplementary(using: headerViewRegistration, for: indexPath)
         }
         
-        collectionView.contentInsetAdjustmentBehavior = constant(iOS: .automatic, tvOS: .never)
         collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
         
         dailyModel.$state
