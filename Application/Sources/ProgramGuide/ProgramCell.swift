@@ -10,13 +10,6 @@ import SwiftUI
 // MARK: Cell
 
 struct ProgramCell: View {
-    private struct FlatButtonStyle: ButtonStyle {
-        func makeBody(configuration: Configuration) -> some View {
-            configuration.label
-                .scaleEffect(!configuration.isPressed ? 1 : 0.98)
-        }
-    }
-    
     @Binding var program: SRGProgram
     let direction: StackDirection
     
