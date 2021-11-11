@@ -12,7 +12,7 @@
 
 static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 {
-    return (__bridge NSString *)UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef _Nonnull)MIMEType, NULL);
+    return (NSString *)CFBridgingRelease(UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, (__bridge CFStringRef _Nonnull)MIMEType, NULL));
 }
 
 @interface NotificationService ()
