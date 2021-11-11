@@ -350,9 +350,9 @@ extension ProfileView {
         private func posterImageDescription(posterImagesString: String) -> String {
             switch SettingPosterImages(rawValue: settingPosterImagesString) {
             case .forced:
-                return PlaySRGSettingsLocalizedString("Forced", comment: "Poster images setting state")
+                return PlaySRGSettingsLocalizedString("Force", comment: "Poster images setting state")
             case .ignored:
-                return PlaySRGSettingsLocalizedString("Ignored", comment: "Poster images setting state")
+                return PlaySRGSettingsLocalizedString("Ignore", comment: "Poster images setting state")
             default:
                 return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
             }

@@ -22,8 +22,8 @@
 			<key>Titles</key>
 			<array>
 				<string>Default (current configuration)</string>
-				<string>Forced</string>
-				<string>Ignored</string>
+				<string>Force</string>
+				<string>Ignore</string>
 			</array>
 		</dict>
 	</array>
