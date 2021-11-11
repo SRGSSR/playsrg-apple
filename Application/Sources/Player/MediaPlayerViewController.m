@@ -876,7 +876,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.summaryLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.summaryLabel.text = media.play_fullSummary;
         
-        BOOL downloaded = [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded;
+        BOOL downloaded = (mainChapterMedia != nil) ? [Download downloadForMedia:mainChapterMedia].state == DownloadStateDownloaded : NO;
         BOOL isWebFirst = mainChapterMedia.play_webFirst;
         BOOL hasSubtitles = resource.play_subtitlesAvailable && ! downloaded;
         BOOL hasAudioDescription = resource.play_audioDescriptionAvailable && ! downloaded;
@@ -1303,7 +1303,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateFavoriteStatusForShow:(SRGShow *)show
 {
-    BOOL isFavorite = FavoritesContainsShow(show);
+    BOOL isFavorite = (show != nil) ? FavoritesContainsShow(show) : NO;
     UIImage *image = isFavorite ? [UIImage imageNamed:@"favorite_full"] : [UIImage imageNamed:@"favorite"];
     [self.favoriteButton setImage:image forState:UIControlStateNormal];
     [self.currentProgramFavoriteButton setImage:image forState:UIControlStateNormal];
