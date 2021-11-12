@@ -9,7 +9,7 @@ import SwiftUI
 // MARK: View
 
 /// Behavior: h-hug, v-exp
-struct TimelineNowView: View {
+struct VerticalNowIndicatorView: View {
     static let width: CGFloat = 13
     static let headerHeight: CGFloat = 8
     
@@ -40,9 +40,9 @@ private struct Triangle: Shape {
 
 // MARK: Preview
 
-struct TimelineNowView_Previews: PreviewProvider {
+struct VerticalNowIndicatorView_Previews: PreviewProvider {
     static var previews: some View {
-        TimelineNowView()
+        VerticalNowIndicatorView()
             .previewLayout(.fixed(width: 40, height: 400))
     }
 }

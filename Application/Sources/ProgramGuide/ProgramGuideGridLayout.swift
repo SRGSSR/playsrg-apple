@@ -41,7 +41,7 @@ import UIKit
 final class ProgramGuideGridLayout: UICollectionViewLayout {
     enum ElementKind: String {
         case timeline
-        case timelineNow
+        case verticalNowIndicator
     }
     
     private struct LayoutData {
@@ -118,16 +118,16 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         
         let nowDate = Date()
         if dateInterval.contains(nowDate) {
-            let timelineNowAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.timelineNow.rawValue, with: IndexPath(item: 0, section: 0))
-            timelineNowAttr.frame = CGRect(
-                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - TimelineNowView.width / 2,
-                y: collectionView.contentOffset.y + Self.timelineHeight - TimelineNowView.headerHeight,
-                width: TimelineNowView.width,
-                height: CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) + TimelineNowView.headerHeight
+            let verticalNowIndicatorAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.verticalNowIndicator.rawValue, with: IndexPath(item: 0, section: 0))
+            verticalNowIndicatorAttr.frame = CGRect(
+                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - VerticalNowIndicatorView.width / 2,
+                y: collectionView.contentOffset.y + Self.timelineHeight - VerticalNowIndicatorView.headerHeight,
+                width: VerticalNowIndicatorView.width,
+                height: CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) + VerticalNowIndicatorView.headerHeight
             )
-            timelineNowAttr.zIndex = 2
+            verticalNowIndicatorAttr.zIndex = 2
             
-            decorationAttrs.append(timelineNowAttr)
+            decorationAttrs.append(verticalNowIndicatorAttr)
         }
         
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
