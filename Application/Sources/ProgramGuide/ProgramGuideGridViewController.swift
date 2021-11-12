@@ -80,6 +80,15 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
+        Timer.publish(every: 10, on: .main, in: .common)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                // Refresh vertical now indicator decoration view
+                self?.collectionView.collectionViewLayout.invalidateLayout()
+            }
+            .store(in: &cancellables)
+        
         self.view = view
     }
     
