@@ -41,6 +41,7 @@ import UIKit
 final class ProgramGuideGridLayout: UICollectionViewLayout {
     enum ElementKind: String {
         case timeline
+        case timelineNow
     }
     
     private struct LayoutData {
@@ -99,7 +100,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 width: Self.channelHeaderWidth,
                 height: (section != snapshot.sectionIdentifiers.count - 1) ? Self.sectionHeight + Self.verticalSpacing : Self.sectionHeight
             )
-            attrs.zIndex = 2
+            attrs.zIndex = 3
             return attrs
         }
         
@@ -113,7 +114,23 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         timelineAttr.dateInterval = dateInterval
         timelineAttr.zIndex = 1
         
-        return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: [timelineAttr], dateInterval: dateInterval)
+        var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
+        
+        let nowDate = Date()
+        if dateInterval.contains(nowDate) {
+            let timelineNowAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.timelineNow.rawValue, with: IndexPath(item: 0, section: 0))
+            timelineNowAttr.frame = CGRect(
+                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - TimelineNowView.width / 2,
+                y: collectionView.contentOffset.y + Self.timelineHeight - TimelineNowView.headerHeight,
+                width: TimelineNowView.width,
+                height: CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) + TimelineNowView.headerHeight
+            )
+            timelineNowAttr.zIndex = 2
+            
+            decorationAttrs.append(timelineNowAttr)
+        }
+        
+        return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
     
     override func prepare() {

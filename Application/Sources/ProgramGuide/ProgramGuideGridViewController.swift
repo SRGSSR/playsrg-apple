@@ -108,6 +108,7 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
+        collectionView.collectionViewLayout.register(TimelineNowDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timelineNow.rawValue)
         
         dailyModel.$state
             .sink { [weak self] state in
@@ -251,5 +252,11 @@ final class TimelineDecorationView: HostSupplementaryView<TimelineView> {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
         guard let timelineAttributes = layoutAttributes as? TimelineLayoutAttributes else { return }
         content = TimelineView(dateInterval: timelineAttributes.dateInterval)
+    }
+}
+
+final class TimelineNowDecorationView: HostSupplementaryView<TimelineNowView> {
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        content = TimelineNowView()
     }
 }
