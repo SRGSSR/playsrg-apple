@@ -84,8 +84,9 @@ final class ProgramGuideGridViewController: UIViewController {
             .autoconnect()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                // Refresh vertical now indicator decoration view
-                self?.collectionView.collectionViewLayout.invalidateLayout()
+                let invalidationContext = UICollectionViewLayoutInvalidationContext()
+                invalidationContext.invalidateDecorationElements(ofKind: ProgramGuideGridLayout.ElementKind.verticalNowIndicator.rawValue, at: [ProgramGuideGridLayout.verticalNowIndicatorIndexPath])
+                self?.collectionView.collectionViewLayout.invalidateLayout(with: invalidationContext)
             }
             .store(in: &cancellables)
         

@@ -44,6 +44,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         case verticalNowIndicator
     }
     
+    static let verticalNowIndicatorIndexPath = IndexPath(item: 0, section: 0)
+    
     private struct LayoutData {
         let layoutAttrs: [UICollectionViewLayoutAttributes]
         let supplementaryAttrs: [UICollectionViewLayoutAttributes]
@@ -116,21 +118,30 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
         
-        let nowDate = Date()
-        if dateInterval.contains(nowDate) {
-            let verticalNowIndicatorAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.verticalNowIndicator.rawValue, with: IndexPath(item: 0, section: 0))
-            verticalNowIndicatorAttr.frame = CGRect(
-                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - VerticalNowIndicatorView.width / 2,
-                y: collectionView.contentOffset.y + Self.timelineHeight - VerticalNowIndicatorView.headerHeight,
-                width: VerticalNowIndicatorView.width,
-                height: VerticalNowIndicatorView.headerHeight + CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing
-            )
-            verticalNowIndicatorAttr.zIndex = 2
-            
+        if let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
             decorationAttrs.append(verticalNowIndicatorAttr)
         }
         
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
+    }
+    
+    private static func verticalNowIndicatorAttr(dateInterval: DateInterval, in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes? {
+        let nowDate = Date()
+        if dateInterval.contains(nowDate) {
+            let verticalNowIndicatorAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.verticalNowIndicator.rawValue, with: verticalNowIndicatorIndexPath)
+            verticalNowIndicatorAttr.frame = CGRect(
+                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - VerticalNowIndicatorView.width / 2,
+                y: collectionView.contentOffset.y + Self.timelineHeight - VerticalNowIndicatorView.headerHeight,
+                width: VerticalNowIndicatorView.width,
+                height: VerticalNowIndicatorView.headerHeight + CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing
+            )
+            verticalNowIndicatorAttr.zIndex = 2
+            
+            return verticalNowIndicatorAttr
+        }
+        else {
+            return nil
+        }
     }
     
     override func prepare() {
@@ -173,6 +184,17 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        // Update vertical now indicator decoration frame
+        if elementKind == ElementKind.verticalNowIndicator.rawValue {
+            guard let collectionView = collectionView, let currentLayoutData = layoutData else { return nil }
+            
+            var newDecorationAttrs = currentLayoutData.decorationAttrs.filter { $0.indexPath == indexPath && $0.representedElementKind != elementKind }
+            if let verticalNowIndicatorAttr = ProgramGuideGridLayout.verticalNowIndicatorAttr(dateInterval: currentLayoutData.dateInterval, in: collectionView) {
+                newDecorationAttrs = newDecorationAttrs.appending(verticalNowIndicatorAttr)
+            }
+            layoutData = LayoutData(layoutAttrs: currentLayoutData.layoutAttrs, supplementaryAttrs: currentLayoutData.supplementaryAttrs, decorationAttrs: newDecorationAttrs, dateInterval: currentLayoutData.dateInterval)
+        }
+        
         return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
 }
