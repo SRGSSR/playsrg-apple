@@ -20,7 +20,7 @@ struct TimelineNowView: View {
                 .frame(width: Self.width, height: Self.headerHeight)
             Rectangle()
                 .fill(.white)
-                .frame(width: 1, height: .infinity)
+                .frame(width: 1)
         }
     }
 }
