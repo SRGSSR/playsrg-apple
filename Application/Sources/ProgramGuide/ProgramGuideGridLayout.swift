@@ -123,7 +123,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - VerticalNowIndicatorView.width / 2,
                 y: collectionView.contentOffset.y + Self.timelineHeight - VerticalNowIndicatorView.headerHeight,
                 width: VerticalNowIndicatorView.width,
-                height: CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) + VerticalNowIndicatorView.headerHeight
+                height: VerticalNowIndicatorView.headerHeight + CGFloat(snapshot.sectionIdentifiers.count) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing
             )
             verticalNowIndicatorAttr.zIndex = 2
             
