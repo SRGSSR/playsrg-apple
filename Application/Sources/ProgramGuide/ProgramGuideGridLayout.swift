@@ -144,6 +144,14 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         }
     }
     
+    private static func updatedLayoutData(from layoutData: LayoutData, withVerticalNowIndicatorAttr: UICollectionViewLayoutAttributes?, in collectionView: UICollectionView) -> LayoutData {
+        var newDecorationAttrs = layoutData.decorationAttrs.filter { $0.indexPath == verticalNowIndicatorIndexPath && $0.representedElementKind != ElementKind.verticalNowIndicator.rawValue }
+        if let verticalNowIndicatorAttr = withVerticalNowIndicatorAttr {
+            newDecorationAttrs = newDecorationAttrs.appending(verticalNowIndicatorAttr)
+        }
+        return LayoutData(layoutAttrs: layoutData.layoutAttrs, supplementaryAttrs: layoutData.supplementaryAttrs, decorationAttrs: newDecorationAttrs, dateInterval: layoutData.dateInterval)
+    }
+    
     override func prepare() {
         super.prepare()
         
@@ -188,11 +196,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         if elementKind == ElementKind.verticalNowIndicator.rawValue {
             guard let collectionView = collectionView, let currentLayoutData = layoutData else { return nil }
             
-            var newDecorationAttrs = currentLayoutData.decorationAttrs.filter { $0.indexPath == indexPath && $0.representedElementKind != elementKind }
-            if let verticalNowIndicatorAttr = ProgramGuideGridLayout.verticalNowIndicatorAttr(dateInterval: currentLayoutData.dateInterval, in: collectionView) {
-                newDecorationAttrs = newDecorationAttrs.appending(verticalNowIndicatorAttr)
-            }
-            layoutData = LayoutData(layoutAttrs: currentLayoutData.layoutAttrs, supplementaryAttrs: currentLayoutData.supplementaryAttrs, decorationAttrs: newDecorationAttrs, dateInterval: currentLayoutData.dateInterval)
+            let verticalNowIndicatorAttr = ProgramGuideGridLayout.verticalNowIndicatorAttr(dateInterval: currentLayoutData.dateInterval, in: collectionView)
+            layoutData = ProgramGuideGridLayout.updatedLayoutData(from: currentLayoutData, withVerticalNowIndicatorAttr: verticalNowIndicatorAttr, in: collectionView)
         }
         
         return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
