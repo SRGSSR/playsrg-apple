@@ -275,8 +275,8 @@ private extension ProgramGuideDailyViewModel {
     
     static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
         let bouquet = bouquet(from: state, for: provider, day: day)
-        return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
-            .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
+        return SRGDataProvider.current!.tvPrograms(day: day, minimal: true)
+            .append(SRGDataProvider.current!.tvPrograms(day: day))
             .map { .content(programCompositions: $0) }
             .tryCatch { error in
                 guard bouquet.hasPrograms else { throw error }

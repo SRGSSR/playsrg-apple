@@ -203,6 +203,21 @@ extension SRGDataProvider {
             .map { filter?.compatibleShows($0) ?? $0 }
             .eraseToAnyPublisher()
     }
+    
+    func tvPrograms(day: SRGDay? = nil, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
+        let tvProgramsVendors = ApplicationConfiguration.shared.tvProgramsVendors
+        assert(tvProgramsVendors.count == 3, "Expected 3 vendors for tv programs")
+        
+        return Publishers.CombineLatest3(
+            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[0], day: day, minimal: minimal),
+            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[1], day: day, minimal: minimal),
+            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[2], day: day, minimal: minimal)
+        )
+            .map { programCompositions1, programCompositions2, programCompositions3 in
+                return programCompositions1 + programCompositions2 + programCompositions3
+            }
+            .eraseToAnyPublisher()
+    }
 }
 
 enum UserDataPublishers {

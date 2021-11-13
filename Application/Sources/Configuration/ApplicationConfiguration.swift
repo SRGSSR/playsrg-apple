@@ -81,6 +81,19 @@ extension ApplicationConfiguration {
         
         return Self.typeformUrlWithParameters(feedbackUrl)
     }
+    
+    var tvProgramsVendors: [SRGVendor] {
+        switch vendor {
+        case .RSI:
+            return [.RSI, .SRF, .RTS]
+        case .RTR:
+            return [.RTR, .RTS, .RSI]
+        case .RTS:
+            return [.RTS, .SRF, .RSI]
+        default:
+            return [.SRF, .RTS, .RSI]
+        }
+    }
 }
 
 enum ConfiguredSection: Hashable {
