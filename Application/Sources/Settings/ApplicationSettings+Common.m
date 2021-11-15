@@ -30,7 +30,7 @@ NSValueTransformer *SettingPosterImagesTransformer(void)
 
 SettingPosterImages ApplicationSettingPosterImages(void)
 {
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     return [[SettingPosterImagesTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingPosterImages]] integerValue];
 #else
     return SettingPosterImagesDefault;
