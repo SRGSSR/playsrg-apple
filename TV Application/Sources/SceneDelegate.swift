@@ -140,19 +140,19 @@ class SceneDelegate: UIResponder {
 extension SceneDelegate: UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        window = UIWindow(windowScene: windowScene)
-        window!.makeKeyAndVisible()
-        window!.rootViewController = Self.applicationRootViewController()
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.makeKeyAndVisible()
+        window.rootViewController = Self.applicationRootViewController()
+        self.window = window
         
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
         settingUpdatesCancellable = ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
             .receive(on: DispatchQueue.main)
-            .sink { [weak window] in
-                if let window = window {
-                    window.rootViewController = Self.applicationRootViewController()
-                }
+            .sink {
+                window.rootViewController = Self.applicationRootViewController()
             }
 #endif
     }
