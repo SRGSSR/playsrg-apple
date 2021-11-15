@@ -95,11 +95,11 @@ final class SearchViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        #if os (iOS)
+#if os (iOS)
         if play_isMovingFromParentViewController() {
             searchController.searchBar.resignFirstResponder()
         }
-        #endif
+#endif
     }
 }
 

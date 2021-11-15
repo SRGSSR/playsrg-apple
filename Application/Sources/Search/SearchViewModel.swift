@@ -19,7 +19,7 @@ final class SearchViewModel: ObservableObject {
             querySubject
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query in
-                    return Self.publisher(forQuery: query, trigger: trigger)
+                    return Self.searchResults(matchingQuery: query, trigger: trigger)
                 }
                 .switchToLatest()
                 .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
@@ -116,49 +116,66 @@ extension SearchViewModel {
 
 // MARK: Publishers
 
-// TODO: Factor out into smaller publishers; extract suggestions from media results, page sizes for by URNs requests
-//       prepend at the correct location to provide initial values
 private extension SearchViewModel {
     typealias Output = (rows: [Row], suggestions: [SRGSearchSuggestion]?)
     
-    static func publisher(forQuery query: String, trigger: Trigger) -> AnyPublisher<Output, Error> {
+    static func mostSearchedShows() -> AnyPublisher<Output, Error> {
         let vendor = ApplicationConfiguration.shared.vendor
-        if query.isEmpty {
-            return SRGDataProvider.current!.mostSearchedShows(for: vendor)
-                .map { shows in
-                    let items = shows.map { Item.show($0) }
-                    return (rows: [Row(section: .mostSearchedShows, items: items)], suggestions: nil)
-                }
-                .eraseToAnyPublisher()
-        }
-        else {
-            let pageSize = ApplicationConfiguration.shared.pageSize
-            return Publishers.CombineLatest(
-                SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: .none, pageSize: pageSize, paginatedBy: nil)
-                    .map { output in
-                        return SRGDataProvider.current!.shows(withUrns: output.showUrns)
-                    }
-                    .switchToLatest(),
-                SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
-                    .map { output in
-                        return SRGDataProvider.current!.medias(withUrns: output.mediaUrns)
-                    }
-                    .switchToLatest()
-                    .scan([]) { $0 + $1 }
-            )
-            .map { shows, medias in
-                var rows = [Row]()
-                if !shows.isEmpty {
-                    let items = shows.map { Item.show($0) }
-                    rows.append(Row(section: .shows, items: items))
-                }
-                if !medias.isEmpty {
-                    let items = medias.map { Item.media($0) }
-                    rows.append(Row(section: .medias, items: items))
-                }
-                return (rows: rows, suggestions: nil)
+        return SRGDataProvider.current!.mostSearchedShows(for: vendor)
+            .map { shows in
+                let items = shows.map { Item.show($0) }
+                return (rows: [Row(section: .mostSearchedShows, items: items)], suggestions: nil)
             }
             .eraseToAnyPublisher()
+    }
+    
+    static func shows(matchingQuery query: String) -> AnyPublisher<[SRGShow], Error> {
+        let vendor = ApplicationConfiguration.shared.vendor
+        let pageSize = ApplicationConfiguration.shared.pageSize
+        return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: .none, pageSize: pageSize, paginatedBy: nil)
+            .map { output in
+                return SRGDataProvider.current!.shows(withUrns: output.showUrns)
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
+    }
+    
+    static func medias(matchingQuery query: String, paginatedBy signal: Trigger.Signal) -> AnyPublisher<[SRGMedia], Error> {
+        let vendor = ApplicationConfiguration.shared.vendor
+        let pageSize = ApplicationConfiguration.shared.pageSize
+        return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: signal)
+            .map { output in
+                return SRGDataProvider.current!.medias(withUrns: output.mediaUrns)
+            }
+            .switchToLatest()
+            .scan([]) { $0 + $1 }
+            .eraseToAnyPublisher()
+    }
+    
+    static func rows(shows: [SRGShow], medias: [SRGMedia]) -> [Row] {
+        var rows = [Row]()
+        if !shows.isEmpty {
+            let items = shows.map { Item.show($0) }
+            rows.append(Row(section: .shows, items: items))
+        }
+        if !medias.isEmpty {
+            let items = medias.map { Item.media($0) }
+            rows.append(Row(section: .medias, items: items))
+        }
+        return rows
+    }
+    
+    static func searchResults(matchingQuery query: String, trigger: Trigger) -> AnyPublisher<Output, Error> {
+        if !query.isEmpty {
+            return Publishers.CombineLatest(
+                shows(matchingQuery: query),
+                medias(matchingQuery: query, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+            )
+            .map { (rows: rows(shows: $0, medias: $1), suggestions: nil) }
+            .eraseToAnyPublisher()
+        }
+        else {
+            return mostSearchedShows()
         }
     }
 }
