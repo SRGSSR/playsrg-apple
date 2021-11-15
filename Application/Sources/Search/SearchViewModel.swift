@@ -117,14 +117,12 @@ extension SearchViewModel {
 // MARK: Publishers
 
 private extension SearchViewModel {
-    typealias Output = (rows: [Row], suggestions: [SRGSearchSuggestion]?)
-    
-    static func mostSearchedShows() -> AnyPublisher<Output, Error> {
+    static func mostSearchedShows() -> AnyPublisher<[Row], Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         return SRGDataProvider.current!.mostSearchedShows(for: vendor)
             .map { shows in
                 let items = shows.map { Item.show($0) }
-                return (rows: [Row(section: .mostSearchedShows, items: items)], suggestions: nil)
+                return [Row(section: .mostSearchedShows, items: items)]
             }
             .eraseToAnyPublisher()
     }
@@ -140,15 +138,18 @@ private extension SearchViewModel {
             .eraseToAnyPublisher()
     }
     
-    static func medias(matchingQuery query: String, paginatedBy signal: Trigger.Signal) -> AnyPublisher<[SRGMedia], Error> {
+    static func medias(matchingQuery query: String, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.pageSize
         return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: signal)
             .map { output in
                 return SRGDataProvider.current!.medias(withUrns: output.mediaUrns)
+                    .map { (medias: $0, suggestions: output.suggestions) }
             }
             .switchToLatest()
-            .scan([]) { $0 + $1 }
+            .scan((medias: [], suggestions: nil)) {
+                return (medias: $0.medias + $1.medias, suggestions: $1.suggestions )
+            }
             .eraseToAnyPublisher()
     }
     
@@ -165,17 +166,19 @@ private extension SearchViewModel {
         return rows
     }
     
-    static func searchResults(matchingQuery query: String, trigger: Trigger) -> AnyPublisher<Output, Error> {
+    static func searchResults(matchingQuery query: String, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !query.isEmpty {
             return Publishers.CombineLatest(
                 shows(matchingQuery: query),
                 medias(matchingQuery: query, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
             )
-            .map { (rows: rows(shows: $0, medias: $1), suggestions: nil) }
+            .map { (rows: rows(shows: $0, medias: $1.medias), suggestions: $1.suggestions) }
             .eraseToAnyPublisher()
         }
         else {
             return mostSearchedShows()
+                .map { (rows: $0, suggestions: nil) }
+                .eraseToAnyPublisher()
         }
     }
 }
