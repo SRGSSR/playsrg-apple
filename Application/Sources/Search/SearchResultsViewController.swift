@@ -8,10 +8,23 @@ import Combine
 import SwiftUI
 import UIKit
 
+
+// MARK: Protocols
+
+#if os(iOS)
+protocol SearchResultsViewControllerDelegate: AnyObject {
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectItem item: SearchViewModel.Item)
+}
+#endif
+
 // MARK: View controller
 
 final class SearchResultsViewController: UIViewController {
-    @ObservedObject var model: SearchViewModel
+    @ObservedObject private var model: SearchViewModel
+    
+#if os(iOS)
+    weak var delegate: SearchResultsViewControllerDelegate?
+#endif
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -99,16 +112,22 @@ final class SearchResultsViewController: UIViewController {
             .store(in: &cancellables)
     }
     
-#if os(tvOS)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+#if os(iOS)
+        deselectItems(in: collectionView, animated: animated)
+#endif
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+#if os(tvOS)
         if let searchController = parent as? UISearchController {
             searchController.tabBarObservedScrollView = collectionView
             searchController.searchControllerObservedScrollView = collectionView
         }
-    }
 #endif
+    }
     
 #if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
@@ -141,18 +160,6 @@ final class SearchResultsViewController: UIViewController {
     }
     
 #if os(iOS)
-    private func open(_ item: SearchViewModel.Item) {
-        switch item {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = SectionViewController.showViewController(for: show)
-                navigationController.pushViewController(showViewController, animated: true)
-            }
-        }
-    }
-    
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
@@ -170,7 +177,7 @@ extension SearchResultsViewController: UICollectionViewDelegate {
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
-        open(item)
+        delegate?.searchResultsViewController(self, didSelectItem: item)
     }
 #endif
     

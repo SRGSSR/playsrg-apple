@@ -41,6 +41,10 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         let searchResultsViewController = SearchResultsViewController(model: model)
+#if os(iOS)
+        searchResultsViewController.delegate = self
+#endif
+        
         searchController = UISearchController(searchResultsController: searchResultsViewController)
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
@@ -91,19 +95,47 @@ final class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        searchController.searchResultsController?.viewWillAppear(animated)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        searchController.searchResultsController?.viewDidAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        searchController.searchResultsController?.viewWillDisappear(animated)
 #if os (iOS)
         if play_isMovingFromParentViewController() {
             searchController.searchBar.resignFirstResponder()
         }
 #endif
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        searchController.searchResultsController?.viewDidDisappear(animated)
+    }
 }
 
 // MARK: Protocols
+
+#if os(iOS)
+extension SearchViewController: SearchResultsViewControllerDelegate {
+    func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectItem item: SearchViewModel.Item) {
+        switch item {
+        case let .media(media):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+        case let .show(show):
+            if let navigationController = navigationController {
+                let showViewController = SectionViewController.showViewController(for: show)
+                navigationController.pushViewController(showViewController, animated: true)
+            }
+        }
+    }
+}
+#endif
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
