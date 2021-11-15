@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
      */
     SettingPosterImagesDefault,
     /**
-     *  Force poster images.
+     *  Forced poster images.
      */
     SettingPosterImagesForced,
     /**

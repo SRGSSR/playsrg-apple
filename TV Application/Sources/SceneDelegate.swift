@@ -142,18 +142,18 @@ extension SceneDelegate: UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(windowScene: windowScene)
         window!.makeKeyAndVisible()
-        window!.rootViewController = SceneDelegate.applicationRootViewController()
+        window!.rootViewController = Self.applicationRootViewController()
         
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
         settingUpdatesCancellable = ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
-        .receive(on: DispatchQueue.main)
-        .sink { [weak window] in
-            if let window = window {
-                window.rootViewController = SceneDelegate.applicationRootViewController()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak window] in
+                if let window = window {
+                    window.rootViewController = Self.applicationRootViewController()
+                }
             }
-        }
 #endif
     }
     
