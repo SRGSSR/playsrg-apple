@@ -50,7 +50,7 @@ OBJC_EXPORT SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(voi
 OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
 
-OBJC_EXPORT NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void);
+OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);

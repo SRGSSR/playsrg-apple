@@ -6,7 +6,7 @@
 PYTHON_NIGHTLIES_TAG="---->"
 PYTHON_NIGHTLIES_CLOSING_TAG="***********************"
 
-if [ "${CONFIGURATION}" == "AppStore" ] || [ $ENABLE_PREVIEWS == "YES" ]; then
+if [ "${CONFIGURATION}" == "AppStore" ] || [ "${CONFIGURATION}" == "Debug" ] || [ $ENABLE_PREVIEWS == "YES" ]; then
     exit 0
 fi
 
@@ -94,8 +94,6 @@ do
             TITLE="Beta"
         elif [ "${CONFIGURATION}" == "Nightly" ] || [ "${CONFIGURATION}" == "Nightly_AppCenter" ]; then
     	    TITLE="Nightly"
-        elif [ "${CONFIGURATION}" == "Debug" ]; then
-            TITLE="Debug"
         else
             TITLE="Und"
         fi
