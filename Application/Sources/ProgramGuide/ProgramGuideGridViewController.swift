@@ -128,14 +128,6 @@ final class ProgramGuideGridViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-        
-        Timer.publish(every: 10, on: .main, in: .common)
-            .autoconnect()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.collectionView.collectionViewLayout.invalidateLayout()
-            }
-            .store(in: &cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {

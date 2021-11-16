@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import SRGDataProviderModel
 import UIKit
 
@@ -62,6 +63,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     
     private var layoutData: LayoutData?
+    private var cancellables = Set<AnyCancellable>()
     
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
         return snapshot.sectionIdentifiers.flatMap { channel in
@@ -142,6 +144,21 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         else {
             return nil
         }
+    }
+    
+    override init() {
+        super.init()
+        Timer.publish(every: 10, on: .main, in: .common)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.invalidateLayout()
+            }
+            .store(in: &cancellables)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func prepare() {
