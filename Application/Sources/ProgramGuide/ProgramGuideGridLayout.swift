@@ -117,11 +117,11 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         timelineAttr.zIndex = 1
         
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
-        
-        if let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
-            decorationAttrs.append(verticalNowIndicatorAttr)
+        if !snapshot.sectionIdentifiers.isEmpty {
+            if let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
+                decorationAttrs.append(verticalNowIndicatorAttr)
+            }
         }
-        
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
     
