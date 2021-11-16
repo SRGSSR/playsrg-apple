@@ -119,10 +119,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         timelineAttr.zIndex = 1
         
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
-        if !snapshot.sectionIdentifiers.isEmpty {
-            if let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
-                decorationAttrs.append(verticalNowIndicatorAttr)
-            }
+        if !snapshot.sectionIdentifiers.isEmpty, let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
+            decorationAttrs.append(verticalNowIndicatorAttr)
         }
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
@@ -138,7 +136,6 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 height: max(VerticalNowIndicatorView.headerHeight + CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing - collectionView.contentOffset.y, VerticalNowIndicatorView.headerHeight)
             )
             verticalNowIndicatorAttr.zIndex = 2
-            
             return verticalNowIndicatorAttr
         }
         else {
