@@ -266,7 +266,7 @@ extension ProgramViewModel {
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel = channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
-                return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+                return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .catch { _ in
                         return Empty()
                     }
