@@ -144,14 +144,6 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         }
     }
     
-    private static func updatedLayoutData(from layoutData: LayoutData, withVerticalNowIndicatorAttr: UICollectionViewLayoutAttributes?, in collectionView: UICollectionView) -> LayoutData {
-        var newDecorationAttrs = layoutData.decorationAttrs.filter { $0.indexPath == verticalNowIndicatorIndexPath && $0.representedElementKind != ElementKind.verticalNowIndicator.rawValue }
-        if let verticalNowIndicatorAttr = withVerticalNowIndicatorAttr {
-            newDecorationAttrs = newDecorationAttrs.appending(verticalNowIndicatorAttr)
-        }
-        return LayoutData(layoutAttrs: layoutData.layoutAttrs, supplementaryAttrs: layoutData.supplementaryAttrs, decorationAttrs: newDecorationAttrs, dateInterval: layoutData.dateInterval)
-    }
-    
     override func prepare() {
         super.prepare()
         
@@ -192,14 +184,6 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        // Update vertical now indicator decoration frame
-        if elementKind == ElementKind.verticalNowIndicator.rawValue {
-            guard let collectionView = collectionView, let currentLayoutData = layoutData else { return nil }
-            
-            let verticalNowIndicatorAttr = ProgramGuideGridLayout.verticalNowIndicatorAttr(dateInterval: currentLayoutData.dateInterval, in: collectionView)
-            layoutData = ProgramGuideGridLayout.updatedLayoutData(from: currentLayoutData, withVerticalNowIndicatorAttr: verticalNowIndicatorAttr, in: collectionView)
-        }
-        
         return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
     }
 }
