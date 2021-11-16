@@ -64,6 +64,7 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.contentInsetAdjustmentBehavior = constant(iOS: .automatic, tvOS: .never)
+        collectionView.isDirectionalLockEnabled = true
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
