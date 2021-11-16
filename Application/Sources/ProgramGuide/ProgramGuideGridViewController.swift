@@ -80,16 +80,6 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
-        Timer.publish(every: 10, on: .main, in: .common)
-            .autoconnect()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                let invalidationContext = UICollectionViewLayoutInvalidationContext()
-                invalidationContext.invalidateDecorationElements(ofKind: ProgramGuideGridLayout.ElementKind.verticalNowIndicator.rawValue, at: [ProgramGuideGridLayout.verticalNowIndicatorIndexPath])
-                self?.collectionView.collectionViewLayout.invalidateLayout(with: invalidationContext)
-            }
-            .store(in: &cancellables)
-        
         self.view = view
     }
     
@@ -136,6 +126,16 @@ final class ProgramGuideGridViewController: UIViewController {
                 case .none:
                     break
                 }
+            }
+            .store(in: &cancellables)
+        
+        Timer.publish(every: 10, on: .main, in: .common)
+            .autoconnect()
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                let invalidationContext = UICollectionViewLayoutInvalidationContext()
+                invalidationContext.invalidateDecorationElements(ofKind: ProgramGuideGridLayout.ElementKind.verticalNowIndicator.rawValue, at: [ProgramGuideGridLayout.verticalNowIndicatorIndexPath])
+                self?.collectionView.collectionViewLayout.invalidateLayout(with: invalidationContext)
             }
             .store(in: &cancellables)
     }
