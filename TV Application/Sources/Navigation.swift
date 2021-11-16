@@ -61,9 +61,8 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
     }
 }
 
-func navigateToProgram(_ program: SRGProgram, animated: Bool = true) {
-    guard let mediaUrn = program.mediaURN else { return }
-    mediaCancellable = SRGDataProvider.current!.media(withUrn: mediaUrn)
+func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true) {
+    mediaCancellable = mediaPublisher(for: program, in: channel)?
         .receive(on: DispatchQueue.main)
         .sink { _ in
         } receiveValue: { media in
@@ -125,4 +124,18 @@ private func applyLetterboxControllerSettings(to controller: SRGLetterboxControl
     let applicationConfiguration = ApplicationConfiguration.shared
     controller.endTolerance = applicationConfiguration.endTolerance
     controller.endToleranceRatio = applicationConfiguration.endToleranceRatio
+}
+
+private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
+    if program.play_contains(Date()) {
+        return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
+            .compactMap { $0.first(where: { $0.channel == channel }) }
+            .eraseToAnyPublisher()
+    }
+    else if let mediaUrn = program.mediaURN {
+        return SRGDataProvider.current!.media(withUrn: mediaUrn)
+    }
+    else {
+        return nil
+    }
 }

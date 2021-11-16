@@ -204,7 +204,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         let channel = snapshot.sectionIdentifiers[indexPath.section]
         let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
 #if os(tvOS)
-        navigateToProgram(program)
+        navigateToProgram(program, in: channel)
 #else
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
