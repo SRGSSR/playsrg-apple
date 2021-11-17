@@ -61,12 +61,7 @@ final class PageViewController: UIViewController {
             return CalendarViewController(radioChannel: radioChannel, date: date)
         }
         else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
-            if UIDevice.current.userInterfaceIdiom == .pad {
-                return ProgramGuideGridViewController(date: date)
-            }
-            else {
-                return ProgramGuideListViewController(date: date)
-            }
+            return ProgramGuideViewController(date: date)
         }
         else {
             return CalendarViewController(radioChannel: nil, date: date)

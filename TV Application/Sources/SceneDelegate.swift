@@ -9,7 +9,7 @@ import SRGDataProviderCombine
 import SwiftUI
 import UIKit
 
-class SceneDelegate: UIResponder {
+final class SceneDelegate: UIResponder {
     var window: UIWindow?
     
     private var cancellables = Set<AnyCancellable>()
@@ -77,7 +77,7 @@ class SceneDelegate: UIResponder {
         }
         
         if !configuration.isTvGuideUnavailable {
-            let programGuideViewController = ProgramGuideGridViewController()
+            let programGuideViewController = ProgramGuideViewController()
             programGuideViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("TV guide", comment: "TV program guide view title"), image: nil, tag: 3)
             programGuideViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.tvGuideTabBarItem.rawValue
             viewControllers.append(programGuideViewController)

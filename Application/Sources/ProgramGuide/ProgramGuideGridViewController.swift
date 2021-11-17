@@ -31,13 +31,10 @@ final class ProgramGuideGridViewController: UIViewController {
         return snapshot
     }
     
-    init(date: Date? = nil) {
-        let initialDate = date ?? Date()
-        model = ProgramGuideViewModel(date: initialDate)
-        dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: initialDate))
-        
+    init(model: ProgramGuideViewModel) {
+        self.model = model
+        dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.dateSelection.date))
         super.init(nibName: nil, bundle: nil)
-        title = NSLocalizedString("TV guide", comment: "TV program guide view title")
     }
     
     required init?(coder: NSCoder) {

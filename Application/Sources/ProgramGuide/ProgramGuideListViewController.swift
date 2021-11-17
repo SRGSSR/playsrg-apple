@@ -17,13 +17,12 @@ final class ProgramGuideListViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(date: Date? = nil) {
-        model = ProgramGuideViewModel(date: date ?? Date())
+    init(model: ProgramGuideViewModel) {
+        self.model = model
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
         super.init(nibName: nil, bundle: nil)
-        title = NSLocalizedString("TV guide", comment: "TV program guide view title")
         addChild(pageViewController)
     }
     
