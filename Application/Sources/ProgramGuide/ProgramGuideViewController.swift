@@ -82,3 +82,15 @@ final class ProgramGuideViewController: UIViewController {
 #endif
     }
 }
+
+// MARK: Protocols
+
+extension ProgramGuideViewController: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return AnalyticsPageTitle.programGuide.rawValue
+    }
+    
+    var srg_pageViewLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+    }
+}

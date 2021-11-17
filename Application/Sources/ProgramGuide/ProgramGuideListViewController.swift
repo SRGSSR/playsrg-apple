@@ -105,16 +105,6 @@ final class ProgramGuideListViewController: UIViewController {
 
 // MARK: Protocols
 
-extension ProgramGuideListViewController: SRGAnalyticsViewTracking {
-    var srg_pageViewTitle: String {
-        return AnalyticsPageTitle.programGuide.rawValue
-    }
-    
-    var srg_pageViewLevels: [String]? {
-        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-    }
-}
-
 extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
     func openCalendar() {
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
