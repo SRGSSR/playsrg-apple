@@ -35,7 +35,7 @@ struct ProgramPreview: View {
         let program: SRGProgram?
         
         private var subtitle: String? {
-            return program?.title
+            return program?.subtitle != nil ? program?.title : nil
         }
         
         private var title: String {
