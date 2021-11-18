@@ -133,12 +133,6 @@ final class ProgramGuideGridViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-#if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-#endif
-    
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
         guard let dataSource = dataSource else { return }
         

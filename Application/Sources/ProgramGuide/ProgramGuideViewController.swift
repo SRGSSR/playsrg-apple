@@ -69,6 +69,12 @@ final class ProgramGuideViewController: UIViewController {
         updateLayout()
     }
     
+#if os(iOS)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Self.play_supportedInterfaceOrientations
+    }
+#endif
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateLayout()

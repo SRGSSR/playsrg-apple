@@ -97,10 +97,6 @@ final class ProgramGuideListViewController: UIViewController {
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
 }
 
 // MARK: Protocols
