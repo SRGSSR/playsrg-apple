@@ -2155,6 +2155,11 @@
 		6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E323D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
+		6FF5D1F52746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
+		6FF5D1F62746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
+		6FF5D1F72746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
+		6FF5D1F82746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
+		6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */; };
 		6FF60CC924F2FA8D006013C2 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF60CC824F2FA8D006013C2 /* CollectionView.swift */; };
 		6FF60CCA24F2FA8D006013C2 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF60CC824F2FA8D006013C2 /* CollectionView.swift */; };
 		6FF60CCB24F2FA8D006013C2 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF60CC824F2FA8D006013C2 /* CollectionView.swift */; };
@@ -3184,6 +3189,7 @@
 		6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCellViewModel.swift; sourceTree = "<group>"; };
 		6FF4D4DE23D5B07E008B981A /* UIVisualEffectView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIVisualEffectView+PlaySRG.h"; sourceTree = "<group>"; };
 		6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIVisualEffectView+PlaySRG.m"; sourceTree = "<group>"; };
+		6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramPreviewModel.swift; sourceTree = "<group>"; };
 		6FF60CC824F2FA8D006013C2 /* CollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		6FF7BB8F22A78DE400FA758A /* SearchSettingSegmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingSegmentCell.h; sourceTree = "<group>"; };
 		6FF7BB9022A78DE400FA758A /* SearchSettingSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSwitchCell.m; sourceTree = "<group>"; };
@@ -4765,6 +4771,7 @@
 				6F928E76274513AB00CE54B5 /* ProgramGuideViewController.swift */,
 				6F0ACF3226A97DD800CDE936 /* ProgramGuideViewModel.swift */,
 				6F9F57592746678E00DCA629 /* ProgramPreview.swift */,
+				6FF5D1F42746BB0400460F70 /* ProgramPreviewModel.swift */,
 				6F054FC526B98C44007A34F8 /* ProgramView.swift */,
 				6F054FBF26B98C33007A34F8 /* ProgramViewModel.swift */,
 				6FEF23712732C2D40098C639 /* TimelineView.swift */,
@@ -9636,6 +9643,7 @@
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6FF5D1F52746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6FE14E65263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F7C666F26DE809100B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCF925B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
@@ -9770,6 +9778,7 @@
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6FF5D1F62746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6FE14E66263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F7C667026DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFA25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
@@ -9904,6 +9913,7 @@
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6FF5D1F72746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6FE14E67263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F7C667126DE809300B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFB25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
@@ -10038,6 +10048,7 @@
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6FF5D1F82746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6FE14E68263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F7C667226DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFC25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,
@@ -10172,6 +10183,7 @@
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
+				6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6FE14E69263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F7C667326DE809500B4EC80 /* UIWindow+PlaySRG.m in Sources */,
 				6F9DDCFD25B1ABB7001D5688 /* SearchResultsView.swift in Sources */,

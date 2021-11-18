@@ -12,70 +12,49 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct ProgramPreview: View {
-    let program: SRGProgram?
+    @Binding var program: SRGProgram?
     
-    private var imageUrl: URL? {
-        return program?.imageUrl(for: .large)
+    @StateObject private var model = ProgramPreviewModel()
+    
+    init(program: SRGProgram?) {
+        _program = .constant(program)
     }
     
     var body: some View {
         HStack {
-            DescriptionView(program: program)
-            ImageView(url: imageUrl)
+            DescriptionView(model: model)
+            ImageView(url: model.imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .redactable()
                 .layoutPriority(1)
                 .overlay(ImageOverlay())
         }
         .redactedIfNil(program)
+        .onAppear {
+            model.program = program
+        }
+        .onChange(of: program) { newValue in
+            model.program = newValue
+        }
     }
     
     /// Behavior: h-exp, v-exp
     struct DescriptionView: View {
-        let program: SRGProgram?
-        
-        private var subtitle: String? {
-            return program?.subtitle != nil ? program?.title : nil
-        }
-        
-        private var title: String {
-            if let subtitle = program?.subtitle {
-                return subtitle
-            }
-            else {
-                return program?.title ?? "                "
-            }
-        }
-        
-        private var timeInformation: String {
-            guard let program = program else { return "       " }
-            let nowDate = Date()
-            if program.play_contains(nowDate) {
-                let remainingTimeInterval = program.endDate.timeIntervalSince(nowDate)
-                let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
-                return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
-            }
-            else {
-                let startTime = DateFormatter.play_time.string(from: program.startDate)
-                let endTime = DateFormatter.play_time.string(from: program.endDate)
-                // Unbreakable spaces before / after the separator
-                return "\(startTime) - \(endTime)"
-            }
-        }
+        @ObservedObject var model: ProgramPreviewModel
         
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
-                if let subtitle = subtitle {
+                if let subtitle = model.subtitle {
                     Text(subtitle)
                         .srgFont(.H4)
                         .lineLimit(1)
                         .foregroundColor(.srgGray96)
                 }
-                Text(title)
+                Text(model.title)
                     .srgFont(.H2)
                     .lineLimit(2)
                     .foregroundColor(.srgGrayC7)
-                Text(timeInformation)
+                Text(model.timeInformation)
                     .srgFont(.H4)
                     .lineLimit(1)
                     .foregroundColor(.srgGray96)
