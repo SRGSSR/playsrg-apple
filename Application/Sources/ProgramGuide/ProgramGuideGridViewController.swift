@@ -84,7 +84,11 @@ final class ProgramGuideGridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+#if os(tvOS)
+        headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
+#else
         headerView.content = ProgramGuideGridHeaderView(model: model)
+#endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
             cell.content = ProgramCell(program: program, direction: .vertical)
@@ -201,8 +205,18 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath, let previouslyFocusedCell = collectionView.cellForItem(at: previouslyFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
             previouslyFocusedCell.isUIKitFocused = false
         }
-        if let nextFocusedIndexPath = context.nextFocusedIndexPath, let nextFocusedCell = collectionView.cellForItem(at: nextFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
-            nextFocusedCell.isUIKitFocused = true
+        if let nextFocusedIndexPath = context.nextFocusedIndexPath {
+            if let nextFocusedCell = collectionView.cellForItem(at: nextFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
+                nextFocusedCell.isUIKitFocused = true
+            }
+            
+            let snapshot = dataSource.snapshot()
+            let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
+            let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row]
+            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
+        }
+        else {
+            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
         }
     }
 #endif

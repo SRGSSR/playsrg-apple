@@ -82,14 +82,15 @@ struct ProgramPreview: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             .padding(.horizontal, 60)
-            .padding(.vertical, 100)
+            .padding(.top, 180)
+            .padding(.bottom, 40)
         }
     }
     
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
         var body: some View {
-            LinearGradient(gradient: Gradient(colors: [.black, .clear]), startPoint: .leading, endPoint: .center)
+            LinearGradient(gradient: Gradient(colors: [.srgGray16, .clear]), startPoint: .leading, endPoint: .center)
         }
     }
 }
