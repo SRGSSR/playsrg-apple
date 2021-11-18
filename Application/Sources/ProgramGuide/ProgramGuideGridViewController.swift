@@ -147,6 +147,10 @@ final class ProgramGuideGridViewController: UIViewController {
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
             emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .generic)) : nil
+#if os(tvOS)
+            let firstCurrentProgram = state.programs(for: nil).first { $0.play_contains(Date()) }
+            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: firstCurrentProgram)
+#endif
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -214,9 +218,6 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
             let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row]
             headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
-        }
-        else {
-            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
         }
     }
 #endif

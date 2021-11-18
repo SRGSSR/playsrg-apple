@@ -27,7 +27,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: self?.day ?? .today)
                 .map { programCompositions in
-                    return State.loaded(programCompositions)
+                    return State.loaded(programCompositions: programCompositions)
                 }
                 .prepend(State.loading)
                 .catch { error in
@@ -49,7 +49,7 @@ extension ProgramGuideDailyViewModel {
     enum State {
         case loading
         case failed(error: Error)
-        case loaded([SRGProgramComposition])
+        case loaded(programCompositions: [SRGProgramComposition])
         
         var hasContent: Bool {
             switch self {
@@ -61,7 +61,7 @@ extension ProgramGuideDailyViewModel {
         }
         
         var channels: [SRGChannel] {
-            if case let .loaded(programCompositions) = self {
+            if case let .loaded(programCompositions: programCompositions) = self {
                 return programCompositions.map { $0.channel }
             }
             else {
@@ -70,7 +70,7 @@ extension ProgramGuideDailyViewModel {
         }
         
         func programs(for channel: SRGChannel?) -> [SRGProgram] {
-            if case let .loaded(programCompositions) = self {
+            if case let .loaded(programCompositions: programCompositions) = self {
                 if let channel = channel {
                     return Self.programs(from: programCompositions.first(where: { $0.channel == channel }))
                 }
