@@ -57,11 +57,10 @@ struct ExpandingButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
-            .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
-            .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
+            .foregroundColor(.srgGrayC7)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
+        .buttonStyle(FlatButtonStyle(focused: isFocused))
     }
 }
 
@@ -75,13 +74,13 @@ struct ExpandingButton_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 240, height: 120))
             ExpandingButton(icon: "a_to_z", label: "A to Z", action: {})
                 .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
+                .previewLayout(.fixed(width: 240, height: 120))
             ExpandingButton(label: "A to Z", action: {})
                 .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
+                .previewLayout(.fixed(width: 120, height: 120))
             ExpandingButton(icon: "a_to_z", action: {})
                 .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
+                .previewLayout(.fixed(width: 120, height: 120))
         }
     }
 }

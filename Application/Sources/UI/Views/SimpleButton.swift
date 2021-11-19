@@ -46,13 +46,10 @@ struct SimpleButton: View {
                 }
             }
             .onParentFocusChange { isFocused = $0 }
-            .padding(.horizontal, constant(iOS: 10, tvOS: 16))
-            .padding(.vertical, constant(iOS: 8, tvOS: 12))
-            .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
-            .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
-            .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
+            .foregroundColor(.srgGrayC7)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
+        .buttonStyle(FlatButtonStyle(focused: isFocused))
     }
 }
 
