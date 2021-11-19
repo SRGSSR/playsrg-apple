@@ -29,6 +29,7 @@ struct ProgramGuideGridHeaderView: View {
             ProgramPreview(program: focusedProgram)
 #endif
             NavigationBar(model: model)
+                .focusable()
         }
     }
     
