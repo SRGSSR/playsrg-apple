@@ -8,6 +8,7 @@ import SwiftUI
 
 // MARK: View
 
+/// Behavior: h-exp, v-exp
 struct ChannelHeaderView: View {
     let channel: SRGChannel
     

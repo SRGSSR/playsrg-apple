@@ -22,12 +22,12 @@ final class ProgramPreviewModel: ObservableObject {
             return subtitle
         }
         else {
-            return program?.title ?? "                "
+            return program?.title ?? .placeholder(length: 16)
         }
     }
     
     var timeInformation: String {
-        guard let program = program else { return "       " }
+        guard let program = program else { return .placeholder(length: 8) }
         let nowDate = Date()
         if program.play_contains(nowDate) {
             let remainingTimeInterval = program.endDate.timeIntervalSince(nowDate)
