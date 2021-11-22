@@ -5,11 +5,17 @@
 //
 
 import SRGAppearanceSwift
+import SRGDataProviderCombine
 import SwiftUI
 import UIKit
 
 class SceneDelegate: UIResponder {
     var window: UIWindow?
+    
+    private var cancellables = Set<AnyCancellable>()
+#if DEBUG || NIGHTLY || BETA
+    private var settingUpdatesCancellable: AnyCancellable?
+#endif
     
     private static func configureTabBarController(_ tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
@@ -44,7 +50,7 @@ class SceneDelegate: UIResponder {
         tabBarController.view.backgroundColor = .srgGray16
     }
     
-    private func applicationRootViewController() -> UIViewController {
+    static private func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
         let videosViewController = PageViewController(id: .video)
@@ -134,11 +140,21 @@ class SceneDelegate: UIResponder {
 extension SceneDelegate: UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        window = UIWindow(windowScene: windowScene)
-        window!.makeKeyAndVisible()
-        window!.rootViewController = applicationRootViewController()
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.makeKeyAndVisible()
+        window.rootViewController = Self.applicationRootViewController()
+        self.window = window
         
         handleURLContexts(connectionOptions.urlContexts)
+        
+#if DEBUG || NIGHTLY || BETA
+        settingUpdatesCancellable = ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
+            .receive(on: DispatchQueue.main)
+            .sink {
+                window.rootViewController = Self.applicationRootViewController()
+            }
+#endif
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

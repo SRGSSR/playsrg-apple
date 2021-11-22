@@ -63,6 +63,7 @@ struct ProfileView: View {
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
                 SectionWideSupportItem()
+                PosterImagesItem()
             }
             #endif
         }
@@ -75,9 +76,9 @@ struct ProfileView: View {
 // MARK: List items
 
 extension ProfileView {
-    struct ProfileListItem: View {
+    private struct ProfileListItem: View {
         @ObservedObject var model: ProfileViewModel
-        @State var alertDisplayed = false
+        @State private var alertDisplayed = false
         
         private var text: String {
             guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
@@ -119,8 +120,8 @@ extension ProfileView {
         }
     }
     
-    struct AutoplayListItem: View {
-        @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
+    private struct AutoplayListItem: View {
+        @AppStorage(PlaySRGSettingAutoplayEnabled) private var isAutoplayEnabled = false
         
         private func action() {
             isAutoplayEnabled.toggle()
@@ -141,8 +142,8 @@ extension ProfileView {
         }
     }
     
-    struct SubtitleAvailabilityListItem: View {
-        @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
+    private struct SubtitleAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) private var isSubtitleAvailabilityDisplayed = false
         
         private func action() {
             isSubtitleAvailabilityDisplayed.toggle()
@@ -163,8 +164,8 @@ extension ProfileView {
         }
     }
     
-    struct AudioDescriptionAvailabilityListItem: View {
-        @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
+    private struct AudioDescriptionAvailabilityListItem: View {
+        @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) private var isAudioDescriptionAvailabilityDisplayed = false
         
         private func action() {
             isAudioDescriptionAvailabilityDisplayed.toggle()
@@ -185,9 +186,9 @@ extension ProfileView {
         }
     }
     
-    struct HistoryRemovalListItem: View {
+    private struct HistoryRemovalListItem: View {
         @ObservedObject var model: ProfileViewModel
-        @State var alertDisplayed = false
+        @State private var alertDisplayed = false
         
         private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
@@ -224,9 +225,9 @@ extension ProfileView {
         }
     }
     
-    struct FavoritesRemovalListItem: View {
+    private struct FavoritesRemovalListItem: View {
         @ObservedObject var model: ProfileViewModel
-        @State var alertDisplayed = false
+        @State private var alertDisplayed = false
         
         private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
@@ -263,9 +264,9 @@ extension ProfileView {
         }
     }
     
-    struct WatchLaterRemovalListItem: View {
+    private struct WatchLaterRemovalListItem: View {
         @ObservedObject var model: ProfileViewModel
-        @State var alertDisplayed = false
+        @State private var alertDisplayed = false
         
         private func alert() -> Alert {
             let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
@@ -303,8 +304,8 @@ extension ProfileView {
     }
     
     #if DEBUG || NIGHTLY || BETA
-    struct SectionWideSupportItem: View {
-        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
+    private struct SectionWideSupportItem: View {
+        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) private var isSectionWideSupportEnabled = false
         
         private func action() {
             isSectionWideSupportEnabled.toggle()
@@ -324,9 +325,55 @@ extension ProfileView {
             .padding()
         }
     }
+    
+    private struct PosterImagesItem: View {
+        private enum SettingPosterImages: String {
+            case `default`
+            case forced
+            case ignored
+        }
+        
+        @AppStorage(PlaySRGSettingPosterImages) private var settingPosterImages = SettingPosterImages.default
+        
+        private var text: String {
+            switch settingPosterImages {
+            case .forced:
+                return PlaySRGSettingsLocalizedString("Force", comment: "Poster images setting state")
+            case .ignored:
+                return PlaySRGSettingsLocalizedString("Ignore", comment: "Poster images setting state")
+            case .`default`:
+                return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
+            }
+        }
+        
+        private func action() {
+            switch settingPosterImages {
+            case .forced:
+                settingPosterImages = .ignored
+            case .ignored:
+                settingPosterImages = .`default`
+            case .`default`:
+                settingPosterImages = .forced
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Poster images", comment: "Poster images setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(text)
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
     #endif
     
-    struct VersionListItem: View {
+    private struct VersionListItem: View {
         var model: ProfileViewModel
         
         var body: some View {

@@ -10,8 +10,8 @@ import SRGAppearanceSwift
 import TvOSTextViewer
 import SwiftUI
 
-var isPresenting = false
-var cancellables = Set<AnyCancellable>()
+private var isPresenting = false
+private var cancellables = Set<AnyCancellable>()
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
     guard !isPresenting else { return }
