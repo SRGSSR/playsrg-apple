@@ -67,11 +67,11 @@
 		081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
-		081A8BD72602B69600530FFF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8BD62602B69600530FFF /* SwiftPackageProductDependency */; };
-		081A8C232602C0EA00530FFF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C222602C0EA00530FFF /* SwiftPackageProductDependency */; };
-		081A8C252602C0F800530FFF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C242602C0F800530FFF /* SwiftPackageProductDependency */; };
-		081A8C272602C10300530FFF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C262602C10300530FFF /* SwiftPackageProductDependency */; };
-		081A8C292602C10E00530FFF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C282602C10E00530FFF /* SwiftPackageProductDependency */; };
+		081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8BD62602B69600530FFF /* SRGDataProviderCombine */; };
+		081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C222602C0EA00530FFF /* SRGDataProviderCombine */; };
+		081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C242602C0F800530FFF /* SRGDataProviderCombine */; };
+		081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C262602C10300530FFF /* SRGDataProviderCombine */; };
+		081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C282602C10E00530FFF /* SRGDataProviderCombine */; };
 		081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
 		081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
@@ -87,11 +87,11 @@
 		0820930A208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930B208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930C208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
-		082099F525780A7F0077CF8B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 082099F425780A7F0077CF8B /* SwiftPackageProductDependency */; };
-		08209A0B25780AAA0077CF8B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0A25780AAA0077CF8B /* SwiftPackageProductDependency */; };
-		08209A0D25780ABE0077CF8B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0C25780ABE0077CF8B /* SwiftPackageProductDependency */; };
-		08209A0F25780AC50077CF8B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0E25780AC50077CF8B /* SwiftPackageProductDependency */; };
-		08209A1125780ACB0077CF8B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A1025780ACB0077CF8B /* SwiftPackageProductDependency */; };
+		082099F525780A7F0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */; };
+		08209A0B25780AAA0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */; };
+		08209A0D25780ABE0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */; };
+		08209A0F25780AC50077CF8B /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */; };
+		08209A1125780ACB0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */; };
 		0821D53E227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D53F227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
 		0821D540227F5ED300FC091F /* DeepLinkService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0821D53D227F5ED300FC091F /* DeepLinkService.m */; };
@@ -147,11 +147,11 @@
 		084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		084EF78026035BB40058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		084EF78126035BB50058A567 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
-		084F0968254861A0009DEDD2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081454BA2546CDD500BB7CA6 /* SwiftPackageProductDependency */; };
-		084F0969254861A0009DEDD2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081455132546CE4300BB7CA6 /* SwiftPackageProductDependency */; };
-		084F096A254861A0009DEDD2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081455152546CE4F00BB7CA6 /* SwiftPackageProductDependency */; };
-		084F096B254861A0009DEDD2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081455172546CE5700BB7CA6 /* SwiftPackageProductDependency */; };
-		084F096C254861A0009DEDD2 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 081455192546CE5F00BB7CA6 /* SwiftPackageProductDependency */; };
+		084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081454BA2546CDD500BB7CA6 /* SwiftMessages */; };
+		084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455132546CE4300BB7CA6 /* SwiftMessages */; };
+		084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455152546CE4F00BB7CA6 /* SwiftMessages */; };
+		084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455172546CE5700BB7CA6 /* SwiftMessages */; };
+		084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */ = {isa = PBXBuildFile; productRef = 081455192546CE5F00BB7CA6 /* SwiftMessages */; };
 		084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
 		084F94B122D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
 		084F94B222D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */; };
@@ -392,7 +392,7 @@
 		08C6D1FE2727061400C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690041D38E08C00BB8AAA /* Localizable.strings */; };
 		08C6D1FF2727061F00C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
 		08C6D2002727062200C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
-		08C97F89271E655D003AE4F3 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08C97F88271E655D003AE4F3 /* SwiftPackageProductDependency */; };
+		08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 08C97F88271E655D003AE4F3 /* SRGMediaPlayer */; };
 		08D5990D26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990E26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
 		08D5990F26AAEF7A00FE1A5B /* ProgramGuideHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideHeaderView.swift */; };
@@ -408,16 +408,16 @@
 		08E6136825843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136925843C8200C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
 		08E6136A25843C8300C5FE4B /* PlayApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F80106820443230009FE197 /* PlayApplication.m */; };
-		08EA3E78259D2AD6008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E77259D2AD6008D412F /* SwiftPackageProductDependency */; };
-		08EA3E7C259D2AE8008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7B259D2AE8008D412F /* SwiftPackageProductDependency */; };
-		08EA3E7E259D2AEF008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7D259D2AEF008D412F /* SwiftPackageProductDependency */; };
-		08EA3E80259D2AF7008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7F259D2AF7008D412F /* SwiftPackageProductDependency */; };
-		08EA3E82259D2B1B008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E81259D2B1B008D412F /* SwiftPackageProductDependency */; };
-		08EA3E98259D2C0E008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E97259D2C0E008D412F /* SwiftPackageProductDependency */; };
-		08EA3E9A259D2C15008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E99259D2C15008D412F /* SwiftPackageProductDependency */; };
-		08EA3E9C259D2C1C008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SwiftPackageProductDependency */; };
-		08EA3E9E259D2C25008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SwiftPackageProductDependency */; };
-		08EA3EA0259D2C2B008D412F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SwiftPackageProductDependency */; };
+		08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E77259D2AD6008D412F /* SRGIdentity */; };
+		08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7B259D2AE8008D412F /* SRGIdentity */; };
+		08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7D259D2AEF008D412F /* SRGIdentity */; };
+		08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E7F259D2AF7008D412F /* SRGIdentity */; };
+		08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E81259D2B1B008D412F /* SRGIdentity */; };
+		08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
+		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
+		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
 		08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
 		08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
 		08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
@@ -448,11 +448,11 @@
 		08F4683C26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */; };
 		08F4683D26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */; };
 		08F4683E26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */; };
-		08F5DAED262D99A900F717D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEC262D99A900F717D0 /* SwiftPackageProductDependency */; };
-		08F5DAEF262D99B400F717D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEE262D99B400F717D0 /* SwiftPackageProductDependency */; };
-		08F5DAF1262D99BF00F717D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF0262D99BF00F717D0 /* SwiftPackageProductDependency */; };
-		08F5DAF3262D99CB00F717D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF2262D99CB00F717D0 /* SwiftPackageProductDependency */; };
-		08F5DAF5262D99D400F717D0 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF4262D99D400F717D0 /* SwiftPackageProductDependency */; };
+		08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */; };
+		08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */; };
+		08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */; };
+		08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */; };
+		08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */; };
 		08F5DB10262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
 		08F5DB11262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
 		08F5DB12262DC7F700F717D0 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F5DB0F262DC7F700F717D0 /* Logger.swift */; };
@@ -624,16 +624,16 @@
 		6F16C80E26025945006F685A /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		6F16C80F26025945006F685A /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
 		6F16C81026025945006F685A /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C80B26025945006F685A /* PageViewModel.swift */; };
-		6F17DC16266AB81C009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC15266AB81C009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC18266AB837009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC17266AB837009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC1A266AB83E009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC19266AB83E009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC1C266AB846009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1B266AB846009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC1E266AB84E009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1D266AB84E009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC20266AB854009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1F266AB854009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC22266AB85B009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC21266AB85B009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC24266AB862009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC23266AB862009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC26266AB867009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC25266AB867009F74C6 /* SwiftPackageProductDependency */; };
-		6F17DC28266AB86D009F74C6 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC27266AB86D009F74C6 /* SwiftPackageProductDependency */; };
+		6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC15266AB81C009F74C6 /* Nuke */; };
+		6F17DC18266AB837009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC17266AB837009F74C6 /* Nuke */; };
+		6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC19266AB83E009F74C6 /* Nuke */; };
+		6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1B266AB846009F74C6 /* Nuke */; };
+		6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1D266AB84E009F74C6 /* Nuke */; };
+		6F17DC20266AB854009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC1F266AB854009F74C6 /* Nuke */; };
+		6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC21266AB85B009F74C6 /* Nuke */; };
+		6F17DC24266AB862009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC23266AB862009F74C6 /* Nuke */; };
+		6F17DC26266AB867009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC25266AB867009F74C6 /* Nuke */; };
+		6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 6F17DC27266AB86D009F74C6 /* Nuke */; };
 		6F1938321EFBFE9E0017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938331EFBFEA40017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382F1EFBFE8D0017B1D1 /* ApplicationConfiguration.json */; };
 		6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */; };
@@ -659,31 +659,31 @@
 		6F1F92A022A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A122A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
 		6F1F92A222A539D40026BFAC /* SearchShowListCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F1F929D22A539D40026BFAC /* SearchShowListCollectionViewCell.m */; };
-		6F2544F52521BAA400F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2544F42521BAA400F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545B52521C14E00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B42521C14E00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545B72521C15E00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B62521C15E00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545B92521C15E00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B82521C15E00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545BB2521C16800F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BA2521C16800F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545BD2521C16800F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BC2521C16800F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545BF2521C17000F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BE2521C17000F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545C12521C17000F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C02521C17000F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545C32521C17700F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C22521C17700F9F4FE /* SwiftPackageProductDependency */; };
-		6F2545C52521C17700F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C42521C17700F9F4FE /* SwiftPackageProductDependency */; };
-		6F25461C2521C22C00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461B2521C22C00F9F4FE /* SwiftPackageProductDependency */; };
-		6F25461E2521C23300F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461D2521C23300F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546202521C23B00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461F2521C23B00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546222521C24600F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546212521C24600F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546242521C24E00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546232521C24E00F9F4FE /* SwiftPackageProductDependency */; };
-		6F25463B2521C34800F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25463A2521C34800F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546512521C35300F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546502521C35300F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546532521C35A00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546522521C35A00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546552521C36100F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546542521C36100F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546572521C36E00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546562521C36E00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546C12521CFD400F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C02521CFD400F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546C32521CFDC00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C22521CFDC00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546C52521CFEA00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C42521CFEA00F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546C72521CFF000F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C62521CFF000F9F4FE /* SwiftPackageProductDependency */; };
-		6F2546C92521CFFA00F9F4FE /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C82521CFFA00F9F4FE /* SwiftPackageProductDependency */; };
+		6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2544F42521BAA400F9F4FE /* SRGUserData */; };
+		6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B42521C14E00F9F4FE /* SRGLetterbox */; };
+		6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B62521C15E00F9F4FE /* SRGLetterbox */; };
+		6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545B82521C15E00F9F4FE /* SRGUserData */; };
+		6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BA2521C16800F9F4FE /* SRGLetterbox */; };
+		6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BC2521C16800F9F4FE /* SRGUserData */; };
+		6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545BE2521C17000F9F4FE /* SRGLetterbox */; };
+		6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C02521C17000F9F4FE /* SRGUserData */; };
+		6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C22521C17700F9F4FE /* SRGLetterbox */; };
+		6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2545C42521C17700F9F4FE /* SRGUserData */; };
+		6F25461C2521C22C00F9F4FE /* SRGDataProviderNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461B2521C22C00F9F4FE /* SRGDataProviderNetwork */; };
+		6F25461E2521C23300F9F4FE /* SRGDataProviderNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461D2521C23300F9F4FE /* SRGDataProviderNetwork */; };
+		6F2546202521C23B00F9F4FE /* SRGDataProviderNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25461F2521C23B00F9F4FE /* SRGDataProviderNetwork */; };
+		6F2546222521C24600F9F4FE /* SRGDataProviderNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546212521C24600F9F4FE /* SRGDataProviderNetwork */; };
+		6F2546242521C24E00F9F4FE /* SRGDataProviderNetwork in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546232521C24E00F9F4FE /* SRGDataProviderNetwork */; };
+		6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */ = {isa = PBXBuildFile; productRef = 6F25463A2521C34800F9F4FE /* Aiolos */; };
+		6F2546512521C35300F9F4FE /* Aiolos in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546502521C35300F9F4FE /* Aiolos */; };
+		6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546522521C35A00F9F4FE /* Aiolos */; };
+		6F2546552521C36100F9F4FE /* Aiolos in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546542521C36100F9F4FE /* Aiolos */; };
+		6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546562521C36E00F9F4FE /* Aiolos */; };
+		6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */; };
+		6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */; };
+		6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */; };
+		6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */; };
+		6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */; };
 		6F2961FC2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
@@ -699,11 +699,11 @@
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
-		6F2DBB9825DD26D9007DA242 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBB9725DD26D9007DA242 /* SwiftPackageProductDependency */; };
-		6F2DBBAE25DD26EB007DA242 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAD25DD26EB007DA242 /* SwiftPackageProductDependency */; };
-		6F2DBBB025DD26F4007DA242 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAF25DD26F4007DA242 /* SwiftPackageProductDependency */; };
-		6F2DBBB225DD26FB007DA242 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB125DD26FB007DA242 /* SwiftPackageProductDependency */; };
-		6F2DBBB425DD2703007DA242 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB325DD2703007DA242 /* SwiftPackageProductDependency */; };
+		6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */; };
+		6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */; };
+		6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB325DD2703007DA242 /* AppCenterCrashes */; };
 		6F2DE05326440FB00059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6F2DE05426440FB10059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6F2DE05526440FB10059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -760,16 +760,16 @@
 		6F3A47B31DD19A7B00C79E67 /* RTSResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B21DD19A7B00C79E67 /* RTSResources.xcassets */; };
 		6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B41DD19A8500C79E67 /* SRFResources.xcassets */; };
 		6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6F3A47B61DD19A9100C79E67 /* SWIResources.xcassets */; };
-		6F3AED342614C5B6007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED332614C5B6007D591F /* SwiftPackageProductDependency */; };
-		6F3AED4F2614C5D7007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED4E2614C5D7007D591F /* SwiftPackageProductDependency */; };
-		6F3AED512614C5E1007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED502614C5E1007D591F /* SwiftPackageProductDependency */; };
-		6F3AED6C2614C5E9007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6B2614C5E9007D591F /* SwiftPackageProductDependency */; };
-		6F3AED6E2614C5F0007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6D2614C5F0007D591F /* SwiftPackageProductDependency */; };
-		6F3AED892614C5FA007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED882614C5FA007D591F /* SwiftPackageProductDependency */; };
-		6F3AEDA42614C601007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA32614C601007D591F /* SwiftPackageProductDependency */; };
-		6F3AEDA62614C607007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA52614C607007D591F /* SwiftPackageProductDependency */; };
-		6F3AEDA82614C60C007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA72614C60C007D591F /* SwiftPackageProductDependency */; };
-		6F3AEDC32614C613007D591F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDC22614C613007D591F /* SwiftPackageProductDependency */; };
+		6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED332614C5B6007D591F /* SRGAppearanceSwift */; };
+		6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */; };
+		6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED502614C5E1007D591F /* SRGAppearanceSwift */; };
+		6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */; };
+		6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */; };
+		6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AED882614C5FA007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA32614C601007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA52614C607007D591F /* SRGAppearanceSwift */; };
+		6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */; };
+		6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6F3AEDC22614C613007D591F /* SRGAppearanceSwift */; };
 		6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
 		6F3B0222245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
 		6F3B0223245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3B0220245AAE1B00C5A8D7 /* ProgramTableViewCell.m */; };
@@ -975,7 +975,7 @@
 		6F4FCAF924D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
-		6F517A1025DAB56600CE548B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* SwiftPackageProductDependency */; };
+		6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */; };
 		6F54C9682717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
 		6F54C9692717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
 		6F54C96A2717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
@@ -1082,11 +1082,11 @@
 		6F61CCAB256E419F00E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F61CCAC256E41A000E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F61CCAD256E41A000E42E31 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
-		6F61CCC3256E41EE00E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC2256E41EE00E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC5256E41F500E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC4256E41F500E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC7256E41FB00E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCC9256E420200E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SwiftPackageProductDependency */; };
-		6F61CCCB256E420800E42E31 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SwiftPackageProductDependency */; };
+		6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC2256E41EE00E42E31 /* SRGUserData */; };
+		6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC4256E41F500E42E31 /* SRGUserData */; };
+		6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC6256E41FB00E42E31 /* SRGUserData */; };
+		6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCC8256E420200E42E31 /* SRGUserData */; };
+		6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */ = {isa = PBXBuildFile; productRef = 6F61CCCA256E420800E42E31 /* SRGUserData */; };
 		6F6B5BB825E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		6F6B5BB925E640A600F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
 		6F6B5BCE25E640A700F549E7 /* WatchLater.m in Sources */ = {isa = PBXBuildFile; fileRef = 08280F142258F02300AC978D /* WatchLater.m */; };
@@ -1351,16 +1351,16 @@
 		6F9897D02412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9897D12412582400B390A2 /* Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9897CC2412582400B390A2 /* Layout.m */; };
 		6F9BF5B92720292B00945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
-		6F9BF5BB2720292B00945973 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5B62720292B00945973 /* SwiftPackageProductDependency */; };
+		6F9BF5BB2720292B00945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5B62720292B00945973 /* SRGDataProviderCombine */; };
 		6F9BF5BC2720292B00945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		6F9BF5CB2720293100945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
-		6F9BF5CD2720293100945973 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5C82720293100945973 /* SwiftPackageProductDependency */; };
+		6F9BF5CD2720293100945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5C82720293100945973 /* SRGDataProviderCombine */; };
 		6F9BF5CE2720293100945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		6F9BF5DD2720293400945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
-		6F9BF5DF2720293400945973 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5DA2720293400945973 /* SwiftPackageProductDependency */; };
+		6F9BF5DF2720293400945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5DA2720293400945973 /* SRGDataProviderCombine */; };
 		6F9BF5E02720293400945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		6F9BF5EF2720293600945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
-		6F9BF5F12720293600945973 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5EC2720293600945973 /* SwiftPackageProductDependency */; };
+		6F9BF5F12720293600945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5EC2720293600945973 /* SRGDataProviderCombine */; };
 		6F9BF5F22720293600945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -1421,16 +1421,16 @@
 		6FA8479C26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
 		6FA8479D26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
 		6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */; };
-		6FA84A1824E44B6400B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1724E44B6400B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A1A24E44B6400B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1924E44B6400B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A1C24E44B6D00B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1B24E44B6D00B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A1E24E44B6D00B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1D24E44B6D00B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2024E44B7500B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1F24E44B7500B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2224E44B7500B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2124E44B7500B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2424E44B7B00B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2324E44B7B00B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2624E44B7B00B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2524E44B7B00B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2824E44B8300B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2724E44B8300B1A56E /* SwiftPackageProductDependency */; };
-		6FA84A2A24E44B8300B1A56E /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2924E44B8300B1A56E /* SwiftPackageProductDependency */; };
+		6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1724E44B6400B1A56E /* SRGLetterbox */; };
+		6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */; };
+		6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */; };
+		6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A1F24E44B7500B1A56E /* SRGLetterbox */; };
+		6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2324E44B7B00B1A56E /* SRGLetterbox */; };
+		6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */; };
+		6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2724E44B8300B1A56E /* SRGLetterbox */; };
+		6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */; };
 		6FA8E2DE261C9D3C003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
 		6FA8E2DF261C9D3D003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
 		6FA8E2E0261C9D3D003FFDCF /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F16C7A226025698006F685A /* PageViewController.swift */; };
@@ -1723,35 +1723,35 @@
 		6FD2CBC51DD19B0200B44958 /* placeholder_media.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media.pdf */; };
 		6FD2CBC61DD19B0200B44958 /* placeholder_media.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media.pdf */; };
 		6FD2CBC71DD19B0200B44958 /* placeholder_media.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6FD2CBC21DD19B0200B44958 /* placeholder_media.pdf */; };
-		6FD4095A25221A1000E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095925221A1000E621EF /* SwiftPackageProductDependency */; };
-		6FD4095C25221A1A00E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095B25221A1A00E621EF /* SwiftPackageProductDependency */; };
-		6FD4095E25221A2300E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095D25221A2300E621EF /* SwiftPackageProductDependency */; };
-		6FD4096025221A2B00E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095F25221A2B00E621EF /* SwiftPackageProductDependency */; };
-		6FD4096225221A3500E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4096125221A3500E621EF /* SwiftPackageProductDependency */; };
-		6FD40A4825221C2D00E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A4725221C2D00E621EF /* SwiftPackageProductDependency */; };
-		6FD40A5E25221C3A00E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A5D25221C3A00E621EF /* SwiftPackageProductDependency */; };
-		6FD40A7425221C4300E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7325221C4300E621EF /* SwiftPackageProductDependency */; };
-		6FD40A7625221C4900E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7525221C4900E621EF /* SwiftPackageProductDependency */; };
-		6FD40A8C25221C4F00E621EF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A8B25221C4F00E621EF /* SwiftPackageProductDependency */; };
-		6FD46C2E25DAB63D00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C2D25DAB63D00874EAF /* SwiftPackageProductDependency */; };
-		6FD46C4425DAB64700874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4325DAB64700874EAF /* SwiftPackageProductDependency */; };
-		6FD46C4625DAB65100874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4525DAB65100874EAF /* SwiftPackageProductDependency */; };
-		6FD46C4825DAB65900874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4725DAB65900874EAF /* SwiftPackageProductDependency */; };
-		6FD46C7225DAB66000874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C7125DAB66000874EAF /* SwiftPackageProductDependency */; };
-		6FD46C8825DAB66600874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8725DAB66600874EAF /* SwiftPackageProductDependency */; };
-		6FD46C8A25DAB66D00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8925DAB66D00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CA025DAB67400874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C9F25DAB67400874EAF /* SwiftPackageProductDependency */; };
-		6FD46CA225DAB67A00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CA125DAB67A00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CB925DAB76D00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CB825DAB76D00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CBB25DAB76D00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CBA25DAB76D00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CD125DAB7BA00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD025DAB7BA00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CD325DAB7BA00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD225DAB7BA00874EAF /* SwiftPackageProductDependency */; };
-		6FD46CE925DAB7C300874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CE825DAB7C300874EAF /* SwiftPackageProductDependency */; };
-		6FD46CEB25DAB7C300874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CEA25DAB7C300874EAF /* SwiftPackageProductDependency */; };
-		6FD46D0125DAB80300874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0025DAB80300874EAF /* SwiftPackageProductDependency */; };
-		6FD46D0325DAB80300874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0225DAB80300874EAF /* SwiftPackageProductDependency */; };
-		6FD46D1925DAB80C00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1825DAB80C00874EAF /* SwiftPackageProductDependency */; };
-		6FD46D1B25DAB80C00874EAF /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1A25DAB80C00874EAF /* SwiftPackageProductDependency */; };
+		6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095925221A1000E621EF /* AirshipCore */; };
+		6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095B25221A1A00E621EF /* AirshipCore */; };
+		6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095D25221A2300E621EF /* AirshipCore */; };
+		6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4095F25221A2B00E621EF /* AirshipCore */; };
+		6FD4096225221A3500E621EF /* AirshipCore in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD4096125221A3500E621EF /* AirshipCore */; };
+		6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A4725221C2D00E621EF /* PaperOnboarding */; };
+		6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A5D25221C3A00E621EF /* PaperOnboarding */; };
+		6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7325221C4300E621EF /* PaperOnboarding */; };
+		6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A7525221C4900E621EF /* PaperOnboarding */; };
+		6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD40A8B25221C4F00E621EF /* PaperOnboarding */; };
+		6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */; };
+		6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */; };
+		6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */; };
+		6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */; };
+		6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CB825DAB76D00874EAF /* AppCenterCrashes */; };
+		6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */; };
+		6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */; };
+		6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */; };
+		6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CE825DAB7C300874EAF /* AppCenterCrashes */; };
+		6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */; };
+		6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0025DAB80300874EAF /* AppCenterCrashes */; };
+		6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0225DAB80300874EAF /* AppCenterDistribute */; };
+		6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1825DAB80C00874EAF /* AppCenterCrashes */; };
+		6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */; };
 		6FD4C2D6268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
 		6FD4C2D7268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
 		6FD4C2D8268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
@@ -1959,7 +1959,7 @@
 		6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
 		6FE4F157257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F4760711EB37D60003021EA /* UIImageView+PlaySRG.m */; };
-		6FE553CA27200F8B00F506B9 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FE553C927200F8B00F506B9 /* SwiftPackageProductDependency */; };
+		6FE553CA27200F8B00F506B9 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */; };
 		6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
 		6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE686E01EB9D57400067D40 /* ChannelService.m */; };
@@ -1985,16 +1985,16 @@
 		6FE9049426F3475A00502077 /* UITableView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9049126F3475A00502077 /* UITableView+PlaySRG.m */; };
 		6FE9049526F3475A00502077 /* UITableView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9049126F3475A00502077 /* UITableView+PlaySRG.m */; };
 		6FE9049626F3475A00502077 /* UITableView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE9049126F3475A00502077 /* UITableView+PlaySRG.m */; };
-		6FEC897A261F165600FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8979261F165600FF9762 /* SwiftPackageProductDependency */; };
-		6FEC8995261F16BA00FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8994261F16BA00FF9762 /* SwiftPackageProductDependency */; };
-		6FEC8997261F16C100FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8996261F16C100FF9762 /* SwiftPackageProductDependency */; };
-		6FEC8999261F16C800FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8998261F16C800FF9762 /* SwiftPackageProductDependency */; };
-		6FEC899B261F16CF00FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899A261F16CF00FF9762 /* SwiftPackageProductDependency */; };
-		6FEC899D261F16D500FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899C261F16D500FF9762 /* SwiftPackageProductDependency */; };
-		6FEC899F261F16DC00FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899E261F16DC00FF9762 /* SwiftPackageProductDependency */; };
-		6FEC89A1261F16E200FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A0261F16E200FF9762 /* SwiftPackageProductDependency */; };
-		6FEC89A3261F16E800FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A2261F16E800FF9762 /* SwiftPackageProductDependency */; };
-		6FEC89A5261F16EE00FF9762 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A4261F16EE00FF9762 /* SwiftPackageProductDependency */; };
+		6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8979261F165600FF9762 /* DZNEmptyDataSet */; };
+		6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */; };
+		6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */; };
+		6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */; };
+		6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */; };
+		6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */; };
+		6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */; };
+		6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */; };
 		6FEC89EF261F19A000FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
 		6FEC89F0261F19A100FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
 		6FEC89F1261F19A100FF9762 /* ContentInsets.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1B9181FAC34D600A58F3B /* ContentInsets.m */; };
@@ -2005,16 +2005,16 @@
 		6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
 		6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEC91A821A6B39A00AA50C8 /* TableLoadMoreFooterView.m */; };
-		6FEEBE78265CD6A700A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE77265CD6A700A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE7A265CD6D300A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE79265CD6D300A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE7C265CD6DB00A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7B265CD6DB00A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE7E265CD6E600A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7D265CD6E600A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE80265CD70000A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7F265CD70000A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE82265CD70900A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE81265CD70900A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE84265CD71000A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE83265CD71000A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE86265CD71700A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE85265CD71700A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE88265CD71E00A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE87265CD71E00A4882B /* SwiftPackageProductDependency */; };
-		6FEEBE8A265CD72400A4882B /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE89265CD72400A4882B /* SwiftPackageProductDependency */; };
+		6FEEBE78265CD6A700A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE77265CD6A700A4882B /* Collections */; };
+		6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE79265CD6D300A4882B /* Collections */; };
+		6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7B265CD6DB00A4882B /* Collections */; };
+		6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7D265CD6E600A4882B /* Collections */; };
+		6FEEBE80265CD70000A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE7F265CD70000A4882B /* Collections */; };
+		6FEEBE82265CD70900A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE81265CD70900A4882B /* Collections */; };
+		6FEEBE84265CD71000A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE83265CD71000A4882B /* Collections */; };
+		6FEEBE86265CD71700A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE85265CD71700A4882B /* Collections */; };
+		6FEEBE88265CD71E00A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE87265CD71E00A4882B /* Collections */; };
+		6FEEBE8A265CD72400A4882B /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 6FEEBE89265CD72400A4882B /* Collections */; };
 		6FF0C84726B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
 		6FF0C84826B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
 		6FF0C84926B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */; };
@@ -2035,11 +2035,11 @@
 		6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
 		6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F47601A1EB37BD1003021EA /* PlayDurationFormatter.m */; };
-		6FF12A48256C58A70042F446 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A47256C58A70042F446 /* SwiftPackageProductDependency */; };
-		6FF12A5E256C58B20042F446 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A5D256C58B20042F446 /* SwiftPackageProductDependency */; };
-		6FF12A74256C58BB0042F446 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A73256C58BB0042F446 /* SwiftPackageProductDependency */; };
-		6FF12A76256C58C40042F446 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A75256C58C40042F446 /* SwiftPackageProductDependency */; };
-		6FF12A8C256C58CC0042F446 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A8B256C58CC0042F446 /* SwiftPackageProductDependency */; };
+		6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A47256C58A70042F446 /* SRGLoggerSwift */; };
+		6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A5D256C58B20042F446 /* SRGLoggerSwift */; };
+		6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A73256C58BB0042F446 /* SRGLoggerSwift */; };
+		6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A75256C58C40042F446 /* SRGLoggerSwift */; };
+		6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */; };
 		6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E123D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
 		6FF4D4E223D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF4D4DF23D5B07E008B981A /* UIVisualEffectView+PlaySRG.m */; };
@@ -3176,23 +3176,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F17DC16266AB81C009F74C6 /* BuildFile in Frameworks */,
-				6F517A1025DAB56600CE548B /* BuildFile in Frameworks */,
-				6F3AED342614C5B6007D591F /* BuildFile in Frameworks */,
-				6FD46CB925DAB76D00874EAF /* BuildFile in Frameworks */,
-				6FD4095A25221A1000E621EF /* BuildFile in Frameworks */,
-				6FD40A4825221C2D00E621EF /* BuildFile in Frameworks */,
-				084F0968254861A0009DEDD2 /* BuildFile in Frameworks */,
-				6F2545B52521C14E00F9F4FE /* BuildFile in Frameworks */,
-				08F5DAF5262D99D400F717D0 /* BuildFile in Frameworks */,
-				6FD46CBB25DAB76D00874EAF /* BuildFile in Frameworks */,
-				6F2546C12521CFD400F9F4FE /* BuildFile in Frameworks */,
-				081A8BD72602B69600530FFF /* BuildFile in Frameworks */,
-				6F25463B2521C34800F9F4FE /* BuildFile in Frameworks */,
-				6F2544F52521BAA400F9F4FE /* BuildFile in Frameworks */,
+				6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */,
+				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
+				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
+				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
+				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
+				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
+				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
+				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
+				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
+				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
+				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
-				6FEC897A261F165600FF9762 /* BuildFile in Frameworks */,
-				6FEEBE78265CD6A700A4882B /* BuildFile in Frameworks */,
+				6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */,
+				6FEEBE78265CD6A700A4882B /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3200,24 +3200,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F17DC18266AB837009F74C6 /* BuildFile in Frameworks */,
-				6FD46C2E25DAB63D00874EAF /* BuildFile in Frameworks */,
-				6F3AED4F2614C5D7007D591F /* BuildFile in Frameworks */,
-				6FD46CD125DAB7BA00874EAF /* BuildFile in Frameworks */,
-				6FD4095C25221A1A00E621EF /* BuildFile in Frameworks */,
-				6FD40A5E25221C3A00E621EF /* BuildFile in Frameworks */,
-				084F0969254861A0009DEDD2 /* BuildFile in Frameworks */,
-				6F2545B92521C15E00F9F4FE /* BuildFile in Frameworks */,
-				08F5DAF3262D99CB00F717D0 /* BuildFile in Frameworks */,
-				6FD46CD325DAB7BA00874EAF /* BuildFile in Frameworks */,
-				6F2546C32521CFDC00F9F4FE /* BuildFile in Frameworks */,
-				081A8C232602C0EA00530FFF /* BuildFile in Frameworks */,
-				6F2546512521C35300F9F4FE /* BuildFile in Frameworks */,
-				08C97F89271E655D003AE4F3 /* BuildFile in Frameworks */,
-				6F2545B72521C15E00F9F4FE /* BuildFile in Frameworks */,
+				6F17DC18266AB837009F74C6 /* Nuke in Frameworks */,
+				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
+				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
+				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
+				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
+				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
+				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */,
+				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
+				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
+				08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */,
+				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
-				6FEC8995261F16BA00FF9762 /* BuildFile in Frameworks */,
-				6FEEBE7A265CD6D300A4882B /* BuildFile in Frameworks */,
+				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
+				6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3225,23 +3225,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F17DC1A266AB83E009F74C6 /* BuildFile in Frameworks */,
-				6FD46C4425DAB64700874EAF /* BuildFile in Frameworks */,
-				6F3AED512614C5E1007D591F /* BuildFile in Frameworks */,
-				6FD46CE925DAB7C300874EAF /* BuildFile in Frameworks */,
-				6FD4095E25221A2300E621EF /* BuildFile in Frameworks */,
-				6FD40A7425221C4300E621EF /* BuildFile in Frameworks */,
-				084F096A254861A0009DEDD2 /* BuildFile in Frameworks */,
-				6F2545BD2521C16800F9F4FE /* BuildFile in Frameworks */,
-				08F5DAF1262D99BF00F717D0 /* BuildFile in Frameworks */,
-				6FD46CEB25DAB7C300874EAF /* BuildFile in Frameworks */,
-				6F2546C52521CFEA00F9F4FE /* BuildFile in Frameworks */,
-				081A8C252602C0F800530FFF /* BuildFile in Frameworks */,
-				6F2546532521C35A00F9F4FE /* BuildFile in Frameworks */,
-				6F2545BB2521C16800F9F4FE /* BuildFile in Frameworks */,
+				6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */,
+				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
+				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
+				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
+				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
+				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
+				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */,
+				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
+				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
+				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
-				6FEC8997261F16C100FF9762 /* BuildFile in Frameworks */,
-				6FEEBE7C265CD6DB00A4882B /* BuildFile in Frameworks */,
+				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
+				6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3249,23 +3249,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F17DC1C266AB846009F74C6 /* BuildFile in Frameworks */,
-				6FD46C4625DAB65100874EAF /* BuildFile in Frameworks */,
-				6F3AED6C2614C5E9007D591F /* BuildFile in Frameworks */,
-				6FD46D0125DAB80300874EAF /* BuildFile in Frameworks */,
-				6FD4096025221A2B00E621EF /* BuildFile in Frameworks */,
-				6FD40A7625221C4900E621EF /* BuildFile in Frameworks */,
-				084F096B254861A0009DEDD2 /* BuildFile in Frameworks */,
-				6F2545C12521C17000F9F4FE /* BuildFile in Frameworks */,
-				08F5DAEF262D99B400F717D0 /* BuildFile in Frameworks */,
-				6FD46D0325DAB80300874EAF /* BuildFile in Frameworks */,
-				6F2546C72521CFF000F9F4FE /* BuildFile in Frameworks */,
-				081A8C272602C10300530FFF /* BuildFile in Frameworks */,
-				6F2546552521C36100F9F4FE /* BuildFile in Frameworks */,
-				6F2545BF2521C17000F9F4FE /* BuildFile in Frameworks */,
+				6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */,
+				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
+				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
+				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
+				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
+				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
+				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */,
+				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
+				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
+				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
-				6FEC8999261F16C800FF9762 /* BuildFile in Frameworks */,
-				6FEEBE7E265CD6E600A4882B /* BuildFile in Frameworks */,
+				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
+				6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3273,23 +3273,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F17DC1E266AB84E009F74C6 /* BuildFile in Frameworks */,
-				6FD46C4825DAB65900874EAF /* BuildFile in Frameworks */,
-				6F3AED6E2614C5F0007D591F /* BuildFile in Frameworks */,
-				6FD46D1925DAB80C00874EAF /* BuildFile in Frameworks */,
-				6FD4096225221A3500E621EF /* BuildFile in Frameworks */,
-				6FD40A8C25221C4F00E621EF /* BuildFile in Frameworks */,
-				084F096C254861A0009DEDD2 /* BuildFile in Frameworks */,
-				6F2545C52521C17700F9F4FE /* BuildFile in Frameworks */,
-				08F5DAED262D99A900F717D0 /* BuildFile in Frameworks */,
-				6FD46D1B25DAB80C00874EAF /* BuildFile in Frameworks */,
-				6F2546C92521CFFA00F9F4FE /* BuildFile in Frameworks */,
-				081A8C292602C10E00530FFF /* BuildFile in Frameworks */,
-				6F2546572521C36E00F9F4FE /* BuildFile in Frameworks */,
-				6F2545C32521C17700F9F4FE /* BuildFile in Frameworks */,
+				6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */,
+				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
+				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
+				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
+				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
+				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
+				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
+				08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */,
+				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
+				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
+				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
+				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
-				6FEC899B261F16CF00FF9762 /* BuildFile in Frameworks */,
-				6FEEBE80265CD70000A4882B /* BuildFile in Frameworks */,
+				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
+				6FEEBE80265CD70000A4882B /* Collections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3332,7 +3332,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F25461C2521C22C00F9F4FE /* BuildFile in Frameworks */,
+				6F25461C2521C22C00F9F4FE /* SRGDataProviderNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3340,7 +3340,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F25461E2521C23300F9F4FE /* BuildFile in Frameworks */,
+				6F25461E2521C23300F9F4FE /* SRGDataProviderNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3348,7 +3348,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F2546202521C23B00F9F4FE /* BuildFile in Frameworks */,
+				6F2546202521C23B00F9F4FE /* SRGDataProviderNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3356,7 +3356,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F2546222521C24600F9F4FE /* BuildFile in Frameworks */,
+				6F2546222521C24600F9F4FE /* SRGDataProviderNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3364,7 +3364,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F2546242521C24E00F9F4FE /* BuildFile in Frameworks */,
+				6F2546242521C24E00F9F4FE /* SRGDataProviderNetwork in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3372,21 +3372,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08209A0B25780AAA0077CF8B /* BuildFile in Frameworks */,
-				08EA3E78259D2AD6008D412F /* BuildFile in Frameworks */,
-				6F61CCC3256E41EE00E42E31 /* BuildFile in Frameworks */,
-				6FA84A1A24E44B6400B1A56E /* BuildFile in Frameworks */,
-				6FA84A1824E44B6400B1A56E /* BuildFile in Frameworks */,
+				08209A0B25780AAA0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E78259D2AD6008D412F /* SRGIdentity in Frameworks */,
+				6F61CCC3256E41EE00E42E31 /* SRGUserData in Frameworks */,
+				6FA84A1A24E44B6400B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A1824E44B6400B1A56E /* SRGLetterbox in Frameworks */,
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
-				6F3AED892614C5FA007D591F /* BuildFile in Frameworks */,
+				6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
-				6FF12A48256C58A70042F446 /* BuildFile in Frameworks */,
-				6F17DC20266AB854009F74C6 /* BuildFile in Frameworks */,
-				6FEC899D261F16D500FF9762 /* BuildFile in Frameworks */,
-				08EA3E98259D2C0E008D412F /* BuildFile in Frameworks */,
-				6FEEBE82265CD70900A4882B /* BuildFile in Frameworks */,
-				6F2DBB9825DD26D9007DA242 /* BuildFile in Frameworks */,
-				6FD46C7225DAB66000874EAF /* BuildFile in Frameworks */,
+				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC20266AB854009F74C6 /* Nuke in Frameworks */,
+				6FEC899D261F16D500FF9762 /* DZNEmptyDataSet in Frameworks */,
+				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FEEBE82265CD70900A4882B /* Collections in Frameworks */,
+				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3394,21 +3394,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				082099F525780A7F0077CF8B /* BuildFile in Frameworks */,
-				08EA3E82259D2B1B008D412F /* BuildFile in Frameworks */,
-				6F61CCC5256E41F500E42E31 /* BuildFile in Frameworks */,
-				6FA84A1E24E44B6D00B1A56E /* BuildFile in Frameworks */,
-				6FA84A1C24E44B6D00B1A56E /* BuildFile in Frameworks */,
+				082099F525780A7F0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E82259D2B1B008D412F /* SRGIdentity in Frameworks */,
+				6F61CCC5256E41F500E42E31 /* SRGUserData in Frameworks */,
+				6FA84A1E24E44B6D00B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A1C24E44B6D00B1A56E /* SRGLetterbox in Frameworks */,
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
-				6F3AEDA42614C601007D591F /* BuildFile in Frameworks */,
+				6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
-				6FF12A5E256C58B20042F446 /* BuildFile in Frameworks */,
-				6F17DC22266AB85B009F74C6 /* BuildFile in Frameworks */,
-				6FEC899F261F16DC00FF9762 /* BuildFile in Frameworks */,
-				08EA3E9A259D2C15008D412F /* BuildFile in Frameworks */,
-				6FEEBE84265CD71000A4882B /* BuildFile in Frameworks */,
-				6F2DBBAE25DD26EB007DA242 /* BuildFile in Frameworks */,
-				6FD46C8825DAB66600874EAF /* BuildFile in Frameworks */,
+				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */,
+				6FEC899F261F16DC00FF9762 /* DZNEmptyDataSet in Frameworks */,
+				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FEEBE84265CD71000A4882B /* Collections in Frameworks */,
+				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3416,21 +3416,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08209A0D25780ABE0077CF8B /* BuildFile in Frameworks */,
-				08EA3E7C259D2AE8008D412F /* BuildFile in Frameworks */,
-				6F61CCC7256E41FB00E42E31 /* BuildFile in Frameworks */,
-				6FA84A2224E44B7500B1A56E /* BuildFile in Frameworks */,
-				6FA84A2024E44B7500B1A56E /* BuildFile in Frameworks */,
+				08209A0D25780ABE0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7C259D2AE8008D412F /* SRGIdentity in Frameworks */,
+				6F61CCC7256E41FB00E42E31 /* SRGUserData in Frameworks */,
+				6FA84A2224E44B7500B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2024E44B7500B1A56E /* SRGLetterbox in Frameworks */,
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
-				6F3AEDA62614C607007D591F /* BuildFile in Frameworks */,
+				6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
-				6FF12A74256C58BB0042F446 /* BuildFile in Frameworks */,
-				6F17DC24266AB862009F74C6 /* BuildFile in Frameworks */,
-				6FEC89A1261F16E200FF9762 /* BuildFile in Frameworks */,
-				08EA3E9C259D2C1C008D412F /* BuildFile in Frameworks */,
-				6FEEBE86265CD71700A4882B /* BuildFile in Frameworks */,
-				6F2DBBB025DD26F4007DA242 /* BuildFile in Frameworks */,
-				6FD46C8A25DAB66D00874EAF /* BuildFile in Frameworks */,
+				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC24266AB862009F74C6 /* Nuke in Frameworks */,
+				6FEC89A1261F16E200FF9762 /* DZNEmptyDataSet in Frameworks */,
+				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FEEBE86265CD71700A4882B /* Collections in Frameworks */,
+				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3438,21 +3438,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08209A0F25780AC50077CF8B /* BuildFile in Frameworks */,
-				08EA3E7E259D2AEF008D412F /* BuildFile in Frameworks */,
-				6F61CCC9256E420200E42E31 /* BuildFile in Frameworks */,
-				6FA84A2624E44B7B00B1A56E /* BuildFile in Frameworks */,
-				6FA84A2424E44B7B00B1A56E /* BuildFile in Frameworks */,
+				08209A0F25780AC50077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E7E259D2AEF008D412F /* SRGIdentity in Frameworks */,
+				6F61CCC9256E420200E42E31 /* SRGUserData in Frameworks */,
+				6FA84A2624E44B7B00B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2424E44B7B00B1A56E /* SRGLetterbox in Frameworks */,
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
-				6F3AEDA82614C60C007D591F /* BuildFile in Frameworks */,
+				6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
-				6FF12A76256C58C40042F446 /* BuildFile in Frameworks */,
-				6F17DC26266AB867009F74C6 /* BuildFile in Frameworks */,
-				6FEC89A3261F16E800FF9762 /* BuildFile in Frameworks */,
-				08EA3E9E259D2C25008D412F /* BuildFile in Frameworks */,
-				6FEEBE88265CD71E00A4882B /* BuildFile in Frameworks */,
-				6F2DBBB225DD26FB007DA242 /* BuildFile in Frameworks */,
-				6FD46CA025DAB67400874EAF /* BuildFile in Frameworks */,
+				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC26266AB867009F74C6 /* Nuke in Frameworks */,
+				6FEC89A3261F16E800FF9762 /* DZNEmptyDataSet in Frameworks */,
+				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FEEBE88265CD71E00A4882B /* Collections in Frameworks */,
+				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3460,21 +3460,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				08209A1125780ACB0077CF8B /* BuildFile in Frameworks */,
-				08EA3E80259D2AF7008D412F /* BuildFile in Frameworks */,
-				6F61CCCB256E420800E42E31 /* BuildFile in Frameworks */,
-				6FA84A2A24E44B8300B1A56E /* BuildFile in Frameworks */,
-				6FA84A2824E44B8300B1A56E /* BuildFile in Frameworks */,
+				08209A1125780ACB0077CF8B /* SRGAnalyticsSwiftUI in Frameworks */,
+				08EA3E80259D2AF7008D412F /* SRGIdentity in Frameworks */,
+				6F61CCCB256E420800E42E31 /* SRGUserData in Frameworks */,
+				6FA84A2A24E44B8300B1A56E /* SRGDataProviderCombine in Frameworks */,
+				6FA84A2824E44B8300B1A56E /* SRGLetterbox in Frameworks */,
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
-				6F3AEDC32614C613007D591F /* BuildFile in Frameworks */,
+				6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */,
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
-				6FF12A8C256C58CC0042F446 /* BuildFile in Frameworks */,
-				6F17DC28266AB86D009F74C6 /* BuildFile in Frameworks */,
-				6FEC89A5261F16EE00FF9762 /* BuildFile in Frameworks */,
-				08EA3EA0259D2C2B008D412F /* BuildFile in Frameworks */,
-				6FEEBE8A265CD72400A4882B /* BuildFile in Frameworks */,
-				6F2DBBB425DD2703007DA242 /* BuildFile in Frameworks */,
-				6FD46CA225DAB67A00874EAF /* BuildFile in Frameworks */,
+				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
+				6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */,
+				6FEC89A5261F16EE00FF9762 /* DZNEmptyDataSet in Frameworks */,
+				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
+				6FEEBE8A265CD72400A4882B /* Collections in Frameworks */,
+				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
+				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3482,7 +3482,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9BF5BB2720292B00945973 /* BuildFile in Frameworks */,
+				6F9BF5BB2720292B00945973 /* SRGDataProviderCombine in Frameworks */,
 				6F9BF5BC2720292B00945973 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3491,7 +3491,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9BF5CD2720293100945973 /* BuildFile in Frameworks */,
+				6F9BF5CD2720293100945973 /* SRGDataProviderCombine in Frameworks */,
 				6F9BF5CE2720293100945973 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3500,7 +3500,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9BF5DF2720293400945973 /* BuildFile in Frameworks */,
+				6F9BF5DF2720293400945973 /* SRGDataProviderCombine in Frameworks */,
 				6F9BF5E02720293400945973 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3509,7 +3509,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F9BF5F12720293600945973 /* BuildFile in Frameworks */,
+				6F9BF5F12720293600945973 /* SRGDataProviderCombine in Frameworks */,
 				6F9BF5F22720293600945973 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3518,7 +3518,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6FE553CA27200F8B00F506B9 /* BuildFile in Frameworks */,
+				6FE553CA27200F8B00F506B9 /* SRGDataProviderCombine in Frameworks */,
 				6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -5088,22 +5088,22 @@
 			);
 			name = "Play SRF";
 			packageProductDependencies = (
-				6F2544F42521BAA400F9F4FE /* SwiftPackageProductDependency */,
-				6F2545B42521C14E00F9F4FE /* SwiftPackageProductDependency */,
-				6F25463A2521C34800F9F4FE /* SwiftPackageProductDependency */,
-				6F2546C02521CFD400F9F4FE /* SwiftPackageProductDependency */,
-				6FD4095925221A1000E621EF /* SwiftPackageProductDependency */,
-				6FD40A4725221C2D00E621EF /* SwiftPackageProductDependency */,
-				081454BA2546CDD500BB7CA6 /* SwiftPackageProductDependency */,
-				6F517A0F25DAB56600CE548B /* SwiftPackageProductDependency */,
-				6FD46CB825DAB76D00874EAF /* SwiftPackageProductDependency */,
-				6FD46CBA25DAB76D00874EAF /* SwiftPackageProductDependency */,
-				081A8BD62602B69600530FFF /* SwiftPackageProductDependency */,
-				6F3AED332614C5B6007D591F /* SwiftPackageProductDependency */,
-				6FEC8979261F165600FF9762 /* SwiftPackageProductDependency */,
-				08F5DAF4262D99D400F717D0 /* SwiftPackageProductDependency */,
-				6FEEBE77265CD6A700A4882B /* SwiftPackageProductDependency */,
-				6F17DC15266AB81C009F74C6 /* SwiftPackageProductDependency */,
+				6F2544F42521BAA400F9F4FE /* SRGUserData */,
+				6F2545B42521C14E00F9F4FE /* SRGLetterbox */,
+				6F25463A2521C34800F9F4FE /* Aiolos */,
+				6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095925221A1000E621EF /* AirshipCore */,
+				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
+				081454BA2546CDD500BB7CA6 /* SwiftMessages */,
+				6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */,
+				6FD46CB825DAB76D00874EAF /* AppCenterCrashes */,
+				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
+				081A8BD62602B69600530FFF /* SRGDataProviderCombine */,
+				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
+				6FEC8979261F165600FF9762 /* DZNEmptyDataSet */,
+				08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */,
+				6FEEBE77265CD6A700A4882B /* Collections */,
+				6F17DC15266AB81C009F74C6 /* Nuke */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5137,23 +5137,23 @@
 			);
 			name = "Play RTS";
 			packageProductDependencies = (
-				6F2545B62521C15E00F9F4FE /* SwiftPackageProductDependency */,
-				6F2545B82521C15E00F9F4FE /* SwiftPackageProductDependency */,
-				6F2546502521C35300F9F4FE /* SwiftPackageProductDependency */,
-				6F2546C22521CFDC00F9F4FE /* SwiftPackageProductDependency */,
-				6FD4095B25221A1A00E621EF /* SwiftPackageProductDependency */,
-				6FD40A5D25221C3A00E621EF /* SwiftPackageProductDependency */,
-				081455132546CE4300BB7CA6 /* SwiftPackageProductDependency */,
-				6FD46C2D25DAB63D00874EAF /* SwiftPackageProductDependency */,
-				6FD46CD025DAB7BA00874EAF /* SwiftPackageProductDependency */,
-				6FD46CD225DAB7BA00874EAF /* SwiftPackageProductDependency */,
-				081A8C222602C0EA00530FFF /* SwiftPackageProductDependency */,
-				6F3AED4E2614C5D7007D591F /* SwiftPackageProductDependency */,
-				6FEC8994261F16BA00FF9762 /* SwiftPackageProductDependency */,
-				08F5DAF2262D99CB00F717D0 /* SwiftPackageProductDependency */,
-				6FEEBE79265CD6D300A4882B /* SwiftPackageProductDependency */,
-				6F17DC17266AB837009F74C6 /* SwiftPackageProductDependency */,
-				08C97F88271E655D003AE4F3 /* SwiftPackageProductDependency */,
+				6F2545B62521C15E00F9F4FE /* SRGLetterbox */,
+				6F2545B82521C15E00F9F4FE /* SRGUserData */,
+				6F2546502521C35300F9F4FE /* Aiolos */,
+				6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095B25221A1A00E621EF /* AirshipCore */,
+				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
+				081455132546CE4300BB7CA6 /* SwiftMessages */,
+				6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */,
+				6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */,
+				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
+				081A8C222602C0EA00530FFF /* SRGDataProviderCombine */,
+				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
+				6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */,
+				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
+				6FEEBE79265CD6D300A4882B /* Collections */,
+				6F17DC17266AB837009F74C6 /* Nuke */,
+				08C97F88271E655D003AE4F3 /* SRGMediaPlayer */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5187,22 +5187,22 @@
 			);
 			name = "Play RSI";
 			packageProductDependencies = (
-				6F2545BA2521C16800F9F4FE /* SwiftPackageProductDependency */,
-				6F2545BC2521C16800F9F4FE /* SwiftPackageProductDependency */,
-				6F2546522521C35A00F9F4FE /* SwiftPackageProductDependency */,
-				6F2546C42521CFEA00F9F4FE /* SwiftPackageProductDependency */,
-				6FD4095D25221A2300E621EF /* SwiftPackageProductDependency */,
-				6FD40A7325221C4300E621EF /* SwiftPackageProductDependency */,
-				081455152546CE4F00BB7CA6 /* SwiftPackageProductDependency */,
-				6FD46C4325DAB64700874EAF /* SwiftPackageProductDependency */,
-				6FD46CE825DAB7C300874EAF /* SwiftPackageProductDependency */,
-				6FD46CEA25DAB7C300874EAF /* SwiftPackageProductDependency */,
-				081A8C242602C0F800530FFF /* SwiftPackageProductDependency */,
-				6F3AED502614C5E1007D591F /* SwiftPackageProductDependency */,
-				6FEC8996261F16C100FF9762 /* SwiftPackageProductDependency */,
-				08F5DAF0262D99BF00F717D0 /* SwiftPackageProductDependency */,
-				6FEEBE7B265CD6DB00A4882B /* SwiftPackageProductDependency */,
-				6F17DC19266AB83E009F74C6 /* SwiftPackageProductDependency */,
+				6F2545BA2521C16800F9F4FE /* SRGLetterbox */,
+				6F2545BC2521C16800F9F4FE /* SRGUserData */,
+				6F2546522521C35A00F9F4FE /* Aiolos */,
+				6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095D25221A2300E621EF /* AirshipCore */,
+				6FD40A7325221C4300E621EF /* PaperOnboarding */,
+				081455152546CE4F00BB7CA6 /* SwiftMessages */,
+				6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */,
+				6FD46CE825DAB7C300874EAF /* AppCenterCrashes */,
+				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
+				081A8C242602C0F800530FFF /* SRGDataProviderCombine */,
+				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
+				6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */,
+				08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */,
+				6FEEBE7B265CD6DB00A4882B /* Collections */,
+				6F17DC19266AB83E009F74C6 /* Nuke */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5236,22 +5236,22 @@
 			);
 			name = "Play RTR";
 			packageProductDependencies = (
-				6F2545BE2521C17000F9F4FE /* SwiftPackageProductDependency */,
-				6F2545C02521C17000F9F4FE /* SwiftPackageProductDependency */,
-				6F2546542521C36100F9F4FE /* SwiftPackageProductDependency */,
-				6F2546C62521CFF000F9F4FE /* SwiftPackageProductDependency */,
-				6FD4095F25221A2B00E621EF /* SwiftPackageProductDependency */,
-				6FD40A7525221C4900E621EF /* SwiftPackageProductDependency */,
-				081455172546CE5700BB7CA6 /* SwiftPackageProductDependency */,
-				6FD46C4525DAB65100874EAF /* SwiftPackageProductDependency */,
-				6FD46D0025DAB80300874EAF /* SwiftPackageProductDependency */,
-				6FD46D0225DAB80300874EAF /* SwiftPackageProductDependency */,
-				081A8C262602C10300530FFF /* SwiftPackageProductDependency */,
-				6F3AED6B2614C5E9007D591F /* SwiftPackageProductDependency */,
-				6FEC8998261F16C800FF9762 /* SwiftPackageProductDependency */,
-				08F5DAEE262D99B400F717D0 /* SwiftPackageProductDependency */,
-				6FEEBE7D265CD6E600A4882B /* SwiftPackageProductDependency */,
-				6F17DC1B266AB846009F74C6 /* SwiftPackageProductDependency */,
+				6F2545BE2521C17000F9F4FE /* SRGLetterbox */,
+				6F2545C02521C17000F9F4FE /* SRGUserData */,
+				6F2546542521C36100F9F4FE /* Aiolos */,
+				6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4095F25221A2B00E621EF /* AirshipCore */,
+				6FD40A7525221C4900E621EF /* PaperOnboarding */,
+				081455172546CE5700BB7CA6 /* SwiftMessages */,
+				6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */,
+				6FD46D0025DAB80300874EAF /* AppCenterCrashes */,
+				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
+				081A8C262602C10300530FFF /* SRGDataProviderCombine */,
+				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
+				6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */,
+				08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */,
+				6FEEBE7D265CD6E600A4882B /* Collections */,
+				6F17DC1B266AB846009F74C6 /* Nuke */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5285,22 +5285,22 @@
 			);
 			name = "Play SWI";
 			packageProductDependencies = (
-				6F2545C22521C17700F9F4FE /* SwiftPackageProductDependency */,
-				6F2545C42521C17700F9F4FE /* SwiftPackageProductDependency */,
-				6F2546562521C36E00F9F4FE /* SwiftPackageProductDependency */,
-				6F2546C82521CFFA00F9F4FE /* SwiftPackageProductDependency */,
-				6FD4096125221A3500E621EF /* SwiftPackageProductDependency */,
-				6FD40A8B25221C4F00E621EF /* SwiftPackageProductDependency */,
-				081455192546CE5F00BB7CA6 /* SwiftPackageProductDependency */,
-				6FD46C4725DAB65900874EAF /* SwiftPackageProductDependency */,
-				6FD46D1825DAB80C00874EAF /* SwiftPackageProductDependency */,
-				6FD46D1A25DAB80C00874EAF /* SwiftPackageProductDependency */,
-				081A8C282602C10E00530FFF /* SwiftPackageProductDependency */,
-				6F3AED6D2614C5F0007D591F /* SwiftPackageProductDependency */,
-				6FEC899A261F16CF00FF9762 /* SwiftPackageProductDependency */,
-				08F5DAEC262D99A900F717D0 /* SwiftPackageProductDependency */,
-				6FEEBE7F265CD70000A4882B /* SwiftPackageProductDependency */,
-				6F17DC1D266AB84E009F74C6 /* SwiftPackageProductDependency */,
+				6F2545C22521C17700F9F4FE /* SRGLetterbox */,
+				6F2545C42521C17700F9F4FE /* SRGUserData */,
+				6F2546562521C36E00F9F4FE /* Aiolos */,
+				6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */,
+				6FD4096125221A3500E621EF /* AirshipCore */,
+				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
+				081455192546CE5F00BB7CA6 /* SwiftMessages */,
+				6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */,
+				6FD46D1825DAB80C00874EAF /* AppCenterCrashes */,
+				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
+				081A8C282602C10E00530FFF /* SRGDataProviderCombine */,
+				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
+				6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */,
+				08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */,
+				6FEEBE7F265CD70000A4882B /* Collections */,
+				6F17DC1D266AB84E009F74C6 /* Nuke */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -5409,7 +5409,7 @@
 			);
 			name = "Play SRF notification service extension";
 			packageProductDependencies = (
-				6F25461B2521C22C00F9F4FE /* SwiftPackageProductDependency */,
+				6F25461B2521C22C00F9F4FE /* SRGDataProviderNetwork */,
 			);
 			productName = "Play SRF notification extension";
 			productReference = 6F0CFB3220C94DF6006B2CE4 /* Play SRF notification service extension.appex */;
@@ -5428,7 +5428,7 @@
 			);
 			name = "Play RTS notification service extension";
 			packageProductDependencies = (
-				6F25461D2521C23300F9F4FE /* SwiftPackageProductDependency */,
+				6F25461D2521C23300F9F4FE /* SRGDataProviderNetwork */,
 			);
 			productName = "Play RTS notification extension";
 			productReference = 6F0CFB4520C94E77006B2CE4 /* Play RTS notification service extension.appex */;
@@ -5447,7 +5447,7 @@
 			);
 			name = "Play RSI notification service extension";
 			packageProductDependencies = (
-				6F25461F2521C23B00F9F4FE /* SwiftPackageProductDependency */,
+				6F25461F2521C23B00F9F4FE /* SRGDataProviderNetwork */,
 			);
 			productName = "Play RSI notification extension";
 			productReference = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */;
@@ -5466,7 +5466,7 @@
 			);
 			name = "Play RTR notification service extension";
 			packageProductDependencies = (
-				6F2546212521C24600F9F4FE /* SwiftPackageProductDependency */,
+				6F2546212521C24600F9F4FE /* SRGDataProviderNetwork */,
 			);
 			productName = "Play RTR notification extension";
 			productReference = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */;
@@ -5485,7 +5485,7 @@
 			);
 			name = "Play SWI notification service extension";
 			packageProductDependencies = (
-				6F2546232521C24E00F9F4FE /* SwiftPackageProductDependency */,
+				6F2546232521C24E00F9F4FE /* SRGDataProviderNetwork */,
 			);
 			productName = "Play SWI notification extension";
 			productReference = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */;
@@ -5514,19 +5514,19 @@
 			);
 			name = "Play SRF TV";
 			packageProductDependencies = (
-				6FA84A1724E44B6400B1A56E /* SwiftPackageProductDependency */,
-				6FA84A1924E44B6400B1A56E /* SwiftPackageProductDependency */,
-				6FF12A47256C58A70042F446 /* SwiftPackageProductDependency */,
-				6F61CCC2256E41EE00E42E31 /* SwiftPackageProductDependency */,
-				08209A0A25780AAA0077CF8B /* SwiftPackageProductDependency */,
-				08EA3E77259D2AD6008D412F /* SwiftPackageProductDependency */,
-				08EA3E97259D2C0E008D412F /* SwiftPackageProductDependency */,
-				6FD46C7125DAB66000874EAF /* SwiftPackageProductDependency */,
-				6F2DBB9725DD26D9007DA242 /* SwiftPackageProductDependency */,
-				6F3AED882614C5FA007D591F /* SwiftPackageProductDependency */,
-				6FEC899C261F16D500FF9762 /* SwiftPackageProductDependency */,
-				6FEEBE81265CD70900A4882B /* SwiftPackageProductDependency */,
-				6F17DC1F266AB854009F74C6 /* SwiftPackageProductDependency */,
+				6FA84A1724E44B6400B1A56E /* SRGLetterbox */,
+				6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */,
+				6FF12A47256C58A70042F446 /* SRGLoggerSwift */,
+				6F61CCC2256E41EE00E42E31 /* SRGUserData */,
+				08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E77259D2AD6008D412F /* SRGIdentity */,
+				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
+				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
+				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
+				6F3AED882614C5FA007D591F /* SRGAppearanceSwift */,
+				6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */,
+				6FEEBE81265CD70900A4882B /* Collections */,
+				6F17DC1F266AB854009F74C6 /* Nuke */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -5555,19 +5555,19 @@
 			);
 			name = "Play RTS TV";
 			packageProductDependencies = (
-				6FA84A1B24E44B6D00B1A56E /* SwiftPackageProductDependency */,
-				6FA84A1D24E44B6D00B1A56E /* SwiftPackageProductDependency */,
-				6FF12A5D256C58B20042F446 /* SwiftPackageProductDependency */,
-				6F61CCC4256E41F500E42E31 /* SwiftPackageProductDependency */,
-				082099F425780A7F0077CF8B /* SwiftPackageProductDependency */,
-				08EA3E81259D2B1B008D412F /* SwiftPackageProductDependency */,
-				08EA3E99259D2C15008D412F /* SwiftPackageProductDependency */,
-				6FD46C8725DAB66600874EAF /* SwiftPackageProductDependency */,
-				6F2DBBAD25DD26EB007DA242 /* SwiftPackageProductDependency */,
-				6F3AEDA32614C601007D591F /* SwiftPackageProductDependency */,
-				6FEC899E261F16DC00FF9762 /* SwiftPackageProductDependency */,
-				6FEEBE83265CD71000A4882B /* SwiftPackageProductDependency */,
-				6F17DC21266AB85B009F74C6 /* SwiftPackageProductDependency */,
+				6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */,
+				6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */,
+				6FF12A5D256C58B20042F446 /* SRGLoggerSwift */,
+				6F61CCC4256E41F500E42E31 /* SRGUserData */,
+				082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E81259D2B1B008D412F /* SRGIdentity */,
+				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
+				6F3AEDA32614C601007D591F /* SRGAppearanceSwift */,
+				6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */,
+				6FEEBE83265CD71000A4882B /* Collections */,
+				6F17DC21266AB85B009F74C6 /* Nuke */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -5596,19 +5596,19 @@
 			);
 			name = "Play RSI TV";
 			packageProductDependencies = (
-				6FA84A1F24E44B7500B1A56E /* SwiftPackageProductDependency */,
-				6FA84A2124E44B7500B1A56E /* SwiftPackageProductDependency */,
-				6FF12A73256C58BB0042F446 /* SwiftPackageProductDependency */,
-				6F61CCC6256E41FB00E42E31 /* SwiftPackageProductDependency */,
-				08209A0C25780ABE0077CF8B /* SwiftPackageProductDependency */,
-				08EA3E7B259D2AE8008D412F /* SwiftPackageProductDependency */,
-				08EA3E9B259D2C1C008D412F /* SwiftPackageProductDependency */,
-				6FD46C8925DAB66D00874EAF /* SwiftPackageProductDependency */,
-				6F2DBBAF25DD26F4007DA242 /* SwiftPackageProductDependency */,
-				6F3AEDA52614C607007D591F /* SwiftPackageProductDependency */,
-				6FEC89A0261F16E200FF9762 /* SwiftPackageProductDependency */,
-				6FEEBE85265CD71700A4882B /* SwiftPackageProductDependency */,
-				6F17DC23266AB862009F74C6 /* SwiftPackageProductDependency */,
+				6FA84A1F24E44B7500B1A56E /* SRGLetterbox */,
+				6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */,
+				6FF12A73256C58BB0042F446 /* SRGLoggerSwift */,
+				6F61CCC6256E41FB00E42E31 /* SRGUserData */,
+				08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
+				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
+				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
+				6F3AEDA52614C607007D591F /* SRGAppearanceSwift */,
+				6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */,
+				6FEEBE85265CD71700A4882B /* Collections */,
+				6F17DC23266AB862009F74C6 /* Nuke */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -5637,19 +5637,19 @@
 			);
 			name = "Play RTR TV";
 			packageProductDependencies = (
-				6FA84A2324E44B7B00B1A56E /* SwiftPackageProductDependency */,
-				6FA84A2524E44B7B00B1A56E /* SwiftPackageProductDependency */,
-				6FF12A75256C58C40042F446 /* SwiftPackageProductDependency */,
-				6F61CCC8256E420200E42E31 /* SwiftPackageProductDependency */,
-				08209A0E25780AC50077CF8B /* SwiftPackageProductDependency */,
-				08EA3E7D259D2AEF008D412F /* SwiftPackageProductDependency */,
-				08EA3E9D259D2C25008D412F /* SwiftPackageProductDependency */,
-				6FD46C9F25DAB67400874EAF /* SwiftPackageProductDependency */,
-				6F2DBBB125DD26FB007DA242 /* SwiftPackageProductDependency */,
-				6F3AEDA72614C60C007D591F /* SwiftPackageProductDependency */,
-				6FEC89A2261F16E800FF9762 /* SwiftPackageProductDependency */,
-				6FEEBE87265CD71E00A4882B /* SwiftPackageProductDependency */,
-				6F17DC25266AB867009F74C6 /* SwiftPackageProductDependency */,
+				6FA84A2324E44B7B00B1A56E /* SRGLetterbox */,
+				6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */,
+				6FF12A75256C58C40042F446 /* SRGLoggerSwift */,
+				6F61CCC8256E420200E42E31 /* SRGUserData */,
+				08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
+				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
+				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
+				6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */,
+				6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */,
+				6FEEBE87265CD71E00A4882B /* Collections */,
+				6F17DC25266AB867009F74C6 /* Nuke */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5678,19 +5678,19 @@
 			);
 			name = "Play SWI TV";
 			packageProductDependencies = (
-				6FA84A2724E44B8300B1A56E /* SwiftPackageProductDependency */,
-				6FA84A2924E44B8300B1A56E /* SwiftPackageProductDependency */,
-				6FF12A8B256C58CC0042F446 /* SwiftPackageProductDependency */,
-				6F61CCCA256E420800E42E31 /* SwiftPackageProductDependency */,
-				08209A1025780ACB0077CF8B /* SwiftPackageProductDependency */,
-				08EA3E7F259D2AF7008D412F /* SwiftPackageProductDependency */,
-				08EA3E9F259D2C2B008D412F /* SwiftPackageProductDependency */,
-				6FD46CA125DAB67A00874EAF /* SwiftPackageProductDependency */,
-				6F2DBBB325DD2703007DA242 /* SwiftPackageProductDependency */,
-				6F3AEDC22614C613007D591F /* SwiftPackageProductDependency */,
-				6FEC89A4261F16EE00FF9762 /* SwiftPackageProductDependency */,
-				6FEEBE89265CD72400A4882B /* SwiftPackageProductDependency */,
-				6F17DC27266AB86D009F74C6 /* SwiftPackageProductDependency */,
+				6FA84A2724E44B8300B1A56E /* SRGLetterbox */,
+				6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */,
+				6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */,
+				6F61CCCA256E420800E42E31 /* SRGUserData */,
+				08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */,
+				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
+				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
+				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
+				6F3AEDC22614C613007D591F /* SRGAppearanceSwift */,
+				6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */,
+				6FEEBE89265CD72400A4882B /* Collections */,
+				6F17DC27266AB86D009F74C6 /* Nuke */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -5710,7 +5710,7 @@
 			);
 			name = "Play RTS TV top shelf extension";
 			packageProductDependencies = (
-				6F9BF5B62720292B00945973 /* SwiftPackageProductDependency */,
+				6F9BF5B62720292B00945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */;
@@ -5730,7 +5730,7 @@
 			);
 			name = "Play RSI TV top shelf extension";
 			packageProductDependencies = (
-				6F9BF5C82720293100945973 /* SwiftPackageProductDependency */,
+				6F9BF5C82720293100945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */;
@@ -5750,7 +5750,7 @@
 			);
 			name = "Play RTR TV top shelf extension";
 			packageProductDependencies = (
-				6F9BF5DA2720293400945973 /* SwiftPackageProductDependency */,
+				6F9BF5DA2720293400945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */;
@@ -5770,7 +5770,7 @@
 			);
 			name = "Play SWI TV top shelf extension";
 			packageProductDependencies = (
-				6F9BF5EC2720293600945973 /* SwiftPackageProductDependency */,
+				6F9BF5EC2720293600945973 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */;
@@ -5790,7 +5790,7 @@
 			);
 			name = "Play SRF TV top shelf extension";
 			packageProductDependencies = (
-				6FE553C927200F8B00F506B9 /* SwiftPackageProductDependency */,
+				6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */,
 			);
 			productName = "Play SRF TV top shelf extension";
 			productReference = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */;
@@ -6003,23 +6003,23 @@
 			);
 			mainGroup = 08C68D461D38D49600BB8AAA;
 			packageReferences = (
-				6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */,
-				6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */,
-				6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */,
-				6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */,
-				6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */,
-				6FFED3F025221564002D471B /* RemoteSwiftPackageReference */,
-				6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */,
-				081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */,
-				6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */,
-				08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */,
-				6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */,
-				6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */,
-				6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */,
-				6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */,
-				6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */,
-				6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */,
-				08C97F87271E655D003AE4F3 /* RemoteSwiftPackageReference */,
+				6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */,
+				6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */,
+				6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */,
+				6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */,
+				6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */,
+				6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */,
+				6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */,
+				081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */,
+				6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */,
+				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
+				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
+				6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */,
+				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
+				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
+				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
+				08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -10528,7 +10528,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -11629,7 +11628,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15467,7 +15465,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15496,7 +15493,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15562,7 +15558,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -15628,7 +15623,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -18756,7 +18750,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */ = {
+		081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
 			requirement = {
@@ -18764,7 +18758,7 @@
 				minimumVersion = 9.0.4;
 			};
 		};
-		08C97F87271E655D003AE4F3 /* RemoteSwiftPackageReference */ = {
+		08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgmediaplayer-apple.git";
 			requirement = {
@@ -18772,7 +18766,7 @@
 				minimumVersion = 6.1.5;
 			};
 		};
-		08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */ = {
+		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
@@ -18780,7 +18774,7 @@
 				minimumVersion = 3.2.0;
 			};
 		};
-		6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */ = {
+		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kean/Nuke.git";
 			requirement = {
@@ -18788,7 +18782,7 @@
 				minimumVersion = 10.4.1;
 			};
 		};
-		6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */ = {
+		6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
@@ -18796,7 +18790,7 @@
 				minimumVersion = 3.2.0;
 			};
 		};
-		6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */ = {
+		6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/IdeasOnCanvas/Aiolos.git";
 			requirement = {
@@ -18804,7 +18798,7 @@
 				minimumVersion = 1.7.2;
 			};
 		};
-		6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */ = {
+		6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
@@ -18812,7 +18806,7 @@
 				minimumVersion = 7.3.0;
 			};
 		};
-		6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */ = {
+		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
@@ -18820,7 +18814,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */ = {
+		6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
@@ -18828,7 +18822,7 @@
 				minimumVersion = 8.7.0;
 			};
 		};
-		6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */ = {
+		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
@@ -18836,7 +18830,7 @@
 				minimumVersion = 7.3.0;
 			};
 		};
-		6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */ = {
+		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
@@ -18844,7 +18838,7 @@
 				minimumVersion = 12.1.0;
 			};
 		};
-		6F9BF5B72720292B00945973 /* RemoteSwiftPackageReference */ = {
+		6F9BF5B72720292B00945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
@@ -18852,7 +18846,7 @@
 				kind = branch;
 			};
 		};
-		6F9BF5C92720293100945973 /* RemoteSwiftPackageReference */ = {
+		6F9BF5C92720293100945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
@@ -18860,7 +18854,7 @@
 				kind = branch;
 			};
 		};
-		6F9BF5DB2720293400945973 /* RemoteSwiftPackageReference */ = {
+		6F9BF5DB2720293400945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
@@ -18868,7 +18862,7 @@
 				kind = branch;
 			};
 		};
-		6F9BF5ED2720293600945973 /* RemoteSwiftPackageReference */ = {
+		6F9BF5ED2720293600945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
@@ -18876,7 +18870,7 @@
 				kind = branch;
 			};
 		};
-		6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */ = {
+		6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Ramotion/paper-onboarding.git";
 			requirement = {
@@ -18884,7 +18878,7 @@
 				minimumVersion = 6.1.5;
 			};
 		};
-		6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */ = {
+		6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
@@ -18892,7 +18886,7 @@
 				minimumVersion = 4.3.0;
 			};
 		};
-		6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */ = {
+		6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dzenbot/DZNEmptyDataSet.git";
 			requirement = {
@@ -18900,7 +18894,7 @@
 				kind = branch;
 			};
 		};
-		6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */ = {
+		6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-collections.git";
 			requirement = {
@@ -18908,7 +18902,7 @@
 				minimumVersion = 1.0.1;
 			};
 		};
-		6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */ = {
+		6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srglogger-apple.git";
 			requirement = {
@@ -18916,7 +18910,7 @@
 				minimumVersion = 3.0.0;
 			};
 		};
-		6FFED3F025221564002D471B /* RemoteSwiftPackageReference */ = {
+		6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/urbanairship/ios-library.git";
 			requirement = {
@@ -18927,784 +18921,784 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		081454BA2546CDD500BB7CA6 /* SwiftPackageProductDependency */ = {
+		081454BA2546CDD500BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
 		};
-		081455132546CE4300BB7CA6 /* SwiftPackageProductDependency */ = {
+		081455132546CE4300BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
 		};
-		081455152546CE4F00BB7CA6 /* SwiftPackageProductDependency */ = {
+		081455152546CE4F00BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
 		};
-		081455172546CE5700BB7CA6 /* SwiftPackageProductDependency */ = {
+		081455172546CE5700BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
 		};
-		081455192546CE5F00BB7CA6 /* SwiftPackageProductDependency */ = {
+		081455192546CE5F00BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 081454B92546CDD500BB7CA6 /* RemoteSwiftPackageReference */;
+			package = 081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */;
 			productName = SwiftMessages;
 		};
-		081A8BD62602B69600530FFF /* SwiftPackageProductDependency */ = {
+		081A8BD62602B69600530FFF /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		081A8C222602C0EA00530FFF /* SwiftPackageProductDependency */ = {
+		081A8C222602C0EA00530FFF /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		081A8C242602C0F800530FFF /* SwiftPackageProductDependency */ = {
+		081A8C242602C0F800530FFF /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		081A8C262602C10300530FFF /* SwiftPackageProductDependency */ = {
+		081A8C262602C10300530FFF /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		081A8C282602C10E00530FFF /* SwiftPackageProductDependency */ = {
+		081A8C282602C10E00530FFF /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		082099F425780A7F0077CF8B /* SwiftPackageProductDependency */ = {
+		082099F425780A7F0077CF8B /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
 		};
-		08209A0A25780AAA0077CF8B /* SwiftPackageProductDependency */ = {
+		08209A0A25780AAA0077CF8B /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
 		};
-		08209A0C25780ABE0077CF8B /* SwiftPackageProductDependency */ = {
+		08209A0C25780ABE0077CF8B /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
 		};
-		08209A0E25780AC50077CF8B /* SwiftPackageProductDependency */ = {
+		08209A0E25780AC50077CF8B /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
 		};
-		08209A1025780ACB0077CF8B /* SwiftPackageProductDependency */ = {
+		08209A1025780ACB0077CF8B /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
 		};
-		08C97F88271E655D003AE4F3 /* SwiftPackageProductDependency */ = {
+		08C97F88271E655D003AE4F3 /* SRGMediaPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08C97F87271E655D003AE4F3 /* RemoteSwiftPackageReference */;
+			package = 08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */;
 			productName = SRGMediaPlayer;
 		};
-		08EA3E77259D2AD6008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E77259D2AD6008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
 			productName = SRGIdentity;
 		};
-		08EA3E7B259D2AE8008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E7B259D2AE8008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
 			productName = SRGIdentity;
 		};
-		08EA3E7D259D2AEF008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E7D259D2AEF008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
 			productName = SRGIdentity;
 		};
-		08EA3E7F259D2AF7008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E7F259D2AF7008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
 			productName = SRGIdentity;
 		};
-		08EA3E81259D2B1B008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E81259D2B1B008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 08EA3E5D259D2434008D412F /* RemoteSwiftPackageReference */;
+			package = 08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */;
 			productName = SRGIdentity;
 		};
-		08EA3E97259D2C0E008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		08EA3E99259D2C15008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		08EA3E9B259D2C1C008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		08EA3E9D259D2C25008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		08EA3E9F259D2C2B008D412F /* SwiftPackageProductDependency */ = {
+		08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		08F5DAEC262D99A900F717D0 /* SwiftPackageProductDependency */ = {
+		08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		08F5DAEE262D99B400F717D0 /* SwiftPackageProductDependency */ = {
+		08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		08F5DAF0262D99BF00F717D0 /* SwiftPackageProductDependency */ = {
+		08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		08F5DAF2262D99CB00F717D0 /* SwiftPackageProductDependency */ = {
+		08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		08F5DAF4262D99D400F717D0 /* SwiftPackageProductDependency */ = {
+		08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		6F17DC15266AB81C009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC15266AB81C009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC17266AB837009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC17266AB837009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC19266AB83E009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC19266AB83E009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC1B266AB846009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC1B266AB846009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC1D266AB84E009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC1D266AB84E009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC1F266AB854009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC1F266AB854009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC21266AB85B009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC21266AB85B009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC23266AB862009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC23266AB862009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC25266AB867009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC25266AB867009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F17DC27266AB86D009F74C6 /* SwiftPackageProductDependency */ = {
+		6F17DC27266AB86D009F74C6 /* Nuke */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F17DC14266AB81C009F74C6 /* RemoteSwiftPackageReference */;
+			package = 6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */;
 			productName = Nuke;
 		};
-		6F2544F42521BAA400F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2544F42521BAA400F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F2545B42521C14E00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545B42521C14E00F9F4FE /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6F2545B62521C15E00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545B62521C15E00F9F4FE /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6F2545B82521C15E00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545B82521C15E00F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F2545BA2521C16800F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545BA2521C16800F9F4FE /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6F2545BC2521C16800F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545BC2521C16800F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F2545BE2521C17000F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545BE2521C17000F9F4FE /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6F2545C02521C17000F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545C02521C17000F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F2545C22521C17700F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545C22521C17700F9F4FE /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6F2545C42521C17700F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2545C42521C17700F9F4FE /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F25461B2521C22C00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F25461B2521C22C00F9F4FE /* SRGDataProviderNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderNetwork;
 		};
-		6F25461D2521C23300F9F4FE /* SwiftPackageProductDependency */ = {
+		6F25461D2521C23300F9F4FE /* SRGDataProviderNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderNetwork;
 		};
-		6F25461F2521C23B00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F25461F2521C23B00F9F4FE /* SRGDataProviderNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderNetwork;
 		};
-		6F2546212521C24600F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546212521C24600F9F4FE /* SRGDataProviderNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderNetwork;
 		};
-		6F2546232521C24E00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546232521C24E00F9F4FE /* SRGDataProviderNetwork */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderNetwork;
 		};
-		6F25463A2521C34800F9F4FE /* SwiftPackageProductDependency */ = {
+		6F25463A2521C34800F9F4FE /* Aiolos */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */;
 			productName = Aiolos;
 		};
-		6F2546502521C35300F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546502521C35300F9F4FE /* Aiolos */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */;
 			productName = Aiolos;
 		};
-		6F2546522521C35A00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546522521C35A00F9F4FE /* Aiolos */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */;
 			productName = Aiolos;
 		};
-		6F2546542521C36100F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546542521C36100F9F4FE /* Aiolos */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */;
 			productName = Aiolos;
 		};
-		6F2546562521C36E00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546562521C36E00F9F4FE /* Aiolos */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546392521C34800F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */;
 			productName = Aiolos;
 		};
-		6F2546C02521CFD400F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546C02521CFD400F9F4FE /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		6F2546C22521CFDC00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546C22521CFDC00F9F4FE /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		6F2546C42521CFEA00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		6F2546C62521CFF000F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		6F2546C82521CFFA00F9F4FE /* SwiftPackageProductDependency */ = {
+		6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2546AB2521CFA100F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
 		};
-		6F2DBB9725DD26D9007DA242 /* SwiftPackageProductDependency */ = {
+		6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6F2DBBAD25DD26EB007DA242 /* SwiftPackageProductDependency */ = {
+		6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6F2DBBAF25DD26F4007DA242 /* SwiftPackageProductDependency */ = {
+		6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6F2DBBB125DD26FB007DA242 /* SwiftPackageProductDependency */ = {
+		6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6F2DBBB325DD2703007DA242 /* SwiftPackageProductDependency */ = {
+		6F2DBBB325DD2703007DA242 /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6F3AED332614C5B6007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED332614C5B6007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AED4E2614C5D7007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AED502614C5E1007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED502614C5E1007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AED6B2614C5E9007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AED6D2614C5F0007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AED882614C5FA007D591F /* SwiftPackageProductDependency */ = {
+		6F3AED882614C5FA007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AEDA32614C601007D591F /* SwiftPackageProductDependency */ = {
+		6F3AEDA32614C601007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AEDA52614C607007D591F /* SwiftPackageProductDependency */ = {
+		6F3AEDA52614C607007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AEDA72614C60C007D591F /* SwiftPackageProductDependency */ = {
+		6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F3AEDC22614C613007D591F /* SwiftPackageProductDependency */ = {
+		6F3AEDC22614C613007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F3AED322614C5B6007D591F /* RemoteSwiftPackageReference */;
+			package = 6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */;
 			productName = SRGAppearanceSwift;
 		};
-		6F517A0F25DAB56600CE548B /* SwiftPackageProductDependency */ = {
+		6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6F61CCC2256E41EE00E42E31 /* SwiftPackageProductDependency */ = {
+		6F61CCC2256E41EE00E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F61CCC4256E41F500E42E31 /* SwiftPackageProductDependency */ = {
+		6F61CCC4256E41F500E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F61CCC6256E41FB00E42E31 /* SwiftPackageProductDependency */ = {
+		6F61CCC6256E41FB00E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F61CCC8256E420200E42E31 /* SwiftPackageProductDependency */ = {
+		6F61CCC8256E420200E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F61CCCA256E420800E42E31 /* SwiftPackageProductDependency */ = {
+		6F61CCCA256E420800E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F2544F32521BAA400F9F4FE /* RemoteSwiftPackageReference */;
+			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
 		};
-		6F9BF5B62720292B00945973 /* SwiftPackageProductDependency */ = {
+		6F9BF5B62720292B00945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F9BF5B72720292B00945973 /* RemoteSwiftPackageReference */;
+			package = 6F9BF5B72720292B00945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6F9BF5C82720293100945973 /* SwiftPackageProductDependency */ = {
+		6F9BF5C82720293100945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F9BF5C92720293100945973 /* RemoteSwiftPackageReference */;
+			package = 6F9BF5C92720293100945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6F9BF5DA2720293400945973 /* SwiftPackageProductDependency */ = {
+		6F9BF5DA2720293400945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F9BF5DB2720293400945973 /* RemoteSwiftPackageReference */;
+			package = 6F9BF5DB2720293400945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6F9BF5EC2720293600945973 /* SwiftPackageProductDependency */ = {
+		6F9BF5EC2720293600945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F9BF5ED2720293600945973 /* RemoteSwiftPackageReference */;
+			package = 6F9BF5ED2720293600945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FA84A1724E44B6400B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A1724E44B6400B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6FA84A1924E44B6400B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A1924E44B6400B1A56E /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FA84A1B24E44B6D00B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A1B24E44B6D00B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6FA84A1D24E44B6D00B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A1D24E44B6D00B1A56E /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FA84A1F24E44B7500B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A1F24E44B7500B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6FA84A2124E44B7500B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A2124E44B7500B1A56E /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FA84A2324E44B7B00B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A2324E44B7B00B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6FA84A2524E44B7B00B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A2524E44B7B00B1A56E /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FA84A2724E44B8300B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A2724E44B8300B1A56E /* SRGLetterbox */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A624E449BA003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */;
 			productName = SRGLetterbox;
 		};
-		6FA84A2924E44B8300B1A56E /* SwiftPackageProductDependency */ = {
+		6FA84A2924E44B8300B1A56E /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FD4095925221A1000E621EF /* SwiftPackageProductDependency */ = {
+		6FD4095925221A1000E621EF /* AirshipCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FFED3F025221564002D471B /* RemoteSwiftPackageReference */;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
 		};
-		6FD4095B25221A1A00E621EF /* SwiftPackageProductDependency */ = {
+		6FD4095B25221A1A00E621EF /* AirshipCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FFED3F025221564002D471B /* RemoteSwiftPackageReference */;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
 		};
-		6FD4095D25221A2300E621EF /* SwiftPackageProductDependency */ = {
+		6FD4095D25221A2300E621EF /* AirshipCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FFED3F025221564002D471B /* RemoteSwiftPackageReference */;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
 		};
-		6FD4095F25221A2B00E621EF /* SwiftPackageProductDependency */ = {
+		6FD4095F25221A2B00E621EF /* AirshipCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FFED3F025221564002D471B /* RemoteSwiftPackageReference */;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
 		};
-		6FD4096125221A3500E621EF /* SwiftPackageProductDependency */ = {
+		6FD4096125221A3500E621EF /* AirshipCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FFED3F025221564002D471B /* RemoteSwiftPackageReference */;
+			package = 6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */;
 			productName = AirshipCore;
 		};
-		6FD40A4725221C2D00E621EF /* SwiftPackageProductDependency */ = {
+		6FD40A4725221C2D00E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */;
+			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FD40A5D25221C3A00E621EF /* SwiftPackageProductDependency */ = {
+		6FD40A5D25221C3A00E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */;
+			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FD40A7325221C4300E621EF /* SwiftPackageProductDependency */ = {
+		6FD40A7325221C4300E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */;
+			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FD40A7525221C4900E621EF /* SwiftPackageProductDependency */ = {
+		6FD40A7525221C4900E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */;
+			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FD40A8B25221C4F00E621EF /* SwiftPackageProductDependency */ = {
+		6FD40A8B25221C4F00E621EF /* PaperOnboarding */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD40A4625221C2D00E621EF /* RemoteSwiftPackageReference */;
+			package = 6FD40A4625221C2D00E621EF /* XCRemoteSwiftPackageReference "paper-onboarding" */;
 			productName = PaperOnboarding;
 		};
-		6FD46C2D25DAB63D00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C4325DAB64700874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C4525DAB65100874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C4725DAB65900874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C7125DAB66000874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C8725DAB66600874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C8925DAB66D00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46C9F25DAB67400874EAF /* SwiftPackageProductDependency */ = {
+		6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46CA125DAB67A00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F517A0E25DAB56600CE548B /* RemoteSwiftPackageReference */;
+			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
 		};
-		6FD46CB825DAB76D00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CB825DAB76D00874EAF /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6FD46CBA25DAB76D00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		6FD46CD025DAB7BA00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6FD46CD225DAB7BA00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		6FD46CE825DAB7C300874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CE825DAB7C300874EAF /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6FD46CEA25DAB7C300874EAF /* SwiftPackageProductDependency */ = {
+		6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		6FD46D0025DAB80300874EAF /* SwiftPackageProductDependency */ = {
+		6FD46D0025DAB80300874EAF /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6FD46D0225DAB80300874EAF /* SwiftPackageProductDependency */ = {
+		6FD46D0225DAB80300874EAF /* AppCenterDistribute */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		6FD46D1825DAB80C00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46D1825DAB80C00874EAF /* AppCenterCrashes */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterCrashes;
 		};
-		6FD46D1A25DAB80C00874EAF /* SwiftPackageProductDependency */ = {
+		6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FD46CB725DAB76C00874EAF /* RemoteSwiftPackageReference */;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		6FE553C927200F8B00F506B9 /* SwiftPackageProductDependency */ = {
+		6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6F6DD3A924E449D7003F9437 /* RemoteSwiftPackageReference */;
+			package = 6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */;
 			productName = SRGDataProviderCombine;
 		};
-		6FEC8979261F165600FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC8979261F165600FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC8994261F16BA00FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC8996261F16C100FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC8998261F16C800FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC899A261F16CF00FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC899C261F16D500FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC899E261F16DC00FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC89A0261F16E200FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC89A2261F16E800FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEC89A4261F16EE00FF9762 /* SwiftPackageProductDependency */ = {
+		6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEC8978261F165500FF9762 /* RemoteSwiftPackageReference */;
+			package = 6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */;
 			productName = DZNEmptyDataSet;
 		};
-		6FEEBE77265CD6A700A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE77265CD6A700A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE79265CD6D300A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE79265CD6D300A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE7B265CD6DB00A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE7B265CD6DB00A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE7D265CD6E600A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE7D265CD6E600A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE7F265CD70000A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE7F265CD70000A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE81265CD70900A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE81265CD70900A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE83265CD71000A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE83265CD71000A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE85265CD71700A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE85265CD71700A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE87265CD71E00A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE87265CD71E00A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FEEBE89265CD72400A4882B /* SwiftPackageProductDependency */ = {
+		6FEEBE89265CD72400A4882B /* Collections */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FEEBE76265CD6A600A4882B /* RemoteSwiftPackageReference */;
+			package = 6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = Collections;
 		};
-		6FF12A47256C58A70042F446 /* SwiftPackageProductDependency */ = {
+		6FF12A47256C58A70042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		6FF12A5D256C58B20042F446 /* SwiftPackageProductDependency */ = {
+		6FF12A5D256C58B20042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		6FF12A73256C58BB0042F446 /* SwiftPackageProductDependency */ = {
+		6FF12A73256C58BB0042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		6FF12A75256C58C40042F446 /* SwiftPackageProductDependency */ = {
+		6FF12A75256C58C40042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
-		6FF12A8B256C58CC0042F446 /* SwiftPackageProductDependency */ = {
+		6FF12A8B256C58CC0042F446 /* SRGLoggerSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 6FF12A46256C58A60042F446 /* RemoteSwiftPackageReference */;
+			package = 6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */;
 			productName = SRGLoggerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
