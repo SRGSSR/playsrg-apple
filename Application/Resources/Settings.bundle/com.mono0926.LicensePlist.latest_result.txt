@@ -50,23 +50,23 @@ version: 2.8.2
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
@@ -165,23 +165,23 @@ version: 2.0.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20200225.4
 
