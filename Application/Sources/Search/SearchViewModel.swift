@@ -129,10 +129,10 @@ private extension SearchViewModel {
     
     static func shows(matchingQuery query: String) -> AnyPublisher<[SRGShow], Error> {
         let vendor = ApplicationConfiguration.shared.vendor
-        let pageSize = ApplicationConfiguration.shared.pageSize
+        let pageSize = ApplicationConfiguration.shared.detailPageSize
         return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: .none, pageSize: pageSize, paginatedBy: nil)
             .map { output in
-                return SRGDataProvider.current!.shows(withUrns: output.showUrns)
+                return SRGDataProvider.current!.shows(withUrns: output.showUrns, pageSize: pageSize)
             }
             .switchToLatest()
             .eraseToAnyPublisher()
@@ -140,10 +140,10 @@ private extension SearchViewModel {
     
     static func medias(matchingQuery query: String, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
         let vendor = ApplicationConfiguration.shared.vendor
-        let pageSize = ApplicationConfiguration.shared.pageSize
+        let pageSize = ApplicationConfiguration.shared.detailPageSize
         return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: signal)
             .map { output in
-                return SRGDataProvider.current!.medias(withUrns: output.mediaUrns)
+                return SRGDataProvider.current!.medias(withUrns: output.mediaUrns, pageSize: pageSize)
                     .map { (medias: $0, suggestions: output.suggestions) }
             }
             .switchToLatest()
