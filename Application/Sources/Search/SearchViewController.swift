@@ -59,6 +59,7 @@ final class SearchViewController: UIViewController {
         searchBar.placeholder = NSLocalizedString("Search", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
+        searchBar.delegate = self
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
@@ -141,6 +142,14 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
     }
 }
 #endif
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if let searchResultsController = searchController.searchResultsController as? SearchResultsViewController {
+            searchResultsController.scrollToTop(animated: true)
+        }
+    }
+}
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

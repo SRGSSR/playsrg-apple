@@ -135,6 +135,10 @@ final class SearchResultsViewController: UIViewController {
     }
 #endif
     
+    func scrollToTop(animated: Bool) {
+        collectionView.play_scrollToTop(animated: animated)
+    }
+    
     private func reloadData(for state: SearchViewModel.State) {
         switch state {
         case .loading:
