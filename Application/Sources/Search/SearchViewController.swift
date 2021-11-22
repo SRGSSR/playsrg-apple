@@ -116,6 +116,11 @@ final class SearchViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         searchController.searchResultsController?.viewDidDisappear(animated)
+        
+        if play_isMovingFromParentViewController() {
+            // Dismiss to avoid retain cycle if the search was entered once, see https://stackoverflow.com/a/33619501/760435
+            searchController.dismiss(animated: false, completion: nil)
+        }
     }
 }
 
