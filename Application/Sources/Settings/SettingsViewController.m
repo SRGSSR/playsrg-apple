@@ -152,7 +152,23 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 {
     NSMutableArray *hiddenKeys = [NSMutableArray array];
     
-#if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
+#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+    if (! MSACDistribute.isEnabled) {
+        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
+#elif defined(NIGHTLY) || defined(BETA)
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    [hiddenKeys addObject:SettingsDeveloperGroup];
+    [hiddenKeys addObject:SettingsFLEXButton];
+    
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
+#else
     [hiddenKeys addObject:SettingsAdvancedFeaturesGroup];
     [hiddenKeys addObject:SettingsServerSettingsButton];
     [hiddenKeys addObject:SettingsUserLocationSettingsButton];
@@ -169,22 +185,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
-#elif !defined(NIGHTLY_APPCENTER) && !defined(BETA_APPCENTER)
-    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    [hiddenKeys addObject:SettingsDeveloperGroup];
-    [hiddenKeys addObject:SettingsFLEXButton];
-
-    if (! PushService.sharedService.enabled) {
-        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    }
-#else
-    if (! MSACDistribute.isEnabled) {
-        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    }
-    
-    if (! PushService.sharedService.enabled) {
-        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    }
 #endif
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
