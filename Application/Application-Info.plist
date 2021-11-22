@@ -6,6 +6,8 @@
 	<string>$(BUILD_NAME)</string>
 	<key>BundleDisplayNameSuffix</key>
 	<string>$(BUNDLE_DISPLAY_NAME_SUFFIX)</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
 	<key>AVInitialRouteSharingPolicy</key>
 	<string>LongFormVideo</string>
 	<key>AppCenterSecret</key>
