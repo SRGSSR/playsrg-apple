@@ -148,8 +148,8 @@ final class ProgramGuideGridViewController: UIViewController {
         case .loaded:
             emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .generic)) : nil
 #if os(tvOS)
-            let firstCurrentProgram = state.programs(for: nil).first { $0.play_contains(Date()) }
-            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: firstCurrentProgram)
+            let currentProgram = state.programs(for: nil).first { $0.play_contains(model.dateSelection.date) }
+            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
 #endif
         }
         
