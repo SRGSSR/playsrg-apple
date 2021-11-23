@@ -52,7 +52,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
-            headerView.heightAnchor.constraint(equalToConstant: constant(iOS: 100, tvOS: 600)),
+            headerView.heightAnchor.constraint(equalToConstant: constant(iOS: 100, tvOS: 700)),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
