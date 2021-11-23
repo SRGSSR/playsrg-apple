@@ -63,7 +63,7 @@ struct ProgramCell: View {
         }
         
         private var horizontalPadding: CGFloat {
-            return direction == .horizontal ? 16 : 8
+            return direction == .horizontal ? 16 : constant(iOS: 8, tvOS: 12)
         }
         
         private var topPadding: CGFloat {
@@ -74,21 +74,25 @@ struct ProgramCell: View {
             return direction == .horizontal ? 0 : 2
         }
         
+        private var spacing: CGFloat {
+            return direction == .horizontal ? 10 : constant(iOS: 4, tvOS: 0)
+        }
+        
         private var isCompact: Bool {
             return availableSize.width < 100
         }
         
         var body: some View {
             ZStack {
-                Stack(direction: direction, alignment: alignment, spacing: 10) {
+                Stack(direction: direction, alignment: alignment, spacing: spacing) {
                     if let timeRange = model.timeRange {
                         Text(timeRange)
-                            .srgFont(.subtitle1)
-                            .lineLimit(timeRangeLineLimit)
+                            .srgFont(.subtitle2)
+                            .lineLimit(1)
                             .foregroundColor(.srgGray96)
                             .frame(maxWidth: timeRangeWidth, alignment: .leading)
                     }
-                    TitleView(model: model, compact: isCompact)
+                    TitleView(model: model, direction: direction, compact: isCompact)
                     Spacer()
                 }
                 .padding(.horizontal, horizontalPadding)
@@ -113,7 +117,12 @@ struct ProgramCell: View {
     /// Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramCellViewModel
+        let direction: StackDirection
         let compact: Bool
+        
+        private var lineLimit: Int {
+            return direction == .horizontal ? 1 : 2
+        }
         
         var body: some View {
             HStack(spacing: 10) {
@@ -124,7 +133,7 @@ struct ProgramCell: View {
                 if let title = model.program?.title {
                     Text(title)
                         .srgFont(.body)
-                        .lineLimit(1)
+                        .lineLimit(lineLimit)
                         .foregroundColor(.srgGrayC7)
                 }
             }
