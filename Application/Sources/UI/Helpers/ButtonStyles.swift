@@ -16,8 +16,8 @@ struct FlatButtonStyle: ButtonStyle {
             .padding(.vertical, 12)
             .background(focused ? Color.srgGray33 : Color.srgGray23)
             .cornerRadius(5)
-            .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
-            .animation(.default, value: focused)
+            .scaleEffect(focused && !configuration.isPressed ? 1.04 : 1)
+            .animation(.easeOut(duration: 0.2), value: focused)
 #else
         configuration.label
             .padding(.horizontal, 10)
@@ -35,6 +35,7 @@ struct TextButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .background(focused ? Color(UIColor(white: 1, alpha: 0.3)) : Color.clear)
-            .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
+            .scaleEffect(focused && !configuration.isPressed ? 1.04 : 1)
+            .animation(.easeOut(duration: 0.2), value: focused)
     }
 }
