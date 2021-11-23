@@ -156,13 +156,14 @@ class ProgramCellSize: NSObject {
 
 struct ProgramCell_Previews: PreviewProvider {
     private static let size = ProgramCellSize.fullWidth().previewSize
+    private static let height: CGFloat = constant(iOS: 105, tvOS: 120)
     
     static var previews: some View {
         ProgramCell(program: Mock.program(), direction: .horizontal)
             .previewLayout(.fixed(width: size.width, height: size.height))
         ProgramCell(program: Mock.program(), direction: .vertical)
-            .previewLayout(.fixed(width: 500, height: 105))
+            .previewLayout(.fixed(width: 500, height: height))
         ProgramCell(program: Mock.program(), direction: .vertical)
-            .previewLayout(.fixed(width: 80, height: 105))
+            .previewLayout(.fixed(width: 80, height: height))
     }
 }
