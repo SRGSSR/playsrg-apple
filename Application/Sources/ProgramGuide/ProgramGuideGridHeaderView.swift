@@ -83,9 +83,6 @@ struct ProgramGuideGridHeaderView: View {
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                    model.switchToYesterday()
-                }
 #if os(iOS)
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideGridHeaderViewActions.openCalendar))
@@ -93,6 +90,9 @@ struct ProgramGuideGridHeaderView: View {
 #endif
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
+                }
+                ExpandingButton(label: NSLocalizedString("Tonight", comment: "Tonight button in program guide")) {
+                    model.switchToTonight()
                 }
             }
             .responderChain(from: firstResponder)

@@ -34,14 +34,14 @@ struct ProgramGuideListHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                    model.switchToYesterday()
-                }
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
                     firstResponder.sendAction(#selector(ProgramGuideListHeaderViewActions.openCalendar))
                 }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
+                }
+                ExpandingButton(label: NSLocalizedString("Tonight", comment: "Tonight button in program guide")) {
+                    model.switchToTonight()
                 }
             }
             .responderChain(from: firstResponder)
