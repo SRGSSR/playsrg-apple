@@ -121,7 +121,7 @@ private extension SearchViewModel {
         let vendor = ApplicationConfiguration.shared.vendor
         return SRGDataProvider.current!.mostSearchedShows(for: vendor)
             .map { shows in
-                let items = shows.map { Item.show($0) }
+                let items = removeDuplicates(in: shows.map { Item.show($0) })
                 return [Row(section: .mostSearchedShows, items: items)]
             }
             .eraseToAnyPublisher()
@@ -148,7 +148,7 @@ private extension SearchViewModel {
             }
             .switchToLatest()
             .scan((medias: [], suggestions: nil)) {
-                return (medias: $0.medias + $1.medias, suggestions: $1.suggestions )
+                return (medias: removeDuplicates(in: $0.medias + $1.medias), suggestions: $1.suggestions )
             }
             .eraseToAnyPublisher()
     }
