@@ -42,7 +42,7 @@ struct ProgramGuideGridHeaderView: View {
 #endif
         
         private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 80)
-        private static let spacing: CGFloat = constant(iOS: 20, tvOS: 40)
+        private static let spacing: CGFloat = constant(iOS: 42, tvOS: 40)
         
         private var direction: StackDirection {
 #if os(iOS)
