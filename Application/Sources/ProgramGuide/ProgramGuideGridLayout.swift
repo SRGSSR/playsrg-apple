@@ -143,6 +143,11 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         }
     }
     
+    private var focusedIndexPath: IndexPath? {
+        guard let focusedCell = UIScreen.main.focusedView as? UICollectionViewCell else { return nil }
+        return collectionView?.indexPath(for: focusedCell)
+    }
+    
     override init() {
         super.init()
         Timer.publish(every: 10, on: .main, in: .common)
@@ -199,6 +204,24 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         return layoutData?.decorationAttrs.first { $0.indexPath == indexPath && $0.representedElementKind == elementKind }
+    }
+    
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        guard let collectionView = collectionView,
+              let focusedIndexPath = focusedIndexPath,
+              let layoutAttr = layoutAttributesForItem(at: focusedIndexPath) else { return proposedContentOffset }
+        let reservedWidth = Self.channelHeaderWidth + Self.horizontalSpacing
+        let xOffset = layoutAttr.frame.minX - reservedWidth
+        
+        // If the currently focused item leading edge is obscured by the header, or if the item itself is larger than the
+        // collection (considering its header), align the item at the leading layout boundary.
+        if collectionView.contentOffset.x - xOffset > 0 || layoutAttr.frame.width + reservedWidth - collectionView.frame.width > 0 {
+            return CGPoint(x: xOffset, y: proposedContentOffset.y)
+        }
+        // Otherwise just use the proposed position
+        else {
+            return proposedContentOffset
+        }
     }
 }
 
