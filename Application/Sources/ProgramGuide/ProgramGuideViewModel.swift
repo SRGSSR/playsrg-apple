@@ -126,7 +126,7 @@ extension ProgramGuideViewModel {
         }
         
         fileprivate static func tonight(from dateSelection: DateSelection) -> DateSelection {
-            let date = Calendar.current.date(bySettingHour: 21, minute: 0, second: 0, of: Date())!
+            let date = Calendar.current.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
             return updatedDateSelection(from: dateSelection, for: date)
         }
         
