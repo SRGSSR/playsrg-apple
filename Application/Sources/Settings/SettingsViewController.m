@@ -38,7 +38,7 @@
 @import SRGLetterbox;
 @import YYWebImage;
 
-#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#if defined(DEBUG) || defined(APPCENTER)
 #import <FLEX/FLEX.h>
 #endif
 
@@ -152,7 +152,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 {
     NSMutableArray *hiddenKeys = [NSMutableArray array];
     
-#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#if defined(DEBUG) || defined(APPCENTER)
     if (! MSACDistribute.isEnabled) {
         [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     }
@@ -473,7 +473,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [UIImage srg_clearVectorImageCache];
         [Download removeAllDownloads];
     }
-#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#if defined(DEBUG) || defined(APPCENTER)
     else if ([specifier.key isEqualToString:SettingsFLEXButton]) {
         [[FLEXManager sharedManager] toggleExplorer];
     }
