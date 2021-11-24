@@ -41,7 +41,7 @@ struct ProgramGuideGridHeaderView: View {
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
 #endif
         
-        private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 80)
+        private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 60)
         private static let spacing: CGFloat = constant(iOS: 42, tvOS: 40)
         
         private var direction: StackDirection {
@@ -103,7 +103,7 @@ struct ProgramGuideGridHeaderView: View {
     private struct DayNavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
         
-        private static let buttonWidth: CGFloat = constant(iOS: 40, tvOS: 60)
+        private static let buttonWidth: CGFloat = constant(iOS: 43, tvOS: 60)
         
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
