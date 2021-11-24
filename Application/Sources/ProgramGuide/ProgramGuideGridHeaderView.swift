@@ -66,9 +66,11 @@ struct ProgramGuideGridHeaderView: View {
                 else {
                     HStack(spacing: Self.spacing) {
                         DayNavigationBar(model: model)
+                            .frame(maxWidth: constant(iOS: 400, tvOS: 750))
                         DaySelector(model: model)
+                            .frame(maxWidth: 450)
                     }
-                    .frame(height: Self.itemHeight)
+                    .frame(maxWidth: .infinity, maxHeight: Self.itemHeight, alignment: .leading)
                 }
             }
             .padding(.horizontal, constant(iOS: 10, tvOS: 56))
