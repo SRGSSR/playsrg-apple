@@ -92,7 +92,7 @@ struct ProgramCell: View {
                             .foregroundColor(.srgGray96)
                             .frame(maxWidth: timeRangeWidth, alignment: .leading)
                     }
-                    TitleView(model: model, direction: direction, compact: isCompact)
+                    TitleView(model: model, compact: isCompact)
                     Spacer()
                 }
                 .padding(.horizontal, horizontalPadding)
@@ -117,7 +117,6 @@ struct ProgramCell: View {
     /// Behavior: h-hug, v-hug
     private struct TitleView: View {
         @ObservedObject var model: ProgramCellViewModel
-        let direction: StackDirection
         let compact: Bool
         
         var body: some View {
