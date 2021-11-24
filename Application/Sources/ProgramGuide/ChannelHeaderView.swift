@@ -21,6 +21,9 @@ struct ChannelHeaderView: View {
         Group {
             if let image = logoImage {
                 Image(uiImage: image)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 62)
             }
             else {
                 Text(channel.title)
