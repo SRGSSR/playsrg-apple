@@ -11,11 +11,11 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct SimpleButton: View {
-    let icon: String
-    let label: String?
-    let accessibilityLabel: String
-    let accessibilityHint: String?
-    let action: () -> Void
+    private let icon: String
+    private let label: String?
+    private let accessibilityLabel: String
+    private let accessibilityHint: String?
+    private let action: () -> Void
     
     @State private var isFocused = false
     
