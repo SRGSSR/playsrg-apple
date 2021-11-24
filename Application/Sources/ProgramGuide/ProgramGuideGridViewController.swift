@@ -52,7 +52,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
-            headerView.heightAnchor.constraint(equalToConstant: constant(iOS: 100, tvOS: 700)),
+            headerView.heightAnchor.constraint(equalToConstant: constant(iOS: 140, tvOS: 760)),
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -68,7 +68,7 @@ final class ProgramGuideGridViewController: UIViewController {
         self.collectionView = collectionView
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -ProgramGuideGridLayout.timelineHeight),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant(iOS: 0, tvOS: 56)),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)

@@ -46,6 +46,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     static let verticalNowIndicatorIndexPath = IndexPath(item: 0, section: 0)
+    static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     
     private struct LayoutData {
         let layoutAttrs: [UICollectionViewLayoutAttributes]
@@ -60,7 +61,6 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
     private static let channelHeaderWidth: CGFloat = 102
     private static let trailingMargin: CGFloat = 10
-    private static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     
     private var layoutData: LayoutData?
     private var cancellables = Set<AnyCancellable>()
@@ -104,7 +104,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 width: Self.channelHeaderWidth,
                 height: (section != snapshot.sectionIdentifiers.count - 1) ? Self.sectionHeight + Self.verticalSpacing : Self.sectionHeight
             )
-            attrs.zIndex = 3
+            attrs.zIndex = 1
             return attrs
         }
         
@@ -116,7 +116,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             height: Self.timelineHeight
         )
         timelineAttr.dateInterval = dateInterval
-        timelineAttr.zIndex = 1
+        timelineAttr.zIndex = 2
         
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
         if !snapshot.sectionIdentifiers.isEmpty, let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
@@ -135,7 +135,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 width: VerticalNowIndicatorView.width,
                 height: max(VerticalNowIndicatorView.headerHeight + CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing - collectionView.contentOffset.y, VerticalNowIndicatorView.headerHeight)
             )
-            verticalNowIndicatorAttr.zIndex = 2
+            verticalNowIndicatorAttr.zIndex = 3
             return verticalNowIndicatorAttr
         }
         else {

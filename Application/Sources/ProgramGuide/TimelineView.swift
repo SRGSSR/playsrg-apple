@@ -67,7 +67,8 @@ struct TimelineView: View {
                 .padding(.bottom, 8)
             }
         }
-        .background(Color.srgGray16)
+        .background(Color(white: 0, opacity: 0.2))
+        .background(Blur(style: .dark))
     }
 }
 
