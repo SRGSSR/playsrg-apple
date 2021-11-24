@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)play_containsDate:(NSDate *)date;
 
+/**
+ *  Common accessibility metadata.
+ */
+@property (nonatomic, copy) NSString *play_accessibilityLabel;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -92,6 +92,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
             cell.content = ProgramCell(program: program, direction: .vertical)
+            cell.accessibilityLabel = program.play_accessibilityLabel
+            cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint");
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in

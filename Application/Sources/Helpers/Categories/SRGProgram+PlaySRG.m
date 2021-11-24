@@ -6,6 +6,9 @@
 
 #import "SRGProgram+PlaySRG.h"
 
+#import "NSBundle+PlaySRG.h"
+#import "PlayAccessibilityFormatter.h"
+
 @implementation SRGProgram (PlaySRG)
 
 - (BOOL)play_containsDate:(NSDate *)date
@@ -16,6 +19,12 @@
     
     NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:startDate endDate:endDate];
     return [dateInterval containsDate:date];
+}
+
+- (NSString *)play_accessibilityLabel
+{
+    return [[NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"From %1$@ to %2$@", @"Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(self.startDate), PlayAccessibilityTimeFromDate(self.endDate)]
+            stringByAppendingFormat:@", %@", self.title];
 }
 
 @end
