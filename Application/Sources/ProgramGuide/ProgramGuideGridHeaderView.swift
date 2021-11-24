@@ -70,7 +70,7 @@ struct ProgramGuideGridHeaderView: View {
                     .frame(height: Self.itemHeight)
                 }
             }
-            .padding(.horizontal, constant(iOS: 10, tvOS: 20))
+            .padding(.horizontal, constant(iOS: 10, tvOS: 56))
             .padding(.vertical, Self.spacing)
             .frame(maxHeight: .infinity, alignment: .bottom)
         }
