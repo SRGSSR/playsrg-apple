@@ -21,13 +21,19 @@ struct ProgramPreview: View {
     }
     
     var body: some View {
-        HStack {
-            DescriptionView(model: model)
+        ZStack {
             ImageView(url: model.imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .redactable()
                 .layoutPriority(1)
                 .overlay(ImageOverlay())
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+            
+            // Use stack with competing views to have a 50/50 horizontal split
+            HStack {
+                DescriptionView(model: model)
+                Color.clear
+            }
         }
         .redactedIfNil(program)
         .onAppear {
@@ -80,8 +86,9 @@ struct ProgramPreview_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             ProgramPreview(program: Mock.program())
+            ProgramPreview(program: Mock.program(.overflow))
             ProgramPreview(program: nil)
         }
-        .previewLayout(.fixed(width: 1920, height: 600))
+        .previewLayout(.fixed(width: 1920, height: 700))
     }
 }
