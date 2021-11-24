@@ -39,6 +39,7 @@
 #import "SRGChannel+PlaySRG.h"
 #import "SRGLetterboxController+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
+#import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIColor+PlaySRG.h"
 #import "UICollectionView+PlaySRG.h"
