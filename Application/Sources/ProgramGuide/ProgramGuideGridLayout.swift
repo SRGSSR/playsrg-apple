@@ -11,10 +11,10 @@ import UIKit
 // MARK: Layout
 
 /**
- *  ┌────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
- *  │                │                                                                                                                   │
- *  │                │                                         Timeline (decoration)                                                     │
- *  │───────────────┬┼─────────────────────────────────────────────────────────┬┬────────────────────────────────┬┬────────────┬────────┬┤
+ *  ┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
+ *  │                                                                                                                                    │
+ *  │                                                    Timeline (decoration)                                                           │
+ *  │───────────────┬┬─────────────────────────────────────────────────────────┬┬────────────────────────────────┬┬────────────┬────────┬┤
  *  │               ││                                                         ││                                ││            │        ││
  *  │               ││                                                         ││                                ││            │        ││
  *  │    Header     ││                          00                             ││              01                ││     02     │        ││
@@ -47,6 +47,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     static let verticalNowIndicatorIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
+    static let channelHeaderWidth: CGFloat = 102
+    static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
     
     private struct LayoutData {
         let layoutAttrs: [UICollectionViewLayoutAttributes]
@@ -55,11 +57,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let dateInterval: DateInterval
     }
     
-    private static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
     private static let verticalSpacing: CGFloat = constant(iOS: 3, tvOS: 6)
     private static let scale: CGFloat = constant(iOS: 430, tvOS: 900) / (60 * 60)
     private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
-    private static let channelHeaderWidth: CGFloat = 102
     private static let trailingMargin: CGFloat = 10
     
     private var layoutData: LayoutData?
@@ -110,7 +110,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         
         let timelineAttr = TimelineLayoutAttributes(forDecorationViewOfKind: ElementKind.timeline.rawValue, with: IndexPath(item: 0, section: 0))
         timelineAttr.frame = CGRect(
-            x: Self.channelHeaderWidth + Self.horizontalSpacing,
+            x: 0,
             y: collectionView.contentOffset.y,
             width: dateInterval.duration * Self.scale,
             height: Self.timelineHeight

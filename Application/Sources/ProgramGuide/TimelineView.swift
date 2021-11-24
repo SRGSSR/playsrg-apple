@@ -19,7 +19,7 @@ struct TimelineView: View {
     
     private func xPosition(for date: Date, width: CGFloat) -> CGFloat {
         guard let dateInterval = dateInterval else { return 0 }
-        return width * date.timeIntervalSince(dateInterval.start) / dateInterval.duration
+        return ProgramGuideGridLayout.channelHeaderWidth + ProgramGuideGridLayout.horizontalSpacing + width * date.timeIntervalSince(dateInterval.start) / dateInterval.duration
     }
     
     private func enumerateDates(matching dateComponents: DateComponents) -> [Date] {
