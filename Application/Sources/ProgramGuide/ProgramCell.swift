@@ -63,15 +63,15 @@ struct ProgramCell: View {
         }
         
         private var horizontalPadding: CGFloat {
-            return direction == .horizontal ? 16 : constant(iOS: 8, tvOS: 12)
+            return direction == .horizontal ? 16 : 12
         }
         
         private var topPadding: CGFloat {
-            return direction == .horizontal ? 0 : 16
+            return direction == .horizontal ? 0 : constant(iOS: 27, tvOS: 16)
         }
         
         private var bottomPadding: CGFloat {
-            return direction == .horizontal ? 0 : 2
+            return direction == .horizontal ? 0 : constant(iOS: 4, tvOS: 8)
         }
         
         private var spacing: CGFloat {
@@ -88,7 +88,7 @@ struct ProgramCell: View {
                     if let timeRange = model.timeRange {
                         Text(timeRange)
                             .srgFont(.subtitle2)
-                            .lineLimit(1)
+                            .lineLimit(timeRangeLineLimit)
                             .foregroundColor(.srgGray96)
                             .frame(maxWidth: timeRangeWidth, alignment: .leading)
                     }
@@ -120,10 +120,6 @@ struct ProgramCell: View {
         let direction: StackDirection
         let compact: Bool
         
-        private var lineLimit: Int {
-            return direction == .horizontal ? 1 : 2
-        }
-        
         var body: some View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
@@ -133,7 +129,7 @@ struct ProgramCell: View {
                 if let title = model.program?.title {
                     Text(title)
                         .srgFont(.body)
-                        .lineLimit(lineLimit)
+                        .lineLimit(1)
                         .foregroundColor(.srgGrayC7)
                 }
             }
