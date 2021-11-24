@@ -65,10 +65,8 @@ struct ProgramPreview: View {
                     .lineLimit(1)
                     .foregroundColor(.srgGray96)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
             .padding(.horizontal, 56)
-            .padding(.top, 180)
-            .padding(.bottom, 40)
         }
     }
     
