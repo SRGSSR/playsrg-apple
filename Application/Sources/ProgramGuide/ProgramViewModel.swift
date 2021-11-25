@@ -75,7 +75,7 @@ final class ProgramViewModel: ObservableObject {
     
     var timeAndDateAccessibilityLabel: String? {
         guard let program = program else { return nil }
-        return program.play_accessibilityLabel
+        return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
             .appending(DateFormatter.play_relativeShort.string(from: program.startDate))
     }
