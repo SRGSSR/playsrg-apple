@@ -47,9 +47,9 @@ struct SimpleButton: View {
             }
             .onParentFocusChange { isFocused = $0 }
             .foregroundColor(.srgGrayC7)
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused))
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
 }
 
