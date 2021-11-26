@@ -10,15 +10,15 @@ import SwiftUI
 // MARK: Cell
 
 struct ProgramCell: View {
-    @Binding var program: SRGProgram
+    @Binding var data: ProgramCellViewModel.Data
     let direction: StackDirection
     
     @StateObject private var model = ProgramCellViewModel()
     
     @Environment(\.isSelected) private var isSelected
     
-    init(program: SRGProgram, direction: StackDirection) {
-        _program = .constant(program)
+    init(program: SRGProgram, channel: SRGChannel?, direction: StackDirection) {
+        _data = .constant(.init(program: program, channel: channel))
         self.direction = direction
     }
     
@@ -26,7 +26,6 @@ struct ProgramCell: View {
         Group {
 #if os(tvOS)
             MainView(model: model, direction: direction)
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
 #else
             MainView(model: model, direction: direction)
                 .selectionAppearance(.dimmed, when: isSelected)
@@ -34,10 +33,10 @@ struct ProgramCell: View {
 #endif
         }
         .onAppear {
-            model.program = program
+            model.data = data
         }
-        .onChange(of: program) { newValue in
-            model.program = newValue
+        .onChange(of: data) { newValue in
+            model.data = newValue
         }
     }
         
@@ -125,7 +124,7 @@ struct ProgramCell: View {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
                 }
-                if let title = model.program?.title {
+                if let title = model.data?.program.title {
                     Text(title)
                         .srgFont(.body)
                         .lineLimit(1)
@@ -163,11 +162,11 @@ struct ProgramCell_Previews: PreviewProvider {
     private static let height: CGFloat = constant(iOS: 105, tvOS: 120)
     
     static var previews: some View {
-        ProgramCell(program: Mock.program(), direction: .horizontal)
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .horizontal)
             .previewLayout(.fixed(width: size.width, height: size.height))
-        ProgramCell(program: Mock.program(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
             .previewLayout(.fixed(width: 500, height: height))
-        ProgramCell(program: Mock.program(), direction: .vertical)
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
             .previewLayout(.fixed(width: 80, height: height))
     }
 }

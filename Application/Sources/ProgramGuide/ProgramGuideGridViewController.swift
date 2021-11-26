@@ -90,10 +90,16 @@ final class ProgramGuideGridViewController: UIViewController {
         headerView.content = ProgramGuideGridHeaderView(model: model)
 #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
-            cell.content = ProgramCell(program: program, direction: .vertical)
-            cell.accessibilityLabel = program.play_accessibilityLabel
-            cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint");
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, indexPath, program in
+            let snapshot = self?.dataSource.snapshot()
+            let channel = snapshot?.sectionIdentifiers[indexPath.section]
+            
+            cell.content = ProgramCell(program: program, channel: channel, direction: .vertical)
+            
+#if os(tvOS)
+            cell.accessibilityLabel = program.play_accessibilityLabel(with: channel)
+            cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
+#endif
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in

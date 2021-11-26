@@ -115,7 +115,7 @@
     }
     
     if ([dateInterval containsDate:program.startDate]) {
-        self.accessibilityLabel = program.play_accessibilityLabel;
+        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
         self.accessibilityHint = PlaySRGAccessibilityLocalizedString(@"Plays from the beginning.", @"Program cell hint");
         
         self.titleLabel.textColor = UIColor.whiteColor;
@@ -141,7 +141,7 @@
         self.userInteractionEnabled = NO;
     }
     else {
-        self.accessibilityLabel = program.play_accessibilityLabel;
+        self.accessibilityLabel = [program play_accessibilityLabelWithChannel:nil];
         self.accessibilityHint = nil;
         
         self.titleLabel.textColor = UIColor.whiteColor;

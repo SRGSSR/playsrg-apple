@@ -16,9 +16,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)play_containsDate:(NSDate *)date;
 
 /**
- *  Common accessibility metadata.
+ *  Common accessibility metadata (with optionally inlined channel information).
  */
-@property (nonatomic, copy) NSString *play_accessibilityLabel;
+- (NSString *)play_accessibilityLabelWithChannel:(nullable SRGChannel *)channel;
 
 @end
 

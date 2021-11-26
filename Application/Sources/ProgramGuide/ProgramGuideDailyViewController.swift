@@ -73,8 +73,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
-            cell.content = ProgramCell(program: program, direction: .horizontal)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, _, program in
+            cell.content = ProgramCell(program: program, channel: self?.programGuideModel.selectedChannel, direction: .horizontal)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
