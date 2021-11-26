@@ -56,7 +56,7 @@ NSString *PlaySRGNonLocalizedString(NSString *string)
 
 - (BOOL)play_isTestFlightDistribution
 {
-#if !defined(DEBUG) && !defined(NIGHTLY_APPCENTER) && !defined(BETA_APPCENTER)
+#if !defined(DEBUG) && !defined(APPCENTER)
     return (self.appStoreReceiptURL.path && [self.appStoreReceiptURL.path rangeOfString:@"sandboxReceipt"].location != NSNotFound);
 #else
     return NO;
