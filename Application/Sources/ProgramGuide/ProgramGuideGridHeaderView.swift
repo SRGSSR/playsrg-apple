@@ -27,6 +27,7 @@ struct ProgramGuideGridHeaderView: View {
         ZStack {
 #if os(tvOS)
             ProgramPreview(program: focusedProgram)
+                .accessibility(hidden: true)
 #endif
             NavigationBar(model: model)
                 .padding(.bottom, ProgramGuideGridLayout.timelineHeight)
