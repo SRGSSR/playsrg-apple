@@ -9,6 +9,7 @@ import SRGAnalytics
 import SRGAppearanceSwift
 import SwiftUI
 import UIKit
+import SRGDataProviderModel
 
 // MARK: View controller
 
@@ -20,6 +21,8 @@ final class SearchViewController: UIViewController {
     
 #if os(tvOS)
     private var cancellables = Set<AnyCancellable>()
+#else
+    private weak var filtersBarButtonItem: UIBarButtonItem?
 #endif
     
     init() {
@@ -63,6 +66,8 @@ final class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        
+        updateSearchSettingsButton()
 #endif
         
         searchContainerViewController = UISearchContainerViewController(searchController: searchController)
@@ -123,6 +128,72 @@ final class SearchViewController: UIViewController {
             searchController.dismiss(animated: false, completion: nil)
         }
     }
+    
+#if os(iOS)
+    private func updateSearchSettingsButton() {
+        guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
+            navigationItem.rightBarButtonItem = nil
+            return
+        }
+        
+        if filtersBarButtonItem == nil {
+            let filtersButton = UIButton(type: .custom)
+            filtersButton.addTarget(self, action: #selector(showSettings(_:)), for: .touchUpInside)
+            
+            if let titleLabel = filtersButton.titleLabel {
+                titleLabel.font = SRGFont.font(family: .text, weight: .regular, size: 16)
+                
+                // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
+                // See https://developer.apple.com/forums/thread/125492
+                titleLabel.lineBreakMode = .byClipping
+            }
+            filtersButton.setTitle(NSLocalizedString("Filters", comment: "Filters button title"), for: .normal)
+            filtersButton.setTitleColor(.gray, for: .highlighted)
+            
+            // See https://stackoverflow.com/a/25559946/760435
+            let inset: CGFloat = 2
+            filtersButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -inset, bottom: 0, right: inset)
+            filtersButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: -inset);
+            filtersButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+            
+            let filtersBarButtonItem = UIBarButtonItem(customView: filtersButton)
+            navigationItem.rightBarButtonItem = filtersBarButtonItem
+            self.filtersBarButtonItem = filtersBarButtonItem
+        }
+        
+        if let filtersButton = filtersBarButtonItem?.customView as? UIButton {
+            let image = !model.hasDefaultSettings ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
+            filtersButton.setImage(image, for: .normal)
+        }
+    }
+    
+    private func scrollToTop(animated: Bool = true) {
+        guard let searchResultsController = searchController.searchResultsController as? SearchResultsViewController else { return }
+        searchResultsController.scrollToTop(animated: animated)
+    }
+    
+    @objc private func showSettings(_ sender: Any) {
+        searchController.searchBar.resignFirstResponder()
+        
+        let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
+        settingsViewController.delegate = self
+        
+        let backgroundColor: UIColor? = UIDevice.current.userInterfaceIdiom == .pad ? .play_popoverGrayBackground : nil
+        let navigationController = NavigationController(rootViewController: settingsViewController,
+                                                        tintColor: .white,
+                                                        backgroundColor: backgroundColor,
+                                                        statusBarStyle: .lightContent)
+        navigationController.modalPresentationStyle = .popover
+        
+        if let popoverPresentationController = navigationController.popoverPresentationController {
+            popoverPresentationController.backgroundColor = .play_popoverGrayBackground
+            popoverPresentationController.permittedArrowDirections = .any
+            popoverPresentationController.barButtonItem = filtersBarButtonItem
+        }
+        
+        present(navigationController, animated: true)
+    }
+#endif
 }
 
 // MARK: Protocols
@@ -141,15 +212,21 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
         }
     }
 }
-#endif
+
+extension SearchViewController: SearchSettingsViewControllerDelegate {
+    func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
+        model.settings = settings
+        updateSearchSettingsButton()
+        scrollToTop(animated: true)
+    }
+}
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let searchResultsController = searchController.searchResultsController as? SearchResultsViewController {
-            searchResultsController.scrollToTop(animated: true)
-        }
+        scrollToTop(animated: true)
     }
 }
+#endif
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

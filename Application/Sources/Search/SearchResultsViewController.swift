@@ -133,11 +133,11 @@ final class SearchResultsViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
     }
-#endif
     
     func scrollToTop(animated: Bool) {
         collectionView.play_scrollToTop(animated: animated)
     }
+#endif
     
     private func reloadData(for state: SearchViewModel.State) {
         switch state {

@@ -15,11 +15,11 @@ final class SearchViewModel: ObservableObject {
     private let trigger = Trigger()
     
     init() {
-        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, trigger] in
-            querySubject
+        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, settingsSubject, trigger] in
+            Publishers.CombineLatest(querySubject, settingsSubject)
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
-                .map { query in
-                    return Self.searchResults(matchingQuery: query, trigger: trigger)
+                .map { query, settings in
+                    return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
                 }
                 .switchToLatest()
                 .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
@@ -40,18 +40,21 @@ final class SearchViewModel: ObservableObject {
         }
     }
     
-    // TODO: Connect with custom settings on iOS
-    private static var searchSettings: SRGMediaSearchSettings? {
-        guard !ApplicationConfiguration.shared.areSearchSettingsHidden else { return nil }
-        
-        let settings = SRGMediaSearchSettings()
-        settings.aggregationsEnabled = false
-        settings.mediaType = constant(iOS: .none, tvOS: .video)
-        settings.suggestionsEnabled = true
-        return settings
+    var settings: SRGMediaSearchSettings {
+        get {
+            settingsSubject.value
+        }
+        set {
+            settingsSubject.value = Self.optimalSettings(from: newValue)
+        }
+    }
+    
+    var hasDefaultSettings: Bool {
+        return Self.areDefaultSettings(settings)
     }
     
     private var querySubject = CurrentValueSubject<String, Never>("")
+    private var settingsSubject = CurrentValueSubject<SRGMediaSearchSettings, Never>(SearchViewModel.optimalSettings())
     
     func reload(deep: Bool = false) {
         if deep || !state.hasContent {
@@ -74,6 +77,16 @@ final class SearchViewModel: ObservableObject {
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
+    }
+    
+    private static func optimalSettings(from settings: SRGMediaSearchSettings = SRGMediaSearchSettings()) -> SRGMediaSearchSettings {
+        let settingsCopy = settings.copy() as! SRGMediaSearchSettings
+#if os(tvOS)
+        settingsCopy.mediaType = .video
+        settingsCopy.suggestionsEnabled = true
+#endif
+        settingsCopy.aggregationsEnabled = false
+        return settingsCopy
     }
 }
 
@@ -130,7 +143,7 @@ private extension SearchViewModel {
     static func shows(matchingQuery query: String) -> AnyPublisher<[SRGShow], Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
-        return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: .none, pageSize: pageSize, paginatedBy: nil)
+        return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: constant(iOS: .none, tvOS: .video), pageSize: pageSize, paginatedBy: nil)
             .map { output in
                 return SRGDataProvider.current!.shows(withUrns: output.showUrns, pageSize: pageSize)
             }
@@ -138,10 +151,10 @@ private extension SearchViewModel {
             .eraseToAnyPublisher()
     }
     
-    static func medias(matchingQuery query: String, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
+    static func medias(matchingQuery query: String, with settings: SRGMediaSearchSettings, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
-        return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: Self.searchSettings, pageSize: pageSize, paginatedBy: signal)
+        return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: settings, pageSize: pageSize, paginatedBy: signal)
             .map { output in
                 return SRGDataProvider.current!.medias(withUrns: output.mediaUrns, pageSize: pageSize)
                     .map { (medias: $0, suggestions: output.suggestions) }
@@ -166,11 +179,15 @@ private extension SearchViewModel {
         return rows
     }
     
-    static func searchResults(matchingQuery query: String, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
-        if !query.isEmpty {
+    static func areDefaultSettings(_ settings: SRGMediaSearchSettings) -> Bool {
+        return optimalSettings() == settings
+    }
+    
+    static func searchResults(matchingQuery query: String, with settings: SRGMediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
+        if !query.isEmpty || !areDefaultSettings(settings) {
             return Publishers.CombineLatest(
                 shows(matchingQuery: query),
-                medias(matchingQuery: query, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+                medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
             )
             .map { (rows: rows(shows: $0, medias: $1.medias), suggestions: $1.suggestions) }
             .eraseToAnyPublisher()

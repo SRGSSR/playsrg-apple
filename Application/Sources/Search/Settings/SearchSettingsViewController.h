@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface SearchSettingsViewController : RequestViewController <SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
 /**
- *  The default settings (including aggregations).
+ *  The default settings (including aggregations). Returns a fresh instance with every call.
  */
 @property (class, nonatomic, readonly) SRGMediaSearchSettings *defaultSettings;
 
