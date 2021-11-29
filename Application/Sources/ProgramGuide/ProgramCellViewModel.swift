@@ -24,8 +24,7 @@ final class ProgramCellViewModel: ObservableObject {
     }
     
     var accessibilityLabel: String? {
-        guard let data = data else { return nil }
-        return data.program.play_accessibilityLabel(with: data.channel)
+        return data?.program.play_accessibilityLabel(with: data?.channel)
     }
     
     var timeRange: String? {
