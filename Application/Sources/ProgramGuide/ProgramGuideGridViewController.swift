@@ -22,6 +22,8 @@ final class ProgramGuideGridViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
+    private weak var headerHeightConstraint: NSLayoutConstraint!
+    
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram> {
         var snapshot = NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>()
         for channel in state.channels {
@@ -50,12 +52,14 @@ final class ProgramGuideGridViewController: UIViewController {
         view.addSubview(headerView)
         self.headerView = headerView
         
+        let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in updateLayout(for:) */)
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
-            headerView.heightAnchor.constraint(equalToConstant: constant(iOS: 140, tvOS: 760)),
+            headerHeightConstraint,
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        self.headerHeightConstraint = headerHeightConstraint
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ProgramGuideGridLayout())
         collectionView.delegate = self
@@ -95,7 +99,6 @@ final class ProgramGuideGridViewController: UIViewController {
             let channel = snapshot?.sectionIdentifiers[indexPath.section]
             
             cell.content = ProgramCell(program: program, channel: channel, direction: .vertical)
-            
 #if os(tvOS)
             cell.accessibilityLabel = program.play_accessibilityLabel(with: channel)
             cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
@@ -138,11 +141,20 @@ final class ProgramGuideGridViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        updateLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        coordinator.animate { _ in
+            self.updateLayout(for: newCollection)
+        } completion: { _ in }
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
@@ -169,6 +181,11 @@ final class ProgramGuideGridViewController: UIViewController {
                 self.scrollToTime(animated: false)
             }
         }
+    }
+    
+    private func updateLayout(for traitCollection: UITraitCollection? = nil) {
+        let appliedTraitCollection = traitCollection ?? self.traitCollection
+        headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
     }
     
     private func switchToDay(_ day: SRGDay) {
