@@ -39,18 +39,22 @@ struct ShowCell: View {
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
-                DescriptionView(model: model, style: style)
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .padding(.top, ShowCellSize.verticalPadding)
+                if imageType != .showPoster {
+                    DescriptionView(model: model, style: style)
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .padding(.top, ShowCellSize.verticalPadding)
+                }
             }
 #else
             VStack(spacing: 0) {
                 ImageView(url: model.imageUrl(with: imageType))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
                     .background(Color.placeholder)
-                DescriptionView(model: model, style: style)
-                    .padding(.horizontal, ShowCellSize.horizontalPadding)
-                    .padding(.vertical, ShowCellSize.verticalPadding)
+                if imageType != .showPoster {
+                    DescriptionView(model: model, style: style)
+                        .padding(.horizontal, ShowCellSize.horizontalPadding)
+                        .padding(.vertical, ShowCellSize.verticalPadding)
+                }
             }
             .background(Color.srgGray23)
             .redactable()
@@ -122,14 +126,16 @@ final class ShowCellSize: NSObject {
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
-    private static let heightOffset: CGFloat = constant(iOS: 32, tvOS: 45)
+    private static func heightOffset(for imageType: SRGImageType) -> CGFloat {
+        return imageType != .showPoster ? constant(iOS: 32, tvOS: 45) : 0
+    }
     
     fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
-        return imageType == .showPoster ? 2 / 3 : 16 / 9
+        return imageType != .showPoster ? 16 / 9 : 2 / 3
     }
     
     fileprivate static func itemWidth(for imageType: SRGImageType) -> CGFloat {
-        return imageType == .showPoster ? constant(iOS: 158, tvOS: 276) : constant(iOS: 210, tvOS: 375)
+        return imageType != .showPoster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
     }
     
     @objc static func swimlane(for imageType: SRGImageType) -> NSCollectionLayoutSize {
@@ -137,11 +143,11 @@ final class ShowCellSize: NSObject {
     }
     
     @objc static func swimlane(for imageType: SRGImageType, itemWidth: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset)
+        return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset(for: imageType))
     }
     
     @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset, layoutWidth, spacing, 2)
+        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset(for: imageType), layoutWidth, spacing, 2)
     }
 }
 
