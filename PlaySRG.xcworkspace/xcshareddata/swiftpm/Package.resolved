@@ -159,8 +159,8 @@
         "repositoryURL": "https://github.com/Mantle/Mantle.git",
         "state": {
           "branch": null,
-          "revision": "bbe0cbe68582a18a6df7516778196ba3cf420ad3",
-          "version": "2.1.7"
+          "revision": "16f72bfe72a2ab29654ba894da1c32b17524e1a6",
+          "version": "2.2.0"
         }
       },
       {
@@ -212,9 +212,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "d20dc0fb85e572c44e902c6c29dc810c611ca6ad",
-          "version": "7.3.0"
+          "branch": "develop",
+          "revision": "aa6fb1e05ea2b747225ec5731d98f99b425bcc4d",
+          "version": null
         }
       },
       {
@@ -239,8 +239,8 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "feature/sanitized-programs",
-          "revision": "d3b0adcff5c2f1127474b2bdbb196f289498723e",
+          "branch": "develop",
+          "revision": "25440b94ba62c9d4764fc51809fcdf58244106d5",
           "version": null
         }
       },
@@ -257,18 +257,18 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": null,
-          "revision": "c4eb6fbb3e84f8cdc340a55b50475eeddd1db011",
-          "version": "3.2.0"
+          "branch": "develop",
+          "revision": "48427865ae0055b2d393df72cc24c78eae6ba6cf",
+          "version": null
         }
       },
       {
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": null,
-          "revision": "fc4086616476eb6b769902bf614a1714d1b92fee",
-          "version": "7.3.1"
+          "branch": "develop",
+          "revision": "c966155bcd39811c6ab2837d7d0b8b1293143b93",
+          "version": null
         }
       },
       {
@@ -284,9 +284,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": null,
-          "revision": "fbd7ad3121c7112cf1ce55bb96638ef09a6cf5ec",
-          "version": "6.1.5"
+          "branch": "develop",
+          "revision": "3a215ac98e97f36bebac5cdfac5e8c9324b283e4",
+          "version": null
         }
       },
       {

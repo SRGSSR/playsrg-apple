@@ -432,7 +432,6 @@
 		08C6D1FE2727061400C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690041D38E08C00BB8AAA /* Localizable.strings */; };
 		08C6D1FF2727061F00C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690381D38E0BE00BB8AAA /* Localizable.strings */; };
 		08C6D2002727062200C8BBB2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 08C690741D38E3E600BB8AAA /* Localizable.strings */; };
-		08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 08C97F88271E655D003AE4F3 /* SRGMediaPlayer */; };
 		08D5990D26AAEF7A00FE1A5B /* ProgramGuideListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideListHeaderView.swift */; };
 		08D5990E26AAEF7A00FE1A5B /* ProgramGuideListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideListHeaderView.swift */; };
 		08D5990F26AAEF7A00FE1A5B /* ProgramGuideListHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D5990C26AAEF7900FE1A5B /* ProgramGuideListHeaderView.swift */; };
@@ -3348,7 +3347,6 @@
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
-				08C97F89271E655D003AE4F3 /* SRGMediaPlayer in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
@@ -5298,7 +5296,6 @@
 				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 				6FEEBE79265CD6D300A4882B /* Collections */,
 				6F17DC17266AB837009F74C6 /* Nuke */,
-				08C97F88271E655D003AE4F3 /* SRGMediaPlayer */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -6164,7 +6161,6 @@
 				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
 				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
-				08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -19009,20 +19005,12 @@
 				minimumVersion = 9.0.4;
 			};
 		};
-		08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SRGSSR/srgmediaplayer-apple.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 6.1.5;
-			};
-		};
 		08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
@@ -19053,8 +19041,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.3.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
@@ -19077,15 +19065,15 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.3.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/sanitized-programs";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19246,11 +19234,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsSwiftUI;
-		};
-		08C97F88271E655D003AE4F3 /* SRGMediaPlayer */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 08C97F87271E655D003AE4F3 /* XCRemoteSwiftPackageReference "srgmediaplayer-apple" */;
-			productName = SRGMediaPlayer;
 		};
 		08EA3E77259D2AD6008D412F /* SRGIdentity */ = {
 			isa = XCSwiftPackageProductDependency;
