@@ -21,7 +21,8 @@ final class SceneDelegate: UIResponder {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         
-        appearance.backgroundColor = .srgGray23
+        appearance.backgroundColor = UIColor( white: 1, alpha: 0.1)
+        appearance.backgroundEffect = UIBlurEffect(style: .dark)
         appearance.selectionIndicatorTintColor = .srgGray96
         
         let font: UIFont = SRGFont.font(family: .text, weight: .medium, size: 28)
