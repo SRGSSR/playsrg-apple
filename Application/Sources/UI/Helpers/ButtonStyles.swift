@@ -15,7 +15,7 @@ struct FlatButtonStyle: ButtonStyle {
             .padding(.horizontal, 16)
             .padding(.vertical, 12)
             .background(focused ? Color.srgGray96 : Color.srgGray23)
-            .cornerRadius(5)
+            .cornerRadius(10)
             .scaleEffect(focused && !configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.2), value: focused)
 #else
@@ -23,7 +23,7 @@ struct FlatButtonStyle: ButtonStyle {
             .padding(.horizontal, 10)
             .padding(.vertical, 8)
             .background(configuration.isPressed ? Color.srgGray4A : Color.srgGray23)
-            .cornerRadius(3)
+            .cornerRadius(LayoutStandardViewCornerRadius)
 #endif
     }
 }
