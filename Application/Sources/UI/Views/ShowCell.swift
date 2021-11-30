@@ -154,10 +154,13 @@ final class ShowCellSize: NSObject {
 // MARK: Preview
 
 struct ShowCell_Previews: PreviewProvider {
-    private static let size = ShowCellSize.swimlane(for: .default).previewSize
+    private static let defaultSize = ShowCellSize.swimlane(for: .default).previewSize
+    private static let posterSize = ShowCellSize.swimlane(for: .showPoster).previewSize
     
     static var previews: some View {
         ShowCell(show: Mock.show(.standard), style: .standard, imageType: .default)
-            .previewLayout(.fixed(width: size.width, height: size.height))
+            .previewLayout(.fixed(width: defaultSize.width, height: defaultSize.height))
+        ShowCell(show: Mock.show(.standard), style: .standard, imageType: .showPoster)
+            .previewLayout(.fixed(width: posterSize.width, height: posterSize.height))
     }
 }
