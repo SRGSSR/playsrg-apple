@@ -172,6 +172,10 @@ final class SearchViewController: UIViewController {
         searchResultsController.scrollToTop(animated: animated)
     }
     
+    @objc private func closeKeyboard(_ sender: Any) {
+        searchController.searchBar.resignFirstResponder()
+    }
+    
     @objc private func showSettings(_ sender: Any) {
         searchController.searchBar.resignFirstResponder()
         
@@ -224,6 +228,19 @@ extension SearchViewController: SearchSettingsViewControllerDelegate {
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         scrollToTop(animated: true)
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("Cancel", comment: "Title of a cancel button"),
+            style: .plain,
+            target: self,
+            action: #selector(closeKeyboard(_:))
+        )
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        navigationItem.leftBarButtonItem = nil
     }
 }
 #endif
