@@ -50,6 +50,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchContainerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         searchContainerViewController.view.frame = view.bounds
         view.addSubview(searchContainerViewController.view)
         searchContainerViewController.didMove(toParent: self)

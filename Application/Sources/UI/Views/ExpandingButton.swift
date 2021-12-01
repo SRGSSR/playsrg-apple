@@ -11,16 +11,34 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp
 struct ExpandingButton: View {
-    let icon: String?
-    let label: String
-    let accessibilityLabel: String
-    let accessibilityHint: String?
-    let action: () -> Void
-        
-    init(icon: String? = nil, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    private let icon: String?
+    private let label: String?
+    private let accessibilityLabel: String
+    private let accessibilityHint: String?
+    private let action: () -> Void
+    
+    @State private var isFocused = false
+    
+    init(icon: String, label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.icon = icon
         self.label = label
         self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
+        self.action = action
+    }
+    
+    init(label: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        self.icon = nil
+        self.label = label
+        self.accessibilityLabel = accessibilityLabel ?? label
+        self.accessibilityHint = accessibilityHint
+        self.action = action
+    }
+    
+    init(icon: String, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+        self.icon = icon
+        self.label = nil
+        self.accessibilityLabel = accessibilityLabel ?? ""
         self.accessibilityHint = accessibilityHint
         self.action = action
     }
@@ -31,15 +49,17 @@ struct ExpandingButton: View {
                 if let icon = icon {
                     Image(icon)
                 }
-                Text(label)
-                    .srgFont(.button)
-                    .lineLimit(1)
+                if let label = label {
+                    Text(label)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
             }
+            .onParentFocusChange { isFocused = $0 }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
         }
-        .foregroundColor(.srgGrayC7)
-        .background(Color.srgGray23)
-        .cornerRadius(LayoutStandardViewCornerRadius)
+        .buttonStyle(FlatButtonStyle(focused: isFocused))
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
 }
@@ -54,10 +74,13 @@ struct ExpandingButton_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: 240, height: 120))
             ExpandingButton(icon: "a_to_z", label: "A to Z", action: {})
                 .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
+                .previewLayout(.fixed(width: 240, height: 120))
             ExpandingButton(label: "A to Z", action: {})
                 .padding()
-                .previewLayout(.fixed(width: 120, height: 60))
+                .previewLayout(.fixed(width: 120, height: 120))
+            ExpandingButton(icon: "a_to_z", action: {})
+                .padding()
+                .previewLayout(.fixed(width: 120, height: 120))
         }
     }
 }

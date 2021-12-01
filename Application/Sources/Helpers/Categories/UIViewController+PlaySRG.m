@@ -28,6 +28,7 @@
 #endif
 
 static void *s_isViewVisibleKey = &s_isViewVisibleKey;
+static void *s_isViewCurrentKey = &s_isViewCurrentKey;
 
 @implementation UIViewController (PlaySRG)
 
@@ -37,6 +38,10 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 {
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillAppear:)),
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewWillAppear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidAppear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidAppear:)));
+    method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewWillDisappear:)),
+                                   class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewWillDisappear:)));
     method_exchangeImplementations(class_getInstanceMethod(self, @selector(viewDidDisappear:)),
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
 }
@@ -62,6 +67,20 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
     [self UIViewController_PlaySRG_swizzled_viewWillAppear:animated];
     
     [self play_setViewVisible:YES];
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewDidAppear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewDidAppear:animated];
+    
+    [self play_setViewCurrent:YES];
+}
+
+- (void)UIViewController_PlaySRG_swizzled_viewWillDisappear:(BOOL)animated
+{
+    [self UIViewController_PlaySRG_swizzled_viewWillDisappear:animated];
+    
+    [self play_setViewCurrent:NO];
 }
 
 - (void)UIViewController_PlaySRG_swizzled_viewDidDisappear:(BOOL)animated
@@ -131,6 +150,16 @@ static void *s_isViewVisibleKey = &s_isViewVisibleKey;
 - (void)play_setViewVisible:(BOOL)visible
 {
     objc_setAssociatedObject(self, s_isViewVisibleKey, @(visible), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)play_isViewCurrent
+{
+    return [objc_getAssociatedObject(self, s_isViewCurrentKey) boolValue];
+}
+
+- (void)play_setViewCurrent:(BOOL)current
+{
+    objc_setAssociatedObject(self, s_isViewCurrentKey, @(current), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (UIViewController *)play_topViewController

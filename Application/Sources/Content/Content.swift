@@ -112,9 +112,9 @@ protocol SectionProperties {
     var analyticsLevels: [String]? { get }
     var analyticsDeletionHiddenEventTitle: String? { get }
     
-    #if os(iOS)
+#if os(iOS)
     var sharingItem: SharingItem? { get }
-    #endif
+#endif
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -302,11 +302,11 @@ private extension Content {
             }
         }
         
-        #if os(iOS)
+#if os(iOS)
         var sharingItem: SharingItem? {
             return SharingItem(for: contentSection)
         }
-        #endif
+#endif
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
@@ -361,15 +361,15 @@ private extension Content {
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
                 case .showAccess:
-                    #if os(iOS)
+#if os(iOS)
                     return Just([.showAccess(radioChannel: nil)])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
-                    #else
+#else
                     return Just([])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
-                    #endif
+#endif
                 case .none, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
                     return Just([])
                         .setFailureType(to: Error.self)
@@ -625,7 +625,7 @@ private extension Content {
             }
         }
         
-        #if os(iOS)
+#if os(iOS)
         var sharingItem: SharingItem? {
             switch configuredSection {
             case let .show(show):
@@ -634,7 +634,7 @@ private extension Content {
                 return nil
             }
         }
-        #endif
+#endif
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
@@ -710,15 +710,15 @@ private extension Content {
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case let .radioShowAccess(channelUid):
-                #if os(iOS)
+#if os(iOS)
                 return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
-                #else
+#else
                 return Just([])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
-                #endif
+#endif
             case .radioWatchLater:
                 return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                     .map { $0.map { .media($0) } }

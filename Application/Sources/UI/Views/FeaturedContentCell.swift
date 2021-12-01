@@ -20,34 +20,34 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     
     @Environment(\.isSelected) private var isSelected
     
-    #if os(iOS)
+#if os(iOS)
     @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-    #endif
+#endif
     
     private var direction: StackDirection {
-        #if os(iOS)
+#if os(iOS)
         if horizontalSizeClass == .compact {
             return .vertical
         }
-        #endif
+#endif
         return .horizontal
     }
     
     private var horizontalPadding: CGFloat {
-        #if os(iOS)
+#if os(iOS)
         if horizontalSizeClass == .compact {
             return 8
         }
-        #endif
+#endif
         return constant(iOS: 54, tvOS: 50)
     }
     
     private var verticalPadding: CGFloat {
-        #if os(iOS)
+#if os(iOS)
         if horizontalSizeClass == .compact {
             return 12
         }
-        #endif
+#endif
         return constant(iOS: 16, tvOS: 16)
     }
     
@@ -61,16 +61,16 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     }
     
     private var detailed: Bool {
-        #if os(iOS)
+#if os(iOS)
         return layout == .highlight || horizontalSizeClass == .regular
-        #else
+#else
         return true
-        #endif
+#endif
     }
     
     var body: some View {
         Group {
-            #if os(tvOS)
+#if os(tvOS)
             ExpandingCardButton(action: content.action) {
                 HStack(spacing: 0) {
                     content.visualView()
@@ -85,7 +85,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
                 .unredactable()
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
-            #else
+#else
             Stack(direction: direction, spacing: 0) {
                 content.visualView()
                     .aspectRatio(FeaturedContentCellSize.aspectRatio, contentMode: .fit)
@@ -100,7 +100,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
             .selectionAppearance(when: isSelected && !content.isPlaceholder)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-            #endif
+#endif
         }
         .redacted(reason: content.isPlaceholder ? .placeholder : .init())
     }
@@ -178,13 +178,13 @@ struct FeaturedContentCell_Previews: PreviewProvider {
     private static let label = "New"
     
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
             .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
         
         FeaturedContentCell(media: Mock.media(kind), label: label, layout: .highlight)
             .previewLayout(for: .headline, layoutWidth: 1800, horizontalSizeClass: .regular)
-        #else
+#else
         FeaturedContentCell(media: Mock.media(kind), label: label, layout: .headline)
             .previewLayout(for: .headline, layoutWidth: 1200, horizontalSizeClass: .regular)
             .environment(\.horizontalSizeClass, .regular)

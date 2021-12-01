@@ -123,16 +123,6 @@ struct MediaDetailView: View {
     }
     
     struct SummaryView: View {
-        private struct TextButtonStyle: ButtonStyle {
-            let focused: Bool
-            
-            func makeBody(configuration: Configuration) -> some View {
-                configuration.label
-                    .background(focused ? Color(UIColor(white: 1, alpha: 0.3)) : Color.clear)
-                    .scaleEffect(focused && !configuration.isPressed ? 1.02 : 1)
-            }
-        }
-        
         @ObservedObject var model: MediaDetailViewModel
         @State var isFocused = false
         

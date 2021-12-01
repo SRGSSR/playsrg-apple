@@ -19,7 +19,7 @@ The `xcconfig` files are located under the `Xcode` directory, structured as foll
             - `Common.xcconfig`: Settings common to all iOS targets.
             - `Application.xcconfig`: tvOS application settings
             - `Screenshots.xcconfig`: tvOS screenshots UI testing bundle settings.
-- `iOS` / `tvOS`: Set of leaf configuration files, grouped platform and target type. These files `#import` shared configuration files but do not define parameters on their own.
+- `iOS` / `tvOS`: Set of leaf configuration files, grouped per platform and target type. These files `#import` shared configuration files but do not define parameters on their own. They import shared configuration files first, then CocoaPods configuration files, so that no `$(inherited)` is required for settings defined in shared configuration files.
 
 ### Configuration support
 

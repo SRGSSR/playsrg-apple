@@ -59,8 +59,8 @@ final class ProgramGuideViewModel: ObservableObject {
         dateSelection = dateSelection.nextDay(transition: .day)
     }
     
-    func switchToYesterday() {
-        dateSelection = dateSelection.yesterday(transition: .day)
+    func switchToTonight() {
+        dateSelection = DateSelection.tonight(from: dateSelection)
     }
     
     func switchToNow() {
@@ -75,7 +75,7 @@ final class ProgramGuideViewModel: ObservableObject {
         dateSelection = dateSelection.atDay(day, transition: .none)
     }
     
-    func scrollToTime(of date: Date) {
+    func didScrollToTime(of date: Date) {
         dateSelection = dateSelection.atTime(of: date, transition: .none)
     }
 }
@@ -113,11 +113,6 @@ extension ProgramGuideViewModel {
             return DateSelection(day: nextDay, time: time, transition: transition)
         }
         
-        fileprivate func yesterday(transition: Transition) -> DateSelection {
-            let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: SRGDay.today)
-            return DateSelection(day: yesterday, time: time, transition: transition)
-        }
-        
         fileprivate func atDay(_ day: SRGDay, transition: Transition) -> DateSelection {
             return DateSelection(day: day, time: time, transition: transition)
         }
@@ -126,10 +121,18 @@ extension ProgramGuideViewModel {
             return DateSelection(day: day, time: date.timeIntervalSince(day.date), transition: transition)
         }
         
-        static func now(from dateSelection: DateSelection) -> DateSelection {
-            let now = Date()
-            let transition: Transition = Calendar.current.isDate(now, inSameDayAs: dateSelection.day.date) ? .time : .day
-            return atDate(now, transition: transition)
+        fileprivate static func now(from dateSelection: DateSelection) -> DateSelection {
+            return updatedDateSelection(from: dateSelection, for: Date())
+        }
+        
+        fileprivate static func tonight(from dateSelection: DateSelection) -> DateSelection {
+            let date = Calendar.current.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
+            return updatedDateSelection(from: dateSelection, for: date)
+        }
+        
+        private static func updatedDateSelection(from dateSelection: DateSelection, for date: Date) -> DateSelection {
+            let transition: Transition = Calendar.current.isDate(date, inSameDayAs: dateSelection.day.date) ? .time : .day
+            return atDate(date, transition: transition)
         }
         
         fileprivate static func atDate(_ date: Date, transition: Transition) -> DateSelection {

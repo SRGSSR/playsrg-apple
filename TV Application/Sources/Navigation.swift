@@ -9,8 +9,11 @@ import SRGAnalytics
 import SRGAppearanceSwift
 import TvOSTextViewer
 import SwiftUI
+import SRGDataProviderModel
 
 private var isPresenting = false
+
+private var mediaCancellable: AnyCancellable?
 private var cancellables = Set<AnyCancellable>()
 
 func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
@@ -56,6 +59,15 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
         }
     }
+}
+
+func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true) {
+    mediaCancellable = mediaPublisher(for: program, in: channel)?
+        .receive(on: DispatchQueue.main)
+        .sink { _ in
+        } receiveValue: { media in
+            navigateToMedia(media, animated: animated)
+        }
 }
 
 func navigateToShow(_ show: SRGShow, animated: Bool = true) {
@@ -112,4 +124,18 @@ private func applyLetterboxControllerSettings(to controller: SRGLetterboxControl
     let applicationConfiguration = ApplicationConfiguration.shared
     controller.endTolerance = applicationConfiguration.endTolerance
     controller.endToleranceRatio = applicationConfiguration.endToleranceRatio
+}
+
+private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
+    if program.play_contains(Date()) {
+        return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
+            .compactMap { $0.first(where: { $0.channel == channel }) }
+            .eraseToAnyPublisher()
+    }
+    else if let mediaUrn = program.mediaURN {
+        return SRGDataProvider.current!.media(withUrn: mediaUrn)
+    }
+    else {
+        return nil
+    }
 }

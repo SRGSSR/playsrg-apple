@@ -75,7 +75,7 @@ final class ProgramViewModel: ObservableObject {
     
     var timeAndDateAccessibilityLabel: String? {
         guard let program = program else { return nil }
-        return String(format: "From %1$@ to %2$@", PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
+        return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
             .appending(DateFormatter.play_relativeShort.string(from: program.startDate))
     }
@@ -266,7 +266,7 @@ extension ProgramViewModel {
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel = channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
-                return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+                return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .catch { _ in
                         return Empty()
                     }

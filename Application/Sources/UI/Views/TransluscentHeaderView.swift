@@ -26,6 +26,25 @@ struct TransluscentHeaderView: View {
     }
 }
 
+// MARK: Helpers
+
+private extension View {
+    func transluscentBackground() -> some View {
+#if os(iOS)
+        Group {
+            if #available(iOS 15, *) {
+                background(.thinMaterial)
+            }
+            else {
+                background(Blur(style: .systemThinMaterial))
+            }
+        }
+#else
+        return background(Color.clear)
+#endif
+    }
+}
+
 // MARK: Size
 
 final class TransluscentHeaderViewSize: NSObject {

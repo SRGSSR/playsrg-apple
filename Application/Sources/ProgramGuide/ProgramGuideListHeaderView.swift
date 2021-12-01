@@ -8,14 +8,14 @@ import SwiftUI
 
 // MARK: Contract
 
-@objc protocol ProgramGuideHeaderViewActions: AnyObject {
+@objc protocol ProgramGuideListHeaderViewActions: AnyObject {
     func openCalendar()
 }
 
 // MARK: View
 
 /// Behavior: h-exp, v-exp
-struct ProgramGuideHeaderView: View {
+struct ProgramGuideListHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
     var body: some View {
@@ -34,14 +34,14 @@ struct ProgramGuideHeaderView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                ExpandingButton(label: NSLocalizedString("Yesterday", comment: "Yesterday button in program guide")) {
-                    model.switchToYesterday()
-                }
                 ExpandingButton(icon: "calendar", label: NSLocalizedString("Calendar", comment: "Calendar button in program guide")) {
-                    firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
+                    firstResponder.sendAction(#selector(ProgramGuideListHeaderViewActions.openCalendar))
                 }
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
                     model.switchToNow()
+                }
+                ExpandingButton(label: NSLocalizedString("Tonight", comment: "Tonight button in program guide")) {
+                    model.switchToTonight()
                 }
             }
             .responderChain(from: firstResponder)
@@ -95,9 +95,9 @@ struct ProgramGuideHeaderView: View {
     }
 }
 
-struct ProgramGuideHeaderView_Previews: PreviewProvider {
+struct ProgramGuideListHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ProgramGuideHeaderView(model: ProgramGuideViewModel(date: Date()))
+        ProgramGuideListHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 375, height: 180))
     }
 }

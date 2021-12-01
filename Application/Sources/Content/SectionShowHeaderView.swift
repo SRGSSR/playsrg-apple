@@ -35,32 +35,32 @@ struct SectionShowHeaderView: View {
     
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
-    #if os(iOS)
+#if os(iOS)
     @Environment(\.horizontalSizeClass) var horizontalSizeClass
-    #endif
+#endif
     
     var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-        #if os(iOS)
+#if os(iOS)
         return UIUserInterfaceSizeClass(horizontalSizeClass)
-        #else
+#else
         return .regular
-        #endif
+#endif
     }
     
     private var direction: StackDirection {
-        #if os(iOS)
+#if os(iOS)
         return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-        #else
+#else
         return .horizontal
-        #endif
+#endif
     }
     
     private var alignment: StackAlignment {
-        #if os(iOS)
+#if os(iOS)
         return (horizontalSizeClass == .compact) ? .center : .leading
-        #else
+#else
         return .leading
-        #endif
+#endif
     }
     
     var body: some View {
@@ -183,10 +183,10 @@ final class SectionShowHeaderViewSize: NSObject {
 
 struct SectionShowHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
             .previewLayout(.sizeThatFits)
-        #else
+#else
         SectionShowHeaderView(section: .content(Mock.contentSection()), show: Mock.show())
             .frame(width: 1000)
             .previewLayout(.sizeThatFits)
@@ -196,6 +196,6 @@ struct SectionShowHeaderView_Previews: PreviewProvider {
             .frame(width: 375)
             .previewLayout(.sizeThatFits)
             .environment(\.horizontalSizeClass, .compact)
-        #endif
+#endif
     }
 }

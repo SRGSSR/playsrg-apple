@@ -69,9 +69,8 @@ final class SwiftMessagesBridge: NSObject {
     }
     
     /**
-    *  Hide all notification messages.
-    *
-    */
+     *  Hide all notification messages.
+     */
     @objc static func hideAll() {
         SwiftMessages.hideAll()
     }

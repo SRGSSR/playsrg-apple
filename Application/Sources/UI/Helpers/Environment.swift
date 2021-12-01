@@ -21,6 +21,13 @@ private struct SelectedKey: EnvironmentKey {
 }
 
 /**
+ *  UIKit focus state internal environment key.
+ */
+private struct UIKitFocusedKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+/**
  *  Custom environment keys.
  */
 extension EnvironmentValues {
@@ -45,6 +52,18 @@ extension EnvironmentValues {
         }
         set {
             self[SelectedKey.self] = newValue
+        }
+    }
+    
+    /**
+     *  UIKit focus state (if focus set by UIKit).
+     */
+    var isUIKitFocused: Bool {
+        get {
+            self[UIKitFocusedKey.self]
+        }
+        set {
+            self[UIKitFocusedKey.self] = newValue
         }
     }
 }

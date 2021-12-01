@@ -42,6 +42,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter=play_isViewVisible) BOOL play_viewVisible;
 
 /**
+ * Return YES iff the view is the current one (appeared and not transitioning to or from this state).
+ */
+@property (nonatomic, readonly, getter=play_isViewCurrent) BOOL play_viewCurrent;
+
+/**
  *  The top view controller of the receiver hierarchy.
  */
 @property (nonatomic, readonly) UIViewController *play_topViewController;

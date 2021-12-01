@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
-    #if os(tvOS)
+#if os(tvOS)
     return tvOS
-    #else
+#else
     return iOS
-    #endif
+#endif
 }
 
 /**
@@ -117,7 +117,7 @@ extension Array {
 
 extension Collection {
     /**
-     *  Apply a transform to each item in a collection, providing an auto-increased index with each processed item.
+     *  Transform each item in a collection, providing an auto-increased index with each processed item.
      */
     func enumeratedMap<T>(_ transform: (Self.Element, Int) throws -> T) rethrows -> [T] {
         var index = 0
@@ -147,6 +147,20 @@ extension Collection {
     }
 }
 
+extension Sequence {
+    /**
+     *  Transform each items in a collection into a sequence and flattens the output, providing an auto-increased index with each processed item.
+     */
+    func enumeratedFlatMap<S>(_ transform: (Self.Element, Int) throws -> S) rethrows -> [S.Element] where S: Sequence {
+        var index = 0
+        return try flatMap { element -> S in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
+    }
+}
+
 extension SRGImageMetadata {
     func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
         return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
@@ -171,16 +185,16 @@ extension View {
             if let label = label, !label.isEmpty {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
-                #if os(tvOS)
+#if os(tvOS)
                 accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityAddTraits(traits)
-                #else
+#else
                 accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityHint(hint ?? "")
                     .accessibilityAddTraits(traits)
-                #endif
+#endif
             }
             else {
                 accessibility(hidden: true)
@@ -195,13 +209,35 @@ extension View {
      *  all the provided space in this direction.
      */
     func adaptiveSizeThatFits(in size: CGSize, for horizontalSizeClass: UIUserInterfaceSizeClass) -> CGSize {
-        #if os(iOS)
+#if os(iOS)
         let hostController = UIHostingController(rootView: self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(horizontalSizeClass)))
-        #else
+#else
         let hostController = UIHostingController(rootView: self)
-        #endif
+#endif
         return hostController.sizeThatFits(in: size)
     }
+    
+    /**
+     *  Read the size of a view and provides it to the specified closure.
+     *
+     *  Warning: Beware of recurisve layout issues when the closure itself triggers a view update.
+     *
+     *  Borrowed from https://www.fivestars.blog/articles/flexible-swiftui/
+     */
+    func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
+        background(
+            GeometryReader { geometry in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: geometry.size)
+            }
+        )
+        .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    }
+}
+
+private struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
 }
 
 /**
@@ -223,7 +259,7 @@ extension View {
                 case .dimmed:
                     overlay(Color.black.opacity(0.5))
                 case .transluscent:
-                    self.opacity(0.5)
+                    opacity(0.5)
                 }
             }
             else {
@@ -342,11 +378,11 @@ extension NSCollectionLayoutSize {
 
 extension View {
     func horizontalSizeClass(_ sizeClass: UIUserInterfaceSizeClass) -> some View {
-        #if os(iOS)
-        return self.environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
-        #else
+#if os(iOS)
+        return environment(\.horizontalSizeClass, UserInterfaceSizeClass(sizeClass))
+#else
         return self
-        #endif
+#endif
     }
 }
 
@@ -448,11 +484,11 @@ extension UIApplication {
     @objc var mainTopViewController: UIViewController? {
         return mainWindow?.play_topViewController
     }
-
-    #if os(iOS)
+    
+#if os(iOS)
     /// Return the main tab bar root controller, if any.
     @objc var mainTabBarController: TabBarController? {
         return mainWindow?.rootViewController as? TabBarController
     }
-    #endif
+#endif
 }

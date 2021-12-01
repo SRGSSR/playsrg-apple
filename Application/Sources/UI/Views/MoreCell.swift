@@ -20,7 +20,7 @@ struct MoreCell: View {
     }
     
     var body: some View {
-        #if os(tvOS)
+#if os(tvOS)
         LabeledCardButton(aspectRatio: Self.aspectRatio(for: imageType), action: action) {
             Image("chevron-large")
                 .resizable()
@@ -32,7 +32,7 @@ struct MoreCell: View {
         } label: {
             Color.clear
         }
-        #else
+#else
         Image("chevron-large")
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -45,14 +45,14 @@ struct MoreCell: View {
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             .frame(maxHeight: .infinity, alignment: .top)
-        #endif
+#endif
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func action() {
         navigateToSection(section, filter: filter)
     }
-    #endif
+#endif
 }
 
 // MARK: Accessibility

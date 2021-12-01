@@ -11,7 +11,6 @@ import UIKit
 
 final class ProgramGuideDailyViewController: UIViewController {
     private let model: ProgramGuideDailyViewModel
-    
     private let programGuideModel: ProgramGuideViewModel
     
     private var cancellables = Set<AnyCancellable>()
@@ -19,6 +18,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
+    
+    private static let margin: CGFloat = 10
     
     var day: SRGDay {
         return model.day
@@ -58,8 +59,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Self.margin),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Self.margin)
         ])
         
         let emptyView = HostView<EmptyView>(frame: .zero)
@@ -72,8 +73,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { cell, _, program in
-            cell.content = ProgramCell(program: program)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, _, program in
+            cell.content = ProgramCell(program: program, channel: self?.programGuideModel.selectedChannel, direction: .horizontal)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -175,7 +176,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
            let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
-            programGuideModel.scrollToTime(of: program.startDate)
+            programGuideModel.didScrollToTime(of: program.startDate)
         }
     }
     

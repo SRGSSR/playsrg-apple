@@ -27,20 +27,20 @@ final class SectionViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
-    #if os(iOS)
+#if os(iOS)
     private weak var refreshControl: UIRefreshControl!
-    #endif
+#endif
     
     private var refreshTriggered = false
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
     private var globalHeaderTitle: String? {
-        #if os(tvOS)
+#if os(tvOS)
         return tabBarController == nil ? model.title : nil
-        #else
+#else
         return nil
-        #endif
+#endif
     }
     
     private static func snapshot(from state: SectionViewModel.State) -> NSDiffableDataSourceSnapshot<SectionViewModel.Section, SectionViewModel.Item> {
@@ -95,14 +95,14 @@ final class SectionViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
-        #if os(tvOS)
+#if os(tvOS)
         self.tabBarObservedScrollView = collectionView
-        #else
+#else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        #endif
+#endif
                 
         self.view = view
     }
@@ -110,9 +110,9 @@ final class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        #if os(iOS)
+#if os(iOS)
         updateNavigationBar()
-        #endif
+#endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
             guard let self = self else { return }
@@ -164,7 +164,7 @@ final class SectionViewController: UIViewController {
         userActivity = nil
     }
     
-    #if os(iOS)
+#if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
     }
@@ -245,7 +245,7 @@ final class SectionViewController: UIViewController {
             return String(format: NSLocalizedString("%d items", comment: "Title displayed when several items have been selected"), numberOfSelectedItems)
         }
     }
-    #endif
+#endif
     
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
@@ -258,9 +258,9 @@ final class SectionViewController: UIViewController {
             emptyView.content = state.displaysEmptyView ? EmptyView(state: .empty(type: properties.emptyType)) : nil
         }
         
-        #if os(iOS)
+#if os(iOS)
         updateNavigationBar(for: state)
-        #endif
+#endif
         
         contentInsets = Self.contentInsets(for: state)
         play_setNeedsContentInsetsUpdate()
@@ -268,7 +268,7 @@ final class SectionViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-                #if os(iOS)
+#if os(iOS)
                 self.collectionView.reloadSectionIndexBar()
                 
                 // Apply colors when the section bar might be visible.
@@ -281,7 +281,7 @@ final class SectionViewController: UIViewController {
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
-                #endif
+#endif
             }
         }
     }
@@ -303,7 +303,7 @@ final class SectionViewController: UIViewController {
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
     
-    #if os(iOS)
+#if os(iOS)
     private func open(_ item: Content.Item) {
         switch item {
         case let .media(media):
@@ -353,7 +353,7 @@ final class SectionViewController: UIViewController {
         }))
         present(alertController, animated: true, completion: nil)
     }
-    #endif
+#endif
 }
 
 // MARK: Types
@@ -448,7 +448,7 @@ extension SectionViewController: ContentInsets {
 }
 
 extension SectionViewController: UICollectionViewDelegate {
-    #if os(iOS)
+#if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
@@ -509,13 +509,13 @@ extension SectionViewController: UICollectionViewDelegate {
         parameters.backgroundColor = view.backgroundColor
         return UITargetedPreview(view: interactionView, parameters: parameters)
     }
-    #endif
+#endif
     
-    #if os(tvOS)
+#if os(tvOS)
     func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
-    #endif
+#endif
 }
 
 extension SectionViewController: UIScrollViewDelegate {
@@ -555,14 +555,14 @@ extension SectionViewController: SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?) {
         guard let event = event else { return }
         
-        #if os(tvOS)
+#if os(tvOS)
         navigateToShow(event.show)
-        #else
+#else
         if let navigationController = navigationController {
             let showViewController = SectionViewController.showViewController(for: event.show)
             navigationController.pushViewController(showViewController, animated: true)
         }
-        #endif
+#endif
     }
 }
 
