@@ -146,7 +146,7 @@ final class SearchResultsViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .search)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
