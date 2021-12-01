@@ -18,8 +18,13 @@ final class SearchViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, settingsSubject, trigger] in
             Publishers.CombineLatest(querySubject, settingsSubject)
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
-                .map { query, settings in
-                    return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
+                .map { query, settings -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> in
+                    if Self.isSearching(with: query, settings: settings) {
+                        return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
+                    }
+                    else {
+                        return Self.mostSearchedShows()
+                    }
                 }
                 .switchToLatest()
                 .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
@@ -53,6 +58,10 @@ final class SearchViewModel: ObservableObject {
         return Self.areDefaultSettings(settings)
     }
     
+    var isSearching: Bool {
+        return Self.isSearching(with: query, settings: settings)
+    }
+    
     private var querySubject = CurrentValueSubject<String, Never>("")
     private var settingsSubject = CurrentValueSubject<SRGMediaSearchSettings, Never>(SearchViewModel.optimalSettings())
     
@@ -77,6 +86,10 @@ final class SearchViewModel: ObservableObject {
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
+    }
+    
+    private static func isSearching(with query: String, settings: SRGMediaSearchSettings) -> Bool {
+        return !query.isEmpty || !Self.areDefaultSettings(settings)
     }
     
     private static func optimalSettings(from settings: SRGMediaSearchSettings = SRGMediaSearchSettings()) -> SRGMediaSearchSettings {
@@ -130,14 +143,39 @@ extension SearchViewModel {
 // MARK: Publishers
 
 private extension SearchViewModel {
-    static func mostSearchedShows() -> AnyPublisher<[Row], Error> {
-        let vendor = ApplicationConfiguration.shared.vendor
-        return SRGDataProvider.current!.mostSearchedShows(for: vendor)
-            .map { shows in
-                let items = removeDuplicates(in: shows.map { Item.show($0) })
-                return [Row(section: .mostSearchedShows, items: items)]
-            }
+    static func mostSearchedShows() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
+        if !ApplicationConfiguration.shared.areShowsUnavailable {
+            let vendor = ApplicationConfiguration.shared.vendor
+            return SRGDataProvider.current!.mostSearchedShows(for: vendor)
+                .map { shows in
+                    let items = removeDuplicates(in: shows.map { Item.show($0) })
+                    return [Row(section: .mostSearchedShows, items: items)]
+                }
+                .map { (rows: $0, suggestions: nil) }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just([])
+                .map { (rows: $0, suggestions: nil) }
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    static func searchResults(matchingQuery query: String, with settings: SRGMediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
+        if !ApplicationConfiguration.shared.areShowsUnavailable {
+            return Publishers.CombineLatest(
+                shows(matchingQuery: query),
+                medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+            )
+            .map { (rows: rows(shows: $0, medias: $1.medias), suggestions: $1.suggestions) }
             .eraseToAnyPublisher()
+        }
+        else {
+            return medias(matchingQuery: query, with: nil /* Not supported */, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+                .map { (rows: rows(shows: [], medias: $0.medias), suggestions: $0.suggestions) }
+                .eraseToAnyPublisher()
+        }
     }
     
     static func shows(matchingQuery query: String) -> AnyPublisher<[SRGShow], Error> {
@@ -151,7 +189,7 @@ private extension SearchViewModel {
             .eraseToAnyPublisher()
     }
     
-    static func medias(matchingQuery query: String, with settings: SRGMediaSearchSettings, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
+    static func medias(matchingQuery query: String, with settings: SRGMediaSearchSettings?, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
         return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: settings, pageSize: pageSize, paginatedBy: signal)
@@ -181,21 +219,5 @@ private extension SearchViewModel {
     
     static func areDefaultSettings(_ settings: SRGMediaSearchSettings) -> Bool {
         return optimalSettings() == settings
-    }
-    
-    static func searchResults(matchingQuery query: String, with settings: SRGMediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
-        if !query.isEmpty || !areDefaultSettings(settings) {
-            return Publishers.CombineLatest(
-                shows(matchingQuery: query),
-                medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
-            )
-            .map { (rows: rows(shows: $0, medias: $1.medias), suggestions: $1.suggestions) }
-            .eraseToAnyPublisher()
-        }
-        else {
-            return mostSearchedShows()
-                .map { (rows: $0, suggestions: nil) }
-                .eraseToAnyPublisher()
-        }
     }
 }

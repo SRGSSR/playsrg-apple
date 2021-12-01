@@ -24,6 +24,7 @@ struct EmptyView: View {
         case history
         case resumePlayback
         case search
+        case searchTutorial
         case watchLater
     }
     
@@ -37,7 +38,7 @@ struct EmptyView: View {
             return "media-background"
         case .history, .resumePlayback:
             return "history-background"
-        case .search:
+        case .search, .searchTutorial:
             return "search-background"
         case .watchLater:
             return "watch_later-background"
@@ -52,6 +53,8 @@ struct EmptyView: View {
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
         case .search:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available");
+        case .searchTutorial:
+            return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
         case .episodesFromFavorites, .generic, .resumePlayback, .watchLater:
             return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
         }
