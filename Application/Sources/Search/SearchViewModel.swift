@@ -18,19 +18,16 @@ final class SearchViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, settingsSubject, trigger] in
             Publishers.CombineLatest(querySubject, settingsSubject)
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
-                .map { query, settings -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> in
-                    if Self.isSearching(with: query, settings: settings) {
-                        return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
-                    }
-                    else {
-                        return Self.mostSearchedShows()
-                    }
+                .map { query, settings -> AnyPublisher<State, Never> in
+                    return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
+                        .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
+                        .catch { error in
+                            return Just(State.failed(error: error))
+                        }
+                        .prepend(State.loading)
+                        .eraseToAnyPublisher()
                 }
                 .switchToLatest()
-                .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -202,6 +199,15 @@ private extension SearchViewModel {
                 return (medias: removeDuplicates(in: $0.medias + $1.medias), suggestions: $1.suggestions )
             }
             .eraseToAnyPublisher()
+    }
+    
+    static func rows(matchingQuery query: String, with settings: SRGMediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
+        if Self.isSearching(with: query, settings: settings) {
+            return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
+        }
+        else {
+            return Self.mostSearchedShows()
+        }
     }
     
     static func rows(shows: [SRGShow], medias: [SRGMedia]) -> [Row] {
