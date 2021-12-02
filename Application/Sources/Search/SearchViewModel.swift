@@ -38,6 +38,7 @@ final class SearchViewModel: ObservableObject {
             querySubject.value
         }
         set {
+            guard querySubject.value != newValue else { return }
             querySubject.value = newValue
         }
     }
@@ -47,7 +48,9 @@ final class SearchViewModel: ObservableObject {
             settingsSubject.value
         }
         set {
-            settingsSubject.value = Self.optimalSettings(from: newValue)
+            let newSettings = Self.optimalSettings(from: newValue)
+            guard settingsSubject.value != newSettings else { return }
+            settingsSubject.value = newSettings
         }
     }
     
