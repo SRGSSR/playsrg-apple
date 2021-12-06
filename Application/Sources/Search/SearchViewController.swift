@@ -43,7 +43,7 @@ final class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let searchResultsViewController = SearchResultsViewController(model: model)
+        let searchResultsViewController = SearchResultsViewController(model: model, searchViewController: self)
 #if os(iOS)
         searchResultsViewController.delegate = self
 #endif

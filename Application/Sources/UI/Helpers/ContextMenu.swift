@@ -79,13 +79,18 @@ private extension ContextMenu {
 
 // MARK: Media context menu
 
-private extension ContextMenu {
+extension ContextMenu {
     static func configuration(for media: SRGMedia, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
             return MediaPreviewViewController(media: media)
         } actionProvider: { _ in
             return menu(for: media, in: viewController)
         }
+    }
+    
+    static func configuration(for media: SRGMedia, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
+        return configuration(for: media, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
     
     private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
@@ -227,13 +232,18 @@ private extension ContextMenu {
 
 // MARK: Show context menu
 
-private extension ContextMenu {
+extension ContextMenu {
     static func configuration(for show: SRGShow, identifier: NSCopying?, in viewController: UIViewController) -> UIContextMenuConfiguration? {
         return UIContextMenuConfiguration(identifier: identifier) {
             return SectionViewController.showViewController(for: show)
         } actionProvider: { _ in
             return menu(for: show, in: viewController)
         }
+    }
+    
+    static func configuration(for show: SRGShow, at indexPath: IndexPath, in viewController: UIViewController) -> UIContextMenuConfiguration? {
+        // Build an `NSIndexPath` from the `IndexPath` argument to have an equivalent identifier conforming to `NSCopying`.
+        return configuration(for: show, identifier: NSIndexPath(item: indexPath.row, section: indexPath.section), in: viewController)
     }
     
     private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {

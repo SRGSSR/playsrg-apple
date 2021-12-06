@@ -8,7 +8,6 @@ import Combine
 import SwiftUI
 import UIKit
 
-
 // MARK: Protocols
 
 #if os(iOS)
@@ -21,6 +20,7 @@ protocol SearchResultsViewControllerDelegate: AnyObject {
 
 final class SearchResultsViewController: UIViewController {
     @ObservedObject private var model: SearchViewModel
+    private weak var searchViewController: SearchViewController?
     
 #if os(iOS)
     weak var delegate: SearchResultsViewControllerDelegate?
@@ -52,8 +52,9 @@ final class SearchResultsViewController: UIViewController {
         return snapshot
     }
     
-    init(model: SearchViewModel) {
+    init(model: SearchViewModel, searchViewController: SearchViewController) {
         self.model = model
+        self.searchViewController = searchViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -187,6 +188,39 @@ extension SearchResultsViewController: UICollectionViewDelegate {
         let section = snapshot.sectionIdentifiers[indexPath.section]
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         delegate?.searchResultsViewController(self, didSelectItem: item)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        
+        switch item {
+        case let .media(media):
+            return ContextMenu.configuration(for: media, at: indexPath, in: self)
+        case let .show(show):
+            return ContextMenu.configuration(for: show, at: indexPath, in: self)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willPerformPreviewActionForMenuWith configuration: UIContextMenuConfiguration, animator: UIContextMenuInteractionCommitAnimating) {
+        guard let searchViewController = searchViewController else { return }
+        ContextMenu.commitPreview(in: searchViewController, animator: animator)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForHighlightingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
+        return preview(for: configuration, in: collectionView)
+    }
+    
+    private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
+        guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
+        let parameters = UIPreviewParameters()
+        parameters.backgroundColor = view.backgroundColor
+        return UITargetedPreview(view: interactionView, parameters: parameters)
     }
 #endif
     
