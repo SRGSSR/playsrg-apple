@@ -99,14 +99,14 @@ extension AppDelegate: UIApplicationDelegate {
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.setupDataProvider()
+                self?.updateDataProvider()
             }
             .store(in: &settingUpdatesCancellables)
         
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.setupDataProvider()
+                self?.updateDataProvider()
             }
             .store(in: &settingUpdatesCancellables)
 #endif
@@ -125,5 +125,16 @@ extension AppDelegate: UIApplicationDelegate {
         dataProvider.globalParameters = ApplicationSettingGlobalParameters()
 #endif
         SRGDataProvider.current = dataProvider
+    }
+    
+    private func updateDataProvider() {
+        URLCache.shared.removeAllCachedResponses()
+        
+        setupDataProvider()
+        
+        // Stop the current player (Picture in picture included)
+        // TODO: For perfectly safe behavior when the service URL is changed, we should have all Letterbox
+        //       view controllers observe URL settings change and do the following in such cases. This is probably
+        //       overkill for the time being.
     }
 }
