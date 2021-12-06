@@ -158,21 +158,21 @@ extension SceneDelegate: UIWindowSceneDelegate {
         
 #if DEBUG || NIGHTLY || BETA
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
-            .receive(on: DispatchQueue.main)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
             .sink {
                 window.rootViewController = Self.applicationRootViewController()
             }
             .store(in: &settingUpdatesCancellables)
         
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
-            .receive(on: DispatchQueue.main)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
             .sink {
                 window.rootViewController = Self.applicationRootViewController()
             }
             .store(in: &settingUpdatesCancellables)
         
         ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
-            .receive(on: DispatchQueue.main)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
             .sink {
                 window.rootViewController = Self.applicationRootViewController()
             }
