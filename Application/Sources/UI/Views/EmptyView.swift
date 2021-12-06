@@ -109,6 +109,7 @@ struct EmptyView_Previews: PreviewProvider {
             EmptyView(state: .empty(type: .history))
             EmptyView(state: .empty(type: .resumePlayback))
             EmptyView(state: .empty(type: .search))
+            EmptyView(state: .empty(type: .searchTutorial))
             EmptyView(state: .empty(type: .watchLater))
             EmptyView(state: .failed(error: PreviewError.kernel32))
         }
