@@ -29,9 +29,10 @@ final class SectionViewController: UIViewController {
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
-#endif
     
     private var refreshTriggered = false
+#endif
+    
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
@@ -520,11 +521,13 @@ extension SectionViewController: UICollectionViewDelegate {
 
 extension SectionViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+#if os(iOS)
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
+#endif
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -609,20 +612,20 @@ private extension SectionViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 }
             }

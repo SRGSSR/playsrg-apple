@@ -6,56 +6,93 @@
 
 import Combine
 import SRGAnalytics
+import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
-class SearchViewController: UIViewController {
-    private var model = SearchResultsViewModel()
+// MARK: View controller
+
+final class SearchViewController: UIViewController {
+    private var model = SearchViewModel()
     
-    private let searchController: UISearchController
-    private let searchContainerViewController: UISearchContainerViewController
+    private var searchController: UISearchController!
+    private var searchContainerViewController: UISearchContainerViewController!
     
+#if os(tvOS)
     private var cancellables = Set<AnyCancellable>()
+#endif
     
     init() {
-        let searchResultsView = SearchResultsView(model: model)
-        let searchResultsViewController = UIHostingController(rootView: searchResultsView)
-        searchController = UISearchController(searchResultsController: searchResultsViewController)
-        
-        searchContainerViewController = UISearchContainerViewController(searchController: searchController)
         super.init(nibName: nil, bundle: nil)
-        
-        addChild(searchContainerViewController)
-        searchController.searchResultsUpdater = self
-        
-        model.viewController = self
-        model.searchController = searchController
-        
-        model.$state
-            .sink { state in
-                if case let .loaded(medias: _, suggestions: suggestions) = state {
-                    self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
-                }
-                else {
-                    self.searchController.searchSuggestions = nil
-                }
-            }
-            .store(in: &cancellables)
+        title = TitleForApplicationSection(.search)
     }
     
     required init?(coder: NSCoder) {
         fatalError("Not implemented")
     }
     
+    override func loadView() {
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = .srgGray16
+        self.view = view
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchContainerViewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        let searchResultsViewController = SearchResultsViewController(model: model)
+        searchController = UISearchController(searchResultsController: searchResultsViewController)
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        
+#if os(iOS)
+        let searchBar = searchController.searchBar
+        object_setClass(searchBar, SearchBar.self)
+        
+        searchBar.placeholder = NSLocalizedString("Search", comment: "Search placeholder text")
+        searchBar.autocapitalizationType = .none
+        searchBar.tintColor = .white
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+#endif
+        
+        searchContainerViewController = UISearchContainerViewController(searchController: searchController)
+        addChild(searchContainerViewController)
         searchContainerViewController.view.frame = view.bounds
         view.addSubview(searchContainerViewController.view)
         searchContainerViewController.didMove(toParent: self)
+        
+        // Required for proper search bar behavior
+        definesPresentationContext = true
+        
+#if os(tvOS)
+        model.$state
+            .sink { state in
+                if case let .loaded(rows: _, suggestions: suggestions) = state {
+                    if let suggestions = suggestions {
+                        self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
+                    }
+                    else {
+                        self.searchController.searchSuggestions = nil
+                    }
+                }
+                else {
+                    self.searchController.searchSuggestions = nil
+                }
+            }
+            .store(in: &cancellables)
+#endif
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.reload()
     }
 }
+
+// MARK: Protocols
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {

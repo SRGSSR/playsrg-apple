@@ -32,9 +32,9 @@ final class PageViewController: UIViewController {
     private var isNavigationBarHidden: Bool {
         return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
-#endif
     
     private var refreshTriggered = false
+#endif
     
     private var globalHeaderTitle: String? {
 #if os(tvOS)
@@ -380,11 +380,13 @@ extension PageViewController: UICollectionViewDelegate {
 
 extension PageViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+#if os(iOS)
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
+#endif
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -572,16 +574,16 @@ private extension PageViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
                     }
 #if os(iOS)
                 case .showAccess:
