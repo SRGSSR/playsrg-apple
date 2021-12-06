@@ -153,7 +153,7 @@ final class SearchViewController: UIViewController {
             // See https://stackoverflow.com/a/25559946/760435
             let inset: CGFloat = 2
             filtersButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -inset, bottom: 0, right: inset)
-            filtersButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: -inset);
+            filtersButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: -inset)
             filtersButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
             
             let filtersBarButtonItem = UIBarButtonItem(customView: filtersButton)

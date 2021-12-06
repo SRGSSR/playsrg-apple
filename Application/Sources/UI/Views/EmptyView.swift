@@ -52,7 +52,7 @@ struct EmptyView: View {
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
         case .search:
-            return NSLocalizedString("No results", comment: "Default text displayed when no results are available");
+            return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         case .searchTutorial:
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
         case .episodesFromFavorites, .generic, .resumePlayback, .watchLater:
