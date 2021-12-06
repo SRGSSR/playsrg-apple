@@ -11,24 +11,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  User location options.
- */
-typedef NS_ENUM(NSInteger, SettingUserLocation) {
-    /**
-     *  Default IP-based location.
-     */
-    SettingUserLocationDefault,
-    /**
-     *  Outside CH.
-     */
-    SettingUserLocationOutsideCH,
-    /**
-     *  Ignore location.
-     */
-    SettingUserLocationIgnored
-};
-
-/**
  *  Tab bar item identifier.
  */
 typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
@@ -47,10 +29,6 @@ OBJC_EXPORT BOOL ApplicationSettingStandaloneEnabled(void);
 OBJC_EXPORT SRGQuality ApplicationSettingPreferredQuality(void);
 OBJC_EXPORT SRGLetterboxPlaybackSettings *ApplicationSettingPlaybackSettings(void);
 
-OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
-OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
-
-OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 OBJC_EXPORT NSTimeInterval ApplicationSettingContinuousPlaybackTransitionDuration(void);
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);

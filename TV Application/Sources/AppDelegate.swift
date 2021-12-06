@@ -17,6 +17,9 @@ class AppDelegate: UIResponder {
     var window: UIWindow?
     
     private var cancellables = Set<AnyCancellable>()
+#if DEBUG || NIGHTLY || BETA
+    private var settingUpdatesCancellables = Set<AnyCancellable>()
+#endif
     
     private func setupAppCenter() {
         guard let appCenterSecret = Bundle.main.object(forInfoDictionaryKey: "AppCenterSecret") as? String, !appCenterSecret.isEmpty else { return }
@@ -92,12 +95,35 @@ extension AppDelegate: UIApplicationDelegate {
         #endif
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
         
-        SRGDataProvider.current = SRGDataProvider(serviceURL: SRGIntegrationLayerProductionServiceURL())
+#if DEBUG || NIGHTLY || BETA
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.setupDataProvider()
+            }
+            .store(in: &settingUpdatesCancellables)
+        
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.setupDataProvider()
+            }
+            .store(in: &settingUpdatesCancellables)
+#endif
+        setupDataProvider()
         
         return true
     }
     
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default", sessionRole: connectingSceneSession.role)
+    }
+    
+    private func setupDataProvider() {
+        let dataProvider = SRGDataProvider(serviceURL: ApplicationSettingServiceURL())
+#if DEBUG || NIGHTLY || BETA
+        dataProvider.globalParameters = ApplicationSettingGlobalParameters()
+#endif
+        SRGDataProvider.current = dataProvider
     }
 }

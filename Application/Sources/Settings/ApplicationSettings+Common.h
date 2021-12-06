@@ -9,6 +9,24 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  User location options.
+ */
+typedef NS_ENUM(NSInteger, SettingUserLocation) {
+    /**
+     *  Default IP-based location.
+     */
+    SettingUserLocationDefault,
+    /**
+     *  Outside CH.
+     */
+    SettingUserLocationOutsideCH,
+    /**
+     *  Ignore location.
+     */
+    SettingUserLocationIgnored
+};
+
+/**
  *  Poster image setting.
  */
 typedef NS_ENUM(NSInteger, SettingPosterImages) {
@@ -28,5 +46,10 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
 
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
+
+OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
+OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
+
+OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 
 NS_ASSUME_NONNULL_END

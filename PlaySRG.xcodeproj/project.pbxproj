@@ -147,6 +147,11 @@
 		0832BF1722BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */; };
 		0832BF1822BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */; };
 		0832BF1922BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */; };
+		0837A293275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		0837A294275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		0837A295275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		0837A296275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		0837A297275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
 		0841E70622F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70722F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
@@ -2602,6 +2607,7 @@
 		0832BF0D22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchLoadingCollectionViewCell.h; sourceTree = "<group>"; };
 		0832BF0E22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchLoadingCollectionViewCell.m; sourceTree = "<group>"; };
 		0832BF0F22BD6BB000EFFFE6 /* SearchLoadingCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchLoadingCollectionViewCell.xib; sourceTree = "<group>"; };
+		0837A28D275E75D900BF7F93 /* Settings.server.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.server.plist; sourceTree = "<group>"; };
 		0841E70422F0953A009D8304 /* SRGDay+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDay+PlaySRG.h"; sourceTree = "<group>"; };
 		0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDay+PlaySRG.m"; sourceTree = "<group>"; };
 		084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionViewController.h; sourceTree = "<group>"; };
@@ -4704,6 +4710,7 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
+				0837A28D275E75D900BF7F93 /* Settings.server.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -6540,6 +6547,7 @@
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
+				0837A293275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6556,6 +6564,7 @@
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
+				0837A294275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
@@ -6572,6 +6581,7 @@
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
+				0837A295275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6588,6 +6598,7 @@
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
+				0837A296275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -6604,6 +6615,7 @@
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
+				0837A297275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
