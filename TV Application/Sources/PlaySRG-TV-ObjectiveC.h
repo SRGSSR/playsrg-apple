@@ -10,6 +10,7 @@
 #import "AccessibilityIdentifierConstants.h"
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
+#import "ApplicationSection.h"
 #import "ApplicationSettings+Common.h"
 #import "ApplicationSettingsConstants.h"
 #import "BaseViewController.h"

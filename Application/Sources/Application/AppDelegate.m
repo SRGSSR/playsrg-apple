@@ -107,6 +107,8 @@ static void *s_kvoContext = &s_kvoContext;
     [self setupAnalytics];
     [self setupDataProvider];
     
+    [SearchBar setup];
+    
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
     
