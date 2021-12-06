@@ -167,11 +167,6 @@ final class SearchViewController: UIViewController {
         }
     }
     
-    private func scrollToTop(animated: Bool = true) {
-        guard let searchResultsController = searchController.searchResultsController as? SearchResultsViewController else { return }
-        searchResultsController.scrollToTop(animated: animated)
-    }
-    
     @objc private func closeKeyboard(_ sender: Any) {
         searchController.searchBar.resignFirstResponder()
     }
@@ -221,15 +216,10 @@ extension SearchViewController: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
         model.settings = settings
         updateSearchSettingsButton()
-        scrollToTop(animated: true)
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        scrollToTop(animated: true)
-    }
-    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: NSLocalizedString("Cancel", comment: "Title of a cancel button"),
