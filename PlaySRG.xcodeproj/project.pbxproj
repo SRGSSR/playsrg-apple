@@ -5652,6 +5652,7 @@
 				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				08C13558256B27AC002F67B8 /* Restore original icons */,
+				0837A299275EA51D00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
 				6FBE535C271FF94A00F90B68 /* Embed App Extensions */,
@@ -5693,6 +5694,7 @@
 				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				08C13575256B2977002F67B8 /* Restore original icons */,
+				0837A298275EA00300BF7F93 /* Update Play MMF service URL */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
 				6F9BF6002720299400945973 /* Embed App Extensions */,
@@ -5734,6 +5736,7 @@
 				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				08C13576256B297E002F67B8 /* Restore original icons */,
+				0837A29A275EA52A00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
 				6F9BF604272029A400945973 /* Embed App Extensions */,
@@ -5775,6 +5778,7 @@
 				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				08C13577256B2983002F67B8 /* Restore original icons */,
+				0837A29B275EA53E00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
 				6F9BF608272029AC00945973 /* Embed App Extensions */,
@@ -5816,6 +5820,7 @@
 				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				08C13578256B2989002F67B8 /* Restore original icons */,
+				0837A29C275EA55400BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
 				6F9BF60C272029B500945973 /* Embed App Extensions */,
@@ -6735,6 +6740,96 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
+		};
+		0837A298275EA00300BF7F93 /* Update Play MMF service URL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Play MMF service URL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
+		};
+		0837A299275EA51D00BF7F93 /* Update Play MMF service URL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Play MMF service URL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
+		};
+		0837A29A275EA52A00BF7F93 /* Update Play MMF service URL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Play MMF service URL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
+		};
+		0837A29B275EA53E00BF7F93 /* Update Play MMF service URL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Play MMF service URL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
+		};
+		0837A29C275EA55400BF7F93 /* Update Play MMF service URL */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Update Play MMF service URL";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
 		};
 		085F7DC71FA4DD510010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
