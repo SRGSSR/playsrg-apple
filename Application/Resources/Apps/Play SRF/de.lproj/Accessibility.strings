@@ -104,7 +104,7 @@
 "Now playing: %@" = "Jetzt spielt: %@";
 
 /* Text providing a channel information. Placeholder is the channel on which it's broadcasted. */
-"on %@" = "on %@";
+"on %@" = "auf %@";
 
 /* More button hint
    Program cell hint */
