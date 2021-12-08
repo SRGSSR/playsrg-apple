@@ -85,6 +85,7 @@ struct ProgramGuideListHeaderView: View {
                 }
                 Text(model.dateString)
                     .srgFont(.H2)
+                    .minimumScaleFactor(0.8)
                     .foregroundColor(.srgGrayC7)
                     .frame(maxWidth: .infinity)
                 SimpleButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {

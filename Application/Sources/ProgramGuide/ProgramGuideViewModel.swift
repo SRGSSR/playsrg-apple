@@ -28,7 +28,7 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     var dateString: String {
-        return DateFormatter.play_relative.string(from: dateSelection.day.date).capitalizedFirstLetter
+        return DateFormatter.play_relativeFull.string(from: dateSelection.day.date).capitalizedFirstLetter
     }
     
     init(date: Date) {
