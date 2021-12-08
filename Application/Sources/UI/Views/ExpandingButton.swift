@@ -52,6 +52,7 @@ struct ExpandingButton: View {
                 if let label = label {
                     Text(label)
                         .srgFont(.button)
+                        .minimumScaleFactor(0.8)
                         .lineLimit(1)
                 }
             }
