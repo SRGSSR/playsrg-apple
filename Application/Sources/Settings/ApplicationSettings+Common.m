@@ -14,6 +14,24 @@
 @import Mantle;
 @import SRGDataProvider;
 
+/**
+ *  User location options.
+ */
+typedef NS_ENUM(NSInteger, SettingUserLocation) {
+    /**
+     *  Default IP-based location.
+     */
+    SettingUserLocationDefault,
+    /**
+     *  Outside CH.
+     */
+    SettingUserLocationOutsideCH,
+    /**
+     *  Ignore location.
+     */
+    SettingUserLocationIgnored
+};
+
 NSValueTransformer *SettingUserLocationTransformer(void)
 {
     static NSValueTransformer *s_transformer;

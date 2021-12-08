@@ -9,24 +9,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  User location options.
- */
-typedef NS_ENUM(NSInteger, SettingUserLocation) {
-    /**
-     *  Default IP-based location.
-     */
-    SettingUserLocationDefault,
-    /**
-     *  Outside CH.
-     */
-    SettingUserLocationOutsideCH,
-    /**
-     *  Ignore location.
-     */
-    SettingUserLocationIgnored
-};
-
-/**
  *  Poster image setting.
  */
 typedef NS_ENUM(NSInteger, SettingPosterImages) {
