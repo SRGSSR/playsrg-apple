@@ -14,7 +14,7 @@ final class SceneDelegate: UIResponder {
     
     private var cancellables = Set<AnyCancellable>()
 #if DEBUG || NIGHTLY || BETA
-    private var settingUpdatesCancellable: AnyCancellable?
+    private var settingUpdatesCancellables = Set<AnyCancellable>()
 #endif
     
     private static func configureTabBarController(_ tabBarController: UITabBarController) {
@@ -157,11 +157,26 @@ extension SceneDelegate: UIWindowSceneDelegate {
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
-        settingUpdatesCancellable = ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
-            .receive(on: DispatchQueue.main)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
             .sink {
                 window.rootViewController = Self.applicationRootViewController()
             }
+            .store(in: &settingUpdatesCancellables)
+        
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
+            .sink {
+                window.rootViewController = Self.applicationRootViewController()
+            }
+            .store(in: &settingUpdatesCancellables)
+        
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+            .debounce(for: 0.7, scheduler: DispatchQueue.main)
+            .sink {
+                window.rootViewController = Self.applicationRootViewController()
+            }
+            .store(in: &settingUpdatesCancellables)
 #endif
     }
     

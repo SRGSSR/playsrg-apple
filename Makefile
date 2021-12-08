@@ -1,7 +1,7 @@
 #!/usr/bin/xcrun make -f
 
 CONFIGURATION_FOLDER=Configuration
-CONFIGURATION_COMMIT_SHA1=07feaa772163765f6d1716d1620057d71ce31b47
+CONFIGURATION_COMMIT_SHA1=98cdec625436d2a4cee8fff2b3f9719b7b3ae671
 
 # Checkout a commit for a repository in the specified directory. Fails if the repository is dirty of if the
 # commit does not exist.  

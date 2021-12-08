@@ -62,6 +62,8 @@ struct ProfileView: View {
             #if DEBUG || NIGHTLY || BETA
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
+                ServiceURLItem(model: model)
+                UserLocationItem()
                 SectionWideSupportItem()
                 PosterImagesItem()
             }
@@ -304,6 +306,74 @@ extension ProfileView {
     }
     
     #if DEBUG || NIGHTLY || BETA
+    private struct ServiceURLItem: View {
+        @ObservedObject var model: ProfileViewModel
+        
+        private func action() {
+            model.nextServiceURL()
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("Server", comment: "Service URL setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(model.serviceURLTitle)
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
+    private struct UserLocationItem: View {
+        private enum SettingUserLocation: String {
+            case `default` = ""
+            case WW
+            case CH
+        }
+        
+        @AppStorage(PlaySRGSettingUserLocation) private var settingUserLocation = SettingUserLocation.default
+        
+        private var text: String {
+            switch settingUserLocation {
+            case .WW:
+                return PlaySRGSettingsLocalizedString("Outside Switzerland", comment: "User location setting state")
+            case .CH:
+                return PlaySRGSettingsLocalizedString("Ignore location", comment: "User location setting state")
+            case .`default`:
+                return PlaySRGSettingsLocalizedString("Default (IP-based location)", comment: "User location setting state")
+            }
+        }
+        
+        private func action() {
+            switch settingUserLocation {
+            case .WW:
+                settingUserLocation = .CH
+            case .CH:
+                settingUserLocation = .`default`
+            case .`default`:
+                settingUserLocation = .WW
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                HStack {
+                    Text(PlaySRGSettingsLocalizedString("User location", comment: "User location setting"))
+                        .srgFont(.button)
+                    Spacer()
+                    Text(text)
+                        .srgFont(.button)
+                        .foregroundColor(.secondary)
+                }
+            }
+            .padding()
+        }
+    }
+    
     private struct SectionWideSupportItem: View {
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) private var isSectionWideSupportEnabled = false
         

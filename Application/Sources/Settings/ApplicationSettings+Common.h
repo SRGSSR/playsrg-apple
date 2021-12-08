@@ -29,4 +29,9 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
 
+OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
+OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
+
+OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
+
 NS_ASSUME_NONNULL_END
