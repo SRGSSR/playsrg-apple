@@ -69,7 +69,7 @@ struct ProgramGuideGridHeaderView: View {
                         DayNavigationBar(model: model)
                             .frame(maxWidth: constant(iOS: 400, tvOS: 750))
                         DaySelector(model: model)
-                            .frame(maxWidth: 450)
+                            .frame(maxWidth: 480)
                     }
                     .frame(maxWidth: .infinity, maxHeight: Self.itemHeight, alignment: .leading)
                 }
