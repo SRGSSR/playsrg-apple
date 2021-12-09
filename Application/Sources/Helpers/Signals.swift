@@ -146,6 +146,7 @@ enum ApplicationSignal {
      */
     static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
         return UserDefaults.standard.publisher(for: keyPath)
+            .dropFirst()
             .map { _ in }
             .eraseToAnyPublisher()
     }
