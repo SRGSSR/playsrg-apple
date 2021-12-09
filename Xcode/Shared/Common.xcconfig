@@ -24,7 +24,7 @@ COMMON__BUNDLE_IDENTIFIER_SUFFIX[config=Debug] = .debug
 COMMON__URL_SCHEME = $(BU__URL_SCHEME)$(COMMON__URL_SCHEME_SUFFIX)
 
 COMMON__URL_SCHEME_SUFFIX[config=Beta] = -beta
-COMMON__URL_SCHEME_SUFFIX[config=Beta_AppCenter] = -beta
+COMMON__URL_SCHEME_SUFFIX[config=Beta_AppCenter] = -beta-appcenter
 COMMON__URL_SCHEME_SUFFIX[config=Nightly] = -nightly
-COMMON__URL_SCHEME_SUFFIX[config=Nightly_AppCenter] = -nightly
+COMMON__URL_SCHEME_SUFFIX[config=Nightly_AppCenter] = -nightly-appcenter
 COMMON__URL_SCHEME_SUFFIX[config=Debug] = -debug
