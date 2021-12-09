@@ -96,19 +96,15 @@ extension AppDelegate: UIApplicationDelegate {
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.updateDataProvider()
-            }
-            .store(in: &settingUpdatesCancellables)
-        
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.updateDataProvider()
-            }
-            .store(in: &settingUpdatesCancellables)
+        Publishers.Merge(
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+        )
+        .receive(on: DispatchQueue.main)
+        .sink { [weak self] _ in
+            self?.updateDataProvider()
+        }
+        .store(in: &settingUpdatesCancellables)
 #endif
         setupDataProvider()
         

@@ -157,26 +157,16 @@ extension SceneDelegate: UIWindowSceneDelegate {
         handleURLContexts(connectionOptions.urlContexts)
         
 #if DEBUG || NIGHTLY || BETA
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages)
-            .debounce(for: 0.7, scheduler: DispatchQueue.main)
-            .sink {
-                window.rootViewController = Self.applicationRootViewController()
-            }
-            .store(in: &settingUpdatesCancellables)
-        
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
-            .debounce(for: 0.7, scheduler: DispatchQueue.main)
-            .sink {
-                window.rootViewController = Self.applicationRootViewController()
-            }
-            .store(in: &settingUpdatesCancellables)
-        
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
-            .debounce(for: 0.7, scheduler: DispatchQueue.main)
-            .sink {
-                window.rootViewController = Self.applicationRootViewController()
-            }
-            .store(in: &settingUpdatesCancellables)
+        Publishers.Merge3(
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+        )
+        .debounce(for: 0.7, scheduler: DispatchQueue.main)
+        .sink {
+            window.rootViewController = Self.applicationRootViewController()
+        }
+        .store(in: &settingUpdatesCancellables)
 #endif
     }
     
