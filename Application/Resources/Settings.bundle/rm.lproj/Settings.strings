@@ -12,7 +12,7 @@
 "Clear web cache" = "Stizzar il cache";
 "Content" = "Cuntegn";
 "Data protection" = "Protecziun da datas";
-"Default (current configuration)" = "Default (current configuration)";
+"Default (current configuration)" = "Standard (configuraziun actuala)";
 "Default (IP-based location)" = "Standard (lieu sin basa da la IP)";
 "Delete content saved for later" = "Allontanar cuntegns arcunads per pli tard";
 "Delete favorites" = "Allontanar favurits";
@@ -21,10 +21,10 @@
 "Display" = "Mussar";
 "Enable / disable FLEX" = "Activar / deactivar FLEX";
 "Features" = "Funcziuns";
-"Force" = "Force";
+"Force" = "Sfurzar";
 "HD over cellular networks" = "HD sur la rait cellulara";
 "Help and copyright" = "Agid ed impressum";
-"Ignore" = "Ignore";
+"Ignore" = "Ignorar";
 "Ignore location" = "Ignorar lieu";
 "Information" = "Infurmaziun";
 "Install previous version" = "Installar la versiun precedenta";
@@ -35,7 +35,7 @@
 "Outside Switzerland" = "Ordaifer la Svizra";
 "Permissions" = "Permissiuns";
 "Playback" = "Playback";
-"Poster images" = "Poster images";
+"Poster images" = "Format da poster";
 "Presenter mode" = "Modus da presentaziun";
 "Production" = "Producziun";
 "Quality" = "Qualitad";
