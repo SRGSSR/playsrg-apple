@@ -212,9 +212,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "aa6fb1e05ea2b747225ec5731d98f99b425bcc4d",
-          "version": null
+          "branch": null,
+          "revision": "26c38b56c51a1a4b84b01fec6ec0f067a6eab5d7",
+          "version": "7.3.1"
         }
       },
       {
@@ -239,9 +239,9 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "25440b94ba62c9d4764fc51809fcdf58244106d5",
-          "version": null
+          "branch": null,
+          "revision": "71aa1b756792f90e7cb8d979c48d48d73d21ca3b",
+          "version": "12.2.0"
         }
       },
       {
@@ -257,18 +257,18 @@
         "package": "SRGIdentity",
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "48427865ae0055b2d393df72cc24c78eae6ba6cf",
-          "version": null
+          "branch": null,
+          "revision": "a64f00d6dc5929b3d9b79d45f5a9479cf406937a",
+          "version": "3.2.1"
         }
       },
       {
         "package": "SRGLetterbox",
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "c966155bcd39811c6ab2837d7d0b8b1293143b93",
-          "version": null
+          "branch": null,
+          "revision": "15b968f93cf93ab2e5e1f24c907e51804c67b638",
+          "version": "7.3.2"
         }
       },
       {
@@ -284,9 +284,9 @@
         "package": "SRGMediaPlayer",
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
-          "branch": "develop",
-          "revision": "3a215ac98e97f36bebac5cdfac5e8c9324b283e4",
-          "version": null
+          "branch": null,
+          "revision": "c41bf436de066e97757b495f0c908d2f8c043cd3",
+          "version": "6.2.0"
         }
       },
       {
