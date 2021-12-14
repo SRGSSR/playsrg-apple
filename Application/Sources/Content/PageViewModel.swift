@@ -95,10 +95,10 @@ final class PageViewModel: Identifiable, ObservableObject {
         .eraseToAnyPublisher()
     }
     
-    private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
+    private static func rowReloadSignal(for section: Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
             section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
-            trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
+            trigger?.signal(activatedBy: TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
         .eraseToAnyPublisher()
     }
@@ -122,7 +122,7 @@ final class PageViewModel: Identifiable, ObservableObject {
             return row
         }
         else {
-            return PageViewModel.Row(section: section, items: Self.placeholderRowItems(for: section))
+            return Row(section: section, items: Self.placeholderRowItems(for: section))
         }
     }
     
