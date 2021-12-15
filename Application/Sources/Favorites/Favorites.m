@@ -10,6 +10,11 @@
 
 #if TARGET_OS_IOS
 #import "PushService+Private.h"
+
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+#import "NSSet+PlaySRG.h"
+#endif
+
 #endif
 
 @import libextobjc;
@@ -116,5 +121,30 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
     
     return YES;
 }
+
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+
+void FavoritesForcePushServiceUpdate(void)
+{
+    NSMutableSet<NSString *> *subscribedURNs = [NSMutableSet set];
+    for (NSString *URN in FavoritesShowURNs()) {
+        if (FavoritesIsSubscribedToShowURN(URN)) {
+            [subscribedURNs addObject:URN];
+        }
+    }
+    NSSet<NSString *> *subscribedPushServiceURNs = PushService.sharedService.subscribedShowURNs;
+    
+    if (! [subscribedURNs isEqualToSet:subscribedPushServiceURNs]) {
+        NSSet<NSString *> *toSubscribeURNs = [subscribedURNs play_setByRemovingObjectsInSet:subscribedPushServiceURNs];
+        [PushService.sharedService subscribeToShowURNs:toSubscribeURNs];
+        
+        NSSet<NSString *> *toUnsubscribeURNs = [subscribedPushServiceURNs play_setByRemovingObjectsInSet:subscribedURNs];
+        [PushService.sharedService unsubscribeFromShowURNs:toUnsubscribeURNs];
+    }
+    
+    NSCAssert([subscribedURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed favorite shows have to be equal to Push Service subscribed shows");
+}
+
+#endif
 
 #endif

@@ -23,6 +23,10 @@
 #import "PushService.h"
 #import "UpdateInfo.h"
 
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+#import "Favorites.h"
+#endif
+
 @import AirshipCore;
 @import AppCenter;
 @import AppCenterCrashes;
@@ -145,6 +149,15 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults synchronize];
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels", nil);
+    
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    if (PushService.sharedService) {
+        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+            FavoritesForcePushServiceUpdate();
+            completionHandler(YES);
+        }, @"MigrateSubscribedShows", nil);
+    }
+#endif
     
     return YES;
 }
