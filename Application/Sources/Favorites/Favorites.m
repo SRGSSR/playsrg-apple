@@ -93,6 +93,11 @@ NSOrderedSet<NSString *> *FavoritesShowURNs(void)
 
 #pragma mark Notification subscriptions
 
+BOOL FavoritesIsSubscribedToShow(SRGShow *show)
+{
+    return FavoritesIsSubscribedToShowURN(show.URN);
+}
+
 #if TARGET_OS_IOS
 
 BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
@@ -113,8 +118,3 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
 }
 
 #endif
-
-BOOL FavoritesIsSubscribedToShow(SRGShow *show)
-{
-    return FavoritesIsSubscribedToShowURN(show.URN);
-}
