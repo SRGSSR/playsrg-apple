@@ -81,20 +81,29 @@ struct ProgramCell: View {
             return availableSize.width < 100
         }
         
+        private var isDisplayable: Bool {
+            return availableSize.width > 2 * horizontalPadding + 5
+        }
+        
         var body: some View {
             ZStack {
                 Stack(direction: direction, alignment: alignment, spacing: spacing) {
-                    if let timeRange = model.timeRange {
-                        Text(timeRange)
-                            .srgFont(.subtitle2)
-                            .lineLimit(timeRangeLineLimit)
-                            .foregroundColor(.srgGray96)
-                            .frame(maxWidth: timeRangeWidth, alignment: .leading)
+                    if isDisplayable {
+                        if let timeRange = model.timeRange {
+                            Text(timeRange)
+                                .srgFont(.subtitle2)
+                                .lineLimit(timeRangeLineLimit)
+                                .foregroundColor(.srgGray96)
+                                .frame(maxWidth: timeRangeWidth, alignment: .leading)
+                        }
+                        TitleView(model: model, compact: isCompact)
+                        Spacer()
                     }
-                    TitleView(model: model, compact: isCompact)
-                    Spacer()
+                    else {
+                        Color(.clear)
+                    }
                 }
-                .padding(.horizontal, horizontalPadding)
+                .padding(.horizontal, isDisplayable ? horizontalPadding : 0)
                 .padding(.top, topPadding)
                 .padding(.bottom, bottomPadding)
                 .frame(maxHeight: .infinity)
@@ -164,9 +173,39 @@ struct ProgramCell_Previews: PreviewProvider {
     static var previews: some View {
         ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .horizontal)
             .previewLayout(.fixed(width: size.width, height: size.height))
+            .background(Color.white)
+            .previewDisplayName("horizontal")
         ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
             .previewLayout(.fixed(width: 500, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 500")
         ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
             .previewLayout(.fixed(width: 80, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 80")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 40, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 40")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 30, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 30")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 24, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 24")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 20, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 20")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 10, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 10")
+        ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .vertical)
+            .previewLayout(.fixed(width: 1, height: height))
+            .background(Color.white)
+            .previewDisplayName("vertical, w 1")
     }
 }
