@@ -37,6 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
+ *  the date in a full format.
+ */
+@property (class, nonatomic, readonly) NSDateFormatter *play_relativeFullDateFormatter;
+
+/**
+ *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
  *  the date in a short format.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateFormatter;

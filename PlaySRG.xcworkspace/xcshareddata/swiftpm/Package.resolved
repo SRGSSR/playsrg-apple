@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "2064534407804195d62f48531155ef41ddf1ce22",
-          "version": "8.9.0"
+          "revision": "839cc6b0cd80b0b8bf81fe9bd82b743b25dc6446",
+          "version": "8.9.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "1f13198b27eb2ac844953dad267bc25639128c41",
-          "version": "8.9.0"
+          "revision": "9b2f6aca5b4685c45f9f5481f19bee8e7982c538",
+          "version": "8.9.1"
         }
       },
       {
@@ -159,8 +159,8 @@
         "repositoryURL": "https://github.com/Mantle/Mantle.git",
         "state": {
           "branch": null,
-          "revision": "bbe0cbe68582a18a6df7516778196ba3cf420ad3",
-          "version": "2.1.7"
+          "revision": "16f72bfe72a2ab29654ba894da1c32b17524e1a6",
+          "version": "2.2.0"
         }
       },
       {
@@ -213,8 +213,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": null,
-          "revision": "d20dc0fb85e572c44e902c6c29dc810c611ca6ad",
-          "version": "7.3.0"
+          "revision": "26c38b56c51a1a4b84b01fec6ec0f067a6eab5d7",
+          "version": "7.3.1"
         }
       },
       {
@@ -240,8 +240,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": null,
-          "revision": "8b3f5e742a0ab28097e84520deec49320c1e9d9a",
-          "version": "12.1.0"
+          "revision": "71aa1b756792f90e7cb8d979c48d48d73d21ca3b",
+          "version": "12.2.0"
         }
       },
       {
@@ -258,8 +258,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
         "state": {
           "branch": null,
-          "revision": "c4eb6fbb3e84f8cdc340a55b50475eeddd1db011",
-          "version": "3.2.0"
+          "revision": "a64f00d6dc5929b3d9b79d45f5a9479cf406937a",
+          "version": "3.2.1"
         }
       },
       {
@@ -267,8 +267,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": null,
-          "revision": "fc4086616476eb6b769902bf614a1714d1b92fee",
-          "version": "7.3.1"
+          "revision": "15b968f93cf93ab2e5e1f24c907e51804c67b638",
+          "version": "7.3.2"
         }
       },
       {
@@ -285,8 +285,8 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": null,
-          "revision": "fbd7ad3121c7112cf1ce55bb96638ef09a6cf5ec",
-          "version": "6.1.5"
+          "revision": "c741067693604f6835f722c31535a4e243054f29",
+          "version": "6.2.1"
         }
       },
       {
@@ -312,8 +312,8 @@
         "repositoryURL": "https://github.com/apple/swift-collections.git",
         "state": {
           "branch": null,
-          "revision": "2d33a0ea89c961dcb2b3da2157963d9c0370347e",
-          "version": "1.0.1"
+          "revision": "48254824bb4248676bf7ce56014ff57b142b77eb",
+          "version": "1.0.2"
         }
       },
       {

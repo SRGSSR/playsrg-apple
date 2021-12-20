@@ -296,6 +296,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+			<key>Title</key>
+			<string>Poster images</string>
+			<key>File</key>
+			<string>Root.inApp.posterImages</string>
+			<key>Key</key>
+			<string>Button_PosterImagesSettings</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
 			<string>Subscribe to all shows</string>

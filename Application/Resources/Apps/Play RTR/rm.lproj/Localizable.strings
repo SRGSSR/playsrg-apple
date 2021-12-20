@@ -599,6 +599,9 @@
    Title of the button to go back to the current date */
 "Today" = "Oz";
 
+/* Tonight button in program guide */
+"Tonight" = "Questa saira";
+
 /* Categories search setting option
    Title label used to present the topic list
    Topics search setting option list view title */
@@ -659,8 +662,7 @@
 /* Title displayed at the top of the What's new view */
 "What's new" = "Il nov";
 
-/* Period setting option
-   Yesterday button in program guide */
+/* Period setting option */
 "Yesterday" = "Ier";
 
 /* Resume playback alert explanation */

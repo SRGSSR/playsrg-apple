@@ -50,23 +50,23 @@ version: 2.8.2
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: google-cast-sdk-no-bluetooth, nameSpecified: 
 body: https://developers.g…
-version: 4.6.1
+version: 4.7.0
 
 name: InAppSettingsKit, nameSpecified: 
 body: Copyright (c) 2009-2…
@@ -165,23 +165,23 @@ version: 2.0.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: Protobuf, nameSpecified: 
 body: Copyright 2008 Googl…
-version: 3.17.0
+version: 3.19.1
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20200225.4
 
@@ -195,11 +195,11 @@ name: Comscore-Swift-Package-Manager, nameSpecified: ComScore, owner: comScore, 
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: 
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.9.0
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.9.1
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 8.9.0
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 8.9.1
 
 name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.1.2
 
@@ -217,7 +217,7 @@ name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3
 
 name: MAKVONotificationCenter, nameSpecified: MAKVONotificationCenter, owner: SRGSSR, version: 1.0.0-srg5
 
-name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.1.7
+name: Mantle, nameSpecified: Mantle, owner: Mantle, version: 2.2.0
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0
 
@@ -229,29 +229,29 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.0.0
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.3.0
+name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 7.3.1
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.0.0
 
 name: srgcontentprotection-apple, nameSpecified: SRGContentProtection, owner: SRGSSR, version: 3.0.4
 
-name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 12.1.0
+name: srgdataprovider-apple, nameSpecified: SRGDataProvider, owner: SRGSSR, version: 12.2.0
 
 name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, version: 3.0.2
 
-name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.2.0
+name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.2.1
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.3.1
+name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 7.3.2
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.0.2
 
-name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.1.5
+name: srgmediaplayer-apple, nameSpecified: SRGMediaPlayer, owner: SRGSSR, version: 6.2.1
 
 name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.0.3
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.2.0
 
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.1
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.2
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.18.0
 

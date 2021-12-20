@@ -25,5 +25,7 @@
   "1.3.2-24": "- Add topics swimlane title.",
   "1.3.3-25": "- Restore favorite and subscription buttons in empty show pages.",
   "1.4.0-26": "- Add Top Shelf with popular shows.\n- Improve page reolad at the right time.",
-  "1.4.0-27": "- Fix content updates incorrectly performed when resuming the application."
+  "1.4.0-27": "- Fix content updates incorrectly performed when resuming the application.",
+  "1.5.0-28": "- A TV guide has been added to the tab bar navigation.\n- Remove show title below poster images.",
+  "1.5.0-29": "- TV guide layout fixes.\n- Advanced settings for test environments."
 }

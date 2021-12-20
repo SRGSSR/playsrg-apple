@@ -5,17 +5,24 @@
 //
 
 import SRGAppearanceSwift
+import SRGDataProviderCombine
 import SwiftUI
 import UIKit
 
-class SceneDelegate: UIResponder {
+final class SceneDelegate: UIResponder {
     var window: UIWindow?
+    
+    private var cancellables = Set<AnyCancellable>()
+#if DEBUG || NIGHTLY || BETA
+    private var settingUpdatesCancellables = Set<AnyCancellable>()
+#endif
     
     private static func configureTabBarController(_ tabBarController: UITabBarController) {
         let appearance = UITabBarAppearance()
         appearance.configureWithDefaultBackground()
         
-        appearance.backgroundColor = .srgGray23
+        appearance.backgroundColor = UIColor(white: 1, alpha: 0.1)
+        appearance.backgroundEffect = UIBlurEffect(style: .dark)
         appearance.selectionIndicatorTintColor = .srgGray96
         
         let font: UIFont = SRGFont.font(family: .text, weight: .medium, size: 28)
@@ -44,7 +51,7 @@ class SceneDelegate: UIResponder {
         tabBarController.view.backgroundColor = .srgGray16
     }
     
-    private func applicationRootViewController() -> UIViewController {
+    static private func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
         let videosViewController = PageViewController(id: .video)
@@ -70,20 +77,27 @@ class SceneDelegate: UIResponder {
             viewControllers.append(liveViewController)
         }
         
+        if !configuration.isTvGuideUnavailable {
+            let programGuideViewController = ProgramGuideViewController()
+            programGuideViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("TV guide", comment: "TV program guide view title"), image: nil, tag: 3)
+            programGuideViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.tvGuideTabBarItem.rawValue
+            viewControllers.append(programGuideViewController)
+        }
+        
         if !configuration.areShowsUnavailable {
             let showsViewController = SectionViewController.showsViewController(forChannelUid: nil)
-            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 3)
+            showsViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Shows", comment: "Shows tab title"), image: nil, tag: 4)
             showsViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.showsTabBarItem.rawValue
             viewControllers.append(showsViewController)
         }
         
         let searchViewController = SearchViewController()
-        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 4)
+        searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 5)
         searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
         
         let profileViewController = UIHostingController(rootView: ProfileView())
-        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 7)
+        profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
         viewControllers.append(profileViewController)
@@ -134,11 +148,26 @@ class SceneDelegate: UIResponder {
 extension SceneDelegate: UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        window = UIWindow(windowScene: windowScene)
-        window!.makeKeyAndVisible()
-        window!.rootViewController = applicationRootViewController()
+        
+        let window = UIWindow(windowScene: windowScene)
+        window.makeKeyAndVisible()
+        window.rootViewController = Self.applicationRootViewController()
+        self.window = window
         
         handleURLContexts(connectionOptions.urlContexts)
+        
+#if DEBUG || NIGHTLY || BETA
+        Publishers.Merge3(
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
+        )
+        .debounce(for: 0.7, scheduler: DispatchQueue.main)
+        .sink {
+            window.rootViewController = Self.applicationRootViewController()
+        }
+        .store(in: &settingUpdatesCancellables)
+#endif
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {

@@ -147,5 +147,7 @@
   "3.3.0-368": "- Improved iOS 15 compatibility.\n- Add topics swimlane title and topics detail page.\n- Restore shared button on show page.",
   "3.4.0-369": "### CarPlay\n\nAdd CarPlay support with:\n- Radio livestreams.\n- Latest episodes from your favorite shows.\n- Trending content per channels.\n\nImprovements and fixes:\n- Restore favorite and subscription buttons in empty show pages.\n- Fix player rotation issue in some scenarios.\n- Fix context menu glitches.\n\nCarPlay suport is only available in TestFlight betas, not in AppCenter ones.",
   "3.4.0-370": "- Update CarPlay tab bar icons.\n- Improve page reolad at the right time (iOS and CarPlay views).",
-  "3.4.0-371": "- Fix content updates incorrectly performed when resuming the application."
+  "3.4.0-371": "- Fix content updates incorrectly performed when resuming the application.",
+  "3.5.0-372": "- A grid TV guide layout has been added to the Videos section on iPad for large screen width.\n- Tonight button on the TV guide.\n- Remove show title below poster images.",
+  "3.5.0-373": "- TV guide layout fixes.\n- Fix background video playback incorrectly paused."
 }

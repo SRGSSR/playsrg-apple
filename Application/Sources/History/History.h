@@ -37,7 +37,7 @@ OBJC_EXPORT float HistoryPlaybackProgress(NSTimeInterval playbackPosition, doubl
  *              any thread.
  */
 OBJC_EXPORT float HistoryPlaybackProgressForMedia(SRGMedia * _Nullable media);
-OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia * _Nullable media, void (^update)(float progress, BOOL completed));
+OBJC_EXPORT NSString * _Nullable HistoryPlaybackProgressForMediaAsync(SRGMedia * _Nullable media, void (^update)(float progress, BOOL completed));
 
 /**
  *  Return a recommended resume playback position for a media.
@@ -46,7 +46,7 @@ OBJC_EXPORT NSString *HistoryPlaybackProgressForMediaAsync(SRGMedia * _Nullable 
  *              any thread.
  */
 OBJC_EXPORT SRGPosition * _Nullable HistoryResumePlaybackPositionForMedia(SRGMedia * _Nullable media);
-OBJC_EXPORT NSString *HistoryResumePlaybackPositionForMediaAsync(SRGMedia * _Nullable media, void (^completion)(SRGPosition * _Nullable position));
+OBJC_EXPORT NSString * _Nullable HistoryResumePlaybackPositionForMediaAsync(SRGMedia * _Nullable media, void (^completion)(SRGPosition * _Nullable position));
 
 /**
  *  Return `YES` if playback can be resumed (or started, a special case of resuming) for some media and position.
@@ -64,7 +64,7 @@ OBJC_EXPORT BOOL HistoryCanResumePlaybackForMediaAndPosition(NSTimeInterval play
  *              any thread.
  */
 OBJC_EXPORT BOOL HistoryCanResumePlaybackForMedia(SRGMedia * _Nullable media);
-OBJC_EXPORT NSString *HistoryCanResumePlaybackForMediaAsync(SRGMedia * _Nullable media, void (^update)(BOOL canResume, BOOL completed));
+OBJC_EXPORT NSString * _Nullable HistoryCanResumePlaybackForMediaAsync(SRGMedia * _Nullable media, void (^update)(BOOL canResume, BOOL completed));
 
 /**
  *  Remove a list of medias from the history.

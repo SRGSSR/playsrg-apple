@@ -38,6 +38,14 @@ final class ProfileViewModel: ObservableObject {
         }
     }
     
+    private(set) var serviceURLTitle = PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state") {
+        willSet {
+            if serviceURLTitle != newValue {
+                objectWillChange.send()
+            }
+        }
+    }
+    
     @Published private(set) var synchronizationDate: Date?
     
     private var cancellables = Set<AnyCancellable>()
@@ -100,6 +108,14 @@ final class ProfileViewModel: ObservableObject {
             }
             .store(in: &cancellables)
         updateFavoritesInformation()
+        
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.updateServiceURLTitle()
+            }
+            .store(in: &cancellables)
+        updateServiceURLTitle()
     }
     
     var supportsLogin: Bool {
@@ -140,6 +156,15 @@ final class ProfileViewModel: ObservableObject {
         SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
     }
     
+    func nextServiceURL() {
+        let serviceURL = ApplicationSettingServiceURL(), servers = servers
+        if let index = servers.firstIndex(where: { $0.url == serviceURL }) {
+            let server = servers[safeIndex: servers.index(after: index)] ?? servers.first!
+            ApplicationSettingSetServiceURL(server.url)
+            updateServiceURLTitle()
+        }
+    }
+    
     private func updateIdentityInformation() {
         isLoggedIn = SRGIdentityService.current?.isLoggedIn ?? false
         account = SRGIdentityService.current?.account
@@ -169,5 +194,32 @@ final class ProfileViewModel: ObservableObject {
     
     private func updateSynchronizationDate() {
         synchronizationDate = SRGUserData.current?.user.synchronizationDate
+    }
+    
+    private struct Server: Hashable {
+        let url: URL
+        let title: String
+    }
+    
+    private func updateServiceURLTitle() {
+        let serviceURL = ApplicationSettingServiceURL()
+        let server = servers.filter({ $0.url == serviceURL }).first ?? servers.first!
+        serviceURLTitle = server.title
+    }
+    
+    private var servers: [Server] {
+        guard let path = Bundle.main.path(forResource: "Settings.server", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: path),
+              let values = plist.value(forKey: "Values") as? [String],
+              let titles = plist.value(forKey: "Titles") as? [String]
+        else { return [Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))] }
+        
+        var servers = [Server]()
+        for (index, value) in values.enumerated() {
+            if let serverURL = URL(string: value) {
+                servers.append(Server(url: serverURL, title: PlaySRGSettingsLocalizedString(titles[index], comment: nil)))
+            }
+        }
+        return servers
     }
 }

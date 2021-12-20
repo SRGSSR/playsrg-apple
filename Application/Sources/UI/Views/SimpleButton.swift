@@ -11,11 +11,11 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct SimpleButton: View {
-    let icon: String
-    let label: String?
-    let accessibilityLabel: String
-    let accessibilityHint: String?
-    let action: () -> Void
+    private let icon: String
+    private let label: String?
+    private let accessibilityLabel: String
+    private let accessibilityHint: String?
+    private let action: () -> Void
     
     @State private var isFocused = false
     
@@ -42,17 +42,15 @@ struct SimpleButton: View {
                 if let label = label {
                     Text(label)
                         .srgFont(.button)
+                        .minimumScaleFactor(0.8)
                         .lineLimit(1)
                 }
             }
             .onParentFocusChange { isFocused = $0 }
-            .padding(.horizontal, constant(iOS: 10, tvOS: 16))
-            .padding(.vertical, constant(iOS: 8, tvOS: 12))
-            .foregroundColor(constant(iOS: .srgGrayC7, tvOS: isFocused ? .srgGray23 : .srgGrayC7))
-            .background(constant(iOS: Color.srgGray23, tvOS: Color.clear))
-            .cornerRadius(constant(iOS: LayoutStandardViewCornerRadius, tvOS: 0))
-            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+            .foregroundColor(isFocused ? .srgGray16 : .srgGrayC7)
         }
+        .buttonStyle(FlatButtonStyle(focused: isFocused))
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
     }
 }
 

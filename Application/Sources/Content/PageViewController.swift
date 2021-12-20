@@ -25,23 +25,23 @@ final class PageViewController: UIViewController {
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
-    #if os(iOS)
+#if os(iOS)
     private weak var refreshControl: UIRefreshControl!
     private weak var googleCastButton: GoogleCastFloatingButton?
     
     private var isNavigationBarHidden: Bool {
         return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
-    #endif
+#endif
     
     private var refreshTriggered = false
     
     private var globalHeaderTitle: String? {
-        #if os(tvOS)
+#if os(tvOS)
         return tabBarController == nil ? model.title : nil
-        #else
+#else
         return nil
-        #endif
+#endif
     }
     
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
@@ -54,6 +54,20 @@ final class PageViewController: UIViewController {
         }
         return snapshot
     }
+    
+#if os(iOS)
+    private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
+        if let radioChannel = radioChannel {
+            return CalendarViewController(radioChannel: radioChannel, date: date)
+        }
+        else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
+            return ProgramGuideViewController(date: date)
+        }
+        else {
+            return CalendarViewController(radioChannel: nil, date: date)
+        }
+    }
+#endif
     
     init(id: PageViewModel.Id) {
         model = PageViewModel(id: id)
@@ -97,14 +111,14 @@ final class PageViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
-        #if os(tvOS)
+#if os(tvOS)
         self.tabBarObservedScrollView = collectionView
-        #else
+#else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        #endif
+#endif
         
         self.view = view
     }
@@ -147,7 +161,7 @@ final class PageViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        #if os(iOS)
+#if os(iOS)
         model.$serviceMessage
             .sink { [weak self] serviceMessage in
                 guard let serviceMessage = serviceMessage else { return }
@@ -157,26 +171,27 @@ final class PageViewController: UIViewController {
         
         NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .sink { [weak self] _ in
-                self?.updateNavigationBar(animated: true)
+                guard let self = self, self.play_isViewCurrent else { return }
+                self.updateNavigationBar(animated: true)
             }
             .store(in: &cancellables)
-        #endif
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
         deselectItems(in: collectionView, animated: animated)
-        #if os(iOS)
+#if os(iOS)
         updateNavigationBar(animated: animated)
-        #endif
+#endif
     }
     
-    #if os(iOS)
+#if os(iOS)
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return Self.play_supportedInterfaceOrientations
     }
-    #endif
+#endif
     
     private func reloadData(for state: PageViewModel.State) {
         switch state {
@@ -191,18 +206,18 @@ final class PageViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             // Can be triggered on a background thread. Layout is updated on the main thread.
             self.dataSource.apply(Self.snapshot(from: state)) {
-                #if os(iOS)
+#if os(iOS)
                 // Avoid stopping scrolling
                 // See http://stackoverflow.com/a/31681037/760435
                 if self.refreshControl.isRefreshing {
                     self.refreshControl.endRefreshing()
                 }
-                #endif
+#endif
             }
         }
     }
     
-    #if os(iOS)
+#if os(iOS)
     private func updateNavigationBar(animated: Bool) {
         if model.id.supportsCastButton {
             if !isNavigationBarHidden, let navigationBar = navigationController?.navigationBar {
@@ -236,7 +251,7 @@ final class PageViewController: UIViewController {
         }
         refreshTriggered = true
     }
-    #endif
+#endif
 }
 
 // MARK: Types
@@ -246,11 +261,11 @@ private extension PageViewController {
         case global
     }
     
-    #if os(iOS)
+#if os(iOS)
     private typealias CollectionView = DampedCollectionView
-    #else
+#else
     private typealias CollectionView = UICollectionView
-    #endif
+#endif
 }
 
 // MARK: Objective-C API
@@ -281,17 +296,17 @@ extension PageViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        #if os(iOS)
+#if os(iOS)
         let top = isNavigationBarHidden ? 0 : Self.layoutVerticalMargin
-        #else
+#else
         let top = Self.layoutVerticalMargin
-        #endif
+#endif
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
 
 extension PageViewController: UICollectionViewDelegate {
-    #if os(iOS)
+#if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
@@ -354,13 +369,13 @@ extension PageViewController: UICollectionViewDelegate {
         parameters.backgroundColor = view.backgroundColor
         return UITargetedPreview(view: interactionView, parameters: parameters)
     }
-    #endif
+#endif
     
-    #if os(tvOS)
+#if os(tvOS)
     func collectionView(_ collectionView: UICollectionView, canFocusItemAt indexPath: IndexPath) -> Bool {
         return false
     }
-    #endif
+#endif
 }
 
 extension PageViewController: UIScrollViewDelegate {
@@ -392,20 +407,14 @@ extension PageViewController: PlayApplicationNavigation {
         case .showByDate:
             let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
             if let navigationController = navigationController {
-                if let radioChannel = applicationSectionInfo.radioChannel {
-                    let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: date)
-                    navigationController.pushViewController(calendarViewController, animated: false)
-                }
-                else {
-                    let programGuideViewController = ProgramGuideViewController(date: date)
-                    navigationController.pushViewController(programGuideViewController, animated: false)
-                }
+                let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
+                navigationController.pushViewController(showByDateViewController, animated: false)
             }
             return true
         case .showAZ:
             if let navigationController = navigationController {
                 let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
-                let showsViewController = SectionViewController.showsViewController(forChannelUid: applicationSectionInfo.radioChannel?.uid, initialSectionId: initialSectionId)
+                let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
             }
             return true
@@ -453,20 +462,8 @@ extension PageViewController: ShowAccessCellActions {
     
     func openShowByDate() {
         if let navigationController = navigationController {
-            switch model.id {
-            case .video:
-                if !ApplicationConfiguration.shared.isTvGuideUnavailable {
-                    let programGuideViewController = ProgramGuideViewController()
-                    navigationController.pushViewController(programGuideViewController, animated: true)
-                }
-                else {
-                    let calendarViewController = CalendarViewController(radioChannel: nil, date: nil)
-                    navigationController.pushViewController(calendarViewController, animated: true)
-                }
-            default:
-                let calendarViewController = CalendarViewController(radioChannel: radioChannel, date: nil)
-                navigationController.pushViewController(calendarViewController, animated: true)
-            }
+            let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
+            navigationController.pushViewController(showByDateViewController, animated: true)
         }
     }
 }
@@ -586,12 +583,12 @@ private extension PageViewController {
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
                         return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
                     }
-                #if os(iOS)
+#if os(iOS)
                 case .showAccess:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                         return ShowAccessCellSize.fullWidth()
                     }
-                #endif
+#endif
                 }
             }
             
@@ -668,7 +665,7 @@ private extension PageViewController {
                     TopicCell(topic: nil)
                 case let .topic(topic):
                     TopicCell(topic: topic)
-                #if os(iOS)
+#if os(iOS)
                 case .showAccess:
                     switch id {
                     case .video:
@@ -677,7 +674,7 @@ private extension PageViewController {
                     default:
                         ShowAccessCell(style: .calendar)
                     }
-                #endif
+#endif
                 case .transparent:
                     Color.clear
                 }
@@ -737,10 +734,10 @@ private extension PageViewController {
         
         var body: some View {
             if let title = Self.title(for: section) {
-                #if os(tvOS)
+#if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
                     .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
-                #else
+#else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
                 } label: {
@@ -749,7 +746,7 @@ private extension PageViewController {
                 .disabled(!hasDetailDisclosure)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
                 .responderChain(from: firstResponder)
-                #endif
+#endif
             }
         }
         

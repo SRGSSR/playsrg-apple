@@ -188,6 +188,28 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 #endif
 }
 
+- (BOOL)arePosterImagesEnabled
+{
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    switch (ApplicationSettingPosterImages()) {
+        case SettingPosterImagesForced: {
+            return YES;
+            break;
+        }
+        case SettingPosterImagesIgnored: {
+            return NO;
+            break;
+        }
+        default: {
+            return _posterImagesEnabled;
+            break;
+        }
+    }
+#else
+    return _posterImagesEnabled;
+#endif
+}
+
 #pragma mark Remote configuration
 
 // Return YES iff the activated remote configuration is valid, and stores the corresponding values. If the configuration

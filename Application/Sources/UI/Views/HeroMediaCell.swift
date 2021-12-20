@@ -15,27 +15,27 @@ struct HeroMediaCell: View {
     @Environment(\.isSelected) private var isSelected
     
     var body: some View {
-        #if os(tvOS)
+#if os(tvOS)
         ExpandingCardButton(action: action) {
             MainView(media: media, label: label)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
-        #else
+#else
         MainView(media: media, label: label)
             .background(Color.placeholder)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .selectionAppearance(when: isSelected)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-        #endif
+#endif
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func action() {
         if let media = media {
             navigateToMedia(media)
         }
     }
-    #endif
+#endif
     
     private struct MainView: View {
         let media: SRGMedia?
@@ -113,12 +113,12 @@ private extension HeroMediaCell {
 
 final class HeroMediaCellSize: NSObject {
     @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        #if os(tvOS)
+#if os(tvOS)
         let height: CGFloat = 700
-        #else
+#else
         let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 1 / 2
         let height = layoutWidth * aspectRatio
-        #endif
+#endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
 }
@@ -135,14 +135,14 @@ private extension View {
 
 struct HeroMediaCell_Previews: PreviewProvider {
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(for: 1920, horizontalSizeClass: .regular)
-        #else
+#else
         HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(for: 375, horizontalSizeClass: .compact)
         HeroMediaCell(media: Mock.media(), label: "New")
             .previewLayout(for: 800, horizontalSizeClass: .regular)
-        #endif
+#endif
     }
 }

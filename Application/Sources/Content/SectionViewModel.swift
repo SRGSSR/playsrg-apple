@@ -305,7 +305,7 @@ private extension SectionViewModel {
         }
         
         var pinToVisibleBounds: Bool {
-            #if os(iOS)
+#if os(iOS)
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
@@ -318,9 +318,9 @@ private extension SectionViewModel {
                 // Remark: `.shows` results cannot be arranged alphabetically because of pagination; no headers.
                 return false
             }
-            #else
+#else
             return false
-            #endif
+#endif
         }
         
         var userActivity: NSUserActivity? {
@@ -367,16 +367,16 @@ private extension SectionViewModel {
         }
         
         var pinToVisibleBounds: Bool {
-            #if os(iOS)
+#if os(iOS)
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return true
             default:
                 return false
             }
-            #else
+#else
             return false
-            #endif
+#endif
         }
         
         var userActivity: NSUserActivity? {
@@ -397,12 +397,12 @@ private extension SectionViewModel {
                     "applicationVersion": applicationVersion
                 ])
                 
-                #if os(iOS)
+#if os(iOS)
                 userActivity.isEligibleForPrediction = true
                 userActivity.persistentIdentifier = show.urn
                 let suggestedInvocationPhraseFormat = (show.transmission == .radio) ? NSLocalizedString("Listen to %@", comment: "Suggested invocation phrase to listen to a show") : NSLocalizedString("Watch %@", comment: "Suggested invocation phrase to watch a show")
                 userActivity.suggestedInvocationPhrase = String(format: suggestedInvocationPhraseFormat, show.title)
-                #endif
+#endif
                 
                 return userActivity
             default:

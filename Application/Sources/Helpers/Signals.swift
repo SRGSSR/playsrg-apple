@@ -130,14 +130,14 @@ enum ApplicationSignal {
     
     /// Can be used on all platforms to minimize preprocessor need, but never emits
     static func pushServiceStatusUpdate() -> AnyPublisher<Void, Never> {
-        #if os(iOS)
+#if os(iOS)
         return NotificationCenter.default.publisher(for: .PushServiceStatusDidChange)
             .map { _ in }
             .eraseToAnyPublisher()
-        #else
+#else
         return Empty(completeImmediately: false)
             .eraseToAnyPublisher()
-        #endif
+#endif
     }
     
     /**
@@ -146,6 +146,7 @@ enum ApplicationSignal {
      */
     static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
         return UserDefaults.standard.publisher(for: keyPath)
+            .dropFirst()
             .map { _ in }
             .eraseToAnyPublisher()
     }

@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>Firebase (8.9.0)</string>
+			<string>Firebase (8.9.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -94,7 +94,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/google-cast-sdk-no-bluetooth</string>
 			<key>Title</key>
-			<string>google-cast-sdk-no-bluetooth (4.6.1)</string>
+			<string>google-cast-sdk-no-bluetooth (4.7.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>GoogleAppMeasurement (8.9.0)</string>
+			<string>GoogleAppMeasurement (8.9.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -182,7 +182,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Mantle</string>
 			<key>Title</key>
-			<string>Mantle (2.1.7)</string>
+			<string>Mantle (2.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -254,7 +254,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Protobuf</string>
 			<key>Title</key>
-			<string>Protobuf (3.17.0)</string>
+			<string>Protobuf (3.19.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -262,7 +262,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>SRGAnalytics (7.3.0)</string>
+			<string>SRGAnalytics (7.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -286,7 +286,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>SRGDataProvider (12.1.0)</string>
+			<string>SRGDataProvider (12.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -302,7 +302,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>SRGIdentity (3.2.0)</string>
+			<string>SRGIdentity (3.2.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>SRGLetterbox (7.3.1)</string>
+			<string>SRGLetterbox (7.3.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -326,7 +326,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>SRGMediaPlayer (6.1.5)</string>
+			<string>SRGMediaPlayer (6.2.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.0.1)</string>
+			<string>swift-collections (1.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

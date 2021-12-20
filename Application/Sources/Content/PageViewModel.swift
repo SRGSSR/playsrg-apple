@@ -95,10 +95,10 @@ final class PageViewModel: Identifiable, ObservableObject {
         .eraseToAnyPublisher()
     }
     
-    private static func rowReloadSignal(for section: PageViewModel.Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
+    private static func rowReloadSignal(for section: Section, trigger: Trigger?) -> AnyPublisher<Void, Never> {
         return Publishers.Merge(
             section.properties.reloadSignal() ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher(),
-            trigger?.signal(activatedBy: PageViewModel.TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
+            trigger?.signal(activatedBy: TriggerId.reloadSection(section)) ?? PassthroughSubject<Void, Never>().eraseToAnyPublisher()
         )
         .eraseToAnyPublisher()
     }
@@ -122,7 +122,7 @@ final class PageViewModel: Identifiable, ObservableObject {
             return row
         }
         else {
-            return PageViewModel.Row(section: section, items: Self.placeholderRowItems(for: section))
+            return Row(section: section, items: Self.placeholderRowItems(for: section))
         }
     }
     
@@ -140,7 +140,7 @@ extension PageViewModel {
         case live
         case topic(topic: SRGTopic)
         
-        #if os(iOS)
+#if os(iOS)
         var isNavigationBarHidden: Bool {
             switch self {
             case .video:
@@ -149,7 +149,7 @@ extension PageViewModel {
                 return false
             }
         }
-        #endif
+#endif
         
         var supportsCastButton: Bool {
             switch self {
@@ -316,13 +316,13 @@ private extension SRGDataProvider {
     
     static func rowItems(_ items: [Content.Item], in section: PageViewModel.Section) -> [PageViewModel.Item] {
         var rowItems = items.map { PageViewModel.Item(.item($0), in: section) }
-        #if os(tvOS)
+#if os(tvOS)
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(PageViewModel.Item(.more, in: section))
         }
-        #endif
+#endif
         return rowItems
     }
 }
@@ -335,7 +335,7 @@ protocol PageViewModelProperties {
 }
 
 extension PageViewModelProperties {
-    #if os(tvOS)
+#if os(tvOS)
     var hasMoreRowItem: Bool {
         switch layout {
         case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
@@ -344,7 +344,7 @@ extension PageViewModelProperties {
             return false
         }
     }
-    #endif
+#endif
     
     var hasGridLayout: Bool {
         switch layout {
@@ -375,12 +375,12 @@ private extension PageViewModel {
             case .topicSelector:
                 return .topicSelector
             case .showAccess:
-                #if os(iOS)
+#if os(iOS)
                 return .showAccess
-                #else
+#else
                 // Not supported
                 return .mediaSwimlane
-                #endif
+#endif
             case .favoriteShows:
                 return .showSwimlane
             case .swimlane:
@@ -413,11 +413,11 @@ private extension PageViewModel {
             case .radioLatestEpisodes, .radioMostPopular, .radioLatest, .radioLatestVideos:
                 return index == 0 ? .headline : .mediaSwimlane
             case .tvLive, .radioLive, .radioLiveSatellite:
-                #if os(iOS)
+#if os(iOS)
                 return .liveMediaGrid
-                #else
+#else
                 return .liveMediaSwimlane
-                #endif
+#endif
             case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
             case .favoriteShows, .radioFavoriteShows, .show:
@@ -425,12 +425,12 @@ private extension PageViewModel {
             case .radioAllShows, .tvAllShows:
                 return .showGrid
             case .radioShowAccess:
-                #if os(iOS)
+#if os(iOS)
                 return .showAccess
-                #else
+#else
                 // Not supported
                 return .mediaSwimlane
-                #endif
+#endif
             }
         }
         

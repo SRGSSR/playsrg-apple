@@ -103,6 +103,9 @@
 /* Mini player label */
 "Now playing: %@" = "Uss va: %@";
 
+/* Text providing a channel information. Placeholder is the channel on which it's broadcasted. */
+"on %@" = "sin %@";
+
 /* More button hint
    Program cell hint */
 "Opens details." = "Avrir detagls.";

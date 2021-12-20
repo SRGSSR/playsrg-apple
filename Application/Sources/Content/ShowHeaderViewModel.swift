@@ -58,7 +58,7 @@ final class ShowHeaderViewModel: ObservableObject {
         return FavoritesIsSubscribedToShow(show)
     }
     
-    #if os(iOS)
+#if os(iOS)
     var subscriptionIcon: String {
         switch subscriptionStatus {
         case .unavailable:
@@ -78,19 +78,19 @@ final class ShowHeaderViewModel: ObservableObject {
             return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
         }
     }
-    #endif
+#endif
     
     private static func subscriptionStatus(for show: SRGShow?) -> SubscriptionStatus {
-        #if os(iOS)
+#if os(iOS)
         if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
             return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
         }
         else {
             return .unavailable
         }
-        #else
+#else
         return .unavailable
-        #endif
+#endif
     }
     
     func toggleFavorite() {
@@ -105,12 +105,12 @@ final class ShowHeaderViewModel: ObservableObject {
         let name = isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
         
-        #if os(iOS)
+#if os(iOS)
         Banner.showFavorite(isFavorite, forItemWithName: show.title)
-        #endif
+#endif
     }
     
-    #if os(iOS)
+#if os(iOS)
     func toggleSubscription() {
         guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
         updateData()
@@ -127,7 +127,7 @@ final class ShowHeaderViewModel: ObservableObject {
         
         Banner.showSubscription(isSubscribed, forItemWithName: show.title)
     }
-    #endif
+#endif
     
     private func updatePublishers() {
         cancellables = []
@@ -174,7 +174,7 @@ extension ShowHeaderViewModel {
         }
     }
     
-    #if os(iOS)
+#if os(iOS)
     var subscriptionAccessibilityLabel: String {
         switch subscriptionStatus {
         case .unavailable, .unsubscribed:
@@ -183,5 +183,5 @@ extension ShowHeaderViewModel {
             return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
         }
     }
-    #endif
+#endif
 }

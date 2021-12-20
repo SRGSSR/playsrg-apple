@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGDataProviderModel
 
 // MARK: View model
 
@@ -69,15 +70,15 @@ final class ProgramViewModel: ObservableObject {
         guard let program = program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
-        let day = DateFormatter.play_relative.string(from: program.startDate)
+        let day = DateFormatter.play_relativeFull.string(from: program.startDate)
         return "\(startTime) - \(endTime), \(day)"
     }
     
     var timeAndDateAccessibilityLabel: String? {
         guard let program = program else { return nil }
-        return String(format: "From %1$@ to %2$@", PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
+        return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
-            .appending(DateFormatter.play_relativeShort.string(from: program.startDate))
+            .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
     }
     
     var imageUrl: URL? {
@@ -266,7 +267,7 @@ extension ProgramViewModel {
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
         if let channel = channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
-                return SRGDataProvider.current!.tvLivestreams(for: ApplicationConfiguration.shared.vendor)
+                return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .catch { _ in
                         return Empty()
                     }

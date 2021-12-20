@@ -38,7 +38,7 @@
 @import SRGLetterbox;
 @import YYWebImage;
 
-#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#if defined(DEBUG) || defined(APPCENTER)
 #import <FLEX/FLEX.h>
 #endif
 
@@ -67,6 +67,7 @@ static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersi
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
 static NSString * const SettingsServerSettingsButton = @"Button_ServerSettings";
 static NSString * const SettingsUserLocationSettingsButton = @"Button_UserLocationSettings";
+static NSString * const SettingsPosterImagesSettingsButton = @"Button_PosterImagesSettings";
 static NSString * const SettingsSubscribeToAllShowsButton = @"Button_SubscribeToAllShows";
 static NSString * const SettingsVersionsAndReleaseNotes = @"Button_VersionsAndReleaseNotes";
 
@@ -151,13 +152,30 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 {
     NSMutableArray *hiddenKeys = [NSMutableArray array];
     
-#if !defined(DEBUG) && !defined(NIGHTLY) && !defined(BETA)
+#if defined(DEBUG) || defined(APPCENTER)
+    if (! MSACDistribute.isEnabled) {
+        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    }
+    
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
+#elif defined(NIGHTLY) || defined(BETA)
+    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
+    [hiddenKeys addObject:SettingsDeveloperGroup];
+    [hiddenKeys addObject:SettingsFLEXButton];
+    
+    if (! PushService.sharedService.enabled) {
+        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
+    }
+#else
     [hiddenKeys addObject:SettingsAdvancedFeaturesGroup];
     [hiddenKeys addObject:SettingsServerSettingsButton];
     [hiddenKeys addObject:SettingsUserLocationSettingsButton];
     [hiddenKeys addObject:PlaySRGSettingPresenterModeEnabled];
     [hiddenKeys addObject:PlaySRGSettingStandaloneEnabled];
     [hiddenKeys addObject:PlaySRGSettingSectionWideSupportEnabled];
+    [hiddenKeys addObject:SettingsPosterImagesSettingsButton];
     [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
     [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
     [hiddenKeys addObject:SettingsResetGroup];
@@ -167,22 +185,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
-#elif !defined(NIGHTLY_APPCENTER) && !defined(BETA_APPCENTER)
-    [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    [hiddenKeys addObject:SettingsDeveloperGroup];
-    [hiddenKeys addObject:SettingsFLEXButton];
-
-    if (! PushService.sharedService.enabled) {
-        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    }
-#else
-    if (! MSACDistribute.isEnabled) {
-        [hiddenKeys addObject:SettingsVersionsAndReleaseNotes];
-    }
-    
-    if (! PushService.sharedService.enabled) {
-        [hiddenKeys addObject:SettingsSubscribeToAllShowsButton];
-    }
 #endif
     
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
@@ -471,7 +473,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [UIImage srg_clearVectorImageCache];
         [Download removeAllDownloads];
     }
-#if defined(DEBUG) || defined(NIGHTLY_APPCENTER) || defined(BETA_APPCENTER)
+#if defined(DEBUG) || defined(APPCENTER)
     else if ([specifier.key isEqualToString:SettingsFLEXButton]) {
         [[FLEXManager sharedManager] toggleExplorer];
     }

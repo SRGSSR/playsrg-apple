@@ -103,6 +103,9 @@
 /* Mini player label */
 "Now playing: %@" = "Jetzt spielt: %@";
 
+/* Text providing a channel information. Placeholder is the channel on which it's broadcasted. */
+"on %@" = "auf %@";
+
 /* More button hint
    Program cell hint */
 "Opens details." = "Details öffnen.";

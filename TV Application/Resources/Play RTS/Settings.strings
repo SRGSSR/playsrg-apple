@@ -12,6 +12,7 @@
 "Clear web cache" = "Effacer le cache web";
 "Content" = "Contenu";
 "Data protection" = "Protection des données";
+"Default (current configuration)" = "Défaut (configuration actuelle)";
 "Default (IP-based location)" = "Défaut (géolocalisation de l'IP)";
 "Delete content saved for later" = "Supprimer le contenu à consulter plus tard";
 "Delete favorites" = "Supprimer les favoris";
@@ -20,8 +21,10 @@
 "Display" = "Affichage";
 "Enable / disable FLEX" = "Activer / désactiver FLEX";
 "Features" = "Fonctionnalités";
+"Force" = "Forcer";
 "HD over cellular networks" = "HD sur réseaux cellulaires";
 "Help and copyright" = "Aide et contact";
+"Ignore" = "Ignorer";
 "Ignore location" = "Ignorer la géolocalisation";
 "Information" = "Informations";
 "Install previous version" = "Installer une version précédente";
@@ -32,6 +35,7 @@
 "Outside Switzerland" = "Hors de Suisse";
 "Permissions" = "Autorisations";
 "Playback" = "Lecture";
+"Poster images" = "Images posters";
 "Presenter mode" = "Mode présentation";
 "Production" = "Production";
 "Quality" = "Qualité";

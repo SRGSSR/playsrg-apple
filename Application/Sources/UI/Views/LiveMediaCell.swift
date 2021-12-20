@@ -20,14 +20,14 @@ struct LiveMediaCell: View {
     
     var body: some View {
         Group {
-            #if os(tvOS)
+#if os(tvOS)
             ExpandingCardButton(action: action) {
                 VisualView(model: model)
                     .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             }
-            #else
+#else
             VisualView(model: model)
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
                 .background(Color.placeholder)
@@ -35,7 +35,7 @@ struct LiveMediaCell: View {
                 .selectionAppearance(when: isSelected && media != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
-            #endif
+#endif
         }
         .redactedIfNil(media)
         .onAppear {
@@ -46,13 +46,13 @@ struct LiveMediaCell: View {
         }
     }
     
-    #if os(tvOS)
+#if os(tvOS)
     private func action() {
         if let media = media {
             navigateToMedia(media, play: true)
         }
     }
-    #endif
+#endif
     
     /// Behavior: h-exp, v-exp
     private struct VisualView: View {
@@ -78,16 +78,16 @@ struct LiveMediaCell: View {
     private struct DescriptionView: View {
         @ObservedObject var model: LiveMediaCellViewModel
         
-        #if os(iOS)
+#if os(iOS)
         @Environment(\.horizontalSizeClass) var horizontalSizeClass
-        #endif
+#endif
         
         private var padding: CGFloat {
-            #if os(iOS)
+#if os(iOS)
             if horizontalSizeClass == .compact {
                 return 8
             }
-            #endif
+#endif
             return constant(iOS: 10, tvOS: 16)
         }
         
@@ -156,10 +156,10 @@ struct LiveMediaCell_Previews: PreviewProvider {
     private static let size = LiveMediaCellSize.swimlane().previewSize
     
     static var previews: some View {
-        #if os(tvOS)
+#if os(tvOS)
         LiveMediaCell(media: media)
             .previewLayout(.fixed(width: size.width, height: size.height))
-        #else
+#else
         Group {
             LiveMediaCell(media: media)
                 .previewLayout(.fixed(width: size.width, height: size.height))
@@ -168,6 +168,6 @@ struct LiveMediaCell_Previews: PreviewProvider {
                 .previewLayout(.fixed(width: size.width, height: size.height))
                 .environment(\.horizontalSizeClass, .regular)
         }
-        #endif
+#endif
     }
 }

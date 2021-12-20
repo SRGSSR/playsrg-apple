@@ -193,7 +193,7 @@
 "Favorites" = "Preferiti";
 
 /* Message displayed when the user is about to delete all favorites */
-"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo profilo";
+"Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti i dispositivi connessi al tuo profilo";
 
 /* Title displayed at the top of the features list */
 "Features" = "Funzionalità";
@@ -203,7 +203,7 @@
 "Filters" = "Filtri";
 
 /* Explanation displayed in the alert asking the user to enable notifications */
-"For the application to inform you when a new episode is available, notifications must be enabled." = "Affinché l'app possa informarvi quando è disponibile un nuovo episodio, è necessario attivare le notifiche.";
+"For the application to inform you when a new episode is available, notifications must be enabled." = "Affinché l'app ti possa informare quando è disponibile un nuovo episodio, è necessario attivare le notifiche.";
 
 /* Total free space size, display at the bottom of download list */
 "Free space: %@" = "Spazio libero: %@";
@@ -542,7 +542,7 @@
 "The episode at %@" = "L'episodio a %@";
 
 /* Confirmation message displayed when a logged in user is about to delete a favorite */
-"The favorite and notification subscription will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti gli apparecchi connessi al suo account.";
+"The favorite and notification subscription will be deleted on all devices connected to your account." = "Preferiti e notifiche saranno eliminati da tutti i dispositivi connessi al tuo account.";
 
 /* Message displayed if the Google Cast receiver cannot play audios */
 "The Google Cast receiver cannot play audios." = "Il ricevitore Google Cast non può riprodurre audio.";
@@ -551,7 +551,7 @@
 "The Google Cast receiver cannot play videos." = "Il ricevitore Google Cast non può riprodurre video.";
 
 /* Message displayed when the user is about to delete the history */
-"The history will be deleted on all devices connected to your account." = "La cronologia sarà eliminata da tutti gli apparecchi collegati al suo account.";
+"The history will be deleted on all devices connected to your account." = "La cronologia sarà eliminata da tutti i dispositivi collegati al tuo account.";
 
 /* Title label used to present the radio latest audios */
 "The latest audios" = "Gli audio più recenti";
@@ -598,6 +598,9 @@
 /* Period setting option
    Title of the button to go back to the current date */
 "Today" = "Oggi";
+
+/* Tonight button in program guide */
+"Tonight" = "Stasera";
 
 /* Categories search setting option
    Title label used to present the topic list
@@ -659,8 +662,7 @@
 /* Title displayed at the top of the What's new view */
 "What's new" = "Novità";
 
-/* Period setting option
-   Yesterday button in program guide */
+/* Period setting option */
 "Yesterday" = "Ieri";
 
 /* Resume playback alert explanation */
@@ -677,4 +679,4 @@
 "You can tap and hold an item to download it (not all items can be downloaded)" = "È possibile toccare e tenere premuto un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
 
 /* Notification displayed when the user has been logged out unexpectedly. */
-"You have been automatically logged out. Login again to keep your data synchronized across devices." = "È stato scollegato automaticamente. Esegua nuovamente il login per mantenere i dati sincronizzati su tutti i dispositivi.";
+"You have been automatically logged out. Login again to keep your data synchronized across devices." = "Sei stato scollegato automaticamente. Esegui nuovamente il login per mantenere i dati sincronizzati su tutti i dispositivi.";
