@@ -121,7 +121,7 @@ private extension CarPlayList {
         let placeholderImage = UIColor.placeholder.image(ofSize: SizeForImageScale(imageScale, .default))
         if let imageUrl = media.imageUrl(for: imageScale) {
             return ImagePipeline.shared.imagePublisher(with: imageUrl)
-                .map { $0.image }
+                .map(\.image)
                 .replaceError(with: placeholderImage)
                 .prepend(placeholderImage)
                 .eraseToAnyPublisher()

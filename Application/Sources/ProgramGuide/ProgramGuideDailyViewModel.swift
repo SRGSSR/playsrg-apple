@@ -62,7 +62,7 @@ extension ProgramGuideDailyViewModel {
         
         var channels: [SRGChannel] {
             if case let .loaded(programCompositions: programCompositions) = self {
-                return programCompositions.map { $0.channel }
+                return programCompositions.map(\.channel)
             }
             else {
                 return []
