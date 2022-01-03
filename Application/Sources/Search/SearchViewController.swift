@@ -203,11 +203,21 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
         switch item {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.value = media.urn
+            labels.type = AnalyticsType.actionPlayMedia.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchOpen.rawValue, labels: labels)
         case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = SectionViewController.showViewController(for: show)
-                navigationController.pushViewController(showViewController, animated: true)
-            }
+            guard let navigationController = navigationController else { return }
+            
+            let showViewController = SectionViewController.showViewController(for: show)
+            navigationController.pushViewController(showViewController, animated: true)
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.value = show.urn
+            labels.type = AnalyticsType.actionDisplayShow.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchTeaserOpen.rawValue, labels: labels)
         }
     }
 }
