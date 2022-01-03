@@ -19,11 +19,11 @@ final class SearchViewController: UIViewController {
     private var searchController: UISearchController!
     private var searchContainerViewController: UISearchContainerViewController!
     
-#if os(tvOS)
-    private var cancellables = Set<AnyCancellable>()
-#else
+#if os(iOS)
     private weak var filtersBarButtonItem: UIBarButtonItem?
 #endif
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -218,6 +218,10 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
             labels.value = show.urn
             labels.type = AnalyticsType.actionDisplayShow.rawValue
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchTeaserOpen.rawValue, labels: labels)
+            
+            SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
+                .sink { _ in } receiveValue: { _ in }
+                .store(in: &cancellables)
         }
     }
 }
