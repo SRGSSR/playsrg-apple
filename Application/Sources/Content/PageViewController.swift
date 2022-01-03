@@ -510,7 +510,7 @@ private extension PageViewController {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             
-            func sectionSupplementaryItems(for section: PageViewModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: PageViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
@@ -600,7 +600,7 @@ private extension PageViewController {
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
             let layoutSection = layoutSection(for: section)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section)
             return layoutSection
         }, configuration: layoutConfiguration())
     }

@@ -588,7 +588,7 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
                                                         configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
@@ -637,7 +637,7 @@ private extension SectionViewController {
             let configuration = self.model.configuration
             
             let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
         }, configuration: layoutConfiguration())
