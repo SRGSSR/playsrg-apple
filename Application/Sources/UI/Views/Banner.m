@@ -139,7 +139,7 @@ static NSString *BannerShortenedName(NSString *name);
     
     NSString *messageFormatString = downloaded ? NSLocalizedString(@"%@ has been added to downloads", @"Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application.") : NSLocalizedString(@"%@ has been deleted from downloads", @"Message displayed at the top of the screen when removing a media from downloads. Quotes are managed by the application.");
     NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(name)];
-    UIImage *image = downloaded ? [UIImage imageNamed:@"downloadable"] : [UIImage imageNamed:@"downloadable_stop"];
+    UIImage *image = downloaded ? [UIImage imageNamed:@"download"] : [UIImage imageNamed:@"download_remove"];
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO inViewController:viewController];
 }
 

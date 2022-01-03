@@ -176,7 +176,7 @@ private extension ContextMenu {
         }
         
         func image(for download: Download?) -> UIImage {
-            return download != nil ? UIImage(named: "downloadable_stop")! : UIImage(named: "downloadable")!
+            return download != nil ? UIImage(named: "download_remove")! : UIImage(named: "download")!
         }
         
         let download = Download(for: media)
