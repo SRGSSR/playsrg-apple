@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
@@ -104,6 +105,17 @@ final class SearchResultsViewController: UIViewController {
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
+        }
+        
+        let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = SectionHeaderView(section: section)
+        }
+        
+        dataSource.supplementaryViewProvider = { collectionView, _, indexPath in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
         }
         
         model.$state
@@ -272,8 +284,15 @@ private extension SearchResultsViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
+            let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
+            
+            func sectionSupplementaryItems(for section: SearchViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+                let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
+                let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+                return [header]
+            }
+            
             func layoutSection(for section: SearchViewModel.Section, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
-                let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section {
@@ -306,7 +325,9 @@ private extension SearchResultsViewController {
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
-            return layoutSection(for: section, layoutEnvironment: layoutEnvironment)
+            let layoutSection = layoutSection(for: section, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section)
+            return layoutSection
         }, configuration: layoutConfiguration())
     }
 }
@@ -324,6 +345,35 @@ private extension SearchResultsViewController {
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageType: .default)
             }
+        }
+    }
+}
+
+// MARK: Headers
+
+private extension SearchResultsViewController {
+    struct SectionHeaderView: View {
+        let section: SearchViewModel.Section
+        
+        private static func title(for section: SearchViewModel.Section) -> String {
+            switch section {
+            case .medias:
+                // TODO: Display header based on search settings video / audio / all / searchSettingsHidden.
+                //       Refer to old implementation.
+                return NSLocalizedString("Videos and audios", comment: "Header for video and audio search results")
+            case .shows:
+                return NSLocalizedString("Shows", comment: "Show search result header")
+            case .mostSearchedShows:
+                return NSLocalizedString("Most searched shows", comment: "Most searched shows header")
+            }
+        }
+        
+        var body: some View {
+            HeaderView(title: Self.title(for: section), subtitle: nil, hasDetailDisclosure: false)
+        }
+        
+        static func size(section: SearchViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+            return HeaderViewSize.recommended(title: title(for: section), subtitle: nil, layoutWidth: layoutWidth)
         }
     }
 }
