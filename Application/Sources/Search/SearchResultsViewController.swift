@@ -194,6 +194,16 @@ final class SearchResultsViewController: UIViewController {
 
 // MARK: Protocols
 
+extension SearchResultsViewController: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return collectionView != nil ? [collectionView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+    }
+}
+
 extension SearchResultsViewController: UICollectionViewDelegate {
 #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -276,6 +286,8 @@ extension SearchResultsViewController: UIScrollViewDelegate {
 // MARK: Layout
 
 private extension SearchResultsViewController {
+    private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
+    
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
         let configuration = UICollectionViewCompositionalLayoutConfiguration()
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
