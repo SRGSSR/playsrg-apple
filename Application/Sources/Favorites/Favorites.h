@@ -62,7 +62,6 @@ OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show);
  *
  *  @discussion Needs to be called after the Push Service setup.
  */
-
 OBJC_EXPORT void FavoritesForcePushServiceUpdate(void);
 
 #endif

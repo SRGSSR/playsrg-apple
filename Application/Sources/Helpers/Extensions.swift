@@ -129,6 +129,19 @@ extension Collection {
     }
     
     /**
+     *  Transform each item in a collection (getting rid of `nil` items), providing an auto-increased index with each
+     *  processed item.
+     */
+    func enumeratedCompactMap<T>(_ transform: (Self.Element, Int) throws -> T?) rethrows -> [T] {
+        var index = 0
+        return try compactMap { element in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
+    }
+    
+    /**
      *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
      *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
      *  array the array of associated items is guaranteed to contain at least 1 item.

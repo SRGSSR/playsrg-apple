@@ -157,7 +157,7 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func nextServiceURL() {
-        let serviceURL = ApplicationSettingServiceURL(), servers = servers
+        let serviceURL = ApplicationSettingServiceURL()
         if let index = servers.firstIndex(where: { $0.url == serviceURL }) {
             let server = servers[safeIndex: servers.index(after: index)] ?? servers.first!
             ApplicationSettingSetServiceURL(server.url)
@@ -196,7 +196,7 @@ final class ProfileViewModel: ObservableObject {
         synchronizationDate = SRGUserData.current?.user.synchronizationDate
     }
     
-    private struct Server: Hashable {
+    private struct Server {
         let url: URL
         let title: String
     }
@@ -211,15 +211,16 @@ final class ProfileViewModel: ObservableObject {
         guard let path = Bundle.main.path(forResource: "Settings.server", ofType: "plist"),
               let plist = NSDictionary(contentsOfFile: path),
               let values = plist.value(forKey: "Values") as? [String],
-              let titles = plist.value(forKey: "Titles") as? [String]
-        else { return [Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))] }
-        
-        var servers = [Server]()
-        for (index, value) in values.enumerated() {
-            if let serverURL = URL(string: value) {
-                servers.append(Server(url: serverURL, title: PlaySRGSettingsLocalizedString(titles[index], comment: nil)))
-            }
+              let titles = plist.value(forKey: "Titles") as? [String],
+              values.count == titles.count,
+              values.count != 0
+        else {
+            return [Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))]
         }
-        return servers
+        
+        return values.enumeratedCompactMap { value, index in
+            guard let serverURL = URL(string: value) else { return nil }
+            return Server(url: serverURL, title: PlaySRGSettingsLocalizedString(titles[index], comment: nil))
+        }
     }
 }
