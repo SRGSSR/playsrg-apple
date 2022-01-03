@@ -58,8 +58,8 @@ final class ProgramViewModel: ObservableObject {
         return program?.title
     }
     
-    var lead: String? {
-        return program?.lead
+    var subtitle: String? {
+        return program?.subtitle ?? program?.lead
     }
     
     var summary: String? {
