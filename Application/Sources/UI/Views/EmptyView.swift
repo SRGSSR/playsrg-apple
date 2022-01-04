@@ -29,6 +29,12 @@ struct EmptyView: View {
     }
     
     let state: State
+    let insets: EdgeInsets
+    
+    init(state: State, insets: EdgeInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)) {
+        self.state = state
+        self.insets = insets
+    }
     
     private func imageName(for type: `Type`) -> String {
         switch type {
@@ -83,6 +89,7 @@ struct EmptyView: View {
         .lineLimit(3)
         .foregroundColor(Color.srgGrayC7)
         .padding()
+        .padding(insets)
     }
 }
 

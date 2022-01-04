@@ -157,12 +157,13 @@ final class SearchResultsViewController: UIViewController {
     private func reloadData(for state: SearchViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading)
+            emptyView.content = EmptyView(state: .loading, insets: Self.emptyViewInsets)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyView.content = EmptyView(state: .failed(error: error), insets: Self.emptyViewInsets)
         case .loaded:
             if !state.hasContent {
-                emptyView.content = model.isSearching ? EmptyView(state: .empty(type: .search)) : EmptyView(state: .empty(type: .searchTutorial))
+                let type: EmptyView.`Type` = model.isSearching ? .search : .searchTutorial
+                emptyView.content = EmptyView(state: .empty(type: type), insets: Self.emptyViewInsets)
             }
             else {
                 emptyView.content = nil
@@ -287,6 +288,7 @@ extension SearchResultsViewController: UIScrollViewDelegate {
 // MARK: Layout
 
 private extension SearchResultsViewController {
+    private static let emptyViewInsets = EdgeInsets(top: constant(iOS: 0, tvOS: 350), leading: 0, bottom: 0, trailing: 0)
     private static let layoutVerticalMargin: CGFloat = constant(iOS: 8, tvOS: 0)
     
     private func layoutConfiguration() -> UICollectionViewCompositionalLayoutConfiguration {
