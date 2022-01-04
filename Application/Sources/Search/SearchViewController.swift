@@ -67,7 +67,7 @@ final class SearchViewController: UIViewController {
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         
-        updateSearchSettingsButton()
+        updateSearchSettingsButton(for: model.settings)
 #endif
         
         searchContainerViewController = UISearchContainerViewController(searchController: searchController)
@@ -93,6 +93,19 @@ final class SearchViewController: UIViewController {
                 else {
                     self.searchController.searchSuggestions = nil
                 }
+            }
+            .store(in: &cancellables)
+#else
+        model.$query
+            .removeDuplicates()
+            .sink { query in
+                searchBar.text = query
+            }
+            .store(in: &cancellables)
+        model.$settings
+            .removeDuplicates()
+            .sink { [weak self] settings in
+                self?.updateSearchSettingsButton(for: settings)
             }
             .store(in: &cancellables)
 #endif
@@ -130,7 +143,7 @@ final class SearchViewController: UIViewController {
     }
     
 #if os(iOS)
-    private func updateSearchSettingsButton() {
+    private func updateSearchSettingsButton(for settings: SRGMediaSearchSettings) {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
             navigationItem.rightBarButtonItem = nil
             return
@@ -162,7 +175,7 @@ final class SearchViewController: UIViewController {
         }
         
         if let filtersButton = filtersBarButtonItem?.customView as? UIButton {
-            let image = !model.hasDefaultSettings ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
+            let image = !SearchViewModel.areDefaultSettings(settings) ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
             filtersButton.setImage(image, for: .normal)
         }
     }
@@ -210,6 +223,7 @@ extension SearchViewController: PlayApplicationNavigation {
         }
         model.settings = settings
         
+        searchController.searchBar.resignFirstResponder()
         return true
     }
 }
@@ -245,7 +259,6 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
 extension SearchViewController: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
         model.settings = settings
-        updateSearchSettingsButton()
     }
 }
 

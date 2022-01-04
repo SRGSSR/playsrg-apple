@@ -10,13 +10,16 @@ import Combine
 // MARK: View model
 
 final class SearchViewModel: ObservableObject {
+    @Published var query: String = ""
+    @Published var settings: SRGMediaSearchSettings = SearchViewModel.optimalSettings()
+    
     @Published private(set) var state = State.loading
     
     private let trigger = Trigger()
     
     init() {
-        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [querySubject, settingsSubject, trigger] in
-            Publishers.CombineLatest(querySubject, settingsSubject)
+        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings, trigger] in
+            Publishers.CombineLatest($query.removeDuplicates(), $settings.removeDuplicates())
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query, settings -> AnyPublisher<State, Never> in
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
@@ -33,37 +36,9 @@ final class SearchViewModel: ObservableObject {
         .assign(to: &$state)
     }
     
-    var query: String {
-        get {
-            querySubject.value
-        }
-        set {
-            guard querySubject.value != newValue else { return }
-            querySubject.value = newValue
-        }
-    }
-    
-    var settings: SRGMediaSearchSettings {
-        get {
-            settingsSubject.value
-        }
-        set {
-            let newSettings = Self.optimalSettings(from: newValue)
-            guard settingsSubject.value != newSettings else { return }
-            settingsSubject.value = newSettings
-        }
-    }
-    
-    var hasDefaultSettings: Bool {
-        return Self.areDefaultSettings(settings)
-    }
-    
     var isSearching: Bool {
         return Self.isSearching(with: query, settings: settings)
     }
-    
-    private var querySubject = CurrentValueSubject<String, Never>("")
-    private var settingsSubject = CurrentValueSubject<SRGMediaSearchSettings, Never>(SearchViewModel.optimalSettings())
     
     func reload(deep: Bool = false) {
         if deep || !state.hasContent {
@@ -86,6 +61,10 @@ final class SearchViewModel: ObservableObject {
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
+    }
+    
+    static func areDefaultSettings(_ settings: SRGMediaSearchSettings) -> Bool {
+        return optimalSettings(from: settings) == optimalSettings()
     }
     
     private static func isSearching(with query: String, settings: SRGMediaSearchSettings) -> Bool {
@@ -224,9 +203,5 @@ private extension SearchViewModel {
             rows.append(Row(section: .medias, items: items))
         }
         return rows
-    }
-    
-    static func areDefaultSettings(_ settings: SRGMediaSearchSettings) -> Bool {
-        return optimalSettings() == settings
     }
 }
