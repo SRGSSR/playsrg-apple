@@ -198,6 +198,22 @@ final class SearchViewController: UIViewController {
 // MARK: Protocols
 
 #if os(iOS)
+extension SearchViewController: PlayApplicationNavigation {
+    func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
+        guard applicationSectionInfo.applicationSection == .search else { return false }
+        
+        model.query = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchQueryKey] as? String ?? ""
+        
+        let settings = SRGMediaSearchSettings()
+        if let mediaType = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchMediaTypeOptionKey] as? Int {
+            settings.mediaType = SRGMediaType(rawValue: mediaType) ?? .none
+        }
+        model.settings = settings
+        
+        return true
+    }
+}
+
 extension SearchViewController: SearchResultsViewControllerDelegate {
     func searchResultsViewController(_ searchResultsViewController: SearchResultsViewController, didSelectItem item: SearchViewModel.Item) {
         switch item {
