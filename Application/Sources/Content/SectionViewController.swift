@@ -97,7 +97,7 @@ final class SectionViewController: UIViewController {
         self.emptyView = emptyView
         
 #if os(tvOS)
-        self.tabBarObservedScrollView = collectionView
+        tabBarObservedScrollView = collectionView
 #else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)

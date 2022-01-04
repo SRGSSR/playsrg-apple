@@ -137,9 +137,10 @@ final class SearchResultsViewController: UIViewController {
         super.viewDidAppear(animated)
 #if os(tvOS)
         if let searchController = parent as? UISearchController {
-            searchController.tabBarObservedScrollView = collectionView
             searchController.searchControllerObservedScrollView = collectionView
         }
+        
+        searchViewController?.tabBarObservedScrollView = collectionView
 #endif
     }
     
