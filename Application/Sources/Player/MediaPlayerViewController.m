@@ -1709,7 +1709,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
     WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
         if (! error) {
-            [Banner showWatchLaterAdded:YES forItemWithName:media.title inViewController:self];
+            [Banner showWatchLaterAdded:YES forItemWithName:media.title];
         }
     });
 }
@@ -1979,7 +1979,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             labels.value = mainChapterMedia.URN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
             
-            [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title inViewController:self];
+            [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
     });
 }
@@ -2049,7 +2049,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     
     void (^sharingCompletionBlock)(SharingItem *, NSString *) = ^(SharingItem *sharingItem, NSString *URN) {
-        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton inViewController:self withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -2168,7 +2168,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     labels.value = show.URN;
     [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     
-    [Banner showFavorite:isFavorite forItemWithName:show.title inViewController:self];
+    [Banner showFavorite:isFavorite forItemWithName:show.title];
 }
 
 - (IBAction)selectLivestreamMedia:(id)sender

@@ -66,7 +66,7 @@ private extension ContextMenu {
     private static let popoverPresentationDelegate = ActivityPopoverPresentationDelegate()
     
     private static func shareItem(_ sharingItem: SharingItem, in viewController: UIViewController) {
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .peekMenu, in: viewController)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .peekMenu)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
@@ -95,15 +95,15 @@ extension ContextMenu {
     
     private static func menu(for media: SRGMedia, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
-            watchLaterAction(for: media, in: viewController),
-            historyAction(for: media, in: viewController),
-            downloadAction(for: media, in: viewController),
+            watchLaterAction(for: media),
+            historyAction(for: media),
+            downloadAction(for: media),
             sharingAction(for: media, in: viewController),
             moreEpisodesAction(for: media, in: viewController)
         ].compactMap { $0 })
     }
     
-    private static func watchLaterAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+    private static func watchLaterAction(for media: SRGMedia) -> UIAction? {
         func title(for action: WatchLaterAction) -> String {
             if action == .add {
                 if media.mediaType == .audio {
@@ -137,7 +137,7 @@ extension ContextMenu {
                     let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
                     SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
                     
-                    Banner.showWatchLaterAdded(added, forItemWithName: media.title, in: viewController)
+                    Banner.showWatchLaterAdded(added, forItemWithName: media.title)
                 }
             }
         }
@@ -147,7 +147,7 @@ extension ContextMenu {
         return menuAction
     }
     
-    private static func historyAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+    private static func historyAction(for media: SRGMedia) -> UIAction? {
         guard HistoryContainsMedia(media) else { return nil }
                 
         let menuAction = UIAction(title: NSLocalizedString("Delete from history", comment: "Context menu action to delete a media from the history"),
@@ -168,7 +168,7 @@ extension ContextMenu {
         return menuAction
     }
     
-    private static func downloadAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
+    private static func downloadAction(for media: SRGMedia) -> UIAction? {
         guard Download.canDownloadMedia(media) else { return nil}
         
         func title(for download: Download?) -> String {
@@ -201,7 +201,7 @@ extension ContextMenu {
                 let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
                 
-                Banner.showDownload(download == nil, forItemWithName: media.title, in: viewController)
+                Banner.showDownload(download == nil, forItemWithName: media.title)
             }
         }
         if download != nil {
@@ -248,12 +248,12 @@ extension ContextMenu {
     
     private static func menu(for show: SRGShow, in viewController: UIViewController) -> UIMenu {
         return UIMenu(title: "", children: [
-            favoriteAction(for: show, in: viewController),
+            favoriteAction(for: show),
             sharingAction(for: show, in: viewController)
         ].compactMap { $0 })
     }
     
-    private static func favoriteAction(for show: SRGShow, in viewController: UIViewController) -> UIAction? {
+    private static func favoriteAction(for show: SRGShow) -> UIAction? {
         func title(isFavorite: Bool) -> String {
             if isFavorite {
                 return NSLocalizedString("Delete from favorites", comment: "Context menu action to delete a show from favorites")
@@ -279,7 +279,7 @@ extension ContextMenu {
                 let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
                 SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
                 
-                Banner.showFavorite(!isFavorite, forItemWithName: show.title, in: viewController)
+                Banner.showFavorite(!isFavorite, forItemWithName: show.title)
             }
         }
         if isFavorite {

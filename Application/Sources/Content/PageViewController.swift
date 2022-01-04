@@ -163,9 +163,9 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         model.$serviceMessage
-            .sink { [weak self] serviceMessage in
+            .sink { serviceMessage in
                 guard let serviceMessage = serviceMessage else { return }
-                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
+                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true)
             }
             .store(in: &cancellables)
         

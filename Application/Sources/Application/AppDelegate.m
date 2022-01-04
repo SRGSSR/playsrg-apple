@@ -398,8 +398,7 @@ static void *s_kvoContext = &s_kvoContext;
             [Banner showWithStyle:BannerStyleWarning
                           message:NSLocalizedString(@"You have been automatically logged out. Login again to keep your data synchronized across devices.", @"Notification displayed when the user has been logged out unexpectedly.")
                             image:[UIImage imageNamed:@"account"]
-                           sticky:YES
-                 inViewController:nil];
+                           sticky:YES];
         });
     }
     
