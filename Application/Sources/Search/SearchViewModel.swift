@@ -23,7 +23,7 @@ final class SearchViewModel: ObservableObject {
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query, settings -> AnyPublisher<State, Never> in
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
-                        .map { State.loaded(rows: $0.rows, suggestions: $0.suggestions) }
+                        .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
                         .catch { error in
                             return Just(State.failed(error: error))
                         }
@@ -109,6 +109,7 @@ extension SearchViewModel {
     enum Item: Hashable {
         case media(_ media: SRGMedia)
         case show(_ show: SRGShow)
+        case empty
     }
     
     typealias Row = CollectionRow<Section, Item>
@@ -147,39 +148,44 @@ private extension SearchViewModel {
                 shows(matchingQuery: query),
                 medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
             )
-            .map { (rows: rows(shows: $0, medias: $1.medias), suggestions: $1.suggestions) }
+            .map { (rows: [$0, $1.row], suggestions: $1.suggestions) }
             .eraseToAnyPublisher()
         }
         else {
-            return medias(matchingQuery: query, with: nil /* Not supported */, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
-                .map { (rows: rows(shows: [], medias: $0.medias), suggestions: $0.suggestions) }
+            return medias(matchingQuery: query, with: nil, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+                .map { (rows: [$0.row], suggestions: $0.suggestions) }
                 .eraseToAnyPublisher()
         }
     }
     
-    static func shows(matchingQuery query: String) -> AnyPublisher<[SRGShow], Error> {
+    static func shows(matchingQuery query: String) -> AnyPublisher<Row, Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
         return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: constant(iOS: .none, tvOS: .video), pageSize: pageSize, paginatedBy: nil)
             .map { output in
                 return SRGDataProvider.current!.shows(withUrns: output.showUrns, pageSize: pageSize)
+                    .map { $0.map { Item.show($0) } }
             }
             .switchToLatest()
+            .prepend([Item.empty])
+            .map { Row(section: .shows, items: $0) }
             .eraseToAnyPublisher()
     }
     
-    static func medias(matchingQuery query: String, with settings: SRGMediaSearchSettings?, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(medias: [SRGMedia], suggestions: [SRGSearchSuggestion]?), Error> {
+    static func medias(matchingQuery query: String, with settings: SRGMediaSearchSettings?, paginatedBy signal: Trigger.Signal) -> AnyPublisher<(row: Row, suggestions: [SRGSearchSuggestion]?), Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
         return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: settings, pageSize: pageSize, paginatedBy: signal)
             .map { output in
                 return SRGDataProvider.current!.medias(withUrns: output.mediaUrns, pageSize: pageSize)
-                    .map { (medias: $0, suggestions: output.suggestions) }
+                    .map { (items: $0.map { Item.media($0) }, suggestions: output.suggestions) }
             }
             .switchToLatest()
-            .scan((medias: [], suggestions: nil)) {
-                return (medias: removeDuplicates(in: $0.medias + $1.medias), suggestions: $1.suggestions )
+            .scan((items: [], suggestions: nil)) {
+                return (items: removeDuplicates(in: $0.items + $1.items), suggestions: $1.suggestions )
             }
+            .prepend((items: [Item.empty], suggestions: nil))
+            .map { (row: Row(section: .medias, items: $0.items), suggestions: $0.suggestions) }
             .eraseToAnyPublisher()
     }
     
@@ -192,16 +198,31 @@ private extension SearchViewModel {
         }
     }
     
-    static func rows(shows: [SRGShow], medias: [SRGMedia]) -> [Row] {
-        var rows = [Row]()
-        if !shows.isEmpty {
-            let items = shows.map { Item.show($0) }
-            rows.append(Row(section: .shows, items: items))
+    static func loadedRow(from row: Row) -> Row? {
+        let items = row.items.filter { item in
+            if case .empty = item {
+                return false
+            }
+            else {
+                return true
+            }
         }
-        if !medias.isEmpty {
-            let items = medias.map { Item.media($0) }
-            rows.append(Row(section: .medias, items: items))
+        
+        if !items.isEmpty {
+            return Row(section: row.section, items: items)
         }
-        return rows
+        else {
+            return nil
+        }
+    }
+    
+    static func state(from rows: [Row], suggestions: [SRGSearchSuggestion]?) -> State {
+        let loadedRows = rows.compactMap { loadedRow(from: $0) }
+        if loadedRows.isEmpty && !rows.isEmpty {
+            return .loading
+        }
+        else {
+            return .loaded(rows: loadedRows, suggestions: suggestions)
+        }
     }
 }

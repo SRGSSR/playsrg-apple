@@ -254,6 +254,8 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
             SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
                 .sink { _ in } receiveValue: { _ in }
                 .store(in: &cancellables)
+        case .empty:
+            break
         }
     }
 }

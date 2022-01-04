@@ -225,6 +225,8 @@ extension SearchResultsViewController: UICollectionViewDelegate {
             return ContextMenu.configuration(for: media, at: indexPath, in: self)
         case let .show(show):
             return ContextMenu.configuration(for: show, at: indexPath, in: self)
+        case .empty:
+            return nil
         }
     }
     
@@ -360,6 +362,8 @@ private extension SearchResultsViewController {
                 MediaCell(media: media, style: .show)
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageType: .default)
+            case .empty:
+                Color.clear
             }
         }
     }
