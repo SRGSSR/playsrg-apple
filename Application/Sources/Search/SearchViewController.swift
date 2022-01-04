@@ -97,13 +97,12 @@ final class SearchViewController: UIViewController {
             .store(in: &cancellables)
 #else
         model.$query
-            .removeDuplicates()
+            .removeDuplicates()         // Prevent recursive updates
             .sink { query in
                 searchBar.text = query
             }
             .store(in: &cancellables)
         model.$settings
-            .removeDuplicates()
             .sink { [weak self] settings in
                 self?.updateSearchSettingsButton(for: settings)
             }
