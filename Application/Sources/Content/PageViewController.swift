@@ -738,7 +738,6 @@ private extension PageViewController {
             if let title = Self.title(for: section) {
 #if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
-                    .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
 #else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
@@ -746,7 +745,6 @@ private extension PageViewController {
                     HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
                 }
                 .disabled(!hasDetailDisclosure)
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
                 .responderChain(from: firstResponder)
 #endif
             }
