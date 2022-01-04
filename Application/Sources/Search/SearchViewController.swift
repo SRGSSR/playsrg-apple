@@ -34,6 +34,13 @@ final class SearchViewController: UIViewController {
         fatalError("Not implemented")
     }
     
+    deinit {
+        if let searchController = searchController {
+            // Dismiss to avoid retain cycle if the search was entered once, see https://stackoverflow.com/a/33619501/760435
+            searchController.dismiss(animated: false, completion: nil)
+        }
+    }
+    
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
@@ -135,11 +142,6 @@ final class SearchViewController: UIViewController {
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         searchController.searchResultsController?.viewDidDisappear(animated)
-        
-        if play_isMovingFromParentViewController() {
-            // Dismiss to avoid retain cycle if the search was entered once, see https://stackoverflow.com/a/33619501/760435
-            searchController.dismiss(animated: false, completion: nil)
-        }
     }
     
 #if os(iOS)
