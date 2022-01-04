@@ -94,10 +94,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             .store(in: &cancellables)
         
         programGuideModel.$dateSelection
+            .filter { $0.transition == .time }
             .sink { [weak self] dateSelection in
-                if dateSelection.transition == .time {
-                    self?.scrollToTime(dateSelection.time, animated: true)
-                }
+                self?.scrollToTime(dateSelection.time, animated: true)
             }
             .store(in: &cancellables)
     }
