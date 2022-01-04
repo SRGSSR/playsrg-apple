@@ -81,7 +81,8 @@ final class SearchViewController: UIViewController {
         
 #if os(tvOS)
         model.$state
-            .sink { state in
+            .sink { [weak self] state in
+                guard let self = self else { return }
                 if case let .loaded(rows: _, suggestions: suggestions) = state {
                     if let suggestions = suggestions {
                         self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
