@@ -109,7 +109,7 @@ extension SearchViewModel {
     enum Item: Hashable {
         case media(_ media: SRGMedia)
         case show(_ show: SRGShow)
-        case empty
+        case loading
     }
     
     typealias Row = CollectionRow<Section, Item>
@@ -167,7 +167,7 @@ private extension SearchViewModel {
                     .map { $0.map { Item.show($0) } }
             }
             .switchToLatest()
-            .prepend([Item.empty])
+            .prepend([Item.loading])
             .map { Row(section: .shows, items: $0) }
             .eraseToAnyPublisher()
     }
@@ -184,7 +184,7 @@ private extension SearchViewModel {
             .scan((items: [], suggestions: nil)) {
                 return (items: removeDuplicates(in: $0.items + $1.items), suggestions: $1.suggestions )
             }
-            .prepend((items: [Item.empty], suggestions: nil))
+            .prepend((items: [Item.loading], suggestions: nil))
             .map { (row: Row(section: .medias, items: $0.items), suggestions: $0.suggestions) }
             .eraseToAnyPublisher()
     }
@@ -198,31 +198,31 @@ private extension SearchViewModel {
         }
     }
     
-    static func loadedRow(from row: Row) -> Row? {
-        let items = row.items.filter { item in
-            if case .empty = item {
-                return false
-            }
-            else {
+    static func isLoading(row: Row) -> Bool {
+        return row.items.contains { item in
+            if case .loading = item {
                 return true
             }
-        }
-        
-        if !items.isEmpty {
-            return Row(section: row.section, items: items)
-        }
-        else {
-            return nil
+            else {
+                return false
+            }
         }
     }
     
     static func state(from rows: [Row], suggestions: [SRGSearchSuggestion]?) -> State {
-        let loadedRows = rows.compactMap { loadedRow(from: $0) }
-        if loadedRows.isEmpty && !rows.isEmpty {
-            return .loading
+        let loadingRows = rows.filter { isLoading(row: $0) }
+        if loadingRows.isEmpty {
+            let filledRows = rows.filter { !$0.items.isEmpty }
+            return .loaded(rows: filledRows, suggestions: suggestions)
         }
         else {
-            return .loaded(rows: loadedRows, suggestions: suggestions)
+            let filledRows = rows.filter { !isLoading(row: $0) && !$0.items.isEmpty }
+            if !filledRows.isEmpty {
+                return .loaded(rows: filledRows, suggestions: suggestions)
+            }
+            else {
+                return .loading
+            }
         }
     }
 }
