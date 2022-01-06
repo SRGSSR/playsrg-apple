@@ -146,23 +146,23 @@ private extension SearchViewModel {
     static func searchResults(matchingQuery query: String, with settings: SRGMediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
             return Publishers.CombineLatest(
-                shows(matchingQuery: query),
+                shows(matchingQuery: query, with: settings),
                 medias(matchingQuery: query, with: settings, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
             )
             .map { (rows: [$0, $1.row], suggestions: $1.suggestions) }
             .eraseToAnyPublisher()
         }
         else {
-            return medias(matchingQuery: query, with: nil, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
+            return medias(matchingQuery: query, with: nil /* Case of SWI; settings not supported */, paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore))
                 .map { (rows: [$0.row], suggestions: $0.suggestions) }
                 .eraseToAnyPublisher()
         }
     }
     
-    static func shows(matchingQuery query: String) -> AnyPublisher<Row, Error> {
+    static func shows(matchingQuery query: String, with settings: SRGMediaSearchSettings) -> AnyPublisher<Row, Error> {
         let vendor = ApplicationConfiguration.shared.vendor
         let pageSize = ApplicationConfiguration.shared.detailPageSize
-        return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: constant(iOS: .none, tvOS: .video), pageSize: pageSize, paginatedBy: nil)
+        return SRGDataProvider.current!.shows(for: vendor, matchingQuery: query, mediaType: settings.mediaType, pageSize: pageSize, paginatedBy: nil)
             .map { output in
                 return SRGDataProvider.current!.shows(withUrns: output.showUrns, pageSize: pageSize)
                     .map { $0.map { Item.show($0) } }
