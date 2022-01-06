@@ -102,6 +102,9 @@ final class SearchResultsViewController: UIViewController {
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SearchViewModel.Item> { cell, _, item in
             cell.content = ItemCell(item: item)
+            // Avoid pausing a loading animation when the user taps the parent cell
+            // See https://stackoverflow.com/questions/27904177/uiimageview-animation-stops-when-user-touches-screen/29330962
+            cell.isUserInteractionEnabled = (item != .loading)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in

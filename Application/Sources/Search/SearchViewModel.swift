@@ -200,14 +200,7 @@ private extension SearchViewModel {
     }
     
     static func isLoading(row: Row) -> Bool {
-        return row.items.contains { item in
-            if case .loading = item {
-                return true
-            }
-            else {
-                return false
-            }
-        }
+        return row.items.contains { $0 == .loading }
     }
     
     static func state(from rows: [Row], suggestions: [SRGSearchSuggestion]?) -> State {
