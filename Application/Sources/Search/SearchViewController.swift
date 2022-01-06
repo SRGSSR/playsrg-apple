@@ -133,9 +133,7 @@ final class SearchViewController: UIViewController {
         super.viewWillDisappear(animated)
         searchController.searchResultsController?.viewWillDisappear(animated)
 #if os (iOS)
-        if play_isMovingFromParentViewController() {
-            searchController.searchBar.resignFirstResponder()
-        }
+        searchController.searchBar.resignFirstResponder()
 #endif
     }
     
