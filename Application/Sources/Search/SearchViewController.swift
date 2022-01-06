@@ -210,6 +210,26 @@ final class SearchViewController: UIViewController {
 #endif
 }
 
+// MARK: Keyboard shorcuts
+
+#if os(iOS)
+extension SearchViewController {
+    private var searchKeyCommand: UIKeyCommand {
+        let keyCommand = UIKeyCommand(input: "f", modifierFlags: .command, action: #selector(search(_:)))
+        keyCommand.discoverabilityTitle = NSLocalizedString("Search", comment: "Search shortcut label")
+        return keyCommand
+    }
+    
+    @objc private func search(_ commmand: UIKeyCommand) {
+        searchController.searchBar.becomeFirstResponder()
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [searchKeyCommand]
+    }
+}
+#endif
+
 // MARK: Protocols
 
 #if os(iOS)
