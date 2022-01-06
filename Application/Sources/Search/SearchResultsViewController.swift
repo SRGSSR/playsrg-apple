@@ -302,9 +302,8 @@ private extension SearchResultsViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
-            
             guard let self = self else { return nil }
+            let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             
             func sectionSupplementaryItems(for section: SearchViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, settings: self.model.settings, layoutWidth: layoutWidth)
@@ -338,12 +337,9 @@ private extension SearchResultsViewController {
                         return ShowCellSize.grid(for: .default, layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .loading:
-                    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
-                    let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                    
-                    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
-                    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                    return NSCollectionLayoutSection(group: group)
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
+                        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+                    }
                 }
             }
             
