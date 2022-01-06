@@ -104,6 +104,7 @@ extension SearchViewModel {
         case medias
         case shows
         case mostSearchedShows
+        case loading
     }
     
     enum Item: Hashable {
@@ -218,7 +219,8 @@ private extension SearchViewModel {
         else {
             let filledRows = rows.filter { !isLoading(row: $0) && !$0.items.isEmpty }
             if !filledRows.isEmpty {
-                return .loaded(rows: filledRows, suggestions: suggestions)
+                let rows = filledRows.appending(Row(section: .loading, items: [.loading]))
+                return .loaded(rows: rows, suggestions: suggestions)
             }
             else {
                 return .loading

@@ -337,6 +337,13 @@ private extension SearchResultsViewController {
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
                         return ShowCellSize.grid(for: .default, layoutWidth: layoutWidth, spacing: spacing)
                     }
+                case .loading:
+                    let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+                    let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                    
+                    let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(150))
+                    let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                    return NSCollectionLayoutSection(group: group)
                 }
             }
             
@@ -363,7 +370,7 @@ private extension SearchResultsViewController {
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageType: .default)
             case .loading:
-                Color.clear
+                ActivityIndicator()
             }
         }
     }
@@ -392,6 +399,8 @@ private extension SearchResultsViewController {
                 return NSLocalizedString("Shows", comment: "Show search result header")
             case .mostSearchedShows:
                 return NSLocalizedString("Most searched shows", comment: "Most searched shows header")
+            case .loading:
+                return nil
             }
         }
         
