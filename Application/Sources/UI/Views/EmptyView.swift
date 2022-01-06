@@ -6,28 +6,9 @@
 
 import SwiftUI
 
-// MARK: Types
-
 // MARK: View
 
 struct EmptyView: View {
-    enum State {
-        case loading
-        case empty(type: `Type`)
-        case failed(error: Error)
-    }
-    
-    enum `Type`: Hashable {
-        case episodesFromFavorites
-        case favoriteShows
-        case generic
-        case history
-        case resumePlayback
-        case search
-        case searchTutorial
-        case watchLater
-    }
-    
     let state: State
     let insets: EdgeInsets
     
@@ -90,6 +71,27 @@ struct EmptyView: View {
         .foregroundColor(Color.srgGrayC7)
         .padding()
         .padding(insets)
+    }
+}
+
+// MARK: Types
+
+extension EmptyView {
+    enum State {
+        case loading
+        case empty(type: `Type`)
+        case failed(error: Error)
+    }
+    
+    enum `Type`: Hashable {
+        case episodesFromFavorites
+        case favoriteShows
+        case generic
+        case history
+        case resumePlayback
+        case search
+        case searchTutorial
+        case watchLater
     }
 }
 
