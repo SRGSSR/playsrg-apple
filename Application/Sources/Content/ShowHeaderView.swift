@@ -120,7 +120,7 @@ struct ShowHeaderView: View {
                 HStack(spacing: 20) {
                     SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
 #if os(iOS)
-                    if model.isFavorite {
+                    if model.isSubscriptionPossible {
                         SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
                     }
 #endif
