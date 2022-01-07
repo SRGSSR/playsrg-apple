@@ -127,7 +127,7 @@ private extension SearchViewModel {
     static func mostSearchedShows() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
             let vendor = ApplicationConfiguration.shared.vendor
-            return SRGDataProvider.current!.mostSearchedShows(for: vendor)
+            return SRGDataProvider.current!.mostSearchedShows(for: vendor, matching: constant(iOS: .none, tvOS: .TV))
                 .map { shows in
                     let items = removeDuplicates(in: shows.map { Item.show($0) })
                     return [Row(section: .mostSearchedShows, items: items)]
