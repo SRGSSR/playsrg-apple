@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,9 +37,9 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
  *  Perform push notification setup.
  *
  *  @discussion This method must be called from `-application:didFinishLaunchingWithOptions:`, otherwise the behavior
- *              is undefined.
+ *              is undefined. It must be provided with the received launch options.
  */
-- (void)setup;
+- (void)setupWithLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions;
 
 /**
  *  Service singleton. `nil` if push notifications are not available for the application.

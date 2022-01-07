@@ -49,7 +49,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     NSAssert(NSClassFromString(@"ASIdentifierManager") == Nil, @"No implicit AdSupport.framework dependency must be found");
     
@@ -132,7 +132,7 @@ static void *s_kvoContext = &s_kvoContext;
         completionHandler(YES);
     }, @"FirstLaunchDone", nil);
     
-    [PushService.sharedService setup];
+    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
