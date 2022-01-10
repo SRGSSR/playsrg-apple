@@ -207,6 +207,10 @@ extension SearchResultsViewController: ContentInsets {
     var play_paddingContentInsets: UIEdgeInsets {
         return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
+    
+    var play_contentParentViewController: UIViewController? {
+        return searchViewController
+    }
 }
 
 extension SearchResultsViewController: UICollectionViewDelegate {

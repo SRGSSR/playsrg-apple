@@ -230,6 +230,21 @@ extension SearchViewController {
 
 // MARK: Protocols
 
+extension SearchViewController: ContainerContentInsets {
+    var play_additionalContentInsets: UIEdgeInsets {
+        return .zero
+    }
+    
+    var play_contentChildViewControllers: [UIViewController] {
+        if let searchResultsController = searchController.searchResultsController {
+            return [searchResultsController]
+        }
+        else {
+            return []
+        }
+    }
+}
+
 #if os(iOS)
 extension SearchViewController: PlayApplicationNavigation {
     func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {

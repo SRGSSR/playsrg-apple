@@ -64,13 +64,45 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
     UpdateContentInsetsForViewController(self);
 }
 
+#pragma mark Helpers
+
+- (UIViewController *)play_effectiveContentParentViewController
+{
+    if (! [self conformsToProtocol:@protocol(ContentInsets)]) {
+        return self.parentViewController;
+    }
+    
+    UIViewController<ContentInsets> *contentViewController = (UIViewController<ContentInsets> *)self;
+    if ([contentViewController respondsToSelector:@selector(play_contentParentViewController)]) {
+        return contentViewController.play_contentParentViewController;
+    }
+    else {
+        return contentViewController.parentViewController;
+    }
+}
+
+- (NSArray<UIViewController *> *)play_effectiveChildViewControllers
+{
+    if (! [self conformsToProtocol:@protocol(ContainerContentInsets)]) {
+        return self.childViewControllers;
+    }
+    
+    UIViewController<ContainerContentInsets> *containerViewController = (UIViewController<ContainerContentInsets> *)self;
+    if ([containerViewController respondsToSelector:@selector(play_contentChildViewControllers)]) {
+        return containerViewController.play_contentChildViewControllers;
+    }
+    else {
+        return containerViewController.childViewControllers;
+    }
+}
+
 #pragma mark Updates
 
 - (void)play_setNeedsContentInsetsUpdate
 {
     UpdateContentInsetsForViewController(self);
     
-    [self.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.play_effectiveChildViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
         [viewController play_setNeedsContentInsetsUpdate];
     }];
 }
@@ -94,7 +126,7 @@ static UIEdgeInsets ChildContentInsetsForViewController(UIViewController *viewCo
                                       insets.bottom + currentInsets.bottom,
                                       insets.right + currentInsets.right);
         }
-        currentViewController = currentViewController.parentViewController;
+        currentViewController = currentViewController.play_effectiveContentParentViewController;
     }
     
     return insets;
@@ -110,7 +142,7 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
     NSArray<UIScrollView *> *scrollViews = contentViewController.play_contentScrollViews;
     UIEdgeInsets paddingInsets = contentViewController.play_paddingContentInsets;
     
-    contentViewController.additionalSafeAreaInsets = ChildContentInsetsForViewController(viewController.parentViewController);
+    contentViewController.additionalSafeAreaInsets = ChildContentInsetsForViewController(viewController.play_effectiveContentParentViewController);
     [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
         scrollView.contentInset = paddingInsets;
     }];
@@ -118,7 +150,7 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
 
 UIEdgeInsets ContentInsetsForViewController(UIViewController *viewController)
 {
-    UIEdgeInsets insets = ChildContentInsetsForViewController(viewController.parentViewController);
+    UIEdgeInsets insets = ChildContentInsetsForViewController(viewController.play_effectiveContentParentViewController);
     UIEdgeInsets safeAreaInsets = viewController.additionalSafeAreaInsets;
     return UIEdgeInsetsMake(insets.top + safeAreaInsets.top,
                             insets.left + safeAreaInsets.left,
