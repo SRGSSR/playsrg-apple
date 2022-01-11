@@ -240,7 +240,7 @@ extension SearchViewController: ContainerContentInsets {
     }
     
     var play_contentChildViewControllers: [UIViewController] {
-        if let searchResultsController = searchController.searchResultsController {
+        if let searchResultsController = searchController?.searchResultsController {
             return [searchResultsController]
         }
         else {
