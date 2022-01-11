@@ -148,10 +148,6 @@ final class SearchResultsViewController: UIViewController {
     }
     
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     func scrollToTop(animated: Bool) {
         collectionView.play_scrollToTop(animated: animated)
     }
