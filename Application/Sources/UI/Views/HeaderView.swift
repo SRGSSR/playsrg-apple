@@ -57,6 +57,7 @@ struct HeaderView: View {
         .foregroundColor(.srgGrayC7)
         .padding(.vertical, constant(iOS: 3, tvOS: 15))
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(label: title, traits: .isHeader)
     }
 }
 

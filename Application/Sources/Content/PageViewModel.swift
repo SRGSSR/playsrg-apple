@@ -40,7 +40,6 @@ final class PageViewModel: Identifiable, ObservableObject {
                             )
                             .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
                             .prepend(Self.placeholderRow(for: section, state: self?.state))
-                            .eraseToAnyPublisher()
                         }
                     })
                     .eraseToAnyPublisher()
@@ -50,7 +49,6 @@ final class PageViewModel: Identifiable, ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -91,7 +89,7 @@ final class PageViewModel: Identifiable, ObservableObject {
                     return self.state.sections.isEmpty
                 }
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
     

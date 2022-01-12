@@ -181,8 +181,7 @@ static const CGFloat SongTableViewMargin = 42.f;
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when song title and artist name have been copied to the pasteboard")
                         image:nil
-                       sticky:NO
-             inViewController:nil /* Not 'self' since dismissed */];
+                       sticky:NO];
     }
 }
 

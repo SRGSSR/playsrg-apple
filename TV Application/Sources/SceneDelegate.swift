@@ -29,13 +29,13 @@ final class SceneDelegate: UIResponder {
         let normalColor = UIColor.white
         let activeColor = UIColor.srgGray16
         
-        let normalItemAttributes = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: normalColor
+        let normalItemAttributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: normalColor
         ]
-        let activeItemAttributes = [
-            NSAttributedString.Key.font: font,
-            NSAttributedString.Key.foregroundColor: activeColor
+        let activeItemAttributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .foregroundColor: activeColor
         ]
         
         let inlineItemAppearance = UITabBarItemAppearance(style: .inline)

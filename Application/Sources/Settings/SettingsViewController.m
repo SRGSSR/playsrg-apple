@@ -344,7 +344,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
         [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
             if (error) {
-                [Banner showError:error inViewController:self];
+                [Banner showError:error];
                 return;
             }
             

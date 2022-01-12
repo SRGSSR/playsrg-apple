@@ -44,7 +44,7 @@
     if (notification.mediaURN) {
         [[SRGDataProvider.currentDataProvider mediaWithURN:notification.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (error) {
-                [Banner showError:error inViewController:viewController];
+                [Banner showError:error];
                 return;
             }
             
@@ -60,7 +60,7 @@
     else if (notification.showURN) {
         [[SRGDataProvider.currentDataProvider showWithURN:notification.showURN completionBlock:^(SRGShow * _Nullable show, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (error) {
-                [Banner showError:error inViewController:viewController];
+                [Banner showError:error];
                 return;
             }
             

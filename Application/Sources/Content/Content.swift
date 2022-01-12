@@ -59,15 +59,6 @@ enum Content {
         }
     }
     
-    enum EmptyType: Hashable {
-        case favoriteShows
-        case episodesFromFavorites
-        case history
-        case resumePlayback
-        case watchLater
-        case generic
-    }
-    
     static func medias(from items: [Content.Item]) -> [SRGMedia] {
         return items.compactMap { item in
             if case let .media(media) = item {
@@ -105,7 +96,7 @@ protocol SectionProperties {
     var placeholderItems: [Content.Item] { get }
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
-    var emptyType: Content.EmptyType { get }
+    var emptyType: EmptyView.`Type` { get }
     var imageType: SRGImageType { get }
     
     var analyticsTitle: String? { get }
@@ -217,7 +208,7 @@ private extension Content {
             }
         }
         
-        var emptyType: Content.EmptyType {
+        var emptyType: EmptyView.`Type` {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
@@ -521,7 +512,7 @@ private extension Content {
             }
         }
         
-        var emptyType: Content.EmptyType {
+        var emptyType: EmptyView.`Type` {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows

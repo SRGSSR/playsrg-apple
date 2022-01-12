@@ -50,7 +50,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -74,7 +74,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -92,7 +92,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: RunLoop.main, latest: true)
+            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }

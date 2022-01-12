@@ -100,7 +100,7 @@ final class SectionViewModel: ObservableObject {
                     return !self.state.hasContent
                 }
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
 }
