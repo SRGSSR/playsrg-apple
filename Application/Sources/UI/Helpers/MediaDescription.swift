@@ -172,7 +172,8 @@ struct MediaDescription {
                         color: .srgBlue
                     )
                 }
-                else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
+                else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,
+                            let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
                     return BadgeProperties(
                         text: String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime),
                         color: .play_orange
