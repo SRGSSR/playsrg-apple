@@ -25,7 +25,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     
     private func updatePublishers() {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: self?.day ?? .today)
+            return SRGDataProvider.current!.tvPrograms(for: self?.day ?? .today, minimal: true)
                 .map { programCompositions in
                     return State.loaded(programCompositions: programCompositions)
                 }
