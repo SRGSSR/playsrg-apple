@@ -181,14 +181,10 @@ extension SRGDataProvider {
     }
     
     func tvPrograms(for day: SRGDay, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
-        // TODO: Better implementation
-        return Publishers.CombineLatest(
-            self.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day, minimal: minimal),
-            self.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
-                .prepend([])
-        )
-        .map { $0 + $1 }
-        .eraseToAnyPublisher()
+        return tvPrograms(for: ApplicationConfiguration.shared.vendor, day: day, minimal: minimal)
+            .append(tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal))
+            .scan([]) { $0 + $1 }
+            .eraseToAnyPublisher()
     }
 }
 
