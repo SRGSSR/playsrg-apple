@@ -121,7 +121,12 @@ final class ProgramGuideDailyViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            if let selectedChannel = programGuideModel.selectedChannel, !state.channels.contains(selectedChannel) {
+                emptyView.content = EmptyView(state: .loading)
+            }
+            else {
+                emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            }
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
