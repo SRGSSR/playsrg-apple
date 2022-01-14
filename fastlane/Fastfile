@@ -795,7 +795,7 @@ def appstore_beta_identifiers
    ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
 end
 
-def appstore_team_api_key_prefixs
+def appstore_team_api_key_prefixes
   { ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI',
     ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
     ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
@@ -954,7 +954,7 @@ end
 
 def srg_app_store_connect_api_key
   itc_team_id = app_config.try_fetch_value(:itc_team_id)
-  key_prefix = appstore_team_api_key_prefixs[itc_team_id]
+  key_prefix = appstore_team_api_key_prefixes[itc_team_id]
   return unless key_prefix
 
   { id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ID'],
