@@ -239,9 +239,9 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": null,
-          "revision": "71aa1b756792f90e7cb8d979c48d48d73d21ca3b",
-          "version": "12.2.0"
+          "branch": "feature/external-tv-channels",
+          "revision": "6ec16e80336d60e43ecf8f8ec367cf464e50419d",
+          "version": null
         }
       },
       {
