@@ -669,6 +669,10 @@ def app_config
   CredentialsManager::AppfileConfig
 end
 
+def srg_pwd
+  Dir.chdir('..') { Dir.pwd }
+end
+
 def cleaned_lane_condition(lane)
   (lane.to_s != 'devLane') &&
     (!lane.to_s.downcase.include? 'dsym') &&
@@ -791,7 +795,7 @@ def appstore_beta_identifiers
    ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
 end
 
-def appstore_team_api_key_prefixs
+def appstore_team_api_key_prefixes
   { ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI',
     ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
     ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
@@ -838,6 +842,19 @@ def srg_xcargs(options)
   xcargs += " MARKETING_VERSION_SUFFIX='#{options[:version_suffix]}'"
   xcargs += " BUILD_NAME='#{options[:build_name]}'"
   xcargs += " DEVELOPMENT_TEAM='#{options[:team_id]}'"
+  xcargs + srg_xcargs_code_signing(export_to_appstore)
+end
+
+# Use cloud signing if available
+def srg_xcargs_code_signing(export_to_appstore)
+  asc_api_key = srg_app_store_connect_api_key if export_to_appstore
+
+  xcargs = ''
+  if asc_api_key
+    xcargs += " -authenticationKeyIssuerID '#{asc_api_key[:issuerId]}'"
+    xcargs += " -authenticationKeyID '#{asc_api_key[:id]}'"
+    xcargs += " -authenticationKeyPath '#{asc_api_key[:filePath]}'"
+  end
   xcargs + ' -allowProvisioningUpdates'
 end
 
@@ -935,14 +952,24 @@ def appstore_platform(platform)
   appstore_platforms[platform]
 end
 
-def login_with_app_store_connect_api_key
+def srg_app_store_connect_api_key
   itc_team_id = app_config.try_fetch_value(:itc_team_id)
-  key_prefix = appstore_team_api_key_prefixs[itc_team_id]
+  key_prefix = appstore_team_api_key_prefixes[itc_team_id]
+  return unless key_prefix
+
+  { id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ID'],
+    issuerId: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ISSUER_ID'],
+    filePath: srg_pwd + '/Configuration/' + ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_PATH'] }
+end
+
+def login_with_app_store_connect_api_key
+  asc_api_key = srg_app_store_connect_api_key
+  return unless asc_api_key
 
   app_store_connect_api_key(
-    key_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ID'],
-    issuer_id: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_ISSUER_ID'],
-    key_content: ENV[key_prefix + '_APPSTORE_CONNECT_API_KEY_CONTENT']
+    key_id: asc_api_key[:id],
+    issuer_id: asc_api_key[:issuerId],
+    key_filepath: asc_api_key[:filePath]
   )
 end
 
