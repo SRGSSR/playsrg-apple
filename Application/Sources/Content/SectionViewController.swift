@@ -695,8 +695,10 @@ private extension SectionViewController {
                 }
             case let .topic(topic):
                 TopicCell(topic: topic)
+#if os(iOS)
             case let .download(download):
-                Color.red
+                DownloadCell(download: download)
+#endif
             case .transparent:
                 Color.clear
             default:

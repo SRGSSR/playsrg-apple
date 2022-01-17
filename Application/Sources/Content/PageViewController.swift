@@ -668,7 +668,7 @@ private extension PageViewController {
                     TopicCell(topic: topic)
 #if os(iOS)
                 case let .download(download):
-                    Color.clear
+                    DownloadCell(download: download)
                 case .showAccess:
                     switch id {
                     case .video:
