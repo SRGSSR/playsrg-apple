@@ -179,21 +179,6 @@ extension SRGDataProvider {
             .map { filter?.compatibleShows($0) ?? $0 }
             .eraseToAnyPublisher()
     }
-    
-    func tvPrograms(for day: SRGDay, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
-        let applicationConfiguration = ApplicationConfiguration.shared
-        let vendor = applicationConfiguration.vendor
-        
-        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
-            return tvPrograms(for: vendor, day: day, minimal: minimal)
-                .append(tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: minimal))
-                .scan([]) { $0 + $1 }
-                .eraseToAnyPublisher()
-        }
-        else {
-            return tvPrograms(for: vendor, day: day, minimal: minimal)
-        }
-    }
 }
 
 enum UserDataPublishers {

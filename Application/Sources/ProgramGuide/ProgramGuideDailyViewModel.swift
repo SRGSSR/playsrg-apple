@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGDataProviderCombine
 
 // MARK: View model
 
@@ -25,7 +26,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     
     private func updatePublishers() {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return SRGDataProvider.current!.tvPrograms(for: self?.day ?? .today, minimal: true)
+            return SRGDataProvider.current!.tvPrograms(for: self?.day ?? .today)
                 .map { programCompositions in
                     return State.loaded(programCompositions: programCompositions)
                 }
@@ -88,6 +89,34 @@ extension ProgramGuideDailyViewModel {
             return programs.flatMap { program in
                 return program.subprograms ?? [program]
             }
+        }
+    }
+}
+
+// MARK: Publishers
+
+private extension SRGDataProvider {
+    func tvPrograms(for day: SRGDay) -> AnyPublisher<[SRGProgramComposition], Error> {
+        let applicationConfiguration = ApplicationConfiguration.shared
+        let vendor = applicationConfiguration.vendor
+        
+        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+            return Publishers.CombineLatest(
+                tvPrograms(for: vendor, day: day, minimal: true)
+                    .append(tvPrograms(for: vendor, day: day))
+                    .prepend([]),
+                tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: true)
+                    .append(tvPrograms(for: vendor, provider: .thirdParty, day: day))
+                    .prepend([])
+            )
+            .map { $0 + $1 }
+            .eraseToAnyPublisher()
+        }
+        else {
+            return tvPrograms(for: vendor, day: day, minimal: true)
+                .append(tvPrograms(for: vendor, day: day))
+                .prepend([])
+                .eraseToAnyPublisher()
         }
     }
 }
