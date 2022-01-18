@@ -71,15 +71,10 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         }.min()
     }
     
-    private static func endDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
-        return snapshot.sectionIdentifiers.flatMap { channel in
-            return snapshot.itemIdentifiers(inSection: channel).map(\.endDate)
-        }.max()
-    }
-    
     private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
-        guard let startDate = startDate(from: snapshot), let endDate = endDate(from: snapshot) else { return nil }
-        return DateInterval(start: startDate, end: endDate)
+        // Required: start date in the current day
+        guard let startDate = startDate(from: snapshot) else { return nil }
+        return DateInterval(start: SRGDay(from: startDate).date, duration: 60 * 60 * 27)
     }
     
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> LayoutData? {
