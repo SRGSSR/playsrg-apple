@@ -65,35 +65,44 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private var layoutData: LayoutData?
     private var cancellables = Set<AnyCancellable>()
     
-    private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
-        // Required: all start dates are in the current day
-        guard let minStartDate = snapshot.sectionIdentifiers.flatMap({ channel in
-            return snapshot.itemIdentifiers(inSection: channel).map(\.startDate)
-        }).min() else { return nil }
-        return Calendar.current.startOfDay(for: minStartDate)
+    private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> Date? {
+        guard let section = snapshot.sectionIdentifiers.first(where: { section in
+            let items = snapshot.itemIdentifiers(inSection: section)
+            return !items.isEmpty
+        }) else { return nil }
+        return snapshot.itemIdentifiers(inSection: section).first?.day.date
     }
     
     private static func endDate(from startDate: Date) -> Date? {
-        let dateComponent = DateComponents.init(day: 1, hour: 3)
+        let dateComponent = DateComponents(day: 1, hour: 3)
         return Calendar.current.date(byAdding: dateComponent, to: startDate)
     }
     
-    private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
+    private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> DateInterval? {
         guard let startDate = startDate(from: snapshot), let endDate = endDate(from: startDate) else { return nil }
         return DateInterval(start: startDate, end: endDate)
     }
     
-    private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> LayoutData? {
+    private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int) -> CGRect {
+        return CGRect(
+            x: Self.channelHeaderWidth + Self.horizontalSpacing + startDate.timeIntervalSince(dateInterval.start) * Self.scale,
+            y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
+            width: max(endDate.timeIntervalSince(startDate) * Self.scale - Self.horizontalSpacing, 0),
+            height: Self.sectionHeight
+        )
+    }
+    
+    private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>, in collectionView: UICollectionView) -> LayoutData? {
         guard let dateInterval = dateInterval(from: snapshot) else { return nil }
         let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
-            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { program, item -> UICollectionViewLayoutAttributes in
-                let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: item, section: section))
-                attrs.frame = CGRect(
-                    x: Self.channelHeaderWidth + Self.horizontalSpacing + program.startDate.timeIntervalSince(dateInterval.start) * Self.scale,
-                    y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
-                    width: max(program.endDate.timeIntervalSince(program.startDate) * Self.scale - Self.horizontalSpacing, 0),
-                    height: Self.sectionHeight
-                )
+            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index -> UICollectionViewLayoutAttributes in
+                let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
+                switch item.wrappedValue {
+                case let .program(program):
+                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section)
+                case .empty:
+                    attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section)
+                }
                 return attrs
             }
         }
@@ -167,7 +176,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     override func prepare() {
         super.prepare()
         
-        if let collectionView = collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<SRGChannel, SRGProgram> {
+        if let collectionView = collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
             layoutData = Self.layoutData(from: dataSource.snapshot(), in: collectionView)
         }
         else {

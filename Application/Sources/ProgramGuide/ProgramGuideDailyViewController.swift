@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SwiftUI
 import UIKit
 
 // MARK: View controller
@@ -14,7 +15,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private let programGuideModel: ProgramGuideViewModel
     
     private var cancellables = Set<AnyCancellable>()
-    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
+    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -25,10 +26,12 @@ final class ProgramGuideDailyViewController: UIViewController {
         return model.day
     }
     
-    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
-        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(state.programs(for: channel), toSection: .main)
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
+        if let channel = channel {
+            snapshot.appendSections([channel])
+            snapshot.appendItems(state.items(for: channel), toSection: channel)
+        }
         return snapshot
     }
     
@@ -73,8 +76,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, _, program in
-            cell.content = ProgramCell(program: program, channel: self?.programGuideModel.selectedChannel, direction: .horizontal)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
+            cell.content = ItemCell(item: item)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -111,26 +114,18 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
-        guard let emptyView = emptyView, let dataSource = dataSource else { return }
-        
-        let channel = channel ?? programGuideModel.selectedChannel
-        
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            if let selectedChannel = programGuideModel.selectedChannel, !state.channels.contains(selectedChannel) {
-                emptyView.content = EmptyView(state: .loading)
-            }
-            else {
-                emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
-            }
+            emptyView.content = nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state, for: channel), animatingDifferences: false) {
+            let channel = channel ?? self.programGuideModel.selectedChannel
+            self.dataSource.apply(Self.snapshot(from: state, for: channel), animatingDifferences: false) {
                 // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
                 // when the content size has not yet been determined (still zero).
                 self.collectionView.layoutIfNeeded()
@@ -140,9 +135,9 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
+        guard let selectedChannel = programGuideModel.selectedChannel else { return }
         let date = model.day.date.addingTimeInterval(time ?? programGuideModel.dateSelection.time)
-        let programs = model.state.programs(for: programGuideModel.selectedChannel)
-        guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
+        guard let row = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }) else { return }
         collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
     }
 }
@@ -168,9 +163,14 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
             return
         }
         
-        let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
-        let programViewController = ProgramView.viewController(for: program, channel: channel)
-        present(programViewController, animated: true) {
+        let item = dataSource.snapshot().itemIdentifiers(inSection: channel)[indexPath.row]
+        switch item.wrappedValue {
+        case let .program(program):
+            let programViewController = ProgramView.viewController(for: program, channel: channel)
+            present(programViewController, animated: true) {
+                self.deselectItems(in: collectionView, animated: true)
+            }
+        case .empty:
             self.deselectItems(in: collectionView, animated: true)
         }
     }
@@ -179,7 +179,9 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
 extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
-           let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
+           let selectedChannel = programGuideModel.selectedChannel,
+           let item = model.state.items(for: selectedChannel)[safeIndex: index],
+           case let .program(program) = item.wrappedValue {
             programGuideModel.didScrollToTime(of: program.startDate)
         }
     }
@@ -191,6 +193,26 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             updateTime()
+        }
+    }
+}
+
+// MARK: Views
+
+// TODO: Factor code with ProgramGuideGridViewController? Or not needed for the vertical list?
+private extension ProgramGuideDailyViewController {
+    struct ItemCell: View {
+        let item: ProgramGuideDailyViewModel.Item
+        
+        var body: some View {
+            switch item.wrappedValue {
+            case let .program(program):
+                ProgramCell(program: program, channel: item.section, direction: .horizontal)
+            case .empty:
+                // TODO: Maybe not for the vertical list
+                Color.srgGray23
+                    .cornerRadius(4)
+            }
         }
     }
 }

@@ -16,7 +16,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private let dailyModel: ProgramGuideDailyViewModel
     
     private var cancellables = Set<AnyCancellable>()
-    private var dataSource: UICollectionViewDiffableDataSource<SRGChannel, SRGProgram>!
+    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
@@ -24,11 +24,11 @@ final class ProgramGuideGridViewController: UIViewController {
     
     private weak var headerHeightConstraint: NSLayoutConstraint!
     
-    private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram> {
-        var snapshot = NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>()
-        for channel in state.channels {
-            snapshot.appendSections([channel])
-            snapshot.appendItems(state.programs(for: channel), toSection: channel)
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
+        for section in state.sections {
+            snapshot.appendSections([section])
+            snapshot.appendItems(state.items(for: section), toSection: section)
         }
         return snapshot
     }
@@ -94,13 +94,10 @@ final class ProgramGuideGridViewController: UIViewController {
         headerView.content = ProgramGuideGridHeaderView(model: model)
 #endif
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, indexPath, program in
-            let snapshot = self?.dataSource.snapshot()
-            let channel = snapshot?.sectionIdentifiers[indexPath.section]
-            
-            cell.content = ProgramCell(program: program, channel: channel, direction: .vertical)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
+            cell.content = ItemCell(item: item)
 #if os(tvOS)
-            cell.accessibilityLabel = program.play_accessibilityLabel(with: channel)
+            cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section)
             cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
 #endif
         }
@@ -158,15 +155,13 @@ final class ProgramGuideGridViewController: UIViewController {
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
-        guard let dataSource = dataSource else { return }
-        
         switch state {
         case .loading:
             emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = !state.hasContent ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyView.content = nil
 #if os(tvOS)
             let currentProgram = state.programs(for: nil).first { $0.play_contains(model.dateSelection.date) }
             headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
@@ -174,7 +169,7 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
+            self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
                 // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
                 // when the content size has not yet been determined (still zero).
                 self.collectionView.layoutIfNeeded()
@@ -192,11 +187,12 @@ final class ProgramGuideGridViewController: UIViewController {
         dailyModel.day = day
     }
     
+    // FIXME: We must scroll to the correct section which was previously visible
     private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
         let date = dailyModel.day.date.addingTimeInterval(time ?? model.dateSelection.time)
-        let channel = dailyModel.state.channels.first
-        let programs = dailyModel.state.programs(for: channel)
-        guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
+        guard let section = dailyModel.state.sections.first else { return }
+        let items = dailyModel.state.items(for: section)
+        guard let row = items.firstIndex(where: { $0.endsAfter(date) }) else { return }
         collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredHorizontally, animated: animated)
     }
 }
@@ -216,17 +212,23 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
         let channel = snapshot.sectionIdentifiers[indexPath.section]
-        let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
+        let item = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
+        
+        switch item.wrappedValue {
+        case let .program(program):
 #if os(tvOS)
-        navigateToProgram(program, in: channel)
+            navigateToProgram(program, in: channel)
 #else
-        // Deselection is managed here rather than in view appearance methods, as those are not called with the
-        // modal presentation we use.
-        let programViewController = ProgramView.viewController(for: program, channel: channel)
-        present(programViewController, animated: true) {
+            // Deselection is managed here rather than in view appearance methods, as those are not called with the
+            // modal presentation we use.
+            let programViewController = ProgramView.viewController(for: program, channel: channel)
+            present(programViewController, animated: true) {
+                self.deselectItems(in: collectionView, animated: true)
+            }
+#endif
+        case .empty:
             self.deselectItems(in: collectionView, animated: true)
         }
-#endif
     }
     
 #if os(tvOS)
@@ -251,8 +253,9 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first,
-           let channel = dailyModel.state.channels[safeIndex: indexPath.section],
-           let program = dailyModel.state.programs(for: channel)[safeIndex: indexPath.row] {
+           let section = dailyModel.state.sections[safeIndex: indexPath.section],
+           let item = dailyModel.state.items(for: section)[safeIndex: indexPath.row],
+           case let .program(program) = item.wrappedValue {
             model.didScrollToTime(of: program.startDate)
         }
     }
@@ -269,6 +272,22 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
 }
 
 // MARK: Views
+
+private extension ProgramGuideGridViewController {
+    struct ItemCell: View {
+        let item: ProgramGuideDailyViewModel.Item
+        
+        var body: some View {
+            switch item.wrappedValue {
+            case let .program(program):
+                ProgramCell(program: program, channel: item.section, direction: .vertical)
+            case .empty:
+                Color.srgGray23
+                    .cornerRadius(4)
+            }
+        }
+    }
+}
 
 final class TimelineDecorationView: HostSupplementaryView<TimelineView> {
     override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {

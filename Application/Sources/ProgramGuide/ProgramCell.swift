@@ -100,7 +100,7 @@ struct ProgramCell: View {
                         Spacer()
                     }
                     else {
-                        Color(.clear)
+                        Color.clear
                     }
                 }
                 .padding(.horizontal, isDisplayable ? horizontalPadding : 0)
