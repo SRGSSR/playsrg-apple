@@ -66,15 +66,21 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private var cancellables = Set<AnyCancellable>()
     
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> Date? {
-        return snapshot.sectionIdentifiers.flatMap { channel in
+        // Required: all start dates are in the current day
+        guard let minStartDate = snapshot.sectionIdentifiers.flatMap({ channel in
             return snapshot.itemIdentifiers(inSection: channel).map(\.startDate)
-        }.min()
+        }).min() else { return nil }
+        return Calendar.current.startOfDay(for: minStartDate)
+    }
+    
+    private static func endDate(from startDate: Date) -> Date? {
+        let dateComponent = DateComponents.init(day: 1, hour: 3)
+        return Calendar.current.date(byAdding: dateComponent, to: startDate)
     }
     
     private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>) -> DateInterval? {
-        // Required: start date in the current day
-        guard let startDate = startDate(from: snapshot) else { return nil }
-        return DateInterval(start: SRGDay(from: startDate).date, duration: 60 * 60 * 27)
+        guard let startDate = startDate(from: snapshot), let endDate = endDate(from: startDate) else { return nil }
+        return DateInterval(start: startDate, end: endDate)
     }
     
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<SRGChannel, SRGProgram>, in collectionView: UICollectionView) -> LayoutData? {
