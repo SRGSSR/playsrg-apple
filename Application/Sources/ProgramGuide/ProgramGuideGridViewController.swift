@@ -242,11 +242,12 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
     
 #if os(tvOS)
     func collectionView(_ collectionView: UICollectionView, didUpdateFocusIn context: UICollectionViewFocusUpdateContext, with coordinator: UIFocusAnimationCoordinator) {
-        if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath, let previouslyFocusedCell = collectionView.cellForItem(at: previouslyFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
+        if let previouslyFocusedIndexPath = context.previouslyFocusedIndexPath,
+            let previouslyFocusedCell = collectionView.cellForItem(at: previouslyFocusedIndexPath) as? HostCollectionViewCell<ItemCell> {
             previouslyFocusedCell.isUIKitFocused = false
         }
         if let nextFocusedIndexPath = context.nextFocusedIndexPath {
-            if let nextFocusedCell = collectionView.cellForItem(at: nextFocusedIndexPath) as? HostCollectionViewCell<ProgramCell> {
+            if let nextFocusedCell = collectionView.cellForItem(at: nextFocusedIndexPath) as? HostCollectionViewCell<ItemCell> {
                 nextFocusedCell.isUIKitFocused = true
             }
             
