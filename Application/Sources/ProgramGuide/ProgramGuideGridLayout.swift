@@ -67,8 +67,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     private static func startDate(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> Date? {
         guard let section = snapshot.sectionIdentifiers.first(where: { section in
-            let items = snapshot.itemIdentifiers(inSection: section)
-            return !items.isEmpty
+            return !snapshot.itemIdentifiers(inSection: section).isEmpty
         }) else { return nil }
         return snapshot.itemIdentifiers(inSection: section).first?.day.date
     }

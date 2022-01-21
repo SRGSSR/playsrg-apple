@@ -124,8 +124,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            let channel = channel ?? self.programGuideModel.selectedChannel
-            self.dataSource.apply(Self.snapshot(from: state, for: channel), animatingDifferences: false) {
+            self.dataSource.apply(Self.snapshot(from: state, for: channel ?? self.programGuideModel.selectedChannel), animatingDifferences: false) {
                 // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
                 // when the content size has not yet been determined (still zero).
                 self.collectionView.layoutIfNeeded()

@@ -169,9 +169,13 @@ final class ProgramGuideGridViewController: UIViewController {
         case .loaded:
             emptyView.content = nil
 #if os(tvOS)
-            // FIXME:
-            // let currentProgram = state.programs(for: nil).first { $0.play_contains(model.dateSelection.date) }
-            // headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
+            if let firstSection = state.sections.first,
+               let currentProgram = state.items(for: firstSection).compactMap(\.program).first(where: { $0.play_contains(model.dateSelection.date) }) {
+                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
+            }
+            else {
+                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
+            }
 #endif
         }
         
@@ -248,12 +252,8 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             
             let snapshot = dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
-            if let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program {
-                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
-            }
-            else {
-                headerView.content = nil
-            }
+            let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program
+            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
         }
     }
 #endif
