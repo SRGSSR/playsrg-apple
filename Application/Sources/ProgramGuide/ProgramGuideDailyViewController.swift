@@ -158,19 +158,14 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
-        guard let channel = programGuideModel.selectedChannel else {
+        guard let channel = programGuideModel.selectedChannel,
+              let program = dataSource.snapshot().itemIdentifiers(inSection: channel)[indexPath.row].program else {
             self.deselectItems(in: collectionView, animated: true)
             return
         }
         
-        let item = dataSource.snapshot().itemIdentifiers(inSection: channel)[indexPath.row]
-        switch item.wrappedValue {
-        case let .program(program):
-            let programViewController = ProgramView.viewController(for: program, channel: channel)
-            present(programViewController, animated: true) {
-                self.deselectItems(in: collectionView, animated: true)
-            }
-        case .empty:
+        let programViewController = ProgramView.viewController(for: program, channel: channel)
+        present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
         }
     }
@@ -180,8 +175,7 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
            let selectedChannel = programGuideModel.selectedChannel,
-           let item = model.state.items(for: selectedChannel)[safeIndex: index],
-           case let .program(program) = item.wrappedValue {
+           let program = model.state.items(for: selectedChannel)[safeIndex: index]?.program {
             programGuideModel.didScrollToTime(of: program.startDate)
         }
     }
@@ -205,10 +199,10 @@ private extension ProgramGuideDailyViewController {
         let item: ProgramGuideDailyViewModel.Item
         
         var body: some View {
-            switch item.wrappedValue {
-            case let .program(program):
+            if let program = item.program {
                 ProgramCell(program: program, channel: item.section, direction: .horizontal)
-            case .empty:
+            }
+            else {
                 // TODO: Maybe not for the vertical list
                 Color.srgGray23
                     .cornerRadius(4)

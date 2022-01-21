@@ -97,8 +97,14 @@ final class ProgramGuideGridViewController: UIViewController {
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
             cell.content = ItemCell(item: item)
 #if os(tvOS)
-            cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section)
-            cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
+            if let program = item.program {
+                cell.accessibilityLabel = program.play_accessibilityLabel(with: item.section)
+                cell.accessibilityHint = PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Program cell hint")
+            }
+            else {
+                cell.accessibilityLabel = nil
+                cell.accessibilityHint = nil
+            }
 #endif
         }
         
@@ -163,8 +169,9 @@ final class ProgramGuideGridViewController: UIViewController {
         case .loaded:
             emptyView.content = nil
 #if os(tvOS)
-            let currentProgram = state.programs(for: nil).first { $0.play_contains(model.dateSelection.date) }
-            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
+            // FIXME:
+            // let currentProgram = state.programs(for: nil).first { $0.play_contains(model.dateSelection.date) }
+            // headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
 #endif
         }
         
@@ -212,23 +219,21 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
         let channel = snapshot.sectionIdentifiers[indexPath.section]
-        let item = snapshot.itemIdentifiers(inSection: channel)[indexPath.row]
+        guard let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row].program else {
+            self.deselectItems(in: collectionView, animated: true)
+            return
+        }
         
-        switch item.wrappedValue {
-        case let .program(program):
 #if os(tvOS)
-            navigateToProgram(program, in: channel)
+        navigateToProgram(program, in: channel)
 #else
-            // Deselection is managed here rather than in view appearance methods, as those are not called with the
-            // modal presentation we use.
-            let programViewController = ProgramView.viewController(for: program, channel: channel)
-            present(programViewController, animated: true) {
-                self.deselectItems(in: collectionView, animated: true)
-            }
-#endif
-        case .empty:
+        // Deselection is managed here rather than in view appearance methods, as those are not called with the
+        // modal presentation we use.
+        let programViewController = ProgramView.viewController(for: program, channel: channel)
+        present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
         }
+#endif
     }
     
 #if os(tvOS)
@@ -243,8 +248,12 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             
             let snapshot = dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
-            let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row]
-            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
+            if let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program {
+                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
+            }
+            else {
+                headerView.content = nil
+            }
         }
     }
 #endif
@@ -254,8 +263,7 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
         if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first,
            let section = dailyModel.state.sections[safeIndex: indexPath.section],
-           let item = dailyModel.state.items(for: section)[safeIndex: indexPath.row],
-           case let .program(program) = item.wrappedValue {
+           let program = dailyModel.state.items(for: section)[safeIndex: indexPath.row]?.program {
             model.didScrollToTime(of: program.startDate)
         }
     }
@@ -278,10 +286,10 @@ private extension ProgramGuideGridViewController {
         let item: ProgramGuideDailyViewModel.Item
         
         var body: some View {
-            switch item.wrappedValue {
-            case let .program(program):
+            if let program = item.program {
                 ProgramCell(program: program, channel: item.section, direction: .vertical)
-            case .empty:
+            }
+            else {
                 Color.srgGray23
                     .cornerRadius(4)
             }

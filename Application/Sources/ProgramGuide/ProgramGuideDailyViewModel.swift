@@ -62,11 +62,20 @@ extension ProgramGuideDailyViewModel {
             self.day = day
         }
         
+        var program: SRGProgram? {
+            if case let .program(program) = wrappedValue {
+                return program
+            }
+            else {
+                return nil
+            }
+        }
+        
         func endsAfter(_ date: Date) -> Bool {
-            switch wrappedValue {
-            case let .program(program):
+            if let program = program {
                 return program.endDate > date
-            case .empty:
+            }
+            else {
                 return false
             }
         }
@@ -146,7 +155,7 @@ extension ProgramGuideDailyViewModel {
         
         private static func items(from row: Row) -> [Item] {
             return row.items.flatMap { item -> [Item] in
-                if case let .program(program) = item.wrappedValue, let subprograms = program.subprograms {
+                if let subprograms = item.program?.subprograms {
                     return subprograms.map { Item(.program($0), in: item.section, day: item.day) }
                 }
                 else {

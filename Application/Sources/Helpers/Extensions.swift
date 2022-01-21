@@ -181,6 +181,7 @@ extension SRGImageMetadata {
 }
 
 // Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
+// TODO: Remove after tvOS media detail view refactoring
 extension Publisher where Failure == Never {
     func weakAssign<T: AnyObject>(to keyPath: ReferenceWritableKeyPath<T, Output>, on object: T) -> AnyCancellable {
         sink { [weak object] value in
