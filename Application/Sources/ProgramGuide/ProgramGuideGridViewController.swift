@@ -291,8 +291,7 @@ private extension ProgramGuideGridViewController {
                 ProgramCell(program: program, channel: item.section, direction: .vertical)
             }
             else {
-                Color.srgGray23
-                    .cornerRadius(4)
+                Color.clear
             }
         }
     }
