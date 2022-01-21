@@ -138,9 +138,6 @@ extension ProgramGuideDailyViewModel {
             if let row = rows.first(where: { $0.section == section }) {
                 return Self.items(from: row)
             }
-            else if let firstRow = rows.first {
-                return Self.items(from: firstRow)
-            }
             else {
                 return []
             }
