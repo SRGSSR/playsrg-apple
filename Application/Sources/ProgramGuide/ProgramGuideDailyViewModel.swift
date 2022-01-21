@@ -10,31 +10,24 @@ import SRGDataProviderCombine
 // MARK: View model
 
 final class ProgramGuideDailyViewModel: ObservableObject {
-    var day: SRGDay {
-        didSet {
-            guard day != oldValue else { return }
-            updatePublishers()
-        }
-    }
-    
+    @Published var day: SRGDay
     @Published private(set) var state: State = .loading
     
     init(day: SRGDay) {
         self.day = day
-        updatePublishers()
-    }
-    
-    private func updatePublishers() {
-        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] () -> AnyPublisher<State, Never> in
-            let existingData = self?.state.data ?? Data()
-            return SRGDataProvider.current!.data(for: self?.day ?? .today, from: existingData)
+        
+        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
+            $day
+                .map { day in
+                    return SRGDataProvider.current!.data(for: day, from: self?.state.data ?? Data())
+                }
+                .switchToLatest()
                 .map { data in
                     return State.loaded(data: data)
                 }
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
