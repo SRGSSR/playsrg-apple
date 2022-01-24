@@ -96,6 +96,10 @@ extension ProgramGuideDailyViewModel {
                 self.init(section: channel, items: [Item(.empty, in: channel, day: day)])
             }
         }
+        
+        var isEmpty: Bool {
+            return items.isEmpty
+        }
     }
     
     enum State {
@@ -124,8 +128,18 @@ extension ProgramGuideDailyViewModel {
                 self.isLoading = isLoading
             }
             
+            func isEmpty(in section: Section?) -> Bool {
+                if let section = section {
+                    guard let row = rows.first(where: { $0.section == section }) else { return true }
+                    return row.isEmpty
+                }
+                else {
+                    return rows.allSatisfy { $0.isEmpty }
+                }
+            }
+            
             var isEmpty: Bool {
-                return rows.isEmpty
+                return isEmpty(in: nil)
             }
         }
         
@@ -180,13 +194,17 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
-        var isEmpty: Bool {
+        func isEmpty(in section: Section?) -> Bool {
             if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
-                return srgGroup.isEmpty && thirdPartyGroup.isEmpty
+                return srgGroup.isEmpty(in: section) && thirdPartyGroup.isEmpty(in: section)
             }
             else {
-                return true
+                return false
             }
+        }
+        
+        var isEmpty: Bool {
+            return isEmpty(in: nil)
         }
         
         func items(for section: Section) -> [Item] {

@@ -114,6 +114,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
+        let currentChannel = channel ?? self.programGuideModel.selectedChannel
+        
         switch state {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
@@ -121,7 +123,7 @@ final class ProgramGuideDailyViewController: UIViewController {
             if state.isLoading {
                 emptyView.content = EmptyView(state: .loading)
             }
-            else if state.isEmpty {
+            else if state.isEmpty(in: currentChannel) {
                 emptyView.content = EmptyView(state: .empty(type: .generic))
             }
             else {
@@ -130,7 +132,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            self.dataSource.apply(Self.snapshot(from: state, for: channel ?? self.programGuideModel.selectedChannel), animatingDifferences: false) {
+            self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
                 // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
                 // when the content size has not yet been determined (still zero).
                 self.collectionView.layoutIfNeeded()
