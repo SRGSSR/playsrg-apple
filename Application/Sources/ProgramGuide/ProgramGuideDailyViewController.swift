@@ -115,8 +115,6 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
         switch state {
-        case .loading:
-            emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:

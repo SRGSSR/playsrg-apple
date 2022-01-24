@@ -11,7 +11,7 @@ import SRGDataProviderCombine
 
 final class ProgramGuideDailyViewModel: ObservableObject {
     @Published var day: SRGDay
-    @Published private(set) var state: State = .loading
+    @Published private(set) var state: State = .loaded(srgState: .loading(rows: []), thirdPartyState: .loading(rows: []))
     
     init(day: SRGDay) {
         self.day = day
@@ -19,15 +19,9 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
                 .map { day in
-                    return SRGDataProvider.current!.data(for: day, from: self?.state.data ?? Data())
+                    return SRGDataProvider.current!.state(for: day, from: self?.state ?? State.empty)
                 }
                 .switchToLatest()
-                .map { data in
-                    return State.loaded(data: data)
-                }
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -98,36 +92,53 @@ extension ProgramGuideDailyViewModel {
         }
     }
     
-    struct Data {
-        let srgRows: [Row]
-        let thirdPartyRows: [Row]
-        
-        fileprivate init(srgRows: [Row] = [], thirdPartyRows: [Row] = []) {
-            self.srgRows = srgRows
-            self.thirdPartyRows = thirdPartyRows
-        }
-        
-        var rows: [Row] {
-            return srgRows + thirdPartyRows
-        }
-    }
-    
     enum State {
-        case loading
-        case failed(error: Error)
-        case loaded(data: Data)
+        enum RowState {
+            case loading(rows: [Row])
+            case loaded(rows: [Row])
+            
+            fileprivate var rows: [Row] {
+                switch self {
+                case let .loading(rows: rows):
+                    return rows
+                case let .loaded(rows: rows):
+                    return rows
+                }
+            }
+        }
         
-        fileprivate var data: Data? {
-            if case let .loaded(data: data) = self {
-                return data
-            }
-            else {
-                return nil
-            }
+        case loaded(srgState: RowState, thirdPartyState: RowState)
+        case failed(error: Error)
+        
+        static var empty: State {
+            return .loaded(srgState: .loaded(rows: []), thirdPartyState: .loaded(rows: []))
         }
         
         private var rows: [Row] {
-            return data?.rows ?? []
+            if case let .loaded(srgState: srgState, thirdPartyState: thirdPartyState) = self {
+                return srgState.rows + thirdPartyState.rows
+            }
+            else {
+                return []
+            }
+        }
+        
+        fileprivate var srgRows: [Row] {
+            if case let .loaded(srgState: srgState, thirdPartyState: _) = self {
+                return srgState.rows
+            }
+            else {
+                return []
+            }
+        }
+        
+        fileprivate var thirdPartyRows: [Row] {
+            if case let .loaded(srgState: _, thirdPartyState: thirdPartyState) = self {
+                return thirdPartyState.rows
+            }
+            else {
+                return []
+            }
         }
         
         var sections: [Section] {
@@ -158,36 +169,47 @@ extension ProgramGuideDailyViewModel {
 
 // MARK: Publishers
 
+// TODO: Can probably improve, e.g. by defining these methods on ProgramGuideDailyViewModel to avoid explicit types
+//       (or using typealiases).
 private extension SRGDataProvider {
     // TODO: Can probably improve to extract existing programs as well if the day stayed the same, so that shallow
     //       reloads preserve existing data
-    private static func placeholderRows(from existingRows: [ProgramGuideDailyViewModel.Row], in day: SRGDay) -> [ProgramGuideDailyViewModel.Row] {
-        return existingRows.map { ProgramGuideDailyViewModel.Row(section: $0.section, in: day) }
+    private static func placeholderRows(from rows: [ProgramGuideDailyViewModel.Row], in day: SRGDay) -> [ProgramGuideDailyViewModel.Row] {
+        return rows.map { ProgramGuideDailyViewModel.Row(section: $0.section, in: day) }
     }
     
-    private func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from existingRows: [ProgramGuideDailyViewModel.Row]) -> AnyPublisher<[ProgramGuideDailyViewModel.Row], Error> {
+    private func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [ProgramGuideDailyViewModel.Row]) -> AnyPublisher<ProgramGuideDailyViewModel.State.RowState, Error> {
         return tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(tvPrograms(for: vendor, provider: provider, day: day))
-            .map { $0.map { ProgramGuideDailyViewModel.Row(from: $0, in: day) } }
-            .prepend(Self.placeholderRows(from: existingRows, in: day))
+            .map { programCompositions in
+                let rows = programCompositions.map { ProgramGuideDailyViewModel.Row(from: $0, in: day) }
+                return ProgramGuideDailyViewModel.State.RowState.loaded(rows: rows)
+            }
+            .prepend(ProgramGuideDailyViewModel.State.RowState.loading(rows: Self.placeholderRows(from: rows, in: day)))
             .eraseToAnyPublisher()
     }
     
-    func data(for day: SRGDay, from existingData: ProgramGuideDailyViewModel.Data) -> AnyPublisher<ProgramGuideDailyViewModel.Data, Error> {
+    func state(for day: SRGDay, from state: ProgramGuideDailyViewModel.State) -> AnyPublisher<ProgramGuideDailyViewModel.State, Never> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
         if applicationConfiguration.areTvThirdPartyChannelsAvailable {
             return Publishers.CombineLatest(
-                self.rows(for: vendor, provider: .SRG, day: day, from: existingData.srgRows),
-                self.rows(for: vendor, provider: .thirdParty, day: day, from: existingData.thirdPartyRows)
+                self.rows(for: vendor, provider: .SRG, day: day, from: state.srgRows),
+                self.rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
             )
-            .map { ProgramGuideDailyViewModel.Data(srgRows: $0, thirdPartyRows: $1) }
+            .map { ProgramGuideDailyViewModel.State.loaded(srgState: $0, thirdPartyState: $1) }
+            .catch { error in
+                return Just(ProgramGuideDailyViewModel.State.failed(error: error))
+            }
             .eraseToAnyPublisher()
         }
         else {
-            return rows(for: vendor, provider: .SRG, day: day, from: existingData.srgRows)
-                .map { ProgramGuideDailyViewModel.Data(srgRows: $0) }
+            return rows(for: vendor, provider: .SRG, day: day, from: state.srgRows)
+                .map { ProgramGuideDailyViewModel.State.loaded(srgState: $0, thirdPartyState: .loaded(rows: [])) }
+                .catch { error in
+                    return Just(ProgramGuideDailyViewModel.State.failed(error: error))
+                }
                 .eraseToAnyPublisher()
         }
     }
