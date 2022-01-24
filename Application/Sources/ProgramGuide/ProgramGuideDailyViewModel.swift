@@ -77,8 +77,14 @@ extension ProgramGuideDailyViewModel {
             self.items = items
         }
         
-        init(section: Section, in day: SRGDay) {
-            self.init(section: section, items: [Item(.empty, in: section, day: day)])
+        init(from row: Row, in day: SRGDay) {
+            let items = row.items.filter { $0.day == day }
+            if !items.isEmpty {
+                self.init(section: row.section, items: items)
+            }
+            else {
+                self.init(section: row.section, items: [Item(.empty, in: row.section, day: day)])
+            }
         }
         
         init(from programComposition: SRGProgramComposition, in day: SRGDay) {
@@ -195,12 +201,6 @@ extension ProgramGuideDailyViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
-    // TODO: Can probably improve to extract existing programs as well if the day stayed the same, so that shallow
-    //       reloads preserve existing data
-    private static func placeholderRows(from rows: [Row], in day: SRGDay) -> [Row] {
-        return rows.map { Row(section: $0.section, in: day) }
-    }
-    
     private static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Group, Error> {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
@@ -208,7 +208,7 @@ private extension ProgramGuideDailyViewModel {
                 let rows = programCompositions.map { Row(from: $0, in: day) }
                 return .loaded(rows: rows)
             }
-            .prepend(.loading(rows: Self.placeholderRows(from: rows, in: day)))
+            .prepend(.loading(rows: rows.map { Row(from: $0, in: day) }))
             .eraseToAnyPublisher()
     }
     
