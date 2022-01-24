@@ -11,7 +11,7 @@ import SRGDataProviderCombine
 
 final class ProgramGuideDailyViewModel: ObservableObject {
     @Published var day: SRGDay
-    @Published private(set) var state: State = .loaded(srgState: .loading(rows: []), thirdPartyState: .loading(rows: []))
+    @Published private(set) var state: State = .loading
     
     init(day: SRGDay) {
         self.day = day
@@ -93,30 +93,46 @@ extension ProgramGuideDailyViewModel {
     }
     
     enum State {
-        enum RowState {
-            case loading(rows: [Row])
-            case loaded(rows: [Row])
+        struct Group {
+            let rows: [Row]
+            let isLoading: Bool
             
-            fileprivate var rows: [Row] {
-                switch self {
-                case let .loading(rows: rows):
-                    return rows
-                case let .loaded(rows: rows):
-                    return rows
-                }
+            static var loading: Self {
+                return Self.loading(rows: [])
+            }
+            
+            static var empty: Self {
+                return Self.loaded(rows: [])
+            }
+            
+            static func loading(rows: [Row]) -> Self {
+                return Self.init(rows: rows, isLoading: true)
+            }
+            
+            static func loaded(rows: [Row]) -> Self {
+                return Self.init(rows: rows, isLoading: false)
+            }
+            
+            private init(rows: [Row], isLoading: Bool) {
+                self.rows = rows
+                self.isLoading = isLoading
             }
         }
         
-        case loaded(srgState: RowState, thirdPartyState: RowState)
+        case content(srgGroup: Group, thirdPartyGroup: Group)
         case failed(error: Error)
         
+        static var loading: State {
+            return .content(srgGroup: .loading, thirdPartyGroup: .loading)
+        }
+        
         static var empty: State {
-            return .loaded(srgState: .loaded(rows: []), thirdPartyState: .loaded(rows: []))
+            return .content(srgGroup: .empty, thirdPartyGroup: .empty)
         }
         
         private var rows: [Row] {
-            if case let .loaded(srgState: srgState, thirdPartyState: thirdPartyState) = self {
-                return srgState.rows + thirdPartyState.rows
+            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
+                return srgGroup.rows + thirdPartyGroup.rows
             }
             else {
                 return []
@@ -124,8 +140,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         fileprivate var srgRows: [Row] {
-            if case let .loaded(srgState: srgState, thirdPartyState: _) = self {
-                return srgState.rows
+            if case let .content(srgGroup: srgGroup, thirdPartyGroup: _) = self {
+                return srgGroup.rows
             }
             else {
                 return []
@@ -133,8 +149,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         fileprivate var thirdPartyRows: [Row] {
-            if case let .loaded(srgState: _, thirdPartyState: thirdPartyState) = self {
-                return thirdPartyState.rows
+            if case let .content(srgGroup: _, thirdPartyGroup: thirdPartyGroup) = self {
+                return thirdPartyGroup.rows
             }
             else {
                 return []
@@ -146,13 +162,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         var isLoading: Bool {
-            if case let .loaded(srgState: srgState, thirdPartyState: thirdPartyState) = self {
-                if case .loading = srgState, case .loading = thirdPartyState {
-                    return true
-                }
-                else {
-                    return false
-                }
+            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
+                return srgGroup.isLoading || thirdPartyGroup.isLoading
             }
             else {
                 return false
@@ -192,14 +203,14 @@ private extension SRGDataProvider {
         return rows.map { ProgramGuideDailyViewModel.Row(section: $0.section, in: day) }
     }
     
-    private func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [ProgramGuideDailyViewModel.Row]) -> AnyPublisher<ProgramGuideDailyViewModel.State.RowState, Error> {
+    private func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [ProgramGuideDailyViewModel.Row]) -> AnyPublisher<ProgramGuideDailyViewModel.State.Group, Error> {
         return tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(tvPrograms(for: vendor, provider: provider, day: day))
             .map { programCompositions in
                 let rows = programCompositions.map { ProgramGuideDailyViewModel.Row(from: $0, in: day) }
-                return ProgramGuideDailyViewModel.State.RowState.loaded(rows: rows)
+                return ProgramGuideDailyViewModel.State.Group.loaded(rows: rows)
             }
-            .prepend(ProgramGuideDailyViewModel.State.RowState.loading(rows: Self.placeholderRows(from: rows, in: day)))
+            .prepend(ProgramGuideDailyViewModel.State.Group.loading(rows: Self.placeholderRows(from: rows, in: day)))
             .eraseToAnyPublisher()
     }
     
@@ -212,7 +223,7 @@ private extension SRGDataProvider {
                 self.rows(for: vendor, provider: .SRG, day: day, from: state.srgRows),
                 self.rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
             )
-            .map { ProgramGuideDailyViewModel.State.loaded(srgState: $0, thirdPartyState: $1) }
+            .map { ProgramGuideDailyViewModel.State.content(srgGroup: $0, thirdPartyGroup: $1) }
             .catch { error in
                 return Just(ProgramGuideDailyViewModel.State.failed(error: error))
             }
@@ -220,7 +231,7 @@ private extension SRGDataProvider {
         }
         else {
             return rows(for: vendor, provider: .SRG, day: day, from: state.srgRows)
-                .map { ProgramGuideDailyViewModel.State.loaded(srgState: $0, thirdPartyState: .loaded(rows: [])) }
+                .map { ProgramGuideDailyViewModel.State.content(srgGroup: $0, thirdPartyGroup: .empty) }
                 .catch { error in
                     return Just(ProgramGuideDailyViewModel.State.failed(error: error))
                 }
