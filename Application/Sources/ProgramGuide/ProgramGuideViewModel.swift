@@ -36,7 +36,7 @@ final class ProgramGuideViewModel: ObservableObject {
         self.dateSelection = DateSelection.atDate(date, transition: .none)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return SRGDataProvider.current!.tvPrograms(for: SRGDay(from: date))
+            return Self.tvPrograms(for: SRGDay(from: date))
                 .map { $0.map(\.channel) }
                 .replaceError(with: self?.channels ?? [])
         }
@@ -145,21 +145,21 @@ extension ProgramGuideViewModel {
 
 // MARK: Publishers
 
-private extension SRGDataProvider {
-    func tvPrograms(for day: SRGDay) -> AnyPublisher<[SRGProgramComposition], Error> {
+private extension ProgramGuideViewModel {
+    static func tvPrograms(for day: SRGDay) -> AnyPublisher<[SRGProgramComposition], Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
         if applicationConfiguration.areTvThirdPartyChannelsAvailable {
             return Publishers.CombineLatest(
-                tvPrograms(for: vendor, day: day, minimal: true),
-                tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: true)
+                SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true),
+                SRGDataProvider.current!.tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: true)
             )
             .map { $0 + $1 }
             .eraseToAnyPublisher()
         }
         else {
-            return tvPrograms(for: vendor, day: day, minimal: true)
+            return SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true)
         }
     }
 }

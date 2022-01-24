@@ -19,7 +19,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
                 .map { day in
-                    return SRGDataProvider.current!.state(for: day, from: self?.state ?? State.empty)
+                    return Self.state(for: day, from: self?.state ?? State.empty)
                 }
                 .switchToLatest()
         }
@@ -194,46 +194,44 @@ extension ProgramGuideDailyViewModel {
 
 // MARK: Publishers
 
-// TODO: Can probably improve, e.g. by defining these methods on ProgramGuideDailyViewModel to avoid explicit types
-//       (or using typealiases).
-private extension SRGDataProvider {
+private extension ProgramGuideDailyViewModel {
     // TODO: Can probably improve to extract existing programs as well if the day stayed the same, so that shallow
     //       reloads preserve existing data
-    private static func placeholderRows(from rows: [ProgramGuideDailyViewModel.Row], in day: SRGDay) -> [ProgramGuideDailyViewModel.Row] {
-        return rows.map { ProgramGuideDailyViewModel.Row(section: $0.section, in: day) }
+    private static func placeholderRows(from rows: [Row], in day: SRGDay) -> [Row] {
+        return rows.map { Row(section: $0.section, in: day) }
     }
     
-    private func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [ProgramGuideDailyViewModel.Row]) -> AnyPublisher<ProgramGuideDailyViewModel.State.Group, Error> {
-        return tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
-            .append(tvPrograms(for: vendor, provider: provider, day: day))
+    private static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Group, Error> {
+        return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
+            .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { programCompositions in
-                let rows = programCompositions.map { ProgramGuideDailyViewModel.Row(from: $0, in: day) }
-                return ProgramGuideDailyViewModel.State.Group.loaded(rows: rows)
+                let rows = programCompositions.map { Row(from: $0, in: day) }
+                return .loaded(rows: rows)
             }
-            .prepend(ProgramGuideDailyViewModel.State.Group.loading(rows: Self.placeholderRows(from: rows, in: day)))
+            .prepend(.loading(rows: Self.placeholderRows(from: rows, in: day)))
             .eraseToAnyPublisher()
     }
     
-    func state(for day: SRGDay, from state: ProgramGuideDailyViewModel.State) -> AnyPublisher<ProgramGuideDailyViewModel.State, Never> {
+    static func state(for day: SRGDay, from state: State) -> AnyPublisher<State, Never> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
         if applicationConfiguration.areTvThirdPartyChannelsAvailable {
             return Publishers.CombineLatest(
-                self.rows(for: vendor, provider: .SRG, day: day, from: state.srgRows),
-                self.rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
+                rows(for: vendor, provider: .SRG, day: day, from: state.srgRows),
+                rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
             )
-            .map { ProgramGuideDailyViewModel.State.content(srgGroup: $0, thirdPartyGroup: $1) }
+            .map { .content(srgGroup: $0, thirdPartyGroup: $1) }
             .catch { error in
-                return Just(ProgramGuideDailyViewModel.State.failed(error: error))
+                return Just(.failed(error: error))
             }
             .eraseToAnyPublisher()
         }
         else {
             return rows(for: vendor, provider: .SRG, day: day, from: state.srgRows)
-                .map { ProgramGuideDailyViewModel.State.content(srgGroup: $0, thirdPartyGroup: .empty) }
+                .map { .content(srgGroup: $0, thirdPartyGroup: .empty) }
                 .catch { error in
-                    return Just(ProgramGuideDailyViewModel.State.failed(error: error))
+                    return Just(.failed(error: error))
                 }
                 .eraseToAnyPublisher()
         }
