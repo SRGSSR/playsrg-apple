@@ -165,7 +165,7 @@ final class ProgramGuideGridViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .loaded:
-            emptyView.content = nil
+            emptyView.content = state.isLoading ? EmptyView(state: .loading) : nil
 #if os(tvOS)
             if let firstSection = state.sections.first,
                let currentProgram = state.items(for: firstSection).compactMap(\.program).first(where: { $0.play_contains(model.dateSelection.date) }) {

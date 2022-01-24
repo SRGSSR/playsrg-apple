@@ -145,6 +145,20 @@ extension ProgramGuideDailyViewModel {
             return rows.map(\.section)
         }
         
+        var isLoading: Bool {
+            if case let .loaded(srgState: srgState, thirdPartyState: thirdPartyState) = self {
+                if case .loading = srgState, case .loading = thirdPartyState {
+                    return true
+                }
+                else {
+                    return false
+                }
+            }
+            else {
+                return false
+            }
+        }
+        
         func items(for section: Section) -> [Item] {
             if let row = rows.first(where: { $0.section == section }) {
                 return Self.items(from: row)
