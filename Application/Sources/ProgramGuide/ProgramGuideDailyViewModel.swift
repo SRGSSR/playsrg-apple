@@ -98,7 +98,7 @@ extension ProgramGuideDailyViewModel {
         }
         
         var isEmpty: Bool {
-            return items.isEmpty
+            return items.filter({ $0.wrappedValue != .empty }).isEmpty
         }
     }
     
