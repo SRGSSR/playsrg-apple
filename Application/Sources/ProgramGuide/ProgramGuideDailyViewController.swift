@@ -118,7 +118,15 @@ final class ProgramGuideDailyViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .content:
-            emptyView.content = state.isLoading ? EmptyView(state: .loading) : nil
+            if state.isLoading {
+                emptyView.content = EmptyView(state: .loading)
+            }
+            else if state.isEmpty {
+                emptyView.content = EmptyView(state: .empty(type: .generic))
+            }
+            else {
+                emptyView.content = nil
+            }
         }
         
         DispatchQueue.global(qos: .userInteractive).async {

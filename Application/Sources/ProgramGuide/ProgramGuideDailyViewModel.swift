@@ -123,6 +123,10 @@ extension ProgramGuideDailyViewModel {
                 self.rows = rows
                 self.isLoading = isLoading
             }
+            
+            var isEmpty: Bool {
+                return rows.isEmpty
+            }
         }
         
         case content(srgGroup: Group, thirdPartyGroup: Group)
@@ -173,6 +177,15 @@ extension ProgramGuideDailyViewModel {
             }
             else {
                 return false
+            }
+        }
+        
+        var isEmpty: Bool {
+            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
+                return srgGroup.isEmpty && thirdPartyGroup.isEmpty
+            }
+            else {
+                return true
             }
         }
         
