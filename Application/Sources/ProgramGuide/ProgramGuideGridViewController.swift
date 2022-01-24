@@ -169,7 +169,7 @@ final class ProgramGuideGridViewController: UIViewController {
                 emptyView.content = EmptyView(state: .loading)
             }
             else if state.isEmpty {
-                emptyView.content = EmptyView(state: .empty(type: .generic))
+                emptyView.content = EmptyView(state: .empty(type: .generic), layout: constant(iOS: .standard, tvOS: .text))
             }
             else {
                 emptyView.content = nil
