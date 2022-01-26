@@ -103,7 +103,7 @@ extension ProgramGuideDailyViewModel {
     }
     
     enum State {
-        struct Group {
+        struct Bouquet {
             let rows: [Row]
             let isLoading: Bool
             
@@ -143,29 +143,29 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
-        case content(srgGroup: Group, thirdPartyGroup: Group)
+        case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet)
         case failed(error: Error)
         
         static var loading: State {
-            return .content(srgGroup: .loading, thirdPartyGroup: .loading)
+            return .content(firstPartyBouquet: .loading, thirdPartyBouquet: .loading)
         }
         
         static var empty: State {
-            return .content(srgGroup: .empty, thirdPartyGroup: .empty)
+            return .content(firstPartyBouquet: .empty, thirdPartyBouquet: .empty)
         }
         
         private var rows: [Row] {
-            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
-                return srgGroup.rows + thirdPartyGroup.rows
+            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+                return firstPartyBouquet.rows + thirdPartyBouquet.rows
             }
             else {
                 return []
             }
         }
         
-        fileprivate var srgRows: [Row] {
-            if case let .content(srgGroup: srgGroup, thirdPartyGroup: _) = self {
-                return srgGroup.rows
+        fileprivate var firstPartyRows: [Row] {
+            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: _) = self {
+                return firstPartyBouquet.rows
             }
             else {
                 return []
@@ -173,8 +173,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         fileprivate var thirdPartyRows: [Row] {
-            if case let .content(srgGroup: _, thirdPartyGroup: thirdPartyGroup) = self {
-                return thirdPartyGroup.rows
+            if case let .content(firstPartyBouquet: _, thirdPartyBouquet: thirdPartyBouquet) = self {
+                return thirdPartyBouquet.rows
             }
             else {
                 return []
@@ -186,8 +186,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         var isLoading: Bool {
-            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
-                return srgGroup.isLoading || thirdPartyGroup.isLoading
+            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+                return firstPartyBouquet.isLoading || thirdPartyBouquet.isLoading
             }
             else {
                 return false
@@ -195,8 +195,8 @@ extension ProgramGuideDailyViewModel {
         }
         
         func isEmpty(in section: Section?) -> Bool {
-            if case let .content(srgGroup: srgGroup, thirdPartyGroup: thirdPartyGroup) = self {
-                return srgGroup.isEmpty(in: section) && thirdPartyGroup.isEmpty(in: section)
+            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+                return firstPartyBouquet.isEmpty(in: section) && thirdPartyBouquet.isEmpty(in: section)
             }
             else {
                 return false
@@ -232,7 +232,7 @@ extension ProgramGuideDailyViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
-    private static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Group, Error> {
+    private static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Bouquet, Error> {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { programCompositions in
@@ -249,18 +249,18 @@ private extension ProgramGuideDailyViewModel {
         
         if applicationConfiguration.areTvThirdPartyChannelsAvailable {
             return Publishers.CombineLatest(
-                rows(for: vendor, provider: .SRG, day: day, from: state.srgRows),
+                rows(for: vendor, provider: .SRG, day: day, from: state.firstPartyRows),
                 rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
             )
-            .map { .content(srgGroup: $0, thirdPartyGroup: $1) }
+            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1) }
             .catch { error in
                 return Just(.failed(error: error))
             }
             .eraseToAnyPublisher()
         }
         else {
-            return rows(for: vendor, provider: .SRG, day: day, from: state.srgRows)
-                .map { .content(srgGroup: $0, thirdPartyGroup: .empty) }
+            return rows(for: vendor, provider: .SRG, day: day, from: state.firstPartyRows)
+                .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty) }
                 .catch { error in
                     return Just(.failed(error: error))
                 }
