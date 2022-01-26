@@ -70,14 +70,12 @@ final class ProgramGuideListViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(day: model.dateSelection.day, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(dateSelection: model.dateSelection, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
         
         model.$dateSelection
             .sink { [weak self] dateSelection in
-                if dateSelection.transition == .day {
-                    self?.switchToDay(dateSelection.day)
-                }
+                self?.switchToDateSelection(dateSelection)
             }
             .store(in: &cancellables)
     }
@@ -87,14 +85,15 @@ final class ProgramGuideListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    private func switchToDay(_ day: SRGDay) {
+    private func switchToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection) {
+        let day = dateSelection.day
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
               currentViewController.day != day else {
             return
         }
         
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
-        let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(dateSelection: dateSelection, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
     }
 }
@@ -110,32 +109,20 @@ extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
 
 extension ProgramGuideListViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
-        let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: currentViewController.day)
-        return ProgramGuideDailyViewController(day: previousDay, programGuideModel: model)
+        return ProgramGuideDailyViewController(dateSelection: model.dateSelection.previousDay, programGuideModel: model)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        guard let currentViewController = viewController as? ProgramGuideDailyViewController else { return nil }
-        let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: currentViewController.day)
-        return ProgramGuideDailyViewController(day: nextDay, programGuideModel: model)
+        return ProgramGuideDailyViewController(dateSelection: model.dateSelection.nextDay, programGuideModel: model)
     }
 }
 
 extension ProgramGuideListViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
         headerView.isUserInteractionEnabled = false
-        
-        guard let currentViewController = pendingViewControllers.first as? ProgramGuideDailyViewController else { return }
-        model.scrollToDay(currentViewController.day)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         headerView.isUserInteractionEnabled = true
-        
-        if !completed {
-            guard let currentViewController = previousViewControllers.first as? ProgramGuideDailyViewController else { return }
-            model.scrollToDay(currentViewController.day)
-        }
     }
 }

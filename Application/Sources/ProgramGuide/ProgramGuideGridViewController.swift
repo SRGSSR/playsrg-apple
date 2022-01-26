@@ -17,15 +17,14 @@ final class ProgramGuideGridViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
+    private var targetDateSelection: ProgramGuideViewModel.DateSelection?
     
     private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
-    
     private weak var headerHeightConstraint: NSLayoutConstraint!
-    private var targetDate: Date?
     
-    private static let scrollOffset: CGFloat = 200
+    private static let scrollMargin: CGFloat = 200
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
@@ -39,7 +38,7 @@ final class ProgramGuideGridViewController: UIViewController {
     init(model: ProgramGuideViewModel) {
         self.model = model
         dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.dateSelection.date))
-        targetDate = model.dateSelection.date
+        targetDateSelection = model.dateSelection
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -138,15 +137,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         model.$dateSelection
             .sink { [weak self] dateSelection in
-                guard let self = self else { return }
-                switch dateSelection.transition {
-                case .day:
-                    self.switchToDateSelection(dateSelection)
-                case .time:
-                    self.scrollToDate(dateSelection.date, animated: true)
-                case .none:
-                    break
-                }
+                self?.targetDateSelection = dateSelection
+                self?.dailyModel.day = dateSelection.day
             }
             .store(in: &cancellables)
         
@@ -192,8 +184,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let targetDate = self.targetDate, !state.isEmpty, self.scrollToDate(targetDate, animated: false) {
-                    self.targetDate = nil
+                if let targetDateSelection = self.targetDateSelection, !state.isEmpty, self.scrollToDate(targetDateSelection.date, animated: false) {
+                    self.targetDateSelection = nil
                 }
             }
         }
@@ -204,16 +196,11 @@ final class ProgramGuideGridViewController: UIViewController {
         headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
     }
     
-    private func switchToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection) {
-        targetDate = dateSelection.date
-        dailyModel.day = dateSelection.day
-    }
-    
     @discardableResult
     private func scrollToDate(_ date: Date, animated: Bool) -> Bool {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let xOffset = collectionViewLayout.xOffset(for: date) else { return false }
-        collectionView.setContentOffset(CGPoint(x: max(xOffset - Self.scrollOffset, 0) , y: collectionView.contentOffset.y), animated: animated)
+        collectionView.setContentOffset(CGPoint(x: max(xOffset - Self.scrollMargin, 0) , y: collectionView.contentOffset.y), animated: animated)
         return true
     }
 }
@@ -273,7 +260,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x + Self.scrollOffset) else { return }
+              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x + Self.scrollMargin) else { return }
         model.didScrollToTime(of: date)
     }
     

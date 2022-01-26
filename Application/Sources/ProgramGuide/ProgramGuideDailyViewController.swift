@@ -16,6 +16,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
+    private var targetDateSelection: ProgramGuideViewModel.DateSelection?
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -35,8 +36,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         return snapshot
     }
     
-    init(day: SRGDay, programGuideModel: ProgramGuideViewModel) {
-        model = ProgramGuideDailyViewModel(day: day)
+    init(dateSelection: ProgramGuideViewModel.DateSelection, programGuideModel: ProgramGuideViewModel) {
+        model = ProgramGuideDailyViewModel(day: dateSelection.day)
+        targetDateSelection = dateSelection
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -97,16 +99,10 @@ final class ProgramGuideDailyViewController: UIViewController {
             .store(in: &cancellables)
         
         programGuideModel.$dateSelection
-            .filter { $0.transition == .time }
             .sink { [weak self] dateSelection in
                 self?.scrollToTime(dateSelection.time, animated: true)
             }
             .store(in: &cancellables)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.scrollToTime(animated: false)
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -133,19 +129,19 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
-                // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-                // when the content size has not yet been determined (still zero).
-                self.collectionView.layoutIfNeeded()
-                self.scrollToTime(animated: false)
+                if let targetDateSelection = self.targetDateSelection, !state.isEmpty, self.scrollToTime(targetDateSelection.time, animated: false) {
+                    self.targetDateSelection = nil
+                }
             }
         }
     }
     
-    private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
-        guard let selectedChannel = programGuideModel.selectedChannel else { return }
-        let date = model.day.date.addingTimeInterval(time ?? programGuideModel.dateSelection.time)
-        guard let row = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }) else { return }
-        collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
+    @discardableResult
+    private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
+        guard let selectedChannel = programGuideModel.selectedChannel else { return false }
+        let date = model.day.date.addingTimeInterval(time)
+        guard let row = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }) else { return false }
+        return collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
     }
 }
 
