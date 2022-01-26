@@ -268,14 +268,8 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
         model.didScrollToTime(of: date)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateTime()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            updateTime()
-        }
     }
 }
 
