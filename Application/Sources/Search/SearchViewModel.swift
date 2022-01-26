@@ -10,8 +10,8 @@ import Combine
 // MARK: View model
 
 final class SearchViewModel: ObservableObject {
-    @Published var query: String = ""
-    @Published var settings: SRGMediaSearchSettings = SearchViewModel.optimalSettings()
+    @Published var query = ""
+    @Published var settings = SearchViewModel.optimalSettings()
     
     @Published private(set) var state = State.loading
     
@@ -21,16 +21,15 @@ final class SearchViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings, trigger] in
             Publishers.CombineLatest($query.removeDuplicates(), $settings)
                 .debounce(for: 0.3, scheduler: DispatchQueue.main)
-                .map { query, settings -> AnyPublisher<State, Never> in
+                .map { query, settings in
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
-                        .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
-                        .catch { error in
-                            return Just(State.failed(error: error))
-                        }
-                        .prepend(State.loading)
-                        .eraseToAnyPublisher()
                 }
                 .switchToLatest()
+                .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
+                .prepend(State.loading)
+                .catch { error in
+                    return Just(State.failed(error: error))
+                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
