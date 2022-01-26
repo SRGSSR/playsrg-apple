@@ -234,6 +234,27 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
 }
 
+// MARK: Offset calculations
+
+extension ProgramGuideGridLayout {
+    private var dateInterval: DateInterval? {
+        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>,
+              let dateInterval = Self.dateInterval(from: dataSource.snapshot()) else { return nil }
+        return dateInterval
+    }
+    
+    func date(forXOffset xOffset: CGFloat) -> Date? {
+        guard let dateInterval = dateInterval else { return nil }
+        let date = dateInterval.start.addingTimeInterval(xOffset / Self.scale)
+        return dateInterval.contains(date) ? date : nil
+    }
+    
+    func xOffset(for date: Date) -> CGFloat? {
+        guard let dateInterval = dateInterval, dateInterval.contains(date) else { return nil }
+        return date.timeIntervalSince(dateInterval.start) * Self.scale
+    }
+}
+
 // MARK: Custom attributes
 
 final class TimelineLayoutAttributes: UICollectionViewLayoutAttributes {

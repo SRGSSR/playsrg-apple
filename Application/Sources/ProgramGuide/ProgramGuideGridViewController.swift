@@ -23,6 +23,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private weak var emptyView: HostView<EmptyView>!
     
     private weak var headerHeightConstraint: NSLayoutConstraint!
+    private var targetDate: Date?
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
@@ -36,6 +37,7 @@ final class ProgramGuideGridViewController: UIViewController {
     init(model: ProgramGuideViewModel) {
         self.model = model
         dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.dateSelection.date))
+        targetDate = model.dateSelection.date
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -134,11 +136,12 @@ final class ProgramGuideGridViewController: UIViewController {
         
         model.$dateSelection
             .sink { [weak self] dateSelection in
+                guard let self = self else { return }
                 switch dateSelection.transition {
                 case .day:
-                    self?.switchToDay(dateSelection.day)
+                    self.switchToDateSelection(dateSelection)
                 case .time:
-                    self?.scrollToTime(dateSelection.time, animated: true)
+                    self.scrollToDate(dateSelection.date, animated: true)
                 case .none:
                     break
                 }
@@ -187,10 +190,9 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-                // when the content size has not yet been determined (still zero).
-                self.collectionView.layoutIfNeeded()
-                self.scrollToTime(animated: false)
+                if let targetDate = self.targetDate, !state.isEmpty, self.scrollToDate(targetDate, animated: false) {
+                    self.targetDate = nil
+                }
             }
         }
     }
@@ -200,17 +202,17 @@ final class ProgramGuideGridViewController: UIViewController {
         headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
     }
     
-    private func switchToDay(_ day: SRGDay) {
-        dailyModel.day = day
+    private func switchToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection) {
+        targetDate = dateSelection.date
+        dailyModel.day = dateSelection.day
     }
     
-    // FIXME: We must scroll to the correct section which was previously visible
-    private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
-        let date = dailyModel.day.date.addingTimeInterval(time ?? model.dateSelection.time)
-        guard let section = dailyModel.state.sections.first else { return }
-        let items = dailyModel.state.items(for: section)
-        guard let row = items.firstIndex(where: { $0.endsAfter(date) }) else { return }
-        collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .centeredHorizontally, animated: animated)
+    @discardableResult
+    private func scrollToDate(_ date: Date, animated: Bool) -> Bool {
+        guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
+              let xOffset = collectionViewLayout.xOffset(for: date) else { return false }
+        collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
+        return true
     }
 }
 
@@ -268,11 +270,9 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
-        if let indexPath = collectionView.indexPathsForVisibleItems.sorted().first,
-           let section = dailyModel.state.sections[safeIndex: indexPath.section],
-           let program = dailyModel.state.items(for: section)[safeIndex: indexPath.row]?.program {
-            model.didScrollToTime(of: program.startDate)
-        }
+        guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
+              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x) else { return }
+        model.didScrollToTime(of: date)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
