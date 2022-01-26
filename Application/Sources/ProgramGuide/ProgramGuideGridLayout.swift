@@ -234,13 +234,12 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
 }
 
-// MARK: Offset calculations
+// MARK: Layout calculations
 
 extension ProgramGuideGridLayout {
     private var dateInterval: DateInterval? {
-        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>,
-              let dateInterval = Self.dateInterval(from: dataSource.snapshot()) else { return nil }
-        return dateInterval
+        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> else { return nil }
+        return Self.dateInterval(from: dataSource.snapshot())
     }
     
     func date(forXOffset xOffset: CGFloat) -> Date? {

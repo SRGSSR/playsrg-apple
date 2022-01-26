@@ -25,6 +25,8 @@ final class ProgramGuideGridViewController: UIViewController {
     private weak var headerHeightConstraint: NSLayoutConstraint!
     private var targetDate: Date?
     
+    private static let scrollOffset: CGFloat = 200
+    
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
         for section in state.sections {
@@ -211,7 +213,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private func scrollToDate(_ date: Date, animated: Bool) -> Bool {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let xOffset = collectionViewLayout.xOffset(for: date) else { return false }
-        collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
+        collectionView.setContentOffset(CGPoint(x: max(xOffset - Self.scrollOffset, 0) , y: collectionView.contentOffset.y), animated: animated)
         return true
     }
 }
@@ -271,7 +273,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x) else { return }
+              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x + Self.scrollOffset) else { return }
         model.didScrollToTime(of: date)
     }
     
