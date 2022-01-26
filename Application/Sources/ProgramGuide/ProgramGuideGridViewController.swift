@@ -24,8 +24,6 @@ final class ProgramGuideGridViewController: UIViewController {
     private weak var emptyView: HostView<EmptyView>!
     private weak var headerHeightConstraint: NSLayoutConstraint!
     
-    private static let scrollMargin: CGFloat = 200
-    
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
         for section in state.sections {
@@ -199,8 +197,8 @@ final class ProgramGuideGridViewController: UIViewController {
     @discardableResult
     private func scrollToDate(_ date: Date, animated: Bool) -> Bool {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let xOffset = collectionViewLayout.xOffset(for: date) else { return false }
-        collectionView.setContentOffset(CGPoint(x: max(xOffset - Self.scrollMargin, 0) , y: collectionView.contentOffset.y), animated: animated)
+              let xOffset = collectionViewLayout.xOffset(centeringDate: date) else { return false }
+        collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
         return true
     }
 }
@@ -260,7 +258,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let date = collectionViewLayout.date(forXOffset: collectionView.contentOffset.x + Self.scrollMargin) else { return }
+              let date = collectionViewLayout.date(centeredAtXOffset: collectionView.contentOffset.x) else { return }
         model.didScrollToTime(of: date)
     }
     
