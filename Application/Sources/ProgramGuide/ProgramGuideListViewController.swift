@@ -70,12 +70,12 @@ final class ProgramGuideListViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(dateSelection: model.dateSelection, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(relativeDate: model.relativeDate, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
         
-        model.$dateSelection
-            .sink { [weak self] dateSelection in
-                self?.switchToDateSelection(dateSelection)
+        model.$relativeDate
+            .sink { [weak self] relativeDate in
+                self?.switchToRelativeDate(relativeDate)
             }
             .store(in: &cancellables)
     }
@@ -85,15 +85,15 @@ final class ProgramGuideListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    private func switchToDateSelection(_ dateSelection: ProgramGuideViewModel.DateSelection) {
-        let day = dateSelection.day
+    private func switchToRelativeDate(_ relativeDate: RelativeDate) {
+        let day = relativeDate.day
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
               currentViewController.day != day else {
             return
         }
         
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
-        let dailyViewController = ProgramGuideDailyViewController(dateSelection: dateSelection, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(relativeDate: relativeDate, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
     }
 }
@@ -109,11 +109,11 @@ extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
 
 extension ProgramGuideListViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return ProgramGuideDailyViewController(dateSelection: model.dateSelection.previousDay, programGuideModel: model)
+        return ProgramGuideDailyViewController(relativeDate: model.relativeDate.previousDay, programGuideModel: model)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return ProgramGuideDailyViewController(dateSelection: model.dateSelection.nextDay, programGuideModel: model)
+        return ProgramGuideDailyViewController(relativeDate: model.relativeDate.nextDay, programGuideModel: model)
     }
 }
 

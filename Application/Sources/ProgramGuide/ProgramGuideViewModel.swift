@@ -11,9 +11,9 @@ import SRGDataProviderCombine
 
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var data = Data(channels: [], selectedChannel: nil)
-    @Published private(set) var dateSelection: DateSelection
+    @Published private(set) var relativeDate: RelativeDate
     
-    private var scrollingDateSelection: DateSelection
+    private var scrollPositionRelativeDate: RelativeDate
     
     var channels: [SRGChannel] {
         return data.channels
@@ -31,12 +31,12 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     var dateString: String {
-        return DateFormatter.play_relativeFull.string(from: dateSelection.day.date).capitalizedFirstLetter
+        return DateFormatter.play_relativeFull.string(from: relativeDate.day.date).capitalizedFirstLetter
     }
     
     init(date: Date) {
-        dateSelection = DateSelection.atDate(date)
-        scrollingDateSelection = DateSelection.atDate(date)
+        relativeDate = RelativeDate.atDate(date)
+        scrollPositionRelativeDate = RelativeDate.atDate(date)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return Self.tvPrograms(for: SRGDay(from: date))
@@ -56,27 +56,27 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func switchToPreviousDay() {
-        dateSelection = dateSelection.previousDay.atTime(scrollingDateSelection.time)
+        relativeDate = relativeDate.previousDay.atTime(scrollPositionRelativeDate.time)
     }
     
     func switchToNextDay() {
-        dateSelection = dateSelection.nextDay.atTime(scrollingDateSelection.time)
+        relativeDate = relativeDate.nextDay.atTime(scrollPositionRelativeDate.time)
     }
     
     func switchToTonight() {
-        dateSelection = DateSelection.tonight
+        relativeDate = RelativeDate.tonight
     }
     
     func switchToNow() {
-        dateSelection = DateSelection.now
+        relativeDate = RelativeDate.now
     }
     
     func switchToDay(_ day: SRGDay) {
-        dateSelection = dateSelection.atDay(day).atTime(scrollingDateSelection.time)
+        relativeDate = relativeDate.atDay(day).atTime(scrollPositionRelativeDate.time)
     }
     
     func didScrollToTime(of date: Date) {
-        scrollingDateSelection = dateSelection.atTime(of: date)
+        scrollPositionRelativeDate = relativeDate.atTime(of: date)
     }
 }
 
@@ -86,51 +86,6 @@ extension ProgramGuideViewModel {
     struct Data {
         let channels: [SRGChannel]
         let selectedChannel: SRGChannel?
-    }
-    
-    struct DateSelection: Hashable {
-        let day: SRGDay
-        let time: TimeInterval      // Offset from midnight
-        
-        static var now: DateSelection {
-            return atDate(Date())
-        }
-        
-        static var tonight: DateSelection {
-            let date = Calendar.current.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
-            return atDate(date)
-        }
-        
-        static func atDate(_ date: Date) -> DateSelection {
-            let day = SRGDay(from: date)
-            return DateSelection(day: day, time: date.timeIntervalSince(day.date))
-        }
-        
-        var date: Date {
-            return day.date.addingTimeInterval(time)
-        }
-        
-        var previousDay: DateSelection {
-            let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
-            return DateSelection(day: previousDay, time: time)
-        }
-        
-        var nextDay: DateSelection {
-            let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
-            return DateSelection(day: nextDay, time: time)
-        }
-        
-        func atDay(_ day: SRGDay) -> DateSelection {
-            return DateSelection(day: day, time: time)
-        }
-        
-        func atTime(_ time: TimeInterval) -> DateSelection {
-            return DateSelection(day: day, time: time)
-        }
-        
-        func atTime(of date: Date) -> DateSelection {
-            return atTime(date.timeIntervalSince(day.date))
-        }
     }
 }
 

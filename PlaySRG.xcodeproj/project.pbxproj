@@ -1968,6 +1968,16 @@
 		6FE38A28270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
 		6FE38A29270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
 		6FE38A2A270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
+		6FE4904727A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904827A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904927A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904A27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904B27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904C27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904D27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904E27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4904F27A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
+		6FE4905027A1A28200AE9118 /* DateSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4904627A1A28200AE9118 /* DateSelection.swift */; };
 		6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -3108,6 +3118,7 @@
 		6FE28772248168A100358CFF /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarPlay+Extensions.swift"; sourceTree = "<group>"; };
 		6FE38A26270CF860004DD296 /* CarPlayListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayListController.swift; sourceTree = "<group>"; };
+		6FE4904627A1A28200AE9118 /* DateSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelection.swift; sourceTree = "<group>"; };
 		6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
@@ -3631,13 +3642,12 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F4760181EB37BD1003021EA /* Categories */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
+				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */,
@@ -3646,6 +3656,7 @@
 				6F79E0A92541647400A28E79 /* Colors.swift */,
 				6FE1B9171FAC34D600A58F3B /* ContentInsets.h */,
 				6FE1B9181FAC34D600A58F3B /* ContentInsets.m */,
+				6FE4904627A1A28200AE9118 /* DateSelection.swift */,
 				6F151E54256BFCEB009082F8 /* Extensions.swift */,
 				6FD2A35423C7628000456DCB /* ForegroundTimer.h */,
 				6FD2A35323C7628000456DCB /* ForegroundTimer.m */,
@@ -3669,6 +3680,7 @@
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6FDEC19126DE307E0020A03F /* PresenterMode.swift */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -8338,6 +8350,7 @@
 			files = (
 				6FF5D1FB2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F0EDA652448B0D800F0FED2 /* RefreshControl.m in Sources */,
+				6FE4904727A1A28200AE9118 /* DateSelection.swift in Sources */,
 				6F54D3C72605100F008B46FF /* ProgressBar.swift in Sources */,
 				6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */,
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
@@ -8735,6 +8748,7 @@
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985B27269D20005793A2 /* SearchViewController.swift in Sources */,
+				6FE4904827A1A28200AE9118 /* DateSelection.swift in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC4F2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9A2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -8966,6 +8980,7 @@
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985C27269D21005793A2 /* SearchViewController.swift in Sources */,
+				6FE4904927A1A28200AE9118 /* DateSelection.swift in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC502626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9B2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -9197,6 +9212,7 @@
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985D27269D22005793A2 /* SearchViewController.swift in Sources */,
+				6FE4904A27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC512626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9C2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
@@ -9302,6 +9318,7 @@
 				6FAE562026C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F73C63E271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
+				6FE4904B27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651826BC58C800454A28 /* CalendarView.swift in Sources */,
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
@@ -9708,6 +9725,7 @@
 				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FDF70052682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FE14E70263EA9B5004AD913 /* TitleView.swift in Sources */,
+				6FE4904C27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				084EF77D26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4E261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562126C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -9840,6 +9858,7 @@
 				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FDF70062682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FE14E71263EA9B5004AD913 /* TitleView.swift in Sources */,
+				6FE4904D27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				084EF77E26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4F261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562226C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -9972,6 +9991,7 @@
 				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FDF70072682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FE14E72263EA9B5004AD913 /* TitleView.swift in Sources */,
+				6FE4904E27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB50261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562326C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -10104,6 +10124,7 @@
 				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FDF70082682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FE14E73263EA9B5004AD913 /* TitleView.swift in Sources */,
+				6FE4904F27A1A28200AE9118 /* DateSelection.swift in Sources */,
 				084EF78026035BB40058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB51261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562426C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
@@ -10236,6 +10257,7 @@
 				6F3F1ABE25060496000FF4DD /* MediaVisualView.swift in Sources */,
 				6FDF70092682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FE14E74263EA9B5004AD913 /* TitleView.swift in Sources */,
+				6FE4905027A1A28200AE9118 /* DateSelection.swift in Sources */,
 				084EF78126035BB50058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB52261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562526C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,

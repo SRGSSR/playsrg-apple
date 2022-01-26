@@ -39,7 +39,7 @@ struct CalendarView: View {
         .padding()
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
-            selectedDate = model.dateSelection.day.date
+            selectedDate = model.relativeDate.day.date
         }
         .onDisappear {
             model.switchToDay(SRGDay(from: selectedDate))

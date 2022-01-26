@@ -16,7 +16,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
-    private var targetDateSelection: ProgramGuideViewModel.DateSelection?
+    private var targetRelativeDate: RelativeDate?
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -36,9 +36,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         return snapshot
     }
     
-    init(dateSelection: ProgramGuideViewModel.DateSelection, programGuideModel: ProgramGuideViewModel) {
-        model = ProgramGuideDailyViewModel(day: dateSelection.day)
-        targetDateSelection = dateSelection
+    init(relativeDate: RelativeDate, programGuideModel: ProgramGuideViewModel) {
+        model = ProgramGuideDailyViewModel(day: relativeDate.day)
+        targetRelativeDate = relativeDate
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,9 +98,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$dateSelection
-            .sink { [weak self] dateSelection in
-                self?.scrollToTime(dateSelection.time, animated: true)
+        programGuideModel.$relativeDate
+            .sink { [weak self] relativeDate in
+                self?.scrollToTime(relativeDate.time, animated: true)
             }
             .store(in: &cancellables)
     }
@@ -129,8 +129,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
-                if let targetDateSelection = self.targetDateSelection, !state.isEmpty, self.scrollToTime(targetDateSelection.time, animated: false) {
-                    self.targetDateSelection = nil
+                if let targetRelativeDate = self.targetRelativeDate, !state.isEmpty, self.scrollToTime(targetRelativeDate.time, animated: false) {
+                    self.targetRelativeDate = nil
                 }
             }
         }
