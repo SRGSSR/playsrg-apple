@@ -13,8 +13,9 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     @Published var day: SRGDay
     @Published private(set) var state: State = .loading
     
-    init(day: SRGDay) {
+    init(day: SRGDay, firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel]) {
         self.day = day
+        self.state = .loading(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, in: day)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
@@ -97,6 +98,10 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
+        init(from channel: SRGChannel, in day: SRGDay) {
+            self.init(section: channel, items: [Item(.empty, in: channel, day: day)])
+        }
+        
         var isEmpty: Bool {
             return items.filter({ $0.wrappedValue != .empty }).isEmpty
         }
@@ -117,6 +122,10 @@ extension ProgramGuideDailyViewModel {
             
             static func loading(rows: [Row]) -> Self {
                 return Self.init(rows: rows, isLoading: true)
+            }
+            
+            static func loading(channels: [SRGChannel], in day: SRGDay) -> Self {
+                return Self.init(rows: channels.map { Row(from: $0, in: day) }, isLoading: true)
             }
             
             static func loaded(rows: [Row]) -> Self {
@@ -148,6 +157,10 @@ extension ProgramGuideDailyViewModel {
         
         static var loading: State {
             return .content(firstPartyBouquet: .loading, thirdPartyBouquet: .loading)
+        }
+        
+        static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], in day: SRGDay) -> State {
+            return .content(firstPartyBouquet: .loading(channels: firstPartyChannels, in: day), thirdPartyBouquet: .loading(channels: thirdPartyChannels, in: day))
         }
         
         static var empty: State {

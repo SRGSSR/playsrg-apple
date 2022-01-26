@@ -35,7 +35,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     init(model: ProgramGuideViewModel) {
         self.model = model
-        dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.relativeDate.date))
+        dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.relativeDate.date), firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
         targetRelativeDate = model.relativeDate
         super.init(nibName: nil, bundle: nil)
     }

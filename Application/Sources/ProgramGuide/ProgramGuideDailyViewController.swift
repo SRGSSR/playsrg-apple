@@ -37,7 +37,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     init(relativeDate: RelativeDate, programGuideModel: ProgramGuideViewModel) {
-        model = ProgramGuideDailyViewModel(day: relativeDate.day)
+        model = ProgramGuideDailyViewModel(day: relativeDate.day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
         targetRelativeDate = relativeDate
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
@@ -92,9 +92,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$data
-            .sink { [weak self] data in
-                self?.reloadData(for: data.selectedChannel)
+        programGuideModel.$bouquet
+            .sink { [weak self] bouquet in
+                self?.reloadData(for: bouquet.selectedChannel)
             }
             .store(in: &cancellables)
         

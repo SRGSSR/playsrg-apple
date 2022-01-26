@@ -10,22 +10,30 @@ import SRGDataProviderCombine
 // MARK: View model
 
 final class ProgramGuideViewModel: ObservableObject {
-    @Published private(set) var data = Data(channels: [], selectedChannel: nil)
+    @Published private(set) var bouquet = Bouquet(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
     @Published private(set) var relativeDate: RelativeDate
     
     private var scrollPositionRelativeDate: RelativeDate
     
     var channels: [SRGChannel] {
-        return data.channels
+        return bouquet.channels
+    }
+    
+    var firstPartyChannels: [SRGChannel] {
+        return bouquet.firstPartyChannels
+    }
+    
+    var thirdPartyChannels: [SRGChannel] {
+        return bouquet.thirdPartyChannels
     }
     
     var selectedChannel: SRGChannel? {
         get {
-            return data.selectedChannel
+            return bouquet.selectedChannel
         }
         set {
             if let newValue = newValue, channels.contains(newValue) {
-                data = Data(channels: channels, selectedChannel: newValue)
+                bouquet = Bouquet(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, selectedChannel: newValue)
             }
         }
     }
@@ -39,20 +47,19 @@ final class ProgramGuideViewModel: ObservableObject {
         scrollPositionRelativeDate = RelativeDate.atDate(date)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return Self.tvPrograms(for: SRGDay(from: date))
-                .map { $0.map(\.channel) }
-                .replaceError(with: self?.channels ?? [])
+            return Self.bouquet(for: SRGDay(from: date))
+                .replaceError(with: self?.bouquet ?? Bouquet(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil))
         }
-        .map { [weak self] channels in
-            if let selectedChannel = self?.selectedChannel, channels.contains(selectedChannel) {
-                return Data(channels: channels, selectedChannel: selectedChannel)
+        .map { [weak self] data in
+            if let selectedChannel = self?.selectedChannel, data.channels.contains(selectedChannel) {
+                return Bouquet(firstPartyChannels: data.firstPartyChannels, thirdPartyChannels: data.thirdPartyChannels, selectedChannel: selectedChannel)
             }
             else {
-                return Data(channels: channels, selectedChannel: channels.first)
+                return Bouquet(firstPartyChannels: data.firstPartyChannels, thirdPartyChannels: data.thirdPartyChannels, selectedChannel: data.channels.first)
             }
         }
         .receive(on: DispatchQueue.main)
-        .assign(to: &$data)
+        .assign(to: &$bouquet)
     }
     
     func switchToPreviousDay() {
@@ -83,16 +90,21 @@ final class ProgramGuideViewModel: ObservableObject {
 // MARK: Types
 
 extension ProgramGuideViewModel {
-    struct Data {
-        let channels: [SRGChannel]
+    struct Bouquet {
+        let firstPartyChannels: [SRGChannel]
+        let thirdPartyChannels: [SRGChannel]
         let selectedChannel: SRGChannel?
+        
+        var channels: [SRGChannel] {
+            return firstPartyChannels + thirdPartyChannels
+        }
     }
 }
 
 // MARK: Publishers
 
 private extension ProgramGuideViewModel {
-    static func tvPrograms(for day: SRGDay) -> AnyPublisher<[SRGProgramComposition], Error> {
+    static func bouquet(for day: SRGDay) -> AnyPublisher<Bouquet, Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
@@ -101,11 +113,13 @@ private extension ProgramGuideViewModel {
                 SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true),
                 SRGDataProvider.current!.tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: true)
             )
-            .map { $0 + $1 }
+            .map { Bouquet(firstPartyChannels: $0.map(\.channel), thirdPartyChannels: $1.map(\.channel), selectedChannel: nil) }
             .eraseToAnyPublisher()
         }
         else {
             return SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true)
+                .map { Bouquet(firstPartyChannels: $0.map(\.channel), thirdPartyChannels: [], selectedChannel: nil) }
+                .eraseToAnyPublisher()
         }
     }
 }
