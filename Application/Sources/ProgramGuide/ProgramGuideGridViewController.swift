@@ -135,8 +135,14 @@ final class ProgramGuideGridViewController: UIViewController {
         
         model.$relativeDate
             .sink { [weak self] relativeDate in
-                self?.targetRelativeDate = relativeDate
-                self?.dailyModel.day = relativeDate.day
+                guard let self = self else { return }
+                self.targetRelativeDate = relativeDate
+                if relativeDate.day == self.dailyModel.day {
+                    self.scrollToDate(relativeDate.date, animated: true)
+                }
+                else {
+                    self.dailyModel.day = relativeDate.day
+                }
             }
             .store(in: &cancellables)
         
