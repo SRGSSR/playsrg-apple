@@ -11,7 +11,7 @@ import Foundation
 // MARK: View model
 
 final class ProgramGuideViewModel: ObservableObject {
-    @Published private(set) var bouquet = Bouquet(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
+    @Published private(set) var bouquet: Bouquet = .empty
     @Published private(set) var day: SRGDay
     @Published private(set) var time: TimeInterval
     
@@ -119,6 +119,10 @@ extension ProgramGuideViewModel {
         let firstPartyChannels: [SRGChannel]
         let thirdPartyChannels: [SRGChannel]
         let selectedChannel: SRGChannel?
+        
+        static var empty: Self {
+            return Self.init(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
+        }
         
         var channels: [SRGChannel] {
             return firstPartyChannels + thirdPartyChannels
