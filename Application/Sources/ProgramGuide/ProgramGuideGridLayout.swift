@@ -243,7 +243,9 @@ extension ProgramGuideGridLayout {
     }
     
     private static func safeXOffset(_ xOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
-        return xOffset.clamped(to: 0...(collectionView.contentSize.width - collectionView.frame.width))
+        let maxXOffset = collectionView.contentSize.width - collectionView.frame.width
+            + collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
+        return xOffset.clamped(to: 0...maxXOffset)
     }
     
     func date(centeredAtXOffset xOffset: CGFloat) -> Date? {

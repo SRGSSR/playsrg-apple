@@ -148,6 +148,12 @@ final class ProgramGuideDailyViewController: UIViewController {
 // MARK: Layout calculations
 
 extension ProgramGuideDailyViewController {
+    private static func safeYOffset(_ yOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
+        let maxYOffset = collectionView.contentSize.height - collectionView.frame.height
+            + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+        return yOffset.clamped(to: 0...maxYOffset)
+    }
+    
     func date(atYOffset yOffset: CGFloat) -> Date? {
         guard let selectedChannel = programGuideModel.selectedChannel,
               let index = collectionView.indexPathForItem(at: CGPoint(x: collectionView.contentOffset.x, y: yOffset))?.row,
@@ -159,7 +165,7 @@ extension ProgramGuideDailyViewController {
         guard let selectedChannel = programGuideModel.selectedChannel,
               let nearestRow = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }),
               let layoutAttr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
-        return layoutAttr.frame.minY
+        return Self.safeYOffset(layoutAttr.frame.minY, in: collectionView)
     }
 }
 
