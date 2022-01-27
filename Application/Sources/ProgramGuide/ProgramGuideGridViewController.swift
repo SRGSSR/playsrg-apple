@@ -17,7 +17,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
-    private var targetRelativeDate: RelativeDate?
+    private var targetTime: TimeInterval?
     
     private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
@@ -35,8 +35,8 @@ final class ProgramGuideGridViewController: UIViewController {
     
     init(model: ProgramGuideViewModel) {
         self.model = model
-        dailyModel = ProgramGuideDailyViewModel(day: SRGDay(from: model.relativeDate.date), firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
-        targetRelativeDate = model.relativeDate
+        dailyModel = ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
+        targetTime = model.time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -133,16 +133,18 @@ final class ProgramGuideGridViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        model.$relativeDate
-            .sink { [weak self] relativeDate in
+        model.$day
+            .removeDuplicates()
+            .sink { [weak self] day in
                 guard let self = self else { return }
-                self.targetRelativeDate = relativeDate
-                if relativeDate.day == self.dailyModel.day {
-                    self.scrollToDate(relativeDate.date, animated: true)
-                }
-                else {
-                    self.dailyModel.day = relativeDate.day
-                }
+                self.targetTime = self.model.time
+                self.dailyModel.day = day
+            }
+            .store(in: &cancellables)
+        
+        model.$time
+            .sink { time in
+                self.scrollToTime(time, animated: true)
             }
             .store(in: &cancellables)
         
@@ -188,8 +190,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let targetRelativeDate = self.targetRelativeDate, !state.isEmpty, self.scrollToDate(targetRelativeDate.date, animated: false) {
-                    self.targetRelativeDate = nil
+                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
+                    self.targetTime = nil
                 }
             }
         }
@@ -201,9 +203,9 @@ final class ProgramGuideGridViewController: UIViewController {
     }
     
     @discardableResult
-    private func scrollToDate(_ date: Date, animated: Bool) -> Bool {
+    private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let xOffset = collectionViewLayout.xOffset(centeringDate: date) else { return false }
+              let xOffset = collectionViewLayout.xOffset(centeringDate: model.date(for: time)) else { return false }
         collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
         return true
     }
@@ -262,14 +264,10 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
-    private func updateTime() {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let date = collectionViewLayout.date(centeredAtXOffset: collectionView.contentOffset.x) else { return }
         model.didScrollToTime(of: date)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateTime()
     }
 }
 

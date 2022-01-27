@@ -37,10 +37,6 @@ final class ProgramGuideViewController: UIViewController {
         }
     }
     
-    private var date: Date {
-        return model.relativeDate.date
-    }
-    
     private func viewController(for layout: Layout) -> UIViewController? {
         switch layout {
 #if os(iOS)

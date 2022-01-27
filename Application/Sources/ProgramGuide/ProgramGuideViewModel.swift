@@ -6,14 +6,22 @@
 
 import Combine
 import SRGDataProviderCombine
+import Foundation
 
 // MARK: View model
 
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var bouquet = Bouquet(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
-    @Published private(set) var relativeDate: RelativeDate
+    @Published private(set) var day: SRGDay
+    @Published private(set) var time: TimeInterval
     
-    private var scrollPositionRelativeDate: RelativeDate
+    /// We store the reported scroll time position separately to avoid publishing changes during scrolling. This
+    /// value is only used when transitioning between days so that the last position can be preserved.
+    private(set) var scrollTime: TimeInterval
+    
+    static func time(from date: Date, relativeTo day: SRGDay) -> TimeInterval {
+        return date.timeIntervalSince(day.date)
+    }
     
     var channels: [SRGChannel] {
         return bouquet.channels
@@ -38,16 +46,25 @@ final class ProgramGuideViewModel: ObservableObject {
         }
     }
     
+    func date(for time: TimeInterval) -> Date {
+        return day.date.addingTimeInterval(time)
+    }
+    
     var dateString: String {
-        return DateFormatter.play_relativeFull.string(from: relativeDate.day.date).capitalizedFirstLetter
+        return DateFormatter.play_relativeFull.string(from: day.date).capitalizedFirstLetter
     }
     
     init(date: Date) {
-        relativeDate = RelativeDate.atDate(date)
-        scrollPositionRelativeDate = RelativeDate.atDate(date)
+        let initialDay = SRGDay(from: date)
+        day = initialDay
+        
+        let initialTime = Self.time(from: date, relativeTo: initialDay)
+        time = initialTime
+        scrollTime = initialTime
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return Self.bouquet(for: SRGDay(from: date))
+            // TODO: Should use a channel request without day dependency here
+            return Self.bouquet(for: initialDay)
                 .replaceError(with: self?.bouquet ?? Bouquet(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil))
         }
         .map { [weak self] data in
@@ -62,28 +79,36 @@ final class ProgramGuideViewModel: ObservableObject {
         .assign(to: &$bouquet)
     }
     
-    func switchToPreviousDay() {
-        relativeDate = relativeDate.previousDay.atTime(scrollPositionRelativeDate.time)
-    }
-    
-    func switchToNextDay() {
-        relativeDate = relativeDate.nextDay.atTime(scrollPositionRelativeDate.time)
-    }
-    
-    func switchToTonight() {
-        relativeDate = RelativeDate.tonight
-    }
-    
-    func switchToNow() {
-        relativeDate = RelativeDate.now
+    private func switchToDate(_ date: Date) {
+        day = SRGDay(from: date)
+        time = Self.time(from: date, relativeTo: day)
+        scrollTime = time
     }
     
     func switchToDay(_ day: SRGDay) {
-        relativeDate = relativeDate.atDay(day).atTime(scrollPositionRelativeDate.time)
+        self.day = day
+        time = scrollTime
+    }
+    
+    func switchToPreviousDay() {
+        switchToDay(SRGDay(byAddingDays: -1, months: 0, years: 0, to: day))
+    }
+    
+    func switchToNextDay() {
+        switchToDay(SRGDay(byAddingDays: 1, months: 0, years: 0, to: day))
+    }
+    
+    func switchToTonight() {
+        let date = Calendar.current.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
+        switchToDate(date)
+    }
+    
+    func switchToNow() {
+        switchToDate(Date())
     }
     
     func didScrollToTime(of date: Date) {
-        scrollPositionRelativeDate = relativeDate.atTime(of: date)
+        scrollTime = Self.time(from: date, relativeTo: day)
     }
 }
 

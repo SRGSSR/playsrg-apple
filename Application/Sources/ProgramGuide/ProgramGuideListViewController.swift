@@ -70,12 +70,12 @@ final class ProgramGuideListViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(relativeDate: model.relativeDate, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(day: model.day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
         
-        model.$relativeDate
-            .sink { [weak self] relativeDate in
-                self?.switchToRelativeDate(relativeDate)
+        model.$day
+            .sink { [weak self] day in
+                self?.switchToDay(day)
             }
             .store(in: &cancellables)
     }
@@ -85,15 +85,14 @@ final class ProgramGuideListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    private func switchToRelativeDate(_ relativeDate: RelativeDate) {
-        let day = relativeDate.day
+    private func switchToDay(_ day: SRGDay) {
         guard let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController,
               currentViewController.day != day else {
             return
         }
         
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
-        let dailyViewController = ProgramGuideDailyViewController(relativeDate: relativeDate, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
     }
 }
@@ -109,11 +108,13 @@ extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
 
 extension ProgramGuideListViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return ProgramGuideDailyViewController(relativeDate: model.relativeDate.previousDay, programGuideModel: model)
+        let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: model.day)
+        return ProgramGuideDailyViewController(day: previousDay, programGuideModel: model)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return ProgramGuideDailyViewController(relativeDate: model.relativeDate.nextDay, programGuideModel: model)
+        let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: model.day)
+        return ProgramGuideDailyViewController(day: nextDay, programGuideModel: model)
     }
 }
 

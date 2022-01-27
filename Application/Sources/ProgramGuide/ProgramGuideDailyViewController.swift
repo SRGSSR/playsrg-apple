@@ -16,7 +16,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
-    private var targetRelativeDate: RelativeDate?
+    private var targetTime: TimeInterval?
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -36,9 +36,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         return snapshot
     }
     
-    init(relativeDate: RelativeDate, programGuideModel: ProgramGuideViewModel) {
-        model = ProgramGuideDailyViewModel(day: relativeDate.day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
-        targetRelativeDate = relativeDate
+    init(day: SRGDay, programGuideModel: ProgramGuideViewModel) {
+        model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+        targetTime = programGuideModel.scrollTime
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -98,9 +98,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$relativeDate
-            .sink { [weak self] relativeDate in
-                self?.scrollToTime(relativeDate.time, animated: true)
+        programGuideModel.$time
+            .sink { [weak self] time in
+                self?.scrollToTime(time, animated: true)
             }
             .store(in: &cancellables)
     }
@@ -129,8 +129,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
-                if let targetRelativeDate = self.targetRelativeDate, !state.isEmpty, self.scrollToTime(targetRelativeDate.time, animated: false) {
-                    self.targetRelativeDate = nil
+                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
+                    self.targetTime = nil
                 }
             }
         }
@@ -138,10 +138,27 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     @discardableResult
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
-        guard let selectedChannel = programGuideModel.selectedChannel else { return false }
-        let date = model.day.date.addingTimeInterval(time)
-        guard let row = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }) else { return false }
-        return collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
+        guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
+        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
+        return true
+    }
+}
+
+// MARK: Layout calculations
+
+extension ProgramGuideDailyViewController {
+    func date(atYOffset yOffset: CGFloat) -> Date? {
+        guard let selectedChannel = programGuideModel.selectedChannel,
+              let index = collectionView.indexPathForItem(at: CGPoint(x: collectionView.contentOffset.x, y: yOffset))?.row,
+              let program = model.state.items(for: selectedChannel)[safeIndex: index]?.program else { return nil }
+        return program.startDate
+    }
+    
+    func yOffset(for date: Date) -> CGFloat? {
+        guard let selectedChannel = programGuideModel.selectedChannel,
+              let nearestRow = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }),
+              let attr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
+        return attr.frame.minY
     }
 }
 
@@ -175,16 +192,9 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideDailyViewController: UIScrollViewDelegate {
-    private func updateTime() {
-        if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
-           let selectedChannel = programGuideModel.selectedChannel,
-           let program = model.state.items(for: selectedChannel)[safeIndex: index]?.program {
-            programGuideModel.didScrollToTime(of: program.startDate)
-        }
-    }
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        updateTime()
+        guard let date = date(atYOffset: scrollView.contentOffset.y) else { return }
+        programGuideModel.didScrollToTime(of: date)
     }
 }
 
