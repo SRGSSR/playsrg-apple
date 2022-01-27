@@ -136,15 +136,15 @@ final class ProgramGuideGridViewController: UIViewController {
         model.$day
             .removeDuplicates()
             .sink { [weak self] day in
-                guard let self = self else { return }
-                self.targetTime = self.model.time
-                self.dailyModel.day = day
+                self?.dailyModel.day = day
             }
             .store(in: &cancellables)
         
         model.$time
-            .sink { time in
-                self.scrollToTime(time, animated: true)
+            .sink { [weak self] time in
+                if let self = self, !self.scrollToTime(time, animated: true) {
+                    self.targetTime = time
+                }
             }
             .store(in: &cancellables)
         
@@ -202,7 +202,6 @@ final class ProgramGuideGridViewController: UIViewController {
         headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
     }
     
-    @discardableResult
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let xOffset = collectionViewLayout.xOffset(centeringDate: model.date(for: time)) else { return false }

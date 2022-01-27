@@ -100,7 +100,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$time
             .sink { [weak self] time in
-                self?.scrollToTime(time, animated: true)
+                if let self = self, !self.scrollToTime(time, animated: true) {
+                    self.targetTime = time
+                }
             }
             .store(in: &cancellables)
     }
@@ -136,7 +138,6 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
     }
     
-    @discardableResult
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
         guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
         collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
