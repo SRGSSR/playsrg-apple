@@ -157,8 +157,8 @@ extension ProgramGuideDailyViewController {
     func yOffset(for date: Date) -> CGFloat? {
         guard let selectedChannel = programGuideModel.selectedChannel,
               let nearestRow = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }),
-              let attr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
-        return attr.frame.minY
+              let layoutAttr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
+        return layoutAttr.frame.minY
     }
 }
 

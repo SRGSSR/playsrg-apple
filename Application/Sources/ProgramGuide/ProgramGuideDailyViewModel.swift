@@ -13,6 +13,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     @Published var day: SRGDay
     @Published private(set) var state: State = .loading
     
+    /// Channels can be provided if available for more efficient content loading
     init(day: SRGDay, firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel]) {
         self.day = day
         self.state = .loading(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, in: day)
@@ -20,7 +21,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
                 .map { day in
-                    return Self.state(for: day, from: self?.state ?? State.empty)
+                    return Self.state(for: day, from: self?.state ?? .empty)
                 }
                 .switchToLatest()
         }
@@ -245,7 +246,7 @@ extension ProgramGuideDailyViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
-    private static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Bouquet, Error> {
+    static func rows(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from rows: [Row]) -> AnyPublisher<State.Bouquet, Error> {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { programCompositions in

@@ -65,17 +65,7 @@ final class ProgramGuideViewModel: ObservableObject {
         scrollTime = initialTime
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            // TODO: Should use a channel request without day dependency here
-            return Self.data(for: initialDay)
-                .replaceError(with: self?.data ?? .empty)
-        }
-        .map { [weak self] data in
-            if let selectedChannel = self?.selectedChannel, data.channels.contains(selectedChannel) {
-                return Data(firstPartyChannels: data.firstPartyChannels, thirdPartyChannels: data.thirdPartyChannels, selectedChannel: selectedChannel)
-            }
-            else {
-                return Data(firstPartyChannels: data.firstPartyChannels, thirdPartyChannels: data.thirdPartyChannels, selectedChannel: data.channels.first)
-            }
+            return Self.data(for: initialDay, from: self?.data ?? .empty)
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$data)
@@ -135,21 +125,40 @@ extension ProgramGuideViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideViewModel {
-    static func data(for day: SRGDay) -> AnyPublisher<Data, Error> {
+    static func matchingChannel(_ channel: SRGChannel?, in channels: [SRGChannel]) -> SRGChannel? {
+        if let channel = channel, channels.contains(channel) {
+            return channel
+        }
+        else {
+            return channels.first
+        }
+    }
+    
+    // TODO: Once an IL request is available to get the channel list without any day, use this request and
+    //       remove the day parameter.
+    static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[SRGChannel], Error> {
+        return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
+            .map { $0.map(\.channel) }
+            .eraseToAnyPublisher()
+    }
+    
+    static func data(for day: SRGDay, from data: Data) -> AnyPublisher<Data, Never> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
         
         if applicationConfiguration.areTvThirdPartyChannelsAvailable {
             return Publishers.CombineLatest(
-                SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true),
-                SRGDataProvider.current!.tvPrograms(for: vendor, provider: .thirdParty, day: day, minimal: true)
+                channels(for: vendor, provider: .SRG, day: day),
+                channels(for: vendor, provider: .thirdParty, day: day)
             )
-            .map { Data(firstPartyChannels: $0.map(\.channel), thirdPartyChannels: $1.map(\.channel), selectedChannel: nil) }
+            .map { Data(firstPartyChannels: $0, thirdPartyChannels: $1, selectedChannel: matchingChannel(data.selectedChannel, in: $0 + $1)) }
+            .replaceError(with: data)
             .eraseToAnyPublisher()
         }
         else {
-            return SRGDataProvider.current!.tvPrograms(for: vendor, day: day, minimal: true)
-                .map { Data(firstPartyChannels: $0.map(\.channel), thirdPartyChannels: [], selectedChannel: nil) }
+            return channels(for: vendor, provider: .SRG, day: day)
+                .map { Data(firstPartyChannels: $0, thirdPartyChannels: [], selectedChannel: matchingChannel(data.selectedChannel, in: $0)) }
+                .replaceError(with: data)
                 .eraseToAnyPublisher()
         }
     }
