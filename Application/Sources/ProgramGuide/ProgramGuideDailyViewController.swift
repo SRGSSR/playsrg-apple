@@ -200,7 +200,6 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
 
 // MARK: Views
 
-// TODO: Factor code with ProgramGuideGridViewController? Or not needed for the vertical list?
 private extension ProgramGuideDailyViewController {
     struct ItemCell: View {
         let item: ProgramGuideDailyViewModel.Item
@@ -210,9 +209,7 @@ private extension ProgramGuideDailyViewController {
                 ProgramCell(program: program, channel: item.section, direction: .horizontal)
             }
             else {
-                // TODO: Maybe not for the vertical list
-                Color.srgGray23
-                    .cornerRadius(4)
+                Color.clear
             }
         }
     }
