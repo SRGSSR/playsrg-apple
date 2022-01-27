@@ -190,7 +190,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
+                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: true) {
                     self.targetTime = nil
                 }
             }
@@ -266,7 +266,8 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let date = collectionViewLayout.date(centeredAtXOffset: collectionView.contentOffset.x) else { return }
-        model.didScrollToTime(of: date)
+        let time = date.timeIntervalSince(dailyModel.day.date)
+        model.didScrollToTime(time)
     }
 }
 

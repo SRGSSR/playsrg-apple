@@ -201,7 +201,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
 extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let date = date(atYOffset: scrollView.contentOffset.y) else { return }
-        programGuideModel.didScrollToTime(of: date)
+        programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
     }
 }
 

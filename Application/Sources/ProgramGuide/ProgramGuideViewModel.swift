@@ -99,8 +99,8 @@ final class ProgramGuideViewModel: ObservableObject {
         switchToDate(Date())
     }
     
-    func didScrollToTime(of date: Date) {
-        scrollTime = Self.time(from: date, relativeTo: day)
+    func didScrollToTime(_ time: TimeInterval) {
+        scrollTime = time
     }
 }
 
