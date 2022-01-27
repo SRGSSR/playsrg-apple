@@ -92,9 +92,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$bouquet
-            .sink { [weak self] bouquet in
-                self?.reloadData(for: bouquet.selectedChannel)
+        programGuideModel.$data
+            .sink { [weak self] data in
+                self?.reloadData(for: data.selectedChannel)
             }
             .store(in: &cancellables)
         
