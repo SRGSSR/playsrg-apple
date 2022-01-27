@@ -15,8 +15,10 @@ final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var day: SRGDay
     @Published private(set) var time: TimeInterval
     
-    /// We store the reported scroll time position separately to avoid publishing changes during scrolling. This
-    /// value is only used when transitioning between days so that the last position can be preserved.
+    /// We store the time to which the user scrolled (reported with `didScrollToTime(of:)` not in `time`, but in a
+    /// separate property. This avoids publishing unnecessary updates as a result of the user navigating the content.
+    /// This separate value is only used to update the `time` when transitioning between days so that only meaningful
+    /// updates are published.
     private(set) var scrollTime: TimeInterval
     
     static func time(from date: Date, relativeTo day: SRGDay) -> TimeInterval {
