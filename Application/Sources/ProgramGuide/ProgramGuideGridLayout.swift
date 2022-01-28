@@ -72,14 +72,14 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return snapshot.itemIdentifiers(inSection: section).first?.day.date
     }
     
-    private static func endDate(from startDate: Date) -> Date? {
+    private static func endDate(from startDate: Date) -> Date {
         let dateComponent = DateComponents(day: 1, hour: 3)
-        return Calendar.current.date(byAdding: dateComponent, to: startDate)
+        return Calendar.current.date(byAdding: dateComponent, to: startDate)!
     }
     
     private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> DateInterval? {
-        guard let startDate = startDate(from: snapshot), let endDate = endDate(from: startDate) else { return nil }
-        return DateInterval(start: startDate, end: endDate)
+        guard let startDate = startDate(from: snapshot) else { return nil }
+        return DateInterval(start: startDate, end: endDate(from: startDate))
     }
     
     private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int) -> CGRect {
@@ -237,9 +237,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
 // MARK: Layout calculations
 
 extension ProgramGuideGridLayout {
-    private var dateInterval: DateInterval? {
-        guard let dataSource = collectionView?.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> else { return nil }
-        return Self.dateInterval(from: dataSource.snapshot())
+    private static func dateInterval(for day: SRGDay) -> DateInterval {
+        let startDate = day.date
+        return DateInterval(start: startDate, end: endDate(from: startDate))
     }
     
     private static func safeXOffset(_ xOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
@@ -248,15 +248,16 @@ extension ProgramGuideGridLayout {
         return xOffset.clamped(to: 0...maxXOffset)
     }
     
-    func date(centeredAtXOffset xOffset: CGFloat) -> Date? {
-        guard let collectionView = collectionView, let dateInterval = dateInterval else { return nil }
+    static func date(centeredAtXOffset xOffset: CGFloat, in collectionView: UICollectionView, day: SRGDay) -> Date? {
+        let dateInterval = dateInterval(for: day)
         let gridWidth = max(collectionView.frame.width - Self.channelHeaderWidth, 0)
         let date = dateInterval.start.addingTimeInterval(Self.safeXOffset(xOffset + gridWidth / 2.0, in: collectionView) / Self.scale)
         return dateInterval.contains(date) ? date : nil
     }
     
-    func xOffset(centeringDate date: Date) -> CGFloat? {
-        guard let collectionView = collectionView, let dateInterval = dateInterval, dateInterval.contains(date) else { return nil }
+    static func xOffset(centeringDate date: Date, in collectionView: UICollectionView, day: SRGDay) -> CGFloat? {
+        let dateInterval = dateInterval(for: day)
+        guard dateInterval.contains(date) else { return nil }
         let gridWidth = max(collectionView.frame.width - Self.channelHeaderWidth, 0)
         return Self.safeXOffset(date.timeIntervalSince(dateInterval.start) * Self.scale - gridWidth / 2.0, in: collectionView)
     }

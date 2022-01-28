@@ -203,8 +203,7 @@ final class ProgramGuideGridViewController: UIViewController {
     }
     
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
-        guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let xOffset = collectionViewLayout.xOffset(centeringDate: model.date(for: time)) else { return false }
+        guard let xOffset = ProgramGuideGridLayout.xOffset(centeringDate: model.date(for: time), in: collectionView, day: model.day) else { return false }
         collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
         return true
     }
@@ -264,8 +263,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
     private func updateTime() {
-        guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
-              let date = collectionViewLayout.date(centeredAtXOffset: collectionView.contentOffset.x) else { return }
+        guard let date = ProgramGuideGridLayout.date(centeredAtXOffset: collectionView.contentOffset.x, in: collectionView, day: dailyModel.day) else { return }
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
     }
