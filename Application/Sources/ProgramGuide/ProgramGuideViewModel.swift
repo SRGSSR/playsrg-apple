@@ -13,13 +13,9 @@ import Foundation
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var data: Data = .empty
     @Published private(set) var day: SRGDay
-    @Published private(set) var time: TimeInterval
     
-    /// We store the time to which the user scrolled (reported with `didScrollToTime(of:)` not in `time`, but in a
-    /// separate property. This avoids publishing unnecessary updates as a result of the user navigating the content.
-    /// This separate value is only used to update the `time` when transitioning between days so that only meaningful
-    /// updates are published.
-    private(set) var scrollTime: TimeInterval
+    /// Current position within the day (in seconds from midnight; might be larger than the number of seconds in a day)
+    private(set) var time: TimeInterval
     
     static func time(from date: Date, relativeTo day: SRGDay) -> TimeInterval {
         return date.timeIntervalSince(day.date)
@@ -59,10 +55,7 @@ final class ProgramGuideViewModel: ObservableObject {
     init(date: Date) {
         let initialDay = SRGDay(from: date)
         day = initialDay
-        
-        let initialTime = Self.time(from: date, relativeTo: initialDay)
-        time = initialTime
-        scrollTime = initialTime
+        time = Self.time(from: date, relativeTo: initialDay)
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
             return Self.data(for: initialDay, from: self?.data ?? .empty)
@@ -74,12 +67,10 @@ final class ProgramGuideViewModel: ObservableObject {
     private func switchToDate(_ date: Date) {
         day = SRGDay(from: date)
         time = Self.time(from: date, relativeTo: day)
-        scrollTime = time
     }
     
     func switchToDay(_ day: SRGDay) {
         self.day = day
-        time = scrollTime
     }
     
     func switchToPreviousDay() {
@@ -100,7 +91,7 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func didScrollToTime(_ time: TimeInterval) {
-        scrollTime = time
+        self.time = time
     }
 }
 

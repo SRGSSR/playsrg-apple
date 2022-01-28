@@ -43,7 +43,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         else {
             model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
         }
-        targetTime = programGuideModel.scrollTime
+        targetTime = programGuideModel.time
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -102,14 +102,11 @@ final class ProgramGuideDailyViewController: UIViewController {
                 self?.reloadData(for: data.selectedChannel)
             }
             .store(in: &cancellables)
-        
-        programGuideModel.$time
-            .sink { [weak self] time in
-                if let self = self, !self.scrollToTime(time, animated: true) {
-                    self.targetTime = time
-                }
-            }
-            .store(in: &cancellables)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.scrollToTime(programGuideModel.time, animated: false)
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -143,6 +140,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         }
     }
     
+    @discardableResult
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
         guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
         collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)

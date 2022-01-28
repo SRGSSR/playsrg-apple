@@ -145,14 +145,6 @@ final class ProgramGuideGridViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        model.$time
-            .sink { [weak self] time in
-                if let self = self, !self.scrollToTime(time, animated: true) {
-                    self.targetTime = time
-                }
-            }
-            .store(in: &cancellables)
-        
         updateLayout()
     }
     
@@ -195,7 +187,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: true) {
+                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
                     self.targetTime = nil
                 }
             }
