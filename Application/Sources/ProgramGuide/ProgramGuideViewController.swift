@@ -29,8 +29,7 @@ final class ProgramGuideViewController: UIViewController {
             var currentDailyModel: ProgramGuideDailyViewModel?
             
             children.forEach { viewController in
-                if viewController is HasProgramGuideDailyViewModel {
-                    let dailyViewController = viewController as! HasProgramGuideDailyViewModel
+                if let dailyViewController = viewController as? HasProgramGuideDailyViewModel {
                     currentDailyModel = dailyViewController.programGuideDailyViewModel
                 }
                 viewController.view.removeFromSuperview()
