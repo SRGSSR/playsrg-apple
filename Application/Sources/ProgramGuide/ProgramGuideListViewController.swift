@@ -13,20 +13,20 @@ final class ProgramGuideListViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
-    private var initialDailyModel: ProgramGuideDailyViewModel?
-    
     private weak var headerView: HostView<ProgramGuideListHeaderView>!
     
     private var cancellables = Set<AnyCancellable>()
     
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
-        initialDailyModel = dailyModel
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
         super.init(nibName: nil, bundle: nil)
         addChild(pageViewController)
+        
+        let dailyViewController = ProgramGuideDailyViewController(day: model.day, programGuideModel: model, programGuideDailyModel: dailyModel)
+        pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
     }
     
     required init?(coder: NSCoder) {
@@ -72,10 +72,6 @@ final class ProgramGuideListViewController: UIViewController {
             ])
         }
         pageViewController.didMove(toParent: self)
-        
-        let dailyViewController = ProgramGuideDailyViewController(day: model.day, programGuideModel: model, programGuideDailyModel: initialDailyModel)
-        pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
-        initialDailyModel = nil
         
         model.$day
             .removeDuplicates()
