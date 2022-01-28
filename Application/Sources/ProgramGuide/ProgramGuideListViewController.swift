@@ -78,6 +78,7 @@ final class ProgramGuideListViewController: UIViewController {
         initialDailyModel = nil
         
         model.$day
+            .removeDuplicates()
             .sink { [weak self] day in
                 self?.switchToDay(day)
             }
@@ -137,5 +138,9 @@ extension ProgramGuideListViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         headerView.isUserInteractionEnabled = true
+        
+        if completed, let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
+            model.switchToDay(currentViewController.day)
+        }
     }
 }
