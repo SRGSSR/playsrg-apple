@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "08686f04881483d2bc098b2696e674c0ba135e47",
-          "version": "8.10.0"
+          "revision": "5344857522053b5d4403ec8173ec0d23200a97ea",
+          "version": "8.11.0"
         }
       },
       {
@@ -123,8 +123,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "cac4b2bffe766cd5e7ab32e7a6a1e5869f5dd896",
-          "version": "16.1.2"
+          "revision": "158c3bd52bb9e32f6b3c1f7d3dafe31fb7174097",
+          "version": "16.2.0"
         }
       },
       {
@@ -177,8 +177,8 @@
         "repositoryURL": "https://github.com/kean/Nuke.git",
         "state": {
           "branch": null,
-          "revision": "6be3e778f1663b16dd645b7e8a0a01f73b5ed7f3",
-          "version": "10.6.1"
+          "revision": "78fa963b8491fc520791d8c2a509f1b8593d8aae",
+          "version": "10.7.1"
         }
       },
       {
@@ -240,7 +240,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "feature/external-tv-channels",
-          "revision": "b9bd04fa9daa3c0809519f7f587280236e394eaf",
+          "revision": "81fa45a71ad8994320676b3a62a1ec920460a639",
           "version": null
         }
       },
@@ -267,7 +267,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "112de4122573fae4f70dbc3a2993d23d1657c82c",
+          "revision": "773594a50410fc090dad333e4865199b9a151c1b",
           "version": null
         }
       },
@@ -330,8 +330,8 @@
         "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
         "state": {
           "branch": null,
-          "revision": "1e49de7b3780b69927bc3e61903d8ec0693a3dc5",
-          "version": "9.0.5"
+          "revision": "b29dd21090b708aa0ae9ecbaf6e2d0487028dc3f",
+          "version": "9.0.6"
         }
       },
       {
