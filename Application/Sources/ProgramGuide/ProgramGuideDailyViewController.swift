@@ -37,7 +37,12 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     init(day: SRGDay, programGuideModel: ProgramGuideViewModel, programGuideDailyModel: ProgramGuideDailyViewModel? = nil) {
-        model = programGuideDailyModel ?? ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+        if let programGuideDailyModel = programGuideDailyModel, programGuideDailyModel.day == programGuideModel.day {
+            model = programGuideDailyModel
+        }
+        else {
+            model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+        }
         targetTime = programGuideModel.scrollTime
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
