@@ -263,11 +263,21 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    private func updateTime() {
         guard let collectionViewLayout = collectionView.collectionViewLayout as? ProgramGuideGridLayout,
               let date = collectionViewLayout.date(centeredAtXOffset: collectionView.contentOffset.x) else { return }
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        updateTime()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            updateTime()
+        }
     }
 }
 
