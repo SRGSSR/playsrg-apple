@@ -40,8 +40,9 @@ final class ProgramGuideViewModel: ObservableObject {
             return data.selectedChannel
         }
         set {
-            if let newValue = newValue, channels.contains(newValue) {
+            if let newValue = newValue, channels.contains(newValue), newValue != data.selectedChannel {
                 data = Data(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, selectedChannel: newValue)
+                change = .channel(newValue)
             }
         }
     }
@@ -134,6 +135,7 @@ extension ProgramGuideViewModel {
         case day(SRGDay)
         case time(TimeInterval)
         case dayAndTime(day: SRGDay, time: TimeInterval)
+        case channel(SRGChannel)
     }
 }
 

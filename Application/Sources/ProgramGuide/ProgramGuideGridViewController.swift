@@ -142,8 +142,6 @@ final class ProgramGuideGridViewController: UIViewController {
             .sink { [weak self] change in
                 guard let self = self else { return }
                 switch change {
-                case .none:
-                    break
                 case let .day(day):
                     self.dailyModel.day = day
                 case let .time(time):
@@ -155,6 +153,8 @@ final class ProgramGuideGridViewController: UIViewController {
                     if !self.scrollToTime(time, animated: true) {
                         self.scrollTargetTime = time
                     }
+                default:
+                    break
                 }
             }
             .store(in: &cancellables)

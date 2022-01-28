@@ -111,6 +111,11 @@ final class ProgramGuideDailyViewController: UIViewController {
                     if !self.scrollToTime(time, animated: true) {
                         self.scrollTargetTime = time
                     }
+                case .channel:
+                    let time = self.programGuideModel.time
+                    if !self.scrollToTime(time, animated: false) {
+                        self.scrollTargetTime = time
+                    }
                 default:
                     break
                 }
