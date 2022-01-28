@@ -73,10 +73,14 @@ final class ProgramGuideListViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        model.$day
-            .removeDuplicates()
-            .sink { [weak self] day in
-                self?.switchToDay(day)
+        model.$change
+            .sink { [weak self] change in
+                switch change {
+                case let .day(day), let .dayAndTime(day: day, time: _):
+                    self?.switchToDay(day)
+                default:
+                    break
+                }
             }
             .store(in: &cancellables)
     }

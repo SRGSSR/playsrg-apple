@@ -12,10 +12,12 @@ import Foundation
 
 final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var data: Data = .empty
-    @Published private(set) var day: SRGDay
     
-    /// Current position within the day (in seconds from midnight; might be larger than the number of seconds in a day)
-    private(set) var time: TimeInterval
+    /// Only significant changes are published. Noisy changes (e.g. because of scrolling) are not published.
+    @Published private(set) var change: Change = .none
+    
+    private(set) var day: SRGDay
+    private(set) var time: TimeInterval     // Position in day (distance from midnight)
     
     static func time(from date: Date, relativeTo day: SRGDay) -> TimeInterval {
         return date.timeIntervalSince(day.date)
@@ -65,12 +67,27 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     private func switchToDate(_ date: Date) {
+        let previousDay = day
+        let previousTime = time
+        
         day = SRGDay(from: date)
         time = Self.time(from: date, relativeTo: day)
+        
+        if day != previousDay && time != previousTime {
+            change = .dayAndTime(day: day, time: time)
+        }
+        else if day != previousDay {
+            change = .day(day)
+        }
+        else if time != previousTime {
+            change = .time(time)
+        }
     }
     
     func switchToDay(_ day: SRGDay) {
+        guard self.day != day else { return }
         self.day = day
+        change = .day(day)
     }
     
     func switchToPreviousDay() {
@@ -110,6 +127,13 @@ extension ProgramGuideViewModel {
         var channels: [SRGChannel] {
             return firstPartyChannels + thirdPartyChannels
         }
+    }
+    
+    enum Change {
+        case none
+        case day(SRGDay)
+        case time(TimeInterval)
+        case dayAndTime(day: SRGDay, time: TimeInterval)
     }
 }
 

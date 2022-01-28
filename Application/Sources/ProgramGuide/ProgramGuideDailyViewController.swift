@@ -14,9 +14,9 @@ final class ProgramGuideDailyViewController: UIViewController {
     private let model: ProgramGuideDailyViewModel
     private let programGuideModel: ProgramGuideViewModel
     
+    private var scrollTargetTime: TimeInterval?
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
-    private var targetTime: TimeInterval?
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
@@ -43,8 +43,8 @@ final class ProgramGuideDailyViewController: UIViewController {
         else {
             model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
         }
-        targetTime = programGuideModel.time
         self.programGuideModel = programGuideModel
+        scrollTargetTime = programGuideModel.time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -102,11 +102,27 @@ final class ProgramGuideDailyViewController: UIViewController {
                 self?.reloadData(for: data.selectedChannel)
             }
             .store(in: &cancellables)
+        
+        programGuideModel.$change
+            .sink { [weak self] change in
+                guard let self = self else { return }
+                switch change {
+                case let .time(time):
+                    if !self.scrollToTime(time, animated: true) {
+                        self.scrollTargetTime = time
+                    }
+                default:
+                    break
+                }
+            }
+            .store(in: &cancellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.scrollToTime(programGuideModel.time, animated: false)
+        if !scrollToTime(programGuideModel.time, animated: false) {
+            scrollTargetTime = programGuideModel.time
+        }
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -133,14 +149,13 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
-                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
-                    self.targetTime = nil
+                if let scrollTargetTime = self.scrollTargetTime, currentChannel != nil, !state.isEmpty(in: currentChannel), self.scrollToTime(scrollTargetTime, animated: false) {
+                    self.scrollTargetTime = nil
                 }
             }
         }
     }
     
-    @discardableResult
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
         guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
         collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
@@ -196,7 +211,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         // modal presentation we use.
         guard let channel = programGuideModel.selectedChannel,
               let program = dataSource.snapshot().itemIdentifiers(inSection: channel)[indexPath.row].program else {
-            self.deselectItems(in: collectionView, animated: true)
+            deselectItems(in: collectionView, animated: true)
             return
         }
         

@@ -15,9 +15,9 @@ final class ProgramGuideGridViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let dailyModel: ProgramGuideDailyViewModel
     
+    private var scrollTargetTime: TimeInterval?
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
-    private var targetTime: TimeInterval?
     
     private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
@@ -35,13 +35,13 @@ final class ProgramGuideGridViewController: UIViewController {
     
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
+        scrollTargetTime = model.time
         if let dailyModel = dailyModel, dailyModel.day == model.day {
             self.dailyModel = dailyModel
         }
         else {
             self.dailyModel = ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
         }
-        targetTime = model.time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -138,10 +138,24 @@ final class ProgramGuideGridViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        model.$day
-            .removeDuplicates()
-            .sink { [weak self] day in
-                self?.dailyModel.day = day
+        model.$change
+            .sink { [weak self] change in
+                guard let self = self else { return }
+                switch change {
+                case .none:
+                    break
+                case let .day(day):
+                    self.dailyModel.day = day
+                case let .time(time):
+                    if !self.scrollToTime(time, animated: true) {
+                        self.scrollTargetTime = time
+                    }
+                case let .dayAndTime(day: day, time: time):
+                    self.dailyModel.day = day
+                    if !self.scrollToTime(time, animated: true) {
+                        self.scrollTargetTime = time
+                    }
+                }
             }
             .store(in: &cancellables)
         
@@ -187,8 +201,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let targetTime = self.targetTime, !state.isEmpty, self.scrollToTime(targetTime, animated: false) {
-                    self.targetTime = nil
+                if let scrollTargetTime = self.scrollTargetTime, !state.isEmpty, self.scrollToTime(scrollTargetTime, animated: false) {
+                    self.scrollTargetTime = nil
                 }
             }
         }
@@ -228,7 +242,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         let snapshot = dataSource.snapshot()
         let channel = snapshot.sectionIdentifiers[indexPath.section]
         guard let program = snapshot.itemIdentifiers(inSection: channel)[indexPath.row].program else {
-            self.deselectItems(in: collectionView, animated: true)
+            deselectItems(in: collectionView, animated: true)
             return
         }
         
