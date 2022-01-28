@@ -184,7 +184,7 @@ final class ProgramGuideGridViewController: UIViewController {
             }
 #if os(tvOS)
             if let firstSection = state.sections.first,
-               let currentProgram = state.items(for: firstSection).compactMap(\.program).first(where: { $0.play_contains(model.day.date) }) {
+               let currentProgram = state.items(for: firstSection).compactMap(\.program).first(where: { $0.play_contains(model.date(for: model.time)) }) {
                 headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
             }
             else {
