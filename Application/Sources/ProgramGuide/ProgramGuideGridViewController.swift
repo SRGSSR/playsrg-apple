@@ -35,7 +35,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
-        self.dailyModel = dailyModel != nil ? dailyModel! : ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
+        self.dailyModel = dailyModel ?? ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
         targetTime = model.time
         super.init(nibName: nil, bundle: nil)
     }
@@ -213,7 +213,7 @@ final class ProgramGuideGridViewController: UIViewController {
 
 extension ProgramGuideGridViewController: HasProgramGuideDailyViewModel {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
-        return self.dailyModel
+        return dailyModel
     }
 }
 

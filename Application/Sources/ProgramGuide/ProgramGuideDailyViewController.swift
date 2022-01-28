@@ -37,7 +37,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     init(day: SRGDay, programGuideModel: ProgramGuideViewModel, programGuideDailyModel: ProgramGuideDailyViewModel? = nil) {
-        model = programGuideDailyModel != nil ? programGuideDailyModel! : ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+        model = programGuideDailyModel ?? ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
         targetTime = programGuideModel.scrollTime
         self.programGuideModel = programGuideModel
         super.init(nibName: nil, bundle: nil)
@@ -173,7 +173,7 @@ extension ProgramGuideDailyViewController {
 
 extension ProgramGuideDailyViewController: HasProgramGuideDailyViewModel {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
-        return self.model
+        return model
     }
 }
 
