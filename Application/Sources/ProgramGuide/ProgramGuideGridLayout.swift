@@ -243,8 +243,8 @@ extension ProgramGuideGridLayout {
     }
     
     private static func safeXOffset(_ xOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
-        let maxXOffset = collectionView.contentSize.width - collectionView.frame.width
-            + collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right
+        let maxXOffset = max(collectionView.contentSize.width - collectionView.frame.width
+            + collectionView.adjustedContentInset.left + collectionView.adjustedContentInset.right, 0)
         return xOffset.clamped(to: 0...maxXOffset)
     }
     

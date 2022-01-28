@@ -149,8 +149,8 @@ final class ProgramGuideDailyViewController: UIViewController {
 
 extension ProgramGuideDailyViewController {
     private static func safeYOffset(_ yOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
-        let maxYOffset = collectionView.contentSize.height - collectionView.frame.height
-            + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom
+        let maxYOffset = max(collectionView.contentSize.height - collectionView.frame.height
+            + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom, 0)
         return yOffset.clamped(to: 0...maxYOffset)
     }
     
