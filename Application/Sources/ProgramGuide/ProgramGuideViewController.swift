@@ -6,6 +6,10 @@
 
 import UIKit
 
+protocol HasProgramGuideDailyViewModel {
+    var programGuideDailyViewModel: ProgramGuideDailyViewModel? { get }
+}
+
 // MARK: View controller
 
 final class ProgramGuideViewController: UIViewController {
@@ -22,12 +26,18 @@ final class ProgramGuideViewController: UIViewController {
         didSet {
             guard layout != oldValue else { return }
             
+            var currentDailyModel: ProgramGuideDailyViewModel?
+            
             children.forEach { viewController in
+                if viewController is HasProgramGuideDailyViewModel {
+                    let dailyViewController = viewController as! HasProgramGuideDailyViewModel
+                    currentDailyModel = dailyViewController.programGuideDailyViewModel
+                }
                 viewController.view.removeFromSuperview()
                 viewController.removeFromParent()
             }
             
-            if let viewController = viewController(for: layout) {
+            if let viewController = viewController(for: layout, dailyModel: currentDailyModel) {
                 addChild(viewController)
                 viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 viewController.view.frame = view.bounds
@@ -37,14 +47,14 @@ final class ProgramGuideViewController: UIViewController {
         }
     }
     
-    private func viewController(for layout: Layout) -> UIViewController? {
+    private func viewController(for layout: Layout, dailyModel: ProgramGuideDailyViewModel?) -> UIViewController? {
         switch layout {
 #if os(iOS)
         case .list:
-            return ProgramGuideListViewController(model: model)
+            return ProgramGuideListViewController(model: model, dailyModel: dailyModel)
 #endif
         case .grid:
-            return ProgramGuideGridViewController(model: model)
+            return ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
         case .none:
             return nil
         }

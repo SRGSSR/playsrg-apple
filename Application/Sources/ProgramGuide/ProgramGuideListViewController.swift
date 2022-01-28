@@ -13,12 +13,15 @@ final class ProgramGuideListViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
+    private var initialDailyModel: ProgramGuideDailyViewModel?
+    
     private weak var headerView: HostView<ProgramGuideListHeaderView>!
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(model: ProgramGuideViewModel) {
+    init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
+        initialDailyModel = dailyModel
         pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: [
             UIPageViewController.OptionsKey.interPageSpacing: 100
         ])
@@ -70,8 +73,9 @@ final class ProgramGuideListViewController: UIViewController {
         }
         pageViewController.didMove(toParent: self)
         
-        let dailyViewController = ProgramGuideDailyViewController(day: model.day, programGuideModel: model)
+        let dailyViewController = ProgramGuideDailyViewController(day: model.day, programGuideModel: model, programGuideDailyModel: initialDailyModel)
         pageViewController.setViewControllers([dailyViewController], direction: .forward, animated: false)
+        initialDailyModel = nil
         
         model.$day
             .sink { [weak self] day in
@@ -95,6 +99,17 @@ final class ProgramGuideListViewController: UIViewController {
 }
 
 // MARK: Protocols
+
+extension ProgramGuideListViewController: HasProgramGuideDailyViewModel {
+    var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
+        if let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
+            return currentViewController.programGuideDailyViewModel
+        }
+        else {
+            return nil
+        }
+    }
+}
 
 extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
     func openCalendar() {

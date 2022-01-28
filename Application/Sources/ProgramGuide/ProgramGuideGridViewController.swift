@@ -33,9 +33,9 @@ final class ProgramGuideGridViewController: UIViewController {
         return snapshot
     }
     
-    init(model: ProgramGuideViewModel) {
+    init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
-        dailyModel = ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
+        self.dailyModel = dailyModel != nil ? dailyModel! : ProgramGuideDailyViewModel(day: model.day, firstPartyChannels: model.firstPartyChannels, thirdPartyChannels: model.thirdPartyChannels)
         targetTime = model.time
         super.init(nibName: nil, bundle: nil)
     }
@@ -210,6 +210,12 @@ final class ProgramGuideGridViewController: UIViewController {
 }
 
 // MARK: Protocols
+
+extension ProgramGuideGridViewController: HasProgramGuideDailyViewModel {
+    var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
+        return self.dailyModel
+    }
+}
 
 extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
     func openCalendar() {
