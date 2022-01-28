@@ -183,8 +183,8 @@ final class ProgramGuideGridViewController: UIViewController {
                 emptyView.content = nil
             }
 #if os(tvOS)
-            if let firstSection = state.sections.first,
-               let currentProgram = state.items(for: firstSection).compactMap(\.program).first(where: { $0.play_contains(model.date(for: model.time)) }) {
+            if let channel = model.selectedChannel ?? model.channels.first, let section = state.sections.first(where: { $0 == channel }) ?? state.sections.first,
+               let currentProgram = state.items(for: section).compactMap(\.program).first(where: { $0.play_contains(model.date(for: model.time)) }) {
                 headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
             }
             else {
@@ -267,6 +267,8 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
             let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program
             headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
+            
+            model.selectedChannel = channel
         }
     }
 #endif
