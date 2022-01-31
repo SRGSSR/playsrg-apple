@@ -15,7 +15,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let dailyModel: ProgramGuideDailyViewModel
     
-    private var scrollTargetTime: TimeInterval?
+    private var scrollTarget: ScrollTarget?
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
@@ -35,7 +35,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
-        scrollTargetTime = model.time
+        scrollTarget = ScrollTarget(channel: model.selectedChannel, time: model.time)
         if let dailyModel = dailyModel, dailyModel.day == model.day {
             self.dailyModel = dailyModel
         }
@@ -145,14 +145,10 @@ final class ProgramGuideGridViewController: UIViewController {
                 case let .day(day):
                     self.dailyModel.day = day
                 case let .time(time):
-                    if !self.scrollToTime(time, animated: true) {
-                        self.scrollTargetTime = time
-                    }
+                    self.scrollToTarget(ScrollTarget(time: time), animated: true)
                 case let .dayAndTime(day: day, time: time):
                     self.dailyModel.day = day
-                    if !self.scrollToTime(time, animated: true) {
-                        self.scrollTargetTime = time
-                    }
+                    self.scrollToTarget(ScrollTarget(time: time), animated: true)
                 default:
                     break
                 }
@@ -165,6 +161,7 @@ final class ProgramGuideGridViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        scrollToTarget(ScrollTarget(channel: model.selectedChannel, time: model.time), animated: false)
     }
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -201,8 +198,8 @@ final class ProgramGuideGridViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
-                if let scrollTargetTime = self.scrollTargetTime, !state.isEmpty, self.scrollToTime(scrollTargetTime, animated: false) {
-                    self.scrollTargetTime = nil
+                if !state.isEmpty {
+                    self.scrollToTarget(self.scrollTarget, animated: false)
                 }
             }
         }
@@ -212,11 +209,66 @@ final class ProgramGuideGridViewController: UIViewController {
         let appliedTraitCollection = traitCollection ?? self.traitCollection
         headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
     }
+}
+
+// MARK: Scrolling management
+
+private extension ProgramGuideGridViewController {
+    func xOffset(for time: TimeInterval?) -> CGFloat? {
+        guard let time = time else { return nil }
+        return ProgramGuideGridLayout.xOffset(centeringDate: model.date(for: time), in: collectionView, day: model.day)
+    }
     
-    private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
-        guard let xOffset = ProgramGuideGridLayout.xOffset(centeringDate: model.date(for: time), in: collectionView, day: model.day) else { return false }
-        collectionView.setContentOffset(CGPoint(x: xOffset, y: collectionView.contentOffset.y), animated: animated)
-        return true
+    func yOffset(for channel: SRGChannel?) -> CGFloat? {
+        guard let channel = channel, let sectionIndex = dataSource.snapshot().sectionIdentifiers.firstIndex(of: channel) else { return nil }
+        return ProgramGuideGridLayout.yOffset(forSectionIndex: sectionIndex, in: collectionView)
+    }
+    
+    func offset(for target: ScrollTarget) -> CGPoint? {
+        if let x = xOffset(for: target.time) {
+            return CGPoint(x: x, y: yOffset(for: target.channel) ?? collectionView.contentOffset.y)
+        }
+        else if let y = yOffset(for: target.channel) {
+            return CGPoint(x: collectionView.contentOffset.x, y: y)
+        }
+        else {
+            return nil
+        }
+    }
+    
+    func scrollToTarget(_ target: ScrollTarget?, animated: Bool) {
+        if let target = target, let offset = offset(for: target) {
+            collectionView.setContentOffset(offset, animated: animated)
+            scrollTarget = nil
+        }
+        else {
+            scrollTarget = target
+        }
+    }
+}
+
+// MARK: Types
+
+private extension ProgramGuideGridViewController {
+    struct ScrollTarget {
+        let channel: SRGChannel?
+        let time: TimeInterval?
+        
+        init?(channel: SRGChannel?, time: TimeInterval?) {
+            guard channel != nil || time != nil else { return nil }
+            self.channel = channel
+            self.time = time
+        }
+        
+        init(channel: SRGChannel) {
+            self.channel = channel
+            self.time = nil
+        }
+        
+        init(time: TimeInterval) {
+            self.channel = nil
+            self.time = time
+        }
     }
 }
 
@@ -281,19 +333,23 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
-    private func updateTime() {
+    private func updatePositon() {
+        let sectionIndex = ProgramGuideGridLayout.sectionIndex(atYOffset: collectionView.contentOffset.y, in: collectionView)
+        guard let channel = dataSource.snapshot().sectionIdentifiers[safeIndex: sectionIndex] else { return }
+        model.selectedChannel = channel
+        
         guard let date = ProgramGuideGridLayout.date(centeredAtXOffset: collectionView.contentOffset.x, in: collectionView, day: dailyModel.day) else { return }
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updateTime()
+        updatePositon()
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
-            updateTime()
+            updatePositon()
         }
     }
 }

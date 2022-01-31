@@ -54,18 +54,25 @@ struct ProgramGuideListHeaderView: View {
         
         var body: some View {
             ScrollView(.horizontal) {
-                HStack(spacing: 10) {
-                    if !model.channels.isEmpty {
-                        ForEach(model.channels, id: \.uid) { channel in
-                            ChannelButton(channel: channel) {
-                                model.selectedChannel = channel
+                ScrollViewReader { proxy in
+                    HStack(spacing: 10) {
+                        if !model.channels.isEmpty {
+                            ForEach(model.channels, id: \.uid) { channel in
+                                ChannelButton(channel: channel) {
+                                    model.selectedChannel = channel
+                                }
+                                .environment(\.isSelected, channel == model.selectedChannel)
                             }
-                            .environment(\.isSelected, channel == model.selectedChannel)
+                            .onAppear {
+                                if let selectedChannel = model.selectedChannel {
+                                    proxy.scrollTo(selectedChannel.uid)
+                                }
+                            }
                         }
-                    }
-                    else {
-                        ForEach(0..<2) { _ in
-                            ChannelButton(channel: nil, action: {})
+                        else {
+                            ForEach(0..<2) { _ in
+                                ChannelButton(channel: nil, action: {})
+                            }
                         }
                     }
                 }

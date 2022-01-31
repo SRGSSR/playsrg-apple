@@ -108,14 +108,9 @@ final class ProgramGuideDailyViewController: UIViewController {
                 guard let self = self else { return }
                 switch change {
                 case let .time(time):
-                    if !self.scrollToTime(time, animated: true) {
-                        self.scrollTargetTime = time
-                    }
+                    self.scrollToTime(time, animated: true)
                 case .channel:
-                    let time = self.programGuideModel.time
-                    if !self.scrollToTime(time, animated: false) {
-                        self.scrollTargetTime = time
-                    }
+                    self.scrollToTime(self.programGuideModel.time, animated: false)
                 default:
                     break
                 }
@@ -125,9 +120,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if !scrollToTime(programGuideModel.time, animated: false) {
-            scrollTargetTime = programGuideModel.time
-        }
+        scrollToTime(programGuideModel.time, animated: false)
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -154,21 +147,24 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
-                if let scrollTargetTime = self.scrollTargetTime, currentChannel != nil, !state.isEmpty(in: currentChannel), self.scrollToTime(scrollTargetTime, animated: false) {
-                    self.scrollTargetTime = nil
+                if let channel = currentChannel, !state.isEmpty(in: channel) {
+                    self.scrollToTime(self.scrollTargetTime, animated: false)
                 }
             }
         }
     }
     
-    private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
-        // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-        // when the content size has not yet been determined (still zero).
-        self.collectionView.layoutIfNeeded()
-        
-        guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
-        collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
-        return true
+    private func scrollToTime(_ time: TimeInterval?, animated: Bool) {
+        if let time = time, let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) {
+            // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+            // when the content size has not yet been determined (still zero).
+            self.collectionView.layoutIfNeeded()
+            collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
+            scrollTargetTime = nil
+        }
+        else {
+            scrollTargetTime = time
+        }
     }
 }
 
@@ -189,7 +185,8 @@ extension ProgramGuideDailyViewController {
     }
     
     func yOffset(for date: Date) -> CGFloat? {
-        guard let selectedChannel = programGuideModel.selectedChannel,
+        guard collectionView.contentSize != .zero,
+              let selectedChannel = programGuideModel.selectedChannel,
               let nearestRow = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }),
               let layoutAttr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
         return Self.safeYOffset(layoutAttr.frame.minY, in: collectionView)

@@ -248,6 +248,12 @@ extension ProgramGuideGridLayout {
         return xOffset.clamped(to: 0...maxXOffset)
     }
     
+    private static func safeYOffset(_ yOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
+        let maxYOffset = max(collectionView.contentSize.height - collectionView.frame.height
+            + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom, 0)
+        return yOffset.clamped(to: 0...maxYOffset)
+    }
+    
     static func date(centeredAtXOffset xOffset: CGFloat, in collectionView: UICollectionView, day: SRGDay) -> Date? {
         let dateInterval = dateInterval(for: day)
         let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
@@ -255,11 +261,21 @@ extension ProgramGuideGridLayout {
         return dateInterval.contains(date) ? date : nil
     }
     
+    static func sectionIndex(atYOffset yOffset: CGFloat, in collectionView: UICollectionView) -> Int {
+        return Int(safeYOffset(yOffset, in: collectionView) / (sectionHeight + verticalSpacing))
+    }
+    
     static func xOffset(centeringDate date: Date, in collectionView: UICollectionView, day: SRGDay) -> CGFloat? {
+        guard collectionView.contentSize != .zero else { return nil }
         let dateInterval = dateInterval(for: day)
         guard dateInterval.contains(date) else { return nil }
         let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
         return safeXOffset(date.timeIntervalSince(dateInterval.start) * scale - gridWidth / 2.0, in: collectionView)
+    }
+    
+    static func yOffset(forSectionIndex sectionIndex: Int, in collectionView: UICollectionView) -> CGFloat? {
+        guard collectionView.contentSize != .zero else { return nil }
+        return safeYOffset(CGFloat(sectionIndex) * (sectionHeight + verticalSpacing), in: collectionView)
     }
 }
 
