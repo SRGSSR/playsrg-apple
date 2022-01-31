@@ -162,6 +162,10 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func scrollToTime(_ time: TimeInterval, animated: Bool) -> Bool {
+        // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+        // when the content size has not yet been determined (still zero).
+        self.collectionView.layoutIfNeeded()
+        
         guard let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) else { return false }
         collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
         return true
