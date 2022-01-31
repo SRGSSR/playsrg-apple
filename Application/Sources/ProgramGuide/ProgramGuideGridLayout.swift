@@ -250,16 +250,16 @@ extension ProgramGuideGridLayout {
     
     static func date(centeredAtXOffset xOffset: CGFloat, in collectionView: UICollectionView, day: SRGDay) -> Date? {
         let dateInterval = dateInterval(for: day)
-        let gridWidth = max(collectionView.frame.width - Self.channelHeaderWidth, 0)
-        let date = dateInterval.start.addingTimeInterval(Self.safeXOffset(xOffset + gridWidth / 2.0, in: collectionView) / Self.scale)
+        let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
+        let date = dateInterval.start.addingTimeInterval(safeXOffset(xOffset + gridWidth / 2.0, in: collectionView) / scale)
         return dateInterval.contains(date) ? date : nil
     }
     
     static func xOffset(centeringDate date: Date, in collectionView: UICollectionView, day: SRGDay) -> CGFloat? {
         let dateInterval = dateInterval(for: day)
         guard dateInterval.contains(date) else { return nil }
-        let gridWidth = max(collectionView.frame.width - Self.channelHeaderWidth, 0)
-        return Self.safeXOffset(date.timeIntervalSince(dateInterval.start) * Self.scale - gridWidth / 2.0, in: collectionView)
+        let gridWidth = max(collectionView.frame.width - channelHeaderWidth, 0)
+        return safeXOffset(date.timeIntervalSince(dateInterval.start) * scale - gridWidth / 2.0, in: collectionView)
     }
 }
 
