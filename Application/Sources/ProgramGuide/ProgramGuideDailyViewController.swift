@@ -198,7 +198,7 @@ extension ProgramGuideDailyViewController {
 
 // MARK: Protocols
 
-extension ProgramGuideDailyViewController: HasProgramGuideDailyViewModel {
+extension ProgramGuideDailyViewController: ProgramGuideChildViewController {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return model
     }

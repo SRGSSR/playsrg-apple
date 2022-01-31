@@ -222,7 +222,7 @@ final class ProgramGuideGridViewController: UIViewController {
 
 // MARK: Protocols
 
-extension ProgramGuideGridViewController: HasProgramGuideDailyViewModel {
+extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return dailyModel
     }

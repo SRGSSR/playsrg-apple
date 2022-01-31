@@ -6,10 +6,6 @@
 
 import UIKit
 
-protocol HasProgramGuideDailyViewModel {
-    var programGuideDailyViewModel: ProgramGuideDailyViewModel? { get }
-}
-
 // MARK: View controller
 
 final class ProgramGuideViewController: UIViewController {
@@ -29,8 +25,8 @@ final class ProgramGuideViewController: UIViewController {
             var currentDailyModel: ProgramGuideDailyViewModel?
             
             children.forEach { viewController in
-                if let dailyViewController = viewController as? HasProgramGuideDailyViewModel {
-                    currentDailyModel = dailyViewController.programGuideDailyViewModel
+                if let childViewController = viewController as? ProgramGuideChildViewController {
+                    currentDailyModel = childViewController.programGuideDailyViewModel
                 }
                 viewController.view.removeFromSuperview()
                 viewController.removeFromParent()

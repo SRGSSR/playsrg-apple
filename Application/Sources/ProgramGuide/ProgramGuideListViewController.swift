@@ -101,7 +101,7 @@ final class ProgramGuideListViewController: UIViewController {
 
 // MARK: Protocols
 
-extension ProgramGuideListViewController: HasProgramGuideDailyViewModel {
+extension ProgramGuideListViewController: ProgramGuideChildViewController {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         if let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
             return currentViewController.programGuideDailyViewModel
