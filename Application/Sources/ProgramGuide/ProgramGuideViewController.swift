@@ -22,17 +22,15 @@ final class ProgramGuideViewController: UIViewController {
         didSet {
             guard layout != oldValue else { return }
             
-            var currentDailyModel: ProgramGuideDailyViewModel?
+            let previousViewController = children.compactMap { $0 as? UIViewController & ProgramGuideChildViewController }.first
+            let dailyModel = previousViewController?.programGuideDailyViewModel
             
-            children.forEach { viewController in
-                if let childViewController = viewController as? ProgramGuideChildViewController {
-                    currentDailyModel = childViewController.programGuideDailyViewModel
-                }
-                viewController.view.removeFromSuperview()
-                viewController.removeFromParent()
+            if let previousViewController = previousViewController {
+                previousViewController.view.removeFromSuperview()
+                previousViewController.removeFromParent()
             }
             
-            if let viewController = viewController(for: layout, dailyModel: currentDailyModel) {
+            if let viewController = viewController(for: layout, dailyModel: dailyModel) {
                 addChild(viewController)
                 viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 viewController.view.frame = view.bounds
