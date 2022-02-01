@@ -53,7 +53,7 @@ struct ProgramGuideListHeaderView: View {
         @ObservedObject var model: ProgramGuideViewModel
         
         var body: some View {
-            ScrollView(.horizontal) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 ScrollViewReader { proxy in
                     HStack(spacing: 10) {
                         if !model.channels.isEmpty {
