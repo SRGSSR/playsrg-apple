@@ -199,6 +199,9 @@ final class ProgramGuideGridViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state), animatingDifferences: false) {
                 if !state.isEmpty {
+                    // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+                    // when because of a still undetermined content size.
+                    self.collectionView.layoutIfNeeded()
                     self.scrollToTarget(self.scrollTarget, animated: false)
                 }
             }

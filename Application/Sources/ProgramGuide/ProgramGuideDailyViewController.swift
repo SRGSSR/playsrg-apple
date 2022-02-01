@@ -59,9 +59,6 @@ final class ProgramGuideDailyViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         
-        // Disable prefetching for faster scrolling to the current position
-        collectionView.isPrefetchingEnabled = false
-        
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView
@@ -148,6 +145,9 @@ final class ProgramGuideDailyViewController: UIViewController {
         DispatchQueue.global(qos: .userInteractive).async {
             self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
                 if let channel = currentChannel, !state.isEmpty(in: channel) {
+                    // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+                    // when because of a still undetermined content size.
+                    self.collectionView.layoutIfNeeded()
                     self.scrollToTime(self.scrollTargetTime, animated: false)
                 }
             }
@@ -156,9 +156,6 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private func scrollToTime(_ time: TimeInterval?, animated: Bool) {
         if let time = time, let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) {
-            // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-            // when the content size has not yet been determined (still zero).
-            self.collectionView.layoutIfNeeded()
             collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
             scrollTargetTime = nil
         }
