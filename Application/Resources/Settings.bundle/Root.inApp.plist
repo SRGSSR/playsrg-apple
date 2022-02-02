@@ -356,6 +356,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Simulate memory warning</string>
+			<key>Key</key>
+			<string>Button_SimulateMemoryWarning</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Developer</string>
