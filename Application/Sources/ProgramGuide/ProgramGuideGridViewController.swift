@@ -336,7 +336,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideGridViewController: UIScrollViewDelegate {
-    private func updatePositon() {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let sectionIndex = ProgramGuideGridLayout.sectionIndex(atYOffset: collectionView.contentOffset.y, in: collectionView)
         guard let channel = dataSource.snapshot().sectionIdentifiers[safeIndex: sectionIndex] else { return }
         model.selectedChannel = channel
@@ -344,16 +344,6 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
         guard let date = ProgramGuideGridLayout.date(centeredAtXOffset: collectionView.contentOffset.x, in: collectionView, day: dailyModel.day) else { return }
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updatePositon()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            updatePositon()
-        }
     }
 }
 
