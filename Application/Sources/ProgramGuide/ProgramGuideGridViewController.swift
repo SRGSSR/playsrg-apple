@@ -209,8 +209,12 @@ final class ProgramGuideGridViewController: UIViewController {
     }
     
     private func updateLayout(for traitCollection: UITraitCollection? = nil) {
+#if os(tvOS)
+        headerHeightConstraint.constant = ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
+#else
         let appliedTraitCollection = traitCollection ?? self.traitCollection
-        headerHeightConstraint.constant = constant(iOS: appliedTraitCollection.horizontalSizeClass == .compact ? 180 : 140, tvOS: 760)
+        headerHeightConstraint.constant = (appliedTraitCollection.horizontalSizeClass == .compact) ? 180 : 140
+#endif
     }
 }
 
