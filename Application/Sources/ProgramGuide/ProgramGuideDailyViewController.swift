@@ -155,7 +155,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func scrollToTime(_ time: TimeInterval?, animated: Bool) {
-        if let time = time, let yOffset = yOffset(for: model.day.date.addingTimeInterval(time)) {
+        if let time = time, let yOffset = yOffset(for: day.date.addingTimeInterval(time)) {
             collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
             scrollTargetTime = nil
         }
