@@ -88,9 +88,11 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
+#if os(tvOS)
         let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(menuPressed(_:)))
         menuGestureRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
         collectionView.addGestureRecognizer(menuGestureRecognizer)
+#endif
         
         self.view = view
     }
