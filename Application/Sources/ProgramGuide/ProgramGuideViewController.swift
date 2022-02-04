@@ -66,6 +66,9 @@ final class ProgramGuideViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateLayout()
+#if os(iOS)
+        updateNavigationBar()
+#endif
     }
     
 #if os(iOS)
@@ -81,11 +84,45 @@ final class ProgramGuideViewController: UIViewController {
     
     private func updateLayout() {
 #if os(iOS)
-        self.layout = (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
+        if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
+            guard layout == .none else { return }
+            layout = .grid
+        }
+        else {
+            layout = (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
+        }
 #else
-        self.layout = .grid
+        layout = .grid
 #endif
     }
+    
+#if os(iOS)
+    private func updateNavigationBar() {
+        if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: (layout == .grid) ? "rectangle.grid.1x2" : "square.grid.3x2"),
+                style: .plain,
+                target: self,
+                action: #selector(toggleLayout(_:))
+            )
+        }
+        else {
+            navigationItem.rightBarButtonItem = nil
+        }
+    }
+    
+    @objc private func toggleLayout(_ sender: AnyObject) {
+        switch layout {
+        case .list:
+            layout = .grid
+        case .grid:
+            layout = .list
+        case .none:
+            break
+        }
+        updateNavigationBar()
+    }
+#endif
 }
 
 // MARK: Protocols
