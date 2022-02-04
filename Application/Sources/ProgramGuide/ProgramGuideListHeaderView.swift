@@ -18,11 +18,23 @@ import SwiftUI
 struct ProgramGuideListHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     
+    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    
+    private var direction: StackDirection {
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
+    }
+    
     var body: some View {
         VStack(spacing: 20) {
-            DaySelector(model: model)
-            ChannelSelector(model: model)
-            NavigationBar(model: model)
+            if direction == .vertical {
+                DaySelector(model: model)
+                ChannelSelector(model: model)
+                DayNavigationBar(model: model)
+            }
+            else {
+                ChannelSelector(model: model)
+                NavigationBar(model: model)
+            }
         }
         .padding(10)
     }
@@ -82,7 +94,7 @@ struct ProgramGuideListHeaderView: View {
     }
     
     /// Behavior: h-exp, v-hug
-    private struct NavigationBar: View {
+    private struct DayNavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
         
         var body: some View {
@@ -101,11 +113,37 @@ struct ProgramGuideListHeaderView: View {
             }
         }
     }
+    
+    /// Behavior: h-exp, v-exp
+    private struct NavigationBar: View {
+        @ObservedObject var model: ProgramGuideViewModel
+                
+        private static let itemHeight: CGFloat = 40
+        private static let spacing: CGFloat = 42
+        
+        var body: some View {
+            Group {
+                HStack(spacing: Self.spacing) {
+                    DayNavigationBar(model: model)
+                        .frame(maxWidth: 400)
+                    DaySelector(model: model)
+                        .frame(maxWidth: 480)
+                }
+                .frame(maxWidth: .infinity, maxHeight: Self.itemHeight, alignment: .leading)
+            }
+            .padding(.horizontal, 10)
+            .frame(maxHeight: .infinity, alignment: .bottom)
+        }
+    }
 }
 
 struct ProgramGuideListHeaderView_Previews: PreviewProvider {
     static var previews: some View {
         ProgramGuideListHeaderView(model: ProgramGuideViewModel(date: Date()))
             .previewLayout(.fixed(width: 375, height: 180))
+            .environment(\.horizontalSizeClass, .compact)
+        ProgramGuideListHeaderView(model: ProgramGuideViewModel(date: Date()))
+            .previewLayout(.fixed(width: 1000, height: 120))
+            .environment(\.horizontalSizeClass, .regular)
     }
 }

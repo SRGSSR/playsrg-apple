@@ -14,6 +14,7 @@ final class ProgramGuideListViewController: UIViewController {
     private let pageViewController: UIPageViewController
     
     private weak var headerView: HostView<ProgramGuideListHeaderView>!
+    private weak var headerHeightConstraint: NSLayoutConstraint!
     
     private var cancellables = Set<AnyCancellable>()
     
@@ -42,12 +43,14 @@ final class ProgramGuideListViewController: UIViewController {
         view.addSubview(headerView)
         self.headerView = headerView
         
+        let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in updateLayout(for:) */)
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 180),
+            headerHeightConstraint,
             headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        self.headerHeightConstraint = headerHeightConstraint
         
         self.view = view
     }
@@ -83,11 +86,20 @@ final class ProgramGuideListViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+        
+        updateLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        coordinator.animate { _ in
+            self.updateLayout(for: newCollection)
+        } completion: { _ in }
     }
     
     private func switchToDay(_ day: SRGDay) {
@@ -96,6 +108,11 @@ final class ProgramGuideListViewController: UIViewController {
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
+    }
+    
+    private func updateLayout(for traitCollection: UITraitCollection? = nil) {
+        let appliedTraitCollection = traitCollection ?? self.traitCollection
+        headerHeightConstraint.constant = (appliedTraitCollection.horizontalSizeClass == .compact) ? 180 : 120
     }
 }
 

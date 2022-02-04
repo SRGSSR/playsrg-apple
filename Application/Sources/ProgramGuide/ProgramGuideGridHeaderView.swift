@@ -141,7 +141,7 @@ struct ProgramGuideGridHeaderView_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 1000, height: 120))
             .environment(\.horizontalSizeClass, .regular)
         ProgramGuideGridHeaderView(model: ProgramGuideViewModel(date: Date()))
-            .previewLayout(.fixed(width: 375, height: 240))
+            .previewLayout(.fixed(width: 375, height: 180))
             .environment(\.horizontalSizeClass, .compact)
 #endif
     }
