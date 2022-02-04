@@ -86,7 +86,7 @@ final class ProgramGuideViewController: UIViewController {
 #if os(iOS)
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
             guard layout == .none else { return }
-            layout = .grid
+            layout = Self.layout(from: ApplicationSettingProgramGuideRecentlyUsedLayout())
         }
         else {
             layout = (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
@@ -97,6 +97,24 @@ final class ProgramGuideViewController: UIViewController {
     }
     
 #if os(iOS)
+    private static func layout(from layout: ProgramGuideLayout) -> Layout {
+        switch layout {
+        case .grid:
+            return .grid
+        case .list:
+            return .list
+        }
+    }
+    
+    private static func layout(from layout: Layout) -> ProgramGuideLayout {
+        switch layout {
+        case .grid, .none:
+            return .grid
+        case .list:
+            return .list
+        }
+    }
+    
     private func updateNavigationBar() {
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -120,6 +138,7 @@ final class ProgramGuideViewController: UIViewController {
         case .none:
             break
         }
+        ApplicationSettingSetProgramGuideRecentlyUsedLayout(Self.layout(from: layout))
         updateNavigationBar()
     }
 #endif
