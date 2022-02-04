@@ -88,6 +88,10 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
+        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(menuPressed(_:)))
+        menuGestureRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
+        collectionView.addGestureRecognizer(menuGestureRecognizer)
+        
         self.view = view
     }
     
@@ -216,6 +220,16 @@ final class ProgramGuideGridViewController: UIViewController {
         headerHeightConstraint.constant = (appliedTraitCollection.horizontalSizeClass == .compact) ? 180 : 140
 #endif
     }
+    
+#if os(tvOS)
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [headerView]
+    }
+    
+    @objc private func menuPressed(_ gestureRecognizer: UIGestureRecognizer) {
+        setNeedsFocusUpdate()
+    }
+#endif
 }
 
 // MARK: Scrolling management
