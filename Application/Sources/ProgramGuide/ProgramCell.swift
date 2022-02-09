@@ -109,7 +109,7 @@ struct ProgramCell: View {
                 .frame(maxHeight: .infinity)
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
                 
-                if let progress = model.progress {
+                if direction == .horizontal, let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
