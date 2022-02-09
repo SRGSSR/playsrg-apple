@@ -10,13 +10,12 @@ import SwiftUI
 
 /// Behavior: h-hug, v-hug
 struct NowArrowView: View {
-    static let width: CGFloat = 13
-    static let height: CGFloat = 8
+    static let size = CGSize(width: 13, height: 8)
     
     var body: some View {
         Triangle()
             .fill(.white)
-            .frame(width: Self.width, height: Self.height)
+            .frame(width: Self.size.width, height: Self.size.height)
     }
     
     private struct Triangle: Shape {
