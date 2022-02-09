@@ -81,11 +81,22 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return DateInterval(start: startDate, end: endDate(from: startDate))
     }
     
-    private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int) -> CGRect {
+    private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, atOffset contentOffset: CGPoint) -> CGRect {
+        let offsetX = contentOffset.x + Self.channelHeaderWidth
+        var x = Self.channelHeaderWidth + Self.horizontalSpacing + startDate.timeIntervalSince(dateInterval.start) * Self.scale
+        var width = max(endDate.timeIntervalSince(startDate) * Self.scale - Self.horizontalSpacing, 0)
+        
+        // To display left labels in cells, and on tvOS, limited layout moves when focus changes, set left visible cells fully visible in the grid.
+        if x + width >= offsetX && x < offsetX {
+            let diff = offsetX - x
+            x += diff
+            width -= diff
+        }
+        
         return CGRect(
-            x: Self.channelHeaderWidth + Self.horizontalSpacing + startDate.timeIntervalSince(dateInterval.start) * Self.scale,
+            x: x,
             y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
-            width: max(endDate.timeIntervalSince(startDate) * Self.scale - Self.horizontalSpacing, 0),
+            width: max(width, 0),
             height: Self.sectionHeight
         )
     }
@@ -96,10 +107,10 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index -> UICollectionViewLayoutAttributes in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
                 if let program = item.program {
-                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section)
+                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, atOffset: collectionView.contentOffset)
                 }
                 else {
-                    attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section)
+                    attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section, atOffset: collectionView.contentOffset)
                 }
                 return attrs
             }
