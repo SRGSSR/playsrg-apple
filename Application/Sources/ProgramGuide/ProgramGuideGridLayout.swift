@@ -41,10 +41,11 @@ import UIKit
 final class ProgramGuideGridLayout: UICollectionViewLayout {
     enum ElementKind: String {
         case timeline
-        case verticalNowIndicator
+        case nowArrow
+        case nowLine
     }
     
-    static let verticalNowIndicatorIndexPath = IndexPath(item: 0, section: 0)
+    static let nowIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     static let channelHeaderWidth: CGFloat = 102
     static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
@@ -138,24 +139,47 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         timelineAttr.zIndex = 3
         
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
-        if !snapshot.sectionIdentifiers.isEmpty, let verticalNowIndicatorAttr = verticalNowIndicatorAttr(dateInterval: dateInterval, in: collectionView) {
-            decorationAttrs.append(verticalNowIndicatorAttr)
+        if !snapshot.sectionIdentifiers.isEmpty {
+            if let nowHeadAttr = nowArrowAttr(dateInterval: dateInterval, in: collectionView) {
+                decorationAttrs.append(nowHeadAttr)
+            }
+            if let nowLineAttr = nowLineAttr(dateInterval: dateInterval, in: collectionView) {
+                decorationAttrs.append(nowLineAttr)
+            }
         }
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
     
-    private static func verticalNowIndicatorAttr(dateInterval: DateInterval, in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes? {
+    private static func nowArrowAttr(dateInterval: DateInterval, in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes? {
         let nowDate = Date()
         if dateInterval.contains(nowDate) {
-            let verticalNowIndicatorAttr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.verticalNowIndicator.rawValue, with: verticalNowIndicatorIndexPath)
-            verticalNowIndicatorAttr.frame = CGRect(
-                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - VerticalNowIndicatorView.width / 2,
-                y: collectionView.contentOffset.y + Self.timelineHeight - VerticalNowIndicatorView.headerHeight,
-                width: VerticalNowIndicatorView.width,
-                height: max(VerticalNowIndicatorView.headerHeight + CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing - collectionView.contentOffset.y, VerticalNowIndicatorView.headerHeight)
+            let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: nowIndexPath)
+            attr.frame = CGRect(
+                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - NowArrowView.width / 2,
+                y: collectionView.contentOffset.y + Self.timelineHeight - NowArrowView.height,
+                width: NowArrowView.width,
+                height: NowArrowView.height
             )
-            verticalNowIndicatorAttr.zIndex = 1
-            return verticalNowIndicatorAttr
+            attr.zIndex = 4
+            return attr
+        }
+        else {
+            return nil
+        }
+    }
+    
+    private static func nowLineAttr(dateInterval: DateInterval, in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes? {
+        let nowDate = Date()
+        if dateInterval.contains(nowDate) {
+            let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: nowIndexPath)
+            attr.frame = CGRect(
+                x: Self.channelHeaderWidth + Self.horizontalSpacing + nowDate.timeIntervalSince(dateInterval.start) * Self.scale - NowArrowView.width / 2,
+                y: collectionView.contentOffset.y + Self.timelineHeight,
+                width: NowArrowView.width,
+                height: max(CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing - collectionView.contentOffset.y, 0)
+            )
+            attr.zIndex = 1
+            return attr
         }
         else {
             return nil

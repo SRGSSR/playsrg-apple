@@ -136,7 +136,8 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
-        collectionView.collectionViewLayout.register(VerticalNowIndicatorDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.verticalNowIndicator.rawValue)
+        collectionView.collectionViewLayout.register(NowArrowDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.nowArrow.rawValue)
+        collectionView.collectionViewLayout.register(NowLineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.nowLine.rawValue)
         
         dailyModel.$state
             .sink { [weak self] state in
@@ -382,17 +383,23 @@ private extension ProgramGuideGridViewController {
             }
         }
     }
-}
-
-final class TimelineDecorationView: HostSupplementaryView<TimelineView> {
-    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        guard let timelineAttributes = layoutAttributes as? TimelineLayoutAttributes else { return }
-        content = TimelineView(dateInterval: timelineAttributes.dateInterval)
+    
+    final class TimelineDecorationView: HostSupplementaryView<TimelineView> {
+        override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+            guard let timelineAttributes = layoutAttributes as? TimelineLayoutAttributes else { return }
+            content = TimelineView(dateInterval: timelineAttributes.dateInterval)
+        }
     }
-}
+    
+    final class NowArrowDecorationView: HostSupplementaryView<NowArrowView> {
+        override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+            content = NowArrowView()
+        }
+    }
 
-final class VerticalNowIndicatorDecorationView: HostSupplementaryView<VerticalNowIndicatorView> {
-    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        content = VerticalNowIndicatorView()
+    final class NowLineDecorationView: HostSupplementaryView<NowLineView> {
+        override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+            content = NowLineView()
+        }
     }
 }
