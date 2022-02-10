@@ -19,27 +19,29 @@ import SRGDataProviderModel
 struct ProgramGuideHeaderView: View {
     @ObservedObject var model: ProgramGuideViewModel
     let layout: ProgramGuideLayout
-        
+    
     var body: some View {
-        ZStack {
 #if os(tvOS)
+        ZStack {
             ProgramPreview(program: model.focusedProgram)
                 .accessibility(hidden: true)
-#endif
-            VStack(spacing: 0) {
-                NavigationBar(model: model)
-                    .focusable()
-#if os(iOS)
-                Spacer(minLength: 20)
-                if layout == .list {
-                    ChannelSelector(model: model)
-                }
-#endif
-            }
-            .padding(.horizontal, constant(iOS: 10, tvOS: 56))
-            .padding(.vertical, constant(iOS: 10, tvOS: 40 + ProgramGuideGridLayout.timelineHeight))
-            .frame(maxHeight: .infinity, alignment: .bottom)
+            NavigationBar(model: model)
+                .focusable()
+                .padding(.horizontal, 56)
+                .padding(.vertical, 40 + ProgramGuideGridLayout.timelineHeight)
+                .frame(maxHeight: .infinity, alignment: .bottom)
         }
+#else
+        VStack(spacing: 0) {
+            NavigationBar(model: model)
+            Spacer(minLength: 20)
+            if layout == .list {
+                ChannelSelector(model: model)
+            }
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 10)
+#endif
     }
     
     /// Behavior: h-exp, v-hug
