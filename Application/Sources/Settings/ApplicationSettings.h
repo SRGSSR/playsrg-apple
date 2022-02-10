@@ -22,14 +22,6 @@ typedef NS_ENUM(NSInteger, TabBarItemIdentifier) {
     TabBarItemIdentifierProfile
 };
 
-/**
- *  Program guide layout.
- */
-typedef NS_CLOSED_ENUM(NSInteger, ProgramGuideLayout) {
-    ProgramGuideLayoutGrid,
-    ProgramGuideLayoutList
-};
-
 OBJC_EXPORT BOOL ApplicationSettingAlternateRadioHomepageDesignEnabled(void);
 OBJC_EXPORT BOOL ApplicationSettingPresenterModeEnabled(void);
 
@@ -59,8 +51,5 @@ OBJC_EXPORT NSURL * _Nullable ApplicationSettingServiceURLForKey(NSString *key);
 OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *key);
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
-
-OBJC_EXPORT ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(void);
-OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout);
 
 NS_ASSUME_NONNULL_END

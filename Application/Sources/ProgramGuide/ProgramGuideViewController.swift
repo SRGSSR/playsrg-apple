@@ -4,25 +4,25 @@
 //  License information is available from the LICENSE file.
 //
 
+import Combine
 import UIKit
 
 // MARK: View controller
 
-final class ProgramGuideViewController: UIViewController {
-    private enum Layout {
-        case none
-        @available(tvOS, unavailable)
-        case list
-        case grid
-    }
-    
+final class ProgramGuideViewController: UIViewController {    
     private let model: ProgramGuideViewModel
     
-    private var layout: Layout = .none {
+    private weak var headerView: HostView<ProgramGuideHeaderView>!
+    private weak var contentView: UIView!
+    private weak var headerHeightConstraint: NSLayoutConstraint!
+    
+    private var cancellables = Set<AnyCancellable>()
+    
+    private var layout: ProgramGuideLayout = .grid {
         didSet {
-            guard layout != oldValue else { return }
-            
             let previousViewController = children.compactMap { $0 as? UIViewController & ProgramGuideChildViewController }.first
+            guard previousViewController == nil || layout != oldValue else { return }
+            
             let dailyModel = previousViewController?.programGuideDailyViewModel
             
             if let previousViewController = previousViewController {
@@ -30,26 +30,44 @@ final class ProgramGuideViewController: UIViewController {
                 previousViewController.removeFromParent()
             }
             
-            if let viewController = viewController(for: layout, dailyModel: dailyModel) {
-                addChild(viewController)
-                viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                viewController.view.frame = view.bounds
-                view.addSubview(viewController.view)
-                viewController.didMove(toParent: self)
+            guard let viewController = viewController(for: layout, dailyModel: dailyModel) else { return }
+            addChild(viewController)
+            
+            if let childView = viewController.view {
+                childView.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(childView)
+                
+                NSLayoutConstraint.activate([
+                    childView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: constant(iOS: 0, tvOS: -ProgramGuideGridLayout.timelineHeight)),
+                    childView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                    childView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                    childView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+                ])
+                
+#if os(tvOS)
+                let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(menuPressed(_:)))
+                menuGestureRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
+                childView.addGestureRecognizer(menuGestureRecognizer)
+#endif
             }
+            
+            viewController.didMove(toParent: self)
+            
+            headerView.isUserInteractionEnabled = true
+            headerView.content = ProgramGuideHeaderView(model: model, layout: layout)
         }
     }
     
-    private func viewController(for layout: Layout, dailyModel: ProgramGuideDailyViewModel?) -> UIViewController? {
+    private func viewController(for layout: ProgramGuideLayout, dailyModel: ProgramGuideDailyViewModel?) -> UIViewController? {
         switch layout {
-#if os(iOS)
         case .list:
+#if os(iOS)
             return ProgramGuideListViewController(model: model, dailyModel: dailyModel)
+#else
+            return nil
 #endif
         case .grid:
             return ProgramGuideGridViewController(model: model, dailyModel: dailyModel)
-        case .none:
-            return nil
         }
     }
     
@@ -65,10 +83,33 @@ final class ProgramGuideViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateLayout()
+        
+        view.backgroundColor = .srgGray16
+        
+        let headerView = HostView<ProgramGuideHeaderView>(frame: .zero)
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(headerView)
+        self.headerView = headerView
+        
+        let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in updateLayout(for:) */)
+        NSLayoutConstraint.activate([
+            headerView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
+            headerHeightConstraint,
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        self.headerHeightConstraint = headerHeightConstraint
+        
 #if os(iOS)
+        model.$isUserInteractionEnabled
+            .sink { isUserInteractionEnabled in
+                headerView.isUserInteractionEnabled = isUserInteractionEnabled
+            }
+            .store(in: &cancellables)
+        
         updateNavigationBar()
 #endif
+        updateLayout()
     }
     
 #if os(iOS)
@@ -77,44 +118,39 @@ final class ProgramGuideViewController: UIViewController {
     }
 #endif
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        updateLayout()
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        coordinator.animate { _ in
+            self.updateLayout(for: newCollection)
+        } completion: { _ in }
     }
     
-    private func updateLayout() {
+#if os(tvOS)
+    override var preferredFocusEnvironments: [UIFocusEnvironment] {
+        return [headerView]
+    }
+    
+    @objc private func menuPressed(_ gestureRecognizer: UIGestureRecognizer) {
+        setNeedsFocusUpdate()
+    }
+#endif
+    
+    private func updateLayout(for traitCollection: UITraitCollection? = nil) {
+        let appliedTraitCollection = traitCollection ?? self.traitCollection
 #if os(iOS)
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
-            guard layout == .none else { return }
-            layout = Self.layout(from: ApplicationSettingProgramGuideRecentlyUsedLayout())
+            layout = ApplicationSettingProgramGuideRecentlyUsedLayout()
         }
         else {
-            layout = (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
+            layout = (appliedTraitCollection.horizontalSizeClass == .compact) ? .list : .grid
         }
 #else
         layout = .grid
 #endif
+        headerHeightConstraint.constant = ProgramGuideHeaderViewSize.height(for: layout, horizontalSizeClass: appliedTraitCollection.horizontalSizeClass)
     }
     
 #if os(iOS)
-    private static func layout(from layout: ProgramGuideLayout) -> Layout {
-        switch layout {
-        case .grid:
-            return .grid
-        case .list:
-            return .list
-        }
-    }
-    
-    private static func layout(from layout: Layout) -> ProgramGuideLayout {
-        switch layout {
-        case .grid, .none:
-            return .grid
-        case .list:
-            return .list
-        }
-    }
-    
     private func updateNavigationBar() {
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
@@ -135,10 +171,10 @@ final class ProgramGuideViewController: UIViewController {
             layout = .grid
         case .grid:
             layout = .list
-        case .none:
-            break
         }
-        ApplicationSettingSetProgramGuideRecentlyUsedLayout(Self.layout(from: layout))
+        ApplicationSettingSetProgramGuideRecentlyUsedLayout(layout)
+        
+        updateLayout()
         updateNavigationBar()
     }
 #endif

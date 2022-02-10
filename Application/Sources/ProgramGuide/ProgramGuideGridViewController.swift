@@ -19,10 +19,8 @@ final class ProgramGuideGridViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
-    private weak var headerView: HostView<ProgramGuideGridHeaderView>!
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
-    private weak var headerHeightConstraint: NSLayoutConstraint!
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
@@ -53,20 +51,6 @@ final class ProgramGuideGridViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let headerView = HostView<ProgramGuideGridHeaderView>(frame: .zero)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(headerView)
-        self.headerView = headerView
-        
-        let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in updateLayout(for:) */)
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
-            headerHeightConstraint,
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        self.headerHeightConstraint = headerHeightConstraint
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: ProgramGuideGridLayout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
@@ -78,7 +62,7 @@ final class ProgramGuideGridViewController: UIViewController {
         self.collectionView = collectionView
         
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -ProgramGuideGridLayout.timelineHeight),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: constant(iOS: 0, tvOS: 56)),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -88,23 +72,11 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
-#if os(tvOS)
-        let menuGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(menuPressed(_:)))
-        menuGestureRecognizer.allowedPressTypes = [NSNumber(value: UIPress.PressType.menu.rawValue)]
-        collectionView.addGestureRecognizer(menuGestureRecognizer)
-#endif
-        
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-#if os(tvOS)
-        headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
-#else
-        headerView.content = ProgramGuideGridHeaderView(model: model)
-#endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
             cell.content = ItemCell(item: item)
@@ -161,21 +133,12 @@ final class ProgramGuideGridViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-        
-        updateLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
         scrollToTarget(ScrollTarget(channel: model.selectedChannel, time: model.time), animated: false)
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        coordinator.animate { _ in
-            self.updateLayout(for: newCollection)
-        } completion: { _ in }
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
@@ -195,10 +158,10 @@ final class ProgramGuideGridViewController: UIViewController {
 #if os(tvOS)
             if let channel = model.selectedChannel ?? model.channels.first, let section = state.sections.first(where: { $0 == channel }) ?? state.sections.first,
                let currentProgram = state.items(for: section).compactMap(\.program).first(where: { $0.play_contains(model.date(for: model.time)) }) {
-                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: currentProgram)
+                model.focusedProgram = currentProgram
             }
             else {
-                headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: nil)
+                model.focusedProgram = nil
             }
 #endif
         }
@@ -214,25 +177,6 @@ final class ProgramGuideGridViewController: UIViewController {
             }
         }
     }
-    
-    private func updateLayout(for traitCollection: UITraitCollection? = nil) {
-#if os(tvOS)
-        headerHeightConstraint.constant = ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
-#else
-        let appliedTraitCollection = traitCollection ?? self.traitCollection
-        headerHeightConstraint.constant = (appliedTraitCollection.horizontalSizeClass == .compact) ? 180 : 140
-#endif
-    }
-    
-#if os(tvOS)
-    override var preferredFocusEnvironments: [UIFocusEnvironment] {
-        return [headerView]
-    }
-    
-    @objc private func menuPressed(_ gestureRecognizer: UIGestureRecognizer) {
-        setNeedsFocusUpdate()
-    }
-#endif
 }
 
 // MARK: Scrolling management
@@ -314,7 +258,7 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     }
 }
 
-extension ProgramGuideGridViewController: ProgramGuideGridHeaderViewActions {
+extension ProgramGuideGridViewController: ProgramGuideHeaderViewActions {
     func openCalendar() {
 #if os(iOS)
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
@@ -357,10 +301,8 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             
             let snapshot = dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[nextFocusedIndexPath.section]
-            let program = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program
-            headerView.content = ProgramGuideGridHeaderView(model: model, focusedProgram: program)
-            
             model.selectedChannel = channel
+            model.focusedProgram = snapshot.itemIdentifiers(inSection: channel)[nextFocusedIndexPath.row].program
         }
     }
 #endif

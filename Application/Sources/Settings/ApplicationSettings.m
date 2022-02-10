@@ -21,7 +21,6 @@
 
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
-NSString * const PlaySRGSettingProgramGuideRecentlyUsedLayout = @"PlaySRGSettingProgramGuideRecentlyUsedLayout";
 
 NSValueTransformer *TabBarItemIdentifierTransformer(void)
 {
@@ -34,19 +33,6 @@ NSValueTransformer *TabBarItemIdentifierTransformer(void)
                                                                                          @"search" : @(TabBarItemIdentifierSearch),
                                                                                          @"profile" : @(TabBarItemIdentifierProfile) }
                                                                          defaultValue:@(TabBarItemIdentifierNone)
-                                                                  reverseDefaultValue:nil];
-    });
-    return s_transformer;
-}
-
-NSValueTransformer *ProgramGuideLayoutTransformer(void)
-{
-    static NSValueTransformer *s_transformer;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"grid" : @(ProgramGuideLayoutGrid),
-                                                                                         @"list" : @(ProgramGuideLayoutList) }
-                                                                         defaultValue:@(ProgramGuideLayoutGrid)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
@@ -211,18 +197,4 @@ NSString *ApplicationSettingServiceNameForKey(NSString *key)
 BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
-}
-
-ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(void)
-{
-    return [[ProgramGuideLayoutTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingProgramGuideRecentlyUsedLayout]] integerValue];
-}
-
-void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout)
-{
-    NSString *layoutIdentifier = [ProgramGuideLayoutTransformer() reverseTransformedValue:@(layout)];
-    
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:layoutIdentifier forKey:PlaySRGSettingProgramGuideRecentlyUsedLayout];
-    [userDefaults synchronize];
 }

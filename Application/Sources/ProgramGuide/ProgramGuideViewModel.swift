@@ -16,6 +16,12 @@ final class ProgramGuideViewModel: ObservableObject {
     /// Only significant changes are published. Noisy changes (e.g. because of scrolling) are not published.
     @Published private(set) var change: Change = .none
     
+#if os(iOS)
+    @Published var isUserInteractionEnabled = true
+#else
+    @Published var focusedProgram: SRGProgram?
+#endif
+    
     private(set) var day: SRGDay
     private(set) var time: TimeInterval     // Position in day (distance from midnight)
     

@@ -13,9 +13,6 @@ final class ProgramGuideListViewController: UIViewController {
     private let model: ProgramGuideViewModel
     private let pageViewController: UIPageViewController
     
-    private weak var headerView: HostView<ProgramGuideListHeaderView>!
-    private weak var headerHeightConstraint: NSLayoutConstraint!
-    
     private var cancellables = Set<AnyCancellable>()
     
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
@@ -37,28 +34,11 @@ final class ProgramGuideListViewController: UIViewController {
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
-        
-        let headerView = HostView<ProgramGuideListHeaderView>(frame: .zero)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(headerView)
-        self.headerView = headerView
-        
-        let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in updateLayout(for:) */)
-        NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            headerHeightConstraint,
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        self.headerHeightConstraint = headerHeightConstraint
-        
         self.view = view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        headerView.content = ProgramGuideListHeaderView(model: model)
         
         pageViewController.dataSource = self
         pageViewController.delegate = self
@@ -68,7 +48,7 @@ final class ProgramGuideListViewController: UIViewController {
             view.addSubview(pageView)
             
             NSLayoutConstraint.activate([
-                pageView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+                pageView.topAnchor.constraint(equalTo: view.topAnchor),
                 pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 pageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 pageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -86,20 +66,11 @@ final class ProgramGuideListViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-        
-        updateLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        coordinator.animate { _ in
-            self.updateLayout(for: newCollection)
-        } completion: { _ in }
     }
     
     private func switchToDay(_ day: SRGDay) {
@@ -108,11 +79,6 @@ final class ProgramGuideListViewController: UIViewController {
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
-    }
-    
-    private func updateLayout(for traitCollection: UITraitCollection? = nil) {
-        let appliedTraitCollection = traitCollection ?? self.traitCollection
-        headerHeightConstraint.constant = (appliedTraitCollection.horizontalSizeClass == .compact) ? 180 : 120
     }
 }
 
@@ -129,7 +95,7 @@ extension ProgramGuideListViewController: ProgramGuideChildViewController {
     }
 }
 
-extension ProgramGuideListViewController: ProgramGuideListHeaderViewActions {
+extension ProgramGuideListViewController: ProgramGuideHeaderViewActions {
     func openCalendar() {
         let calendarViewController = ProgramGuideCalendarViewController(model: model)
         present(calendarViewController, animated: true)
@@ -150,11 +116,11 @@ extension ProgramGuideListViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideListViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        headerView.isUserInteractionEnabled = false
+        model.isUserInteractionEnabled = false
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        headerView.isUserInteractionEnabled = true
+        model.isUserInteractionEnabled = true
         
         if completed, let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
             model.switchToDay(currentViewController.day)
