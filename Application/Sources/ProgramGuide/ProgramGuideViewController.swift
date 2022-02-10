@@ -118,7 +118,7 @@ final class ProgramGuideViewController: UIViewController {
     private func updateNavigationBar() {
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: UIImage(systemName: (layout == .grid) ? "rectangle.grid.1x2" : "square.grid.3x2"),
+                image: UIImage(named: (layout == .grid) ? "layout_grid_on" : "layout_list_on"),
                 style: .plain,
                 target: self,
                 action: #selector(toggleLayout(_:))
