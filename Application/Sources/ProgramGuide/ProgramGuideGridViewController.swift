@@ -298,6 +298,16 @@ private extension ProgramGuideGridViewController {
 
 // MARK: Protocols
 
+extension ProgramGuideGridViewController: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return collectionView != nil ? [collectionView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0)
+    }
+}
+
 extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return dailyModel
