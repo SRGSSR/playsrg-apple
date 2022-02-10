@@ -67,8 +67,12 @@ struct TimelineView: View {
                 .padding(.bottom, 8)
             }
         }
+#if os(iOS)
+        .background(Color.srgGray16)
+#else
         .background(Color(white: 0, opacity: 0.2))
         .background(Blur(style: .dark))
+#endif
         .accessibility(hidden: true)
     }
 }
