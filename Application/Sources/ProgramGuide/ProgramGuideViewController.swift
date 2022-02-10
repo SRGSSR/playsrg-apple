@@ -153,12 +153,17 @@ final class ProgramGuideViewController: UIViewController {
 #if os(iOS)
     private func updateNavigationBar() {
         if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(
-                image: UIImage(named: (layout == .grid) ? "layout_grid_on" : "layout_list_on"),
+            let isGrid = (layout == .grid)
+            let layoutBarButtonItem = UIBarButtonItem(
+                image: UIImage(named: isGrid ? "layout_grid_on" : "layout_list_on"),
                 style: .plain,
                 target: self,
                 action: #selector(toggleLayout(_:))
             )
+            layoutBarButtonItem.accessibilityLabel = isGrid
+                ? PlaySRGAccessibilityLocalizedString("Display list", comment: "Button to display the TV guide as a list")
+                : PlaySRGAccessibilityLocalizedString("Display grid", comment: "Button to display the TV guide as a grid")
+            navigationItem.rightBarButtonItem = layoutBarButtonItem
         }
         else {
             navigationItem.rightBarButtonItem = nil
