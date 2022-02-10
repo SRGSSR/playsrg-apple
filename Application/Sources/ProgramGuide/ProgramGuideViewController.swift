@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: View controller
 
-final class ProgramGuideViewController: UIViewController {    
+final class ProgramGuideViewController: UIViewController {
     private let model: ProgramGuideViewModel
     
     private weak var headerView: HostView<ProgramGuideHeaderView>!
