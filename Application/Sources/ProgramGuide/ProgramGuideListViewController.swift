@@ -95,13 +95,6 @@ extension ProgramGuideListViewController: ProgramGuideChildViewController {
     }
 }
 
-extension ProgramGuideListViewController: ProgramGuideHeaderViewActions {
-    func openCalendar() {
-        let calendarViewController = ProgramGuideCalendarViewController(model: model)
-        present(calendarViewController, animated: true)
-    }
-}
-
 extension ProgramGuideListViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: model.day)

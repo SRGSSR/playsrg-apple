@@ -9,9 +9,11 @@ import SRGDataProviderModel
 
 // MARK: Contract
 
+#if os(iOS)
 @objc protocol ProgramGuideHeaderViewActions: AnyObject {
     func openCalendar()
 }
+#endif
 
 // MARK: View
 

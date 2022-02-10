@@ -258,15 +258,6 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     }
 }
 
-extension ProgramGuideGridViewController: ProgramGuideHeaderViewActions {
-    func openCalendar() {
-#if os(iOS)
-        let calendarViewController = ProgramGuideCalendarViewController(model: model)
-        present(calendarViewController, animated: true)
-#endif
-    }
-}
-
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()

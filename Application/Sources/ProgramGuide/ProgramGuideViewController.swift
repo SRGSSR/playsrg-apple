@@ -187,6 +187,15 @@ final class ProgramGuideViewController: UIViewController {
 
 // MARK: Protocols
 
+#if os(iOS)
+extension ProgramGuideViewController: ProgramGuideHeaderViewActions {
+    func openCalendar() {
+        let calendarViewController = ProgramGuideCalendarViewController(model: model)
+        present(calendarViewController, animated: true)
+    }
+}
+#endif
+
 extension ProgramGuideViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
         return AnalyticsPageTitle.programGuide.rawValue
