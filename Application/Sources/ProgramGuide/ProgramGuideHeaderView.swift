@@ -34,13 +34,13 @@ struct ProgramGuideHeaderView: View {
 #else
         VStack(spacing: 0) {
             NavigationBar(model: model)
+                .padding(.horizontal, ProgramGuideHeaderViewSize.margin)
             Spacer(minLength: 20)
             if layout == .list {
                 ChannelSelector(model: model)
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 10)
+        .padding(.vertical, ProgramGuideHeaderViewSize.margin)
 #endif
     }
     
@@ -164,6 +164,7 @@ struct ProgramGuideHeaderView: View {
                             }
                         }
                     }
+                    .padding(.horizontal, ProgramGuideHeaderViewSize.margin)
                 }
             }
             .frame(height: 50)
@@ -175,6 +176,12 @@ struct ProgramGuideHeaderView: View {
 // MARK: Size
 
 enum ProgramGuideHeaderViewSize {
+    static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
+    
+#if os(iOS)
+    fileprivate static let margin: CGFloat = 10
+#endif
+    
     static func height(for layout: ProgramGuideLayout, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
 #if os(iOS)
         switch layout {
@@ -187,9 +194,6 @@ enum ProgramGuideHeaderViewSize {
         return ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
 #endif
     }
-    
-    static let compact: CGFloat = constant(iOS: 210, tvOS: 375)
-    static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
 }
 
 // MARK: Preview
