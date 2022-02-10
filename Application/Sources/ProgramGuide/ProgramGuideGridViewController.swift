@@ -304,7 +304,7 @@ extension ProgramGuideGridViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: ProgramGuideGridLayout.verticalSpacing, right: 0)
     }
 }
 

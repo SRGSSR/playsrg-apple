@@ -22,6 +22,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private weak var emptyView: HostView<EmptyView>!
     
     private static let margin: CGFloat = 10
+    private static let verticalSpacing: CGFloat = 3
     
     var day: SRGDay {
         return model.day
@@ -204,7 +205,7 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: Self.verticalSpacing, right: 0)
     }
 }
 
@@ -258,7 +259,7 @@ private extension ProgramGuideDailyViewController {
             let section = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
                 return ProgramCellSize.fullWidth()
             }
-            section.interGroupSpacing = 3
+            section.interGroupSpacing = Self.verticalSpacing
             return section
         }
     }
