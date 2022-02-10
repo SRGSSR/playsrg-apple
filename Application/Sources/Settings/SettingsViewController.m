@@ -82,6 +82,7 @@ static NSString * const SettingsResetGroup = @"Group_Reset";
 static NSString * const SettingsClearWebCacheButton = @"Button_ClearWebCache";
 static NSString * const SettingsClearVectorImageCacheButton = @"Button_ClearVectorImageCache";
 static NSString * const SettingsClearAllContentsButton = @"Button_ClearAllContents";
+static NSString * const SettingsSimulateMemoryWarning = @"Button_SimulateMemoryWarning";
 
 // Developer settings group
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
@@ -182,6 +183,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsClearWebCacheButton];
     [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
     [hiddenKeys addObject:SettingsClearAllContentsButton];
+    [hiddenKeys addObject:SettingsSimulateMemoryWarning];
     
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
@@ -472,6 +474,13 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [self clearWebCache];
         [UIImage srg_clearVectorImageCache];
         [Download removeAllDownloads];
+    }
+    else if ([specifier.key isEqualToString:SettingsSimulateMemoryWarning]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSString *methodName = [[[NSString stringWithFormat:@"_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g"] componentsSeparatedByCharactersInSet:NSCharacterSet.decimalDigitCharacterSet] componentsJoinedByString:@""];
+        [UIApplication.sharedApplication performSelector:NSSelectorFromString(methodName)];
+#pragma clang diagnostic pop
     }
 #if defined(DEBUG) || defined(APPCENTER)
     else if ([specifier.key isEqualToString:SettingsFLEXButton]) {

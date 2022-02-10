@@ -42,6 +42,7 @@
 "Reset" = "Remise à zéro";
 "Section wide support" = "Support étendu des sections";
 "Server" = "Serveur";
+"Simulate memory warning" = "Simuler l'alerte mémoire";
 "Source code" = "Code source";
 "Stage" = "Stage";
 "Standalone playback" = "Lecture individuelle";
