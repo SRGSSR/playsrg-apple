@@ -35,7 +35,7 @@ struct CalendarView: View {
             .frame(height: 40)
             .responderChain(from: firstResponder)
         }
-        .frame(maxWidth: 400)
+        .frame(maxWidth: 340)
         .padding()
         .background(Color.srgGray16.cornerRadius(30))
         .onAppear {
