@@ -5,5 +5,6 @@
 //
 
 protocol ProgramGuideChildViewController {
+    var programGuideLayout: ProgramGuideLayout { get }
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? { get }
 }

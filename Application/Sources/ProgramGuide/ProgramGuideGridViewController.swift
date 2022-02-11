@@ -253,6 +253,10 @@ extension ProgramGuideGridViewController: ContentInsets {
 }
 
 extension ProgramGuideGridViewController: ProgramGuideChildViewController {
+    var programGuideLayout: ProgramGuideLayout {
+        return .grid
+    }
+    
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return dailyModel
     }

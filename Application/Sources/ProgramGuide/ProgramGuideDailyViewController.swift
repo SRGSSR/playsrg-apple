@@ -194,6 +194,10 @@ extension ProgramGuideDailyViewController {
 // MARK: Protocols
 
 extension ProgramGuideDailyViewController: ProgramGuideChildViewController {
+    var programGuideLayout: ProgramGuideLayout {
+        return .list
+    }
+    
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return model
     }

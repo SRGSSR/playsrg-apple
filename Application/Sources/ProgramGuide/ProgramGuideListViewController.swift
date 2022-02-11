@@ -85,6 +85,10 @@ final class ProgramGuideListViewController: UIViewController {
 // MARK: Protocols
 
 extension ProgramGuideListViewController: ProgramGuideChildViewController {
+    var programGuideLayout: ProgramGuideLayout {
+        return .list
+    }
+    
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         if let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
             return currentViewController.programGuideDailyViewModel
