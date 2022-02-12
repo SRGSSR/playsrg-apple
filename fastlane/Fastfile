@@ -492,7 +492,7 @@ platform :ios do
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      can_upload = can_upload_testflight_build(platform, app_identifier)
+      can_upload = can_upload_testflight_build(app_identifier, platform, build_number)
       UI.message("#{schemes[index]} (Beta #{build_number}) already uploaded 🔁 ✅") unless can_upload
       next unless can_upload
 
@@ -523,7 +523,7 @@ platform :ios do
     options[:platform] ||= 'iOS'
     build_number = xcode_build_number(options[:platform])
 
-    can_upload = can_upload_testflight_build(options[:platform], nil)
+    can_upload = can_upload_testflight_build(nil, options[:platform], build_number)
     UI.message("#{options[:scheme]} (#{options[:platform]}) #{build_number} already uploaded 🔁 ✅") unless can_upload
     next unless can_upload
 
@@ -1106,18 +1106,18 @@ def upload_screenshots(platform)
   )
 end
 
-def can_upload_testflight_build(platform, app_identifier)
-  platform ||= 'iOS'
+def can_upload_testflight_build(app_identifier, platform, build_number)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
+  platform ||= 'iOS'
+  build_number ||= xcode_build_number(platform)
 
   login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(
     platform: appstore_platform(platform),
     app_identifier: app_identifier
   )
-  local_build_number = xcode_build_number(platform)
 
-  (appstore_build_number < local_build_number.to_i)
+  (appstore_build_number < build_number.to_i)
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repository,
