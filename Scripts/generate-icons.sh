@@ -10,7 +10,7 @@ if [ "${CONFIGURATION}" == "AppStore" ] || [ "${CONFIGURATION}" == "Debug" ] || 
     exit 0
 fi
 
-export PATH="${PATH}:/usr/local/bin:/opt/local/bin"
+export PATH="${PATH}:/usr/local/bin:/opt/local/bin:/opt/homebrew/bin"
 
 BUSINESS_UNIT=`echo ${PRODUCT_NAME} | sed 's/Play //g'`
 SOURCE_IOS_RESOURCES_PATH="${SRCROOT}/Application/Resources/Apps/Play ${BUSINESS_UNIT}/${BUSINESS_UNIT}Resources.xcassets"
