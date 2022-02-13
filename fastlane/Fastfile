@@ -291,27 +291,27 @@ platform :ios do
 
   desc 'SWI: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
-    testflight_lane(platform: 'iOS', scheme: 'Play SWI')
+    testflight_prod(platform: 'iOS', scheme: 'Play SWI')
   end
 
   desc 'SRF: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
-    testflight_lane(platform: 'iOS', scheme: 'Play SRF')
+    testflight_prod(platform: 'iOS', scheme: 'Play SRF')
   end
 
   desc 'RTS: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
-    testflight_lane(platform: 'iOS', scheme: 'Play RTS')
+    testflight_prod(platform: 'iOS', scheme: 'Play RTS')
   end
 
   desc 'RSI: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
-    testflight_lane(platform: 'iOS', scheme: 'Play RSI')
+    testflight_prod(platform: 'iOS', scheme: 'Play RSI')
   end
 
   desc 'RTR: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
-    testflight_lane(platform: 'iOS', scheme: 'Play RTR')
+    testflight_prod(platform: 'iOS', scheme: 'Play RTR')
   end
 
   # Individual latest iOS dSYMs uploads
@@ -387,27 +387,27 @@ platform :ios do
 
   desc 'SWI: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSswiAppStoreUpload do
-    testflight_lane(platform: 'tvOS', scheme: 'Play SWI TV')
+    testflight_prod(platform: 'tvOS', scheme: 'Play SWI TV')
   end
 
   desc 'SRF: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSsrfAppStoreUpload do
-    testflight_lane(platform: 'tvOS', scheme: 'Play SRF TV')
+    testflight_prod(platform: 'tvOS', scheme: 'Play SRF TV')
   end
 
   desc 'RTS: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrtsAppStoreUpload do
-    testflight_lane(platform: 'tvOS', scheme: 'Play RTS TV')
+    testflight_prod(platform: 'tvOS', scheme: 'Play RTS TV')
   end
 
   desc 'RSI: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrsiAppStoreUpload do
-    testflight_lane(platform: 'tvOS', scheme: 'Play RSI TV')
+    testflight_prod(platform: 'tvOS', scheme: 'Play RSI TV')
   end
 
   desc 'RTR: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrtrAppStoreUpload do
-    testflight_lane(platform: 'tvOS', scheme: 'Play RTR TV')
+    testflight_prod(platform: 'tvOS', scheme: 'Play RTR TV')
   end
 
   # Individual latest tvOS dSYMs uploads
@@ -518,8 +518,8 @@ platform :ios do
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Builds and uploads to TestFlight'
-  private_lane :testflight_lane do |options|
+  desc 'Builds a new prod build on AppStore Connect with the current build number and uploads it.'
+  private_lane :testflight_prod do |options|
     options[:platform] ||= 'iOS'
     build_number = xcode_build_number(options[:platform])
 
