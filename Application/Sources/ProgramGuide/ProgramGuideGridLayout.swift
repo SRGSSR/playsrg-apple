@@ -82,11 +82,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return DateInterval(start: startDate, end: endDate(from: startDate))
     }
     
-    private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, withContentOffset contentOffset: CGPoint) -> CGRect {
-        let xOffset = contentOffset.x + channelHeaderWidth
-        var x = xPosition(at: startDate, in: dateInterval)
-        var width = max(endDate.timeIntervalSince(startDate) * scale - horizontalSpacing, 0)
-        
+    private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, collectionView: UICollectionView) -> CGRect {
         // Adjust the frame of items which would be partially visible at the left so that they fit within the visible frame.
         // This has two benefits:
         //  - Cells slide when the grid is scrolled so that their text remains visible.
@@ -98,18 +94,19 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         //  - Even with the frame entirely contained in the visible collection view rect, the focus engine still moves
         //    the collection when focusing cells near the right of the grid; horizontal motions cannot therefore be
         //    entirely eliminated, though they would be greatly reduced).
-        if x + width >= xOffset && x < xOffset {
-            let diff = xOffset - x
-            x += diff
-            width -= diff
-        }
-        
-        return CGRect(
-            x: x,
+        let rightFrame = CGRect(
+            x: collectionView.contentOffset.x + channelHeaderWidth,
+            y: 0,
+            width: .greatestFiniteMagnitude,
+            height: .greatestFiniteMagnitude
+        )
+        let frame = CGRect(
+            x: xPosition(at: startDate, in: dateInterval),
             y: timelineHeight + CGFloat(section) * (sectionHeight + verticalSpacing),
-            width: max(width, 0),
+            width: max(endDate.timeIntervalSince(startDate) * scale - horizontalSpacing, 0),
             height: sectionHeight
         )
+        return frame.intersects(rightFrame) ? frame.intersection(rightFrame) : frame
     }
     
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>, in collectionView: UICollectionView) -> LayoutData? {
@@ -118,10 +115,10 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index -> UICollectionViewLayoutAttributes in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
                 if let program = item.program {
-                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, withContentOffset: collectionView.contentOffset)
+                    attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, collectionView: collectionView)
                 }
                 else {
-                    attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section, withContentOffset: collectionView.contentOffset)
+                    attrs.frame = frame(from: dateInterval.start, to: dateInterval.end, in: dateInterval, forSection: section, collectionView: collectionView)
                 }
                 return attrs
             }
