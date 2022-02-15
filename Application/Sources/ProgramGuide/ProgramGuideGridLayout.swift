@@ -83,21 +83,19 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, collectionView: UICollectionView) -> CGRect {
-        // Adjust the frame of items which would be partially visible at the left so that they fit within the visible frame.
-        // This has two benefits:
-        //  - Cells slide when the grid is scrolled so that their text remains visible.
-        //  - On tvOS the horizontal motions are reduced when navigating the grid (though not entirely eliminated).
-        //
-        // Remark: Attempting to do the same at the right of the grid (i.e. reducing cell frames intersecting with the
-        //         visible frame to the intersection frames only) does not add more benefits, though:
-        //  - Items coming from the right start in a shrink state, which is not what we want.
-        //  - Even with the frame entirely contained in the visible collection view rect, the focus engine still moves
-        //    the collection when focusing cells near the right of the grid; horizontal motions cannot therefore be
-        //    entirely eliminated, though they would be greatly reduced).
-        let rightFrame = CGRect(
+        // Adjust the frame of items which would be partially visible otherwise. Two different behaviors are implemented
+        // for iOS and tvOS:
+        //  - On iOS items partially visible on the left are adjusted to ensure their content is always visible.
+        //  - On tvOS items partially visible on the left and / or right are adjusted. This ensures their content
+        //    is always visible and that focus navigation is horizontally stable on the left of the collection. Items
+        //    coming from the right start in a shrinked state, unlike iOS, but this makes focus navigation on the right
+        //    of the collection a bit more horizontally stable than if this wasn't done. Not all horizontal motions
+        //    can be eliminated, though, probably because the focus engine attempts to have items visible within a smaller
+        //    invisible frame in the collection.
+        let visibleFrame = CGRect(
             x: collectionView.contentOffset.x + channelHeaderWidth,
             y: 0,
-            width: .greatestFiniteMagnitude,
+            width: constant(iOS: .greatestFiniteMagnitude, tvOS: max(collectionView.frame.width - channelHeaderWidth, 0)),
             height: .greatestFiniteMagnitude
         )
         let frame = CGRect(
@@ -106,7 +104,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             width: max(endDate.timeIntervalSince(startDate) * scale - horizontalSpacing, 0),
             height: sectionHeight
         )
-        return frame.intersects(rightFrame) ? frame.intersection(rightFrame) : frame
+        return frame.intersects(visibleFrame) ? frame.intersection(visibleFrame) : frame
     }
     
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>, in collectionView: UICollectionView) -> LayoutData? {
