@@ -169,6 +169,7 @@ struct ProgramGuideHeaderView: View {
                 }
             }
             .frame(height: 50)
+            .padding(.bottom, 6)
         }
     }
     #endif
@@ -185,7 +186,7 @@ enum ProgramGuideHeaderViewSize {
         case .grid:
             return (horizontalSizeClass == .compact) ? 160 : 80
         case .list:
-            return (horizontalSizeClass == .compact) ? 210 : 130
+            return (horizontalSizeClass == .compact) ? 216 : 136
         }
 #else
         return ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable ? 650 : 760
