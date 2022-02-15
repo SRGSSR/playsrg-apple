@@ -83,22 +83,32 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     private static func frame(from startDate: Date, to endDate: Date, in dateInterval: DateInterval, forSection section: Int, withContentOffset contentOffset: CGPoint) -> CGRect {
-        let horizontalOffset = contentOffset.x + Self.channelHeaderWidth
-        var x = Self.channelHeaderWidth + Self.horizontalSpacing + startDate.timeIntervalSince(dateInterval.start) * Self.scale
-        var width = max(endDate.timeIntervalSince(startDate) * Self.scale - Self.horizontalSpacing, 0)
+        let xOffset = contentOffset.x + channelHeaderWidth
+        var x = xPosition(at: startDate, in: dateInterval)
+        var width = max(endDate.timeIntervalSince(startDate) * scale - horizontalSpacing, 0)
         
-        // To display left labels in cells, and on tvOS, limited layout moves when focus changes, set left visible cells fully visible in the grid.
-        if x + width >= horizontalOffset && x < horizontalOffset {
-            let diff = horizontalOffset - x
+        // Adjust the frame of items which would be partially visible at the left so that they fit within the visible frame.
+        // This has two benefits:
+        //  - Cells slide when the grid is scrolled so that their text remains visible.
+        //  - On tvOS the horizontal motions are reduced when navigating the grid (though not entirely eliminated).
+        //
+        // Remark: Attempting to do the same at the right of the grid (i.e. reducing cell frames intersecting with the
+        //         visible frame to the intersection frames only) does not add more benefits, though:
+        //  - Items coming from the right start in a shrink state, which is not what we want.
+        //  - Even with the frame entirely contained in the visible collection view rect, the focus engine still moves
+        //    the collection when focusing cells near the right of the grid; horizontal motions cannot therefore be
+        //    entirely eliminated, though they would be greatly reduced).
+        if x + width >= xOffset && x < xOffset {
+            let diff = xOffset - x
             x += diff
             width -= diff
         }
         
         return CGRect(
             x: x,
-            y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
+            y: timelineHeight + CGFloat(section) * (sectionHeight + verticalSpacing),
             width: max(width, 0),
-            height: Self.sectionHeight
+            height: sectionHeight
         )
     }
     
@@ -120,9 +130,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             let attrs = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(item: 0, section: section))
             attrs.frame = CGRect(
                 x: collectionView.contentOffset.x,
-                y: Self.timelineHeight + CGFloat(section) * (Self.sectionHeight + Self.verticalSpacing),
-                width: Self.channelHeaderWidth,
-                height: (section != snapshot.sectionIdentifiers.count - 1) ? Self.sectionHeight + Self.verticalSpacing : Self.sectionHeight
+                y: timelineHeight + CGFloat(section) * (sectionHeight + verticalSpacing),
+                width: channelHeaderWidth,
+                height: (section != snapshot.sectionIdentifiers.count - 1) ? sectionHeight + verticalSpacing : sectionHeight
             )
             attrs.zIndex = 2
             return attrs
@@ -132,8 +142,8 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         timelineAttr.frame = CGRect(
             x: 0,
             y: collectionView.contentOffset.y,
-            width: dateInterval.duration * Self.scale,
-            height: Self.timelineHeight
+            width: dateInterval.duration * scale,
+            height: timelineHeight
         )
         timelineAttr.dateInterval = dateInterval
         timelineAttr.zIndex = 3
@@ -150,15 +160,19 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
     
-    private static func xPosition(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> CGFloat {
-        return Self.channelHeaderWidth + Self.horizontalSpacing + date.timeIntervalSince(dateInterval.start) * Self.scale - NowArrowView.size.width / 2
+    private static func xPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
+        return channelHeaderWidth + horizontalSpacing + date.timeIntervalSince(dateInterval.start) * scale
+    }
+    
+    private static func nowXPosition(at date: Date, in dateInterval: DateInterval) -> CGFloat {
+        return xPosition(at: date, in: dateInterval) - NowArrowView.size.width / 2
     }
     
     private static func nowArrowAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: nowIndexPath)
         attr.frame = CGRect(
-            x: xPosition(at: date, in: dateInterval, collectionView: collectionView),
-            y: collectionView.contentOffset.y + Self.timelineHeight - NowArrowView.size.height,
+            x: nowXPosition(at: date, in: dateInterval),
+            y: collectionView.contentOffset.y + timelineHeight - NowArrowView.size.height,
             width: NowArrowView.size.width,
             height: NowArrowView.size.height
         )
@@ -169,10 +183,10 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static func nowLineAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: nowIndexPath)
         attr.frame = CGRect(
-            x: xPosition(at: date, in: dateInterval, collectionView: collectionView),
-            y: collectionView.contentOffset.y + Self.timelineHeight,
+            x: nowXPosition(at: date, in: dateInterval),
+            y: collectionView.contentOffset.y + timelineHeight,
             width: NowArrowView.size.width,
-            height: max(CGFloat(collectionView.numberOfSections) * (Self.sectionHeight + Self.verticalSpacing) - Self.verticalSpacing - collectionView.contentOffset.y, 0)
+            height: max(CGFloat(collectionView.numberOfSections) * (sectionHeight + verticalSpacing) - verticalSpacing - collectionView.contentOffset.y, 0)
         )
         attr.zIndex = 1
         return attr
