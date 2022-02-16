@@ -223,10 +223,21 @@ extension ProgramGuideDailyViewModel {
         
         func items(for section: Section) -> [Item] {
             if let row = rows.first(where: { $0.section == section }) {
-                return row.items
+                return Self.items(from: row)
             }
             else {
                 return []
+            }
+        }
+        
+        private static func items(from row: Row) -> [Item] {
+            return row.items.flatMap { item -> [Item] in
+                if let subprograms = item.program?.subprograms {
+                    return subprograms.map { Item(.program($0), in: item.section, day: item.day) }
+                }
+                else {
+                    return [item]
+                }
             }
         }
     }
