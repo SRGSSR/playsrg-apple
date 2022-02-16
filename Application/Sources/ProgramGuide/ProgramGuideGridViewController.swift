@@ -258,11 +258,11 @@ extension ProgramGuideGridViewController: ContentInsets {
 
 extension ProgramGuideGridViewController: DayNavigationViewActions {
     func navigateForward() {
-        print("--> next day")
+        model.continueToNextDay()
     }
     
     func navigateBackward() {
-        print("--> previous day")
+        model.continueToPreviousDay()
     }
 }
 

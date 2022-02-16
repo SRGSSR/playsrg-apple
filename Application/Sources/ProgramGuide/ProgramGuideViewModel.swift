@@ -73,28 +73,31 @@ final class ProgramGuideViewModel: ObservableObject {
         .assign(to: &$data)
     }
     
-    private func switchToDate(_ date: Date) {
-        let previousDay = day
-        let previousTime = time
+    private func switchToDay(_ day: SRGDay, atTime time: TimeInterval?) {
+        let previousDay = self.day
+        let previousTime = self.time
         
-        day = SRGDay(from: date)
-        time = Self.time(from: date, relativeTo: day)
+        self.day = day
+        self.time = time ?? self.time
         
-        if day != previousDay && time != previousTime {
-            change = .dayAndTime(day: day, time: time)
+        if self.day != previousDay && self.time != previousTime {
+            change = .dayAndTime(day: self.day, time: self.time)
         }
-        else if day != previousDay {
-            change = .day(day)
+        else if self.day != previousDay {
+            change = .day(self.day)
         }
-        else if time != previousTime {
-            change = .time(time)
+        else if self.time != previousTime {
+            change = .time(self.time)
         }
     }
     
+    private func switchToDate(_ date: Date) {
+        let day = SRGDay(from: date)
+        switchToDay(day, atTime: Self.time(from: date, relativeTo: day))
+    }
+    
     func switchToDay(_ day: SRGDay) {
-        guard self.day != day else { return }
-        self.day = day
-        change = .day(day)
+        switchToDay(day, atTime: nil)
     }
     
     func switchToPreviousDay() {
@@ -112,6 +115,16 @@ final class ProgramGuideViewModel: ObservableObject {
     
     func switchToNow() {
         switchToDate(Date())
+    }
+    
+    func continueToNextDay() {
+        let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
+        switchToDay(nextDay, atTime: 0)
+    }
+    
+    func continueToPreviousDay() {
+        let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
+        switchToDay(previousDay, atTime: 27 * 60 * 60)
     }
     
     func didScrollToTime(_ time: TimeInterval) {
