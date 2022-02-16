@@ -127,11 +127,14 @@ struct ProgramCell: View {
         @ObservedObject var model: ProgramCellViewModel
         let compact: Bool
         
+        private let canPlayHeight: CGFloat = 25
+        
         var body: some View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
+                        .frame(maxHeight: canPlayHeight)
                 }
                 if let title = model.data?.program.title {
                     Text(title)
@@ -140,6 +143,7 @@ struct ProgramCell: View {
                         .foregroundColor(.srgGrayC7)
                 }
             }
+            .frame(minHeight: canPlayHeight)
         }
     }
 }
