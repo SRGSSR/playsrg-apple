@@ -17,7 +17,7 @@ final class ProgramGuideViewController: UIViewController {
     private weak var headerHostHeightConstraint: NSLayoutConstraint!
     private weak var headerHeightConstraint: NSLayoutConstraint!
     
-    private var _layout: ProgramGuideLayout = .grid
+    private var _layout: ProgramGuideLayout = .grid     // Pseudo ivar to implement animated and non-animated setters
     private var cancellables = Set<AnyCancellable>()
     
     private static let transitionDuration: TimeInterval = 0.4
@@ -65,6 +65,9 @@ final class ProgramGuideViewController: UIViewController {
         ])
         self.headerHeightConstraint = headerHeightConstraint
         
+        _layout = Self.layout(for: traitCollection)
+        transition(to: _layout, traitCollection: traitCollection, animated: false)
+        
 #if os(iOS)
         model.$isUserInteractionEnabled
             .sink { isUserInteractionEnabled in
@@ -74,7 +77,6 @@ final class ProgramGuideViewController: UIViewController {
         
         updateNavigationBar()
 #endif
-        transition(to: _layout, traitCollection: traitCollection, animated: false)
     }
 
 #if os(iOS)
@@ -85,12 +87,7 @@ final class ProgramGuideViewController: UIViewController {
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         coordinator.animate { _ in
-            if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
-                self.transition(to: self.layout, traitCollection: newCollection, animated: false)
-            }
-            else {
-                self.transition(to: (newCollection.horizontalSizeClass == .compact) ? .list : .grid, traitCollection: newCollection, animated: false)
-            }
+            self.transition(to: Self.layout(for: newCollection), traitCollection: newCollection, animated: false)
         } completion: { _ in }
     }
     
@@ -127,7 +124,22 @@ final class ProgramGuideViewController: UIViewController {
         }
         updateNavigationBar()
     }
+#endif
+    
+    private static func layout(for traitCollection: UITraitCollection) -> ProgramGuideLayout {
+#if os(iOS)
+        if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
+            return ApplicationSettingProgramGuideRecentlyUsedLayout()
+        }
+        else {
+            return (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
+        }
 #else
+        return .grid
+#endif
+    }
+    
+#if os(tvOS)
     override var preferredFocusEnvironments: [UIFocusEnvironment] {
         return [headerView]
     }
