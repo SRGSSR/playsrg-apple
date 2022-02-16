@@ -112,6 +112,8 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.collectionViewLayout.register(TimelineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.timeline.rawValue)
         collectionView.collectionViewLayout.register(NowArrowDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.nowArrow.rawValue)
         collectionView.collectionViewLayout.register(NowLineDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.nowLine.rawValue)
+        collectionView.collectionViewLayout.register(PreviousDayNavigationDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.previousDayNavigation.rawValue)
+        collectionView.collectionViewLayout.register(NextDayNavigationDecorationView.self, forDecorationViewOfKind: ProgramGuideGridLayout.ElementKind.nextDayNavigation.rawValue)
         
         dailyModel.$state
             .sink { [weak self] state in
@@ -349,6 +351,18 @@ private extension ProgramGuideGridViewController {
     final class NowLineDecorationView: HostSupplementaryView<NowLineView> {
         override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
             content = NowLineView()
+        }
+    }
+    
+    final class PreviousDayNavigationDecorationView: HostSupplementaryView<DayNavigationView> {
+        override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+            content = DayNavigationView(direction: .backward)
+        }
+    }
+    
+    final class NextDayNavigationDecorationView: HostSupplementaryView<DayNavigationView> {
+        override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+            content = DayNavigationView(direction: .forward)
         }
     }
 }

@@ -43,9 +43,11 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         case timeline
         case nowArrow
         case nowLine
+        case previousDayNavigation
+        case nextDayNavigation
     }
     
-    static let nowIndexPath = IndexPath(item: 0, section: 0)
+    static let decorationIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     static let channelHeaderWidth: CGFloat = 102
     static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
@@ -129,7 +131,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 width: channelHeaderWidth,
                 height: (section != snapshot.sectionIdentifiers.count - 1) ? sectionHeight + verticalSpacing : sectionHeight
             )
-            attrs.zIndex = 2
+            attrs.zIndex = 3
             return attrs
         }
         
@@ -141,7 +143,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             height: timelineHeight
         )
         timelineAttr.dateInterval = dateInterval
-        timelineAttr.zIndex = 3
+        timelineAttr.zIndex = 5
         
         let nowDate = Date()
         var decorationAttrs: [UICollectionViewLayoutAttributes] = [timelineAttr]
@@ -151,6 +153,12 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             
             let nowLineAttr = nowLineAttr(at: nowDate, in: dateInterval, collectionView: collectionView)
             decorationAttrs.append(nowLineAttr)
+            
+            let previousDayNavigationAttr = previousDayNavigationAttr(in: collectionView)
+            decorationAttrs.append(previousDayNavigationAttr)
+            
+            let nextDayNavigationAttr = nextDayNavigationAttr(in: collectionView)
+            decorationAttrs.append(nextDayNavigationAttr)
         }
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
@@ -164,19 +172,43 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     private static func nowArrowAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
-        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: nowIndexPath)
+        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: nowXPosition(at: date, in: dateInterval),
             y: collectionView.contentOffset.y + timelineHeight - NowArrowView.size.height,
             width: NowArrowView.size.width,
             height: NowArrowView.size.height
         )
-        attr.zIndex = 4
+        attr.zIndex = 2
+        return attr
+    }
+    
+    private static func previousDayNavigationAttr(in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
+        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.previousDayNavigation.rawValue, with: decorationIndexPath)
+        attr.frame = CGRect(
+            x: channelHeaderWidth,
+            y: collectionView.contentOffset.y,
+            width: DayNavigationView.width,
+            height: collectionView.frame.height
+        )
+        attr.zIndex = 2
+        return attr
+    }
+    
+    private static func nextDayNavigationAttr(in collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
+        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nextDayNavigation.rawValue, with: decorationIndexPath)
+        attr.frame = CGRect(
+            x: collectionView.contentSize.width - DayNavigationView.width,
+            y: collectionView.contentOffset.y,
+            width: DayNavigationView.width,
+            height: collectionView.frame.height
+        )
+        attr.zIndex = 2
         return attr
     }
     
     private static func nowLineAttr(at date: Date, in dateInterval: DateInterval, collectionView: UICollectionView) -> UICollectionViewLayoutAttributes {
-        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: nowIndexPath)
+        let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: nowXPosition(at: date, in: dateInterval),
             y: collectionView.contentOffset.y + timelineHeight,
