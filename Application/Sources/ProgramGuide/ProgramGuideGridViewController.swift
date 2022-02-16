@@ -256,6 +256,16 @@ extension ProgramGuideGridViewController: ContentInsets {
     }
 }
 
+extension ProgramGuideGridViewController: DayNavigationViewActions {
+    func navigateForward() {
+        print("--> next day")
+    }
+    
+    func navigateBackward() {
+        print("--> previous day")
+    }
+}
+
 extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     var programGuideLayout: ProgramGuideLayout {
         return .grid

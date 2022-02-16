@@ -6,27 +6,42 @@
 
 import SwiftUI
 
+// MARK: Contract
+
+@objc protocol DayNavigationViewActions: AnyObject {
+    func navigateForward()
+    func navigateBackward()
+}
+
 // MARK: View
 
 /// Behavior: h-exp, v-exp
 struct DayNavigationView: View {
-    static let width: CGFloat = 50
-    
-    enum Direction {
+    enum Direction: Int {
         case forward
         case backward
     }
     
     let direction: Direction
     
+    @FirstResponder private var firstResponder
+    
+    static let width: CGFloat = 50
+    
     var body: some View {
         Button(action: action) {
             Color.red
         }
+        .responderChain(from: firstResponder)
     }
     
     private func action() {
-        print("--> change to sibling day")
+        switch direction {
+        case .forward:
+            firstResponder.sendAction(#selector(DayNavigationViewActions.navigateForward))
+        case .backward:
+            firstResponder.sendAction(#selector(DayNavigationViewActions.navigateBackward))
+        }
     }
 }
 
