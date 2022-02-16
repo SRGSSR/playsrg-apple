@@ -153,13 +153,14 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
             
             let nowLineAttr = nowLineAttr(at: nowDate, in: dateInterval, collectionView: collectionView)
             decorationAttrs.append(nowLineAttr)
-            
-            let previousDayNavigationAttr = previousDayNavigationAttr(in: collectionView)
-            decorationAttrs.append(previousDayNavigationAttr)
-            
-            let nextDayNavigationAttr = nextDayNavigationAttr(in: collectionView)
-            decorationAttrs.append(nextDayNavigationAttr)
         }
+        
+        let previousDayNavigationAttr = previousDayNavigationAttr(in: collectionView)
+        decorationAttrs.append(previousDayNavigationAttr)
+        
+        let nextDayNavigationAttr = nextDayNavigationAttr(in: collectionView)
+        decorationAttrs.append(nextDayNavigationAttr)
+        
         return LayoutData(layoutAttrs: layoutAttrs, supplementaryAttrs: headerAttrs, decorationAttrs: decorationAttrs, dateInterval: dateInterval)
     }
     
