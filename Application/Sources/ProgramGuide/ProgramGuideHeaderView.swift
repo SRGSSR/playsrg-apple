@@ -114,6 +114,7 @@ struct ProgramGuideHeaderView: View {
     /// Behavior: h-exp, v-exp
     private struct DayNavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
+        @FirstResponder private var firstResponder
         
         private static let buttonWidth: CGFloat = constant(iOS: 43, tvOS: 70)
         
@@ -124,17 +125,39 @@ struct ProgramGuideHeaderView: View {
                 }
                 .frame(width: Self.buttonWidth)
                 
-                Text(model.dateString)
-                    .srgFont(.H2)
-                    .minimumScaleFactor(0.8)
-                    .foregroundColor(.srgGrayC7)
-                    .frame(maxWidth: .infinity)
+#if os(iOS)
+                Button(action: action) {
+                    DateView(model: model)
+                }
+#else
+                DateView(model: model)
+#endif
                 
                 ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
                     model.switchToNextDay()
                 }
                 .frame(width: Self.buttonWidth)
             }
+            .responderChain(from: firstResponder)
+        }
+
+#if os(iOS)
+        private func action() {
+            firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
+        }
+#endif
+    }
+    
+    /// Behavior: h-exp, v-hug
+    private struct DateView: View {
+        @ObservedObject var model: ProgramGuideViewModel
+        
+        var body: some View {
+            Text(model.dateString)
+                .srgFont(.H2)
+                .minimumScaleFactor(0.8)
+                .foregroundColor(.srgGrayC7)
+                .frame(maxWidth: .infinity)
         }
     }
     
