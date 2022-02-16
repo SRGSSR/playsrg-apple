@@ -188,9 +188,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.previousDayNavigation.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: channelHeaderWidth,
-            y: collectionView.contentOffset.y,
+            y: collectionView.contentOffset.y + timelineHeight,
             width: DayNavigationView.width,
-            height: collectionView.frame.height
+            height: max(collectionView.frame.height - timelineHeight, 0)
         )
         attr.zIndex = 2
         return attr
@@ -200,9 +200,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nextDayNavigation.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: collectionView.contentSize.width - DayNavigationView.width,
-            y: collectionView.contentOffset.y,
+            y: collectionView.contentOffset.y + timelineHeight,
             width: DayNavigationView.width,
-            height: collectionView.frame.height
+            height: max(collectionView.frame.height - timelineHeight, 0)
         )
         attr.zIndex = 2
         return attr

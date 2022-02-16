@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: Contract
@@ -30,9 +31,22 @@ struct DayNavigationView: View {
     
     var body: some View {
         Button(action: action) {
-            Color.red
+            Image(systemName: iconSystemName)
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
+        .background(Color.srgGray23)
+        .cornerRadius(4)
         .responderChain(from: firstResponder)
+    }
+    
+    private var iconSystemName: String {
+        switch direction {
+        case .forward:
+            return "chevron.compact.right"
+        case .backward:
+            return "chevron.compact.left"
+        }
     }
     
     private func action() {
