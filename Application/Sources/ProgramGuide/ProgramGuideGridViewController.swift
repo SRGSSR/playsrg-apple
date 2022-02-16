@@ -56,6 +56,7 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.backgroundColor = .clear
         collectionView.contentInsetAdjustmentBehavior = constant(iOS: .automatic, tvOS: .never)
         collectionView.isDirectionalLockEnabled = true
+        collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: ProgramGuideGridLayout.channelHeaderWidth, bottom: 0, right: 0)
         collectionView.verticalScrollIndicatorInsets = UIEdgeInsets(top: ProgramGuideGridLayout.timelineHeight, left: 0, bottom: 0, right: 0)
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
