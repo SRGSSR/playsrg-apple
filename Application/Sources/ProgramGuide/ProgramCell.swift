@@ -134,7 +134,7 @@ struct ProgramCell: View {
                 if !compact && model.canPlay {
                     Image("play_circle")
                         .foregroundColor(.srgGrayC7)
-                        .frame(maxHeight: canPlayHeight)
+                        .frame(height: canPlayHeight)
                 }
                 if let title = model.data?.program.title {
                     Text(title)
