@@ -245,7 +245,7 @@ extension ProgramGuideViewController {
             addProgramGuideChild(viewController)
             viewController.didMove(toParent: self)
             headerHostHeightConstraint.constant = headerHeight
-            headerView.isUserInteractionEnabled = true
+            model.isHeaderUserInteractionEnabled = true
         }
     }
     
