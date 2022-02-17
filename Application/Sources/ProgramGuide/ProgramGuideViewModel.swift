@@ -117,16 +117,6 @@ final class ProgramGuideViewModel: ObservableObject {
         switchToDate(Date())
     }
     
-    func continueToNextDay() {
-        let nextDay = SRGDay(byAddingDays: 1, months: 0, years: 0, to: day)
-        switchToDay(nextDay, atTime: 0)
-    }
-    
-    func continueToPreviousDay() {
-        let previousDay = SRGDay(byAddingDays: -1, months: 0, years: 0, to: day)
-        switchToDay(previousDay, atTime: 27 * 60 * 60)
-    }
-    
     func didScrollToTime(_ time: TimeInterval) {
         self.time = time
     }
