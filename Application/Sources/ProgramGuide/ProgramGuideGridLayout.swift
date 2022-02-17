@@ -47,6 +47,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     static let decorationIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
+    static let timelinePadding: CGFloat = 1000
     static let channelHeaderWidth: CGFloat = 102
     static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
     static let verticalSpacing: CGFloat = constant(iOS: 3, tvOS: 6)
@@ -135,9 +136,9 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         
         let timelineAttr = TimelineLayoutAttributes(forDecorationViewOfKind: ElementKind.timeline.rawValue, with: IndexPath(item: 0, section: 0))
         timelineAttr.frame = CGRect(
-            x: 0,
+            x: -timelinePadding,
             y: collectionView.contentOffset.y,
-            width: dateInterval.duration * scale,
+            width: timelinePadding + dateInterval.duration * scale,
             height: timelineHeight
         )
         timelineAttr.dateInterval = dateInterval
