@@ -169,50 +169,55 @@ extension ProgramGuideDailyViewModel {
         }
         
         private var rows: [Row] {
-            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
                 return firstPartyBouquet.rows + thirdPartyBouquet.rows
-            }
-            else {
+            case .failed:
                 return []
             }
         }
         
         fileprivate var firstPartyRows: [Row] {
-            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: _) = self {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: _):
                 return firstPartyBouquet.rows
-            }
-            else {
+            case .failed:
                 return []
             }
         }
         
         fileprivate var thirdPartyRows: [Row] {
-            if case let .content(firstPartyBouquet: _, thirdPartyBouquet: thirdPartyBouquet) = self {
+            switch self {
+            case let .content(firstPartyBouquet: _, thirdPartyBouquet: thirdPartyBouquet):
                 return thirdPartyBouquet.rows
-            }
-            else {
+            case .failed:
                 return []
             }
         }
         
         var sections: [Section] {
-            return rows.map(\.section)
+            switch self {
+            case .content:
+                return rows.map(\.section)
+            case .failed:
+                return []
+            }
         }
         
         var isLoading: Bool {
-            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
                 return firstPartyBouquet.isLoading || thirdPartyBouquet.isLoading
-            }
-            else {
+            case .failed:
                 return false
             }
         }
         
         func isEmpty(in section: Section?) -> Bool {
-            if case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet) = self {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
                 return firstPartyBouquet.isEmpty(in: section) && thirdPartyBouquet.isEmpty(in: section)
-            }
-            else {
+            case .failed:
                 return false
             }
         }
