@@ -213,7 +213,9 @@ extension ProgramGuideViewController {
                         previousViewController.view.removeFromSuperview()
                         previousViewController.removeFromParent()
                         viewController.didMove(toParent: self)
+#if os(iOS)
                         self.model.isHeaderUserInteractionEnabled = true
+#endif
                     }
                 }
                 else {
@@ -221,7 +223,9 @@ extension ProgramGuideViewController {
                     previousViewController.view.removeFromSuperview()
                     previousViewController.removeFromParent()
                     viewController.didMove(toParent: self)
+#if os(iOS)
                     model.isHeaderUserInteractionEnabled = true
+#endif
                 }
             }
             else {
@@ -231,12 +235,16 @@ extension ProgramGuideViewController {
                         self.headerHostHeightConstraint.constant = headerHeight
                         self.view.layoutIfNeeded()
                     } completion: { _ in
+#if os(iOS)
                         self.model.isHeaderUserInteractionEnabled = true
+#endif
                     }
                 }
                 else {
                     headerHostHeightConstraint.constant = headerHeight
+#if os(iOS)
                     model.isHeaderUserInteractionEnabled = true
+#endif
                 }
             }
         }
@@ -245,7 +253,9 @@ extension ProgramGuideViewController {
             addProgramGuideChild(viewController)
             viewController.didMove(toParent: self)
             headerHostHeightConstraint.constant = headerHeight
+#if os(iOS)
             model.isHeaderUserInteractionEnabled = true
+#endif
         }
     }
     
