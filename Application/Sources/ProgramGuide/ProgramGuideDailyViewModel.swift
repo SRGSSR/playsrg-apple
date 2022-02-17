@@ -20,10 +20,28 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
-                .map { day in
-                    return Self.state(for: day, from: self?.state ?? .empty)
+                .map { day -> AnyPublisher<State, Error> in
+                    let applicationConfiguration = ApplicationConfiguration.shared
+                    let vendor = applicationConfiguration.vendor
+                    
+                    if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+                        return Publishers.CombineLatest(
+                            Self.rows(for: vendor, provider: .SRG, day: day, from: self?.state.firstPartyRows ?? []),
+                            Self.rows(for: vendor, provider: .thirdParty, day: day, from: self?.state.thirdPartyRows ?? [])
+                        )
+                        .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1) }
+                        .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Self.rows(for: vendor, provider: .SRG, day: day, from: self?.state.firstPartyRows ?? [])
+                            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty) }
+                            .eraseToAnyPublisher()
+                    }
                 }
                 .switchToLatest()
+                .catch { error in
+                    return Just(.failed(error: error))
+                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -258,32 +276,13 @@ private extension ProgramGuideDailyViewModel {
                 let rows = programCompositions.map { Row(from: $0, in: day) }
                 return .loaded(rows: rows)
             }
+            .tryCatch { error -> AnyPublisher<State.Bouquet, Never> in
+                let availableRows = rows.map { Row(from: $0, in: day) }
+                guard !availableRows.allSatisfy({ $0.isEmpty }) else { throw error }
+                return Just(.loaded(rows: availableRows))
+                    .eraseToAnyPublisher()
+            }
             .prepend(.loading(rows: rows.map { Row(from: $0, in: day) }))
             .eraseToAnyPublisher()
-    }
-    
-    static func state(for day: SRGDay, from state: State) -> AnyPublisher<State, Never> {
-        let applicationConfiguration = ApplicationConfiguration.shared
-        let vendor = applicationConfiguration.vendor
-        
-        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
-            return Publishers.CombineLatest(
-                rows(for: vendor, provider: .SRG, day: day, from: state.firstPartyRows),
-                rows(for: vendor, provider: .thirdParty, day: day, from: state.thirdPartyRows)
-            )
-            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1) }
-            .catch { error in
-                return Just(.failed(error: error))
-            }
-            .eraseToAnyPublisher()
-        }
-        else {
-            return rows(for: vendor, provider: .SRG, day: day, from: state.firstPartyRows)
-                .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty) }
-                .catch { error in
-                    return Just(.failed(error: error))
-                }
-                .eraseToAnyPublisher()
-        }
     }
 }
