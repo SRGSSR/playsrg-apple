@@ -17,7 +17,7 @@ final class ProgramGuideViewModel: ObservableObject {
     @Published private(set) var change: Change = .none
     
 #if os(iOS)
-    @Published var isUserInteractionEnabled = true
+    @Published var isHeaderUserInteractionEnabled = true
 #else
     @Published var focusedProgram: SRGProgram?
 #endif

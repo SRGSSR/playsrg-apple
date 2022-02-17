@@ -69,9 +69,9 @@ final class ProgramGuideViewController: UIViewController {
         transition(to: _layout, traitCollection: traitCollection, animated: false)
         
 #if os(iOS)
-        model.$isUserInteractionEnabled
-            .sink { isUserInteractionEnabled in
-                headerView.isUserInteractionEnabled = isUserInteractionEnabled
+        model.$isHeaderUserInteractionEnabled
+            .sink { isHeaderUserInteractionEnabled in
+                headerView.isUserInteractionEnabled = isHeaderUserInteractionEnabled
             }
             .store(in: &cancellables)
         
@@ -213,7 +213,7 @@ extension ProgramGuideViewController {
                         previousViewController.view.removeFromSuperview()
                         previousViewController.removeFromParent()
                         viewController.didMove(toParent: self)
-                        self.headerView.isUserInteractionEnabled = true
+                        self.model.isHeaderUserInteractionEnabled = true
                     }
                 }
                 else {
@@ -221,7 +221,7 @@ extension ProgramGuideViewController {
                     previousViewController.view.removeFromSuperview()
                     previousViewController.removeFromParent()
                     viewController.didMove(toParent: self)
-                    headerView.isUserInteractionEnabled = true
+                    model.isHeaderUserInteractionEnabled = true
                 }
             }
             else {
@@ -231,12 +231,12 @@ extension ProgramGuideViewController {
                         self.headerHostHeightConstraint.constant = headerHeight
                         self.view.layoutIfNeeded()
                     } completion: { _ in
-                        self.headerView.isUserInteractionEnabled = true
+                        self.model.isHeaderUserInteractionEnabled = true
                     }
                 }
                 else {
                     headerHostHeightConstraint.constant = headerHeight
-                    headerView.isUserInteractionEnabled = true
+                    model.isHeaderUserInteractionEnabled = true
                 }
             }
         }

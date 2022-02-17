@@ -113,11 +113,11 @@ extension ProgramGuideListViewController: UIPageViewControllerDataSource {
 
 extension ProgramGuideListViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
-        model.isUserInteractionEnabled = false
+        model.isHeaderUserInteractionEnabled = false
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        model.isUserInteractionEnabled = true
+        model.isHeaderUserInteractionEnabled = true
         
         if completed, let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
             model.switchToDay(currentViewController.day)
