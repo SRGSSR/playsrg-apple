@@ -92,22 +92,17 @@ final class ProgramGuideViewController: UIViewController {
     }
     
     private func updateNavigationBar() {
-        if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
-            let isGrid = (layout == .grid)
-            let layoutBarButtonItem = UIBarButtonItem(
-                image: UIImage(named: isGrid ? "layout_grid_on" : "layout_list_on"),
-                style: .plain,
-                target: self,
-                action: #selector(toggleLayout(_:))
-            )
-            layoutBarButtonItem.accessibilityLabel = isGrid
-                ? PlaySRGAccessibilityLocalizedString("Display list", comment: "Button to display the TV guide as a list")
-                : PlaySRGAccessibilityLocalizedString("Display grid", comment: "Button to display the TV guide as a grid")
-            navigationItem.rightBarButtonItem = layoutBarButtonItem
-        }
-        else {
-            navigationItem.rightBarButtonItem = nil
-        }
+        let isGrid = (layout == .grid)
+        let layoutBarButtonItem = UIBarButtonItem(
+            image: UIImage(named: isGrid ? "layout_grid_on" : "layout_list_on"),
+            style: .plain,
+            target: self,
+            action: #selector(toggleLayout(_:))
+        )
+        layoutBarButtonItem.accessibilityLabel = isGrid
+            ? PlaySRGAccessibilityLocalizedString("Display list", comment: "Button to display the TV guide as a list")
+            : PlaySRGAccessibilityLocalizedString("Display grid", comment: "Button to display the TV guide as a grid")
+        navigationItem.rightBarButtonItem = layoutBarButtonItem
     }
     
     @objc private func toggleLayout(_ sender: AnyObject) {
@@ -127,16 +122,7 @@ final class ProgramGuideViewController: UIViewController {
 #endif
     
     private static func layout(for traitCollection: UITraitCollection) -> ProgramGuideLayout {
-#if os(iOS)
-        if ApplicationConfiguration.shared.areTvThirdPartyChannelsAvailable {
-            return ApplicationSettingProgramGuideRecentlyUsedLayout()
-        }
-        else {
-            return (traitCollection.horizontalSizeClass == .compact) ? .list : .grid
-        }
-#else
-        return .grid
-#endif
+        return constant(iOS: ApplicationSettingProgramGuideRecentlyUsedLayout(), tvOS: .grid)
     }
     
 #if os(tvOS)
