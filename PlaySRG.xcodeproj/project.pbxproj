@@ -7,6 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478027BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478127BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478227BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478327BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478427BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478527BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478627BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -2524,6 +2534,7 @@
 		00E494C3E1EB4D27F2A95D22 /* Pods-Play SRG-iOS-Play RTR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.debug.xcconfig"; sourceTree = "<group>"; };
 		012AAE6771704B2EDF9865EB /* Pods-Play SRG-iOS-Play RTR.nightly_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTR.nightly_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR.nightly_appcenter.xcconfig"; sourceTree = "<group>"; };
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
+		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
@@ -4701,6 +4712,7 @@
 			isa = PBXGroup;
 			children = (
 				6FEF23662732C2410098C639 /* ChannelHeaderView.swift */,
+				04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */,
 				6F2F556A27B40967003DC9C0 /* NowArrowView.swift */,
 				08669674273E63D0005AF2BA /* NowLineView.swift */,
 				6F2E160826A84ED200F3DC89 /* ProgramCell.swift */,
@@ -8361,6 +8373,7 @@
 				6F1A77832643CAB600A00EFC /* EmptyView.swift in Sources */,
 				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
+				04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */,
 				08AF2AED26BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6F54D30926050FBA008B46FF /* MediaCell.swift in Sources */,
@@ -8710,6 +8723,7 @@
 				6F0EDA662448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C321A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91A1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				6F74293E265BE52E0000538D /* Signals.swift in Sources */,
 				6F566E8124EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD68619246052A100B8018A /* GradientView.m in Sources */,
@@ -8942,6 +8956,7 @@
 				6F0EDA672448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C421A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91B1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				6F74293F265BE52E0000538D /* Signals.swift in Sources */,
 				6F566E8224EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861A246052A100B8018A /* GradientView.m in Sources */,
@@ -9174,6 +9189,7 @@
 				6F0EDA682448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F80E9C521A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91C1FAC34D600A58F3B /* ContentInsets.m in Sources */,
+				04D5478027BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				6F742940265BE52E0000538D /* Signals.swift in Sources */,
 				6F566E8324EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861B246052A100B8018A /* GradientView.m in Sources */,
@@ -9296,6 +9312,7 @@
 				6FA9ECBE20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6FE287712481687B00358CFF /* SongTableViewCell.m in Sources */,
 				08280F1A2258F02400AC978D /* WatchLater.m in Sources */,
+				04D5478127BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0825914427285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				088899492077628500242654 /* TVChannel.m in Sources */,
 				E66BEC201DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
@@ -9650,6 +9667,7 @@
 				6FB89A0426335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFA24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13A257A372800223F22 /* PlayErrors.m in Sources */,
+				04D5478227BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0858CA6F271094EA00EE36EA /* ExpandingButton.swift in Sources */,
 				6F426B4225680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6FE862712657D24E0061D3F0 /* MoreCell.swift in Sources */,
@@ -9784,6 +9802,7 @@
 				6FB89A0526335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFB24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13B257A372800223F22 /* PlayErrors.m in Sources */,
+				04D5478327BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0858CA70271094EC00EE36EA /* ExpandingButton.swift in Sources */,
 				6F426B4325680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6FE862722657D24F0061D3F0 /* MoreCell.swift in Sources */,
@@ -9918,6 +9937,7 @@
 				6FB89A0626335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFC24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13C257A372800223F22 /* PlayErrors.m in Sources */,
+				04D5478427BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0858CA71271094EE00EE36EA /* ExpandingButton.swift in Sources */,
 				6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6FE862732657D24F0061D3F0 /* MoreCell.swift in Sources */,
@@ -10052,6 +10072,7 @@
 				6FB89A0726335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFD24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13D257A372900223F22 /* PlayErrors.m in Sources */,
+				04D5478527BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0858CA72271094EE00EE36EA /* ExpandingButton.swift in Sources */,
 				6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6FE862742657D2510061D3F0 /* MoreCell.swift in Sources */,
@@ -10186,6 +10207,7 @@
 				6FB89A0826335B090012F1B0 /* Stack.swift in Sources */,
 				6FB1ADFE24EFEF2C00E80C1E /* ShowCell.swift in Sources */,
 				6FE4F13E257A372900223F22 /* PlayErrors.m in Sources */,
+				04D5478627BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				0858CA73271094F000EE36EA /* ExpandingButton.swift in Sources */,
 				6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */,
 				6FE862752657D2510061D3F0 /* MoreCell.swift in Sources */,

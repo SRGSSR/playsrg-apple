@@ -327,6 +327,9 @@ private extension ProgramGuideGridViewController {
             if let program = item.program {
                 ProgramCell(program: program, channel: item.section, direction: .vertical)
             }
+            else if item.isLoading {
+                LoadingCell()
+            }
             else {
                 Color.clear
             }

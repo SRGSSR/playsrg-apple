@@ -132,7 +132,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
         case .content:
-            if state.isLoading {
+            if state.isLoading(in: currentChannel) {
                 emptyView.content = EmptyView(state: .loading)
             }
             else if state.isEmpty(in: currentChannel) {
