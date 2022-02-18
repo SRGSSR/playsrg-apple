@@ -126,19 +126,19 @@ extension ProgramGuideDailyViewModel {
             self.init(section: channel, items: [Item(.loading, in: channel, day: day)])
         }
         
-        var isEmpty: Bool {
-            return items.filter({ $0.wrappedValue != .empty }).isEmpty
-        }
-        
         var isLoading: Bool {
             return !items.filter({ $0.wrappedValue == .loading }).isEmpty
+        }
+        
+        var isEmpty: Bool {
+            return items.filter({ $0.wrappedValue != .empty }).isEmpty
         }
     }
     
     enum State {
         struct Bouquet {
             let rows: [Row]
-            private let _isLoading: Bool
+            let isLoading: Bool
             
             static var loading: Self {
                 return Self.loading(rows: [])
@@ -162,42 +162,11 @@ extension ProgramGuideDailyViewModel {
             
             private init(rows: [Row], isLoading: Bool) {
                 self.rows = rows
-                _isLoading = isLoading
-            }
-            
-            func isLoading(in section: Section?) -> Bool {
-                if rows.isEmpty {
-                    return _isLoading
-                }
-                else if let section = section {
-                    guard let row = rows.first(where: { $0.section == section }) else { return false }
-                    return row.isLoading
-                }
-                else {
-                    return rows.allSatisfy { $0.isLoading }
-                }
-            }
-            
-            var isLoading: Bool {
-                return isLoading(in: nil)
-            }
-            
-            func isEmpty(in section: Section?) -> Bool {
-                if let section = section {
-                    guard let row = rows.first(where: { $0.section == section }) else { return true }
-                    return row.isEmpty
-                }
-                else {
-                    return rows.allSatisfy { $0.isEmpty }
-                }
+                self.isLoading = isLoading
             }
             
             var isEmpty: Bool {
-                return isEmpty(in: nil)
-            }
-            
-            func contains(section: Section) -> Bool {
-                return rows.first(where: { $0.section == section }) != nil
+                return rows.allSatisfy { $0.isEmpty }
             }
         }
         
@@ -243,6 +212,10 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
+        private func row(for section: Section) -> Row? {
+            return rows.first(where: { $0.section == section })
+        }
+        
         var sections: [Section] {
             switch self {
             case .content:
@@ -252,28 +225,11 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
-        private func bouquet(for section: Section) -> Bouquet? {
-            switch self {
-            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
-                if firstPartyBouquet.contains(section: section) {
-                    return firstPartyBouquet
-                }
-                else if thirdPartyBouquet.contains(section: section) {
-                    return thirdPartyBouquet
-                }
-                else {
-                    return nil
-                }
-            case .failed:
-                return nil
-            }
-        }
-        
         func isLoading(in section: Section?) -> Bool {
             switch self {
             case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
-                if let section = section, let bouquet = self.bouquet(for: section) {
-                    return bouquet.isLoading(in: section)
+                if let section = section, let row = row(for: section) {
+                    return row.isLoading
                 }
                 else {
                     return isEmpty && firstPartyBouquet.isLoading && thirdPartyBouquet.isLoading
@@ -290,7 +246,12 @@ extension ProgramGuideDailyViewModel {
         func isEmpty(in section: Section?) -> Bool {
             switch self {
             case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet):
-                return firstPartyBouquet.isEmpty(in: section) && thirdPartyBouquet.isEmpty(in: section)
+                if let section = section, let row = row(for: section) {
+                    return row.isEmpty
+                }
+                else {
+                    return firstPartyBouquet.isEmpty && thirdPartyBouquet.isEmpty
+                }
             case .failed:
                 return false
             }
@@ -300,12 +261,8 @@ extension ProgramGuideDailyViewModel {
             return isEmpty(in: nil)
         }
         
-        private func row(for section: Section) -> Row? {
-            return rows.first(where: { $0.section == section })
-        }
-        
         func items(for section: Section) -> [Item] {
-            if let row = rows.first(where: { $0.section == section }) {
+            if let row = row(for: section) {
                 return Self.items(from: row)
             }
             else {
