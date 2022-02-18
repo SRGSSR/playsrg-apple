@@ -254,14 +254,14 @@ extension ProgramGuideDailyViewModel {
         }
         
         private static func items(from row: Row) -> [Item] {
-            return row.items.flatMap { item -> [Item] in
+            return removeDuplicates(in: row.items.flatMap { item -> [Item] in
                 if let subprograms = item.program?.subprograms {
                     return subprograms.map { Item(.program($0), in: item.section, day: item.day) }
                 }
                 else {
                     return [item]
                 }
-            }
+            })
         }
     }
 }
