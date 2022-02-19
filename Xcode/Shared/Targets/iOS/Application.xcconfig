@@ -6,8 +6,5 @@ CODE_SIGN_ENTITLEMENTS[config=Nightly_AppCenter] = $(PROJECT_DIR)/Application/Ap
 PRODUCT_MODULE_NAME = PlaySRG
 SWIFT_OBJC_BRIDGING_HEADER = $(PROJECT_DIR)/Application/Sources/Bridges/PlaySRG-ObjectiveC.h
 
-// Since all pods and ComScore are not compatible with arm64 iOS simulator architecture
-EXCLUDED_ARCHS[sdk=iphonesimulator*] = arm64
-
 TARGET__ACTIVITY_CONTINUATION_DOMAIN = activitycontinuation:$(BU__DOMAIN)
 TARGET__APP_LINKS_DOMAIN = applinks:$(BU__DOMAIN)

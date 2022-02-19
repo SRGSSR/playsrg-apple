@@ -83,6 +83,15 @@
         }
       },
       {
+        "package": "GoogleCastSDK-ios-no-bluetooth",
+        "repositoryURL": "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth",
+        "state": {
+          "branch": null,
+          "revision": "0f4e99833b70dcb21c761f1c7bad37b95358246f",
+          "version": "4.7.0-beta.3"
+        }
+      },
+      {
         "package": "GoogleDataTransport",
         "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
         "state": {

@@ -7,7 +7,6 @@ inhibit_all_warnings!
 def ios_pods
   pod 'AutoCoding'
   pod 'FSCalendar'
-  pod 'google-cast-sdk-no-bluetooth'
   pod 'InAppSettingsKit', '3.3.0'
   pod 'MaterialComponents/Tabs', '118.2.0' # Tabs replaced with new implementation as of 119.0.0
 
@@ -84,16 +83,5 @@ abstract_target 'Play SRG' do
             'Beta' => :release,
             'Beta_AppCenter' => :release,
             'AppStore' => :release
-  end
-end
-
-# Fix deployment target warnings. See https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod
-# Since all pods are not compatible with arm64 iOS simulator architecture
-post_install do |lib|
-  lib.pods_project.targets.each do |target|
-    target.build_configurations.each do |config|
-      config.build_settings.delete 'IPHONEOS_DEPLOYMENT_TARGET'
-      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
-    end
   end
 end
