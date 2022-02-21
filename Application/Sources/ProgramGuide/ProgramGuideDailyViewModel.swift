@@ -95,6 +95,7 @@ extension ProgramGuideDailyViewModel {
         
         private init(section: Section, items: [Item]) {
             // Empty rows must still contain an .empty item
+            // FIXME: Can we write preconditions for empty / loading row = row with single empty / loading item
             precondition(!items.isEmpty)
             self.section = section
             self.items = items
@@ -133,18 +134,18 @@ extension ProgramGuideDailyViewModel {
         }
         
         var isLoading: Bool {
-            return items.contains { $0.wrappedValue == .loading }
+            return items.allSatisfy { $0.wrappedValue == .loading }
         }
         
         var isEmpty: Bool {
-            return items.contains { $0.wrappedValue == .empty }
+            return items.allSatisfy { $0.wrappedValue == .empty }
         }
     }
     
     enum State {
         struct Bouquet {
             let rows: [Row]
-            let isLoading: Bool
+            fileprivate let isLoadingWithoutRows: Bool
             
             fileprivate static var loading: Self {
                 return Self.loading(rows: [])
@@ -168,11 +169,15 @@ extension ProgramGuideDailyViewModel {
             
             private init(rows: [Row], isLoading: Bool) {
                 self.rows = rows
-                self.isLoading = isLoading
+                isLoadingWithoutRows = isLoading && rows.isEmpty
             }
             
             var isEmpty: Bool {
                 return rows.allSatisfy { $0.isEmpty }
+            }
+            
+            var isLoading: Bool {
+                return rows.isEmpty ? isLoadingWithoutRows : rows.allSatisfy { $0.isLoading }
             }
         }
         
