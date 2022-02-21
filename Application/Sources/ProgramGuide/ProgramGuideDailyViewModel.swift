@@ -95,75 +95,75 @@ extension ProgramGuideDailyViewModel {
         }
     }
     
-    enum State {
-        enum Bouquet {
-            case loading(channels: [SRGChannel])
-            case content(programCompositions: [SRGProgramComposition])
-            
-            fileprivate static var empty: Self {
-                return .content(programCompositions: [])
-            }
-            
-            fileprivate var isLoading: Bool {
-                switch self {
-                case .loading:
-                    return true
-                case .content:
-                    return false
-                }
-            }
-            
-            fileprivate var isEmpty: Bool {
-                switch self {
-                case .loading:
-                    return false
-                case let .content(programCompositions: programCompositions):
-                    return programCompositions.allSatisfy { $0.programs?.isEmpty ?? true }
-                }
-            }
-            
-            fileprivate var channels: [SRGChannel] {
-                switch self {
-                case let .loading(channels: channels):
-                    return channels
-                case let .content(programCompositions: programCompositions):
-                    return programCompositions.map(\.channel)
-                }
-            }
-            
-            fileprivate func contains(channel: SRGChannel) -> Bool {
-                return channels.contains(channel)
-            }
-            
-            private static func programs(for channel: SRGChannel, in programCompositions: [SRGProgramComposition]) -> [SRGProgram] {
-                return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
-            }
-            
-            fileprivate func isEmpty(for channel: SRGChannel) -> Bool {
-                switch self {
-                case .loading:
-                    return false
-                case let .content(programCompositions: programCompositions):
-                    return Self.programs(for: channel, in: programCompositions).isEmpty
-                }
-            }
-            
-            fileprivate func items(for channel: SRGChannel, day: SRGDay) -> [Item] {
-                switch self {
-                case .loading:
-                    return [Item(wrappedValue: .loading, section: channel, day: day)]
-                case let .content(programCompositions: programCompositions):
-                    let programs = Self.programs(for: channel, in: programCompositions)
-                    if !programs.isEmpty {
-                        return programs.map { Item(wrappedValue: .program($0), section: channel, day: day) }
-                    }
-                    else {
-                        return [Item(wrappedValue: .empty, section: channel, day: day)]
-                    }
-                }
+    enum Bouquet {
+        case loading(channels: [SRGChannel])
+        case content(programCompositions: [SRGProgramComposition])
+        
+        fileprivate static var empty: Self {
+            return .content(programCompositions: [])
+        }
+        
+        fileprivate var isLoading: Bool {
+            switch self {
+            case .loading:
+                return true
+            case .content:
+                return false
             }
         }
         
+        fileprivate var isEmpty: Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.allSatisfy { $0.programs?.isEmpty ?? true }
+            }
+        }
+        
+        fileprivate var channels: [SRGChannel] {
+            switch self {
+            case let .loading(channels: channels):
+                return channels
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.map(\.channel)
+            }
+        }
+        
+        fileprivate func contains(channel: SRGChannel) -> Bool {
+            return channels.contains(channel)
+        }
+        
+        private static func programs(for channel: SRGChannel, in programCompositions: [SRGProgramComposition]) -> [SRGProgram] {
+            return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
+        }
+        
+        fileprivate func isEmpty(for channel: SRGChannel) -> Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return Self.programs(for: channel, in: programCompositions).isEmpty
+            }
+        }
+        
+        fileprivate func items(for channel: SRGChannel, day: SRGDay) -> [Item] {
+            switch self {
+            case .loading:
+                return [Item(wrappedValue: .loading, section: channel, day: day)]
+            case let .content(programCompositions: programCompositions):
+                let programs = Self.programs(for: channel, in: programCompositions)
+                if !programs.isEmpty {
+                    return programs.map { Item(wrappedValue: .program($0), section: channel, day: day) }
+                }
+                else {
+                    return [Item(wrappedValue: .empty, section: channel, day: day)]
+                }
+            }
+        }
+    }
+    
+    enum State {
         case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet, day: SRGDay)
         case failed(error: Error)
         
@@ -271,11 +271,11 @@ extension ProgramGuideDailyViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
-    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from bouquet: State.Bouquet, inSameDay: Bool) -> AnyPublisher<State.Bouquet, Error> {
+    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from bouquet: Bouquet, inSameDay: Bool) -> AnyPublisher<Bouquet, Error> {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { .content(programCompositions: $0) }
-            .tryCatch { error -> AnyPublisher<State.Bouquet, Never> in
+            .tryCatch { error -> AnyPublisher<Bouquet, Never> in
                 if inSameDay {
                     return Just(bouquet)
                         .eraseToAnyPublisher()
