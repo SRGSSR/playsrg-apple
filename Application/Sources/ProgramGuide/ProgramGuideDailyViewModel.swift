@@ -94,6 +94,8 @@ extension ProgramGuideDailyViewModel {
         let items: [Item]
         
         private init(section: Section, items: [Item]) {
+            // Empty rows must still contain an .empty item
+            precondition(!items.isEmpty)
             self.section = section
             self.items = items
         }
@@ -131,11 +133,11 @@ extension ProgramGuideDailyViewModel {
         }
         
         var isLoading: Bool {
-            return !items.filter({ $0.wrappedValue == .loading }).isEmpty
+            return items.contains { $0.wrappedValue == .loading }
         }
         
         var isEmpty: Bool {
-            return items.filter({ $0.wrappedValue != .empty }).isEmpty
+            return items.contains { $0.wrappedValue == .empty }
         }
     }
     
