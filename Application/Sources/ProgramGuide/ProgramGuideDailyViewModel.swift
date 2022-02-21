@@ -98,28 +98,36 @@ extension ProgramGuideDailyViewModel {
             self.items = items
         }
         
-        init(from row: Row, in day: SRGDay) {
-            let items = row.items.filter { $0.day == day }
-            if !items.isEmpty {
-                self.init(section: row.section, items: items)
-            }
-            else {
-                self.init(section: row.section, items: [Item(.loading, in: row.section, day: day)])
-            }
+        fileprivate static func loading(channel: SRGChannel, in day: SRGDay) -> Row {
+            return Self.init(section: channel, items: [Item(.loading, in: channel, day: day)])
         }
         
-        init(from programComposition: SRGProgramComposition, in day: SRGDay) {
+        fileprivate static func loading(from row: Row, in day: SRGDay) -> Row {
+            return created(from: row, in: day, isLoading: true)
+        }
+        
+        fileprivate static func loaded(from row: Row, in day: SRGDay) -> Row {
+            return created(from: row, in: day, isLoading: false)
+        }
+        
+        fileprivate static func loaded(from programComposition: SRGProgramComposition, in day: SRGDay) -> Row {
             let channel = programComposition.channel
             if let programs = programComposition.programs, !programs.isEmpty {
-                self.init(section: channel, items: programs.map { Item(.program($0), in: channel, day: day) })
+                return Self.init(section: channel, items: programs.map { Item(.program($0), in: channel, day: day) })
             }
             else {
-                self.init(section: channel, items: [Item(.empty, in: channel, day: day)])
+                return Self.init(section: channel, items: [Item(.empty, in: channel, day: day)])
             }
         }
         
-        init(from channel: SRGChannel, in day: SRGDay) {
-            self.init(section: channel, items: [Item(.loading, in: channel, day: day)])
+        private static func created(from row: Row, in day: SRGDay, isLoading: Bool) -> Row {
+            let items = row.items.filter { $0.day == day }
+            if !items.isEmpty {
+                return Self.init(section: row.section, items: items)
+            }
+            else {
+                return Self.init(section: row.section, items: [Item(isLoading ? .loading : .empty, in: row.section, day: day)])
+            }
         }
         
         var isLoading: Bool {
@@ -149,7 +157,7 @@ extension ProgramGuideDailyViewModel {
             }
             
             fileprivate static func loading(channels: [SRGChannel], in day: SRGDay) -> Self {
-                return Self.init(rows: channels.map { Row(from: $0, in: day) }, isLoading: true)
+                return Self.init(rows: channels.map { Row.loading(channel: $0, in: day) }, isLoading: true)
             }
             
             fileprivate static func loaded(rows: [Row]) -> Self {
@@ -286,16 +294,16 @@ private extension ProgramGuideDailyViewModel {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { programCompositions in
-                let rows = programCompositions.map { Row(from: $0, in: day) }
+                let rows = programCompositions.map { Row.loaded(from: $0, in: day) }
                 return .loaded(rows: rows)
             }
             .tryCatch { error -> AnyPublisher<State.Bouquet, Never> in
-                let availableRows = rows.map { Row(from: $0, in: day) }
+                let availableRows = rows.map { Row.loaded(from: $0, in: day) }
                 guard !availableRows.allSatisfy({ $0.isEmpty }) else { throw error }
                 return Just(.loaded(rows: availableRows))
                     .eraseToAnyPublisher()
             }
-            .prepend(.loading(rows: rows.map { Row(from: $0, in: day) }))
+            .prepend(.loading(rows: rows.map { Row.loading(from: $0, in: day) }))
             .eraseToAnyPublisher()
     }
 }
