@@ -87,10 +87,6 @@ extension ProgramGuideDailyViewModel {
                 return false
             }
         }
-        
-        var isLoading: Bool {
-            return wrappedValue == .loading
-        }
     }
     
     struct Row {

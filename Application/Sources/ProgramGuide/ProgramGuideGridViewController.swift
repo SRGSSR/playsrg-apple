@@ -324,13 +324,12 @@ private extension ProgramGuideGridViewController {
         let item: ProgramGuideDailyViewModel.Item
         
         var body: some View {
-            if let program = item.program {
+            switch item.wrappedValue {
+            case let .program(program):
                 ProgramCell(program: program, channel: item.section, direction: .vertical)
-            }
-            else if item.isLoading {
+            case .loading:
                 LoadingCell()
-            }
-            else {
+            case .empty:
                 Color.clear
             }
         }
