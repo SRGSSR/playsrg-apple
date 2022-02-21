@@ -284,7 +284,7 @@ private extension ProgramGuideDailyViewModel {
                     throw error
                 }
             }
-            .prepend(.loading(channels: bouquet.channels))
+            .prepend(inSameDay ? bouquet : .loading(channels: bouquet.channels))
             .eraseToAnyPublisher()
     }
 }
