@@ -11,7 +11,7 @@ import SRGDataProviderCombine
 
 final class ProgramGuideDailyViewModel: ObservableObject {
     @Published var day: SRGDay
-    @Published private(set) var state: State = .loading
+    @Published private(set) var state: State
     
     /// Channels can be provided if available for more efficient content loading
     init(day: SRGDay, firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel]) {
@@ -147,16 +147,12 @@ extension ProgramGuideDailyViewModel {
             let rows: [Row]
             fileprivate let isLoadingWithoutRows: Bool
             
-            fileprivate static var loading: Self {
-                return Self.loading(rows: [])
-            }
-            
             fileprivate static var empty: Self {
                 return Self.loaded(rows: [])
             }
             
-            fileprivate static func loading(rows: [Row]) -> Self {
-                return Self.init(rows: rows, isLoading: true)
+            fileprivate static func loading(rows: [Row], in day: SRGDay) -> Self {
+                return Self.init(rows: rows.map { Row.loading(from: $0, in: day) }, isLoading: true)
             }
             
             fileprivate static func loading(channels: [SRGChannel], in day: SRGDay) -> Self {
@@ -183,10 +179,6 @@ extension ProgramGuideDailyViewModel {
         
         case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet)
         case failed(error: Error)
-        
-        static var loading: State {
-            return .content(firstPartyBouquet: .loading, thirdPartyBouquet: .loading)
-        }
         
         static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], in day: SRGDay) -> State {
             return .content(firstPartyBouquet: .loading(channels: firstPartyChannels, in: day), thirdPartyBouquet: .loading(channels: thirdPartyChannels, in: day))
@@ -310,7 +302,7 @@ private extension ProgramGuideDailyViewModel {
                 return Just(.loaded(rows: availableRows))
                     .eraseToAnyPublisher()
             }
-            .prepend(.loading(rows: rows.map { Row.loading(from: $0, in: day) }))
+            .prepend(.loading(rows: rows, in: day))
             .eraseToAnyPublisher()
     }
 }
