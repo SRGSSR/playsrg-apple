@@ -136,23 +136,23 @@ extension ProgramGuideDailyViewModel {
             let rows: [Row]
             let isLoading: Bool
             
-            static var loading: Self {
+            fileprivate static var loading: Self {
                 return Self.loading(rows: [])
             }
             
-            static var empty: Self {
+            fileprivate static var empty: Self {
                 return Self.loaded(rows: [])
             }
             
-            static func loading(rows: [Row]) -> Self {
+            fileprivate static func loading(rows: [Row]) -> Self {
                 return Self.init(rows: rows, isLoading: true)
             }
             
-            static func loading(channels: [SRGChannel], in day: SRGDay) -> Self {
+            fileprivate static func loading(channels: [SRGChannel], in day: SRGDay) -> Self {
                 return Self.init(rows: channels.map { Row(from: $0, in: day) }, isLoading: true)
             }
             
-            static func loaded(rows: [Row]) -> Self {
+            fileprivate static func loaded(rows: [Row]) -> Self {
                 return Self.init(rows: rows, isLoading: false)
             }
             
