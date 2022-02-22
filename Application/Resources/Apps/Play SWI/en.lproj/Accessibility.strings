@@ -54,6 +54,12 @@
 /* Show unsubscription label */
 "Disable notifications for show" = "Disable notifications for topic";
 
+/* Button to display the TV guide as a grid */
+"Display grid" = "Display grid";
+
+/* Button to display the TV guide as a list */
+"Display list" = "Display list";
+
 /* A download button label */
 "Download" = "Download";
 

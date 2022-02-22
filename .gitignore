@@ -1,4 +1,4 @@
-	.DS_Store
+.DS_Store
 
 *.xccheckout
 *.xcscmblueprint
@@ -8,8 +8,6 @@ xcuserdata
 /build
 
 /Configuration
-
-/Carthage
 
 /.env
 /Xcode/Links

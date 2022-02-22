@@ -55,6 +55,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, readonly, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;
+@property (nonatomic, readonly, getter=areTvThirdPartyChannelsAvailable) BOOL tvThirdPartyChannelsAvailable;
 
 @property (nonatomic, readonly, getter=isSubtitleAvailabilityHidden) BOOL subtitleAvailabilityHidden;
 @property (nonatomic, readonly, getter=isAudioDescriptionAvailabilityHidden) BOOL audioDescriptionAvailabilityHidden;

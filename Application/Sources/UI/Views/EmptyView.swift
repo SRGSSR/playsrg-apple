@@ -9,11 +9,18 @@ import SwiftUI
 // MARK: View
 
 struct EmptyView: View {
+    enum Layout {
+        case standard
+        case text
+    }
+    
     let state: State
+    let layout: Layout
     let insets: EdgeInsets
     
-    init(state: State, insets: EdgeInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)) {
+    init(state: State, layout: Layout = .standard, insets: EdgeInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0)) {
         self.state = state
+        self.layout = layout
         self.insets = insets
     }
     
@@ -54,7 +61,9 @@ struct EmptyView: View {
                 ActivityIndicator()
             case let .empty(type: type):
                 VStack {
-                    Image(imageName(for: type))
+                    if layout == .standard {
+                        Image(imageName(for: type))
+                    }
                     Text(emptyTitle(for: type))
                         .srgFont(.H2)
                 }

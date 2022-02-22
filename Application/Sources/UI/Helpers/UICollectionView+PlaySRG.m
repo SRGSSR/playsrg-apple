@@ -8,12 +8,15 @@
 
 @implementation UICollectionView (PlaySRG)
 
-- (void)play_scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated;
+- (BOOL)play_scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated;
 {
     @try {
         [self scrollToItemAtIndexPath:indexPath atScrollPosition:scrollPosition animated:animated];
+        return YES;
     }
-    @catch (NSException *exception) {}
+    @catch (NSException *exception) {
+        return NO;
+    }
 }
 
 @end

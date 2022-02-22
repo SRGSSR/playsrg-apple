@@ -43,8 +43,7 @@ If you want to contribute to the project, have a look at our [contributing guide
 - Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
 
 ```
-brew install imagemagick ghostscript
-brew install jq
+brew install imagemagick ghostscript jq
 ```
 
 - Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system:
