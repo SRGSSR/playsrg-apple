@@ -23,21 +23,16 @@ final class ProgramGuideDailyViewModel: ObservableObject {
                 .map { day -> AnyPublisher<State, Error> in
                     let applicationConfiguration = ApplicationConfiguration.shared
                     let vendor = applicationConfiguration.vendor
-                    
-                    let firstPartyBouquet = self?.state.firstPartyBouquet ?? .empty
-                    let inSameDay = self?.state.isSameDay(as: day) ?? false
-                    
                     if applicationConfiguration.areTvThirdPartyChannelsAvailable {
-                        let thirdPartyBouquet = self?.state.thirdPartyBouquet ?? .empty
                         return Publishers.CombineLatest(
-                            Self.bouquet(for: vendor, provider: .SRG, day: day, from: firstPartyBouquet, inSameDay: inSameDay),
-                            Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: thirdPartyBouquet, inSameDay: inSameDay)
+                            Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state),
+                            Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: self?.state)
                         )
                         .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1, day: day) }
                         .eraseToAnyPublisher()
                     }
                     else {
-                        return Self.bouquet(for: vendor, provider: .SRG, day: day, from: firstPartyBouquet, inSameDay: inSameDay)
+                        return Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state)
                             .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty, day: day) }
                             .eraseToAnyPublisher()
                     }
@@ -121,6 +116,18 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
+        fileprivate var hasPrograms: Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.contains { programComposition in
+                    guard let programs = programComposition.programs else { return false }
+                    return !programs.isEmpty
+                }
+            }
+        }
+        
         fileprivate var channels: [SRGChannel] {
             switch self {
             case let .loading(channels: channels):
@@ -194,13 +201,18 @@ extension ProgramGuideDailyViewModel {
         }
         
         private func bouquet(for section: Section) -> Bouquet? {
-            if let firstPartyBouquet = firstPartyBouquet, firstPartyBouquet.contains(channel: section) {
-                return firstPartyBouquet
-            }
-            else if let thirdPartyBouquet = thirdPartyBouquet, thirdPartyBouquet.contains(channel: section) {
-                return thirdPartyBouquet
-            }
-            else {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: _):
+                if firstPartyBouquet.contains(channel: section) {
+                    return firstPartyBouquet
+                }
+                else if thirdPartyBouquet.contains(channel: section) {
+                    return thirdPartyBouquet
+                }
+                else {
+                    return nil
+                }
+            case .failed:
                 return nil
             }
         }
@@ -238,53 +250,36 @@ extension ProgramGuideDailyViewModel {
         var isEmpty: Bool {
             return isEmpty(in: nil)
         }
-        
-        fileprivate var firstPartyBouquet: Bouquet? {
-            switch self {
-            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: _, day: _):
-                return firstPartyBouquet
-            case .failed:
-                return nil
-            }
-        }
-        
-        fileprivate var thirdPartyBouquet: Bouquet? {
-            switch self {
-            case let .content(firstPartyBouquet: _, thirdPartyBouquet: thirdPartyBouquet, day: _):
-                return thirdPartyBouquet
-            case .failed:
-                return nil
-            }
-        }
-        
-        fileprivate func isSameDay(as otherDay: SRGDay) -> Bool {
-            switch self {
-            case let .content(firstPartyBouquet: _, thirdPartyBouquet: _, day: day):
-                return otherDay.compare(day) == .orderedSame
-            case .failed:
-                return false
-            }
-        }
     }
 }
 
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
-    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from bouquet: Bouquet, inSameDay: Bool) -> AnyPublisher<Bouquet, Error> {
+    static func bouquet(from state: State?, for provider: SRGProgramProvider, day otherDay: SRGDay) -> Bouquet {
+        guard let state = state else { return .empty }
+        switch state {
+        case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: day):
+            guard otherDay.compare(day) == .orderedSame else {
+                return provider == .thirdParty ? .loading(channels: thirdPartyBouquet.channels) : .loading(channels: firstPartyBouquet.channels)
+            }
+            return provider == .thirdParty ? thirdPartyBouquet : firstPartyBouquet
+        case .failed:
+            return .empty
+        }
+    }
+    
+    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
+        let bouquet = bouquet(from: state, for: provider, day: day)
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { .content(programCompositions: $0) }
             .tryCatch { error -> AnyPublisher<Bouquet, Never> in
-                if inSameDay {
-                    return Just(bouquet)
-                        .eraseToAnyPublisher()
-                }
-                else {
-                    throw error
-                }
+                guard bouquet.hasPrograms else { throw error }
+                return Just(bouquet)
+                    .eraseToAnyPublisher()
             }
-            .prepend(inSameDay ? bouquet : .loading(channels: bouquet.channels))
+            .prepend(bouquet)
             .eraseToAnyPublisher()
     }
 }
