@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 
 # Requirements:
 # brew install imagemagick ghostscript jq
@@ -123,8 +122,6 @@ do
         fi
 
         SOURCE_ICON_PATH="${SCRIPT_ICON_PATH}"
-        echo "Copying icon from '${SOURCE_ICON_PATH}' ... "
-        echo "... in '${TARGET_ICON_PATH}'"
         cp -f "${SOURCE_ICON_PATH}" "${TARGET_ICON_PATH}"
     done
 done

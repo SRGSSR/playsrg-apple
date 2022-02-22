@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -x
 
 if [ "${CONFIGURATION}" == "AppStore" ] || [ "${CONFIGURATION}" == "Debug" ] || [ "${ENABLE_PREVIEWS}" == "YES" ]; then
     exit 0
