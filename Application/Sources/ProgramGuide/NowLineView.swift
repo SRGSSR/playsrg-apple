@@ -15,7 +15,6 @@ struct NowLineView: View {
             Rectangle()
                 .fill(.white)
                 .frame(width: 1)
-            
         }
     }
 }
