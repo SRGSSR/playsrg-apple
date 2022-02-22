@@ -1,4 +1,5 @@
-#!/bin/bash -e -x
+#!/usr/bin/env bash
+set -x
 
 xcrun simctl boot "${TARGET_DEVICE_IDENTIFIER}"
 
