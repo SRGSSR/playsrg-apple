@@ -102,12 +102,7 @@ extension LiveMediaCellViewModel {
     }
     
     var imageUrl: URL? {
-        if let channel = channel {
-            return program?.imageUrl(for: .small) ?? channel.imageUrl(for: .small)
-        }
-        else {
-            return media?.imageUrl(for: .small)
-        }
+        return program?.imageUrl(for: .small) ?? media?.imageUrl(for: .small)
     }
 }
 
