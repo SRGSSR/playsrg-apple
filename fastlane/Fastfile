@@ -51,8 +51,6 @@ platform :ios do
 
     notify_build_number_to_ci(platform, nightly_build_name(branch_name))
 
-    changelog = default_changelog_for_nightlies(platform, service)
-
     ios_schemes.each_index do |index|
       build_lane(
         configuration: 'Nightly_AppCenter',
@@ -66,12 +64,12 @@ platform :ios do
       appcenter_lane(
         appname: appcenter_nightly_names[index],
         destinations: ENV['PLAY_NIGHTLY_APPCENTER_DESTINATIONS'],
-        notes: changelog
+        notes: nightly_changelog(platform, service)
       )
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (Nightly #{build_number}) delivered. ✅"
+      UI.message "#{ios_schemes[index]} (Nightly #{build_number}) uploaded and distributed. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -82,7 +80,7 @@ platform :ios do
     testflight_nightlies(platform: 'tvOS')
   end
 
-  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :tvOSnightlyDSYMs do |options|
     tvos_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -96,7 +94,7 @@ platform :ios do
     testflight_nightlies(platform: 'iOS')
   end
 
-  desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :iOSnightlyDSYMs do |options|
     ios_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -124,6 +122,8 @@ platform :ios do
 
     notify_build_number_to_ci(platform, nil)
 
+    build_number = xcode_build_number(platform)
+
     ios_schemes.each_index do |index|
       build_lane(
         configuration: 'Beta_AppCenter',
@@ -141,6 +141,8 @@ platform :ios do
       )
 
       clean_build_artifacts
+
+      UI.message "#{ios_schemes[index]} (Beta #{build_number}) uploaded and distributed. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -151,7 +153,7 @@ platform :ios do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Sends latest tvOS beta dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :tvOSbetaDSYMs do |options|
     tvos_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -165,7 +167,7 @@ platform :ios do
     testflight_betas(platform: 'iOS')
   end
 
-  desc 'Sends latest iOS beta dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :iOSbetaDSYMs do |options|
     ios_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -200,7 +202,7 @@ platform :ios do
     sh 'bundle exec fastlane ios rtrAppStoreUpload'
   end
 
-  desc 'Sends latest iOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :dSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
@@ -229,7 +231,7 @@ platform :ios do
     sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
   end
 
-  desc 'Sends latest tvOS dSYMs to App Center. Optional \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :tvOSdSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
@@ -451,8 +453,6 @@ platform :ios do
 
     notify_build_number_to_ci(platform, nightly_build_name(branch_name))
 
-    changelog = default_changelog_for_nightlies(platform, service)
-
     schemes = schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -467,14 +467,27 @@ platform :ios do
         export_to_appstore: true
       )
 
-      srg_pilot(app_identifier, platform, changelog)
-
-      appcenter_appnames = appcenter_testflight_nightly_names(platform)
-      update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
+      pilot_fast_upload(app_identifier, platform)
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) delivered. ✅"
+      UI.message "#{schemes[index]} (Nightly #{build_number}) uploaded. ✅"
+    end
+
+    changelog = nightly_changelog(platform, service)
+    dsyms_options = { build_number: build_number }
+
+    schemes.each_index do |index|
+      app_identifier = appstore_nightly_identifiers[index]
+
+      pilot_distribute(app_identifier, platform, build_number, changelog)
+
+      UI.message "#{schemes[index]} (Nightly #{build_number}) distributed. ✅"
+
+      appcenter_appname = appcenter_testflight_nightly_names(platform)[index]
+      update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
+
+      UI.message "#{schemes[index]} (Nightly #{build_number}) dSYM file OK. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -505,14 +518,27 @@ platform :ios do
         export_to_appstore: true
       )
 
-      srg_pilot(app_identifier, platform, what_s_new_for_beta(platform))
-
-      appcenter_appnames = appcenter_testflight_beta_names(platform)
-      update_dsyms(app_identifier, platform, appcenter_appnames[index], nil)
+      pilot_fast_upload(app_identifier, platform)
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) delivered. ✅"
+      UI.message "#{schemes[index]} (Beta #{build_number}) uploaded. ✅"
+    end
+
+    changelog = what_s_new_for_beta(platform)
+    dsyms_options = { build_number: build_number }
+
+    schemes.each_index do |index|
+      app_identifier = appstore_beta_identifiers[index]
+
+      pilot_distribute(app_identifier, platform, build_number, changelog)
+
+      UI.message "#{schemes[index]} (Beta #{build_number}) distributed. ✅"
+
+      appcenter_appname = appcenter_testflight_beta_names(platform)[index]
+      update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
+
+      UI.message "#{schemes[index]} (Beta #{build_number}) dSYM file OK. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -880,8 +906,8 @@ def nightly_build_name(branch_name)
   end
 end
 
-# Return a default changelog for nightlies
-def default_changelog_for_nightlies(platform, service)
+# Return a nightly changelog from git commit messages
+def nightly_changelog(platform, service)
   last_commit_hash = last_nightlies_success_git_commit_hash(platform, service)
   last_commit_hash = 'HEAD^^^^^' if last_commit_hash.length < 12
 
@@ -892,8 +918,8 @@ def default_changelog_for_nightlies(platform, service)
 
   # HAX: strip emoji from changelog
   changelog = changelog ? changelog.sub(/[\u{1F300}-\u{1F6FF}]/, '').lstrip : ''
-  changelog = 'No change log found for this build.' if changelog.empty?
-  Actions.lane_context[SharedValues::FL_CHANGELOG] = changelog
+
+  changelog.empty? ? 'No change log found for this build.' : changelog
 end
 
 # Save the git commit hash in a local text file for nightlies
@@ -973,51 +999,67 @@ def login_with_app_store_connect_api_key
   )
 end
 
-def srg_pilot(app_identifier, platform, changelog)
-  login_with_app_store_connect_api_key
-  begin
-    pilot(
-      app_identifier: app_identifier,
-      app_platform: appstore_platform(platform),
-      changelog: changelog,
-      distribute_external: true,
-      groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
-      demo_account_required: false,
-      beta_app_review_info: beta_app_review_info
-    )
-  rescue StandardError => e
-    raise unless e.message.include? 'Another build is in review'
+def pilot_fast_upload(app_identifier, platform)
+  lane_context.delete(SharedValues::FL_CHANGELOG)
 
-    UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
-  end
+  login_with_app_store_connect_api_key
+  pilot(
+    app_identifier: app_identifier,
+    app_platform: appstore_platform(platform),
+    skip_waiting_for_build_processing: true
+  )
 end
 
-# Update dSYMs from AppStore to App Center.
+def pilot_distribute(app_identifier, platform, build_number, changelog)
+  srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+rescue StandardError => e
+  raise unless e.message.include? 'Another build is in review'
+
+  UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
+end
+
+def srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+  login_with_app_store_connect_api_key
+  pilot(
+    distribute_only: true,
+    app_identifier: app_identifier,
+    app_platform: appstore_platform(platform),
+    build_number: build_number,
+    changelog: changelog,
+    distribute_external: true,
+    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    notify_external_testers: true,
+    demo_account_required: false,
+    beta_app_review_info: beta_app_review_info
+  )
+end
+
+# Update dSYMs from AppStore Connect to App Center.
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
-  min_version = options ? options[:min_version] : nil
-  version = options ? options[:version] : nil
+
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
-  download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+  download_appstore_dsyms(app_identifier, platform, options, output_directory)
   upload_appcenter_dsyms(appcenter_appname)
 
   lane_context.delete(SharedValues::DSYM_PATHS)
 end
 
-def download_appstore_dsyms(app_identifier, platform, min_version, version, output_directory)
+def download_appstore_dsyms(app_identifier, platform, options, output_directory)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
-  version ||= 'latest'
+  options[:version] ||= 'latest'
 
   login_with_app_store_connect_api_key
   download_dsyms(
     app_identifier: app_identifier,
     platform: appstore_platform(platform),
-    min_version: min_version,
-    version: min_version ? nil : version,
+    min_version: options[:build_number] ? nil : options[:min_version],
+    version: options[:min_version] || options[:build_number] ? nil : options[:version],
+    build_number: options[:build_number],
     output_directory: output_directory,
     wait_for_dsym_processing: true,
     wait_timeout: 90
