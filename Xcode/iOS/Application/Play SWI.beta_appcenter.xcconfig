@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play SWI.beta_appcenter.xcconfig"
+#include? "Configuration/Xcode/Play SWI.beta_appcenter.xcconfig"
+
 #include "Xcode/Shared/BUs/SWI.xcconfig"
 #include "Xcode/Shared/Targets/iOS/Application.xcconfig"
 

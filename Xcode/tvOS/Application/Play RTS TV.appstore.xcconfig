@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play RTS TV.appstore.xcconfig"
+#include? "Configuration/Xcode/Play RTS TV.appstore.xcconfig"
+
 #include "Xcode/Shared/BUs/RTS.xcconfig"
 #include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
 

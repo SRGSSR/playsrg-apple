@@ -73,7 +73,7 @@ do
         TARGET_ICON_PATH="${SOURCE_ICON_PATH}"
 
         if [ ! -e "${SOURCE_ICON_PATH}" ]; then
-            echo "warning: App icon not found: ${SOURCE_ICON_PATH}"
+            echo "Warning: App icon not found: ${SOURCE_ICON_PATH}"
             continue
         fi
 

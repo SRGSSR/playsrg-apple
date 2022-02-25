@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play SWI TV.debug.xcconfig"
+#include? "Configuration/Xcode/Play SWI TV.debug.xcconfig"
+
 #include "Xcode/Shared/BUs/SWI.xcconfig"
 #include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
 
