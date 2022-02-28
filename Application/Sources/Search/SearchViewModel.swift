@@ -20,7 +20,7 @@ final class SearchViewModel: ObservableObject {
     init() {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings, trigger] in
             Publishers.CombineLatest($query.removeDuplicates(), $settings)
-                .debounce(for: 0.3, scheduler: DispatchQueue.main)
+                .debounceAfterFirst(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query, settings in
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
                 }
