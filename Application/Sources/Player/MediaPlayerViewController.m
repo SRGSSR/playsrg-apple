@@ -1008,13 +1008,15 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
-        self.currentProgramTitleLabel.text = channel.name ?: [self mainMedia].title;
+        SRGMedia *mainMedia = [self mainMedia];
+        
+        self.currentProgramTitleLabel.text = channel.name ?: mainMedia.title;
         self.currentProgramSubtitleLabel.text = nil;
         
         self.currentProgramMoreEpisodesButton.hidden = YES;
         self.currentProgramFavoriteButton.hidden = YES;
         
-        [self updateFavoriteStatusForShow:nil];
+        [self updateFavoriteStatusForShow:mainMedia.show];
     }
     
     BOOL hadPrograms = (self.programs.count != 0);
