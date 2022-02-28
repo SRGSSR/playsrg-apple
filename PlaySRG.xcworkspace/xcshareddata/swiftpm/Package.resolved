@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
         "state": {
           "branch": null,
-          "revision": "9b9a68ad1f73e838e9d8f9ea948f0ed83d0f8ccd",
-          "version": "1.7.2"
+          "revision": "5356c91308b64a994b9392f1d8b40457378875c7",
+          "version": "1.7.3"
         }
       },
       {
@@ -42,8 +42,8 @@
         "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
         "state": {
           "branch": null,
-          "revision": "de8577f58200195a882d3b21f1270775b02b78e2",
-          "version": "6.9.0"
+          "revision": "7e3c521ad689b0e2bbf5cfb62e19c9e1619feae2",
+          "version": "6.10.0"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "5344857522053b5d4403ec8173ec0d23200a97ea",
-          "version": "8.11.0"
+          "revision": "78f7087fd5d48eb7c36e299f330b6dddccd647b2",
+          "version": "8.12.1"
         }
       },
       {
@@ -78,8 +78,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "9b2f6aca5b4685c45f9f5481f19bee8e7982c538",
-          "version": "8.9.1"
+          "revision": "6cc2991c11872510a5314bc112cc7558dd9d046a",
+          "version": "8.12.0"
         }
       },
       {
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "158c3bd52bb9e32f6b3c1f7d3dafe31fb7174097",
-          "version": "16.2.0"
+          "revision": "fcc2c3e8109022438f470aa77b04da874a0079cc",
+          "version": "16.4.0"
         }
       },
       {
@@ -221,9 +221,9 @@
         "package": "SRGAnalytics",
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
-          "branch": null,
-          "revision": "26c38b56c51a1a4b84b01fec6ec0f067a6eab5d7",
-          "version": "7.3.1"
+          "branch": "develop",
+          "revision": "e4781a12893191bf7356ac33df290b10c8c472c3",
+          "version": null
         }
       },
       {
@@ -276,7 +276,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "773594a50410fc090dad333e4865199b9a151c1b",
+          "revision": "f3d0c1d7ba889d0dd9ad9248d88adcdb85de7fc1",
           "version": null
         }
       },
