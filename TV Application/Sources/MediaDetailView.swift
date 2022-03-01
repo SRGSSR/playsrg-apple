@@ -86,7 +86,7 @@ struct MediaDetailView: View {
         
         var body: some View {
             HStack(spacing: 10) {
-                Image(icon)
+                Image(decorative: icon)
                 // Unbreakable spaces before / after the separator
                 Text(values.joined(separator: " - "))
                     .srgFont(.subtitle2)

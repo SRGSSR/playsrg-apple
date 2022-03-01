@@ -38,7 +38,7 @@ struct SimpleButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                Image(icon)
+                Image(decorative: icon)
                 if let label = label {
                     Text(label)
                         .srgFont(.button)
