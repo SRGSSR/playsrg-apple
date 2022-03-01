@@ -200,18 +200,20 @@ extension View {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
 #if os(tvOS)
-                accessibilityElement()
+                accessibilityHidden(true)
+                    .accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityAddTraits(traits)
 #else
-                accessibilityElement()
+                accessibilityHidden(true)
+                    .accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityHint(hint ?? "")
                     .accessibilityAddTraits(traits)
 #endif
             }
             else {
-                accessibility(hidden: true)
+                accessibilityHidden(true)
             }
         }
     }
