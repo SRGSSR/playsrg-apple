@@ -130,11 +130,19 @@ struct MediaDescription {
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
+        let accessibilityLabel: String
         if let show = media.show, !areRedundant(media: media, show: show) {
-            return show.title.appending(", \(media.title)")
+            accessibilityLabel = show.title.appending(", \(media.title)")
         }
         else {
-            return media.title
+            accessibilityLabel = media.title
+        }
+        
+        if let youthProtectionLabel = SRGAccessibilityLabelForYouthProtectionColor(media.youthProtectionColor) {
+            return accessibilityLabel.appending(", \(youthProtectionLabel)")
+        }
+        else {
+            return accessibilityLabel
         }
     }
     
