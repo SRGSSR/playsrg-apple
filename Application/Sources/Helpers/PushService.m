@@ -152,6 +152,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     return URNs.copy;
 }
 
+- (NSString *)airshipIdentifier
+{
+    return UAirship.channel.identifier;
+}
+
 #pragma mark Setup
 
 - (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions

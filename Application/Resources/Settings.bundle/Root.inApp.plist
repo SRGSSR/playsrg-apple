@@ -250,6 +250,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Copy Airship identifier</string>
+			<key>Key</key>
+			<string>Button_CopyAirshipIdentifier</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Advanced features</string>
