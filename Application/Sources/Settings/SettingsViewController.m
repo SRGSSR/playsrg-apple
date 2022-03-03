@@ -62,6 +62,7 @@ static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
+static NSString * const SettingsCopyDeviceTokenButton = @"Button_CopyDeviceToken";
 
 // Advanced features settings group
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
@@ -424,6 +425,13 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
+    else if ([specifier.key isEqualToString:SettingsCopyDeviceTokenButton]) {
+        UIPasteboard.generalPasteboard.string = ApplicationSettingDeviceToken();
+        [Banner showWithStyle:BannerStyleInfo
+                      message:NSLocalizedString(@"The device token has been copied to the pasteboard", @"Information message displayed when the device token has been copied to the pasteboard by the user")
+                        image:nil
+                       sticky:NO];
+    }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subscribe to all shows?", @"Title of the message displayed when the user is about to subscribe to all shows")
                                                                                  message:nil
@@ -523,10 +531,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (UITableViewCell *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController cellForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
-        static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
-        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
+        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:SettingsApplicationVersionCell];
         if (! cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kApplicationVersionCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingsApplicationVersionCell];
         }
         cell.textLabel.text = specifier.title;
         cell.detailTextLabel.text = NSBundle.mainBundle.play_friendlyVersionNumber;
