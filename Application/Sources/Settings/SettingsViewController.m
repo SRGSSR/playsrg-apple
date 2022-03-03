@@ -236,6 +236,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [hiddenKeys addObject:SettingsBetaTestingButton];
     }
     
+    if (! ApplicationSettingDeviceToken()) {
+        [hiddenKeys addObject:SettingsCopyDeviceTokenButton];
+    }
+    
     self.hiddenKeys = hiddenKeys.copy;
 }
 
@@ -426,7 +430,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([specifier.key isEqualToString:SettingsCopyDeviceTokenButton]) {
-        UIPasteboard.generalPasteboard.string = ApplicationSettingDeviceToken();
+        NSString *deviceToken = ApplicationSettingDeviceToken();
+        NSAssert(deviceToken, @"Button must not be displayed when no device token is available");
+        UIPasteboard.generalPasteboard.string = deviceToken;
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"The device token has been copied to the pasteboard", @"Information message displayed when the device token has been copied to the pasteboard by the user")
                         image:nil
