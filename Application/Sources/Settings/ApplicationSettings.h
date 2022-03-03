@@ -52,4 +52,7 @@ OBJC_EXPORT NSString * _Nullable ApplicationSettingServiceNameForKey(NSString *k
 
 OBJC_EXPORT BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void);
 
+OBJC_EXPORT NSString * _Nullable ApplicationSettingDeviceToken(void);
+OBJC_EXPORT void ApplicationSettingSetDeviceToken(NSString *deviceToken);
+
 NS_ASSUME_NONNULL_END
