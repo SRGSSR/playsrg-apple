@@ -261,7 +261,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
     }
     
-    [deviceInformationComponents addObject:@"\n"];
+    [deviceInformationComponents addObject:@""];
     [deviceInformationComponents addObject:@"Push notification information"];
     [deviceInformationComponents addObject:@"-----------------------------"];
     
