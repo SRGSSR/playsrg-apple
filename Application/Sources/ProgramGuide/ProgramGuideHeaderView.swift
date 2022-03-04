@@ -26,7 +26,7 @@ struct ProgramGuideHeaderView: View {
 #if os(tvOS)
         ZStack {
             ProgramPreview(program: model.focusedProgram)
-                .accessibility(hidden: true)
+                .accessibilityHidden(true)
             NavigationBar(model: model)
                 .focusable()
                 .padding(.horizontal, 56)

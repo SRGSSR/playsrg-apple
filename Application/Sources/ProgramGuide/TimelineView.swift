@@ -74,7 +74,7 @@ struct TimelineView: View {
         .background(Color(white: 0, opacity: 0.2))
         .background(Blur(style: .dark))
 #endif
-        .accessibility(hidden: true)
+        .accessibilityHidden(true)
     }
 }
 

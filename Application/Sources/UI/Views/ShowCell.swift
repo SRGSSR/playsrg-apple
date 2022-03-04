@@ -93,7 +93,7 @@ struct ShowCell: View {
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 if style == .favorite, model.isSubscribed {
-                    Image("subscription_full")
+                    Image(decorative: "subscription_full")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 12)

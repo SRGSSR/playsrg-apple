@@ -26,7 +26,7 @@ struct LabeledButton: View {
     var body: some View {
         VStack {
             Button(action: action) {
-                Image(icon)
+                Image(decorative: icon)
                     .frame(width: 68)
                     .foregroundColor(isFocused ? .darkGray : .white)
                     .onParentFocusChange { isFocused = $0 }

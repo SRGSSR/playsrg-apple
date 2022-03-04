@@ -65,7 +65,7 @@ struct ProgramView: View {
                         ZStack {
                             VisualView(model: model)
                             Color(white: 0, opacity: 0.2)
-                            Image("play")
+                            Image(decorative: "play")
                                 .foregroundColor(.white)
                         }
                     }

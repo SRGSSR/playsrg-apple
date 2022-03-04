@@ -132,7 +132,7 @@ struct ProgramCell: View {
         var body: some View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
-                    Image("play_circle")
+                    Image(decorative: "play_circle")
                         .foregroundColor(.srgGrayC7)
                         .frame(height: canPlayHeight)
                 }

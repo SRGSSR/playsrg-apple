@@ -62,14 +62,14 @@ struct EmptyView: View {
             case let .empty(type: type):
                 VStack {
                     if layout == .standard {
-                        Image(imageName(for: type))
+                        Image(decorative: imageName(for: type))
                     }
                     Text(emptyTitle(for: type))
                         .srgFont(.H2)
                 }
             case let .failed(error: error):
                 VStack {
-                    Image("error-background")
+                    Image(decorative: "error-background")
                     Text(error.localizedDescription)
                         .srgFont(.H4)
                 }
