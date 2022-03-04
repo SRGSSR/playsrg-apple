@@ -222,7 +222,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "c81209e98c7f11568920d90ab987d139506e0826",
+          "revision": "acf791abb754e06f495e026018a3264ee63a44ae",
           "version": null
         }
       },
@@ -249,7 +249,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "aed90f2d347f606c31070cb08048bfd2eef581e3",
+          "revision": "2d8d1151c7766b7212fc896b66632f2b418f8e71",
           "version": null
         }
       },
@@ -276,7 +276,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "e18dac2a40e4f9e80d0718f2d7a08349a272f73b",
+          "revision": "8a942d7991e7e0f05f3780030dd4a9ff4301a2cd",
           "version": null
         }
       },
@@ -294,7 +294,7 @@
         "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
         "state": {
           "branch": "develop",
-          "revision": "a595571ebe229bdf9038963fe07fd1bf9b2f0aec",
+          "revision": "3a87aff351129294ea685f8ba85874fa774ff43f",
           "version": null
         }
       },
@@ -330,8 +330,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "7e2c5f3cbbeea68e004915e3a8961e20bd11d824",
-          "version": "1.18.0"
+          "revision": "e1499bc69b9040b29184f7f2996f7bab467c1639",
+          "version": "1.19.0"
         }
       },
       {
