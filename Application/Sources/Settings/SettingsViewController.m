@@ -21,6 +21,7 @@
 #import "PushService.h"
 #import "PushService+Private.h"
 #import "UIApplication+PlaySRG.h"
+#import "UIDevice+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -250,7 +251,10 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [deviceInformationComponents addObject:@"-------------------"];
     
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS: %@", UIDevice.currentDevice.systemName]];
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Model: %@", UIDevice.currentDevice.model]];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Model identifier: %@", UIDevice.currentDevice.play_hardware]];
     
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
     if (SRGIdentityService.currentIdentityService) {
