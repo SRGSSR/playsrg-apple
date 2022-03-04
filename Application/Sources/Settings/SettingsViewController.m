@@ -442,7 +442,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
-                      message:NSLocalizedString(@"The device token has been copied to the pasteboard", @"Information message displayed when the device token has been copied to the pasteboard by the user")
+                      message:NSLocalizedString(@"The device information has been copied to the pasteboard", @"Information message displayed when the device information has been copied to the pasteboard by the user")
                         image:nil
                        sticky:NO];
     }
