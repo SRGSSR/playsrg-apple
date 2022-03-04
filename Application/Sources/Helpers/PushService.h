@@ -54,7 +54,7 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 /**
  *  Return the current  Airship (channel) identifier.
  */
-@property (nonatomic, readonly, nullable) NSString *airshipIdentifier;
+@property (nonatomic, readonly, copy, nullable) NSString *airshipIdentifier;
 
 /**
  *  Attempt to present the system alert to enable push notifications. Returns `YES` iff presented.
