@@ -429,8 +429,20 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsCopyDeviceInformationButton]) {
         NSMutableArray<NSString *> *deviceInformationComponents = [NSMutableArray array];
         
+        [deviceInformationComponents addObject:@"General information"];
+        [deviceInformationComponents addObject:@"-------------------"];
+        
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version; %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
+        
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
+        if (SRGIdentityService.currentIdentityService) {
+            [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
+        }
+        
+        [deviceInformationComponents addObject:@"\n"];
+        [deviceInformationComponents addObject:@"Push notification information"];
+        [deviceInformationComponents addObject:@"-----------------------------"];
         
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
         
@@ -442,11 +454,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
-        
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
-        if (SRGIdentityService.currentIdentityService) {
-            [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
-        }
         
         UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
