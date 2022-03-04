@@ -244,17 +244,9 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Copy device token</string>
+			<string>Copy device information</string>
 			<key>Key</key>
-			<string>Button_CopyDeviceToken</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>IASKButtonSpecifier</string>
-			<key>Title</key>
-			<string>Copy Airship identifier</string>
-			<key>Key</key>
-			<string>Button_CopyAirshipIdentifier</string>
+			<string>Button_CopyDeviceInformation</string>
 		</dict>
 		<dict>
 			<key>Type</key>

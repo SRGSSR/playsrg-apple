@@ -62,8 +62,7 @@ static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
-static NSString * const SettingsCopyDeviceTokenButton = @"Button_CopyDeviceToken";
-static NSString * const SettingsCopyAirshipIdentifierButton = @"Button_CopyAirshipIdentifier";
+static NSString * const SettingsCopyDeviceInformationButton = @"Button_CopyDeviceInformation";
 
 // Advanced features settings group
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
@@ -235,14 +234,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     
     if (! applicationConfiguration.betaTestingURL) {
         [hiddenKeys addObject:SettingsBetaTestingButton];
-    }
-    
-    if (! ApplicationSettingDeviceToken()) {
-        [hiddenKeys addObject:SettingsCopyDeviceTokenButton];
-    }
-    
-    if (! PushService.sharedService.airshipIdentifier) {
-        [hiddenKeys addObject:SettingsCopyAirshipIdentifierButton];
     }
     
     self.hiddenKeys = hiddenKeys.copy;
@@ -434,21 +425,18 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
-    else if ([specifier.key isEqualToString:SettingsCopyDeviceTokenButton]) {
-        NSString *deviceToken = ApplicationSettingDeviceToken();
-        NSAssert(deviceToken, @"Button must not be displayed when no device token is available");
-        UIPasteboard.generalPasteboard.string = deviceToken;
+    else if ([specifier.key isEqualToString:SettingsCopyDeviceInformationButton]) {
+        NSMutableArray<NSString *> *deviceInformationComponents = [NSMutableArray array];
+        
+        NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
+        
+        NSString *deviceToken = ApplicationSettingDeviceToken() ?: @"None";
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
+        
+        UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"The device token has been copied to the pasteboard", @"Information message displayed when the device token has been copied to the pasteboard by the user")
-                        image:nil
-                       sticky:NO];
-    }
-    else if ([specifier.key isEqualToString:SettingsCopyAirshipIdentifierButton]) {
-        NSString *airshipId = PushService.sharedService.airshipIdentifier;
-        NSAssert(airshipId, @"Button must not be displayed when no Airship identifier available");
-        UIPasteboard.generalPasteboard.string = airshipId;
-        [Banner showWithStyle:BannerStyleInfo
-                      message:NSLocalizedString(@"The Airship identifier has been copied to the pasteboard", @"Information message displayed when the Airship (channel) identifier has been copied to the pasteboard by the user")
                         image:nil
                        sticky:NO];
     }
