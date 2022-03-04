@@ -240,6 +240,41 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     self.hiddenKeys = hiddenKeys.copy;
 }
 
+#pragma mark Device information
+
+- (NSString *)deviceInformation
+{
+    NSMutableArray<NSString *> *deviceInformationComponents = [NSMutableArray array];
+    
+    [deviceInformationComponents addObject:@"General information"];
+    [deviceInformationComponents addObject:@"-------------------"];
+    
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
+    
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
+    if (SRGIdentityService.currentIdentityService) {
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
+    }
+    
+    [deviceInformationComponents addObject:@"\n"];
+    [deviceInformationComponents addObject:@"Push notification information"];
+    [deviceInformationComponents addObject:@"-----------------------------"];
+    
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
+    
+    NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
+    
+    NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
+    
+    NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
+    
+    return [deviceInformationComponents componentsJoinedByString:@"\n"];
+}
+
 #pragma mark What's new
 
 /**
@@ -427,35 +462,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([specifier.key isEqualToString:SettingsCopyDeviceInformationButton]) {
-        NSMutableArray<NSString *> *deviceInformationComponents = [NSMutableArray array];
-        
-        [deviceInformationComponents addObject:@"General information"];
-        [deviceInformationComponents addObject:@"-------------------"];
-        
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
-        
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
-        if (SRGIdentityService.currentIdentityService) {
-            [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
-        }
-        
-        [deviceInformationComponents addObject:@"\n"];
-        [deviceInformationComponents addObject:@"Push notification information"];
-        [deviceInformationComponents addObject:@"-----------------------------"];
-        
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
-        
-        NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
-        
-        NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
-        
-        NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];
-        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
-        
-        UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
+        UIPasteboard.generalPasteboard.string = [self deviceInformation];
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"The device information has been copied to the pasteboard", @"Information message displayed when the device information has been copied to the pasteboard by the user")
                         image:nil
