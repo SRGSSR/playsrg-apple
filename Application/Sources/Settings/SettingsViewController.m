@@ -443,6 +443,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
         
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
+        
         UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"The device information has been copied to the pasteboard", @"Information message displayed when the device information has been copied to the pasteboard by the user")
