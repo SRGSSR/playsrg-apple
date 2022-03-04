@@ -21,7 +21,6 @@
 
 NSString * const PlaySRGSettingLastOpenedRadioChannelUid = @"PlaySRGSettingLastOpenedRadioChannelUid";
 NSString * const PlaySRGSettingLastOpenedTabBarItem = @"PlaySRGSettingLastOpenedTabBarItem";
-NSString * const PlaySRGSettingDeviceToken = @"PlaySRGSettingDeviceToken";
 
 NSValueTransformer *TabBarItemIdentifierTransformer(void)
 {
@@ -198,16 +197,4 @@ NSString *ApplicationSettingServiceNameForKey(NSString *key)
 BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)
 {
     return [NSUserDefaults.standardUserDefaults boolForKey:PlaySRGSettingBackgroundVideoPlaybackEnabled];
-}
-
-NSString *ApplicationSettingDeviceToken()
-{
-    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingDeviceToken];
-}
-
-void ApplicationSettingSetDeviceToken(NSString *deviceToken)
-{
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    [userDefaults setObject:deviceToken forKey:PlaySRGSettingDeviceToken];
-    [userDefaults synchronize];
 }

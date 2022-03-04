@@ -52,7 +52,12 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
 @property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
 
 /**
- *  Return the current  Airship (channel) identifier.
+ *  Return the current device token.
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *deviceToken;
+
+/**
+ *  Return the current Airship (channel) identifier.
  */
 @property (nonatomic, readonly, copy, nullable) NSString *airshipIdentifier;
 

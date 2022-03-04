@@ -27,3 +27,7 @@ Push notifications are sent via [Airship](https://www.airship.com), whose SDK is
 #### Remark
 
 To check that your setup is working you can initially create very a basic push notification containing a simple body, omitting all other fields. This notification will be processed by the app but will not provide any action or image.
+
+## Observce push status messages
+
+An old technical note discusses [push notification status message inspection](https://developer.apple.com/library/archive/technotes/tn2265/_index.html). No profile is required anymore nowadays: You can observe status messages in the Console application by filtering results associated with the `apns` process.

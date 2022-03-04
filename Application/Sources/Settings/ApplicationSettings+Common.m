@@ -110,7 +110,7 @@ NSURL *ApplicationSettingServiceURL(void)
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         settingServiceURLReset = NO;
         completionHandler(YES);
-    }, @"SettingServiceURLReset2", nil);
+    }, @"SettingServiceURLReset2");
     
     if (! settingServiceURLReset) {
         [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];

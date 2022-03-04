@@ -22,6 +22,15 @@ static void lockComplete(CFNotificationCenterRef center, void *observer, CFStrin
     return s_locked;
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)play_hardware
+{
+    struct utsname systemInfo;
+    uname(&systemInfo);
+    return [NSString stringWithCString:systemInfo.machine encoding:NSUTF8StringEncoding];
+}
+
 #pragma mark Notifications
 
 + (void)play_applicationDidBecomeActive:(NSNotification *)notification

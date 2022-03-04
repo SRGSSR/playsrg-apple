@@ -58,7 +58,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
-    }, @"FirebaseConfigurationReset", nil);
+    }, @"FirebaseConfigurationReset");
     
     // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename
@@ -132,7 +132,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         firstLaunchDone = NO;
         completionHandler(YES);
-    }, @"FirstLaunchDone", nil);
+    }, @"FirstLaunchDone");
     
     [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
@@ -140,7 +140,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
-    }, @"ClearVectorImageCache2", nil);
+    }, @"ClearVectorImageCache2");
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -150,16 +150,16 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults removeObjectForKey:previousKey];
         [userDefaults synchronize];
         completionHandler(YES);
-    }, @"MigrateSelectedLiveStreamURNForChannels", nil);
+    }, @"MigrateSelectedLiveStreamURNForChannels");
     
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    if (PushService.sharedService) {
-        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-            FavoritesForcePushServiceUpdate();
-            completionHandler(YES);
-        }, @"MigrateSubscribedShows", nil);
-    }
-#endif
+    FavoritesUpdatePushService();
+    
+    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferencesDomain]) {
+            FavoritesUpdatePushService();
+        }
+    }];
     
     return YES;
 }
@@ -178,12 +178,6 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [PushService.sharedService updateApplicationBadge];
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSString *deviceTokenString = [UAUtils deviceTokenStringFromDeviceToken:deviceToken];
-    ApplicationSettingSetDeviceToken(deviceTokenString);
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
