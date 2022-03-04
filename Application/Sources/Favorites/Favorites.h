@@ -55,16 +55,11 @@ OBJC_EXPORT NSOrderedSet<NSString *> * _Nonnull FavoritesShowURNs(void);
  */
 OBJC_EXPORT BOOL FavoritesToggleSubscriptionForShow(SRGShow * _Nonnull show);
 
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-
 /**
- *  Force Favorites to synchronize subscribed shows at any time.
+ *  Synchronize subscribed favorite shows.
  *
- *  @discussion Needs to be called after the Push Service setup.
  */
-OBJC_EXPORT void FavoritesForcePushServiceUpdate(void);
-
-#endif
+OBJC_EXPORT void FavoritesUpdatePushService(void);
 
 #endif
 

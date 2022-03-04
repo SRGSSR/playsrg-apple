@@ -152,14 +152,14 @@ static void *s_kvoContext = &s_kvoContext;
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels");
     
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    if (PushService.sharedService) {
-        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-            FavoritesForcePushServiceUpdate();
-            completionHandler(YES);
-        }, @"MigrateSubscribedShows");
-    }
-#endif
+    FavoritesUpdatePushService();
+    
+    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferencesDomain]) {
+            FavoritesUpdatePushService();
+        }
+    }];
     
     return YES;
 }
