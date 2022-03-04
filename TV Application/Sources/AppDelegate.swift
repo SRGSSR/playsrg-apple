@@ -34,7 +34,7 @@ extension AppDelegate: UIApplicationDelegate {
         PlayApplicationRunOnce({ completionHandler -> Void in
             PlayFirebaseConfiguration.clearCache()
             completionHandler(true)
-        }, "FirebaseConfigurationReset", nil)
+        }, "FirebaseConfigurationReset")
         
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             FirebaseApp.configure()
