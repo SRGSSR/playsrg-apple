@@ -428,6 +428,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsCopyDeviceInformationButton]) {
         NSMutableArray<NSString *> *deviceInformationComponents = [NSMutableArray array];
         
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
+        
         NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
         
