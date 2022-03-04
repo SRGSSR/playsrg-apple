@@ -152,6 +152,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     return URNs.copy;
 }
 
+- (NSString *)deviceToken
+{
+    return UAirship.push.deviceToken;
+}
+
 - (NSString *)airshipIdentifier
 {
     return UAirship.channel.identifier;

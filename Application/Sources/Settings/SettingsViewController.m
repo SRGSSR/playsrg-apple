@@ -437,7 +437,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
         
-        NSString *deviceToken = ApplicationSettingDeviceToken() ?: @"None";
+        NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
         
         NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];

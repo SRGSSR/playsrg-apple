@@ -180,12 +180,6 @@ static void *s_kvoContext = &s_kvoContext;
     [PushService.sharedService updateApplicationBadge];
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    NSString *deviceTokenString = [UAUtils deviceTokenStringFromDeviceToken:deviceToken];
-    ApplicationSettingSetDeviceToken(deviceTokenString);
-}
-
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
