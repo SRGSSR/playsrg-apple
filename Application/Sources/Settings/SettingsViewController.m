@@ -19,6 +19,7 @@
 #import "Onboarding.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
+#import "PushService+Private.h"
 #import "UIApplication+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -435,6 +436,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         
         NSString *deviceToken = ApplicationSettingDeviceToken() ?: @"None";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
+        
+        NSString *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects componentsJoinedByString:@","];
+        [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
         
         UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
