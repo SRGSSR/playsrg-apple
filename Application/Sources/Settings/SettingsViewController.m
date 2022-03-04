@@ -444,6 +444,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed show URNs: %@", subscribedShowURNs]];
         
         [deviceInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
+        if (SRGIdentityService.currentIdentityService) {
+            [deviceInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
+        }
         
         UIPasteboard.generalPasteboard.string = [deviceInformationComponents componentsJoinedByString:@"\n"];
         [Banner showWithStyle:BannerStyleInfo
