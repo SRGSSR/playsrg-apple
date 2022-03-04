@@ -1689,7 +1689,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             completionHandler(YES);
         }]];
         [self presentViewController:alertController animated:YES completion:nil];
-    }, @"DisableAutoplayAsked", nil);
+    }, @"DisableAutoplayAsked");
     
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
     labels.source = AnalyticsSourceButton;
@@ -2411,7 +2411,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             }]];
             
             [topViewController presentViewController:alertController animated:YES completion:nil];
-        }, @"BackgroundVideoPlaybackAsked", nil);
+        }, @"BackgroundVideoPlaybackAsked");
     }
     self.shouldDisplayBackgroundVideoPlaybackPrompt = NO;
 }

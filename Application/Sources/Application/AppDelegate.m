@@ -58,7 +58,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
-    }, @"FirebaseConfigurationReset", nil);
+    }, @"FirebaseConfigurationReset");
     
     // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename
@@ -132,7 +132,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         firstLaunchDone = NO;
         completionHandler(YES);
-    }, @"FirstLaunchDone", nil);
+    }, @"FirstLaunchDone");
     
     [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
@@ -140,7 +140,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
-    }, @"ClearVectorImageCache2", nil);
+    }, @"ClearVectorImageCache2");
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -150,14 +150,14 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults removeObjectForKey:previousKey];
         [userDefaults synchronize];
         completionHandler(YES);
-    }, @"MigrateSelectedLiveStreamURNForChannels", nil);
+    }, @"MigrateSelectedLiveStreamURNForChannels");
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     if (PushService.sharedService) {
         PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
             FavoritesForcePushServiceUpdate();
             completionHandler(YES);
-        }, @"MigrateSubscribedShows", nil);
+        }, @"MigrateSubscribedShows");
     }
 #endif
     
