@@ -69,7 +69,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (Nightly #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_schemes[index]} (#{platform} Nightly #{build_number}) uploaded and distributed. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -142,7 +142,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (Beta #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_schemes[index]} (#{platform} Beta #{build_number}) uploaded and distributed. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -297,27 +297,27 @@ platform :ios do
 
   desc 'SWI: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :swiAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play SWI')
+    testflight_appstore_upload(platform: 'iOS', scheme: 'Play SWI')
   end
 
   desc 'SRF: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :srfAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play SRF')
+    testflight_appstore_upload(platform: 'iOS', scheme: 'Play SRF')
   end
 
   desc 'RTS: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rtsAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RTS')
+    testflight_appstore_upload(platform: 'iOS', scheme: 'Play RTS')
   end
 
   desc 'RSI: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rsiAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RSI')
+    testflight_appstore_upload(platform: 'iOS', scheme: 'Play RSI')
   end
 
   desc 'RTR: Uploads a new iOS build on AppStore Connect with the current build number.'
   lane :rtrAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RTR')
+    testflight_appstore_upload(platform: 'iOS', scheme: 'Play RTR')
   end
 
   # Individual latest iOS dSYMs uploads
@@ -393,27 +393,27 @@ platform :ios do
 
   desc 'SWI: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSswiAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play SWI TV')
+    testflight_appstore_upload(platform: 'tvOS', scheme: 'Play SWI TV')
   end
 
   desc 'SRF: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSsrfAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play SRF TV')
+    testflight_appstore_upload(platform: 'tvOS', scheme: 'Play SRF TV')
   end
 
   desc 'RTS: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrtsAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RTS TV')
+    testflight_appstore_upload(platform: 'tvOS', scheme: 'Play RTS TV')
   end
 
   desc 'RSI: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrsiAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RSI TV')
+    testflight_appstore_upload(platform: 'tvOS', scheme: 'Play RSI TV')
   end
 
   desc 'RTR: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSrtrAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RTR TV')
+    testflight_appstore_upload(platform: 'tvOS', scheme: 'Play RTR TV')
   end
 
   # Individual latest tvOS dSYMs uploads
@@ -475,7 +475,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) uploaded. ✅"
     end
 
     changelog = nightly_changelog(platform, service)
@@ -486,12 +486,12 @@ platform :ios do
 
       pilot_distribute(app_identifier, platform, build_number, changelog)
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_nightly_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) dSYM file OK. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -510,7 +510,7 @@ platform :ios do
       app_identifier = appstore_beta_identifiers[index]
 
       can_upload = can_upload_testflight_build(app_identifier, platform, build_number)
-      UI.message("#{schemes[index]} (Beta #{build_number}) already uploaded 🔁 ✅") unless can_upload
+      UI.message("#{schemes[index]} (#{platform} Beta #{build_number}) already uploaded 🔁 ✅") unless can_upload
       next unless can_upload
 
       build_lane(
@@ -526,7 +526,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) uploaded. ✅"
     end
 
     changelog = what_s_new_for_beta(platform)
@@ -537,41 +537,45 @@ platform :ios do
 
       pilot_distribute(app_identifier, platform, build_number, changelog)
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_beta_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) dSYM file OK. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Builds a new prod build on AppStore Connect with the current build number and uploads it.'
-  private_lane :testflight_prod do |options|
-    options[:platform] ||= 'iOS'
-    build_number = xcode_build_number(options[:platform])
+  desc 'Builds a new AppStore build on AppStore Connect with the current build number and and skips build processing.'
+  private_lane :testflight_appstore_upload do |options|
+    platform = options[:platform] || 'iOS'
+    scheme = options[:scheme]
 
-    can_upload = can_upload_testflight_build(nil, options[:platform], build_number)
-    UI.message("#{options[:scheme]} (#{options[:platform]}) #{build_number} already uploaded 🔁 ✅") unless can_upload
+    UI.important('A scheme option is required to build an AppStore buid. Skipping build. ⚠️') unless scheme
+    next unless scheme
+
+    notify_build_number_to_ci(platform, nil)
+
+    build_number = xcode_build_number(platform)
+
+    can_upload = can_upload_testflight_build(nil, platform, build_number)
+    UI.message("#{scheme} (#{platform} AppStore #{build_number}) already uploaded 🔁 ✅") unless can_upload
     next unless can_upload
 
     build_lane(
       configuration: 'AppStore',
-      scheme: options[:scheme],
-      platform: options[:platform],
+      scheme: scheme,
+      platform: platform,
       export_to_appstore: true
     )
 
-    login_with_app_store_connect_api_key
-    pilot(
-      app_platform: appstore_platform(options[:platform]),
-      skip_waiting_for_build_processing: true
-    )
-    UI.message("#{options[:scheme]} (#{options[:platform]}) #{build_number} uploaded ✅")
+    pilot_fast_upload(nil, platform)
 
     clean_build_artifacts
+
+    UI.message("#{scheme} (#{platform} AppStore #{build_number}) uploaded ✅")
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1004,6 +1008,9 @@ def login_with_app_store_connect_api_key
 end
 
 def pilot_fast_upload(app_identifier, platform)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
+  platform ||= 'iOS'
+
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
   login_with_app_store_connect_api_key
