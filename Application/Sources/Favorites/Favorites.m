@@ -9,12 +9,8 @@
 #import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
-#import "PushService+Private.h"
-
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import "NSSet+PlaySRG.h"
-#endif
-
+#import "PushService+Private.h"
 #endif
 
 @import libextobjc;
