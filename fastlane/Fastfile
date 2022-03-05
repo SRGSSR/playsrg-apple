@@ -1015,7 +1015,7 @@ def pilot_distribute(app_identifier, platform, build_number, changelog)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
-  UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
+  UI.important('Another build is already in TestFlight app review. Skipping external distribution. ⚠️')
 end
 
 def srg_pilot_distribute(app_identifier, platform, build_number, changelog)
