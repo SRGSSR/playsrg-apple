@@ -76,16 +76,16 @@ Sends latest iOS beta dSYMs to App Center. Optional 'build_number', 'version' or
 fastlane ios betaTester
 ```
 Add a beta TestFlight tester (email required)
-### ios appStoreUploads
+### ios iOSappStoreUploads
 ```
-fastlane ios appStoreUploads
+fastlane ios iOSappStoreUploads
 ```
-Uploads a new iOS build on AppStore Connect with the current build number.
-### ios dSYMs
+Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSdSYMs
 ```
-fastlane ios dSYMs
+fastlane ios iOSdSYMs
 ```
-Sends latest iOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest iOS AppStore dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios tvOSappStoreUploads
 ```
 fastlane ios tvOSappStoreUploads
@@ -96,81 +96,81 @@ Uploads a new tvOS build on AppStore Connect with the current build number.
 fastlane ios tvOSdSYMs
 ```
 Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
-### ios swiScreenshots
+### ios iOSswiScreenshots
 ```
-fastlane ios swiScreenshots
+fastlane ios iOSswiScreenshots
 ```
 SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios srfScreenshots
+### ios iOSsrfScreenshots
 ```
-fastlane ios srfScreenshots
+fastlane ios iOSsrfScreenshots
 ```
 SRF: Makes iOS screenshots.
-### ios rtsScreenshots
+### ios iOSrtsScreenshots
 ```
-fastlane ios rtsScreenshots
+fastlane ios iOSrtsScreenshots
 ```
 RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios rsiScreenshots
+### ios iOSrsiScreenshots
 ```
-fastlane ios rsiScreenshots
+fastlane ios iOSrsiScreenshots
 ```
 RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios rtrScreenshots
+### ios iOSrtrScreenshots
 ```
-fastlane ios rtrScreenshots
+fastlane ios iOSrtrScreenshots
 ```
 RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios swiAppStoreUpload
+### ios iOSswiAppStoreUpload
 ```
-fastlane ios swiAppStoreUpload
+fastlane ios iOSswiAppStoreUpload
 ```
-SWI: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios srfAppStoreUpload
+SWI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSsrfAppStoreUpload
 ```
-fastlane ios srfAppStoreUpload
+fastlane ios iOSsrfAppStoreUpload
 ```
-SRF: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rtsAppStoreUpload
+SRF: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSrtsAppStoreUpload
 ```
-fastlane ios rtsAppStoreUpload
+fastlane ios iOSrtsAppStoreUpload
 ```
-RTS: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rsiAppStoreUpload
+RTS: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSrsiAppStoreUpload
 ```
-fastlane ios rsiAppStoreUpload
+fastlane ios iOSrsiAppStoreUpload
 ```
-RSI: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rtrAppStoreUpload
+RSI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSrtrAppStoreUpload
 ```
-fastlane ios rtrAppStoreUpload
+fastlane ios iOSrtrAppStoreUpload
 ```
-RTR: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios swiDSYMs
+RTR: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSswiDSYMs
 ```
-fastlane ios swiDSYMs
+fastlane ios iOSswiDSYMs
 ```
-SWI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios srfDSYMs
+SWI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios iOSsrfDSYMs
 ```
-fastlane ios srfDSYMs
+fastlane ios iOSsrfDSYMs
 ```
-SFR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rtsDSYMs
+SFR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios iOSrtsDSYMs
 ```
-fastlane ios rtsDSYMs
+fastlane ios iOSrtsDSYMs
 ```
-RTS: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rsiDSYMs
+RTS: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios iOSrsiDSYMs
 ```
-fastlane ios rsiDSYMs
+fastlane ios iOSrsiDSYMs
 ```
-RSI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rtrDSYMs
+RSI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+### ios iOSrtrDSYMs
 ```
-fastlane ios rtrDSYMs
+fastlane ios iOSrtrDSYMs
 ```
-RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
+RTR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
 ### ios tvOSswiScreenshots
 ```
 fastlane ios tvOSswiScreenshots

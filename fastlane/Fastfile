@@ -189,21 +189,21 @@ platform :ios do
 
   # Prods
 
-  desc 'Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :appStoreUploads do
+  desc 'Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSappStoreUploads do
     platform = 'iOS'
 
     notify_build_number_to_ci(platform, nil)
 
-    sh 'bundle exec fastlane ios swiAppStoreUpload'
-    sh 'bundle exec fastlane ios srfAppStoreUpload'
-    sh 'bundle exec fastlane ios rtsAppStoreUpload'
-    sh 'bundle exec fastlane ios rsiAppStoreUpload'
-    sh 'bundle exec fastlane ios rtrAppStoreUpload'
+    sh 'bundle exec fastlane ios iOSswiAppStoreUpload'
+    sh 'bundle exec fastlane ios iOSsrfAppStoreUpload'
+    sh 'bundle exec fastlane ios iOSrtsAppStoreUpload'
+    sh 'bundle exec fastlane ios iOSrsiAppStoreUpload'
+    sh 'bundle exec fastlane ios iOSrtrAppStoreUpload'
   end
 
-  desc 'Sends latest iOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
-  lane :dSYMs do |options|
+  desc 'Sends latest iOS AppStore dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  lane :iOSdSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
     build_number = options[:build_number]
@@ -213,11 +213,11 @@ platform :ios do
     options += " version:#{version}" if version
     options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios swiDSYMs#{options}"
-    sh "bundle exec fastlane ios srfDSYMs#{options}"
-    sh "bundle exec fastlane ios rtsDSYMs#{options}"
-    sh "bundle exec fastlane ios rsiDSYMs#{options}"
-    sh "bundle exec fastlane ios rtrDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSswiDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSsrfDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrtsDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrsiDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrtrDSYMs#{options}"
   end
 
   desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
@@ -254,7 +254,7 @@ platform :ios do
   # Individual iOS screenshots
 
   desc 'SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :swiScreenshots do
+  lane :iOSswiScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'Play SWI screenshots', ['en-US'])
@@ -262,7 +262,7 @@ platform :ios do
   end
 
   desc 'SRF: Makes iOS screenshots.'
-  lane :srfScreenshots do
+  lane :iOSsrfScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'Play SRF screenshots', ['de-DE'])
@@ -270,7 +270,7 @@ platform :ios do
   end
 
   desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rtsScreenshots do
+  lane :iOSrtsScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
@@ -278,7 +278,7 @@ platform :ios do
   end
 
   desc 'RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rsiScreenshots do
+  lane :iOSrsiScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'Play RSI screenshots', ['it'])
@@ -286,7 +286,7 @@ platform :ios do
   end
 
   desc 'RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rtrScreenshots do
+  lane :iOSrtrScreenshots do
     platform = 'iOS'
 
     screenshots(platform, 'Play RTR screenshots', ['de-DE'])
@@ -295,55 +295,55 @@ platform :ios do
 
   # Individual iOS build uploads
 
-  desc 'SWI: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :swiAppStoreUpload do
+  desc 'SWI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSswiAppStoreUpload do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play SWI')
   end
 
-  desc 'SRF: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :srfAppStoreUpload do
+  desc 'SRF: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSsrfAppStoreUpload do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play SRF')
   end
 
-  desc 'RTS: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rtsAppStoreUpload do
+  desc 'RTS: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSrtsAppStoreUpload do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play RTS')
   end
 
-  desc 'RSI: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rsiAppStoreUpload do
+  desc 'RSI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSrsiAppStoreUpload do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play RSI')
   end
 
-  desc 'RTR: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rtrAppStoreUpload do
+  desc 'RTR: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
+  lane :iOSrtrAppStoreUpload do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play RTR')
   end
 
   # Individual latest iOS dSYMs uploads
 
-  desc 'SWI: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :swiDSYMs do |options|
+  desc 'SWI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
+  lane :iOSswiDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :srfDSYMs do |options|
+  desc 'SFR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
+  lane :iOSsrfDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rtsDSYMs do |options|
+  desc 'RTS: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
+  lane :iOSrtsDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RSI: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rsiDSYMs do |options|
+  desc 'RSI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
+  lane :iOSrsiDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rtrDSYMs do |options|
+  desc 'RTR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
+  lane :iOSrtrDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
