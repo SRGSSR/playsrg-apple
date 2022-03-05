@@ -206,10 +206,12 @@ platform :ios do
   lane :dSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
+    build_number = options[:build_number]
 
     options = ''
     options += " min_version:#{min_version}" if min_version
     options += " version:#{version}" if version
+    options += " build_number:#{build_number}" if build_number
 
     sh "bundle exec fastlane ios swiDSYMs#{options}"
     sh "bundle exec fastlane ios srfDSYMs#{options}"
@@ -235,10 +237,12 @@ platform :ios do
   lane :tvOSdSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
+    build_number = options[:build_number]
 
     options = ''
     options += " min_version:#{min_version}" if min_version
     options += " version:#{version}" if version
+    options += " build_number:#{build_number}" if build_number
 
     sh "bundle exec fastlane ios tvOSswiDSYMs#{options}"
     sh "bundle exec fastlane ios tvOSsrfDSYMs#{options}"
