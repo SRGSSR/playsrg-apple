@@ -81,6 +81,11 @@ Add a beta TestFlight tester (email required)
 fastlane ios iOSappStoreUploads
 ```
 Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSAppStoreDistributePrivateBetas
+```
+fastlane ios iOSAppStoreDistributePrivateBetas
+```
+Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
 ### ios iOSdSYMs
 ```
 fastlane ios iOSdSYMs
@@ -91,6 +96,11 @@ Sends latest iOS AppStore dSYMs to App Center. Optional 'build_number', 'version
 fastlane ios tvOSappStoreUploads
 ```
 Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSAppStoreDistributePrivateBetas
+```
+fastlane ios tvOSAppStoreDistributePrivateBetas
+```
+Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
 ### ios tvOSdSYMs
 ```
 fastlane ios tvOSdSYMs
@@ -146,6 +156,31 @@ RSI: Uploads a new iOS AppStore build on AppStore Connect with the current build
 fastlane ios iOSrtrAppStoreUpload
 ```
 RTR: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+### ios iOSswiAppStoreDistributePrivateBeta
+```
+fastlane ios iOSswiAppStoreDistributePrivateBeta
+```
+SWI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+### ios iOSsrfAppStoreDistributePrivateBeta
+```
+fastlane ios iOSsrfAppStoreDistributePrivateBeta
+```
+SRF: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+### ios iOSrtsAppStoreDistributePrivateBeta
+```
+fastlane ios iOSrtsAppStoreDistributePrivateBeta
+```
+RTS: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+### ios iOSrsiAppStoreDistributePrivateBeta
+```
+fastlane ios iOSrsiAppStoreDistributePrivateBeta
+```
+RSI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+### ios iOSrtrAppStoreDistributePrivateBeta
+```
+fastlane ios iOSrtrAppStoreDistributePrivateBeta
+```
+RTR: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
 ### ios iOSswiDSYMs
 ```
 fastlane ios iOSswiDSYMs
@@ -221,6 +256,31 @@ RSI: Uploads a new tvOS build on AppStore Connect with the current build number.
 fastlane ios tvOSrtrAppStoreUpload
 ```
 RTR: Uploads a new tvOS build on AppStore Connect with the current build number.
+### ios tvOSswiAppStoreDistributePrivateBeta
+```
+fastlane ios tvOSswiAppStoreDistributePrivateBeta
+```
+SWI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+### ios tvOSsrfAppStoreDistributePrivateBeta
+```
+fastlane ios tvOSsrfAppStoreDistributePrivateBeta
+```
+SRF: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+### ios tvOSrtsAppStoreDistributePrivateBeta
+```
+fastlane ios tvOSrtsAppStoreDistributePrivateBeta
+```
+RTS: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+### ios tvOSrsiAppStoreDistributePrivateBeta
+```
+fastlane ios tvOSrsiAppStoreDistributePrivateBeta
+```
+RSI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+### ios tvOSrtrAppStoreDistributePrivateBeta
+```
+fastlane ios tvOSrtrAppStoreDistributePrivateBeta
+```
+RTR: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
 ### ios tvOSswiDSYMs
 ```
 fastlane ios tvOSswiDSYMs

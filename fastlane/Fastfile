@@ -22,7 +22,7 @@ platform :ios do
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 
     # For betas, before all, check if we have a beta release description
-    if lane.to_s.downcase.include?('betas')
+    if lane.to_s.downcase.include?('beta')
       what_s_new = what_s_new_for_beta(platform)
       if what_s_new.empty?
         UI.user_error!("Whoops, WhatsNew-#{platform}-beta.json has no release note for #{tag_version(platform)}.")
@@ -187,7 +187,7 @@ platform :ios do
     )
   end
 
-  # Prods
+  # AppStore builds
 
   desc 'Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
   lane :iOSappStoreUploads do
@@ -200,6 +200,19 @@ platform :ios do
     sh 'bundle exec fastlane ios iOSrtsAppStoreUpload'
     sh 'bundle exec fastlane ios iOSrsiAppStoreUpload'
     sh 'bundle exec fastlane ios iOSrtrAppStoreUpload'
+  end
+
+  desc 'Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSAppStoreDistributePrivateBetas do
+    platform = 'iOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios iOSswiAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios iOSsrfAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios iOSrtsAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios iOSrsiAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios iOSrtrAppStoreDistributePrivateBeta'
   end
 
   desc 'Sends latest iOS AppStore dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -231,6 +244,19 @@ platform :ios do
     sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
     sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
     sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
+  end
+
+  desc 'Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSAppStoreDistributePrivateBetas do
+    platform = 'tvOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios tvOSswiAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios tvOSsrfAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios tvOSrtsAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios tvOSrsiAppStoreDistributePrivateBeta'
+    sh 'bundle exec fastlane ios tvOSrtrAppStoreDistributePrivateBeta'
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -293,7 +319,7 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  # Individual iOS build uploads
+  # Individual iOS Appstore build uploads
 
   desc 'SWI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.'
   lane :iOSswiAppStoreUpload do
@@ -320,7 +346,34 @@ platform :ios do
     testflight_appstore_upload(platform: 'iOS', scheme: 'Play RTR')
   end
 
-  # Individual latest iOS dSYMs uploads
+  # Individual iOS Appstore build private distributions
+
+  desc 'SWI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSswiAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play SWI')
+  end
+
+  desc 'SRF: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSsrfAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play SRF')
+  end
+
+  desc 'RTS: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSrtsAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play RTS')
+  end
+
+  desc 'RSI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSrsiAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play RSI')
+  end
+
+  desc 'RTR: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :iOSrtrAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play RTR')
+  end
+
+  # Individual iOS AppStore build dSYMs uploads
 
   desc 'SWI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as \'dSYMs\'.'
   lane :iOSswiDSYMs do |options|
@@ -389,7 +442,7 @@ platform :ios do
     upload_screenshots(platform)
   end
 
-  # Individual tvOS build uploads
+  # Individual tvOS AppStore build uploads
 
   desc 'SWI: Uploads a new tvOS build on AppStore Connect with the current build number.'
   lane :tvOSswiAppStoreUpload do
@@ -416,7 +469,34 @@ platform :ios do
     testflight_appstore_upload(platform: 'tvOS', scheme: 'Play RTR TV')
   end
 
-  # Individual latest tvOS dSYMs uploads
+  # Individual tvOS Appstore build private distributions
+
+  desc 'SWI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSswiAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play SWI TV')
+  end
+
+  desc 'SRF: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSsrfAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play SRF TV')
+  end
+
+  desc 'RTS: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSrtsAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play RTS TV')
+  end
+
+  desc 'RSI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSrsiAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play RSI TV')
+  end
+
+  desc 'RTR: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.'
+  lane :tvOSrtrAppStoreDistributePrivateBeta do
+    testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play RTR TV')
+  end
+
+  # Individual tvOS AppStore build dSYMs uploads
 
   desc 'SWI: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
   lane :tvOSswiDSYMs do |options|
@@ -576,6 +656,23 @@ platform :ios do
     clean_build_artifacts
 
     UI.message("#{scheme} (#{platform} AppStore #{build_number}) uploaded ✅")
+  end
+
+  desc 'Distribute the AppStore build on AppStore Connect with the current build number to private group.'
+  private_lane :testflight_appstore_distribute_private_beta do |options|
+    platform = options[:platform] || 'iOS'
+    scheme = options[:scheme]
+
+    UI.important('A scheme option is required to build an AppStore buid. Skipping build. ⚠️') unless scheme
+    next unless scheme
+
+    notify_build_number_to_ci(platform, nil)
+
+    build_number = xcode_build_number(platform)
+    changelog = what_s_new_for_beta(platform)
+    pilot_distribute(nil, platform, build_number, changelog)
+
+    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to private group. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1022,6 +1119,10 @@ def pilot_fast_upload(app_identifier, platform)
 end
 
 def pilot_distribute(app_identifier, platform, build_number, changelog)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
+  platform ||= 'iOS'
+  build_number ||= xcode_build_number(platform)
+
   srg_pilot_distribute(app_identifier, platform, build_number, changelog)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
