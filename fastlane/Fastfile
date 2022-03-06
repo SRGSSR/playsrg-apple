@@ -110,7 +110,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_nightly_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
     )
   end
 
@@ -183,7 +183,7 @@ platform :ios do
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_beta_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
     )
   end
 
@@ -213,6 +213,19 @@ platform :ios do
     sh 'bundle exec fastlane ios iOSrtsAppStoreDistributePrivateBeta'
     sh 'bundle exec fastlane ios iOSrsiAppStoreDistributePrivateBeta'
     sh 'bundle exec fastlane ios iOSrtrAppStoreDistributePrivateBeta'
+  end
+
+  desc 'Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSAppStoreDistributePublicBetas do
+    platform = 'iOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios iOSswiAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios iOSsrfAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios iOSrtsAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios iOSrsiAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios iOSrtrAppStoreDistributePublicBeta'
   end
 
   desc 'Sends latest iOS AppStore dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -257,6 +270,19 @@ platform :ios do
     sh 'bundle exec fastlane ios tvOSrtsAppStoreDistributePrivateBeta'
     sh 'bundle exec fastlane ios tvOSrsiAppStoreDistributePrivateBeta'
     sh 'bundle exec fastlane ios tvOSrtrAppStoreDistributePrivateBeta'
+  end
+
+  desc 'Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSAppStoreDistributePublicBetas do
+    platform = 'tvOS'
+
+    notify_build_number_to_ci(platform, nil)
+
+    sh 'bundle exec fastlane ios tvOSswiAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios tvOSsrfAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios tvOSrtsAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios tvOSrsiAppStoreDistributePublicBeta'
+    sh 'bundle exec fastlane ios tvOSrtrAppStoreDistributePublicBeta'
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -371,6 +397,33 @@ platform :ios do
   desc 'RTR: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.'
   lane :iOSrtrAppStoreDistributePrivateBeta do
     testflight_appstore_distribute_private_beta(platform: 'iOS', scheme: 'Play RTR')
+  end
+
+  # Individual iOS Appstore build public distributions
+
+  desc 'SWI: Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSswiAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'iOS', scheme: 'Play SWI')
+  end
+
+  desc 'SRF: Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSsrfAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'iOS', scheme: 'Play SRF')
+  end
+
+  desc 'RTS: Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSrtsAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'iOS', scheme: 'Play RTS')
+  end
+
+  desc 'RSI: Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSrsiAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'iOS', scheme: 'Play RSI')
+  end
+
+  desc 'RTR: Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :iOSrtrAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'iOS', scheme: 'Play RTR')
   end
 
   # Individual iOS AppStore build dSYMs uploads
@@ -496,6 +549,29 @@ platform :ios do
     testflight_appstore_distribute_private_beta(platform: 'tvOS', scheme: 'Play RTR TV')
   end
 
+  # Individual tvOS Appstore build public distributions
+
+  desc 'SWI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSswiAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'tvOS', scheme: 'Play SWI TV')
+  end
+  desc 'SRF: Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSsrfAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'tvOS', scheme: 'Play SRF TV')
+  end
+  desc 'RTS: Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSrtsAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'tvOS', scheme: 'Play RTS TV')
+  end
+  desc 'RSI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSrsiAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'tvOS', scheme: 'Play RSI TV')
+  end
+  desc 'RTR: Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.'
+  lane :tvOSrtrAppStoreDistributePublicBeta do
+    testflight_appstore_distribute_public_beta(platform: 'tvOS', scheme: 'Play RTR TV')
+  end
+
   # Individual tvOS AppStore build dSYMs uploads
 
   desc 'SWI: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
@@ -564,7 +640,7 @@ platform :ios do
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog)
+      pilot_distribute(app_identifier, platform, build_number, changelog, false)
 
       UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) distributed. ✅"
 
@@ -615,7 +691,7 @@ platform :ios do
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog)
+      pilot_distribute(app_identifier, platform, build_number, changelog, false)
 
       UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) distributed. ✅"
 
@@ -663,16 +739,33 @@ platform :ios do
     platform = options[:platform] || 'iOS'
     scheme = options[:scheme]
 
-    UI.important('A scheme option is required to build an AppStore buid. Skipping build. ⚠️') unless scheme
+    UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
     next unless scheme
 
     notify_build_number_to_ci(platform, nil)
 
     build_number = xcode_build_number(platform)
     changelog = what_s_new_for_beta(platform)
-    pilot_distribute(nil, platform, build_number, changelog)
+    pilot_distribute(nil, platform, build_number, changelog, false)
 
-    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to private group. ✅"
+    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to private beta group. ✅"
+  end
+
+  desc 'Distribute the AppStore build on AppStore Connect with the current build number to public group.'
+  private_lane :testflight_appstore_distribute_public_beta do |options|
+    platform = options[:platform] || 'iOS'
+    scheme = options[:scheme]
+
+    UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
+    next unless scheme
+
+    notify_build_number_to_ci(platform, nil)
+
+    build_number = xcode_build_number(platform)
+    changelog = what_s_new_for_beta(platform)
+    pilot_distribute(nil, platform, build_number, changelog, true)
+
+    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to public beta group. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -743,7 +836,7 @@ platform :ios do
     UI.message("Preparing invitations to #{email}. 📩")
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
-    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TF_GROUPS']
 
     spaceship_login
 
@@ -1118,19 +1211,22 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, build_number, changelog)
+def pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
   build_number ||= xcode_build_number(platform)
+  is_public_beta ||= false
 
-  srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+  srg_pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
   UI.important('Another build is already in TestFlight app review. Skipping external distribution. ⚠️')
 end
 
-def srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+def srg_pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
+  groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
+
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1139,7 +1235,7 @@ def srg_pilot_distribute(app_identifier, platform, build_number, changelog)
     build_number: build_number,
     changelog: changelog,
     distribute_external: true,
-    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    groups: groups,
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
