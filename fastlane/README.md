@@ -86,6 +86,11 @@ Uploads a new iOS AppStore build on AppStore Connect with the current build numb
 fastlane ios iOSAppStoreDistributePrivateBetas
 ```
 Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+### ios iOSAppStoreDistributePublicBetas
+```
+fastlane ios iOSAppStoreDistributePublicBetas
+```
+Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.
 ### ios iOSdSYMs
 ```
 fastlane ios iOSdSYMs
@@ -101,6 +106,11 @@ Uploads a new tvOS build on AppStore Connect with the current build number.
 fastlane ios tvOSAppStoreDistributePrivateBetas
 ```
 Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+### ios tvOSAppStoreDistributePublicBetas
+```
+fastlane ios tvOSAppStoreDistributePublicBetas
+```
+Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.
 ### ios tvOSdSYMs
 ```
 fastlane ios tvOSdSYMs
@@ -115,7 +125,7 @@ SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ```
 fastlane ios iOSsrfScreenshots
 ```
-SRF: Makes iOS screenshots.
+SRF: Makes iOS screenshots. !!! No replacements on AppStoreConnect done !!!
 ### ios iOSrtsScreenshots
 ```
 fastlane ios iOSrtsScreenshots
@@ -135,77 +145,102 @@ RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ```
 fastlane ios iOSswiAppStoreUpload
 ```
-SWI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+SWI only: See 'iOSAppStoreUploads' lane.
 ### ios iOSsrfAppStoreUpload
 ```
 fastlane ios iOSsrfAppStoreUpload
 ```
-SRF: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+SRF only: See 'iOSAppStoreUploads' lane.
 ### ios iOSrtsAppStoreUpload
 ```
 fastlane ios iOSrtsAppStoreUpload
 ```
-RTS: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+RTS only: See 'iOSAppStoreUploads' lane.
 ### ios iOSrsiAppStoreUpload
 ```
 fastlane ios iOSrsiAppStoreUpload
 ```
-RSI: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+RSI only: See 'iOSAppStoreUploads' lane.
 ### ios iOSrtrAppStoreUpload
 ```
 fastlane ios iOSrtrAppStoreUpload
 ```
-RTR: Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+RTR only: See 'iOSAppStoreUploads' lane.
 ### ios iOSswiAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSswiAppStoreDistributePrivateBeta
 ```
-SWI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+SWI only: See 'iOSAppStoreDistributePrivateBetas' lane.
 ### ios iOSsrfAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSsrfAppStoreDistributePrivateBeta
 ```
-SRF: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+SRF only: See 'iOSAppStoreDistributePrivateBetas' lane.
 ### ios iOSrtsAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSrtsAppStoreDistributePrivateBeta
 ```
-RTS: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+RTS only: See 'iOSAppStoreDistributePrivateBetas' lane.
 ### ios iOSrsiAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSrsiAppStoreDistributePrivateBeta
 ```
-RSI: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+RSI only: See 'iOSAppStoreDistributePrivateBetas' lane.
 ### ios iOSrtrAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSrtrAppStoreDistributePrivateBeta
 ```
-RTR: Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+RTR only: See 'iOSAppStoreDistributePrivateBetas' lane.
+### ios iOSswiAppStoreDistributePublicBeta
+```
+fastlane ios iOSswiAppStoreDistributePublicBeta
+```
+SWI only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSsrfAppStoreDistributePublicBeta
+```
+fastlane ios iOSsrfAppStoreDistributePublicBeta
+```
+SRF only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSrtsAppStoreDistributePublicBeta
+```
+fastlane ios iOSrtsAppStoreDistributePublicBeta
+```
+RTS only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSrsiAppStoreDistributePublicBeta
+```
+fastlane ios iOSrsiAppStoreDistributePublicBeta
+```
+RSI only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSrtrAppStoreDistributePublicBeta
+```
+fastlane ios iOSrtrAppStoreDistributePublicBeta
+```
+RTR only: See 'iOSAppStoreDistributePublicBeta' lane.
 ### ios iOSswiDSYMs
 ```
 fastlane ios iOSswiDSYMs
 ```
-SWI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+SWI only: See 'iOSDSYMs' lane.
 ### ios iOSsrfDSYMs
 ```
 fastlane ios iOSsrfDSYMs
 ```
-SFR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+SFR only: See 'iOSDSYMs' lane.
 ### ios iOSrtsDSYMs
 ```
 fastlane ios iOSrtsDSYMs
 ```
-RTS: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+RTS only: See 'iOSDSYMs' lane.
 ### ios iOSrsiDSYMs
 ```
 fastlane ios iOSrsiDSYMs
 ```
-RSI: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+RSI only: See 'iOSDSYMs' lane.
 ### ios iOSrtrDSYMs
 ```
 fastlane ios iOSrtrDSYMs
 ```
-RTR: Sends latest iOS AppStore dSYMs to App Center, with same parameters as 'dSYMs'.
+RTR only: See 'iOSDSYMs' lane.
 ### ios tvOSswiScreenshots
 ```
 fastlane ios tvOSswiScreenshots
@@ -235,77 +270,102 @@ RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ```
 fastlane ios tvOSswiAppStoreUpload
 ```
-SWI: Uploads a new tvOS build on AppStore Connect with the current build number.
+SWI only: See 'tvOSAppStoreUploads' lane.
 ### ios tvOSsrfAppStoreUpload
 ```
 fastlane ios tvOSsrfAppStoreUpload
 ```
-SRF: Uploads a new tvOS build on AppStore Connect with the current build number.
+SRF only: See 'tvOSAppStoreUploads' lane.
 ### ios tvOSrtsAppStoreUpload
 ```
 fastlane ios tvOSrtsAppStoreUpload
 ```
-RTS: Uploads a new tvOS build on AppStore Connect with the current build number.
+RTS only: See 'tvOSAppStoreUploads' lane.
 ### ios tvOSrsiAppStoreUpload
 ```
 fastlane ios tvOSrsiAppStoreUpload
 ```
-RSI: Uploads a new tvOS build on AppStore Connect with the current build number.
+RSI only: See 'tvOSAppStoreUploads' lane.
 ### ios tvOSrtrAppStoreUpload
 ```
 fastlane ios tvOSrtrAppStoreUpload
 ```
-RTR: Uploads a new tvOS build on AppStore Connect with the current build number.
+RTR only: See 'tvOSAppStoreUploads' lane.
 ### ios tvOSswiAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSswiAppStoreDistributePrivateBeta
 ```
-SWI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+SWI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 ### ios tvOSsrfAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSsrfAppStoreDistributePrivateBeta
 ```
-SRF: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+SRF only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 ### ios tvOSrtsAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSrtsAppStoreDistributePrivateBeta
 ```
-RTS: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+RTS only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 ### ios tvOSrsiAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSrsiAppStoreDistributePrivateBeta
 ```
-RSI: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+RSI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 ### ios tvOSrtrAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSrtrAppStoreDistributePrivateBeta
 ```
-RTR: Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+RTR only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+### ios tvOSswiAppStoreDistributePublicBeta
+```
+fastlane ios tvOSswiAppStoreDistributePublicBeta
+```
+SWI only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSsrfAppStoreDistributePublicBeta
+```
+fastlane ios tvOSsrfAppStoreDistributePublicBeta
+```
+SRF only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSrtsAppStoreDistributePublicBeta
+```
+fastlane ios tvOSrtsAppStoreDistributePublicBeta
+```
+RTS only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSrsiAppStoreDistributePublicBeta
+```
+fastlane ios tvOSrsiAppStoreDistributePublicBeta
+```
+RSI only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSrtrAppStoreDistributePublicBeta
+```
+fastlane ios tvOSrtrAppStoreDistributePublicBeta
+```
+RTR only: See 'tvOSAppStoreDistributePublicBetas' lane.
 ### ios tvOSswiDSYMs
 ```
 fastlane ios tvOSswiDSYMs
 ```
-SWI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+SWI only: See 'tvOSDSYMs' lane.
 ### ios tvOSsrfDSYMs
 ```
 fastlane ios tvOSsrfDSYMs
 ```
-SFR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+SFR only: See 'tvOSDSYMs' lane.
 ### ios tvOSrtsDSYMs
 ```
 fastlane ios tvOSrtsDSYMs
 ```
-RTS: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+RTS only: See 'tvOSDSYMs' lane.
 ### ios tvOSrsiDSYMs
 ```
 fastlane ios tvOSrsiDSYMs
 ```
-RSI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+RSI only: See 'tvOSDSYMs' lane.
 ### ios tvOSrtrDSYMs
 ```
 fastlane ios tvOSrtrDSYMs
 ```
-RTR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+RTR only: See 'tvOSDSYMs' lane.
 
 ----
 
