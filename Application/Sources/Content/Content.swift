@@ -36,8 +36,11 @@ enum Content {
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
         
-        @available(tvOS, unavailable)
+#if os(iOS)
+        case download(_ download: Download)
+        
         case showAccess(radioChannel: RadioChannel?)
+#endif
         
         case transparent
         
@@ -49,7 +52,13 @@ enum Content {
                 return show.title
             case let .topic(topic):
                 return topic.title
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess, .transparent:
+#if os(iOS)
+            case let .download(download):
+                return download.title
+            case .showAccess:
+                return nil
+#endif
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .transparent:
                 return nil
             }
         }
@@ -441,6 +450,8 @@ private extension Content {
         
         var title: String? {
             switch configuredSection {
+            case .downloads:
+                return NSLocalizedString("Downloads", comment: "Label to present downloads")
             case .history:
                 return NSLocalizedString("History", comment: "Title label used to present the history")
             case .radioAllShows, .tvAllShows:
@@ -488,7 +499,7 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .downloads, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -514,6 +525,8 @@ private extension Content {
         
         var emptyType: EmptyView.`Type` {
             switch configuredSection {
+            case .downloads:
+                return .downloads
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows
             case .radioLatestEpisodes:
@@ -543,6 +556,8 @@ private extension Content {
             switch configuredSection {
             case let .show(show):
                 return show.title
+            case .downloads:
+                return AnalyticsPageTitle.downloads.rawValue
             case .history:
                 return AnalyticsPageTitle.history.rawValue
             case .radioAllShows, .tvAllShows:
@@ -611,7 +626,7 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
                 return nil
-            case .favoriteShows, .history, .watchLater:
+            case .downloads, .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
             }
         }
@@ -638,6 +653,17 @@ private extension Content {
                 return dataProvider.latestMediasForShow(withUrn: show.urn, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
+            case .downloads:
+#if os(iOS)
+                return Just(Download.downloads)
+                    .map { $0.map { .download($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+#else
+                return Just([])
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+#endif
             case .favoriteShows:
                 return dataProvider.favoritesPublisher(filter: nil)
                     .map { $0.map { .show($0) } }

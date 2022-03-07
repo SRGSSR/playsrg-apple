@@ -392,6 +392,10 @@ extension SectionViewController {
         return SectionViewController(section: .content(contentSection))
     }
     
+    @objc static func downloadsViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.downloads))
+    }
+    
     @objc static func favoriteShowsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.favoriteShows))
     }
@@ -689,8 +693,10 @@ private extension SectionViewController {
                         ShowCell(show: show, style: .standard, imageVariant: imageVariant)
                     }
                 }
-            case let .topic(topic: topic):
+            case let .topic(topic):
                 TopicCell(topic: topic)
+            case let .download(download):
+                Color.red
             case .transparent:
                 Color.clear
             default:

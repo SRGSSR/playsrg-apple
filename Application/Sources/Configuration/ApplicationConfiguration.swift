@@ -38,6 +38,7 @@ enum ConfiguredSection: Hashable {
     case show(SRGShow)
     
     case favoriteShows
+    case downloads
     case history
     case watchLater
     

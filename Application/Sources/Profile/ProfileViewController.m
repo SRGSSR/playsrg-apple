@@ -216,7 +216,7 @@
         }
             
         case ApplicationSectionDownloads: {
-            viewController = [[DownloadsViewController alloc] init];
+            viewController = [SectionViewController downloadsViewController];
             break;
         }
             

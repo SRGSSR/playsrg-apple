@@ -26,6 +26,8 @@ struct EmptyView: View {
     
     private func imageName(for type: `Type`) -> String {
         switch type {
+        case .downloads:
+            return "download-background"
         case .episodesFromFavorites, .favoriteShows:
             return "favorite-background"
         case .generic:
@@ -41,6 +43,8 @@ struct EmptyView: View {
     
     private func emptyTitle(for type: `Type`) -> String {
         switch type {
+        case .downloads:
+            return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
         case .favoriteShows:
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
@@ -93,6 +97,7 @@ extension EmptyView {
     }
     
     enum `Type`: Hashable {
+        case downloads
         case episodesFromFavorites
         case favoriteShows
         case generic
@@ -120,16 +125,21 @@ struct EmptyView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            EmptyView(state: .loading)
-            EmptyView(state: .empty(type: .episodesFromFavorites))
-            EmptyView(state: .empty(type: .favoriteShows))
-            EmptyView(state: .empty(type: .generic))
-            EmptyView(state: .empty(type: .history))
-            EmptyView(state: .empty(type: .resumePlayback))
-            EmptyView(state: .empty(type: .search))
-            EmptyView(state: .empty(type: .searchTutorial))
-            EmptyView(state: .empty(type: .watchLater))
-            EmptyView(state: .failed(error: PreviewError.kernel32))
+            Group {
+                EmptyView(state: .loading)
+                EmptyView(state: .empty(type: .downloads))
+                EmptyView(state: .empty(type: .episodesFromFavorites))
+                EmptyView(state: .empty(type: .favoriteShows))
+                EmptyView(state: .empty(type: .generic))
+                EmptyView(state: .empty(type: .history))
+            }
+            Group {
+                EmptyView(state: .empty(type: .resumePlayback))
+                EmptyView(state: .empty(type: .search))
+                EmptyView(state: .empty(type: .searchTutorial))
+                EmptyView(state: .empty(type: .watchLater))
+                EmptyView(state: .failed(error: PreviewError.kernel32))
+            }
         }
         .previewLayout(.fixed(width: 400, height: 400))
     }

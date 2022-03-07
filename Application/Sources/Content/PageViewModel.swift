@@ -223,9 +223,9 @@ extension PageViewModel {
         case showGrid
         case showSwimlane
         case topicSelector
-        
-        @available(tvOS, unavailable)
+#if os(iOS)
         case showAccess
+#endif
     }
     
     struct Section: Hashable {
@@ -419,7 +419,7 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .downloads, .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
             case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane

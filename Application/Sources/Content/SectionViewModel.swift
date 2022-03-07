@@ -360,7 +360,7 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .downloads, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
