@@ -100,8 +100,8 @@ struct DownloadCell: View {
                     .srgFont(.H4)
                     .lineLimit(2)
                     .foregroundColor(.srgGray96)
-                if let size = model.size {
-                    Text(size)
+                if let subtitle = model.subtitle {
+                    Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(1)
                         .foregroundColor(.srgGrayC7)

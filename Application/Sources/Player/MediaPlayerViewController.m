@@ -1264,7 +1264,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     Download *download = [Download downloadForMedia:media];
     switch (download.state) {
         case DownloadStateAdded:
-        case DownloadStateDownloadingSuspended:{
+        case DownloadStateDownloadingSuspended: {
             [self.downloadButton.imageView stopAnimating];
             [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
