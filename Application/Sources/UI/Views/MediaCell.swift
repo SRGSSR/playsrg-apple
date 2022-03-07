@@ -128,12 +128,12 @@ struct MediaCell: View {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
-                        .foregroundColor(Color.srgGray96)
+                        .foregroundColor(.srgGray96)
                 }
                 Text(title)
                     .srgFont(.H4)
                     .lineLimit(2)
-                    .foregroundColor(Color.srgGrayC7)
+                    .foregroundColor(.srgGrayC7)
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

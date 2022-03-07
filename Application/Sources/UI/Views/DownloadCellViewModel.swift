@@ -11,16 +11,12 @@ import Combine
 final class DownloadCellViewModel: ObservableObject {
     @Published var download: Download?
     
-    var title: String {
-        return download?.title ?? .placeholder(length: 10)
+    var title: String? {
+        return download?.title
     }
     
     var size: String? {
         guard let size = download?.size else { return nil }
         return ByteCountFormatter.string(fromByteCount: size, countStyle: .file)
-    }
-    
-    var imageUrl: URL? {
-        return download?.media?.imageUrl(for: .small) ?? download?.imageUrl(for: .small)
     }
 }
