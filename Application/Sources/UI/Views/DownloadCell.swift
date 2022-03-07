@@ -16,7 +16,9 @@ struct DownloadCell: View {
         case adaptive
     }
     
-    let download: Download?
+    @Binding private(set) var download: Download?
+    @StateObject private var model = DownloadCellViewModel()
+    
     let layout: Layout
     
     @Environment(\.isEditing) private var isEditing
@@ -33,26 +35,23 @@ struct DownloadCell: View {
         }
     }
     
-    private var title: String {
-        return download?.title ?? .placeholder(length: 10)
-    }
-    
-    private var size: String? {
-        guard let size = download?.size else { return nil }
-        return ByteCountFormatter.string(fromByteCount: size, countStyle: .file)
-    }
-    
     init(download: Download?, layout: Layout = .adaptive) {
-        self.download = download
+        _download = .constant(download)
         self.layout = layout
     }
     
     var body: some View {
         Stack(direction: direction) {
-            Text(title)
-            if let size = size {
+            Text(model.title)
+            if let size = model.size {
                 Text(size)
             }
+        }
+        .onAppear {
+            model.download = download
+        }
+        .onChange(of: download) { newValue in
+            model.download = newValue
         }
     }
 }
