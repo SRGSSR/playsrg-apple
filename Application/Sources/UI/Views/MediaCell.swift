@@ -29,7 +29,7 @@ struct MediaCell: View {
     @Environment(\.isSelected) private var isSelected
     
 #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
     
     private var direction: StackDirection {

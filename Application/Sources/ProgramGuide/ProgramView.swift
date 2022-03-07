@@ -133,7 +133,7 @@ struct ProgramView: View {
     // Behavior: h-exp, v-hug
     private struct ActionsView: View {
         @ObservedObject var model: ProgramViewModel
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
         
         static let buttonHeight: CGFloat = 40
         

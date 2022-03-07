@@ -51,7 +51,7 @@ struct ProgramGuideHeaderView: View {
         @ObservedObject var model: ProgramGuideViewModel
         
 #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
         
         private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 70)
