@@ -50,12 +50,12 @@ Add a nightly TestFlight tester (email required)
 ```
 fastlane ios betas
 ```
-Builds a new iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+Builds an iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios tvOSbetas
 ```
 fastlane ios tvOSbetas
 ```
-Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+Builds a tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios tvOSbetaDSYMs
 ```
 fastlane ios tvOSbetaDSYMs
@@ -65,7 +65,7 @@ Sends latest tvOS beta dSYMs to App Center. Optional 'build_number', 'version' o
 ```
 fastlane ios iOSbetas
 ```
-Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+Builds an iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios iOSbetaDSYMs
 ```
 fastlane ios iOSbetaDSYMs
@@ -80,17 +80,17 @@ Add a beta TestFlight tester (email required)
 ```
 fastlane ios iOSappStoreUploads
 ```
-Uploads a new iOS AppStore build on AppStore Connect with the current build number.
+Uploads an iOS AppStore build on AppStore Connect with the current build number.
 ### ios iOSAppStoreDistributePrivateBetas
 ```
 fastlane ios iOSAppStoreDistributePrivateBetas
 ```
-Distribute the iOS AppStore build on AppStore Connect with the current build number to private group.
+Distribute to private groups an iOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios iOSAppStoreDistributePublicBetas
 ```
 fastlane ios iOSAppStoreDistributePublicBetas
 ```
-Distribute the iOS AppStore build on AppStore Connect with the current build number to public group.
+Distribute to public groups an iOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios iOSdSYMs
 ```
 fastlane ios iOSdSYMs
@@ -100,17 +100,17 @@ Sends latest iOS AppStore dSYMs to App Center. Optional 'build_number', 'version
 ```
 fastlane ios tvOSappStoreUploads
 ```
-Uploads a new tvOS build on AppStore Connect with the current build number.
+Uploads a tvOS build on AppStore Connect with the current build number.
 ### ios tvOSAppStoreDistributePrivateBetas
 ```
 fastlane ios tvOSAppStoreDistributePrivateBetas
 ```
-Distribute the tvOS AppStore build on AppStore Connect with the current build number to private group.
+Distribute to private groups a tvOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios tvOSAppStoreDistributePublicBetas
 ```
 fastlane ios tvOSAppStoreDistributePublicBetas
 ```
-Distribute the tvOS AppStore build on AppStore Connect with the current build number to public group.
+Distribute to public groups a tvOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios tvOSdSYMs
 ```
 fastlane ios tvOSdSYMs
