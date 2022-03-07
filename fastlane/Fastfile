@@ -46,11 +46,13 @@ platform :ios do
     service = 'AppCenter'
 
     build_number = latest_appcenter_build_number(appcenter_nightly_names)
-    build_number = xcode_override_build_number(platform, build_number + 1)
+    xcode_override_build_number(platform, build_number + 1)
+
+    tag_version = tag_version(platform)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nil, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
 
     ios_schemes.each_index do |index|
       build_lane(
@@ -70,7 +72,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (#{platform} Nightly #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_schemes[index]} (#{platform} Nightly #{tag_version}) uploaded and distributed. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -121,9 +123,9 @@ platform :ios do
   lane :betas do
     platform = 'iOS'
 
-    notify_build_number_to_ci(platform, nil, nil)
+    notify_version_to_ci(platform, nil, nil)
 
-    build_number = xcode_build_number(platform)
+    tag_version = tag_version(platform)
 
     ios_schemes.each_index do |index|
       build_lane(
@@ -143,7 +145,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (#{platform} Beta #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -644,11 +646,13 @@ platform :ios do
     service = 'TestFlight'
 
     build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
-    build_number = xcode_override_build_number(platform, build_number + 1)
+    xcode_override_build_number(platform, build_number + 1)
+
+    tag_version = tag_version(platform)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nil, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
 
     schemes = schemes(platform)
     schemes.each_index do |index|
@@ -668,23 +672,23 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) uploaded. ✅"
     end
 
     changelog = nightly_changelog(platform, service)
-    dsyms_options = { build_number: build_number }
+    dsyms_options = { build_number: build_number_from_tag_version(tag_version) }
 
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog, false)
+      pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_nightly_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) dSYM file OK. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -694,16 +698,16 @@ platform :ios do
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
-    notify_build_number_to_ci(platform, nil, nil)
+    notify_version_to_ci(platform, nil, nil)
 
-    build_number = xcode_build_number(platform)
+    tag_version = tag_version(platform)
 
     schemes = schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      can_upload = can_upload_testflight_build(app_identifier, platform, build_number)
-      UI.message("#{schemes[index]} (#{platform} Beta #{build_number}) already uploaded 🔁 ✅") unless can_upload
+      can_upload = can_upload_testflight_build(app_identifier, platform, tag_version)
+      UI.message("#{schemes[index]} (#{platform} Beta #{tag_version}) already uploaded 🔁 ✅") unless can_upload
       next unless can_upload
 
       build_lane(
@@ -719,23 +723,23 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) uploaded. ✅"
     end
 
     changelog = what_s_new_for_beta(platform, nil)
-    dsyms_options = { build_number: build_number }
+    dsyms_options = { build_number: build_number_from_tag_version(tag_version) }
 
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog, false)
+      pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_beta_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) dSYM file OK. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -749,12 +753,12 @@ platform :ios do
     UI.important('A scheme option is required to build an AppStore buid. Skipping build. ⚠️') unless scheme
     next unless scheme
 
-    notify_build_number_to_ci(platform, nil, nil)
+    notify_version_to_ci(platform, nil, nil)
 
-    build_number = xcode_build_number(platform)
+    tag_version = tag_version(platform)
 
-    can_upload = can_upload_testflight_build(nil, platform, build_number)
-    UI.message("#{scheme} (#{platform} AppStore #{build_number}) already uploaded 🔁 ✅") unless can_upload
+    can_upload = can_upload_testflight_build(nil, platform, tag_version)
+    UI.message("#{scheme} (#{platform} AppStore #{tag_version}) already uploaded 🔁 ✅") unless can_upload
     next unless can_upload
 
     build_lane(
@@ -768,7 +772,7 @@ platform :ios do
 
     clean_build_artifacts
 
-    UI.message("#{scheme} (#{platform} AppStore #{build_number}) uploaded ✅")
+    UI.message("#{scheme} (#{platform} AppStore #{tag_version}) uploaded ✅")
   end
 
   desc 'Distribute the AppStore build on AppStore Connect with the current build number to private group.'
@@ -780,13 +784,12 @@ platform :ios do
     UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
     next unless scheme
 
-    notify_build_number_to_ci(platform, tag_version, nil)
+    notify_version_to_ci(platform, tag_version, nil)
 
-    build_number = build_number_from_tag_version(tag_version)
     changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, build_number, changelog, false)
+    pilot_distribute(nil, platform, tag_version, changelog, false)
 
-    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to private beta group. ✅"
+    UI.message "#{scheme} (#{platform} AppStore #{tag_version}) distributed to private beta group. ✅"
   end
 
   desc 'Distribute the AppStore build on AppStore Connect with the current build number to public group.'
@@ -798,13 +801,12 @@ platform :ios do
     UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
     next unless scheme
 
-    notify_build_number_to_ci(platform, tag_version, nil)
+    notify_version_to_ci(platform, tag_version, nil)
 
-    build_number = build_number_from_tag_version(tag_version)
     changelog = what_s_new_for_beta(platform, tag_version)
-    pilot_distribute(nil, platform, build_number, changelog, true)
+    pilot_distribute(nil, platform, tag_version, changelog, true)
 
-    UI.message "#{scheme} (#{platform} AppStore #{build_number}) distributed to public beta group. ✅"
+    UI.message "#{scheme} (#{platform} AppStore #{tag_version}) distributed to public beta group. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -1069,12 +1071,16 @@ def tag_version(platform)
   "#{xcode_marketing_version(platform)}-#{xcode_build_number(platform)}"
 end
 
+def srg_tag(platform)
+  "#{platform.downcase}/#{tag_version(platform)}"
+end
+
 def build_number_from_tag_version(tag_version)
   tag_version.split('-').last
 end
 
-def srg_tag(platform)
-  "#{platform.downcase}/#{tag_version(platform)}"
+def marketing_version_from_tag_version(tag_version)
+  tag_version.split('-').first
 end
 
 # Returns the what's new text from WhatsNew-beta.json file in the repository
@@ -1254,20 +1260,20 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
+def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
-  build_number ||= xcode_build_number(platform)
+  tag_version ||= tag_version(platform)
   is_public_beta ||= false
 
-  srg_pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
+  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
   UI.important('Another build is already in TestFlight app review. Skipping external distribution. ⚠️')
 end
 
-def srg_pilot_distribute(app_identifier, platform, build_number, changelog, is_public_beta)
+def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
   groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
 
   login_with_app_store_connect_api_key
@@ -1275,7 +1281,8 @@ def srg_pilot_distribute(app_identifier, platform, build_number, changelog, is_p
     distribute_only: true,
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
-    build_number: build_number,
+    app_version: marketing_version_from_tag_version(tag_version),
+    build_number: build_number_from_tag_version(tag_version),
     changelog: changelog,
     distribute_external: true,
     groups: groups,
@@ -1328,7 +1335,7 @@ def upload_appcenter_dsyms(appcenter_appname)
 end
 
 # Share build version and number to the continuous integration
-def notify_build_number_to_ci(platform, tag_version, build_name)
+def notify_version_to_ci(platform, tag_version, build_name)
   return unless ENV['TEAMCITY_VERSION']
 
   tag_version ||= tag_version(platform)
@@ -1400,10 +1407,11 @@ def upload_screenshots(platform)
   )
 end
 
-def can_upload_testflight_build(app_identifier, platform, build_number)
+def can_upload_testflight_build(app_identifier, platform, tag_version)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
-  build_number ||= xcode_build_number(platform)
+  tag_version ||= tag_version(platform)
+  build_number = build_number_from_tag_version(tag_version)
 
   login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(
