@@ -529,6 +529,9 @@
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Kopiert.";
 
+/* Information message displayed when the device information has been copied to the pasteboard by the user */
+"The device information has been copied to the pasteboard" = "The device information has been copied to the pasteboard";
+
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Der heruntergeladene Inhalt wird gelöscht.";
 
