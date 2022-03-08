@@ -275,7 +275,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
     
-    NSArray<NSString *> *subscribedShowURNs = PushService.sharedService.subscribedShowURNs.allObjects;
+    NSArray<NSString *> *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects sortedArrayUsingSelector:@selector(compare:)];
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"Subscribed URNs: %@", (subscribedShowURNs.count != 0) ? [subscribedShowURNs componentsJoinedByString:@","] : @"None"]];
     
     return [deviceInformationComponents componentsJoinedByString:@"\n"];
