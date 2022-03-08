@@ -10,7 +10,7 @@ import Combine
 
 final class DownloadCellViewModel: ObservableObject {
     @Published var download: Download?
-    @Published private var state: State = .unknown
+    @Published private(set) var state: State = .unknown
     
     var title: String? {
         return download?.title
@@ -48,7 +48,7 @@ final class DownloadCellViewModel: ObservableObject {
 
 // MARK: Types
 
-private extension DownloadCellViewModel {
+extension DownloadCellViewModel {
     // TODO: Provides a common state merging both download-related notification streams. The download service should probably
     //       be improved to deliver a single update stream, but for the moment it is simpler to do the consolidation here.
     enum State {
@@ -61,7 +61,7 @@ private extension DownloadCellViewModel {
         case downloaded
     }
     
-    static func progress(for download: Download?) -> Progress {
+    private static func progress(for download: Download?) -> Progress {
         if let download = download, let progress = Download.currentlyKnownProgress(for: download) {
             return progress
         }
@@ -71,7 +71,7 @@ private extension DownloadCellViewModel {
         }
     }
     
-    static func state(from downloadState: DownloadState, for download: Download?) -> State {
+    private static func state(from downloadState: DownloadState, for download: Download?) -> State {
         switch downloadState {
         case .added:
             return .added

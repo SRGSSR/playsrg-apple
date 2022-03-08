@@ -95,20 +95,40 @@ struct DownloadCell: View {
         }
         
         var body: some View {
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 Text(title)
                     .srgFont(.H4)
                     .lineLimit(2)
-                    .foregroundColor(.srgGray96)
-                if let subtitle = model.subtitle {
-                    Text(subtitle)
-                        .srgFont(.subtitle1)
-                        .lineLimit(1)
-                        .foregroundColor(.srgGrayC7)
-                        .layoutPriority(1)
+                HStack {
+                    Icon(model: model)
+                    if let subtitle = model.subtitle {
+                        Text(subtitle)
+                            .srgFont(.subtitle1)
+                            .lineLimit(1)
+                            .foregroundColor(.srgGrayC7)
+                            .layoutPriority(1)
+                    }
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        }
+    }
+    
+    /// Behavior: h-hug, v-hug
+    private struct Icon: View {
+        @ObservedObject var model: DownloadCellViewModel
+        
+        var body: some View {
+            switch model.state {
+            case .added, .suspended, .unknown:
+                Image(decorative: "downloadable_stop")
+            case .downloading:
+                Image(decorative: "downloadable")
+            case .downloaded:
+                Image(decorative: "downloadable_full")
+            case .downloadable, .removed:
+                Image(decorative: "downloadable")
+            }
         }
     }
 }
@@ -117,6 +137,21 @@ struct DownloadCell: View {
 
 final class DownloadCellSize: NSObject {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    private static let defaultItemWidth: CGFloat = 210
+    private static let heightOffset: CGFloat = 70
+    
+    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
+    }
+    
+    @objc static func fullWidth() -> NSCollectionLayoutSize {
+        return fullWidth(itemHeight: 84)
+    }
+    
+    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
+    }
 }
 
 // MARK: Preview
