@@ -212,3 +212,19 @@ enum UserDataPublishers {
         .eraseToAnyPublisher()
     }
 }
+
+#if DEBUG
+extension Publisher {
+    /**
+     *  Dump values passing through the pipeline.
+     *
+     *  Borrowed from https://peterfriese.dev/posts/swiftui-combine-custom-operators/
+     */
+    func dump() -> AnyPublisher<Output, Failure> {
+        handleEvents(receiveOutput: { value in
+            Swift.dump(value)
+        })
+        .eraseToAnyPublisher()
+    }
+}
+#endif
