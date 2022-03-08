@@ -221,6 +221,7 @@ extension SectionViewModel {
         case mediaGrid
         case showGrid
         case topicGrid
+        case downloadGrid
     }
     
     enum TriggerId {
@@ -360,7 +361,7 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .downloads, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
@@ -368,6 +369,8 @@ private extension SectionViewModel {
                 return .showGrid
             case .radioShowAccess:
                 return .mediaGrid
+            case .downloads:
+                return .downloadGrid
             }
         }
         
