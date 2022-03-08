@@ -30,6 +30,21 @@
     return [self play_animatedImageViewNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
++ (UIImageView *)play_smallDownloadingImageViewWithTintColor:(UIColor *)tintColor;
+{
+    return [self play_animatedImageViewNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
+}
+
++ (UIImageView *)play_downloadingImageViewWithTintColor:(UIColor *)tintColor
+{
+    return [self play_animatedImageViewNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
+}
+
++ (UIImageView *)play_largeDownloadingImageViewWithTintColor:(UIColor *)tintColor
+{
+    return [self play_animatedImageViewNamed:@"downloading_animation-large" withTintColor:tintColor duration:1.];
+}
+
 // Expect a sequence of images named "name-N", where N must begin at 0. Stops when no image is found for some N
 + (UIImageView *)play_animatedImageViewNamed:(NSString *)name withTintColor:(UIColor *)tintColor duration:(NSTimeInterval)duration
 {

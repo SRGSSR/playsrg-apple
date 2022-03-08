@@ -19,6 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImageView *)play_largeLoadingImageViewWithTintColor:(nullable UIColor *)tintColor;
 
 /**
+ *  Standard download animations (animation already started).
+ */
++ (UIImageView *)play_smallDownloadingImageViewWithTintColor:(nullable UIColor *)tintColor;
++ (UIImageView *)play_downloadingImageViewWithTintColor:(nullable UIColor *)tintColor;
++ (UIImageView *)play_largeDownloadingImageViewWithTintColor:(nullable UIColor *)tintColor;
+
+/**
  *  Standard loading animations (must be managed with `-startAnimating` and `-stopAnimating`).
  */
 - (void)play_setLargeLoadingAnimationWithTintColor:(nullable UIColor *)tintColor;

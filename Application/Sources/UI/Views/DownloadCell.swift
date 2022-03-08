@@ -123,11 +123,29 @@ struct DownloadCell: View {
             case .added, .suspended, .unknown:
                 Image(decorative: "downloadable_stop")
             case .downloading:
-                Image(decorative: "downloadable")
+                AnimatedDownloadIcon()
             case .downloaded:
                 Image(decorative: "downloadable_full")
             case .downloadable, .removed:
                 Image(decorative: "downloadable")
+            }
+        }
+    }
+    
+    /// Behavior: h-hug, v-hug
+    private struct AnimatedDownloadIcon: View {
+        var body: some View {
+            DownloadImageView()
+                .frame(width: 16, height: 16)
+        }
+        
+        private struct DownloadImageView: UIViewRepresentable {
+            func makeUIView(context: Context) -> UIImageView {
+                return UIImageView.play_smallDownloadingImageView(withTintColor: .srgGrayC7)
+            }
+            
+            func updateUIView(_ uiView: UIImageView, context: Context) {
+                // No update logic required
             }
         }
     }
