@@ -221,7 +221,9 @@ extension SectionViewModel {
         case mediaGrid
         case showGrid
         case topicGrid
+#if os(iOS)
         case downloadGrid
+#endif
     }
     
     enum TriggerId {
@@ -370,7 +372,12 @@ private extension SectionViewModel {
             case .radioShowAccess:
                 return .mediaGrid
             case .downloads:
+#if os(iOS)
                 return .downloadGrid
+#else
+                // Not supported
+                return .mediaGrid
+#endif
             }
         }
         
