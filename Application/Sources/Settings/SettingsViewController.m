@@ -250,6 +250,8 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [deviceInformationComponents addObject:@"General information"];
     [deviceInformationComponents addObject:@"-------------------"];
     
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"App name: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
+    [deviceInformationComponents addObject:[NSString stringWithFormat:@"App identifier: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"]]];
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS: %@", UIDevice.currentDevice.systemName]];
     [deviceInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
