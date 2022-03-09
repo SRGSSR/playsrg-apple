@@ -318,6 +318,28 @@ final class SectionViewController: UIViewController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
                 navigationController.pushViewController(pageViewController, animated: true)
             }
+        case let .download(download):
+            if let media = download.media {
+                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+            else if download.state == .downloading {
+                Banner.show(
+                    with: .info,
+                    message: NSLocalizedString("Media is being downloaded", comment: "Message on top screen when trying to open a media in the download list and the media is being downloaded."),
+                    image: nil,
+                    sticky: false
+                )
+            }
+            else {
+                let error = NSError(
+                    domain: PlayErrorDomain,
+                    code: PlayErrorCode.notFound.rawValue,
+                    userInfo: [
+                        NSLocalizedDescriptionKey : NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
+                    ]
+                )
+                Banner.showError(error)
+            }
         default:
             ()
         }
