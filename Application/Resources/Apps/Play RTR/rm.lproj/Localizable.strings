@@ -529,8 +529,8 @@
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Il cuntegn è copià en communicaziuns.";
 
-/* Information message displayed when the device information has been copied to the pasteboard by the user */
-"The device information has been copied to the pasteboard" = "The device information has been copied to the pasteboard";
+/* Information message displayed when support information has been copied to the pasteboard by the user */
+"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Il cuntegn chargià vegn allontanà.";

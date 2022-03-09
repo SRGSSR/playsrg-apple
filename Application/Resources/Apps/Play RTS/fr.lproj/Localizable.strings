@@ -529,8 +529,8 @@
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Le contenu a été copié dans le presse-papier.";
 
-/* Information message displayed when the device information has been copied to the pasteboard by the user */
-"The device information has been copied to the pasteboard" = "Les informations de l'appareil ont été copiées dans le presse-papier.";
+/* Information message displayed when support information has been copied to the pasteboard by the user */
+"Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier.";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Le contenu téléchargé sera supprimé.";
