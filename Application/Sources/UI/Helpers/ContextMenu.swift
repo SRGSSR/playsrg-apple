@@ -19,6 +19,13 @@ enum ContextMenu {
             return configuration(for: media, identifier: identifier, in: viewController)
         case let .show(show):
             return configuration(for: show, identifier: identifier, in: viewController)
+        case let .download(download):
+            if let media = download.media {
+                return configuration(for: media, identifier: identifier, in: viewController)
+            }
+            else {
+                return nil
+            }
         default:
             return nil
         }
