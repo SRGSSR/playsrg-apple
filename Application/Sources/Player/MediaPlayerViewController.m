@@ -1994,7 +1994,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [Download addDownloadForMedia:media];
         }
         else {
-            [Download removeDownload:download];
+            [Download removeDownloads:@[download]];
         }
         
         [self updateDownloadStatus];
@@ -2006,7 +2006,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     };
     
-    if (!download) {
+    if (! download) {
         toggleDownload();
     }
     else {

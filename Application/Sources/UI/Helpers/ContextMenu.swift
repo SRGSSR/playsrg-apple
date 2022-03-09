@@ -195,7 +195,7 @@ extension ContextMenu {
         let menuAction = UIAction(title: title(for: download), image: image(for: download)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 if let download = download {
-                    Download.removeDownload(download)
+                    Download.removeDownloads([download])
                 }
                 else {
                     Download.add(for: media)

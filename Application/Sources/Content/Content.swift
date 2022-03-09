@@ -79,6 +79,17 @@ enum Content {
         }
     }
     
+    static func downloads(from items: [Content.Item]) -> [Download] {
+        return items.compactMap { item in
+            if case let .download(download) = item {
+                return download
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
     static func shows(from items: [Content.Item]) -> [SRGShow] {
         return items.compactMap { item in
             if case let .show(show) = item {
@@ -516,7 +527,7 @@ private extension Content {
         
         var supportsEdition: Bool {
             switch configuredSection {
-            case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
+            case .favoriteShows, .downloads, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
             default:
                 return false
@@ -767,6 +778,8 @@ private extension Content {
                 return UserInteractionSignal.historyUpdates()
             case .radioWatchLater, .watchLater:
                 return UserInteractionSignal.watchLaterUpdates()
+            case .downloads:
+                return UserInteractionSignal.downloadUpdates()
             default:
                 return Just([]).eraseToAnyPublisher()
             }
@@ -778,6 +791,8 @@ private extension Content {
                 return ThrottledSignal.preferenceUpdates()
             case .radioWatchLater, .watchLater:
                 return ThrottledSignal.watchLaterUpdates()
+            case .downloads:
+                return ThrottledSignal.downloadUpdates()
             case .radioLive:
                 return ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
             default:
@@ -795,6 +810,8 @@ private extension Content {
                 Content.removeFromWatchLater(items)
             case .history, .radioResumePlayback:
                 Content.removeFromHistory(items)
+            case .downloads:
+                Content.removeFromDownloads(items)
             default:
                 ()
             }
@@ -818,5 +835,10 @@ private extension Content {
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         HistoryRemoveMedias(medias) { _ in }
+    }
+    
+    static func removeFromDownloads(_ items: [Content.Item]) {
+        let downloads = Content.downloads(from: items)
+        Download.removeDownloads(downloads)
     }
 }

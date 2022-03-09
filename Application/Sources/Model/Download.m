@@ -8,6 +8,7 @@
 
 #import "DownloadSession.h"
 #import "NSDateFormatter+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "PlayErrors.h"
 #import "PlayLogger.h"
 #import "UIImage+PlaySRG.h"
@@ -287,6 +288,8 @@ static NSArray<Download *> *s_sortedDownloads;
             [self saveDownloadsDictionary];
             
             download.state = DownloadStateAdded;
+            
+            [UserInteractionEvent addToDownloads:@[download]];
         }
         
         if ([DownloadSession.sharedDownloadSession addDownload:download]) {
@@ -300,20 +303,24 @@ static NSArray<Download *> *s_sortedDownloads;
     }
 }
 
-+ (void)removeDownload:(Download *)download
++ (void)removeDownloads:(NSArray<Download *> *)downloads
 {
-    if (! download.URN || !s_downloadsDictionary[download.URN]) {
-        return;
+    for (Download *download in downloads) {
+        if (! download.URN || !s_downloadsDictionary[download.URN]) {
+            continue;
+        }
+        
+        [s_downloadsDictionary removeObjectForKey:download.URN];
+        [DownloadSession.sharedDownloadSession removeDownload:download];
+        [download removeLocalFiles];
+        
+        download.state = DownloadStateRemoved;
     }
     
-    [s_downloadsDictionary removeObjectForKey:download.URN];
-    [DownloadSession.sharedDownloadSession removeDownload:download];
-    [download removeLocalFiles];
     s_sortedDownloads = nil;            // Invalidate sorted download cache
-    
     [self saveDownloadsDictionary];
     
-    download.state = DownloadStateRemoved;
+    [UserInteractionEvent removeFromDownloads:downloads];
 }
 
 + (Download *)downloadForMedia:(SRGMedia *)media
@@ -352,6 +359,8 @@ static NSArray<Download *> *s_sortedDownloads;
     [downloads enumerateObjectsUsingBlock:^(Download * _Nonnull download, NSUInteger idx, BOOL * _Nonnull stop) {
         download.state = DownloadStateRemoved;
     }];
+    
+    [UserInteractionEvent removeFromDownloads:downloads];
 }
 
 + (void)removeUnusedDownloadedFilesInFolderPath:(NSString *)folderPath

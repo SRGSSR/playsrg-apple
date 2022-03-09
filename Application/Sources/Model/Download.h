@@ -158,9 +158,9 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 + (Download *)downloadForURN:(NSString *)URN;
 
 /**
- *  Remove an existing download (and associated files)
+ *  Remove a download list (and associated files)
  */
-+ (void)removeDownload:(Download *)download;
++ (void)removeDownloads:(NSArray<Download *> *)downloads;
 
 /**
  *  Remove all downlaods and associated files
