@@ -244,9 +244,9 @@
 			<key>Type</key>
 			<string>IASKButtonSpecifier</string>
 			<key>Title</key>
-			<string>Copy device information</string>
+			<string>Copy support information</string>
 			<key>Key</key>
-			<string>Button_CopyDeviceInformation</string>
+			<string>Button_CopySupportInformation</string>
 		</dict>
 		<dict>
 			<key>Type</key>
