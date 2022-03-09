@@ -2953,8 +2953,6 @@
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionRequestViewController.h; sourceTree = "<group>"; };
-		6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionRequestViewController.m; sourceTree = "<group>"; };
 		6F475F901EB37BC6003021EA /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		6F475F911EB37BC6003021EA /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		6F475F921EB37BC6003021EA /* ListRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRequestViewController.h; sourceTree = "<group>"; };
@@ -4544,8 +4542,6 @@
 			children = (
 				6F475F8C1EB37BC6003021EA /* BaseViewController.h */,
 				6F475F8D1EB37BC6003021EA /* BaseViewController.m */,
-				6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */,
-				6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */,
 				6F475F901EB37BC6003021EA /* DataViewController.h */,
 				6F475F911EB37BC6003021EA /* DataViewController.m */,
 				6F475F921EB37BC6003021EA /* ListRequestViewController.h */,
@@ -4554,7 +4550,6 @@
 				6F475F971EB37BC6003021EA /* NavigationController.m */,
 				6F475F991EB37BC6003021EA /* PageContainerViewController.h */,
 				6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */,
-				08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */,
 				6F475F9C1EB37BC6003021EA /* RequestViewController.h */,
 				6F475F9D1EB37BC6003021EA /* RequestViewController.m */,
 				6F0506E5245468EE0053253E /* SplitViewController.h */,
@@ -4813,6 +4808,7 @@
 				08669674273E63D0005AF2BA /* NowLineView.swift */,
 				6F2E160826A84ED200F3DC89 /* ProgramCell.swift */,
 				6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */,
+				08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */,
 				6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */,
 				6F362A8926A0706F00CBCC9D /* ProgramGuideDailyViewController.swift */,
 				6F362A8F26A089D100CBCC9D /* ProgramGuideDailyViewModel.swift */,
@@ -8663,7 +8659,6 @@
 				6F4760341EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
-				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6F8BE02727A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
@@ -8921,7 +8916,6 @@
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80D26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10C2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A426025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9126A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9161,7 +9155,6 @@
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80E26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10D2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A526025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9226A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9401,7 +9394,6 @@
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				6F16C80F26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10E2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A626025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9326A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9634,7 +9626,6 @@
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				6F16C81026025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10F2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A726025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9426A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
