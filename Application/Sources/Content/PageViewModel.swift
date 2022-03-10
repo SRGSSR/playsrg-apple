@@ -419,18 +419,17 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .downloads, .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return .mediaSwimlane
             case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
-            case .radioShowAccess:
 #if os(iOS)
-                return .showAccess
-#else
-                // Not supported
+            case .downloads:
                 return .mediaSwimlane
+            case .radioShowAccess:
+                return .showAccess
 #endif
             }
         }

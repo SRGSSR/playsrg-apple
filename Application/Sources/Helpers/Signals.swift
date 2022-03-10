@@ -97,6 +97,7 @@ enum ThrottledSignal {
             .eraseToAnyPublisher()
     }
     
+#if os(iOS)
     /**
      *  Emits a signal when downloads are updated.
      */
@@ -106,6 +107,7 @@ enum ThrottledSignal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
+#endif
 }
 
 // MARK: Signals for application events
@@ -258,6 +260,7 @@ enum UserInteractionSignal {
         notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
     }
     
+#if os(iOS)
     @objc static func addToDownloads(_ downloads: [Download]) {
         notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: true)
     }
@@ -265,4 +268,5 @@ enum UserInteractionSignal {
     @objc static func removeFromDownloads(_ downloads: [Download]) {
         notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: false)
     }
+#endif
 }

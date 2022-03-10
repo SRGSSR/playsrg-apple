@@ -169,7 +169,9 @@ extension SectionViewModel {
     
     enum Footer: Hashable {
         case none
+#if os(iOS)
         case diskInfo
+#endif
     }
     
     struct Section: Hashable, Indexable {
@@ -375,14 +377,11 @@ private extension SectionViewModel {
                 return .liveMediaGrid
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
+#if os(iOS)
             case .radioShowAccess:
                 return .mediaGrid
             case .downloads:
-#if os(iOS)
                 return .downloadGrid
-#else
-                // Not supported
-                return .mediaGrid
 #endif
             }
         }
@@ -439,8 +438,10 @@ private extension SectionViewModel {
                 return SectionViewModel.alphabeticalRows(from: items, smart: false)
             case let .show(show):
                 return SectionViewModel.consolidatedRows(with: items, header: .show(show))
+#if os(iOS)
             case .downloads:
                 return SectionViewModel.consolidatedRows(with: items, footer: .diskInfo)
+#endif
             default:
                 return SectionViewModel.consolidatedRows(with: items)
             }

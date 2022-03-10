@@ -78,6 +78,7 @@ struct DownloadCell: View {
                 .padding(.horizontal, horizontalPadding)
                 .padding(.top, verticalPadding)
         }
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
         .onAppear {
             model.download = download
         }
@@ -148,6 +149,32 @@ struct DownloadCell: View {
                 // No update logic required
             }
         }
+    }
+}
+
+// MARK: Accessibility
+
+extension DownloadCell {
+    var accessibilityLabel: String? {
+        guard let download = download else { return nil }
+        if let media = download.media {
+            return MediaDescription.accessibilityLabel(for: media)
+        }
+        else {
+            return download.title
+        }
+    }
+    
+    var accessibilityHint: String? {
+        return !isEditing ? PlaySRGAccessibilityLocalizedString("Plays the content.", comment: "Download cell hint") : PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Download cell hint in edit mode")
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+#if os(tvOS)
+        return .isButton
+#else
+        return isSelected ? .isSelected : []
+#endif
     }
 }
 

@@ -26,8 +26,6 @@ struct EmptyView: View {
     
     private func imageName(for type: `Type`) -> String {
         switch type {
-        case .downloads:
-            return "download-background"
         case .episodesFromFavorites, .favoriteShows:
             return "favorite-background"
         case .generic:
@@ -38,13 +36,15 @@ struct EmptyView: View {
             return "search-background"
         case .watchLater:
             return "watch_later-background"
+#if os(iOS)
+        case .downloads:
+            return "download-background"
+#endif
         }
     }
     
     private func emptyTitle(for type: `Type`) -> String {
         switch type {
-        case .downloads:
-            return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
         case .favoriteShows:
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
@@ -55,6 +55,10 @@ struct EmptyView: View {
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
         case .episodesFromFavorites, .generic, .resumePlayback, .watchLater:
             return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
+#if os(iOS)
+        case .downloads:
+            return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
+#endif
         }
     }
     
@@ -97,7 +101,6 @@ extension EmptyView {
     }
     
     enum `Type`: Hashable {
-        case downloads
         case episodesFromFavorites
         case favoriteShows
         case generic
@@ -106,6 +109,9 @@ extension EmptyView {
         case search
         case searchTutorial
         case watchLater
+#if os(iOS)
+        case downloads
+#endif
     }
 }
 
@@ -127,11 +133,13 @@ struct EmptyView_Previews: PreviewProvider {
         Group {
             Group {
                 EmptyView(state: .loading)
-                EmptyView(state: .empty(type: .downloads))
                 EmptyView(state: .empty(type: .episodesFromFavorites))
                 EmptyView(state: .empty(type: .favoriteShows))
                 EmptyView(state: .empty(type: .generic))
                 EmptyView(state: .empty(type: .history))
+#if os(iOS)
+                EmptyView(state: .empty(type: .downloads))
+#endif
             }
             Group {
                 EmptyView(state: .empty(type: .resumePlayback))

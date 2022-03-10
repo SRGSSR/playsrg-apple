@@ -38,7 +38,6 @@ enum ConfiguredSection: Hashable {
     case show(SRGShow)
     
     case favoriteShows
-    case downloads
     case history
     case watchLater
     
@@ -54,7 +53,6 @@ enum ConfiguredSection: Hashable {
     case radioLatestVideos(channelUid: String)
     case radioMostPopular(channelUid: String)
     case radioResumePlayback(channelUid: String)
-    case radioShowAccess(channelUid: String)
     case radioWatchLater(channelUid: String)
     
     case tvLive
@@ -63,4 +61,10 @@ enum ConfiguredSection: Hashable {
     
     case tvLiveCenter
     case tvScheduledLivestreams
+    
+#if os(iOS)
+    case downloads
+    case radioShowAccess(channelUid: String)
+#endif
+
 }

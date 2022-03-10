@@ -425,9 +425,11 @@ extension SectionViewController {
         return SectionViewController(section: .content(contentSection))
     }
     
+#if os(iOS)
     @objc static func downloadsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.downloads))
     }
+#endif
     
     @objc static func favoriteShowsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.favoriteShows))
@@ -811,8 +813,10 @@ private extension SectionViewController {
         
         var body: some View {
             switch section.footer {
+#if os(iOS)
             case .diskInfo:
                 DiskInfoFooterView()
+#endif
             case .none:
                 Color.clear
             }
@@ -820,8 +824,10 @@ private extension SectionViewController {
         
         static func size(section: SectionViewModel.Section) -> NSCollectionLayoutSize {
             switch section.footer {
+#if os(iOS)
             case .diskInfo:
                 return LayoutFullWidthCellSize(30)
+#endif
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
