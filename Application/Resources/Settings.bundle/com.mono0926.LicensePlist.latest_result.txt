@@ -155,7 +155,7 @@ name: Comscore-Swift-Package-Manager, nameSpecified: ComScore, owner: comScore, 
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.12.1, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 8.13.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FXReachability, nameSpecified: FXReachability, owner: SRGSSR, version: 1.3.2-srg5, source: https://github.com/SRGSSR/FXReachability
 
