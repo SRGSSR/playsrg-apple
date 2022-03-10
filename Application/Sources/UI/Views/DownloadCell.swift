@@ -198,13 +198,3 @@ final class DownloadCellSize: NSObject {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
     }
 }
-
-// MARK: Preview
-
-struct DownloadCell_Previews: PreviewProvider {
-    // TODO: We should be able to mock downloads
-    static var previews: some View {
-        DownloadCell(download: nil, layout: .vertical)
-        DownloadCell(download: nil, layout: .horizontal)
-    }
-}
