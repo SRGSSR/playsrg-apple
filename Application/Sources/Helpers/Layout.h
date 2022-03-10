@@ -28,6 +28,8 @@ OBJC_EXPORT const CGFloat LayoutHeaderHeightZero;
  *  Return the size of a cell whose content has the given width and aspect ratio, suited for display in swimlanes. A
  *  height offset can be provided if more space is required for displaying additional content.
  *
+ *  Scales with accessibility font size settings.
+ *
  *        ┌────────────────────────────────────┐
  *        │....................................│
  *        │....................................│
@@ -55,6 +57,8 @@ OBJC_EXPORT NSCollectionLayoutSize *LayoutSwimlaneCellSize(CGFloat width, CGFloa
  *
  *  As for `LayoutSwimlaneCellSize`, an aspect ratio must be provided, as well as a height offset is more
  *  space is required vertically.
+ *
+ *  Scales with accessibility font size settings.
  */
 OBJC_EXPORT NSCollectionLayoutSize *LayoutGridCellSize(CGFloat approximateWidth, CGFloat aspectRatio, CGFloat heightOffset, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns);
 
@@ -82,6 +86,11 @@ OBJC_EXPORT NSCollectionLayoutSize *LayoutGridCellSize(CGFloat approximateWidth,
  *                                    width
  */
 OBJC_EXPORT NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentAspectRatio, CGFloat fraction);
+
+/**
+ *  Simple full-width cell with a fixed height. Scales with accessibility font size settings.
+ */
+OBJC_EXPORT NSCollectionLayoutSize *LayoutFullWidthCellSize(CGFloat height);
 
 /**
  *  Table and collection view constants.

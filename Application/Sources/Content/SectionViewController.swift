@@ -821,7 +821,7 @@ private extension SectionViewController {
         static func size(section: SectionViewModel.Section) -> NSCollectionLayoutSize {
             switch section.footer {
             case .diskInfo:
-                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(30))
+                return LayoutFullWidthCellSize(30)
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
