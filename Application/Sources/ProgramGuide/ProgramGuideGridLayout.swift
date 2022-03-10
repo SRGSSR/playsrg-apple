@@ -198,7 +198,6 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         super.init()
         Timer.publish(every: 10, on: .main, in: .common)
             .autoconnect()
-            .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.invalidateLayout()
             }
