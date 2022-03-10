@@ -167,9 +167,15 @@ extension SectionViewModel {
         }
     }
     
+    enum Footer: Hashable {
+        case none
+        case diskInfo
+    }
+    
     struct Section: Hashable, Indexable {
         let id: String
         let header: Header
+        let footer: Footer
         
         var indexTitle: String {
             return id.uppercased()
@@ -231,9 +237,9 @@ extension SectionViewModel {
         case reload
     }
     
-    fileprivate static func consolidatedRows(with items: [Item], header: Header = .none) -> [Row] {
+    fileprivate static func consolidatedRows(with items: [Item], header: Header = .none, footer: Footer = .none) -> [Row] {
         let rowItems = (header.size == .large && items.isEmpty) ? [.transparent] : items
-        if let row = Row(section: Section(id: "main", header: header), items: rowItems) {
+        if let row = Row(section: Section(id: "main", header: header, footer: footer), items: rowItems) {
             return [row]
         }
         else {
@@ -244,7 +250,7 @@ extension SectionViewModel {
     private static func alphabeticalRows(from groups: [(key: Character, value: [Item])]) -> [Row] {
         return groups.compactMap { character, items in
             return Row(
-                section: Section(id: String(character), header: .title(String(character).uppercased())),
+                section: Section(id: String(character), header: .title(String(character).uppercased()), footer: .none),
                 items: items
             )
         }
@@ -276,7 +282,7 @@ extension SectionViewModel {
 
 protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
-    var pinToVisibleBounds: Bool { get }
+    var pinHeadersToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
@@ -312,7 +318,7 @@ private extension SectionViewModel {
             }
         }
         
-        var pinToVisibleBounds: Bool {
+        var pinHeadersToVisibleBounds: Bool {
 #if os(iOS)
             switch contentSection.type {
             case .predefined:
@@ -381,7 +387,7 @@ private extension SectionViewModel {
             }
         }
         
-        var pinToVisibleBounds: Bool {
+        var pinHeadersToVisibleBounds: Bool {
 #if os(iOS)
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
@@ -433,6 +439,8 @@ private extension SectionViewModel {
                 return SectionViewModel.alphabeticalRows(from: items, smart: false)
             case let .show(show):
                 return SectionViewModel.consolidatedRows(with: items, header: .show(show))
+            case .downloads:
+                return SectionViewModel.consolidatedRows(with: items, footer: .diskInfo)
             default:
                 return SectionViewModel.consolidatedRows(with: items)
             }

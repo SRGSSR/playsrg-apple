@@ -135,12 +135,23 @@ final class SectionViewController: UIViewController {
             view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
         }
         
+        let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = SectionFooterView(section: section)
+        }
+        
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if kind == Header.global.rawValue {
+            switch kind {
+            case Header.global.rawValue:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
-            }
-            else {
+            case UICollectionView.elementKindSectionHeader:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            case UICollectionView.elementKindSectionFooter:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
+            default:
+                return nil
             }
         }
         
@@ -619,8 +630,12 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
-                return [header]
+                header.pinToVisibleBounds = configuration.viewModelProperties.pinHeadersToVisibleBounds
+                
+                let footerSize = SectionFooterView.size(section: section)
+                let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+                
+                return [header, footer]
             }
             
             func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -781,6 +796,32 @@ private extension SectionViewController {
                 }
             case let .show(show):
                 return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+            case .none:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+            }
+        }
+    }
+}
+
+// MARK: Footers
+
+private extension SectionViewController {
+    struct SectionFooterView: View {
+        let section: SectionViewModel.Section
+        
+        var body: some View {
+            switch section.footer {
+            case .diskInfo:
+                Color.red
+            case .none:
+                Color.clear
+            }
+        }
+        
+        static func size(section: SectionViewModel.Section) -> NSCollectionLayoutSize {
+            switch section.footer {
+            case .diskInfo:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(40))
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }
