@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "1ff6704dca7b29fc3f436fd2cc4f10bf652dd88d",
-        "version" : "7.4.0"
+        "branch" : "feature/playback-speed",
+        "revision" : "d9c28a7a111bfacdb33acb2cbcd8cbf7df9c3b49"
       }
     },
     {
@@ -275,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "5c4461eefa4976a56ac9b308f15259b95541313f",
-        "version" : "7.4.0"
+        "branch" : "feature/playback-speed",
+        "revision" : "a260c5a3e3e2e9dedb8ef63e39e1d179a2e8d12e"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "83dc2f50050327e0b353f4e5372a674f90e3f5fc",
-        "version" : "6.2.2"
+        "branch" : "feature/playback-speed",
+        "revision" : "1ec10ba446144e746a41c91d9b428b4c7d1b3fe2"
       }
     },
     {

@@ -35,17 +35,17 @@ IB_DESIGNABLE
 @end
 
 IB_DESIGNABLE
+@interface SRGSettingsButton (Designable)
+
+@end
+
+IB_DESIGNABLE
 @interface SRGTimeSlider (Designable)
 
 @end
 
 IB_DESIGNABLE
 @interface SRGTimelineView (Designable)
-
-@end
-
-IB_DESIGNABLE
-@interface SRGTracksButton (Designable)
 
 @end
 
