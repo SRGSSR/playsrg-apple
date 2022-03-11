@@ -333,14 +333,6 @@ final class SectionViewController: UIViewController {
             if let media = download.media {
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
-            else if download.state == .downloading {
-                Banner.show(
-                    with: .info,
-                    message: NSLocalizedString("Media is being downloaded", comment: "Message on top screen when trying to open a media in the download list and the media is being downloaded."),
-                    image: nil,
-                    sticky: false
-                )
-            }
             else {
                 let error = NSError(
                     domain: PlayErrorDomain,
