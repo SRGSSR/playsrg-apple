@@ -174,7 +174,6 @@ extension SRGDataProvider {
     }
     
     func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
-        // For some reason (compiler bug?) the type of the items is seen as [Any] and requires casting
         return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
             .map { filter?.compatibleShows($0) ?? $0 }
             .eraseToAnyPublisher()
