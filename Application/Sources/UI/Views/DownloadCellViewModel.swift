@@ -46,9 +46,10 @@ final class DownloadCellViewModel: ObservableObject {
 
 // MARK: Types
 
+// TODO: Provides a common state merging both download-related notification streams. The download service should probably
+//       be improved to deliver a single update stream, but for the moment it is simpler to do the consolidation here. If
+//       we later rewrite our download service to deliver a single notification stream this extension can be removed.
 extension DownloadCellViewModel {
-    // TODO: Provides a common state merging both download-related notification streams. The download service should probably
-    //       be improved to deliver a single update stream, but for the moment it is simpler to do the consolidation here.
     enum State {
         case unknown
         case added
