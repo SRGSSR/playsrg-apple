@@ -338,7 +338,7 @@ final class SectionViewController: UIViewController {
                     domain: PlayErrorDomain,
                     code: PlayErrorCode.notFound.rawValue,
                     userInfo: [
-                        NSLocalizedDescriptionKey : NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
+                        NSLocalizedDescriptionKey: NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
                     ]
                 )
                 Banner.showError(error)
