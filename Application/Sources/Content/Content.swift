@@ -624,6 +624,8 @@ private extension Content {
                 return AnalyticsTitle.watchLaterRemove.rawValue
             case .history, .radioResumePlayback:
                 return AnalyticsTitle.historyRemove.rawValue
+            case .downloads:
+                return AnalyticsTitle.downloadRemove.rawValue
             default:
                 return nil
             }
