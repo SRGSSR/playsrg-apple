@@ -278,7 +278,7 @@ private extension PageViewModel {
     static func sectionsPublisher(id: Id) -> AnyPublisher<[Section], Error> {
         switch id {
         case .video:
-            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
                 .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):

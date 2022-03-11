@@ -29,7 +29,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 13')
+    xcversion(version: '~> 13.3')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean
