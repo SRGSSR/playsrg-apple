@@ -305,6 +305,7 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (void)removeDownloads:(NSArray<Download *> *)downloads
 {
+    NSMutableArray<Download *> *removedDownloads = [NSMutableArray array];
     for (Download *download in downloads) {
         if (! download.URN || !s_downloadsDictionary[download.URN]) {
             continue;
@@ -315,12 +316,13 @@ static NSArray<Download *> *s_sortedDownloads;
         [download removeLocalFiles];
         
         download.state = DownloadStateRemoved;
+        [removedDownloads addObject:download];
     }
     
     s_sortedDownloads = nil;            // Invalidate sorted download cache
     [self saveDownloadsDictionary];
     
-    [UserInteractionEvent removeFromDownloads:downloads];
+    [UserInteractionEvent removeFromDownloads:removedDownloads];
 }
 
 + (Download *)downloadForMedia:(SRGMedia *)media
