@@ -30,7 +30,7 @@
     return [self play_animatedImageViewNamed:@"loading_animation-large" withTintColor:tintColor duration:1.];
 }
 
-+ (UIImageView *)play_smallDownloadingImageViewWithTintColor:(UIColor *)tintColor;
++ (UIImageView *)play_smallDownloadingImageViewWithTintColor:(UIColor *)tintColor
 {
     return [self play_animatedImageViewNamed:@"downloading_animation-small" withTintColor:tintColor duration:1.];
 }

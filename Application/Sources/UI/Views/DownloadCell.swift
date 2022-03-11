@@ -36,11 +36,11 @@ struct DownloadCell: View {
     }
     
     private var horizontalPadding: CGFloat {
-        return direction == .vertical ? 0 : constant(iOS: 10, tvOS: 20)
+        return direction == .vertical ? 0 : 10
     }
     
     private var verticalPadding: CGFloat {
-        return direction == .vertical ? constant(iOS: 5, tvOS: 15) : 0
+        return direction == .vertical ? 5 : 0
     }
     
     private var hasSelectionAppearance: Bool {
@@ -170,11 +170,7 @@ extension DownloadCell {
     }
     
     var accessibilityTraits: AccessibilityTraits {
-#if os(tvOS)
-        return .isButton
-#else
         return isSelected ? .isSelected : []
-#endif
     }
 }
 

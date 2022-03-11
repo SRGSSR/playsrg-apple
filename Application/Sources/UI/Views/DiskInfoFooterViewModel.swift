@@ -13,7 +13,7 @@ final class DiskInfoFooterViewModel: ObservableObject {
     
     var formattedFreeSpace: String {
         let formattedByteCount = ByteCountFormatter.string(fromByteCount: freeByteCount, countStyle: .file)
-        return String(format: NSLocalizedString("Free space: %@", comment: "Total free space size, display at the bottom of download list"), formattedByteCount)
+        return String(format: NSLocalizedString("Free space: %@", comment: "Total free space size displayed as a list footer"), formattedByteCount)
     }
     
     init() {
