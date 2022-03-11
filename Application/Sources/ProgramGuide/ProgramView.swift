@@ -238,7 +238,7 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
 
 // MARK: Accessibility
 
-extension ProgramView {
+private extension ProgramView {
     var accessibilityLabel: String? {
         return model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
     }
