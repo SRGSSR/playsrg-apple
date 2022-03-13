@@ -276,7 +276,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/playback-speed",
-        "revision" : "a260c5a3e3e2e9dedb8ef63e39e1d179a2e8d12e"
+        "revision" : "eaadd69f4438d8744670e47a4c0f762bc283a4b3"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
         "branch" : "feature/playback-speed",
-        "revision" : "1ec10ba446144e746a41c91d9b428b4c7d1b3fe2"
+        "revision" : "639073b6fa910d2cf5cfb8129f42fb015d2a0af3"
       }
     },
     {
