@@ -22,7 +22,9 @@ platform :ios do
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 
     # For betas, before all, check if we have a beta release description
-    if lane.to_s.downcase.include?('beta')
+    if lane.to_s.downcase.include?('betas') ||
+       ['appstore', 'beta'].all? { |i| lane.to_s.downcase.include? i }
+
       tag_version = options[:tag_version] || tag_version(platform)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
