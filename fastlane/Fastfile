@@ -194,6 +194,13 @@ platform :ios do
 
   # AppStore betas
 
+  desc 'Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSdSYMs.'
+  lane :iOSAppStoreBetas do
+    sh 'bundle exec fastlane ios iOSAppStoreUploadBetas'
+    sh 'bundle exec fastlane ios iOSAppStoreDistributePrivateBetas'
+    sh 'bundle exec fastlane ios iOSdSYMs'
+  end
+
   desc 'Uploads an iOS AppStore beta on AppStore Connect with the current build number.'
   lane :iOSAppStoreUploadBetas do
     sh 'bundle exec fastlane ios iOSswiAppStoreUploadBeta'
@@ -203,7 +210,7 @@ platform :ios do
     sh 'bundle exec fastlane ios iOSrtrAppStoreUploadBeta'
   end
 
-  desc 'Distribute to private groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to private groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
   lane :iOSAppStoreDistributePrivateBetas do |options|
     tag_version = options[:tag_version]
 
@@ -217,7 +224,7 @@ platform :ios do
     sh "bundle exec fastlane ios iOSrtrAppStoreDistributePrivateBeta#{options}"
   end
 
-  desc 'Distribute to public groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to public groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
   lane :iOSAppStoreDistributePublicBetas do |options|
     tag_version = options[:tag_version]
 
@@ -249,6 +256,13 @@ platform :ios do
     sh "bundle exec fastlane ios iOSrtrDSYMs#{options}"
   end
 
+  desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSdSYMs.'
+  lane :tvOSAppStoreBetas do
+    sh 'bundle exec fastlane ios tvOSAppStoreUploadBetas'
+    sh 'bundle exec fastlane ios tvOSAppStoreDistributePrivateBetas'
+    sh 'bundle exec fastlane ios tvOSdSYMs'
+  end
+
   desc 'Uploads a tvOS build on AppStore Connect with the current build number.'
   lane :tvOSAppStoreUploadBetas do
     sh 'bundle exec fastlane ios tvOSswiAppStoreUploadBeta'
@@ -258,7 +272,7 @@ platform :ios do
     sh 'bundle exec fastlane ios tvOSrtrAppStoreUploadBeta'
   end
 
-  desc 'Distribute to private groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to private groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
   lane :tvOSAppStoreDistributePrivateBetas do |options|
     tag_version = options[:tag_version]
 
@@ -272,7 +286,7 @@ platform :ios do
     sh "bundle exec fastlane ios tvOSrtrAppStoreDistributePrivateBeta#{options}"
   end
 
-  desc 'Distribute to public groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to public groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
   lane :tvOSAppStoreDistributePublicBetas do |options|
     tag_version = options[:tag_version]
 
@@ -777,7 +791,7 @@ platform :ios do
     UI.message("#{scheme} (#{platform} AppStore #{tag_version}) uploaded ✅")
   end
 
-  desc 'Distribute the AppStore beta on AppStore Connect with the current build number to private group.'
+  desc 'Distributes the AppStore beta on AppStore Connect with the current build number to private group.'
   private_lane :testflight_appstore_distribute_private_beta do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
@@ -794,7 +808,7 @@ platform :ios do
     UI.message "#{scheme} (#{platform} AppStore #{tag_version}) distributed to private beta group. ✅"
   end
 
-  desc 'Distribute the AppStore beta on AppStore Connect with the current build number to public group.'
+  desc 'Distributes the AppStore beta on AppStore Connect with the current build number to public group.'
   private_lane :testflight_appstore_distribute_public_beta do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
