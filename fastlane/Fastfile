@@ -324,7 +324,7 @@ platform :ios do
   lane :iOSswiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play SWI screenshots', ['en-US'])
+    screenshots(platform, 'SWI', ['en-US'])
     upload_screenshots(platform)
   end
 
@@ -332,7 +332,7 @@ platform :ios do
   lane :iOSsrfScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play SRF screenshots', ['de-DE'])
+    screenshots(platform, 'SRF', ['de-DE'])
     # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
   end
 
@@ -340,7 +340,7 @@ platform :ios do
   lane :iOSrtsScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
+    screenshots(platform, 'RTS', ['fr-FR'])
     upload_screenshots(platform)
   end
 
@@ -348,7 +348,7 @@ platform :ios do
   lane :iOSrsiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play RSI screenshots', ['it'])
+    screenshots(platform, 'RSI', ['it'])
     upload_screenshots(platform)
   end
 
@@ -356,7 +356,7 @@ platform :ios do
   lane :iOSrtrScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play RTR screenshots', ['de-DE'])
+    screenshots(platform, 'RTR', ['de-DE'])
     upload_screenshots(platform)
   end
 
@@ -364,27 +364,27 @@ platform :ios do
 
   desc 'SWI only: See \'iOSAppStoreUploadBetas\' lane.'
   lane :iOSswiAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'iOS', scheme: 'Play SWI')
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'SWI')
   end
 
   desc 'SRF only: See \'iOSAppStoreUploadBetas\' lane.'
   lane :iOSsrfAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'iOS', scheme: 'Play SRF')
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'SRF')
   end
 
   desc 'RTS only: See \'iOSAppStoreUploadBetas\' lane.'
   lane :iOSrtsAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'iOS', scheme: 'Play RTS')
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RTS')
   end
 
   desc 'RSI only: See \'iOSAppStoreUploadBetas\' lane.'
   lane :iOSrsiAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'iOS', scheme: 'Play RSI')
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RSI')
   end
 
   desc 'RTR only: See \'iOSAppStoreUploadBetas\' lane.'
   lane :iOSrtrAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'iOS', scheme: 'Play RTR')
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RTR')
   end
 
   # Individual iOS AppStore beta private distributions
@@ -392,35 +392,35 @@ platform :ios do
   desc 'SWI only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
   lane :iOSswiAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'iOS', scheme: 'Play SWI', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
   desc 'SRF only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
   lane :iOSsrfAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'iOS', scheme: 'Play SRF', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTS only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
   lane :iOSrtsAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'iOS', scheme: 'Play RTS', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
   desc 'RSI only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
   lane :iOSrsiAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'iOS', scheme: 'Play RSI', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTR only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
   lane :iOSrtrAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'iOS', scheme: 'Play RTR', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
@@ -429,35 +429,35 @@ platform :ios do
   desc 'SWI only: See \'iOSAppStoreDistributePublicBeta\' lane.'
   lane :iOSswiAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'iOS', scheme: 'Play SWI', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
   desc 'SRF only: See \'iOSAppStoreDistributePublicBeta\' lane.'
   lane :iOSsrfAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'iOS', scheme: 'Play SRF', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTS only: See \'iOSAppStoreDistributePublicBeta\' lane.'
   lane :iOSrtsAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'iOS', scheme: 'Play RTS', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
   desc 'RSI only: See \'iOSAppStoreDistributePublicBeta\' lane.'
   lane :iOSrsiAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'iOS', scheme: 'Play RSI', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTR only: See \'iOSAppStoreDistributePublicBeta\' lane.'
   lane :iOSrtrAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'iOS', scheme: 'Play RTR', tag_version: options[:tag_version]
+      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
@@ -494,7 +494,7 @@ platform :ios do
   lane :tvOSswiScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play SWI TV screenshots', ['en-US'])
+    screenshots(platform, 'SWI', ['en-US'])
     upload_screenshots(platform)
   end
 
@@ -502,7 +502,7 @@ platform :ios do
   lane :tvOSsrfScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play SRF TV screenshots', ['de-DE'])
+    screenshots(platform, 'SRF', ['de-DE'])
     upload_screenshots(platform)
   end
 
@@ -510,7 +510,7 @@ platform :ios do
   lane :tvOSrtsScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play RTS TV screenshots', ['fr-FR'])
+    screenshots(platform, 'RTS', ['fr-FR'])
     upload_screenshots(platform)
   end
 
@@ -518,7 +518,7 @@ platform :ios do
   lane :tvOSrsiScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play RSI TV screenshots', ['it'])
+    screenshots(platform, 'RSI', ['it'])
     upload_screenshots(platform)
   end
 
@@ -526,7 +526,7 @@ platform :ios do
   lane :tvOSrtrScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play RTR TV screenshots', ['de-DE'])
+    screenshots(platform, 'RTR', ['de-DE'])
     upload_screenshots(platform)
   end
 
@@ -534,27 +534,27 @@ platform :ios do
 
   desc 'SWI only: See \'tvOSAppStoreUploadBetas\' lane.'
   lane :tvOSswiAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'tvOS', scheme: 'Play SWI TV')
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'SWI')
   end
 
   desc 'SRF only: See \'tvOSAppStoreUploadBetas\' lane.'
   lane :tvOSsrfAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'tvOS', scheme: 'Play SRF TV')
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'SRF')
   end
 
   desc 'RTS only: See \'tvOSAppStoreUploadBetas\' lane.'
   lane :tvOSrtsAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'tvOS', scheme: 'Play RTS TV')
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RTS')
   end
 
   desc 'RSI only: See \'tvOSAppStoreUploadBetas\' lane.'
   lane :tvOSrsiAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'tvOS', scheme: 'Play RSI TV')
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RSI')
   end
 
   desc 'RTR only: See \'tvOSAppStoreUploadBetas\' lane.'
   lane :tvOSrtrAppStoreUploadBeta do
-    testflight_appstore_upload_beta(platform: 'tvOS', scheme: 'Play RTR TV')
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RTR')
   end
 
   # Individual tvOS AppStore beta private distributions
@@ -562,35 +562,35 @@ platform :ios do
   desc 'SWI only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
   lane :tvOSswiAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'tvOS', scheme: 'Play SWI TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
 
   desc 'SRF only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
   lane :tvOSsrfAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'tvOS', scheme: 'Play SRF TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTS only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
   lane :tvOSrtsAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'tvOS', scheme: 'Play RTS TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
   desc 'RSI only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
   lane :tvOSrsiAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'tvOS', scheme: 'Play RSI TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
   desc 'RTR only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
   lane :tvOSrtrAppStoreDistributePrivateBeta do |options|
     testflight_appstore_distribute_private_beta(
-      platform: 'tvOS', scheme: 'Play RTR TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
@@ -599,31 +599,31 @@ platform :ios do
   desc 'SWI only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
   lane :tvOSswiAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'tvOS', scheme: 'Play SWI TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
     )
   end
   desc 'SRF only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
   lane :tvOSsrfAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'tvOS', scheme: 'Play SRF TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
   desc 'RTS only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
   lane :tvOSrtsAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'tvOS', scheme: 'Play RTS TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
   desc 'RSI only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
   lane :tvOSrsiAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'tvOS', scheme: 'Play RSI TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
   desc 'RTR only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
   lane :tvOSrtrAppStoreDistributePublicBeta do |options|
     testflight_appstore_distribute_public_beta(
-      platform: 'tvOS', scheme: 'Play RTR TV', tag_version: options[:tag_version]
+      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
@@ -764,9 +764,9 @@ platform :ios do
   desc 'Builds a new AppStore beta on AppStore Connect with the current build number and and skips build processing.'
   private_lane :testflight_appstore_upload_beta do |options|
     platform = options[:platform] || 'iOS'
-    scheme = options[:scheme]
+    scheme = scheme(platform, options[:bu])
 
-    UI.important('A scheme option is required to build an AppStore buid. Skipping build. ⚠️') unless scheme
+    UI.important('A valid bu option is required to build an AppStore beta. Skipping build. ⚠️') unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, nil, nil)
@@ -795,9 +795,9 @@ platform :ios do
   private_lane :testflight_appstore_distribute_private_beta do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
-    scheme = options[:scheme]
+    scheme = scheme(platform, options[:bu])
 
-    UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
+    UI.important('A valid bu option is required to distribute an AppStore beta. Skipping distribution. ⚠️') unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, tag_version, nil)
@@ -812,9 +812,9 @@ platform :ios do
   private_lane :testflight_appstore_distribute_public_beta do |options|
     platform = options[:platform] || 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
-    scheme = options[:scheme]
+    scheme = scheme(platform, options[:bu])
 
-    UI.important('A scheme option is required to distribute an AppStore buid. Skipping distribution. ⚠️') unless scheme
+    UI.important('A valid bu option is required to distribute an AppStore beta. Skipping distribution. ⚠️') unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, tag_version, nil)
@@ -988,6 +988,25 @@ def schemes(platform)
   else
     tvos_schemes
   end
+end
+
+def bu_index(business_unit)
+  ['SWI', 'RTS', 'SRF', 'RSI', 'RTR'].index(business_unit.upcase)
+end
+
+def scheme(platform, business_unit)
+  platform ||= 'iOS'
+
+  schemes(platform)[bu_index(business_unit)]
+end
+
+def screenshots_scheme(platform, business_unit)
+  platform ||= 'iOS'
+
+  app_scheme = scheme(platform, business_unit)
+  return unless app_scheme
+
+  "#{app_scheme} screenshots"
 end
 
 def appcenter_nightly_names
@@ -1394,13 +1413,13 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
 end
 
 # Create screenshots for AppStoreConnect.
-def screenshots(platform, scheme, languages)
+def screenshots(platform, business_unit, languages)
   platform ||= 'iOS'
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
-    scheme: scheme,
+    scheme: screenshots_scheme(platform, business_unit),
     languages: languages,
     devices: snapshot_devices(platform),
     derived_data_path: derived_data_path,
