@@ -194,11 +194,11 @@ platform :ios do
 
   # AppStore betas
 
-  desc 'Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSdSYMs.'
+  desc 'Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSAppStoreDSYMs.'
   lane :iOSAppStoreBetas do
     sh 'bundle exec fastlane ios iOSAppStoreUploadBetas'
     sh 'bundle exec fastlane ios iOSAppStoreDistributePrivateBetas'
-    sh 'bundle exec fastlane ios iOSdSYMs'
+    sh 'bundle exec fastlane ios iOSAppStoreDSYMs'
   end
 
   desc 'Uploads an iOS AppStore beta on AppStore Connect with the current build number.'
@@ -239,7 +239,7 @@ platform :ios do
   end
 
   desc 'Sends latest iOS AppStore dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
-  lane :iOSdSYMs do |options|
+  lane :iOSAppStoreDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
     build_number = options[:build_number]
@@ -249,18 +249,18 @@ platform :ios do
     options += " version:#{version}" if version
     options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios iOSswiDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSsrfDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrtsDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrsiDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrtrDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSswiAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSsrfAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrtsAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrsiAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios iOSrtrAppStoreDSYMs#{options}"
   end
 
-  desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSdSYMs.'
+  desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.'
   lane :tvOSAppStoreBetas do
     sh 'bundle exec fastlane ios tvOSAppStoreUploadBetas'
     sh 'bundle exec fastlane ios tvOSAppStoreDistributePrivateBetas'
-    sh 'bundle exec fastlane ios tvOSdSYMs'
+    sh 'bundle exec fastlane ios tvOSAppStoreDSYMs'
   end
 
   desc 'Uploads a tvOS build on AppStore Connect with the current build number.'
@@ -301,7 +301,7 @@ platform :ios do
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
-  lane :tvOSdSYMs do |options|
+  lane :tvOSAppStoreDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
     build_number = options[:build_number]
@@ -311,11 +311,11 @@ platform :ios do
     options += " version:#{version}" if version
     options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios tvOSswiDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSsrfDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtsDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrsiDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtrDSYMs#{options}"
+    sh "bundle exec fastlane ios tvOSswiAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios tvOSsrfAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios tvOSrtsAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios tvOSrsiAppStoreDSYMs#{options}"
+    sh "bundle exec fastlane ios tvOSrtrAppStoreDSYMs#{options}"
   end
 
   # Individual iOS screenshots
@@ -463,28 +463,28 @@ platform :ios do
 
   # Individual iOS AppStore beta dSYMs uploads
 
-  desc 'SWI only: See \'iOSDSYMs\' lane.'
-  lane :iOSswiDSYMs do |options|
+  desc 'SWI only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSswiAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR only: See \'iOSDSYMs\' lane.'
-  lane :iOSsrfDSYMs do |options|
+  desc 'SFR only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSsrfAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS only: See \'iOSDSYMs\' lane.'
-  lane :iOSrtsDSYMs do |options|
+  desc 'RTS only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrtsAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RSI only: See \'iOSDSYMs\' lane.'
-  lane :iOSrsiDSYMs do |options|
+  desc 'RSI only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrsiAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR only: See \'iOSDSYMs\' lane.'
-  lane :iOSrtrDSYMs do |options|
+  desc 'RTR only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrtrAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
@@ -629,28 +629,28 @@ platform :ios do
 
   # Individual tvOS AppStore beta dSYMs uploads
 
-  desc 'SWI only: See \'tvOSDSYMs\' lane.'
-  lane :tvOSswiDSYMs do |options|
+  desc 'SWI only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSswiAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_SWI_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR only: See \'tvOSDSYMs\' lane.'
-  lane :tvOSsrfDSYMs do |options|
+  desc 'SFR only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSsrfAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_SRF_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS only: See \'tvOSDSYMs\' lane.'
-  lane :tvOSrtsDSYMs do |options|
+  desc 'RTS only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrtsAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RTS_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RSI only: See \'tvOSDSYMs\' lane.'
-  lane :tvOSrsiDSYMs do |options|
+  desc 'RSI only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrsiAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RSI_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR only: See \'tvOSDSYMs\' lane.'
-  lane :tvOSrtrDSYMs do |options|
+  desc 'RTR only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrtrAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RTR_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 

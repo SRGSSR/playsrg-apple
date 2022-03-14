@@ -80,7 +80,7 @@ Add a beta TestFlight tester (email required)
 ```
 fastlane ios iOSAppStoreBetas
 ```
-Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSdSYMs.
+Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSAppStoreDSYMs.
 ### ios iOSAppStoreUploadBetas
 ```
 fastlane ios iOSAppStoreUploadBetas
@@ -96,16 +96,16 @@ Distributes to private groups an iOS AppStore beta on AppStore Connect with the 
 fastlane ios iOSAppStoreDistributePublicBetas
 ```
 Distributes to public groups an iOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
-### ios iOSdSYMs
+### ios iOSAppStoreDSYMs
 ```
-fastlane ios iOSdSYMs
+fastlane ios iOSAppStoreDSYMs
 ```
 Sends latest iOS AppStore dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios tvOSAppStoreBetas
 ```
 fastlane ios tvOSAppStoreBetas
 ```
-Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSdSYMs.
+Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.
 ### ios tvOSAppStoreUploadBetas
 ```
 fastlane ios tvOSAppStoreUploadBetas
@@ -121,9 +121,9 @@ Distributes to private groups a tvOS AppStore beta on AppStore Connect with the 
 fastlane ios tvOSAppStoreDistributePublicBetas
 ```
 Distributes to public groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
-### ios tvOSdSYMs
+### ios tvOSAppStoreDSYMs
 ```
-fastlane ios tvOSdSYMs
+fastlane ios tvOSAppStoreDSYMs
 ```
 Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios iOSswiScreenshots
@@ -226,31 +226,31 @@ RSI only: See 'iOSAppStoreDistributePublicBeta' lane.
 fastlane ios iOSrtrAppStoreDistributePublicBeta
 ```
 RTR only: See 'iOSAppStoreDistributePublicBeta' lane.
-### ios iOSswiDSYMs
+### ios iOSswiAppStoreDSYMs
 ```
-fastlane ios iOSswiDSYMs
+fastlane ios iOSswiAppStoreDSYMs
 ```
-SWI only: See 'iOSDSYMs' lane.
-### ios iOSsrfDSYMs
+SWI only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSsrfAppStoreDSYMs
 ```
-fastlane ios iOSsrfDSYMs
+fastlane ios iOSsrfAppStoreDSYMs
 ```
-SFR only: See 'iOSDSYMs' lane.
-### ios iOSrtsDSYMs
+SFR only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSrtsAppStoreDSYMs
 ```
-fastlane ios iOSrtsDSYMs
+fastlane ios iOSrtsAppStoreDSYMs
 ```
-RTS only: See 'iOSDSYMs' lane.
-### ios iOSrsiDSYMs
+RTS only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSrsiAppStoreDSYMs
 ```
-fastlane ios iOSrsiDSYMs
+fastlane ios iOSrsiAppStoreDSYMs
 ```
-RSI only: See 'iOSDSYMs' lane.
-### ios iOSrtrDSYMs
+RSI only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSrtrAppStoreDSYMs
 ```
-fastlane ios iOSrtrDSYMs
+fastlane ios iOSrtrAppStoreDSYMs
 ```
-RTR only: See 'iOSDSYMs' lane.
+RTR only: See 'iOSAppStoreDSYMs' lane.
 ### ios tvOSswiScreenshots
 ```
 fastlane ios tvOSswiScreenshots
@@ -351,31 +351,31 @@ RSI only: See 'tvOSAppStoreDistributePublicBetas' lane.
 fastlane ios tvOSrtrAppStoreDistributePublicBeta
 ```
 RTR only: See 'tvOSAppStoreDistributePublicBetas' lane.
-### ios tvOSswiDSYMs
+### ios tvOSswiAppStoreDSYMs
 ```
-fastlane ios tvOSswiDSYMs
+fastlane ios tvOSswiAppStoreDSYMs
 ```
-SWI only: See 'tvOSDSYMs' lane.
-### ios tvOSsrfDSYMs
+SWI only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSsrfAppStoreDSYMs
 ```
-fastlane ios tvOSsrfDSYMs
+fastlane ios tvOSsrfAppStoreDSYMs
 ```
-SFR only: See 'tvOSDSYMs' lane.
-### ios tvOSrtsDSYMs
+SFR only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSrtsAppStoreDSYMs
 ```
-fastlane ios tvOSrtsDSYMs
+fastlane ios tvOSrtsAppStoreDSYMs
 ```
-RTS only: See 'tvOSDSYMs' lane.
-### ios tvOSrsiDSYMs
+RTS only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSrsiAppStoreDSYMs
 ```
-fastlane ios tvOSrsiDSYMs
+fastlane ios tvOSrsiAppStoreDSYMs
 ```
-RSI only: See 'tvOSDSYMs' lane.
-### ios tvOSrtrDSYMs
+RSI only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSrtrAppStoreDSYMs
 ```
-fastlane ios tvOSrtrDSYMs
+fastlane ios tvOSrtrAppStoreDSYMs
 ```
-RTR only: See 'tvOSDSYMs' lane.
+RTR only: See 'tvOSAppStoreDSYMs' lane.
 
 ----
 
