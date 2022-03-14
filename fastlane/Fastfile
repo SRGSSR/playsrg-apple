@@ -972,12 +972,16 @@ def derived_data_path
   'build/DerivedData'
 end
 
+def bu_index(business_unit)
+  ['SWI', 'SRF', 'RTS', 'RSI', 'RTR'].index(business_unit.upcase)
+end
+
 def ios_schemes
-  ['Play SWI', 'Play RTS', 'Play SRF', 'Play RSI', 'Play RTR']
+  ['Play SWI', 'Play SRF', 'Play RTS', 'Play RSI', 'Play RTR']
 end
 
 def tvos_schemes
-  ['Play SWI TV', 'Play RTS TV', 'Play SRF TV', 'Play RSI TV', 'Play RTR TV']
+  ['Play SWI TV', 'Play SRF TV', 'Play RTS TV', 'Play RSI TV', 'Play RTR TV']
 end
 
 def schemes(platform)
@@ -988,10 +992,6 @@ def schemes(platform)
   else
     tvos_schemes
   end
-end
-
-def bu_index(business_unit)
-  ['SWI', 'RTS', 'SRF', 'RSI', 'RTR'].index(business_unit.upcase)
 end
 
 def scheme(platform, business_unit)
