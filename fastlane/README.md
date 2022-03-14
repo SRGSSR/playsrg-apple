@@ -76,41 +76,41 @@ Sends latest iOS beta dSYMs to App Center. Optional 'build_number', 'version' or
 fastlane ios betaTester
 ```
 Add a beta TestFlight tester (email required)
-### ios iOSappStoreUploads
+### ios iOSAppStoreUploadBetas
 ```
-fastlane ios iOSappStoreUploads
+fastlane ios iOSAppStoreUploadBetas
 ```
-Uploads an iOS AppStore build on AppStore Connect with the current build number.
+Uploads an iOS AppStore beta on AppStore Connect with the current build number.
 ### ios iOSAppStoreDistributePrivateBetas
 ```
 fastlane ios iOSAppStoreDistributePrivateBetas
 ```
-Distribute to private groups an iOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distribute to private groups an iOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios iOSAppStoreDistributePublicBetas
 ```
 fastlane ios iOSAppStoreDistributePublicBetas
 ```
-Distribute to public groups an iOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distribute to public groups an iOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios iOSdSYMs
 ```
 fastlane ios iOSdSYMs
 ```
 Sends latest iOS AppStore dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
-### ios tvOSappStoreUploads
+### ios tvOSAppStoreUploadBetas
 ```
-fastlane ios tvOSappStoreUploads
+fastlane ios tvOSAppStoreUploadBetas
 ```
 Uploads a tvOS build on AppStore Connect with the current build number.
 ### ios tvOSAppStoreDistributePrivateBetas
 ```
 fastlane ios tvOSAppStoreDistributePrivateBetas
 ```
-Distribute to private groups a tvOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distribute to private groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios tvOSAppStoreDistributePublicBetas
 ```
 fastlane ios tvOSAppStoreDistributePublicBetas
 ```
-Distribute to public groups a tvOS AppStore build on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distribute to public groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
 ### ios tvOSdSYMs
 ```
 fastlane ios tvOSdSYMs
@@ -141,31 +141,31 @@ RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 fastlane ios iOSrtrScreenshots
 ```
 RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios iOSswiAppStoreUpload
+### ios iOSswiAppStoreUploadBeta
 ```
-fastlane ios iOSswiAppStoreUpload
+fastlane ios iOSswiAppStoreUploadBeta
 ```
-SWI only: See 'iOSAppStoreUploads' lane.
-### ios iOSsrfAppStoreUpload
+SWI only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSsrfAppStoreUploadBeta
 ```
-fastlane ios iOSsrfAppStoreUpload
+fastlane ios iOSsrfAppStoreUploadBeta
 ```
-SRF only: See 'iOSAppStoreUploads' lane.
-### ios iOSrtsAppStoreUpload
+SRF only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSrtsAppStoreUploadBeta
 ```
-fastlane ios iOSrtsAppStoreUpload
+fastlane ios iOSrtsAppStoreUploadBeta
 ```
-RTS only: See 'iOSAppStoreUploads' lane.
-### ios iOSrsiAppStoreUpload
+RTS only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSrsiAppStoreUploadBeta
 ```
-fastlane ios iOSrsiAppStoreUpload
+fastlane ios iOSrsiAppStoreUploadBeta
 ```
-RSI only: See 'iOSAppStoreUploads' lane.
-### ios iOSrtrAppStoreUpload
+RSI only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSrtrAppStoreUploadBeta
 ```
-fastlane ios iOSrtrAppStoreUpload
+fastlane ios iOSrtrAppStoreUploadBeta
 ```
-RTR only: See 'iOSAppStoreUploads' lane.
+RTR only: See 'iOSAppStoreUploadBetas' lane.
 ### ios iOSswiAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSswiAppStoreDistributePrivateBeta
@@ -266,31 +266,31 @@ RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 fastlane ios tvOSrtrScreenshots
 ```
 RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSswiAppStoreUpload
+### ios tvOSswiAppStoreUploadBeta
 ```
-fastlane ios tvOSswiAppStoreUpload
+fastlane ios tvOSswiAppStoreUploadBeta
 ```
-SWI only: See 'tvOSAppStoreUploads' lane.
-### ios tvOSsrfAppStoreUpload
+SWI only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSsrfAppStoreUploadBeta
 ```
-fastlane ios tvOSsrfAppStoreUpload
+fastlane ios tvOSsrfAppStoreUploadBeta
 ```
-SRF only: See 'tvOSAppStoreUploads' lane.
-### ios tvOSrtsAppStoreUpload
+SRF only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSrtsAppStoreUploadBeta
 ```
-fastlane ios tvOSrtsAppStoreUpload
+fastlane ios tvOSrtsAppStoreUploadBeta
 ```
-RTS only: See 'tvOSAppStoreUploads' lane.
-### ios tvOSrsiAppStoreUpload
+RTS only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSrsiAppStoreUploadBeta
 ```
-fastlane ios tvOSrsiAppStoreUpload
+fastlane ios tvOSrsiAppStoreUploadBeta
 ```
-RSI only: See 'tvOSAppStoreUploads' lane.
-### ios tvOSrtrAppStoreUpload
+RSI only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSrtrAppStoreUploadBeta
 ```
-fastlane ios tvOSrtrAppStoreUpload
+fastlane ios tvOSrtrAppStoreUploadBeta
 ```
-RTR only: See 'tvOSAppStoreUploads' lane.
+RTR only: See 'tvOSAppStoreUploadBetas' lane.
 ### ios tvOSswiAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSswiAppStoreDistributePrivateBeta
