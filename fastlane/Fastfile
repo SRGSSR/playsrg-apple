@@ -972,16 +972,20 @@ def derived_data_path
   'build/DerivedData'
 end
 
+def business_units
+  ['SWI', 'SRF', 'RTS', 'RSI', 'RTR']
+end
+
 def bu_index(business_unit)
-  ['SWI', 'SRF', 'RTS', 'RSI', 'RTR'].index(business_unit.upcase)
+  business_units.index(business_unit.upcase)
 end
 
 def ios_schemes
-  ['Play SWI', 'Play SRF', 'Play RTS', 'Play RSI', 'Play RTR']
+  business_units.map { |business_unit| "Play #{business_unit}" }
 end
 
 def tvos_schemes
-  ['Play SWI TV', 'Play SRF TV', 'Play RTS TV', 'Play RSI TV', 'Play RTR TV']
+  business_units.map { |business_unit| "Play #{business_unit} TV" }
 end
 
 def schemes(platform)
