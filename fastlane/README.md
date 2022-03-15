@@ -126,21 +126,6 @@ Distributes to public groups a tvOS AppStore beta on AppStore Connect with the c
 fastlane ios tvOSAppStoreDSYMs
 ```
 Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
-### ios iOSswiScreenshots
-```
-fastlane ios iOSswiScreenshots
-```
-SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios iOSsrfScreenshots
-```
-fastlane ios iOSsrfScreenshots
-```
-SRF: Makes iOS screenshots. !!! No replacements on AppStoreConnect done !!!
-### ios iOSrtsScreenshots
-```
-fastlane ios iOSrtsScreenshots
-```
-RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios iOSrsiScreenshots
 ```
 fastlane ios iOSrsiScreenshots
@@ -151,21 +136,21 @@ RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 fastlane ios iOSrtrScreenshots
 ```
 RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios iOSswiAppStoreUploadBeta
+### ios iOSrtsScreenshots
 ```
-fastlane ios iOSswiAppStoreUploadBeta
+fastlane ios iOSrtsScreenshots
 ```
-SWI only: See 'iOSAppStoreUploadBetas' lane.
-### ios iOSsrfAppStoreUploadBeta
+RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.
+### ios iOSsrfScreenshots
 ```
-fastlane ios iOSsrfAppStoreUploadBeta
+fastlane ios iOSsrfScreenshots
 ```
-SRF only: See 'iOSAppStoreUploadBetas' lane.
-### ios iOSrtsAppStoreUploadBeta
+SRF: Makes iOS screenshots. !!! No replacements on AppStoreConnect done !!!
+### ios iOSswiScreenshots
 ```
-fastlane ios iOSrtsAppStoreUploadBeta
+fastlane ios iOSswiScreenshots
 ```
-RTS only: See 'iOSAppStoreUploadBetas' lane.
+SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
 ### ios iOSrsiAppStoreUploadBeta
 ```
 fastlane ios iOSrsiAppStoreUploadBeta
@@ -176,21 +161,21 @@ RSI only: See 'iOSAppStoreUploadBetas' lane.
 fastlane ios iOSrtrAppStoreUploadBeta
 ```
 RTR only: See 'iOSAppStoreUploadBetas' lane.
-### ios iOSswiAppStoreDistributePrivateBeta
+### ios iOSrtsAppStoreUploadBeta
 ```
-fastlane ios iOSswiAppStoreDistributePrivateBeta
+fastlane ios iOSrtsAppStoreUploadBeta
 ```
-SWI only: See 'iOSAppStoreDistributePrivateBetas' lane.
-### ios iOSsrfAppStoreDistributePrivateBeta
+RTS only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSsrfAppStoreUploadBeta
 ```
-fastlane ios iOSsrfAppStoreDistributePrivateBeta
+fastlane ios iOSsrfAppStoreUploadBeta
 ```
-SRF only: See 'iOSAppStoreDistributePrivateBetas' lane.
-### ios iOSrtsAppStoreDistributePrivateBeta
+SRF only: See 'iOSAppStoreUploadBetas' lane.
+### ios iOSswiAppStoreUploadBeta
 ```
-fastlane ios iOSrtsAppStoreDistributePrivateBeta
+fastlane ios iOSswiAppStoreUploadBeta
 ```
-RTS only: See 'iOSAppStoreDistributePrivateBetas' lane.
+SWI only: See 'iOSAppStoreUploadBetas' lane.
 ### ios iOSrsiAppStoreDistributePrivateBeta
 ```
 fastlane ios iOSrsiAppStoreDistributePrivateBeta
@@ -201,21 +186,21 @@ RSI only: See 'iOSAppStoreDistributePrivateBetas' lane.
 fastlane ios iOSrtrAppStoreDistributePrivateBeta
 ```
 RTR only: See 'iOSAppStoreDistributePrivateBetas' lane.
-### ios iOSswiAppStoreDistributePublicBeta
+### ios iOSrtsAppStoreDistributePrivateBeta
 ```
-fastlane ios iOSswiAppStoreDistributePublicBeta
+fastlane ios iOSrtsAppStoreDistributePrivateBeta
 ```
-SWI only: See 'iOSAppStoreDistributePublicBeta' lane.
-### ios iOSsrfAppStoreDistributePublicBeta
+RTS only: See 'iOSAppStoreDistributePrivateBetas' lane.
+### ios iOSsrfAppStoreDistributePrivateBeta
 ```
-fastlane ios iOSsrfAppStoreDistributePublicBeta
+fastlane ios iOSsrfAppStoreDistributePrivateBeta
 ```
-SRF only: See 'iOSAppStoreDistributePublicBeta' lane.
-### ios iOSrtsAppStoreDistributePublicBeta
+SRF only: See 'iOSAppStoreDistributePrivateBetas' lane.
+### ios iOSswiAppStoreDistributePrivateBeta
 ```
-fastlane ios iOSrtsAppStoreDistributePublicBeta
+fastlane ios iOSswiAppStoreDistributePrivateBeta
 ```
-RTS only: See 'iOSAppStoreDistributePublicBeta' lane.
+SWI only: See 'iOSAppStoreDistributePrivateBetas' lane.
 ### ios iOSrsiAppStoreDistributePublicBeta
 ```
 fastlane ios iOSrsiAppStoreDistributePublicBeta
@@ -226,21 +211,21 @@ RSI only: See 'iOSAppStoreDistributePublicBeta' lane.
 fastlane ios iOSrtrAppStoreDistributePublicBeta
 ```
 RTR only: See 'iOSAppStoreDistributePublicBeta' lane.
-### ios iOSswiAppStoreDSYMs
+### ios iOSrtsAppStoreDistributePublicBeta
 ```
-fastlane ios iOSswiAppStoreDSYMs
+fastlane ios iOSrtsAppStoreDistributePublicBeta
 ```
-SWI only: See 'iOSAppStoreDSYMs' lane.
-### ios iOSsrfAppStoreDSYMs
+RTS only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSsrfAppStoreDistributePublicBeta
 ```
-fastlane ios iOSsrfAppStoreDSYMs
+fastlane ios iOSsrfAppStoreDistributePublicBeta
 ```
-SFR only: See 'iOSAppStoreDSYMs' lane.
-### ios iOSrtsAppStoreDSYMs
+SRF only: See 'iOSAppStoreDistributePublicBeta' lane.
+### ios iOSswiAppStoreDistributePublicBeta
 ```
-fastlane ios iOSrtsAppStoreDSYMs
+fastlane ios iOSswiAppStoreDistributePublicBeta
 ```
-RTS only: See 'iOSAppStoreDSYMs' lane.
+SWI only: See 'iOSAppStoreDistributePublicBeta' lane.
 ### ios iOSrsiAppStoreDSYMs
 ```
 fastlane ios iOSrsiAppStoreDSYMs
@@ -251,21 +236,21 @@ RSI only: See 'iOSAppStoreDSYMs' lane.
 fastlane ios iOSrtrAppStoreDSYMs
 ```
 RTR only: See 'iOSAppStoreDSYMs' lane.
-### ios tvOSswiScreenshots
+### ios iOSrtsAppStoreDSYMs
 ```
-fastlane ios tvOSswiScreenshots
+fastlane ios iOSrtsAppStoreDSYMs
 ```
-SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSsrfScreenshots
+RTS only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSsrfAppStoreDSYMs
 ```
-fastlane ios tvOSsrfScreenshots
+fastlane ios iOSsrfAppStoreDSYMs
 ```
-SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSrtsScreenshots
+SFR only: See 'iOSAppStoreDSYMs' lane.
+### ios iOSswiAppStoreDSYMs
 ```
-fastlane ios tvOSrtsScreenshots
+fastlane ios iOSswiAppStoreDSYMs
 ```
-RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
+SWI only: See 'iOSAppStoreDSYMs' lane.
 ### ios tvOSrsiScreenshots
 ```
 fastlane ios tvOSrsiScreenshots
@@ -276,21 +261,21 @@ RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 fastlane ios tvOSrtrScreenshots
 ```
 RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSswiAppStoreUploadBeta
+### ios tvOSrtsScreenshots
 ```
-fastlane ios tvOSswiAppStoreUploadBeta
+fastlane ios tvOSrtsScreenshots
 ```
-SWI only: See 'tvOSAppStoreUploadBetas' lane.
-### ios tvOSsrfAppStoreUploadBeta
+RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
+### ios tvOSsrfScreenshots
 ```
-fastlane ios tvOSsrfAppStoreUploadBeta
+fastlane ios tvOSsrfScreenshots
 ```
-SRF only: See 'tvOSAppStoreUploadBetas' lane.
-### ios tvOSrtsAppStoreUploadBeta
+SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
+### ios tvOSswiScreenshots
 ```
-fastlane ios tvOSrtsAppStoreUploadBeta
+fastlane ios tvOSswiScreenshots
 ```
-RTS only: See 'tvOSAppStoreUploadBetas' lane.
+SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
 ### ios tvOSrsiAppStoreUploadBeta
 ```
 fastlane ios tvOSrsiAppStoreUploadBeta
@@ -301,21 +286,21 @@ RSI only: See 'tvOSAppStoreUploadBetas' lane.
 fastlane ios tvOSrtrAppStoreUploadBeta
 ```
 RTR only: See 'tvOSAppStoreUploadBetas' lane.
-### ios tvOSswiAppStoreDistributePrivateBeta
+### ios tvOSrtsAppStoreUploadBeta
 ```
-fastlane ios tvOSswiAppStoreDistributePrivateBeta
+fastlane ios tvOSrtsAppStoreUploadBeta
 ```
-SWI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
-### ios tvOSsrfAppStoreDistributePrivateBeta
+RTS only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSsrfAppStoreUploadBeta
 ```
-fastlane ios tvOSsrfAppStoreDistributePrivateBeta
+fastlane ios tvOSsrfAppStoreUploadBeta
 ```
-SRF only: See 'tvOSAppStoreDistributePrivateBetas' lane.
-### ios tvOSrtsAppStoreDistributePrivateBeta
+SRF only: See 'tvOSAppStoreUploadBetas' lane.
+### ios tvOSswiAppStoreUploadBeta
 ```
-fastlane ios tvOSrtsAppStoreDistributePrivateBeta
+fastlane ios tvOSswiAppStoreUploadBeta
 ```
-RTS only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+SWI only: See 'tvOSAppStoreUploadBetas' lane.
 ### ios tvOSrsiAppStoreDistributePrivateBeta
 ```
 fastlane ios tvOSrsiAppStoreDistributePrivateBeta
@@ -326,21 +311,21 @@ RSI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 fastlane ios tvOSrtrAppStoreDistributePrivateBeta
 ```
 RTR only: See 'tvOSAppStoreDistributePrivateBetas' lane.
-### ios tvOSswiAppStoreDistributePublicBeta
+### ios tvOSrtsAppStoreDistributePrivateBeta
 ```
-fastlane ios tvOSswiAppStoreDistributePublicBeta
+fastlane ios tvOSrtsAppStoreDistributePrivateBeta
 ```
-SWI only: See 'tvOSAppStoreDistributePublicBetas' lane.
-### ios tvOSsrfAppStoreDistributePublicBeta
+RTS only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+### ios tvOSsrfAppStoreDistributePrivateBeta
 ```
-fastlane ios tvOSsrfAppStoreDistributePublicBeta
+fastlane ios tvOSsrfAppStoreDistributePrivateBeta
 ```
-SRF only: See 'tvOSAppStoreDistributePublicBetas' lane.
-### ios tvOSrtsAppStoreDistributePublicBeta
+SRF only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+### ios tvOSswiAppStoreDistributePrivateBeta
 ```
-fastlane ios tvOSrtsAppStoreDistributePublicBeta
+fastlane ios tvOSswiAppStoreDistributePrivateBeta
 ```
-RTS only: See 'tvOSAppStoreDistributePublicBetas' lane.
+SWI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
 ### ios tvOSrsiAppStoreDistributePublicBeta
 ```
 fastlane ios tvOSrsiAppStoreDistributePublicBeta
@@ -351,21 +336,21 @@ RSI only: See 'tvOSAppStoreDistributePublicBetas' lane.
 fastlane ios tvOSrtrAppStoreDistributePublicBeta
 ```
 RTR only: See 'tvOSAppStoreDistributePublicBetas' lane.
-### ios tvOSswiAppStoreDSYMs
+### ios tvOSrtsAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSswiAppStoreDSYMs
+fastlane ios tvOSrtsAppStoreDistributePublicBeta
 ```
-SWI only: See 'tvOSAppStoreDSYMs' lane.
-### ios tvOSsrfAppStoreDSYMs
+RTS only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSsrfAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSsrfAppStoreDSYMs
+fastlane ios tvOSsrfAppStoreDistributePublicBeta
 ```
-SFR only: See 'tvOSAppStoreDSYMs' lane.
-### ios tvOSrtsAppStoreDSYMs
+SRF only: See 'tvOSAppStoreDistributePublicBetas' lane.
+### ios tvOSswiAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSrtsAppStoreDSYMs
+fastlane ios tvOSswiAppStoreDistributePublicBeta
 ```
-RTS only: See 'tvOSAppStoreDSYMs' lane.
+SWI only: See 'tvOSAppStoreDistributePublicBetas' lane.
 ### ios tvOSrsiAppStoreDSYMs
 ```
 fastlane ios tvOSrsiAppStoreDSYMs
@@ -376,6 +361,21 @@ RSI only: See 'tvOSAppStoreDSYMs' lane.
 fastlane ios tvOSrtrAppStoreDSYMs
 ```
 RTR only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSrtsAppStoreDSYMs
+```
+fastlane ios tvOSrtsAppStoreDSYMs
+```
+RTS only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSsrfAppStoreDSYMs
+```
+fastlane ios tvOSsrfAppStoreDSYMs
+```
+SFR only: See 'tvOSAppStoreDSYMs' lane.
+### ios tvOSswiAppStoreDSYMs
+```
+fastlane ios tvOSswiAppStoreDSYMs
+```
+SWI only: See 'tvOSAppStoreDSYMs' lane.
 
 ----
 
