@@ -207,11 +207,9 @@ platform :ios do
 
   desc 'Uploads an iOS AppStore beta on AppStore Connect with the current build number.'
   lane :iOSAppStoreUploadBetas do
-    sh 'bundle exec fastlane ios iOSswiAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios iOSsrfAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios iOSrtsAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios iOSrsiAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios iOSrtrAppStoreUploadBeta'
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios iOS#{business_unit.downcase}AppStoreUploadBeta"
+    end
   end
 
   desc 'Distributes to private groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
@@ -221,11 +219,10 @@ platform :ios do
     options = ''
     options += " tag_version:#{tag_version}" if tag_version
 
-    sh "bundle exec fastlane ios iOSswiAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios iOSsrfAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios iOSrtsAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios iOSrsiAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios iOSrtrAppStoreDistributePrivateBeta#{options}"
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}AppStoreDistributePrivateBeta#{options}"
+    end
   end
 
   desc 'Distributes to public groups an iOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
@@ -235,11 +232,10 @@ platform :ios do
     options = ''
     options += " tag_version:#{tag_version}" if tag_version
 
-    sh "bundle exec fastlane ios iOSswiAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios iOSsrfAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios iOSrtsAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios iOSrsiAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios iOSrtrAppStoreDistributePublicBeta#{options}"
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}AppStoreDistributePublicBeta#{options}"
+    end
   end
 
   desc 'Sends latest iOS AppStore dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -253,11 +249,9 @@ platform :ios do
     options += " version:#{version}" if version
     options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios iOSswiAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSsrfAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrtsAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrsiAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios iOSrtrAppStoreDSYMs#{options}"
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios iOS#{business_unit.downcase}AppStoreDSYMs#{options}"
+    end
   end
 
   desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.'
@@ -269,11 +263,9 @@ platform :ios do
 
   desc 'Uploads a tvOS build on AppStore Connect with the current build number.'
   lane :tvOSAppStoreUploadBetas do
-    sh 'bundle exec fastlane ios tvOSswiAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios tvOSsrfAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios tvOSrtsAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios tvOSrsiAppStoreUploadBeta'
-    sh 'bundle exec fastlane ios tvOSrtrAppStoreUploadBeta'
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios tvOS#{business_unit.downcase}AppStoreUploadBeta"
+    end
   end
 
   desc 'Distributes to private groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
@@ -283,11 +275,10 @@ platform :ios do
     options = ''
     options += " tag_version:#{tag_version}" if tag_version
 
-    sh "bundle exec fastlane ios tvOSswiAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios tvOSsrfAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrtsAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrsiAppStoreDistributePrivateBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrtrAppStoreDistributePrivateBeta#{options}"
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios tvOS#{business_unit}AppStoreDistributePrivateBeta#{options}"
+    end
   end
 
   desc 'Distributes to public groups a tvOS AppStore beta on AppStore Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
@@ -297,11 +288,10 @@ platform :ios do
     options = ''
     options += " tag_version:#{tag_version}" if tag_version
 
-    sh "bundle exec fastlane ios tvOSswiAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios tvOSsrfAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrtsAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrsiAppStoreDistributePublicBeta#{options}"
-    sh "bundle exec fastlane ios tvOSrtrAppStoreDistributePublicBeta#{options}"
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios tvOS#{business_unit}AppStoreDistributePublicBeta#{options}"
+    end
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
@@ -315,11 +305,9 @@ platform :ios do
     options += " version:#{version}" if version
     options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios tvOSswiAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSsrfAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtsAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrsiAppStoreDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtrAppStoreDSYMs#{options}"
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios tvOS#{business_unit.downcase}AppStoreDSYMs#{options}"
+    end
   end
 
   # Individual iOS screenshots
