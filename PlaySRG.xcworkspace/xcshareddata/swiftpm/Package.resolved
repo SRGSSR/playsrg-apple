@@ -222,7 +222,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "feature/playback-speed",
-        "revision" : "eb95093f9014c34ce378d2e315728b368f75bfd8"
+        "revision" : "ec72c87abc5f5462d47fb60001775fcec69020bd"
       }
     },
     {
@@ -276,7 +276,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/playback-speed",
-        "revision" : "8d6b3be6dc4a56f6bbb1b44097232343da2bfc39"
+        "revision" : "1b5cddb38347ef9b19b5d85f1766321c388352ab"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
         "branch" : "feature/playback-speed",
-        "revision" : "4cee1fd4548455b43b4ddeda27e00a30cbedeab1"
+        "revision" : "3d2ec5e9cf50e9336b726348265ea424bab1ab7b"
       }
     },
     {

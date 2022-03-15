@@ -31,7 +31,7 @@ func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = tru
         let playlist = PlaylistForURN(media.urn)
         controller.playlistDataSource = playlist
         controller.playbackTransitionDelegate = playlist
-        applyLetterboxControllerSettings(to: controller)
+        ApplicationConfigurationApplyControllerSettings(controller)
         
         controller.addPeriodicTimeObserver(forInterval: CMTimeMakeWithSeconds(1, preferredTimescale: Int32(NSEC_PER_SEC)), queue: nil) { _ in
             HistoryUpdateLetterboxPlaybackProgress(controller)
@@ -115,15 +115,6 @@ private func present(_ viewController: UIViewController, animated: Bool, complet
             completion()
         }
     }
-}
-
-private func applyLetterboxControllerSettings(to controller: SRGLetterboxController) {
-    controller.serviceURL = SRGDataProvider.current?.serviceURL
-    controller.globalParameters = SRGDataProvider.current?.globalParameters
-    
-    let applicationConfiguration = ApplicationConfiguration.shared
-    controller.endTolerance = applicationConfiguration.endTolerance
-    controller.endToleranceRatio = applicationConfiguration.endToleranceRatio
 }
 
 private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {

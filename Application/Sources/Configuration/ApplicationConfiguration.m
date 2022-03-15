@@ -13,6 +13,7 @@
 #import "SRGMedia+PlaySRG.h"
 
 @import libextobjc;
+@import MediaAccessibility;
 @import SRGAppearance;
 @import SRGLetterbox;
 
@@ -48,6 +49,27 @@ static SRGVendor DataProviderVendor(NSString *businessUnitIdentifier)
 
 void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *controller)
 {
+    controller.audioConfigurationBlock = ^AVMediaSelectionOption * _Nonnull(NSArray<AVMediaSelectionOption *> * _Nonnull audioOptions, AVMediaSelectionOption * _Nonnull defaultAudioOption) {
+        NSString *lastSelectedLanguageCode = ApplicationSettingLastSelectedAudioLanguageCode();
+        if (! lastSelectedLanguageCode) {
+            return defaultAudioOption;
+        }
+        
+        NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(AVMediaSelectionOption * _Nullable option, NSDictionary<NSString *,id> * _Nullable bindings) {
+            return [[option.locale objectForKey:NSLocaleLanguageCode] isEqualToString:lastSelectedLanguageCode];
+        }];
+        NSArray<AVMediaSelectionOption *> *matchingAudioOptions = [audioOptions filteredArrayUsingPredicate:predicate];
+        if (matchingAudioOptions.count == 0) {
+            return defaultAudioOption;
+        }
+        
+        NSArray<AVMediaCharacteristic> *characteristics = CFBridgingRelease(MAAudibleMediaCopyPreferredCharacteristics());
+        return [AVMediaSelectionGroup mediaSelectionOptionsFromArray:matchingAudioOptions withMediaCharacteristics:characteristics].firstObject ?: matchingAudioOptions.firstObject;
+    };
+    [controller reloadMediaConfiguration];
+    
+    controller.playbackRate = ApplicationSettingLastSelectedPlaybackRate();
+    
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
     controller.globalParameters = SRGDataProvider.currentDataProvider.globalParameters;
 #if TARGET_OS_IOS

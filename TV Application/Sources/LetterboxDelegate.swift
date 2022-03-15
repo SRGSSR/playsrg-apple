@@ -32,6 +32,10 @@ class LetterboxDelegate: NSObject {
 }
 
 extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
+    func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didSelectPlaybackRate playbackRate: Float) {
+        ApplicationSettingSetLastSelectedPlaybackRate(playbackRate)
+    }
+    
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didEngageInContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue

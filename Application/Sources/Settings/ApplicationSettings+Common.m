@@ -33,6 +33,8 @@ typedef NS_ENUM(NSInteger, SettingUserLocation) {
 };
 
 NSString * const PlaySRGSettingProgramGuideRecentlyUsedLayout = @"PlaySRGSettingProgramGuideRecentlyUsedLayout";
+NSString * const PlaySRGSettingLastSelectedPlaybackRate = @"PlaySRGSettingLastSelectedPlaybackRate";
+NSString * const PlaySRGSettingLastSelectedAudioLanguageCode = @"PlaySRGSettingLastSelectedAudioLanguageCode";
 
 NSValueTransformer *ProgramGuideLayoutTransformer(void)
 {
@@ -153,4 +155,29 @@ NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 #else
     return nil;
 #endif
+}
+
+float ApplicationSettingLastSelectedPlaybackRate(void)
+{
+    NSNumber *playbackRate = [NSUserDefaults.standardUserDefaults objectForKey:PlaySRGSettingLastSelectedPlaybackRate];
+    return playbackRate ? playbackRate.floatValue : 1.f;
+}
+
+void ApplicationSettingSetLastSelectedPlaybackRate(float playbackRate)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setFloat:playbackRate forKey:PlaySRGSettingLastSelectedPlaybackRate];
+    [userDefaults synchronize];
+}
+
+NSString *ApplicationSettingLastSelectedAudioLanguageCode(void)
+{
+    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastSelectedAudioLanguageCode];
+}
+
+void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString *languageCode)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:languageCode forKey:PlaySRGSettingLastSelectedAudioLanguageCode];
+    [userDefaults synchronize];
 }
