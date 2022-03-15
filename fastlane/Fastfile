@@ -47,7 +47,7 @@ platform :ios do
   # Nightlies
 
   desc 'Builds a new iOS nightly on App Center.'
-  lane :nightlies do
+  lane :appcenteriOSnighties do
     platform = 'iOS'
     service = 'AppCenter'
 
@@ -126,7 +126,7 @@ platform :ios do
   # Betas
 
   desc 'Builds an iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
-  lane :betas do
+  lane :appcenteriOSbetas do
     platform = 'iOS'
 
     notify_version_to_ci(platform, nil, nil)

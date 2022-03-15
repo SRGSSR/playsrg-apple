@@ -16,9 +16,9 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios nightlies
+### ios appcenteriOSnighties
 ```
-fastlane ios nightlies
+fastlane ios appcenteriOSnighties
 ```
 Builds a new iOS nightly on App Center.
 ### ios tvOSnightlies
@@ -46,9 +46,9 @@ Sends latest iOS nightly dSYMs to App Center. Optional 'build_number', 'version'
 fastlane ios nightlyTester
 ```
 Add a nightly TestFlight tester (email required)
-### ios betas
+### ios appcenteriOSbetas
 ```
-fastlane ios betas
+fastlane ios appcenteriOSbetas
 ```
 Builds an iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
 ### ios tvOSbetas
