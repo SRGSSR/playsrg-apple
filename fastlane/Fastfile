@@ -47,11 +47,11 @@ platform :ios do
   # Nightlies
 
   desc 'Builds a new iOS nightly on App Center.'
-  lane :appcenteriOSnighties do
+  lane :iOSnightliesAppCenter do
     platform = 'iOS'
     service = 'AppCenter'
 
-    build_number = latest_appcenter_build_number(appcenter_nightly_names)
+    build_number = latest_appcenter_build_number(appcenter_ios_nightly_appcenter_names)
     xcode_override_build_number(platform, build_number + 1)
 
     tag_version = tag_version(platform)
@@ -71,7 +71,7 @@ platform :ios do
       )
 
       appcenter_lane(
-        appname: appcenter_nightly_names[index],
+        appname: appcenter_ios_nightly_appcenter_names[index],
         destinations: ENV['PLAY_NIGHTLY_APPCENTER_DESTINATIONS'],
         notes: nightly_changelog(platform, service)
       )
@@ -126,7 +126,7 @@ platform :ios do
   # Betas
 
   desc 'Builds an iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
-  lane :appcenteriOSbetas do
+  lane :iOSbetasAppCenter do
     platform = 'iOS'
 
     notify_version_to_ci(platform, nil, nil)
@@ -143,7 +143,7 @@ platform :ios do
       )
 
       appcenter_lane(
-        appname: appcenter_beta_names[index],
+        appname: appcenter_ios_beta_appcenter_names[index],
         destinations: ENV['PLAY_BETA_APPCENTER_DESTINATIONS'],
         notes: what_s_new_for_beta(platform, nil),
         notify_testers: true
@@ -1002,7 +1002,7 @@ def derived_data_path
   'build/DerivedData'
 end
 
-def appcenter_nightly_names
+def appcenter_ios_nightly_appcenter_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
@@ -1024,7 +1024,7 @@ def appcenter_testflight_nightly_names(platform)
   end
 end
 
-def appcenter_beta_names
+def appcenter_ios_beta_appcenter_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_BETA_APPCENTER_APPNAME"] }
 end
 
