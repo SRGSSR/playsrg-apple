@@ -1660,11 +1660,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
 }
 
-- (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectPlaybackRate:(float)playbackRate
-{
-    ApplicationSettingSetLastSelectedPlaybackRate(playbackRate);
-}
-
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectAudioLanguageCode:(NSString *)languageCode
 {
     ApplicationSettingSetLastSelectedAudioLanguageCode(languageCode);

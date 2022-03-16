@@ -68,8 +68,6 @@ void ApplicationConfigurationApplyControllerSettings(SRGLetterboxController *con
     };
     [controller reloadMediaConfiguration];
     
-    controller.playbackRate = ApplicationSettingLastSelectedPlaybackRate();
-    
     controller.serviceURL = SRGDataProvider.currentDataProvider.serviceURL;
     controller.globalParameters = SRGDataProvider.currentDataProvider.globalParameters;
 #if TARGET_OS_IOS
