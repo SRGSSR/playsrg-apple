@@ -29,5 +29,6 @@
   "1.5.0-28": "- A TV guide has been added to the tab bar navigation.\n- Remove show title below poster images.",
   "1.5.0-29": "- TV guide layout fixes.\n- Advanced settings for test environments.",
   "1.5.1-30": "- Display 3rd party channels in SRF/RTR TV guide.\n- Improved program information in TV guide.\n- Shows added to the search view.\n- Youth protection information for all BUs.",
-  "1.5.1-31": "- Fix crash during continuous playback transitions.\n- Improve accessiblity labels."
+  "1.5.1-31": "- Fix crash during continuous playback transitions.\n- Improve accessiblity labels.",
+  "1.5.1-32": "- SRG released libraries.\n- All translations are up to date."
 }
