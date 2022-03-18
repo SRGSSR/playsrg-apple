@@ -530,7 +530,7 @@
 "The content has been copied to the clipboard." = "Kopiert.";
 
 /* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
+"Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Der heruntergeladene Inhalt wird gelöscht.";
