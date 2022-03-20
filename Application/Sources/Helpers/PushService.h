@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-@import Foundation;
+@import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -37,9 +37,9 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
  *  Perform push notification setup.
  *
  *  @discussion This method must be called from `-application:didFinishLaunchingWithOptions:`, otherwise the behavior
- *              is undefined.
+ *              is undefined. It must be provided with the received launch options.
  */
-- (void)setup;
+- (void)setupWithLaunchingWithOptions:(nullable NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions;
 
 /**
  *  Service singleton. `nil` if push notifications are not available for the application.
@@ -50,6 +50,16 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
  *  Return `YES` iff push notifications are enabled in the system settings.
  */
 @property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
+
+/**
+ *  Return the current device token.
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *deviceToken;
+
+/**
+ *  Return the current Airship (channel) identifier.
+ */
+@property (nonatomic, readonly, copy, nullable) NSString *airshipIdentifier;
 
 /**
  *  Attempt to present the system alert to enable push notifications. Returns `YES` iff presented.

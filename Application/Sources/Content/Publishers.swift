@@ -174,7 +174,6 @@ extension SRGDataProvider {
     }
     
     func favoritesPublisher(filter: SectionFiltering?) -> AnyPublisher<[SRGShow], Error> {
-        // For some reason (compiler bug?) the type of the items is seen as [Any] and requires casting
         return self.showsPublisher(withUrns: FavoritesShowURNs().array as? [String] ?? [])
             .map { filter?.compatibleShows($0) ?? $0 }
             .eraseToAnyPublisher()
@@ -212,3 +211,19 @@ enum UserDataPublishers {
         .eraseToAnyPublisher()
     }
 }
+
+#if DEBUG
+extension Publisher {
+    /**
+     *  Dump values passing through the pipeline.
+     *
+     *  Borrowed from https://peterfriese.dev/posts/swiftui-combine-custom-operators/
+     */
+    func dump() -> AnyPublisher<Output, Failure> {
+        handleEvents(receiveOutput: { value in
+            Swift.dump(value)
+        })
+        .eraseToAnyPublisher()
+    }
+}
+#endif

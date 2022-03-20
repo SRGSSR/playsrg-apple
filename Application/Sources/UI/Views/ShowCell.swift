@@ -19,7 +19,7 @@ struct ShowCell: View {
     
     let style: Style
     let imageType: SRGImageType
-
+    
     @StateObject private var model = ShowCellViewModel()
     
     @Environment(\.isEditing) private var isEditing
@@ -93,7 +93,7 @@ struct ShowCell: View {
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                 if style == .favorite, model.isSubscribed {
-                    Image("subscription_full")
+                    Image(decorative: "subscription_full")
                         .resizable()
                         .scaledToFit()
                         .frame(height: 12)
@@ -139,11 +139,7 @@ final class ShowCellSize: NSObject {
     }
     
     @objc static func swimlane(for imageType: SRGImageType) -> NSCollectionLayoutSize {
-        return swimlane(for: imageType, itemWidth: itemWidth(for: imageType))
-    }
-    
-    @objc static func swimlane(for imageType: SRGImageType, itemWidth: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth, aspectRatio(for: imageType), heightOffset(for: imageType))
+        return LayoutSwimlaneCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset(for: imageType))
     }
     
     @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {

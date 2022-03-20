@@ -15,7 +15,7 @@ final class MediaDetailViewModel: ObservableObject {
         let urns: [String]
     }
     
-    @Published var initialMedia: SRGMedia? = nil {
+    @Published var initialMedia: SRGMedia? {
         didSet {
             refresh()
             updateWatchLaterAllowedAction()

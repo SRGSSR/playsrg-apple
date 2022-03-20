@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play RSI TV.beta_appcenter.xcconfig"
+#include? "Configuration/Xcode/Play RSI TV.beta_appcenter.xcconfig"
+
 #include "Xcode/Shared/BUs/RSI.xcconfig"
 #include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
 

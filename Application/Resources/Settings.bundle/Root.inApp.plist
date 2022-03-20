@@ -242,6 +242,14 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Copy support information</string>
+			<key>Key</key>
+			<string>Button_CopySupportInformation</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Advanced features</string>
@@ -353,6 +361,14 @@
 			<string>Clear all contents</string>
 			<key>Key</key>
 			<string>Button_ClearAllContents</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>IASKButtonSpecifier</string>
+			<key>Title</key>
+			<string>Simulate memory warning</string>
+			<key>Key</key>
+			<string>Button_SimulateMemoryWarning</string>
 		</dict>
 		<dict>
 			<key>Type</key>

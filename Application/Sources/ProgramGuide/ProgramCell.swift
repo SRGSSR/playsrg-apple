@@ -100,7 +100,7 @@ struct ProgramCell: View {
                         Spacer()
                     }
                     else {
-                        Color(.clear)
+                        Color.clear
                     }
                 }
                 .padding(.horizontal, isDisplayable ? horizontalPadding : 0)
@@ -109,7 +109,7 @@ struct ProgramCell: View {
                 .frame(maxHeight: .infinity)
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
                 
-                if let progress = model.progress {
+                if direction == .horizontal, let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
@@ -127,11 +127,14 @@ struct ProgramCell: View {
         @ObservedObject var model: ProgramCellViewModel
         let compact: Bool
         
+        private let canPlayHeight: CGFloat = 25
+        
         var body: some View {
             HStack(spacing: 10) {
                 if !compact && model.canPlay {
-                    Image("play_circle")
+                    Image(decorative: "play_circle")
                         .foregroundColor(.srgGrayC7)
+                        .frame(height: canPlayHeight)
                 }
                 if let title = model.data?.program.title {
                     Text(title)
@@ -140,6 +143,7 @@ struct ProgramCell: View {
                         .foregroundColor(.srgGrayC7)
                 }
             }
+            .frame(minHeight: canPlayHeight)
         }
     }
 }

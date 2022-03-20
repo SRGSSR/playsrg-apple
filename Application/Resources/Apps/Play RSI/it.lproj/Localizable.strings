@@ -443,8 +443,8 @@
 
 /* Label to present the search view
    Search placeholder text
-   Search tab title
-   Title displayed when there is no search criterium entered */
+   Search shortcut label
+   Search tab title */
 "Search" = "Ricerca";
 
 /* Select button title */
@@ -529,8 +529,8 @@
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Il contenuto è stato copiato negli Appunti.";
 
-/* Error message returned for invalid data */
-"The data is invalid" = "I dati non sono validi";
+/* Information message displayed when support information has been copied to the pasteboard by the user */
+"Support information has been copied to the pasteboard" = "Le informazioni di supporto sono state copiate negli appunti";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Il contenuto scaricato sarà eliminato.";
@@ -620,8 +620,7 @@
    TV program guide view title */
 "TV guide" = "Guida TV";
 
-/* Default text displayed when no search criterium has been entered
-   Message displayed when there is no search criterium entered */
+/* Message displayed when there is no search criterium entered */
 "Type to start searching" = "Iniziare a scrivere per avviare la ricerca";
 
 /* Title of the button to update the application */

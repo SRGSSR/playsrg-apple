@@ -65,7 +65,7 @@ struct ProgramView: View {
                         ZStack {
                             VisualView(model: model)
                             Color(white: 0, opacity: 0.2)
-                            Image("play")
+                            Image(decorative: "play")
                                 .foregroundColor(.white)
                         }
                     }
@@ -209,8 +209,8 @@ struct ProgramView: View {
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGrayC7)
                 }
-                if let lead = model.lead {
-                    Text(lead)
+                if let subtitle = model.subtitle {
+                    Text(subtitle)
                         .srgFont(.H4)
                         .multilineTextAlignment(.center)
                         .foregroundColor(.srgGray96)

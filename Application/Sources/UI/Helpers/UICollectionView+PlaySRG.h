@@ -11,9 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UICollectionView (PlaySRG)
 
 /**
- *  Same as `-scrollToItemAtIndexPath:atScrollPosition:animated:` but inhibiting assertions.
+ *  Same as `-scrollToItemAtIndexPath:atScrollPosition:animated:` but inhibiting assertions. Returns `NO` if the scrolling
+ *  attempt failed.
  */
-- (void)play_scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated;
+- (BOOL)play_scrollToItemAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UICollectionViewScrollPosition)scrollPosition animated:(BOOL)animated;
 
 @end
 

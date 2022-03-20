@@ -11,6 +11,7 @@
 "Clear vector image cache" = "Clear vector image cache";
 "Clear web cache" = "Clear web cache";
 "Content" = "Content";
+"Copy support information" = "Copy support information";
 "Data protection" = "Data protection";
 "Default (current configuration)" = "Default (current configuration)";
 "Default (IP-based location)" = "Default (IP-based location)";
@@ -42,6 +43,7 @@
 "Reset" = "Reset";
 "Section wide support" = "Section wide support";
 "Server" = "Server";
+"Simulate memory warning" = "Simulate memory warning";
 "Source code" = "Source code";
 "Stage" = "Stage";
 "Standalone playback" = "Standalone playback";

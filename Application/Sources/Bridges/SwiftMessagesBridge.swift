@@ -15,15 +15,14 @@ final class SwiftMessagesBridge: NSObject {
      *  @param message             The message to be displayed.
      *  @param accessibilityPrefix Optional clarification prefix used before reading out the message with VoiceOver.
      *  @param image               Optional leading image.
-     *  @param viewController      The view controller context for which the notification must be displayed.
      *  @param backgroundColor     The notification banner color.
      *  @param foregroundColor     Text and image tint color.
-     *  @sticky                    The banner has to be removed by the user.
+     *  @param sticky              The banner has to be removed by the user when set to `true`.
      *
      *  @discussion Provide the most accurate view controller context, as it ensures the notification behaves correctly
      *              for it (i.e. rotates consistently and appears under a parent navigation bar).
      */
-    @objc static func show(_ message: String, accessibilityPrefix: String?, image: UIImage?, viewController: UIViewController?, backgroundColor: UIColor?, foregroundColor: UIColor?, sticky: Bool) {
+    @objc static func show(_ message: String, accessibilityPrefix: String?, image: UIImage?, backgroundColor: UIColor?, foregroundColor: UIColor?, sticky: Bool) {
         SwiftMessages.hideAll()
         
         let messageView = MessageView.viewFromNib(layout: .cardView)
@@ -50,8 +49,8 @@ final class SwiftMessagesBridge: NSObject {
         }
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
-        // the notification rotation behavior matches the one of the associated view controller.
-        var presentationController = viewController ?? UIApplication.shared.mainTopViewController
+        // the notification rotation behavior matches the one of the currently visible view controller.
+        var presentationController = UIApplication.shared.mainTopViewController
         while presentationController?.parent != nil {
             if presentationController is UINavigationController {
                 break

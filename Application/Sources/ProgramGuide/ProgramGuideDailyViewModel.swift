@@ -5,33 +5,41 @@
 //
 
 import Combine
+import SRGDataProviderCombine
 
 // MARK: View model
 
 final class ProgramGuideDailyViewModel: ObservableObject {
-    var day: SRGDay {
-        didSet {
-            guard day != oldValue else { return }
-            updatePublishers()
-        }
-    }
+    @Published var day: SRGDay
+    @Published private(set) var state: State
     
-    @Published private(set) var state: State = .loading
-    
-    init(day: SRGDay) {
+    /// Channels can be provided if available for more efficient content loading
+    init(day: SRGDay, firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel]) {
         self.day = day
-        updatePublishers()
-    }
-    
-    private func updatePublishers() {
-        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self] in
-            return SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, day: self?.day ?? .today)
-                .map { programCompositions in
-                    return State.loaded(programCompositions: programCompositions)
+        self.state = .loading(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, day: day)
+        
+        Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
+            $day
+                .map { day -> AnyPublisher<State, Error> in
+                    let applicationConfiguration = ApplicationConfiguration.shared
+                    let vendor = applicationConfiguration.vendor
+                    if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+                        return Publishers.CombineLatest(
+                            Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state),
+                            Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: self?.state)
+                        )
+                        .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1, day: day) }
+                        .eraseToAnyPublisher()
+                    }
+                    else {
+                        return Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state)
+                            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty, day: day) }
+                            .eraseToAnyPublisher()
+                    }
                 }
-                .prepend(State.loading)
+                .switchToLatest()
                 .catch { error in
-                    return Just(State.failed(error: error))
+                    return Just(.failed(error: error))
                 }
         }
         .receive(on: DispatchQueue.main)
@@ -42,52 +50,236 @@ final class ProgramGuideDailyViewModel: ObservableObject {
 // MARK: Types
 
 extension ProgramGuideDailyViewModel {
-    enum Section {
-        case main
-    }
+    typealias Section = SRGChannel
     
-    enum State {
-        case loading
-        case failed(error: Error)
-        case loaded(programCompositions: [SRGProgramComposition])
+    struct Item: Hashable {
+        enum WrappedValue: Hashable {
+            case program(_ program: SRGProgram)
+            case empty
+            case loading
+        }
         
-        var hasContent: Bool {
-            switch self {
-            case let .loaded(programCompositions):
-                return !programCompositions.flatMap({ $0.programs ?? [] }).isEmpty
+        let wrappedValue: WrappedValue
+        let section: Section
+        
+        // Only attached to items so that `ProgramGuideGridLayout` can retrieve the current day from a snapshot
+        let day: SRGDay
+        
+        fileprivate init(wrappedValue: WrappedValue, section: Section, day: SRGDay) {
+            self.wrappedValue = wrappedValue
+            self.section = section
+            self.day = day
+        }
+        
+        var program: SRGProgram? {
+            switch wrappedValue {
+            case let .program(program):
+                return program
+            default:
+                return nil
+            }
+        }
+        
+        func endsAfter(_ date: Date) -> Bool {
+            switch wrappedValue {
+            case let .program(program):
+                return program.endDate > date
             default:
                 return false
             }
         }
+    }
+    
+    enum Bouquet {
+        case loading(channels: [SRGChannel])
+        case content(programCompositions: [SRGProgramComposition])
         
-        var channels: [SRGChannel] {
-            if case let .loaded(programCompositions: programCompositions) = self {
-                return programCompositions.map { $0.channel }
-            }
-            else {
-                return []
+        fileprivate static var empty: Self {
+            return .content(programCompositions: [])
+        }
+        
+        fileprivate var isLoading: Bool {
+            switch self {
+            case .loading:
+                return true
+            case .content:
+                return false
             }
         }
         
-        func programs(for channel: SRGChannel?) -> [SRGProgram] {
-            if case let .loaded(programCompositions: programCompositions) = self {
-                if let channel = channel {
-                    return Self.programs(from: programCompositions.first(where: { $0.channel == channel }))
+        fileprivate var isEmpty: Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.allSatisfy { $0.programs?.isEmpty ?? true }
+            }
+        }
+        
+        fileprivate var hasPrograms: Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.contains { programComposition in
+                    guard let programs = programComposition.programs else { return false }
+                    return !programs.isEmpty
+                }
+            }
+        }
+        
+        fileprivate var channels: [SRGChannel] {
+            switch self {
+            case let .loading(channels: channels):
+                return channels
+            case let .content(programCompositions: programCompositions):
+                return programCompositions.map(\.channel)
+            }
+        }
+        
+        fileprivate func contains(channel: SRGChannel) -> Bool {
+            return channels.contains(channel)
+        }
+        
+        private static func programs(for channel: SRGChannel, in programCompositions: [SRGProgramComposition]) -> [SRGProgram] {
+            return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
+        }
+        
+        fileprivate func isEmpty(for channel: SRGChannel) -> Bool {
+            switch self {
+            case .loading:
+                return false
+            case let .content(programCompositions: programCompositions):
+                return Self.programs(for: channel, in: programCompositions).isEmpty
+            }
+        }
+        
+        fileprivate func items(for channel: SRGChannel, day: SRGDay) -> [Item] {
+            switch self {
+            case .loading:
+                return [Item(wrappedValue: .loading, section: channel, day: day)]
+            case let .content(programCompositions: programCompositions):
+                let programs = Self.programs(for: channel, in: programCompositions)
+                if !programs.isEmpty {
+                    return programs.map { Item(wrappedValue: .program($0), section: channel, day: day) }
                 }
                 else {
-                    return Self.programs(from: programCompositions.first)
+                    return [Item(wrappedValue: .empty, section: channel, day: day)]
                 }
             }
-            else {
+        }
+    }
+    
+    enum State {
+        case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet, day: SRGDay)
+        case failed(error: Error)
+        
+        fileprivate static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], day: SRGDay) -> State {
+            return .content(firstPartyBouquet: .loading(channels: firstPartyChannels), thirdPartyBouquet: .loading(channels: thirdPartyChannels), day: day)
+        }
+        
+        private var day: SRGDay? {
+            switch self {
+            case let .content(firstPartyBouquet: _, thirdPartyBouquet: _, day: day):
+                return day
+            case .failed:
+                return nil
+            }
+        }
+        
+        private var bouquets: [Bouquet] {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: _):
+                return [firstPartyBouquet, thirdPartyBouquet]
+            case .failed:
                 return []
             }
         }
         
-        private static func programs(from programComposition: SRGProgramComposition?) -> [SRGProgram] {
-            guard let programs = programComposition?.programs else { return [] }
-            return programs.flatMap { program in
-                return program.subprograms ?? [program]
+        var sections: [Section] {
+            return bouquets.flatMap(\.channels)
+        }
+        
+        private func bouquet(for section: Section) -> Bouquet? {
+            switch self {
+            case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: _):
+                if firstPartyBouquet.contains(channel: section) {
+                    return firstPartyBouquet
+                }
+                else if thirdPartyBouquet.contains(channel: section) {
+                    return thirdPartyBouquet
+                }
+                else {
+                    return nil
+                }
+            case .failed:
+                return nil
             }
         }
+        
+        func items(for section: Section) -> [Item] {
+            guard let day = day, let bouquet = bouquet(for: section) else { return [] }
+            return bouquet.items(for: section, day: day)
+        }
+        
+        func isLoading(in section: Section?) -> Bool {
+            if let section = section {
+                guard let bouquet = bouquet(for: section) else { return false }
+                return bouquet.isLoading
+            }
+            else {
+                // Grid layout: Do not display any loading indicator when the channel list is known
+                return sections.isEmpty
+            }
+        }
+        
+        var isLoading: Bool {
+            return isLoading(in: nil)
+        }
+        
+        func isEmpty(in section: Section?) -> Bool {
+            if let section = section {
+                guard let bouquet = bouquet(for: section) else { return false }
+                return bouquet.isEmpty(for: section)
+            }
+            else {
+                return bouquets.allSatisfy { $0.isEmpty }
+            }
+        }
+        
+        var isEmpty: Bool {
+            return isEmpty(in: nil)
+        }
+    }
+}
+
+// MARK: Publishers
+
+private extension ProgramGuideDailyViewModel {
+    static func bouquet(from state: State?, for provider: SRGProgramProvider, day otherDay: SRGDay) -> Bouquet {
+        guard let state = state else { return .empty }
+        switch state {
+        case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: day):
+            guard otherDay.compare(day) == .orderedSame else {
+                return provider == .thirdParty ? .loading(channels: thirdPartyBouquet.channels) : .loading(channels: firstPartyBouquet.channels)
+            }
+            return provider == .thirdParty ? thirdPartyBouquet : firstPartyBouquet
+        case .failed:
+            return .empty
+        }
+    }
+    
+    static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
+        let bouquet = bouquet(from: state, for: provider, day: day)
+        return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
+            .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
+            .map { .content(programCompositions: $0) }
+            .tryCatch { error -> AnyPublisher<Bouquet, Never> in
+                guard bouquet.hasPrograms else { throw error }
+                return Just(bouquet)
+                    .eraseToAnyPublisher()
+            }
+            .prepend(bouquet)
+            .eraseToAnyPublisher()
     }
 }

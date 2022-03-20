@@ -32,6 +32,21 @@ typedef NS_ENUM(NSInteger, SettingUserLocation) {
     SettingUserLocationIgnored
 };
 
+NSString * const PlaySRGSettingProgramGuideRecentlyUsedLayout = @"PlaySRGSettingProgramGuideRecentlyUsedLayout";
+
+NSValueTransformer *ProgramGuideLayoutTransformer(void)
+{
+    static NSValueTransformer *s_transformer;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"grid" : @(ProgramGuideLayoutGrid),
+                                                                                         @"list" : @(ProgramGuideLayoutList) }
+                                                                         defaultValue:@(ProgramGuideLayoutGrid)
+                                                                  reverseDefaultValue:nil];
+    });
+    return s_transformer;
+}
+
 NSValueTransformer *SettingUserLocationTransformer(void)
 {
     static NSValueTransformer *s_transformer;
@@ -43,6 +58,20 @@ NSValueTransformer *SettingUserLocationTransformer(void)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
+}
+
+ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(void)
+{
+    return [[ProgramGuideLayoutTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingProgramGuideRecentlyUsedLayout]] integerValue];
+}
+
+void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout)
+{
+    NSString *layoutIdentifier = [ProgramGuideLayoutTransformer() reverseTransformedValue:@(layout)];
+    
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:layoutIdentifier forKey:PlaySRGSettingProgramGuideRecentlyUsedLayout];
+    [userDefaults synchronize];
 }
 
 BOOL ApplicationSettingSectionWideSupportEnabled(void)
@@ -81,7 +110,7 @@ NSURL *ApplicationSettingServiceURL(void)
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         settingServiceURLReset = NO;
         completionHandler(YES);
-    }, @"SettingServiceURLReset2", nil);
+    }, @"SettingServiceURLReset2");
     
     if (! settingServiceURLReset) {
         [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];

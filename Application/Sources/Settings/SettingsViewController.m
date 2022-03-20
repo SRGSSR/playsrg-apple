@@ -19,7 +19,9 @@
 #import "Onboarding.h"
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
+#import "PushService+Private.h"
 #import "UIApplication+PlaySRG.h"
+#import "UIDevice+PlaySRG.h"
 #import "UIImage+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
@@ -62,6 +64,7 @@ static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
+static NSString * const SettingsCopySupportInformationButton = @"Button_CopySupportInformation";
 
 // Advanced features settings group
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
@@ -82,6 +85,7 @@ static NSString * const SettingsResetGroup = @"Group_Reset";
 static NSString * const SettingsClearWebCacheButton = @"Button_ClearWebCache";
 static NSString * const SettingsClearVectorImageCacheButton = @"Button_ClearVectorImageCache";
 static NSString * const SettingsClearAllContentsButton = @"Button_ClearAllContents";
+static NSString * const SettingsSimulateMemoryWarning = @"Button_SimulateMemoryWarning";
 
 // Developer settings group
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
@@ -182,6 +186,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [hiddenKeys addObject:SettingsClearWebCacheButton];
     [hiddenKeys addObject:SettingsClearVectorImageCacheButton];
     [hiddenKeys addObject:SettingsClearAllContentsButton];
+    [hiddenKeys addObject:SettingsSimulateMemoryWarning];
     
     [hiddenKeys addObject:SettingsDeveloperGroup];
     [hiddenKeys addObject:SettingsFLEXButton];
@@ -234,6 +239,46 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     
     self.hiddenKeys = hiddenKeys.copy;
+}
+
+#pragma mark Support information
+
+- (NSString *)supportInformation
+{
+    NSMutableArray<NSString *> *supportInformationComponents = [NSMutableArray array];
+    
+    [supportInformationComponents addObject:@"General information"];
+    [supportInformationComponents addObject:@"-------------------"];
+    
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"App name: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"App identifier: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"]]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS: %@", UIDevice.currentDevice.systemName]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model: %@", UIDevice.currentDevice.model]];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model identifier: %@", UIDevice.currentDevice.play_hardware]];
+    
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
+    if (SRGIdentityService.currentIdentityService) {
+        [supportInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
+    }
+    
+    [supportInformationComponents addObject:@""];
+    [supportInformationComponents addObject:@"Push notification information"];
+    [supportInformationComponents addObject:@"-----------------------------"];
+    
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
+    
+    NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
+    
+    NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
+    
+    NSArray<NSString *> *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects sortedArrayUsingSelector:@selector(compare:)];
+    [supportInformationComponents addObject:[NSString stringWithFormat:@"Subscribed URNs: %@", (subscribedShowURNs.count != 0) ? [subscribedShowURNs componentsJoinedByString:@","] : @"None"]];
+    
+    return [supportInformationComponents componentsJoinedByString:@"\n"];
 }
 
 #pragma mark What's new
@@ -344,7 +389,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     else if ([specifier.key isEqualToString:SettingsWhatsNewButton]) {
         [self loadWhatsNewWithCompletionHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
             if (error) {
-                [Banner showError:error inViewController:self];
+                [Banner showError:error];
                 return;
             }
             
@@ -422,6 +467,13 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
+    else if ([specifier.key isEqualToString:SettingsCopySupportInformationButton]) {
+        UIPasteboard.generalPasteboard.string = [self supportInformation];
+        [Banner showWithStyle:BannerStyleInfo
+                      message:NSLocalizedString(@"Support information has been copied to the pasteboard", @"Information message displayed when support information has been copied to the pasteboard")
+                        image:nil
+                       sticky:NO];
+    }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subscribe to all shows?", @"Title of the message displayed when the user is about to subscribe to all shows")
                                                                                  message:nil
@@ -473,6 +525,13 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         [UIImage srg_clearVectorImageCache];
         [Download removeAllDownloads];
     }
+    else if ([specifier.key isEqualToString:SettingsSimulateMemoryWarning]) {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        NSString *methodName = [[[NSString stringWithFormat:@"_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g"] componentsSeparatedByCharactersInSet:NSCharacterSet.decimalDigitCharacterSet] componentsJoinedByString:@""];
+        [UIApplication.sharedApplication performSelector:NSSelectorFromString(methodName)];
+#pragma clang diagnostic pop
+    }
 #if defined(DEBUG) || defined(APPCENTER)
     else if ([specifier.key isEqualToString:SettingsFLEXButton]) {
         [[FLEXManager sharedManager] toggleExplorer];
@@ -514,10 +573,9 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
 - (UITableViewCell *)settingsViewController:(UITableViewController<IASKViewController> *)settingsViewController cellForSpecifier:(IASKSpecifier *)specifier
 {
     if ([specifier.key isEqualToString:SettingsApplicationVersionCell]) {
-        static NSString * const kApplicationVersionCellIdentifier = @"Cell_ApplicationVersion";
-        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:kApplicationVersionCellIdentifier];
+        UITableViewCell *cell = [settingsViewController.tableView dequeueReusableCellWithIdentifier:SettingsApplicationVersionCell];
         if (! cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kApplicationVersionCellIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:SettingsApplicationVersionCell];
         }
         cell.textLabel.text = specifier.title;
         cell.detailTextLabel.text = NSBundle.mainBundle.play_friendlyVersionNumber;

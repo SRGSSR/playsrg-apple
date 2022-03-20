@@ -1,0 +1,19 @@
+{
+  "images" : [
+    {
+      "filename" : "downloadstop_22.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "downloadstop_22-1.pdf",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "properties" : {
+    "template-rendering-intent" : "template"
+  }
+}

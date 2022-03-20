@@ -5,6 +5,3 @@ CODE_SIGN_ENTITLEMENTS[config=Beta_AppCenter] = $(PROJECT_DIR)/TV Application/TV
 CODE_SIGN_ENTITLEMENTS[config=Nightly_AppCenter] = $(PROJECT_DIR)/TV Application/TV-Application-enterprise.entitlements
 PRODUCT_MODULE_NAME = PlaySRG
 SWIFT_OBJC_BRIDGING_HEADER = $(PROJECT_DIR)/TV Application/Sources/PlaySRG-TV-ObjectiveC.h
-
-// Since ComScore is not compatible with arm64 tvOS simulator architecture
-EXCLUDED_ARCHS[sdk=appletvsimulator*] = arm64

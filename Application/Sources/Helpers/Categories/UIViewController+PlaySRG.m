@@ -328,7 +328,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
     [[SRGDataProvider.currentDataProvider mediaCompositionForURN:media.URN standalone:standalone withCompletionBlock:^(SRGMediaComposition * _Nullable mediaComposition, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         void (^presentNativePlayer)(NSString *) = ^(NSString *message) {
             [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
-                [Banner showWithStyle:BannerStyleInfo message:message image:nil sticky:NO inViewController:nil /* self is being covered */];
+                [Banner showWithStyle:BannerStyleInfo message:message image:nil sticky:NO];
                 completion ? completion(PlayerTypeNative) : nil;
             }];
         };
@@ -362,7 +362,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
         }
         else {
             [self play_presentNativeMediaPlayerFromLetterboxController:letterboxController withAirPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
-                [Banner showWithStyle:BannerStyleInfo message:error.localizedDescription image:nil sticky:NO inViewController:nil /* self is being covered */];
+                [Banner showWithStyle:BannerStyleInfo message:error.localizedDescription image:nil sticky:NO];
                 completion ? completion(PlayerTypeNative) : nil;
             }];
         }

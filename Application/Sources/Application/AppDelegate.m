@@ -49,7 +49,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Application lifecycle
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
     NSAssert(NSClassFromString(@"ASIdentifierManager") == Nil, @"No implicit AdSupport.framework dependency must be found");
     
@@ -58,7 +58,7 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [PlayFirebaseConfiguration clearFirebaseConfigurationCache];
         completionHandler(YES);
-    }, @"FirebaseConfigurationReset", nil);
+    }, @"FirebaseConfigurationReset");
     
     // The configuration file, copied at build time in the main product bundle, has the standard Firebase
     // configuration filename
@@ -107,6 +107,8 @@ static void *s_kvoContext = &s_kvoContext;
     [self setupAnalytics];
     [self setupDataProvider];
     
+    [SearchBar setup];
+    
     // Use appropriate voice over language for the whole application
     application.accessibilityLanguage = applicationConfiguration.voiceOverLanguageCode;
     
@@ -130,15 +132,15 @@ static void *s_kvoContext = &s_kvoContext;
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         firstLaunchDone = NO;
         completionHandler(YES);
-    }, @"FirstLaunchDone", nil);
+    }, @"FirstLaunchDone");
     
-    [PushService.sharedService setup];
+    [PushService.sharedService setupWithLaunchingWithOptions:launchOptions];
     [PushService.sharedService updateApplicationBadge];
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         [UIImage srg_clearVectorImageCache];
         completionHandler(YES);
-    }, @"ClearVectorImageCache2", nil);
+    }, @"ClearVectorImageCache2");
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
@@ -148,16 +150,16 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults removeObjectForKey:previousKey];
         [userDefaults synchronize];
         completionHandler(YES);
-    }, @"MigrateSelectedLiveStreamURNForChannels", nil);
+    }, @"MigrateSelectedLiveStreamURNForChannels");
     
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    if (PushService.sharedService) {
-        PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-            FavoritesForcePushServiceUpdate();
-            completionHandler(YES);
-        }, @"MigrateSubscribedShows", nil);
-    }
-#endif
+    FavoritesUpdatePushService();
+    
+    [NSNotificationCenter.defaultCenter addObserverForName:SRGPreferencesDidChangeNotification object:SRGUserData.currentUserData.preferences queue:nil usingBlock:^(NSNotification * _Nonnull notification) {
+        NSSet<NSString *> *domains = notification.userInfo[SRGPreferencesDomainsKey];
+        if ([domains containsObject:PlayPreferencesDomain]) {
+            FavoritesUpdatePushService();
+        }
+    }];
     
     return YES;
 }
@@ -179,7 +181,7 @@ static void *s_kvoContext = &s_kvoContext;
 }
 
 // https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
     [PushService.sharedService updateApplicationBadge];
     completionHandler(UIBackgroundFetchResultNoData);
@@ -396,8 +398,7 @@ static void *s_kvoContext = &s_kvoContext;
             [Banner showWithStyle:BannerStyleWarning
                           message:NSLocalizedString(@"You have been automatically logged out. Login again to keep your data synchronized across devices.", @"Notification displayed when the user has been logged out unexpectedly.")
                             image:[UIImage imageNamed:@"account"]
-                           sticky:YES
-                 inViewController:nil];
+                           sticky:YES];
         });
     }
     

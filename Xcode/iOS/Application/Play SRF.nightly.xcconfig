@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play SRF.nightly.xcconfig"
+#include? "Configuration/Xcode/Play SRF.nightly.xcconfig"
+
 #include "Xcode/Shared/BUs/SRF.xcconfig"
 #include "Xcode/Shared/Targets/iOS/Application.xcconfig"
 

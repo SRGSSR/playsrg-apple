@@ -268,14 +268,13 @@
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"Media is being downloaded", @"Message on top screen when trying to open a media in the download list and the media is being downloaded.")
                         image:nil
-                       sticky:NO
-             inViewController:self];
+                       sticky:NO];
     }
     else {
         NSError *error = [NSError errorWithDomain:PlayErrorDomain
                                              code:PlayErrorCodeNotFound
                                          userInfo:@{ NSLocalizedDescriptionKey : NSLocalizedString(@"Media not available yet", @"Message on top screen when trying to open a media in the download list and the media is not downloaded.") }];
-        [Banner showError:error inViewController:self];
+        [Banner showError:error];
     }
 }
 

@@ -39,8 +39,7 @@
     self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
     self.titleLabel.text = applicationSectionInfo.title;
     
-    self.iconImageView.image = applicationSectionInfo.image;
-    [self updateIconImageViewAnimation];
+    [self updateIconImageView];
 }
 
 #pragma mark Overrides
@@ -61,7 +60,7 @@
     [super willMoveToWindow:window];
     
     if (window) {
-        [self updateIconImageViewAnimation];
+        [self updateIconImageView];
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(downloadSessionStateDidChange:)
                                                    name:DownloadSessionStateDidChangeNotification
@@ -80,29 +79,28 @@
     self.titleLabel.textColor = color;
     self.iconImageView.tintColor = color;
     
-    [self updateIconImageViewAnimation];
+    [self updateIconImageView];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
     
-    [self updateIconImageViewAnimation];
+    [self updateIconImageView];
 }
 
 #pragma mark User interface
 
-- (void)updateIconImageViewAnimation
+- (void)updateIconImageView
 {
-    if (self.applicationSectionInfo.applicationSection == ApplicationSectionDownloads) {
-        if (DownloadSession.sharedDownloadSession.state == DownloadSessionStateDownloading) {
-            [self.iconImageView play_setDownloadAnimationWithTintColor:self.iconImageView.tintColor];
-            [self.iconImageView startAnimating];
-        }
-        else {
-            [self.iconImageView stopAnimating];
-            self.iconImageView.image = self.applicationSectionInfo.image;
-        }
+    if (self.applicationSectionInfo.applicationSection == ApplicationSectionDownloads
+            && DownloadSession.sharedDownloadSession.state == DownloadSessionStateDownloading) {
+        [self.iconImageView play_setDownloadAnimationWithTintColor:self.iconImageView.tintColor];
+        [self.iconImageView startAnimating];
+    }
+    else {
+        [self.iconImageView stopAnimating];
+        self.iconImageView.image = self.applicationSectionInfo.image;
     }
 }
 
@@ -110,7 +108,7 @@
 
 - (void)downloadSessionStateDidChange:(NSNotification *)notification
 {
-    [self updateIconImageViewAnimation];
+    [self updateIconImageView];
 }
 
 @end

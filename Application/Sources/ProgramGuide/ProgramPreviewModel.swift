@@ -13,16 +13,24 @@ final class ProgramPreviewModel: ObservableObject {
     @Published var program: SRGProgram?
     @Published private(set) var date = Date()
     
+    private var primaryTitle: String {
+        return program?.title ?? .placeholder(length: 16)
+    }
+    
+    private var secondaryTitle: String? {
+        return program?.subtitle ?? program?.lead
+    }
+    
     var subtitle: String? {
-        return program?.subtitle != nil ? program?.title : nil
+        return secondaryTitle != nil ? primaryTitle : nil
     }
     
     var title: String {
-        if let subtitle = program?.subtitle {
-            return subtitle
+        if let secondaryTitle = secondaryTitle {
+            return secondaryTitle
         }
         else {
-            return program?.title ?? .placeholder(length: 16)
+            return primaryTitle
         }
     }
     

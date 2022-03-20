@@ -18,6 +18,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) UIEdgeInsets play_additionalContentInsets;
 
+@optional
+
+/**
+ *  Child controllers for the container. If this method is not implemented the default `childViewControllers` property
+ *  is used. This method is only useful for special containments where the parent-child relationship is not obvious
+ *  (e.g. search controller).
+ */
+@property (nonatomic, readonly) NSArray<UIViewController *> *play_contentChildViewControllers;
+
 @end
 
 /**
@@ -35,6 +44,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  Additional content insets applied to the declared scroll views.
  */
 @property (nonatomic, readonly) UIEdgeInsets play_paddingContentInsets;
+
+@optional
+
+/**
+ *  Parent view controller for the content. If this method is not implemented the default `parentViewController`
+ *  is used. This method is only useful for special containments where the parent-child relationship is not obvious
+ *  (e.g. search controller).
+ */
+@property (nonatomic, readonly, nullable) UIViewController *play_contentParentViewController;
 
 @end
 

@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play RTR TV.debug.xcconfig"
+#include? "Configuration/Xcode/Play RTR TV.debug.xcconfig"
+
 #include "Xcode/Shared/BUs/RTR.xcconfig"
 #include "Xcode/Shared/Targets/tvOS/Application.xcconfig"
 

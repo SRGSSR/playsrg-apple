@@ -129,6 +129,19 @@ extension Collection {
     }
     
     /**
+     *  Transform each item in a collection (getting rid of `nil` items), providing an auto-increased index with each
+     *  processed item.
+     */
+    func enumeratedCompactMap<T>(_ transform: (Self.Element, Int) throws -> T?) rethrows -> [T] {
+        var index = 0
+        return try compactMap { element in
+            let transformedElement = try transform(element, index)
+            index += 1
+            return transformedElement
+        }
+    }
+    
+    /**
      *  Groups items from the receiver into an alphabetical list. Preserves the initial ordering in each group,
      *  and collects items starting with non-letter characters under '#'. If a group is present in the returned
      *  array the array of associated items is guaranteed to contain at least 1 item.
@@ -168,6 +181,7 @@ extension SRGImageMetadata {
 }
 
 // Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
+// TODO: Remove after tvOS media detail view refactoring
 extension Publisher where Failure == Never {
     func weakAssign<T: AnyObject>(to keyPath: ReferenceWritableKeyPath<T, Output>, on object: T) -> AnyCancellable {
         sink { [weak object] value in
@@ -186,18 +200,20 @@ extension View {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
 #if os(tvOS)
-                accessibilityElement()
+                accessibilityHidden(true)
+                    .accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityAddTraits(traits)
 #else
-                accessibilityElement()
+                accessibilityHidden(true)
+                    .accessibilityElement()
                     .accessibilityLabel(label)
                     .accessibilityHint(hint ?? "")
                     .accessibilityAddTraits(traits)
 #endif
             }
             else {
-                accessibility(hidden: true)
+                accessibilityHidden(true)
             }
         }
     }

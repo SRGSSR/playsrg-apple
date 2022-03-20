@@ -29,18 +29,17 @@ final class PageViewModel: Identifiable, ObservableObject {
         self.id = id
         
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
-            return SRGDataProvider.current!.sectionsPublisher(id: id)
+            return Self.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
                         return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
-                            return SRGDataProvider.current!.rowPublisher(id: id,
-                                                                         section: section,
-                                                                         pageSize: Self.pageSize(for: section, in: sections),
-                                                                         paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
+                            return Self.rowPublisher(id: id,
+                                                     section: section,
+                                                     pageSize: Self.pageSize(for: section, in: sections),
+                                                     paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
                             )
                             .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
                             .prepend(Self.placeholderRow(for: section, state: self?.state))
-                            .eraseToAnyPublisher()
                         }
                     })
                     .eraseToAnyPublisher()
@@ -50,7 +49,6 @@ final class PageViewModel: Identifiable, ObservableObject {
                 .catch { error in
                     return Just(State.failed(error: error))
                 }
-                .eraseToAnyPublisher()
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -91,7 +89,7 @@ final class PageViewModel: Identifiable, ObservableObject {
                     return self.state.sections.isEmpty
                 }
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
     
@@ -276,29 +274,29 @@ extension PageViewModel {
 
 // MARK: Publishers
 
-private extension SRGDataProvider {
-    func sectionsPublisher(id: PageViewModel.Id) -> AnyPublisher<[PageViewModel.Section], Error> {
+private extension PageViewModel {
+    static func sectionsPublisher(id: Id) -> AnyPublisher<[Section], Error> {
         switch id {
         case .video:
-            return contentPage(for: ApplicationConfiguration.shared.vendor, mediaType: .video)
-                .map { $0.sections.enumeratedMap { PageViewModel.Section(.content($0), index: $1) } }
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
+                .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
         case let .topic(topic: topic):
-            return contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.enumeratedMap { PageViewModel.Section(.content($0), index: $1) } }
+            return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
+                .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().enumeratedMap { PageViewModel.Section(.configured($0), index: $1) })
+            return Just(channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().enumeratedMap { PageViewModel.Section(.configured($0), index: $1) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections().enumeratedMap { Section(.configured($0), index: $1) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
     }
     
-    func rowPublisher(id: PageViewModel.Id, section: PageViewModel.Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<PageViewModel.Row, Error> {
+    static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
         return Publishers.CombineLatest(
             section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .scan([]) { $0 + $1 },
@@ -309,18 +307,18 @@ private extension SRGDataProvider {
         .map { items, removedItems in
             return items.filter { !removedItems.contains($0) }
         }
-        .map { Self.rowItems(removeDuplicates(in: $0), in: section) }
-        .map { PageViewModel.Row(section: section, items: $0) }
+        .map { rowItems(removeDuplicates(in: $0), in: section) }
+        .map { Row(section: section, items: $0) }
         .eraseToAnyPublisher()
     }
     
-    static func rowItems(_ items: [Content.Item], in section: PageViewModel.Section) -> [PageViewModel.Item] {
-        var rowItems = items.map { PageViewModel.Item(.item($0), in: section) }
+    static func rowItems(_ items: [Content.Item], in section: Section) -> [Item] {
+        var rowItems = items.map { Item(.item($0), in: section) }
 #if os(tvOS)
         if rowItems.count > 0
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
-            rowItems.append(PageViewModel.Item(.more, in: section))
+            rowItems.append(Item(.more, in: section))
         }
 #endif
         return rowItems

@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play SRF.debug.xcconfig"
+#include? "Configuration/Xcode/Play SRF.debug.xcconfig"
+
 #include "Xcode/Shared/BUs/SRF.xcconfig"
 #include "Xcode/Shared/Targets/iOS/Application.xcconfig"
 

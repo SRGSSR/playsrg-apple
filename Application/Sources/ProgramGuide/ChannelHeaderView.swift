@@ -39,7 +39,7 @@ struct ChannelHeaderView: View {
                 .shadow(color: Color(white: 0, opacity: 0.6), radius: 10, x: 0, y: 0)
                 .mask(Rectangle().padding(.trailing, -40))
         )
-        .accessibility(hidden: true)
+        .accessibilityHidden(true)
     }
 }
 

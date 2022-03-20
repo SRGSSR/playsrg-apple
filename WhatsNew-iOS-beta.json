@@ -149,5 +149,10 @@
   "3.4.0-370": "- Update CarPlay tab bar icons.\n- Improve page reolad at the right time (iOS and CarPlay views).",
   "3.4.0-371": "- Fix content updates incorrectly performed when resuming the application.",
   "3.5.0-372": "- A grid TV guide layout has been added to the Videos section on iPad for large screen width.\n- Tonight button on the TV guide.\n- Remove show title below poster images.",
-  "3.5.0-373": "- TV guide layout fixes.\n- Fix background video playback incorrectly paused."
+  "3.5.0-373": "- TV guide layout fixes.\n- Fix background video playback incorrectly paused.",
+  "3.5.1-374": "- Display 3rd party channels in SRF/RTR TV guide.\n- List / Grid TV guide layout with a switch button available for smartphone and tablet.\n- Cancel button in search view to dismiss the keyboard.\n- Most searched shows displayed as a grid.\n- Youth protection information for all BUs.\n\nPush notifications moved to TestFlight versions (not available in AppCenter versions anymore).\n",
+  "3.5.1-375": "- Add basic push notification information in application settings.\n- Fix favorite state on media player page.\n- Improve accessibility.",
+  "3.5.1-376": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
+  "3.5.1-377": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
+  "3.5.1-378": "- Fix an unexpected item selection option in detail views.\n- SRG released libraries.\n- All translations are up to date."
 }

@@ -36,6 +36,10 @@ final class ProgramCellViewModel: ObservableObject {
     }
     
     var canPlay: Bool {
+        // The TV channel must be a BU channel to be playable (as declared by the application configuration)
+        guard let channel = data?.channel, ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) != nil else {
+            return false
+        }
         return progress != nil || data?.program.mediaURN != nil
     }
     

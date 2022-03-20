@@ -1,4 +1,5 @@
-#include "Xcode/Links/Play RSI.debug.xcconfig"
+#include? "Configuration/Xcode/Play RSI.debug.xcconfig"
+
 #include "Xcode/Shared/BUs/RSI.xcconfig"
 #include "Xcode/Shared/Targets/iOS/Application.xcconfig"
 

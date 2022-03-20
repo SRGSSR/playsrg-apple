@@ -9,6 +9,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  Program guide layout.
+ */
+typedef NS_CLOSED_ENUM(NSInteger, ProgramGuideLayout) {
+    ProgramGuideLayoutGrid,
+    ProgramGuideLayoutList
+};
+
+/**
  *  Poster image setting.
  */
 typedef NS_ENUM(NSInteger, SettingPosterImages) {
@@ -25,6 +33,9 @@ typedef NS_ENUM(NSInteger, SettingPosterImages) {
      */
     SettingPosterImagesIgnored
 };
+
+OBJC_EXPORT ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(void);
+OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout);
 
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);

@@ -115,3 +115,4 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `showsUnavailable` (optional, boolean): If set to `true`, all features related to shows are removed.
 * `subtitleAvailabilityHidden` (optional, boolean): Set to `true` to hide the subtitle availability setting.
 * `tvGuideUnavailable` (optional, boolean): If set to `true`, TV guide access is removed and replaced with the legacy _by date_ access.
+* `tvThirdPartyChannelsAvailable` (optional, boolean): if set to `true`, third-party TV channel content is available in the TV guide.

@@ -130,11 +130,19 @@ struct MediaDescription {
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
+        let accessibilityLabel: String
         if let show = media.show, !areRedundant(media: media, show: show) {
-            return show.title.appending(", \(media.title)")
+            accessibilityLabel = show.title.appending(", \(media.title)")
         }
         else {
-            return media.title
+            accessibilityLabel = media.title
+        }
+        
+        if let youthProtectionLabel = SRGAccessibilityLabelForYouthProtectionColor(media.youthProtectionColor) {
+            return accessibilityLabel.appending(", \(youthProtectionLabel)")
+        }
+        else {
+            return accessibilityLabel
         }
     }
     
@@ -172,7 +180,8 @@ struct MediaDescription {
                         color: .srgBlue
                     )
                 }
-                else if let endDate = media.endDate, media.contentType == .episode, let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
+                else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,
+                            let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
                     return BadgeProperties(
                         text: String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime),
                         color: .play_orange

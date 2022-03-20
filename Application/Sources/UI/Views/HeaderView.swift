@@ -41,7 +41,7 @@ struct HeaderView: View {
                     .srgFont(.H3)
                     .lineLimit(1)
                 if hasDetailDisclosure {
-                    Image("chevron")
+                    Image(decorative: "chevron")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(height: SRGFont.metricsForFont(with: .H3).scaledValue(for: 18))
@@ -57,6 +57,7 @@ struct HeaderView: View {
         .foregroundColor(.srgGrayC7)
         .padding(.vertical, constant(iOS: 3, tvOS: 15))
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(label: title, traits: .isHeader)
     }
 }
 

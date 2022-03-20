@@ -19,6 +19,7 @@ The Play platform is more generally available on the web and on Android phones:
 The application provides a rich set of functionalities, among which:
 
 * Access to our content, whether it is broadcast on TV, radio or online. 
+* A TV guide.
 * An audio mini player (iOS only).
 * Subscriptions with push notifications (iOS only).
 * Resume playback and continuous playback.
@@ -42,17 +43,16 @@ If you want to contribute to the project, have a look at our [contributing guide
 
 - Building the project requires command-line tools for icon generation, easily installed with [Homebrew](https://brew.sh/):
 
-```
-brew install imagemagick ghostscript
-brew install jq
-```
+	```
+	brew install imagemagick ghostscript jq
+	```
 
 - Some project dependencies are retrieved using [CocoaPods](https://cocoapods.org/). Be sure that this tool is available on your system:
 
-```
-which pod
-pod --version
-```
+	```
+	which pod
+	pod --version
+	```
 
 ## Building the project
 
@@ -62,7 +62,15 @@ A [Makefile](../Makefile) provides several targets to prepare project dependenci
 make help
 ```
 
-Commands are available both for internal use (proprietary builds) and for wider use (public builds).
+### Project setup
+
+After checking out the project run:
+
+```
+make setup
+```
+
+to setup the project and its dependencies.
 
 ### Private settings
 
@@ -75,21 +83,7 @@ If you need to make changes to the settings:
 1. Update the [Makefile](../Makefile) `CONFIGURATION_COMMIT_SHA1` variable to point at the configuration commit to use.
 1. Push all commits when you are ready.
 
-If you are part of the SRG SSR organization be sure to setup the project first:
-
-```
-make setup
-```
-
-### Open source builds
-
-If you are not part of the SRG SSR organization you can still build the project. Setup the project first:
-
-```
-make
-```
-
-This setup does not contain private configuration information we use for publishing the applications, but otherwise works the same.
+The project can be built without private settings but some features might not be available (e.g. push notifications) or configured in a different way.
 
 ### Running the project
 
@@ -106,3 +100,4 @@ Follow the links below for feature specifications and technical details:
 * [Configuration files](CONFIGURATION_FILES.md)
 * [Remote configuration](REMOTE_CONFIGURATION.md)
 * [Custom URL and Universal Link Support](CUSTOM_URLS_AND_UNIVERSAL_LINKS.md)
+* [Push notifications](PUSH_NOTIFICATIONSSS.md)

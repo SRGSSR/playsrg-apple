@@ -31,7 +31,7 @@ class IndexedCollectionViewDiffableDataSource<Section, Item>: UICollectionViewDi
     
     override func indexTitles(for collectionView: UICollectionView) -> [String]? {
         let sectionIdentifiers = snapshot().sectionIdentifiers
-        return (sectionIdentifiers.count >= minimumIndexTitlesCount) ? sectionIdentifiers.map { $0.indexTitle } : nil
+        return (sectionIdentifiers.count >= minimumIndexTitlesCount) ? sectionIdentifiers.map(\.indexTitle) : nil
     }
     
     override func collectionView(_ collectionView: UICollectionView, indexPathForIndexTitle title: String, at index: Int) -> IndexPath {

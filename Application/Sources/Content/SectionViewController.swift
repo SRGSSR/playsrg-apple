@@ -29,9 +29,10 @@ final class SectionViewController: UIViewController {
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
-#endif
     
     private var refreshTriggered = false
+#endif
+    
     private var contentInsets: UIEdgeInsets
     private var leftBarButtonItem: UIBarButtonItem?
     
@@ -96,7 +97,7 @@ final class SectionViewController: UIViewController {
         self.emptyView = emptyView
         
 #if os(tvOS)
-        self.tabBarObservedScrollView = collectionView
+        tabBarObservedScrollView = collectionView
 #else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
@@ -333,7 +334,7 @@ final class SectionViewController: UIViewController {
     @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
         guard let sharingItem = model.configuration.properties.sharingItem else { return }
         
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button, in: self)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
@@ -473,7 +474,7 @@ extension SectionViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldBeginMultipleSelectionInteractionAt indexPath: IndexPath) -> Bool {
-        return true
+        return model.configuration.properties.supportsEdition
     }
     
     func collectionView(_ collectionView: UICollectionView, didBeginMultipleSelectionInteractionAt indexPath: IndexPath) {
@@ -520,11 +521,13 @@ extension SectionViewController: UICollectionViewDelegate {
 
 extension SectionViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+#if os(iOS)
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
+#endif
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -585,7 +588,7 @@ private extension SectionViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, index: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section,
                                                         configuration: configuration,
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
@@ -609,20 +612,20 @@ private extension SectionViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 }
             }
@@ -634,7 +637,7 @@ private extension SectionViewController {
             let configuration = self.model.configuration
             
             let layoutSection = layoutSection(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, index: sectionIndex, layoutEnvironment: layoutEnvironment)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, configuration: configuration, layoutEnvironment: layoutEnvironment)
             layoutSection.supplementariesFollowContentInsets = false
             return layoutSection
         }, configuration: layoutConfiguration())

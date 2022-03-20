@@ -81,9 +81,6 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         
         self.configuration = configuration;
         
-        // Use status cached by Airship as initial value
-        self.enabled = ([UAirship push].authorizationStatus == UAAuthorizationStatusAuthorized);
-        
         [NSNotificationCenter.defaultCenter addObserver:self
                                                selector:@selector(applicationDidBecomeActive:)
                                                    name:UIApplicationDidBecomeActiveNotification
@@ -139,7 +136,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSSet<NSString *> *)subscribedShowURNs
 {
-    NSArray<NSString *> *tags = [UAirship channel].tags;
+    NSArray<NSString *> *tags = UAirship.channel.tags;
     if (tags.count == 0) {
         return [NSSet set];
     }
@@ -155,22 +152,35 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     return URNs.copy;
 }
 
+- (NSString *)deviceToken
+{
+    return UAirship.push.deviceToken;
+}
+
+- (NSString *)airshipIdentifier
+{
+    return UAirship.channel.identifier;
+}
+
 #pragma mark Setup
 
-- (void)setup
+- (void)setupWithLaunchingWithOptions:(NSDictionary<UIApplicationLaunchOptionsKey,id> *)launchOptions
 {
-    [UAirship takeOff:self.configuration];
+    [UAirship takeOff:self.configuration launchOptions:launchOptions];
     
-    [UAirship push].defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
-    [UAirship push].pushNotificationDelegate = self;
-    [UAirship push].autobadgeEnabled = YES;
+    UAirship.push.defaultPresentationOptions = (UNNotificationPresentationOptionList | UNNotificationPresentationOptionBanner | UNNotificationPresentationOptionBadge | UNNotificationPresentationOptionSound);
+    UAirship.push.pushNotificationDelegate = self;
+    UAirship.push.autobadgeEnabled = YES;
+    
+    // Use status cached by Airship as initial value
+    self.enabled = (UAirship.push.authorizationStatus == UAAuthorizationStatusAuthorized);
 }
 
 #pragma mark Badge management
 
 - (void)resetApplicationBadge
 {
-    [[UAirship push] resetBadge];
+    [UAirship.push resetBadge];
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
 }
 
@@ -179,7 +189,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     NSInteger unreadNotificationCount = Notification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
-        [UAirship push].badgeNumber = unreadNotificationCount;
+        UAirship.push.badgeNumber = unreadNotificationCount;
         [NSNotificationCenter.defaultCenter postNotificationName:PushServiceBadgeDidChangeNotification object:self];
     }
 }
@@ -220,10 +230,12 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         return;
     }
     
-    for (NSString *URN in URNs) {
-        [[UAirship channel] addTag:[self tagForShowURN:URN]];
-    }
-    [[UAirship push] updateRegistration];
+    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+        for (NSString *URN in URNs) {
+            [editor addTag:[self tagForShowURN:URN]];
+        }
+    }];
+    [UAirship.push updateRegistration];
 }
 
 - (void)unsubscribeFromShowURNs:(NSSet<NSString *> *)URNs
@@ -232,15 +244,17 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         return;
     }
     
-    for (NSString *URN in URNs) {
-        [[UAirship channel] removeTag:[self tagForShowURN:URN]];
-    }
-    [[UAirship push] updateRegistration];
+    [UAirship.channel editTags:^(UATagEditor * _Nonnull editor) {
+        for (NSString *URN in URNs) {
+            [editor removeTag:[self tagForShowURN:URN]];
+        }
+    }];
+    [UAirship.push updateRegistration];
 }
 
 - (BOOL)isSubscribedToShowURN:(NSString *)URN
 {
-    return [[UAirship channel].tags containsObject:[self tagForShowURN:URN]];
+    return [UAirship.channel.tags containsObject:[self tagForShowURN:URN]];
 }
 
 #pragma mark Actions
@@ -249,8 +263,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     // Lazily enable push notifications at the Urban Airship level, so that the user is asked the first time she
     // attempts to use the functionality.
-    if (! [UAirship push].userPushNotificationsEnabled) {
-        [UAirship push].userPushNotificationsEnabled = YES;
+    if (! UAirship.push.userPushNotificationsEnabled) {
+        UAirship.push.userPushNotificationsEnabled = YES;
         return YES;
     }
     else {
@@ -260,35 +274,37 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 #pragma mark UAPushNotificationDelegate protocol
 
-- (void)receivedNotificationResponse:(UANotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
+- (void)receivedNotificationResponse:(UNNotificationResponse *)notificationResponse completionHandler:(void (^)(void))completionHandler
 {
-    if (notificationResponse.notificationContent.notification) {
-        Notification *notification = [[Notification alloc] initWithNotification:notificationResponse.notificationContent.notification];
-        [Notification saveNotification:notification read:YES];
+    UNNotification *notification = notificationResponse.notification;
+    if (notification) {
+        Notification *savedNotification = [[Notification alloc] initWithNotification:notification];
+        [Notification saveNotification:savedNotification read:YES];
     }
     
-    UANotificationContent *notificationContent = notificationResponse.notificationContent;
-    NSString *channelUid = notificationContent.notificationInfo[@"channelId"];
+    UNNotificationContent *notificationContent = notification.request.content;
+    NSDictionary *userInfo = notificationContent.userInfo;
+    NSString *channelUid = userInfo[@"channelId"];
     
-    if (notificationContent.notificationInfo[@"media"]) {
-        NSString *mediaURN = notificationContent.notificationInfo[@"media"];
-        NSInteger startTime = [notificationContent.notificationInfo[@"startTime"] integerValue];
+    if (userInfo[@"media"]) {
+        NSString *mediaURN = userInfo[@"media"];
+        NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = notificationContent.notificationInfo[@"show"] ?: AnalyticsSourceNotificationPush;
-            labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;
+            labels.source = userInfo[@"show"] ?: AnalyticsSourceNotificationPush;
+            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;
             labels.value = mediaURN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
         }];
     }
-    else if (notificationContent.notificationInfo[@"show"]) {
-        NSString *showURN = notificationContent.notificationInfo[@"show"];
+    else if (userInfo[@"show"]) {
+        NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceNotificationPush;
-            labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionDisplayShow;
+            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow;
             labels.value = showURN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
         }];
@@ -296,29 +312,21 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     else {
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourceNotificationPush;
-        labels.type = notificationContent.notificationInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert;
-        labels.value = notificationContent.alertBody;
+        labels.type = userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert;
+        labels.value = notificationContent.body;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
     }
     completionHandler();
 }
 
-- (void)receivedForegroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(void))completionHandler
+- (void)receivedForegroundNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))completionHandler
 {
-    if (notificationContent.notification) {
-        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-        [Notification saveNotification:notification read:NO];
-    }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler();
 }
 
-- (void)receivedBackgroundNotification:(UANotificationContent *)notificationContent completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
+- (void)receivedBackgroundNotification:(NSDictionary *)userInfo completionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
 {
-    if (notificationContent.notification) {
-        Notification *notification = [[Notification alloc] initWithNotification:notificationContent.notification];
-        [Notification saveNotification:notification read:NO];
-    }
     [NSNotificationCenter.defaultCenter postNotificationName:PushServiceDidReceiveNotification object:self];
     completionHandler(UIBackgroundFetchResultNewData);
 }

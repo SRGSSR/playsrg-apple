@@ -11,6 +11,7 @@
 "Clear vector image cache" = "Effacer les images vectorielles";
 "Clear web cache" = "Effacer le cache web";
 "Content" = "Contenu";
+"Copy support information" = "Copier les informations de support";
 "Data protection" = "Protection des données";
 "Default (current configuration)" = "Défaut (configuration actuelle)";
 "Default (IP-based location)" = "Défaut (géolocalisation de l'IP)";
@@ -42,6 +43,7 @@
 "Reset" = "Remise à zéro";
 "Section wide support" = "Support étendu des sections";
 "Server" = "Serveur";
+"Simulate memory warning" = "Simuler l'alerte mémoire";
 "Source code" = "Code source";
 "Stage" = "Stage";
 "Standalone playback" = "Lecture individuelle";

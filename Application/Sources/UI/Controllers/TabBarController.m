@@ -16,7 +16,6 @@
 #import "ProfileViewController.h"
 #import "PushService.h"
 #import "RadioChannelsViewController.h"
-#import "SearchViewController.h"
 #import "SplitViewController.h"
 #import "TabBarActionable.h"
 #import "UIColor+PlaySRG.h"

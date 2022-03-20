@@ -8,9 +8,9 @@
 
 #import "NSSet+PlaySRG.h"
 #import "SearchSettingSelectorCell.h"
+#import "PlaySRG-Swift.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
-#import "UISearchBar+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
 
 @import libextobjc;
@@ -25,7 +25,7 @@
 @property (nonatomic) NSArray<SearchSettingsMultiSelectionItem *> *filteredItems;
 
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet SearchBar *searchBar;
 
 @end
 
@@ -81,10 +81,6 @@
     self.searchBar.placeholder = NSLocalizedString(@"Search", @"Search placeholder text");
     self.searchBar.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.searchBar.delegate = self;
-    
-    UITextField *searchTextField = self.searchBar.play_textField;
-    searchTextField.font = [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:18.f];
-    searchTextField.textColor = UIColor.whiteColor;
 }
 
 #pragma mark Rotation

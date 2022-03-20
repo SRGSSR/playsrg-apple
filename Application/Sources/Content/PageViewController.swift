@@ -32,9 +32,9 @@ final class PageViewController: UIViewController {
     private var isNavigationBarHidden: Bool {
         return model.id.isNavigationBarHidden && !UIAccessibility.isVoiceOverRunning
     }
-#endif
     
     private var refreshTriggered = false
+#endif
     
     private var globalHeaderTitle: String? {
 #if os(tvOS)
@@ -112,7 +112,7 @@ final class PageViewController: UIViewController {
         self.emptyView = emptyView
         
 #if os(tvOS)
-        self.tabBarObservedScrollView = collectionView
+        tabBarObservedScrollView = collectionView
 #else
         let refreshControl = RefreshControl()
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
@@ -163,9 +163,9 @@ final class PageViewController: UIViewController {
         
 #if os(iOS)
         model.$serviceMessage
-            .sink { [weak self] serviceMessage in
+            .sink { serviceMessage in
                 guard let serviceMessage = serviceMessage else { return }
-                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true, in: self)
+                Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true)
             }
             .store(in: &cancellables)
         
@@ -380,11 +380,13 @@ extension PageViewController: UICollectionViewDelegate {
 
 extension PageViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+#if os(iOS)
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
+#endif
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -508,7 +510,7 @@ private extension PageViewController {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             
-            func sectionSupplementaryItems(for section: PageViewModel.Section, index: Int) -> [NSCollectionLayoutBoundarySupplementaryItem] {
+            func sectionSupplementaryItems(for section: PageViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {
                 let headerSize = SectionHeaderView.size(section: section, layoutWidth: layoutWidth)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .topLeading)
                 return [header]
@@ -572,16 +574,16 @@ private extension PageViewController {
                     }
                     else {
                         return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                            return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
                 case .liveMediaGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return LiveMediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: Self.itemSpacing)
+                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
                     }
 #if os(iOS)
                 case .showAccess:
@@ -598,7 +600,7 @@ private extension PageViewController {
             let section = snapshot.sectionIdentifiers[sectionIndex]
             
             let layoutSection = layoutSection(for: section)
-            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section, index: sectionIndex)
+            layoutSection.boundarySupplementaryItems = sectionSupplementaryItems(for: section)
             return layoutSection
         }, configuration: layoutConfiguration())
     }
@@ -736,7 +738,6 @@ private extension PageViewController {
             if let title = Self.title(for: section) {
 #if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
-                    .accessibilityElement(label: accessibilityLabel, traits: .isHeader)
 #else
                 Button {
                     firstResponder.sendAction(#selector(SectionHeaderViewAction.openSection(sender:event:)), for: OpenSectionEvent(section: section))
@@ -744,7 +745,6 @@ private extension PageViewController {
                     HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: hasDetailDisclosure)
                 }
                 .disabled(!hasDetailDisclosure)
-                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isHeader)
                 .responderChain(from: firstResponder)
 #endif
             }

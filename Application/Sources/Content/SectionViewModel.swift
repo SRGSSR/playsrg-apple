@@ -23,6 +23,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     var numberOfSelectedItems: Int {
+        guard configuration.properties.supportsEdition else { return 0 }
         return selectedItems.count
     }
     
@@ -67,20 +68,24 @@ final class SectionViewModel: ObservableObject {
     }
     
     func select(_ item: Content.Item) {
+        guard configuration.properties.supportsEdition else { return }
         selectedItems.insert(item)
     }
     
     func deselect(_ item: Content.Item) {
+        guard configuration.properties.supportsEdition else { return }
         selectedItems.remove(item)
     }
     
     func clearSelection() {
+        guard configuration.properties.supportsEdition else { return }
         selectedItems.removeAll()
     }
     
     func deleteSelection() {
-        let properties = configuration.properties
+        guard configuration.properties.supportsEdition else { return }
         
+        let properties = configuration.properties
         properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
@@ -100,7 +105,7 @@ final class SectionViewModel: ObservableObject {
                     return !self.state.hasContent
                 }
         )
-        .throttle(for: 0.5, scheduler: RunLoop.main, latest: false)
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
     }
 }

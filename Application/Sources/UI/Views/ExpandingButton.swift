@@ -47,7 +47,7 @@ struct ExpandingButton: View {
         Button(action: action) {
             HStack(spacing: 8) {
                 if let icon = icon {
-                    Image(icon)
+                    Image(decorative: icon)
                 }
                 if let label = label {
                     Text(label)

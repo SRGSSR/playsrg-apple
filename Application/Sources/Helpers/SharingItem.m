@@ -130,7 +130,6 @@
 
 - (instancetype)initWithSharingItem:(SharingItem *)sharingItem
                              source:(AnalyticsSource)source
-                   inViewController:(UIViewController *)viewController
                 withCompletionBlock:(void (^)(UIActivityType))completionBlock
 {
     if (self = [self initWithActivityItems:@[ sharingItem ] applicationActivities:nil]) {
@@ -161,8 +160,7 @@
                 [Banner showWithStyle:BannerStyleInfo
                               message:NSLocalizedString(@"The content has been copied to the clipboard.", @"Message displayed when some content (media, show, etc.) has been copied to the clipboard")
                                 image:nil
-                               sticky:NO
-                     inViewController:viewController];
+                               sticky:NO];
             }
             
             completionBlock ? completionBlock(activityType) : nil;

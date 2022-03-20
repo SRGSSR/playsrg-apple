@@ -54,6 +54,12 @@
 /* Show unsubscription label */
 "Disable notifications for show" = "Push-Mitteilungen deaktivieren";
 
+/* Button to display the TV guide as a grid */
+"Display grid" = "Als Raster anzeigen";
+
+/* Button to display the TV guide as a list */
+"Display list" = "Als Liste anzeigen";
+
 /* A download button label */
 "Download" = "Download";
 

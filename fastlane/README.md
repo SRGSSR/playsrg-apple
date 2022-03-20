@@ -30,7 +30,7 @@ Builds a new tvOS nightly on AppStore Connect and waits build processing.
 ```
 fastlane ios tvOSnightlyDSYMs
 ```
-Sends latest tvOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest tvOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios iOSnightlies
 ```
 fastlane ios iOSnightlies
@@ -40,7 +40,7 @@ Builds a new iOS nightly on AppStore Connect and waits build processing.
 ```
 fastlane ios iOSnightlyDSYMs
 ```
-Sends latest iOS nightly dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest iOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios nightlyTester
 ```
 fastlane ios nightlyTester
@@ -60,7 +60,7 @@ Builds a new tvOS beta on AppStore Connect with the current build number and wai
 ```
 fastlane ios tvOSbetaDSYMs
 ```
-Sends latest tvOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest tvOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios iOSbetas
 ```
 fastlane ios iOSbetas
@@ -70,7 +70,7 @@ Builds a new iOS beta on AppStore Connect with the current build number and wait
 ```
 fastlane ios iOSbetaDSYMs
 ```
-Sends latest iOS beta dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest iOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios betaTester
 ```
 fastlane ios betaTester
@@ -85,7 +85,7 @@ Uploads a new iOS build on AppStore Connect with the current build number.
 ```
 fastlane ios dSYMs
 ```
-Sends latest iOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest iOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios tvOSappStoreUploads
 ```
 fastlane ios tvOSappStoreUploads
@@ -95,7 +95,7 @@ Uploads a new tvOS build on AppStore Connect with the current build number.
 ```
 fastlane ios tvOSdSYMs
 ```
-Sends latest tvOS dSYMs to App Center. Optional 'version' or 'min_version' parameters.
+Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 ### ios swiScreenshots
 ```
 fastlane ios swiScreenshots

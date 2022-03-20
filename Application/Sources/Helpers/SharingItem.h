@@ -30,11 +30,9 @@ NS_ASSUME_NONNULL_BEGIN
  *  Create an activity view controller for sharing the specified item.
  *
  *  @param source The source of the action.
- *  @param viewController The view controller in which the activity is displayed.
  */
 - (instancetype)initWithSharingItem:(SharingItem *)sharingItem
                              source:(AnalyticsSource)source
-                   inViewController:(UIViewController *)viewController
                 withCompletionBlock:(nullable void (^)(UIActivityType activityType))completionBlock;
 
 @end

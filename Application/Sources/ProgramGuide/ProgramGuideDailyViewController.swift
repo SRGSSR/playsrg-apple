@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SwiftUI
 import UIKit
 
 // MARK: View controller
@@ -13,28 +14,38 @@ final class ProgramGuideDailyViewController: UIViewController {
     private let model: ProgramGuideDailyViewModel
     private let programGuideModel: ProgramGuideViewModel
     
+    private var scrollTargetTime: TimeInterval?
     private var cancellables = Set<AnyCancellable>()
-    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, SRGProgram>!
+    private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
     private weak var emptyView: HostView<EmptyView>!
     
     private static let margin: CGFloat = 10
+    private static let verticalSpacing: CGFloat = 3
     
     var day: SRGDay {
         return model.day
     }
     
-    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram> {
-        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, SRGProgram>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(state.programs(for: channel), toSection: .main)
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
+        var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
+        if let channel = channel {
+            snapshot.appendSections([channel])
+            snapshot.appendItems(state.items(for: channel), toSection: channel)
+        }
         return snapshot
     }
     
-    init(day: SRGDay, programGuideModel: ProgramGuideViewModel) {
-        model = ProgramGuideDailyViewModel(day: day)
+    init(day: SRGDay, programGuideModel: ProgramGuideViewModel, programGuideDailyModel: ProgramGuideDailyViewModel? = nil) {
+        if let programGuideDailyModel = programGuideDailyModel, programGuideDailyModel.day == programGuideModel.day {
+            model = programGuideDailyModel
+        }
+        else {
+            model = ProgramGuideDailyViewModel(day: day, firstPartyChannels: programGuideModel.firstPartyChannels, thirdPartyChannels: programGuideModel.thirdPartyChannels)
+        }
         self.programGuideModel = programGuideModel
+        scrollTargetTime = programGuideModel.time
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,9 +59,6 @@ final class ProgramGuideDailyViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
-        
-        // Disable prefetching for faster scrolling to the current position
-        collectionView.isPrefetchingEnabled = false
         
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
@@ -73,8 +81,8 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ProgramCell>, SRGProgram> { [weak self] cell, _, program in
-            cell.content = ProgramCell(program: program, channel: self?.programGuideModel.selectedChannel, direction: .horizontal)
+        let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, ProgramGuideDailyViewModel.Item> { cell, _, item in
+            cell.content = ItemCell(item: item)
         }
         
         dataSource = UICollectionViewDiffableDataSource(collectionView: collectionView) { collectionView, indexPath, item in
@@ -93,10 +101,16 @@ final class ProgramGuideDailyViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        programGuideModel.$dateSelection
-            .sink { [weak self] dateSelection in
-                if dateSelection.transition == .time {
-                    self?.scrollToTime(dateSelection.time, animated: true)
+        programGuideModel.$change
+            .sink { [weak self] change in
+                guard let self = self else { return }
+                switch change {
+                case let .time(time):
+                    self.scrollToTime(time, animated: true)
+                case .channel:
+                    self.scrollToTime(self.programGuideModel.time, animated: false)
+                default:
+                    break
                 }
             }
             .store(in: &cancellables)
@@ -104,7 +118,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.scrollToTime(animated: false)
+        scrollToTime(programGuideModel.time, animated: false)
     }
     
     private func reloadData(for channel: SRGChannel? = nil) {
@@ -112,38 +126,82 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
-        guard let emptyView = emptyView, let dataSource = dataSource else { return }
-        
-        let channel = channel ?? programGuideModel.selectedChannel
+        let currentChannel = channel ?? self.programGuideModel.selectedChannel
         
         switch state {
-        case .loading:
-            emptyView.content = EmptyView(state: .loading)
         case let .failed(error: error):
             emptyView.content = EmptyView(state: .failed(error: error))
-        case .loaded:
-            emptyView.content = state.programs(for: channel).isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+        case .content:
+            if state.isLoading(in: currentChannel) {
+                emptyView.content = EmptyView(state: .loading)
+            }
+            else if state.isEmpty(in: currentChannel) {
+                emptyView.content = EmptyView(state: .empty(type: .generic))
+            }
+            else {
+                emptyView.content = nil
+            }
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
-            dataSource.apply(Self.snapshot(from: state, for: channel), animatingDifferences: false) {
-                // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
-                // when the content size has not yet been determined (still zero).
-                self.collectionView.layoutIfNeeded()
-                self.scrollToTime(animated: false)
+            self.dataSource.apply(Self.snapshot(from: state, for: currentChannel), animatingDifferences: false) {
+                if let channel = currentChannel, !state.isEmpty(in: channel) {
+                    // Ensure correct content size before attempting to scroll, otherwise scrolling might not work
+                    // when because of a still undetermined content size.
+                    self.collectionView.layoutIfNeeded()
+                    self.scrollToTime(self.scrollTargetTime, animated: false)
+                }
             }
         }
     }
     
-    private func scrollToTime(_ time: TimeInterval? = nil, animated: Bool) {
-        let date = model.day.date.addingTimeInterval(time ?? programGuideModel.dateSelection.time)
-        let programs = model.state.programs(for: programGuideModel.selectedChannel)
-        guard let row = programs.firstIndex(where: { $0.endDate > date }) else { return }
-        collectionView.play_scrollToItem(at: IndexPath(row: row, section: 0), at: .top, animated: animated)
+    private func scrollToTime(_ time: TimeInterval?, animated: Bool) {
+        if let time = time, let yOffset = yOffset(for: day.date.addingTimeInterval(time)) {
+            collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
+            scrollTargetTime = nil
+        }
+        else {
+            scrollTargetTime = time
+        }
+    }
+}
+
+// MARK: Layout calculations
+
+extension ProgramGuideDailyViewController {
+    private static func safeYOffset(_ yOffset: CGFloat, in collectionView: UICollectionView) -> CGFloat {
+        let maxYOffset = max(collectionView.contentSize.height - collectionView.frame.height
+            + collectionView.adjustedContentInset.top + collectionView.adjustedContentInset.bottom, 0)
+        return yOffset.clamped(to: 0...maxYOffset)
+    }
+    
+    func date(atYOffset yOffset: CGFloat) -> Date? {
+        guard let selectedChannel = programGuideModel.selectedChannel,
+              let index = collectionView.indexPathForItem(at: CGPoint(x: collectionView.contentOffset.x, y: yOffset))?.row,
+              let program = model.state.items(for: selectedChannel)[safeIndex: index]?.program else { return nil }
+        return program.startDate
+    }
+    
+    func yOffset(for date: Date) -> CGFloat? {
+        guard collectionView.contentSize != .zero,
+              let selectedChannel = programGuideModel.selectedChannel,
+              let nearestRow = model.state.items(for: selectedChannel).firstIndex(where: { $0.endsAfter(date) }),
+              let layoutAttr = collectionView.layoutAttributesForItem(at: IndexPath(row: nearestRow, section: 0)) else { return nil }
+        return Self.safeYOffset(layoutAttr.frame.minY, in: collectionView)
     }
 }
 
 // MARK: Protocols
+
+extension ProgramGuideDailyViewController: ProgramGuideChildViewController {
+    var programGuideLayout: ProgramGuideLayout {
+        return .list
+    }
+    
+    var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
+        return model
+    }
+}
 
 extension ProgramGuideDailyViewController: ContentInsets {
     var play_contentScrollViews: [UIScrollView]? {
@@ -151,7 +209,7 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
     
     var play_paddingContentInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 0, bottom: 6, right: 0)
+        return UIEdgeInsets(top: 0, left: 0, bottom: Self.verticalSpacing, right: 0)
     }
 }
 
@@ -159,12 +217,12 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
-        guard let channel = programGuideModel.selectedChannel else {
-            self.deselectItems(in: collectionView, animated: true)
+        guard let channel = programGuideModel.selectedChannel,
+              let program = dataSource.snapshot().itemIdentifiers(inSection: channel)[indexPath.row].program else {
+            deselectItems(in: collectionView, animated: true)
             return
         }
         
-        let program = dataSource.snapshot().itemIdentifiers(inSection: .main)[indexPath.row]
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
@@ -173,20 +231,25 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
 }
 
 extension ProgramGuideDailyViewController: UIScrollViewDelegate {
-    private func updateTime() {
-        if let index = collectionView.indexPathsForVisibleItems.sorted().first?.row,
-           let program = model.state.programs(for: programGuideModel.selectedChannel)[safeIndex: index] {
-            programGuideModel.didScrollToTime(of: program.startDate)
-        }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard let date = date(atYOffset: collectionView.contentOffset.y) else { return }
+        programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
     }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        updateTime()
-    }
-    
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        if !decelerate {
-            updateTime()
+}
+
+// MARK: Views
+
+private extension ProgramGuideDailyViewController {
+    struct ItemCell: View {
+        let item: ProgramGuideDailyViewModel.Item
+        
+        var body: some View {
+            if let program = item.program {
+                ProgramCell(program: program, channel: item.section, direction: .horizontal)
+            }
+            else {
+                Color.clear
+            }
         }
     }
 }
@@ -200,7 +263,7 @@ private extension ProgramGuideDailyViewController {
             let section = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
                 return ProgramCellSize.fullWidth()
             }
-            section.interGroupSpacing = 3
+            section.interGroupSpacing = Self.verticalSpacing
             return section
         }
     }

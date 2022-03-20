@@ -9,12 +9,8 @@
 #import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
-#import "PushService+Private.h"
-
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
 #import "NSSet+PlaySRG.h"
-#endif
-
+#import "PushService+Private.h"
 #endif
 
 @import libextobjc;
@@ -122,10 +118,14 @@ BOOL FavoritesToggleSubscriptionForShow(SRGShow *show)
     return YES;
 }
 
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+#pragma mark Push service synchronization
 
-void FavoritesForcePushServiceUpdate(void)
+void FavoritesUpdatePushService(void)
 {
+    if (! PushService.sharedService) {
+        return;
+    }
+    
     NSMutableSet<NSString *> *subscribedURNs = [NSMutableSet set];
     for (NSString *URN in FavoritesShowURNs()) {
         if (FavoritesIsSubscribedToShowURN(URN)) {
@@ -144,7 +144,5 @@ void FavoritesForcePushServiceUpdate(void)
     
     NSCAssert([subscribedURNs isEqualToSet:PushService.sharedService.subscribedShowURNs], @"Subscribed favorite shows have to be equal to Push Service subscribed shows");
 }
-
-#endif
 
 #endif
