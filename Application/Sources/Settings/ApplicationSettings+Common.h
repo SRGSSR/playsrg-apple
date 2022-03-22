@@ -45,4 +45,7 @@ OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
 
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 
+OBJC_EXPORT NSString * _Nullable ApplicationSettingLastSelectedAudioLanguageCode(void);
+OBJC_EXPORT void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString * _Nullable languageCode);
+
 NS_ASSUME_NONNULL_END
