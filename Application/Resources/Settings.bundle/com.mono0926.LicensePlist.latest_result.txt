@@ -155,11 +155,11 @@ name: Comscore-Swift-Package-Manager, nameSpecified: comscore-swift-package-mana
 
 name: DZNEmptyDataSet, nameSpecified: dznemptydataset, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 8.13.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 8.14.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FXReachability, nameSpecified: fxreachability, owner: SRGSSR, version: 1.3.2-srg5, source: https://github.com/SRGSSR/FXReachability
 
-name: GoogleAppMeasurement, nameSpecified: googleappmeasurement, owner: google, version: 8.12.0, source: https://github.com/google/GoogleAppMeasurement
+name: GoogleAppMeasurement, nameSpecified: googleappmeasurement, owner: google, version: 8.14.0, source: https://github.com/google/GoogleAppMeasurement
 
 name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: googlecastsdk-ios-no-bluetooth, owner: SRGSSR, version: 4.7.0-beta.3, source: https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth
 
