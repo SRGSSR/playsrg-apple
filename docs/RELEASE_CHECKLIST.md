@@ -11,15 +11,15 @@
 | Check version and build numbers. Bump if needed ||||||
 | Update what's new JSON for betas ||||||
 | Update what's new on Pastebin (mark new release with the _preprod_ flag) ||||||
-| Create new version on AppStore Connect with what's new information ||||||
-| Collect translated what's new and update Pastbin and AppStore Connect ||||||
+| Create new version on App Store Connect with what's new information ||||||
+| Collect translated what's new and update Pastbin and App Store Connect ||||||
 | Update screenshots if needed (with fastlane) ||||||
 | Build betas for AppCenter (with fastlane on TeamCity) ||||||
-| Build versions for AppStore Connect (with fastlane on TeamCity) ||||||
-| Wait until the binary has been validated on AppStore Connect ||||||
+| Build versions for App Store Connect (with fastlane on TeamCity) ||||||
+| Wait until the binary has been validated on App Store Connect ||||||
 | Collect DSYMs and upload it on AppCenter (with fastlane) ||||||
 | Update production remote configuration on Firebase ||||||
-| Distribute TestFlight versions on AppStore Connect ||||||
+| Distribute TestFlight versions on App Store Connect ||||||
 | Check what's new in AppCenter betas or TestFlight versions ||||||
 | Ask the PO to approve the version ||||||
 | Submit to Apple review ||||||
