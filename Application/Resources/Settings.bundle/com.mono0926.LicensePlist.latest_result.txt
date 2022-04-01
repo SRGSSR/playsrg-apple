@@ -147,7 +147,7 @@ name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, ve
 
 name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.8.0, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.1, source: https://github.com/microsoft/appcenter-sdk-apple
+name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.2, source: https://github.com/microsoft/appcenter-sdk-apple
 
 name: boringssl-SwiftPM, nameSpecified: boringssl-swiftpm, owner: firebase, version: 0.7.2, source: https://github.com/firebase/boringssl-SwiftPM
 
@@ -169,9 +169,9 @@ name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7
 
 name: grpc-SwiftPM, nameSpecified: grpc-swiftpm, owner: firebase, version: 1.28.4, source: https://github.com/firebase/grpc-SwiftPM
 
-name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 1.7.0, source: https://github.com/google/gtm-session-fetcher
+name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 1.7.1, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.4.0, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.5.0, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
