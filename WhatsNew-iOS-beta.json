@@ -155,5 +155,6 @@
   "3.5.1-376": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
   "3.5.1-377": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
   "3.5.1-378": "- Fix an unexpected item selection option in detail views.\n- SRG released libraries.\n- All translations are up to date.",
-  "3.6.0-379": "- Add playback speed support in the player.\n- Persist audio track selection between content."
+  "3.6.0-379": "- Add playback speed support in the player.\n- Persist audio track selection between content.",
+  "3.6.0-380": "- Fix a playback speed measurement.\n- Fix a push notification potencial issue with a backup restoration."
 }
