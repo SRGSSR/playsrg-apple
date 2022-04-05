@@ -171,7 +171,7 @@ name: grpc-SwiftPM, nameSpecified: grpc-swiftpm, owner: firebase, version: 1.28.
 
 name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 1.7.1, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.5.0, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.5.1, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
