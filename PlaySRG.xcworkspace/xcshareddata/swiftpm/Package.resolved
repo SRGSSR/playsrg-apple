@@ -131,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "f4bb0faeb3fff1dd662b8d520b88bd79dd953699",
-        "version" : "16.5.0"
+        "revision" : "f24aea12599525de279cb28d959e35177f9af7e5",
+        "version" : "16.5.1"
       }
     },
     {
@@ -222,7 +222,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "ae992a94f5b78bfb40c8208c17daee0376774d85"
+        "revision" : "4355e1205c9c82a38cd23bcf89cda435d8c900dd"
       }
     },
     {
