@@ -32,5 +32,6 @@
   "1.5.1-31": "- Fix crash during continuous playback transitions.\n- Improve accessiblity labels.",
   "1.5.1-32": "- SRG released libraries.\n- All translations are up to date.",
   "1.6.0-33": "- Add playback speed support in the player.",
-  "1.6.0-34": "- Fix a playback speed measurement."
+  "1.6.0-34": "- Fix a playback speed measurement.",
+  "1.6.0-35": "- Update Italian, French and German translations for playback speed feature.\n- Fix a playback speed measurement."
 }
