@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/IdeasOnCanvas/Aiolos.git",
       "state" : {
-        "revision" : "12aee6065058aa7abe4f57ca93d5e4682c79bb6b",
-        "version" : "1.8.0"
+        "revision" : "1f38e1f0f3cebad4e92b5a9c34eca8e305754279",
+        "version" : "1.8.1"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "b3bb0c5551fb3f80ca939829639ab5b093edd14f",
-        "version" : "7.7.0"
+        "revision" : "f4abe56ce62a779e64b525eb133c8fc2a84bbc1f",
+        "version" : "7.7.1"
       }
     },
     {
@@ -212,8 +212,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "611337c330350c9c1823ad6d671e7f936af5ee13",
-        "version" : "2.0.0"
+        "revision" : "46c1e6b5ac09d8f82c991061c659f67e573d425d",
+        "version" : "2.1.0"
       }
     },
     {
@@ -275,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "424772021a863665dc79d9ff38c9023866268760"
+        "branch" : "feature/playback-rate-info",
+        "revision" : "4f812f153227b769b62b07b6b112609ae22d4f6b"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "e7bce8ee8ce6c96c1a8998a3da0991d783fafa39"
+        "revision" : "d187a4bbf0a4c453d19ec5eb596e7bee1c6c114a"
       }
     },
     {
