@@ -42,8 +42,8 @@ final class CarPlayPlaybackSpeedController {
         
         if let controller = SRGLetterboxService.shared.controller {
             Self.playbackRateChangeSignal(for: controller)
-                .sink { _ in
-                    template.updateSections(Self.sections(interfaceController: interfaceController))
+                .sink { [weak template] _ in
+                    template?.updateSections(Self.sections(interfaceController: interfaceController))
                 }
                 .store(in: &cancellables)
         }
