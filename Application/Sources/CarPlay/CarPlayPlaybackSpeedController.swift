@@ -39,7 +39,6 @@ final class CarPlayPlaybackSpeedController {
     
     init(template: CPListTemplate, interfaceController: CPInterfaceController) {
         template.emptyViewSubtitleVariants = [NSLocalizedString("No content", comment: "Default text displayed when no content is available")]
-        template.updateSections(Self.sections(interfaceController: interfaceController))
         
         if let controller = SRGLetterboxService.shared.controller {
             Self.playbackRateChangeSignal(for: controller)
