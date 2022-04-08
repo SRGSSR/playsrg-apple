@@ -7,9 +7,16 @@
 import CarPlay
 
 extension CPListTemplate {
-    convenience init(list: CarPlayList, interfaceController: CPInterfaceController) {
-        self.init(title: list.title, sections: [])
-        controller = CarPlayTemplateListController(list: list, template: self, interfaceController: interfaceController)
+    static func list(_ list: CarPlayList, interfaceController: CPInterfaceController) -> CPListTemplate {
+        let template = CPListTemplate(title: list.title, sections: [])
+        template.controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
+        return template
+    }
+    
+    static func playbackRate(interfaceController: CPInterfaceController) -> CPListTemplate {
+        let template = CPListTemplate(title: NSLocalizedString("Playback speed", comment: "Playback speed screen title"), sections: [])
+        template.controller = CarPlayPlaybackSpeedController(template: template, interfaceController: interfaceController)
+        return template
     }
 }
 
@@ -28,10 +35,9 @@ extension CPInterfaceController {
     }
     
     private var playbackRateButton: CPNowPlayingButton {
-        return CPNowPlayingPlaybackRateButton { _ in
-            guard let controller = SRGLetterboxService.shared.controller,
-                  let nextPlaybackRate = Self.nextPlaybackRate(for: controller) else { return }
-            controller.playbackRate = nextPlaybackRate
+        return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
+            let playbackRateTemplate = CPListTemplate.playbackRate(interfaceController: self)
+            self.pushTemplate(playbackRateTemplate, animated: true) { _, _ in }
         }
     }
     
