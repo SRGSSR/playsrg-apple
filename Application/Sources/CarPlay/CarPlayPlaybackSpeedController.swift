@@ -13,7 +13,7 @@ import SRGLetterbox
 final class CarPlayPlaybackSpeedController {
     private var cancellables = Set<AnyCancellable>()
     
-    private static func sections(interfaceController: CPInterfaceController) -> [CPListSection] {
+    private static func sections(template: CPListTemplate?) -> [CPListSection] {
         guard let controller = SRGLetterboxService.shared.controller else { return [] }
         let items = controller.supportedPlaybackRates
             .map(\.floatValue)
@@ -28,9 +28,8 @@ final class CarPlayPlaybackSpeedController {
                 }
                 item.handler = { [weak controller] _, completion in
                     controller?.playbackRate = playbackRate
-                    interfaceController.popTemplate(animated: true) { _, _ in
-                        completion()
-                    }
+                    template?.updateSections(sections(template: template))
+                    completion()
                 }
                 return item
         }
@@ -43,7 +42,7 @@ final class CarPlayPlaybackSpeedController {
         if let controller = SRGLetterboxService.shared.controller {
             Self.playbackRateChangeSignal(for: controller)
                 .sink { [weak template] _ in
-                    template?.updateSections(Self.sections(interfaceController: interfaceController))
+                    template?.updateSections(Self.sections(template: template))
                 }
                 .store(in: &cancellables)
         }
