@@ -65,7 +65,7 @@ enum MediaDescription {
     }
     
     static func subtitle(for media: SRGMedia, style: Style) -> String? {
-        guard media.contentType != .livestream else { return nil }
+        guard media.contentType != .livestream else { return NSLocalizedString("Livestream", comment: "Subtitle label to present a livestream media") }
         
         switch style {
         case .show:
