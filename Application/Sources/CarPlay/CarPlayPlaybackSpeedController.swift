@@ -25,7 +25,7 @@ final class CarPlayPlaybackSpeedController {
                     accessoryImage: Self.accessoryImage(forPlaybackRate: playbackRate, controller: controller),
                     accessoryType: .none
                 )
-                item.handler = { [weak controller] _, completion in
+                item.handler = { [weak controller, weak template] _, completion in
                     controller?.playbackRate = playbackRate
                     template?.updateSections(sections(template: template))
                     completion()
