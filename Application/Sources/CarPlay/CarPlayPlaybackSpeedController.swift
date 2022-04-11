@@ -18,14 +18,13 @@ final class CarPlayPlaybackSpeedController {
         let items = controller.supportedPlaybackRates
             .map(\.floatValue)
             .map { playbackRate -> CPListItem in
-                let item: CPListItem
-                if playbackRate == controller.playbackRate {
-                    let detailText = (playbackRate != controller.effectivePlaybackRate) ? String(format: NSLocalizedString("The playback speed is restricted to %@×.", comment: "Information message about playback speed restrictions"), controller.effectivePlaybackRate.minimalRepresentation) : nil
-                    item = CPListItem(text: "\(playbackRate.minimalRepresentation)×", detailText: detailText, image: nil, accessoryImage: UIImage(systemName: "checkmark"), accessoryType: .none)
-                }
-                else {
-                    item = CPListItem(text: "\(playbackRate.minimalRepresentation)×", detailText: nil)
-                }
+                let item = CPListItem(
+                    text: Self.text(forPlaybackRate: playbackRate, controller: controller),
+                    detailText: nil,
+                    image: nil,
+                    accessoryImage: Self.accessoryImage(forPlaybackRate: playbackRate, controller: controller),
+                    accessoryType: .none
+                )
                 item.handler = { [weak controller] _, completion in
                     controller?.playbackRate = playbackRate
                     template?.updateSections(sections(template: template))
@@ -46,6 +45,20 @@ final class CarPlayPlaybackSpeedController {
                 }
                 .store(in: &cancellables)
         }
+    }
+    
+    private static func text(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> String {
+        let effectivePlaybackRate = controller.effectivePlaybackRate
+        if playbackRate == controller.playbackRate && playbackRate != effectivePlaybackRate {
+            return String(format: NSLocalizedString("%@× (Currently: %@×)", comment: "Speed factor with current value if different from desired one"), playbackRate.minimalRepresentation, effectivePlaybackRate.minimalRepresentation)
+        }
+        else {
+            return String(format: NSLocalizedString("%@×", comment: "Speed factor"), playbackRate.minimalRepresentation)
+        }
+    }
+    
+    private static func accessoryImage(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> UIImage? {
+        return playbackRate == controller.playbackRate ? UIImage(systemName: "checkmark") : nil
     }
     
     private static func playbackRateChangeSignal(for controller: SRGLetterboxController) -> AnyPublisher<Void, Never> {
