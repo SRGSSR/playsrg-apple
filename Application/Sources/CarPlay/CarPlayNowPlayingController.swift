@@ -22,7 +22,7 @@ final class CarPlayNowPlayingController: CarPlayTemplateController {
         // should be sufficient.
         SRGLetterboxService.shared.publisher(for: \.controller)
             .filter { $0 == nil }
-            .sink { [weak interfaceController] controller in
+            .sink { [weak interfaceController] _ in
                 interfaceController?.popToRootTemplate(animated: true) { _, _ in }
             }
             .store(in: &cancellables)
