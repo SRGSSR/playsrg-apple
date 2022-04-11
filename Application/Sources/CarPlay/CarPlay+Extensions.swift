@@ -52,7 +52,7 @@ extension CPInterfaceController {
         }
         
         let nowPlayingTemplate = CPNowPlayingTemplate.shared
-        nowPlayingTemplate.controller = CarPlayNowPlayingController()
+        nowPlayingTemplate.controller = CarPlayNowPlayingController(interfaceController: self)
         nowPlayingTemplate.updateNowPlayingButtons([playbackRateButton])
         
         pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
