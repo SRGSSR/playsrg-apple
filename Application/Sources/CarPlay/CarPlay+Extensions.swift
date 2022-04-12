@@ -13,9 +13,9 @@ extension CPListTemplate {
         return template
     }
     
-    static func playbackRate(interfaceController: CPInterfaceController) -> CPListTemplate {
+    static var playbackRate: CPListTemplate {
         let template = CPListTemplate(title: NSLocalizedString("Playback speed", comment: "Playback speed screen title"), sections: [])
-        template.controller = CarPlayPlaybackSpeedController(template: template, interfaceController: interfaceController)
+        template.controller = CarPlayPlaybackSpeedController(template: template)
         return template
     }
 }
@@ -36,8 +36,7 @@ extension CPInterfaceController {
     
     private var playbackRateButton: CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
-            let playbackRateTemplate = CPListTemplate.playbackRate(interfaceController: self)
-            self.pushTemplate(playbackRateTemplate, animated: true) { _, _ in }
+            self.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
         }
     }
     
