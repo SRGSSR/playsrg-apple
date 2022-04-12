@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualizzazioni";
 
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Speed factor with current value if different from desired one */
+"%@× (Now: %@×)" = "%1$@× (Ora: %2$@×)";
+
 /* Title displayed when several items have been selected */
 "%d items" = "%d elementi";
 
@@ -397,6 +403,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, preferiti e elementi salvati per dopo saranno eliminati da questa Apple TV.";
 
+/* Playback speed screen title */
+"Playback speed" = "Velocità di riproduzione";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popolari sul Play RSI";
 
@@ -516,6 +525,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sottotitolato";
 
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Le informazioni di supporto sono state copiate negli appunti";
+
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronizzare cronologia, preferiti ed elementi da guardare dopo su tutti gli apparecchi collegati al suo account.";
 
@@ -528,9 +540,6 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Il contenuto è stato copiato negli Appunti.";
-
-/* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Le informazioni di supporto sono state copiate negli appunti";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Il contenuto scaricato sarà eliminato.";

@@ -145,7 +145,7 @@ version: 2.0.1
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, version: 0.20200225.4, source: https://github.com/firebase/abseil-cpp-SwiftPM
 
-name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.8.0, source: https://github.com/IdeasOnCanvas/Aiolos
+name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.8.1, source: https://github.com/IdeasOnCanvas/Aiolos
 
 name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.2, source: https://github.com/microsoft/appcenter-sdk-apple
 
@@ -165,7 +165,7 @@ name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: googlecastsdk-ios-no-blueto
 
 name: GoogleDataTransport, nameSpecified: googledatatransport, owner: google, version: 9.1.2, source: https://github.com/google/GoogleDataTransport
 
-name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7.7.0, source: https://github.com/google/GoogleUtilities
+name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7.7.1, source: https://github.com/google/GoogleUtilities
 
 name: grpc-SwiftPM, nameSpecified: grpc-swiftpm, owner: firebase, version: 1.28.4, source: https://github.com/firebase/grpc-SwiftPM
 
@@ -189,7 +189,7 @@ name: paper-onboarding, nameSpecified: paper-onboarding, owner: Ramotion, versio
 
 name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.10.1, source: https://github.com/microsoft/PLCrashReporter
 
-name: promises, nameSpecified: promises, owner: google, version: 2.0.0, source: https://github.com/google/promises
+name: promises, nameSpecified: promises, owner: google, version: 2.1.0, source: https://github.com/google/promises
 
 name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srganalytics-apple
 
