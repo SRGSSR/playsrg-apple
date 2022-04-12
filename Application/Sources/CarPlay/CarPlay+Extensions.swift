@@ -21,19 +21,6 @@ extension CPListTemplate {
 }
 
 extension CPInterfaceController {
-    private static func nextPlaybackRate(for controller: SRGLetterboxController) -> Float? {
-        let supportedPlaybackRates = controller.supportedPlaybackRates
-        guard !supportedPlaybackRates.isEmpty else { return nil }
-        
-        if let index = supportedPlaybackRates.firstIndex(where: { $0.floatValue == controller.playbackRate }),
-           index < supportedPlaybackRates.count - 1 {
-            return supportedPlaybackRates[index + 1].floatValue
-        }
-        else {
-            return supportedPlaybackRates.first?.floatValue
-        }
-    }
-    
     private var playbackRateButton: CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
             self.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
