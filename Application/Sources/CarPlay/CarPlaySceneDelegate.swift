@@ -15,9 +15,23 @@ final class CarPlaySceneDelegate: UIResponder {
 // MARK: Protocols
 
 extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
+    private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
+        return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
+            interfaceController.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
+        }
+    }
+    
+    private static func configureNowPlayingTemplate(for interfaceController: CPInterfaceController) {
+        let nowPlayingTemplate = CPNowPlayingTemplate.shared
+        nowPlayingTemplate.controller = CarPlayNowPlayingController(interfaceController: interfaceController)
+        nowPlayingTemplate.updateNowPlayingButtons([playbackRateButton(for: interfaceController)])
+    }
+    
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
         interfaceController.delegate = self
         self.interfaceController = interfaceController
+        
+        Self.configureNowPlayingTemplate(for: interfaceController)
         
         let traitCollection = UITraitCollection(userInterfaceIdiom: .carPlay)
         var templates = [CPTemplate]()

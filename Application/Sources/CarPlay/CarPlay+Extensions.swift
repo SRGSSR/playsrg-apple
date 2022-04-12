@@ -21,12 +21,6 @@ extension CPListTemplate {
 }
 
 extension CPInterfaceController {
-    private var playbackRateButton: CPNowPlayingButton {
-        return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
-            self.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
-        }
-    }
-    
     func play(media: SRGMedia, completion: @escaping () -> Void) {
         if let controller = SRGLetterboxService.shared.controller {
             controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
@@ -38,9 +32,6 @@ extension CPInterfaceController {
         }
         
         let nowPlayingTemplate = CPNowPlayingTemplate.shared
-        nowPlayingTemplate.controller = CarPlayNowPlayingController(interfaceController: self)
-        nowPlayingTemplate.updateNowPlayingButtons([playbackRateButton])
-        
         pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
             completion()
         }
