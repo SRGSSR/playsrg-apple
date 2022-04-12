@@ -10,7 +10,7 @@ import SRGLetterbox
 
 // MARK: Controller
 
-final class CarPlayNowPlayingController: CarPlayTemplateController {
+final class CarPlayNowPlayingController {
     private weak var interfaceController: CPInterfaceController?
     private var cancellables = Set<AnyCancellable>()
     
@@ -27,7 +27,11 @@ final class CarPlayNowPlayingController: CarPlayTemplateController {
             }
             .store(in: &cancellables)
     }
-    
+}
+
+// MARK: Protocols
+
+extension CarPlayNowPlayingController: CarPlayTemplateController {
     func willAppear(animated: Bool) {}
     
     func didAppear(animated: Bool) {
