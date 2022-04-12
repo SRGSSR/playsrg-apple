@@ -123,10 +123,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
-@property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
@@ -827,7 +827,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
-        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
+        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
         if (media.date) {
             self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
             self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
