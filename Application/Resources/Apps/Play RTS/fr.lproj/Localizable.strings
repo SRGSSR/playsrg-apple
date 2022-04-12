@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vues";
 
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Speed factor with current value if different from desired one */
+"%@× (Now: %@×)" = "%1$@× (Maintenant : %2$@×)";
+
 /* Title displayed when several items have been selected */
 "%d items" = "%d éléments";
 
@@ -397,6 +403,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "L'historique de lecture, les favoris et le contenu à consulter plus tard seront supprimés de cette Apple TV.";
 
+/* Playback speed screen title */
+"Playback speed" = "Vitesse de lecture";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Populaire sur Play RTS";
 
@@ -516,6 +525,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Sous-titré";
 
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier";
+
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisez l'historique de lecture, les favoris et le contenu à consulter plus tard sur tous les appareils liés à votre compte.";
 
@@ -528,9 +540,6 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Le contenu a été copié dans le presse-papier.";
-
-/* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Les informations de support ont été copiées dans le presse-papier";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Le contenu téléchargé sera supprimé.";

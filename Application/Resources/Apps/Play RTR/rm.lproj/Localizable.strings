@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ visualisaziuns";
 
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Speed factor with current value if different from desired one */
+"%@× (Now: %@×)" = "%1$@× (Ussa: %2$@×)";
+
 /* Title displayed when several items have been selected */
 "%d items" = "%d elements";
 
@@ -397,6 +403,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Cronologia, favurits e cuntegns arcunads per pli tard vegnan allontanads da quest Apple TV.";
 
+/* Playback speed screen title */
+"Playback speed" = "Spertadad da reproducziun";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular sin Play RTR";
 
@@ -516,6 +525,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Suttitels";
 
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
+
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Sincronisar cronologia, favurits e cuntegns arcunads per pli tard sin tut ils apparats colliads.";
 
@@ -528,9 +540,6 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Il cuntegn è copià en communicaziuns.";
-
-/* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Infurmaziuns da support èn copiadas en las notizias";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Il cuntegn chargià vegn allontanà.";

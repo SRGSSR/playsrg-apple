@@ -50,7 +50,7 @@ final class CarPlayPlaybackSpeedController {
     private static func text(forPlaybackRate playbackRate: Float, controller: SRGLetterboxController) -> String {
         let effectivePlaybackRate = controller.effectivePlaybackRate
         if playbackRate == controller.playbackRate && playbackRate != effectivePlaybackRate {
-            return String(format: NSLocalizedString("%@× (Currently: %@×)", comment: "Speed factor with current value if different from desired one"), playbackRate.minimalRepresentation, effectivePlaybackRate.minimalRepresentation)
+            return String(format: NSLocalizedString("%1$@× (Now: %2$@×)", comment: "Speed factor with current value if different from desired one"), playbackRate.minimalRepresentation, effectivePlaybackRate.minimalRepresentation)
         }
         else {
             return String(format: NSLocalizedString("%@×", comment: "Speed factor"), playbackRate.minimalRepresentation)

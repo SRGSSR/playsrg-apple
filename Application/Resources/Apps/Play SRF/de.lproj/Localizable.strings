@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@";
 
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Speed factor with current value if different from desired one */
+"%@× (Now: %@×)" = "%1$@× (Jetzt: %2$@×)";
+
 /* Title displayed when several items have been selected */
 "%d items" = "%d Objekte";
 
@@ -397,6 +403,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Wiedergabeverlauf, Favoriten und Inhalte, die für später gespeichert wurden, werden von diesem Apple TV gelöscht.";
 
+/* Playback speed screen title */
+"Playback speed" = "Wiedergabegeschwindigkeit";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Beliebt auf Play SRF";
 
@@ -516,6 +525,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Mit Untertiteln";
 
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
+
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronisieren Sie den Wiedergabeverlauf, die Favoriten und die für später gemerkten Inhalte auf allen mit Ihrem Konto verbundenen Geräten.";
 
@@ -528,9 +540,6 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "Kopiert.";
-
-/* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Die Informationen wurden in die Zwischenablage kopiert";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "Der heruntergeladene Inhalt wird gelöscht.";
