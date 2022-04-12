@@ -222,7 +222,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "5cd36f384c5137e1d9c19825f7ba9e89215a6024"
+        "revision" : "9d9a55923944257f9df29130ff187840853d7f4f"
       }
     },
     {
@@ -275,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "feature/playback-rate-info",
-        "revision" : "b63c7ee4635f9721b06fa2a60a9f9535228236dd"
+        "branch" : "develop",
+        "revision" : "256f0d9573f6221343efa0984ff6ac0c2e249e26"
       }
     },
     {
