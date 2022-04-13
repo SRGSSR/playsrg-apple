@@ -75,6 +75,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleLabel];
+    self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColor.whiteColor;
     
     NSString *text = nil;
@@ -96,7 +97,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
     
     if (text) {
-        self.text = [NSString stringWithFormat:@"  %@  ", text];
+        self.text = [NSString stringWithFormat:@"%@    ", text];
         self.hidden = NO;
     }
     else {
@@ -111,7 +112,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    self.text = [NSString stringWithFormat:@"  %@  ", NSLocalizedString(@"Web first", @"Web first label on media cells")];
+    self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Web first label on media cells")];
+    self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColor.whiteColor;
 }
 

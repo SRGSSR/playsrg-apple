@@ -144,26 +144,26 @@
                                                                 <rect key="frame" x="10" y="12" width="386" height="20"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lM5-97-WVz" userLabel="Spacer View">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="135" height="20"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="120.5" height="20"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="&lt;date&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eaZ-CL-kRu" userLabel="Date Label">
-                                                                        <rect key="frame" x="145" y="0.0" width="10.5" height="20"/>
+                                                                        <rect key="frame" x="130.5" y="0.0" width="40.5" height="20"/>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                                                         <color key="textColor" red="0.59215686274509804" green="0.59215686274509804" blue="0.59215686274509804" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;Availability&gt;" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5B6-wH-ilY" userLabel="Availabilility Label">
-                                                                        <rect key="frame" x="165.5" y="0.0" width="75.5" height="20"/>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="&lt;availability&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SRi-LQ-A6H" userLabel="Availability Label">
+                                                                        <rect key="frame" x="181" y="0.0" width="74.5" height="20"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="20" id="Uen-zt-q9e"/>
+                                                                            <constraint firstAttribute="height" constant="20" id="bXZ-vo-zfk"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                        <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <color key="textColor" red="0.59215686270000001" green="0.59215686270000001" blue="0.59215686270000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtP-OD-4ma" userLabel="Spacer View">
-                                                                        <rect key="frame" x="251" y="0.0" width="135" height="20"/>
+                                                                        <rect key="frame" x="265.5" y="0.0" width="120.5" height="20"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                 </subviews>
@@ -651,8 +651,8 @@
                     </view>
                     <connections>
                         <outlet property="audioDescriptionImageView" destination="79J-t3-C9N" id="ndT-i5-Ol6"/>
-                        <outlet property="availabilityLabel" destination="5B6-wH-ilY" id="PQH-MM-Ffr"/>
-                        <outlet property="availabilityLabelHeightConstraint" destination="Uen-zt-q9e" id="jFQ-S6-giA"/>
+                        <outlet property="availabilityLabel" destination="SRi-LQ-A6H" id="6AI-Bq-YNO"/>
+                        <outlet property="availabilityLabelHeightConstraint" destination="bXZ-vo-zfk" id="Yar-z5-Tcn"/>
                         <outlet property="channelInfoStackView" destination="TRa-Gj-haE" id="EO7-sW-cDj"/>
                         <outlet property="channelView" destination="Hdu-Mm-eGu" id="Vgz-F0-XBO"/>
                         <outlet property="closeButton" destination="URR-EB-goh" id="GT8-V7-lKB"/>
