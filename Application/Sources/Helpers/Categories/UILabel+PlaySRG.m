@@ -29,6 +29,16 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
 }
 
+static NSString *AccessibilityLabelFormattedDuration(NSTimeInterval duration)
+{
+    if (duration >= 60. * 60. * 24.) {
+        return PlayFormattedDays(duration);
+    }
+    else {
+        return PlayFormattedHours(fmax(duration, 60. * 60.));
+    }
+}
+
 @implementation UILabel (PlaySRG)
 
 #pragma mark Public
@@ -79,6 +89,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.textColor = UIColor.whiteColor;
     
     NSString *text = nil;
+    NSString *accessibilityLabel = nil;
+    
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
     if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
@@ -93,15 +105,18 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         if (monthsDateComponents.day <= kDayNearExpirationThreshold) {
             NSTimeInterval timeIntervalBeforeEnd = [mediaMetadata.endDate timeIntervalSinceDate:nowDate];
             text = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];
+            accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), AccessibilityLabelFormattedDuration(timeIntervalBeforeEnd)];
         }
     }
     
     if (text) {
         self.text = [NSString stringWithFormat:@"%@    ", text];
+        self.accessibilityLabel = accessibilityLabel;
         self.hidden = NO;
     }
     else {
         self.text = nil;
+        self.accessibilityLabel = nil;
         self.hidden = YES;
     }
 }
