@@ -6,6 +6,8 @@
 
 #import "BaseViewController.h"
 
+#import "UIViewController+PlaySRG.h"
+
 static void commonInit(BaseViewController *self);
 
 @implementation BaseViewController
@@ -42,7 +44,7 @@ static void commonInit(BaseViewController *self);
         return YES;
     }
     else if (self.presentingViewController) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self play_dismissViewControllerAnimated:YES completion:nil];
         return YES;
     }
     else {

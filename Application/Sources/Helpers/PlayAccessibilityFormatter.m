@@ -8,7 +8,19 @@
 
 #import "NSBundle+PlaySRG.h"
 
-NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
+NSString *PlayAccessibilityDateFromDate(NSDate *date)
+{
+    static NSDateFormatter *s_dateFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.dateStyle = NSDateFormatterLongStyle;
+        s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    });
+    return [s_dateFormatter stringFromDate:date];
+}
+
+NSString *PlayAccessibilityRelativeDateFromDate(NSDate *date)
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
@@ -18,8 +30,19 @@ NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
         s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
         s_dateFormatter.doesRelativeDateFormatting = YES;
     });
-    NSString *dateString = [s_dateFormatter stringFromDate:date];
-    
+    return [s_dateFormatter stringFromDate:date];
+}
+
+NSString *PlayAccessibilityDateAndTimeFromDate(NSDate *date)
+{
+    NSString *dateString = PlayAccessibilityDateFromDate(date);
+    NSString *timeString = PlayAccessibilityTimeFromDate(date);
+    return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%1$@ at %2$@", @"Date at time label to spell a date and time value."), dateString, timeString];
+}
+
+NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
+{
+    NSString *dateString = PlayAccessibilityRelativeDateFromDate(date);
     NSString *timeString = PlayAccessibilityTimeFromDate(date);
     return [NSString stringWithFormat:PlaySRGAccessibilityLocalizedString(@"%1$@ at %2$@", @"Date at time label to spell a date and time value."), dateString, timeString];
 }

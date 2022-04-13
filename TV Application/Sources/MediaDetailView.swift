@@ -129,7 +129,7 @@ struct MediaDetailView: View {
         
         var availabilityInformation: String {
             guard let media = model.media else { return .placeholder(length: 15)}
-            var publication = DateFormatter.play_dateAndTime.string(from: media.date)
+            var publication = DateFormatter.play_dateAndTimeShort.string(from: media.date)
             if let availability = MediaDescription.availability(for: media) {
                 // Unbreakable spaces before / after the separator
                 publication += " - " + availability

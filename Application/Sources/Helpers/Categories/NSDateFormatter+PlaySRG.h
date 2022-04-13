@@ -18,9 +18,18 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_timeFormatter;
 
 /**
- *  Absolute date and time formatting.
+ *  Absolute short date formatting.
+ *
+ *  @discussion Use `PlayAccessibilityDateFromDate` for accessibility-oriented formatting.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_dateAndTimeFormatter;
+@property (class, nonatomic, readonly) NSDateFormatter *play_shortDateFormatter;
+
+/**
+ *  Absolute date and time short formatting.
+ *
+ *  @discussion Use `PlayAccessibilityDateAndTimeFromDate` for accessibility-oriented formatting.
+ */
+@property (class, nonatomic, readonly) NSDateFormatter *play_dateAndTimeShortFormatter;
 
 /**
  *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.
@@ -32,18 +41,24 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
  *  the date in a long format.
+ *
+ *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeDateFormatter;
 
 /**
  *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
  *  the date in a full format.
+ *
+ *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeFullDateFormatter;
 
 /**
  *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
  *  the date in a short format.
+ *
+ *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
  */
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateFormatter;
 

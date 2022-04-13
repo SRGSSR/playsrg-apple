@@ -20,13 +20,25 @@
     return s_dateFormatter;
 }
 
-+ (NSDateFormatter *)play_dateAndTimeFormatter
++ (NSDateFormatter *)play_shortDateFormatter
+{
+    static dispatch_once_t s_onceToken;
+    static NSDateFormatter *s_dateFormatter;
+    dispatch_once(&s_onceToken, ^{
+        s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.dateStyle = NSDateFormatterShortStyle;
+        s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
+    });
+    return s_dateFormatter;
+}
+
++ (NSDateFormatter *)play_dateAndTimeShortFormatter
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
-        s_dateFormatter.dateStyle = NSDateFormatterLongStyle;
+        s_dateFormatter.dateStyle = NSDateFormatterShortStyle;
         s_dateFormatter.timeStyle = NSDateFormatterShortStyle;
     });
     return s_dateFormatter;

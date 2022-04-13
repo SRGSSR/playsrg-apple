@@ -12,14 +12,19 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UILabel (PlaySRG)
 
 /**
- *  Use this method to display the correct duration label for an object conform to a media metadata
+ *  Use this method to display the correct duration label for some media metadata.
  */
-- (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
+- (void)play_displayDurationLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata;
 
 /**
- *  Use this method to display the correct availability label for an object conform to a media metadata, if needed
+ *  Use this method to display the correct date label for some media metadata.
  */
-- (void)play_displayAvailabilityLabelForMediaMetadata:(id<SRGMediaMetadata>)object;
+- (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata;
+
+/**
+ *  Use this method to display the correct availability label for some media metadata.
+ */
+- (void)play_displayAvailabilityBadgeForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata;
 
 /**
  *  Call to display the standard "web first" badge.
