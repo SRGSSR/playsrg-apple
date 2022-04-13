@@ -48,6 +48,16 @@ struct MediaDetailView: View {
         
         @Namespace private var namespace
         
+        var availabilityInformation: String {
+            guard let media = model.media else { return .placeholder(length: 15)}
+            var publication = DateFormatter.play_dateAndTimeShort.string(from: media.date)
+            if let availability = MediaDescription.availability(for: media) {
+                // Unbreakable spaces before / after the separator
+                publication += " - " + availability
+            }
+            return publication
+        }
+        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -60,6 +70,10 @@ struct MediaDetailView: View {
                             .srgFont(.H3)
                             .foregroundColor(.white)
                     }
+                    Text(availabilityInformation)
+                        .srgFont(.subtitle2)
+                        .foregroundColor(.white)
+                        .padding(.vertical, 5)
                     Spacer()
                         .frame(height: 20)
                     VStack(alignment: .leading, spacing: 0) {
@@ -127,16 +141,6 @@ struct MediaDetailView: View {
         @ObservedObject var model: MediaDetailViewModel
         @State var isFocused = false
         
-        var availabilityInformation: String {
-            guard let media = model.media else { return .placeholder(length: 15)}
-            var publication = DateFormatter.play_dateAndTimeShort.string(from: media.date)
-            if let availability = MediaDescription.availability(for: media) {
-                // Unbreakable spaces before / after the separator
-                publication += " - " + availability
-            }
-            return publication
-        }
-        
         var body: some View {
             GeometryReader { geometry in
                 VStack(alignment: .leading, spacing: 0) {
@@ -153,11 +157,6 @@ struct MediaDetailView: View {
                         }
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
-                    
-                    Text(availabilityInformation)
-                        .srgFont(.subtitle2)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 5)
                 }
             }
         }
