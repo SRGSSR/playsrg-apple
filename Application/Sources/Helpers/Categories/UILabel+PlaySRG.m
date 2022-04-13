@@ -64,7 +64,8 @@ static NSString *AccessibilityLabelFormattedDuration(NSTimeInterval duration)
             NSDateComponents *monthsDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
             if (monthsDateComponents.day > kDayNearExpirationThreshold) {
                 NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDateFormatter stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
-                text = [text stringByAppendingFormat:@" - %@", expiration];
+                // Unbreakable spaces before / after the separator
+                text = [text stringByAppendingFormat:@" - %@", expiration];
                 
                 NSString *expirationAccessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), PlayAccessibilityDateFromDate(mediaMetadata.endDate)];
                 accessibilityLabel = [accessibilityLabel stringByAppendingFormat:@", %@", expirationAccessibilityLabel];
