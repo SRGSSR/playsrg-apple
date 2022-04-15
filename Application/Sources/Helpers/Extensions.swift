@@ -39,6 +39,13 @@ extension Comparable {
     }
 }
 
+extension Float {
+    // See https://stackoverflow.com/a/31390678/760435
+    var minimalRepresentation: String {
+       return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+}
+
 extension String {
     static func placeholder(length: Int) -> String {
         return String(repeating: " ", count: length)

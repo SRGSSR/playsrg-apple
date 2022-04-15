@@ -728,6 +728,10 @@
 		6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C42521CFEA00F9F4FE /* SRGAnalyticsIdentity */; };
 		6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C62521CFF000F9F4FE /* SRGAnalyticsIdentity */; };
 		6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2546C82521CFFA00F9F4FE /* SRGAnalyticsIdentity */; };
+		6F264D7A2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
+		6F264D7B2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
+		6F264D7C2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
+		6F264D7D2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
 		6F2961FC2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
@@ -1994,10 +1998,10 @@
 		6FE38A21270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
 		6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
 		6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */; };
-		6FE38A27270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
-		6FE38A28270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
-		6FE38A29270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
-		6FE38A2A270CF860004DD296 /* CarPlayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayListController.swift */; };
+		6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */; };
+		6FE38A28270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */; };
+		6FE38A29270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */; };
+		6FE38A2A270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */; };
 		6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -2852,6 +2856,7 @@
 		6F1938371EFBFEC80017B1D1 /* ApplicationConfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ApplicationConfiguration.json; sourceTree = "<group>"; };
 		6F1A77822643CAB600A00EFC /* EmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
 		6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowHeaderView.swift; sourceTree = "<group>"; };
+		6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayPlaybackSpeedController.swift; sourceTree = "<group>"; };
 		6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placeholder_media_list.pdf; sourceTree = "<group>"; };
 		6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MediaPlayerViewController+SongPanel.swift"; sourceTree = "<group>"; };
 		6F2E160826A84ED200F3DC89 /* ProgramCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCell.swift; sourceTree = "<group>"; };
@@ -3139,7 +3144,7 @@
 		6FE2876C2481687A00358CFF /* SongTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SongTableViewCell.m; sourceTree = "<group>"; };
 		6FE28772248168A100358CFF /* SongTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SongTableViewCell.xib; sourceTree = "<group>"; };
 		6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CarPlay+Extensions.swift"; sourceTree = "<group>"; };
-		6FE38A26270CF860004DD296 /* CarPlayListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayListController.swift; sourceTree = "<group>"; };
+		6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayTemplateListController.swift; sourceTree = "<group>"; };
 		6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		6FE686DF1EB9D57400067D40 /* ChannelService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChannelService.h; sourceTree = "<group>"; };
 		6FE686E01EB9D57400067D40 /* ChannelService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChannelService.m; sourceTree = "<group>"; };
@@ -4954,8 +4959,9 @@
 			children = (
 				6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */,
 				6FB90D17270D91010033D860 /* CarPlayList.swift */,
-				6FE38A26270CF860004DD296 /* CarPlayListController.swift */,
+				6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */,
 				6F80F66A27187AFC00867C3B /* CarPlayNowPlayingController.swift */,
+				6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */,
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
 				6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */,
 			);
@@ -8368,6 +8374,7 @@
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F1A77832643CAB600A00EFC /* EmptyView.swift in Sources */,
 				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
+				6F264D7A2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
 				6F56F9F4247C407000B2387B /* ChannelServiceSetup.m in Sources */,
@@ -8539,7 +8546,7 @@
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
-				6FE38A27270CF860004DD296 /* CarPlayListController.swift in Sources */,
+				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
 				6FF7BBA122A78DE400FA758A /* SearchSettingsViewController.m in Sources */,
@@ -8724,7 +8731,7 @@
 				6F566E8124EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD68619246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8B26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
-				6FE38A28270CF860004DD296 /* CarPlayListController.swift in Sources */,
+				6FE38A28270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				6F7F2B07249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7F92628F23700BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE0E20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -8805,6 +8812,7 @@
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5C270DE4FE00210713 /* Publishers.swift in Sources */,
+				6F264D7B2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80D26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10C2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
@@ -8957,7 +8965,7 @@
 				6F566E8224EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861A246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8C26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
-				6FE38A29270CF860004DD296 /* CarPlayListController.swift in Sources */,
+				6FE38A29270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				6F7F2B08249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FA2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE0F20AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -9038,6 +9046,7 @@
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5D270DE4FE00210713 /* Publishers.swift in Sources */,
+				6F264D7C2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80E26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10D2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
@@ -9190,7 +9199,7 @@
 				6F566E8324EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6FD6861B246052A100B8018A /* GradientView.m in Sources */,
 				6F362A8D26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
-				6FE38A2A270CF860004DD296 /* CarPlayListController.swift in Sources */,
+				6FE38A2A270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				6F7F2B09249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
 				6FC2F7FB2628F23800BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE1020AE985C00B71572 /* OnboardingsViewController.m in Sources */,
@@ -9271,6 +9280,7 @@
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5E270DE4FE00210713 /* Publishers.swift in Sources */,
+				6F264D7D2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				6F16C80F26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10E2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
@@ -19039,7 +19049,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.4.0;
+				minimumVersion = 7.5.0;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
@@ -19063,7 +19073,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 7.4.0;
+				minimumVersion = 7.5.0;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
@@ -19071,7 +19081,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 13.0.0;
+				minimumVersion = 13.1.0;
 			};
 		};
 		6F9BF5B72720292B00945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {

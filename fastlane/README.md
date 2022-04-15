@@ -1,254 +1,600 @@
 fastlane documentation
-================
+----
+
 # Installation
 
 Make sure you have the latest version of the Xcode command line tools installed:
 
-```
+```sh
 xcode-select --install
 ```
 
-Install _fastlane_ using
-```
-[sudo] gem install fastlane -NV
-```
-or alternatively using `brew install fastlane`
+For _fastlane_ installation instructions, see [Installing _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 
 # Available Actions
+
 ## iOS
-### ios nightlies
+
+### ios iOSnightliesAppCenter
+
+```sh
+[bundle exec] fastlane ios iOSnightliesAppCenter
 ```
-fastlane ios nightlies
-```
+
 Builds a new iOS nightly on App Center.
+
 ### ios tvOSnightlies
+
+```sh
+[bundle exec] fastlane ios tvOSnightlies
 ```
-fastlane ios tvOSnightlies
-```
-Builds a new tvOS nightly on AppStore Connect and waits build processing.
+
+Builds a new tvOS nightly on App Store Connect and waits for build processing.
+
 ### ios tvOSnightlyDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSnightlyDSYMs
 ```
-fastlane ios tvOSnightlyDSYMs
-```
+
 Sends latest tvOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
 ### ios iOSnightlies
+
+```sh
+[bundle exec] fastlane ios iOSnightlies
 ```
-fastlane ios iOSnightlies
-```
-Builds a new iOS nightly on AppStore Connect and waits build processing.
+
+Builds a new iOS nightly on App Store Connect and waits for build processing.
+
 ### ios iOSnightlyDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSnightlyDSYMs
 ```
-fastlane ios iOSnightlyDSYMs
-```
+
 Sends latest iOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
 ### ios nightlyTester
+
+```sh
+[bundle exec] fastlane ios nightlyTester
 ```
-fastlane ios nightlyTester
+
+Adds a nightly TestFlight tester (email required)
+
+### ios iOSbetasAppCenter
+
+```sh
+[bundle exec] fastlane ios iOSbetasAppCenter
 ```
-Add a nightly TestFlight tester (email required)
-### ios betas
-```
-fastlane ios betas
-```
-Builds a new iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+
+Builds an iOS beta on App Center with the current build number. On the develop branch attempts to tag the current version, then bumps the build number and pushes.
+
 ### ios tvOSbetas
+
+```sh
+[bundle exec] fastlane ios tvOSbetas
 ```
-fastlane ios tvOSbetas
-```
-Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+
+Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.
+
 ### ios tvOSbetaDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSbetaDSYMs
 ```
-fastlane ios tvOSbetaDSYMs
-```
+
 Sends latest tvOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
 ### ios iOSbetas
+
+```sh
+[bundle exec] fastlane ios iOSbetas
 ```
-fastlane ios iOSbetas
-```
-Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.
+
+Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.
+
 ### ios iOSbetaDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSbetaDSYMs
 ```
-fastlane ios iOSbetaDSYMs
-```
+
 Sends latest iOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
 ### ios betaTester
+
+```sh
+[bundle exec] fastlane ios betaTester
 ```
-fastlane ios betaTester
+
+Adds a beta TestFlight tester (email required)
+
+### ios iOSAppStoreBetas
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreBetas
 ```
-Add a beta TestFlight tester (email required)
-### ios appStoreUploads
+
+Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSAppStoreDSYMs.
+
+### ios iOSAppStoreUploadBetas
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreUploadBetas
 ```
-fastlane ios appStoreUploads
+
+Uploads an iOS App Store beta on App Store Connect with the current build number.
+
+### ios iOSAppStoreDistributePrivateBetas
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreDistributePrivateBetas
 ```
-Uploads a new iOS build on AppStore Connect with the current build number.
-### ios dSYMs
+
+Distributes to private groups an iOS App Store beta on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+
+### ios iOSAppStoreDistributePublicBetas
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreDistributePublicBetas
 ```
-fastlane ios dSYMs
+
+Distributes to public groups an iOS App Store beta on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+
+### ios iOSAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreDSYMs
 ```
-Sends latest iOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
-### ios tvOSappStoreUploads
+
+Sends latest iOS App Store dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
+### ios tvOSAppStoreBetas
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreBetas
 ```
-fastlane ios tvOSappStoreUploads
+
+Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.
+
+### ios tvOSAppStoreUploadBetas
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreUploadBetas
 ```
-Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSdSYMs
+
+Uploads a tvOS build on App Store Connect with the current build number.
+
+### ios tvOSAppStoreDistributePrivateBetas
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreDistributePrivateBetas
 ```
-fastlane ios tvOSdSYMs
+
+Distributes to private groups a tvOS App Store beta on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+
+### ios tvOSAppStoreDistributePublicBetas
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreDistributePublicBetas
 ```
+
+Distributes to public groups a tvOS App Store beta on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+
+### ios tvOSAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreDSYMs
+```
+
 Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
-### ios swiScreenshots
+
+### ios iOSrsiScreenshots
+
+```sh
+[bundle exec] fastlane ios iOSrsiScreenshots
 ```
-fastlane ios swiScreenshots
+
+RSI: Makes iOS screenshots and replaces current ones on App Store Connect.
+
+### ios iOSrtrScreenshots
+
+```sh
+[bundle exec] fastlane ios iOSrtrScreenshots
 ```
-SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios srfScreenshots
+
+RTR: Makes iOS screenshots and replaces current ones on App Store Connect.
+
+### ios iOSrtsScreenshots
+
+```sh
+[bundle exec] fastlane ios iOSrtsScreenshots
 ```
-fastlane ios srfScreenshots
+
+RTS: Makes iOS screenshots and replaces current ones on App Store Connect.
+
+### ios iOSsrfScreenshots
+
+```sh
+[bundle exec] fastlane ios iOSsrfScreenshots
 ```
-SRF: Makes iOS screenshots.
-### ios rtsScreenshots
+
+SRF: Makes iOS screenshots. !!! No replacement made on App Store Connect !!!
+
+### ios iOSswiScreenshots
+
+```sh
+[bundle exec] fastlane ios iOSswiScreenshots
 ```
-fastlane ios rtsScreenshots
+
+SWI: Makes iOS screenshots and replaces current ones on App Store Connect.
+
+### ios iOSrsiAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios iOSrsiAppStoreUploadBeta
 ```
-RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios rsiScreenshots
+
+RSI only: See 'iOSAppStoreUploadBetas' lane.
+
+### ios iOSrtrAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtrAppStoreUploadBeta
 ```
-fastlane ios rsiScreenshots
+
+RTR only: See 'iOSAppStoreUploadBetas' lane.
+
+### ios iOSrtsAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtsAppStoreUploadBeta
 ```
-RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios rtrScreenshots
+
+RTS only: See 'iOSAppStoreUploadBetas' lane.
+
+### ios iOSsrfAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios iOSsrfAppStoreUploadBeta
 ```
-fastlane ios rtrScreenshots
+
+SRF only: See 'iOSAppStoreUploadBetas' lane.
+
+### ios iOSswiAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios iOSswiAppStoreUploadBeta
 ```
-RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.
-### ios swiAppStoreUpload
+
+SWI only: See 'iOSAppStoreUploadBetas' lane.
+
+### ios iOSrsiAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios iOSrsiAppStoreDistributePrivateBeta
 ```
-fastlane ios swiAppStoreUpload
+
+RSI only: See 'iOSAppStoreDistributePrivateBetas' lane.
+
+### ios iOSrtrAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtrAppStoreDistributePrivateBeta
 ```
-SWI: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios srfAppStoreUpload
+
+RTR only: See 'iOSAppStoreDistributePrivateBetas' lane.
+
+### ios iOSrtsAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtsAppStoreDistributePrivateBeta
 ```
-fastlane ios srfAppStoreUpload
+
+RTS only: See 'iOSAppStoreDistributePrivateBetas' lane.
+
+### ios iOSsrfAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios iOSsrfAppStoreDistributePrivateBeta
 ```
-SRF: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rtsAppStoreUpload
+
+SRF only: See 'iOSAppStoreDistributePrivateBetas' lane.
+
+### ios iOSswiAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios iOSswiAppStoreDistributePrivateBeta
 ```
-fastlane ios rtsAppStoreUpload
+
+SWI only: See 'iOSAppStoreDistributePrivateBetas' lane.
+
+### ios iOSrsiAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios iOSrsiAppStoreDistributePublicBeta
 ```
-RTS: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rsiAppStoreUpload
+
+RSI only: See 'iOSAppStoreDistributePublicBeta' lane.
+
+### ios iOSrtrAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtrAppStoreDistributePublicBeta
 ```
-fastlane ios rsiAppStoreUpload
+
+RTR only: See 'iOSAppStoreDistributePublicBeta' lane.
+
+### ios iOSrtsAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios iOSrtsAppStoreDistributePublicBeta
 ```
-RSI: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios rtrAppStoreUpload
+
+RTS only: See 'iOSAppStoreDistributePublicBeta' lane.
+
+### ios iOSsrfAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios iOSsrfAppStoreDistributePublicBeta
 ```
-fastlane ios rtrAppStoreUpload
+
+SRF only: See 'iOSAppStoreDistributePublicBeta' lane.
+
+### ios iOSswiAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios iOSswiAppStoreDistributePublicBeta
 ```
-RTR: Uploads a new iOS build on AppStore Connect with the current build number.
-### ios swiDSYMs
+
+SWI only: See 'iOSAppStoreDistributePublicBeta' lane.
+
+### ios iOSrsiAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSrsiAppStoreDSYMs
 ```
-fastlane ios swiDSYMs
+
+RSI only: See 'iOSAppStoreDSYMs' lane.
+
+### ios iOSrtrAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSrtrAppStoreDSYMs
 ```
-SWI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios srfDSYMs
+
+RTR only: See 'iOSAppStoreDSYMs' lane.
+
+### ios iOSrtsAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSrtsAppStoreDSYMs
 ```
-fastlane ios srfDSYMs
+
+RTS only: See 'iOSAppStoreDSYMs' lane.
+
+### ios iOSsrfAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSsrfAppStoreDSYMs
 ```
-SFR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rtsDSYMs
+
+SFR only: See 'iOSAppStoreDSYMs' lane.
+
+### ios iOSswiAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios iOSswiAppStoreDSYMs
 ```
-fastlane ios rtsDSYMs
-```
-RTS: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rsiDSYMs
-```
-fastlane ios rsiDSYMs
-```
-RSI: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios rtrDSYMs
-```
-fastlane ios rtrDSYMs
-```
-RTR: Sends latest iOS dSYMs to App Center, with same parameters as 'dSYMs'.
-### ios tvOSswiScreenshots
-```
-fastlane ios tvOSswiScreenshots
-```
-SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSsrfScreenshots
-```
-fastlane ios tvOSsrfScreenshots
-```
-SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSrtsScreenshots
-```
-fastlane ios tvOSrtsScreenshots
-```
-RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
+
+SWI only: See 'iOSAppStoreDSYMs' lane.
+
 ### ios tvOSrsiScreenshots
+
+```sh
+[bundle exec] fastlane ios tvOSrsiScreenshots
 ```
-fastlane ios tvOSrsiScreenshots
-```
-RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
+
+RSI: Makes tvOS screenshots and replaces current ones on App Store Connect.
+
 ### ios tvOSrtrScreenshots
+
+```sh
+[bundle exec] fastlane ios tvOSrtrScreenshots
 ```
-fastlane ios tvOSrtrScreenshots
+
+RTR: Makes tvOS screenshots and replaces current ones on App Store Connect.
+
+### ios tvOSrtsScreenshots
+
+```sh
+[bundle exec] fastlane ios tvOSrtsScreenshots
 ```
-RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.
-### ios tvOSswiAppStoreUpload
+
+RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.
+
+### ios tvOSsrfScreenshots
+
+```sh
+[bundle exec] fastlane ios tvOSsrfScreenshots
 ```
-fastlane ios tvOSswiAppStoreUpload
+
+SRF: Makes tvOS screenshots and replaces current ones on App Store Connect.
+
+### ios tvOSswiScreenshots
+
+```sh
+[bundle exec] fastlane ios tvOSswiScreenshots
 ```
-SWI: Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSsrfAppStoreUpload
+
+SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.
+
+### ios tvOSrsiAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrsiAppStoreUploadBeta
 ```
-fastlane ios tvOSsrfAppStoreUpload
+
+RSI only: See 'tvOSAppStoreUploadBetas' lane.
+
+### ios tvOSrtrAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtrAppStoreUploadBeta
 ```
-SRF: Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSrtsAppStoreUpload
+
+RTR only: See 'tvOSAppStoreUploadBetas' lane.
+
+### ios tvOSrtsAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtsAppStoreUploadBeta
 ```
-fastlane ios tvOSrtsAppStoreUpload
+
+RTS only: See 'tvOSAppStoreUploadBetas' lane.
+
+### ios tvOSsrfAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios tvOSsrfAppStoreUploadBeta
 ```
-RTS: Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSrsiAppStoreUpload
+
+SRF only: See 'tvOSAppStoreUploadBetas' lane.
+
+### ios tvOSswiAppStoreUploadBeta
+
+```sh
+[bundle exec] fastlane ios tvOSswiAppStoreUploadBeta
 ```
-fastlane ios tvOSrsiAppStoreUpload
+
+SWI only: See 'tvOSAppStoreUploadBetas' lane.
+
+### ios tvOSrsiAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrsiAppStoreDistributePrivateBeta
 ```
-RSI: Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSrtrAppStoreUpload
+
+RSI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+
+### ios tvOSrtrAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtrAppStoreDistributePrivateBeta
 ```
-fastlane ios tvOSrtrAppStoreUpload
+
+RTR only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+
+### ios tvOSrtsAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtsAppStoreDistributePrivateBeta
 ```
-RTR: Uploads a new tvOS build on AppStore Connect with the current build number.
-### ios tvOSswiDSYMs
+
+RTS only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+
+### ios tvOSsrfAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios tvOSsrfAppStoreDistributePrivateBeta
 ```
-fastlane ios tvOSswiDSYMs
+
+SRF only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+
+### ios tvOSswiAppStoreDistributePrivateBeta
+
+```sh
+[bundle exec] fastlane ios tvOSswiAppStoreDistributePrivateBeta
 ```
-SWI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
-### ios tvOSsrfDSYMs
+
+SWI only: See 'tvOSAppStoreDistributePrivateBetas' lane.
+
+### ios tvOSrsiAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrsiAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSsrfDSYMs
+
+RSI only: See 'tvOSAppStoreDistributePublicBetas' lane.
+
+### ios tvOSrtrAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtrAppStoreDistributePublicBeta
 ```
-SFR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
-### ios tvOSrtsDSYMs
+
+RTR only: See 'tvOSAppStoreDistributePublicBetas' lane.
+
+### ios tvOSrtsAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios tvOSrtsAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSrtsDSYMs
+
+RTS only: See 'tvOSAppStoreDistributePublicBetas' lane.
+
+### ios tvOSsrfAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios tvOSsrfAppStoreDistributePublicBeta
 ```
-RTS: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
-### ios tvOSrsiDSYMs
+
+SRF only: See 'tvOSAppStoreDistributePublicBetas' lane.
+
+### ios tvOSswiAppStoreDistributePublicBeta
+
+```sh
+[bundle exec] fastlane ios tvOSswiAppStoreDistributePublicBeta
 ```
-fastlane ios tvOSrsiDSYMs
+
+SWI only: See 'tvOSAppStoreDistributePublicBetas' lane.
+
+### ios tvOSrsiAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSrsiAppStoreDSYMs
 ```
-RSI: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
-### ios tvOSrtrDSYMs
+
+RSI only: See 'tvOSAppStoreDSYMs' lane.
+
+### ios tvOSrtrAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSrtrAppStoreDSYMs
 ```
-fastlane ios tvOSrtrDSYMs
+
+RTR only: See 'tvOSAppStoreDSYMs' lane.
+
+### ios tvOSrtsAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSrtsAppStoreDSYMs
 ```
-RTR: Sends latest tvOS dSYMs to App Center, with same parameters as 'tvOSdSYMs'.
+
+RTS only: See 'tvOSAppStoreDSYMs' lane.
+
+### ios tvOSsrfAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSsrfAppStoreDSYMs
+```
+
+SFR only: See 'tvOSAppStoreDSYMs' lane.
+
+### ios tvOSswiAppStoreDSYMs
+
+```sh
+[bundle exec] fastlane ios tvOSswiAppStoreDSYMs
+```
+
+SWI only: See 'tvOSAppStoreDSYMs' lane.
 
 ----
 
 This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
-More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
-The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
+
+More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
+
+The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).

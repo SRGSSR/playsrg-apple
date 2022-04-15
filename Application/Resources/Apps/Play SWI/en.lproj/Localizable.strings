@@ -43,6 +43,12 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
+/* Speed factor */
+"%@×" = "%@×";
+
+/* Speed factor with current value if different from desired one */
+"%@× (Now: %@×)" = "%1$@× (Now: %2$@×)";
+
 /* Title displayed when several items have been selected */
 "%d items" = "%d items";
 
@@ -397,6 +403,9 @@
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Playback history, favorites and content saved for later will be deleted from this Apple TV.";
 
+/* Playback speed screen title */
+"Playback speed" = "Playback speed";
+
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular on Play SWI";
 
@@ -516,6 +525,9 @@
 /* Name of the search setting to filter subtitled content */
 "Subtitled" = "Subtitled";
 
+/* Information message displayed when support information has been copied to the pasteboard */
+"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
+
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronize playback history, favorites and content saved for later on all devices connected to your account.";
 
@@ -528,9 +540,6 @@
 /* Message displayed when some content (media, show, etc.) has been copied to the clipboard
    Message displayed when song title and artist name have been copied to the pasteboard */
 "The content has been copied to the clipboard." = "The content has been copied to the clipboard.";
-
-/* Information message displayed when support information has been copied to the pasteboard by the user */
-"Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
 
 /* Confirmation message displayed when the user is about to delete a download */
 "The downloaded content will be deleted." = "The downloaded content will be deleted.";

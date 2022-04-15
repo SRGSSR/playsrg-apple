@@ -62,7 +62,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     
     private var detailed: Bool {
 #if os(iOS)
-        return layout == .highlight || horizontalSizeClass == .regular
+        return horizontalSizeClass == .regular
 #else
         return true
 #endif
@@ -148,7 +148,7 @@ final class FeaturedContentCellSize: NSObject {
     
     @objc static func highlight(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 145)
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 80)
         }
         else {
             return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)

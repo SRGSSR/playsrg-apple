@@ -224,7 +224,7 @@ private extension CarPlayList {
                     let item = CPListItem(text: radioChannel.name, detailText: nil, image: logoImage(for: radioChannel))
                     item.accessoryType = .disclosureIndicator
                     item.handler = { _, completion in
-                        let template = CPListTemplate(list: .mostPopularMedias(radioChannel: radioChannel), interfaceController: interfaceController)
+                        let template = CPListTemplate.list(.mostPopularMedias(radioChannel: radioChannel), interfaceController: interfaceController)
                         interfaceController.pushTemplate(template, animated: true) { _, _ in
                             completion()
                         }

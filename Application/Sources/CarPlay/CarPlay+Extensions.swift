@@ -7,9 +7,16 @@
 import CarPlay
 
 extension CPListTemplate {
-    convenience init(list: CarPlayList, interfaceController: CPInterfaceController) {
-        self.init(title: list.title, sections: [])
-        controller = CarPlayTemplateListController(list: list, template: self, interfaceController: interfaceController)
+    static func list(_ list: CarPlayList, interfaceController: CPInterfaceController) -> CPListTemplate {
+        let template = CPListTemplate(title: list.title, sections: [])
+        template.controller = CarPlayTemplateListController(list: list, template: template, interfaceController: interfaceController)
+        return template
+    }
+    
+    static var playbackRate: CPListTemplate {
+        let template = CPListTemplate(title: NSLocalizedString("Playback speed", comment: "Playback speed screen title"), sections: [])
+        template.controller = CarPlayPlaybackSpeedController(template: template)
+        return template
     }
 }
 
@@ -25,8 +32,6 @@ extension CPInterfaceController {
         }
         
         let nowPlayingTemplate = CPNowPlayingTemplate.shared
-        nowPlayingTemplate.controller = CarPlayNowPlayingController()
-        
         pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
             completion()
         }

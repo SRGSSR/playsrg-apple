@@ -5,12 +5,33 @@
 //
 
 import CarPlay
+import Combine
+import SRGLetterbox
 
 // MARK: Controller
 
-final class CarPlayNowPlayingController: CarPlayTemplateController {
-    init() {}
+final class CarPlayNowPlayingController {
+    private weak var interfaceController: CPInterfaceController?
+    private var cancellables = Set<AnyCancellable>()
     
+    init(interfaceController: CPInterfaceController) {
+        self.interfaceController = interfaceController
+        
+        // If the player is closed on the iOS device return to the first level. A better result would inspect the
+        // template hierarchy to pop to the previous one but this might perform an IPC call. Popping to the root
+        // should be sufficient.
+        SRGLetterboxService.shared.publisher(for: \.controller)
+            .filter { $0 == nil }
+            .sink { [weak interfaceController] _ in
+                interfaceController?.popToRootTemplate(animated: true) { _, _ in }
+            }
+            .store(in: &cancellables)
+    }
+}
+
+// MARK: Protocols
+
+extension CarPlayNowPlayingController: CarPlayTemplateController {
     func willAppear(animated: Bool) {}
     
     func didAppear(animated: Bool) {

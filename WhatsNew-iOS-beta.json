@@ -78,7 +78,7 @@
   "2.9.1-298": "- Add Watch Later section for medias.\n- Add My List feature to keep shows and be notified if needed.\n- Quick access to My List shows on TV and Radio homepages.\n- Migrate Favoris and Subscriptions contents. Remove those sections.\n- Playing throw Chromecast now resumes playbacks from the user history.\n- Startup performance improvements (75% reduction).\n- Improve the subtitles and audio tracks selection (SDH and audio descriptions).\n- Display live medias in show page.\n- Update Comscore analytics to SMDH requirements.",
   "2.9.1-299": "- Rename My List to Favorites.\n- Open the show page from the player page.\n- Fix a crash when selecting subtitles in a TV livestream.\n- Update Onboarding screens.\n\nMy List items migration from Beta 2.9.1 (298) to the \"new show Favorites\" is not guaranteed. Migration from all previous Beta versions works as expected.",
   "2.9.1-301": "- Update German translations\n- Update Italian translations\n\nMy List items migration from Beta 2.9.1 (298) to the \"new show Favorites\" is not guaranteed. Migration from all previous Beta versions works as expected.",
-  "2.9.1-302": "- Fix Onboarding margins.\n- Restore icon in empty notifications view.\n- Fix AppStore Connect warnings.",
+  "2.9.1-302": "- Fix Onboarding margins.\n- Restore icon in empty notifications view.\n- Fix App Store Connect warnings.",
   "2.9.1-303": "- Fix Chromecast issue on Beta / Nightly versions.",
   "2.9.1-304": "- Update Play SWI translations.",
   "2.9.2-305": "- Fix potential migration crash.",
@@ -154,5 +154,9 @@
   "3.5.1-375": "- Add basic push notification information in application settings.\n- Fix favorite state on media player page.\n- Improve accessibility.",
   "3.5.1-376": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
   "3.5.1-377": "- Fix favorite subscribed shows synchronisation with push notification service.\n- Improve device information in application settings.",
-  "3.5.1-378": "- Fix an unexpected item selection option in detail views.\n- SRG released libraries.\n- All translations are up to date."
+  "3.5.1-378": "- Fix an unexpected item selection option in detail views.\n- SRG released libraries.\n- All translations are up to date.",
+  "3.6.0-379": "- Add playback speed support in the player.\n- Persist audio track selection between content.",
+  "3.6.0-380": "- Fix a playback speed measurement.\n- Fix a push notification potencial issue with a backup restoration.",
+  "3.6.0-381": "- Preview thumbnails in the player, if content provides them.\n- Update Italian, French and German translations for playback speed feature.\n- Fix a playback speed measurement.",
+  "3.6.0-382": "- Playback speed button for CarPlay.\n- SRG released libraries.\n- AppStore release."
 }

@@ -15,22 +15,36 @@ final class CarPlaySceneDelegate: UIResponder {
 // MARK: Protocols
 
 extension CarPlaySceneDelegate: CPTemplateApplicationSceneDelegate {
+    private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
+        return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
+            interfaceController.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
+        }
+    }
+    
+    private static func configureNowPlayingTemplate(for interfaceController: CPInterfaceController) {
+        let nowPlayingTemplate = CPNowPlayingTemplate.shared
+        nowPlayingTemplate.controller = CarPlayNowPlayingController(interfaceController: interfaceController)
+        nowPlayingTemplate.updateNowPlayingButtons([playbackRateButton(for: interfaceController)])
+    }
+    
     func templateApplicationScene(_ templateApplicationScene: CPTemplateApplicationScene, didConnect interfaceController: CPInterfaceController) {
         interfaceController.delegate = self
         self.interfaceController = interfaceController
         
+        Self.configureNowPlayingTemplate(for: interfaceController)
+        
         let traitCollection = UITraitCollection(userInterfaceIdiom: .carPlay)
         var templates = [CPTemplate]()
         
-        let livestreamsTemplate = CPListTemplate(list: .livestreams, interfaceController: interfaceController)
+        let livestreamsTemplate = CPListTemplate.list(.livestreams, interfaceController: interfaceController)
         livestreamsTemplate.tabImage = UIImage(named: "livestreams_tab", in: nil, compatibleWith: traitCollection)
         templates.append(livestreamsTemplate)
         
-        let favoriteEpisodesTemplate = CPListTemplate(list: .latestEpisodesFromFavorites, interfaceController: interfaceController)
+        let favoriteEpisodesTemplate = CPListTemplate.list(.latestEpisodesFromFavorites, interfaceController: interfaceController)
         favoriteEpisodesTemplate.tabImage = UIImage(named: "favorites_tab", in: nil, compatibleWith: traitCollection)
         templates.append(favoriteEpisodesTemplate)
         
-        let mostPopularTemplate = CPListTemplate(list: .mostPopular, interfaceController: interfaceController)
+        let mostPopularTemplate = CPListTemplate.list(.mostPopular, interfaceController: interfaceController)
         mostPopularTemplate.tabImage = UIImage(named: "trends_tab", in: nil, compatibleWith: traitCollection)
         templates.append(mostPopularTemplate)
         

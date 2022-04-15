@@ -33,6 +33,7 @@ typedef NS_ENUM(NSInteger, SettingUserLocation) {
 };
 
 NSString * const PlaySRGSettingProgramGuideRecentlyUsedLayout = @"PlaySRGSettingProgramGuideRecentlyUsedLayout";
+NSString * const PlaySRGSettingLastSelectedAudioLanguageCode = @"PlaySRGSettingLastSelectedAudioLanguageCode";
 
 NSValueTransformer *ProgramGuideLayoutTransformer(void)
 {
@@ -153,4 +154,16 @@ NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 #else
     return nil;
 #endif
+}
+
+NSString *ApplicationSettingLastSelectedAudioLanguageCode(void)
+{
+    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastSelectedAudioLanguageCode];
+}
+
+void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString *languageCode)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:languageCode forKey:PlaySRGSettingLastSelectedAudioLanguageCode];
+    [userDefaults synchronize];
 }

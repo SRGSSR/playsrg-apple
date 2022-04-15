@@ -1660,6 +1660,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
 }
 
+- (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectAudioLanguageCode:(NSString *)languageCode
+{
+    ApplicationSettingSetLastSelectedAudioLanguageCode(languageCode);
+}
+
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
     SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];

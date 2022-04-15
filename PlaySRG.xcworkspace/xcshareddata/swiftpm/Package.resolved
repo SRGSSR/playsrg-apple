@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/IdeasOnCanvas/Aiolos.git",
       "state" : {
-        "revision" : "12aee6065058aa7abe4f57ca93d5e4682c79bb6b",
-        "version" : "1.8.0"
+        "revision" : "1f38e1f0f3cebad4e92b5a9c34eca8e305754279",
+        "version" : "1.8.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
       "state" : {
-        "revision" : "b84bc8a39ff04bc8d5ae7b4d230c171c562891aa",
-        "version" : "4.4.1"
+        "revision" : "8354a50fe01a7e54e196d3b5493b5ab53dd5866a",
+        "version" : "4.4.2"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "d4c4e8c7b8898ea771e90beab71112ea279d73a5",
-        "version" : "8.13.0"
+        "revision" : "ccb2bccb82e62ad9e8a4e757a43ce6a04ceae1c9",
+        "version" : "8.14.0"
       }
     },
     {
@@ -77,8 +77,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "6cc2991c11872510a5314bc112cc7558dd9d046a",
-        "version" : "8.12.0"
+        "revision" : "9b74e6a3f875208c04c22b39b580a21d4de0f4f9",
+        "version" : "8.14.0"
       }
     },
     {
@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "b3bb0c5551fb3f80ca939829639ab5b093edd14f",
-        "version" : "7.7.0"
+        "revision" : "f4abe56ce62a779e64b525eb133c8fc2a84bbc1f",
+        "version" : "7.7.1"
       }
     },
     {
@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/gtm-session-fetcher.git",
       "state" : {
-        "revision" : "bc6a19702ac76ac4e488b68148710eb815f9bc56",
-        "version" : "1.7.0"
+        "revision" : "eca9404a18f53727e4698211aaf2615eb93b962a",
+        "version" : "1.7.1"
       }
     },
     {
@@ -131,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "fcc2c3e8109022438f470aa77b04da874a0079cc",
-        "version" : "16.4.0"
+        "revision" : "f24aea12599525de279cb28d959e35177f9af7e5",
+        "version" : "16.5.1"
       }
     },
     {
@@ -212,8 +212,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
       "state" : {
-        "revision" : "611337c330350c9c1823ad6d671e7f936af5ee13",
-        "version" : "2.0.0"
+        "revision" : "46c1e6b5ac09d8f82c991061c659f67e573d425d",
+        "version" : "2.1.0"
       }
     },
     {
@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "1ff6704dca7b29fc3f436fd2cc4f10bf652dd88d",
-        "version" : "7.4.0"
+        "revision" : "99f726822dcc5045cd5e2b48df3f56fdd191fed8",
+        "version" : "7.5.0"
       }
     },
     {
@@ -248,8 +248,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "04d1d4a45fd83044116c77ba7f2c64e2618aea94",
-        "version" : "13.0.0"
+        "revision" : "9cf7768024d11194c42734b22460ab5f7272f7d1",
+        "version" : "13.1.0"
       }
     },
     {
@@ -275,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "5c4461eefa4976a56ac9b308f15259b95541313f",
-        "version" : "7.4.0"
+        "revision" : "6490f6c76516c82f00e314dcc8df2ae2d72578df",
+        "version" : "7.5.0"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "83dc2f50050327e0b353f4e5372a674f90e3f5fc",
-        "version" : "6.2.2"
+        "revision" : "44836cc4218855e3bc70a29258dab61212cfa4de",
+        "version" : "7.0.0"
       }
     },
     {

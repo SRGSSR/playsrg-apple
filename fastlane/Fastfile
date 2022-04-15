@@ -18,14 +18,17 @@ fastlane_version '2.96.0'
 default_platform :ios
 
 platform :ios do
-  before_all do |lane|
+  before_all do |lane, options|
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
 
     # For betas, before all, check if we have a beta release description
-    if lane.to_s.downcase.include?('betas')
-      what_s_new = what_s_new_for_beta(platform)
+    if lane.to_s.downcase.include?('betas') ||
+       ['appstore', 'beta'].all? { |i| lane.to_s.downcase.include? i }
+
+      tag_version = options[:tag_version] || tag_version(platform)
+      what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
-        UI.user_error!("Whoops, WhatsNew-#{platform}-beta.json has no release note for #{tag_version(platform)}.")
+        UI.user_error!("WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}.")
       end
     end
 
@@ -37,430 +40,642 @@ platform :ios do
     end
   end
 
+  #
+  # Public lanes
+  #
+
   # Nightlies
 
   desc 'Builds a new iOS nightly on App Center.'
-  lane :nightlies do
+  lane :iOSnightliesAppCenter do
     platform = 'iOS'
     service = 'AppCenter'
 
-    build_number = latest_appcenter_build_number(appcenter_nightly_names)
-    build_number = xcode_override_build_number(platform, build_number + 1)
+    build_number = latest_appcenter_build_number(appcenter_ios_nightly_appcenter_names)
+    xcode_override_build_number(platform, build_number + 1)
+
+    tag_version = tag_version(platform)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
 
-    ios_schemes.each_index do |index|
+    ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Nightly_AppCenter',
-        scheme: ios_schemes[index],
-        display_name_suffix: nighlty_display_name_suffix(branch_name),
+        scheme: ios_application_schemes[index],
+        display_name_suffix: nightly_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name: nightly_build_name(branch_name),
         platform: platform
       )
 
       appcenter_lane(
-        appname: appcenter_nightly_names[index],
+        appname: appcenter_ios_nightly_appcenter_names[index],
         destinations: ENV['PLAY_NIGHTLY_APPCENTER_DESTINATIONS'],
         notes: nightly_changelog(platform, service)
       )
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (Nightly #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_application_schemes[index]} (#{platform} Nightly #{tag_version}) uploaded and distributed. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a new tvOS nightly on AppStore Connect and waits build processing.'
+  desc 'Builds a new tvOS nightly on App Store Connect and waits for build processing.'
   lane :tvOSnightlies do
     testflight_nightlies(platform: 'tvOS')
   end
 
   desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :tvOSnightlyDSYMs do |options|
-    tvos_schemes.each_index do |index|
+    tvos_application_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
       appcenter_appname = appcenter_tv_nightly_names[index]
       update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
     end
   end
 
-  desc 'Builds a new iOS nightly on AppStore Connect and waits build processing.'
+  desc 'Builds a new iOS nightly on App Store Connect and waits for build processing.'
   lane :iOSnightlies do
     testflight_nightlies(platform: 'iOS')
   end
 
   desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :iOSnightlyDSYMs do |options|
-    ios_schemes.each_index do |index|
+    ios_application_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
       appcenter_appname = appcenter_ios_nightly_names[index]
       update_dsyms(app_identifier, 'iOS', appcenter_appname, options)
     end
   end
 
-  desc 'Add a nightly TestFlight tester (email required)'
+  desc 'Adds a nightly TestFlight tester (email required)'
   lane :nightlyTester do |options|
     addTestFlightTester(
       email: options[:email],
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_nightly_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
     )
   end
 
   # Betas
 
-  desc 'Builds a new iOS beta on App Center with the current build number. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
-  lane :betas do
+  desc 'Builds an iOS beta on App Center with the current build number. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  lane :iOSbetasAppCenter do
     platform = 'iOS'
 
-    notify_build_number_to_ci(platform, nil)
+    notify_version_to_ci(platform, nil, nil)
 
-    build_number = xcode_build_number(platform)
+    tag_version = tag_version(platform)
 
-    ios_schemes.each_index do |index|
+    ios_application_schemes.each_index do |index|
       build_lane(
         configuration: 'Beta_AppCenter',
-        scheme: ios_schemes[index],
+        scheme: ios_application_schemes[index],
         display_name_suffix: ' 🎯',
         version_suffix: '-beta',
         platform: platform
       )
 
       appcenter_lane(
-        appname: appcenter_beta_names[index],
+        appname: appcenter_ios_beta_appcenter_names[index],
         destinations: ENV['PLAY_BETA_APPCENTER_DESTINATIONS'],
-        notes: what_s_new_for_beta(platform),
+        notes: what_s_new_for_beta(platform, nil),
         notify_testers: true
       )
 
       clean_build_artifacts
 
-      UI.message "#{ios_schemes[index]} (Beta #{build_number}) uploaded and distributed. ✅"
+      UI.message "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Builds a new tvOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
   lane :tvOSbetas do
     testflight_betas(platform: 'tvOS')
   end
 
   desc 'Sends latest tvOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :tvOSbetaDSYMs do |options|
-    tvos_schemes.each_index do |index|
+    tvos_application_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
       appcenter_appname = appcenter_tv_beta_names[index]
       update_dsyms(app_identifier, 'tvOS', appcenter_appname, options)
     end
   end
 
-  desc 'Builds a new iOS beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
   lane :iOSbetas do
     testflight_betas(platform: 'iOS')
   end
 
   desc 'Sends latest iOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
   lane :iOSbetaDSYMs do |options|
-    ios_schemes.each_index do |index|
+    ios_application_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
       appcenter_appname = appcenter_ios_beta_names[index]
       update_dsyms(app_identifier, 'iOS', appcenter_appname, options)
     end
   end
 
-  desc 'Add a beta TestFlight tester (email required)'
+  desc 'Adds a beta TestFlight tester (email required)'
   lane :betaTester do |options|
     addTestFlightTester(
       email: options[:email],
       first_name: options[:first_name],
       last_name: options[:last_name],
       app_identifiers: appstore_beta_identifiers,
-      group_name: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+      group_name: ENV['ITUNES_CONNECT_TF_GROUPS']
     )
   end
 
-  # Prods
+  # App Store betas
 
-  desc 'Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :appStoreUploads do
-    platform = 'iOS'
-
-    notify_build_number_to_ci(platform, nil)
-
-    sh 'bundle exec fastlane ios swiAppStoreUpload'
-    sh 'bundle exec fastlane ios srfAppStoreUpload'
-    sh 'bundle exec fastlane ios rtsAppStoreUpload'
-    sh 'bundle exec fastlane ios rsiAppStoreUpload'
-    sh 'bundle exec fastlane ios rtrAppStoreUpload'
+  desc 'Applies iOSAppStoreUploadBetas, iOSAppStoreDistributePrivateBetas and iOSAppStoreDSYMs.'
+  lane :iOSAppStoreBetas do
+    sh 'bundle exec fastlane ios iOSAppStoreUploadBetas'
+    sh 'bundle exec fastlane ios iOSAppStoreDistributePrivateBetas'
+    sh 'bundle exec fastlane ios iOSAppStoreDSYMs'
   end
 
-  desc 'Sends latest iOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
-  lane :dSYMs do |options|
+  desc 'Uploads an iOS App Store beta on App Store Connect with the current build number.'
+  lane :iOSAppStoreUploadBetas do
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios iOS#{business_unit.downcase}AppStoreUploadBeta"
+    end
+  end
+
+  desc 'Distributes to private groups an iOS App Store beta on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  lane :iOSAppStoreDistributePrivateBetas do |options|
+    tag_version = options[:tag_version]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}AppStoreDistributePrivateBeta#{options}"
+    end
+  end
+
+  desc 'Distributes to public groups an iOS App Store beta on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  lane :iOSAppStoreDistributePublicBetas do |options|
+    tag_version = options[:tag_version]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}AppStoreDistributePublicBeta#{options}"
+    end
+  end
+
+  desc 'Sends latest iOS App Store dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  lane :iOSAppStoreDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
+    build_number = options[:build_number]
 
     options = ''
     options += " min_version:#{min_version}" if min_version
     options += " version:#{version}" if version
+    options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios swiDSYMs#{options}"
-    sh "bundle exec fastlane ios srfDSYMs#{options}"
-    sh "bundle exec fastlane ios rtsDSYMs#{options}"
-    sh "bundle exec fastlane ios rsiDSYMs#{options}"
-    sh "bundle exec fastlane ios rtrDSYMs#{options}"
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios iOS#{business_unit.downcase}AppStoreDSYMs#{options}"
+    end
   end
 
-  desc 'Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSappStoreUploads do
-    platform = 'tvOS'
+  desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.'
+  lane :tvOSAppStoreBetas do
+    sh 'bundle exec fastlane ios tvOSAppStoreUploadBetas'
+    sh 'bundle exec fastlane ios tvOSAppStoreDistributePrivateBetas'
+    sh 'bundle exec fastlane ios tvOSAppStoreDSYMs'
+  end
 
-    notify_build_number_to_ci(platform, nil)
+  desc 'Uploads a tvOS build on App Store Connect with the current build number.'
+  lane :tvOSAppStoreUploadBetas do
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios tvOS#{business_unit.downcase}AppStoreUploadBeta"
+    end
+  end
 
-    sh 'bundle exec fastlane ios tvOSswiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSsrfAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtsAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrsiAppStoreUpload'
-    sh 'bundle exec fastlane ios tvOSrtrAppStoreUpload'
+  desc 'Distributes to private groups a tvOS App Store beta on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  lane :tvOSAppStoreDistributePrivateBetas do |options|
+    tag_version = options[:tag_version]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios tvOS#{business_unit}AppStoreDistributePrivateBeta#{options}"
+    end
+  end
+
+  desc 'Distributes to public groups a tvOS App Store beta on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  lane :tvOSAppStoreDistributePublicBetas do |options|
+    tag_version = options[:tag_version]
+
+    options = ''
+    options += " tag_version:#{tag_version}" if tag_version
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios tvOS#{business_unit}AppStoreDistributePublicBeta#{options}"
+    end
   end
 
   desc 'Sends latest tvOS dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
-  lane :tvOSdSYMs do |options|
+  lane :tvOSAppStoreDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
+    build_number = options[:build_number]
 
     options = ''
     options += " min_version:#{min_version}" if min_version
     options += " version:#{version}" if version
+    options += " build_number:#{build_number}" if build_number
 
-    sh "bundle exec fastlane ios tvOSswiDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSsrfDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtsDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrsiDSYMs#{options}"
-    sh "bundle exec fastlane ios tvOSrtrDSYMs#{options}"
+    business_units.map do |business_unit|
+      sh "bundle exec fastlane ios tvOS#{business_unit.downcase}AppStoreDSYMs#{options}"
+    end
   end
 
   # Individual iOS screenshots
 
-  desc 'SWI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :swiScreenshots do
+  desc 'RSI: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  lane :iOSrsiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play SWI screenshots', ['en-US'])
+    screenshots(platform, 'RSI', ['it'])
     upload_screenshots(platform)
   end
 
-  desc 'SRF: Makes iOS screenshots.'
-  lane :srfScreenshots do
+  desc 'RTR: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  lane :iOSrtrScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play SRF screenshots', ['de-DE'])
+    screenshots(platform, 'RTR', ['de-DE'])
+    upload_screenshots(platform)
+  end
+
+  desc 'RTS: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  lane :iOSrtsScreenshots do
+    platform = 'iOS'
+
+    screenshots(platform, 'RTS', ['fr-FR'])
+    upload_screenshots(platform)
+  end
+
+  desc 'SRF: Makes iOS screenshots. !!! No replacement made on App Store Connect !!!'
+  lane :iOSsrfScreenshots do
+    platform = 'iOS'
+
+    screenshots(platform, 'SRF', ['de-DE'])
     # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
   end
 
-  desc 'RTS: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rtsScreenshots do
+  desc 'SWI: Makes iOS screenshots and replaces current ones on App Store Connect.'
+  lane :iOSswiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'Play RTS screenshots', ['fr-FR'])
+    screenshots(platform, 'SWI', ['en-US'])
     upload_screenshots(platform)
   end
 
-  desc 'RSI: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rsiScreenshots do
-    platform = 'iOS'
+  # Individual iOS App Store beta uploads
 
-    screenshots(platform, 'Play RSI screenshots', ['it'])
-    upload_screenshots(platform)
+  desc 'RSI only: See \'iOSAppStoreUploadBetas\' lane.'
+  lane :iOSrsiAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RSI')
   end
 
-  desc 'RTR: Makes iOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :rtrScreenshots do
-    platform = 'iOS'
-
-    screenshots(platform, 'Play RTR screenshots', ['de-DE'])
-    upload_screenshots(platform)
+  desc 'RTR only: See \'iOSAppStoreUploadBetas\' lane.'
+  lane :iOSrtrAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RTR')
   end
 
-  # Individual iOS build uploads
-
-  desc 'SWI: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :swiAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play SWI')
+  desc 'RTS only: See \'iOSAppStoreUploadBetas\' lane.'
+  lane :iOSrtsAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'RTS')
   end
 
-  desc 'SRF: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :srfAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play SRF')
+  desc 'SRF only: See \'iOSAppStoreUploadBetas\' lane.'
+  lane :iOSsrfAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'SRF')
   end
 
-  desc 'RTS: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rtsAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RTS')
+  desc 'SWI only: See \'iOSAppStoreUploadBetas\' lane.'
+  lane :iOSswiAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'iOS', bu: 'SWI')
   end
 
-  desc 'RSI: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rsiAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RSI')
+  # Individual iOS App Store beta private distributions
+
+  desc 'RSI only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
+  lane :iOSrsiAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
+    )
   end
 
-  desc 'RTR: Uploads a new iOS build on AppStore Connect with the current build number.'
-  lane :rtrAppStoreUpload do
-    testflight_prod(platform: 'iOS', scheme: 'Play RTR')
+  desc 'RTR only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
+  lane :iOSrtrAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
+    )
   end
 
-  # Individual latest iOS dSYMs uploads
-
-  desc 'SWI: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :swiDSYMs do |options|
-    update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'RTS only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
+  lane :iOSrtsAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
+    )
   end
 
-  desc 'SFR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :srfDSYMs do |options|
-    update_dsyms(nil, 'iOS', ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'SRF only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
+  lane :iOSsrfAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
+    )
   end
 
-  desc 'RTS: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rtsDSYMs do |options|
-    update_dsyms(nil, 'iOS', ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'SWI only: See \'iOSAppStoreDistributePrivateBetas\' lane.'
+  lane :iOSswiAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
+    )
   end
 
-  desc 'RSI: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rsiDSYMs do |options|
+  # Individual iOS App Store beta public distributions
+
+  desc 'RSI only: See \'iOSAppStoreDistributePublicBeta\' lane.'
+  lane :iOSrsiAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTR only: See \'iOSAppStoreDistributePublicBeta\' lane.'
+  lane :iOSrtrAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTS only: See \'iOSAppStoreDistributePublicBeta\' lane.'
+  lane :iOSrtsAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SRF only: See \'iOSAppStoreDistributePublicBeta\' lane.'
+  lane :iOSsrfAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SWI only: See \'iOSAppStoreDistributePublicBeta\' lane.'
+  lane :iOSswiAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
+    )
+  end
+
+  # Individual iOS App Store beta dSYMs uploads
+
+  desc 'RSI only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrsiAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR: Sends latest iOS dSYMs to App Center, with same parameters as \'dSYMs\'.'
-  lane :rtrDSYMs do |options|
+  desc 'RTR only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrtrAppStoreDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'RTS only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSrtsAppStoreDSYMs do |options|
+    update_dsyms(nil, 'iOS', ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'SFR only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSsrfAppStoreDSYMs do |options|
+    update_dsyms(nil, 'iOS', ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'SWI only: See \'iOSAppStoreDSYMs\' lane.'
+  lane :iOSswiAppStoreDSYMs do |options|
+    update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   # Individual tvOS screenshots
 
-  desc 'SWI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :tvOSswiScreenshots do
-    platform = 'tvOS'
-
-    screenshots(platform, 'Play SWI TV screenshots', ['en-US'])
-    upload_screenshots(platform)
-  end
-
-  desc 'SRF: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :tvOSsrfScreenshots do
-    platform = 'tvOS'
-
-    screenshots(platform, 'Play SRF TV screenshots', ['de-DE'])
-    upload_screenshots(platform)
-  end
-
-  desc 'RTS: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
-  lane :tvOSrtsScreenshots do
-    platform = 'tvOS'
-
-    screenshots(platform, 'Play RTS TV screenshots', ['fr-FR'])
-    upload_screenshots(platform)
-  end
-
-  desc 'RSI: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  desc 'RSI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
   lane :tvOSrsiScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play RSI TV screenshots', ['it'])
+    screenshots(platform, 'RSI', ['it'])
     upload_screenshots(platform)
   end
 
-  desc 'RTR: Makes tvOS screenshots and replaces current ones on AppStoreConnect.'
+  desc 'RTR: Makes tvOS screenshots and replaces current ones on App Store Connect.'
   lane :tvOSrtrScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'Play RTR TV screenshots', ['de-DE'])
+    screenshots(platform, 'RTR', ['de-DE'])
     upload_screenshots(platform)
   end
 
-  # Individual tvOS build uploads
+  desc 'RTS: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  lane :tvOSrtsScreenshots do
+    platform = 'tvOS'
 
-  desc 'SWI: Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSswiAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play SWI TV')
+    screenshots(platform, 'RTS', ['fr-FR'])
+    upload_screenshots(platform)
   end
 
-  desc 'SRF: Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSsrfAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play SRF TV')
+  desc 'SRF: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  lane :tvOSsrfScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'SRF', ['de-DE'])
+    upload_screenshots(platform)
   end
 
-  desc 'RTS: Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSrtsAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RTS TV')
+  desc 'SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
+  lane :tvOSswiScreenshots do
+    platform = 'tvOS'
+
+    screenshots(platform, 'SWI', ['en-US'])
+    upload_screenshots(platform)
   end
 
-  desc 'RSI: Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSrsiAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RSI TV')
+  # Individual tvOS App Store beta uploads
+
+  desc 'RSI only: See \'tvOSAppStoreUploadBetas\' lane.'
+  lane :tvOSrsiAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RSI')
   end
 
-  desc 'RTR: Uploads a new tvOS build on AppStore Connect with the current build number.'
-  lane :tvOSrtrAppStoreUpload do
-    testflight_prod(platform: 'tvOS', scheme: 'Play RTR TV')
+  desc 'RTR only: See \'tvOSAppStoreUploadBetas\' lane.'
+  lane :tvOSrtrAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RTR')
   end
 
-  # Individual latest tvOS dSYMs uploads
-
-  desc 'SWI: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
-  lane :tvOSswiDSYMs do |options|
-    update_dsyms(nil, 'tvOS', ENV['PLAY_SWI_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'RTS only: See \'tvOSAppStoreUploadBetas\' lane.'
+  lane :tvOSrtsAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'RTS')
   end
 
-  desc 'SFR: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
-  lane :tvOSsrfDSYMs do |options|
-    update_dsyms(nil, 'tvOS', ENV['PLAY_SRF_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'SRF only: See \'tvOSAppStoreUploadBetas\' lane.'
+  lane :tvOSsrfAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'SRF')
   end
 
-  desc 'RTS: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
-  lane :tvOSrtsDSYMs do |options|
-    update_dsyms(nil, 'tvOS', ENV['PLAY_RTS_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  desc 'SWI only: See \'tvOSAppStoreUploadBetas\' lane.'
+  lane :tvOSswiAppStoreUploadBeta do
+    testflight_appstore_upload_beta(platform: 'tvOS', bu: 'SWI')
   end
 
-  desc 'RSI: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
-  lane :tvOSrsiDSYMs do |options|
+  # Individual tvOS App Store beta private distributions
+
+  desc 'RSI only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
+  lane :tvOSrsiAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTR only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
+  lane :tvOSrtrAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTS only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
+  lane :tvOSrtsAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SRF only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
+  lane :tvOSsrfAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SWI only: See \'tvOSAppStoreDistributePrivateBetas\' lane.'
+  lane :tvOSswiAppStoreDistributePrivateBeta do |options|
+    testflight_appstore_distribute_private_beta(
+      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
+    )
+  end
+
+  # Individual tvOS App Store beta public distributions
+
+  desc 'RSI only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
+  lane :tvOSrsiAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTR only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
+  lane :tvOSrtrAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'RTS only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
+  lane :tvOSrtsAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SRF only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
+  lane :tvOSsrfAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
+    )
+  end
+
+  desc 'SWI only: See \'tvOSAppStoreDistributePublicBetas\' lane.'
+  lane :tvOSswiAppStoreDistributePublicBeta do |options|
+    testflight_appstore_distribute_public_beta(
+      platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
+    )
+  end
+
+  # Individual tvOS App Store beta dSYMs uploads
+
+  desc 'RSI only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrsiAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RSI_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR: Sends latest tvOS dSYMs to App Center, with same parameters as \'tvOSdSYMs\'.'
-  lane :tvOSrtrDSYMs do |options|
+  desc 'RTR only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrtrAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RTR_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  # Private lanes
+  desc 'RTS only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSrtsAppStoreDSYMs do |options|
+    update_dsyms(nil, 'tvOS', ENV['PLAY_RTS_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  end
 
-  desc 'Builds a new nightly on AppStore Connect and waits build processing.'
+  desc 'SFR only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSsrfAppStoreDSYMs do |options|
+    update_dsyms(nil, 'tvOS', ENV['PLAY_SRF_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  desc 'SWI only: See \'tvOSAppStoreDSYMs\' lane.'
+  lane :tvOSswiAppStoreDSYMs do |options|
+    update_dsyms(nil, 'tvOS', ENV['PLAY_SWI_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  #
+  # Private lanes
+  #
+
+  desc 'Builds a new nightly on App Store Connect and waits for build processing.'
   private_lane :testflight_nightlies do |options|
     platform = options[:platform] || 'iOS'
     service = 'TestFlight'
 
     build_number = srg_latest_testflight_build_number(appstore_nightly_identifiers, platform)
-    build_number = xcode_override_build_number(platform, build_number + 1)
+    xcode_override_build_number(platform, build_number + 1)
+
+    tag_version = tag_version(platform)
 
     branch_name = git_branch_name
 
-    notify_build_number_to_ci(platform, nightly_build_name(branch_name))
+    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
 
-    schemes = schemes(platform)
+    schemes = application_schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
 
       build_lane(
         configuration: 'Nightly',
         scheme: schemes[index],
-        display_name_suffix: nighlty_display_name_suffix(branch_name),
+        display_name_suffix: nightly_display_name_suffix(branch_name),
         version_suffix: nightly_version_suffix(branch_name),
         build_name: nightly_build_name(branch_name),
         platform: platform,
@@ -471,42 +686,42 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) uploaded. ✅"
     end
 
     changelog = nightly_changelog(platform, service)
-    dsyms_options = { build_number: build_number }
+    dsyms_options = { build_number: build_number_from_tag_version(tag_version) }
 
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog)
+      pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_nightly_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (Nightly #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) dSYM file OK. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
   end
 
-  desc 'Builds a new beta on AppStore Connect with the current build number and waits build processing. If on the develop branch, tries to tag the current version, then bumps the build number and pushes.'
+  desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
 
-    notify_build_number_to_ci(platform, nil)
+    notify_version_to_ci(platform, nil, nil)
 
-    build_number = xcode_build_number(platform)
+    tag_version = tag_version(platform)
 
-    schemes = schemes(platform)
+    schemes = application_schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      can_upload = can_upload_testflight_build(app_identifier, platform, build_number)
-      UI.message("#{schemes[index]} (Beta #{build_number}) already uploaded 🔁 ✅") unless can_upload
+      can_upload = can_upload_testflight_build(app_identifier, platform, tag_version)
+      UI.message("#{schemes[index]} (#{platform} Beta #{tag_version}) already uploaded 🔁 ✅") unless can_upload
       next unless can_upload
 
       build_lane(
@@ -522,52 +737,90 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) uploaded. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) uploaded. ✅"
     end
 
-    changelog = what_s_new_for_beta(platform)
-    dsyms_options = { build_number: build_number }
+    changelog = what_s_new_for_beta(platform, nil)
+    dsyms_options = { build_number: build_number_from_tag_version(tag_version) }
 
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
 
-      pilot_distribute(app_identifier, platform, build_number, changelog)
+      pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) distributed. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_beta_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (Beta #{build_number}) dSYM file OK. ✅"
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) dSYM file OK. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
   end
 
-  desc 'Builds a new prod build on AppStore Connect with the current build number and uploads it.'
-  private_lane :testflight_prod do |options|
-    options[:platform] ||= 'iOS'
-    build_number = xcode_build_number(options[:platform])
+  desc 'Builds a new App Store beta on App Store Connect with the current build number and and skips build processing.'
+  private_lane :testflight_appstore_upload_beta do |options|
+    platform = options[:platform] || 'iOS'
+    scheme = application_scheme(platform, options[:bu])
 
-    can_upload = can_upload_testflight_build(nil, options[:platform], build_number)
-    UI.message("#{options[:scheme]} (#{options[:platform]}) #{build_number} already uploaded 🔁 ✅") unless can_upload
+    UI.important('A valid bu option is required to build an App Store beta. Skipping build. ⚠️') unless scheme
+    next unless scheme
+
+    notify_version_to_ci(platform, nil, nil)
+
+    tag_version = tag_version(platform)
+
+    can_upload = can_upload_testflight_build(nil, platform, tag_version)
+    UI.message("#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅") unless can_upload
     next unless can_upload
 
     build_lane(
       configuration: 'AppStore',
-      scheme: options[:scheme],
-      platform: options[:platform],
+      scheme: scheme,
+      platform: platform,
       export_to_appstore: true
     )
 
-    login_with_app_store_connect_api_key
-    pilot(
-      app_platform: appstore_platform(options[:platform]),
-      skip_waiting_for_build_processing: true
-    )
-    UI.message("#{options[:scheme]} (#{options[:platform]}) #{build_number} uploaded ✅")
+    pilot_fast_upload(nil, platform)
 
     clean_build_artifacts
+
+    UI.message("#{scheme} (#{platform} App Store #{tag_version}) uploaded ✅")
+  end
+
+  desc 'Distributes the App Store beta on App Store Connect with the current build number to private group.'
+  private_lane :testflight_appstore_distribute_private_beta do |options|
+    platform = options[:platform] || 'iOS'
+    tag_version = options[:tag_version] || tag_version(platform)
+    scheme = application_scheme(platform, options[:bu])
+
+    UI.important('A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️') unless scheme
+    next unless scheme
+
+    notify_version_to_ci(platform, tag_version, nil)
+
+    changelog = what_s_new_for_beta(platform, tag_version)
+    pilot_distribute(nil, platform, tag_version, changelog, false)
+
+    UI.message "#{scheme} (#{platform} App Store #{tag_version}) distributed to private beta group. ✅"
+  end
+
+  desc 'Distributes the App Store beta on App Store Connect with the current build number to public group.'
+  private_lane :testflight_appstore_distribute_public_beta do |options|
+    platform = options[:platform] || 'iOS'
+    tag_version = options[:tag_version] || tag_version(platform)
+    scheme = application_scheme(platform, options[:bu])
+
+    UI.important('A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️') unless scheme
+    next unless scheme
+
+    notify_version_to_ci(platform, tag_version, nil)
+
+    changelog = what_s_new_for_beta(platform, tag_version)
+    pilot_distribute(nil, platform, tag_version, changelog, true)
+
+    UI.message "#{scheme} (#{platform} App Store #{tag_version}) distributed to public beta group. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -638,7 +891,7 @@ platform :ios do
     UI.message("Preparing invitations to #{email}. 📩")
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
-    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS']
+    group_name = options[:group_name] || ENV['ITUNES_CONNECT_TF_GROUPS']
 
     spaceship_login
 
@@ -671,10 +924,6 @@ platform :ios do
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true)
     end
-
-    # slack(
-    #   message: "Successfully deployed new App Update."
-    # )
   end
 
   error do |lane|
@@ -683,27 +932,61 @@ platform :ios do
       ENV.delete('DERIVED_DATA_CLEANED')
       reset_git_repo(skip_clean: true, force: true)
     end
-
-    # slack(
-    #   message: exception.message,
-    #   success: false
-    # )
   end
+end
+
+#
+# Functions
+#
+
+def business_units
+  ['RTS', 'SRF', 'RSI', 'RTR', 'SWI']
+end
+
+def business_unit_index(business_unit)
+  business_units.index(business_unit.upcase)
+end
+
+def ios_application_schemes
+  business_units.map { |business_unit| "Play #{business_unit}" }
+end
+
+def tvos_application_schemes
+  business_units.map { |business_unit| "Play #{business_unit} TV" }
+end
+
+def application_schemes(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    ios_application_schemes
+  else
+    tvos_application_schemes
+  end
+end
+
+def application_scheme(platform, business_unit)
+  platform ||= 'iOS'
+
+  application_schemes(platform)[business_unit_index(business_unit)]
+end
+
+def screenshots_scheme(platform, business_unit)
+  platform ||= 'iOS'
+
+  application_scheme = application_scheme(platform, business_unit)
+  return unless application_scheme
+
+  "#{application_scheme} screenshots"
 end
 
 def app_config
   CredentialsManager::AppfileConfig
 end
 
-def srg_pwd
-  Dir.chdir('..') { Dir.pwd }
-end
-
 def cleaned_lane_condition(lane)
   (lane.to_s != 'devLane') &&
-    (!lane.to_s.downcase.include? 'dsym') &&
-    (!lane.to_s.downcase.include? 'tester') &&
-    (!lane.to_s.downcase.include? 'screenshots')
+    ['distribute', 'dsym', 'screenshots', 'tester'].all? { |i| !lane.to_s.downcase.include? i }
 end
 
 def skip_clean_derived_data
@@ -719,46 +1002,16 @@ def derived_data_path
   'build/DerivedData'
 end
 
-def ios_schemes
-  ['Play SWI', 'Play RTS', 'Play SRF', 'Play RSI', 'Play RTR']
-end
-
-def tvos_schemes
-  ['Play SWI TV', 'Play RTS TV', 'Play SRF TV', 'Play RSI TV', 'Play RTR TV']
-end
-
-def schemes(platform)
-  platform ||= 'iOS'
-
-  if platform == 'iOS'
-    ios_schemes
-  else
-    tvos_schemes
-  end
-end
-
-def appcenter_nightly_names
-  [ENV['PLAY_SWI_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_NIGHTLY_APPCENTER_APPNAME']]
+def appcenter_ios_nightly_appcenter_names
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
 def appcenter_tv_nightly_names
-  [ENV['PLAY_SWI_TV_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_TV_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_TV_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_TV_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_TV_NIGHTLY_APPCENTER_APPNAME']]
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
 def appcenter_ios_nightly_names
-  [ENV['PLAY_SWI_IOS_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_IOS_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_IOS_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_IOS_NIGHTLY_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_IOS_NIGHTLY_APPCENTER_APPNAME']]
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_IOS_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
 def appcenter_testflight_nightly_names(platform)
@@ -771,28 +1024,16 @@ def appcenter_testflight_nightly_names(platform)
   end
 end
 
-def appcenter_beta_names
-  [ENV['PLAY_SWI_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_BETA_APPCENTER_APPNAME']]
+def appcenter_ios_beta_appcenter_names
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_BETA_APPCENTER_APPNAME"] }
 end
 
 def appcenter_tv_beta_names
-  [ENV['PLAY_SWI_TV_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_TV_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_TV_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_TV_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_TV_BETA_APPCENTER_APPNAME']]
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_BETA_APPCENTER_APPNAME"] }
 end
 
 def appcenter_ios_beta_names
-  [ENV['PLAY_SWI_IOS_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTS_IOS_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_SRF_IOS_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RSI_IOS_BETA_APPCENTER_APPNAME'],
-   ENV['PLAY_RTR_IOS_BETA_APPCENTER_APPNAME']]
+  business_units.map { |business_unit| ENV["PLAY_#{business_unit}_IOS_BETA_APPCENTER_APPNAME"] }
 end
 
 def appcenter_testflight_beta_names(platform)
@@ -806,19 +1047,15 @@ def appcenter_testflight_beta_names(platform)
 end
 
 def appstore_nightly_identifiers
-  [ENV['ITUNES_CONNECT_NIGHLTY_SWI_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_NIGHLTY_RTS_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_NIGHLTY_SRF_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_NIGHLTY_RSI_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_NIGHLTY_RTR_APP_IDENTIFIER']]
+  business_units.map do |business_unit|
+    ENV["ITUNES_CONNECT_NIGHLTY_#{business_unit}_APP_IDENTIFIER"]
+  end
 end
 
 def appstore_beta_identifiers
-  [ENV['ITUNES_CONNECT_BETA_SWI_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_BETA_RTS_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_BETA_SRF_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_BETA_RSI_APP_IDENTIFIER'],
-   ENV['ITUNES_CONNECT_BETA_RTR_APP_IDENTIFIER']]
+  business_units.map do |business_unit|
+    ENV["ITUNES_CONNECT_BETA_#{business_unit}_APP_IDENTIFIER"]
+  end
 end
 
 def appstore_team_api_key_prefixes
@@ -838,16 +1075,26 @@ def srg_tag(platform)
   "#{platform.downcase}/#{tag_version(platform)}"
 end
 
+def build_number_from_tag_version(tag_version)
+  tag_version.split('-').last
+end
+
+def marketing_version_from_tag_version(tag_version)
+  tag_version.split('-').first
+end
+
 # Returns the what's new text from WhatsNew-beta.json file in the repository
-def what_s_new_for_beta(platform)
+def what_s_new_for_beta(platform, tag_version)
+  tag_version ||= tag_version(platform)
+
   file = File.open("../WhatsNew-#{platform}-beta.json", 'r')
   json = JSON.parse(file.read)
   file.close
-  what_s_new = json[tag_version(platform)]
+  what_s_new = json[tag_version]
   what_s_new || ''
 end
 
-# Characters "-" or "+" in version are not allowed on AppStore Connect.
+# Characters "-" or "+" in version are not allowed on App Store Connect.
 def update_options_to_appstore(options)
   return options unless options[:export_to_appstore]
 
@@ -884,10 +1131,10 @@ def srg_xcargs_code_signing(export_to_appstore)
   "#{xcargs} -allowProvisioningUpdates"
 end
 
-def nighlty_display_name_suffix(branch_name)
-  nighlty_display_name_suffix = ' 🌙'
-  nighlty_display_name_suffix = ' 🌿' if branch_name.include? 'feature/'
-  nighlty_display_name_suffix
+def nightly_display_name_suffix(branch_name)
+  nightly_display_name_suffix = ' 🌙'
+  nightly_display_name_suffix = ' 🌿' if branch_name.include? 'feature/'
+  nightly_display_name_suffix
 end
 
 def nightly_version_suffix(branch_name)
@@ -983,9 +1230,10 @@ def srg_app_store_connect_api_key
   key_prefix = appstore_team_api_key_prefixes[itc_team_id]
   return unless key_prefix
 
+  folder_path = Dir.chdir('..') { Dir.pwd }
   { id: ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_ID"],
     issuerId: ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_ISSUER_ID"],
-    filePath: "#{srg_pwd}/Configuration/#{ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_PATH"]}" }
+    filePath: "#{folder_path}/Configuration/#{ENV["#{key_prefix}_APPSTORE_CONNECT_API_KEY_PATH"]}" }
 end
 
 def login_with_app_store_connect_api_key
@@ -1000,6 +1248,9 @@ def login_with_app_store_connect_api_key
 end
 
 def pilot_fast_upload(app_identifier, platform)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
+  platform ||= 'iOS'
+
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
   login_with_app_store_connect_api_key
@@ -1010,31 +1261,39 @@ def pilot_fast_upload(app_identifier, platform)
   )
 end
 
-def pilot_distribute(app_identifier, platform, build_number, changelog)
-  srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  app_identifier ||= app_config.try_fetch_value(:app_identifier)
+  platform ||= 'iOS'
+  tag_version ||= tag_version(platform)
+  is_public_beta ||= false
+
+  srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
-  UI.important('Another build is already in external beta review. Skipping external distribution. ⚠️')
+  UI.important('Another build is already in TestFlight app review. Skipping external distribution. ⚠️')
 end
 
-def srg_pilot_distribute(app_identifier, platform, build_number, changelog)
+def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
+
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
-    build_number: build_number,
+    app_version: marketing_version_from_tag_version(tag_version),
+    build_number: build_number_from_tag_version(tag_version),
     changelog: changelog,
     distribute_external: true,
-    groups: ENV['ITUNES_CONNECT_TESTFLIGHT_GROUPS'],
+    groups: groups,
     notify_external_testers: true,
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
   )
 end
 
-# Update dSYMs from AppStore Connect to App Center.
+# Update dSYMs from App Store Connect to App Center.
 def update_dsyms(app_identifier, platform, appcenter_appname, options)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
@@ -1070,19 +1329,20 @@ def upload_appcenter_dsyms(appcenter_appname)
   lane_context[SharedValues::DSYM_PATHS]&.each do |dsym|
     appcenter_lane(
       appname: appcenter_appname,
-      notes: 'DSYMs from AppStore Connect (via fastlane).',
+      notes: 'DSYMs from App Store Connect (via fastlane).',
       upload_dsym: dsym
     )
   end
 end
 
-# Share build number to the continuous integration
-def notify_build_number_to_ci(platform, build_name)
+# Share build version and number to the continuous integration
+def notify_version_to_ci(platform, tag_version, build_name)
   return unless ENV['TEAMCITY_VERSION']
 
+  tag_version ||= tag_version(platform)
   build_name ||= ''
-  displayed_build_number = xcode_marketing_version(platform)
-  displayed_build_number += "-#{xcode_build_number(platform)}"
+
+  displayed_build_number = tag_version
   displayed_build_number += "+#{build_name}" unless build_name.empty?
   puts "##teamcity[buildNumber '#{displayed_build_number}']"
 end
@@ -1102,7 +1362,7 @@ def latest_appcenter_build_number(app_names)
   build_number
 end
 
-# Returns current build number on AppStore Connect
+# Returns current build number on App Store Connect
 def srg_latest_testflight_build_number(app_identifiers, platform)
   login_with_app_store_connect_api_key
 
@@ -1118,14 +1378,14 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
   build_number
 end
 
-# Create screenshots for AppStoreConnect.
-def screenshots(platform, scheme, languages)
+# Create screenshots for App Store Connect.
+def screenshots(platform, business_unit, languages)
   platform ||= 'iOS'
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
-    scheme: scheme,
+    scheme: screenshots_scheme(platform, business_unit),
     languages: languages,
     devices: snapshot_devices(platform),
     derived_data_path: derived_data_path,
@@ -1148,10 +1408,11 @@ def upload_screenshots(platform)
   )
 end
 
-def can_upload_testflight_build(app_identifier, platform, build_number)
+def can_upload_testflight_build(app_identifier, platform, tag_version)
   app_identifier ||= app_config.try_fetch_value(:app_identifier)
   platform ||= 'iOS'
-  build_number ||= xcode_build_number(platform)
+  tag_version ||= tag_version(platform)
+  build_number = build_number_from_tag_version(tag_version)
 
   login_with_app_store_connect_api_key
   appstore_build_number = latest_testflight_build_number(

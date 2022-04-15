@@ -17,19 +17,25 @@ static CGSize DefaultSizeForImageScale(ImageScale imageScale)
     dispatch_once(&s_onceToken, ^{
 #if TARGET_OS_IOS
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            s_widths = @{ @(ImageScaleSmall) : @(200.f),
-                          @(ImageScaleMedium) : @(340.f),
-                          @(ImageScaleLarge) : @(400.f)};
+            s_widths = @{
+                @(ImageScaleSmall) : @200.f,
+                @(ImageScaleMedium) : @340.f,
+                @(ImageScaleLarge) : @400.f
+            };
         }
         else {
-            s_widths = @{ @(ImageScaleSmall) : @(200.f),
-                          @(ImageScaleMedium) : @(500.f),
-                          @(ImageScaleLarge) : @(800.f)};
+            s_widths = @{
+                @(ImageScaleSmall) : @200.f,
+                @(ImageScaleMedium) : @500.f,
+                @(ImageScaleLarge) : @800.f
+            };
         }
 #else
-        s_widths = @{ @(ImageScaleSmall) : @(350.f),
-                      @(ImageScaleMedium) : @(800.f),
-                      @(ImageScaleLarge) : @(1000.f)};
+        s_widths = @{
+            @(ImageScaleSmall) : @350.f,
+            @(ImageScaleMedium) : @800.f,
+            @(ImageScaleLarge) : @1000.f
+        };
 #endif
     });
     
@@ -44,13 +50,17 @@ static CGSize ShowPosterSizeForImageScale(ImageScale imageScale)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
 #if TARGET_OS_IOS
-        s_widths = @{ @(ImageScaleSmall) : @(150.f),
-                      @(ImageScaleMedium) : @(200.f),
-                      @(ImageScaleLarge) : @(300.f)};
+        s_widths = @{
+            @(ImageScaleSmall) : @150.f,
+            @(ImageScaleMedium) : @200.f,
+            @(ImageScaleLarge) : @300.f
+        };
 #else
-        s_widths = @{ @(ImageScaleSmall) : @(250.f),
-                      @(ImageScaleMedium) : @(300.f),
-                      @(ImageScaleLarge) : @(400.f)};
+        s_widths = @{
+            @(ImageScaleSmall) : @250.f,
+            @(ImageScaleMedium) : @300.f,
+            @(ImageScaleLarge) : @400.f
+        };
 #endif
     });
     

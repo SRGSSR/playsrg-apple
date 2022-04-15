@@ -173,7 +173,7 @@ static void *s_kvoContext = &s_kvoContext;
     [self play_setNeedsContentInsetsUpdate];
 }
 
-#pragma mark WKNavigationDelegate
+#pragma mark WKNavigationDelegate protocol
 
 - (void)webView:(WKWebView *)webView didStartProvisionalNavigation:(WKNavigation *)navigation
 {
