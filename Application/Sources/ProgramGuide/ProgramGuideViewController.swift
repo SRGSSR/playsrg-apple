@@ -38,11 +38,12 @@ final class ProgramGuideViewController: UIViewController {
         view.backgroundColor = .srgGray16
         
         let headerHostView = UIView()
-        headerHostView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headerHostView)
         self.headerHostView = headerHostView
         
         let headerHostHeightConstraint = headerHostView.heightAnchor.constraint(equalToConstant: 0 /* set in transition(to:traitCollection:animated:) */)
+        
+        headerHostView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerHostView.topAnchor.constraint(equalTo: constant(iOS: view.safeAreaLayoutGuide.topAnchor, tvOS: view.topAnchor)),
             headerHostHeightConstraint,
@@ -52,11 +53,12 @@ final class ProgramGuideViewController: UIViewController {
         self.headerHostHeightConstraint = headerHostHeightConstraint
         
         let headerView = HostView<ProgramGuideHeaderView>(frame: .zero)
-        headerView.translatesAutoresizingMaskIntoConstraints = false
         headerHostView.addSubview(headerView)
         self.headerView = headerView
         
         let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in transition(to:traitCollection:animated:) */)
+        
+        headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             headerView.topAnchor.constraint(equalTo: headerHostView.topAnchor),
             headerHeightConstraint,
@@ -158,9 +160,9 @@ extension ProgramGuideViewController {
         addChild(viewController)
         
         let childView = viewController.view!
-        childView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(childView)
         
+        childView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             childView.topAnchor.constraint(equalTo: headerHostView.bottomAnchor, constant: constant(iOS: 0, tvOS: -ProgramGuideGridLayout.timelineHeight)),
             childView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

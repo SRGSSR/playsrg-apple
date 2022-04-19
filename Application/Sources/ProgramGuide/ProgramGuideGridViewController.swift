@@ -59,10 +59,10 @@ final class ProgramGuideGridViewController: UIViewController {
         collectionView.horizontalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: ProgramGuideGridLayout.channelHeaderWidth, bottom: 0, right: 0)
         collectionView.verticalScrollIndicatorInsets = UIEdgeInsets(top: ProgramGuideGridLayout.timelineHeight, left: 0, bottom: 0, right: 0)
         
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

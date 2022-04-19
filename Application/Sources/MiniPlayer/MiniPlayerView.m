@@ -33,9 +33,9 @@
 {
     if (self = [super initWithFrame:frame]) {
         UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-        blurView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:blurView];
         
+        blurView.translatesAutoresizingMaskIntoConstraints = NO;
         [NSLayoutConstraint activateConstraints:@[
             [blurView.topAnchor constraintEqualToAnchor:self.topAnchor],
             [blurView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
@@ -44,10 +44,10 @@
         ]];
         
         PlayMiniPlayerView *playMiniPlayerView = PlayMiniPlayerView.view;
-        playMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:playMiniPlayerView];
         self.playMiniPlayerView = playMiniPlayerView;
-                
+        
+        playMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [NSLayoutConstraint activateConstraints:@[
             [playMiniPlayerView.topAnchor constraintEqualToAnchor:self.topAnchor],
             [playMiniPlayerView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],
@@ -62,10 +62,10 @@
         }];
         
         GoogleCastMiniPlayerView *googleCastMiniPlayerView = GoogleCastMiniPlayerView.view;
-        googleCastMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [self addSubview:googleCastMiniPlayerView];
         self.googleCastMiniPlayerView = googleCastMiniPlayerView;
         
+        googleCastMiniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
         [NSLayoutConstraint activateConstraints:@[
             [googleCastMiniPlayerView.topAnchor constraintEqualToAnchor:self.topAnchor],
             [googleCastMiniPlayerView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor],

@@ -85,8 +85,9 @@
     [super viewDidLoad];
     
     UIView *pageView = self.pageViewController.view;
-    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
+    
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
         [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
@@ -99,9 +100,9 @@
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:blurView belowSubview:self.calendar];
     
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [blurView.topAnchor constraintEqualToAnchor:self.calendar.topAnchor],
         [blurView.bottomAnchor constraintEqualToAnchor:self.calendar.bottomAnchor],

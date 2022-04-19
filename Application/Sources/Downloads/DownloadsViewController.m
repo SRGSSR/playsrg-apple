@@ -66,9 +66,16 @@
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:tableView];
     self.tableView = tableView;
+    
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [tableView.topAnchor constraintEqualToAnchor:view.topAnchor],
+        [tableView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
+        [tableView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
+        [tableView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor]
+    ]];
     
     RefreshControl *refreshControl = [[RefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];

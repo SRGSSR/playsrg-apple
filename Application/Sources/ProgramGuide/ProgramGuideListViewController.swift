@@ -44,9 +44,9 @@ final class ProgramGuideListViewController: UIViewController {
         pageViewController.delegate = self
         
         if let pageView = pageViewController.view {
-            pageView.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(pageView)
             
+            pageView.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 pageView.topAnchor.constraint(equalTo: view.topAnchor),
                 pageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),

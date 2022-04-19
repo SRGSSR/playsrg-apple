@@ -64,9 +64,16 @@
     TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
     tableView.dataSource = self;
     tableView.delegate = self;
-    tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [view addSubview:tableView];
     self.tableView = tableView;
+    
+    tableView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [tableView.topAnchor constraintEqualToAnchor:view.topAnchor],
+        [tableView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
+        [tableView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
+        [tableView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor]
+    ]];
     
     self.view = view;
 }

@@ -53,8 +53,6 @@
     UIView *containerView = [transitionContext containerView];
     
     UIView *dimmingView = [[UIView alloc] initWithFrame:containerView.bounds];
-    dimmingView.frame = containerView.bounds;
-    dimmingView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     dimmingView.backgroundColor = [UIColor colorWithWhite:0.f alpha:0.5f];
     self.dimmingView = dimmingView;
     
@@ -74,6 +72,14 @@
         NSAssert(fromView != nil, @"Dismissed view must be available");
         [containerView insertSubview:dimmingView belowSubview:fromView];
     }
+    
+    dimmingView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [dimmingView.topAnchor constraintEqualToAnchor:containerView.topAnchor],
+        [dimmingView.bottomAnchor constraintEqualToAnchor:containerView.bottomAnchor],
+        [dimmingView.leadingAnchor constraintEqualToAnchor:containerView.leadingAnchor],
+        [dimmingView.trailingAnchor constraintEqualToAnchor:containerView.trailingAnchor]
+    ]];
     
     // Appearance events need to be notified manually for custom transitions, see https://stackoverflow.com/a/29041911/760435
     [fromViewController beginAppearanceTransition:NO animated:transitionContext.animated];

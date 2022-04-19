@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "revision" : "99f726822dcc5045cd5e2b48df3f56fdd191fed8",
-        "version" : "7.5.0"
+        "branch" : "feature/layout-contraints",
+        "revision" : "c52e6462e21b6fbd8d472b7d5eef0ae9cc1bb22d"
       }
     },
     {
@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgidentity-apple.git",
       "state" : {
-        "revision" : "a64f00d6dc5929b3d9b79d45f5a9479cf406937a",
-        "version" : "3.2.1"
+        "branch" : "feature/layout-contraints",
+        "revision" : "f8be513049944fc42ed50d2991e12db82bb83ca1"
       }
     },
     {
@@ -275,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "revision" : "6490f6c76516c82f00e314dcc8df2ae2d72578df",
-        "version" : "7.5.0"
+        "branch" : "feature/layout-contraints",
+        "revision" : "337f1f1eaa21422ab90cdc6adbb54536af7dadb9"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "revision" : "44836cc4218855e3bc70a29258dab61212cfa4de",
-        "version" : "7.0.0"
+        "branch" : "feature/layout-contraints",
+        "revision" : "b2fb7304079a6316a51eedd4f6aca6c72d90914f"
       }
     },
     {

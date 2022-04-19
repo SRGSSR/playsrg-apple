@@ -143,13 +143,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     // The mini player is not available for all BUs
     MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
-    miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     miniPlayerView.layer.shadowOpacity = 0.9f;
     miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];
-    
     self.miniPlayerView = miniPlayerView;
     
+    miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     @weakify(self)
     [miniPlayerView addObserver:self keyPath:@keypath(miniPlayerView.active) options:0 block:^(MAKVONotification *notification) {
         @strongify(self)
