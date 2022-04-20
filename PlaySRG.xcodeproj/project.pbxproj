@@ -19048,7 +19048,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/layout-contraints";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19072,7 +19072,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/layout-contraints";
+				branch = develop;
 				kind = branch;
 			};
 		};
