@@ -366,7 +366,7 @@ private extension SearchResultsViewController {
             case let .media(media):
                 MediaCell(media: media, style: .show)
             case let .show(show):
-                ShowCell(show: show, style: .standard, imageType: .default)
+                ShowCell(show: show, style: .standard, imageVariant: .default)
             case .loading:
                 ActivityIndicator()
             }

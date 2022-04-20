@@ -18,28 +18,28 @@ struct ShowCell: View {
     @Binding private(set) var show: SRGShow?
     
     let style: Style
-    let imageType: SRGImageType
+    let imageVariant: SRGImageVariant
     
     @StateObject private var model = ShowCellViewModel()
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
-    init(show: SRGShow?, style: Style, imageType: SRGImageType) {
+    init(show: SRGShow?, style: Style, imageVariant: SRGImageVariant) {
         _show = .constant(show)
         self.style = style
-        self.imageType = imageType
+        self.imageVariant = imageVariant
     }
     
     var body: some View {
         Group {
 #if os(tvOS)
-            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageType), action: action) {
-                ImageView(url: model.imageUrl(with: imageType))
+            LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageVariant), action: action) {
+                ImageView(url: model.imageUrl(with: imageVariant))
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
-                if imageType != .showPoster {
+                if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
                         .frame(maxHeight: .infinity, alignment: .top)
                         .padding(.top, ShowCellSize.verticalPadding)
@@ -47,10 +47,10 @@ struct ShowCell: View {
             }
 #else
             VStack(spacing: 0) {
-                ImageView(url: model.imageUrl(with: imageType))
-                    .aspectRatio(ShowCellSize.aspectRatio(for: imageType), contentMode: .fit)
+                ImageView(url: model.imageUrl(with: imageVariant))
+                    .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
                     .background(Color.placeholder)
-                if imageType != .showPoster {
+                if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)
                         .padding(.vertical, ShowCellSize.verticalPadding)
@@ -126,24 +126,24 @@ final class ShowCellSize: NSObject {
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
-    private static func heightOffset(for imageType: SRGImageType) -> CGFloat {
-        return imageType != .showPoster ? constant(iOS: 32, tvOS: 45) : 0
+    private static func heightOffset(for imageVariant: SRGImageVariant) -> CGFloat {
+        return imageVariant != .poster ? constant(iOS: 32, tvOS: 45) : 0
     }
     
-    fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
-        return imageType != .showPoster ? 16 / 9 : 2 / 3
+    fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
+        return imageVariant != .poster ? 16 / 9 : 2 / 3
     }
     
-    fileprivate static func itemWidth(for imageType: SRGImageType) -> CGFloat {
-        return imageType != .showPoster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
+    fileprivate static func itemWidth(for imageVariant: SRGImageVariant) -> CGFloat {
+        return imageVariant != .poster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
     }
     
-    @objc static func swimlane(for imageType: SRGImageType) -> NSCollectionLayoutSize {
-        return LayoutSwimlaneCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset(for: imageType))
+    @objc static func swimlane(for imageVariant: SRGImageVariant) -> NSCollectionLayoutSize {
+        return LayoutSwimlaneCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant))
     }
     
-    @objc static func grid(for imageType: SRGImageType, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
-        return LayoutGridCellSize(itemWidth(for: imageType), aspectRatio(for: imageType), heightOffset(for: imageType), layoutWidth, spacing, 2)
+    @objc static func grid(for imageVariant: SRGImageVariant, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+        return LayoutGridCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant), layoutWidth, spacing, 2)
     }
 }
 
@@ -151,12 +151,12 @@ final class ShowCellSize: NSObject {
 
 struct ShowCell_Previews: PreviewProvider {
     private static let defaultSize = ShowCellSize.swimlane(for: .default).previewSize
-    private static let posterSize = ShowCellSize.swimlane(for: .showPoster).previewSize
+    private static let posterSize = ShowCellSize.swimlane(for: .poster).previewSize
     
     static var previews: some View {
-        ShowCell(show: Mock.show(.standard), style: .standard, imageType: .default)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .default)
             .previewLayout(.fixed(width: defaultSize.width, height: defaultSize.height))
-        ShowCell(show: Mock.show(.standard), style: .standard, imageType: .showPoster)
+        ShowCell(show: Mock.show(.standard), style: .standard, imageVariant: .poster)
             .previewLayout(.fixed(width: posterSize.width, height: posterSize.height))
     }
 }

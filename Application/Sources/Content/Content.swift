@@ -97,7 +97,7 @@ protocol SectionProperties {
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: EmptyView.`Type` { get }
-    var imageType: SRGImageType { get }
+    var imageVariant: SRGImageVariant { get }
     
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
@@ -228,15 +228,15 @@ private extension Content {
             }
         }
 
-        var imageType: SRGImageType {
+        var imageVariant: SRGImageVariant {
             guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch contentSection.type {
             case .shows:
-                return .showPoster
+                return .poster
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows:
-                    return .showPoster
+                    return .poster
                 default:
                     return .default
                 }
@@ -529,11 +529,11 @@ private extension Content {
             }
         }
         
-        var imageType: SRGImageType {
+        var imageVariant: SRGImageVariant {
             guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
             switch configuredSection {
             case .tvAllShows:
-                return .showPoster
+                return .poster
             default:
                 return .default
             }

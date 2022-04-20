@@ -97,7 +97,9 @@
         imagePlaceholder = ImagePlaceholderMediaList;
     }
     
-    [self.thumbnailImageView play_requestImageForObject:notification withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:imagePlaceholder];
+    // FIXME:
+    NSAssert(NO, @"Must be fixed");
+    // [self.thumbnailImageView play_requestImageForObject:notification withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:imagePlaceholder];
 }
 
 @end

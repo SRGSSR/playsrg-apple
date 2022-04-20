@@ -45,9 +45,13 @@ struct TopicCell: View {
     private struct MainView: View {
         let topic: SRGTopic?
         
+        private var imageUrl: URL? {
+            return url(for: topic?.image, size: .small)
+        }
+        
         var body: some View {
             ZStack {
-                ImageView(url: topic?.imageUrl(for: .small))
+                ImageView(url: imageUrl)
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
                     .background(Color.placeholder)
                 Color.srgGray23

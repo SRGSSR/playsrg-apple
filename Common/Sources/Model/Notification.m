@@ -207,27 +207,6 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     return dictionary.copy;
 }
 
-#pragma mark SRGImageMetadata protocol
-
-- (NSURL *)imageURLForDimension:(SRGImageDimension)dimension withValue:(CGFloat)value type:(NSString *)type
-{
-    NSString *dimensionString = (dimension == SRGImageDimensionWidth) ? @"width" : @"height";
-    NSString *sizeComponent = [NSString stringWithFormat:@"scale/%@/%@", dimensionString, @(value)];
-    return [self.imageURL URLByAppendingPathComponent:sizeComponent];
-}
-
-- (NSString *)imageTitle
-{
-    // Not saved in notifications
-    return nil;
-}
-
-- (NSString *)imageCopyright
-{
-    // Not saved in notifications
-    return nil;
-}
-
 #pragma mark Equality
 
 - (BOOL)isEqual:(id)object

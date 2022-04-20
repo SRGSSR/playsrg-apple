@@ -200,8 +200,8 @@
     
     self.subtitleLabel.numberOfLines = self.durationLabel.hidden ? 3 : 1;
     
-    [self.thumbnailImageView play_requestImageForObject:download.media withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
-        [self.thumbnailImageView play_requestImageForObject:download withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+    [self.thumbnailImageView play_requestImage:download.media.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia unavailabilityHandler:^{
+        [self.thumbnailImageView play_requestImage:download.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia];
     }];
     
     [self updateDownloadStatus];

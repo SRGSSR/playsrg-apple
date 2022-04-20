@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGDataProviderModel
 import SRGUserData
 import SwiftUI
 
@@ -14,7 +15,7 @@ struct MediaVisualView<Content: View>: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = MediaVisualViewModel()
     
-    let scale: ImageScale
+    let size: SRGImageSize
     let contentMode: ContentMode
     
     @Binding private var content: (SRGMedia?) -> Content
@@ -22,11 +23,11 @@ struct MediaVisualView<Content: View>: View {
     let padding: CGFloat = constant(iOS: 6, tvOS: 16)
     
     init(media: SRGMedia?,
-         scale: ImageScale,
+         size: SRGImageSize,
          contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill),
          @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
         _media = .constant(media)
-        self.scale = scale
+        self.size = size
         self.contentMode = contentMode
         _content = .constant(content)
     }
@@ -34,7 +35,7 @@ struct MediaVisualView<Content: View>: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ImageView(url: model.imageUrl(for: scale))
+                ImageView(url: model.imageUrl(for: size))
                     .aspectRatio(contentMode: contentMode)
                     .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
                     .clipped()
@@ -114,8 +115,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == SwiftUI.EmptyView {
-    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
-        self.init(media: media, scale: scale, contentMode: contentMode) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
+        self.init(media: media, size: size, contentMode: contentMode) { _ in
             SwiftUI.EmptyView()
         }
     }
@@ -133,10 +134,10 @@ struct MediaVisualView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            MediaVisualView(media: Mock.media(.standard), scale: .small)
-            MediaVisualView(media: Mock.media(.rich), scale: .small)
-            MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
-            MediaVisualView(media: Mock.media(.blocked), scale: .small)
+            MediaVisualView(media: Mock.media(.standard), size: .small)
+            MediaVisualView(media: Mock.media(.rich), size: .small)
+            MediaVisualView(media: Mock.media(.nineSixteen), size: .small)
+            MediaVisualView(media: Mock.media(.blocked), size: .small)
         }
         .frame(width: 600, height: 500)
         .previewLayout(.sizeThatFits)

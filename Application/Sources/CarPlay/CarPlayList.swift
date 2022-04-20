@@ -117,9 +117,9 @@ private extension CarPlayList {
     }
     
     private static func imagePublisher(for media: SRGMedia) -> AnyPublisher<UIImage, Never> {
-        let imageScale = ImageScale.small
-        let placeholderImage = UIColor.placeholder.image(ofSize: SizeForImageScale(imageScale, .default))
-        if let imageUrl = media.imageUrl(for: imageScale) {
+        let imageSize = SRGImageSize.small
+        let placeholderImage = UIColor.placeholder.image(ofSize: SRGRecommendedImageCGSize(imageSize, .default))
+        if let imageUrl = url(for: media.image, size: imageSize) {
             return ImagePipeline.shared.imagePublisher(with: imageUrl)
                 .map(\.image)
                 .replaceError(with: placeholderImage)

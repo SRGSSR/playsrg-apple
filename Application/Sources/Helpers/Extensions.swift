@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGDataProviderCombine
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
@@ -31,6 +32,10 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
         }
         return isNew
     }
+}
+
+func url(for image: SRGImage?, size: SRGImageSize, scaling: SRGImageScaling = .default) -> URL? {
+    return SRGDataProvider.current!.url(for: image, size: size, scaling: scaling)
 }
 
 extension Comparable {
@@ -178,12 +183,6 @@ extension Sequence {
             index += 1
             return transformedElement
         }
-    }
-}
-
-extension SRGImageMetadata {
-    func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
     }
 }
 

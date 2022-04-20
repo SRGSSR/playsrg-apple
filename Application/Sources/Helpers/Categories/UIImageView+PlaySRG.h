@@ -39,29 +39,26 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Request an image of the specified object. Use `SRGImageTypeDefault` for the default image.
  *
- *  @param object                The object for which the image must be requested.
- *  @param scale                 The image scale.
- *  @param type                  The image type.
+ *  @param image                 The image to request.
+ *  @param size                  The image size.
  *  @param placeholder           The image placeholder.
  *  @param unavailabilityHandler An optional handler called when the image is invalid (no object was provided or its
  *                               associated image is invalid). You can implement this block to respond to such cases,
  *                               e.g. to retrieve another image. If the block is set, no image will be set, otherwise
  *                               the default placeholder will automatically be set.
  */
-- (void)play_requestImageForObject:(nullable id<SRGImage>)object
-                         withScale:(ImageScale)scale
-                              type:(SRGImageType)type
-                       placeholder:(ImagePlaceholder)placeholder
-             unavailabilityHandler:(nullable void (^)(void))unavailabilityHandler;
+- (void)play_requestImage:(nullable SRGImage *)image
+                 withSize:(SRGImageSize)size
+              placeholder:(ImagePlaceholder)placeholder
+    unavailabilityHandler:(nullable void (^)(void))unavailabilityHandler;
 
 /**
- *  Same as `-play_requestImageForObject:withScale:type:placeholder:unavailabilityHandler:`, with no unavailability handler (thus
+ *  Same as `-play_requestImage:withSize:placeholder:unavailabilityHandler:`, with no unavailability handler (thus
  *  setting the default placeholder if no image is available).
  */
-- (void)play_requestImageForObject:(nullable id<SRGImage>)object
-                         withScale:(ImageScale)scale
-                              type:(SRGImageType)type
-                       placeholder:(ImagePlaceholder)placeholder;
+- (void)play_requestImage:(nullable SRGImage *)image
+                 withSize:(SRGImageSize)size
+              placeholder:(ImagePlaceholder)placeholder;
 
 /**
  *  Reset the image and cancel any pending image request.

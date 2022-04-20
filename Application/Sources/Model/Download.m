@@ -14,6 +14,7 @@
 
 @import FXReachability;
 @import libextobjc;
+@import SRGDataProviderNetwork;
 
 NSString * const DownloadStateDidChangeNotification = @"DownloadStateDidChangeNotification";
 NSString * const DownloadStateKey = @"DownloadState";
@@ -451,8 +452,7 @@ static NSArray<Download *> *s_sortedDownloads;
     
     self.presentation = media.presentation;
     
-    CGFloat imageWidth = SizeForImageScale(ImageScaleMedium, SRGImageTypeDefault).width;
-    self.downloadImageURL = [media imageURLForDimension:SRGImageDimensionWidth withValue:imageWidth type:SRGImageTypeDefault];
+    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
     
     self.uid = media.uid;
     self.URN = media.URN;
@@ -733,9 +733,9 @@ static NSArray<Download *> *s_sortedDownloads;
     return nil;
 }
 
-- (NSURL *)imageURLForDimension:(SRGImageDimension)dimension withValue:(CGFloat)value type:(NSString *)type
+- (SRGImage *)image
 {
-    return self.localImageFileURL;
+    return [[SRGImage alloc] initWithURL:self.localImageFileURL variant:SRGImageVariantDefault];
 }
 
 - (NSURL *)downloadMediaURL
