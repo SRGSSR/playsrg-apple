@@ -72,9 +72,9 @@
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
     UIView *pageView = self.pageViewController.view;
-    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
     
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
         [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
@@ -85,10 +85,10 @@
     [self.pageViewController didMoveToParentViewController:self];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:blurView];
     self.blurView = blurView;
     
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
         [blurView.heightAnchor constraintEqualToConstant:60.f],
@@ -107,8 +107,7 @@
         [tabBarItems addObject:tabBarItem];
     }];
     
-    MDCTabBar *tabBar = [[MDCTabBar alloc] initWithFrame:blurView.bounds];
-    tabBar.translatesAutoresizingMaskIntoConstraints = NO;
+    MDCTabBar *tabBar = [[MDCTabBar alloc] init];
     tabBar.itemAppearance = hasImage ? MDCTabBarItemAppearanceImages : MDCTabBarItemAppearanceTitles;
     tabBar.alignment = MDCTabBarAlignmentCenter;
     tabBar.delegate = self;
@@ -125,6 +124,7 @@
     [blurView.contentView addSubview:tabBar];
     self.tabBar = tabBar;
     
+    tabBar.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [tabBar.topAnchor constraintEqualToAnchor:blurView.contentView.topAnchor],
         [tabBar.bottomAnchor constraintEqualToAnchor:blurView.contentView.bottomAnchor],

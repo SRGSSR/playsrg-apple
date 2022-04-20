@@ -61,6 +61,8 @@ file are licensed as follows:
     specific language governing permissions and limitations
     under the License.
 </string>
+			<key>License</key>
+			<string>unknown</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

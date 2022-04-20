@@ -31,15 +31,21 @@ final class ProgramGuideCalendarViewController: UIViewController {
         
         let blurEffect = UIBlurEffect(style: .systemUltraThinMaterial)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = view.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         view.addSubview(blurEffectView)
+
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            blurEffectView.topAnchor.constraint(equalTo: view.topAnchor),
+            blurEffectView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            blurEffectView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
         
-        let calendarView = HostView<CalendarView>(frame: .zero)
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        let calendarView = HostView<CalendarView>()
         view.addSubview(calendarView)
         self.calendarView = calendarView
         
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             calendarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
