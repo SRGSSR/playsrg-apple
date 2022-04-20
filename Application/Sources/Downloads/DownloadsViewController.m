@@ -63,7 +63,7 @@
     UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
     view.backgroundColor = UIColor.srg_gray16Color;
         
-    TableView *tableView = [[TableView alloc] initWithFrame:view.bounds];
+    TableView *tableView = [[TableView alloc] init];
     tableView.allowsSelectionDuringEditing = YES;
     tableView.allowsMultipleSelectionDuringEditing = YES;
     [view addSubview:tableView];

@@ -107,7 +107,7 @@
         [tabBarItems addObject:tabBarItem];
     }];
     
-    MDCTabBar *tabBar = [[MDCTabBar alloc] initWithFrame:blurView.bounds];
+    MDCTabBar *tabBar = [[MDCTabBar alloc] init];
     tabBar.itemAppearance = hasImage ? MDCTabBarItemAppearanceImages : MDCTabBarItemAppearanceTitles;
     tabBar.alignment = MDCTabBarAlignmentCenter;
     tabBar.delegate = self;

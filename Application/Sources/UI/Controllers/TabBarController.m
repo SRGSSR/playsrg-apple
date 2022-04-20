@@ -142,7 +142,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [super viewDidLoad];
     
     // The mini player is not available for all BUs
-    MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
+    MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] init];
     miniPlayerView.layer.shadowOpacity = 0.9f;
     miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];

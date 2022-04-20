@@ -41,7 +41,7 @@ final class ProgramGuideCalendarViewController: UIViewController {
             blurEffectView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let calendarView = HostView<CalendarView>(frame: .zero)
+        let calendarView = HostView<CalendarView>()
         view.addSubview(calendarView)
         self.calendarView = calendarView
         
