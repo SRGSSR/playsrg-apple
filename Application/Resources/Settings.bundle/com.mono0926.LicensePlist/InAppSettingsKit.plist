@@ -21,6 +21,8 @@ or substantial portions of the Software.
 
 This code is licensed under the BSD license that is available at: &lt;http://www.opensource.org/licenses/bsd-license.php&gt;
 </string>
+			<key>License</key>
+			<string>unknown</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

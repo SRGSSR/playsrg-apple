@@ -229,4 +229,4 @@ name: YYWebImage, nameSpecified: yywebimage, owner: SRGSSR, version: 1.0.5-srg3,
 
 add-version-numbers: true
 
-LicensePlist Version: 3.19.1
+LicensePlist Version: 3.21.1

@@ -218,6 +218,8 @@
     you may redistribute such product without providing attribution as would
     otherwise be required by Sections 4(a), 4(b) and 4(d) of the License.
 </string>
+			<key>License</key>
+			<string>Apache-2.0</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

@@ -8,6 +8,8 @@
 			<key>FooterText</key>
 			<string>Please refer to the license agreement document on the following URL
 https://github.com/comScore/ComScore-iOS-watchOS-tvOS/blob/master/LicenseAgreement.pdf</string>
+			<key>License</key>
+			<string>unknown</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
