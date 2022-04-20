@@ -12,18 +12,15 @@ import SwiftUI
 struct ChannelHeaderView: View {
     let channel: SRGChannel
     
-    private var logoImage: UIImage? {
-        guard let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
-        return TVChannelLargeLogoImage(tvChannel)
+    private var imageUrl: URL? {
+        return channel.imageUrl(for: .small)
     }
     
     var body: some View {
         Group {
-            if let image = logoImage {
-                Image(uiImage: image)
-                    .resizable()
+            if let imageUrl = imageUrl {
+                ImageView(url: imageUrl)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 62)
             }
             else {
                 Text(channel.title)
@@ -31,7 +28,7 @@ struct ChannelHeaderView: View {
                     .lineLimit(1)
             }
         }
-        .padding(.horizontal, 8)
+        .padding(.horizontal, 12)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // See https://stackoverflow.com/a/68765719/760435
         .background(
