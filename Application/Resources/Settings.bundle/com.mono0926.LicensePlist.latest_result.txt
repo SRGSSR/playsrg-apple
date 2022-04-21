@@ -201,13 +201,13 @@ name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR
 
 name: srgdiagnostics-apple, nameSpecified: srgdiagnostics-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
-name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: 3.2.1, source: https://github.com/SRGSSR/srgidentity-apple
+name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgidentity-apple
 
 name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: srglogger-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srglogger-apple
 
-name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: 7.0.0, source: https://github.com/SRGSSR/srgmediaplayer-apple
+name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgmediaplayer-apple
 
 name: srgnetwork-apple, nameSpecified: srgnetwork-apple, owner: SRGSSR, version: 3.0.3, source: https://github.com/SRGSSR/srgnetwork-apple
 

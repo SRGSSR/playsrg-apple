@@ -294,7 +294,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgidentity-apple</string>
 			<key>Title</key>
-			<string>srgidentity-apple (3.2.1)</string>
+			<string>srgidentity-apple</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -318,7 +318,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (7.0.0)</string>
+			<string>srgmediaplayer-apple</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
