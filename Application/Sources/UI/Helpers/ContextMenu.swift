@@ -66,7 +66,7 @@ private extension ContextMenu {
     private static let popoverPresentationDelegate = ActivityPopoverPresentationDelegate()
     
     private static func shareItem(_ sharingItem: SharingItem, in viewController: UIViewController) {
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .peekMenu)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .contextMenu)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
@@ -131,7 +131,7 @@ extension ContextMenu {
                     guard error == nil else { return }
                     
                     let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.peekMenu.rawValue
+                    labels.source = AnalyticsSource.contextMenu.rawValue
                     labels.value = media.urn
                     
                     let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
@@ -157,7 +157,7 @@ extension ContextMenu {
                     guard error == nil else { return }
                     
                     let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.peekMenu.rawValue
+                    labels.source = AnalyticsSource.contextMenu.rawValue
                     labels.value = media.urn
                     
                     SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
@@ -195,7 +195,7 @@ extension ContextMenu {
                 }
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.source = AnalyticsSource.contextMenu.rawValue
                 labels.value = media.urn
                 
                 let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
@@ -273,7 +273,7 @@ extension ContextMenu {
                 FavoritesToggleShow(show)
                 
                 let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.peekMenu.rawValue
+                labels.source = AnalyticsSource.contextMenu.rawValue
                 labels.value = show.urn
                 
                 let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
