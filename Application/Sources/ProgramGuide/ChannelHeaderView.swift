@@ -12,21 +12,25 @@ import SwiftUI
 struct ChannelHeaderView: View {
     let channel: SRGChannel
     
+    @State private var isLoaded = false
+    
     private var imageUrl: URL? {
         return url(for: channel.rawImage, size: .small, scaling: .preserveAspectRatio)
     }
     
     var body: some View {
         Group {
-            if let imageUrl = imageUrl {
-                ImageView(url: imageUrl)
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: constant(iOS: 22, tvOS: 36))
-            }
-            else {
-                Text(channel.title)
-                    .srgFont(.button)
-                    .lineLimit(1)
+            ZStack {
+                if !isLoaded {
+                    Text(channel.title)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
+                if let imageUrl = imageUrl {
+                    ImageView(url: imageUrl, isLoaded: $isLoaded)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(height: constant(iOS: 22, tvOS: 36))
+                }
             }
         }
         .padding(.horizontal, 12)

@@ -14,9 +14,12 @@ struct ImageView: UIViewRepresentable {
     let url: URL?
     let contentMode: ContentMode
     
-    init(url: URL?, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
+    @Binding var isLoaded: Bool
+    
+    init(url: URL?, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill), isLoaded: Binding<Bool> = .constant(false)) {
         self.url = url
         self.contentMode = contentMode
+        _isLoaded = isLoaded
     }
     
     func makeUIView(context: Context) -> UIImageView {
@@ -32,9 +35,22 @@ struct ImageView: UIViewRepresentable {
             let options = ImageLoadingOptions(
                 transition: .fadeIn(duration: 0.5)
             )
-            Nuke.loadImage(with: url, options: options, into: uiView)
+            
+            DispatchQueue.main.async {
+                self.isLoaded = false
+            }
+            Nuke.loadImage(with: url, options: options, into: uiView) { result in
+                if case .success = result {
+                    DispatchQueue.main.async {
+                        self.isLoaded = true
+                    }
+                }
+            }
         }
         else {
+            DispatchQueue.main.async {
+                isLoaded = false
+            }
             Nuke.cancelRequest(for: uiView)
             uiView.image = nil
         }

@@ -14,6 +14,7 @@ struct ChannelButton: View {
     let channel: SRGChannel?
     let action: () -> Void
     
+    @State private var isLoaded = false
     @Environment(\.isSelected) var isSelected
     
     private var imageUrl: URL? {
@@ -22,14 +23,16 @@ struct ChannelButton: View {
     
     var body: some View {
         Button(action: action) {
-            if let imageUrl = imageUrl {
-                ImageView(url: imageUrl)
-                    .aspectRatio(contentMode: .fit)
-            }
-            else if let title = channel?.title {
-                Text(title)
-                    .srgFont(.button)
-                    .lineLimit(1)
+            ZStack {
+                if !isLoaded, let title = channel?.title {
+                    Text(title)
+                        .srgFont(.button)
+                        .lineLimit(1)
+                }
+                if let imageUrl = imageUrl {
+                    ImageView(url: imageUrl, isLoaded: $isLoaded)
+                        .aspectRatio(contentMode: .fit)
+                }
             }
         }
         .frame(minWidth: 40, maxWidth: 120, maxHeight: 22)
