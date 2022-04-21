@@ -16,15 +16,15 @@ struct ChannelButton: View {
     
     @Environment(\.isSelected) var isSelected
     
-    private var logoImage: UIImage? {
-        guard let channel = channel, let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
-        return TVChannelLogoImage(tvChannel)
+    private var imageUrl: URL? {
+        return url(for: channel?.image, size: .small, scaling: .preserveAspectRatio)
     }
     
     var body: some View {
         Button(action: action) {
-            if let image = logoImage {
-                Image(uiImage: image)
+            if let imageUrl = imageUrl {
+                ImageView(url: imageUrl)
+                    .aspectRatio(contentMode: .fit)
             }
             else if let title = channel?.title {
                 Text(title)
