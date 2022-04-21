@@ -32,7 +32,7 @@ struct ChannelButton: View {
                     .lineLimit(1)
             }
         }
-        .frame(minWidth: 40, maxWidth: 120, minHeight: 22)
+        .frame(minWidth: 40, maxWidth: 120, maxHeight: 22)
         .fixedSize(horizontal: true, vertical: false)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)

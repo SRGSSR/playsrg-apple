@@ -21,6 +21,7 @@ struct ChannelHeaderView: View {
             if let imageUrl = imageUrl {
                 ImageView(url: imageUrl)
                     .aspectRatio(contentMode: .fit)
+                    .frame(height: constant(iOS: 22, tvOS: 36))
             }
             else {
                 Text(channel.title)
