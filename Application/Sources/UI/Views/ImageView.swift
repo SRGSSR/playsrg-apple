@@ -11,15 +11,38 @@ import SwiftUI
 
 /// Behavior: h-exp, v-exp (like `Image/resizable()`)
 struct ImageView: UIViewRepresentable {
+    class Coordinator {
+        /// The currently assigned URL. Useful to reset `isLoaded` when a URL change is detected.
+        fileprivate var url: URL?
+        /// Set to `true` when the next body update must be inhibited.
+        fileprivate var skipNextUpdate: Bool = false
+        /// The delayed `isLoaded` value to apply
+        fileprivate var delayedIsLoaded: Bool = false
+    }
+    
     let url: URL?
     let contentMode: ContentMode
+    let isBound: Bool
     
     @Binding var isLoaded: Bool
     
-    init(url: URL?, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill), isLoaded: Binding<Bool> = .constant(false)) {
+    init(url: URL?, contentMode: ContentMode = .fit) {
+        self.init(url: url, contentMode: contentMode, isLoaded: .constant(false), isBound: false)
+    }
+    
+    init(url: URL?, contentMode: ContentMode = .fit, isLoaded: Binding<Bool>) {
+        self.init(url: url, contentMode: contentMode, isLoaded: isLoaded, isBound: true)
+    }
+    
+    private init(url: URL?, contentMode: ContentMode = .fit, isLoaded: Binding<Bool>, isBound: Bool) {
         self.url = url
         self.contentMode = contentMode
         _isLoaded = isLoaded
+        self.isBound = isBound
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        return Coordinator()
     }
     
     func makeUIView(context: Context) -> UIImageView {
@@ -29,30 +52,78 @@ struct ImageView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIImageView, context: Context) {
+        if shouldSkipUpdate(context: context) {
+            return
+        }
+        
         uiView.contentMode = Self.contentMode(contentMode)
+        
+        if context.coordinator.url != url {
+            updateAfterDelay(isLoaded: false, context: context)
+            context.coordinator.url = url
+        }
         
         if let url = url {
             let options = ImageLoadingOptions(
                 transition: .fadeIn(duration: 0.5)
             )
             
-            DispatchQueue.main.async {
-                self.isLoaded = false
-            }
             Nuke.loadImage(with: url, options: options, into: uiView) { result in
-                if case .success = result {
-                    DispatchQueue.main.async {
-                        self.isLoaded = true
-                    }
+                switch result {
+                case .success:
+                    updateAfterDelay(isLoaded: true, context: context)
+                case .failure:
+                    updateAfterDelay(isLoaded: false, context: context)
                 }
             }
         }
         else {
-            DispatchQueue.main.async {
-                isLoaded = false
-            }
             Nuke.cancelRequest(for: uiView)
             uiView.image = nil
+        }
+    }
+    
+    /**
+     *  Update of the bindings must be made on the next run loop to avoid mutating a state while updating the body. To
+     *  avoid this triggering additional body updates afterwards we need to be able to inhibit some updates.
+     */
+    private func updateAfterDelay(isLoaded: Bool, context: Context) {
+        guard isBound else { return }
+        
+        // Store the value to apply on the next run loop
+        context.coordinator.delayedIsLoaded = isLoaded
+        
+        // Schedule at most once update on the next run loop
+        if !context.coordinator.skipNextUpdate {
+            context.coordinator.skipNextUpdate = true
+            
+            DispatchQueue.main.async {
+                // No change made, so no next body update will be triggered by the binding
+                if self.isLoaded == context.coordinator.delayedIsLoaded {
+                    context.coordinator.skipNextUpdate = false
+                }
+                // The change triggers a body update
+                else {
+                    self.isLoaded = context.coordinator.delayedIsLoaded
+                }
+            }
+        }
+    }
+    
+    /**
+     *  The next body update must be skipped when this method returns `true`. This method also takes care of
+     *  properly resetting the associated flag so that further updates can be properly processed.
+     */
+    private func shouldSkipUpdate(context: Context) -> Bool {
+        guard isBound else { return false }
+        
+        let coordinator = context.coordinator
+        if coordinator.skipNextUpdate {
+            coordinator.skipNextUpdate = false
+            return true
+        }
+        else {
+            return false
         }
     }
     
