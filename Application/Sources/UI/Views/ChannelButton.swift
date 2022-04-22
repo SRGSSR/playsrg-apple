@@ -27,7 +27,7 @@ struct ChannelButton: View {
                 LazyImage(source: imageUrl) { state in
                     if let image = state.image {
                         image
-                            .aspectRatio(contentMode: .fit)
+                            .resizingMode(.aspectFit)
                     }
                     else {
                         TitleView(channel: channel)
@@ -81,7 +81,8 @@ struct ChannelButton_Previews: PreviewProvider {
             ChannelButton(channel: nil, action: {})
             ChannelButton(channel: Mock.channel(), action: {})
             ChannelButton(channel: Mock.channel(.unknown), action: {})
-            ChannelButton(channel: Mock.channel(.overflow), action: {})
+            ChannelButton(channel: Mock.channel(.standardWithoutLogo), action: {})
+            ChannelButton(channel: Mock.channel(.overflowWithoutLogo), action: {})
         }
         .padding()
         .previewLayout(.sizeThatFits)

@@ -23,8 +23,8 @@ struct ChannelHeaderView: View {
                 LazyImage(source: imageUrl) { state in
                     if let image = state.image {
                         image
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: constant(iOS: 22, tvOS: 36))
+                            .resizingMode(.aspectFit)
+                            .frame(maxWidth: 50, maxHeight: 50)
                     }
                     else {
                         TitleView(channel: channel)
@@ -35,7 +35,7 @@ struct ChannelHeaderView: View {
                 TitleView(channel: channel)
             }
         }
-        .padding(.horizontal, 12)
+        .padding(.horizontal, 20)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // See https://stackoverflow.com/a/68765719/760435
         .background(
@@ -61,7 +61,12 @@ struct ChannelHeaderView: View {
 
 struct ChannelHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ChannelHeaderView(channel: Mock.channel())
-            .previewLayout(.fixed(width: 100, height: 90))
+        Group {
+            ChannelHeaderView(channel: Mock.channel())
+            ChannelHeaderView(channel: Mock.channel(.unknown))
+            ChannelHeaderView(channel: Mock.channel(.standardWithoutLogo))
+            ChannelHeaderView(channel: Mock.channel(.overflowWithoutLogo))
+        }
+        .previewLayout(.fixed(width: 100, height: 90))
     }
 }
