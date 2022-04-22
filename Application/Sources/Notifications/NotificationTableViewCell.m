@@ -14,6 +14,7 @@
 #import "UILabel+PlaySRG.h"
 
 @import SRGAppearance;
+@import SRGDataProvider;
 
 @interface NotificationTableViewCell ()
 
@@ -97,9 +98,8 @@
         imagePlaceholder = ImagePlaceholderMediaList;
     }
     
-    // FIXME:
-    NSAssert(NO, @"Must be fixed");
-    // [self.thumbnailImageView play_requestImageForObject:notification withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:imagePlaceholder];
+    SRGImage *image = [[SRGImage alloc] initWithURL:notification.imageURL variant:SRGImageVariantDefault];
+    [self.thumbnailImageView play_requestImage:image withSize:SRGImageSizeSmall placeholder:imagePlaceholder];
 }
 
 @end
