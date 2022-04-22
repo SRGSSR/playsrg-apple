@@ -34,27 +34,25 @@ struct MediaVisualView<Content: View>: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                LazyImage(source: model.imageUrl(for: size), resizingMode: resizingMode)
-                content(media)
-                BlockingOverlay(media: media)
-                
-                if let properties = model.availabilityBadgeProperties {
-                    Badge(text: properties.text, color: Color(properties.color))
-                        .padding([.top, .leading], padding)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                }
-                
-                AttributesView(model: model)
-                    .padding([.bottom, .horizontal], padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                
-                ProgressBar(value: model.progress)
-                    .opacity(model.progress != 0 ? 1 : 0)
-                    .frame(height: LayoutProgressBarHeight)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        ZStack {
+            LazyImage(source: model.imageUrl(for: size), resizingMode: resizingMode)
+            content(media)
+            BlockingOverlay(media: media)
+            
+            if let properties = model.availabilityBadgeProperties {
+                Badge(text: properties.text, color: Color(properties.color))
+                    .padding([.top, .leading], padding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
+            
+            AttributesView(model: model)
+                .padding([.bottom, .horizontal], padding)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            
+            ProgressBar(value: model.progress)
+                .opacity(model.progress != 0 ? 1 : 0)
+                .frame(height: LayoutProgressBarHeight)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .onAppear {
             model.media = media
