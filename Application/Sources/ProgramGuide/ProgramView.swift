@@ -85,7 +85,7 @@ struct ProgramView: View {
         
         var body: some View {
             ZStack {
-                LazyImage(source: model.imageUrl)
+                ImageView(source: model.imageUrl)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
                 if let properties = model.availabilityBadgeProperties {

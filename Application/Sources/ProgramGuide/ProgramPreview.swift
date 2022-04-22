@@ -23,7 +23,7 @@ struct ProgramPreview: View {
     
     var body: some View {
         ZStack {
-            LazyImage(source: model.imageUrl)
+            ImageView(source: model.imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .redactable()
                 .layoutPriority(1)

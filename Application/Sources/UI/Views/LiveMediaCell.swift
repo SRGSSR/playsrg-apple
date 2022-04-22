@@ -60,7 +60,7 @@ struct LiveMediaCell: View {
         
         var body: some View {
             ZStack {
-                LazyImage(source: model.imageUrl)
+                ImageView(source: model.imageUrl)
                 Color.srgGray16.opacity(0.7)
                 DescriptionView(model: model)
                 BlockingOverlay(media: model.media)

@@ -20,7 +20,7 @@ struct MediaDetailView: View {
     
     var body: some View {
         ZStack {
-            LazyImage(source: model.imageUrl)
+            ImageView(source: model.imageUrl)
             Color(white: 0, opacity: 0.6)
             VStack {
                 DescriptionView(model: model)

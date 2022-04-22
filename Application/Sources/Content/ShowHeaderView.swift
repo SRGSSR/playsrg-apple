@@ -64,7 +64,7 @@ struct ShowHeaderView: View {
         
         var body: some View {
             Stack(direction: direction, alignment: alignment, spacing: 0) {
-                LazyImage(source: model.imageUrl)
+                ImageView(source: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .adaptiveMainFrame(for: uiHorizontalSizeClass)

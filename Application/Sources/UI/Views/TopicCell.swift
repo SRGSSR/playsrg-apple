@@ -52,7 +52,7 @@ struct TopicCell: View {
         
         var body: some View {
             ZStack {
-                LazyImage(source: imageUrl)
+                ImageView(source: imageUrl)
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
                 Color.srgGray23
                     .opacity(0.3)

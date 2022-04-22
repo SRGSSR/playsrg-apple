@@ -101,7 +101,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return LazyImage(source: url(for: show?.image, size: .large))
+        return ImageView(source: url(for: show?.image, size: .large))
     }
     
 #if os(tvOS)
