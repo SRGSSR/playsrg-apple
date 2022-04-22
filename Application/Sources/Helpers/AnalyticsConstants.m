@@ -86,7 +86,6 @@ AnalyticsSource const AnalyticsSourceClose = @"close";
 AnalyticsSource const AnalyticsSourceContextMenu = @"context_menu";
 AnalyticsSource const AnalyticsSourceCustomURL = @"scheme_url";
 AnalyticsSource const AnalyticsSourceHandoff = @"handoff";
-AnalyticsSource const AnalyticsSourceLongPress = @"long_click";
 AnalyticsSource const AnalyticsSourceNotification = @"notification";
 AnalyticsSource const AnalyticsSourceNotificationPush = @"push_notification";
 AnalyticsSource const AnalyticsSourceSelection = @"selection";

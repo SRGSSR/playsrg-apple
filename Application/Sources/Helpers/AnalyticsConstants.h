@@ -194,7 +194,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceContextMenu;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceLongPress;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
