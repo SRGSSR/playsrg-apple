@@ -34,25 +34,43 @@ struct MediaVisualView<Content: View>: View {
     }
     
     var body: some View {
-        ZStack {
-            LazyImage(source: model.imageUrl(for: size), resizingMode: resizingMode)
-            content(media)
-            BlockingOverlay(media: media)
-            
-            if let properties = model.availabilityBadgeProperties {
-                Badge(text: properties.text, color: Color(properties.color))
-                    .padding([.top, .leading], padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        GeometryReader { geometry in
+            ZStack {
+                LazyImage(source: model.imageUrl(for: size)) { state in
+                    if let image = state.image, let imageContainer = state.imageContainer {
+                        switch resizingMode {
+                        case .aspectFill:
+                            image
+                                .resizingMode(.aspectFill)
+                                .frame(width: geometry.size.width, height: geometry.size.width * imageContainer.image.size.height / imageContainer.image.size.width)
+                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
+                        default:
+                            image
+                                .resizingMode(resizingMode)
+                        }
+                    }
+                    else {
+                        Color.placeholder
+                    }
+                }
+                content(media)
+                BlockingOverlay(media: media)
+                
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                        .padding([.top, .leading], padding)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                }
+                
+                AttributesView(model: model)
+                    .padding([.bottom, .horizontal], padding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                
+                ProgressBar(value: model.progress)
+                    .opacity(model.progress != 0 ? 1 : 0)
+                    .frame(height: LayoutProgressBarHeight)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             }
-            
-            AttributesView(model: model)
-                .padding([.bottom, .horizontal], padding)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            
-            ProgressBar(value: model.progress)
-                .opacity(model.progress != 0 ? 1 : 0)
-                .frame(height: LayoutProgressBarHeight)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .onAppear {
             model.media = media
