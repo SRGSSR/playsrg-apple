@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -69,9 +70,8 @@ struct SectionShowHeaderView: View {
     
     var body: some View {
         Stack(direction: direction, alignment: alignment, spacing: 0) {
-            ImageView(url: imageUrl)
+            LazyImage(source: imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
-                .background(Color.placeholder)
                 .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                 .adaptiveMainFrame(for: uiHorizontalSizeClass)
                 .layoutPriority(1)

@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 // MARK: View
@@ -63,9 +64,8 @@ struct ShowHeaderView: View {
         
         var body: some View {
             Stack(direction: direction, alignment: alignment, spacing: 0) {
-                ImageView(url: model.imageUrl)
+                LazyImage(source: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
-                    .background(Color.placeholder)
                     .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
                     .adaptiveMainFrame(for: uiHorizontalSizeClass)
                     .layoutPriority(1)

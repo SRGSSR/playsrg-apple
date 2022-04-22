@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGDataProviderModel
 import SRGUserData
 import SwiftUI
@@ -16,7 +17,7 @@ struct MediaVisualView<Content: View>: View {
     @StateObject private var model = MediaVisualViewModel()
     
     let size: SRGImageSize
-    let contentMode: ContentMode
+    let resizingMode: ImageResizingMode
     
     @Binding private var content: (SRGMedia?) -> Content
     
@@ -24,22 +25,18 @@ struct MediaVisualView<Content: View>: View {
     
     init(media: SRGMedia?,
          size: SRGImageSize,
-         contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill),
+         resizingMode: ImageResizingMode = constant(iOS: .aspectFit, tvOS: .aspectFill),
          @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
         _media = .constant(media)
         self.size = size
-        self.contentMode = contentMode
+        self.resizingMode = resizingMode
         _content = .constant(content)
     }
     
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                ImageView(url: model.imageUrl(for: size))
-                    .aspectRatio(contentMode: contentMode)
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                    .clipped()
-                
+                LazyImage(source: model.imageUrl(for: size), resizingMode: resizingMode)
                 content(media)
                 BlockingOverlay(media: media)
                 
@@ -115,8 +112,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == SwiftUI.EmptyView {
-    init(media: SRGMedia?, size: SRGImageSize, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
-        self.init(media: media, size: size, contentMode: contentMode) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, resizingMode: ImageResizingMode = constant(iOS: .aspectFit, tvOS: .aspectFill)) {
+        self.init(media: media, size: size, resizingMode: resizingMode) { _ in
             SwiftUI.EmptyView()
         }
     }

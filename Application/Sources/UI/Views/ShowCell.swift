@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -35,7 +36,7 @@ struct ShowCell: View {
         Group {
 #if os(tvOS)
             LabeledCardButton(aspectRatio: ShowCellSize.aspectRatio(for: imageVariant), action: action) {
-                ImageView(url: model.imageUrl(with: imageVariant))
+                LazyImage(source: model.imageUrl(with: imageVariant))
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
             } label: {
@@ -47,9 +48,8 @@ struct ShowCell: View {
             }
 #else
             VStack(spacing: 0) {
-                ImageView(url: model.imageUrl(with: imageVariant))
+                LazyImage(source: model.imageUrl(with: imageVariant))
                     .aspectRatio(ShowCellSize.aspectRatio(for: imageVariant), contentMode: .fit)
-                    .background(Color.placeholder)
                 if imageVariant != .poster {
                     DescriptionView(model: model, style: style)
                         .padding(.horizontal, ShowCellSize.horizontalPadding)

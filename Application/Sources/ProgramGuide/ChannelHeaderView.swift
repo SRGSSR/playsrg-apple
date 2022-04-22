@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 // MARK: View
@@ -12,25 +13,26 @@ import SwiftUI
 struct ChannelHeaderView: View {
     let channel: SRGChannel
     
-    @State private var isLoaded = false
-    
     private var imageUrl: URL? {
         return url(for: channel.rawImage, size: .small, scaling: .preserveAspectRatio)
     }
     
     var body: some View {
         Group {
-            ZStack {
-                if !isLoaded {
-                    Text(channel.title)
-                        .srgFont(.button)
-                        .lineLimit(1)
+            if let imageUrl = imageUrl {
+                LazyImage(source: imageUrl) { state in
+                    if let image = state.image {
+                        image
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: constant(iOS: 22, tvOS: 36))
+                    }
+                    else {
+                        TitleView(channel: channel)
+                    }
                 }
-                if let imageUrl = imageUrl {
-                    ImageView(url: imageUrl, isLoaded: $isLoaded)
-                        .aspectRatio(contentMode: .fit)
-                        .frame(height: constant(iOS: 22, tvOS: 36))
-                }
+            }
+            else {
+                TitleView(channel: channel)
             }
         }
         .padding(.horizontal, 12)
@@ -42,6 +44,16 @@ struct ChannelHeaderView: View {
                 .mask(Rectangle().padding(.trailing, -40))
         )
         .accessibilityHidden(true)
+    }
+    
+    private struct TitleView: View {
+        let channel: SRGChannel
+        
+        var body: some View {
+            Text(channel.title)
+                .srgFont(.button)
+                .lineLimit(1)
+        }
     }
 }
 

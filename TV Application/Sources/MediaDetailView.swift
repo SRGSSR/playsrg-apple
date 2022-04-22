@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAnalyticsSwiftUI
 import SRGAppearanceSwift
 import SRGLetterbox
@@ -19,7 +20,7 @@ struct MediaDetailView: View {
     
     var body: some View {
         ZStack {
-            ImageView(url: model.imageUrl)
+            LazyImage(source: model.imageUrl)
             Color(white: 0, opacity: 0.6)
             VStack {
                 DescriptionView(model: model)

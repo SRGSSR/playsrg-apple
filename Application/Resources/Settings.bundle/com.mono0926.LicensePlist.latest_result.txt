@@ -159,6 +159,8 @@ name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, versio
 
 name: FXReachability, nameSpecified: fxreachability, owner: SRGSSR, version: 1.3.2-srg5, source: https://github.com/SRGSSR/FXReachability
 
+name: Gifu, nameSpecified: gifu, owner: kaishin, version: 3.3.1, source: https://github.com/kaishin/Gifu
+
 name: GoogleAppMeasurement, nameSpecified: googleappmeasurement, owner: google, version: 8.15.0, source: https://github.com/google/GoogleAppMeasurement
 
 name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: googlecastsdk-ios-no-bluetooth, owner: SRGSSR, version: 4.7.0-beta.3, source: https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth
@@ -184,6 +186,8 @@ name: Mantle, nameSpecified: mantle, owner: Mantle, version: 2.2.0, source: http
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30908.0, source: https://github.com/firebase/nanopb
 
 name: Nuke, nameSpecified: nuke, owner: kean, version: 10.7.1, source: https://github.com/kean/Nuke
+
+name: NukeUI, nameSpecified: nukeui, owner: kean, version: 0.8.1, source: https://github.com/kean/NukeUI
 
 name: paper-onboarding, nameSpecified: paper-onboarding, owner: Ramotion, version: 6.1.5, source: https://github.com/Ramotion/paper-onboarding
 

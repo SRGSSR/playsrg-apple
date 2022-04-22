@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -51,9 +52,8 @@ struct TopicCell: View {
         
         var body: some View {
             ZStack {
-                ImageView(url: imageUrl)
+                LazyImage(source: imageUrl)
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
-                    .background(Color.placeholder)
                 Color.srgGray23
                     .opacity(0.3)
                 Text(topic?.title ?? "")

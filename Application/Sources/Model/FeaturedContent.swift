@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 protocol FeaturedContent {
@@ -100,7 +101,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return ImageView(url: url(for: show?.image, size: .large))
+        return LazyImage(source: url(for: show?.image, size: .large))
     }
     
 #if os(tvOS)

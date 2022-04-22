@@ -41,7 +41,6 @@ struct MoreCell: View {
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .aspectRatio(Self.aspectRatio(for: imageVariant), contentMode: .fit)
-            .background(Color.placeholder)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             .frame(maxHeight: .infinity, alignment: .top)

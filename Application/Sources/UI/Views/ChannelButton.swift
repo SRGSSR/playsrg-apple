@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -14,7 +15,6 @@ struct ChannelButton: View {
     let channel: SRGChannel?
     let action: () -> Void
     
-    @State private var isLoaded = false
     @Environment(\.isSelected) var isSelected
     
     private var imageUrl: URL? {
@@ -23,16 +23,19 @@ struct ChannelButton: View {
     
     var body: some View {
         Button(action: action) {
-            ZStack {
-                if !isLoaded, let title = channel?.title {
-                    Text(title)
-                        .srgFont(.button)
-                        .lineLimit(1)
+            if let imageUrl = imageUrl {
+                LazyImage(source: imageUrl) { state in
+                    if let image = state.image {
+                        image
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    else {
+                        TitleView(channel: channel)
+                    }
                 }
-                if let imageUrl = imageUrl {
-                    ImageView(url: imageUrl, isLoaded: $isLoaded)
-                        .aspectRatio(contentMode: .fit)
-                }
+            }
+            else {
+                TitleView(channel: channel)
             }
         }
         .frame(minWidth: 40, maxWidth: 120, maxHeight: 22)
@@ -43,6 +46,18 @@ struct ChannelButton: View {
         .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+    }
+    
+    private struct TitleView: View {
+        let channel: SRGChannel?
+        
+        var body: some View {
+            if let title = channel?.title {
+                Text(title)
+                    .srgFont(.button)
+                    .lineLimit(1)
+            }
+        }
     }
 }
 

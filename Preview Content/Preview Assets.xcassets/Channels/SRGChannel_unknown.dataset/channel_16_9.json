@@ -4,6 +4,7 @@
   "urn": "urn:rts:channel:tv:unknown",
   "title": "Unknown",
   "imageUrl": "https://www.rts.ch/2020/05/18/14/17/11333277.image/16x9",
+  "imageUrlRaw": "https://il.srgssr.ch/image-service/dynamic/7d9eb26.svg",
   "imageTitle": "Unknown channel image",
   "transmission": "TV"
 }
