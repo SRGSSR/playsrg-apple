@@ -255,6 +255,13 @@ extension View {
         )
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
     }
+    
+    /**
+     *  Small helper to build a frame with a size.
+     */
+    func frame(size: CGSize, alignment: Alignment = .center) -> some View {
+        frame(width: size.width, height: size.height, alignment: alignment)
+    }
 }
 
 private struct SizePreferenceKey: PreferenceKey {

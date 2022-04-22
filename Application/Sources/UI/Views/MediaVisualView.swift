@@ -36,23 +36,7 @@ struct MediaVisualView<Content: View>: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                LazyImage(source: model.imageUrl(for: size)) { state in
-                    if let image = state.image, let imageContainer = state.imageContainer {
-                        switch resizingMode {
-                        case .aspectFill:
-                            image
-                                .resizingMode(.aspectFill)
-                                .frame(width: geometry.size.width, height: geometry.size.width * imageContainer.image.size.height / imageContainer.image.size.width)
-                                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                        default:
-                            image
-                                .resizingMode(resizingMode)
-                        }
-                    }
-                    else {
-                        Color.placeholder
-                    }
-                }
+                ImageView(source: model.imageUrl(for: size), contentMode: .aspectFillTop)
                 content(media)
                 BlockingOverlay(media: media)
                 

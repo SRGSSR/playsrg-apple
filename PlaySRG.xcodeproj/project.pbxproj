@@ -1009,6 +1009,16 @@
 		6F49EF9A263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */; };
 		6F49EF9B263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */; };
 		6F49EF9C263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */; };
+		6F4CF736281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF737281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF738281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF739281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73A281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73B281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73C281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73D281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73E281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
+		6F4CF73F281341B7006AFE6D /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F4CF735281341B7006AFE6D /* ImageView.swift */; };
 		6F4EA1341EE034B000BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1321EE034B000BEC4DA /* Accessibility.strings */; };
 		6F4EA1371EE034C500BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1351EE034C500BEC4DA /* Accessibility.strings */; };
 		6F4EA13A1EE034D500BEC4DA /* Accessibility.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F4EA1381EE034D500BEC4DA /* Accessibility.strings */; };
@@ -2936,6 +2946,7 @@
 		6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayAccessibilityFormatter.h; sourceTree = "<group>"; };
 		6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayAccessibilityFormatter.m; sourceTree = "<group>"; };
 		6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveMediaCellViewModel.swift; sourceTree = "<group>"; };
+		6F4CF735281341B7006AFE6D /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6F4EA1331EE034B000BEC4DA /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA1361EE034C500BEC4DA /* rm */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = rm; path = rm.lproj/Accessibility.strings; sourceTree = "<group>"; };
 		6F4EA1391EE034D500BEC4DA /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Accessibility.strings; sourceTree = "<group>"; };
@@ -4554,6 +4565,7 @@
 				6FE14E5F263EA83C004AD913 /* HeaderView.swift */,
 				6FCE753426D3786F00667298 /* HeroMediaCell.swift */,
 				6FCE7ABF260367B90037A861 /* HostViews.swift */,
+				6F4CF735281341B7006AFE6D /* ImageView.swift */,
 				0809812E2622195900AA586B /* LiveMediaCell.swift */,
 				6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */,
 				6FDB2AC424E5923600FF286E /* MediaCell.swift */,
@@ -8482,6 +8494,7 @@
 				0875851323A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0B98502726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC24A7E26395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
+				6F4CF736281341B7006AFE6D /* ImageView.swift in Sources */,
 				08F5DBC1262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FD4C2E1268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
 				6F488ACB22EED363002B1150 /* PlayAccessibilityFormatter.m in Sources */,
@@ -8803,6 +8816,7 @@
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
+				6F4CF737281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8B1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				08B77AF1240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -9036,6 +9050,7 @@
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
+				6F4CF738281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8C1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				08B77AF2240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -9269,6 +9284,7 @@
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
+				6F4CF739281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8D1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				08B77AF3240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
@@ -9499,6 +9515,7 @@
 				6F556B3C1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8E1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				08B77AF4240A86FD00A3BC3B /* AccessibilityIdentifierConstants.m in Sources */,
+				6F4CF73A281341B7006AFE6D /* ImageView.swift in Sources */,
 				0875851723A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EB245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760971EB37DF2003021EA /* UIImageView+PlaySRG.m in Sources */,
@@ -9749,6 +9766,7 @@
 				6FF5D2002747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FF0C84C26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0B984A2726977A005793A2 /* SearchResultsViewController.swift in Sources */,
+				6F4CF73B281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DB26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F0850F926256A7700B4E410 /* Reachability.m in Sources */,
 				0809813F2622195900AA586B /* Badges.swift in Sources */,
@@ -9883,6 +9901,7 @@
 				6FF5D2012747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FF0C84D26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0B984B2726977A005793A2 /* SearchResultsViewController.swift in Sources */,
+				6F4CF73C281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DC26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F0850FA26256A7700B4E410 /* Reachability.m in Sources */,
 				080981402622195900AA586B /* Badges.swift in Sources */,
@@ -10017,6 +10036,7 @@
 				6FF5D2022747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FF0C84E26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0B984C2726977A005793A2 /* SearchResultsViewController.swift in Sources */,
+				6F4CF73D281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DD26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F0850FB26256A7700B4E410 /* Reachability.m in Sources */,
 				080981412622195900AA586B /* Badges.swift in Sources */,
@@ -10151,6 +10171,7 @@
 				6FF5D2032747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FF0C84F26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0B984D2726977A005793A2 /* SearchResultsViewController.swift in Sources */,
+				6F4CF73E281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DE26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F0850FC26256A7700B4E410 /* Reachability.m in Sources */,
 				080981422622195900AA586B /* Badges.swift in Sources */,
@@ -10285,6 +10306,7 @@
 				6FF5D2042747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6FF0C85026B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0B984E2726977A005793A2 /* SearchResultsViewController.swift in Sources */,
+				6F4CF73F281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DF26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F0850FD26256A7700B4E410 /* Reachability.m in Sources */,
 				080981432622195900AA586B /* Badges.swift in Sources */,
