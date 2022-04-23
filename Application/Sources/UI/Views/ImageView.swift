@@ -87,7 +87,7 @@ struct ImageView: View {
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height
         
-        if (targetAspectRatio > imageAspectRatio) {
+        if targetAspectRatio > imageAspectRatio {
             return CGSize(width: targetSize.height * imageAspectRatio, height: targetSize.height)
         }
         else {
@@ -105,7 +105,7 @@ struct ImageView: View {
         let imageAspectRatio = imageSize.width / imageSize.height
         let targetAspectRatio = targetSize.width / targetSize.height
         
-        if (targetAspectRatio > imageAspectRatio) {
+        if targetAspectRatio > imageAspectRatio {
             return CGSize(width: targetSize.width, height: targetSize.width / imageAspectRatio)
         }
         else {
