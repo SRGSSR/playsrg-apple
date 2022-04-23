@@ -164,8 +164,6 @@ struct ImageView: View {
 
 // MARK: Preview
 
-// TODO: More previews with portrait / landscape images
-
 struct ImageView_Previews: PreviewProvider {
     static var previews: some View {
         ImageView(source: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400")
