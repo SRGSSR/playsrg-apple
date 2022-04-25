@@ -123,8 +123,10 @@ static NSArray<Download *> *s_sortedDownloads;
 + (NSDictionary<NSString *, Download *> *)loadDownloadsDictionary
 {
     NSData *data = [NSData dataWithContentsOfFile:[self downloadsFilePath]];
-    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:NULL];
+    NSError *error = nil;
+    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:&error];
     if (! downloadsDictionary) {
+        PlayLogError(@"download", @"Could not load download dictionary. Reason: %@", error);
         return nil;
     }
     
@@ -172,7 +174,7 @@ static NSArray<Download *> *s_sortedDownloads;
                 downloadsBackupDictionary[download.URN] = download;
             }
             else {
-                PlayLogError(@"download", @"Could not open downliad for key %@. Skipped", key);
+                PlayLogError(@"download", @"Could not open download for key %@. Skipped", key);
             }
         }
     }];
