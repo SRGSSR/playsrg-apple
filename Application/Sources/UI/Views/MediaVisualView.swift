@@ -17,7 +17,7 @@ struct MediaVisualView<Content: View>: View {
     @StateObject private var model = MediaVisualViewModel()
     
     let size: SRGImageSize
-    let resizingMode: ImageResizingMode
+    let contentMode: ImageView.ContentMode
     
     @Binding private var content: (SRGMedia?) -> Content
     
@@ -25,17 +25,17 @@ struct MediaVisualView<Content: View>: View {
     
     init(media: SRGMedia?,
          size: SRGImageSize,
-         resizingMode: ImageResizingMode = constant(iOS: .aspectFit, tvOS: .aspectFill),
+         contentMode: ImageView.ContentMode = .aspectFit,
          @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
         _media = .constant(media)
         self.size = size
-        self.resizingMode = resizingMode
+        self.contentMode = contentMode
         _content = .constant(content)
     }
     
     var body: some View {
         ZStack {
-            ImageView(source: model.imageUrl(for: size), contentMode: .aspectFillTop)
+            ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
             content(media)
             BlockingOverlay(media: media)
             
@@ -110,8 +110,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == SwiftUI.EmptyView {
-    init(media: SRGMedia?, size: SRGImageSize, resizingMode: ImageResizingMode = constant(iOS: .aspectFit, tvOS: .aspectFill)) {
-        self.init(media: media, size: size, resizingMode: resizingMode) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit) {
+        self.init(media: media, size: size, contentMode: contentMode) { _ in
             SwiftUI.EmptyView()
         }
     }

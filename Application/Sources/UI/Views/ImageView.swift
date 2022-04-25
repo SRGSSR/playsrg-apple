@@ -113,7 +113,7 @@ struct ImageView: View {
         }
     }
     
-    init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFill) {
+    init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFit) {
         self.source = source
         self.contentMode = contentMode
     }
