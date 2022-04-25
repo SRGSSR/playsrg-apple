@@ -98,7 +98,7 @@
         imagePlaceholder = ImagePlaceholderMediaList;
     }
     
-    SRGImage *image = [[SRGImage alloc] initWithURL:notification.imageURL variant:SRGImageVariantDefault];
+    SRGImage *image = [SRGImage imageWithURL:notification.imageURL variant:SRGImageVariantDefault];
     [self.thumbnailImageView play_requestImage:image withSize:SRGImageSizeSmall placeholder:imagePlaceholder];
 }
 

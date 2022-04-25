@@ -735,7 +735,7 @@ static NSArray<Download *> *s_sortedDownloads;
 
 - (SRGImage *)image
 {
-    return [[SRGImage alloc] initWithURL:self.localImageFileURL variant:SRGImageVariantDefault];
+    return [SRGImage imageWithURL:self.localImageFileURL variant:SRGImageVariantDefault];
 }
 
 - (NSURL *)downloadMediaURL

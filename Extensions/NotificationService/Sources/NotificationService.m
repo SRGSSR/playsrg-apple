@@ -76,7 +76,7 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
         s_dataProvider = [[SRGDataProvider alloc] initWithServiceURL:SRGIntegrationLayerProductionServiceURL()];
     });
     
-    SRGImage *image = [[SRGImage alloc] initWithURL:notification.imageURL variant:SRGImageVariantDefault];
+    SRGImage *image = [SRGImage imageWithURL:notification.imageURL variant:SRGImageVariantDefault];
     NSURL *scaledImageURL = [s_dataProvider URLForImage:image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileURL, NSURLResponse *response, NSError *error) {
         if (error) {
