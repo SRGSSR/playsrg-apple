@@ -86,7 +86,7 @@ static NSArray<Download *> *s_sortedDownloads;
     }
     
     @try {
-        s_downloadsDictionary = [self loadDownloadsDictionary].mutableCopy;
+        s_downloadsDictionary = [self loadDownloadsDictionary];
     }
     @catch (NSException *exception) {
         PlayLogWarning(@"download", @"Download migration failed. Use backup dictionary instead");
@@ -120,11 +120,19 @@ static NSArray<Download *> *s_sortedDownloads;
     return [libraryDirectoryPath stringByAppendingPathComponent:@"downloads.plist"];
 }
 
-+ (NSDictionary<NSString *, Download *> *)loadDownloadsDictionary
++ (NSMutableDictionary<NSString *, Download *> *)loadDownloadsDictionary
 {
-    NSData *data = [NSData dataWithContentsOfFile:[self downloadsFilePath]];
+    NSString *downloadsFilePath = [self downloadsFilePath];
+    if (! [NSFileManager.defaultManager fileExistsAtPath:downloadsFilePath]) {
+        return nil;
+    }
+    
+    NSData *data = [NSData dataWithContentsOfFile:downloadsFilePath];
     NSError *error = nil;
-    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:&error];
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    
+    NSMutableDictionary<NSString *, Download *> *downloadsDictionary = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
     if (! downloadsDictionary) {
         PlayLogError(@"download", @"Could not load download dictionary. Reason: %@", error);
         return nil;
