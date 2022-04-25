@@ -6,8 +6,8 @@
 
 import SwiftUI
 
-struct ImageView_Previews_16_9_Common: PreviewProvider {
-    private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
+struct ImageViewPortraitCommonPreviews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
         Group {
@@ -24,8 +24,8 @@ struct ImageView_Previews_16_9_Common: PreviewProvider {
     }
 }
 
-struct ImageView_Previews_16_9_Alignment: PreviewProvider {
-    private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
+struct ImageViewPortraitAlignmentPreviews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
         Group {
@@ -50,8 +50,8 @@ struct ImageView_Previews_16_9_Alignment: PreviewProvider {
     }
 }
 
-struct ImageView_Previews_16_9_AspectFit: PreviewProvider {
-    private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
+struct ImageViewPortraitAspectFitPreviews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
         Group {
@@ -76,8 +76,8 @@ struct ImageView_Previews_16_9_AspectFit: PreviewProvider {
     }
 }
 
-struct ImageView_Previews_16_9_AspectFill: PreviewProvider {
-    private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
+struct ImageViewPortraitAspectFillPreviews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
         Group {
