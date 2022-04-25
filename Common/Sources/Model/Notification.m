@@ -160,7 +160,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         
         NSDictionary *userInfo = notificationRequest.content.userInfo;
         self.type = NotificationTypeFromString(userInfo[@"type"]);
-        self.imageURL = (userInfo[@"imageUrl"]) ? [NSURL URLWithString:userInfo[@"imageUrl"]] : nil;
+        self.imageURL = userInfo[@"imageUrl"] ? [NSURL URLWithString:userInfo[@"imageUrl"]] : nil;
         self.mediaURN = userInfo[@"media"];
         self.showURN = userInfo[@"show"];
         self.channelUid = userInfo[@"channelId"];
@@ -179,7 +179,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         self.body = dictionary[@"body"];
         
         self.type = NotificationTypeFromString(dictionary[@"type"]);
-        self.imageURL = (dictionary[@"imageUrl"]) ? [NSURL URLWithString:dictionary[@"imageUrl"]] : nil;
+        self.imageURL = dictionary[@"imageUrl"] ? [NSURL URLWithString:dictionary[@"imageUrl"]] : nil;
         self.mediaURN = dictionary[@"media"];
         self.showURN = dictionary[@"show"];
         self.channelUid = dictionary[@"channelId"];
