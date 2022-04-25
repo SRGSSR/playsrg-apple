@@ -267,7 +267,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/image-sizes",
-        "revision" : "202229ea50ab007e59413673137122312c3867f4"
+        "revision" : "3ae18bd0318cc9778d80af00eb945d0f3a4a8f80"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/image-sizes",
-        "revision" : "ba08bd7e2b4b3d137931f8e1eefbbd40f328210e"
+        "revision" : "19c151c37cbd015687c1560840446d710e0982fc"
       }
     },
     {
