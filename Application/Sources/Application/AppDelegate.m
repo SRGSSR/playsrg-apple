@@ -105,6 +105,14 @@ static void *s_kvoContext = &s_kvoContext;
                                              object:nil];
     
     [self setupAnalytics];
+    
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
+        [userDefaults synchronize];
+        completionHandler(YES);
+    }, @"DataProviderServiceURLChange");
+    
     [self setupDataProvider];
     
     [SearchBar setup];
@@ -151,13 +159,6 @@ static void *s_kvoContext = &s_kvoContext;
         [userDefaults synchronize];
         completionHandler(YES);
     }, @"MigrateSelectedLiveStreamURNForChannels");
-    
-    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
-        [userDefaults synchronize];
-        completionHandler(YES);
-    }, @"DataProviderServiceURLChange");
     
     FavoritesUpdatePushService();
     
