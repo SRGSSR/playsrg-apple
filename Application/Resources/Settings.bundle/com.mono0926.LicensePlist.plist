@@ -92,6 +92,14 @@
 		</dict>
 		<dict>
 			<key>File</key>
+			<string>com.mono0926.LicensePlist/Gifu</string>
+			<key>Title</key>
+			<string>gifu (3.3.1)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
 			<string>googleappmeasurement (8.15.0)</string>
@@ -222,7 +230,15 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Nuke</string>
 			<key>Title</key>
-			<string>nuke (10.7.1)</string>
+			<string>nuke (10.8.0)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/NukeUI</string>
+			<key>Title</key>
+			<string>nukeui (0.8.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -278,7 +294,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>srgdataprovider-apple (13.1.0)</string>
+			<string>srgdataprovider-apple</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

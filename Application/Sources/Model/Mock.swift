@@ -8,9 +8,11 @@ import SwiftUI
 
 struct Mock {
     enum Channel: String {
-        case standard
         case unknown
+        case standard
         case overflow
+        case standardWithoutLogo
+        case overflowWithoutLogo
     }
     
     static func channel(_ kind: Channel = .standard) -> SRGChannel {

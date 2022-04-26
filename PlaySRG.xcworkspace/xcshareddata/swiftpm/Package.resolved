@@ -73,6 +73,15 @@
       }
     },
     {
+      "identity" : "gifu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kaishin/Gifu",
+      "state" : {
+        "revision" : "51f2eab32903e336f590c013267cfa4d7f8b06c4",
+        "version" : "3.3.1"
+      }
+    },
+    {
       "identity" : "googleappmeasurement",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
@@ -185,8 +194,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke.git",
       "state" : {
-        "revision" : "78fa963b8491fc520791d8c2a509f1b8593d8aae",
-        "version" : "10.7.1"
+        "revision" : "0ea7545b5c918285aacc044dc75048625c8257cc",
+        "version" : "10.8.0"
+      }
+    },
+    {
+      "identity" : "nukeui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/NukeUI.git",
+      "state" : {
+        "revision" : "17f26c07e6b1d3b9258287f99f528111fcd7b7ad",
+        "version" : "0.8.1"
       }
     },
     {
@@ -222,7 +240,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "9c2b353a7e952b8f9dc3d6c769a4b2b1c28ec6ab"
+        "revision" : "9b19442fb4a9b10ac975ef5909c9f9742d894b8c"
       }
     },
     {
@@ -248,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "9cf7768024d11194c42734b22460ab5f7272f7d1",
-        "version" : "13.1.0"
+        "branch" : "develop",
+        "revision" : "04c2a886f69b800be4eb44dcc0f427b820a8bb47"
       }
     },
     {
@@ -276,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "ca627d328e99cee144726d5435e6f9cd3a156dbf"
+        "revision" : "7f4794bcdf6080ff12d4775d4aadddbd045bf16a"
       }
     },
     {

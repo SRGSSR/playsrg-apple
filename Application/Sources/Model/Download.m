@@ -14,6 +14,7 @@
 
 @import FXReachability;
 @import libextobjc;
+@import SRGDataProviderNetwork;
 
 NSString * const DownloadStateDidChangeNotification = @"DownloadStateDidChangeNotification";
 NSString * const DownloadStateKey = @"DownloadState";
@@ -85,7 +86,7 @@ static NSArray<Download *> *s_sortedDownloads;
     }
     
     @try {
-        s_downloadsDictionary = [self loadDownloadsDictionary].mutableCopy;
+        s_downloadsDictionary = [self loadDownloadsDictionary];
     }
     @catch (NSException *exception) {
         PlayLogWarning(@"download", @"Download migration failed. Use backup dictionary instead");
@@ -119,11 +120,21 @@ static NSArray<Download *> *s_sortedDownloads;
     return [libraryDirectoryPath stringByAppendingPathComponent:@"downloads.plist"];
 }
 
-+ (NSDictionary<NSString *, Download *> *)loadDownloadsDictionary
++ (NSMutableDictionary<NSString *, Download *> *)loadDownloadsDictionary
 {
-    NSData *data = [NSData dataWithContentsOfFile:[self downloadsFilePath]];
-    NSDictionary<NSString *, Download *> *downloadsDictionary = [NSKeyedUnarchiver unarchivedObjectOfClass:NSDictionary.class fromData:data error:NULL];
+    NSString *downloadsFilePath = [self downloadsFilePath];
+    if (! [NSFileManager.defaultManager fileExistsAtPath:downloadsFilePath]) {
+        return nil;
+    }
+    
+    NSData *data = [NSData dataWithContentsOfFile:downloadsFilePath];
+    NSError *error = nil;
+    NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingFromData:data error:&error];
+    unarchiver.requiresSecureCoding = NO;
+    
+    NSMutableDictionary<NSString *, Download *> *downloadsDictionary = [unarchiver decodeObjectForKey:NSKeyedArchiveRootObjectKey];
     if (! downloadsDictionary) {
+        PlayLogError(@"download", @"Could not load download dictionary. Reason: %@", error);
         return nil;
     }
     
@@ -171,7 +182,7 @@ static NSArray<Download *> *s_sortedDownloads;
                 downloadsBackupDictionary[download.URN] = download;
             }
             else {
-                PlayLogError(@"download", @"Could not open downliad for key %@. Skipped", key);
+                PlayLogError(@"download", @"Could not open download for key %@. Skipped", key);
             }
         }
     }];
@@ -451,8 +462,7 @@ static NSArray<Download *> *s_sortedDownloads;
     
     self.presentation = media.presentation;
     
-    CGFloat imageWidth = SizeForImageScale(ImageScaleMedium, SRGImageTypeDefault).width;
-    self.downloadImageURL = [media imageURLForDimension:SRGImageDimensionWidth withValue:imageWidth type:SRGImageTypeDefault];
+    self.downloadImageURL = [SRGDataProvider.currentDataProvider URLForImage:media.image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
     
     self.uid = media.uid;
     self.URN = media.URN;
@@ -733,9 +743,9 @@ static NSArray<Download *> *s_sortedDownloads;
     return nil;
 }
 
-- (NSURL *)imageURLForDimension:(SRGImageDimension)dimension withValue:(CGFloat)value type:(NSString *)type
+- (SRGImage *)image
 {
-    return self.localImageFileURL;
+    return [SRGImage imageWithURL:self.localImageFileURL variant:SRGImageVariantDefault];
 }
 
 - (NSURL *)downloadMediaURL

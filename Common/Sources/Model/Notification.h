@@ -5,7 +5,6 @@
 //
 
 @import Foundation;
-@import SRGDataProviderModel;
 @import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -33,7 +32,7 @@ OBJC_EXPORT NSString * NotificationTypeString(NotificationType notificationType)
 /**
  *  Push notification information.
  */
-@interface Notification : NSObject <SRGImageMetadata>
+@interface Notification : NSObject
 
 /**
  *  List of currently available notifications.

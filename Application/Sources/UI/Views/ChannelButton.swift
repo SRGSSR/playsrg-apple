@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -16,23 +17,28 @@ struct ChannelButton: View {
     
     @Environment(\.isSelected) var isSelected
     
-    private var logoImage: UIImage? {
-        guard let channel = channel, let tvChannel = ApplicationConfiguration.shared.tvChannel(forUid: channel.uid) else { return nil }
-        return TVChannelLogoImage(tvChannel)
+    private var imageUrl: URL? {
+        return url(for: channel?.rawImage, size: .small, scaling: .preserveAspectRatio)
     }
     
     var body: some View {
         Button(action: action) {
-            if let image = logoImage {
-                Image(uiImage: image)
+            if let imageUrl = imageUrl {
+                LazyImage(source: imageUrl) { state in
+                    if let image = state.image {
+                        image
+                            .resizingMode(.aspectFit)
+                    }
+                    else {
+                        TitleView(channel: channel)
+                    }
+                }
             }
-            else if let title = channel?.title {
-                Text(title)
-                    .srgFont(.button)
-                    .lineLimit(1)
+            else {
+                TitleView(channel: channel)
             }
         }
-        .frame(minWidth: 40, maxWidth: 120, minHeight: 22)
+        .frame(minWidth: 40, maxWidth: 120, maxHeight: 22)
         .fixedSize(horizontal: true, vertical: false)
         .padding(.horizontal, 18)
         .padding(.vertical, 12)
@@ -40,6 +46,18 @@ struct ChannelButton: View {
         .background(isSelected ? Color.srgGray4A : Color.srgGray23)
         .cornerRadius(100)
         .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+    }
+    
+    private struct TitleView: View {
+        let channel: SRGChannel?
+        
+        var body: some View {
+            if let title = channel?.title {
+                Text(title)
+                    .srgFont(.button)
+                    .lineLimit(1)
+            }
+        }
     }
 }
 
@@ -63,7 +81,8 @@ struct ChannelButton_Previews: PreviewProvider {
             ChannelButton(channel: nil, action: {})
             ChannelButton(channel: Mock.channel(), action: {})
             ChannelButton(channel: Mock.channel(.unknown), action: {})
-            ChannelButton(channel: Mock.channel(.overflow), action: {})
+            ChannelButton(channel: Mock.channel(.standardWithoutLogo), action: {})
+            ChannelButton(channel: Mock.channel(.overflowWithoutLogo), action: {})
         }
         .padding()
         .previewLayout(.sizeThatFits)

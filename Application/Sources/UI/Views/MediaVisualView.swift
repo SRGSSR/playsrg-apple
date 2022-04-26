@@ -4,6 +4,8 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
+import SRGDataProviderModel
 import SRGUserData
 import SwiftUI
 
@@ -14,49 +16,43 @@ struct MediaVisualView<Content: View>: View {
     @Binding private(set) var media: SRGMedia?
     @StateObject private var model = MediaVisualViewModel()
     
-    let scale: ImageScale
-    let contentMode: ContentMode
+    let size: SRGImageSize
+    let contentMode: ImageView.ContentMode
     
     @Binding private var content: (SRGMedia?) -> Content
     
     let padding: CGFloat = constant(iOS: 6, tvOS: 16)
     
     init(media: SRGMedia?,
-         scale: ImageScale,
-         contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill),
+         size: SRGImageSize,
+         contentMode: ImageView.ContentMode = .aspectFit,
          @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
         _media = .constant(media)
-        self.scale = scale
+        self.size = size
         self.contentMode = contentMode
         _content = .constant(content)
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            ZStack {
-                ImageView(url: model.imageUrl(for: scale))
-                    .aspectRatio(contentMode: contentMode)
-                    .frame(width: geometry.size.width, height: geometry.size.height, alignment: .top)
-                    .clipped()
-                
-                content(media)
-                BlockingOverlay(media: media)
-                
-                if let properties = model.availabilityBadgeProperties {
-                    Badge(text: properties.text, color: Color(properties.color))
-                        .padding([.top, .leading], padding)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                }
-                
-                AttributesView(model: model)
-                    .padding([.bottom, .horizontal], padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                
-                ProgressBar(value: model.progress)
-                    .opacity(model.progress != 0 ? 1 : 0)
-                    .frame(height: LayoutProgressBarHeight)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        ZStack {
+            ImageView(source: model.imageUrl(for: size), contentMode: contentMode)
+            content(media)
+            BlockingOverlay(media: media)
+            
+            if let properties = model.availabilityBadgeProperties {
+                Badge(text: properties.text, color: Color(properties.color))
+                    .padding([.top, .leading], padding)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             }
+            
+            AttributesView(model: model)
+                .padding([.bottom, .horizontal], padding)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            
+            ProgressBar(value: model.progress)
+                .opacity(model.progress != 0 ? 1 : 0)
+                .frame(height: LayoutProgressBarHeight)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         }
         .onAppear {
             model.media = media
@@ -114,8 +110,8 @@ struct MediaVisualView<Content: View>: View {
 // MARK: Extensions
 
 extension MediaVisualView where Content == SwiftUI.EmptyView {
-    init(media: SRGMedia?, scale: ImageScale, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
-        self.init(media: media, scale: scale, contentMode: contentMode) { _ in
+    init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit) {
+        self.init(media: media, size: size, contentMode: contentMode) { _ in
             SwiftUI.EmptyView()
         }
     }
@@ -133,10 +129,10 @@ struct MediaVisualView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            MediaVisualView(media: Mock.media(.standard), scale: .small)
-            MediaVisualView(media: Mock.media(.rich), scale: .small)
-            MediaVisualView(media: Mock.media(.nineSixteen), scale: .small)
-            MediaVisualView(media: Mock.media(.blocked), scale: .small)
+            MediaVisualView(media: Mock.media(.standard), size: .small)
+            MediaVisualView(media: Mock.media(.rich), size: .small)
+            MediaVisualView(media: Mock.media(.nineSixteen), size: .small)
+            MediaVisualView(media: Mock.media(.blocked), size: .small)
         }
         .frame(width: 600, height: 500)
         .previewLayout(.sizeThatFits)

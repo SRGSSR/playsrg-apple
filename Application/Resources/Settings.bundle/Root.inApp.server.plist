@@ -12,13 +12,13 @@
 			<key>Key</key>
 			<string>PlaySRGSettingServiceURL</string>
 			<key>DefaultValue</key>
-			<string>https://il.srgssr.ch/integrationlayer</string>
+			<string>https://il.srgssr.ch</string>
 			<key>Values</key>
 			<array>
-				<string>https://il.srgssr.ch/integrationlayer</string>
-				<string>https://il-stage.srgssr.ch/integrationlayer</string>
-				<string>https://il-test.srgssr.ch/integrationlayer</string>
-				<string>https://play-mmf.herokuapp.com/integrationlayer</string>
+				<string>https://il.srgssr.ch</string>
+				<string>https://il-stage.srgssr.ch</string>
+				<string>https://il-test.srgssr.ch</string>
+				<string>https://play-mmf.herokuapp.com</string>
 			</array>
 			<key>Titles</key>
 			<array>

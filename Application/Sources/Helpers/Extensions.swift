@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGDataProviderCombine
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
@@ -31,6 +32,10 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
         }
         return isNew
     }
+}
+
+func url(for image: SRGImage?, size: SRGImageSize, scaling: SRGImageScaling = .default) -> URL? {
+    return SRGDataProvider.current!.url(for: image, size: size, scaling: scaling)
 }
 
 extension Comparable {
@@ -181,12 +186,6 @@ extension Sequence {
     }
 }
 
-extension SRGImageMetadata {
-    func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
-    }
-}
-
 // Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
 // TODO: Remove after tvOS media detail view refactoring
 extension Publisher where Failure == Never {
@@ -255,6 +254,13 @@ extension View {
             }
         )
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    }
+    
+    /**
+     *  Small helper to build a frame with a size.
+     */
+    func frame(size: CGSize, alignment: Alignment = .center) -> some View {
+        frame(width: size.width, height: size.height, alignment: alignment)
     }
 }
 

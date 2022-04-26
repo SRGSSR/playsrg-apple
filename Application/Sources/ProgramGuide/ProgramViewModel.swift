@@ -92,7 +92,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return program?.imageUrl(for: .medium)
+        return url(for: program?.image, size: .medium)
     }
     
     var duration: Double? {

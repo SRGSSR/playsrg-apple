@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 protocol FeaturedContent {
@@ -59,7 +60,7 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return MediaVisualView(media: media, scale: .large)
+        return MediaVisualView(media: media, size: .large)
     }
     
 #if os(tvOS)
@@ -100,7 +101,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return ImageView(url: show?.imageUrl(for: .large))
+        return ImageView(source: url(for: show?.image, size: .large))
     }
     
 #if os(tvOS)

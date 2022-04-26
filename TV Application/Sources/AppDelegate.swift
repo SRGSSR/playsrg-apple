@@ -31,10 +31,17 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         assert(NSClassFromString("ASIdentifierManager") == nil, "No implicit AdSupport.framework dependency must be found")
         
-        PlayApplicationRunOnce({ completionHandler -> Void in
+        PlayApplicationRunOnce({ completionHandler in
             PlayFirebaseConfiguration.clearCache()
             completionHandler(true)
         }, "FirebaseConfigurationReset")
+        
+        PlayApplicationRunOnce({ completionHandler in
+            let userDefaults = UserDefaults.standard
+            userDefaults.removeObject(forKey: PlaySRGSettingServiceURL)
+            userDefaults.synchronize()
+            completionHandler(true)
+        }, "DataProviderServiceURLChange")
         
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             FirebaseApp.configure()

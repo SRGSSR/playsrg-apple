@@ -61,7 +61,7 @@ final class MediaDetailViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return media?.imageURL(for: .width, withValue: SizeForImageScale(.large, .default).width, type: .default)
+        return url(for: media?.image, size: .large)
     }
     
     private func refresh() {

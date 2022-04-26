@@ -9,9 +9,10 @@ import TVServices
 
 final class ContentProvider: TVTopShelfContentProvider {
     private struct ImageLayout {
-        let type: SRGImageType
+        let image: SRGImage
         let shape: TVTopShelfSectionedItem.ImageShape
-        let width: CGFloat
+        let width1x: SRGImageWidth
+        let width2x: SRGImageWidth
     }
     
     static let dataProvider: SRGDataProvider = {
@@ -39,19 +40,28 @@ final class ContentProvider: TVTopShelfContentProvider {
         }
     }()
     
-    private static let imageLayout: ImageLayout = {
-        let imageLayout = Bundle.main.infoDictionary?["PlaySRGImageLayout"] as! String
-        switch imageLayout {
-        case "poster":
-            return ImageLayout(type: .showPoster, shape: .poster, width: 300)
-        default:
-            return ImageLayout(type: .default, shape: .hdtv, width: 840)
-        }
-    }()
-    
     private static let urlScheme: String = {
         return Bundle.main.infoDictionary?["PlaySRGURLScheme"] as! String
     }()
+    
+    private static func imageLayout(for show: SRGShow) -> ImageLayout {
+        let imageLayout = Bundle.main.infoDictionary?["PlaySRGImageLayout"] as! String
+        switch imageLayout {
+        case "poster":
+            if let posterImage = show.posterImage {
+                return ImageLayout(image: posterImage, shape: .poster, width1x: .width320, width2x: .width640)
+            }
+            else {
+                return ImageLayout(image: show.image, shape: .hdtv, width1x: .width960, width2x: .width1920)
+            }
+        default:
+            return ImageLayout(image: show.image, shape: .hdtv, width1x: .width960, width2x: .width1920)
+        }
+    }
+    
+    private static func url(for image: SRGImage?, width: SRGImageWidth) -> URL? {
+        return dataProvider.url(for: image, width: width)
+    }
     
     private static func contentPublisher() -> AnyPublisher<[SRGShow], Error> {
         let contentRequest = Bundle.main.infoDictionary?["PlaySRGContentRequest"] as! String
@@ -71,9 +81,11 @@ final class ContentProvider: TVTopShelfContentProvider {
     private static func item(from show: SRGShow) -> TVTopShelfSectionedItem {
         let item = TVTopShelfSectionedItem(identifier: show.urn)
         item.title = show.title
-        item.imageShape = Self.imageLayout.shape
-        item.setImageURL(show.imageURL(for: .width, withValue: Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale1x)
-        item.setImageURL(show.imageURL(for: .width, withValue: 2 * Self.imageLayout.width, type: Self.imageLayout.type), for: .screenScale2x)
+        
+        let imageLayout = Self.imageLayout(for: show)
+        item.imageShape = imageLayout.shape
+        item.setImageURL(url(for: imageLayout.image, width: imageLayout.width1x), for: .screenScale1x)
+        item.setImageURL(url(for: imageLayout.image, width: imageLayout.width2x), for: .screenScale2x)
         item.displayAction = TVTopShelfAction(url: URL(string: "\(urlScheme)://show/\(show.urn)")!)
         return item
     }

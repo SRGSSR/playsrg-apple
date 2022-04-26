@@ -24,8 +24,8 @@ final class MediaVisualViewModel: ObservableObject {
         HistoryAsyncCancel(taskHandle)
     }
     
-    func imageUrl(for scale: ImageScale) -> URL? {
-        return media?.imageUrl(for: scale)
+    func imageUrl(for size: SRGImageSize) -> URL? {
+        return url(for: media?.image, size: size)
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {

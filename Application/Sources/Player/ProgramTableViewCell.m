@@ -89,7 +89,7 @@
     
     self.subtitleLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
     
-    [self.thumbnailImageView play_requestImageForObject:program withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMedia];
+    [self.thumbnailImageView play_requestImage:program.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMedia];
     
     if (mediaType == SRGMediaTypeVideo) {
         [self.waveformImageView play_setPlayAnimationWithTintColor:UIColor.whiteColor];

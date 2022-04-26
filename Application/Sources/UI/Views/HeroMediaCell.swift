@@ -22,7 +22,6 @@ struct HeroMediaCell: View {
         }
 #else
         MainView(media: media, label: label)
-            .background(Color.placeholder)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .selectionAppearance(when: isSelected)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
@@ -43,7 +42,7 @@ struct HeroMediaCell: View {
         
         var body: some View {
             ZStack {
-                MediaVisualView(media: media, scale: .large, contentMode: .fill) { media in
+                MediaVisualView(media: media, size: .large, contentMode: .aspectFillTop) { media in
                     if media != nil {
                         LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.7)]), startPoint: .center, endPoint: .bottom)
                     }

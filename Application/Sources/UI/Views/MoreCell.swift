@@ -10,18 +10,18 @@ import SwiftUI
 
 struct MoreCell: View {
     let section: Content.Section
-    let imageType: SRGImageType
+    let imageVariant: SRGImageVariant
     let filter: SectionFiltering?
     
     static let iconHeight: CGFloat = constant(iOS: 60, tvOS: 100)
     
-    fileprivate static func aspectRatio(for imageType: SRGImageType) -> CGFloat {
-        return imageType == .showPoster ? 2 / 3 : 16 / 9
+    fileprivate static func aspectRatio(for imageVariant: SRGImageVariant) -> CGFloat {
+        return imageVariant == .poster ? 2 / 3 : 16 / 9
     }
     
     var body: some View {
 #if os(tvOS)
-        LabeledCardButton(aspectRatio: Self.aspectRatio(for: imageType), action: action) {
+        LabeledCardButton(aspectRatio: Self.aspectRatio(for: imageVariant), action: action) {
             Image(decorative: "chevron-large")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
@@ -40,8 +40,7 @@ struct MoreCell: View {
             .foregroundColor(.srgGrayC7)
             .opacity(0.8)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .aspectRatio(Self.aspectRatio(for: imageType), contentMode: .fit)
-            .background(Color.placeholder)
+            .aspectRatio(Self.aspectRatio(for: imageVariant), contentMode: .fit)
             .cornerRadius(LayoutStandardViewCornerRadius)
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
             .frame(maxHeight: .infinity, alignment: .top)
@@ -71,7 +70,7 @@ private extension MoreCell {
 
 struct MoreCell_Previews: PreviewProvider {
     static var previews: some View {
-        MoreCell(section: .configured(.tvLive), imageType: .default, filter: nil)
+        MoreCell(section: .configured(.tvLive), imageVariant: .default, filter: nil)
             .previewLayout(.fixed(width: 400, height: 400))
     }
 }

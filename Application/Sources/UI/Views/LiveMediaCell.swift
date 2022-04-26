@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 // MARK: View
@@ -30,7 +31,6 @@ struct LiveMediaCell: View {
 #else
             VisualView(model: model)
                 .aspectRatio(LiveMediaCellSize.aspectRatio, contentMode: .fit)
-                .background(Color.placeholder)
                 .redactable()
                 .selectionAppearance(when: isSelected && media != nil)
                 .cornerRadius(LayoutStandardViewCornerRadius)
@@ -60,7 +60,7 @@ struct LiveMediaCell: View {
         
         var body: some View {
             ZStack {
-                ImageView(url: model.imageUrl)
+                ImageView(source: model.imageUrl)
                 Color.srgGray16.opacity(0.7)
                 DescriptionView(model: model)
                 BlockingOverlay(media: model.media)

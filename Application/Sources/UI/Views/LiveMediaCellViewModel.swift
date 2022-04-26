@@ -102,7 +102,7 @@ extension LiveMediaCellViewModel {
     }
     
     var imageUrl: URL? {
-        return program?.imageUrl(for: .small) ?? media?.imageUrl(for: .small)
+        return url(for: program?.image, size: .small) ?? url(for: media?.image, size: .small)
     }
 }
 

@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -45,11 +46,14 @@ struct TopicCell: View {
     private struct MainView: View {
         let topic: SRGTopic?
         
+        private var imageUrl: URL? {
+            return url(for: topic?.image, size: .small)
+        }
+        
         var body: some View {
             ZStack {
-                ImageView(url: topic?.imageUrl(for: .small))
+                ImageView(source: imageUrl)
                     .aspectRatio(TopicCellSize.aspectRatio, contentMode: .fit)
-                    .background(Color.placeholder)
                 Color.srgGray23
                     .opacity(0.3)
                 Text(topic?.title ?? "")
