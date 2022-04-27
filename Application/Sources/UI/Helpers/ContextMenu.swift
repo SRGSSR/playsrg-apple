@@ -169,7 +169,7 @@ extension ContextMenu {
     }
     
     private static func downloadAction(for media: SRGMedia) -> UIAction? {
-        guard Download.canDownloadMedia(media) else { return nil}
+        guard Download.canToggle(for: media) else { return nil}
         
         func title(for download: Download?) -> String {
             if download != nil {

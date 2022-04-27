@@ -271,6 +271,11 @@ static NSArray<Download *> *s_sortedDownloads;
     return media.podcastHighDefinitionURL || media.podcastStandardDefinitionURL;
 }
 
++ (BOOL)canToggleDownloadForMedia:(SRGMedia *)media
+{
+    return [Download canDownloadMedia:media] || [self downloadForMedia:media];
+}
+
 + (Download *)addDownloadForMedia:(SRGMedia *)media
 {
     if ([Download canDownloadMedia:media]) {
