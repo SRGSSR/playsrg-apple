@@ -5,6 +5,7 @@
 //
 
 import SRGAppearanceSwift
+import SRGDataProviderModel
 import SwiftUI
 
 // MARK: View
@@ -27,7 +28,7 @@ struct TimelineView: View {
         guard let dateInterval = dateInterval else { return [] }
         
         var dates = [Date]()
-        Calendar.current.enumerateDates(startingAfter: dateInterval.start, matching: dateComponents, matchingPolicy: .nextTime) { date, _, stop in
+        Calendar.srgDefault.enumerateDates(startingAfter: dateInterval.start, matching: dateComponents, matchingPolicy: .nextTime) { date, _, stop in
             guard let date = date else { return }
             if dateInterval.contains(date) {
                 dates.append(date)

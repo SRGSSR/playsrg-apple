@@ -194,8 +194,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke.git",
       "state" : {
-        "revision" : "958ca90df22fc77fdf33b5b9a6d70102b7743851",
-        "version" : "10.9.0"
+        "revision" : "0ea7545b5c918285aacc044dc75048625c8257cc",
+        "version" : "10.8.0"
       }
     },
     {
@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "9b19442fb4a9b10ac975ef5909c9f9742d894b8c"
+        "branch" : "feature/improved-timezone-support",
+        "revision" : "846648007aa7e06eda85e3d40bdfa38ab241093c"
       }
     },
     {
@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "04c2a886f69b800be4eb44dcc0f427b820a8bb47"
+        "branch" : "feature/improved-timezone-support",
+        "revision" : "443d35ac783ebb4803b9691b93ede914eea84ca4"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "ac10ca6fb06bfe93dd05f36f86397761f207e8ae"
+        "branch" : "feature/improved-timezone-support",
+        "revision" : "9a5faf4c6f942f1b838c10668ecc6d49c851fb02"
       }
     },
     {

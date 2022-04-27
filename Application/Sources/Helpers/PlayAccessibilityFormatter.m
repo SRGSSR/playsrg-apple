@@ -8,6 +8,8 @@
 
 #import "NSBundle+PlaySRG.h"
 
+@import SRGDataProviderModel;
+
 NSString *PlayAccessibilityDateFromDate(NSDate *date)
 {
     static NSDateFormatter *s_dateFormatter;
@@ -58,7 +60,7 @@ NSString *PlayAccessibilityTimeFromDate(NSDate *date)
         s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorNone;
     });
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
-                                                                   fromDate:date];
+    NSDateComponents *components = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                                                     fromDate:date];
     return [s_dateComponentsFormatter stringFromDateComponents:components];
 }
