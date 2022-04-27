@@ -1262,14 +1262,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateDownloadStatusForMedia:(SRGMedia *)media
 {
-    if (self.letterboxController.continuousPlaybackUpcomingMedia || ! media || ! [Download canDownloadMedia:media]) {
+    Download *download = [Download downloadForMedia:media];
+    BOOL canDisplayDownloadStatus = [Download canDownloadMedia:media] || download;
+    
+    if (self.letterboxController.continuousPlaybackUpcomingMedia || ! media || ! canDisplayDownloadStatus) {
         self.downloadButton.hidden = YES;
         return;
     }
     
     self.downloadButton.hidden = NO;
     
-    Download *download = [Download downloadForMedia:media];
     switch (download.state) {
         case DownloadStateAdded:
         case DownloadStateDownloadingSuspended:{
