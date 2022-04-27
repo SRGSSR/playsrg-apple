@@ -72,21 +72,6 @@
 		080981412622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
 		080981422622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
 		080981432622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
-		081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
@@ -97,16 +82,6 @@
 		081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C242602C0F800530FFF /* SRGDataProviderCombine */; };
 		081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C262602C10300530FFF /* SRGDataProviderCombine */; };
 		081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C282602C10E00530FFF /* SRGDataProviderCombine */; };
-		081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
 		08209308208F522A00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		08209309208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930A208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
@@ -903,11 +878,6 @@
 		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
-		6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
 		6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6F475FBF1EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6F475FC01EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
@@ -2614,16 +2584,8 @@
 		0806E7B61D50D918002ED406 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		0809812E2622195900AA586B /* LiveMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveMediaCell.swift; sourceTree = "<group>"; };
 		0809812F2622195900AA586B /* Badges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
-		081220A41DD079BB00BF8326 /* DownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadsViewController.h; sourceTree = "<group>"; };
-		081220A51DD079BB00BF8326 /* DownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadsViewController.m; sourceTree = "<group>"; };
-		081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTableViewCell.h; sourceTree = "<group>"; };
-		081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTableViewCell.m; sourceTree = "<group>"; };
-		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
 		081220BF1DD0ADAC00BF8326 /* DownloadSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSession.h; sourceTree = "<group>"; };
 		081220C01DD0ADAC00BF8326 /* DownloadSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSession.m; sourceTree = "<group>"; };
-		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
-		081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFooterSectionView.m; sourceTree = "<group>"; };
-		081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadFooterSectionView.xib; sourceTree = "<group>"; };
 		082092FC208E272E00711DE4 /* Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Application.entitlements; sourceTree = "<group>"; };
 		08209306208F522A00711DE4 /* PushService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushService.h; sourceTree = "<group>"; };
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
@@ -3721,16 +3683,8 @@
 		081220731DCCE70400BF8326 /* Downloads */ = {
 			isa = PBXGroup;
 			children = (
-				081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */,
-				081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */,
-				081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */,
 				081220BF1DD0ADAC00BF8326 /* DownloadSession.h */,
 				081220C01DD0ADAC00BF8326 /* DownloadSession.m */,
-				081220A41DD079BB00BF8326 /* DownloadsViewController.h */,
-				081220A51DD079BB00BF8326 /* DownloadsViewController.m */,
-				081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */,
-				081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */,
-				081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */,
 			);
 			path = Downloads;
 			sourceTree = "<group>";
@@ -6297,8 +6251,6 @@
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
 				6FE28773248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
-				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6FB89A0B26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
@@ -6343,11 +6295,9 @@
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
-				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -6390,8 +6340,6 @@
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
-				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -6431,8 +6379,6 @@
 			files = (
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
@@ -6481,11 +6427,9 @@
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
-				081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
@@ -8527,7 +8471,6 @@
 				6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				6F2E160926A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				6FAAF78820CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
-				081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F861AF81DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6F00875D219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
@@ -8600,7 +8543,6 @@
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
-				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
 				6F8D54422639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				6FF7BB9722A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
@@ -8675,7 +8617,6 @@
 				6F362A8426A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F49EF93263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F58903426AED4CD00553C24 /* Environment.swift in Sources */,
 				6FB899FF26335B090012F1B0 /* Stack.swift in Sources */,
@@ -8808,7 +8749,6 @@
 				6F73BFB726563C830032D742 /* Content.swift in Sources */,
 				6F8A545B2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD12813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0526D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED031FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -8858,7 +8798,6 @@
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F901D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -8924,7 +8863,6 @@
 				08F5DBC2262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5D25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70012682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595526989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9047,7 +8985,6 @@
 				6F73BFB826563C830032D742 /* Content.swift in Sources */,
 				6F8A545C2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD22813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0626D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -9097,7 +9034,6 @@
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F911D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9163,7 +9099,6 @@
 				08F5DBC3262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5E25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70022682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595626989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9286,7 +9221,6 @@
 				6F73BFB926563C830032D742 /* Content.swift in Sources */,
 				6F8A545D2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD32813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0726D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -9336,7 +9270,6 @@
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F921D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9402,7 +9335,6 @@
 				08F5DBC4262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5F25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70032682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595726989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9521,7 +9453,6 @@
 				6F73BFBA26563C830032D742 /* Content.swift in Sources */,
 				6F8A545E2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F573D0826D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FD4C2E5268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
@@ -9574,7 +9505,6 @@
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FCA26B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9634,7 +9564,6 @@
 				08F5DBC5262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70042682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */,

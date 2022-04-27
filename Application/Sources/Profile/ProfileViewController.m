@@ -8,7 +8,6 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
-#import "DownloadsViewController.h"
 #import "Layout.h"
 #import "NavigationController.h"
 #import "NotificationTableViewCell.h"
