@@ -16,41 +16,20 @@ struct MediaDescription {
         case time
     }
     
-    private enum FormattedDurationStyle {
-        /// Full duration format
-        case full
-        /// Short duration format
-        case short
-    }
-    
     struct BadgeProperties {
         let text: String
         let color: UIColor
     }
     
-    private static func formattedDuration(from: Date, to: Date, format: FormattedDurationStyle = .full) -> String? {
+    private static func formattedDuration(from: Date, to: Date) -> String? {
         let days = Calendar.current.dateComponents([.day], from: from, to: to).day!
-        
-        if format == .short {
-            switch days {
-            case 0:
-                return PlayShortFormattedHours(to.timeIntervalSince(from))
-            case 1...3:
-                return PlayShortFormattedDays(to.timeIntervalSince(from))
-            default:
-                return nil
-            }
-        }
-        else {
-            switch days {
-            case 0:
-                // Minimum displayed is 1 hour
-                return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
-            case 1...30:
-                return PlayFormattedDays(to.timeIntervalSince(from))
-            default:
-                return nil
-            }
+        switch days {
+        case 0:
+            return PlayFormattedHours(to.timeIntervalSince(from))
+        case 1...3:
+            return PlayFormattedDays(to.timeIntervalSince(from))
+        default:
+            return nil
         }
     }
     
@@ -185,7 +164,7 @@ struct MediaDescription {
                     )
                 }
                 else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,
-                            let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
+                        let remainingTime = Self.formattedDuration(from: now, to: endDate) {
                     return BadgeProperties(
                         text: String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime),
                         color: .play_orange
