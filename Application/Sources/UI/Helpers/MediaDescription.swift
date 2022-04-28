@@ -29,7 +29,7 @@ struct MediaDescription {
     }
     
     private static func formattedDuration(from: Date, to: Date, format: FormattedDurationStyle = .full) -> String? {
-        guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
+        let days = Calendar.current.dateComponents([.day], from: from, to: to).day!
         
         if format == .short {
             switch days {
@@ -113,20 +113,24 @@ struct MediaDescription {
         return media.duration / 1000
     }
     
-    static func availability(for media: SRGMedia) -> String? {
+    private static func publication(for media: SRGMedia) -> String {
+        return DateFormatter.play_dateAndTimeShort.string(from: media.date)
+    }
+    
+    private static func expiration(for media: SRGMedia) -> String? {
+        guard let endDate = media.endDate else { return nil }
+        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_short.string(from: endDate))
+    }
+    
+    static func availability(for media: SRGMedia) -> String {
         let now = Date()
-        switch media.timeAvailability(at: now) {
-        case .notAvailableAnymore:
-            let endDate = (media.endDate != nil) ? media.endDate! : media.date.addingTimeInterval(media.duration / 1000)
-            guard let expiringDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
-            return String(format: NSLocalizedString("Not available since %@", comment: "Explains that a content has expired (days or hours ago). Displayed in the media player view."), expiringDays)
-        case .available:
-            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream, media.contentType != .trailer else { return nil }
-            guard let remainingDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
-            return String(format: NSLocalizedString("Still available for %@", comment: "Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view."), remainingDays)
-        default:
-            return nil
-        }
+        let publication = publication(for: media)
+        guard media.timeAvailability(at: now) == .available,
+              let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream, media.contentType != .trailer else { return publication }
+        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
+        guard remainingDateComponents.day! > 3, let expiration = expiration(for: media) else { return publication }
+        // Unbreakable spaces before / after the separator
+        return "\(publication) - \(expiration)"
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {

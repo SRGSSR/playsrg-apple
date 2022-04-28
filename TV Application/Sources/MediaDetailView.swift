@@ -45,18 +45,7 @@ struct MediaDetailView: View {
     
     private struct DescriptionView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
         @Namespace private var namespace
-        
-        var availabilityInformation: String {
-            guard let media = model.media else { return .placeholder(length: 15)}
-            var publication = DateFormatter.play_dateAndTimeShort.string(from: media.date)
-            if let availability = MediaDescription.availability(for: media) {
-                // Unbreakable spaces before / after the separator
-                publication += " - " + availability
-            }
-            return publication
-        }
         
         var body: some View {
             GeometryReader { geometry in
@@ -70,10 +59,7 @@ struct MediaDetailView: View {
                             .srgFont(.H3)
                             .foregroundColor(.white)
                     }
-                    Text(availabilityInformation)
-                        .srgFont(.subtitle2)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 5)
+                    AvailabilityView(model: model)
                     Spacer()
                         .frame(height: 20)
                     VStack(alignment: .leading, spacing: 0) {
@@ -95,7 +81,33 @@ struct MediaDetailView: View {
         }
     }
     
-    struct AttributeView: View {
+    private struct AvailabilityView: View {
+        @ObservedObject var model: MediaDetailViewModel
+        
+        private var availabilityInformation: String {
+            guard let media = model.media else { return .placeholder(length: 15) }
+            return MediaDescription.availability(for: media)
+        }
+        
+        private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+            guard let media = model.media else { return nil }
+            return MediaDescription.availabilityBadgeProperties(for: media)
+        }
+        
+        var body: some View {
+            HStack(spacing: 20) {
+                Text(availabilityInformation)
+                    .srgFont(.subtitle2)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 5)
+                if let properties = availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                }
+            }
+        }
+    }
+    
+    private struct AttributeView: View {
         let icon: String
         let values: [String]
         
@@ -110,7 +122,7 @@ struct MediaDetailView: View {
         }
     }
     
-    struct AttributesView: View {
+    private struct AttributesView: View {
         @ObservedObject var model: MediaDetailViewModel
         
         var body: some View {
@@ -137,7 +149,7 @@ struct MediaDetailView: View {
         }
     }
     
-    struct SummaryView: View {
+    private struct SummaryView: View {
         @ObservedObject var model: MediaDetailViewModel
         @State var isFocused = false
         
@@ -162,7 +174,7 @@ struct MediaDetailView: View {
         }
     }
     
-    struct ActionsView: View {
+    private struct ActionsView: View {
         @ObservedObject var model: MediaDetailViewModel
         
         var playButtonLabel: String {
