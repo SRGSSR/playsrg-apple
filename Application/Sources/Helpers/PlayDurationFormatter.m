@@ -16,7 +16,7 @@ NSString *PlayFormattedHours(NSTimeInterval duration)
         s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
         s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
     });
-    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60. * 60., duration)];
 }
 
 NSString *PlayFormattedDays(NSTimeInterval duration)
@@ -29,7 +29,7 @@ NSString *PlayFormattedDays(NSTimeInterval duration)
         s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
         s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
     });
-    return [s_dateComponentsFormatter stringFromTimeInterval:duration];
+    return [s_dateComponentsFormatter stringFromTimeInterval:fmax(24 * 60. * 60., duration)];
 }
 
 NSString *PlayShortFormattedMinutes(NSTimeInterval duration)

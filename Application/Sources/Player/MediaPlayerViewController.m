@@ -23,8 +23,6 @@
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
-#import "NSString+PlaySRG.h"
-#import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -123,10 +121,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
-@property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
@@ -178,6 +176,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIButton *currentProgramFavoriteButton;
 
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
+
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *availabilityLabelHeightConstraint;
 
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
@@ -425,6 +425,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
+    [self updateAvailabilityLabelHeight];
+    
     // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
         self.letterboxView.controller = self.letterboxController;
@@ -641,10 +643,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 #pragma mark Accessibility
 
-- (BOOL)accessibilityPerformEscape
+- (void)updateForContentSizeCategory
 {
-    [self play_dismissViewControllerAnimated:YES completion:nil];
-    return YES;
+    [super updateForContentSizeCategory];
+    
+    [self updateAvailabilityLabelHeight];
+}
+
+- (void)updateAvailabilityLabelHeight
+{
+    self.availabilityLabelHeightConstraint.constant = [[SRGFont metricsForFontWithStyle:SRGFontStyleLabel] scaledValueForValue:20.f];
 }
 
 #pragma mark Modal presentation
@@ -822,20 +830,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.scrollView.hidden = NO;
         self.channelView.hidden = YES;
         
-        [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+        [self.availabilityLabel play_displayAvailabilityBadgeForMediaMetadata:mainChapterMedia];
         
         self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
-        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
-        if (media.date) {
-            self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
-            self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
-        }
-        else {
-            self.dateLabel.text = nil;
-            self.dateLabel.accessibilityLabel = nil;
-        }
+        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
+        [self.dateLabel play_displayDateLabelForMediaMetadata:media];
         
         [self removeSongPanel];
         

@@ -16,41 +16,20 @@ struct MediaDescription {
         case time
     }
     
-    private enum FormattedDurationStyle {
-        /// Full duration format
-        case full
-        /// Short duration format
-        case short
-    }
-    
     struct BadgeProperties {
         let text: String
         let color: UIColor
     }
     
-    private static func formattedDuration(from: Date, to: Date, format: FormattedDurationStyle = .full) -> String? {
-        guard let days = Calendar.current.dateComponents([.day], from: from, to: to).day else { return nil }
-        
-        if format == .short {
-            switch days {
-            case 0:
-                return PlayShortFormattedHours(to.timeIntervalSince(from))
-            case 1...3:
-                return PlayShortFormattedDays(to.timeIntervalSince(from))
-            default:
-                return nil
-            }
-        }
-        else {
-            switch days {
-            case 0:
-                // Minimum displayed is 1 hour
-                return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
-            case 1...30:
-                return PlayFormattedDays(to.timeIntervalSince(from))
-            default:
-                return nil
-            }
+    private static func formattedDuration(from: Date, to: Date) -> String? {
+        let days = Calendar.current.dateComponents([.day], from: from, to: to).day!
+        switch days {
+        case 0:
+            return PlayFormattedHours(to.timeIntervalSince(from))
+        case 1...3:
+            return PlayFormattedDays(to.timeIntervalSince(from))
+        default:
+            return nil
         }
     }
     
@@ -113,19 +92,32 @@ struct MediaDescription {
         return media.duration / 1000
     }
     
-    static func availability(for media: SRGMedia) -> String? {
+    private static func shouldDisplayExpiration(for media: SRGMedia) -> Bool {
         let now = Date()
-        switch media.timeAvailability(at: now) {
-        case .notAvailableAnymore:
-            let endDate = (media.endDate != nil) ? media.endDate! : media.date.addingTimeInterval(media.duration / 1000)
-            guard let expiringDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
-            return String(format: NSLocalizedString("Not available since %@", comment: "Explains that a content has expired (days or hours ago). Displayed in the media player view."), expiringDays)
-        case .available:
-            guard let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream, media.contentType != .trailer else { return nil }
-            guard let remainingDays = Self.formattedDuration(from: now, to: endDate) else { return nil }
-            return String(format: NSLocalizedString("Still available for %@", comment: "Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view."), remainingDays)
-        default:
-            return nil
+        guard media.timeAvailability(at: now) == .available,
+              media.contentType != .scheduledLivestream, media.contentType != .trailer,
+              let endDate = media.endDate, media.contentType != .livestream else { return false }
+        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
+        return remainingDateComponents.day! > 3
+    }
+    
+    private static func publication(for media: SRGMedia) -> String {
+        return DateFormatter.play_shortDateAndTime.string(from: media.date)
+    }
+    
+    private static func expiration(for media: SRGMedia) -> String? {
+        guard let endDate = media.endDate else { return nil }
+        return String(format: NSLocalizedString("Available until %@", comment: "Availability until date, specified as parameter"), DateFormatter.play_short.string(from: endDate))
+    }
+    
+    static func availability(for media: SRGMedia) -> String {
+        let publication = publication(for: media)
+        if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
+            // Unbreakable spaces before / after the separator
+            return "\(publication) - \(expiration)"
+        }
+        else {
+            return publication
         }
     }
     
@@ -181,7 +173,7 @@ struct MediaDescription {
                     )
                 }
                 else if let endDate = media.endDate, media.contentType == .episode || media.contentType == .clip,
-                            let remainingTime = Self.formattedDuration(from: now, to: endDate, format: .short) {
+                        let remainingTime = Self.formattedDuration(from: now, to: endDate) {
                     return BadgeProperties(
                         text: String(format: NSLocalizedString("%@ left", comment: "Short label displayed on a media expiring soon"), remainingTime),
                         color: .play_orange
