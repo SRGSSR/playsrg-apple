@@ -241,46 +241,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     self.hiddenKeys = hiddenKeys.copy;
 }
 
-#pragma mark Support information
-
-- (NSString *)supportInformation
-{
-    NSMutableArray<NSString *> *supportInformationComponents = [NSMutableArray array];
-    
-    [supportInformationComponents addObject:@"General information"];
-    [supportInformationComponents addObject:@"-------------------"];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App name: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App identifier: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"]]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS: %@", UIDevice.currentDevice.systemName]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model: %@", UIDevice.currentDevice.model]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model identifier: %@", UIDevice.currentDevice.play_hardware]];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
-    if (SRGIdentityService.currentIdentityService) {
-        [supportInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
-    }
-    
-    [supportInformationComponents addObject:@""];
-    [supportInformationComponents addObject:@"Push notification information"];
-    [supportInformationComponents addObject:@"-----------------------------"];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
-    
-    NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
-    
-    NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
-    
-    NSArray<NSString *> *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects sortedArrayUsingSelector:@selector(compare:)];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Subscribed URNs: %@", (subscribedShowURNs.count != 0) ? [subscribedShowURNs componentsJoinedByString:@","] : @"None"]];
-    
-    return [supportInformationComponents componentsJoinedByString:@"\n"];
-}
-
 #pragma mark What's new
 
 /**
@@ -468,7 +428,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([specifier.key isEqualToString:SettingsCopySupportInformationButton]) {
-        UIPasteboard.generalPasteboard.string = [self supportInformation];
+        UIPasteboard.generalPasteboard.string = [SupportInformation generate];
         [Banner showWithStyle:BannerStyleInfo
                       message:NSLocalizedString(@"Support information has been copied to the pasteboard", @"Information message displayed when support information has been copied to the pasteboard")
                         image:nil

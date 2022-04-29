@@ -29,11 +29,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)isSubscribedToShowURN:(NSString *)URN;
 
-/**
- *  Return the URNs of all shows the user has subscribed to.
- */
-@property (nonatomic, readonly) NSSet<NSString *> *subscribedShowURNs;
-
 @end
 
 @interface PushService (Helpers)
