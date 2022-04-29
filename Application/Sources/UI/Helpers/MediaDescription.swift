@@ -92,6 +92,15 @@ struct MediaDescription {
         return media.duration / 1000
     }
     
+    private static func shouldDisplayExpiration(for media: SRGMedia) -> Bool {
+        let now = Date()
+        guard media.timeAvailability(at: now) == .available,
+              media.contentType != .scheduledLivestream, media.contentType != .trailer,
+              let endDate = media.endDate, media.contentType != .livestream else { return false }
+        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
+        return remainingDateComponents.day! > 3
+    }
+    
     private static func publication(for media: SRGMedia) -> String {
         return DateFormatter.play_dateAndTimeShort.string(from: media.date)
     }
@@ -102,14 +111,14 @@ struct MediaDescription {
     }
     
     static func availability(for media: SRGMedia) -> String {
-        let now = Date()
         let publication = publication(for: media)
-        guard media.timeAvailability(at: now) == .available,
-              let endDate = media.endDate, media.contentType != .livestream, media.contentType != .scheduledLivestream, media.contentType != .trailer else { return publication }
-        let remainingDateComponents = Calendar.current.dateComponents([.day], from: now, to: endDate)
-        guard remainingDateComponents.day! > 3, let expiration = expiration(for: media) else { return publication }
-        // Unbreakable spaces before / after the separator
-        return "\(publication) - \(expiration)"
+        if shouldDisplayExpiration(for: media), let expiration = expiration(for: media) {
+            // Unbreakable spaces before / after the separator
+            return "\(publication) - \(expiration)"
+        }
+        else {
+            return publication
+        }
     }
     
     static func accessibilityLabel(for media: SRGMedia) -> String? {
