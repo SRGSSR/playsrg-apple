@@ -25,7 +25,7 @@ struct MediaDescription {
         let days = Calendar.current.dateComponents([.day], from: from, to: to).day!
         switch days {
         case 0:
-            return PlayFormattedHours(to.timeIntervalSince(from))
+            return PlayFormattedHours(max(to.timeIntervalSince(from), 60 * 60))
         case 1...3:
             return PlayFormattedDays(to.timeIntervalSince(from))
         default:
