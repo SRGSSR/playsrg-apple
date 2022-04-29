@@ -1,3 +1,6 @@
+/* Speed factor with current value if different from desired one */
+"%1$@× (Now: %2$@×)" = "%1$@× (Maintenant : %2$@×)";
+
 /* Seek backward shortcut label */
 "%@ backward" = "Reculer de %@";
 
@@ -46,9 +49,6 @@
 /* Speed factor */
 "%@×" = "%@×";
 
-/* Speed factor with current value if different from desired one */
-"%@× (Now: %@×)" = "%1$@× (Maintenant : %2$@×)";
-
 /* Title displayed when several items have been selected */
 "%d items" = "%d éléments";
 
@@ -89,6 +89,9 @@
 
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "L'abonnement automatique a échoué. Veuillez réessayer.";
+
+/* Availability until date, specified as parameter */
+"Available until %@" = "Disponible jusqu'au %@";
 
 /* Back to live shortcut label */
 "Back to live" = "Retourner au direct";
@@ -254,9 +257,6 @@
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Vidéos les plus récentes";
 
-/* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
-"less than 1 hour" = "moins d'une heure";
-
 /* Play button label for audio in media detail view */
 "Listen" = "Écouter";
 
@@ -357,9 +357,6 @@
 
 /* Default text displayed when no results are available */
 "No results" = "Aucun résultat";
-
-/* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
-"Not available since %@" = "Plus disponible depuis %@";
 
 /* Label to present the help page */
 "Notifications" = "Notifications";
@@ -503,9 +500,6 @@
 
 /* Start over shortcut label */
 "Start over" = "Reprendre au début";
-
-/* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
-"Still available for %@" = "Disponible %@";
 
 /* Title of a subscription button */
 "Subscribe" = "S'abonner";
