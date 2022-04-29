@@ -50,7 +50,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         
         NSDate *nowDate = NSDate.date;
         SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
-        if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
+        if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
+                && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
             NSDateComponents *remainingDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
             if (remainingDateComponents.day > kDayNearExpirationThreshold) {
                 NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDateFormatter stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
