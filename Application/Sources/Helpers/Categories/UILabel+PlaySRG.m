@@ -25,7 +25,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         return PlayFormattedDays(duration);
     }
     else {
-        return PlayFormattedHours(fmax(duration, 60. * 60.));
+        return PlayFormattedHours(duration);
     }
 }
 
@@ -89,7 +89,8 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         
         text = NSLocalizedString(@"Expired", @"Short label identifying content which has expired.");
     }
-    else if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
+    else if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
+             && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
         self.backgroundColor = UIColor.play_orangeColor;
         
         NSDateComponents *monthsDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
