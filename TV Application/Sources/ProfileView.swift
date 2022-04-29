@@ -58,6 +58,7 @@ struct ProfileView: View {
             }
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Information", comment: "Information section header")).srgFont(.H3)) {
                 VersionListItem(model: model)
+                SupportInformationListItem()
             }
             #if DEBUG || NIGHTLY || BETA
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
@@ -442,6 +443,19 @@ extension ProfileView {
         }
     }
     #endif
+    
+    private struct SupportInformationListItem: View {
+        var body: some View {
+            Button {
+                showText(SupportInformation.generate())
+            } label: {
+                Text(PlaySRGSettingsLocalizedString("Copy support information", comment: "Label of the button to copy support information"))
+                    .srgFont(.button)
+                .foregroundColor(.secondary)
+            }
+            .padding()
+        }
+    }
     
     private struct VersionListItem: View {
         var model: ProfileViewModel
