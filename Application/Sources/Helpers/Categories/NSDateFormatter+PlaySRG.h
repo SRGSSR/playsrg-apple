@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @discussion Use `PlayAccessibilityDateAndTimeFromDate` for accessibility-oriented formatting.
  */
-@property (class, nonatomic, readonly) NSDateFormatter *play_dateAndTimeShortFormatter;
+@property (class, nonatomic, readonly) NSDateFormatter *play_shortDateAndTimeFormatter;
 
 /**
  *  Relative date and time formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today.

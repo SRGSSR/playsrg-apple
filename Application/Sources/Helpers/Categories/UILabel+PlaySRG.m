@@ -45,7 +45,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
 - (void)play_displayDateLabelForMediaMetadata:(id<SRGMediaMetadata>)mediaMetadata
 {
     if (mediaMetadata.date) {
-        NSString *text = [NSDateFormatter.play_dateAndTimeShortFormatter stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
+        NSString *text = [NSDateFormatter.play_shortDateAndTimeFormatter stringFromDate:mediaMetadata.date].play_localizedUppercaseFirstLetterString;
         NSString *accessibilityLabel = PlayAccessibilityDateAndTimeFromDate(mediaMetadata.date);
         
         NSDate *nowDate = NSDate.date;

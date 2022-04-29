@@ -32,7 +32,7 @@
     return s_dateFormatter;
 }
 
-+ (NSDateFormatter *)play_dateAndTimeShortFormatter
++ (NSDateFormatter *)play_shortDateAndTimeFormatter
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;

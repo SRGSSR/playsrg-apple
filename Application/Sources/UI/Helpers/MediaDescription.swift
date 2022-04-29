@@ -102,7 +102,7 @@ struct MediaDescription {
     }
     
     private static func publication(for media: SRGMedia) -> String {
-        return DateFormatter.play_dateAndTimeShort.string(from: media.date)
+        return DateFormatter.play_shortDateAndTime.string(from: media.date)
     }
     
     private static func expiration(for media: SRGMedia) -> String? {
