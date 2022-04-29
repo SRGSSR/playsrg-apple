@@ -22,16 +22,6 @@ static const NSInteger kDayNearExpirationThreshold = 3;
 static NSString *LabelFormattedDuration(NSTimeInterval duration)
 {
     if (duration >= 60. * 60. * 24.) {
-        return PlayShortFormattedDays(duration);
-    }
-    else {
-        return PlayShortFormattedHours(fmax(duration, 60. * 60.));
-    }
-}
-
-static NSString *AccessibilityLabelFormattedDuration(NSTimeInterval duration)
-{
-    if (duration >= 60. * 60. * 24.) {
         return PlayFormattedDays(duration);
     }
     else {
@@ -106,7 +96,7 @@ static NSString *AccessibilityLabelFormattedDuration(NSTimeInterval duration)
         if (monthsDateComponents.day <= kDayNearExpirationThreshold) {
             NSTimeInterval timeIntervalBeforeEnd = [mediaMetadata.endDate timeIntervalSinceDate:nowDate];
             text = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];
-            accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), AccessibilityLabelFormattedDuration(timeIntervalBeforeEnd)];
+            accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];
         }
     }
     
