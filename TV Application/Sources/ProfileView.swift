@@ -449,7 +449,7 @@ extension ProfileView {
             Button {
                 showText(SupportInformation.generate())
             } label: {
-                Text(PlaySRGSettingsLocalizedString("Copy support information", comment: "Label of the button to copy support information"))
+                Text(PlaySRGSettingsLocalizedString("Support information", comment: "Label of the button to send support information"))
                     .srgFont(.button)
                 .foregroundColor(.secondary)
             }

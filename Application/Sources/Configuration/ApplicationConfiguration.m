@@ -116,6 +116,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
+@property (nonatomic, copy) NSString *supportEmailAddress;
+
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;
@@ -286,6 +288,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
+    NSString *supportEmailAddress = [firebaseConfiguration stringForKey:@"supportEmailAddress"];
+    if (! supportEmailAddress) {
+        return NO;
+    }
+    
     NSNumber *appStoreProductIdentifier = [firebaseConfiguration numberForKey:@"appStoreProductIdentifier"];
     if (! appStoreProductIdentifier) {
         return NO;
@@ -302,6 +309,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.middlewareURL = middlewareURL;
     self.whatsNewURL = whatsNewURL;
     
+    self.supportEmailAddress = supportEmailAddress;
     self.appStoreProductIdentifier = appStoreProductIdentifier;
     
     //

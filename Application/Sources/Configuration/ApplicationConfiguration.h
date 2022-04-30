@@ -52,6 +52,8 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, nullable) NSURL *betaTestingURL;
 @property (nonatomic, readonly, nullable) NSURL *sourceCodeURL;
 
+@property (nonatomic, readonly, copy) NSString *supportEmailAddress;
+
 @property (nonatomic, readonly, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, readonly, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, readonly, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;

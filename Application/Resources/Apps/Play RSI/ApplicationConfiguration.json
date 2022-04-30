@@ -7,6 +7,7 @@
   "appStoreProductIdentifier": 920753497,
   "playURL": "https://www.rsi.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
+  "supportEmailAddress": "support.play@rts.ch",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioWatchLater",
   "minimumSocialViewCount": 50,
