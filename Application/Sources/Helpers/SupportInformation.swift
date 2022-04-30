@@ -13,6 +13,10 @@ import UIKit
         return bool ? "Yes" : "No"
     }
     
+    private static var dateAndTime: String {
+        return DateFormatter.play_shortDateAndTime.string(from: Date())
+    }
+    
     private static var applicationName: String {
         return Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
     }
@@ -81,6 +85,7 @@ import UIKit
         
         components.append("General information")
         components.append( "-------------------")
+        components.append("Date and time: \(dateAndTime)")
         components.append("App name: \(applicationName)")
         components.append("App identifier: \(applicationIdentifier)")
         components.append("App version: \(applicationVersion)")
