@@ -158,8 +158,8 @@ final class ProfileViewModel: ObservableObject {
     
     func nextServiceURL() {
         let serviceURL = ApplicationSettingServiceURL()
-        if let index = servers.firstIndex(where: { $0.url == serviceURL }) {
-            let server = servers[safeIndex: servers.index(after: index)] ?? servers.first!
+        if let index = Server.servers.firstIndex(where: { $0.url == serviceURL }) {
+            let server = Server.servers[safeIndex: Server.servers.index(after: index)] ?? Server.servers.first!
             ApplicationSettingSetServiceURL(server.url)
             updateServiceURLTitle()
         }
@@ -196,31 +196,9 @@ final class ProfileViewModel: ObservableObject {
         synchronizationDate = SRGUserData.current?.user.synchronizationDate
     }
     
-    private struct Server {
-        let url: URL
-        let title: String
-    }
-    
     private func updateServiceURLTitle() {
         let serviceURL = ApplicationSettingServiceURL()
-        let server = servers.filter({ $0.url == serviceURL }).first ?? servers.first!
+        let server = Server.servers.filter({ $0.url == serviceURL }).first ?? Server.servers.first!
         serviceURLTitle = server.title
-    }
-    
-    private var servers: [Server] {
-        guard let path = Bundle.main.path(forResource: "Settings.server", ofType: "plist"),
-              let plist = NSDictionary(contentsOfFile: path),
-              let values = plist.value(forKey: "Values") as? [String],
-              let titles = plist.value(forKey: "Titles") as? [String],
-              values.count == titles.count,
-              values.count != 0
-        else {
-            return [Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))]
-        }
-        
-        return values.enumeratedCompactMap { value, index in
-            guard let serverURL = URL(string: value) else { return nil }
-            return Server(url: serverURL, title: PlaySRGSettingsLocalizedString(titles[index], comment: nil))
-        }
     }
 }
