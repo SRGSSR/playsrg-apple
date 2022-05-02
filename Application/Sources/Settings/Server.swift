@@ -6,13 +6,15 @@
 
 import Foundation
 
-struct Server {
+struct Server: Hashable, Identifiable {
     let url: URL
     let title: String
     
+    static var production = Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))
+    
     static var servers: [Server] = {
         guard let plistServers = plistServers, !plistServers.isEmpty else {
-            return [Server(url: SRGIntegrationLayerProductionServiceURL(), title: PlaySRGSettingsLocalizedString("Production", comment: "Service URL setting state"))]
+            return [production]
         }
         return plistServers
     }()
@@ -33,4 +35,15 @@ struct Server {
             return Server(url: serverURL, title: PlaySRGSettingsLocalizedString(titles[index], comment: nil))
         }
     }()
+    
+    static func server(for urlString: String?) -> Server {
+        guard let urlString = urlString, let server = servers.first(where: { $0.url.absoluteString == urlString }) else {
+            return .production
+        }
+        return server
+    }
+    
+    var id: URL {
+        return url
+    }
 }

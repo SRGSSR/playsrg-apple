@@ -22,6 +22,7 @@ struct SettingsView: View {
                 PermissionsSection(model: model)
                 ContentSection(model: model)
                 InformationSection(model: model)
+                AdvancedFeaturesSection(model: model)
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
             .toolbar {
@@ -155,7 +156,7 @@ struct SettingsView: View {
                 } label: {
                     Text(NSLocalizedString("Licenses", comment: "Label of the button to display licenses"))
                 }
-                Button(NSLocalizedString("Source code", comment: "Label of the button to acces the source code"), action: model.showSourceCode)
+                Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: model.showSourceCode)
                 Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: model.becomeBetaTester)
                 VersionCell(model: model)
                 Button(NSLocalizedString("Copy support information", comment: "Label of the button to copy support information"), action: model.copySupportInformation)
@@ -175,6 +176,87 @@ struct SettingsView: View {
                 Text(model.version)
                     .foregroundColor(.secondary)
             }
+        }
+    }
+    
+    private struct AdvancedFeaturesSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            Section {
+                NavigationLink {
+                    ServerSelection()
+                } label: {
+                    ServerSelectionCell()
+                }
+            } header: {
+                Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
+            }
+        }
+    }
+    
+    private struct ServerSelectionCell: View {
+        @AppStorage(PlaySRGSettingServiceURL) private var serviceUrlString: String?
+        
+        private var selectedServer: Server {
+            return Server.server(for: serviceUrlString)
+        }
+        
+        var body: some View {
+            HStack {
+                Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
+                Spacer()
+                Text(selectedServer.title)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    private struct ServerSelection: View {
+        var body: some View {
+            List {
+                ForEach(Server.servers) { server in
+                    ServerCell(server: server)
+                }
+            }
+            .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    private struct ServerCell: View {
+        let server: Server
+        
+        @AppStorage(PlaySRGSettingServiceURL) var serviceUrlString: String?
+        
+        private var selectedServer: Server {
+            return Server.server(for: serviceUrlString)
+        }
+        
+        var body: some View {
+            Button(action: select) {
+                HStack {
+                    Text(server.title)
+                    Spacer()
+                    if hasSelected(server) {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+            .foregroundColor(.white)
+        }
+        
+        private func hasSelected(_ server: Server) -> Bool {
+            if let serviceUrlString = serviceUrlString {
+                return server.url.absoluteString == serviceUrlString
+            }
+            else {
+                return server == selectedServer
+            }
+        }
+        
+        private func select() {
+            serviceUrlString = server.url.absoluteString
         }
     }
 }

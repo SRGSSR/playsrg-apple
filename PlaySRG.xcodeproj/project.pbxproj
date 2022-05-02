@@ -668,6 +668,11 @@
 		6F1A77852643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F1A77862643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F1A77872643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
+		6F1D901E28201E8200720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		6F1D901F28201E8200720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		6F1D902028201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		6F1D902128201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
+		6F1D902228201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
 		6F1EE835268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE836268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE837268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
@@ -3787,6 +3792,7 @@
 		0865F616223C7684007DE03B /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				0837A28D275E75D900BF7F93 /* Settings.server.plist */,
 				0828BB3922E62831009617A7 /* parsePlayUrl.js */,
 			);
 			path = Data;
@@ -4719,7 +4725,6 @@
 				6FB053E524D42021004B0CE1 /* Play RTS */,
 				6FB053E824D42022004B0CE1 /* Play SRF */,
 				6FB053E724D42022004B0CE1 /* Play SWI */,
-				0837A28D275E75D900BF7F93 /* Settings.server.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -6281,6 +6286,7 @@
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6E9267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
+				6F1D901E28201E8200720F93 /* Settings.server.plist in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FD633E31FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6FF7BBB222A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -6322,6 +6328,7 @@
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
+				6F1D901F28201E8200720F93 /* Settings.server.plist in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F93DE1420AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
@@ -6363,6 +6370,7 @@
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6EB267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
+				6F1D902028201E8300720F93 /* Settings.server.plist in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
@@ -6404,6 +6412,7 @@
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F7C89D220AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F0AF6EC267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
+				6F1D902128201E8300720F93 /* Settings.server.plist in Resources */,
 				6F93DE1620AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				0828BB3D22E62831009617A7 /* parsePlayUrl.js in Resources */,
@@ -6445,6 +6454,7 @@
 				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
+				6F1D902228201E8300720F93 /* Settings.server.plist in Resources */,
 				6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */,
