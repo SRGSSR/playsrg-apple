@@ -19,6 +19,7 @@ struct SettingsView: View {
             DisplaySection()
             PermissionsSection(model: model)
             ContentSection(model: model)
+            InformationSection(model: model)
         }
     }
     
@@ -105,6 +106,44 @@ struct SettingsView: View {
                 if let synchronizationStatus = model.synchronizationStatus {
                     Text(synchronizationStatus)
                 }
+            }
+        }
+    }
+    
+    private struct InformationSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            Section {
+                NavigationLink {
+                    
+                } label: {
+                    Text(NSLocalizedString("Features", comment: "Label of the button display the features"))
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Text(NSLocalizedString("What's new", comment: "Label of the button to display what's new information"))
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Text(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"))
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Text(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"))
+                }
+                NavigationLink {
+                    
+                } label: {
+                    Text(NSLocalizedString("Licenses", comment: "Label of the button to display licenses"))
+                }
+                Button(NSLocalizedString("Source code", comment: "Label of the button to acces the source code"), action: model.showSourceCode)
+                Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: model.becomeBetaTester)
+            } header: {
+                Text(NSLocalizedString("Information", comment: "Information section header"))
             }
         }
     }

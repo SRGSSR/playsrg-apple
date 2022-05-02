@@ -39,6 +39,16 @@ final class SettingsViewModel: ObservableObject {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
     
+    func showSourceCode() {
+        guard let url = ApplicationConfiguration.shared.sourceCodeURL else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    func becomeBetaTester() {
+        guard let url = ApplicationConfiguration.shared.betaTestingURL else { return }
+        UIApplication.shared.open(url)
+    }
+    
     func deleteHistory() {
         
     }
