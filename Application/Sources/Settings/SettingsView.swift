@@ -243,7 +243,7 @@ struct SettingsView: View {
                     }
                 }
             }
-            .foregroundColor(.white)
+            .foregroundColor(.primary)
         }
         
         private func hasSelected(_ server: Server) -> Bool {
