@@ -22,7 +22,7 @@ struct SettingsView: View {
                 PermissionsSection(model: model)
                 ContentSection(model: model)
                 InformationSection(model: model)
-                AdvancedFeaturesSection(model: model)
+                AdvancedFeaturesSection()
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
             .toolbar {
@@ -180,7 +180,9 @@ struct SettingsView: View {
     }
     
     private struct AdvancedFeaturesSection: View {
-        @ObservedObject var model: SettingsViewModel
+        @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
+        @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
+        @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         var body: some View {
             Section {
@@ -194,6 +196,9 @@ struct SettingsView: View {
                 } label: {
                     UserLocationSelectionCell()
                 }
+                Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
+                Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
+                Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
             }
