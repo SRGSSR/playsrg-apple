@@ -437,8 +437,7 @@
 - (void)settings:(id)sender
 {
     SettingsHostViewController *settingsViewController = [[SettingsHostViewController alloc] init];
-    NavigationController *settingsNavigationController = [[NavigationController alloc] initWithRootViewController:settingsViewController];
-    [self presentViewController:settingsNavigationController animated:YES completion:nil];
+    [self presentViewController:settingsViewController animated:YES completion:nil];
 }
 
 #pragma mark Notifications

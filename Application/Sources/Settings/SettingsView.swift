@@ -11,16 +11,31 @@ import UIKit
 
 struct SettingsView: View {
     @StateObject private var model = SettingsViewModel()
+    @FirstResponder private var firstResponder
     
     var body: some View {
-        List {
-            QualitySection()
-            PlaybackSection()
-            DisplaySection()
-            PermissionsSection(model: model)
-            ContentSection(model: model)
-            InformationSection(model: model)
+        NavigationView {
+            List {
+                QualitySection()
+                PlaybackSection()
+                DisplaySection()
+                PermissionsSection(model: model)
+                ContentSection(model: model)
+                InformationSection(model: model)
+            }
+            .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        firstResponder.sendAction(#selector(SettingsHostViewController.close(_:)))
+                    } label: {
+                        Image(decorative: "close")
+                    }
+                }
+            }
         }
+        .navigationViewStyle(.stack)
+        .responderChain(from: firstResponder)
     }
     
     private struct QualitySection: View {
@@ -158,18 +173,6 @@ class SettingsHostViewController: UIViewController {
         self.view = view
     }
     
-    private func closeBarButtonItem() -> UIBarButtonItem {
-        let barButtonItem = UIBarButtonItem(
-            image: UIImage(named: "close"),
-            landscapeImagePhone: nil,
-            style: .done,
-            target: self,
-            action: #selector(close(_:))
-        )
-        barButtonItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Close", comment: "Close button label on settings view");
-        return barButtonItem
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -189,12 +192,9 @@ class SettingsHostViewController: UIViewController {
         }
         
         hostController.didMove(toParent: self)
-        
-        title = NSLocalizedString("Settings", comment: "Settings view title")
-        navigationItem.leftBarButtonItem = closeBarButtonItem()
     }
     
-    @objc func close(_ sender: UIBarButtonItem) {
+    @objc fileprivate func close(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
 }
@@ -203,10 +203,6 @@ class SettingsHostViewController: UIViewController {
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            SettingsView()
-                .navigationTitle("Settings")
-        }
-        .navigationViewStyle(.stack)
+        SettingsView()
     }
 }
