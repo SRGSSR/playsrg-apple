@@ -5,6 +5,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 // MARK: View
 
@@ -16,6 +17,7 @@ struct SettingsView: View {
             QualitySection()
             PlaybackSection()
             DisplaySection()
+            PermissionsSection()
         }
     }
     
@@ -68,6 +70,22 @@ struct SettingsView: View {
             } footer: {
                 Text(NSLocalizedString("Always visible when VoiceOver is active.", comment: "Subtitle availability setting section footer"))
             }
+        }
+    }
+    
+    private struct PermissionsSection: View {
+        var body: some View {
+            Section {
+                Button(NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), action: openSystemSettings)
+            } header: {
+                Text(NSLocalizedString("Permissions", comment: "Permissions settings section header"))
+            } footer: {
+                Text(NSLocalizedString("Local network access must be allowed for Google Cast receiver discovery.", comment: "Permissions settings section footer"))
+            }
+        }
+        
+        private func openSystemSettings() {
+            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         }
     }
 }
