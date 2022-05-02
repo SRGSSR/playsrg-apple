@@ -5,7 +5,7 @@
 "Background video playback" = "Background video playback";
 "Become a beta tester" = "Become a beta tester";
 "Become a beta tester on Apple TV" = "Become a beta tester on Apple TV";
-"By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "High-definition medias are played over cellular networks by default. To avoid possible extra costs, disable this option so that high-definition medias are only played when connected to a Wi-Fi network.";
+"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "High-definition medias are played over cellular networks by default. To avoid possible extra costs, disable this option so that high-definition medias are only played when connected to a Wi-Fi network.";
 "Check for updates" = "Check for updates";
 "Clear all contents" = "Clear all contents";
 "Clear vector image cache" = "Clear vector image cache";

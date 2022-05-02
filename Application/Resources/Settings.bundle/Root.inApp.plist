@@ -12,7 +12,7 @@
 			<key>Title</key>
 			<string>Quality</string>
 			<key>FooterText</key>
-			<string>By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks.</string>
+			<string>By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.</string>
 		</dict>
 		<dict>
 			<key>Type</key>

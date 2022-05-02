@@ -5,7 +5,7 @@
 "Background video playback" = "Hintergrundwiedergabe";
 "Become a beta tester" = "Beta-Tester werden";
 "Become a beta tester on Apple TV" = "Werden Sie Beta-Tester auf Apple TV";
-"By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks." = "Standardmässig werden Videos immer in der bestmöglichen Qualität geladen. Um Kosten zu vermeiden, können Sie aber das Abspielen in höchster Qualität (High Definition) in Mobilfunknetzen unterbinden. Sie benötigen dann ein WLAN-Netzwerk, um Videos in HD abzuspielen.";
+"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Standardmässig werden Videos immer in der bestmöglichen Qualität geladen. Um Kosten zu vermeiden, können Sie aber das Abspielen in höchster Qualität (High Definition) in Mobilfunknetzen unterbinden. Sie benötigen dann ein WLAN-Netzwerk, um Videos in HD abzuspielen.";
 "Check for updates" = "Nach neuen Updates suchen";
 "Clear all contents" = "Allen Inhalt entfernen";
 "Clear vector image cache" = "Vektorgrafik-Cache leeren";
