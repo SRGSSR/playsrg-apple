@@ -25,11 +25,11 @@ struct SettingsView: View {
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
+                ToolbarItem {
                     Button {
                         firstResponder.sendAction(#selector(SettingsHostViewController.close(_:)))
                     } label: {
-                        Image(decorative: "close")
+                        Text(NSLocalizedString("Done", comment: "Done button title"))
                     }
                 }
             }
