@@ -17,7 +17,8 @@ struct SettingsView: View {
             QualitySection()
             PlaybackSection()
             DisplaySection()
-            PermissionsSection()
+            PermissionsSection(model: model)
+            ContentSection(model: model)
         }
     }
     
@@ -74,18 +75,37 @@ struct SettingsView: View {
     }
     
     private struct PermissionsSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
         var body: some View {
             Section {
-                Button(NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), action: openSystemSettings)
+                Button(NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), action: model.openSystemSettings)
             } header: {
                 Text(NSLocalizedString("Permissions", comment: "Permissions settings section header"))
             } footer: {
                 Text(NSLocalizedString("Local network access must be allowed for Google Cast receiver discovery.", comment: "Permissions settings section footer"))
             }
         }
+    }
+    
+    private struct ContentSection: View {
+        @ObservedObject var model: SettingsViewModel
         
-        private func openSystemSettings() {
-            UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        var body: some View {
+            Section {
+                Button(NSLocalizedString("Delete history", comment: "Label of the button to delete the history"), action: model.deleteHistory)
+                    .foregroundColor(Color.red)
+                Button(NSLocalizedString("Delete favorites", comment: "Label of the button to delete the favorites"), action: model.deleteFavorites)
+                    .foregroundColor(Color.red)
+                Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.deleteWatchLater)
+                    .foregroundColor(Color.red)
+            } header: {
+                Text(NSLocalizedString("Content", comment: "Content settings section header"))
+            } footer: {
+                if let synchronizationStatus = model.synchronizationStatus {
+                    Text(synchronizationStatus)
+                }
+            }
         }
     }
 }
