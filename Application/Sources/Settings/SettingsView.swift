@@ -145,27 +145,27 @@ struct SettingsView: View {
         var body: some View {
             Section {
                 NavigationLink {
-                    
+                    // TODO:
                 } label: {
                     Text(NSLocalizedString("Features", comment: "Label of the button display the features"))
                 }
                 NavigationLink {
-                    
+                    // TODO:
                 } label: {
                     Text(NSLocalizedString("What's new", comment: "Label of the button to display what's new information"))
                 }
                 NavigationLink {
-                    
+                    // TODO:
                 } label: {
                     Text(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"))
                 }
                 NavigationLink {
-                    
+                    // TODO:
                 } label: {
                     Text(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"))
                 }
                 NavigationLink {
-                    
+                    // TODO:
                 } label: {
                     Text(NSLocalizedString("Licenses", comment: "Label of the button to display licenses"))
                 }
