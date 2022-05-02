@@ -15,6 +15,7 @@ struct SettingsView: View {
         List {
             QualitySection()
             PlaybackSection()
+            DisplaySection()
         }
     }
     
@@ -50,6 +51,22 @@ struct SettingsView: View {
                 EmptyView()
             } footer: {
                 Text(NSLocalizedString("When enabled, video playback continues even when you leave the application.", comment: "Background video playback setting section footer"))
+            }
+        }
+    }
+    
+    private struct DisplaySection: View {
+        @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
+        @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
+        
+        var body: some View {
+            Section {
+                Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
+                Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
+            } header: {
+                Text(NSLocalizedString("Display", comment: "Display settings section header"))
+            } footer: {
+                Text(NSLocalizedString("Always visible when VoiceOver is active.", comment: "Subtitle availability setting section footer"))
             }
         }
     }
@@ -113,5 +130,6 @@ struct SettingsView_Previews: PreviewProvider {
             SettingsView()
                 .navigationTitle("Settings")
         }
+        .navigationViewStyle(.stack)
     }
 }
