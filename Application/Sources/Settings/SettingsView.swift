@@ -185,9 +185,14 @@ struct SettingsView: View {
         var body: some View {
             Section {
                 NavigationLink {
-                    ServerSelection()
+                    ServerSelectionView()
                 } label: {
                     ServerSelectionCell()
+                }
+                NavigationLink {
+                    UserLocationSelectionView()
+                } label: {
+                    UserLocationSelectionCell()
                 }
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
@@ -212,7 +217,7 @@ struct SettingsView: View {
         }
     }
     
-    private struct ServerSelection: View {
+    private struct ServerSelectionView: View {
         var body: some View {
             List {
                 ForEach(Server.servers) { server in
@@ -257,6 +262,75 @@ struct SettingsView: View {
         
         private func select() {
             serviceUrlString = server.url.absoluteString
+        }
+    }
+    
+    private enum UserLocation: String, CaseIterable, Identifiable {
+        case `default` = ""
+        case WW
+        case CH
+        
+        var id: Self {
+            return self
+        }
+        
+        var description: String {
+            switch self {
+            case .WW:
+                return PlaySRGSettingsLocalizedString("Outside Switzerland", comment: "User location setting state")
+            case .CH:
+                return PlaySRGSettingsLocalizedString("Ignore location", comment: "User location setting state")
+            case .`default`:
+                return PlaySRGSettingsLocalizedString("Default (IP-based location)", comment: "User location setting state")
+            }
+        }
+    }
+    
+    private struct UserLocationSelectionCell: View {
+        @AppStorage(PlaySRGSettingUserLocation) private var userLocation = UserLocation.default
+        
+        var body: some View {
+            HStack {
+                Text(NSLocalizedString("User location", comment: "Label of the button to user location selection"))
+                Spacer()
+                Text(userLocation.description)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    private struct UserLocationSelectionView: View {
+        var body: some View {
+            List {
+                ForEach(UserLocation.allCases) { location in
+                    LocationCell(location: location)
+                }
+            }
+            .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    private struct LocationCell: View {
+        let location: UserLocation
+        
+        @AppStorage(PlaySRGSettingUserLocation) private var userLocation = UserLocation.default
+        
+        var body: some View {
+            Button(action: select) {
+                HStack {
+                    Text(location.description)
+                    Spacer()
+                    if location == userLocation {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+            .foregroundColor(.primary)
+        }
+        
+        private func select() {
+            userLocation = location
         }
     }
 }
