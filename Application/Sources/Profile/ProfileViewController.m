@@ -436,7 +436,7 @@
 
 - (void)settings:(id)sender
 {
-    SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
+    SettingsHostViewController *settingsViewController = [[SettingsHostViewController alloc] init];
     NavigationController *settingsNavigationController = [[NavigationController alloc] initWithRootViewController:settingsViewController];
     [self presentViewController:settingsNavigationController animated:YES completion:nil];
 }

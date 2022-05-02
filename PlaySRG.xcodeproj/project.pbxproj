@@ -863,6 +863,16 @@
 		6F426B4425680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4525680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
 		6F426B4625680A8F00DD22AB /* BlockingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */; };
+		6F46B7B5281FB1F100D20748 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F46B7B6281FB1F100D20748 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F46B7B7281FB1F100D20748 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F46B7B8281FB1F100D20748 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F46B7B9281FB1F100D20748 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F46B7BB281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F46B7BC281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F46B7BD281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F46B7BE281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F46B7BF281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
 		6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
@@ -2916,6 +2926,8 @@
 		6F3F1AB925060496000FF4DD /* MediaVisualView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVisualView.swift; sourceTree = "<group>"; };
 		6F40B7782726CB8300DDFED0 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
+		6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		6F46B7BA281FB1FB00D20748 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6F475F901EB37BC6003021EA /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
@@ -3673,8 +3685,10 @@
 				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
 				6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */,
 				6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */,
+				6F46B7BA281FB1FB00D20748 /* SettingsView.swift */,
 				0806E7B51D50D918002ED406 /* SettingsViewController.h */,
 				0806E7B61D50D918002ED406 /* SettingsViewController.m */,
+				6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */,
 				6F3E09FF23D055DD009B00C1 /* SettingTableViewCell.h */,
 				6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
@@ -8425,6 +8439,7 @@
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
+				6F46B7B5281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				08280F162258F02400AC978D /* WatchLater.m in Sources */,
 				6FC6A12A2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				08A3ED021FA2612E00A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -8491,6 +8506,7 @@
 				086BDE151EA63D3800965F45 /* PlayMiniPlayerView.m in Sources */,
 				6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */,
 				6F7EEBF322DC7AA7005E5A97 /* SearchSettingMultiSelectionCell.m in Sources */,
+				6F46B7BB281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6FEC91A921A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FE9048626F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
@@ -8645,6 +8661,7 @@
 				0821D53F227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D7268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F47607F1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
+				6F46B7BC281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6F475FC41EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77842643CAB600A00EFC /* EmptyView.swift in Sources */,
 				6FD633EB1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -8810,6 +8827,7 @@
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
+				6F46B7B6281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6F4CF737281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B391DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8B1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
@@ -8883,6 +8901,7 @@
 				0821D540227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D8268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F4760861EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
+				6F46B7BD281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6F475FC51EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77852643CAB600A00EFC /* EmptyView.swift in Sources */,
 				6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -9048,6 +9067,7 @@
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
+				6F46B7B7281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6F4CF738281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B3A1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8C1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
@@ -9121,6 +9141,7 @@
 				0821D541227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D9268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F47608D1EB37DF1003021EA /* UIColor+PlaySRG.m in Sources */,
+				6F46B7BE281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6F475FC61EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77862643CAB600A00EFC /* EmptyView.swift in Sources */,
 				6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -9286,6 +9307,7 @@
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
+				6F46B7B8281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6F4CF739281341B7006AFE6D /* ImageView.swift in Sources */,
 				6F556B3B1DDC419800B5DEA2 /* SettingsBaseViewController.m in Sources */,
 				08C68F8D1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
@@ -9377,6 +9399,7 @@
 				6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EE02664BFAB0016B793 /* Colors.swift in Sources */,
 				6FAE562026C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F46B7B9281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6F73C63E271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				0806E7BC1D50D919002ED406 /* SettingsViewController.m in Sources */,
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
@@ -9557,6 +9580,7 @@
 				6FC24A8226395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
 				6FAE025E266812B300791A76 /* FocusTracker.swift in Sources */,
 				08F5DBC5262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
+				6F46B7BF281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70042682022C0004437E /* ApplicationSettings+Common.m in Sources */,
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
