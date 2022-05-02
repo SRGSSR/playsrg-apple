@@ -68,4 +68,8 @@ final class SettingsViewModel: ObservableObject {
     func deleteWatchLater() {
         
     }
+    
+    func subscribeToAllShows() {
+        
+    }
 }

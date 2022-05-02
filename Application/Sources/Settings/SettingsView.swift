@@ -22,7 +22,7 @@ struct SettingsView: View {
                 PermissionsSection(model: model)
                 ContentSection(model: model)
                 InformationSection(model: model)
-                AdvancedFeaturesSection()
+                AdvancedFeaturesSection(model: model)
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
             .toolbar {
@@ -180,6 +180,8 @@ struct SettingsView: View {
     }
     
     private struct AdvancedFeaturesSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
         @AppStorage(PlaySRGSettingPresenterModeEnabled) var isPresenterModeEnabled = false
         @AppStorage(PlaySRGSettingStandaloneEnabled) var isStandaloneEnabled = false
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
@@ -204,8 +206,11 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+                Button(NSLocalizedString("Subscribe to all shows", comment: "Label of the button to subscribe to all shows"), action: model.subscribeToAllShows)
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer"))
             }
         }
     }
