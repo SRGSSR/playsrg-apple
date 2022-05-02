@@ -157,8 +157,23 @@ struct SettingsView: View {
                 }
                 Button(NSLocalizedString("Source code", comment: "Label of the button to acces the source code"), action: model.showSourceCode)
                 Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: model.becomeBetaTester)
+                VersionCell(model: model)
+                Button(NSLocalizedString("Copy support information", comment: "Label of the button to copy support information"), action: model.copySupportInformation)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
+            }
+        }
+    }
+    
+    private struct VersionCell: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            HStack {
+                Text(NSLocalizedString("Version", comment: "Version label in settings"))
+                Spacer()
+                Text(model.version)
+                    .foregroundColor(.secondary)
             }
         }
     }

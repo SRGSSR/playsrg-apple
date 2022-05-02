@@ -35,6 +35,10 @@ final class SettingsViewModel: ObservableObject {
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), Self.string(for: synchronizationDate))
     }
     
+    var version: String {
+        return Bundle.main.play_friendlyVersionNumber
+    }
+    
     func openSystemSettings() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
@@ -47,6 +51,10 @@ final class SettingsViewModel: ObservableObject {
     func becomeBetaTester() {
         guard let url = ApplicationConfiguration.shared.betaTestingURL else { return }
         UIApplication.shared.open(url)
+    }
+    
+    func copySupportInformation() {
+        // TODO: Improvements pending, see PLAYRTS-4185
     }
     
     func deleteHistory() {
