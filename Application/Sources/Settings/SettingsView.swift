@@ -199,6 +199,11 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                 Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
+                NavigationLink {
+                    PosterImagesSelectionView()
+                } label: {
+                    PosterImagesSelectionCell()
+                }
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
             }
@@ -206,10 +211,10 @@ struct SettingsView: View {
     }
     
     private struct ServerSelectionCell: View {
-        @AppStorage(PlaySRGSettingServiceURL) private var serviceUrlString: String?
+        @AppStorage(PlaySRGSettingServiceURL) private var selectedServiceUrlString: String?
         
         private var selectedServer: Server {
-            return Server.server(for: serviceUrlString)
+            return Server.server(for: selectedServiceUrlString)
         }
         
         var body: some View {
@@ -237,10 +242,10 @@ struct SettingsView: View {
     private struct ServerCell: View {
         let server: Server
         
-        @AppStorage(PlaySRGSettingServiceURL) var serviceUrlString: String?
+        @AppStorage(PlaySRGSettingServiceURL) var selectedServiceUrlString: String?
         
         private var selectedServer: Server {
-            return Server.server(for: serviceUrlString)
+            return Server.server(for: selectedServiceUrlString)
         }
         
         var body: some View {
@@ -257,7 +262,7 @@ struct SettingsView: View {
         }
         
         private func hasSelected(_ server: Server) -> Bool {
-            if let serviceUrlString = serviceUrlString {
+            if let serviceUrlString = selectedServiceUrlString {
                 return server.url.absoluteString == serviceUrlString
             }
             else {
@@ -266,7 +271,7 @@ struct SettingsView: View {
         }
         
         private func select() {
-            serviceUrlString = server.url.absoluteString
+            selectedServiceUrlString = server.url.absoluteString
         }
     }
     
@@ -292,13 +297,13 @@ struct SettingsView: View {
     }
     
     private struct UserLocationSelectionCell: View {
-        @AppStorage(PlaySRGSettingUserLocation) private var userLocation = UserLocation.default
+        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
         
         var body: some View {
             HStack {
-                Text(NSLocalizedString("User location", comment: "Label of the button to user location selection"))
+                Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
                 Spacer()
-                Text(userLocation.description)
+                Text(selectedUserLocation.description)
                     .foregroundColor(.secondary)
             }
         }
@@ -307,8 +312,8 @@ struct SettingsView: View {
     private struct UserLocationSelectionView: View {
         var body: some View {
             List {
-                ForEach(UserLocation.allCases) { location in
-                    LocationCell(location: location)
+                ForEach(UserLocation.allCases) { userLocation in
+                    LocationCell(userLocation: userLocation)
                 }
             }
             .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
@@ -317,16 +322,16 @@ struct SettingsView: View {
     }
     
     private struct LocationCell: View {
-        let location: UserLocation
+        let userLocation: UserLocation
         
-        @AppStorage(PlaySRGSettingUserLocation) private var userLocation = UserLocation.default
+        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
         
         var body: some View {
             Button(action: select) {
                 HStack {
-                    Text(location.description)
+                    Text(userLocation.description)
                     Spacer()
-                    if location == userLocation {
+                    if userLocation == selectedUserLocation {
                         Image(systemName: "checkmark")
                     }
                 }
@@ -335,7 +340,76 @@ struct SettingsView: View {
         }
         
         private func select() {
-            userLocation = location
+            selectedUserLocation = userLocation
+        }
+    }
+    
+    private enum PosterImages: String, CaseIterable, Identifiable {
+        case `default`
+        case forced
+        case ignored
+        
+        var id: Self {
+            return self
+        }
+        
+        var description: String {
+            switch self {
+            case .forced:
+                return PlaySRGSettingsLocalizedString("Force", comment: "Poster images setting state")
+            case .ignored:
+                return PlaySRGSettingsLocalizedString("Ignore", comment: "Poster images setting state")
+            case .`default`:
+                return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
+            }
+        }
+    }
+    
+    private struct PosterImagesSelectionCell: View {
+        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+        
+        var body: some View {
+            HStack {
+                Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                Spacer()
+                Text(selectedPosterImages.description)
+                    .foregroundColor(.secondary)
+            }
+        }
+    }
+    
+    private struct PosterImagesSelectionView: View {
+        var body: some View {
+            List {
+                ForEach(PosterImages.allCases) { posterImages in
+                    PosterImagesCell(posterImages: posterImages)
+                }
+            }
+            .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+            .navigationBarTitleDisplayMode(.inline)
+        }
+    }
+    
+    private struct PosterImagesCell: View {
+        let posterImages: PosterImages
+        
+        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+        
+        var body: some View {
+            Button(action: select) {
+                HStack {
+                    Text(posterImages.description)
+                    Spacer()
+                    if posterImages == selectedPosterImages {
+                        Image(systemName: "checkmark")
+                    }
+                }
+            }
+            .foregroundColor(.primary)
+        }
+        
+        private func select() {
+            selectedPosterImages = posterImages
         }
     }
 }
