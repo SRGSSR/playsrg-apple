@@ -7,6 +7,7 @@
 import Combine
 import SRGIdentity
 import SRGUserData
+import YYWebImage
 
 // MARK: View model
 
@@ -58,18 +59,41 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func deleteHistory() {
-        
+        // TODO:
     }
     
     func deleteFavorites() {
-        
+        // TODO:
     }
     
     func deleteWatchLater() {
-        
+        // TODO:
     }
     
     func subscribeToAllShows() {
+        // TODO:
+    }
+    
+    func clearWebCache() {
+        URLCache.shared.removeAllCachedResponses()
         
+        if let cache = YYWebImageManager.shared().cache {
+            cache.memoryCache.removeAllObjects()
+            cache.diskCache.removeAllObjects()
+        }
+    }
+    
+    func clearVectorImageCache() {
+        UIImage.srg_clearVectorImageCache()
+    }
+    
+    func clearAllContents() {
+        clearWebCache()
+        clearVectorImageCache()
+        Download.removeAllDownloads()
+    }
+    
+    func simulateMemoryWarning() {
+        // TODO:
     }
 }

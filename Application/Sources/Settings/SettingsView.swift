@@ -23,6 +23,7 @@ struct SettingsView: View {
                 ContentSection(model: model)
                 InformationSection(model: model)
                 AdvancedFeaturesSection(model: model)
+                ResetSection(model: model)
             }
             .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
             .toolbar {
@@ -111,11 +112,11 @@ struct SettingsView: View {
         var body: some View {
             Section {
                 Button(NSLocalizedString("Delete history", comment: "Label of the button to delete the history"), action: model.deleteHistory)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(.red)
                 Button(NSLocalizedString("Delete favorites", comment: "Label of the button to delete the favorites"), action: model.deleteFavorites)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(.red)
                 Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.deleteWatchLater)
-                    .foregroundColor(Color.red)
+                    .foregroundColor(.red)
             } header: {
                 Text(NSLocalizedString("Content", comment: "Content settings section header"))
             } footer: {
@@ -415,6 +416,26 @@ struct SettingsView: View {
         
         private func select() {
             selectedPosterImages = posterImages
+        }
+    }
+    
+    private struct ResetSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            Section {
+                Button(NSLocalizedString("Clear web cache", comment: "Label of the button to clear the web cache"), action: model.clearWebCache)
+                    .foregroundColor(.red)
+                Button(NSLocalizedString("Clear vector image cache", comment: "Label of the button to clear the vector image cache"), action: model.clearVectorImageCache)
+                    .foregroundColor(.red)
+                Button(NSLocalizedString("Clear all contents", comment: "Label of the button to clear all contents"), action: model.clearAllContents)
+                    .foregroundColor(.red)
+                Button(NSLocalizedString("Simulate memory warning", comment: "Label of the button to simulate a memory warning"), action: model.simulateMemoryWarning)
+            } header: {
+                Text(NSLocalizedString("Reset", comment: "Reset section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
+            }
         }
     }
 }
