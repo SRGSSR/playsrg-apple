@@ -22,10 +22,15 @@ struct MediaDescription {
     }
     
     private static func formattedDuration(from: Date, to: Date) -> String? {
-        let days = Calendar.current.dateComponents([.day], from: from, to: to).day!
-        switch days {
+        let components = Calendar.current.dateComponents([.day, .minute], from: from, to: to)
+        switch components.day! {
         case 0:
-            return PlayFormattedHours(to.timeIntervalSince(from))
+            switch components.minute! {
+            case 0..<60:
+                return PlayFormattedMinutes(to.timeIntervalSince(from))
+            default:
+                return PlayFormattedHours(to.timeIntervalSince(from))
+            }
         case 1...3:
             return PlayFormattedDays(to.timeIntervalSince(from))
         default:

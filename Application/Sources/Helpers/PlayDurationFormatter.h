@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard duration formatters for a single unit.
  */
+OBJC_EXPORT NSString *PlayFormattedMinutes(NSTimeInterval duration);
 OBJC_EXPORT NSString *PlayFormattedHours(NSTimeInterval duration);
 OBJC_EXPORT NSString *PlayFormattedDays(NSTimeInterval duration);
 

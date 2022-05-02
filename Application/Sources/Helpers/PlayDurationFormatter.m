@@ -6,6 +6,19 @@
 
 #import "PlayDurationFormatter.h"
 
+NSString *PlayFormattedMinutes(NSTimeInterval duration)
+{
+    static NSDateComponentsFormatter *s_dateComponentsFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_dateComponentsFormatter = [[NSDateComponentsFormatter alloc] init];
+        s_dateComponentsFormatter.allowedUnits = NSCalendarUnitMinute;
+        s_dateComponentsFormatter.unitsStyle = NSDateComponentsFormatterUnitsStyleFull;
+        s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorPad;
+    });
+    return [s_dateComponentsFormatter stringFromTimeInterval:fmax(60., duration)];
+}
+
 NSString *PlayFormattedHours(NSTimeInterval duration)
 {
     static NSDateComponentsFormatter *s_dateComponentsFormatter;

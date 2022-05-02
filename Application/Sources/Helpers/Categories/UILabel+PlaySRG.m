@@ -24,8 +24,11 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     if (duration >= 60. * 60. * 24.) {
         return PlayFormattedDays(duration);
     }
-    else {
+    else if (duration >= 60. * 60.) {
         return PlayFormattedHours(duration);
+    }
+    else {
+        return PlayFormattedMinutes(duration);
     }
 }
 
