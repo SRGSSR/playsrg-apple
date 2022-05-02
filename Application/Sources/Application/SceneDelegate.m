@@ -41,8 +41,8 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     [NSNotificationCenter.defaultCenter addObserver:self
-                                           selector:@selector(settingDidChange:)
-                                               name:kIASKAppSettingChanged
+                                           selector:@selector(userDefaultsDidChange:)
+                                               name:NSUserDefaultsDidChangeNotification
                                              object:nil];
     
     UIWindowScene *windowScene = (UIWindowScene *)scene;
@@ -197,12 +197,9 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark Notifications
 
-- (void)settingDidChange:(NSNotification *)notification
+- (void)userDefaultsDidChange:(NSNotification *)notification
 {
-    NSNumber *presenterModeEnabled = notification.userInfo[PlaySRGSettingPresenterModeEnabled];
-    if (presenterModeEnabled) {
-        [PresenterMode enable:presenterModeEnabled.boolValue];
-    }
+    [PresenterMode enable:ApplicationSettingPresenterModeEnabled()];
 }
 
 #pragma mark User interface changes
