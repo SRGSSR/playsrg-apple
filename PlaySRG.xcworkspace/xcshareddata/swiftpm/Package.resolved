@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "f24aea12599525de279cb28d959e35177f9af7e5",
-        "version" : "16.5.1"
+        "revision" : "9ff2ee8150b94a93a6f7690eb69d97dba21b48bf",
+        "version" : "16.6.0"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "4f3b39799d1f7bec9961db3ed3f860723704df71"
+        "branch" : "feature/modern-player-gestures",
+        "revision" : "7b9fc7a95dce82780a46107f7e609903621488aa"
       }
     },
     {
