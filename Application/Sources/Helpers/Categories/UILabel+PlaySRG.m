@@ -55,7 +55,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
         if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
                 && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
-            NSDateComponents *remainingDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
+            NSDateComponents *remainingDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
             if (remainingDateComponents.day > kDayNearExpirationThreshold) {
                 NSString *expiration = [NSString stringWithFormat:NSLocalizedString(@"Available until %@", @"Availability until date, specified as parameter"), [NSDateFormatter.play_shortDateFormatter stringFromDate:mediaMetadata.endDate].play_localizedUppercaseFirstLetterString];
                 // Unbreakable spaces before / after the separator
@@ -96,7 +96,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
              && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
         self.backgroundColor = UIColor.play_orangeColor;
         
-        NSDateComponents *monthsDateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
+        NSDateComponents *monthsDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];
         if (monthsDateComponents.day <= kDayNearExpirationThreshold) {
             NSTimeInterval timeIntervalBeforeEnd = [mediaMetadata.endDate timeIntervalSinceDate:nowDate];
             text = [NSString stringWithFormat:NSLocalizedString(@"%@ left", @"Short label displayed on a media expiring soon"), LabelFormattedDuration(timeIntervalBeforeEnd)];

@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGDataProviderModel
 import UIKit
 
 // MARK: Layout
@@ -75,7 +76,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     
     private static func endDate(from startDate: Date) -> Date {
         let dateComponent = DateComponents(day: 1, hour: 3)
-        return Calendar.current.date(byAdding: dateComponent, to: startDate)!
+        return Calendar.srgDefault.date(byAdding: dateComponent, to: startDate)!
     }
     
     private static func dateInterval(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>) -> DateInterval? {

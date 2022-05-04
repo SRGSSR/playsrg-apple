@@ -8,12 +8,15 @@
 
 #import "NSBundle+PlaySRG.h"
 
+@import SRGDataProviderModel;
+
 NSString *PlayAccessibilityDateFromDate(NSDate *date)
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.timeZone = NSTimeZone.srg_defaultTimeZone;
         s_dateFormatter.dateStyle = NSDateFormatterLongStyle;
         s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
     });
@@ -26,6 +29,7 @@ NSString *PlayAccessibilityRelativeDateFromDate(NSDate *date)
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
         s_dateFormatter = [[NSDateFormatter alloc] init];
+        s_dateFormatter.timeZone = NSTimeZone.srg_defaultTimeZone;
         s_dateFormatter.dateStyle = NSDateFormatterLongStyle;
         s_dateFormatter.timeStyle = NSDateFormatterNoStyle;
         s_dateFormatter.doesRelativeDateFormatting = YES;
@@ -58,7 +62,7 @@ NSString *PlayAccessibilityTimeFromDate(NSDate *date)
         s_dateComponentsFormatter.zeroFormattingBehavior = NSDateComponentsFormatterZeroFormattingBehaviorNone;
     });
     
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute
-                                                                   fromDate:date];
+    NSDateComponents *components = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitHour | NSCalendarUnitMinute
+                                                                     fromDate:date];
     return [s_dateComponentsFormatter stringFromDateComponents:components];
 }

@@ -109,7 +109,7 @@ final class ProgramGuideViewModel: ObservableObject {
     }
     
     func switchToTonight() {
-        let date = Calendar.current.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
+        let date = Calendar.srgDefault.date(bySettingHour: 20, minute: 30, second: 0, of: Date())!
         switchToDate(date)
     }
     
