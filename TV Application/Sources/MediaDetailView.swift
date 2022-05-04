@@ -135,10 +135,6 @@ struct MediaDetailView: View {
                         DurationBadge(duration: duration)
                     }
                 }
-                
-                if let isWebFirst = model.media?.play_isWebFirst, isWebFirst {
-                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color.srgBlue)
-                }
                 if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
                     AttributeView(icon: "subtitle_tracks", values: subtitleLanguages)
                 }

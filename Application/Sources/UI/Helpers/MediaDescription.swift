@@ -173,7 +173,7 @@ struct MediaDescription {
                 }
                 else if media.play_isWebFirst {
                     return BadgeProperties(
-                        text: NSLocalizedString("Web first", comment: "Web first label on media cells"),
+                        text: NSLocalizedString("Web first", comment: "Short label identifying a web first content."),
                         color: .srgBlue
                     )
                 }
