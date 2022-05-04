@@ -119,7 +119,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Web first label on media cells")];
+    self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Short label identifying a web first content.")];
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColor.whiteColor;
 }

@@ -657,8 +657,7 @@
    Context menu action to add a video to the later list */
 "Watch later" = "Guardar pli tard";
 
-/* Web first label on media cells
-   Web first label on media detail page */
+/* Short label identifying a web first content. */
 "Web first" = "Web l'emprim";
 
 /* Title displayed at the top of the What's new view */
