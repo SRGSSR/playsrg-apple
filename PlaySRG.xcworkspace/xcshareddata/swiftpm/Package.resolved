@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "15ccdfd25ac55b9239b82809531ff26605e7556e",
-        "version" : "9.1.2"
+        "revision" : "4073d04bf28943353b706f461d4ca2a89abb69c1",
+        "version" : "9.1.3"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "feature/modern-player-gestures",
-        "revision" : "7b9fc7a95dce82780a46107f7e609903621488aa"
+        "revision" : "d84c1d7aa643f99aeeed145959963a15dcdbdf33"
       }
     },
     {
@@ -312,7 +312,7 @@
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "c215ad7235d28e43a04f9ab2f244fd67b8cc6cf7"
+        "revision" : "95f56ad0ac518cbc5231b9762bad9421a5b66d47"
       }
     },
     {
