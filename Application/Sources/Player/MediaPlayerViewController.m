@@ -1880,7 +1880,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                      action:@selector(exitFullScreen:)];
     [keyCommands addObject:exitFullScreenCommand];
     
-    if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
+    if ([self.letterboxController canSkipForward]) {
         UIKeyCommand *skipForwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
                                                                modifierFlags:0
                                                                       action:@selector(skipForward:)];
@@ -1892,7 +1892,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [keyCommands addObject:skipForwardCommand];
     }
     
-    if ([self.letterboxController canSkipWithInterval:-SRGLetterboxBackwardSkipInterval]) {
+    if ([self.letterboxController canSkipBackward]) {
         UIKeyCommand *skipBackwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
                                                                 modifierFlags:0
                                                                        action:@selector(skipBackward:)];
@@ -1940,12 +1940,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)skipForward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:SRGLetterboxForwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipForwardWithCompletionHandler:nil];
 }
 
 - (void)skipBackward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:-SRGLetterboxBackwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipBackwardWithCompletionHandler:nil];
 }
 
 - (void)skipToLive:(UIKeyCommand *)command
