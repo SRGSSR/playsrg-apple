@@ -196,8 +196,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIGestureRecognizer *detailsGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIPanGestureRecognizer *pullDownGestureRecognizer;
 
-@property (nonatomic, weak) UIPinchGestureRecognizer *pinchGestureRecognizer;
-
 @property (nonatomic, getter=isTransitioning) BOOL transitioning;           // Whether the UI is currently transitioning between class sizes
 @property (nonatomic, getter=isStatusBarHidden) BOOL statusBarHidden;
 
@@ -523,13 +521,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.closeButton.accessibilityIdentifier = AccessibilityIdentifierCloseButton;
     
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
-    
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-        pinchGestureRecognizer.delegate = self;
-        [self.letterboxView addGestureRecognizer:pinchGestureRecognizer];
-        self.pinchGestureRecognizer = pinchGestureRecognizer;
-    }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
@@ -1763,7 +1754,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if (gestureRecognizer == self.pullDownGestureRecognizer || gestureRecognizer == self.pinchGestureRecognizer) {
+    if (gestureRecognizer == self.pullDownGestureRecognizer) {
         return ! [touch.view isKindOfClass:UISlider.class];
     }
     else {
@@ -1784,9 +1775,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     if (gestureRecognizer == self.pullDownGestureRecognizer) {
-        return [otherGestureRecognizer isKindOfClass:SRGActivityGestureRecognizer.class];
-    }
-    else if (gestureRecognizer == self.pinchGestureRecognizer) {
         return [otherGestureRecognizer isKindOfClass:SRGActivityGestureRecognizer.class];
     }
     else {
@@ -1892,7 +1880,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                      action:@selector(exitFullScreen:)];
     [keyCommands addObject:exitFullScreenCommand];
     
-    if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
+    if ([self.letterboxController canSkipForward]) {
         UIKeyCommand *skipForwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
                                                                modifierFlags:0
                                                                       action:@selector(skipForward:)];
@@ -1904,7 +1892,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [keyCommands addObject:skipForwardCommand];
     }
     
-    if ([self.letterboxController canSkipWithInterval:-SRGLetterboxBackwardSkipInterval]) {
+    if ([self.letterboxController canSkipBackward]) {
         UIKeyCommand *skipBackwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
                                                                 modifierFlags:0
                                                                        action:@selector(skipBackward:)];
@@ -1952,12 +1940,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)skipForward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:SRGLetterboxForwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipForwardWithCompletionHandler:nil];
 }
 
 - (void)skipBackward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:-SRGLetterboxBackwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipBackwardWithCompletionHandler:nil];
 }
 
 - (void)skipToLive:(UIKeyCommand *)command
@@ -2274,13 +2262,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     if (self.letterboxView.userInterfaceTogglable) {
         [self.letterboxView setUserInterfaceHidden:! self.letterboxView.userInterfaceHidden animated:YES togglable:YES];
-    }
-}
-
-- (IBAction)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        [self.letterboxView setFullScreen:(gestureRecognizer.scale > 1.f) animated:YES];
     }
 }
 
