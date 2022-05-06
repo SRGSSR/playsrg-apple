@@ -65,7 +65,7 @@ struct SectionShowHeaderView: View {
     }
     
     private var imageUrl: URL? {
-        return url(for: show.image, size: .large)
+        return url(for: show.image, size: .medium)
     }
     
     var body: some View {

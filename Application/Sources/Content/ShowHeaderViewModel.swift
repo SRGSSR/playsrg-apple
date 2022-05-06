@@ -37,7 +37,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var imageUrl: URL? {
-        return url(for: show?.image, size: .large)
+        return url(for: show?.image, size: .medium)
     }
     
     var favoriteIcon: String {
