@@ -19147,7 +19147,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/modern-player-gestures";
+				branch = develop;
 				kind = branch;
 			};
 		};

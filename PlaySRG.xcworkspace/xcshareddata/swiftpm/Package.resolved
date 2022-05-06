@@ -240,7 +240,7 @@
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "89f7eb316a626473007914a02949dd988e197f14"
+        "revision" : "b1bd6f8be7dd0f91a36b5fccc7cbe343b02213c0"
       }
     },
     {
@@ -267,7 +267,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "2209f6a345d47489e135d336b2c85e2490293d16"
+        "revision" : "7884e722207a99b826661e245241d133f440459c"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "feature/modern-player-gestures",
-        "revision" : "d84c1d7aa643f99aeeed145959963a15dcdbdf33"
+        "branch" : "develop",
+        "revision" : "bc6ab470140faa558e3806fc0fae866c30681be0"
       }
     },
     {
