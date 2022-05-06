@@ -158,6 +158,7 @@
   "3.6.0-379": "- Add playback speed support in the player.\n- Persist audio track selection between content.",
   "3.6.0-380": "- Fix a playback speed measurement.\n- Fix a push notification potencial issue with a backup restoration.",
   "3.6.0-381": "- Preview thumbnails in the player, if content provides them.\n- Update Italian, French and German translations for playback speed feature.\n- Fix a playback speed measurement.",
-  "3.6.0-382": "- Playback speed button for CarPlay.\n- SRG released libraries.\n- AppStore release.",
-  "3.6.1-383": "- External TVP channels in TV guide for SRF and RTR.\n- Fix TV guide list view glitch sometimes appeared."
+  "3.6.0-382": "- Playback speed button for CarPlay. [RSI, RTR, RTS, SRF]\n- SRG released libraries.\n- AppStore release.",
+  "3.6.1-383": "- External TVP channels in TV guide. [RTR, SRF]\n- Fix TV guide list view glitch sometimes appeared. [RTR, RTS, SRF]",
+  "3.6.1-384": "- Add double tap gesture on player to skip to next or previous time position.\n- Fix TV guide layout issue when displayed in a time zone other than Zurich. [RTR, RTS, SRF]\n- Fix download button in player view. [RTS]"
 }

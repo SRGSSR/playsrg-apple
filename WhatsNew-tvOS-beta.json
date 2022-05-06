@@ -35,5 +35,6 @@
   "1.6.0-34": "- Fix a playback speed measurement.",
   "1.6.0-35": "- Update Italian, French and German translations for playback speed feature.\n- Fix a playback speed measurement.",
   "1.6.0-36": "- SRG released libraries.\n- AppStore release.",
-  "1.6.1-37": "- External TVP channels in TV guide for SRF and RTR."
+  "1.6.1-37": "- External TVP channels in TV guide. [RTR, SRF]",
+  "1.6.1-38": "- Fix TV guide layout issue when displayed in a time zone other than Zurich. [RTR, RTS, SRF]"
 }
