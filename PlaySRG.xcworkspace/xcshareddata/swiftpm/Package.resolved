@@ -104,8 +104,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "4073d04bf28943353b706f461d4ca2a89abb69c1",
-        "version" : "9.1.3"
+        "revision" : "b905c49326b72211531ed9d7baa02d724828a8dc",
+        "version" : "9.1.4"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "bc6ab470140faa558e3806fc0fae866c30681be0"
+        "revision" : "f8e55f6686da500aff4f21e6974e8f0a3f041590"
       }
     },
     {
