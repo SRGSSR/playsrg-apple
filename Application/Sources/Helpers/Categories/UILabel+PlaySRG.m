@@ -104,7 +104,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     }
     
     if (text) {
-        self.text = [NSString stringWithFormat:@"%@    ", text];
+        self.text = [NSString stringWithFormat:@"%@    ", text].uppercaseString;
         self.hidden = NO;
     }
     else {
@@ -119,7 +119,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     self.layer.cornerRadius = LayoutStandardLabelCornerRadius;
     self.layer.masksToBounds = YES;
     self.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
-    self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Short label identifying a web first content.")];
+    self.text = [NSString stringWithFormat:@"%@    ", NSLocalizedString(@"Web first", @"Short label identifying a web first content.")].uppercaseString;
     self.textAlignment = NSTextAlignmentCenter;
     self.textColor = UIColor.whiteColor;
 }
