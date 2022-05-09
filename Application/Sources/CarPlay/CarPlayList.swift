@@ -15,7 +15,7 @@ enum CarPlayList {
     case livestreams
     case mostPopular
     case mostPopularMedias(radioChannel: RadioChannel)
-    case livestreamMedias(channel: SRGChannel, medias: [SRGMedia])
+    case livestream(channel: SRGChannel, media: SRGMedia)
     
     private static let pageSize: UInt = 20
     
@@ -29,7 +29,7 @@ enum CarPlayList {
             return NSLocalizedString("Trends", comment: "Tab title to present the most popular medias by channel on CarPlay")
         case let .mostPopularMedias(radioChannel: radioChannel):
             return radioChannel.name
-        case let .livestreamMedias(channel: channel, _):
+        case let .livestream(channel: channel, _):
             return channel.title
         }
     }
@@ -42,8 +42,8 @@ enum CarPlayList {
             return AnalyticsPageTitle.home.rawValue
         case .mostPopularMedias:
             return AnalyticsPageTitle.mostPopular.rawValue
-        case .livestreamMedias:
-            return AnalyticsPageTitle.latestEpisodes.rawValue
+        case .livestream:
+            return AnalyticsPageTitle.livestream.rawValue
         }
     }
     
@@ -57,8 +57,8 @@ enum CarPlayList {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, AnalyticsPageLevel.mostPopular.rawValue]
         case let .mostPopularMedias(radioChannel):
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, radioChannel.name]
-        case let .livestreamMedias(channel, _):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, AnalyticsPageLevel.live.rawValue, channel.title]
+        case let .livestream(channel, _):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, channel.title]
         }
     }
     
@@ -80,10 +80,8 @@ enum CarPlayList {
         case let .mostPopularMedias(radioChannel: radioChannel):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
                 .mapToSections(with: interfaceController)
-        case let .livestreamMedias(_, medias: medias):
-            return Just(medias)
-                .setFailureType(to: Error.self)
-                .mapToSections(with: interfaceController, style: .time)
+        case let .livestream(_, media: media):
+            return Self.livestreamSections(for: media, interfaceController: interfaceController)
         }
     }
 }
@@ -108,9 +106,9 @@ private extension CarPlayList {
             liveProgramMediasPublisher(for: media)
         )
         .map { playing, liveProgramMedias in
-                return LiveMediaData(media: media, programMedias: liveProgramMedias, playing: playing)
-            }
-            .eraseToAnyPublisher()
+            return LiveMediaData(media: media, programMedias: liveProgramMedias, playing: playing)
+        }
+        .eraseToAnyPublisher()
     }
     
     static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
@@ -245,7 +243,7 @@ private extension CarPlayList {
                         let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Livestream and latest programs", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .disclosureIndicator
                         item.handler = { _, completion in
-                            let template = CPListTemplate.list(.livestreamMedias(channel: liveMediaData.media.channel!, medias: [liveMediaData.media] + liveMediaData.programMedias), interfaceController: interfaceController)
+                            let template = CPListTemplate.list(.livestream(channel: liveMediaData.media.channel!, media: liveMediaData.media), interfaceController: interfaceController)
                             interfaceController.pushTemplate(template, animated: true) { _, _ in
                                 completion()
                             }
@@ -283,6 +281,13 @@ private extension CarPlayList {
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }
+    }
+    
+    static func livestreamSections(for media: SRGMedia, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
+        return liveProgramMediasPublisher(for: media)
+            .map { [media] + $0 }
+            .setFailureType(to: Error.self)
+            .mapToSections(with: interfaceController, style: .time)
     }
 }
 

@@ -37,6 +37,7 @@ AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodes = @"latest episodes";
 AnalyticsPageTitle const AnalyticsPageTitleLatestEpisodesFromFavorites = @"latest episodes from favorites";
 AnalyticsPageTitle const AnalyticsPageTitleLicense = @"license";
 AnalyticsPageTitle const AnalyticsPageTitleLicenses = @"licenses";
+AnalyticsPageTitle const AnalyticsPageTitleLivestream = @"livestream";
 AnalyticsPageTitle const AnalyticsPageTitleLogin = @"login";
 AnalyticsPageTitle const AnalyticsPageTitleMedia = @"media";
 AnalyticsPageTitle const AnalyticsPageTitleMostPopular = @"most popular";
