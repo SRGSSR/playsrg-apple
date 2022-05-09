@@ -81,7 +81,9 @@ enum CarPlayList {
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
                 .mapToSections(with: interfaceController)
         case let .livestream(_, media: media):
-            return Self.livestreamSections(for: media, interfaceController: interfaceController)
+            return Publishers.PublishAndRepeat(onOutputFrom: Timer.publish(every: 30, on: .main, in: .common).autoconnect()) {
+                return Self.livestreamSections(for: media, interfaceController: interfaceController)
+            }
         }
     }
 }
