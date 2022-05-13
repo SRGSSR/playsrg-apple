@@ -432,7 +432,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Support information", @"Support information alert title")
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        if ([MFMailComposeViewController canSendMail]) {
+        if ([MFMailComposeViewController canSendMail] && ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress) {
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send by email", @"Label of the button to send support information by email") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
                 mailComposeViewController.mailComposeDelegate = self;

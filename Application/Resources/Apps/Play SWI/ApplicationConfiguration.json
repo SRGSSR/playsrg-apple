@@ -7,7 +7,6 @@
   "appStoreProductIdentifier": 920785201,
   "playURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "supportEmailAddress": "support.play@rts.ch",
   "minimumSocialViewCount": 50,
   "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",
   "whatsNewURL": "https://pastebin.com/raw/BRC1hPbt",

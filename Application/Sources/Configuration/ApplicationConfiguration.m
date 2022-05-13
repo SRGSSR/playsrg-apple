@@ -288,11 +288,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
-    NSString *supportEmailAddress = [firebaseConfiguration stringForKey:@"supportEmailAddress"];
-    if (! supportEmailAddress) {
-        return NO;
-    }
-    
     NSNumber *appStoreProductIdentifier = [firebaseConfiguration numberForKey:@"appStoreProductIdentifier"];
     if (! appStoreProductIdentifier) {
         return NO;
@@ -309,15 +304,13 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.middlewareURL = middlewareURL;
     self.whatsNewURL = whatsNewURL;
     
-    self.supportEmailAddress = supportEmailAddress;
     self.appStoreProductIdentifier = appStoreProductIdentifier;
     
     //
     // Optional values
     //
     
-    NSString *voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
-    self.voiceOverLanguageCode = voiceOverLanguageCode;
+    self.voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
     
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;
@@ -345,6 +338,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *dataProtectionURLString = [firebaseConfiguration stringForKey:@"dataProtectionURL"];
     self.dataProtectionURL = dataProtectionURLString ? [NSURL URLWithString:dataProtectionURLString] : nil;
+    
+    self.supportEmailAddress = [firebaseConfiguration stringForKey:@"supportEmailAddress"];
     
     NSNumber *minimumSocialViewCount = [firebaseConfiguration numberForKey:@"minimumSocialViewCount"];
     self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;
