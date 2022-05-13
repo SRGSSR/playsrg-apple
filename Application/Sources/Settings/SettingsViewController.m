@@ -437,7 +437,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
                 MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
                 mailComposeViewController.mailComposeDelegate = self;
                 [mailComposeViewController setToRecipients:@[ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress]];
-                [mailComposeViewController setSubject:NSLocalizedString(@"Support information", @"Subject of the support information standard email")];
                 [mailComposeViewController setMessageBody:[SupportInformation generate] isHTML:NO];
                 [self presentViewController:mailComposeViewController animated:YES completion:nil];
             }]];
