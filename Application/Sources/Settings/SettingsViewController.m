@@ -429,7 +429,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         }
     }
     else if ([specifier.key isEqualToString:SettingsSupportInformationButton]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Support information", @"Support information alert title")
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:PlaySRGSettingsLocalizedString(@"Support information", @"Support information alert title")
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
         if ([MFMailComposeViewController canSendMail] && ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress) {
