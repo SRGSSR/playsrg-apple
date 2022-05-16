@@ -44,14 +44,39 @@ final class SettingsViewModel: ObservableObject {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
     
-    func showSourceCode() {
-        guard let url = ApplicationConfiguration.shared.sourceCodeURL else { return }
-        UIApplication.shared.open(url)
+    var showImpressum: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.impressumURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
     }
     
-    func becomeBetaTester() {
-        guard let url = ApplicationConfiguration.shared.betaTestingURL else { return }
-        UIApplication.shared.open(url)
+    var showTermsAndConditions: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.termsAndConditionsURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    var showDataProtection: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.dataProtectionURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    var showSourceCode: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.sourceCodeURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+    
+    var becomeBetaTester: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.betaTestingURL else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
     }
     
     func copySupportInformation() {

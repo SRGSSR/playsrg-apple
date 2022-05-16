@@ -154,23 +154,26 @@ struct SettingsView: View {
                 } label: {
                     Text(NSLocalizedString("What's new", comment: "Label of the button to display what's new information"))
                 }
-                NavigationLink {
-                    // TODO:
-                } label: {
-                    Text(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"))
+                if let showImpressum = model.showImpressum {
+                    Button(NSLocalizedString("Help and impressum", comment: "Label of the button to display help and impressum"), action: showImpressum)
                 }
-                NavigationLink {
-                    // TODO:
-                } label: {
-                    Text(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"))
+                if let showTermsAndConditions = model.showTermsAndConditions {
+                    Button(NSLocalizedString("Terms and conditions", comment: "Label of the button to display terms and conditions"), action: showTermsAndConditions)
+                }
+                if let showDataProtection = model.showDataProtection {
+                    Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
                 }
                 NavigationLink {
                     // TODO:
                 } label: {
                     Text(NSLocalizedString("Licenses", comment: "Label of the button to display licenses"))
                 }
-                Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: model.showSourceCode)
-                Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: model.becomeBetaTester)
+                if let showSourceCode = model.showSourceCode {
+                    Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
+                }
+                if let becomeBetaTester = model.becomeBetaTester {
+                    Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
+                }
                 VersionCell(model: model)
                 Button(NSLocalizedString("Copy support information", comment: "Label of the button to copy support information"), action: model.copySupportInformation)
             } header: {
