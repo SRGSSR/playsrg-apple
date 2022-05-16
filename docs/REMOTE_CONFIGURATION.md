@@ -33,7 +33,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Email
 
-* `supportEmailAddress` (optional, string): The email to provide support informations.
+* `supportEmailAddress` (optional, string): The email to send support information to.
 
 ## Analytics
 
