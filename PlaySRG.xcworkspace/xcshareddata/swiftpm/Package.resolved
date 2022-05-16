@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "branch" : "feature/width-whitelist-reduction",
-        "revision" : "d954cebaa0826a9fa163ef53c54b2c3768eba551"
+        "branch" : "develop",
+        "revision" : "b1bd6f8be7dd0f91a36b5fccc7cbe343b02213c0"
       }
     },
     {
@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "feature/width-whitelist-reduction",
-        "revision" : "577b7abb4bc49456da04079551bf581728b0da4d"
+        "branch" : "develop",
+        "revision" : "03d91dd7cf3a4986722b1c4050e05372c12da3fb"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "feature/width-whitelist-reduction",
-        "revision" : "a44bf3429b58912f331dc0c791734ea9fee50249"
+        "branch" : "develop",
+        "revision" : "d82b72890082272d460ac7ebfe0a5b124eafb956"
       }
     },
     {
