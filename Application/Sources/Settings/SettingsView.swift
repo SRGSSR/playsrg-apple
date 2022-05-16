@@ -175,7 +175,7 @@ struct SettingsView: View {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
                 }
                 VersionCell(model: model)
-                Button(NSLocalizedString("Copy support information", comment: "Label of the button to copy support information"), action: model.copySupportInformation)
+                Button(NSLocalizedString("Support information", comment: "Label of the button to access support information"), action: model.showSupportInformation)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }

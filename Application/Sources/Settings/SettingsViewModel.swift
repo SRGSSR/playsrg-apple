@@ -79,8 +79,8 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    func copySupportInformation() {
-        // TODO: Improvements pending, see PLAYRTS-4185
+    func showSupportInformation() {
+        // TODO:
     }
     
     func deleteHistory() {
