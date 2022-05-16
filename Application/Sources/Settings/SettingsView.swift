@@ -150,11 +150,6 @@ struct SettingsView: View {
                 if let showDataProtection = model.showDataProtection {
                     Button(NSLocalizedString("Data protection", comment: "Label of the button to display the data protection policy"), action: showDataProtection)
                 }
-                NavigationLink {
-                    // TODO:
-                } label: {
-                    Text(NSLocalizedString("Licenses", comment: "Label of the button to display licenses"))
-                }
                 if let showSourceCode = model.showSourceCode {
                     Button(NSLocalizedString("Source code", comment: "Label of the button to access the source code"), action: showSourceCode)
                 }

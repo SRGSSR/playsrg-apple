@@ -5276,7 +5276,6 @@
 				0806E7A71D4BA4ED002ED406 /* Make custom icons */,
 				08C68D871D38D6F400BB8AAA /* Resources */,
 				085F7DCB1FA4E6890010AF34 /* Restore original icons */,
-				08C3ADF9222B018700BB7AF7 /* Update Play MMF service URL */,
 				6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */,
 				6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
@@ -5328,7 +5327,6 @@
 				0806E7A61D4BA4DF002ED406 /* Make custom icons */,
 				08C68DBE1D38D70D00BB8AAA /* Resources */,
 				085F7DCA1FA4E67B0010AF34 /* Restore original icons */,
-				08C3ADFA222B06FA00BB7AF7 /* Update Play MMF service URL */,
 				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
@@ -5379,7 +5377,6 @@
 				0806E7A51D4BA4CF002ED406 /* Make custom icons */,
 				08C68DF51D38D72000BB8AAA /* Resources */,
 				085F7DC91FA4E6670010AF34 /* Restore original icons */,
-				08C3ADFB222B073400BB7AF7 /* Update Play MMF service URL */,
 				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
@@ -5430,7 +5427,6 @@
 				0806E7A41D4BA4BA002ED406 /* Make custom icons */,
 				08C68E2C1D38D73000BB8AAA /* Resources */,
 				085F7DC71FA4DD510010AF34 /* Restore original icons */,
-				08C3ADFC222B075100BB7AF7 /* Update Play MMF service URL */,
 				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
@@ -5481,7 +5477,6 @@
 				0806E7A31D4BA494002ED406 /* Make custom icons */,
 				08C68E631D38D73C00BB8AAA /* Resources */,
 				085F7DC81FA4E6570010AF34 /* Restore original icons */,
-				08C3ADFD222B077600BB7AF7 /* Update Play MMF service URL */,
 				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
@@ -7521,96 +7516,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
-		};
-		08C3ADF9222B018700BB7AF7 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
-		};
-		08C3ADFA222B06FA00BB7AF7 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
-		};
-		08C3ADFB222B073400BB7AF7 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
-		};
-		08C3ADFC222B075100BB7AF7 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
-		};
-		08C3ADFD222B077600BB7AF7 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :PreferenceSpecifiers:0:Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.bundle/Root.inApp.server.plist\"\nfi\n";
 		};
 		1FF1158BC96D38AD87F2F9E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
