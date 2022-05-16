@@ -53,3 +53,4 @@
 #import "UIViewController+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "WatchLater.h"
+#import "WebViewController.h"

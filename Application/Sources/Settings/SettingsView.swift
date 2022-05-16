@@ -150,7 +150,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Features", comment: "Label of the button display the features"))
                 }
                 NavigationLink {
-                    // TODO:
+                    WhatsNewView(url: model.whatsNewURL)
                 } label: {
                     Text(NSLocalizedString("What's new", comment: "Label of the button to display what's new information"))
                 }

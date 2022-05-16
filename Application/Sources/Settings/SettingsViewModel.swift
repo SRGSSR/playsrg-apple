@@ -36,6 +36,10 @@ final class SettingsViewModel: ObservableObject {
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), Self.string(for: synchronizationDate))
     }
     
+    var whatsNewURL: URL {
+        return ApplicationConfiguration.shared.whatsNewURL
+    }
+    
     var version: String {
         return Bundle.main.play_friendlyVersionNumber
     }
