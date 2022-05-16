@@ -11,33 +11,19 @@ import UIKit
 
 struct SettingsView: View {
     @StateObject private var model = SettingsViewModel()
-    @FirstResponder private var firstResponder
     
     var body: some View {
-        NavigationView {
-            List {
-                QualitySection()
-                PlaybackSection()
-                DisplaySection()
-                PermissionsSection(model: model)
-                ContentSection(model: model)
-                InformationSection(model: model)
-                AdvancedFeaturesSection(model: model)
-                ResetSection(model: model)
-            }
-            .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        firstResponder.sendAction(#selector(SettingsHostViewController.close(_:)))
-                    } label: {
-                        Text(NSLocalizedString("Done", comment: "Done button title"))
-                    }
-                }
-            }
+        List {
+            QualitySection()
+            PlaybackSection()
+            DisplaySection()
+            PermissionsSection(model: model)
+            ContentSection(model: model)
+            InformationSection(model: model)
+            AdvancedFeaturesSection(model: model)
+            ResetSection(model: model)
         }
-        .navigationViewStyle(.stack)
-        .responderChain(from: firstResponder)
+        .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
     }
     
     // MARK: Quality section
@@ -151,6 +137,7 @@ struct SettingsView: View {
                 }
                 NavigationLink {
                     WhatsNewView(url: model.whatsNewURL)
+                        .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     Text(NSLocalizedString("What's new", comment: "Label of the button to display what's new information"))
                 }
@@ -208,11 +195,13 @@ struct SettingsView: View {
             Section {
                 NavigationLink {
                     ServerSelectionView()
+                        .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     ServerSelectionCell()
                 }
                 NavigationLink {
                     UserLocationSelectionView()
+                        .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     UserLocationSelectionCell()
                 }
@@ -221,6 +210,7 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
                 NavigationLink {
                     PosterImagesSelectionView()
+                        .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     PosterImagesSelectionCell()
                 }
@@ -260,7 +250,6 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -323,7 +312,6 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -373,7 +361,6 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
     
@@ -423,45 +410,13 @@ struct SettingsView: View {
     }
 }
 
-// MARK: UIKit presentation
-
-class SettingsHostViewController: UIViewController {
-    override func loadView() {
-        let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .systemBackground
-        self.view = view
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let hostController = UIHostingController(rootView: SettingsView())
-        addChild(hostController)
-        
-        if let hostView = hostController.view {
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(hostView)
-            
-            NSLayoutConstraint.activate([
-                hostView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                hostView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                hostView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                hostView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-        }
-        
-        hostController.didMove(toParent: self)
-    }
-    
-    @objc fileprivate func close(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
-}
-
 // MARK: Preview
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView()
+        NavigationView {
+            SettingsView()
+        }
+        .navigationViewStyle(.stack)
     }
 }

@@ -23,7 +23,6 @@ struct WhatsNewView: View {
             }
         }
         .navigationTitle(NSLocalizedString("What's new", comment: "Title displayed at the top of the What's new view"))
-        .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             model.url = url
         }

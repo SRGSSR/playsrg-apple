@@ -1359,6 +1359,11 @@
 		6F8BE02E27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
 		6F8BE02F27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
 		6F8BE03027A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
+		6F8CBD812832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */; };
+		6F8CBD822832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */; };
+		6F8CBD832832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */; };
+		6F8CBD842832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */; };
+		6F8CBD852832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */; };
 		6F8D54422639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */; };
 		6F8D54432639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */; };
 		6F8D54442639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */; };
@@ -3088,6 +3093,7 @@
 		6F8A54592655100400AE78FD /* SectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewController.swift; sourceTree = "<group>"; };
 		6F8A5470265510F900AE78FD /* SectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionViewModel.swift; sourceTree = "<group>"; };
 		6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideChildViewController.swift; sourceTree = "<group>"; };
+		6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationView.swift; sourceTree = "<group>"; };
 		6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedContent.swift; sourceTree = "<group>"; };
 		6F8D5FB825FBB15100F948C1 /* ApplicationScreenshots~tvos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ApplicationScreenshots~tvos.swift"; sourceTree = "<group>"; };
 		6F9122BD1DC8708400725EEB /* PlayErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayErrors.h; sourceTree = "<group>"; };
@@ -3743,6 +3749,7 @@
 				6F46B7C028200E3E00D20748 /* Server.swift */,
 				6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */,
 				6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */,
+				6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */,
 				6F46B7BA281FB1FB00D20748 /* SettingsView.swift */,
 				0806E7B51D50D918002ED406 /* SettingsViewController.h */,
 				0806E7B61D50D918002ED406 /* SettingsViewController.m */,
@@ -3751,9 +3758,9 @@
 				6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
 				6F6C7AC82820576000BC3EA5 /* UserLocation.swift */,
+				6FDAAD93283283EB008E2806 /* WebView.swift */,
 				6FDAAD8D2832824E008E2806 /* WhatsNewView.swift */,
 				6FDAAD8728328244008E2806 /* WhatsNewViewModel.swift */,
-				6FDAAD93283283EB008E2806 /* WebView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -8469,6 +8476,7 @@
 				6FF5D1FB2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F0EDA652448B0D800F0FED2 /* RefreshControl.m in Sources */,
 				6F54D3C72605100F008B46FF /* ProgressBar.swift in Sources */,
+				6F8CBD812832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */,
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F1A77832643CAB600A00EFC /* EmptyContentView.swift in Sources */,
@@ -8902,6 +8910,7 @@
 				6FE686E21EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63B271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
+				6F8CBD822832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6FDF08EC218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
@@ -9148,6 +9157,7 @@
 				6FE686E31EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */,
 				6F73C63C271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
+				6F8CBD832832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6FDF08ED218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
@@ -9394,6 +9404,7 @@
 				6FE686E41EB9D57400067D40 /* ChannelService.m in Sources */,
 				6FB90D1B270D91020033D860 /* CarPlayList.swift in Sources */,
 				6F73C63D271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
+				6F8CBD842832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6FDF08EE218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
@@ -9509,6 +9520,7 @@
 				6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F54D2D62604FB19008B46FF /* ShowCell.swift in Sources */,
 				6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
+				6F8CBD852832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F2E160D26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
