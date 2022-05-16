@@ -60,7 +60,7 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return MediaVisualView(media: media, size: .large)
+        return MediaVisualView(media: media, size: .medium)
     }
     
 #if os(tvOS)
@@ -101,7 +101,7 @@ struct FeaturedShowContent: FeaturedContent {
     }
     
     func visualView() -> some View {
-        return ImageView(source: url(for: show?.image, size: .large))
+        return ImageView(source: url(for: show?.image, size: .medium))
     }
     
 #if os(tvOS)

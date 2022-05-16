@@ -267,7 +267,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "7884e722207a99b826661e245241d133f440459c"
+        "revision" : "03d91dd7cf3a4986722b1c4050e05372c12da3fb"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "d136e95adf86c6112fccbb3f4c9373fd1658822c"
+        "revision" : "d82b72890082272d460ac7ebfe0a5b124eafb956"
       }
     },
     {

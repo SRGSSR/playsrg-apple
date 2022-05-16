@@ -49,13 +49,13 @@ final class ContentProvider: TVTopShelfContentProvider {
         switch imageLayout {
         case "poster":
             if let posterImage = show.posterImage {
-                return ImageLayout(image: posterImage, shape: .poster, width1x: .width320, width2x: .width640)
+                return ImageLayout(image: posterImage, shape: .poster, width1x: .width240, width2x: .width480)
             }
             else {
-                return ImageLayout(image: show.image, shape: .hdtv, width1x: .width960, width2x: .width1920)
+                return ImageLayout(image: show.image, shape: .hdtv, width1x: .width480, width2x: .width960)
             }
         default:
-            return ImageLayout(image: show.image, shape: .hdtv, width1x: .width960, width2x: .width1920)
+            return ImageLayout(image: show.image, shape: .hdtv, width1x: .width480, width2x: .width960)
         }
     }
     
