@@ -432,11 +432,12 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:PlaySRGSettingsLocalizedString(@"Support information", @"Support information alert title")
                                                                                  message:nil
                                                                           preferredStyle:UIAlertControllerStyleAlert];
-        if ([MFMailComposeViewController canSendMail] && ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress) {
+        NSString *supportEmailAddress = ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress;
+        if (supportEmailAddress && [MFMailComposeViewController canSendMail]) {
             [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send by email", @"Label of the button to send support information by email") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                 MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
                 mailComposeViewController.mailComposeDelegate = self;
-                [mailComposeViewController setToRecipients:@[ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress]];
+                [mailComposeViewController setToRecipients:@[supportEmailAddress]];
                 [mailComposeViewController setMessageBody:[SupportInformation generate] isHTML:NO];
                 [self presentViewController:mailComposeViewController animated:YES completion:nil];
             }]];
