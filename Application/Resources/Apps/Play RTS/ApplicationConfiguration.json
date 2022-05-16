@@ -10,6 +10,7 @@
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",
   "userDataServiceURL": "https://profil.rts.ch/api",
+  "supportEmailAddress": "support.play@rts.ch",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioLatestVideos,radioWatchLater",
   "minimumSocialViewCount": 50,

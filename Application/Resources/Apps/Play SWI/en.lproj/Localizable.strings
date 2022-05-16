@@ -118,6 +118,9 @@
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Content saved for later will be deleted on all devices connected to your account.";
 
+/* Label of the button to copy support information to the pasteboard */
+"Copy to the pasteboard" = "Copy to the pasteboard";
+
 /* Sort by date option */
 "Date" = "Date";
 
@@ -458,6 +461,9 @@
 
 /* Title displayed when no item has been selected */
 "Select items" = "Select items";
+
+/* Label of the button to send support information by email */
+"Send by email" = "Send by email";
 
 /* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Server changed to '%@'";

@@ -76,6 +76,11 @@ OBJC_EXPORT NSString * const PushServiceEnabledKey;
  */
 - (void)updateApplicationBadge;
 
+/**
+ *  Return the URNs of all shows the user has subscribed to.
+ */
+@property (nonatomic, readonly) NSSet<NSString *> *subscribedShowURNs;
+
 @end
 
 NS_ASSUME_NONNULL_END
