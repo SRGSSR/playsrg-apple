@@ -132,8 +132,8 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
-    func showSupportInformation() {
-        // TODO:
+    func copySupportInformation() {
+        UIPasteboard.general.string = SupportInformation.generate()
     }
     
     func removeHistory() {

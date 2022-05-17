@@ -105,10 +105,10 @@ struct SettingsView: View {
     
     private struct HistoryRemovalButton: View {
         @ObservedObject var model: SettingsViewModel
-        @State private var alertDisplayed = false
+        @State private var isAlertDisplayed = false
         
         private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeHistory()
             }
@@ -131,7 +131,7 @@ struct SettingsView: View {
         
         private func action() {
             if model.hasHistoryEntries {
-                alertDisplayed = true
+                isAlertDisplayed = true
             }
         }
         
@@ -140,16 +140,16 @@ struct SettingsView: View {
                 Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
                     .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
             }
-            .alert(isPresented: $alertDisplayed, content: alert)
+            .alert(isPresented: $isAlertDisplayed, content: alert)
         }
     }
     
     private struct FavoritesRemovalButton: View {
         @ObservedObject var model: SettingsViewModel
-        @State private var alertDisplayed = false
+        @State private var isAlertDisplayed = false
         
         private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeFavorites()
             }
@@ -172,7 +172,7 @@ struct SettingsView: View {
         
         private func action() {
             if model.hasFavorites {
-                alertDisplayed = true
+                isAlertDisplayed = true
             }
         }
         
@@ -181,16 +181,16 @@ struct SettingsView: View {
                 Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                     .foregroundColor(model.hasFavorites ? .red : .secondary)
             }
-            .alert(isPresented: $alertDisplayed, content: alert)
+            .alert(isPresented: $isAlertDisplayed, content: alert)
         }
     }
     
     private struct WatchLaterRemovalButton: View {
         @ObservedObject var model: SettingsViewModel
-        @State private var alertDisplayed = false
+        @State private var isAlertDisplayed = false
         
         private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
             let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
                 model.removeWatchLaterItems()
             }
@@ -213,7 +213,7 @@ struct SettingsView: View {
         
         private func action() {
             if model.hasWatchLaterItems {
-                alertDisplayed = true
+                isAlertDisplayed = true
             }
         }
         
@@ -222,7 +222,7 @@ struct SettingsView: View {
                 Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
                     .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
             }
-            .alert(isPresented: $alertDisplayed, content: alert)
+            .alert(isPresented: $isAlertDisplayed, content: alert)
         }
     }
     
@@ -245,6 +245,66 @@ struct SettingsView: View {
     }
     
     // MARK: Information section
+    
+    private struct SupportInformationButton: View {
+        @ObservedObject var model: SettingsViewModel
+        @State private var isAlertDisplayed = false
+        @State private var isMailComposeDisplayed = false
+        
+        private var supportRecipients: [String] {
+            guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return [] }
+            return [supportEmailAddress]
+        }
+        
+        // TODO: Once the code requires iOS 15+ we can use the updated 15.0 alert API (or confirmationDialog API) and
+        //       have a cancel button. To avoid writing the code twice the old API is currently used, which limits
+        //       the number of buttons to two. But this is simpler than having both implementations coexist for now.
+        private var primaryButton: Alert.Button {
+            if !supportRecipients.isEmpty {
+                return .default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
+                    isMailComposeDisplayed = true
+                }
+            }
+            else {
+                return .cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            }
+        }
+        
+        private func alert() -> Alert {
+            let secondaryButton = Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
+                model.copySupportInformation()
+                Banner.show(
+                    with: .info,
+                    message: NSLocalizedString("Support information has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
+                    image: nil,
+                    sticky: false
+                )
+            }
+            return Alert(
+                title: Text(PlaySRGSettingsLocalizedString("Support information", comment: "Support information alert title")),
+                primaryButton: primaryButton,
+                secondaryButton: secondaryButton
+            )
+        }
+        
+        private func mailComposeView() -> MailComposeView {
+            return MailComposeView()
+                .toRecipients(supportRecipients)
+                .messageBody(SupportInformation.generate())
+        }
+        
+        private func action() {
+            isAlertDisplayed = true
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                Text(PlaySRGSettingsLocalizedString("Support information", comment: "Label of the button to access support information"))
+            }
+            .alert(isPresented: $isAlertDisplayed, content: alert)
+            .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
+        }
+    }
     
     private struct InformationSection: View {
         @ObservedObject var model: SettingsViewModel
@@ -278,7 +338,7 @@ struct SettingsView: View {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
                 }
                 VersionCell(model: model)
-                Button(NSLocalizedString("Support information", comment: "Label of the button to access support information"), action: model.showSupportInformation)
+                SupportInformationButton(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
