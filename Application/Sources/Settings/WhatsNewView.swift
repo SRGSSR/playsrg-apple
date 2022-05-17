@@ -4,7 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAnalyticsSwiftUI
 import SwiftUI
+
+// MARK: View
 
 struct WhatsNewView: View {
     let url: URL
@@ -29,8 +32,23 @@ struct WhatsNewView: View {
         .onChange(of: url) { newValue in
             model.url = newValue
         }
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
 }
+
+// MARK: Analytics
+
+extension WhatsNewView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.whatsNew.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
+    }
+}
+
+// MARK: Preview
 
 struct WhatsNewView_Previews: PreviewProvider {
     static var previews: some View {

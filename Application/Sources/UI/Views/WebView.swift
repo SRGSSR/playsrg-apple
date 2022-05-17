@@ -5,16 +5,23 @@
 //
 
 import SwiftUI
+import WebKit
 
 // MARK: View
 
 struct WebView: UIViewControllerRepresentable {
     let request: URLRequest
+    let customization: ((WKWebView) -> Void)?
+    let decisionHandler: ((URL) -> WKNavigationActionPolicy)?
     
-    // TODO: Add block parameters for view controller init as well as modifiers for analytics info
+    init(request: URLRequest, customization: ((WKWebView) -> Void)? = nil, decisionHandler: ((URL) -> WKNavigationActionPolicy)? = nil) {
+        self.request = request
+        self.customization = customization
+        self.decisionHandler = decisionHandler
+    }
     
     func makeUIViewController(context: Context) -> WebViewController {
-        return WebViewController(request: request, customizationBlock: nil, decisionHandler: nil)
+        return WebViewController(request: request, customizationBlock: customization, decisionHandler: decisionHandler)
     }
     
     func updateUIViewController(_ uiViewController: WebViewController, context: Context) {

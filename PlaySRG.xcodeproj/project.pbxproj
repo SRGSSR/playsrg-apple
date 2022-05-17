@@ -1096,6 +1096,11 @@
 		6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
 		6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C691271D39089700BB8AAA /* CommonImages.xcassets */; };
+		6F5D439728338F2900F56A58 /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */; };
+		6F5D439928338F3100F56A58 /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */; };
+		6F5D439B28338F3700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */; };
+		6F5D439D28338F3C00F56A58 /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */; };
+		6F5D439F28338F4700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */; };
 		6F5F4FC41DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
 		6F5F4FC51DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
 		6F5F4FC61DB10CFD0011CCA3 /* RelatedContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F5F4FC21DB10CFD0011CCA3 /* RelatedContentView.m */; };
@@ -3386,6 +3391,7 @@
 				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F5D439728338F2900F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
@@ -3412,6 +3418,7 @@
 				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F5D439928338F3100F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
@@ -3438,6 +3445,7 @@
 				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F5D439B28338F3700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
@@ -3464,6 +3472,7 @@
 				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F5D439D28338F3C00F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
@@ -3490,6 +3499,7 @@
 				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
+				6F5D439F28338F4700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
@@ -3758,7 +3768,6 @@
 				6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
 				6F6C7AC82820576000BC3EA5 /* UserLocation.swift */,
-				6FDAAD93283283EB008E2806 /* WebView.swift */,
 				6FDAAD8D2832824E008E2806 /* WhatsNewView.swift */,
 				6FDAAD8728328244008E2806 /* WhatsNewViewModel.swift */,
 			);
@@ -4687,6 +4696,7 @@
 				6FE14E6A263EA9B5004AD913 /* TitleView.swift */,
 				6FDFD88B24E6BC9200F20382 /* TopicCell.swift */,
 				6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */,
+				6FDAAD93283283EB008E2806 /* WebView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -5309,6 +5319,7 @@
 				6F17DC15266AB81C009F74C6 /* Nuke */,
 				04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9072812D837007C3406 /* NukeUI */,
+				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5359,6 +5370,7 @@
 				6F17DC17266AB837009F74C6 /* Nuke */,
 				04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9092812D846007C3406 /* NukeUI */,
+				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5409,6 +5421,7 @@
 				6F17DC19266AB83E009F74C6 /* Nuke */,
 				04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
+				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5459,6 +5472,7 @@
 				6F17DC1B266AB846009F74C6 /* Nuke */,
 				04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90D2812D851007C3406 /* NukeUI */,
+				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5509,6 +5523,7 @@
 				6F17DC1D266AB84E009F74C6 /* Nuke */,
 				04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90F2812D856007C3406 /* NukeUI */,
+				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -19724,6 +19739,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsSwiftUI;
+		};
+		6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsSwiftUI;
+		};
+		6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsSwiftUI;
+		};
+		6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsSwiftUI;
+		};
+		6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
+			productName = SRGAnalyticsSwiftUI;
 		};
 		6F61CCC2256E41EE00E42E31 /* SRGUserData */ = {
 			isa = XCSwiftPackageProductDependency;
