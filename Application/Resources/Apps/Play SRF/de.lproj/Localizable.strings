@@ -1,5 +1,5 @@
 /* Speed factor with current value if different from desired one */
-"%1$@× (Currently: %2$@×)" = "%1$@× (Currently: %2$@×)";
+"%1$@× (Currently: %2$@×)" = "%1$@× (Aktuell: %2$@×)";
 
 /* Seek backward shortcut label */
 "%@ backward" = "%@ zurück";
@@ -119,7 +119,7 @@
 "Content saved for later will be deleted on all devices connected to your account." = "Für später gespeicherte Inhalte werden auf allen mit Ihrem Konto verbundenen Geräten gelöscht.";
 
 /* Label of the button to copy support information to the pasteboard */
-"Copy to the pasteboard" = "Copy to the pasteboard";
+"Copy to the pasteboard" = "In Zwischenablage kopieren";
 
 /* Sort by date option */
 "Date" = "Datum";
@@ -463,7 +463,7 @@
 "Select items" = "Auswählen";
 
 /* Label of the button to send support information by email */
-"Send by email" = "Send by email";
+"Send by email" = "Per E-Mail senden";
 
 /* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Server geändert auf '%@'";
