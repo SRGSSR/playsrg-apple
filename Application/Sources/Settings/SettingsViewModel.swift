@@ -148,10 +148,6 @@ final class SettingsViewModel: ObservableObject {
         SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
     }
     
-    func subscribeToAllShows() {
-        // TODO:
-    }
-    
     func clearWebCache() {
         URLCache.shared.removeAllCachedResponses()
         

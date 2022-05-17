@@ -391,7 +391,6 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
-                Button(NSLocalizedString("Subscribe to all shows", comment: "Label of the button to subscribe to all shows"), action: model.subscribeToAllShows)
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
             } footer: {
