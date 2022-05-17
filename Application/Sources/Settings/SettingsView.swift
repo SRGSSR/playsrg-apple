@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 import UIKit
 
@@ -102,16 +103,56 @@ struct SettingsView: View {
     
     // MARK: Content section
     
+    private struct HistoryRemovalButton: View {
+        @ObservedObject var model: SettingsViewModel
+        @State private var alertDisplayed = false
+        
+        private func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeHistory()
+            }
+            if model.isLoggedIn {
+                return Alert(
+                    title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                    message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+            else {
+                return Alert(
+                    title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+        }
+        
+        private func action() {
+            if model.hasHistoryEntries {
+                alertDisplayed = true
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
+                    .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
+            }
+            .alert(isPresented: $alertDisplayed, content: alert)
+        }
+    }
+    
     private struct ContentSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
             Section {
-                Button(NSLocalizedString("Delete history", comment: "Label of the button to delete the history"), action: model.deleteHistory)
+                HistoryRemovalButton(model: model)
+                Button(NSLocalizedString("Delete favorites", comment: "Label of the button to delete the favorites"), action: model.removeFavorites)
                     .foregroundColor(.red)
-                Button(NSLocalizedString("Delete favorites", comment: "Label of the button to delete the favorites"), action: model.deleteFavorites)
-                    .foregroundColor(.red)
-                Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.deleteWatchLater)
+                Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.removeWatchLater)
                     .foregroundColor(.red)
             } header: {
                 Text(NSLocalizedString("Content", comment: "Content settings section header"))

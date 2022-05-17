@@ -12,14 +12,45 @@ import YYWebImage
 // MARK: View model
 
 final class SettingsViewModel: ObservableObject {
+    @Published private(set) var isLoggedIn = false
+    @Published private(set) var hasHistoryEntries = false
     @Published private var synchronizationDate: Date?
     
     init() {
         NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
             .map { _ in }
             .prepend(())
-            .map { SRGUserData.current?.user.synchronizationDate }
+            .map { SRGUserData.current!.user.synchronizationDate }
             .assign(to: &$synchronizationDate)
+        
+        if let identityService = SRGIdentityService.current {
+            Self.loggedInReloadSignal(for: identityService)
+                .prepend(())
+                .map { identityService.isLoggedIn }
+                .assign(to: &$isLoggedIn)
+        }
+        
+        ThrottledSignal.historyUpdates()
+            .prepend(())
+            .map { _ in
+                return SRGDataProvider.current!.historyEntriesPublisher()
+                    .map { !$0.isEmpty }
+                    .replaceError(with: false)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$hasHistoryEntries)
+    }
+    
+    private static func loggedInReloadSignal(for identityService: SRGIdentityService) -> AnyPublisher<Void, Never> {
+        return Publishers.Merge3(
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: identityService),
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
+        )
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
+        .map { _ in }
+        .eraseToAnyPublisher()
     }
     
     private static func string(for date: Date?) -> String {
@@ -87,15 +118,15 @@ final class SettingsViewModel: ObservableObject {
         // TODO:
     }
     
-    func deleteHistory() {
+    func removeHistory() {
+        SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
+    }
+    
+    func removeFavorites() {
         // TODO:
     }
     
-    func deleteFavorites() {
-        // TODO:
-    }
-    
-    func deleteWatchLater() {
+    func removeWatchLater() {
         // TODO:
     }
     
