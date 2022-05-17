@@ -313,7 +313,8 @@ struct SettingsView: View {
         var body: some View {
             Section {
                 NavigationLink {
-                    // TODO:
+                    FeaturesView()
+                        .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     Text(NSLocalizedString("Features", comment: "Label of the button display the features"))
                 }
