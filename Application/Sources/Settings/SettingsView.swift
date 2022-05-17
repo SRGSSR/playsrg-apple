@@ -25,6 +25,7 @@ struct SettingsView: View {
             ResetSection(model: model)
         }
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
     
     // MARK: Quality section
@@ -583,6 +584,18 @@ struct SettingsView: View {
                 Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
             }
         }
+    }
+}
+
+// MARK: Analytics
+
+private extension SettingsView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.settings.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.application.rawValue]
     }
 }
 

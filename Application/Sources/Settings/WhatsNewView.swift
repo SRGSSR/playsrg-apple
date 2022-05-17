@@ -38,7 +38,7 @@ struct WhatsNewView: View {
 
 // MARK: Analytics
 
-extension WhatsNewView {
+private extension WhatsNewView {
     private var analyticsPageTitle: String {
         return AnalyticsPageTitle.whatsNew.rawValue
     }
