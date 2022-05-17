@@ -139,7 +139,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func laterEntriesPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -155,12 +155,17 @@ extension SRGDataProvider {
                 }
             }
         }
-        .map { urns in
-            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
-                .map { filter?.compatibleMedias($0) ?? $0 }
-        }
-        .switchToLatest()
         .eraseToAnyPublisher()
+    }
+    
+    func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        return laterEntriesPublisher()
+            .map { urns in
+                return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+                    .map { filter?.compatibleMedias($0) ?? $0 }
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {

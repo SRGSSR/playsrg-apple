@@ -15,6 +15,7 @@ final class SettingsViewModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
     @Published private(set) var hasHistoryEntries = false
     @Published private(set) var hasFavorites = false
+    @Published private(set) var hasWatchLaterItems = false
     @Published private var synchronizationDate: Date?
     
     init() {
@@ -33,10 +34,10 @@ final class SettingsViewModel: ObservableObject {
         
         ThrottledSignal.historyUpdates()
             .prepend(())
-            .map { _ in
+            .map { [weak self] _ in
                 return SRGDataProvider.current!.historyEntriesPublisher()
                     .map { !$0.isEmpty }
-                    .replaceError(with: false)
+                    .replaceError(with: self?.hasHistoryEntries ?? false)
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
@@ -46,6 +47,17 @@ final class SettingsViewModel: ObservableObject {
             .prepend(())
             .map { FavoritesShowURNs().count != 0 }
             .assign(to: &$hasFavorites)
+        
+        ThrottledSignal.watchLaterUpdates()
+            .prepend(())
+            .map { [weak self] _ in
+                return SRGDataProvider.current!.laterEntriesPublisher()
+                    .map { !$0.isEmpty }
+                    .replaceError(with: self?.hasWatchLaterItems ?? false)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$hasWatchLaterItems)
     }
     
     private static func loggedInReloadSignal(for identityService: SRGIdentityService) -> AnyPublisher<Void, Never> {
@@ -132,8 +144,8 @@ final class SettingsViewModel: ObservableObject {
         FavoritesRemoveShows(nil)
     }
     
-    func removeWatchLater() {
-        // TODO:
+    func removeWatchLaterItems() {
+        SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
     }
     
     func subscribeToAllShows() {

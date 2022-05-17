@@ -185,6 +185,47 @@ struct SettingsView: View {
         }
     }
     
+    private struct WatchLaterRemovalButton: View {
+        @ObservedObject var model: SettingsViewModel
+        @State private var alertDisplayed = false
+        
+        private func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeWatchLaterItems()
+            }
+            if model.isLoggedIn {
+                return Alert(
+                    title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                    message: Text(NSLocalizedString("Content saved for later will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete content saved for later")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+            else {
+                return Alert(
+                    title: Text(PlaySRGSettingsLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+        }
+        
+        private func action() {
+            if model.hasWatchLaterItems {
+                alertDisplayed = true
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
+                    .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
+            }
+            .alert(isPresented: $alertDisplayed, content: alert)
+        }
+    }
+    
     private struct ContentSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -192,8 +233,7 @@ struct SettingsView: View {
             Section {
                 HistoryRemovalButton(model: model)
                 FavoritesRemovalButton(model: model)
-                Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.removeWatchLater)
-                    .foregroundColor(.red)
+                WatchLaterRemovalButton(model: model)
             } header: {
                 Text(NSLocalizedString("Content", comment: "Content settings section header"))
             } footer: {
