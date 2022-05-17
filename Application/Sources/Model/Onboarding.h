@@ -17,6 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly) NSArray<OnboardingPage *> *pages;
 
+@property (nonatomic, readonly, copy) NSString *iconName;
+
 @end
 
 NS_ASSUME_NONNULL_END

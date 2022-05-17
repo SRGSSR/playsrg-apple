@@ -48,6 +48,13 @@
     return s_onboardings;
 }
 
+#pragma mark Getters and setters
+
+- (NSString *)iconName
+{
+    return [NSString stringWithFormat:@"%@_icon", self.uid];
+}
+
 #pragma mark MTLJSONSerializing protocol
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey
