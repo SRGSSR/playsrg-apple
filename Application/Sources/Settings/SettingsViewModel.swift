@@ -14,6 +14,7 @@ import YYWebImage
 final class SettingsViewModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
     @Published private(set) var hasHistoryEntries = false
+    @Published private(set) var hasFavorites = false
     @Published private var synchronizationDate: Date?
     
     init() {
@@ -40,6 +41,11 @@ final class SettingsViewModel: ObservableObject {
             .switchToLatest()
             .receive(on: DispatchQueue.main)
             .assign(to: &$hasHistoryEntries)
+        
+        ThrottledSignal.preferenceUpdates()
+            .prepend(())
+            .map { FavoritesShowURNs().count != 0 }
+            .assign(to: &$hasFavorites)
     }
     
     private static func loggedInReloadSignal(for identityService: SRGIdentityService) -> AnyPublisher<Void, Never> {
@@ -123,7 +129,7 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func removeFavorites() {
-        // TODO:
+        FavoritesRemoveShows(nil)
     }
     
     func removeWatchLater() {

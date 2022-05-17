@@ -144,14 +144,54 @@ struct SettingsView: View {
         }
     }
     
+    private struct FavoritesRemovalButton: View {
+        @ObservedObject var model: SettingsViewModel
+        @State private var alertDisplayed = false
+        
+        private func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                model.removeFavorites()
+            }
+            if model.isLoggedIn {
+                return Alert(
+                    title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
+                    message: Text(NSLocalizedString("Favorites and notification subscriptions will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete all favorites")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+            else {
+                return Alert(
+                    title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+        }
+        
+        private func action() {
+            if model.hasFavorites {
+                alertDisplayed = true
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
+                    .foregroundColor(model.hasFavorites ? .red : .secondary)
+            }
+            .alert(isPresented: $alertDisplayed, content: alert)
+        }
+    }
+    
     private struct ContentSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
             Section {
                 HistoryRemovalButton(model: model)
-                Button(NSLocalizedString("Delete favorites", comment: "Label of the button to delete the favorites"), action: model.removeFavorites)
-                    .foregroundColor(.red)
+                FavoritesRemovalButton(model: model)
                 Button(NSLocalizedString("Delete content saved for later", comment: "Label of the button to delete content saved for later"), action: model.removeWatchLater)
                     .foregroundColor(.red)
             } header: {
