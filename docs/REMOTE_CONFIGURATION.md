@@ -24,7 +24,9 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
-* `historyServiceURL` (optional, string): The URL of the history service.
+* `identityWebserviceURL` (optional, string): The URL of the identity webservices.
+* `identityWebsiteURL` (optional, string): The URL of the identity web portal.
+* `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
 * `playURL` (mandatory, string): The base URL of the Play web portal, used when building sharing URLs.
 * `playServiceURL` (mandatory, string): The base URL of the Play web service.
