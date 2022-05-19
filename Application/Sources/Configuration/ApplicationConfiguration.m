@@ -90,6 +90,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) PlayFirebaseConfiguration *firebaseConfiguration;
 
+@property (nonatomic, copy) NSString *businessUnitIdentifier;
 @property (nonatomic) SRGVendor vendor;
 
 @property (nonatomic, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
@@ -245,6 +246,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     //
     
     NSString *businessUnitIdentifier = [firebaseConfiguration stringForKey:@"businessUnit"];
+    if (! businessUnitIdentifier) {
+        return NO;
+    }
+    
     SRGVendor vendor = DataProviderVendor(businessUnitIdentifier);
     if (vendor == SRGVendorNone) {
         return NO;
@@ -294,9 +299,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     
     // Update mandatory values
+    self.businessUnitIdentifier = businessUnitIdentifier;
+    self.vendor = vendor;
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.integerValue;
-    self.vendor = vendor;
     self.siteName = siteName;
     self.tvSiteName = tvSiteName;
     

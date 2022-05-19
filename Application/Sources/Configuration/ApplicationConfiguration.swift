@@ -28,6 +28,12 @@ extension ApplicationConfiguration {
             return Self.configuredSection(from: homeSection)
         }
     }
+    
+    var serviceMessageUrl: URL {
+        let resourcePath = "v3/api/" + businessUnitIdentifier + "/general-information-message"
+        let url = URL(string: resourcePath, relativeTo: playURL)
+        return url!
+    }
 }
 
 enum ConfiguredSection: Hashable {

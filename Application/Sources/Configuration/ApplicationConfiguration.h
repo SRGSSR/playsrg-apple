@@ -25,6 +25,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (class, nonatomic, readonly) ApplicationConfiguration *sharedApplicationConfiguration;
 
+@property (nonatomic, readonly, copy) NSString *businessUnitIdentifier;
 @property (nonatomic, readonly) SRGVendor vendor;
 
 @property (nonatomic, readonly, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
