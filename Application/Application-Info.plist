@@ -299,5 +299,7 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Dark</string>
+	<key>PlayMMFServiceURL</key>
+	<string>$(CONFIG__PLAY_MMF_SERVICE_URL)</string>
 </dict>
 </plist>

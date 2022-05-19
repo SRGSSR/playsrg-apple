@@ -33,8 +33,15 @@ struct Service: Identifiable, Equatable {
     static var mmf = Service(
         id: "play mmf",
         name: "Play MMF",
-        url: URL(string: "https://play-mmf.herokuapp.com")!
+        url: mmfUrl
     )
+    
+    private static var mmfUrl: URL = {
+        guard let mmfUrlString = Bundle.main.object(forInfoDictionaryKey: "PlayMMFServiceURL") as? String else {
+            return URL(string: "https://play-mmf.herokuapp.com")!
+        }
+        return URL(string: mmfUrlString)!
+    }()
     
     static var services: [Service] = [production, stage, test, mmf]
     
