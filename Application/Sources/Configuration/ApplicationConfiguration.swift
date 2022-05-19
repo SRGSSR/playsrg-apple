@@ -31,7 +31,7 @@ extension ApplicationConfiguration {
     
     var serviceMessageUrl: URL {
         let resourcePath = "v3/api/" + businessUnitIdentifier + "/general-information-message"
-        let url = URL(string: resourcePath, relativeTo: playURL)
+        let url = URL(string: resourcePath, relativeTo: playServiceURL)
         return url!
     }
 }

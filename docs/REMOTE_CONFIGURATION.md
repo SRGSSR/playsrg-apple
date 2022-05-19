@@ -26,7 +26,8 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
 * `historyServiceURL` (optional, string): The URL of the history service.
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
-* `playURL` (mandatory, string): The base URL of the Play portal, used when building sharing URLs.
+* `playURL` (mandatory, string): The base URL of the Play web portal, used when building sharing URLs.
+* `playServiceURL` (mandatory, string): The base URL of the Play web service.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
 * `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
 * `whatsNewURL` (mandatory, string): The URL at which the update information can be retrieved.

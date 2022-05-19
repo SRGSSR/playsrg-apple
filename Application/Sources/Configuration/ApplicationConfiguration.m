@@ -104,6 +104,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic) NSURL *playURL;
+@property (nonatomic) NSURL *playServiceURL;
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
@@ -281,6 +282,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
+    NSString *playServiceURLString = [firebaseConfiguration stringForKey:@"playServiceURL"];
+    NSURL *playServiceURL = playServiceURLString ? [NSURL URLWithString:playServiceURLString] : nil;
+    if (! playServiceURL) {
+        return NO;
+    }
+    
     NSString *middlewareURLString = [firebaseConfiguration stringForKey:@"middlewareURL"];
     NSURL *middlewareURL = middlewareURLString ? [NSURL URLWithString:middlewareURLString] : nil;
     if (! middlewareURL) {
@@ -307,6 +314,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.tvSiteName = tvSiteName;
     
     self.playURL = playURL;
+    self.playServiceURL = playServiceURL;
     self.middlewareURL = middlewareURL;
     self.whatsNewURL = whatsNewURL;
     

@@ -40,6 +40,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic, readonly) NSURL *playURL;
+@property (nonatomic, readonly) NSURL *playServiceURL;
 @property (nonatomic, readonly) NSURL *middlewareURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;
