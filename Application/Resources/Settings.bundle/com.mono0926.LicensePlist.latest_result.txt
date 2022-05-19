@@ -169,11 +169,11 @@ name: GoogleDataTransport, nameSpecified: googledatatransport, owner: google, ve
 
 name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7.7.1, source: https://github.com/google/GoogleUtilities
 
-name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.0-grpc, source: https://github.com/grpc/grpc-ios
+name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.2-grpc, source: https://github.com/grpc/grpc-ios
 
 name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 1.7.2, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.6.0, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.7.0, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 

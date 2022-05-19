@@ -122,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/grpc/grpc-ios.git",
       "state" : {
-        "revision" : "abd2d5a4347efa0454606a788678a5d8ec223738",
-        "version" : "1.44.0-grpc"
+        "revision" : "2af4f6e9c2b18beae228f50b1198c641be859d2b",
+        "version" : "1.44.2-grpc"
       }
     },
     {
@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "9ff2ee8150b94a93a6f7690eb69d97dba21b48bf",
-        "version" : "16.6.0"
+        "revision" : "cf31f8c232ede66546e2a68f53fc97e684daeb8a",
+        "version" : "16.7.0"
       }
     },
     {
@@ -267,7 +267,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "03d91dd7cf3a4986722b1c4050e05372c12da3fb"
+        "revision" : "f8ddf11cdce9122732aa0875264ded2167fec3e7"
       }
     },
     {
