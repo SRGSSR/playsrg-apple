@@ -203,6 +203,8 @@ name: swift-protobuf, nameSpecified: swift-protobuf, owner: apple, version: 1.19
 
 name: SwiftMessages, nameSpecified: swiftmessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
 
+name: SwiftUI-Introspect, nameSpecified: swiftui-introspect, owner: siteline, version: 0.1.4, source: https://github.com/siteline/SwiftUI-Introspect
+
 name: TCCore-xcframework-apple, nameSpecified: tccore-xcframework-apple, owner: SRGSSR, version: 4.5.4-srg5, source: https://github.com/SRGSSR/TCCore-xcframework-apple
 
 name: TCSDK-xcframework-apple, nameSpecified: tcsdk-xcframework-apple, owner: SRGSSR, version: 4.4.1-srg5, source: https://github.com/SRGSSR/TCSDK-xcframework-apple

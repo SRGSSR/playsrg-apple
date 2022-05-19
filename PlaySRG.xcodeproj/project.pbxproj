@@ -1170,6 +1170,11 @@
 		6F710A2D2644637A0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2E2644637B0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2F2644637B0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
+		6F7269A92836CFE90072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269A82836CFE90072BA0B /* Introspect */; };
+		6F7269AB2836D0040072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AA2836D0040072BA0B /* Introspect */; };
+		6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AC2836D00B0072BA0B /* Introspect */; };
+		6F7269AF2836D0100072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269AE2836D0100072BA0B /* Introspect */; };
+		6F7269B12836D0160072BA0B /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 6F7269B02836D0160072BA0B /* Introspect */; };
 		6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
 		6F72E60826BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
 		6F72E60926BA6B16001A890C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F72E60526BA6B16001A890C /* SceneDelegate.m */; };
@@ -3345,6 +3350,7 @@
 				6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */,
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
+				6F7269A92836CFE90072BA0B /* Introspect in Frameworks */,
 				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
@@ -3372,6 +3378,7 @@
 				6F17DC18266AB837009F74C6 /* Nuke in Frameworks */,
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
+				6F7269AB2836D0040072BA0B /* Introspect in Frameworks */,
 				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
@@ -3399,6 +3406,7 @@
 				6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
+				6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */,
 				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
@@ -3426,6 +3434,7 @@
 				6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */,
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
+				6F7269AF2836D0100072BA0B /* Introspect in Frameworks */,
 				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
@@ -3453,6 +3462,7 @@
 				6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
 				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
+				6F7269B12836D0160072BA0B /* Introspect in Frameworks */,
 				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
@@ -5272,6 +5282,7 @@
 				04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9072812D837007C3406 /* NukeUI */,
 				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
+				6F7269A82836CFE90072BA0B /* Introspect */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5322,6 +5333,7 @@
 				04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9092812D846007C3406 /* NukeUI */,
 				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
+				6F7269AA2836D0040072BA0B /* Introspect */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5372,6 +5384,7 @@
 				04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
 				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
+				6F7269AC2836D00B0072BA0B /* Introspect */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5422,6 +5435,7 @@
 				04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90D2812D851007C3406 /* NukeUI */,
 				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
+				6F7269AE2836D0100072BA0B /* Introspect */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5472,6 +5486,7 @@
 				04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90F2812D856007C3406 /* NukeUI */,
 				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
+				6F7269B02836D0160072BA0B /* Introspect */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -6197,6 +6212,7 @@
 				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
 				04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */,
 				6FA6C9062812D837007C3406 /* XCRemoteSwiftPackageReference "NukeUI" */,
+				6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -18962,6 +18978,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/siteline/SwiftUI-Introspect.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.4;
+			};
+		};
 		6F9BF5B72720292B00945973 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
@@ -19532,6 +19556,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2544F32521BAA400F9F4FE /* XCRemoteSwiftPackageReference "srguserdata-apple" */;
 			productName = SRGUserData;
+		};
+		6F7269A82836CFE90072BA0B /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		6F7269AA2836D0040072BA0B /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		6F7269AC2836D00B0072BA0B /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		6F7269AE2836D0100072BA0B /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
+		};
+		6F7269B02836D0160072BA0B /* Introspect */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
+			productName = Introspect;
 		};
 		6F9BF5B62720292B00945973 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;
