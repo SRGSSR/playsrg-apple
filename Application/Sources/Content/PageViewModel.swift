@@ -53,12 +53,13 @@ final class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [serviceMessage] in
+        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) {
             return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
                 .map { Optional($0) }
-                .replaceError(with: serviceMessage)
+                .replaceError(with: nil)
                 .eraseToAnyPublisher()
         }
+        .removeDuplicates()
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
     }
