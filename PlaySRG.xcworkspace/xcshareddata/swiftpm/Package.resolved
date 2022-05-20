@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "b1bd6f8be7dd0f91a36b5fccc7cbe343b02213c0"
+        "revision" : "5df56e21e23ffab0e7c8f374f440d6800227e985",
+        "version" : "7.6.0"
       }
     },
     {
@@ -248,8 +248,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgappearance-apple.git",
       "state" : {
-        "revision" : "cfd2b130277502b1355863ac4a105fd9922be752",
-        "version" : "5.0.0"
+        "revision" : "8fb77eac6855c4b2765e15b597665b951893f3f2",
+        "version" : "5.1.0"
       }
     },
     {
@@ -266,8 +266,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "f8ddf11cdce9122732aa0875264ded2167fec3e7"
+        "revision" : "cf802c734d42a5a40200ad21015524093b12f7bf",
+        "version" : "14.0.0"
       }
     },
     {
@@ -284,8 +284,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgidentity-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "5cd01de36fa684ef8c04a4410cdaaafb7074aeea"
+        "revision" : "8b852be038b73b552d5f9b6d499536b70401d0bf",
+        "version" : "3.2.3"
       }
     },
     {
@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "2baf424b90731772d528d97492519437ccf2fa18"
+        "revision" : "5d0d4791e8844c7c643ead9d3b877fbf13e5a9ab",
+        "version" : "8.0.0"
       }
     },
     {
@@ -311,8 +311,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "95f56ad0ac518cbc5231b9762bad9421a5b66d47"
+        "revision" : "b0a28e88281b358b94d1ec6de8c5d65e3712c4cb",
+        "version" : "7.0.1"
       }
     },
     {

@@ -195,23 +195,23 @@ name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version
 
 name: promises, nameSpecified: promises, owner: google, version: 2.1.0, source: https://github.com/google/promises
 
-name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srganalytics-apple
+name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: 7.6.0, source: https://github.com/SRGSSR/srganalytics-apple
 
-name: srgappearance-apple, nameSpecified: srgappearance-apple, owner: SRGSSR, version: 5.0.0, source: https://github.com/SRGSSR/srgappearance-apple
+name: srgappearance-apple, nameSpecified: srgappearance-apple, owner: SRGSSR, version: 5.1.0, source: https://github.com/SRGSSR/srgappearance-apple
 
 name: srgcontentprotection-apple, nameSpecified: srgcontentprotection-apple, owner: SRGSSR, version: 3.0.4, source: https://github.com/SRGSSR/srgcontentprotection-apple
 
-name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgdataprovider-apple
+name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: 14.0.0, source: https://github.com/SRGSSR/srgdataprovider-apple
 
 name: srgdiagnostics-apple, nameSpecified: srgdiagnostics-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
-name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgidentity-apple
+name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: 3.2.3, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: 8.0.0, source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: srglogger-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srglogger-apple
 
-name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgmediaplayer-apple
+name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: 7.0.1, source: https://github.com/SRGSSR/srgmediaplayer-apple
 
 name: srgnetwork-apple, nameSpecified: srgnetwork-apple, owner: SRGSSR, version: 3.0.3, source: https://github.com/SRGSSR/srgnetwork-apple
 
