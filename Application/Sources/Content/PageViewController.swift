@@ -179,6 +179,12 @@ final class PageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // TODO: Just for PoC
+        if #available(iOS 15, *) {
+            parent?.parent?.setContentScrollView(collectionView)
+        }
+        
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)

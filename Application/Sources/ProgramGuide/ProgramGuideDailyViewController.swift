@@ -118,6 +118,12 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        // TODO: Just for PoC
+        if #available(iOS 15, *) {
+            parent?.parent?.parent?.setContentScrollView(collectionView)
+        }
+        
         scrollToTime(programGuideModel.time, animated: false)
     }
     
