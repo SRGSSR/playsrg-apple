@@ -103,13 +103,19 @@
     appearance.shadowColor = UIColor.clearColor;
     
     UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
-                                                             NSForegroundColorAttributeName : foregroundColor };
-    appearance.titleTextAttributes = attributes;
-    appearance.largeTitleTextAttributes = attributes;
+    appearance.titleTextAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:UIFontWeightSemibold fixedSize:17.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
+    appearance.largeTitleTextAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyDisplay weight:UIFontWeightBold fixedSize:30.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
     
-    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
-                                                                   NSForegroundColorAttributeName : foregroundColor };
+    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
     
     UIBarButtonItemAppearance *plainButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
     plainButtonAppearance.normal.titleTextAttributes = buttonAttributes;
@@ -120,6 +126,7 @@
     appearance.doneButtonAppearance = doneButtonAppearance;
     
     UINavigationBar *navigationBar = self.navigationBar;
+    navigationBar.prefersLargeTitles = YES;
     navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
     navigationBar.standardAppearance = appearance;
     navigationBar.compactAppearance = appearance;
