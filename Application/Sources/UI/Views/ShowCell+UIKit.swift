@@ -13,18 +13,18 @@ extension UICollectionView {
     @objc static func registerShowCell() {
         if defaultShowCellRegistration == nil {
             defaultShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
-                cell.content = ShowCell(show: show, style: .standard, imageType: .default)
+                cell.content = ShowCell(show: show, style: .standard, imageVariant: .default)
             }
         }
         if posterShowCellRegistration == nil {
             posterShowCellRegistration = UICollectionView.CellRegistration { cell, _, show in
-                cell.content = ShowCell(show: show, style: .standard, imageType: .showPoster)
+                cell.content = ShowCell(show: show, style: .standard, imageVariant: .poster)
             }
         }
     }
     
-    @objc func showCell(for indexPath: IndexPath, show: SRGShow, imageType: SRGImageType) -> UICollectionViewCell {
-        if imageType == .showPoster {
+    @objc func showCell(for indexPath: IndexPath, show: SRGShow, imageVariant: SRGImageVariant) -> UICollectionViewCell {
+        if imageVariant == .poster {
             return dequeueConfiguredReusableCell(using: Self.posterShowCellRegistration, for: indexPath, item: show)
         }
         else {

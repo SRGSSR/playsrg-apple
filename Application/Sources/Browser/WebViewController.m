@@ -76,8 +76,7 @@ static void *s_kvoContext = &s_kvoContext;
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
-    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.bounds];
-    webView.translatesAutoresizingMaskIntoConstraints = NO;
+    WKWebView *webView = [[WKWebView alloc] init];
     webView.opaque = NO;
     webView.backgroundColor = UIColor.clearColor;
     webView.alpha = 0.0f;
@@ -85,6 +84,7 @@ static void *s_kvoContext = &s_kvoContext;
     webView.scrollView.delegate = self;
     [self.view insertSubview:webView atIndex:0];
     
+    webView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [webView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
         [webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
@@ -94,11 +94,11 @@ static void *s_kvoContext = &s_kvoContext;
     self.webView = webView;
     
     UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
-    loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     loadingImageView.hidden = YES;
     [self.view insertSubview:loadingImageView atIndex:0];
     self.loadingImageView = loadingImageView;
     
+    loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [loadingImageView.centerXAnchor constraintEqualToAnchor:self.errorLabel.centerXAnchor],
         [loadingImageView.centerYAnchor constraintEqualToAnchor:self.errorLabel.centerYAnchor]

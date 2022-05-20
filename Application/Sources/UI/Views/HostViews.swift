@@ -49,10 +49,16 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
             }
             
             if let hostView = hostController?.view, hostView.superview != contentView {
-                hostView.frame = contentView.bounds
                 hostView.backgroundColor = .clear
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 contentView.addSubview(hostView)
+                
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: contentView.topAnchor),
+                    hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+                    hostView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+                ])
             }
         }
         else if let hostView = hostController?.view {
@@ -100,10 +106,16 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
             }
             
             if let hostView = hostController?.view, hostView.superview != self {
-                hostView.frame = bounds
                 hostView.backgroundColor = .clear
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 addSubview(hostView)
+                
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: topAnchor),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
             }
         }
         else if let hostView = hostController?.view {
@@ -149,11 +161,10 @@ class HostTableViewCell<Content: View>: UITableViewCell {
             }
             
             if let hostView = hostController?.view, hostView.superview != contentView {
-                hostView.frame = contentView.bounds
                 hostView.backgroundColor = .clear
-                hostView.translatesAutoresizingMaskIntoConstraints = false
                 contentView.addSubview(hostView)
                 
+                hostView.translatesAutoresizingMaskIntoConstraints = false
                 NSLayoutConstraint.activate([
                     hostView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: LayoutMargin / 2),
                     hostView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -LayoutMargin / 2),
@@ -205,10 +216,16 @@ class HostView<Content: View>: UIView {
             }
             
             if let hostView = hostController?.view, hostView.superview != self {
-                hostView.frame = bounds
                 hostView.backgroundColor = .clear
-                hostView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 addSubview(hostView)
+                
+                hostView.translatesAutoresizingMaskIntoConstraints = false
+                NSLayoutConstraint.activate([
+                    hostView.topAnchor.constraint(equalTo: topAnchor),
+                    hostView.bottomAnchor.constraint(equalTo: bottomAnchor),
+                    hostView.leadingAnchor.constraint(equalTo: leadingAnchor),
+                    hostView.trailingAnchor.constraint(equalTo: trailingAnchor)
+                ])
             }
         }
         else if let hostView = hostController?.view {

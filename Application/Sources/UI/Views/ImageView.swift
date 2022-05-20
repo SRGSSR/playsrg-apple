@@ -5,47 +5,159 @@
 //
 
 import Nuke
+import NukeUI
 import SwiftUI
 
 // MARK: View
 
-/// Behavior: h-exp, v-exp (like `Image/resizable()`)
-struct ImageView: UIViewRepresentable {
-    let url: URL?
+/**
+ *  An image view supporting content modes for image scaling and alignment.
+ *
+ *  Remark: This cannot be implemented with Nuke resizing processors because the image size is usually not reliably known
+ *          when SwiftUI builds the view for the first time. Instead we use SwiftUI frames to size the content and position
+ *          it afterwards.
+ *
+ *  Behavior: h-exp, v-exp
+ */
+struct ImageView: View {
+    enum ContentMode {
+        case aspectFit
+        case aspectFill
+        case center
+        case fill
+        case top
+        case bottom
+        case left
+        case right
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+        case aspectFitTop
+        case aspectFitBottom
+        case aspectFitLeft
+        case aspectFitRight
+        case aspectFitTopLeft
+        case aspectFitTopRight
+        case aspectFitBottomLeft
+        case aspectFitBottomRight
+        case aspectFillTop
+        case aspectFillBottom
+        case aspectFillLeft
+        case aspectFillRight
+        case aspectFillTopLeft
+        case aspectFillTopRight
+        case aspectFillBottomLeft
+        case aspectFillBottomRight
+    }
+    
+    let source: ImageRequestConvertible?
     let contentMode: ContentMode
     
-    init(url: URL?, contentMode: ContentMode = constant(iOS: .fit, tvOS: .fill)) {
-        self.url = url
+    private static func alignment(for contentMode: ImageView.ContentMode) -> Alignment {
+        switch contentMode {
+        case .aspectFit, .aspectFill, .center, .fill:
+            return .center
+        case .top, .aspectFitTop, .aspectFillTop:
+            return .top
+        case .bottom, .aspectFitBottom, .aspectFillBottom:
+            return .bottom
+        case .left, .aspectFitLeft, .aspectFillLeft:
+            return .leading
+        case .right, .aspectFitRight, .aspectFillRight:
+            return .trailing
+        case .topLeft, .aspectFitTopLeft, .aspectFillTopLeft:
+            return .topLeading
+        case .topRight, .aspectFitTopRight, .aspectFillTopRight:
+            return .topTrailing
+        case .bottomLeft, .aspectFitBottomLeft, .aspectFillBottomLeft:
+            return .bottomLeading
+        case .bottomRight, .aspectFitBottomRight, .aspectFillBottomRight:
+            return .bottomTrailing
+        }
+    }
+    
+    private static func fitSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
+        let imageSize = imageContainer.image.size
+        guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
+        
+        let targetSize = geometry.size
+        guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
+        
+        let imageAspectRatio = imageSize.width / imageSize.height
+        let targetAspectRatio = targetSize.width / targetSize.height
+        
+        if targetAspectRatio > imageAspectRatio {
+            return CGSize(width: targetSize.height * imageAspectRatio, height: targetSize.height)
+        }
+        else {
+            return CGSize(width: targetSize.width, height: targetSize.width / imageAspectRatio)
+        }
+    }
+    
+    private static func fillSize(for imageContainer: ImageContainer, in geometry: GeometryProxy) -> CGSize {
+        let imageSize = imageContainer.image.size
+        guard imageSize.width != 0 && imageSize.height != 0 else { return .zero }
+        
+        let targetSize = geometry.size
+        guard targetSize.width != 0 && targetSize.height != 0 else { return .zero }
+        
+        let imageAspectRatio = imageSize.width / imageSize.height
+        let targetAspectRatio = targetSize.width / targetSize.height
+        
+        if targetAspectRatio > imageAspectRatio {
+            return CGSize(width: targetSize.width, height: targetSize.width / imageAspectRatio)
+        }
+        else {
+            return CGSize(width: targetSize.height * imageAspectRatio, height: targetSize.height)
+        }
+    }
+    
+    init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFit) {
+        self.source = source
         self.contentMode = contentMode
     }
     
-    func makeUIView(context: Context) -> UIImageView {
-        let imageView = UIImageView()
-        imageView.applySizingBehavior(.expanding)
-        return imageView
-    }
-    
-    func updateUIView(_ uiView: UIImageView, context: Context) {
-        uiView.contentMode = Self.contentMode(contentMode)
-        
-        if let url = url {
-            let options = ImageLoadingOptions(
-                transition: .fadeIn(duration: 0.5)
-            )
-            Nuke.loadImage(with: url, options: options, into: uiView)
-        }
-        else {
-            Nuke.cancelRequest(for: uiView)
-            uiView.image = nil
-        }
-    }
-    
-    private static func contentMode(_ contentMode: ContentMode) -> UIView.ContentMode {
-        switch contentMode {
-        case .fit:
-            return .scaleAspectFit
-        case .fill:
-            return .scaleAspectFill
+    var body: some View {
+        GeometryReader { geometry in
+            LazyImage(source: source) { state in
+                if let image = state.image, let imageContainer = state.imageContainer {
+                    switch contentMode {
+                    case .aspectFit:
+                        image
+                            .resizingMode(.aspectFit)
+                    case .aspectFill:
+                        image
+                            .resizingMode(.aspectFill)
+                    case .center:
+                        image
+                            .resizingMode(.center)
+                    case .fill:
+                        image
+                            .resizingMode(.fill)
+                    case .top, .bottom, .left, .right,
+                            .topLeft, .topRight, .bottomLeft, .bottomRight:
+                        image
+                            .frame(size: imageContainer.image.size)
+                            .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                    case .aspectFitTop, .aspectFitBottom, .aspectFitLeft, .aspectFitRight,
+                            .aspectFitTopLeft, .aspectFitTopRight, .aspectFitBottomLeft, .aspectFitBottomRight:
+                        image
+                            .resizingMode(.fill)
+                            .frame(size: Self.fitSize(for: imageContainer, in: geometry))
+                            .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                    case .aspectFillTop, .aspectFillBottom, .aspectFillLeft, .aspectFillRight,
+                            .aspectFillTopLeft, .aspectFillTopRight, .aspectFillBottomLeft, .aspectFillBottomRight:
+                        image
+                            .resizingMode(.fill)
+                            .frame(size: Self.fillSize(for: imageContainer, in: geometry))
+                            .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                    }
+                }
+                else {
+                    Color.placeholder
+                }
+            }
         }
     }
 }
@@ -53,14 +165,8 @@ struct ImageView: UIViewRepresentable {
 // MARK: Preview
 
 struct ImageView_Previews: PreviewProvider {
-    private static let contentMode: ContentMode = .fill
-    
     static var previews: some View {
-        Group {
-            ImageView(url: URL(string: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400")!)
-            ImageView(url: URL(string: "https://www.rts.ch/2021/04/02/10/23/12095345.image/scale/width/400")!)
-        }
-        .aspectRatio(contentMode: .fit)
-        .previewLayout(.fixed(width: 600, height: 600))
+        ImageView(source: "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400")
+            .previewLayout(.fixed(width: 1000, height: 1000))
     }
 }

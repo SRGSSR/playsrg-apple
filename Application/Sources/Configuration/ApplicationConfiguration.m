@@ -116,6 +116,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSURL *betaTestingURL;
 @property (nonatomic) NSURL *sourceCodeURL;
 
+@property (nonatomic, copy) NSString *supportEmailAddress;
+
 @property (nonatomic, getter=areDownloadsHintsHidden) BOOL downloadsHintsHidden;
 @property (nonatomic, getter=areShowsUnavailable) BOOL showsUnavailable;
 @property (nonatomic, getter=isTvGuideUnavailable) BOOL tvGuideUnavailable;
@@ -308,8 +310,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     // Optional values
     //
     
-    NSString *voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
-    self.voiceOverLanguageCode = voiceOverLanguageCode;
+    self.voiceOverLanguageCode = [firebaseConfiguration stringForKey:@"voiceOverLanguageCode"];
     
     NSString *identityWebserviceURLString = [firebaseConfiguration stringForKey:@"identityWebserviceURL"];
     self.identityWebserviceURL = identityWebserviceURLString ? [NSURL URLWithString:identityWebserviceURLString] : nil;
@@ -337,6 +338,8 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSString *dataProtectionURLString = [firebaseConfiguration stringForKey:@"dataProtectionURL"];
     self.dataProtectionURL = dataProtectionURLString ? [NSURL URLWithString:dataProtectionURLString] : nil;
+    
+    self.supportEmailAddress = [firebaseConfiguration stringForKey:@"supportEmailAddress"];
     
     NSNumber *minimumSocialViewCount = [firebaseConfiguration numberForKey:@"minimumSocialViewCount"];
     self.minimumSocialViewCount = minimumSocialViewCount ? MAX(minimumSocialViewCount.integerValue, 0) : NSIntegerMax;

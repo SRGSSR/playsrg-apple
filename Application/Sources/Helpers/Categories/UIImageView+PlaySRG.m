@@ -13,6 +13,7 @@
 #import <objc/runtime.h>
 
 @import SRGAppearance;
+@import SRGDataProviderNetwork;
 @import YYWebImage;
 
 @implementation UIImageView (PlaySRG)
@@ -107,15 +108,14 @@
 
 #pragma mark Standard image loading
 
-- (void)play_requestImageForObject:(id<SRGImage>)object
-                         withScale:(ImageScale)scale
-                              type:(SRGImageType)type
-                       placeholder:(ImagePlaceholder)placeholder
-             unavailabilityHandler:(void (^)(void))unavailabilityHandler
+- (void)play_requestImage:(SRGImage *)image
+                 withSize:(SRGImageSize)size
+              placeholder:(ImagePlaceholder)placeholder
+    unavailabilityHandler:(void (^)(void))unavailabilityHandler
 {
     NSString *filePath = FilePathForImagePlaceholder(placeholder);
-    CGSize size = SizeForImageScale(scale, type);
-    UIImage *placeholderImage = filePath ? [UIImage srg_vectorImageAtPath:filePath withSize:size] : nil;
+    CGSize recommendedSize = SRGRecommendedImageCGSize(size, image.variant);
+    UIImage *placeholderImage = filePath ? [UIImage srg_vectorImageAtPath:filePath withSize:recommendedSize] : nil;
     
     void (^handleUnavailableURL)(void) = ^{
         if (unavailabilityHandler) {
@@ -126,12 +126,12 @@
         }
     };
     
-    if (! object) {
+    if (! image) {
         handleUnavailableURL();
         return;
     }
     
-    NSURL *URL = [object imageURLForDimension:SRGImageDimensionWidth withValue:size.width type:type];
+    NSURL *URL = [SRGDataProvider.currentDataProvider URLForImage:image withSize:size scaling:SRGImageScalingDefault];
     
     // Fix for invalid images, incorrect Kids program images, and incorrect images for sports (RTS)
     // See https://srfmmz.atlassian.net/browse/AIS-15672
@@ -164,13 +164,12 @@
     }
 }
 
-- (void)play_requestImageForObject:(id<SRGImage>)object
-                         withScale:(ImageScale)imageScale
-                              type:(SRGImageType)type
-                       placeholder:(ImagePlaceholder)placeholder
+- (void)play_requestImage:(SRGImage *)image
+                 withSize:(SRGImageSize)size
+              placeholder:(ImagePlaceholder)placeholder;
 
 {
-    [self play_requestImageForObject:object withScale:imageScale type:type placeholder:placeholder unavailabilityHandler:nil];
+    [self play_requestImage:image withSize:size placeholder:placeholder unavailabilityHandler:nil];
 }
 
 - (void)play_resetImage

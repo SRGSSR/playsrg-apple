@@ -64,7 +64,7 @@ struct MediaCell: View {
         Group {
 #if os(tvOS)
             LabeledCardButton(aspectRatio: MediaCellSize.aspectRatio, action: action ?? defaultAction) {
-                MediaVisualView(media: media, scale: .small)
+                MediaVisualView(media: media, size: .small)
                     .onParentFocusChange(perform: onFocusChange)
                     .unredactable()
                     .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
@@ -74,9 +74,8 @@ struct MediaCell: View {
             }
 #else
             Stack(direction: direction, spacing: 0) {
-                MediaVisualView(media: media, scale: .small)
+                MediaVisualView(media: media, size: .small)
                     .aspectRatio(MediaCellSize.aspectRatio, contentMode: .fit)
-                    .background(Color.placeholder)
                     .selectionAppearance(when: hasSelectionAppearance, while: isEditing)
                     .cornerRadius(LayoutStandardViewCornerRadius)
                     .redactable()

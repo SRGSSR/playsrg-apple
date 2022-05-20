@@ -80,11 +80,10 @@ final class SectionViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         collectionView.allowsMultipleSelectionDuringEditing = true
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -621,7 +620,7 @@ private extension SectionViewController {
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: configuration.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
+                        return ShowCellSize.grid(for: configuration.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .topicGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
@@ -668,26 +667,26 @@ private extension SectionViewController {
                     }
                 }
             case let .show(show):
-                let imageType = configuration.properties.imageType
+                let imageVariant = configuration.properties.imageVariant
                 switch configuration.wrappedValue {
                 case let .content(contentSection):
                     switch contentSection.type {
                     case .predefined:
                         switch contentSection.presentation.type {
                         case .favoriteShows:
-                            ShowCell(show: show, style: .favorite, imageType: imageType)
+                            ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
                         default:
-                            ShowCell(show: show, style: .standard, imageType: imageType)
+                            ShowCell(show: show, style: .standard, imageVariant: imageVariant)
                         }
                     default:
-                        ShowCell(show: show, style: .standard, imageType: imageType)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
                     }
                 case let .configured(configuredSection):
                     switch configuredSection {
                     case .favoriteShows, .radioFavoriteShows:
-                        ShowCell(show: show, style: .favorite, imageType: imageType)
+                        ShowCell(show: show, style: .favorite, imageVariant: imageVariant)
                     default:
-                        ShowCell(show: show, style: .standard, imageType: imageType)
+                        ShowCell(show: show, style: .standard, imageVariant: imageVariant)
                     }
                 }
             case let .topic(topic: topic):

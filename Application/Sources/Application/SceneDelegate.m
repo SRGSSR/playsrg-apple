@@ -513,8 +513,12 @@ static void *s_kvoContext = &s_kvoContext;
 {
     if (s_kvoContext == context) {
         if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages]) {
-            // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the user interface
-            self.window.rootViewController = [[TabBarController alloc] init];
+            // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the
+            // user interface. Scheduled for the next run loop to have the same code in the app delegate (updating the
+            // data provider) executed first.
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.window.rootViewController = [[TabBarController alloc] init];
+            });
         }
     }
     else {

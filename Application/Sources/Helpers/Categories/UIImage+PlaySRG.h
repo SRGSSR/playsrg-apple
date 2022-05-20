@@ -9,23 +9,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, ImageScale) {
-    ImageScaleSmall,
-    ImageScaleMedium,
-    ImageScaleLarge
-};
-
 typedef NS_ENUM(NSInteger, ImagePlaceholder) {
     ImagePlaceholderNone,
     ImagePlaceholderMedia,
     ImagePlaceholderMediaList,
     ImagePlaceholderNotification
 };
-
-/**
- *  Return the size corresponding to a given scale and type. Takes into account the device screen scale.
- */
-OBJC_EXPORT CGSize SizeForImageScale(ImageScale imageScale, SRGImageType imageType);
 
 /**
  *  Return the file path corresponding to an image placeholder.

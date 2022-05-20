@@ -26,8 +26,8 @@ final class GoogleCastFloatingButton: GCKUICastButton {
     
     private func layout() {
         tintColor = .white
-        translatesAutoresizingMaskIntoConstraints = false
         
+        translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             widthAnchor.constraint(equalToConstant: Self.side),
             heightAnchor.constraint(equalToConstant: Self.side)

@@ -7,6 +7,8 @@
 		<dict>
 			<key>FooterText</key>
 			<string>https://developers.google.com/terms/</string>
+			<key>License</key>
+			<string>unknown</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

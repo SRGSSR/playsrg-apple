@@ -1,3 +1,6 @@
+/* Speed factor with current value if different from desired one */
+"%1$@× (Currently: %2$@×)" = "%1$@× (Actual: %2$@×)";
+
 /* Seek backward shortcut label */
 "%@ backward" = "%@ enavos";
 
@@ -46,9 +49,6 @@
 /* Speed factor */
 "%@×" = "%@×";
 
-/* Speed factor with current value if different from desired one */
-"%@× (Now: %@×)" = "%1$@× (Ussa: %2$@×)";
-
 /* Title displayed when several items have been selected */
 "%d items" = "%d elements";
 
@@ -90,6 +90,9 @@
 /* Message description displayed when the user could not be subscribed to all TV and radio shows */
 "Automatic subscriptions failed. Please retry." = "Errur. Per plaschair empruvar anc ina giada.";
 
+/* Availability until date, specified as parameter */
+"Available until %@" = "Disponibel enfin %@";
+
 /* Back to live shortcut label */
 "Back to live" = "Enavos tar live";
 
@@ -114,6 +117,9 @@
 
 /* Message displayed when the user is about to delete content saved for later */
 "Content saved for later will be deleted on all devices connected to your account." = "Cuntegn arcunà per pli tard vegn allontanà da tut ils apparats cun voss account.";
+
+/* Label of the button to copy support information to the pasteboard */
+"Copy to the pasteboard" = "Copiar el archiv provisoric";
 
 /* Sort by date option */
 "Date" = "Data";
@@ -254,9 +260,6 @@
 /* Title label used to present the radio latest videos */
 "Latest videos" = "Ils pli novs videos";
 
-/* Explains that a content has expired, will expire or will be available in less than one hour. Displayed in the media player view. */
-"less than 1 hour" = "main ch'ina ura";
-
 /* Play button label for audio in media detail view */
 "Listen" = "Tadlar";
 
@@ -357,9 +360,6 @@
 
 /* Default text displayed when no results are available */
 "No results" = "Nagin resultat";
-
-/* Explains that a content has expired (days or hours ago). Displayed in the media player view. */
-"Not available since %@" = "Betg accessibel dapi %@";
 
 /* Label to present the help page */
 "Notifications" = "Notificaziuns";
@@ -462,6 +462,9 @@
 /* Title displayed when no item has been selected */
 "Select items" = "Selecziunar elements";
 
+/* Label of the button to send support information by email */
+"Send by email" = "Trametter per e-mail";
+
 /* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Midà server tar '%@'";
 
@@ -503,9 +506,6 @@
 
 /* Start over shortcut label */
 "Start over" = "Recumenzar";
-
-/* Explains that a content is still online (for days or hours) but will expire. Displayed in the media player view. */
-"Still available for %@" = "Anc accessibel per %@";
 
 /* Title of a subscription button */
 "Subscribe" = "Abunar";
@@ -663,8 +663,7 @@
    Context menu action to add a video to the later list */
 "Watch later" = "Guardar pli tard";
 
-/* Web first label on media cells
-   Web first label on media detail page */
+/* Short label identifying a web first content. */
 "Web first" = "Web l'emprim";
 
 /* Title displayed at the top of the What's new view */

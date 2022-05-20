@@ -4,12 +4,14 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "BaseViewController.h"
+
 @import SRGAnalytics;
 @import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MediaPlayerViewController : UIViewController <SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
+@interface MediaPlayerViewController : BaseViewController <SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
     UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
 
 // Use nil for starting at the default location (resumes if the media is already being played)

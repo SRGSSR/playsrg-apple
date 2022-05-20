@@ -23,8 +23,6 @@
 #import "ModalTransition.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
-#import "NSString+PlaySRG.h"
-#import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
@@ -123,10 +121,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 
+@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *availabilityLabel;
-@property (nonatomic, weak) IBOutlet UIStackView *dateStackView;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
+@property (nonatomic, weak) IBOutlet UIStackView *viewCountStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *viewCountImageView;
 @property (nonatomic, weak) IBOutlet UILabel *viewCountLabel;
 @property (nonatomic, weak) IBOutlet UIButton *detailsButton;
@@ -179,6 +177,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UITableView *programsTableView;
 
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *availabilityLabelHeightConstraint;
+
 // Switching to and from full-screen is made by adjusting the priority of constraints at the top and bottom of the player view
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerTopConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *playerBottomConstraint;
@@ -195,8 +195,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, weak) IBOutlet UIGestureRecognizer *detailsGestureRecognizer;
 @property (nonatomic, weak) IBOutlet UIPanGestureRecognizer *pullDownGestureRecognizer;
-
-@property (nonatomic, weak) UIPinchGestureRecognizer *pinchGestureRecognizer;
 
 @property (nonatomic, getter=isTransitioning) BOOL transitioning;           // Whether the UI is currently transitioning between class sizes
 @property (nonatomic, getter=isStatusBarHidden) BOOL statusBarHidden;
@@ -425,6 +423,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.radioHomeButton.layer.masksToBounds = YES;
     [self.radioHomeButton setTitle:nil forState:UIControlStateNormal];
     
+    [self updateAvailabilityLabelHeight];
+    
     // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
         self.letterboxView.controller = self.letterboxController;
@@ -521,13 +521,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.closeButton.accessibilityIdentifier = AccessibilityIdentifierCloseButton;
     
     self.shareButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Share", @"Share button label on player view");
-    
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        UIPinchGestureRecognizer *pinchGestureRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(handlePinch:)];
-        pinchGestureRecognizer.delegate = self;
-        [self.letterboxView addGestureRecognizer:pinchGestureRecognizer];
-        self.pinchGestureRecognizer = pinchGestureRecognizer;
-    }
     
     [self reloadDataOverriddenWithMedia:nil mainChapterMedia:nil];
 }
@@ -641,10 +634,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 #pragma mark Accessibility
 
-- (BOOL)accessibilityPerformEscape
+- (void)updateForContentSizeCategory
 {
-    [self play_dismissViewControllerAnimated:YES completion:nil];
-    return YES;
+    [super updateForContentSizeCategory];
+    
+    [self updateAvailabilityLabelHeight];
+}
+
+- (void)updateAvailabilityLabelHeight
+{
+    self.availabilityLabelHeightConstraint.constant = [[SRGFont metricsForFontWithStyle:SRGFontStyleLabel] scaledValueForValue:20.f];
 }
 
 #pragma mark Modal presentation
@@ -822,20 +821,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.scrollView.hidden = NO;
         self.channelView.hidden = YES;
         
-        [self.availabilityLabel play_displayAvailabilityLabelForMediaMetadata:mainChapterMedia];
+        [self.availabilityLabel play_displayAvailabilityBadgeForMediaMetadata:mainChapterMedia];
         
         self.titleLabel.font = [SRGFont fontWithStyle:SRGFontStyleH2];
         self.titleLabel.text = media.title;
         
-        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
-        if (media.date) {
-            self.dateLabel.text = [NSDateFormatter.play_relativeDateAndTimeFormatter stringFromDate:media.date].play_localizedUppercaseFirstLetterString;
-            self.dateLabel.accessibilityLabel = PlayAccessibilityRelativeDateAndTimeFromDate(media.date);
-        }
-        else {
-            self.dateLabel.text = nil;
-            self.dateLabel.accessibilityLabel = nil;
-        }
+        self.dateLabel.font = [SRGFont fontWithStyle:SRGFontStyleCaption];
+        [self.dateLabel play_displayDateLabelForMediaMetadata:media];
         
         [self removeSongPanel];
         
@@ -935,7 +927,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)reloadDetailsWithShow:(SRGShow *)show
 {
     if (show) {
-        [self.showThumbnailImageView play_requestImageForObject:show withScale:ImageScaleSmall type:SRGImageTypeDefault placeholder:ImagePlaceholderMediaList unavailabilityHandler:nil];
+        [self.showThumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
         self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
         self.showLabel.text = show.title;
@@ -1262,7 +1254,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateDownloadStatusForMedia:(SRGMedia *)media
 {
-    if (self.letterboxController.continuousPlaybackUpcomingMedia || ! media || ! [Download canDownloadMedia:media]) {
+    if (self.letterboxController.continuousPlaybackUpcomingMedia || ! media || ! [Download canToggleDownloadForMedia:media]) {
         self.downloadButton.hidden = YES;
         return;
     }
@@ -1762,7 +1754,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-    if (gestureRecognizer == self.pullDownGestureRecognizer || gestureRecognizer == self.pinchGestureRecognizer) {
+    if (gestureRecognizer == self.pullDownGestureRecognizer) {
         return ! [touch.view isKindOfClass:UISlider.class];
     }
     else {
@@ -1783,9 +1775,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     if (gestureRecognizer == self.pullDownGestureRecognizer) {
-        return [otherGestureRecognizer isKindOfClass:SRGActivityGestureRecognizer.class];
-    }
-    else if (gestureRecognizer == self.pinchGestureRecognizer) {
         return [otherGestureRecognizer isKindOfClass:SRGActivityGestureRecognizer.class];
     }
     else {
@@ -1891,24 +1880,24 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                      action:@selector(exitFullScreen:)];
     [keyCommands addObject:exitFullScreenCommand];
     
-    if ([self.letterboxController canSkipWithInterval:SRGLetterboxForwardSkipInterval]) {
+    if ([self.letterboxController canSkipForward]) {
         UIKeyCommand *skipForwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputRightArrow
                                                                modifierFlags:0
                                                                       action:@selector(skipForward:)];
         skipForwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
-                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxForwardSkipInterval]];
+                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
         if (@available(iOS 15, *)) {
             skipForwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
         [keyCommands addObject:skipForwardCommand];
     }
     
-    if ([self.letterboxController canSkipWithInterval:-SRGLetterboxBackwardSkipInterval]) {
+    if ([self.letterboxController canSkipBackward]) {
         UIKeyCommand *skipBackwardCommand = [UIKeyCommand keyCommandWithInput:UIKeyInputLeftArrow
                                                                 modifierFlags:0
                                                                        action:@selector(skipBackward:)];
         skipBackwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
-                                                   [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxBackwardSkipInterval]];
+                                                   [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
         if (@available(iOS 15, *)) {
             skipBackwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
@@ -1951,12 +1940,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)skipForward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:SRGLetterboxForwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipForwardWithCompletionHandler:nil];
 }
 
 - (void)skipBackward:(UIKeyCommand *)command
 {
-    [self.letterboxController skipWithInterval:-SRGLetterboxBackwardSkipInterval completionHandler:nil];
+    [self.letterboxController skipBackwardWithCompletionHandler:nil];
 }
 
 - (void)skipToLive:(UIKeyCommand *)command
@@ -1994,7 +1983,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (IBAction)toggleDownload:(id)sender
 {
     SRGMedia *media = [self mainChapterMedia];
-    if (! media || ! [Download canDownloadMedia:media]) {
+    if (! media || ! [Download canToggleDownloadForMedia:media]) {
         return;
     }
     
@@ -2273,13 +2262,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     if (self.letterboxView.userInterfaceTogglable) {
         [self.letterboxView setUserInterfaceHidden:! self.letterboxView.userInterfaceHidden animated:YES togglable:YES];
-    }
-}
-
-- (IBAction)handlePinch:(UIPinchGestureRecognizer *)gestureRecognizer
-{
-    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-        [self.letterboxView setFullScreen:(gestureRecognizer.scale > 1.f) animated:YES];
     }
 }
 

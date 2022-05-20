@@ -12,7 +12,7 @@
 
 - (BOOL)play_isToday
 {
-    return [NSCalendar.currentCalendar isDateInToday:self.date];
+    return [NSCalendar.srg_defaultCalendar isDateInToday:self.date];
 }
 
 - (NSString *)play_fullSummary

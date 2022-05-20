@@ -11,7 +11,6 @@
 "Clear vector image cache" = "Clear vector image cache";
 "Clear web cache" = "Clear web cache";
 "Content" = "Content";
-"Copy support information" = "Copy support information";
 "Data protection" = "Data protection";
 "Default (current configuration)" = "Default (current configuration)";
 "Default (IP-based location)" = "Default (IP-based location)";
@@ -49,6 +48,7 @@
 "Standalone playback" = "Standalone playback";
 "Subscribe to all shows" = "Subscribe to all topics";
 "Subtitle availability" = "Subtitle availability";
+"Support information" = "Support information";
 "Terms and conditions" = "Terms and conditions";
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "This section is only available in nightly and beta versions, and won't appear in the production version.";

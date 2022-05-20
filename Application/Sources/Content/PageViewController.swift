@@ -95,11 +95,10 @@ final class PageViewController: UIViewController {
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
-        
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
         self.collectionView = collectionView
         
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -556,7 +555,7 @@ private extension PageViewController {
                     return layoutSection
                 case .showSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
-                        return ShowCellSize.swimlane(for: section.properties.imageType)
+                        return ShowCellSize.swimlane(for: section.properties.imageVariant)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -583,7 +582,7 @@ private extension PageViewController {
                     }
                 case .showGrid:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: section.properties.imageType, layoutWidth: layoutWidth, spacing: spacing)
+                        return ShowCellSize.grid(for: section.properties.imageVariant, layoutWidth: layoutWidth, spacing: spacing)
                     }
 #if os(iOS)
                 case .showAccess:
@@ -642,7 +641,7 @@ private extension PageViewController {
             case .highlight:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
             default:
-                PlaySRG.ShowCell(show: show, style: .standard, imageType: section.properties.imageType)
+                PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant)
             }
         }
     }
@@ -681,7 +680,7 @@ private extension PageViewController {
                     Color.clear
                 }
             case .more:
-                MoreCell(section: item.section.wrappedValue, imageType: item.section.properties.imageType, filter: id)
+                MoreCell(section: item.section.wrappedValue, imageVariant: item.section.properties.imageVariant, filter: id)
             }
         }
     }

@@ -142,14 +142,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [super viewDidLoad];
     
     // The mini player is not available for all BUs
-    MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] initWithFrame:CGRectZero];
-    miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
+    MiniPlayerView *miniPlayerView = [[MiniPlayerView alloc] init];
     miniPlayerView.layer.shadowOpacity = 0.9f;
     miniPlayerView.layer.shadowRadius = 5.f;
     [self.view insertSubview:miniPlayerView belowSubview:self.tabBar];
-    
     self.miniPlayerView = miniPlayerView;
     
+    miniPlayerView.translatesAutoresizingMaskIntoConstraints = NO;
     @weakify(self)
     [miniPlayerView addObserver:self keyPath:@keypath(miniPlayerView.active) options:0 block:^(MAKVONotification *notification) {
         @strongify(self)
@@ -274,13 +273,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     inlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
     inlineItemAppearance.selected.iconColor = selectedForegroundColor;
     appearance.inlineLayoutAppearance = inlineItemAppearance;
-    
-    UITabBarItemAppearance *compactInlineItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleCompactInline];
-    compactInlineItemAppearance.normal.titleTextAttributes = normalItemAttributes;
-    compactInlineItemAppearance.normal.iconColor = normalForegroundColor;
-    compactInlineItemAppearance.selected.titleTextAttributes = selectedItemAttributes;
-    compactInlineItemAppearance.selected.iconColor = selectedForegroundColor;
-    appearance.compactInlineLayoutAppearance = compactInlineItemAppearance;
     
     UITabBar *tabBar = self.tabBar;
     tabBar.standardAppearance = appearance;

@@ -31,6 +31,10 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
 * `whatsNewURL` (mandatory, string): The URL at which the update information can be retrieved.
 
+## Email
+
+* `supportEmailAddress` (optional, string): The email to send support information to.
+
 ## Analytics
 
 * `siteName` (mandatory, string): The iOS site name to send events to.

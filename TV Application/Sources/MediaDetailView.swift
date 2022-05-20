@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SRGAnalyticsSwiftUI
 import SRGAppearanceSwift
 import SRGLetterbox
@@ -19,7 +20,7 @@ struct MediaDetailView: View {
     
     var body: some View {
         ZStack {
-            ImageView(url: model.imageUrl)
+            ImageView(source: model.imageUrl)
             Color(white: 0, opacity: 0.6)
             VStack {
                 DescriptionView(model: model)
@@ -44,7 +45,6 @@ struct MediaDetailView: View {
     
     private struct DescriptionView: View {
         @ObservedObject var model: MediaDetailViewModel
-        
         @Namespace private var namespace
         
         var body: some View {
@@ -59,6 +59,7 @@ struct MediaDetailView: View {
                             .srgFont(.H3)
                             .foregroundColor(.white)
                     }
+                    AvailabilityView(model: model)
                     Spacer()
                         .frame(height: 20)
                     VStack(alignment: .leading, spacing: 0) {
@@ -80,7 +81,33 @@ struct MediaDetailView: View {
         }
     }
     
-    struct AttributeView: View {
+    private struct AvailabilityView: View {
+        @ObservedObject var model: MediaDetailViewModel
+        
+        private var availabilityInformation: String {
+            guard let media = model.media else { return .placeholder(length: 15) }
+            return MediaDescription.availability(for: media)
+        }
+        
+        private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+            guard let media = model.media else { return nil }
+            return MediaDescription.availabilityBadgeProperties(for: media)
+        }
+        
+        var body: some View {
+            HStack(spacing: 20) {
+                Text(availabilityInformation)
+                    .srgFont(.subtitle2)
+                    .foregroundColor(.white)
+                    .padding(.vertical, 5)
+                if let properties = availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                }
+            }
+        }
+    }
+    
+    private struct AttributeView: View {
         let icon: String
         let values: [String]
         
@@ -95,7 +122,7 @@ struct MediaDetailView: View {
         }
     }
     
-    struct AttributesView: View {
+    private struct AttributesView: View {
         @ObservedObject var model: MediaDetailViewModel
         
         var body: some View {
@@ -108,10 +135,6 @@ struct MediaDetailView: View {
                         DurationBadge(duration: duration)
                     }
                 }
-                
-                if let isWebFirst = model.media?.play_isWebFirst, isWebFirst {
-                    Badge(text: NSLocalizedString("Web first", comment: "Web first label on media detail page"), color: Color.srgBlue)
-                }
                 if let subtitleLanguages = model.media?.play_subtitleLanguages, !subtitleLanguages.isEmpty {
                     AttributeView(icon: "subtitle_tracks", values: subtitleLanguages)
                 }
@@ -122,19 +145,9 @@ struct MediaDetailView: View {
         }
     }
     
-    struct SummaryView: View {
+    private struct SummaryView: View {
         @ObservedObject var model: MediaDetailViewModel
         @State var isFocused = false
-        
-        var availabilityInformation: String {
-            guard let media = model.media else { return .placeholder(length: 15)}
-            var publication = DateFormatter.play_dateAndTime.string(from: media.date)
-            if let availability = MediaDescription.availability(for: media) {
-                // Unbreakable spaces before / after the separator
-                publication += " - " + availability
-            }
-            return publication
-        }
         
         var body: some View {
             GeometryReader { geometry in
@@ -152,17 +165,12 @@ struct MediaDetailView: View {
                         }
                         .buttonStyle(TextButtonStyle(focused: isFocused))
                     }
-                    
-                    Text(availabilityInformation)
-                        .srgFont(.subtitle2)
-                        .foregroundColor(.white)
-                        .padding(.vertical, 5)
                 }
             }
         }
     }
     
-    struct ActionsView: View {
+    private struct ActionsView: View {
         @ObservedObject var model: MediaDetailViewModel
         
         var playButtonLabel: String {

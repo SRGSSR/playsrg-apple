@@ -32,6 +32,7 @@
 
 @import AppCenterDistribute;
 @import libextobjc;
+@import MessageUI;
 @import SafariServices;
 @import SRGAppearance;
 @import SRGDataProviderNetwork;
@@ -64,7 +65,7 @@ static NSString * const SettingsFeedbackButton = @"Button_Feedback";
 static NSString * const SettingsSourceCodeButton = @"Button_SourceCode";
 static NSString * const SettingsBetaTestingButton = @"Button_BetaTesting";
 static NSString * const SettingsApplicationVersionCell = @"Cell_ApplicationVersion";
-static NSString * const SettingsCopySupportInformationButton = @"Button_CopySupportInformation";
+static NSString * const SettingsSupportInformationButton = @"Button_SupportInformation";
 
 // Advanced features settings group
 static NSString * const SettingsAdvancedFeaturesGroup = @"Group_AdvancedFeatures";
@@ -91,7 +92,7 @@ static NSString * const SettingsSimulateMemoryWarning = @"Button_SimulateMemoryW
 static NSString * const SettingsDeveloperGroup = @"Group_Developer";
 static NSString * const SettingsFLEXButton = @"Button_FLEX";
 
-@interface SettingsViewController () <SFSafariViewControllerDelegate>
+@interface SettingsViewController () <MFMailComposeViewControllerDelegate, SFSafariViewControllerDelegate>
 
 @property (nonatomic) SRGRequestQueue *requestQueue;
 
@@ -239,46 +240,6 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     }
     
     self.hiddenKeys = hiddenKeys.copy;
-}
-
-#pragma mark Support information
-
-- (NSString *)supportInformation
-{
-    NSMutableArray<NSString *> *supportInformationComponents = [NSMutableArray array];
-    
-    [supportInformationComponents addObject:@"General information"];
-    [supportInformationComponents addObject:@"-------------------"];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App name: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleDisplayName"]]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App identifier: %@", [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleIdentifier"]]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"App version: %@", NSBundle.mainBundle.play_friendlyVersionNumber]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS: %@", UIDevice.currentDevice.systemName]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"OS version: %@", NSProcessInfo.processInfo.operatingSystemVersionString]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model: %@", UIDevice.currentDevice.model]];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Model identifier: %@", UIDevice.currentDevice.play_hardware]];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Background video playback enabled: %@", ApplicationSettingBackgroundVideoPlaybackEnabled() ? @"Yes" : @"No"]];
-    if (SRGIdentityService.currentIdentityService) {
-        [supportInformationComponents addObject:[NSString stringWithFormat:@"Logged in: %@", SRGIdentityService.currentIdentityService.isLoggedIn ? @"Yes" : @"No"]];
-    }
-    
-    [supportInformationComponents addObject:@""];
-    [supportInformationComponents addObject:@"Push notification information"];
-    [supportInformationComponents addObject:@"-----------------------------"];
-    
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Push notifications enabled: %@", PushService.sharedService.enabled ? @"Yes" : @"No"]];
-    
-    NSString *airshipIdentifier = PushService.sharedService.airshipIdentifier ?: @"None";
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Airship identifier: %@", airshipIdentifier]];
-    
-    NSString *deviceToken = PushService.sharedService.deviceToken ?: @"None";
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Device push notification token: %@", deviceToken]];
-    
-    NSArray<NSString *> *subscribedShowURNs = [PushService.sharedService.subscribedShowURNs.allObjects sortedArrayUsingSelector:@selector(compare:)];
-    [supportInformationComponents addObject:[NSString stringWithFormat:@"Subscribed URNs: %@", (subscribedShowURNs.count != 0) ? [subscribedShowURNs componentsJoinedByString:@","] : @"None"]];
-    
-    return [supportInformationComponents componentsJoinedByString:@"\n"];
 }
 
 #pragma mark What's new
@@ -467,12 +428,29 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
             [topViewController presentViewController:safariViewController animated:YES completion:nil];
         }
     }
-    else if ([specifier.key isEqualToString:SettingsCopySupportInformationButton]) {
-        UIPasteboard.generalPasteboard.string = [self supportInformation];
-        [Banner showWithStyle:BannerStyleInfo
-                      message:NSLocalizedString(@"Support information has been copied to the pasteboard", @"Information message displayed when support information has been copied to the pasteboard")
-                        image:nil
-                       sticky:NO];
+    else if ([specifier.key isEqualToString:SettingsSupportInformationButton]) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:PlaySRGSettingsLocalizedString(@"Support information", @"Support information alert title")
+                                                                                 message:nil
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        NSString *supportEmailAddress = ApplicationConfiguration.sharedApplicationConfiguration.supportEmailAddress;
+        if (supportEmailAddress && [MFMailComposeViewController canSendMail]) {
+            [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Send by email", @"Label of the button to send support information by email") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+                mailComposeViewController.mailComposeDelegate = self;
+                [mailComposeViewController setToRecipients:@[supportEmailAddress]];
+                [mailComposeViewController setMessageBody:[SupportInformation generate] isHTML:NO];
+                [self presentViewController:mailComposeViewController animated:YES completion:nil];
+            }]];
+        }
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Copy to the pasteboard", @"Label of the button to copy support information to the pasteboard") style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIPasteboard.generalPasteboard.string = [SupportInformation generate];
+            [Banner showWithStyle:BannerStyleInfo
+                          message:NSLocalizedString(@"Support information has been copied to the pasteboard", @"Information message displayed when support information has been copied to the pasteboard")
+                            image:nil
+                           sticky:NO];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Title of a cancel button") style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alertController animated:YES completion:nil];
     }
     else if ([specifier.key isEqualToString:SettingsSubscribeToAllShowsButton]) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Subscribe to all shows?", @"Title of the message displayed when the user is about to subscribe to all shows")
@@ -646,7 +624,14 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [self updateSettingsVisibility];
 }
 
-#pragma mark SFSafariViewControllerDelegate
+#pragma mark MFMailComposeViewController protocol
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark SFSafariViewControllerDelegate protocol
 
 - (void)safariViewControllerDidFinish:(SFSafariViewController *)controller
 {

@@ -20,5 +20,6 @@
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
   "hiddenOnboardings": "account,favorites_account,resume_playback_account,watch_later_account",
-  "audioDescriptionAvailabilityHidden": true
+  "audioDescriptionAvailabilityHidden": true,
+  "tvThirdPartyChannelsAvailable": true
 }

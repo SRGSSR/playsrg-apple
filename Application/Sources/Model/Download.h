@@ -134,9 +134,9 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 @property (class, nonatomic, readonly) NSArray<Download *> *downloads;
 
 /**
- *  Return `YES` iff the media can be downloaded
+ *  Return `YES` iff the download media status can be changed or displayed
  */
-+ (BOOL)canDownloadMedia:(SRGMedia *)media;
++ (BOOL)canToggleDownloadForMedia:(SRGMedia *)media;
 
 /**
  *  Add a download to the download list and start downloading it. Returns `nil` if download is not possible

@@ -11,7 +11,6 @@
 "Clear vector image cache" = "Stizzar il cache da maletgs vectorials";
 "Clear web cache" = "Stizzar il cache";
 "Content" = "Cuntegn";
-"Copy support information" = "Copiar las infurmaziuns da support";
 "Data protection" = "Protecziun da datas";
 "Default (current configuration)" = "Standard (configuraziun actuala)";
 "Default (IP-based location)" = "Standard (lieu sin basa da la IP)";
@@ -49,6 +48,7 @@
 "Standalone playback" = "Play individual";
 "Subscribe to all shows" = "S'abonnar a tut las shows";
 "Subtitle availability" = "Disponibilitad da suttitels";
+"Support information" = "Infurmaziuns davart il support";
 "Terms and conditions" = "Cundiziuns generalas";
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Questa secziun è mo disponibla en la versiun nightly ni beta e na vegn betg en producziun.";

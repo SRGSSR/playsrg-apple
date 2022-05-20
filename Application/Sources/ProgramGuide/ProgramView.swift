@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import NukeUI
 import SwiftUI
 
 // MARK: View
@@ -28,7 +29,6 @@ struct ProgramView: View {
                 VStack(spacing: 10) {
                     InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
-                        .background(Color.placeholder)
                         .cornerRadius(LayoutStandardViewCornerRadius)
                         .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
                     DescriptionView(model: model)
@@ -85,7 +85,7 @@ struct ProgramView: View {
         
         var body: some View {
             ZStack {
-                ImageView(url: model.imageUrl)
+                ImageView(source: model.imageUrl)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
                 if let properties = model.availabilityBadgeProperties {

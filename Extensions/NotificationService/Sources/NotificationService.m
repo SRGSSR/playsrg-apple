@@ -9,6 +9,7 @@
 #import "Notification.h"
 
 @import MobileCoreServices;
+@import SRGDataProviderNetwork;
 
 static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 {
@@ -69,22 +70,14 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 {
     NSParameterAssert(completion);
     
-    static CGFloat s_imageWidth;
+    static SRGDataProvider *s_dataProvider;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        CGFloat imageWidth;
-        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            imageWidth = 340.f;
-        }
-        else {
-            imageWidth = 500.f;
-        }
-        
-        // Use 2x maximum as scale. Sufficient for a good result without having to load very large images
-        s_imageWidth = imageWidth * fminf(UIScreen.mainScreen.scale, 2.f);
+        s_dataProvider = [[SRGDataProvider alloc] initWithServiceURL:SRGIntegrationLayerProductionServiceURL()];
     });
     
-    NSURL *scaledImageURL = [notification imageURLForDimension:SRGImageDimensionWidth withValue:s_imageWidth type:SRGImageTypeDefault];
+    SRGImage *image = [SRGImage imageWithURL:notification.imageURL variant:SRGImageVariantDefault];
+    NSURL *scaledImageURL = [s_dataProvider URLForImage:image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileURL, NSURLResponse *response, NSError *error) {
         if (error) {
             completion(nil);

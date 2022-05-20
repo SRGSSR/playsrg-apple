@@ -6,6 +6,7 @@
 
 import Combine
 import Foundation
+import SRGDataProviderCombine
 import SwiftUI
 
 func constant<T>(iOS: T, tvOS: T) -> T {
@@ -33,6 +34,10 @@ func removeDuplicates<T: Hashable>(in items: [T]) -> [T] {
     }
 }
 
+func url(for image: SRGImage?, size: SRGImageSize, scaling: SRGImageScaling = .default) -> URL? {
+    return SRGDataProvider.current!.url(for: image, size: size, scaling: scaling)
+}
+
 extension Comparable {
     func clamped(to range: ClosedRange<Self>) -> Self {
         return min(max(self, range.lowerBound), range.upperBound)
@@ -51,8 +56,7 @@ extension String {
         return String(repeating: " ", count: length)
     }
     
-    static var loremIpsum: String {
-        return """
+    static let loremIpsum: String = """
             Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et \
             dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. \
             Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, \
@@ -78,7 +82,6 @@ extension String {
             sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero \
             eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est.
             """
-    }
     
     func unobfuscated() -> String {
         return components(separatedBy: .decimalDigits).joined()
@@ -181,12 +184,6 @@ extension Sequence {
     }
 }
 
-extension SRGImageMetadata {
-    func imageUrl(for scale: ImageScale, with type: SRGImageType = .default) -> URL? {
-        return imageURL(for: .width, withValue: SizeForImageScale(scale, type).width, type: type)
-    }
-}
-
 // Borrowed from https://www.swiftbysundell.com/articles/combine-self-cancellable-memory-management/
 // TODO: Remove after tvOS media detail view refactoring
 extension Publisher where Failure == Never {
@@ -255,6 +252,13 @@ extension View {
             }
         )
         .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    }
+    
+    /**
+     *  Small helper to build a frame with a size.
+     */
+    func frame(size: CGSize, alignment: Alignment = .center) -> some View {
+        frame(width: size.width, height: size.height, alignment: alignment)
     }
 }
 

@@ -11,7 +11,6 @@
 "Clear vector image cache" = "Vektorgrafik-Cache leeren";
 "Clear web cache" = "Web-Cache leeren";
 "Content" = "Inhalt";
-"Copy support information" = "Supportinformationen kopieren";
 "Data protection" = "Datenschutzerklärung";
 "Default (current configuration)" = "Standard (aktuelle Konfiguration)";
 "Default (IP-based location)" = "Default (IP-based location)";
@@ -49,6 +48,7 @@
 "Standalone playback" = "Standalone playback";
 "Subscribe to all shows" = "Push-Mitteilungen für alle Sendungen aktivieren";
 "Subtitle availability" = "Untertitel verfügbar";
+"Support information" = "Supportinformationen";
 "Terms and conditions" = "Datenschutzerklärung";
 "Test" = "Test";
 "This section is only available in nightly and beta versions, and won't appear in the production version." = "Die erweiterten Funktionen sind nur in Nightlies oder Betas sichtbar.";

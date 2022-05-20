@@ -85,8 +85,9 @@
     [super viewDidLoad];
     
     UIView *pageView = self.pageViewController.view;
-    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:pageView atIndex:0];
+    
+    pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [pageView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
         [pageView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
@@ -99,9 +100,9 @@
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view insertSubview:blurView belowSubview:self.calendar];
     
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
         [blurView.topAnchor constraintEqualToAnchor:self.calendar.topAnchor],
         [blurView.bottomAnchor constraintEqualToAnchor:self.calendar.bottomAnchor],
@@ -125,7 +126,7 @@
     [self.view addGestureRecognizer:scopeGestureRecognizer];
     self.scopeGestureRecognizer = scopeGestureRecognizer;
     
-    self.calendar.firstWeekday = NSCalendar.currentCalendar.firstWeekday;
+    self.calendar.firstWeekday = NSCalendar.srg_defaultCalendar.firstWeekday;
     self.calendar.backgroundColor = UIColor.clearColor;
     
     // Hide months on the left and right
@@ -248,7 +249,7 @@
     
     UIPageViewControllerNavigationDirection navigationDirection = UIPageViewControllerNavigationDirectionForward;
     if (currentDailyMediasViewController) {
-        NSComparisonResult dateComparisonResult = [NSCalendar.currentCalendar compareDate:date toDate:currentDailyMediasViewController.date toUnitGranularity:NSCalendarUnitDay];
+        NSComparisonResult dateComparisonResult = [NSCalendar.srg_defaultCalendar compareDate:date toDate:currentDailyMediasViewController.date toUnitGranularity:NSCalendarUnitDay];
         if (dateComparisonResult == NSOrderedSame) {
             return;
         }
@@ -280,7 +281,7 @@
 
 - (NSDate *)minimumDateForCalendar:(FSCalendar *)calendar
 {
-    NSDateComponents *dateComponents = [NSCalendar.currentCalendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:NSDate.date];
+    NSDateComponents *dateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay fromDate:NSDate.date];
     
     if (UIAccessibilityIsVoiceOverRunning()) {
         dateComponents.month -= 1;
@@ -288,7 +289,7 @@
     else {
         dateComponents.year -= 5;
     }
-    return [NSCalendar.currentCalendar dateFromComponents:dateComponents];
+    return [NSCalendar.srg_defaultCalendar dateFromComponents:dateComponents];
 }
 
 - (NSDate *)maximumDateForCalendar:(FSCalendar *)calendar
@@ -316,7 +317,7 @@
     NSCalendarUnit unitGranularity = (calendar.scope == FSCalendarScopeMonth) ? NSCalendarUnitMonth : NSCalendarUnitWeekOfYear;
     
     // Hidden if in the same page as today and current date is not today
-    BOOL hidden = [NSCalendar.currentCalendar compareDate:calendar.currentPage toDate:calendar.today toUnitGranularity:unitGranularity] == NSOrderedSame
+    BOOL hidden = [NSCalendar.srg_defaultCalendar compareDate:calendar.currentPage toDate:calendar.today toUnitGranularity:unitGranularity] == NSOrderedSame
         && [calendar.today isEqualToDate:dailyMediasViewController.date];
     [self setNavigationBarItemsHidden:hidden];
 }
@@ -412,7 +413,7 @@
     dateComponents.day = -1;
     
     UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)viewController;
-    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
+    NSDate *date = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
     return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
 }
 
@@ -426,7 +427,7 @@
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     dateComponents.day = 1;
     
-    NSDate *date = [NSCalendar.currentCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
+    NSDate *date = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDailyMediasViewController.date options:0];
     return [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
 }
 

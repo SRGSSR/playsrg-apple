@@ -20,6 +20,7 @@ struct Badge: View {
     var body: some View {
         Text(text)
             .srgFont(.label)
+            .textCase(.uppercase)
             .lineLimit(1)
             .foregroundColor(.white)
             .padding(.vertical, constant(iOS: 2, tvOS: 5))
