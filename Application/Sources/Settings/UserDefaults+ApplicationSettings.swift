@@ -17,8 +17,8 @@ extension UserDefaults {
         return string(forKey: PlaySRG.PlaySRGSettingPosterImages)
     }
     
-    @objc dynamic var PlaySRGSettingServiceURL: String? {
-        return string(forKey: PlaySRG.PlaySRGSettingServiceURL)
+    @objc dynamic var PlaySRGSettingServiceIdentifier: String? {
+        return string(forKey: PlaySRG.PlaySRGSettingServiceIdentifier)
     }
     
     @objc dynamic var PlaySRGSettingUserLocation: String? {

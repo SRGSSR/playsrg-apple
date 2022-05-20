@@ -16,8 +16,6 @@
 #import "PlaySRG-Swift.h"
 #import "UIApplication+PlaySRG.h"
 
-#import <InAppSettingsKit/IASKSettingsReader.h>
-
 @import libextobjc;
 @import SRGDataProvider;
 
@@ -61,7 +59,7 @@ static void *s_kvoContext = &s_kvoContext;
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceIdentifier options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingPosterImages options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
@@ -71,7 +69,7 @@ static void *s_kvoContext = &s_kvoContext;
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-    [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceURL];
+    [defaults removeObserver:self forKeyPath:PlaySRGSettingServiceIdentifier];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingUserLocation];
     [defaults removeObserver:self forKeyPath:PlaySRGSettingPosterImages];
 #endif
@@ -104,14 +102,14 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)handleDeepLinkAction:(DeepLinkAction *)action
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    NSString *server = [action parameterWithName:@"server"];
-    if (server) {
-        NSURL *serviceURL = ApplicationSettingServiceURLForKey(server);
-        if (serviceURL && ! [serviceURL isEqual:ApplicationSettingServiceURL()]) {
-            ApplicationSettingSetServiceURL(serviceURL);
+    NSString *serviceIdentifier = [action parameterWithName:@"server"];
+    if (serviceIdentifier) {
+        if (! [serviceIdentifier isEqual:ApplicationSettingServiceIdentifier()]) {
+            ApplicationSettingSetServiceIdentifier(serviceIdentifier);
             
+            NSString *serviceName = [ServiceObjC nameForServiceId:serviceIdentifier];
             [Banner showWithStyle:BannerStyleInfo
-                          message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), ApplicationSettingServiceNameForKey(server)]
+                          message:[NSString stringWithFormat:NSLocalizedString(@"Server changed to '%@'", @"Notification message when the server URL changed due to a custom URL."), serviceName]
                             image:[UIImage imageNamed:@"settings"]
                            sticky:NO];
         }
@@ -509,7 +507,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation] || [keyPath isEqualToString:PlaySRGSettingPosterImages]) {
             // Entirely reload the view controller hierarchy to ensure all configuration changes are reflected in the
             // user interface. Scheduled for the next run loop to have the same code in the app delegate (updating the
             // data provider) executed first.

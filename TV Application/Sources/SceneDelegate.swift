@@ -61,14 +61,14 @@ final class SceneDelegate: UIResponder {
         
         let configuration = ApplicationConfiguration.shared
         
-        #if DEBUG
+#if DEBUG
         if let firstChannel = configuration.radioHomepageChannels.first {
             let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
             viewControllers.append(audiosViewController)
         }
-        #endif
+#endif
         
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = PageViewController(id: .live)
@@ -159,7 +159,7 @@ extension SceneDelegate: UIWindowSceneDelegate {
 #if DEBUG || NIGHTLY || BETA
         Publishers.Merge3(
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
         )
         .debounce(for: 0.7, scheduler: DispatchQueue.main)

@@ -372,10 +372,10 @@ struct SettingsView: View {
         var body: some View {
             Section {
                 NavigationLink {
-                    ServerSelectionView()
+                    ServiceSelectionView()
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
-                    ServerSelectionCell()
+                    ServiceSelectionCell()
                 }
                 NavigationLink {
                     UserLocationSelectionView()
@@ -400,51 +400,47 @@ struct SettingsView: View {
         }
     }
     
-    // MARK: Server selection
+    // MARK: Service selection
     
-    private struct ServerSelectionCell: View {
-        @AppStorage(PlaySRGSettingServiceURL) private var selectedServiceUrlString: String?
+    private struct ServiceSelectionCell: View {
+        @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
         
-        private var selectedServer: Server {
-            return Server.server(for: selectedServiceUrlString)
+        private var selectedService: Service {
+            return Service.service(forId: selectedServiceId)
         }
         
         var body: some View {
             HStack {
                 Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
                 Spacer()
-                Text(selectedServer.title)
+                Text(selectedService.name)
                     .foregroundColor(.secondary)
             }
         }
     }
     
-    private struct ServerSelectionView: View {
+    private struct ServiceSelectionView: View {
         var body: some View {
             List {
-                ForEach(Server.servers) { server in
-                    ServerCell(server: server)
+                ForEach(Service.services) { service in
+                    ServiceCell(service: service)
                 }
             }
             .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
         }
     }
     
-    private struct ServerCell: View {
-        let server: Server
+    private struct ServiceCell: View {
+        let service: Service
         
-        @AppStorage(PlaySRGSettingServiceURL) var selectedServiceUrlString: String?
-        
-        private var selectedServer: Server {
-            return Server.server(for: selectedServiceUrlString)
-        }
+        @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
         
         var body: some View {
             Button(action: select) {
                 HStack {
-                    Text(server.title)
+                    Text(service.name)
                     Spacer()
-                    if hasSelected(server) {
+                    if hasSelected(service) {
                         Image(systemName: "checkmark")
                     }
                 }
@@ -452,17 +448,17 @@ struct SettingsView: View {
             .foregroundColor(.primary)
         }
         
-        private func hasSelected(_ server: Server) -> Bool {
-            if let serviceUrlString = selectedServiceUrlString {
-                return server.url.absoluteString == serviceUrlString
+        private func hasSelected(_ service: Service) -> Bool {
+            if let selectedServiceId = selectedServiceId {
+                return service.id == selectedServiceId
             }
             else {
-                return server == selectedServer
+                return service == .production
             }
         }
         
         private func select() {
-            selectedServiceUrlString = server.url.absoluteString
+            selectedServiceId = service.id
         }
     }
     

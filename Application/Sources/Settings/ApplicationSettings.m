@@ -12,9 +12,6 @@
 #import "PlaySRG-Swift.h"
 #import "UIWindow+PlaySRG.h"
 
-#import <InAppSettingsKit/IASKSettingsReader.h>
-#import <InAppSettingsKit/IASKSpecifier.h>
-
 @import FXReachability;
 @import libextobjc;
 @import SRGLetterbox;
@@ -164,34 +161,6 @@ void ApplicationSettingSetLastOpenedRadioChannel(RadioChannel *radioChannel)
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults setObject:radioChannel.uid forKey:PlaySRGSettingLastOpenedRadioChannelUid];
     [userDefaults synchronize];
-}
-
-NSURL *ApplicationSettingServiceURLForKey(NSString *key)
-{
-    IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
-    IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
-    
-    NSInteger index = [[specifier multipleTitles] indexOfObjectPassingTest:^BOOL(NSString * _Nonnull string, NSUInteger idx, BOOL * _Nonnull stop) {
-        return [string caseInsensitiveCompare:key] == NSOrderedSame;
-    }];
-    if (index != NSNotFound) {
-        NSString *URLString = [[specifier multipleValues] objectAtIndex:index];
-        return [NSURL URLWithString:URLString];
-    }
-    else {
-        return nil;
-    }
-}
-
-NSString *ApplicationSettingServiceNameForKey(NSString *key)
-{
-    IASKSettingsReader *settingsReader = [[IASKSettingsReader alloc] initWithFile:@"Root.inApp.server"];
-    IASKSpecifier *specifier = [settingsReader specifierForKey:PlaySRGSettingServiceURL];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(NSString * _Nullable string, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return [string caseInsensitiveCompare:key] == NSOrderedSame;
-    }];
-    return [[specifier multipleTitles] filteredArrayUsingPredicate:predicate].firstObject;
 }
 
 BOOL ApplicationSettingBackgroundVideoPlaybackEnabled(void)

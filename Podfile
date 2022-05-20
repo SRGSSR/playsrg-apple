@@ -7,7 +7,6 @@ inhibit_all_warnings!
 def ios_pods
   pod 'AutoCoding'
   pod 'FSCalendar'
-  pod 'InAppSettingsKit', '3.3.0'
   pod 'MaterialComponents/Tabs', '118.2.0' # Tabs replaced with new implementation as of 119.0.0
 
   pod 'ShowTime',

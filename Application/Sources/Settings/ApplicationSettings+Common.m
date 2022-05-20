@@ -7,9 +7,7 @@
 #import "ApplicationSettings+Common.h"
 
 #import "ApplicationSettingsConstants.h"
-#if TARGET_OS_IOS
-#import "PlayApplication.h"
-#endif
+#import "PlaySRG-Swift.h"
 
 @import Mantle;
 @import SRGDataProvider;
@@ -102,42 +100,6 @@ SettingPosterImages ApplicationSettingPosterImages(void)
 #endif
 }
 
-NSURL *ApplicationSettingServiceURL(void)
-{
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-#if TARGET_OS_IOS
-    __block BOOL settingServiceURLReset = YES;
-    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
-        settingServiceURLReset = NO;
-        completionHandler(YES);
-    }, @"SettingServiceURLReset2");
-    
-    if (! settingServiceURLReset) {
-        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
-        [userDefaults synchronize];
-    }
-#endif
-    // Do not use `-URLForKey:`, as the method transform the string to a file URL.
-    NSString *URLString = [userDefaults stringForKey:PlaySRGSettingServiceURL];
-    NSURL *URL = URLString ? [NSURL URLWithString:URLString] : nil;
-    return URL ?: SRGIntegrationLayerProductionServiceURL();
-#else
-    return SRGIntegrationLayerProductionServiceURL();
-#endif
-}
-
-void ApplicationSettingSetServiceURL(NSURL *serviceURL)
-{
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-    // Do not use `-setURL:forKey:`, as the method archives the value, preventing InAppSettingsKit from comparing it
-    // to a selectable value. `-URLForKey:` can't be used when reading, though.
-    [userDefaults setObject:serviceURL.absoluteString forKey:PlaySRGSettingServiceURL];
-    [userDefaults synchronize];
-#endif
-}
-
 NSDictionary<NSString *, NSString *> *ApplicationSettingGlobalParameters(void)
 {
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
@@ -166,4 +128,21 @@ void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString *languageCode)
     NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
     [userDefaults setObject:languageCode forKey:PlaySRGSettingLastSelectedAudioLanguageCode];
     [userDefaults synchronize];
+}
+
+NSString *ApplicationSettingServiceIdentifier(void)
+{
+    return [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingServiceIdentifier];
+}
+
+void ApplicationSettingSetServiceIdentifier(NSString *identifier)
+{
+    NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
+    [userDefaults setObject:identifier forKey:PlaySRGSettingServiceIdentifier];
+    [userDefaults synchronize];
+}
+
+NSURL *ApplicationSettingServiceURL(void)
+{
+    return [ServiceObjC urlForServiceId:ApplicationSettingServiceIdentifier()];
 }

@@ -109,13 +109,13 @@ final class ProfileViewModel: ObservableObject {
             .store(in: &cancellables)
         updateFavoritesInformation()
         
-        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL)
+        ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
-                self?.updateServiceURLTitle()
+                self?.updateServiceName()
             }
             .store(in: &cancellables)
-        updateServiceURLTitle()
+        updateServiceName()
     }
     
     var supportsLogin: Bool {
@@ -157,11 +157,11 @@ final class ProfileViewModel: ObservableObject {
     }
     
     func nextServiceURL() {
-        let serviceURL = ApplicationSettingServiceURL()
-        if let index = Server.servers.firstIndex(where: { $0.url == serviceURL }) {
-            let server = Server.servers[safeIndex: Server.servers.index(after: index)] ?? Server.servers.first!
-            ApplicationSettingSetServiceURL(server.url)
-            updateServiceURLTitle()
+        let service = Service.service(forId: ApplicationSettingServiceIdentifier())
+        if let index = Service.services.firstIndex(of: service),
+           let nextService = Service.services[safeIndex: Service.services.index(after: index)] ?? Service.services.first {
+            ApplicationSettingSetServiceIdentifier(nextService.id)
+            updateServiceName()
         }
     }
     
@@ -196,9 +196,8 @@ final class ProfileViewModel: ObservableObject {
         synchronizationDate = SRGUserData.current?.user.synchronizationDate
     }
     
-    private func updateServiceURLTitle() {
-        let serviceURL = ApplicationSettingServiceURL()
-        let server = Server.servers.filter({ $0.url == serviceURL }).first ?? Server.servers.first!
-        serviceURLTitle = server.title
+    private func updateServiceName() {
+        let service = Service.service(forId: ApplicationSettingServiceIdentifier())
+        serviceURLTitle = service.name
     }
 }

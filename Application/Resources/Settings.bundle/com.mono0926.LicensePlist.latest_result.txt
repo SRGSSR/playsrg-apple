@@ -48,26 +48,6 @@ name: FSCalendar, nameSpecified:
 body: Copyright (c) 2013-2…
 version: 2.8.2
 
-name: InAppSettingsKit, nameSpecified: 
-body: Copyright (c) 2009-2…
-version: 3.3
-
-name: InAppSettingsKit, nameSpecified: 
-body: Copyright (c) 2009-2…
-version: 3.3
-
-name: InAppSettingsKit, nameSpecified: 
-body: Copyright (c) 2009-2…
-version: 3.3
-
-name: InAppSettingsKit, nameSpecified: 
-body: Copyright (c) 2009-2…
-version: 3.3
-
-name: InAppSettingsKit, nameSpecified: 
-body: Copyright (c) 2009-2…
-version: 3.3
-
 name: MaterialComponents, nameSpecified: 
 body: 
                    …

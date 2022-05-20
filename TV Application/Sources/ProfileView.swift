@@ -60,7 +60,7 @@ struct ProfileView: View {
                 VersionListItem(model: model)
                 SupportInformationListItem()
             }
-            #if DEBUG || NIGHTLY || BETA
+#if DEBUG || NIGHTLY || BETA
             SwiftUI.Section(header: Text(PlaySRGSettingsLocalizedString("Advanced features", comment: "Advanced features section header")).srgFont(.H3),
                             footer: Text(PlaySRGSettingsLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer")).srgFont(.subtitle2).opacity(0.8)) {
                 ServiceURLItem(model: model)
@@ -68,7 +68,7 @@ struct ProfileView: View {
                 SectionWideSupportItem()
                 PosterImagesItem()
             }
-            #endif
+#endif
         }
         .listStyle(GroupedListStyle())
         .frame(maxWidth: 1054)
@@ -306,7 +306,7 @@ extension ProfileView {
         }
     }
     
-    #if DEBUG || NIGHTLY || BETA
+#if DEBUG || NIGHTLY || BETA
     private struct ServiceURLItem: View {
         @ObservedObject var model: ProfileViewModel
         
@@ -442,7 +442,7 @@ extension ProfileView {
             .padding()
         }
     }
-    #endif
+#endif
     
     private struct SupportInformationListItem: View {
         var body: some View {

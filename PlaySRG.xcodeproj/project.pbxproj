@@ -132,11 +132,6 @@
 		082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
 		082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
 		082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */; };
-		0837A293275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		0837A294275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		0837A295275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		0837A296275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		0837A297275E75D900BF7F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
 		0841E70622F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70722F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
 		0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */; };
@@ -663,11 +658,6 @@
 		6F1A77852643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F1A77862643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F1A77872643CAB600A00EFC /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
-		6F1D901E28201E8200720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		6F1D901F28201E8200720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		6F1D902028201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		6F1D902128201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
-		6F1D902228201E8300720F93 /* Settings.server.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0837A28D275E75D900BF7F93 /* Settings.server.plist */; };
 		6F1EE835268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE836268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
 		6F1EE837268A1B0E004A48CA /* ShowHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1EE834268A1B0E004A48CA /* ShowHeaderView.swift */; };
@@ -873,16 +863,16 @@
 		6F46B7BD281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
 		6F46B7BE281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
 		6F46B7BF281FB1FB00D20748 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
-		6F46B7C128200E3E00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C228200E3E00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C328200E3E00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C428200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C528200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C628200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C728200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C828200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7C928200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
-		6F46B7CA28200E3F00D20748 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Server.swift */; };
+		6F46B7C128200E3E00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C228200E3E00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C328200E3E00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C428200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C528200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C628200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C728200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C828200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7C928200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
+		6F46B7CA28200E3F00D20748 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7C028200E3E00D20748 /* Service.swift */; };
 		6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB51EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
@@ -2659,7 +2649,6 @@
 		082910AD239E90D200D168F4 /* TabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarController.m; sourceTree = "<group>"; };
 		082910B3239EA69B00D168F4 /* RadioChannelsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadioChannelsViewController.m; sourceTree = "<group>"; };
 		082910B4239EA69C00D168F4 /* RadioChannelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannelsViewController.h; sourceTree = "<group>"; };
-		0837A28D275E75D900BF7F93 /* Settings.server.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Settings.server.plist; sourceTree = "<group>"; };
 		0841E70422F0953A009D8304 /* SRGDay+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDay+PlaySRG.h"; sourceTree = "<group>"; };
 		0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDay+PlaySRG.m"; sourceTree = "<group>"; };
 		084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionViewController.h; sourceTree = "<group>"; };
@@ -2970,7 +2959,7 @@
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
 		6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		6F46B7BA281FB1FB00D20748 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		6F46B7C028200E3E00D20748 /* Server.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		6F46B7C028200E3E00D20748 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		6F475F901EB37BC6003021EA /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
@@ -3732,7 +3721,7 @@
 				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
 				6F5B4D5D2833F8F3004F5BA3 /* FeaturesView.swift */,
 				6F6C7AD32820578900BC3EA5 /* PosterImages.swift */,
-				6F46B7C028200E3E00D20748 /* Server.swift */,
+				6F46B7C028200E3E00D20748 /* Service.swift */,
 				6F8CBD802832A2CB000C7A93 /* SettingsNavigationView.swift */,
 				6F46B7BA281FB1FB00D20748 /* SettingsView.swift */,
 				6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */,
@@ -3823,7 +3812,6 @@
 		0865F616223C7684007DE03B /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0837A28D275E75D900BF7F93 /* Settings.server.plist */,
 				0828BB3922E62831009617A7 /* parsePlayUrl.js */,
 			);
 			path = Data;
@@ -5256,7 +5244,6 @@
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */,
 				6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */,
-				43935C186E7C3FA3D9A3CC33 /* [CP] Copy Pods Resources */,
 				6F5E54992521E3C7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5307,7 +5294,6 @@
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
 				6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */,
-				61F7B1B1FC7E1DB00591868E /* [CP] Copy Pods Resources */,
 				6F5E549A2521E3D0004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5358,7 +5344,6 @@
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
 				6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */,
-				8CB5D42DBD5EAABC62E8D1A4 /* [CP] Copy Pods Resources */,
 				6F5E549B2521E3D6004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5409,7 +5394,6 @@
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
 				6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */,
-				F036A8D455D4D1988A3D0455 /* [CP] Copy Pods Resources */,
 				6F5E549C2521E3DE004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5460,7 +5444,6 @@
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
 				6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */,
-				9C3D1D8DF4FF07B5A8C53C11 /* [CP] Copy Pods Resources */,
 				6F5E549D2521E3E7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5691,7 +5674,6 @@
 				08C13557256B277B002F67B8 /* Make custom icons */,
 				6F331CE224D06B8200C096AB /* Resources */,
 				08C13558256B27AC002F67B8 /* Restore original icons */,
-				0837A299275EA51D00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
 				6FBE535C271FF94A00F90B68 /* Embed App Extensions */,
@@ -5734,7 +5716,6 @@
 				08C13571256B291D002F67B8 /* Make custom icons */,
 				6F331CFA24D06BA200C096AB /* Resources */,
 				08C13575256B2977002F67B8 /* Restore original icons */,
-				0837A298275EA00300BF7F93 /* Update Play MMF service URL */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
 				6F9BF6002720299400945973 /* Embed App Extensions */,
@@ -5777,7 +5758,6 @@
 				08C13572256B2922002F67B8 /* Make custom icons */,
 				6F331D1224D06BB800C096AB /* Resources */,
 				08C13576256B297E002F67B8 /* Restore original icons */,
-				0837A29A275EA52A00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
 				6F9BF604272029A400945973 /* Embed App Extensions */,
@@ -5820,7 +5800,6 @@
 				08C13573256B2927002F67B8 /* Make custom icons */,
 				6F331D2A24D06BC600C096AB /* Resources */,
 				08C13577256B2983002F67B8 /* Restore original icons */,
-				0837A29B275EA53E00BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
 				6F9BF608272029AC00945973 /* Embed App Extensions */,
@@ -5863,7 +5842,6 @@
 				08C13574256B292C002F67B8 /* Make custom icons */,
 				6F331D4224D06C2600C096AB /* Resources */,
 				08C13578256B2989002F67B8 /* Restore original icons */,
-				0837A29C275EA55400BF7F93 /* Update Play MMF service URL */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
 				6F9BF60C272029B500945973 /* Embed App Extensions */,
@@ -6313,7 +6291,6 @@
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6E9267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
-				6F1D901E28201E8200720F93 /* Settings.server.plist in Resources */,
 				6F0A7F0520AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FD633E31FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6FF7BBB222A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -6354,7 +6331,6 @@
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
-				6F1D901F28201E8200720F93 /* Settings.server.plist in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
@@ -6394,7 +6370,6 @@
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6EB267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
-				6F1D902028201E8300720F93 /* Settings.server.plist in Resources */,
 				6F0A7F0720AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FB0BB3720AEF5A7007C5D87 /* Onboarding.strings in Resources */,
 				6FA7EC3B20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
@@ -6436,7 +6411,6 @@
 				6F3B022A245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F7C89D220AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6F0AF6EC267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
-				6F1D902128201E8300720F93 /* Settings.server.plist in Resources */,
 				6FD88F7F22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
 				0828BB3D22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FE31D38E04B00BB8AAA /* iTunesArtwork@2x in Resources */,
@@ -6476,7 +6450,6 @@
 				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
-				6F1D902228201E8300720F93 /* Settings.server.plist in Resources */,
 				6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				08C6908B1D38E3E600BB8AAA /* iTunesArtwork@2x in Resources */,
@@ -6553,7 +6526,6 @@
 				6F5AA59C2502666A00718420 /* CommonImages.xcassets in Resources */,
 				6FB053F524D4208C004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				08777DB824EC39AE006F2EC7 /* Localizable.strings in Resources */,
-				0837A293275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6F3F1AB125027CB5000FF4DD /* SRFResources.xcassets in Resources */,
 				6FD1204C24D19268008CB2F8 /* SRFAssets.xcassets in Resources */,
 				6FFCC5EC24EFC1FA00805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6570,7 +6542,6 @@
 				6F5AA59D2502666B00718420 /* CommonImages.xcassets in Resources */,
 				6F3F1AB025027CAE000FF4DD /* RTSResources.xcassets in Resources */,
 				6FB053F324D42083004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				0837A294275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				08777DB224EC3340006F2EC7 /* Localizable.strings in Resources */,
 				6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */,
 				6FD1205424D1927A008CB2F8 /* RTSAssets.xcassets in Resources */,
@@ -6587,7 +6558,6 @@
 				6F5AA59E2502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1205C24D19288008CB2F8 /* RSIAssets.xcassets in Resources */,
 				6F3F1AAE25027CA2000FF4DD /* RSIResources.xcassets in Resources */,
-				0837A295275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				08777DB424EC3997006F2EC7 /* Localizable.strings in Resources */,
 				6FB053EA24D42066004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6604,7 +6574,6 @@
 				6F5AA59F2502666C00718420 /* CommonImages.xcassets in Resources */,
 				08777DB524EC399F006F2EC7 /* Localizable.strings in Resources */,
 				6FB053F124D4207B004B0CE1 /* LaunchScreen.storyboard in Resources */,
-				0837A296275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */,
 				6F3F1AAF25027CA8000FF4DD /* RTRResources.xcassets in Resources */,
 				6FD1206424D19294008CB2F8 /* RTRAssets.xcassets in Resources */,
@@ -6621,7 +6590,6 @@
 				6F5AA5A02502666C00718420 /* CommonImages.xcassets in Resources */,
 				6FD1206C24D1929F008CB2F8 /* SWIAssets.xcassets in Resources */,
 				08777DBA24EC39B7006F2EC7 /* Localizable.strings in Resources */,
-				0837A297275E75D900BF7F93 /* Settings.server.plist in Resources */,
 				6F3F1AB225027CBA000FF4DD /* SWIResources.xcassets in Resources */,
 				6FB053F724D42095004B0CE1 /* LaunchScreen.storyboard in Resources */,
 				6FFCC5ED24EFC1FD00805B0F /* ApplicationConfiguration.json in Resources */,
@@ -6741,96 +6709,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
-		};
-		0837A298275EA00300BF7F93 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
-		};
-		0837A299275EA51D00BF7F93 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
-		};
-		0837A29A275EA52A00BF7F93 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
-		};
-		0837A29B275EA53E00BF7F93 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
-		};
-		0837A29C275EA55400BF7F93 /* Update Play MMF service URL */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Update Play MMF service URL";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ ! -z \"${CONFIG__PLAY_MMF_SERVICE_URL}\" ]; then\n/usr/libexec/PlistBuddy -c \"Set :Values:3 ${CONFIG__PLAY_MMF_SERVICE_URL}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/Settings.server.plist\"\nfi\n";
 		};
 		085F7DC71FA4DD510010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -7554,24 +7432,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		43935C186E7C3FA3D9A3CC33 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		49ADB3012DE6D27CE66B2113 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -7588,24 +7448,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		61F7B1B1FC7E1DB00591868E /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		69679F3DF79A5A7DF70B2B79 /* [CP] Check Pods Manifest.lock */ = {
@@ -8180,42 +8022,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8CB5D42DBD5EAABC62E8D1A4 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RSI/Pods-Play SRG-iOS-Play RSI-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		9C3D1D8DF4FF07B5A8C53C11 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play SWI/Pods-Play SRG-iOS-Play SWI-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E7AC0E2F6A0FB261ACE34DB4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -8236,24 +8042,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F036A8D455D4D1988A3D0455 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/InAppSettingsKit/InAppSettingsKit.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppSettingsKit.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Play SRG-iOS-Play RTR/Pods-Play SRG-iOS-Play RTR-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FAE3B1C7F74BDAE7DC78737D /* [CP] Check Pods Manifest.lock */ = {
@@ -8393,7 +8181,7 @@
 				6F340F52220DA99B00778CA3 /* History.m in Sources */,
 				6FF65C5A28360EB100AF0768 /* Onboarding.swift in Sources */,
 				0875852223A0025F00FA7207 /* ProfileViewController.m in Sources */,
-				6F46B7C128200E3E00D20748 /* Server.swift in Sources */,
+				6F46B7C128200E3E00D20748 /* Service.swift in Sources */,
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6F46B7B5281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
@@ -8821,7 +8609,7 @@
 				6FCE7AC1260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8422D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5C270DE4FE00210713 /* Publishers.swift in Sources */,
-				6F46B7C228200E3E00D20748 /* Server.swift in Sources */,
+				6F46B7C228200E3E00D20748 /* Service.swift in Sources */,
 				6F264D7B2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80D26025945006F685A /* PageViewModel.swift in Sources */,
@@ -9066,7 +8854,7 @@
 				6FCE7AC2260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8522D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5D270DE4FE00210713 /* Publishers.swift in Sources */,
-				6F46B7C328200E3E00D20748 /* Server.swift in Sources */,
+				6F46B7C328200E3E00D20748 /* Service.swift in Sources */,
 				6F264D7C2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80E26025945006F685A /* PageViewModel.swift in Sources */,
@@ -9311,7 +9099,7 @@
 				6FCE7AC3260367B90037A861 /* HostViews.swift in Sources */,
 				6FD88F8622D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
 				6F091D5E270DE4FE00210713 /* Publishers.swift in Sources */,
-				6F46B7C428200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C428200E3F00D20748 /* Service.swift in Sources */,
 				6F264D7D2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				6F16C80F26025945006F685A /* PageViewModel.swift in Sources */,
@@ -9360,7 +9148,7 @@
 				6F4760941EB37DF2003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F475FC71EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77872643CAB600A00EFC /* EmptyContentView.swift in Sources */,
-				6F46B7C528200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C528200E3F00D20748 /* Service.swift in Sources */,
 				6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				08F4683E26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FF65C582835FFA400AF0768 /* OnboardingView.swift in Sources */,
@@ -9706,6 +9494,7 @@
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2C8283E7E2100031415 /* Highlight.swift in Sources */,
 				6F46B7C628200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C628200E3F00D20748 /* Service.swift in Sources */,
 				6FF5D1F52746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676856281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD52813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -9850,6 +9639,7 @@
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2C9283E7E2200031415 /* Highlight.swift in Sources */,
 				6F46B7C728200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C728200E3F00D20748 /* Service.swift in Sources */,
 				6FF5D1F62746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676857281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD62813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -9994,6 +9784,7 @@
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CA283E7E2200031415 /* Highlight.swift in Sources */,
 				6F46B7C828200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C828200E3F00D20748 /* Service.swift in Sources */,
 				6FF5D1F72746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676858281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD72813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -10138,6 +9929,7 @@
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CB283E7E2300031415 /* Highlight.swift in Sources */,
 				6F46B7C928200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7C928200E3F00D20748 /* Service.swift in Sources */,
 				6FF5D1F82746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676859281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD82813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -10281,6 +10073,7 @@
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CC283E7E2300031415 /* Highlight.swift in Sources */,
 				6F46B7CA28200E3F00D20748 /* Server.swift in Sources */,
+				6F46B7CA28200E3F00D20748 /* Service.swift in Sources */,
 				6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F67685A281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD92813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
