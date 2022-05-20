@@ -161,5 +161,6 @@
   "3.6.0-382": "- Playback speed button for CarPlay. [RSI, RTR, RTS, SRF]\n- SRG released libraries.\n- AppStore release.",
   "3.6.1-383": "- External TVP channels in TV guide. [RTR, SRF]\n- Fix TV guide list view glitch sometimes appeared. [RTR, RTS, SRF]",
   "3.6.1-384": "- Add double tap gesture on player to skip to next or previous time position.\n- Fix TV guide layout issue when displayed in a time zone other than Zurich. [RTR, RTS, SRF]\n- Fix download button in player view. [RTS]",
-  "3.6.1-385": "- Improved double tap skipping gesture on player and behavior with other tap gestures.\n- Use the reduced image size variants between platforms (web, Android, Apple).\n- Support informations in settings can also be send by mail. [RTS]"
+  "3.6.1-385": "- Improved double tap skipping gesture on player and behavior with other tap gestures.\n- Use the reduced image size variants between platforms (web, Android, Apple).\n- Support informations in settings can also be send by mail. [RTS]",
+  "3.6.1-386": "- IT, RM, FR and GE translations updated.\n- SRG released libraries.\n- AppStore release."
 }
