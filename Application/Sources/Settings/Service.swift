@@ -37,7 +37,8 @@ struct Service: Identifiable, Equatable {
     )
     
     private static var mmfUrl: URL = {
-        guard let mmfUrlString = Bundle.main.object(forInfoDictionaryKey: "PlayMMFServiceURL") as? String else {
+        guard let mmfUrlString = Bundle.main.object(forInfoDictionaryKey: "PlayMMFServiceURL") as? String,
+              !mmfUrlString.isEmpty else {
             return URL(string: "https://play-mmf.herokuapp.com")!
         }
         return URL(string: mmfUrlString)!
