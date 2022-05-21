@@ -5,6 +5,7 @@
 //
 
 import SRGAnalyticsSwiftUI
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: View
@@ -22,6 +23,7 @@ struct FeaturesView: View {
                 }
             }
         }
+        .srgFont(.body)
         .navigationTitle(NSLocalizedString("Features", comment: "Title displayed at the top of the Features view"))
         .fullScreenCover(item: $selectedOnboarding) { onboarding in
             OnboardingView(onboarding: onboarding)

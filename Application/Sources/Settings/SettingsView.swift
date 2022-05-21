@@ -24,6 +24,7 @@ struct SettingsView: View {
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
         }
+        .srgFont(.body)
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
@@ -426,6 +427,7 @@ struct SettingsView: View {
                     ServiceCell(service: service)
                 }
             }
+            .srgFont(.body)
             .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
         }
     }
@@ -484,6 +486,7 @@ struct SettingsView: View {
                     LocationCell(userLocation: userLocation)
                 }
             }
+            .srgFont(.body)
             .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
         }
     }
@@ -533,6 +536,7 @@ struct SettingsView: View {
                     PosterImagesCell(posterImages: posterImages)
                 }
             }
+            .srgFont(.body)
             .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
         }
     }
