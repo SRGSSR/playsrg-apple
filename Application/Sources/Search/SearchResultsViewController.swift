@@ -208,6 +208,14 @@ extension SearchResultsViewController: ContentInsets {
     }
 }
 
+#if os(iOS)
+extension SearchResultsViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView.play_scrollToTop(animated: animated)
+    }
+}
+#endif
+
 extension SearchResultsViewController: UICollectionViewDelegate {
 #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
