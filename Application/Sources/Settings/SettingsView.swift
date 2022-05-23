@@ -115,129 +115,6 @@ struct SettingsView: View {
     
     // MARK: Content section
     
-    private struct HistoryRemovalButton: View {
-        @ObservedObject var model: SettingsViewModel
-        @State private var isAlertDisplayed = false
-        
-        private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                model.removeHistory()
-            }
-            if model.isLoggedIn {
-                return Alert(
-                    title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                    message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-            else {
-                return Alert(
-                    title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-        }
-        
-        private func action() {
-            if model.hasHistoryEntries {
-                isAlertDisplayed = true
-            }
-        }
-        
-        var body: some View {
-            Button(action: action) {
-                Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
-                    .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
-            }
-            .alert(isPresented: $isAlertDisplayed, content: alert)
-        }
-    }
-    
-    private struct FavoritesRemovalButton: View {
-        @ObservedObject var model: SettingsViewModel
-        @State private var isAlertDisplayed = false
-        
-        private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                model.removeFavorites()
-            }
-            if model.isLoggedIn {
-                return Alert(
-                    title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
-                    message: Text(NSLocalizedString("Favorites and notification subscriptions will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete all favorites")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-            else {
-                return Alert(
-                    title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-        }
-        
-        private func action() {
-            if model.hasFavorites {
-                isAlertDisplayed = true
-            }
-        }
-        
-        var body: some View {
-            Button(action: action) {
-                Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
-                    .foregroundColor(model.hasFavorites ? .red : .secondary)
-            }
-            .alert(isPresented: $isAlertDisplayed, content: alert)
-        }
-    }
-    
-    private struct WatchLaterRemovalButton: View {
-        @ObservedObject var model: SettingsViewModel
-        @State private var isAlertDisplayed = false
-        
-        private func alert() -> Alert {
-            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
-            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
-                model.removeWatchLaterItems()
-            }
-            if model.isLoggedIn {
-                return Alert(
-                    title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
-                    message: Text(NSLocalizedString("Content saved for later will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete content saved for later")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-            else {
-                return Alert(
-                    title: Text(PlaySRGSettingsLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
-                    primaryButton: primaryButton,
-                    secondaryButton: secondaryButton
-                )
-            }
-        }
-        
-        private func action() {
-            if model.hasWatchLaterItems {
-                isAlertDisplayed = true
-            }
-        }
-        
-        var body: some View {
-            Button(action: action) {
-                Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
-                    .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
-            }
-            .alert(isPresented: $isAlertDisplayed, content: alert)
-        }
-    }
-    
     private struct ContentSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -254,71 +131,132 @@ struct SettingsView: View {
                 }
             }
         }
+        
+        private struct HistoryRemovalButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            
+            private func alert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeHistory()
+                }
+                if model.isLoggedIn {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        message: Text(NSLocalizedString("The history will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+                else {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete history", comment: "Title of the message displayed when the user is about to delete the history")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+            }
+            
+            private func action() {
+                if model.hasHistoryEntries {
+                    isAlertDisplayed = true
+                }
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
+                        .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
+                }
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+            }
+        }
+        
+        private struct FavoritesRemovalButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            
+            private func alert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeFavorites()
+                }
+                if model.isLoggedIn {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
+                        message: Text(NSLocalizedString("Favorites and notification subscriptions will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete all favorites")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+                else {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete favorites", comment: "Title of the message displayed when the user is about to delete all favorites")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+            }
+            
+            private func action() {
+                if model.hasFavorites {
+                    isAlertDisplayed = true
+                }
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
+                        .foregroundColor(model.hasFavorites ? .red : .secondary)
+                }
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+            }
+        }
+        
+        private struct WatchLaterRemovalButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            
+            private func alert() -> Alert {
+                let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+                let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Delete", comment: "Title of a delete button"))) {
+                    model.removeWatchLaterItems()
+                }
+                if model.isLoggedIn {
+                    return Alert(
+                        title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                        message: Text(NSLocalizedString("Content saved for later will be deleted on all devices connected to your account.", comment: "Message displayed when the user is about to delete content saved for later")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+                else {
+                    return Alert(
+                        title: Text(PlaySRGSettingsLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                        primaryButton: primaryButton,
+                        secondaryButton: secondaryButton
+                    )
+                }
+            }
+            
+            private func action() {
+                if model.hasWatchLaterItems {
+                    isAlertDisplayed = true
+                }
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
+                        .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
+                }
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+            }
+        }
     }
     
     // MARK: Information section
-    
-#if os(iOS)
-    private struct SupportInformationButton: View {
-        @ObservedObject var model: SettingsViewModel
-        @State private var isAlertDisplayed = false
-        @State private var isMailComposeDisplayed = false
-        
-        private var supportRecipients: [String] {
-            guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return [] }
-            return [supportEmailAddress]
-        }
-        
-        // TODO: Once the code requires iOS 15+ we can use the updated 15.0 alert API (or confirmationDialog API) and
-        //       have a cancel button. To avoid writing the code twice the old API is currently used, which limits
-        //       the number of buttons to two. But this is simpler than having both implementations coexist for now.
-        private var primaryButton: Alert.Button {
-            if !supportRecipients.isEmpty {
-                return .default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
-                    isMailComposeDisplayed = true
-                }
-            }
-            else {
-                return .cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
-            }
-        }
-        
-        private func alert() -> Alert {
-            let secondaryButton = Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
-                model.copySupportInformation()
-                Banner.show(
-                    with: .info,
-                    message: NSLocalizedString("Support information has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
-                    image: nil,
-                    sticky: false
-                )
-            }
-            return Alert(
-                title: Text(PlaySRGSettingsLocalizedString("Support information", comment: "Support information alert title")),
-                primaryButton: primaryButton,
-                secondaryButton: secondaryButton
-            )
-        }
-        
-        private func mailComposeView() -> MailComposeView {
-            return MailComposeView()
-                .toRecipients(supportRecipients)
-                .messageBody(SupportInformation.generate())
-        }
-        
-        private func action() {
-            isAlertDisplayed = true
-        }
-        
-        var body: some View {
-            Button(action: action) {
-                Text(PlaySRGSettingsLocalizedString("Support information", comment: "Label of the button to access support information"))
-            }
-            .alert(isPresented: $isAlertDisplayed, content: alert)
-            .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
-        }
-    }
-#endif
     
     private struct InformationSection: View {
         @ObservedObject var model: SettingsViewModel
@@ -362,19 +300,81 @@ struct SettingsView: View {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
         }
-    }
-    
-    private struct VersionCell: View {
-        @ObservedObject var model: SettingsViewModel
         
-        var body: some View {
-            HStack {
-                Text(NSLocalizedString("Version", comment: "Version label in settings"))
-                Spacer()
-                Text(model.version)
-                    .foregroundColor(.secondary)
+        private struct VersionCell: View {
+            @ObservedObject var model: SettingsViewModel
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Version", comment: "Version label in settings"))
+                    Spacer()
+                    Text(model.version)
+                        .foregroundColor(.secondary)
+                }
             }
         }
+        
+#if os(iOS)
+        private struct SupportInformationButton: View {
+            @ObservedObject var model: SettingsViewModel
+            @State private var isAlertDisplayed = false
+            @State private var isMailComposeDisplayed = false
+            
+            private var supportRecipients: [String] {
+                guard MailComposeView.canSendMail(), let supportEmailAddress = ApplicationConfiguration.shared.supportEmailAddress else { return [] }
+                return [supportEmailAddress]
+            }
+            
+            // TODO: Once the code requires iOS 15+ we can use the updated 15.0 alert API (or confirmationDialog API) and
+            //       have a cancel button. To avoid writing the code twice the old API is currently used, which limits
+            //       the number of buttons to two. But this is simpler than having both implementations coexist for now.
+            private var primaryButton: Alert.Button {
+                if !supportRecipients.isEmpty {
+                    return .default(Text(NSLocalizedString("Send by email", comment: "Label of the button to send support information by email"))) {
+                        isMailComposeDisplayed = true
+                    }
+                }
+                else {
+                    return .cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button"))) {}
+                }
+            }
+            
+            private func alert() -> Alert {
+                let secondaryButton = Alert.Button.default(Text(NSLocalizedString("Copy to the pasteboard", comment: "Label of the button to copy support information to the pasteboard"))) {
+                    model.copySupportInformation()
+                    Banner.show(
+                        with: .info,
+                        message: NSLocalizedString("Support information has been copied to the pasteboard", comment: "Information message displayed when support information has been copied to the pasteboard"),
+                        image: nil,
+                        sticky: false
+                    )
+                }
+                return Alert(
+                    title: Text(PlaySRGSettingsLocalizedString("Support information", comment: "Support information alert title")),
+                    primaryButton: primaryButton,
+                    secondaryButton: secondaryButton
+                )
+            }
+            
+            private func mailComposeView() -> MailComposeView {
+                return MailComposeView()
+                    .toRecipients(supportRecipients)
+                    .messageBody(SupportInformation.generate())
+            }
+            
+            private func action() {
+                isAlertDisplayed = true
+            }
+            
+            var body: some View {
+                Button(action: action) {
+                    Text(PlaySRGSettingsLocalizedString("Support information", comment: "Label of the button to access support information"))
+                }
+                .alert(isPresented: $isAlertDisplayed, content: alert)
+                .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
+            }
+        }
+#endif
     }
     
     // MARK: Advanced features section
@@ -421,168 +421,168 @@ struct SettingsView: View {
                 Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer"))
             }
         }
-    }
-    
-    // MARK: Service selection
-    
-    private struct ServiceSelectionCell: View {
-        @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
         
-        private var selectedService: Service {
-            return Service.service(forId: selectedServiceId)
-        }
+        // MARK: Service selection
         
-        var body: some View {
-            HStack {
-                Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
-                Spacer()
-                Text(selectedService.name)
-                    .foregroundColor(.secondary)
+        private struct ServiceSelectionCell: View {
+            @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
+            
+            private var selectedService: Service {
+                return Service.service(forId: selectedServiceId)
             }
-        }
-    }
-    
-    private struct ServiceSelectionView: View {
-        var body: some View {
-            List {
-                ForEach(Service.services) { service in
-                    ServiceCell(service: service)
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
+                    Spacer()
+                    Text(selectedService.name)
+                        .foregroundColor(.secondary)
                 }
             }
-            .srgFont(.body)
-            .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
         }
-    }
-    
-    private struct ServiceCell: View {
-        let service: Service
         
-        @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
-        
-        var body: some View {
-            Button(action: select) {
-                HStack {
-                    Text(service.name)
-                    Spacer()
-                    if hasSelected(service) {
-                        Image(systemName: "checkmark")
+        private struct ServiceSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(Service.services) { service in
+                        ServiceCell(service: service)
                     }
                 }
-            }
-            .foregroundColor(.primary)
-        }
-        
-        private func hasSelected(_ service: Service) -> Bool {
-            if let selectedServiceId = selectedServiceId {
-                return service.id == selectedServiceId
-            }
-            else {
-                return service == .production
+                .srgFont(.body)
+                .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
             }
         }
         
-        private func select() {
-            selectedServiceId = service.id
-        }
-    }
-    
-    // MARK: User location selection
-    
-    private struct UserLocationSelectionCell: View {
-        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
-        
-        var body: some View {
-            HStack {
-                Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
-                Spacer()
-                Text(selectedUserLocation.description)
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    private struct UserLocationSelectionView: View {
-        var body: some View {
-            List {
-                ForEach(UserLocation.allCases) { userLocation in
-                    LocationCell(userLocation: userLocation)
-                }
-            }
-            .srgFont(.body)
-            .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
-        }
-    }
-    
-    private struct LocationCell: View {
-        let userLocation: UserLocation
-        
-        @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
-        
-        var body: some View {
-            Button(action: select) {
-                HStack {
-                    Text(userLocation.description)
-                    Spacer()
-                    if userLocation == selectedUserLocation {
-                        Image(systemName: "checkmark")
+        private struct ServiceCell: View {
+            let service: Service
+            
+            @AppStorage(PlaySRGSettingServiceIdentifier) var selectedServiceId: String?
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(service.name)
+                        Spacer()
+                        if hasSelected(service) {
+                            Image(systemName: "checkmark")
+                        }
                     }
                 }
+                .foregroundColor(.primary)
             }
-            .foregroundColor(.primary)
-        }
-        
-        private func select() {
-            selectedUserLocation = userLocation
-        }
-    }
-    
-    // MARK: Poster images selection
-    
-    private struct PosterImagesSelectionCell: View {
-        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
-        
-        var body: some View {
-            HStack {
-                Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
-                Spacer()
-                Text(selectedPosterImages.description)
-                    .foregroundColor(.secondary)
-            }
-        }
-    }
-    
-    private struct PosterImagesSelectionView: View {
-        var body: some View {
-            List {
-                ForEach(PosterImages.allCases) { posterImages in
-                    PosterImagesCell(posterImages: posterImages)
+            
+            private func hasSelected(_ service: Service) -> Bool {
+                if let selectedServiceId = selectedServiceId {
+                    return service.id == selectedServiceId
+                }
+                else {
+                    return service == .production
                 }
             }
-            .srgFont(.body)
-            .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+            
+            private func select() {
+                selectedServiceId = service.id
+            }
         }
-    }
-    
-    private struct PosterImagesCell: View {
-        let posterImages: PosterImages
         
-        @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+        // MARK: User location selection
         
-        var body: some View {
-            Button(action: select) {
+        private struct UserLocationSelectionCell: View {
+            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
+            
+            var body: some View {
                 HStack {
-                    Text(posterImages.description)
+                    Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
                     Spacer()
-                    if posterImages == selectedPosterImages {
-                        Image(systemName: "checkmark")
+                    Text(selectedUserLocation.description)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        
+        private struct UserLocationSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(UserLocation.allCases) { userLocation in
+                        LocationCell(userLocation: userLocation)
                     }
                 }
+                .srgFont(.body)
+                .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
             }
-            .foregroundColor(.primary)
         }
         
-        private func select() {
-            selectedPosterImages = posterImages
+        private struct LocationCell: View {
+            let userLocation: UserLocation
+            
+            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(userLocation.description)
+                        Spacer()
+                        if userLocation == selectedUserLocation {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedUserLocation = userLocation
+            }
+        }
+        
+        // MARK: Poster images selection
+        
+        private struct PosterImagesSelectionCell: View {
+            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                    Spacer()
+                    Text(selectedPosterImages.description)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        
+        private struct PosterImagesSelectionView: View {
+            var body: some View {
+                List {
+                    ForEach(PosterImages.allCases) { posterImages in
+                        PosterImagesCell(posterImages: posterImages)
+                    }
+                }
+                .srgFont(.body)
+                .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
+            }
+        }
+        
+        private struct PosterImagesCell: View {
+            let posterImages: PosterImages
+            
+            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+            
+            var body: some View {
+                Button(action: select) {
+                    HStack {
+                        Text(posterImages.description)
+                        Spacer()
+                        if posterImages == selectedPosterImages {
+                            Image(systemName: "checkmark")
+                        }
+                    }
+                }
+                .foregroundColor(.primary)
+            }
+            
+            private func select() {
+                selectedPosterImages = posterImages
+            }
         }
     }
     
