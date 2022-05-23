@@ -4,6 +4,9 @@
 //  License information is available from the LICENSE file.
 //
 
+#if APPCENTER
+import AppCenterDistribute
+#endif
 import SRGAppearanceSwift
 import SwiftUI
 import UIKit
@@ -415,14 +418,15 @@ struct SettingsView: View {
                 } label: {
                     PosterImagesSelectionCell()
                 }
+#if os(iOS) && APPCENTER
+                VersionsAndReleaseNotesButton()
+#endif
             } header: {
                 Text(NSLocalizedString("Advanced features", comment: "Advanced features section header"))
             } footer: {
                 Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Advanced features section footer"))
             }
         }
-        
-        // MARK: Service selection
         
         private struct ServiceSelectionCell: View {
             @AppStorage(PlaySRGSettingServiceIdentifier) private var selectedServiceId: String?
@@ -436,6 +440,61 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Server", comment: "Label of the button to access server selection"))
                     Spacer()
                     Text(selectedService.name)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        
+        private struct UserLocationSelectionCell: View {
+            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
+                    Spacer()
+                    Text(selectedUserLocation.description)
+                        .foregroundColor(.secondary)
+                }
+            }
+        }
+        
+#if os(iOS) && APPCENTER
+        private struct VersionsAndReleaseNotesButton: View {
+            @State private var isSheetDisplayed = false
+            
+            private var appCenterUrl: URL? {
+                guard let appCenterUrlString = Bundle.main.object(forInfoDictionaryKey: "AppCenterURL") as? String, !appCenterUrlString.isEmpty else {
+                    return nil
+                }
+                return URL(string: appCenterUrlString)
+            }
+            
+            var body: some View {
+                if let appCenterUrl = appCenterUrl {
+                    Button(NSLocalizedString("Versions and release notes", comment: "Label of the button to access release notes and download internal builds (App Center)"), action: action)
+                        .sheet(isPresented: $isSheetDisplayed) {
+                            SafariView(url: appCenterUrl)
+                                .ignoresSafeArea()
+                        }
+                }
+            }
+            
+            private func action() {
+                UserDefaults.standard.removeObject(forKey: "MSAppCenterPostponedTimestamp")
+                Distribute.checkForUpdate()
+                isSheetDisplayed = true
+            }
+        }
+#endif
+        
+        private struct PosterImagesSelectionCell: View {
+            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
+            
+            var body: some View {
+                HStack {
+                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
+                    Spacer()
+                    Text(selectedPosterImages.description)
                         .foregroundColor(.secondary)
                 }
             }
@@ -485,21 +544,6 @@ struct SettingsView: View {
             }
         }
         
-        // MARK: User location selection
-        
-        private struct UserLocationSelectionCell: View {
-            @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
-            
-            var body: some View {
-                HStack {
-                    Text(NSLocalizedString("User location", comment: "Label of the button for user location selection"))
-                    Spacer()
-                    Text(selectedUserLocation.description)
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
-        
         private struct UserLocationSelectionView: View {
             var body: some View {
                 List {
@@ -536,19 +580,6 @@ struct SettingsView: View {
         }
         
         // MARK: Poster images selection
-        
-        private struct PosterImagesSelectionCell: View {
-            @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
-            
-            var body: some View {
-                HStack {
-                    Text(NSLocalizedString("Poster images", comment: "Label of the button for poster image format selection"))
-                    Spacer()
-                    Text(selectedPosterImages.description)
-                        .foregroundColor(.secondary)
-                }
-            }
-        }
         
         private struct PosterImagesSelectionView: View {
             var body: some View {
