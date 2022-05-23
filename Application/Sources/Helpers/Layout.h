@@ -9,6 +9,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  The standard maximum list width on tvOS (when presented full screen).
+ */
+OBJC_EXPORT const CGFloat LayoutMaxListWidth API_AVAILABLE(tvos(14.0));
+
+/**
  *  Standard corner radius constants.
  */
 OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;

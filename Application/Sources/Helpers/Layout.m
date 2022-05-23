@@ -8,6 +8,10 @@
 
 @import SRGAppearance;
 
+#if TARGET_OS_TV
+const CGFloat LayoutMaxListWidth = 1054.f;
+#endif
+
 const CGFloat LayoutStandardLabelCornerRadius = 2.f;
 const CGFloat LayoutStandardViewCornerRadius = 4.f;
 

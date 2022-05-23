@@ -39,8 +39,8 @@ struct SettingsView: View {
         }
 #if os(tvOS)
         .listStyle(GroupedListStyle())
+        .frame(maxWidth: LayoutMaxListWidth)
 #endif
-        .frame(maxWidth: constant(iOS: .infinity, tvOS: 1054))
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
@@ -402,7 +402,7 @@ struct SettingsView: View {
         
         var body: some View {
             PlaySection {
-                NavigationLink {
+                NextLink {
                     ServiceSelectionView()
 #if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
@@ -410,7 +410,7 @@ struct SettingsView: View {
                 } label: {
                     ServiceSelectionCell()
                 }
-                NavigationLink {
+                NextLink {
                     UserLocationSelectionView()
 #if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
@@ -421,7 +421,7 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Presenter mode", comment: "Presenter mode setting label"), isOn: $isPresenterModeEnabled)
                 Toggle(NSLocalizedString("Standalone playback", comment: "Standalone playback setting label"), isOn: $isStandaloneEnabled)
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
-                NavigationLink {
+                NextLink {
                     PosterImagesSelectionView()
 #if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
@@ -525,6 +525,10 @@ struct SettingsView: View {
                     }
                 }
                 .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
                 .navigationTitle(NSLocalizedString("Server", comment: "Server selection view title"))
             }
         }
@@ -569,6 +573,10 @@ struct SettingsView: View {
                     }
                 }
                 .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
                 .navigationTitle(NSLocalizedString("User location", comment: "User location selection view title"))
             }
         }
@@ -606,6 +614,10 @@ struct SettingsView: View {
                     }
                 }
                 .srgFont(.body)
+#if os(tvOS)
+                .listStyle(GroupedListStyle())
+                .frame(maxWidth: LayoutMaxListWidth)
+#endif
                 .navigationTitle(NSLocalizedString("Poster images", comment: "Poster image format selection view title"))
             }
         }
@@ -675,6 +687,38 @@ struct SettingsView: View {
         }
     }
 #endif
+    
+    // MARK: Presentation
+    
+    /**
+     *  Presents with a modal sheet on tvOS (better), with a navigation level otherwise.
+     */
+    private struct NextLink<Destination: View, Label: View>: View {
+        @ViewBuilder var destination: () -> Destination
+        @ViewBuilder var label: () -> Label
+        
+#if os(tvOS)
+        @State private var isPresented: Bool = false
+#endif
+        
+        var body: some View {
+#if os(tvOS)
+            Button(action: action, label: label)
+                .sheet(isPresented: $isPresented, content: destination)
+#else
+            NavigationLink(destination: {
+                destination()
+                    .navigationBarTitleDisplayMode(.inline)
+            }, label: label)
+#endif
+        }
+        
+#if os(tvOS)
+        private func action() {
+            isPresented = true
+        }
+#endif
+    }
 }
 
 // MARK: Analytics
