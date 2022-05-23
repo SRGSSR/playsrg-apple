@@ -322,6 +322,8 @@ struct SettingsView: View {
                     Spacer()
                     Text(model.version)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
                 }
             }
         }
@@ -450,6 +452,8 @@ struct SettingsView: View {
                     Spacer()
                     Text(selectedService.name)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
                 }
             }
         }
@@ -463,6 +467,8 @@ struct SettingsView: View {
                     Spacer()
                     Text(selectedUserLocation.description)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
                 }
             }
         }
@@ -505,6 +511,8 @@ struct SettingsView: View {
                     Spacer()
                     Text(selectedPosterImages.description)
                         .foregroundColor(.secondary)
+                        .multilineTextAlignment(.trailing)
+                        .lineLimit(2)
                 }
             }
         }
