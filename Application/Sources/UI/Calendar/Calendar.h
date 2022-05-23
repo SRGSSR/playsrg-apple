@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import <FSCalendar/FSCalendar.h>
+@import FSCalendar;
 
 NS_ASSUME_NONNULL_BEGIN
 

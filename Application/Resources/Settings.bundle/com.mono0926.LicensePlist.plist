@@ -78,7 +78,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FSCalendar</string>
 			<key>Title</key>
-			<string>FSCalendar (2.8.2)</string>
+			<string>fscalendar (2.8.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
