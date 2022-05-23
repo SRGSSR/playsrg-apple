@@ -68,3 +68,8 @@ Settings must never be overridden by several configuration files involved in the
 
 The `PRODUCT_BUNDLE_IDENTIFIER` is a good example of such a parameter. It is namely defined in the top-level `Shared/Common.xcconfig` file but is itself made of other common, BU and target-specific settings. The top-level common configuration file therefore provides the recipe for the parameter format, while its descendents provide the actual ingredients required to build it.
 
+# Exclude packages per configuration
+
+Swift Package Manager does not offer a way to exclude packages per configuration, but there is a workaround using Xcode settings. As documented in [FLEX installation guide](https://github.com/FLEXTool/FLEX), it namely suffices to use `INCLUDED_SOURCE_FILE_NAMES` and `EXCLUDED_SOURCE_FILE_NAMES` to exclude some packages for specific configurations.
+
+If needed identify the target which requires package exclusion and edit its associated configuration file accordingly. For a package which should never be delivered in production by mistake please ensure the package is **excluded as a general rule and included only for the configurations needing it**.
