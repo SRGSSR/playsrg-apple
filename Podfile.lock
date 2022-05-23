@@ -41,14 +41,12 @@ PODS:
     - MDFTextAccessibility
   - MDFInternationalization (3.0.0)
   - MDFTextAccessibility (2.0.1)
-  - ShowTime (2.5.3)
   - TvOSTextViewer (1.3.0)
 
 DEPENDENCIES:
   - AutoCoding
   - FSCalendar
   - MaterialComponents/Tabs (= 118.2.0)
-  - ShowTime
   - TvOSTextViewer
 
 SPEC REPOS:
@@ -58,7 +56,6 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
-    - ShowTime
     - TvOSTextViewer
 
 SPEC CHECKSUMS:
@@ -67,9 +64,8 @@ SPEC CHECKSUMS:
   MaterialComponents: fc3dba46cf3ae8495728a875778b47d0c6ec7ed5
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
   MDFTextAccessibility: f4bb4cc2194286651b59a215fdeaa0e05dc90ba5
-  ShowTime: 06cc9dc79886274b21041fe19b79c9eff59b9714
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: 53bb607ce90232626fee19b563c9aacf234b9272
+PODFILE CHECKSUM: dbb8830f61789a760f52a1502f1d8c3a9e760fd2
 
 COCOAPODS: 1.11.3
