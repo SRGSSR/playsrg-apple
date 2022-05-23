@@ -37,7 +37,10 @@ struct SettingsView: View {
             DeveloperSection()
 #endif
         }
-        .srgFont(.body)
+#if os(tvOS)
+        .listStyle(GroupedListStyle())
+#endif
+        .frame(maxWidth: constant(iOS: .infinity, tvOS: 1054))
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
@@ -49,7 +52,7 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingHDOverCellularEnabled) var isHDOverCellularEnabled = false
         
         var body: some View {
-            Section {
+            PlaySection {
                 Toggle(NSLocalizedString("HD over cellular networks", comment: "HD setting label"), isOn: $isHDOverCellularEnabled)
             } header: {
                 Text(NSLocalizedString("Quality", comment: "Quality settings section header"))
@@ -67,7 +70,7 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingBackgroundVideoPlaybackEnabled) var isBackgroundPlaybackEnabled = false
         
         var body: some View {
-            Section {
+            PlaySection {
                 Toggle(NSLocalizedString("Autoplay", comment: "Autoplay setting label"), isOn: $isAutoplayEnabled)
             } header: {
                 Text(NSLocalizedString("Playback", comment: "Playback settings section header"))
@@ -75,7 +78,7 @@ struct SettingsView: View {
                 Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Autoplay setting section footer"))
             }
 #if os(iOS)
-            Section {
+            PlaySection {
                 Toggle(NSLocalizedString("Background video playback", comment: "Background video playback setting label"), isOn: $isBackgroundPlaybackEnabled)
             } header: {
                 EmptyView()
@@ -93,7 +96,7 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
         
         var body: some View {
-            Section {
+            PlaySection {
                 Toggle(NSLocalizedString("Subtitle availability", comment: "Subtitle availability setting label"), isOn: $isSubtitleAvailabilityDisplayed)
                 Toggle(NSLocalizedString("Audio description availability", comment: "Audio description availability setting label"), isOn: $isAudioDescriptionAvailabilityDisplayed)
             } header: {
@@ -111,7 +114,7 @@ struct SettingsView: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
-            Section {
+            PlaySection {
                 Button(NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), action: model.openSystemSettings)
             } header: {
                 Text(NSLocalizedString("Permissions", comment: "Permissions settings section header"))
@@ -128,7 +131,7 @@ struct SettingsView: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
-            Section {
+            PlaySection {
                 HistoryRemovalButton(model: model)
                 FavoritesRemovalButton(model: model)
                 WatchLaterRemovalButton(model: model)
@@ -271,7 +274,7 @@ struct SettingsView: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
-            Section {
+            PlaySection {
 #if os(iOS)
                 NavigationLink {
                     FeaturesView()
@@ -396,7 +399,7 @@ struct SettingsView: View {
         @AppStorage(PlaySRGSettingSectionWideSupportEnabled) var isSectionWideSupportEnabled = false
         
         var body: some View {
-            Section {
+            PlaySection {
                 NavigationLink {
                     ServiceSelectionView()
 #if os(iOS)
@@ -629,7 +632,7 @@ struct SettingsView: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
-            Section {
+            PlaySection {
                 Button(NSLocalizedString("Clear web cache", comment: "Label of the button to clear the web cache"), action: model.clearWebCache)
                     .foregroundColor(.red)
                 Button(NSLocalizedString("Clear vector image cache", comment: "Label of the button to clear the vector image cache"), action: model.clearVectorImageCache)
@@ -650,7 +653,7 @@ struct SettingsView: View {
 #if os(iOS) && (DEBUG || APPCENTER)
     private struct DeveloperSection: View {
         var body: some View {
-            Section {
+            PlaySection {
                 Button(NSLocalizedString("Enable / disable FLEX", comment: "Label of the button to toggle FLEX"), action: toggleFlex)
             } header: {
                 Text(NSLocalizedString("Developer", comment: "Developer section header"))
