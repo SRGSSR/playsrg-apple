@@ -11,8 +11,6 @@ def ios_pods
 
   pod 'ShowTime',
       configurations: ['Debug', 'Nightly', 'Nightly_AppCenter', 'Beta', 'Beta_AppCenter']
-  pod 'FLEX',
-      configurations: ['Debug', 'Nightly_AppCenter', 'Beta_AppCenter']
 end
 
 def tvos_pods

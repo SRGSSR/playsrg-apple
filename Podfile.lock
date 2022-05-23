@@ -1,6 +1,5 @@
 PODS:
   - AutoCoding (2.2.3)
-  - FLEX (4.6.1)
   - FSCalendar (2.8.2)
   - MaterialComponents/AnimationTiming (118.2.0)
   - MaterialComponents/Availability (118.2.0)
@@ -47,7 +46,6 @@ PODS:
 
 DEPENDENCIES:
   - AutoCoding
-  - FLEX
   - FSCalendar
   - MaterialComponents/Tabs (= 118.2.0)
   - ShowTime
@@ -56,7 +54,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - AutoCoding
-    - FLEX
     - FSCalendar
     - MaterialComponents
     - MDFInternationalization
@@ -66,7 +63,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   AutoCoding: 90ca3cbc0d77a37cfff75167d705b44148c5fc51
-  FLEX: bbc55d197f87d7cde2454c3981aa47069b694144
   FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
   MaterialComponents: fc3dba46cf3ae8495728a875778b47d0c6ec7ed5
   MDFInternationalization: d697c55307816222a55685c4ccb1044ffb030c12
@@ -74,6 +70,6 @@ SPEC CHECKSUMS:
   ShowTime: 06cc9dc79886274b21041fe19b79c9eff59b9714
   TvOSTextViewer: c1a0c64286931e663d131dc680f908bcfa36e214
 
-PODFILE CHECKSUM: 9e5e700088fec9d228c1a192cf9343358fa9b8df
+PODFILE CHECKSUM: 53bb607ce90232626fee19b563c9aacf234b9272
 
 COCOAPODS: 1.11.3

@@ -3,6 +3,10 @@
 CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/Application/$(BU__CODE_SIGN_ENTITLEMENTS_IOS_APP_FILE_NAME)
 CODE_SIGN_ENTITLEMENTS[config=Beta_AppCenter] = $(PROJECT_DIR)/Application/Application-without-CarPlay.entitlements
 CODE_SIGN_ENTITLEMENTS[config=Nightly_AppCenter] = $(PROJECT_DIR)/Application/Application-without-CarPlay.entitlements
+EXCLUDED_SOURCE_FILE_NAMES = FLEX.o
+INCLUDED_SOURCE_FILE_NAMES[config=Beta_AppCenter] = FLEX.o
+INCLUDED_SOURCE_FILE_NAMES[config=Nightly_AppCenter] = FLEX.o
+INCLUDED_SOURCE_FILE_NAMES[config=Debug] = FLEX.o
 PRODUCT_MODULE_NAME = PlaySRG
 SWIFT_OBJC_BRIDGING_HEADER = $(PROJECT_DIR)/Application/Sources/Bridges/PlaySRG-ObjectiveC.h
 

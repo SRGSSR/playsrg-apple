@@ -7,6 +7,9 @@
 #if APPCENTER
 import AppCenterDistribute
 #endif
+#if os(iOS) && (DEBUG || APPCENTER)
+import FLEX
+#endif
 import SRGAppearanceSwift
 import SwiftUI
 import UIKit
@@ -30,6 +33,9 @@ struct SettingsView: View {
             InformationSection(model: model)
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
+#if os(iOS) && (DEBUG || APPCENTER)
+            DeveloperSection()
+#endif
         }
         .srgFont(.body)
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
@@ -638,6 +644,26 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: Developer section
+    
+#if os(iOS) && (DEBUG || APPCENTER)
+    private struct DeveloperSection: View {
+        var body: some View {
+            Section {
+                Button(NSLocalizedString("Enable / disable FLEX", comment: "Label of the button to toggle FLEX"), action: toggleFlex)
+            } header: {
+                Text(NSLocalizedString("Developer", comment: "Developer section header"))
+            } footer: {
+                Text(NSLocalizedString("This section is only available in nightly and beta versions, and won't appear in the production version.", comment: "Reset section footer"))
+            }
+        }
+        
+        private func toggleFlex() {
+            FLEXManager.shared.toggleExplorer()
+        }
+    }
+#endif
 }
 
 // MARK: Analytics

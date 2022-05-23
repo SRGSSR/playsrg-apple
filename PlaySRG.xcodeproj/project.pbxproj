@@ -1008,6 +1008,11 @@
 		6F4FCAFB24D06FF7002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F4FCAFD24D06FF8002675EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
 		6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */; };
+		6F548968283B8994001290E7 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 6F548967283B8994001290E7 /* FLEX */; };
+		6F54896A283B89A8001290E7 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 6F548969283B89A8001290E7 /* FLEX */; };
+		6F54896C283B89AE001290E7 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 6F54896B283B89AE001290E7 /* FLEX */; };
+		6F54896E283B89B3001290E7 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 6F54896D283B89B3001290E7 /* FLEX */; };
+		6F548970283B89B8001290E7 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 6F54896F283B89B8001290E7 /* FLEX */; };
 		6F54C9682717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
 		6F54C9692717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
 		6F54C96A2717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */; };
@@ -3352,6 +3357,7 @@
 				6FA6C9082812D837007C3406 /* NukeUI in Frameworks */,
 				6F17DC16266AB81C009F74C6 /* Nuke in Frameworks */,
 				6F517A1025DAB56600CE548B /* FirebaseRemoteConfig in Frameworks */,
+				6F548968283B8994001290E7 /* FLEX in Frameworks */,
 				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269A92836CFE90072BA0B /* Introspect in Frameworks */,
 				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
@@ -3380,6 +3386,7 @@
 				6FA6C90A2812D846007C3406 /* NukeUI in Frameworks */,
 				6F17DC18266AB837009F74C6 /* Nuke in Frameworks */,
 				6FD46C2E25DAB63D00874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F54896A283B89A8001290E7 /* FLEX in Frameworks */,
 				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AB2836D0040072BA0B /* Introspect in Frameworks */,
 				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
@@ -3408,6 +3415,7 @@
 				6FA6C90C2812D84B007C3406 /* NukeUI in Frameworks */,
 				6F17DC1A266AB83E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4425DAB64700874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F54896C283B89AE001290E7 /* FLEX in Frameworks */,
 				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */,
 				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
@@ -3436,6 +3444,7 @@
 				6FA6C90E2812D851007C3406 /* NukeUI in Frameworks */,
 				6F17DC1C266AB846009F74C6 /* Nuke in Frameworks */,
 				6FD46C4625DAB65100874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F54896E283B89B3001290E7 /* FLEX in Frameworks */,
 				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AF2836D0100072BA0B /* Introspect in Frameworks */,
 				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
@@ -3464,6 +3473,7 @@
 				6FA6C9102812D856007C3406 /* NukeUI in Frameworks */,
 				6F17DC1E266AB84E009F74C6 /* Nuke in Frameworks */,
 				6FD46C4825DAB65900874EAF /* FirebaseRemoteConfig in Frameworks */,
+				6F548970283B89B8001290E7 /* FLEX in Frameworks */,
 				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269B12836D0160072BA0B /* Introspect in Frameworks */,
 				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
@@ -5285,6 +5295,7 @@
 				6FA6C9072812D837007C3406 /* NukeUI */,
 				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269A82836CFE90072BA0B /* Introspect */,
+				6F548967283B8994001290E7 /* FLEX */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5336,6 +5347,7 @@
 				6FA6C9092812D846007C3406 /* NukeUI */,
 				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AA2836D0040072BA0B /* Introspect */,
+				6F548969283B89A8001290E7 /* FLEX */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5387,6 +5399,7 @@
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
 				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AC2836D00B0072BA0B /* Introspect */,
+				6F54896B283B89AE001290E7 /* FLEX */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5438,6 +5451,7 @@
 				6FA6C90D2812D851007C3406 /* NukeUI */,
 				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AE2836D0100072BA0B /* Introspect */,
+				6F54896D283B89B3001290E7 /* FLEX */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5489,6 +5503,7 @@
 				6FA6C90F2812D856007C3406 /* NukeUI */,
 				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269B02836D0160072BA0B /* Introspect */,
+				6F54896F283B89B8001290E7 /* FLEX */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -6215,6 +6230,7 @@
 				04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */,
 				6FA6C9062812D837007C3406 /* XCRemoteSwiftPackageReference "NukeUI" */,
 				6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
+				6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -18968,6 +18984,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/FLEXTool/FLEX.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.7.0;
+			};
+		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
@@ -19512,6 +19536,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		6F548967283B8994001290E7 /* FLEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */;
+			productName = FLEX;
+		};
+		6F548969283B89A8001290E7 /* FLEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */;
+			productName = FLEX;
+		};
+		6F54896B283B89AE001290E7 /* FLEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */;
+			productName = FLEX;
+		};
+		6F54896D283B89B3001290E7 /* FLEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */;
+			productName = FLEX;
+		};
+		6F54896F283B89B8001290E7 /* FLEX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */;
+			productName = FLEX;
 		};
 		6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
