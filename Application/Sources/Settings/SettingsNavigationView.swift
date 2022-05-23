@@ -30,10 +30,10 @@ struct SettingsNavigationView: View {
         .introspectNavigationController { navigationController in
             let navigationBar = navigationController.navigationBar
             navigationBar.largeTitleTextAttributes = [
-                .font : SRGFont.font(family: .display, weight: .bold, size: 34) as UIFont
+                .font: SRGFont.font(family: .display, weight: .bold, size: 34) as UIFont
             ]
             navigationBar.titleTextAttributes = [
-                .font : SRGFont.font(family: .display, weight: .semibold, size: 17) as UIFont
+                .font: SRGFont.font(family: .display, weight: .semibold, size: 17) as UIFont
             ]
         }
         .responderChain(from: firstResponder)
