@@ -183,6 +183,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                         .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
                 }
+                .disabled(!model.hasHistoryEntries)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
@@ -224,6 +225,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                         .foregroundColor(model.hasFavorites ? .red : .secondary)
                 }
+                .disabled(!model.hasFavorites)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
@@ -265,6 +267,7 @@ struct SettingsView: View {
                     Text(NSLocalizedString("Delete content saved for later", comment: "Title of the button to delete content saved for later"))
                         .foregroundColor(model.hasWatchLaterItems ? .red : .secondary)
                 }
+                .disabled(!model.hasWatchLaterItems)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
             }
         }
