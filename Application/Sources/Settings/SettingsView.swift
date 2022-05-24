@@ -31,8 +31,10 @@ struct SettingsView: View {
 #endif
             ContentSection(model: model)
             InformationSection(model: model)
+#if DEBUG || NIGHTLY || BETA
             AdvancedFeaturesSection(model: model)
             ResetSection(model: model)
+#endif
 #if os(iOS) && (DEBUG || APPCENTER)
             DeveloperSection()
 #endif
@@ -393,6 +395,7 @@ struct SettingsView: View {
     
     // MARK: Advanced features section
     
+#if DEBUG || NIGHTLY || BETA
     private struct AdvancedFeaturesSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -645,9 +648,11 @@ struct SettingsView: View {
             }
         }
     }
+#endif
     
     // MARK: Reset section
     
+#if DEBUG || NIGHTLY || BETA
     private struct ResetSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -667,6 +672,7 @@ struct SettingsView: View {
             }
         }
     }
+#endif
     
     // MARK: Developer section
     

@@ -171,8 +171,10 @@ final class SettingsViewModel: ObservableObject {
 #endif
     }
     
+#if DEBUG || NIGHTLY || BETA
     func simulateMemoryWarning() {
         let selector = Selector("_p39e45r2f435o6r7837m12M34e5m6o67r8y8W9a9r66654n43i3n2g".unobfuscated())
         UIApplication.shared.perform(selector)
     }
+#endif
 }
