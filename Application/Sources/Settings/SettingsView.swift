@@ -319,13 +319,15 @@ struct SettingsView: View {
             @ObservedObject var model: SettingsViewModel
             
             var body: some View {
-                HStack {
-                    Text(NSLocalizedString("Version", comment: "Version label in settings"))
-                    Spacer()
-                    Text(model.version)
-                        .foregroundColor(.secondary)
-                        .multilineTextAlignment(.trailing)
-                        .lineLimit(2)
+                ListItem {
+                    HStack {
+                        Text(NSLocalizedString("Version", comment: "Version label in settings"))
+                        Spacer()
+                        Text(model.version)
+                            .foregroundColor(.secondary)
+                            .multilineTextAlignment(.trailing)
+                            .lineLimit(2)
+                    }
                 }
             }
         }
@@ -724,6 +726,21 @@ struct SettingsView: View {
             isPresented = true
         }
 #endif
+    }
+    
+    /**
+     *  Simple wrapper for static list items.
+     */
+    private struct ListItem<Content: View>: View {
+        @ViewBuilder var content: () -> Content
+        
+        var body: some View {
+#if os(tvOS)
+            Button(action: { /* Nothing, just to make the item focusable */ }, label: content)
+#else
+            content()
+#endif
+        }
     }
 }
 
