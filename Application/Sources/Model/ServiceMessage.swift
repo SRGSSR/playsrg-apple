@@ -6,18 +6,23 @@
 
 import Foundation
 
-struct ServiceMessage: Decodable, Equatable {
-    private var data: ServiceMessageData
+struct ServiceMessage: Codable, Identifiable, Equatable {
+    private let data: Data
+    
+    var id: String {
+        return data.id
+    }
     
     var text: String {
         return data.text
     }
     
     static func == (lhs: ServiceMessage, rhs: ServiceMessage) -> Bool {
-        return lhs.data.text == rhs.data.text
+        return lhs.id == rhs.id
     }
     
-    private struct ServiceMessageData: Decodable {
-        var text: String
+    private struct Data: Codable {
+        let id: String
+        let text: String
     }
 }
