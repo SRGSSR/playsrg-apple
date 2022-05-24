@@ -19,10 +19,3 @@ func PlaySRGAccessibilityLocalizedString(_ key: String, comment: String?) -> Str
 func PlaySRGOnboardingLocalizedString(_ key: String, comment: String?) -> String {
     return __PlaySRGOnboardingLocalizedString(key, comment)
 }
-
-/**
- *  Return a setting localized string from the settings bundle.
- */
-func PlaySRGSettingsLocalizedString(_ key: String, comment: String?) -> String {
-    return __PlaySRGSettingsLocalizedString(key, comment)
-}

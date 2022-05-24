@@ -18,11 +18,11 @@ enum PosterImages: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .forced:
-            return PlaySRGSettingsLocalizedString("Force", comment: "Poster images setting state")
+            return NSLocalizedString("Force", comment: "Poster images setting state")
         case .ignored:
-            return PlaySRGSettingsLocalizedString("Ignore", comment: "Poster images setting state")
+            return NSLocalizedString("Ignore", comment: "Poster images setting state")
         case .`default`:
-            return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
+            return NSLocalizedString("Default (current configuration)", comment: "Poster images setting state")
         }
     }
 }

@@ -18,11 +18,11 @@ enum UserLocation: String, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .WW:
-            return PlaySRGSettingsLocalizedString("Outside Switzerland", comment: "User location setting state")
+            return NSLocalizedString("Outside Switzerland", comment: "User location setting state")
         case .CH:
-            return PlaySRGSettingsLocalizedString("Ignore location", comment: "User location setting state")
+            return NSLocalizedString("Ignore location", comment: "User location setting state")
         case .`default`:
-            return PlaySRGSettingsLocalizedString("Default (IP-based location)", comment: "User location setting state")
+            return NSLocalizedString("Default (IP-based location)", comment: "User location setting state")
         }
     }
 }

@@ -180,7 +180,7 @@ struct SettingsView: View {
             
             var body: some View {
                 Button(action: action) {
-                    Text(PlaySRGSettingsLocalizedString("Delete history", comment: "Delete history button title"))
+                    Text(NSLocalizedString("Delete history", comment: "Delete history button title"))
                         .foregroundColor(model.hasHistoryEntries ? .red : .secondary)
                 }
                 .alert(isPresented: $isAlertDisplayed, content: alert)
@@ -221,7 +221,7 @@ struct SettingsView: View {
             
             var body: some View {
                 Button(action: action) {
-                    Text(PlaySRGSettingsLocalizedString("Delete favorites", comment: "Delete favorites button title"))
+                    Text(NSLocalizedString("Delete favorites", comment: "Delete favorites button title"))
                         .foregroundColor(model.hasFavorites ? .red : .secondary)
                 }
                 .alert(isPresented: $isAlertDisplayed, content: alert)
@@ -247,7 +247,7 @@ struct SettingsView: View {
                 }
                 else {
                     return Alert(
-                        title: Text(PlaySRGSettingsLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
+                        title: Text(NSLocalizedString("Delete content saved for later", comment: "Title of the message displayed when the user is about to delete content saved for later")),
                         primaryButton: primaryButton,
                         secondaryButton: secondaryButton
                     )
@@ -368,7 +368,7 @@ struct SettingsView: View {
                     )
                 }
                 return Alert(
-                    title: Text(PlaySRGSettingsLocalizedString("Support information", comment: "Support information alert title")),
+                    title: Text(NSLocalizedString("Support information", comment: "Support information alert title")),
                     primaryButton: primaryButton,
                     secondaryButton: secondaryButton
                 )
@@ -386,7 +386,7 @@ struct SettingsView: View {
             
             var body: some View {
                 Button(action: action) {
-                    Text(PlaySRGSettingsLocalizedString("Support information", comment: "Label of the button to access support information"))
+                    Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
                 }
                 .alert(isPresented: $isAlertDisplayed, content: alert)
                 .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
