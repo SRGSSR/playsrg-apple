@@ -11,6 +11,8 @@ import SwiftUI
 struct HighlightCell: View {
     let highlight: Highlight
     
+    @Environment(\.isSelected) private var isSelected
+    
     var body: some View {
 #if os(tvOS)
         ExpandingCardButton(action: action) {
@@ -18,6 +20,8 @@ struct HighlightCell: View {
         }
 #else
         MainView(highlight: highlight)
+            .selectionAppearance(when: isSelected)
+            .cornerRadius(LayoutStandardViewCornerRadius)
 #endif
     }
     
