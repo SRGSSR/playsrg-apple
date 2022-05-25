@@ -185,7 +185,7 @@ name: Mantle, nameSpecified: mantle, owner: Mantle, version: 2.2.0, source: http
 
 name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30909.0, source: https://github.com/firebase/nanopb
 
-name: Nuke, nameSpecified: nuke, owner: kean, version: 10.9.0, source: https://github.com/kean/Nuke
+name: Nuke, nameSpecified: nuke, owner: kean, version: 10.10.0, source: https://github.com/kean/Nuke
 
 name: NukeUI, nameSpecified: nukeui, owner: kean, version: 0.8.1, source: https://github.com/kean/NukeUI
 
