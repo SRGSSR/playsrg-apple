@@ -55,12 +55,12 @@ struct HighlightCell: View {
 enum HighlightCellSize {
     static func fullWidth(for highlight: Highlight?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title = highlight?.title, !title.isEmpty {
-            if horizontalSizeClass == .compact {
-                return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(300))
-            }
-            else {
-                return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(200))
-            }
+#if os(tvOS)
+            let height: CGFloat = 700
+#else
+            let height: CGFloat = (horizontalSizeClass == .compact) ? 300 : 400
+#endif
+            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
         }
         else {
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(LayoutHeaderHeightZero))
