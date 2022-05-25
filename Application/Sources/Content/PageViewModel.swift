@@ -212,10 +212,10 @@ extension PageViewModel {
     }
     
     enum SectionLayout: Hashable {
-        case hero
+        case heroStage
         case headline
-        case highlight
-        case highlightSwimlane
+        case element
+        case elementSwimlane
         case liveMediaGrid
         case liveMediaSwimlane
         case mediaGrid
@@ -339,7 +339,7 @@ extension PageViewModelProperties {
 #if os(tvOS)
     var hasMoreRowItem: Bool {
         switch layout {
-        case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
+        case .mediaSwimlane, .showSwimlane, .elementSwimlane:
             return true
         default:
             return false
@@ -368,13 +368,13 @@ private extension PageViewModel {
         var layout: PageViewModel.SectionLayout {
             switch presentation.type {
             case .heroStage:
-                return .hero
+                return .heroStage
             case .highlight:
-                return .highlight
+                return .element
             case .mediaElement, .showElement:
-                return .highlight
+                return .element
             case .mediaElementSwimlane:
-                return .highlightSwimlane
+                return .elementSwimlane
             case .topicSelector:
                 return .topicSelector
             case .showAccess:

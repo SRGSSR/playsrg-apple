@@ -519,7 +519,7 @@ private extension PageViewController {
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section.viewModelProperties.layout {
-                case .hero:
+                case .heroStage:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
@@ -531,13 +531,13 @@ private extension PageViewController {
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
-                case .highlight:
+                case .element:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
-                case .highlightSwimlane:
+                case .elementSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -614,12 +614,12 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero:
+            case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
-            case .highlight, .highlightSwimlane:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
+            case .element, .elementSwimlane:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .element)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
@@ -636,10 +636,10 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero, .headline:
+            case .heroStage, .headline:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
-            case .highlight:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
+            case .element:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .element)
             default:
                 PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant)
             }
