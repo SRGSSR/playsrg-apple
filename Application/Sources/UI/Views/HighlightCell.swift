@@ -11,17 +11,38 @@ import SwiftUI
 struct HighlightCell: View {
     let highlight: Highlight
     
-    private var imageUrl: URL? {
-        return SRGDataProvider.current!.url(for: highlight.image, size: .large)
+    var body: some View {
+#if os(tvOS)
+        ExpandingCardButton(action: action) {
+            MainView(highlight: highlight)
+        }
+#else
+        MainView(highlight: highlight)
+#endif
     }
     
-    var body: some View {
-        GeometryReader { geometry in
-            ZStack(alignment: .leading) {
-                ImageView(source: imageUrl, contentMode: .aspectFillTop)
-                LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
-                DescriptionView(highlight: highlight)
-                    .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+#if os(tvOS)
+    private func action() {
+        
+    }
+#endif
+    
+    /// Behavior: h-exp, v-exp
+    private struct MainView: View {
+        let highlight: Highlight
+        
+        private var imageUrl: URL? {
+            return SRGDataProvider.current!.url(for: highlight.image, size: .large)
+        }
+        
+        var body: some View {
+            GeometryReader { geometry in
+                ZStack(alignment: .leading) {
+                    ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                    LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
+                    DescriptionView(highlight: highlight)
+                        .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                }
             }
         }
     }
