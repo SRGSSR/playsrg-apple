@@ -301,19 +301,26 @@ private extension PageViewModel {
     }
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
-        return Publishers.CombineLatest(
-            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
-                .scan([]) { $0 + $1 },
-            section.properties.interactiveUpdatesPublisher()
-                .prepend(Just([]))
-                .setFailureType(to: Error.self)
-        )
-        .map { items, removedItems in
-            return items.filter { !removedItems.contains($0) }
+        if section.properties.displaysItems {
+            return Publishers.CombineLatest(
+                section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                    .scan([]) { $0 + $1 },
+                section.properties.interactiveUpdatesPublisher()
+                    .prepend(Just([]))
+                    .setFailureType(to: Error.self)
+            )
+            .map { items, removedItems in
+                return items.filter { !removedItems.contains($0) }
+            }
+            .map { rowItems(removeDuplicates(in: $0), in: section) }
+            .map { Row(section: section, items: $0) }
+            .eraseToAnyPublisher()
         }
-        .map { rowItems(removeDuplicates(in: $0), in: section) }
-        .map { Row(section: section, items: $0) }
-        .eraseToAnyPublisher()
+        else {
+            return Just(Row(section: section, items: [Item(.item(.transparent), in: section)]))
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
     }
     
     static func rowItems(_ items: [Content.Item], in section: Section) -> [Item] {

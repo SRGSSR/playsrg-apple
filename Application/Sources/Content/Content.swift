@@ -119,6 +119,7 @@ protocol SectionProperties {
     var imageVariant: SRGImageVariant { get }
     
     /// Properties for section display on a page
+    var displaysItems: Bool { get }
     var placeholderItems: [Content.Item] { get }
     var displaysHeader: Bool { get }
     
@@ -207,6 +208,10 @@ private extension Content {
             default:
                 return .default
             }
+        }
+        
+        var displaysItems: Bool {
+            return presentation.type != .highlight
         }
         
         var placeholderItems: [Content.Item] {
@@ -531,6 +536,10 @@ private extension Content {
             default:
                 return .default
             }
+        }
+        
+        var displaysItems: Bool {
+            return true
         }
         
         var placeholderItems: [Content.Item] {
