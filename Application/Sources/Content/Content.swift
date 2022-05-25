@@ -112,15 +112,22 @@ protocol SectionFiltering {
 }
 
 protocol SectionProperties {
+    /// Generic properties
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
+    var imageVariant: SRGImageVariant { get }
+    
+    /// Properties for section display on a page
     var placeholderItems: [Content.Item] { get }
+    var displaysHeader: Bool { get }
+    
+    /// Properties for section detail display
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: EmptyView.`Type` { get }
-    var imageVariant: SRGImageVariant { get }
     
+    /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
     var analyticsDeletionHiddenEventTitle: String? { get }
@@ -185,9 +192,26 @@ private extension Content {
             return presentation.label
         }
         
+        var imageVariant: SRGImageVariant {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            switch contentSection.type {
+            case .shows:
+                return .poster
+            case .predefined:
+                switch presentation.type {
+                case .favoriteShows:
+                    return .poster
+                default:
+                    return .default
+                }
+            default:
+                return .default
+            }
+        }
+        
         var placeholderItems: [Content.Item] {
             switch presentation.type {
-            case .highlight, .mediaElement:
+            case .mediaElement:
                 return [.mediaPlaceholder(index: 0)]
             case .showElement:
                 return [.showPlaceholder(index: 0)]
@@ -205,9 +229,13 @@ private extension Content {
                 }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .none, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
+            case .none, .highlight, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
                 return []
             }
+        }
+        
+        var displaysHeader: Bool {
+            return contentSection.presentation.type != .highlight
         }
         
         var displaysTitle: Bool {
@@ -247,23 +275,6 @@ private extension Content {
                 }
             default:
                 return .generic
-            }
-        }
-
-        var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
-            switch contentSection.type {
-            case .shows:
-                return .poster
-            case .predefined:
-                switch presentation.type {
-                case .favoriteShows:
-                    return .poster
-                default:
-                    return .default
-                }
-            default:
-                return .default
             }
         }
         
@@ -512,6 +523,16 @@ private extension Content {
             return nil
         }
         
+        var imageVariant: SRGImageVariant {
+            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
+            switch configuredSection {
+            case .tvAllShows:
+                return .poster
+            default:
+                return .default
+            }
+        }
+        
         var placeholderItems: [Content.Item] {
             switch configuredSection {
             case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
@@ -529,6 +550,10 @@ private extension Content {
                 return []
 #endif
             }
+        }
+        
+        var displaysHeader: Bool {
+            return true
         }
         
         var displaysTitle: Bool {
@@ -566,16 +591,6 @@ private extension Content {
 #endif
             default:
                 return .generic
-            }
-        }
-        
-        var imageVariant: SRGImageVariant {
-            guard ApplicationConfiguration.shared.arePosterImagesEnabled else { return .default }
-            switch configuredSection {
-            case .tvAllShows:
-                return .poster
-            default:
-                return .default
             }
         }
         
