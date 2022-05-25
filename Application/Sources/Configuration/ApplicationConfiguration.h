@@ -25,6 +25,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 
 @property (class, nonatomic, readonly) ApplicationConfiguration *sharedApplicationConfiguration;
 
+@property (nonatomic, readonly, copy) NSString *businessUnitIdentifier;
 @property (nonatomic, readonly) SRGVendor vendor;
 
 @property (nonatomic, readonly, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
@@ -39,6 +40,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic, readonly) NSURL *playURL;
+@property (nonatomic, readonly) NSURL *playServiceURL;
 @property (nonatomic, readonly) NSURL *middlewareURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebserviceURL;
 @property (nonatomic, readonly, nullable) NSURL *identityWebsiteURL;

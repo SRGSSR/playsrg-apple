@@ -68,8 +68,7 @@ final class MediaDetailViewModel: ObservableObject {
         guard let initialMedia = initialMedia, initialMedia.contentType != .livestream else { return }
         
         let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
-        let resourcePath = "api/v2/playlist/recommendation/relatedContent/" + initialMedia.urn
-        let url = URL(string: resourcePath, relativeTo: middlewareUrl)!
+        let url = URL(string: "api/v2/playlist/recommendation/relatedContent/\(initialMedia.urn)", relativeTo: middlewareUrl)!
         
         URLSession.shared.dataTaskPublisher(for: url)
             .map(\.data)

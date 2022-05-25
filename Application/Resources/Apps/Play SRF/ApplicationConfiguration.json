@@ -6,6 +6,7 @@
   "voiceOverLanguageCode": "de",
   "appStoreProductIdentifier": 638194352,
   "playURL": "https://www.srf.ch/play/",
+  "playServiceURL": "https://www.srf.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",

@@ -6,6 +6,7 @@
   "voiceOverLanguageCode": "fr",
   "appStoreProductIdentifier": 920754415,
   "playURL": "https://www.rts.ch/play/",
+  "playServiceURL": "https://www.rts.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "identityWebserviceURL": "https://hummingbird.rts.ch/api/profile",
   "identityWebsiteURL": "https://www.rts.ch/profile",

@@ -21,7 +21,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var serviceMessage: SRGServiceMessage?
+    @Published private(set) var serviceMessage: ServiceMessage?
     
     private let trigger = Trigger()
     
@@ -54,7 +54,9 @@ final class PageViewModel: Identifiable, ObservableObject {
         .assign(to: &$state)
         
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) {
-            return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
+            URLSession.shared.dataTaskPublisher(for: ApplicationConfiguration.shared.serviceMessageUrl)
+                .map(\.data)
+                .decode(type: ServiceMessage.self, decoder: JSONDecoder())
                 .map { Optional($0) }
                 .replaceError(with: nil)
                 .eraseToAnyPublisher()

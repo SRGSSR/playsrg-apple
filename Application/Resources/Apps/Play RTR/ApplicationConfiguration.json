@@ -5,6 +5,7 @@
   "tvSiteName": "rtr-player-tvos-apple",
   "appStoreProductIdentifier": 920754925,
   "playURL": "https://www.rtr.ch/play/",
+  "playServiceURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",

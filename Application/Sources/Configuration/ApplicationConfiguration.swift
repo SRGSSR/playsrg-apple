@@ -28,6 +28,10 @@ extension ApplicationConfiguration {
             return Self.configuredSection(from: homeSection)
         }
     }
+    
+    var serviceMessageUrl: URL {
+        return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+    }
 }
 
 enum ConfiguredSection: Hashable {
