@@ -35,26 +35,63 @@ struct HighlightCell: View {
     private struct MainView: View {
         let highlight: Highlight
         
+#if os(iOS)
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+#endif
+        
+        private var direction: StackDirection {
+#if os(iOS)
+            if horizontalSizeClass == .compact {
+                return .vertical
+            }
+#endif
+            return .horizontal
+        }
+        
+        private var isCompact: Bool {
+#if os(iOS)
+            return horizontalSizeClass == .compact
+#else
+            return false
+#endif
+        }
+        
         private var imageUrl: URL? {
             return SRGDataProvider.current!.url(for: highlight.image, size: .large)
         }
         
         var body: some View {
             GeometryReader { geometry in
-                ZStack(alignment: .leading) {
-                    ImageView(source: imageUrl, contentMode: .aspectFillTop)
-                    LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
-                    DescriptionView(highlight: highlight)
-                        .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                if isCompact {
+                    ZStack(alignment: .bottom) {
+                        ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                        LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
+                        Text(highlight.title)
+                            .srgFont(.H2)
+                            .lineLimit(2)
+                            .foregroundColor(.white)
+                            .padding(16)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                else {
+                    ZStack(alignment: .leading) {
+                        ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                        LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
+                        DescriptionView(highlight: highlight)
+                            .padding(.horizontal, 60)
+                            .padding(.vertical, 40)
+                            .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                    }
                 }
             }
         }
     }
     
-    /// Behavior: h-exp, v-exp
+    /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         let highlight: Highlight
-        
+                
         var body: some View {
             VStack(alignment: .leading, spacing: 15) {
                 Text(highlight.title)
@@ -68,9 +105,7 @@ struct HighlightCell: View {
                 }
             }
             .foregroundColor(.white)
-            .padding(.leading, 60)
-            .padding(.vertical, 40)
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity)
         }
     }
 }
@@ -97,7 +132,7 @@ enum HighlightCellSize {
 
 private extension View {
     func previewLayout(for highlight: Highlight, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
-        let size = HighlightCellSize.fullWidth(for: highlight, layoutWidth: 1000, horizontalSizeClass: horizontalSizeClass).previewSize
+        let size = HighlightCellSize.fullWidth(for: highlight, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
         return previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }
@@ -109,5 +144,7 @@ struct HighlightCell_Previews: PreviewProvider {
     static var previews: some View {
         HighlightCell(highlight: highlight)
             .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
+        HighlightCell(highlight: highlight)
+            .previewLayout(for: highlight, layoutWidth: 400, horizontalSizeClass: .compact)
     }
 }
