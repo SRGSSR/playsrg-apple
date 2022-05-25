@@ -14,12 +14,12 @@ struct HighlightCell: View {
     let imageUrl: URL?
     
     var body: some View {
-        ZStack {
-            ImageView(source: imageUrl, contentMode: .aspectFillTop)
-            LinearGradient(gradient: Gradient(colors: [.srgGray16, .clear]), startPoint: .leading, endPoint: .center)
-            HStack {
+        GeometryReader { geometry in
+            ZStack(alignment: .leading) {
+                ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                LinearGradient(gradient: Gradient(colors: [.srgGray16, .clear]), startPoint: .leading, endPoint: .center)
                 DescriptionView(title: title, summary: summary)
-                Color.clear
+                    .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
             }
         }
     }
