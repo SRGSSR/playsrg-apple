@@ -19,7 +19,7 @@ struct HighlightCell: View {
         GeometryReader { geometry in
             ZStack(alignment: .leading) {
                 ImageView(source: imageUrl, contentMode: .aspectFillTop)
-                LinearGradient(gradient: Gradient(colors: [.srgGray16, .clear]), startPoint: .leading, endPoint: .center)
+                LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
                 DescriptionView(highlight: highlight)
                     .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
             }
@@ -35,15 +35,14 @@ struct HighlightCell: View {
                 Text(highlight.title)
                     .srgFont(.H2)
                     .lineLimit(1)
-                    .foregroundColor(.srgGrayC7)
                 if let summary = highlight.summary {
                     Text(summary)
                         .lineLimit(3)
                         .multilineTextAlignment(.leading)
                         .srgFont(.body)
-                        .foregroundColor(.srgGray96)
                 }
             }
+            .foregroundColor(.white)
             .padding(.leading, 60)
             .padding(.vertical, 40)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
