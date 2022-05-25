@@ -159,11 +159,11 @@ private extension Content {
                 switch presentation.type {
                 case .favoriteShows:
                     return NSLocalizedString("Favorites", comment: "Title label used to present the TV or radio favorite shows")
-                case .personalizedProgram:
+                case .myProgram:
                     return NSLocalizedString("Latest episodes from your favorites", comment: "Title label used to present the latest episodes from TV favorite shows")
                 case .livestreams:
                     return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-                case .resumePlayback:
+                case .continueWatching:
                     return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
                 case .watchLater:
                     return NSLocalizedString("Later", comment: "Title Label used to present the video later list")
@@ -187,13 +187,13 @@ private extension Content {
         
         var placeholderItems: [Content.Item] {
             switch presentation.type {
-            case .mediaHighlight:
+            case .highlight, .mediaElement:
                 return [.mediaPlaceholder(index: 0)]
-            case .showHighlight:
+            case .showElement:
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
                 return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
-            case .swimlane, .mediaHighlightSwimlane, .hero, .grid:
+            case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
                 switch contentSection.type {
                 case .showAndMedias:
                     let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -205,7 +205,7 @@ private extension Content {
                 }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .none, .favoriteShows, .resumePlayback, .watchLater, .personalizedProgram, .showAccess:
+            case .none, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
                 return []
             }
         }
@@ -220,7 +220,7 @@ private extension Content {
                 return false
             case .predefined:
                 switch presentation.type {
-                case .favoriteShows, .resumePlayback, .watchLater:
+                case .favoriteShows, .continueWatching, .watchLater:
                     return true
                 default:
                     return false
@@ -236,9 +236,9 @@ private extension Content {
                 switch contentSection.presentation.type {
                 case .favoriteShows:
                     return .favoriteShows
-                case .personalizedProgram:
+                case .myProgram:
                     return .episodesFromFavorites
-                case .resumePlayback:
+                case .continueWatching:
                     return .resumePlayback
                 case .watchLater:
                     return .watchLater
@@ -275,15 +275,15 @@ private extension Content {
                 switch presentation.type {
                 case .favoriteShows:
                     return AnalyticsPageTitle.favorites.rawValue
-                case .personalizedProgram:
+                case .myProgram:
                     return AnalyticsPageTitle.latestEpisodesFromFavorites.rawValue
-                case .resumePlayback:
+                case .continueWatching:
                     return AnalyticsPageTitle.resumePlayback.rawValue
                 case .watchLater:
                     return AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
                     return AnalyticsPageTitle.topics.rawValue
-                case .none, .livestreams, .showAccess, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                case .none, .livestreams, .showAccess, .swimlane, .heroStage, .highlight, .grid, .mediaElement, .mediaElementSwimlane, .showElement:
                     return nil
                 }
             case .none:
@@ -308,7 +308,7 @@ private extension Content {
                 return AnalyticsTitle.favoriteRemove.rawValue
             case .watchLater:
                 return AnalyticsTitle.watchLaterRemove.rawValue
-            case .resumePlayback:
+            case .continueWatching:
                 return AnalyticsTitle.historyRemove.rawValue
             default:
                 return nil
@@ -351,7 +351,7 @@ private extension Content {
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { $0.map { .show($0) } }
                         .eraseToAnyPublisher()
-                case .personalizedProgram:
+                case .myProgram:
                     return dataProvider.favoritesPublisher(filter: filter)
                         .map { dataProvider.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: pageSize) }
                         .switchToLatest()
@@ -365,7 +365,7 @@ private extension Content {
                     return dataProvider.tvTopics(for: vendor)
                         .map { $0.map { .topic($0) } }
                         .eraseToAnyPublisher()
-                case .resumePlayback:
+                case .continueWatching:
                     return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
@@ -383,7 +383,7 @@ private extension Content {
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
 #endif
-                case .none, .swimlane, .hero, .grid, .mediaHighlight, .mediaHighlightSwimlane, .showHighlight:
+                case .none, .swimlane, .heroStage, .highlight, .grid, .mediaElement, .mediaElementSwimlane, .showElement:
                     return Just([])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
@@ -399,9 +399,9 @@ private extension Content {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
-                case .favoriteShows, .personalizedProgram:
+                case .favoriteShows, .myProgram:
                     return UserInteractionSignal.favoriteUpdates()
-                case .resumePlayback:
+                case .continueWatching:
                     return UserInteractionSignal.historyUpdates()
                 case .watchLater:
                     return UserInteractionSignal.watchLaterUpdates()
@@ -415,7 +415,7 @@ private extension Content {
         
         func reloadSignal() -> AnyPublisher<Void, Never>? {
             switch presentation.type {
-            case .favoriteShows, .personalizedProgram:
+            case .favoriteShows, .myProgram:
                 return ThrottledSignal.preferenceUpdates()
             case .watchLater:
                 return ThrottledSignal.watchLaterUpdates()
@@ -432,7 +432,7 @@ private extension Content {
                 Content.removeFromFavorites(items)
             case .watchLater:
                 Content.removeFromWatchLater(items)
-            case .resumePlayback:
+            case .continueWatching:
                 Content.removeFromHistory(items)
             default:
                 ()
@@ -440,7 +440,7 @@ private extension Content {
         }
         
         private func filterItems<T>(_ items: [T]) -> [T] {
-            guard presentation.type == .mediaHighlight || presentation.type == .showHighlight else { return items }
+            guard presentation.type == .mediaElement || presentation.type == .showElement else { return items }
             
             if presentation.isRandomized, let item = items.randomElement() {
                 return [item]

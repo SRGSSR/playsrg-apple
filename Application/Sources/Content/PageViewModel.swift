@@ -367,11 +367,13 @@ private extension PageViewModel {
         
         var layout: PageViewModel.SectionLayout {
             switch presentation.type {
-            case .hero:
+            case .heroStage:
                 return .hero
-            case .mediaHighlight, .showHighlight:
+            case .highlight:
                 return .highlight
-            case .mediaHighlightSwimlane:
+            case .mediaElement, .showElement:
+                return .highlight
+            case .mediaElementSwimlane:
                 return .highlightSwimlane
             case .topicSelector:
                 return .topicSelector
@@ -390,14 +392,14 @@ private extension PageViewModel {
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
             case .livestreams:
                 return .liveMediaSwimlane
-            case .none, .resumePlayback, .watchLater, .personalizedProgram:
+            case .none, .continueWatching, .watchLater, .myProgram:
                 return .mediaSwimlane
             }
         }
         
         var canOpenDetailPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .personalizedProgram, .resumePlayback, .topicSelector, .watchLater:
+            case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
                 return true
             default:
                 return presentation.hasDetailPage

@@ -302,9 +302,9 @@ private extension SectionViewModel {
                 return .showGrid
             case .predefined:
                 switch contentSection.presentation.type {
-                case .hero, .mediaHighlight, .mediaHighlightSwimlane, .resumePlayback, .watchLater, .personalizedProgram:
+                case .heroStage, .highlight, .mediaElement, .mediaElementSwimlane, .continueWatching, .watchLater, .myProgram:
                     return .mediaGrid
-                case .showHighlight, .favoriteShows:
+                case .showElement, .favoriteShows:
                     return .showGrid
                 case .topicSelector:
                     return .topicGrid
