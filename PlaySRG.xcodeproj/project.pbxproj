@@ -722,6 +722,11 @@
 		6F264D7B2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
 		6F264D7C2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
 		6F264D7D2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */; };
+		6F27C2C8283E7E2100031415 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F27C2C9283E7E2200031415 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F27C2CA283E7E2200031415 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F27C2CB283E7E2300031415 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F27C2CC283E7E2300031415 /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F2961FC2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
 		6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 6F2961FB2006186000CAB0E4 /* placeholder_media_list.pdf */; };
@@ -1135,6 +1140,11 @@
 		6F6C0FBE257AAF250077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6F6C0FBF257AAF260077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
 		6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 0827DA1D1F0D36D900A31A42 /* NSBundle+PlaySRG.m */; };
+		6F6E9061283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F6E9062283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F6E9063283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F6E9064283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F6E9065283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F710A2A264463780035CA03 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyView.swift */; };
 		6F710A2C2644637A0035CA03 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyView.swift */; };
 		6F710A2D2644637A0035CA03 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyView.swift */; };
@@ -2990,6 +3000,7 @@
 		6F5FAA43268CB88C007F0CA8 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		6F661C9E1FBB632E008E345B /* PlaySRG-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-ObjectiveC.h"; sourceTree = "<group>"; };
 		6F676850281C0F7F00D61211 /* SupportInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportInformation.swift; sourceTree = "<group>"; };
+		6F6E9060283E6EB10049FEEE /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
 		6F72E60526BA6B16001A890C /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		6F72E60626BA6B16001A890C /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6F73BFAF26563ABD0032D742 /* DampedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DampedCollectionView.swift; sourceTree = "<group>"; };
@@ -4947,6 +4958,7 @@
 				6FDF08C5218B126700B2AF2C /* Download.m */,
 				6FDF08C8218B126700B2AF2C /* Download+Private.h */,
 				6F8D54412639ABFE00EF5FE8 /* FeaturedContent.swift */,
+				6F6E9060283E6EB10049FEEE /* Highlight.swift */,
 				6FFA68322637E99C00BCDA06 /* Mock.swift */,
 				6FDF08D3218B126700B2AF2C /* Onboarding.h */,
 				6FDF08CA218B126700B2AF2C /* Onboarding.m */,
@@ -8417,6 +8429,7 @@
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				0806E7B81D50D918002ED406 /* SettingsViewController.m in Sources */,
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
+				6F6E9061283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6FE14E60263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6F0506E7245468EE0053253E /* SplitViewController.m in Sources */,
 				6F566E9524EEC40A0024B4CA /* ApplicationSection.m in Sources */,
@@ -8649,6 +8662,7 @@
 				6FE2876E2481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F172258F02400AC978D /* WatchLater.m in Sources */,
 				088899462077628300242654 /* TVChannel.m in Sources */,
+				6F6E9062283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556C27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F2DE05426440FB10059335E /* ActivityIndicator.swift in Sources */,
@@ -8886,6 +8900,7 @@
 				6FE2876F2481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F182258F02400AC978D /* WatchLater.m in Sources */,
 				088899472077628400242654 /* TVChannel.m in Sources */,
+				6F6E9063283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556D27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F2DE05526440FB10059335E /* ActivityIndicator.swift in Sources */,
@@ -9123,6 +9138,7 @@
 				6FE287702481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F192258F02400AC978D /* WatchLater.m in Sources */,
 				088899482077628400242654 /* TVChannel.m in Sources */,
+				6F6E9064283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556E27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1F1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F2DE05626440FB20059335E /* ActivityIndicator.swift in Sources */,
@@ -9397,6 +9413,7 @@
 				6F054FC426B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6FE287402481448C00358CFF /* SongsViewController.m in Sources */,
 				089EA015201148270070E11A /* NSTimer+PlaySRG.m in Sources */,
+				6F6E9065283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F4843D023EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F54D2D62604FB19008B46FF /* ShowCell.swift in Sources */,
 				6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
@@ -9706,6 +9723,7 @@
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F27C2C8283E7E2100031415 /* Highlight.swift in Sources */,
 				6FF5D1F52746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676856281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD52813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -9846,6 +9864,7 @@
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F27C2C9283E7E2200031415 /* Highlight.swift in Sources */,
 				6FF5D1F62746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676857281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD62813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -9986,6 +10005,7 @@
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F27C2CA283E7E2200031415 /* Highlight.swift in Sources */,
 				6FF5D1F72746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676858281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD72813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -10126,6 +10146,7 @@
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F27C2CB283E7E2300031415 /* Highlight.swift in Sources */,
 				6FF5D1F82746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F676859281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD82813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
@@ -10266,6 +10287,7 @@
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
 				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
+				6F27C2CC283E7E2300031415 /* Highlight.swift in Sources */,
 				6FF5D1F92746BB0400460F70 /* ProgramPreviewModel.swift in Sources */,
 				6F67685A281C0F7F00D61211 /* SupportInformation.swift in Sources */,
 				6F9ABCD92813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,

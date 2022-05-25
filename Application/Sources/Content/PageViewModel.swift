@@ -316,8 +316,14 @@ private extension PageViewModel {
             .map { Row(section: section, items: $0) }
             .eraseToAnyPublisher()
         }
+        else if let highlight = section.properties.highlight {
+            let item = Item(.item(.highlight(highlight)), in: section)
+            return Just(Row(section: section, items: [item]))
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
         else {
-            return Just(Row(section: section, items: [Item(.item(.highlight), in: section)]))
+            return Just(Row(section: section, items: []))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }

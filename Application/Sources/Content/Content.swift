@@ -41,7 +41,8 @@ enum Content {
         case showAccess(radioChannel: RadioChannel?)
 #endif
         
-        case highlight
+        case highlight(_ highlight: Highlight)
+        
         case transparent
         
         private var title: String? {
@@ -116,6 +117,7 @@ protocol SectionProperties {
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
+    var image: SRGImage? { get }
     var imageVariant: SRGImageVariant { get }
     
     /// Properties for section display on a page
@@ -149,9 +151,13 @@ protocol SectionProperties {
     
     /// Method to be called for removing the specified items from an editable section.
     func remove(_ items: [Content.Item])
-    
-    /// Method to retrieve the image associated with the section, if any.
-    func imageUrl(for size: SRGImageSize) -> URL?
+}
+
+extension SectionProperties {
+    var highlight: Highlight? {
+        guard let title = title else { return nil }
+        return Highlight(title: title, summary: summary, image: image)
+    }
 }
 
 private extension Content {
@@ -194,6 +200,10 @@ private extension Content {
         
         var label: String? {
             return presentation.label
+        }
+        
+        var image: SRGImage? {
+            return presentation.image
         }
         
         var imageVariant: SRGImageVariant {
@@ -458,10 +468,6 @@ private extension Content {
             }
         }
         
-        func imageUrl(for size: SRGImageSize) -> URL? {
-            return SRGDataProvider.current!.url(for: contentSection.presentation.image, size: size)
-        }
-        
         private func filterItems<T>(_ items: [T]) -> [T] {
             guard presentation.type == .mediaElement || presentation.type == .showElement else { return items }
             
@@ -532,6 +538,10 @@ private extension Content {
         }
         
         var label: String? {
+            return nil
+        }
+        
+        var image: SRGImage? {
             return nil
         }
         
@@ -872,10 +882,6 @@ private extension Content {
             default:
                 ()
             }
-        }
-        
-        func imageUrl(for size: SRGImageSize) -> URL? {
-            return nil
         }
     }
 }
