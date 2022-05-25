@@ -213,6 +213,7 @@ extension PageViewModel {
     
     enum SectionLayout: Hashable {
         case heroStage
+        case highlight
         case headline
         case element
         case elementSwimlane
@@ -370,7 +371,7 @@ private extension PageViewModel {
             case .heroStage:
                 return .heroStage
             case .highlight:
-                return .element
+                return .highlight
             case .mediaElement, .showElement:
                 return .element
             case .mediaElementSwimlane:

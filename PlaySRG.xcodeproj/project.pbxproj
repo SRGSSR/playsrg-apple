@@ -1639,6 +1639,16 @@
 		6FB89A1226336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1326336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
 		6FB89A1426336E9D0012F1B0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */; };
+		6FB89E27283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E28283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E29283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2A283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2B283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2C283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2D283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2E283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E2F283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
+		6FB89E30283DEA12006F9C6C /* HighlightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB89E26283DEA12006F9C6C /* HighlightCell.swift */; };
 		6FB90D18270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
 		6FB90D19270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
 		6FB90D1A270D91010033D860 /* CarPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB90D17270D91010033D860 /* CarPlayList.swift */; };
@@ -3082,6 +3092,7 @@
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		6FB89E26283DEA12006F9C6C /* HighlightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCell.swift; sourceTree = "<group>"; };
 		6FB90D17270D91010033D860 /* CarPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarPlayList.swift; sourceTree = "<group>"; };
 		6FB9B3D526CA88AD0065092F /* TransluscentHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransluscentHeaderView.swift; sourceTree = "<group>"; };
 		6FBA2ECF20D11A65005EB21D /* Application-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Application-Info.plist"; sourceTree = "<group>"; };
@@ -4561,6 +4572,7 @@
 				6FD68617246052A100B8018A /* GradientView.m */,
 				6FE14E5F263EA83C004AD913 /* HeaderView.swift */,
 				6FCE753426D3786F00667298 /* HeroMediaCell.swift */,
+				6FB89E26283DEA12006F9C6C /* HighlightCell.swift */,
 				6FCE7ABF260367B90037A861 /* HostViews.swift */,
 				6F4CF735281341B7006AFE6D /* ImageView.swift */,
 				6F9ABCDA2813F44E00B118A3 /* ImageViewLandscapePreviews.swift */,
@@ -8503,6 +8515,7 @@
 				6F2F556B27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				6FB03F5C25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FF7BB9C22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
+				6FB89E27283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				08B4650326BC07F900454A28 /* ChannelButton.swift in Sources */,
 				6F54D3FE26051035008B46FF /* MediaDescription.swift in Sources */,
 				6FD9595426989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
@@ -8778,6 +8791,7 @@
 				08AF9481217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54432639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE171EA63D5A00965F45 /* PlayMiniPlayerView.m in Sources */,
+				6FB89E28283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				08209309208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77A2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -9014,6 +9028,7 @@
 				08AF9482217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54442639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE191EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
+				6FB89E29283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				0820930A208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77B2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -9250,6 +9265,7 @@
 				08AF9483217D27E40028B082 /* SharingItem.m in Sources */,
 				6F8D54452639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				086BDE1B1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
+				6FB89E2A283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				0820930B208F522B00711DE4 /* PushService.m in Sources */,
 				6F40B77C2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
@@ -9527,6 +9543,7 @@
 				6FCB65F426F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */,
 				6FF0C84B26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
+				6FB89E2B283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
@@ -9749,6 +9766,7 @@
 				6F85F7AF2567ED2A00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
+				6FB89E2C283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9210ED26AEDDDA00291CA9 /* Environment.swift in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83A268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -9888,6 +9906,7 @@
 				6F85F7C42567ED2B00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
+				6FB89E2D283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9210EE26AEDDDA00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83B268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10027,6 +10046,7 @@
 				6F85F7C52567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
+				6FB89E2E283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9210EF26AEDDDB00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83C268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10166,6 +10186,7 @@
 				6F85F7DA2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
+				6FB89E2F283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9210F026AEDDDB00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83D268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10305,6 +10326,7 @@
 				6F85F7DB2567ED2C00AC8286 /* NSTimer+PlaySRG.m in Sources */,
 				6FE4F0D0257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB8250286DD000FF4DD /* UIColor+PlaySRG.m in Sources */,
+				6FB89E30283DEA12006F9C6C /* HighlightCell.swift in Sources */,
 				6F9210F126AEDDDC00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC324E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83E268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
