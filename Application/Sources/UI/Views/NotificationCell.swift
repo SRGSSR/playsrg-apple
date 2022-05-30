@@ -36,7 +36,7 @@ struct NotificationCell: View {
         
         var body: some View {
             VStack(alignment: .leading) {
-                HStack {
+                HStack(alignment: .top) {
                     Text(title)
                         .lineLimit(2)
                         .foregroundColor(.srgGray96)
