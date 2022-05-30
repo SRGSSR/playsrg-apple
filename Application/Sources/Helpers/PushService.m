@@ -194,7 +194,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
     }
 }
 
-#pragma mrk Subscription management
+#pragma mark Subscription management
 
 - (NSString *)tagForShowURN:(NSString *)URN
 {
