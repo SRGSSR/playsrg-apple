@@ -30,8 +30,16 @@ struct NotificationCell: View {
         let notification: UserNotification
         
         private var title: String {
-            // Unbreakable spaces before / after the separator
-            return "\(notification.title) · \(DateFormatter.play_relativeShort.string(from: notification.date))"
+            let date = DateFormatter.play_relativeShort.string(from: notification.date)
+            
+            let title = notification.title
+            if !title.isEmpty {
+                // Unbreakable spaces before / after the separator
+                return "\(title) · \(date)"
+            }
+            else {
+                return date
+            }
         }
         
         var body: some View {
