@@ -110,8 +110,8 @@ private extension HeroMediaCell {
 
 // MARK: Size
 
-final class HeroMediaCellSize: NSObject {
-    @objc static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+enum HeroMediaCellSize {
+    static func recommended(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
 #if os(tvOS)
         let height: CGFloat = 700
 #else
@@ -125,7 +125,7 @@ final class HeroMediaCellSize: NSObject {
 // MARK: Preview
 
 private extension View {
-    func previewLayout(for layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+    func previewLayout(forLayoutWidth layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
         let size = HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
         return previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
@@ -136,12 +136,12 @@ struct HeroMediaCell_Previews: PreviewProvider {
     static var previews: some View {
 #if os(tvOS)
         HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(for: 1920, horizontalSizeClass: .regular)
+            .previewLayout(forLayoutWidth: 1920, horizontalSizeClass: .regular)
 #else
         HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(for: 375, horizontalSizeClass: .compact)
+            .previewLayout(forLayoutWidth: 375, horizontalSizeClass: .compact)
         HeroMediaCell(media: Mock.media(), label: "New")
-            .previewLayout(for: 800, horizontalSizeClass: .regular)
+            .previewLayout(forLayoutWidth: 800, horizontalSizeClass: .regular)
 #endif
     }
 }

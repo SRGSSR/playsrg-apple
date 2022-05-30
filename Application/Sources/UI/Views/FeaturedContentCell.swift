@@ -133,10 +133,10 @@ private extension FeaturedContentCell {
 
 // MARK: Size
 
-final class FeaturedContentCellSize: NSObject {
+enum FeaturedContentCellSize {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
-    @objc static func headline(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func headline(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
             return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 100)
         }
@@ -145,7 +145,7 @@ final class FeaturedContentCellSize: NSObject {
         }
     }
     
-    @objc static func element(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+    static func element(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if horizontalSizeClass == .compact {
             return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 80)
         }

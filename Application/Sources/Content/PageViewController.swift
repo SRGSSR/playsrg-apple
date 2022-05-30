@@ -498,7 +498,7 @@ private extension PageViewController {
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
+        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         
@@ -759,7 +759,7 @@ private extension PageViewController {
         
         static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             if section.properties.displaysHeader {
-                return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+                return HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
             }
             else {
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))

@@ -82,8 +82,8 @@ extension ShowAccessCell {
 
 // MARK: Size
 
-final class ShowAccessCellSize: NSObject {
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
+enum ShowAccessCellSize {
+    static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(38))
     }
 }

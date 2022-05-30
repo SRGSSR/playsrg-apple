@@ -160,10 +160,10 @@ private extension ProgramCell {
     }
 }
 
-// MARK: Sizing
+// MARK: Size
 
-class ProgramCellSize: NSObject {
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
+enum ProgramCellSize {
+    static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(50))
     }
 }

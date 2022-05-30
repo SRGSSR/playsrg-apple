@@ -122,7 +122,7 @@ private extension ShowCell {
 
 // MARK: Size
 
-final class ShowCellSize: NSObject {
+enum ShowCellSize {
     fileprivate static let horizontalPadding: CGFloat = constant(iOS: 10, tvOS: 0)
     fileprivate static let verticalPadding: CGFloat = constant(iOS: 5, tvOS: 7)
     
@@ -138,11 +138,11 @@ final class ShowCellSize: NSObject {
         return imageVariant != .poster ? constant(iOS: 210, tvOS: 375) : constant(iOS: 158, tvOS: 276)
     }
     
-    @objc static func swimlane(for imageVariant: SRGImageVariant) -> NSCollectionLayoutSize {
+    static func swimlane(for imageVariant: SRGImageVariant) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant))
     }
     
-    @objc static func grid(for imageVariant: SRGImageVariant, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+    static func grid(for imageVariant: SRGImageVariant, layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(itemWidth(for: imageVariant), aspectRatio(for: imageVariant), heightOffset(for: imageVariant), layoutWidth, spacing, 2)
     }
 }

@@ -25,8 +25,8 @@ struct TitleView: View {
 
 // MARK: Size
 
-final class TitleViewSize: NSObject {
-    @objc static func recommended(text: String?) -> NSCollectionLayoutSize {
+enum TitleViewSize {
+    static func recommended(forText text: String?) -> NSCollectionLayoutSize {
         if let text = text, !text.isEmpty {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 60, tvOS: 100)))
         }

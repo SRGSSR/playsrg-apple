@@ -131,20 +131,20 @@ private extension LiveMediaCell {
 
 // MARK: Size
 
-class LiveMediaCellSize: NSObject {
+enum LiveMediaCellSize {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
-    @objc static func swimlane() -> NSCollectionLayoutSize {
+    static func swimlane() -> NSCollectionLayoutSize {
         return swimlane(itemWidth: defaultItemWidth)
     }
     
-    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, 0, layoutWidth, spacing, 2)
     }
 }
