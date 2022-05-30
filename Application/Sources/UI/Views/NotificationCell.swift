@@ -24,6 +24,7 @@ struct NotificationCell: View {
             DescriptionView(notification: notification)
                 .padding(.horizontal, 10)
         }
+        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: accessibilityTraits)
     }
     
     /// Behavior: h-exp, v-exp
@@ -65,5 +66,27 @@ struct NotificationCell: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         }
+    }
+}
+
+// MARK: Accessibility
+
+private extension NotificationCell {
+    var accessibilityLabel: String? {
+        let title = notification.title
+        if !title.isEmpty {
+            return "\(title), \(notification.body)"
+        }
+        else {
+            return notification.body
+        }
+    }
+    
+    var accessibilityHint: String? {
+        return isEditing ? PlaySRGAccessibilityLocalizedString("Toggles selection.", comment: "Notification cell hint in edit mode") : nil
+    }
+    
+    var accessibilityTraits: AccessibilityTraits {
+        return isSelected ? .isSelected : []
     }
 }
