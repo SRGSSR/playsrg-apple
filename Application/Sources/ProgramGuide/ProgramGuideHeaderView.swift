@@ -200,7 +200,7 @@ struct ProgramGuideHeaderView: View {
 
 // MARK: Size
 
-enum ProgramGuideHeaderViewSize {    
+enum ProgramGuideHeaderViewSize {
     static func height(for layout: ProgramGuideLayout, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
 #if os(iOS)
         switch layout {

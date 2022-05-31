@@ -747,7 +747,7 @@ private extension PageViewController {
         }
         
         var body: some View {
-            if section.properties.displaysHeader, let title = Self.title(for: section) {
+            if section.properties.displaysRowHeader, let title = Self.title(for: section) {
 #if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
 #else
@@ -763,7 +763,7 @@ private extension PageViewController {
         }
         
         static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-            if section.properties.displaysHeader {
+            if section.properties.displaysRowHeader {
                 return HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
             }
             else {

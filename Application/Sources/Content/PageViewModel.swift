@@ -128,7 +128,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private static func placeholderRowItems(for section: Section) -> [Item] {
-        return section.properties.placeholderItems.map { Item(.item($0), in: section) }
+        return section.properties.placeholderRowItems.map { Item(.item($0), in: section) }
     }
 }
 
@@ -301,7 +301,7 @@ private extension PageViewModel {
     }
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
-        if section.properties.displaysItems {
+        if section.properties.displaysRowItems {
             return Publishers.CombineLatest(
                 section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                     .scan([]) { $0 + $1 },

@@ -122,24 +122,24 @@ protocol SectionProperties {
     var image: SRGImage? { get }
     var imageVariant: SRGImageVariant { get }
     
-    /// Properties for section display on a page
-    var displaysItems: Bool { get }
-    var placeholderItems: [Content.Item] { get }
-    var displaysHeader: Bool { get }
-    
     /// Properties for section detail display
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: EmptyView.`Type` { get }
+    
+#if os(iOS)
+    var sharingItem: SharingItem? { get }
+#endif
     
     /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
     var analyticsDeletionHiddenEventTitle: String? { get }
     
-#if os(iOS)
-    var sharingItem: SharingItem? { get }
-#endif
+    /// Properties for section displayed as a row
+    var displaysRowItems: Bool { get }
+    var placeholderRowItems: [Content.Item] { get }
+    var displaysRowHeader: Bool { get }
     
     /// Publisher providing content for the section. A single result must be delivered upon subscription. Further
     /// results can be retrieved (if any) using a paginator, one page at a time.
@@ -225,39 +225,6 @@ private extension Content {
             }
         }
         
-        var displaysItems: Bool {
-            return presentation.type != .highlight
-        }
-        
-        var placeholderItems: [Content.Item] {
-            switch presentation.type {
-            case .mediaElement:
-                return [.mediaPlaceholder(index: 0)]
-            case .showElement:
-                return [.showPlaceholder(index: 0)]
-            case .topicSelector:
-                return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
-            case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
-                switch contentSection.type {
-                case .showAndMedias:
-                    let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-                    return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
-                case .shows:
-                    return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-                case .none, .medias, .predefined:
-                    return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-                }
-            case .livestreams:
-                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .none, .highlight, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
-                return []
-            }
-        }
-        
-        var displaysHeader: Bool {
-            return contentSection.presentation.type != .highlight
-        }
-        
         var displaysTitle: Bool {
             return contentSection.type != .showAndMedias
         }
@@ -297,6 +264,12 @@ private extension Content {
                 return .generic
             }
         }
+        
+#if os(iOS)
+        var sharingItem: SharingItem? {
+            return SharingItem(for: contentSection)
+        }
+#endif
         
         var analyticsTitle: String? {
             switch contentSection.type {
@@ -346,11 +319,38 @@ private extension Content {
             }
         }
         
-#if os(iOS)
-        var sharingItem: SharingItem? {
-            return SharingItem(for: contentSection)
+        var displaysRowItems: Bool {
+            return presentation.type != .highlight
         }
-#endif
+        
+        var placeholderRowItems: [Content.Item] {
+            switch presentation.type {
+            case .mediaElement:
+                return [.mediaPlaceholder(index: 0)]
+            case .showElement:
+                return [.showPlaceholder(index: 0)]
+            case .topicSelector:
+                return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
+            case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
+                switch contentSection.type {
+                case .showAndMedias:
+                    let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
+                case .shows:
+                    return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                case .none, .medias, .predefined:
+                    return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                }
+            case .livestreams:
+                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .none, .highlight, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
+                return []
+            }
+        }
+        
+        var displaysRowHeader: Bool {
+            return contentSection.presentation.type != .highlight
+        }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
@@ -557,33 +557,6 @@ private extension Content {
             }
         }
         
-        var displaysItems: Bool {
-            return true
-        }
-        
-        var placeholderItems: [Content.Item] {
-            switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .tvLive, .radioLive, .radioLiveSatellite:
-                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .favoriteShows, .radioAllShows, .tvAllShows:
-                return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater:
-                return []
-#if os(iOS)
-            case .downloads:
-                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .radioShowAccess:
-                return []
-#endif
-            }
-        }
-        
-        var displaysHeader: Bool {
-            return true
-        }
-        
         var displaysTitle: Bool {
             return true
         }
@@ -621,6 +594,17 @@ private extension Content {
                 return .generic
             }
         }
+        
+#if os(iOS)
+        var sharingItem: SharingItem? {
+            switch configuredSection {
+            case let .show(show):
+                return SharingItem(for: show)
+            default:
+                return nil
+            }
+        }
+#endif
         
         var analyticsTitle: String? {
             switch configuredSection {
@@ -715,16 +699,32 @@ private extension Content {
             }
         }
         
-#if os(iOS)
-        var sharingItem: SharingItem? {
+        var displaysRowItems: Bool {
+            return true
+        }
+        
+        var placeholderRowItems: [Content.Item] {
             switch configuredSection {
-            case let .show(show):
-                return SharingItem(for: show)
-            default:
-                return nil
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .tvLive, .radioLive, .radioLiveSatellite:
+                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .favoriteShows, .radioAllShows, .tvAllShows:
+                return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater:
+                return []
+#if os(iOS)
+            case .downloads:
+                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .radioShowAccess:
+                return []
+#endif
             }
         }
-#endif
+        
+        var displaysRowHeader: Bool {
+            return true
+        }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
             let dataProvider = SRGDataProvider.current!
