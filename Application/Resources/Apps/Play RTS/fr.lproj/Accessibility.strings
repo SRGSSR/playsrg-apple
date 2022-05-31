@@ -142,7 +142,8 @@
 /* Program cell hint */
 "Plays from the beginning." = "Joue depuis le début.";
 
-/* Featured media hint
+/* Download cell hint
+   Featured media hint
    Media cell hint */
 "Plays the content." = "Joue le contenu.";
 
@@ -191,7 +192,8 @@
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Sous-titré";
 
-/* Media cell hint in edit mode
+/* Download cell hint in edit mode
+   Media cell hint in edit mode
    Show cell hint in edit mode */
 "Toggles selection." = "Inverse la sélection.";
 
