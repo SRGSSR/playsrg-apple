@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, UserNotificationType) {
  *  Conversion between notification types and underlying string representations.
  */
 OBJC_EXPORT UserNotificationType UserNotificationTypeFromString(NSString *notificationType);
-OBJC_EXPORT NSString * UserNotificationTypeString(UserNotificationType notificationType);
+OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType notificationType);
 
 /**
  *  Push notification information.
