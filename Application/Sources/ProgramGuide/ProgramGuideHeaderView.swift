@@ -140,7 +140,7 @@ struct ProgramGuideHeaderView: View {
             }
             .responderChain(from: firstResponder)
         }
-
+        
 #if os(iOS)
         private func action() {
             firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
@@ -195,7 +195,7 @@ struct ProgramGuideHeaderView: View {
             .padding(.bottom, 6)
         }
     }
-    #endif
+#endif
 }
 
 // MARK: Size
