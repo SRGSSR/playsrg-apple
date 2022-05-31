@@ -8,7 +8,6 @@
 
 #import "AnalyticsConstants.h"
 #import "ApplicationSectionInfo.h"
-#import "DownloadsViewController.h"
 #import "Layout.h"
 #import "NavigationController.h"
 #import "NotificationTableViewCell.h"
@@ -216,7 +215,7 @@
         }
             
         case ApplicationSectionDownloads: {
-            viewController = [[DownloadsViewController alloc] init];
+            viewController = [SectionViewController downloadsViewController];
             break;
         }
             

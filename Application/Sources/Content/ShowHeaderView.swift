@@ -35,7 +35,7 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         
 #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
         
         var uiHorizontalSizeClass: UIUserInterfaceSizeClass {

@@ -72,21 +72,6 @@
 		080981412622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
 		080981422622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
 		080981432622195900AA586B /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0809812F2622195900AA586B /* Badges.swift */; };
-		081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
-		081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A51DD079BB00BF8326 /* DownloadsViewController.m */; };
-		081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */; };
-		081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */; };
 		081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
 		081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 081220C01DD0ADAC00BF8326 /* DownloadSession.m */; };
@@ -97,16 +82,6 @@
 		081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C242602C0F800530FFF /* SRGDataProviderCombine */; };
 		081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C262602C10300530FFF /* SRGDataProviderCombine */; };
 		081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 081A8C282602C10E00530FFF /* SRGDataProviderCombine */; };
-		081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */; };
-		081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
-		081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */; };
 		08209308208F522A00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		08209309208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
 		0820930A208F522B00711DE4 /* PushService.m in Sources */ = {isa = PBXBuildFile; fileRef = 08209307208F522A00711DE4 /* PushService.m */; };
@@ -663,6 +638,11 @@
 		6F0EDA672448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
 		6F0EDA682448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
 		6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0EDA632448B0D700F0FED2 /* RefreshControl.m */; };
+		6F11BADB27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
+		6F11BADC27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
+		6F11BADD27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
+		6F11BADE27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
+		6F11BADF27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
 		6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
@@ -898,11 +878,6 @@
 		6F475FB61EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB71EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
 		6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8D1EB37BC6003021EA /* BaseViewController.m */; };
-		6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
-		6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */; };
 		6F475FBE1EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6F475FBF1EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6F475FC01EB37BC6003021EA /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
@@ -933,16 +908,6 @@
 		6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FA01EB37BC6003021EA /* ModalTransition.m */; };
 		6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FA01EB37BC6003021EA /* ModalTransition.m */; };
 		6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FA01EB37BC6003021EA /* ModalTransition.m */; };
-		6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */; };
-		6F475FF61EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */; };
-		6F475FF71EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */; };
-		6F475FF81EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */; };
-		6F475FF91EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */; };
-		6F475FFA1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
-		6F475FFB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
-		6F475FFC1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
-		6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
-		6F475FFE1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */; };
 		6F4760131EB37BC6003021EA /* Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB31EB37BC6003021EA /* Banner.m */; };
 		6F4760141EB37BC6003021EA /* Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB31EB37BC6003021EA /* Banner.m */; };
 		6F4760151EB37BC6003021EA /* Banner.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475FB31EB37BC6003021EA /* Banner.m */; };
@@ -1344,11 +1309,6 @@
 		6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
 		6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
 		6F8A5475265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
-		6F8A5476265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
-		6F8A5477265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
-		6F8A5478265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
-		6F8A5479265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
-		6F8A547A265510F900AE78FD /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
 		6F8BE02727A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
 		6F8BE02827A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
 		6F8BE02927A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */; };
@@ -1786,11 +1746,31 @@
 		6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
 		6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
 		6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FDF08C6218B126700B2AF2C /* Recommendation.m */; };
+		6FC6A12A2795C1F000EEC8A6 /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */; };
+		6FC6A12B2795C1F000EEC8A6 /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */; };
+		6FC6A12C2795C1F000EEC8A6 /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */; };
+		6FC6A12D2795C1F000EEC8A6 /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */; };
+		6FC6A12E2795C1F000EEC8A6 /* DownloadCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */; };
 		6FC8866B1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866C1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866D1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866E1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
 		6FC8866F1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */; };
+		6FCA5BD627D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */; };
+		6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */; };
+		6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */; };
+		6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */; };
+		6FCA5BDA27D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */; };
+		6FCA5BDC27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */; };
+		6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */; };
+		6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */; };
+		6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */; };
+		6FCA5BE027D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */; };
+		6FCA5BED27DA00A900916D0B /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
+		6FCA5BEE27DA00AA00916D0B /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
+		6FCA5BEF27DA00AA00916D0B /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
+		6FCA5BF027DA00AB00916D0B /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
+		6FCA5BF127DA00AC00916D0B /* SectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F8A5470265510F900AE78FD /* SectionViewModel.swift */; };
 		6FCB65F026F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCB65EF26F4994C00A95C07 /* GoogleCastFloatingButton.swift */; };
 		6FCB65F126F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCB65EF26F4994C00A95C07 /* GoogleCastFloatingButton.swift */; };
 		6FCB65F226F4994C00A95C07 /* GoogleCastFloatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCB65EF26F4994C00A95C07 /* GoogleCastFloatingButton.swift */; };
@@ -2258,11 +2238,6 @@
 		6FFA683A2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
 		6FFA683B2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
 		6FFA683C2637E99C00BCDA06 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFA68322637E99C00BCDA06 /* Mock.swift */; };
-		6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
-		6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
-		6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
-		6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
-		6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */; };
 		6FFCC5E924EFC1F100805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382D1EFBFE7F0017B1D1 /* ApplicationConfiguration.json */; };
 		6FFCC5EA24EFC1F400805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F19382F1EFBFE8D0017B1D1 /* ApplicationConfiguration.json */; };
 		6FFCC5EB24EFC1F700805B0F /* ApplicationConfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 6F1938311EFBFE9E0017B1D1 /* ApplicationConfiguration.json */; };
@@ -2604,16 +2579,8 @@
 		0806E7B61D50D918002ED406 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		0809812E2622195900AA586B /* LiveMediaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveMediaCell.swift; sourceTree = "<group>"; };
 		0809812F2622195900AA586B /* Badges.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
-		081220A41DD079BB00BF8326 /* DownloadsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadsViewController.h; sourceTree = "<group>"; };
-		081220A51DD079BB00BF8326 /* DownloadsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadsViewController.m; sourceTree = "<group>"; };
-		081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadTableViewCell.h; sourceTree = "<group>"; };
-		081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadTableViewCell.m; sourceTree = "<group>"; };
-		081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadTableViewCell.xib; sourceTree = "<group>"; };
 		081220BF1DD0ADAC00BF8326 /* DownloadSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadSession.h; sourceTree = "<group>"; };
 		081220C01DD0ADAC00BF8326 /* DownloadSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadSession.m; sourceTree = "<group>"; };
-		081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownloadFooterSectionView.h; sourceTree = "<group>"; };
-		081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownloadFooterSectionView.m; sourceTree = "<group>"; };
-		081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DownloadFooterSectionView.xib; sourceTree = "<group>"; };
 		082092FC208E272E00711DE4 /* Application.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Application.entitlements; sourceTree = "<group>"; };
 		08209306208F522A00711DE4 /* PushService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushService.h; sourceTree = "<group>"; };
 		08209307208F522A00711DE4 /* PushService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushService.m; sourceTree = "<group>"; };
@@ -2896,6 +2863,7 @@
 		6F0ED543252B00B000ECE97B /* LabeledButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledButton.swift; sourceTree = "<group>"; };
 		6F0EDA632448B0D700F0FED2 /* RefreshControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshControl.m; sourceTree = "<group>"; };
 		6F0EDA642448B0D800F0FED2 /* RefreshControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshControl.h; sourceTree = "<group>"; };
+		6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCellViewModel.swift; sourceTree = "<group>"; };
 		6F151E26256BF5CF009082F8 /* ProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		6F151E54256BFCEB009082F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6F16C7A226025698006F685A /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -2942,8 +2910,6 @@
 		6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockingOverlay.swift; sourceTree = "<group>"; };
 		6F475F8C1EB37BC6003021EA /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		6F475F8D1EB37BC6003021EA /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionRequestViewController.h; sourceTree = "<group>"; };
-		6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionRequestViewController.m; sourceTree = "<group>"; };
 		6F475F901EB37BC6003021EA /* DataViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataViewController.h; sourceTree = "<group>"; };
 		6F475F911EB37BC6003021EA /* DataViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataViewController.m; sourceTree = "<group>"; };
 		6F475F921EB37BC6003021EA /* ListRequestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListRequestViewController.h; sourceTree = "<group>"; };
@@ -2956,9 +2922,6 @@
 		6F475F9D1EB37BC6003021EA /* RequestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestViewController.m; sourceTree = "<group>"; };
 		6F475F9F1EB37BC6003021EA /* ModalTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModalTransition.h; sourceTree = "<group>"; };
 		6F475FA01EB37BC6003021EA /* ModalTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModalTransition.m; sourceTree = "<group>"; };
-		6F475FA91EB37BC6003021EA /* CollectionLoadMoreFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionLoadMoreFooterView.h; sourceTree = "<group>"; };
-		6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionLoadMoreFooterView.m; sourceTree = "<group>"; };
-		6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CollectionLoadMoreFooterView.xib; sourceTree = "<group>"; };
 		6F475FB21EB37BC6003021EA /* Banner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Banner.h; sourceTree = "<group>"; };
 		6F475FB31EB37BC6003021EA /* Banner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Banner.m; sourceTree = "<group>"; };
 		6F4760191EB37BD1003021EA /* PlayDurationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayDurationFormatter.h; sourceTree = "<group>"; };
@@ -3139,8 +3102,11 @@
 		6FC2A21B265E3D2300EBC0F0 /* SectionShowHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionShowHeaderView.swift; sourceTree = "<group>"; };
 		6FC2F7932628F1B200BF6B19 /* ResponderChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponderChain.swift; sourceTree = "<group>"; };
 		6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-TV-ObjectiveC.h"; sourceTree = "<group>"; };
+		6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadCell.swift; sourceTree = "<group>"; };
 		6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGProgram+PlaySRG.h"; sourceTree = "<group>"; };
 		6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGProgram+PlaySRG.m"; sourceTree = "<group>"; };
+		6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskInfoFooterView.swift; sourceTree = "<group>"; };
+		6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiskInfoFooterViewModel.swift; sourceTree = "<group>"; };
 		6FCB65EF26F4994C00A95C07 /* GoogleCastFloatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCastFloatingButton.swift; sourceTree = "<group>"; };
 		6FCE753426D3786F00667298 /* HeroMediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroMediaCell.swift; sourceTree = "<group>"; };
 		6FCE7ABF260367B90037A861 /* HostViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostViews.swift; sourceTree = "<group>"; };
@@ -3228,8 +3194,6 @@
 		6FF8F155250609CF009A741F /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
 		6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		6FFA68322637E99C00BCDA06 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
-		6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwimlaneCollectionViewLayout.h; sourceTree = "<group>"; };
-		6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwimlaneCollectionViewLayout.m; sourceTree = "<group>"; };
 		6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusTracker.swift; sourceTree = "<group>"; };
 		6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailViewModel.swift; sourceTree = "<group>"; };
 		717127C5FD11D0FB2507B95F /* Pods-Play SRG-iOS-Play RTS.beta_appcenter.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.beta_appcenter.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.beta_appcenter.xcconfig"; sourceTree = "<group>"; };
@@ -3711,16 +3675,8 @@
 		081220731DCCE70400BF8326 /* Downloads */ = {
 			isa = PBXGroup;
 			children = (
-				081DAA1C1E099A3A00018623 /* DownloadFooterSectionView.h */,
-				081DAA1D1E099A3A00018623 /* DownloadFooterSectionView.m */,
-				081DAA251E0C1E9700018623 /* DownloadFooterSectionView.xib */,
 				081220BF1DD0ADAC00BF8326 /* DownloadSession.h */,
 				081220C01DD0ADAC00BF8326 /* DownloadSession.m */,
-				081220A41DD079BB00BF8326 /* DownloadsViewController.h */,
-				081220A51DD079BB00BF8326 /* DownloadsViewController.m */,
-				081220A71DD079BB00BF8326 /* DownloadTableViewCell.h */,
-				081220A81DD079BB00BF8326 /* DownloadTableViewCell.m */,
-				081220A91DD079BB00BF8326 /* DownloadTableViewCell.xib */,
 			);
 			path = Downloads;
 			sourceTree = "<group>";
@@ -3737,12 +3693,13 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6F4760181EB37BD1003021EA /* Categories */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
-				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */,
@@ -3774,7 +3731,6 @@
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6FDEC19126DE307E0020A03F /* PresenterMode.swift */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -4532,8 +4488,6 @@
 			children = (
 				6F475F8C1EB37BC6003021EA /* BaseViewController.h */,
 				6F475F8D1EB37BC6003021EA /* BaseViewController.m */,
-				6F475F8E1EB37BC6003021EA /* CollectionRequestViewController.h */,
-				6F475F8F1EB37BC6003021EA /* CollectionRequestViewController.m */,
 				6F475F901EB37BC6003021EA /* DataViewController.h */,
 				6F475F911EB37BC6003021EA /* DataViewController.m */,
 				6F475F921EB37BC6003021EA /* ListRequestViewController.h */,
@@ -4542,7 +4496,6 @@
 				6F475F971EB37BC6003021EA /* NavigationController.m */,
 				6F475F991EB37BC6003021EA /* PageContainerViewController.h */,
 				6F475F9A1EB37BC6003021EA /* PageContainerViewController.m */,
-				08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */,
 				6F475F9C1EB37BC6003021EA /* RequestViewController.h */,
 				6F475F9D1EB37BC6003021EA /* RequestViewController.m */,
 				6F0506E5245468EE0053253E /* SplitViewController.h */,
@@ -4565,8 +4518,6 @@
 				6F475F9F1EB37BC6003021EA /* ModalTransition.h */,
 				6F475FA01EB37BC6003021EA /* ModalTransition.m */,
 				6FDB2AB924E5916F00FF286E /* RedactingView.swift */,
-				6FFCB62224504C6C00D16466 /* SwimlaneCollectionViewLayout.h */,
-				6FFCB62324504C6C00D16466 /* SwimlaneCollectionViewLayout.m */,
 				6FB340D823E1A21500BC83BF /* TabBarActionable.h */,
 				6FAE561B26C19D6F00EBFCD6 /* UICollectionView+Index.swift */,
 				6FE9048426F3466800502077 /* UICollectionView+PlaySRG.h */,
@@ -4592,10 +4543,11 @@
 				6F3CCE9826CAC7A2004039E2 /* Blur.swift */,
 				08B4651326BC58C800454A28 /* CalendarView.swift */,
 				08B4650226BC07F900454A28 /* ChannelButton.swift */,
-				6F475FA91EB37BC6003021EA /* CollectionLoadMoreFooterView.h */,
-				6F475FAA1EB37BC6003021EA /* CollectionLoadMoreFooterView.m */,
-				6F475FAB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib */,
 				6F73BFAF26563ABD0032D742 /* DampedCollectionView.swift */,
+				6FCA5BD527D9DE0900916D0B /* DiskInfoFooterView.swift */,
+				6FCA5BDB27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift */,
+				6FC6A1292795C1F000EEC8A6 /* DownloadCell.swift */,
+				6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */,
 				6F1A77822643CAB600A00EFC /* EmptyView.swift */,
 				08AF2AEC26BA83ED00C4745E /* ExpandingButton.swift */,
 				08F5DBB6262DF34400F717D0 /* FeaturedContentCell.swift */,
@@ -4799,6 +4751,7 @@
 				08669674273E63D0005AF2BA /* NowLineView.swift */,
 				6F2E160826A84ED200F3DC89 /* ProgramCell.swift */,
 				6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */,
+				08F4683926C6CAE400CC725F /* ProgramGuideCalendarViewController.swift */,
 				6F8BE02627A7CA84009FE094 /* ProgramGuideChildViewController.swift */,
 				6F362A8926A0706F00CBCC9D /* ProgramGuideDailyViewController.swift */,
 				6F362A8F26A089D100CBCC9D /* ProgramGuideDailyViewModel.swift */,
@@ -6287,8 +6240,6 @@
 				6F3A47B51DD19A8500C79E67 /* SRFResources.xcassets in Resources */,
 				6FE28773248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
-				081DAA261E0C1E9700018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220AD1DD079BB00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6FB89A0B26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
@@ -6317,7 +6268,6 @@
 				084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
-				6F475FFA1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				E694A9FA1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
@@ -6333,11 +6283,9 @@
 				6F0A7F0620AC0FD800DF6723 /* OnboardingViewController.storyboard in Resources */,
 				6FE28774248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FD88F7D22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
-				081DAA271E0C1FC700018623 /* DownloadFooterSectionView.xib in Resources */,
 				6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				081220B11DD07B7A00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -6364,7 +6312,6 @@
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FB0BB3D20AEF5C4007C5D87 /* Onboarding.strings in Resources */,
-				6F475FFB1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				E694A9FB1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6380,8 +6327,6 @@
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
-				081DAA291E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220B51DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
@@ -6408,7 +6353,6 @@
 				0828BB3C22E62831009617A7 /* parsePlayUrl.js in Resources */,
 				08C68FAA1D38DF8300BB8AAA /* iTunesArtwork in Resources */,
 				6FD2CBC51DD19B0200B44958 /* placeholder_media.pdf in Resources */,
-				6F475FFC1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				6FD633E51FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6F7C89D120AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				E694A9FC1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
@@ -6421,8 +6365,6 @@
 			files = (
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
-				081DAA281E0C1FC800018623 /* DownloadFooterSectionView.xib in Resources */,
-				081220B91DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
@@ -6456,7 +6398,6 @@
 				6FB0BB3A20AEF5B8007C5D87 /* Onboarding.strings in Resources */,
 				6FD2CBC61DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				0875851123A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
-				6F475FFD1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -6471,11 +6412,9 @@
 				6FA7EC3D20AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 				6F1938381EFBFEC80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FF7BBB622A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				081DAA2A1E0C1FC900018623 /* DownloadFooterSectionView.xib in Resources */,
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
-				081220BD1DD07B7B00BF8326 /* DownloadTableViewCell.xib in Resources */,
 				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
@@ -6501,7 +6440,6 @@
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F2962002006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
-				6F475FFE1EB37BC6003021EA /* CollectionLoadMoreFooterView.xib in Resources */,
 				E694A9FE1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 				6F4EA1401EE034EF00BEC4DA /* Accessibility.strings in Resources */,
 			);
@@ -8452,7 +8390,6 @@
 				6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */,
 				E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
 				6F1A77832643CAB600A00EFC /* EmptyView.swift in Sources */,
-				6FFCB62424504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F264D7A2800591C0022C6AD /* CarPlayPlaybackSpeedController.swift in Sources */,
 				6F475FC31EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
@@ -8474,7 +8411,6 @@
 				6FCE7AC0260367B90037A861 /* HostViews.swift in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6F475FF51EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
@@ -8488,6 +8424,7 @@
 				6FB2C10B2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				08280F162258F02400AC978D /* WatchLater.m in Sources */,
+				6FC6A12A2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				08A3ED021FA2612E00A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6F390D7E268C97D500587B1F /* FocusableRegion.swift in Sources */,
 				0841E70622F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
@@ -8500,6 +8437,7 @@
 				6FDF08EB218B126700B2AF2C /* OnboardingPage.m in Sources */,
 				6FDF08D7218B126700B2AF2C /* Download.m in Sources */,
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
+				6FCA5BDC27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				0825914027285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
@@ -8516,7 +8454,6 @@
 				6FF4D4E023D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
 				6F2E160926A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				6FAAF78820CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
-				081220AC1DD079BB00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F861AF81DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6F00875D219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F4760131EB37BC6003021EA /* Banner.m in Sources */,
@@ -8524,6 +8461,7 @@
 				085C0DCE261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				6FC1FA882292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
 				084F94B022D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.m in Sources */,
+				6F11BADB27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6F54C9682717FDA3006B3465 /* CarPlayTemplateController.swift in Sources */,
 				6F362A9026A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
 				6F054FC626B98C44007A34F8 /* ProgramView.swift in Sources */,
@@ -8588,7 +8526,6 @@
 				6FD88F7722D3618F008859EF /* SearchSettingsHeaderView.m in Sources */,
 				6F475FB41EB37BC6003021EA /* BaseViewController.m in Sources */,
 				6FE686E11EB9D57400067D40 /* ChannelService.m in Sources */,
-				081220AA1DD079BB00BF8326 /* DownloadsViewController.m in Sources */,
 				6F8D54422639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FB0AEFC217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
 				6FF7BB9722A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
@@ -8647,7 +8584,6 @@
 				6F4760341EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDF08DC218B126700B2AF2C /* Recommendation.m in Sources */,
 				6F54D35926050FE4008B46FF /* MediaVisualView.swift in Sources */,
-				6F475FB91EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F054FC026B98C33007A34F8 /* ProgramViewModel.swift in Sources */,
 				6F8BE02727A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FA8479A26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
@@ -8664,9 +8600,9 @@
 				6F362A8426A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F49EF93263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
-				081DAA1F1E099A3A00018623 /* DownloadFooterSectionView.m in Sources */,
 				087584EF23A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F58903426AED4CD00553C24 /* Environment.swift in Sources */,
+				6FCA5BD627D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6FB899FF26335B090012F1B0 /* Stack.swift in Sources */,
 				6FD4C2D6268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F16C80C26025945006F685A /* PageViewModel.swift in Sources */,
@@ -8716,6 +8652,7 @@
 				086F8D5622984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8743,6 +8680,7 @@
 				6FEF23682732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F4843CD23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */,
+				6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160A26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
@@ -8790,14 +8728,12 @@
 				6F30AB812604B66400457331 /* TopicCell.swift in Sources */,
 				6FDEC19326DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760351EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
-				6F475FF61EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA45268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9A26CAC7A2004039E2 /* Blur.swift in Sources */,
 				0875851923A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB726563C830032D742 /* Content.swift in Sources */,
 				6F8A545B2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C01DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B01DD07B7A00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD12813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0526D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED031FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -8847,7 +8783,6 @@
 				6F475FE21EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F901D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B623708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220AE1DD07B7A00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6641EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC726B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -8856,11 +8791,11 @@
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985B27269D20005793A2 /* SearchViewController.swift in Sources */,
+				6F11BADC27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6FEC91AA21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC4F2626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9A2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
-				6FFCB62524504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -8878,6 +8813,7 @@
 				0875851423A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506E8245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				6FC6A12B2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC325262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
@@ -8903,7 +8839,6 @@
 				6F9897CE2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80D26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10C2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBA1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A426025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08D8218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9126A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -8912,7 +8847,6 @@
 				08F5DBC2262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5D25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70012682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA211E099DAE00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595526989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B52487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD31EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -8954,6 +8888,7 @@
 				086F8D5722984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -8981,6 +8916,7 @@
 				089EA013201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF23692732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D42604FB18008B46FF /* ShowCell.swift in Sources */,
 				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160B26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -9028,14 +8964,12 @@
 				6F30AB802604B66300457331 /* TopicCell.swift in Sources */,
 				6FDEC19426DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760361EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
-				6F475FF71EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA46268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9B26CAC7A2004039E2 /* Blur.swift in Sources */,
 				0875851A23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB826563C830032D742 /* Content.swift in Sources */,
 				6F8A545C2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C11DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B41DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD22813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0626D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED041FA2619100A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -9085,7 +9019,6 @@
 				6F475FE31EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F911D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B723708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220B21DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6651EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC826B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9094,11 +9027,11 @@
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985C27269D21005793A2 /* SearchViewController.swift in Sources */,
+				6F11BADD27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6FEC91AB21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC502626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9B2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
-				6FFCB62624504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -9116,6 +9049,7 @@
 				0875851523A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506E9245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				6FC6A12C2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC326262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
@@ -9141,7 +9075,6 @@
 				6F9897CF2412582400B390A2 /* Layout.m in Sources */,
 				6F16C80E26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10D2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBB1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A526025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08D9218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9226A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9150,7 +9083,6 @@
 				08F5DBC3262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5E25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70022682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA221E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595626989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD41EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9192,6 +9124,7 @@
 				086F8D5822984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
+				6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -9219,6 +9152,7 @@
 				089EA014201148260070E11A /* NSTimer+PlaySRG.m in Sources */,
 				6FEF236A2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
+				6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D52604FB19008B46FF /* ShowCell.swift in Sources */,
 				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160C26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -9266,14 +9200,12 @@
 				6F30AB7F2604B66300457331 /* TopicCell.swift in Sources */,
 				6FDEC19526DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760371EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
-				6F475FF81EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA47268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9C26CAC7A2004039E2 /* Blur.swift in Sources */,
 				0875851B23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFB926563C830032D742 /* Content.swift in Sources */,
 				6F8A545D2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C21DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220B81DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F9ABCD32813F43000B118A3 /* ImageViewPortraitPreviews.swift in Sources */,
 				6F573D0726D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED051FA2619200A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
@@ -9323,7 +9255,6 @@
 				6F475FE41EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F921D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B823708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220B61DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6661EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FC926B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9332,11 +9263,11 @@
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* Notification.m in Sources */,
 				6F0B985D27269D22005793A2 /* SearchViewController.swift in Sources */,
+				6F11BADE27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6FEC91AC21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC512626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9C2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
-				6FFCB62724504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -9354,6 +9285,7 @@
 				0875851623A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
 				6F0506EA245468EE0053253E /* SplitViewController.m in Sources */,
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
+				6FC6A12D2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6FACC327262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
@@ -9379,7 +9311,6 @@
 				6F9897D02412582400B390A2 /* Layout.m in Sources */,
 				6F16C80F26025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10E2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBC1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
 				6F16C7A626025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DA218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9326A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9388,7 +9319,6 @@
 				08F5DBC4262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F5F25DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70032682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA231E099DAF00018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595726989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD51EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9483,6 +9413,7 @@
 				6FA5D1611F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F566E9924EEC40A0024B4CA /* ApplicationSection.m in Sources */,
 				6F72E60B26BA6B16001A890C /* SceneDelegate.m in Sources */,
+				6F11BADF27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */,
 				6FE14E6F263EA9B5004AD913 /* TitleView.swift in Sources */,
 				6F0A7F0320AC0B9A00DF6723 /* OnboardingViewController.swift in Sources */,
 				085C0DC726132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
@@ -9499,14 +9430,12 @@
 				6F30AB7E2604B66200457331 /* TopicCell.swift in Sources */,
 				6FDEC19626DE307E0020A03F /* PresenterMode.swift in Sources */,
 				6F4760381EB37BD1003021EA /* NSDateFormatter+PlaySRG.m in Sources */,
-				6F475FF91EB37BC6003021EA /* CollectionLoadMoreFooterView.m in Sources */,
 				6F5FAA48268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F3CCE9D26CAC7A2004039E2 /* Blur.swift in Sources */,
 				0875851C23A0025F00FA7207 /* ProfileTableViewCell.m in Sources */,
 				6F73BFBA26563C830032D742 /* Content.swift in Sources */,
 				6F8A545E2655100400AE78FD /* SectionViewController.swift in Sources */,
 				6F9122C31DC8708400725EEB /* PlayErrors.m in Sources */,
-				081220BC1DD07B7B00BF8326 /* DownloadTableViewCell.m in Sources */,
 				6F573D0826D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				08A3ED061FA2619300A517EF /* SRGDataProvider+PlaySRG.m in Sources */,
 				6FD4C2E5268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
@@ -9517,6 +9446,7 @@
 				0827DA221F0D36E400A31A42 /* NSBundle+PlaySRG.m in Sources */,
 				6F54D35D26050FE6008B46FF /* MediaVisualView.swift in Sources */,
 				6F0EDA692448B0D800F0FED2 /* RefreshControl.m in Sources */,
+				6FC6A12E2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				6F80E9C621A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				6FE1B91D1FAC34D600A58F3B /* ContentInsets.m in Sources */,
 				6F742941265BE52E0000538D /* Signals.swift in Sources */,
@@ -9528,6 +9458,7 @@
 				6FC2F7FC2628F23900BF6B19 /* ResponderChain.swift in Sources */,
 				6F93DE1120AE985C00B71572 /* OnboardingsViewController.m in Sources */,
 				08669679273E63D1005AF2BA /* NowLineView.swift in Sources */,
+				6FCA5BDA27D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6FF5D1FF2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -9558,7 +9489,6 @@
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
-				081220BA1DD07B7B00BF8326 /* DownloadsViewController.m in Sources */,
 				087BC6671EDF1B7D00EED89B /* UILabel+PlaySRG.m in Sources */,
 				6F054FCA26B98C44007A34F8 /* ProgramView.swift in Sources */,
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
@@ -9571,7 +9501,6 @@
 				6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				085C0D9D2611F33F008E07C8 /* ShowAccessCell.swift in Sources */,
 				6F4760981EB37DF2003021EA /* UIStackView+PlaySRG.m in Sources */,
-				6FFCB62824504C6C00D16466 /* SwimlaneCollectionViewLayout.m in Sources */,
 				6F49EF97263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				0858CA5F271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A81DB7791300220FC6 /* ApplicationSettings.m in Sources */,
@@ -9610,7 +9539,7 @@
 				6F9897D12412582400B390A2 /* Layout.m in Sources */,
 				6F16C81026025945006F685A /* PageViewModel.swift in Sources */,
 				6FB2C10F2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
-				6F475FBD1EB37BC6003021EA /* CollectionRequestViewController.m in Sources */,
+				6FCA5BE027D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F16C7A726025698006F685A /* PageViewController.swift in Sources */,
 				6FDF08DB218B126700B2AF2C /* Download.m in Sources */,
 				6F362A9426A089D100CBCC9D /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9619,7 +9548,6 @@
 				08F5DBC5262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6FB03F6025DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FDF70042682022C0004437E /* ApplicationSettings+Common.m in Sources */,
-				081DAA241E099DB000018623 /* DownloadFooterSectionView.m in Sources */,
 				6FD9595826989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */,
 				6F475FD61EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -9754,6 +9682,7 @@
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
 				6FD9595926989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FCE753A26D3786F00667298 /* HeroMediaCell.swift in Sources */,
+				6FCA5BED27DA00A900916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557027B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC6262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98552726980F005793A2 /* SearchViewModel.swift in Sources */,
@@ -9830,7 +9759,6 @@
 				6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CB2721786B00C134AA /* DeepLinkAction.m in Sources */,
-				6F8A5476265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F83873025E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7B2719C5CF0082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
@@ -9893,6 +9821,7 @@
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
 				6FD9595A26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FCE753B26D3786F00667298 /* HeroMediaCell.swift in Sources */,
+				6FCA5BEE27DA00AA00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557127B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC7262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98562726980F005793A2 /* SearchViewModel.swift in Sources */,
@@ -9969,7 +9898,6 @@
 				6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CC2721786D00C134AA /* DeepLinkAction.m in Sources */,
-				6F8A5477265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F83873125E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7C2719C5D00082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
@@ -10032,6 +9960,7 @@
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
 				6FD9595B26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FCE753C26D3786F00667298 /* HeroMediaCell.swift in Sources */,
+				6FCA5BEF27DA00AA00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557227B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC8262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98572726980F005793A2 /* SearchViewModel.swift in Sources */,
@@ -10108,7 +10037,6 @@
 				6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CD2721786D00C134AA /* DeepLinkAction.m in Sources */,
-				6F8A5478265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F83873225E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7D2719C5D10082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
@@ -10171,6 +10099,7 @@
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
 				6FD9595C26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FCE753D26D3786F00667298 /* HeroMediaCell.swift in Sources */,
+				6FCA5BF027DA00AB00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557327B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBC9262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98582726980F005793A2 /* SearchViewModel.swift in Sources */,
@@ -10247,7 +10176,6 @@
 				6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CE2721786E00C134AA /* DeepLinkAction.m in Sources */,
-				6F8A5479265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F83873325E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7E2719C5D20082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
@@ -10310,6 +10238,7 @@
 				6FC413F224EEEDCB00FDF806 /* RadioChannel.m in Sources */,
 				6FD9595D26989FD900739FAE /* MediaVisualViewModel.swift in Sources */,
 				6FCE753E26D3786F00667298 /* HeroMediaCell.swift in Sources */,
+				6FCA5BF127DA00AC00916D0B /* SectionViewModel.swift in Sources */,
 				6F2F557427B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				08F5DBCA262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98592726980F005793A2 /* SearchViewModel.swift in Sources */,
@@ -10386,7 +10315,6 @@
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CF2721786F00C134AA /* DeepLinkAction.m in Sources */,
-				6F8A547A265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F83873425E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7F2719C5D30082CAE9 /* PlayAccessibilityFormatter.m in Sources */,

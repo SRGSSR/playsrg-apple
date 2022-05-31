@@ -23,10 +23,12 @@ extension RadioChannel {
             return .radioMostPopular(channelUid: channelUid)
         case .radioResumePlayback:
             return .radioResumePlayback(channelUid: channelUid)
-        case .radioShowsAccess:
-            return .radioShowAccess(channelUid: channelUid)
         case .radioWatchLater:
             return .radioWatchLater(channelUid: channelUid)
+#if os(iOS)
+        case .radioShowsAccess:
+            return .radioShowAccess(channelUid: channelUid)
+#endif
         default:
             return nil
         }

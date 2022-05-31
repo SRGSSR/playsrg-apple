@@ -26,6 +26,7 @@
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplication.h"
 #import "PlayDurationFormatter.h"
+#import "PlayErrors.h"
 #import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
 #import "Reachability.h"

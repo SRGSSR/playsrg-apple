@@ -142,7 +142,8 @@
 /* Program cell hint */
 "Plays from the beginning." = "Cumenza a l'entschatta.";
 
-/* Featured media hint
+/* Download cell hint
+   Featured media hint
    Media cell hint */
 "Plays the content." = "Laschà ì il cuntegn.";
 
@@ -191,7 +192,8 @@
 /* Accessibility label for the subtitled badge */
 "Subtitled" = "Suttitels";
 
-/* Media cell hint in edit mode
+/* Download cell hint in edit mode
+   Media cell hint in edit mode
    Show cell hint in edit mode */
 "Toggles selection." = "Mida la selecziun.";
 

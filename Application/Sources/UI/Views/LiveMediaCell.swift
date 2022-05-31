@@ -79,7 +79,7 @@ struct LiveMediaCell: View {
         @ObservedObject var model: LiveMediaCellViewModel
         
 #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
         
         private var padding: CGFloat {

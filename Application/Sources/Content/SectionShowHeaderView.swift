@@ -37,7 +37,7 @@ struct SectionShowHeaderView: View {
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
 #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
     
     var uiHorizontalSizeClass: UIUserInterfaceSizeClass {

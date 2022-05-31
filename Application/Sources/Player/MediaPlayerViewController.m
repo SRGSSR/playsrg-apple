@@ -1264,7 +1264,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     Download *download = [Download downloadForMedia:media];
     switch (download.state) {
         case DownloadStateAdded:
-        case DownloadStateDownloadingSuspended:{
+        case DownloadStateDownloadingSuspended: {
             [self.downloadButton.imageView stopAnimating];
             [self.downloadButton setImage:[UIImage imageNamed:@"downloadable_stop-large"] forState:UIControlStateNormal];
             self.downloadButton.accessibilityLabel = PlaySRGAccessibilityLocalizedString(@"Retry download", @"A download button label");
@@ -1994,7 +1994,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [Download addDownloadForMedia:media];
         }
         else {
-            [Download removeDownload:download];
+            [Download removeDownloads:@[download]];
         }
         
         [self updateDownloadStatus];
@@ -2006,7 +2006,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
     };
     
-    if (!download) {
+    if (! download) {
         toggleDownload();
     }
     else {

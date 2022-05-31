@@ -133,7 +133,7 @@ struct ProgramView: View {
     // Behavior: h-exp, v-hug
     private struct ActionsView: View {
         @ObservedObject var model: ProgramViewModel
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
         
         static let buttonHeight: CGFloat = 40
         
@@ -238,7 +238,7 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
 
 // MARK: Accessibility
 
-extension ProgramView {
+private extension ProgramView {
     var accessibilityLabel: String? {
         return model.playAction != nil ? PlaySRGAccessibilityLocalizedString("Play", comment: "Play button label") : nil
     }

@@ -36,6 +36,10 @@ struct EmptyView: View {
             return "search-background"
         case .watchLater:
             return "watch_later-background"
+#if os(iOS)
+        case .downloads:
+            return "download-background"
+#endif
         }
     }
     
@@ -51,6 +55,10 @@ struct EmptyView: View {
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
         case .episodesFromFavorites, .generic, .resumePlayback, .watchLater:
             return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
+#if os(iOS)
+        case .downloads:
+            return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
+#endif
         }
     }
     
@@ -77,7 +85,7 @@ struct EmptyView: View {
         }
         .multilineTextAlignment(.center)
         .lineLimit(3)
-        .foregroundColor(Color.srgGrayC7)
+        .foregroundColor(.srgGrayC7)
         .padding()
         .padding(insets)
     }
@@ -101,6 +109,9 @@ extension EmptyView {
         case search
         case searchTutorial
         case watchLater
+#if os(iOS)
+        case downloads
+#endif
     }
 }
 
@@ -120,16 +131,23 @@ struct EmptyView_Previews: PreviewProvider {
     
     static var previews: some View {
         Group {
-            EmptyView(state: .loading)
-            EmptyView(state: .empty(type: .episodesFromFavorites))
-            EmptyView(state: .empty(type: .favoriteShows))
-            EmptyView(state: .empty(type: .generic))
-            EmptyView(state: .empty(type: .history))
-            EmptyView(state: .empty(type: .resumePlayback))
-            EmptyView(state: .empty(type: .search))
-            EmptyView(state: .empty(type: .searchTutorial))
-            EmptyView(state: .empty(type: .watchLater))
-            EmptyView(state: .failed(error: PreviewError.kernel32))
+            Group {
+                EmptyView(state: .loading)
+                EmptyView(state: .empty(type: .episodesFromFavorites))
+                EmptyView(state: .empty(type: .favoriteShows))
+                EmptyView(state: .empty(type: .generic))
+                EmptyView(state: .empty(type: .history))
+#if os(iOS)
+                EmptyView(state: .empty(type: .downloads))
+#endif
+            }
+            Group {
+                EmptyView(state: .empty(type: .resumePlayback))
+                EmptyView(state: .empty(type: .search))
+                EmptyView(state: .empty(type: .searchTutorial))
+                EmptyView(state: .empty(type: .watchLater))
+                EmptyView(state: .failed(error: PreviewError.kernel32))
+            }
         }
         .previewLayout(.fixed(width: 400, height: 400))
     }

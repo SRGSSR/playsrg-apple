@@ -36,8 +36,11 @@ enum Content {
         case topicPlaceholder(index: Int)
         case topic(_ topic: SRGTopic)
         
-        @available(tvOS, unavailable)
+#if os(iOS)
+        case download(_ download: Download)
+        
         case showAccess(radioChannel: RadioChannel?)
+#endif
         
         case transparent
         
@@ -49,7 +52,13 @@ enum Content {
                 return show.title
             case let .topic(topic):
                 return topic.title
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .showAccess, .transparent:
+#if os(iOS)
+            case let .download(download):
+                return download.title
+            case .showAccess:
+                return nil
+#endif
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .transparent:
                 return nil
             }
         }
@@ -69,6 +78,19 @@ enum Content {
             }
         }
     }
+    
+#if os(iOS)
+    static func downloads(from items: [Content.Item]) -> [Download] {
+        return items.compactMap { item in
+            if case let .download(download) = item {
+                return download
+            }
+            else {
+                return nil
+            }
+        }
+    }
+#endif
     
     static func shows(from items: [Content.Item]) -> [SRGShow] {
         return items.compactMap { item in
@@ -463,8 +485,6 @@ private extension Content {
                 return NSLocalizedString("Most listened to", comment: "Title label used to present the radio most popular audio medias")
             case .radioResumePlayback:
                 return NSLocalizedString("Resume playback", comment: "Title label used to present medias whose playback can be resumed")
-            case .radioShowAccess:
-                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
             case .radioWatchLater, .watchLater:
                 return NSLocalizedString("Later", comment: "Title Label used to present the audio later list")
             case .tvLive:
@@ -473,6 +493,12 @@ private extension Content {
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
+#if os(iOS)
+            case .downloads:
+                return NSLocalizedString("Downloads", comment: "Label to present downloads")
+            case .radioShowAccess:
+                return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
+#endif
             case .show, .radioEpisodesForDay, .tvEpisodesForDay:
                 return nil
             }
@@ -494,8 +520,14 @@ private extension Content {
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .favoriteShows, .radioAllShows, .tvAllShows:
                 return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioShowAccess, .radioWatchLater:
+            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater:
                 return []
+#if os(iOS)
+            case .downloads:
+                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .radioShowAccess:
+                return []
+#endif
             }
         }
         
@@ -507,6 +539,10 @@ private extension Content {
             switch configuredSection {
             case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
+#if os(iOS)
+            case .downloads:
+                return true
+#endif
             default:
                 return false
             }
@@ -524,6 +560,10 @@ private extension Content {
                 return .history
             case .radioResumePlayback:
                 return .resumePlayback
+#if os(iOS)
+            case .downloads:
+                return .downloads
+#endif
             default:
                 return .generic
             }
@@ -565,8 +605,14 @@ private extension Content {
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.events.rawValue
-            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
+            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .tvEpisodesForDay, .tvLive:
                 return nil
+#if os(iOS)
+            case .downloads:
+                return AnalyticsPageTitle.downloads.rawValue
+            case .radioShowAccess:
+                return nil
+#endif
             }
         }
         
@@ -578,6 +624,10 @@ private extension Content {
                 return AnalyticsTitle.watchLaterRemove.rawValue
             case .history, .radioResumePlayback:
                 return AnalyticsTitle.historyRemove.rawValue
+#if os(iOS)
+            case .downloads:
+                return AnalyticsTitle.downloadRemove.rawValue
+#endif
             default:
                 return nil
             }
@@ -609,10 +659,16 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .radioShowAccess, .tvEpisodesForDay, .tvLive:
+            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .tvEpisodesForDay, .tvLive:
                 return nil
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+#if os(iOS)
+            case .downloads:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+            case .radioShowAccess:
+                return nil
+#endif
             }
         }
         
@@ -700,16 +756,6 @@ private extension Content {
                 return dataProvider.resumePlaybackPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case let .radioShowAccess(channelUid):
-#if os(iOS)
-                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-#else
-                return Just([])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-#endif
             case .radioWatchLater:
                 return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                     .map { $0.map { .media($0) } }
@@ -730,6 +776,17 @@ private extension Content {
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
+#if os(iOS)
+            case let .radioShowAccess(channelUid):
+                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            case .downloads:
+                return Just(Download.downloads)
+                    .map { $0.map { .download($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+#endif
             }
         }
         
@@ -741,6 +798,10 @@ private extension Content {
                 return UserInteractionSignal.historyUpdates()
             case .radioWatchLater, .watchLater:
                 return UserInteractionSignal.watchLaterUpdates()
+#if os(iOS)
+            case .downloads:
+                return UserInteractionSignal.downloadUpdates()
+#endif
             default:
                 return Just([]).eraseToAnyPublisher()
             }
@@ -754,6 +815,10 @@ private extension Content {
                 return ThrottledSignal.watchLaterUpdates()
             case .radioLive:
                 return ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)
+#if os(iOS)
+            case .downloads:
+                return ThrottledSignal.downloadUpdates()
+#endif
             default:
                 // TODO: No history updates yet for battery consumption reasons. Fix when an efficient way to
                 //       broadcast and apply history updates is available.
@@ -769,6 +834,10 @@ private extension Content {
                 Content.removeFromWatchLater(items)
             case .history, .radioResumePlayback:
                 Content.removeFromHistory(items)
+#if os(iOS)
+            case .downloads:
+                Content.removeFromDownloads(items)
+#endif
             default:
                 ()
             }
@@ -793,4 +862,11 @@ private extension Content {
         let medias = Content.medias(from: items)
         HistoryRemoveMedias(medias) { _ in }
     }
+    
+#if os(iOS)
+    static func removeFromDownloads(_ items: [Content.Item]) {
+        let downloads = Content.downloads(from: items)
+        Download.removeDownloads(downloads)
+    }
+#endif
 }
