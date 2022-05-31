@@ -698,7 +698,7 @@ private extension PageViewController {
                 case let .download(download):
                     DownloadCell(download: download)
                 case let .notification(notification):
-                    Color.blue
+                    NotificationCell(notification: notification)
                 case .showAccess:
                     switch id {
                     case .video:

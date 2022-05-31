@@ -793,7 +793,7 @@ private extension SectionViewController {
             case let .download(download):
                 DownloadCell(download: download)
             case let .notification(notification):
-                Color.blue
+                NotificationCell(notification: notification)
 #endif
             case .transparent:
                 Color.clear
