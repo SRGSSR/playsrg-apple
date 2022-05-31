@@ -617,6 +617,7 @@
 		6F11BADD27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
 		6F11BADE27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
 		6F11BADF27D60525003E59B2 /* DownloadCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F11BADA27D60525003E59B2 /* DownloadCellViewModel.swift */; };
+		6F14B113283CA4EF00F79447 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
 		6F151E27256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F151E28256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
 		6F151E29256BF5CF009082F8 /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F151E26256BF5CF009082F8 /* ProgressBar.swift */; };
@@ -10179,6 +10180,7 @@
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
+				6F14B113283CA4EF00F79447 /* SettingsView.swift in Sources */,
 				6FEF237B2732C2D40098C639 /* TimelineView.swift in Sources */,
 				6FFA683C2637E99C00BCDA06 /* Mock.swift in Sources */,
 				6FC413FB24EF0DEE00FDF806 /* SRGMedia+PlaySRG.m in Sources */,
