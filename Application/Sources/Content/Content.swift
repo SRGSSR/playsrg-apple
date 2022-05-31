@@ -59,7 +59,9 @@ enum Content {
             case .showAccess:
                 return nil
 #endif
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .highlight, .transparent:
+            case let .highlight(highlight):
+                return highlight.title
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .transparent:
                 return nil
             }
         }
