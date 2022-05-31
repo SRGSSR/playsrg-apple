@@ -164,5 +164,9 @@ struct HighlightCell_Previews: PreviewProvider {
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
             .previewLayout(for: highlight, layoutWidth: 400, horizontalSizeClass: .compact)
 #endif
+        HighlightCell(highlight: Mock.highlight(.overflow), section: .configured(.tvAllShows), filter: nil)
+            .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
+        HighlightCell(highlight: Mock.highlight(.short), section: .configured(.tvAllShows), filter: nil)
+            .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
     }
 }
