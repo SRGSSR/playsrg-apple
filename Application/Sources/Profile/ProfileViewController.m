@@ -11,7 +11,6 @@
 #import "Layout.h"
 #import "NavigationController.h"
 #import "NotificationTableViewCell.h"
-#import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "ProfileAccountHeaderView.h"
@@ -420,7 +419,7 @@
 {
     UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
-        [NotificationsViewController openNotification:notification fromViewController:self];
+        // [NotificationsViewController openNotification:notification fromViewController:self];
         
         // Update the cell dot right away
         [self reloadTableView];

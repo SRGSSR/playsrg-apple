@@ -1563,11 +1563,6 @@
 		6FA8E59A261CB792003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6FA8E5B4261CB793003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6FA8E5B5261CB794003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
-		6FA9ECAC20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
-		6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
-		6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
-		6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
-		6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */; };
 		6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
 		6FA9ECBB20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
 		6FA9ECBC20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
@@ -3120,8 +3115,6 @@
 		6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGProgramComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
 		6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCellViewModel.swift; sourceTree = "<group>"; };
-		6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationsViewController.h; sourceTree = "<group>"; };
-		6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationsViewController.m; sourceTree = "<group>"; };
 		6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
 		6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
 		6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
@@ -4883,8 +4876,6 @@
 		6FA9ECA920C7A9F300D3D6C2 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
-				6FA9ECAA20C7AA1600D3D6C2 /* NotificationsViewController.h */,
-				6FA9ECAB20C7AA1600D3D6C2 /* NotificationsViewController.m */,
 				6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */,
 				6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */,
 				6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */,
@@ -8331,7 +8322,6 @@
 				085C0D992611F33E008E07C8 /* ShowAccessCell.swift in Sources */,
 				6FEF23672732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F7F2B06249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m in Sources */,
-				6FA9ECAC20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FF7BBA622A78DE400FA758A /* SearchSettingSelectorCell.m in Sources */,
 				0801E07B1D4A4A810008021E /* RadioChannel.m in Sources */,
 				0809813A2622195900AA586B /* Badges.swift in Sources */,
@@ -8475,7 +8465,6 @@
 				9EA78A2D26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
 				086F8D5622984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACA2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
@@ -8722,7 +8711,6 @@
 				9EA78A2E26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
 				086F8D5722984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACB2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
@@ -8969,7 +8957,6 @@
 				9EA78A2F26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
 				086F8D5822984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6F6C7ACC2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
@@ -9221,7 +9208,6 @@
 				6F5E99F2283B4C4100DD8A4A /* SafariView.swift in Sources */,
 				086F8D5922984B29001BE2F4 /* Favorites.m in Sources */,
 				6F0E37502680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6FA9ECB020C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6F0E8D9C1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08E0218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753926D3786F00667298 /* HeroMediaCell.swift in Sources */,
