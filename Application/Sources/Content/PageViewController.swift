@@ -326,6 +326,11 @@ extension PageViewController: UICollectionViewDelegate {
                     let pageViewController = PageViewController(id: .topic(topic: topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
+            case .highlight:
+                if let navigationController = navigationController {
+                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                    navigationController.pushViewController(sectionViewController, animated: true)
+                }
             default:
                 ()
             }
