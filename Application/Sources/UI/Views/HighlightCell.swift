@@ -19,11 +19,13 @@ struct HighlightCell: View {
 #if os(tvOS)
         ExpandingCardButton(action: action) {
             MainView(highlight: highlight)
+                .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
 #else
         MainView(highlight: highlight)
             .selectionAppearance(when: isSelected)
             .cornerRadius(LayoutStandardViewCornerRadius)
+            .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
 #endif
     }
     
@@ -109,6 +111,18 @@ struct HighlightCell: View {
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
         }
+    }
+}
+
+// MARK: Accessibility
+
+private extension HighlightCell {
+    var accessibilityLabel: String? {
+        return highlight.title
+    }
+    
+    var accessibilityHint: String? {
+        return PlaySRGAccessibilityLocalizedString("Opens details.", comment: "Highlight cell hint")
     }
 }
 
