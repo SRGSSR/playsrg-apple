@@ -109,7 +109,7 @@ struct HighlightCell: View {
                 }
             }
             .foregroundColor(.white)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 }
