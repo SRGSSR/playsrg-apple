@@ -688,7 +688,7 @@ private extension PageViewController {
                     }
 #endif
                 case let .highlight(highlight):
-                    HighlightCell(highlight: highlight)
+                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, filter: id)
                 case .transparent:
                     Color.clear
                 }

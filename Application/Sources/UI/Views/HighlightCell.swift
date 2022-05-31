@@ -10,6 +10,8 @@ import SwiftUI
 
 struct HighlightCell: View {
     let highlight: Highlight
+    let section: Content.Section
+    let filter: SectionFiltering?
     
     @Environment(\.isSelected) private var isSelected
     
@@ -27,7 +29,7 @@ struct HighlightCell: View {
     
 #if os(tvOS)
     private func action() {
-        
+        navigateToSection(section, filter: filter)
     }
 #endif
     
@@ -142,9 +144,9 @@ struct HighlightCell_Previews: PreviewProvider {
     static let highlight = Mock.highlight()
     
     static var previews: some View {
-        HighlightCell(highlight: highlight)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
             .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
-        HighlightCell(highlight: highlight)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
             .previewLayout(for: highlight, layoutWidth: 400, horizontalSizeClass: .compact)
     }
 }
