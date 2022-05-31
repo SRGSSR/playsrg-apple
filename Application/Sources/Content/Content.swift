@@ -94,6 +94,17 @@ enum Content {
             }
         }
     }
+    
+    static func notifications(from items: [Content.Item]) -> [UserNotification] {
+        return items.compactMap { item in
+            if case let .notification(notification) = item {
+                return notification
+            }
+            else {
+                return nil
+            }
+        }
+    }
 #endif
     
     static func shows(from items: [Content.Item]) -> [SRGShow] {
@@ -568,7 +579,7 @@ private extension Content {
         
         var supportsEdition: Bool {
             switch configuredSection {
-            case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
+            case .favoriteShows, .history, .notifications, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
 #if os(iOS)
             case .downloads:
@@ -854,6 +865,10 @@ private extension Content {
                 return UserInteractionSignal.favoriteUpdates()
             case .history, .radioResumePlayback:
                 return UserInteractionSignal.historyUpdates()
+#if os(iOS)
+            case .notifications:
+                return UserInteractionSignal.notificationUpdates()
+#endif
             case .radioWatchLater, .watchLater:
                 return UserInteractionSignal.watchLaterUpdates()
 #if os(iOS)
@@ -895,6 +910,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 Content.removeFromDownloads(items)
+            case .notifications:
+                Content.removeFromNotifications(items)
 #endif
             default:
                 ()
@@ -911,14 +928,23 @@ private extension Content {
         FavoritesRemoveShows(shows)
     }
     
-    static func removeFromWatchLater(_ items: [Content.Item]) {
-        let medias = Content.medias(from: items)
-        WatchLaterRemoveMedias(medias) { _ in }
-    }
-    
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         HistoryRemoveMedias(medias) { _ in }
+    }
+    
+#if os(iOS)
+    static func removeFromNotifications(_ items: [Content.Item]) {
+        let notifications = Content.notifications(from: items)
+        let updatedNotifications = Array(Set(UserNotification.notifications).subtracting(notifications))
+        UserNotification.saveNotifications(updatedNotifications)
+        UserInteractionEvent.removeFromNotifications(notifications)
+    }
+#endif
+    
+    static func removeFromWatchLater(_ items: [Content.Item]) {
+        let medias = Content.medias(from: items)
+        WatchLaterRemoveMedias(medias) { _ in }
     }
     
 #if os(iOS)

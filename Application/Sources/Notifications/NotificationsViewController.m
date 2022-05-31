@@ -327,7 +327,7 @@
     UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         UserNotification *notification = self.notifications[indexPath.row];
         
-        [UserNotification removeNotification:notification];
+        // [UserNotification removeNotifications:@[notification]];
         
         self.notifications = [self.notifications play_arrayByRemovingObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:indexPath.row inSection:0] ]

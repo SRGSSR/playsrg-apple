@@ -99,15 +99,6 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     [self saveNotifications:notifications];
 }
 
-+ (void)removeNotification:(UserNotification *)notification
-{
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UserNotification * _Nullable otherNotification, NSDictionary<NSString *,id> * _Nullable bindings) {
-        return ! [notification isEqual:otherNotification];
-    }];
-    NSArray<UserNotification *> *notifications = [[self notifications] filteredArrayUsingPredicate:predicate];
-    [self saveNotifications:notifications];
-}
-
 + (NSURL *)notificationsFilePath
 {
     return [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];

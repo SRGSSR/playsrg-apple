@@ -52,9 +52,9 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
 + (void)saveNotification:(UserNotification *)notification read:(BOOL)read;
 
 /**
- *  Remove a notification.
+ *  Save multiple notifications.
  */
-+ (void)removeNotification:(UserNotification *)notification;
++ (void)saveNotifications:(NSArray<UserNotification *> *)notifications;
 
 /**
  *  Create a notification from a system notification request.

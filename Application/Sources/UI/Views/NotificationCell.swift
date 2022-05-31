@@ -11,13 +11,14 @@ import SwiftUI
 struct NotificationCell: View {
     let notification: UserNotification
     
+    @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
     var body: some View {
         HStack(spacing: 0) {
             ImageView(source: notification.imageURL)
                 .aspectRatio(16 / 9, contentMode: .fit)
-                .selectionAppearance(when: isSelected)
+                .selectionAppearance(when: isSelected, while: isEditing)
                 .cornerRadius(LayoutStandardViewCornerRadius)
                 .layoutPriority(1)
             DescriptionView(notification: notification)
