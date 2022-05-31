@@ -322,7 +322,7 @@ static NSArray<Download *> *s_sortedDownloads;
     s_sortedDownloads = nil;            // Invalidate sorted download cache
     [self saveDownloadsDictionary];
     
-    [UserInteractionEvent removeFromDownloads:removedDownloads];
+    [UserInteractionEvent removeFromDownloads:removedDownloads.copy];
 }
 
 + (Download *)downloadForMedia:(SRGMedia *)media
