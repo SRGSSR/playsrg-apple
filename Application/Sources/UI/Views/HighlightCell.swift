@@ -146,7 +146,9 @@ struct HighlightCell_Previews: PreviewProvider {
     static var previews: some View {
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
             .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
+#if os(iOS)
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
             .previewLayout(for: highlight, layoutWidth: 400, horizontalSizeClass: .compact)
+#endif
     }
 }
