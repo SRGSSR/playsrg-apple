@@ -317,7 +317,7 @@ private extension PageViewModel {
             .eraseToAnyPublisher()
         }
         else {
-            return Just(Row(section: section, items: [Item(.item(.transparent), in: section)]))
+            return Just(Row(section: section, items: [Item(.item(.highlight), in: section)]))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }

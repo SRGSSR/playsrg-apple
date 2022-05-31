@@ -38,10 +38,10 @@ enum Content {
         
 #if os(iOS)
         case download(_ download: Download)
-        
         case showAccess(radioChannel: RadioChannel?)
 #endif
         
+        case highlight
         case transparent
         
         private var title: String? {
@@ -58,7 +58,7 @@ enum Content {
             case .showAccess:
                 return nil
 #endif
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .transparent:
+            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .highlight, .transparent:
                 return nil
             }
         }
@@ -149,6 +149,9 @@ protocol SectionProperties {
     
     /// Method to be called for removing the specified items from an editable section.
     func remove(_ items: [Content.Item])
+    
+    /// Method to retrieve the image associated with the section, if any.
+    func imageUrl(for size: SRGImageSize) -> URL?
 }
 
 private extension Content {
@@ -453,6 +456,10 @@ private extension Content {
             default:
                 ()
             }
+        }
+        
+        func imageUrl(for size: SRGImageSize) -> URL? {
+            return SRGDataProvider.current!.url(for: contentSection.presentation.image, size: size)
         }
         
         private func filterItems<T>(_ items: [T]) -> [T] {
@@ -865,6 +872,10 @@ private extension Content {
             default:
                 ()
             }
+        }
+        
+        func imageUrl(for size: SRGImageSize) -> URL? {
+            return nil
         }
     }
 }

@@ -527,7 +527,7 @@ private extension PageViewController {
                     return layoutSection
                 case .highlight:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return HighlightCellSize.fullWidth(title: section.properties.title, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
@@ -682,6 +682,17 @@ private extension PageViewController {
                         ShowAccessCell(style: .calendar)
                     }
 #endif
+                case .highlight:
+                    if let title = item.section.properties.title {
+                        HighlightCell(
+                            title: title,
+                            summary: item.section.properties.summary,
+                            imageUrl: item.section.properties.imageUrl(for: .large)
+                        )
+                    }
+                    else {
+                        Color.clear
+                    }
                 case .transparent:
                     Color.clear
                 }

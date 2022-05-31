@@ -28,7 +28,6 @@ struct ProgramPreview: View {
                 .redactable()
                 .layoutPriority(1)
                 .overlay(ImageOverlay())
-                .clipped()
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
             
             // Use stack with competing views to have a 50/50 horizontal split
