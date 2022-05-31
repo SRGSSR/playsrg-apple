@@ -40,6 +40,8 @@ struct SettingsView: View {
         .responderChain(from: firstResponder)
     }
     
+    // MARK: Quality section
+    
     private struct QualitySection: View {
         @AppStorage(PlaySRGSettingHDOverCellularEnabled) var isHDOverCellularEnabled = false
         
@@ -53,6 +55,8 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: Playback section
     
     private struct PlaybackSection: View {
         @AppStorage(PlaySRGSettingAutoplayEnabled) var isAutoplayEnabled = false
@@ -76,6 +80,8 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: Display section
+    
     private struct DisplaySection: View {
         @AppStorage(PlaySRGSettingSubtitleAvailabilityDisplayed) var isSubtitleAvailabilityDisplayed = false
         @AppStorage(PlaySRGSettingAudioDescriptionAvailabilityDisplayed) var isAudioDescriptionAvailabilityDisplayed = false
@@ -92,6 +98,8 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: Permissions section
+    
     private struct PermissionsSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -105,6 +113,8 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: Content section
     
     private struct ContentSection: View {
         @ObservedObject var model: SettingsViewModel
@@ -126,6 +136,8 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: Information section
     
     private struct InformationSection: View {
         @ObservedObject var model: SettingsViewModel
@@ -180,6 +192,8 @@ struct SettingsView: View {
         }
     }
     
+    // MARK: Advanced features section
+    
     private struct AdvancedFeaturesSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -215,6 +229,8 @@ struct SettingsView: View {
             }
         }
     }
+    
+    // MARK: Server selection
     
     private struct ServerSelectionCell: View {
         @AppStorage(PlaySRGSettingServiceURL) private var selectedServiceUrlString: String?
@@ -281,26 +297,7 @@ struct SettingsView: View {
         }
     }
     
-    private enum UserLocation: String, CaseIterable, Identifiable {
-        case `default` = ""
-        case WW
-        case CH
-        
-        var id: Self {
-            return self
-        }
-        
-        var description: String {
-            switch self {
-            case .WW:
-                return PlaySRGSettingsLocalizedString("Outside Switzerland", comment: "User location setting state")
-            case .CH:
-                return PlaySRGSettingsLocalizedString("Ignore location", comment: "User location setting state")
-            case .`default`:
-                return PlaySRGSettingsLocalizedString("Default (IP-based location)", comment: "User location setting state")
-            }
-        }
-    }
+    // MARK: User location selection
     
     private struct UserLocationSelectionCell: View {
         @AppStorage(PlaySRGSettingUserLocation) private var selectedUserLocation = UserLocation.default
@@ -350,26 +347,7 @@ struct SettingsView: View {
         }
     }
     
-    private enum PosterImages: String, CaseIterable, Identifiable {
-        case `default`
-        case forced
-        case ignored
-        
-        var id: Self {
-            return self
-        }
-        
-        var description: String {
-            switch self {
-            case .forced:
-                return PlaySRGSettingsLocalizedString("Force", comment: "Poster images setting state")
-            case .ignored:
-                return PlaySRGSettingsLocalizedString("Ignore", comment: "Poster images setting state")
-            case .`default`:
-                return PlaySRGSettingsLocalizedString("Default (current configuration)", comment: "Poster images setting state")
-            }
-        }
-    }
+    // MARK: Poster images selection
     
     private struct PosterImagesSelectionCell: View {
         @AppStorage(PlaySRGSettingPosterImages) private var selectedPosterImages = PosterImages.default
@@ -418,6 +396,8 @@ struct SettingsView: View {
             selectedPosterImages = posterImages
         }
     }
+    
+    // MARK: Reset section
     
     private struct ResetSection: View {
         @ObservedObject var model: SettingsViewModel

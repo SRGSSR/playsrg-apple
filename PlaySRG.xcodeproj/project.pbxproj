@@ -1155,6 +1155,26 @@
 		6F6E9063283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F6E9064283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F6E9065283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
+		6F6C7AC92820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACA2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACB2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACC2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACD2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACE2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7ACF2820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7AD02820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7AD12820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7AD22820576000BC3EA5 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AC82820576000BC3EA5 /* UserLocation.swift */; };
+		6F6C7AD42820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7AD52820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7AD82820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7AD92820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7ADA2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7ADB2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7ADC2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6C7ADD2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
 		6F710A2A264463780035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2C2644637A0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
 		6F710A2D2644637A0035CA03 /* EmptyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F1A77822643CAB600A00EFC /* EmptyContentView.swift */; };
@@ -3017,6 +3037,8 @@
 		6F661C9E1FBB632E008E345B /* PlaySRG-ObjectiveC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PlaySRG-ObjectiveC.h"; sourceTree = "<group>"; };
 		6F676850281C0F7F00D61211 /* SupportInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportInformation.swift; sourceTree = "<group>"; };
 		6F6E9060283E6EB10049FEEE /* Highlight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Highlight.swift; sourceTree = "<group>"; };
+		6F6C7AC82820576000BC3EA5 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
+		6F6C7AD32820578900BC3EA5 /* PosterImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterImages.swift; sourceTree = "<group>"; };
 		6F72E60526BA6B16001A890C /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		6F72E60626BA6B16001A890C /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6F73BFAF26563ABD0032D742 /* DampedCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DampedCollectionView.swift; sourceTree = "<group>"; };
@@ -3699,6 +3721,7 @@
 				6FDF6FFF2682022C0004437E /* ApplicationSettings+Common.m */,
 				6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */,
 				6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */,
+				6F6C7AD32820578900BC3EA5 /* PosterImages.swift */,
 				6F46B7C028200E3E00D20748 /* Server.swift */,
 				6F556B361DDC419800B5DEA2 /* SettingsBaseViewController.h */,
 				6F556B371DDC419800B5DEA2 /* SettingsBaseViewController.m */,
@@ -3709,6 +3732,7 @@
 				6F3E09FF23D055DD009B00C1 /* SettingTableViewCell.h */,
 				6F3E0A0023D055DD009B00C1 /* SettingTableViewCell.m */,
 				6F73C639271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift */,
+				6F6C7AC82820576000BC3EA5 /* UserLocation.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -8453,6 +8477,7 @@
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6F475FD21EB37BC6003021EA /* PageContainerViewController.m in Sources */,
+				6F6C7AD42820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F1EE835268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
 				6F9ABCDB2813F44E00B118A3 /* ImageViewLandscapePreviews.swift in Sources */,
 				6F4843D323EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
@@ -8478,6 +8503,7 @@
 				6FC2A21C265E3D2300EBC0F0 /* SectionShowHeaderView.swift in Sources */,
 				6FCA5BDC27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F7C35B523708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
+				6F6C7AC92820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6F93DE1A20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
 				0825914027285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				08B4651426BC58C800454A28 /* CalendarView.swift in Sources */,
@@ -8696,6 +8722,7 @@
 				6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAD20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD727D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
+				6F6C7ACA2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6F0E8D991F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DD218B126700B2AF2C /* Recommendation.m in Sources */,
 				6FCE753626D3786F00667298 /* HeroMediaCell.swift in Sources */,
@@ -8725,6 +8752,7 @@
 				6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */,
 				6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
+				6F6C7AD52820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F2E160A26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F93DE1B20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */,
@@ -8937,6 +8965,7 @@
 				6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAE20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD827D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
+				6F6C7ACB2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FE38A23270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9A1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DE218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -8966,6 +8995,7 @@
 				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D42604FB18008B46FF /* ShowCell.swift in Sources */,
+				6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160B26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C31DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
@@ -9178,6 +9208,7 @@
 				6F0E374F2680B13A008FC923 /* ContextMenu.swift in Sources */,
 				6FA9ECAF20C7AA1600D3D6C2 /* NotificationsViewController.m in Sources */,
 				6FCA5BD927D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
+				6F6C7ACC2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FE38A24270CBF63004DD296 /* CarPlay+Extensions.swift in Sources */,
 				6F0E8D9B1F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				6FDF08DF218B126700B2AF2C /* Recommendation.m in Sources */,
@@ -9207,6 +9238,7 @@
 				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D52604FB19008B46FF /* ShowCell.swift in Sources */,
+				6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160C26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C41DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
@@ -9538,6 +9570,7 @@
 				6F475FC21EB37BC6003021EA /* DataViewController.m in Sources */,
 				0801E07F1D4A4A810008021E /* RadioChannel.m in Sources */,
 				6FB0AF00217F4975009D707A /* SRGMediaComposition+PlaySRG.m in Sources */,
+				6F6C7ACD2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				0827DA291F0D43BD00A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6FEF23762732C2D40098C639 /* TimelineView.swift in Sources */,
 				6FB89A0326335B090012F1B0 /* Stack.swift in Sources */,
@@ -9546,6 +9579,7 @@
 				086BDE1D1EA63D5B00965F45 /* PlayMiniPlayerView.m in Sources */,
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6FEF236B2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
+				6F6C7AD82820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
@@ -9824,11 +9858,13 @@
 				6FC44B4A25DE552300DE6E6F /* Recommendation.m in Sources */,
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CB2721786B00C134AA /* DeepLinkAction.m in Sources */,
+				6F6C7AD92820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F83873025E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7B2719C5CF0082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2002747A69900460F70 /* ButtonStyles.swift in Sources */,
 				04E4DEF5283696AB00698BF8 /* ServiceMessage.swift in Sources */,
+				6F6C7ACE2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FF0C84C26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F4CF73B281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DB26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -9966,11 +10002,13 @@
 				6FC44B4B25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CC2721786D00C134AA /* DeepLinkAction.m in Sources */,
+				6F6C7ADA2820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F83873125E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7C2719C5D00082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2012747A69900460F70 /* ButtonStyles.swift in Sources */,
 				04E4DEF6283696AC00698BF8 /* ServiceMessage.swift in Sources */,
+				6F6C7ACF2820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FF0C84D26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F4CF73C281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DC26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -10108,11 +10146,13 @@
 				6FC44B4C25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CD2721786D00C134AA /* DeepLinkAction.m in Sources */,
+				6F6C7ADB2820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F83873225E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7D2719C5D10082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2022747A69900460F70 /* ButtonStyles.swift in Sources */,
 				04E4DEF7283696AD00698BF8 /* ServiceMessage.swift in Sources */,
+				6F6C7AD02820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FF0C84E26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F4CF73D281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DD26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -10250,11 +10290,13 @@
 				6FC44B4D25DE552400DE6E6F /* Recommendation.m in Sources */,
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CE2721786E00C134AA /* DeepLinkAction.m in Sources */,
+				6F6C7ADC2820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F83873325E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7E2719C5D20082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2032747A69900460F70 /* ButtonStyles.swift in Sources */,
 				04E4DEF8283696AF00698BF8 /* ServiceMessage.swift in Sources */,
+				6F6C7AD12820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FF0C84F26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F4CF73E281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DE26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
@@ -10392,11 +10434,13 @@
 				6FC44B4E25DE552500DE6E6F /* Recommendation.m in Sources */,
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CF2721786F00C134AA /* DeepLinkAction.m in Sources */,
+				6F6C7ADD2820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F83873425E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7F2719C5D30082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2042747A69900460F70 /* ButtonStyles.swift in Sources */,
 				04E4DEF9283696AF00698BF8 /* ServiceMessage.swift in Sources */,
+				6F6C7AD22820576000BC3EA5 /* UserLocation.swift in Sources */,
 				6FF0C85026B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F4CF73F281341B7006AFE6D /* ImageView.swift in Sources */,
 				6FB9B3DF26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
