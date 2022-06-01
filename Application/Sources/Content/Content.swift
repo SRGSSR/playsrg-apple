@@ -56,12 +56,10 @@ enum Content {
 #if os(iOS)
             case let .download(download):
                 return download.title
-            case .showAccess:
-                return nil
 #endif
             case let .highlight(highlight):
                 return highlight.title
-            case .mediaPlaceholder, .showPlaceholder, .topicPlaceholder, .transparent:
+            default:
                 return nil
             }
         }
@@ -287,7 +285,7 @@ private extension Content {
                     return AnalyticsPageTitle.watchLater.rawValue
                 case .topicSelector:
                     return AnalyticsPageTitle.topics.rawValue
-                case .none, .livestreams, .showAccess, .swimlane, .heroStage, .highlight, .grid, .mediaElement, .mediaElementSwimlane, .showElement:
+                default:
                     return nil
                 }
             case .none:
@@ -338,12 +336,12 @@ private extension Content {
                     return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
                 case .shows:
                     return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-                case .none, .medias, .predefined:
+                default:
                     return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
                 }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .none, .highlight, .favoriteShows, .continueWatching, .watchLater, .myProgram, .showAccess:
+            default:
                 return []
             }
         }
@@ -404,17 +402,13 @@ private extension Content {
                     return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: filter)
                         .map { $0.map { .media($0) } }
                         .eraseToAnyPublisher()
-                case .showAccess:
 #if os(iOS)
+                case .showAccess:
                     return Just([.showAccess(radioChannel: nil)])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
-#else
-                    return Just([])
-                        .setFailureType(to: Error.self)
-                        .eraseToAnyPublisher()
 #endif
-                case .none, .swimlane, .heroStage, .highlight, .grid, .mediaElement, .mediaElementSwimlane, .showElement:
+                default:
                     return Just([])
                         .setFailureType(to: Error.self)
                         .eraseToAnyPublisher()
@@ -530,7 +524,7 @@ private extension Content {
             case .radioShowAccess:
                 return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
 #endif
-            case .show, .radioEpisodesForDay, .tvEpisodesForDay:
+            default:
                 return nil
             }
         }
@@ -632,14 +626,12 @@ private extension Content {
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.events.rawValue
-            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .tvEpisodesForDay, .tvLive:
-                return nil
 #if os(iOS)
             case .downloads:
                 return AnalyticsPageTitle.downloads.rawValue
-            case .radioShowAccess:
-                return nil
 #endif
+            default:
+                return nil
             }
         }
         
@@ -686,16 +678,14 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-            case .radioEpisodesForDay, .radioLive, .radioLiveSatellite, .tvEpisodesForDay, .tvLive:
-                return nil
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)
             case .downloads:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
-            case .radioShowAccess:
-                return nil
 #endif
+            default:
+                return nil
             }
         }
         
@@ -705,20 +695,19 @@ private extension Content {
         
         var placeholderRowItems: [Content.Item] {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos, .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
+                    .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .favoriteShows, .radioAllShows, .tvAllShows:
                 return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
-            case .radioFavoriteShows, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater:
-                return []
 #if os(iOS)
             case .downloads:
                 return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
-            case .radioShowAccess:
-                return []
 #endif
+            default:
+                return []
             }
         }
         

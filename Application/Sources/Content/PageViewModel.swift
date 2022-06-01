@@ -391,12 +391,9 @@ private extension PageViewModel {
                 return .elementSwimlane
             case .topicSelector:
                 return .topicSelector
-            case .showAccess:
 #if os(iOS)
+            case .showAccess:
                 return .showAccess
-#else
-                // Not supported
-                return .mediaSwimlane
 #endif
             case .favoriteShows:
                 return .showSwimlane
@@ -406,7 +403,7 @@ private extension PageViewModel {
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
             case .livestreams:
                 return .liveMediaSwimlane
-            case .none, .continueWatching, .watchLater, .myProgram:
+            default:
                 return .mediaSwimlane
             }
         }
@@ -435,18 +432,16 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return .mediaSwimlane
             case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
 #if os(iOS)
-            case .downloads:
-                return .mediaSwimlane
             case .radioShowAccess:
                 return .showAccess
 #endif
+            default:
+                return .mediaSwimlane
             }
         }
         

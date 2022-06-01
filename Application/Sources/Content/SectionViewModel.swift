@@ -302,8 +302,6 @@ private extension SectionViewModel {
                 return .showGrid
             case .predefined:
                 switch contentSection.presentation.type {
-                case .heroStage, .highlight, .mediaElement, .mediaElementSwimlane, .continueWatching, .watchLater, .myProgram:
-                    return .mediaGrid
                 case .showElement, .favoriteShows:
                     return .showGrid
                 case .topicSelector:
@@ -312,7 +310,7 @@ private extension SectionViewModel {
                     return .liveMediaGrid
                 case .swimlane, .grid:
                     return (contentSection.type == .shows) ? .showGrid : .mediaGrid
-                case .none, .showAccess:
+                default:
                     return .mediaGrid
                 }
             case .none:
@@ -371,18 +369,16 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
 #if os(iOS)
-            case .radioShowAccess:
-                return .mediaGrid
             case .downloads:
                 return .downloadGrid
 #endif
+            default:
+                return .mediaGrid
             }
         }
         
