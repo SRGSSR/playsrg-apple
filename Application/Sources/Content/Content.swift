@@ -503,8 +503,6 @@ private extension Content {
             switch configuredSection {
             case .history:
                 return NSLocalizedString("History", comment: "Title label used to present the history")
-            case .notifications:
-                return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
             case .radioAllShows, .tvAllShows:
                 return NSLocalizedString("Shows", comment: "Title label used to present radio associated shows")
             case .favoriteShows, .radioFavoriteShows:
@@ -538,6 +536,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return NSLocalizedString("Downloads", comment: "Label to present downloads")
+            case .notifications:
+                return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
             case .radioShowAccess:
                 return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
 #endif
@@ -579,10 +579,10 @@ private extension Content {
         
         var supportsEdition: Bool {
             switch configuredSection {
-            case .favoriteShows, .history, .notifications, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
+            case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
 #if os(iOS)
-            case .downloads:
+            case .downloads, .notifications:
                 return true
 #endif
             default:
@@ -594,8 +594,6 @@ private extension Content {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows
-            case .notifications:
-                return .notifications
             case .radioLatestEpisodes:
                 return .episodesFromFavorites
             case .radioWatchLater, .watchLater:
@@ -607,6 +605,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return .downloads
+            case .notifications:
+                return .notifications
 #endif
             default:
                 return .generic
@@ -630,8 +630,6 @@ private extension Content {
                 return show.title
             case .history:
                 return AnalyticsPageTitle.history.rawValue
-            case .notifications:
-                return AnalyticsPageTitle.notifications.rawValue
             case .radioAllShows, .tvAllShows:
                 return AnalyticsPageTitle.showsAZ.rawValue
             case .favoriteShows, .radioFavoriteShows:
@@ -655,6 +653,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return AnalyticsPageTitle.downloads.rawValue
+            case .notifications:
+                return AnalyticsPageTitle.notifications.rawValue
 #endif
             default:
                 return nil
@@ -707,7 +707,7 @@ private extension Content {
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)
-            case .downloads:
+            case .downloads, .notifications:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #endif
             default:
@@ -760,17 +760,6 @@ private extension Content {
                 return dataProvider.historyPublisher(pageSize: pageSize, paginatedBy: paginator, filter: nil)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case .notifications:
-#if os(iOS)
-                return Just(UserNotification.notifications)
-                    .map { $0.map { .notification($0) } }
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-#else
-                return Just([])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
-#endif
             case .watchLater:
                 return dataProvider.laterPublisher(pageSize: pageSize, paginatedBy: paginator, filter: nil)
                     .map { $0.map { .media($0) } }
@@ -855,6 +844,16 @@ private extension Content {
                     .map { $0.map { .download($0) } }
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
+            case .notifications:
+                return Just(UserNotification.notifications)
+                    .map { $0.map { .notification($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+#else
+            default:
+                return Just([])
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
 #endif
             }
         }
@@ -865,15 +864,13 @@ private extension Content {
                 return UserInteractionSignal.favoriteUpdates()
             case .history, .radioResumePlayback:
                 return UserInteractionSignal.historyUpdates()
-#if os(iOS)
-            case .notifications:
-                return UserInteractionSignal.notificationUpdates()
-#endif
             case .radioWatchLater, .watchLater:
                 return UserInteractionSignal.watchLaterUpdates()
 #if os(iOS)
             case .downloads:
                 return UserInteractionSignal.downloadUpdates()
+            case .notifications:
+                return UserInteractionSignal.notificationUpdates()
 #endif
             default:
                 return Just([]).eraseToAnyPublisher()
