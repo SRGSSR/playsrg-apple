@@ -176,21 +176,21 @@ private extension DownloadCell {
 
 // MARK: Size
 
-final class DownloadCellSize: NSObject {
+enum DownloadCellSize {
     fileprivate static let aspectRatio: CGFloat = 16 / 9
     
     private static let defaultItemWidth: CGFloat = 210
     private static let heightOffset: CGFloat = 70
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
+    static func fullWidth() -> NSCollectionLayoutSize {
         return fullWidth(itemHeight: 84)
     }
     
-    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
+    static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
     }
 }
