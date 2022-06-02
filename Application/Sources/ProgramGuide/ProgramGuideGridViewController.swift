@@ -140,11 +140,6 @@ final class ProgramGuideGridViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // TODO: Just for PoC
-        if #available(iOS 15, *) {
-            parent?.setContentScrollView(collectionView)
-        }
-        
         navigationController?.setNavigationBarHidden(false, animated: animated)
         scrollToTarget(ScrollTarget(channel: model.selectedChannel, time: model.time), animated: false)
     }
@@ -267,6 +262,12 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     
     var programGuideDailyViewModel: ProgramGuideDailyViewModel? {
         return dailyModel
+    }
+}
+
+extension ProgramGuideGridViewController: ScrollableContent {
+    var play_contentScrollView: UIScrollView? {
+        return collectionView
     }
 }
 

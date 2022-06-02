@@ -57,6 +57,28 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
+ *  Protocol used to declare which scrollable content controls collapsable navigation bars and navigation / tab
+ *  bar edge appearance.
+ */
+@protocol ScrollableContent <NSObject>
+
+/**
+ *  The main scroll view which is used to navigate the content.
+ */
+@property (nonatomic, readonly, nullable) UIScrollView *play_contentScrollView;
+
+@end
+
+@protocol ScrollableContentContainer <NSObject>
+
+/**
+ *  Called when the offset of the main content scroll located in the receiver hierarchy was scrolled.
+ */
+- (void)play_contentOffsetDidChangeInContentScrollView:(UIScrollView *)scrollView;
+
+@end
+
+/**
  *  To be able to guarantee proper consistent behavior across iOS versions, and to provide a convenient formalism
  *  to precisely define content inset contributions in view controller hierarchies:
  *

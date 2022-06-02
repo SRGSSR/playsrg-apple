@@ -119,11 +119,6 @@ final class ProgramGuideDailyViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // TODO: Just for PoC
-        if #available(iOS 15, *) {
-            parent?.parent?.parent?.setContentScrollView(collectionView)
-        }
-        
         scrollToTime(programGuideModel.time, animated: false)
     }
     
@@ -216,6 +211,12 @@ extension ProgramGuideDailyViewController: ContentInsets {
     
     var play_paddingContentInsets: UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: Self.verticalSpacing, right: 0)
+    }
+}
+
+extension ProgramGuideDailyViewController: ScrollableContent {
+    var play_contentScrollView: UIScrollView? {
+        return collectionView
     }
 }
 

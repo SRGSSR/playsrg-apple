@@ -180,11 +180,6 @@ final class PageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        // TODO: Just for PoC
-        if #available(iOS 15, *) {
-            parent?.parent?.setContentScrollView(collectionView)
-        }
-        
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -307,6 +302,12 @@ extension PageViewController: ContentInsets {
         let top = Self.layoutVerticalMargin
 #endif
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+    }
+}
+
+extension PageViewController: ScrollableContent {
+    var play_contentScrollView: UIScrollView? {
+        return collectionView
     }
 }
 
