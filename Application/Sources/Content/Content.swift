@@ -229,8 +229,6 @@ private extension Content {
         
         var supportsEdition: Bool {
             switch contentSection.type {
-            case .medias, .showAndMedias, .shows:
-                return false
             case .predefined:
                 switch presentation.type {
                 case .favoriteShows, .continueWatching, .watchLater:
@@ -238,7 +236,7 @@ private extension Content {
                 default:
                     return false
                 }
-            case .none:
+            default:
                 return false
             }
         }

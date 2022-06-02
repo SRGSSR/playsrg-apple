@@ -296,8 +296,6 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch contentSection.type {
-            case .medias, .showAndMedias:
-                return .mediaGrid
             case .shows:
                 return .showGrid
             case .predefined:
@@ -313,7 +311,7 @@ private extension SectionViewModel {
                 default:
                     return .mediaGrid
                 }
-            case .none:
+            default:
                 return .mediaGrid
             }
         }
