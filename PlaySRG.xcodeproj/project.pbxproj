@@ -1393,6 +1393,15 @@
 		6F93DE1C20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1D20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
 		6F93DE1E20AE9BE600B71572 /* OnboardingTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */; };
+		6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B522849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B532849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B542849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B552849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B562849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B572849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B582849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
+		6F978B592849C3CA003061E8 /* ScrollableContent.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F978B502849C3CA003061E8 /* ScrollableContent.m */; };
 		6F982B93244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F982B94244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
 		6F982B95244F1E1200C0386E /* TableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F982B92244F1E1200C0386E /* TableView.m */; };
@@ -3049,6 +3058,8 @@
 		6F93DE1220AE9A9900B71572 /* OnboardingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OnboardingsViewController.storyboard; sourceTree = "<group>"; };
 		6F93DE1820AE9BE600B71572 /* OnboardingTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OnboardingTableViewCell.h; sourceTree = "<group>"; };
 		6F93DE1920AE9BE600B71572 /* OnboardingTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OnboardingTableViewCell.m; sourceTree = "<group>"; };
+		6F978B4F2849C3CA003061E8 /* ScrollableContent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollableContent.h; sourceTree = "<group>"; };
+		6F978B502849C3CA003061E8 /* ScrollableContent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ScrollableContent.m; sourceTree = "<group>"; };
 		6F982B91244F1E1200C0386E /* TableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableView.h; sourceTree = "<group>"; };
 		6F982B92244F1E1200C0386E /* TableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableView.m; sourceTree = "<group>"; };
 		6F9897CB2412582400B390A2 /* Layout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Layout.h; sourceTree = "<group>"; };
@@ -3764,6 +3775,8 @@
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
+				6F978B4F2849C3CA003061E8 /* ScrollableContent.h */,
+				6F978B502849C3CA003061E8 /* ScrollableContent.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -8520,6 +8533,7 @@
 				6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				08F4683A26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
+				6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F0B98452726977A005793A2 /* SearchResultsViewController.swift in Sources */,
 				6F3E0A0123D055DD009B00C1 /* SettingTableViewCell.m in Sources */,
 				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
@@ -8855,6 +8869,7 @@
 				6F0850F526256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F676852281C0F7F00D61211 /* SupportInformation.swift in Sources */,
+				6F978B522849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F702090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459EF1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9D22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
@@ -9093,6 +9108,7 @@
 				6F0850F626256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F676853281C0F7F00D61211 /* SupportInformation.swift in Sources */,
+				6F978B532849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F712090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F01D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9E22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
@@ -9331,6 +9347,7 @@
 				6F0850F726256A7700B4E410 /* Reachability.m in Sources */,
 				6F9D2746203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F676854281C0F7F00D61211 /* SupportInformation.swift in Sources */,
+				6F978B542849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6F939F722090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FF7BB9F22A78DE400FA758A /* SearchSettingSegmentCell.m in Sources */,
@@ -9440,6 +9457,7 @@
 				6F4760991EB37DF2003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40626051037008B46FF /* MediaDescription.swift in Sources */,
 				E6971AF11D4B300C008CA703 /* PlayApplicationError.m in Sources */,
+				6F978B552849C3CA003061E8 /* ScrollableContent.m in Sources */,
 				6FDF08F4218B126700B2AF2C /* UpdateInfo.m in Sources */,
 				6F40B77D2726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				0875852623A0025F00FA7207 /* ProfileViewController.m in Sources */,
@@ -9826,6 +9844,7 @@
 				084EF77D26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4E261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562126C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F978B562849C3CA003061E8 /* ScrollableContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -9967,6 +9986,7 @@
 				084EF77E26035BB10058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB4F261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562226C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F978B572849C3CA003061E8 /* ScrollableContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10108,6 +10128,7 @@
 				084EF77F26035BB30058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB50261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562326C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F978B582849C3CA003061E8 /* ScrollableContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -10249,6 +10270,7 @@
 				084EF78026035BB40058A567 /* PageViewModel.swift in Sources */,
 				6F9FFB51261662D900CDDC26 /* CollectionRow.swift in Sources */,
 				6FAE562426C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
+				6F978B592849C3CA003061E8 /* ScrollableContent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

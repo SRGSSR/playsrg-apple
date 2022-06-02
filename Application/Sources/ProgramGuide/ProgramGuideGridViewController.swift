@@ -266,7 +266,7 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
 }
 
 extension ProgramGuideGridViewController: ScrollableContent {
-    var play_contentScrollView: UIScrollView? {
+    var play_scrollableView: UIScrollView? {
         return collectionView
     }
 }

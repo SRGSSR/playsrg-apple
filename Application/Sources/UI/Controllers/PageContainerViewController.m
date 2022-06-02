@@ -23,6 +23,7 @@
 
 @property (nonatomic, weak) MDCTabBar *tabBar;
 @property (nonatomic, weak) UIVisualEffectView *blurView;
+@property (nonatomic, weak) NSLayoutConstraint *blurTopConstraint;
 
 @end
 
@@ -90,7 +91,7 @@
     
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        self.blurTopConstraint = [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
         [blurView.heightAnchor constraintEqualToConstant:60.f],
         [blurView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
         [blurView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
@@ -224,6 +225,7 @@
     
     UIViewController *newViewController = self.viewControllers[index];
     [self.pageViewController setViewControllers:@[newViewController] direction:direction animated:animated completion:nil];
+    [self play_setNeedsScrollableViewUpdate];
     
     [self didDisplayViewController:newViewController animated:animated];
     return YES;
@@ -256,6 +258,18 @@
 {
     NSUInteger index = [tabBar.items indexOfObject:item];
     [self displayPageAtIndex:index animated:YES];
+}
+
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.pageViewController.viewControllers.firstObject;
+}
+
+- (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
+{
+    self.blurTopConstraint.constant = fmaxf(-scrollView.contentOffset.y - scrollView.adjustedContentInset.top, 0.f);
 }
 
 #pragma mark SRGAnalyticsContainerViewTracking protocol
@@ -309,6 +323,7 @@
         NSUInteger currentIndex = [self.viewControllers indexOfObject:newViewController];
         [self.tabBar setSelectedItem:self.tabBar.items[currentIndex] animated:YES];;
         [self didDisplayViewController:newViewController animated:YES];
+        [self play_setNeedsScrollableViewUpdate];
     }
 }
 

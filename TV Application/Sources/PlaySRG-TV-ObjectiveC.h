@@ -30,6 +30,7 @@
 #import "PlayFirebaseConfiguration.h"
 #import "Playlist.h"
 #import "Reachability.h"
+#import "ScrollableContent.h"
 #import "SRGChannel+PlaySRG.h"
 #import "SRGMedia+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"

@@ -306,7 +306,7 @@ extension PageViewController: ContentInsets {
 }
 
 extension PageViewController: ScrollableContent {
-    var play_contentScrollView: UIScrollView? {
+    var play_scrollableView: UIScrollView? {
         return collectionView
     }
 }

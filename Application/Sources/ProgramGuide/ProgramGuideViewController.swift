@@ -16,6 +16,7 @@ final class ProgramGuideViewController: UIViewController {
     private weak var headerView: HostView<ProgramGuideHeaderView>!
     private weak var headerHostHeightConstraint: NSLayoutConstraint!
     private weak var headerHeightConstraint: NSLayoutConstraint!
+    private weak var headerTopConstraint: NSLayoutConstraint!
     
     private var _layout: ProgramGuideLayout = .grid     // Pseudo ivar to implement animated and non-animated setters
     private var cancellables = Set<AnyCancellable>()
@@ -56,15 +57,17 @@ final class ProgramGuideViewController: UIViewController {
         headerHostView.addSubview(headerView)
         self.headerView = headerView
         
+        let headerTopConstraint = headerView.topAnchor.constraint(equalTo: headerHostView.topAnchor)
         let headerHeightConstraint = headerView.heightAnchor.constraint(equalToConstant: 0 /* set in transition(to:traitCollection:animated:) */)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            headerView.topAnchor.constraint(equalTo: headerHostView.topAnchor),
+            headerTopConstraint,
             headerHeightConstraint,
             headerView.leadingAnchor.constraint(equalTo: headerHostView.leadingAnchor),
             headerView.trailingAnchor.constraint(equalTo: headerHostView.trailingAnchor)
         ])
+        self.headerTopConstraint = headerTopConstraint
         self.headerHeightConstraint = headerHeightConstraint
         
         _layout = Self.layout(for: traitCollection)
@@ -201,6 +204,7 @@ extension ProgramGuideViewController {
                         previousViewController.view.removeFromSuperview()
                         previousViewController.removeFromParent()
                         viewController.didMove(toParent: self)
+                        self.play_setNeedsScrollableViewUpdate()
 #if os(iOS)
                         self.model.isHeaderUserInteractionEnabled = true
 #endif
@@ -211,6 +215,7 @@ extension ProgramGuideViewController {
                     previousViewController.view.removeFromSuperview()
                     previousViewController.removeFromParent()
                     viewController.didMove(toParent: self)
+                    play_setNeedsScrollableViewUpdate()
 #if os(iOS)
                     model.isHeaderUserInteractionEnabled = true
 #endif
@@ -262,6 +267,16 @@ extension ProgramGuideViewController {
 }
 
 // MARK: Protocols
+
+extension ProgramGuideViewController: ScrollableContentContainer {
+    var play_scrollableChildViewController: UIViewController? {
+        return children.first
+    }
+    
+    func play_contentOffsetDidChange(inScrollableView scrollView: UIScrollView) {
+        headerTopConstraint.constant = max(-scrollView.contentOffset.y - scrollView.adjustedContentInset.top, 0)
+    }
+}
 
 #if os(iOS)
 extension ProgramGuideViewController: ProgramGuideHeaderViewActions {

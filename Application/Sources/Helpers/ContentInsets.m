@@ -13,7 +13,6 @@
 #import <objc/runtime.h>
 
 static void UpdateContentInsetsForViewController(UIViewController *viewController);
-static UIScrollView *ContentScrollViewInViewController(UIViewController *viewController);
 
 @implementation UIViewController (ContentInsets)
 
@@ -56,14 +55,6 @@ static UIScrollView *ContentScrollViewInViewController(UIViewController *viewCon
             }];
         }
     });
-    
-    if (@available(iOS 15, *)) {
-        UIScrollView *contentScrollView = ContentScrollViewInViewController(self);
-        [self setContentScrollView:contentScrollView forEdge:NSDirectionalRectEdgeTop];
-        
-        // TODO: Same call for bottom here? (for bottom edge appearance)
-        // [self setContentScrollView:contentScrollView forEdge:NSDirectionalRectEdgeBottom];
-    }
 }
 
 - (void)UIViewController_ContentInsets_swizzled_viewWillLayoutSubviews
@@ -111,7 +102,7 @@ static UIScrollView *ContentScrollViewInViewController(UIViewController *viewCon
 {
     UpdateContentInsetsForViewController(self);
     
-    [self.play_effectiveChildViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.play_effectiveChildViewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
         [viewController play_setNeedsContentInsetsUpdate];
     }];
 }
@@ -155,26 +146,6 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
     [scrollViews enumerateObjectsUsingBlock:^(UIScrollView * _Nonnull scrollView, NSUInteger idx, BOOL * _Nonnull stop) {
         scrollView.contentInset = paddingInsets;
     }];
-}
-
-static UIScrollView *ContentScrollViewInViewController(UIViewController *viewController)
-{
-    if ([viewController conformsToProtocol:@protocol(ScrollableContent)]) {
-        UIViewController<ScrollableContent> *scrollableViewController = (UIViewController<ScrollableContent> *)viewController;
-        UIScrollView *contentScrollView = scrollableViewController.play_contentScrollView;
-        if (contentScrollView) {
-            return contentScrollView;
-        }
-    }
-    
-    for (UIViewController *childViewController in viewController.play_effectiveChildViewControllers) {
-        UIScrollView *contentScrollView = ContentScrollViewInViewController(childViewController);
-        if (contentScrollView) {
-            return contentScrollView;
-        }
-    }
-    
-    return nil;
 }
 
 UIEdgeInsets ContentInsetsForViewController(UIViewController *viewController)
