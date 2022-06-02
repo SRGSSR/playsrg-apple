@@ -158,6 +158,7 @@ struct ImageView: View {
                     Color.placeholder
                 }
             }
+            .clipped()
         }
     }
 }

@@ -296,15 +296,11 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch contentSection.type {
-            case .medias, .showAndMedias:
-                return .mediaGrid
             case .shows:
                 return .showGrid
             case .predefined:
                 switch contentSection.presentation.type {
-                case .hero, .mediaHighlight, .mediaHighlightSwimlane, .resumePlayback, .watchLater, .personalizedProgram:
-                    return .mediaGrid
-                case .showHighlight, .favoriteShows:
+                case .showElement, .favoriteShows:
                     return .showGrid
                 case .topicSelector:
                     return .topicGrid
@@ -312,10 +308,10 @@ private extension SectionViewModel {
                     return .liveMediaGrid
                 case .swimlane, .grid:
                     return (contentSection.type == .shows) ? .showGrid : .mediaGrid
-                case .none, .showAccess:
+                default:
                     return .mediaGrid
                 }
-            case .none:
+            default:
                 return .mediaGrid
             }
         }
@@ -371,18 +367,16 @@ private extension SectionViewModel {
         
         var layout: SectionViewModel.SectionLayout {
             switch configuredSection {
-            case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestEpisodesFromFavorites, .radioLatestVideos, .radioMostPopular, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return .mediaGrid
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return .liveMediaGrid
             case .favoriteShows, .radioFavoriteShows, .radioAllShows, .tvAllShows:
                 return .showGrid
 #if os(iOS)
-            case .radioShowAccess:
-                return .mediaGrid
             case .downloads:
                 return .downloadGrid
 #endif
+            default:
+                return .mediaGrid
             }
         }
         

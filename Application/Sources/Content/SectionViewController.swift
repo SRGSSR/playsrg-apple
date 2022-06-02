@@ -609,7 +609,7 @@ private extension SectionViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         configuration.interSectionSpacing = constant(iOS: 15, tvOS: 100)
         
-        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
+        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         

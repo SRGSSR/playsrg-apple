@@ -170,7 +170,7 @@ private extension View {
 
 // MARK: Size
 
-final class SectionShowHeaderViewSize: NSObject {
+enum SectionShowHeaderViewSize {
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let show = show {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)

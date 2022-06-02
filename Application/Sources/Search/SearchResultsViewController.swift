@@ -420,7 +420,7 @@ private extension SearchResultsViewController {
         }
         
         static func size(section: SearchViewModel.Section, settings: SRGMediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-            return HeaderViewSize.recommended(title: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
+            return HeaderViewSize.recommended(forTitle: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
         }
     }
 }

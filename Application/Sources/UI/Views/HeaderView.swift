@@ -63,8 +63,8 @@ struct HeaderView: View {
 
 // MARK: Size
 
-final class HeaderViewSize: NSObject {
-    @objc static func recommended(title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+enum HeaderViewSize {
+    static func recommended(forTitle title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
         if let title = title, !title.isEmpty {
             let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
