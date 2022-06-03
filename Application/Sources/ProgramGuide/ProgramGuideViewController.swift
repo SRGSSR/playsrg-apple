@@ -163,7 +163,11 @@ extension ProgramGuideViewController {
         addChild(viewController)
         
         let childView = viewController.view!
+#if os(tvOS)
+        view.addSubview(childView)
+#else
         view.insertSubview(childView, at: 0)
+#endif
         
         childView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
