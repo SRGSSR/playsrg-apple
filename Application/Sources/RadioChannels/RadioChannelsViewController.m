@@ -75,7 +75,7 @@
 
 - (void)updateTitle
 {
-    self.title = self.radioChannelName ?: NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
+    self.navigationItem.title = self.radioChannelName ?: NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
 }
 
 #pragma mark PlayApplicationNavigation protocol
