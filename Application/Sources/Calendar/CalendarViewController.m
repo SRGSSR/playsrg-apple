@@ -259,6 +259,7 @@
     
     UIViewController *newDailyMediasViewController = [SectionViewController mediasViewControllerForDay:[SRGDay dayFromDate:date] channelUid:self.radioChannel.uid];
     [self.pageViewController setViewControllers:@[newDailyMediasViewController] direction:navigationDirection animated:animated completion:nil];
+    [self play_setNeedsScrollableViewUpdate];
     
     [self setNavigationBarItemsHidden:[date isEqualToDate:self.calendar.today]];
 }
@@ -462,6 +463,7 @@
     else {
         UIViewController<DailyMediasViewController> *currentDailyMediasViewController = (UIViewController<DailyMediasViewController> *)pageViewController.viewControllers.firstObject;
         date = currentDailyMediasViewController.date;
+        [self play_setNeedsScrollableViewUpdate];
     }
     
     [self setNavigationBarItemsHidden:[date isEqualToDate:self.calendar.today]];
