@@ -398,7 +398,7 @@
     if (self.calendar.scope == FSCalendarScopeMonth) {
         return velocity.y < 0;
     }
-    // When displaying the day, only downward gestures at the exact top expand the calendar. This way, pull-to-refresh
+    // When displaying the day, only downward gestures at the top expand the calendar. This way, pull-to-refresh
     // can also be triggered for the collection view, even when the calendar is in week view (this can occur while the
     // collection is bouncing at its top). If implemented with less care, pull-to-refresh would have been possible
     // only when the calendar is in monthly view, which is impractical on small screens
@@ -406,7 +406,7 @@
         UIViewController<DailyMediasViewController> *currentDailyMediasViewController = self.pageViewController.viewControllers.firstObject;
         UIScrollView *scrollView = currentDailyMediasViewController.scrollView;
         UIEdgeInsets contentInsets = ContentInsetsForScrollView(scrollView);
-        return velocity.y > 0 && (scrollView.contentOffset.y - scrollView.contentInset.top == -contentInsets.top);
+        return velocity.y > 0 && fabs(scrollView.contentOffset.y - scrollView.contentInset.top + contentInsets.top) < 1;
     }
 }
 
