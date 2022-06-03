@@ -32,7 +32,7 @@
     
     NSUInteger initialPage = [radioChannels indexOfObject:ApplicationSettingLastOpenedRadioChannel()];
     if (self = [super initWithViewControllers:viewControllers.copy initialPage:initialPage]) {
-        self.title = NSLocalizedString(@"Audios", @"Tab bar title displayed for the audio view");
+        [self updateTitle];
     }
     return self;
 }
@@ -43,10 +43,11 @@
 {
     [super viewDidLoad];
     
+    [self updateTitle];
+    
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     if (navigationBar) {
         self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
-        [self updateNavigationBar:navigationBar];
     }
 }
 
@@ -67,18 +68,14 @@
         [navigationController updateWithRadioChannel:radioChannel animated:animated];
     }
     
-    [self updateNavigationBar:self.navigationController.navigationBar];
+    [self updateTitle];
 }
 
 #pragma mark Navigation bar
 
-- (void)updateNavigationBar:(UINavigationBar *)navigationBar
+- (void)updateTitle
 {
-    if (! navigationBar) {
-        return;
-    }
-    
-    self.navigationItem.title = self.radioChannelName ?: NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
+    self.title = self.radioChannelName ?: NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
 }
 
 #pragma mark PlayApplicationNavigation protocol
