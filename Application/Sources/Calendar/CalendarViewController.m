@@ -30,7 +30,9 @@
 @property (nonatomic) UIPageViewController *pageViewController;
 
 @property (nonatomic, weak) Calendar *calendar;
+
 @property (nonatomic, weak) NSLayoutConstraint *calendarHeightConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *calendarTopConstraint;
 
 @property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
@@ -102,7 +104,7 @@
     
     calendar.translatesAutoresizingMaskIntoConstraints = false;
     [NSLayoutConstraint activateConstraints:@[
-        [calendar.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        self.calendarTopConstraint = [calendar.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
         [calendar.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
         [calendar.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor],
         self.calendarHeightConstraint = [calendar.heightAnchor constraintEqualToConstant:300.f]
@@ -334,6 +336,18 @@
 - (UIEdgeInsets)play_additionalContentInsets
 {
     return UIEdgeInsetsMake(CGRectGetHeight(self.calendar.frame), 0.f, 0.f, 0.f);
+}
+
+- (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
+{
+    self.calendarTopConstraint.constant = fmaxf(-scrollView.contentOffset.y - scrollView.adjustedContentInset.top, 0.f);
+}
+
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.pageViewController.viewControllers.firstObject;
 }
 
 #pragma mark SRGAnalyticsViewTracking protocol

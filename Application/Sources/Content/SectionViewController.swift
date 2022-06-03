@@ -478,6 +478,12 @@ extension SectionViewController: ContentInsets {
     }
 }
 
+extension SectionViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension SectionViewController: UICollectionViewDelegate {
 #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
