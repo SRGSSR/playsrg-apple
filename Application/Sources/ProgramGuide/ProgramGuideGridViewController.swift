@@ -265,11 +265,13 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     }
 }
 
+#if os(iOS)
 extension ProgramGuideGridViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
         return collectionView
     }
 }
+#endif
 
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
