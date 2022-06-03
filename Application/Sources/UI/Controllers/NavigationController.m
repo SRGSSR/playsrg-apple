@@ -130,7 +130,9 @@
     navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
     navigationBar.standardAppearance = appearance;
     navigationBar.compactAppearance = appearance;
-    navigationBar.scrollEdgeAppearance = appearance;
+    if (backgroundColor) {
+        navigationBar.scrollEdgeAppearance = appearance;
+    }
     
     // Force appearance settings to be applied again, see https://stackoverflow.com/a/37668610/760435
     self.navigationBarHidden = YES;
