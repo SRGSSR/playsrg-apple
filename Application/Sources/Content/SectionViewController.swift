@@ -110,9 +110,8 @@ final class SectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.largeTitleDisplayMode = model.largeTitleDisplayMode
-        
 #if os(iOS)
+        navigationItem.largeTitleDisplayMode = model.largeTitleDisplayMode
         updateNavigationBar()
 #endif
         
