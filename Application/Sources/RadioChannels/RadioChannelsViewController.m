@@ -37,7 +37,10 @@
     }
     
     NSUInteger initialPage = [radioChannels indexOfObject:ApplicationSettingLastOpenedRadioChannel()];
-    return [super initWithViewControllers:viewControllers.copy initialPage:initialPage];
+    if (self = [super initWithViewControllers:viewControllers.copy initialPage:initialPage]) {
+        [self updateTitle];
+    }
+    return self;
 }
 
 #pragma mark View lifecycle
