@@ -29,8 +29,8 @@
 
 @property (nonatomic) UIPageViewController *pageViewController;
 
-@property (nonatomic, weak) IBOutlet Calendar *calendar;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *calendarHeightConstraint;
+@property (nonatomic, weak) Calendar *calendar;
+@property (nonatomic, weak) NSLayoutConstraint *calendarHeightConstraint;
 
 @property (nonatomic) UISelectionFeedbackGenerator *selectionFeedbackGenerator;
 
@@ -44,7 +44,7 @@
 
 - (instancetype)initWithRadioChannel:(RadioChannel *)radioChannel date:(NSDate *)date
 {
-    if (self = [self initFromStoryboard]) {
+    if (self = [self init]) {
         self.radioChannel = radioChannel;
         self.initialDate = date;
         self.selectionFeedbackGenerator = [[UISelectionFeedbackGenerator alloc] init];
@@ -60,17 +60,6 @@
     return self;
 }
 
-- (instancetype)initFromStoryboard
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
-    return storyboard.instantiateInitialViewController;
-}
-
-- (instancetype)init
-{
-    return [self initWithRadioChannel:nil date:nil];
-}
-
 #pragma mark Getters and setters
 
 - (NSString *)title
@@ -84,8 +73,10 @@
 {
     [super viewDidLoad];
     
+    self.view.backgroundColor = UIColor.srg_gray16Color;
+    
     UIView *pageView = self.pageViewController.view;
-    [self.view insertSubview:pageView atIndex:0];
+    [self.view addSubview:pageView];
     
     pageView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
@@ -97,42 +88,48 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    self.view.backgroundColor = UIColor.srg_gray16Color;
+    Calendar *calendar = [[Calendar alloc] init];
+    calendar.backgroundColor = UIColor.clearColor;
+    calendar.firstWeekday = NSCalendar.srg_defaultCalendar.firstWeekday;
+    calendar.dataSource = self;
+    calendar.delegate = self;
+    // Display full calendar for easier access when voice over is running (only a month of content)
+    calendar.scope = UIAccessibilityIsVoiceOverRunning() ? FSCalendarScopeMonth : FSCalendarScopeWeek;
+    // Hide months on the left and right
+    calendar.appearance.headerMinimumDissolvedAlpha = 0.0;
+    [self.view addSubview:calendar];
+    self.calendar = calendar;
+    
+    calendar.translatesAutoresizingMaskIntoConstraints = false;
+    [NSLayoutConstraint activateConstraints:@[
+        [calendar.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [calendar.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
+        [calendar.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor],
+        self.calendarHeightConstraint = [calendar.heightAnchor constraintEqualToConstant:300.f]
+    ]];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-    [self.view insertSubview:blurView belowSubview:self.calendar];
+    [self.view insertSubview:blurView belowSubview:calendar];
     
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [blurView.topAnchor constraintEqualToAnchor:self.calendar.topAnchor],
-        [blurView.bottomAnchor constraintEqualToAnchor:self.calendar.bottomAnchor],
-        [blurView.leadingAnchor constraintEqualToAnchor:self.calendar.leadingAnchor],
-        [blurView.trailingAnchor constraintEqualToAnchor:self.calendar.trailingAnchor]
+        [blurView.topAnchor constraintEqualToAnchor:calendar.topAnchor],
+        [blurView.bottomAnchor constraintEqualToAnchor:calendar.bottomAnchor],
+        [blurView.leadingAnchor constraintEqualToAnchor:calendar.leadingAnchor],
+        [blurView.trailingAnchor constraintEqualToAnchor:calendar.trailingAnchor]
     ]];
-    
-    self.calendar.dataSource = self;
-    self.calendar.delegate = self;
-    
-    // Display full calendar for easier access when voice over is running (only a month of content)
-    self.calendar.scope = UIAccessibilityIsVoiceOverRunning() ? FSCalendarScopeMonth : FSCalendarScopeWeek;
     
     self.pageViewController.dataSource = self;
     
     // Add pan gesture to the whole view. This pan gesture will trigger the calendar handleScope: method in such
     // a way that the calendar is expanded or collapsed also when the collection is scrolled (see gesture recognizer
     // delegate implementation)
-    UIPanGestureRecognizer *scopeGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self.calendar action:@selector(handleScopeGesture:)];
+    UIPanGestureRecognizer *scopeGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:calendar action:@selector(handleScopeGesture:)];
     scopeGestureRecognizer.delegate = self;
     [self.view addGestureRecognizer:scopeGestureRecognizer];
     self.scopeGestureRecognizer = scopeGestureRecognizer;
     
-    self.calendar.firstWeekday = NSCalendar.srg_defaultCalendar.firstWeekday;
-    self.calendar.backgroundColor = UIColor.clearColor;
-    
-    // Hide months on the left and right
-    self.calendar.appearance.headerMinimumDissolvedAlpha = 0.0;
-    
-    FSCalendarAppearance *calendarAppearance = self.calendar.appearance;
+    FSCalendarAppearance *calendarAppearance = calendar.appearance;
     
     // Month / year
     calendarAppearance.headerTitleColor = UIColor.whiteColor;
@@ -151,15 +148,15 @@
     
     if (self.initialDate) {
         // Minimum / maximum dates read from the calendar directly have an incorrect value
-        NSDate *minimumDate = [self minimumDateForCalendar:self.calendar];
-        NSDate *maximumDate = [self maximumDateForCalendar:self.calendar];
+        NSDate *minimumDate = [self minimumDateForCalendar:calendar];
+        NSDate *maximumDate = [self maximumDateForCalendar:calendar];
         
         NSDateInterval *dateInterval = [[NSDateInterval alloc] initWithStartDate:minimumDate endDate:maximumDate];
-        NSDate *date = [dateInterval containsDate:self.initialDate] ? self.initialDate : self.calendar.today;
+        NSDate *date = [dateInterval containsDate:self.initialDate] ? self.initialDate : calendar.today;
         [self showMediasForDate:date animated:NO];
     }
     else {
-        [self showMediasForDate:self.calendar.today animated:NO];
+        [self showMediasForDate:calendar.today animated:NO];
     }
     
     [NSNotificationCenter.defaultCenter addObserver:self
@@ -173,7 +170,7 @@
     
     // Cannot use `-calendar:boundingRectWillChange:animated: since not called with end values.
     @weakify(self)
-    [self.calendar addObserver:self keyPath:@keypath(FSCalendar.new, bounds) options:0 block:^(MAKVONotification *notification) {
+    [calendar addObserver:self keyPath:@keypath(FSCalendar.new, bounds) options:0 block:^(MAKVONotification *notification) {
         @strongify(self)
         
         [self.pageViewController.viewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {

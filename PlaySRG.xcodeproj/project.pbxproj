@@ -2324,11 +2324,6 @@
 		E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
 		E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E694A9F31D65F02700372DF0 /* CalendarViewController.m */; };
-		E694A9FA1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */; };
-		E694A9FB1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */; };
-		E694A9FC1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */; };
-		E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */; };
-		E694A9FE1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */; };
 		E6971AED1D4B300C008CA703 /* PlayApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */; };
 		E6971AEE1D4B300C008CA703 /* PlayApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */; };
 		E6971AEF1D4B300C008CA703 /* PlayApplicationError.m in Sources */ = {isa = PBXBuildFile; fileRef = E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */; };
@@ -3272,7 +3267,6 @@
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
 		E694A9F21D65F02700372DF0 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
 		E694A9F31D65F02700372DF0 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
-		E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = CalendarViewController.storyboard; sourceTree = "<group>"; };
 		E6971AEB1D4B300C008CA703 /* PlayApplicationError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayApplicationError.h; sourceTree = "<group>"; };
 		E6971AEC1D4B300C008CA703 /* PlayApplicationError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayApplicationError.m; sourceTree = "<group>"; };
 		EC2DF535757623B50FE8F3E2 /* Pods-Play SRG-iOS-Play SRF.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play SRF/Pods-Play SRG-iOS-Play SRF.appstore.xcconfig"; sourceTree = "<group>"; };
@@ -5098,7 +5092,6 @@
 			children = (
 				E694A9F21D65F02700372DF0 /* CalendarViewController.h */,
 				E694A9F31D65F02700372DF0 /* CalendarViewController.m */,
-				E694A9F41D65F02700372DF0 /* CalendarViewController.storyboard */,
 			);
 			path = Calendar;
 			sourceTree = "<group>";
@@ -6306,7 +6299,6 @@
 				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
-				E694A9FA1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6349,7 +6341,6 @@
 				6F7C89D020AAFC6100255A54 /* Onboardings.xcassets in Resources */,
 				6FD2CBC41DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FB0BB3D20AEF5C4007C5D87 /* Onboarding.strings in Resources */,
-				E694A9FB1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6392,7 +6383,6 @@
 				6FD2CBC51DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FD633E51FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.xib in Resources */,
 				6F7C89D120AAFC6100255A54 /* Onboardings.xcassets in Resources */,
-				E694A9FC1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6435,7 +6425,6 @@
 				6FB0BB3A20AEF5B8007C5D87 /* Onboarding.strings in Resources */,
 				6FD2CBC61DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				0875851123A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
-				E694A9FD1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -6477,7 +6466,6 @@
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
 				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F2962002006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
-				E694A9FE1D65F02700372DF0 /* CalendarViewController.storyboard in Resources */,
 				6F4EA1401EE034EF00BEC4DA /* Accessibility.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
