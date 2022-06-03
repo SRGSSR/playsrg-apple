@@ -22,6 +22,10 @@ final class SectionViewModel: ObservableObject {
         return properties.displaysTitle ? properties.title : nil
     }
     
+    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+        return title != nil ? .always : .never
+    }
+    
     var numberOfSelectedItems: Int {
         guard configuration.properties.supportsEdition else { return 0 }
         return selectedItems.count
