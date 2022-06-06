@@ -242,6 +242,12 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
         guard let date = date(atYOffset: collectionView.contentOffset.y) else { return }
         programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
     }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        collectionView.play_scrollToTop(animated: true)
+        return false
+    }
 }
 
 // MARK: Views

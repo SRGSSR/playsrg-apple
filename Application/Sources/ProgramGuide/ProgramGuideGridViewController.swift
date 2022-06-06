@@ -324,6 +324,14 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
     }
+    
+#if os(iOS)
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        collectionView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
 }
 
 // MARK: Views
