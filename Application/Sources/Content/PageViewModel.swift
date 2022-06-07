@@ -301,7 +301,13 @@ private extension PageViewModel {
     }
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
-        if section.properties.displaysRowItems {
+        if let highlight = section.properties.rowHighlight {
+            let item = Item(.item(.highlight(highlight)), in: section)
+            return Just(Row(section: section, items: [item]))
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
+        else {
             return Publishers.CombineLatest(
                 section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                     .scan([]) { $0 + $1 },
@@ -315,17 +321,6 @@ private extension PageViewModel {
             .map { rowItems(removeDuplicates(in: $0), in: section) }
             .map { Row(section: section, items: $0) }
             .eraseToAnyPublisher()
-        }
-        else if let highlight = section.properties.highlight {
-            let item = Item(.item(.highlight(highlight)), in: section)
-            return Just(Row(section: section, items: [item]))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
-        }
-        else {
-            return Just(Row(section: section, items: []))
-                .setFailureType(to: Error.self)
-                .eraseToAnyPublisher()
         }
     }
     
@@ -384,7 +379,7 @@ private extension PageViewModel {
             case .heroStage:
                 return .heroStage
             case .highlight:
-                return .highlight
+                return (contentSection.presentation.title != nil) ? .highlight : .mediaSwimlane
             case .mediaElement, .showElement:
                 return .element
             case .mediaElementSwimlane:
