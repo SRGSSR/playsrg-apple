@@ -24,7 +24,7 @@
 
 @property (nonatomic, weak) MDCTabBar *tabBar;
 @property (nonatomic, weak) UIVisualEffectView *blurView;
-@property (nonatomic, weak) NSLayoutConstraint *blurTopConstraint;
+@property (nonatomic, weak) NSLayoutConstraint *tabBarTopConstraint;
 
 @end
 
@@ -86,19 +86,6 @@
     
     [self.pageViewController didMoveToParentViewController:self];
     
-    UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
-    blurView.alpha = 0.f;
-    [self.view addSubview:blurView];
-    self.blurView = blurView;
-    
-    blurView.translatesAutoresizingMaskIntoConstraints = NO;
-    [NSLayoutConstraint activateConstraints:@[
-        self.blurTopConstraint = [blurView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
-        [blurView.heightAnchor constraintEqualToConstant:60.f],
-        [blurView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
-        [blurView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
-    ]];
-    
     __block BOOL hasImage = NO;
     
     NSMutableArray<UITabBarItem *> *tabBarItems = [NSMutableArray array];
@@ -129,10 +116,23 @@
     
     tabBar.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [tabBar.topAnchor constraintEqualToAnchor:blurView.contentView.topAnchor],
-        [tabBar.bottomAnchor constraintEqualToAnchor:blurView.contentView.bottomAnchor],
-        [tabBar.leadingAnchor constraintEqualToAnchor:blurView.contentView.leadingAnchor],
-        [tabBar.trailingAnchor constraintEqualToAnchor:blurView.contentView.trailingAnchor]
+        self.tabBarTopConstraint = [tabBar.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
+        [tabBar.heightAnchor constraintEqualToConstant:60.f],
+        [tabBar.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor],
+        [tabBar.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor]
+    ]];
+    
+    UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.alpha = 0.f;
+    [self.view insertSubview:blurView belowSubview:tabBar];
+    self.blurView = blurView;
+    
+    blurView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [blurView.topAnchor constraintEqualToAnchor:tabBar.topAnchor],
+        [blurView.bottomAnchor constraintEqualToAnchor:tabBar.bottomAnchor],
+        [blurView.leadingAnchor constraintEqualToAnchor:tabBar.leadingAnchor],
+        [blurView.trailingAnchor constraintEqualToAnchor:tabBar.trailingAnchor]
     ]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -272,7 +272,7 @@
 - (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
 {
     CGFloat adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top;
-    self.blurTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
+    self.tabBarTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
     self.blurView.alpha = fmax(0.f, fminf(1.f, adjustedOffset / LayoutBlurActivationDistance));
 }
 
