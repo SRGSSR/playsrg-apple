@@ -194,6 +194,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, getter=isTransitioning) BOOL transitioning;           // Whether the UI is currently transitioning between class sizes
 @property (nonatomic, getter=isStatusBarHidden) BOOL statusBarHidden;
+@property (nonatomic) BOOL wasPortraitFullScreen;
 
 @property (nonatomic, getter=areDetailsExpanded) BOOL detailsExpanded;
 @property (nonatomic, getter=areDetailsAvailable) BOOL detailsAvailable;
@@ -597,13 +598,17 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         // iPhone devices: Set full screen when switching to landscape orientation (no change when switching to portrait,
         // when switching to landscape we want the experience to be as immersive as possible, but when switching to portrait
-        // we don't want to alter the current experience)
+        // we don't want to alter the current experience). Animated booleans set to NO because the transition ensures
+        // changes are animated.
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             BOOL isLandscape = (size.width > size.height);
-            [self.letterboxView setFullScreen:isLandscape animated:NO /* will be animated with the view transition */];
-            
             if (isLandscape) {
-                [self hidePlayerUserInterfaceAnimated:NO /* will be animated with the view transition */];
+                self.wasPortraitFullScreen = self.letterboxView.fullScreen;
+                [self.letterboxView setFullScreen:YES animated:NO];
+                [self hidePlayerUserInterfaceAnimated:NO];
+            }
+            else if (! self.wasPortraitFullScreen) {
+                [self.letterboxView setFullScreen:NO animated:NO];
             }
         }
         [self scrollToNearestProgramAnimated:NO];
