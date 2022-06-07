@@ -135,7 +135,7 @@ protocol SectionProperties {
     var analyticsDeletionHiddenEventTitle: String? { get }
     
     /// Properties for section displayed as a row
-    var displaysRowItems: Bool { get }
+    var rowHighlight: Highlight? { get }
     var placeholderRowItems: [Content.Item] { get }
     var displaysRowHeader: Bool { get }
     
@@ -151,13 +151,6 @@ protocol SectionProperties {
     
     /// Method to be called for removing the specified items from an editable section.
     func remove(_ items: [Content.Item])
-}
-
-extension SectionProperties {
-    var highlight: Highlight? {
-        guard let title = title else { return nil }
-        return Highlight(title: title, summary: summary, image: image)
-    }
 }
 
 private extension Content {
@@ -315,8 +308,8 @@ private extension Content {
             }
         }
         
-        var displaysRowItems: Bool {
-            return presentation.type != .highlight
+        var rowHighlight: Highlight? {
+            return Highlight(from: contentSection)
         }
         
         var placeholderRowItems: [Content.Item] {
@@ -339,6 +332,8 @@ private extension Content {
                 }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .highlight:
+                return (rowHighlight != nil) ? [] : (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             default:
                 return []
             }
@@ -687,8 +682,8 @@ private extension Content {
             }
         }
         
-        var displaysRowItems: Bool {
-            return true
+        var rowHighlight: Highlight? {
+            return nil
         }
         
         var placeholderRowItems: [Content.Item] {

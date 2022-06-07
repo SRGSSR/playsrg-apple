@@ -532,7 +532,7 @@ private extension PageViewController {
                     return layoutSection
                 case .highlight:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return HighlightCellSize.fullWidth(for: section.properties.highlight, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in

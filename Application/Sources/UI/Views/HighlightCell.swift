@@ -129,17 +129,14 @@ private extension HighlightCell {
 // MARK: Size
 
 enum HighlightCellSize {
-    static func fullWidth(for highlight: Highlight?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        if let title = highlight?.title, !title.isEmpty {
-#if os(tvOS)
-            let height: CGFloat = 700
-#else
-            let height: CGFloat = (horizontalSizeClass == .compact) ? 300 : 400
-#endif
-            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    
+    static func fullWidth(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
+        if horizontalSizeClass == .compact {
+            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 0)
         }
         else {
-            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(LayoutHeaderHeightZero))
+            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
         }
     }
 }
@@ -147,8 +144,8 @@ enum HighlightCellSize {
 // MARK: Preview
 
 private extension View {
-    func previewLayout(for highlight: Highlight, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
-        let size = HighlightCellSize.fullWidth(for: highlight, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
+    func previewLayout(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> some View {
+        let size = HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass).previewSize
         return previewLayout(.fixed(width: size.width, height: size.height))
             .horizontalSizeClass(horizontalSizeClass)
     }
@@ -159,10 +156,10 @@ struct HighlightCell_Previews: PreviewProvider {
     
     static var previews: some View {
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
-            .previewLayout(for: highlight, layoutWidth: 1000, horizontalSizeClass: .regular)
+            .previewLayout(layoutWidth: 1000, horizontalSizeClass: .regular)
 #if os(iOS)
         HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
-            .previewLayout(for: highlight, layoutWidth: 400, horizontalSizeClass: .compact)
+            .previewLayout(layoutWidth: 400, horizontalSizeClass: .compact)
 #endif
     }
 }
