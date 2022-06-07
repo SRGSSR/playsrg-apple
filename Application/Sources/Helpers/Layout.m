@@ -18,6 +18,7 @@ const CGFloat LayoutProgressBarHeight = 3.f;
 #endif
 
 const CGFloat LayoutHeaderHeightZero = 0.001f;
+const CGFloat LayoutBlurActivationDistance = 10.f;
 
 static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {

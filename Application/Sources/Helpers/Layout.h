@@ -100,4 +100,9 @@ OBJC_EXPORT const CGFloat LayoutMargin;
 OBJC_EXPORT const UIEdgeInsets LayoutPaddingContentInsets;
 OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
 
+/**
+ *  Miscellaneous constants.
+ */
+OBJC_EXPORT const CGFloat LayoutBlurActivationDistance;
+
 NS_ASSUME_NONNULL_END

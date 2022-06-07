@@ -6,6 +6,7 @@
 
 #import "PageContainerViewController.h"
 
+#import "Layout.h"
 #import "PlayLogger.h"
 #import "UIColor+PlaySRG.h"
 #import "UIViewController+PlaySRG.h"
@@ -86,6 +87,7 @@
     [self.pageViewController didMoveToParentViewController:self];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.alpha = 0.f;
     [self.view addSubview:blurView];
     self.blurView = blurView;
     
@@ -122,7 +124,7 @@
     tabBar.enableRippleBehavior = YES;
     tabBar.rippleColor = UIColor.clearColor;
     
-    [blurView.contentView addSubview:tabBar];
+    [self.view addSubview:tabBar];
     self.tabBar = tabBar;
     
     tabBar.translatesAutoresizingMaskIntoConstraints = NO;
@@ -269,7 +271,9 @@
 
 - (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
 {
-    self.blurTopConstraint.constant = fmaxf(-scrollView.contentOffset.y - scrollView.adjustedContentInset.top, 0.f);
+    CGFloat adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top;
+    self.blurTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
+    self.blurView.alpha = fmax(0.f, fminf(1.f, adjustedOffset / LayoutBlurActivationDistance));
 }
 
 #pragma mark SRGAnalyticsContainerViewTracking protocol

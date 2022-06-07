@@ -346,10 +346,7 @@
 {
     CGFloat adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top;
     self.calendarTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
-    
-    // Enable the blur over a short distance
-    static const CGFloat kBlurActivationDistance = 10.f;
-    self.blurView.alpha = fmax(0.f, fminf(1.f, adjustedOffset / kBlurActivationDistance));
+    self.blurView.alpha = fmax(0.f, fminf(1.f, adjustedOffset / LayoutBlurActivationDistance));
 }
 
 #pragma mark ScrollableContentContainer protocol
