@@ -129,14 +129,16 @@ private extension HighlightCell {
 // MARK: Size
 
 enum HighlightCellSize {
+    fileprivate static let aspectRatio: CGFloat = 16 / 9
+
     static func fullWidth(for highlight: Highlight?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         if let title = highlight?.title, !title.isEmpty {
-#if os(tvOS)
-            let height: CGFloat = 700
-#else
-            let height: CGFloat = (horizontalSizeClass == .compact) ? 300 : 400
-#endif
-            return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+            if horizontalSizeClass == .compact {
+                return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 0)
+            }
+            else {
+                return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
+            }
         }
         else {
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(LayoutHeaderHeightZero))
