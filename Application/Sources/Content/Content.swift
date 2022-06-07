@@ -332,6 +332,8 @@ private extension Content {
                 }
             case .livestreams:
                 return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .highlight:
+                return (rowHighlight != nil) ? [] : (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             default:
                 return []
             }
