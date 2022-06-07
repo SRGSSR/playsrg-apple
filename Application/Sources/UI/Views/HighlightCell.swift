@@ -68,7 +68,7 @@ struct HighlightCell: View {
             GeometryReader { geometry in
                 if isCompact {
                     ZStack(alignment: .bottom) {
-                        ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                        ImageView(source: imageUrl, contentMode: .aspectFillRight)
                         LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
                         Text(highlight.title)
                             .srgFont(.H2)
@@ -80,7 +80,7 @@ struct HighlightCell: View {
                 }
                 else {
                     ZStack(alignment: .leading) {
-                        ImageView(source: imageUrl, contentMode: .aspectFillTop)
+                        ImageView(source: imageUrl, contentMode: .aspectFill)
                         LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
                         DescriptionView(highlight: highlight)
                             .padding(.horizontal, 60)
