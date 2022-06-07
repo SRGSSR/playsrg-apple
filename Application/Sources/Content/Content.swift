@@ -309,8 +309,7 @@ private extension Content {
         }
         
         var rowHighlight: Highlight? {
-            guard presentation.type == .highlight, let title = title else { return nil }
-            return Highlight(title: title, summary: summary, image: image)
+            return Highlight(from: contentSection)
         }
         
         var placeholderRowItems: [Content.Item] {
