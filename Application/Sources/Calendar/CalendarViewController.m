@@ -30,6 +30,7 @@
 @property (nonatomic) UIPageViewController *pageViewController;
 
 @property (nonatomic, weak) Calendar *calendar;
+@property (nonatomic, weak) UIVisualEffectView *blurView;
 
 @property (nonatomic, weak) NSLayoutConstraint *calendarHeightConstraint;
 @property (nonatomic, weak) NSLayoutConstraint *calendarTopConstraint;
@@ -111,7 +112,9 @@
     ]];
     
     UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
+    blurView.alpha = 0.f;
     [self.view insertSubview:blurView belowSubview:calendar];
+    self.blurView = blurView;
     
     blurView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
@@ -341,7 +344,12 @@
 
 - (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
 {
-    self.calendarTopConstraint.constant = fmaxf(-scrollView.contentOffset.y - scrollView.adjustedContentInset.top, 0.f);
+    CGFloat adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top;
+    self.calendarTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
+    
+    // Enable the blur over a short distance
+    static const CGFloat kBlurActivationDistance = 10.f;
+    self.blurView.alpha = fmax(0.f, fminf(1.f, adjustedOffset / kBlurActivationDistance));
 }
 
 #pragma mark ScrollableContentContainer protocol
