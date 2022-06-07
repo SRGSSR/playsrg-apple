@@ -309,6 +309,7 @@ private extension Content {
         }
         
         var rowHighlight: Highlight? {
+            guard presentation.type == .highlight else { return nil }
             return Highlight(from: contentSection)
         }
         
