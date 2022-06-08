@@ -155,10 +155,18 @@ struct MediaDescription {
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                return BadgeProperties(
-                    text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                    color: .play_green
-                )
+                if let startDate = media.startDate {
+                    return BadgeProperties(
+                        text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
+                        color: .play_green
+                    )
+                }
+                else {
+                    return BadgeProperties(
+                        text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
+                        color: .play_green
+                    )
+                }
             case .notAvailableAnymore:
                 return BadgeProperties(
                     text: NSLocalizedString("Expired", comment: "Short label identifying content which has expired."),
