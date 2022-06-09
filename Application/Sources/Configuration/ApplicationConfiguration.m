@@ -421,6 +421,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return playURL;
 }
 
+- (NSArray<RadioChannel *> *)radioHomepageChannels
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(RadioChannel.new, hasHomepage)];
+    return [self.radioChannels filteredArrayUsingPredicate:predicate];
+}
+
 #pragma mark Helpers
 
 - (RadioChannel *)radioChannelForUid:(NSString *)uid
