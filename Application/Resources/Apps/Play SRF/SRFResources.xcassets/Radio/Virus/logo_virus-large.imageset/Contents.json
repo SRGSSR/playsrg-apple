@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "SRF_radioVirus.pdf",
+      "filename" : "RadioSRFVirus_32.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "SRF_radioVirus-1.pdf",
+      "filename" : "RadioSRFVirus_32-1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "SRF_radioVirus-2.pdf",
+      "filename" : "RadioSRFVirus_32-2.pdf",
       "idiom" : "car"
     },
     {
-      "filename" : "logosradio_virus_60.pdf",
+      "filename" : "RadioSRFVirus_60.pdf",
       "idiom" : "tv"
     }
   ],
