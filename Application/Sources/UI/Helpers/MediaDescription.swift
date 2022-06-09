@@ -155,8 +155,7 @@ struct MediaDescription {
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                guard allowsDateDisplay else { return nil }
-                if let startDate = media.startDate {
+                if allowsDateDisplay, let startDate = media.startDate {
                     return BadgeProperties(
                         text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
                         color: .play_green
