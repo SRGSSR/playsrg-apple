@@ -439,6 +439,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return [radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
 }
 
+- (RadioChannel *)radioHomepageChannelForUid:(NSString *)uid
+{
+    if (! uid) {
+        return nil;
+    }
+    
+    return [self.radioHomepageChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
+}
+
 - (TVChannel *)tvChannelForUid:(NSString *)uid
 {
     if (! uid) {

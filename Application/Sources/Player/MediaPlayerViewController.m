@@ -1373,7 +1373,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)updateRadioHomeButton
 {
     NSString *channelUid = [self channelUid];
-    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioHomepageChannelForUid:channelUid];
     
     self.radioHomeView.hidden = (radioChannel == nil);
     self.radioHomeButtonImageView.image = RadioChannelLogoImage(radioChannel);
