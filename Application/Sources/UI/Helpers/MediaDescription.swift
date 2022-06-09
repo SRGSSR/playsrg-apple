@@ -143,7 +143,7 @@ struct MediaDescription {
         }
     }
     
-    static func availabilityBadgeProperties(for media: SRGMedia) -> BadgeProperties? {
+    static func availabilityBadgeProperties(for media: SRGMedia, allowsDateDisplay: Bool = true) -> BadgeProperties? {
         if media.contentType == .livestream {
             return BadgeProperties(
                 text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
@@ -155,10 +155,18 @@ struct MediaDescription {
             let availability = media.timeAvailability(at: now)
             switch availability {
             case .notYetAvailable:
-                return BadgeProperties(
-                    text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
-                    color: .play_green
-                )
+                if allowsDateDisplay, let startDate = media.startDate {
+                    return BadgeProperties(
+                        text: DateFormatter.play_relativeShortDateAndTime.string(from: startDate),
+                        color: .play_green
+                    )
+                }
+                else {
+                    return BadgeProperties(
+                        text: NSLocalizedString("Soon", comment: "Short label identifying content which will be available soon."),
+                        color: .play_green
+                    )
+                }
             case .notAvailableAnymore:
                 return BadgeProperties(
                     text: NSLocalizedString("Expired", comment: "Short label identifying content which has expired."),

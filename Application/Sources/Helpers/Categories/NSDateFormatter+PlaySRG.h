@@ -63,6 +63,14 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateFormatter;
 
 /**
+ *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
+ *  the date in a short format and time in a short format.
+ *
+ *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
+ */
+@property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateAndTimeFormatter;
+
+/**
  *  Formatter for URL date options.
  */
 + (NSDateFormatter *)play_URLOptionDateFormatter;
