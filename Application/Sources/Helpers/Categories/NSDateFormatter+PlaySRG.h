@@ -64,7 +64,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  Relative date formatting, i.e. displays today / yesterday / tomorrow / ... for dates near today, otherwise
- *  the date in a short format, and time in a short format.
+ *  the date in a short format and time in a short format.
  *
  *  @discussion Use `PlayAccessibilityRelativeDateFromDate` for accessibility-oriented formatting.
  */

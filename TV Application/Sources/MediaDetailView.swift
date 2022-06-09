@@ -91,7 +91,7 @@ struct MediaDetailView: View {
         
         private var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
             guard let media = model.media else { return nil }
-            return MediaDescription.availabilityBadgeProperties(for: media)
+            return MediaDescription.availabilityBadgeProperties(for: media, allowsDateDisplay: false)
         }
         
         var body: some View {
