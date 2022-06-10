@@ -5,6 +5,7 @@
 //
 
 import Combine
+import SRGAnalytics
 import SRGAppearanceSwift
 import SRGDataProviderModel
 import SwiftUI
@@ -346,6 +347,37 @@ extension SearchViewController2: SearchSettingsViewControllerDelegate {
 
 extension SearchViewController2: UICollectionViewDelegate {
 #if os(iOS)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let snapshot = dataSource.snapshot()
+        let section = snapshot.sectionIdentifiers[indexPath.section]
+        let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
+        switch item {
+        case let .media(media):
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.value = media.urn
+            labels.type = AnalyticsType.actionPlayMedia.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchOpen.rawValue, labels: labels)
+        case let .show(show):
+            guard let navigationController = navigationController else { return }
+            
+            let showViewController = SectionViewController.showViewController(for: show)
+            navigationController.pushViewController(showViewController, animated: true)
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.value = show.urn
+            labels.type = AnalyticsType.actionDisplayShow.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchTeaserOpen.rawValue, labels: labels)
+            
+            SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
+                .sink { _ in } receiveValue: { _ in }
+                .store(in: &cancellables)
+        case .loading:
+            break
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, contextMenuConfigurationForItemAt indexPath: IndexPath, point: CGPoint) -> UIContextMenuConfiguration? {
         let snapshot = dataSource.snapshot()
         let section = snapshot.sectionIdentifiers[indexPath.section]
