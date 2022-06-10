@@ -292,11 +292,13 @@ extension SearchViewController2 {
 
 // MARK: Protocols
 
+#if os(iOS)
 extension SearchViewController2: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
         model.settings = settings
     }
 }
+#endif
 
 extension SearchViewController2: UICollectionViewDelegate {
 #if os(iOS)
