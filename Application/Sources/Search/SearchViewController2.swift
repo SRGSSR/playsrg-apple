@@ -347,6 +347,16 @@ extension SearchViewController2: ContentInsets {
     }
 }
 
+extension SearchViewController2: SRGAnalyticsViewTracking {
+    var srg_pageViewTitle: String {
+        return AnalyticsPageTitle.home.rawValue
+    }
+    
+    var srg_pageViewLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
+    }
+}
+
 #if os(iOS)
 extension SearchViewController2: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
