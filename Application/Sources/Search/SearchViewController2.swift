@@ -337,6 +337,16 @@ extension SearchViewController2 {
 
 // MARK: Protocols
 
+extension SearchViewController2: ContentInsets {
+    var play_contentScrollViews: [UIScrollView]? {
+        return collectionView != nil ? [collectionView] : nil
+    }
+    
+    var play_paddingContentInsets: UIEdgeInsets {
+        return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+    }
+}
+
 #if os(iOS)
 extension SearchViewController2: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
