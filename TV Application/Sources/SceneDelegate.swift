@@ -62,7 +62,7 @@ final class SceneDelegate: UIResponder {
         let configuration = ApplicationConfiguration.shared
         
         #if DEBUG
-        if let firstChannel = configuration.radioChannels.first {
+        if let firstChannel = configuration.radioHomepageChannels.first {
             let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
