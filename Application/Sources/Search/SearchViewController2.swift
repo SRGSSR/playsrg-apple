@@ -23,8 +23,14 @@ final class SearchViewController2: UIViewController {
     private weak var emptyView: HostView<EmptyView>!
     
 #if os(iOS)
+    private weak var filtersBarButtonItem: UIBarButtonItem?
     private weak var refreshControl: UIRefreshControl!
+    
     private var refreshTriggered = false
+    
+    private var searchController: UISearchController? {
+        return navigationItem.searchController
+    }
 #endif
     
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
@@ -51,7 +57,7 @@ final class SearchViewController2: UIViewController {
     
     override func loadView() {
         let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .clear
+        view.backgroundColor = .srgGray16
         
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
@@ -76,23 +82,6 @@ final class SearchViewController2: UIViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
-        
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.showsSearchResultsController = true
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchResultsUpdater = self
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
-        
-        let searchBar = searchController.searchBar
-        object_setClass(searchBar, SearchBar.self)
-        
-        searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
-        searchBar.autocapitalizationType = .none
-        searchBar.tintColor = .white
-        
-        definesPresentationContext = true
 #endif
         
         self.view = view
@@ -128,14 +117,118 @@ final class SearchViewController2: UIViewController {
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
+        
+#if os(iOS)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.showsSearchResultsController = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        let searchBar = searchController.searchBar
+        object_setClass(searchBar, SearchBar.self)
+        
+        searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
+        searchBar.autocapitalizationType = .none
+        searchBar.tintColor = .white
+        
+        definesPresentationContext = true
+        
+        model.$query
+            .removeDuplicates()         // Prevent recursive updates
+            .sink { query in
+                searchBar.text = query
+            }
+            .store(in: &cancellables)
+        model.$settings
+            .sink { [weak self] settings in
+                self?.updateSearchSettingsButton(for: settings)
+            }
+            .store(in: &cancellables)
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        model.reload()
 #if os(iOS)
         deselectItems(in: collectionView, animated: animated)
 #endif
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+#if os(iOS)
+        searchController?.searchBar.resignFirstResponder()
+#endif
+    }
+    
+#if os(iOS)
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return Self.play_supportedInterfaceOrientations
+    }
+    
+    private func updateSearchSettingsButton(for settings: SRGMediaSearchSettings) {
+        guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
+            navigationItem.rightBarButtonItem = nil
+            return
+        }
+        
+        if filtersBarButtonItem == nil {
+            let filtersButton = UIButton(type: .custom)
+            filtersButton.addTarget(self, action: #selector(showSettings(_:)), for: .touchUpInside)
+            
+            if let titleLabel = filtersButton.titleLabel {
+                titleLabel.font = SRGFont.font(family: .text, weight: .regular, size: 16)
+                
+                // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
+                // See https://developer.apple.com/forums/thread/125492
+                titleLabel.lineBreakMode = .byClipping
+            }
+            filtersButton.setTitle(NSLocalizedString("Filters", comment: "Filters button title"), for: .normal)
+            filtersButton.setTitleColor(.gray, for: .highlighted)
+            
+            // See https://stackoverflow.com/a/25559946/760435
+            let inset: CGFloat = 2
+            filtersButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -inset, bottom: 0, right: inset)
+            filtersButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: -inset)
+            filtersButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
+            
+            let filtersBarButtonItem = UIBarButtonItem(customView: filtersButton)
+            navigationItem.rightBarButtonItem = filtersBarButtonItem
+            self.filtersBarButtonItem = filtersBarButtonItem
+        }
+        
+        if let filtersButton = filtersBarButtonItem?.customView as? UIButton {
+            let image = !SearchViewModel.areDefaultSettings(settings) ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
+            filtersButton.setImage(image, for: .normal)
+        }
+    }
+    
+    @objc private func showSettings(_ sender: Any) {
+        searchController?.searchBar.resignFirstResponder()
+        
+        let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
+        settingsViewController.delegate = self
+        
+        let backgroundColor: UIColor? = UIDevice.current.userInterfaceIdiom == .pad ? .play_popoverGrayBackground : nil
+        let navigationController = NavigationController(rootViewController: settingsViewController,
+                                                        tintColor: .white,
+                                                        backgroundColor: backgroundColor,
+                                                        statusBarStyle: .lightContent)
+        navigationController.modalPresentationStyle = .popover
+        
+        if let popoverPresentationController = navigationController.popoverPresentationController {
+            popoverPresentationController.backgroundColor = .play_popoverGrayBackground
+            popoverPresentationController.permittedArrowDirections = .any
+            popoverPresentationController.barButtonItem = filtersBarButtonItem
+        }
+        
+        present(navigationController, animated: true)
+    }
+#endif
     
     private func reloadData(for state: SearchViewModel.State) {
         switch state {
@@ -193,6 +286,12 @@ extension SearchViewController2 {
 }
 
 // MARK: Protocols
+
+extension SearchViewController2: SearchSettingsViewControllerDelegate {
+    func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
+        model.settings = settings
+    }
+}
 
 extension SearchViewController2: UICollectionViewDelegate {
 #if os(iOS)
