@@ -27,11 +27,8 @@ final class SearchViewController2: UIViewController {
     private weak var refreshControl: UIRefreshControl!
     
     private var refreshTriggered = false
-    
-    private var searchController: UISearchController? {
-        return navigationItem.searchController
-    }
 #endif
+    private weak var searchController: UISearchController!
     
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     
@@ -118,7 +115,25 @@ final class SearchViewController2: UIViewController {
             }
             .store(in: &cancellables)
         
-#if os(iOS)
+#if os(tvOS)
+        precondition(searchController != nil, "The search controller must be assigned right after view controller creation on tvOS")
+        model.$state
+            .sink { [weak self] state in
+                guard let self = self else { return }
+                if case let .loaded(rows: _, suggestions: suggestions) = state {
+                    if let suggestions = suggestions {
+                        self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
+                    }
+                    else {
+                        self.searchController.searchSuggestions = nil
+                    }
+                }
+                else {
+                    self.searchController.searchSuggestions = nil
+                }
+            }
+            .store(in: &cancellables)
+#else
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
         searchController.hidesNavigationBarDuringPresentation = false
@@ -126,6 +141,7 @@ final class SearchViewController2: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        self.searchController = searchController
         
         let searchBar = searchController.searchBar
         object_setClass(searchBar, SearchBar.self)
@@ -169,7 +185,7 @@ final class SearchViewController2: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 #if os(iOS)
-        searchController?.searchBar.resignFirstResponder()
+        searchController.searchBar.resignFirstResponder()
 #endif
     }
     
@@ -216,11 +232,11 @@ final class SearchViewController2: UIViewController {
     }
     
     @objc private func closeKeyboard(_ sender: Any) {
-        searchController?.searchBar.resignFirstResponder()
+        searchController.searchBar.resignFirstResponder()
     }
     
     @objc private func showSettings(_ sender: Any) {
-        searchController?.searchBar.resignFirstResponder()
+        searchController.searchBar.resignFirstResponder()
         
         let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
         settingsViewController.delegate = self
@@ -289,6 +305,7 @@ extension SearchViewController2 {
 #if os(tvOS)
         let searchViewController = SearchViewController2()
         let searchController = UISearchController(searchResultsController: searchViewController)
+        searchViewController.searchController = searchController
         searchController.searchResultsUpdater = searchViewController
         return UISearchContainerViewController(searchController: searchController)
 #else
@@ -308,7 +325,7 @@ extension SearchViewController2 {
     }
     
     @objc private func search(_ commmand: UIKeyCommand) {
-        searchController?.searchBar.becomeFirstResponder()
+        searchController.searchBar.becomeFirstResponder()
     }
     
     override var keyCommands: [UIKeyCommand]? {
