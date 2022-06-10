@@ -133,6 +133,7 @@ final class SearchViewController2: UIViewController {
         searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
+        searchBar.delegate = self
         
         definesPresentationContext = true
         
@@ -205,6 +206,10 @@ final class SearchViewController2: UIViewController {
             let image = !SearchViewModel.areDefaultSettings(settings) ? UIImage(named: "filter_on") : UIImage(named: "filter_off")
             filtersButton.setImage(image, for: .normal)
         }
+    }
+    
+    @objc private func closeKeyboard(_ sender: Any) {
+        searchController?.searchBar.resignFirstResponder()
     }
     
     @objc private func showSettings(_ sender: Any) {
@@ -336,6 +341,23 @@ extension SearchViewController2: UICollectionViewDelegate {
     }
 #endif
 }
+
+#if os(iOS)
+extension SearchViewController2: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: NSLocalizedString("Cancel", comment: "Title of a cancel button"),
+            style: .plain,
+            target: self,
+            action: #selector(closeKeyboard(_:))
+        )
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        navigationItem.leftBarButtonItem = nil
+    }
+}
+#endif
 
 extension SearchViewController2: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
