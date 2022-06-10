@@ -182,6 +182,14 @@ final class SearchViewController2: UIViewController {
 #endif
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+#if os(iOS)
+        // Dismiss to avoid retain cycle if the search was entered once, see https://stackoverflow.com/a/33619501/760435
+        searchController?.dismiss(animated: false, completion: nil)
+#endif
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 #if os(iOS)
