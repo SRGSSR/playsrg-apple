@@ -91,6 +91,8 @@ final class SearchViewController2: UIViewController {
         searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
+        
+        definesPresentationContext = true
 #endif
         
         self.view = view
