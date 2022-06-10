@@ -354,7 +354,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
                                                                      tag:TabBarItemIdentifierSearch];
     searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
  
-    UIViewController *searchViewController = [SearchViewController2 viewController];
+    UIViewController *searchViewController = [SearchViewController viewController];
     NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
     searchNavigationController.tabBarItem = searchTabBarItem;
     return searchNavigationController;
