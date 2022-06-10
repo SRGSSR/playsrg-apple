@@ -29,7 +29,7 @@ final class SearchViewController2: UIViewController {
     
     private var refreshTriggered = false
 #endif
-    private weak var searchController: UISearchController!
+    private weak var searchController: UISearchController?
     
     private static let itemSpacing: CGFloat = constant(iOS: 8, tvOS: 40)
     
@@ -117,20 +117,19 @@ final class SearchViewController2: UIViewController {
             .store(in: &cancellables)
         
 #if os(tvOS)
-        precondition(searchController != nil, "The search controller must be assigned right after view controller creation on tvOS")
         model.$state
             .sink { [weak self] state in
-                guard let self = self else { return }
+                guard let self = self, let searchController = self.searchController else { return }
                 if case let .loaded(rows: _, suggestions: suggestions) = state {
                     if let suggestions = suggestions {
-                        self.searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
+                        searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
                     }
                     else {
-                        self.searchController.searchSuggestions = nil
+                        searchController.searchSuggestions = nil
                     }
                 }
                 else {
-                    self.searchController.searchSuggestions = nil
+                    searchController.searchSuggestions = nil
                 }
             }
             .store(in: &cancellables)
@@ -186,7 +185,7 @@ final class SearchViewController2: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 #if os(iOS)
-        searchController.searchBar.resignFirstResponder()
+        searchController?.searchBar.resignFirstResponder()
 #endif
     }
     
@@ -233,11 +232,11 @@ final class SearchViewController2: UIViewController {
     }
     
     @objc private func closeKeyboard(_ sender: Any) {
-        searchController.searchBar.resignFirstResponder()
+        searchController?.searchBar.resignFirstResponder()
     }
     
     @objc private func showSettings(_ sender: Any) {
-        searchController.searchBar.resignFirstResponder()
+        searchController?.searchBar.resignFirstResponder()
         
         let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
         settingsViewController.delegate = self
@@ -326,7 +325,7 @@ extension SearchViewController2 {
     }
     
     @objc private func search(_ commmand: UIKeyCommand) {
-        searchController.searchBar.becomeFirstResponder()
+        searchController?.searchBar.becomeFirstResponder()
     }
     
     override var keyCommands: [UIKeyCommand]? {
@@ -358,6 +357,23 @@ extension SearchViewController2: SRGAnalyticsViewTracking {
 }
 
 #if os(iOS)
+extension SearchViewController2: PlayApplicationNavigation {
+    func open(_ applicationSectionInfo: ApplicationSectionInfo) -> Bool {
+        guard applicationSectionInfo.applicationSection == .search else { return false }
+        
+        model.query = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchQueryKey] as? String ?? ""
+        
+        let settings = SRGMediaSearchSettings()
+        if let mediaType = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchMediaTypeOptionKey] as? Int {
+            settings.mediaType = SRGMediaType(rawValue: mediaType) ?? .none
+        }
+        model.settings = settings
+        
+        searchController?.searchBar.resignFirstResponder()
+        return true
+    }
+}
+
 extension SearchViewController2: SearchSettingsViewControllerDelegate {
     func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
         model.settings = settings
@@ -483,7 +499,7 @@ extension SearchViewController2: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
 #if os(iOS)
         if scrollView.isDragging && !scrollView.isDecelerating {
-            searchController.searchBar.resignFirstResponder()
+            searchController?.searchBar.resignFirstResponder()
         }
 #endif
         
