@@ -213,7 +213,7 @@ private extension CarPlayList {
     }
     
     static func mostPopular(interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        let radioChannels = ApplicationConfiguration.shared.radioChannels
+        let radioChannels = ApplicationConfiguration.shared.radioHomepageChannels
         if radioChannels.count == 1, let radioChannel = radioChannels.first {
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
                 .mapToSections(with: interfaceController)

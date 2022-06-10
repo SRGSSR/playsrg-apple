@@ -305,7 +305,7 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
     
-    NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioChannels;
+    NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioHomepageChannels;
     if (radioChannels.count > 1) {
         UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
         

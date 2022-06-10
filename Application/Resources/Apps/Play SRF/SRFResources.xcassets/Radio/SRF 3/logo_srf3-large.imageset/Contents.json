@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "SRF_radio3.pdf",
+      "filename" : "RadioSRF3_32.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "SRF_radio3-1.pdf",
+      "filename" : "RadioSRF3_32-1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "SRF_radio3-2.pdf",
+      "filename" : "RadioSRF3_32-2.pdf",
       "idiom" : "car"
     },
     {
-      "filename" : "logosradio_srf3_60.pdf",
+      "filename" : "RadioSRF3_60.pdf",
       "idiom" : "tv"
     }
   ],

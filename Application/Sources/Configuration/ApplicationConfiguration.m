@@ -421,6 +421,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return playURL;
 }
 
+- (NSArray<RadioChannel *> *)radioHomepageChannels
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(RadioChannel.new, hasHomepage)];
+    return [self.radioChannels filteredArrayUsingPredicate:predicate];
+}
+
 #pragma mark Helpers
 
 - (RadioChannel *)radioChannelForUid:(NSString *)uid
@@ -431,6 +437,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSArray<RadioChannel *> *radioChannels = [self.radioChannels arrayByAddingObjectsFromArray:self.satelliteRadioChannels];
     return [radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
+}
+
+- (RadioChannel *)radioHomepageChannelForUid:(NSString *)uid
+{
+    if (! uid) {
+        return nil;
+    }
+    
+    return [self.radioHomepageChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
 }
 
 - (TVChannel *)tvChannelForUid:(NSString *)uid

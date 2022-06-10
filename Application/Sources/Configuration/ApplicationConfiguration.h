@@ -70,6 +70,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSInteger minimumSocialViewCount;                       // minimum value to display social view count
 
 @property (nonatomic, readonly) NSArray<RadioChannel *> *radioChannels;
+@property (nonatomic, readonly) NSArray<RadioChannel *> *radioHomepageChannels;         // radio channels having a corresponding homepage
 @property (nonatomic, readonly) NSArray<TVChannel *> *tvChannels;
 @property (nonatomic, readonly) NSArray<RadioChannel *> *satelliteRadioChannels;
 
@@ -93,6 +94,7 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 - (nullable RadioChannel *)radioChannelForUid:(nullable NSString *)uid;
+- (nullable RadioChannel *)radioHomepageChannelForUid:(nullable NSString *)uid;         // only returns a result if the radio channel exists and has a corresponding homepage
 - (nullable TVChannel *)tvChannelForUid:(nullable NSString *)uid;
 - (nullable __kindof Channel *)channelForUid:(nullable NSString *)uid;
 

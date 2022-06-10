@@ -13,8 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @interface RadioChannel : Channel
 
+/**
+ *  Create a radio channel.
+ */
 - (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary
                         defaultHomeSections:(nullable NSArray<NSNumber *> *)defaultHomeSections NS_DESIGNATED_INITIALIZER;
+
+/**
+ *  `YES` iff a homepage can be displayed for the radio channel.
+ */
+@property (nonatomic, readonly) BOOL hasHomepage;
 
 /**
  *  The home sections ordered list.
