@@ -471,6 +471,12 @@ extension SearchViewController2: UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+#if os(iOS)
+        if scrollView.isDragging && !scrollView.isDecelerating {
+            searchController.searchBar.resignFirstResponder()
+        }
+#endif
+        
         if scrollView.contentSize.height > 0 {
             let numberOfScreens = 4
             if scrollView.contentOffset.y > scrollView.contentSize.height - CGFloat(numberOfScreens) * scrollView.frame.height {
