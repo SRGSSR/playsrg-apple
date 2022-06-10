@@ -353,6 +353,12 @@ extension SearchViewController2: SearchSettingsViewControllerDelegate {
         model.settings = settings
     }
 }
+
+extension SearchViewController2: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView.play_scrollToTop(animated: animated)
+    }
+}
 #endif
 
 extension SearchViewController2: UICollectionViewDelegate {
