@@ -159,6 +159,13 @@ final class SearchViewController2: UIViewController {
 #endif
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+#if os(tvOS)
+        tabBarObservedScrollView = collectionView
+#endif
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 #if os(iOS)
