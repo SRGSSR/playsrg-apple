@@ -76,6 +76,21 @@ final class SearchViewController2: UIViewController {
         refreshControl.addTarget(self, action: #selector(pullToRefresh), for: .valueChanged)
         collectionView.insertSubview(refreshControl, at: 0)
         self.refreshControl = refreshControl
+        
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.showsSearchResultsController = true
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchResultsUpdater = self
+        
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        
+        let searchBar = searchController.searchBar
+        object_setClass(searchBar, SearchBar.self)
+        
+        searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
+        searchBar.autocapitalizationType = .none
+        searchBar.tintColor = .white
 #endif
         
         self.view = view
@@ -160,6 +175,21 @@ final class SearchViewController2: UIViewController {
 #endif
 }
 
+// MARK: Instantiation
+
+extension SearchViewController2 {
+    @objc static func viewController() -> UIViewController {
+#if os(tvOS)
+        let searchViewController = SearchViewController2()
+        let searchController = UISearchController(searchResultsController: searchViewController)
+        searchController.searchResultsUpdater = searchViewController
+        return UISearchContainerViewController(searchController: searchController)
+#else
+        return SearchViewController2()
+#endif
+    }
+}
+
 // MARK: Protocols
 
 extension SearchViewController2: UICollectionViewDelegate {
@@ -204,6 +234,12 @@ extension SearchViewController2: UICollectionViewDelegate {
         return false
     }
 #endif
+}
+
+extension SearchViewController2: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        model.query = searchController.searchBar.text ?? ""
+    }
 }
 
 extension SearchViewController2: UIScrollViewDelegate {

@@ -91,7 +91,7 @@ final class SceneDelegate: UIResponder {
             viewControllers.append(showsViewController)
         }
         
-        let searchViewController = SearchViewController2()
+        let searchViewController = SearchViewController2.viewController()
         searchViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: "Search tab title"), image: nil, tag: 5)
         searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
