@@ -139,8 +139,8 @@ class HostTableViewCell<Content: View>: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.tintColor = .red
-        self.backgroundColor = .clear
+        tintColor = .red
+        backgroundColor = .clear
         
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = .clear
