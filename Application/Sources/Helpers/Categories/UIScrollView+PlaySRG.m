@@ -8,7 +8,7 @@
 
 #import "UIView+PlaySRG.h"
 
-static const CGFloat kSearchBarHeightContribution = 44.f;
+static const CGFloat kSearchBarHeightContribution = 52.f;
 static const CGFloat kLargeNavigationBarHeightContribution = 52.f;
 
 @implementation UIScrollView (PlaySRG)
