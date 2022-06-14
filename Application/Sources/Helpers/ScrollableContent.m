@@ -48,23 +48,23 @@ static UIScrollView *ScrollableViewInViewController(UIViewController *viewContro
 
 static void UpdateContentViewForViewController(UIViewController *viewController)
 {
+    UIScrollView *scrollableView = ScrollableViewInViewController(viewController);
     if (@available(iOS 15, tvOS 15, *)) {
-        UIScrollView *scrollableView = ScrollableViewInViewController(viewController);
         [viewController setContentScrollView:scrollableView forEdge:NSDirectionalRectEdgeAll];
-        
-        id<MAKVOObservation> previousContentOffsetObservation = objc_getAssociatedObject(viewController, s_contentOffsetRegistrationKey);
-        [previousContentOffsetObservation remove];
-        
-        if ([viewController conformsToProtocol:@protocol(ScrollableContentContainer)]) {
-            UIViewController<ScrollableContentContainer> *containerViewController = (UIViewController<ScrollableContentContainer> *)viewController;
-            if ([containerViewController respondsToSelector:@selector(play_contentOffsetDidChangeInScrollableView:)]) {
-                @weakify(containerViewController) @weakify(scrollableView)
-                id<MAKVOObservation> contentOffsetObservation = [scrollableView addObserver:viewController keyPath:@keypath(scrollableView.contentOffset) options:NSKeyValueObservingOptionInitial block:^(MAKVONotification *notification) {
-                    @strongify(containerViewController) @strongify(scrollableView)
-                    [containerViewController play_contentOffsetDidChangeInScrollableView:scrollableView];
-                }];
-                objc_setAssociatedObject(viewController, s_contentOffsetRegistrationKey, contentOffsetObservation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-            }
+    }
+    
+    id<MAKVOObservation> previousContentOffsetObservation = objc_getAssociatedObject(viewController, s_contentOffsetRegistrationKey);
+    [previousContentOffsetObservation remove];
+    
+    if ([viewController conformsToProtocol:@protocol(ScrollableContentContainer)]) {
+        UIViewController<ScrollableContentContainer> *containerViewController = (UIViewController<ScrollableContentContainer> *)viewController;
+        if ([containerViewController respondsToSelector:@selector(play_contentOffsetDidChangeInScrollableView:)]) {
+            @weakify(containerViewController) @weakify(scrollableView)
+            id<MAKVOObservation> contentOffsetObservation = [scrollableView addObserver:viewController keyPath:@keypath(scrollableView.contentOffset) options:NSKeyValueObservingOptionInitial block:^(MAKVONotification *notification) {
+                @strongify(containerViewController) @strongify(scrollableView)
+                [containerViewController play_contentOffsetDidChangeInScrollableView:scrollableView];
+            }];
+            objc_setAssociatedObject(viewController, s_contentOffsetRegistrationKey, contentOffsetObservation, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         }
     }
 }
