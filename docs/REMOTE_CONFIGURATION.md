@@ -65,6 +65,10 @@ The keys common to both TV and radio channels JSON dictionaries are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
 
+The radio channel JSON dictionaries have one more key:
+
+* `hasHomepage` (optional, boolean): Set to `true` if the radio channel has an audio homepage available. If omitted, `false`.
+
 ## Audio homepage
 
 `audioHomeSections` (optional, string, multiple): The sections to be displayed on the audio homepage of a radio channel, in the order they must appear.
