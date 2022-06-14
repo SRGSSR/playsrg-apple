@@ -8,13 +8,15 @@
 
 #import "UIView+PlaySRG.h"
 
+static const CGFloat kLargeNavigationBarHeightContribution = 52.f;
+
 @implementation UIScrollView (PlaySRG)
 
-- (BOOL)play_canDisplayLargeTitle
+- (BOOL)play_canExpandToLargeNavigation
 {
     UIViewController *nearestViewController = self.play_nearestViewController;
     UINavigationBar *navigationBar = nearestViewController.navigationController.navigationBar;
-    return (navigationBar && ! navigationBar.hidden && navigationBar.prefersLargeTitles
+    return (navigationBar && ! navigationBar.hidden && navigationBar.prefersLargeTitles && CGRectGetHeight(navigationBar.frame) < kLargeNavigationBarHeightContribution
             && nearestViewController.navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
 }
 
@@ -25,13 +27,13 @@
     // Scroll view not covered by bars and requiring no adjustment. To reveal a large title it suffices to scroll just a tiny
     // bit before the top content offset (1 px is enough)
     if (topAdjustedContentInset == 0.f) {
-        CGFloat navigationBarOffset = [self play_canDisplayLargeTitle] ? 1.f : 0.f;
+        CGFloat navigationBarOffset = [self play_canExpandToLargeNavigation] ? 1.f : 0.f;
         [self setContentOffset:CGPointMake(self.contentOffset.x, -topAdjustedContentInset - navigationBarOffset) animated:animated];
     }
     // Scroll view covered by bars. To reveal a large title we must scroll before the top content offset, with a distance
     // equal to the (undocumented) large title added height (52 px, see https://ivomynttinen.com/blog/ios-design-guidelines)
     else if (self.contentOffset.y > -topAdjustedContentInset) {
-        CGFloat navigationBarOffset = [self play_canDisplayLargeTitle] ? 52.f : 0.f;
+        CGFloat navigationBarOffset = [self play_canExpandToLargeNavigation] ? kLargeNavigationBarHeightContribution : 0.f;
         [self setContentOffset:CGPointMake(self.contentOffset.x, -topAdjustedContentInset - navigationBarOffset) animated:animated];
     }
 }
