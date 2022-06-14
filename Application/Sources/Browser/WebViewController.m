@@ -86,7 +86,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [webView.topAnchor constraintEqualToAnchor:self.view.topAnchor],
+        [webView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
         [webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
         [webView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
         [webView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor]
