@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MiniPlayerView : UIView
 
+@property (nonatomic) CGFloat blurOpacity;
 @property (nonatomic, readonly, getter=isActive) BOOL active;
 
 @end
