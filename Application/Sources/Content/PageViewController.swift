@@ -502,8 +502,7 @@ extension PageViewController: SectionHeaderViewAction {
 
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        guard let collectionView = collectionView else { return }
-        collectionView.play_scrollToTop(animated: animated)
+        collectionView?.play_scrollToTop(animated: animated)
     }
 }
 

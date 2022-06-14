@@ -401,7 +401,7 @@ extension SearchViewController: SearchSettingsViewControllerDelegate {
 
 extension SearchViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        collectionView.play_scrollToTop(animated: animated)
+        collectionView?.play_scrollToTop(animated: animated)
     }
 }
 #endif

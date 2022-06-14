@@ -615,8 +615,7 @@ extension SectionViewController: SectionShowHeaderViewAction {
 #if os(iOS)
 extension SectionViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        guard let collectionView = collectionView else { return }
-        collectionView.play_scrollToTop(animated: animated)
+        collectionView?.play_scrollToTop(animated: animated)
     }
 }
 #endif
