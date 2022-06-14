@@ -126,7 +126,9 @@
     appearance.doneButtonAppearance = doneButtonAppearance;
     
     UINavigationBar *navigationBar = self.navigationBar;
-    navigationBar.prefersLargeTitles = YES;
+    if (@available(iOS 15, *)) {
+        navigationBar.prefersLargeTitles = YES;
+    }
     navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
     navigationBar.standardAppearance = appearance;
     navigationBar.compactAppearance = appearance;
