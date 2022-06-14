@@ -8,6 +8,16 @@
 
 @implementation SplitViewController
 
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.delegate = self;
+    }
+    return self;
+}
+
 #pragma mark Rotation
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -72,6 +82,13 @@
     }
 }
 
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.viewControllers.lastObject;
+}
+
 #pragma mark TabBarActionable protocol
 
 - (void)performActiveTabActionAnimated:(BOOL)animated
@@ -91,6 +108,30 @@
         UIViewController *primaryViewController = self.viewControllers.firstObject;
         performActiveTabAction(primaryViewController);
     }
+}
+
+#pragma mark UISplitViewControllerDelegate protocol
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController showViewController:(UIViewController *)vc sender:(id)sender
+{
+    [self play_setNeedsScrollableViewUpdate];
+    return NO;
+}
+
+- (BOOL)splitViewController:(UISplitViewController *)splitViewController showDetailViewController:(UIViewController *)vc sender:(id)sender
+{
+    [self play_setNeedsScrollableViewUpdate];
+    return NO;
+}
+
+- (void)splitViewControllerDidExpand:(UISplitViewController *)svc
+{
+    [self play_setNeedsScrollableViewUpdate];
+}
+
+- (void)splitViewControllerDidCollapse:(UISplitViewController *)svc
+{
+    [self play_setNeedsScrollableViewUpdate];
 }
 
 @end

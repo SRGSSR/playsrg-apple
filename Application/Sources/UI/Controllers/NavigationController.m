@@ -27,6 +27,7 @@
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
+        self.delegate = self;
         [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
@@ -192,6 +193,13 @@
     }
 }
 
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.topViewController;
+}
+
 #pragma mark TabBarActionable protocol
 
 - (void)performActiveTabActionAnimated:(BOOL)animated
@@ -208,6 +216,13 @@
         // explicitly for all other kinds of embedding as well (e.g. tab bar -> split view -> navigation).
         [self popToRootViewControllerAnimated:animated];
     }
+}
+
+#pragma mark UINavigationControlelrDelegate protocol
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [self play_setNeedsScrollableViewUpdate];
 }
 
 @end

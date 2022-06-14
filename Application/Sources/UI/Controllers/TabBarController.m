@@ -496,6 +496,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return NO;
 }
 
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.selectedViewController;
+}
+
 #pragma mark UITabBarControllerDelegate protocol
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -507,6 +514,11 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         }
     }
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [self play_setNeedsScrollableViewUpdate];
 }
 
 #pragma mark Notifications

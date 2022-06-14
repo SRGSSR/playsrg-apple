@@ -5,6 +5,7 @@
 //
 
 #import "PlayApplicationNavigation.h"
+#import "ScrollableContent.h"
 #import "TabBarActionable.h"
 
 @import UIKit;
@@ -14,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Lightweight split view controller subclass with standard behavior.
  */
-@interface SplitViewController : UISplitViewController <PlayApplicationNavigation, TabBarActionable>
+@interface SplitViewController : UISplitViewController <PlayApplicationNavigation, ScrollableContentContainer, TabBarActionable, UISplitViewControllerDelegate>
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
 
