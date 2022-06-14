@@ -361,6 +361,14 @@
     [self.tableView play_scrollToTopAnimated:animated];
 }
 
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    [scrollView play_scrollToTopAnimated:YES];
+    return NO;
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
