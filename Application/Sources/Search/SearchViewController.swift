@@ -359,6 +359,12 @@ extension SearchViewController: ContentInsets {
     }
 }
 
+extension SearchViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension SearchViewController: SRGAnalyticsViewTracking {
     var srg_pageViewTitle: String {
         return AnalyticsPageTitle.home.rawValue
