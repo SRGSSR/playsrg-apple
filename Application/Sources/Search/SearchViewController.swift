@@ -138,6 +138,7 @@ final class SearchViewController: UIViewController {
         
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
+        searchController.obscuresBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.searchResultsUpdater = self
         
