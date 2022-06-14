@@ -13,14 +13,29 @@ static const CGFloat kLargeNavigationBarHeightContribution = 52.f;
 
 @implementation UIScrollView (PlaySRG)
 
++ (UINavigationController *)play_topmostNavigationControllerFromViewController:(UIViewController *)viewController
+{
+    UINavigationController *navigationController = viewController.navigationController;
+    if (navigationController) {
+        return [self play_topmostNavigationControllerFromViewController:navigationController];
+    }
+    else if ([viewController isKindOfClass:UINavigationController.class]) {
+        return (UINavigationController *)viewController;
+    }
+    else {
+        return nil;
+    }
+}
+
 - (BOOL)play_canExpandToLargeNavigation
 {
     UIViewController *nearestViewController = self.play_nearestViewController;
     UINavigationItem *navigationItem = nearestViewController.navigationItem;
     
     CGFloat collapsedHeight = navigationItem.searchController ? kLargeNavigationBarHeightContribution + kSearchBarHeightContribution : kLargeNavigationBarHeightContribution;
-    UINavigationBar *navigationBar = nearestViewController.navigationController.navigationBar;
-    return (navigationBar && ! navigationBar.hidden && navigationBar.prefersLargeTitles && CGRectGetHeight(navigationBar.frame) <= collapsedHeight
+    UINavigationController *navigationController = [UIScrollView play_topmostNavigationControllerFromViewController:nearestViewController];
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    return (navigationBar && ! navigationController.navigationBarHidden && navigationBar.prefersLargeTitles && CGRectGetHeight(navigationBar.frame) <= collapsedHeight
             && navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
 }
 
