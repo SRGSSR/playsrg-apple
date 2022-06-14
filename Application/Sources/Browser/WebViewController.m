@@ -154,6 +154,13 @@ static void *s_kvoContext = &s_kvoContext;
     }
 }
 
+#pragma mark ScrollableContent protocol
+
+- (UIScrollView *)play_scrollableView
+{
+    return self.webView.scrollView;
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
