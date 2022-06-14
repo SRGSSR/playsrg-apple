@@ -92,6 +92,8 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
+        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+        
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
@@ -242,7 +244,6 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
-        navigationItem.largeTitleDisplayMode = isNavigationBarHidden ? .never : .always
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
     }
     
