@@ -8,6 +8,7 @@
 
 #import "UIView+PlaySRG.h"
 
+static const CGFloat kSearchBarHeightContribution = 44.f;
 static const CGFloat kLargeNavigationBarHeightContribution = 52.f;
 
 @implementation UIScrollView (PlaySRG)
@@ -15,9 +16,12 @@ static const CGFloat kLargeNavigationBarHeightContribution = 52.f;
 - (BOOL)play_canExpandToLargeNavigation
 {
     UIViewController *nearestViewController = self.play_nearestViewController;
+    UINavigationItem *navigationItem = nearestViewController.navigationItem;
+    
+    CGFloat collapsedHeight = navigationItem.searchController ? kLargeNavigationBarHeightContribution + kSearchBarHeightContribution : kLargeNavigationBarHeightContribution;
     UINavigationBar *navigationBar = nearestViewController.navigationController.navigationBar;
-    return (navigationBar && ! navigationBar.hidden && navigationBar.prefersLargeTitles && CGRectGetHeight(navigationBar.frame) < kLargeNavigationBarHeightContribution
-            && nearestViewController.navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
+    return (navigationBar && ! navigationBar.hidden && navigationBar.prefersLargeTitles && CGRectGetHeight(navigationBar.frame) <= collapsedHeight
+            && navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
 }
 
 - (void)play_scrollToTopAnimated:(BOOL)animated
