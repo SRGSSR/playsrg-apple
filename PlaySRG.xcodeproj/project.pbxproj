@@ -2290,15 +2290,10 @@
 		E62459F11D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */; };
 		E64BA3FA1D4A587E002C10D5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BA3F81D4A587E002C10D5 /* WebViewController.m */; };
-		E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E64BA3FC1D4A5887002C10D5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BA3F81D4A587E002C10D5 /* WebViewController.m */; };
 		E64BA3FD1D4A5888002C10D5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BA3F81D4A587E002C10D5 /* WebViewController.m */; };
 		E64BA3FE1D4A5888002C10D5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BA3F81D4A587E002C10D5 /* WebViewController.m */; };
 		E64BA3FF1D4A5888002C10D5 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E64BA3F81D4A587E002C10D5 /* WebViewController.m */; };
-		E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
-		E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
-		E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
-		E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */; };
 		E66BEC1C1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
 		E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */; };
@@ -3250,7 +3245,6 @@
 		E62459ED1D488D0400482BE9 /* SwiftMessagesBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftMessagesBridge.swift; sourceTree = "<group>"; };
 		E64BA3F71D4A587E002C10D5 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		E64BA3F81D4A587E002C10D5 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = WebViewController.storyboard; sourceTree = "<group>"; };
 		E66BEC191DA7FCED00AD4450 /* MediaPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MediaPlayerViewController.h; sourceTree = "<group>"; };
 		E66BEC1A1DA7FCED00AD4450 /* MediaPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MediaPlayerViewController.m; sourceTree = "<group>"; };
 		E66BEC1B1DA7FCED00AD4450 /* MediaPlayerViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MediaPlayerViewController.storyboard; sourceTree = "<group>"; };
@@ -5089,7 +5083,6 @@
 			children = (
 				E64BA3F71D4A587E002C10D5 /* WebViewController.h */,
 				E64BA3F81D4A587E002C10D5 /* WebViewController.m */,
-				E64BA3F91D4A587E002C10D5 /* WebViewController.storyboard */,
 			);
 			path = Browser;
 			sourceTree = "<group>";
@@ -6259,7 +6252,6 @@
 				6FE28773248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6F1938361EFBFEBC0017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6FB89A0B26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
-				E64BA3FB1D4A587E002C10D5 /* WebViewController.storyboard in Resources */,
 				08754F4B201BB01000458F3A /* InfoPlist.strings in Resources */,
 				6F3B0227245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6E9267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
@@ -6303,7 +6295,6 @@
 				6FB89A0C26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				0875851E23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
-				E64BA4001D4A588B002C10D5 /* WebViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F93DE1420AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
@@ -6343,7 +6334,6 @@
 				6F93DE1520AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6F2961FE2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6FB89A0D26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
-				E64BA4031D4A5891002C10D5 /* WebViewController.storyboard in Resources */,
 				6F1938341EFBFEA80017B1D1 /* ApplicationConfiguration.json in Resources */,
 				6F3B0229245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6EB267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
@@ -6382,7 +6372,6 @@
 				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
 				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
-				E64BA4011D4A5890002C10D5 /* WebViewController.storyboard in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6FB89A0E26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -6429,7 +6418,6 @@
 				6F93DE1720AE9A9900B71572 /* OnboardingsViewController.storyboard in Resources */,
 				6FB89A0F26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				08754F4F201BB02900458F3A /* InfoPlist.strings in Resources */,
-				E64BA4041D4A5892002C10D5 /* WebViewController.storyboard in Resources */,
 				6F3B022B245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
 				6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F7C89D320AAFC6100255A54 /* Onboardings.xcassets in Resources */,

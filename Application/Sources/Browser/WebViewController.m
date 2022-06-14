@@ -21,10 +21,11 @@ static void *s_kvoContext = &s_kvoContext;
 
 @property (nonatomic) NSURLRequest *request;
 
-@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
+@property (nonatomic, weak) UIProgressView *progressView;
 @property (nonatomic, weak) WKWebView *webView;
 @property (nonatomic, weak) UIImageView *loadingImageView;
-@property (nonatomic, weak) IBOutlet UILabel *errorLabel;
+@property (nonatomic, weak) UILabel *errorLabel;
+@property (nonatomic, weak) NSLayoutConstraint *progressTopConstraint;
 
 @property (nonatomic, copy) WebViewControllerCustomizationBlock customizationBlock;
 @property (nonatomic, copy) WKNavigationActionPolicy (^decisionHandler)(NSURL *URL);
@@ -39,18 +40,12 @@ static void *s_kvoContext = &s_kvoContext;
              customizationBlock:(WebViewControllerCustomizationBlock)customizationBlock
                 decisionHandler:(WKNavigationActionPolicy (^)(NSURL *))decisionHandler
 {
-    if (self = [self initFromStoryboard]) {
+    if (self = [self init]) {
         self.request = request;
         self.customizationBlock = customizationBlock;
         self.decisionHandler = decisionHandler;
     }
     return self;
-}
-
-- (instancetype)initFromStoryboard
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:NSStringFromClass(self.class) bundle:nil];
-    return storyboard.instantiateInitialViewController;
 }
 
 - (void)dealloc
@@ -69,11 +64,10 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark View lifecycle
 
-- (void)viewDidLoad
+- (void)loadView
 {
-    [super viewDidLoad];
-    
-    self.view.backgroundColor = UIColor.srg_gray16Color;
+    UIView *view = [[UIView alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    view.backgroundColor = UIColor.srg_gray16Color;
     
     // WKWebView cannot be instantiated in storyboards, do it programmatically
     WKWebView *webView = [[WKWebView alloc] init];
@@ -81,36 +75,65 @@ static void *s_kvoContext = &s_kvoContext;
     webView.backgroundColor = UIColor.clearColor;
     webView.alpha = 0.0f;
     webView.navigationDelegate = self;
+    webView.scrollView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     webView.scrollView.delegate = self;
-    [self.view insertSubview:webView atIndex:0];
+    [view insertSubview:webView atIndex:0];
     
     webView.translatesAutoresizingMaskIntoConstraints = NO;
     [NSLayoutConstraint activateConstraints:@[
-        [webView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor],
-        [webView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor],
-        [webView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor],
-        [webView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor]
+        [webView.topAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.topAnchor],
+        [webView.bottomAnchor constraintEqualToAnchor:view.bottomAnchor],
+        [webView.leadingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.leadingAnchor],
+        [webView.trailingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.trailingAnchor]
     ]];
     self.webView = webView;
-    
-    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
-    loadingImageView.hidden = YES;
-    [self.view insertSubview:loadingImageView atIndex:0];
-    self.loadingImageView = loadingImageView;
-    
-    loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
-    [NSLayoutConstraint activateConstraints:@[
-        [loadingImageView.centerXAnchor constraintEqualToAnchor:self.errorLabel.centerXAnchor],
-        [loadingImageView.centerYAnchor constraintEqualToAnchor:self.errorLabel.centerYAnchor]
-    ]];
     
     if (self.customizationBlock) {
         self.customizationBlock(webView);
     }
     
-    self.errorLabel.text = nil;
+    UIImageView *loadingImageView = [UIImageView play_largeLoadingImageViewWithTintColor:UIColor.srg_grayC7Color];
+    loadingImageView.hidden = YES;
+    [view insertSubview:loadingImageView atIndex:0];
+    self.loadingImageView = loadingImageView;
     
-    self.progressView.progressTintColor = UIColor.srg_redColor;
+    loadingImageView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [loadingImageView.centerXAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.centerXAnchor],
+        [loadingImageView.centerYAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.centerYAnchor]
+    ]];
+    
+    UILabel *errorLabel = [[UILabel alloc] init];
+    errorLabel.textColor = UIColor.whiteColor;
+    errorLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+    [view addSubview:errorLabel];
+    self.errorLabel = errorLabel;
+    
+    errorLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [errorLabel.leadingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.leadingAnchor constant:40.f],
+        [errorLabel.trailingAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.trailingAnchor constant:-40.f],
+        [errorLabel.centerYAnchor constraintEqualToAnchor:view.centerYAnchor]
+    ]];
+    
+    UIProgressView *progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    progressView.progressTintColor = UIColor.srg_redColor;
+    [view addSubview:progressView];
+    self.progressView = progressView;
+    
+    progressView.translatesAutoresizingMaskIntoConstraints = NO;
+    [NSLayoutConstraint activateConstraints:@[
+        [progressView.leadingAnchor constraintEqualToAnchor:view.leadingAnchor],
+        [progressView.trailingAnchor constraintEqualToAnchor:view.trailingAnchor],
+        self.progressTopConstraint = [progressView.topAnchor constraintEqualToAnchor:view.safeAreaLayoutGuide.topAnchor]
+    ]];
+    
+    self.view = view;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
     
     [self.webView loadRequest:self.request];
     
@@ -178,6 +201,12 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)scrollViewDidChangeAdjustedContentInset:(UIScrollView *)scrollView
 {
     [self play_setNeedsContentInsetsUpdate];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    CGFloat adjustedOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top;
+    self.progressTopConstraint.constant = fmaxf(-adjustedOffset, 0.f);
 }
 
 #pragma mark WKNavigationDelegate protocol
