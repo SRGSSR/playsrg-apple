@@ -335,6 +335,13 @@
     return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
+#pragma mark ScrollableContent protocol
+
+- (UIScrollView *)play_scrollableView
+{
+    return self.tableView;
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
