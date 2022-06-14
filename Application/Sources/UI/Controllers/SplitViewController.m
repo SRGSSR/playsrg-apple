@@ -100,14 +100,8 @@
         }
     };
     
-    if (self.viewControllers.count == 2) {
-        UIViewController *secondaryViewController = self.viewControllers[1];
-        performActiveTabAction(secondaryViewController);
-    }
-    else {
-        UIViewController *primaryViewController = self.viewControllers.firstObject;
-        performActiveTabAction(primaryViewController);
-    }
+    UIViewController *lastViewController = self.viewControllers.lastObject;
+    performActiveTabAction(lastViewController);
 }
 
 #pragma mark UISplitViewControllerDelegate protocol
