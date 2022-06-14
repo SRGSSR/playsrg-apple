@@ -242,6 +242,7 @@ final class PageViewController: UIViewController {
             self.googleCastButton?.removeFromSuperview()
         }
         
+        navigationItem.largeTitleDisplayMode = isNavigationBarHidden ? .never : .always
         navigationController?.setNavigationBarHidden(isNavigationBarHidden, animated: animated)
     }
     
