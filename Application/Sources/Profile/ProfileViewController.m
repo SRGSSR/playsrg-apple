@@ -61,6 +61,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;

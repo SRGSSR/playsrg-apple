@@ -134,6 +134,8 @@ final class SearchViewController: UIViewController {
             }
             .store(in: &cancellables)
 #else
+        navigationItem.largeTitleDisplayMode = .always
+        
         let searchController = UISearchController(searchResultsController: nil)
         searchController.showsSearchResultsController = true
         searchController.hidesNavigationBarDuringPresentation = false

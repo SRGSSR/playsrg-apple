@@ -80,6 +80,7 @@ final class ProgramGuideViewController: UIViewController {
             }
             .store(in: &cancellables)
         
+        navigationItem.largeTitleDisplayMode = .always
         updateNavigationBar()
 #endif
     }
