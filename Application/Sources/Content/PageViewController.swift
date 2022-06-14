@@ -92,7 +92,9 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
+#if os(iOS)
         navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+#endif
         
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
