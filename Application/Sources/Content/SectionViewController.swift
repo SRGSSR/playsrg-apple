@@ -557,15 +557,21 @@ extension SectionViewController: UICollectionViewDelegate {
 }
 
 extension SectionViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 #if os(iOS)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
-#endif
     }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.contentSize.height > 0 else { return }
