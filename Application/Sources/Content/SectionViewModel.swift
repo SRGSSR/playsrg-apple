@@ -22,10 +22,6 @@ final class SectionViewModel: ObservableObject {
         return properties.displaysTitle ? properties.title : nil
     }
     
-    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
-        return title != nil ? .always : .never
-    }
-    
     var numberOfSelectedItems: Int {
         guard configuration.properties.supportsEdition else { return 0 }
         return selectedItems.count
@@ -290,6 +286,7 @@ protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     var pinHeadersToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
+    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
@@ -341,6 +338,10 @@ private extension SectionViewModel {
         
         var userActivity: NSUserActivity? {
             return nil
+        }
+        
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            return .always
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
@@ -425,6 +426,15 @@ private extension SectionViewModel {
                 return userActivity
             default:
                 return nil
+            }
+        }
+        
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            switch configuredSection {
+            case .show:
+                return .never
+            default:
+                return .always
             }
         }
         

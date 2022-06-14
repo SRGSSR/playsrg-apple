@@ -111,7 +111,7 @@ final class SectionViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
-        navigationItem.largeTitleDisplayMode = model.largeTitleDisplayMode
+        navigationItem.largeTitleDisplayMode = model.configuration.viewModelProperties.largeTitleDisplayMode
         updateNavigationBar()
 #endif
         

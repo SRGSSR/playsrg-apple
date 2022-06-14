@@ -18,33 +18,22 @@
             && nearestViewController.navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
 }
 
-- (BOOL)play_isContainedInNavigationController
-{
-    UIViewController *nearestViewController = self.play_nearestViewController;
-    return nearestViewController.parentViewController == nearestViewController.navigationController;
-}
-
-- (CGFloat)play_navigationBarOffset
-{
-    if ([self play_canDisplayLargeTitle]) {
-        // 52 px is the additional height associated with large titles, see https://ivomynttinen.com/blog/ios-design-guidelines
-        if ([self play_isContainedInNavigationController]) {
-            return 52.f;
-        }
-        // To reveal a large navigation bar if it can be displayed, we have to scroll just a tiny bit before the top
-        // (1 px suffices) so that the large title is forced to be displayed.
-        else {
-            return 1.f;
-        }
-    }
-    else {
-        return 0.f;
-    }
-}
-
 - (void)play_scrollToTopAnimated:(BOOL)animated
 {
-    [self setContentOffset:CGPointMake(self.contentOffset.x, -self.adjustedContentInset.top - [self play_navigationBarOffset]) animated:animated];
+    CGFloat topAdjustedContentInset = self.adjustedContentInset.top;
+    
+    // Scroll view not covered by bars and requiring no adjustment. To reveal a large title it suffices to scroll just a tiny
+    // bit before the top content offset (1 px is enough)
+    if (topAdjustedContentInset == 0.f) {
+        CGFloat navigationBarOffset = [self play_canDisplayLargeTitle] ? 1.f : 0.f;
+        [self setContentOffset:CGPointMake(self.contentOffset.x, -topAdjustedContentInset - navigationBarOffset) animated:animated];
+    }
+    // Scroll view covered by bars. To reveal a large title we must scroll before the top content offset, with a distance
+    // equal to the (undocumented) large title added height (52 px, see https://ivomynttinen.com/blog/ios-design-guidelines)
+    else if (self.contentOffset.y > -topAdjustedContentInset) {
+        CGFloat navigationBarOffset = [self play_canDisplayLargeTitle] ? 52.f : 0.f;
+        [self setContentOffset:CGPointMake(self.contentOffset.x, -topAdjustedContentInset - navigationBarOffset) animated:animated];
+    }
 }
 
 @end
