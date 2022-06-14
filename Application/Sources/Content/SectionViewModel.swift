@@ -341,7 +341,12 @@ private extension SectionViewModel {
         }
         
         var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
-            return .always
+            switch contentSection.type {
+            case .showAndMedias:
+                return .never
+            default:
+                return .always
+            }
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
