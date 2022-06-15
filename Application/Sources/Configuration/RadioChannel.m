@@ -10,7 +10,7 @@
 
 @interface RadioChannel ()
 
-@property (nonatomic) BOOL hasHomepage;
+@property (nonatomic) BOOL homepageHidden;
 @property (nonatomic) NSArray<NSNumber *> *homeSections;
 
 @end
@@ -25,9 +25,9 @@
         id homeSections = dictionary[@"homeSections"];
         self.homeSections = [homeSections isKindOfClass:NSString.class] ? FirebaseConfigurationHomeSections(homeSections) : defaultHomeSections ?: @[];
         
-        id hasHomepage = dictionary[@"hasHomepage"];
-        if ([hasHomepage isKindOfClass:NSNumber.class]) {
-            self.hasHomepage = [hasHomepage boolValue];
+        id homepageHidden = dictionary[@"homepageHidden"];
+        if ([homepageHidden isKindOfClass:NSNumber.class]) {
+            self.homepageHidden = [homepageHidden boolValue];
         }
     }
     return self;

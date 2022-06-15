@@ -423,7 +423,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 - (NSArray<RadioChannel *> *)radioHomepageChannels
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == YES", @keypath(RadioChannel.new, hasHomepage)];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(RadioChannel.new, homepageHidden)];
     return [self.radioChannels filteredArrayUsingPredicate:predicate];
 }
 

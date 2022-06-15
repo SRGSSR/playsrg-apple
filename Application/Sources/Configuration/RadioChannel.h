@@ -20,9 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
                         defaultHomeSections:(nullable NSArray<NSNumber *> *)defaultHomeSections NS_DESIGNATED_INITIALIZER;
 
 /**
- *  `YES` iff a homepage can be displayed for the radio channel.
+ *  `YES` iff a homepage does not have to be displayed for the radio channel.
  */
-@property (nonatomic, readonly) BOOL hasHomepage;
+@property (nonatomic, readonly) BOOL homepageHidden;
 
 /**
  *  The home sections ordered list.
