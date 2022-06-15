@@ -31,6 +31,7 @@ final class SectionViewController: UIViewController {
     private weak var refreshControl: UIRefreshControl!
     
     private var refreshTriggered = false
+    private var firstHeaderVisible = true
 #endif
     
     private var contentInsets: UIEdgeInsets
@@ -65,7 +66,7 @@ final class SectionViewController: UIViewController {
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
-        title = model.title
+        title = model.displaysTitle ? model.title : nil
     }
     
     required init?(coder: NSCoder) {
@@ -217,13 +218,13 @@ final class SectionViewController: UIViewController {
                 navigationItem.leftBarButtonItem = deleteBarButtonItem
             }
             else {
-                navigationItem.title = model.title
+                navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
                 editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
                 navigationItem.leftBarButtonItem = leftBarButtonItem
             }
         }
         else {
-            navigationItem.title = model.title
+            navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
             
             if model.configuration.properties.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
@@ -539,6 +540,30 @@ extension SectionViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, previewForDismissingContextMenuWithConfiguration configuration: UIContextMenuConfiguration) -> UITargetedPreview? {
         return preview(for: configuration, in: collectionView)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionHeader:
+            if indexPath.section == 0 {
+                firstHeaderVisible = true
+                updateNavigationBar()
+            }
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionHeader:
+            if indexPath.section == 0 {
+                firstHeaderVisible = false
+                updateNavigationBar()
+            }
+        default:
+            break
+        }
     }
     
     private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {

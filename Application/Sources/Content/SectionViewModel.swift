@@ -18,8 +18,11 @@ final class SectionViewModel: ObservableObject {
     private var selectedItems = Set<Content.Item>()
     
     var title: String? {
-        let properties = configuration.properties
-        return properties.displaysTitle ? properties.title : nil
+        return configuration.properties.title
+    }
+    
+    var displaysTitle: Bool {
+        return configuration.properties.displaysTitle
     }
     
     var numberOfSelectedItems: Int {
