@@ -494,6 +494,7 @@ extension SearchViewController: UISearchBarDelegate {
         button.setImage(UIImage(systemName: "arrow.left.circle.fill"), for: .normal)
         button.addTarget(self, action: #selector(closeKeyboard(_:)), for: .touchUpInside)
         button.tintColor = .secondaryLabel
+        button.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Label of the search bar button to close the keyboard")
         textField.leftView = button
     }
     
