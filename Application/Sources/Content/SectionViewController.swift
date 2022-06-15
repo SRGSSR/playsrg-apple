@@ -205,7 +205,7 @@ final class SectionViewController: UIViewController {
             navigationItem.rightBarButtonItem = editButtonItem
             
             if isEditing {
-                title = Self.title(for: model.numberOfSelectedItems)
+                navigationItem.title = Self.title(for: model.numberOfSelectedItems)
                 editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
                 
                 let numberOfSelectedItems = model.numberOfSelectedItems
@@ -217,13 +217,13 @@ final class SectionViewController: UIViewController {
                 navigationItem.leftBarButtonItem = deleteBarButtonItem
             }
             else {
-                title = model.title
+                navigationItem.title = model.title
                 editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
                 navigationItem.leftBarButtonItem = leftBarButtonItem
             }
         }
         else {
-            title = model.title
+            navigationItem.title = model.title
             
             if model.configuration.properties.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
