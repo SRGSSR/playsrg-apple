@@ -194,8 +194,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke.git",
       "state" : {
-        "revision" : "9b62e2ecbfecdcccacd52341e38832bcc84d98f4",
-        "version" : "10.10.0"
+        "revision" : "a002b7fd786f2df2ed4333fe73a9727499fd9d97",
+        "version" : "10.11.2"
       }
     },
     {
@@ -203,8 +203,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/NukeUI.git",
       "state" : {
-        "revision" : "17f26c07e6b1d3b9258287f99f528111fcd7b7ad",
-        "version" : "0.8.1"
+        "revision" : "ebfed3c9a4e97e310b0ff8ee0fffe5579887a825",
+        "version" : "0.8.2"
       }
     },
     {
