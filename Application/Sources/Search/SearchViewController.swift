@@ -225,6 +225,7 @@ final class SearchViewController: UIViewController {
                 titleLabel.lineBreakMode = .byClipping
             }
             filtersButton.setTitle(NSLocalizedString("Filters", comment: "Filters button title"), for: .normal)
+            filtersButton.setTitleColor(.srgGrayC7, for: .normal)
             filtersButton.setTitleColor(.gray, for: .highlighted)
             
             // See https://stackoverflow.com/a/25559946/760435
