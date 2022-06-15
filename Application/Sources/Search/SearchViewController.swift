@@ -26,6 +26,7 @@ final class SearchViewController: UIViewController {
 #if os(iOS)
     private weak var filtersBarButtonItem: UIBarButtonItem?
     private weak var refreshControl: UIRefreshControl!
+    private var defaultLeftView: UIView?        // strong
     
     private var refreshTriggered = false
     private var searchUpdateInhibited = false
@@ -482,18 +483,23 @@ extension SearchViewController: UICollectionViewDelegate {
 }
 
 #if os(iOS)
+// Replace search icon with a back button
+// See https://betterprogramming.pub/how-to-change-the-search-icon-in-a-uisearchbar-150b775fb6c8
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            title: NSLocalizedString("Cancel", comment: "Title of a cancel button"),
-            style: .plain,
-            target: self,
-            action: #selector(closeKeyboard(_:))
-        )
+        guard let searchBar = searchBar as? SearchBar, let textField = searchBar.textField else { return }
+        defaultLeftView = textField.leftView
+        
+        let button = UIButton(type: .custom)
+        button.setImage(UIImage(systemName: "arrow.left.circle.fill"), for: .normal)
+        button.addTarget(self, action: #selector(closeKeyboard(_:)), for: .touchUpInside)
+        button.tintColor = .secondaryLabel
+        textField.leftView = button
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        navigationItem.leftBarButtonItem = nil
+        guard let searchBar = searchBar as? SearchBar, let textField = searchBar.textField else { return }
+        textField.leftView = defaultLeftView
     }
 }
 #endif
