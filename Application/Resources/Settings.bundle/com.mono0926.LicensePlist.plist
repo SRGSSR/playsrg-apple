@@ -110,7 +110,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleCastSDK-ios-no-bluetooth</string>
 			<key>Title</key>
-			<string>googlecastsdk-ios-no-bluetooth (4.7.0-beta.3)</string>
+			<string>googlecastsdk-ios-no-bluetooth (4.7.1-beta.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

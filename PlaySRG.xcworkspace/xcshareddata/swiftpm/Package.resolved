@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth",
       "state" : {
-        "revision" : "0f4e99833b70dcb21c761f1c7bad37b95358246f",
-        "version" : "4.7.0-beta.3"
+        "revision" : "fb1ae18c88ce1cd1f12e7c6ae12c0b7cdc011c50",
+        "version" : "4.7.1-beta.1"
       }
     },
     {

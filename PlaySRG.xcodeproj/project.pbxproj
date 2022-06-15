@@ -19091,8 +19091,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth";
 			requirement = {
-				kind = exactVersion;
-				version = "4.7.0-beta.3";
+				kind = upToNextMajorVersion;
+				minimumVersion = "4.7.1-beta.1";
 			};
 		};
 		081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
