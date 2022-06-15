@@ -254,11 +254,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UIColor *normalForegroundColor = UIColor.srg_gray96Color;
     UIColor *selectedForegroundColor = UIColor.whiteColor;
     
-    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{ NSFontAttributeName : font,
-                                                                       NSForegroundColorAttributeName : normalForegroundColor };
+    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{
+        NSFontAttributeName : font,
+        NSForegroundColorAttributeName : normalForegroundColor
+    };
     
-    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{ NSFontAttributeName : font,
-                                                                         NSForegroundColorAttributeName : selectedForegroundColor };
+    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{
+        NSFontAttributeName : font,
+        NSForegroundColorAttributeName : selectedForegroundColor
+    };
     
     UITabBarItemAppearance *stackedItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleStacked];
     stackedItemAppearance.normal.titleTextAttributes = normalItemAttributes;
