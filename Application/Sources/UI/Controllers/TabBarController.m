@@ -503,13 +503,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return self.selectedViewController;
 }
 
-- (void)play_contentOffsetDidChangeInScrollableView:(UIScrollView *)scrollView
-{
-    CGFloat yOffset = scrollView.contentOffset.y - scrollView.contentSize.height + CGRectGetHeight(scrollView.frame);
-    CGFloat adjustedOffset = scrollView.adjustedContentInset.bottom - yOffset;
-    self.miniPlayerView.blurOpacity = fmax(0.f, fminf(1.f, adjustedOffset / LayoutBlurActivationDistance));
-}
-
 #pragma mark UITabBarControllerDelegate protocol
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController

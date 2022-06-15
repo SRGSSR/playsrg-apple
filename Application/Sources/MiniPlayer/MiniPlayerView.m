@@ -19,7 +19,6 @@
 
 @interface MiniPlayerView ()
 
-@property (nonatomic, weak) UIVisualEffectView *blurView;
 @property (nonatomic, weak) PlayMiniPlayerView *playMiniPlayerView;
 @property (nonatomic, weak) GoogleCastMiniPlayerView *googleCastMiniPlayerView;
 @property (nonatomic, getter=isActive) BOOL active;
@@ -35,7 +34,6 @@
     if (self = [super initWithFrame:frame]) {
         UIVisualEffectView *blurView = UIVisualEffectView.play_blurView;
         [self addSubview:blurView];
-        self.blurView = blurView;
         
         blurView.translatesAutoresizingMaskIntoConstraints = NO;
         [NSLayoutConstraint activateConstraints:@[
@@ -83,18 +81,6 @@
         [self updateLayoutAnimated:NO];
     }
     return self;
-}
-
-#pragma mark Getters and setters
-
-- (void)setBlurOpacity:(CGFloat)blurOpacity
-{
-    self.blurView.alpha = blurOpacity;
-}
-
-- (CGFloat)blurOpacity
-{
-    return self.blurView.alpha;
 }
 
 #pragma mark Subview management
