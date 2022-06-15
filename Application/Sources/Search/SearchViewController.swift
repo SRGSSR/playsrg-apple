@@ -112,14 +112,10 @@ final class SearchViewController: UIViewController {
         
         model.$state
             .sink { [weak self] state in
-                self?.reloadData(for: state)
-            }
-            .store(in: &cancellables)
-        
+                guard let self = self else { return }
+                self.reloadData(for: state)
 #if os(tvOS)
-        model.$state
-            .sink { [weak self] state in
-                guard let self = self, let searchController = self.searchController else { return }
+                guard let searchController = self.searchController else { return }
                 if case let .loaded(rows: _, suggestions: suggestions) = state {
                     if let suggestions = suggestions {
                         searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
@@ -131,9 +127,11 @@ final class SearchViewController: UIViewController {
                 else {
                     searchController.searchSuggestions = nil
                 }
+#endif
             }
             .store(in: &cancellables)
-#else
+        
+#if os(iOS)
         navigationItem.largeTitleDisplayMode = .always
         
         let searchController = UISearchController(searchResultsController: nil)
