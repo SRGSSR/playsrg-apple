@@ -87,7 +87,12 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
     
     NSDate *nowDate = NSDate.date;
     SRGTimeAvailability timeAvailability = [mediaMetadata timeAvailabilityAtDate:nowDate];
-    if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
+    if (timeAvailability == SRGTimeAvailabilityNotYetAvailable) {
+        self.backgroundColor = UIColor.play_greenColor;
+        
+        text = NSLocalizedString(@"Soon", @"Short label identifying content which will be available soon.");
+    }
+    else if (timeAvailability == SRGTimeAvailabilityNotAvailableAnymore) {
         self.backgroundColor = UIColor.srg_gray96Color;
         
         text = NSLocalizedString(@"Expired", @"Short label identifying content which has expired.");

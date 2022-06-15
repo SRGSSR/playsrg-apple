@@ -135,12 +135,23 @@ final class SectionViewController: UIViewController {
             view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
         }
         
+        let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
+            guard let self = self else { return }
+            let snapshot = self.dataSource.snapshot()
+            let section = snapshot.sectionIdentifiers[indexPath.section]
+            view.content = SectionFooterView(section: section)
+        }
+        
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
-            if kind == Header.global.rawValue {
+            switch kind {
+            case Header.global.rawValue:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: globalHeaderViewRegistration, for: indexPath)
-            }
-            else {
+            case UICollectionView.elementKindSectionHeader:
                 return collectionView.dequeueConfiguredReusableSupplementary(using: sectionHeaderViewRegistration, for: indexPath)
+            case UICollectionView.elementKindSectionFooter:
+                return collectionView.dequeueConfiguredReusableSupplementary(using: sectionFooterViewRegistration, for: indexPath)
+            default:
+                return nil
             }
         }
         
@@ -318,6 +329,20 @@ final class SectionViewController: UIViewController {
                 let pageViewController = PageViewController(id: .topic(topic: topic))
                 navigationController.pushViewController(pageViewController, animated: true)
             }
+        case let .download(download):
+            if let media = download.media {
+                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            }
+            else {
+                let error = NSError(
+                    domain: PlayErrorDomain,
+                    code: PlayErrorCode.notFound.rawValue,
+                    userInfo: [
+                        NSLocalizedDescriptionKey: NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
+                    ]
+                )
+                Banner.showError(error)
+            }
         default:
             ()
         }
@@ -391,6 +416,12 @@ extension SectionViewController {
     @objc static func viewController(forContentSection contentSection: SRGContentSection) -> SectionViewController {
         return SectionViewController(section: .content(contentSection))
     }
+    
+#if os(iOS)
+    @objc static func downloadsViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.downloads))
+    }
+#endif
     
     @objc static func favoriteShowsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.favoriteShows))
@@ -578,7 +609,7 @@ private extension SectionViewController {
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         configuration.interSectionSpacing = constant(iOS: 15, tvOS: 100)
         
-        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
+        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         
@@ -593,8 +624,12 @@ private extension SectionViewController {
                                                         layoutWidth: layoutEnvironment.container.effectiveContentSize.width,
                                                         horizontalSizeClass: layoutEnvironment.traitCollection.horizontalSizeClass)
                 let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-                header.pinToVisibleBounds = configuration.viewModelProperties.pinToVisibleBounds
-                return [header]
+                header.pinToVisibleBounds = configuration.viewModelProperties.pinHeadersToVisibleBounds
+                
+                let footerSize = SectionFooterView.size(section: section)
+                let footer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: footerSize, elementKind: UICollectionView.elementKindSectionFooter, alignment: .bottom)
+                
+                return [header, footer]
             }
             
             func layoutSection(for section: SectionViewModel.Section, configuration: SectionViewModel.Configuration, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
@@ -626,6 +661,19 @@ private extension SectionViewController {
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
                         return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
+#if os(iOS)
+                case .downloadGrid:
+                    if horizontalSizeClass == .compact {
+                        return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
+                            return DownloadCellSize.fullWidth()
+                        }
+                    }
+                    else {
+                        return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { layoutWidth, spacing in
+                            return DownloadCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
+                        }
+                    }
+#endif
                 }
             }
             
@@ -689,8 +737,12 @@ private extension SectionViewController {
                         ShowCell(show: show, style: .standard, imageVariant: imageVariant)
                     }
                 }
-            case let .topic(topic: topic):
+            case let .topic(topic):
                 TopicCell(topic: topic)
+#if os(iOS)
+            case let .download(download):
+                DownloadCell(download: download)
+#endif
             case .transparent:
                 Color.clear
             default:
@@ -738,6 +790,36 @@ private extension SectionViewController {
                 }
             case let .show(show):
                 return ShowHeaderViewSize.recommended(for: show, layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+            case .none:
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+            }
+        }
+    }
+}
+
+// MARK: Footers
+
+private extension SectionViewController {
+    struct SectionFooterView: View {
+        let section: SectionViewModel.Section
+        
+        var body: some View {
+            switch section.footer {
+#if os(iOS)
+            case .diskInfo:
+                DiskInfoFooterView()
+#endif
+            case .none:
+                Color.clear
+            }
+        }
+        
+        static func size(section: SectionViewModel.Section) -> NSCollectionLayoutSize {
+            switch section.footer {
+#if os(iOS)
+            case .diskInfo:
+                return LayoutFullWidthCellSize(30)
+#endif
             case .none:
                 return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
             }

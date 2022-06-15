@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "CollectionRequestViewController.h"
 #import "ContentInsets.h"
 #import "RadioChannel.h"
 

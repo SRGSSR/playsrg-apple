@@ -19,6 +19,13 @@ enum ContextMenu {
             return configuration(for: media, identifier: identifier, in: viewController)
         case let .show(show):
             return configuration(for: show, identifier: identifier, in: viewController)
+        case let .download(download):
+            if let media = download.media {
+                return configuration(for: media, identifier: identifier, in: viewController)
+            }
+            else {
+                return nil
+            }
         default:
             return nil
         }
@@ -188,7 +195,7 @@ extension ContextMenu {
         let menuAction = UIAction(title: title(for: download), image: image(for: download)) { _ in
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 if let download = download {
-                    Download.removeDownload(download)
+                    Download.removeDownloads([download])
                 }
                 else {
                     Download.add(for: media)

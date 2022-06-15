@@ -20,27 +20,13 @@ final class ProgramGuideDailyViewModel: ObservableObject {
         
         Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) { [weak self, $day] in
             $day
-                .map { day -> AnyPublisher<State, Error> in
-                    let applicationConfiguration = ApplicationConfiguration.shared
-                    let vendor = applicationConfiguration.vendor
-                    if applicationConfiguration.areTvThirdPartyChannelsAvailable {
-                        return Publishers.CombineLatest(
-                            Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state),
-                            Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: self?.state)
-                        )
-                        .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1, day: day) }
-                        .eraseToAnyPublisher()
-                    }
-                    else {
-                        return Self.bouquet(for: vendor, provider: .SRG, day: day, from: self?.state)
-                            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty, day: day) }
-                            .eraseToAnyPublisher()
-                    }
+                .map { day in
+                    return Self.state(from: self?.state, for: day)
+                        .catch { error in
+                            return Just(.failed(error: error))
+                        }
                 }
                 .switchToLatest()
-                .catch { error in
-                    return Just(.failed(error: error))
-                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -256,6 +242,24 @@ extension ProgramGuideDailyViewModel {
 // MARK: Publishers
 
 private extension ProgramGuideDailyViewModel {
+    static func state(from state: State?, for day: SRGDay) -> AnyPublisher<State, Error> {
+        let applicationConfiguration = ApplicationConfiguration.shared
+        let vendor = applicationConfiguration.vendor
+        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+            return Publishers.CombineLatest(
+                Self.bouquet(for: vendor, provider: .SRG, day: day, from: state),
+                Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: state)
+            )
+            .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: $1, day: day) }
+            .eraseToAnyPublisher()
+        }
+        else {
+            return Self.bouquet(for: vendor, provider: .SRG, day: day, from: state)
+                .map { .content(firstPartyBouquet: $0, thirdPartyBouquet: .empty, day: day) }
+                .eraseToAnyPublisher()
+        }
+    }
+    
     static func bouquet(from state: State?, for provider: SRGProgramProvider, day otherDay: SRGDay) -> Bouquet {
         guard let state = state else { return .empty }
         switch state {

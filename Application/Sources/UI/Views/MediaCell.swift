@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-import SRGAppearance
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: View
@@ -29,7 +29,7 @@ struct MediaCell: View {
     @Environment(\.isSelected) private var isSelected
     
 #if os(iOS)
-    @Environment(\.horizontalSizeClass) var horizontalSizeClass
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
     
     private var direction: StackDirection {
@@ -128,12 +128,12 @@ struct MediaCell: View {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
-                        .foregroundColor(Color.srgGray96)
+                        .foregroundColor(.srgGray96)
                 }
                 Text(title)
                     .srgFont(.H4)
                     .lineLimit(2)
-                    .foregroundColor(Color.srgGrayC7)
+                    .foregroundColor(.srgGrayC7)
                     .layoutPriority(1)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)

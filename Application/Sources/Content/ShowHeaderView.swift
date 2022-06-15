@@ -35,7 +35,7 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         
 #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
         
         var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
@@ -174,7 +174,7 @@ private extension View {
 
 // MARK: Size
 
-final class ShowHeaderViewSize: NSObject {
+enum ShowHeaderViewSize {
     static func recommended(for show: SRGShow, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
         let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
         let model = ShowHeaderViewModel()

@@ -6,6 +6,7 @@
   "voiceOverLanguageCode": "en",
   "appStoreProductIdentifier": 920785201,
   "playURL": "https://play.swissinfo.ch/play/",
+  "playServiceURL": "https://play.swissinfo.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "minimumSocialViewCount": 50,
   "dataProtectionURL": "https://www.swissinfo.ch/eng/data-privacy-statement/133174",

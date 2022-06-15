@@ -21,7 +21,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     @Published private(set) var state: State = .loading
-    @Published private(set) var serviceMessage: SRGServiceMessage?
+    @Published private(set) var serviceMessage: ServiceMessage?
     
     private let trigger = Trigger()
     
@@ -54,7 +54,9 @@ final class PageViewModel: Identifiable, ObservableObject {
         .assign(to: &$state)
         
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) {
-            return SRGDataProvider.current!.serviceMessage(for: ApplicationConfiguration.shared.vendor)
+            URLSession.shared.dataTaskPublisher(for: ApplicationConfiguration.shared.serviceMessageUrl)
+                .map(\.data)
+                .decode(type: ServiceMessage.self, decoder: JSONDecoder())
                 .map { Optional($0) }
                 .replaceError(with: nil)
                 .eraseToAnyPublisher()
@@ -126,7 +128,7 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private static func placeholderRowItems(for section: Section) -> [Item] {
-        return section.properties.placeholderItems.map { Item(.item($0), in: section) }
+        return section.properties.placeholderRowItems.map { Item(.item($0), in: section) }
     }
 }
 
@@ -210,10 +212,11 @@ extension PageViewModel {
     }
     
     enum SectionLayout: Hashable {
-        case hero
-        case headline
+        case heroStage
         case highlight
-        case highlightSwimlane
+        case headline
+        case element
+        case elementSwimlane
         case liveMediaGrid
         case liveMediaSwimlane
         case mediaGrid
@@ -221,9 +224,9 @@ extension PageViewModel {
         case showGrid
         case showSwimlane
         case topicSelector
-        
-        @available(tvOS, unavailable)
+#if os(iOS)
         case showAccess
+#endif
     }
     
     struct Section: Hashable {
@@ -298,19 +301,27 @@ private extension PageViewModel {
     }
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
-        return Publishers.CombineLatest(
-            section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
-                .scan([]) { $0 + $1 },
-            section.properties.interactiveUpdatesPublisher()
-                .prepend(Just([]))
+        if let highlight = section.properties.rowHighlight {
+            let item = Item(.item(.highlight(highlight)), in: section)
+            return Just(Row(section: section, items: [item]))
                 .setFailureType(to: Error.self)
-        )
-        .map { items, removedItems in
-            return items.filter { !removedItems.contains($0) }
+                .eraseToAnyPublisher()
         }
-        .map { rowItems(removeDuplicates(in: $0), in: section) }
-        .map { Row(section: section, items: $0) }
-        .eraseToAnyPublisher()
+        else {
+            return Publishers.CombineLatest(
+                section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                    .scan([]) { $0 + $1 },
+                section.properties.interactiveUpdatesPublisher()
+                    .prepend(Just([]))
+                    .setFailureType(to: Error.self)
+            )
+            .map { items, removedItems in
+                return items.filter { !removedItems.contains($0) }
+            }
+            .map { rowItems(removeDuplicates(in: $0), in: section) }
+            .map { Row(section: section, items: $0) }
+            .eraseToAnyPublisher()
+        }
     }
     
     static func rowItems(_ items: [Content.Item], in section: Section) -> [Item] {
@@ -337,7 +348,7 @@ extension PageViewModelProperties {
 #if os(tvOS)
     var hasMoreRowItem: Bool {
         switch layout {
-        case .mediaSwimlane, .showSwimlane, .highlightSwimlane:
+        case .mediaSwimlane, .showSwimlane, .elementSwimlane:
             return true
         default:
             return false
@@ -365,20 +376,19 @@ private extension PageViewModel {
         
         var layout: PageViewModel.SectionLayout {
             switch presentation.type {
-            case .hero:
-                return .hero
-            case .mediaHighlight, .showHighlight:
-                return .highlight
-            case .mediaHighlightSwimlane:
-                return .highlightSwimlane
+            case .heroStage:
+                return .heroStage
+            case .highlight:
+                return (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
+            case .mediaElement, .showElement:
+                return .element
+            case .mediaElementSwimlane:
+                return .elementSwimlane
             case .topicSelector:
                 return .topicSelector
-            case .showAccess:
 #if os(iOS)
+            case .showAccess:
                 return .showAccess
-#else
-                // Not supported
-                return .mediaSwimlane
 #endif
             case .favoriteShows:
                 return .showSwimlane
@@ -388,14 +398,14 @@ private extension PageViewModel {
                 return (contentSection.type == .shows) ? .showGrid : .mediaGrid
             case .livestreams:
                 return .liveMediaSwimlane
-            case .none, .resumePlayback, .watchLater, .personalizedProgram:
+            default:
                 return .mediaSwimlane
             }
         }
         
         var canOpenDetailPage: Bool {
             switch presentation.type {
-            case .favoriteShows, .personalizedProgram, .resumePlayback, .topicSelector, .watchLater:
+            case .favoriteShows, .myProgram, .continueWatching, .topicSelector, .watchLater:
                 return true
             default:
                 return presentation.hasDetailPage
@@ -417,19 +427,16 @@ private extension PageViewModel {
 #else
                 return .liveMediaSwimlane
 #endif
-            case .history, .watchLater, .radioEpisodesForDay, .radioLatestEpisodesFromFavorites, .radioResumePlayback, .radioWatchLater, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return .mediaSwimlane
             case .favoriteShows, .radioFavoriteShows, .show:
                 return .showSwimlane
             case .radioAllShows, .tvAllShows:
                 return .showGrid
-            case .radioShowAccess:
 #if os(iOS)
+            case .radioShowAccess:
                 return .showAccess
-#else
-                // Not supported
-                return .mediaSwimlane
 #endif
+            default:
+                return .mediaSwimlane
             }
         }
         

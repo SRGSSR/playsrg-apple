@@ -303,6 +303,13 @@ extension SearchViewController: SearchSettingsViewControllerDelegate {
     }
 }
 
+extension SearchViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        guard let searchResultsActionableController = searchController.searchResultsController as? TabBarActionable else { return }
+        searchResultsActionableController.performActiveTabAction(animated: animated)
+    }
+}
+
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         navigationItem.leftBarButtonItem = UIBarButtonItem(

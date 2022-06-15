@@ -90,6 +90,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic) PlayFirebaseConfiguration *firebaseConfiguration;
 
+@property (nonatomic, copy) NSString *businessUnitIdentifier;
 @property (nonatomic) SRGVendor vendor;
 
 @property (nonatomic, copy) SRGAnalyticsBusinessUnitIdentifier analyticsBusinessUnitIdentifier;
@@ -103,6 +104,7 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic, copy) NSNumber *appStoreProductIdentifier;
 
 @property (nonatomic) NSURL *playURL;
+@property (nonatomic) NSURL *playServiceURL;
 @property (nonatomic) NSURL *middlewareURL;
 @property (nonatomic) NSURL *identityWebserviceURL;
 @property (nonatomic) NSURL *identityWebsiteURL;
@@ -245,6 +247,10 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     //
     
     NSString *businessUnitIdentifier = [firebaseConfiguration stringForKey:@"businessUnit"];
+    if (! businessUnitIdentifier) {
+        return NO;
+    }
+    
     SRGVendor vendor = DataProviderVendor(businessUnitIdentifier);
     if (vendor == SRGVendorNone) {
         return NO;
@@ -276,6 +282,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
         return NO;
     }
     
+    NSString *playServiceURLString = [firebaseConfiguration stringForKey:@"playServiceURL"];
+    NSURL *playServiceURL = playServiceURLString ? [NSURL URLWithString:playServiceURLString] : nil;
+    if (! playServiceURL) {
+        return NO;
+    }
+    
     NSString *middlewareURLString = [firebaseConfiguration stringForKey:@"middlewareURL"];
     NSURL *middlewareURL = middlewareURLString ? [NSURL URLWithString:middlewareURLString] : nil;
     if (! middlewareURL) {
@@ -294,13 +306,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     }
     
     // Update mandatory values
+    self.businessUnitIdentifier = businessUnitIdentifier;
+    self.vendor = vendor;
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.integerValue;
-    self.vendor = vendor;
     self.siteName = siteName;
     self.tvSiteName = tvSiteName;
     
     self.playURL = playURL;
+    self.playServiceURL = playServiceURL;
     self.middlewareURL = middlewareURL;
     self.whatsNewURL = whatsNewURL;
     
@@ -407,6 +421,12 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     return playURL;
 }
 
+- (NSArray<RadioChannel *> *)radioHomepageChannels
+{
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == NO", @keypath(RadioChannel.new, homepageHidden)];
+    return [self.radioChannels filteredArrayUsingPredicate:predicate];
+}
+
 #pragma mark Helpers
 
 - (RadioChannel *)radioChannelForUid:(NSString *)uid
@@ -417,6 +437,15 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     
     NSArray<RadioChannel *> *radioChannels = [self.radioChannels arrayByAddingObjectsFromArray:self.satelliteRadioChannels];
     return [radioChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
+}
+
+- (RadioChannel *)radioHomepageChannelForUid:(NSString *)uid
+{
+    if (! uid) {
+        return nil;
+    }
+    
+    return [self.radioHomepageChannels filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"%K == %@", @keypath(RadioChannel.new, uid), uid]].firstObject;
 }
 
 - (TVChannel *)tvChannelForUid:(NSString *)uid

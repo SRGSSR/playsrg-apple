@@ -51,7 +51,7 @@ struct ProgramGuideHeaderView: View {
         @ObservedObject var model: ProgramGuideViewModel
         
 #if os(iOS)
-        @Environment(\.horizontalSizeClass) var horizontalSizeClass
+        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
 #endif
         
         private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 70)
@@ -140,7 +140,7 @@ struct ProgramGuideHeaderView: View {
             }
             .responderChain(from: firstResponder)
         }
-
+        
 #if os(iOS)
         private func action() {
             firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
@@ -195,14 +195,12 @@ struct ProgramGuideHeaderView: View {
             .padding(.bottom, 6)
         }
     }
-    #endif
+#endif
 }
 
 // MARK: Size
 
 enum ProgramGuideHeaderViewSize {
-    static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
-        
     static func height(for layout: ProgramGuideLayout, horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
 #if os(iOS)
         switch layout {

@@ -96,6 +96,18 @@ enum ThrottledSignal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
+    
+#if os(iOS)
+    /**
+     *  Emits a signal when downloads are updated.
+     */
+    static func downloadUpdates() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.publisher(for: .DownloadStateDidChange, object: nil)
+            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+#endif
 }
 
 // MARK: Signals for application events
@@ -161,6 +173,7 @@ private extension Notification.Name {
     static let didUpdateFavorites = Notification.Name("UserInteractionDidUpdateFavoritesNotification")
     static let didUpdateHistoryEntries = Notification.Name("UserInteractionDidUpdateHistoryEntriesNotification")
     static let didUpdateWatchLaterEntries = Notification.Name("UserInteractionDidUpdateWatchLaterEntriesNotification")
+    static let didUpdateDownloads = Notification.Name("UserInteractionDidUpdateDownloadsNotification")
 }
 
 private enum UserInteractionUpdateKey {
@@ -203,6 +216,13 @@ enum UserInteractionSignal {
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
+    
+    static func downloadUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateDownloads)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
 }
 
 // MARK: Methods to notify data updates resulting from user interaction
@@ -239,4 +259,14 @@ enum UserInteractionSignal {
     @objc static func removeFromFavorites(_ shows: [SRGShow]) {
         notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
     }
+    
+#if os(iOS)
+    @objc static func addToDownloads(_ downloads: [Download]) {
+        notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: true)
+    }
+    
+    @objc static func removeFromDownloads(_ downloads: [Download]) {
+        notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: false)
+    }
+#endif
 }

@@ -48,6 +48,15 @@ NSCollectionLayoutSize *LayoutFractionedCellSize(CGFloat width, CGFloat contentA
                                           heightDimension:[NSCollectionLayoutDimension absoluteDimension:height]];
 }
 
+NSCollectionLayoutSize *LayoutFullWidthCellSize(CGFloat height)
+{
+    // Use body as scaling curve; should offer pretty standard behavior covering all needs
+    UIFontMetrics *fontMetrics = [SRGFont metricsForFontWithStyle:SRGFontStyleBody];
+    CGFloat scaledHeight = [fontMetrics scaledValueForValue:height];
+    return [NSCollectionLayoutSize sizeWithWidthDimension:[NSCollectionLayoutDimension fractionalWidthDimension:1.f]
+                                          heightDimension:[NSCollectionLayoutDimension absoluteDimension:scaledHeight]];
+}
+
 const CGFloat LayoutMargin = 8.f;
 const UIEdgeInsets LayoutPaddingContentInsets = { LayoutMargin, 0.f, LayoutMargin, 0.f };
 const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0.f, LayoutMargin / 2.f, 0.f };

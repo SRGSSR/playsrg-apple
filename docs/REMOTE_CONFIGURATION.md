@@ -24,9 +24,12 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 * `feedbackURL` (optional, string): The URL of the feedback form.
 * `dataProtectionURL` (optional, string): The URL of the data protection information page.
 * `impressumURL` (optional, string): The URL of the impressum page. If none is provided, the corresponding menu entry will not be displayed. 
-* `historyServiceURL` (optional, string): The URL of the history service.
+* `identityWebserviceURL` (optional, string): The URL of the identity webservices.
+* `identityWebsiteURL` (optional, string): The URL of the identity web portal.
+* `userDataServiceURL` (optional, string): The URL of the service with which user data can be synchronized (history, preferences, playlists).
 * `middlewareURL` (mandatory, string): The URL of the Play application middleware.
-* `playURL` (mandatory, string): The base URL of the Play portal, used when building sharing URLs.
+* `playURL` (mandatory, string): The base URL of the Play web portal, used when building sharing URLs.
+* `playServiceURL` (mandatory, string): The base URL of the Play web service.
 * `sourceCodeURL` (optional, string); The URL where the application source code can be found.
 * `termsAndConditionsURL` (optional, string): The URL of the terms and conditions page.
 * `whatsNewURL` (mandatory, string): The URL at which the update information can be retrieved.
@@ -61,6 +64,10 @@ The keys common to both TV and radio channels JSON dictionaries are:
 * `songsViewStyle` (optional, string): The songs view style when added to the view. Never displayed if not set. Available values are:
    * `collapsed`: Collapsed when added to the view.
    * `expanded`: Expanded when added to the view.
+
+The radio channel JSON dictionaries have one more key:
+
+* `homepageHidden` (optional, boolean): Set to `true` iff a homepage does not have to be displayed for the radio channel. If omitted, `false`.
 
 ## Audio homepage
 

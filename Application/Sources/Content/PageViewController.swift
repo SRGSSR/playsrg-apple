@@ -326,6 +326,11 @@ extension PageViewController: UICollectionViewDelegate {
                     let pageViewController = PageViewController(id: .topic(topic: topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
+            case .highlight:
+                if let navigationController = navigationController {
+                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                    navigationController.pushViewController(sectionViewController, animated: true)
+                }
             default:
                 ()
             }
@@ -498,7 +503,7 @@ private extension PageViewController {
         configuration.interSectionSpacing = constant(iOS: 35, tvOS: 70)
         configuration.contentInsetsReference = constant(iOS: .automatic, tvOS: .layoutMargins)
         
-        let headerSize = TitleViewSize.recommended(text: globalHeaderTitle)
+        let headerSize = TitleViewSize.recommended(forText: globalHeaderTitle)
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: Header.global.rawValue, alignment: .topLeading)
         configuration.boundarySupplementaryItems = [header]
         
@@ -519,25 +524,29 @@ private extension PageViewController {
                 let horizontalSizeClass = layoutEnvironment.traitCollection.horizontalSizeClass
                 
                 switch section.viewModelProperties.layout {
-                case .hero:
+                case .heroStage:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
                         return HeroMediaCellSize.recommended(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
+                case .highlight:
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
+                        return HighlightCellSize.fullWidth(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                    }
                 case .headline:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
                         return FeaturedContentCellSize.headline(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .groupPaging
                     return layoutSection
-                case .highlight:
+                case .element:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
-                case .highlightSwimlane:
+                case .elementSwimlane:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, _ in
-                        return FeaturedContentCellSize.highlight(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
+                        return FeaturedContentCellSize.element(layoutWidth: layoutWidth, horizontalSizeClass: horizontalSizeClass)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
@@ -614,12 +623,12 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero:
+            case .heroStage:
                 HeroMediaCell(media: media, label: section.properties.label)
             case .headline:
                 FeaturedContentCell(media: media, label: section.properties.label, layout: .headline)
-            case .highlight, .highlightSwimlane:
-                FeaturedContentCell(media: media, label: section.properties.label, layout: .highlight)
+            case .element, .elementSwimlane:
+                FeaturedContentCell(media: media, label: section.properties.label, layout: .element)
             case .liveMediaSwimlane, .liveMediaGrid:
                 LiveMediaCell(media: media)
             case .mediaGrid:
@@ -636,10 +645,10 @@ private extension PageViewController {
         
         var body: some View {
             switch section.viewModelProperties.layout {
-            case .hero, .headline:
+            case .heroStage, .headline:
                 FeaturedContentCell(show: show, label: section.properties.label, layout: .headline)
-            case .highlight:
-                FeaturedContentCell(show: show, label: section.properties.label, layout: .highlight)
+            case .element:
+                FeaturedContentCell(show: show, label: section.properties.label, layout: .element)
             default:
                 PlaySRG.ShowCell(show: show, style: .standard, imageVariant: section.properties.imageVariant)
             }
@@ -667,6 +676,8 @@ private extension PageViewController {
                 case let .topic(topic):
                     TopicCell(topic: topic)
 #if os(iOS)
+                case let .download(download):
+                    DownloadCell(download: download)
                 case .showAccess:
                     switch id {
                     case .video:
@@ -676,6 +687,8 @@ private extension PageViewController {
                         ShowAccessCell(style: .calendar)
                     }
 #endif
+                case let .highlight(highlight):
+                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, filter: id)
                 case .transparent:
                     Color.clear
                 }
@@ -734,7 +747,7 @@ private extension PageViewController {
         }
         
         var body: some View {
-            if let title = Self.title(for: section) {
+            if section.properties.displaysRowHeader, let title = Self.title(for: section) {
 #if os(tvOS)
                 HeaderView(title: title, subtitle: Self.subtitle(for: section), hasDetailDisclosure: false)
 #else
@@ -750,7 +763,12 @@ private extension PageViewController {
         }
         
         static func size(section: PageViewModel.Section, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-            return HeaderViewSize.recommended(title: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+            if section.properties.displaysRowHeader {
+                return HeaderViewSize.recommended(forTitle: title(for: section), subtitle: subtitle(for: section), layoutWidth: layoutWidth)
+            }
+            else {
+                return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(LayoutHeaderHeightZero))
+            }
         }
     }
 }

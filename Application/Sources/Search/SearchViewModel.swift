@@ -23,13 +23,13 @@ final class SearchViewModel: ObservableObject {
                 .debounceAfterFirst(for: 0.3, scheduler: DispatchQueue.main)
                 .map { query, settings in
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
+                        .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
+                        .catch { error in
+                            return Just(State.failed(error: error))
+                        }
                 }
                 .switchToLatest()
-                .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
                 .prepend(State.loading)
-                .catch { error in
-                    return Just(State.failed(error: error))
-                }
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)

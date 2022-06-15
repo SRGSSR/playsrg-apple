@@ -74,9 +74,6 @@
 /* All option */
 "All" = "Tutto";
 
-/* Confirmation message displayed when the user is about to delete all download items */
-"All items will be deleted." = "Tutti gli elementi saranno eliminati.";
-
 /* Audios option
    Audios tab title
    Header for audio search results
@@ -135,9 +132,6 @@
 
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
 "Delete download" = "Eliminare il download";
-
-/* Title of the confirmation pop-up displayed when the user is about to delete download items */
-"Delete downloads" = "Eliminare il download";
 
 /* Title of the message displayed when the user is about to delete all favorites */
 "Delete favorites" = "Eliminare i preferiti";
@@ -217,7 +211,7 @@
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "Affinché l'app ti possa informare quando è disponibile un nuovo episodio, è necessario attivare le notifiche.";
 
-/* Total free space size, display at the bottom of download list */
+/* Total free space size displayed as a list footer */
 "Free space: %@" = "Spazio libero: %@";
 
 /* Full screen shortcut label */
@@ -301,9 +295,6 @@
 
 /* Message title displayed when the user is forced to update the application. */
 "Mandatory update" = "È necessario aggiornare";
-
-/* Message on top screen when trying to open a media in the download list and the media is being downloaded. */
-"Media is being downloaded" = "Il media è in fase di download";
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media non disponibile";
@@ -584,8 +575,7 @@
    Name of the subscription item, if no title or name to display */
 "The selected content" = "Contenuto selezionato";
 
-/* Confirmation message displayed when the user is about to delete selected download items
-   Confirmation message displayed when the user is about to delete selected entries */
+/* Confirmation message displayed when the user is about to delete selected entries */
 "The selected items will be deleted." = "L’elemento selezionato verrà eliminato";
 
 /* Error message when a show cannot be opened via Handoff
@@ -615,9 +605,6 @@
    Title label used to present the topic list
    Topics search setting option list view title */
 "Topics" = "Categorie";
-
-/* Total space size, display at the bottom of download list */
-"Total space used: %@" = "Spazio totale usato: %@";
 
 /* Tab title to present the most popular medias by channel on CarPlay */
 "Trends" = "Trends";
@@ -678,12 +665,6 @@
 /* Description of the alert view to keep autoplay permanently
    Description of the alert view to opt-in for background video playback */
 "You can manage this feature in the settings at any time." = "È possibile gestire questa funzionalità nelle impostazioni in qualsiasi momento.";
-
-/* Hint displayed when no downloads are available and the device supports 3D touch */
-"You can press on an item to download it (not all items can be downloaded)" = "È possibile premere su un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
-
-/* Hint displayed when no downloads are available and the device does not support 3D touch */
-"You can tap and hold an item to download it (not all items can be downloaded)" = "È possibile toccare e tenere premuto un elemento per scaricarlo (non tutti gli elementi possono essere scaricati)";
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Sei stato scollegato automaticamente. Esegui nuovamente il login per mantenere i dati sincronizzati su tutti i dispositivi.";

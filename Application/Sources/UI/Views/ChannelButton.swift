@@ -63,7 +63,7 @@ struct ChannelButton: View {
 
 // MARK: Accessibility
 
-extension ChannelButton {
+private extension ChannelButton {
     var accessibilityLabel: String? {
         return channel?.title
     }

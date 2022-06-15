@@ -28,6 +28,10 @@ extension ApplicationConfiguration {
             return Self.configuredSection(from: homeSection)
         }
     }
+    
+    var serviceMessageUrl: URL {
+        return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+    }
 }
 
 enum ConfiguredSection: Hashable {
@@ -49,7 +53,6 @@ enum ConfiguredSection: Hashable {
     case radioLatestVideos(channelUid: String)
     case radioMostPopular(channelUid: String)
     case radioResumePlayback(channelUid: String)
-    case radioShowAccess(channelUid: String)
     case radioWatchLater(channelUid: String)
     
     case tvLive
@@ -58,4 +61,10 @@ enum ConfiguredSection: Hashable {
     
     case tvLiveCenter
     case tvScheduledLivestreams
+    
+#if os(iOS)
+    case downloads
+    case radioShowAccess(channelUid: String)
+#endif
+
 }
