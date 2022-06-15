@@ -506,7 +506,9 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+#if os(iOS)
         guard !searchUpdateInhibited else { return }
+#endif
         model.query = searchController.searchBar.text ?? ""
     }
 }
