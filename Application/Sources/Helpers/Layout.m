@@ -66,6 +66,8 @@ NSCollectionLayoutSize *LayoutFullWidthCellSize(CGFloat height)
                                           heightDimension:[NSCollectionLayoutDimension absoluteDimension:scaledHeight]];
 }
 
+#if TARGET_OS_IOS
+
 static CGFloat LayoutStandardNavigationBarHeightContribution(void)
 {
     return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 50.f : 44.f;
@@ -107,3 +109,4 @@ LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavig
     }
 }
 
+#endif

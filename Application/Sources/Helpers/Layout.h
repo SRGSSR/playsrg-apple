@@ -122,6 +122,6 @@ typedef NS_CLOSED_ENUM(NSInteger, LayoutNavigationBarState) {
 /**
  *  Returns the navigation bar state for the specified navigation controller.
  */
-OBJC_EXPORT LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavigationController *navigationController);
+OBJC_EXPORT LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavigationController *navigationController) API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_END
