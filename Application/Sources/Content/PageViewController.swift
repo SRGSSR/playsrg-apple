@@ -92,10 +92,6 @@ final class PageViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-#if os(iOS)
-        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
-#endif
-        
         let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
@@ -128,6 +124,10 @@ final class PageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+#if os(iOS)
+        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+#endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
             cell.content = ItemCell(item: item, id: model.id)
