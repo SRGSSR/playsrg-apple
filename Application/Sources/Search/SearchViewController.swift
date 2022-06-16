@@ -30,7 +30,6 @@ final class SearchViewController: UIViewController {
     
     private var refreshTriggered = false
     private var searchUpdateInhibited = false
-    private var previousYContentOffset: CGFloat = 0
 #endif
     private weak var searchController: UISearchController?
     
@@ -552,11 +551,7 @@ extension SearchViewController: UIScrollViewDelegate {
         //       this should only be done when the collection view is at the top.
         //
         //       This bug will be reported to Apple and this workaround will hopefully be removed in the future.
-        let yContentOffset = scrollView.contentOffset.y + scrollView.adjustedContentInset.top
-        let yOffsetDifference = yContentOffset - previousYContentOffset
-        
-        if let navigationBar = navigationController?.navigationBar, navigationBar.prefersLargeTitles,
-           previousYContentOffset > 0, yOffsetDifference < 0 {
+        if let navigationController = navigationController, LayoutNavigationBarStateForNavigationController(navigationController) != .normal {
             let searchController = navigationItem.searchController
             searchUpdateInhibited = true
             navigationItem.searchController = nil
@@ -564,9 +559,6 @@ extension SearchViewController: UIScrollViewDelegate {
             searchUpdateInhibited = false
             searchController?.searchBar.text = model.query
         }
-        
-        previousYContentOffset = yContentOffset
-        // End of workaround
 #endif
         
         if scrollView.contentSize.height > 0 {

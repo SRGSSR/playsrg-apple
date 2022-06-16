@@ -105,4 +105,23 @@ OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
  */
 OBJC_EXPORT const CGFloat LayoutBlurActivationDistance;
 
+/**
+ *  Contribution associated
+ */
+OBJC_EXPORT const CGFloat LayoutLargeNavigationBarHeightContribution;
+
+/**
+ *  Navigation bar states.
+ */
+typedef NS_CLOSED_ENUM(NSInteger, LayoutNavigationBarState) {
+    LayoutNavigationBarStateNormal = 0,
+    LayoutNavigationBarStateResizing,
+    LayoutNavigationBarStateLarge
+};
+
+/**
+ *  Returns the navigation bar state for the specified navigation controller.
+ */
+OBJC_EXPORT LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavigationController *navigationController);
+
 NS_ASSUME_NONNULL_END
