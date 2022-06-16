@@ -29,6 +29,7 @@ final class SearchViewController: UIViewController {
     private var defaultLeftView: UIView?        // strong
     
     private var refreshTriggered = false
+    private var searchUpdateInhibited = false
 #endif
     private weak var searchController: UISearchController?
     
@@ -506,6 +507,9 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+#if os(iOS)
+        guard !searchUpdateInhibited else { return }
+#endif
         model.query = searchController.searchBar.text ?? ""
     }
 }
@@ -531,6 +535,30 @@ extension SearchViewController: UIScrollViewDelegate {
 #if os(iOS)
         if scrollView.isDragging && !scrollView.isDecelerating {
             searchController?.searchBar.resignFirstResponder()
+        }
+        
+        // TODO: This is a workaround for UIKit bugs when using a search controller with `hidesSearchBarWhenScrolling`
+        //       and large navigation titles:
+        //         - After entering input with the search bar expanded, scrolling down does not reveal any title in
+        //           the collapsed navigation bar.
+        //         - After entering input with the search bar collapsed, scrolling to the top does not reveal any large
+        //           title in the expanded navigation bar.
+        //       The titles are in fact there but their opacity is incorrect. To fix this bug we re-attach the same search
+        //       controller we use to the navigation item during scrolling, forcing title updates. We first must set the
+        //       navigation item search controller to `nil` so that a refresh is triggered, which clears the search
+        //       bar text, an update we need to inhibit. We then restore the search criterium, which does not trigger
+        //       any further view model reload since duplicate query updates are inhibited. This is a bit expensive so
+        //       this should only be done when the collection view is at the top.
+        //
+        //       This bug will be reported to Apple and this workaround will hopefully be removed in the future.
+        if let navigationBar = navigationController?.navigationBar, navigationBar.prefersLargeTitles,
+           scrollView.contentOffset.y + scrollView.adjustedContentInset.top == 0 {
+            let searchController = navigationItem.searchController
+            searchUpdateInhibited = true
+            navigationItem.searchController = nil
+            navigationItem.searchController = searchController
+            searchUpdateInhibited = false
+            searchController?.searchBar.text = model.query
         }
 #endif
         
