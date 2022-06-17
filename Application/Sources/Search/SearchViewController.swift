@@ -149,7 +149,7 @@ final class SearchViewController: UIViewController {
         let searchBar = searchController.searchBar
         object_setClass(searchBar, SearchBar.self)
         
-        searchBar.placeholder = NSLocalizedString("Shows, Topics, and More", comment: "Search placeholder text")
+        searchBar.placeholder = NSLocalizedString("Shows, topics, and more", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
         searchBar.delegate = self
@@ -493,7 +493,7 @@ extension SearchViewController: UISearchBarDelegate {
         button.setImage(UIImage(systemName: "arrow.left.circle.fill"), for: .normal)
         button.addTarget(self, action: #selector(closeKeyboard(_:)), for: .touchUpInside)
         button.tintColor = .secondaryLabel
-        button.accessibilityLabel = NSLocalizedString("Dismiss keyboard", comment: "Label of the search bar button to close the keyboard")
+        button.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Dismiss keyboard", comment: "Label of the search bar button to close the keyboard")
         textField.leftView = button
     }
     

@@ -272,6 +272,7 @@
 "Live" = "Live";
 
 /* Label to present the Livestreams view
+   Livestreams tab bar title
    Livestreams tab title
    Tab title to present the livestreams on CarPlay
    Title displayed at the top of the livestreams view */
@@ -404,6 +405,7 @@
 "Previous" = "Precedente";
 
 /* Profile section header
+   Profile tab bar title
    Title displayed at the top of the profile view */
 "Profile" = "Profilo";
 
@@ -444,6 +446,7 @@
 /* Label to present the search view
    Search placeholder text
    Search shortcut label
+   Search tab bar title
    Search tab title */
 "Search" = "Ricerca";
 
@@ -482,6 +485,9 @@
 
 /* Label to present shows (episodes) by date (radio or TV) */
 "Shows by date" = "Programmi per data";
+
+/* Search placeholder text */
+"Shows, topics, and more" = "Shows, topics, and more";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Salta";
@@ -624,7 +630,8 @@
 
 /* Header for video search results
    Title displayed at the top of the video view
-   Videos option */
+   Videos option
+   Videos tab title */
 "Videos" = "Video";
 
 /* Header for video and audio search results */
