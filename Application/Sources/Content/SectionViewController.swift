@@ -31,6 +31,7 @@ final class SectionViewController: UIViewController {
     private weak var refreshControl: UIRefreshControl!
     
     private var refreshTriggered = false
+    private var firstHeaderVisible = true
 #endif
     
     private var contentInsets: UIEdgeInsets
@@ -65,7 +66,7 @@ final class SectionViewController: UIViewController {
         self.fromPushNotification = fromPushNotification
         contentInsets = Self.contentInsets(for: model.state)
         super.init(nibName: nil, bundle: nil)
-        title = model.title
+        title = model.displaysTitle ? model.title : nil
     }
     
     required init?(coder: NSCoder) {
@@ -111,6 +112,7 @@ final class SectionViewController: UIViewController {
         super.viewDidLoad()
         
 #if os(iOS)
+        navigationItem.largeTitleDisplayMode = model.configuration.viewModelProperties.largeTitleDisplayMode
         updateNavigationBar()
 #endif
         
@@ -204,7 +206,7 @@ final class SectionViewController: UIViewController {
             navigationItem.rightBarButtonItem = editButtonItem
             
             if isEditing {
-                title = Self.title(for: model.numberOfSelectedItems)
+                navigationItem.title = Self.title(for: model.numberOfSelectedItems)
                 editButtonItem.title = NSLocalizedString("Done", comment: "Done button title")
                 
                 let numberOfSelectedItems = model.numberOfSelectedItems
@@ -216,13 +218,13 @@ final class SectionViewController: UIViewController {
                 navigationItem.leftBarButtonItem = deleteBarButtonItem
             }
             else {
-                title = model.title
+                navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
                 editButtonItem.title = NSLocalizedString("Select", comment: "Select button title")
                 navigationItem.leftBarButtonItem = leftBarButtonItem
             }
         }
         else {
-            title = model.title
+            navigationItem.title = (model.displaysTitle || !firstHeaderVisible) ? model.title : nil
             
             if model.configuration.properties.sharingItem != nil {
                 let shareButtonItem = UIBarButtonItem(image: UIImage(named: "share"),
@@ -478,6 +480,12 @@ extension SectionViewController: ContentInsets {
     }
 }
 
+extension SectionViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension SectionViewController: UICollectionViewDelegate {
 #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -534,6 +542,30 @@ extension SectionViewController: UICollectionViewDelegate {
         return preview(for: configuration, in: collectionView)
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionHeader:
+            if indexPath.section == 0 {
+                firstHeaderVisible = true
+                updateNavigationBar()
+            }
+        default:
+            break
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        switch elementKind {
+        case UICollectionView.elementKindSectionHeader:
+            if indexPath.section == 0 {
+                firstHeaderVisible = false
+                updateNavigationBar()
+            }
+        default:
+            break
+        }
+    }
+    
     private func preview(for configuration: UIContextMenuConfiguration, in collectionView: UICollectionView) -> UITargetedPreview? {
         guard let interactionView = ContextMenu.interactionView(in: collectionView, with: configuration) else { return nil }
         let parameters = UIPreviewParameters()
@@ -550,15 +582,21 @@ extension SectionViewController: UICollectionViewDelegate {
 }
 
 extension SectionViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 #if os(iOS)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
-#endif
     }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.contentSize.height > 0 else { return }
@@ -598,6 +636,14 @@ extension SectionViewController: SectionShowHeaderViewAction {
 #endif
     }
 }
+
+#if os(iOS)
+extension SectionViewController: TabBarActionable {
+    func performActiveTabAction(animated: Bool) {
+        collectionView?.play_scrollToTop(animated: animated)
+    }
+}
+#endif
 
 // MARK: Layout
 

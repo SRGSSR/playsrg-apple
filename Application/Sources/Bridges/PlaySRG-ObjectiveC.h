@@ -35,6 +35,7 @@
 #import "Reachability.h"
 #import "RefreshControl.h"
 #import "SceneDelegate.h"
+#import "ScrollableContent.h"
 #import "SearchSettingsViewController.h"
 #import "SharingItem.h"
 #import "SongsViewController.h"

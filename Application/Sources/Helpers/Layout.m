@@ -18,6 +18,15 @@ const CGFloat LayoutProgressBarHeight = 3.f;
 #endif
 
 const CGFloat LayoutHeaderHeightZero = 0.001f;
+const CGFloat LayoutBlurActivationDistance = 10.f;
+
+const CGFloat LayoutMargin = 8.f;
+const UIEdgeInsets LayoutPaddingContentInsets = { LayoutMargin, 0.f, LayoutMargin, 0.f };
+const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0.f, LayoutMargin / 2.f, 0.f };
+
+const CGFloat LayoutLargeNavigationBarHeightContribution = 52.f;
+
+static const CGFloat LayoutSearchBarHeightContribution = 52.f;
 
 static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {
@@ -57,6 +66,68 @@ NSCollectionLayoutSize *LayoutFullWidthCellSize(CGFloat height)
                                           heightDimension:[NSCollectionLayoutDimension absoluteDimension:scaledHeight]];
 }
 
-const CGFloat LayoutMargin = 8.f;
-const UIEdgeInsets LayoutPaddingContentInsets = { LayoutMargin, 0.f, LayoutMargin, 0.f };
-const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0.f, LayoutMargin / 2.f, 0.f };
+#if TARGET_OS_IOS
+
+static CGFloat LayoutStandardNavigationBarHeightContribution(void)
+{
+    return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 50.f : 44.f;
+}
+
+static BOOL LayoutLargeTitlesEnabledForNavigationController(UINavigationController *navigationController)
+{
+    for (UIViewController *viewController in navigationController.viewControllers.reverseObjectEnumerator) {
+        if (viewController.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAutomatic) {
+            continue;
+        }
+        return viewController.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAlways;
+    }
+    
+    // If all view controllers have automatic mode large titles are enabled
+    return YES;
+}
+
+LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavigationController *navigationController)
+{
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    if (navigationController.navigationBarHidden) {
+        return LayoutNavigationBarStateNone;
+    }
+    
+    if (navigationBar.prefersLargeTitles && LayoutLargeTitlesEnabledForNavigationController(navigationController)) {
+        UISearchController *searchController = navigationController.topViewController.navigationItem.searchController;
+        if (searchController) {
+            if (searchController.hidesNavigationBarDuringPresentation && searchController.active) {
+                return LayoutNavigationBarStateLargeCollapsed;
+            }
+            else {
+                CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
+                if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution) {
+                    return LayoutNavigationBarStateLargeCollapsed;
+                }
+                else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution + LayoutLargeNavigationBarHeightContribution) {
+                    return LayoutNavigationBarStateLargeExpanded;
+                }
+                else {
+                    return LayoutNavigationBarStateLargeResizing;
+                }
+            }
+        }
+        else {
+            CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
+            if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution()) {
+                return LayoutNavigationBarStateLargeCollapsed;
+            }
+            else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutLargeNavigationBarHeightContribution) {
+                return LayoutNavigationBarStateLargeExpanded;
+            }
+            else {
+                return LayoutNavigationBarStateLargeResizing;
+            }
+        }
+    }
+    else {
+        return LayoutNavigationBarStateSmall;
+    }
+}
+
+#endif

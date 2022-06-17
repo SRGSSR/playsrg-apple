@@ -13,8 +13,12 @@ final class PageViewModel: Identifiable, ObservableObject {
     
     var title: String? {
         switch id {
-        case .video, .audio, .live:
-            return nil
+        case .video:
+            return NSLocalizedString("Videos", comment: "Title displayed at the top of the video view")
+        case .audio:
+            return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
+        case .live:
+            return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
         case let .topic(topic: topic):
             return topic.title
         }

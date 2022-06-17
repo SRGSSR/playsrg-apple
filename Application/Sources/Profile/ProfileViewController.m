@@ -61,6 +61,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
@@ -334,6 +335,13 @@
     return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
+#pragma mark ScrollableContent protocol
+
+- (UIScrollView *)play_scrollableView
+{
+    return self.tableView;
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -351,6 +359,14 @@
 - (void)performActiveTabActionAnimated:(BOOL)animated
 {
     [self.tableView play_scrollToTopAnimated:animated];
+}
+
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    [scrollView play_scrollToTopAnimated:YES];
+    return NO;
 }
 
 #pragma mark UITableViewDataSource protocol

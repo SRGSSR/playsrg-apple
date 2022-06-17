@@ -27,6 +27,7 @@
                             statusBarStyle:(UIStatusBarStyle)statusBarStyle
 {
     if (self = [super initWithRootViewController:rootViewController]) {
+        self.delegate = self;
         [self updateWithTintColor:tintColor backgroundColor:backgroundColor statusBarStyle:statusBarStyle];
     }
     return self;
@@ -102,14 +103,20 @@
     // Remove the separator (looks nicer)
     appearance.shadowColor = UIColor.clearColor;
     
-    UIColor *foregroundColor = tintColor ?: UIColor.whiteColor;
-    NSDictionary<NSAttributedStringKey, id> *attributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
-                                                             NSForegroundColorAttributeName : foregroundColor };
-    appearance.titleTextAttributes = attributes;
-    appearance.largeTitleTextAttributes = attributes;
+    UIColor *foregroundColor = tintColor ?: UIColor.srg_grayC7Color;
+    appearance.titleTextAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:UIFontWeightSemibold fixedSize:17.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
+    appearance.largeTitleTextAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyDisplay weight:UIFontWeightBold fixedSize:30.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
     
-    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
-                                                                   NSForegroundColorAttributeName : foregroundColor };
+    NSDictionary<NSAttributedStringKey, id> *buttonAttributes = @{
+        NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightRegular fixedSize:16.f],
+        NSForegroundColorAttributeName : foregroundColor
+    };
     
     UIBarButtonItemAppearance *plainButtonAppearance = [[UIBarButtonItemAppearance alloc] initWithStyle:UIBarButtonItemStylePlain];
     plainButtonAppearance.normal.titleTextAttributes = buttonAttributes;
@@ -120,10 +127,15 @@
     appearance.doneButtonAppearance = doneButtonAppearance;
     
     UINavigationBar *navigationBar = self.navigationBar;
+    if (@available(iOS 15, *)) {
+        navigationBar.prefersLargeTitles = YES;
+    }
     navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
     navigationBar.standardAppearance = appearance;
     navigationBar.compactAppearance = appearance;
-    navigationBar.scrollEdgeAppearance = appearance;
+    if (backgroundColor) {
+        navigationBar.scrollEdgeAppearance = appearance;
+    }
     
     // Force appearance settings to be applied again, see https://stackoverflow.com/a/37668610/760435
     self.navigationBarHidden = YES;
@@ -181,6 +193,13 @@
     }
 }
 
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.topViewController;
+}
+
 #pragma mark TabBarActionable protocol
 
 - (void)performActiveTabActionAnimated:(BOOL)animated
@@ -197,6 +216,13 @@
         // explicitly for all other kinds of embedding as well (e.g. tab bar -> split view -> navigation).
         [self popToRootViewControllerAnimated:animated];
     }
+}
+
+#pragma mark UINavigationControlelrDelegate protocol
+
+- (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    [self play_setNeedsScrollableViewUpdate];
 }
 
 @end

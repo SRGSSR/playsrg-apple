@@ -107,6 +107,7 @@ static NSString * const SettingsFLEXButton = @"Button_FLEX";
     [super viewDidLoad];
     
     self.title = NSLocalizedString(@"Settings", nil);
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
     [self updateSettingsVisibility];
     

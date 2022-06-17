@@ -79,6 +79,7 @@ final class ProgramGuideListViewController: UIViewController {
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
         pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
+        play_setNeedsScrollableViewUpdate()
     }
 }
 
@@ -96,6 +97,12 @@ extension ProgramGuideListViewController: ProgramGuideChildViewController {
         else {
             return nil
         }
+    }
+}
+
+extension ProgramGuideListViewController: ScrollableContentContainer {
+    var play_scrollableChildViewController: UIViewController? {
+        return pageViewController.viewControllers?.first
     }
 }
 
@@ -121,6 +128,7 @@ extension ProgramGuideListViewController: UIPageViewControllerDelegate {
         
         if completed, let currentViewController = pageViewController.viewControllers?.first as? ProgramGuideDailyViewController {
             model.switchToDay(currentViewController.day)
+            play_setNeedsScrollableViewUpdate()
         }
     }
 }

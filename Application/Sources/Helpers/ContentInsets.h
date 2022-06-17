@@ -9,27 +9,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
- *  Protocol allowing container view controllers to define the content inset behavior to apply to their children.
- */
-@protocol ContainerContentInsets <NSObject>
-
-/**
- *  Additional content insets to be applied to child view controllers.
- */
-@property (nonatomic, readonly) UIEdgeInsets play_additionalContentInsets;
-
-@optional
-
-/**
- *  Child controllers for the container. If this method is not implemented the default `childViewControllers` property
- *  is used. This method is only useful for special containments where the parent-child relationship is not obvious
- *  (e.g. search controller).
- */
-@property (nonatomic, readonly) NSArray<UIViewController *> *play_contentChildViewControllers;
-
-@end
-
-/**
  *  Protocol allowing view controllers to define their content inset behavior.
  */
 @protocol ContentInsets <NSObject>
@@ -57,22 +36,42 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 /**
- *  To be able to guarantee proper consistent behavior across iOS versions, and to provide a convenient formalism
- *  to precisely define content inset contributions in view controller hierarchies:
+ *  Protocol allowing container view controllers to define the content inset behavior to apply to their children.
+ */
+@protocol ContainerContentInsets <NSObject>
+
+/**
+ *  Additional content insets to be applied to child view controllers.
+ */
+@property (nonatomic, readonly) UIEdgeInsets play_additionalContentInsets;
+
+@optional
+
+/**
+ *  Child controllers for the container. If this method is not implemented the default `childViewControllers` property
+ *  is used. This method is only useful for special containments where the parent-child relationship is not obvious
+ *  (e.g. search controller).
+ */
+@property (nonatomic, readonly) NSArray<UIViewController *> *play_contentChildViewControllers;
+
+@end
+
+/**
+ *  This file provide a convenient formalism to precisely define content inset contributions in view controller
+ *  hierarchies:
  *
- *  - Containers which need to define additional insets because of their layout (e.g. bar covering an area where
- *    their children will be displayed) can conform to the `ContainerContentInsets` protocol.
- *  - View controllers containing scrollable views should conform to the `ContentInsets` protocol.
- *
- *  View controllers conforming to the `ContentInsets` protocol will automatically adjust their content insets,
- *  consistently for all iOS versions, in such a way that parent inset contributions are properly taken into
- *  account as well.
+ *  - View controllers containing scrollable views must conform to the `ContentInsets` protocol to declare which
+ *    views are scrollable so that their insets can be adjusted automatically.
+ *  - Containers can implement `ContainerContentInsets` to declare non-trivial parent-child relationships or
+ *    to define additional insets related to their layout (e.g. bar covering an area where their children will be
+ *    displayed).
  */
 @interface UIViewController (ContentInsets)
 
 /**
- *  Content inset adjustments for view controllers conforming to the `ContentInsets` protocol are automatic. If
- *  needed in some cases, though, you can call this method to force a content inset update.
+ *  Content inset adjustments for view controllers conforming to the `ContentInsets` protocol are automatically
+ *  applied when their view appears. When implementing containers, however, this mechanism might not suffice, in
+ *  which case this method can be used to trigger an update.
  */
 - (void)play_setNeedsContentInsetsUpdate;
 

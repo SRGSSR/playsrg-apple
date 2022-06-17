@@ -18,8 +18,11 @@ final class SectionViewModel: ObservableObject {
     private var selectedItems = Set<Content.Item>()
     
     var title: String? {
-        let properties = configuration.properties
-        return properties.displaysTitle ? properties.title : nil
+        return configuration.properties.title
+    }
+    
+    var displaysTitle: Bool {
+        return configuration.properties.displaysTitle
     }
     
     var numberOfSelectedItems: Int {
@@ -286,6 +289,7 @@ protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     var pinHeadersToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
+    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
@@ -337,6 +341,15 @@ private extension SectionViewModel {
         
         var userActivity: NSUserActivity? {
             return nil
+        }
+        
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            switch contentSection.type {
+            case .showAndMedias:
+                return .never
+            default:
+                return .always
+            }
         }
         
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
@@ -421,6 +434,15 @@ private extension SectionViewModel {
                 return userActivity
             default:
                 return nil
+            }
+        }
+        
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            switch configuredSection {
+            case .show:
+                return .never
+            default:
+                return .always
             }
         }
         

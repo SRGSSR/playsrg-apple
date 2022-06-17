@@ -170,6 +170,7 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.play_popoverGrayBackgroundColor;
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
     self.tableView.backgroundView = nil;
     self.tableView.backgroundColor = UIColor.clearColor;

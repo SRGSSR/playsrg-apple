@@ -118,6 +118,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         scrollToTime(programGuideModel.time, animated: false)
     }
     
@@ -213,6 +214,12 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
 }
 
+extension ProgramGuideDailyViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
@@ -234,6 +241,12 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let date = date(atYOffset: collectionView.contentOffset.y) else { return }
         programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
+    }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
     }
 }
 

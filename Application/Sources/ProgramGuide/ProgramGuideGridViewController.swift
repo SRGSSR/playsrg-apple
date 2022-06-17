@@ -139,6 +139,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(false, animated: animated)
         scrollToTarget(ScrollTarget(channel: model.selectedChannel, time: model.time), animated: false)
     }
@@ -264,6 +265,14 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     }
 }
 
+#if os(iOS)
+extension ProgramGuideGridViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+#endif
+
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
@@ -315,6 +324,14 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
     }
+    
+#if os(iOS)
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
 }
 
 // MARK: Views

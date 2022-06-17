@@ -5,22 +5,13 @@
 //
 
 #import "RadioChannelsViewController.h"
-
-#import "ApplicationSettings.h"
-#import "GoogleCastBarButtonItem.h"
-#import "NavigationController.h"
-#import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 
 @import libextobjc;
-@import SRGAppearance;
 
 @interface RadioChannelsViewController ()
 
-@property (nonatomic, copy) NSString *subtitle;
-
-@property (nonatomic, weak) UILabel *navigationTitleLabel;
-@property (nonatomic, weak) UILabel *navigationSubtitleLabel;
+@property (nonatomic, copy) NSString *radioChannelName;
 
 @end
 
@@ -41,7 +32,7 @@
     
     NSUInteger initialPage = [radioChannels indexOfObject:ApplicationSettingLastOpenedRadioChannel()];
     if (self = [super initWithViewControllers:viewControllers.copy initialPage:initialPage]) {
-        self.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
+        [self updateTitle];
     }
     return self;
 }
@@ -52,10 +43,11 @@
 {
     [super viewDidLoad];
     
+    [self updateTitle];
+    
     UINavigationBar *navigationBar = self.navigationController.navigationBar;
     if (navigationBar) {
         self.navigationItem.rightBarButtonItem = [[GoogleCastBarButtonItem alloc] initForNavigationBar:navigationBar];
-        [self updateNavigationBar:navigationBar];
     }
 }
 
@@ -67,7 +59,7 @@
     
     PageViewController *pageViewController = (PageViewController *)viewController;
     RadioChannel *radioChannel = pageViewController.radioChannel;
-    self.subtitle = radioChannel.name;
+    self.radioChannelName = radioChannel.name;
     
     ApplicationSettingSetLastOpenedRadioChannel(radioChannel);
     
@@ -76,49 +68,14 @@
         [navigationController updateWithRadioChannel:radioChannel animated:animated];
     }
     
-    [self updateNavigationBar:self.navigationController.navigationBar];
+    [self updateTitle];
 }
 
 #pragma mark Navigation bar
 
-- (void)updateNavigationBar:(UINavigationBar *)navigationBar
+- (void)updateTitle
 {
-    if (! navigationBar) {
-        return;
-    }
-    
-    NSAssert(self.title != nil, @"Expect at title to be defined");
-    
-    if (self.subtitle) {
-        if (! self.navigationItem.titleView) {
-            UIStackView *stackView = [[UIStackView alloc] init];
-            stackView.axis = UILayoutConstraintAxisVertical;
-            self.navigationItem.titleView = stackView;
-            
-            UILabel *navigationTitleLabel = [[UILabel alloc] init];
-            navigationTitleLabel.textAlignment = NSTextAlignmentCenter;
-            navigationTitleLabel.alpha = 0.7f;
-            [stackView addArrangedSubview:navigationTitleLabel];
-            self.navigationTitleLabel = navigationTitleLabel;
-            
-            UILabel *navigationSubtitleLabel = [[UILabel alloc] init];
-            navigationSubtitleLabel.textAlignment = NSTextAlignmentCenter;
-            [stackView addArrangedSubview:navigationSubtitleLabel];
-            self.navigationSubtitleLabel = navigationSubtitleLabel;
-        }
-        
-        self.navigationTitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.title
-                                                                                   attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:14.f],
-                                                                                                 NSForegroundColorAttributeName : navigationBar.tintColor }];
-        self.navigationSubtitleLabel.attributedText = [[NSAttributedString alloc] initWithString:self.subtitle
-                                                                                      attributes:@{ NSFontAttributeName : [SRGFont fontWithFamily:SRGFontFamilyText weight:SRGFontWeightMedium fixedSize:18.f],
-                                                                                                    NSForegroundColorAttributeName : navigationBar.tintColor }];
-        
-        self.navigationItem.titleView.accessibilityLabel = [NSString stringWithFormat:@"%@, %@", self.title, self.subtitle];
-    }
-    else {
-        self.navigationItem.titleView = nil;
-    }
+    self.navigationItem.title = self.radioChannelName ?: NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
 }
 
 #pragma mark PlayApplicationNavigation protocol

@@ -7,12 +7,13 @@
 #import "ApplicationSectionInfo.h"
 #import "ContentInsets.h"
 #import "PlayApplicationNavigation.h"
+#import "ScrollableContent.h"
 
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TabBarController : UITabBarController <ContainerContentInsets, PlayApplicationNavigation, UITabBarControllerDelegate>
+@interface TabBarController : UITabBarController <ContainerContentInsets, PlayApplicationNavigation, ScrollableContentContainer, UITabBarControllerDelegate>
 
 /**
  *  Open the application section.

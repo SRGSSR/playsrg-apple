@@ -7,6 +7,7 @@
 #import "RadioChannel.h"
 
 #import "PlayApplicationNavigation.h"
+#import "ScrollableContent.h"
 #import "TabBarActionable.h"
 
 @import UIKit;
@@ -16,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Standard navigation controller with Play look-and-feel and behavior.
  */
-@interface NavigationController : UINavigationController <PlayApplicationNavigation, TabBarActionable>
+@interface NavigationController : UINavigationController <PlayApplicationNavigation, ScrollableContentContainer, TabBarActionable, UINavigationControllerDelegate>
 
 /**
  *  Create a navigation controller with standard customizable look-and-feel.

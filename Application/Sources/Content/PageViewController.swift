@@ -125,6 +125,13 @@ final class PageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+#if os(iOS)
+        // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+        // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+        // be incorrect at the top.
+        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+#endif
+        
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
             cell.content = ItemCell(item: item, id: model.id)
         }
@@ -179,6 +186,7 @@ final class PageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -304,6 +312,12 @@ extension PageViewController: ContentInsets {
     }
 }
 
+extension PageViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension PageViewController: UICollectionViewDelegate {
 #if os(iOS)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -383,15 +397,21 @@ extension PageViewController: UICollectionViewDelegate {
 }
 
 extension PageViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 #if os(iOS)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
-#endif
     }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.contentSize.height > 0 else { return }
@@ -485,8 +505,7 @@ extension PageViewController: SectionHeaderViewAction {
 
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        guard let collectionView = collectionView else { return }
-        collectionView.play_scrollToTop(animated: animated)
+        collectionView?.play_scrollToTop(animated: animated)
     }
 }
 

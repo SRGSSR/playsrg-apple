@@ -254,11 +254,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     UIColor *normalForegroundColor = UIColor.srg_gray96Color;
     UIColor *selectedForegroundColor = UIColor.whiteColor;
     
-    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{ NSFontAttributeName : font,
-                                                                       NSForegroundColorAttributeName : normalForegroundColor };
+    NSDictionary<NSAttributedStringKey, id> *normalItemAttributes = @{
+        NSFontAttributeName : font,
+        NSForegroundColorAttributeName : normalForegroundColor
+    };
     
-    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{ NSFontAttributeName : font,
-                                                                         NSForegroundColorAttributeName : selectedForegroundColor };
+    NSDictionary<NSAttributedStringKey, id> *selectedItemAttributes = @{
+        NSFontAttributeName : font,
+        NSForegroundColorAttributeName : selectedForegroundColor
+    };
     
     UITabBarItemAppearance *stackedItemAppearance = [[UITabBarItemAppearance alloc] initWithStyle:UITabBarItemAppearanceStyleStacked];
     stackedItemAppearance.normal.titleTextAttributes = normalItemAttributes;
@@ -276,29 +280,30 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     UITabBar *tabBar = self.tabBar;
     tabBar.standardAppearance = appearance;
-    
-    // Starting with iOS 15 the default behavior is to have a transparent tab bar appearance when reaching the
-    // scroll edge (the observed scroll view determined heuristically in most cases, but can be also set with
-    // `-setContentScrollView:` if the heuristic approach fails). We can preserve the old behavior (probably
-    // more readable) by just setting a common appearance for the standard and scroll edge cases.
-    if (@available(iOS 15.0, *)) {
-        tabBar.scrollEdgeAppearance = appearance;
-    }
 }
 
 #pragma mark View controllers
 
 - (UIViewController *)videosTabViewController
 {
-    UIViewController *videosViewController = [PageViewController videosViewController];
-    videosViewController.title = NSLocalizedString(@"Videos", @"Title displayed at the top of the video view");
-    
-    UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:videosViewController.title image:[UIImage imageNamed:@"videos_tab"] tag:TabBarItemIdentifierVideos];
+    UITabBarItem *videosTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Videos", @"Videos tab title")
+                                                                   image:[UIImage imageNamed:@"videos_tab"]
+                                                                     tag:TabBarItemIdentifierVideos];
     videosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierVideosTabBarItem;
-    
+ 
+    UIViewController *videosViewController = [PageViewController videosViewController];
     NavigationController *videosNavigationController = [[NavigationController alloc] initWithRootViewController:videosViewController];
     videosNavigationController.tabBarItem = videosTabBarItem;
     return videosNavigationController;
+}
+
+- (UITabBarItem *)audiosTabBarItem
+{
+    UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Audios", @"Audios tab title")
+                                                                   image:[UIImage imageNamed:@"audios_tab"]
+                                                                     tag:TabBarItemIdentifierAudios];
+    audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
+    return audiosTabBarItem;
 }
 
 - (UIViewController *)audiosTabViewController
@@ -308,24 +313,15 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     NSArray<RadioChannel *> *radioChannels = applicationConfiguration.radioHomepageChannels;
     if (radioChannels.count > 1) {
         UIViewController *radioChannelsViewController = [[RadioChannelsViewController alloc] initWithRadioChannels:radioChannels];
-        
-        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:radioChannelsViewController.title image:[UIImage imageNamed:@"audios_tab"] tag:TabBarItemIdentifierAudios];
-        audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
-        
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:radioChannelsViewController];
-        audiosNavigationController.tabBarItem = audiosTabBarItem;
+        audiosNavigationController.tabBarItem = [self audiosTabBarItem];
         return audiosNavigationController;
     }
     else if (radioChannels.count == 1) {
         RadioChannel *radioChannel = radioChannels.firstObject;
         UIViewController *audiosViewController = [PageViewController audiosViewControllerForRadioChannel:radioChannel];
-        audiosViewController.title = NSLocalizedString(@"Audios", @"Title displayed at the top of the audio view");
-        
-        UITabBarItem *audiosTabBarItem = [[UITabBarItem alloc] initWithTitle:audiosViewController.title image:[UIImage imageNamed:@"audios_tab"] tag:TabBarItemIdentifierAudios];
-        audiosTabBarItem.accessibilityIdentifier = AccessibilityIdentifierAudiosTabBarItem;
-        
         NavigationController *audiosNavigationController = [[NavigationController alloc] initWithRootViewController:audiosViewController];
-        audiosNavigationController.tabBarItem = audiosTabBarItem;
+        audiosNavigationController.tabBarItem = [self audiosTabBarItem];
         [audiosNavigationController updateWithRadioChannel:radioChannel animated:NO];
         return audiosNavigationController;
     }
@@ -340,12 +336,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     
     NSArray<NSNumber *> *liveHomeSections = applicationConfiguration.liveHomeSections;
     if (liveHomeSections.count != 0) {
-        UIViewController *liveViewController = [PageViewController liveViewController];
-        liveViewController.title = NSLocalizedString(@"Livestreams", @"Title displayed at the top of the livestreams view");
-        
-        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:liveViewController.title image:[UIImage imageNamed:@"livestreams_tab"] tag:TabBarItemIdentifierLivestreams];
+        UITabBarItem *liveTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Livestreams", @"Livestreams tab bar title")
+                                                                     image:[UIImage imageNamed:@"livestreams_tab"]
+                                                                       tag:TabBarItemIdentifierLivestreams];
         liveTabBarItem.accessibilityIdentifier = AccessibilityIdentifierLivestreamsTabBarItem;
         
+        UIViewController *liveViewController = [PageViewController liveViewController];
         NavigationController *liveNavigationController = [[NavigationController alloc] initWithRootViewController:liveViewController];
         liveNavigationController.tabBarItem = liveTabBarItem;
         return liveNavigationController;
@@ -357,11 +353,12 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (UIViewController *)searchTabViewController
 {
-    UIViewController *searchViewController = [[SearchViewController alloc] init];
-    
-    UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:searchViewController.title image:[UIImage imageNamed:@"search_tab"] tag:TabBarItemIdentifierSearch];
+    UITabBarItem *searchTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Search tab bar title")
+                                                                   image:[UIImage imageNamed:@"search_tab"]
+                                                                     tag:TabBarItemIdentifierSearch];
     searchTabBarItem.accessibilityIdentifier = AccessibilityIdentifierSearchTabBarItem;
-    
+ 
+    UIViewController *searchViewController = [SearchViewController viewController];
     NavigationController *searchNavigationController = [[NavigationController alloc] initWithRootViewController:searchViewController];
     searchNavigationController.tabBarItem = searchTabBarItem;
     return searchNavigationController;
@@ -369,11 +366,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
 
 - (UIViewController *)profileTabViewController
 {
+    UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Profile", @"Profile tab bar title")
+                                                                    image:[UIImage imageNamed:@"profile_tab"]
+                                                                      tag:TabBarItemIdentifierProfile];
+    profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
+    
     UIViewController *profileViewController = [[ProfileViewController alloc] init];
     NavigationController *profileNavigationController = [[NavigationController alloc] initWithRootViewController:profileViewController];
-    
-    UITabBarItem *profileTabBarItem = [[UITabBarItem alloc] initWithTitle:profileViewController.title image:[UIImage imageNamed:@"profile_tab"] tag:TabBarItemIdentifierProfile];
-    profileTabBarItem.accessibilityIdentifier = AccessibilityIdentifierProfileTabBarItem;
     
     SplitViewController *profileSplitViewController = [[SplitViewController alloc] init];
     profileSplitViewController.preferredDisplayMode = UISplitViewControllerDisplayModeOneBesideSecondary;
@@ -501,6 +500,13 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return NO;
 }
 
+#pragma mark ScrollableContentContainer protocol
+
+- (UIViewController *)play_scrollableChildViewController
+{
+    return self.selectedViewController;
+}
+
 #pragma mark UITabBarControllerDelegate protocol
 
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
@@ -512,6 +518,11 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
         }
     }
     return YES;
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [self play_setNeedsScrollableViewUpdate];
 }
 
 #pragma mark Notifications
