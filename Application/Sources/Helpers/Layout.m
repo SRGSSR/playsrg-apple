@@ -73,39 +73,60 @@ static CGFloat LayoutStandardNavigationBarHeightContribution(void)
     return (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) ? 50.f : 44.f;
 }
 
+static BOOL LayoutLargeTitlesEnabledForNavigationController(UINavigationController *navigationController)
+{
+    for (UIViewController *viewController in navigationController.viewControllers.reverseObjectEnumerator) {
+        if (viewController.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAutomatic) {
+            continue;
+        }
+        return viewController.navigationItem.largeTitleDisplayMode == UINavigationItemLargeTitleDisplayModeAlways;
+    }
+    
+    // If all view controllers have automatic mode large titles are enabled
+    return YES;
+}
+
 LayoutNavigationBarState LayoutNavigationBarStateForNavigationController(UINavigationController *navigationController)
 {
-    UISearchController *searchController = navigationController.topViewController.navigationItem.searchController;
-    if (searchController) {
-        if (! searchController.hidesNavigationBarDuringPresentation || ! searchController.active) {
-            UINavigationBar *navigationBar = navigationController.navigationBar;
-            CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
-            if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution) {
-                return LayoutNavigationBarStateNormal;
-            }
-            else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution + LayoutLargeNavigationBarHeightContribution) {
-                return LayoutNavigationBarStateLarge;
+    UINavigationBar *navigationBar = navigationController.navigationBar;
+    if (navigationController.navigationBarHidden) {
+        return LayoutNavigationBarStateNone;
+    }
+    
+    if (navigationBar.prefersLargeTitles && LayoutLargeTitlesEnabledForNavigationController(navigationController)) {
+        UISearchController *searchController = navigationController.topViewController.navigationItem.searchController;
+        if (searchController) {
+            if (searchController.hidesNavigationBarDuringPresentation && searchController.active) {
+                return LayoutNavigationBarStateLargeCollapsed;
             }
             else {
-                return LayoutNavigationBarStateResizing;
+                CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
+                if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution) {
+                    return LayoutNavigationBarStateLargeCollapsed;
+                }
+                else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutSearchBarHeightContribution + LayoutLargeNavigationBarHeightContribution) {
+                    return LayoutNavigationBarStateLargeExpanded;
+                }
+                else {
+                    return LayoutNavigationBarStateLargeResizing;
+                }
             }
         }
         else {
-            return LayoutNavigationBarStateNormal;
+            CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
+            if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution()) {
+                return LayoutNavigationBarStateLargeCollapsed;
+            }
+            else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutLargeNavigationBarHeightContribution) {
+                return LayoutNavigationBarStateLargeExpanded;
+            }
+            else {
+                return LayoutNavigationBarStateLargeResizing;
+            }
         }
     }
     else {
-        UINavigationBar *navigationBar = navigationController.navigationBar;
-        CGFloat navigationBarHeight = CGRectGetHeight(navigationBar.frame);
-        if (navigationBarHeight <= LayoutStandardNavigationBarHeightContribution()) {
-            return LayoutNavigationBarStateNormal;
-        }
-        else if (navigationBarHeight >= LayoutStandardNavigationBarHeightContribution() + LayoutLargeNavigationBarHeightContribution) {
-            return LayoutNavigationBarStateLarge;
-        }
-        else {
-            return LayoutNavigationBarStateResizing;
-        }
+        return LayoutNavigationBarStateSmall;
     }
 }
 

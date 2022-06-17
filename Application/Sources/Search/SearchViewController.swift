@@ -551,13 +551,16 @@ extension SearchViewController: UIScrollViewDelegate {
         //       this should only be done when the collection view is at the top.
         //
         //       This bug will be reported to Apple and this workaround will hopefully be removed in the future.
-        if let navigationController = navigationController, LayoutNavigationBarStateForNavigationController(navigationController) != .normal {
-            let searchController = navigationItem.searchController
-            searchUpdateInhibited = true
-            navigationItem.searchController = nil
-            navigationItem.searchController = searchController
-            searchUpdateInhibited = false
-            searchController?.searchBar.text = model.query
+        if let navigationController = navigationController {
+            let navigationBarState = LayoutNavigationBarStateForNavigationController(navigationController)
+            if navigationBarState == .largeExpanded || navigationBarState == .largeResizing {
+                let searchController = navigationItem.searchController
+                searchUpdateInhibited = true
+                navigationItem.searchController = nil
+                navigationItem.searchController = searchController
+                searchUpdateInhibited = false
+                searchController?.searchBar.text = model.query
+            }
         }
 #endif
         

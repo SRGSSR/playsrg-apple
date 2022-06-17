@@ -28,13 +28,8 @@
 - (BOOL)play_canExpandToLargeNavigation
 {
     UIViewController *nearestViewController = self.play_nearestViewController;
-    UINavigationItem *navigationItem = nearestViewController.navigationItem;
-    
     UINavigationController *navigationController = [UIScrollView play_topmostNavigationControllerFromViewController:nearestViewController];
-    UINavigationBar *navigationBar = navigationController.navigationBar;
-    return (navigationBar && ! navigationController.navigationBarHidden && navigationBar.prefersLargeTitles
-            && LayoutNavigationBarStateForNavigationController(navigationController) != LayoutNavigationBarStateLarge
-            && navigationItem.largeTitleDisplayMode != UINavigationItemLargeTitleDisplayModeNever);
+    return LayoutNavigationBarStateForNavigationController(navigationController) == LayoutNavigationBarStateLargeCollapsed;
 }
 
 - (void)play_scrollToTopAnimated:(BOOL)animated

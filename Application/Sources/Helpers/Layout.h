@@ -106,7 +106,7 @@ OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
 OBJC_EXPORT const CGFloat LayoutBlurActivationDistance;
 
 /**
- *  Contribution associated
+ *  Contribution associated with a large navigation bar (added height for expansion).
  */
 OBJC_EXPORT const CGFloat LayoutLargeNavigationBarHeightContribution;
 
@@ -114,9 +114,16 @@ OBJC_EXPORT const CGFloat LayoutLargeNavigationBarHeightContribution;
  *  Navigation bar states.
  */
 typedef NS_CLOSED_ENUM(NSInteger, LayoutNavigationBarState) {
-    LayoutNavigationBarStateNormal = 0,
-    LayoutNavigationBarStateResizing,
-    LayoutNavigationBarStateLarge
+    // No navigation bar
+    LayoutNavigationBarStateNone = 0,
+    // Small navigation bar
+    LayoutNavigationBarStateSmall,
+    // Navigation bar supporting large titles, collapsed
+    LayoutNavigationBarStateLargeCollapsed,
+    // Navigation bar supporting large titles, expanding or collapsing
+    LayoutNavigationBarStateLargeResizing,
+    // Navigation bar supporting large titles, expanded
+    LayoutNavigationBarStateLargeExpanded
 };
 
 /**
