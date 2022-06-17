@@ -835,10 +835,6 @@ private extension Content {
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
 #if os(iOS)
-            case let .radioShowAccess(channelUid):
-                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
             case .downloads:
                 return Just(Download.downloads)
                     .map { $0.map { .download($0) } }
@@ -847,6 +843,10 @@ private extension Content {
             case .notifications:
                 return Just(UserNotification.notifications)
                     .map { $0.map { .notification($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            case let .radioShowAccess(channelUid):
+                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
 #else
