@@ -508,6 +508,7 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
 #if os(iOS)
+        // This is a workaround for UIKit bugs. See `scrollViewDidScroll(_:)`.
         guard !searchUpdateInhibited else { return }
 #endif
         model.query = searchController.searchBar.text ?? ""
