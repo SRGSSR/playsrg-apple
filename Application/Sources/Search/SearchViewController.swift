@@ -173,10 +173,9 @@ final class SearchViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         model.reload()
+        deselectItems(in: collectionView, animated: animated)
 #if os(tvOS)
         searchController?.searchControllerObservedScrollView = collectionView
-#else
-        deselectItems(in: collectionView, animated: animated)
 #endif
     }
     
