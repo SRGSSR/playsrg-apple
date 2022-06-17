@@ -39,7 +39,6 @@ enum ConfiguredSection: Hashable {
     
     case favoriteShows
     case history
-    case notifications
     case watchLater
     
     case tvAllShows
@@ -65,6 +64,7 @@ enum ConfiguredSection: Hashable {
     
 #if os(iOS)
     case downloads
+    case notifications
     case radioShowAccess(channelUid: String)
 #endif
 
