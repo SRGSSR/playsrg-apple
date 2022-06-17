@@ -35,7 +35,7 @@ platform :ios do
     xcversion(version: '~> 13.3')
 
     if cleaned_lane_condition(lane)
-      ensure_git_status_clean
+      ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
       clean_derived_data unless skip_clean_derived_data
     end
   end
