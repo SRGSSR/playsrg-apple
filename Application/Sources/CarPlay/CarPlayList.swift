@@ -182,16 +182,36 @@ private extension CarPlayList {
     private static func liveProgramMediasPublisher(for media: SRGMedia) -> AnyPublisher<[SRGMedia], Never> {
         return SRGDataProvider.current!.mediaComposition(forUrn: media.urn)
             .map { mediaComposition in
-                let segments = mediaComposition.mainChapter.segments ?? []
-                let now = Date()
+                let settings = ApplicationSettingPlaybackSettings()
+                let playbackSettings = SRGPlaybackSettings()
+                playbackSettings.streamType = settings.streamType
+                playbackSettings.quality = settings.quality
+                playbackSettings.startBitRate = settings.startBitRate
+                playbackSettings.sourceUid = settings.sourceUid
                 
-                return segments
-                    .reversed()
-                    .filter({
-                        guard let markInDate = $0.markInDate else { return false }
-                        return markInDate <= now
-                    })
-                    .map({ mediaComposition.media(for: $0)! })
+                var streamOffsetInSeconds: Double = 0
+                var programSegments: [SRGDataProviderModel.SRGSegment] = []
+                
+                // Get the playabble resource
+                if mediaComposition.playbackContext(withPreferredSettings: playbackSettings,
+                                                    contextBlock: { _, resource, segments, _, _ in
+                    streamOffsetInSeconds = resource.streamOffset / 1000
+                    if let segments = segments as? [SRGDataProviderModel.SRGSegment] {
+                        programSegments = segments
+                    }
+                }) {
+                    let nowDate = Date().addingTimeInterval(-streamOffsetInSeconds)
+                    return programSegments
+                        .reversed()
+                        .filter({
+                            guard let markInDate = $0.markInDate else { return false }
+                            return markInDate <= nowDate
+                        })
+                        .map({ mediaComposition.media(for: $0)! })
+                }
+                else {
+                    return []
+                }
             }
             .replaceError(with: [])
             .eraseToAnyPublisher()
