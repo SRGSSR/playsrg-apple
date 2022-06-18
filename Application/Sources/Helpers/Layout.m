@@ -30,7 +30,9 @@ const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0
 
 const CGFloat LayoutLargeNavigationBarHeightContribution = 52.f;
 
+#if TARGET_OS_IOS
 static const CGFloat LayoutSearchBarHeightContribution = 52.f;
+#endif
 
 static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {

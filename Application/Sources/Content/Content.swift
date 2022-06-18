@@ -849,11 +849,6 @@ private extension Content {
                 return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
-#else
-            default:
-                return Just([])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
 #endif
             }
         }
