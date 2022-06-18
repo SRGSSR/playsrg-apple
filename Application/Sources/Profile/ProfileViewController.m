@@ -17,7 +17,6 @@
 #import "ProfileAccountHeaderView.h"
 #import "ProfileTableViewCell.h"
 #import "PushService.h"
-#import "SettingsViewController.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
