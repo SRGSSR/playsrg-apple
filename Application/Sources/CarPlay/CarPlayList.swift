@@ -127,7 +127,7 @@ private extension CarPlayList {
     
     private static func playingPublisher(for media: SRGMedia) -> AnyPublisher<Bool, Never> {
         return nowPlayingMediaPublisher()
-            .map { media == $0 }
+            .map { $0.contains(media) }
             .eraseToAnyPublisher()
     }
     
@@ -147,19 +147,22 @@ private extension CarPlayList {
         }
     }
     
-    private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> SRGMedia? {
-        guard let controller = controller else { return nil }
-        if let fullLengthMedia = controller.fullLengthMedia, fullLengthMedia.contentType == .livestream || fullLengthMedia.contentType == .scheduledLivestream {
-            return fullLengthMedia
+    private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> [SRGMedia] {
+        guard let controller = controller else { return [] }
+        
+        var medias: [SRGMedia] = []
+        if let fullLengthMedia = controller.fullLengthMedia {
+            medias += [fullLengthMedia]
         }
-        else {
-            return controller.media
+        if let media = controller.media {
+            medias += [media]
         }
+        return medias
     }
     
-    private static func nowPlayingMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
+    private static func nowPlayingMediaPublisher() -> AnyPublisher<[SRGMedia], Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<SRGMedia?, Never> in
+            .map { controller -> AnyPublisher<[SRGMedia], Never> in
                 if let controller = controller {
                     return NotificationCenter.default.weakPublisher(for: NSNotification.Name.SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
@@ -170,7 +173,7 @@ private extension CarPlayList {
                         .eraseToAnyPublisher()
                 }
                 else {
-                    return Just(nil)
+                    return Just([])
                         .eraseToAnyPublisher()
                 }
             }
