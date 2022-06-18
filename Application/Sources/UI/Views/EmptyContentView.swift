@@ -8,7 +8,7 @@ import SwiftUI
 
 // MARK: View
 
-struct EmptyView: View {
+struct EmptyContentView: View {
     enum Layout {
         case standard
         case text
@@ -93,7 +93,7 @@ struct EmptyView: View {
 
 // MARK: Types
 
-extension EmptyView {
+extension EmptyContentView {
     enum State {
         case loading
         case empty(type: `Type`)
@@ -117,7 +117,7 @@ extension EmptyView {
 
 // MARK: Preview
 
-struct EmptyView_Previews: PreviewProvider {
+struct EmptyContentView_Previews: PreviewProvider {
     enum PreviewError: LocalizedError {
         case kernel32
         
@@ -132,21 +132,21 @@ struct EmptyView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Group {
-                EmptyView(state: .loading)
-                EmptyView(state: .empty(type: .episodesFromFavorites))
-                EmptyView(state: .empty(type: .favoriteShows))
-                EmptyView(state: .empty(type: .generic))
-                EmptyView(state: .empty(type: .history))
+                EmptyContentView(state: .loading)
+                EmptyContentView(state: .empty(type: .episodesFromFavorites))
+                EmptyContentView(state: .empty(type: .favoriteShows))
+                EmptyContentView(state: .empty(type: .generic))
+                EmptyContentView(state: .empty(type: .history))
 #if os(iOS)
-                EmptyView(state: .empty(type: .downloads))
+                EmptyContentView(state: .empty(type: .downloads))
 #endif
             }
             Group {
-                EmptyView(state: .empty(type: .resumePlayback))
-                EmptyView(state: .empty(type: .search))
-                EmptyView(state: .empty(type: .searchTutorial))
-                EmptyView(state: .empty(type: .watchLater))
-                EmptyView(state: .failed(error: PreviewError.kernel32))
+                EmptyContentView(state: .empty(type: .resumePlayback))
+                EmptyContentView(state: .empty(type: .search))
+                EmptyContentView(state: .empty(type: .searchTutorial))
+                EmptyContentView(state: .empty(type: .watchLater))
+                EmptyContentView(state: .failed(error: PreviewError.kernel32))
             }
         }
         .previewLayout(.fixed(width: 400, height: 400))

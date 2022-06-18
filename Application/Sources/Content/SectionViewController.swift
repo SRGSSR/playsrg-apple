@@ -25,7 +25,7 @@ final class SectionViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Section, SectionViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -92,9 +92,9 @@ final class SectionViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -263,12 +263,12 @@ final class SectionViewController: UIViewController {
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case .loaded:
             let properties = model.configuration.properties
-            emptyView.content = state.displaysEmptyView ? EmptyView(state: .empty(type: properties.emptyType)) : nil
+            emptyContentView.content = state.displaysEmptyContentView ? EmptyContentView(state: .empty(type: properties.emptyType)) : nil
         }
         
 #if os(iOS)

@@ -222,7 +222,7 @@ extension SectionViewModel {
             }
         }
         
-        var displaysEmptyView: Bool {
+        var displaysEmptyContentView: Bool {
             return headerSize != .large && !hasContent
         }
     }

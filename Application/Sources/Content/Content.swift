@@ -123,7 +123,7 @@ protocol SectionProperties {
     /// Properties for section detail display
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
-    var emptyType: EmptyView.`Type` { get }
+    var emptyType: EmptyContentView.`Type` { get }
     
 #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -239,7 +239,7 @@ private extension Content {
             }
         }
         
-        var emptyType: EmptyView.`Type` {
+        var emptyType: EmptyContentView.`Type` {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
@@ -574,7 +574,7 @@ private extension Content {
             }
         }
         
-        var emptyType: EmptyView.`Type` {
+        var emptyType: EmptyContentView.`Type` {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows

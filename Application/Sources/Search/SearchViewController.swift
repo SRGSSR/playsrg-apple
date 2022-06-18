@@ -21,7 +21,7 @@ final class SearchViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<SearchViewModel.Section, SearchViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var filtersBarButtonItem: UIBarButtonItem?
@@ -73,7 +73,7 @@ final class SearchViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
+        let emptyView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
@@ -274,13 +274,13 @@ final class SearchViewController: UIViewController {
     private func reloadData(for state: SearchViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading, insets: Self.emptyViewInsets)
+            emptyView.content = EmptyContentView(state: .loading, insets: Self.emptyViewInsets)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error), insets: Self.emptyViewInsets)
+            emptyView.content = EmptyContentView(state: .failed(error: error), insets: Self.emptyViewInsets)
         case .loaded:
             if !state.hasContent {
-                let type: EmptyView.`Type` = model.isSearching ? .search : .searchTutorial
-                emptyView.content = EmptyView(state: .empty(type: type), insets: Self.emptyViewInsets)
+                let type: EmptyContentView.`Type` = model.isSearching ? .search : .searchTutorial
+                emptyView.content = EmptyContentView(state: .empty(type: type), insets: Self.emptyViewInsets)
             }
             else {
                 emptyView.content = nil

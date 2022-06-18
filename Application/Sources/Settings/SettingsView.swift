@@ -47,7 +47,7 @@ struct SettingsView: View {
             Section {
                 Toggle(NSLocalizedString("Background video playback", comment: "Background video playback setting label"), isOn: $isBackgroundPlaybackEnabled)
             } header: {
-                SwiftUI.EmptyView()
+                EmptyView()
             } footer: {
                 Text(NSLocalizedString("When enabled, video playback continues even when you leave the application.", comment: "Background video playback setting section footer"))
             }
