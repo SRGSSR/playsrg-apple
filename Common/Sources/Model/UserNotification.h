@@ -12,49 +12,49 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Valid notification types
  */
-typedef NS_ENUM(NSInteger, NotificationType) {
+typedef NS_ENUM(NSInteger, UserNotificationType) {
     /**
      *  Not specified.
      */
-    NotificationTypeNone = 0,
+    UserNotificationTypeNone = 0,
     /**
      *  A new on-demand content is available.
      */
-    NotificationTypeNewOnDemandContentAvailable
+    UserNotificationTypeNewOnDemandContentAvailable
 };
 
 /**
  *  Conversion between notification types and underlying string representations.
  */
-OBJC_EXPORT NotificationType NotificationTypeFromString(NSString *notificationType);
-OBJC_EXPORT NSString * NotificationTypeString(NotificationType notificationType);
+OBJC_EXPORT UserNotificationType UserNotificationTypeFromString(NSString *notificationType);
+OBJC_EXPORT NSString * UserNotificationTypeString(UserNotificationType notificationType);
 
 /**
  *  Push notification information.
  */
-@interface Notification : NSObject
+@interface UserNotification : NSObject
 
 /**
  *  List of currently available notifications.
  */
-@property (class, nonatomic, readonly) NSArray<Notification *> *notifications;
+@property (class, nonatomic, readonly) NSArray<UserNotification *> *notifications;
 
 /**
  *  List of currently unread notifications.
  */
-@property (class, nonatomic, readonly) NSArray<Notification *> *unreadNotifications;
+@property (class, nonatomic, readonly) NSArray<UserNotification *> *unreadNotifications;
 
 /**
  *  Save a new notification or update an existing one.
  *
  *  @discussion A read notification cannot be marked as unread again.
  */
-+ (void)saveNotification:(Notification *)notification read:(BOOL)read;
++ (void)saveNotification:(UserNotification *)notification read:(BOOL)read;
 
 /**
  *  Remove a notification.
  */
-+ (void)removeNotification:(Notification *)notification;
++ (void)removeNotification:(UserNotification *)notification;
 
 /**
  *  Create a notification from a system notification request.
@@ -99,7 +99,7 @@ OBJC_EXPORT NSString * NotificationTypeString(NotificationType notificationType)
 /**
  *  The type of the notification.
  */
-@property (nonatomic, readonly) NotificationType type;
+@property (nonatomic, readonly) UserNotificationType type;
 
 /**
  *  The URN of the media associated with the notification, if any.

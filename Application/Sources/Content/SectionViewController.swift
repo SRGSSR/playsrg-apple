@@ -328,7 +328,7 @@ final class SectionViewController: UIViewController {
             }
         case let .topic(topic):
             if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic: topic))
+                let pageViewController = PageViewController(id: .topic(topic))
                 navigationController.pushViewController(pageViewController, animated: true)
             }
         case let .download(download):
@@ -422,6 +422,10 @@ extension SectionViewController {
 #if os(iOS)
     @objc static func downloadsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.downloads))
+    }
+
+    @objc static func notificationsViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.notifications))
     }
 #endif
     
@@ -788,6 +792,8 @@ private extension SectionViewController {
 #if os(iOS)
             case let .download(download):
                 DownloadCell(download: download)
+            case let .notification(notification):
+                Color.blue
 #endif
             case .transparent:
                 Color.clear

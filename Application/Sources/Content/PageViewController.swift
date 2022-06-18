@@ -291,7 +291,7 @@ extension PageViewController {
     }
     
     @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
-        return PageViewController(id: .topic(topic: topic))
+        return PageViewController(id: .topic(topic))
     }
 }
 
@@ -337,7 +337,7 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case let .topic(topic):
                 if let navigationController = navigationController {
-                    let pageViewController = PageViewController(id: .topic(topic: topic))
+                    let pageViewController = PageViewController(id: .topic(topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             case .highlight:
@@ -457,7 +457,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
         switch model.id {
         case .video, .audio, .live:
             return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic: topic):
+        case let .topic(topic):
             return topic.title
         }
     }
@@ -697,6 +697,8 @@ private extension PageViewController {
 #if os(iOS)
                 case let .download(download):
                     DownloadCell(download: download)
+                case let .notification(notification):
+                    Color.blue
                 case .showAccess:
                     switch id {
                     case .video:

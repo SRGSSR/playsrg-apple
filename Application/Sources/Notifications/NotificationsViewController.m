@@ -26,7 +26,7 @@
 
 @interface NotificationsViewController ()
 
-@property (nonatomic) NSArray<Notification *> *notifications;
+@property (nonatomic) NSArray<UserNotification *> *notifications;
 
 @property (nonatomic, weak) TableView *tableView;
 @property (nonatomic, weak) RefreshControl *refreshControl;
@@ -37,9 +37,9 @@
 
 #pragma mark Class methods
 
-+ (void)openNotification:(Notification *)notification fromViewController:(UIViewController *)viewController
++ (void)openNotification:(UserNotification *)notification fromViewController:(UIViewController *)viewController
 {
-    [Notification saveNotification:notification read:YES];
+    [UserNotification saveNotification:notification read:YES];
     
     if (notification.mediaURN) {
         [[SRGDataProvider.currentDataProvider mediaWithURN:notification.mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -51,7 +51,7 @@
             [viewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:^(PlayerType playerType) {
                 SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
                 labels.source = notification.showURN ?: AnalyticsSourceNotification;
-                labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionPlayMedia;
+                labels.type = UserNotificationTypeString(notification.type) ?: AnalyticsTypeActionPlayMedia;
                 labels.value = notification.mediaURN;
                 [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
             }];
@@ -69,7 +69,7 @@
             
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceNotification;
-            labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionDisplayShow;
+            labels.type = UserNotificationTypeString(notification.type) ?: AnalyticsTypeActionDisplayShow;
             labels.value = notification.showURN;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
         }] resume];
@@ -77,7 +77,7 @@
     else {
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = AnalyticsSourceNotification;
-        labels.type = NotificationTypeString(notification.type) ?: AnalyticsTypeActionNotificationAlert;
+        labels.type = UserNotificationTypeString(notification.type) ?: AnalyticsTypeActionNotificationAlert;
         labels.value = notification.body;
         [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationOpen labels:labels];
     }
@@ -88,7 +88,7 @@
 - (instancetype)init
 {
     if (self = [super init]) {
-        self.notifications = Notification.notifications;
+        self.notifications = UserNotification.notifications;
     }
     return self;
 }
@@ -225,7 +225,7 @@
 
 - (void)reloadDataAnimated:(BOOL)animated
 {
-    self.notifications = Notification.notifications;
+    self.notifications = UserNotification.notifications;
     [self.tableView reloadData];
 }
 
@@ -317,7 +317,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Notification *notification = self.notifications[indexPath.row];
+    UserNotification *notification = self.notifications[indexPath.row];
     [NotificationsViewController openNotification:notification fromViewController:self];
     [tableView reloadData];
 }
@@ -325,9 +325,9 @@
 - (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView trailingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIContextualAction *deleteAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleDestructive title:nil handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
-        Notification *notification = self.notifications[indexPath.row];
+        UserNotification *notification = self.notifications[indexPath.row];
         
-        [Notification removeNotification:notification];
+        [UserNotification removeNotification:notification];
         
         self.notifications = [self.notifications play_arrayByRemovingObjectAtIndex:indexPath.row];
         [self.tableView deleteRowsAtIndexPaths:@[ [NSIndexPath indexPathForRow:indexPath.row inSection:0] ]

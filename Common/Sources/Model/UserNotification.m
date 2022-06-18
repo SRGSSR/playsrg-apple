@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Notification.h"
+#import "UserNotification.h"
 
 #import "UIImage+PlaySRG.h"
 #import "NSFileManager+PlaySRG.h"
@@ -13,17 +13,17 @@
 @import libextobjc;
 @import Mantle;
 
-static NSString *NotificationDescriptionForType(NotificationType notificationType)
+static NSString *NotificationDescriptionForType(UserNotificationType notificationType)
 {
     static dispatch_once_t s_onceToken;
     static NSDictionary<NSNumber *, NSString *> *s_descriptions;
     dispatch_once(&s_onceToken, ^{
-        s_descriptions = @{ @(NotificationTypeNewOnDemandContentAvailable) : @"New on-demand content available" };
+        s_descriptions = @{ @(UserNotificationTypeNewOnDemandContentAvailable) : @"New on-demand content available" };
     });
     return s_descriptions[@(notificationType)];
 }
 
-@interface Notification ()
+@interface UserNotification ()
 
 @property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, copy) NSString *title;
@@ -31,25 +31,25 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
 @property (nonatomic) NSURL *imageURL;
 @property (nonatomic) NSDate *date;
 @property (nonatomic, getter=isRead) BOOL read;
-@property (nonatomic) NotificationType type;
+@property (nonatomic) UserNotificationType type;
 @property (nonatomic, copy) NSString *mediaURN;
 @property (nonatomic, copy) NSString *showURN;
 @property (nonatomic, copy) NSString *channelUid;
 
 @end
 
-@implementation Notification
+@implementation UserNotification
 
 #pragma mark Class methods
 
-+ (NSArray<Notification *> *)notifications
++ (NSArray<UserNotification *> *)notifications
 {
-    NSMutableArray<Notification *> *notificationsArray = [NSMutableArray array];
+    NSMutableArray<UserNotification *> *notificationsArray = [NSMutableArray array];
     NSArray *notificationsPlistArray = [NSArray arrayWithContentsOfURL:[self notificationsFilePath]];
     [notificationsPlistArray enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
         if ([obj isKindOfClass:NSDictionary.class]) {
             NSDictionary *notificationDictionary = (NSDictionary *)obj;
-            Notification *notification = [[Notification alloc] initWithDictionary:notificationDictionary];
+            UserNotification *notification = [[UserNotification alloc] initWithDictionary:notificationDictionary];
             if (notification) {
                 [notificationsArray addObject:notification];
             }
@@ -63,29 +63,29 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
     [dateComponents setDay:-14];
     NSDate *fourteenDaysAgo = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDate options:0];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K >= %@", @keypath(Notification.new, date), fourteenDaysAgo];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K >= %@", @keypath(UserNotification.new, date), fourteenDaysAgo];
     
     return [notificationsArray filteredArrayUsingPredicate:predicate];
 }
 
-+ (NSArray<Notification *> *)unreadNotifications
++ (NSArray<UserNotification *> *)unreadNotifications
 {
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(Notification.new, read), @NO];
-    return [Notification.notifications filteredArrayUsingPredicate:predicate];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(UserNotification.new, read), @NO];
+    return [UserNotification.notifications filteredArrayUsingPredicate:predicate];
 }
 
-+ (void)saveNotification:(Notification *)notification read:(BOOL)read
++ (void)saveNotification:(UserNotification *)notification read:(BOOL)read
 {
-    NSArray<Notification *> *notifications = [self notifications];
+    NSArray<UserNotification *> *notifications = [self notifications];
     
     NSInteger index = [notifications indexOfObject:notification];
     if (index != NSNotFound) {
         // Flag a notification unread again is not allowed.
-        Notification *originalNotification = notifications[index];
+        UserNotification *originalNotification = notifications[index];
         if (read && ! originalNotification.read) {
             notification.read = YES;
         }
-        NSMutableArray<Notification *> *updatedNotifications = notifications.mutableCopy;
+        NSMutableArray<UserNotification *> *updatedNotifications = notifications.mutableCopy;
         [updatedNotifications replaceObjectAtIndex:index withObject:notification];
         notifications = updatedNotifications.copy;
     }
@@ -93,18 +93,18 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         notifications = [notifications arrayByAddingObject:notification];
     }
     
-    NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(Notification.new, date) ascending:NO];
-    NSSortDescriptor *identifierSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(Notification.new, identifier) ascending:NO];
+    NSSortDescriptor *dateSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, date) ascending:NO];
+    NSSortDescriptor *identifierSortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@keypath(UserNotification.new, identifier) ascending:NO];
     notifications = [notifications sortedArrayUsingDescriptors:@[dateSortDescriptor, identifierSortDescriptor]];
     [self saveNotifications:notifications];
 }
 
-+ (void)removeNotification:(Notification *)notification
++ (void)removeNotification:(UserNotification *)notification
 {
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(Notification * _Nullable otherNotification, NSDictionary<NSString *,id> * _Nullable bindings) {
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UserNotification * _Nullable otherNotification, NSDictionary<NSString *,id> * _Nullable bindings) {
         return ! [notification isEqual:otherNotification];
     }];
-    NSArray<Notification *> *notifications = [[self notifications] filteredArrayUsingPredicate:predicate];
+    NSArray<UserNotification *> *notifications = [[self notifications] filteredArrayUsingPredicate:predicate];
     [self saveNotifications:notifications];
 }
 
@@ -113,10 +113,10 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     return [[NSFileManager.play_applicationGroupContainerURL URLByAppendingPathComponent:@"Library"] URLByAppendingPathComponent:@"notifications.plist"];
 }
 
-+ (void)saveNotifications:(NSArray<Notification *> *)notifications
++ (void)saveNotifications:(NSArray<UserNotification *> *)notifications
 {
     NSMutableArray<NSDictionary *> *notificationsArray = [NSMutableArray array];
-    [notifications enumerateObjectsUsingBlock:^(Notification * _Nonnull notification, NSUInteger idx, BOOL * _Nonnull stop) {
+    [notifications enumerateObjectsUsingBlock:^(UserNotification * _Nonnull notification, NSUInteger idx, BOOL * _Nonnull stop) {
         [notificationsArray addObject:notification.dictionary];
     }];
     
@@ -159,7 +159,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         self.body = notificationRequest.content.body;
         
         NSDictionary *userInfo = notificationRequest.content.userInfo;
-        self.type = NotificationTypeFromString(userInfo[@"type"]);
+        self.type = UserNotificationTypeFromString(userInfo[@"type"]);
         self.imageURL = userInfo[@"imageUrl"] ? [NSURL URLWithString:userInfo[@"imageUrl"]] : nil;
         self.mediaURN = userInfo[@"media"];
         self.showURN = userInfo[@"show"];
@@ -178,7 +178,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         self.title = dictionary[@"title"];
         self.body = dictionary[@"body"];
         
-        self.type = NotificationTypeFromString(dictionary[@"type"]);
+        self.type = UserNotificationTypeFromString(dictionary[@"type"]);
         self.imageURL = dictionary[@"imageUrl"] ? [NSURL URLWithString:dictionary[@"imageUrl"]] : nil;
         self.mediaURN = dictionary[@"media"];
         self.showURN = dictionary[@"show"];
@@ -200,7 +200,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
     dictionary[@"body"] = self.body;
     
     dictionary[@"imageUrl"] = self.imageURL.absoluteString;
-    dictionary[@"type"] = NotificationTypeString(self.type);
+    dictionary[@"type"] = UserNotificationTypeString(self.type);
     dictionary[@"media"] = self.mediaURN;
     dictionary[@"show"] = self.showURN;
     dictionary[@"channelId"] = self.channelUid;
@@ -215,7 +215,7 @@ static NSString *NotificationDescriptionForType(NotificationType notificationTyp
         return NO;
     }
     
-    Notification *otherNotification = object;
+    UserNotification *otherNotification = object;
     return [self.identifier isEqualToString:otherNotification.identifier];
 }
 
@@ -247,19 +247,19 @@ static NSValueTransformer *NotificationTypeTransformer(void)
     static NSValueTransformer *s_transformer;
     static dispatch_once_t s_onceToken;
     dispatch_once(&s_onceToken, ^{
-        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"newod" : @(NotificationTypeNewOnDemandContentAvailable) }
-                                                                         defaultValue:@(NotificationTypeNone)
+        s_transformer = [NSValueTransformer mtl_valueMappingTransformerWithDictionary:@{ @"newod" : @(UserNotificationTypeNewOnDemandContentAvailable) }
+                                                                         defaultValue:@(UserNotificationTypeNone)
                                                                   reverseDefaultValue:nil];
     });
     return s_transformer;
 }
 
-NotificationType NotificationTypeFromString(NSString *notificationType)
+UserNotificationType UserNotificationTypeFromString(NSString *notificationType)
 {
     return [[NotificationTypeTransformer() transformedValue:notificationType] integerValue];
 }
 
-NSString * NotificationTypeString(NotificationType notificationType)
+NSString * UserNotificationTypeString(UserNotificationType notificationType)
 {
     return [NotificationTypeTransformer() reverseTransformedValue:@(notificationType)];
 }

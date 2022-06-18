@@ -176,7 +176,7 @@
 
 #pragma mark Helpers
 
-- (Notification *)notificationAtIndexPath:(NSIndexPath *)indexPath
+- (UserNotification *)notificationAtIndexPath:(NSIndexPath *)indexPath
 {
     ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
     if (applicationSectionInfo.applicationSection != ApplicationSectionNotifications) {
@@ -195,7 +195,7 @@
     UIViewController *viewController = nil;
     switch (applicationSectionInfo.applicationSection) {
         case ApplicationSectionNotifications: {
-            viewController = [[NotificationsViewController alloc] init];
+            viewController = [SectionViewController notificationsViewController];
             break;
         }
             
@@ -404,7 +404,7 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Notification *notification = [self notificationAtIndexPath:indexPath];
+    UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
         NotificationTableViewCell *notificationTableViewCell = (NotificationTableViewCell *)cell;
         notificationTableViewCell.notification = notification;
@@ -418,7 +418,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Notification *notification = [self notificationAtIndexPath:indexPath];
+    UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
         [NotificationsViewController openNotification:notification fromViewController:self];
         

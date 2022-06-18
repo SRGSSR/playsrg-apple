@@ -39,6 +39,7 @@ enum ConfiguredSection: Hashable {
     
     case favoriteShows
     case history
+    case notifications
     case watchLater
     
     case tvAllShows

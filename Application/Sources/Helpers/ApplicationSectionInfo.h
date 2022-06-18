@@ -5,8 +5,8 @@
 //
 
 #import "ApplicationSection.h"
-#import "Notification.h"
 #import "RadioChannel.h"
+#import "UserNotification.h"
 
 @import Foundation;
 @import UIKit;

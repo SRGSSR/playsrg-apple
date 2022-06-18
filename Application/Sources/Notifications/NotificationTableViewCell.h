@@ -4,7 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "Notification.h"
+#import "UserNotification.h"
 
 @import UIKit;
 
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NotificationTableViewCell : UITableViewCell
 
-@property (nonatomic, nullable) Notification *notification;
+@property (nonatomic, nullable) UserNotification *notification;
 
 @end
 

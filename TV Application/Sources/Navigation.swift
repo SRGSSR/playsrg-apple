@@ -80,7 +80,7 @@ func navigateToShow(_ show: SRGShow, animated: Bool = true) {
 func navigateToTopic(_ topic: SRGTopic, animated: Bool = true) {
     guard !isPresenting else { return }
     
-    let pageViewController = PageViewController(id: .topic(topic: topic))
+    let pageViewController = PageViewController(id: .topic(topic))
     present(pageViewController, animated: animated)
 }
 

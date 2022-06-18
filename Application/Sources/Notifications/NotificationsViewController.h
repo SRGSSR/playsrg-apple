@@ -6,7 +6,7 @@
 
 #import "ContentInsets.h"
 #import "DataViewController.h"
-#import "Notification.h"
+#import "UserNotification.h"
 
 @import DZNEmptyDataSet;
 @import SRGAnalytics;
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NotificationsViewController : DataViewController <ContentInsets, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate, SRGAnalyticsViewTracking, UITableViewDataSource, UITableViewDelegate>
 
-+ (void)openNotification:(Notification *)notification fromViewController:(UIViewController *)viewController;
++ (void)openNotification:(UserNotification *)notification fromViewController:(UIViewController *)viewController;
 
 @end
 

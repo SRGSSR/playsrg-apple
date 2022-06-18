@@ -19,7 +19,7 @@ final class PageViewModel: Identifiable, ObservableObject {
             return NSLocalizedString("Audios", comment: "Title displayed at the top of the audio view")
         case .live:
             return NSLocalizedString("Livestreams", comment: "Title displayed at the top of the livestreams view")
-        case let .topic(topic: topic):
+        case let .topic(topic):
             return topic.title
         }
     }
@@ -143,7 +143,7 @@ extension PageViewModel {
         case video
         case audio(channel: RadioChannel)
         case live
-        case topic(topic: SRGTopic)
+        case topic(_ topic: SRGTopic)
         
 #if os(iOS)
         var isNavigationBarHidden: Bool {
@@ -289,7 +289,7 @@ private extension PageViewModel {
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
                 .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()
-        case let .topic(topic: topic):
+        case let .topic(topic):
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
                 .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
                 .eraseToAnyPublisher()

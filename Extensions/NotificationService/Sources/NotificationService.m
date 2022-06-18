@@ -6,7 +6,7 @@
 
 #import "NotificationService.h"
 
-#import "Notification.h"
+#import "UserNotification.h"
 
 @import MobileCoreServices;
 @import SRGDataProviderNetwork;
@@ -37,8 +37,8 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
     self.notificationContent = notificationContent;
     self.contentHandler = contentHandler;
     
-    Notification *notification = [[Notification alloc] initWithRequest:request];
-    [Notification saveNotification:notification read:NO];
+    UserNotification *notification = [[UserNotification alloc] initWithRequest:request];
+    [UserNotification saveNotification:notification read:NO];
     
     if (notification.imageURL) {
         self.downloadTask = [self imageDownloadTaskForNotification:notification withCompletion:^(UNNotificationAttachment * _Nullable attachment) {
@@ -66,7 +66,7 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 
 #pragma mark UNNotificationAttachment for image
 
-- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(Notification *)notification withCompletion:(void (^)(UNNotificationAttachment * _Nullable attachment))completion
+- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(UserNotification *)notification withCompletion:(void (^)(UNNotificationAttachment * _Nullable attachment))completion
 {
     NSParameterAssert(completion);
     

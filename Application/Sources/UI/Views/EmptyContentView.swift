@@ -32,6 +32,8 @@ struct EmptyContentView: View {
             return "media-background"
         case .history, .resumePlayback:
             return "history-background"
+        case .notifications:
+            return "subscription-background"
         case .search, .searchTutorial:
             return "search-background"
         case .watchLater:
@@ -49,16 +51,18 @@ struct EmptyContentView: View {
             return NSLocalizedString("No favorites", comment: "Text displayed when no favorites are available")
         case .history:
             return NSLocalizedString("No history", comment: "Text displayed when no history is available")
+        case .notifications:
+            return NSLocalizedString("No notifications", comment: "Text displayed when no notifications are available")
         case .search:
             return NSLocalizedString("No results", comment: "Default text displayed when no results are available")
         case .searchTutorial:
             return NSLocalizedString("Type to start searching", comment: "Message displayed when there is no search criterium entered")
-        case .episodesFromFavorites, .generic, .resumePlayback, .watchLater:
-            return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
 #if os(iOS)
         case .downloads:
             return NSLocalizedString("No downloads", comment: "Text displayed when no downloads are available")
 #endif
+        default:
+            return NSLocalizedString("No content", comment: "Default text displayed when no content is available")
         }
     }
     
@@ -105,6 +109,7 @@ extension EmptyContentView {
         case favoriteShows
         case generic
         case history
+        case notifications
         case resumePlayback
         case search
         case searchTutorial
@@ -132,7 +137,6 @@ struct EmptyContentView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
             Group {
-                EmptyContentView(state: .loading)
                 EmptyContentView(state: .empty(type: .episodesFromFavorites))
                 EmptyContentView(state: .empty(type: .favoriteShows))
                 EmptyContentView(state: .empty(type: .generic))
@@ -146,6 +150,9 @@ struct EmptyContentView_Previews: PreviewProvider {
                 EmptyContentView(state: .empty(type: .search))
                 EmptyContentView(state: .empty(type: .searchTutorial))
                 EmptyContentView(state: .empty(type: .watchLater))
+            }
+            Group {
+                EmptyContentView(state: .loading)
                 EmptyContentView(state: .failed(error: PreviewError.kernel32))
             }
         }

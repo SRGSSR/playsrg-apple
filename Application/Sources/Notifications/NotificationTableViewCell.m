@@ -66,7 +66,7 @@
 
 #pragma mark Getters and setters
 
-- (void)setNotification:(Notification *)notification
+- (void)setNotification:(UserNotification *)notification
 {
     _notification = notification;
     

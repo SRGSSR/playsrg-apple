@@ -10,10 +10,10 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
-#import "Notification.h"
 #import "PlaySRG-Swift.h"
 #import "UIView+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
+#import "UserNotification.h"
 
 @import AirshipCore;
 @import libextobjc;
@@ -186,7 +186,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (void)updateApplicationBadge
 {
-    NSInteger unreadNotificationCount = Notification.unreadNotifications.count;
+    NSInteger unreadNotificationCount = UserNotification.unreadNotifications.count;
     
     if (UIApplication.sharedApplication.applicationIconBadgeNumber > unreadNotificationCount) {
         UAirship.push.badgeNumber = unreadNotificationCount;
@@ -198,7 +198,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 
 - (NSString *)tagForShowURN:(NSString *)URN
 {
-    return [NSString stringWithFormat:@"%@|%@|%@|%@", self.appIdentifier, NotificationTypeString(NotificationTypeNewOnDemandContentAvailable), self.environmentIdentifier, URN];
+    return [NSString stringWithFormat:@"%@|%@|%@|%@", self.appIdentifier, UserNotificationTypeString(UserNotificationTypeNewOnDemandContentAvailable), self.environmentIdentifier, URN];
 }
 
 - (NSString *)tagForShow:(SRGShow *)show
@@ -213,7 +213,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         return nil;
     }
     
-    if (! [components[1] isEqualToString:NotificationTypeString(NotificationTypeNewOnDemandContentAvailable)]) {
+    if (! [components[1] isEqualToString:UserNotificationTypeString(UserNotificationTypeNewOnDemandContentAvailable)]) {
         return nil;
     }
     
@@ -278,8 +278,8 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
 {
     UNNotification *notification = notificationResponse.notification;
     if (notification) {
-        Notification *savedNotification = [[Notification alloc] initWithNotification:notification];
-        [Notification saveNotification:savedNotification read:YES];
+        UserNotification *savedNotification = [[UserNotification alloc] initWithNotification:notification];
+        [UserNotification saveNotification:savedNotification read:YES];
     }
     
     UNNotificationContent *notificationContent = notification.request.content;
