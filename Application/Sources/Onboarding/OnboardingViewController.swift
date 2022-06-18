@@ -120,7 +120,7 @@ final class OnboardingViewController: BaseViewController {
     }
     
     @IBAction private func close(_ sender: UIButton) {
-        if ["favorites", "favorites_account"].contains(onboarding.uid) {
+        if ["favorites", "favorites_account"].contains(onboarding.id) {
             PushService.shared?.presentSystemAlertForPushNotifications()
         }
         dismiss(animated: true, completion: nil)
@@ -145,16 +145,13 @@ extension OnboardingViewController: PaperOnboardingDataSource {
     func onboardingItem(at index: Int) -> OnboardingItemInfo {
         let page = onboarding.pages[index]
         
-        let informationImage = UIImage(named: "\(onboarding.uid)_\(page.uid)") ?? UIImage()
-        let pageIcon = UIImage(named: "\(onboarding.uid)_\(page.uid)-small") ?? UIImage()
-        
         let titleFontSize = CGFloat(isTall ? 24.0 : 20.0)
         let subtitleFontSize = CGFloat(isTall ? 15.0 : 14.0)
         
-        return OnboardingItemInfo(informationImage: informationImage,
+        return OnboardingItemInfo(informationImage: UIImage(named: page.imageName(for: onboarding)) ?? UIImage(),
                                   title: PlaySRGOnboardingLocalizedString(page.title, comment: nil),
                                   description: PlaySRGOnboardingLocalizedString(page.text, comment: nil),
-                                  pageIcon: pageIcon,
+                                  pageIcon: UIImage(named: page.iconName(for: onboarding)) ?? UIImage(),
                                   color: page.color,
                                   titleColor: .white,
                                   descriptionColor: .white,

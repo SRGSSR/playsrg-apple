@@ -9,19 +9,12 @@ import SwiftUI
 
 // MARK: View
 
-// TODO: Rewrite Onboarding type in Swift
-extension Onboarding: Identifiable {
-    public var id: String {
-        return uid
-    }
-}
-
 struct FeaturesView: View {
     @State private var selectedOnboarding: Onboarding?
     
     var body: some View {
         List {
-            ForEach(Onboarding.onboardings, id: \.uid) { onboarding in
+            ForEach(Onboarding.onboardings) { onboarding in
                 Button {
                     selectedOnboarding = onboarding
                 } label: {
