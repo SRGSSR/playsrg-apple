@@ -7,7 +7,7 @@
 import PaperOnboarding
 import SRGAppearance
 
-@objc(OnboardingViewController) final class OnboardingViewController: BaseViewController {
+final class OnboardingViewController: BaseViewController {
     final var onboarding: Onboarding!
     
     private weak var paperOnboarding: PaperOnboarding!
@@ -22,17 +22,13 @@ import SRGAppearance
         return view.frame.height >= 600.0
     }
     
-    // MARK: Object lifecycle
-    
-    @objc static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
+    static func viewController(for onboarding: Onboarding!) -> OnboardingViewController {
         let storyboard = UIStoryboard(name: "OnboardingViewController", bundle: nil)
         let viewController = storyboard.instantiateInitialViewController() as! OnboardingViewController
         viewController.onboarding = onboarding
         viewController.title = onboarding.title
         return viewController
     }
-    
-    // MARK: View lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,8 +69,6 @@ import SRGAppearance
                                                object: nil)
     }
     
-    // MARK: Rotation
-    
     func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .pad {
             return .all
@@ -84,13 +78,9 @@ import SRGAppearance
         }
     }
     
-    // MARK: Status bar
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-    // MARK: Overrides
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -104,8 +94,6 @@ import SRGAppearance
         
         buttonBottomConstraint.constant = 0.19 * view.frame.height
     }
-    
-    // MARK: User interface
     
     private func updateUserInterface(index: Int, animated: Bool) {
         let animations = {
@@ -126,8 +114,6 @@ import SRGAppearance
             animations()
         }
     }
-    
-    // MARK: Actions
     
     @IBAction private func previousPage(_ sender: UIButton) {
         paperOnboarding.currentIndex(paperOnboarding.currentIndex - 1, animated: true)
