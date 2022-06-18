@@ -437,11 +437,6 @@
 		08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */; };
 		08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */; };
 		08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */ = {isa = PBXBuildFile; productRef = 08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */; };
-		08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
-		08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
-		08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
-		08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
-		08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08EA3EB6259E33C9008D412F /* ProfileView.swift */; };
 		08F3849825FA69BB00E1BCF0 /* AccessibilityIdentifierConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 08B77AEF240A86FC00A3BC3B /* AccessibilityIdentifierConstants.m */; };
 		08F3849925FA69BB00E1BCF0 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B77A5C2409C48700A3BC3B /* SnapshotHelper.swift */; };
 		08F3849C25FA69BB00E1BCF0 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 087CDB6B240DC39100BDFAEA /* Configuration.plist */; };
@@ -578,6 +573,15 @@
 		6F0AF6EB267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0AF6E3267D0B0400AD2EA3 /* MediaPreviewViewController.storyboard */; };
 		6F0AF6EC267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0AF6E3267D0B0400AD2EA3 /* MediaPreviewViewController.storyboard */; };
 		6F0AF6ED267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6F0AF6E3267D0B0400AD2EA3 /* MediaPreviewViewController.storyboard */; };
+		6F0B162B2837C7160074845E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F0B162C2837C7170074845E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F0B162D2837C7170074845E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F0B162E2837C7180074845E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7BA281FB1FB00D20748 /* SettingsView.swift */; };
+		6F0B162F2837C72D0074845E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F0B16302837C72D0074845E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F0B16312837C72D0074845E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F0B16322837C72E0074845E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
+		6F0B16332837C72E0074845E /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F46B7B4281FB1F100D20748 /* SettingsViewModel.swift */; };
 		6F0B98502726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98512726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98522726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
@@ -1284,11 +1288,6 @@
 		6F8144162008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
 		6F8144172008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
 		6F8144182008FA970075F52F /* GoogleCast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8144132008FA970075F52F /* GoogleCast.m */; };
-		6F83873025E507DC00BDCB25 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */; };
-		6F83873125E507DC00BDCB25 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */; };
-		6F83873225E507DC00BDCB25 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */; };
-		6F83873325E507DC00BDCB25 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */; };
-		6F83873425E507DC00BDCB25 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */; };
 		6F85E4B71EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
 		6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */; };
@@ -2848,7 +2847,6 @@
 		08C690781D38E3E600BB8AAA /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		08C691271D39089700BB8AAA /* CommonImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CommonImages.xcassets; sourceTree = "<group>"; };
 		08DADF8B20D92D6400291AD1 /* placeholder_notification.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placeholder_notification.pdf; sourceTree = "<group>"; };
-		08EA3EB6259E33C9008D412F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		08F384A225FA69BB00E1BCF0 /* Play SWI TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SWI TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F3866125FA9AD800E1BCF0 /* Play SRF TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play SRF TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		08F3868825FA9AE000E1BCF0 /* Play RTS TV screenshots.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Play RTS TV screenshots.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -3064,7 +3062,6 @@
 		6F8125E62638C37900EB029E /* LabeledCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledCardButton.swift; sourceTree = "<group>"; };
 		6F8144122008FA970075F52F /* GoogleCast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleCast.h; sourceTree = "<group>"; };
 		6F8144132008FA970075F52F /* GoogleCast.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleCast.m; sourceTree = "<group>"; };
-		6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		6F85E4B51EEA8F9B00552256 /* UIView+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PlaySRG.h"; sourceTree = "<group>"; };
 		6F85E4B61EEA8F9B00552256 /* UIView+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PlaySRG.m"; sourceTree = "<group>"; };
 		6F861AF71DAE65A600C46102 /* SRGMediaPlayerDesignables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGMediaPlayerDesignables.m; sourceTree = "<group>"; };
@@ -4737,8 +4734,6 @@
 				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
 				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */,
-				08EA3EB6259E33C9008D412F /* ProfileView.swift */,
-				6F83872F25E507DC00BDCB25 /* ProfileViewModel.swift */,
 				6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */,
 			);
 			path = Sources;
@@ -9506,7 +9501,6 @@
 				08F5DBC6262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98552726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413D124EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB7259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77D2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2C8283E7E2100031415 /* Highlight.swift in Sources */,
 				6F46B7C628200E3F00D20748 /* Server.swift in Sources */,
@@ -9555,6 +9549,7 @@
 				6F3D67E1256827DD0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6125DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2E6268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
+				6F0B162B2837C7160074845E /* SettingsView.swift in Sources */,
 				6F8D54472639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FEF236C2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6B2719C46C0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9582,7 +9577,6 @@
 				6FF129DD256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CB2721786B00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7AD92820578900BC3EA5 /* PosterImages.swift in Sources */,
-				6F83873025E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7822567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7B2719C5CF0082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2002747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -9605,6 +9599,7 @@
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413D624EEEDC900FDF806 /* Channel.m in Sources */,
 				6FC413CF24EEEDC900FDF806 /* TVChannel.m in Sources */,
+				6F0B162F2837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD3261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6A2710927B00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABA25060496000FF4DD /* MediaVisualView.swift in Sources */,
@@ -9651,7 +9646,6 @@
 				08F5DBC7262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98562726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413D924EEEDC900FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB8259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77E2567ED1500AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2C9283E7E2200031415 /* Highlight.swift in Sources */,
 				6F46B7C728200E3F00D20748 /* Server.swift in Sources */,
@@ -9700,6 +9694,7 @@
 				6F3D67F6256827DE0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6225DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2E7268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
+				6F0B162C2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54482639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FEF236D2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6D2719C46F0082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9727,7 +9722,6 @@
 				6FF129F2256C0D370042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CC2721786D00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADA2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				6F83873125E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7972567ED2000AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7C2719C5D00082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2012747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -9750,6 +9744,7 @@
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413DE24EEEDC900FDF806 /* Channel.m in Sources */,
 				6FC413D724EEEDC900FDF806 /* TVChannel.m in Sources */,
+				6F0B16302837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD4261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6B2710927C00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABB25060496000FF4DD /* MediaVisualView.swift in Sources */,
@@ -9796,7 +9791,6 @@
 				08F5DBC8262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98572726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413E124EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EB9259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F77F2567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CA283E7E2200031415 /* Highlight.swift in Sources */,
 				6F46B7C828200E3F00D20748 /* Server.swift in Sources */,
@@ -9845,6 +9839,7 @@
 				6F3D67F7256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6325DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2E8268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
+				6F0B162D2837C7170074845E /* SettingsView.swift in Sources */,
 				6F8D54492639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FEF236E2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6E2719C4700082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -9872,7 +9867,6 @@
 				6FF129F3256C0D380042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CD2721786D00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADB2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				6F83873225E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AC2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7D2719C5D10082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2022747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -9895,6 +9889,7 @@
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413E624EEEDCA00FDF806 /* Channel.m in Sources */,
 				6FC413DF24EEEDCA00FDF806 /* TVChannel.m in Sources */,
+				6F0B16312837C72D0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD5261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6C2710927E00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABC25060496000FF4DD /* MediaVisualView.swift in Sources */,
@@ -9941,7 +9936,6 @@
 				08F5DBC9262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98582726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413E924EEEDCA00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBA259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7802567ED1600AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CB283E7E2300031415 /* Highlight.swift in Sources */,
 				6F46B7C928200E3F00D20748 /* Server.swift in Sources */,
@@ -9990,6 +9984,7 @@
 				6F3D680C256827DF0030922B /* SRGChannel+PlaySRG.m in Sources */,
 				6FB03F6425DECB3A0033132B /* ApplicationSettingsConstants.m in Sources */,
 				6FD4C2E9268C430600F06F63 /* ShowHeaderViewModel.swift in Sources */,
+				6F0B162E2837C7180074845E /* SettingsView.swift in Sources */,
 				6F8D544A2639ABFE00EF5FE8 /* FeaturedContent.swift in Sources */,
 				6FEF236F2732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F6F2719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
@@ -10017,7 +10012,6 @@
 				6FF12A08256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CE2721786E00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADC2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				6F83873325E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AD2567ED2100AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7E2719C5D20082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2032747A69900460F70 /* ButtonStyles.swift in Sources */,
@@ -10040,6 +10034,7 @@
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
 				6FC413EE24EEEDCA00FDF806 /* Channel.m in Sources */,
 				6FC413E724EEEDCA00FDF806 /* TVChannel.m in Sources */,
+				6F0B16322837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				085C0DD6261326C8008E07C8 /* RadioChannel.swift in Sources */,
 				0858CA6D2710927F00EE36EA /* ProgramGuideViewModel.swift in Sources */,
 				6F3F1ABD25060496000FF4DD /* MediaVisualView.swift in Sources */,
@@ -10085,7 +10080,6 @@
 				08F5DBCA262DF34400F717D0 /* FeaturedContentCell.swift in Sources */,
 				6F0B98592726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FC413F124EEEDCB00FDF806 /* PlayFirebaseConfiguration.m in Sources */,
-				08EA3EBB259E33C9008D412F /* ProfileView.swift in Sources */,
 				6F85F7812567ED1700AC8286 /* ChannelServiceSetup.m in Sources */,
 				6F27C2CC283E7E2300031415 /* Highlight.swift in Sources */,
 				6F46B7CA28200E3F00D20748 /* Server.swift in Sources */,
@@ -10139,6 +10133,7 @@
 				6FEF23702732C2420098C639 /* ChannelHeaderView.swift in Sources */,
 				6FE86F702719C4710082CAE9 /* ProgramGuideDailyViewModel.swift in Sources */,
 				080981392622195900AA586B /* LiveMediaCell.swift in Sources */,
+				6F0B16332837C72E0074845E /* SettingsViewModel.swift in Sources */,
 				0858CA64271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6FFF1636250A20EF0053CDA6 /* FocusTracker.swift in Sources */,
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
@@ -10162,7 +10157,6 @@
 				6FF12A09256C0D390042F446 /* PlayDurationFormatter.m in Sources */,
 				6F7625CF2721786F00C134AA /* DeepLinkAction.m in Sources */,
 				6F6C7ADD2820578900BC3EA5 /* PosterImages.swift in Sources */,
-				6F83873425E507DC00BDCB25 /* ProfileViewModel.swift in Sources */,
 				6F85F7AE2567ED2300AC8286 /* ForegroundTimer.m in Sources */,
 				6FE86F7F2719C5D30082CAE9 /* PlayAccessibilityFormatter.m in Sources */,
 				6FF5D2042747A69900460F70 /* ButtonStyles.swift in Sources */,

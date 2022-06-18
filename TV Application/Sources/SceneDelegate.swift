@@ -96,7 +96,7 @@ final class SceneDelegate: UIResponder {
         searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
         
-        let profileViewController = UIHostingController(rootView: ProfileView())
+        let profileViewController = UIHostingController(rootView: SettingsView())
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue

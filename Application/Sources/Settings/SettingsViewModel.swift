@@ -84,15 +84,16 @@ final class SettingsViewModel: ObservableObject {
         guard let identityService = SRGIdentityService.current, identityService.isLoggedIn else { return nil }
         return String(format: NSLocalizedString("Last synchronization: %@", comment: "Introductory text for the most recent data synchronization date"), Self.string(for: synchronizationDate))
     }
+        
+    var version: String {
+        return Bundle.main.play_friendlyVersionNumber
+    }
     
     var whatsNewURL: URL {
         return ApplicationConfiguration.shared.whatsNewURL
     }
     
-    var version: String {
-        return Bundle.main.play_friendlyVersionNumber
-    }
-    
+#if os(iOS)
     func openSystemSettings() {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }
@@ -135,6 +136,7 @@ final class SettingsViewModel: ObservableObject {
     func copySupportInformation() {
         UIPasteboard.general.string = SupportInformation.generate()
     }
+#endif
     
     func removeHistory() {
         SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
@@ -164,7 +166,9 @@ final class SettingsViewModel: ObservableObject {
     func clearAllContents() {
         clearWebCache()
         clearVectorImageCache()
+#if os(iOS)
         Download.removeAllDownloads()
+#endif
     }
     
     func simulateMemoryWarning() {

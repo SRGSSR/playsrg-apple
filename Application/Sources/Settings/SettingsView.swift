@@ -15,10 +15,14 @@ struct SettingsView: View {
     
     var body: some View {
         List {
+#if os(iOS)
             QualitySection()
+#endif
             PlaybackSection()
             DisplaySection()
+#if os(iOS)
             PermissionsSection(model: model)
+#endif
             ContentSection(model: model)
             InformationSection(model: model)
             AdvancedFeaturesSection(model: model)
@@ -31,6 +35,7 @@ struct SettingsView: View {
     
     // MARK: Quality section
     
+#if os(iOS)
     private struct QualitySection: View {
         @AppStorage(PlaySRGSettingHDOverCellularEnabled) var isHDOverCellularEnabled = false
         
@@ -44,6 +49,7 @@ struct SettingsView: View {
             }
         }
     }
+#endif
     
     // MARK: Playback section
     
@@ -59,6 +65,7 @@ struct SettingsView: View {
             } footer: {
                 Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Autoplay setting section footer"))
             }
+#if os(iOS)
             Section {
                 Toggle(NSLocalizedString("Background video playback", comment: "Background video playback setting label"), isOn: $isBackgroundPlaybackEnabled)
             } header: {
@@ -66,6 +73,7 @@ struct SettingsView: View {
             } footer: {
                 Text(NSLocalizedString("When enabled, video playback continues even when you leave the application.", comment: "Background video playback setting section footer"))
             }
+#endif
         }
     }
     
@@ -89,6 +97,7 @@ struct SettingsView: View {
     
     // MARK: Permissions section
     
+#if os(iOS)
     private struct PermissionsSection: View {
         @ObservedObject var model: SettingsViewModel
         
@@ -102,6 +111,7 @@ struct SettingsView: View {
             }
         }
     }
+#endif
     
     // MARK: Content section
     
@@ -248,6 +258,7 @@ struct SettingsView: View {
     
     // MARK: Information section
     
+#if os(iOS)
     private struct SupportInformationButton: View {
         @ObservedObject var model: SettingsViewModel
         @State private var isAlertDisplayed = false
@@ -307,12 +318,14 @@ struct SettingsView: View {
             .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
         }
     }
+#endif
     
     private struct InformationSection: View {
         @ObservedObject var model: SettingsViewModel
         
         var body: some View {
             Section {
+#if os(iOS)
                 NavigationLink {
                     FeaturesView()
                         .navigationBarTitleDisplayMode(.inline)
@@ -340,8 +353,11 @@ struct SettingsView: View {
                 if let becomeBetaTester = model.becomeBetaTester {
                     Button(NSLocalizedString("Become a beta tester", comment: "Label of the button to become beta tester"), action: becomeBetaTester)
                 }
+#endif
                 VersionCell(model: model)
+#if os(iOS)
                 SupportInformationButton(model: model)
+#endif
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
@@ -374,13 +390,17 @@ struct SettingsView: View {
             Section {
                 NavigationLink {
                     ServiceSelectionView()
+#if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
+#endif
                 } label: {
                     ServiceSelectionCell()
                 }
                 NavigationLink {
                     UserLocationSelectionView()
+#if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
+#endif
                 } label: {
                     UserLocationSelectionCell()
                 }
@@ -389,7 +409,9 @@ struct SettingsView: View {
                 Toggle(NSLocalizedString("Section wide support", comment: "Section wide support setting label"), isOn: $isSectionWideSupportEnabled)
                 NavigationLink {
                     PosterImagesSelectionView()
+#if os(iOS)
                         .navigationBarTitleDisplayMode(.inline)
+#endif
                 } label: {
                     PosterImagesSelectionCell()
                 }
