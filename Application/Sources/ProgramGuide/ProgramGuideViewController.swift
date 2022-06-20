@@ -190,7 +190,9 @@ extension ProgramGuideViewController {
         headerView.content = ProgramGuideHeaderView(model: model, layout: layout)
         headerHeightConstraint.constant = headerHeight
         
-        if let previousViewController = children.first as? UIViewController & ProgramGuideChildViewController {
+        // Use the last child since we can have two children when snapping layouts and we want to check the
+        // most recent desired layout.
+        if let previousViewController = children.last as? UIViewController & ProgramGuideChildViewController {
             if previousViewController.programGuideLayout != layout {
                 previousViewController.willMove(toParent: nil)
                 
