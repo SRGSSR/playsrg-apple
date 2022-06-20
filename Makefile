@@ -14,6 +14,12 @@ setup:
 	@pod install
 	@echo "... done.\n"
 
+.PHONY: lint
+lint:
+	@echo "Linting project..."
+	@swiftlint --fix && swiftlint
+	@echo "... done.\n"
+
 .PHONY: clean
 clean:
 	@echo "Cleaning up build products..."
@@ -25,5 +31,6 @@ help:
 	@echo "The following targets are available:"
 	@echo "   all       Build the project"
 	@echo "   setup     Setup project"
-	@echo "   help      Display this message"
+	@echo "   lint      Lint project and fix issues"
 	@echo "   clean     Clean the project and its dependencies"
+	@echo "   help      Display this message"
