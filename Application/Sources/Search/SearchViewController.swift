@@ -251,7 +251,7 @@ final class SearchViewController: UIViewController {
     @objc private func showSettings(_ sender: Any) {
         searchController?.searchBar.resignFirstResponder()
         
-        let settingsViewController = SearchSettingsNavigationViewController(query: model.query, settings: model.settings)
+        let settingsViewController = SearchSettingsNavigationViewController(model: model)
         settingsViewController.modalPresentationStyle = .popover
         
         if let popoverPresentationController = settingsViewController.popoverPresentationController {

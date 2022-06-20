@@ -10,8 +10,7 @@ import SwiftUI
 // MARK: View
 
 struct SearchSettingsView: View {
-    let query: String?
-    let settings: SRGMediaSearchSettings
+    @ObservedObject var model: SearchViewModel
     
     var body: some View {
         Text("Settings")
@@ -24,7 +23,7 @@ struct SearchSettingsView: View {
 struct SearchSettingsPreviews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchSettingsView(query: nil, settings: SRGMediaSearchSettings())
+            SearchSettingsView(model: SearchViewModel())
         }
         .navigationViewStyle(.stack)
     }

@@ -9,14 +9,13 @@ import SwiftUI
 // MARK: View
 
 struct SearchSettingsNavigationView: View {
-    let query: String?
-    let settings: SRGMediaSearchSettings
+    @ObservedObject var model: SearchViewModel
     
     @FirstResponder private var firstResponder
     
     var body: some View {
         NavigationView {
-            SearchSettingsView(query: query, settings: settings)
+            SearchSettingsView(model: model)
                 .toolbar {
                     ToolbarItem {
                         Button {
@@ -35,8 +34,8 @@ struct SearchSettingsNavigationView: View {
 // MARK: UIKit presentation
 
 final class SearchSettingsNavigationViewController: UIHostingController<SearchSettingsNavigationView> {
-    init(query: String?, settings: SRGMediaSearchSettings) {
-        super.init(rootView: SearchSettingsNavigationView(query: query, settings: settings))
+    init(model: SearchViewModel) {
+        super.init(rootView: SearchSettingsNavigationView(model: model))
     }
     
     required init?(coder: NSCoder) {
@@ -52,7 +51,7 @@ final class SearchSettingsNavigationViewController: UIHostingController<SearchSe
 
 struct SearchSettingsNavigationView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchSettingsNavigationView(query: nil, settings: SRGMediaSearchSettings())
+        SearchSettingsNavigationView(model: SearchViewModel())
     }
 }
 
