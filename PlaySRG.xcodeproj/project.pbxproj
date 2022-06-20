@@ -763,6 +763,11 @@
 		6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* ExpandingCardButton.swift */; };
 		6F30ACB62604CDFD00457331 /* ExpandingCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F30ACB12604CDFD00457331 /* ExpandingCardButton.swift */; };
 		6F331CE724D06B8200C096AB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F331CE624D06B8200C096AB /* AppDelegate.swift */; };
+		6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
+		6F33E60E2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
+		6F33E60F2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
+		6F33E6102860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
+		6F33E6112860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
 		6F340F52220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F53220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F54220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
@@ -1553,16 +1558,6 @@
 		6FA8E59A261CB792003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6FA8E5B4261CB793003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
 		6FA8E5B5261CB794003FFDCF /* DataViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F475F911EB37BC6003021EA /* DataViewController.m */; };
-		6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECBB20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECBC20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECBD20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECBE20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */; };
-		6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
-		6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
-		6FA9ECC820C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
-		6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
-		6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */; };
 		6FAAF77C20CABA3A00BB58A3 /* UserNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF77A20CABA3A00BB58A3 /* UserNotification.m */; };
 		6FAAF77D20CABA3A00BB58A3 /* UserNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF77A20CABA3A00BB58A3 /* UserNotification.m */; };
 		6FAAF77E20CABA3A00BB58A3 /* UserNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF77A20CABA3A00BB58A3 /* UserNotification.m */; };
@@ -2953,6 +2948,7 @@
 		6F331D1424D06BB800C096AB /* Play RSI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RSI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331D2C24D06BC600C096AB /* Play RTR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play RTR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F331D4424D06C2600C096AB /* Play SWI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Play SWI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationCell+UIKit.swift"; sourceTree = "<group>"; };
 		6F340F50220DA99B00778CA3 /* History.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = History.h; sourceTree = "<group>"; };
 		6F340F51220DA99B00778CA3 /* History.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = History.m; sourceTree = "<group>"; };
 		6F362A8326A0461B00CBCC9D /* ProgramGuideListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideListViewController.swift; sourceTree = "<group>"; };
@@ -3114,9 +3110,6 @@
 		6FA6C0622458064C00518DE6 /* SRGProgramComposition+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGProgramComposition+PlaySRG.m"; sourceTree = "<group>"; };
 		6FA7EC3820AB0FEB00A9C5FE /* Onboardings.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Onboardings.json; sourceTree = "<group>"; };
 		6FA8479926A9B47400780D7A /* ProgramCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCellViewModel.swift; sourceTree = "<group>"; };
-		6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewCell.h; sourceTree = "<group>"; };
-		6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewCell.m; sourceTree = "<group>"; };
-		6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationTableViewCell.xib; sourceTree = "<group>"; };
 		6FAAF76C20CAB25000BB58A3 /* NotificationService.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationService.entitlements; sourceTree = "<group>"; };
 		6FAAF77920CABA3A00BB58A3 /* UserNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserNotification.h; sourceTree = "<group>"; };
 		6FAAF77A20CABA3A00BB58A3 /* UserNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNotification.m; sourceTree = "<group>"; };
@@ -4325,7 +4318,6 @@
 				6F9CEA6321884ACC007DE35F /* History */,
 				086BDE111EA63D3800965F45 /* MiniPlayer */,
 				6FDF08C4218B126700B2AF2C /* Model */,
-				6FA9ECA920C7A9F300D3D6C2 /* Notifications */,
 				6F00BFD320A9C630009795AF /* Onboarding */,
 				E66BEC181DA7FCC000AD4450 /* Player */,
 				087584C623A0008500FA7207 /* Profile */,
@@ -4667,6 +4659,7 @@
 				6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */,
 				6FE8626B2657C5F30061D3F0 /* MoreCell.swift */,
 				6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */,
+				6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */,
 				6F151E26256BF5CF009082F8 /* ProgressBar.swift */,
 				6F0EDA642448B0D800F0FED2 /* RefreshControl.h */,
 				6F0EDA632448B0D700F0FED2 /* RefreshControl.m */,
@@ -4871,16 +4864,6 @@
 				6F340F51220DA99B00778CA3 /* History.m */,
 			);
 			path = History;
-			sourceTree = "<group>";
-		};
-		6FA9ECA920C7A9F300D3D6C2 /* Notifications */ = {
-			isa = PBXGroup;
-			children = (
-				6FA9ECB820C7AB3A00D3D6C2 /* NotificationTableViewCell.h */,
-				6FA9ECB920C7AB3A00D3D6C2 /* NotificationTableViewCell.m */,
-				6FA9ECC520C7AD9C00D3D6C2 /* NotificationTableViewCell.xib */,
-			);
-			path = Notifications;
 			sourceTree = "<group>";
 		};
 		6FAAF77520CAB6ED00BB58A3 /* Application */ = {
@@ -6361,7 +6344,6 @@
 				08C6905A1D38E0BE00BB8AAA /* LaunchScreen.xib in Resources */,
 				6FD2CBC31DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				084F94B522D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
-				6FA9ECC620C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				0875851D23A0025F00FA7207 /* ProfileViewController.storyboard in Resources */,
 				6FA7EC3920AB0FEB00A9C5FE /* Onboardings.json in Resources */,
 			);
@@ -6382,7 +6364,6 @@
 				6FF7BBB322A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
 				6F0AF6EA267D0B0500AD2EA3 /* MediaPreviewViewController.storyboard in Resources */,
 				6F3B0228245AAF6B00C5A8D7 /* ProgramTableViewCell.xib in Resources */,
-				6FA9ECC720C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F2961FD2006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6F4EA13A1EE034D500BEC4DA /* Accessibility.strings in Resources */,
 				0875850F23A0025F00FA7207 /* ProfileAccountHeaderView.xib in Resources */,
@@ -6428,7 +6409,6 @@
 				6F3A47AF1DD19A5B00C79E67 /* RSIResources.xcassets in Resources */,
 				6F4EA1341EE034B000BEC4DA /* Accessibility.strings in Resources */,
 				6FD88F7E22D3618F008859EF /* SearchSettingsHeaderView.xib in Resources */,
-				6FA9ECC820C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				08C68FAF1D38DF8300BB8AAA /* iTunesArtwork@2x in Resources */,
 				6F58664C1DD226EE005DAFE4 /* Settings.bundle in Resources */,
 				08C68FB41D38DF8300BB8AAA /* LaunchScreen.xib in Resources */,
@@ -6454,7 +6434,6 @@
 				08C6912B1D39089700BB8AAA /* CommonImages.xcassets in Resources */,
 				6FC0C69D245FF06D00B44CAE /* ProgramHeaderView.xib in Resources */,
 				6FE28776248168A100358CFF /* SongTableViewCell.xib in Resources */,
-				6FA9ECC920C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				084F94B822D3B77700D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard in Resources */,
 				6FB89A0E26336E9D0012F1B0 /* Preview Assets.xcassets in Resources */,
 				6FF7BBB522A7901900FA758A /* SearchSettingsViewController.storyboard in Resources */,
@@ -6521,7 +6500,6 @@
 				6FD2CBC71DD19B0200B44958 /* placeholder_media.pdf in Resources */,
 				6FB0BB4320AEF5DC007C5D87 /* Onboarding.strings in Resources */,
 				6F3A47B71DD19A9100C79E67 /* SWIResources.xcassets in Resources */,
-				6FA9ECCA20C7AD9C00D3D6C2 /* NotificationTableViewCell.xib in Resources */,
 				6F2962002006186100CAB0E4 /* placeholder_media_list.pdf in Resources */,
 				6F4EA1401EE034EF00BEC4DA /* Accessibility.strings in Resources */,
 			);
@@ -8305,6 +8283,7 @@
 				088899452077627900242654 /* TVChannel.m in Sources */,
 				08F4683A26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6F978B512849C3CA003061E8 /* ScrollableContent.m in Sources */,
+				6F33E60D2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FDEC19226DE307E0020A03F /* PresenterMode.swift in Sources */,
 				0827DA251F0D437400A31A42 /* SRGMedia+PlaySRG.m in Sources */,
 				6F0850F426256A7700B4E410 /* Reachability.m in Sources */,
@@ -8348,7 +8327,6 @@
 				6F73BFB026563ABD0032D742 /* DampedCollectionView.swift in Sources */,
 				6F4843CC23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FEF23722732C2D40098C639 /* TimelineView.swift in Sources */,
-				6FA9ECBA20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6F3B0221245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6F74293D265BE52E0000538D /* Signals.swift in Sources */,
 				6FDF70002682022C0004437E /* ApplicationSettings+Common.m in Sources */,
@@ -8442,7 +8420,6 @@
 				6FE14E61263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6FF7BB9822A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				6F0ACF3426A97DD900CDE936 /* ProgramGuideViewModel.swift in Sources */,
-				6FA9ECBB20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6F0B98512726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FE2876E2481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F172258F02400AC978D /* WatchLater.m in Sources */,
@@ -8496,6 +8473,7 @@
 				6F54D2BA2604FB16008B46FF /* ShowCell.swift in Sources */,
 				6FCA5BDD27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F4843D423EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
+				6F33E60E2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD52820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F2E160A26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
 				081220C21DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
@@ -8688,7 +8666,6 @@
 				6FE14E62263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6FF7BB9922A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				6F0ACF3526A97DD900CDE936 /* ProgramGuideViewModel.swift in Sources */,
-				6FA9ECBC20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6F0B98522726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FE2876F2481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F182258F02400AC978D /* WatchLater.m in Sources */,
@@ -8742,6 +8719,7 @@
 				6F4843CE23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDE27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D42604FB18008B46FF /* ShowCell.swift in Sources */,
+				6F33E60F2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD62820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D523EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160B26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -8934,7 +8912,6 @@
 				6FE14E63263EA83C004AD913 /* HeaderView.swift in Sources */,
 				6FF7BB9A22A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				6F0ACF3626A97DD900CDE936 /* ProgramGuideViewModel.swift in Sources */,
-				6FA9ECBD20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6F0B98532726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6FE287702481687A00358CFF /* SongTableViewCell.m in Sources */,
 				08280F192258F02400AC978D /* WatchLater.m in Sources */,
@@ -8988,6 +8965,7 @@
 				6F4843CF23EC3ADF00868F78 /* AccessibilityView.m in Sources */,
 				6FCA5BDF27D9DE4C00916D0B /* DiskInfoFooterViewModel.swift in Sources */,
 				6F54D2D52604FB19008B46FF /* ShowCell.swift in Sources */,
+				6F33E6102860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6F6C7AD72820578900BC3EA5 /* PosterImages.swift in Sources */,
 				6F4843D623EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F2E160C26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
@@ -9182,7 +9160,6 @@
 				6FF7BB9B22A78DE400FA758A /* SearchSettingSwitchCell.m in Sources */,
 				6F928E7B274513AB00CE54B5 /* ProgramGuideViewController.swift in Sources */,
 				6F0ACF3726A97DD900CDE936 /* ProgramGuideViewModel.swift in Sources */,
-				6FA9ECBE20C7AB3A00D3D6C2 /* NotificationTableViewCell.m in Sources */,
 				6FE287712481687B00358CFF /* SongTableViewCell.m in Sources */,
 				08280F1A2258F02400AC978D /* WatchLater.m in Sources */,
 				04D5478127BFFE79003D1BC2 /* LoadingCell.swift in Sources */,
@@ -9346,6 +9323,7 @@
 				04E4DEEF283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* UserNotification.m in Sources */,
+				6F33E6112860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */,
 				6FEC91AD21A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
 				6FF9EC522626C9CC00A2E11A /* Accessibility.swift in Sources */,
 				6F5B4D622833F8F3004F5BA3 /* FeaturesView.swift in Sources */,

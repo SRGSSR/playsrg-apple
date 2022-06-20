@@ -10,7 +10,6 @@
 #import "ApplicationSectionInfo.h"
 #import "Layout.h"
 #import "NavigationController.h"
-#import "NotificationTableViewCell.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "ProfileAccountHeaderView.h"
@@ -69,9 +68,7 @@
         self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
     
-    NSString *cellIdentifier = NSStringFromClass(NotificationTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableNotificationCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -382,7 +379,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self notificationAtIndexPath:indexPath]) {
-        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(NotificationTableViewCell.class) forIndexPath:indexPath];
+        return [tableView dequeueReusableNotificationCellFor:indexPath];
     }
     else {
         return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
@@ -405,7 +402,7 @@
 {
     UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
-        NotificationTableViewCell *notificationTableViewCell = (NotificationTableViewCell *)cell;
+        UITableViewCell<NotificationSettable> *notificationTableViewCell = (UITableViewCell<NotificationSettable> *)cell;
         notificationTableViewCell.notification = notification;
     }
     else {
@@ -434,7 +431,7 @@
 
 - (void)settings:(id)sender
 {
-    SettingsNavigationViewController *settingsNavigationViewController = [[SettingsNavigationViewController alloc] init];
+    UIViewController *settingsNavigationViewController = [SettingsNavigationViewController viewController];
     [self presentViewController:settingsNavigationViewController animated:YES completion:nil];
 }
 
