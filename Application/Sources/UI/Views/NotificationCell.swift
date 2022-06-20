@@ -90,3 +90,11 @@ private extension NotificationCell {
         return isSelected ? .isSelected : []
     }
 }
+
+// MARK: Size
+
+enum NotificationCellSize {
+    static func fullWidth() -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
+    }
+}

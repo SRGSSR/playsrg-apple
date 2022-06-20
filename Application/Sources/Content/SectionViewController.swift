@@ -771,6 +771,10 @@ private extension SectionViewController {
                             return DownloadCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
+                case .notificationList:
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
+                        return NotificationCellSize.fullWidth()
+                    }
 #endif
                 }
             }

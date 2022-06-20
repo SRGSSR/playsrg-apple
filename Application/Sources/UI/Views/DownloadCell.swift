@@ -187,10 +187,6 @@ enum DownloadCellSize {
     }
     
     static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: 84)
-    }
-    
-    static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
