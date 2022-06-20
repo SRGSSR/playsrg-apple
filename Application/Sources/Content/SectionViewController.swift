@@ -317,87 +317,6 @@ final class SectionViewController: UIViewController {
     }
     
 #if os(iOS)
-    private func open(_ notification: UserNotification) {
-        UserNotification.saveNotification(notification, read: true)
-        
-        if let mediaUrn = notification.mediaURN {
-            SRGDataProvider.current!.media(withURN: mediaUrn) { media, _, error in
-                if let media = media {
-                    self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true) { _ in
-                        let labels = SRGAnalyticsHiddenEventLabels()
-                        labels.source = notification.showURN ?? AnalyticsSource.notification.rawValue
-                        labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue
-                        labels.value = mediaUrn
-                        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
-                    }
-                }
-                else if let error = error {
-                    Banner.showError(error)
-                }
-            }.resume()
-        }
-        else if let showUrn = notification.showURN {
-            SRGDataProvider.current!.show(withURN: showUrn) { show, _, error in
-                if let show = show {
-                    let showViewController = SectionViewController.showViewController(for: show)
-                    self.navigationController?.pushViewController(showViewController, animated: true)
-                    
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.notification.rawValue
-                    labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionDisplayShow.rawValue
-                    labels.value = showUrn
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
-                }
-                else if let error = error {
-                    Banner.showError(error)
-                }
-            }
-            .resume()
-        }
-        else {
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.notification.rawValue
-            labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionNotificationAlert.rawValue
-            labels.value = notification.body
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
-        }
-    }
-    
-    private func open(_ item: Content.Item) {
-        switch item {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = SectionViewController.showViewController(for: show)
-                navigationController.pushViewController(showViewController, animated: true)
-            }
-        case let .topic(topic):
-            if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic))
-                navigationController.pushViewController(pageViewController, animated: true)
-            }
-        case let .download(download):
-            if let media = download.media {
-                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            }
-            else {
-                let error = NSError(
-                    domain: PlayErrorDomain,
-                    code: PlayErrorCode.notFound.rawValue,
-                    userInfo: [
-                        NSLocalizedDescriptionKey: NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
-                    ]
-                )
-                Banner.showError(error)
-            }
-        case let .notification(notification):
-            open(notification)
-        default:
-            ()
-        }
-    }
-    
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
@@ -550,7 +469,7 @@ extension SectionViewController: UICollectionViewDelegate {
             updateNavigationBar()
         }
         else {
-            open(item)
+            navigateToItem(item)
         }
     }
     

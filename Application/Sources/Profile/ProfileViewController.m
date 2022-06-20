@@ -416,7 +416,7 @@
 {
     UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
-        // [NotificationsViewController openNotification:notification fromViewController:self];
+        [self navigateToNotification:notification];
         
         // Update the cell dot right away
         [self reloadTableView];

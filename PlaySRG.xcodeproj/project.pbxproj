@@ -768,6 +768,11 @@
 		6F33E60F2860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
 		6F33E6102860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
 		6F33E6112860A2AD00724E76 /* NotificationCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33E60C2860A2AC00724E76 /* NotificationCell+UIKit.swift */; };
+		6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		6F33E6132860AF0000724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		6F33E6152860AF0200724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		6F33E6162860AF0200724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
+		6F33E6172860AF0200724E76 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0805703D2540E0FC00A59C9D /* Navigation.swift */; };
 		6F340F52220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F53220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
 		6F340F54220DA99B00778CA3 /* History.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F340F51220DA99B00778CA3 /* History.m */; };
@@ -8351,6 +8356,7 @@
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
 				6FE9049226F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6FC2F7DF2628F23600BF6B19 /* ResponderChain.swift in Sources */,
+				6F33E6122860AEFF00724E76 /* Navigation.swift in Sources */,
 				6F8A545A2655100400AE78FD /* SectionViewController.swift in Sources */,
 				08209308208F522A00711DE4 /* PushService.m in Sources */,
 				6F362A8A26A0706F00CBCC9D /* ProgramGuideDailyViewController.swift in Sources */,
@@ -8438,6 +8444,7 @@
 				6FD633EB1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				08F4683B26C6CAE400CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD8F2832824E008E2806 /* WhatsNewView.swift in Sources */,
+				6F33E6132860AF0000724E76 /* Navigation.swift in Sources */,
 				6F54D3C826051010008B46FF /* ProgressBar.swift in Sources */,
 				6F8144152008FA970075F52F /* GoogleCast.m in Sources */,
 				9EA78A2D26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
@@ -8684,6 +8691,7 @@
 				6FD633EC1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				08F4683C26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD902832824E008E2806 /* WhatsNewView.swift in Sources */,
+				6F33E6152860AF0200724E76 /* Navigation.swift in Sources */,
 				6F54D3C926051010008B46FF /* ProgressBar.swift in Sources */,
 				6F8144162008FA970075F52F /* GoogleCast.m in Sources */,
 				9EA78A2E26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
@@ -8930,6 +8938,7 @@
 				6FD633ED1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
 				08F4683D26C6CAE500CC725F /* ProgramGuideCalendarViewController.swift in Sources */,
 				6FDAAD912832824E008E2806 /* WhatsNewView.swift in Sources */,
+				6F33E6162860AF0200724E76 /* Navigation.swift in Sources */,
 				6F54D3CA26051011008B46FF /* ProgressBar.swift in Sources */,
 				6F8144172008FA970075F52F /* GoogleCast.m in Sources */,
 				9EA78A2F26D66E89004DAC33 /* CarPlaySceneDelegate.swift in Sources */,
@@ -9225,6 +9234,7 @@
 				6FB9B3DA26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
+				6F33E6172860AF0200724E76 /* Navigation.swift in Sources */,
 				6F73BFB426563ABD0032D742 /* DampedCollectionView.swift in Sources */,
 				6F008761219AA888004BD6FF /* StoreReview.m in Sources */,
 				6F54D32626050FBD008B46FF /* MediaCell.swift in Sources */,
