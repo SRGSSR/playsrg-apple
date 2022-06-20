@@ -251,23 +251,16 @@ final class SearchViewController: UIViewController {
     @objc private func showSettings(_ sender: Any) {
         searchController?.searchBar.resignFirstResponder()
         
-        let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
-        settingsViewController.delegate = self
+        let settingsViewController = SearchSettingsNavigationViewController(query: model.query, settings: model.settings)
+        settingsViewController.modalPresentationStyle = .popover
         
-        let backgroundColor: UIColor? = UIDevice.current.userInterfaceIdiom == .pad ? .play_popoverGrayBackground : nil
-        let navigationController = NavigationController(rootViewController: settingsViewController,
-                                                        tintColor: .white,
-                                                        backgroundColor: backgroundColor,
-                                                        statusBarStyle: .lightContent)
-        navigationController.modalPresentationStyle = .popover
-        
-        if let popoverPresentationController = navigationController.popoverPresentationController {
+        if let popoverPresentationController = settingsViewController.popoverPresentationController {
             popoverPresentationController.backgroundColor = .play_popoverGrayBackground
             popoverPresentationController.permittedArrowDirections = .any
             popoverPresentationController.barButtonItem = filtersBarButtonItem
         }
         
-        present(navigationController, animated: true)
+        present(settingsViewController, animated: true)
     }
 #endif
     
@@ -390,12 +383,6 @@ extension SearchViewController: PlayApplicationNavigation {
         
         searchController?.searchBar.resignFirstResponder()
         return true
-    }
-}
-
-extension SearchViewController: SearchSettingsViewControllerDelegate {
-    func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
-        model.settings = settings
     }
 }
 
