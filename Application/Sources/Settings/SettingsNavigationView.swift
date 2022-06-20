@@ -19,7 +19,7 @@ struct SettingsNavigationView: View {
                 .toolbar {
                     ToolbarItem {
                         Button {
-                            firstResponder.sendAction(#selector(SettingsNavigationViewController.close(_:)))
+                            firstResponder.sendAction(#selector(SettingsNavigationHostViewController.close(_:)))
                         } label: {
                             Text(NSLocalizedString("Done", comment: "Done button title"))
                         }
@@ -42,32 +42,19 @@ struct SettingsNavigationView: View {
 
 // MARK: UIKit presentation
 
-class SettingsNavigationViewController: UIViewController {
-    override func loadView() {
-        let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .systemBackground
-        self.view = view
+final class SettingsNavigationViewController: NSObject {
+    @objc static func viewController() -> UIViewController {
+        return SettingsNavigationHostViewController()
+    }
+}
+
+private final class SettingsNavigationHostViewController: UIHostingController<SettingsNavigationView> {
+    init() {
+        super.init(rootView: SettingsNavigationView())
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let hostController = UIHostingController(rootView: SettingsNavigationView())
-        addChild(hostController)
-        
-        if let hostView = hostController.view {
-            hostView.translatesAutoresizingMaskIntoConstraints = false
-            view.addSubview(hostView)
-            
-            NSLayoutConstraint.activate([
-                hostView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                hostView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                hostView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-                hostView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-        }
-        
-        hostController.didMove(toParent: self)
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     @objc fileprivate func close(_ sender: UIBarButtonItem) {
