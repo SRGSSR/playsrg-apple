@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import Introspect
 import SRGAppearanceSwift
 import SwiftUI
 
@@ -14,7 +13,7 @@ struct SettingsNavigationView: View {
     @FirstResponder private var firstResponder
     
     var body: some View {
-        NavigationView {
+        PlayNavigationView {
             SettingsView()
                 .toolbar {
                     ToolbarItem {
@@ -27,15 +26,6 @@ struct SettingsNavigationView: View {
                 }
         }
         .navigationViewStyle(.stack)
-        .introspectNavigationController { navigationController in
-            let navigationBar = navigationController.navigationBar
-            navigationBar.largeTitleTextAttributes = [
-                .font: SRGFont.font(family: .display, weight: .bold, size: 34) as UIFont
-            ]
-            navigationBar.titleTextAttributes = [
-                .font: SRGFont.font(family: .display, weight: .semibold, size: 17) as UIFont
-            ]
-        }
         .responderChain(from: firstResponder)
     }
 }

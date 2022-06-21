@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SRGDataProviderModel
 import SwiftUI
 
@@ -74,6 +75,7 @@ struct SearchSettingsView: View {
             Toggle(NSLocalizedString("Playable abroad", comment: "Search setting"), isOn: $playableAbroad)
             Toggle(NSLocalizedString("Subtitled", comment: "Search setting"), isOn: $subtitlesAvailable)
         }
+        .srgFont(.body)
         .navigationTitle(NSLocalizedString("Filters", comment: "Search filters page title"))
     }
 }

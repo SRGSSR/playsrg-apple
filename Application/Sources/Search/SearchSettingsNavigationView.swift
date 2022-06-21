@@ -14,7 +14,7 @@ struct SearchSettingsNavigationView: View {
     @FirstResponder private var firstResponder
     
     var body: some View {
-        NavigationView {
+        PlayNavigationView {
             SearchSettingsView(model: model)
                 .toolbar {
                     ToolbarItem {
