@@ -28,7 +28,7 @@ final class SearchSettingsViewModel: ObservableObject {
     init() {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings] in
             Publishers.CombineLatest($query, $settings)
-                .map { query, settings in
+                .map { query, settings -> AnyPublisher<State, Never> in
                     let vendor = ApplicationConfiguration.shared.vendor
                     let enrichedSettings = Self.enrichedSettings(from: settings)
                     return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings)
@@ -36,6 +36,7 @@ final class SearchSettingsViewModel: ObservableObject {
                         .catch { error in
                             return Just(State.failed(error: error))
                         }
+                        .eraseToAnyPublisher()
                 }
                 .switchToLatest()
                 .prepend(State.loading)
