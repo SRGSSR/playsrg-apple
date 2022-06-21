@@ -44,4 +44,3 @@ func PlaySection<Content: View>(@ViewBuilder content: () -> Content) -> Section<
         EmptyView()
     }
 }
-

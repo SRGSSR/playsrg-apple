@@ -54,5 +54,3 @@ struct SearchSettingsNavigationView_Previews: PreviewProvider {
         SearchSettingsNavigationView(model: SearchViewModel())
     }
 }
-
-
