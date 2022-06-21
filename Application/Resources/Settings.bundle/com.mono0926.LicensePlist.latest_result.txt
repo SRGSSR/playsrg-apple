@@ -163,7 +163,7 @@ name: srgappearance-apple, nameSpecified: srgappearance-apple, owner: SRGSSR, ve
 
 name: srgcontentprotection-apple, nameSpecified: srgcontentprotection-apple, owner: SRGSSR, version: 3.0.4, source: https://github.com/SRGSSR/srgcontentprotection-apple
 
-name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: 15.0.0, source: https://github.com/SRGSSR/srgdataprovider-apple
+name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgdataprovider-apple
 
 name: srgdiagnostics-apple, nameSpecified: srgdiagnostics-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
