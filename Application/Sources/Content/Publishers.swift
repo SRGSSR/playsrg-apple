@@ -230,9 +230,13 @@ extension Publisher {
      *  Borrowed from https://peterfriese.dev/posts/swiftui-combine-custom-operators/
      */
     func dump() -> AnyPublisher<Output, Failure> {
-        handleEvents(receiveOutput: { value in
-            Swift.dump(value)
-        })
+        handleEvents { output in
+            Swift.dump(output)
+        } receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                Swift.dump(error)
+            }
+        }
         .eraseToAnyPublisher()
     }
 }
