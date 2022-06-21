@@ -12,9 +12,11 @@ func PlayNavigationView<Content: View>(@ViewBuilder content: () -> Content) -> A
     return NavigationView(content: content)
         .introspectNavigationController { navigationController in
             let navigationBar = navigationController.navigationBar
+#if os(iOS)
             navigationBar.largeTitleTextAttributes = [
                 .font: SRGFont.font(family: .display, weight: .bold, size: 34) as UIFont
             ]
+#endif
             navigationBar.titleTextAttributes = [
                 .font: SRGFont.font(family: .display, weight: .semibold, size: 17) as UIFont
             ]
