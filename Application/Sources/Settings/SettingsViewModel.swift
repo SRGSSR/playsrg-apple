@@ -13,6 +13,9 @@ import YYWebImage
 
 final class SettingsViewModel: ObservableObject {
     @Published private(set) var isLoggedIn = false
+#if os(tvOS)
+    @Published private(set) var account: SRGAccount?
+#endif
     @Published private(set) var hasHistoryEntries = false
     @Published private(set) var hasFavorites = false
     @Published private(set) var hasWatchLaterItems = false
@@ -30,6 +33,14 @@ final class SettingsViewModel: ObservableObject {
                 .prepend(())
                 .map { identityService.isLoggedIn }
                 .assign(to: &$isLoggedIn)
+            
+#if os(tvOS)
+            NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService)
+                .map { _ in }
+                .prepend(())
+                .map { identityService.account }
+                .assign(to: &$account)
+#endif
         }
         
         ThrottledSignal.historyUpdates()
@@ -79,6 +90,30 @@ final class SettingsViewModel: ObservableObject {
             return NSLocalizedString("Never", comment: "Text displayed when no data synchronization has been made yet")
         }
     }
+    
+#if os(tvOS)
+    var supportsLogin: Bool {
+        return SRGIdentityService.current != nil
+    }
+    
+    var username: String? {
+        return account?.displayName ?? SRGIdentityService.current?.emailAddress
+    }
+    
+    func login() {
+        if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue])
+            
+            let labels = SRGAnalyticsHiddenEventLabels()
+            labels.type = AnalyticsType.actionDisplayLogin.rawValue
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+        }
+    }
+    
+    func logout() {
+        SRGIdentityService.current?.logout()
+    }
+#endif
     
     var synchronizationStatus: String? {
         guard let identityService = SRGIdentityService.current, identityService.isLoggedIn else { return nil }

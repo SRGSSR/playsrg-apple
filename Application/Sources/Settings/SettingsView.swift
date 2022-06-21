@@ -21,6 +21,11 @@ struct SettingsView: View {
     
     var body: some View {
         List {
+#if os(tvOS)
+            if model.supportsLogin {
+                ProfileSection(model: model)
+            }
+#endif
 #if os(iOS)
             QualitySection()
 #endif
@@ -46,6 +51,67 @@ struct SettingsView: View {
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
     }
+    
+    // MARK: Profile section
+    
+#if os(tvOS)
+    private struct ProfileSection: View {
+        @ObservedObject var model: SettingsViewModel
+        
+        var body: some View {
+            PlaySection {
+                ProfileButton(model: model)
+            } header: {
+                Text(NSLocalizedString("Profile", comment: "Profile section header"))
+            } footer: {
+                Text(NSLocalizedString("Synchronize playback history, favorites and content saved for later on all devices connected to your account.", comment: "Login benefits description footer"))
+            }
+        }
+    }
+    
+    private struct ProfileButton: View {
+        @ObservedObject var model: SettingsViewModel
+        @State private var isAlertDisplayed = false
+        
+        private var text: String {
+            guard model.isLoggedIn else { return NSLocalizedString("Login", comment: "Login button on Apple TV") }
+            if let username = model.username {
+                return NSLocalizedString("Logout", comment: "Logout button on Apple TV").appending(" (\(username))")
+            }
+            else {
+                return NSLocalizedString("Logout", comment: "Logout button on Apple TV")
+            }
+        }
+        
+        private func alert() -> Alert {
+            let primaryButton = Alert.Button.cancel(Text(NSLocalizedString("Cancel", comment: "Title of a cancel button")))
+            let secondaryButton = Alert.Button.destructive(Text(NSLocalizedString("Logout", comment: "Logout button on Apple TV"))) {
+                model.logout()
+            }
+            return Alert(title: Text(NSLocalizedString("Logout", comment: "Logout alert view title on Apple TV")),
+                         message: Text(NSLocalizedString("Playback history, favorites and content saved for later will be deleted from this Apple TV.", comment: "Message displayed when the user is about to log out")),
+                         primaryButton: primaryButton,
+                         secondaryButton: secondaryButton)
+        }
+        
+        private func action() {
+            if model.isLoggedIn {
+                isAlertDisplayed = true
+            }
+            else {
+                model.login()
+            }
+        }
+        
+        var body: some View {
+            Button(action: action) {
+                Text(text)
+                    .foregroundColor(model.isLoggedIn ? .red : .primary)
+            }
+            .alert(isPresented: $isAlertDisplayed, content: alert)
+        }
+    }
+#endif
     
     // MARK: Quality section
     
