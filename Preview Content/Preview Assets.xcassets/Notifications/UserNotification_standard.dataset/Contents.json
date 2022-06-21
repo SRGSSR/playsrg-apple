@@ -1,7 +1,7 @@
 {
   "data" : [
     {
-      "filename" : "UserNotification_standard.plist",
+      "filename" : "UserNotification_standard.json",
       "idiom" : "universal"
     }
   ],

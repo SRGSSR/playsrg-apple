@@ -5,6 +5,7 @@
 //
 
 @import Foundation;
+@import Mantle;
 @import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -32,7 +33,7 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
 /**
  *  Push notification information.
  */
-@interface UserNotification : NSObject
+@interface UserNotification : MTLModel <MTLJSONSerializing>
 
 /**
  *  List of currently available notifications.
@@ -65,11 +66,6 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
  *  Create a notification from a system notification.
  */
 - (instancetype)initWithNotification:(UNNotification *)notification;
-
-/**
- *  Create a notification from a saved plist file.
- */
-- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 /**
  *  The notification identifier.

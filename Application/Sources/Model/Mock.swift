@@ -115,12 +115,6 @@ struct Mock {
     private static func mockObject<T>(_ name: String, type: T.Type) -> T {
         let clazz: AnyClass = type as! AnyClass
         let asset = NSDataAsset(name: "\(NSStringFromClass(clazz))_\(name)")!
-#if os(iOS)
-        if clazz == UserNotification.self,
-           let dictionary = try? PropertyListSerialization.propertyList(from: asset.data, format: nil) as? [String: Any] {
-            return UserNotification.init(dictionary: dictionary) as! T
-        }
-#endif
         let jsonData = try! JSONSerialization.jsonObject(with: asset.data, options: []) as? [String: Any]
         return try! MTLJSONAdapter(modelClass: clazz)?.model(fromJSONDictionary: jsonData) as! T
     }

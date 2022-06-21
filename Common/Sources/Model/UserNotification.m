@@ -11,7 +11,8 @@
 #import "PlayLogger.h"
 
 @import libextobjc;
-@import Mantle;
+
+static NSValueTransformer *NotificationTypeTransformer(void);
 
 static NSString *NotificationDescriptionForType(UserNotificationType notificationType)
 {
@@ -196,6 +197,52 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     dictionary[@"show"] = self.showURN;
     dictionary[@"channelId"] = self.channelUid;
     return dictionary.copy;
+}
+
+#pragma mark MTLJSONSerializing protocol
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey
+{
+    static NSDictionary *s_mapping;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_mapping = @{
+            @keypath(UserNotification.new, identifier) : @"identifier",
+            @keypath(UserNotification.new, date) : @"date",
+            @keypath(UserNotification.new, read) : @"read",
+            
+            @keypath(UserNotification.new, title) : @"title",
+            @keypath(UserNotification.new, body) : @"body",
+            
+            @keypath(UserNotification.new, imageURL) : @"imageUrl",
+            @keypath(UserNotification.new, type) : @"type",
+            @keypath(UserNotification.new, mediaURN) : @"media",
+            @keypath(UserNotification.new, showURN) : @"show",
+            @keypath(UserNotification.new, channelUid) : @"channelId"
+        };
+    });
+    return s_mapping;
+}
+
+#pragma mark Transformers
+
++ (NSValueTransformer *)dateJSONTransformer{
+    
+    return [MTLValueTransformer transformerUsingForwardBlock:^(NSNumber *number, BOOL *success, NSError **error){
+        return [NSDate dateWithTimeIntervalSince1970:number.floatValue];
+    } reverseBlock:^(NSDate *date, BOOL *success, NSError **error) {
+        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+    }];
+}
+
++ (NSValueTransformer *)imageURLJSONTransformer
+{
+    return [NSValueTransformer valueTransformerForName:MTLURLValueTransformerName];
+}
+
++ (NSValueTransformer *)typeJSONTransformer
+{
+    return NotificationTypeTransformer();
 }
 
 #pragma mark Equality
