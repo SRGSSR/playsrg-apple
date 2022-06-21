@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "UserNotification_standard.plist",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

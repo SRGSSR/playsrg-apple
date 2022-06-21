@@ -67,6 +67,11 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
 - (instancetype)initWithNotification:(UNNotification *)notification;
 
 /**
+ *  Create a notification from a saved plist file.
+ */
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+/**
  *  The notification identifier.
  */
 @property (nonatomic, readonly, copy) NSString *identifier;

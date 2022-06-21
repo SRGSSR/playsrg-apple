@@ -98,3 +98,16 @@ enum NotificationCellSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
+
+// MARK: Preview
+
+struct NotificationCell_Previews: PreviewProvider {
+    private static let size = NotificationCellSize.fullWidth().previewSize
+
+    static var previews: some View {
+        NotificationCell(notification: Mock.notification(.standard))
+            .previewLayout(.fixed(width: size.width, height: size.height))
+        NotificationCell(notification: Mock.notification(.overflow))
+            .previewLayout(.fixed(width: size.width, height: size.height))
+    }
+}
