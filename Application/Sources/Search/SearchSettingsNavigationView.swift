@@ -15,7 +15,7 @@ struct SearchSettingsNavigationView: View {
     
     var body: some View {
         PlayNavigationView {
-            SearchSettingsView(model: model)
+            SearchSettingsView(query: $model.query, settings: $model.settings)
                 .toolbar {
                     ToolbarItem {
                         Button {

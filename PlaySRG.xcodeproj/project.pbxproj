@@ -1890,6 +1890,11 @@
 		6FD1EF492861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
 		6FD1EF4A2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
 		6FD1EF4B2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */; };
+		6FD1EF4D2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
+		6FD1EF4E2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
+		6FD1EF4F2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
+		6FD1EF502861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
+		6FD1EF512861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */; };
 		6FD2A35523C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35623C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
 		6FD2A35723C7628000456DCB /* ForegroundTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FD2A35323C7628000456DCB /* ForegroundTimer.m */; };
@@ -3216,6 +3221,7 @@
 		6FD1206624D1929F008CB2F8 /* SWIAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SWIAssets.xcassets; sourceTree = "<group>"; };
 		6FD1EF362861A39400BCBF19 /* PlaySection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySection.swift; sourceTree = "<group>"; };
 		6FD1EF412861A3C500BCBF19 /* PlayNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayNavigationView.swift; sourceTree = "<group>"; };
+		6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSettingsViewModel.swift; sourceTree = "<group>"; };
 		6FD2A35323C7628000456DCB /* ForegroundTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForegroundTimer.m; sourceTree = "<group>"; };
 		6FD2A35423C7628000456DCB /* ForegroundTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForegroundTimer.h; sourceTree = "<group>"; };
 		6FD2CBC21DD19B0200B44958 /* placeholder_media.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = placeholder_media.pdf; sourceTree = "<group>"; };
@@ -5170,6 +5176,7 @@
 			children = (
 				6F33E61E2860BED900724E76 /* SearchSettingsNavigationView.swift */,
 				6F33E6182860B5EF00724E76 /* SearchSettingsView.swift */,
+				6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */,
 				6FDF54F128530BAB0068BABB /* SearchViewController.swift */,
 				6F0B984F2726980F005793A2 /* SearchViewModel.swift */,
 				6FF7BB8E22A78DE400FA758A /* Settings */,
@@ -8243,6 +8250,7 @@
 				6FD68618246052A100B8018A /* GradientView.m in Sources */,
 				6FCF57E0263DDA9A001C4615 /* RedactingView.swift in Sources */,
 				6FD88F8322D476CF008859EF /* UIScrollView+PlaySRG.m in Sources */,
+				6FD1EF4D2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80E9C221A682E70027CA2F /* TableRequestViewController.m in Sources */,
 				081220C11DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F6E9061283E6EB10049FEEE /* Highlight.swift in Sources */,
@@ -8564,6 +8572,7 @@
 				6F23631A2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F54D40026051035008B46FF /* MediaDescription.swift in Sources */,
 				E6971AEE1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
+				6FD1EF4E2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66C27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				6FDF08F1218B126700B2AF2C /* UpdateInfo.m in Sources */,
 				0875852323A0025F00FA7207 /* ProfileViewController.m in Sources */,
@@ -8815,6 +8824,7 @@
 				6F23631B2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40226051036008B46FF /* MediaDescription.swift in Sources */,
+				6FD1EF4F2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66D27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				E6971AEF1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F2218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -9066,6 +9076,7 @@
 				6F23631C2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40426051036008B46FF /* MediaDescription.swift in Sources */,
+				6FD1EF502861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66E27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				E6971AF01D4B300C008CA703 /* PlayApplicationError.m in Sources */,
 				6FDF08F3218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -9394,6 +9405,7 @@
 				0820930C208F522B00711DE4 /* PushService.m in Sources */,
 				6FEF236B2732C2410098C639 /* ChannelHeaderView.swift in Sources */,
 				6F6C7AD82820578900BC3EA5 /* PosterImages.swift in Sources */,
+				6FD1EF512861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F475FE51EB37BC6003021EA /* ModalTransition.m in Sources */,
 				08C68F931D38DEA100BB8AAA /* main.m in Sources */,
 				6F7C35B923708E8A00259BE7 /* SRGResource+PlaySRG.m in Sources */,
