@@ -2656,14 +2656,9 @@
 		082910B4239EA69C00D168F4 /* RadioChannelsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannelsViewController.h; sourceTree = "<group>"; };
 		0841E70422F0953A009D8304 /* SRGDay+PlaySRG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SRGDay+PlaySRG.h"; sourceTree = "<group>"; };
 		0841E70522F0953A009D8304 /* SRGDay+PlaySRG.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SRGDay+PlaySRG.m"; sourceTree = "<group>"; };
-		084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionViewController.h; sourceTree = "<group>"; };
-		084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingMultiSelectionViewController.m; sourceTree = "<group>"; };
-		084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SearchSettingMultiSelectionViewController.storyboard; sourceTree = "<group>"; };
 		0852539522073D5200BCF0B1 /* UIApplication+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIApplication+PlaySRG.h"; sourceTree = "<group>"; };
 		0852539622073D5200BCF0B1 /* UIApplication+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+PlaySRG.m"; sourceTree = "<group>"; };
 		0858CA5A271084A000EE36EA /* ProgramGuideGridViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramGuideGridViewController.swift; sourceTree = "<group>"; };
-		0859ADC422D72F4F00511F7F /* SearchSettingsMultiSelectionItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchSettingsMultiSelectionItem.h; sourceTree = "<group>"; };
-		0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsMultiSelectionItem.m; sourceTree = "<group>"; };
 		085C0D982611F33E008E07C8 /* ShowAccessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowAccessCell.swift; sourceTree = "<group>"; };
 		085C0DC226132672008E07C8 /* ApplicationConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationConfiguration.swift; sourceTree = "<group>"; };
 		085C0DCD261326C8008E07C8 /* RadioChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioChannel.swift; sourceTree = "<group>"; };
@@ -3049,8 +3044,6 @@
 		6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6F7C89CE20AAFC6100255A54 /* Onboardings.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Onboardings.xcassets; sourceTree = "<group>"; };
 		6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayLogger.h; sourceTree = "<group>"; };
-		6F7EEBF122DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingMultiSelectionCell.h; sourceTree = "<group>"; };
-		6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingMultiSelectionCell.m; sourceTree = "<group>"; };
 		6F7F2B04249CD78D00C37526 /* SRGLetterboxController+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGLetterboxController+PlaySRG.h"; sourceTree = "<group>"; };
 		6F7F2B05249CD78D00C37526 /* SRGLetterboxController+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SRGLetterboxController+PlaySRG.m"; sourceTree = "<group>"; };
 		6F80106720443230009FE197 /* PlayApplication.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayApplication.h; sourceTree = "<group>"; };
@@ -3181,9 +3174,6 @@
 		6FD68617246052A100B8018A /* GradientView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
 		6FD6861D2460670600B8018A /* Channel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		6FD6861E2460670600B8018A /* Channel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
-		6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsHeaderView.h; sourceTree = "<group>"; };
-		6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsHeaderView.m; sourceTree = "<group>"; };
-		6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchSettingsHeaderView.xib; sourceTree = "<group>"; };
 		6FD88F8122D476CF008859EF /* UIScrollView+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+PlaySRG.h"; sourceTree = "<group>"; };
 		6FD88F8222D476CF008859EF /* UIScrollView+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+PlaySRG.m"; sourceTree = "<group>"; };
 		6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaVisualViewModel.swift; sourceTree = "<group>"; };
@@ -3238,15 +3228,6 @@
 		6FF65C532835FFA400AF0768 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		6FF65C5928360EB100AF0768 /* Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding.swift; sourceTree = "<group>"; };
 		6FF65C5F283617DC00AF0768 /* OnboardingPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage.swift; sourceTree = "<group>"; };
-		6FF7BB8F22A78DE400FA758A /* SearchSettingSegmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingSegmentCell.h; sourceTree = "<group>"; };
-		6FF7BB9022A78DE400FA758A /* SearchSettingSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSwitchCell.m; sourceTree = "<group>"; };
-		6FF7BB9122A78DE400FA758A /* SearchSettingSelectorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingSelectorCell.h; sourceTree = "<group>"; };
-		6FF7BB9222A78DE400FA758A /* SearchSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingsViewController.h; sourceTree = "<group>"; };
-		6FF7BB9322A78DE400FA758A /* SearchSettingSegmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSegmentCell.m; sourceTree = "<group>"; };
-		6FF7BB9422A78DE400FA758A /* SearchSettingSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchSettingSwitchCell.h; sourceTree = "<group>"; };
-		6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingsViewController.m; sourceTree = "<group>"; };
-		6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchSettingSelectorCell.m; sourceTree = "<group>"; };
-		6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SearchSettingsViewController.storyboard; sourceTree = "<group>"; };
 		6FF8F155250609CF009A741F /* MediaDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDescription.swift; sourceTree = "<group>"; };
 		6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility.swift; sourceTree = "<group>"; };
 		6FFA68322637E99C00BCDA06 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
@@ -5020,32 +5001,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6FF7BB8E22A78DE400FA758A /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				6F7EEBF122DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.h */,
-				6F7EEBF222DC7AA6005E5A97 /* SearchSettingMultiSelectionCell.m */,
-				084F94AD22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.h */,
-				084F94AE22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.m */,
-				084F94AF22D3B77600D2D3A5 /* SearchSettingMultiSelectionViewController.storyboard */,
-				6FF7BB8F22A78DE400FA758A /* SearchSettingSegmentCell.h */,
-				6FF7BB9322A78DE400FA758A /* SearchSettingSegmentCell.m */,
-				6FF7BB9122A78DE400FA758A /* SearchSettingSelectorCell.h */,
-				6FF7BB9622A78DE400FA758A /* SearchSettingSelectorCell.m */,
-				6FD88F7422D3618F008859EF /* SearchSettingsHeaderView.h */,
-				6FD88F7522D3618F008859EF /* SearchSettingsHeaderView.m */,
-				6FD88F7622D3618F008859EF /* SearchSettingsHeaderView.xib */,
-				0859ADC422D72F4F00511F7F /* SearchSettingsMultiSelectionItem.h */,
-				0859ADC522D72F4F00511F7F /* SearchSettingsMultiSelectionItem.m */,
-				6FF7BB9222A78DE400FA758A /* SearchSettingsViewController.h */,
-				6FF7BB9522A78DE400FA758A /* SearchSettingsViewController.m */,
-				6FF7BBB122A7901900FA758A /* SearchSettingsViewController.storyboard */,
-				6FF7BB9422A78DE400FA758A /* SearchSettingSwitchCell.h */,
-				6FF7BB9022A78DE400FA758A /* SearchSettingSwitchCell.m */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		9EA78A2A26D66E6D004DAC33 /* CarPlay */ = {
 			isa = PBXGroup;
 			children = (
@@ -5124,7 +5079,6 @@
 				6FD1EF4C2861C35400BCBF19 /* SearchSettingsViewModel.swift */,
 				6FDF54F128530BAB0068BABB /* SearchViewController.swift */,
 				6F0B984F2726980F005793A2 /* SearchViewModel.swift */,
-				6FF7BB8E22A78DE400FA758A /* Settings */,
 			);
 			path = Search;
 			sourceTree = "<group>";
