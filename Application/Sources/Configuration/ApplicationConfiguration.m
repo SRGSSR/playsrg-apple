@@ -154,7 +154,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 
 @property (nonatomic, getter=areSearchSettingsHidden) BOOL searchSettingsHidden;
 @property (nonatomic, getter=isSearchSettingSubtitledHidden) BOOL searchSettingSubtitledHidden;
-@property (nonatomic, getter=isSearchSortingCriteriumHidden) BOOL searchSortingCriteriumHidden;
 @property (nonatomic, getter=isShowsSearchHidden) BOOL showsSearchHidden;
 
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)

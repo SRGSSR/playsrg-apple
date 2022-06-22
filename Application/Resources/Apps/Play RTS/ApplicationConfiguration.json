@@ -27,6 +27,5 @@
   "endTolerance": 10,
   "endToleranceRatio": 0.01,
   "hiddenOnboardings": "favorites,resume_playback,watch_later",
-  "searchSettingSubtitledHidden": true,
-  "searchSortingCriteriumHidden": true
+  "searchSettingSubtitledHidden": true
 }

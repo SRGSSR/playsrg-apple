@@ -291,17 +291,13 @@ static SearchSettingPeriod SearchSettingPeriodForSettings(SRGMediaSearchSettings
 {
     NSMutableArray *sectionTypes = [NSMutableArray array];
 
-    ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    if (! applicationConfiguration.searchSortingCriteriumHidden) {
-        [sectionTypes addObject:SearchSettingSectionTypeSortCriterium];
-    }
-    [sectionTypes addObjectsFromArray:@[ SearchSettingSectionTypeMediaType,
-                                         SearchSettingSectionTypeTopics,
-                                         SearchSettingSectionTypeShows,
-                                         SearchSettingSectionTypePeriod,
-                                         SearchSettingSectionTypeDuration,
-                                         SearchSettingSectionTypeProperties ]];
-    return sectionTypes.copy;
+    return @[ SearchSettingSectionTypeSortCriterium,
+              SearchSettingSectionTypeMediaType,
+              SearchSettingSectionTypeTopics,
+              SearchSettingSectionTypeShows,
+              SearchSettingSectionTypePeriod,
+              SearchSettingSectionTypeDuration,
+              SearchSettingSectionTypeProperties ]];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSectionWithType:(SearchSettingSectionType)type
