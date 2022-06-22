@@ -37,7 +37,7 @@ struct SearchSettingsView: View {
             .pickerStyle(.inline)
             
             NavigationLink {
-                SearchSettingsBucketsView(model: model, kind: .topics)
+                SearchSettingsBucketsView(buckets: model.topicBuckets, bucketType: .topics, selections: $settings.topicURNs)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Topics", comment: "Search setting"))
@@ -49,7 +49,7 @@ struct SearchSettingsView: View {
             .disabled(model.isLoadingFilters || !model.hasTopicFilter)
             
             NavigationLink {
-                SearchSettingsBucketsView(model: model, kind: .shows)
+                SearchSettingsBucketsView(buckets: model.showsBuckets, bucketType: .shows, selections: $settings.showURNs)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Shows", comment: "Search setting"))
