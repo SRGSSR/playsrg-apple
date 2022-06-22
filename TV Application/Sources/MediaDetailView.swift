@@ -154,7 +154,7 @@ struct MediaDetailView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     if let summary = model.media?.play_fullSummary {
                         Button {
-                            showText(summary)
+                            navigateToText(summary)
                         } label: {
                             Text(summary)
                                 .foregroundColor(.white)
