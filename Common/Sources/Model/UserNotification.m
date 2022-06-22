@@ -226,12 +226,12 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
 
 #pragma mark Transformers
 
-+ (NSValueTransformer *)dateJSONTransformer{
-    
-    return [MTLValueTransformer transformerUsingForwardBlock:^(NSNumber *number, BOOL *success, NSError **error){
++ (NSValueTransformer *)dateJSONTransformer
+{
+    return [MTLValueTransformer transformerUsingForwardBlock:^(NSNumber *number, BOOL *success, NSError **pError) {
         return [NSDate dateWithTimeIntervalSince1970:number.floatValue];
-    } reverseBlock:^(NSDate *date, BOOL *success, NSError **error) {
-        return [NSNumber numberWithDouble:[date timeIntervalSince1970]];
+    } reverseBlock:^(NSDate *date, BOOL *success, NSError **pError) {
+        return [NSNumber numberWithDouble:date.timeIntervalSince1970];
     }];
 }
 
