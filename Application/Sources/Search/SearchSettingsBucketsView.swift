@@ -18,6 +18,15 @@ struct SearchSettingsBucketsView: View {
     
     let kind: Kind
     
+    private var title: String {
+        switch kind {
+        case .topics:
+            return NSLocalizedString("Topics", comment: "Search setting")
+        case .shows:
+            return NSLocalizedString("Shows", comment: "Search setting")
+        }
+    }
+    
     private var buckets: [SearchSettingsViewModel.SearchSettingsBucket] {
         switch kind {
         case .topics:
@@ -31,6 +40,7 @@ struct SearchSettingsBucketsView: View {
         List(buckets) {
             Text($0.title)
         }
+        .navigationTitle(title)
     }
 }
 
