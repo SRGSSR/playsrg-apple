@@ -41,6 +41,15 @@ final class SearchSettingsViewModel: ObservableObject {
         .assign(to: &$state)
     }
     
+    var isLoadingFilters: Bool {
+        switch state {
+        case .loading:
+            return true
+        default:
+            return false
+        }
+    }
+    
     var hasTopicFilter: Bool {
         if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
             return !aggregations.topicBuckets.isEmpty

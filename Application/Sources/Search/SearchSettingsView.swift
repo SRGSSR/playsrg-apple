@@ -36,15 +36,29 @@ struct SearchSettingsView: View {
             }
             .pickerStyle(.inline)
             
-            NavigationLink(NSLocalizedString("Topics", comment: "Search setting")) {
+            NavigationLink {
                 Text("TODO")
+            } label: {
+                HStack(spacing: 10) {
+                    Text(NSLocalizedString("Topics", comment: "Search setting"))
+                    if model.isLoadingFilters {
+                        ProgressView()
+                    }
+                }
             }
-            .disabled(!model.hasTopicFilter)
+            .disabled(model.isLoadingFilters || !model.hasTopicFilter)
             
-            NavigationLink(NSLocalizedString("Shows", comment: "Search setting")) {
+            NavigationLink {
                 Text("TODO")
+            } label: {
+                HStack(spacing: 10) {
+                    Text(NSLocalizedString("Shows", comment: "Search setting"))
+                    if model.isLoadingFilters {
+                        ProgressView()
+                    }
+                }
             }
-            .disabled(!model.hasShowFilter)
+            .disabled(model.isLoadingFilters || !model.hasShowFilter)
             
             Picker(NSLocalizedString("Period", comment: "Search setting"), selection: $settings.period) {
                 Text(NSLocalizedString("Anytime", comment: "Search setting option"))
