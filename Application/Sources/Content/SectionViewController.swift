@@ -39,7 +39,7 @@ final class SectionViewController: UIViewController {
     
     private var globalHeaderTitle: String? {
 #if os(tvOS)
-        return tabBarController == nil ? model.title : nil
+        return (tabBarController == nil && model.displaysTitle) ? model.title : nil
 #else
         return nil
 #endif
