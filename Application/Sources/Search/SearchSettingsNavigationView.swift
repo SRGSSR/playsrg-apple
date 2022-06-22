@@ -17,6 +17,17 @@ struct SearchSettingsNavigationView: View {
         PlayNavigationView {
             SearchSettingsView(query: $model.query, settings: $model.settings)
                 .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        // TODO: Starting with iOS 16 we can put the if on the toolbar item directly
+                        if !model.hasDefaultSettings {
+                            Button {
+                                model.resetSettings()
+                            } label: {
+                                Text(NSLocalizedString("Reset", comment: "Title of the reset search settings button"))
+                            }
+                        }
+                    }
+                    
                     ToolbarItem {
                         Button {
                             firstResponder.sendAction(#selector(SearchSettingsNavigationViewController.close(_:)))

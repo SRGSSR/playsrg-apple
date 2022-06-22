@@ -17,6 +17,10 @@ final class SearchViewModel: ObservableObject {
     
     private let trigger = Trigger()
     
+    var hasDefaultSettings: Bool {
+        return Self.areDefaultSettings(settings)
+    }
+    
     init() {
         Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings, trigger] in
             Publishers.CombineLatest($query.removeDuplicates(), $settings)
@@ -47,6 +51,10 @@ final class SearchViewModel: ObservableObject {
     
     func loadMore() {
         trigger.activate(for: TriggerId.loadMore)
+    }
+    
+    func resetSettings() {
+        settings = Self.optimalSettings()
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
