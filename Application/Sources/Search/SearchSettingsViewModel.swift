@@ -59,6 +59,10 @@ final class SearchSettingsViewModel: ObservableObject {
         }
     }
     
+    var hasSubtitledFilter: Bool {
+        return !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
+    }
+    
     private func reloadSignal() -> AnyPublisher<Void, Never> {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)

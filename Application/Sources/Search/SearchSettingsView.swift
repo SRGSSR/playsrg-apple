@@ -72,7 +72,9 @@ struct SearchSettingsView: View {
             
             Toggle(NSLocalizedString("Downloadable", comment: "Search setting"), isOn: $settings.downloadAvailable)
             Toggle(NSLocalizedString("Playable abroad", comment: "Search setting"), isOn: $settings.playableAbroad)
-            Toggle(NSLocalizedString("Subtitled", comment: "Search setting"), isOn: $settings.subtitlesAvailable)
+            if model.hasSubtitledFilter {
+                Toggle(NSLocalizedString("Subtitled", comment: "Search setting"), isOn: $settings.subtitlesAvailable)
+            }
         }
         .srgFont(.body)
         .navigationTitle(NSLocalizedString("Filters", comment: "Search filters page title"))
