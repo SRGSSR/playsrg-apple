@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import SRGAppearanceSwift
 import SwiftUI
 
 // MARK: View
@@ -40,6 +41,7 @@ struct SearchSettingsBucketsView: View {
         List(buckets) {
             Text($0.title)
         }
+        .srgFont(.body)
         .navigationTitle(title)
     }
 }
