@@ -15,10 +15,6 @@ final class SearchSettingsViewModel: ObservableObject {
     
     @Published private(set) var state: State = .loading
     
-    // TODO: Must update the settings
-    @Published var period: Period = .anytime
-    @Published var duration: Duration = .any
-    
     private static func enrichedSettings(from settings: SRGMediaSearchSettings?) -> SRGMediaSearchSettings {
         let settingsCopy = settings?.copy() as? SRGMediaSearchSettings ?? SRGMediaSearchSettings()
         settingsCopy.aggregationsEnabled = true
