@@ -37,7 +37,7 @@ struct SearchSettingsView: View {
             .pickerStyle(.inline)
             
             NavigationLink {
-                Text("TODO")
+                SearchSettingsBucketsView(model: model, kind: .topics)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Topics", comment: "Search setting"))
@@ -49,7 +49,7 @@ struct SearchSettingsView: View {
             .disabled(model.isLoadingFilters || !model.hasTopicFilter)
             
             NavigationLink {
-                Text("TODO")
+                SearchSettingsBucketsView(model: model, kind: .shows)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Shows", comment: "Search setting"))

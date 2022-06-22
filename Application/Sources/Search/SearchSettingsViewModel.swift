@@ -59,12 +59,30 @@ final class SearchSettingsViewModel: ObservableObject {
         }
     }
     
+    var topicBuckets: [SearchSettingsBucket] {
+        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
+            return aggregations.topicBuckets.map { SearchSettingsBucket(bucket: .topic(topic: $0)) }
+        }
+        else {
+            return []
+        }
+    }
+    
     var hasShowFilter: Bool {
         if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
             return !aggregations.showBuckets.isEmpty
         }
         else {
             return false
+        }
+    }
+    
+    var showsBuckets: [SearchSettingsBucket] {
+        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
+            return aggregations.showBuckets.map { SearchSettingsBucket(bucket: .show(show: $0)) }
+        }
+        else {
+            return []
         }
     }
     
@@ -76,6 +94,37 @@ final class SearchSettingsViewModel: ObservableObject {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
+    }
+    
+    struct SearchSettingsBucket: Swift.Identifiable, Equatable {
+        enum Bucket {
+            case topic(topic: SRGTopicBucket)
+            case show(show: SRGShowBucket)
+        }
+        
+        let bucket: Bucket
+        
+        var id: String {
+            switch bucket {
+            case let .topic(topic):
+                return topic.urn
+            case let .show(show):
+                return show.urn
+            }
+        }
+        
+        var title: String {
+            switch bucket {
+            case let .topic(topic):
+                return "\(topic.title) (\(topic.count)"
+            case let .show(show):
+                return "\(show.title) (\(show.count)"
+            }
+        }
+        
+        static func == (lhs: SearchSettingsBucket, rhs: SearchSettingsBucket) -> Bool {
+            return lhs.id == rhs.id
+        }
     }
 }
 
