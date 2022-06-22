@@ -116,9 +116,9 @@ final class SearchSettingsViewModel: ObservableObject {
         var title: String {
             switch bucket {
             case let .topic(topic):
-                return "\(topic.title) (\(topic.count)"
+                return "\(topic.title) (\(NumberFormatter.localizedString(from: topic.count as NSNumber, number: .decimal)))"
             case let .show(show):
-                return "\(show.title) (\(show.count)"
+                return "\(show.title) (\(NumberFormatter.localizedString(from: show.count as NSNumber, number: .decimal)))"
             }
         }
         
