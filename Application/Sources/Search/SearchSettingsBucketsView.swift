@@ -21,6 +21,7 @@ struct SearchSettingsBucketsView: View {
     
     @Binding var selections: Set<String>
 
+    @State private var displayedBuckets: [SearchSettingsViewModel.SearchSettingsBucket] = []
     @State private var multiSelection = Set<String>()
     
     private var title: String {
@@ -33,13 +34,14 @@ struct SearchSettingsBucketsView: View {
     }
     
     var body: some View {
-        List(buckets, selection: $multiSelection) {
+        List(displayedBuckets, selection: $multiSelection) {
             Text($0.title)
         }
         .srgFont(.body)
         .navigationTitle(title)
         .environment(\.editMode, .constant(.active))
         .onAppear {
+            displayedBuckets = buckets
             multiSelection = selections
         }
         .onChange(of: multiSelection) { newValue in
