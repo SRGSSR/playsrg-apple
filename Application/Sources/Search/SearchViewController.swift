@@ -206,7 +206,7 @@ final class SearchViewController: UIViewController {
         return Self.play_supportedInterfaceOrientations
     }
     
-    private func updateSearchSettingsButton(for settings: SRGMediaSearchSettings) {
+    private func updateSearchSettingsButton(for settings: MediaSearchSettings) {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
             navigationItem.rightBarButtonItem = nil
             return
@@ -375,7 +375,7 @@ extension SearchViewController: PlayApplicationNavigation {
         
         model.query = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchQueryKey] as? String ?? ""
         
-        let settings = SRGMediaSearchSettings()
+        var settings = MediaSearchSettings()
         if let mediaType = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchMediaTypeOptionKey] as? Int {
             settings.mediaType = SRGMediaType(rawValue: mediaType) ?? .none
         }
@@ -650,9 +650,9 @@ private extension SearchViewController {
 private extension SearchViewController {
     struct SectionHeaderView: View {
         let section: SearchViewModel.Section
-        let settings: SRGMediaSearchSettings
+        let settings: MediaSearchSettings
         
-        private static func title(for section: SearchViewModel.Section, settings: SRGMediaSearchSettings) -> String? {
+        private static func title(for section: SearchViewModel.Section, settings: MediaSearchSettings) -> String? {
             switch section {
             case .medias:
                 guard !ApplicationConfiguration.shared.radioChannels.isEmpty else { return nil }
@@ -682,7 +682,7 @@ private extension SearchViewController {
             }
         }
         
-        static func size(section: SearchViewModel.Section, settings: SRGMediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        static func size(section: SearchViewModel.Section, settings: MediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             return HeaderViewSize.recommended(forTitle: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
         }
     }

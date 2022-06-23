@@ -11,14 +11,14 @@ import SRGDataProviderCombine
 
 final class SearchSettingsViewModel: ObservableObject {
     @Published var query: String?
-    @Published var settings: SRGMediaSearchSettings?
+    @Published var settings: MediaSearchSettings?
     
     @Published private(set) var state: State = .loading
     
-    private static func enrichedSettings(from settings: SRGMediaSearchSettings?) -> SRGMediaSearchSettings {
-        let settingsCopy = settings?.copy() as? SRGMediaSearchSettings ?? SRGMediaSearchSettings()
-        settingsCopy.aggregationsEnabled = true
-        return settingsCopy
+    private static func enrichedSettings(from settings: MediaSearchSettings?) -> MediaSearchSettings {
+        var enrichedSettings = settings ?? MediaSearchSettings()
+        enrichedSettings.aggregationsEnabled = true
+        return enrichedSettings
     }
     
     init() {
@@ -27,15 +27,15 @@ final class SearchSettingsViewModel: ObservableObject {
                 .map { query, settings -> AnyPublisher<State, Never> in
                     let vendor = ApplicationConfiguration.shared.vendor
                     let enrichedSettings = Self.enrichedSettings(from: settings)
-                    return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings)
+                    return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings.requestSettings)
                         .map { State.loaded(aggregations: $0.aggregations) }
                         .catch { error in
                             return Just(State.failed(error: error))
                         }
+                        .prepend(State.loading)
                         .eraseToAnyPublisher()
                 }
                 .switchToLatest()
-                .prepend(State.loading)
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
@@ -135,19 +135,5 @@ extension SearchSettingsViewModel {
         case loading
         case failed(error: Error)
         case loaded(aggregations: SRGMediaAggregations?)
-    }
-    
-    enum Period {
-        case anytime
-        case today
-        case yesterday
-        case thisWeek
-        case lastWeek
-    }
-    
-    enum Duration {
-        case any
-        case lessThanFiveMinutes
-        case moreThanThirtyMinutes
     }
 }

@@ -12,7 +12,7 @@ import SwiftUI
 
 struct SearchSettingsView: View {
     @Binding var query: String
-    @Binding var settings: SRGMediaSearchSettings
+    @Binding var settings: MediaSearchSettings
     
     @StateObject private var model = SearchSettingsViewModel()
     
@@ -37,7 +37,7 @@ struct SearchSettingsView: View {
             .pickerStyle(.inline)
             
             NavigationLink {
-                SearchSettingsBucketsView(buckets: model.topicBuckets, bucketType: .topics, selections: $settings.topicURNs)
+                SearchSettingsBucketsView(buckets: model.topicBuckets, bucketType: .topics, selections: $settings.topicUrns)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Topics", comment: "Search setting"))
@@ -49,7 +49,7 @@ struct SearchSettingsView: View {
             .disabled(model.isLoadingFilters || !model.hasTopicFilter)
             
             NavigationLink {
-                SearchSettingsBucketsView(buckets: model.showsBuckets, bucketType: .shows, selections: $settings.showURNs)
+                SearchSettingsBucketsView(buckets: model.showsBuckets, bucketType: .shows, selections: $settings.showUrns)
             } label: {
                 HStack(spacing: 10) {
                     Text(NSLocalizedString("Shows", comment: "Search setting"))
@@ -62,25 +62,25 @@ struct SearchSettingsView: View {
             
             Picker(NSLocalizedString("Period", comment: "Search setting"), selection: $settings.period) {
                 Text(NSLocalizedString("Anytime", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Period.anytime)
+                    .tag(MediaSearchSettings.Period.anytime)
                 Text(NSLocalizedString("Today", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Period.today)
+                    .tag(MediaSearchSettings.Period.today)
                 Text(NSLocalizedString("Yesterday", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Period.yesterday)
+                    .tag(MediaSearchSettings.Period.yesterday)
                 Text(NSLocalizedString("This week", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Period.thisWeek)
+                    .tag(MediaSearchSettings.Period.thisWeek)
                 Text(NSLocalizedString("Last week", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Period.lastWeek)
+                    .tag(MediaSearchSettings.Period.lastWeek)
             }
             .pickerStyle(.inline)
             
             Picker(NSLocalizedString("Duration", comment: "Search setting"), selection: $settings.duration) {
                 Text(NSLocalizedString("Any", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Duration.any)
+                    .tag(MediaSearchSettings.Duration.any)
                 Text(NSLocalizedString("< 5 min", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Duration.lessThanFiveMinutes)
+                    .tag(MediaSearchSettings.Duration.lessThanFiveMinutes)
                 Text(NSLocalizedString("> 30 min", comment: "Search setting option"))
-                    .tag(SearchSettingsViewModel.Duration.moreThanThirtyMinutes)
+                    .tag(MediaSearchSettings.Duration.moreThanThirtyMinutes)
             }
             .pickerStyle(.inline)
             
@@ -105,110 +105,12 @@ struct SearchSettingsView: View {
     }
 }
 
-// MARK: Binding transforms
-
-private extension SRGMediaSearchSettings {
-    private static func period(in settings: SRGMediaSearchSettings) -> SearchSettingsViewModel.Period {
-        guard let fromDay = settings.fromDay, let toDay = settings.toDay else {
-            return .anytime
-        }
-        
-        let today = SRGDay.today
-        let settingsRangeComponents = SRGDay.components(.day, from: fromDay, to: toDay)
-        switch settingsRangeComponents.day {
-        case 6:
-            if today.play_isBetweenDay(fromDay, andDay: toDay) {
-                return .thisWeek
-            }
-            else if SRGDay(byAddingDays: -7, months: 0, years: 0, to: today).play_isBetweenDay(fromDay, andDay: toDay) {
-                return .lastWeek
-            }
-            else {
-                return .anytime
-            }
-        case 0:
-            if today == fromDay {
-                return .today
-            }
-            else if SRGDay(byAddingDays: -1, months: 0, years: 0, to: today) == fromDay {
-                return .yesterday
-            }
-            else {
-                return .anytime
-            }
-        default:
-            return .anytime
-        }
-    }
-    
-    private static func setPeriod(_ period: SearchSettingsViewModel.Period, in settings: SRGMediaSearchSettings) {
-        switch period {
-        case .anytime:
-            settings.fromDay = nil
-            settings.toDay = nil
-        case .today:
-            let today = SRGDay.today
-            settings.fromDay = today
-            settings.toDay = today
-        case .yesterday:
-            let yesterday = SRGDay(byAddingDays: -1, months: 0, years: 0, to: .today)
-            settings.fromDay = yesterday
-            settings.toDay = yesterday
-        case .thisWeek:
-            let firstDayOfThisWeek = SRGDay.start(for: .weekOfYear, containing: .today)
-            settings.fromDay = firstDayOfThisWeek
-            settings.toDay = SRGDay(byAddingDays: 6, months: 0, years: 0, to: firstDayOfThisWeek)
-        case .lastWeek:
-            let firstDayOfThisWeek = SRGDay.start(for: .weekOfYear, containing: .today)
-            let firstDayOfLastWeek = SRGDay(byAddingDays: -6, months: 0, years: 0, to: firstDayOfThisWeek)
-            settings.fromDay = firstDayOfLastWeek
-            settings.toDay = SRGDay(byAddingDays: 6, months: 0, years: 0, to: firstDayOfLastWeek)
-        }
-    }
-    
-    var period: SearchSettingsViewModel.Period {
-        get {
-            return Self.period(in: self)
-        }
-        set {
-            Self.setPeriod(newValue, in: self)
-        }
-    }
-    
-    var duration: SearchSettingsViewModel.Duration {
-        get {
-            if minimumDurationInMinutes == nil && maximumDurationInMinutes == nil {
-                return .any
-            }
-            else if maximumDurationInMinutes == nil {
-                return .moreThanThirtyMinutes
-            }
-            else {
-                return .lessThanFiveMinutes
-            }
-        }
-        set {
-            switch newValue {
-            case .any:
-                minimumDurationInMinutes = nil
-                maximumDurationInMinutes = nil
-            case .lessThanFiveMinutes:
-                minimumDurationInMinutes = nil
-                maximumDurationInMinutes = 5
-            case .moreThanThirtyMinutes:
-                minimumDurationInMinutes = 30
-                maximumDurationInMinutes = nil
-            }
-        }
-    }
-}
-
 // MARK: Preview
 
 struct SearchSettingsPreviews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SearchSettingsView(query: .constant(""), settings: .constant(SRGMediaSearchSettings()))
+            SearchSettingsView(query: .constant(""), settings: .constant(MediaSearchSettings()))
         }
         .navigationViewStyle(.stack)
     }
