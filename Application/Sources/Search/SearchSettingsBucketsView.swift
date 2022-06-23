@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: View
 
 struct SearchSettingsBucketsView: View {
-    let buckets: [SearchSettingsViewModel.SearchSettingsBucket]
+    @State var buckets: [SearchSettingsViewModel.SearchSettingsBucket]
     
     enum BucketType: String {
         case topics
@@ -19,10 +19,9 @@ struct SearchSettingsBucketsView: View {
     
     let bucketType: BucketType
     
-    @Binding var selections: Set<String>
+    @Binding var selectedUrns: Set<String>
 
-    @State private var displayedBuckets: [SearchSettingsViewModel.SearchSettingsBucket] = []
-    @State private var multiSelection = Set<String>()
+    @State private var selection = Set<String>()
     
     private var title: String {
         switch bucketType {
@@ -34,18 +33,17 @@ struct SearchSettingsBucketsView: View {
     }
     
     var body: some View {
-        List(displayedBuckets, selection: $multiSelection) {
+        List(buckets, selection: $selection) {
             Text($0.title)
         }
         .srgFont(.body)
         .navigationTitle(title)
         .environment(\.editMode, .constant(.active))
         .onAppear {
-            displayedBuckets = buckets
-            multiSelection = selections
+            selection = selectedUrns
         }
-        .onChange(of: multiSelection) { newValue in
-            selections = newValue
+        .onChange(of: selection) { newValue in
+            selectedUrns = newValue
         }
     }
 }
