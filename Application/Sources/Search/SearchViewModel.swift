@@ -22,21 +22,21 @@ final class SearchViewModel: ObservableObject {
     }
     
     init() {
-        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings, trigger] in
-            Publishers.CombineLatest($query.removeDuplicates(), $settings)
-                .debounceAfterFirst(for: 0.3, scheduler: DispatchQueue.main)
-                .map { query, settings in
+        Publishers.CombineLatest($query.removeDuplicates(), $settings)
+            .debounceAfterFirst(for: 0.3, scheduler: DispatchQueue.main)
+            .map { [weak self, trigger] query, settings in
+                return Publishers.PublishAndRepeat(onOutputFrom: self?.reloadSignal()) {
                     return Self.rows(matchingQuery: query, with: settings, trigger: trigger)
                         .map { Self.state(from: $0.rows, suggestions: $0.suggestions) }
                         .catch { error in
                             return Just(State.failed(error: error))
                         }
+                        .prepend(State.loading)
                 }
-                .switchToLatest()
-                .prepend(State.loading)
-        }
-        .receive(on: DispatchQueue.main)
-        .assign(to: &$state)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$state)
     }
     
     var isSearching: Bool {

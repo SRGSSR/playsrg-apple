@@ -115,7 +115,7 @@ name: Comscore-Swift-Package-Manager, nameSpecified: comscore-swift-package-mana
 
 name: DZNEmptyDataSet, nameSpecified: dznemptydataset, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.1.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.2.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: fscalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 

@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "2eb177effe7baf1f13ad0c5f4eb8c71a98429fb5",
-        "version" : "9.1.0"
+        "revision" : "e8828e8efc813817b3c2cbfde8e965f7a7a26641",
+        "version" : "9.2.0"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/better-search-settings",
-        "revision" : "a0b2f6ad23ff62990f6969f7c9ab32f6cbd80c2c"
+        "revision" : "a988d416db0211815225bd3588739b359266db04"
       }
     },
     {

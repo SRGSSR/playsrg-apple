@@ -24,8 +24,8 @@ final class SearchSettingsViewModel: ObservableObject {
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         Publishers.CombineLatest($query.dropFirst(), $settings.dropFirst())
-            .map { query, settings in
-                return Publishers.PublishAndRepeat(onOutputFrom: Self.reloadSignal()) { () -> AnyPublisher<SearchSettingsViewModel.State, Never> in
+            .map { [weak self] query, settings in
+                return Publishers.PublishAndRepeat(onOutputFrom: self?.reloadSignal()) { () -> AnyPublisher<SearchSettingsViewModel.State, Never> in
                     let vendor = ApplicationConfiguration.shared.vendor
                     let enrichedSettings = Self.enrichedSettings(from: settings)
                     return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings.requestSettings)
@@ -91,7 +91,7 @@ final class SearchSettingsViewModel: ObservableObject {
         return !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
     }
     
-    private static func reloadSignal() -> AnyPublisher<Void, Never> {
+    private func reloadSignal() -> AnyPublisher<Void, Never> {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
