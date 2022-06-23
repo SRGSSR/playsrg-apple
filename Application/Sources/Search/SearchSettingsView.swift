@@ -44,6 +44,13 @@ struct SearchSettingsView: View {
                     if model.isLoadingFilters {
                         ProgressView()
                     }
+                    else if let topicBuckets = model.filteredTopicBuckets, !topicBuckets.isEmpty {
+                        let text = topicBuckets
+                            .map { $0.title }
+                            .joined(separator: ", ")
+                        Text(text)
+                            .foregroundColor(.secondary)
+                    }
                 }
             }
             .disabled(model.isLoadingFilters || !model.hasTopicFilter)
@@ -55,6 +62,13 @@ struct SearchSettingsView: View {
                     Text(NSLocalizedString("Shows", comment: "Search setting"))
                     if model.isLoadingFilters {
                         ProgressView()
+                    }
+                    else if let showBuckets = model.filteredShowBuckets, !showBuckets.isEmpty {
+                        let text = showBuckets
+                            .map { $0.title }
+                            .joined(separator: ", ")
+                        Text(text)
+                            .foregroundColor(.secondary)
                     }
                 }
             }
