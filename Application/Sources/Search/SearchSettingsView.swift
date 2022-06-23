@@ -45,11 +45,13 @@ struct SearchSettingsView: View {
                         ProgressView()
                     }
                     else if let topicBuckets = model.filteredTopicBuckets, !topicBuckets.isEmpty {
+                        Spacer()
                         let text = topicBuckets
                             .map { $0.title }
                             .joined(separator: ", ")
                         Text(text)
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
                     }
                 }
             }
@@ -64,11 +66,13 @@ struct SearchSettingsView: View {
                         ProgressView()
                     }
                     else if let showBuckets = model.filteredShowBuckets, !showBuckets.isEmpty {
+                        Spacer()
                         let text = showBuckets
                             .map { $0.title }
                             .joined(separator: ", ")
                         Text(text)
                             .foregroundColor(.secondary)
+                            .lineLimit(1)
                     }
                 }
             }
