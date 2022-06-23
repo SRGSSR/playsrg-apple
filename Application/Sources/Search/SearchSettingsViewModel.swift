@@ -22,9 +22,10 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     init() {
-        Publishers.PublishAndRepeat(onOutputFrom: reloadSignal()) { [$query, $settings] in
-            Publishers.CombineLatest($query, $settings)
-                .map { query, settings -> AnyPublisher<State, Never> in
+        // Drop initial values; relevant values are first assigned when the view appears
+        Publishers.CombineLatest($query.dropFirst(), $settings.dropFirst())
+            .map { query, settings in
+                return Publishers.PublishAndRepeat(onOutputFrom: Self.reloadSignal()) { () -> AnyPublisher<SearchSettingsViewModel.State, Never> in
                     let vendor = ApplicationConfiguration.shared.vendor
                     let enrichedSettings = Self.enrichedSettings(from: settings)
                     return SRGDataProvider.current!.medias(for: vendor, matchingQuery: query, with: enrichedSettings.requestSettings)
@@ -35,10 +36,10 @@ final class SearchSettingsViewModel: ObservableObject {
                         .prepend(State.loading)
                         .eraseToAnyPublisher()
                 }
-                .switchToLatest()
-        }
-        .receive(on: DispatchQueue.main)
-        .assign(to: &$state)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$state)
     }
     
     var isLoadingFilters: Bool {
@@ -90,7 +91,7 @@ final class SearchSettingsViewModel: ObservableObject {
         return !ApplicationConfiguration.shared.isSearchSettingSubtitledHidden
     }
     
-    private func reloadSignal() -> AnyPublisher<Void, Never> {
+    private static func reloadSignal() -> AnyPublisher<Void, Never> {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
