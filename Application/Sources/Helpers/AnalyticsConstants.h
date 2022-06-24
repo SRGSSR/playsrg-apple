@@ -40,7 +40,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeedback;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;

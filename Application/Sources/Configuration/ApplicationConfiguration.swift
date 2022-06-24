@@ -32,6 +32,25 @@ extension ApplicationConfiguration {
     var serviceMessageUrl: URL {
         return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
     }
+    
+    var feedbackUrlWithParamters: URL? {
+        guard let feedbackUrl = self.feedbackURL else { return nil }
+        let feedbackQueryItems = [
+            URLQueryItem(name: "platform", value: "iOS"),
+            URLQueryItem(name: "version", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String?),
+            URLQueryItem(name: "type", value: UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"),
+            URLQueryItem(name: "cid", value: UserDefaults.standard.string(forKey: "tc_unique_id"))
+        ]
+        
+        guard var urlComponents = URLComponents(url: feedbackUrl, resolvingAgainstBaseURL: false) else { return feedbackUrl }
+        if let queryItems = urlComponents.queryItems {
+            urlComponents.queryItems = feedbackQueryItems.appending(contentsOf: queryItems)
+        }
+        else {
+            urlComponents.queryItems = feedbackQueryItems
+        }
+        return urlComponents.url ?? feedbackUrl
+    }
 }
 
 enum ConfiguredSection: Hashable {

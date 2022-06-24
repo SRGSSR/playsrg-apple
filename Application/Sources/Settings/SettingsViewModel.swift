@@ -168,6 +168,13 @@ final class SettingsViewModel: ObservableObject {
         }
     }
     
+    var openFeedbackForm: (() -> Void)? {
+        guard let url = ApplicationConfiguration.shared.feedbackUrlWithParamters else { return nil }
+        return {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     func copySupportInformation() {
         UIPasteboard.general.string = SupportInformation.generate()
     }

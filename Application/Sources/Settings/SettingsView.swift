@@ -377,6 +377,9 @@ struct SettingsView: View {
 #endif
                 VersionCell(model: model)
 #if os(iOS)
+                if let openFeedbackForm = model.openFeedbackForm {
+                    Button(NSLocalizedString("Your feedback", comment: "Label of the button to display feedback form"), action: openFeedbackForm)
+                }
                 SupportInformationButton(model: model)
 #endif
             } header: {

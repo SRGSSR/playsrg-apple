@@ -800,3 +800,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "Vus essas vegni deconnectà automaticamain. Per mantegnair la sincronisaziun da las datas sur tut ils apparats far anc ina giada il login.";
+
+/* Label of the button to display feedback form */
+"Your feedback" = "Voss resun";
