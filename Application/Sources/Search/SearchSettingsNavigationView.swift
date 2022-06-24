@@ -53,6 +53,13 @@ final class SearchSettingsNavigationViewController: UIHostingController<SearchSe
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var preferredContentSize: CGSize {
+        get {
+            return CGSize(width: 375, height: 800)
+        }
+        set {}
+    }
+    
     @objc fileprivate func close(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
