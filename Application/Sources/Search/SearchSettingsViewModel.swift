@@ -104,7 +104,7 @@ final class SearchSettingsViewModel: ObservableObject {
             .eraseToAnyPublisher()
     }
     
-    struct SearchSettingsBucket: Swift.Identifiable, Equatable {
+    struct SearchSettingsBucket: Identifiable, Equatable {
         enum Bucket {
             case topic(topic: SRGTopicBucket)
             case show(show: SRGShowBucket)
