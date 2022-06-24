@@ -43,7 +43,7 @@ private final class SettingsNavigationHostViewController: UIHostingController<Se
         super.init(rootView: SettingsNavigationView())
     }
     
-    required init?(coder: NSCoder) {
+    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
