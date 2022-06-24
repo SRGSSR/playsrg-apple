@@ -617,7 +617,7 @@ struct SettingsView: View {
                     HStack {
                         Text(service.name)
                         Spacer()
-                        if hasSelected(service) {
+                        if isSelected() {
                             Image(systemName: "checkmark")
                         }
                     }
@@ -625,7 +625,7 @@ struct SettingsView: View {
                 .foregroundColor(.primary)
             }
             
-            private func hasSelected(_ service: Service) -> Bool {
+            private func isSelected() -> Bool {
                 if let selectedServiceId = selectedServiceId {
                     return service.id == selectedServiceId
                 }
