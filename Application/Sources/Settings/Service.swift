@@ -14,19 +14,19 @@ struct Service: Identifiable, Equatable {
     
     static var production = Service(
         id: "production",
-        name: "Production",
+        name: NSLocalizedString("Production", comment: "Server setting name"),
         url: SRGIntegrationLayerProductionServiceURL()
     )
     
     static var stage = Service(
         id: "stage",
-        name: "Stage",
+        name: NSLocalizedString("Stage", comment: "Server setting name"),
         url: SRGIntegrationLayerStagingServiceURL()
     )
     
     static var test = Service(
         id: "test",
-        name: "Test",
+        name: NSLocalizedString("Test", comment: "Server setting name"),
         url: SRGIntegrationLayerTestServiceURL()
     )
     
