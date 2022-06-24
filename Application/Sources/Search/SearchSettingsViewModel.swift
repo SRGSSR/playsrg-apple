@@ -130,6 +130,17 @@ final class SearchSettingsViewModel: ObservableObject {
             }
         }
         
+        var accessibilityLabel: String {
+            switch bucket {
+            case let .topic(topic):
+                let items = String(format: PlaySRGAccessibilityLocalizedString("%d items", comment: "Number of items aggregated in search"), topic.count)
+                return "\(topic.title) (\(items))"
+            case let .show(show):
+                let items = String(format: PlaySRGAccessibilityLocalizedString("%d items", comment: "Number of items aggregated in search"), show.count)
+                return "\(show.title) (\(items))"
+            }
+        }
+        
         static func == (lhs: SearchSettingsBucket, rhs: SearchSettingsBucket) -> Bool {
             return lhs.id == rhs.id
         }

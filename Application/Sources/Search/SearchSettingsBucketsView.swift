@@ -68,7 +68,7 @@ struct SearchSettingsBucketsView: View {
             Button(action: select) {
                 HStack {
                     Text(bucket.title)
-                        .accessibilityHidden(true)
+                        .accessibilityLabel(bucket.accessibilityLabel)
                     Spacer()
                     if selectedUrns.contains(bucket.id) {
                         Image(systemName: "checkmark")
