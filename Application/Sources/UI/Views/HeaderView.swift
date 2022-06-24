@@ -15,23 +15,16 @@ struct HeaderView: View {
     let subtitle: String?
     let hasDetailDisclosure: Bool
     
-#if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
-    
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     @Environment(\.sizeCategory) private var sizeCategory
     
     private var displayableSubtitle: String? {
-#if os(iOS)
         if horizontalSizeClass == .regular, let subtitle = subtitle, !subtitle.isEmpty {
             return subtitle
         }
         else {
             return nil
         }
-#else
-        return subtitle
-#endif
     }
     
     var body: some View {

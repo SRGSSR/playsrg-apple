@@ -27,18 +27,15 @@ struct MediaCell: View {
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
-    
-#if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
     private var direction: StackDirection {
-#if os(iOS)
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
         }
-#endif
-        return .vertical
+        else {
+            return .vertical
+        }
     }
     
     private var horizontalPadding: CGFloat {
