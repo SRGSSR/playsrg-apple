@@ -51,62 +51,47 @@ final class SearchSettingsViewModel: ObservableObject {
         }
     }
     
-    var hasTopicFilter: Bool {
+    private var aggregations: SRGMediaAggregations? {
         if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
-            return !aggregations.topicBuckets.isEmpty
+            return aggregations
         }
         else {
-            return false
+            return nil
         }
+    }
+    
+    var hasTopicFilter: Bool {
+        guard let aggregations = aggregations else { return false }
+        return !aggregations.topicBuckets.isEmpty
     }
     
     var topicBuckets: [SearchSettingsBucket] {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
-            return aggregations.topicBuckets.map { SearchSettingsBucket(bucket: .topic(topic: $0)) }
-        }
-        else {
-            return []
-        }
+        guard let aggregations = aggregations else { return [] }
+        return aggregations.topicBuckets.map { SearchSettingsBucket(bucket: .topic(topic: $0)) }
     }
     
     var selectedTopics: String? {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations, let settings = settings {
-            let selectedBuckets = aggregations.topicBuckets.filter { settings.topicUrns.contains($0.urn) }
-            guard !selectedBuckets.isEmpty else { return nil }
-            return selectedBuckets.map(\.title).joined(separator: ", ")
-        }
-        else {
-            return nil
-        }
+        guard let aggregations = aggregations, let settings = settings else { return nil }
+        let selectedBuckets = aggregations.topicBuckets.filter { settings.topicUrns.contains($0.urn) }
+        guard !selectedBuckets.isEmpty else { return nil }
+        return selectedBuckets.map(\.title).joined(separator: ", ")
     }
     
     var hasShowFilter: Bool {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
-            return !aggregations.showBuckets.isEmpty
-        }
-        else {
-            return false
-        }
+        guard let aggregations = aggregations else { return false }
+        return !aggregations.showBuckets.isEmpty
     }
     
     var showsBuckets: [SearchSettingsBucket] {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
-            return aggregations.showBuckets.map { SearchSettingsBucket(bucket: .show(show: $0)) }
-        }
-        else {
-            return []
-        }
+        guard let aggregations = aggregations else { return [] }
+        return aggregations.showBuckets.map { SearchSettingsBucket(bucket: .show(show: $0)) }
     }
     
     var selectedShows: String? {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations, let settings = settings {
-            let selectedBuckets = aggregations.showBuckets.filter { settings.showUrns.contains($0.urn) }
-            guard !selectedBuckets.isEmpty else { return nil }
-            return selectedBuckets.map(\.title).joined(separator: ", ")
-        }
-        else {
-            return nil
-        }
+        guard let aggregations = aggregations, let settings = settings else { return nil }
+        let selectedBuckets = aggregations.showBuckets.filter { settings.showUrns.contains($0.urn) }
+        guard !selectedBuckets.isEmpty else { return nil }
+        return selectedBuckets.map(\.title).joined(separator: ", ")
     }
     
     var hasSubtitledFilter: Bool {
