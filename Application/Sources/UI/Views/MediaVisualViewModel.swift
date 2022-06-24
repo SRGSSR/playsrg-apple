@@ -9,19 +9,22 @@ import Combine
 // MARK: View model
 
 final class MediaVisualViewModel: ObservableObject {
-    @Published var media: SRGMedia? {
-        didSet {
-            updatePublishers()
-        }
-    }
+    @Published var media: SRGMedia?
+    @Published private(set) var progress: Double?
     
-    @Published private(set) var progress: Double = 0
-    
-    private var taskHandle: String?
-    private var cancellables = Set<AnyCancellable>()
-    
-    deinit {
-        HistoryAsyncCancel(taskHandle)
+    init() {
+        // Drop initial values; relevant values are first assigned when the view appears
+        $media
+            .dropFirst()
+            .map { media -> AnyPublisher<Double?, Never> in
+                guard let media = media else {
+                    return Just(nil).eraseToAnyPublisher()
+                }
+                return UserDataPublishers.playbackProgressPublisher(for: media)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$progress)
     }
     
     func imageUrl(for size: SRGImageSize) -> URL? {
@@ -59,30 +62,5 @@ final class MediaVisualViewModel: ObservableObject {
     var duration: Double? {
         guard let media = media else { return nil }
         return MediaDescription.duration(for: media)
-    }
-    
-    private func updatePublishers() {
-        cancellables = []
-        
-        if let media = media {
-            ThrottledSignal.historyUpdates(for: media.urn)
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] _ in
-                    self?.updateProgress()
-                }
-                .store(in: &cancellables)
-        }
-        
-        updateProgress()
-    }
-    
-    // Cannot be wrapped into Futures because the progress update block might be called several times
-    private func updateProgress() {
-        HistoryAsyncCancel(taskHandle)
-        taskHandle = HistoryPlaybackProgressForMediaAsync(media) { progress, _ in
-            DispatchQueue.main.async {
-                self.progress = Double(progress)
-            }
-        }
     }
 }

@@ -39,7 +39,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the history is updated for some uid or, if omitted, when any history update occurs.
      */
-    static func historyUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func historyUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
                 guard let uid = uid else { return true }
@@ -50,7 +50,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -58,7 +58,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the watch later playlist is updated for some uid or, if omitted, when any watch later update occurs.
      */
-    static func watchLaterUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func watchLaterUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
@@ -74,7 +74,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -82,7 +82,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the user preferences are updated.
      */
-    static func preferenceUpdates() -> AnyPublisher<Void, Never> {
+    static func preferenceUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
@@ -92,7 +92,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -101,9 +101,9 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when downloads are updated.
      */
-    static func downloadUpdates() -> AnyPublisher<Void, Never> {
+    static func downloadUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .DownloadStateDidChange, object: nil)
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -140,7 +140,8 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
-    /// Can be used on all platforms to minimize preprocessor need, but never emits
+    /// Can be used on all platforms to minimize preprocessor need, but never emits on platforms not supporting
+    /// push notifications
     static func pushServiceStatusUpdate() -> AnyPublisher<Void, Never> {
 #if os(iOS)
         return NotificationCenter.default.publisher(for: .PushServiceStatusDidChange)

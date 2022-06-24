@@ -5,6 +5,7 @@
 //
 
 import Collections
+import Combine
 import SRGDataProviderCombine
 import SRGUserData
 
@@ -191,6 +192,12 @@ extension SRGDataProvider {
 }
 
 enum UserDataPublishers {
+    enum SubscriptionStatus {
+        case unavailable
+        case unsubscribed
+        case subscribed
+    }
+    
     static func playbackProgressPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
         return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
             return Deferred {
@@ -207,8 +214,17 @@ enum UserDataPublishers {
         .eraseToAnyPublisher()
     }
     
+    static func favoritePublisher(for show: SRGShow) -> AnyPublisher<Bool, Never> {
+        return ThrottledSignal.preferenceUpdates(interval: 0)
+            .prepend(())
+            .map { _ in
+                return FavoritesContainsShow(show)
+            }
+            .eraseToAnyPublisher()
+    }
+    
     static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn, interval: 0)) {
             return Deferred {
                 Future<WatchLaterAction, Never> { promise in
                     WatchLaterAllowedActionForMediaAsync(media) { action in
@@ -220,6 +236,21 @@ enum UserDataPublishers {
         .prepend(.none)
         .eraseToAnyPublisher()
     }
+    
+#if os(iOS)
+    static func subscriptionStatusPublisher(for show: SRGShow) -> AnyPublisher<SubscriptionStatus, Never> {
+        return Publishers.Merge(
+            ThrottledSignal.preferenceUpdates(interval: 0),
+            ApplicationSignal.pushServiceStatusUpdate()
+        )
+        .prepend(())
+        .map {
+            guard let isEnabled = PushService.shared?.isEnabled, isEnabled else { return .unavailable }
+            return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
+        }
+        .eraseToAnyPublisher()
+    }
+#endif
 }
 
 #if DEBUG

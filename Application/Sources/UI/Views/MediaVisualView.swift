@@ -49,10 +49,12 @@ struct MediaVisualView<Content: View>: View {
                 .padding([.bottom, .horizontal], padding)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
-            ProgressBar(value: model.progress)
-                .opacity(model.progress != 0 ? 1 : 0)
-                .frame(height: LayoutProgressBarHeight)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            if let progress = model.progress {
+                ProgressBar(value: progress)
+                    .opacity(progress != 0 ? 1 : 0)
+                    .frame(height: LayoutProgressBarHeight)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
         }
         .onAppear {
             model.media = media
