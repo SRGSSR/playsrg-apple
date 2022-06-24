@@ -7,6 +7,15 @@
 import SwiftUI
 
 struct Mock {
+    enum Bucket: String {
+        case standard
+        case overflow
+    }
+    
+    static func bucket(_ kind: Bucket = .standard) -> SRGItemBucket {
+        return mockObject(kind.rawValue, type: SRGItemBucket.self)
+    }
+    
     enum Channel: String {
         case unknown
         case standard

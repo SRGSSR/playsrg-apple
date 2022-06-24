@@ -14,7 +14,7 @@ struct SearchSettingsBucketCell: View {
     let bucket: SRGItemBucket
     
     @Binding var selectedUrns: Set<String>
-            
+    
     var body: some View {
         Button(action: toggleSelection) {
             HStack {
@@ -59,5 +59,23 @@ private extension SearchSettingsBucketCell {
     
     var accessibilityTraits: AccessibilityTraits {
         return isSelected ? [.isButton, .isSelected] : .isButton
+    }
+}
+
+// MARK: Preview
+
+struct SearchSettingsBucketCell_Previews: PreviewProvider {
+    private static let size = CGSize(width: 320, height: 36)
+    
+    static var previews: some View {
+        SearchSettingsBucketCell(bucket: Mock.bucket(.standard), selectedUrns: .constant([]))
+            .padding()
+            .previewLayout(.fixed(width: size.width, height: size.height))
+        SearchSettingsBucketCell(bucket: Mock.bucket(.standard), selectedUrns: .constant([Mock.bucket(.standard).urn]))
+            .padding()
+            .previewLayout(.fixed(width: size.width, height: size.height))
+        SearchSettingsBucketCell(bucket: Mock.bucket(.overflow), selectedUrns: .constant([Mock.bucket(.overflow).urn]))
+            .padding()
+            .previewLayout(.fixed(width: size.width, height: size.height))
     }
 }
