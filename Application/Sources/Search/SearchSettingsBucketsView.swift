@@ -40,16 +40,23 @@ struct SearchSettingsBucketsView: View {
     @State private var searchText = ""
     @State private var selection = Set<String>()
     
+    @FirstResponder private var firstResponder
+    
     var body: some View {
-        VStack(spacing: 0) {
+        List {
             SearchBarView(text: $searchText, placeholder: NSLocalizedString("Search", comment: "Search shortcut label"))
-                .padding(.horizontal, 8)
-            List(filteredBuckets) {
+            ForEach(filteredBuckets) {
                 BucketCell(bucket: $0, selectedUrns: $selectedUrns)
             }
-            .srgFont(.body)
-            .navigationTitle(title)
         }
+        .listStyle(.plain)
+        .simultaneousGesture(
+            DragGesture().onChanged { _ in
+                firstResponder.sendAction(#selector(UIResponder.resignFirstResponder))
+            }
+        )
+        .srgFont(.body)
+        .navigationTitle(title)
     }
     
     private struct BucketCell: View {
