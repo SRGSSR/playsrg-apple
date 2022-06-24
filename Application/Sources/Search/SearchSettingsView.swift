@@ -110,6 +110,7 @@ struct SearchSettingsView: View {
         }
         .srgFont(.body)
         .navigationTitle(NSLocalizedString("Filters", comment: "Search filters page title"))
+        .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         .onAppear {
             model.query = query
             model.settings = settings
@@ -120,6 +121,18 @@ struct SearchSettingsView: View {
         .onChange(of: settings) { newValue in
             model.settings = newValue
         }
+    }
+}
+
+// MARK: Analytics
+
+private extension SearchSettingsView {
+    private var analyticsPageTitle: String {
+        return AnalyticsPageTitle.settings.rawValue
+    }
+    
+    private var analyticsPageLevels: [String]? {
+        return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.search.rawValue]
     }
 }
 
