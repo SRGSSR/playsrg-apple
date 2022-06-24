@@ -53,8 +53,8 @@ struct SearchSettingsBucketCell: View {
 
 private extension SearchSettingsBucketCell {
     var accessibilityLabel: String? {
-        let items = String(format: PlaySRGAccessibilityLocalizedString("%d items", comment: "Number of items aggregated in search"), bucket.count)
-        return "\(bucket.title) (\(items))"
+        let contents = String(format: PlaySRGAccessibilityLocalizedString("%d contents", comment: "Number of contents aggregated in search"), bucket.count)
+        return "\(bucket.title) (\(contents))"
     }
     
     var accessibilityTraits: AccessibilityTraits {
