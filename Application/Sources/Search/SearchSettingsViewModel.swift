@@ -61,13 +61,11 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     var hasTopicFilter: Bool {
-        guard let aggregations = aggregations else { return false }
-        return !aggregations.topicBuckets.isEmpty
+        return !topicBuckets.isEmpty
     }
     
-    var topicBuckets: [Bucket] {
-        guard let aggregations = aggregations else { return [] }
-        return aggregations.topicBuckets.map { Bucket(from: $0) }
+    var topicBuckets: [SRGItemBucket] {
+        return aggregations?.topicBuckets ?? []
     }
     
     var selectedTopics: String? {
@@ -78,13 +76,11 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     var hasShowFilter: Bool {
-        guard let aggregations = aggregations else { return false }
-        return !aggregations.showBuckets.isEmpty
+        return !showBuckets.isEmpty
     }
     
-    var showsBuckets: [Bucket] {
-        guard let aggregations = aggregations else { return [] }
-        return aggregations.showBuckets.map { Bucket(from: $0) }
+    var showBuckets: [SRGItemBucket] {
+        return aggregations?.showBuckets ?? []
     }
     
     var selectedShows: String? {

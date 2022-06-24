@@ -61,7 +61,7 @@ struct SearchSettingsView: View {
             NavigationLink {
                 SearchSettingsBucketsView(
                     title: NSLocalizedString("Shows", comment: "Show list view in search settings"),
-                    buckets: model.showsBuckets,
+                    buckets: model.showBuckets,
                     selectedUrns: $settings.showUrns
                 )
             } label: {
