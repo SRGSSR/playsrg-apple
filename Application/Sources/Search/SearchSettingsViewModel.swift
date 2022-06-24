@@ -65,9 +65,9 @@ final class SearchSettingsViewModel: ObservableObject {
         return !aggregations.topicBuckets.isEmpty
     }
     
-    var topicBuckets: [SearchSettingsBucket] {
+    var topicBuckets: [Bucket] {
         guard let aggregations = aggregations else { return [] }
-        return aggregations.topicBuckets.map { SearchSettingsBucket(bucket: .topic(topic: $0)) }
+        return aggregations.topicBuckets.map { Bucket(from: $0) }
     }
     
     var selectedTopics: String? {
@@ -82,9 +82,9 @@ final class SearchSettingsViewModel: ObservableObject {
         return !aggregations.showBuckets.isEmpty
     }
     
-    var showsBuckets: [SearchSettingsBucket] {
+    var showsBuckets: [Bucket] {
         guard let aggregations = aggregations else { return [] }
-        return aggregations.showBuckets.map { SearchSettingsBucket(bucket: .show(show: $0)) }
+        return aggregations.showBuckets.map { Bucket(from: $0) }
     }
     
     var selectedShows: String? {
@@ -102,48 +102,6 @@ final class SearchSettingsViewModel: ObservableObject {
         return ApplicationSignal.wokenUp()
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
-    }
-    
-    struct SearchSettingsBucket: Identifiable, Equatable {
-        enum Bucket {
-            case topic(topic: SRGTopicBucket)
-            case show(show: SRGShowBucket)
-        }
-        
-        let bucket: Bucket
-        
-        var id: String {
-            switch bucket {
-            case let .topic(topic):
-                return topic.urn
-            case let .show(show):
-                return show.urn
-            }
-        }
-        
-        var title: String {
-            switch bucket {
-            case let .topic(topic):
-                return "\(topic.title) (\(NumberFormatter.localizedString(from: topic.count as NSNumber, number: .decimal)))"
-            case let .show(show):
-                return "\(show.title) (\(NumberFormatter.localizedString(from: show.count as NSNumber, number: .decimal)))"
-            }
-        }
-        
-        var accessibilityLabel: String {
-            switch bucket {
-            case let .topic(topic):
-                let items = String(format: PlaySRGAccessibilityLocalizedString("%d items", comment: "Number of items aggregated in search"), topic.count)
-                return "\(topic.title) (\(items))"
-            case let .show(show):
-                let items = String(format: PlaySRGAccessibilityLocalizedString("%d items", comment: "Number of items aggregated in search"), show.count)
-                return "\(show.title) (\(items))"
-            }
-        }
-        
-        static func == (lhs: SearchSettingsBucket, rhs: SearchSettingsBucket) -> Bool {
-            return lhs.id == rhs.id
-        }
     }
 }
 

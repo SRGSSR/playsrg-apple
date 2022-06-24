@@ -7,40 +7,21 @@
 import SRGAppearanceSwift
 import SwiftUI
 
-typealias SearchSettingsBucket = SearchSettingsViewModel.SearchSettingsBucket
-
 // MARK: View
 
 struct SearchSettingsBucketsView: View {
-    @State var buckets: [SearchSettingsBucket]
+    let title: String
     
-    enum BucketType: String {
-        case topics
-        case shows
-    }
-    
-    let bucketType: BucketType
-    
+    @State var buckets: [Bucket]        // Capture the initial bucket list as state so that it never gets modified afterwards
     @Binding var selectedUrns: Set<String>
+    @State private var searchText = ""
     
-    private var title: String {
-        switch bucketType {
-        case .topics:
-            return NSLocalizedString("Topics", comment: "Search setting")
-        case .shows:
-            return NSLocalizedString("Shows", comment: "Search setting")
-        }
-    }
+    @FirstResponder private var firstResponder
     
-    private var filteredBuckets: [SearchSettingsBucket] {
+    private var filteredBuckets: [Bucket] {
         guard !searchText.isEmpty else { return buckets }
         return buckets.filter { $0.title.contains(searchText) }
     }
-    
-    @State private var searchText = ""
-    @State private var selection = Set<String>()
-    
-    @FirstResponder private var firstResponder
     
     var body: some View {
         List {
@@ -60,17 +41,17 @@ struct SearchSettingsBucketsView: View {
     }
     
     private struct BucketCell: View {
-        let bucket: SearchSettingsBucket
+        let bucket: Bucket
         
         @Binding var selectedUrns: Set<String>
                 
         var body: some View {
-            Button(action: select) {
+            Button(action: toggleSelection) {
                 HStack {
                     Text(bucket.title)
                         .accessibilityLabel(bucket.accessibilityLabel)
                     Spacer()
-                    if selectedUrns.contains(bucket.id) {
+                    if selectedUrns.contains(bucket.urn) {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
                     }
@@ -79,7 +60,7 @@ struct SearchSettingsBucketsView: View {
             .foregroundColor(.primary)
         }
         
-        private func select() {
+        private func toggleSelection() {
             if selectedUrns.contains(bucket.id) {
                 selectedUrns.remove(bucket.id)
             }
