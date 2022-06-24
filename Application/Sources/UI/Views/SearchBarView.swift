@@ -6,13 +6,13 @@
 
 import SwiftUI
 
+// MARK: View
+
 struct SearchBarView: UIViewRepresentable {
-    
     @Binding var text: String
     let placeholder: String
     
-    class Cordinator: NSObject, UISearchBarDelegate {
-        
+    final class Cordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
         
         init(text: Binding<String>) {
@@ -24,18 +24,30 @@ struct SearchBarView: UIViewRepresentable {
         }
     }
     
-    func makeCoordinator() -> SearchBarView.Cordinator {
+    func makeCoordinator() -> Cordinator {
         return Cordinator(text: $text)
     }
     
-    func makeUIView(context: UIViewRepresentableContext<SearchBarView>) -> UISearchBar {
-        let searchBar = UISearchBar(frame: .zero)
+    func makeUIView(context: Context) -> UISearchBar {
+        let searchBar = UISearchBar()
         searchBar.placeholder = placeholder
         searchBar.delegate = context.coordinator
         return searchBar
     }
     
-    func updateUIView(_ uiView: UISearchBar, context: UIViewRepresentableContext<SearchBarView>) {
+    func updateUIView(_ uiView: UISearchBar, context: Context) {
         uiView.text = text
+    }
+}
+
+// MARK: Preview
+
+struct SearchBarView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            SearchBarView(text: .constant(""), placeholder: "Enter something here...")
+            SearchBarView(text: .constant("Roger"), placeholder: "Enter something here...")
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
