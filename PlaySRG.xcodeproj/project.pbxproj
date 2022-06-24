@@ -4329,6 +4329,7 @@
 				08C68ECB1D38DEA100BB8AAA /* AppDelegate.h */,
 				08C68ECC1D38DEA100BB8AAA /* AppDelegate.m */,
 				08C68ECD1D38DEA100BB8AAA /* main.m */,
+				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6F72E60626BA6B16001A890C /* SceneDelegate.h */,
 				6F72E60526BA6B16001A890C /* SceneDelegate.m */,
 			);
@@ -4746,7 +4747,6 @@
 				08ADFB1E25EE5729004662A8 /* LetterboxDelegate.swift */,
 				086499B124F69FF20027373E /* MediaDetailView.swift */,
 				6FFFB9B6252CA310004E40AE /* MediaDetailViewModel.swift */,
-				0805703D2540E0FC00A59C9D /* Navigation.swift */,
 				6FC4140124EF11F400FDF806 /* PlaySRG-TV-ObjectiveC.h */,
 				6F7C664926DE7CE100B4EC80 /* SceneDelegate.swift */,
 			);
