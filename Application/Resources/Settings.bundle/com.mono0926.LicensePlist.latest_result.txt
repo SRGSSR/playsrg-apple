@@ -155,7 +155,7 @@ name: paper-onboarding, nameSpecified: paper-onboarding, owner: Ramotion, versio
 
 name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.10.1, source: https://github.com/microsoft/PLCrashReporter
 
-name: promises, nameSpecified: promises, owner: google, version: 2.1.0, source: https://github.com/google/promises
+name: promises, nameSpecified: promises, owner: google, version: 2.1.1, source: https://github.com/google/promises
 
 name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: 7.7.0, source: https://github.com/SRGSSR/srganalytics-apple
 
