@@ -69,12 +69,14 @@ final class SearchSettingsViewModel: ObservableObject {
         }
     }
     
-    var filteredTopicBuckets: [SRGTopicBucket] {
+    var selectedTopics: String? {
         if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations, let settings = settings {
-            return aggregations.topicBuckets.filter { settings.topicUrns.contains($0.urn) }
+            let selectedBuckets = aggregations.topicBuckets.filter { settings.topicUrns.contains($0.urn) }
+            guard !selectedBuckets.isEmpty else { return nil }
+            return selectedBuckets.map(\.title).joined(separator: ", ")
         }
         else {
-            return []
+            return nil
         }
     }
     
@@ -96,12 +98,14 @@ final class SearchSettingsViewModel: ObservableObject {
         }
     }
     
-    var filteredShowBuckets: [SRGShowBucket] {
+    var selectedShows: String? {
         if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations, let settings = settings {
-            return aggregations.showBuckets.filter { settings.showUrns.contains($0.urn) }
+            let selectedBuckets = aggregations.showBuckets.filter { settings.showUrns.contains($0.urn) }
+            guard !selectedBuckets.isEmpty else { return nil }
+            return selectedBuckets.map(\.title).joined(separator: ", ")
         }
         else {
-            return []
+            return nil
         }
     }
     

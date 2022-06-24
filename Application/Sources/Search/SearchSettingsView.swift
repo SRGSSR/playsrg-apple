@@ -44,12 +44,9 @@ struct SearchSettingsView: View {
                     if model.isLoadingFilters {
                         ProgressView()
                     }
-                    else if let topicBuckets = model.filteredTopicBuckets, !topicBuckets.isEmpty {
+                    else if let selectedTopics = model.selectedTopics {
                         Spacer()
-                        let text = topicBuckets
-                            .map { $0.title }
-                            .joined(separator: ", ")
-                        Text(text)
+                        Text(selectedTopics)
                             .foregroundColor(.secondary)
                             .lineLimit(1)
                     }
@@ -65,12 +62,9 @@ struct SearchSettingsView: View {
                     if model.isLoadingFilters {
                         ProgressView()
                     }
-                    else if let showBuckets = model.filteredShowBuckets, !showBuckets.isEmpty {
+                    else if let selectedShows = model.selectedShows {
                         Spacer()
-                        let text = showBuckets
-                            .map { $0.title }
-                            .joined(separator: ", ")
-                        Text(text)
+                        Text(selectedShows)
                             .foregroundColor(.secondary)
                             .lineLimit(1)
                     }
