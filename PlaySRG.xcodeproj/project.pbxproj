@@ -1190,6 +1190,11 @@
 		6F6C7ADB2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
 		6F6C7ADC2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
 		6F6C7ADD2820578900BC3EA5 /* PosterImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6C7AD32820578900BC3EA5 /* PosterImages.swift */; };
+		6F6CD8622865767700DA7DED /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
+		6F6CD8632865767800DA7DED /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
+		6F6CD8642865767900DA7DED /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
+		6F6CD8652865767900DA7DED /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
+		6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F33443328642A8B00E664F1 /* MediaSearchSettings.swift */; };
 		6F6E9061283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F6E9062283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
 		6F6E9063283E6EB10049FEEE /* Highlight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6E9060283E6EB10049FEEE /* Highlight.swift */; };
@@ -9454,6 +9459,7 @@
 				6FE86F712719C4CB0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B224F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AA2541647400A28E79 /* Colors.swift in Sources */,
+				6F6CD8622865767700DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413D524EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E57F261CB791003FFDCF /* DataViewController.m in Sources */,
 				6F026EED250134FD00BAE8D1 /* UIView+PlaySRG.m in Sources */,
@@ -9600,6 +9606,7 @@
 				6FE86F722719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B324F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AB2541647400A28E79 /* Colors.swift in Sources */,
+				6F6CD8632865767800DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413DD24EEEDC900FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E599261CB792003FFDCF /* DataViewController.m in Sources */,
 				6F026EEE250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
@@ -9746,6 +9753,7 @@
 				6FE86F732719C4CC0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B424F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AC2541647400A28E79 /* Colors.swift in Sources */,
+				6F6CD8642865767900DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413E524EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E59A261CB792003FFDCF /* DataViewController.m in Sources */,
 				6F026EEF250134FE00BAE8D1 /* UIView+PlaySRG.m in Sources */,
@@ -9892,6 +9900,7 @@
 				6FE86F742719C4CD0082CAE9 /* ProgramCell.swift in Sources */,
 				086499B524F69FF20027373E /* MediaDetailView.swift in Sources */,
 				6F79E0AD2541647400A28E79 /* Colors.swift in Sources */,
+				6F6CD8652865767900DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FC413ED24EEEDCA00FDF806 /* ApplicationConfiguration.m in Sources */,
 				6FA8E5B4261CB793003FFDCF /* DataViewController.m in Sources */,
 				6F026EF0250134FF00BAE8D1 /* UIView+PlaySRG.m in Sources */,
@@ -10107,6 +10116,7 @@
 				6F85F7682567ED0F00AC8286 /* ChannelService.m in Sources */,
 				6F3041F827393FC2001E64BF /* UICollectionView+PlaySRG.m in Sources */,
 				6F9F575E2746678E00DCA629 /* ProgramPreview.swift in Sources */,
+				6F6CD8662865767A00DA7DED /* MediaSearchSettings.swift in Sources */,
 				6FE374B0261D8F5C00803E8F /* BaseViewController.m in Sources */,
 				6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */,
 				6F710A2F2644637B0035CA03 /* EmptyContentView.swift in Sources */,
