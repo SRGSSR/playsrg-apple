@@ -140,7 +140,7 @@ private extension SearchSettingsView {
 
 // MARK: Preview
 
-struct SearchSettingsPreviews: PreviewProvider {
+struct SearchSettings_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             SearchSettingsView(query: .constant(""), settings: .constant(MediaSearchSettings()))

@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct ImageViewPortraitCommonPreviews: PreviewProvider {
+struct ImageViewPortraitCommon_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
@@ -24,7 +24,7 @@ struct ImageViewPortraitCommonPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewPortraitAlignmentPreviews: PreviewProvider {
+struct ImageViewPortraitAlignment_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
@@ -50,7 +50,7 @@ struct ImageViewPortraitAlignmentPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewPortraitAspectFitPreviews: PreviewProvider {
+struct ImageViewPortraitAspectFit_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
@@ -76,7 +76,7 @@ struct ImageViewPortraitAspectFitPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewPortraitAspectFillPreviews: PreviewProvider {
+struct ImageViewPortraitAspectFill_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
     
     static var previews: some View {
