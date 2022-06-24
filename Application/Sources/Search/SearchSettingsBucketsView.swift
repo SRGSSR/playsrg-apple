@@ -49,19 +49,27 @@ struct SearchSettingsBucketsView: View {
             Button(action: toggleSelection) {
                 HStack {
                     Text(bucket.title)
-                        .accessibilityLabel(bucket.accessibilityLabel)
                     Spacer()
-                    if selectedUrns.contains(bucket.urn) {
+                    if isSelected {
                         Image(systemName: "checkmark")
                             .foregroundColor(.accentColor)
                     }
                 }
             }
             .foregroundColor(.primary)
+            .accessibilityElement(label: bucket.accessibilityLabel, hint: nil, traits: accessibilityTraits)
+        }
+        
+        private var isSelected: Bool {
+            return selectedUrns.contains(bucket.urn)
+        }
+        
+        private var accessibilityTraits: AccessibilityTraits {
+            return isSelected ? [.isButton, .isSelected] : .isButton
         }
         
         private func toggleSelection() {
-            if selectedUrns.contains(bucket.id) {
+            if isSelected {
                 selectedUrns.remove(bucket.id)
             }
             else {
