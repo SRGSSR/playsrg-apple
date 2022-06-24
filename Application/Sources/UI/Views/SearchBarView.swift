@@ -30,6 +30,7 @@ struct SearchBarView: UIViewRepresentable {
     
     func makeUIView(context: Context) -> UISearchBar {
         let searchBar = UISearchBar()
+        searchBar.backgroundImage = UIImage()
         searchBar.placeholder = placeholder
         searchBar.delegate = context.coordinator
         return searchBar
