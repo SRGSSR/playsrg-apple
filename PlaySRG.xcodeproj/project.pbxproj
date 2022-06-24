@@ -1593,16 +1593,6 @@
 		6FAAF78F20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FAAF79020CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
 		6FAAF79120CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */; };
-		6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */; };
-		6FACC325262EB694000F1751 /* MediaCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */; };
-		6FACC326262EB694000F1751 /* MediaCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */; };
-		6FACC327262EB694000F1751 /* MediaCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */; };
-		6FACC328262EB694000F1751 /* MediaCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */; };
-		6FACC343262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */; };
-		6FACC344262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */; };
-		6FACC345262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */; };
-		6FACC346262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */; };
-		6FACC347262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */; };
 		6FAE0259266812AF00791A76 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
 		6FAE025A266812B000791A76 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
 		6FAE025B266812B000791A76 /* FocusTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFF1631250A20EF0053CDA6 /* FocusTracker.swift */; };
@@ -3117,8 +3107,6 @@
 		6FAAF77A20CABA3A00BB58A3 /* UserNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserNotification.m; sourceTree = "<group>"; };
 		6FAAF78620CABC0D00BB58A3 /* NSFileManager+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+PlaySRG.h"; sourceTree = "<group>"; };
 		6FAAF78720CABC0D00BB58A3 /* NSFileManager+PlaySRG.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+PlaySRG.m"; sourceTree = "<group>"; };
-		6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaCell+UIKit.swift"; sourceTree = "<group>"; };
-		6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShowCell+UIKit.swift"; sourceTree = "<group>"; };
 		6FAE561B26C19D6F00EBFCD6 /* UICollectionView+Index.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Index.swift"; sourceTree = "<group>"; };
 		6FB03F5A25DECB3A0033132B /* ApplicationSettingsConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationSettingsConstants.h; sourceTree = "<group>"; };
 		6FB03F5B25DECB3A0033132B /* ApplicationSettingsConstants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationSettingsConstants.m; sourceTree = "<group>"; };
@@ -3821,14 +3809,14 @@
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
 				6F0850F226256A7700B4E410 /* Reachability.h */,
 				6F0850F326256A7700B4E410 /* Reachability.m */,
+				6F978B4F2849C3CA003061E8 /* ScrollableContent.h */,
+				6F978B502849C3CA003061E8 /* ScrollableContent.m */,
 				08AF947E217D27E40028B082 /* SharingItem.h */,
 				08AF947F217D27E40028B082 /* SharingItem.m */,
 				6F74293C265BE52E0000538D /* Signals.swift */,
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
-				6F978B4F2849C3CA003061E8 /* ScrollableContent.h */,
-				6F978B502849C3CA003061E8 /* ScrollableContent.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -4652,7 +4640,6 @@
 				6F49EF92263A9F2200ED96D2 /* LiveMediaCellViewModel.swift */,
 				6F2363182833D57F00A1127C /* MailComposeView.swift */,
 				6FDB2AC424E5923600FF286E /* MediaCell.swift */,
-				6FACC323262EB694000F1751 /* MediaCell+UIKit.swift */,
 				6F3F1AB925060496000FF4DD /* MediaVisualView.swift */,
 				6FD9595326989FD900739FAE /* MediaVisualViewModel.swift */,
 				6FE8626B2657C5F30061D3F0 /* MoreCell.swift */,
@@ -4668,7 +4655,6 @@
 				6F40B7782726CB8300DDFED0 /* SearchBar.swift */,
 				085C0D982611F33E008E07C8 /* ShowAccessCell.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
-				6FACC342262EB74E000F1751 /* ShowCell+UIKit.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
 				6FB899FE26335B090012F1B0 /* Stack.swift */,
@@ -8148,7 +8134,6 @@
 				08AF2AED26BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6F54D30926050FBA008B46FF /* MediaCell.swift in Sources */,
 				6FCE753526D3786F00667298 /* HeroMediaCell.swift in Sources */,
-				6FACC343262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
 				082910AE239E90D200D168F4 /* TabBarController.m in Sources */,
 				6FD68618246052A100B8018A /* GradientView.m in Sources */,
 				6FCF57E0263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -8163,7 +8148,6 @@
 				6FCE7AC0260367B90037A861 /* HostViews.swift in Sources */,
 				6F475FDC1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */,
-				6FACC324262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F566E8024EE95CB0024B4CA /* PlayFirebaseConfiguration.m in Sources */,
 				6F0A416F1F6FAB6E000533E7 /* Calendar.m in Sources */,
 				6F475FD21EB37BC6003021EA /* PageContainerViewController.m in Sources */,
@@ -8450,7 +8434,6 @@
 				6F475FDD1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70722F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
 				0825914127285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
-				6FACC344262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
 				6FF65C552835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				6FE9049326F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E5267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
@@ -8581,7 +8564,6 @@
 				6FC6A12B2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
-				6FACC325262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F33E61A2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B81EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
@@ -8697,7 +8679,6 @@
 				6F475FDE1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0825914227285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				0841E70822F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
-				6FACC345262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
 				6FF65C562835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				6FE9049426F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E6267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
@@ -8827,7 +8808,6 @@
 				6FC6A12C2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
-				6FACC326262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F33E61B2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4B91EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
@@ -8943,7 +8923,6 @@
 				6F475FDF1EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0825914327285ACD00E2F8F7 /* ProgramGuideHeaderView.swift in Sources */,
 				0841E70922F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
-				6FACC346262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
 				6FF65C572835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				6FE9049526F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E7267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
@@ -9073,7 +9052,6 @@
 				6FC6A12D2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
-				6FACC327262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F33E61C2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F85E4BA1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,
@@ -9182,7 +9160,6 @@
 				6FD686232460670600B8018A /* Channel.m in Sources */,
 				6F475FE01EB37BC6003021EA /* RequestViewController.m in Sources */,
 				0841E70A22F0953A009D8304 /* SRGDay+PlaySRG.m in Sources */,
-				6FACC347262EB74E000F1751 /* ShowCell+UIKit.swift in Sources */,
 				6FE9049626F3475A00502077 /* UITableView+PlaySRG.m in Sources */,
 				6F0AF6E8267D0B0500AD2EA3 /* MediaPreviewViewController.m in Sources */,
 				6FDF54F628530BAC0068BABB /* SearchViewController.swift in Sources */,
@@ -9312,7 +9289,6 @@
 				6FF65C5E28360EB100AF0768 /* Onboarding.swift in Sources */,
 				087584F323A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
 				6F4760331EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
-				6FACC328262EB694000F1751 /* MediaCell+UIKit.swift in Sources */,
 				6F4760961EB37DF2003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F0B98542726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6F85E4BB1EEA8F9B00552256 /* UIView+PlaySRG.m in Sources */,

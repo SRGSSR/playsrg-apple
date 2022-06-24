@@ -391,7 +391,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self notificationAtIndexPath:indexPath]) {
-        return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
+        return [[NotificationCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
     }
     else {
         return ProfileTableViewCell.height;

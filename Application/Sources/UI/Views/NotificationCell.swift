@@ -93,8 +93,8 @@ private extension NotificationCell {
 
 // MARK: Size
 
-enum NotificationCellSize {
-    static func fullWidth() -> NSCollectionLayoutSize {
+class NotificationCellSize: NSObject {
+    @objc static func fullWidth() -> NSCollectionLayoutSize {
         return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }
