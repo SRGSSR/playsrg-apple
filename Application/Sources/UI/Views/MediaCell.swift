@@ -177,11 +177,7 @@ final class MediaCellSize: NSObject {
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
     
-    static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
-    }
-    
-    static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
     
