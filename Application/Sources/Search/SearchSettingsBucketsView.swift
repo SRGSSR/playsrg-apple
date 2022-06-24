@@ -20,8 +20,6 @@ struct SearchSettingsBucketsView: View {
     let bucketType: BucketType
     
     @Binding var selectedUrns: Set<String>
-
-    @State private var selection = Set<String>()
     
     private var title: String {
         switch bucketType {
@@ -32,18 +30,30 @@ struct SearchSettingsBucketsView: View {
         }
     }
     
+    private var filteredBuckets: [SearchSettingsViewModel.SearchSettingsBucket] {
+        guard !searchText.isEmpty else { return buckets }
+        return buckets.filter { $0.title.contains(searchText) }
+    }
+    
+    @State private var searchText = ""
+    @State private var selection = Set<String>()
+    
     var body: some View {
-        List(buckets, selection: $selection) {
-            Text($0.title)
-        }
-        .srgFont(.body)
-        .navigationTitle(title)
-        .environment(\.editMode, .constant(.active))
-        .onAppear {
-            selection = selectedUrns
-        }
-        .onChange(of: selection) { newValue in
-            selectedUrns = newValue
+        VStack(spacing: 0) {
+            SearchBarView(text: $searchText, placeholder: NSLocalizedString("Search", comment: "Search shortcut label"))
+                .padding(.horizontal, 8)
+            List(filteredBuckets, selection: $selection) {
+                Text($0.title)
+            }
+            .srgFont(.body)
+            .navigationTitle(title)
+            .environment(\.editMode, .constant(.active))
+            .onAppear {
+                selection = selectedUrns
+            }
+            .onChange(of: selection) { newValue in
+                selectedUrns = newValue
+            }
         }
     }
 }
