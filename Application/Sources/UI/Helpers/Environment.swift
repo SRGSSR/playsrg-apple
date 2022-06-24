@@ -72,22 +72,18 @@ extension EnvironmentValues {
      *  unlike `UIUserInterfaceSizeClass`, leading to more preprocessor use than should be necessary).
      */
     var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-        get {
 #if os(iOS)
-            return horizontalSizeClass == .compact ? .compact : .regular
+        return horizontalSizeClass == .compact ? .compact : .regular
 #else
-            return .regular
+        return .regular
 #endif
-        }
     }
     
     var uiVerticalSizeClass: UIUserInterfaceSizeClass {
-        get {
 #if os(iOS)
-            return verticalSizeClass == .compact ? .compact : .regular
+        return verticalSizeClass == .compact ? .compact : .regular
 #else
-            return .regular
+        return .regular
 #endif
-        }
     }
 }
