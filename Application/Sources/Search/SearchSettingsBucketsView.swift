@@ -11,11 +11,10 @@ import SwiftUI
 
 struct SearchSettingsBucketsView: View {
     let title: String
+    let buckets: [SRGItemBucket]
     
-    @State var buckets: [SRGItemBucket]        // Capture the initial bucket list as state so that it never gets modified afterwards
     @Binding var selectedUrns: Set<String>
     @State private var searchText = ""
-    
     @FirstResponder private var firstResponder
     
     private var filteredBuckets: [SRGItemBucket] {

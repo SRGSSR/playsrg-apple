@@ -13,7 +13,7 @@ final class SearchSettingsViewModel: ObservableObject {
     @Published var query: String?
     @Published var settings: MediaSearchSettings?
     
-    @Published private(set) var state: State = .loading
+    @Published private(set) var state: State = .loading(aggregations: nil)
     
     private static func enrichedSettings(from settings: MediaSearchSettings?) -> MediaSearchSettings {
         var enrichedSettings = settings ?? MediaSearchSettings()
@@ -33,7 +33,7 @@ final class SearchSettingsViewModel: ObservableObject {
                         .catch { error in
                             return Just(State.failed(error: error))
                         }
-                        .prepend(State.loading)
+                        .prepend(State.loading(aggregations: self?.aggregations))
                         .eraseToAnyPublisher()
                 }
             }
@@ -52,10 +52,12 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     private var aggregations: SRGMediaAggregations? {
-        if case let .loaded(aggregations: aggregations) = state, let aggregations = aggregations {
+        switch state {
+        case let .loading(aggregations: aggregations):
             return aggregations
-        }
-        else {
+        case let .loaded(aggregations: aggregations):
+            return aggregations
+        case .failed:
             return nil
         }
     }
@@ -105,7 +107,7 @@ final class SearchSettingsViewModel: ObservableObject {
 
 extension SearchSettingsViewModel {
     enum State {
-        case loading
+        case loading(aggregations: SRGMediaAggregations?)
         case failed(error: Error)
         case loaded(aggregations: SRGMediaAggregations?)
     }

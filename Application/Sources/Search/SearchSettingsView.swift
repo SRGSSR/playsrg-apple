@@ -48,7 +48,7 @@ struct SearchSettingsView: View {
                     if model.isLoadingFilters {
                         ProgressView()
                     }
-                    else if let selectedTopics = model.selectedTopics {
+                    if let selectedTopics = model.selectedTopics {
                         Spacer()
                         Text(selectedTopics)
                             .foregroundColor(.secondary)
@@ -70,7 +70,7 @@ struct SearchSettingsView: View {
                     if model.isLoadingFilters {
                         ProgressView()
                     }
-                    else if let selectedShows = model.selectedShows {
+                    if let selectedShows = model.selectedShows {
                         Spacer()
                         Text(selectedShows)
                             .foregroundColor(.secondary)
