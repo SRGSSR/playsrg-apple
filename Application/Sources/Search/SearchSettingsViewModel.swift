@@ -21,6 +21,15 @@ final class SearchSettingsViewModel: ObservableObject {
         return enrichedSettings
     }
     
+    private static func description(forSelectedUrns selectedUrns: Set<String>?, in buckets: [SRGItemBucket]) -> String? {
+        guard let selectedUrns = selectedUrns else { return nil }
+        let selectedBuckets = buckets
+            .filter { selectedUrns.contains($0.urn) }
+            .sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending }
+        guard !selectedBuckets.isEmpty else { return nil }
+        return selectedBuckets.map(\.title).joined(separator: ", ")
+    }
+    
     init() {
         // Drop initial values; relevant values are first assigned when the view appears
         Publishers.CombineLatest($query.dropFirst(), $settings.dropFirst())
@@ -71,10 +80,7 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     var selectedTopics: String? {
-        guard let aggregations = aggregations, let settings = settings else { return nil }
-        let selectedBuckets = aggregations.topicBuckets.filter { settings.topicUrns.contains($0.urn) }
-        guard !selectedBuckets.isEmpty else { return nil }
-        return selectedBuckets.map(\.title).joined(separator: ", ")
+        return Self.description(forSelectedUrns: settings?.topicUrns, in: topicBuckets)
     }
     
     var hasShowFilter: Bool {
@@ -86,10 +92,7 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     var selectedShows: String? {
-        guard let aggregations = aggregations, let settings = settings else { return nil }
-        let selectedBuckets = aggregations.showBuckets.filter { settings.showUrns.contains($0.urn) }
-        guard !selectedBuckets.isEmpty else { return nil }
-        return selectedBuckets.map(\.title).joined(separator: ", ")
+        return Self.description(forSelectedUrns: settings?.showUrns, in: showBuckets)
     }
     
     var hasSubtitledFilter: Bool {
