@@ -29,6 +29,7 @@ struct SearchSettingsBucketsView: View {
                 SearchSettingsBucketCell(bucket: $0, selectedUrns: $selectedUrns)
             }
         }
+        .animation(.easeInOut, value: buckets)
         .listStyle(.plain)
         .simultaneousGesture(
             DragGesture().onChanged { _ in
