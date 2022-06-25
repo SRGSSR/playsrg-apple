@@ -11,6 +11,13 @@ import SwiftUI
 struct SearchBarView: UIViewRepresentable {
     @Binding var text: String
     let placeholder: String
+    let autocapitalizationType: UITextAutocapitalizationType
+    
+    init(text: Binding<String>, placeholder: String = "", autocapitalizationType: UITextAutocapitalizationType = .sentences) {
+        _text = text
+        self.placeholder = placeholder
+        self.autocapitalizationType = autocapitalizationType
+    }
     
     final class Cordinator: NSObject, UISearchBarDelegate {
         @Binding var text: String
@@ -32,6 +39,7 @@ struct SearchBarView: UIViewRepresentable {
         let searchBar = UISearchBar()
         searchBar.backgroundImage = UIImage()
         searchBar.placeholder = placeholder
+        searchBar.autocapitalizationType = .none
         searchBar.delegate = context.coordinator
         return searchBar
     }

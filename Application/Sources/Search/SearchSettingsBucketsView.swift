@@ -20,12 +20,12 @@ struct SearchSettingsBucketsView: View {
     
     private var filteredBuckets: [SRGItemBucket] {
         guard !searchText.isEmpty else { return buckets }
-        return buckets.filter { $0.title.contains(searchText) }
+        return buckets.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
     }
     
     var body: some View {
         List {
-            SearchBarView(text: $searchText, placeholder: NSLocalizedString("Search", comment: "Search shortcut label"))
+            SearchBarView(text: $searchText, placeholder: NSLocalizedString("Search", comment: "Search shortcut label"), autocapitalizationType: .none)
             ForEach(filteredBuckets, id: \.urn) {
                 SearchSettingsBucketCell(bucket: $0, selectedUrns: $selectedUrns)
             }
