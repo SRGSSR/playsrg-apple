@@ -14,9 +14,14 @@ struct NotificationCell: View {
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
     
+    private var imageUrl: URL? {
+        guard let image = SRGImage(url: notification.imageURL, variant: .default) else { return nil }
+        return url(for: image, size: .small)
+    }
+    
     var body: some View {
         HStack(spacing: 0) {
-            ImageView(source: notification.imageURL)
+            ImageView(source: imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
                 .selectionAppearance(when: isSelected, while: isEditing)
                 .cornerRadius(LayoutStandardViewCornerRadius)
