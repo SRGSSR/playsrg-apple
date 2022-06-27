@@ -13,6 +13,9 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";
 
+/* Number of results aggregated in search */
+"%@ results" = "%@ results";
+
 /* Show A-Z button label */
 "A to Z shows" = "Emissiuns dad A fin Z";
 
@@ -24,8 +27,7 @@
 "Audio described" = "Audio descrit";
 
 /* Close button label
-   Close button label on player view
-   Close button label on settings view */
+   Close button label on player view */
 "Close" = "Serrar";
 
 /* Player close button hint */
@@ -198,6 +200,7 @@
 
 /* Download cell hint in edit mode
    Media cell hint in edit mode
+   Notification cell hint in edit mode
    Show cell hint in edit mode */
 "Toggles selection." = "Mida la selecziun.";
 

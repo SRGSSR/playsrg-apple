@@ -35,4 +35,9 @@ OBJC_EXPORT NSString *PlayAccessibilityRelativeDateAndTimeFromDate(NSDate *date)
  */
 OBJC_EXPORT NSString *PlayAccessibilityTimeFromDate(NSDate *date);
 
+/**
+ *  Formats a number in a human readable way suited for accessibility.
+ */
+OBJC_EXPORT NSString *PlayAccessibilityNumberFormatter(NSNumber *number);
+
 NS_ASSUME_NONNULL_END
