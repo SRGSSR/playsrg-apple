@@ -32,6 +32,17 @@ To check that your setup is working you can initially create very a basic push n
 
 An old technical note discusses [push notification status message inspection](https://developer.apple.com/library/archive/technotes/tn2265/_index.html). No profile is required anymore nowadays: You can observe status messages in the Console application by filtering results associated with the `apns` process.
 
+## Debugging the notification service
+
+To debug the notification service:
+
+- Run the Play debug application for some business unit on a physical device and enable push notifications for some show.
+- In Xcode ensure the notification service extension scheme is visible for the Play app you picked.
+- Edit the extension scheme and ensure the iOS app is associated as _Executable_ when running the scheme.
+- Run the notification service extension scheme on the device.
+- Set a breakpoint in the code.
+- On Airship create a push notification for the app and URN of the show you registered to and send it. Xcode should resume in the debugger where you can inspect the code.
+
 ## Troubleshooting
 
 To identify potential issues with Airship registration you can use the _Support information_ button available in the application settings:

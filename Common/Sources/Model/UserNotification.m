@@ -65,7 +65,6 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     [dateComponents setDay:-14];
     NSDate *fourteenDaysAgo = [NSCalendar.srg_defaultCalendar dateByAddingComponents:dateComponents toDate:currentDate options:0];
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K >= %@", @keypath(UserNotification.new, date), fourteenDaysAgo];
-    
     return [notificationsArray filteredArrayUsingPredicate:predicate];
 }
 
