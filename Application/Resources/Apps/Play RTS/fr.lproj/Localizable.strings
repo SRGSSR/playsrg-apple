@@ -581,7 +581,7 @@
 "Shows by date" = "Émissions par date";
 
 /* Search placeholder text */
-"Shows, topics, and more" = "Émissions, sujets et plus encore";
+"Shows, topics and more" = "Émissions, sujets et plus encore";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simuler l'alerte mémoire";

@@ -581,7 +581,7 @@
 "Shows by date" = "Sendungen nach Datum";
 
 /* Search placeholder text */
-"Shows, topics, and more" = "Shows, topics, and more";
+"Shows, topics and more" = "Shows, topics and more";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Speicherwarnung simulieren";
