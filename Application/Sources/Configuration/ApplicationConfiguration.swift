@@ -33,16 +33,28 @@ extension ApplicationConfiguration {
         return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
     }
     
-    var feedbackUrlWithParamters: URL? {
-        guard let feedbackUrl = self.feedbackURL else { return nil }
+    private static var version: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    }
+    
+    private static var type: String {
+        return UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"
+    }
+    
+    private static var identifier: String? {
+        return UserDefaults.standard.string(forKey: "tc_unique_id")
+    }
+    
+    var feedbackUrlWithParameters: URL? {
+        guard let feedbackUrl = feedbackURL else { return nil }
+        guard var urlComponents = URLComponents(url: feedbackUrl, resolvingAgainstBaseURL: false) else { return feedbackUrl }
+        
         let feedbackQueryItems = [
             URLQueryItem(name: "platform", value: "iOS"),
-            URLQueryItem(name: "version", value: Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String?),
-            URLQueryItem(name: "type", value: UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"),
-            URLQueryItem(name: "cid", value: UserDefaults.standard.string(forKey: "tc_unique_id"))
+            URLQueryItem(name: "version", value: Self.version),
+            URLQueryItem(name: "type", value: Self.type),
+            URLQueryItem(name: "cid", value: Self.identifier)
         ]
-        
-        guard var urlComponents = URLComponents(url: feedbackUrl, resolvingAgainstBaseURL: false) else { return feedbackUrl }
         if let queryItems = urlComponents.queryItems {
             urlComponents.queryItems = feedbackQueryItems.appending(contentsOf: queryItems)
         }

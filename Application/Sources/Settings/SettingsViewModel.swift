@@ -169,7 +169,7 @@ final class SettingsViewModel: ObservableObject {
     }
     
     var openFeedbackForm: (() -> Void)? {
-        guard let url = ApplicationConfiguration.shared.feedbackUrlWithParamters else { return nil }
+        guard let url = ApplicationConfiguration.shared.feedbackUrlWithParameters else { return nil }
         return {
             UIApplication.shared.open(url)
         }
