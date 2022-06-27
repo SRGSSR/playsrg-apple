@@ -217,7 +217,7 @@ final class SearchViewController: UIViewController {
             filtersButton.addTarget(self, action: #selector(showSettings(_:)), for: .touchUpInside)
             
             if let titleLabel = filtersButton.titleLabel {
-                titleLabel.font = SRGFont.font(family: .text, weight: .regular, size: 16)
+                titleLabel.font = SRGFont.font(family: .text, weight: .regular, fixedSize: 16)
                 
                 // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
                 // See https://developer.apple.com/forums/thread/125492

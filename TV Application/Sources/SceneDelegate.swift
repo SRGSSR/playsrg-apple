@@ -25,7 +25,7 @@ final class SceneDelegate: UIResponder {
         appearance.backgroundEffect = UIBlurEffect(style: .dark)
         appearance.selectionIndicatorTintColor = .srgGray96
         
-        let font: UIFont = SRGFont.font(family: .text, weight: .medium, size: 28)
+        let font: UIFont = SRGFont.font(family: .text, weight: .medium, fixedSize: 28)
         let normalColor = UIColor.white
         let activeColor = UIColor.srgGray16
         

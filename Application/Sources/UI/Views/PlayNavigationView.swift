@@ -14,11 +14,11 @@ func PlayNavigationView<Content: View>(@ViewBuilder content: () -> Content) -> A
             let navigationBar = navigationController.navigationBar
 #if os(iOS)
             navigationBar.largeTitleTextAttributes = [
-                .font: SRGFont.font(family: .display, weight: .bold, size: 34) as UIFont
+                .font: SRGFont.font(family: .display, weight: .bold, fixedSize: 34) as UIFont
             ]
 #endif
             navigationBar.titleTextAttributes = [
-                .font: SRGFont.font(family: .display, weight: .semibold, size: 17) as UIFont
+                .font: SRGFont.font(family: .display, weight: .semibold, fixedSize: 17) as UIFont
             ]
         }
         .eraseToAnyView()
