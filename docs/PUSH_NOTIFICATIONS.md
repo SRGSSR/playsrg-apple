@@ -31,3 +31,13 @@ To check that your setup is working you can initially create very a basic push n
 ## Observe push status messages
 
 An old technical note discusses [push notification status message inspection](https://developer.apple.com/library/archive/technotes/tn2265/_index.html). No profile is required anymore nowadays: You can observe status messages in the Console application by filtering results associated with the `apns` process.
+
+## Troubleshooting
+
+To identify potential issues with Airship registration you can use the _Support information_ button available in the application settings:
+
+- A device token is generated for each device and should always be available.
+- An Airship identifier associates a device token with a registration on Airship side, which should happen quickly after enabling push notifications. If no identifier is available but push notifications have been enabled please verify that the registration happened properly (Airship usually logs errors to the console). It might happen that using a VPN (e.g. the 1Blocker VPN) might prevent registration from occuring correctly, in which case you should temporarily disable it so that registration can succeed.
+- Also check that URN registrations are available.
+
+If a device token and an Airship identifier are available you should be able to receive push notifications for the specified URN registrations.
