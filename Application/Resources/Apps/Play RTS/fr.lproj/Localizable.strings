@@ -783,10 +783,10 @@
 "What's new" = "Nouveautés";
 
 /* Autoplay setting section footer */
-"When enabled, more content is automatically played after playback of the current content ends." = "Lorsque cette fonctionnalité est activée, la lecture continue automatiquement avec un autre contenu lorsque le contenu lu actuellement se termine.";
+"When enabled, more content is automatically played after playback of the current content ends." = "Joue automatiquement un autre contenu lorsque la lecture d'un contenu se termine.";
 
 /* Background video playback setting section footer */
-"When enabled, video playback continues even when you leave the application." = "Lorsque cette fonctionnalité est activée, la lecture vidéo se poursuit même quand vous sortez de l'application.";
+"When enabled, video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";
 
 /* Search setting option */
 "Yesterday" = "Hier";
