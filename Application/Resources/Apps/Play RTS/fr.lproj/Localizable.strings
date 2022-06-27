@@ -81,10 +81,10 @@
 "Always visible when VoiceOver is active." = "Toujours visible lorsque VoiceOver est activé.";
 
 /* Search setting option */
-"Any" = "Any";
+"Any" = "Toutes";
 
 /* Search setting option */
-"Anytime" = "Anytime";
+"Anytime" = "Toutes";
 
 /* Audio description availability setting label */
 "Audio description availability" = "Disponibilité de l'audiodescription";
@@ -581,7 +581,7 @@
 "Shows by date" = "Émissions par date";
 
 /* Search placeholder text */
-"Shows, topics, and more" = "Émissions, sujets, et plus enocre";
+"Shows, topics, and more" = "Émissions, sujets et plus encore";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simuler l'alerte mémoire";
