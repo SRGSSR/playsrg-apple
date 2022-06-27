@@ -149,7 +149,7 @@ final class SearchViewController: UIViewController {
         let searchBar = searchController.searchBar
         object_setClass(searchBar, SearchBar.self)
         
-        searchBar.placeholder = NSLocalizedString("Shows, topics, and more", comment: "Search placeholder text")
+        searchBar.placeholder = NSLocalizedString("Shows, topics and more", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
         searchBar.delegate = self
