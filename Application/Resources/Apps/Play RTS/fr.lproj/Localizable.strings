@@ -114,7 +114,7 @@
 "By date" = "Par date";
 
 /* Quality settings section footer */
-"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "L’application charge par défaut le contenu haute définition sur les réseaux cellulaires. Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée afin que la meilleure qualité ne soit jouée que sur les réseaux Wi-Fi.";
+"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée afin que la meilleure qualité ne soit jouée que sur les réseaux Wi-Fi.";
 
 /* Calendar button in program guide */
 "Calendar" = "Calendrier";
