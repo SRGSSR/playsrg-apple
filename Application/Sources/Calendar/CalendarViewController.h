@@ -8,8 +8,7 @@
 #import "RadioChannel.h"
 #import "ScrollableContent.h"
 
-#import <FSCalendar/FSCalendar.h>
-
+@import FSCalendar;
 @import SRGAnalytics;
 
 NS_ASSUME_NONNULL_BEGIN

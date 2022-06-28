@@ -9,38 +9,25 @@ import Combine
 // MARK: View model
 
 class ShowCellViewModel: ObservableObject {
-    @Published var show: SRGShow? {
-        didSet {
-            updatePublishers()
-        }
-    }
-    
+    @Published var show: SRGShow?
     @Published private(set) var isSubscribed: Bool = false
     
-    private var cancellables = Set<AnyCancellable>()
-        
-    private func updatePublishers() {
-        cancellables = []
-        
-        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.pushServiceStatusUpdate())
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.updateData()
-            }
-            .store(in: &cancellables)
-        updateData()
-    }
-    
-    private func updateData() {
+    init() {
 #if os(iOS)
-        if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
-            isSubscribed = FavoritesIsSubscribedToShow(show)
-        }
-        else {
-            isSubscribed = false
-        }
-#else
-        isSubscribed = false
+        // Drop initial value; a relevant value is first assigned when the view appears
+        $show
+            .dropFirst()
+            .map { show -> AnyPublisher<Bool, Never> in
+                guard let show = show else {
+                    return Just(false).eraseToAnyPublisher()
+                }
+                return UserDataPublishers.subscriptionStatusPublisher(for: show)
+                    .map { $0 == .subscribed }
+                    .eraseToAnyPublisher()
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$isSubscribed)
 #endif
     }
 }

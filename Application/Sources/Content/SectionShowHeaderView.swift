@@ -36,32 +36,14 @@ struct SectionShowHeaderView: View {
     
     fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
-#if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
-    
-    var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-#if os(iOS)
-        return UIUserInterfaceSizeClass(horizontalSizeClass)
-#else
-        return .regular
-#endif
-    }
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
     private var direction: StackDirection {
-#if os(iOS)
         return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-#else
-        return .horizontal
-#endif
     }
     
     private var alignment: StackAlignment {
-#if os(iOS)
         return (horizontalSizeClass == .compact) ? .center : .leading
-#else
-        return .leading
-#endif
     }
     
     private var imageUrl: URL? {
@@ -72,8 +54,8 @@ struct SectionShowHeaderView: View {
         Stack(direction: direction, alignment: alignment, spacing: 0) {
             ImageView(source: imageUrl)
                 .aspectRatio(16 / 9, contentMode: .fit)
-                .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
-                .adaptiveMainFrame(for: uiHorizontalSizeClass)
+                .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
+                .adaptiveMainFrame(for: horizontalSizeClass)
                 .layoutPriority(1)
             VStack(spacing: SectionShowHeaderView.verticalSpacing) {
                 DescriptionView(section: section)
@@ -89,10 +71,10 @@ struct SectionShowHeaderView: View {
     
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
-        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
+        let horizontalSizeClass: UIUserInterfaceSizeClass
         
         var body: some View {
-            if uiHorizontalSizeClass == .regular {
+            if horizontalSizeClass == .regular {
                 LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
             }
         }

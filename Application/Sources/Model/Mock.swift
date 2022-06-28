@@ -7,6 +7,15 @@
 import SwiftUI
 
 struct Mock {
+    enum Bucket: String {
+        case standard
+        case overflow
+    }
+    
+    static func bucket(_ kind: Bucket = .standard) -> SRGItemBucket {
+        return mockObject(kind.rawValue, type: SRGItemBucket.self)
+    }
+    
     enum Channel: String {
         case unknown
         case standard
@@ -73,6 +82,17 @@ struct Mock {
     static func media(_ kind: Media = .standard) -> SRGMedia {
         return mockObject(kind.rawValue, type: SRGMedia.self)
     }
+    
+#if os(iOS)
+    enum Notification: String {
+        case standard
+        case overflow
+    }
+    
+    static func notification(_ kind: Notification = .standard) -> UserNotification {
+        mockObject(kind.rawValue, type: UserNotification.self)
+    }
+#endif
     
     enum Program: String {
         case standard

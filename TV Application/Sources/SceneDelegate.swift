@@ -25,7 +25,7 @@ final class SceneDelegate: UIResponder {
         appearance.backgroundEffect = UIBlurEffect(style: .dark)
         appearance.selectionIndicatorTintColor = .srgGray96
         
-        let font: UIFont = SRGFont.font(family: .text, weight: .medium, size: 28)
+        let font: UIFont = SRGFont.font(family: .text, weight: .medium, fixedSize: 28)
         let normalColor = UIColor.white
         let activeColor = UIColor.srgGray16
         
@@ -61,14 +61,14 @@ final class SceneDelegate: UIResponder {
         
         let configuration = ApplicationConfiguration.shared
         
-        #if DEBUG
+#if DEBUG
         if let firstChannel = configuration.radioHomepageChannels.first {
             let audiosViewController = PageViewController(id: .audio(channel: firstChannel))
             audiosViewController.tabBarItem = UITabBarItem(title: NSLocalizedString("Audios", comment: "Audios tab title"), image: nil, tag: 1)
             audiosViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.audiosTabBarItem.rawValue
             viewControllers.append(audiosViewController)
         }
-        #endif
+#endif
         
         if !configuration.liveHomeSections.isEmpty {
             let liveViewController = PageViewController(id: .live)
@@ -96,7 +96,7 @@ final class SceneDelegate: UIResponder {
         searchViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.searchTabBarItem.rawValue
         viewControllers.append(searchViewController)
         
-        let profileViewController = UIHostingController(rootView: ProfileView())
+        let profileViewController = UIHostingController(rootView: SettingsView())
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: UIImage(named: "profile_tab")!.withRenderingMode(.alwaysTemplate), tag: 6)
         profileViewController.tabBarItem.accessibilityLabel = PlaySRGAccessibilityLocalizedString("Profile", comment: "Profile button label on home view")
         profileViewController.tabBarItem.accessibilityIdentifier = AccessibilityIdentifier.profileTabBarItem.rawValue
@@ -159,7 +159,7 @@ extension SceneDelegate: UIWindowSceneDelegate {
 #if DEBUG || NIGHTLY || BETA
         Publishers.Merge3(
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingPosterImages),
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
         )
         .debounce(for: 0.7, scheduler: DispatchQueue.main)

@@ -48,13 +48,17 @@ static UIScrollView *ScrollableViewInViewController(UIViewController *viewContro
 
 static void UpdateContentViewForViewController(UIViewController *viewController)
 {
+    id<MAKVOObservation> previousContentOffsetObservation = objc_getAssociatedObject(viewController, s_contentOffsetRegistrationKey);
+    [previousContentOffsetObservation remove];
+    
     UIScrollView *scrollableView = ScrollableViewInViewController(viewController);
+    if (! scrollableView) {
+        return;
+    }
+    
     if (@available(iOS 15, tvOS 15, *)) {
         [viewController setContentScrollView:scrollableView forEdge:NSDirectionalRectEdgeAll];
     }
-    
-    id<MAKVOObservation> previousContentOffsetObservation = objc_getAssociatedObject(viewController, s_contentOffsetRegistrationKey);
-    [previousContentOffsetObservation remove];
     
     if ([viewController conformsToProtocol:@protocol(ScrollableContentContainer)]) {
         UIViewController<ScrollableContentContainer> *containerViewController = (UIViewController<ScrollableContentContainer> *)viewController;

@@ -19,36 +19,18 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     let layout: FeaturedContentLayout
     
     @Environment(\.isSelected) private var isSelected
-    
-#if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
     private var direction: StackDirection {
-#if os(iOS)
-        if horizontalSizeClass == .compact {
-            return .vertical
-        }
-#endif
-        return .horizontal
+        return (horizontalSizeClass == .compact) ? .vertical : .horizontal
     }
     
     private var horizontalPadding: CGFloat {
-#if os(iOS)
-        if horizontalSizeClass == .compact {
-            return 8
-        }
-#endif
-        return constant(iOS: 54, tvOS: 50)
+        return (horizontalSizeClass == .compact) ? 8 : constant(iOS: 54, tvOS: 50)
     }
     
     private var verticalPadding: CGFloat {
-#if os(iOS)
-        if horizontalSizeClass == .compact {
-            return 12
-        }
-#endif
-        return constant(iOS: 16, tvOS: 16)
+        return (horizontalSizeClass == .compact) ? 12 : constant(iOS: 16, tvOS: 16)
     }
     
     private var descriptionAlignment: FeaturedDescriptionView<Content>.Alignment {
@@ -61,11 +43,7 @@ struct FeaturedContentCell<Content: FeaturedContent>: View {
     }
     
     private var detailed: Bool {
-#if os(iOS)
         return horizontalSizeClass == .regular
-#else
-        return true
-#endif
     }
     
     var body: some View {

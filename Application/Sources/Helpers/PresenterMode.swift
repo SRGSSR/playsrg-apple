@@ -12,8 +12,8 @@ import SRGLetterbox
 final class PresenterMode: NSObject {
     @objc static func enable(_ enabled: Bool) {
         SRGLetterboxService.shared.isMirroredOnExternalScreen = enabled
-        #if DEBUG || NIGHTLY || BETA
+#if DEBUG || NIGHTLY || BETA
         ShowTime.enabled = enabled ? .always : .never
-        #endif
+#endif
     }
 }

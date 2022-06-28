@@ -108,7 +108,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
         NSUserDefaults *userDefaults = NSUserDefaults.standardUserDefaults;
-        [userDefaults removeObjectForKey:PlaySRGSettingServiceURL];
+        [userDefaults removeObjectForKey:PlaySRGSettingServiceIdentifier];
         [userDefaults synchronize];
         completionHandler(YES);
     }, @"DataProviderServiceURLChange");
@@ -120,7 +120,7 @@ static void *s_kvoContext = &s_kvoContext;
     
 #if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
     NSUserDefaults *defaults = NSUserDefaults.standardUserDefaults;
-    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceURL options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:s_kvoContext];
+    [defaults addObserver:self forKeyPath:PlaySRGSettingServiceIdentifier options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld  context:s_kvoContext];
     [defaults addObserver:self forKeyPath:PlaySRGSettingUserLocation options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:s_kvoContext];
 #endif
     
@@ -184,13 +184,6 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     [PushService.sharedService updateApplicationBadge];
-}
-
-// https://support.urbanairship.com/hc/en-us/articles/213492483-iOS-Badging-and-Auto-Badging
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler
-{
-    [PushService.sharedService updateApplicationBadge];
-    completionHandler(UIBackgroundFetchResultNoData);
 }
 
 #pragma mark Helpers
@@ -419,7 +412,7 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (s_kvoContext == context) {
-        if ([keyPath isEqualToString:PlaySRGSettingServiceURL] || [keyPath isEqualToString:PlaySRGSettingUserLocation]) {
+        if ([keyPath isEqualToString:PlaySRGSettingServiceIdentifier] || [keyPath isEqualToString:PlaySRGSettingUserLocation]) {
             id oldValue = change[NSKeyValueChangeOldKey];
             id newValue = change[NSKeyValueChangeNewKey];
             

@@ -39,7 +39,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the history is updated for some uid or, if omitted, when any history update occurs.
      */
-    static func historyUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func historyUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
                 guard let uid = uid else { return true }
@@ -50,7 +50,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -58,7 +58,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the watch later playlist is updated for some uid or, if omitted, when any watch later update occurs.
      */
-    static func watchLaterUpdates(for uid: String? = nil) -> AnyPublisher<Void, Never> {
+    static func watchLaterUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
@@ -74,7 +74,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -82,7 +82,7 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when the user preferences are updated.
      */
-    static func preferenceUpdates() -> AnyPublisher<Void, Never> {
+    static func preferenceUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .SRGPreferencesDidChange, object: SRGUserData.current?.preferences)
             .filter { notification in
                 if let domains = notification.userInfo?[SRGPreferencesDomainsKey] as? Set<String>, domains.contains(PlayPreferencesDomain) {
@@ -92,7 +92,7 @@ enum ThrottledSignal {
                     return false
                 }
             }
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -101,9 +101,9 @@ enum ThrottledSignal {
     /**
      *  Emits a signal when downloads are updated.
      */
-    static func downloadUpdates() -> AnyPublisher<Void, Never> {
+    static func downloadUpdates(interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.publisher(for: .DownloadStateDidChange, object: nil)
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: true)
+            .throttle(for: .seconds(interval), scheduler: DispatchQueue.main, latest: true)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -140,7 +140,8 @@ enum ApplicationSignal {
             .eraseToAnyPublisher()
     }
     
-    /// Can be used on all platforms to minimize preprocessor need, but never emits
+    /// Can be used on all platforms to minimize preprocessor need, but never emits on platforms not supporting
+    /// push notifications
     static func pushServiceStatusUpdate() -> AnyPublisher<Void, Never> {
 #if os(iOS)
         return NotificationCenter.default.publisher(for: .PushServiceStatusDidChange)
@@ -170,10 +171,15 @@ enum ApplicationSignal {
  *  Internal notifications sent to signal item updates resulting from user interaction.
  */
 private extension Notification.Name {
+#if os(iOS)
+    static let didUpdateDownloads = Notification.Name("UserInteractionDidUpdateDownloadsNotification")
+#endif
     static let didUpdateFavorites = Notification.Name("UserInteractionDidUpdateFavoritesNotification")
     static let didUpdateHistoryEntries = Notification.Name("UserInteractionDidUpdateHistoryEntriesNotification")
+#if os(iOS)
+    static let didUpdateNotifications = Notification.Name("UserInteractionDidUpdateNotificationsNotification")
+#endif
     static let didUpdateWatchLaterEntries = Notification.Name("UserInteractionDidUpdateWatchLaterEntriesNotification")
-    static let didUpdateDownloads = Notification.Name("UserInteractionDidUpdateDownloadsNotification")
 }
 
 private enum UserInteractionUpdateKey {
@@ -196,19 +202,14 @@ enum UserInteractionSignal {
         }
     }
     
-    static func historyUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didUpdateHistoryEntries)
+#if os(iOS)
+    static func downloadUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateDownloads)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
             .removeDuplicates()
             .eraseToAnyPublisher()
     }
-    
-    static func watchLaterUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didUpdateWatchLaterEntries)
-            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
-            .removeDuplicates()
-            .eraseToAnyPublisher()
-    }
+#endif
     
     static func favoriteUpdates() -> AnyPublisher<[Content.Item], Never> {
         return NotificationCenter.default.publisher(for: .didUpdateFavorites)
@@ -217,8 +218,24 @@ enum UserInteractionSignal {
             .eraseToAnyPublisher()
     }
     
-    static func downloadUpdates() -> AnyPublisher<[Content.Item], Never> {
-        return NotificationCenter.default.publisher(for: .didUpdateDownloads)
+    static func historyUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateHistoryEntries)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+    
+#if os(iOS)
+    static func notificationUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateNotifications)
+            .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
+            .removeDuplicates()
+            .eraseToAnyPublisher()
+    }
+#endif
+    
+    static func watchLaterUpdates() -> AnyPublisher<[Content.Item], Never> {
+        return NotificationCenter.default.publisher(for: .didUpdateWatchLaterEntries)
             .scan([Content.Item]()) { consolidate(items: $0, with: $1) }
             .removeDuplicates()
             .eraseToAnyPublisher()
@@ -235,31 +252,7 @@ enum UserInteractionSignal {
             key: items
         ])
     }
-    
-    @objc static func addToHistory(_ medias: [SRGMedia]) {
-        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: true)
-    }
-    
-    @objc static func removeFromHistory(_ medias: [SRGMedia]) {
-        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: false)
-    }
-    
-    @objc static func addToWatchLater(_ medias: [SRGMedia]) {
-        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: true)
-    }
-    
-    @objc static func removeFromWatchLater(_ medias: [SRGMedia]) {
-        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: false)
-    }
-    
-    @objc static func addToFavorites(_ shows: [SRGShow]) {
-        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: true)
-    }
-    
-    @objc static func removeFromFavorites(_ shows: [SRGShow]) {
-        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
-    }
-    
+
 #if os(iOS)
     @objc static func addToDownloads(_ downloads: [Download]) {
         notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: true)
@@ -269,4 +262,34 @@ enum UserInteractionSignal {
         notify(.didUpdateDownloads, for: downloads.map { Content.Item.download($0) }, added: false)
     }
 #endif
+    
+    @objc static func addToFavorites(_ shows: [SRGShow]) {
+        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: true)
+    }
+    
+    @objc static func removeFromFavorites(_ shows: [SRGShow]) {
+        notify(.didUpdateFavorites, for: shows.map { Content.Item.show($0) }, added: false)
+    }
+    
+    @objc static func addToHistory(_ medias: [SRGMedia]) {
+        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: true)
+    }
+    
+    @objc static func removeFromHistory(_ medias: [SRGMedia]) {
+        notify(.didUpdateHistoryEntries, for: medias.map { Content.Item.media($0) }, added: false)
+    }
+    
+#if os(iOS)
+    @objc static func removeFromNotifications(_ notifications: [UserNotification]) {
+        notify(.didUpdateNotifications, for: notifications.map { Content.Item.notification($0) }, added: false)
+    }
+#endif
+    
+    @objc static func addToWatchLater(_ medias: [SRGMedia]) {
+        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: true)
+    }
+    
+    @objc static func removeFromWatchLater(_ medias: [SRGMedia]) {
+        notify(.didUpdateWatchLaterEntries, for: medias.map { Content.Item.media($0) }, added: false)
+    }
 }

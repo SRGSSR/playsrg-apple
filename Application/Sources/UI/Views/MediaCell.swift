@@ -27,18 +27,15 @@ struct MediaCell: View {
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
-    
-#if os(iOS)
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
     private var direction: StackDirection {
-#if os(iOS)
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
             return .horizontal
         }
-#endif
-        return .vertical
+        else {
+            return .vertical
+        }
     }
     
     private var horizontalPadding: CGFloat {
@@ -180,24 +177,16 @@ final class MediaCellSize: NSObject {
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     private static let heightOffset: CGFloat = constant(iOS: 65, tvOS: 140)
     
-    @objc static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
-    }
-    
-    @objc static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, heightOffset)
     }
     
-    @objc static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
+    static func grid(layoutWidth: CGFloat, spacing: CGFloat) -> NSCollectionLayoutSize {
         return LayoutGridCellSize(defaultItemWidth, aspectRatio, heightOffset, layoutWidth, spacing, 1)
     }
     
-    @objc static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: constant(iOS: 84, tvOS: 120))
-    }
-    
-    @objc static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
+    static func fullWidth() -> NSCollectionLayoutSize {
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 84, tvOS: 120)))
     }
 }
 

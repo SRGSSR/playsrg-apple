@@ -30,7 +30,6 @@ AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
 AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
 AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";
 AnalyticsPageTitle const AnalyticsPageTitleFeatures = @"features";
-AnalyticsPageTitle const AnalyticsPageTitleFeedback = @"feedback";
 AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
 AnalyticsPageTitle const AnalyticsPageTitleHome = @"home";
 AnalyticsPageTitle const AnalyticsPageTitleLatest = @"latest";

@@ -8,6 +8,10 @@
 
 @import SRGAppearance;
 
+#if TARGET_OS_TV
+const CGFloat LayoutMaxListWidth = 1054.f;
+#endif
+
 const CGFloat LayoutStandardLabelCornerRadius = 2.f;
 const CGFloat LayoutStandardViewCornerRadius = 4.f;
 
@@ -26,7 +30,9 @@ const UIEdgeInsets LayoutTableViewPaddingContentInsets = { LayoutMargin / 2.f, 0
 
 const CGFloat LayoutLargeNavigationBarHeightContribution = 52.f;
 
+#if TARGET_OS_IOS
 static const CGFloat LayoutSearchBarHeightContribution = 52.f;
+#endif
 
 static CGFloat LayoutOptimalGridCellWidth(CGFloat approximateWidth, CGFloat layoutWidth, CGFloat spacing, NSInteger minimumNumberOfColumns)
 {

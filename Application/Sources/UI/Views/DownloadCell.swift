@@ -23,8 +23,7 @@ struct DownloadCell: View {
     
     @Environment(\.isEditing) private var isEditing
     @Environment(\.isSelected) private var isSelected
-    
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
     
     private var direction: StackDirection {
         if layout == .horizontal || (layout == .adaptive && horizontalSizeClass == .compact) {
@@ -187,10 +186,6 @@ enum DownloadCellSize {
     }
     
     static func fullWidth() -> NSCollectionLayoutSize {
-        return fullWidth(itemHeight: 84)
-    }
-    
-    static func fullWidth(itemHeight: CGFloat) -> NSCollectionLayoutSize {
-        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(itemHeight))
+        return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(84))
     }
 }

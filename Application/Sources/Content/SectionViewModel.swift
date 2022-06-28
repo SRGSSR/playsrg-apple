@@ -222,7 +222,7 @@ extension SectionViewModel {
             }
         }
         
-        var displaysEmptyView: Bool {
+        var displaysEmptyContentView: Bool {
             return headerSize != .large && !hasContent
         }
     }
@@ -234,6 +234,7 @@ extension SectionViewModel {
         case topicGrid
 #if os(iOS)
         case downloadGrid
+        case notificationList
 #endif
     }
     
@@ -387,6 +388,8 @@ private extension SectionViewModel {
 #if os(iOS)
             case .downloads:
                 return .downloadGrid
+            case .notifications:
+                return .notificationList
 #endif
             default:
                 return .mediaGrid

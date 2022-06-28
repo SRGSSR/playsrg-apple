@@ -39,25 +39,14 @@ struct HighlightCell: View {
     private struct MainView: View {
         let highlight: Highlight
         
-#if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         private var direction: StackDirection {
-#if os(iOS)
-            if horizontalSizeClass == .compact {
-                return .vertical
-            }
-#endif
-            return .horizontal
+            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
         }
         
         private var isCompact: Bool {
-#if os(iOS)
             return horizontalSizeClass == .compact
-#else
-            return false
-#endif
         }
         
         private var imageUrl: URL? {

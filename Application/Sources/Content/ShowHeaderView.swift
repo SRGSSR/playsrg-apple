@@ -33,41 +33,22 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug.
     fileprivate struct MainView: View {
         @ObservedObject var model: ShowHeaderViewModel
-        
-#if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
-        
-        var uiHorizontalSizeClass: UIUserInterfaceSizeClass {
-#if os(iOS)
-            return UIUserInterfaceSizeClass(horizontalSizeClass)
-#else
-            return .regular
-#endif
-        }
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         private var direction: StackDirection {
-#if os(iOS)
             return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-#else
-            return .horizontal
-#endif
         }
         
         private var alignment: StackAlignment {
-#if os(iOS)
             return (horizontalSizeClass == .compact) ? .center : .leading
-#else
-            return .leading
-#endif
         }
         
         var body: some View {
             Stack(direction: direction, alignment: alignment, spacing: 0) {
                 ImageView(source: model.imageUrl)
                     .aspectRatio(16 / 9, contentMode: .fit)
-                    .overlay(ImageOverlay(uiHorizontalSizeClass: uiHorizontalSizeClass))
-                    .adaptiveMainFrame(for: uiHorizontalSizeClass)
+                    .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
+                    .adaptiveMainFrame(for: horizontalSizeClass)
                     .layoutPriority(1)
                 DescriptionView(model: model)
                     .padding(.horizontal, constant(iOS: 16, tvOS: 80))
@@ -81,10 +62,10 @@ struct ShowHeaderView: View {
     
     /// Behavior: h-exp, v-exp
     private struct ImageOverlay: View {
-        let uiHorizontalSizeClass: UIUserInterfaceSizeClass
+        let horizontalSizeClass: UIUserInterfaceSizeClass
         
         var body: some View {
-            if uiHorizontalSizeClass == .regular {
+            if horizontalSizeClass == .regular {
                 LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
             }
         }

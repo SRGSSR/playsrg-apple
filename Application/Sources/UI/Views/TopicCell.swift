@@ -87,11 +87,7 @@ enum TopicCellSize {
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 150, tvOS: 300)
     
-    static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
-    }
-    
-    static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     

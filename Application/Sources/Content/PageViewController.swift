@@ -23,7 +23,7 @@ final class PageViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -106,9 +106,9 @@ final class PageViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -203,11 +203,11 @@ final class PageViewController: UIViewController {
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case let .loaded(rows: rows):
-            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -291,7 +291,7 @@ extension PageViewController {
     }
     
     @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
-        return PageViewController(id: .topic(topic: topic))
+        return PageViewController(id: .topic(topic))
     }
 }
 
@@ -337,7 +337,7 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case let .topic(topic):
                 if let navigationController = navigationController {
-                    let pageViewController = PageViewController(id: .topic(topic: topic))
+                    let pageViewController = PageViewController(id: .topic(topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             case .highlight:
@@ -457,7 +457,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
         switch model.id {
         case .video, .audio, .live:
             return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic: topic):
+        case let .topic(topic):
             return topic.title
         }
     }
@@ -697,6 +697,8 @@ private extension PageViewController {
 #if os(iOS)
                 case let .download(download):
                     DownloadCell(download: download)
+                case let .notification(notification):
+                    NotificationCell(notification: notification)
                 case .showAccess:
                     switch id {
                     case .video:

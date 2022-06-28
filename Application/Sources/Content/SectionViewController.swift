@@ -25,7 +25,7 @@ final class SectionViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<SectionViewModel.Section, SectionViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -39,7 +39,7 @@ final class SectionViewController: UIViewController {
     
     private var globalHeaderTitle: String? {
 #if os(tvOS)
-        return tabBarController == nil ? model.title : nil
+        return (tabBarController == nil && model.displaysTitle) ? model.title : nil
 #else
         return nil
 #endif
@@ -92,9 +92,9 @@ final class SectionViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -263,12 +263,12 @@ final class SectionViewController: UIViewController {
     private func reloadData(for state: SectionViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case .loaded:
             let properties = model.configuration.properties
-            emptyView.content = state.displaysEmptyView ? EmptyView(state: .empty(type: properties.emptyType)) : nil
+            emptyContentView.content = state.displaysEmptyContentView ? EmptyContentView(state: .empty(type: properties.emptyType)) : nil
         }
         
 #if os(iOS)
@@ -317,39 +317,6 @@ final class SectionViewController: UIViewController {
     }
     
 #if os(iOS)
-    private func open(_ item: Content.Item) {
-        switch item {
-        case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-        case let .show(show):
-            if let navigationController = navigationController {
-                let showViewController = SectionViewController.showViewController(for: show)
-                navigationController.pushViewController(showViewController, animated: true)
-            }
-        case let .topic(topic):
-            if let navigationController = navigationController {
-                let pageViewController = PageViewController(id: .topic(topic: topic))
-                navigationController.pushViewController(pageViewController, animated: true)
-            }
-        case let .download(download):
-            if let media = download.media {
-                play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            }
-            else {
-                let error = NSError(
-                    domain: PlayErrorDomain,
-                    code: PlayErrorCode.notFound.rawValue,
-                    userInfo: [
-                        NSLocalizedDescriptionKey: NSLocalizedString("Media not available yet", comment: "Message on top screen when trying to open a media in the download list and the media is not downloaded.")
-                    ]
-                )
-                Banner.showError(error)
-            }
-        default:
-            ()
-        }
-    }
-    
     @objc private func pullToRefresh(_ refreshControl: RefreshControl) {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
@@ -422,6 +389,10 @@ extension SectionViewController {
 #if os(iOS)
     @objc static func downloadsViewController() -> SectionViewController {
         return SectionViewController(section: .configured(.downloads))
+    }
+
+    @objc static func notificationsViewController() -> SectionViewController {
+        return SectionViewController(section: .configured(.notifications))
     }
 #endif
     
@@ -498,7 +469,7 @@ extension SectionViewController: UICollectionViewDelegate {
             updateNavigationBar()
         }
         else {
-            open(item)
+            navigateToItem(item)
         }
     }
     
@@ -719,6 +690,10 @@ private extension SectionViewController {
                             return DownloadCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
+                case .notificationList:
+                    return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing, top: top) { _, _ in
+                        return NotificationCellSize.fullWidth()
+                    }
 #endif
                 }
             }
@@ -788,6 +763,8 @@ private extension SectionViewController {
 #if os(iOS)
             case let .download(download):
                 DownloadCell(download: download)
+            case let .notification(notification):
+                NotificationCell(notification: notification)
 #endif
             case .transparent:
                 Color.clear

@@ -19,7 +19,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
     private static let margin: CGFloat = 10
     private static let verticalSpacing: CGFloat = 3
@@ -71,9 +71,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Self.margin)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
         self.view = view
     }
@@ -131,16 +131,16 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         switch state {
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case .content:
             if state.isLoading(in: currentChannel) {
-                emptyView.content = EmptyView(state: .loading)
+                emptyContentView.content = EmptyContentView(state: .loading)
             }
             else if state.isEmpty(in: currentChannel) {
-                emptyView.content = EmptyView(state: .empty(type: .generic))
+                emptyContentView.content = EmptyContentView(state: .empty(type: .generic))
             }
             else {
-                emptyView.content = nil
+                emptyContentView.content = nil
             }
         }
         

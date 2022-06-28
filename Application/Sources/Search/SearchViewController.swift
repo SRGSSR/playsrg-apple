@@ -21,7 +21,7 @@ final class SearchViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<SearchViewModel.Section, SearchViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var filtersBarButtonItem: UIBarButtonItem?
@@ -73,7 +73,7 @@ final class SearchViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
+        let emptyView = HostView<EmptyContentView>(frame: .zero)
         collectionView.backgroundView = emptyView
         self.emptyView = emptyView
         
@@ -149,7 +149,7 @@ final class SearchViewController: UIViewController {
         let searchBar = searchController.searchBar
         object_setClass(searchBar, SearchBar.self)
         
-        searchBar.placeholder = NSLocalizedString("Shows, topics, and more", comment: "Search placeholder text")
+        searchBar.placeholder = NSLocalizedString("Shows, topics and more", comment: "Search placeholder text")
         searchBar.autocapitalizationType = .none
         searchBar.tintColor = .white
         searchBar.delegate = self
@@ -206,7 +206,7 @@ final class SearchViewController: UIViewController {
         return Self.play_supportedInterfaceOrientations
     }
     
-    private func updateSearchSettingsButton(for settings: SRGMediaSearchSettings) {
+    private func updateSearchSettingsButton(for settings: MediaSearchSettings) {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
             navigationItem.rightBarButtonItem = nil
             return
@@ -217,7 +217,7 @@ final class SearchViewController: UIViewController {
             filtersButton.addTarget(self, action: #selector(showSettings(_:)), for: .touchUpInside)
             
             if let titleLabel = filtersButton.titleLabel {
-                titleLabel.font = SRGFont.font(family: .text, weight: .regular, size: 16)
+                titleLabel.font = SRGFont.font(family: .text, weight: .regular, fixedSize: 16)
                 
                 // Trick to avoid incorrect truncation when Bold text has been enabled in system settings
                 // See https://developer.apple.com/forums/thread/125492
@@ -251,36 +251,29 @@ final class SearchViewController: UIViewController {
     @objc private func showSettings(_ sender: Any) {
         searchController?.searchBar.resignFirstResponder()
         
-        let settingsViewController = SearchSettingsViewController(query: model.query, settings: model.settings)
-        settingsViewController.delegate = self
+        let settingsViewController = SearchSettingsNavigationViewController(model: model)
+        settingsViewController.modalPresentationStyle = .popover
         
-        let backgroundColor: UIColor? = UIDevice.current.userInterfaceIdiom == .pad ? .play_popoverGrayBackground : nil
-        let navigationController = NavigationController(rootViewController: settingsViewController,
-                                                        tintColor: .white,
-                                                        backgroundColor: backgroundColor,
-                                                        statusBarStyle: .lightContent)
-        navigationController.modalPresentationStyle = .popover
-        
-        if let popoverPresentationController = navigationController.popoverPresentationController {
+        if let popoverPresentationController = settingsViewController.popoverPresentationController {
             popoverPresentationController.backgroundColor = .play_popoverGrayBackground
             popoverPresentationController.permittedArrowDirections = .any
             popoverPresentationController.barButtonItem = filtersBarButtonItem
         }
         
-        present(navigationController, animated: true)
+        present(settingsViewController, animated: true)
     }
 #endif
     
     private func reloadData(for state: SearchViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading, insets: Self.emptyViewInsets)
+            emptyView.content = EmptyContentView(state: .loading, insets: Self.emptyViewInsets)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error), insets: Self.emptyViewInsets)
+            emptyView.content = EmptyContentView(state: .failed(error: error), insets: Self.emptyViewInsets)
         case .loaded:
             if !state.hasContent {
-                let type: EmptyView.`Type` = model.isSearching ? .search : .searchTutorial
-                emptyView.content = EmptyView(state: .empty(type: type), insets: Self.emptyViewInsets)
+                let type: EmptyContentView.`Type` = model.isSearching ? .search : .searchTutorial
+                emptyView.content = EmptyContentView(state: .empty(type: type), insets: Self.emptyViewInsets)
             }
             else {
                 emptyView.content = nil
@@ -382,7 +375,7 @@ extension SearchViewController: PlayApplicationNavigation {
         
         model.query = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchQueryKey] as? String ?? ""
         
-        let settings = SRGMediaSearchSettings()
+        var settings = MediaSearchSettings()
         if let mediaType = applicationSectionInfo.options?[ApplicationSectionOptionKey.searchMediaTypeOptionKey] as? Int {
             settings.mediaType = SRGMediaType(rawValue: mediaType) ?? .none
         }
@@ -390,12 +383,6 @@ extension SearchViewController: PlayApplicationNavigation {
         
         searchController?.searchBar.resignFirstResponder()
         return true
-    }
-}
-
-extension SearchViewController: SearchSettingsViewControllerDelegate {
-    func searchSettingsViewController(_ searchSettingsViewController: SearchSettingsViewController, didUpdate settings: SRGMediaSearchSettings) {
-        model.settings = settings
     }
 }
 
@@ -663,9 +650,9 @@ private extension SearchViewController {
 private extension SearchViewController {
     struct SectionHeaderView: View {
         let section: SearchViewModel.Section
-        let settings: SRGMediaSearchSettings
+        let settings: MediaSearchSettings
         
-        private static func title(for section: SearchViewModel.Section, settings: SRGMediaSearchSettings) -> String? {
+        private static func title(for section: SearchViewModel.Section, settings: MediaSearchSettings) -> String? {
             switch section {
             case .medias:
                 guard !ApplicationConfiguration.shared.radioChannels.isEmpty else { return nil }
@@ -695,7 +682,7 @@ private extension SearchViewController {
             }
         }
         
-        static func size(section: SearchViewModel.Section, settings: SRGMediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
+        static func size(section: SearchViewModel.Section, settings: MediaSearchSettings, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
             return HeaderViewSize.recommended(forTitle: title(for: section, settings: settings), subtitle: nil, layoutWidth: layoutWidth)
         }
     }

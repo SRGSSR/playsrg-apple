@@ -98,7 +98,7 @@ static NSString *LabelFormattedDuration(NSTimeInterval duration)
         text = NSLocalizedString(@"Expired", @"Short label identifying content which has expired.");
     }
     else if (timeAvailability == SRGTimeAvailabilityAvailable && mediaMetadata.endDate
-             && mediaMetadata.contentType != SRGContentTypeScheduledLivestream && mediaMetadata.contentType != SRGContentTypeLivestream && mediaMetadata.contentType != SRGContentTypeTrailer) {
+             && (mediaMetadata.contentType == SRGContentTypeEpisode || mediaMetadata.contentType == SRGContentTypeClip)) {
         self.backgroundColor = UIColor.play_orangeColor;
         
         NSDateComponents *monthsDateComponents = [NSCalendar.srg_defaultCalendar components:NSCalendarUnitDay fromDate:nowDate toDate:mediaMetadata.endDate options:0];

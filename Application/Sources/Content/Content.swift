@@ -38,6 +38,7 @@ enum Content {
         
 #if os(iOS)
         case download(_ download: Download)
+        case notification(_ notification: UserNotification)
         case showAccess(radioChannel: RadioChannel?)
 #endif
         
@@ -56,6 +57,8 @@ enum Content {
 #if os(iOS)
             case let .download(download):
                 return download.title
+            case let .notification(notification):
+                return notification.title
 #endif
             case let .highlight(highlight):
                 return highlight.title
@@ -85,6 +88,17 @@ enum Content {
         return items.compactMap { item in
             if case let .download(download) = item {
                 return download
+            }
+            else {
+                return nil
+            }
+        }
+    }
+    
+    static func notifications(from items: [Content.Item]) -> [UserNotification] {
+        return items.compactMap { item in
+            if case let .notification(notification) = item {
+                return notification
             }
             else {
                 return nil
@@ -123,7 +137,7 @@ protocol SectionProperties {
     /// Properties for section detail display
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
-    var emptyType: EmptyView.`Type` { get }
+    var emptyType: EmptyContentView.`Type` { get }
     
 #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -239,7 +253,7 @@ private extension Content {
             }
         }
         
-        var emptyType: EmptyView.`Type` {
+        var emptyType: EmptyContentView.`Type` {
             switch contentSection.type {
             case .predefined:
                 switch contentSection.presentation.type {
@@ -522,6 +536,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return NSLocalizedString("Downloads", comment: "Label to present downloads")
+            case .notifications:
+                return NSLocalizedString("Notifications", comment: "Title label used to present notifications")
             case .radioShowAccess:
                 return NSLocalizedString("Shows", comment: "Title label used to present the radio shows AZ and radio shows by date access buttons")
 #endif
@@ -566,7 +582,7 @@ private extension Content {
             case .favoriteShows, .history, .radioFavoriteShows, .radioResumePlayback, .radioWatchLater, .watchLater:
                 return true
 #if os(iOS)
-            case .downloads:
+            case .downloads, .notifications:
                 return true
 #endif
             default:
@@ -574,7 +590,7 @@ private extension Content {
             }
         }
         
-        var emptyType: EmptyView.`Type` {
+        var emptyType: EmptyContentView.`Type` {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return .favoriteShows
@@ -589,6 +605,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return .downloads
+            case .notifications:
+                return .notifications
 #endif
             default:
                 return .generic
@@ -635,6 +653,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return AnalyticsPageTitle.downloads.rawValue
+            case .notifications:
+                return AnalyticsPageTitle.notifications.rawValue
 #endif
             default:
                 return nil
@@ -687,7 +707,7 @@ private extension Content {
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)
-            case .downloads:
+            case .downloads, .notifications:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #endif
             default:
@@ -815,13 +835,18 @@ private extension Content {
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
 #if os(iOS)
-            case let .radioShowAccess(channelUid):
-                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
-                    .setFailureType(to: Error.self)
-                    .eraseToAnyPublisher()
             case .downloads:
                 return Just(Download.downloads)
                     .map { $0.map { .download($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            case .notifications:
+                return Just(UserNotification.notifications)
+                    .map { $0.map { .notification($0) } }
+                    .setFailureType(to: Error.self)
+                    .eraseToAnyPublisher()
+            case let .radioShowAccess(channelUid):
+                return Just([.showAccess(radioChannel: configuration.radioChannel(forUid: channelUid))])
                     .setFailureType(to: Error.self)
                     .eraseToAnyPublisher()
 #endif
@@ -839,6 +864,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 return UserInteractionSignal.downloadUpdates()
+            case .notifications:
+                return UserInteractionSignal.notificationUpdates()
 #endif
             default:
                 return Just([]).eraseToAnyPublisher()
@@ -875,6 +902,8 @@ private extension Content {
 #if os(iOS)
             case .downloads:
                 Content.removeFromDownloads(items)
+            case .notifications:
+                Content.removeFromNotifications(items)
 #endif
             default:
                 ()
@@ -891,14 +920,23 @@ private extension Content {
         FavoritesRemoveShows(shows)
     }
     
-    static func removeFromWatchLater(_ items: [Content.Item]) {
-        let medias = Content.medias(from: items)
-        WatchLaterRemoveMedias(medias) { _ in }
-    }
-    
     static func removeFromHistory(_ items: [Content.Item]) {
         let medias = Content.medias(from: items)
         HistoryRemoveMedias(medias) { _ in }
+    }
+    
+#if os(iOS)
+    static func removeFromNotifications(_ items: [Content.Item]) {
+        let notifications = Content.notifications(from: items)
+        let updatedNotifications = Array(Set(UserNotification.notifications).subtracting(notifications))
+        UserNotification.saveNotifications(updatedNotifications)
+        UserInteractionEvent.removeFromNotifications(notifications)
+    }
+#endif
+    
+    static func removeFromWatchLater(_ items: [Content.Item]) {
+        let medias = Content.medias(from: items)
+        WatchLaterRemoveMedias(medias) { _ in }
     }
     
 #if os(iOS)

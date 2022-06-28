@@ -9,6 +9,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /**
+ *  The standard maximum list width on tvOS (when presented full screen).
+ */
+OBJC_EXPORT const CGFloat LayoutMaxListWidth API_AVAILABLE(tvos(14.0));
+
+/**
  *  Standard corner radius constants.
  */
 OBJC_EXPORT const CGFloat LayoutStandardLabelCornerRadius;
@@ -97,18 +102,18 @@ OBJC_EXPORT NSCollectionLayoutSize *LayoutFullWidthCellSize(CGFloat height);
  */
 
 OBJC_EXPORT const CGFloat LayoutMargin;
-OBJC_EXPORT const UIEdgeInsets LayoutPaddingContentInsets;
-OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets;
+OBJC_EXPORT const UIEdgeInsets LayoutPaddingContentInsets API_UNAVAILABLE(tvos);
+OBJC_EXPORT const UIEdgeInsets LayoutTableViewPaddingContentInsets API_UNAVAILABLE(tvos);
 
 /**
  *  Miscellaneous constants.
  */
-OBJC_EXPORT const CGFloat LayoutBlurActivationDistance;
+OBJC_EXPORT const CGFloat LayoutBlurActivationDistance API_UNAVAILABLE(tvos);
 
 /**
  *  Contribution associated with a large navigation bar (added height for expansion).
  */
-OBJC_EXPORT const CGFloat LayoutLargeNavigationBarHeightContribution;
+OBJC_EXPORT const CGFloat LayoutLargeNavigationBarHeightContribution API_UNAVAILABLE(tvos);
 
 /**
  *  Navigation bar states.
@@ -124,7 +129,7 @@ typedef NS_CLOSED_ENUM(NSInteger, LayoutNavigationBarState) {
     LayoutNavigationBarStateLargeResizing,
     // Navigation bar supporting large titles, expanded
     LayoutNavigationBarStateLargeExpanded
-};
+} API_UNAVAILABLE(tvos);
 
 /**
  *  Returns the navigation bar state for the specified navigation controller.

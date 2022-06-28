@@ -11,18 +11,42 @@ import SRGIdentity
 // MARK: View model
 
 final class ShowHeaderViewModel: ObservableObject {
-    var show: SRGShow? {
-        didSet {
-            updatePublishers()
-        }
-    }
+    @Published var show: SRGShow?
     
     @Published private(set) var isFavorite: Bool = false
-    @Published private(set) var subscriptionStatus: SubscriptionStatus = .unavailable
+    @Published private(set) var subscriptionStatus: UserDataPublishers.SubscriptionStatus = .unavailable
     
     @Published var isFavoriteRemovalAlertDisplayed: Bool = false
     
-    private var cancellables = Set<AnyCancellable>()
+    init() {
+        // Drop initial values; relevant values are first assigned when the view appears
+        $show
+            .dropFirst()
+            .map { show -> AnyPublisher<Bool, Never> in
+                guard let show = show else {
+                    return Just(false).eraseToAnyPublisher()
+                }
+                return UserDataPublishers.favoritePublisher(for: show)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$isFavorite)
+        
+#if os(iOS)
+        // Drop initial values; relevant values are first assigned when the view appears
+        $show
+            .dropFirst()
+            .map { show -> AnyPublisher<UserDataPublishers.SubscriptionStatus, Never> in
+                guard let show = show else {
+                    return Just(.unavailable).eraseToAnyPublisher()
+                }
+                return UserDataPublishers.subscriptionStatusPublisher(for: show)
+            }
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$subscriptionStatus)
+#endif
+    }
     
     var title: String? {
         return show?.title
@@ -84,23 +108,9 @@ final class ShowHeaderViewModel: ObservableObject {
     }
 #endif
     
-    private static func subscriptionStatus(for show: SRGShow?) -> SubscriptionStatus {
-#if os(iOS)
-        if let isEnabled = PushService.shared?.isEnabled, isEnabled, let show = show {
-            return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
-        }
-        else {
-            return .unavailable
-        }
-#else
-        return .unavailable
-#endif
-    }
-    
     func toggleFavorite() {
         guard let show = show else { return }
         FavoritesToggleShow(show)
-        updateData()
         
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue
@@ -117,7 +127,6 @@ final class ShowHeaderViewModel: ObservableObject {
 #if os(iOS)
     func toggleSubscription() {
         guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
-        updateData()
         
         let isSubscribed = FavoritesIsSubscribedToShow(show)
         subscriptionStatus = isSubscribed ? .subscribed : .unsubscribed
@@ -132,38 +141,6 @@ final class ShowHeaderViewModel: ObservableObject {
         Banner.showSubscription(isSubscribed, forItemWithName: show.title)
     }
 #endif
-    
-    private func updatePublishers() {
-        cancellables = []
-        
-        Publishers.Merge(ThrottledSignal.preferenceUpdates(), ApplicationSignal.pushServiceStatusUpdate())
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] _ in
-                self?.updateData()
-            }
-            .store(in: &cancellables)
-        updateData()
-    }
-    
-    private func updateData() {
-        if let show = show {
-            isFavorite = FavoritesContainsShow(show)
-        }
-        else {
-            isFavorite = false
-        }
-        subscriptionStatus = Self.subscriptionStatus(for: show)
-    }
-}
-
-// MARK: Types
-
-extension ShowHeaderViewModel {
-    enum SubscriptionStatus {
-        case unavailable
-        case unsubscribed
-        case subscribed
-    }
 }
 
 // MARK: Accessibility

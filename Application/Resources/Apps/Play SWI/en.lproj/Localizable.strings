@@ -55,10 +55,10 @@
 /* Title displayed when 1 item has been selected */
 "1 item" = "1 item";
 
-/* Less than 5 min option */
+/* Search setting option */
 "< 5 min" = "< 5 min";
 
-/* More than 3 min option */
+/* Search setting option */
 "> 30 min" = "> 30 min";
 
 /* Show A-Z short button title */
@@ -71,27 +71,44 @@
    Label displayed in the show view when a show can be favorited */
 "Add to favorites" = "Add to favorites";
 
-/* All option */
+/* Advanced features section header */
+"Advanced features" = "Advanced features";
+
+/* Search setting option */
 "All" = "All";
 
-/* Audios option
-   Audios tab title
+/* Subtitle availability setting section footer */
+"Always visible when VoiceOver is active." = "Always visible when VoiceOver is active.";
+
+/* Search setting option */
+"Any" = "Any";
+
+/* Search setting option */
+"Anytime" = "Anytime";
+
+/* Audio description availability setting label */
+"Audio description availability" = "Audio description availability";
+
+/* Audios tab title
    Header for audio search results
+   Search setting option
    Title displayed at the top of the audio view */
 "Audios" = "Audios";
 
-/* Message title displayed when subscribing to all TV and radio shows
-   Message title displayed when the user subscribed to all TV and radio shows */
-"Automatic subscriptions" = "Automatic subscriptions";
-
-/* Message description displayed when the user could not be subscribed to all TV and radio shows */
-"Automatic subscriptions failed. Please retry." = "Automatic subscriptions failed. Please retry.";
+/* Autoplay setting label */
+"Autoplay" = "Autoplay";
 
 /* Availability until date, specified as parameter */
 "Available until %@" = "Available until %@";
 
 /* Back to live shortcut label */
 "Back to live" = "Back to live";
+
+/* Background video playback setting label */
+"Background video playback" = "Background video playback";
+
+/* Label of the button to become beta tester */
+"Become a beta tester" = "Become a beta tester";
 
 /* Show by date short button title */
 "By date" = "By date";
@@ -101,15 +118,24 @@
 
 /* Label of the button to close the media sharing menu
    Title of a cancel button
-   Title of the cancel button in the alert view when deleting a download in the player view
-   Title of the cancel button in the alert view when logout */
+   Title of the cancel button in the alert view when deleting a download in the player view */
 "Cancel" = "Cancel";
 
 /* Information message of the action view to choose a regional radio
    Title displayed on the regional radio selection button */
 "Choose a regional radio" = "Choose a regional radio";
 
-/* Search settings section header */
+/* Label of the button to clear all contents */
+"Clear all contents" = "Clear all contents";
+
+/* Label of the button to clear the vector image cache */
+"Clear vector image cache" = "Clear vector image cache";
+
+/* Label of the button to clear the web cache */
+"Clear web cache" = "Clear web cache";
+
+/* Content settings section header
+   Search setting */
 "Content" = "Content";
 
 /* Message displayed when the user is about to delete content saved for later */
@@ -118,8 +144,17 @@
 /* Label of the button to copy support information to the pasteboard */
 "Copy to the pasteboard" = "Copy to the pasteboard";
 
-/* Sort by date option */
+/* Label of the button to display the data protection policy */
+"Data protection" = "Data protection";
+
+/* Search setting */
 "Date" = "Date";
+
+/* Poster images setting state */
+"Default (current configuration)" = "Default (current configuration)";
+
+/* User location setting state */
+"Default (IP-based location)" = "Default (IP-based location)";
 
 /* Title of a delete button
    Title of the confirmation pop-up displayed when the user is about to delete items
@@ -133,7 +168,8 @@
 /* Title of the confirmation pop-up displayed when the user is about to delete a download */
 "Delete download" = "Delete download";
 
-/* Title of the message displayed when the user is about to delete all favorites */
+/* Delete favorites button title
+   Title of the message displayed when the user is about to delete all favorites */
 "Delete favorites" = "Delete favorites";
 
 /* Context menu action to delete a media from the later list */
@@ -149,14 +185,18 @@
 /* Context menu action to delete a media from the history */
 "Delete from history" = "Delete from history";
 
-/* Title of the message displayed when the user is about to delete the history */
+/* Delete history button title
+   Title of the message displayed when the user is about to delete the history */
 "Delete history" = "Delete history";
+
+/* Developer section header */
+"Developer" = "Developer";
 
 /* Label for the button disabling autoplay */
 "Disable" = "Disable";
 
-/* Introductory title displayed at the top of the onboarding list */
-"Discover" = "Discover";
+/* Display settings section header */
+"Display" = "Display";
 
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Display %@ videos";
@@ -164,17 +204,20 @@
 /* Done button title */
 "Done" = "Done";
 
-/* Name of the search setting to filter downloadable content */
+/* Search setting */
 "Downloadable" = "Downloadable";
 
 /* Label to present downloads */
 "Downloads" = "Downloads";
 
-/* Search settings section header */
+/* Search setting */
 "Duration" = "Duration";
 
 /* Label for the button keeping autoplay enabled */
 "Enable" = "Enable";
+
+/* Label of the button to toggle FLEX */
+"Enable / disable FLEX" = "Enable / disable FLEX";
 
 /* Title of the alert view to opt-in for background video playback */
 "Enable background video playback?" = "Enable background video playback?";
@@ -201,7 +244,8 @@
 /* Message displayed when the user is about to delete all favorites */
 "Favorites and notification subscriptions will be deleted on all devices connected to your account." = "Favorites and notification subscriptions will be deleted on all devices connected to your account.";
 
-/* Title displayed at the top of the features list */
+/* Label of the button display the features
+   Title displayed at the top of the Features view */
 "Features" = "Features";
 
 /* Filters button title
@@ -211,11 +255,20 @@
 /* Explanation displayed in the alert asking the user to enable notifications */
 "For the application to inform you when a new episode is available, notifications must be enabled." = "For the application to inform you when a new episode is available, notifications must be enabled.";
 
+/* Poster images setting state */
+"Force" = "Force";
+
 /* Total free space size displayed as a list footer */
 "Free space: %@" = "Free space: %@";
 
 /* Full screen shortcut label */
 "Full screen" = "Full screen";
+
+/* HD setting label */
+"HD over cellular networks" = "HD over cellular networks";
+
+/* Label of the button to display help and impressum */
+"Help and impressum" = "Help and impressum";
 
 /* Label to present history
    Title label used to present the history */
@@ -224,8 +277,17 @@
 /* Home tab title */
 "Home" = "Home";
 
+/* Poster images setting state */
+"Ignore" = "Ignore";
+
+/* User location setting state */
+"Ignore location" = "Ignore location";
+
 /* Image copyright introductory label */
 "Image credit: %@" = "Image credit: %@";
+
+/* Information section header */
+"Information" = "Information";
 
 /* Label for the button keeping autoplay enabled */
 "Keep" = "Keep";
@@ -236,7 +298,7 @@
 /* Introductory text for the most recent data synchronization date */
 "Last synchronization: %@" = "Last synchronization: %@";
 
-/* Period setting option */
+/* Search setting option */
 "Last week" = "Last week";
 
 /* Label for the button for deciding to opt-in for background video playback at a later time
@@ -281,7 +343,7 @@
 /* Default text displayed when loading */
 "Loading…" = "Loading…";
 
-/* Setting footer message for system permission group. New rule for iOS 14 and more. */
+/* Permissions settings section footer */
 "Local network access must be allowed for Google Cast receiver discovery." = "Local network access must be allowed for Google Cast receiver discovery.";
 
 /* Login button on Apple TV */
@@ -299,6 +361,9 @@
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media not available yet";
+
+/* Autoplay setting section footer */
+"More content is automatically played after playback of the current content ends." = "More content is automatically played after playback of the current content ends.";
 
 /* Button to access more episodes from the media detail view
    Button to access more episodes from the program detail view
@@ -353,7 +418,8 @@
 /* Default text displayed when no results are available */
 "No results" = "No results";
 
-/* Label to present the help page */
+/* Label to present the help page
+   Title label used to present notifications */
 "Notifications" = "Notifications";
 
 /* Message at the top of the screen displayed when disabling push notifications. Quotes around the content placeholder are managed by the application. */
@@ -373,15 +439,23 @@
 
 /* Title of the button displayed at the end of an onboarding
    Title of the button to validate date settings
-   Title of the button when the user subscribed to all TV and radio shows
    Title of the search settings button to apply settings */
 "OK" = "OK";
+
+/* Label of the button opening system settings */
+"Open system settings" = "Open system settings";
+
+/* User location setting state */
+"Outside Switzerland" = "Outside Switzerland";
 
 /* Label to present the main Videos / Audios views */
 "Overview" = "Overview";
 
-/* Search settings section header */
+/* Search setting */
 "Period" = "Period";
+
+/* Permissions settings section header */
+"Permissions" = "Permissions";
 
 /* Play / Pause shortcut label */
 "Play / Pause" = "Play / Pause";
@@ -389,8 +463,11 @@
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
 
-/* Name of the search setting to filter content playable abroard */
+/* Search setting */
 "Playable abroad" = "Playable abroad";
+
+/* Playback settings section header */
+"Playback" = "Playback";
 
 /* Message displayed when the user is about to log out */
 "Playback history, favorites and content saved for later will be deleted from this Apple TV." = "Playback history, favorites and content saved for later will be deleted from this Apple TV.";
@@ -401,19 +478,29 @@
 /* Most poular shows on Play SRG, displayed in the tvOS top shelf */
 "Popular on Play SRG" = "Popular on Play SWI";
 
+/* Label of the button for poster image format selection
+   Poster image format selection view title */
+"Poster images" = "Poster images";
+
+/* Presenter mode setting label */
+"Presenter mode" = "Presenter mode";
+
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Previous";
+
+/* Server setting name */
+"Production" = "Production";
 
 /* Profile section header
    Profile tab bar title
    Title displayed at the top of the profile view */
 "Profile" = "Profile";
 
-/* Search settings section header */
-"Properties" = "Properties";
-
 /* Text displayed to inform the user she can pull a list to reload it */
 "Pull to reload" = "Pull to refresh";
+
+/* Quality settings section header */
+"Quality" = "Quality";
 
 /* Title label to present main radio livestreams */
 "Radio channels" = "Radio channels";
@@ -427,13 +514,14 @@
 /* Title of the action view to choose a regional radio */
 "Regional radios" = "Regional radios";
 
-/* Sort by relevance option */
+/* Search setting */
 "Relevance" = "Relevance";
 
 /* Short label identifying a replay sport event. Display in uppercase. */
 "Replay" = "Replay";
 
-/* Title of the reset search settings button */
+/* Reset section header
+   Title of the reset search settings button */
 "Reset" = "Reset";
 
 /* Alert choice to resume playback
@@ -444,11 +532,13 @@
 "Resume playback" = "Resume playback";
 
 /* Label to present the search view
-   Search placeholder text
    Search shortcut label
    Search tab bar title
    Search tab title */
 "Search" = "Search";
+
+/* Section wide support setting label */
+"Section wide support" = "Section wide support";
 
 /* Select button title */
 "Select" = "Select";
@@ -459,10 +549,14 @@
 /* Label of the button to send support information by email */
 "Send by email" = "Send by email";
 
+/* Label of the button to access server selection
+   Server selection view title */
+"Server" = "Server";
+
 /* Notification message when the server URL changed due to a custom URL. */
 "Server changed to '%@'" = "Server changed to '%@'";
 
-/* No comment provided by engineer. */
+/* Settings view title */
 "Settings" = "Settings";
 
 /* Context menu action to share a media
@@ -471,9 +565,9 @@
 "Share" = "Share";
 
 /* Program list header in livestream view
+   Search setting
+   Show list view in search settings
    Show search result header
-   Shows search setting option
-   Shows search setting option list view title
    Shows tab title
    Title label used to present radio associated shows
    Title label used to present the radio shows AZ and radio shows by date access buttons
@@ -487,7 +581,10 @@
 "Shows by date" = "Topics by date";
 
 /* Search placeholder text */
-"Shows, topics, and more" = "Shows, topics, and more";
+"Shows, topics and more" = "Topics and more";
+
+/* Label of the button to simulate a memory warning */
+"Simulate memory warning" = "Simulate memory warning";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Skip";
@@ -495,38 +592,45 @@
 /* Short label identifying content which will be available soon. */
 "Soon" = "Soon";
 
-/* Search settings section header */
+/* Search setting */
 "Sort by" = "Sort by";
+
+/* Label of the button to access the source code */
+"Source code" = "Source code";
 
 /* Title label used to present live center medias */
 "Sport" = "Sport";
 
+/* Server setting name */
+"Stage" = "Stage";
+
+/* Standalone playback setting label */
+"Standalone playback" = "Standalone playback";
+
 /* Start over shortcut label */
 "Start over" = "Start over";
 
-/* Title of a subscription button */
-"Subscribe" = "Subscribe";
+/* Subtitle availability setting label */
+"Subtitle availability" = "Subtitle availability";
 
-/* Title of the message displayed when the user is about to subscribe to all shows */
-"Subscribe to all shows?" = "Subscribe to all topics";
-
-/* Message displayed when no notifications have been received */
-"Subscribe to shows you like to be notified when a new episode is available." = "Subscribe to topics you like to be notified when a new content is available.";
-
-/* Message description displayed when the user was subscribed to all TV and radio shows */
-"Subscribed to all TV and radio shows." = "Subscribed to all TV and radio shows.";
-
-/* Message description displayed when subscribing to all TV and radio shows */
-"Subscribing to all TV and radio shows…" = "Subscribing to all TV and radio shows…";
-
-/* Name of the search setting to filter subtitled content */
+/* Search setting */
 "Subtitled" = "Subtitled";
+
+/* Label of the button to access support information
+   Support information alert title */
+"Support information" = "Support information";
 
 /* Information message displayed when support information has been copied to the pasteboard */
 "Support information has been copied to the pasteboard" = "Support information has been copied to the pasteboard";
 
 /* Login benefits description footer */
 "Synchronize playback history, favorites and content saved for later on all devices connected to your account." = "Synchronize playback history, favorites and content saved for later on all devices connected to your account.";
+
+/* Label of the button to display terms and conditions */
+"Terms and conditions" = "Terms and conditions";
+
+/* Server setting name */
+"Test" = "Test";
 
 /* Button label to share the content being played. */
 "The content" = "The video";
@@ -594,22 +698,29 @@
 /* Related content media list title */
 "This might interest you" = "This might interest you";
 
-/* Period setting option */
+/* Advanced features section footer
+   Reset section footer */
+"This section is only available in nightly and beta versions, and won't appear in the production version." = "This section is only available in nightly and beta versions, and won't appear in the production version.";
+
+/* Search setting option */
 "This week" = "This week";
 
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Time-shifted";
 
-/* Period setting option
+/* Quality settings section footer */
+"To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.";
+
+/* Search setting option
    Title of the button to go back to the current date */
 "Today" = "Today";
 
 /* Tonight button in program guide */
 "Tonight" = "Tonight";
 
-/* Categories search setting option
+/* Search setting
    Title label used to present the topic list
-   Topics search setting option list view title */
+   Topic list view in search settings */
 "Topics" = "Topics";
 
 /* Tab title to present the most popular medias by channel on CarPlay */
@@ -628,9 +739,22 @@
 /* Title of the button to update the application */
 "Update" = "Update";
 
+/* Label of the button for user location selection
+   User location selection view title */
+"User location" = "User location";
+
+/* Version label in settings */
+"Version" = "Version";
+
+/* Label of the button to access release notes and download internal builds (App Center) */
+"Versions and release notes" = "Versions and release notes";
+
+/* Background video playback setting section footer */
+"Video playback continues even when you leave the application." = "Video playback continues even when you leave the application.";
+
 /* Header for video search results
+   Search setting option
    Title displayed at the top of the video view
-   Videos option
    Videos tab title */
 "Videos" = "Videos";
 
@@ -660,10 +784,11 @@
 /* Short label identifying a web first content. */
 "Web first" = "Web first";
 
-/* Title displayed at the top of the What's new view */
+/* Label of the button to display what's new information
+   Title displayed at the top of the What's new view */
 "What's new" = "What's new";
 
-/* Period setting option */
+/* Search setting option */
 "Yesterday" = "Yesterday";
 
 /* Resume playback alert explanation */
@@ -675,3 +800,6 @@
 
 /* Notification displayed when the user has been logged out unexpectedly. */
 "You have been automatically logged out. Login again to keep your data synchronized across devices." = "You have been automatically logged out. Login again to keep your data synchronized across devices.";
+
+/* Label of the button to display feedback form */
+"Your feedback" = "Your feedback";

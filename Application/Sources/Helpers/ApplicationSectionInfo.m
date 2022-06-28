@@ -42,7 +42,7 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
                                                               options:options];
 }
 
-+ (ApplicationSectionInfo *)applicationSectionInfoWithNotification:(Notification *)notification
++ (ApplicationSectionInfo *)applicationSectionInfoWithNotification:(UserNotification *)notification
 {
     return [[ApplicationSectionInfo alloc] initWithApplicationSection:ApplicationSectionNotifications
                                                                 title:notification.title
@@ -57,9 +57,9 @@ ApplicationSectionOptionKey const ApplicationSectionOptionShowByDateDateKey = @"
         [sectionInfos addObject:[self applicationSectionInfoWithApplicationSection:ApplicationSectionNotifications radioChannel:nil]];
         
         if (notificationPreview) {
-            NSArray<Notification *> *unreadNotifications = Notification.unreadNotifications;
-            NSArray<Notification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
-            for (Notification *notification in previewNotifications) {
+            NSArray<UserNotification *> *unreadNotifications = UserNotification.unreadNotifications;
+            NSArray<UserNotification *> *previewNotifications = [unreadNotifications subarrayWithRange:NSMakeRange(0, MIN(3, unreadNotifications.count))];
+            for (UserNotification *notification in previewNotifications) {
                 [sectionInfos addObject:[self applicationSectionInfoWithNotification:notification]];
             }
         }

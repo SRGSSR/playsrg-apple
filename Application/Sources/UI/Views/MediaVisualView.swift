@@ -49,10 +49,12 @@ struct MediaVisualView<Content: View>: View {
                 .padding([.bottom, .horizontal], padding)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             
-            ProgressBar(value: model.progress)
-                .opacity(model.progress != 0 ? 1 : 0)
-                .frame(height: LayoutProgressBarHeight)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            if let progress = model.progress {
+                ProgressBar(value: progress)
+                    .opacity(progress != 0 ? 1 : 0)
+                    .frame(height: LayoutProgressBarHeight)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            }
         }
         .onAppear {
             model.media = media
@@ -109,10 +111,10 @@ struct MediaVisualView<Content: View>: View {
 
 // MARK: Extensions
 
-extension MediaVisualView where Content == SwiftUI.EmptyView {
+extension MediaVisualView where Content == EmptyView {
     init(media: SRGMedia?, size: SRGImageSize, contentMode: ImageView.ContentMode = .aspectFit) {
         self.init(media: media, size: size, contentMode: contentMode) { _ in
-            SwiftUI.EmptyView()
+            EmptyView()
         }
     }
 }
