@@ -113,9 +113,6 @@
 /* Show by date short button title */
 "By date" = "Nach Datum";
 
-/* Quality settings section footer */
-"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Standardmässig werden Videos immer in der bestmöglichen Qualität geladen. Um Kosten zu vermeiden, können Sie aber das Abspielen in höchster Qualität (High Definition) in Mobilfunknetzen unterbinden. Sie benötigen dann ein WLAN-Netzwerk, um Videos in HD abzuspielen.";
-
 /* Calendar button in program guide */
 "Calendar" = "Kalender";
 
@@ -364,6 +361,9 @@
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Inhalt noch nicht verfügbar";
+
+/* Autoplay setting section footer */
+"More content is automatically played after playback of the current content ends." = "Nach Beendigung der Wiedergabe des aktuellen Inhalts werden weitere Inhalte automatisch abgespielt.";
 
 /* Button to access more episodes from the media detail view
    Button to access more episodes from the program detail view
@@ -708,6 +708,9 @@
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Zeitversetzt";
 
+/* Quality settings section footer */
+"To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Um Kosten zu vermeiden, können Sie das Abspielen in höchster Qualität (High Definition) in Mobilfunknetzen unterbinden.";
+
 /* Search setting option
    Title of the button to go back to the current date */
 "Today" = "Heute";
@@ -746,6 +749,9 @@
 /* Label of the button to access release notes and download internal builds (App Center) */
 "Versions and release notes" = "Versionen und neue Funktionen";
 
+/* Background video playback setting section footer */
+"Video playback continues even when you leave the application." = "Die Videos werden ohne Unterbrechung im Hintergrund abgespielt.";
+
 /* Header for video search results
    Search setting option
    Title displayed at the top of the video view
@@ -781,12 +787,6 @@
 /* Label of the button to display what's new information
    Title displayed at the top of the What's new view */
 "What's new" = "Neue Funktionen";
-
-/* Autoplay setting section footer */
-"When enabled, more content is automatically played after playback of the current content ends." = "Wenn diese Option aktiviert ist, werden nach Beendigung der Wiedergabe des aktuellen Inhalts automatisch weitere Inhalte abgespielt.";
-
-/* Background video playback setting section footer */
-"When enabled, video playback continues even when you leave the application." = "Die Videos werden ohne Unterbrechung im Hintergrund abgespielt, auch wenn eine andere App geöffnet ist.";
 
 /* Search setting option */
 "Yesterday" = "Gestern";

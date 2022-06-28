@@ -113,9 +113,6 @@
 /* Show by date short button title */
 "By date" = "Tenor data";
 
-/* Quality settings section footer */
-"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Sco standard chargia l'applicaziun il cuntegn en aulta resoluziun. Per evitar custs eventuals supplementars, po questa opziun vegnir deactivada e la meglera qualitad po vegnir guardada mo sur Wi-Fi.";
-
 /* Calendar button in program guide */
 "Calendar" = "Chalender";
 
@@ -364,6 +361,9 @@
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Media betg disponibel";
+
+/* Autoplay setting section footer */
+"More content is automatically played after playback of the current content ends." = "Automaticamein dapli cuntegn suenter playback sche inabel.";
 
 /* Button to access more episodes from the media detail view
    Button to access more episodes from the program detail view
@@ -708,6 +708,9 @@
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Differì";
 
+/* Quality settings section footer */
+"To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Per evitar custs eventuals supplementars, po questa opziun vegnir deactivada e la meglera qualitad po vegnir guardada mo sur Wi-Fi.";
+
 /* Search setting option
    Title of the button to go back to the current date */
 "Today" = "Oz";
@@ -746,6 +749,9 @@
 /* Label of the button to access release notes and download internal builds (App Center) */
 "Versions and release notes" = "Remartgas davart versiuns e publicaziuns";
 
+/* Background video playback setting section footer */
+"Video playback continues even when you leave the application." = "Activà, ed il video marscha vinavant, era sche Vus bandunais l'applicaziun.";
+
 /* Header for video search results
    Search setting option
    Title displayed at the top of the video view
@@ -781,12 +787,6 @@
 /* Label of the button to display what's new information
    Title displayed at the top of the What's new view */
 "What's new" = "Il nov";
-
-/* Autoplay setting section footer */
-"When enabled, more content is automatically played after playback of the current content ends." = "Automaticamein dapli cuntegn suenter playback sche inabel.";
-
-/* Background video playback setting section footer */
-"When enabled, video playback continues even when you leave the application." = "Activà, ed il video marscha vinavant, era sche Vus bandunais l'applicaziun.";
 
 /* Search setting option */
 "Yesterday" = "Ier";

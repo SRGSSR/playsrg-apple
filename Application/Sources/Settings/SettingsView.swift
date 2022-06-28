@@ -125,7 +125,7 @@ struct SettingsView: View {
             } header: {
                 Text(NSLocalizedString("Quality", comment: "Quality settings section header"))
             } footer: {
-                Text(NSLocalizedString("By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.", comment: "Quality settings section footer"))
+                Text(NSLocalizedString("To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks.", comment: "Quality settings section footer"))
             }
         }
     }
@@ -143,7 +143,7 @@ struct SettingsView: View {
             } header: {
                 Text(NSLocalizedString("Playback", comment: "Playback settings section header"))
             } footer: {
-                Text(NSLocalizedString("When enabled, more content is automatically played after playback of the current content ends.", comment: "Autoplay setting section footer"))
+                Text(NSLocalizedString("More content is automatically played after playback of the current content ends.", comment: "Autoplay setting section footer"))
             }
 #if os(iOS)
             PlaySection {
@@ -151,7 +151,7 @@ struct SettingsView: View {
             } header: {
                 EmptyView()
             } footer: {
-                Text(NSLocalizedString("When enabled, video playback continues even when you leave the application.", comment: "Background video playback setting section footer"))
+                Text(NSLocalizedString("Video playback continues even when you leave the application.", comment: "Background video playback setting section footer"))
             }
 #endif
         }

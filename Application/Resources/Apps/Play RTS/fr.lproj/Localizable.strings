@@ -113,9 +113,6 @@
 /* Show by date short button title */
 "By date" = "Par date";
 
-/* Quality settings section footer */
-"By default the application loads high-definition medias over cellular networks. To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Pour éviter les coûts supplémentaires éventuels, cette option peut être désactivée afin que la meilleure qualité ne soit jouée que sur les réseaux Wi-Fi.";
-
 /* Calendar button in program guide */
 "Calendar" = "Calendrier";
 
@@ -364,6 +361,9 @@
 
 /* Message on top screen when trying to open a media in the download list and the media is not downloaded. */
 "Media not available yet" = "Contenu non disponible";
+
+/* Autoplay setting section footer */
+"More content is automatically played after playback of the current content ends." = "Joue automatiquement un autre contenu lorsque la lecture d'un contenu se termine.";
 
 /* Button to access more episodes from the media detail view
    Button to access more episodes from the program detail view
@@ -708,6 +708,9 @@
 /* Introductory text for live content played with timeshift, displayed on the mini player */
 "Time-shifted" = "Différé";
 
+/* Quality settings section footer */
+"To avoid possible extra costs this option can be disabled to have the highest quality played only on Wi-Fi networks." = "Pour éviter des coûts supplémentaires, cette option peut être désactivée afin que la meilleure qualité ne soit jouée que sur les réseaux Wi-Fi.";
+
 /* Search setting option
    Title of the button to go back to the current date */
 "Today" = "Aujourd'hui";
@@ -746,6 +749,9 @@
 /* Label of the button to access release notes and download internal builds (App Center) */
 "Versions and release notes" = "Versions et notes de mise à jour";
 
+/* Background video playback setting section footer */
+"Video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";
+
 /* Header for video search results
    Search setting option
    Title displayed at the top of the video view
@@ -781,12 +787,6 @@
 /* Label of the button to display what's new information
    Title displayed at the top of the What's new view */
 "What's new" = "Nouveautés";
-
-/* Autoplay setting section footer */
-"When enabled, more content is automatically played after playback of the current content ends." = "Joue automatiquement un autre contenu lorsque la lecture d'un contenu se termine.";
-
-/* Background video playback setting section footer */
-"When enabled, video playback continues even when you leave the application." = "Autorise la lecture vidéo à se poursuivre même quand vous sortez de l'application.";
 
 /* Search setting option */
 "Yesterday" = "Hier";
