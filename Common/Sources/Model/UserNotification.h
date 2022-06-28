@@ -6,6 +6,7 @@
 
 @import Foundation;
 @import Mantle;
+@import SRGDataProviderModel;
 @import UserNotifications;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -83,9 +84,9 @@ OBJC_EXPORT NSString * _Nullable UserNotificationTypeString(UserNotificationType
 @property (nonatomic, readonly, copy) NSString *body;
 
 /**
- *  The URL of the image associated with the notification, if any.
+ *  The image associated with the notification, if any.
  */
-@property (nonatomic, readonly, nullable) NSURL *imageURL;
+@property (nonatomic, readonly, nullable) SRGImage *image;
 
 /**
  *  The date at which the notification was sent.

@@ -198,6 +198,11 @@ static NSString *NotificationDescriptionForType(UserNotificationType notificatio
     return dictionary.copy;
 }
 
+- (SRGImage *)image
+{
+    return [SRGImage imageWithURL:self.imageURL variant:SRGImageVariantDefault];
+}
+
 #pragma mark MTLJSONSerializing protocol
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey

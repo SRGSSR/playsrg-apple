@@ -15,8 +15,7 @@ struct NotificationCell: View {
     @Environment(\.isSelected) private var isSelected
     
     private var imageUrl: URL? {
-        guard let image = SRGImage(url: notification.imageURL, variant: .default) else { return nil }
-        return url(for: image, size: .small)
+        return url(for: notification.image, size: .small)
     }
     
     var body: some View {
