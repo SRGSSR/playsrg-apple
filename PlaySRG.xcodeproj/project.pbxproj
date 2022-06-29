@@ -37,6 +37,16 @@
 		04D5478D27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
 		04D5478F27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
 		04D5479127C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F920286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F921286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F922286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F923286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04D5F928286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04E4DEEB283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEEC283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEED283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
@@ -2645,6 +2655,7 @@
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
+		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -5011,6 +5022,7 @@
 				6FF65C5F283617DC00AF0768 /* OnboardingPage.swift */,
 				6FDF08D1218B126700B2AF2C /* Recommendation.h */,
 				6FDF08C6218B126700B2AF2C /* Recommendation.m */,
+				04D5F91E286C4542000A5A4E /* Recommendation.swift */,
 				04E4DEEA283678C900698BF8 /* ServiceMessage.swift */,
 				6FDF08D4218B126700B2AF2C /* UpdateInfo.h */,
 				6FDF08CD218B126700B2AF2C /* UpdateInfo.m */,
@@ -8312,6 +8324,7 @@
 				6FAE561C26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6F30AB9C2604B66600457331 /* TopicCell.swift in Sources */,
 				6F16C7A326025698006F685A /* PageViewController.swift in Sources */,
+				04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FA5D15D1F2077B10059E4E2 /* NSString+PlaySRG.m in Sources */,
 				6F40B7792726CB8300DDFED0 /* SearchBar.swift in Sources */,
 				6F475FCD1EB37BC6003021EA /* NavigationController.m in Sources */,
@@ -8464,6 +8477,7 @@
 				6F23631A2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F54D40026051035008B46FF /* MediaDescription.swift in Sources */,
 				E6971AEE1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
+				04D5F920286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FD1EF4E2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66C27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				6FDF08F1218B126700B2AF2C /* UpdateInfo.m in Sources */,
@@ -8710,6 +8724,7 @@
 				6F23631B2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F47608B1EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40226051036008B46FF /* MediaDescription.swift in Sources */,
+				04D5F921286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FD1EF4F2861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66D27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				E6971AEF1D4B300C008CA703 /* PlayApplicationError.m in Sources */,
@@ -8956,6 +8971,7 @@
 				6F23631C2833D57F00A1127C /* MailComposeView.swift in Sources */,
 				6F4760921EB37DF1003021EA /* UIViewController+PlaySRG.m in Sources */,
 				6F54D40426051036008B46FF /* MediaDescription.swift in Sources */,
+				04D5F922286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FD1EF502861C35400BCBF19 /* SearchSettingsViewModel.swift in Sources */,
 				6F80F66E27187AFC00867C3B /* CarPlayNowPlayingController.swift in Sources */,
 				E6971AF01D4B300C008CA703 /* PlayApplicationError.m in Sources */,
@@ -9139,6 +9155,7 @@
 				6FD4C2DA268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6FF65C64283617DC00AF0768 /* OnboardingPage.swift in Sources */,
 				6F4760941EB37DF2003021EA /* UIColor+PlaySRG.m in Sources */,
+				04D5F923286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6F475FC71EB37BC6003021EA /* ListRequestViewController.m in Sources */,
 				6F1A77872643CAB600A00EFC /* EmptyContentView.swift in Sources */,
 				6FD633EE1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
@@ -9478,6 +9495,7 @@
 				6FD1EF472861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C63F271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
+				04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F762719C5650082CAE9 /* ProgramCellViewModel.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
@@ -9625,6 +9643,7 @@
 				6FD1EF482861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C640271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
+				04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F772719C5670082CAE9 /* ProgramCellViewModel.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
@@ -9772,6 +9791,7 @@
 				6FD1EF492861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C641271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
+				04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F782719C5680082CAE9 /* ProgramCellViewModel.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
@@ -9919,6 +9939,7 @@
 				6FD1EF4A2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F73C642271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
+				04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F792719C5690082CAE9 /* ProgramCellViewModel.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
@@ -10109,6 +10130,7 @@
 				6FD1EF4B2861A3C500BCBF19 /* PlayNavigationView.swift in Sources */,
 				6F5AA59B25024C4B00718420 /* UIImage+PlaySRG.m in Sources */,
 				6F6B5BE925E640C600F549E7 /* NSArray+PlaySRG.m in Sources */,
+				04D5F928286C4542000A5A4E /* Recommendation.swift in Sources */,
 				0866967E273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6F85F8082567ED3E00AC8286 /* SRGProgram+PlaySRG.m in Sources */,
 				6FA8E4FB261CAC4F003FFDCF /* Layout.m in Sources */,

@@ -24,10 +24,10 @@ final class MediaDetailViewModel: ObservableObject {
                 }
                 return Publishers.CombineLatest(UserDataPublishers.laterAllowedActionPublisher(for: media),
                                                 Self.relatedMediasPublisher(for: media, from: self.mediaData))
-                    .map { action, relatedMedias in
-                        return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
-                    }
-                    .eraseToAnyPublisher()
+                .map { action, relatedMedias in
+                    return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
+                }
+                .eraseToAnyPublisher()
             }
             .switchToLatest()
             .receive(on: DispatchQueue.main)
@@ -75,14 +75,10 @@ final class MediaDetailViewModel: ObservableObject {
 
 extension MediaDetailViewModel {
     private static func relatedMediasPublisher(for media: SRGMedia?, from mediaData: MediaData) -> AnyPublisher<[SRGMedia], Never> {
-        guard let media = media, media.contentType != .livestream,
-              !mediaData.relatedMedias.contains(media) else {
+        guard let media = media, media.contentType != .livestream, !mediaData.relatedMedias.contains(media) else {
             return Just(mediaData.relatedMedias).eraseToAnyPublisher()
         }
-        let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
-        let url = URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: middlewareUrl)!
-        
-        return URLSession.shared.dataTaskPublisher(for: url)
+        return URLSession.shared.dataTaskPublisher(for: ApplicationConfiguration.shared.relatedContentUrl(for: media))
             .map(\.data)
             .decode(type: Recommendation.self, decoder: JSONDecoder())
             .map { recommendation in
@@ -97,18 +93,11 @@ extension MediaDetailViewModel {
 // MARK: Types
 
 extension MediaDetailViewModel {
-    /// Data related to the media stored by the model
     private struct MediaData {
         let media: SRGMedia?
         let watchLaterAllowedAction: WatchLaterAction
         let relatedMedias: [SRGMedia]
         
         static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
-    }
-    
-    /// Middleware recommendation object
-    struct Recommendation: Codable {
-        let recommendationId: String
-        let urns: [String]
     }
 }
