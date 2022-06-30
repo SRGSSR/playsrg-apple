@@ -114,6 +114,46 @@ struct ImageView: View {
         }
     }
     
+    /**
+     * Calculate the offset to apply so that the focal point P approaches the center C of the target frame as close as
+     * possible while ensuring the resized filling image entirely covers the target frame.
+     *
+     *    ┌─────────────────┬─────────────────────────────────────────┬────────────────────┐
+     *    │                 │                                         │                    │
+     *    │                 │  Target frame                           │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │            P       │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                    C                    │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    └─────────────────┴─────────────────────────────────────────┴────────────────────┘
+     *
+     *                                                                     Resized frame
+     */
+    private static func offset(forFocalPoint focalPoint: CGPoint, targetSize: CGSize, fillSize: CGSize) -> CGSize {
+        let margins = CGSize(
+            width: (fillSize.width - targetSize.width) / 2,
+            height: (fillSize.height - targetSize.height) / 2
+        )
+        return CGSize(
+            width: (focalPoint.x - fillSize.width / 2).clamped(to: -margins.width...margins.width),
+            height: (focalPoint.y - fillSize.height / 2).clamped(to: -margins.height...margins.height)
+        )
+    }
+    
     init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFit) {
         self.source = source
         self.contentMode = contentMode
@@ -155,22 +195,13 @@ struct ImageView: View {
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
                     case let .aspectFillFocused(relativeWidth: relativeWidth, relativeHeight: relativeHeight):
                         let fillSize = Self.fillSize(for: imageContainer, in: geometry)
-                        let margins = CGSize(
-                            width: (fillSize.width - geometry.size.width) / 2,
-                            height: (fillSize.height - geometry.size.height) / 2
-                        )
-                        let focusPoint = CGSize(
-                            width: fillSize.width * relativeWidth,
-                            height: fillSize.height * relativeHeight
-                        )
+                        let targetSize = geometry.size
+                        let focalPoint = CGPoint(x: fillSize.width * relativeWidth, y: fillSize.height * relativeHeight)
                         image
                             .resizingMode(.fill)
                             .frame(size: fillSize)
-                            .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
-                            .offset(CGSize(
-                                width: (focusPoint.width - fillSize.width / 2).clamped(to: -margins.width...margins.width),
-                                height: (focusPoint.height - fillSize.height / 2).clamped(to: -margins.height...margins.height)
-                            ))
+                            .frame(size: targetSize, alignment: Self.alignment(for: contentMode))
+                            .offset(Self.offset(forFocalPoint: focalPoint, targetSize: targetSize, fillSize: fillSize))
                     }
                 }
                 else {
