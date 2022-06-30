@@ -55,7 +55,7 @@ struct HighlightCell: View {
         
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = highlight.imageFocalPoint {
-                return .aspectFillFocused(CGSize(width: focalPoint.widthPercentage, height: focalPoint.heightPercentage))
+                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             }
             else {
                 return .aspectFillRight

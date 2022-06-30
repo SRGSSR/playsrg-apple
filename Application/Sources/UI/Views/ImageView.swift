@@ -49,7 +49,7 @@ struct ImageView: View {
         case aspectFillTopRight
         case aspectFillBottomLeft
         case aspectFillBottomRight
-        case aspectFillFocused(CGSize)
+        case aspectFillFocused(relativeWidth: CGFloat, relativeHeight: CGFloat)
     }
     
     let source: ImageRequestConvertible?
@@ -153,12 +153,24 @@ struct ImageView: View {
                             .resizingMode(.fill)
                             .frame(size: Self.fillSize(for: imageContainer, in: geometry))
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
-                    case let .aspectFillFocused(point):
-                        // TODO: Implement using point
+                    case let .aspectFillFocused(relativeWidth: relativeWidth, relativeHeight: relativeHeight):
+                        let fillSize = Self.fillSize(for: imageContainer, in: geometry)
+                        let margins = CGSize(
+                            width: (fillSize.width - geometry.size.width) / 2,
+                            height: (fillSize.height - geometry.size.height) / 2
+                        )
+                        let focusPoint = CGSize(
+                            width: fillSize.width * relativeWidth,
+                            height: fillSize.height * relativeHeight
+                        )
                         image
                             .resizingMode(.fill)
-                            .frame(size: Self.fillSize(for: imageContainer, in: geometry))
+                            .frame(size: fillSize)
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                            .offset(CGSize(
+                                width: (focusPoint.width - fillSize.width / 2).clamped(to: -margins.width...margins.width),
+                                height: (focusPoint.height - fillSize.height / 2).clamped(to: -margins.height...margins.height)
+                            ))
                     }
                 }
                 else {

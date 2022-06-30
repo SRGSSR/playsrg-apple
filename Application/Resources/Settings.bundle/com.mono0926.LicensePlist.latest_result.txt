@@ -149,11 +149,11 @@ name: nanopb, nameSpecified: nanopb, owner: firebase, version: 2.30909.0, source
 
 name: Nuke, nameSpecified: nuke, owner: kean, version: 10.11.2, source: https://github.com/kean/Nuke
 
-name: NukeUI, nameSpecified: nukeui, owner: kean, version: 0.8.2, source: https://github.com/kean/NukeUI
+name: NukeUI, nameSpecified: nukeui, owner: kean, version: 0.8.3, source: https://github.com/kean/NukeUI
 
 name: paper-onboarding, nameSpecified: paper-onboarding, owner: Ramotion, version: 6.1.5, source: https://github.com/Ramotion/paper-onboarding
 
-name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.10.1, source: https://github.com/microsoft/PLCrashReporter
+name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.10.2, source: https://github.com/microsoft/PLCrashReporter
 
 name: promises, nameSpecified: promises, owner: google, version: 2.1.1, source: https://github.com/google/promises
 

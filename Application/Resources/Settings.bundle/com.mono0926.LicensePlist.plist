@@ -230,7 +230,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/NukeUI</string>
 			<key>Title</key>
-			<string>nukeui (0.8.2)</string>
+			<string>nukeui (0.8.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -246,7 +246,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/PLCrashReporter</string>
 			<key>Title</key>
-			<string>plcrashreporter (1.10.1)</string>
+			<string>plcrashreporter (1.10.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
