@@ -81,10 +81,10 @@
 "Always visible when VoiceOver is active." = "Immer sichtbar wenn VoiceOver aktiviert ist.";
 
 /* Search setting option */
-"Any" = "Any";
+"Any" = "Alle";
 
 /* Search setting option */
-"Anytime" = "Anytime";
+"Anytime" = "Alle";
 
 /* Audio description availability setting label */
 "Audio description availability" = "Audiodeskription verfügbar";
@@ -154,7 +154,7 @@
 "Default (current configuration)" = "Standard (aktuelle Konfiguration)";
 
 /* User location setting state */
-"Default (IP-based location)" = "Default (IP-based location)";
+"Default (IP-based location)" = "Standard (IP-basierter Standort)";
 
 /* Title of a delete button
    Title of the confirmation pop-up displayed when the user is about to delete items
@@ -281,7 +281,7 @@
 "Ignore" = "Ignorieren";
 
 /* User location setting state */
-"Ignore location" = "Ignore location";
+"Ignore location" = "Standort ignorieren";
 
 /* Image copyright introductory label */
 "Image credit: %@" = "Bild: %@";
@@ -446,7 +446,7 @@
 "Open system settings" = "Einstellungen anzeigen";
 
 /* User location setting state */
-"Outside Switzerland" = "Outside Switzerland";
+"Outside Switzerland" = "Ausserhalb der Schweiz";
 
 /* Label to present the main Videos / Audios views */
 "Overview" = "Startseite";
@@ -581,7 +581,7 @@
 "Shows by date" = "Sendungen nach Datum";
 
 /* Search placeholder text */
-"Shows, topics and more" = "Shows, topics and more";
+"Shows, topics and more" = "Sendungen, Kategorien und mehr";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Speicherwarnung simulieren";
@@ -605,7 +605,7 @@
 "Stage" = "Stage";
 
 /* Standalone playback setting label */
-"Standalone playback" = "Standalone playback";
+"Standalone playback" = "Eigenständige Wiedergabe";
 
 /* Start over shortcut label */
 "Start over" = "Von vorne beginnen";
@@ -741,7 +741,7 @@
 
 /* Label of the button for user location selection
    User location selection view title */
-"User location" = "User location";
+"User location" = "Standort des Benutzers";
 
 /* Version label in settings */
 "Version" = "Version";

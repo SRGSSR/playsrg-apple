@@ -14,7 +14,7 @@
 "%@ views" = "%@ vis";
 
 /* Number of results aggregated in search */
-"%@ results" = "%@ results";
+"%@ results" = "%@ resultasts";
 
 /* Show A-Z button label */
 "A to Z shows" = "Emissiuns dad A fin Z";
@@ -57,7 +57,7 @@
 "Disable notifications for show" = "Deactivar las notificaziuns per mussar";
 
 /* Label of the search bar button to close the keyboard */
-"Dismiss keyboard" = "Dismiss keyboard";
+"Dismiss keyboard" = "Serrar tastatura";
 
 /* Button to display the TV guide as a grid */
 "Display grid" = "Visualisaziun sco giatter";

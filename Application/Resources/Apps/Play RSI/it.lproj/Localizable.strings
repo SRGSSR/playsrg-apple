@@ -81,10 +81,10 @@
 "Always visible when VoiceOver is active." = "Sempre visibile con VoiceOver attivo.";
 
 /* Search setting option */
-"Any" = "Any";
+"Any" = "Tutte";
 
 /* Search setting option */
-"Anytime" = "Anytime";
+"Anytime" = "Tutti";
 
 /* Audio description availability setting label */
 "Audio description availability" = "Audiodescrizione disponibile";
@@ -196,7 +196,7 @@
 "Disable" = "Disattivare";
 
 /* Display settings section header */
-"Display" = "Display";
+"Display" = "Mostrare";
 
 /* User activity title when displaying a show page */
 "Display %@ episodes" = "Mostra le puntate di %@";
@@ -581,7 +581,7 @@
 "Shows by date" = "Programmi per data";
 
 /* Search placeholder text */
-"Shows, topics and more" = "Shows, topics and more";
+"Shows, topics and more" = "Programmi, temi e altro";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simulare l'avviso di memoria";

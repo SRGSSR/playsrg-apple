@@ -14,7 +14,7 @@
 "%@ views" = "%@ visualizzazioni";
 
 /* Number of results aggregated in search */
-"%@ results" = "%@ results";
+"%@ results" = "%@ risultati";
 
 /* Show A-Z button label */
 "A to Z shows" = "Programmi dalla A alla Z";
@@ -57,7 +57,7 @@
 "Disable notifications for show" = "Disattivare le notifiche per il programma";
 
 /* Label of the search bar button to close the keyboard */
-"Dismiss keyboard" = "Dismiss keyboard";
+"Dismiss keyboard" = "Chiudere la tastiera";
 
 /* Button to display the TV guide as a grid */
 "Display grid" = "Visualizzazione a griglia";
