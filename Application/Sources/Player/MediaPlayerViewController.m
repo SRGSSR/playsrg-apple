@@ -2134,7 +2134,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (IBAction)openRadioHome:(id)sender
 {
     NSString *channelUid = [self channelUid];
-    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioChannelForUid:channelUid];
+    RadioChannel *radioChannel = [[ApplicationConfiguration sharedApplicationConfiguration] radioHomepageChannelForUid:channelUid];
     if (! radioChannel) {
         return;
     }
