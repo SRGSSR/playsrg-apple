@@ -261,7 +261,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)openHomeWithChannelUid:(NSString *)channelUid completionBlock:(void (^)(void))completionBlock
 {
-    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioChannelForUid:channelUid];
+    RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioHomepageChannelForUid:channelUid];
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:completionBlock];
 }
