@@ -293,8 +293,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "branch" : "develop",
-        "revision" : "ef606a5644fa504c58df1254717e6a700764a6e1"
+        "branch" : "feature/focal-point",
+        "revision" : "02b41737c23e8c4a135b6456aea291b18663da78"
       }
     },
     {
