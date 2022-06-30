@@ -115,8 +115,8 @@ struct ImageView: View {
     }
     
     /**
-     * Calculate the offset to apply so that the focal point P approaches the center C of the target frame as close as
-     * possible while ensuring the resized filling image entirely covers the target frame.
+     *  Calculate the offset to apply so that the focal point P approaches the center C of the target frame as close as
+     *  possible while ensuring the resized filling image entirely covers the target frame.
      *
      *    ┌─────────────────┬─────────────────────────────────────────┬────────────────────┐
      *    │                 │                                         │                    │
@@ -149,7 +149,7 @@ struct ImageView: View {
             height: (fillSize.height - targetSize.height) / 2
         )
         return CGSize(
-            width: (focalPoint.x - fillSize.width / 2).clamped(to: -margins.width...margins.width),
+            width: -(focalPoint.x - fillSize.width / 2).clamped(to: -margins.width...margins.width),
             height: (focalPoint.y - fillSize.height / 2).clamped(to: -margins.height...margins.height)
         )
     }
