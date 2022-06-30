@@ -40,9 +40,18 @@ struct HeroMediaCell: View {
         let media: SRGMedia?
         let label: String?
         
+        private var contentMode: ImageView.ContentMode {
+            if let focalPoint = media?.imageFocalPoint {
+                return .aspectFillFocused(CGSize(width: focalPoint.widthPercentage, height: focalPoint.heightPercentage))
+            }
+            else {
+                return .aspectFillTop
+            }
+        }
+        
         var body: some View {
             ZStack {
-                MediaVisualView(media: media, size: .large, contentMode: .aspectFillTop) { media in
+                MediaVisualView(media: media, size: .large, contentMode: contentMode) { media in
                     if media != nil {
                         LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.7)]), startPoint: .center, endPoint: .bottom)
                     }

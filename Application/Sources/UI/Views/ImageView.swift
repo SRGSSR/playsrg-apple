@@ -49,6 +49,7 @@ struct ImageView: View {
         case aspectFillTopRight
         case aspectFillBottomLeft
         case aspectFillBottomRight
+        case aspectFillFocused(CGSize)
     }
     
     let source: ImageRequestConvertible?
@@ -56,7 +57,7 @@ struct ImageView: View {
     
     private static func alignment(for contentMode: ImageView.ContentMode) -> Alignment {
         switch contentMode {
-        case .aspectFit, .aspectFill, .center, .fill:
+        case .aspectFit, .aspectFill, .center, .fill, .aspectFillFocused:
             return .center
         case .top, .aspectFitTop, .aspectFillTop:
             return .top
@@ -152,6 +153,16 @@ struct ImageView: View {
                             .resizingMode(.fill)
                             .frame(size: Self.fillSize(for: imageContainer, in: geometry))
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                    case let .aspectFillFocused(point):
+                        let fillSize = Self.fillSize(for: imageContainer, in: geometry)
+                        image
+                            .resizingMode(.fill)
+                            .frame(size: fillSize)
+                            .frame(size: geometry.size, alignment: .bottomLeading)
+                            .offset(CGSize(
+                                width: (geometry.size.width - fillSize.width) * point.width / 100,
+                                height: (geometry.size.height - fillSize.height) * point.height / 100
+                            ))
                     }
                 }
                 else {
