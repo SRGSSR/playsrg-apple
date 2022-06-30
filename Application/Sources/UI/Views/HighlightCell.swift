@@ -78,7 +78,7 @@ struct HighlightCell: View {
                 }
                 else {
                     ZStack(alignment: .leading) {
-                        ImageView(source: imageUrl, contentMode: .aspectFill)
+                        ImageView(source: imageUrl, contentMode: contentMode)
                         LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
                         DescriptionView(highlight: highlight)
                             .padding(.horizontal, 60)

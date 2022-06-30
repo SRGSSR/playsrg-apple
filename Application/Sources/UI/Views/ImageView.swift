@@ -154,15 +154,11 @@ struct ImageView: View {
                             .frame(size: Self.fillSize(for: imageContainer, in: geometry))
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
                     case let .aspectFillFocused(point):
-                        let fillSize = Self.fillSize(for: imageContainer, in: geometry)
+                        // TODO: Implement using point
                         image
                             .resizingMode(.fill)
-                            .frame(size: fillSize)
-                            .frame(size: geometry.size, alignment: .bottomLeading)
-                            .offset(CGSize(
-                                width: (geometry.size.width - fillSize.width) * point.width / 100,
-                                height: (geometry.size.height - fillSize.height) * point.height / 100
-                            ))
+                            .frame(size: Self.fillSize(for: imageContainer, in: geometry))
+                            .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
                     }
                 }
                 else {

@@ -37,10 +37,33 @@ struct Mock {
         return mockObject(kind.rawValue, type: SRGContentSection.self)
     }
     
+    enum FocalPoint: String {
+        case none
+        case left
+        case right
+        case top
+        case bottom
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+    }
+    
+    static func focalPoint(_ kind: FocalPoint = .none) -> SRGFocalPoint? {
+        switch kind {
+        case .none:
+            return nil
+        default:
+            return mockObject(kind.rawValue, type: SRGFocalPoint.self)
+        }
+    }
+    
     enum Highlight {
         case standard
         case overflow
         case short
+        case topLeftAligned
+        case bottomRightAligned
     }
     
     static func highlight(_ kind: Highlight = .standard) -> PlaySRG.Highlight {
@@ -65,6 +88,20 @@ struct Mock {
                 summary: "Description",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/b75b85ed-5fbd-4f1f-983b-80ac0d92764b.jpeg"), variant: .default),
                 imageFocalPoint: nil
+            )
+        case .topLeftAligned:
+            return PlaySRG.Highlight(
+                title: "Top left",
+                summary: "Summary",
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: Mock.focalPoint(.topLeft)
+            )
+        case .bottomRightAligned:
+            return PlaySRG.Highlight(
+                title: "Bottom right",
+                summary: "Summary",
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: Mock.focalPoint(.bottomRight)
             )
         }
     }
