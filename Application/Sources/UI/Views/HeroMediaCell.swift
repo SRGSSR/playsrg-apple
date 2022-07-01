@@ -42,19 +42,23 @@ struct HeroMediaCell: View {
         
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
+        private var largeWidthContentMode: ImageView.ContentMode {
+            return .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
+        }
+        
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = media?.imageFocalPoint {
                 return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             }
             else {
 #if os(tvOS)
-                return .aspectFillTop
+                return largeWidthContentMode
 #else
                 if horizontalSizeClass == .compact {
                     return .aspectFillTop
                 }
                 else {
-                    return .aspectFill
+                    return largeWidthContentMode
                 }
 #endif
             }
