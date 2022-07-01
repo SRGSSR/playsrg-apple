@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -6657,6 +6657,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		0806E7A31D4BA494002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6667,10 +6668,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A41D4BA4BA002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6681,10 +6683,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A51D4BA4CF002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6695,10 +6698,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A61D4BA4DF002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6709,10 +6713,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A71D4BA4ED002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6727,6 +6732,7 @@
 		};
 		085F7DC71FA4DD510010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6737,10 +6743,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DC81FA4E6570010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6751,10 +6758,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DC91FA4E6670010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6765,10 +6773,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DCA1FA4E67B0010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6779,10 +6788,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DCB1FA4E6890010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6797,6 +6807,7 @@
 		};
 		08A1C3BF2636E77900276A5E /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6815,6 +6826,7 @@
 		};
 		08AD6C6E266BDC5000FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6833,6 +6845,7 @@
 		};
 		08AD6C6F266BDC6D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6851,6 +6864,7 @@
 		};
 		08AD6C70266BDC7B00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6869,6 +6883,7 @@
 		};
 		08AD6C71266BDC8D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6887,6 +6902,7 @@
 		};
 		08AD6C72266BDCA100FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6905,6 +6921,7 @@
 		};
 		08AD6C73266BDCBB00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6923,6 +6940,7 @@
 		};
 		08AD6C74266BDCC800FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6941,6 +6959,7 @@
 		};
 		08AD6C75266BDCD400FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6959,6 +6978,7 @@
 		};
 		08AD6C76266BDCDE00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6977,6 +6997,7 @@
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6991,6 +7012,7 @@
 		};
 		08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7005,6 +7027,7 @@
 		};
 		08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7015,10 +7038,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7029,10 +7053,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7043,10 +7068,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B836941FBDBEAB00D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7057,10 +7083,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836951FBDC07100D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7075,6 +7102,7 @@
 		};
 		08B836961FBDC08400D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7085,10 +7113,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836971FBDC09500D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7103,6 +7132,7 @@
 		};
 		08B836981FBDC0A100D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7113,10 +7143,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08C13555256B2746002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7135,6 +7166,7 @@
 		};
 		08C13557256B277B002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7153,6 +7185,7 @@
 		};
 		08C13558256B27AC002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7171,6 +7204,7 @@
 		};
 		08C1356D256B28C0002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7189,6 +7223,7 @@
 		};
 		08C1356E256B28C7002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7207,6 +7242,7 @@
 		};
 		08C1356F256B28CF002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7225,6 +7261,7 @@
 		};
 		08C13570256B28D7002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7243,6 +7280,7 @@
 		};
 		08C13571256B291D002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7261,6 +7299,7 @@
 		};
 		08C13572256B2922002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7279,6 +7318,7 @@
 		};
 		08C13573256B2927002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7297,6 +7337,7 @@
 		};
 		08C13574256B292C002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7315,6 +7356,7 @@
 		};
 		08C13575256B2977002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7333,6 +7375,7 @@
 		};
 		08C13576256B297E002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7351,6 +7394,7 @@
 		};
 		08C13577256B2983002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7369,6 +7413,7 @@
 		};
 		08C13578256B2989002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7489,6 +7534,7 @@
 		};
 		6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7507,6 +7553,7 @@
 		};
 		6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7525,6 +7572,7 @@
 		};
 		6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7543,6 +7591,7 @@
 		};
 		6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7561,6 +7610,7 @@
 		};
 		6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7579,6 +7629,7 @@
 		};
 		6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7593,6 +7644,7 @@
 		};
 		6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7607,6 +7659,7 @@
 		};
 		6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7621,6 +7674,7 @@
 		};
 		6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7635,6 +7689,7 @@
 		};
 		6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7649,6 +7704,7 @@
 		};
 		6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7667,6 +7723,7 @@
 		};
 		6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7685,6 +7742,7 @@
 		};
 		6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7703,6 +7761,7 @@
 		};
 		6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7721,6 +7780,7 @@
 		};
 		6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7739,6 +7799,7 @@
 		};
 		6F5E54992521E3C7004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7757,6 +7818,7 @@
 		};
 		6F5E549A2521E3D0004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7775,6 +7837,7 @@
 		};
 		6F5E549B2521E3D6004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7793,6 +7856,7 @@
 		};
 		6F5E549C2521E3DE004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7811,6 +7875,7 @@
 		};
 		6F5E549D2521E3E7004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7829,6 +7894,7 @@
 		};
 		6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7843,6 +7909,7 @@
 		};
 		6FE3C7C21F74EC5C00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7857,6 +7924,7 @@
 		};
 		6FE3C7C31F74EEA500D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7871,6 +7939,7 @@
 		};
 		6FE3C7C41F74EEBE00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7885,6 +7954,7 @@
 		};
 		6FE3C7C61F74EECF00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7899,6 +7969,7 @@
 		};
 		6FE3C7C71F74EEDB00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7913,6 +7984,7 @@
 		};
 		6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7931,6 +8003,7 @@
 		};
 		6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7949,6 +8022,7 @@
 		};
 		6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7967,6 +8041,7 @@
 		};
 		6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7985,6 +8060,7 @@
 		};
 		6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
