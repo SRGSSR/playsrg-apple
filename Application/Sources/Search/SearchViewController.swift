@@ -144,6 +144,10 @@ final class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        if #available(iOS 16, *) {
+            navigationItem.preferredSearchBarPlacement = .stacked
+        }
+        
         self.searchController = searchController
         
         let searchBar = searchController.searchBar
