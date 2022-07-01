@@ -42,7 +42,7 @@ struct HeroMediaCell: View {
         
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
-        private var largeWidthContentMode: ImageView.ContentMode {
+        private var regularWidthContentMode: ImageView.ContentMode {
             return .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
         }
         
@@ -52,13 +52,13 @@ struct HeroMediaCell: View {
             }
             else {
 #if os(tvOS)
-                return largeWidthContentMode
+                return regularWidthContentMode
 #else
                 if horizontalSizeClass == .compact {
                     return .aspectFillTop
                 }
                 else {
-                    return largeWidthContentMode
+                    return regularWidthContentMode
                 }
 #endif
             }
