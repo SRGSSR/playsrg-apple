@@ -199,7 +199,7 @@ private extension MediaPlayerViewController {
         case .fullHeight:
             panel.configuration.mode = .expanded
         default:
-            ()
+            break
         }
     }
 }
@@ -271,7 +271,7 @@ extension MediaPlayerViewController: PanelAccessibilityDelegate {
         case .expanded, .fullHeight:
             panel.configuration.mode = .compact
         default:
-            ()
+            break
         }
         return true
     }

@@ -473,7 +473,7 @@ private extension Content {
             case .continueWatching:
                 Content.removeFromHistory(items)
             default:
-                ()
+                break
             }
         }
         
@@ -906,7 +906,7 @@ private extension Content {
                 Content.removeFromNotifications(items)
 #endif
             default:
-                ()
+                break
             }
         }
     }
