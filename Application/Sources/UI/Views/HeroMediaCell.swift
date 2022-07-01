@@ -40,12 +40,23 @@ struct HeroMediaCell: View {
         let media: SRGMedia?
         let label: String?
         
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
+        
         private var contentMode: ImageView.ContentMode {
             if let focalPoint = media?.imageFocalPoint {
                 return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             }
             else {
+#if os(tvOS)
                 return .aspectFillTop
+#else
+                if horizontalSizeClass == .compact {
+                    return .aspectFillTop
+                }
+                else {
+                    return .aspectFill
+                }
+#endif
             }
         }
         
@@ -124,7 +135,7 @@ enum HeroMediaCellSize {
 #if os(tvOS)
         let height: CGFloat = 700
 #else
-        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 1 / 2
+        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 2 / 5
         let height = layoutWidth * aspectRatio
 #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
