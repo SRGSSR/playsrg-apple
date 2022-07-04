@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "cf31f8c232ede66546e2a68f53fc97e684daeb8a",
-        "version" : "16.7.0"
+        "revision" : "c676b974f01773edd34449fafbcb84ea11fe4743",
+        "version" : "16.8.0"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "feature/focal-point",
-        "revision" : "30be7283cf5596a5103027b740b0f14c43049c82"
+        "revision" : "8614855311254b9c8915a84eb4aa95e172c42d1a"
       }
     },
     {
