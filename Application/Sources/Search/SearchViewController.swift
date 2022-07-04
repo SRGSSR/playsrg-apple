@@ -412,28 +412,16 @@ extension SearchViewController: UICollectionViewDelegate {
         switch item {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.value = media.urn
-            labels.type = AnalyticsType.actionPlayMedia.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchOpen.rawValue, labels: labels)
         case let .show(show):
             guard let navigationController = navigationController else { return }
-            
             let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.value = show.urn
-            labels.type = AnalyticsType.actionDisplayShow.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchTeaserOpen.rawValue, labels: labels)
             
             SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
                 .sink { _ in } receiveValue: { _ in }
                 .store(in: &cancellables)
         case let .topic(topic):
             guard let navigationController = navigationController else { return }
-            
             let topicViewController = PageViewController.topicViewController(for: topic)
             navigationController.pushViewController(topicViewController, animated: true)
         case .loading:
