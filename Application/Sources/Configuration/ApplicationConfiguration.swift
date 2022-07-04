@@ -22,7 +22,7 @@ extension ApplicationConfiguration {
         }
     }
     
-    func liveConfiguredSections() -> [ConfiguredSection] {
+    var liveConfiguredSections: [ConfiguredSection] {
         return liveHomeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection)
@@ -31,6 +31,10 @@ extension ApplicationConfiguration {
     
     var serviceMessageUrl: URL {
         return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+    }
+    
+    func relatedContentUrl(for media: SRGMedia) -> URL {
+        return URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: self.middlewareURL)!
     }
     
     private static var version: String {

@@ -298,7 +298,7 @@ private extension PageViewModel {
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections().enumeratedMap { Section(.configured($0), index: $1) })
+            return Just(ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) })
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }

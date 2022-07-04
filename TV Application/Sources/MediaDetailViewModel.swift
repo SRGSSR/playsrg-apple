@@ -10,45 +10,30 @@ import SRGUserData
 // MARK: View model
 
 final class MediaDetailViewModel: ObservableObject {
-    struct Recommendation: Codable {
-        let recommendationId: String
-        let urns: [String]
-    }
+    @Published var media: SRGMedia?
     
-    @Published var initialMedia: SRGMedia? {
-        didSet {
-            refresh()
-            updateWatchLaterAllowedAction()
-        }
-    }
-    
-    @Published private(set) var relatedMedias: [SRGMedia] = []
-    @Published private(set) var watchLaterAllowedAction: WatchLaterAction = .none
-    @Published var selectedMedia: SRGMedia? {
-        didSet {
-            updateWatchLaterAllowedAction()
-        }
-    }
-    
-    private var mainCancellables = Set<AnyCancellable>()
-    private var refreshCancellables = Set<AnyCancellable>()
+    @Published private var mediaData: MediaData = .empty
     
     init() {
-        NotificationCenter.default.publisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] notification in
-                guard let self = self,
-                      let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue,
-                      let entriesUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, let mediaUrn = self.media?.urn, entriesUids.contains(mediaUrn) else {
-                    return
+        // Drop initial values; relevant values are first assigned when the view appears
+        $media
+            .dropFirst()
+            .map { [weak self] media -> AnyPublisher<MediaData, Never> in
+                guard let media = media else {
+                    return Just(MediaData.empty).eraseToAnyPublisher()
                 }
-                self.updateWatchLaterAllowedAction()
+                return Publishers.CombineLatest(
+                    UserDataPublishers.laterAllowedActionPublisher(for: media),
+                    Self.relatedMediasPublisher(for: media, from: self?.mediaData ?? .empty)
+                )
+                .map { action, relatedMedias in
+                    return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
+                }
+                .eraseToAnyPublisher()
             }
-            .store(in: &mainCancellables)
-    }
-    
-    var media: SRGMedia? {
-        return selectedMedia ?? initialMedia
+            .switchToLatest()
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$mediaData)
     }
     
     var showTitle: String? {
@@ -64,23 +49,12 @@ final class MediaDetailViewModel: ObservableObject {
         return url(for: media?.image, size: .large)
     }
     
-    private func refresh() {
-        guard let initialMedia = initialMedia, initialMedia.contentType != .livestream else { return }
-        
-        let middlewareUrl = ApplicationConfiguration.shared.middlewareURL
-        let url = URL(string: "api/v2/playlist/recommendation/relatedContent/\(initialMedia.urn)", relativeTo: middlewareUrl)!
-        
-        URLSession.shared.dataTaskPublisher(for: url)
-            .map(\.data)
-            .decode(type: Recommendation.self, decoder: JSONDecoder())
-            .map { recommendation in
-                return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
-            }
-            .switchToLatest()
-            .replaceError(with: [])
-            .receive(on: DispatchQueue.main)
-            .weakAssign(to: \.relatedMedias, on: self)
-            .store(in: &refreshCancellables)
+    var watchLaterAllowedAction: WatchLaterAction {
+        return mediaData.watchLaterAllowedAction
+    }
+    
+    var relatedMedias: [SRGMedia] {
+        return mediaData.relatedMedias
     }
     
     func toggleWatchLater() {
@@ -94,12 +68,39 @@ final class MediaDetailViewModel: ObservableObject {
             labels.value = media.urn
             SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
             
-            self.updateWatchLaterAllowedAction()
+            self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, relatedMedias: self.mediaData.relatedMedias)
         }
     }
-    
-    private func updateWatchLaterAllowedAction() {
-        guard let media = media else { return }
-        watchLaterAllowedAction = WatchLaterAllowedActionForMedia(media)
+}
+
+// MARK: Publishers
+
+extension MediaDetailViewModel {
+    private static func relatedMediasPublisher(for media: SRGMedia?, from mediaData: MediaData) -> AnyPublisher<[SRGMedia], Never> {
+        guard let media = media, media.contentType != .livestream, !mediaData.relatedMedias.contains(media) else {
+            return Just(mediaData.relatedMedias).eraseToAnyPublisher()
+        }
+        return URLSession.shared.dataTaskPublisher(for: ApplicationConfiguration.shared.relatedContentUrl(for: media))
+            .map(\.data)
+            .decode(type: Recommendation.self, decoder: JSONDecoder())
+            .map { recommendation in
+                return SRGDataProvider.current!.medias(withUrns: recommendation.urns)
+            }
+            .switchToLatest()
+            .replaceError(with: [])
+            .prepend([])
+            .eraseToAnyPublisher()
+    }
+}
+
+// MARK: Types
+
+extension MediaDetailViewModel {
+    private struct MediaData {
+        let media: SRGMedia?
+        let watchLaterAllowedAction: WatchLaterAction
+        let relatedMedias: [SRGMedia]
+        
+        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
     }
 }

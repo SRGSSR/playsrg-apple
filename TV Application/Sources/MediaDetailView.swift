@@ -34,10 +34,10 @@ struct MediaDetailView: View {
         .background(Color.srgGray16)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            model.initialMedia = media
+            model.media = media
         }
         .onChange(of: media) { newValue in
-            model.initialMedia = newValue
+            model.media = newValue
         }
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         .redactedIfNil(media)
@@ -240,7 +240,7 @@ struct MediaDetailView: View {
                                         }
                                         .onFocus { isFocused in
                                             if isFocused {
-                                                model.selectedMedia = media
+                                                model.media = media
                                             }
                                         }
                                         .frame(width: 280)
