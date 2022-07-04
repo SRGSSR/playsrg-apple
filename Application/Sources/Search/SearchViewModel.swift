@@ -111,12 +111,14 @@ extension SearchViewModel {
         case medias
         case shows
         case mostSearchedShows
+        case topics
         case loading
     }
     
     enum Item: Hashable {
         case media(_ media: SRGMedia)
         case show(_ show: SRGShow)
+        case topic(_ topic: SRGTopic)
         case loading
     }
     
@@ -131,16 +133,14 @@ extension SearchViewModel {
 // MARK: Publishers
 
 private extension SearchViewModel {
-    static func mostSearchedShows() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
+    static func searchSuggestion() -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if !ApplicationConfiguration.shared.areShowsUnavailable {
-            let vendor = ApplicationConfiguration.shared.vendor
-            return SRGDataProvider.current!.mostSearchedShows(for: vendor, matching: constant(iOS: .none, tvOS: .TV))
-                .map { shows in
-                    let items = removeDuplicates(in: shows.map { Item.show($0) })
-                    return [Row(section: .mostSearchedShows, items: items)]
-                }
-                .map { (rows: $0, suggestions: nil) }
-                .eraseToAnyPublisher()
+            return Publishers.CombineLatest(
+                mostSearchedShows(),
+                topics()
+            )
+            .map { (rows: [$0, $1], suggestions: nil) }
+            .eraseToAnyPublisher()
         }
         else {
             return Just([])
@@ -204,12 +204,30 @@ private extension SearchViewModel {
             .eraseToAnyPublisher()
     }
     
+    static func mostSearchedShows() -> AnyPublisher<Row, Error> {
+        let vendor = ApplicationConfiguration.shared.vendor
+        return SRGDataProvider.current!.mostSearchedShows(for: vendor, matching: constant(iOS: .none, tvOS: .TV))
+            .map { removeDuplicates(in: $0.map { Item.show($0) }) }
+            .prepend([Item.loading])
+            .map { Row(section: .mostSearchedShows, items: $0) }
+            .eraseToAnyPublisher()
+    }
+    
+    static func topics() -> AnyPublisher<Row, Error> {
+        let vendor = ApplicationConfiguration.shared.vendor
+        return SRGDataProvider.current!.tvTopics(for: vendor)
+            .map { removeDuplicates(in: $0.map { Item.topic($0) }) }
+            .prepend([Item.loading])
+            .map { Row(section: .topics, items: $0) }
+            .eraseToAnyPublisher()
+    }
+    
     static func rows(matchingQuery query: String, with settings: MediaSearchSettings, trigger: Trigger) -> AnyPublisher<(rows: [Row], suggestions: [SRGSearchSuggestion]?), Error> {
         if Self.isSearching(with: query, settings: settings) {
             return Self.searchResults(matchingQuery: query, with: settings, trigger: trigger)
         }
         else {
-            return Self.mostSearchedShows()
+            return Self.searchSuggestion()
         }
     }
     
