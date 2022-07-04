@@ -90,6 +90,7 @@ extension MediaDetailViewModel {
             }
             .switchToLatest()
             .replaceError(with: [])
+            .prepend([])
             .eraseToAnyPublisher()
     }
 }
