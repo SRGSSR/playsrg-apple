@@ -18,14 +18,16 @@ final class MediaDetailViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $media
             .dropFirst()
-            .map { media -> AnyPublisher<MediaData, Never> in
+            .map { [weak self] media -> AnyPublisher<MediaData, Never> in
                 guard let media = media else {
                     return Just(MediaData.empty).eraseToAnyPublisher()
                 }
                 // Drop first prepend which is laterAllowedAction == none and avoid Later button quick refresh when
                 // switching media selection.
-                return Publishers.CombineLatest(UserDataPublishers.laterAllowedActionPublisher(for: media).dropFirst(),
-                                                Self.relatedMediasPublisher(for: media, from: self.mediaData))
+                return Publishers.CombineLatest(
+                    UserDataPublishers.laterAllowedActionPublisher(for: media).dropFirst(),
+                    Self.relatedMediasPublisher(for: media, from: self?.mediaData ?? .empty)
+                )
                 .map { action, relatedMedias in
                     return MediaData(media: media, watchLaterAllowedAction: action, relatedMedias: relatedMedias)
                 }

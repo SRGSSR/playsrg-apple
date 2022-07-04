@@ -7,6 +7,9 @@
 import Foundation
 
 struct Recommendation: Codable {
+    /**
+     *  The recommendation identifier.
+     */
     let recommendationId: String
     
     /**
