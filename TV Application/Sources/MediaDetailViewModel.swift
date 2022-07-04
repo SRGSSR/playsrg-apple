@@ -22,10 +22,8 @@ final class MediaDetailViewModel: ObservableObject {
                 guard let media = media else {
                     return Just(MediaData.empty).eraseToAnyPublisher()
                 }
-                // Drop first prepend which is laterAllowedAction == none and avoid Later button quick refresh when
-                // switching media selection.
                 return Publishers.CombineLatest(
-                    UserDataPublishers.laterAllowedActionPublisher(for: media).dropFirst(),
+                    UserDataPublishers.laterAllowedActionPublisher(for: media),
                     Self.relatedMediasPublisher(for: media, from: self?.mediaData ?? .empty)
                 )
                 .map { action, relatedMedias in
