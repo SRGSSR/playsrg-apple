@@ -139,8 +139,7 @@ enum HeroMediaCellSize {
 #if os(tvOS)
         let height: CGFloat = 700
 #else
-        let aspectRatio: CGFloat = Self.aspectRatio(horizontalSizeClass: horizontalSizeClass)
-        let height = layoutWidth * aspectRatio
+        let height = layoutWidth * aspectRatio(horizontalSizeClass: horizontalSizeClass)
 #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
