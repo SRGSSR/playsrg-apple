@@ -7,7 +7,7 @@
 import UIKit
 
 extension UIWindowScene {
-    var orientationIsLandscape: Bool {
+    var isLandscape: Bool {
 #if os(iOS)
         return interfaceOrientation.isLandscape
 #else

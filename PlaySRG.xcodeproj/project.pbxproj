@@ -3851,7 +3851,6 @@
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
-				0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -4762,6 +4761,7 @@
 				6F4760751EB37D60003021EA /* UIViewController+PlaySRG.m */,
 				6F4760761EB37D60003021EA /* UIWindow+PlaySRG.h */,
 				6F4760771EB37D60003021EA /* UIWindow+PlaySRG.m */,
+				0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
