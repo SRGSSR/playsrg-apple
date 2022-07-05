@@ -22,6 +22,16 @@
 		0447E0AC2861C726001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AB2861C726001B7285 /* Introspect */; };
 		0447E0AE2861C72D001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AD2861C72D001B7285 /* Introspect */; };
 		0447E0B02861C73B001B7285 /* Introspect in Frameworks */ = {isa = PBXBuildFile; productRef = 0447E0AF2861C73B001B7285 /* Introspect */; };
+		0451ECE328742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE428742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE528742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE628742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE728742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE828742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECE928742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -2654,6 +2664,7 @@
 		0308888C90C1881DBBFCDB84 /* Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-tvOS-Play RTS TV/Pods-Play SRG-tvOS-Play RTS TV.nightly.xcconfig"; sourceTree = "<group>"; };
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
+		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
@@ -3840,6 +3851,7 @@
 				6F00875B219AA888004BD6FF /* StoreReview.h */,
 				6F00875C219AA888004BD6FF /* StoreReview.m */,
 				6F676850281C0F7F00D61211 /* SupportInformation.swift */,
+				0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -8236,6 +8248,7 @@
 				6F573D0426D644A000757CD5 /* DeepLinkAction.m in Sources */,
 				6F475FE11EB37BC6003021EA /* ModalTransition.m in Sources */,
 				6FD633EA1FFD151000875BE5 /* MiniPlayerView.m in Sources */,
+				0451ECE328742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				082910B5239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6FF65C542835FFA400AF0768 /* OnboardingView.swift in Sources */,
 				0407308528635FEA002E8221 /* SearchSettingsBucketsView.swift in Sources */,
@@ -8431,6 +8444,7 @@
 				6FE9048726F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB11262DC7F700F717D0 /* Logger.swift in Sources */,
 				6FAAF78A20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
+				0451ECE428742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FFF8EDD2664BFA90016B793 /* Colors.swift in Sources */,
 				6FAE561D26C19D6F00EBFCD6 /* UICollectionView+Index.swift in Sources */,
 				6FD1EF382861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -8678,6 +8692,7 @@
 				6FCE753726D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048826F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB12262DC7F700F717D0 /* Logger.swift in Sources */,
+				0451ECE528742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FAAF78C20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDE2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FD1EF392861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -8925,6 +8940,7 @@
 				6FCE753826D3786F00667298 /* HeroMediaCell.swift in Sources */,
 				6FE9048926F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				08F5DB13262DC7F700F717D0 /* Logger.swift in Sources */,
+				0451ECE628742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FAAF78E20CABC0D00BB58A3 /* NSFileManager+PlaySRG.m in Sources */,
 				6FFF8EDF2664BFAA0016B793 /* Colors.swift in Sources */,
 				6FD1EF3A2861A39400BCBF19 /* PlaySection.swift in Sources */,
@@ -9183,6 +9199,7 @@
 				6F475FB81EB37BC6003021EA /* BaseViewController.m in Sources */,
 				08B4651826BC58C800454A28 /* CalendarView.swift in Sources */,
 				6F54D39426051000008B46FF /* BlockingOverlay.swift in Sources */,
+				0451ECE728742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				08AF2AF126BA83EE00C4745E /* ExpandingButton.swift in Sources */,
 				6FA8479E26A9B47400780D7A /* ProgramCellViewModel.swift in Sources */,
 				6FC1FA8C2292E3480036CB34 /* NSSet+PlaySRG.m in Sources */,
@@ -9497,6 +9514,7 @@
 				6F30ACB22604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F924286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F762719C5650082CAE9 /* ProgramCellViewModel.swift in Sources */,
+				0451ECE828742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FE4F153257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F48257C5028002F58AF /* Favorites.m in Sources */,
 				6FC413D224EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9645,6 +9663,7 @@
 				6F30ACB32604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F925286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F772719C5670082CAE9 /* ProgramCellViewModel.swift in Sources */,
+				0451ECE928742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FE4F154257A7D3C00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F49257C5029002F58AF /* Favorites.m in Sources */,
 				6FC413DA24EEEDC900FDF806 /* RadioChannel.m in Sources */,
@@ -9793,6 +9812,7 @@
 				6F30ACB42604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F782719C5680082CAE9 /* ProgramCellViewModel.swift in Sources */,
+				0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FE4F155257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4A257C502A002F58AF /* Favorites.m in Sources */,
 				6FC413E224EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -9941,6 +9961,7 @@
 				6F30ACB52604CDFD00457331 /* ExpandingCardButton.swift in Sources */,
 				04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */,
 				6FE86F792719C5690082CAE9 /* ProgramCellViewModel.swift in Sources */,
+				0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				6FE4F156257A7D3D00223F22 /* UIImageView+PlaySRG.m in Sources */,
 				087B5F4B257C502B002F58AF /* Favorites.m in Sources */,
 				6FC413EA24EEEDCA00FDF806 /* RadioChannel.m in Sources */,
@@ -10076,6 +10097,7 @@
 				6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
+				0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
 				085C0DCC26132673008E07C8 /* ApplicationConfiguration.swift in Sources */,
 				6FC2F8012628F23C00BF6B19 /* ResponderChain.swift in Sources */,
 				6FD1EF402861A39400BCBF19 /* PlaySection.swift in Sources */,

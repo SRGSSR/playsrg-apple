@@ -139,10 +139,22 @@ enum HeroMediaCellSize {
 #if os(tvOS)
         let height: CGFloat = 700
 #else
-        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 2 / 5
+        let aspectRatio: CGFloat = Self.aspectRatio(horizontalSizeClass: horizontalSizeClass)
         let height = layoutWidth * aspectRatio
 #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+    }
+    
+    static private func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        if horizontalSizeClass == .compact {
+            return 9 / 11
+        }
+        else if let isLandscape = UIApplication.shared.mainWindowScene?.orientationIsLandscape, isLandscape {
+            return 2 / 5
+        }
+        else {
+            return 1 / 2
+        }
     }
 }
 
