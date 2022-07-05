@@ -53,11 +53,20 @@ struct HighlightCell: View {
             return SRGDataProvider.current!.url(for: highlight.image, size: .large)
         }
         
+        private var contentMode: ImageView.ContentMode {
+            if let focalPoint = highlight.imageFocalPoint {
+                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
+            }
+            else {
+                return .aspectFillRight
+            }
+        }
+        
         var body: some View {
             GeometryReader { geometry in
                 if isCompact {
                     ZStack(alignment: .bottom) {
-                        ImageView(source: imageUrl, contentMode: .aspectFillRight)
+                        ImageView(source: imageUrl, contentMode: contentMode)
                         LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
                         Text(highlight.title)
                             .srgFont(.H2)
@@ -69,7 +78,7 @@ struct HighlightCell: View {
                 }
                 else {
                     ZStack(alignment: .leading) {
-                        ImageView(source: imageUrl, contentMode: .aspectFill)
+                        ImageView(source: imageUrl, contentMode: contentMode)
                         LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
                         DescriptionView(highlight: highlight)
                             .padding(.horizontal, 60)

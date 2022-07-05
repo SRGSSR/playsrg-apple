@@ -101,3 +101,21 @@ struct ImageViewPortraitAspectFill_Previews: PreviewProvider {
         .previewLayout(.fixed(width: 1000, height: 1000))
     }
 }
+
+struct ImageViewPortraitAspectFillFocused_Previews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2022/03/29/18/28/12979393.image/9x16/scale/width/400"
+    
+    static var previews: some View {
+        Group {
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 0, relativeHeight: 0))
+                .previewDisplayName("Bottom left focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 0, relativeHeight: 1))
+                .previewDisplayName("Top left focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 1, relativeHeight: 0))
+                .previewDisplayName("Bottom right focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 1, relativeHeight: 1))
+                .previewDisplayName("Top right focus")
+        }
+        .previewLayout(.fixed(width: 1000, height: 1000))
+    }
+}

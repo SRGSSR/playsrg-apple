@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "cf31f8c232ede66546e2a68f53fc97e684daeb8a",
-        "version" : "16.7.0"
+        "revision" : "c676b974f01773edd34449fafbcb84ea11fe4743",
+        "version" : "16.8.0"
       }
     },
     {
@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/NukeUI.git",
       "state" : {
-        "revision" : "ebfed3c9a4e97e310b0ff8ee0fffe5579887a825",
-        "version" : "0.8.2"
+        "revision" : "db55022a8e483774ebbf3568727071477546d9ea",
+        "version" : "0.8.3"
       }
     },
     {
@@ -239,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/microsoft/PLCrashReporter.git",
       "state" : {
-        "revision" : "6b27393cad517c067dceea85fadf050e70c4ceaa",
-        "version" : "1.10.1"
+        "revision" : "81cdec2b3827feb03286cb297f4c501a8eb98df1",
+        "version" : "1.10.2"
       }
     },
     {
@@ -294,7 +294,7 @@
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "ef606a5644fa504c58df1254717e6a700764a6e1"
+        "revision" : "d35d66e7ccf32a6cead77ff2d4096b2fc6ad2729"
       }
     },
     {
