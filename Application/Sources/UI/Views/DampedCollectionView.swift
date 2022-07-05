@@ -8,9 +8,10 @@ import UIKit
 
 /**
  *  A collection view applying a stronger deceleration rate to horizontally scrollable sections.
+ *
+ *  TODO: Remove if the compositional layout API is further improved (could be added to `UICollectionViewCompositionalLayoutConfiguration`
+ *        in the future).
  */
-// TODO: Remove if the compositional layout API is further improved (could be added to `UICollectionViewCompositionalLayoutConfiguration`
-//       in the future).
 @available(tvOS, unavailable)
 class DampedCollectionView: UICollectionView {
     override func didAddSubview(_ subview: UIView) {
