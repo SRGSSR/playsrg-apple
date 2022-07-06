@@ -8,6 +8,10 @@ import SwiftUI
 
 struct FlatButtonStyle: ButtonStyle {
     let focused: Bool
+
+#if os(tvOS)
+    @State private var unfocusedSize: CGSize = .zero
+#endif
     
     func makeBody(configuration: Configuration) -> some View {
 #if os(tvOS)
@@ -16,8 +20,11 @@ struct FlatButtonStyle: ButtonStyle {
             .padding(.vertical, 12)
             .background(focused ? Color.srgGray96 : Color.srgGray23)
             .cornerRadius(10)
-            .scaleEffect(focused && !configuration.isPressed ? 1.2 : 1)
+            .scaleEffect(focused && !configuration.isPressed ? Self.focusedScaleFactor(for: unfocusedSize) : 1)
             .animation(.easeOut(duration: 0.2), value: focused)
+            .readSize { size in
+                unfocusedSize = size
+            }
 #else
         configuration.label
             .padding(.horizontal, 10)
@@ -27,6 +34,8 @@ struct FlatButtonStyle: ButtonStyle {
 #endif
     }
 }
+
+#if os(tvOS)
 
 /**
  *  A flat card button style to replace the built-in CardButtonStyle which suffers from issues since
@@ -38,12 +47,6 @@ struct FlatCardButtonStyle: ButtonStyle {
     
     @State private var unfocusedSize: CGSize = .zero
     
-    private var scaleFactor: CGFloat {
-        let maxDimension = max(unfocusedSize.width, unfocusedSize.height)
-        guard maxDimension != 0 else { return 1 }
-        return (maxDimension + 40) / maxDimension
-    }
-    
     private var shadowColor: Color {
         return focused ? Color(white: 0, opacity: 0.8) : .clear
     }
@@ -51,7 +54,7 @@ struct FlatCardButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .cornerRadius(10)
-            .scaleEffect(focused && !configuration.isPressed ? scaleFactor : 1)
+            .scaleEffect(focused && !configuration.isPressed ? Self.focusedScaleFactor(for: unfocusedSize) : 1)
             .shadow(color: shadowColor, radius: 20, y: 20)
             .animation(.easeOut(duration: 0.2), value: focused)
             .readSize { size in
@@ -60,14 +63,28 @@ struct FlatCardButtonStyle: ButtonStyle {
     }
 }
 
-@available(iOS, unavailable)
 struct TextButtonStyle: ButtonStyle {
     let focused: Bool
+    
+    @State private var unfocusedSize: CGSize = .zero
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .background(focused ? Color(white: 1, opacity: 0.3) : Color.clear)
-            .scaleEffect(focused && !configuration.isPressed ? 1.04 : 1)
+            .scaleEffect(focused && !configuration.isPressed ? Self.focusedScaleFactor(for: unfocusedSize) : 1)
             .animation(.easeOut(duration: 0.2), value: focused)
+            .readSize { size in
+                unfocusedSize = size
+            }
     }
 }
+
+private extension ButtonStyle {
+    static func focusedScaleFactor(for unfocusedSize: CGSize) -> CGFloat {
+        let maxDimension = max(unfocusedSize.width, unfocusedSize.height)
+        guard maxDimension != 0 else { return 1 }
+        return (maxDimension + 40) / maxDimension
+    }
+}
+
+#endif
