@@ -612,11 +612,11 @@
 		6F0B98572726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98582726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98592726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
-		6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB3220C94DF6006B2CE4 /* Play SRF notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB4520C94E77006B2CE4 /* Play RTS notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB3220C94DF6006B2CE4 /* Play SRF notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB4520C94E77006B2CE4 /* Play RTS notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
 		6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
 		6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
@@ -1514,10 +1514,10 @@
 		6F9BF5EF2720293600945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6F9BF5F12720293600945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5EC2720293600945973 /* SRGDataProviderCombine */; };
 		6F9BF5F22720293600945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
-		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
@@ -1728,7 +1728,7 @@
 		6FBB7F9F2844B9FB00976FFB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */; };
 		6FBB7FA02844B9FB00976FFB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */; };
 		6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
-		6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6FBE5378271FFA9C00F90B68 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
@@ -2546,114 +2546,114 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB4020C94DF6006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed App Extensions */,
+				6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB5320C94E77006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed App Extensions */,
+				6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB6620C94E8E006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */,
+				6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB7920C94EC8006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */,
+				6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB8C20C94EE5006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */,
+				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF6002720299400945973 /* Embed App Extensions */ = {
+		6F9BF6002720299400945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */,
+				6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF604272029A400945973 /* Embed App Extensions */ = {
+		6F9BF604272029A400945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */,
+				6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF608272029AC00945973 /* Embed App Extensions */ = {
+		6F9BF608272029AC00945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */,
+				6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF60C272029B500945973 /* Embed App Extensions */ = {
+		6F9BF60C272029B500945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */,
+				6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FBE535C271FF94A00F90B68 /* Embed App Extensions */ = {
+		6FBE535C271FF94A00F90B68 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */,
+				6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -5254,7 +5254,7 @@
 				6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */,
-				6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */,
+				6F0CFB4020C94DF6006B2CE4 /* Embed Foundation Extensions */,
 				6F5E54992521E3C7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5308,7 +5308,7 @@
 				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */,
+				6F0CFB5320C94E77006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549A2521E3D0004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5362,7 +5362,7 @@
 				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */,
+				6F0CFB6620C94E8E006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549B2521E3D6004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5416,7 +5416,7 @@
 				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */,
+				6F0CFB7920C94EC8006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549C2521E3DE004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5470,7 +5470,7 @@
 				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */,
+				6F0CFB8C20C94EE5006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549D2521E3E7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5707,7 +5707,7 @@
 				08C13558256B27AC002F67B8 /* Restore original icons */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
-				6FBE535C271FF94A00F90B68 /* Embed App Extensions */,
+				6FBE535C271FF94A00F90B68 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5750,7 +5750,7 @@
 				08C13575256B2977002F67B8 /* Restore original icons */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
-				6F9BF6002720299400945973 /* Embed App Extensions */,
+				6F9BF6002720299400945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5793,7 +5793,7 @@
 				08C13576256B297E002F67B8 /* Restore original icons */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
-				6F9BF604272029A400945973 /* Embed App Extensions */,
+				6F9BF604272029A400945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5836,7 +5836,7 @@
 				08C13577256B2983002F67B8 /* Restore original icons */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
-				6F9BF608272029AC00945973 /* Embed App Extensions */,
+				6F9BF608272029AC00945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5879,7 +5879,7 @@
 				08C13578256B2989002F67B8 /* Restore original icons */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
-				6F9BF60C272029B500945973 /* Embed App Extensions */,
+				6F9BF60C272029B500945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -6016,7 +6016,7 @@
 			attributes = {
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
