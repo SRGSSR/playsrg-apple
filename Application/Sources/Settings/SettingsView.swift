@@ -19,6 +19,8 @@ import UIKit
 struct SettingsView: View {
     @StateObject private var model = SettingsViewModel()
     
+    @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
+    
     var body: some View {
         List {
 #if os(tvOS)
@@ -47,6 +49,8 @@ struct SettingsView: View {
 #if os(tvOS)
         .listStyle(GroupedListStyle())
         .frame(maxWidth: LayoutMaxListWidth)
+#else
+        .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
 #endif
         .navigationTitle(NSLocalizedString("Settings", comment: "Settings view title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)

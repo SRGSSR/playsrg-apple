@@ -20,7 +20,7 @@ final class SearchViewController: UIViewController {
     
     private var dataSource: UICollectionViewDiffableDataSource<SearchViewModel.Section, SearchViewModel.Item>!
     
-    private weak var collectionView: UICollectionView!
+    private weak var collectionView: CollectionView!
     private weak var emptyView: HostView<EmptyContentView>!
     
 #if os(iOS)
@@ -59,7 +59,7 @@ final class SearchViewController: UIViewController {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = .srgGray16
         
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout())
+        let collectionView = CollectionView(frame: .zero, collectionViewLayout: layout())
         collectionView.delegate = self
         collectionView.backgroundColor = .clear
         view.addSubview(collectionView)
@@ -304,6 +304,16 @@ final class SearchViewController: UIViewController {
 #endif
 }
 
+// MARK: Types
+
+extension SearchViewController {
+#if os(iOS)
+    private typealias CollectionView = DampedCollectionView
+#else
+    private typealias CollectionView = UICollectionView
+#endif
+}
+
 // MARK: Instantiation
 
 extension SearchViewController {
@@ -402,25 +412,18 @@ extension SearchViewController: UICollectionViewDelegate {
         switch item {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.value = media.urn
-            labels.type = AnalyticsType.actionPlayMedia.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchOpen.rawValue, labels: labels)
         case let .show(show):
             guard let navigationController = navigationController else { return }
-            
             let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
-            
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.value = show.urn
-            labels.type = AnalyticsType.actionDisplayShow.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.searchTeaserOpen.rawValue, labels: labels)
             
             SRGDataProvider.current!.increaseSearchResultsViewCount(for: show)
                 .sink { _ in } receiveValue: { _ in }
                 .store(in: &cancellables)
+        case let .topic(topic):
+            guard let navigationController = navigationController else { return }
+            let topicViewController = PageViewController.topicViewController(for: topic)
+            navigationController.pushViewController(topicViewController, animated: true)
         case .loading:
             break
         }
@@ -436,7 +439,7 @@ extension SearchViewController: UICollectionViewDelegate {
             return ContextMenu.configuration(for: media, at: indexPath, in: self)
         case let .show(show):
             return ContextMenu.configuration(for: show, at: indexPath, in: self)
-        case .loading:
+        default:
             return nil
         }
     }
@@ -599,15 +602,15 @@ private extension SearchViewController {
                             return MediaCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                         }
                     }
-                case .shows:
+                case .mostSearchedShows, .shows:
                     let layoutSection = NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { _, _ in
                         return ShowCellSize.swimlane(for: .default)
                     }
                     layoutSection.orthogonalScrollingBehavior = .continuousGroupLeadingBoundary
                     return layoutSection
-                case .mostSearchedShows:
+                case .topics:
                     return NSCollectionLayoutSection.grid(layoutWidth: layoutWidth, spacing: Self.itemSpacing) { layoutWidth, spacing in
-                        return ShowCellSize.grid(for: .default, layoutWidth: layoutWidth, spacing: spacing)
+                        return TopicCellSize.grid(layoutWidth: layoutWidth, spacing: spacing)
                     }
                 case .loading:
                     return NSCollectionLayoutSection.horizontal(layoutWidth: layoutWidth) { _, _ in
@@ -638,6 +641,8 @@ private extension SearchViewController {
                 MediaCell(media: media, style: .show)
             case let .show(show):
                 ShowCell(show: show, style: .standard, imageVariant: .default)
+            case let .topic(topic):
+                TopicCell(topic: topic)
             case .loading:
                 ActivityIndicator()
             }
@@ -668,6 +673,8 @@ private extension SearchViewController {
                 return NSLocalizedString("Shows", comment: "Show search result header")
             case .mostSearchedShows:
                 return NSLocalizedString("Most searched shows", comment: "Most searched shows header")
+            case .topics:
+                return NSLocalizedString("Topics", comment: "Topics header")
             case .loading:
                 return nil
             }

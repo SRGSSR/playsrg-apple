@@ -15,6 +15,7 @@ struct SearchSettingsView: View {
     @Binding var settings: MediaSearchSettings
     
     @StateObject private var model = SearchSettingsViewModel()
+    @Accessibility(\.isVoiceOverRunning) private var isVoiceOverRunning
     
     var body: some View {
         List {
@@ -111,6 +112,7 @@ struct SearchSettingsView: View {
             }
         }
         .srgFont(.body)
+        .navigationBarTitleDisplayMode(isVoiceOverRunning ? .inline : .large)
         .navigationTitle(NSLocalizedString("Filters", comment: "Search filters page title"))
         .tracked(withTitle: analyticsPageTitle, levels: analyticsPageLevels)
         .onAppear {

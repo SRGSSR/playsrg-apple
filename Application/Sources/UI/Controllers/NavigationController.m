@@ -38,6 +38,17 @@
     return [self initWithRootViewController:rootViewController tintColor:nil backgroundColor:nil statusBarStyle:UIStatusBarStyleLightContent];
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(voiceOverStatusDidChange:)
+                                               name:UIAccessibilityVoiceOverStatusDidChangeNotification
+                                             object:nil];
+    [self updateLargeTitleAppearance];
+}
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 
@@ -127,9 +138,6 @@
     appearance.doneButtonAppearance = doneButtonAppearance;
     
     UINavigationBar *navigationBar = self.navigationBar;
-    if (@available(iOS 15, *)) {
-        navigationBar.prefersLargeTitles = YES;
-    }
     navigationBar.tintColor = foregroundColor;          // Still use the old customization API to set the icon tint color
     navigationBar.standardAppearance = appearance;
     navigationBar.compactAppearance = appearance;
@@ -157,6 +165,17 @@
     }
     else {
         animations();
+    }
+}
+
+- (void)updateLargeTitleAppearance
+{
+    UINavigationBar *navigationBar = self.navigationBar;
+    if (@available(iOS 15, *)) {
+        // There are some issues with large titles and accessibility (e.g. ordering of headers in a view controller
+        // decorated with a search controller). To avoid any issues we just disable large titles when VoiceOver is
+        // enabled.
+        navigationBar.prefersLargeTitles = ! UIAccessibilityIsVoiceOverRunning();
     }
 }
 
@@ -223,6 +242,13 @@
 - (void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     [self play_setNeedsScrollableViewUpdate];
+}
+
+#pragma mark Notifications
+
+- (void)voiceOverStatusDidChange:(NSNotification *)notification
+{
+    [self updateLargeTitleAppearance];
 }
 
 @end
