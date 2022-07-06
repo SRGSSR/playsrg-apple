@@ -28,6 +28,8 @@ struct MoreCell: View {
                 .frame(height: Self.iconHeight)
                 .foregroundColor(.srgGrayC7)
                 .opacity(0.8)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.srgGray33)
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         } label: {
             Color.clear
