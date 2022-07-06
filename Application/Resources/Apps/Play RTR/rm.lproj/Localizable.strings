@@ -720,7 +720,8 @@
 
 /* Search setting
    Title label used to present the topic list
-   Topic list view in search settings */
+   Topic list view in search settings
+   Topics header */
 "Topics" = "Temas";
 
 /* Tab title to present the most popular medias by channel on CarPlay */
