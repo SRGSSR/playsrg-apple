@@ -23,7 +23,7 @@ struct ChannelButton: View {
     
     var body: some View {
         Button(action: action) {
-            if let imageUrl = imageUrl {
+            if let imageUrl {
                 LazyImage(source: imageUrl) { state in
                     if let image = state.image {
                         image

@@ -19,7 +19,7 @@ struct HeaderView: View {
     @Environment(\.sizeCategory) private var sizeCategory
     
     private var displayableSubtitle: String? {
-        if horizontalSizeClass == .regular, let subtitle = subtitle, !subtitle.isEmpty {
+        if horizontalSizeClass == .regular, let subtitle, !subtitle.isEmpty {
             return subtitle
         }
         else {
@@ -58,7 +58,7 @@ struct HeaderView: View {
 
 enum HeaderViewSize {
     static func recommended(forTitle title: String?, subtitle: String?, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-        if let title = title, !title.isEmpty {
+        if let title, !title.isEmpty {
             let hostController = UIHostingController(rootView: HeaderView(title: title, subtitle: subtitle, hasDetailDisclosure: true))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))

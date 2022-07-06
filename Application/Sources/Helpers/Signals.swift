@@ -42,7 +42,7 @@ enum ThrottledSignal {
     static func historyUpdates(for uid: String? = nil, interval: TimeInterval = 10) -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.weakPublisher(for: .SRGHistoryEntriesDidChange, object: SRGUserData.current?.history)
             .filter { notification in
-                guard let uid = uid else { return true }
+                guard let uid else { return true }
                 if let updatedUids = notification.userInfo?[SRGHistoryEntriesUidsKey] as? Set<String>, updatedUids.contains(uid) {
                     return true
                 }
@@ -62,7 +62,7 @@ enum ThrottledSignal {
         return NotificationCenter.default.weakPublisher(for: .SRGPlaylistEntriesDidChange, object: SRGUserData.current?.playlists)
             .filter { notification in
                 if let playlistUid = notification.userInfo?[SRGPlaylistUidKey] as? String, playlistUid == SRGPlaylistUid.watchLater.rawValue {
-                    guard let uid = uid else { return true }
+                    guard let uid else { return true }
                     if let updatedUids = notification.userInfo?[SRGPlaylistEntriesUidsKey] as? Set<String>, updatedUids.contains(uid) {
                         return true
                     }

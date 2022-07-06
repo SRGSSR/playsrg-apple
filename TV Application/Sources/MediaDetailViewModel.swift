@@ -19,7 +19,7 @@ final class MediaDetailViewModel: ObservableObject {
         $media
             .dropFirst()
             .map { [weak self] media -> AnyPublisher<MediaData, Never> in
-                guard let media = media else {
+                guard let media else {
                     return Just(MediaData.empty).eraseToAnyPublisher()
                 }
                 return Publishers.CombineLatest(
@@ -58,7 +58,7 @@ final class MediaDetailViewModel: ObservableObject {
     }
     
     func toggleWatchLater() {
-        guard let media = media else { return }
+        guard let media else { return }
         WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
             
@@ -77,7 +77,7 @@ final class MediaDetailViewModel: ObservableObject {
 
 extension MediaDetailViewModel {
     private static func relatedMediasPublisher(for media: SRGMedia?, from mediaData: MediaData) -> AnyPublisher<[SRGMedia], Never> {
-        guard let media = media, media.contentType != .livestream, !mediaData.relatedMedias.contains(media) else {
+        guard let media, media.contentType != .livestream, !mediaData.relatedMedias.contains(media) else {
             return Just(mediaData.relatedMedias).eraseToAnyPublisher()
         }
         return URLSession.shared.dataTaskPublisher(for: ApplicationConfiguration.shared.relatedContentUrl(for: media))

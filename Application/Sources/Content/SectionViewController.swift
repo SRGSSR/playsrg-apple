@@ -117,7 +117,7 @@ final class SectionViewController: UIViewController {
 #endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, SectionViewModel.Item> { [weak self] cell, _, item in
-            guard let self = self else { return }
+            guard let self else { return }
             cell.content = ItemCell(item: item, configuration: self.model.configuration)
         }
         
@@ -126,19 +126,19 @@ final class SectionViewController: UIViewController {
         }
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
-            guard let self = self else { return }
+            guard let self else { return }
             view.content = TitleView(text: self.globalHeaderTitle)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
+            guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, configuration: self.model.configuration)
         }
         
         let sectionFooterViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionFooterView>>(elementKind: UICollectionView.elementKindSectionFooter) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
+            guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionFooterView(section: section)
@@ -405,7 +405,7 @@ extension SectionViewController {
     }
     
     @objc static func mediasViewController(forDay day: SRGDay, channelUid: String?) -> SectionViewController & DailyMediasViewController {
-        if let channelUid = channelUid {
+        if let channelUid {
             return SectionViewController(section: .configured(.radioEpisodesForDay(day, channelUid: channelUid)))
         }
         else {
@@ -414,7 +414,7 @@ extension SectionViewController {
     }
     
     @objc static func showsViewController(forChannelUid channelUid: String?, initialSectionId: String?) -> SectionViewController {
-        if let channelUid = channelUid {
+        if let channelUid {
             return SectionViewController(section: .configured(.radioAllShows(channelUid: channelUid)), initialSectionId: initialSectionId)
         }
         else {
@@ -596,12 +596,12 @@ extension SectionViewController: SRGAnalyticsViewTracking {
 
 extension SectionViewController: SectionShowHeaderViewAction {
     func openShow(sender: Any?, event: OpenShowEvent?) {
-        guard let event = event else { return }
+        guard let event else { return }
         
 #if os(tvOS)
         navigateToShow(event.show)
 #else
-        if let navigationController = navigationController {
+        if let navigationController {
             let showViewController = SectionViewController.showViewController(for: event.show)
             navigationController.pushViewController(showViewController, animated: true)
         }
@@ -699,7 +699,7 @@ private extension SectionViewController {
                 }
             }
             
-            guard let self = self else { return nil }
+            guard let self else { return nil }
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]

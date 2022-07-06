@@ -85,7 +85,7 @@ final class SettingsViewModel: ObservableObject {
     }
     
     private static func string(for date: Date?) -> String {
-        if let date = date {
+        if let date {
             return DateFormatter.play_relativeDateAndTime.string(from: date)
         }
         else {

@@ -57,7 +57,7 @@ final class PageViewController: UIViewController {
     
 #if os(iOS)
     private static func showByDateViewController(radioChannel: RadioChannel?, date: Date?) -> UIViewController {
-        if let radioChannel = radioChannel {
+        if let radioChannel {
             return CalendarViewController(radioChannel: radioChannel, date: date)
         }
         else if !ApplicationConfiguration.shared.isTvGuideUnavailable {
@@ -141,12 +141,12 @@ final class PageViewController: UIViewController {
         }
         
         let globalHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<TitleView>>(elementKind: Header.global.rawValue) { [weak self] view, _, _ in
-            guard let self = self else { return }
+            guard let self else { return }
             view.content = TitleView(text: self.globalHeaderTitle)
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
+            guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, pageId: self.model.id)
@@ -170,14 +170,14 @@ final class PageViewController: UIViewController {
 #if os(iOS)
         model.$serviceMessage
             .sink { serviceMessage in
-                guard let serviceMessage = serviceMessage else { return }
+                guard let serviceMessage else { return }
                 Banner.show(with: .error, message: serviceMessage.text, image: nil, sticky: true)
             }
             .store(in: &cancellables)
         
         NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .sink { [weak self] _ in
-                guard let self = self, self.play_isViewCurrent else { return }
+                guard let self, self.play_isViewCurrent else { return }
                 self.updateNavigationBar(animated: true)
             }
             .store(in: &cancellables)
@@ -330,17 +330,17 @@ extension PageViewController: UICollectionViewDelegate {
             case let .media(media):
                 play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             case let .show(show):
-                if let navigationController = navigationController {
+                if let navigationController {
                     let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: true)
                 }
             case let .topic(topic):
-                if let navigationController = navigationController {
+                if let navigationController {
                     let pageViewController = PageViewController(id: .topic(topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             case .highlight:
-                if let navigationController = navigationController {
+                if let navigationController {
                     let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
                     navigationController.pushViewController(sectionViewController, animated: true)
                 }
@@ -348,7 +348,7 @@ extension PageViewController: UICollectionViewDelegate {
                 ()
             }
         case .more:
-            if let navigationController = navigationController {
+            if let navigationController {
                 let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
                 navigationController.pushViewController(sectionViewController, animated: true)
             }
@@ -431,13 +431,13 @@ extension PageViewController: PlayApplicationNavigation {
         switch applicationSectionInfo.applicationSection {
         case .showByDate:
             let date = applicationSectionInfo.options?[ApplicationSectionOptionKey.showByDateDateKey] as? Date
-            if let navigationController = navigationController {
+            if let navigationController {
                 let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: date)
                 navigationController.pushViewController(showByDateViewController, animated: false)
             }
             return true
         case .showAZ:
-            if let navigationController = navigationController {
+            if let navigationController {
                 let initialSectionId = applicationSectionInfo.options?[ApplicationSectionOptionKey.showAZIndexKey] as? String
                 let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid, initialSectionId: initialSectionId)
                 navigationController.pushViewController(showsViewController, animated: false)
@@ -479,14 +479,14 @@ extension PageViewController: SRGAnalyticsViewTracking {
 
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
-        if let navigationController = navigationController {
+        if let navigationController {
             let showsViewController = SectionViewController.showsViewController(forChannelUid: radioChannel?.uid)
             navigationController.pushViewController(showsViewController, animated: true)
         }
     }
     
     func openShowByDate() {
-        if let navigationController = navigationController {
+        if let navigationController {
             let showByDateViewController = Self.showByDateViewController(radioChannel: radioChannel, date: nil)
             navigationController.pushViewController(showByDateViewController, animated: true)
         }
@@ -495,7 +495,7 @@ extension PageViewController: ShowAccessCellActions {
 
 extension PageViewController: SectionHeaderViewAction {
     fileprivate func openSection(sender: Any?, event: OpenSectionEvent?) {
-        if let event = event, let navigationController = navigationController {
+        if let event, let navigationController {
             let sectionViewController = SectionViewController(section: event.section.wrappedValue, filter: model.id)
             navigationController.pushViewController(sectionViewController, animated: true)
         }
@@ -620,7 +620,7 @@ private extension PageViewController {
                 }
             }
             
-            guard let self = self else { return nil }
+            guard let self else { return nil }
             
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[sectionIndex]

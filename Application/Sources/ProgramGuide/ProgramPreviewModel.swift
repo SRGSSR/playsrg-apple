@@ -26,7 +26,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
     
     var title: String {
-        if let secondaryTitle = secondaryTitle {
+        if let secondaryTitle {
             return secondaryTitle
         }
         else {
@@ -35,7 +35,7 @@ final class ProgramPreviewModel: ObservableObject {
     }
     
     var timeInformation: String {
-        guard let program = program else { return .placeholder(length: 8) }
+        guard let program else { return .placeholder(length: 8) }
         let nowDate = Date()
         if program.play_contains(nowDate) {
             let remainingTimeInterval = program.endDate.timeIntervalSince(nowDate)

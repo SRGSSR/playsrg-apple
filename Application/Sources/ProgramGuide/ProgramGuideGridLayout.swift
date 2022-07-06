@@ -217,7 +217,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     override func prepare() {
         super.prepare()
         
-        if let collectionView = collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
+        if let collectionView, let dataSource = collectionView.dataSource as? UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
             layoutData = Self.layoutData(from: dataSource.snapshot(), in: collectionView)
         }
         else {
@@ -230,7 +230,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override var collectionViewContentSize: CGSize {
-        guard let collectionView = collectionView, let layoutData = layoutData else { return .zero }
+        guard let collectionView, let layoutData else { return .zero }
         return CGSize(
             width: Self.channelHeaderWidth + Self.horizontalSpacing + layoutData.dateInterval.duration * Self.scale + Self.trailingMargin,
             height: Self.timelineHeight + CGFloat(collectionView.numberOfSections) * Self.sectionHeight + max(CGFloat(collectionView.numberOfSections - 1), 0) * Self.verticalSpacing
@@ -238,7 +238,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        guard let layoutData = layoutData else { return nil }
+        guard let layoutData else { return nil }
         let layoutAttrs = layoutData.layoutAttrs.filter { $0.frame.intersects(rect) }
         let supplementaryAttrs = layoutData.supplementaryAttrs.filter { $0.frame.intersects(rect) }
         let decorationAttrs = layoutData.decorationAttrs.filter { $0.frame.intersects(rect) }

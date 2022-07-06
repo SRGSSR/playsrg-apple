@@ -90,7 +90,7 @@ extension SRGDataProvider {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {
@@ -114,7 +114,7 @@ extension SRGDataProvider {
     
     func resumePlaybackPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
-            guard let historyEntries = historyEntries else { return [:] }
+            guard let historyEntries else { return [:] }
             
             var playbackPositions = OrderedDictionary<String, TimeInterval>()
             for historyEntry in historyEntries {
@@ -131,7 +131,7 @@ extension SRGDataProvider {
             Future<OrderedDictionary<String, TimeInterval>, Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {
@@ -161,7 +161,7 @@ extension SRGDataProvider {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                 SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {

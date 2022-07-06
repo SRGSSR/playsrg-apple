@@ -46,7 +46,7 @@ final class ProgramGuideViewModel: ObservableObject {
             return data.selectedChannel
         }
         set {
-            if let newValue = newValue, channels.contains(newValue), newValue != data.selectedChannel {
+            if let newValue, channels.contains(newValue), newValue != data.selectedChannel {
                 data = Data(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, selectedChannel: newValue)
                 change = .channel(newValue)
             }
@@ -152,7 +152,7 @@ extension ProgramGuideViewModel {
 
 private extension ProgramGuideViewModel {
     static func matchingChannel(_ channel: SRGChannel?, in channels: [SRGChannel]) -> SRGChannel? {
-        if let channel = channel, channels.contains(channel) {
+        if let channel, channels.contains(channel) {
             return channel
         }
         else {

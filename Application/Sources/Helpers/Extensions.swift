@@ -200,7 +200,7 @@ extension View {
      */
     func accessibilityElement<S>(label: S?, hint: S? = nil, traits: AccessibilityTraits = []) -> some View where S: StringProtocol {
         Group {
-            if let label = label, !label.isEmpty {
+            if let label, !label.isEmpty {
                 // FIXME: Accessibility hints are currently buggy with SwiftUI on tvOS. Applying a hint makes VoiceOver tell only the hint,
                 //        forgetting about the label. Until this is fixed by Apple we must avoid applying hints on tvOS.
 #if os(tvOS)
@@ -467,7 +467,7 @@ extension UIView {
 extension UIViewController {
     func deselectItems(in collectionView: UICollectionView, animated: Bool) {
         guard let selectedIndexPaths = collectionView.indexPathsForSelectedItems else { return }
-        guard animated, let transitionCoordinator = transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
+        guard animated, let transitionCoordinator, transitionCoordinator.animate(alongsideTransition: { context in
                 selectedIndexPaths.forEach { indexPath in
                     collectionView.deselectItem(at: indexPath, animated: context.isAnimated)
                 }

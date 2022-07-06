@@ -18,7 +18,7 @@ class ShowCellViewModel: ObservableObject {
         $show
             .dropFirst()
             .map { show -> AnyPublisher<Bool, Never> in
-                guard let show = show else {
+                guard let show else {
                     return Just(false).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.subscriptionStatusPublisher(for: show)

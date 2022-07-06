@@ -22,7 +22,7 @@ final class SearchSettingsViewModel: ObservableObject {
     }
     
     private static func description(forSelectedUrns selectedUrns: Set<String>?, in buckets: [SRGItemBucket]) -> String? {
-        guard let selectedUrns = selectedUrns else { return nil }
+        guard let selectedUrns else { return nil }
         let selectedBuckets = buckets
             .filter { selectedUrns.contains($0.urn) }
             .sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == .orderedAscending }

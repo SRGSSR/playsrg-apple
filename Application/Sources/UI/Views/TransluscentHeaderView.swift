@@ -49,7 +49,7 @@ private extension View {
 
 enum TransluscentHeaderViewSize {
     static func recommended(title: String?, horizontalPadding: CGFloat, layoutWidth: CGFloat) -> NSCollectionLayoutSize {
-        if let title = title, !title.isEmpty {
+        if let title, !title.isEmpty {
             let hostController = UIHostingController(rootView: TransluscentHeaderView(title: title, horizontalPadding: horizontalPadding))
             let size = hostController.sizeThatFits(in: CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height))
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(size.height))

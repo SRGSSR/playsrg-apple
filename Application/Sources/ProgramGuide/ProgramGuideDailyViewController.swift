@@ -30,7 +30,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
-        if let channel = channel {
+        if let channel {
             snapshot.appendSections([channel])
             snapshot.appendItems(state.items(for: channel), toSection: channel)
         }
@@ -38,7 +38,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     init(day: SRGDay, programGuideModel: ProgramGuideViewModel, programGuideDailyModel: ProgramGuideDailyViewModel? = nil) {
-        if let programGuideDailyModel = programGuideDailyModel, programGuideDailyModel.day == programGuideModel.day {
+        if let programGuideDailyModel, programGuideDailyModel.day == programGuideModel.day {
             model = programGuideDailyModel
         }
         else {
@@ -103,7 +103,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         programGuideModel.$change
             .sink { [weak self] change in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch change {
                 case let .time(time):
                     self.scrollToTime(time, animated: true)
@@ -157,7 +157,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     }
     
     private func scrollToTime(_ time: TimeInterval?, animated: Bool) {
-        if let time = time, let yOffset = yOffset(for: day.date.addingTimeInterval(time)) {
+        if let time, let yOffset = yOffset(for: day.date.addingTimeInterval(time)) {
             collectionView.setContentOffset(CGPoint(x: collectionView.contentOffset.x, y: yOffset), animated: animated)
             scrollTargetTime = nil
         }

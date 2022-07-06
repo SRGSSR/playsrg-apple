@@ -34,7 +34,7 @@ final class ProgramGuideGridViewController: UIViewController {
     init(model: ProgramGuideViewModel, dailyModel: ProgramGuideDailyViewModel?) {
         self.model = model
         scrollTarget = ScrollTarget(channel: model.selectedChannel, time: model.time)
-        if let dailyModel = dailyModel, dailyModel.day == model.day {
+        if let dailyModel, dailyModel.day == model.day {
             self.dailyModel = dailyModel
         }
         else {
@@ -99,7 +99,7 @@ final class ProgramGuideGridViewController: UIViewController {
         }
         
         let headerViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<ChannelHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
+            guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let channel = snapshot.sectionIdentifiers[indexPath.section]
             view.content = ChannelHeaderView(channel: channel)
@@ -121,7 +121,7 @@ final class ProgramGuideGridViewController: UIViewController {
         
         model.$change
             .sink { [weak self] change in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch change {
                 case let .day(day):
                     self.dailyModel.day = day
@@ -186,12 +186,12 @@ final class ProgramGuideGridViewController: UIViewController {
 
 private extension ProgramGuideGridViewController {
     func xOffset(for time: TimeInterval?) -> CGFloat? {
-        guard let time = time else { return nil }
+        guard let time else { return nil }
         return ProgramGuideGridLayout.xOffset(centeringDate: model.date(for: time), in: collectionView, day: model.day)
     }
     
     func yOffset(for channel: SRGChannel?) -> CGFloat? {
-        guard let channel = channel, let sectionIndex = dataSource.snapshot().sectionIdentifiers.firstIndex(of: channel) else { return nil }
+        guard let channel, let sectionIndex = dataSource.snapshot().sectionIdentifiers.firstIndex(of: channel) else { return nil }
         return ProgramGuideGridLayout.yOffset(forSectionIndex: sectionIndex, in: collectionView)
     }
     
@@ -208,7 +208,7 @@ private extension ProgramGuideGridViewController {
     }
     
     func scrollToTarget(_ target: ScrollTarget?, animated: Bool) {
-        if let target = target, let offset = offset(for: target) {
+        if let target, let offset = offset(for: target) {
             collectionView.setContentOffset(offset, animated: animated)
             scrollTarget = nil
         }

@@ -204,12 +204,12 @@ extension ProgramGuideDailyViewModel {
         }
         
         func items(for section: Section) -> [Item] {
-            guard let day = day, let bouquet = bouquet(for: section) else { return [] }
+            guard let day, let bouquet = bouquet(for: section) else { return [] }
             return bouquet.items(for: section, day: day)
         }
         
         func isLoading(in section: Section?) -> Bool {
-            if let section = section {
+            if let section {
                 guard let bouquet = bouquet(for: section) else { return false }
                 return bouquet.isLoading
             }
@@ -224,7 +224,7 @@ extension ProgramGuideDailyViewModel {
         }
         
         func isEmpty(in section: Section?) -> Bool {
-            if let section = section {
+            if let section {
                 guard let bouquet = bouquet(for: section) else { return false }
                 return bouquet.isEmpty(for: section)
             }
@@ -261,7 +261,7 @@ private extension ProgramGuideDailyViewModel {
     }
     
     static func bouquet(from state: State?, for provider: SRGProgramProvider, day otherDay: SRGDay) -> Bouquet {
-        guard let state = state else { return .empty }
+        guard let state else { return .empty }
         switch state {
         case let .content(firstPartyBouquet: firstPartyBouquet, thirdPartyBouquet: thirdPartyBouquet, day: day):
             guard otherDay.compare(day) == .orderedSame else {
