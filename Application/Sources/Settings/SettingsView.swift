@@ -384,8 +384,8 @@ struct SettingsView: View {
                 if let openFeedbackForm = model.openFeedbackForm {
                     Button(NSLocalizedString("Your feedback", comment: "Label of the button to display feedback form"), action: openFeedbackForm)
                 }
-                SupportInformationButton(model: model)
 #endif
+                SupportInformationButton(model: model)
             } header: {
                 Text(NSLocalizedString("Information", comment: "Information section header"))
             }
@@ -408,9 +408,10 @@ struct SettingsView: View {
             }
         }
         
-#if os(iOS)
         private struct SupportInformationButton: View {
             @ObservedObject var model: SettingsViewModel
+        
+#if os(iOS)
             @State private var isAlertDisplayed = false
             @State private var isMailComposeDisplayed = false
             
@@ -455,20 +456,26 @@ struct SettingsView: View {
                     .toRecipients(supportRecipients)
                     .messageBody(SupportInformation.generate())
             }
+#endif
             
             private func action() {
+#if os(iOS)
                 isAlertDisplayed = true
+#else
+                navigateToText(SupportInformation.generate())
+#endif
             }
             
             var body: some View {
                 Button(action: action) {
                     Text(NSLocalizedString("Support information", comment: "Label of the button to access support information"))
                 }
+#if os(iOS)
                 .alert(isPresented: $isAlertDisplayed, content: alert)
                 .sheet(isPresented: $isMailComposeDisplayed, content: mailComposeView)
+#endif
             }
         }
-#endif
     }
     
     // MARK: Advanced features section
