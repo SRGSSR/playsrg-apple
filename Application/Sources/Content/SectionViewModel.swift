@@ -105,7 +105,7 @@ final class SectionViewModel: ObservableObject {
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self = self else { return false }
-                    return !self.state.hasContent
+                    return !self.state.hasContent || self.configuration.viewModelProperties.reloadSignalOnWokenUp()
                 }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
@@ -293,6 +293,9 @@ protocol SectionViewModelProperties {
     var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
+    
+    /// Property to force signal reload at woken up.
+    func reloadSignalOnWokenUp() -> Bool
 }
 
 private extension SectionViewModel {
@@ -373,6 +376,10 @@ private extension SectionViewModel {
                 // Remark: `.shows` results cannot be arranged alphabetically because of pagination.
                 return SectionViewModel.consolidatedRows(with: items)
             }
+        }
+        
+        func reloadSignalOnWokenUp() -> Bool {
+            return false
         }
     }
     
@@ -464,6 +471,10 @@ private extension SectionViewModel {
             default:
                 return SectionViewModel.consolidatedRows(with: items)
             }
+        }
+        
+        func reloadSignalOnWokenUp() -> Bool {
+            return configuredSection == .notifications
         }
     }
 }
