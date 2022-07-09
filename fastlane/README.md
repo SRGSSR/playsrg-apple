@@ -157,7 +157,7 @@ Sends latest iOS App Store dSYMs to App Center. Optional 'build_number', 'versio
 [bundle exec] fastlane ios iOSAppStoreRelease
 ```
 
-Prepare AppStore iOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'submit_for_review' boolean parameter.
+Prepare AppStore iOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'version' or 'submit_for_review' parameters.
 
 ### ios tvOSAppStoreBetas
 
@@ -205,7 +205,7 @@ Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'mi
 [bundle exec] fastlane ios tvOSAppStoreRelease
 ```
 
-Prepare AppStore tvOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'submit_for_review' boolean parameter.
+Prepare AppStore tvOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'version' or 'submit_for_review' parameters.
 
 ### ios iOSrsiScreenshots
 
