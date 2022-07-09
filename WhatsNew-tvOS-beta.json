@@ -43,5 +43,6 @@
   "1.6.2-42": "- Add highlight layout support.",
   "1.6.2-43": "- Soon playable content have now the date and time displayed in list.\n- Update Radio SRF 3 and Virus channel logo. [SRF]\n- Fix search result update after an error occured.",
   "1.6.3-44": "- Update settings tab.",
-  "1.6.3-45": "- The search view now presents topics in addition to the most searched shows.\n- Home page hero stage and highlights should have a better image framing."
+  "1.6.3-45": "- The search view now presents topics in addition to the most searched shows.\n- Home page hero stage and highlights should have a better image framing.",
+  "1.6.3-46": "- Support informations can be displayed in profile view."
 }
