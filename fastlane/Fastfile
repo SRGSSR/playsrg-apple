@@ -316,7 +316,7 @@ platform :ios do
   lane :iOSrsiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'RSI', ['it'])
+    screenshots(platform, 'RSI')
     upload_screenshots(platform)
   end
 
@@ -324,7 +324,7 @@ platform :ios do
   lane :iOSrtrScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'RTR', ['de-DE'])
+    screenshots(platform, 'RTR')
     upload_screenshots(platform)
   end
 
@@ -332,7 +332,7 @@ platform :ios do
   lane :iOSrtsScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'RTS', ['fr-FR'])
+    screenshots(platform, 'RTS')
     upload_screenshots(platform)
   end
 
@@ -340,7 +340,7 @@ platform :ios do
   lane :iOSsrfScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'SRF', ['de-DE'])
+    screenshots(platform, 'SRF')
     # upload_screenshots(platform) # Don't erase existing ones, from SRF marketing team.
   end
 
@@ -348,7 +348,7 @@ platform :ios do
   lane :iOSswiScreenshots do
     platform = 'iOS'
 
-    screenshots(platform, 'SWI', ['en-US'])
+    screenshots(platform, 'SWI')
     upload_screenshots(platform)
   end
 
@@ -486,7 +486,7 @@ platform :ios do
   lane :tvOSrsiScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'RSI', ['it'])
+    screenshots(platform, 'RSI')
     upload_screenshots(platform)
   end
 
@@ -494,7 +494,7 @@ platform :ios do
   lane :tvOSrtrScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'RTR', ['de-DE'])
+    screenshots(platform, 'RTR')
     upload_screenshots(platform)
   end
 
@@ -502,7 +502,7 @@ platform :ios do
   lane :tvOSrtsScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'RTS', ['fr-FR'])
+    screenshots(platform, 'RTS')
     upload_screenshots(platform)
   end
 
@@ -510,7 +510,7 @@ platform :ios do
   lane :tvOSsrfScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'SRF', ['de-DE'])
+    screenshots(platform, 'SRF')
     upload_screenshots(platform)
   end
 
@@ -518,7 +518,7 @@ platform :ios do
   lane :tvOSswiScreenshots do
     platform = 'tvOS'
 
-    screenshots(platform, 'SWI', ['en-US'])
+    screenshots(platform, 'SWI')
     upload_screenshots(platform)
   end
 
@@ -1059,11 +1059,13 @@ def appstore_beta_identifiers
 end
 
 def appstore_team_api_key_prefixes
-  { ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI',
+  {
+    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
     ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
     ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
-    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
-    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR' } # RTR is in SRG SSR ASC team
+    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR', # RTR is in SRG SSR ASC team
+    ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI'
+  }
 end
 
 # Returns current tag version
@@ -1379,18 +1381,29 @@ def srg_latest_testflight_build_number(app_identifiers, platform)
 end
 
 # Create screenshots for App Store Connect.
-def screenshots(platform, business_unit, languages)
+def screenshots(platform, business_unit)
   platform ||= 'iOS'
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
   Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
   snapshot(
     scheme: screenshots_scheme(platform, business_unit),
-    languages: languages,
+    languages: [device_language(business_unit)],
     devices: snapshot_devices(platform),
     derived_data_path: derived_data_path,
     output_directory: output_directory
   )
+end
+
+def device_language(business_unit)
+  languages = {
+    'RSI' => 'it-CH',
+    'RTR' => 'de-CH',
+    'RTS' => 'fr-CH',
+    'SRF' => 'de-CH',
+    'SWI' => 'en-US'
+  }
+  languages[business_unit]
 end
 
 def upload_screenshots(platform)
