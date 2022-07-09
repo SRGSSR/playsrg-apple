@@ -6,7 +6,7 @@
 
 #import "NotificationService.h"
 
-#import "Notification.h"
+#import "UserNotification.h"
 
 @import MobileCoreServices;
 @import SRGDataProviderNetwork;
@@ -18,6 +18,8 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 
 @interface NotificationService ()
 
+@property (nonatomic) SRGDataProvider *dataProvider;
+
 @property (nonatomic, copy) void (^contentHandler)(UNNotificationContent *contentToDeliver);
 @property (nonatomic) UNNotificationContent *notificationContent;
 
@@ -26,6 +28,16 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 @end
 
 @implementation NotificationService
+
+#pragma mark Object lifecycle
+
+- (instancetype)init
+{
+    if (self = [super init]) {
+        self.dataProvider = [[SRGDataProvider alloc] initWithServiceURL:SRGIntegrationLayerProductionServiceURL()];
+    }
+    return self;
+}
 
 #pragma mark Subclassing hooks
 
@@ -37,25 +49,11 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
     self.notificationContent = notificationContent;
     self.contentHandler = contentHandler;
     
-    Notification *notification = [[Notification alloc] initWithRequest:request];
-    [Notification saveNotification:notification read:NO];
+    UserNotification *notification = [[UserNotification alloc] initWithRequest:request];
+    [UserNotification saveNotification:notification read:NO];
     
-    if (notification.imageURL) {
-        self.downloadTask = [self imageDownloadTaskForNotification:notification withCompletion:^(UNNotificationAttachment * _Nullable attachment) {
-            if (attachment) {
-                UNMutableNotificationContent *mutableNotificationContent = notificationContent.mutableCopy;
-                mutableNotificationContent.attachments = @[attachment];
-                contentHandler(mutableNotificationContent.copy);
-            }
-            else {
-                contentHandler(notificationContent);
-            }
-        }];
-        [self.downloadTask resume];
-    }
-    else {
-        contentHandler(notificationContent);
-    }
+    self.downloadTask = [self imageDownloadTaskForNotification:notification content:notificationContent withContentHandler:contentHandler];
+    [self.downloadTask resume];
 }
 
 - (void)serviceExtensionTimeWillExpire
@@ -66,39 +64,46 @@ static NSString *NotificationServiceUTIFromMIMEType(NSString *MIMEType)
 
 #pragma mark UNNotificationAttachment for image
 
-- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(Notification *)notification withCompletion:(void (^)(UNNotificationAttachment * _Nullable attachment))completion
+- (NSURLSessionDownloadTask *)imageDownloadTaskForNotification:(UserNotification *)notification
+                                                       content:(UNNotificationContent *)content
+                                            withContentHandler:(void (^)(UNNotificationContent * _Nonnull))contentHandler
 {
-    NSParameterAssert(completion);
+    NSParameterAssert(contentHandler);
     
-    static SRGDataProvider *s_dataProvider;
-    static dispatch_once_t s_onceToken;
-    dispatch_once(&s_onceToken, ^{
-        s_dataProvider = [[SRGDataProvider alloc] initWithServiceURL:SRGIntegrationLayerProductionServiceURL()];
-    });
+    NSURL *scaledImageURL = [self.dataProvider URLForImage:notification.image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
+    if (! scaledImageURL) {
+        contentHandler(content);
+        return nil;
+    }
     
-    SRGImage *image = [SRGImage imageWithURL:notification.imageURL variant:SRGImageVariantDefault];
-    NSURL *scaledImageURL = [s_dataProvider URLForImage:image withSize:SRGImageSizeMedium scaling:SRGImageScalingDefault];
     return [[NSURLSession sharedSession] downloadTaskWithURL:scaledImageURL completionHandler:^(NSURL *temporaryFileURL, NSURLResponse *response, NSError *error) {
         if (error) {
-            completion(nil);
+            contentHandler(content);
             return;
         }
         
         NSString *MIMEType = response.MIMEType;
         if (! MIMEType) {
-            completion(nil);
+            contentHandler(content);
             return;
         }
         
         NSString *UTI = NotificationServiceUTIFromMIMEType(MIMEType);
         if (! UTI) {
-            completion(nil);
+            contentHandler(content);
             return;
         }
         
         NSDictionary *options = @{ UNNotificationAttachmentOptionsTypeHintKey : UTI };
         UNNotificationAttachment *attachment = [UNNotificationAttachment attachmentWithIdentifier:@"" URL:temporaryFileURL options:options error:NULL];
-        completion(attachment);
+        if (! attachment) {
+            contentHandler(content);
+            return;
+        }
+        
+        UNMutableNotificationContent *mutableContent = content.mutableCopy;
+        mutableContent.attachments = @[attachment];
+        contentHandler(mutableContent.copy);
     }];
 }
 

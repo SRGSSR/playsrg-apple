@@ -20,7 +20,7 @@ final class ProgramGuideGridViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
     private static func snapshot(from state: ProgramGuideDailyViewModel.State) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
@@ -70,9 +70,9 @@ final class ProgramGuideGridViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
         self.view = view
     }
@@ -139,6 +139,7 @@ final class ProgramGuideGridViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         navigationController?.setNavigationBarHidden(false, animated: animated)
         scrollToTarget(ScrollTarget(channel: model.selectedChannel, time: model.time), animated: false)
     }
@@ -146,16 +147,16 @@ final class ProgramGuideGridViewController: UIViewController {
     private func reloadData(for state: ProgramGuideDailyViewModel.State) {
         switch state {
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case .content:
             if state.isLoading {
-                emptyView.content = EmptyView(state: .loading)
+                emptyContentView.content = EmptyContentView(state: .loading)
             }
             else if state.isEmpty {
-                emptyView.content = EmptyView(state: .empty(type: .generic), layout: constant(iOS: .standard, tvOS: .text))
+                emptyContentView.content = EmptyContentView(state: .empty(type: .generic), layout: constant(iOS: .standard, tvOS: .text))
             }
             else {
-                emptyView.content = nil
+                emptyContentView.content = nil
             }
 #if os(tvOS)
             if let channel = model.selectedChannel ?? model.channels.first, let section = state.sections.first(where: { $0 == channel }) ?? state.sections.first,
@@ -264,6 +265,14 @@ extension ProgramGuideGridViewController: ProgramGuideChildViewController {
     }
 }
 
+#if os(iOS)
+extension ProgramGuideGridViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+#endif
+
 extension ProgramGuideGridViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let snapshot = dataSource.snapshot()
@@ -315,6 +324,14 @@ extension ProgramGuideGridViewController: UIScrollViewDelegate {
         let time = date.timeIntervalSince(dailyModel.day.date)
         model.didScrollToTime(time)
     }
+    
+#if os(iOS)
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
 }
 
 // MARK: Views

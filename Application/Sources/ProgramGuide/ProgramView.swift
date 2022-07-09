@@ -133,7 +133,7 @@ struct ProgramView: View {
     // Behavior: h-exp, v-hug
     private struct ActionsView: View {
         @ObservedObject var model: ProgramViewModel
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         static let buttonHeight: CGFloat = 40
         
@@ -227,7 +227,7 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
         super.init(rootView: ProgramView(program: program, channel: channel))
     }
     
-    @objc required dynamic init?(coder aDecoder: NSCoder) {
+    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

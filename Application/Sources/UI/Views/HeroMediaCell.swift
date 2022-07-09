@@ -40,9 +40,33 @@ struct HeroMediaCell: View {
         let media: SRGMedia?
         let label: String?
         
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
+        
+        private var regularWidthContentMode: ImageView.ContentMode {
+            return .aspectFillFocused(relativeWidth: 0.5, relativeHeight: 0.55)
+        }
+        
+        private var contentMode: ImageView.ContentMode {
+            if let focalPoint = media?.imageFocalPoint {
+                return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
+            }
+            else {
+#if os(tvOS)
+                return regularWidthContentMode
+#else
+                if horizontalSizeClass == .compact {
+                    return .aspectFillTop
+                }
+                else {
+                    return regularWidthContentMode
+                }
+#endif
+            }
+        }
+        
         var body: some View {
             ZStack {
-                MediaVisualView(media: media, size: .large, contentMode: .aspectFillTop) { media in
+                MediaVisualView(media: media, size: .large, contentMode: contentMode) { media in
                     if media != nil {
                         LinearGradient(gradient: Gradient(colors: [.clear, .init(white: 0, opacity: 0.7)]), startPoint: .center, endPoint: .bottom)
                     }
@@ -115,10 +139,21 @@ enum HeroMediaCellSize {
 #if os(tvOS)
         let height: CGFloat = 700
 #else
-        let aspectRatio: CGFloat = (horizontalSizeClass == .compact) ? 9 / 11 : 1 / 2
-        let height = layoutWidth * aspectRatio
+        let height = layoutWidth * aspectRatio(horizontalSizeClass: horizontalSizeClass)
 #endif
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
+    }
+    
+    static private func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        if horizontalSizeClass == .compact {
+            return 9 / 11
+        }
+        else if let isLandscape = UIApplication.shared.mainWindowScene?.isLandscape, isLandscape {
+            return 2 / 5
+        }
+        else {
+            return 1 / 2
+        }
     }
 }
 

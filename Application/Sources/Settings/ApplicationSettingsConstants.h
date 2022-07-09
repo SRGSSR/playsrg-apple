@@ -19,7 +19,7 @@ OBJC_EXPORT NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed;
 OBJC_EXPORT NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed;
 OBJC_EXPORT NSString * const PlaySRGSettingLastLoggedInEmailAddress;
 OBJC_EXPORT NSString * const PlaySRGSettingSelectedLivestreamURNForChannels;
-OBJC_EXPORT NSString * const PlaySRGSettingServiceURL;
+OBJC_EXPORT NSString * const PlaySRGSettingServiceIdentifier;
 OBJC_EXPORT NSString * const PlaySRGSettingUserLocation;
 
 NS_ASSUME_NONNULL_END

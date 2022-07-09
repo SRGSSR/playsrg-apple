@@ -19,7 +19,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
     private static let margin: CGFloat = 10
     private static let verticalSpacing: CGFloat = 3
@@ -71,9 +71,9 @@ final class ProgramGuideDailyViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Self.margin)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
         self.view = view
     }
@@ -118,6 +118,7 @@ final class ProgramGuideDailyViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         scrollToTime(programGuideModel.time, animated: false)
     }
     
@@ -130,16 +131,16 @@ final class ProgramGuideDailyViewController: UIViewController {
         
         switch state {
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case .content:
             if state.isLoading(in: currentChannel) {
-                emptyView.content = EmptyView(state: .loading)
+                emptyContentView.content = EmptyContentView(state: .loading)
             }
             else if state.isEmpty(in: currentChannel) {
-                emptyView.content = EmptyView(state: .empty(type: .generic))
+                emptyContentView.content = EmptyContentView(state: .empty(type: .generic))
             }
             else {
-                emptyView.content = nil
+                emptyContentView.content = nil
             }
         }
         
@@ -213,6 +214,12 @@ extension ProgramGuideDailyViewController: ContentInsets {
     }
 }
 
+extension ProgramGuideDailyViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
+    }
+}
+
 extension ProgramGuideDailyViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
@@ -234,6 +241,12 @@ extension ProgramGuideDailyViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard let date = date(atYOffset: collectionView.contentOffset.y) else { return }
         programGuideModel.didScrollToTime(date.timeIntervalSince(day.date))
+    }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
     }
 }
 

@@ -40,7 +40,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeedback;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHome;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleLatest;
@@ -154,16 +153,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 
 /**
- *  Title for events related to opening a media or show from search result
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchOpen;
-
-/**
- *  Title for events related to opening a media or show from search teaser
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSearchTeaserOpen;
-
-/**
  *  Title for events related to opening a user activity
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleUserActivity;
@@ -194,7 +183,7 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceContextMenu;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification;
+OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification NS_SWIFT_NAME(AnalyticsSource.notification);
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;

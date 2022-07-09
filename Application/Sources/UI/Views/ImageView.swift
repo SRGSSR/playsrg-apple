@@ -49,6 +49,7 @@ struct ImageView: View {
         case aspectFillTopRight
         case aspectFillBottomLeft
         case aspectFillBottomRight
+        case aspectFillFocused(relativeWidth: CGFloat, relativeHeight: CGFloat)
     }
     
     let source: ImageRequestConvertible?
@@ -56,7 +57,7 @@ struct ImageView: View {
     
     private static func alignment(for contentMode: ImageView.ContentMode) -> Alignment {
         switch contentMode {
-        case .aspectFit, .aspectFill, .center, .fill:
+        case .aspectFit, .aspectFill, .center, .fill, .aspectFillFocused:
             return .center
         case .top, .aspectFitTop, .aspectFillTop:
             return .top
@@ -113,6 +114,46 @@ struct ImageView: View {
         }
     }
     
+    /**
+     *  Calculate the offset to apply so that the focal point P approaches the center C of the target frame as close as
+     *  possible while ensuring the resized filling image entirely covers the target frame.
+     *
+     *    ┌─────────────────┬─────────────────────────────────────────┬────────────────────┐
+     *    │                 │                                         │                    │
+     *    │                 │  Target frame                           │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │            P       │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                    C                    │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    │                 │                                         │                    │
+     *    └─────────────────┴─────────────────────────────────────────┴────────────────────┘
+     *
+     *                                                                     Resized frame
+     */
+    private static func offset(forFocalPoint focalPoint: CGPoint, targetSize: CGSize, fillSize: CGSize) -> CGSize {
+        let margins = CGSize(
+            width: (fillSize.width - targetSize.width) / 2,
+            height: (fillSize.height - targetSize.height) / 2
+        )
+        return CGSize(
+            width: -(focalPoint.x - fillSize.width / 2).clamped(to: -margins.width...margins.width),
+            height: (focalPoint.y - fillSize.height / 2).clamped(to: -margins.height...margins.height)
+        )
+    }
+    
     init(source: ImageRequestConvertible?, contentMode: ContentMode = .aspectFit) {
         self.source = source
         self.contentMode = contentMode
@@ -152,6 +193,15 @@ struct ImageView: View {
                             .resizingMode(.fill)
                             .frame(size: Self.fillSize(for: imageContainer, in: geometry))
                             .frame(size: geometry.size, alignment: Self.alignment(for: contentMode))
+                    case let .aspectFillFocused(relativeWidth: relativeWidth, relativeHeight: relativeHeight):
+                        let fillSize = Self.fillSize(for: imageContainer, in: geometry)
+                        let targetSize = geometry.size
+                        let focalPoint = CGPoint(x: fillSize.width * relativeWidth, y: fillSize.height * relativeHeight)
+                        image
+                            .resizingMode(.fill)
+                            .frame(size: fillSize)
+                            .frame(size: targetSize, alignment: Self.alignment(for: contentMode))
+                            .offset(Self.offset(forFocalPoint: focalPoint, targetSize: targetSize, fillSize: fillSize))
                     }
                 }
                 else {

@@ -5,6 +5,7 @@
 //
 
 import Collections
+import Combine
 import SRGDataProviderCombine
 import SRGUserData
 
@@ -68,7 +69,7 @@ extension SRGDataProvider {
 #endif
     }
     
-    func historyPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func historyEntriesPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -84,12 +85,17 @@ extension SRGDataProvider {
                 }
             }
         }
-        .map { urns in
-            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
-                .map { filter?.compatibleMedias($0) ?? $0 }
-        }
-        .switchToLatest()
         .eraseToAnyPublisher()
+    }
+    
+    func historyPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        return historyEntriesPublisher()
+            .map { urns in
+                return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+                    .map { filter?.compatibleMedias($0) ?? $0 }
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
     
     func resumePlaybackPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
@@ -134,7 +140,7 @@ extension SRGDataProvider {
         .eraseToAnyPublisher()
     }
     
-    func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+    func laterEntriesPublisher() -> AnyPublisher<[String], Error> {
         // Use a deferred future to make it repeatable on-demand
         // See https://heckj.github.io/swiftui-notes/#reference-future
         return Deferred {
@@ -150,12 +156,17 @@ extension SRGDataProvider {
                 }
             }
         }
-        .map { urns in
-            return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
-                .map { filter?.compatibleMedias($0) ?? $0 }
-        }
-        .switchToLatest()
         .eraseToAnyPublisher()
+    }
+    
+    func laterPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
+        return laterEntriesPublisher()
+            .map { urns in
+                return self.medias(withUrns: urns, pageSize: pageSize, paginatedBy: paginator)
+                    .map { filter?.compatibleMedias($0) ?? $0 }
+            }
+            .switchToLatest()
+            .eraseToAnyPublisher()
     }
     
     func showsPublisher(withUrns urns: [String]) -> AnyPublisher<[SRGShow], Error> {
@@ -181,6 +192,12 @@ extension SRGDataProvider {
 }
 
 enum UserDataPublishers {
+    enum SubscriptionStatus {
+        case unavailable
+        case unsubscribed
+        case subscribed
+    }
+    
     static func playbackProgressPublisher(for media: SRGMedia) -> AnyPublisher<Double?, Never> {
         return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.historyUpdates(for: media.urn)) {
             return Deferred {
@@ -197,19 +214,36 @@ enum UserDataPublishers {
         .eraseToAnyPublisher()
     }
     
-    static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
-            return Deferred {
-                Future<WatchLaterAction, Never> { promise in
-                    WatchLaterAllowedActionForMediaAsync(media) { action in
-                        promise(.success(action))
-                    }
-                }
+    static func favoritePublisher(for show: SRGShow) -> AnyPublisher<Bool, Never> {
+        return ThrottledSignal.preferenceUpdates(interval: 0)
+            .prepend(())
+            .map { _ in
+                return FavoritesContainsShow(show)
             }
+            .eraseToAnyPublisher()
+    }
+    
+    static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn, interval: 0)) {
+            return Just(WatchLaterAllowedActionForMedia(media))
         }
-        .prepend(.none)
         .eraseToAnyPublisher()
     }
+    
+#if os(iOS)
+    static func subscriptionStatusPublisher(for show: SRGShow) -> AnyPublisher<SubscriptionStatus, Never> {
+        return Publishers.Merge(
+            ThrottledSignal.preferenceUpdates(interval: 0),
+            ApplicationSignal.pushServiceStatusUpdate()
+        )
+        .prepend(())
+        .map {
+            guard let isEnabled = PushService.shared?.isEnabled, isEnabled else { return .unavailable }
+            return FavoritesIsSubscribedToShow(show) ? .subscribed : .unsubscribed
+        }
+        .eraseToAnyPublisher()
+    }
+#endif
 }
 
 #if DEBUG
@@ -220,9 +254,13 @@ extension Publisher {
      *  Borrowed from https://peterfriese.dev/posts/swiftui-combine-custom-operators/
      */
     func dump() -> AnyPublisher<Output, Failure> {
-        handleEvents(receiveOutput: { value in
-            Swift.dump(value)
-        })
+        handleEvents { output in
+            Swift.dump(output)
+        } receiveCompletion: { completion in
+            if case let .failure(error) = completion {
+                Swift.dump(error)
+            }
+        }
         .eraseToAnyPublisher()
     }
 }

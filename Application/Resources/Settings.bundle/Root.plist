@@ -10,42 +10,6 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Quality</string>
-			<key>FooterText</key>
-			<string>By default, the application loads high-definition medias over cellular networks. To avoid possible extra costs, this option could be disable and the highest quality will be played only on Wi-Fi networks.</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>HD over cellular networks</string>
-			<key>Key</key>
-			<string>PlaySRGSettingHDOverCellularEnabled</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Playback</string>
-			<key>FooterText</key>
-			<string>When enabled, video playback continues even when you leave the application.</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Video background playback</string>
-			<key>Key</key>
-			<string>PlaySRGSettingBackgroundVideoPlaybackEnabled</string>
-			<key>DefaultValue</key>
-			<false/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
 			<string>Information</string>
 		</dict>
 		<dict>

@@ -38,7 +38,7 @@ extension AppDelegate: UIApplicationDelegate {
         
         PlayApplicationRunOnce({ completionHandler in
             let userDefaults = UserDefaults.standard
-            userDefaults.removeObject(forKey: PlaySRGSettingServiceURL)
+            userDefaults.removeObject(forKey: PlaySRGSettingServiceIdentifier)
             userDefaults.synchronize()
             completionHandler(true)
         }, "DataProviderServiceURLChange")
@@ -97,14 +97,14 @@ extension AppDelegate: UIApplicationDelegate {
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
                                                                siteName: configuration.tvSiteName)
-        #if DEBUG || NIGHTLY || BETA
+#if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
-        #endif
+#endif
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA
         Publishers.Merge(
-            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceURL),
+            ApplicationSignal.settingUpdates(at: \.PlaySRGSettingServiceIdentifier),
             ApplicationSignal.settingUpdates(at: \.PlaySRGSettingUserLocation)
         )
         .receive(on: DispatchQueue.main)

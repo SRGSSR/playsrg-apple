@@ -138,7 +138,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let timelineAttr = TimelineLayoutAttributes(forDecorationViewOfKind: ElementKind.timeline.rawValue, with: IndexPath(item: 0, section: 0))
         timelineAttr.frame = CGRect(
             x: -timelinePadding,
-            y: collectionView.contentOffset.y,
+            y: yElasticContentOffset(for: collectionView),
             width: timelinePadding + dateInterval.duration * scale,
             height: timelineHeight
         )
@@ -169,7 +169,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowArrow.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: nowXPosition(at: date, in: dateInterval),
-            y: collectionView.contentOffset.y + timelineHeight - NowArrowView.size.height,
+            y: yElasticContentOffset(for: collectionView) + collectionView.adjustedContentInset.top + timelineHeight - NowArrowView.size.height,
             width: NowArrowView.size.width,
             height: NowArrowView.size.height
         )
@@ -181,12 +181,18 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
         let attr = UICollectionViewLayoutAttributes(forDecorationViewOfKind: ElementKind.nowLine.rawValue, with: decorationIndexPath)
         attr.frame = CGRect(
             x: nowXPosition(at: date, in: dateInterval),
-            y: collectionView.contentOffset.y + timelineHeight,
+            y: yElasticContentOffset(for: collectionView) + timelineHeight,
             width: NowArrowView.size.width,
             height: max(CGFloat(collectionView.numberOfSections) * (sectionHeight + verticalSpacing) - verticalSpacing - collectionView.contentOffset.y, 0)
         )
         attr.zIndex = 1
         return attr
+    }
+    
+    /// Content offset with contribution of vertical bouncing taken into account
+    private static func yElasticContentOffset(for collectionView: UICollectionView) -> CGFloat {
+        let yBouncingOffset = max(-collectionView.contentOffset.y - collectionView.adjustedContentInset.top, 0)
+        return collectionView.contentOffset.y + yBouncingOffset
     }
     
     private var focusedIndexPath: IndexPath? {

@@ -66,3 +66,14 @@ NSString *PlayAccessibilityTimeFromDate(NSDate *date)
                                                                      fromDate:date];
     return [s_dateComponentsFormatter stringFromDateComponents:components];
 }
+
+NSString *PlayAccessibilityNumberFormatter(NSNumber *number)
+{
+    static NSNumberFormatter *s_numberFormatter;
+    static dispatch_once_t s_onceToken;
+    dispatch_once(&s_onceToken, ^{
+        s_numberFormatter = [[NSNumberFormatter alloc] init];
+        s_numberFormatter.numberStyle = NSNumberFormatterSpellOutStyle;
+    });
+    return [s_numberFormatter stringFromNumber:number];
+}

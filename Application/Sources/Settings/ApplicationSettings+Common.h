@@ -40,12 +40,14 @@ OBJC_EXPORT void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuid
 OBJC_EXPORT BOOL ApplicationSettingSectionWideSupportEnabled(void);
 OBJC_EXPORT SettingPosterImages ApplicationSettingPosterImages(void);
 
-OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
-OBJC_EXPORT void ApplicationSettingSetServiceURL(NSURL * _Nullable serviceURL);
-
 OBJC_EXPORT NSDictionary<NSString *, NSString *> * _Nullable ApplicationSettingGlobalParameters(void);
 
 OBJC_EXPORT NSString * _Nullable ApplicationSettingLastSelectedAudioLanguageCode(void);
 OBJC_EXPORT void ApplicationSettingSetLastSelectedAudioLanguageCode(NSString * _Nullable languageCode);
+
+OBJC_EXPORT NSString *ApplicationSettingServiceIdentifier(void);
+OBJC_EXPORT void ApplicationSettingSetServiceIdentifier(NSString * _Nullable identifier);
+
+OBJC_EXPORT NSURL *ApplicationSettingServiceURL(void);
 
 NS_ASSUME_NONNULL_END

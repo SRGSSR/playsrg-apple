@@ -1,16 +1,16 @@
 [
   {
-      "uid": "account",
+      "id": "account",
       "title": "Account",
       "pages": [
           {
-              "uid": "account_creation",
+              "id": "account_creation",
               "title": "Account",
               "text": "Open an account to enable more features.",
               "color": "#af001d"
           },
           {
-        "uid": "account",
+        "id": "account",
         "title": "Benefits",
         "text": "Find your content and resume playback on any of your devices.",
         "color": "#c9002b"
@@ -18,17 +18,17 @@
     ]
   },
   {
-    "uid": "resume_playback",
+    "id": "resume_playback",
     "title": "Resume playback",
     "pages": [
       {
-        "uid": "resume",
+        "id": "resume",
         "title": "Resume playback",
         "text": "When reopening a content previously watched, playback resumes where you left off.",
         "color": "#8b0019"
       },
       {
-        "uid": "history",
+        "id": "history",
         "title": "History",
         "text": "Access your playback history.",
         "color": "#af001d"
@@ -36,23 +36,23 @@
     ]
   },
   {
-    "uid": "resume_playback_account",
+    "id": "resume_playback_account",
     "title": "Resume playback",
     "pages": [
       {
-        "uid": "resume",
+        "id": "resume",
         "title": "Resume playback",
         "text": "When reopening a content previously watched, playback resumes where you left off.",
         "color": "#8b0019"
       },
       {
-        "uid": "history",
+        "id": "history",
         "title": "History",
         "text": "Access your playback history.",
         "color": "#af001d"
       },
       {
-        "uid": "account",
+        "id": "account",
         "title": "Account",
         "text": "Resume playback on any of your devices.",
         "color": "#c9002b"
@@ -60,40 +60,40 @@
     ]
   },
   {
-    "uid": "favorites",
+    "id": "favorites",
     "title": "Favorites",
     "pages": [
       {
-        "uid": "favorites",
+        "id": "favorites",
         "title": "Favorites",
         "text": "Bookmark the shows you like.",
         "color": "#8b0019"
       },
       {
-        "uid": "notifications",
+        "id": "notifications",
         "title": "Receive notifications",
         "text": "You will be notified when a new episode is available.",
         "color": "#af001d"
       }]
   },
   {
-    "uid": "favorites_account",
+    "id": "favorites_account",
     "title": "Favorites",
     "pages": [
       {
-        "uid": "favorites",
+        "id": "favorites",
         "title": "Favorites",
         "text": "Bookmark the shows you like.",
         "color": "#8b0019"
       },
       {
-        "uid": "notifications",
+        "id": "notifications",
         "title": "Receive notifications",
         "text": "You will be notified when a new episode is available.",
         "color": "#af001d"
       },
       {
-        "uid": "account",
+        "id": "account",
         "title": "Account",
         "text": "Find your favorite shows on any of your devices.",
         "color": "#c9002b"
@@ -101,11 +101,11 @@
     ]
   },
   {
-    "uid": "watch_later",
+    "id": "watch_later",
     "title": "Watch later",
     "pages": [
       {
-        "uid": "watch_later",
+        "id": "watch_later",
         "title": "Watch later",
         "text": "Save any content to watch it at a later time.",
         "color": "#af001d"
@@ -113,17 +113,17 @@
   }
 ,
   {
-    "uid": "watch_later_account",
+    "id": "watch_later_account",
     "title": "Watch later",
     "pages": [
       {
-        "uid": "watch_later",
+        "id": "watch_later",
         "title": "Watch later",
         "text": "Save any content to watch it at a later time.",
         "color": "#af001d"
       },
       {
-        "uid": "account",
+        "id": "account",
         "title": "Account",
         "text": "Watch the content later on any of your devices.",
         "color": "#c9002b"

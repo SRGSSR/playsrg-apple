@@ -13,6 +13,9 @@
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vues";
 
+/* Number of results aggregated in search */
+"%@ results" = "%@ résultats";
+
 /* Show A-Z button label */
 "A to Z shows" = "Émissions de A à Z";
 
@@ -24,8 +27,7 @@
 "Audio described" = "Audiodécrit";
 
 /* Close button label
-   Close button label on player view
-   Close button label on settings view */
+   Close button label on player view */
 "Close" = "Fermer";
 
 /* Player close button hint */
@@ -53,6 +55,9 @@
 
 /* Show unsubscription label */
 "Disable notifications for show" = "Désactiver les notifications pour l'émission";
+
+/* Label of the search bar button to close the keyboard */
+"Dismiss keyboard" = "Fermer le clavier";
 
 /* Button to display the TV guide as a grid */
 "Display grid" = "Afficher en grille";
@@ -112,7 +117,8 @@
 /* Text providing a channel information. Placeholder is the channel on which it's broadcasted. */
 "on %@" = "sur %@";
 
-/* More button hint
+/* Highlight cell hint
+   More button hint
    Program cell hint */
 "Opens details." = "Affiche plus de détails.";
 
@@ -194,6 +200,7 @@
 
 /* Download cell hint in edit mode
    Media cell hint in edit mode
+   Notification cell hint in edit mode
    Show cell hint in edit mode */
 "Toggles selection." = "Inverse la sélection.";
 

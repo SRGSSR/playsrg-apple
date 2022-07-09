@@ -487,6 +487,12 @@ extension UIViewController {
     }
 }
 
+extension View {
+    func eraseToAnyView() -> AnyView {
+        AnyView(self)
+    }
+}
+
 extension UIApplication {
     /// Return the main window scene among all connected scenes, if any.
     @objc var mainWindowScene: UIWindowScene? {

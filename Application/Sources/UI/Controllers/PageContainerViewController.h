@@ -5,6 +5,7 @@
 //
 
 #import "ContentInsets.h"
+#import "ScrollableContent.h"
 #import "TabBarActionable.h"
 
 @import SRGAnalytics;
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Abstract container class to display pages of contents, between which the user can change using a swipe or a tab strip.
  *  Tabs can be customized by associating a `UITabBarItem` with a view controller.
  */
-@interface PageContainerViewController : UIViewController <ContainerContentInsets, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
+@interface PageContainerViewController : UIViewController <ContainerContentInsets, ScrollableContentContainer, SRGAnalyticsContainerViewTracking, TabBarActionable, UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
 /**
  *  Create an instance displaying the supplied view controllers, and starting at the specified page.

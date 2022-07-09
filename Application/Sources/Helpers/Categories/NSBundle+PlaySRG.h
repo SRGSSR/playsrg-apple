@@ -19,11 +19,6 @@ OBJC_EXPORT NSString *PlaySRGAccessibilityLocalizedString(NSString *key, NSStrin
 OBJC_EXPORT NSString *PlaySRGOnboardingLocalizedString(NSString *key, NSString * _Nullable comment) NS_REFINED_FOR_SWIFT;
 
 /**
- *  Return a setting localized string from the settings bundle.
- */
-OBJC_EXPORT NSString *PlaySRGSettingsLocalizedString(NSString *key, NSString * _Nullable comment) NS_REFINED_FOR_SWIFT;
-
-/**
  *  Use to avoid user-facing text analyzer warnings.
  *
  *  See https://clang-analyzer.llvm.org/faq.html.

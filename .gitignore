@@ -26,3 +26,5 @@ xcuserdata
 /vendor
 /.bundle
 .ruby-version
+
+.vscode

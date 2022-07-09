@@ -17,7 +17,7 @@ NSString * const PlaySRGSettingSubtitleAvailabilityDisplayed = @"PlaySRGSettingS
 NSString * const PlaySRGSettingAudioDescriptionAvailabilityDisplayed = @"PlaySRGSettingAudioDescriptionAvailabilityDisplayed";
 NSString * const PlaySRGSettingLastLoggedInEmailAddress = @"PlaySRGSettingLastLoggedInEmailAddress";
 NSString * const PlaySRGSettingSelectedLivestreamURNForChannels = @"PlaySRGSettingSelectedLivestreamURNForChannels";
-NSString * const PlaySRGSettingServiceURL = @"PlaySRGSettingServiceURL";
+NSString * const PlaySRGSettingServiceIdentifier = @"PlaySRGSettingServiceIdentifier";
 NSString * const PlaySRGSettingUserLocation = @"PlaySRGSettingUserLocation";
 
 __attribute__((constructor)) static void ApplicationSettingsConstantsInit(void)

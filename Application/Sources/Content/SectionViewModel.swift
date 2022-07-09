@@ -18,8 +18,11 @@ final class SectionViewModel: ObservableObject {
     private var selectedItems = Set<Content.Item>()
     
     var title: String? {
-        let properties = configuration.properties
-        return properties.displaysTitle ? properties.title : nil
+        return configuration.properties.title
+    }
+    
+    var displaysTitle: Bool {
+        return configuration.properties.displaysTitle
     }
     
     var numberOfSelectedItems: Int {
@@ -219,7 +222,7 @@ extension SectionViewModel {
             }
         }
         
-        var displaysEmptyView: Bool {
+        var displaysEmptyContentView: Bool {
             return headerSize != .large && !hasContent
         }
     }
@@ -231,6 +234,7 @@ extension SectionViewModel {
         case topicGrid
 #if os(iOS)
         case downloadGrid
+        case notificationList
 #endif
     }
     
@@ -286,6 +290,7 @@ protocol SectionViewModelProperties {
     var layout: SectionViewModel.SectionLayout { get }
     var pinHeadersToVisibleBounds: Bool { get }
     var userActivity: NSUserActivity? { get }
+    var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode { get }
     
     func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row]
 }
@@ -339,6 +344,15 @@ private extension SectionViewModel {
             return nil
         }
         
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            switch contentSection.type {
+            case .showAndMedias:
+                return .never
+            default:
+                return .always
+            }
+        }
+        
         func rows(from items: [SectionViewModel.Item]) -> [SectionViewModel.Row] {
             switch contentSection.type {
             case .showAndMedias:
@@ -374,6 +388,8 @@ private extension SectionViewModel {
 #if os(iOS)
             case .downloads:
                 return .downloadGrid
+            case .notifications:
+                return .notificationList
 #endif
             default:
                 return .mediaGrid
@@ -421,6 +437,15 @@ private extension SectionViewModel {
                 return userActivity
             default:
                 return nil
+            }
+        }
+        
+        var largeTitleDisplayMode: UINavigationItem.LargeTitleDisplayMode {
+            switch configuredSection {
+            case .show:
+                return .never
+            default:
+                return .always
             }
         }
         

@@ -7,6 +7,15 @@
 import SwiftUI
 
 struct Mock {
+    enum Bucket: String {
+        case standard
+        case overflow
+    }
+    
+    static func bucket(_ kind: Bucket = .standard) -> SRGItemBucket {
+        return mockObject(kind.rawValue, type: SRGItemBucket.self)
+    }
+    
     enum Channel: String {
         case unknown
         case standard
@@ -28,10 +37,33 @@ struct Mock {
         return mockObject(kind.rawValue, type: SRGContentSection.self)
     }
     
+    enum FocalPoint: String {
+        case none
+        case left
+        case right
+        case top
+        case bottom
+        case topLeft
+        case topRight
+        case bottomLeft
+        case bottomRight
+    }
+    
+    static func focalPoint(_ kind: FocalPoint = .none) -> SRGFocalPoint? {
+        switch kind {
+        case .none:
+            return nil
+        default:
+            return mockObject(kind.rawValue, type: SRGFocalPoint.self)
+        }
+    }
+    
     enum Highlight {
         case standard
         case overflow
         case short
+        case topLeftAligned
+        case bottomRightAligned
     }
     
     static func highlight(_ kind: Highlight = .standard) -> PlaySRG.Highlight {
@@ -40,19 +72,37 @@ struct Mock {
             return PlaySRG.Highlight(
                 title: "Jeune et Golri - Saison 1 inédite!",
                 summary: "Prune, stand-uppeuse jeune et golri, rencontre Francis, vieux et dépité.  Elle qui devait bosser son premier spectacle s'embarque dans cette love story inattendue!",
-                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default)
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: nil
             )
         case .overflow:
             return PlaySRG.Highlight(
                 title: .loremIpsum,
                 summary: .loremIpsum,
-                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default)
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: nil
             )
         case .short:
             return PlaySRG.Highlight(
                 title: "Title",
                 summary: "Description",
-                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/b75b85ed-5fbd-4f1f-983b-80ac0d92764b.jpeg"), variant: .default))
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/b75b85ed-5fbd-4f1f-983b-80ac0d92764b.jpeg"), variant: .default),
+                imageFocalPoint: nil
+            )
+        case .topLeftAligned:
+            return PlaySRG.Highlight(
+                title: "Top left",
+                summary: "Summary",
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: Mock.focalPoint(.topLeft)
+            )
+        case .bottomRightAligned:
+            return PlaySRG.Highlight(
+                title: "Bottom right",
+                summary: "Summary",
+                image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
+                imageFocalPoint: Mock.focalPoint(.bottomRight)
+            )
         }
     }
     
@@ -73,6 +123,17 @@ struct Mock {
     static func media(_ kind: Media = .standard) -> SRGMedia {
         return mockObject(kind.rawValue, type: SRGMedia.self)
     }
+    
+#if os(iOS)
+    enum Notification: String {
+        case standard
+        case overflow
+    }
+    
+    static func notification(_ kind: Notification = .standard) -> UserNotification {
+        mockObject(kind.rawValue, type: UserNotification.self)
+    }
+#endif
     
     enum Program: String {
         case standard

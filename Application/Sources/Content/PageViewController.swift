@@ -23,7 +23,7 @@ final class PageViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<PageViewModel.Section, PageViewModel.Item>!
     
     private weak var collectionView: UICollectionView!
-    private weak var emptyView: HostView<EmptyView>!
+    private weak var emptyContentView: HostView<EmptyContentView>!
     
 #if os(iOS)
     private weak var refreshControl: UIRefreshControl!
@@ -106,9 +106,9 @@ final class PageViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        let emptyView = HostView<EmptyView>(frame: .zero)
-        collectionView.backgroundView = emptyView
-        self.emptyView = emptyView
+        let emptyContentView = HostView<EmptyContentView>(frame: .zero)
+        collectionView.backgroundView = emptyContentView
+        self.emptyContentView = emptyContentView
         
 #if os(tvOS)
         tabBarObservedScrollView = collectionView
@@ -124,6 +124,13 @@ final class PageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+#if os(iOS)
+        // Avoid iOS automatic scroll insets / offset bugs occurring if large titles are desired by a view controller
+        // but the navigation bar is hidden. The scroll insets are incorrect and sometimes the scroll offset might
+        // be incorrect at the top.
+        navigationItem.largeTitleDisplayMode = model.id.isNavigationBarHidden ? .never : .always
+#endif
         
         let cellRegistration = UICollectionView.CellRegistration<HostCollectionViewCell<ItemCell>, PageViewModel.Item> { [model] cell, _, item in
             cell.content = ItemCell(item: item, id: model.id)
@@ -179,6 +186,7 @@ final class PageViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         model.reload()
         deselectItems(in: collectionView, animated: animated)
 #if os(iOS)
@@ -195,11 +203,11 @@ final class PageViewController: UIViewController {
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
-            emptyView.content = EmptyView(state: .loading)
+            emptyContentView.content = EmptyContentView(state: .loading)
         case let .failed(error: error):
-            emptyView.content = EmptyView(state: .failed(error: error))
+            emptyContentView.content = EmptyContentView(state: .failed(error: error))
         case let .loaded(rows: rows):
-            emptyView.content = rows.isEmpty ? EmptyView(state: .empty(type: .generic)) : nil
+            emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
         }
         
         DispatchQueue.global(qos: .userInteractive).async {
@@ -283,7 +291,7 @@ extension PageViewController {
     }
     
     @objc static func topicViewController(for topic: SRGTopic) -> UIViewController {
-        return PageViewController(id: .topic(topic: topic))
+        return PageViewController(id: .topic(topic))
     }
 }
 
@@ -301,6 +309,12 @@ extension PageViewController: ContentInsets {
         let top = Self.layoutVerticalMargin
 #endif
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
+    }
+}
+
+extension PageViewController: ScrollableContent {
+    var play_scrollableView: UIScrollView? {
+        return collectionView
     }
 }
 
@@ -323,7 +337,7 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case let .topic(topic):
                 if let navigationController = navigationController {
-                    let pageViewController = PageViewController(id: .topic(topic: topic))
+                    let pageViewController = PageViewController(id: .topic(topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
             case .highlight:
@@ -383,15 +397,21 @@ extension PageViewController: UICollectionViewDelegate {
 }
 
 extension PageViewController: UIScrollViewDelegate {
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
 #if os(iOS)
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         // Avoid the collection jumping when pulling to refresh. Only mark the refresh as being triggered.
         if refreshTriggered {
             model.reload(deep: true)
             refreshTriggered = false
         }
-#endif
     }
+    
+    // The system default behavior does not lead to correct results when large titles are displayed. Override.
+    func scrollViewShouldScrollToTop(_ scrollView: UIScrollView) -> Bool {
+        scrollView.play_scrollToTop(animated: true)
+        return false
+    }
+#endif
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard scrollView.contentSize.height > 0 else { return }
@@ -437,7 +457,7 @@ extension PageViewController: SRGAnalyticsViewTracking {
         switch model.id {
         case .video, .audio, .live:
             return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic: topic):
+        case let .topic(topic):
             return topic.title
         }
     }
@@ -485,8 +505,7 @@ extension PageViewController: SectionHeaderViewAction {
 
 extension PageViewController: TabBarActionable {
     func performActiveTabAction(animated: Bool) {
-        guard let collectionView = collectionView else { return }
-        collectionView.play_scrollToTop(animated: animated)
+        collectionView?.play_scrollToTop(animated: animated)
     }
 }
 
@@ -678,6 +697,8 @@ private extension PageViewController {
 #if os(iOS)
                 case let .download(download):
                     DownloadCell(download: download)
+                case let .notification(notification):
+                    NotificationCell(notification: notification)
                 case .showAccess:
                     switch id {
                     case .video:

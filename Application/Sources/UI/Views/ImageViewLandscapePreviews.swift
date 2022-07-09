@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct ImageViewLandscapeCommonPreviews: PreviewProvider {
+struct ImageViewLandscapeCommon_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
     
     static var previews: some View {
@@ -24,7 +24,7 @@ struct ImageViewLandscapeCommonPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewLandscapeAlignmentPreviews: PreviewProvider {
+struct ImageViewLandscapeAlignment_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
     
     static var previews: some View {
@@ -50,7 +50,7 @@ struct ImageViewLandscapeAlignmentPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewLandscapeAspectFitPreviews: PreviewProvider {
+struct ImageViewLandscapeAspectFit_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
     
     static var previews: some View {
@@ -76,7 +76,7 @@ struct ImageViewLandscapeAspectFitPreviews: PreviewProvider {
     }
 }
 
-struct ImageViewLandscapeAspectFillPreviews: PreviewProvider {
+struct ImageViewLandscapeAspectFill_Previews: PreviewProvider {
     private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
     
     static var previews: some View {
@@ -97,6 +97,24 @@ struct ImageViewLandscapeAspectFillPreviews: PreviewProvider {
                 .previewDisplayName(".aspectFillBottomLeft")
             ImageView(source: source, contentMode: .aspectFillBottomRight)
                 .previewDisplayName(".aspectFillBottomRight")
+        }
+        .previewLayout(.fixed(width: 1000, height: 1000))
+    }
+}
+
+struct ImageViewLandscapeAspectFillFocused_Previews: PreviewProvider {
+    private static let source = "https://www.rts.ch/2020/11/09/11/29/11737826.image/16x9/scale/width/400"
+    
+    static var previews: some View {
+        Group {
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 0, relativeHeight: 0))
+                .previewDisplayName("Bottom left focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 0, relativeHeight: 1))
+                .previewDisplayName("Top left focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 1, relativeHeight: 0))
+                .previewDisplayName("Bottom right focus")
+            ImageView(source: source, contentMode: .aspectFillFocused(relativeWidth: 1, relativeHeight: 1))
+                .previewDisplayName("Top right focus")
         }
         .previewLayout(.fixed(width: 1000, height: 1000))
     }

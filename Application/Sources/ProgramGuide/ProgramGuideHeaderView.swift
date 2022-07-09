@@ -49,20 +49,13 @@ struct ProgramGuideHeaderView: View {
     /// Behavior: h-exp, v-hug
     private struct NavigationBar: View {
         @ObservedObject var model: ProgramGuideViewModel
-        
-#if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         private static let itemHeight: CGFloat = constant(iOS: 40, tvOS: 70)
         private static let spacing: CGFloat = constant(iOS: 42, tvOS: 40)
         
         private var direction: StackDirection {
-#if os(iOS)
             return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-#else
-            return .horizontal
-#endif
         }
         
         var body: some View {

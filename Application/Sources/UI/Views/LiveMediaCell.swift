@@ -77,18 +77,10 @@ struct LiveMediaCell: View {
     /// Behavior: h-exp, v-exp
     private struct DescriptionView: View {
         @ObservedObject var model: LiveMediaCellViewModel
-        
-#if os(iOS)
-        @Environment(\.horizontalSizeClass) private var horizontalSizeClass
-#endif
+        @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
         private var padding: CGFloat {
-#if os(iOS)
-            if horizontalSizeClass == .compact {
-                return 8
-            }
-#endif
-            return constant(iOS: 10, tvOS: 16)
+            return (horizontalSizeClass == .compact) ? 8 : constant(iOS: 10, tvOS: 16)
         }
         
         var body: some View {
@@ -136,11 +128,7 @@ enum LiveMediaCellSize {
     
     private static let defaultItemWidth: CGFloat = constant(iOS: 210, tvOS: 375)
     
-    static func swimlane() -> NSCollectionLayoutSize {
-        return swimlane(itemWidth: defaultItemWidth)
-    }
-    
-    static func swimlane(itemWidth: CGFloat) -> NSCollectionLayoutSize {
+    static func swimlane(itemWidth: CGFloat = defaultItemWidth) -> NSCollectionLayoutSize {
         return LayoutSwimlaneCellSize(itemWidth, aspectRatio, 0)
     }
     

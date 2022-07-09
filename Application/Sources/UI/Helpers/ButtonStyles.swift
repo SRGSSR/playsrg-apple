@@ -34,7 +34,7 @@ struct TextButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .background(focused ? Color(UIColor(white: 1, alpha: 0.3)) : Color.clear)
+            .background(focused ? Color(white: 1, opacity: 0.3) : Color.clear)
             .scaleEffect(focused && !configuration.isPressed ? 1.04 : 1)
             .animation(.easeOut(duration: 0.2), value: focused)
     }

@@ -10,14 +10,11 @@
 #import "ApplicationSectionInfo.h"
 #import "Layout.h"
 #import "NavigationController.h"
-#import "NotificationTableViewCell.h"
-#import "NotificationsViewController.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlaySRG-Swift.h"
 #import "ProfileAccountHeaderView.h"
 #import "ProfileTableViewCell.h"
 #import "PushService.h"
-#import "SettingsViewController.h"
 #import "TableView.h"
 #import "UIColor+PlaySRG.h"
 #import "UIDevice+PlaySRG.h"
@@ -61,6 +58,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
+    self.navigationItem.largeTitleDisplayMode = UINavigationItemLargeTitleDisplayModeAlways;
     
     TableViewConfigure(self.tableView);
     self.tableView.dataSource = self;
@@ -70,9 +68,7 @@
         self.tableView.tableHeaderView = [ProfileAccountHeaderView view];
     }
     
-    NSString *cellIdentifier = NSStringFromClass(NotificationTableViewCell.class);
-    UINib *cellNib = [UINib nibWithNibName:cellIdentifier bundle:nil];
-    [self.tableView registerNib:cellNib forCellReuseIdentifier:cellIdentifier];
+    [self.tableView registerReusableNotificationCell];
     
     [NSNotificationCenter.defaultCenter addObserver:self
                                            selector:@selector(accessibilityVoiceOverStatusChanged:)
@@ -176,7 +172,7 @@
 
 #pragma mark Helpers
 
-- (Notification *)notificationAtIndexPath:(NSIndexPath *)indexPath
+- (UserNotification *)notificationAtIndexPath:(NSIndexPath *)indexPath
 {
     ApplicationSectionInfo *applicationSectionInfo = self.sectionInfos[indexPath.row];
     if (applicationSectionInfo.applicationSection != ApplicationSectionNotifications) {
@@ -195,7 +191,7 @@
     UIViewController *viewController = nil;
     switch (applicationSectionInfo.applicationSection) {
         case ApplicationSectionNotifications: {
-            viewController = [[NotificationsViewController alloc] init];
+            viewController = [SectionViewController notificationsViewController];
             break;
         }
             
@@ -334,6 +330,13 @@
     return [self openApplicationSectionInfo:applicationSectionInfo interactive:YES animated:NO];
 }
 
+#pragma mark ScrollableContent protocol
+
+- (UIScrollView *)play_scrollableView
+{
+    return self.tableView;
+}
+
 #pragma mark SRGAnalyticsViewTracking protocol
 
 - (NSString *)srg_pageViewTitle
@@ -353,6 +356,14 @@
     [self.tableView play_scrollToTopAnimated:animated];
 }
 
+#pragma mark UIScrollViewDelegate protocol
+
+- (BOOL)scrollViewShouldScrollToTop:(UIScrollView *)scrollView
+{
+    [scrollView play_scrollToTopAnimated:YES];
+    return NO;
+}
+
 #pragma mark UITableViewDataSource protocol
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -368,7 +379,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self notificationAtIndexPath:indexPath]) {
-        return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(NotificationTableViewCell.class) forIndexPath:indexPath];
+        return [tableView dequeueReusableNotificationCellFor:indexPath];
     }
     else {
         return [tableView dequeueReusableCellWithIdentifier:NSStringFromClass(ProfileTableViewCell.class) forIndexPath:indexPath];
@@ -380,7 +391,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([self notificationAtIndexPath:indexPath]) {
-        return [[MediaCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
+        return [[NotificationCellSize fullWidth] constrainedBy:tableView].height + LayoutMargin;
     }
     else {
         return ProfileTableViewCell.height;
@@ -389,9 +400,9 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Notification *notification = [self notificationAtIndexPath:indexPath];
+    UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
-        NotificationTableViewCell *notificationTableViewCell = (NotificationTableViewCell *)cell;
+        UITableViewCell<NotificationSettable> *notificationTableViewCell = (UITableViewCell<NotificationSettable> *)cell;
         notificationTableViewCell.notification = notification;
     }
     else {
@@ -403,9 +414,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Notification *notification = [self notificationAtIndexPath:indexPath];
+    UserNotification *notification = [self notificationAtIndexPath:indexPath];
     if (notification) {
-        [NotificationsViewController openNotification:notification fromViewController:self];
+        [self navigateToNotification:notification animated:YES];
         
         // Update the cell dot right away
         [self reloadTableView];
@@ -420,9 +431,8 @@
 
 - (void)settings:(id)sender
 {
-    SettingsViewController *settingsViewController = [[SettingsViewController alloc] init];
-    NavigationController *settingsNavigationController = [[NavigationController alloc] initWithRootViewController:settingsViewController];
-    [self presentViewController:settingsNavigationController animated:YES completion:nil];
+    UIViewController *settingsNavigationViewController = [SettingsNavigationViewController viewController];
+    [self presentViewController:settingsNavigationViewController animated:YES completion:nil];
 }
 
 #pragma mark Notifications

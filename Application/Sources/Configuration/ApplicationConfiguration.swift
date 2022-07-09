@@ -22,7 +22,7 @@ extension ApplicationConfiguration {
         }
     }
     
-    func liveConfiguredSections() -> [ConfiguredSection] {
+    var liveConfiguredSections: [ConfiguredSection] {
         return liveHomeSections.compactMap { homeSection in
             guard let homeSection = HomeSection(rawValue: homeSection.intValue) else { return nil }
             return Self.configuredSection(from: homeSection)
@@ -31,6 +31,41 @@ extension ApplicationConfiguration {
     
     var serviceMessageUrl: URL {
         return URL(string: "v3/api/\(businessUnitIdentifier)/general-information-message", relativeTo: playServiceURL)!
+    }
+    
+    func relatedContentUrl(for media: SRGMedia) -> URL {
+        return URL(string: "api/v2/playlist/recommendation/relatedContent/\(media.urn)", relativeTo: self.middlewareURL)!
+    }
+    
+    private static var version: String {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+    }
+    
+    private static var type: String {
+        return UIDevice.current.userInterfaceIdiom == .pad ? "tablet" : "phone"
+    }
+    
+    private static var identifier: String? {
+        return UserDefaults.standard.string(forKey: "tc_unique_id")
+    }
+    
+    var feedbackUrlWithParameters: URL? {
+        guard let feedbackUrl = feedbackURL else { return nil }
+        guard var urlComponents = URLComponents(url: feedbackUrl, resolvingAgainstBaseURL: false) else { return feedbackUrl }
+        
+        let feedbackQueryItems = [
+            URLQueryItem(name: "platform", value: "iOS"),
+            URLQueryItem(name: "version", value: Self.version),
+            URLQueryItem(name: "type", value: Self.type),
+            URLQueryItem(name: "cid", value: Self.identifier)
+        ]
+        if let queryItems = urlComponents.queryItems {
+            urlComponents.queryItems = feedbackQueryItems.appending(contentsOf: queryItems)
+        }
+        else {
+            urlComponents.queryItems = feedbackQueryItems
+        }
+        return urlComponents.url ?? feedbackUrl
     }
 }
 
@@ -64,6 +99,7 @@ enum ConfiguredSection: Hashable {
     
 #if os(iOS)
     case downloads
+    case notifications
     case radioShowAccess(channelUid: String)
 #endif
 

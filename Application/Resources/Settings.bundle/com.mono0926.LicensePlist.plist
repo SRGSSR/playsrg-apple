@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>firebase-ios-sdk (9.1.0)</string>
+			<string>firebase-ios-sdk (9.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -78,7 +78,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/FSCalendar</string>
 			<key>Title</key>
-			<string>FSCalendar (2.8.2)</string>
+			<string>fscalendar (2.8.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -110,7 +110,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleCastSDK-ios-no-bluetooth</string>
 			<key>Title</key>
-			<string>googlecastsdk-ios-no-bluetooth (4.7.0-beta.3)</string>
+			<string>googlecastsdk-ios-no-bluetooth (4.7.1-beta.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -148,17 +148,9 @@
 		</dict>
 		<dict>
 			<key>File</key>
-			<string>com.mono0926.LicensePlist/InAppSettingsKit</string>
-			<key>Title</key>
-			<string>InAppSettingsKit (3.3)</string>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-		</dict>
-		<dict>
-			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>ios-library (16.7.0)</string>
+			<string>ios-library (16.8.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -230,7 +222,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Nuke</string>
 			<key>Title</key>
-			<string>nuke (10.10.0)</string>
+			<string>nuke (10.11.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -238,7 +230,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/NukeUI</string>
 			<key>Title</key>
-			<string>nukeui (0.8.1)</string>
+			<string>nukeui (0.8.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -254,7 +246,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/PLCrashReporter</string>
 			<key>Title</key>
-			<string>plcrashreporter (1.10.1)</string>
+			<string>plcrashreporter (1.10.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -262,7 +254,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/promises</string>
 			<key>Title</key>
-			<string>promises (2.1.0)</string>
+			<string>promises (2.1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -270,7 +262,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srganalytics-apple</string>
 			<key>Title</key>
-			<string>srganalytics-apple (7.7.0)</string>
+			<string>srganalytics-apple (7.8.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -278,7 +270,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgappearance-apple</string>
 			<key>Title</key>
-			<string>srgappearance-apple (5.1.0)</string>
+			<string>srgappearance-apple (5.1.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -294,7 +286,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgdataprovider-apple</string>
 			<key>Title</key>
-			<string>srgdataprovider-apple (15.0.0)</string>
+			<string>srgdataprovider-apple (16.0.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -318,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (8.1.0)</string>
+			<string>srgletterbox-apple (8.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -334,7 +326,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgmediaplayer-apple</string>
 			<key>Title</key>
-			<string>srgmediaplayer-apple (7.0.1)</string>
+			<string>srgmediaplayer-apple (7.0.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -375,6 +367,14 @@
 			<string>com.mono0926.LicensePlist/SwiftMessages</string>
 			<key>Title</key>
 			<string>swiftmessages (9.0.6)</string>
+			<key>Type</key>
+			<string>PSChildPaneSpecifier</string>
+		</dict>
+		<dict>
+			<key>File</key>
+			<string>com.mono0926.LicensePlist/SwiftUI-Introspect</string>
+			<key>Title</key>
+			<string>swiftui-introspect (0.1.4)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
