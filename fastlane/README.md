@@ -151,6 +151,14 @@ Distributes to public groups an iOS App Store beta on App Store Connect with the
 
 Sends latest iOS App Store dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
 
+### ios iOSAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSAppStoreRelease
+```
+
+Prepare AppStore iOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'submit_for_review' boolean parameter.
+
 ### ios tvOSAppStoreBetas
 
 ```sh
@@ -190,6 +198,14 @@ Distributes to public groups a tvOS App Store beta on App Store Connect with the
 ```
 
 Sends latest tvOS dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+
+### ios tvOSAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSAppStoreRelease
+```
+
+Prepare AppStore tvOS release on App Store Connect with the current version number and latest uploaded build number. Optional 'submit_for_review' boolean parameter.
 
 ### ios iOSrsiScreenshots
 
@@ -391,6 +407,46 @@ SFR only: See 'iOSAppStoreDSYMs' lane.
 
 SWI only: See 'iOSAppStoreDSYMs' lane.
 
+### ios iOSrsiAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSrsiAppStoreRelease
+```
+
+RSI only: See 'iOSAppStoreRelease' lane.
+
+### ios iOSrtrAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSrtrAppStoreRelease
+```
+
+RTR only: See 'iOSAppStoreRelease' lane.
+
+### ios iOSrtsAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSrtsAppStoreRelease
+```
+
+RTS only: See 'iOSAppStoreRelease' lane.
+
+### ios iOSsrfAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSsrfAppStoreRelease
+```
+
+SRF only: See 'iOSAppStoreRelease' lane.
+
+### ios iOSswiAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios iOSswiAppStoreRelease
+```
+
+SWI only: See 'iOSAppStoreRelease' lane.
+
 ### ios tvOSrsiScreenshots
 
 ```sh
@@ -590,6 +646,46 @@ SFR only: See 'tvOSAppStoreDSYMs' lane.
 ```
 
 SWI only: See 'tvOSAppStoreDSYMs' lane.
+
+### ios tvOSrsiAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSrsiAppStoreRelease
+```
+
+RSI only: See 'tvOSAppStoreRelease' lane.
+
+### ios tvOSrtrAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSrtrAppStoreRelease
+```
+
+RTR only: See 'tvOSAppStoreRelease' lane.
+
+### ios tvOSrtsAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSrtsAppStoreRelease
+```
+
+RTS only: See 'tvOSAppStoreRelease' lane.
+
+### ios tvOSsrfAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSsrfAppStoreRelease
+```
+
+SRF only: See 'tvOSAppStoreRelease' lane.
+
+### ios tvOSswiAppStoreRelease
+
+```sh
+[bundle exec] fastlane ios tvOSswiAppStoreRelease
+```
+
+SWI only: See 'tvOSAppStoreRelease' lane.
 
 ----
 

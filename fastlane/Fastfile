@@ -254,6 +254,19 @@ platform :ios do
     end
   end
 
+  desc 'Prepare AppStore iOS release on App Store Connect with the current version number and latest uploaded build number. Optional \'submit_for_review\' boolean parameter.'
+  lane :iOSAppStoreRelease do |options|
+    submit_for_review = options[:submit_for_review]
+
+    options = ''
+    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios iOS#{business_unit}AppStoreRelease#{options}"
+    end
+  end
+
   desc 'Applies tvOSAppStoreUploadBetas, tvOSAppStoreDistributePrivateBetas and tvOSAppStoreDSYMs.'
   lane :tvOSAppStoreBetas do
     sh 'bundle exec fastlane ios tvOSAppStoreUploadBetas'
@@ -307,6 +320,19 @@ platform :ios do
 
     business_units.map do |business_unit|
       sh "bundle exec fastlane ios tvOS#{business_unit.downcase}AppStoreDSYMs#{options}"
+    end
+  end
+
+  desc 'Prepare AppStore tvOS release on App Store Connect with the current version number and latest uploaded build number. Optional \'submit_for_review\' boolean parameter.'
+  lane :tvOSAppStoreRelease do |options|
+    submit_for_review = options[:submit_for_review]
+
+    options = ''
+    options += " submit_for_review:#{submit_for_review}" if submit_for_review
+
+    business_units.map do |business_unit|
+      business_unit = business_unit.downcase
+      sh "bundle exec fastlane ios tvOS#{business_unit}AppStoreRelease#{options}"
     end
   end
 
@@ -480,6 +506,33 @@ platform :ios do
     update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
+  # Individual iOS AppStore releases
+
+  desc 'RSI only: See \'iOSAppStoreRelease\' lane.'
+  lane :iOSrsiAppStoreRelease do |options|
+    prepare_appstore_release('iOS', 'RSI', options)
+  end
+
+  desc 'RTR only: See \'iOSAppStoreRelease\' lane.'
+  lane :iOSrtrAppStoreRelease do |options|
+    prepare_appstore_release('iOS', 'RTR', options)
+  end
+
+  desc 'RTS only: See \'iOSAppStoreRelease\' lane.'
+  lane :iOSrtsAppStoreRelease do |options|
+    prepare_appstore_release('iOS', 'RTS', options)
+  end
+
+  desc 'SRF only: See \'iOSAppStoreRelease\' lane.'
+  lane :iOSsrfAppStoreRelease do |options|
+    prepare_appstore_release('iOS', 'SRF', options)
+  end
+
+  desc 'SWI only: See \'iOSAppStoreRelease\' lane.'
+  lane :iOSswiAppStoreRelease do |options|
+    prepare_appstore_release('iOS', 'SWI', options)
+  end
+
   # Individual tvOS screenshots
 
   desc 'RSI: Makes tvOS screenshots and replaces current ones on App Store Connect.'
@@ -648,6 +701,33 @@ platform :ios do
   desc 'SWI only: See \'tvOSAppStoreDSYMs\' lane.'
   lane :tvOSswiAppStoreDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_SWI_TV_APPSTORE_APPCENTER_APPNAME'], options)
+  end
+
+  # Individual tvOS AppStore releases
+
+  desc 'RSI only: See \'tvOSAppStoreRelease\' lane.'
+  lane :tvOSrsiAppStoreRelease do |options|
+    prepare_appstore_release('tvOS', 'RSI', options)
+  end
+
+  desc 'RTR only: See \'tvOSAppStoreRelease\' lane.'
+  lane :tvOSrtrAppStoreRelease do |options|
+    prepare_appstore_release('tvOS', 'RTR', options)
+  end
+
+  desc 'RTS only: See \'tvOSAppStoreRelease\' lane.'
+  lane :tvOSrtsAppStoreRelease do |options|
+    prepare_appstore_release('tvOS', 'RTS', options)
+  end
+
+  desc 'SRF only: See \'tvOSAppStoreRelease\' lane.'
+  lane :tvOSsrfAppStoreRelease do |options|
+    prepare_appstore_release('tvOS', 'SRF', options)
+  end
+
+  desc 'SWI only: See \'tvOSAppStoreRelease\' lane.'
+  lane :tvOSswiAppStoreRelease do |options|
+    prepare_appstore_release('tvOS', 'SWI', options)
   end
 
   #
@@ -988,8 +1068,9 @@ def app_config
 end
 
 def cleaned_lane_condition(lane)
+  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'tester']
   (lane.to_s != 'devLane') &&
-    ['distribute', 'dsym', 'screenshots', 'tester'].all? { |i| !lane.to_s.downcase.include? i }
+    excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
 
 def skip_clean_derived_data
@@ -1437,6 +1518,58 @@ def can_upload_testflight_build(app_identifier, platform, tag_version)
   )
 
   (appstore_build_number < build_number.to_i)
+end
+
+def prepare_appstore_release(platform, business_unit, options)
+  platform ||= 'iOS'
+  submit_for_review = options[:submit_for_review] || false
+  output_directory = appstore_release_metadata_directory(platform, business_unit)
+
+  login_with_app_store_connect_api_key
+  deliver(
+    platform: appstore_platform(platform),
+    app_version: xcode_marketing_version(platform),
+    skip_binary_upload: true,
+    skip_screenshots: true,
+    metadata_path: output_directory,
+    precheck_include_in_app_purchases: false,
+    submit_for_review: submit_for_review,
+    automatic_release: true,
+    force: true # Don't stop to wait manual preview
+  )
+end
+
+def appstore_release_metadata_directory(platform, business_unit)
+  platform ||= 'iOS'
+
+  output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
+  Dir.chdir('..') { FileUtils.remove_entry(output_directory, true) }
+  Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+  language_directory = "#{output_directory}/#{appstore_language(business_unit)}"
+  Dir.chdir('..') { FileUtils.mkdir_p(language_directory) }
+
+  collect_appstore_release_notes(platform, business_unit, language_directory)
+
+  output_directory
+end
+
+def appstore_language(business_unit)
+  languages = {
+    'RSI' => 'it',
+    'RTR' => 'de-DE',
+    'RTS' => 'fr-FR',
+    'SRF' => 'de-DE',
+    'SWI' => 'en-US'
+  }
+  languages[business_unit]
+end
+
+def collect_appstore_release_notes(platform, business_unit, language_directory)
+  release_notes = "What's new for #{business_unit} #{platform}."
+  file_name = 'release_notes.txt'
+  Dir.chdir("../#{language_directory}") { File.write(file_name, release_notes) }
+  UI.message("Release notes for #{business_unit} #{platform}: #{release_notes}")
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repository,
