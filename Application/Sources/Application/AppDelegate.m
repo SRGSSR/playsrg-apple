@@ -192,8 +192,12 @@ static void *s_kvoContext = &s_kvoContext;
         return;
     }
     
+#if defined(APPCENTER)
     MSACDistribute.updateTrack = MSACUpdateTrackPrivate;
     [MSACAppCenter start:appCenterSecret withServices:@[ MSACCrashes.class, MSACDistribute.class ]];
+#else
+    [MSACAppCenter start:appCenterSecret withServices:@[ MSACCrashes.class ]];
+#endif
 }
 
 - (void)setupDataProvider
