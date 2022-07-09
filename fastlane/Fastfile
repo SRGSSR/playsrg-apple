@@ -38,6 +38,8 @@ platform :ios do
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
       clean_derived_data unless skip_clean_derived_data
     end
+
+    pull_translations unless !pull_translations_lane_condition(lane) || skip_pull_translations
   end
 
   #
@@ -1522,16 +1524,22 @@ end
 
 def prepare_appstore_release(platform, business_unit, options)
   platform ||= 'iOS'
+  marketing_version = options[:marketing_version] || xcode_marketing_version(platform)
   submit_for_review = options[:submit_for_review] || false
-  output_directory = appstore_release_metadata_directory(platform, business_unit)
 
+  metadata_path = appstore_release_metadata_path(platform, business_unit, marketing_version)
+
+  srg_deliver(platform, marketing_version, metadata_path, submit_for_review)
+end
+
+def srg_deliver(platform, marketing_version, metadata_path, submit_for_review)
   login_with_app_store_connect_api_key
   deliver(
     platform: appstore_platform(platform),
-    app_version: xcode_marketing_version(platform),
+    app_version: marketing_version,
     skip_binary_upload: true,
     skip_screenshots: true,
-    metadata_path: output_directory,
+    metadata_path: metadata_path,
     precheck_include_in_app_purchases: false,
     submit_for_review: submit_for_review,
     automatic_release: true,
@@ -1539,19 +1547,20 @@ def prepare_appstore_release(platform, business_unit, options)
   )
 end
 
-def appstore_release_metadata_directory(platform, business_unit)
+def appstore_release_metadata_path(platform, business_unit, marketing_version)
   platform ||= 'iOS'
 
+  # Erase previous metadata
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
-  Dir.chdir('..') { FileUtils.remove_entry(output_directory, true) }
-  Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+  metadata_directory = "#{output_directory}/metadata"
+  Dir.chdir('..') { FileUtils.remove_entry(metadata_directory, true) }
 
-  language_directory = "#{output_directory}/#{appstore_language(business_unit)}"
+  language_directory = "#{metadata_directory}/#{appstore_language(business_unit)}"
   Dir.chdir('..') { FileUtils.mkdir_p(language_directory) }
 
-  collect_appstore_release_notes(platform, business_unit, language_directory)
+  collect_appstore_release_notes(platform, business_unit, language_directory, marketing_version)
 
-  output_directory
+  metadata_directory
 end
 
 def appstore_language(business_unit)
@@ -1565,11 +1574,53 @@ def appstore_language(business_unit)
   languages[business_unit]
 end
 
-def collect_appstore_release_notes(platform, business_unit, language_directory)
-  release_notes = "What's new for #{business_unit} #{platform}."
+def collect_appstore_release_notes(platform, business_unit, language_directory, marketing_version)
+  release_notes = get_appstore_release_notes(platform, business_unit, marketing_version)
   file_name = 'release_notes.txt'
   Dir.chdir("../#{language_directory}") { File.write(file_name, release_notes) }
-  UI.message("Release notes for #{business_unit} #{platform}: #{release_notes}")
+  UI.message("Release notes for #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}")
+end
+
+def get_appstore_release_notes(platform, business_unit, marketing_version)
+  platform ||= 'iOS'
+  marketing_version ||= xcode_marketing_version(platform)
+
+  file_name = "What_s new #{platform}.csv"
+  file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
+  file = File.open(file_path, 'r')
+  table = CSV.table(file)
+  file.close
+
+  index = table.by_col[0].find_index(marketing_version)
+  release_notes = table.by_col[1][index]
+
+  UI.user_error!("On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version.") unless release_notes
+
+  release_notes
+end
+
+def crowdin_language(business_unit)
+  languages = {
+    'RSI' => 'it-CH',
+    'RTR' => 'rm-CH',
+    'RTS' => 'fr-CH',
+    'SRF' => 'de-CH',
+    'SWI' => 'en'
+  }
+  languages[business_unit]
+end
+
+def pull_translations_lane_condition(lane)
+  lane.to_s.downcase.include? 'release'
+end
+
+def skip_pull_translations
+  ENV['CROWDIN_TRANSLATIONS_PULLLED'] == '1'
+end
+
+def pull_translations
+  Dir.chdir('..') { sh 'Configuration/Scripts/pullCrowdin.sh --skip-copies' }
+  ENV['CROWDIN_TRANSLATIONS_PULLLED'] = '1'
 end
 
 # Beta workflow: tag the new beta, bump build number and push to the repository,
