@@ -13,6 +13,7 @@
 #import "Banner.h"
 #import "DeepLinkService.h"
 #import "Download.h"
+#import "Favorites.h"
 #import "GoogleCast.h"
 #import "NSBundle+PlaySRG.h"
 #import "PlayApplication.h"
@@ -22,10 +23,6 @@
 #import "PlaySRG-Swift.h"
 #import "PushService.h"
 #import "UpdateInfo.h"
-
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-#import "Favorites.h"
-#endif
 
 @import AirshipCore;
 @import AppCenter;
