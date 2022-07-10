@@ -256,13 +256,13 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore iOS release on App Store Connect with the current version number and latest uploaded build number. Optional \'version\' or \'submit_for_review\' parameters.'
+  desc 'Prepare AppStore iOS release on App Store Connect with the current version number and build number. Optional \'tag_version\' (X.Y.Z-build_number) or \'submit_for_review\' (boolean) parameters.'
   lane :iOSAppStoreRelease do |options|
-    version = options[:version]
+    tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
     options = ''
-    options += " version:#{version}" if version
+    options += " tag_version:#{tag_version}" if tag_version
     options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
@@ -327,12 +327,13 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore tvOS release on App Store Connect with the current version number and latest uploaded build number. Optional \'version\' or \'submit_for_review\' parameters.'
+  desc 'Prepare AppStore tvOS release on App Store Connect with the current version number and build number. Optional \'tag_version\' (X.Y.Z-build_number) or \'submit_for_review\' (boolean) parameters.'
   lane :tvOSAppStoreRelease do |options|
+    tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
 
     options = ''
-    options += " version:#{version}" if version
+    options += " tag_version:#{tag_version}" if tag_version
     options += " submit_for_review:#{submit_for_review}" if submit_for_review
 
     business_units.map do |business_unit|
@@ -1527,19 +1528,20 @@ end
 
 def prepare_appstore_release(platform, business_unit, options)
   platform ||= 'iOS'
-  marketing_version = options[:version] || xcode_marketing_version(platform)
+  tag_version = options[:tag_version] || tag_version(platform)
   submit_for_review = options[:submit_for_review] || false
 
-  metadata_path = appstore_release_metadata_path(platform, business_unit, marketing_version)
+  metadata_path = appstore_release_metadata_path(platform, business_unit, tag_version)
 
-  srg_deliver(platform, marketing_version, metadata_path, submit_for_review)
+  srg_deliver(platform, tag_version, metadata_path, submit_for_review)
 end
 
-def srg_deliver(platform, marketing_version, metadata_path, submit_for_review)
+def srg_deliver(platform, tag_version, metadata_path, submit_for_review)
   login_with_app_store_connect_api_key
   deliver(
     platform: appstore_platform(platform),
-    app_version: marketing_version,
+    app_version: marketing_version_from_tag_version(tag_version),
+    build_number: build_number_from_tag_version(tag_version),
     skip_binary_upload: true,
     skip_screenshots: true,
     metadata_path: metadata_path,
@@ -1550,8 +1552,9 @@ def srg_deliver(platform, marketing_version, metadata_path, submit_for_review)
   )
 end
 
-def appstore_release_metadata_path(platform, business_unit, marketing_version)
+def appstore_release_metadata_path(platform, business_unit, tag_version)
   platform ||= 'iOS'
+  tag_version ||= tag_version(platform)
 
   # Erase previous metadata
   output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
@@ -1561,7 +1564,7 @@ def appstore_release_metadata_path(platform, business_unit, marketing_version)
   language_directory = "#{metadata_directory}/#{appstore_language(business_unit)}"
   Dir.chdir('..') { FileUtils.mkdir_p(language_directory) }
 
-  collect_appstore_release_notes(platform, business_unit, language_directory, marketing_version)
+  collect_appstore_release_notes(platform, business_unit, language_directory, tag_version)
 
   metadata_directory
 end
@@ -1577,7 +1580,8 @@ def appstore_language(business_unit)
   languages[business_unit]
 end
 
-def collect_appstore_release_notes(platform, business_unit, language_directory, marketing_version)
+def collect_appstore_release_notes(platform, business_unit, language_directory, tag_version)
+  marketing_version = marketing_version_from_tag_version(tag_version)
   release_notes = get_appstore_release_notes(platform, business_unit, marketing_version)
   file_name = 'release_notes.txt'
   Dir.chdir("../#{language_directory}") { File.write(file_name, release_notes) }
@@ -1585,9 +1589,6 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  platform ||= 'iOS'
-  marketing_version ||= xcode_marketing_version(platform)
-
   file_name = "What_s new #{platform}.csv"
   file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
   file = File.open(file_path, 'r')
