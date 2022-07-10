@@ -28,7 +28,7 @@ platform :ios do
       tag_version = options[:tag_version] || tag_version(platform)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
-        UI.user_error!("WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}.")
+        UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
       end
     end
 
@@ -80,7 +80,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_application_schemes[index]} (#{platform} Nightly #{tag_version}) uploaded and distributed. ✅"
+      UI.success "#{ios_application_schemes[index]} (#{platform} Nightly #{tag_version}) uploaded and distributed. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -153,7 +153,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
+      UI.success "#{ios_application_schemes[index]} (#{platform} Beta #{tag_version}) uploaded and distributed. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -771,7 +771,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) uploaded. ✅"
+      UI.success "#{schemes[index]} (#{platform} Nightly #{tag_version}) uploaded. ✅"
     end
 
     changelog = nightly_changelog(platform, service)
@@ -782,12 +782,12 @@ platform :ios do
 
       pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
+      UI.success "#{schemes[index]} (#{platform} Nightly #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_nightly_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (#{platform} Nightly #{tag_version}) dSYM file OK. ✅"
+      UI.success "#{schemes[index]} (#{platform} Nightly #{tag_version}) dSYM file OK. ✅"
     end
 
     save_last_nightlies_success_git_commit_hash(platform, service)
@@ -806,7 +806,7 @@ platform :ios do
       app_identifier = appstore_beta_identifiers[index]
 
       can_upload = can_upload_testflight_build(app_identifier, platform, tag_version)
-      UI.message("#{schemes[index]} (#{platform} Beta #{tag_version}) already uploaded 🔁 ✅") unless can_upload
+      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) already uploaded 🔁 ✅" unless can_upload
       next unless can_upload
 
       build_lane(
@@ -822,7 +822,7 @@ platform :ios do
 
       clean_build_artifacts
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) uploaded. ✅"
+      UI.success "#{schemes[index]} (#{platform} Beta #{tag_version}) uploaded. ✅"
     end
 
     changelog = what_s_new_for_beta(platform, nil)
@@ -833,12 +833,12 @@ platform :ios do
 
       pilot_distribute(app_identifier, platform, tag_version, changelog, false)
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
+      UI.success "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
 
       appcenter_appname = appcenter_testflight_beta_names(platform)[index]
       update_dsyms(app_identifier, platform, appcenter_appname, dsyms_options)
 
-      UI.message "#{schemes[index]} (#{platform} Beta #{tag_version}) dSYM file OK. ✅"
+      UI.success "#{schemes[index]} (#{platform} Beta #{tag_version}) dSYM file OK. ✅"
     end
 
     bump_build_number_beta_workflow(platform)
@@ -849,7 +849,7 @@ platform :ios do
     platform = options[:platform] || 'iOS'
     scheme = application_scheme(platform, options[:bu])
 
-    UI.important('A valid bu option is required to build an App Store beta. Skipping build. ⚠️') unless scheme
+    UI.important 'A valid bu option is required to build an App Store beta. Skipping build. ⚠️' unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, nil, nil)
@@ -857,7 +857,7 @@ platform :ios do
     tag_version = tag_version(platform)
 
     can_upload = can_upload_testflight_build(nil, platform, tag_version)
-    UI.message("#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅") unless can_upload
+    UI.message "#{scheme} (#{platform} App Store #{tag_version}) already uploaded 🔁 ✅" unless can_upload
     next unless can_upload
 
     build_lane(
@@ -871,7 +871,7 @@ platform :ios do
 
     clean_build_artifacts
 
-    UI.message("#{scheme} (#{platform} App Store #{tag_version}) uploaded ✅")
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) uploaded ✅"
   end
 
   desc 'Distributes the App Store beta on App Store Connect with the current build number to private group.'
@@ -880,7 +880,7 @@ platform :ios do
     tag_version = options[:tag_version] || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
 
-    UI.important('A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️') unless scheme
+    UI.important 'A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, tag_version, nil)
@@ -888,7 +888,7 @@ platform :ios do
     changelog = what_s_new_for_beta(platform, tag_version)
     pilot_distribute(nil, platform, tag_version, changelog, false)
 
-    UI.message "#{scheme} (#{platform} App Store #{tag_version}) distributed to private beta group. ✅"
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to private beta group. ✅"
   end
 
   desc 'Distributes the App Store beta on App Store Connect with the current build number to public group.'
@@ -897,7 +897,7 @@ platform :ios do
     tag_version = options[:tag_version] || tag_version(platform)
     scheme = application_scheme(platform, options[:bu])
 
-    UI.important('A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️') unless scheme
+    UI.important 'A valid bu option is required to distribute an App Store beta. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
     notify_version_to_ci(platform, tag_version, nil)
@@ -905,7 +905,7 @@ platform :ios do
     changelog = what_s_new_for_beta(platform, tag_version)
     pilot_distribute(nil, platform, tag_version, changelog, true)
 
-    UI.message "#{scheme} (#{platform} App Store #{tag_version}) distributed to public beta group. ✅"
+    UI.success "#{scheme} (#{platform} App Store #{tag_version}) distributed to public beta group. ✅"
   end
 
   desc 'Builds for a scheme and a configuration'
@@ -974,9 +974,9 @@ platform :ios do
   private_lane :addTestFlightTester do |options|
     email = spaceship_email_required(options[:email])
     email ||= spaceship_email_required(prompt(text: 'email: '))
-    return UI.user_error!('A valid email is required. (email parameter)') unless email
+    return UI.user_error! 'A valid email is required. (email parameter)' unless email
 
-    UI.message("Preparing invitations to #{email}. 📩")
+    UI.message "Preparing invitations to #{email}. 📩"
 
     app_identifiers = options[:app_identifiers] || appstore_beta_identifiers
     group_name = options[:group_name] || ENV['ITUNES_CONNECT_TF_GROUPS']
@@ -994,16 +994,16 @@ platform :ios do
       if tester
         if tester.status == 'invited'
           spaceship_delete_tester(app, tester)
-          UI.message("#{email} was invited as a tester for #{app.name}. Invitation removed. 📨 🚮")
+          UI.message "#{email} was invited as a tester for #{app.name}. Invitation removed. 📨 🚮"
         else # accepted or installed
-          UI.message("#{email} is already a tester for #{app.name} (status: #{tester.status}). 🔁 ✅")
+          UI.message "#{email} is already a tester for #{app.name} (status: #{tester.status}). 🔁 ✅"
           next
         end
       end
 
       spaceship_add_tester(group, email, options[:first_name], options[:last_name])
 
-      UI.message "#{email} tester added to #{group.name} for #{app.name}. Invitation sent. 📨 ✅"
+      UI.success "#{email} tester added to #{group.name} for #{app.name}. Invitation sent. 📨 ✅"
     end
   end
 
@@ -1362,7 +1362,7 @@ def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public
 rescue StandardError => e
   raise unless e.message.include? 'Another build is in review'
 
-  UI.important('Another build is already in TestFlight app review. Skipping external distribution. ⚠️')
+  UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
 end
 
 def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
@@ -1581,7 +1581,7 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   release_notes = get_appstore_release_notes(platform, business_unit, marketing_version)
   file_name = 'release_notes.txt'
   Dir.chdir("../#{language_directory}") { File.write(file_name, release_notes) }
-  UI.message("Release notes for #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}")
+  UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
@@ -1597,7 +1597,7 @@ def get_appstore_release_notes(platform, business_unit, marketing_version)
   index = table.by_col[0].find_index(marketing_version)
   release_notes = table.by_col[1][index] if index
 
-  UI.user_error!("On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version.") unless release_notes
+  UI.user_error! "On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version." unless release_notes
 
   release_notes
 end
@@ -1635,10 +1635,10 @@ def bump_build_number_beta_workflow(platform)
 
   git_pull(only_tags: true)
   if git_tag_exists(tag: tag)
-    UI.important("Tag \"#{tag}\" already exists. Probably done by an other build (to AppCenter, to TestFlight or did it manually). ⚠️")
+    UI.important "Tag \"#{tag}\" already exists. Probably done by an other build (to AppCenter, to TestFlight or did it manually). ⚠️"
   else
     srg_add_tag_and_bump_build_number(platform, tag)
-    UI.message("Tag \"#{tag}\" created. ✅")
+    UI.message "Tag \"#{tag}\" created. ✅"
   end
 end
 
@@ -1711,13 +1711,13 @@ end
 
 def spaceship_app(app_identifier)
   app = Spaceship::ConnectAPI::App.find(app_identifier)
-  UI.message("#{app_identifier} app does not exist. ⚠️") unless app
+  UI.important "#{app_identifier} app does not exist. ⚠️" unless app
   app
 end
 
 def spaceship_get_group(app, group_name)
   group = app.get_beta_groups(filter: { name: group_name }).first
-  UI.message("#{group_name} group does not exist for #{app.name}. ⚠️") unless group
+  UI.important "#{group_name} group does not exist for #{app.name}. ⚠️" unless group
   group
 end
 
