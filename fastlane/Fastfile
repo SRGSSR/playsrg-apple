@@ -89,7 +89,7 @@ platform :ios do
     testflight_nightlies(platform: 'tvOS')
   end
 
-  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS nightly dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :tvOSnightlyDSYMs do |options|
     tvos_application_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -103,7 +103,7 @@ platform :ios do
     testflight_nightlies(platform: 'iOS')
   end
 
-  desc 'Sends latest iOS nightly dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS nightly dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :iOSnightlyDSYMs do |options|
     ios_application_schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -162,7 +162,7 @@ platform :ios do
     testflight_betas(platform: 'tvOS')
   end
 
-  desc 'Sends latest tvOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS beta dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :tvOSbetaDSYMs do |options|
     tvos_application_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -176,7 +176,7 @@ platform :ios do
     testflight_betas(platform: 'iOS')
   end
 
-  desc 'Sends latest iOS beta dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS beta dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :iOSbetaDSYMs do |options|
     ios_application_schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -212,7 +212,7 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups an iOS App Store build on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to private groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
   lane :iOSDistributePrivateAppStoreBuilds do |options|
     tag_version = options[:tag_version]
 
@@ -225,7 +225,7 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to public groups an iOS App Store build on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
   lane :iOSDistributePublicAppStoreBuilds do |options|
     tag_version = options[:tag_version]
 
@@ -238,7 +238,7 @@ platform :ios do
     end
   end
 
-  desc 'Sends latest iOS App Store build dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest iOS App Store build dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :iOSAppStoreBuildDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
@@ -254,7 +254,7 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore iOS releases on App Store Connect with the current version number and build number. Builds have to be uploaded before any submission for review. Optional \'tag_version\' (X.Y.Z-build_number) or \'submit_for_review\' (boolean) parameters.'
+  desc 'Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
   lane :iOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
@@ -283,7 +283,7 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to private groups a tvOS App Store build on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to private groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
   lane :tvOSDistributePrivateAppStoreBuilds do |options|
     tag_version = options[:tag_version]
 
@@ -296,7 +296,7 @@ platform :ios do
     end
   end
 
-  desc 'Distributes to public groups a tvOS App Store build on App Store Connect with the current build number. Optional \'tag_version\' parameter (X.Y.Z-build_number).'
+  desc 'Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).'
   lane :tvOSDistributePublicAppStoreBuilds do |options|
     tag_version = options[:tag_version]
 
@@ -309,7 +309,7 @@ platform :ios do
     end
   end
 
-  desc 'Sends latest tvOS App Store build dSYMs to App Center. Optional \'build_number\', \'version\' or \'min_version\' parameters.'
+  desc 'Sends latest tvOS App Store build dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.'
   lane :tvOSAppStoreBuildDSYMs do |options|
     min_version = options[:min_version]
     version = options[:version]
@@ -325,7 +325,7 @@ platform :ios do
     end
   end
 
-  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version number and build number. Builds have to be uploaded before any submission for review. Optional \'tag_version\' (X.Y.Z-build_number) or \'submit_for_review\' (boolean) parameters.'
+  desc 'Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.'
   lane :tvOSPrepareAppStoreReleases do |options|
     tag_version = options[:tag_version]
     submit_for_review = options[:submit_for_review]
@@ -384,62 +384,62 @@ platform :ios do
 
   # Individual iOS App Store build uploads
 
-  desc 'RSI only: See \'iOSUploadAppStoreBuilds\' lane.'
+  desc 'RSI only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSrsiUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'RSI')
   end
 
-  desc 'RTR only: See \'iOSUploadAppStoreBuilds\' lane.'
+  desc 'RTR only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSrtrUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'RTR')
   end
 
-  desc 'RTS only: See \'iOSUploadAppStoreBuilds\' lane.'
+  desc 'RTS only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSrtsUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'RTS')
   end
 
-  desc 'SRF only: See \'iOSUploadAppStoreBuilds\' lane.'
+  desc 'SRF only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SRF')
   end
 
-  desc 'SWI only: See \'iOSUploadAppStoreBuilds\' lane.'
+  desc 'SWI only: See `iOSUploadAppStoreBuilds` lane.'
   lane :iOSswiUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'iOS', bu: 'SWI')
   end
 
   # Individual iOS App Store build private distributions
 
-  desc 'RSI only: See \'iOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RSI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
   lane :iOSrsiDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTR only: See \'iOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RTR only: See `iOSDistributePrivateAppStoreBuilds` lane.'
   lane :iOSrtrDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTS only: See \'iOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.'
   lane :iOSrtsDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SRF only: See \'iOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.'
   lane :iOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SWI only: See \'iOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'SWI only: See `iOSDistributePrivateAppStoreBuilds` lane.'
   lane :iOSswiDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
@@ -448,35 +448,35 @@ platform :ios do
 
   # Individual iOS App Store build public distributions
 
-  desc 'RSI only: See \'iOSDistributePublicAppStoreBuild\' lane.'
+  desc 'RSI only: See `iOSDistributePublicAppStoreBuild` lane.'
   lane :iOSrsiDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'iOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTR only: See \'iOSDistributePublicAppStoreBuild\' lane.'
+  desc 'RTR only: See `iOSDistributePublicAppStoreBuild` lane.'
   lane :iOSrtrDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'iOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTS only: See \'iOSDistributePublicAppStoreBuild\' lane.'
+  desc 'RTS only: See `iOSDistributePublicAppStoreBuild` lane.'
   lane :iOSrtsDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'iOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SRF only: See \'iOSDistributePublicAppStoreBuild\' lane.'
+  desc 'SRF only: See `iOSDistributePublicAppStoreBuild` lane.'
   lane :iOSsrfDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'iOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SWI only: See \'iOSDistributePublicAppStoreBuild\' lane.'
+  desc 'SWI only: See `iOSDistributePublicAppStoreBuild` lane.'
   lane :iOSswiDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'iOS', bu: 'SWI', tag_version: options[:tag_version]
@@ -485,54 +485,54 @@ platform :ios do
 
   # Individual iOS App Store build dSYMs uploads
 
-  desc 'RSI only: See \'iOSAppStoreBuildDSYMs\' lane.'
+  desc 'RSI only: See `iOSAppStoreBuildDSYMs` lane.'
   lane :iOSrsiAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RSI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR only: See \'iOSAppStoreBuildDSYMs\' lane.'
+  desc 'RTR only: See `iOSAppStoreBuildDSYMs` lane.'
   lane :iOSrtrAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTR_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS only: See \'iOSAppStoreBuildDSYMs\' lane.'
+  desc 'RTS only: See `iOSAppStoreBuildDSYMs` lane.'
   lane :iOSrtsAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_RTS_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR only: See \'iOSAppStoreBuildDSYMs\' lane.'
+  desc 'SFR only: See `iOSAppStoreBuildDSYMs` lane.'
   lane :iOSsrfAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SRF_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SWI only: See \'iOSAppStoreBuildDSYMs\' lane.'
+  desc 'SWI only: See `iOSAppStoreBuildDSYMs` lane.'
   lane :iOSswiAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'iOS', ENV['PLAY_SWI_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   # Individual iOS AppStore releases
 
-  desc 'RSI only: See \'iOSPrepareAppStoreRelease\' lane.'
+  desc 'RSI only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSrsiPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'RSI', options)
   end
 
-  desc 'RTR only: See \'iOSPrepareAppStoreRelease\' lane.'
+  desc 'RTR only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSrtrPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'RTR', options)
   end
 
-  desc 'RTS only: See \'iOSPrepareAppStoreRelease\' lane.'
+  desc 'RTS only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSrtsPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'RTS', options)
   end
 
-  desc 'SRF only: See \'iOSPrepareAppStoreRelease\' lane.'
+  desc 'SRF only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSsrfPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'SRF', options)
   end
 
-  desc 'SWI only: See \'iOSPrepareAppStoreRelease\' lane.'
+  desc 'SWI only: See `iOSPrepareAppStoreRelease` lane.'
   lane :iOSswiPrepareAppStoreRelease do |options|
     prepare_appstore_release('iOS', 'SWI', options)
   end
@@ -581,62 +581,62 @@ platform :ios do
 
   # Individual tvOS App Store build uploads
 
-  desc 'RSI only: See \'tvOSUploadAppStoreBuilds\' lane.'
+  desc 'RSI only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSrsiUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'RSI')
   end
 
-  desc 'RTR only: See \'tvOSUploadAppStoreBuilds\' lane.'
+  desc 'RTR only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSrtrUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'RTR')
   end
 
-  desc 'RTS only: See \'tvOSUploadAppStoreBuilds\' lane.'
+  desc 'RTS only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSrtsUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'RTS')
   end
 
-  desc 'SRF only: See \'tvOSUploadAppStoreBuilds\' lane.'
+  desc 'SRF only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSsrfUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SRF')
   end
 
-  desc 'SWI only: See \'tvOSUploadAppStoreBuilds\' lane.'
+  desc 'SWI only: See `tvOSUploadAppStoreBuilds` lane.'
   lane :tvOSswiUploadAppStoreBuild do
     testflight_appstore_build_upload(platform: 'tvOS', bu: 'SWI')
   end
 
   # Individual tvOS App Store build private distributions
 
-  desc 'RSI only: See \'tvOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RSI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
   lane :tvOSrsiDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTR only: See \'tvOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RTR only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
   lane :tvOSrtrDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTS only: See \'tvOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
   lane :tvOSrtsDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SRF only: See \'tvOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
   lane :tvOSsrfDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SWI only: See \'tvOSDistributePrivateAppStoreBuilds\' lane.'
+  desc 'SWI only: See `tvOSDistributePrivateAppStoreBuilds` lane.'
   lane :tvOSswiDistributePrivateAppStoreBuild do |options|
     testflight_distribute_private_appstore_build(
       platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
@@ -645,35 +645,35 @@ platform :ios do
 
   # Individual tvOS App Store build public distributions
 
-  desc 'RSI only: See \'tvOSDistributePublicAppStoreBuilds\' lane.'
+  desc 'RSI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
   lane :tvOSrsiDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'tvOS', bu: 'RSI', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTR only: See \'tvOSDistributePublicAppStoreBuilds\' lane.'
+  desc 'RTR only: See `tvOSDistributePublicAppStoreBuilds` lane.'
   lane :tvOSrtrDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'tvOS', bu: 'RTR', tag_version: options[:tag_version]
     )
   end
 
-  desc 'RTS only: See \'tvOSDistributePublicAppStoreBuilds\' lane.'
+  desc 'RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.'
   lane :tvOSrtsDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'tvOS', bu: 'RTS', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SRF only: See \'tvOSDistributePublicAppStoreBuilds\' lane.'
+  desc 'SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.'
   lane :tvOSsrfDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'tvOS', bu: 'SRF', tag_version: options[:tag_version]
     )
   end
 
-  desc 'SWI only: See \'tvOSDistributePublicAppStoreBuilds\' lane.'
+  desc 'SWI only: See `tvOSDistributePublicAppStoreBuilds` lane.'
   lane :tvOSswiDistributePublicAppStoreBuild do |options|
     testflight_distribute_public_appstore_build(
       platform: 'tvOS', bu: 'SWI', tag_version: options[:tag_version]
@@ -682,54 +682,54 @@ platform :ios do
 
   # Individual tvOS App Store build dSYMs uploads
 
-  desc 'RSI only: See \'tvOSAppStoreBuildDSYMs\' lane.'
+  desc 'RSI only: See `tvOSAppStoreBuildDSYMs` lane.'
   lane :tvOSrsiAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RSI_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTR only: See \'tvOSAppStoreBuildDSYMs\' lane.'
+  desc 'RTR only: See `tvOSAppStoreBuildDSYMs` lane.'
   lane :tvOSrtrAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RTR_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'RTS only: See \'tvOSAppStoreBuildDSYMs\' lane.'
+  desc 'RTS only: See `tvOSAppStoreBuildDSYMs` lane.'
   lane :tvOSrtsAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_RTS_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SFR only: See \'tvOSAppStoreBuildDSYMs\' lane.'
+  desc 'SFR only: See `tvOSAppStoreBuildDSYMs` lane.'
   lane :tvOSsrfAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_SRF_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
-  desc 'SWI only: See \'tvOSAppStoreBuildDSYMs\' lane.'
+  desc 'SWI only: See `tvOSAppStoreBuildDSYMs` lane.'
   lane :tvOSswiAppStoreBuildDSYMs do |options|
     update_dsyms(nil, 'tvOS', ENV['PLAY_SWI_TV_APPSTORE_APPCENTER_APPNAME'], options)
   end
 
   # Individual tvOS AppStore releases
 
-  desc 'RSI only: See \'tvOSPrepareAppStoreRelease\' lane.'
+  desc 'RSI only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSrsiPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'RSI', options)
   end
 
-  desc 'RTR only: See \'tvOSPrepareAppStoreRelease\' lane.'
+  desc 'RTR only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSrtrPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'RTR', options)
   end
 
-  desc 'RTS only: See \'tvOSPrepareAppStoreRelease\' lane.'
+  desc 'RTS only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSrtsPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'RTS', options)
   end
 
-  desc 'SRF only: See \'tvOSPrepareAppStoreRelease\' lane.'
+  desc 'SRF only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSsrfPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'SRF', options)
   end
 
-  desc 'SWI only: See \'tvOSPrepareAppStoreRelease\' lane.'
+  desc 'SWI only: See `tvOSPrepareAppStoreRelease` lane.'
   lane :tvOSswiPrepareAppStoreRelease do |options|
     prepare_appstore_release('tvOS', 'SWI', options)
   end

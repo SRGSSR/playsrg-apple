@@ -37,7 +37,7 @@ Builds a new tvOS nightly on App Store Connect and waits for build processing.
 [bundle exec] fastlane ios tvOSnightlyDSYMs
 ```
 
-Sends latest tvOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest tvOS nightly dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios iOSnightlies
 
@@ -53,7 +53,7 @@ Builds a new iOS nightly on App Store Connect and waits for build processing.
 [bundle exec] fastlane ios iOSnightlyDSYMs
 ```
 
-Sends latest iOS nightly dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest iOS nightly dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios nightlyTester
 
@@ -85,7 +85,7 @@ Builds a tvOS beta on App Store Connect with the current build number and waits 
 [bundle exec] fastlane ios tvOSbetaDSYMs
 ```
 
-Sends latest tvOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest tvOS beta dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios iOSbetas
 
@@ -101,7 +101,7 @@ Builds an iOS beta on App Store Connect with the current build number and waits 
 [bundle exec] fastlane ios iOSbetaDSYMs
 ```
 
-Sends latest iOS beta dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest iOS beta dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios betaTester
 
@@ -133,7 +133,7 @@ Uploads an iOS App Store build on App Store Connect with the current build numbe
 [bundle exec] fastlane ios iOSDistributePrivateAppStoreBuilds
 ```
 
-Distributes to private groups an iOS App Store build on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distributes to private groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
 ### ios iOSDistributePublicAppStoreBuilds
 
@@ -141,7 +141,7 @@ Distributes to private groups an iOS App Store build on App Store Connect with t
 [bundle exec] fastlane ios iOSDistributePublicAppStoreBuilds
 ```
 
-Distributes to public groups an iOS App Store build on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distributes to public groups an iOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
 ### ios iOSAppStoreBuildDSYMs
 
@@ -149,7 +149,7 @@ Distributes to public groups an iOS App Store build on App Store Connect with th
 [bundle exec] fastlane ios iOSAppStoreBuildDSYMs
 ```
 
-Sends latest iOS App Store build dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest iOS App Store build dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios iOSPrepareAppStoreReleases
 
@@ -157,7 +157,7 @@ Sends latest iOS App Store build dSYMs to App Center. Optional 'build_number', '
 [bundle exec] fastlane ios iOSPrepareAppStoreReleases
 ```
 
-Prepare AppStore iOS releases on App Store Connect with the current version number and build number. Builds have to be uploaded before any submission for review. Optional 'tag_version' (X.Y.Z-build_number) or 'submit_for_review' (boolean) parameters.
+Prepare AppStore iOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
 
 ### ios tvOSAppStoreBuilds
 
@@ -181,7 +181,7 @@ Uploads a tvOS build on App Store Connect with the current build number.
 [bundle exec] fastlane ios tvOSDistributePrivateAppStoreBuilds
 ```
 
-Distributes to private groups a tvOS App Store build on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distributes to private groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
 ### ios tvOSDistributePublicAppStoreBuilds
 
@@ -189,7 +189,7 @@ Distributes to private groups a tvOS App Store build on App Store Connect with t
 [bundle exec] fastlane ios tvOSDistributePublicAppStoreBuilds
 ```
 
-Distributes to public groups a tvOS App Store build on App Store Connect with the current build number. Optional 'tag_version' parameter (X.Y.Z-build_number).
+Distributes to public groups a tvOS App Store build on App Store Connect with the current version and build numbers. Optional `tag_version` parameter (`X.Y.Z-build_number`).
 
 ### ios tvOSAppStoreBuildDSYMs
 
@@ -197,7 +197,7 @@ Distributes to public groups a tvOS App Store build on App Store Connect with th
 [bundle exec] fastlane ios tvOSAppStoreBuildDSYMs
 ```
 
-Sends latest tvOS App Store build dSYMs to App Center. Optional 'build_number', 'version' or 'min_version' parameters.
+Sends latest tvOS App Store build dSYMs to App Center. Optional `build_number`, `version` or `min_version` parameters.
 
 ### ios tvOSPrepareAppStoreReleases
 
@@ -205,7 +205,7 @@ Sends latest tvOS App Store build dSYMs to App Center. Optional 'build_number', 
 [bundle exec] fastlane ios tvOSPrepareAppStoreReleases
 ```
 
-Prepare AppStore tvOS releases on App Store Connect with the current version number and build number. Builds have to be uploaded before any submission for review. Optional 'tag_version' (X.Y.Z-build_number) or 'submit_for_review' (boolean) parameters.
+Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
 
 ### ios iOSrsiScreenshots
 
@@ -253,7 +253,7 @@ SWI: Makes iOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios iOSrsiUploadAppStoreBuild
 ```
 
-RSI only: See 'iOSUploadAppStoreBuilds' lane.
+RSI only: See `iOSUploadAppStoreBuilds` lane.
 
 ### ios iOSrtrUploadAppStoreBuild
 
@@ -261,7 +261,7 @@ RSI only: See 'iOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrtrUploadAppStoreBuild
 ```
 
-RTR only: See 'iOSUploadAppStoreBuilds' lane.
+RTR only: See `iOSUploadAppStoreBuilds` lane.
 
 ### ios iOSrtsUploadAppStoreBuild
 
@@ -269,7 +269,7 @@ RTR only: See 'iOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrtsUploadAppStoreBuild
 ```
 
-RTS only: See 'iOSUploadAppStoreBuilds' lane.
+RTS only: See `iOSUploadAppStoreBuilds` lane.
 
 ### ios iOSsrfUploadAppStoreBuild
 
@@ -277,7 +277,7 @@ RTS only: See 'iOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSsrfUploadAppStoreBuild
 ```
 
-SRF only: See 'iOSUploadAppStoreBuilds' lane.
+SRF only: See `iOSUploadAppStoreBuilds` lane.
 
 ### ios iOSswiUploadAppStoreBuild
 
@@ -285,7 +285,7 @@ SRF only: See 'iOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSswiUploadAppStoreBuild
 ```
 
-SWI only: See 'iOSUploadAppStoreBuilds' lane.
+SWI only: See `iOSUploadAppStoreBuilds` lane.
 
 ### ios iOSrsiDistributePrivateAppStoreBuild
 
@@ -293,7 +293,7 @@ SWI only: See 'iOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrsiDistributePrivateAppStoreBuild
 ```
 
-RSI only: See 'iOSDistributePrivateAppStoreBuilds' lane.
+RSI only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSrtrDistributePrivateAppStoreBuild
 
@@ -301,7 +301,7 @@ RSI only: See 'iOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrtrDistributePrivateAppStoreBuild
 ```
 
-RTR only: See 'iOSDistributePrivateAppStoreBuilds' lane.
+RTR only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSrtsDistributePrivateAppStoreBuild
 
@@ -309,7 +309,7 @@ RTR only: See 'iOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrtsDistributePrivateAppStoreBuild
 ```
 
-RTS only: See 'iOSDistributePrivateAppStoreBuilds' lane.
+RTS only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSsrfDistributePrivateAppStoreBuild
 
@@ -317,7 +317,7 @@ RTS only: See 'iOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSsrfDistributePrivateAppStoreBuild
 ```
 
-SRF only: See 'iOSDistributePrivateAppStoreBuilds' lane.
+SRF only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSswiDistributePrivateAppStoreBuild
 
@@ -325,7 +325,7 @@ SRF only: See 'iOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSswiDistributePrivateAppStoreBuild
 ```
 
-SWI only: See 'iOSDistributePrivateAppStoreBuilds' lane.
+SWI only: See `iOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios iOSrsiDistributePublicAppStoreBuild
 
@@ -333,7 +333,7 @@ SWI only: See 'iOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios iOSrsiDistributePublicAppStoreBuild
 ```
 
-RSI only: See 'iOSDistributePublicAppStoreBuild' lane.
+RSI only: See `iOSDistributePublicAppStoreBuild` lane.
 
 ### ios iOSrtrDistributePublicAppStoreBuild
 
@@ -341,7 +341,7 @@ RSI only: See 'iOSDistributePublicAppStoreBuild' lane.
 [bundle exec] fastlane ios iOSrtrDistributePublicAppStoreBuild
 ```
 
-RTR only: See 'iOSDistributePublicAppStoreBuild' lane.
+RTR only: See `iOSDistributePublicAppStoreBuild` lane.
 
 ### ios iOSrtsDistributePublicAppStoreBuild
 
@@ -349,7 +349,7 @@ RTR only: See 'iOSDistributePublicAppStoreBuild' lane.
 [bundle exec] fastlane ios iOSrtsDistributePublicAppStoreBuild
 ```
 
-RTS only: See 'iOSDistributePublicAppStoreBuild' lane.
+RTS only: See `iOSDistributePublicAppStoreBuild` lane.
 
 ### ios iOSsrfDistributePublicAppStoreBuild
 
@@ -357,7 +357,7 @@ RTS only: See 'iOSDistributePublicAppStoreBuild' lane.
 [bundle exec] fastlane ios iOSsrfDistributePublicAppStoreBuild
 ```
 
-SRF only: See 'iOSDistributePublicAppStoreBuild' lane.
+SRF only: See `iOSDistributePublicAppStoreBuild` lane.
 
 ### ios iOSswiDistributePublicAppStoreBuild
 
@@ -365,7 +365,7 @@ SRF only: See 'iOSDistributePublicAppStoreBuild' lane.
 [bundle exec] fastlane ios iOSswiDistributePublicAppStoreBuild
 ```
 
-SWI only: See 'iOSDistributePublicAppStoreBuild' lane.
+SWI only: See `iOSDistributePublicAppStoreBuild` lane.
 
 ### ios iOSrsiAppStoreBuildDSYMs
 
@@ -373,7 +373,7 @@ SWI only: See 'iOSDistributePublicAppStoreBuild' lane.
 [bundle exec] fastlane ios iOSrsiAppStoreBuildDSYMs
 ```
 
-RSI only: See 'iOSAppStoreBuildDSYMs' lane.
+RSI only: See `iOSAppStoreBuildDSYMs` lane.
 
 ### ios iOSrtrAppStoreBuildDSYMs
 
@@ -381,7 +381,7 @@ RSI only: See 'iOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios iOSrtrAppStoreBuildDSYMs
 ```
 
-RTR only: See 'iOSAppStoreBuildDSYMs' lane.
+RTR only: See `iOSAppStoreBuildDSYMs` lane.
 
 ### ios iOSrtsAppStoreBuildDSYMs
 
@@ -389,7 +389,7 @@ RTR only: See 'iOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios iOSrtsAppStoreBuildDSYMs
 ```
 
-RTS only: See 'iOSAppStoreBuildDSYMs' lane.
+RTS only: See `iOSAppStoreBuildDSYMs` lane.
 
 ### ios iOSsrfAppStoreBuildDSYMs
 
@@ -397,7 +397,7 @@ RTS only: See 'iOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios iOSsrfAppStoreBuildDSYMs
 ```
 
-SFR only: See 'iOSAppStoreBuildDSYMs' lane.
+SFR only: See `iOSAppStoreBuildDSYMs` lane.
 
 ### ios iOSswiAppStoreBuildDSYMs
 
@@ -405,7 +405,7 @@ SFR only: See 'iOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios iOSswiAppStoreBuildDSYMs
 ```
 
-SWI only: See 'iOSAppStoreBuildDSYMs' lane.
+SWI only: See `iOSAppStoreBuildDSYMs` lane.
 
 ### ios iOSrsiPrepareAppStoreRelease
 
@@ -413,7 +413,7 @@ SWI only: See 'iOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios iOSrsiPrepareAppStoreRelease
 ```
 
-RSI only: See 'iOSPrepareAppStoreRelease' lane.
+RSI only: See `iOSPrepareAppStoreRelease` lane.
 
 ### ios iOSrtrPrepareAppStoreRelease
 
@@ -421,7 +421,7 @@ RSI only: See 'iOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios iOSrtrPrepareAppStoreRelease
 ```
 
-RTR only: See 'iOSPrepareAppStoreRelease' lane.
+RTR only: See `iOSPrepareAppStoreRelease` lane.
 
 ### ios iOSrtsPrepareAppStoreRelease
 
@@ -429,7 +429,7 @@ RTR only: See 'iOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios iOSrtsPrepareAppStoreRelease
 ```
 
-RTS only: See 'iOSPrepareAppStoreRelease' lane.
+RTS only: See `iOSPrepareAppStoreRelease` lane.
 
 ### ios iOSsrfPrepareAppStoreRelease
 
@@ -437,7 +437,7 @@ RTS only: See 'iOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios iOSsrfPrepareAppStoreRelease
 ```
 
-SRF only: See 'iOSPrepareAppStoreRelease' lane.
+SRF only: See `iOSPrepareAppStoreRelease` lane.
 
 ### ios iOSswiPrepareAppStoreRelease
 
@@ -445,7 +445,7 @@ SRF only: See 'iOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios iOSswiPrepareAppStoreRelease
 ```
 
-SWI only: See 'iOSPrepareAppStoreRelease' lane.
+SWI only: See `iOSPrepareAppStoreRelease` lane.
 
 ### ios tvOSrsiScreenshots
 
@@ -493,7 +493,7 @@ SWI: Makes tvOS screenshots and replaces current ones on App Store Connect.
 [bundle exec] fastlane ios tvOSrsiUploadAppStoreBuild
 ```
 
-RSI only: See 'tvOSUploadAppStoreBuilds' lane.
+RSI only: See `tvOSUploadAppStoreBuilds` lane.
 
 ### ios tvOSrtrUploadAppStoreBuild
 
@@ -501,7 +501,7 @@ RSI only: See 'tvOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtrUploadAppStoreBuild
 ```
 
-RTR only: See 'tvOSUploadAppStoreBuilds' lane.
+RTR only: See `tvOSUploadAppStoreBuilds` lane.
 
 ### ios tvOSrtsUploadAppStoreBuild
 
@@ -509,7 +509,7 @@ RTR only: See 'tvOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtsUploadAppStoreBuild
 ```
 
-RTS only: See 'tvOSUploadAppStoreBuilds' lane.
+RTS only: See `tvOSUploadAppStoreBuilds` lane.
 
 ### ios tvOSsrfUploadAppStoreBuild
 
@@ -517,7 +517,7 @@ RTS only: See 'tvOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSsrfUploadAppStoreBuild
 ```
 
-SRF only: See 'tvOSUploadAppStoreBuilds' lane.
+SRF only: See `tvOSUploadAppStoreBuilds` lane.
 
 ### ios tvOSswiUploadAppStoreBuild
 
@@ -525,7 +525,7 @@ SRF only: See 'tvOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSswiUploadAppStoreBuild
 ```
 
-SWI only: See 'tvOSUploadAppStoreBuilds' lane.
+SWI only: See `tvOSUploadAppStoreBuilds` lane.
 
 ### ios tvOSrsiDistributePrivateAppStoreBuild
 
@@ -533,7 +533,7 @@ SWI only: See 'tvOSUploadAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrsiDistributePrivateAppStoreBuild
 ```
 
-RSI only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
+RSI only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSrtrDistributePrivateAppStoreBuild
 
@@ -541,7 +541,7 @@ RSI only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtrDistributePrivateAppStoreBuild
 ```
 
-RTR only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
+RTR only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSrtsDistributePrivateAppStoreBuild
 
@@ -549,7 +549,7 @@ RTR only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtsDistributePrivateAppStoreBuild
 ```
 
-RTS only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
+RTS only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSsrfDistributePrivateAppStoreBuild
 
@@ -557,7 +557,7 @@ RTS only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSsrfDistributePrivateAppStoreBuild
 ```
 
-SRF only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
+SRF only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSswiDistributePrivateAppStoreBuild
 
@@ -565,7 +565,7 @@ SRF only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSswiDistributePrivateAppStoreBuild
 ```
 
-SWI only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
+SWI only: See `tvOSDistributePrivateAppStoreBuilds` lane.
 
 ### ios tvOSrsiDistributePublicAppStoreBuild
 
@@ -573,7 +573,7 @@ SWI only: See 'tvOSDistributePrivateAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrsiDistributePublicAppStoreBuild
 ```
 
-RSI only: See 'tvOSDistributePublicAppStoreBuilds' lane.
+RSI only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 ### ios tvOSrtrDistributePublicAppStoreBuild
 
@@ -581,7 +581,7 @@ RSI only: See 'tvOSDistributePublicAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtrDistributePublicAppStoreBuild
 ```
 
-RTR only: See 'tvOSDistributePublicAppStoreBuilds' lane.
+RTR only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 ### ios tvOSrtsDistributePublicAppStoreBuild
 
@@ -589,7 +589,7 @@ RTR only: See 'tvOSDistributePublicAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrtsDistributePublicAppStoreBuild
 ```
 
-RTS only: See 'tvOSDistributePublicAppStoreBuilds' lane.
+RTS only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 ### ios tvOSsrfDistributePublicAppStoreBuild
 
@@ -597,7 +597,7 @@ RTS only: See 'tvOSDistributePublicAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSsrfDistributePublicAppStoreBuild
 ```
 
-SRF only: See 'tvOSDistributePublicAppStoreBuilds' lane.
+SRF only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 ### ios tvOSswiDistributePublicAppStoreBuild
 
@@ -605,7 +605,7 @@ SRF only: See 'tvOSDistributePublicAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSswiDistributePublicAppStoreBuild
 ```
 
-SWI only: See 'tvOSDistributePublicAppStoreBuilds' lane.
+SWI only: See `tvOSDistributePublicAppStoreBuilds` lane.
 
 ### ios tvOSrsiAppStoreBuildDSYMs
 
@@ -613,7 +613,7 @@ SWI only: See 'tvOSDistributePublicAppStoreBuilds' lane.
 [bundle exec] fastlane ios tvOSrsiAppStoreBuildDSYMs
 ```
 
-RSI only: See 'tvOSAppStoreBuildDSYMs' lane.
+RSI only: See `tvOSAppStoreBuildDSYMs` lane.
 
 ### ios tvOSrtrAppStoreBuildDSYMs
 
@@ -621,7 +621,7 @@ RSI only: See 'tvOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios tvOSrtrAppStoreBuildDSYMs
 ```
 
-RTR only: See 'tvOSAppStoreBuildDSYMs' lane.
+RTR only: See `tvOSAppStoreBuildDSYMs` lane.
 
 ### ios tvOSrtsAppStoreBuildDSYMs
 
@@ -629,7 +629,7 @@ RTR only: See 'tvOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios tvOSrtsAppStoreBuildDSYMs
 ```
 
-RTS only: See 'tvOSAppStoreBuildDSYMs' lane.
+RTS only: See `tvOSAppStoreBuildDSYMs` lane.
 
 ### ios tvOSsrfAppStoreBuildDSYMs
 
@@ -637,7 +637,7 @@ RTS only: See 'tvOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios tvOSsrfAppStoreBuildDSYMs
 ```
 
-SFR only: See 'tvOSAppStoreBuildDSYMs' lane.
+SFR only: See `tvOSAppStoreBuildDSYMs` lane.
 
 ### ios tvOSswiAppStoreBuildDSYMs
 
@@ -645,7 +645,7 @@ SFR only: See 'tvOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios tvOSswiAppStoreBuildDSYMs
 ```
 
-SWI only: See 'tvOSAppStoreBuildDSYMs' lane.
+SWI only: See `tvOSAppStoreBuildDSYMs` lane.
 
 ### ios tvOSrsiPrepareAppStoreRelease
 
@@ -653,7 +653,7 @@ SWI only: See 'tvOSAppStoreBuildDSYMs' lane.
 [bundle exec] fastlane ios tvOSrsiPrepareAppStoreRelease
 ```
 
-RSI only: See 'tvOSPrepareAppStoreRelease' lane.
+RSI only: See `tvOSPrepareAppStoreRelease` lane.
 
 ### ios tvOSrtrPrepareAppStoreRelease
 
@@ -661,7 +661,7 @@ RSI only: See 'tvOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios tvOSrtrPrepareAppStoreRelease
 ```
 
-RTR only: See 'tvOSPrepareAppStoreRelease' lane.
+RTR only: See `tvOSPrepareAppStoreRelease` lane.
 
 ### ios tvOSrtsPrepareAppStoreRelease
 
@@ -669,7 +669,7 @@ RTR only: See 'tvOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios tvOSrtsPrepareAppStoreRelease
 ```
 
-RTS only: See 'tvOSPrepareAppStoreRelease' lane.
+RTS only: See `tvOSPrepareAppStoreRelease` lane.
 
 ### ios tvOSsrfPrepareAppStoreRelease
 
@@ -677,7 +677,7 @@ RTS only: See 'tvOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios tvOSsrfPrepareAppStoreRelease
 ```
 
-SRF only: See 'tvOSPrepareAppStoreRelease' lane.
+SRF only: See `tvOSPrepareAppStoreRelease` lane.
 
 ### ios tvOSswiPrepareAppStoreRelease
 
@@ -685,7 +685,7 @@ SRF only: See 'tvOSPrepareAppStoreRelease' lane.
 [bundle exec] fastlane ios tvOSswiPrepareAppStoreRelease
 ```
 
-SWI only: See 'tvOSPrepareAppStoreRelease' lane.
+SWI only: See `tvOSPrepareAppStoreRelease` lane.
 
 ----
 
