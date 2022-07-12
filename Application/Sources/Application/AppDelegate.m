@@ -250,6 +250,9 @@ static void *s_kvoContext = &s_kvoContext;
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
                                                                                                        container:applicationConfiguration.analyticsContainer
                                                                                                         siteName:applicationConfiguration.siteName];
+#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
+    configuration.environmentMode = SRGAnalyticsEnvironmentModePreProduction;
+#endif
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                               identityService:SRGIdentityService.currentIdentityService];
 }
