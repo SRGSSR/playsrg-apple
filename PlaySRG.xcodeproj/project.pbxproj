@@ -10688,6 +10688,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -10696,6 +10697,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -10711,6 +10713,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -10719,6 +10722,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -10797,7 +10801,7 @@
 			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10829,6 +10833,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 392;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
@@ -10848,6 +10853,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -11794,6 +11800,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -11802,6 +11809,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Beta;
@@ -11815,6 +11823,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -11823,6 +11832,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Beta;
@@ -11894,7 +11904,7 @@
 			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11926,6 +11936,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 392;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
@@ -11945,6 +11956,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -13558,6 +13570,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -13566,6 +13579,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -13579,6 +13593,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = JA876HZNN2;
 				ENABLE_PREVIEWS = YES;
@@ -13587,6 +13602,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = AppStore;
@@ -13599,6 +13615,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -13607,6 +13624,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -13620,6 +13638,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = 8779C367VK;
 				ENABLE_PREVIEWS = YES;
@@ -13628,6 +13647,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = AppStore;
@@ -13822,6 +13842,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
@@ -13830,6 +13851,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Beta_AppCenter;
@@ -13843,6 +13865,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
@@ -13851,6 +13874,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Beta_AppCenter;
@@ -13986,6 +14010,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
@@ -13994,6 +14019,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -14009,6 +14035,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
 				ENABLE_PREVIEWS = YES;
@@ -14017,6 +14044,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -15715,7 +15743,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -15723,6 +15751,7 @@
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 392;
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = ABW92QGFZ7;
 				ENABLE_PREVIEWS = YES;
@@ -15732,6 +15761,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -15744,7 +15774,7 @@
 			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15776,6 +15806,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 392;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = JA876HZNN2;
@@ -15795,6 +15826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -15809,7 +15841,7 @@
 			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15841,6 +15873,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 392;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -15860,6 +15893,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -15874,7 +15908,7 @@
 			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15906,6 +15940,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 392;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
 				DEVELOPMENT_TEAM = VMGRRW6SG7;
@@ -15925,6 +15960,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 3.6.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -19020,8 +19056,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.1;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
@@ -19044,8 +19080,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */ = {
@@ -19060,16 +19096,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.7.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */ = {
@@ -19100,16 +19136,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.2.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 16.0.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -19196,8 +19232,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srglogger-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = "feature/ios16-tvos16-xcode14";
+				kind = branch;
 			};
 		};
 		6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */ = {
