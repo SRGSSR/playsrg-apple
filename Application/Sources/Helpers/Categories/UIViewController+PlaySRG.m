@@ -410,16 +410,16 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
     UIViewController *presentingViewController = topViewController.presentingViewController;
     if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
         if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortrait]) {
-            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationPortrait];
         }
         else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
-            [UIDevice.currentDevice setValue:@(UIDeviceOrientationPortraitUpsideDown) forKey:@keypath(UIDevice.new, orientation)];
+            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown];
         }
         else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeLeft]) {
-            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeLeft) forKey:@keypath(UIDevice.new, orientation)];
+            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
         }
         else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeRight]) {
-            [UIDevice.currentDevice setValue:@(UIDeviceOrientationLandscapeRight) forKey:@keypath(UIDevice.new, orientation)];
+            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
         }
     }
 #endif

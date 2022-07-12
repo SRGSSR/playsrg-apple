@@ -63,6 +63,10 @@
 @import SRGAppearance;
 @import SRGUserData;
 
+// Store the most recently used landscape orientation, also between player instantiations (so that the user last used
+// orientation is preferred)
+static UIInterfaceOrientation s_previouslyUsedLandscapeInterfaceOrientation = UIInterfaceOrientationLandscapeLeft;
+
 static const UILayoutPriority MediaPlayerBottomConstraintNormalPriority = 850;
 static const UILayoutPriority MediaPlayerBottomConstraintFullScreenPriority = 950;
 
@@ -194,7 +198,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 @property (nonatomic, getter=isTransitioning) BOOL transitioning;           // Whether the UI is currently transitioning between class sizes
 @property (nonatomic, getter=isStatusBarHidden) BOOL statusBarHidden;
-@property (nonatomic) BOOL wasPortraitFullScreen;
 
 @property (nonatomic, getter=areDetailsExpanded) BOOL detailsExpanded;
 @property (nonatomic, getter=areDetailsAvailable) BOOL detailsAvailable;
@@ -598,17 +601,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         // iPhone devices: Set full screen when switching to landscape orientation (no change when switching to portrait,
         // when switching to landscape we want the experience to be as immersive as possible, but when switching to portrait
-        // we don't want to alter the current experience). Animated booleans set to NO because the transition ensures
-        // changes are animated.
+        // we don't want to alter the current experience)
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
             BOOL isLandscape = (size.width > size.height);
+            [self.letterboxView setFullScreen:isLandscape animated:NO /* will be animated with the view transition */];
+            
             if (isLandscape) {
-                self.wasPortraitFullScreen = self.letterboxView.fullScreen;
-                [self.letterboxView setFullScreen:YES animated:NO];
-                [self hidePlayerUserInterfaceAnimated:NO];
-            }
-            else if (! self.wasPortraitFullScreen) {
-                [self.letterboxView setFullScreen:NO animated:NO];
+                [self hidePlayerUserInterfaceAnimated:NO /* will be animated with the view transition */];
             }
         }
         [self scrollToNearestProgramAnimated:NO];
@@ -616,6 +615,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self reloadSongPanelSize];
         [self scrollToNearestSongAnimated:NO];
     } completion:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+            s_previouslyUsedLandscapeInterfaceOrientation = interfaceOrientation;
+        }
         self.transitioning = NO;
     }];
 }
@@ -1553,6 +1556,29 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView toggleFullScreen:(BOOL)fullScreen animated:(BOOL)animated withCompletionHandler:(nonnull void (^)(BOOL))completionHandler
 {
+    void (^rotate)(UIInterfaceOrientation) = ^(UIInterfaceOrientation orientation) {
+        // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
+        completionHandler(NO);
+        [UIDevice.currentDevice rotateToUserInterfaceOrientation:orientation];
+    };
+    
+    // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,
+    // we force a rotation, which itself will perform the appropriate transition from or to full-screen
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone && ! self.transitioning) {
+        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
+        if (UIInterfaceOrientationIsLandscape(interfaceOrientation)) {
+            rotate(UIInterfaceOrientationPortrait);
+            return;
+        }
+        else {
+            // Only force rotation from portrait to landscape orientation if the content is better watched in landscape orientation
+            if (letterboxView.aspectRatio > 1.f) {
+                rotate(s_previouslyUsedLandscapeInterfaceOrientation);
+                return;
+            }
+        }
+    }
+    
     // Status bar is NOT updated after rotation consistently, so we must store the desired status bar visibility once
     // we have reliable information to determine it. On iPhone in landscape orientation it is always hidden since iOS 13,
     // in which case we must not hide it to avoid incorrect safe area insets after returning from landscape orientation.
@@ -1678,17 +1704,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [Banner showWatchLaterAdded:YES forItemWithName:media.title];
         }
     });
-}
-
-- (BOOL)letterboxViewShouldDisplayFullScreenToggleButton:(SRGLetterboxView *)letterboxView
-{
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        UIInterfaceOrientation interfaceOrientation = UIApplication.sharedApplication.mainWindowScene.interfaceOrientation;
-        return UIInterfaceOrientationIsPortrait(interfaceOrientation);
-    }
-    else {
-        return YES;
-    }
 }
 
 #pragma mark SRGLetterboxPictureInPictureDelegate protocol
