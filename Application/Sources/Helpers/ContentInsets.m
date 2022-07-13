@@ -81,28 +81,13 @@ static void UpdateContentInsetsForViewController(UIViewController *viewControlle
     }
 }
 
-- (NSArray<UIViewController *> *)play_effectiveChildViewControllers
-{
-    if (! [self conformsToProtocol:@protocol(ContainerContentInsets)]) {
-        return self.childViewControllers;
-    }
-    
-    UIViewController<ContainerContentInsets> *containerViewController = (UIViewController<ContainerContentInsets> *)self;
-    if ([containerViewController respondsToSelector:@selector(play_contentChildViewControllers)]) {
-        return containerViewController.play_contentChildViewControllers;
-    }
-    else {
-        return containerViewController.childViewControllers;
-    }
-}
-
 #pragma mark Updates
 
 - (void)play_setNeedsContentInsetsUpdate
 {
     UpdateContentInsetsForViewController(self);
     
-    [self.play_effectiveChildViewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
+    [self.childViewControllers enumerateObjectsUsingBlock:^(UIViewController * _Nonnull viewController, NSUInteger idx, BOOL * _Nonnull stop) {
         [viewController play_setNeedsContentInsetsUpdate];
     }];
 }
