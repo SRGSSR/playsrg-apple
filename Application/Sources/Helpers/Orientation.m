@@ -30,6 +30,10 @@ static UIInterfaceOrientationMask SupportedInterfaceOrientationsForViewControlle
 
 - (UIInterfaceOrientationMask)UIViewController_Orientation_swizzled_supportedInterfaceOrientations
 {
+    // When a modal is presented with a custom style, the presenter is asked about supported orientations, which
+    // implicitly assumes that most custom presentations only cover part of the screen. If the custom presentation
+    // covers the whole screen, though, we should have similar behavior as `UIModalPresentationFullScreen`, i.e.
+    // the presented view controller should be asked for supported orientations instead.
     UIViewController *presentedViewController = self.presentedViewController;
     if (presentedViewController.modalPresentationStyle == UIModalPresentationCustom && [presentedViewController conformsToProtocol:@protocol(Oriented)]) {
         UIViewController<Oriented> *orientedPresentedViewController = (UIViewController<Oriented> *)presentedViewController;
@@ -153,6 +157,8 @@ static UIInterfaceOrientationMask SupportedInterfaceOrientationsForOrientedViewC
 
 static UIInterfaceOrientationMask SupportedInterfaceOrientationsForViewController(UIViewController *viewController)
 {
+    // For `Oriented` view controllers we can determine the overall orientation support by combining the intrinsic
+    // rotation behavior of the view controller with the one of its participating children.
     if ([viewController conformsToProtocol:@protocol(Oriented)]) {
         UIViewController<Oriented> *orientedViewController = (UIViewController<Oriented> *)viewController;
         UIInterfaceOrientationMask supportedInterfaceOrientations = SupportedInterfaceOrientationsForOrientedViewController(orientedViewController);
