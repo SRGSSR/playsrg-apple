@@ -362,6 +362,12 @@ extension SearchViewController: ContentInsets {
     }
 }
 
+#if os(iOS)
+extension SearchViewController: Oriented {
+    
+}
+#endif
+
 extension SearchViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
         return collectionView

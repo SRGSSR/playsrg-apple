@@ -50,6 +50,18 @@
     return [self.viewControllers.firstObject preferredStatusBarUpdateAnimation];
 }
 
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (NSArray<UIViewController *> *)play_orientingChildViewControllers
+{
+    return self.viewControllers;
+}
+
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo

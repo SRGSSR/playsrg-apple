@@ -255,6 +255,18 @@
     [self displayPageAtIndex:index animated:YES];
 }
 
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (NSArray<UIViewController *> *)play_orientingChildViewControllers
+{
+    return self.pageViewController.viewControllers;
+}
+
 #pragma mark ScrollableContentContainer protocol
 
 - (UIViewController *)play_scrollableChildViewController

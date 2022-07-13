@@ -467,6 +467,18 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     return UIEdgeInsetsMake(0.f, 0.f, self.miniPlayerView.active ? (MiniPlayerHeight + self.miniPlayerOffset) : 0.f, 0.f);
 }
 
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (NSArray<UIViewController *> *)play_orientingChildViewControllers
+{
+    return @[self.selectedViewController];
+}
+
 #pragma mark PlayApplicationNavigation protocol
 
 - (BOOL)openApplicationSectionInfo:(ApplicationSectionInfo *)applicationSectionInfo

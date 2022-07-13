@@ -16,6 +16,7 @@
 #import "GoogleCast.h"
 #import "History.h"
 #import "MediaPlayerViewController.h"
+#import "Orientation.h"
 #import "Playlist.h"
 #import "PlaySRG-Swift.h"
 #import "UIDevice+PlaySRG.h"
@@ -353,11 +354,6 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
             }];
         }
     }];
-}
-
-- (BOOL)play_supportsOrientation:(UIInterfaceOrientation)orientation
-{
-    return (self.supportedInterfaceOrientations & (1 << orientation)) != 0;
 }
 
 #endif

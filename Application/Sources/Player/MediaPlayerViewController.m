@@ -1530,6 +1530,18 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     return self.fromPushNotification;
 }
 
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)play_isFullScreenWhenDisplayedInCustomModal
+{
+    return YES;
+}
+
 #pragma mark SRGLetterboxViewDelegate protocol
 
 - (void)letterboxViewWillAnimateUserInterface:(SRGLetterboxView *)letterboxView

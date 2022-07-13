@@ -271,6 +271,12 @@ extension ProgramGuideViewController {
 
 // MARK: Protocols
 
+#if os(iOS)
+extension ProgramGuideViewController: Oriented {
+    
+}
+#endif
+
 extension ProgramGuideViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {
         return children.first

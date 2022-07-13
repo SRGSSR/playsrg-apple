@@ -447,6 +447,12 @@ extension SectionViewController: ContentInsets {
     }
 }
 
+#if os(iOS)
+extension SectionViewController: Oriented {
+    
+}
+#endif
+
 extension SectionViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
         return collectionView

@@ -128,6 +128,10 @@ final class OnboardingViewController: BaseViewController {
     }
 }
 
+extension OnboardingViewController: Oriented {
+    
+}
+
 extension OnboardingViewController: PaperOnboardingDataSource {
     func onboardingItemsCount() -> Int {
         return onboarding.pages.count

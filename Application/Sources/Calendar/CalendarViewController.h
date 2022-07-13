@@ -5,6 +5,7 @@
 //
 
 #import "ContentInsets.h"
+#import "Orientation.h"
 #import "RadioChannel.h"
 #import "ScrollableContent.h"
 
@@ -14,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface CalendarViewController : UIViewController <ContainerContentInsets, FSCalendarDataSource, FSCalendarDelegate, FSCalendarDelegateAppearance,
-    ScrollableContentContainer, SRGAnalyticsViewTracking, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate>
+    Oriented, ScrollableContentContainer, SRGAnalyticsViewTracking, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate>
 
 /**
  *  Instantiate for medias belonging to the specified radio channel. If no channel is provided, TV medias will be

@@ -1678,6 +1678,11 @@
 		6FB2C1122719AAE2003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
 		6FB2C1132719AAE2003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
 		6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
+		6FB79BEE287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BEF287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF0287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF1287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF2287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
 		6FB899FF26335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
 		6FB89A0026335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
 		6FB89A0126335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
@@ -3159,6 +3164,8 @@
 		6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideGridLayout.swift; sourceTree = "<group>"; };
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
+		6FB79BEC287E81790091D157 /* Orientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
+		6FB79BED287E81790091D157 /* Orientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6FB89E26283DEA12006F9C6C /* HighlightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCell.swift; sourceTree = "<group>"; };
@@ -3800,13 +3807,12 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F4760181EB37BD1003021EA /* Categories */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
+				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */,
@@ -3824,6 +3830,8 @@
 				6F9897CC2412582400B390A2 /* Layout.m */,
 				6F5FAA43268CB88C007F0CA8 /* Localization.swift */,
 				08F5DB0F262DC7F700F717D0 /* Logger.swift */,
+				6FB79BEC287E81790091D157 /* Orientation.h */,
+				6FB79BED287E81790091D157 /* Orientation.m */,
 				6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */,
 				6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */,
 				6F80106720443230009FE197 /* PlayApplication.h */,
@@ -3838,6 +3846,7 @@
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6FDEC19126DE307E0020A03F /* PresenterMode.swift */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -8348,6 +8357,7 @@
 				6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */,
 				6F46B7BB281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6FEC91A921A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FB79BEE287E81790091D157 /* Orientation.m in Sources */,
 				6FE9048626F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				088899452077627900242654 /* TVChannel.m in Sources */,
@@ -8673,6 +8683,7 @@
 				6F8CBD822832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BEF287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B6281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5B28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF737281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -8921,6 +8932,7 @@
 				6F8CBD832832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BF0287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B7281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5C28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF738281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -9169,6 +9181,7 @@
 				6F8CBD842832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BF1287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B8281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5D28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF739281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -9288,6 +9301,7 @@
 				6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F8CBD852832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F2E160D26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
+				6FB79BF2287E81790091D157 /* Orientation.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686232460670600B8018A /* Channel.m in Sources */,

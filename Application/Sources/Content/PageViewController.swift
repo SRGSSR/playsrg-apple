@@ -306,6 +306,12 @@ extension PageViewController: ContentInsets {
     }
 }
 
+#if os(iOS)
+extension PageViewController: Oriented {
+    
+}
+#endif
+
 extension PageViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {
         return collectionView
