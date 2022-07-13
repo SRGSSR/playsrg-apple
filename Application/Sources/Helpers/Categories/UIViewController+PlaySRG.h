@@ -78,21 +78,6 @@ NS_ASSUME_NONNULL_BEGIN
                                               animated:(BOOL)animated
                                             completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 
-/**
- *  Present the view controller, ensuring that view lifecycle events are properly forwarded if a custom transition is applied.
- *
- *  @discussion Useful when a custom modal presentation style is applied. In general you can use standard dismissal.
- */
-- (void)play_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(nullable void (^)(void))completion;
-
-/**
- *  Dismiss the view controller, ensuring a compatible suitable orientation is applied to the revealed view controller,
- *  and that view lifecycle events are properly forwarded if a custom transition is applied.
- *
- *  @discussion Useful when a custom modal presentation style is applied. In general you can use standard dismissal.
- */
-- (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(nullable void (^)(void))completion;
-
 @end
 
 NS_ASSUME_NONNULL_END

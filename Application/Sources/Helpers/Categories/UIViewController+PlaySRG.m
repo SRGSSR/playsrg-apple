@@ -19,7 +19,6 @@
 #import "Orientation.h"
 #import "Playlist.h"
 #import "PlaySRG-Swift.h"
-#import "UIDevice+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 
 @import GoogleCast;
@@ -357,73 +356,5 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
 }
 
 #endif
-
-- (void)play_presentViewController:(UIViewController *)viewController animated:(BOOL)animated completion:(void (^)(void))completion
-{
-    // Not animated: The system takes care of sending transition appearance events (and thus view lifecycle events).
-    // Custom transition: Retrieved from the delegate only when animated. Must take care of implementing transition
-    //                    appearance events (most notably for interactive transitions which otherwise would not be
-    //                    covered).
-    if (animated || ! viewController.transitioningDelegate) {
-        [self presentViewController:viewController animated:YES completion:completion];
-    }
-    else {
-        UIViewController *fromViewController = self;
-        UIViewController *toViewController = viewController;
-        
-        [fromViewController beginAppearanceTransition:NO animated:NO];
-        [toViewController beginAppearanceTransition:YES animated:NO];
-        
-        [self presentViewController:viewController animated:NO completion:^{
-            [fromViewController endAppearanceTransition];
-            [toViewController endAppearanceTransition];
-            
-            completion ? completion() : nil;
-        }];
-    }
-}
-
-- (void)play_dismissViewControllerAnimated:(BOOL)animated completion:(void (^)(void))completion
-{
-#if TARGET_OS_IOS
-    UIViewController *topViewController = self.play_topViewController;
-    
-    // See https://stackoverflow.com/a/29560217
-    UIViewController *presentingViewController = topViewController.presentingViewController;
-    if (! [presentingViewController play_supportsOrientation:(UIInterfaceOrientation)UIDevice.currentDevice.orientation]) {
-        if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortrait]) {
-            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationPortrait];
-        }
-        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationPortraitUpsideDown]) {
-            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationPortraitUpsideDown];
-        }
-        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeLeft]) {
-            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationLandscapeLeft];
-        }
-        else if ([presentingViewController play_supportsOrientation:UIInterfaceOrientationLandscapeRight]) {
-            [UIDevice.currentDevice rotateToUserInterfaceOrientation:UIInterfaceOrientationLandscapeRight];
-        }
-    }
-#endif
-    
-    // See `-play_presentViewController:animated:completion:`
-    if (animated || ! self.transitioningDelegate) {
-        [self dismissViewControllerAnimated:animated completion:completion];
-    }
-    else {
-        UIViewController *fromViewController = self;
-        UIViewController *toViewController = self.presentingViewController;
-        
-        [fromViewController beginAppearanceTransition:NO animated:NO];
-        [toViewController beginAppearanceTransition:YES animated:NO];
-        
-        [self dismissViewControllerAnimated:NO completion:^{
-            [fromViewController endAppearanceTransition];
-            [toViewController endAppearanceTransition];
-            
-            completion ? completion() : nil;
-        }];
-    }
-}
 
 @end
