@@ -194,12 +194,6 @@ final class PageViewController: UIViewController {
 #endif
     }
     
-#if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-#endif
-    
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:

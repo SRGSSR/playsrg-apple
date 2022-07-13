@@ -21,12 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface UIViewController (PlaySRG)
 
 /**
- *  Return the standard user interface orientations supported by the application. Useful when implementing the
- *  `-supportedInterfaceOrientations` of a view controller
- */
-@property (class, nonatomic, readonly) UIInterfaceOrientationMask play_supportedInterfaceOrientations API_UNAVAILABLE(tvos);
-
-/**
  *  Convenience method to determine whether a view controller is appearing or disappearing. Take the parent view
  *  controller hierarchy in the process.
  *

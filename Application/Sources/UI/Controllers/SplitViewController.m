@@ -20,15 +20,6 @@
 
 #pragma mark Rotation
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    UIInterfaceOrientationMask supportedInterfaceOrientations = [super supportedInterfaceOrientations];
-    for (UIViewController *viewController in self.viewControllers) {
-        supportedInterfaceOrientations &= viewController.supportedInterfaceOrientations;
-    }
-    return supportedInterfaceOrientations;
-}
-
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];

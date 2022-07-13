@@ -179,23 +179,6 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [self updateLayoutAnimated:NO];
 }
 
-#pragma mark Rotation
-
-- (BOOL)shouldAutorotate
-{
-    if (! [super shouldAutorotate]) {
-        return NO;
-    }
-    
-    return [self.selectedViewController shouldAutorotate];
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    UIInterfaceOrientationMask supportedInterfaceOrientations = [super supportedInterfaceOrientations];
-    return supportedInterfaceOrientations & [self.selectedViewController supportedInterfaceOrientations];
-}
-
 #pragma mark Responsiveness
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator

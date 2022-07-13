@@ -196,11 +196,6 @@
 
 #pragma mark Rotation
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
     [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];

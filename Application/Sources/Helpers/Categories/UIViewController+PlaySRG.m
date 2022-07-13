@@ -46,20 +46,6 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
                                    class_getInstanceMethod(self, @selector(UIViewController_PlaySRG_swizzled_viewDidDisappear:)));
 }
 
-#if TARGET_OS_IOS
-
-+ (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
-{
-    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-        return UIInterfaceOrientationMaskPortrait;
-    }
-    else {
-        return UIInterfaceOrientationMaskAll;
-    }
-}
-
-#endif
-
 #pragma mark Swizzled methods
 
 - (void)UIViewController_PlaySRG_swizzled_viewWillAppear:(BOOL)animated

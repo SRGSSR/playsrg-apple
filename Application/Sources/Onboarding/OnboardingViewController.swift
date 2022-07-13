@@ -69,15 +69,6 @@ final class OnboardingViewController: BaseViewController {
                                                object: nil)
     }
     
-    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return .all
-        }
-        else {
-            return .portrait
-        }
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }

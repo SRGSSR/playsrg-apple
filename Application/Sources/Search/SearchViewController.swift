@@ -206,10 +206,6 @@ final class SearchViewController: UIViewController {
     }
     
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     private func updateSearchSettingsButton(for settings: MediaSearchSettings) {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
             navigationItem.rightBarButtonItem = nil

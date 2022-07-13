@@ -165,13 +165,6 @@
     } completion:nil];
 }
 
-#pragma mark Rotation
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
 #pragma mark Status bar
 
 - (UIStatusBarStyle)preferredStatusBarStyle
