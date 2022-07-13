@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Remark: View controllers conforming to this protocol should not implement `supportedInterfaceOrientation` explicitly,
  *          otherwise the behavior is undefined.
  */
+API_UNAVAILABLE(tvos)
 @protocol Oriented <NSObject>
 
 @optional
