@@ -224,9 +224,16 @@ enum UserDataPublishers {
     }
     
     static func laterAllowedActionPublisher(for media: SRGMedia) -> AnyPublisher<WatchLaterAction, Never> {
-        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn, interval: 0)) {
-            return Just(WatchLaterAllowedActionForMedia(media))
+        return Publishers.PublishAndRepeat(onOutputFrom: ThrottledSignal.watchLaterUpdates(for: media.urn)) {
+            return Deferred {
+                Future<WatchLaterAction, Never> { promise in
+                    WatchLaterAllowedActionForMediaAsync(media) { action in
+                        promise(.success(action))
+                    }
+                }
+            }
         }
+        .prepend(.none)
         .eraseToAnyPublisher()
     }
     
