@@ -18,7 +18,7 @@ final class MediaDetailViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $media
             .dropFirst()
-            .map { [weak self] media -> AnyPublisher<MediaData, Never> in
+            .map { [weak self] media in
                 guard let media else {
                     return Just(MediaData.empty).eraseToAnyPublisher()
                 }

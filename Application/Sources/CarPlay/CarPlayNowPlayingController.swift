@@ -85,7 +85,7 @@ private extension CarPlayNowPlayingController {
 
     private static func nowPlayingPropertiesPublisher(interfaceController: CPInterfaceController) -> AnyPublisher<NowPlayingProperties, Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<NowPlayingProperties, Never> in
+            .map { controller in
                 if let controller {
                     return Publishers.CombineLatest3(
                         controller.mediaPlayerController.publisher(for: \.timeRange),

@@ -22,7 +22,7 @@ final class ShowHeaderViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
             .dropFirst()
-            .map { show -> AnyPublisher<Bool, Never> in
+            .map { show in
                 guard let show else {
                     return Just(false).eraseToAnyPublisher()
                 }
@@ -36,9 +36,9 @@ final class ShowHeaderViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
             .dropFirst()
-            .map { show -> AnyPublisher<UserDataPublishers.SubscriptionStatus, Never> in
+            .map { show in
                 guard let show else {
-                    return Just(.unavailable).eraseToAnyPublisher()
+                    return Just(UserDataPublishers.SubscriptionStatus.unavailable).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.subscriptionStatusPublisher(for: show)
             }

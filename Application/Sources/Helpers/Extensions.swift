@@ -176,7 +176,7 @@ extension Sequence {
      */
     func enumeratedFlatMap<S>(_ transform: (Self.Element, Int) throws -> S) rethrows -> [S.Element] where S: Sequence {
         var index = 0
-        return try flatMap { element -> S in
+        return try flatMap { element in
             let transformedElement = try transform(element, index)
             index += 1
             return transformedElement

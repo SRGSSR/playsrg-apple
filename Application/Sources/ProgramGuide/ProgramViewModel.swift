@@ -257,7 +257,7 @@ extension ProgramViewModel {
                         return Empty()
                     }
             }
-            .map { media -> AnyPublisher<MediaData, Never> in
+            .map { media in
                 return Publishers.CombineLatest(UserDataPublishers.laterAllowedActionPublisher(for: media), UserDataPublishers.playbackProgressPublisher(for: media))
                     .map { action, progress in
                         return MediaData(media: media, watchLaterAllowedAction: action, progress: progress)

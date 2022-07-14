@@ -278,7 +278,7 @@ private extension ProgramGuideDailyViewModel {
         return SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day, minimal: true)
             .append(SRGDataProvider.current!.tvPrograms(for: vendor, provider: provider, day: day))
             .map { .content(programCompositions: $0) }
-            .tryCatch { error -> AnyPublisher<Bouquet, Never> in
+            .tryCatch { error in
                 guard bouquet.hasPrograms else { throw error }
                 return Just(bouquet)
                     .eraseToAnyPublisher()

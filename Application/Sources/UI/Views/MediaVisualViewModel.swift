@@ -16,9 +16,9 @@ final class MediaVisualViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $media
             .dropFirst()
-            .map { media -> AnyPublisher<Double?, Never> in
+            .map { media in
                 guard let media else {
-                    return Just(nil).eraseToAnyPublisher()
+                    return Just(nil as Double?).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.playbackProgressPublisher(for: media)
             }

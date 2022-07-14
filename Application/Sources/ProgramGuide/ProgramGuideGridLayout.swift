@@ -112,7 +112,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     private static func layoutData(from snapshot: NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>, in collectionView: UICollectionView) -> LayoutData? {
         guard let dateInterval = dateInterval(from: snapshot) else { return nil }
         let layoutAttrs = snapshot.sectionIdentifiers.enumeratedFlatMap { channel, section in
-            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index -> UICollectionViewLayoutAttributes in
+            return snapshot.itemIdentifiers(inSection: channel).enumeratedMap { item, index in
                 let attrs = UICollectionViewLayoutAttributes(forCellWith: IndexPath(item: index, section: section))
                 if let program = item.program {
                     attrs.frame = frame(from: program.startDate, to: program.endDate, in: dateInterval, forSection: section, collectionView: collectionView)
@@ -123,7 +123,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
                 return attrs
             }
         }
-        let headerAttrs = snapshot.sectionIdentifiers.enumeratedMap { _, section -> UICollectionViewLayoutAttributes in
+        let headerAttrs = snapshot.sectionIdentifiers.enumeratedMap { _, section in
             let attrs = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(item: 0, section: section))
             attrs.frame = CGRect(
                 x: collectionView.contentOffset.x,
