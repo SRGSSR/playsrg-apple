@@ -34,7 +34,7 @@ struct MediaDetailView: View {
         .background(Color.srgGray16)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
-            model.media = media
+            model.media = model.media ?? media
         }
         .onChange(of: media) { newValue in
             model.media = newValue
