@@ -191,7 +191,7 @@ struct MediaDetailView: View {
                         navigateToMedia(media, play: true)
                     }
                 }
-                if let action = model.watchLaterAllowedAction, action != .none, let isRemoval = (action == .remove) {
+                if let action = model.watchLaterAllowedAction, let isRemoval = (action == .remove) {
                     // TODO: Write in a better way
                     LabeledButton(icon: isRemoval ? "watch_later_full" : "watch_later",
                                   label: isRemoval
