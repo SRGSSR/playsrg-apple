@@ -836,6 +836,9 @@ platform :ios do
 
     options[:team_id] = app_config.try_fetch_value(:team_id)
 
+    # CI can take time to be ready to start the build
+    ENV['FASTLANE_XCODEBUILD_SETTINGS_RETRIES'] = '10'
+
     destination = "generic/platform=#{options[:platform]}"
     lane_name = lane_context[SharedValues::LANE_NAME]
     output_directory = "fastlane/export/#{lane_name}/"
