@@ -10698,7 +10698,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913902717388E00774985 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10721,7 +10720,6 @@
 			baseConfigurationReference = 08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10744,7 +10742,6 @@
 			baseConfigurationReference = 08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10767,7 +10764,6 @@
 			baseConfigurationReference = 08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10790,7 +10786,6 @@
 			baseConfigurationReference = 08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -10811,7 +10806,6 @@
 			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10876,7 +10870,6 @@
 			baseConfigurationReference = 08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10941,7 +10934,6 @@
 			baseConfigurationReference = 08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11006,7 +10998,6 @@
 			baseConfigurationReference = 08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11071,7 +11062,6 @@
 			baseConfigurationReference = 08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11804,7 +11794,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A42717388E00774985 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11825,7 +11814,6 @@
 			baseConfigurationReference = 08A913A92717388E00774985 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11846,7 +11834,6 @@
 			baseConfigurationReference = 08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11867,7 +11854,6 @@
 			baseConfigurationReference = 08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11888,7 +11874,6 @@
 			baseConfigurationReference = 08A913952717388E00774985 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -11908,7 +11893,6 @@
 			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11973,7 +11957,6 @@
 			baseConfigurationReference = 08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12038,7 +12021,6 @@
 			baseConfigurationReference = 08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12103,7 +12085,6 @@
 			baseConfigurationReference = 08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12168,7 +12149,6 @@
 			baseConfigurationReference = 08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13568,7 +13548,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913962717388E00774985 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13589,7 +13568,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13609,7 +13587,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13630,7 +13607,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13650,7 +13626,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13671,7 +13646,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913992717388E00774985 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13691,7 +13665,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A12717388E00774985 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13712,7 +13685,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13732,7 +13704,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A22717388E00774985 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13752,7 +13723,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13832,7 +13802,6 @@
 			baseConfigurationReference = 08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13853,7 +13822,6 @@
 			baseConfigurationReference = 08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13874,7 +13842,6 @@
 			baseConfigurationReference = 08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13895,7 +13862,6 @@
 			baseConfigurationReference = 08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13916,7 +13882,6 @@
 			baseConfigurationReference = 08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13996,7 +13961,6 @@
 			baseConfigurationReference = 08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -14019,7 +13983,6 @@
 			baseConfigurationReference = 08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -14042,7 +14005,6 @@
 			baseConfigurationReference = 08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -14065,7 +14027,6 @@
 			baseConfigurationReference = 08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -14088,7 +14049,6 @@
 			baseConfigurationReference = 08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -15729,7 +15689,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -15758,7 +15717,6 @@
 			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15823,7 +15781,6 @@
 			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15888,7 +15845,6 @@
 			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15952,7 +15908,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -15981,7 +15936,6 @@
 			baseConfigurationReference = 08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16046,7 +16000,6 @@
 			baseConfigurationReference = 08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16111,7 +16064,6 @@
 			baseConfigurationReference = 08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16175,7 +16127,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16204,7 +16155,6 @@
 			baseConfigurationReference = 08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16269,7 +16219,6 @@
 			baseConfigurationReference = 08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16334,7 +16283,6 @@
 			baseConfigurationReference = 08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16398,7 +16346,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16427,7 +16374,6 @@
 			baseConfigurationReference = 08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16492,7 +16438,6 @@
 			baseConfigurationReference = 08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16557,7 +16502,6 @@
 			baseConfigurationReference = 08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16621,7 +16565,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16650,7 +16593,6 @@
 			baseConfigurationReference = 08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16715,7 +16657,6 @@
 			baseConfigurationReference = 08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16780,7 +16721,6 @@
 			baseConfigurationReference = 08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
