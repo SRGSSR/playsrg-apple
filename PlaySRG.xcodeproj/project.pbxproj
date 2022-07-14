@@ -19034,7 +19034,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19058,7 +19058,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19074,7 +19074,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19082,7 +19082,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19114,7 +19114,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19122,7 +19122,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
@@ -19210,7 +19210,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srglogger-apple.git";
 			requirement = {
-				branch = "feature/ios16-tvos16-xcode14";
+				branch = develop;
 				kind = branch;
 			};
 		};
