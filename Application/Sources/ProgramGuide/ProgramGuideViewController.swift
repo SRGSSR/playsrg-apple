@@ -86,10 +86,6 @@ final class ProgramGuideViewController: UIViewController {
     }
 
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         coordinator.animate { _ in
@@ -274,6 +270,12 @@ extension ProgramGuideViewController {
 }
 
 // MARK: Protocols
+
+#if os(iOS)
+extension ProgramGuideViewController: Oriented {
+    
+}
+#endif
 
 extension ProgramGuideViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {

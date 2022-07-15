@@ -32,7 +32,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 13.3')
+    xcversion(version: '~> 14')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
@@ -836,6 +836,9 @@ platform :ios do
 
     options[:team_id] = app_config.try_fetch_value(:team_id)
 
+    # CI can take time to be ready to start the build
+    ENV['FASTLANE_XCODEBUILD_SETTINGS_RETRIES'] = '10'
+
     destination = "generic/platform=#{options[:platform]}"
     lane_name = lane_context[SharedValues::LANE_NAME]
     output_directory = "fastlane/export/#{lane_name}/"
@@ -1255,12 +1258,14 @@ def pilot_fast_upload(app_identifier, platform)
 
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
+  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
     skip_waiting_for_build_processing: true
   )
+  xcversion(version: '~> 14')
 end
 
 def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
@@ -1279,6 +1284,7 @@ end
 def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
   groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
 
+  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1293,6 +1299,7 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_pu
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
   )
+  xcversion(version: '~> 14')
 end
 
 # Update dSYMs from App Store Connect to App Center.

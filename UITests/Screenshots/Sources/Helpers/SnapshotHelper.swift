@@ -211,17 +211,17 @@ open class Snapshot: NSObject {
 
     class func waitForLoadingIndicatorToDisappear(within timeout: TimeInterval) {
         #if os(tvOS)
-            return
-        #endif
-
+        return
+        #else
         guard let app = self.app else {
             NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
             return
         }
-
+        
         let networkLoadingIndicator = app.otherElements.deviceStatusBars.networkLoadingIndicators.element
         let networkLoadingIndicatorDisappeared = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: networkLoadingIndicator)
         _ = XCTWaiter.wait(for: [networkLoadingIndicatorDisappeared], timeout: timeout)
+        #endif
     }
 
     class func getCacheDirectory() throws -> URL {

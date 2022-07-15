@@ -140,7 +140,7 @@ final class SceneDelegate: UIResponder {
                 }
                 .store(in: &cancellables)
         default:
-            ()
+            break
         }
     }
 }

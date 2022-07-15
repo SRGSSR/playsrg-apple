@@ -230,10 +230,6 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
     @MainActor required dynamic init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
 }
 
 // MARK: Accessibility

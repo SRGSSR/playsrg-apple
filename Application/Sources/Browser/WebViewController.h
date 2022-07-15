@@ -7,6 +7,7 @@
 #import "AnalyticsConstants.h"
 #import "BaseViewController.h"
 #import "ContentInsets.h"
+#import "Orientation.h"
 #import "ScrollableContent.h"
 
 @import SRGAnalytics;
@@ -20,7 +21,7 @@ typedef void (^WebViewControllerCustomizationBlock)(WKWebView *webView);
 /**
  *  A basic web view controller class for in-app display.
  */
-@interface WebViewController : BaseViewController <ContentInsets, WKNavigationDelegate, ScrollableContent, SRGAnalyticsViewTracking, UIScrollViewDelegate>
+@interface WebViewController : BaseViewController <ContentInsets, Oriented, ScrollableContent, SRGAnalyticsViewTracking, UIScrollViewDelegate, WKNavigationDelegate>
 
 /**
  *  Create an instance. The associated web view can be customized by implementing an optional customization block, called right after

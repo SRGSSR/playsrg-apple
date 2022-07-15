@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -612,11 +612,11 @@
 		6F0B98572726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98582726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
 		6F0B98592726980F005793A2 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0B984F2726980F005793A2 /* SearchViewModel.swift */; };
-		6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB3220C94DF6006B2CE4 /* Play SRF notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB4520C94E77006B2CE4 /* Play RTS notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB3220C94DF6006B2CE4 /* Play SRF notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB4520C94E77006B2CE4 /* Play RTS notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB5820C94E8E006B2CE4 /* Play RSI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB6B20C94EC8006B2CE4 /* Play RTR notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F0CFB7E20C94EE5006B2CE4 /* Play SWI notification service extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F0E374C2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
 		6F0E374D2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
 		6F0E374E2680B13A008FC923 /* ContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F0E374B2680B139008FC923 /* ContextMenu.swift */; };
@@ -1514,10 +1514,10 @@
 		6F9BF5EF2720293600945973 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6F9BF5F12720293600945973 /* SRGDataProviderCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 6F9BF5EC2720293600945973 /* SRGDataProviderCombine */; };
 		6F9BF5F22720293600945973 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
-		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5C52720292B00945973 /* Play RTS top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5D72720293100945973 /* Play RSI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5E92720293400945973 /* Play RTR top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6F9BF5FB2720293600945973 /* Play SWI top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6F9D2743203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2744203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
 		6F9D2745203AD99C00FDE899 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F9D2742203AD99C00FDE899 /* Playlist.m */; };
@@ -1678,6 +1678,11 @@
 		6FB2C1122719AAE2003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
 		6FB2C1132719AAE2003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
 		6FB2C1142719AAE3003CAAD1 /* ProgramGuideGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */; };
+		6FB79BEE287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BEF287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF0287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF1287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
+		6FB79BF2287E81790091D157 /* Orientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FB79BED287E81790091D157 /* Orientation.m */; };
 		6FB899FF26335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
 		6FB89A0026335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
 		6FB89A0126335B090012F1B0 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FB899FE26335B090012F1B0 /* Stack.swift */; };
@@ -1728,7 +1733,7 @@
 		6FBB7F9F2844B9FB00976FFB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */; };
 		6FBB7FA02844B9FB00976FFB /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBB7F9B2844B9FB00976FFB /* NotificationCell.swift */; };
 		6FBE5354271FF94A00F90B68 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
-		6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 6FBE5353271FF94A00F90B68 /* Play SRF top shelf extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6FBE5378271FFA9C00F90B68 /* ContentProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FBE5376271FFA9B00F90B68 /* ContentProvider.swift */; };
 		6FC0C695245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
 		6FC0C696245FF06D00B44CAE /* ProgramHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FC0C693245FF06C00B44CAE /* ProgramHeaderView.m */; };
@@ -2546,114 +2551,114 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB4020C94DF6006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed App Extensions */,
+				6F0CFB3A20C94DF6006B2CE4 /* Play SRF notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB5320C94E77006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed App Extensions */,
+				6F0CFB4D20C94E77006B2CE4 /* Play RTS notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB6620C94E8E006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed App Extensions */,
+				6F0CFB6020C94E8E006B2CE4 /* Play RSI notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB7920C94EC8006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed App Extensions */,
+				6F0CFB7320C94EC8006B2CE4 /* Play RTR notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */ = {
+		6F0CFB8C20C94EE5006B2CE4 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed App Extensions */,
+				6F0CFB8620C94EE5006B2CE4 /* Play SWI notification service extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF6002720299400945973 /* Embed App Extensions */ = {
+		6F9BF6002720299400945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed App Extensions */,
+				6F9BF5FD2720299300945973 /* Play RTS top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF604272029A400945973 /* Embed App Extensions */ = {
+		6F9BF604272029A400945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed App Extensions */,
+				6F9BF601272029A400945973 /* Play RSI top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF608272029AC00945973 /* Embed App Extensions */ = {
+		6F9BF608272029AC00945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed App Extensions */,
+				6F9BF605272029AC00945973 /* Play RTR top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6F9BF60C272029B500945973 /* Embed App Extensions */ = {
+		6F9BF60C272029B500945973 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed App Extensions */,
+				6F9BF609272029B400945973 /* Play SWI top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FBE535C271FF94A00F90B68 /* Embed App Extensions */ = {
+		6FBE535C271FF94A00F90B68 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed App Extensions */,
+				6FBE535B271FF94A00F90B68 /* Play SRF top shelf extension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -3159,6 +3164,8 @@
 		6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCell.swift; sourceTree = "<group>"; };
 		6FB2C10A2719AAD5003CAAD1 /* ProgramGuideGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramGuideGridLayout.swift; sourceTree = "<group>"; };
 		6FB340D823E1A21500BC83BF /* TabBarActionable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TabBarActionable.h; sourceTree = "<group>"; };
+		6FB79BEC287E81790091D157 /* Orientation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Orientation.h; sourceTree = "<group>"; };
+		6FB79BED287E81790091D157 /* Orientation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Orientation.m; sourceTree = "<group>"; };
 		6FB899FE26335B090012F1B0 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		6FB89A0A26336E9D0012F1B0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6FB89E26283DEA12006F9C6C /* HighlightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightCell.swift; sourceTree = "<group>"; };
@@ -3800,13 +3807,12 @@
 		08654B921D3CDA160040EF04 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				6F4760181EB37BD1003021EA /* Categories */,
-				08C33ED323CB5C6500D422C1 /* Protocols */,
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
 				087584CF23A0008500FA7207 /* ApplicationSectionInfo.m */,
+				6F4760181EB37BD1003021EA /* Categories */,
 				6FE686DF1EB9D57400067D40 /* ChannelService.h */,
 				6FE686E01EB9D57400067D40 /* ChannelService.m */,
 				6F56F9F2247C407000B2387B /* ChannelServiceSetup.h */,
@@ -3824,6 +3830,8 @@
 				6F9897CC2412582400B390A2 /* Layout.m */,
 				6F5FAA43268CB88C007F0CA8 /* Localization.swift */,
 				08F5DB0F262DC7F700F717D0 /* Logger.swift */,
+				6FB79BEC287E81790091D157 /* Orientation.h */,
+				6FB79BED287E81790091D157 /* Orientation.m */,
 				6F488AC922EED363002B1150 /* PlayAccessibilityFormatter.h */,
 				6F488ACA22EED363002B1150 /* PlayAccessibilityFormatter.m */,
 				6F80106720443230009FE197 /* PlayApplication.h */,
@@ -3838,6 +3846,7 @@
 				6F9D2742203AD99C00FDE899 /* Playlist.m */,
 				6F7CE6EF1DD6021700FA4A6D /* PlayLogger.h */,
 				6FDEC19126DE307E0020A03F /* PresenterMode.swift */,
+				08C33ED323CB5C6500D422C1 /* Protocols */,
 				08209306208F522A00711DE4 /* PushService.h */,
 				08209307208F522A00711DE4 /* PushService.m */,
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
@@ -5254,7 +5263,7 @@
 				6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */,
 				6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */,
-				6F0CFB4020C94DF6006B2CE4 /* Embed App Extensions */,
+				6F0CFB4020C94DF6006B2CE4 /* Embed Foundation Extensions */,
 				6F5E54992521E3C7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5308,7 +5317,7 @@
 				6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */,
 				6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB5320C94E77006B2CE4 /* Embed App Extensions */,
+				6F0CFB5320C94E77006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549A2521E3D0004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5362,7 +5371,7 @@
 				6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */,
 				6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */,
 				08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB6620C94E8E006B2CE4 /* Embed App Extensions */,
+				6F0CFB6620C94E8E006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549B2521E3D6004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5416,7 +5425,7 @@
 				6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */,
 				6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB7920C94EC8006B2CE4 /* Embed App Extensions */,
+				6F0CFB7920C94EC8006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549C2521E3DE004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5470,7 +5479,7 @@
 				6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */,
 				6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */,
 				08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */,
-				6F0CFB8C20C94EE5006B2CE4 /* Embed App Extensions */,
+				6F0CFB8C20C94EE5006B2CE4 /* Embed Foundation Extensions */,
 				6F5E549D2521E3E7004334E4 /* Extract Signing Identity */,
 			);
 			buildRules = (
@@ -5707,7 +5716,7 @@
 				08C13558256B27AC002F67B8 /* Restore original icons */,
 				6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */,
 				6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */,
-				6FBE535C271FF94A00F90B68 /* Embed App Extensions */,
+				6FBE535C271FF94A00F90B68 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5750,7 +5759,7 @@
 				08C13575256B2977002F67B8 /* Restore original icons */,
 				6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */,
-				6F9BF6002720299400945973 /* Embed App Extensions */,
+				6F9BF6002720299400945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5793,7 +5802,7 @@
 				08C13576256B297E002F67B8 /* Restore original icons */,
 				6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */,
 				6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */,
-				6F9BF604272029A400945973 /* Embed App Extensions */,
+				6F9BF604272029A400945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5836,7 +5845,7 @@
 				08C13577256B2983002F67B8 /* Restore original icons */,
 				6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */,
 				6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */,
-				6F9BF608272029AC00945973 /* Embed App Extensions */,
+				6F9BF608272029AC00945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -5879,7 +5888,7 @@
 				08C13578256B2989002F67B8 /* Restore original icons */,
 				6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */,
 				6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */,
-				6F9BF60C272029B500945973 /* Embed App Extensions */,
+				6F9BF60C272029B500945973 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -6016,7 +6025,7 @@
 			attributes = {
 				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 1310;
-				LastUpgradeCheck = 1230;
+				LastUpgradeCheck = 1400;
 				ORGANIZATIONNAME = "SRG SSR";
 				TargetAttributes = {
 					08B77A442409C06000A3BC3B = {
@@ -6657,6 +6666,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		0806E7A31D4BA494002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6667,10 +6677,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A41D4BA4BA002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6681,10 +6692,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A51D4BA4CF002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6695,10 +6707,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A61D4BA4DF002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6709,10 +6722,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons.sh\"\n";
 		};
 		0806E7A71D4BA4ED002ED406 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6727,6 +6741,7 @@
 		};
 		085F7DC71FA4DD510010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6737,10 +6752,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DC81FA4E6570010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6751,10 +6767,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DC91FA4E6670010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6765,10 +6782,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DCA1FA4E67B0010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6779,10 +6797,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		085F7DCB1FA4E6890010AF34 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6797,6 +6816,7 @@
 		};
 		08A1C3BF2636E77900276A5E /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6815,6 +6835,7 @@
 		};
 		08AD6C6E266BDC5000FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6833,6 +6854,7 @@
 		};
 		08AD6C6F266BDC6D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6851,6 +6873,7 @@
 		};
 		08AD6C70266BDC7B00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6869,6 +6892,7 @@
 		};
 		08AD6C71266BDC8D00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6887,6 +6911,7 @@
 		};
 		08AD6C72266BDCA100FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6905,6 +6930,7 @@
 		};
 		08AD6C73266BDCBB00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6923,6 +6949,7 @@
 		};
 		08AD6C74266BDCC800FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6941,6 +6968,7 @@
 		};
 		08AD6C75266BDCD400FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6959,6 +6987,7 @@
 		};
 		08AD6C76266BDCDE00FAF1FA /* Swift Lint */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6977,6 +7006,7 @@
 		};
 		08B4A22D2093577300474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -6991,6 +7021,7 @@
 		};
 		08B4A22E20935AB100474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7005,6 +7036,7 @@
 		};
 		08B4A22F20935ABE00474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7015,10 +7047,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B4A23020935ADE00474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7029,10 +7062,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B4A23120935AE700474EBB /* Copy Urban Airship Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7043,10 +7077,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi";
+			shellScript = "URBAN_AIRSHIP_FILE=\"${SRCROOT}/Configuration/UrbanAirship/AirshipConfig-${PRODUCT_BUNDLE_IDENTIFIER}.plist\"\nif [ -f \"${URBAN_AIRSHIP_FILE}\" ]; then\n    cp \"${URBAN_AIRSHIP_FILE}\" \"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app/AirshipConfig.plist\"\nfi\n";
 		};
 		08B836941FBDBEAB00D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7057,10 +7092,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836951FBDC07100D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7075,6 +7111,7 @@
 		};
 		08B836961FBDC08400D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7085,10 +7122,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08B836971FBDC09500D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7103,6 +7141,7 @@
 		};
 		08B836981FBDC0A100D849D8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7113,10 +7152,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"";
+			shellScript = "\"${SRCROOT}/Scripts/generate-icons-restore.sh\"\n";
 		};
 		08C13555256B2746002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7135,6 +7175,7 @@
 		};
 		08C13557256B277B002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7153,6 +7194,7 @@
 		};
 		08C13558256B27AC002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7171,6 +7213,7 @@
 		};
 		08C1356D256B28C0002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7189,6 +7232,7 @@
 		};
 		08C1356E256B28C7002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7207,6 +7251,7 @@
 		};
 		08C1356F256B28CF002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7225,6 +7270,7 @@
 		};
 		08C13570256B28D7002F67B8 /* Restore original icons if needed */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7243,6 +7289,7 @@
 		};
 		08C13571256B291D002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7261,6 +7308,7 @@
 		};
 		08C13572256B2922002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7279,6 +7327,7 @@
 		};
 		08C13573256B2927002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7297,6 +7346,7 @@
 		};
 		08C13574256B292C002F67B8 /* Make custom icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7315,6 +7365,7 @@
 		};
 		08C13575256B2977002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7333,6 +7384,7 @@
 		};
 		08C13576256B297E002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7351,6 +7403,7 @@
 		};
 		08C13577256B2983002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7369,6 +7422,7 @@
 		};
 		08C13578256B2989002F67B8 /* Restore original icons */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7489,6 +7543,7 @@
 		};
 		6F0108D022E96E96002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7507,6 +7562,7 @@
 		};
 		6F0108D222E97D37002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7525,6 +7581,7 @@
 		};
 		6F0108D322E97D47002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7543,6 +7600,7 @@
 		};
 		6F0108D422E97D5B002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7561,6 +7619,7 @@
 		};
 		6F0108D522E97D69002DC778 /* Insert Version In Settings Bundle */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7579,6 +7638,7 @@
 		};
 		6F19381D1EFA9AF60017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7593,6 +7653,7 @@
 		};
 		6F19381E1EFA9D4C0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7607,6 +7668,7 @@
 		};
 		6F1938201EFA9D590017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7621,6 +7683,7 @@
 		};
 		6F1938211EFA9D5D0017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7635,6 +7698,7 @@
 		};
 		6F1938221EFA9D600017B1D1 /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7649,6 +7713,7 @@
 		};
 		6F3FA4C425246DF700ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7667,6 +7732,7 @@
 		};
 		6F3FA4D925246E0000ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7685,6 +7751,7 @@
 		};
 		6F3FA4DA25246E0500ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7703,6 +7770,7 @@
 		};
 		6F3FA4EF25246E1100ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7721,6 +7789,7 @@
 		};
 		6F3FA50425246E1A00ABEE9A /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7739,6 +7808,7 @@
 		};
 		6F5E54992521E3C7004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7757,6 +7827,7 @@
 		};
 		6F5E549A2521E3D0004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7775,6 +7846,7 @@
 		};
 		6F5E549B2521E3D6004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7793,6 +7865,7 @@
 		};
 		6F5E549C2521E3DE004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7811,6 +7884,7 @@
 		};
 		6F5E549D2521E3E7004334E4 /* Extract Signing Identity */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7829,6 +7903,7 @@
 		};
 		6FD84B4720F872C50059C817 /* Register SRF Old URL Scheme For Backwards Compatibility */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7843,6 +7918,7 @@
 		};
 		6FE3C7C21F74EC5C00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7857,6 +7933,7 @@
 		};
 		6FE3C7C31F74EEA500D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7871,6 +7948,7 @@
 		};
 		6FE3C7C41F74EEBE00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7885,6 +7963,7 @@
 		};
 		6FE3C7C61F74EECF00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7899,6 +7978,7 @@
 		};
 		6FE3C7C71F74EEDB00D57D29 /* Update License Information */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7913,6 +7993,7 @@
 		};
 		6FFCC5EE24EFC47300805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7931,6 +8012,7 @@
 		};
 		6FFCC5EF24EFC47A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7949,6 +8031,7 @@
 		};
 		6FFCC5F024EFC48000805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7967,6 +8050,7 @@
 		};
 		6FFCC5F124EFC48500805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -7985,6 +8069,7 @@
 		};
 		6FFCC5F224EFC48A00805B0F /* Copy Google Service Configuration File */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -8272,6 +8357,7 @@
 				6F72E60726BA6B16001A890C /* SceneDelegate.m in Sources */,
 				6F46B7BB281FB1FB00D20748 /* SettingsView.swift in Sources */,
 				6FEC91A921A6B39A00AA50C8 /* TableLoadMoreFooterView.m in Sources */,
+				6FB79BEE287E81790091D157 /* Orientation.m in Sources */,
 				6FE9048626F3466800502077 /* UICollectionView+PlaySRG.m in Sources */,
 				6FE1B4971DCB84F00094D5BA /* AnalyticsConstants.m in Sources */,
 				088899452077627900242654 /* TVChannel.m in Sources */,
@@ -8597,6 +8683,7 @@
 				6F8CBD822832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5472265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B94244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BEF287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B6281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5B28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF737281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -8845,6 +8932,7 @@
 				6F8CBD832832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5473265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B95244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BF0287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B7281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5C28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF738281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -9093,6 +9181,7 @@
 				6F8CBD842832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F8A5474265510F900AE78FD /* SectionViewModel.swift in Sources */,
 				6F982B96244F1E1200C0386E /* TableView.m in Sources */,
+				6FB79BF1287E81790091D157 /* Orientation.m in Sources */,
 				6F46B7B8281FB1F100D20748 /* SettingsViewModel.swift in Sources */,
 				6FF65C5D28360EB100AF0768 /* Onboarding.swift in Sources */,
 				6F4CF739281341B7006AFE6D /* ImageView.swift in Sources */,
@@ -9212,6 +9301,7 @@
 				6F4843D723EC4D4D00868F78 /* GoogleCastPlaybackButton.m in Sources */,
 				6F8CBD852832A2CB000C7A93 /* SettingsNavigationView.swift in Sources */,
 				6F2E160D26A84ED200F3DC89 /* ProgramCell.swift in Sources */,
+				6FB79BF2287E81790091D157 /* Orientation.m in Sources */,
 				081220C51DD0ADAC00BF8326 /* DownloadSession.m in Sources */,
 				6F3B0225245AAE1B00C5A8D7 /* ProgramTableViewCell.m in Sources */,
 				6FD686232460670600B8018A /* Channel.m in Sources */,
@@ -10608,7 +10698,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913902717388E00774985 /* Play SRF.nightly.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10631,7 +10720,6 @@
 			baseConfigurationReference = 08A913AA2717388E00774985 /* Play RTS.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10654,7 +10742,6 @@
 			baseConfigurationReference = 08A913A72717388E00774985 /* Play RSI.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10677,7 +10764,6 @@
 			baseConfigurationReference = 08A913A32717388E00774985 /* Play RTR.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -10700,7 +10786,6 @@
 			baseConfigurationReference = 08A9138F2717388E00774985 /* Play SWI.nightly.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -10721,7 +10806,6 @@
 			baseConfigurationReference = 08A9136F2717388C00774985 /* Play SRF TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10786,7 +10870,6 @@
 			baseConfigurationReference = 08A913762717388C00774985 /* Play RTS TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10851,7 +10934,6 @@
 			baseConfigurationReference = 08A913672717388C00774985 /* Play RSI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10916,7 +10998,6 @@
 			baseConfigurationReference = 08A913772717388C00774985 /* Play RTR TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -10981,7 +11062,6 @@
 			baseConfigurationReference = 08A9137E2717388C00774985 /* Play SWI TV.nightly.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11714,7 +11794,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A42717388E00774985 /* Play SRF.beta.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11735,7 +11814,6 @@
 			baseConfigurationReference = 08A913A92717388E00774985 /* Play RTS.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11756,7 +11834,6 @@
 			baseConfigurationReference = 08A9139B2717388E00774985 /* Play RSI.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11777,7 +11854,6 @@
 			baseConfigurationReference = 08A9138E2717388E00774985 /* Play RTR.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -11798,7 +11874,6 @@
 			baseConfigurationReference = 08A913952717388E00774985 /* Play SWI.beta.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -11818,7 +11893,6 @@
 			baseConfigurationReference = 08A913782717388C00774985 /* Play SRF TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11883,7 +11957,6 @@
 			baseConfigurationReference = 08A913612717388C00774985 /* Play RTS TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -11948,7 +12021,6 @@
 			baseConfigurationReference = 08A913682717388C00774985 /* Play RSI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12013,7 +12085,6 @@
 			baseConfigurationReference = 08A913692717388C00774985 /* Play RTR TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -12078,7 +12149,6 @@
 			baseConfigurationReference = 08A9137C2717388C00774985 /* Play SWI TV.beta.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -13478,7 +13548,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913962717388E00774985 /* Play SRF.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13499,7 +13568,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9138D2717388E00774985 /* Play SRF.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13519,7 +13587,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139F2717388E00774985 /* Play RTS.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13540,7 +13607,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A52717388E00774985 /* Play RTS.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13560,7 +13626,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9139A2717388E00774985 /* Play RSI.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13581,7 +13646,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913992717388E00774985 /* Play RSI.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13601,7 +13665,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A12717388E00774985 /* Play RTR.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13622,7 +13685,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A82717388E00774985 /* Play RTR.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13642,7 +13704,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A22717388E00774985 /* Play SWI.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13662,7 +13723,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913A62717388E00774985 /* Play SWI.appstore.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13742,7 +13802,6 @@
 			baseConfigurationReference = 08A913932717388E00774985 /* Play SRF.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13763,7 +13822,6 @@
 			baseConfigurationReference = 08A913912717388E00774985 /* Play RTS.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13784,7 +13842,6 @@
 			baseConfigurationReference = 08A913A02717388E00774985 /* Play RSI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13805,7 +13862,6 @@
 			baseConfigurationReference = 08A9139E2717388E00774985 /* Play RTR.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13826,7 +13882,6 @@
 			baseConfigurationReference = 08A913972717388E00774985 /* Play SWI.beta_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -13906,7 +13961,6 @@
 			baseConfigurationReference = 08A9139C2717388E00774985 /* Play SRF.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13929,7 +13983,6 @@
 			baseConfigurationReference = 08A913982717388E00774985 /* Play RTS.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13952,7 +14005,6 @@
 			baseConfigurationReference = 08A9139D2717388E00774985 /* Play RSI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13975,7 +14027,6 @@
 			baseConfigurationReference = 08A913942717388E00774985 /* Play RTR.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Schweizerische Radio- und Fernsehgesellschaft";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -13998,7 +14049,6 @@
 			baseConfigurationReference = 08A913922717388E00774985 /* Play SWI.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				APPCENTER_URL = "https://install.appcenter.ms/orgs/$(CONFIG__APPCENTER_OWNER)/apps/$(CONFIG__APPCENTER_APPNAME)?skip_registration=true";
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEVELOPMENT_ASSET_PATHS = "\"Preview Content\"";
@@ -15639,7 +15689,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913652717388C00774985 /* Play SRF TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -15668,7 +15717,6 @@
 			baseConfigurationReference = 08A9137A2717388C00774985 /* Play SRF TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15733,7 +15781,6 @@
 			baseConfigurationReference = 08A9136E2717388C00774985 /* Play SRF TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15798,7 +15845,6 @@
 			baseConfigurationReference = 08A913792717388C00774985 /* Play SRF TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15862,7 +15908,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137B2717388C00774985 /* Play RTS TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -15891,7 +15936,6 @@
 			baseConfigurationReference = 08A913702717388C00774985 /* Play RTS TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -15956,7 +16000,6 @@
 			baseConfigurationReference = 08A913712717388C00774985 /* Play RTS TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16021,7 +16064,6 @@
 			baseConfigurationReference = 08A9136A2717388C00774985 /* Play RTS TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16085,7 +16127,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9136B2717388C00774985 /* Play RSI TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16114,7 +16155,6 @@
 			baseConfigurationReference = 08A913622717388C00774985 /* Play RSI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16179,7 +16219,6 @@
 			baseConfigurationReference = 08A9136D2717388C00774985 /* Play RSI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16244,7 +16283,6 @@
 			baseConfigurationReference = 08A9136C2717388C00774985 /* Play RSI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16308,7 +16346,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A913732717388C00774985 /* Play RTR TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16337,7 +16374,6 @@
 			baseConfigurationReference = 08A913752717388C00774985 /* Play RTR TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16402,7 +16438,6 @@
 			baseConfigurationReference = 08A913722717388C00774985 /* Play RTR TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16467,7 +16502,6 @@
 			baseConfigurationReference = 08A913632717388C00774985 /* Play RTR TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16531,7 +16565,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 08A9137D2717388C00774985 /* Play SWI TV.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -16560,7 +16593,6 @@
 			baseConfigurationReference = 08A913662717388C00774985 /* Play SWI TV.appstore.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16625,7 +16657,6 @@
 			baseConfigurationReference = 08A913742717388C00774985 /* Play SWI TV.beta_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -16690,7 +16721,6 @@
 			baseConfigurationReference = 08A913642717388C00774985 /* Play SWI TV.nightly_appcenter.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -18944,8 +18974,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgidentity-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.1;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */ = {
@@ -18968,8 +18998,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srguserdata-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.2.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F2546392521C34800F9F4FE /* XCRemoteSwiftPackageReference "Aiolos" */ = {
@@ -18984,16 +19014,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srganalytics-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 7.7.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgappearance-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */ = {
@@ -19024,16 +19054,16 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 8.2.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 16.0.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {
@@ -19120,8 +19150,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srglogger-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
+				branch = develop;
+				kind = branch;
 			};
 		};
 		6FFED3F025221564002D471B /* XCRemoteSwiftPackageReference "ios-library" */ = {

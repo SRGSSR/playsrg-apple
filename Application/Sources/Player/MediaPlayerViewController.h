@@ -5,13 +5,14 @@
 //
 
 #import "BaseViewController.h"
+#import "Orientation.h"
 
 @import SRGAnalytics;
 @import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MediaPlayerViewController : BaseViewController <SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
+@interface MediaPlayerViewController : BaseViewController <Oriented, SRGLetterboxViewDelegate, SRGLetterboxPictureInPictureDelegate, SRGAnalyticsViewTracking,
     UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
 
 // Use nil for starting at the default location (resumes if the media is already being played)

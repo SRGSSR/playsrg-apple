@@ -26,6 +26,7 @@
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSDateFormatter+PlaySRG.h"
+#import "Orientation.h"
 #import "PlayAccessibilityFormatter.h"
 #import "PlayApplicationNavigation.h"
 #import "PlayDurationFormatter.h"

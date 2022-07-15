@@ -194,12 +194,6 @@ final class PageViewController: UIViewController {
 #endif
     }
     
-#if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-#endif
-    
     private func reloadData(for state: PageViewModel.State) {
         switch state {
         case .loading:
@@ -311,6 +305,12 @@ extension PageViewController: ContentInsets {
         return UIEdgeInsets(top: top, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
+
+#if os(iOS)
+extension PageViewController: Oriented {
+    
+}
+#endif
 
 extension PageViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {

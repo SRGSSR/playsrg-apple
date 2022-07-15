@@ -69,15 +69,6 @@ final class OnboardingViewController: BaseViewController {
                                                object: nil)
     }
     
-    func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            return .all
-        }
-        else {
-            return .portrait
-        }
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -135,6 +126,10 @@ final class OnboardingViewController: BaseViewController {
     @objc private func accessibilityVoiceOverStatusChanged(notification: NSNotification) {
         updateUserInterface(index: paperOnboarding.currentIndex, animated: true)
     }
+}
+
+extension OnboardingViewController: Oriented {
+    
 }
 
 extension OnboardingViewController: PaperOnboardingDataSource {

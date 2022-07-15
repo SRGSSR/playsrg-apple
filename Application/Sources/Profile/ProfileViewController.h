@@ -6,6 +6,7 @@
 
 #import "BaseViewController.h"
 #import "ContentInsets.h"
+#import "Orientation.h"
 #import "PlayApplicationNavigation.h"
 #import "ScrollableContent.h"
 #import "TabBarActionable.h"
@@ -14,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : BaseViewController <ContentInsets, PlayApplicationNavigation, ScrollableContent, SRGAnalyticsViewTracking, TabBarActionable, UITableViewDataSource, UITableViewDelegate>
+@interface ProfileViewController : BaseViewController <ContentInsets, Oriented, PlayApplicationNavigation, ScrollableContent, SRGAnalyticsViewTracking, TabBarActionable, UITableViewDataSource, UITableViewDelegate>
 
 @end
 

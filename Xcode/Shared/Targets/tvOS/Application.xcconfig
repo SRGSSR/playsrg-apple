@@ -3,5 +3,8 @@
 CODE_SIGN_ENTITLEMENTS = $(PROJECT_DIR)/TV Application/TV-Application.entitlements
 CODE_SIGN_ENTITLEMENTS[config=Beta_AppCenter] = $(PROJECT_DIR)/TV Application/TV-Application-enterprise.entitlements
 CODE_SIGN_ENTITLEMENTS[config=Nightly_AppCenter] = $(PROJECT_DIR)/TV Application/TV-Application-enterprise.entitlements
+
+ASSETCATALOG_COMPILER_APPICON_NAME = App Icon & Top Shelf Image
+
 PRODUCT_MODULE_NAME = PlaySRG
 SWIFT_OBJC_BRIDGING_HEADER = $(PROJECT_DIR)/TV Application/Sources/PlaySRG-TV-ObjectiveC.h
