@@ -20,10 +20,13 @@ default_platform :ios
 platform :ios do
   before_all do |lane, options|
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
+    tag_version = options[:tag_version] || tag_version(platform)
+    build_name = nightly_build_name(git_branch_name) if lane.to_s.downcase.include?('nightl')
+
+    notify_version_to_ci(platform, tag_version, build_name)
 
     # For betas and AppStore builds, before all, check if we have a beta release description
     if ['appstore', 'beta'].one? { |i| lane.to_s.downcase.include? i }
-      tag_version = options[:tag_version] || tag_version(platform)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
         UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
@@ -57,8 +60,6 @@ platform :ios do
     tag_version = tag_version(platform)
 
     branch_name = git_branch_name
-
-    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
@@ -128,8 +129,6 @@ platform :ios do
   desc 'Builds an iOS beta on App Center with the current build number. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
   lane :iOSbetasAppCenter do
     platform = 'iOS'
-
-    notify_version_to_ci(platform, nil, nil)
 
     tag_version = tag_version(platform)
 
@@ -760,8 +759,6 @@ platform :ios do
 
     branch_name = git_branch_name
 
-    notify_version_to_ci(platform, nil, nightly_build_name(branch_name))
-
     schemes = application_schemes(platform)
     schemes.each_index do |index|
       app_identifier = appstore_nightly_identifiers[index]
@@ -805,8 +802,6 @@ platform :ios do
   desc 'Builds a beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
   private_lane :testflight_betas do |options|
     platform = options[:platform] || 'iOS'
-
-    notify_version_to_ci(platform, nil, nil)
 
     tag_version = tag_version(platform)
 
@@ -861,8 +856,6 @@ platform :ios do
     UI.important 'A valid bu option is required to build an App Store build. Skipping build. ⚠️' unless scheme
     next unless scheme
 
-    notify_version_to_ci(platform, nil, nil)
-
     tag_version = tag_version(platform)
 
     can_upload = can_upload_testflight_build(nil, platform, tag_version)
@@ -892,8 +885,6 @@ platform :ios do
     UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
     next unless scheme
 
-    notify_version_to_ci(platform, tag_version, nil)
-
     changelog = what_s_new_for_beta(platform, tag_version)
     pilot_distribute(nil, platform, tag_version, changelog, false)
 
@@ -908,8 +899,6 @@ platform :ios do
 
     UI.important 'A valid bu option is required to distribute an App Store build. Skipping distribution. ⚠️' unless scheme
     next unless scheme
-
-    notify_version_to_ci(platform, tag_version, nil)
 
     changelog = what_s_new_for_beta(platform, tag_version)
     pilot_distribute(nil, platform, tag_version, changelog, true)
@@ -1439,6 +1428,7 @@ end
 def notify_version_to_ci(platform, tag_version, build_name)
   return unless ENV['TEAMCITY_VERSION']
 
+  platform ||= iOS
   tag_version ||= tag_version(platform)
   build_name ||= ''
 
