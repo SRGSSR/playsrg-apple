@@ -117,7 +117,7 @@ Adds a beta TestFlight tester (email required)
 [bundle exec] fastlane ios iOSAppStoreBuilds
 ```
 
-Applies iOSUploadAppStoreBuilds, iOSDistributePrivateAppStoreBuilds and iOSAppStoreBuildDSYMs.
+Applies iOSUploadAppStoreBuilds, iOSDistributePrivateAppStoreBuilds (or iOSDistributePublicAppStoreBuilds) and iOSAppStoreBuildDSYMs. Optional `public_testflight_distribution` parameter.
 
 ### ios iOSUploadAppStoreBuilds
 
@@ -165,7 +165,7 @@ Prepare AppStore iOS releases on App Store Connect with the current version and 
 [bundle exec] fastlane ios tvOSAppStoreBuilds
 ```
 
-Applies tvOSUploadAppStoreBuilds, tvOSDistributePrivateAppStoreBuilds and tvOSAppStoreBuildDSYMs.
+Applies tvOSUploadAppStoreBuilds, tvOSDistributePrivateAppStoreBuilds (or tvOSDistributePublicAppStoreBuilds) and tvOSAppStoreBuildDSYMs. Optional `public_testflight_distribution` parameter.
 
 ### ios tvOSUploadAppStoreBuilds
 
