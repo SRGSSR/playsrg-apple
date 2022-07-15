@@ -14,7 +14,6 @@ static BOOL s_locked = NO;
 
 // Function declarations
 static void lockComplete(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo);
-static UIInterfaceOrientationMask MediaPlayerUserInterfaceOrientationMask(UIInterfaceOrientation orientation);
 
 @implementation UIDevice (PlaySRG)
 
@@ -29,20 +28,13 @@ static UIInterfaceOrientationMask MediaPlayerUserInterfaceOrientationMask(UIInte
 
 - (void)rotateToUserInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-    if (@available(iOS 16, *)) {
-        UIInterfaceOrientationMask interfaceOrientationMask = MediaPlayerUserInterfaceOrientationMask(orientation);
-        UIWindowSceneGeometryPreferences *preferences = [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:interfaceOrientationMask];
-        [UIApplication.sharedApplication.mainWindowScene requestGeometryUpdateWithPreferences:preferences errorHandler:nil];
+    // User interface orientations are a subset of device orientations with matching values. Trick: To avoid the
+    // system inhibiting some rotation attempts for which it would detect no meaningful change, we perform a
+    // change to portrait mode first).
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
     }
-    else {
-        // User interface orientations are a subset of device orientations with matching values. Trick: To avoid the
-        // system inhibiting some rotation attempts for which it would detect no meaningful change, we perform a
-        // change to portrait mode first).
-        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
-        }
-        [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
-    }
+    [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
 }
 
 #pragma mark Notifications
@@ -79,29 +71,4 @@ __attribute__((constructor)) static void PlayUIDeviceInit(void)
 static void lockComplete(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo)
 {
     s_locked = YES;
-}
-
-static UIInterfaceOrientationMask MediaPlayerUserInterfaceOrientationMask(UIInterfaceOrientation orientation)
-{
-    switch (orientation) {
-        case UIInterfaceOrientationLandscapeLeft: {
-            return UIInterfaceOrientationMaskLandscapeLeft;
-            break;
-        }
-        
-        case UIInterfaceOrientationLandscapeRight: {
-            return UIInterfaceOrientationMaskLandscapeRight;
-            break;
-        }
-        
-        case UIInterfaceOrientationPortraitUpsideDown: {
-            return UIInterfaceOrientationMaskPortraitUpsideDown;
-            break;
-        }
-            
-        default: {
-            return UIInterfaceOrientationMaskPortrait;
-            break;
-        }
-    }
 }
