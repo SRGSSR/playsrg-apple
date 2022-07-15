@@ -32,7 +32,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 14')
+    xcversion(version: '~> 13.3')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
