@@ -26,7 +26,7 @@ platform :ios do
     notify_version_to_ci(platform, tag_version, build_name)
 
     # For betas and AppStore builds, before all, check if we have a beta release description
-    if ['appstore', 'beta'].one? { |i| lane.to_s.downcase.include? i }
+    if ['appstorebuild', 'beta'].one? { |i| lane.to_s.downcase.include? i }
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
         UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
