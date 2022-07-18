@@ -1148,14 +1148,21 @@ def appstore_beta_identifiers
   end
 end
 
-def appstore_team_api_key_prefixes
-  {
-    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
-    ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
-    ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
-    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR', # RTR is in SRG SSR ASC team
-    ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI'
-  }
+def itc_business_units
+  # RTR is in SRG SSR ASC team
+  business_units.map do |business_unit|
+    business_unit == 'RTR' ? 'SRGSSR' : business_unit
+  end
+end
+
+def itc_team_ids
+  itc_business_units.map do |itc_business_unit|
+    ENV["#{itc_business_unit}_ITUNES_CONNECT_TEAM_ID"]
+  end
+end
+
+def itc_team_id_index(itc_team_id)
+  itc_team_ids.index(itc_team_id)
 end
 
 # Returns current tag version
@@ -1317,9 +1324,9 @@ def appstore_platform(platform)
   appstore_platforms[platform]
 end
 
-def srg_app_store_connect_api_key
-  itc_team_id = app_config.try_fetch_value(:itc_team_id)
-  key_prefix = appstore_team_api_key_prefixes[itc_team_id]
+def srg_app_store_connect_api_key(business_unit = nil)
+  business_unit ||= business_units[itc_team_id_index(app_config.try_fetch_value(:itc_team_id))]
+  key_prefix = itc_business_units[business_unit_index(business_unit)]
   return unless key_prefix
 
   folder_path = Dir.chdir('..') { Dir.pwd }
