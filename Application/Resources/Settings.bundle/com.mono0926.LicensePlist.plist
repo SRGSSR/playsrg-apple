@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>firebase-ios-sdk (9.2.0)</string>
+			<string>firebase-ios-sdk (9.3.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -102,7 +102,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleAppMeasurement</string>
 			<key>Title</key>
-			<string>googleappmeasurement (9.1.0)</string>
+			<string>googleappmeasurement (9.3.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
