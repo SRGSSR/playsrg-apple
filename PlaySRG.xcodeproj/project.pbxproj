@@ -19058,8 +19058,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/FLEXTool/FLEX.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.7.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {

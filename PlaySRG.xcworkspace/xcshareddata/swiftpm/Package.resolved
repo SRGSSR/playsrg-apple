@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/FLEXTool/FLEX.git",
       "state" : {
-        "revision" : "ac50a6d36b738a15a6d3b6b51683d8a152319f59",
-        "version" : "4.7.0"
+        "branch" : "master",
+        "revision" : "4375f1a67fd50ef638e67d5ba131d6d9b5c034e7"
       }
     },
     {
