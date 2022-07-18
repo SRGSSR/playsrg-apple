@@ -321,7 +321,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "cfb3e724249a4551f6fcf9b520fa88ef6110b486"
+        "revision" : "d0d6f284b99be2464fd5d2a9634f36a41ec2e3aa"
       }
     },
     {
@@ -339,7 +339,7 @@
       "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "5897da5091bf866ed9384d1c45e992b43e5d9142"
+        "revision" : "a43e8a963b167b2e8c01e739d5e43436337003eb"
       }
     },
     {
