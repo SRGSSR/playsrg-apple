@@ -53,6 +53,7 @@ struct FlatCardButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
+            .background(Color(white: 1, opacity: 0.1))
             .cornerRadius(10)
             .scaleEffect(focused && !configuration.isPressed ? Self.focusedScaleFactor(for: unfocusedSize) : 1)
             .shadow(color: shadowColor, radius: 20, y: 20)
