@@ -14,7 +14,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/abseil-cpp-SwiftPM</string>
 			<key>Title</key>
-			<string>abseil-cpp-swiftpm (0.20220203.1)</string>
+			<string>abseil-cpp-swiftpm (0.20220203.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -46,7 +46,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/boringssl-SwiftPM</string>
 			<key>Title</key>
-			<string>boringssl-swiftpm (0.9.0)</string>
+			<string>boringssl-swiftpm (0.9.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -118,7 +118,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/GoogleDataTransport</string>
 			<key>Title</key>
-			<string>googledatatransport (9.1.4)</string>
+			<string>googledatatransport (9.2.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -134,7 +134,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/grpc-ios</string>
 			<key>Title</key>
-			<string>grpc-ios (1.44.2-grpc)</string>
+			<string>grpc-ios (1.44.3-grpc)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
