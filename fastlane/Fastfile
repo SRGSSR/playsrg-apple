@@ -748,7 +748,7 @@ platform :ios do
 
     UI.success "#{scheme} (#{platform} App Store #{tag_version}) uploaded ✅"
 
-    appcenter_appname = appcenter_appstore_name(platform, business_unit)
+    appcenter_appname = appcenter_appstore_build_name(platform, business_unit)
     upload_appcenter_dsyms(appcenter_appname)
 
     UI.success "#{scheme} (#{platform} App Store #{tag_version}) dSYM file OK. ✅"
@@ -1013,28 +1013,28 @@ def appcenter_testflight_beta_names(platform)
   end
 end
 
-def appcenter_ios_appstore_names
+def appcenter_ios_appstore_build_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_APPSTORE_APPCENTER_APPNAME"] }
 end
 
-def appcenter_tvos_appstore_names
+def appcenter_tvos_appstore_build_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_APPSTORE_APPCENTER_APPNAME"] }
 end
 
-def appcenter_appstore_names(platform)
+def appcenter_appstore_build_names(platform)
   platform ||= 'iOS'
 
   if platform == 'iOS'
-    appcenter_ios_appstore_names
+    appcenter_ios_appstore_build_names
   else
-    appcenter_tvos_appstore_names
+    appcenter_tvos_appstore_build_names
   end
 end
 
-def appcenter_appstore_name(platform, business_unit)
+def appcenter_appstore_build_name(platform, business_unit)
   platform ||= 'iOS'
 
-  appcenter_appstore_names(platform)[business_unit_index(business_unit)]
+  appcenter_appstore_build_names(platform)[business_unit_index(business_unit)]
 end
 
 def appstore_nightly_identifiers
