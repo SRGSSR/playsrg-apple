@@ -120,7 +120,7 @@ final class ShowHeaderViewModel: ObservableObject {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
         
 #if os(iOS)
-        Banner.showFavorite(isFavorite, forItemWithName: show.title)
+        Banner.showFavorite(!isFavorite, forItemWithName: show.title)
 #endif
     }
     
@@ -128,17 +128,15 @@ final class ShowHeaderViewModel: ObservableObject {
     func toggleSubscription() {
         guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
         
-        let isSubscribed = FavoritesIsSubscribedToShow(show)
-        subscriptionStatus = isSubscribed ? .subscribed : .unsubscribed
-        
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue
         labels.value = show.urn
         
+        let isSubscribed = (subscriptionStatus == .subscribed)
         let name = isSubscribed ? AnalyticsTitle.subscriptionAdd.rawValue : AnalyticsTitle.subscriptionRemove.rawValue
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
         
-        Banner.showSubscription(isSubscribed, forItemWithName: show.title)
+        Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
     }
 #endif
 }
