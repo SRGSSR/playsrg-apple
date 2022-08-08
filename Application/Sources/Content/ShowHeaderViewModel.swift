@@ -116,7 +116,7 @@ final class ShowHeaderViewModel: ObservableObject {
         labels.source = AnalyticsSource.button.rawValue
         labels.value = show.urn
         
-        let name = isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
+        let name = isFavorite ? AnalyticsTitle.favoriteRemove.rawValue : AnalyticsTitle.favoriteAdd.rawValue
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
         
 #if os(iOS)
@@ -133,7 +133,7 @@ final class ShowHeaderViewModel: ObservableObject {
         labels.value = show.urn
         
         let isSubscribed = (subscriptionStatus == .subscribed)
-        let name = isSubscribed ? AnalyticsTitle.subscriptionAdd.rawValue : AnalyticsTitle.subscriptionRemove.rawValue
+        let name = isSubscribed ? AnalyticsTitle.subscriptionRemove.rawValue : AnalyticsTitle.subscriptionAdd.rawValue
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
         
         Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
