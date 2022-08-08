@@ -57,7 +57,7 @@ struct SectionShowHeaderView: View {
                 .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
                 .adaptiveMainFrame(for: horizontalSizeClass)
                 .layoutPriority(1)
-            VStack(spacing: SectionShowHeaderView.verticalSpacing) {
+            VStack(spacing: Self.verticalSpacing) {
                 DescriptionView(section: section)
                 ShowAccessButton(show: show)
             }

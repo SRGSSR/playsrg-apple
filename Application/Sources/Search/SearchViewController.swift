@@ -361,7 +361,6 @@ extension SearchViewController: ContentInsets {
 
 #if os(iOS)
 extension SearchViewController: Oriented {
-    
 }
 #endif
 

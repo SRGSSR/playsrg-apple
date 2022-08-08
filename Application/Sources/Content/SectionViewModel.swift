@@ -31,7 +31,7 @@ final class SectionViewModel: ObservableObject {
     }
     
     init(section: Content.Section, filter: SectionFiltering?) {
-        self.configuration = SectionViewModel.Configuration(section)
+        self.configuration = Self.Configuration(section)
         
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
@@ -205,7 +205,7 @@ extension SectionViewModel {
         
         var hasContent: Bool {
             if case let .loaded(rows: rows) = self {
-                let filteredRows = rows.filter { !$0.items.filter { $0 != .transparent }.isEmpty }
+                let filteredRows = rows.filter { $0.items.contains { $0 != .transparent } }
                 return !filteredRows.isEmpty
             }
             else {

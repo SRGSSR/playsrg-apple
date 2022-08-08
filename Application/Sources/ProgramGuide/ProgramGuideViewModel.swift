@@ -131,7 +131,7 @@ extension ProgramGuideViewModel {
         let selectedChannel: SRGChannel?
         
         static var empty: Self {
-            return Self.init(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
+            return Self(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
         }
         
         var channels: [SRGChannel] {

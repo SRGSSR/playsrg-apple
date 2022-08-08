@@ -449,7 +449,6 @@ extension SectionViewController: ContentInsets {
 
 #if os(iOS)
 extension SectionViewController: Oriented {
-    
 }
 #endif
 

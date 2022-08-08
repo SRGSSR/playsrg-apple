@@ -13,10 +13,10 @@ import SRGIdentity
 final class ShowHeaderViewModel: ObservableObject {
     @Published var show: SRGShow?
     
-    @Published private(set) var isFavorite: Bool = false
+    @Published private(set) var isFavorite = false
     @Published private(set) var subscriptionStatus: UserDataPublishers.SubscriptionStatus = .unavailable
     
-    @Published var isFavoriteRemovalAlertDisplayed: Bool = false
+    @Published var isFavoriteRemovalAlertDisplayed = false
     
     init() {
         // Drop initial values; relevant values are first assigned when the view appears

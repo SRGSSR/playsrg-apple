@@ -129,7 +129,6 @@ final class OnboardingViewController: BaseViewController {
 }
 
 extension OnboardingViewController: Oriented {
-    
 }
 
 extension OnboardingViewController: PaperOnboardingDataSource {

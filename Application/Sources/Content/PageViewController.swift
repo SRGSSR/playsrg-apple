@@ -308,7 +308,6 @@ extension PageViewController: ContentInsets {
 
 #if os(iOS)
 extension PageViewController: Oriented {
-    
 }
 #endif
 

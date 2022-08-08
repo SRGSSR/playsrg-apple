@@ -789,7 +789,7 @@ struct SettingsView: View {
         @ViewBuilder var label: () -> Label
         
 #if os(tvOS)
-        @State private var isPresented: Bool = false
+        @State private var isPresented = false
 #endif
         
         var body: some View {

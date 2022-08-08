@@ -144,7 +144,7 @@ enum HeroMediaCellSize {
         return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(height))
     }
     
-    static private func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+    private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
         if horizontalSizeClass == .compact {
             return 9 / 11
         }

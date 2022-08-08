@@ -298,7 +298,7 @@ extension View {
 
 // See https://stackoverflow.com/questions/61552497/uitableviewheaderfooterview-with-swiftui-content-getting-automatic-safe-area-ins
 extension UIHostingController {
-    convenience public init(rootView: Content, ignoreSafeArea: Bool) {
+    public convenience init(rootView: Content, ignoreSafeArea: Bool) {
         self.init(rootView: rootView)
         
         if ignoreSafeArea {

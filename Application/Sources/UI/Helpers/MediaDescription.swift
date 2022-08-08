@@ -6,7 +6,7 @@
 
 import SRGAppearanceSwift
 
-struct MediaDescription {
+enum MediaDescription {
     enum Style {
         /// Show information emphasis
         case show

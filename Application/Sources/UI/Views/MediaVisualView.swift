@@ -23,10 +23,12 @@ struct MediaVisualView<Content: View>: View {
     
     let padding: CGFloat = constant(iOS: 6, tvOS: 16)
     
-    init(media: SRGMedia?,
-         size: SRGImageSize,
-         contentMode: ImageView.ContentMode = .aspectFit,
-         @ViewBuilder content: @escaping (SRGMedia?) -> Content) {
+    init(
+        media: SRGMedia?,
+        size: SRGImageSize,
+        contentMode: ImageView.ContentMode = .aspectFit,
+        @ViewBuilder content: @escaping (SRGMedia?) -> Content
+    ) {
         _media = .constant(media)
         self.size = size
         self.contentMode = contentMode

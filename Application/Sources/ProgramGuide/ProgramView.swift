@@ -227,7 +227,7 @@ private final class ProgramViewController: UIHostingController<ProgramView> {
         super.init(rootView: ProgramView(program: program, channel: channel))
     }
     
-    @MainActor required dynamic init?(coder aDecoder: NSCoder) {
+    @MainActor dynamic required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

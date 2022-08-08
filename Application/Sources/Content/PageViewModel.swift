@@ -331,7 +331,7 @@ private extension PageViewModel {
     static func rowItems(_ items: [Content.Item], in section: Section) -> [Item] {
         var rowItems = items.map { Item(.item($0), in: section) }
 #if os(tvOS)
-        if rowItems.count > 0
+        if !rowItems.isEmpty
             && (section.viewModelProperties.canOpenDetailPage || ApplicationSettingSectionWideSupportEnabled())
             && section.viewModelProperties.hasMoreRowItem {
             rowItems.append(Item(.more, in: section))

@@ -83,7 +83,7 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
         }
     }
     
-    var isUIKitFocused: Bool = false {
+    var isUIKitFocused = false {
         didSet {
             update(with: content, editing: isEditing, selected: isSelected, UIKitFocused: isUIKitFocused)
         }

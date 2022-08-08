@@ -17,7 +17,7 @@ import SwiftUI
 /// Behavior: h-hug, v-hug
 struct CalendarView: View {
     @ObservedObject var model: ProgramGuideViewModel
-    @State private var selectedDate: Date = Date()
+    @State private var selectedDate = Date()
     @FirstResponder private var firstResponder
     
     var body: some View {

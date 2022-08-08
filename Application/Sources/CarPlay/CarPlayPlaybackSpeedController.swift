@@ -31,7 +31,7 @@ final class CarPlayPlaybackSpeedController {
                     completion()
                 }
                 return item
-        }
+            }
         return [CPListSection(items: items)]
     }
     

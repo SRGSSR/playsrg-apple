@@ -11,7 +11,7 @@ import SRGDataProviderModel
 
 final class ProgramCellViewModel: ObservableObject {
     @Published var data: Data?
-    @Published private(set) var date: Date = Date()
+    @Published private(set) var date = Date()
     
     init() {
         Timer.publish(every: 10, on: .main, in: .common)

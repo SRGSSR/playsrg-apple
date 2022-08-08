@@ -6,8 +6,8 @@
 
 import SRGDataProviderCombine
 
-private let defaultNumberOfPlaceholders = 10
-private let defaultNumberOfLivestreamPlaceholders = 4
+private let kDefaultNumberOfPlaceholders = 10
+private let kDefaultNumberOfLivestreamPlaceholders = 4
 
 // MARK: Types
 
@@ -339,21 +339,21 @@ private extension Content {
             case .showElement:
                 return [.showPlaceholder(index: 0)]
             case .topicSelector:
-                return (0..<defaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfPlaceholders).map { .topicPlaceholder(index: $0) }
             case .swimlane, .mediaElementSwimlane, .heroStage, .grid:
                 switch contentSection.type {
                 case .showAndMedias:
-                    let mediaPlaceholderItems: [Content.Item] = (1..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    let mediaPlaceholderItems: [Content.Item] = (1..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
                     return [.showPlaceholder(index: 0)].appending(contentsOf: mediaPlaceholderItems)
                 case .shows:
-                    return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                    return (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
                 default:
-                    return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                    return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
                 }
             case .livestreams:
-                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .highlight:
-                return (rowHighlight != nil) ? [] : (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             default:
                 return []
             }
@@ -723,14 +723,14 @@ private extension Content {
             switch configuredSection {
             case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                     .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
-                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
-                return (0..<defaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .favoriteShows, .radioAllShows, .tvAllShows:
-                return (0..<defaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
 #if os(iOS)
             case .downloads:
-                return (0..<defaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
 #endif
             default:
                 return []

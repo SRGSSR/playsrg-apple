@@ -90,7 +90,8 @@ final class ProgramGuideViewController: UIViewController {
         super.willTransition(to: newCollection, with: coordinator)
         coordinator.animate { _ in
             self.transition(to: Self.layout(for: newCollection), traitCollection: newCollection, animated: false)
-        } completion: { _ in }
+        } completion: { _ in
+        }
     }
     
     private func updateNavigationBar() {
@@ -273,7 +274,6 @@ extension ProgramGuideViewController {
 
 #if os(iOS)
 extension ProgramGuideViewController: Oriented {
-    
 }
 #endif
 
