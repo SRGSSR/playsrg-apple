@@ -21,9 +21,8 @@ platform :ios do
   before_all do |lane, options|
     platform = lane.to_s.downcase.include?('tvos') ? 'tvOS' : 'iOS'
     tag_version = options[:tag_version] || tag_version(platform)
-    build_name = nightly_build_name(git_branch_name) if lane.to_s.downcase.include?('nightl')
 
-    notify_version_to_ci(platform, tag_version, build_name)
+    notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include?('nightlies')
 
     # For betas and AppStore builds, before all, check if we have a beta release description
     if ['appstorebuild', 'beta'].one? { |i| lane.to_s.downcase.include? i }
@@ -60,6 +59,8 @@ platform :ios do
     tag_version = tag_version(platform)
 
     branch_name = git_branch_name
+
+    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
 
     ios_application_schemes.each_index do |index|
       build_lane(
@@ -758,6 +759,8 @@ platform :ios do
     tag_version = tag_version(platform)
 
     branch_name = git_branch_name
+
+    notify_version_to_ci(platform, tag_version, nightly_build_name(branch_name))
 
     schemes = application_schemes(platform)
     schemes.each_index do |index|
