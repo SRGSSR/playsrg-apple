@@ -7,7 +7,7 @@
 import XCTest
 
 class ApplicationScreenshots: XCTestCase {
-    static let configuration: NSDictionary = {
+    private static let configuration: NSDictionary = {
         if let path = Bundle(for: ApplicationScreenshots.self).path(forResource: "Configuration", ofType: "plist") {
             return NSDictionary(contentsOfFile: path) ?? [:]
         }
@@ -17,6 +17,8 @@ class ApplicationScreenshots: XCTestCase {
     }()
     
     override func setUp() {
+        super.setUp()
+        
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()

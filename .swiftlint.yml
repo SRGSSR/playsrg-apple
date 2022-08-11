@@ -3,6 +3,7 @@ included:
   - Common
   - Extensions
   - TV Application
+  - UITests
 
 disabled_rules:
   - cyclomatic_complexity
