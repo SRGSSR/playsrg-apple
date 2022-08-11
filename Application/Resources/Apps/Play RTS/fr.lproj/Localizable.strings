@@ -584,7 +584,7 @@
 "Shows, topics and more" = "Émissions, sujets et plus encore";
 
 /* Label of the button to simulate a memory warning */
-"Simulate memory warning" = "Simuler l'alerte mémoire";
+"Simulate memory warning" = "Simuler une alerte mémoire";
 
 /* Title of the button to skip updating the application */
 "Skip" = "Ignorer";
