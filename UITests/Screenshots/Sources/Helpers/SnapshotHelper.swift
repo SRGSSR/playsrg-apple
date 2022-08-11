@@ -200,7 +200,7 @@ open class Snapshot: NSObject {
                 let format = UIGraphicsImageRendererFormat()
                 format.scale = image.scale
                 let renderer = UIGraphicsImageRenderer(size: image.size, format: format)
-                return renderer.image { _ in
+                return renderer.image { context in
                     image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
                 }
             } else {
@@ -211,17 +211,17 @@ open class Snapshot: NSObject {
 
     class func waitForLoadingIndicatorToDisappear(within timeout: TimeInterval) {
         #if os(tvOS)
-        return
-        #else
+            return
+        #endif
+
         guard let app = self.app else {
             NSLog("XCUIApplication is not set. Please call setupSnapshot(app) before snapshot().")
             return
         }
-        
+
         let networkLoadingIndicator = app.otherElements.deviceStatusBars.networkLoadingIndicators.element
         let networkLoadingIndicatorDisappeared = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: networkLoadingIndicator)
         _ = XCTWaiter.wait(for: [networkLoadingIndicatorDisappeared], timeout: timeout)
-        #endif
     }
 
     class func getCacheDirectory() throws -> URL {
