@@ -1656,14 +1656,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         });
     }
     
-    SRGLetterboxController *letterboxController = letterboxView.controller;
-    Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
-    
-    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
-    if (! [[playlist.medias valueForKeyPath:keyPath] containsObject:subdivision.URN]) {
-        Playlist *playlist = PlaylistForURN(subdivision.URN);
-        letterboxController.playlistDataSource = playlist;
-        letterboxController.playbackTransitionDelegate = playlist;
+    if ([subdivision isKindOfClass:SRGChapter.class]) {
+        SRGLetterboxController *letterboxController = letterboxView.controller;
+        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
+        
+        NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
+        if (! [[playlist.medias valueForKeyPath:keyPath] containsObject:subdivision.URN]) {
+            Playlist *playlist = PlaylistForURN(subdivision.URN);
+            letterboxController.playlistDataSource = playlist;
+            letterboxController.playbackTransitionDelegate = playlist;
+        }
     }
 }
 
