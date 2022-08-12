@@ -1660,8 +1660,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         SRGLetterboxController *letterboxController = letterboxView.controller;
         Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         
-        NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(SRGMedia.new, URN)];
-        if (! [[playlist.medias valueForKeyPath:keyPath] containsObject:subdivision.URN]) {
+        if (! [[playlist.medias valueForKeyPath:@keypath(SRGMedia.new, URN)] containsObject:subdivision.URN]) {
             Playlist *playlist = PlaylistForURN(subdivision.URN);
             letterboxController.playlistDataSource = playlist;
             letterboxController.playbackTransitionDelegate = playlist;
