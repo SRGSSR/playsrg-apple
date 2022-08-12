@@ -178,10 +178,6 @@ final class SectionViewController: UIViewController {
     }
     
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         
@@ -450,6 +446,11 @@ extension SectionViewController: ContentInsets {
         return contentInsets
     }
 }
+
+#if os(iOS)
+extension SectionViewController: Oriented {
+}
+#endif
 
 extension SectionViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {

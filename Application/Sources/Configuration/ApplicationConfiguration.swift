@@ -102,5 +102,4 @@ enum ConfiguredSection: Hashable {
     case notifications
     case radioShowAccess(channelUid: String)
 #endif
-
 }

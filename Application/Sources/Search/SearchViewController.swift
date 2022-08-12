@@ -144,6 +144,7 @@ final class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        
         self.searchController = searchController
         
         let searchBar = searchController.searchBar
@@ -202,10 +203,6 @@ final class SearchViewController: UIViewController {
     }
     
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     private func updateSearchSettingsButton(for settings: MediaSearchSettings) {
         guard !ApplicationConfiguration.shared.areSearchSettingsHidden else {
             navigationItem.rightBarButtonItem = nil
@@ -361,6 +358,11 @@ extension SearchViewController: ContentInsets {
         return UIEdgeInsets(top: Self.layoutVerticalMargin, left: 0, bottom: Self.layoutVerticalMargin, right: 0)
     }
 }
+
+#if os(iOS)
+extension SearchViewController: Oriented {
+}
+#endif
 
 extension SearchViewController: ScrollableContent {
     var play_scrollableView: UIScrollView? {

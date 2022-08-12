@@ -176,7 +176,7 @@ extension ContextMenu {
     }
     
     private static func downloadAction(for media: SRGMedia) -> UIAction? {
-        guard Download.canToggle(for: media) else { return nil}
+        guard Download.canToggle(for: media) else { return nil }
         
         func title(for download: Download?) -> String {
             if download != nil {
@@ -220,7 +220,7 @@ extension ContextMenu {
     private static func sharingAction(for media: SRGMedia, in viewController: UIViewController) -> UIAction? {
         guard let sharingItem = SharingItem(for: media, at: CMTime.zero) else { return nil }
         return UIAction(title: NSLocalizedString("Share", comment: "Context menu action to share a media"),
-                                  image: UIImage(named: "share")!) { _ in
+                        image: UIImage(named: "share")!) { _ in
             shareItem(sharingItem, in: viewController)
         }
     }

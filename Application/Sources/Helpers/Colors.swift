@@ -7,8 +7,8 @@
 import SwiftUI
 
 extension Color {
-    public static let darkGray = Color(.darkGray)
-    public static let placeholder = Color(.placeholder)
+    static let darkGray = Color(.darkGray)
+    static let placeholder = Color(.placeholder)
 }
 
 extension UIColor {

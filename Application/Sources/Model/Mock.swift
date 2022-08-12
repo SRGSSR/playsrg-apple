@@ -6,7 +6,7 @@
 
 import SwiftUI
 
-struct Mock {
+enum Mock {
     enum Bucket: String {
         case standard
         case overflow
@@ -94,14 +94,14 @@ struct Mock {
                 title: "Top left",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
-                imageFocalPoint: Mock.focalPoint(.topLeft)
+                imageFocalPoint: Self.focalPoint(.topLeft)
             )
         case .bottomRightAligned:
             return PlaySRG.Highlight(
                 title: "Bottom right",
                 summary: "Summary",
                 image: SRGImage(url: URL(string: "https://il.srgssr.ch/integrationlayer/2.0/image-scale-sixteen-to-nine/https://play-pac-public-production.s3.eu-central-1.amazonaws.com/images/4fe0346b-3b3b-47cf-b31a-9d4ae4e3552a.jpeg"), variant: .default),
-                imageFocalPoint: Mock.focalPoint(.bottomRight)
+                imageFocalPoint: Self.focalPoint(.bottomRight)
             )
         }
     }

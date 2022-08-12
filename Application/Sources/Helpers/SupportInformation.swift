@@ -44,7 +44,9 @@ import UIKit
     private static var modelIdentifier: String {
         var systemInfo = utsname()
         uname(&systemInfo)
-        return String(cString: &systemInfo.machine.0)
+        return withUnsafePointer(to: &systemInfo.machine.0) { p in
+            return String(cString: p)
+        }
     }
     
     private static var loginStatus: String {

@@ -6,7 +6,7 @@
 
 #import "BaseViewController.h"
 
-#import "UIViewController+PlaySRG.h"
+#import "Orientation.h"
 
 static void commonInit(BaseViewController *self);
 

@@ -103,35 +103,35 @@ body:
                    …
 version: 2.0.1
 
-name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, version: 0.20220203.1, source: https://github.com/firebase/abseil-cpp-SwiftPM
+name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, version: 0.20220203.2, source: https://github.com/firebase/abseil-cpp-SwiftPM
 
 name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.8.1, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.2, source: https://github.com/microsoft/appcenter-sdk-apple
+name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.3, source: https://github.com/microsoft/appcenter-sdk-apple
 
-name: boringssl-SwiftPM, nameSpecified: boringssl-swiftpm, owner: firebase, version: 0.9.0, source: https://github.com/firebase/boringssl-SwiftPM
+name: boringssl-SwiftPM, nameSpecified: boringssl-swiftpm, owner: firebase, version: 0.9.1, source: https://github.com/firebase/boringssl-SwiftPM
 
 name: Comscore-Swift-Package-Manager, nameSpecified: comscore-swift-package-manager, owner: comScore, version: 6.10.0, source: https://github.com/comScore/Comscore-Swift-Package-Manager
 
 name: DZNEmptyDataSet, nameSpecified: dznemptydataset, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.2.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.3.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: fscalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 
-name: FXReachability, nameSpecified: fxreachability, owner: SRGSSR, version: 1.3.2-srg5, source: https://github.com/SRGSSR/FXReachability
+name: FXReachability, nameSpecified: fxreachability, owner: SRGSSR, version: 1.3.2-srg6, source: https://github.com/SRGSSR/FXReachability
 
 name: Gifu, nameSpecified: gifu, owner: kaishin, version: 3.3.1, source: https://github.com/kaishin/Gifu
 
-name: GoogleAppMeasurement, nameSpecified: googleappmeasurement, owner: google, version: 9.1.0, source: https://github.com/google/GoogleAppMeasurement
+name: GoogleAppMeasurement, nameSpecified: googleappmeasurement, owner: google, version: 9.3.0, source: https://github.com/google/GoogleAppMeasurement
 
 name: GoogleCastSDK-ios-no-bluetooth, nameSpecified: googlecastsdk-ios-no-bluetooth, owner: SRGSSR, version: 4.7.1-beta.1, source: https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth
 
-name: GoogleDataTransport, nameSpecified: googledatatransport, owner: google, version: 9.1.4, source: https://github.com/google/GoogleDataTransport
+name: GoogleDataTransport, nameSpecified: googledatatransport, owner: google, version: 9.2.0, source: https://github.com/google/GoogleDataTransport
 
 name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7.7.1, source: https://github.com/google/GoogleUtilities
 
-name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.2-grpc, source: https://github.com/grpc/grpc-ios
+name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.3-grpc, source: https://github.com/grpc/grpc-ios
 
 name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 2.0.0, source: https://github.com/google/gtm-session-fetcher
 
@@ -139,9 +139,9 @@ name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
-name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg3, source: https://github.com/SRGSSR/libextobjc
+name: libextobjc, nameSpecified: libextobjc, owner: SRGSSR, version: 0.6.0-srg4, source: https://github.com/SRGSSR/libextobjc
 
-name: MAKVONotificationCenter, nameSpecified: makvonotificationcenter, owner: SRGSSR, version: 1.0.0-srg5, source: https://github.com/SRGSSR/MAKVONotificationCenter
+name: MAKVONotificationCenter, nameSpecified: makvonotificationcenter, owner: SRGSSR, version: 1.0.0-srg6, source: https://github.com/SRGSSR/MAKVONotificationCenter
 
 name: Mantle, nameSpecified: mantle, owner: Mantle, version: 2.2.0, source: https://github.com/Mantle/Mantle
 
@@ -157,27 +157,27 @@ name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version
 
 name: promises, nameSpecified: promises, owner: google, version: 2.1.1, source: https://github.com/google/promises
 
-name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: 7.8.0, source: https://github.com/SRGSSR/srganalytics-apple
+name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: 7.9.0, source: https://github.com/SRGSSR/srganalytics-apple
 
-name: srgappearance-apple, nameSpecified: srgappearance-apple, owner: SRGSSR, version: 5.1.1, source: https://github.com/SRGSSR/srgappearance-apple
+name: srgappearance-apple, nameSpecified: srgappearance-apple, owner: SRGSSR, version: 5.2.0, source: https://github.com/SRGSSR/srgappearance-apple
 
-name: srgcontentprotection-apple, nameSpecified: srgcontentprotection-apple, owner: SRGSSR, version: 3.0.4, source: https://github.com/SRGSSR/srgcontentprotection-apple
+name: srgcontentprotection-apple, nameSpecified: srgcontentprotection-apple, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgcontentprotection-apple
 
-name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: 16.0.0, source: https://github.com/SRGSSR/srgdataprovider-apple
+name: srgdataprovider-apple, nameSpecified: srgdataprovider-apple, owner: SRGSSR, version: 16.1.0, source: https://github.com/SRGSSR/srgdataprovider-apple
 
-name: srgdiagnostics-apple, nameSpecified: srgdiagnostics-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srgdiagnostics-apple
+name: srgdiagnostics-apple, nameSpecified: srgdiagnostics-apple, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgdiagnostics-apple
 
-name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: 3.2.3, source: https://github.com/SRGSSR/srgidentity-apple
+name: srgidentity-apple, nameSpecified: srgidentity-apple, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: 8.2.0, source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: 8.3.0, source: https://github.com/SRGSSR/srgletterbox-apple
 
-name: srglogger-apple, nameSpecified: srglogger-apple, owner: SRGSSR, version: 3.0.2, source: https://github.com/SRGSSR/srglogger-apple
+name: srglogger-apple, nameSpecified: srglogger-apple, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
-name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: 7.0.2, source: https://github.com/SRGSSR/srgmediaplayer-apple
+name: srgmediaplayer-apple, nameSpecified: srgmediaplayer-apple, owner: SRGSSR, version: 7.1.0, source: https://github.com/SRGSSR/srgmediaplayer-apple
 
-name: srgnetwork-apple, nameSpecified: srgnetwork-apple, owner: SRGSSR, version: 3.0.3, source: https://github.com/SRGSSR/srgnetwork-apple
+name: srgnetwork-apple, nameSpecified: srgnetwork-apple, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srgnetwork-apple
 
-name: srguserdata-apple, nameSpecified: srguserdata-apple, owner: SRGSSR, version: 3.2.0, source: https://github.com/SRGSSR/srguserdata-apple
+name: srguserdata-apple, nameSpecified: srguserdata-apple, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srguserdata-apple
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.2, source: https://github.com/apple/swift-collections
 

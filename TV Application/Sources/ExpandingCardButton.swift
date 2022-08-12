@@ -18,6 +18,8 @@ struct ExpandingCardButton<Content: View>: View {
     
     fileprivate var onFocusChangeAction: ((Bool) -> Void)?
     
+    @State private var isFocused = false
+    
     init(action: @escaping () -> Void, @ViewBuilder content: @escaping () -> Content) {
         self.action = action
         _content = .constant(content)
@@ -32,9 +34,10 @@ struct ExpandingCardButton<Content: View>: View {
                         if let onFocusAction = self.onFocusChangeAction {
                             onFocusAction(focused)
                         }
+                        isFocused = focused
                     }
             }
-            .buttonStyle(CardButtonStyle())
+            .buttonStyle(FlatCardButtonStyle(focused: isFocused))
         }
     }
 }

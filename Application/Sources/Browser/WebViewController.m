@@ -143,13 +143,6 @@ static void *s_kvoContext = &s_kvoContext;
                                              object:nil];
 }
 
-#pragma mark Rotation
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    return [super supportedInterfaceOrientations] & UIViewController.play_supportedInterfaceOrientations;
-}
-
 #pragma mark Status bar
 
 - (UIStatusBarStyle)preferredStatusBarStyle

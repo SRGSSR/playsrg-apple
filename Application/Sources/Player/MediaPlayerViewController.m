@@ -1530,6 +1530,18 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     return self.fromPushNotification;
 }
 
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (BOOL)play_isFullScreenWhenDisplayedInCustomModal
+{
+    return YES;
+}
+
 #pragma mark SRGLetterboxViewDelegate protocol
 
 - (void)letterboxViewWillAnimateUserInterface:(SRGLetterboxView *)letterboxView
@@ -1559,14 +1571,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     void (^rotate)(UIInterfaceOrientation) = ^(UIInterfaceOrientation orientation) {
         // We interrupt the rotation attempt and trigger a rotation (which itself will toggle the expected full-screen display)
         completionHandler(NO);
-        
-        // User interface orientations are a subset of device orientations with matching values. Trick: To avoid the
-        // system inhibiting some rotation attempts for which it would detect no meaningful change, we perform a
-        // change to portrait mode first).
-        if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
-        }
-        [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
+        [UIDevice.currentDevice rotateToUserInterfaceOrientation:orientation];
     };
     
     // On iPhones, full-screen transitions can be triggered by rotation. In such cases, when tapping on the full-screen button,

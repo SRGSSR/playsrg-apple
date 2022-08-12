@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+#import "Orientation.h"
 #import "PlayApplicationNavigation.h"
 #import "ScrollableContent.h"
 #import "TabBarActionable.h"
@@ -15,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  *  Lightweight split view controller subclass with standard behavior.
  */
-@interface SplitViewController : UISplitViewController <PlayApplicationNavigation, ScrollableContentContainer, TabBarActionable, UISplitViewControllerDelegate>
+@interface SplitViewController : UISplitViewController <Oriented, PlayApplicationNavigation, ScrollableContentContainer, TabBarActionable, UISplitViewControllerDelegate>
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated;
 

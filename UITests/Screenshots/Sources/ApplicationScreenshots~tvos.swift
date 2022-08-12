@@ -7,7 +7,7 @@
 import XCTest
 
 class ApplicationScreenshots: XCTestCase {
-    static let configuration: NSDictionary = {
+    private static let configuration: NSDictionary = {
         if let path = Bundle(for: ApplicationScreenshots.self).path(forResource: "Configuration", ofType: "plist") {
             return NSDictionary(contentsOfFile: path) ?? [:]
         }
@@ -17,6 +17,8 @@ class ApplicationScreenshots: XCTestCase {
     }()
     
     override func setUp() {
+        super.setUp()
+        
         let app = XCUIApplication()
         setupSnapshot(app)
         app.launch()
@@ -64,13 +66,13 @@ class ApplicationScreenshots: XCTestCase {
         }
     }
     
-    var focusedIdentifier: String? {
+    private var focusedIdentifier: String? {
         // String-based predicate recommended by `elements(matching:)` documentation
         let identifier = XCUIApplication().descendants(matching: .any).element(matching: NSPredicate(format: "hasFocus == true")).identifier
         return !identifier.isEmpty ? identifier : nil
     }
     
-    func moveToNextTabBarItem() {
+    private func moveToNextTabBarItem() {
         let remote = XCUIRemote.shared
         
         // Press Menu if to return to the tab bar if needed. All our tab bar accessibility identifiers contain 'TabBarItem',

@@ -25,7 +25,7 @@ final class ProgramViewModel: ObservableObject {
     @Published private var mediaData: MediaData = .empty
     @Published private var livestreamMedia: SRGMedia?
     
-    @Published private(set) var date: Date = Date()
+    @Published private(set) var date = Date()
     
     init() {
         Timer.publish(every: 10, on: .main, in: .common)

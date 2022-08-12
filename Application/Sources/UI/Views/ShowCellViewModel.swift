@@ -10,7 +10,7 @@ import Combine
 
 class ShowCellViewModel: ObservableObject {
     @Published var show: SRGShow?
-    @Published private(set) var isSubscribed: Bool = false
+    @Published private(set) var isSubscribed = false
     
     init() {
 #if os(iOS)

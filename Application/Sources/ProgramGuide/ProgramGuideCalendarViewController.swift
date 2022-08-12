@@ -60,10 +60,6 @@ final class ProgramGuideCalendarViewController: UIViewController {
         super.viewDidLoad()
         calendarView.content = CalendarView(model: model)
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
 }
 
 // MARK: Accessibility

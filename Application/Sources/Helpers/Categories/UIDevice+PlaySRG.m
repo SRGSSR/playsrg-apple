@@ -6,6 +6,10 @@
 
 #import "UIDevice+PlaySRG.h"
 
+#import "PlaySRG-Swift.h"
+
+@import libextobjc;
+
 static BOOL s_locked = NO;
 
 // Function declarations
@@ -18,6 +22,19 @@ static void lockComplete(CFNotificationCenterRef center, void *observer, CFStrin
 + (BOOL)play_isLocked
 {
     return s_locked;
+}
+
+#pragma mark Rotation
+
+- (void)rotateToUserInterfaceOrientation:(UIInterfaceOrientation)orientation
+{
+    // User interface orientations are a subset of device orientations with matching values. Trick: To avoid the
+    // system inhibiting some rotation attempts for which it would detect no meaningful change, we perform a
+    // change to portrait mode first).
+    if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
+        [UIDevice.currentDevice setValue:@(UIInterfaceOrientationPortrait) forKey:@keypath(UIDevice.new, orientation)];
+    }
+    [UIDevice.currentDevice setValue:@(orientation) forKey:@keypath(UIDevice.new, orientation)];
 }
 
 #pragma mark Notifications

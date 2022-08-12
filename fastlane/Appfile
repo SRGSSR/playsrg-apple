@@ -6,49 +6,49 @@ team_id "#{ENV['DEFAULT_TEAM_ID']}"
 itc_team_id "#{ENV['DEFAULT_ITUNES_CONNECT_TEAM_ID']}"
 
 for_platform :ios do
-  for_lane :iOSswiAppStoreUploadBeta do
+  for_lane :iOSswiUploadAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :tvOSswiAppStoreUploadBeta do
+  for_lane :tvOSswiUploadAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :iOSswiAppStoreDistributePrivateBeta do
+  for_lane :iOSswiDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :tvOSswiAppStoreDistributePrivateBeta do
+  for_lane :tvOSswiDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :iOSswiAppStoreDistributePublicBeta do
+  for_lane :iOSswiDistributePublicAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :tvOSswiAppStoreDistributePublicBeta do
+  for_lane :tvOSswiDistributePublicAppStoreBuild do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :iOSswiAppStoreDSYMs do
+  for_lane :iOSswiAppStoreBuildDSYMs do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :tvOSswiAppStoreDSYMs do
+  for_lane :tvOSswiAppStoreBuildDSYMs do
     app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SWI_TEAM_ID']}"
@@ -66,49 +66,61 @@ for_platform :ios do
     team_id "#{ENV['SWI_TEAM_ID']}"
   end
 
-  for_lane :iOSsrfAppStoreUploadBeta do
+  for_lane :iOSswiPrepareAppStoreRelease do
+    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SWI_TEAM_ID']}"
+  end
+
+  for_lane :tvOSswiPrepareAppStoreRelease do
+    app_identifier "#{ENV['SWI_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['SWI_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SWI_TEAM_ID']}"
+  end
+
+  for_lane :iOSsrfUploadAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :tvOSsrfAppStoreUploadBeta do
+  for_lane :tvOSsrfUploadAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :iOSsrfAppStoreDistributePrivateBeta do
+  for_lane :iOSsrfDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :tvOSsrfAppStoreDistributePrivateBeta do
+  for_lane :tvOSsrfDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :iOSsrfAppStoreDistributePublicBeta do
+  for_lane :iOSsrfDistributePublicAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :tvOSsrfAppStoreDistributePublicBeta do
+  for_lane :tvOSsrfDistributePublicAppStoreBuild do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :iOSsrfAppStoreDSYMs do
+  for_lane :iOSsrfAppStoreBuildDSYMs do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :tvOSsrfAppStoreDSYMs do
+  for_lane :tvOSsrfAppStoreBuildDSYMs do
     app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['SRF_TEAM_ID']}"
@@ -126,49 +138,61 @@ for_platform :ios do
     team_id "#{ENV['SRF_TEAM_ID']}"
   end
 
-  for_lane :iOSrtsAppStoreUploadBeta do
+  for_lane :iOSsrfPrepareAppStoreRelease do
+    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRF_TEAM_ID']}"
+  end
+
+  for_lane :tvOSsrfPrepareAppStoreRelease do
+    app_identifier "#{ENV['SRF_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['SRF_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['SRF_TEAM_ID']}"
+  end
+
+  for_lane :iOSrtsUploadAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtsAppStoreUploadBeta do
+  for_lane :tvOSrtsUploadAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :iOSrtsAppStoreDistributePrivateBeta do
+  for_lane :iOSrtsDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtsAppStoreDistributePrivateBeta do
+  for_lane :tvOSrtsDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :iOSrtsAppStoreDistributePublicBeta do
+  for_lane :iOSrtsDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtsAppStoreDistributePublicBeta do
+  for_lane :tvOSrtsDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :iOSrtsAppStoreDSYMs do
+  for_lane :iOSrtsAppStoreBuildDSYMs do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtsAppStoreDSYMs do
+  for_lane :tvOSrtsAppStoreBuildDSYMs do
     app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTS_TEAM_ID']}"
@@ -186,49 +210,61 @@ for_platform :ios do
     team_id "#{ENV['RTS_TEAM_ID']}"
   end
 
-  for_lane :iOSrsiAppStoreUploadBeta do
+  for_lane :iOSrtsPrepareAppStoreRelease do
+    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RTS_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrtsPrepareAppStoreRelease do
+    app_identifier "#{ENV['RTS_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RTS_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RTS_TEAM_ID']}"
+  end
+
+  for_lane :iOSrsiUploadAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :tvOSrsiAppStoreUploadBeta do
+  for_lane :tvOSrsiUploadAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :iOSrsiAppStoreDistributePrivateBeta do
+  for_lane :iOSrsiDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :tvOSrsiAppStoreDistributePrivateBeta do
+  for_lane :tvOSrsiDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :iOSrsiAppStoreDistributePublicBeta do
+  for_lane :iOSrsiDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :tvOSrsiAppStoreDistributePublicBeta do
+  for_lane :tvOSrsiDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :iOSrsiAppStoreDSYMs do
+  for_lane :iOSrsiAppStoreBuildDSYMs do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :tvOSrsiAppStoreDSYMs do
+  for_lane :tvOSrsiAppStoreBuildDSYMs do
     app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RSI_TEAM_ID']}"
@@ -246,49 +282,61 @@ for_platform :ios do
     team_id "#{ENV['RSI_TEAM_ID']}"
   end
 
-  for_lane :iOSrtrAppStoreUploadBeta do
+  for_lane :iOSrsiPrepareAppStoreRelease do
+    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RSI_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrsiPrepareAppStoreRelease do
+    app_identifier "#{ENV['RSI_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RSI_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RSI_TEAM_ID']}"
+  end
+
+  for_lane :iOSrtrUploadAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtrAppStoreUploadBeta do
+  for_lane :tvOSrtrUploadAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :iOSrtrAppStoreDistributePrivateBeta do
+  for_lane :iOSrtrDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtrAppStoreDistributePrivateBeta do
+  for_lane :tvOSrtrDistributePrivateAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :iOSrtrAppStoreDistributePublicBeta do
+  for_lane :iOSrtrDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtrAppStoreDistributePublicBeta do
+  for_lane :tvOSrtrDistributePublicAppStoreBuild do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :iOSrtrAppStoreDSYMs do
+  for_lane :iOSrtrAppStoreBuildDSYMs do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
   end
 
-  for_lane :tvOSrtrAppStoreDSYMs do
+  for_lane :tvOSrtrAppStoreBuildDSYMs do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"
@@ -301,6 +349,18 @@ for_platform :ios do
   end
 
   for_lane :tvOSrtrScreenshots do
+    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RTR_TEAM_ID']}"
+  end
+
+  for_lane :iOSrtrPrepareAppStoreRelease do
+    app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
+    itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
+    team_id "#{ENV['RTR_TEAM_ID']}"
+  end
+
+  for_lane :tvOSrtrPrepareAppStoreRelease do
     app_identifier "#{ENV['RTR_APP_IDENTIFIER']}"
     itc_team_id "#{ENV['RTR_ITUNES_CONNECT_TEAM_ID']}"
     team_id "#{ENV['RTR_TEAM_ID']}"

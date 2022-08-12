@@ -86,15 +86,12 @@ final class ProgramGuideViewController: UIViewController {
     }
 
 #if os(iOS)
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return Self.play_supportedInterfaceOrientations
-    }
-    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         coordinator.animate { _ in
             self.transition(to: Self.layout(for: newCollection), traitCollection: newCollection, animated: false)
-        } completion: { _ in }
+        } completion: { _ in
+        }
     }
     
     private func updateNavigationBar() {
@@ -274,6 +271,11 @@ extension ProgramGuideViewController {
 }
 
 // MARK: Protocols
+
+#if os(iOS)
+extension ProgramGuideViewController: Oriented {
+}
+#endif
 
 extension ProgramGuideViewController: ScrollableContentContainer {
     var play_scrollableChildViewController: UIViewController? {

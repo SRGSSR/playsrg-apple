@@ -20,15 +20,6 @@
 
 #pragma mark Rotation
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-    UIInterfaceOrientationMask supportedInterfaceOrientations = [super supportedInterfaceOrientations];
-    for (UIViewController *viewController in self.viewControllers) {
-        supportedInterfaceOrientations &= viewController.supportedInterfaceOrientations;
-    }
-    return supportedInterfaceOrientations;
-}
-
 - (void)viewDidLayoutSubviews
 {
     [super viewDidLayoutSubviews];
@@ -57,6 +48,18 @@
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
 {
     return [self.viewControllers.firstObject preferredStatusBarUpdateAnimation];
+}
+
+#pragma mark Oriented protocol
+
+- (UIInterfaceOrientationMask)play_supportedInterfaceOrientations
+{
+    return UIInterfaceOrientationMaskAll;
+}
+
+- (NSArray<UIViewController *> *)play_orientingChildViewControllers
+{
+    return self.viewControllers;
 }
 
 #pragma mark PlayApplicationNavigation protocol

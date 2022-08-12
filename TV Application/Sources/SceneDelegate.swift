@@ -51,7 +51,7 @@ final class SceneDelegate: UIResponder {
         tabBarController.view.backgroundColor = .srgGray16
     }
     
-    static private func applicationRootViewController() -> UIViewController {
+    private static func applicationRootViewController() -> UIViewController {
         var viewControllers = [UIViewController]()
         
         let videosViewController = PageViewController(id: .video)
@@ -140,7 +140,7 @@ final class SceneDelegate: UIResponder {
                 }
                 .store(in: &cancellables)
         default:
-            ()
+            break
         }
     }
 }
