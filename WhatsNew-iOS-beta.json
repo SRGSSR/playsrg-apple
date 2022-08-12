@@ -168,5 +168,6 @@
   "3.6.2-389": "- Soon playable content have now the date and time displayed in list.\n- Update Radio SRF 3 and Virus channel logo. [SRF]\n- Remove Virus Audio homepage. [SRF]\n- Fix search result update after an error occured.",
   "3.6.3-390": "- Adopt a modern look & feel for iOS 15 (large titles and scroll edge appearance).\n- Update application settings view.\n- Update search filters view.",
   "3.6.3-391": "- The search view now presents topics in addition to the most searched shows.\n- Home page hero stage and highlights should have a better image framing.\n- Improve VoiceOver nagivation by disabling UI large titles.",
-  "3.6.4-392": "- The audio track and subtitle selection window can rotate on iPhone."
+  "3.6.4-392": "- The audio track and subtitle selection window can rotate on iPhone.",
+  "3.6.4-393": "- Fix inverted favorite & subscription banner messages.\n- Remove superfluous pinch gestures on player if device screen ratio fit content image ratio."
 }
