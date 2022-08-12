@@ -70,7 +70,9 @@ enum CarPlayList {
                     .map { SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: Self.pageSize) }
                     .switchToLatest()
             }
-            .mapToSections(with: interfaceController)
+            .mapToSection(with: interfaceController)
+            .map { [$0] }
+            .eraseToAnyPublisher()
         case .livestreams:
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)) {
                 return Self.livestreamsSections(for: .all, interfaceController: interfaceController)
@@ -79,7 +81,9 @@ enum CarPlayList {
             return Self.mostPopular(interfaceController: interfaceController)
         case let .mostPopularMedias(radioChannel: radioChannel):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
-                .mapToSections(with: interfaceController)
+                .mapToSection(with: interfaceController)
+                .map { [$0] }
+                .eraseToAnyPublisher()
         case let .livestream(_, media: media):
             return Publishers.PublishAndRepeat(onOutputFrom: Timer.publish(every: 30, on: .main, in: .common).autoconnect()) {
                 return Self.livestreamSections(for: media, interfaceController: interfaceController)
@@ -256,7 +260,7 @@ private extension CarPlayList {
             .map { liveMediaDataList in
                 let items = liveMediaDataList.map { liveMediaData -> CPListItem in
                     if liveMediaData.programMedias.isEmpty {
-                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Livestream", comment: "Subtitle label to present the livestream media only"), image: Self.logoImage(for: liveMediaData.media))
+                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live", comment: "Subtitle label to present the livestream media only"), image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .none
                         item.handler = { _, completion in
                             interfaceController.play(media: liveMediaData.media, completion: completion)
@@ -265,7 +269,7 @@ private extension CarPlayList {
                         return item
                     }
                     else {
-                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Livestream and latest programs", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
+                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live and latest programs", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .disclosureIndicator
                         item.handler = { _, completion in
                             let template = CPListTemplate.list(.livestream(channel: liveMediaData.media.channel!, media: liveMediaData.media), interfaceController: interfaceController)
@@ -286,7 +290,9 @@ private extension CarPlayList {
         let radioChannels = ApplicationConfiguration.shared.radioHomepageChannels
         if radioChannels.count == 1, let radioChannel = radioChannels.first {
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
-                .mapToSections(with: interfaceController)
+                .mapToSection(with: interfaceController)
+                .map { [$0] }
+                .eraseToAnyPublisher()
         }
         else {
             return radioChannels.publisher
@@ -309,15 +315,25 @@ private extension CarPlayList {
     }
     
     static func livestreamSections(for media: SRGMedia, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
-        return liveProgramMediasPublisher(for: media)
-            .map { [media] + $0 }
-            .setFailureType(to: Error.self)
-            .mapToSections(with: interfaceController, style: .time)
+        return Publishers.CombineLatest(
+            Just([media])
+                .mapToSection(with: interfaceController,
+                              header: NSLocalizedString("Live", comment: "Live section header in livestream view")),
+            liveProgramMediasPublisher(for: media)
+                .mapToSection(with: interfaceController,
+                              header: NSLocalizedString("Shows", comment: "Program list section header in livestream view"),
+                              style: .time)
+            )
+        .map { livestreamSection, programsSection in
+            return [ livestreamSection, programsSection ]
+        }
+        .setFailureType(to: Error.self)
+        .eraseToAnyPublisher()
     }
 }
 
 private extension Publisher where Output == [SRGMedia] {
-    func mapToSections(with interfaceController: CPInterfaceController, style: MediaDescription.Style = .show) -> AnyPublisher<[CPListSection], Failure> {
+    func mapToSection(with interfaceController: CPInterfaceController, header: String? = nil, style: MediaDescription.Style = .show) -> AnyPublisher<CPListSection, Failure> {
         return map { medias in
             return Publishers.AccumulateLatestMany(medias.map { media in
                 return CarPlayList.mediaDataPublisher(for: media)
@@ -327,7 +343,7 @@ private extension Publisher where Output == [SRGMedia] {
         .map { mediaDataList in
             let items = mediaDataList.map { mediaData -> CPListItem in
                 let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: style),
-                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: style),
+                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: style) ?? " ",
                                       image: mediaData.image)
                 item.isPlaying = mediaData.playing
                 item.playbackProgress = mediaData.progress ?? 0
@@ -337,7 +353,7 @@ private extension Publisher where Output == [SRGMedia] {
                 }
                 return item
             }
-            return [CPListSection(items: items)]
+            return CPListSection(items: items, header: header, sectionIndexTitle: nil)
         }
         .eraseToAnyPublisher()
     }
