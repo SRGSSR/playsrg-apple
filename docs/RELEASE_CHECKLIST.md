@@ -18,10 +18,10 @@
 | Build betas for TestFlight (with fastlane\*) ||||||
 | Build App Store versions + collect DSYMs (with fastlane\*) ||||||
 | Update production remote configuration on Firebase ||||||
-| Distribute public TestFlight versions (with fastane\*\*) ||||||
+| Distribute public TestFlight versions (with fastane\*) ||||||
 | Check what's new in betas or TestFlight versions ||||||
 | Ask the PO to approve the version ||||||
-| Submit to Apple review ||||||
+| Submit to Apple review (with fastlane\*) ||||||
 | Update status page on Confluence (Up coming status, statistics changes) ||||||
 | Obtain successful Apple review ||||||
 | Release to the store ||||||
@@ -36,18 +36,33 @@
 
 ### \*Fastlane on PlayCity CI:
 
-- Beta with current version number
-	- iOS: `bundle exec fastlane ios iOSbetas`
-	- tvOS: `bundle exec fastlane ios tvOSbetas`
-- App Store build with current version number
-	- iOS: `bundle exec fastlane ios iOSAppStoreBetas`
-	- tvOS: `bundle exec fastlane ios tvOSAppStoreBetas`
+- Build Betas with current version number
+	- **Play SRG iOS Betas**: `fastlane ios iOSbetas`
+	- **Play SRG tvOS Betas**: `fastlane ios tvOSbetas`
+- Build App Store builds with current version number
+	- **Play SRG iOS AppStore builds**: `fastlane ios iOSAppStoreBuilds`
+	- **Play SRG tvOS AppStore builds**: `fastlane ios tvOSAppStoreBuilds`
+- Distribute App Store builds to public TestFlight with the current version number
+	- **Play SRG iOS AppStore builds** (with `true` to `public_testflight_distribution` parameter): `fastlane ios iOSAppStoreBuilds public_testflight_distribution:true`
+	- **Play SRG tvOS AppStore builds** (with `true` to `public_testflight_distribution` parameter): `fastlane ios tvOSAppStoreBuilds public_testflight_distribution:true`
+- Prepare AppStore releases on AppStore Connect with the current version number
+	- **Play SRG iOS AppStore releases**: `fastlane ios iOSPrepareAppStoreReleases`
+	- **Play SRG tvOS AppStore releases**: `fastlane ios tvOSPrepareAppStoreReleases`
+- Submit to Apple review the releases with the current version number
+	- **Play SRG iOS AppStore releases** (with `true` to `submit_for_review` parameter): `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
+	- **Play SRG tvOS AppStore releases** (with `true` to `submit_for_review` parameter):  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 
 ### \*\*Manual fastlane:
 
-- Screenshots
-	- iOS: `iOSrsiScreenshots`, `iOSrtrScreenshots`, `iOSrtsScreenshots`, `iOSsrfScreenshots` (No upload to ASC, due to some marketing images), `iOSswiScreenshots`
-	- tvOS: `tvOSrsiScreenshots`, `tvOSrtrScreenshots`, `tvOSrtsScreenshots`, `tvOSsrfScreenshots`, `tvOSswiScreenshots`
-- Distribute public TestFlight from App Store build
-	- iOS: `bundle exec fastlane ios iOSAppStoreDistributePublicBetas tag_version:3.6.0-382` (`tag_version` is optional. By default: the current local version) 
-	- tvOS: `bundle exec fastlane ios tvOSAppStoreDistributePublicBetas tag_version:1.6.0-36` (`tag_version` is optional. By default: the current local version) 
+- Screenshots iOS
+	- Play RSI iOS: `fastlane ios iOSrsiScreenshots`
+	- Play RTR iOS: `fastlane ios iOSrtrScreenshots`
+	- Play RTS iOS: `fastlane ios iOSrtsScreenshots`
+	- Play SRF iOS: `fastlane ios iOSsrfScreenshots` (No upload to ASC, due to some marketing images)
+	- Play SWI iOS: `fastlane ios iOSswiScreenshots`
+- Screenshots tvOS
+	- Play RSI tvOS: `fastlane ios tvOSrsiScreenshots`
+	- Play RTR tvOS: `fastlane ios tvOSrtrScreenshots`
+	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
+	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots`
+	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`

@@ -1548,6 +1548,7 @@ def srg_deliver(platform, tag_version, metadata_path, submit_for_review)
     metadata_path: metadata_path,
     precheck_include_in_app_purchases: false,
     submit_for_review: submit_for_review,
+    submission_information: { add_id_info_uses_idfa: false },
     automatic_release: true,
     force: true # Don't stop to wait manual preview
   )
