@@ -71,9 +71,25 @@ struct ShowHeaderView: View {
         }
     }
     
+    /// Behavior: h-exp, v-hug
+    private struct LeadView: View {
+        let lead: String
+        
+        var body: some View {
+            Text(lead)
+                .srgFont(.body)
+                .lineLimit(6)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.srgGray96)
+        }
+    }
+    
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
+#if os(tvOS)
+        @State var isFocused = false
+#endif
         
         var body: some View {
             VStack(spacing: ShowHeaderView.verticalSpacing) {
@@ -90,13 +106,21 @@ struct ShowHeaderView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.srgGrayC7)
                 if let lead = model.lead {
-                    Text(lead)
-                        .srgFont(.body)
-                        .lineLimit(6)
+#if os(iOS)
+                    LeadView(lead: lead)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray96)
+#else
+                    Button {
+                        navigateToText(lead)
+                    } label: {
+                        LeadView(lead: lead)
+                            // See above
+                            .fixedSize(horizontal: false, vertical: true)
+                            .onParentFocusChange { isFocused = $0 }
+                    }
+                    .buttonStyle(TextButtonStyle(focused: isFocused))
+#endif
                 }
                 HStack(spacing: 20) {
                     SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
@@ -168,7 +192,7 @@ enum ShowHeaderViewSize {
 struct ShowHeaderView_Previews: PreviewProvider {
     private static let model: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
-        model.show = Mock.show()
+        model.show = Mock.show(.overflow)
         return model
     }()
     
