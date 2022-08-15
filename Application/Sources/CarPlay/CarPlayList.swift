@@ -197,12 +197,14 @@ private extension CarPlayList {
                     streamOffsetInSeconds = resource.streamOffset / 1000
                     programSegments = segments ?? []
                 }) {
-                    let nowDate = Date().addingTimeInterval(-streamOffsetInSeconds)
+                    let toDate = Date().addingTimeInterval(-streamOffsetInSeconds)
+                    let defautlDVRWindow = Double(6 * 60 * 60)
+                    let fromDate = toDate.addingTimeInterval(-defautlDVRWindow)
                     return programSegments
                         .reversed()
                         .filter({
                             guard let markInDate = $0.markInDate else { return false }
-                            return markInDate <= nowDate
+                            return markInDate <= toDate && markInDate > fromDate
                         })
                         .map({ mediaComposition.media(for: $0)! })
                 }
