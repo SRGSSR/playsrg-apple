@@ -156,10 +156,10 @@ private extension CarPlayList {
         
         var medias: [SRGMedia] = []
         if let fullLengthMedia = controller.fullLengthMedia {
-            medias += [fullLengthMedia]
+            medias.append(fullLengthMedia)
         }
         if let media = controller.media {
-            medias += [media]
+            medias.append(media)
         }
         return medias
     }
