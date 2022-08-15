@@ -189,27 +189,21 @@ private extension CarPlayList {
     private static func liveProgramMediasPublisher(for media: SRGMedia) -> AnyPublisher<[SRGMedia], Never> {
         return SRGDataProvider.current!.mediaComposition(forUrn: media.urn)
             .map { mediaComposition in
-                var streamOffsetInSeconds: Double = 0
-                var programSegments: [SRGDataProviderModel.SRGSegment] = []
+                var medias: [SRGMedia] = []
                 
                 // Get the playable resource
                 if mediaComposition.play_playbackContext(withPreferredSettings: ApplicationSettingPlaybackSettings(), contextBlock: { resource, segments in
-                    streamOffsetInSeconds = resource.streamOffset / 1000
-                    programSegments = segments ?? []
+                    if let segments = segments {
+                        let streamOffset = resource.streamOffset / 1000
+                        medias = segments.filterProgramSegments(streamOffset: streamOffset)
+                            .reversed()
+                            .map({ mediaComposition.media(for: $0)! })
+                    }
                 }) {
-                    let toDate = Date().addingTimeInterval(-streamOffsetInSeconds)
-                    let defautlDVRWindow = Double(6 * 60 * 60)
-                    let fromDate = toDate.addingTimeInterval(-defautlDVRWindow)
-                    return programSegments
-                        .reversed()
-                        .filter({
-                            guard let markInDate = $0.markInDate else { return false }
-                            return markInDate <= toDate && markInDate > fromDate
-                        })
-                        .map({ mediaComposition.media(for: $0)! })
+                    return medias
                 }
                 else {
-                    return []
+                    return medias
                 }
             }
             .replaceError(with: [])
@@ -315,7 +309,7 @@ private extension CarPlayList {
                 .mapToSection(with: interfaceController,
                               header: NSLocalizedString("Shows", comment: "Program list section header in livestream view"),
                               style: .time)
-            )
+        )
         .map { livestreamSection, programsSection in
             return [ livestreamSection, programsSection ]
         }
@@ -348,5 +342,19 @@ private extension Publisher where Output == [SRGMedia] {
             return CPListSection(items: items, header: header, sectionIndexTitle: nil)
         }
         .eraseToAnyPublisher()
+    }
+}
+
+private extension Array {
+    func filterProgramSegments(streamOffset: Double) -> [SRGDataProviderModel.SRGSegment] {
+        guard let programSegments = self as? [SRGDataProviderModel.SRGSegment] else { return [] }
+        
+        let toDate = Date().addingTimeInterval(-streamOffset)
+        let defautlDVRWindow = Double(6 * 60 * 60)
+        let fromDate = toDate.addingTimeInterval(-defautlDVRWindow)
+        return programSegments.filter({
+            guard let markInDate = $0.markInDate else { return false }
+            return markInDate <= toDate && markInDate > fromDate
+        })
     }
 }
