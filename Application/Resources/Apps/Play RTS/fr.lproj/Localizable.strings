@@ -340,6 +340,8 @@
    Title displayed at the top of the livestreams view */
 "Livestreams" = "Directs";
 
+"Live and latest shows" = "Direct et dernières émissions";
+
 /* Default text displayed when loading */
 "Loading…" = "Chargement…";
 

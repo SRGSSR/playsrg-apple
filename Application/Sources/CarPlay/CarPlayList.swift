@@ -255,7 +255,7 @@ private extension CarPlayList {
                         return item
                     }
                     else {
-                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live and latest programs", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
+                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live and latest shows", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .disclosureIndicator
                         item.handler = { _, completion in
                             let template = CPListTemplate.list(.livestream(channel: liveMediaData.media.channel!, media: liveMediaData.media), interfaceController: interfaceController)
