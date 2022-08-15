@@ -41,13 +41,13 @@ final class CarPlayNowPlayingController {
     }
     
     private func startOverButton() -> CPNowPlayingButton {
-        return CPNowPlayingImageButton(image: UIImage(named: "start_over")!) { _ in
+        return CPNowPlayingImageButton(image: UIImage(named: "start_over", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
             SRGLetterboxService.shared.controller?.startOver()
         }
     }
     
     private func skipToLiveButton() -> CPNowPlayingButton {
-        return CPNowPlayingImageButton(image: UIImage(named: "skip_to_live")!) { _ in
+        return CPNowPlayingImageButton(image: UIImage(named: "skip_to_live", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
             SRGLetterboxService.shared.controller?.skipToLive()
         }
     }
