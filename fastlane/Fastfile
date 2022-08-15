@@ -363,14 +363,15 @@ platform :ios do
       ['iOS', 'tvOS'].map do |platform|
         spaceship_platform = spaceship_platform(platform)
         live_version = app.get_live_app_store_version(platform: spaceship_platform)
-        UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} is #{live_version.app_store_state}." if live_version
+        UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
         latest_version = app.get_latest_app_store_version(platform: spaceship_platform)
         if !latest_version || latest_version.version_string == live_version.version_string
-          UI.message "Play #{business_unit} #{platform} version #{latest_version.version_string} is the latest one."
+          UI.message "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
         else
-          UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} is #{latest_version.app_store_state}."
+          build_version = latest_version.build ? latest_version.build.version : 'NaN'
+          UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{latest_version.app_store_state}."
         end
         UI.message '-----'
       end
