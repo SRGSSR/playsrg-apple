@@ -10,7 +10,7 @@
 
 @implementation SRGMediaComposition (PlaySRG)
 
-- (SRGSubdivision *)subdivisionWithURN:(NSString *)URN
+- (SRGSubdivision *)play_subdivisionWithURN:(NSString *)URN
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSubdivision.new, URN), URN];
     SRGSubdivision *subdivision = [self.chapters filteredArrayUsingPredicate:predicate].firstObject;
@@ -26,6 +26,20 @@
         }
     }
     return nil;
+}
+
+- (BOOL)play_playbackContextWithPreferredSettings:(nullable SRGLetterboxPlaybackSettings *)preferredSettings
+                                     contextBlock:(NS_NOESCAPE PlayPlaybackContextBlock)contextBlock
+{
+    SRGPlaybackSettings *playbackSettings = [[SRGPlaybackSettings alloc] init];
+    playbackSettings.streamType = preferredSettings.streamType;
+    playbackSettings.quality = preferredSettings.quality;
+    playbackSettings.startBitRate = preferredSettings.startBitRate;
+    playbackSettings.sourceUid = preferredSettings.sourceUid;
+    
+    return [self playbackContextWithPreferredSettings:playbackSettings contextBlock:^(NSURL * _Nonnull streamURL, SRGResource * _Nonnull resource, NSArray<id<SRGSegment>> * _Nullable segments, NSInteger index, SRGAnalyticsStreamLabels * _Nullable analyticsLabels) {
+        return contextBlock(resource, (NSArray<SRGSegment *> *)segments);
+    }];
 }
 
 @end

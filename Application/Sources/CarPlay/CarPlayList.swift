@@ -189,23 +189,13 @@ private extension CarPlayList {
     private static func liveProgramMediasPublisher(for media: SRGMedia) -> AnyPublisher<[SRGMedia], Never> {
         return SRGDataProvider.current!.mediaComposition(forUrn: media.urn)
             .map { mediaComposition in
-                let settings = ApplicationSettingPlaybackSettings()
-                let playbackSettings = SRGPlaybackSettings()
-                playbackSettings.streamType = settings.streamType
-                playbackSettings.quality = settings.quality
-                playbackSettings.startBitRate = settings.startBitRate
-                playbackSettings.sourceUid = settings.sourceUid
-                
                 var streamOffsetInSeconds: Double = 0
                 var programSegments: [SRGDataProviderModel.SRGSegment] = []
                 
-                // Get the playabble resource
-                if mediaComposition.playbackContext(withPreferredSettings: playbackSettings,
-                                                    contextBlock: { _, resource, segments, _, _ in
+                // Get the playable resource
+                if mediaComposition.play_playbackContext(withPreferredSettings: ApplicationSettingPlaybackSettings(), contextBlock: { resource, segments in
                     streamOffsetInSeconds = resource.streamOffset / 1000
-                    if let segments = segments as? [SRGDataProviderModel.SRGSegment] {
-                        programSegments = segments
-                    }
+                    programSegments = segments ?? []
                 }) {
                     let nowDate = Date().addingTimeInterval(-streamOffsetInSeconds)
                     return programSegments

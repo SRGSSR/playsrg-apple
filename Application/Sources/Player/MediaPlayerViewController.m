@@ -2054,7 +2054,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     void (^sharingCompletionBlock)(SharingItem *, NSString *) = ^(SharingItem *sharingItem, NSString *URN) {
         UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
-            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:URN];
+            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition play_subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing
