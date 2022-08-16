@@ -100,7 +100,8 @@ NSString * const DownloadProgressKey = @"DownloadProgress";
 
 - (BOOL)addDownload:(Download *)download
 {
-    if ([[self.downloads.allValues valueForKeyPath:@"@distinctUnionOfObjects.URN"] containsObject:download.URN]) {
+    NSString *keyPath = [NSString stringWithFormat:@"@distinctUnionOfObjects.%@", @keypath(Download.new, URN)];
+    if ([[self.downloads.allValues valueForKeyPath:keyPath] containsObject:download.URN]) {
         return NO;
     }
     

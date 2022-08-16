@@ -1655,6 +1655,17 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [letterboxView setUserInterfaceHidden:! UIAccessibilityIsVoiceOverRunning() animated:YES];
         });
     }
+    
+    if ([subdivision isKindOfClass:SRGChapter.class]) {
+        SRGLetterboxController *letterboxController = letterboxView.controller;
+        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
+        
+        if (! [[playlist.medias valueForKeyPath:@keypath(SRGMedia.new, URN)] containsObject:subdivision.URN]) {
+            Playlist *playlist = PlaylistForURN(subdivision.URN);
+            letterboxController.playlistDataSource = playlist;
+            letterboxController.playbackTransitionDelegate = playlist;
+        }
+    }
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectAudioLanguageCode:(NSString *)languageCode
