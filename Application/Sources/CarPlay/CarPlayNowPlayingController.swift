@@ -27,11 +27,15 @@ final class CarPlayNowPlayingController {
             }
             .store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: nil)
-            .sink { [self] _ in
-                self.updateNowPlayingButtons()
-            }
-            .store(in: &cancellables)
+        Publishers.Merge(
+            NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: nil),
+            NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: nil)
+        )
+        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
+        .sink { [self] _ in
+            self.updateNowPlayingButtons()
+        }
+        .store(in: &cancellables)
     }
     
     private func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
