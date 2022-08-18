@@ -21,14 +21,4 @@
     }
 }
 
-- (SRGMedia *)play_mainMedia
-{
-    if (self.mediaComposition) {
-        return [self.mediaComposition mediaForSubdivision:self.mediaComposition.mainChapter];
-    }
-    else {
-        return self.media;
-    }
-}
-
 @end

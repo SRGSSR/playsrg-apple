@@ -23,9 +23,7 @@ extension CPListTemplate {
 extension CPInterfaceController {
     func play(media: SRGMedia, completion: @escaping () -> Void) {
         if let controller = SRGLetterboxService.shared.controller {
-            if controller.play_mainMedia != media {
-                controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
-            }
+            controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
         }
         else {
             let controller = SRGLetterboxController()

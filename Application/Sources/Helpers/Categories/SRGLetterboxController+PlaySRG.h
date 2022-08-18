@@ -12,8 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readonly, nullable) NSDateInterval *play_dateInterval;
 
-@property (nonatomic, readonly, nullable) SRGMedia *play_mainMedia;
-
 @end
 
 NS_ASSUME_NONNULL_END

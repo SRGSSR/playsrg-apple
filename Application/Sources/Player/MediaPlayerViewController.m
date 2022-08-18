@@ -1002,7 +1002,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
-        SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
+        SRGMedia *mainMedia = [self mainMedia];
         
         self.currentProgramTitleLabel.text = channel.name ?: mainMedia.title;
         self.currentProgramSubtitleLabel.text = nil;
@@ -1045,7 +1045,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)registerForChannelUpdates
 {
-    SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
+    SRGMedia *mainMedia = [self mainMedia];
     if (! mainMedia) {
         return;
     }
@@ -1188,6 +1188,16 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     return nil;
 }
 
+- (SRGMedia *)mainMedia
+{
+    if (self.letterboxController.mediaComposition) {
+        return [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
+    }
+    else {
+        return self.letterboxController.media;
+    }
+}
+
 - (SRGShow *)mainShow
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
@@ -1311,20 +1321,20 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateTimelineVisibilityForFullScreen:(BOOL)fullScreen animated:(BOOL)animated
 {
-    SRGMedia *media = self.letterboxController.play_mainMedia;
+    SRGMedia *media = [self mainMedia];
     BOOL hidden = (media.contentType == SRGContentTypeLivestream && ! fullScreen);
     [self.letterboxView setTimelineAlwaysHidden:hidden animated:animated];
 }
 
 - (BOOL)isLivestreamButtonHidden
 {
-    SRGMedia *media = self.letterboxController.play_mainMedia;
+    SRGMedia *media = [self mainMedia];
     return ! media || ! [self.livestreamMedias containsObject:media] || self.livestreamMedias.count < 2;
 }
 
 - (void)updateLivestreamButton
 {
-    SRGMedia *media = self.letterboxController.play_mainMedia;
+    SRGMedia *media = [self mainMedia];
     
     if (! media || media.contentType != SRGContentTypeLivestream || media.channel.transmission != SRGTransmissionRadio) {
         self.livestreamMedias = nil;
@@ -1545,7 +1555,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
         // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space for metadata, especially
         // when displaying a program list).
-        SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
+        SRGMedia *mainMedia = [self mainMedia];
         CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaPlayerMediaTypeVideo) ? 0.5f : 0.4f;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
@@ -1709,7 +1719,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didLongPressSubdivision:(SRGSubdivision *)subdivision
 {
-    if (self.letterboxController.play_mainMedia.contentType == SRGContentTypeLivestream) {
+    if ([self mainMedia].contentType == SRGContentTypeLivestream) {
         return;
     }
         
