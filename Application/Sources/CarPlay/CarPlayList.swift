@@ -154,14 +154,14 @@ private extension CarPlayList {
     private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> [SRGMedia] {
         guard let controller = controller else { return [] }
         
-        var medias: [SRGMedia] = []
-        if let fullLengthMedia = controller.fullLengthMedia {
-            medias.append(fullLengthMedia)
+        var medias: Set<SRGMedia> = []
+        if let mainMedia = controller.play_mainMedia, controller.isLive {
+            medias.insert(mainMedia)
         }
         if let media = controller.media {
-            medias.append(media)
+            medias.insert(media)
         }
-        return medias
+        return Array(medias)
     }
     
     private static func nowPlayingMediaPublisher() -> AnyPublisher<[SRGMedia], Never> {
