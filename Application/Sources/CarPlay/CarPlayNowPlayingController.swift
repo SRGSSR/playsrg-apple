@@ -32,8 +32,8 @@ final class CarPlayNowPlayingController {
             NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: nil)
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
-        .sink { [self] _ in
-            self.updateNowPlayingButtons()
+        .sink { [weak self] _ in
+            self?.updateNowPlayingButtons()
         }
         .store(in: &cancellables)
     }
