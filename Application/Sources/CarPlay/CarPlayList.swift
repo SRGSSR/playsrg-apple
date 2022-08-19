@@ -246,7 +246,7 @@ private extension CarPlayList {
             .map { liveMediaDataList in
                 let items = liveMediaDataList.map { liveMediaData -> CPListItem in
                     if liveMediaData.programMedias.isEmpty {
-                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live", comment: "Subtitle label to present the livestream media only"), image: Self.logoImage(for: liveMediaData.media))
+                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .none
                         item.handler = { _, completion in
                             interfaceController.play(media: liveMediaData.media, completion: completion)
@@ -255,7 +255,7 @@ private extension CarPlayList {
                         return item
                     }
                     else {
-                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: NSLocalizedString("Live and latest shows", comment: "Subtitle label to present the livestream media and its latest programs"), image: Self.logoImage(for: liveMediaData.media))
+                        let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: liveMediaData.media))
                         item.accessoryType = .disclosureIndicator
                         item.handler = { _, completion in
                             let template = CPListTemplate.list(.livestream(channel: liveMediaData.media.channel!, media: liveMediaData.media), interfaceController: interfaceController)
