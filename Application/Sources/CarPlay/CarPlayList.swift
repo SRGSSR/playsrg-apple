@@ -168,7 +168,7 @@ private extension CarPlayList {
         return SRGLetterboxService.shared.publisher(for: \.controller)
             .map { controller -> AnyPublisher<[SRGMedia], Never> in
                 if let controller = controller {
-                    return NotificationCenter.default.weakPublisher(for: NSNotification.Name.SRGLetterboxMetadataDidChange, object: controller)
+                    return NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
                             let controller = notification.object as? SRGLetterboxController
                             return nowPlayingMedia(for: controller)

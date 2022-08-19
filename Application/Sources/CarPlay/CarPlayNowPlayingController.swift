@@ -12,7 +12,8 @@ import SRGLetterbox
 
 final class CarPlayNowPlayingController {
     private weak var interfaceController: CPInterfaceController?
-    private var cancellables = Set<AnyCancellable>()
+    private var popCancellable: AnyCancellable
+    private var nowPlayingButtonsCancellable: AnyCancellable?
     
     init(interfaceController: CPInterfaceController) {
         self.interfaceController = interfaceController
@@ -20,22 +21,11 @@ final class CarPlayNowPlayingController {
         // If the player is closed on the iOS device return to the first level. A better result would inspect the
         // template hierarchy to pop to the previous one but this might perform an IPC call. Popping to the root
         // should be sufficient.
-        SRGLetterboxService.shared.publisher(for: \.controller)
+        popCancellable = SRGLetterboxService.shared.publisher(for: \.controller)
             .filter { $0 == nil }
             .sink { [weak interfaceController] _ in
                 interfaceController?.popToRootTemplate(animated: true) { _, _ in }
             }
-            .store(in: &cancellables)
-        
-        Publishers.Merge(
-            NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: nil),
-            NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: nil)
-        )
-        .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
-        .sink { [weak self] _ in
-            self?.updateNowPlayingButtons()
-        }
-        .store(in: &cancellables)
     }
     
     private func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
@@ -56,22 +46,43 @@ final class CarPlayNowPlayingController {
         }
     }
     
-    private func updateNowPlayingButtons() {
-        let nowPlayingTemplate = CPNowPlayingTemplate.shared
+    private func nowPlayingButtons(for controller: SRGLetterboxController?) -> [CPNowPlayingButton] {
+        guard let controller = controller else { return [] }
         
-        if let controller = SRGLetterboxService.shared.controller {
-            var nowPlayingButtons = [playbackRateButton(for: interfaceController!)]
-            if controller.canStartOver() {
-                nowPlayingButtons.insert(startOverButton(), at: 0)
-            }
-            if controller.canSkipToLive() {
-                nowPlayingButtons.append(skipToLiveButton())
-            }
-            nowPlayingTemplate.updateNowPlayingButtons(nowPlayingButtons)
+        var nowPlayingButtons = [playbackRateButton(for: interfaceController!)]
+        if controller.canStartOver() {
+            nowPlayingButtons.insert(startOverButton(), at: 0)
         }
-        else {
-            nowPlayingTemplate.updateNowPlayingButtons([])
+        if controller.canSkipToLive() {
+            nowPlayingButtons.append(skipToLiveButton())
         }
+        return nowPlayingButtons
+    }
+    
+    private func nowPlayingButtonsPublisher() -> AnyPublisher<[CPNowPlayingButton], Never> {
+        return SRGLetterboxService.shared.publisher(for: \.controller)
+            .map { [weak self] controller -> AnyPublisher<[CPNowPlayingButton], Never> in
+                if let controller = controller {
+                    return Publishers.Merge(
+                        NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: controller),
+                        NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: controller)
+                    )
+                    .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
+                    .map { [weak self] notification in
+                        let controller = notification.object as? SRGLetterboxController
+                        return self?.nowPlayingButtons(for: controller) ?? []
+                    }
+                    .prepend(self?.nowPlayingButtons(for: controller) ?? [])
+                    .eraseToAnyPublisher()
+                }
+                else {
+                    return Just([])
+                        .eraseToAnyPublisher()
+                }
+            }
+            .switchToLatest()
+            .removeDuplicates()
+            .eraseToAnyPublisher()
     }
 }
 
@@ -79,7 +90,10 @@ final class CarPlayNowPlayingController {
 
 extension CarPlayNowPlayingController: CarPlayTemplateController {
     func willAppear(animated: Bool) {
-        updateNowPlayingButtons()
+        nowPlayingButtonsCancellable = nowPlayingButtonsPublisher()
+            .sink { nowPlayingButtons in
+                CPNowPlayingTemplate.shared.updateNowPlayingButtons(nowPlayingButtons)
+            }
     }
     
     func didAppear(animated: Bool) {
@@ -91,5 +105,7 @@ extension CarPlayNowPlayingController: CarPlayTemplateController {
     
     func willDisappear(animated: Bool) {}
     
-    func didDisappear(animated: Bool) {}
+    func didDisappear(animated: Bool) {
+        nowPlayingButtonsCancellable = nil
+    }
 }
