@@ -2679,6 +2679,7 @@
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
+		04E6D3B528AFF5AA00847D76 /* SRGMediaPlayerController+PlaySRG.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SRGMediaPlayerController+PlaySRG.h"; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
@@ -4749,6 +4750,7 @@
 				0827DA241F0D437400A31A42 /* SRGMedia+PlaySRG.m */,
 				6FB0AEFA217F4975009D707A /* SRGMediaComposition+PlaySRG.h */,
 				6FB0AEFB217F4975009D707A /* SRGMediaComposition+PlaySRG.m */,
+				04E6D3B528AFF5AA00847D76 /* SRGMediaPlayerController+PlaySRG.h */,
 				6FC886691EC58BD5000BC3FF /* SRGProgram+PlaySRG.h */,
 				6FC8866A1EC58BD5000BC3FF /* SRGProgram+PlaySRG.m */,
 				6FA6C0612458064C00518DE6 /* SRGProgramComposition+PlaySRG.h */,

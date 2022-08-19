@@ -15,6 +15,7 @@
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NSBundle+PlaySRG.h"
+#import "SRGMediaPlayerController+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIView+PlaySRG.h"
@@ -42,12 +43,6 @@
 
 @property (nonatomic, weak) id periodicTimeObserver;
 @property (nonatomic, weak) id channelObserver;
-
-@end
-
-@interface SRGLetterboxController (MediaPlayerController_Private)
-
-@property (nonatomic, readonly) SRGMediaPlayerController *mediaPlayerController;
 
 @end
 

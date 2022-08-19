@@ -63,16 +63,16 @@ final class CarPlayNowPlayingController {
         return SRGLetterboxService.shared.publisher(for: \.controller)
             .map { [weak self] controller -> AnyPublisher<[CPNowPlayingButton], Never> in
                 if let controller = controller {
-                    return Publishers.Merge(
+                    return Publishers.CombineLatest3(
+                        controller.mediaPlayerController.publisher(for: \.timeRange),
                         NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: controller),
                         NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                     )
                     .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
-                    .map { [weak self] notification in
-                        let controller = notification.object as? SRGLetterboxController
+                    .map { _ in
                         return self?.nowPlayingButtons(for: controller) ?? []
                     }
-                    .prepend(self?.nowPlayingButtons(for: controller) ?? [])
+                    .prepend(self?.nowPlayingButtons(for: SRGLetterboxService.shared.controller) ?? [])
                     .eraseToAnyPublisher()
                 }
                 else {
