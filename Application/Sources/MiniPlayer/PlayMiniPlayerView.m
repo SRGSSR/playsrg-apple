@@ -15,7 +15,7 @@
 #import "History.h"
 #import "MediaPlayerViewController.h"
 #import "NSBundle+PlaySRG.h"
-#import "SRGMediaPlayerController+PlaySRG.h"
+#import "SRGLetterboxController+PlaySRG.h"
 #import "SRGProgram+PlaySRG.h"
 #import "SRGProgramComposition+PlaySRG.h"
 #import "UIView+PlaySRG.h"

@@ -16,4 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface SRGLetterboxController (PlaySRG_Private)
+
+@property (nonatomic, readonly) SRGMediaPlayerController *mediaPlayerController;
+
+@end
+
 NS_ASSUME_NONNULL_END
