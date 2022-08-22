@@ -22,7 +22,7 @@ final class SettingsViewModel: ObservableObject {
     @Published private var synchronizationDate: Date?
     
     init() {
-        NotificationCenter.default.publisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
+        NotificationCenter.default.weakPublisher(for: .SRGUserDataDidFinishSynchronization, object: SRGUserData.current)
             .map { _ in }
             .prepend(())
             .map { SRGUserData.current!.user.synchronizationDate }
@@ -35,7 +35,7 @@ final class SettingsViewModel: ObservableObject {
                 .assign(to: &$isLoggedIn)
             
 #if os(tvOS)
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService)
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceDidUpdateAccount, object: identityService)
                 .map { _ in }
                 .prepend(())
                 .map { identityService.account }
@@ -75,9 +75,9 @@ final class SettingsViewModel: ObservableObject {
     
     private static func loggedInReloadSignal(for identityService: SRGIdentityService) -> AnyPublisher<Void, Never> {
         return Publishers.Merge3(
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: identityService),
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: identityService),
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: identityService),
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: identityService)
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .map { _ in }

@@ -175,7 +175,7 @@ final class PageViewController: UIViewController {
             }
             .store(in: &cancellables)
         
-        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .sink { [weak self] _ in
                 guard let self = self, self.play_isViewCurrent else { return }
                 self.updateNavigationBar(animated: true)

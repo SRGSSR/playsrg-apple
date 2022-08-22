@@ -9,6 +9,20 @@ import Combine
 import SRGDataProviderCombine
 import SRGUserData
 
+extension NotificationCenter {
+    /// The usual notification publisher retains the filter object, potentially creating cycles. Apply filter on
+    /// unfiltered stream to avoid this issue.
+    func weakPublisher(for name: Notification.Name, object: AnyObject? = nil) -> AnyPublisher<Notification, Never> {
+        publisher(for: name)
+            .filter { [weak object] notification in
+                guard let object = object,
+                      let notificationObject = notification.object as? AnyObject else { return false }
+                return notificationObject === object
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
 extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt = SRGDataProviderDefaultPageSize) -> AnyPublisher<[SRGMedia], Error> {
