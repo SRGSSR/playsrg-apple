@@ -66,10 +66,10 @@
     {
       "identity" : "flex",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/FLEXTool/FLEX.git",
+      "location" : "https://github.com/SRGSSR/FLEX",
       "state" : {
-        "branch" : "master",
-        "revision" : "4375f1a67fd50ef638e67d5ba131d6d9b5c034e7"
+        "branch" : "fix/spm",
+        "revision" : "1a01d20db98d3818aa0382ad7269a9555c97a7cf"
       }
     },
     {
