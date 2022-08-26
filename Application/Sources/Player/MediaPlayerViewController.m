@@ -97,7 +97,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic) SRGLetterboxController *originalLetterboxController;       // optional source controller, will be used if provided
 @property (nonatomic) SRGPosition *originalPosition;                             // original position to start at
 
-@property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
+@property (nonatomic) SRGLetterboxController *letterboxController;
 
 @property (nonatomic) SRGProgramComposition *programComposition;
 @property (nonatomic) NSArray<SRGProgram *> *programs;
@@ -236,6 +236,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalURN = URN;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            
+            self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
         }
         return self;
@@ -260,6 +262,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalMedia = media;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            
+            self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
         }
         return self;
@@ -273,7 +277,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
         
-        // Force the correct Letterbox controller. It will be linked to the Letterbox view in `-viewDidLoad`
         self.letterboxController = controller;
     }
     return self;
@@ -351,6 +354,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
+    self.letterboxView.controller = self.letterboxController;
+    
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
     
@@ -425,10 +430,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     [self updateAvailabilityLabelHeight];
     
-    // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
-        self.letterboxView.controller = self.letterboxController;
-        
         // Always resume playback if the original controller was not playing
         [self.letterboxController play];
     }
