@@ -15,8 +15,8 @@ extension NotificationCenter {
     func weakPublisher(for name: Notification.Name, object: AnyObject? = nil) -> AnyPublisher<Notification, Never> {
         publisher(for: name)
             .filter { [weak object] notification in
-                guard let object = object,
-                      let notificationObject = notification.object as? AnyObject else { return false }
+                guard let object = object else { return true }
+                guard let notificationObject = notification.object as? AnyObject else { return false }
                 return notificationObject === object
             }
             .eraseToAnyPublisher()
