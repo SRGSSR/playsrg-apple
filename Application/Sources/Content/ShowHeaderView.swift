@@ -94,14 +94,14 @@ struct ShowHeaderView: View {
                     .foregroundColor(.srgGrayC7)
                 if let lead = model.lead {
 #if os(iOS)
-                    LeadView(lead: lead)
+                    LeadView(lead)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
 #else
                     Button {
                         navigateToText(lead)
                     } label: {
-                        LeadView(lead: lead)
+                        LeadView(lead)
                             // See above
                             .fixedSize(horizontal: false, vertical: true)
                             .onParentFocusChange { isFocused = $0 }
@@ -149,14 +149,18 @@ struct ShowHeaderView: View {
         
         /// Behavior: h-exp, v-hug
         private struct LeadView: View {
-            let lead: String
+            let content: String
             
             var body: some View {
-                Text(lead)
+                Text(content)
                     .srgFont(.body)
                     .lineLimit(6)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.srgGray96)
+            }
+            
+            init(_ content: String) {
+                self.content = content
             }
         }
     }
