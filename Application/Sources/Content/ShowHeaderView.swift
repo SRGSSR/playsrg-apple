@@ -192,7 +192,7 @@ enum ShowHeaderViewSize {
 struct ShowHeaderView_Previews: PreviewProvider {
     private static let model: ShowHeaderViewModel = {
         let model = ShowHeaderViewModel()
-        model.show = Mock.show(.overflow)
+        model.show = Mock.show()
         return model
     }()
     
