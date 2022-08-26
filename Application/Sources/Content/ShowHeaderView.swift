@@ -71,19 +71,6 @@ struct ShowHeaderView: View {
         }
     }
     
-    /// Behavior: h-exp, v-hug
-    private struct LeadView: View {
-        let lead: String
-        
-        var body: some View {
-            Text(lead)
-                .srgFont(.body)
-                .lineLimit(6)
-                .multilineTextAlignment(.center)
-                .foregroundColor(.srgGray96)
-        }
-    }
-    
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
@@ -159,6 +146,19 @@ struct ShowHeaderView: View {
             model.toggleSubscription()
         }
 #endif
+        
+        /// Behavior: h-exp, v-hug
+        private struct LeadView: View {
+            let lead: String
+            
+            var body: some View {
+                Text(lead)
+                    .srgFont(.body)
+                    .lineLimit(6)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.srgGray96)
+            }
+        }
     }
 }
 
