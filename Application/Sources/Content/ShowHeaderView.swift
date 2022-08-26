@@ -74,6 +74,9 @@ struct ShowHeaderView: View {
     /// Behavior: h-hug, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ShowHeaderViewModel
+#if os(tvOS)
+        @State var isFocused = false
+#endif
         
         var body: some View {
             VStack(spacing: ShowHeaderView.verticalSpacing) {
@@ -90,13 +93,21 @@ struct ShowHeaderView: View {
                     .multilineTextAlignment(.center)
                     .foregroundColor(.srgGrayC7)
                 if let lead = model.lead {
-                    Text(lead)
-                        .srgFont(.body)
-                        .lineLimit(6)
+#if os(iOS)
+                    LeadView(lead)
                         // See above
                         .fixedSize(horizontal: false, vertical: true)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray96)
+#else
+                    Button {
+                        navigateToText(lead)
+                    } label: {
+                        LeadView(lead)
+                            // See above
+                            .fixedSize(horizontal: false, vertical: true)
+                            .onParentFocusChange { isFocused = $0 }
+                    }
+                    .buttonStyle(TextButtonStyle(focused: isFocused))
+#endif
                 }
                 HStack(spacing: 20) {
                     SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
@@ -135,6 +146,23 @@ struct ShowHeaderView: View {
             model.toggleSubscription()
         }
 #endif
+        
+        /// Behavior: h-exp, v-hug
+        private struct LeadView: View {
+            let content: String
+            
+            var body: some View {
+                Text(content)
+                    .srgFont(.body)
+                    .lineLimit(6)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.srgGray96)
+            }
+            
+            init(_ content: String) {
+                self.content = content
+            }
+        }
     }
 }
 
