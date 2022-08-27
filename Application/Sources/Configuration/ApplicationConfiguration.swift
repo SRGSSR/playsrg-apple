@@ -82,16 +82,12 @@ extension ApplicationConfiguration {
         return Self.typeformUrlWithParameters(feedbackUrl)
     }
     
-    var tvProgramsVendors: [SRGVendor] {
+    var tvGuideThirdPartyBouquets: [TVGuideThirdPartyBouquet] {
         switch vendor {
-        case .RSI:
-            return [.RSI, .SRF, .RTS]
-        case .RTR:
-            return [.RTR, .RTS, .RSI]
-        case .RTS:
-            return [.RTS, .SRF, .RSI]
+        case .RTR, .SRF:
+            return [.nonSRG, .RTS, .RSI]
         default:
-            return [.SRF, .RTS, .RSI]
+            return []
         }
     }
 }
@@ -133,4 +129,12 @@ enum ConfiguredSection: Hashable {
     case notifications
     case radioShowAccess(channelUid: String)
 #endif
+}
+
+enum TVGuideThirdPartyBouquet: Hashable {
+    case nonSRG
+    
+    case RSI
+    case RTS
+    case SRF
 }

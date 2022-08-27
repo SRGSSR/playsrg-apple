@@ -163,7 +163,7 @@ private extension ProgramGuideViewModel {
     // TODO: Once an IL request is available to get the channel list without any day, use this request and
     //       remove the day parameter.
     static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[SRGChannel], Error> {
-        return SRGDataProvider.current!.tvPrograms(day: day, minimal: true)
+        return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
             .map { $0.map(\.channel) }
             .eraseToAnyPublisher()
     }

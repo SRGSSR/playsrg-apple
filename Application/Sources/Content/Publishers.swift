@@ -204,19 +204,39 @@ extension SRGDataProvider {
             .eraseToAnyPublisher()
     }
     
-    func tvPrograms(day: SRGDay? = nil, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
-        let tvProgramsVendors = ApplicationConfiguration.shared.tvProgramsVendors
-        assert(tvProgramsVendors.count == 3, "Expected 3 vendors for tv programs")
-        
-        return Publishers.CombineLatest3(
-            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[0], day: day, minimal: minimal),
-            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[1], day: day, minimal: minimal),
-            SRGDataProvider.current!.tvPrograms(for: tvProgramsVendors[2], day: day, minimal: minimal)
-        )
-            .map { programCompositions1, programCompositions2, programCompositions3 in
-                return programCompositions1 + programCompositions2 + programCompositions3
-            }
-            .eraseToAnyPublisher()
+    func tvProgramsPublisher(day: SRGDay? = nil, provider: SRGProgramProvider, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
+        let applicationConfiguration = ApplicationConfiguration.shared
+        if provider == .SRG {
+            return SRGDataProvider.current!.tvPrograms(for: applicationConfiguration.vendor, day: day, minimal: minimal)
+        }
+        else {
+            let tvThirdPartyProgramsPublishers = applicationConfiguration.tvGuideThirdPartyBouquets
+                .map { tvThirdPartyProgramsPublisher(day: day, thirdPartyBouquet: $0, minimal: minimal) }
+            return Publishers.concatenateMany(tvThirdPartyProgramsPublishers)
+                .tryReduce([]) { $0 + $1 }
+                .eraseToAnyPublisher()
+        }
+    }
+    
+    private func tvThirdPartyProgramsPublisher(day: SRGDay? = nil, thirdPartyBouquet: TVGuideThirdPartyBouquet, minimal: Bool = false) -> AnyPublisher<[SRGProgramComposition], Error> {
+        switch thirdPartyBouquet {
+        case .RSI:
+            return  SRGDataProvider.current!.tvPrograms(for: .RSI, day: day, minimal: minimal)
+        case .RTS:
+            return  SRGDataProvider.current!.tvPrograms(for: .RTS, day: day, minimal: minimal)
+        case .SRF:
+            return  SRGDataProvider.current!.tvPrograms(for: .SRF, day: day, minimal: minimal)
+        case .nonSRG:
+            return  SRGDataProvider.current!.tvPrograms(for: ApplicationConfiguration.shared.vendor, provider: .thirdParty, day: day, minimal: minimal)
+        }
+    }
+}
+
+extension Publishers {
+    static func concatenateMany<Output, Failure>(_ publishers: [AnyPublisher<Output, Failure>]) -> AnyPublisher<Output, Failure> {
+        return publishers.reduce(Empty().eraseToAnyPublisher()) { acc, elem in
+            Publishers.Concatenate(prefix: acc, suffix: elem).eraseToAnyPublisher()
+        }
     }
 }
 

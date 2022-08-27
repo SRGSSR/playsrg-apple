@@ -245,7 +245,7 @@ private extension ProgramGuideDailyViewModel {
     static func state(from state: State?, for day: SRGDay) -> AnyPublisher<State, Error> {
         let applicationConfiguration = ApplicationConfiguration.shared
         let vendor = applicationConfiguration.vendor
-        if applicationConfiguration.areTvThirdPartyChannelsAvailable {
+        if !applicationConfiguration.tvGuideThirdPartyBouquets.isEmpty {
             return Publishers.CombineLatest(
                 Self.bouquet(for: vendor, provider: .SRG, day: day, from: state),
                 Self.bouquet(for: vendor, provider: .thirdParty, day: day, from: state)
@@ -275,8 +275,8 @@ private extension ProgramGuideDailyViewModel {
     
     static func bouquet(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay, from state: State?) -> AnyPublisher<Bouquet, Error> {
         let bouquet = bouquet(from: state, for: provider, day: day)
-        return SRGDataProvider.current!.tvPrograms(day: day, minimal: true)
-            .append(SRGDataProvider.current!.tvPrograms(day: day))
+        return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
+            .append(SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider))
             .map { .content(programCompositions: $0) }
             .tryCatch { error in
                 guard bouquet.hasPrograms else { throw error }
