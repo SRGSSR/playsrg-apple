@@ -155,7 +155,7 @@ private extension CarPlayList {
         guard let controller = controller else { return [] }
         
         var medias: Set<SRGMedia> = []
-        if let mainMedia = controller.play_mainMedia, controller.isLive {
+        if let mainMedia = controller.play_mainMedia {
             medias.insert(mainMedia)
         }
         if let media = controller.media {
