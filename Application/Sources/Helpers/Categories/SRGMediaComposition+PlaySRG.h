@@ -20,15 +20,6 @@ typedef void (^PlayPlaybackContextBlock)(SRGResource *resource, NSArray<SRGSegme
  */
 - (nullable SRGSubdivision *)play_subdivisionWithURN:(NSString *)URN;
 
-/**
- *  Retrieve a playback context for the receiver, trying to use the specified preferred settings. If no exact match can
- *  be found for the specified settings, a recommended approaching valid setup will be used instead.
- *
- *  @discussion See `playbackContextWithPreferredSettings:contextBlock:` documentation in `SRGMediaComposition+SRGAnalyticsDataProvider.h`.
- */
-- (BOOL)play_playbackContextWithPreferredSettings:(nullable SRGLetterboxPlaybackSettings *)preferredSettings
-                                     contextBlock:(NS_NOESCAPE PlayPlaybackContextBlock)contextBlock;
-
 @end
 
 NS_ASSUME_NONNULL_END

@@ -46,6 +46,17 @@ final class CarPlayNowPlayingController {
         }
     }
     
+    private func liveProgramsButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
+        return CPNowPlayingImageButton(image: UIImage(systemName: "list.triangle")!) { _ in
+            if let controller = SRGLetterboxService.shared.controller,
+               let media = controller.play_mainMedia, media.contentType == .livestream,
+               let channel = controller.channel {
+                let template = CPListTemplate.list(.livePrograms(channel: channel, media: media), interfaceController: interfaceController)
+                interfaceController.pushTemplate(template, animated: true) { _, _ in }
+            }
+        }
+    }
+    
     private func nowPlayingButtons(for controller: SRGLetterboxController?) -> [CPNowPlayingButton] {
         guard let controller = controller else { return [] }
         
@@ -55,6 +66,10 @@ final class CarPlayNowPlayingController {
         }
         if controller.canSkipToLive() {
             nowPlayingButtons.append(skipToLiveButton())
+        }
+        if let mainChapter = controller.mediaComposition?.mainChapter, mainChapter.contentType == .livestream,
+           let segments = mainChapter.segments, !segments.isEmpty {
+            nowPlayingButtons.insert(liveProgramsButton(for: interfaceController!), at: 0)
         }
         return nowPlayingButtons
     }
