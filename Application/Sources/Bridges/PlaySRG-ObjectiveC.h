@@ -31,6 +31,7 @@
 #import "PlayApplicationNavigation.h"
 #import "PlayDurationFormatter.h"
 #import "PlayErrors.h"
+#import "Playlist.h"
 #import "PushService.h"
 #import "Reachability.h"
 #import "RefreshControl.h"
