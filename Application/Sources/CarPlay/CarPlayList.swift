@@ -322,11 +322,12 @@ private extension CarPlayList {
             .switchToLatest()
             .map { liveProgramDataList in
                 let items = liveProgramDataList.map { liveProgramData -> CPListItem in
-                    let time = DateFormatter.play_time.string(from: liveProgramData.program.startDate).capitalizedFirstLetter
+                    let program = liveProgramData.program
+                    let time = "\(DateFormatter.play_time.string(from: program.startDate)) - \(DateFormatter.play_time.string(from: program.endDate))"
                     let item = CPListItem(text: liveProgramData.program.title, detailText: time, image: liveProgramData.image)
                     item.accessoryType = .none
                     item.handler = { _, completion in
-                        if let mediaUrn = liveProgramData.program.mediaURN, liveProgramData.program.startDate <= Date() {
+                        if let mediaUrn = program.mediaURN, program.startDate <= Date() {
                             SRGLetterboxService.shared.controller?.switch(toURN: mediaUrn, withCompletionHandler: { _ in
                                 completion()
                             })
