@@ -30,10 +30,10 @@ final class DownloadCellViewModel: ObservableObject {
         $download
             .map { download in
                 return Publishers.Merge(
-                    NotificationCenter.default.publisher(for: NSNotification.Name.DownloadStateDidChange, object: download)
+                    NotificationCenter.default.weakPublisher(for: NSNotification.Name.DownloadStateDidChange, object: download)
                         .compactMap { $0.userInfo?[DownloadStateKey] as? Int }
                         .map { Self.state(from: DownloadState(rawValue: $0), for: download) },
-                    NotificationCenter.default.publisher(for: NSNotification.Name.DownloadProgressDidChange, object: download)
+                    NotificationCenter.default.weakPublisher(for: NSNotification.Name.DownloadProgressDidChange, object: download)
                         .compactMap { $0.userInfo?[DownloadProgressKey] as? Progress }
                         .map { State.downloading(progress: $0) }
                 )
