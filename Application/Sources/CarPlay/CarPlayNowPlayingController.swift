@@ -80,8 +80,8 @@ final class CarPlayNowPlayingController {
                 if let controller = controller {
                     return Publishers.CombineLatest3(
                         controller.mediaPlayerController.publisher(for: \.timeRange),
-                        NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackStateDidChange, object: controller),
-                        NotificationCenter.default.publisher(for: .SRGLetterboxMetadataDidChange, object: controller)
+                        NotificationCenter.default.weakPublisher(for: .SRGLetterboxPlaybackStateDidChange, object: controller),
+                        NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                     )
                     .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
                     .map { _ in
