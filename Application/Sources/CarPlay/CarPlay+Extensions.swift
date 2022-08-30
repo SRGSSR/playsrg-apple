@@ -31,6 +31,12 @@ extension CPInterfaceController {
             SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
         }
         
+        if let controller = SRGLetterboxService.shared.controller {
+            let playlist = PlaylistForURN(media.urn)
+            controller.playlistDataSource = playlist
+            controller.playbackTransitionDelegate = playlist
+        }
+        
         let nowPlayingTemplate = CPNowPlayingTemplate.shared
         pushTemplate(nowPlayingTemplate, animated: true) { _, _ in
             completion()
