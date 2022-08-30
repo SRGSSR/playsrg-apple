@@ -60,7 +60,7 @@ extension AppDelegate: UIApplicationDelegate {
            let identityWebsiteURL = configuration.identityWebsiteURL {
             SRGIdentityService.current = SRGIdentityService(webserviceURL: identityWebserviceURL, websiteURL: identityWebsiteURL)
             
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -69,7 +69,7 @@ extension AppDelegate: UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
                 .sink { _ in
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
@@ -78,7 +78,7 @@ extension AppDelegate: UIApplicationDelegate {
                 }
                 .store(in: &cancellables)
             
-            NotificationCenter.default.publisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
+            NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogout, object: SRGIdentityService.current)
                 .sink { notification in
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 

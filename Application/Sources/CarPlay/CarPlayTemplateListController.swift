@@ -54,7 +54,7 @@ final class CarPlayTemplateListController {
     }
     
     private static func foreground() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: UIScene.willEnterForegroundNotification)
+        return NotificationCenter.default.weakPublisher(for: UIScene.willEnterForegroundNotification)
             .filter { $0.object is CPTemplateApplicationScene }
             .map { _ in }
             .eraseToAnyPublisher()

@@ -52,64 +52,64 @@ final class AccessibilitySettings: ObservableObject {
     @Published var isOnOffSwitchLabelsEnabled = UIAccessibility.isOnOffSwitchLabelsEnabled
     
     private init() {
-        NotificationCenter.default.publisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.voiceOverStatusDidChangeNotification)
             .map { _ in UIAccessibility.isVoiceOverRunning }
             .assign(to: &$isVoiceOverRunning)
-        NotificationCenter.default.publisher(for: UIAccessibility.monoAudioStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.monoAudioStatusDidChangeNotification)
             .map { _ in UIAccessibility.isMonoAudioEnabled }
             .assign(to: &$isMonoAudioEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.closedCaptioningStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.closedCaptioningStatusDidChangeNotification)
             .map { _ in UIAccessibility.isClosedCaptioningEnabled }
             .assign(to: &$isClosedCaptioningEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.invertColorsStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.invertColorsStatusDidChangeNotification)
             .map { _ in UIAccessibility.isInvertColorsEnabled }
             .assign(to: &$isInvertColorsEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.guidedAccessStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.guidedAccessStatusDidChangeNotification)
             .map { _ in UIAccessibility.isGuidedAccessEnabled }
             .assign(to: &$isGuidedAccessEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.boldTextStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.boldTextStatusDidChangeNotification)
             .map { _ in UIAccessibility.isBoldTextEnabled }
             .assign(to: &$isBoldTextEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.buttonShapesEnabledStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.buttonShapesEnabledStatusDidChangeNotification)
             .map { _ in UIAccessibility.buttonShapesEnabled }
             .assign(to: &$buttonShapesEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.grayscaleStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.grayscaleStatusDidChangeNotification)
             .map { _ in UIAccessibility.isGrayscaleEnabled }
             .assign(to: &$isGrayscaleEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.reduceTransparencyStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.reduceTransparencyStatusDidChangeNotification)
             .map { _ in UIAccessibility.isReduceTransparencyEnabled }
             .assign(to: &$isReduceTransparencyEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.reduceMotionStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.reduceMotionStatusDidChangeNotification)
             .map { _ in UIAccessibility.isReduceMotionEnabled }
             .assign(to: &$isReduceMotionEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.prefersCrossFadeTransitionsStatusDidChange)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.prefersCrossFadeTransitionsStatusDidChange)
             .map { _ in UIAccessibility.prefersCrossFadeTransitions }
             .assign(to: &$prefersCrossFadeTransitions)
-        NotificationCenter.default.publisher(for: UIAccessibility.videoAutoplayStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.videoAutoplayStatusDidChangeNotification)
             .map { _ in UIAccessibility.isVideoAutoplayEnabled }
             .assign(to: &$isVideoAutoplayEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.darkerSystemColorsStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.darkerSystemColorsStatusDidChangeNotification)
             .map { _ in UIAccessibility.isDarkerSystemColorsEnabled }
             .assign(to: &$isDarkerSystemColorsEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.switchControlStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.switchControlStatusDidChangeNotification)
             .map { _ in UIAccessibility.isSwitchControlRunning }
             .assign(to: &$isSwitchControlRunning)
-        NotificationCenter.default.publisher(for: UIAccessibility.speakSelectionStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.speakSelectionStatusDidChangeNotification)
             .map { _ in UIAccessibility.isSpeakSelectionEnabled }
             .assign(to: &$isSpeakSelectionEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.speakScreenStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.speakScreenStatusDidChangeNotification)
             .map { _ in UIAccessibility.isSpeakScreenEnabled }
             .assign(to: &$isSpeakScreenEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.shakeToUndoDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.shakeToUndoDidChangeNotification)
             .map { _ in UIAccessibility.isShakeToUndoEnabled }
             .assign(to: &$isShakeToUndoEnabled)
-        NotificationCenter.default.publisher(for: UIAccessibility.assistiveTouchStatusDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.assistiveTouchStatusDidChangeNotification)
             .map { _ in UIAccessibility.isAssistiveTouchRunning }
             .assign(to: &$isAssistiveTouchRunning)
-        NotificationCenter.default.publisher(for: UIAccessibility.differentiateWithoutColorDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.differentiateWithoutColorDidChangeNotification)
             .map { _ in UIAccessibility.shouldDifferentiateWithoutColor }
             .assign(to: &$shouldDifferentiateWithoutColor)
-        NotificationCenter.default.publisher(for: UIAccessibility.onOffSwitchLabelsDidChangeNotification)
+        NotificationCenter.default.weakPublisher(for: UIAccessibility.onOffSwitchLabelsDidChangeNotification)
             .map { _ in UIAccessibility.isOnOffSwitchLabelsEnabled }
             .assign(to: &$isOnOffSwitchLabelsEnabled)
     }
