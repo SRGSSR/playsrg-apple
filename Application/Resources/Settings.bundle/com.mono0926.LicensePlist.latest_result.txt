@@ -115,7 +115,7 @@ name: Comscore-Swift-Package-Manager, nameSpecified: comscore-swift-package-mana
 
 name: DZNEmptyDataSet, nameSpecified: dznemptydataset, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.4.1, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: firebase-ios-sdk, owner: firebase, version: 9.5.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: fscalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 
@@ -133,7 +133,7 @@ name: GoogleUtilities, nameSpecified: googleutilities, owner: google, version: 7
 
 name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.3-grpc, source: https://github.com/grpc/grpc-ios
 
-name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 2.1.0, source: https://github.com/google/gtm-session-fetcher
+name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 2.0.0, source: https://github.com/google/gtm-session-fetcher
 
 name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.9.2, source: https://github.com/urbanairship/ios-library
 
@@ -181,7 +181,7 @@ name: srguserdata-apple, nameSpecified: srguserdata-apple, owner: SRGSSR, versio
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.2, source: https://github.com/apple/swift-collections
 
-name: swift-protobuf, nameSpecified: swift-protobuf, owner: apple, version: 1.19.1, source: https://github.com/apple/swift-protobuf
+name: swift-protobuf, nameSpecified: swift-protobuf, owner: apple, version: 1.20.1, source: https://github.com/apple/swift-protobuf
 
 name: SwiftMessages, nameSpecified: swiftmessages, owner: SwiftKickMobile, version: 9.0.6, source: https://github.com/SwiftKickMobile/SwiftMessages
 
