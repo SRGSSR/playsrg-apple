@@ -28,25 +28,25 @@ final class CarPlayNowPlayingController {
             }
     }
     
-    private func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
+    private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
             interfaceController.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
         }
     }
     
-    private func startOverButton() -> CPNowPlayingButton {
+    private static func startOverButton() -> CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(named: "start_over", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
             SRGLetterboxService.shared.controller?.startOver()
         }
     }
     
-    private func skipToLiveButton() -> CPNowPlayingButton {
+    private static func skipToLiveButton() -> CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(named: "skip_to_live", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
             SRGLetterboxService.shared.controller?.skipToLive()
         }
     }
     
-    private func liveProgramsButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
+    private static func liveProgramsButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
         return CPNowPlayingImageButton(image: UIImage(systemName: "list.triangle")!) { _ in
             if let controller = SRGLetterboxService.shared.controller,
                let media = controller.play_mainMedia, media.contentType == .livestream,
@@ -57,10 +57,10 @@ final class CarPlayNowPlayingController {
         }
     }
     
-    private func nowPlayingButtons(for controller: SRGLetterboxController?) -> [CPNowPlayingButton] {
+    private static func nowPlayingButtons(for controller: SRGLetterboxController?, interfaceController: CPInterfaceController) -> [CPNowPlayingButton] {
         guard let controller = controller else { return [] }
         
-        var nowPlayingButtons = [playbackRateButton(for: interfaceController!)]
+        var nowPlayingButtons = [playbackRateButton(for: interfaceController)]
         if controller.canStartOver() {
             nowPlayingButtons.insert(startOverButton(), at: 0)
         }
@@ -69,14 +69,14 @@ final class CarPlayNowPlayingController {
         }
         if let mainChapter = controller.mediaComposition?.mainChapter, mainChapter.contentType == .livestream,
            let segments = mainChapter.segments, !segments.isEmpty {
-            nowPlayingButtons.insert(liveProgramsButton(for: interfaceController!), at: 0)
+            nowPlayingButtons.insert(liveProgramsButton(for: interfaceController), at: 0)
         }
         return nowPlayingButtons
     }
     
-    private func nowPlayingButtonsPublisher() -> AnyPublisher<[CPNowPlayingButton], Never> {
+    private static func nowPlayingButtonsPublisher(interfaceController: CPInterfaceController) -> AnyPublisher<[CPNowPlayingButton], Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { [weak self] controller -> AnyPublisher<[CPNowPlayingButton], Never> in
+            .map { controller -> AnyPublisher<[CPNowPlayingButton], Never> in
                 if let controller = controller {
                     return Publishers.CombineLatest3(
                         controller.mediaPlayerController.publisher(for: \.timeRange),
@@ -85,9 +85,9 @@ final class CarPlayNowPlayingController {
                     )
                     .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
                     .map { _ in
-                        return self?.nowPlayingButtons(for: controller) ?? []
+                        return Self.nowPlayingButtons(for: controller, interfaceController: interfaceController)
                     }
-                    .prepend(self?.nowPlayingButtons(for: SRGLetterboxService.shared.controller) ?? [])
+                    .prepend(Self.nowPlayingButtons(for: SRGLetterboxService.shared.controller, interfaceController: interfaceController))
                     .eraseToAnyPublisher()
                 }
                 else {
@@ -105,7 +105,7 @@ final class CarPlayNowPlayingController {
 
 extension CarPlayNowPlayingController: CarPlayTemplateController {
     func willAppear(animated: Bool) {
-        nowPlayingButtonsCancellable = nowPlayingButtonsPublisher()
+        nowPlayingButtonsCancellable = Self.nowPlayingButtonsPublisher(interfaceController: interfaceController!)
             .sink { nowPlayingButtons in
                 CPNowPlayingTemplate.shared.updateNowPlayingButtons(nowPlayingButtons)
             }
