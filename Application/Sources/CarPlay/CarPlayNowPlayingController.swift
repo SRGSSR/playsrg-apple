@@ -10,7 +10,7 @@ import SRGLetterbox
 
 // MARK: Controller
 
-final class CarPlayNowPlayingController {
+final class CarPlayNowPlayingController: NSObject {
     private weak var interfaceController: CPInterfaceController?
     private var popToRootCancellable: AnyCancellable
     private var nowPlayingButtonsCancellable: AnyCancellable?
@@ -26,6 +26,8 @@ final class CarPlayNowPlayingController {
             .sink { [weak interfaceController] _ in
                 interfaceController?.popToRootTemplate(animated: true) { _, _ in }
             }
+        
+        CPNowPlayingTemplate.shared.upNextTitle = NSLocalizedString("Lately", comment: "Button title on top right CarPlay player for livestream content")
     }
     
     private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
@@ -46,17 +48,6 @@ final class CarPlayNowPlayingController {
         }
     }
     
-    private static func liveProgramsButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
-        return CPNowPlayingImageButton(image: UIImage(systemName: "list.triangle")!) { _ in
-            if let controller = SRGLetterboxService.shared.controller,
-               let media = controller.play_mainMedia, media.contentType == .livestream,
-               let channel = controller.channel {
-                let template = CPListTemplate.list(.livePrograms(channel: channel, media: media), interfaceController: interfaceController)
-                interfaceController.pushTemplate(template, animated: true) { _, _ in }
-            }
-        }
-    }
-    
     private static func nowPlayingButtons(for controller: SRGLetterboxController?, interfaceController: CPInterfaceController) -> [CPNowPlayingButton] {
         guard let controller = controller else { return [] }
         
@@ -67,11 +58,18 @@ final class CarPlayNowPlayingController {
         if controller.canSkipToLive() {
             nowPlayingButtons.append(skipToLiveButton())
         }
-        if let mainChapter = controller.mediaComposition?.mainChapter, mainChapter.contentType == .livestream,
-           let segments = mainChapter.segments, !segments.isEmpty {
-            nowPlayingButtons.insert(liveProgramsButton(for: interfaceController), at: 0)
-        }
         return nowPlayingButtons
+    }
+    
+    private static var isUpNextButtonEnabled: Bool {
+        if let mainChapter = SRGLetterboxService.shared.controller?.mediaComposition?.mainChapter,
+           mainChapter.contentType == .livestream,
+           let segments = mainChapter.segments {
+            return !segments.isEmpty
+        }
+        else {
+            return false
+        }
     }
     
     private static func nowPlayingButtonsPublisher(interfaceController: CPInterfaceController) -> AnyPublisher<[CPNowPlayingButton], Never> {
@@ -105,9 +103,12 @@ final class CarPlayNowPlayingController {
 
 extension CarPlayNowPlayingController: CarPlayTemplateController {
     func willAppear(animated: Bool) {
+        CPNowPlayingTemplate.shared.add(self)
         nowPlayingButtonsCancellable = Self.nowPlayingButtonsPublisher(interfaceController: interfaceController!)
             .sink { nowPlayingButtons in
-                CPNowPlayingTemplate.shared.updateNowPlayingButtons(nowPlayingButtons)
+                let template = CPNowPlayingTemplate.shared
+                template.updateNowPlayingButtons(nowPlayingButtons)
+                template.isUpNextButtonEnabled = Self.isUpNextButtonEnabled
             }
     }
     
@@ -122,5 +123,18 @@ extension CarPlayNowPlayingController: CarPlayTemplateController {
     
     func didDisappear(animated: Bool) {
         nowPlayingButtonsCancellable = nil
+        CPNowPlayingTemplate.shared.remove(self)
+    }
+}
+
+extension CarPlayNowPlayingController: CPNowPlayingTemplateObserver {
+    func nowPlayingTemplateUpNextButtonTapped(_ nowPlayingTemplate: CPNowPlayingTemplate) {
+        if let interfaceController = interfaceController,
+           let controller = SRGLetterboxService.shared.controller,
+           let media = controller.play_mainMedia, media.contentType == .livestream,
+           let channel = controller.channel {
+            let template = CPListTemplate.list(.livePrograms(channel: channel, media: media), interfaceController: interfaceController)
+            interfaceController.pushTemplate(template, animated: true) { _, _ in }
+        }
     }
 }
