@@ -349,8 +349,10 @@ platform :ios do
     end
   end
 
-  desc 'Get AppStore release status for iOS and tvOS'
-  lane :appStoreReleaseStatus do
+  # App Store App status
+
+  desc 'Get AppStore App status for iOS and tvOS'
+  lane :appStoreAppStatus do
     UI.message '-----'
     business_units.map do |business_unit|
       spaceship_login_with_api_key(business_unit)
@@ -376,6 +378,28 @@ platform :ios do
       end
     end
     UI.message '-----'
+  end
+
+  # Public Release notes
+
+  desc 'Publish release notes for iOS'
+  lane :iOSPublishReleaseNotes do
+    platform = 'iOS'
+    output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
+    Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+
+    business_units.map do |business_unit|
+      table = get_appstore_release_notes_table(platform, business_unit).reverse
+      table = table.select { |row| row[0].start_with?('3') }
+
+      divs = release_notes_table_to_html_divs(platform, table)
+
+      html = File.read("releases/release_notes_template-#{business_unit.downcase}.html")
+      html = html.sub('<!-- versions -->', divs.strip)
+
+      output_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+      File.write("../#{output_directory}/#{output_file}", html)
+    end
   end
 
   # Individual iOS screenshots
@@ -1108,7 +1132,7 @@ def what_s_new_condition(lane)
 end
 
 def cleaned_lane_condition(lane)
-  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'tester']
+  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'status', 'tester']
   (lane.to_s != 'devLane') &&
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
@@ -1224,11 +1248,55 @@ end
 def what_s_new_for_beta(platform, tag_version)
   tag_version ||= tag_version(platform)
 
+  json = what_s_new_for_beta_json(platform)
+  what_s_new = json[tag_version]
+  what_s_new || ''
+end
+
+def build_number_for_version(platform, version)
+  json = what_s_new_for_beta_json(platform)
+  tag_version = json.keys.select { |key| key.start_with?(version) }.last
+  build_number_from_tag_version(tag_version)
+end
+
+def what_s_new_for_beta_json(platform)
   file = File.open("../WhatsNew-#{platform}-beta.json", 'r')
   json = JSON.parse(file.read)
   file.close
-  what_s_new = json[tag_version]
-  what_s_new || ''
+  json
+end
+
+def release_notes_table_to_html_divs(platform, table)
+  divs = ''
+  table.map do |row|
+    divs += release_notes_version_to_html(platform, row[0], row[1])
+  end
+  divs.strip
+end
+
+def release_notes_version_to_html(platform, version, text)
+  div = "<div id=\"#{build_number_for_version(platform, version)}\">\n<h2>#{version}</h2>\n"
+  div += release_notes_to_html(text)
+  div += "\n</div>\n"
+  div
+end
+
+def release_notes_to_html(text)
+  output = ''
+  in_list = false
+  text.each_line.reject { |line| line.strip == '' }.map do |line|
+    if line.start_with?('-')
+      output += "<ul>\n" unless in_list
+      in_list = true
+      output += "<li>#{line[1..-1].strip}</li>\n"
+    else
+      output += "</ul>\n" if in_list
+      in_list = false
+      output += "<p>#{line.strip}</p>\n"
+    end
+  end
+  output += '</ul>' if in_list
+  output.strip
 end
 
 # Characters "-" or "+" in version are not allowed on App Store Connect.
@@ -1642,11 +1710,7 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  file_name = "What_s new #{platform}.csv"
-  file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
-  file = File.open(file_path, 'r')
-  table = CSV.table(file)
-  file.close
+  table = get_appstore_release_notes_table(platform, business_unit)
 
   index = table.by_col[0].find_index(marketing_version)
   release_notes = table.by_col[1][index] if index
@@ -1654,6 +1718,12 @@ def get_appstore_release_notes(platform, business_unit, marketing_version)
   UI.user_error! "On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version." unless release_notes
 
   release_notes
+end
+
+def get_appstore_release_notes_table(platform, business_unit)
+  file_name = "What_s new #{platform}.csv"
+  file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
+  CSV.read(file_path)
 end
 
 def crowdin_language(business_unit)
@@ -1668,7 +1738,7 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'prepareappstorerelease'
+  lane.to_s.downcase.include? 'release'
 end
 
 def skip_pull_translations

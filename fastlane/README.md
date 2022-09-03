@@ -207,13 +207,21 @@ Sends latest tvOS App Store build dSYMs to App Center. Optional `build_number`, 
 
 Prepare AppStore tvOS releases on App Store Connect with the current version and build numbers. No build uploads. Optional `tag_version` (`X.Y.Z-build_number`) or `submit_for_review` parameters.
 
-### ios appStoreReleaseStatus
+### ios appStoreAppStatus
 
 ```sh
-[bundle exec] fastlane ios appStoreReleaseStatus
+[bundle exec] fastlane ios appStoreAppStatus
 ```
 
-Get AppStore release status for iOS and tvOS
+Get AppStore App status for iOS and tvOS
+
+### ios iOSPublishReleaseNotes
+
+```sh
+[bundle exec] fastlane ios iOSPublishReleaseNotes
+```
+
+Publish release notes for iOS
 
 ### ios iOSrsiScreenshots
 
