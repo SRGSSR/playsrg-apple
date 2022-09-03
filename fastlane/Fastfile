@@ -356,18 +356,16 @@ platform :ios do
     UI.message '-----'
     business_units.map do |business_unit|
       spaceship_login_with_api_key(business_unit)
-      app_identifier = appstore_build_identifiers[business_unit_index(business_unit)]
-      app = spaceship_app(app_identifier)
+      app = spaceship_bu_appstore_build_app(business_unit)
       next unless app
 
       UI.message '-----'
       ['iOS', 'tvOS'].map do |platform|
-        spaceship_platform = spaceship_platform(platform)
-        live_version = app.get_live_app_store_version(platform: spaceship_platform)
+        live_version = spaceship_app_live_version(platform, app)
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
-        latest_version = app.get_latest_app_store_version(platform: spaceship_platform)
+        latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
           UI.message "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
         else
@@ -389,16 +387,26 @@ platform :ios do
     Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
 
     business_units.map do |business_unit|
+      UI.message "Preparing Play #{business_unit} #{platform} release notes. 📝"
+
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+      live_version = spaceship_app_live_version(platform, app)
+      released_version = live_version.version_string
+      released_build = live_version.build.version
+
       table = get_appstore_release_notes_table(platform, business_unit).reverse
       table = table.select { |row| row[0].start_with?('3') }
 
-      divs = release_notes_table_to_html_divs(platform, table)
+      divs = release_notes_table_to_html_divs(platform, table, released_version, released_build)
 
       html = File.read("releases/release_notes_template-#{business_unit.downcase}.html")
       html = html.sub('<!-- versions -->', divs.strip)
 
       output_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
       File.write("../#{output_directory}/#{output_file}", html)
+
+      UI.success "Play #{business_unit} #{platform} #{released_version} release notes built. ✅"
     end
   end
 
@@ -1256,7 +1264,7 @@ end
 def build_number_for_version(platform, version)
   json = what_s_new_for_beta_json(platform)
   tag_version = json.keys.select { |key| key.start_with?(version) }.last
-  build_number_from_tag_version(tag_version)
+  tag_version ? build_number_from_tag_version(tag_version) : '999999'
 end
 
 def what_s_new_for_beta_json(platform)
@@ -1266,19 +1274,27 @@ def what_s_new_for_beta_json(platform)
   json
 end
 
-def release_notes_table_to_html_divs(platform, table)
+def release_notes_table_to_html_divs(platform, table, released_version, released_build)
   divs = ''
   table.map do |row|
-    divs += release_notes_version_to_html(platform, row[0], row[1])
+    is_preprod = version_is_preprod(platform, row[0], released_version, released_build)
+    divs += release_notes_version_to_html(platform, row[0], row[1], is_preprod)
   end
   divs.strip
 end
 
-def release_notes_version_to_html(platform, version, text)
-  div = "<div id=\"#{build_number_for_version(platform, version)}\">\n<h2>#{version}</h2>\n"
+def release_notes_version_to_html(platform, version, text, is_preprod)
+  build_number = build_number_for_version(platform, version)
+  attribute = is_preprod ? ' preprod' : ''
+  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2>#{version}</h2>\n"
   div += release_notes_to_html(text)
   div += "\n</div>\n"
   div
+end
+
+def version_is_preprod(platform, version, released_version, released_build)
+  build_number = build_number_for_version(platform, version)
+  version != released_version && build_number > released_build
 end
 
 def release_notes_to_html(text)
@@ -1851,6 +1867,11 @@ def spaceship_email_required(email)
   email.strip
 end
 
+def spaceship_bu_appstore_build_app(business_unit)
+  app_identifier = appstore_build_identifiers[business_unit_index(business_unit)]
+  spaceship_app(app_identifier)
+end
+
 def spaceship_app(app_identifier)
   app = Spaceship::ConnectAPI::App.find(app_identifier)
   UI.important "#{app_identifier} app does not exist. ⚠️" unless app
@@ -1881,6 +1902,14 @@ end
 def spaceship_add_tester(group, email, first_name, last_name)
   tester = spaceship_new_tester(email, first_name, last_name)
   group.post_bulk_beta_tester_assignments(beta_testers: [tester])
+end
+
+def spaceship_app_live_version(platform, app)
+  app.get_live_app_store_version(platform: spaceship_platform(platform))
+end
+
+def spaceship_app_latest_known_version(platform, app)
+  app.get_latest_app_store_version(platform: spaceship_platform(platform))
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
