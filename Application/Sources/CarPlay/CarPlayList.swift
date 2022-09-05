@@ -30,7 +30,7 @@ enum CarPlayList {
         case let .mostPopularMedias(radioChannel: radioChannel):
             return radioChannel.name
         case .livePrograms:
-            return "\(NSLocalizedString("Lately", comment: "Template title to present the live programs on CarPlay"))"
+            return "\(NSLocalizedString("Previous shows", comment: "Template title to present the livestream previous programs on CarPlay"))"
         }
     }
     

@@ -27,7 +27,7 @@ final class CarPlayNowPlayingController: NSObject {
                 interfaceController?.popToRootTemplate(animated: true) { _, _ in }
             }
         
-        CPNowPlayingTemplate.shared.upNextTitle = NSLocalizedString("Lately", comment: "Button title on top right CarPlay player for livestream content")
+        CPNowPlayingTemplate.shared.upNextTitle = NSLocalizedString("Previous shows", comment: "Button title on CarPlay player for livestream previous programs")
     }
     
     private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {

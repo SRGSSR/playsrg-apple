@@ -301,8 +301,6 @@
 /* Search setting option */
 "Last week" = "Ultima emna";
 
-"Lately" = "L’ultim temp";
-
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Label to present the later list
    Title Label used to present the audio later list

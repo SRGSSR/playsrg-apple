@@ -301,8 +301,6 @@
 /* Search setting option */
 "Last week" = "La semaine dernière";
 
-"Lately" = "Dernièrement";
-
 /* Label for the button for deciding to opt-in for background video playback at a later time
    Label to present the later list
    Title Label used to present the audio later list
@@ -489,6 +487,8 @@
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Précédent";
+
+"Previous shows" = "Émissions précédentes";
 
 /* Server setting name */
 "Production" = "Production";
