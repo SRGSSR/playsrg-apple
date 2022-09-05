@@ -5,12 +5,8 @@
 //
 
 @import SRGDataProviderModel;
-@import SRGLetterbox;
 
 NS_ASSUME_NONNULL_BEGIN
-
-// Completion block signatures.
-typedef void (^PlayPlaybackContextBlock)(SRGResource *resource, NSArray<SRGSegment *> * _Nullable segments);
 
 @interface SRGMediaComposition (PlaySRG)
 
