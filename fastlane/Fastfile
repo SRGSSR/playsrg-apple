@@ -24,8 +24,7 @@ platform :ios do
 
     notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include?('nightlies')
 
-    # For betas and AppStore builds, before all, check if we have a beta release description
-    if ['appstorebuild', 'beta'].one? { |i| lane.to_s.downcase.include? i }
+    if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
         UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
@@ -1100,6 +1099,12 @@ end
 
 def app_config
   CredentialsManager::AppfileConfig
+end
+
+def what_s_new_condition(lane)
+  included_lanes = ['appstorebuild', 'beta']
+  (!lane.to_s.downcase.include? 'tester') &&
+    included_lanes.one? { |i| lane.to_s.downcase.include? i }
 end
 
 def cleaned_lane_condition(lane)
