@@ -488,6 +488,10 @@
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedente";
 
+/* Button title on CarPlay player for livestream previous programs
+   Livestream previous programs screen title */
+"Previous shows" = "Previous shows";
+
 /* Server setting name */
 "Production" = "Produzione";
 
