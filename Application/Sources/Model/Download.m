@@ -512,6 +512,11 @@ static NSArray<Download *> *s_sortedDownloads;
     NSString *type = types.firstObject;
     NSString *extension = types.lastObject ?: @"mov";
     
+    // Fix the default arbitrary binary data response
+    if ([type.lowercaseString isEqualToString:@"application"] && [extension.lowercaseString isEqualToString:@"octet-stream"] && self.downloadMediaURL.pathExtension != nil) {
+        extension = self.downloadMediaURL.pathExtension;
+    }
+    
     // For audio, mpeg type extension don't work with AVPlayer
     if ([type.lowercaseString isEqualToString:@"audio"] && [extension.lowercaseString isEqualToString:@"mpeg"]) {
         extension = @"mp3";
