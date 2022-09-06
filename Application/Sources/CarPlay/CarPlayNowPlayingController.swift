@@ -129,10 +129,10 @@ extension CarPlayNowPlayingController: CarPlayTemplateController {
 
 extension CarPlayNowPlayingController: CPNowPlayingTemplateObserver {
     func nowPlayingTemplateUpNextButtonTapped(_ nowPlayingTemplate: CPNowPlayingTemplate) {
-        if let interfaceController = interfaceController,
-           let controller = SRGLetterboxService.shared.controller,
-           let media = controller.play_mainMedia, media.contentType == .livestream,
-           let channel = controller.channel {
+        if Self.isUpNextButtonEnabled,
+           let channel = SRGLetterboxService.shared.controller?.channel,
+           let media = SRGLetterboxService.shared.controller?.play_mainMedia,
+           let interfaceController = interfaceController {
             let template = CPListTemplate.list(.livePrograms(channel: channel, media: media), interfaceController: interfaceController)
             interfaceController.pushTemplate(template, animated: true) { _, _ in }
         }
