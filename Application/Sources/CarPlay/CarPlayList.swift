@@ -356,6 +356,7 @@ private extension Publisher where Output == [SRGMedia] {
         .map { mediaDataList in
             let items = mediaDataList.map { mediaData -> CPListItem in
                 let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: style),
+                                      // Keep same media item height with a detail text in any cases.
                                       detailText: MediaDescription.subtitle(for: mediaData.media, style: style) ?? " ",
                                       image: mediaData.image)
                 item.isPlaying = mediaData.playing
