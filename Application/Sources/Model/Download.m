@@ -253,7 +253,17 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (void)removeUnusedDownloadedFiles
 {
-    [self removeUnusedDownloadedFilesInFolderPath:[self downloadsDirectoryURLString]];
+    NSArray *downloadedMediaFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localMediaFileURL)];
+    NSArray *downloadedImageFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localImageFileURL)];
+    NSArray *allDownloadedFilesURLs = [[@[] arrayByAddingObjectsFromArray:downloadedMediaFilesURLs] arrayByAddingObjectsFromArray:downloadedImageFilesURLs];
+    NSString *folderPath = [self downloadsDirectoryURLString];
+    NSError *error;
+    for (NSString *fileName in [NSFileManager.defaultManager contentsOfDirectoryAtPath:folderPath error:&error]) {
+        NSURL *fileURL = [NSURL fileURLWithPath:[folderPath stringByAppendingPathComponent:fileName]];
+        if (! [allDownloadedFilesURLs containsObject:fileURL]) {
+            [NSFileManager.defaultManager removeItemAtURL:fileURL error:&error];
+        }
+    }
 }
 
 #pragma mark Public class methods
@@ -363,20 +373,6 @@ static NSArray<Download *> *s_sortedDownloads;
     }];
     
     [UserInteractionEvent removeFromDownloads:downloads];
-}
-
-+ (void)removeUnusedDownloadedFilesInFolderPath:(NSString *)folderPath
-{
-    NSArray *downloadedMediaFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localMediaFileURL)];
-    NSArray *downloadedImageFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localImageFileURL)];
-    NSArray *allDownloadedFilesURLs = [[@[] arrayByAddingObjectsFromArray:downloadedMediaFilesURLs] arrayByAddingObjectsFromArray:downloadedImageFilesURLs];
-    NSError *error;
-    for (NSString *fileName in [NSFileManager.defaultManager contentsOfDirectoryAtPath:folderPath error:&error]) {
-        NSURL *fileURL = [NSURL fileURLWithPath:[folderPath stringByAppendingPathComponent:fileName]];
-        if (! [allDownloadedFilesURLs containsObject:fileURL]) {
-            [NSFileManager.defaultManager removeItemAtURL:fileURL error:&error];
-        }
-    }
 }
 
 + (nullable NSProgress *)currentlyKnownProgressForDownload:(Download *)download
