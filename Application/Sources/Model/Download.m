@@ -266,6 +266,17 @@ static NSArray<Download *> *s_sortedDownloads;
     }
 }
 
++ (void)removeUnplayableDownloads
+{
+    NSMutableArray<Download *> *unplayableDownloadeds = NSMutableArray.array;
+    for (Download *download in Download.downloads) {
+        if (download.state == DownloadStateDownloaded && [download.localMediaFileURL.pathExtension isEqualToString:@"octet-stream"]) {
+            [unplayableDownloadeds addObject:download];
+        }
+    }
+    [Download removeDownloads:unplayableDownloadeds.copy];
+}
+
 #pragma mark Public class methods
 
 + (NSArray<Download *> *)downloads
