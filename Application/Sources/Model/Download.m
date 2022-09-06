@@ -266,15 +266,33 @@ static NSArray<Download *> *s_sortedDownloads;
     }
 }
 
-+ (void)removeUnplayableDownloads
++ (void)updateUnplayableDownloads
 {
     NSMutableArray<Download *> *unplayableDownloadeds = NSMutableArray.array;
     for (Download *download in Download.downloads) {
-        if (download.state == DownloadStateDownloaded && [download.localMediaFileURL.pathExtension isEqualToString:@"octet-stream"]) {
-            [unplayableDownloadeds addObject:download];
+        if (download.state == DownloadStateDownloaded && [download.localMediaFileName.pathExtension isEqualToString:@"octet-stream"]) {
+            // Try to move media file with the download url extension
+            if (download.downloadMediaURL.pathExtension != nil) {
+                NSURL *atURL = download.localMediaFileURL;
+                
+                NSString *localMediaFileName = [download.localMediaFileName stringByReplacingOccurrencesOfString:download.localMediaFileName.pathExtension
+                                                                                                      withString:download.downloadMediaURL.pathExtension];
+                NSString *mediaFilePath = [[Download downloadsDirectoryURLString] stringByAppendingPathComponent:localMediaFileName];
+                NSURL *toURL = [NSURL fileURLWithPath:mediaFilePath];
+                [NSFileManager.defaultManager moveItemAtURL:atURL toURL:toURL error:nil];
+                
+                download.localMediaFileName = localMediaFileName;
+                if (! download.localMediaFileURL) {
+                    [unplayableDownloadeds addObject:download];
+                }
+            }
+            else {
+                [unplayableDownloadeds addObject:download];
+            }
         }
     }
     [Download removeDownloads:unplayableDownloadeds.copy];
+    [self saveDownloadsDictionary];
 }
 
 #pragma mark Public class methods
@@ -525,7 +543,7 @@ static NSArray<Download *> *s_sortedDownloads;
             extension = self.downloadMediaURL.pathExtension;
         }
         else {
-            PlayLogError(@"download", @"Could not find a downloaded file extension for media %@.\nMIMEType: %@", self.URN, MIMEType);
+            PlayLogError(@"download", @"Could not find a file extension for media %@.\nMIMEType: %@", self.URN, MIMEType);
             return NO;
         }
     }
