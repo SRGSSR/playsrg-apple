@@ -43,7 +43,7 @@ enum CarPlayList {
         case .mostPopularMedias:
             return AnalyticsPageTitle.mostPopular.rawValue
         case .livePrograms:
-            return AnalyticsPageTitle.playerPrograms.rawValue
+            return AnalyticsPageTitle.livePrograms.rawValue
         }
     }
     
