@@ -130,6 +130,11 @@ static void *s_kvoContext = &s_kvoContext;
     // Clean downloaded folder
     [Download removeUnusedDownloadedFiles];
     
+    PlayApplicationRunOnce(^(void (^completionHandler)(BOOL success)) {
+        [Download updateUnplayableDownloads];
+        completionHandler(YES);
+    }, @"updateUnplayableDownloads");
+    
     [self checkForForcedUpdates];
     
     __block BOOL firstLaunchDone = YES;

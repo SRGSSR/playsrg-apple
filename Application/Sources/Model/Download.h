@@ -173,6 +173,11 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 + (void)removeUnusedDownloadedFiles;
 
 /**
+ *  Update the unplayable downloads and their files (or remove if no solutions)
+ */
++ (void)updateUnplayableDownloads;
+
+/**
  *  The currently known download progress for a download
  */
 + (nullable NSProgress *)currentlyKnownProgressForDownload:(Download *)download;
