@@ -276,6 +276,7 @@ private extension CarPlayList {
                     item.handler = { _, completion in
                         interfaceController.play(media: liveMediaData.media, completion: completion)
                     }
+                    item.playingIndicatorLocation = .trailing
                     item.isPlaying = liveMediaData.playing
                     return item
                 }
@@ -336,6 +337,7 @@ private extension CarPlayList {
                             completion()
                         }
                     }
+                    item.playingIndicatorLocation = .trailing
                     item.isPlaying = liveProgramData.playing
                     return item
                 }
@@ -359,12 +361,13 @@ private extension Publisher where Output == [SRGMedia] {
                                       // Keep same media item height with a detail text in any cases.
                                       detailText: MediaDescription.subtitle(for: mediaData.media, style: style) ?? " ",
                                       image: mediaData.image)
-                item.isPlaying = mediaData.playing
-                item.playbackProgress = mediaData.progress ?? 0
                 item.accessoryType = .none
                 item.handler = { _, completion in
                     interfaceController.play(media: mediaData.media, completion: completion)
                 }
+                item.playingIndicatorLocation = .trailing
+                item.isPlaying = mediaData.playing
+                item.playbackProgress = mediaData.progress ?? 0
                 return item
             }
             return CPListSection(items: items, header: header, sectionIndexTitle: nil)
