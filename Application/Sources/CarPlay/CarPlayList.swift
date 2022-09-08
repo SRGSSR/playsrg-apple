@@ -70,9 +70,7 @@ enum CarPlayList {
                     .map { SRGDataProvider.current!.latestMediasForShowsPublisher(withUrns: $0.map(\.urn), pageSize: Self.pageSize) }
                     .switchToLatest()
             }
-            .mapToSection(with: interfaceController)
-            .map { [$0] }
-            .eraseToAnyPublisher()
+            .mapToSections(with: interfaceController)
         case .livestreams:
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.settingUpdates(at: \.PlaySRGSettingSelectedLivestreamURNForChannels)) {
                 return Self.livestreamsSections(for: .all, interfaceController: interfaceController)
@@ -81,9 +79,7 @@ enum CarPlayList {
             return Self.mostPopular(interfaceController: interfaceController)
         case let .mostPopularMedias(radioChannel: radioChannel):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
-                .mapToSection(with: interfaceController)
-                .map { [$0] }
-                .eraseToAnyPublisher()
+                .mapToSections(with: interfaceController)
         case let .livePrograms(channel, media):
             return Publishers.PublishAndRepeat(onOutputFrom: Timer.publish(every: 30, on: .main, in: .common).autoconnect()) {
                 return Self.liveProgramsSections(for: channel, media: media, interfaceController: interfaceController)
@@ -289,9 +285,7 @@ private extension CarPlayList {
         let radioChannels = ApplicationConfiguration.shared.radioHomepageChannels
         if radioChannels.count == 1, let radioChannel = radioChannels.first {
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid)
-                .mapToSection(with: interfaceController)
-                .map { [$0] }
-                .eraseToAnyPublisher()
+                .mapToSections(with: interfaceController)
         }
         else {
             return radioChannels.publisher
@@ -348,7 +342,7 @@ private extension CarPlayList {
 }
 
 private extension Publisher where Output == [SRGMedia] {
-    func mapToSection(with interfaceController: CPInterfaceController, header: String? = nil, style: MediaDescription.Style = .show) -> AnyPublisher<CPListSection, Failure> {
+    func mapToSections(with interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Failure> {
         return map { medias in
             return Publishers.AccumulateLatestMany(medias.map { media in
                 return CarPlayList.mediaDataPublisher(for: media)
@@ -357,9 +351,9 @@ private extension Publisher where Output == [SRGMedia] {
         .switchToLatest()
         .map { mediaDataList in
             let items = mediaDataList.map { mediaData -> CPListItem in
-                let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: style),
+                let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
                                       // Keep same media item height with a detail text in any cases.
-                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: style) ?? " ",
+                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: .show) ?? " ",
                                       image: mediaData.image)
                 item.accessoryType = .none
                 item.handler = { _, completion in
@@ -370,7 +364,7 @@ private extension Publisher where Output == [SRGMedia] {
                 item.playbackProgress = mediaData.progress ?? 0
                 return item
             }
-            return CPListSection(items: items, header: header, sectionIndexTitle: nil)
+            return [CPListSection(items: items)]
         }
         .eraseToAnyPublisher()
     }
