@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/IdeasOnCanvas/Aiolos.git",
       "state" : {
-        "revision" : "fb9176dafaac5319a25bb2c48fbef1efcc1dc6da",
-        "version" : "1.9.1"
+        "revision" : "d6a6bca88aafd9e413653ae75fa0ea8314fc7606",
+        "version" : "1.9.2"
       }
     },
     {
