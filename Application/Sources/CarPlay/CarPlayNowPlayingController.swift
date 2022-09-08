@@ -85,7 +85,7 @@ final class CarPlayNowPlayingController: NSObject {
                     .map { _ in
                         return Self.nowPlayingButtons(for: controller, interfaceController: interfaceController)
                     }
-                    .prepend(Self.nowPlayingButtons(for: SRGLetterboxService.shared.controller, interfaceController: interfaceController))
+                    .prepend(Self.nowPlayingButtons(for: controller, interfaceController: interfaceController))
                     .eraseToAnyPublisher()
                 }
                 else {
