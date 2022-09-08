@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Play RSI (iPhone & iPad)</title>
+<title>Play SRF (iPhone & iPad)</title>
 </head>
 <meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 <style>
 @font-face {
   font-family: "SRG SSR Type Regular";
-  src: url("https://www.rsi.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+  src: url("https://www.srf.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
 }
 body {
   font-family: "SRG SSR Type Regular";
@@ -101,9 +101,9 @@ function highlightElement () {
 }
 
 function addHighlightHeader (highlightDiv, withUpdateButton) {
-  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Versione installata</h2></div>';
+  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Installierte Version</h2></div>';
   if (withUpdateButton) {
-      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-rsi/id920753497?mt=8\'">Aggiorna</button></p>';
+      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-srf/id638194352?mt=8\'">Updaten</button></p>';
     highlightHeader = button + '\n' + highlightHeader;
   }
   highlightDiv.insertAdjacentHTML('beforeBegin', highlightHeader);
@@ -117,8 +117,11 @@ function addHighlightFooter (highlightDiv) {
 <noscript>Sorry, your browser does not support JavaScript!</noscript>
 <body onload="highlightElement()">
 <div style="text-align: center;">
-<h2>Play RSI</h2>
-<p style="line-height: 0px;">(iPhone & iPad)</p>
+<h2 style="line-height: 0;">Play SRF</h2>
+<p style="line-height: 2;">iPhone & iPad</p>
+</div>
+<div>
+<p>Wir freuen uns über Ihr Feedback. Bei Fragen zur Play SRF App wenden Sie sich bitte an den SRF Kundendienst via srf.ch/kontakt oder per Telefon unter 0848 80 80 80.</p>
 </div>
 <!-- versions -->
 </body>

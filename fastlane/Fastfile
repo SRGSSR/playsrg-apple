@@ -385,6 +385,11 @@ platform :ios do
     platform = 'iOS'
     output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
     Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+    releases_directory = "#{output_directory}/releases"
+    Dir.chdir('..') { FileUtils.mkdir_p(releases_directory) }
+
+    index_html_file = 'fastlane/gh-pages/index.html'
+    Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
 
     business_units.map do |business_unit|
       UI.message "Preparing Play #{business_unit} #{platform} release notes. 📝"
@@ -400,11 +405,12 @@ platform :ios do
 
       divs = release_notes_table_to_html_divs(platform, table, released_version, released_build)
 
-      html = File.read("releases/release_notes_template-#{business_unit.downcase}.html")
+      input_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+      html = File.read("gh-pages/releases/#{input_file}")
       html = html.sub('<!-- versions -->', divs.strip)
 
       output_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
-      File.write("../#{output_directory}/#{output_file}", html)
+      Dir.chdir('..') { File.write("#{releases_directory}/#{output_file}", html) }
 
       UI.success "Play #{business_unit} #{platform} #{released_version} release notes built. ✅"
     end
