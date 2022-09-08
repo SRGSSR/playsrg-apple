@@ -10,7 +10,7 @@
 
 @implementation SRGMediaComposition (PlaySRG)
 
-- (SRGSubdivision *)subdivisionWithURN:(NSString *)URN
+- (SRGSubdivision *)play_subdivisionWithURN:(NSString *)URN
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%K == %@", @keypath(SRGSubdivision.new, URN), URN];
     SRGSubdivision *subdivision = [self.chapters filteredArrayUsingPredicate:predicate].firstObject;

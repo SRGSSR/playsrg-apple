@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  Check chapters and segments from the receiver and return the first subdivision matching the specified URN. If no
  *  match is found, `nil` is returned.
  */
-- (nullable SRGSubdivision *)subdivisionWithURN:(NSString *)URN;
+- (nullable SRGSubdivision *)play_subdivisionWithURN:(NSString *)URN;
 
 @end
 

@@ -5063,11 +5063,11 @@
 			children = (
 				6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */,
 				6FB90D17270D91010033D860 /* CarPlayList.swift */,
-				6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */,
 				6F80F66A27187AFC00867C3B /* CarPlayNowPlayingController.swift */,
 				6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */,
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
 				6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */,
+				6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */,
 			);
 			path = CarPlay;
 			sourceTree = "<group>";

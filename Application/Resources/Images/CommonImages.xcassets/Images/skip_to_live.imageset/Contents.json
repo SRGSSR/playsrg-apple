@@ -1,15 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "start_over.pdf",
+      "filename" : "skip_to_live.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "start_over-1.pdf",
+      "filename" : "skip_to_live-1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "start_over-2.pdf",
+      "filename" : "skip_to_live-2.pdf",
       "idiom" : "car"
     }
   ],
