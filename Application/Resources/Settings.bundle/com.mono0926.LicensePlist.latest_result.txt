@@ -135,7 +135,7 @@ name: grpc-ios, nameSpecified: grpc-ios, owner: grpc, version: 1.44.3-grpc, sour
 
 name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 2.0.0, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.9.2, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: ios-library, owner: urbanairship, version: 16.9.3, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
@@ -179,7 +179,7 @@ name: srgnetwork-apple, nameSpecified: srgnetwork-apple, owner: SRGSSR, version:
 
 name: srguserdata-apple, nameSpecified: srguserdata-apple, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srguserdata-apple
 
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.2, source: https://github.com/apple/swift-collections
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.3, source: https://github.com/apple/swift-collections
 
 name: swift-protobuf, nameSpecified: swift-protobuf, owner: apple, version: 1.20.1, source: https://github.com/apple/swift-protobuf
 

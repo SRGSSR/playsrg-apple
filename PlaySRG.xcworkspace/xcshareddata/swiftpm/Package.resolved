@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/urbanairship/ios-library.git",
       "state" : {
-        "revision" : "be218058500206df98e082126b15728ce3d6b7d9",
-        "version" : "16.9.2"
+        "revision" : "12aa2eb9fbdcd3b623346d6771cac02068d6596e",
+        "version" : "16.9.3"
       }
     },
     {
@@ -321,7 +321,7 @@
       "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "1c6545788da0158e26104025463858d629999aee"
+        "revision" : "188c6eabe4a01145f4aadebea75ba19d2c79cb40"
       }
     },
     {
@@ -365,8 +365,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",
       "state" : {
-        "revision" : "48254824bb4248676bf7ce56014ff57b142b77eb",
-        "version" : "1.0.2"
+        "revision" : "f504716c27d2e5d4144fa4794b12129301d17729",
+        "version" : "1.0.3"
       }
     },
     {
