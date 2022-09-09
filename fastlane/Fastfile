@@ -416,6 +416,21 @@ platform :ios do
       upcoming_version = last_table_version == released_version ? 'NaN' : last_table_version 
       UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{released_version}, upcoming: #{upcoming_version}). ✅"
     end
+
+    branch_name = git_branch_name
+
+    Dir.chdir('..') {
+      sh 'git checkout --orphan gh-pages'
+      sh 'git reset --hard'
+      sh "mv \"#{releases_directory}\" ./"
+      sh 'git add releases/*'
+      sh "mv \"#{output_directory}/index.html\" ./"
+      sh 'git add index.html'
+      sh 'git commit -m "Publish release notes"'
+      sh 'git push origin gh-pages --force'
+      sh "git checkout #{branch_name}"
+      sh 'git branch -D gh-pages'
+    }
   end
 
   # Individual iOS screenshots
@@ -1148,7 +1163,7 @@ def what_s_new_condition(lane)
 end
 
 def cleaned_lane_condition(lane)
-  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'status', 'tester']
+  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'appstorerelease', 'status', 'tester']
   (lane.to_s != 'devLane') &&
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
