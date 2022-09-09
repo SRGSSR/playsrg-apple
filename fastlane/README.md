@@ -215,13 +215,13 @@ Prepare AppStore tvOS releases on App Store Connect with the current version and
 
 Get AppStore App status for iOS and tvOS
 
-### ios iOSPublishReleaseNotes
+### ios publishReleaseNotes
 
 ```sh
-[bundle exec] fastlane ios iOSPublishReleaseNotes
+[bundle exec] fastlane ios publishReleaseNotes
 ```
 
-Publish release notes for iOS
+Publish release notes for iOS and tvOS on Github pages
 
 ### ios iOSrsiScreenshots
 

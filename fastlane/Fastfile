@@ -380,9 +380,8 @@ platform :ios do
 
   # Public Release notes
 
-  desc 'Publish release notes for iOS'
-  lane :iOSPublishReleaseNotes do
-    platform = 'iOS'
+  desc 'Publish release notes for iOS and tvOS on Github pages'
+  lane :publishReleaseNotes do
     output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
     Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
     releases_directory = "#{output_directory}/releases"
@@ -392,26 +391,30 @@ platform :ios do
     Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
 
     business_units.map do |business_unit|
-      UI.message "Preparing Play #{business_unit} #{platform} release notes. 📝"
-
       spaceship_login_with_api_key(business_unit)
       app = spaceship_bu_appstore_build_app(business_unit)
-      live_version = spaceship_app_live_version(platform, app)
 
-      table = release_notes_for_v3_table(platform, business_unit)
-      divs = release_notes_table_to_html_divs(platform, table, live_version)
-      html = release_notes_html(platform, business_unit, divs)
+      ['iOS', 'tvOS'].map do |platform|
+        UI.message "Preparing Play #{business_unit} #{platform} release notes. 📝"
 
-      release_html_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
-      Dir.chdir('..') { File.write("#{releases_directory}/#{release_html_file}", html) }
+        live_version = spaceship_app_live_version(platform, app)
 
-      upcoming_version = table[0][0]
-      upcoming_version = 'NaN' if live_version.version_string == upcoming_version
-      UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{live_version.version_string}, upcoming: #{upcoming_version}). ✅"
+        table = release_notes_table_for_html(platform, business_unit)
+        divs = release_notes_table_to_html_divs(platform, table, live_version)
+        html = release_notes_html(platform, business_unit, divs)
+
+        release_html_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+        Dir.chdir('..') { File.write("#{releases_directory}/#{release_html_file}", html) }
+
+        upcoming_version = table[0][0]
+        upcoming_version = 'NaN' if live_version.version_string == upcoming_version
+        UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{live_version.version_string}, upcoming: #{upcoming_version}). ✅"
+      end
     end
 
+    UI.message 'Start Play release notes publication on Github pages.'
     publish_on_github_pages(output_directory, releases_directory)
-    UI.success 'Play release notes pushed to Github pages. ✅'
+    UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
   # Individual iOS screenshots
@@ -1278,9 +1281,14 @@ def what_s_new_for_beta_json(platform)
   json
 end
 
+def release_notes_html_platform(platform)
+  platform == 'iOS' ? 'iPhone & iPad' : 'Apple TV'
+end
+
 def release_notes_html(platform, business_unit, divs)
-  input_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+  input_file = "release_notes-#{business_unit.downcase}.html"
   html = File.read("gh-pages/releases/#{input_file}")
+  html = html.gsub('<!-- platform -->', release_notes_html_platform(platform))
   html.sub('<!-- versions -->', divs.strip)
 end
 
@@ -1738,9 +1746,13 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
-def release_notes_for_v3_table(platform, business_unit)
+def major_version(platform)
+  platform == 'iOS' ? 3 : 1
+end
+
+def release_notes_table_for_html(platform, business_unit)
   table = get_appstore_release_notes_table(platform, business_unit).reverse
-  table.select { |row| row[0].start_with?('3') }
+  table.select { |row| row[0].start_with?(major_version(platform).to_s) }
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
