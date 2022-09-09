@@ -1406,8 +1406,12 @@ def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public
   tag_version ||= tag_version(platform)
   is_public_beta ||= false
 
+  xcversion(version: '~> 13')
   srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  xcversion(version: '~> 14')
 rescue StandardError => e
+  xcversion(version: '~> 14')
+
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
@@ -1416,7 +1420,6 @@ end
 def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
   groups = is_public_beta ? ENV['ITUNES_CONNECT_TF_PUBLIC_GROUPS'] : ENV['ITUNES_CONNECT_TF_GROUPS']
 
-  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     distribute_only: true,
@@ -1431,7 +1434,6 @@ def srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_pu
     demo_account_required: false,
     beta_app_review_info: beta_app_review_info
   )
-  xcversion(version: '~> 14')
 end
 
 # Update dSYMs from App Store Connect to App Center.
