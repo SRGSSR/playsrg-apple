@@ -272,7 +272,7 @@ static NSArray<Download *> *s_sortedDownloads;
     for (Download *download in Download.downloads) {
         if (download.state == DownloadStateDownloaded && [download.localMediaFileName.pathExtension isEqualToString:@"octet-stream"]) {
             // Try to move media file with the download url extension
-            if (download.downloadMediaURL.pathExtension != nil) {
+            if (download.downloadMediaURL.pathExtension) {
                 NSURL *atURL = download.localMediaFileURL;
                 
                 NSString *localMediaFileName = [download.localMediaFileName stringByReplacingOccurrencesOfString:download.localMediaFileName.pathExtension
