@@ -412,7 +412,9 @@ platform :ios do
       output_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
       Dir.chdir('..') { File.write("#{releases_directory}/#{output_file}", html) }
 
-      UI.success "Play #{business_unit} #{platform} #{released_version} release notes built. ✅"
+      last_table_version = table[0][0]
+      upcoming_version = last_table_version == released_version ? 'NaN' : last_table_version 
+      UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{released_version}, upcoming: #{upcoming_version}). ✅"
     end
   end
 
