@@ -268,30 +268,31 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (void)updateUnplayableDownloads
 {
-    NSMutableArray<Download *> *unplayableDownloadeds = NSMutableArray.array;
+    NSMutableArray<Download *> *unplayableDownloads = NSMutableArray.array;
     for (Download *download in Download.downloads) {
         if (download.state == DownloadStateDownloaded && [download.localMediaFileName.pathExtension isEqualToString:@"octet-stream"]) {
             // Try to move media file with the download url extension
-            if (download.downloadMediaURL.pathExtension != nil) {
-                NSURL *atURL = download.localMediaFileURL;
+            if (download.downloadMediaURL.pathExtension) {
+                NSURL *sourceURL = download.localMediaFileURL;
                 
-                NSString *localMediaFileName = [download.localMediaFileName stringByReplacingOccurrencesOfString:download.localMediaFileName.pathExtension
-                                                                                                      withString:download.downloadMediaURL.pathExtension];
-                NSString *mediaFilePath = [[Download downloadsDirectoryURLString] stringByAppendingPathComponent:localMediaFileName];
-                NSURL *toURL = [NSURL fileURLWithPath:mediaFilePath];
-                [NSFileManager.defaultManager moveItemAtURL:atURL toURL:toURL error:nil];
+                NSString *localMediaFileName = [[download.localMediaFileName stringByDeletingPathExtension] stringByAppendingPathExtension:download.downloadMediaURL.pathExtension];
+                NSString *destinationPath = [[Download downloadsDirectoryURLString] stringByAppendingPathComponent:localMediaFileName];
+                NSURL *destinationURL = [NSURL fileURLWithPath:destinationPath];
+                [NSFileManager.defaultManager moveItemAtURL:sourceURL toURL:destinationURL error:nil];
                 
-                download.localMediaFileName = localMediaFileName;
-                if (! download.localMediaFileURL) {
-                    [unplayableDownloadeds addObject:download];
+                if ([NSFileManager.defaultManager fileExistsAtPath:destinationPath]) {
+                    download.localMediaFileName = localMediaFileName;
+                }
+                else {
+                    [unplayableDownloads addObject:download];
                 }
             }
             else {
-                [unplayableDownloadeds addObject:download];
+                [unplayableDownloads addObject:download];
             }
         }
     }
-    [Download removeDownloads:unplayableDownloadeds.copy];
+    [Download removeDownloads:unplayableDownloads.copy];
     [self saveDownloadsDictionary];
 }
 

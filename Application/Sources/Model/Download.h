@@ -173,7 +173,7 @@ typedef NS_ENUM(NSInteger, DownloadState) {
 + (void)removeUnusedDownloadedFiles;
 
 /**
- *  Update the unplayable downloads and their files (or remove if no solutions)
+ *  Fix unplayable downloads and their files (or remove if no fix was possible)
  */
 + (void)updateUnplayableDownloads;
 
