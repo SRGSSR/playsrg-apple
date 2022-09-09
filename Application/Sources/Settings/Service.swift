@@ -44,7 +44,25 @@ struct Service: Identifiable, Equatable {
         return URL(string: mmfUrlString)!
     }()
     
-    static var services: [Service] = [production, stage, test, mmf]
+    static var samProduction = Service(
+        id: "sam production",
+        name: "SAM \(NSLocalizedString("Production", comment: "Server setting name"))",
+        url: SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
+    )
+    
+    static var samStage = Service(
+        id: "sam stage",
+        name: "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))",
+        url: SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
+    )
+    
+    static var samTest = Service(
+        id: "sam test",
+        name: "SAM \(NSLocalizedString("Test", comment: "Server setting name"))",
+        url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
+    )
+    
+    static var services: [Service] = [production, stage, test, mmf, samProduction, samStage, samTest]
     
     static func service(forId id: String?) -> Service {
 #if DEBUG || NIGHTLY || BETA
