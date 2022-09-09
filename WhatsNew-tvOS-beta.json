@@ -47,5 +47,6 @@
   "1.6.3-46": "- Support informations can be displayed in profile view.",
   "1.6.4-47": "- Fix user interface glitches when navigating from the player to the media detail view.\n- Fix page layout on tvOS 16.",
   "1.6.4-48": "- Prepare AppStore release.",
-  "1.6.5-49": "- Allow to expand text on show page."
+  "1.6.5-49": "- Allow to expand text on show page.",
+  "1.6.5-50": "- Improved tvOS 16 compatibility."
 }
