@@ -61,7 +61,7 @@ extension DownloadCellViewModel {
     }
     
     private static func progress(for download: Download?) -> Progress {
-        if let download = download, let progress = Download.currentlyKnownProgress(for: download) {
+        if let download, let progress = Download.currentlyKnownProgress(for: download) {
             return progress
         }
         else {
@@ -71,7 +71,7 @@ extension DownloadCellViewModel {
     }
     
     private static func state(from downloadState: DownloadState?, for download: Download?) -> State {
-        guard let downloadState = downloadState else { return .unknown }
+        guard let downloadState else { return .unknown }
         switch downloadState {
         case .added:
             return .added

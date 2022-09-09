@@ -50,7 +50,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     private var isLive: Bool {
-        guard let program = program else { return false }
+        guard let program else { return false }
         return (program.startDate...program.endDate).contains(date)
     }
     
@@ -77,7 +77,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var timeAndDate: String? {
-        guard let program = program else { return nil }
+        guard let program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
         let day = DateFormatter.play_relativeFull.string(from: program.startDate)
@@ -85,7 +85,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var timeAndDateAccessibilityLabel: String? {
-        guard let program = program else { return nil }
+        guard let program else { return nil }
         return String(format: PlaySRGAccessibilityLocalizedString("From %1$@ to %2$@", comment: "Text providing program time information. First placeholder is the start time, second is the end time."), PlayAccessibilityTimeFromDate(program.startDate), PlayAccessibilityTimeFromDate(program.endDate))
             .appending(", ")
             .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
@@ -96,7 +96,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var duration: Double? {
-        guard let program = program else { return nil }
+        guard let program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)
         return duration > 0 ? duration : nil
     }
@@ -119,7 +119,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var progress: Double? {
-        if isLive, let program = program {
+        if isLive, let program {
             let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
             return (0...1).contains(progress) ? progress : nil
         }
@@ -154,7 +154,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
-        guard isLive, let media = media, media.blockingReason(at: Date()) == .none else { return nil }
+        guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
         return ButtonProperties(
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
@@ -181,7 +181,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var episodeButtonProperties: ButtonProperties? {
-        guard let show = show else { return nil }
+        guard let show else { return nil }
         return ButtonProperties(
             icon: "episodes",
             label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
@@ -202,7 +202,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var watchLaterButtonProperties: ButtonProperties? {
-        guard !isLive, let media = media else { return nil }
+        guard !isLive, let media else { return nil }
         
         func toggleWatchLater() {
             WatchLaterToggleMedia(media) { added, error in
@@ -257,7 +257,7 @@ extension ProgramViewModel {
                         return Empty()
                     }
             }
-            .map { media -> AnyPublisher<MediaData, Never> in
+            .map { media in
                 return Publishers.CombineLatest(UserDataPublishers.laterAllowedActionPublisher(for: media), UserDataPublishers.playbackProgressPublisher(for: media))
                     .map { action, progress in
                         return MediaData(media: media, watchLaterAllowedAction: action, progress: progress)
@@ -275,7 +275,7 @@ extension ProgramViewModel {
     }
     
     private static func livestreamMediaPublisher(for channel: SRGChannel?) -> AnyPublisher<SRGMedia?, Never> {
-        if let channel = channel {
+        if let channel {
             return Publishers.PublishAndRepeat(onOutputFrom: ApplicationSignal.wokenUp()) {
                 return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
                     .catch { _ in

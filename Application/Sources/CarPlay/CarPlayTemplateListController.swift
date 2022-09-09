@@ -30,7 +30,7 @@ final class CarPlayTemplateListController {
         }
         .receive(on: DispatchQueue.main)
         .sink { [weak template] state in
-            guard let template = template else { return }
+            guard let template else { return }
             switch state {
             case let .failed(error: error):
                 template.emptyViewSubtitleVariants = [error.localizedDescription]

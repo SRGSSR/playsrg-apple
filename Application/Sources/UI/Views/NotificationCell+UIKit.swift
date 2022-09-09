@@ -13,7 +13,7 @@ extension UITableView {
     final class NotificationTableViewCell: HostTableViewCell<NotificationCell>, NotificationSettable {
         var notification: UserNotification? {
             didSet {
-                if let notification = notification {
+                if let notification {
                     content = NotificationCell(notification: notification)
                 }
                 else {

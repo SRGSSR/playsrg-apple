@@ -39,9 +39,9 @@ class HostCollectionViewCell<Content: View>: UICollectionViewCell {
     private var hostController: UIHostingController<HostCellView<Content>>?
     
     private func update(with content: Content?, editing: Bool, selected: Bool, UIKitFocused: Bool) {
-        if let content = content {
+        if let content {
             let rootView = HostCellView(editing: editing, selected: selected, UIKitFocused: UIKitFocused, content: content)
-            if let hostController = hostController {
+            if let hostController {
                 hostController.rootView = rootView
             }
             else {
@@ -98,7 +98,7 @@ class HostSupplementaryView<Content: View>: UICollectionReusableView {
     
     private func update(with content: Content?) {
         if let rootView = content {
-            if let hostController = hostController {
+            if let hostController {
                 hostController.rootView = rootView
             }
             else {
@@ -153,7 +153,7 @@ class HostTableViewCell<Content: View>: UITableViewCell {
     
     private func update(with content: Content?) {
         if let rootView = content {
-            if let hostController = hostController {
+            if let hostController {
                 hostController.rootView = rootView
             }
             else {
@@ -208,7 +208,7 @@ class HostView<Content: View>: UIView {
     
     private func update(with content: Content?) {
         if let rootView = content {
-            if let hostController = hostController {
+            if let hostController {
                 hostController.rootView = rootView
             }
             else {

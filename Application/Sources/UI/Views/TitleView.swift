@@ -13,7 +13,7 @@ struct TitleView: View {
     let text: String?
     
     var body: some View {
-        if let text = text {
+        if let text {
             Text(text)
                 .srgFont(.H1)
                 .foregroundColor(.srgGrayC7)
@@ -27,7 +27,7 @@ struct TitleView: View {
 
 enum TitleViewSize {
     static func recommended(forText text: String?) -> NSCollectionLayoutSize {
-        if let text = text, !text.isEmpty {
+        if let text, !text.isEmpty {
             return NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(constant(iOS: 60, tvOS: 100)))
         }
         else {

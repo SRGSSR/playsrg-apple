@@ -102,7 +102,7 @@ final class SearchViewController: UIViewController {
         }
         
         let sectionHeaderViewRegistration = UICollectionView.SupplementaryRegistration<HostSupplementaryView<SectionHeaderView>>(elementKind: UICollectionView.elementKindSectionHeader) { [weak self] view, _, indexPath in
-            guard let self = self else { return }
+            guard let self else { return }
             let snapshot = self.dataSource.snapshot()
             let section = snapshot.sectionIdentifiers[indexPath.section]
             view.content = SectionHeaderView(section: section, settings: self.model.settings)
@@ -114,12 +114,12 @@ final class SearchViewController: UIViewController {
         
         model.$state
             .sink { [weak self] state in
-                guard let self = self else { return }
+                guard let self else { return }
                 self.reloadData(for: state)
 #if os(tvOS)
                 guard let searchController = self.searchController else { return }
                 if case let .loaded(rows: _, suggestions: suggestions) = state {
-                    if let suggestions = suggestions {
+                    if let suggestions {
                         searchController.searchSuggestions = suggestions.map { UISearchSuggestionItem(localizedSuggestion: $0.text) }
                     }
                     else {
@@ -144,6 +144,9 @@ final class SearchViewController: UIViewController {
         
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
+        if #available(iOS 16, *) {
+            navigationItem.preferredSearchBarPlacement = .stacked
+        }
         
         self.searchController = searchController
         
@@ -415,7 +418,7 @@ extension SearchViewController: UICollectionViewDelegate {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
         case let .show(show):
-            guard let navigationController = navigationController else { return }
+            guard let navigationController else { return }
             let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: true)
             
@@ -423,7 +426,7 @@ extension SearchViewController: UICollectionViewDelegate {
                 .sink { _ in } receiveValue: { _ in }
                 .store(in: &cancellables)
         case let .topic(topic):
-            guard let navigationController = navigationController else { return }
+            guard let navigationController else { return }
             let topicViewController = PageViewController.topicViewController(for: topic)
             navigationController.pushViewController(topicViewController, animated: true)
         case .loading:
@@ -543,7 +546,7 @@ extension SearchViewController: UIScrollViewDelegate {
         //       this should only be done when the collection view is at the top.
         //
         //       This bug will be reported to Apple and this workaround will hopefully be removed in the future.
-        if let navigationController = navigationController {
+        if let navigationController {
             let navigationBarState = LayoutNavigationBarStateForNavigationController(navigationController)
             if navigationBarState == .largeExpanded || navigationBarState == .largeResizing {
                 let searchController = navigationItem.searchController
@@ -580,7 +583,7 @@ private extension SearchViewController {
     
     private func layout() -> UICollectionViewLayout {
         return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] sectionIndex, layoutEnvironment in
-            guard let self = self else { return nil }
+            guard let self else { return nil }
             let layoutWidth = layoutEnvironment.container.effectiveContentSize.width
             
             func sectionSupplementaryItems(for section: SearchViewModel.Section) -> [NSCollectionLayoutBoundarySupplementaryItem] {

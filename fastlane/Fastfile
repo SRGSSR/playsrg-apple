@@ -31,7 +31,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 13.3')
+    xcversion(version: '~> 14')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
@@ -1390,12 +1390,14 @@ def pilot_fast_upload(app_identifier, platform)
 
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
+  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
     skip_waiting_for_build_processing: true
   )
+  xcversion(version: '~> 14')
 end
 
 def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
@@ -1404,8 +1406,12 @@ def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public
   tag_version ||= tag_version(platform)
   is_public_beta ||= false
 
+  xcversion(version: '~> 13')
   srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  xcversion(version: '~> 14')
 rescue StandardError => e
+  xcversion(version: '~> 14')
+
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'

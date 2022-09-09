@@ -90,7 +90,7 @@ struct MediaCell: View {
     
 #if os(tvOS)
     private func defaultAction() {
-        if let media = media {
+        if let media {
             navigateToMedia(media)
         }
     }
@@ -98,7 +98,7 @@ struct MediaCell: View {
     private func onFocusChange(focused: Bool) {
         isFocused = focused
         
-        if let onFocusAction = onFocusAction {
+        if let onFocusAction {
             onFocusAction(focused)
         }
     }
@@ -110,18 +110,18 @@ struct MediaCell: View {
         let style: MediaDescription.Style
         
         private var subtitle: String? {
-            guard let media = media else { return .placeholder(length: 15) }
+            guard let media else { return .placeholder(length: 15) }
             return MediaDescription.subtitle(for: media, style: style)
         }
         
         private var title: String {
-            guard let media = media else { return .placeholder(length: 8) }
+            guard let media else { return .placeholder(length: 8) }
             return MediaDescription.title(for: media, style: style)
         }
         
         var body: some View {
             VStack(alignment: .leading) {
-                if let subtitle = subtitle {
+                if let subtitle {
                     Text(subtitle)
                         .srgFont(.subtitle1)
                         .lineLimit(2)
@@ -152,7 +152,7 @@ extension MediaCell {
 
 private extension MediaCell {
     var accessibilityLabel: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.accessibilityLabel(for: media)
     }
     

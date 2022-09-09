@@ -573,7 +573,7 @@ struct SettingsView: View {
             }
             
             var body: some View {
-                if let appCenterUrl = appCenterUrl {
+                if let appCenterUrl {
                     Button(NSLocalizedString("Versions and release notes", comment: "Label of the button to access release notes and download internal builds (App Center)"), action: action)
                         .sheet(isPresented: $isSheetDisplayed) {
                             SafariView(url: appCenterUrl)
@@ -640,7 +640,7 @@ struct SettingsView: View {
             }
             
             private func isSelected() -> Bool {
-                if let selectedServiceId = selectedServiceId {
+                if let selectedServiceId {
                     return service.id == selectedServiceId
                 }
                 else {

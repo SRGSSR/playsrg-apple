@@ -66,7 +66,7 @@ struct Service: Identifiable, Equatable {
     
     static func service(forId id: String?) -> Service {
 #if DEBUG || NIGHTLY || BETA
-        guard let id = id, let server = services.first(where: { $0.id == id }) else {
+        guard let id, let server = services.first(where: { $0.id == id }) else {
             return .production
         }
         return server

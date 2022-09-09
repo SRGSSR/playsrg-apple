@@ -139,7 +139,7 @@ private extension CarPlayList {
     }
     
     private static func playingPublisher(for mediaUrn: String?) -> AnyPublisher<Bool, Never> {
-        if let mediaUrn = mediaUrn {
+        if let mediaUrn {
             return nowPlayingMediaPublisher()
                 .map { $0.map(\.urn).contains(mediaUrn) }
                 .eraseToAnyPublisher()
@@ -175,7 +175,7 @@ private extension CarPlayList {
     }
     
     private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> [SRGMedia] {
-        guard let controller = controller else { return [] }
+        guard let controller else { return [] }
         
         var medias: Set<SRGMedia> = []
         if let mainMedia = controller.play_mainMedia {
@@ -189,8 +189,8 @@ private extension CarPlayList {
     
     private static func nowPlayingMediaPublisher() -> AnyPublisher<[SRGMedia], Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<[SRGMedia], Never> in
-                if let controller = controller {
+            .map { controller in
+                if let controller {
                     return NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
                             let controller = notification.object as? SRGLetterboxController
@@ -266,7 +266,7 @@ private extension CarPlayList {
             }
             .switchToLatest()
             .map { liveMediaDataList in
-                let items = liveMediaDataList.map { liveMediaData -> CPListItem in
+                let items = liveMediaDataList.map { liveMediaData in
                     let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: liveMediaData.media))
                     item.accessoryType = .none
                     item.handler = { _, completion in
@@ -350,7 +350,7 @@ private extension Publisher where Output == [SRGMedia] {
         }
         .switchToLatest()
         .map { mediaDataList in
-            let items = mediaDataList.map { mediaData -> CPListItem in
+            let items = mediaDataList.map { mediaData in
                 let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
                                       // Keep same media item height with a detail text in any cases.
                                       detailText: MediaDescription.subtitle(for: mediaData.media, style: .show) ?? " ",

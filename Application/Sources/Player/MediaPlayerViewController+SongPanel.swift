@@ -27,7 +27,7 @@ extension MediaPlayerViewController {
             }
         }
         
-        if let programsTableView = programsTableView {
+        if let programsTableView {
             let insets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: MediaPlayerViewController.contentHeight, right: 0.0)
             programsTableView.contentInset = insets
             programsTableView.scrollIndicatorInsets = insets
@@ -42,18 +42,18 @@ extension MediaPlayerViewController {
     }
     
     @objc func removeSongPanel() {
-        guard let panel = panel else { return }
+        guard let panel else { return }
         panel.removeFromParent(transition: .none, completion: nil)
         self.panel = nil
         
-        if let programsTableView = programsTableView {
+        if let programsTableView {
             programsTableView.contentInset = .zero
             programsTableView.scrollIndicatorInsets = .zero
         }
     }
     
     @objc func updateSongPanel(for traitCollection: UITraitCollection, fullScreen: Bool) {
-        guard let panel = panel else { return }
+        guard let panel else { return }
         
         if fullScreen {
             panel.removeFromParent(transition: .none, completion: nil)
@@ -67,27 +67,27 @@ extension MediaPlayerViewController {
     }
     
     @objc func reloadSongPanelSize() {
-        guard let panel = panel else { return }
+        guard let panel else { return }
         panel.reloadSize()
     }
     
     @objc func scrollToSong(at date: Date?, animated: Bool) {
-        guard let songsViewController = songsViewController() else { return }
+        guard let songsViewController else { return }
         songsViewController.scrollToSong(at: date, animated: animated)
     }
     
     @objc func updateSelectionForSong(at date: Date?) {
-        guard let songsViewController = songsViewController() else { return }
+        guard let songsViewController else { return }
         songsViewController.updateSelectionForSong(at: date)
     }
     
     @objc func updateSelectionForCurrentSong() {
-        guard let songsViewController = songsViewController() else { return }
+        guard let songsViewController else { return }
         songsViewController.updateSelectionForCurrentSong()
     }
     
     @objc func updateSongProgress() {
-        guard let songsViewController = songsViewController() else { return }
+        guard let songsViewController else { return }
         songsViewController.updateProgress(for: letterboxController.play_dateInterval)
     }
 }
@@ -118,6 +118,12 @@ private extension MediaPlayerViewController {
         else {
             return MediaPlayerViewController.contentHeight
         }
+    }
+    
+    var songsViewController: SongsViewController? {
+        guard let panel else { return nil }
+        guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
+        return contentNavigationController.viewControllers.first as? SongsViewController
     }
     
     func makePanelController(channel: SRGChannel, mode: Panel.Configuration.Mode) -> Panel {
@@ -163,7 +169,7 @@ private extension MediaPlayerViewController {
     }
     
     func songTableView() -> UITableView? {
-        guard let songsViewController = songsViewController() else { return nil }
+        guard let songsViewController else { return nil }
         return songsViewController.tableView
     }
     
@@ -182,14 +188,8 @@ private extension MediaPlayerViewController {
         }
     }
     
-    func songsViewController() -> SongsViewController? {
-        guard let panel = panel else { return nil }
-        guard let contentNavigationController = panel.contentViewController as? UINavigationController else { return nil }
-        return contentNavigationController.viewControllers.first as? SongsViewController
-    }
-    
     @objc func togglePanel(_ sender: UITapGestureRecognizer) {
-        guard let panel = panel else { return }
+        guard let panel else { return }
         
         switch panel.configuration.mode {
         case .compact:

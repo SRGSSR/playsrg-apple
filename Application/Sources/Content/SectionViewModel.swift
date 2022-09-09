@@ -104,7 +104,7 @@ final class SectionViewModel: ObservableObject {
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
-                    guard let self = self else { return false }
+                    guard let self else { return false }
                     return !self.state.hasContent
                 }
         )

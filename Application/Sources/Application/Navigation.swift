@@ -42,7 +42,7 @@ extension UIViewController {
             
             controller.publisher(for: \.continuousPlaybackUpcomingMedia)
                 .sink { upcomingMedia in
-                    guard let upcomingMedia = upcomingMedia else { return }
+                    guard let upcomingMedia else { return }
                     
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.automatic.rawValue
@@ -60,7 +60,7 @@ extension UIViewController {
             controller.playMedia(media, at: position, withPreferredSettings: nil)
             present(letterboxViewController, animated: animated) {
                 SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.player.rawValue, levels: [AnalyticsPageLevel.play.rawValue])
-                if let completion = completion {
+                if let completion {
                     completion()
                 }
             }
@@ -174,7 +174,7 @@ extension UIViewController {
                         Banner.showError(error)
                     }
                 } receiveValue: { [weak self] media in
-                    guard let self = self else { return }
+                    guard let self else { return }
                     self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
                         let labels = SRGAnalyticsHiddenEventLabels()
                         labels.source = notification.showURN ?? AnalyticsSource.notification.rawValue
@@ -233,11 +233,11 @@ extension UIViewController {
         case let .media(media):
             play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated, completion: nil)
         case let .show(show):
-            guard let navigationController = navigationController else { return }
+            guard let navigationController else { return }
             let showViewController = SectionViewController.showViewController(for: show)
             navigationController.pushViewController(showViewController, animated: animated)
         case let .topic(topic):
-            guard let navigationController = navigationController else { return }
+            guard let navigationController else { return }
             let pageViewController = PageViewController(id: .topic(topic))
             navigationController.pushViewController(pageViewController, animated: animated)
         case let .download(download):

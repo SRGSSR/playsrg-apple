@@ -42,7 +42,7 @@ private extension CarPlayNowPlayingController {
         }
         
         private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
-            return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
+            return CPNowPlayingImageButton(image: UIImage(named: "playback_speed", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
                 interfaceController.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
             }
         }
@@ -85,8 +85,8 @@ private extension CarPlayNowPlayingController {
 
     private static func nowPlayingPropertiesPublisher(interfaceController: CPInterfaceController) -> AnyPublisher<NowPlayingProperties, Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<NowPlayingProperties, Never> in
-                if let controller = controller {
+            .map { controller in
+                if let controller {
                     return Publishers.CombineLatest3(
                         controller.mediaPlayerController.publisher(for: \.timeRange),
                         NotificationCenter.default.weakPublisher(for: .SRGLetterboxPlaybackStateDidChange, object: controller),

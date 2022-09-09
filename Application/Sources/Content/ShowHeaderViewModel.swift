@@ -22,8 +22,8 @@ final class ShowHeaderViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
             .dropFirst()
-            .map { show -> AnyPublisher<Bool, Never> in
-                guard let show = show else {
+            .map { show in
+                guard let show else {
                     return Just(false).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.favoritePublisher(for: show)
@@ -36,9 +36,9 @@ final class ShowHeaderViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $show
             .dropFirst()
-            .map { show -> AnyPublisher<UserDataPublishers.SubscriptionStatus, Never> in
-                guard let show = show else {
-                    return Just(.unavailable).eraseToAnyPublisher()
+            .map { show in
+                guard let show else {
+                    return Just(UserDataPublishers.SubscriptionStatus.unavailable).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.subscriptionStatusPublisher(for: show)
             }
@@ -78,7 +78,7 @@ final class ShowHeaderViewModel: ObservableObject {
     }
     
     var shouldDisplayFavoriteRemovalAlert: Bool {
-        guard let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn, let show = show else { return false }
+        guard let loggedIn = SRGIdentityService.current?.isLoggedIn, loggedIn, let show else { return false }
         return FavoritesIsSubscribedToShow(show)
     }
     
@@ -109,7 +109,7 @@ final class ShowHeaderViewModel: ObservableObject {
 #endif
     
     func toggleFavorite() {
-        guard let show = show else { return }
+        guard let show else { return }
         FavoritesToggleShow(show)
         
         let labels = SRGAnalyticsHiddenEventLabels()
@@ -126,7 +126,7 @@ final class ShowHeaderViewModel: ObservableObject {
     
 #if os(iOS)
     func toggleSubscription() {
-        guard let show = show, FavoritesToggleSubscriptionForShow(show) else { return }
+        guard let show, FavoritesToggleSubscriptionForShow(show) else { return }
         
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = AnalyticsSource.button.rawValue

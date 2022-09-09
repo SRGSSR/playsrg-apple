@@ -17,7 +17,7 @@ final class CarPlayPlaybackSpeedController {
         guard let controller = SRGLetterboxService.shared.controller else { return [] }
         let items = controller.supportedPlaybackRates
             .map(\.floatValue)
-            .map { playbackRate -> CPListItem in
+            .map { playbackRate in
                 let item = CPListItem(
                     text: Self.text(forPlaybackRate: playbackRate, controller: controller),
                     detailText: nil,
