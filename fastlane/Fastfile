@@ -397,40 +397,21 @@ platform :ios do
       spaceship_login_with_api_key(business_unit)
       app = spaceship_bu_appstore_build_app(business_unit)
       live_version = spaceship_app_live_version(platform, app)
-      released_version = live_version.version_string
-      released_build = live_version.build.version
 
-      table = get_appstore_release_notes_table(platform, business_unit).reverse
-      table = table.select { |row| row[0].start_with?('3') }
+      table = release_notes_for_v3_table(platform, business_unit)
+      divs = release_notes_table_to_html_divs(platform, table, live_version)
+      html = release_notes_html(platform, business_unit, divs)
 
-      divs = release_notes_table_to_html_divs(platform, table, released_version, released_build)
+      release_html_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+      Dir.chdir('..') { File.write("#{releases_directory}/#{release_html_file}", html) }
 
-      input_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
-      html = File.read("gh-pages/releases/#{input_file}")
-      html = html.sub('<!-- versions -->', divs.strip)
-
-      output_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
-      Dir.chdir('..') { File.write("#{releases_directory}/#{output_file}", html) }
-
-      last_table_version = table[0][0]
-      upcoming_version = last_table_version == released_version ? 'NaN' : last_table_version 
-      UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{released_version}, upcoming: #{upcoming_version}). ✅"
+      upcoming_version = table[0][0]
+      upcoming_version = 'NaN' if live_version.version_string == upcoming_version
+      UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{live_version.version_string}, upcoming: #{upcoming_version}). ✅"
     end
 
-    branch_name = git_branch_name
-
-    Dir.chdir('..') {
-      sh 'git checkout --orphan gh-pages'
-      sh 'git reset --hard'
-      sh "mv \"#{releases_directory}\" ./"
-      sh 'git add releases/*'
-      sh "mv \"#{output_directory}/index.html\" ./"
-      sh 'git add index.html'
-      sh 'git commit -m "Publish release notes"'
-      sh 'git push origin gh-pages --force'
-      sh "git checkout #{branch_name}"
-      sh 'git branch -D gh-pages'
-    }
+    publish_on_github_pages(output_directory, releases_directory)
+    UI.success 'Play release notes pushed to Github pages. ✅'
   end
 
   # Individual iOS screenshots
@@ -1297,10 +1278,16 @@ def what_s_new_for_beta_json(platform)
   json
 end
 
-def release_notes_table_to_html_divs(platform, table, released_version, released_build)
+def release_notes_html(platform, business_unit, divs)
+  input_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+  html = File.read("gh-pages/releases/#{input_file}")
+  html.sub('<!-- versions -->', divs.strip)
+end
+
+def release_notes_table_to_html_divs(platform, table, live_version)
   divs = ''
   table.map do |row|
-    is_preprod = version_is_preprod(platform, row[0], released_version, released_build)
+    is_preprod = version_is_preprod(platform, row[0], live_version)
     divs += release_notes_version_to_html(platform, row[0], row[1], is_preprod)
   end
   divs.strip
@@ -1315,8 +1302,11 @@ def release_notes_version_to_html(platform, version, text, is_preprod)
   div
 end
 
-def version_is_preprod(platform, version, released_version, released_build)
+def version_is_preprod(platform, version, live_version)
+  released_version = live_version.version_string
+  released_build = live_version.build.version
   build_number = build_number_for_version(platform, version)
+
   version != released_version && build_number > released_build
 end
 
@@ -1748,6 +1738,11 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
+def release_notes_for_v3_table(platform, business_unit)
+  table = get_appstore_release_notes_table(platform, business_unit).reverse
+  table.select { |row| row[0].start_with?('3') }
+end
+
 def get_appstore_release_notes(platform, business_unit, marketing_version)
   table = get_appstore_release_notes_table(platform, business_unit)
 
@@ -1933,6 +1928,23 @@ end
 
 def spaceship_app_latest_known_version(platform, app)
   app.get_latest_app_store_version(platform: spaceship_platform(platform))
+end
+
+def publish_on_github_pages(output_directory, releases_directory)
+  branch_name = git_branch_name
+
+  Dir.chdir('..') do
+    sh 'git checkout --orphan gh-pages'
+    sh 'git reset --hard'
+    sh "mv \"#{output_directory}/index.html\" ./"
+    sh 'git add index.html'
+    sh "mv \"#{releases_directory}\" ./"
+    sh 'git add releases/*'
+    sh 'git commit -m "Publish release notes"'
+    sh 'git push origin gh-pages --force'
+    sh "git checkout #{branch_name}"
+    sh 'git branch -D gh-pages'
+  end
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
