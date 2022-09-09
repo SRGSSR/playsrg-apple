@@ -280,8 +280,10 @@ static NSArray<Download *> *s_sortedDownloads;
                 NSURL *destinationURL = [NSURL fileURLWithPath:mediaFilePath];
                 [NSFileManager.defaultManager moveItemAtURL:sourceURL toURL:destinationURL error:nil];
                 
-                download.localMediaFileName = localMediaFileName;
-                if (! download.localMediaFileURL) {
+                if ([NSFileManager.defaultManager fileExistsAtPath:mediaFilePath]) {
+                    download.localMediaFileName = localMediaFileName;
+                }
+                else {
                     [unplayableDownloadeds addObject:download];
                 }
             }
