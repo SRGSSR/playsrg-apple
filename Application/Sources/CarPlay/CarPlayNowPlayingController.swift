@@ -42,7 +42,7 @@ private extension CarPlayNowPlayingController {
         }
         
         private static func playbackRateButton(for interfaceController: CPInterfaceController) -> CPNowPlayingButton {
-            return CPNowPlayingImageButton(image: UIImage(systemName: "speedometer")!) { _ in
+            return CPNowPlayingImageButton(image: UIImage(named: "playback_speed", in: nil, compatibleWith: UITraitCollection(userInterfaceIdiom: .carPlay))!) { _ in
                 interfaceController.pushTemplate(CPListTemplate.playbackRate, animated: true) { _, _ in }
             }
         }
