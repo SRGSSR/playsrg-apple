@@ -275,8 +275,7 @@ static NSArray<Download *> *s_sortedDownloads;
             if (download.downloadMediaURL.pathExtension) {
                 NSURL *sourceURL = download.localMediaFileURL;
                 
-                NSString *localMediaFileName = [download.localMediaFileName stringByReplacingOccurrencesOfString:download.localMediaFileName.pathExtension
-                                                                                                      withString:download.downloadMediaURL.pathExtension];
+                NSString *localMediaFileName = [[download.localMediaFileName stringByDeletingPathExtension] stringByAppendingPathExtension:download.downloadMediaURL.pathExtension];
                 NSString *mediaFilePath = [[Download downloadsDirectoryURLString] stringByAppendingPathComponent:localMediaFileName];
                 NSURL *destinationURL = [NSURL fileURLWithPath:mediaFilePath];
                 [NSFileManager.defaultManager moveItemAtURL:sourceURL toURL:destinationURL error:nil];
