@@ -154,7 +154,7 @@ private extension View {
 
 enum SectionShowHeaderViewSize {
     static func recommended(for section: Content.Section, show: SRGShow?, layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        if let show = show {
+        if let show {
             let fittingSize = CGSize(width: layoutWidth, height: UIView.layoutFittingExpandedSize.height)
             let size = SectionShowHeaderView(section: section, show: show).adaptiveSizeThatFits(in: fittingSize, for: horizontalSizeClass)
             return NSCollectionLayoutSize(widthDimension: .absolute(layoutWidth), heightDimension: .absolute(size.height))

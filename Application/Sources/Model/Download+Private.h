@@ -18,11 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (BOOL)addDownload:(Download *)download;
 
 /**
- *  Clean a folder to ununsed downloaded files
- */
-+ (void)removeUnusedDownloadedFilesInFolderPath:(NSString *)folderPath;
-
-/**
  *  Create a download from a dictionary of its fields
  */
 - (nullable instancetype)initWithDictionary:(NSDictionary *)dictionary;

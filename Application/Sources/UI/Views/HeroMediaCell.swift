@@ -30,7 +30,7 @@ struct HeroMediaCell: View {
     
 #if os(tvOS)
     private func action() {
-        if let media = media {
+        if let media {
             navigateToMedia(media)
         }
     }
@@ -83,28 +83,28 @@ struct HeroMediaCell: View {
         let label: String?
         
         private var subtitle: String? {
-            guard let media = media else { return nil }
+            guard let media else { return nil }
             return MediaDescription.subtitle(for: media, style: .show)
         }
         
         private var title: String? {
-            guard let media = media else { return nil }
+            guard let media else { return nil }
             return MediaDescription.title(for: media, style: .show)
         }
         
         var body: some View {
             VStack {
                 HStack(spacing: constant(iOS: 8, tvOS: 12)) {
-                    if let label = label {
+                    if let label {
                         Badge(text: label, color: Color(.play_green))
                     }
-                    if let subtitle = subtitle {
+                    if let subtitle {
                         Text(subtitle)
                             .srgFont(.subtitle1)
                             .lineLimit(1)
                     }
                 }
-                if let title = title {
+                if let title {
                     Text(title)
                         .srgFont(.H2)
                         .lineLimit(2)
@@ -123,7 +123,7 @@ struct HeroMediaCell: View {
 
 private extension HeroMediaCell {
     var accessibilityLabel: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.accessibilityLabel(for: media)
     }
     

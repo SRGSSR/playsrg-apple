@@ -46,10 +46,10 @@ struct ExpandingButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 8) {
-                if let icon = icon {
+                if let icon {
                     Image(decorative: icon)
                 }
-                if let label = label {
+                if let label {
                     Text(label)
                         .srgFont(.button)
                         .minimumScaleFactor(0.8)

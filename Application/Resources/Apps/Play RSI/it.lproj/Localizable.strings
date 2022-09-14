@@ -377,7 +377,7 @@
 "Most listened to" = "I più ascoltati";
 
 /* Most searched shows header */
-"Most searched shows" = "Programmi più ricercati";
+"Most searched shows" = "Programmi più cercati";
 
 /* Song list title */
 "Music" = "Musica";
@@ -487,6 +487,10 @@
 
 /* Title of the button to proceed to the previous onboarding page */
 "Previous" = "Precedente";
+
+/* Button title on CarPlay player for livestream previous programs
+   Livestream previous programs screen title */
+"Previous shows" = "Trasmissioni precedenti";
 
 /* Server setting name */
 "Production" = "Produzione";

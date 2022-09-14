@@ -24,15 +24,14 @@ platform :ios do
 
     notify_version_to_ci(platform, tag_version, nil) unless lane.to_s.downcase.include?('nightlies')
 
-    # For betas and AppStore builds, before all, check if we have a beta release description
-    if ['appstorebuild', 'beta'].one? { |i| lane.to_s.downcase.include? i }
+    if what_s_new_condition(lane)
       what_s_new = what_s_new_for_beta(platform, tag_version)
       if what_s_new.empty?
         UI.user_error! "WhatsNew-#{platform}-beta.json has no release notes for #{tag_version}."
       end
     end
 
-    xcversion(version: '~> 13.3')
+    xcversion(version: '~> 14')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
@@ -348,6 +347,35 @@ platform :ios do
       business_unit = business_unit.downcase
       sh "bundle exec fastlane ios tvOS#{business_unit}PrepareAppStoreRelease#{options}"
     end
+  end
+
+  desc 'Get AppStore release status for iOS and tvOS'
+  lane :appStoreReleaseStatus do
+    UI.message '-----'
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app_identifier = appstore_build_identifiers[business_unit_index(business_unit)]
+      app = spaceship_app(app_identifier)
+      next unless app
+
+      UI.message '-----'
+      ['iOS', 'tvOS'].map do |platform|
+        spaceship_platform = spaceship_platform(platform)
+        live_version = app.get_live_app_store_version(platform: spaceship_platform)
+        UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
+        UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
+
+        latest_version = app.get_latest_app_store_version(platform: spaceship_platform)
+        if !latest_version || latest_version.version_string == live_version.version_string
+          UI.message "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
+        else
+          build_version = latest_version.build ? latest_version.build.version : 'NaN'
+          UI.important "Play #{business_unit} #{platform} latest version #{latest_version.version_string} (#{build_version}) is #{latest_version.app_store_state}."
+        end
+        UI.message '-----'
+      end
+    end
+    UI.message '-----'
   end
 
   # Individual iOS screenshots
@@ -1073,6 +1101,12 @@ def app_config
   CredentialsManager::AppfileConfig
 end
 
+def what_s_new_condition(lane)
+  included_lanes = ['appstorebuild', 'beta']
+  (!lane.to_s.downcase.include? 'tester') &&
+    included_lanes.one? { |i| lane.to_s.downcase.include? i }
+end
+
 def cleaned_lane_condition(lane)
   excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'tester']
   (lane.to_s != 'devLane') &&
@@ -1148,14 +1182,25 @@ def appstore_beta_identifiers
   end
 end
 
-def appstore_team_api_key_prefixes
-  {
-    ENV['RSI_ITUNES_CONNECT_TEAM_ID'] => 'RSI',
-    ENV['RTS_ITUNES_CONNECT_TEAM_ID'] => 'RTS',
-    ENV['SRF_ITUNES_CONNECT_TEAM_ID'] => 'SRF',
-    ENV['SRGSSR_ITUNES_CONNECT_TEAM_ID'] => 'SRGSSR', # RTR is in SRG SSR ASC team
-    ENV['SWI_ITUNES_CONNECT_TEAM_ID'] => 'SWI'
-  }
+def appstore_build_identifiers
+  business_units.map { |business_unit| ENV["#{business_unit}_APP_IDENTIFIER"] }
+end
+
+def itc_business_units
+  # RTR is in SRG SSR ASC team
+  business_units.map do |business_unit|
+    business_unit == 'RTR' ? 'SRGSSR' : business_unit
+  end
+end
+
+def itc_team_ids
+  itc_business_units.map do |itc_business_unit|
+    ENV["#{itc_business_unit}_ITUNES_CONNECT_TEAM_ID"]
+  end
+end
+
+def itc_team_id_index(itc_team_id)
+  itc_team_ids.index(itc_team_id)
 end
 
 # Returns current tag version
@@ -1317,9 +1362,9 @@ def appstore_platform(platform)
   appstore_platforms[platform]
 end
 
-def srg_app_store_connect_api_key
-  itc_team_id = app_config.try_fetch_value(:itc_team_id)
-  key_prefix = appstore_team_api_key_prefixes[itc_team_id]
+def srg_app_store_connect_api_key(business_unit = nil)
+  business_unit ||= business_units[itc_team_id_index(app_config.try_fetch_value(:itc_team_id))]
+  key_prefix = itc_business_units[business_unit_index(business_unit)]
   return unless key_prefix
 
   folder_path = Dir.chdir('..') { Dir.pwd }
@@ -1345,12 +1390,14 @@ def pilot_fast_upload(app_identifier, platform)
 
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
+  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
     skip_waiting_for_build_processing: true
   )
+  xcversion(version: '~> 14')
 end
 
 def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
@@ -1359,8 +1406,12 @@ def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public
   tag_version ||= tag_version(platform)
   is_public_beta ||= false
 
+  xcversion(version: '~> 13')
   srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
+  xcversion(version: '~> 14')
 rescue StandardError => e
+  xcversion(version: '~> 14')
+
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
@@ -1617,7 +1668,7 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'release'
+  lane.to_s.downcase.include? 'prepareappstorerelease'
 end
 
 def skip_pull_translations
@@ -1704,6 +1755,24 @@ def spaceship_login
   ENV['FASTLANE_ITC_TEAM_ID'] = app_config.try_fetch_value(:itc_team_id)
   Spaceship::Tunes.login
   Spaceship::Tunes.select_team
+end
+
+def spaceship_login_with_api_key(business_unit = nil)
+  asc_api_key = srg_app_store_connect_api_key(business_unit)
+  return unless asc_api_key
+
+  token = Spaceship::ConnectAPI::Token.create(
+    key_id: asc_api_key[:id],
+    issuer_id: asc_api_key[:issuerId],
+    filepath: asc_api_key[:filePath]
+  )
+
+  Spaceship::ConnectAPI.token = token
+end
+
+def spaceship_platform(platform)
+  spaceship_platforms = { 'iOS' => 'IOS', 'tvOS' => 'TV_OS' }
+  spaceship_platforms[platform]
 end
 
 def spaceship_email_required(email)

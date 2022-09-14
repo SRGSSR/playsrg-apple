@@ -16,9 +16,9 @@ final class MediaVisualViewModel: ObservableObject {
         // Drop initial values; relevant values are first assigned when the view appears
         $media
             .dropFirst()
-            .map { media -> AnyPublisher<Double?, Never> in
-                guard let media = media else {
-                    return Just(nil).eraseToAnyPublisher()
+            .map { media in
+                guard let media else {
+                    return Just(nil as Double?).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.playbackProgressPublisher(for: media)
             }
@@ -32,7 +32,7 @@ final class MediaVisualViewModel: ObservableObject {
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.availabilityBadgeProperties(for: media)
     }
     
@@ -41,17 +41,17 @@ final class MediaVisualViewModel: ObservableObject {
     }
     
     var isMultiAudioAvailable: Bool {
-        guard let media = media else { return false }
+        guard let media else { return false }
         return media.play_isMultiAudioAvailable
     }
     
     var isAudioDescriptionAvailable: Bool {
-        guard let media = media else { return false }
+        guard let media else { return false }
         return media.play_isAudioDescriptionAvailable
     }
     
     var areSubtitlesAvailable: Bool {
-        guard let media = media else { return false }
+        guard let media else { return false }
         return media.play_areSubtitlesAvailable
     }
     
@@ -60,7 +60,7 @@ final class MediaVisualViewModel: ObservableObject {
     }
     
     var duration: Double? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.duration(for: media)
     }
 }

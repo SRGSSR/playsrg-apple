@@ -36,7 +36,7 @@ struct TopicCell: View {
     
 #if os(tvOS)
     private func action() {
-        if let topic = topic {
+        if let topic {
             navigateToTopic(topic)
         }
     }

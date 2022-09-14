@@ -155,7 +155,7 @@ struct DownloadCell: View {
 
 private extension DownloadCell {
     var accessibilityLabel: String? {
-        guard let download = download else { return nil }
+        guard let download else { return nil }
         if let media = download.media {
             return MediaDescription.accessibilityLabel(for: media)
         }

@@ -30,7 +30,7 @@ final class CarPlayTemplateListController {
         }
         .receive(on: DispatchQueue.main)
         .sink { [weak template] state in
-            guard let template = template else { return }
+            guard let template else { return }
             switch state {
             case let .failed(error: error):
                 template.emptyViewSubtitleVariants = [error.localizedDescription]
@@ -54,7 +54,7 @@ final class CarPlayTemplateListController {
     }
     
     private static func foreground() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.publisher(for: UIScene.willEnterForegroundNotification)
+        return NotificationCenter.default.weakPublisher(for: UIScene.willEnterForegroundNotification)
             .filter { $0.object is CPTemplateApplicationScene }
             .map { _ in }
             .eraseToAnyPublisher()

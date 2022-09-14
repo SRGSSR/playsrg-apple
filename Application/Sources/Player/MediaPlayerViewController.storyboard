@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21223" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HgT-ei-KY5">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21204"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -30,7 +30,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="233"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
-                                            <outlet property="controller" destination="dXH-ia-Dmj" id="bf2-Sg-xcz"/>
                                             <outlet property="delegate" destination="HgT-ei-KY5" id="7Xa-Iz-mjp"/>
                                         </connections>
                                     </view>
@@ -670,7 +669,6 @@
                         <outlet property="googleCastButton" destination="ztP-om-rhx" id="LlI-ts-svo"/>
                         <outlet property="imageCopyrightLabel" destination="a5Z-fv-nGR" id="JmN-dL-SmO"/>
                         <outlet property="imageCopyrightSpacerView" destination="7Wy-WF-f0f" id="0LG-EU-9fX"/>
-                        <outlet property="letterboxController" destination="dXH-ia-Dmj" id="y0X-sc-ych"/>
                         <outlet property="letterboxView" destination="JX5-nY-2fC" id="lFB-kd-d0k"/>
                         <outlet property="livestreamButton" destination="HA6-0V-M1C" id="Rxi-AX-801"/>
                         <outlet property="livestreamButtonImageView" destination="Lud-EO-TIz" id="laS-wA-W8i"/>
@@ -714,7 +712,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YfY-ML-gnW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="dXH-ia-Dmj" customClass="SRGLetterboxController"/>
                 <tapGestureRecognizer id="pQW-g8-tXr" userLabel="User Activity Gesture Recognizer">
                     <connections>
                         <action selector="toggleUserInterfaceVisibility:" destination="HgT-ei-KY5" id="3LP-Sq-5d0"/>

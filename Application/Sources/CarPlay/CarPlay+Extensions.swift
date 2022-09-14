@@ -23,12 +23,20 @@ extension CPListTemplate {
 extension CPInterfaceController {
     func play(media: SRGMedia, completion: @escaping () -> Void) {
         if let controller = SRGLetterboxService.shared.controller {
-            controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
+            if controller.play_mainMedia != media {
+                controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
+            }
         }
         else {
             let controller = SRGLetterboxController()
             controller.playMedia(media, at: HistoryResumePlaybackPositionForMedia(media), withPreferredSettings: ApplicationSettingPlaybackSettings())
             SRGLetterboxService.shared.enable(with: controller, pictureInPictureDelegate: nil)
+        }
+        
+        if let controller = SRGLetterboxService.shared.controller {
+            let playlist = PlaylistForURN(media.urn)
+            controller.playlistDataSource = playlist
+            controller.playbackTransitionDelegate = playlist
         }
         
         let nowPlayingTemplate = CPNowPlayingTemplate.shared

@@ -97,7 +97,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic) SRGLetterboxController *originalLetterboxController;       // optional source controller, will be used if provided
 @property (nonatomic) SRGPosition *originalPosition;                             // original position to start at
 
-@property (nonatomic) IBOutlet SRGLetterboxController *letterboxController;      // top object, strong
+@property (nonatomic) SRGLetterboxController *letterboxController;
 
 @property (nonatomic) SRGProgramComposition *programComposition;
 @property (nonatomic) NSArray<SRGProgram *> *programs;
@@ -236,6 +236,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalURN = URN;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            
+            self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
         }
         return self;
@@ -260,6 +262,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalMedia = media;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            
+            self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
         }
         return self;
@@ -273,7 +277,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         self.originalPosition = position;
         self.fromPushNotification = fromPushNotification;
         
-        // Force the correct Letterbox controller. It will be linked to the Letterbox view in `-viewDidLoad`
         self.letterboxController = controller;
     }
     return self;
@@ -351,6 +354,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     self.view.backgroundColor = UIColor.srg_gray16Color;
     
+    self.letterboxView.controller = self.letterboxController;
+    
     self.scrollView.hidden = YES;
     self.channelView.hidden = YES;
     
@@ -425,10 +430,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     [self updateAvailabilityLabelHeight];
     
-    // Use original controller, if any has been provided
     if (self.originalLetterboxController) {
-        self.letterboxView.controller = self.letterboxController;
-        
         // Always resume playback if the original controller was not playing
         [self.letterboxController play];
     }
@@ -1000,7 +1002,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateFavoriteStatusForShow:currentProgram.show];
     }
     else {
-        SRGMedia *mainMedia = [self mainMedia];
+        SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
         
         self.currentProgramTitleLabel.text = channel.name ?: mainMedia.title;
         self.currentProgramSubtitleLabel.text = nil;
@@ -1043,7 +1045,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)registerForChannelUpdates
 {
-    SRGMedia *mainMedia = [self mainMedia];
+    SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
     if (! mainMedia) {
         return;
     }
@@ -1186,16 +1188,6 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     return nil;
 }
 
-- (SRGMedia *)mainMedia
-{
-    if (self.letterboxController.mediaComposition) {
-        return [self.letterboxController.mediaComposition mediaForSubdivision:self.letterboxController.mediaComposition.mainChapter];
-    }
-    else {
-        return self.letterboxController.media;
-    }
-}
-
 - (SRGShow *)mainShow
 {
     SRGMedia *mainChapterMedia = [self mainChapterMedia];
@@ -1319,20 +1311,20 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)updateTimelineVisibilityForFullScreen:(BOOL)fullScreen animated:(BOOL)animated
 {
-    SRGMedia *media = [self mainMedia];
+    SRGMedia *media = self.letterboxController.play_mainMedia;
     BOOL hidden = (media.contentType == SRGContentTypeLivestream && ! fullScreen);
     [self.letterboxView setTimelineAlwaysHidden:hidden animated:animated];
 }
 
 - (BOOL)isLivestreamButtonHidden
 {
-    SRGMedia *media = [self mainMedia];
+    SRGMedia *media = self.letterboxController.play_mainMedia;
     return ! media || ! [self.livestreamMedias containsObject:media] || self.livestreamMedias.count < 2;
 }
 
 - (void)updateLivestreamButton
 {
-    SRGMedia *media = [self mainMedia];
+    SRGMedia *media = self.letterboxController.play_mainMedia;
     
     if (! media || media.contentType != SRGContentTypeLivestream || media.channel.transmission != SRGTransmissionRadio) {
         self.livestreamMedias = nil;
@@ -1553,7 +1545,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         // Calculate the minimum possible aspect ratio so that only a fraction of the vertical height is occupied by the player at most.
         // Use it as limit value if needed. Apply a smaller value to for radio (image less important, more space for metadata, especially
         // when displaying a program list).
-        SRGMedia *mainMedia = [self mainMedia];
+        SRGMedia *mainMedia = self.letterboxController.play_mainMedia;
         CGFloat verticalFillRatio = (mainMedia.mediaType == SRGMediaPlayerMediaTypeVideo) ? 0.5f : 0.4f;
         CGFloat minAspectRatio = CGRectGetWidth(self.view.frame) / (verticalFillRatio * CGRectGetHeight(self.view.frame));
         CGFloat multiplier = 1.f / fmaxf(aspectRatio, minAspectRatio);
@@ -1655,6 +1647,17 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [letterboxView setUserInterfaceHidden:! UIAccessibilityIsVoiceOverRunning() animated:YES];
         });
     }
+    
+    if ([subdivision isKindOfClass:SRGChapter.class]) {
+        SRGLetterboxController *letterboxController = letterboxView.controller;
+        Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
+        
+        if (! [[playlist.medias valueForKeyPath:@keypath(SRGMedia.new, URN)] containsObject:subdivision.URN]) {
+            Playlist *playlist = PlaylistForURN(subdivision.URN);
+            letterboxController.playlistDataSource = playlist;
+            letterboxController.playbackTransitionDelegate = playlist;
+        }
+    }
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didSelectAudioLanguageCode:(NSString *)languageCode
@@ -1706,7 +1709,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didLongPressSubdivision:(SRGSubdivision *)subdivision
 {
-    if ([self mainMedia].contentType == SRGContentTypeLivestream) {
+    if (self.letterboxController.play_mainMedia.contentType == SRGContentTypeLivestream) {
         return;
     }
         
@@ -2051,7 +2054,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     void (^sharingCompletionBlock)(SharingItem *, NSString *) = ^(SharingItem *sharingItem, NSString *URN) {
         UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
-            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition subdivisionWithURN:URN];
+            SRGSubdivision *subdivision = [self.letterboxController.mediaComposition play_subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
                     // Nothing

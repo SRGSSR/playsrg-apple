@@ -57,6 +57,11 @@
 		04D5F926286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F927286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F928286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
+		04E031CF28BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */; };
+		04E031D028BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */; };
+		04E031D128BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */; };
+		04E031D228BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */; };
+		04E031D328BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */; };
 		04E4DEEB283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEEC283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEED283678C900698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
@@ -2672,6 +2677,7 @@
 		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
+		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
@@ -3852,6 +3858,7 @@
 				08BDB5B1228D520000335898 /* PushService+Private.h */,
 				6F0850F226256A7700B4E410 /* Reachability.h */,
 				6F0850F326256A7700B4E410 /* Reachability.m */,
+				04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */,
 				6F978B4F2849C3CA003061E8 /* ScrollableContent.h */,
 				6F978B502849C3CA003061E8 /* ScrollableContent.m */,
 				08AF947E217D27E40028B082 /* SharingItem.h */,
@@ -5056,11 +5063,11 @@
 			children = (
 				6FE38A20270CBF63004DD296 /* CarPlay+Extensions.swift */,
 				6FB90D17270D91010033D860 /* CarPlayList.swift */,
-				6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */,
 				6F80F66A27187AFC00867C3B /* CarPlayNowPlayingController.swift */,
 				6F264D792800591C0022C6AD /* CarPlayPlaybackSpeedController.swift */,
 				9EA78A2B26D66E89004DAC33 /* CarPlaySceneDelegate.swift */,
 				6F54C9672717FDA3006B3465 /* CarPlayTemplateController.swift */,
+				6FE38A26270CF860004DD296 /* CarPlayTemplateListController.swift */,
 			);
 			path = CarPlay;
 			sourceTree = "<group>";
@@ -8472,6 +8479,7 @@
 				6F58903426AED4CD00553C24 /* Environment.swift in Sources */,
 				6FCA5BD627D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
 				6FB899FF26335B090012F1B0 /* Stack.swift in Sources */,
+				04E031CF28BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6FD4C2D6268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
 				6F16C80C26025945006F685A /* PageViewModel.swift in Sources */,
 				08F5DB10262DC7F700F717D0 /* Logger.swift in Sources */,
@@ -8505,6 +8513,7 @@
 				6F6E9062283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556C27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1D1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
+				04E031D028BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6F2DE05426440FB10059335E /* ActivityIndicator.swift in Sources */,
 				0821D53F227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D7268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
@@ -8754,6 +8763,7 @@
 				6F6E9063283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556D27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1E1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
+				04E031D128BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6F2DE05526440FB10059335E /* ActivityIndicator.swift in Sources */,
 				0821D540227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D8268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
@@ -9003,6 +9013,7 @@
 				6F6E9064283E6EB10049FEEE /* Highlight.swift in Sources */,
 				6F2F556E27B40967003DC9C0 /* NowArrowView.swift in Sources */,
 				E66BEC1F1DA7FCED00AD4450 /* MediaPlayerViewController.m in Sources */,
+				04E031D228BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6F2DE05626440FB20059335E /* ActivityIndicator.swift in Sources */,
 				0821D541227F5ED300FC091F /* DeepLinkService.m in Sources */,
 				6FD4C2D9268B6CBB00F06F63 /* SimpleButton.swift in Sources */,
@@ -9313,6 +9324,7 @@
 				6FD633E21FFBC0BE00875BE5 /* GoogleCastMiniPlayerView.m in Sources */,
 				6FB9B3DA26CA88AD0065092F /* TransluscentHeaderView.swift in Sources */,
 				6F56F9F8247C407100B2387B /* ChannelServiceSetup.m in Sources */,
+				04E031D328BD0EF000450D38 /* RemoteCommandCenter.swift in Sources */,
 				6FC0C699245FF06D00B44CAE /* ProgramHeaderView.m in Sources */,
 				6F010E15286607450024A745 /* SearchSettingsBucketCell.swift in Sources */,
 				6F33E6172860AF0200724E76 /* Navigation.swift in Sources */,
@@ -19046,8 +19058,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/FLEXTool/FLEX.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.7.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		6F6DD3A624E449BA003F9437 /* XCRemoteSwiftPackageReference "srgletterbox-apple" */ = {
@@ -19055,7 +19067,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgletterbox-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.3.0;
+				minimumVersion = 8.3.1;
 			};
 		};
 		6F6DD3A924E449D7003F9437 /* XCRemoteSwiftPackageReference "srgdataprovider-apple" */ = {

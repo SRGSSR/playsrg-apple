@@ -36,22 +36,22 @@ struct FeaturedMediaContent: FeaturedContent {
     }
     
     var introduction: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.subtitle(for: media, style: .show)
     }
     
     var title: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.title(for: media, style: .show)
     }
     
     var summary: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.summary(for: media)
     }
     
     var accessibilityLabel: String? {
-        guard let media = media else { return nil }
+        guard let media else { return nil }
         return MediaDescription.accessibilityLabel(for: media)
     }
     
@@ -65,7 +65,7 @@ struct FeaturedMediaContent: FeaturedContent {
     
 #if os(tvOS)
     func action() {
-        if let media = media {
+        if let media {
             navigateToMedia(media)
         }
     }
@@ -106,7 +106,7 @@ struct FeaturedShowContent: FeaturedContent {
     
 #if os(tvOS)
     func action() {
-        if let show = show {
+        if let show {
             navigateToShow(show)
         }
     }

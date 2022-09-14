@@ -13,7 +13,7 @@ class LetterboxDelegate: NSObject {
     var cancellables = Set<AnyCancellable>()
 
     override init() {
-        NotificationCenter.default.publisher(for: .SRGLetterboxPlaybackDidContinueAutomatically)
+        NotificationCenter.default.weakPublisher(for: .SRGLetterboxPlaybackDidContinueAutomatically)
             .sink { notification in
                 guard let media = notification.userInfo?[SRGLetterboxMediaKey] as? SRGMedia else { return }
 

@@ -19,17 +19,17 @@ struct TimelineView: View {
     }
     
     private func xPosition(for date: Date, width: CGFloat) -> CGFloat {
-        guard let dateInterval = dateInterval else { return 0 }
+        guard let dateInterval else { return 0 }
         return ProgramGuideGridLayout.timelinePadding + ProgramGuideGridLayout.channelHeaderWidth
             + ProgramGuideGridLayout.horizontalSpacing + (width - ProgramGuideGridLayout.timelinePadding) * date.timeIntervalSince(dateInterval.start) / dateInterval.duration
     }
     
     private func enumerateDates(matching dateComponents: DateComponents) -> [Date] {
-        guard let dateInterval = dateInterval else { return [] }
+        guard let dateInterval else { return [] }
         
         var dates = [Date]()
         Calendar.srgDefault.enumerateDates(startingAfter: dateInterval.start, matching: dateComponents, matchingPolicy: .nextTime) { date, _, stop in
-            guard let date = date else { return }
+            guard let date else { return }
             if dateInterval.contains(date) {
                 dates.append(date)
             }

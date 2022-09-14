@@ -4,13 +4,13 @@
 
 Play SRG is the [SRG SSR (Swiss Broadcasting Corporation)](https://www.srgssr.ch/en/who-we-are/organisation/) audio and video platform, provided as a distinct service for each of its business units ([RSI](https://www.rsi.ch), [RTR](https://www.rtr.ch), [RTS](https://www.rts.ch), [SRF](https://www.srf.ch) and [SWI](https://www.swissinfo.ch)). This repository contains the source code of the Play SRG applications for iOS and tvOS.
 
-The Play platform is more generally available on the web and on Android phones:
+The Play platform is more generally available on the web, on Android phones and devices running Android TV:
 
 | Platform | Play RSI | Play RTR | Play RTS | Play SRF | Play SWI |
 |:-- |:--:|:--:|:--:|:--:|:--:|
-| iOS / tvOS | [📱📺](https://itunes.apple.com/ch/app/play-rsi/id920753497) | [📱📺](https://itunes.apple.com/ch/app/play-rtr/id920754925) | [📱📺](https://itunes.apple.com/ch/app/play-rts/id920754415) | [📱📺](https://itunes.apple.com/ch/app/play-srf/id638194352) | [📱📺](https://itunes.apple.com/ch/app/play-swi/id920785201) |
-| Android | [🤖](https://play.google.com/store/apps/details?id=ch.rsi.player) | [🤖](https://play.google.com/store/apps/details?id=ch.rtr.player) | [🤖](https://play.google.com/store/apps/details?id=ch.rts.player) | [🤖](https://play.google.com/store/apps/details?id=ch.srf.mobile.srfplayer) | [🤖](https://play.google.com/store/apps/details?id=ch.swissinfo.player) |
-| Web | [🖥](https://www.rsi.ch/play) | [🖥](https://www.rtr.ch/play) | [🖥](https://www.rts.ch/play) | [🖥](https://www.srf.ch/play) | [🖥](https://www.swissinfo.ch/play) |
+| iOS / tvOS | [🍎📱📺](https://itunes.apple.com/ch/app/play-rsi/id920753497) | [🍎📱📺](https://itunes.apple.com/ch/app/play-rtr/id920754925) | [🍎📱📺](https://itunes.apple.com/ch/app/play-rts/id920754415) | [🍎📱📺](https://itunes.apple.com/ch/app/play-srf/id638194352) | [🍎📱📺](https://itunes.apple.com/ch/app/play-swi/id920785201) |
+| Android / Android TV | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rsi.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rtr.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.rts.player) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.srf.mobile.srfplayer) | [🤖📱📺](https://play.google.com/store/apps/details?id=ch.swissinfo.player) |
+| Web | [🖥📱💻](https://www.rsi.ch/play) | [🖥📱💻](https://www.rtr.ch/play) | [🖥📱💻](https://www.rts.ch/play) | [🖥📱💻](https://www.srf.ch/play) | [🖥📱💻](https://www.swissinfo.ch/play) |
 
 ![Screenshots](README-images/iphone-screenshots.png)
 
@@ -91,7 +91,7 @@ Simply open the project with Xcode and wait until all dependencies have been ret
 
 ## Releasing binaries
 
-The proprietary project uses [fastlane](https://fastlane.tools/) for releasing binaries, either for internal purposes or for the AppStore.
+The proprietary project uses [fastlane](https://fastlane.tools/) to [release binaries](RELEASE_CHECKLIST.md), either for internal purposes or for the AppStore.
 
 ## Specifications
 

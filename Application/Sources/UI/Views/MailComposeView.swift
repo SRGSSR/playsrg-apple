@@ -40,7 +40,7 @@ struct MailComposeView: UIViewControllerRepresentable {
         let viewController = MFMailComposeViewController()
         viewController.mailComposeDelegate = context.coordinator
         viewController.setToRecipients(toRecipients)
-        if let messageBody = messageBody {
+        if let messageBody {
             viewController.setMessageBody(messageBody, isHTML: false)
         }
         return viewController

@@ -17,8 +17,8 @@ class ShowCellViewModel: ObservableObject {
         // Drop initial value; a relevant value is first assigned when the view appears
         $show
             .dropFirst()
-            .map { show -> AnyPublisher<Bool, Never> in
-                guard let show = show else {
+            .map { show in
+                guard let show else {
                     return Just(false).eraseToAnyPublisher()
                 }
                 return UserDataPublishers.subscriptionStatusPublisher(for: show)

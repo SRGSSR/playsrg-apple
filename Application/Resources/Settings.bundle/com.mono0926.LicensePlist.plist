@@ -22,7 +22,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/Aiolos</string>
 			<key>Title</key>
-			<string>aiolos (1.8.1)</string>
+			<string>aiolos (1.9.2)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -70,7 +70,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/firebase-ios-sdk</string>
 			<key>Title</key>
-			<string>firebase-ios-sdk (9.3.0)</string>
+			<string>firebase-ios-sdk (9.5.0)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -150,7 +150,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/ios-library</string>
 			<key>Title</key>
-			<string>ios-library (16.8.0)</string>
+			<string>ios-library (16.9.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -310,7 +310,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/srgletterbox-apple</string>
 			<key>Title</key>
-			<string>srgletterbox-apple (8.3.0)</string>
+			<string>srgletterbox-apple (8.3.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -350,7 +350,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-collections</string>
 			<key>Title</key>
-			<string>swift-collections (1.0.2)</string>
+			<string>swift-collections (1.0.3)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>
@@ -358,7 +358,7 @@
 			<key>File</key>
 			<string>com.mono0926.LicensePlist/swift-protobuf</string>
 			<key>Title</key>
-			<string>swift-protobuf (1.19.0)</string>
+			<string>swift-protobuf (1.20.1)</string>
 			<key>Type</key>
 			<string>PSChildPaneSpecifier</string>
 		</dict>

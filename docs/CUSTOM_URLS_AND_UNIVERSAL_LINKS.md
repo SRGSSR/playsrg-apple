@@ -12,7 +12,7 @@ For example Play RTS can be opened with URLs starting with `playrts://...`, whil
 
 The host name (first item after the `//` in the URL) describes the action which must be performed. Following actions are currently available:
 
-* Open a media within the player: `[scheme]://media/[media_urn]`. An optional `&start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
+* Open a media within the player: `[scheme]://media/[media_urn]`. An optional `start_time=[start_time]` parameter can be added to start VOD / AOD playback at the specified position in second.
 * Open a show page: `[scheme]://show/[show_urn]`.
 * Open a topic page: `[scheme]://topic/[topic_urn]`.
 * Open a section page: `[scheme]://section/[section_id]`.

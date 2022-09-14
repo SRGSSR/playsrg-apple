@@ -75,7 +75,7 @@ struct ShowCell: View {
     
 #if os(tvOS)
     private func action() {
-        if let show = show {
+        if let show {
             navigateToShow(show)
         }
     }

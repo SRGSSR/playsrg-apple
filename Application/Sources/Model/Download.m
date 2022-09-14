@@ -253,7 +253,47 @@ static NSArray<Download *> *s_sortedDownloads;
 
 + (void)removeUnusedDownloadedFiles
 {
-    [self removeUnusedDownloadedFilesInFolderPath:[self downloadsDirectoryURLString]];
+    NSArray *downloadedMediaFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localMediaFileURL)];
+    NSArray *downloadedImageFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localImageFileURL)];
+    NSArray *allDownloadedFilesURLs = [[@[] arrayByAddingObjectsFromArray:downloadedMediaFilesURLs] arrayByAddingObjectsFromArray:downloadedImageFilesURLs];
+    NSString *folderPath = [self downloadsDirectoryURLString];
+    NSError *error;
+    for (NSString *fileName in [NSFileManager.defaultManager contentsOfDirectoryAtPath:folderPath error:&error]) {
+        NSURL *fileURL = [NSURL fileURLWithPath:[folderPath stringByAppendingPathComponent:fileName]];
+        if (! [allDownloadedFilesURLs containsObject:fileURL]) {
+            [NSFileManager.defaultManager removeItemAtURL:fileURL error:&error];
+        }
+    }
+}
+
++ (void)updateUnplayableDownloads
+{
+    NSMutableArray<Download *> *unplayableDownloads = NSMutableArray.array;
+    for (Download *download in Download.downloads) {
+        if (download.state == DownloadStateDownloaded && [download.localMediaFileName.pathExtension isEqualToString:@"octet-stream"]) {
+            // Try to move media file with the download url extension
+            if (download.downloadMediaURL.pathExtension) {
+                NSURL *sourceURL = download.localMediaFileURL;
+                
+                NSString *localMediaFileName = [[download.localMediaFileName stringByDeletingPathExtension] stringByAppendingPathExtension:download.downloadMediaURL.pathExtension];
+                NSString *destinationPath = [[Download downloadsDirectoryURLString] stringByAppendingPathComponent:localMediaFileName];
+                NSURL *destinationURL = [NSURL fileURLWithPath:destinationPath];
+                [NSFileManager.defaultManager moveItemAtURL:sourceURL toURL:destinationURL error:nil];
+                
+                if ([NSFileManager.defaultManager fileExistsAtPath:destinationPath]) {
+                    download.localMediaFileName = localMediaFileName;
+                }
+                else {
+                    [unplayableDownloads addObject:download];
+                }
+            }
+            else {
+                [unplayableDownloads addObject:download];
+            }
+        }
+    }
+    [Download removeDownloads:unplayableDownloads.copy];
+    [self saveDownloadsDictionary];
 }
 
 #pragma mark Public class methods
@@ -363,20 +403,6 @@ static NSArray<Download *> *s_sortedDownloads;
     }];
     
     [UserInteractionEvent removeFromDownloads:downloads];
-}
-
-+ (void)removeUnusedDownloadedFilesInFolderPath:(NSString *)folderPath
-{
-    NSArray *downloadedMediaFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localMediaFileURL)];
-    NSArray *downloadedImageFilesURLs = [Download.downloads valueForKey:@keypath(Download.new, localImageFileURL)];
-    NSArray *allDownloadedFilesURLs = [[@[] arrayByAddingObjectsFromArray:downloadedMediaFilesURLs] arrayByAddingObjectsFromArray:downloadedImageFilesURLs];
-    NSError *error;
-    for (NSString *fileName in [NSFileManager.defaultManager contentsOfDirectoryAtPath:folderPath error:&error]) {
-        NSURL *fileURL = [NSURL fileURLWithPath:[folderPath stringByAppendingPathComponent:fileName]];
-        if (! [allDownloadedFilesURLs containsObject:fileURL]) {
-            [NSFileManager.defaultManager removeItemAtURL:fileURL error:&error];
-        }
-    }
 }
 
 + (nullable NSProgress *)currentlyKnownProgressForDownload:(Download *)download
@@ -511,6 +537,17 @@ static NSArray<Download *> *s_sortedDownloads;
     NSArray *types = [MIMEType componentsSeparatedByString:@"/"];
     NSString *type = types.firstObject;
     NSString *extension = types.lastObject ?: @"mov";
+    
+    // Try to fix the default arbitrary binary data response with the url file extension
+    if ([type.lowercaseString isEqualToString:@"application"] && [extension.lowercaseString isEqualToString:@"octet-stream"]) {
+        if (self.downloadMediaURL.pathExtension != nil) {
+            extension = self.downloadMediaURL.pathExtension;
+        }
+        else {
+            PlayLogError(@"download", @"Could not find a file extension for media %@.\nMIMEType: %@", self.URN, MIMEType);
+            return NO;
+        }
+    }
     
     // For audio, mpeg type extension don't work with AVPlayer
     if ([type.lowercaseString isEqualToString:@"audio"] && [extension.lowercaseString isEqualToString:@"mpeg"]) {

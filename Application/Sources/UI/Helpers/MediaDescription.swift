@@ -43,7 +43,7 @@ enum MediaDescription {
     }
     
     private static func formattedTime(for media: SRGMedia) -> String {
-        return DateFormatter.play_time.string(from: media.date).capitalizedFirstLetter
+        return DateFormatter.play_time.string(from: media.date)
     }
     
     private static func areRedundant(media: SRGMedia, show: SRGShow) -> Bool {

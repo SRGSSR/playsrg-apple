@@ -19,7 +19,7 @@ struct ChannelHeaderView: View {
     
     var body: some View {
         Group {
-            if let imageUrl = imageUrl {
+            if let imageUrl {
                 LazyImage(source: imageUrl) { state in
                     if let image = state.image {
                         image

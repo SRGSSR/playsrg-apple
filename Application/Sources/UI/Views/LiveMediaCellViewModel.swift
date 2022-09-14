@@ -31,9 +31,9 @@ final class LiveMediaCellViewModel: ObservableObject {
     private func registerForChannelUpdates(for media: SRGMedia?) {
         unregisterChannelUpdates()
         
-        if let media = media, let channel = media.channel, media.contentType == .livestream {
+        if let media, let channel = media.channel, media.contentType == .livestream {
             channelObserver = ChannelService.shared.addObserverForUpdates(with: channel, livestreamUid: media.uid) { [weak self] composition in
-                guard let self = self else { return }
+                guard let self else { return }
                 self.programComposition = composition
             }
         }
@@ -61,10 +61,10 @@ extension LiveMediaCellViewModel {
     }
     
     var title: String? {
-        if let channel = channel {
+        if let channel {
             return program?.title ?? channel.title
         }
-        else if let media = media {
+        else if let media {
             return MediaDescription.title(for: media, style: .date)
         }
         else {
@@ -73,11 +73,11 @@ extension LiveMediaCellViewModel {
     }
     
     var subtitle: String? {
-        if let media = media, media.contentType == .scheduledLivestream {
+        if let media, media.contentType == .scheduledLivestream {
             return MediaDescription.subtitle(for: media, style: .date)
         }
         else {
-            guard let program = program else { return nil }
+            guard let program else { return nil }
             let remainingTimeInterval = program.endDate.timeIntervalSince(date)
             let remainingTime = PlayRemainingTimeFormattedDuration(remainingTimeInterval)
             return String(format: NSLocalizedString("%@ remaining", comment: "Text displayed on live cells telling how much time remains for a program currently on air"), remainingTime)
@@ -86,11 +86,11 @@ extension LiveMediaCellViewModel {
     
     var progress: Double? {
         if channel != nil {
-            guard let program = program else { return nil }
+            guard let program else { return nil }
             let progress = date.timeIntervalSince(program.startDate) / program.endDate.timeIntervalSince(program.startDate)
             return progress.clamped(to: 0...1)
         }
-        else if let media = media, media.contentType == .scheduledLivestream, media.timeAvailability(at: date) == .available,
+        else if let media, media.contentType == .scheduledLivestream, media.timeAvailability(at: date) == .available,
                 let startDate = media.startDate,
                 let endDate = media.endDate {
             let progress = date.timeIntervalSince(startDate) / endDate.timeIntervalSince(startDate)
@@ -110,14 +110,14 @@ extension LiveMediaCellViewModel {
 
 extension LiveMediaCellViewModel {
     var accessibilityLabel: String? {
-        if let channel = channel {
+        if let channel {
             var label = String(format: PlaySRGAccessibilityLocalizedString("%@ live", comment: "Live content label, with a channel title"), channel.title)
-            if let program = program {
+            if let program {
                 label.append(", \(program.title)")
             }
             return label
         }
-        else if let media = media {
+        else if let media {
             return MediaDescription.accessibilityLabel(for: media)
         }
         else {

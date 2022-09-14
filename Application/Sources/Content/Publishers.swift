@@ -9,6 +9,20 @@ import Combine
 import SRGDataProviderCombine
 import SRGUserData
 
+extension NotificationCenter {
+    /// The usual notification publisher retains the filter object, potentially creating cycles. Apply filter on
+    /// unfiltered stream to avoid this issue.
+    func weakPublisher(for name: Notification.Name, object: AnyObject? = nil) -> AnyPublisher<Notification, Never> {
+        publisher(for: name)
+            .filter { [weak object] notification in
+                guard let object = object else { return true }
+                guard let notificationObject = notification.object as? AnyObject else { return false }
+                return notificationObject === object
+            }
+            .eraseToAnyPublisher()
+    }
+}
+
 extension SRGDataProvider {
     /// Publishes the latest 30 episodes for a show URN list.
     func latestMediasForShowsPublisher(withUrns urns: [String], pageSize: UInt = SRGDataProviderDefaultPageSize) -> AnyPublisher<[SRGMedia], Error> {
@@ -76,7 +90,7 @@ extension SRGDataProvider {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {
@@ -100,7 +114,7 @@ extension SRGDataProvider {
     
     func resumePlaybackPublisher(pageSize: UInt = SRGDataProviderDefaultPageSize, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[SRGMedia], Error> {
         func playbackPositions(for historyEntries: [SRGHistoryEntry]?) -> OrderedDictionary<String, TimeInterval> {
-            guard let historyEntries = historyEntries else { return [:] }
+            guard let historyEntries else { return [:] }
             
             var playbackPositions = OrderedDictionary<String, TimeInterval>()
             for historyEntry in historyEntries {
@@ -117,7 +131,7 @@ extension SRGDataProvider {
             Future<OrderedDictionary<String, TimeInterval>, Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGHistoryEntry.date, ascending: false)
                 SRGUserData.current!.history.historyEntries(matching: nil, sortedWith: [sortDescriptor]) { historyEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {
@@ -147,7 +161,7 @@ extension SRGDataProvider {
             Future<[String], Error> { promise in
                 let sortDescriptor = NSSortDescriptor(keyPath: \SRGPlaylistEntry.date, ascending: false)
                 SRGUserData.current!.playlists.playlistEntriesInPlaylist(withUid: SRGPlaylistUid.watchLater.rawValue, matching: nil, sortedWith: [sortDescriptor]) { playlistEntries, error in
-                    if let error = error {
+                    if let error {
                         promise(.failure(error))
                     }
                     else {

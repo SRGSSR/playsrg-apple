@@ -58,7 +58,7 @@ final class SwiftMessagesBridge: NSObject {
             presentationController = presentationController?.parent
         }
         
-        if let presentationController = presentationController {
+        if let presentationController {
             config.presentationContext = .viewController(presentationController)
         }
         

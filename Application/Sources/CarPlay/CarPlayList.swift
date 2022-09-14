@@ -15,6 +15,7 @@ enum CarPlayList {
     case livestreams
     case mostPopular
     case mostPopularMedias(radioChannel: RadioChannel)
+    case livePrograms(channel: SRGChannel, media: SRGMedia)
     
     private static let pageSize: UInt = 20
     
@@ -28,6 +29,8 @@ enum CarPlayList {
             return NSLocalizedString("Trends", comment: "Tab title to present the most popular medias by channel on CarPlay")
         case let .mostPopularMedias(radioChannel: radioChannel):
             return radioChannel.name
+        case .livePrograms:
+            return "\(NSLocalizedString("Previous shows", comment: "Livestream previous programs screen title"))"
         }
     }
     
@@ -39,6 +42,8 @@ enum CarPlayList {
             return AnalyticsPageTitle.home.rawValue
         case .mostPopularMedias:
             return AnalyticsPageTitle.mostPopular.rawValue
+        case .livePrograms:
+            return AnalyticsPageTitle.livePrograms.rawValue
         }
     }
     
@@ -52,6 +57,8 @@ enum CarPlayList {
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, AnalyticsPageLevel.mostPopular.rawValue]
         case let .mostPopularMedias(radioChannel):
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, radioChannel.name]
+        case let .livePrograms(channel, _):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.automobile.rawValue, channel.title]
         }
     }
     
@@ -73,6 +80,10 @@ enum CarPlayList {
         case let .mostPopularMedias(radioChannel: radioChannel):
             return SRGDataProvider.current!.radioMostPopularMedias(for: ApplicationConfiguration.shared.vendor, channelUid: radioChannel.uid, pageSize: Self.pageSize)
                 .mapToSections(with: interfaceController)
+        case let .livePrograms(channel, media):
+            return Publishers.PublishAndRepeat(onOutputFrom: Timer.publish(every: 30, on: .main, in: .common).autoconnect()) {
+                return Self.liveProgramsSections(for: channel, media: media, interfaceController: interfaceController)
+            }
         }
     }
 }
@@ -80,6 +91,12 @@ enum CarPlayList {
 private extension CarPlayList {
     struct LiveMediaData {
         let media: SRGMedia
+        let playing: Bool
+    }
+    
+    struct LiveProgramData {
+        let program: SRGProgram
+        let image: UIImage
         let playing: Bool
     }
     
@@ -91,17 +108,28 @@ private extension CarPlayList {
     }
     
     static func liveMediaDataPublisher(for media: SRGMedia) -> AnyPublisher<LiveMediaData, Never> {
-        return playingPublisher(for: media)
+        return playingPublisher(for: media.urn)
             .map { playing in
                 return LiveMediaData(media: media, playing: playing)
             }
             .eraseToAnyPublisher()
     }
     
+    static func liveProgramDataPublisher(for program: SRGProgram) -> AnyPublisher<LiveProgramData, Never> {
+        return Publishers.CombineLatest(
+            imagePublisher(for: program),
+            playingPublisher(for: program.mediaURN)
+        )
+        .map { image, playing in
+            return LiveProgramData(program: program, image: image, playing: playing)
+        }
+        .eraseToAnyPublisher()
+    }
+    
     static func mediaDataPublisher(for media: SRGMedia) -> AnyPublisher<MediaData, Never> {
         return Publishers.CombineLatest3(
             imagePublisher(for: media),
-            playingPublisher(for: media),
+            playingPublisher(for: media.urn),
             UserDataPublishers.playbackProgressPublisher(for: media)
         )
         .map { image, playing, progress in
@@ -110,16 +138,30 @@ private extension CarPlayList {
         .eraseToAnyPublisher()
     }
     
-    private static func playingPublisher(for media: SRGMedia) -> AnyPublisher<Bool, Never> {
-        return nowPlayingMediaPublisher()
-            .map { media == $0 }
-            .eraseToAnyPublisher()
+    private static func playingPublisher(for mediaUrn: String?) -> AnyPublisher<Bool, Never> {
+        if let mediaUrn {
+            return nowPlayingMediaPublisher()
+                .map { $0.map(\.urn).contains(mediaUrn) }
+                .eraseToAnyPublisher()
+        }
+        else {
+            return Just(false)
+                .eraseToAnyPublisher()
+        }
     }
     
     private static func imagePublisher(for media: SRGMedia) -> AnyPublisher<UIImage, Never> {
+        return imagePublisher(for: media.image)
+    }
+    
+    private static func imagePublisher(for program: SRGProgram) -> AnyPublisher<UIImage, Never> {
+        return imagePublisher(for: program.image)
+    }
+    
+    private static func imagePublisher(for image: SRGImage?) -> AnyPublisher<UIImage, Never> {
         let imageSize = SRGImageSize.small
         let placeholderImage = UIColor.placeholder.image(ofSize: SRGRecommendedImageCGSize(imageSize, .default))
-        if let imageUrl = url(for: media.image, size: imageSize) {
+        if let imageUrl = url(for: image, size: imageSize) {
             return ImagePipeline.shared.imagePublisher(with: imageUrl)
                 .map(\.image)
                 .replaceError(with: placeholderImage)
@@ -132,21 +174,24 @@ private extension CarPlayList {
         }
     }
     
-    private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> SRGMedia? {
-        guard let controller = controller else { return nil }
-        if let fullLengthMedia = controller.fullLengthMedia, fullLengthMedia.contentType == .livestream || fullLengthMedia.contentType == .scheduledLivestream {
-            return fullLengthMedia
+    private static func nowPlayingMedia(for controller: SRGLetterboxController?) -> [SRGMedia] {
+        guard let controller else { return [] }
+        
+        var medias: Set<SRGMedia> = []
+        if let mainMedia = controller.play_mainMedia {
+            medias.insert(mainMedia)
         }
-        else {
-            return controller.media
+        if let media = controller.media {
+            medias.insert(media)
         }
+        return Array(medias)
     }
     
-    private static func nowPlayingMediaPublisher() -> AnyPublisher<SRGMedia?, Never> {
+    private static func nowPlayingMediaPublisher() -> AnyPublisher<[SRGMedia], Never> {
         return SRGLetterboxService.shared.publisher(for: \.controller)
-            .map { controller -> AnyPublisher<SRGMedia?, Never> in
-                if let controller = controller {
-                    return NotificationCenter.default.publisher(for: NSNotification.Name.SRGLetterboxMetadataDidChange, object: controller)
+            .map { controller in
+                if let controller {
+                    return NotificationCenter.default.weakPublisher(for: .SRGLetterboxMetadataDidChange, object: controller)
                         .map { notification in
                             let controller = notification.object as? SRGLetterboxController
                             return nowPlayingMedia(for: controller)
@@ -155,13 +200,36 @@ private extension CarPlayList {
                         .eraseToAnyPublisher()
                 }
                 else {
-                    return Just(nil)
+                    return Just([])
                         .eraseToAnyPublisher()
                 }
             }
             .switchToLatest()
             .removeDuplicates()
             .eraseToAnyPublisher()
+    }
+    
+    private static func liveProgramsPublisher(for channel: SRGChannel, media: SRGMedia) -> AnyPublisher<[SRGProgram], Error> {
+        if let controller = SRGLetterboxService.shared.controller,
+           let dateInterval = controller.play_dateInterval,
+           let segments = controller.mediaComposition?.mainChapter.segments, !segments.isEmpty {
+            return SRGDataProvider.current!.radioLatestPrograms(for: ApplicationConfiguration.shared.vendor,
+                                                                channelUid: channel.uid,
+                                                                livestreamUid: media.uid,
+                                                                from: nil, to: nil,
+                                                                pageSize: 50, paginatedBy: nil)
+            .map { _, programs in
+                return programs
+                    .filter { $0.startDate >= dateInterval.start && $0.startDate <= dateInterval.end }
+                    .reversed()
+            }
+            .eraseToAnyPublisher()
+        }
+        else {
+            return Just([])
+                .setFailureType(to: Error.self)
+                .eraseToAnyPublisher()
+        }
     }
 }
 
@@ -197,14 +265,15 @@ private extension CarPlayList {
                 })
             }
             .switchToLatest()
-            .map { mediaDataList in
-                let items = mediaDataList.map { mediaData -> CPListItem in
-                    let item = CPListItem(text: mediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: mediaData.media))
+            .map { liveMediaDataList in
+                let items = liveMediaDataList.map { liveMediaData in
+                    let item = CPListItem(text: liveMediaData.media.channel?.title, detailText: nil, image: Self.logoImage(for: liveMediaData.media))
                     item.accessoryType = .none
                     item.handler = { _, completion in
-                        interfaceController.play(media: mediaData.media, completion: completion)
+                        interfaceController.play(media: liveMediaData.media, completion: completion)
                     }
-                    item.isPlaying = mediaData.playing
+                    item.playingIndicatorLocation = .trailing
+                    item.isPlaying = liveMediaData.playing
                     return item
                 }
                 return [CPListSection(items: items)]
@@ -237,6 +306,39 @@ private extension CarPlayList {
                 .eraseToAnyPublisher()
         }
     }
+    
+    static func liveProgramsSections(for channel: SRGChannel, media: SRGMedia, interfaceController: CPInterfaceController) -> AnyPublisher<[CPListSection], Error> {
+        return liveProgramsPublisher(for: channel, media: media)
+            .map { programs in
+                return Publishers.AccumulateLatestMany(programs.map { program in
+                    return liveProgramDataPublisher(for: program)
+                })
+            }
+            .switchToLatest()
+            .map { liveProgramDataList in
+                let items = liveProgramDataList.map { liveProgramData -> CPListItem in
+                    let program = liveProgramData.program
+                    let time = "\(DateFormatter.play_time.string(from: program.startDate)) - \(DateFormatter.play_time.string(from: program.endDate))"
+                    let item = CPListItem(text: liveProgramData.program.title, detailText: time, image: liveProgramData.image)
+                    item.accessoryType = .none
+                    item.handler = { _, completion in
+                        if let mediaUrn = program.mediaURN, program.startDate <= Date() {
+                            SRGLetterboxService.shared.controller?.switch(toURN: mediaUrn, withCompletionHandler: { _ in
+                                completion()
+                            })
+                        }
+                        else {
+                            completion()
+                        }
+                    }
+                    item.playingIndicatorLocation = .trailing
+                    item.isPlaying = liveProgramData.playing
+                    return item
+                }
+                return [CPListSection(items: items)]
+            }
+            .eraseToAnyPublisher()
+    }
 }
 
 private extension Publisher where Output == [SRGMedia] {
@@ -248,16 +350,18 @@ private extension Publisher where Output == [SRGMedia] {
         }
         .switchToLatest()
         .map { mediaDataList in
-            let items = mediaDataList.map { mediaData -> CPListItem in
+            let items = mediaDataList.map { mediaData in
                 let item = CPListItem(text: MediaDescription.title(for: mediaData.media, style: .show),
-                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: .show),
+                                      // Keep same media item height with a detail text in any cases.
+                                      detailText: MediaDescription.subtitle(for: mediaData.media, style: .show) ?? " ",
                                       image: mediaData.image)
-                item.isPlaying = mediaData.playing
-                item.playbackProgress = mediaData.progress ?? 0
                 item.accessoryType = .none
                 item.handler = { _, completion in
                     interfaceController.play(media: mediaData.media, completion: completion)
                 }
+                item.playingIndicatorLocation = .trailing
+                item.isPlaying = mediaData.playing
+                item.playbackProgress = mediaData.progress ?? 0
                 return item
             }
             return [CPListSection(items: items)]
