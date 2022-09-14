@@ -4,9 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#if APPCENTER
-import AppCenterDistribute
-#endif
 #if os(iOS) && (DEBUG || APPCENTER)
 import FLEX
 #endif

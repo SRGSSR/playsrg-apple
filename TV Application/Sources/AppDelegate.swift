@@ -4,8 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-import AppCenter
-import AppCenterCrashes
 import Firebase
 import SRGAnalyticsIdentity
 import SRGDataProviderCombine
@@ -20,11 +18,6 @@ class AppDelegate: UIResponder {
 #if DEBUG || NIGHTLY || BETA
     private var settingUpdatesCancellables = Set<AnyCancellable>()
 #endif
-    
-    private func setupAppCenter() {
-        guard let appCenterSecret = Bundle.main.object(forInfoDictionaryKey: "AppCenterSecret") as? String, !appCenterSecret.isEmpty else { return }
-        AppCenter.start(withAppSecret: appCenterSecret, services: [Crashes.self])
-    }
 }
     
 extension AppDelegate: UIApplicationDelegate {
@@ -46,10 +39,6 @@ extension AppDelegate: UIApplicationDelegate {
         if Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist") != nil {
             FirebaseApp.configure()
         }
-        
-        #if !DEBUG
-        setupAppCenter()
-        #endif
         
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
