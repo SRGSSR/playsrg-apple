@@ -62,7 +62,13 @@ struct Service: Identifiable, Equatable {
         url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")
     )
     
-    static var services: [Service] = [production, stage, test, mmf, samProduction, samStage, samTest]
+    static var localhost = Service(
+        id: "localhost 8080",
+        name: "Localhost 8080",
+        url: URL(string: "http://localhost:8080")!
+    )
+    
+    static var services: [Service] = [production, stage, test, mmf, samProduction, samStage, samTest, localhost]
     
     static func service(forId id: String?) -> Service {
 #if DEBUG || NIGHTLY || BETA
