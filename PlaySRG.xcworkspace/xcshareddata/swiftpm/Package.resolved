@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "appcenter-sdk-apple",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
-      "state" : {
-        "revision" : "b2dc99cfedead0bad4e6573d86c5228c89cff332",
-        "version" : "4.4.3"
-      }
-    },
-    {
       "identity" : "boringssl-swiftpm",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
@@ -235,15 +226,6 @@
       }
     },
     {
-      "identity" : "plcrashreporter",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/microsoft/PLCrashReporter.git",
-      "state" : {
-        "revision" : "81cdec2b3827feb03286cb297f4c501a8eb98df1",
-        "version" : "1.10.2"
-      }
-    },
-    {
       "identity" : "promises",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/promises.git",
@@ -293,8 +275,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
       "state" : {
-        "revision" : "340c676f77eec1bd437bed91f30165736fc10abb",
-        "version" : "16.1.0"
+        "branch" : "feature/default-images",
+        "revision" : "23e55155a621aff9bb4eddf15998e5858935c230"
       }
     },
     {
