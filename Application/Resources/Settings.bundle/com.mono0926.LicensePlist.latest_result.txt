@@ -107,7 +107,7 @@ name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, ve
 
 name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.9.2, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.3, source: https://github.com/microsoft/appcenter-sdk-apple
+name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/appcenter-sdk-apple
 
 name: boringssl-SwiftPM, nameSpecified: boringssl-swiftpm, owner: firebase, version: 0.9.1, source: https://github.com/firebase/boringssl-SwiftPM
 
