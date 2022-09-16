@@ -10,22 +10,22 @@
 | Start git-flow release branch for new version ||||||
 | Check version and build numbers. Bump if needed ||||||
 | Update what's new JSON for betas ||||||
-| [iOS] Update what's new on Pastebin (mark new release with the preprod flag) ||||||
-| Create new version on App Store Connect with what's new information ||||||
-| Collect translated what's new and update App Store Connect ||||||
-| [iOS] Collect translated what's new and update Pastebin ||||||
+| [iOS] Update what's new on Github pages (with fastlane\*) ||||||
+| Create new version on App Store Connect (with fastlane\*) ||||||
 | Update screenshots if needed (with fastlane\*\*) ||||||
 | Build betas for TestFlight (with fastlane\*) ||||||
 | Build App Store versions + collect DSYMs (with fastlane\*) ||||||
 | Update production remote configuration on Firebase ||||||
 | Distribute public TestFlight versions (with fastane\*) ||||||
+| Collect translations and update App Store Connect (with fastlane\*) ||||||
+| [iOS] Collect translations and update Github pages (with fastlane\*) ||||||
 | Check what's new in betas or TestFlight versions ||||||
 | Ask the PO to approve the version ||||||
 | Submit to Apple review (with fastlane\*) ||||||
 | Update status page on Confluence (Up coming status, statistics changes) ||||||
 | Obtain successful Apple review ||||||
 | Release to the store ||||||
-| [iOS] Remove the preprod flag from what's new information on Pastebin ||||||
+| [iOS] Update Github pages to display hidden releases (with fastlane\*) ||||||
 | [iOS] Check what's new information with production applications ||||||
 | Finish git-flow release ||||||
 | Bump patch / build version numbers in project ||||||
@@ -51,6 +51,8 @@
 - Submit to Apple review the releases with the current version number
 	- **Play SRG iOS AppStore releases** (with `true` to `submit_for_review` parameter): `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 	- **Play SRG tvOS AppStore releases** (with `true` to `submit_for_review` parameter):  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
+- Publish release notes on Github page with correct released status
+ 	- **Play SRG Publish release notes**: `fastlane ios publishReleaseNotes`
 
 ### \*\*Manual fastlane:
 
@@ -66,3 +68,5 @@
 	- Play RTS tvOS: `fastlane ios tvOSrtsScreenshots`
 	- Play SRF tvOS: `fastlane ios tvOSsrfScreenshots`
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
+- Application status (Ready for sale, In review, etc…)
+	- All published app: `fastlane ios appStoreAppStatus`
