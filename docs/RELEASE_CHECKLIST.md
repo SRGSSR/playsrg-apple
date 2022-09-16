@@ -70,3 +70,19 @@
 	- Play SWI tvOS: `fastlane ios tvOSswiScreenshots`
 - Application status (Ready for sale, In review, etc…)
 	- All published app: `fastlane ios appStoreAppStatus`
+
+# Release notes html pages
+
+The Play SRG iOS application has in `Profile` tab, `Settings` view, a `What's new` link.
+It downloads a html file to display release notes. The html pages are published from the project github pages: [https://srgssr.github.io/playsrg-apple](https://srgssr.github.io/playsrg-apple).
+
+`fastlane ios publishReleaseNotes` script does update automatically (recommended).
+
+It can be done manually. No need to keep the commits history:
+
+- Checkout `gh-pages` branch.
+- Edit html files with new `div` for a new version.
+- Add or remove the `preprod` div attribute if it's a prerelease version (see in the html script).
+- Amend commit with changes.
+- Force push the branch to remote.
+- Switch to an other branch and remove local `gh-pages` branch (recommended).
