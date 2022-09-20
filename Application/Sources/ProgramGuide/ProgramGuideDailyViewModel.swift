@@ -14,7 +14,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
     @Published private(set) var state: State
     
     /// Channels can be provided if available for more efficient content loading
-    init(day: SRGDay, firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel]) {
+    init(day: SRGDay, firstPartyChannels: [PlayChannel], thirdPartyChannels: [PlayChannel]) {
         self.day = day
         self.state = .loading(firstPartyChannels: firstPartyChannels, thirdPartyChannels: thirdPartyChannels, day: day)
         
@@ -36,7 +36,7 @@ final class ProgramGuideDailyViewModel: ObservableObject {
 // MARK: Types
 
 extension ProgramGuideDailyViewModel {
-    typealias Section = SRGChannel
+    typealias Section = PlayChannel
     
     struct Item: Hashable {
         enum WrappedValue: Hashable {
@@ -77,8 +77,8 @@ extension ProgramGuideDailyViewModel {
     }
     
     enum Bouquet {
-        case loading(channels: [SRGChannel])
-        case content(programCompositions: [SRGProgramComposition])
+        case loading(channels: [PlayChannel])
+        case content(programCompositions: [PlayProgramComposition])
         
         fileprivate static var empty: Self {
             return .content(programCompositions: [])
@@ -114,24 +114,24 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
-        fileprivate var channels: [SRGChannel] {
+        fileprivate var channels: [PlayChannel] {
             switch self {
             case let .loading(channels: channels):
                 return channels
             case let .content(programCompositions: programCompositions):
-                return programCompositions.map(\.channel)
+                return programCompositions.map(\.playChannel)
             }
         }
         
-        fileprivate func contains(channel: SRGChannel) -> Bool {
+        fileprivate func contains(channel: PlayChannel) -> Bool {
             return channels.contains(channel)
         }
         
-        private static func programs(for channel: SRGChannel, in programCompositions: [SRGProgramComposition]) -> [SRGProgram] {
-            return programCompositions.first(where: { $0.channel == channel })?.programs ?? []
+        private static func programs(for channel: PlayChannel, in programCompositions: [PlayProgramComposition]) -> [SRGProgram] {
+            return programCompositions.first(where: { $0.playChannel == channel })?.programs ?? []
         }
         
-        fileprivate func isEmpty(for channel: SRGChannel) -> Bool {
+        fileprivate func isEmpty(for channel: PlayChannel) -> Bool {
             switch self {
             case .loading:
                 return false
@@ -140,7 +140,7 @@ extension ProgramGuideDailyViewModel {
             }
         }
         
-        fileprivate func items(for channel: SRGChannel, day: SRGDay) -> [Item] {
+        fileprivate func items(for channel: PlayChannel, day: SRGDay) -> [Item] {
             switch self {
             case .loading:
                 return [Item(wrappedValue: .loading, section: channel, day: day)]
@@ -160,7 +160,7 @@ extension ProgramGuideDailyViewModel {
         case content(firstPartyBouquet: Bouquet, thirdPartyBouquet: Bouquet, day: SRGDay)
         case failed(error: Error)
         
-        fileprivate static func loading(firstPartyChannels: [SRGChannel], thirdPartyChannels: [SRGChannel], day: SRGDay) -> Self {
+        fileprivate static func loading(firstPartyChannels: [PlayChannel], thirdPartyChannels: [PlayChannel], day: SRGDay) -> Self {
             return .content(firstPartyBouquet: .loading(channels: firstPartyChannels), thirdPartyBouquet: .loading(channels: thirdPartyChannels), day: day)
         }
         

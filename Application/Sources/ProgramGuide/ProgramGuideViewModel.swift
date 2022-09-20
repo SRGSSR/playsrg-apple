@@ -29,19 +29,19 @@ final class ProgramGuideViewModel: ObservableObject {
         return date.timeIntervalSince(day.date)
     }
     
-    var channels: [SRGChannel] {
+    var channels: [PlayChannel] {
         return data.channels
     }
     
-    var firstPartyChannels: [SRGChannel] {
+    var firstPartyChannels: [PlayChannel] {
         return data.firstPartyChannels
     }
     
-    var thirdPartyChannels: [SRGChannel] {
+    var thirdPartyChannels: [PlayChannel] {
         return data.thirdPartyChannels
     }
     
-    var selectedChannel: SRGChannel? {
+    var selectedChannel: PlayChannel? {
         get {
             return data.selectedChannel
         }
@@ -126,15 +126,15 @@ final class ProgramGuideViewModel: ObservableObject {
 
 extension ProgramGuideViewModel {
     struct Data {
-        let firstPartyChannels: [SRGChannel]
-        let thirdPartyChannels: [SRGChannel]
-        let selectedChannel: SRGChannel?
+        let firstPartyChannels: [PlayChannel]
+        let thirdPartyChannels: [PlayChannel]
+        let selectedChannel: PlayChannel?
         
         static var empty: Self {
             return Self(firstPartyChannels: [], thirdPartyChannels: [], selectedChannel: nil)
         }
         
-        var channels: [SRGChannel] {
+        var channels: [PlayChannel] {
             return firstPartyChannels + thirdPartyChannels
         }
     }
@@ -144,14 +144,14 @@ extension ProgramGuideViewModel {
         case day(SRGDay)
         case time(TimeInterval)
         case dayAndTime(day: SRGDay, time: TimeInterval)
-        case channel(SRGChannel)
+        case channel(PlayChannel)
     }
 }
 
 // MARK: Publishers
 
 private extension ProgramGuideViewModel {
-    static func matchingChannel(_ channel: SRGChannel?, in channels: [SRGChannel]) -> SRGChannel? {
+    static func matchingChannel(_ channel: PlayChannel?, in channels: [PlayChannel]) -> PlayChannel? {
         if let channel, channels.contains(channel) {
             return channel
         }
@@ -162,9 +162,9 @@ private extension ProgramGuideViewModel {
     
     // TODO: Once an IL request is available to get the channel list without any day, use this request and
     //       remove the day parameter.
-    static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[SRGChannel], Error> {
+    static func channels(for vendor: SRGVendor, provider: SRGProgramProvider, day: SRGDay) -> AnyPublisher<[PlayChannel], Error> {
         return SRGDataProvider.current!.tvProgramsPublisher(day: day, provider: provider, minimal: true)
-            .map { $0.map(\.channel) }
+            .map { $0.map(\.playChannel) }
             .eraseToAnyPublisher()
     }
     

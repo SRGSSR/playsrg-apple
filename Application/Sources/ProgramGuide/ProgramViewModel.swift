@@ -19,10 +19,10 @@ final class ProgramViewModel: ObservableObject {
             Self.mediaDataPublisher(for: data?.program)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$mediaData)
-            Self.livestreamMediaPublisher(for: data?.channel)
+            Self.livestreamMediaPublisher(for: data?.channel.wrappedValue)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
-            eventEditViewDelegateObject.channel = data?.channel
+            eventEditViewDelegateObject.channel = data?.channel.wrappedValue
         }
     }
     
@@ -52,7 +52,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     private var channel: SRGChannel? {
-        return data?.channel
+        return data?.channel.wrappedValue
     }
     
     private var isLive: Bool {
@@ -191,10 +191,10 @@ final class ProgramViewModel: ObservableObject {
             return { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel.wrappedValue).send()
                     }
                     else {
-                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel.wrappedValue).send()
                     }
                 }
                 
@@ -214,7 +214,7 @@ final class ProgramViewModel: ObservableObject {
         guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
         
         let data = self.data
-        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel) : nil
+        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel.wrappedValue) : nil
         return ButtonProperties(
             icon: .startOver,
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
@@ -310,7 +310,7 @@ final class ProgramViewModel: ObservableObject {
                         guard let self else { return }
                         if granted {
                             let event = EKEvent(eventStore: eventStore)
-                            event.title = "\(program.title) - \(channel.title)"
+                            event.title = "\(program.title) - \(channel.wrappedValue.title)"
                             event.startDate = program.startDate
                             event.endDate = program.endDate
                             event.url = self.calendarUrl

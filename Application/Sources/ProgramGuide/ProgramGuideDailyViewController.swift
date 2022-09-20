@@ -28,7 +28,7 @@ final class ProgramGuideDailyViewController: UIViewController {
         return model.day
     }
     
-    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: SRGChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
+    private static func snapshot(from state: ProgramGuideDailyViewModel.State, for channel: PlayChannel?) -> NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<ProgramGuideDailyViewModel.Section, ProgramGuideDailyViewModel.Item>()
         if let channel {
             snapshot.appendSections([channel])
@@ -122,11 +122,11 @@ final class ProgramGuideDailyViewController: UIViewController {
         scrollToTime(programGuideModel.time, animated: false)
     }
     
-    private func reloadData(for channel: SRGChannel? = nil) {
+    private func reloadData(for channel: PlayChannel? = nil) {
         reloadData(for: model.state, channel: channel)
     }
     
-    private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: SRGChannel? = nil) {
+    private func reloadData(for state: ProgramGuideDailyViewModel.State, channel: PlayChannel? = nil) {
         let currentChannel = channel ?? self.programGuideModel.selectedChannel
         
         switch state {
