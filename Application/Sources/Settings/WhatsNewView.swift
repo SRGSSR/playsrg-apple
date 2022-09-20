@@ -53,7 +53,7 @@ private extension WhatsNewView {
 struct WhatsNewView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WhatsNewView(url: URL(string: "https://pastebin.com/raw/nmGqYFny")!)
+            WhatsNewView(url: URL(string: "https://srgssr.github.io/playsrg-apple/releases/release_notes-ios-srf.html")!)
         }
         .navigationViewStyle(.stack)
     }

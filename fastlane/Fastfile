@@ -349,23 +349,23 @@ platform :ios do
     end
   end
 
-  desc 'Get AppStore release status for iOS and tvOS'
-  lane :appStoreReleaseStatus do
+  # App Store App status
+
+  desc 'Get AppStore App status for iOS and tvOS'
+  lane :appStoreAppStatus do
     UI.message '-----'
     business_units.map do |business_unit|
       spaceship_login_with_api_key(business_unit)
-      app_identifier = appstore_build_identifiers[business_unit_index(business_unit)]
-      app = spaceship_app(app_identifier)
+      app = spaceship_bu_appstore_build_app(business_unit)
       next unless app
 
       UI.message '-----'
       ['iOS', 'tvOS'].map do |platform|
-        spaceship_platform = spaceship_platform(platform)
-        live_version = app.get_live_app_store_version(platform: spaceship_platform)
+        live_version = spaceship_app_live_version(platform, app)
         UI.success "Play #{business_unit} #{platform} live version #{live_version.version_string} (#{live_version.build.version}) is #{live_version.app_store_state}." if live_version
         UI.important "Play #{business_unit} #{platform} has no live version." unless live_version
 
-        latest_version = app.get_latest_app_store_version(platform: spaceship_platform)
+        latest_version = spaceship_app_latest_known_version(platform, app)
         if !latest_version || latest_version.version_string == live_version.version_string
           UI.message "Play #{business_unit} #{platform} version #{live_version.version_string} (#{live_version.build.version}) is the latest one."
         else
@@ -376,6 +376,45 @@ platform :ios do
       end
     end
     UI.message '-----'
+  end
+
+  # Public Release notes
+
+  desc 'Publish release notes for iOS and tvOS on Github pages'
+  lane :publishReleaseNotes do
+    output_directory = "fastlane/export/#{lane_context[SharedValues::LANE_NAME]}"
+    Dir.chdir('..') { FileUtils.mkdir_p(output_directory) }
+    releases_directory = "#{output_directory}/releases"
+    Dir.chdir('..') { FileUtils.mkdir_p(releases_directory) }
+
+    index_html_file = 'fastlane/gh-pages/index.html'
+    Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
+
+    business_units.map do |business_unit|
+      spaceship_login_with_api_key(business_unit)
+      app = spaceship_bu_appstore_build_app(business_unit)
+
+      ['iOS', 'tvOS'].map do |platform|
+        UI.message "Preparing Play #{business_unit} #{platform} release notes. 📝"
+
+        live_version = spaceship_app_live_version(platform, app)
+
+        table = release_notes_table_for_html(platform, business_unit)
+        divs = release_notes_table_to_html_divs(platform, table, live_version)
+        html = release_notes_html(platform, business_unit, divs)
+
+        release_html_file = "release_notes-#{platform.downcase}-#{business_unit.downcase}.html"
+        Dir.chdir('..') { File.write("#{releases_directory}/#{release_html_file}", html) }
+
+        upcoming_version = table[0][0]
+        upcoming_version = 'NaN' if live_version.version_string == upcoming_version
+        UI.success "Computed Play #{business_unit} #{platform} release notes (release: #{live_version.version_string}, upcoming: #{upcoming_version}). ✅"
+      end
+    end
+
+    UI.message 'Start Play release notes publication on Github pages.'
+    publish_on_github_pages(output_directory, releases_directory)
+    UI.success 'Play release notes pushed on Github pages. ✅'
   end
 
   # Individual iOS screenshots
@@ -1108,7 +1147,7 @@ def what_s_new_condition(lane)
 end
 
 def cleaned_lane_condition(lane)
-  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'release', 'tester']
+  excluded_lanes = ['distribute', 'dsym', 'screenshots', 'appstorerelease', 'status', 'tester']
   (lane.to_s != 'devLane') &&
     excluded_lanes.all? { |i| !lane.to_s.downcase.include? i }
 end
@@ -1224,11 +1263,77 @@ end
 def what_s_new_for_beta(platform, tag_version)
   tag_version ||= tag_version(platform)
 
+  json = what_s_new_for_beta_json(platform)
+  what_s_new = json[tag_version]
+  what_s_new || ''
+end
+
+def build_number_for_version(platform, version)
+  json = what_s_new_for_beta_json(platform)
+  tag_version = json.keys.select { |key| key.start_with?(version) }.last
+  tag_version ? build_number_from_tag_version(tag_version) : '999999'
+end
+
+def what_s_new_for_beta_json(platform)
   file = File.open("../WhatsNew-#{platform}-beta.json", 'r')
   json = JSON.parse(file.read)
   file.close
-  what_s_new = json[tag_version]
-  what_s_new || ''
+  json
+end
+
+def release_notes_html_platform(platform)
+  platform == 'iOS' ? 'iPhone & iPad' : 'Apple TV'
+end
+
+def release_notes_html(platform, business_unit, divs)
+  input_file = "release_notes-#{business_unit.downcase}.html"
+  html = File.read("gh-pages/releases/#{input_file}")
+  html = html.gsub('<!-- platform -->', release_notes_html_platform(platform))
+  html.sub('<!-- versions -->', divs.strip)
+end
+
+def release_notes_table_to_html_divs(platform, table, live_version)
+  divs = ''
+  table.map do |row|
+    is_preprod = version_is_preprod(platform, row[0], live_version)
+    divs += release_notes_version_to_html(platform, row[0], row[1], is_preprod)
+  end
+  divs.strip
+end
+
+def release_notes_version_to_html(platform, version, text, is_preprod)
+  build_number = build_number_for_version(platform, version)
+  attribute = is_preprod ? ' preprod' : ''
+  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2>#{version}</h2>\n"
+  div += release_notes_to_html(text)
+  div += "\n</div>\n"
+  div
+end
+
+def version_is_preprod(platform, version, live_version)
+  released_version = live_version.version_string
+  released_build = live_version.build.version
+  build_number = build_number_for_version(platform, version)
+
+  version != released_version && build_number > released_build
+end
+
+def release_notes_to_html(text)
+  output = ''
+  in_list = false
+  text.each_line.reject { |line| line.strip == '' }.map do |line|
+    if line.start_with?('-')
+      output += "<ul>\n" unless in_list
+      in_list = true
+      output += "<li>#{line[1..-1].strip}</li>\n"
+    else
+      output += "</ul>\n" if in_list
+      in_list = false
+      output += "<p>#{line.strip}</p>\n"
+    end
+  end
+  output += '</ul>' if in_list
+  output.strip
 end
 
 # Characters "-" or "+" in version are not allowed on App Store Connect.
@@ -1641,12 +1746,17 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
+def major_version(platform)
+  platform == 'iOS' ? 3 : 1
+end
+
+def release_notes_table_for_html(platform, business_unit)
+  table = get_appstore_release_notes_table(platform, business_unit).reverse
+  table.select { |row| row[0].start_with?(major_version(platform).to_s) }
+end
+
 def get_appstore_release_notes(platform, business_unit, marketing_version)
-  file_name = "What_s new #{platform}.csv"
-  file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
-  file = File.open(file_path, 'r')
-  table = CSV.table(file)
-  file.close
+  table = get_appstore_release_notes_table(platform, business_unit)
 
   index = table.by_col[0].find_index(marketing_version)
   release_notes = table.by_col[1][index] if index
@@ -1654,6 +1764,12 @@ def get_appstore_release_notes(platform, business_unit, marketing_version)
   UI.user_error! "On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version." unless release_notes
 
   release_notes
+end
+
+def get_appstore_release_notes_table(platform, business_unit)
+  file_name = "What_s new #{platform}.csv"
+  file_path = "/tmp/playsrg-crowdin/#{crowdin_language(business_unit)}/Apple/Play App/#{file_name}"
+  CSV.read(file_path)
 end
 
 def crowdin_language(business_unit)
@@ -1668,7 +1784,7 @@ def crowdin_language(business_unit)
 end
 
 def pull_translations_lane_condition(lane)
-  lane.to_s.downcase.include? 'prepareappstorerelease'
+  lane.to_s.downcase.include? 'release'
 end
 
 def skip_pull_translations
@@ -1781,6 +1897,11 @@ def spaceship_email_required(email)
   email.strip
 end
 
+def spaceship_bu_appstore_build_app(business_unit)
+  app_identifier = appstore_build_identifiers[business_unit_index(business_unit)]
+  spaceship_app(app_identifier)
+end
+
 def spaceship_app(app_identifier)
   app = Spaceship::ConnectAPI::App.find(app_identifier)
   UI.important "#{app_identifier} app does not exist. ⚠️" unless app
@@ -1811,6 +1932,31 @@ end
 def spaceship_add_tester(group, email, first_name, last_name)
   tester = spaceship_new_tester(email, first_name, last_name)
   group.post_bulk_beta_tester_assignments(beta_testers: [tester])
+end
+
+def spaceship_app_live_version(platform, app)
+  app.get_live_app_store_version(platform: spaceship_platform(platform))
+end
+
+def spaceship_app_latest_known_version(platform, app)
+  app.get_latest_app_store_version(platform: spaceship_platform(platform))
+end
+
+def publish_on_github_pages(output_directory, releases_directory)
+  branch_name = git_branch_name
+
+  Dir.chdir('..') do
+    sh 'git checkout --orphan gh-pages'
+    sh 'git reset --hard'
+    sh "mv \"#{output_directory}/index.html\" ./"
+    sh 'git add index.html'
+    sh "mv \"#{releases_directory}\" ./"
+    sh 'git add releases/*'
+    sh 'git commit -m "Publish release notes"'
+    sh 'git push origin gh-pages --force'
+    sh "git checkout #{branch_name}"
+    sh 'git branch -D gh-pages'
+  end
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
