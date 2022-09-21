@@ -1002,7 +1002,7 @@ platform :ios do
       clean: true,
       xcargs: srg_xcargs(options),
       export_method: options[:export_to_appstore] ? 'app-store' : 'enterprise',
-      include_bitcode: options[:export_to_appstore],
+      include_bitcode: false,
       export_team_id: options[:team_id],
       destination: destination,
       derived_data_path: derived_data_path,
@@ -1350,18 +1350,18 @@ def update_options_to_appstore(options)
 end
 
 def srg_xcargs(options)
-  export_to_appstore = options[:export_to_appstore] || false
-  xcargs = export_to_appstore ? 'ENABLE_BITCODE=YES' : 'ENABLE_BITCODE=NO'
+  xcargs = 'ENABLE_BITCODE=NO'
   xcargs += " BUNDLE_DISPLAY_NAME_SUFFIX='#{options[:display_name_suffix]}'"
   xcargs += " MARKETING_VERSION='#{options[:version]}'"
   xcargs += " MARKETING_VERSION_SUFFIX='#{options[:version_suffix]}'"
   xcargs += " BUILD_NAME='#{options[:build_name]}'"
   xcargs += " DEVELOPMENT_TEAM='#{options[:team_id]}'"
-  xcargs + srg_xcargs_code_signing(export_to_appstore)
+  xcargs + srg_xcargs_code_signing(options)
 end
 
 # Use cloud signing if available
-def srg_xcargs_code_signing(export_to_appstore)
+def srg_xcargs_code_signing(options)
+  export_to_appstore = options[:export_to_appstore] || false
   asc_api_key = srg_app_store_connect_api_key if export_to_appstore
 
   xcargs = ''
