@@ -13,7 +13,7 @@
 
 # This is the minimum version number required.
 # Update this, if you use features of a newer version
-fastlane_version '2.96.0'
+fastlane_version '2.210.1'
 
 default_platform :ios
 
@@ -1388,14 +1388,12 @@ def pilot_fast_upload(app_identifier, platform)
 
   lane_context.delete(SharedValues::FL_CHANGELOG)
 
-  xcversion(version: '~> 13')
   login_with_app_store_connect_api_key
   pilot(
     app_identifier: app_identifier,
     app_platform: appstore_platform(platform),
     skip_waiting_for_build_processing: true
   )
-  xcversion(version: '~> 14')
 end
 
 def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
@@ -1404,12 +1402,8 @@ def pilot_distribute(app_identifier, platform, tag_version, changelog, is_public
   tag_version ||= tag_version(platform)
   is_public_beta ||= false
 
-  xcversion(version: '~> 13')
   srg_pilot_distribute(app_identifier, platform, tag_version, changelog, is_public_beta)
-  xcversion(version: '~> 14')
 rescue StandardError => e
-  xcversion(version: '~> 14')
-
   raise unless e.message.include? 'Another build is in review'
 
   UI.important 'Another build is already in TestFlight app review. Skipping external distribution. ⚠️'
@@ -1715,7 +1709,7 @@ end
 
 def snapshot_ios_devices
   [
-    'iPhone 13 Pro Max', # 6.5 inch, required
+    'iPhone 14 Plus', # 6.5 inch, required
     'iPhone 8 Plus', # 5.5 inch, required
     'iPad Pro (12.9-inch) (5th generation)', # 12.9 inch, required
     'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
