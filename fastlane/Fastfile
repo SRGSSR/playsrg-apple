@@ -1044,7 +1044,7 @@ def appcenter_ios_nightly_appcenter_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
-def appcenter_tv_nightly_names
+def appcenter_tvos_nightly_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_NIGHTLY_APPCENTER_APPNAME"] }
 end
 
@@ -1058,7 +1058,7 @@ def appcenter_testflight_nightly_names(platform)
   if platform == 'iOS'
     appcenter_ios_nightly_names
   else
-    appcenter_tv_nightly_names
+    appcenter_tvos_nightly_names
   end
 end
 
@@ -1066,7 +1066,7 @@ def appcenter_ios_beta_appcenter_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_BETA_APPCENTER_APPNAME"] }
 end
 
-def appcenter_tv_beta_names
+def appcenter_tvos_beta_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_BETA_APPCENTER_APPNAME"] }
 end
 
@@ -1080,11 +1080,11 @@ def appcenter_testflight_beta_names(platform)
   if platform == 'iOS'
     appcenter_ios_beta_names
   else
-    appcenter_tv_beta_names
+    appcenter_tvos_beta_names
   end
 end
 
-def appcenter_tv_appstore_build_names
+def appcenter_tvos_appstore_build_names
   business_units.map { |business_unit| ENV["PLAY_#{business_unit}_TV_APPSTORE_APPCENTER_APPNAME"] }
 end
 
@@ -1098,7 +1098,7 @@ def appcenter_appstore_build_names(platform)
   if platform == 'iOS'
     appcenter_ios_appstore_build_names
   else
-    appcenter_tv_appstore_build_names
+    appcenter_tvos_appstore_build_names
   end
 end
 
