@@ -1709,7 +1709,7 @@ end
 
 def snapshot_ios_devices
   [
-    'iPhone 13 Pro Max', # 6.5 inch, required
+    'iPhone 14 Plus', # 6.5 inch, required
     'iPhone 8 Plus', # 5.5 inch, required
     'iPad Pro (12.9-inch) (5th generation)', # 12.9 inch, required
     'iPad Pro (12.9-inch) (2nd generation)' # 12.9 inch, required
