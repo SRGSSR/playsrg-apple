@@ -11,15 +11,15 @@
 | Check version and build numbers. Bump if needed ||||||
 | Update what's new JSON for betas ||||||
 | [iOS] Update what's new on Github pages (with fastlane\*) ||||||
+| Build betas for TestFlight (with fastlane\*) ||||||
 | Create new version on App Store Connect (with fastlane\*) ||||||
 | Update screenshots if needed (with fastlane\*\*) ||||||
-| Build betas for TestFlight (with fastlane\*) ||||||
-| Build App Store versions + collect DSYMs (with fastlane\*) ||||||
+| Build App Store builds (with fastlane\*) ||||||
 | Update production remote configuration on Firebase ||||||
-| Distribute public TestFlight versions (with fastane\*) ||||||
+| Distribute App Store builds to public TestFlight groups (with fastane\*) ||||||
 | Collect translations and update App Store Connect (with fastlane\*) ||||||
 | [iOS] Collect translations and update Github pages (with fastlane\*) ||||||
-| Check what's new in betas or TestFlight versions ||||||
+| Check what's new in betas or TestFlight builds ||||||
 | Ask the PO to approve the version ||||||
 | Submit to Apple review (with fastlane\*) ||||||
 | Update status page on Confluence (Up coming status, statistics changes) ||||||
