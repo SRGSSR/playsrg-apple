@@ -4,6 +4,7 @@
 //  License information is available from the LICENSE file.
 //
 
+import Collections
 import Combine
 import Foundation
 import SRGDataProviderModel
@@ -111,6 +112,13 @@ final class ProgramViewModel: ObservableObject {
     
     var hasSubtitles: Bool {
         return currentMedia?.play_areSubtitlesAvailable ?? false
+    }
+    
+    var crewMembersDatas: [CrewMembersData]? {
+        guard let crewMembers = program?.crewMembers, !crewMembers.isEmpty else { return nil }
+        return OrderedDictionary(grouping: crewMembers, by: { $0.role }).map { role, crewMembers in
+            return CrewMembersData(role: role, crewMembers: crewMembers)
+        }
     }
     
     var imageCopyright: String? {
@@ -300,6 +308,28 @@ extension ProgramViewModel {
     struct Data: Hashable {
         let program: SRGProgram
         let channel: SRGChannel
+    }
+    
+    /// Data related to the program crew members
+    struct CrewMembersData: Identifiable {
+        let role: String?
+        let names: [String]
+        
+        var id: String? {
+            return role
+        }
+        
+        init(role: String?, crewMembers: [SRGCrewMember]) {
+            self.role = role
+            self.names = crewMembers.map { crewMember in
+                if let characterName = crewMember.characterName {
+                    return "\(crewMember.name) (\(characterName))"
+                }
+                else {
+                    return crewMember.name
+                }
+            }
+        }
     }
     
     /// Data related to the media stored by the model

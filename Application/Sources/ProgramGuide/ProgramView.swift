@@ -186,6 +186,28 @@ struct ProgramView: View {
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                
+                if let crewMembersDatas = model.crewMembersDatas {
+                    ForEach(crewMembersDatas) { crewMembersData in
+                        VStack(alignment: .leading, spacing: 0) {
+                            if let role = crewMembersData.role {
+                                Text(role)
+                                    .srgFont(.H2)
+                                    .foregroundColor(.srgGray96)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                            VStack(alignment: .leading, spacing: 0) {
+                                ForEach(crewMembersData.names, id: \.self) { name in
+                                    Text(name)
+                                        .srgFont(.body)
+                                        .foregroundColor(.srgGray96)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                            }
+                        }
+                    }
+                }
+                
                 if let imageCopyright = model.imageCopyright {
                     Text(imageCopyright)
                         .srgFont(.subtitle1)
@@ -247,7 +269,7 @@ private extension ProgramView {
 // MARK: Preview
 
 struct ProgramView_Previews: PreviewProvider {
-    private static let size = CGSize(width: 320, height: 600)
+    private static let size = CGSize(width: 320, height: 1200)
     
     static var previews: some View {
         ProgramView(program: Mock.program(), channel: Mock.channel())
