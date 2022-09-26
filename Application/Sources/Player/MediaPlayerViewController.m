@@ -605,7 +605,14 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         // when switching to landscape we want the experience to be as immersive as possible, but when switching to portrait
         // we don't want to alter the current experience)
         if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone) {
-            BOOL isLandscape = (size.width > size.height);
+            CGSize nextSize = size;
+            
+            // See https://github.com/SRGSSR/playsrg-apple/issues/240
+            if (@available(iOS 16, *)) {
+                nextSize = context.containerView.frame.size;
+            }
+
+            BOOL isLandscape = (nextSize.width > nextSize.height);
             [self.letterboxView setFullScreen:isLandscape animated:NO /* will be animated with the view transition */];
             
             if (isLandscape) {
