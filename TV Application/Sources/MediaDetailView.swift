@@ -269,3 +269,22 @@ extension MediaDetailView {
         return [AnalyticsPageLevel.play.rawValue]
     }
 }
+
+// MARK: Preview
+
+struct MediaDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MediaDetailView(media: Mock.media())
+                .previewDisplayName("standard")
+            MediaDetailView(media: Mock.media(.noShow))
+                .previewDisplayName("no show")
+            MediaDetailView(media: Mock.media(.rich))
+                .previewDisplayName("rich")
+            MediaDetailView(media: Mock.media(.overflow))
+                .previewDisplayName("overflow")
+            MediaDetailView(media: Mock.media(.nineSixteen))
+                .previewDisplayName("nine sixteen")
+        }
+    }
+}
