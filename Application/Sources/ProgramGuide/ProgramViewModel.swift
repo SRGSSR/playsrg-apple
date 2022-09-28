@@ -339,6 +339,10 @@ extension ProgramViewModel {
                 }
             }
         }
+        
+        var accessibilityLabel: String {
+            return "\(role ?? "") \(names.joined(separator: ", "))"
+        }
     }
     
     /// Data related to the media stored by the model

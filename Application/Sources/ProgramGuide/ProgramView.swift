@@ -183,6 +183,39 @@ struct ProgramView: View {
     }
     
     // Behavior: h-exp, v-hug
+    private struct CrewMembersView: View {
+        let crewMembersDatas: [ProgramViewModel.CrewMembersData]
+        
+        init(datas: [ProgramViewModel.CrewMembersData]) {
+            crewMembersDatas = datas
+        }
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(crewMembersDatas) { crewMembersData in
+                    VStack(alignment: .leading, spacing: 0) {
+                        if let role = crewMembersData.role {
+                            Text(role)
+                                .srgFont(.H2)
+                                .foregroundColor(.srgGray96)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(crewMembersData.names, id: \.self) { name in
+                                Text(name)
+                                    .srgFont(.body)
+                                    .foregroundColor(.srgGray96)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }
+                    .accessibilityElement(label: crewMembersData.accessibilityLabel)
+                }
+            }
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ProgramViewModel
         
@@ -215,24 +248,7 @@ struct ProgramView: View {
                 }
                 
                 if let crewMembersDatas = model.crewMembersDatas {
-                    ForEach(crewMembersDatas) { crewMembersData in
-                        VStack(alignment: .leading, spacing: 0) {
-                            if let role = crewMembersData.role {
-                                Text(role)
-                                    .srgFont(.H2)
-                                    .foregroundColor(.srgGray96)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            }
-                            VStack(alignment: .leading, spacing: 0) {
-                                ForEach(crewMembersData.names, id: \.self) { name in
-                                    Text(name)
-                                        .srgFont(.body)
-                                        .foregroundColor(.srgGray96)
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                }
-                            }
-                        }
-                    }
+                    CrewMembersView(datas: crewMembersDatas)
                 }
                 
                 if let imageCopyright = model.imageCopyright {
