@@ -177,6 +177,8 @@ struct ProgramView: View {
                         .foregroundColor(.srgGray96)
                 }
             }
+            .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
@@ -203,7 +205,6 @@ struct ProgramView: View {
                 
                 if let youthProtectionColor = model.youthProtectionColor {
                     YouthProtectionView(color: youthProtectionColor)
-                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
                 if let summary = model.summary {
