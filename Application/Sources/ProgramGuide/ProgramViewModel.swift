@@ -92,6 +92,15 @@ final class ProgramViewModel: ObservableObject {
             .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
     }
     
+    var youthProtectionColor: SRGYouthProtectionColor? {
+        if let media {
+            return media.youthProtectionColor
+        }
+        else {
+            return program?.youthProtectionColor
+        }
+    }
+    
     var imageUrl: URL? {
         return url(for: program?.image, size: .medium)
     }

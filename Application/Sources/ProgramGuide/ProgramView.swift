@@ -160,6 +160,27 @@ struct ProgramView: View {
     }
     
     // Behavior: h-exp, v-hug
+    private struct YouthProtectionView: View {
+        let color: SRGYouthProtectionColor
+        
+        init(color: SRGYouthProtectionColor) {
+            self.color = color
+        }
+        
+        var body: some View {
+            HStack(spacing: 8) {
+                YouthProtectionBadge(color: color)
+                if let youthProtectionMessage = SRGMessageForYouthProtectionColor(color) {
+                    Text(youthProtectionMessage)
+                        .srgFont(.subtitle1)
+                        .lineLimit(2)
+                        .foregroundColor(.srgGray96)
+                }
+            }
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         @ObservedObject var model: ProgramViewModel
         
@@ -178,6 +199,11 @@ struct ProgramView: View {
                 
                 if model.hasActions {
                     ActionsView(model: model)
+                }
+                
+                if let youthProtectionColor = model.youthProtectionColor {
+                    YouthProtectionView(color: youthProtectionColor)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
                 if let summary = model.summary {
