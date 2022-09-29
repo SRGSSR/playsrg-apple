@@ -143,6 +143,11 @@ platform :ios do
     testflight_betas(platform: 'tvOS')
   end
 
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  lane :iOSbetas do
+    testflight_betas(platform: 'iOS')
+  end
+
   desc 'Adds a beta TestFlight tester (email required)'
   lane :betaTester do |options|
     addTestFlightTester(

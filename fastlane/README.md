@@ -63,6 +63,14 @@ Builds an iOS beta on App Center with the current build number. On the develop b
 
 Builds a tvOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.
 
+### ios iOSbetas
+
+```sh
+[bundle exec] fastlane ios iOSbetas
+```
+
+Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.
+
 ### ios betaTester
 
 ```sh
