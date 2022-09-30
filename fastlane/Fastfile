@@ -1618,8 +1618,8 @@ end
 def get_appstore_release_notes(platform, business_unit, marketing_version)
   table = get_appstore_release_notes_table(platform, business_unit)
 
-  index = table.by_col[0].find_index(marketing_version)
-  release_notes = table.by_col[1][index] if index
+  version_row = table.select { |row| row[0] == marketing_version }.first
+  release_notes = version_row[1] if version_row
 
   UI.user_error! "On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version." unless release_notes
 
