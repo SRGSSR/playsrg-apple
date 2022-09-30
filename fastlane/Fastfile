@@ -143,6 +143,11 @@ platform :ios do
     testflight_betas(platform: 'tvOS')
   end
 
+  desc 'Builds an iOS beta on App Store Connect with the current build number and waits for build processing. On the develop branch attempts to tag the current version, then bumps the build number and pushes.'
+  lane :iOSbetas do
+    testflight_betas(platform: 'iOS')
+  end
+
   desc 'Adds a beta TestFlight tester (email required)'
   lane :betaTester do |options|
     addTestFlightTester(
@@ -1613,8 +1618,8 @@ end
 def get_appstore_release_notes(platform, business_unit, marketing_version)
   table = get_appstore_release_notes_table(platform, business_unit)
 
-  index = table.by_col[0].find_index(marketing_version)
-  release_notes = table.by_col[1][index] if index
+  version_row = table.select { |row| row[0] == marketing_version }.first
+  release_notes = version_row[1] if version_row
 
   UI.user_error! "On Crowdin, #{file_name} for #{business_unit} has no release notes for #{marketing_version} version." unless release_notes
 
@@ -1794,7 +1799,8 @@ def spaceship_app_live_version(platform, app)
 end
 
 def spaceship_app_latest_known_version(platform, app)
-  app.get_latest_app_store_version(platform: spaceship_platform(platform))
+  includes = Spaceship::ConnectAPI::AppStoreVersion::ESSENTIAL_INCLUDES
+  app.get_latest_app_store_version(platform: spaceship_platform(platform), includes: includes)
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
