@@ -1799,7 +1799,8 @@ def spaceship_app_live_version(platform, app)
 end
 
 def spaceship_app_latest_known_version(platform, app)
-  app.get_latest_app_store_version(platform: spaceship_platform(platform))
+  includes = Spaceship::ConnectAPI::AppStoreVersion::ESSENTIAL_INCLUDES
+  app.get_latest_app_store_version(platform: spaceship_platform(platform), includes: includes)
 end
 
 def publish_on_github_pages(output_directory, releases_directory)
