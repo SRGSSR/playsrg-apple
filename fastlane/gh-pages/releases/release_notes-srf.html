@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Play SRF (<!-- platform -->)</title>
+</head>
+<meta charset="UTF-8" content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<style>
+@font-face {
+  font-family: "SRG SSR Type Regular";
+  src: url("https://www.srf.ch/play/v3/fonts/SRGSSRTypeVF_Text_W_Wght.woff2") format("woff2"); 
+}
+body {
+  font-family: "SRG SSR Type Regular";
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-text-size-adjust: 100%;
+  color: #ffffff;
+  background-color: #161616;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #9d0018; /* Red */
+    margin: 1em 0;
+    padding: 0; 
+}
+.button {
+    background-color: #0f5acb; /* Blue */
+    border: none;
+    border-radius: 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+<script>
+function Hide (elements, exceptItem) {
+  elements = elements.length ? elements : [elements];
+  for (var index = 0; index < elements.length; index++) {
+    if (elements[index] != exceptItem) {
+      elements[index].style.display = 'none';
+    }
+  }
+}
+function getUrlVars() {
+  var vars = {};
+  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+      vars[key] = value;
+  });
+  return vars;
+}
+
+function highlightElement () {
+  var build = getUrlVars()['build'];
+  console.log('build='+build);
+
+  var divs = document.querySelectorAll('[id^="build_"]');
+  var highlightDiv;
+  var firstDiv;
+  var hiddenDivs = new Array();
+
+  regex = /build_([0-9]*)/;
+  for (var i=0; i < divs.length; i++) {
+    var div = divs[i];
+    var div_id = div.id;
+    var div_build = div_id.match(regex)[1];
+    var hideDiv = div.hasAttribute('preprod');
+
+    if (!firstDiv && !hideDiv) {
+      firstDiv = div;
+    }
+
+    if (build && (parseInt(div_build) >= parseInt(build))) {
+      highlightDiv = div;
+      console.log('Select highlight ' + div_id);
+    }
+
+    if (hideDiv && (!build || (parseInt(div_build) >= parseInt(build)))) {
+      hiddenDivs.push(div);
+    }
+  }
+
+  if (hiddenDivs.includes(highlightDiv)) {
+    firstDiv = highlightDiv;
+  }
+
+  if (hiddenDivs.length) {
+    Hide(hiddenDivs, highlightDiv);
+  }
+
+  if (highlightDiv) {
+    addHighlightHeader(highlightDiv, highlightDiv != firstDiv);
+    addHighlightFooter(highlightDiv);
+  }
+}
+
+function addHighlightHeader (highlightDiv, withUpdateButton) {
+  var highlightHeader = '<div id="version"><hr /><h2 style="text-align: center">Installierte Version</h2></div>';
+  if (withUpdateButton) {
+      var button = '<p style="text-align: center"><button class="button" onclick="window.location.href=\'https://itunes.apple.com/ch/app/play-srf/id638194352?mt=8\'">Updaten</button></p>';
+    highlightHeader = button + '\n' + highlightHeader;
+  }
+  highlightDiv.insertAdjacentHTML('beforeBegin', highlightHeader);
+}
+
+function addHighlightFooter (highlightDiv) {
+  var highlightFooter = '<div id="version"><hr /></div>';
+  highlightDiv.insertAdjacentHTML('afterend', highlightFooter);
+}
+</script>
+<noscript>Sorry, your browser does not support JavaScript!</noscript>
+<body onload="highlightElement()">
+<div style="text-align: center;">
+<h2 style="line-height: 0;">Play SRF</h2>
+<p style="line-height: 2;"><!-- platform --></p>
+</div>
+<div>
+<p>Wir freuen uns über Ihr Feedback. Bei Fragen zur Play SRF App wenden Sie sich bitte an den SRF Kundendienst via srf.ch/kontakt oder per Telefon unter 0848 80 80 80.</p>
+</div>
+<!-- versions -->
+</body>
+</html>
