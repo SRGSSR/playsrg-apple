@@ -123,9 +123,6 @@ struct ProgramView: View {
                 if model.hasSubtitles {
                     SubtitlesBadge()
                 }
-                if let duration = model.duration {
-                    DurationBadge(duration: duration)
-                }
             }
         }
     }
@@ -234,6 +231,14 @@ struct ProgramView: View {
                 
                 if model.hasActions {
                     ActionsView(model: model)
+                }
+                
+                if let durationAndProduction = model.durationAndProduction {
+                    Text(durationAndProduction)
+                        .srgFont(.subtitle1)
+                        .lineLimit(1)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
                 if let youthProtectionColor = model.youthProtectionColor {

@@ -105,10 +105,27 @@ final class ProgramViewModel: ObservableObject {
         return url(for: program?.image, size: .medium)
     }
     
-    var duration: Double? {
+    private var duration: Double? {
         guard let program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)
         return duration > 0 ? duration : nil
+    }
+    
+    private var production: String? {
+        let year = program?.productionYear?.stringValue
+        let production = [program?.productionCountry, year]
+            .compactMap { $0 }
+            .joined(separator: " ")
+        return !production.isEmpty ? production : nil
+    }
+    
+    var durationAndProduction: String? {
+        guard let program else { return nil }
+        let durationString = duration != nil ? PlayFormattedMinutes(duration!) : nil
+        let durationAndProduction = [durationString, production, program.genre]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        return !durationAndProduction.isEmpty ? durationAndProduction : nil
     }
     
     var hasMultiAudio: Bool {
