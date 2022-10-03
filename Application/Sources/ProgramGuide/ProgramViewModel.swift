@@ -93,12 +93,8 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var youthProtectionColor: SRGYouthProtectionColor? {
-        if let media {
-            return media.youthProtectionColor
-        }
-        else {
-            return program?.youthProtectionColor
-        }
+        let youthProtectionColor = program?.youthProtectionColor
+        return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
     }
     
     var imageUrl: URL? {
