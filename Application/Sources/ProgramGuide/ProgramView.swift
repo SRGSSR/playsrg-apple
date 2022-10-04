@@ -151,17 +151,17 @@ struct ProgramView: View {
         
         var body: some View {
             HStack(spacing: 6) {
-                if model.hasAudioDescription {
-                    AudioDescriptionBadge()
-                }
                 if model.hasSubtitles {
                     SubtitlesBadge()
                 }
-                if model.hasSignLanguage {
-                    SignLanguageBadge()
-                }
                 if model.hasMultiAudio {
                     MultiAudioBadge()
+                }
+                if model.hasAudioDescription {
+                    AudioDescriptionBadge()
+                }
+                if model.hasSignLanguage {
+                    SignLanguageBadge()
                 }
                 if model.hasDolbyDigital {
                     DolbyDigitalBadge()
