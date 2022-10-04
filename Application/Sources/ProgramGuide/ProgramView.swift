@@ -255,19 +255,19 @@ struct ProgramView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 
+                if let imageCopyright = model.imageCopyright {
+                    Text(imageCopyright)
+                        .srgFont(.subtitle1)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
                 if model.hasAttributes {
                     AttributesView(model: model)
                 }
                 
                 if let crewMembersDatas = model.crewMembersDatas {
                     CrewMembersView(datas: crewMembersDatas)
-                }
-                
-                if let imageCopyright = model.imageCopyright {
-                    Text(imageCopyright)
-                        .srgFont(.subtitle1)
-                        .foregroundColor(.srgGray96)
-                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
         }
