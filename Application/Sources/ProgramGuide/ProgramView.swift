@@ -88,12 +88,6 @@ struct ProgramView: View {
                 ImageView(source: model.imageUrl)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
-                if let properties = model.availabilityBadgeProperties {
-                    Badge(text: properties.text, color: Color(properties.color))
-                        .padding([.top, .leading], Self.padding)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                }
-                
                 if let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
@@ -222,6 +216,9 @@ struct ProgramView: View {
         var body: some View {
             VStack(spacing: 18) {
                 VStack(spacing: 6) {
+                    if let properties = model.availabilityBadgeProperties {
+                        Badge(text: properties.text, color: Color(properties.color))
+                    }
                     if let timeAndDate = model.timeAndDate {
                         Text(timeAndDate)
                             .srgFont(.caption)
