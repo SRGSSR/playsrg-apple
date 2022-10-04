@@ -42,7 +42,7 @@ final class ProgramViewModel: ObservableObject {
         return mediaData.media
     }
     
-    var show: SRGShow? {
+    private var show: SRGShow? {
         return media?.show ?? program?.show
     }
     
@@ -226,6 +226,8 @@ final class ProgramViewModel: ObservableObject {
         guard let show else { return nil }
         return ShowButtonProperties(
             show: show,
+            isFavorite: FavoritesContainsShow(show),
+            accessibilityLabel: "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button label to access more episodes from the program detail view"))",
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController,
                       let window = UIApplication.shared.mainWindow else {
@@ -388,6 +390,8 @@ extension ProgramViewModel {
     /// Show button properties
     struct ShowButtonProperties {
         let show: SRGShow
+        let isFavorite: Bool
+        let accessibilityLabel: String
         let action: () -> Void
     }
 }

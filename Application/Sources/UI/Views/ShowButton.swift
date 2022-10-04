@@ -12,14 +12,16 @@ import SwiftUI
 /// Behavior: h-exp, v-hug
 struct ShowButton: View {
     private let show: SRGShow
+    private let isFavorite: Bool
     private let accessibilityLabel: String
     private let accessibilityHint: String?
     private let action: () -> Void
     
     @State private var isFocused = false
     
-    init(show: SRGShow, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(show: SRGShow, isFavorite: Bool, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
         self.show = show
+        self.isFavorite = isFavorite
         self.accessibilityLabel = accessibilityLabel ?? show.title
         self.accessibilityHint = accessibilityHint
         self.action = action
@@ -27,6 +29,10 @@ struct ShowButton: View {
     
     private var imageUrl: URL? {
         return url(for: show.image, size: .small)
+    }
+    
+    private var favoriteIcon: String {
+        return isFavorite ? "favorite_full" : "favorite"
     }
     
     private var numberOfEpisodes: String? {
@@ -58,8 +64,8 @@ struct ShowButton: View {
                 }
                 .padding(.vertical, 2)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
-                    .frame(width: 0)
+                Image(decorative: favoriteIcon)
+                    .padding(.trailing, 8)
             }
             .frame(height: 80)
             .onParentFocusChange { isFocused = $0 }
@@ -74,7 +80,7 @@ struct ShowButton: View {
 struct ShowButton_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            ShowButton(show: Mock.show(), action: {})
+            ShowButton(show: Mock.show(), isFavorite: false, action: {})
                 .padding()
                 .previewLayout(.fixed(width: 360, height: 80))
         }
