@@ -94,34 +94,10 @@ struct ProgramView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
                 }
                 
-                AttributesView(model: model)
-                    .padding([.bottom, .horizontal], Self.padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                
                 if let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                }
-            }
-        }
-    }
-    
-    /// Behavior: h-exp, v-hug
-    private struct AttributesView: View {
-        @ObservedObject var model: ProgramViewModel
-        
-        var body: some View {
-            HStack(spacing: 6) {
-                Spacer()
-                if model.hasMultiAudio {
-                    MultiAudioBadge()
-                }
-                if model.hasAudioDescription {
-                    AudioDescriptionBadge()
-                }
-                if model.hasSubtitles {
-                    SubtitlesBadge()
                 }
             }
         }
@@ -175,6 +151,27 @@ struct ProgramView: View {
                 }
             }
             .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    /// Behavior: h-exp, v-hug
+    private struct AttributesView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            HStack(spacing: 6) {
+                if model.hasSubtitles {
+                    SubtitlesBadge()
+                }
+                if model.hasAudioDescription {
+                    AudioDescriptionBadge()
+                }
+                if model.hasMultiAudio {
+                    MultiAudioBadge()
+                }
+                Spacer()
+            }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
@@ -250,6 +247,10 @@ struct ProgramView: View {
                         .srgFont(.body)
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
+                if model.hasAttributes {
+                    AttributesView(model: model)
                 }
                 
                 if let crewMembersDatas = model.crewMembersDatas {

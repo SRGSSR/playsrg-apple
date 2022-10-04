@@ -124,16 +124,20 @@ final class ProgramViewModel: ObservableObject {
         return !durationAndProduction.isEmpty ? durationAndProduction : nil
     }
     
+    var hasAttributes: Bool {
+        return hasAudioDescription || hasSubtitles || hasMultiAudio
+    }
+    
     var hasMultiAudio: Bool {
-        return currentMedia?.play_isMultiAudioAvailable ?? false
+        return program?.alternateAudioAvailable ?? false
     }
     
     var hasAudioDescription: Bool {
-        return currentMedia?.play_isAudioDescriptionAvailable ?? false
+        return program?.audioDescriptionAvailable ?? false
     }
     
     var hasSubtitles: Bool {
-        return currentMedia?.play_areSubtitlesAvailable ?? false
+        return program?.subtitlesAvailable ?? false
     }
     
     var crewMembersDatas: [CrewMembersData]? {

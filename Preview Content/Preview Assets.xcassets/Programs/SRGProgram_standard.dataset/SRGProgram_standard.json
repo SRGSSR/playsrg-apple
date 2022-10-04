@@ -49,13 +49,13 @@
       "name": "Created by"
     }
   ],
-  "subtitlesAvailable": false,
+  "subtitlesAvailable": true,
   "isLive": false,
-  "hasTwoLanguages": false,
-  "hasSignLanguage": false,
-  "hasVisualDescription": false,
+  "hasTwoLanguages": true,
+  "hasSignLanguage": true,
+  "hasVisualDescription": true,
   "isFollowUp": false,
-  "isDolbyDigital": false,
+  "isDolbyDigital": true,
   "isRepetition": true,
   "repetitionDescription": "Wiederholung vom 11.11.2021",
   "channelTitle": "SRF 1",
