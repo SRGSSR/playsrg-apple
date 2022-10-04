@@ -87,6 +87,11 @@
 		04E4DEF7283696AD00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF8283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF9283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
+		04F184CE28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D228EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -2680,6 +2685,7 @@
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
+		04F184CD28EC5EE500B1207C /* ShowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowButton.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
@@ -4716,6 +4722,7 @@
 				6F40B7782726CB8300DDFED0 /* SearchBar.swift */,
 				043CBF0B286512CF0063FD97 /* SearchBarView.swift */,
 				085C0D982611F33E008E07C8 /* ShowAccessCell.swift */,
+				04F184CD28EC5EE500B1207C /* ShowButton.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
@@ -8456,6 +8463,7 @@
 				6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F33E61F2860BED900724E76 /* SearchSettingsNavigationView.swift in Sources */,
+				04F184CE28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F73C63A271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6FDF54F228530BAB0068BABB /* SearchViewController.swift in Sources */,
@@ -8692,6 +8700,7 @@
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD95283283EB008E2806 /* WebView.swift in Sources */,
+				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -8942,6 +8951,7 @@
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD96283283EB008E2806 /* WebView.swift in Sources */,
+				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9192,6 +9202,7 @@
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD97283283EB008E2806 /* WebView.swift in Sources */,
+				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9433,6 +9444,7 @@
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8826A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				04F184D228EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04E4DEEF283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* UserNotification.m in Sources */,

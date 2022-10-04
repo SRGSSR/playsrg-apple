@@ -118,10 +118,6 @@ struct ProgramView: View {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
                 }
-                if let properties = model.episodeButtonProperties {
-                    ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
-                        .frame(height: Self.buttonHeight)
-                }
             }
         }
     }
@@ -265,6 +261,10 @@ struct ProgramView: View {
                 
                 if let crewMembersDatas = model.crewMembersDatas {
                     CrewMembersView(datas: crewMembersDatas)
+                }
+                
+                if let properties = model.showButtonProperties {
+                    ShowButton(show: properties.show, action: properties.action)
                 }
             }
         }

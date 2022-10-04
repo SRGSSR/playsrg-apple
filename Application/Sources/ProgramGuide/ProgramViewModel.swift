@@ -42,8 +42,8 @@ final class ProgramViewModel: ObservableObject {
         return mediaData.media
     }
     
-    private var show: SRGShow? {
-        return media?.show
+    var show: SRGShow? {
+        return media?.show ?? program?.show
     }
     
     private var channel: SRGChannel? {
@@ -192,7 +192,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasActions: Bool {
-        return watchFromStartButtonProperties != nil || episodeButtonProperties != nil || watchLaterButtonProperties != nil
+        return watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
@@ -222,11 +222,10 @@ final class ProgramViewModel: ObservableObject {
         )
     }
     
-    var episodeButtonProperties: ButtonProperties? {
+    var showButtonProperties: ShowButtonProperties? {
         guard let show else { return nil }
-        return ButtonProperties(
-            icon: "episodes",
-            label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
+        return ShowButtonProperties(
+            show: show,
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController,
                       let window = UIApplication.shared.mainWindow else {
@@ -383,6 +382,12 @@ extension ProgramViewModel {
     struct ButtonProperties {
         let icon: String
         let label: String
+        let action: () -> Void
+    }
+    
+    /// Show button properties
+    struct ShowButtonProperties {
+        let show: SRGShow
         let action: () -> Void
     }
 }
