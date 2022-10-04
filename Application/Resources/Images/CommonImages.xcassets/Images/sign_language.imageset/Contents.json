@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "sign_language-19.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "sign_language-19 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "sign_language-33.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

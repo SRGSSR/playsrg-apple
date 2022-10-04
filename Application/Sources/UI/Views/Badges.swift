@@ -67,9 +67,29 @@ struct AudioDescriptionBadge: View {
 }
 
 /// Behavior: h-hug, v-hug
+struct SignLanguageBadge: View {
+    var body: some View {
+        Image(decorative: "sign_language")
+            .resizable()
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
+            .cornerRadius(BadgeMetrics.cornerRadius)
+    }
+}
+
+/// Behavior: h-hug, v-hug
 struct MultiAudioBadge: View {
     var body: some View {
         Image(decorative: "multiaudio")
+            .resizable()
+            .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
+            .cornerRadius(BadgeMetrics.cornerRadius)
+    }
+}
+
+/// Behavior: h-hug, v-hug
+struct DolbyDigitalBadge: View {
+    var body: some View {
+        Image(decorative: "dolby_digital")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
@@ -106,7 +126,9 @@ struct Badges_Previews: PreviewProvider {
             DurationBadge(duration: 1234)
             SubtitlesBadge()
             AudioDescriptionBadge()
+            SignLanguageBadge()
             MultiAudioBadge()
+            DolbyDigitalBadge()
             ThreeSixtyBadge()
         }
         .padding()

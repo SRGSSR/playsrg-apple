@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "dolby_digital-19.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "dolby_digital-19 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "dolby_digital-33.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -125,7 +125,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasAttributes: Bool {
-        return hasAudioDescription || hasSubtitles || hasMultiAudio
+        return hasAudioDescription || hasDolbyDigital || hasMultiAudio || hasSignLanguage || hasSubtitles
     }
     
     var hasMultiAudio: Bool {
@@ -138,6 +138,14 @@ final class ProgramViewModel: ObservableObject {
     
     var hasSubtitles: Bool {
         return program?.subtitlesAvailable ?? false
+    }
+    
+    var hasSignLanguage: Bool {
+        return program?.signLanguageAvailable ?? false
+    }
+    
+    var hasDolbyDigital: Bool {
+        return program?.dolbyDigitalAvailable ?? false
     }
     
     var crewMembersDatas: [CrewMembersData]? {
