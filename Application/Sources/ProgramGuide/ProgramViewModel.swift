@@ -222,23 +222,6 @@ final class ProgramViewModel: ObservableObject {
         )
     }
     
-    var showButtonProperties: ShowButtonProperties? {
-        guard let show else { return nil }
-        return ShowButtonProperties(
-            show: show,
-            isFavorite: FavoritesContainsShow(show),
-            action: {
-                guard let tabBarController = UIApplication.shared.mainTabBarController,
-                      let window = UIApplication.shared.mainWindow else {
-                    return
-                }
-                let showViewController = SectionViewController.showViewController(for: show)
-                tabBarController.pushViewController(showViewController, animated: false)
-                window.play_dismissAllViewControllers(animated: true, completion: nil)
-            }
-        )
-    }
-    
     private var watchLaterAllowedAction: WatchLaterAction {
         return mediaData.watchLaterAllowedAction
     }
@@ -285,6 +268,23 @@ final class ProgramViewModel: ObservableObject {
         default:
             return nil
         }
+    }
+    
+    var showButtonProperties: ShowButtonProperties? {
+        guard let show else { return nil }
+        return ShowButtonProperties(
+            show: show,
+            isFavorite: FavoritesContainsShow(show),
+            action: {
+                guard let tabBarController = UIApplication.shared.mainTabBarController,
+                      let window = UIApplication.shared.mainWindow else {
+                    return
+                }
+                let showViewController = SectionViewController.showViewController(for: show)
+                tabBarController.pushViewController(showViewController, animated: false)
+                window.play_dismissAllViewControllers(animated: true, completion: nil)
+            }
+        )
     }
 }
 
