@@ -13,17 +13,13 @@ import SwiftUI
 struct ShowButton: View {
     private let show: SRGShow
     private let isFavorite: Bool
-    private let accessibilityLabel: String
-    private let accessibilityHint: String?
     private let action: () -> Void
     
     @State private var isFocused = false
     
-    init(show: SRGShow, isFavorite: Bool, accessibilityLabel: String? = nil, accessibilityHint: String? = nil, action: @escaping () -> Void) {
+    init(show: SRGShow, isFavorite: Bool, action: @escaping () -> Void) {
         self.show = show
         self.isFavorite = isFavorite
-        self.accessibilityLabel = accessibilityLabel ?? show.title
-        self.accessibilityHint = accessibilityHint
         self.action = action
     }
     
@@ -35,16 +31,8 @@ struct ShowButton: View {
         return isFavorite ? "favorite_full" : "favorite"
     }
     
-    private var numberOfEpisodes: String? {
-        guard let numberOfEpisodes = show.numberOfEpisodes,
-              let numberOfEpisodesString = Self.numberOfEpisodesFormatter.string(from: numberOfEpisodes) else { return nil }
-        return String(format: NSLocalizedString("%@ episodes", comment: "The amount of episodes available for a show"), numberOfEpisodesString)
-    }
-    
-    private static var numberOfEpisodesFormatter: NumberFormatter {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        return formatter
+    private var accessibilityLabel: String {
+        return "\(show.title), \(PlaySRGAccessibilityLocalizedString("More episodes", comment: "Button to access more episodes"))"
     }
     
     var body: some View {
@@ -56,11 +44,9 @@ struct ShowButton: View {
                     Text(show.title)
                         .srgFont(.H4)
                         .lineLimit(2)
-                    if let numberOfEpisodes {
-                        Text(numberOfEpisodes)
-                            .srgFont(.subtitle1)
-                            .foregroundColor(.srgGrayC7)
-                    }
+                    Text(NSLocalizedString("More episodes", comment: "Button to access more episodes"))
+                        .srgFont(.subtitle1)
+                        .foregroundColor(.srgGrayC7)
                     Spacer()
                 }
                 .padding(.vertical, 2)
@@ -72,7 +58,7 @@ struct ShowButton: View {
             .onParentFocusChange { isFocused = $0 }
         }
         .buttonStyle(FlatButtonStyle(focused: isFocused, noPadding: true))
-        .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
+        .accessibilityElement(label: accessibilityLabel, traits: .isButton)
     }
 }
 

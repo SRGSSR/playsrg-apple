@@ -264,7 +264,7 @@ struct ProgramView: View {
                 }
                 
                 if let properties = model.showButtonProperties {
-                    ShowButton(show: properties.show, isFavorite: properties.isFavorite, accessibilityLabel: properties.accessibilityLabel, action: properties.action)
+                    ShowButton(show: properties.show, isFavorite: properties.isFavorite, action: properties.action)
                 }
             }
         }
