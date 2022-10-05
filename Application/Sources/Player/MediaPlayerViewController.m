@@ -934,7 +934,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (show) {
         [self.showThumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
-        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
         self.showLabel.text = show.title;
         
         self.numberOfEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];

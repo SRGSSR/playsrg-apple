@@ -54,7 +54,8 @@ struct ShowButton: View {
                     .aspectRatio(16 / 9, contentMode: .fit)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(show.title)
-                        .srgFont(.body)
+                        .srgFont(.H4)
+                        .lineLimit(2)
                     if let numberOfEpisodes {
                         Text(numberOfEpisodes)
                             .srgFont(.subtitle1)
