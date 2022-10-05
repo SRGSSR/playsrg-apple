@@ -53,6 +53,7 @@ struct SubtitlesBadge: View {
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Subtitled", comment: "Accessibility label for the subtitled badge"))
     }
 }
 
@@ -63,6 +64,7 @@ struct AudioDescriptionBadge: View {
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Audio described", comment: "Accessibility label for the audio description badge"))
     }
 }
 
@@ -73,6 +75,7 @@ struct SignLanguageBadge: View {
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Sign Language", comment: "Accessibility label for the sign Language badge"))
     }
 }
 
@@ -83,6 +86,7 @@ struct MultiAudioBadge: View {
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Original version", comment: "Accessibility label for the multi audio badge"))
     }
 }
 
@@ -93,6 +97,7 @@ struct DolbyDigitalBadge: View {
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
             .cornerRadius(BadgeMetrics.cornerRadius)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("Dolby Digital sound", comment: "Accessibility label for the Dolby Digital sound badge"))
     }
 }
 
@@ -102,6 +107,7 @@ struct ThreeSixtyBadge: View {
         Image(decorative: "360_media")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("360 content", comment: "Accessibility label for the 360 badge"))
     }
 }
 
@@ -115,6 +121,7 @@ struct YouthProtectionBadge: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: BadgeMetrics.length)
+                .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
         }
     }
 }

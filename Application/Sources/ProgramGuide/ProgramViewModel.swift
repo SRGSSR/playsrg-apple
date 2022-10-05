@@ -60,11 +60,11 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var subtitle: String? {
-        return program?.subtitle ?? program?.lead
+        return program?.subtitle
     }
     
     var summary: String? {
-        if program?.subtitle != nil, let lead = program?.lead {
+        if let lead = program?.lead {
             if let summary = program?.summary {
                 return "\(lead)\n\n\(summary)"
             }
