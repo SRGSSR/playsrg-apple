@@ -102,6 +102,25 @@ final class ProgramViewModel: ObservableObject {
             .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
     }
     
+    private var seasonNumber: NSNumber? {
+        guard let seasonNumber = program?.seasonNumber else { return nil }
+        return seasonNumber.intValue > 0 ? seasonNumber : nil
+    }
+    
+    private var episodeNumber: NSNumber? {
+        guard let episodeNumber = program?.episodeNumber else { return nil }
+        return episodeNumber.intValue > 0 ? episodeNumber : nil
+    }
+    
+    var serie: String? {
+        let seaon = seasonNumber != nil ? "\(NSLocalizedString("Season", comment: "Season of a serie")) \(seasonNumber!)" : nil
+        let episode = episodeNumber != nil ? "\(NSLocalizedString("Episode", comment: "Episode of a serie")) \(episodeNumber!)" : nil
+        let serie = [seaon, episode]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        return !serie.isEmpty ? serie : nil
+    }
+    
     var youthProtectionColor: SRGYouthProtectionColor? {
         let youthProtectionColor = program?.youthProtectionColor
         return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil

@@ -301,6 +301,12 @@ struct ProgramView: View {
                             .multilineTextAlignment(.center)
                             .foregroundColor(.srgGray96)
                     }
+                    if let serie = model.serie {
+                        Text(serie)
+                            .srgFont(.caption)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGray96)
+                    }
                 }
             }
         }
