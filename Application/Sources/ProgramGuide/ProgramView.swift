@@ -26,12 +26,23 @@ struct ProgramView: View {
         VStack(spacing: 18) {
             Handle()
             ScrollView {
-                VStack(spacing: 10) {
+                VStack(spacing: 24) {
                     InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .cornerRadius(LayoutStandardViewCornerRadius)
                         .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
+                    TitleView(model: model)
+                    if model.hasActions {
+                        ActionsView(model: model)
+                    }
+                    AdditionnalInformationView(model: model)
                     DescriptionView(model: model)
+                    if let crewMembersDatas = model.crewMembersDatas {
+                        CrewMembersView(datas: crewMembersDatas)
+                    }
+                    if let properties = model.showButtonProperties {
+                        ShowButton(show: properties.show, isFavorite: properties.isFavorite, action: properties.action)
+                    }
                     Spacer()
                 }
             }
@@ -109,7 +120,7 @@ struct ProgramView: View {
         }
         
         var body: some View {
-            Stack(direction: direction, spacing: 7) {
+            Stack(direction: direction, spacing: 8) {
                 if let properties = model.watchLaterButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
@@ -146,6 +157,26 @@ struct ProgramView: View {
             }
             .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
             .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
+    private struct AdditionnalInformationView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            VStack(spacing: 8) {
+                if let durationAndProduction = model.durationAndProduction {
+                    Text(durationAndProduction)
+                        .srgFont(.subtitle1)
+                        .lineLimit(1)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                if let youthProtectionColor = model.youthProtectionColor {
+                    YouthProtectionView(color: youthProtectionColor)
+                }
+            }
         }
     }
     
@@ -214,61 +245,27 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack(spacing: 18) {
-                VStack(spacing: 6) {
-                    if let properties = model.availabilityBadgeProperties {
-                        Badge(text: properties.text, color: Color(properties.color))
-                    }
-                    if let timeAndDate = model.timeAndDate {
-                        Text(timeAndDate)
-                            .srgFont(.caption)
-                            .lineLimit(1)
-                            .foregroundColor(.srgGray96)
-                            .accessibilityElement(label: model.timeAndDateAccessibilityLabel)
-                    }
-                    TitleView(model: model)
-                }
-                
-                if model.hasActions {
-                    ActionsView(model: model)
-                }
-                
-                if let durationAndProduction = model.durationAndProduction {
-                    Text(durationAndProduction)
-                        .srgFont(.subtitle1)
-                        .lineLimit(1)
+            VStack(spacing: 8) {
+                if let lead = model.lead {
+                    Text(lead)
+                        .srgFont(.H4)
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
-                if let youthProtectionColor = model.youthProtectionColor {
-                    YouthProtectionView(color: youthProtectionColor)
-                }
-                
                 if let summary = model.summary {
                     Text(summary)
                         .srgFont(.body)
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
                 if let imageCopyright = model.imageCopyright {
                     Text(imageCopyright)
                         .srgFont(.subtitle1)
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
                 if model.hasAttributes {
                     AttributesView(model: model)
-                }
-                
-                if let crewMembersDatas = model.crewMembersDatas {
-                    CrewMembersView(datas: crewMembersDatas)
-                }
-                
-                if let properties = model.showButtonProperties {
-                    ShowButton(show: properties.show, isFavorite: properties.isFavorite, action: properties.action)
                 }
             }
         }
@@ -279,19 +276,31 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack(spacing: 0) {
-                if let title = model.title {
-                    Text(title)
-                        .srgFont(.H2)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGrayC7)
+            VStack(spacing: 8) {
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
                 }
-                if let subtitle = model.subtitle {
-                    Text(subtitle)
-                        .srgFont(.H4)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray96)
+                VStack(spacing: 0) {
+                    if let timeAndDate = model.timeAndDate {
+                        Text(timeAndDate)
+                            .srgFont(.caption)
+                            .lineLimit(1)
+                            .foregroundColor(.srgGray96)
+                            .accessibilityElement(label: model.timeAndDateAccessibilityLabel)
+                    }
+                    if let title = model.title {
+                        Text(title)
+                            .srgFont(.H2)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGrayC7)
+                    }
+                    if let subtitle = model.subtitle {
+                        Text(subtitle)
+                            .srgFont(.subtitle1)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGray96)
+                    }
                 }
             }
         }

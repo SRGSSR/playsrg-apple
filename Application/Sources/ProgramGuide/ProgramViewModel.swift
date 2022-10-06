@@ -65,18 +65,12 @@ final class ProgramViewModel: ObservableObject {
         return program?.subtitle
     }
     
+    var lead: String? {
+        return program?.lead
+    }
+    
     var summary: String? {
-        if let lead = program?.lead {
-            if let summary = program?.summary {
-                return "\(lead)\n\n\(summary)"
-            }
-            else {
-                return lead
-            }
-        }
-        else {
-            return program?.summary
-        }
+        return program?.summary
     }
     
     private var calendarNotes: String? {
