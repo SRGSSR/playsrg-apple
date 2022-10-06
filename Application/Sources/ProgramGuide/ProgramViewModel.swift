@@ -204,8 +204,15 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
-        guard let media = currentMedia else { return nil }
-        return MediaDescription.availabilityBadgeProperties(for: media)
+        if isLive {
+            return MediaDescription.liveBadgeProperties()
+        }
+        else if let media = currentMedia {
+            return MediaDescription.availabilityBadgeProperties(for: media)
+        }
+        else {
+            return nil
+        }
     }
     
     var playAction: (() -> Void)? {

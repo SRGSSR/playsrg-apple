@@ -143,12 +143,16 @@ enum MediaDescription {
         }
     }
     
+    static func liveBadgeProperties() -> BadgeProperties {
+        return BadgeProperties(
+            text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
+            color: .srgLightRed
+        )
+    }
+    
     static func availabilityBadgeProperties(for media: SRGMedia, allowsDateDisplay: Bool = true) -> BadgeProperties? {
         if media.contentType == .livestream {
-            return BadgeProperties(
-                text: NSLocalizedString("Live", comment: "Short label identifying a livestream. Display in uppercase."),
-                color: .srgLightRed
-            )
+            return liveBadgeProperties()
         }
         else {
             let now = Date()
