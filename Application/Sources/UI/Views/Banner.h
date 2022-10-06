@@ -76,6 +76,13 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
  */
 + (void)showWatchLaterAdded:(BOOL)added forItemWithName:(nullable NSString *)name;
 
+/**
+ *  Show a banner telling the user that the specified event has been added to Calendar.
+ *
+ *  @discussion If no name is provided, no banner displayed.
+ */
++ (void)calendarEventAddedWithName:(NSString *)name;
+
 @end
 
 NS_ASSUME_NONNULL_END

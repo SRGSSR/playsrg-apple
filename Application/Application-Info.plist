@@ -196,6 +196,8 @@
 	<string>The application should not use your location. Please don’t allow.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>The application uses the microphone for Google Cast receiver discovery.</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>The application uses your calendar to add TV programs.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).playing</string>

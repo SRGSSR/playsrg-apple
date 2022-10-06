@@ -520,6 +520,17 @@ static const CGFloat MiniPlayerDefaultOffset = 5.f;
     [self play_setNeedsScrollableViewUpdate];
 }
 
+#pragma mark EKEventEditViewDelegate
+
+- (void)eventEditViewController:(EKEventEditViewController *)controller didCompleteWithAction:(EKEventEditViewAction)action
+{
+    [controller dismissViewControllerAnimated:YES completion:^{
+        if (action == EKEventEditViewActionSaved) {
+            [Banner calendarEventAddedWithName:controller.event.title];
+        }
+    }];
+}
+
 #pragma mark Notifications
 
 - (void)applicationDidBecomeActive:(NSNotification *)notification

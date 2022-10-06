@@ -118,6 +118,10 @@ struct ProgramView: View {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
                 }
+                if let properties = model.calendarButtonProperties {
+                    ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
+                        .frame(height: Self.buttonHeight)
+                }
             }
         }
     }

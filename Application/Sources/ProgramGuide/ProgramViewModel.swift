@@ -6,6 +6,8 @@
 
 import Collections
 import Combine
+import EventKit
+import EventKitUI
 import Foundation
 import SRGDataProviderModel
 
@@ -74,6 +76,20 @@ final class ProgramViewModel: ObservableObject {
         }
         else {
             return program?.summary
+        }
+    }
+    
+    private var calendarNotes: String? {
+        if let subtitle {
+            if let summary {
+                return "\(subtitle)\n\n\(summary)"
+            }
+            else {
+                return subtitle
+            }
+        }
+        else {
+            return summary
         }
     }
     
@@ -192,7 +208,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasActions: Bool {
-        return watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil
+        return watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil || calendarButtonProperties != nil
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
@@ -268,6 +284,57 @@ final class ProgramViewModel: ObservableObject {
         default:
             return nil
         }
+    }
+    
+    var calendarButtonProperties: ButtonProperties? {
+        return ButtonProperties(
+            icon: "calendar",
+            label: NSLocalizedString("Add to my calendar", comment: "Button to add to my calendar"),
+            action: {
+                guard let program = self.program,
+                      let channel = self.data?.channel,
+                      let tabBarController = UIApplication.shared.mainTabBarController else { return }
+                let eventStore = EKEventStore()
+                eventStore.requestAccess( to: EKEntityType.event, completion: { granted, error in
+                    DispatchQueue.main.async {
+                        guard error == nil else {
+                            Banner.showError(error)
+                            return
+                        }
+                        
+                        if granted {
+                            let event = EKEvent(eventStore: eventStore)
+                            event.title = "\(program.title) - \(channel.title)"
+                            event.startDate = program.startDate
+                            event.endDate = program.endDate
+                            event.notes = self.calendarNotes
+                            
+                            if let media = self.media ?? self.livestreamMedia,
+                               let url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero) {
+                                event.url = url
+                            }
+                            
+                            let eventController = EKEventEditViewController()
+                            eventController.event = event
+                            eventController.eventStore = eventStore
+                            eventController.editViewDelegate = tabBarController
+                            tabBarController.play_top.present(eventController, animated: true, completion: nil)
+                        }
+                        else {
+                            let applicationName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+                            let alertController = UIAlertController(title: String(format: NSLocalizedString("“%@” would like to access to your Calendar", comment: "Add to Calendar alert title"), applicationName),
+                                                                    message: NSLocalizedString("The application uses your calendar to add TV programs.", comment: "Add to Calendar alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), style: .default, handler: { _ in
+                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                            }))
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
+                            tabBarController.play_top.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+        )
     }
     
     var showButtonProperties: ShowButtonProperties? {
