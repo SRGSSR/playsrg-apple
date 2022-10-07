@@ -51,6 +51,9 @@ struct ProgramPreview: View {
         
         var body: some View {
             VStack(alignment: .leading, spacing: 4) {
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
+                }
                 if let subtitle = model.subtitle {
                     Text(subtitle)
                         .srgFont(.H4)
