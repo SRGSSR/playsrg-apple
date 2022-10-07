@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, BannerStyle) {
  *
  *  @discussion If no name is provided, no banner displayed.
  */
-+ (void)calendarEventAddedWithName:(NSString *)name;
++ (void)calendarEventAddedWithTitle:(NSString *)title;
 
 @end
 

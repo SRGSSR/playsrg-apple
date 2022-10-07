@@ -30,6 +30,8 @@ final class ProgramViewModel: ObservableObject {
     
     @Published private(set) var date = Date()
     
+    private let eventEditViewDelegateObject = EventEditViewDelegateObject()
+    
     init() {
         Timer.publish(every: 10, on: .main, in: .common)
             .autoconnect()
@@ -315,13 +317,14 @@ final class ProgramViewModel: ObservableObject {
                       let channel = self.data?.channel,
                       let tabBarController = UIApplication.shared.mainTabBarController else { return }
                 let eventStore = EKEventStore()
-                eventStore.requestAccess( to: EKEntityType.event, completion: { granted, error in
+                eventStore.requestAccess( to: EKEntityType.event, completion: { [weak self] granted, error in
                     DispatchQueue.main.async {
                         guard error == nil else {
                             Banner.showError(error)
                             return
                         }
                         
+                        guard let self else { return }
                         if granted {
                             let event = EKEvent(eventStore: eventStore)
                             event.title = "\(program.title) - \(channel.title)"
@@ -337,7 +340,7 @@ final class ProgramViewModel: ObservableObject {
                             let eventController = EKEventEditViewController()
                             eventController.event = event
                             eventController.eventStore = eventStore
-                            eventController.editViewDelegate = tabBarController
+                            eventController.editViewDelegate = self.eventEditViewDelegateObject
                             tabBarController.play_top.present(eventController, animated: true, completion: nil)
                         }
                         else {
@@ -478,5 +481,17 @@ extension ProgramViewModel {
         let show: SRGShow
         let isFavorite: Bool
         let action: () -> Void
+    }
+}
+
+// MARK: UIKit delegate object
+
+private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelegate {
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true) {
+            if action == .saved, let title = controller.event?.title {
+                Banner.calendarEventAdded(withTitle: title)
+            }
+        }
     }
 }

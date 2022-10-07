@@ -10,13 +10,11 @@
 #import "PlayApplicationNavigation.h"
 #import "ScrollableContent.h"
 
-@import EventKit;
-@import EventKitUI;
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TabBarController : UITabBarController <ContainerContentInsets, Oriented, PlayApplicationNavigation, ScrollableContentContainer, UITabBarControllerDelegate, EKEventEditViewDelegate>
+@interface TabBarController : UITabBarController <ContainerContentInsets, Oriented, PlayApplicationNavigation, ScrollableContentContainer, UITabBarControllerDelegate>
 
 /**
  *  Open the application section.
