@@ -155,28 +155,9 @@ final class ProgramViewModel: ObservableObject {
         return !durationAndProduction.isEmpty ? durationAndProduction : nil
     }
     
-    var hasAttributes: Bool {
-        return hasAudioDescription || hasDolbyDigital || hasMultiAudio || hasSignLanguage || hasSubtitles
-    }
-    
-    var hasMultiAudio: Bool {
-        return program?.alternateAudioAvailable ?? false
-    }
-    
-    var hasAudioDescription: Bool {
-        return program?.audioDescriptionAvailable ?? false
-    }
-    
-    var hasSubtitles: Bool {
-        return program?.subtitlesAvailable ?? false
-    }
-    
-    var hasSignLanguage: Bool {
-        return program?.signLanguageAvailable ?? false
-    }
-    
-    var hasDolbyDigital: Bool {
-        return program?.dolbyDigitalAvailable ?? false
+    var badgesListData: BadgeList.Data? {
+        guard let program else { return nil }
+        return BadgeList.data(for: program)
     }
     
     var crewMembersDatas: [CrewMembersData]? {

@@ -180,33 +180,6 @@ struct ProgramView: View {
         }
     }
     
-    /// Behavior: h-exp, v-hug
-    private struct AttributesView: View {
-        @ObservedObject var model: ProgramViewModel
-        
-        var body: some View {
-            HStack(spacing: 6) {
-                if model.hasSubtitles {
-                    SubtitlesBadge()
-                }
-                if model.hasMultiAudio {
-                    MultiAudioBadge()
-                }
-                if model.hasAudioDescription {
-                    AudioDescriptionBadge()
-                }
-                if model.hasSignLanguage {
-                    SignLanguageBadge()
-                }
-                if model.hasDolbyDigital {
-                    DolbyDigitalBadge()
-                }
-                Spacer()
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
-        }
-    }
-    
     // Behavior: h-exp, v-hug
     private struct CrewMembersView: View {
         let crewMembersDatas: [ProgramViewModel.CrewMembersData]
@@ -264,8 +237,8 @@ struct ProgramView: View {
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                if model.hasAttributes {
-                    AttributesView(model: model)
+                if let badgesListData = model.badgesListData {
+                    BadgeList(data: badgesListData)
                 }
             }
         }
