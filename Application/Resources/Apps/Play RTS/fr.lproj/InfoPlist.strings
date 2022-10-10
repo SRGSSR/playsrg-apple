@@ -1,6 +1,7 @@
 "Downloads" = "Téléchargements";
 "Favorites" = "Favoris";
 "History" = "Historique";
-"Search" = "Recherche";
-"NSMicrophoneUsageDescription" = "L'application utilise le micro pour la découverte de récepteur Google Cast.";
+"NSCalendarsUsageDescription" = "L'application utilise le calendrier pour ajouter des programmes TV.";
 "NSLocalNetworkUsageDescription" = "L'application utilise le réseau local pour la découverte de récepteur Google Cast.";
+"NSMicrophoneUsageDescription" = "L'application utilise le micro pour la découverte de récepteur Google Cast.";
+"Search" = "Recherche";

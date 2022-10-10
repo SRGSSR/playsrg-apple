@@ -1,6 +1,7 @@
 "Downloads" = "Downloads";
 "Favorites" = "Favoriten";
 "History" = "Zuletzt gesehen";
-"Search" = "Suche";
-"NSMicrophoneUsageDescription" = "Die App benutzt das Mikrofon, um Google Cast Empfänger zu erkennen.";
+"NSCalendarsUsageDescription" = "The application uses the calendar to add TV programs.";
 "NSLocalNetworkUsageDescription" = "Die Applikation verwendet das lokale Netzwerk für die Erkennung von Google Cast-Empfängern.";
+"NSMicrophoneUsageDescription" = "Die App benutzt das Mikrofon, um Google Cast Empfänger zu erkennen.";
+"Search" = "Suche";
