@@ -107,7 +107,7 @@ struct ThreeSixtyBadge: View {
         Image(decorative: "360_media")
             .resizable()
             .frame(width: BadgeMetrics.length, height: BadgeMetrics.length)
-            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("360 content", comment: "Accessibility label for the 360 badge"))
+            .accessibilityElement(label: PlaySRGAccessibilityLocalizedString("360-degree content", comment: "Accessibility label for the 360 badge"))
     }
 }
 

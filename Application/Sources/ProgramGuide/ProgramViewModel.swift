@@ -292,7 +292,7 @@ final class ProgramViewModel: ObservableObject {
     var calendarButtonProperties: ButtonProperties? {
         return ButtonProperties(
             icon: "calendar",
-            label: NSLocalizedString("Add to my calendar", comment: "Button to add to my calendar"),
+            label: NSLocalizedString("Add to Calendar", comment: "Button to add an event to Calendar application"),
             action: {
                 guard let program = self.program,
                       let channel = self.data?.channel,
@@ -326,8 +326,8 @@ final class ProgramViewModel: ObservableObject {
                         }
                         else {
                             let applicationName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
-                            let alertController = UIAlertController(title: String(format: NSLocalizedString("“%@” would like to access to your Calendar", comment: "Add to Calendar alert title"), applicationName),
-                                                                    message: NSLocalizedString("The application uses your calendar to add TV programs.", comment: "Add to Calendar alert explanation"),
+                            let alertController = UIAlertController(title: String(format: NSLocalizedString("“%@” would like to access to your calendar", comment: "Add to Calendar alert title"), applicationName),
+                                                                    message: NSLocalizedString("The application uses the calendar to add TV programs.", comment: "Add to Calendar alert explanation"),
                                                                     preferredStyle: .alert)
                             alertController.addAction(UIAlertAction(title: NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), style: .default, handler: { _ in
                                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
