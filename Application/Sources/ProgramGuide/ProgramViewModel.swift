@@ -313,9 +313,13 @@ final class ProgramViewModel: ObservableObject {
                             event.endDate = program.endDate
                             event.notes = self.calendarNotes
                             
-                            if let media = self.media ?? self.livestreamMedia,
+                            let timeAvailability = program.timeAvailability(at: Date())
+                            if let media = self.media ?? (timeAvailability == .notYetAvailable ? self.livestreamMedia : nil),
                                let url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero) {
                                 event.url = url
+                            }
+                            else {
+                                event.url = ApplicationConfiguration.shared.playURL
                             }
                             
                             let eventController = EKEventEditViewController()
