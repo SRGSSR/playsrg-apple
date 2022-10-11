@@ -56,6 +56,7 @@ AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
+AnalyticsTitle const AnalyticsTitleCalendarAdd = @"calendar_add";
 AnalyticsTitle const AnalyticsTitleContinuousPlayback = @"continuous_playback";
 AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";
 AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
