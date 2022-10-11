@@ -4,14 +4,14 @@
 /* Seek backward shortcut label */
 "%@ backward" = "Reculer de %@";
 
-/* The amount of episodes available for a show */
-"%@ episodes" = "%@ épisodes";
-
 /* Seek forward shortcut label */
 "%@ forward" = "Avancer de %@";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Later\"" = "%@ a été ajouté à \"Plus tard\"";
+
+/* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
+"%@ has been added to calendar" = "%@ a été ajouté au calendrier";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
 "%@ has been added to downloads" = "%@ a été ajouté aux téléchargements";
@@ -63,6 +63,9 @@
 
 /* Show A-Z short button title */
 "A to Z" = "De A à Z";
+
+/* Button to add an event to Calendar application */
+"Add to Calendar" = "Ajouter au calendrier";
 
 /* Context menu action to add a media to the downloads */
 "Add to downloads" = "Ajouter aux téléchargements";
@@ -228,6 +231,9 @@
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Activer les notifications ?";
 
+/* Episode of a serie */
+"Episode" = "Épisode";
+
 /* Title label used to present scheduled livestream medias */
 "Events" = "Événements";
 
@@ -365,8 +371,8 @@
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "Joue automatiquement un autre contenu lorsque la lecture d'un contenu se termine.";
 
-/* Button to access more episodes from the media detail view
-   Button to access more episodes from the program detail view
+/* Button to access more episodes
+   Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
 "More episodes" = "Autres épisodes";
 
@@ -541,6 +547,9 @@
    Search tab title */
 "Search" = "Recherche";
 
+/* Season of a serie */
+"Season" = "Saison";
+
 /* Section wide support setting label */
 "Section wide support" = "Support étendu des sections";
 
@@ -635,6 +644,9 @@
 
 /* Server setting name */
 "Test" = "Test";
+
+/* Add to Calendar alert explanation */
+"The application uses the calendar to add TV programs." = "L'application utilise le calendrier pour ajouter des programmes TV.";
 
 /* Button label to share the content being played. */
 "The content" = "Le contenu";
@@ -808,3 +820,6 @@
 
 /* Label of the button to display feedback form */
 "Your feedback" = "Votre avis";
+
+/* Add to Calendar alert title */
+"“%@” would like to access to your calendar" = "« %@ » désire accéder à votre calendrier\n";

@@ -1,31 +1,66 @@
 {
-         "title" : "Gredig direkt",
-         "startTime" : "2021-11-12T02:15:00+01:00",
-         "endTime" : "2021-11-12T02:45:00+01:00",
-         "lead" : "Nicht erst, seit er an der EM zum Penaltyhelden avancierte, fliegen Publikumsliebling Yann Sommer die Herzen der Schweizerinnen und Schweizer zu. Am Tag vor dem wegweisenden Spiel in der WM-Qualifikation gegen Italien spricht der Nati-Goalie bei «Gredig direkt» über Fussball – aber längst nicht nur.",
-         "description" : "70 Länderspiele – kein anderer Goalie stand so oft für die Schweizer Fussball-Nati im Einsatz wie Yann Sommer. Gerade weil der 32-Jährige seit seinen ersten Schritten im Profifussball stets abgeklärt, geerdet und reif wirkte und sein Innenleben kaum je nach aussen kehrte, wirkten seine tränenreichen Interviews an der Europameisterschaft vor einigen Monaten umso stärker.\n\nMit dem herausragenden Turnier und der erstmaligen Viertelfinal-Teilnahme hat der Publikumsliebling wie das gesamte Schweizer Team noch einmal einen Popularitätsschub erhalten. Und das Selbstvertrauen ist gewachsen: Selbst ein Auswärtserfolg bei Champion Italien und damit ein grosser Schritt Richtung WM-Qualifikation ist mittlerweile ein realistisches Szenario.\n\nDer überprofessionelle Sommer scheint in seiner Karriere nichts dem Zufall zu überlassen. Hilft ihm das auch in unvorhersehbaren Situationen, wo der Druck für andere fast nicht mehr auszuhalten ist? Wie stellt er sich zu ungeimpften Kollegen, der WM in Katar und zum oft gehörten Vorwurf, der Horizont von Fussballern höre an der Seitenlinie auf? Bei «Gredig direkt» lässt der zweifache Familienvater tief blicken.",
-         "imageUrl" : "https://www.srf.ch/programm/tv/image/redirect/5c63ce86deca4758952764669bb895fb0464ae15.jpg",
-         "imageIsFallbackUrl" : false,
-         "imageTitle" : "Gredig direkt Moderator Urs Gredig 2020",
-         "imageCopyright" : "SRF/Oscar Alessio",
-         "mediaUrn" : "urn:srf:video:f0dc77ba-c5ab-453c-82bf-a81f43c54faa",
-         "genre" : "Info / Dok",
-         "productionYear" : 2021,
-         "productionCountry" : "Schweiz",
-         "subtitle" : "mit Yann Sommer",
-         "creditList" : [ {
-            "realName" : "Urs Gredig",
-            "role" : "Gastgeber"
-         } ],
-         "subtitlesAvailable" : false,
-         "isLive" : false,
-         "hasTwoLanguages" : false,
-         "hasSignLanguage" : false,
-         "hasVisualDescription" : false,
-         "isFollowUp" : false,
-         "isDolbyDigital" : false,
-         "isRepetition" : true,
-         "repetitionDescription" : "Wiederholung vom 11.11.2021",
-         "channelTitle" : "SRF 1",
-         "channelUrn" : "urn:srf:channel:tv:23FFBE1B-65CE-4188-ADD2-C724186C2C9F"
-      }
+  "title": "Gredig direkt",
+  "startTime": "2021-11-12T02:15:00+01:00",
+  "endTime": "2021-11-12T02:45:00+01:00",
+  "lead": "Nicht erst, seit er an der EM zum Penaltyhelden avancierte, fliegen Publikumsliebling Yann Sommer die Herzen der Schweizerinnen und Schweizer zu. Am Tag vor dem wegweisenden Spiel in der WM-Qualifikation gegen Italien spricht der Nati-Goalie bei «Gredig direkt» über Fussball – aber längst nicht nur.",
+  "description": "70 Länderspiele – kein anderer Goalie stand so oft für die Schweizer Fussball-Nati im Einsatz wie Yann Sommer. Gerade weil der 32-Jährige seit seinen ersten Schritten im Profifussball stets abgeklärt, geerdet und reif wirkte und sein Innenleben kaum je nach aussen kehrte, wirkten seine tränenreichen Interviews an der Europameisterschaft vor einigen Monaten umso stärker.",
+  "imageUrl": "https://www.srf.ch/programm/tv/image/redirect/5c63ce86deca4758952764669bb895fb0464ae15.jpg",
+  "imageIsFallbackUrl": false,
+  "imageTitle": "Gredig direkt Moderator Urs Gredig 2020",
+  "imageCopyright": "SRF/Oscar Alessio",
+  "mediaUrn": "urn:srf:video:f0dc77ba-c5ab-453c-82bf-a81f43c54faa",
+  "genre": "Info / Dok",
+  "productionYear": 2021,
+  "productionCountry": "Schweiz",
+  "subtitle": "mit Yann Sommer",
+  "seasonNumber": 1,
+  "episodeNumber": 3,
+  "episodesTotal": 10,
+  "youthProtectionColor": "YELLOW",
+  "creditList": [
+    {
+      "realName": "Urs Gredig",
+      "role": "Gastgeber"
+    },
+    {
+      "realName": "Tanya König",
+      "role": "Moderation"
+    },
+    {
+      "realName": "Eamonn Walker",
+      "role": "Mit",
+      "name": "Wallace Boden"
+    },
+    {
+      "realName": "Kara Killmer",
+      "role": "Mit",
+      "name": "Sylvie Brett"
+    },
+    {
+      "realName": "Joe Minoso",
+      "role": "Mit",
+      "name": "Joe Cruz"
+    },
+    {
+      "realName": "Derek Haas",
+      "role": "Drehbuch",
+      "name": "Created by"
+    },
+    {
+      "realName": "Michael Brandt",
+      "role": "Drehbuch",
+      "name": "Created by"
+    }
+  ],
+  "subtitlesAvailable": true,
+  "isLive": false,
+  "hasTwoLanguages": true,
+  "hasSignLanguage": true,
+  "hasVisualDescription": true,
+  "isFollowUp": false,
+  "isDolbyDigital": true,
+  "isRepetition": true,
+  "repetitionDescription": "Wiederholung vom 11.11.2021",
+  "channelTitle": "SRF 1",
+  "channelUrn": "urn:srf:channel:tv:23FFBE1B-65CE-4188-ADD2-C724186C2C9F"
+}

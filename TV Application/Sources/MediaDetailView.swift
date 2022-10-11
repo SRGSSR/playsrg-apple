@@ -128,7 +128,7 @@ struct MediaDetailView: View {
         var body: some View {
             HStack(spacing: 30) {
                 HStack(spacing: 4) {
-                    if let youthProtectionColor = model.media?.youthProtectionColor, let youthProtectionLogoImage = YouthProtectionImageForColor(youthProtectionColor) {
+                    if let youthProtectionColor = model.youthProtectionColor, let youthProtectionLogoImage = YouthProtectionImageForColor(youthProtectionColor) {
                         Image(uiImage: youthProtectionLogoImage)
                     }
                     if let media = model.media, let duration = MediaDescription.duration(for: media) {
@@ -267,5 +267,24 @@ extension MediaDetailView {
     
     private var analyticsPageLevels: [String]? {
         return [AnalyticsPageLevel.play.rawValue]
+    }
+}
+
+// MARK: Preview
+
+struct MediaDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MediaDetailView(media: Mock.media())
+                .previewDisplayName("standard")
+            MediaDetailView(media: Mock.media(.noShow))
+                .previewDisplayName("no show")
+            MediaDetailView(media: Mock.media(.rich))
+                .previewDisplayName("rich")
+            MediaDetailView(media: Mock.media(.overflow))
+                .previewDisplayName("overflow")
+            MediaDetailView(media: Mock.media(.nineSixteen))
+                .previewDisplayName("nine sixteen")
+        }
     }
 }

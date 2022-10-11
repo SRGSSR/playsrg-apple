@@ -9,7 +9,7 @@ BU__CODE_SIGN_ENTITLEMENTS_IOS_APP_FILE_NAME = Application-without-CarPlay.entit
 BU__DOMAIN = *.swissinfo.ch
 BU__DOMAIN[config=Beta] = srgplayer-swi.stage.srf.ch
 BU__DOMAIN[config=Beta_AppCenter] = srgplayer-swi.stage.srf.ch
-BU__DOMAIN[config=Nightly] = srgplayer-swi.test.srf.ch
+BU__DOMAIN[config=Nightly] = play-mmf.herokuapp.com
 BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-swi.test.srf.ch
 BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
 BU__IDENTIFIER = swi

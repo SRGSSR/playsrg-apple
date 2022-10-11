@@ -134,24 +134,24 @@ struct ProgramGuideHeaderView: View {
             .responderChain(from: firstResponder)
         }
         
+        /// Behavior: h-exp, v-hug
+        private struct DateView: View {
+            @ObservedObject var model: ProgramGuideViewModel
+            
+            var body: some View {
+                Text(model.dateString)
+                    .srgFont(.H2)
+                    .minimumScaleFactor(0.8)
+                    .foregroundColor(.srgGrayC7)
+                    .frame(maxWidth: .infinity)
+            }
+        }
+        
 #if os(iOS)
         private func action() {
             firstResponder.sendAction(#selector(ProgramGuideHeaderViewActions.openCalendar))
         }
 #endif
-    }
-    
-    /// Behavior: h-exp, v-hug
-    private struct DateView: View {
-        @ObservedObject var model: ProgramGuideViewModel
-        
-        var body: some View {
-            Text(model.dateString)
-                .srgFont(.H2)
-                .minimumScaleFactor(0.8)
-                .foregroundColor(.srgGrayC7)
-                .frame(maxWidth: .infinity)
-        }
     }
     
 #if os(iOS)

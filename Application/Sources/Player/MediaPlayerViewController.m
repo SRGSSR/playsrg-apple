@@ -141,7 +141,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic, weak) IBOutlet UIStackView *showStackView;
 @property (nonatomic, weak) IBOutlet UIImageView *showThumbnailImageView;
 @property (nonatomic, weak) IBOutlet UILabel *showLabel;
-@property (nonatomic, weak) IBOutlet UILabel *numberOfEpisodesLabel;
+@property (nonatomic, weak) IBOutlet UILabel *moreEpisodesLabel;
 @property (nonatomic, weak) IBOutlet UIButton *favoriteButton;
 
 @property (nonatomic, weak) IBOutlet UIView *radioHomeView;
@@ -387,6 +387,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     self.showWrapperView.layer.masksToBounds = YES;
     
     self.showThumbnailImageView.backgroundColor = UIColor.play_grayThumbnailImageViewBackgroundColor;
+    
+    self.moreEpisodesLabel.textColor = UIColor.srg_grayC7Color;
     
     self.pullDownGestureRecognizer.delegate = self;
     
@@ -934,19 +936,11 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (show) {
         [self.showThumbnailImageView play_requestImage:show.image withSize:SRGImageSizeSmall placeholder:ImagePlaceholderMediaList];
         
-        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleBody];
+        self.showLabel.font = [SRGFont fontWithStyle:SRGFontStyleH4];
         self.showLabel.text = show.title;
         
-        self.numberOfEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
-        
-        NSNumber *numberOfEpisodes = show.numberOfEpisodes;
-        if (numberOfEpisodes) {
-            NSString *numberOfEpisodesString = [NSNumberFormatter localizedStringFromNumber:numberOfEpisodes numberStyle:NSNumberFormatterDecimalStyle];
-            self.numberOfEpisodesLabel.text = [NSString stringWithFormat:NSLocalizedString(@"%@ episodes", @"The amount of episodes available for a show"), numberOfEpisodesString];
-        }
-        else {
-            self.numberOfEpisodesLabel.text = nil;
-        }
+        self.moreEpisodesLabel.font = [SRGFont fontWithStyle:SRGFontStyleSubtitle1];
+        self.moreEpisodesLabel.text = NSLocalizedString(@"More episodes", @"Button to access more episodes");
         
         [self updateFavoriteStatusForShow:show];
         

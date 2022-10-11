@@ -132,6 +132,18 @@ static NSString *BannerShortenedName(NSString *name);
     [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO];
 }
 
++ (void)calendarEventAddedWithTitle:(NSString *)title
+{
+    if (! title) {
+        return;
+    }
+    
+    NSString *messageFormatString = NSLocalizedString(@"%@ has been added to calendar", @"Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application.");
+    NSString *message = [NSString stringWithFormat:messageFormatString, BannerShortenedName(title)];
+    UIImage *image = [UIImage imageNamed:@"calendar"];
+    [self showWithStyle:BannerStyleInfo message:message image:image sticky:NO];
+}
+
 @end
 
 static NSString *BannerShortenedName(NSString *name)
