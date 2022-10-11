@@ -313,10 +313,14 @@ final class ProgramViewModel: ObservableObject {
                             event.endDate = program.endDate
                             event.notes = self.calendarNotes
                             
-                            let timeAvailability = program.timeAvailability(at: Date())
-                            if let media = self.media ?? (timeAvailability == .notYetAvailable ? self.livestreamMedia : nil),
-                               let url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero) {
-                                event.url = url
+                            if let media = self.media {
+                                event.url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+                            }
+                            else if let media = self.livestreamMedia, program.timeAvailability(at: Date()) == .notYetAvailable {
+                                event.url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+                            }
+                            else if let show = program.show {
+                                event.url = ApplicationConfiguration.shared.sharingURL(for: show)
                             }
                             else {
                                 event.url = ApplicationConfiguration.shared.playURL
