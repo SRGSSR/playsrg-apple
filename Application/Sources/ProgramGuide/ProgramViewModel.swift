@@ -445,7 +445,7 @@ extension ProgramViewModel {
         }
         
         var accessibilityLabel: String {
-            return "\(role ?? "") \(names.joined(separator: ", "))"
+            return "\(role ?? "") \(names.joined(separator: ", "))".trimmingCharacters(in: .whitespaces)
         }
     }
     
