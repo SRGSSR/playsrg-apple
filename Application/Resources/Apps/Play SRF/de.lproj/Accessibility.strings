@@ -17,7 +17,7 @@
 "%@ views" = "%@ gesehen";
 
 /* Accessibility label for the 360 badge */
-"360-degree content" = "360-degree content";
+"360-degree content" = "360-Grad Inhalt";
 
 /* Show A-Z button label */
 "A to Z shows" = "Sendungen A bis Z";
@@ -69,7 +69,7 @@
 "Display list" = "Als Liste anzeigen";
 
 /* Accessibility label for the Dolby Digital sound badge */
-"Dolby Digital sound" = "Dolby Digital sound";
+"Dolby Digital sound" = "Dolby-Digital-Sound";
 
 /* A download button label */
 "Download" = "Download";
@@ -197,7 +197,7 @@
 "Shows the channel programs" = "Zeigt das Programm für den Sender";
 
 /* Accessibility label for the sign Language badge */
-"Sign Language" = "Sign Language";
+"Sign Language" = "Gebärdensprache";
 
 /* Stop button label */
 "Stop" = "Anhalten";

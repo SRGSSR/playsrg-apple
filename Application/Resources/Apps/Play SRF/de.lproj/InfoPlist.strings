@@ -1,7 +1,7 @@
 "Downloads" = "Downloads";
 "Favorites" = "Favoriten";
 "History" = "Zuletzt gesehen";
-"NSCalendarsUsageDescription" = "The application uses the calendar to add TV programs.";
+"NSCalendarsUsageDescription" = "Die Applikation verwendet den Kalender, um Einträge aus dem TV-Programm hinzuzufügen.";
 "NSLocalNetworkUsageDescription" = "Die Applikation verwendet das lokale Netzwerk für die Erkennung von Google Cast-Empfängern.";
 "NSMicrophoneUsageDescription" = "Die App benutzt das Mikrofon, um Google Cast Empfänger zu erkennen.";
 "Search" = "Suche";
