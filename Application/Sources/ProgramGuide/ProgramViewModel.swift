@@ -94,7 +94,7 @@ final class ProgramViewModel: ObservableObject {
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
         let day = DateFormatter.play_relativeFull.string(from: program.startDate)
-        return "\(startTime) - \(endTime), \(day)"
+        return "\(startTime) - \(endTime) · \(day)"
     }
     
     var timeAndDateAccessibilityLabel: String? {
