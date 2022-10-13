@@ -267,13 +267,9 @@ static void *s_kvoContext = &s_kvoContext;
 - (void)setupAnalytics
 {
     ApplicationConfiguration *applicationConfiguration = ApplicationConfiguration.sharedApplicationConfiguration;
-    
     SRGAnalyticsConfiguration *configuration = [[SRGAnalyticsConfiguration alloc] initWithBusinessUnitIdentifier:applicationConfiguration.analyticsBusinessUnitIdentifier
-                                                                                                       container:applicationConfiguration.analyticsContainer
+                                                                                                       sourceKey:applicationConfiguration.analyticsSourceKey
                                                                                                         siteName:applicationConfiguration.siteName];
-#if defined(DEBUG) || defined(NIGHTLY) || defined(BETA)
-    configuration.environmentMode = SRGAnalyticsEnvironmentModePreProduction;
-#endif
     [SRGAnalyticsTracker.sharedTracker startWithConfiguration:configuration
                                                    dataSource:self
                                               identityService:SRGIdentityService.currentIdentityService];

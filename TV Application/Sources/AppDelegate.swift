@@ -88,12 +88,11 @@ extension AppDelegate: UIApplicationDelegate {
         
         UserConsentHelper.setup()
         
-        let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
-                                                               container: configuration.analyticsContainer,
-                                                               siteName: configuration.siteName)
-#if DEBUG || NIGHTLY || BETA
-        analyticsConfiguration.environmentMode = .preProduction
-#endif
+        let analyticsConfiguration = SRGAnalyticsConfiguration(
+            businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
+            sourceKey: configuration.analyticsSourceKey,
+            siteName: configuration.siteName
+        )
         SRGAnalyticsTracker.shared.start(with: analyticsConfiguration, dataSource: self, identityService: SRGIdentityService.current)
         
 #if DEBUG || NIGHTLY || BETA

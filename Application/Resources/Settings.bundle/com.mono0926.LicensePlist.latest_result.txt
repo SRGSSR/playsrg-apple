@@ -157,7 +157,7 @@ name: PLCrashReporter, nameSpecified: PLCrashReporter, owner: microsoft, version
 
 name: promises, nameSpecified: Promises, owner: google, version: 2.3.1, source: https://github.com/google/promises
 
-name: srganalytics-apple, nameSpecified: SRGAnalytics, owner: SRGSSR, version: 8.2.0, source: https://github.com/SRGSSR/srganalytics-apple
+name: srganalytics-apple, nameSpecified: srganalytics-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srganalytics-apple
 
 name: srgappearance-apple, nameSpecified: SRGAppearance, owner: SRGSSR, version: 5.2.1, source: https://github.com/SRGSSR/srgappearance-apple
 
@@ -169,7 +169,7 @@ name: srgdiagnostics-apple, nameSpecified: SRGDiagnostics, owner: SRGSSR, versio
 
 name: srgidentity-apple, nameSpecified: SRGIdentity, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srgidentity-apple
 
-name: srgletterbox-apple, nameSpecified: SRGLetterbox, owner: SRGSSR, version: 9.1.2, source: https://github.com/SRGSSR/srgletterbox-apple
+name: srgletterbox-apple, nameSpecified: srgletterbox-apple, owner: SRGSSR, version: , source: https://github.com/SRGSSR/srgletterbox-apple
 
 name: srglogger-apple, nameSpecified: SRGLogger, owner: SRGSSR, version: 3.1.0, source: https://github.com/SRGSSR/srglogger-apple
 
@@ -187,9 +187,9 @@ name: SwiftMessages, nameSpecified: SwiftMessages, owner: SwiftKickMobile, versi
 
 name: SwiftUI-Introspect, nameSpecified: Introspect, owner: siteline, version: 0.12.0, source: https://github.com/siteline/SwiftUI-Introspect
 
-name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 4.5.4-srg5, source: https://github.com/SRGSSR/TCCore-xcframework-apple
+name: TCCore-xcframework-apple, nameSpecified: TCCore, owner: SRGSSR, version: 5.1.1, source: https://github.com/SRGSSR/TCCore-xcframework-apple
 
-name: TCSDK-xcframework-apple, nameSpecified: TCSDK, owner: SRGSSR, version: 4.4.1-srg5, source: https://github.com/SRGSSR/TCSDK-xcframework-apple
+name: TCServerSide-xcframework-apple, nameSpecified: TCServerSide, owner: SRGSSR, version: 5.1.2, source: https://github.com/SRGSSR/TCServerSide-xcframework-apple
 
 name: UICKeyChainStore, nameSpecified: UICKeyChainStore, owner: kishikawakatsumi, version: 2.2.1, source: https://github.com/kishikawakatsumi/UICKeyChainStore
 
