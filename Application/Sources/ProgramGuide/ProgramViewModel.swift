@@ -487,7 +487,8 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                 if let channel = self.channel {
                     let labels = SRGAnalyticsHiddenEventLabels()
                     labels.source = AnalyticsSource.button.rawValue
-                    labels.value = channel.title
+                    labels.value = channel.urn
+                    labels.extraValue1 = channel.title
                     SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.calendarAdd.rawValue, labels: labels)
                 }
             }
