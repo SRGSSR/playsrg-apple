@@ -22,6 +22,7 @@ final class ProgramViewModel: ObservableObject {
             Self.livestreamMediaPublisher(for: data?.channel)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
+            eventEditViewDelegateObject.channel = data?.channel
         }
     }
     
@@ -476,10 +477,20 @@ extension ProgramViewModel {
 // MARK: UIKit delegate object
 
 private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelegate {
+    var channel: SRGChannel?
+    
     func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
         controller.dismiss(animated: true) {
             if action == .saved, let title = controller.event?.title {
                 Banner.calendarEventAdded(withTitle: title)
+                
+                if let channel = self.channel {
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.value = channel.urn
+                    labels.extraValue1 = channel.title
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.calendarAdd.rawValue, labels: labels)
+                }
             }
         }
     }
