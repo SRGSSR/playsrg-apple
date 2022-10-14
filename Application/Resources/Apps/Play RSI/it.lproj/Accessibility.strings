@@ -17,7 +17,7 @@
 "%@ views" = "%@ visualizzazioni";
 
 /* Accessibility label for the 360 badge */
-"360-degree content" = "360-degree content";
+"360-degree content" = "Contenuto 360 gradi";
 
 /* Show A-Z button label */
 "A to Z shows" = "Programmi dalla A alla Z";
@@ -69,7 +69,7 @@
 "Display list" = "Visualizzazione a elenco";
 
 /* Accessibility label for the Dolby Digital sound badge */
-"Dolby Digital sound" = "Dolby Digital sound";
+"Dolby Digital sound" = "Suono Dolby Digital";
 
 /* A download button label */
 "Download" = "Scarica";
@@ -197,7 +197,7 @@
 "Shows the channel programs" = "Mostra i programmi";
 
 /* Accessibility label for the sign Language badge */
-"Sign Language" = "Sign Language";
+"Sign Language" = "Lingua dei segni";
 
 /* Stop button label */
 "Stop" = "Stop";

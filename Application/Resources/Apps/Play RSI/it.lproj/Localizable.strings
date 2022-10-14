@@ -11,7 +11,7 @@
 "%@ has been added to \"Later\"" = "%@ è stato aggiunto alla lista \"Dopo\"";
 
 /* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
-"%@ has been added to calendar" = "%@ has been added to calendar";
+"%@ has been added to calendar" = "%@ è stato aggiunto al calendario";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
 "%@ has been added to downloads" = "%@ è stato aggiunto ai downloads";
@@ -65,7 +65,7 @@
 "A to Z" = "Dalla A alla Z";
 
 /* Button to add an event to Calendar application */
-"Add to Calendar" = "Add to Calendar";
+"Add to Calendar" = "Aggiungere al calendario";
 
 /* Context menu action to add a media to the downloads */
 "Add to downloads" = "Aggiungere ai download";
@@ -232,7 +232,7 @@
 "Enable notifications?" = "Abilitare le notifiche?";
 
 /* Episode of a serie */
-"Episode" = "Episode";
+"Episode" = "Episodio";
 
 /* Title label used to present scheduled livestream medias */
 "Events" = "Eventi";
@@ -548,7 +548,7 @@
 "Search" = "Ricerca";
 
 /* Season of a serie */
-"Season" = "Season";
+"Season" = "Stagione";
 
 /* Section wide support setting label */
 "Section wide support" = "Supporto esteso della sezione";
@@ -646,7 +646,7 @@
 "Test" = "Test";
 
 /* Add to Calendar alert explanation */
-"The application uses the calendar to add TV programs." = "The application uses the calendar to add TV programs.";
+"The application uses the calendar to add TV programs." = "L'applicazione usa il calendario per aggiungere i programmi TV";
 
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";
@@ -822,4 +822,4 @@
 "Your feedback" = "Esprimere un'opinione";
 
 /* Add to Calendar alert title */
-"“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";
+"“%@” would like to access to your calendar" = "“%@” vorrebbe accedere al tuo calendario";
