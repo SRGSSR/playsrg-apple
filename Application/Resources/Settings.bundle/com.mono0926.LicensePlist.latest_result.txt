@@ -105,7 +105,7 @@ version: 2.0.1
 
 name: abseil-cpp-SwiftPM, nameSpecified: abseil, owner: firebase, version: 0.20220203.2, source: https://github.com/firebase/abseil-cpp-SwiftPM
 
-name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 1.9.2, source: https://github.com/IdeasOnCanvas/Aiolos
+name: Aiolos, nameSpecified: Aiolos, owner: IdeasOnCanvas, version: 1.9.7, source: https://github.com/IdeasOnCanvas/Aiolos
 
 name: appcenter-sdk-apple, nameSpecified: AppCenter, owner: SRGSSR, version: , source: https://github.com/SRGSSR/appcenter-sdk-apple
 
