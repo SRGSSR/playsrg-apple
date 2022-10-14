@@ -822,4 +822,4 @@
 "Your feedback" = "Votre avis";
 
 /* Add to Calendar alert title */
-"“%@” would like to access to your calendar" = "« %@ » désire accéder à votre calendrier\n";
+"“%@” would like to access to your calendar" = "« %@ » souhaite accéder à vote calendrier.";
