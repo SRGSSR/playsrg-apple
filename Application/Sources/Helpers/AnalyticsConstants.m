@@ -27,7 +27,6 @@ AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
 
 AnalyticsPageTitle const AnalyticsPageTitleDevices = @"devices";
 AnalyticsPageTitle const AnalyticsPageTitleDownloads = @"downloads";
-AnalyticsPageTitle const AnalyticsPageTitleEvents = @"events";
 AnalyticsPageTitle const AnalyticsPageTitleFavorites = @"favorites";
 AnalyticsPageTitle const AnalyticsPageTitleFeatures = @"features";
 AnalyticsPageTitle const AnalyticsPageTitleHistory = @"history";
@@ -47,6 +46,7 @@ AnalyticsPageTitle const AnalyticsPageTitleProgramGuide = @"program guide";
 AnalyticsPageTitle const AnalyticsPageTitleRadio = @"radio";
 AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite = @"satellite radio";
 AnalyticsPageTitle const AnalyticsPageTitleResumePlayback = @"resume playback";
+AnalyticsPageTitle const AnalyticsPageTitleScheduledLivestreams = @"scheduled livestreams";
 AnalyticsPageTitle const AnalyticsPageTitleSettings = @"settings";
 AnalyticsPageTitle const AnalyticsPageTitleShowsAZ = @"shows a-z";
 AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar = @"shows calendar";

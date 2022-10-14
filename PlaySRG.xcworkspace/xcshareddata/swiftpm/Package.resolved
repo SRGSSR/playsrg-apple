@@ -293,9 +293,9 @@
         "package": "SRGDataProvider",
         "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
         "state": {
-          "branch": null,
-          "revision": "4f840770c70bbe47340bfd32ff856d71ba002093",
-          "version": "16.1.1"
+          "branch": "feature/34-scheduled-livestreams-improvements",
+          "revision": "09eec863976a8e5779f50cd56ed739d7d6ea62bc",
+          "version": null
         }
       },
       {

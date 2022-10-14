@@ -8,7 +8,7 @@
   "playURL": "https://www.srf.ch/play/",
   "playServiceURL": "https://www.srf.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
+  "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvLiveCenterScheduledLivestreams,tvLiveCenterOnDemand",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",
   "minimumSocialViewCount": 50,
   "dataProtectionURL": "https://www.srf.ch/article/617762",

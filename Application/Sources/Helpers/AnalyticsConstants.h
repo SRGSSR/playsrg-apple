@@ -37,7 +37,6 @@ typedef NSString * AnalyticsPageTitle NS_STRING_ENUM;
 
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDevices;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleDownloads;
-OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleEvents;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFavorites;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleFeatures;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleHistory;
@@ -57,6 +56,7 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleProgramGuide;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadio;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleRadioSatellite;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleResumePlayback;
+OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleScheduledLivestreams;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleSettings;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsAZ;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleShowsCalendar;
