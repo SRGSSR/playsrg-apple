@@ -1202,7 +1202,7 @@ end
 def release_notes_version_to_html(platform, version, text, is_preprod)
   build_number = build_number_for_version(platform, version)
   attribute = is_preprod ? ' preprod' : ''
-  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2>#{version}</h2>\n"
+  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2 id=\"#{version}\">#{version}</h2>\n"
   div += release_notes_to_html(text)
   div += "\n</div>\n"
   div
