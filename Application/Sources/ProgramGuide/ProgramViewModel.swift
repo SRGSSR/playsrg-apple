@@ -76,20 +76,6 @@ final class ProgramViewModel: ObservableObject {
         return program?.summary
     }
     
-    private var calendarNotes: String? {
-        if let subtitle {
-            if let summary {
-                return "\(subtitle)\n\n\(summary)"
-            }
-            else {
-                return subtitle
-            }
-        }
-        else {
-            return summary
-        }
-    }
-    
     var timeAndDate: String? {
         guard let program else { return nil }
         let startTime = DateFormatter.play_time.string(from: program.startDate)
@@ -312,20 +298,8 @@ final class ProgramViewModel: ObservableObject {
                             event.title = "\(program.title) - \(channel.title)"
                             event.startDate = program.startDate
                             event.endDate = program.endDate
+                            event.url = self.calendarUrl
                             event.notes = self.calendarNotes
-                            
-                            if let media = self.media {
-                                event.url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
-                            }
-                            else if let media = self.livestreamMedia, program.timeAvailability(at: Date()) == .notYetAvailable {
-                                event.url = ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
-                            }
-                            else if let show = program.show {
-                                event.url = ApplicationConfiguration.shared.sharingURL(for: show)
-                            }
-                            else {
-                                event.url = ApplicationConfiguration.shared.playURL
-                            }
                             
                             let eventController = EKEventEditViewController()
                             eventController.event = event
@@ -365,6 +339,38 @@ final class ProgramViewModel: ObservableObject {
                 window.play_dismissAllViewControllers(animated: true, completion: nil)
             }
         )
+    }
+    
+    private var calendarUrl: URL? {
+        if let media = self.media {
+            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        }
+        else if let media = self.livestreamMedia, program?.timeAvailability(at: Date()) == .notYetAvailable {
+            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        }
+        else if let show {
+            return ApplicationConfiguration.shared.sharingURL(for: show)
+        }
+        else {
+            return ApplicationConfiguration.shared.playURL
+        }
+    }
+    
+    private var calendarNotes: String? {
+        let notes = [calendarShowNote, subtitle, summary]
+            .compactMap { $0 }
+            .joined(separator: "\n\n")
+        return !notes.isEmpty ? notes : nil
+    }
+    
+    private var calendarShowNote: String? {
+        guard let show else { return nil }
+        if let url = ApplicationConfiguration.shared.sharingURL(for: show) {
+            return "\(show.title)\n\(url)"
+        }
+        else {
+            return show.title
+        }
     }
 }
 
