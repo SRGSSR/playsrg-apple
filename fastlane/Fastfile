@@ -1179,14 +1179,14 @@ def what_s_new_for_beta_json(platform)
   json
 end
 
-def release_notes_html_platform(platform)
+def release_notes_html_devices(platform)
   platform == 'iOS' ? 'iPhone & iPad' : 'Apple TV'
 end
 
 def release_notes_html(platform, business_unit, divs)
   input_file = "release_notes-#{business_unit.downcase}.html"
   html = File.read("gh-pages/releases/#{input_file}")
-  html = html.gsub('<!-- platform -->', release_notes_html_platform(platform))
+  html = html.gsub('<!-- devices -->', release_notes_html_devices(platform))
   html.sub('<!-- versions -->', divs.strip)
 end
 
