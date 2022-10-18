@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
         "state": {
           "branch": null,
-          "revision": "d6a6bca88aafd9e413653ae75fa0ea8314fc7606",
-          "version": "1.9.2"
+          "revision": "ff71c20fb9730452be9b406513375f0c9a88254f",
+          "version": "1.9.7"
         }
       },
       {
@@ -60,8 +60,8 @@
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
         "state": {
           "branch": null,
-          "revision": "7f31a43f8c49bd4a1723bc9fecdfaa4411dd9f36",
-          "version": "9.5.0"
+          "revision": "7e80c25b51c2ffa238879b07fbfc5baa54bb3050",
+          "version": "9.6.0"
         }
       },
       {
@@ -69,7 +69,7 @@
         "repositoryURL": "https://github.com/FLEXTool/FLEX.git",
         "state": {
           "branch": "master",
-          "revision": "d33d909fa0e6a02543161f6ace56496b5fb83207",
+          "revision": "fbda722f112162fb14549c6cd92d6c685a4a5ad6",
           "version": null
         }
       },
@@ -105,8 +105,8 @@
         "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
         "state": {
           "branch": null,
-          "revision": "f54f60d0164d887e1174fa51ab2efe48a8e9d178",
-          "version": "9.3.0"
+          "revision": "c1cfde8067668027b23a42c29d11c246152fe046",
+          "version": "9.6.0"
         }
       },
       {
@@ -132,8 +132,8 @@
         "repositoryURL": "https://github.com/google/GoogleUtilities.git",
         "state": {
           "branch": null,
-          "revision": "f4abe56ce62a779e64b525eb133c8fc2a84bbc1f",
-          "version": "7.7.1"
+          "revision": "68ea347bdb1a69e2d2ae2e25cd085b6ef92f64cb",
+          "version": "7.9.0"
         }
       },
       {
@@ -150,8 +150,8 @@
         "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
         "state": {
           "branch": null,
-          "revision": "19605024d59eaefdb1f6a2cb11ebe75df4421126",
-          "version": "2.0.0"
+          "revision": "d4289da23e978f37c344ea6a386e5546e2466294",
+          "version": "2.1.0"
         }
       },
       {
@@ -159,8 +159,8 @@
         "repositoryURL": "https://github.com/urbanairship/ios-library.git",
         "state": {
           "branch": null,
-          "revision": "12aa2eb9fbdcd3b623346d6771cac02068d6596e",
-          "version": "16.9.3"
+          "revision": "6b4978bc562d5262ef7191a975ce074270fda4d6",
+          "version": "16.9.4"
         }
       },
       {
@@ -375,8 +375,8 @@
         "repositoryURL": "https://github.com/apple/swift-protobuf.git",
         "state": {
           "branch": null,
-          "revision": "b8230909dedc640294d7324d37f4c91ad3dcf177",
-          "version": "1.20.1"
+          "revision": "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
+          "version": "1.20.2"
         }
       },
       {
