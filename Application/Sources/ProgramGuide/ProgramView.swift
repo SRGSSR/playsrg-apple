@@ -279,6 +279,7 @@ struct ProgramView: View {
                             .srgFont(.caption)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.srgGray96)
+                            .padding(.top, 2)
                     }
                 }
             }
