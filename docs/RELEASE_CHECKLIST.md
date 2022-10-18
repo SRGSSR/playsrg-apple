@@ -51,7 +51,7 @@
 - Submit to Apple review the releases with the current version number
 	- **Play SRG iOS AppStore releases** (with `true` to `submit_for_review` parameter): `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
 	- **Play SRG tvOS AppStore releases** (with `true` to `submit_for_review` parameter):  `fastlane ios tvOSPrepareAppStoreReleases submit_for_review:true`
-- Publish release notes on Github pages with correct released status
+- Publish release notes on Github pages with correct released status (AppStore and TestFlight release notes)
  	- **Play SRG Publish release notes**: `fastlane ios publishReleaseNotes`
 
 ### \*\*Manual fastlane:
