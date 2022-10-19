@@ -24,7 +24,7 @@ struct LoadingCell: View {
 // MARK: Preview
 
 struct LoadingCell_Previews: PreviewProvider {
-    private static let height: CGFloat = constant(iOS: 105, tvOS: 120)
+    private static let height: CGFloat = constant(iOS: 80, tvOS: 120)
     
     static var previews: some View {
         LoadingCell()

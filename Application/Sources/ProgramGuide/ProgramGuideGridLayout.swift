@@ -61,7 +61,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     private static let scale: CGFloat = constant(iOS: 430, tvOS: 900) / (60 * 60)
-    private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
+    private static let sectionHeight: CGFloat = constant(iOS: 80, tvOS: 120)
     private static let trailingMargin: CGFloat = 10
     
     private var layoutData: LayoutData?
