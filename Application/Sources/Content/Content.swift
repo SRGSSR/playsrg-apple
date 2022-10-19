@@ -531,7 +531,7 @@ private extension Content {
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
                 return NSLocalizedString("Sport livestreams", comment: "Title label used to present scheduled livestreams medias from live center (Sport manager)")
-            case .tvLiveCenterOnDemand, .tvLiveCenterOnDemandAll:
+            case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
@@ -648,7 +648,7 @@ private extension Content {
                 return AnalyticsPageTitle.resumePlayback.rawValue
             case .radioWatchLater, .watchLater:
                 return AnalyticsPageTitle.watchLater.rawValue
-            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterOnDemand, .tvLiveCenterOnDemandAll:
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return AnalyticsPageTitle.sports.rawValue
             case .tvScheduledLivestreams:
                 return AnalyticsPageTitle.scheduledLivestreams.rawValue
@@ -704,7 +704,7 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-            case .tvLiveCenterOnDemand, .tvLiveCenterOnDemandAll:
+            case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
@@ -725,7 +725,7 @@ private extension Content {
             switch configuredSection {
             case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                     .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
-                    .tvLiveCenterOnDemand, .tvLiveCenterOnDemandAll, .tvScheduledLivestreams:
+                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams:
                 return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -837,11 +837,11 @@ private extension Content {
                 return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .scheduledLivestream, eventsWithResultOnly: false, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case .tvLiveCenterOnDemand:
+            case .tvLiveCenterEpisodes:
                 return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .episode, eventsWithResultOnly: true, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case .tvLiveCenterOnDemandAll:
+            case .tvLiveCenterEpisodesAll:
                 return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .episode, eventsWithResultOnly: false, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()

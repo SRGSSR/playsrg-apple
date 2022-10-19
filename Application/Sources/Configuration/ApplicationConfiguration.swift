@@ -17,10 +17,10 @@ extension ApplicationConfiguration {
             return .tvLiveCenterScheduledLivestreams
         case .tvLiveCenterScheduledLivestreamsAll:
             return .tvLiveCenterScheduledLivestreamsAll
-        case .tvLiveCenterOnDemand:
-            return .tvLiveCenterOnDemand
-        case .tvLiveCenterOnDemandAll:
-            return .tvLiveCenterOnDemandAll
+        case .tvLiveCenterEpisodes:
+            return .tvLiveCenterEpisodes
+        case .tvLiveCenterEpisodesAll:
+            return .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
             return .tvScheduledLivestreams
         default:
@@ -102,8 +102,8 @@ enum ConfiguredSection: Hashable {
     
     case tvLiveCenterScheduledLivestreams
     case tvLiveCenterScheduledLivestreamsAll
-    case tvLiveCenterOnDemand
-    case tvLiveCenterOnDemandAll
+    case tvLiveCenterEpisodes
+    case tvLiveCenterEpisodesAll
     case tvScheduledLivestreams
     
 #if os(iOS)

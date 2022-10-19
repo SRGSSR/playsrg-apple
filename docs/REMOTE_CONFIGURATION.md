@@ -101,8 +101,8 @@ The radio channel JSON dictionaries have one more key:
 * `radioLiveSatellite`: Swiss Satellite radio livestreams.
 * `tvLiveCenterScheduledLivestreams`: Sport livestreams (with result).
 * `tvLiveCenterScheduledLivestreamsAll`: Sport livestreams (all).
-* `tvLiveCenterOnDemand`: Past sport livestreams (with result).
-* `tvLiveCenterOnDemandAll`: Past sport livestreams (all).
+* `tvLiveCenterEpisodes`: Past sport livestreams (with result).
+* `tvLiveCenterEpisodesAll`: Past sport livestreams (all).
 * `tvScheduledLivestreams`: Scheduled livestreams.
 
 ## Search
