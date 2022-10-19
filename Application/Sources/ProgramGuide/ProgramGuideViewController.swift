@@ -125,7 +125,7 @@ final class ProgramGuideViewController: UIViewController {
 #endif
     
     private static func layout(for traitCollection: UITraitCollection) -> ProgramGuideLayout {
-        return constant(iOS: ApplicationSettingProgramGuideRecentlyUsedLayout(), tvOS: .grid)
+        return constant(iOS: ApplicationSettingProgramGuideRecentlyUsedLayout(traitCollection.horizontalSizeClass == .compact), tvOS: .grid)
     }
     
 #if os(tvOS)

@@ -59,9 +59,18 @@ NSValueTransformer *SettingUserLocationTransformer(void)
     return s_transformer;
 }
 
-ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(void)
+ProgramGuideLayout ApplicationSettingProgramGuideRecentlyUsedLayout(BOOL isCompactHorizontalSizeClass)
 {
-    return [[ProgramGuideLayoutTransformer() transformedValue:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingProgramGuideRecentlyUsedLayout]] integerValue];
+    NSString *layoutIdentifier = [NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingProgramGuideRecentlyUsedLayout];
+    if (layoutIdentifier) {
+        return [[ProgramGuideLayoutTransformer() transformedValue:layoutIdentifier] integerValue];
+    }
+    else if (isCompactHorizontalSizeClass) {
+        return ProgramGuideLayoutList;
+    }
+    else {
+        return ProgramGuideLayoutGrid;
+    }
 }
 
 void ApplicationSettingSetProgramGuideRecentlyUsedLayout(ProgramGuideLayout layout)
