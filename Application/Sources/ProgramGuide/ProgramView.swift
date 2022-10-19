@@ -26,7 +26,7 @@ struct ProgramView: View {
         VStack(spacing: 18) {
             Handle()
             ScrollView {
-                VStack(spacing: 24) {
+                VStack(spacing: 16) {
                     InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .cornerRadius(LayoutStandardViewCornerRadius)
@@ -34,6 +34,7 @@ struct ProgramView: View {
                     TitleView(model: model)
                     if model.hasActions {
                         ActionsView(model: model)
+                            .padding(.vertical, 8)
                     }
                     AdditionnalInformationView(model: model)
                     DescriptionView(model: model)
@@ -279,7 +280,7 @@ struct ProgramView: View {
                             .srgFont(.caption)
                             .multilineTextAlignment(.center)
                             .foregroundColor(.srgGray96)
-                            .padding(.top, 2)
+                            .padding(.top, 4)
                     }
                 }
             }
