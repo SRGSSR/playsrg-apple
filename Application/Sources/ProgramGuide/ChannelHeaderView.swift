@@ -35,7 +35,7 @@ struct ChannelHeaderView: View {
                 TitleView(channel: channel)
             }
         }
-        .padding(.horizontal, 20)
+        .padding(.horizontal, 16)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         // See https://stackoverflow.com/a/68765719/760435
         .background(
@@ -67,6 +67,6 @@ struct ChannelHeaderView_Previews: PreviewProvider {
             ChannelHeaderView(channel: Mock.channel(.standardWithoutLogo))
             ChannelHeaderView(channel: Mock.channel(.overflowWithoutLogo))
         }
-        .previewLayout(.fixed(width: 100, height: 90))
+        .previewLayout(.fixed(width: 80, height: 90))
     }
 }
