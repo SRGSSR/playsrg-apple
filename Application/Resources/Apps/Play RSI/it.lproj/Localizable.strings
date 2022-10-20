@@ -234,9 +234,6 @@
 /* Episode of a serie */
 "Episode" = "Episodio";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Eventi";
-
 /* Short label identifying content which has expired. */
 "Expired" = "Scaduto";
 
@@ -468,6 +465,9 @@
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
+
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "RSI livestreams";
 
 /* Search setting */
 "Playable abroad" = "Disponibile all'estero";

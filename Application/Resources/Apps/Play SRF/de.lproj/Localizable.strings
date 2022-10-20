@@ -234,9 +234,6 @@
 /* Episode of a serie */
 "Episode" = "Folge";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Events";
-
 /* Short label identifying content which has expired. */
 "Expired" = "Abgelaufen";
 
@@ -468,6 +465,9 @@
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Start / Stopp";
+
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "SRF livestreams";
 
 /* Search setting */
 "Playable abroad" = "Im Ausland verfügbar";

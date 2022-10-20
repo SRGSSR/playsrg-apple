@@ -234,9 +234,6 @@
 /* Episode of a serie */
 "Episode" = "Épisode";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Événements";
-
 /* Short label identifying content which has expired. */
 "Expired" = "Expiré";
 
@@ -468,6 +465,9 @@
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Lecture / Stop";
+
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "RTS livestreams";
 
 /* Search setting */
 "Playable abroad" = "Jouable à l'étranger";

@@ -234,9 +234,6 @@
 /* Episode of a serie */
 "Episode" = "Episoda";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Eveniments";
-
 /* Short label identifying content which has expired. */
 "Expired" = "Expirà";
 
@@ -468,6 +465,9 @@
 
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
+
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "RTR livestreams";
 
 /* Search setting */
 "Playable abroad" = "Disponibel en l'exteriur";
