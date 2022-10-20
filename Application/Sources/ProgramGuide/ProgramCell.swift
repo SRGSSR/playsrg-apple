@@ -66,7 +66,7 @@ struct ProgramCell: View {
         }
         
         private var topPadding: CGFloat {
-            return direction == .horizontal ? 0 : constant(iOS: 27, tvOS: 16)
+            return direction == .horizontal ? 0 : constant(iOS: 12, tvOS: 16)
         }
         
         private var bottomPadding: CGFloat {
@@ -172,7 +172,7 @@ enum ProgramCellSize {
 
 struct ProgramCell_Previews: PreviewProvider {
     private static let size = ProgramCellSize.fullWidth().previewSize
-    private static let height: CGFloat = constant(iOS: 105, tvOS: 120)
+    private static let height: CGFloat = constant(iOS: 80, tvOS: 120)
     
     static var previews: some View {
         ProgramCell(program: Mock.program(), channel: Mock.channel(), direction: .horizontal)

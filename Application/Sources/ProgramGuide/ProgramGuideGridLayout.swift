@@ -49,7 +49,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     static let decorationIndexPath = IndexPath(item: 0, section: 0)
     static let timelineHeight: CGFloat = constant(iOS: 40, tvOS: 60)
     static let timelinePadding: CGFloat = 1000
-    static let channelHeaderWidth: CGFloat = 102
+    static let channelHeaderWidth: CGFloat = 82
     static let horizontalSpacing: CGFloat = constant(iOS: 2, tvOS: 4)
     static let verticalSpacing: CGFloat = constant(iOS: 3, tvOS: 6)
     
@@ -61,7 +61,7 @@ final class ProgramGuideGridLayout: UICollectionViewLayout {
     }
     
     private static let scale: CGFloat = constant(iOS: 430, tvOS: 900) / (60 * 60)
-    private static let sectionHeight: CGFloat = constant(iOS: 105, tvOS: 120)
+    private static let sectionHeight: CGFloat = constant(iOS: 80, tvOS: 120)
     private static let trailingMargin: CGFloat = 10
     
     private var layoutData: LayoutData?

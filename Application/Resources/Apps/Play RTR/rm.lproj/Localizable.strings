@@ -11,7 +11,7 @@
 "%@ has been added to \"Later\"" = "%@ è agiuntà a \"guardar pli tard\"";
 
 /* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
-"%@ has been added to calendar" = "%@ has been added to calendar";
+"%@ has been added to calendar" = "%@ è agiuntà al chalender";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
 "%@ has been added to downloads" = "%@ è vegnì aschuntà tar mes downloads";
@@ -65,7 +65,7 @@
 "A to Z" = "Dad A fin Z";
 
 /* Button to add an event to Calendar application */
-"Add to Calendar" = "Add to Calendar";
+"Add to Calendar" = "Agiuntar al chalender";
 
 /* Context menu action to add a media to the downloads */
 "Add to downloads" = "Agiunscher a telechargiada";
@@ -232,7 +232,7 @@
 "Enable notifications?" = "Activar las notificaziuns?";
 
 /* Episode of a serie */
-"Episode" = "Episode";
+"Episode" = "Episoda";
 
 /* Title label used to present scheduled livestream medias */
 "Events" = "Eveniments";
@@ -548,7 +548,7 @@
 "Search" = "Tschertga";
 
 /* Season of a serie */
-"Season" = "Season";
+"Season" = "Stafla";
 
 /* Section wide support setting label */
 "Section wide support" = "Largezza cumplaina";
@@ -646,7 +646,7 @@
 "Test" = "Test";
 
 /* Add to Calendar alert explanation */
-"The application uses the calendar to add TV programs." = "The application uses the calendar to add TV programs.";
+"The application uses the calendar to add TV programs." = "L'applicaziun utilisescha il chalender per agiuntar programs da TV.";
 
 /* Button label to share the content being played. */
 "The content" = "Il cuntegn";
@@ -822,4 +822,4 @@
 "Your feedback" = "Voss resun";
 
 /* Add to Calendar alert title */
-"“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";
+"“%@” would like to access to your calendar" = "„%@” vul access a Voss chalender.";
