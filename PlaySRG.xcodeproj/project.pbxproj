@@ -87,6 +87,21 @@
 		04E4DEF7283696AD00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF8283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
 		04E4DEF9283696AF00698BF8 /* ServiceMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E4DEEA283678C900698BF8 /* ServiceMessage.swift */; };
+		04F184CE28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184D228EC5EE500B1207C /* ShowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184CD28EC5EE500B1207C /* ShowButton.swift */; };
+		04F184E828F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184E928F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184EA28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184EB28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184EC28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184ED28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184EE28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184EF28F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184F028F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
+		04F184F128F097E900B1207C /* BadgeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F184E728F097E900B1207C /* BadgeList.swift */; };
 		08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
 		08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08013EB325DC28F60099A6E8 /* TVServices.framework */; };
@@ -2680,6 +2695,8 @@
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
 		04E4DEEA283678C900698BF8 /* ServiceMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceMessage.swift; sourceTree = "<group>"; };
+		04F184CD28EC5EE500B1207C /* ShowButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowButton.swift; sourceTree = "<group>"; };
+		04F184E728F097E900B1207C /* BadgeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeList.swift; sourceTree = "<group>"; };
 		05F9A586175D559FBBCA636E /* Pods-Play SRG-iOS-Play RTS.appstore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; path = "Pods/Target Support Files/Pods-Play SRG-iOS-Play RTS/Pods-Play SRG-iOS-Play RTS.appstore.xcconfig"; sourceTree = "<group>"; };
 		08013EB325DC28F60099A6E8 /* TVServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TVServices.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS14.3.sdk/System/Library/Frameworks/TVServices.framework; sourceTree = DEVELOPER_DIR; };
 		0801E0791D4A4A810008021E /* RadioChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadioChannel.h; sourceTree = "<group>"; };
@@ -4668,6 +4685,7 @@
 				6F4843CB23EC3ADF00868F78 /* AccessibilityView.m */,
 				6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */,
 				0809812F2622195900AA586B /* Badges.swift */,
+				04F184E728F097E900B1207C /* BadgeList.swift */,
 				6F475FB21EB37BC6003021EA /* Banner.h */,
 				6F475FB31EB37BC6003021EA /* Banner.m */,
 				6F426B4125680A8F00DD22AB /* BlockingOverlay.swift */,
@@ -4716,6 +4734,7 @@
 				6F40B7782726CB8300DDFED0 /* SearchBar.swift */,
 				043CBF0B286512CF0063FD97 /* SearchBarView.swift */,
 				085C0D982611F33E008E07C8 /* ShowAccessCell.swift */,
+				04F184CD28EC5EE500B1207C /* ShowButton.swift */,
 				6FB1ADF924EFEF2C00E80C1E /* ShowCell.swift */,
 				6FF0C84626B44F6A006B3C6A /* ShowCellViewModel.swift */,
 				6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */,
@@ -8362,6 +8381,7 @@
 				6F0E8D981F14F62F002014C3 /* SRGChannel+PlaySRG.m in Sources */,
 				087BC6631EDF1B7C00EED89B /* UILabel+PlaySRG.m in Sources */,
 				0875851323A0025F00FA7207 /* ProfileAccountHeaderView.m in Sources */,
+				04F184E828F097E900B1207C /* BadgeList.swift in Sources */,
 				6F0B98502726980F005793A2 /* SearchViewModel.swift in Sources */,
 				6F5B4D5E2833F8F3004F5BA3 /* FeaturesView.swift in Sources */,
 				6FC24A7E26395F3E00CACC20 /* FeaturedDescriptionView.swift in Sources */,
@@ -8456,6 +8476,7 @@
 				6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */,
 				6F33E61F2860BED900724E76 /* SearchSettingsNavigationView.swift in Sources */,
+				04F184CE28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				6F47607A1EB37D60003021EA /* UIImage+PlaySRG.m in Sources */,
 				6F73C63A271DB5AE00DBDBFB /* UserDefaults+ApplicationSettings.swift in Sources */,
 				6FDF54F228530BAB0068BABB /* SearchViewController.swift in Sources */,
@@ -8682,6 +8703,7 @@
 				082910B6239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8526A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F61D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				04F184E928F097E900B1207C /* BadgeList.swift in Sources */,
 				6FDF54F328530BAB0068BABB /* SearchViewController.swift in Sources */,
 				6F340F53220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF77E20CABA3A00BB58A3 /* UserNotification.m in Sources */,
@@ -8692,6 +8714,7 @@
 				6F4760831EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF94263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD95283283EB008E2806 /* WebView.swift in Sources */,
+				04F184CF28EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5C271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A51DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E1263DDA9A001C4615 /* RedactingView.swift in Sources */,
@@ -8932,6 +8955,7 @@
 				082910B7239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8626A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F71D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				04F184EA28F097E900B1207C /* BadgeList.swift in Sources */,
 				6FDF54F428530BAC0068BABB /* SearchViewController.swift in Sources */,
 				6F340F54220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78020CABA3A00BB58A3 /* UserNotification.m in Sources */,
@@ -8942,6 +8966,7 @@
 				6F47608A1EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF95263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD96283283EB008E2806 /* WebView.swift in Sources */,
+				04F184D028EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5D271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A61DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E2263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9182,6 +9207,7 @@
 				082910B8239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8726A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F81D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				04F184EB28F097E900B1207C /* BadgeList.swift in Sources */,
 				6FDF54F528530BAC0068BABB /* SearchViewController.swift in Sources */,
 				6F340F55220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78220CABA3A00BB58A3 /* UserNotification.m in Sources */,
@@ -9192,6 +9218,7 @@
 				6F4760911EB37DF1003021EA /* UIStackView+PlaySRG.m in Sources */,
 				6F49EF96263A9F2200ED96D2 /* LiveMediaCellViewModel.swift in Sources */,
 				6FDAAD97283283EB008E2806 /* WebView.swift in Sources */,
+				04F184D128EC5EE500B1207C /* ShowButton.swift in Sources */,
 				0858CA5E271084A000EE36EA /* ProgramGuideGridViewController.swift in Sources */,
 				6F06E0A71DB7791300220FC6 /* ApplicationSettings.m in Sources */,
 				6FCF57E3263DDA9B001C4615 /* RedactingView.swift in Sources */,
@@ -9397,6 +9424,7 @@
 				6F33E61D2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				08669679273E63D1005AF2BA /* NowLineView.swift in Sources */,
 				6FCA5BDA27D9DE0900916D0B /* DiskInfoFooterView.swift in Sources */,
+				04F184EC28F097E900B1207C /* BadgeList.swift in Sources */,
 				6FF5D1FF2747A69900460F70 /* ButtonStyles.swift in Sources */,
 				6F861AFC1DAE65A600C46102 /* SRGMediaPlayerDesignables.m in Sources */,
 				6FF4D4E423D5B07E008B981A /* UIVisualEffectView+PlaySRG.m in Sources */,
@@ -9433,6 +9461,7 @@
 				082910B9239EA69C00D168F4 /* RadioChannelsViewController.m in Sources */,
 				6F362A8826A0461B00CBCC9D /* ProgramGuideListViewController.swift in Sources */,
 				E694A9F91D65F02700372DF0 /* CalendarViewController.m in Sources */,
+				04F184D228EC5EE500B1207C /* ShowButton.swift in Sources */,
 				04E4DEEF283678C900698BF8 /* ServiceMessage.swift in Sources */,
 				6F340F56220DA99B00778CA3 /* History.m in Sources */,
 				6FAAF78420CABA3A00BB58A3 /* UserNotification.m in Sources */,
@@ -9728,6 +9757,7 @@
 				6FF129C4256C0A9D0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88C24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D024EEEDC900FDF806 /* ApplicationSection.m in Sources */,
+				04F184ED28F097E900B1207C /* BadgeList.swift in Sources */,
 				6F8BE02C27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F156250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E55256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -9877,6 +9907,7 @@
 				6FF129C5256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88D24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413D824EEEDC900FDF806 /* ApplicationSection.m in Sources */,
+				04F184EE28F097E900B1207C /* BadgeList.swift in Sources */,
 				6F8BE02D27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F157250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E56256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10026,6 +10057,7 @@
 				6FF129C6256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88E24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E024EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
+				04F184EF28F097E900B1207C /* BadgeList.swift in Sources */,
 				6F8BE02E27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F158250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E57256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10175,6 +10207,7 @@
 				6FF129C7256C0A9E0042F446 /* NSDateFormatter+PlaySRG.m in Sources */,
 				6FDFD88F24E6BC9200F20382 /* TopicCell.swift in Sources */,
 				6FC413E824EEEDCA00FDF806 /* ApplicationSection.m in Sources */,
+				04F184F028F097E900B1207C /* BadgeList.swift in Sources */,
 				6F8BE02F27A7CA85009FE094 /* ProgramGuideChildViewController.swift in Sources */,
 				6FF8F159250609CF009A741F /* MediaDescription.swift in Sources */,
 				6F151E58256BFCEB009082F8 /* Extensions.swift in Sources */,
@@ -10206,6 +10239,7 @@
 				6F6C0FC0257AAF270077322C /* NSBundle+PlaySRG.m in Sources */,
 				6F5FAA4D268CB88C007F0CA8 /* Localization.swift in Sources */,
 				6F6B5BD025E640A800F549E7 /* WatchLater.m in Sources */,
+				04F184F128F097E900B1207C /* BadgeList.swift in Sources */,
 				6FC44B3525DE54F900DE6E6F /* Playlist.m in Sources */,
 				6F7C664E26DE7CE100B4EC80 /* SceneDelegate.swift in Sources */,
 				0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */,
@@ -19084,7 +19118,7 @@
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 16.1.0;
+				minimumVersion = 16.1.1;
 			};
 		};
 		6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */ = {

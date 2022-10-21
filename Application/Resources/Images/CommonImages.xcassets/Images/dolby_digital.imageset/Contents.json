@@ -1,0 +1,20 @@
+{
+  "images" : [
+    {
+      "filename" : "Info-Labels19.pdf",
+      "idiom" : "iphone"
+    },
+    {
+      "filename" : "Info-Labels19 1.pdf",
+      "idiom" : "ipad"
+    },
+    {
+      "filename" : "Info-Labels33.pdf",
+      "idiom" : "tv"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

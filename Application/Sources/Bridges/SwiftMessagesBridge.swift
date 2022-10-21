@@ -47,6 +47,7 @@ final class SwiftMessagesBridge: NSObject {
         else {
             config.duration = .seconds(seconds: 4)
         }
+        config.presentationStyle = .bottom
         
         // Set a presentation context (with a preference for navigation controllers). A context is required so that
         // the notification rotation behavior matches the one of the currently visible view controller.

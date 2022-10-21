@@ -10,11 +10,14 @@
 /* Live content label, with a channel title */
 "%@ live" = "%@ live";
 
+/* Number of results aggregated in search */
+"%@ results" = "%@ resultasts";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ vis";
 
-/* Number of results aggregated in search */
-"%@ results" = "%@ resultasts";
+/* Accessibility label for the 360 badge */
+"360-degree content" = "Cuntagn 360 grads";
 
 /* Show A-Z button label */
 "A to Z shows" = "Emissiuns dad A fin Z";
@@ -65,6 +68,9 @@
 /* Button to display the TV guide as a list */
 "Display list" = "Visualisaziun sco glista";
 
+/* Accessibility label for the Dolby Digital sound badge */
+"Dolby Digital sound" = "Tun Dolby digital";
+
 /* A download button label */
 "Download" = "Telechargiar";
 
@@ -99,7 +105,8 @@
 /* More button label */
 "More" = "Dapli";
 
-/* A more episode button label */
+/* A more episode button label
+   Button to access more episodes */
 "More episodes" = "Dapli episodas";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
@@ -188,6 +195,9 @@
 
 /* Channel selector button hint */
 "Shows the channel programs" = "Mussa il program dal chanal";
+
+/* Accessibility label for the sign Language badge */
+"Sign Language" = "Lingua da segns";
 
 /* Stop button label */
 "Stop" = "Stop";

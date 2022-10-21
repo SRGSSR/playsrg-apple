@@ -45,6 +45,11 @@ final class MediaDetailViewModel: ObservableObject {
         }
     }
     
+    var youthProtectionColor: SRGYouthProtectionColor? {
+        let youthProtectionColor = media?.youthProtectionColor
+        return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
+    }
+    
     var imageUrl: URL? {
         return url(for: media?.image, size: .large)
     }

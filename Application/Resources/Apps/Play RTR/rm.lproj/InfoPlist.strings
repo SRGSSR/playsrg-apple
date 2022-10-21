@@ -1,6 +1,7 @@
 "Downloads" = "Downloads";
 "Favorites" = "Favurits";
 "History" = "Cronologia";
-"Search" = "Tschertga";
-"NSMicrophoneUsageDescription" = "L'applicaziun dovra il microfon per chattar il receptur Google Cast.";
+"NSCalendarsUsageDescription" = "L'applicaziun utilisescha il chalender per agiuntar programs da TV.";
 "NSLocalNetworkUsageDescription" = "La applicaziun utilisescha la rait locala per Google Cast.";
+"NSMicrophoneUsageDescription" = "L'applicaziun dovra il microfon per chattar il receptur Google Cast.";
+"Search" = "Tschertga";

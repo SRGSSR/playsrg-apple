@@ -532,7 +532,7 @@ private extension Content {
             case .tvLiveCenter:
                 return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
             case .tvScheduledLivestreams:
-                return NSLocalizedString("Events", comment: "Title label used to present scheduled livestream medias")
+                return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
 #if os(iOS)
             case .downloads:
                 return NSLocalizedString("Downloads", comment: "Label to present downloads")

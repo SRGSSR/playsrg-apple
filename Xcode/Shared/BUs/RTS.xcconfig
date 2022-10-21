@@ -9,7 +9,7 @@ BU__CODE_SIGN_ENTITLEMENTS_IOS_APP_FILE_NAME = Application.entitlements
 BU__DOMAIN = *.rts.ch
 BU__DOMAIN[config=Beta] = srgplayer-rts.stage.srf.ch
 BU__DOMAIN[config=Beta_AppCenter] = srgplayer-rts.stage.srf.ch
-BU__DOMAIN[config=Nightly] = srgplayer-rts.test.srf.ch
+BU__DOMAIN[config=Nightly] = play-mmf.herokuapp.com
 BU__DOMAIN[config=Nightly_AppCenter] = srgplayer-rts.test.srf.ch
 BU__DOMAIN[config=Debug] = play-mmf.herokuapp.com
 BU__IDENTIFIER = rts

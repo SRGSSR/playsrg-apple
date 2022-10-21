@@ -26,12 +26,24 @@ struct ProgramView: View {
         VStack(spacing: 18) {
             Handle()
             ScrollView {
-                VStack(spacing: 10) {
+                VStack(spacing: 16) {
                     InteractiveVisualView(model: model)
                         .aspectRatio(16 / 9, contentMode: .fit)
                         .cornerRadius(LayoutStandardViewCornerRadius)
                         .accessibilityElement(label: accessibilityLabel, traits: accessibilityTraits)
+                    TitleView(model: model)
+                    if model.hasActions {
+                        ActionsView(model: model)
+                            .padding(.vertical, 8)
+                    }
+                    AdditionnalInformationView(model: model)
                     DescriptionView(model: model)
+                    if let crewMembersDatas = model.crewMembersDatas {
+                        CrewMembersView(datas: crewMembersDatas)
+                    }
+                    if let properties = model.showButtonProperties {
+                        ShowButton(show: properties.show, isFavorite: properties.isFavorite, action: properties.action)
+                    }
                     Spacer()
                 }
             }
@@ -88,43 +100,10 @@ struct ProgramView: View {
                 ImageView(source: model.imageUrl)
                 BlockingOverlay(media: model.currentMedia, messageDisplayed: true)
                 
-                if let properties = model.availabilityBadgeProperties {
-                    Badge(text: properties.text, color: Color(properties.color))
-                        .padding([.top, .leading], Self.padding)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                }
-                
-                AttributesView(model: model)
-                    .padding([.bottom, .horizontal], Self.padding)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                
                 if let progress = model.progress {
                     ProgressBar(value: progress)
                         .frame(height: LayoutProgressBarHeight)
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                }
-            }
-        }
-    }
-    
-    /// Behavior: h-exp, v-hug
-    private struct AttributesView: View {
-        @ObservedObject var model: ProgramViewModel
-        
-        var body: some View {
-            HStack(spacing: 6) {
-                Spacer()
-                if model.hasMultiAudio {
-                    MultiAudioBadge()
-                }
-                if model.hasAudioDescription {
-                    AudioDescriptionBadge()
-                }
-                if model.hasSubtitles {
-                    SubtitlesBadge()
-                }
-                if let duration = model.duration {
-                    DurationBadge(duration: duration)
                 }
             }
         }
@@ -142,7 +121,7 @@ struct ProgramView: View {
         }
         
         var body: some View {
-            Stack(direction: direction, spacing: 7) {
+            Stack(direction: direction, spacing: 8) {
                 if let properties = model.watchLaterButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
@@ -151,9 +130,85 @@ struct ProgramView: View {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
                 }
-                if let properties = model.episodeButtonProperties {
+                if let properties = model.calendarButtonProperties {
                     ExpandingButton(icon: properties.icon, label: properties.label, action: properties.action)
                         .frame(height: Self.buttonHeight)
+                }
+            }
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
+    private struct YouthProtectionView: View {
+        let color: SRGYouthProtectionColor
+        
+        init(color: SRGYouthProtectionColor) {
+            self.color = color
+        }
+        
+        var body: some View {
+            HStack(spacing: 8) {
+                YouthProtectionBadge(color: color)
+                if let youthProtectionMessage = SRGMessageForYouthProtectionColor(color) {
+                    Text(youthProtectionMessage)
+                        .srgFont(.subtitle1)
+                        .lineLimit(2)
+                        .foregroundColor(.srgGray96)
+                }
+            }
+            .accessibilityElement(label: SRGMessageForYouthProtectionColor(color))
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
+    private struct AdditionnalInformationView: View {
+        @ObservedObject var model: ProgramViewModel
+        
+        var body: some View {
+            VStack(spacing: 8) {
+                if let durationAndProduction = model.durationAndProduction {
+                    Text(durationAndProduction)
+                        .srgFont(.subtitle1)
+                        .lineLimit(1)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                if let youthProtectionColor = model.youthProtectionColor {
+                    YouthProtectionView(color: youthProtectionColor)
+                }
+            }
+        }
+    }
+    
+    // Behavior: h-exp, v-hug
+    private struct CrewMembersView: View {
+        let crewMembersDatas: [ProgramViewModel.CrewMembersData]
+        
+        init(datas: [ProgramViewModel.CrewMembersData]) {
+            crewMembersDatas = datas
+        }
+        
+        var body: some View {
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(crewMembersDatas) { crewMembersData in
+                    VStack(alignment: .leading, spacing: 0) {
+                        if let role = crewMembersData.role {
+                            Text(role)
+                                .srgFont(.H2)
+                                .foregroundColor(.srgGray96)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(crewMembersData.names, id: \.self) { name in
+                                Text(name)
+                                    .srgFont(.body)
+                                    .foregroundColor(.srgGray96)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
+                    }
+                    .accessibilityElement(label: crewMembersData.accessibilityLabel)
                 }
             }
         }
@@ -164,22 +219,13 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack(spacing: 18) {
-                VStack(spacing: 6) {
-                    if let timeAndDate = model.timeAndDate {
-                        Text(timeAndDate)
-                            .srgFont(.caption)
-                            .lineLimit(1)
-                            .foregroundColor(.srgGray96)
-                            .accessibilityElement(label: model.timeAndDateAccessibilityLabel)
-                    }
-                    TitleView(model: model)
+            VStack(spacing: 8) {
+                if let lead = model.lead {
+                    Text(lead)
+                        .srgFont(.H4)
+                        .foregroundColor(.srgGray96)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
-                
-                if model.hasActions {
-                    ActionsView(model: model)
-                }
-                
                 if let summary = model.summary {
                     Text(summary)
                         .srgFont(.body)
@@ -192,6 +238,9 @@ struct ProgramView: View {
                         .foregroundColor(.srgGray96)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
+                if let badgesListData = model.badgesListData {
+                    BadgeList(data: badgesListData)
+                }
             }
         }
     }
@@ -201,19 +250,38 @@ struct ProgramView: View {
         @ObservedObject var model: ProgramViewModel
         
         var body: some View {
-            VStack(spacing: 0) {
-                if let title = model.title {
-                    Text(title)
-                        .srgFont(.H2)
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGrayC7)
+            VStack(spacing: 8) {
+                if let properties = model.availabilityBadgeProperties {
+                    Badge(text: properties.text, color: Color(properties.color))
                 }
-                if let subtitle = model.subtitle {
-                    Text(subtitle)
-                        .srgFont(.H4)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.srgGray96)
+                VStack(spacing: 0) {
+                    if let timeAndDate = model.timeAndDate {
+                        Text(timeAndDate)
+                            .srgFont(.caption)
+                            .lineLimit(1)
+                            .foregroundColor(.srgGray96)
+                            .accessibilityElement(label: model.timeAndDateAccessibilityLabel)
+                    }
+                    if let title = model.title {
+                        Text(title)
+                            .srgFont(.H2)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGrayC7)
+                    }
+                    if let subtitle = model.subtitle {
+                        Text(subtitle)
+                            .srgFont(.subtitle1)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGray96)
+                    }
+                    if let serie = model.serie {
+                        Text(serie)
+                            .srgFont(.caption)
+                            .multilineTextAlignment(.center)
+                            .foregroundColor(.srgGray96)
+                            .padding(.top, 4)
+                    }
                 }
             }
         }
@@ -247,7 +315,7 @@ private extension ProgramView {
 // MARK: Preview
 
 struct ProgramView_Previews: PreviewProvider {
-    private static let size = CGSize(width: 320, height: 600)
+    private static let size = CGSize(width: 320, height: 1200)
     
     static var previews: some View {
         ProgramView(program: Mock.program(), channel: Mock.channel())

@@ -72,6 +72,11 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 
 /**
+ *  Title for events related to addition of a calendar event
+ */
+OBJC_EXPORT AnalyticsTitle const AnalyticsTitleCalendarAdd;
+
+/**
  *  Title for events related to continuous playback
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleContinuousPlayback;

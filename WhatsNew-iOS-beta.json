@@ -173,5 +173,7 @@
   "3.6.5-394": "- Update next recommended media if the user changed the subject in the player view.\n- Add next recommended audio for CarPlay usage.\n- Fix player timeline clickable when playback stopped.\n- Fix player timeline clickable on Mac with Apple silicon.",
   "3.6.5-395": "- Update unplayable downloaded media.",
   "3.6.5-396": "- Add live programs in CarPlay player.\n- Improved iOS 16 compatibility.",
-  "3.6.6-397": "- Fix full screen player when opened from the program guide."
+  "3.6.6-397": "- Fix full screen player when opened from the program guide.",
+  "3.6.7-398": "- TV guide: more details available about the selected program.\n- You can add a TV program to your calendar.",
+  "3.6.7-399": "- Tiny TV guide grid layout update to increase overall overview of channels.\n- Update translations."
 }

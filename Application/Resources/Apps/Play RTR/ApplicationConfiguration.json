@@ -7,7 +7,7 @@
   "playURL": "https://www.rtr.ch/play/",
   "playServiceURL": "https://www.rtr.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
-  "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
+  "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioWatchLater",
   "minimumSocialViewCount": 50,
   "dataProtectionURL": "https://www.rtr.ch/article/7872047",

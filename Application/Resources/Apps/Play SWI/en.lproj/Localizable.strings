@@ -4,14 +4,14 @@
 /* Seek backward shortcut label */
 "%@ backward" = "%@ backward";
 
-/* The amount of episodes available for a show */
-"%@ episodes" = "%@ episodes";
-
 /* Seek forward shortcut label */
 "%@ forward" = "%@ forward";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Later\"" = "%@ has been added to \"Later\"";
+
+/* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
+"%@ has been added to calendar" = "%@ has been added to calendar";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
 "%@ has been added to downloads" = "%@ has been added to downloads";
@@ -63,6 +63,9 @@
 
 /* Show A-Z short button title */
 "A to Z" = "A to Z";
+
+/* Button to add an event to Calendar application */
+"Add to Calendar" = "Add to Calendar";
 
 /* Context menu action to add a media to the downloads */
 "Add to downloads" = "Add to downloads";
@@ -228,8 +231,8 @@
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Enable notifications?";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Events";
+/* Episode of a serie */
+"Episode" = "Episode";
 
 /* Short label identifying content which has expired. */
 "Expired" = "Expired";
@@ -365,8 +368,8 @@
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "More content is automatically played after playback of the current content ends.";
 
-/* Button to access more episodes from the media detail view
-   Button to access more episodes from the program detail view
+/* Button to access more episodes
+   Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
 "More episodes" = "More episodes";
 
@@ -463,6 +466,9 @@
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
 
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "SWI livestreams";
+
 /* Search setting */
 "Playable abroad" = "Playable abroad";
 
@@ -540,6 +546,9 @@
    Search tab bar title
    Search tab title */
 "Search" = "Search";
+
+/* Season of a serie */
+"Season" = "Season";
 
 /* Section wide support setting label */
 "Section wide support" = "Section wide support";
@@ -635,6 +644,9 @@
 
 /* Server setting name */
 "Test" = "Test";
+
+/* Add to Calendar alert explanation */
+"The application uses the calendar to add TV programs." = "The application uses the calendar to add TV programs.";
 
 /* Button label to share the content being played. */
 "The content" = "The video";
@@ -808,3 +820,6 @@
 
 /* Label of the button to display feedback form */
 "Your feedback" = "Your feedback";
+
+/* Add to Calendar alert title */
+"“%@” would like to access to your calendar" = "“%@” would like to access to your calendar";

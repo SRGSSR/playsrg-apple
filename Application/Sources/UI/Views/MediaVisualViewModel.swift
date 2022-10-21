@@ -56,7 +56,8 @@ final class MediaVisualViewModel: ObservableObject {
     }
     
     var youthProtectionColor: SRGYouthProtectionColor? {
-        return media?.youthProtectionColor
+        let youthProtectionColor = media?.youthProtectionColor
+        return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
     }
     
     var duration: Double? {

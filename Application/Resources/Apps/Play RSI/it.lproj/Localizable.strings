@@ -4,14 +4,14 @@
 /* Seek backward shortcut label */
 "%@ backward" = "%@ indietro";
 
-/* The amount of episodes available for a show */
-"%@ episodes" = "%@ episodi";
-
 /* Seek forward shortcut label */
 "%@ forward" = "%@ avanti";
 
 /* Message displayed at the top of the screen when adding a media to the later list. Quotes around the content placeholder are managed by the application. */
 "%@ has been added to \"Later\"" = "%@ è stato aggiunto alla lista \"Dopo\"";
+
+/* Message displayed at the top of the screen when adding a program to Calendar. Quotes are managed by the application. */
+"%@ has been added to calendar" = "%@ è stato aggiunto al calendario";
 
 /* Message displayed at the top of the screen when adding a media to downloads. Quotes are managed by the application. */
 "%@ has been added to downloads" = "%@ è stato aggiunto ai downloads";
@@ -63,6 +63,9 @@
 
 /* Show A-Z short button title */
 "A to Z" = "Dalla A alla Z";
+
+/* Button to add an event to Calendar application */
+"Add to Calendar" = "Aggiungere al calendario";
 
 /* Context menu action to add a media to the downloads */
 "Add to downloads" = "Aggiungere ai download";
@@ -228,8 +231,8 @@
 /* Question displayed at the top of an alert asking the user to enable notifications */
 "Enable notifications?" = "Abilitare le notifiche?";
 
-/* Title label used to present scheduled livestream medias */
-"Events" = "Eventi";
+/* Episode of a serie */
+"Episode" = "Episodio";
 
 /* Short label identifying content which has expired. */
 "Expired" = "Scaduto";
@@ -365,8 +368,8 @@
 /* Autoplay setting section footer */
 "More content is automatically played after playback of the current content ends." = "Un nuovo contenuto viene riprodotto automaticamente al termine di quello corrente.";
 
-/* Button to access more episodes from the media detail view
-   Button to access more episodes from the program detail view
+/* Button to access more episodes
+   Button to access more episodes from the media detail view
    Context menu action to open more episodes associated with a media */
 "More episodes" = "Più episodi";
 
@@ -463,6 +466,9 @@
 /* Play / Stop shortcut label */
 "Play / Stop" = "Play / Stop";
 
+/* Title label used to present scheduled livestream medias */
+"Play livestreams" = "RSI livestreams";
+
 /* Search setting */
 "Playable abroad" = "Disponibile all'estero";
 
@@ -540,6 +546,9 @@
    Search tab bar title
    Search tab title */
 "Search" = "Ricerca";
+
+/* Season of a serie */
+"Season" = "Stagione";
 
 /* Section wide support setting label */
 "Section wide support" = "Supporto esteso della sezione";
@@ -635,6 +644,9 @@
 
 /* Server setting name */
 "Test" = "Test";
+
+/* Add to Calendar alert explanation */
+"The application uses the calendar to add TV programs." = "L'applicazione usa il calendario per aggiungere i programmi TV";
 
 /* Button label to share the content being played. */
 "The content" = "Il contenuto";
@@ -808,3 +820,6 @@
 
 /* Label of the button to display feedback form */
 "Your feedback" = "Esprimere un'opinione";
+
+/* Add to Calendar alert title */
+"“%@” would like to access to your calendar" = "“%@” vorrebbe accedere al tuo calendario";

@@ -30,7 +30,7 @@ enum CarPlayList {
         case let .mostPopularMedias(radioChannel: radioChannel):
             return radioChannel.name
         case .livePrograms:
-            return "\(NSLocalizedString("Previous shows", comment: "Livestream previous programs screen title"))"
+            return NSLocalizedString("Previous shows", comment: "Livestream previous programs screen title")
         }
     }
     

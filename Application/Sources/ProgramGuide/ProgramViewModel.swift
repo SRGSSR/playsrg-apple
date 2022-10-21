@@ -4,7 +4,10 @@
 //  License information is available from the LICENSE file.
 //
 
+import Collections
 import Combine
+import EventKit
+import EventKitUI
 import Foundation
 import SRGDataProviderModel
 
@@ -19,6 +22,7 @@ final class ProgramViewModel: ObservableObject {
             Self.livestreamMediaPublisher(for: data?.channel)
                 .receive(on: DispatchQueue.main)
                 .assign(to: &$livestreamMedia)
+            eventEditViewDelegateObject.channel = data?.channel
         }
     }
     
@@ -26,6 +30,8 @@ final class ProgramViewModel: ObservableObject {
     @Published private var livestreamMedia: SRGMedia?
     
     @Published private(set) var date = Date()
+    
+    private let eventEditViewDelegateObject = EventEditViewDelegateObject()
     
     init() {
         Timer.publish(every: 10, on: .main, in: .common)
@@ -42,7 +48,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     private var show: SRGShow? {
-        return media?.show
+        return media?.show ?? program?.show
     }
     
     private var channel: SRGChannel? {
@@ -59,21 +65,15 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var subtitle: String? {
-        return program?.subtitle ?? program?.lead
+        return program?.subtitle
+    }
+    
+    var lead: String? {
+        return program?.lead
     }
     
     var summary: String? {
-        if program?.subtitle != nil, let lead = program?.lead {
-            if let summary = program?.summary {
-                return "\(lead)\n\n\(summary)"
-            }
-            else {
-                return lead
-            }
-        }
-        else {
-            return program?.summary
-        }
+        return program?.summary
     }
     
     var timeAndDate: String? {
@@ -81,7 +81,7 @@ final class ProgramViewModel: ObservableObject {
         let startTime = DateFormatter.play_time.string(from: program.startDate)
         let endTime = DateFormatter.play_time.string(from: program.endDate)
         let day = DateFormatter.play_relativeFull.string(from: program.startDate)
-        return "\(startTime) - \(endTime), \(day)"
+        return "\(startTime) - \(endTime) · \(day)"
     }
     
     var timeAndDateAccessibilityLabel: String? {
@@ -91,26 +91,67 @@ final class ProgramViewModel: ObservableObject {
             .appending(DateFormatter.play_relativeFull.string(from: program.startDate))
     }
     
+    private var seasonNumber: NSNumber? {
+        guard let seasonNumber = program?.seasonNumber else { return nil }
+        return seasonNumber.intValue > 0 ? seasonNumber : nil
+    }
+    
+    private var episodeNumber: NSNumber? {
+        guard let episodeNumber = program?.episodeNumber else { return nil }
+        return episodeNumber.intValue > 0 ? episodeNumber : nil
+    }
+    
+    var serie: String? {
+        let seaon = seasonNumber != nil ? "\(NSLocalizedString("Season", comment: "Season of a serie")) \(seasonNumber!)" : nil
+        let episode = episodeNumber != nil ? "\(NSLocalizedString("Episode", comment: "Episode of a serie")) \(episodeNumber!)" : nil
+        let serie = [seaon, episode]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        return !serie.isEmpty ? serie : nil
+    }
+    
+    var youthProtectionColor: SRGYouthProtectionColor? {
+        let youthProtectionColor = program?.youthProtectionColor
+        return youthProtectionColor != SRGYouthProtectionColor.none ? youthProtectionColor : nil
+    }
+    
     var imageUrl: URL? {
         return url(for: program?.image, size: .medium)
     }
     
-    var duration: Double? {
+    private var duration: Double? {
         guard let program else { return nil }
         let duration = program.endDate.timeIntervalSince(program.startDate)
         return duration > 0 ? duration : nil
     }
     
-    var hasMultiAudio: Bool {
-        return currentMedia?.play_isMultiAudioAvailable ?? false
+    private var production: String? {
+        let year = program?.productionYear?.stringValue
+        let production = [program?.productionCountry, year]
+            .compactMap { $0 }
+            .joined(separator: " ")
+        return !production.isEmpty ? production : nil
     }
     
-    var hasAudioDescription: Bool {
-        return currentMedia?.play_isAudioDescriptionAvailable ?? false
+    var durationAndProduction: String? {
+        guard let program else { return nil }
+        let durationString = duration != nil ? PlayFormattedMinutes(duration!) : nil
+        let durationAndProduction = [durationString, production, program.genre]
+            .compactMap { $0 }
+            .joined(separator: " · ")
+        return !durationAndProduction.isEmpty ? durationAndProduction : nil
     }
     
-    var hasSubtitles: Bool {
-        return currentMedia?.play_areSubtitlesAvailable ?? false
+    var badgesListData: BadgeList.Data? {
+        guard let program else { return nil }
+        return BadgeList.data(for: program)
+    }
+    
+    var crewMembersDatas: [CrewMembersData]? {
+        guard let crewMembers = program?.crewMembers, !crewMembers.isEmpty else { return nil }
+        return OrderedDictionary(grouping: crewMembers, by: { $0.role }).map { role, crewMembers in
+            return CrewMembersData(role: role, crewMembers: crewMembers)
+        }
     }
     
     var imageCopyright: String? {
@@ -133,8 +174,15 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
-        guard let media = currentMedia else { return nil }
-        return MediaDescription.availabilityBadgeProperties(for: media)
+        if isLive {
+            return MediaDescription.liveBadgeProperties()
+        }
+        else if let media = currentMedia {
+            return MediaDescription.availabilityBadgeProperties(for: media)
+        }
+        else {
+            return nil
+        }
     }
     
     var playAction: (() -> Void)? {
@@ -150,7 +198,7 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var hasActions: Bool {
-        return watchFromStartButtonProperties != nil || episodeButtonProperties != nil || watchLaterButtonProperties != nil
+        return watchFromStartButtonProperties != nil || watchLaterButtonProperties != nil || calendarButtonProperties != nil
     }
     
     var watchFromStartButtonProperties: ButtonProperties? {
@@ -176,23 +224,6 @@ final class ProgramViewModel: ObservableObject {
                 else {
                     tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                 }
-            }
-        )
-    }
-    
-    var episodeButtonProperties: ButtonProperties? {
-        guard let show else { return nil }
-        return ButtonProperties(
-            icon: "episodes",
-            label: NSLocalizedString("More episodes", comment: "Button to access more episodes from the program detail view"),
-            action: {
-                guard let tabBarController = UIApplication.shared.mainTabBarController,
-                      let window = UIApplication.shared.mainWindow else {
-                    return
-                }
-                let showViewController = SectionViewController.showViewController(for: show)
-                tabBarController.pushViewController(showViewController, animated: false)
-                window.play_dismissAllViewControllers(animated: true, completion: nil)
             }
         )
     }
@@ -242,6 +273,103 @@ final class ProgramViewModel: ObservableObject {
             )
         default:
             return nil
+        }
+    }
+    
+    var calendarButtonProperties: ButtonProperties? {
+        return ButtonProperties(
+            icon: "calendar",
+            label: NSLocalizedString("Add to Calendar", comment: "Button to add an event to Calendar application"),
+            action: {
+                guard let program = self.program,
+                      let channel = self.data?.channel,
+                      let tabBarController = UIApplication.shared.mainTabBarController else { return }
+                let eventStore = EKEventStore()
+                eventStore.requestAccess( to: EKEntityType.event, completion: { [weak self] granted, error in
+                    DispatchQueue.main.async {
+                        guard error == nil else {
+                            Banner.showError(error)
+                            return
+                        }
+                        
+                        guard let self else { return }
+                        if granted {
+                            let event = EKEvent(eventStore: eventStore)
+                            event.title = "\(program.title) - \(channel.title)"
+                            event.startDate = program.startDate
+                            event.endDate = program.endDate
+                            event.url = self.calendarUrl
+                            event.notes = self.calendarNotes
+                            
+                            let eventController = EKEventEditViewController()
+                            eventController.event = event
+                            eventController.eventStore = eventStore
+                            eventController.editViewDelegate = self.eventEditViewDelegateObject
+                            tabBarController.play_top.present(eventController, animated: true, completion: nil)
+                        }
+                        else {
+                            let applicationName = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as! String
+                            let alertController = UIAlertController(title: String(format: NSLocalizedString("“%@” would like to access to your calendar", comment: "Add to Calendar alert title"), applicationName),
+                                                                    message: NSLocalizedString("The application uses the calendar to add TV programs.", comment: "Add to Calendar alert explanation"),
+                                                                    preferredStyle: .alert)
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("Open system settings", comment: "Label of the button opening system settings"), style: .default, handler: { _ in
+                                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+                            }))
+                            alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
+                            tabBarController.play_top.present(alertController, animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+        )
+    }
+    
+    var showButtonProperties: ShowButtonProperties? {
+        guard let show else { return nil }
+        return ShowButtonProperties(
+            show: show,
+            isFavorite: FavoritesContainsShow(show),
+            action: {
+                guard let tabBarController = UIApplication.shared.mainTabBarController,
+                      let window = UIApplication.shared.mainWindow else {
+                    return
+                }
+                let showViewController = SectionViewController.showViewController(for: show)
+                tabBarController.pushViewController(showViewController, animated: false)
+                window.play_dismissAllViewControllers(animated: true, completion: nil)
+            }
+        )
+    }
+    
+    private var calendarUrl: URL? {
+        if let media = self.media {
+            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        }
+        else if let media = self.livestreamMedia, program?.timeAvailability(at: Date()) == .notYetAvailable {
+            return ApplicationConfiguration.shared.sharingURL(for: media, at: .zero)
+        }
+        else if let show {
+            return ApplicationConfiguration.shared.sharingURL(for: show)
+        }
+        else {
+            return ApplicationConfiguration.shared.playURL
+        }
+    }
+    
+    private var calendarNotes: String? {
+        let notes = [calendarShowNote, subtitle, summary]
+            .compactMap { $0 }
+            .joined(separator: "\n\n")
+        return !notes.isEmpty ? notes : nil
+    }
+    
+    private var calendarShowNote: String? {
+        guard let show else { return nil }
+        if let url = ApplicationConfiguration.shared.sharingURL(for: show) {
+            return "\(show.title)\n\(url)"
+        }
+        else {
+            return show.title
         }
     }
 }
@@ -302,6 +430,32 @@ extension ProgramViewModel {
         let channel: SRGChannel
     }
     
+    /// Data related to the program crew members
+    struct CrewMembersData: Identifiable {
+        let role: String?
+        let names: [String]
+        
+        var id: String? {
+            return role
+        }
+        
+        init(role: String?, crewMembers: [SRGCrewMember]) {
+            self.role = role
+            self.names = crewMembers.map { crewMember in
+                if let characterName = crewMember.characterName {
+                    return "\(crewMember.name) (\(characterName))"
+                }
+                else {
+                    return crewMember.name
+                }
+            }
+        }
+        
+        var accessibilityLabel: String {
+            return "\(role ?? "") \(names.joined(separator: ", "))".trimmingCharacters(in: .whitespaces)
+        }
+    }
+    
     /// Data related to the media stored by the model
     private struct MediaData {
         let media: SRGMedia?
@@ -316,5 +470,34 @@ extension ProgramViewModel {
         let icon: String
         let label: String
         let action: () -> Void
+    }
+    
+    /// Show button properties
+    struct ShowButtonProperties {
+        let show: SRGShow
+        let isFavorite: Bool
+        let action: () -> Void
+    }
+}
+
+// MARK: UIKit delegate object
+
+private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelegate {
+    var channel: SRGChannel?
+    
+    func eventEditViewController(_ controller: EKEventEditViewController, didCompleteWith action: EKEventEditViewAction) {
+        controller.dismiss(animated: true) {
+            if action == .saved, let title = controller.event?.title {
+                Banner.calendarEventAdded(withTitle: title)
+                
+                if let channel = self.channel {
+                    let labels = SRGAnalyticsHiddenEventLabels()
+                    labels.source = AnalyticsSource.button.rawValue
+                    labels.value = channel.urn
+                    labels.extraValue1 = channel.title
+                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.calendarAdd.rawValue, labels: labels)
+                }
+            }
+        }
     }
 }

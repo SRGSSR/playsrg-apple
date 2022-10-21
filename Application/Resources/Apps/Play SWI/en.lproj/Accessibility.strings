@@ -10,11 +10,14 @@
 /* Live content label, with a channel title */
 "%@ live" = "%@ live";
 
+/* Number of results aggregated in search */
+"%@ results" = "%@ results";
+
 /* Label displaying the number of views on the player */
 "%@ views" = "%@ views";
 
-/* Number of results aggregated in search */
-"%@ results" = "%@ results";
+/* Accessibility label for the 360 badge */
+"360-degree content" = "360-degree content";
 
 /* Show A-Z button label */
 "A to Z shows" = "A to Z topics";
@@ -65,6 +68,9 @@
 /* Button to display the TV guide as a list */
 "Display list" = "Display list";
 
+/* Accessibility label for the Dolby Digital sound badge */
+"Dolby Digital sound" = "Dolby Digital sound";
+
 /* A download button label */
 "Download" = "Download";
 
@@ -99,7 +105,8 @@
 /* More button label */
 "More" = "More";
 
-/* A more episode button label */
+/* A more episode button label
+   Button to access more episodes */
 "More episodes" = "More episodes";
 
 /* Text displayed when a user is logged in but no information has been retrieved yet */
@@ -188,6 +195,9 @@
 
 /* Channel selector button hint */
 "Shows the channel programs" = "Shows the channel programs";
+
+/* Accessibility label for the sign Language badge */
+"Sign Language" = "Sign Language";
 
 /* Stop button label */
 "Stop" = "Stop";

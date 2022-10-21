@@ -31,7 +31,7 @@ platform :ios do
       end
     end
 
-    xcversion(version: '~> 14')
+    xcversion(version: '~> 14.1.0')
 
     if cleaned_lane_condition(lane)
       ensure_git_status_clean(show_uncommitted_changes: true, show_diff: true)
@@ -319,6 +319,20 @@ platform :ios do
 
     index_html_file = 'fastlane/gh-pages/index.html'
     Dir.chdir('..') { FileUtils.cp(index_html_file, output_directory) }
+
+    ['iOS', 'tvOS'].map do |platform|
+      UI.message "Preparing Play #{platform} beta release notes. 📝"
+
+      json = what_s_new_for_beta_json(platform)
+      divs = beta_release_notes_table_to_html_divs(json)
+      html = beta_release_notes_html(platform, divs)
+
+      release_html_file = "release_notes-#{platform.downcase}-beta.html"
+      Dir.chdir('..') { File.write("#{releases_directory}/#{release_html_file}", html) }
+
+      latest_version = json.keys.last
+      UI.success "Computed Play #{platform} beta release notes (latest beta: #{latest_version}). ✅"
+    end
 
     business_units.map do |business_unit|
       spaceship_login_with_api_key(business_unit)
@@ -1179,14 +1193,23 @@ def what_s_new_for_beta_json(platform)
   json
 end
 
-def release_notes_html_platform(platform)
+def release_notes_html_devices(platform)
   platform == 'iOS' ? 'iPhone & iPad' : 'Apple TV'
 end
 
 def release_notes_html(platform, business_unit, divs)
-  input_file = "release_notes-#{business_unit.downcase}.html"
+  release_notes_html_export(business_unit.downcase, platform, divs)
+end
+
+def beta_release_notes_html(platform, divs)
+  release_notes_html_export('beta', platform, divs)
+end
+
+def release_notes_html_export(file_suffix, platform, divs)
+  input_file = "release_notes-#{file_suffix}.html"
   html = File.read("gh-pages/releases/#{input_file}")
-  html = html.gsub('<!-- platform -->', release_notes_html_platform(platform))
+  html = html.gsub('<!-- platform -->', platform)
+  html = html.gsub('<!-- devices -->', release_notes_html_devices(platform))
   html.sub('<!-- versions -->', divs.strip)
 end
 
@@ -1199,10 +1222,28 @@ def release_notes_table_to_html_divs(platform, table, live_version)
   divs.strip
 end
 
+def beta_release_notes_table_to_html_divs(json)
+  divs = ''
+  json.keys.reverse.map do |key|
+    divs += beta_release_notes_version_to_html(key, json[key])
+  end
+  divs.strip
+end
+
 def release_notes_version_to_html(platform, version, text, is_preprod)
   build_number = build_number_for_version(platform, version)
+  release_notes_version_to_html_export(build_number, version, text, is_preprod)
+end
+
+def beta_release_notes_version_to_html(tag_version, text)
+  build_number = build_number_from_tag_version(tag_version)
+  version = "#{marketing_version_from_tag_version(tag_version)} (#{build_number})"
+  release_notes_version_to_html_export(build_number, version, text, false)
+end
+
+def release_notes_version_to_html_export(build_number, version, text, is_preprod)
   attribute = is_preprod ? ' preprod' : ''
-  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2>#{version}</h2>\n"
+  div = "<div id=\"build_#{build_number}\"#{attribute}>\n<h2 id=\"#{version}\">#{version}</h2>\n"
   div += release_notes_to_html(text)
   div += "\n</div>\n"
   div

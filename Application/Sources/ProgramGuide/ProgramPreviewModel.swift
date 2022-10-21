@@ -13,6 +13,20 @@ final class ProgramPreviewModel: ObservableObject {
     @Published var program: SRGProgram?
     @Published private(set) var date = Date()
     
+    private var isLive: Bool {
+        guard let program else { return false }
+        return (program.startDate...program.endDate).contains(date)
+    }
+    
+    var availabilityBadgeProperties: MediaDescription.BadgeProperties? {
+        if isLive {
+            return MediaDescription.liveBadgeProperties()
+        }
+        else {
+            return nil
+        }
+    }
+    
     private var primaryTitle: String {
         return program?.title ?? .placeholder(length: 16)
     }
