@@ -702,10 +702,12 @@ private extension Content {
                 }
             case .tvAllShows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvScheduledLivestreams:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.scheduledLivestream.rawValue]
             case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
+            case .tvScheduledLivestreams:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)

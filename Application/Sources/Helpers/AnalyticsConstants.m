@@ -11,13 +11,14 @@
 AnalyticsPageLevel const AnalyticsPageLevelApplication = @"application";
 AnalyticsPageLevel const AnalyticsPageLevelAudio = @"audio";
 AnalyticsPageLevel const AnalyticsPageLevelAutomobile = @"automobile";
-AnalyticsPageLevel const AnalyticsPageLevelEvent = @"event";
+AnalyticsPageLevel const AnalyticsPageLevelEpisode = @"episode";
 AnalyticsPageLevel const AnalyticsPageLevelFeature = @"feature";
 AnalyticsPageLevel const AnalyticsPageLevelGoogleCast = @"google cast";
 AnalyticsPageLevel const AnalyticsPageLevelLive = @"live";
 AnalyticsPageLevel const AnalyticsPageLevelMostPopular = @"most popular";
 AnalyticsPageLevel const AnalyticsPageLevelPlay = @"play";
 AnalyticsPageLevel const AnalyticsPageLevelPreview = @"preview";
+AnalyticsPageLevel const AnalyticsPageLevelScheduledLivestream = @"scheduled livestream";
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
 AnalyticsPageLevel const AnalyticsPageLevelSection = @"section";
 AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
