@@ -104,6 +104,7 @@ The radio channel JSON dictionaries have one more key:
 * `tvLiveCenterEpisodes`: Past sport livestreams (with result).
 * `tvLiveCenterEpisodesAll`: Past sport livestreams (all).
 * `tvScheduledLivestreams`: Scheduled livestreams.
+* `tvScheduledLivestreamsSignLanguage`: Sign language livestreams.
 
 ## Search
 

@@ -535,6 +535,8 @@ private extension Content {
                 return NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
+            case .tvScheduledLivestreamsSignLanguage:
+                return NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
 #if os(iOS)
             case .downloads:
                 return NSLocalizedString("Downloads", comment: "Label to present downloads")
@@ -650,7 +652,7 @@ private extension Content {
                 return AnalyticsPageTitle.watchLater.rawValue
             case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return AnalyticsPageTitle.sports.rawValue
-            case .tvScheduledLivestreams:
+            case .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
                 return AnalyticsPageTitle.scheduledLivestreams.rawValue
 #if os(iOS)
             case .downloads:
@@ -708,6 +710,8 @@ private extension Content {
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvScheduledLivestreamsSignLanguage:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)
@@ -727,7 +731,7 @@ private extension Content {
             switch configuredSection {
             case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
                     .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
-                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams:
+                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
                 return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -849,6 +853,10 @@ private extension Content {
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvScheduledLivestreamsSignLanguage:
+                return dataProvider.tvScheduledLivestreams(for: vendor, signLanguageOnly: true, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
 #if os(iOS)

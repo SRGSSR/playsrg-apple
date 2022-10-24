@@ -23,6 +23,8 @@ extension ApplicationConfiguration {
             return .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
             return .tvScheduledLivestreams
+        case .tvScheduledLivestreamsSignLanguage:
+            return .tvScheduledLivestreamsSignLanguage
         default:
             return nil
         }
@@ -105,6 +107,7 @@ enum ConfiguredSection: Hashable {
     case tvLiveCenterEpisodes
     case tvLiveCenterEpisodesAll
     case tvScheduledLivestreams
+    case tvScheduledLivestreamsSignLanguage
     
 #if os(iOS)
     case downloads

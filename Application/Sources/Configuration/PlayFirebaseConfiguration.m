@@ -18,6 +18,7 @@ static HomeSection HomeSectionWithString(NSString *string)
     dispatch_once(&s_onceToken, ^{
         s_sections = @{ @"tvLive" : @(HomeSectionTVLive),
                         @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
+                        @"tvScheduledLivestreamsSignLanguage" : @(HomeSectionTVScheduledLivestreamsSignLanguage),
                         @"tvLiveCenterScheduledLivestreams" : @(HomeSectionTVLiveCenterScheduledLivestreams),
                         @"tvLiveCenterScheduledLivestreamsAll" : @(HomeSectionTVLiveCenterScheduledLivestreamsAll),
                         @"tvLiveCenterEpisodes" : @(HomeSectionTVLiveCenterEpisodes),

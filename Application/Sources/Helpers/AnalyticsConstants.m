@@ -22,6 +22,7 @@ AnalyticsPageLevel const AnalyticsPageLevelScheduledLivestream = @"scheduled liv
 AnalyticsPageLevel const AnalyticsPageLevelSearch = @"search";
 AnalyticsPageLevel const AnalyticsPageLevelSection = @"section";
 AnalyticsPageLevel const AnalyticsPageLevelShow = @"show";
+AnalyticsPageLevel const AnalyticsPageLevelSignLanguage = @"sign language";
 AnalyticsPageLevel const AnalyticsPageLevelTopic = @"topic";
 AnalyticsPageLevel const AnalyticsPageLevelUser = @"user";
 AnalyticsPageLevel const AnalyticsPageLevelVideo = @"video";
