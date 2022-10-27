@@ -455,7 +455,7 @@
 "Overview" = "Survista";
 
 /* Title label used to present on demand medias from live center (Sport manager) */
-"Past sport livestreams" = "Past sport livestreams";
+"Past sport livestreams" = "Anteriurs livestreams";
 
 /* Search setting */
 "Period" = "Spazi da temp";
@@ -600,7 +600,7 @@
 "Shows, topics and more" = "Emissiuns, temas e dapli";
 
 /* Title label used to present sign language scheduled livestream medias */
-"Sign language livestreams" = "Sign language livestreams";
+"Sign language livestreams" = "Livestreams en lingua da segns";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simular in avertiment da memoria";
@@ -618,7 +618,7 @@
 "Source code" = "Code da funtauna";
 
 /* Title label used to present scheduled livestreams medias from live center (Sport manager) */
-"Sport livestreams" = "Sport livestreams";
+"Sport livestreams" = "RTR livestreams";
 
 /* Server setting name */
 "Stage" = "Stage";
