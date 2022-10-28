@@ -529,10 +529,14 @@ private extension Content {
                 return show.title
             case .tvLive:
                 return NSLocalizedString("TV channels", comment: "Title label to present main TV livestreams")
-            case .tvLiveCenter:
-                return NSLocalizedString("Sport", comment: "Title label used to present live center medias")
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
+                return NSLocalizedString("Sport livestreams", comment: "Title label used to present scheduled livestreams medias from live center (Sport manager)")
+            case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
+                return NSLocalizedString("Past sport livestreams", comment: "Title label used to present on demand medias from live center (Sport manager)")
             case .tvScheduledLivestreams:
                 return NSLocalizedString("Play livestreams", comment: "Title label used to present scheduled livestream medias")
+            case .tvScheduledLivestreamsSignLanguage:
+                return NSLocalizedString("Sign language livestreams", comment: "Title label used to present sign language scheduled livestream medias")
 #if os(iOS)
             case .downloads:
                 return NSLocalizedString("Downloads", comment: "Label to present downloads")
@@ -646,10 +650,10 @@ private extension Content {
                 return AnalyticsPageTitle.resumePlayback.rawValue
             case .radioWatchLater, .watchLater:
                 return AnalyticsPageTitle.watchLater.rawValue
-            case .tvLiveCenter:
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll, .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
                 return AnalyticsPageTitle.sports.rawValue
-            case .tvScheduledLivestreams:
-                return AnalyticsPageTitle.events.rawValue
+            case .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
+                return AnalyticsPageTitle.scheduledLivestreams.rawValue
 #if os(iOS)
             case .downloads:
                 return AnalyticsPageTitle.downloads.rawValue
@@ -700,10 +704,14 @@ private extension Content {
                 }
             case .tvAllShows:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-            case .tvLiveCenter:
-                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.scheduledLivestream.rawValue]
+            case .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.episode.rawValue]
             case .tvScheduledLivestreams:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+            case .tvScheduledLivestreamsSignLanguage:
+                return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue, AnalyticsPageLevel.signLanguage.rawValue]
             case .favoriteShows, .history, .watchLater:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
 #if os(iOS)
@@ -722,7 +730,8 @@ private extension Content {
         var placeholderRowItems: [Content.Item] {
             switch configuredSection {
             case .show, .history, .watchLater, .radioEpisodesForDay, .radioLatest, .radioLatestEpisodes, .radioLatestVideos,
-                    .radioMostPopular, .tvEpisodesForDay, .tvLiveCenter, .tvScheduledLivestreams:
+                    .radioMostPopular, .tvEpisodesForDay, .tvLiveCenterScheduledLivestreams, .tvLiveCenterScheduledLivestreamsAll,
+                    .tvLiveCenterEpisodes, .tvLiveCenterEpisodesAll, .tvScheduledLivestreams, .tvScheduledLivestreamsSignLanguage:
                 return (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .tvLive, .radioLive, .radioLiveSatellite:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
@@ -826,12 +835,28 @@ private extension Content {
                 return dataProvider.tvLivestreams(for: vendor)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
-            case .tvLiveCenter:
-                return dataProvider.liveCenterVideos(for: vendor, pageSize: pageSize, paginatedBy: paginator)
+            case .tvLiveCenterScheduledLivestreams:
+                return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .scheduledLivestream, eventsWithResultOnly: true, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvLiveCenterScheduledLivestreamsAll:
+                return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .scheduledLivestream, eventsWithResultOnly: false, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvLiveCenterEpisodes:
+                return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .episode, eventsWithResultOnly: true, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvLiveCenterEpisodesAll:
+                return dataProvider.liveCenterVideos(for: vendor, contentTypeFilter: .episode, eventsWithResultOnly: false, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
             case .tvScheduledLivestreams:
                 return dataProvider.tvScheduledLivestreams(for: vendor, pageSize: pageSize, paginatedBy: paginator)
+                    .map { $0.map { .media($0) } }
+                    .eraseToAnyPublisher()
+            case .tvScheduledLivestreamsSignLanguage:
+                return dataProvider.tvScheduledLivestreams(for: vendor, signLanguageOnly: true, pageSize: pageSize, paginatedBy: paginator)
                     .map { $0.map { .media($0) } }
                     .eraseToAnyPublisher()
 #if os(iOS)

@@ -13,10 +13,18 @@ extension ApplicationConfiguration {
             return .radioLive
         case .radioLiveSatellite:
             return .radioLiveSatellite
-        case .tvLiveCenter:
-            return .tvLiveCenter
+        case .tvLiveCenterScheduledLivestreams:
+            return .tvLiveCenterScheduledLivestreams
+        case .tvLiveCenterScheduledLivestreamsAll:
+            return .tvLiveCenterScheduledLivestreamsAll
+        case .tvLiveCenterEpisodes:
+            return .tvLiveCenterEpisodes
+        case .tvLiveCenterEpisodesAll:
+            return .tvLiveCenterEpisodesAll
         case .tvScheduledLivestreams:
             return .tvScheduledLivestreams
+        case .tvScheduledLivestreamsSignLanguage:
+            return .tvScheduledLivestreamsSignLanguage
         default:
             return nil
         }
@@ -94,8 +102,12 @@ enum ConfiguredSection: Hashable {
     case radioLive
     case radioLiveSatellite
     
-    case tvLiveCenter
+    case tvLiveCenterScheduledLivestreams
+    case tvLiveCenterScheduledLivestreamsAll
+    case tvLiveCenterEpisodes
+    case tvLiveCenterEpisodesAll
     case tvScheduledLivestreams
+    case tvScheduledLivestreamsSignLanguage
     
 #if os(iOS)
     case downloads

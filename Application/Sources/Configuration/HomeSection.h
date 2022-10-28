@@ -25,8 +25,12 @@ typedef NS_ENUM(NSInteger, HomeSection) {
     
     // Live sections
     HomeSectionTVLive,
-    HomeSectionTVLiveCenter,
+    HomeSectionTVLiveCenterScheduledLivestreams,
+    HomeSectionTVLiveCenterScheduledLivestreamsAll,
+    HomeSectionTVLiveCenterEpisodes,
+    HomeSectionTVLiveCenterEpisodesAll,
     HomeSectionTVScheduledLivestreams,
+    HomeSectionTVScheduledLivestreamsSignLanguage,
     HomeSectionRadioLive,
     HomeSectionRadioLiveSatellite
 };
