@@ -19117,7 +19117,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SRGSSR/srgdataprovider-apple.git";
 			requirement = {
-				branch = "feature/34-scheduled-livestreams-improvements";
+				branch = develop;
 				kind = branch;
 			};
 		};
