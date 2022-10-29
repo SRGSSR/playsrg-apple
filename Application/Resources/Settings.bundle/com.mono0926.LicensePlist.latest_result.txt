@@ -107,7 +107,7 @@ name: abseil-cpp-SwiftPM, nameSpecified: abseil-cpp-swiftpm, owner: firebase, ve
 
 name: Aiolos, nameSpecified: aiolos, owner: IdeasOnCanvas, version: 1.9.7, source: https://github.com/IdeasOnCanvas/Aiolos
 
-name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: 4.4.3, source: https://github.com/microsoft/appcenter-sdk-apple
+name: appcenter-sdk-apple, nameSpecified: appcenter-sdk-apple, owner: microsoft, version: , source: https://github.com/microsoft/appcenter-sdk-apple
 
 name: boringssl-SwiftPM, nameSpecified: boringssl-swiftpm, owner: firebase, version: 0.9.1, source: https://github.com/firebase/boringssl-SwiftPM
 
@@ -153,7 +153,7 @@ name: NukeUI, nameSpecified: nukeui, owner: kean, version: 0.8.3, source: https:
 
 name: paper-onboarding, nameSpecified: paper-onboarding, owner: Ramotion, version: 6.1.5, source: https://github.com/Ramotion/paper-onboarding
 
-name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.10.2, source: https://github.com/microsoft/PLCrashReporter
+name: PLCrashReporter, nameSpecified: plcrashreporter, owner: microsoft, version: 1.11.0, source: https://github.com/microsoft/PLCrashReporter
 
 name: promises, nameSpecified: promises, owner: google, version: 2.1.1, source: https://github.com/google/promises
 

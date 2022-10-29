@@ -19172,8 +19172,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.3.0;
+				branch = master;
+				kind = branch;
 			};
 		};
 		6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
