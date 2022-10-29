@@ -47,11 +47,6 @@
 		04BF391C28D3DD8F002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391B28D3DD8F002456E2 /* AppCenterDistribute */; };
 		04BF391E28D3DD97002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391D28D3DD97002456E2 /* AppCenterCrashes */; };
 		04BF392028D3DD97002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391F28D3DD97002456E2 /* AppCenterDistribute */; };
-		04BF392428D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392628D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392828D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392A28D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392C28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -62,6 +57,11 @@
 		04D5478427BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5478527BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5478627BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478927C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478B27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478D27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478F27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5479127C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
 		04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F920286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F921286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
@@ -2690,7 +2690,6 @@
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
-		04BF392228D3E2F2002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "PlaySRG-GoogleCastSDK-ios-no-bluetooth"; path = "Packages/PlaySRG-GoogleCastSDK-ios-no-bluetooth"; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
@@ -3404,6 +3403,7 @@
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
+				04D5478927C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				04BF390E28D3DD74002456E2 /* AppCenterCrashes in Frameworks */,
 				6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3413,7 +3413,6 @@
 				6F3B563A283B903C009A2D7D /* ShowTime in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
 				04BF391028D3DD74002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392428D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 				6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE78265CD6A700A4882B /* Collections in Frameworks */,
@@ -3435,6 +3434,7 @@
 				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */,
+				04D5478B27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				04BF391228D3DD81002456E2 /* AppCenterCrashes in Frameworks */,
 				6F2345D3283BAB5000A9089D /* FSCalendar in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3444,7 +3444,6 @@
 				6F3B563C283B9057009A2D7D /* ShowTime in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
 				04BF391428D3DD81002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392628D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */,
@@ -3466,6 +3465,7 @@
 				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */,
+				04D5478D27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				04BF391628D3DD88002456E2 /* AppCenterCrashes in Frameworks */,
 				6F2345D5283BAB5600A9089D /* FSCalendar in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3475,7 +3475,6 @@
 				6F3B563E283B905C009A2D7D /* ShowTime in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
 				04BF391828D3DD88002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392828D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */,
@@ -3497,6 +3496,7 @@
 				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */,
+				04D5478F27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				04BF391A28D3DD8F002456E2 /* AppCenterCrashes in Frameworks */,
 				6F2345D7283BAB5B00A9089D /* FSCalendar in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3506,7 +3506,6 @@
 				6F3B5640283B9061009A2D7D /* ShowTime in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
 				04BF391C28D3DD8F002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392A28D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */,
@@ -3528,6 +3527,7 @@
 				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */,
+				04D5479127C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				04BF391E28D3DD97002456E2 /* AppCenterCrashes in Frameworks */,
 				6F2345D9283BAB6000A9089D /* FSCalendar in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
@@ -3537,7 +3537,6 @@
 				6F3B5642283B9067009A2D7D /* ShowTime in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
 				04BF392028D3DD97002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392C28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE80265CD70000A4882B /* Collections in Frameworks */,
@@ -3787,14 +3786,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04BF392128D3E2F2002456E2 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				04BF392228D3E2F2002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		0806E7B41D50D8DD002ED406 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -4287,7 +4278,6 @@
 		08C68D461D38D49600BB8AAA = {
 			isa = PBXGroup;
 			children = (
-				04BF392128D3E2F2002456E2 /* Packages */,
 				6F7C089426CE4E2A00166CE7 /* Podfile */,
 				6FAAF77620CABA3A00BB58A3 /* Common */,
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
@@ -5323,6 +5313,7 @@
 				08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */,
 				6FEEBE77265CD6A700A4882B /* Collections */,
 				6F17DC15266AB81C009F74C6 /* Nuke */,
+				04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9072812D837007C3406 /* NukeUI */,
 				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269A82836CFE90072BA0B /* Introspect */,
@@ -5331,7 +5322,6 @@
 				6F2345D0283BAB3600A9089D /* FSCalendar */,
 				04BF390D28D3DD74002456E2 /* AppCenterCrashes */,
 				04BF390F28D3DD74002456E2 /* AppCenterDistribute */,
-				04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5377,6 +5367,7 @@
 				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 				6FEEBE79265CD6D300A4882B /* Collections */,
 				6F17DC17266AB837009F74C6 /* Nuke */,
+				04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9092812D846007C3406 /* NukeUI */,
 				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AA2836D0040072BA0B /* Introspect */,
@@ -5385,7 +5376,6 @@
 				6F2345D2283BAB5000A9089D /* FSCalendar */,
 				04BF391128D3DD81002456E2 /* AppCenterCrashes */,
 				04BF391328D3DD81002456E2 /* AppCenterDistribute */,
-				04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5431,6 +5421,7 @@
 				08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */,
 				6FEEBE7B265CD6DB00A4882B /* Collections */,
 				6F17DC19266AB83E009F74C6 /* Nuke */,
+				04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
 				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AC2836D00B0072BA0B /* Introspect */,
@@ -5439,7 +5430,6 @@
 				6F2345D4283BAB5600A9089D /* FSCalendar */,
 				04BF391528D3DD88002456E2 /* AppCenterCrashes */,
 				04BF391728D3DD88002456E2 /* AppCenterDistribute */,
-				04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5485,6 +5475,7 @@
 				08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */,
 				6FEEBE7D265CD6E600A4882B /* Collections */,
 				6F17DC1B266AB846009F74C6 /* Nuke */,
+				04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90D2812D851007C3406 /* NukeUI */,
 				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AE2836D0100072BA0B /* Introspect */,
@@ -5493,7 +5484,6 @@
 				6F2345D6283BAB5B00A9089D /* FSCalendar */,
 				04BF391928D3DD8F002456E2 /* AppCenterCrashes */,
 				04BF391B28D3DD8F002456E2 /* AppCenterDistribute */,
-				04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5539,6 +5529,7 @@
 				08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */,
 				6FEEBE7F265CD70000A4882B /* Collections */,
 				6F17DC1D266AB84E009F74C6 /* Nuke */,
+				04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90F2812D856007C3406 /* NukeUI */,
 				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269B02836D0160072BA0B /* Introspect */,
@@ -5547,7 +5538,6 @@
 				6F2345D8283BAB6000A9089D /* FSCalendar */,
 				04BF391D28D3DD97002456E2 /* AppCenterCrashes */,
 				04BF391F28D3DD97002456E2 /* AppCenterDistribute */,
-				04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -6275,6 +6265,7 @@
 				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
 				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
+				04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */,
 				6FA6C9062812D837007C3406 /* XCRemoteSwiftPackageReference "NukeUI" */,
 				6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */,
@@ -19017,6 +19008,14 @@
 				kind = branch;
 			};
 		};
+		04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = "4.7.1-beta.1";
+			};
+		};
 		081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SwiftKickMobile/SwiftMessages.git";
@@ -19312,25 +19311,30 @@
 			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
 			productName = AppCenterDistribute;
 		};
-		04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
+		04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
+		04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
+		04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
+		04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
+		04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
 		081454BA2546CDD500BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
