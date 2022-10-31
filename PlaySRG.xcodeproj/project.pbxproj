@@ -32,26 +32,6 @@
 		0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
 		0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
 		0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
-		04BF390428D3DABA002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390328D3DABA002456E2 /* AppCenterCrashes */; };
-		04BF390628D3DD53002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390528D3DD53002456E2 /* AppCenterCrashes */; };
-		04BF390828D3DD5B002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390728D3DD5B002456E2 /* AppCenterCrashes */; };
-		04BF390A28D3DD63002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390928D3DD63002456E2 /* AppCenterCrashes */; };
-		04BF390C28D3DD6B002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390B28D3DD6B002456E2 /* AppCenterCrashes */; };
-		04BF390E28D3DD74002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390D28D3DD74002456E2 /* AppCenterCrashes */; };
-		04BF391028D3DD74002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF390F28D3DD74002456E2 /* AppCenterDistribute */; };
-		04BF391228D3DD81002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391128D3DD81002456E2 /* AppCenterCrashes */; };
-		04BF391428D3DD81002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391328D3DD81002456E2 /* AppCenterDistribute */; };
-		04BF391628D3DD88002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391528D3DD88002456E2 /* AppCenterCrashes */; };
-		04BF391828D3DD88002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391728D3DD88002456E2 /* AppCenterDistribute */; };
-		04BF391A28D3DD8F002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391928D3DD8F002456E2 /* AppCenterCrashes */; };
-		04BF391C28D3DD8F002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391B28D3DD8F002456E2 /* AppCenterDistribute */; };
-		04BF391E28D3DD97002456E2 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391D28D3DD97002456E2 /* AppCenterCrashes */; };
-		04BF392028D3DD97002456E2 /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF391F28D3DD97002456E2 /* AppCenterDistribute */; };
-		04BF392428D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392628D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392828D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392A28D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
-		04BF392C28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -62,6 +42,11 @@
 		04D5478427BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5478527BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5478627BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
+		04D5478927C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478B27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478D27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5478F27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
+		04D5479127C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */ = {isa = PBXBuildFile; productRef = 04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */; };
 		04D5F91F286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F920286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
 		04D5F921286C4542000A5A4E /* Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5F91E286C4542000A5A4E /* Recommendation.swift */; };
@@ -782,6 +767,11 @@
 		6F2AB1B62487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B72487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
 		6F2AB1B82487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F2AB1B32487C31C009D9FBC /* MediaPlayerViewController+SongPanel.swift */; };
+		6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */; };
+		6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */; };
+		6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */; };
+		6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6F2DBBB325DD2703007DA242 /* AppCenterCrashes */; };
 		6F2DE05326440FB00059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6F2DE05426440FB10059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
 		6F2DE05526440FB10059335E /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE4F0CB257A368B00223F22 /* ActivityIndicator.swift */; };
@@ -1974,6 +1964,16 @@
 		6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */; };
 		6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */; };
 		6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */; };
+		6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CB825DAB76D00874EAF /* AppCenterCrashes */; };
+		6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */; };
+		6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */; };
+		6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */; };
+		6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CE825DAB7C300874EAF /* AppCenterCrashes */; };
+		6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */; };
+		6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0025DAB80300874EAF /* AppCenterCrashes */; };
+		6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D0225DAB80300874EAF /* AppCenterDistribute */; };
+		6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1825DAB80C00874EAF /* AppCenterCrashes */; };
+		6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */ = {isa = PBXBuildFile; productRef = 6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */; };
 		6FD4C2D6268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
 		6FD4C2D7268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
 		6FD4C2D8268B6CBB00F06F63 /* SimpleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD4C2D5268B6CBB00F06F63 /* SimpleButton.swift */; };
@@ -2690,7 +2690,6 @@
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
-		04BF392228D3E2F2002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "PlaySRG-GoogleCastSDK-ios-no-bluetooth"; path = "Packages/PlaySRG-GoogleCastSDK-ios-no-bluetooth"; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
@@ -3399,21 +3398,21 @@
 				6F548968283B8994001290E7 /* FLEX in Frameworks */,
 				6F3AED342614C5B6007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269A92836CFE90072BA0B /* Introspect in Frameworks */,
+				6FD46CB925DAB76D00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095A25221A1000E621EF /* AirshipCore in Frameworks */,
 				6FD40A4825221C2D00E621EF /* PaperOnboarding in Frameworks */,
 				084F0968254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B52521C14E00F9F4FE /* SRGLetterbox in Frameworks */,
 				08F5DAF5262D99D400F717D0 /* SRGLoggerSwift in Frameworks */,
-				04BF390E28D3DD74002456E2 /* AppCenterCrashes in Frameworks */,
+				04D5478927C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6F2345D1283BAB3600A9089D /* FSCalendar in Frameworks */,
+				6FD46CBB25DAB76D00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C12521CFD400F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8BD72602B69600530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439728338F2900F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F25463B2521C34800F9F4FE /* Aiolos in Frameworks */,
 				6F3B563A283B903C009A2D7D /* ShowTime in Frameworks */,
 				6F2544F52521BAA400F9F4FE /* SRGUserData in Frameworks */,
-				04BF391028D3DD74002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392428D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				4E695C40A3BD7079CB4D03DE /* libPods-Play SRG-iOS-Play SRF.a in Frameworks */,
 				6FEC897A261F165600FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE78265CD6A700A4882B /* Collections in Frameworks */,
@@ -3430,21 +3429,21 @@
 				6F54896A283B89A8001290E7 /* FLEX in Frameworks */,
 				6F3AED4F2614C5D7007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AB2836D0040072BA0B /* Introspect in Frameworks */,
+				6FD46CD125DAB7BA00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095C25221A1A00E621EF /* AirshipCore in Frameworks */,
 				6FD40A5E25221C3A00E621EF /* PaperOnboarding in Frameworks */,
 				084F0969254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545B92521C15E00F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF3262D99CB00F717D0 /* SRGLoggerSwift in Frameworks */,
-				04BF391228D3DD81002456E2 /* AppCenterCrashes in Frameworks */,
+				04D5478B27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6F2345D3283BAB5000A9089D /* FSCalendar in Frameworks */,
+				6FD46CD325DAB7BA00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C32521CFDC00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C232602C0EA00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439928338F3100F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546512521C35300F9F4FE /* Aiolos in Frameworks */,
 				6F3B563C283B9057009A2D7D /* ShowTime in Frameworks */,
 				6F2545B72521C15E00F9F4FE /* SRGLetterbox in Frameworks */,
-				04BF391428D3DD81002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392628D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				70D8747D1FCCB2C6B309BC0B /* libPods-Play SRG-iOS-Play RTS.a in Frameworks */,
 				6FEC8995261F16BA00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7A265CD6D300A4882B /* Collections in Frameworks */,
@@ -3461,21 +3460,21 @@
 				6F54896C283B89AE001290E7 /* FLEX in Frameworks */,
 				6F3AED512614C5E1007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AD2836D00B0072BA0B /* Introspect in Frameworks */,
+				6FD46CE925DAB7C300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4095E25221A2300E621EF /* AirshipCore in Frameworks */,
 				6FD40A7425221C4300E621EF /* PaperOnboarding in Frameworks */,
 				084F096A254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545BD2521C16800F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAF1262D99BF00F717D0 /* SRGLoggerSwift in Frameworks */,
-				04BF391628D3DD88002456E2 /* AppCenterCrashes in Frameworks */,
+				04D5478D27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6F2345D5283BAB5600A9089D /* FSCalendar in Frameworks */,
+				6FD46CEB25DAB7C300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C52521CFEA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C252602C0F800530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439B28338F3700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546532521C35A00F9F4FE /* Aiolos in Frameworks */,
 				6F3B563E283B905C009A2D7D /* ShowTime in Frameworks */,
 				6F2545BB2521C16800F9F4FE /* SRGLetterbox in Frameworks */,
-				04BF391828D3DD88002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392828D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				2B917038BA0F995D9AC8DC22 /* libPods-Play SRG-iOS-Play RSI.a in Frameworks */,
 				6FEC8997261F16C100FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7C265CD6DB00A4882B /* Collections in Frameworks */,
@@ -3492,21 +3491,21 @@
 				6F54896E283B89B3001290E7 /* FLEX in Frameworks */,
 				6F3AED6C2614C5E9007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269AF2836D0100072BA0B /* Introspect in Frameworks */,
+				6FD46D0125DAB80300874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096025221A2B00E621EF /* AirshipCore in Frameworks */,
 				6FD40A7625221C4900E621EF /* PaperOnboarding in Frameworks */,
 				084F096B254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C12521C17000F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAEF262D99B400F717D0 /* SRGLoggerSwift in Frameworks */,
-				04BF391A28D3DD8F002456E2 /* AppCenterCrashes in Frameworks */,
+				04D5478F27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6F2345D7283BAB5B00A9089D /* FSCalendar in Frameworks */,
+				6FD46D0325DAB80300874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C72521CFF000F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C272602C10300530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439D28338F3C00F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546552521C36100F9F4FE /* Aiolos in Frameworks */,
 				6F3B5640283B9061009A2D7D /* ShowTime in Frameworks */,
 				6F2545BF2521C17000F9F4FE /* SRGLetterbox in Frameworks */,
-				04BF391C28D3DD8F002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392A28D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				D8A1811ABB77991A9249F28D /* libPods-Play SRG-iOS-Play RTR.a in Frameworks */,
 				6FEC8999261F16C800FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE7E265CD6E600A4882B /* Collections in Frameworks */,
@@ -3523,21 +3522,21 @@
 				6F548970283B89B8001290E7 /* FLEX in Frameworks */,
 				6F3AED6E2614C5F0007D591F /* SRGAppearanceSwift in Frameworks */,
 				6F7269B12836D0160072BA0B /* Introspect in Frameworks */,
+				6FD46D1925DAB80C00874EAF /* AppCenterCrashes in Frameworks */,
 				6FD4096225221A3500E621EF /* AirshipCore in Frameworks */,
 				6FD40A8C25221C4F00E621EF /* PaperOnboarding in Frameworks */,
 				084F096C254861A0009DEDD2 /* SwiftMessages in Frameworks */,
 				6F2545C52521C17700F9F4FE /* SRGUserData in Frameworks */,
 				08F5DAED262D99A900F717D0 /* SRGLoggerSwift in Frameworks */,
-				04BF391E28D3DD97002456E2 /* AppCenterCrashes in Frameworks */,
+				04D5479127C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6F2345D9283BAB6000A9089D /* FSCalendar in Frameworks */,
+				6FD46D1B25DAB80C00874EAF /* AppCenterDistribute in Frameworks */,
 				6F2546C92521CFFA00F9F4FE /* SRGAnalyticsIdentity in Frameworks */,
 				081A8C292602C10E00530FFF /* SRGDataProviderCombine in Frameworks */,
 				6F5D439F28338F4700F56A58 /* SRGAnalyticsSwiftUI in Frameworks */,
 				6F2546572521C36E00F9F4FE /* Aiolos in Frameworks */,
 				6F3B5642283B9067009A2D7D /* ShowTime in Frameworks */,
 				6F2545C32521C17700F9F4FE /* SRGLetterbox in Frameworks */,
-				04BF392028D3DD97002456E2 /* AppCenterDistribute in Frameworks */,
-				04BF392C28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth in Frameworks */,
 				6163CAAB64C899DF024B433E /* libPods-Play SRG-iOS-Play SWI.a in Frameworks */,
 				6FEC899B261F16CF00FF9762 /* DZNEmptyDataSet in Frameworks */,
 				6FEEBE80265CD70000A4882B /* Collections in Frameworks */,
@@ -3631,7 +3630,6 @@
 				8C3643978953564D3546A15C /* libPods-Play SRG-tvOS-Play SRF TV.a in Frameworks */,
 				6F3AED892614C5FA007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FA6C9122812D85D007C3406 /* NukeUI in Frameworks */,
-				04BF390628D3DD53002456E2 /* AppCenterCrashes in Frameworks */,
 				08013F4125DC50D80099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A48256C58A70042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC20266AB854009F74C6 /* Nuke in Frameworks */,
@@ -3639,6 +3637,7 @@
 				08EA3E98259D2C0E008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				0447E0A82861C70B001B7285 /* Introspect in Frameworks */,
 				6FEEBE82265CD70900A4882B /* Collections in Frameworks */,
+				6F2DBB9825DD26D9007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C7225DAB66000874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3655,7 +3654,6 @@
 				2F014EC1298A005CED1AB5D8 /* libPods-Play SRG-tvOS-Play RTS TV.a in Frameworks */,
 				6F3AEDA42614C601007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FA6C9142812D861007C3406 /* NukeUI in Frameworks */,
-				04BF390428D3DABA002456E2 /* AppCenterCrashes in Frameworks */,
 				08013F4225DC50D90099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A5E256C58B20042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC22266AB85B009F74C6 /* Nuke in Frameworks */,
@@ -3663,6 +3661,7 @@
 				08EA3E9A259D2C15008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				0447E0AA2861C71A001B7285 /* Introspect in Frameworks */,
 				6FEEBE84265CD71000A4882B /* Collections in Frameworks */,
+				6F2DBBAE25DD26EB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8825DAB66600874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3679,7 +3678,6 @@
 				FC46A119EB419CEE1F60BD49 /* libPods-Play SRG-tvOS-Play RSI TV.a in Frameworks */,
 				6F3AEDA62614C607007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FA6C9162812D866007C3406 /* NukeUI in Frameworks */,
-				04BF390828D3DD5B002456E2 /* AppCenterCrashes in Frameworks */,
 				08013F4325DC50DA0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A74256C58BB0042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC24266AB862009F74C6 /* Nuke in Frameworks */,
@@ -3687,6 +3685,7 @@
 				08EA3E9C259D2C1C008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				0447E0AC2861C726001B7285 /* Introspect in Frameworks */,
 				6FEEBE86265CD71700A4882B /* Collections in Frameworks */,
+				6F2DBBB025DD26F4007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46C8A25DAB66D00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3703,7 +3702,6 @@
 				0B2164E33BB0632C4F3DADED /* libPods-Play SRG-tvOS-Play RTR TV.a in Frameworks */,
 				6F3AEDA82614C60C007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FA6C9182812D86C007C3406 /* NukeUI in Frameworks */,
-				04BF390A28D3DD63002456E2 /* AppCenterCrashes in Frameworks */,
 				08013EB425DC28F60099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A76256C58C40042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC26266AB867009F74C6 /* Nuke in Frameworks */,
@@ -3711,6 +3709,7 @@
 				08EA3E9E259D2C25008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				0447E0AE2861C72D001B7285 /* Introspect in Frameworks */,
 				6FEEBE88265CD71E00A4882B /* Collections in Frameworks */,
+				6F2DBBB225DD26FB007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA025DAB67400874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3727,7 +3726,6 @@
 				4ADF71B3CD93059BC9C13BFE /* libPods-Play SRG-tvOS-Play SWI TV.a in Frameworks */,
 				6F3AEDC32614C613007D591F /* SRGAppearanceSwift in Frameworks */,
 				6FA6C91A2812D871007C3406 /* NukeUI in Frameworks */,
-				04BF390C28D3DD6B002456E2 /* AppCenterCrashes in Frameworks */,
 				08013F4425DC50DB0099A6E8 /* TVServices.framework in Frameworks */,
 				6FF12A8C256C58CC0042F446 /* SRGLoggerSwift in Frameworks */,
 				6F17DC28266AB86D009F74C6 /* Nuke in Frameworks */,
@@ -3735,6 +3733,7 @@
 				08EA3EA0259D2C2B008D412F /* SRGAnalyticsIdentity in Frameworks */,
 				0447E0B02861C73B001B7285 /* Introspect in Frameworks */,
 				6FEEBE8A265CD72400A4882B /* Collections in Frameworks */,
+				6F2DBBB425DD2703007DA242 /* AppCenterCrashes in Frameworks */,
 				6FD46CA225DAB67A00874EAF /* FirebaseRemoteConfig in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3787,14 +3786,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		04BF392128D3E2F2002456E2 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				04BF392228D3E2F2002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		0806E7B41D50D8DD002ED406 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -4287,7 +4278,6 @@
 		08C68D461D38D49600BB8AAA = {
 			isa = PBXGroup;
 			children = (
-				04BF392128D3E2F2002456E2 /* Packages */,
 				6F7C089426CE4E2A00166CE7 /* Podfile */,
 				6FAAF77620CABA3A00BB58A3 /* Common */,
 				6FAAF77520CAB6ED00BB58A3 /* Application */,
@@ -5317,21 +5307,21 @@
 				6FD40A4725221C2D00E621EF /* PaperOnboarding */,
 				081454BA2546CDD500BB7CA6 /* SwiftMessages */,
 				6F517A0F25DAB56600CE548B /* FirebaseRemoteConfig */,
+				6FD46CB825DAB76D00874EAF /* AppCenterCrashes */,
+				6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */,
 				081A8BD62602B69600530FFF /* SRGDataProviderCombine */,
 				6F3AED332614C5B6007D591F /* SRGAppearanceSwift */,
 				6FEC8979261F165600FF9762 /* DZNEmptyDataSet */,
 				08F5DAF4262D99D400F717D0 /* SRGLoggerSwift */,
 				6FEEBE77265CD6A700A4882B /* Collections */,
 				6F17DC15266AB81C009F74C6 /* Nuke */,
+				04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9072812D837007C3406 /* NukeUI */,
 				6F5D439628338F2900F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269A82836CFE90072BA0B /* Introspect */,
 				6F548967283B8994001290E7 /* FLEX */,
 				6F3B5639283B903C009A2D7D /* ShowTime */,
 				6F2345D0283BAB3600A9089D /* FSCalendar */,
-				04BF390D28D3DD74002456E2 /* AppCenterCrashes */,
-				04BF390F28D3DD74002456E2 /* AppCenterDistribute */,
-				04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play SRF";
 			productReference = 08C68D891D38D6F400BB8AAA /* Play SRF.app */;
@@ -5371,21 +5361,21 @@
 				6FD40A5D25221C3A00E621EF /* PaperOnboarding */,
 				081455132546CE4300BB7CA6 /* SwiftMessages */,
 				6FD46C2D25DAB63D00874EAF /* FirebaseRemoteConfig */,
+				6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */,
+				6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */,
 				081A8C222602C0EA00530FFF /* SRGDataProviderCombine */,
 				6F3AED4E2614C5D7007D591F /* SRGAppearanceSwift */,
 				6FEC8994261F16BA00FF9762 /* DZNEmptyDataSet */,
 				08F5DAF2262D99CB00F717D0 /* SRGLoggerSwift */,
 				6FEEBE79265CD6D300A4882B /* Collections */,
 				6F17DC17266AB837009F74C6 /* Nuke */,
+				04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C9092812D846007C3406 /* NukeUI */,
 				6F5D439828338F3100F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AA2836D0040072BA0B /* Introspect */,
 				6F548969283B89A8001290E7 /* FLEX */,
 				6F3B563B283B9057009A2D7D /* ShowTime */,
 				6F2345D2283BAB5000A9089D /* FSCalendar */,
-				04BF391128D3DD81002456E2 /* AppCenterCrashes */,
-				04BF391328D3DD81002456E2 /* AppCenterDistribute */,
-				04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RTS";
 			productReference = 08C68DC01D38D70D00BB8AAA /* Play RTS.app */;
@@ -5425,21 +5415,21 @@
 				6FD40A7325221C4300E621EF /* PaperOnboarding */,
 				081455152546CE4F00BB7CA6 /* SwiftMessages */,
 				6FD46C4325DAB64700874EAF /* FirebaseRemoteConfig */,
+				6FD46CE825DAB7C300874EAF /* AppCenterCrashes */,
+				6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */,
 				081A8C242602C0F800530FFF /* SRGDataProviderCombine */,
 				6F3AED502614C5E1007D591F /* SRGAppearanceSwift */,
 				6FEC8996261F16C100FF9762 /* DZNEmptyDataSet */,
 				08F5DAF0262D99BF00F717D0 /* SRGLoggerSwift */,
 				6FEEBE7B265CD6DB00A4882B /* Collections */,
 				6F17DC19266AB83E009F74C6 /* Nuke */,
+				04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90B2812D84B007C3406 /* NukeUI */,
 				6F5D439A28338F3700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AC2836D00B0072BA0B /* Introspect */,
 				6F54896B283B89AE001290E7 /* FLEX */,
 				6F3B563D283B905C009A2D7D /* ShowTime */,
 				6F2345D4283BAB5600A9089D /* FSCalendar */,
-				04BF391528D3DD88002456E2 /* AppCenterCrashes */,
-				04BF391728D3DD88002456E2 /* AppCenterDistribute */,
-				04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RSI";
 			productReference = 08C68DF71D38D72000BB8AAA /* Play RSI.app */;
@@ -5479,21 +5469,21 @@
 				6FD40A7525221C4900E621EF /* PaperOnboarding */,
 				081455172546CE5700BB7CA6 /* SwiftMessages */,
 				6FD46C4525DAB65100874EAF /* FirebaseRemoteConfig */,
+				6FD46D0025DAB80300874EAF /* AppCenterCrashes */,
+				6FD46D0225DAB80300874EAF /* AppCenterDistribute */,
 				081A8C262602C10300530FFF /* SRGDataProviderCombine */,
 				6F3AED6B2614C5E9007D591F /* SRGAppearanceSwift */,
 				6FEC8998261F16C800FF9762 /* DZNEmptyDataSet */,
 				08F5DAEE262D99B400F717D0 /* SRGLoggerSwift */,
 				6FEEBE7D265CD6E600A4882B /* Collections */,
 				6F17DC1B266AB846009F74C6 /* Nuke */,
+				04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90D2812D851007C3406 /* NukeUI */,
 				6F5D439C28338F3C00F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269AE2836D0100072BA0B /* Introspect */,
 				6F54896D283B89B3001290E7 /* FLEX */,
 				6F3B563F283B9061009A2D7D /* ShowTime */,
 				6F2345D6283BAB5B00A9089D /* FSCalendar */,
-				04BF391928D3DD8F002456E2 /* AppCenterCrashes */,
-				04BF391B28D3DD8F002456E2 /* AppCenterDistribute */,
-				04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play RTR";
 			productReference = 08C68E2E1D38D73000BB8AAA /* Play RTR.app */;
@@ -5533,21 +5523,21 @@
 				6FD40A8B25221C4F00E621EF /* PaperOnboarding */,
 				081455192546CE5F00BB7CA6 /* SwiftMessages */,
 				6FD46C4725DAB65900874EAF /* FirebaseRemoteConfig */,
+				6FD46D1825DAB80C00874EAF /* AppCenterCrashes */,
+				6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */,
 				081A8C282602C10E00530FFF /* SRGDataProviderCombine */,
 				6F3AED6D2614C5F0007D591F /* SRGAppearanceSwift */,
 				6FEC899A261F16CF00FF9762 /* DZNEmptyDataSet */,
 				08F5DAEC262D99A900F717D0 /* SRGLoggerSwift */,
 				6FEEBE7F265CD70000A4882B /* Collections */,
 				6F17DC1D266AB84E009F74C6 /* Nuke */,
+				04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */,
 				6FA6C90F2812D856007C3406 /* NukeUI */,
 				6F5D439E28338F4700F56A58 /* SRGAnalyticsSwiftUI */,
 				6F7269B02836D0160072BA0B /* Introspect */,
 				6F54896F283B89B8001290E7 /* FLEX */,
 				6F3B5641283B9067009A2D7D /* ShowTime */,
 				6F2345D8283BAB6000A9089D /* FSCalendar */,
-				04BF391D28D3DD97002456E2 /* AppCenterCrashes */,
-				04BF391F28D3DD97002456E2 /* AppCenterDistribute */,
-				04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */,
 			);
 			productName = "Play SWI";
 			productReference = 08C68E651D38D73C00BB8AAA /* Play SWI.app */;
@@ -5769,13 +5759,13 @@
 				08EA3E77259D2AD6008D412F /* SRGIdentity */,
 				08EA3E97259D2C0E008D412F /* SRGAnalyticsIdentity */,
 				6FD46C7125DAB66000874EAF /* FirebaseRemoteConfig */,
+				6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */,
 				6F3AED882614C5FA007D591F /* SRGAppearanceSwift */,
 				6FEC899C261F16D500FF9762 /* DZNEmptyDataSet */,
 				6FEEBE81265CD70900A4882B /* Collections */,
 				6F17DC1F266AB854009F74C6 /* Nuke */,
 				6FA6C9112812D85D007C3406 /* NukeUI */,
 				0447E0A72861C70B001B7285 /* Introspect */,
-				04BF390528D3DD53002456E2 /* AppCenterCrashes */,
 			);
 			productName = "Play SRF TV";
 			productReference = 6F331CE424D06B8200C096AB /* Play SRF.app */;
@@ -5812,13 +5802,13 @@
 				08EA3E81259D2B1B008D412F /* SRGIdentity */,
 				08EA3E99259D2C15008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8725DAB66600874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */,
 				6F3AEDA32614C601007D591F /* SRGAppearanceSwift */,
 				6FEC899E261F16DC00FF9762 /* DZNEmptyDataSet */,
 				6FEEBE83265CD71000A4882B /* Collections */,
 				6F17DC21266AB85B009F74C6 /* Nuke */,
 				6FA6C9132812D861007C3406 /* NukeUI */,
 				0447E0A92861C71A001B7285 /* Introspect */,
-				04BF390328D3DABA002456E2 /* AppCenterCrashes */,
 			);
 			productName = "Play RTS TV";
 			productReference = 6F331CFC24D06BA200C096AB /* Play RTS.app */;
@@ -5855,13 +5845,13 @@
 				08EA3E7B259D2AE8008D412F /* SRGIdentity */,
 				08EA3E9B259D2C1C008D412F /* SRGAnalyticsIdentity */,
 				6FD46C8925DAB66D00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */,
 				6F3AEDA52614C607007D591F /* SRGAppearanceSwift */,
 				6FEC89A0261F16E200FF9762 /* DZNEmptyDataSet */,
 				6FEEBE85265CD71700A4882B /* Collections */,
 				6F17DC23266AB862009F74C6 /* Nuke */,
 				6FA6C9152812D866007C3406 /* NukeUI */,
 				0447E0AB2861C726001B7285 /* Introspect */,
-				04BF390728D3DD5B002456E2 /* AppCenterCrashes */,
 			);
 			productName = "Play RSI TV";
 			productReference = 6F331D1424D06BB800C096AB /* Play RSI.app */;
@@ -5898,13 +5888,13 @@
 				08EA3E7D259D2AEF008D412F /* SRGIdentity */,
 				08EA3E9D259D2C25008D412F /* SRGAnalyticsIdentity */,
 				6FD46C9F25DAB67400874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */,
 				6F3AEDA72614C60C007D591F /* SRGAppearanceSwift */,
 				6FEC89A2261F16E800FF9762 /* DZNEmptyDataSet */,
 				6FEEBE87265CD71E00A4882B /* Collections */,
 				6F17DC25266AB867009F74C6 /* Nuke */,
 				6FA6C9172812D86C007C3406 /* NukeUI */,
 				0447E0AD2861C72D001B7285 /* Introspect */,
-				04BF390928D3DD63002456E2 /* AppCenterCrashes */,
 			);
 			productName = "Play RTR TV";
 			productReference = 6F331D2C24D06BC600C096AB /* Play RTR.app */;
@@ -5941,13 +5931,13 @@
 				08EA3E7F259D2AF7008D412F /* SRGIdentity */,
 				08EA3E9F259D2C2B008D412F /* SRGAnalyticsIdentity */,
 				6FD46CA125DAB67A00874EAF /* FirebaseRemoteConfig */,
+				6F2DBBB325DD2703007DA242 /* AppCenterCrashes */,
 				6F3AEDC22614C613007D591F /* SRGAppearanceSwift */,
 				6FEC89A4261F16EE00FF9762 /* DZNEmptyDataSet */,
 				6FEEBE89265CD72400A4882B /* Collections */,
 				6F17DC27266AB86D009F74C6 /* Nuke */,
 				6FA6C9192812D871007C3406 /* NukeUI */,
 				0447E0AF2861C73B001B7285 /* Introspect */,
-				04BF390B28D3DD6B002456E2 /* AppCenterCrashes */,
 			);
 			productName = "Play SWI TV";
 			productReference = 6F331D4424D06C2600C096AB /* Play SWI.app */;
@@ -6271,16 +6261,17 @@
 				6FF12A46256C58A60042F446 /* XCRemoteSwiftPackageReference "srglogger-apple" */,
 				08EA3E5D259D2434008D412F /* XCRemoteSwiftPackageReference "srgidentity-apple" */,
 				6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 				6F3AED322614C5B6007D591F /* XCRemoteSwiftPackageReference "srgappearance-apple" */,
 				6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */,
 				6FEEBE76265CD6A600A4882B /* XCRemoteSwiftPackageReference "swift-collections" */,
 				6F17DC14266AB81C009F74C6 /* XCRemoteSwiftPackageReference "Nuke" */,
+				04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */,
 				6FA6C9062812D837007C3406 /* XCRemoteSwiftPackageReference "NukeUI" */,
 				6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */,
 				6F548966283B8994001290E7 /* XCRemoteSwiftPackageReference "FLEX" */,
 				6F3B5638283B903C009A2D7D /* XCRemoteSwiftPackageReference "ShowTime" */,
 				6F2345CF283BAB3600A9089D /* XCRemoteSwiftPackageReference "FSCalendar" */,
-				04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */,
 			);
 			productRefGroup = 08C68D501D38D49600BB8AAA /* Products */;
 			projectDirPath = "";
@@ -19009,12 +19000,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+		04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SRGSSR/appcenter-sdk-apple.git";
+			repositoryURL = "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth";
 			requirement = {
-				branch = develop;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = "4.7.1-beta.1";
 			};
 		};
 		081454B92546CDD500BB7CA6 /* XCRemoteSwiftPackageReference "SwiftMessages" */ = {
@@ -19177,6 +19168,14 @@
 				minimumVersion = 6.1.5;
 			};
 		};
+		6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/microsoft/appcenter-sdk-apple.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		6FEC8978261F165500FF9762 /* XCRemoteSwiftPackageReference "DZNEmptyDataSet" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/dzenbot/DZNEmptyDataSet.git";
@@ -19237,100 +19236,30 @@
 			package = 6F7269A72836CFE90072BA0B /* XCRemoteSwiftPackageReference "SwiftUI-Introspect" */;
 			productName = Introspect;
 		};
-		04BF390328D3DABA002456E2 /* AppCenterCrashes */ = {
+		04D5478827C07A03003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF390528D3DD53002456E2 /* AppCenterCrashes */ = {
+		04D5478A27C07A11003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF390728D3DD5B002456E2 /* AppCenterCrashes */ = {
+		04D5478C27C07A19003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF390928D3DD63002456E2 /* AppCenterCrashes */ = {
+		04D5478E27C07A22003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
-		04BF390B28D3DD6B002456E2 /* AppCenterCrashes */ = {
+		04D5479027C07A2B003D1BC2 /* GoogleCastSDK-ios-no-bluetooth */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF390D28D3DD74002456E2 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF390F28D3DD74002456E2 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		04BF391128D3DD81002456E2 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF391328D3DD81002456E2 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		04BF391528D3DD88002456E2 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF391728D3DD88002456E2 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		04BF391928D3DD8F002456E2 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF391B28D3DD8F002456E2 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		04BF391D28D3DD97002456E2 /* AppCenterCrashes */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterCrashes;
-		};
-		04BF391F28D3DD97002456E2 /* AppCenterDistribute */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 04BF390228D3DABA002456E2 /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
-			productName = AppCenterDistribute;
-		};
-		04BF392328D3E316002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
-		};
-		04BF392528D3E31F002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
-		};
-		04BF392728D3E325002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
-		};
-		04BF392928D3E32B002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
-		};
-		04BF392B28D3E332002456E2 /* PlaySRG-GoogleCastSDK-ios-no-bluetooth */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "PlaySRG-GoogleCastSDK-ios-no-bluetooth";
+			package = 04D5478727C07905003D1BC2 /* XCRemoteSwiftPackageReference "GoogleCastSDK-ios-no-bluetooth" */;
+			productName = "GoogleCastSDK-ios-no-bluetooth";
 		};
 		081454BA2546CDD500BB7CA6 /* SwiftMessages */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -19681,6 +19610,31 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F2546AB2521CFA100F9F4FE /* XCRemoteSwiftPackageReference "srganalytics-apple" */;
 			productName = SRGAnalyticsIdentity;
+		};
+		6F2DBB9725DD26D9007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAD25DD26EB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBAF25DD26F4007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB125DD26FB007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6F2DBBB325DD2703007DA242 /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
 		};
 		6F3AED332614C5B6007D591F /* SRGAppearanceSwift */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -20076,6 +20030,56 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 6F517A0E25DAB56600CE548B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseRemoteConfig;
+		};
+		6FD46CB825DAB76D00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CBA25DAB76D00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CD025DAB7BA00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CD225DAB7BA00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46CE825DAB7C300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46CEA25DAB7C300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D0025DAB80300874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D0225DAB80300874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
+		};
+		6FD46D1825DAB80C00874EAF /* AppCenterCrashes */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterCrashes;
+		};
+		6FD46D1A25DAB80C00874EAF /* AppCenterDistribute */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6FD46CB725DAB76C00874EAF /* XCRemoteSwiftPackageReference "appcenter-sdk-apple" */;
+			productName = AppCenterDistribute;
 		};
 		6FE553C927200F8B00F506B9 /* SRGDataProviderCombine */ = {
 			isa = XCSwiftPackageProductDependency;

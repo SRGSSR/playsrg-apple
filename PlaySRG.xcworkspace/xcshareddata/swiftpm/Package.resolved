@@ -1,439 +1,437 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "abseil",
-        "repositoryURL": "https://github.com/firebase/abseil-cpp-SwiftPM.git",
-        "state": {
-          "branch": null,
-          "revision": "583de9bd60f66b40e78d08599cc92036c2e7e4e1",
-          "version": "0.20220203.2"
-        }
-      },
-      {
-        "package": "Aiolos",
-        "repositoryURL": "https://github.com/IdeasOnCanvas/Aiolos.git",
-        "state": {
-          "branch": null,
-          "revision": "ff71c20fb9730452be9b406513375f0c9a88254f",
-          "version": "1.9.7"
-        }
-      },
-      {
-        "package": "AppCenter",
-        "repositoryURL": "https://github.com/SRGSSR/appcenter-sdk-apple.git",
-        "state": {
-          "branch": "develop",
-          "revision": "f161dee0a70b4aa8edf9b8adeec21d2f957423bd",
-          "version": null
-        }
-      },
-      {
-        "package": "BoringSSL-GRPC",
-        "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
-        "state": {
-          "branch": null,
-          "revision": "dd3eda2b05a3f459fc3073695ad1b28659066eab",
-          "version": "0.9.1"
-        }
-      },
-      {
-        "package": "ComScore",
-        "repositoryURL": "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
-        "state": {
-          "branch": null,
-          "revision": "7e3c521ad689b0e2bbf5cfb62e19c9e1619feae2",
-          "version": "6.10.0"
-        }
-      },
-      {
-        "package": "DZNEmptyDataSet",
-        "repositoryURL": "https://github.com/dzenbot/DZNEmptyDataSet.git",
-        "state": {
-          "branch": "master",
-          "revision": "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179",
-          "version": null
-        }
-      },
-      {
-        "package": "Firebase",
-        "repositoryURL": "https://github.com/firebase/firebase-ios-sdk.git",
-        "state": {
-          "branch": null,
-          "revision": "7e80c25b51c2ffa238879b07fbfc5baa54bb3050",
-          "version": "9.6.0"
-        }
-      },
-      {
-        "package": "FLEX",
-        "repositoryURL": "https://github.com/FLEXTool/FLEX.git",
-        "state": {
-          "branch": "master",
-          "revision": "fbda722f112162fb14549c6cd92d6c685a4a5ad6",
-          "version": null
-        }
-      },
-      {
-        "package": "FSCalendar",
-        "repositoryURL": "https://github.com/WenchaoD/FSCalendar.git",
-        "state": {
-          "branch": null,
-          "revision": "0fbdec5172fccb90f707472eeaea4ffe095278f6",
-          "version": "2.8.4"
-        }
-      },
-      {
-        "package": "FXReachability",
-        "repositoryURL": "https://github.com/SRGSSR/FXReachability.git",
-        "state": {
-          "branch": null,
-          "revision": "b8d60cfbe6eddf1a622476548465efed88afb564",
-          "version": "1.3.2-srg6"
-        }
-      },
-      {
-        "package": "Gifu",
-        "repositoryURL": "https://github.com/kaishin/Gifu",
-        "state": {
-          "branch": null,
-          "revision": "51f2eab32903e336f590c013267cfa4d7f8b06c4",
-          "version": "3.3.1"
-        }
-      },
-      {
-        "package": "GoogleAppMeasurement",
-        "repositoryURL": "https://github.com/google/GoogleAppMeasurement.git",
-        "state": {
-          "branch": null,
-          "revision": "c1cfde8067668027b23a42c29d11c246152fe046",
-          "version": "9.6.0"
-        }
-      },
-      {
-        "package": "GoogleCastSDK-ios-no-bluetooth",
-        "repositoryURL": "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth",
-        "state": {
-          "branch": null,
-          "revision": "fb1ae18c88ce1cd1f12e7c6ae12c0b7cdc011c50",
-          "version": "4.7.1-beta.1"
-        }
-      },
-      {
-        "package": "GoogleDataTransport",
-        "repositoryURL": "https://github.com/google/GoogleDataTransport.git",
-        "state": {
-          "branch": null,
-          "revision": "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
-          "version": "9.2.0"
-        }
-      },
-      {
-        "package": "GoogleUtilities",
-        "repositoryURL": "https://github.com/google/GoogleUtilities.git",
-        "state": {
-          "branch": null,
-          "revision": "68ea347bdb1a69e2d2ae2e25cd085b6ef92f64cb",
-          "version": "7.9.0"
-        }
-      },
-      {
-        "package": "gRPC",
-        "repositoryURL": "https://github.com/grpc/grpc-ios.git",
-        "state": {
-          "branch": null,
-          "revision": "8440b914756e0d26d4f4d054a1c1581daedfc5b6",
-          "version": "1.44.3-grpc"
-        }
-      },
-      {
-        "package": "GTMSessionFetcher",
-        "repositoryURL": "https://github.com/google/gtm-session-fetcher.git",
-        "state": {
-          "branch": null,
-          "revision": "d4289da23e978f37c344ea6a386e5546e2466294",
-          "version": "2.1.0"
-        }
-      },
-      {
-        "package": "Airship",
-        "repositoryURL": "https://github.com/urbanairship/ios-library.git",
-        "state": {
-          "branch": null,
-          "revision": "6b4978bc562d5262ef7191a975ce074270fda4d6",
-          "version": "16.9.4"
-        }
-      },
-      {
-        "package": "leveldb",
-        "repositoryURL": "https://github.com/firebase/leveldb.git",
-        "state": {
-          "branch": null,
-          "revision": "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
-          "version": "1.22.2"
-        }
-      },
-      {
-        "package": "libextobjc",
-        "repositoryURL": "https://github.com/SRGSSR/libextobjc.git",
-        "state": {
-          "branch": null,
-          "revision": "9c9a7327410fe3f7cdb695965ced43b9a7766ee0",
-          "version": "0.6.0-srg4"
-        }
-      },
-      {
-        "package": "MAKVONotificationCenter",
-        "repositoryURL": "https://github.com/SRGSSR/MAKVONotificationCenter.git",
-        "state": {
-          "branch": null,
-          "revision": "8bde3cdc872085bd31f4cfe546bdf8e6932a0806",
-          "version": "1.0.0-srg6"
-        }
-      },
-      {
-        "package": "Mantle",
-        "repositoryURL": "https://github.com/Mantle/Mantle.git",
-        "state": {
-          "branch": null,
-          "revision": "16f72bfe72a2ab29654ba894da1c32b17524e1a6",
-          "version": "2.2.0"
-        }
-      },
-      {
-        "package": "nanopb",
-        "repositoryURL": "https://github.com/firebase/nanopb.git",
-        "state": {
-          "branch": null,
-          "revision": "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
-          "version": "2.30909.0"
-        }
-      },
-      {
-        "package": "Nuke",
-        "repositoryURL": "https://github.com/kean/Nuke.git",
-        "state": {
-          "branch": null,
-          "revision": "a002b7fd786f2df2ed4333fe73a9727499fd9d97",
-          "version": "10.11.2"
-        }
-      },
-      {
-        "package": "NukeUI",
-        "repositoryURL": "https://github.com/kean/NukeUI.git",
-        "state": {
-          "branch": null,
-          "revision": "db55022a8e483774ebbf3568727071477546d9ea",
-          "version": "0.8.3"
-        }
-      },
-      {
-        "package": "PaperOnboarding",
-        "repositoryURL": "https://github.com/Ramotion/paper-onboarding.git",
-        "state": {
-          "branch": null,
-          "revision": "c36df080b1001c385cc14c85f3b1c5ea36531fd0",
-          "version": "6.1.5"
-        }
-      },
-      {
-        "package": "PLCrashReporter",
-        "repositoryURL": "https://github.com/microsoft/PLCrashReporter.git",
-        "state": {
-          "branch": null,
-          "revision": "81cdec2b3827feb03286cb297f4c501a8eb98df1",
-          "version": "1.10.2"
-        }
-      },
-      {
-        "package": "Promises",
-        "repositoryURL": "https://github.com/google/promises.git",
-        "state": {
-          "branch": null,
-          "revision": "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
-          "version": "2.1.1"
-        }
-      },
-      {
-        "package": "ShowTime",
-        "repositoryURL": "https://github.com/KaneCheshire/ShowTime.git",
-        "state": {
-          "branch": null,
-          "revision": "f4e976931fc5f9b7a7d011f40c62a250c4ff53ab",
-          "version": "2.5.3"
-        }
-      },
-      {
-        "package": "SRGAnalytics",
-        "repositoryURL": "https://github.com/SRGSSR/srganalytics-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "1ae66aa9dc392c5dbf2cd9dd7be72d277c73c685",
-          "version": "7.9.0"
-        }
-      },
-      {
-        "package": "SRGAppearance",
-        "repositoryURL": "https://github.com/SRGSSR/srgappearance-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "72d9475b46d97ecde0298b5bc80a654e8b424ebb",
-          "version": "5.2.0"
-        }
-      },
-      {
-        "package": "SRGContentProtection",
-        "repositoryURL": "https://github.com/SRGSSR/srgcontentprotection-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "69420d0f2a89ae88d392385422c24acd2e5f450c",
-          "version": "3.1.0"
-        }
-      },
-      {
-        "package": "SRGDataProvider",
-        "repositoryURL": "https://github.com/SRGSSR/srgdataprovider-apple.git",
-        "state": {
-          "branch": "develop",
-          "revision": "8580c922fdd1aa39c3fda8d011bd75c82bbb402b",
-          "version": null
-        }
-      },
-      {
-        "package": "SRGDiagnostics",
-        "repositoryURL": "https://github.com/SRGSSR/srgdiagnostics-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "c595e8f186eb41335f0ea48848543ab3804ea22e",
-          "version": "3.1.0"
-        }
-      },
-      {
-        "package": "SRGIdentity",
-        "repositoryURL": "https://github.com/SRGSSR/srgidentity-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "10368fd1679eeaffb05d84bcdc1002f3d66c2d12",
-          "version": "3.3.0"
-        }
-      },
-      {
-        "package": "SRGLetterbox",
-        "repositoryURL": "https://github.com/SRGSSR/srgletterbox-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "9f4c6dcee58f1de29759e0c0d512ecc83beeddbf",
-          "version": "8.3.1"
-        }
-      },
-      {
-        "package": "SRGLogger",
-        "repositoryURL": "https://github.com/SRGSSR/srglogger-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "dd98468422044b53e283d970809b8502e1ef5b8d",
-          "version": "3.1.0"
-        }
-      },
-      {
-        "package": "SRGMediaPlayer",
-        "repositoryURL": "https://github.com/SRGSSR/srgmediaplayer-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "0e5993756dc0fdfa892205fcf5bf3b9e62dd22ac",
-          "version": "7.1.0"
-        }
-      },
-      {
-        "package": "SRGNetwork",
-        "repositoryURL": "https://github.com/SRGSSR/srgnetwork-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "153a2544391c1aaccae2d38d8b113fd0a03421b8",
-          "version": "3.1.0"
-        }
-      },
-      {
-        "package": "SRGUserData",
-        "repositoryURL": "https://github.com/SRGSSR/srguserdata-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "9c5f317ca346af90749c295c62cadc35eade09c6",
-          "version": "3.3.0"
-        }
-      },
-      {
-        "package": "swift-collections",
-        "repositoryURL": "https://github.com/apple/swift-collections.git",
-        "state": {
-          "branch": null,
-          "revision": "f504716c27d2e5d4144fa4794b12129301d17729",
-          "version": "1.0.3"
-        }
-      },
-      {
-        "package": "SwiftProtobuf",
-        "repositoryURL": "https://github.com/apple/swift-protobuf.git",
-        "state": {
-          "branch": null,
-          "revision": "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
-          "version": "1.20.2"
-        }
-      },
-      {
-        "package": "SwiftMessages",
-        "repositoryURL": "https://github.com/SwiftKickMobile/SwiftMessages.git",
-        "state": {
-          "branch": null,
-          "revision": "b29dd21090b708aa0ae9ecbaf6e2d0487028dc3f",
-          "version": "9.0.6"
-        }
-      },
-      {
-        "package": "Introspect",
-        "repositoryURL": "https://github.com/siteline/SwiftUI-Introspect.git",
-        "state": {
-          "branch": null,
-          "revision": "f2616860a41f9d9932da412a8978fec79c06fe24",
-          "version": "0.1.4"
-        }
-      },
-      {
-        "package": "TCCore",
-        "repositoryURL": "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "eb686883e63af28174472a09eda97acf07179c88",
-          "version": "4.5.4-srg5"
-        }
-      },
-      {
-        "package": "TCSDK",
-        "repositoryURL": "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
-        "state": {
-          "branch": null,
-          "revision": "c4becb0b250258b78cb46225af5e269da834db5a",
-          "version": "4.4.1-srg5"
-        }
-      },
-      {
-        "package": "UICKeyChainStore",
-        "repositoryURL": "https://github.com/kishikawakatsumi/UICKeyChainStore.git",
-        "state": {
-          "branch": null,
-          "revision": "8220ac38124613fb709508426f75fbac6921e261",
-          "version": "2.2.1"
-        }
-      },
-      {
-        "package": "YYWebImage",
-        "repositoryURL": "https://github.com/SRGSSR/YYWebImage.git",
-        "state": {
-          "branch": null,
-          "revision": "f7408c97fd0e897e1bb8b3e8b01e0c8e9dc22123",
-          "version": "1.0.5-srg3"
-        }
+  "pins" : [
+    {
+      "identity" : "abseil-cpp-swiftpm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/abseil-cpp-SwiftPM.git",
+      "state" : {
+        "revision" : "583de9bd60f66b40e78d08599cc92036c2e7e4e1",
+        "version" : "0.20220203.2"
       }
-    ]
-  },
-  "version": 1
+    },
+    {
+      "identity" : "aiolos",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/IdeasOnCanvas/Aiolos.git",
+      "state" : {
+        "revision" : "ff71c20fb9730452be9b406513375f0c9a88254f",
+        "version" : "1.9.7"
+      }
+    },
+    {
+      "identity" : "appcenter-sdk-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/microsoft/appcenter-sdk-apple.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "88e65475ffd3a7cf2bbde07df9e62159a1fd60a8"
+      }
+    },
+    {
+      "identity" : "boringssl-swiftpm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
+      "state" : {
+        "revision" : "dd3eda2b05a3f459fc3073695ad1b28659066eab",
+        "version" : "0.9.1"
+      }
+    },
+    {
+      "identity" : "comscore-swift-package-manager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/comScore/Comscore-Swift-Package-Manager.git",
+      "state" : {
+        "revision" : "7e3c521ad689b0e2bbf5cfb62e19c9e1619feae2",
+        "version" : "6.10.0"
+      }
+    },
+    {
+      "identity" : "dznemptydataset",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dzenbot/DZNEmptyDataSet.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "9bffa69a83a9fa58a14b3cf43cb6dd8a63774179"
+      }
+    },
+    {
+      "identity" : "firebase-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/firebase-ios-sdk.git",
+      "state" : {
+        "revision" : "7e80c25b51c2ffa238879b07fbfc5baa54bb3050",
+        "version" : "9.6.0"
+      }
+    },
+    {
+      "identity" : "flex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/FLEXTool/FLEX.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "fbda722f112162fb14549c6cd92d6c685a4a5ad6"
+      }
+    },
+    {
+      "identity" : "fscalendar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/WenchaoD/FSCalendar.git",
+      "state" : {
+        "revision" : "0fbdec5172fccb90f707472eeaea4ffe095278f6",
+        "version" : "2.8.4"
+      }
+    },
+    {
+      "identity" : "fxreachability",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/FXReachability.git",
+      "state" : {
+        "revision" : "b8d60cfbe6eddf1a622476548465efed88afb564",
+        "version" : "1.3.2-srg6"
+      }
+    },
+    {
+      "identity" : "gifu",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kaishin/Gifu",
+      "state" : {
+        "revision" : "51f2eab32903e336f590c013267cfa4d7f8b06c4",
+        "version" : "3.3.1"
+      }
+    },
+    {
+      "identity" : "googleappmeasurement",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleAppMeasurement.git",
+      "state" : {
+        "revision" : "c1cfde8067668027b23a42c29d11c246152fe046",
+        "version" : "9.6.0"
+      }
+    },
+    {
+      "identity" : "googlecastsdk-ios-no-bluetooth",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/GoogleCastSDK-ios-no-bluetooth.git",
+      "state" : {
+        "revision" : "fb1ae18c88ce1cd1f12e7c6ae12c0b7cdc011c50",
+        "version" : "4.7.1-beta.1"
+      }
+    },
+    {
+      "identity" : "googledatatransport",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleDataTransport.git",
+      "state" : {
+        "revision" : "5056b15c5acbb90cd214fe4d6138bdf5a740e5a8",
+        "version" : "9.2.0"
+      }
+    },
+    {
+      "identity" : "googleutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/GoogleUtilities.git",
+      "state" : {
+        "revision" : "68ea347bdb1a69e2d2ae2e25cd085b6ef92f64cb",
+        "version" : "7.9.0"
+      }
+    },
+    {
+      "identity" : "grpc-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/grpc/grpc-ios.git",
+      "state" : {
+        "revision" : "8440b914756e0d26d4f4d054a1c1581daedfc5b6",
+        "version" : "1.44.3-grpc"
+      }
+    },
+    {
+      "identity" : "gtm-session-fetcher",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/gtm-session-fetcher.git",
+      "state" : {
+        "revision" : "d4289da23e978f37c344ea6a386e5546e2466294",
+        "version" : "2.1.0"
+      }
+    },
+    {
+      "identity" : "ios-library",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/urbanairship/ios-library.git",
+      "state" : {
+        "revision" : "6b4978bc562d5262ef7191a975ce074270fda4d6",
+        "version" : "16.9.4"
+      }
+    },
+    {
+      "identity" : "leveldb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/leveldb.git",
+      "state" : {
+        "revision" : "0706abcc6b0bd9cedfbb015ba840e4a780b5159b",
+        "version" : "1.22.2"
+      }
+    },
+    {
+      "identity" : "libextobjc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/libextobjc.git",
+      "state" : {
+        "revision" : "9c9a7327410fe3f7cdb695965ced43b9a7766ee0",
+        "version" : "0.6.0-srg4"
+      }
+    },
+    {
+      "identity" : "makvonotificationcenter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/MAKVONotificationCenter.git",
+      "state" : {
+        "revision" : "8bde3cdc872085bd31f4cfe546bdf8e6932a0806",
+        "version" : "1.0.0-srg6"
+      }
+    },
+    {
+      "identity" : "mantle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mantle/Mantle.git",
+      "state" : {
+        "revision" : "16f72bfe72a2ab29654ba894da1c32b17524e1a6",
+        "version" : "2.2.0"
+      }
+    },
+    {
+      "identity" : "nanopb",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/firebase/nanopb.git",
+      "state" : {
+        "revision" : "819d0a2173aff699fb8c364b6fb906f7cdb1a692",
+        "version" : "2.30909.0"
+      }
+    },
+    {
+      "identity" : "nuke",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/Nuke.git",
+      "state" : {
+        "revision" : "a002b7fd786f2df2ed4333fe73a9727499fd9d97",
+        "version" : "10.11.2"
+      }
+    },
+    {
+      "identity" : "nukeui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kean/NukeUI.git",
+      "state" : {
+        "revision" : "db55022a8e483774ebbf3568727071477546d9ea",
+        "version" : "0.8.3"
+      }
+    },
+    {
+      "identity" : "paper-onboarding",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Ramotion/paper-onboarding.git",
+      "state" : {
+        "revision" : "c36df080b1001c385cc14c85f3b1c5ea36531fd0",
+        "version" : "6.1.5"
+      }
+    },
+    {
+      "identity" : "plcrashreporter",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/microsoft/PLCrashReporter.git",
+      "state" : {
+        "revision" : "b1a342da19ed9b3af61ea2efa7656c2af30aeb7c",
+        "version" : "1.11.0"
+      }
+    },
+    {
+      "identity" : "promises",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/google/promises.git",
+      "state" : {
+        "revision" : "3e4e743631e86c8c70dbc6efdc7beaa6e90fd3bb",
+        "version" : "2.1.1"
+      }
+    },
+    {
+      "identity" : "showtime",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/KaneCheshire/ShowTime.git",
+      "state" : {
+        "revision" : "f4e976931fc5f9b7a7d011f40c62a250c4ff53ab",
+        "version" : "2.5.3"
+      }
+    },
+    {
+      "identity" : "srganalytics-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srganalytics-apple.git",
+      "state" : {
+        "revision" : "1ae66aa9dc392c5dbf2cd9dd7be72d277c73c685",
+        "version" : "7.9.0"
+      }
+    },
+    {
+      "identity" : "srgappearance-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgappearance-apple.git",
+      "state" : {
+        "revision" : "72d9475b46d97ecde0298b5bc80a654e8b424ebb",
+        "version" : "5.2.0"
+      }
+    },
+    {
+      "identity" : "srgcontentprotection-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgcontentprotection-apple.git",
+      "state" : {
+        "revision" : "69420d0f2a89ae88d392385422c24acd2e5f450c",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "srgdataprovider-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgdataprovider-apple.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "8580c922fdd1aa39c3fda8d011bd75c82bbb402b"
+      }
+    },
+    {
+      "identity" : "srgdiagnostics-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgdiagnostics-apple.git",
+      "state" : {
+        "revision" : "c595e8f186eb41335f0ea48848543ab3804ea22e",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "srgidentity-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgidentity-apple.git",
+      "state" : {
+        "revision" : "10368fd1679eeaffb05d84bcdc1002f3d66c2d12",
+        "version" : "3.3.0"
+      }
+    },
+    {
+      "identity" : "srgletterbox-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgletterbox-apple.git",
+      "state" : {
+        "revision" : "9f4c6dcee58f1de29759e0c0d512ecc83beeddbf",
+        "version" : "8.3.1"
+      }
+    },
+    {
+      "identity" : "srglogger-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srglogger-apple.git",
+      "state" : {
+        "revision" : "dd98468422044b53e283d970809b8502e1ef5b8d",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "srgmediaplayer-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgmediaplayer-apple.git",
+      "state" : {
+        "revision" : "0e5993756dc0fdfa892205fcf5bf3b9e62dd22ac",
+        "version" : "7.1.0"
+      }
+    },
+    {
+      "identity" : "srgnetwork-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srgnetwork-apple.git",
+      "state" : {
+        "revision" : "153a2544391c1aaccae2d38d8b113fd0a03421b8",
+        "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "srguserdata-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/srguserdata-apple.git",
+      "state" : {
+        "revision" : "9c5f317ca346af90749c295c62cadc35eade09c6",
+        "version" : "3.3.0"
+      }
+    },
+    {
+      "identity" : "swift-collections",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-collections.git",
+      "state" : {
+        "revision" : "f504716c27d2e5d4144fa4794b12129301d17729",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "swift-protobuf",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-protobuf.git",
+      "state" : {
+        "revision" : "88c7d15e1242fdb6ecbafbc7926426a19be1e98a",
+        "version" : "1.20.2"
+      }
+    },
+    {
+      "identity" : "swiftmessages",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SwiftKickMobile/SwiftMessages.git",
+      "state" : {
+        "revision" : "b29dd21090b708aa0ae9ecbaf6e2d0487028dc3f",
+        "version" : "9.0.6"
+      }
+    },
+    {
+      "identity" : "swiftui-introspect",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
+      "state" : {
+        "revision" : "f2616860a41f9d9932da412a8978fec79c06fe24",
+        "version" : "0.1.4"
+      }
+    },
+    {
+      "identity" : "tccore-xcframework-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/TCCore-xcframework-apple.git",
+      "state" : {
+        "revision" : "eb686883e63af28174472a09eda97acf07179c88",
+        "version" : "4.5.4-srg5"
+      }
+    },
+    {
+      "identity" : "tcsdk-xcframework-apple",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/TCSDK-xcframework-apple.git",
+      "state" : {
+        "revision" : "c4becb0b250258b78cb46225af5e269da834db5a",
+        "version" : "4.4.1-srg5"
+      }
+    },
+    {
+      "identity" : "uickeychainstore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kishikawakatsumi/UICKeyChainStore.git",
+      "state" : {
+        "revision" : "8220ac38124613fb709508426f75fbac6921e261",
+        "version" : "2.2.1"
+      }
+    },
+    {
+      "identity" : "yywebimage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SRGSSR/YYWebImage.git",
+      "state" : {
+        "revision" : "f7408c97fd0e897e1bb8b3e8b01e0c8e9dc22123",
+        "version" : "1.0.5-srg3"
+      }
+    }
+  ],
+  "version" : 2
 }
