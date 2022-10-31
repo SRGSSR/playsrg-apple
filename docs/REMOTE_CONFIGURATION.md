@@ -75,16 +75,21 @@ The radio channel JSON dictionaries have one more key:
 
 ### Home sections:
 
-* `radioAllShows`: All available shows.
-* `radioFavoriteShows`: Radio shows added to the favorites.
-* `radioLatest`: The latest audios.
-* `radioLatestEpisodes`: The latest episodes.
-* `radioLatestFromFavorites`: The latest audios from the user favorite shows.
-* `radioLatestVideos`: The latest videos.
-* `radioMostPopular`: The most popular audios.
-* `radioResumePlayback`: Audios for which playback can be resumed.
-* `radioShowsAccess`: A-Z and By date access buttons.
-* `radioWatchLater`: Audios added to the Later list.
+Feeds
+
+* `radioAllShows`: All available shows. ([audio/alphabeticalByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/showList/radio/alphabeticalByChannel/_CHANNEL_ID_))
+* `radioLatest`: The latest audios. ([audio/latestByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/latestByChannel/_CHANNEL_ID_))
+* `radioLatestEpisodes`: The latest episodes. ([audio/latestEpisodesByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/latestEpisodesByChannel/_CHANNEL_ID_))
+* `radioLatestVideos`: The latest videos. ([video/latestByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/latestByChannel/_CHANNEL_ID_))
+* `radioMostPopular`: The most popular audios. ([audio/mostClickedByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/mostClickedByChannel/_CHANNEL_ID_))
+* `radioShowsAccess`: A-Z and By Date access buttons. ([audio/alphabeticalByChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/showList/radio/alphabeticalByChannel/_CHANNEL_ID_) + [audio/episodesByDateAndChannel](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/episodesByDateAndChannel/_CHANNEL_ID_/_DAY_DATE_))
+
+User data
+
+* `radioFavoriteShows`: Radio shows added to the favorites. (*Local* + [showList/byUrns](https://il.srgssr.ch/integrationlayer/2.0/showList/byUrns?urns=))
+* `radioLatestFromFavorites`: The latest audios from the user favorite shows. (*Local* + [mediaList/byUrns](https://il.srgssr.ch/integrationlayer/2.0/mediaList/byUrns?urns=))
+* `radioResumePlayback`: Audios for which playback can be resumed. (*Local* + [mediaList/byUrns](https://il.srgssr.ch/integrationlayer/2.0/mediaList/byUrns?urns=))
+* `radioWatchLater`: Audios added to the Later list. (*Local* + [mediaList/byUrns](https://il.srgssr.ch/integrationlayer/2.0/mediaList/byUrns?urns=))
 
 ### User interface options
 
@@ -96,15 +101,17 @@ The radio channel JSON dictionaries have one more key:
 
 ### Home sections
 
-* `tvLive`: TV livestreams.
-* `radioLive`: Radio livestreams.
-* `radioLiveSatellite`: Swiss Satellite radio livestreams.
-* `tvLiveCenterScheduledLivestreams`: Sport livestreams (with result).
-* `tvLiveCenterScheduledLivestreamsAll`: Sport livestreams (all).
-* `tvLiveCenterEpisodes`: Past sport livestreams (with result).
-* `tvLiveCenterEpisodesAll`: Past sport livestreams (all).
-* `tvScheduledLivestreams`: Scheduled livestreams.
-* `tvScheduledLivestreamsSignLanguage`: Sign language livestreams.
+Feeds
+
+* `tvLive`: TV livestreams. ([video/livestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/livestreams))
+* `radioLive`: Radio livestreams. ([audio/livestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/livestreams))
+* `radioLiveSatellite`: Swiss Satellite radio livestreams. ([audio/livestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/audio/livestreams?onlyThirdPartyContentProvider=ssatr))
+* `tvLiveCenterScheduledLivestreams`: Sport livestreams (with result). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=scheduled_livestream))
+* `tvLiveCenterScheduledLivestreamsAll`: Sport livestreams (all). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=scheduled_livestream&onlyEventsWithResult=false))
+* `tvLiveCenterEpisodes`: Past sport livestreams (with result). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=episode))
+* `tvLiveCenterEpisodesAll`: Past sport livestreams (all). ([video/scheduledLivestreams/livecenter](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams/livecenter?types=episode&onlyEventsWithResult=false))
+* `tvScheduledLivestreams`: Scheduled livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams))
+* `tvScheduledLivestreamsSignLanguage`: Sign language livestreams. ([video/scheduledLivestreams](https://il.srgssr.ch/integrationlayer/2.0/_BU_/mediaList/video/scheduledLivestreams?signLanguageOnly=true))
 
 ## Search
 
