@@ -366,7 +366,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
+#if TARGET_OS_IOS
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
+#else
+    self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"tvLiveHomeSections"];
+#endif
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     
