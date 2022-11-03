@@ -30,12 +30,15 @@ final class SectionViewModel: ObservableObject {
         return selectedItems.count
     }
     
+    private var lastReloadSignalTriggerDate = Date()
+    
     init(section: Content.Section, filter: SectionFiltering?) {
         self.configuration = Self.Configuration(section)
         
         // Use property capture list (simpler code than if `self` is weakly captured). Only safe because we are
         // capturing constant values (see https://www.swiftbysundell.com/articles/swifts-closure-capturing-mechanics/)
-        Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger] in
+        Publishers.Publish(onOutputFrom: reloadSignal()) { [configuration, trigger, weak self] in
+            self?.lastReloadSignalTriggerDate = Date()
             return Publishers.CombineLatest(
                 configuration.properties.publisher(pageSize: ApplicationConfiguration.shared.detailPageSize,
                                                    paginatedBy: trigger.signal(activatedBy: TriggerId.loadMore),
@@ -100,12 +103,18 @@ final class SectionViewModel: ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
                     return !self.state.hasContent
+                },
+            ApplicationSignal.foreground()
+                .filter { [weak self] in
+                    guard let self else { return false }
+                    guard let minute = Calendar.current.dateComponents([.minute], from: self.lastReloadSignalTriggerDate, to: Date()).minute  else { return true }
+                    return minute > 1
                 }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)

@@ -28,11 +28,13 @@ final class PageViewModel: Identifiable, ObservableObject {
     @Published private(set) var serviceMessage: ServiceMessage?
     
     private let trigger = Trigger()
+    private var lastReloadSignalTriggerDate = Date()
     
     init(id: Id) {
         self.id = id
         
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
+            self?.lastReloadSignalTriggerDate = Date()
             return Self.sectionsPublisher(id: id)
                 .map { sections in
                     return Publishers.AccumulateLatestMany(sections.map { section in
@@ -88,12 +90,23 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
                     return self.state.sections.isEmpty
+                },
+            ApplicationSignal.foreground()
+                .filter { [weak self] in
+                    guard let self else { return false }
+                    switch self.id {
+                    case .live:
+                        return true
+                    default:
+                        guard let minute = Calendar.current.dateComponents([.minute], from: self.lastReloadSignalTriggerDate, to: Date()).minute  else { return true }
+                        return minute > 1
+                    }
                 }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
