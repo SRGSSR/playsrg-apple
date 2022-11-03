@@ -97,7 +97,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSInteger analyticsContainer;
 
 @property (nonatomic, copy) NSString *siteName;
-@property (nonatomic, copy) NSString *tvSiteName;
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
@@ -309,8 +308,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.vendor = vendor;
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.integerValue;
+#if TARGET_OS_IOS
     self.siteName = siteName;
-    self.tvSiteName = tvSiteName;
+#else
+    self.siteName = tvSiteName;
+#endif
     
     self.playURL = playURL;
     self.playServiceURL = playServiceURL;

@@ -96,7 +96,7 @@ extension AppDelegate: UIApplicationDelegate {
         
         let analyticsConfiguration = SRGAnalyticsConfiguration(businessUnitIdentifier: configuration.analyticsBusinessUnitIdentifier,
                                                                container: configuration.analyticsContainer,
-                                                               siteName: configuration.tvSiteName)
+                                                               siteName: configuration.siteName)
 #if DEBUG || NIGHTLY || BETA
         analyticsConfiguration.environmentMode = .preProduction
 #endif
