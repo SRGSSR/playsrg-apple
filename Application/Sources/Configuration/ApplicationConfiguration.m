@@ -97,7 +97,6 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
 @property (nonatomic) NSInteger analyticsContainer;
 
 @property (nonatomic, copy) NSString *siteName;
-@property (nonatomic, copy) NSString *tvSiteName;
 
 @property (nonatomic, copy) NSString *voiceOverLanguageCode;
 
@@ -309,8 +308,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.vendor = vendor;
     self.analyticsBusinessUnitIdentifier = analyticsBusinessUnitIdentifier;
     self.analyticsContainer = analyticsContainer.integerValue;
+#if TARGET_OS_IOS
     self.siteName = siteName;
-    self.tvSiteName = tvSiteName;
+#else
+    self.siteName = tvSiteName;
+#endif
     
     self.playURL = playURL;
     self.playServiceURL = playServiceURL;
@@ -366,7 +368,11 @@ NSTimeInterval ApplicationConfigurationEffectiveEndTolerance(NSTimeInterval dura
     self.audioDescriptionAvailabilityHidden = [firebaseConfiguration boolForKey:@"audioDescriptionAvailabilityHidden"];
     self.posterImagesEnabled = [firebaseConfiguration boolForKey:@"posterImagesEnabled"];
     
+#if TARGET_OS_IOS
     self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"liveHomeSections"];
+#else
+    self.liveHomeSections = [firebaseConfiguration homeSectionsForKey:@"tvLiveHomeSections"];
+#endif
     
     self.audioHomeSections = [firebaseConfiguration homeSectionsForKey:@"audioHomeSections"];
     

@@ -13,6 +13,7 @@
   "userDataServiceURL": "https://profil.rts.ch/api",
   "supportEmailAddress": "support.play@rts.ch",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite,tvScheduledLivestreams",
+  "tvLiveHomeSections": "tvLive,tvScheduledLivestreams,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioLatestEpisodes,radioLatestVideos,radioWatchLater",
   "minimumSocialViewCount": 50,
   "termsAndConditionsURL": "https://www.rts.ch/article/8994021",

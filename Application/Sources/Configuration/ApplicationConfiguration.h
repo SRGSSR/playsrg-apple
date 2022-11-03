@@ -32,7 +32,6 @@ OBJC_EXPORT NSString * const ApplicationConfigurationDidChangeNotification;
 @property (nonatomic, readonly) NSInteger analyticsContainer;
 
 @property (nonatomic, readonly, copy) NSString *siteName;
-@property (nonatomic, readonly, copy) NSString *tvSiteName;
 
 // Might be nil for "exotic" languages like Rumantsch
 @property (nonatomic, readonly, copy, nullable) NSString *voiceOverLanguageCode;

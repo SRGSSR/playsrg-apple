@@ -40,7 +40,7 @@ If a remote configuration is found to be invalid (usually a mandatory parameter 
 
 ## Analytics
 
-* `siteName` (mandatory, string): The iOS site name to send events to.
+* `siteName` (mandatory, string): The iOS and iPadOS site name to send events to.
 * `tvSiteName` (mandatory, string): The tvOS site name to send events to.
 
 ## Channel configuration
@@ -97,7 +97,8 @@ User data
 
 ## Livestream homepage
 
-`liveHomeSections` (optional, string, multiple): The sections to be displayed on the live homepage, in the order they must appear.
+* `liveHomeSections` (optional, string, multiple): The sections to be displayed on the live homepage on iOS and iPadOS, in the order they must appear.
+* `tvLiveHomeSections` (optional, string, multiple): The sections to be displayed on the live homepage on tvOS, in the order they must appear.
 
 ### Home sections
 
