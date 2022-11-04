@@ -65,11 +65,7 @@ struct ProgramCell: View {
             return direction == .horizontal ? 16 : 12
         }
         
-        private var topPadding: CGFloat {
-            return direction == .horizontal ? 0 : constant(iOS: 12, tvOS: 16)
-        }
-        
-        private var bottomPadding: CGFloat {
+        private var verticalPadding: CGFloat {
             return direction == .horizontal ? 0 : constant(iOS: 4, tvOS: 8)
         }
         
@@ -97,15 +93,16 @@ struct ProgramCell: View {
                                 .frame(maxWidth: timeRangeWidth, alignment: .leading)
                         }
                         TitleView(model: model, compact: isCompact)
-                        Spacer()
+                        if direction == .horizontal {
+                            Spacer()
+                        }
                     }
                     else {
                         Color.clear
                     }
                 }
                 .padding(.horizontal, isDisplayable ? horizontalPadding : 0)
-                .padding(.top, topPadding)
-                .padding(.bottom, bottomPadding)
+                .padding(.vertical, verticalPadding)
                 .frame(maxHeight: .infinity)
                 .background(!isFocused ? Color.srgGray23 : Color.srgGray33)
                 
