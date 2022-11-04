@@ -93,9 +93,7 @@ struct ProgramCell: View {
                                 .frame(maxWidth: timeRangeWidth, alignment: .leading)
                         }
                         TitleView(model: model, compact: isCompact)
-                        if direction == .horizontal {
-                            Spacer()
-                        }
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     }
                     else {
                         Color.clear
