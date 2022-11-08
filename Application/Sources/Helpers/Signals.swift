@@ -200,6 +200,15 @@ enum ApplicationSignal {
             .map { _ in }
             .eraseToAnyPublisher()
     }
+    
+    /**
+     *  Emits a signal when the application configuration is updated.
+     */
+    static func applicationConfigurationUpdate() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: NSNotification.Name.ApplicationConfigurationDidChange)
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
 }
 
 // MARK: Notifications

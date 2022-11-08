@@ -258,7 +258,9 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
     
     [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
         [self.remoteConfig activateWithCompletion:^(BOOL changed, NSError * _Nullable error) {
-            self.updateBlock(self);
+            if (changed) {
+                self.updateBlock(self);
+            }
         }];
     }];
 }
