@@ -60,7 +60,7 @@ final class SectionViewModel: ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
         
-        Publishers.Publish(onOutputFrom: ApplicationSignal.lieDown()) {
+        Publishers.Publish(onOutputFrom: ApplicationSignal.background()) {
             return Just(Date())
         }
         .assign(to: &$inactiveApplicationDate)

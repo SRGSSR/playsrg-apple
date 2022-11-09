@@ -70,7 +70,7 @@ final class PageViewModel: Identifiable, ObservableObject {
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
         
-        Publishers.Publish(onOutputFrom: ApplicationSignal.lieDown()) {
+        Publishers.Publish(onOutputFrom: ApplicationSignal.background()) {
             return Just(Date())
         }
         .assign(to: &$inactiveApplicationDate)

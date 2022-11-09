@@ -114,19 +114,10 @@ enum ThrottledSignal {
 
 enum ApplicationSignal {
     /**
-     *  Emits a signal when the application is woken up (network reachable again, will move to the foreground or becomes active).
+     *  Emits a signal when the application is woken up (network reachable again or will move to the foreground).
      */
     static func wokenUp() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge3(reachable(), foreground(), becomeActive())
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: false)
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application is lie down to sleep (moved to the background or resignes ative).
-     */
-    static func lieDown() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(background(), resignActive())
+        return Publishers.Merge(reachable(), foreground())
             .throttle(for: 10, scheduler: DispatchQueue.main, latest: false)
             .eraseToAnyPublisher()
     }
@@ -155,24 +146,6 @@ enum ApplicationSignal {
      */
     static func background() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.weakPublisher(for: UIApplication.didEnterBackgroundNotification)
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application becomes active.
-     */
-    static func becomeActive() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: UIApplication.didBecomeActiveNotification)
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application resignes active.
-     */
-    static func resignActive() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: UIApplication.willResignActiveNotification)
             .map { _ in }
             .eraseToAnyPublisher()
     }
