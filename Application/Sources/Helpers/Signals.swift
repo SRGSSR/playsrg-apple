@@ -118,7 +118,7 @@ enum ApplicationSignal {
      */
     static func wokenUp() -> AnyPublisher<Void, Never> {
         return Publishers.Merge(reachable(), foreground())
-            .throttle(for: 10, scheduler: DispatchQueue.main, latest: false)
+            .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
             .eraseToAnyPublisher()
     }
     
