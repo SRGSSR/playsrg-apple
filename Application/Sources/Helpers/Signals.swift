@@ -113,23 +113,55 @@ enum ThrottledSignal {
 // MARK: Signals for application events
 
 enum ApplicationSignal {
+    enum NotificationType {
+        case application
+        case scene(filter: (Notification) -> Bool)
+        
+        fileprivate var foregroundNotificationName: NSNotification.Name {
+            switch self {
+            case .application:
+                return UIApplication.willEnterForegroundNotification
+            case .scene:
+                return UIScene.willEnterForegroundNotification
+            }
+        }
+        
+        fileprivate var backgroundNotificationName: NSNotification.Name {
+            switch self {
+            case .application:
+                return UIApplication.didEnterBackgroundNotification
+            case .scene:
+                return UIScene.didEnterBackgroundNotification
+            }
+        }
+        
+        fileprivate func filter(notification: Notification) -> Bool {
+            switch self {
+            case .application:
+                return true
+            case let .scene(filter: filter):
+                return filter(notification)
+            }
+        }
+    }
+    
     /**
-     *  Emits a signal when the application is woken up (network reachable again or will move to the foreground).
+     *  Emits a signal when the application (or scene) is woken up (network reachable again or will move to the foreground).
      */
-    static func wokenUp() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(reachable(), foreground())
+    static func wokenUp(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(reachable(), foreground(type))
             .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
             .eraseToAnyPublisher()
     }
     
     /**
-     *  Emits a signal when the application will move to the foreground after moved to the background and need a refresh.
+     *  Emits a signal when the application (or scene) will move to the foreground after moved to the background and need a refresh.
      */
-    static func foregroundRefresh() -> AnyPublisher<Void, Never> {
+    static func foregroundRefresh(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
         return Publishers.Zip(
-            background()
+            background(type)
                 .map { _ in Date() },
-            foreground()
+            foreground(type)
                 .dropFirst()
                 .map { _ in Date() }
         )
@@ -142,29 +174,31 @@ enum ApplicationSignal {
     }
     
     /**
+     *  Emits a signal when the application (or scene) will move to the foreground.
+     */
+    static func foreground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: type.foregroundNotificationName)
+            .filter { type.filter(notification: $0) }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the application (or scene) moved to the background.
+     */
+    static func background(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: type.backgroundNotificationName)
+            .filter { type.filter(notification: $0) }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    /**
      *  Emits a signal when the network is reachable again.
      */
     static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.weakPublisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application will move to the foreground.
-     */
-    static func foreground() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: UIApplication.willEnterForegroundNotification)
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application moved to the background.
-     */
-    static func background() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: UIApplication.didEnterBackgroundNotification)
             .map { _ in }
             .eraseToAnyPublisher()
     }
