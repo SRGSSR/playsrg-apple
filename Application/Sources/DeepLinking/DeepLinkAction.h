@@ -21,6 +21,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeHome;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeAZ;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeByDate;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeSection;
+OBJC_EXPORT DeepLinkType const DeepLinkTypeLivestreams;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeSearch;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeLink;
 OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
@@ -35,6 +36,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
  *    [scheme]://az (optional query parameters: channel_id=[channel_id], index=[index_letter])
  *    [scheme]://bydate (optional query parameters: channel_id=[channel_id], date=[date] with format yyyy-MM-dd)
  *    [scheme]://section/[section_id]
+ *    [scheme]://livestreams
  *    [scheme]://search (optional query parameters: query=[query], media_type=[audio|video])
  *    [scheme]://link?url=[url]
  *    [scheme]://[play_website_url] (use "parsePlayUrl.js" to attempt transforming the URL)

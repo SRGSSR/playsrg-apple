@@ -19,6 +19,7 @@ The host name (first item after the `//` in the URL) describes the action which 
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single lowercase character parameter can be provided to open the page at the specified index.
 * Open program guide page (videos), or shows by date page (audios): `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
+* Open the livestreams page: `[scheme]://livestreams`.
 * Open search page: `[scheme]://search`. Optional `query` and `media_type` (with `video` or `audio` values) parameters can be provided.
 * Open a URL: `[scheme]://link?url=[url]`.
 

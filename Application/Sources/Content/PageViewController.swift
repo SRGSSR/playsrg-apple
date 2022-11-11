@@ -444,7 +444,12 @@ extension PageViewController: PlayApplicationNavigation {
             }
             return true
         default:
-            return applicationSectionInfo.applicationSection == .overview
+            switch self.model.id {
+            case .live:
+                return applicationSectionInfo.applicationSection == .live
+            default:
+                return applicationSectionInfo.applicationSection == .overview
+            }
         }
     }
 }
