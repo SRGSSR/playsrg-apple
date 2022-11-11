@@ -13,7 +13,6 @@ final class SectionViewModel: ObservableObject {
     let configuration: SectionViewModel.Configuration
     
     @Published private(set) var state: State = .loading
-    @Published private var inactiveApplicationDate: Date?
     
     private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
@@ -59,11 +58,6 @@ final class SectionViewModel: ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
-        
-        Publishers.Publish(onOutputFrom: ApplicationSignal.background()) {
-            return Just(Date())
-        }
-        .assign(to: &$inactiveApplicationDate)
     }
     
     func loadMore() {
@@ -106,15 +100,14 @@ final class SectionViewModel: ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
-                    guard let inactiveApplicationDate = self.inactiveApplicationDate,
-                          let minute = Calendar.current.dateComponents([.minute], from: inactiveApplicationDate, to: Date()).minute else { return true }
-                    return !self.state.hasContent || minute > 0
-                }
+                    return !self.state.hasContent
+                },
+            ApplicationSignal.foregroundRefresh()
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()

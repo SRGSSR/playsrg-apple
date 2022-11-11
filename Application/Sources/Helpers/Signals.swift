@@ -123,6 +123,25 @@ enum ApplicationSignal {
     }
     
     /**
+     *  Emits a signal when the application will move to the foreground after moved to the background and need a refresh.
+     */
+    static func foregroundRefresh() -> AnyPublisher<Void, Never> {
+        return Publishers.Zip(
+            background()
+                .map { _ in Date() },
+            foreground()
+                .dropFirst()
+                .map { _ in Date() }
+        )
+        .filter {
+            guard let minute = Calendar.current.dateComponents([.minute], from: $0, to: $1).minute else { return false }
+            return minute > 0
+        }
+        .map { _ in }
+        .eraseToAnyPublisher()
+    }
+    
+    /**
      *  Emits a signal when the network is reachable again.
      */
     static func reachable() -> AnyPublisher<Void, Never> {

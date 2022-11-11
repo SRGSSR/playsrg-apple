@@ -26,7 +26,6 @@ final class PageViewModel: Identifiable, ObservableObject {
     
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
-    @Published private var inactiveApplicationDate: Date?
     
     private let trigger = Trigger()
     
@@ -69,11 +68,6 @@ final class PageViewModel: Identifiable, ObservableObject {
         .removeDuplicates()
         .receive(on: DispatchQueue.main)
         .assign(to: &$serviceMessage)
-        
-        Publishers.Publish(onOutputFrom: ApplicationSignal.background()) {
-            return Just(Date())
-        }
-        .assign(to: &$inactiveApplicationDate)
     }
     
     func loadMore() {
@@ -94,15 +88,14 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge3(
+        return Publishers.Merge4(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
-                    guard let inactiveApplicationDate = self.inactiveApplicationDate,
-                          let minute = Calendar.current.dateComponents([.minute], from: inactiveApplicationDate, to: Date()).minute else { return true }
-                    return self.state.sections.isEmpty || minute > 0
+                    return self.state.sections.isEmpty
                 },
+            ApplicationSignal.foregroundRefresh(),
             ApplicationSignal.applicationConfigurationUpdate()
                 .filter { [weak self] in
                     guard let self else { return false }
