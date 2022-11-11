@@ -95,7 +95,7 @@ final class PageViewModel: Identifiable, ObservableObject {
                     guard let self else { return false }
                     return self.state.sections.isEmpty
                 },
-            ApplicationSignal.foregroundRefresh(),
+            ApplicationSignal.foregroundAfterTimeInBackground(),
             ApplicationSignal.applicationConfigurationUpdate()
                 .filter { [weak self] in
                     guard let self else { return false }

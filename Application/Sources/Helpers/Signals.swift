@@ -155,9 +155,9 @@ enum ApplicationSignal {
     }
     
     /**
-     *  Emits a signal when the application (or scene) will move to the foreground after moved to the background and need a refresh.
+     *  Emits a signal when the application (or scene) will move to the foreground after some  time in background.
      */
-    static func foregroundRefresh(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+    static func foregroundAfterTimeInBackground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
         return Publishers.Zip(
             background(type)
                 .map { _ in Date() },

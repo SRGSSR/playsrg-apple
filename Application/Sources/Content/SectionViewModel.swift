@@ -107,7 +107,7 @@ final class SectionViewModel: ObservableObject {
                     guard let self else { return false }
                     return !self.state.hasContent
                 },
-            ApplicationSignal.foregroundRefresh()
+            ApplicationSignal.foregroundAfterTimeInBackground()
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
