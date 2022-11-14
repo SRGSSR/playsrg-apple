@@ -176,5 +176,6 @@
   "3.6.6-397": "- Fix full screen player when opened from the program guide.",
   "3.6.7-398": "- TV guide: more details available about the selected program.\n- You can add a TV program to your calendar.",
   "3.6.7-399": "- Tiny TV guide grid layout update to increase overall overview of channels.\n- Update translations.",
-  "3.6.8-400": "- Add sport livestreams in livestreams tab. [SRF, RTS]"
+  "3.6.8-400": "- Add sport livestreams in livestreams tab. [RTS, SRF]",
+  "3.6.8-401": "- Reload page content after a while in background.\n- Deeplink to open livestreams tab."
 }
