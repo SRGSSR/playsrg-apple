@@ -88,12 +88,18 @@ final class PageViewModel: Identifiable, ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge4(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
                     return self.state.sections.isEmpty
+                },
+            ApplicationSignal.foregroundAfterTimeInBackground(),
+            ApplicationSignal.applicationConfigurationUpdate()
+                .filter { [weak self] in
+                    guard let self else { return false }
+                    return self.id.isConfigured
                 }
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
@@ -159,6 +165,15 @@ extension PageViewModel {
         var supportsCastButton: Bool {
             switch self {
             case .video, .audio, .live:
+                return true
+            default:
+                return false
+            }
+        }
+        
+        var isConfigured: Bool {
+            switch self {
+            case .audio, .live:
                 return true
             default:
                 return false

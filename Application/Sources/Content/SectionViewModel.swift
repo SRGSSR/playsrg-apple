@@ -100,13 +100,14 @@ final class SectionViewModel: ObservableObject {
     }
     
     private func reloadSignal() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(
+        return Publishers.Merge3(
             trigger.signal(activatedBy: TriggerId.reload),
             ApplicationSignal.wokenUp()
                 .filter { [weak self] in
                     guard let self else { return false }
                     return !self.state.hasContent
-                }
+                },
+            ApplicationSignal.foregroundAfterTimeInBackground()
         )
         .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: false)
         .eraseToAnyPublisher()
