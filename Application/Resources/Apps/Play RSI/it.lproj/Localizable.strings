@@ -455,7 +455,7 @@
 "Overview" = "Home";
 
 /* Title label used to present on demand medias from live center (Sport manager) */
-"Past sport livestreams" = "Past sport livestreams";
+"Past sport livestreams" = "Sport livestreams passati";
 
 /* Search setting */
 "Period" = "Periodo";
@@ -600,7 +600,7 @@
 "Shows, topics and more" = "Programmi, temi e altro";
 
 /* Title label used to present sign language scheduled livestream medias */
-"Sign language livestreams" = "Sign language livestreams";
+"Sign language livestreams" = "Livestreams in lingua dei segni";
 
 /* Label of the button to simulate a memory warning */
 "Simulate memory warning" = "Simulare l'avviso di memoria";

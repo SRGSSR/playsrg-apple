@@ -19,7 +19,7 @@
 | Distribute App Store builds to public TestFlight groups (with fastane\*) ||||||
 | Collect translations and update App Store Connect (with fastlane\*) ||||||
 | [iOS] Collect translations and update Github pages (with fastlane\*) ||||||
-| Check what's new in betas or TestFlight builds ||||||
+| [iOS] Check what's new in betas or TestFlight builds ||||||
 | Ask the PO to approve the version ||||||
 | Submit to Apple review (with fastlane\*) ||||||
 | Update status page on Confluence (Up coming status, statistics changes) ||||||
