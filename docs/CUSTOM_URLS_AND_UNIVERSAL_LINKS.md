@@ -4,7 +4,7 @@ Play applications can be opened with custom URLs starting with a URL scheme defi
 
 ## Custom URLs
 
-Play application can be started using [custom URLs](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) having a reserved scheme. The scheme to use depends on the business unit and build variant to use, and has the following format:
+The Play iOS application can be started using [custom URLs](https://developer.apple.com/documentation/xcode/defining-a-custom-url-scheme-for-your-app) having a reserved scheme. The scheme to use depends on the business unit and build variant to use, and has the following format:
 
 `play(srf|rts|rsi|rtr|swi)(-beta|-nightly|-debug)`
 
@@ -19,6 +19,7 @@ The host name (first item after the `//` in the URL) describes the action which 
 * Open a home page: `[scheme]://home`.
 * Open shows A to Z page: `[scheme]://az`. An optional `index` single lowercase character parameter can be provided to open the page at the specified index.
 * Open program guide page (videos), or shows by date page (audios): `[scheme]://bydate`. An optional `date` parameter with the `yyyy-MM-dd` format can be provided.
+* Open the livestreams page: `[scheme]://livestreams`.
 * Open search page: `[scheme]://search`. Optional `query` and `media_type` (with `video` or `audio` values) parameters can be provided.
 * Open a URL: `[scheme]://link?url=[url]`.
 
@@ -26,19 +27,26 @@ For media, show and page links, an optional `channel_id=[channel_id]` parameter 
 
 For a debug, nightly or beta build, a `server=[server_title]` parameter can also be added to force a server selection update. The available server list can be found in the application under *Settings* > *Advanced features* > *Server*.
 
-The Play application also supports pseudo-universal link URLs, obtained by replacing the URL scheme in the original portal URL with the application custom URL scheme.
+The Play iOS application also supports pseudo-universal link URLs, obtained by replacing the URL scheme in the original portal URL with the application custom URL scheme.
 
 For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply replace `https` with `playrts-debug`, as follows: [playrts-debug://www.rts.ch/play/tv/emissions?index=l](playrts-debug://www.rts.ch/play/tv/emissions?index=l)
+
+The Play tvOS application supports only those custom URLs:
+
+* Open a media page: `[scheme]://media/[media_urn]`. If it's a 24/7 livestream, the player page is open instead.
+* Open a show page: `[scheme]://show/[show_urn]`.
 
 Refer to the _Testing_ section for more information about how custom URLs can be supplied to an application during tests.
 
 ## Universal Links
 
-The application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case you can open most of URLs of a Play business unit portal in the associated Play application.
+The Play iOS application supports Apple universal links, provided that the associated business unit website declares a corresponding [association file](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html). If this is the case you can open most of URLs of a Play business unit portal in the associated Play application.
 
 For test purposes, and since this feature requires support from the portal which is not always available (e.g. for internal builds or business units which have not deployed an association file), there is a way to have universal link URLs for `Debug` configuration builds using the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool to get an associated `https://play-mmf.herokuapp.com/[BU]/[…]` URL.
 
 For example, if you want to open [https://www.rts.ch/play/tv/emissions?index=l](https://www.rts.ch/play/tv/emissions?index=l) with the Play RTS debug app, simply decode this URL with the [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool and get the Play MMF associated URL: [https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l](https://play-mmf.herokuapp.com/rts/play/tv/emissions?index=l).
+
+The Play tvOS application does not support Apple universal links.
 
 Refer to the _Testing_ section for more information about how universal URLs can be supplied to an application during tests.
 
@@ -55,8 +63,9 @@ The [Play MMF Deeplink](https://play-mmf.herokuapp.com/deeplink/index.html) tool
 
 ## Changelog
 
-- Version 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
-- Version 2.9.6: Version 2 of universal link support.
+- Version iOS 3.6.8: New livestreams page action.
+- Version iOS 3.2.0: New section page action and module page action removal (modules not available on the web portal and in applications anymore).
+- Version iOS 2.9.6: Version 2 of universal link support.
 
 ## Examples
 

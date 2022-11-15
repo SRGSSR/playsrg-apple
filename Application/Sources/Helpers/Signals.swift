@@ -113,11 +113,83 @@ enum ThrottledSignal {
 // MARK: Signals for application events
 
 enum ApplicationSignal {
+    enum NotificationType {
+        case application
+        case scene(filter: (Notification) -> Bool)
+        
+        fileprivate var foregroundNotificationName: NSNotification.Name {
+            switch self {
+            case .application:
+                return UIApplication.willEnterForegroundNotification
+            case .scene:
+                return UIScene.willEnterForegroundNotification
+            }
+        }
+        
+        fileprivate var backgroundNotificationName: NSNotification.Name {
+            switch self {
+            case .application:
+                return UIApplication.didEnterBackgroundNotification
+            case .scene:
+                return UIScene.didEnterBackgroundNotification
+            }
+        }
+        
+        fileprivate func filter(notification: Notification) -> Bool {
+            switch self {
+            case .application:
+                return true
+            case let .scene(filter: filter):
+                return filter(notification)
+            }
+        }
+    }
+    
     /**
-     *  Emits a signal when the application is woken up (network reachable again or moved to the foreground).
+     *  Emits a signal when the application (or scene) is woken up (network reachable again or will move to the foreground).
      */
-    static func wokenUp() -> AnyPublisher<Void, Never> {
-        return Publishers.Merge(reachable(), foreground())
+    static func wokenUp(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return Publishers.Merge(reachable(), foreground(type))
+            .throttle(for: 0.5, scheduler: DispatchQueue.main, latest: true)
+            .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the application (or scene) will move to the foreground after some  time in background.
+     */
+    static func foregroundAfterTimeInBackground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return Publishers.Zip(
+            background(type)
+                .map { _ in Date() },
+            foreground(type)
+                .dropFirst()
+                .map { _ in Date() }
+        )
+        .filter {
+            guard let minute = Calendar.current.dateComponents([.minute], from: $0, to: $1).minute else { return false }
+            return minute > 0
+        }
+        .map { _ in }
+        .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the application (or scene) will move to the foreground.
+     */
+    static func foreground(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: type.foregroundNotificationName)
+            .filter { type.filter(notification: $0) }
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the application (or scene) moved to the background.
+     */
+    static func background(_ type: NotificationType = .application) -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: type.backgroundNotificationName)
+            .filter { type.filter(notification: $0) }
+            .map { _ in }
             .eraseToAnyPublisher()
     }
     
@@ -127,15 +199,6 @@ enum ApplicationSignal {
     static func reachable() -> AnyPublisher<Void, Never> {
         return NotificationCenter.default.weakPublisher(for: .FXReachabilityStatusDidChange)
             .filter { ReachabilityBecameReachable($0) }
-            .map { _ in }
-            .eraseToAnyPublisher()
-    }
-    
-    /**
-     *  Emits a signal when the application moves to the foreground.
-     */
-    static func foreground() -> AnyPublisher<Void, Never> {
-        return NotificationCenter.default.weakPublisher(for: UIApplication.willEnterForegroundNotification)
             .map { _ in }
             .eraseToAnyPublisher()
     }
@@ -160,6 +223,15 @@ enum ApplicationSignal {
     static func settingUpdates<Value>(at keyPath: KeyPath<UserDefaults, Value>) -> AnyPublisher<Void, Never> {
         return UserDefaults.standard.publisher(for: keyPath)
             .dropFirst()
+            .map { _ in }
+            .eraseToAnyPublisher()
+    }
+    
+    /**
+     *  Emits a signal when the application configuration is updated.
+     */
+    static func applicationConfigurationUpdate() -> AnyPublisher<Void, Never> {
+        return NotificationCenter.default.weakPublisher(for: NSNotification.Name.ApplicationConfigurationDidChange)
             .map { _ in }
             .eraseToAnyPublisher()
     }

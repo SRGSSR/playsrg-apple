@@ -21,6 +21,7 @@ DeepLinkType const DeepLinkTypeHome = @"home";
 DeepLinkType const DeepLinkTypeAZ = @"az";
 DeepLinkType const DeepLinkTypeByDate = @"bydate";
 DeepLinkType const DeepLinkTypeSection = @"section";
+DeepLinkType const DeepLinkTypeLivestreams = @"livestreams";
 DeepLinkType const DeepLinkTypeSearch = @"search";
 DeepLinkType const DeepLinkTypeLink = @"link";
 DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
@@ -116,7 +117,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
                           analyticsLabels:labels
                                queryItems:URLComponents.queryItems];
     }
-    else if ([@[ DeepLinkTypeHome, DeepLinkTypeAZ, DeepLinkTypeByDate, DeepLinkTypeSearch ] containsObject:type]) {
+    else if ([@[ DeepLinkTypeHome, DeepLinkTypeAZ, DeepLinkTypeByDate, DeepLinkTypeSearch, DeepLinkTypeLivestreams ] containsObject:type]) {
         SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
         labels.source = source;
         labels.type = AnalyticsTypeActionDisplayPage;

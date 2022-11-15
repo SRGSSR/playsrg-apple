@@ -177,6 +177,11 @@ static void *s_kvoContext = &s_kvoContext;
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
         }];
     }
+    else if ([action.type isEqualToString:DeepLinkTypeLivestreams]) {
+        [self openLivestreamsWithCompletionBlock:^{
+            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+        }];
+    }
     else if ([action.type isEqualToString:DeepLinkTypeLink]) {
         NSURL *URL = [NSURL URLWithString:action.identifier];
         if (URL) {
@@ -263,6 +268,12 @@ static void *s_kvoContext = &s_kvoContext;
 {
     RadioChannel *radioChannel = [ApplicationConfiguration.sharedApplicationConfiguration radioHomepageChannelForUid:channelUid];
     ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionOverview radioChannel:radioChannel];
+    [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:completionBlock];
+}
+
+- (void)openLivestreamsWithCompletionBlock:(void (^)(void))completionBlock
+{
+    ApplicationSectionInfo *applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionLive radioChannel:nil];
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:completionBlock];
 }
 

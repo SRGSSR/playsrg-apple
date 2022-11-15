@@ -18,7 +18,11 @@ static HomeSection HomeSectionWithString(NSString *string)
     dispatch_once(&s_onceToken, ^{
         s_sections = @{ @"tvLive" : @(HomeSectionTVLive),
                         @"tvScheduledLivestreams" : @(HomeSectionTVScheduledLivestreams),
-                        @"tvLiveCenter" : @(HomeSectionTVLiveCenter),
+                        @"tvScheduledLivestreamsSignLanguage" : @(HomeSectionTVScheduledLivestreamsSignLanguage),
+                        @"tvLiveCenterScheduledLivestreams" : @(HomeSectionTVLiveCenterScheduledLivestreams),
+                        @"tvLiveCenterScheduledLivestreamsAll" : @(HomeSectionTVLiveCenterScheduledLivestreamsAll),
+                        @"tvLiveCenterEpisodes" : @(HomeSectionTVLiveCenterEpisodes),
+                        @"tvLiveCenterEpisodesAll" : @(HomeSectionTVLiveCenterEpisodesAll),
                         @"radioAllShows" : @(HomeSectionRadioAllShows),
                         @"radioFavoriteShows" : @(HomeSectionRadioFavoriteShows),
                         @"radioLatest" : @(HomeSectionRadioLatest),
@@ -253,8 +257,11 @@ NSArray<NSNumber *> *FirebaseConfigurationHomeSections(NSString *string)
 #endif
     
     [self.remoteConfig fetchWithExpirationDuration:kExpirationDuration completionHandler:^(FIRRemoteConfigFetchStatus status, NSError * _Nullable error) {
-        [self.remoteConfig activateWithCompletion:nil];
-        self.updateBlock(self);
+        [self.remoteConfig activateWithCompletion:^(BOOL changed, NSError * _Nullable error) {
+            if (changed) {
+                self.updateBlock(self);
+            }
+        }];
     }];
 }
 

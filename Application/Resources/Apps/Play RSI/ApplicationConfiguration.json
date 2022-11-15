@@ -9,6 +9,7 @@
   "playServiceURL": "https://www.rsi.ch/play/",
   "middlewareURL": "https://playfff.herokuapp.com",
   "liveHomeSections": "tvLive,radioLive,radioLiveSatellite",
+  "tvLiveHomeSections": "tvLive,radioLive,radioLiveSatellite",
   "audioHomeSections": "radioLatest,radioShowsAccess,radioFavoriteShows,radioLatestEpisodesFromFavorites,radioResumePlayback,radioMostPopular,radioWatchLater",
   "minimumSocialViewCount": 50,
   "termsAndConditionsURL": "https://www.rsi.ch/la-rsi/Condizioni-generali-di-uso-del-sito-RSI-8585464.html",
