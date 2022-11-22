@@ -416,7 +416,7 @@ extension SearchViewController: UICollectionViewDelegate {
         let item = snapshot.itemIdentifiers(inSection: section)[indexPath.row]
         switch item {
         case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, sourceUid: "search", animated: true, completion: nil)
         case let .show(show):
             guard let navigationController else { return }
             let showViewController = SectionViewController.showViewController(for: show)

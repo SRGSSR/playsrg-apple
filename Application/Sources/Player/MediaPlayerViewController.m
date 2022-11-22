@@ -103,6 +103,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 @property (nonatomic) NSArray<SRGProgram *> *programs;
 
 @property (nonatomic, getter=isFromPushNotification) BOOL fromPushNotification;
+@property (nonatomic) NSString *sourceUid;
 
 @property (nonatomic) NSArray<SRGMedia *> *livestreamMedias;                     // Media list for regional radio choice
 @property (nonatomic, weak) SRGRequest *livestreamMediasRequest;
@@ -218,7 +219,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 #pragma mark Object lifecycle
 
-- (instancetype)initWithURN:(NSString *)URN position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification
+- (instancetype)initWithURN:(NSString *)URN position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid
 {
     SRGLetterboxService *service = SRGLetterboxService.sharedService;
     
@@ -236,6 +237,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalURN = URN;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            self.sourceUid = sourceUid;
             
             self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
@@ -244,7 +246,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
 }
 
-- (instancetype)initWithMedia:(SRGMedia *)media position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification
+- (instancetype)initWithMedia:(SRGMedia *)media position:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid
 {
     SRGLetterboxService *service = SRGLetterboxService.sharedService;
     
@@ -262,6 +264,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             self.originalMedia = media;
             self.originalPosition = position;
             self.fromPushNotification = fromPushNotification;
+            self.sourceUid = sourceUid;
             
             self.letterboxController = [[SRGLetterboxController alloc] init];
             ApplicationConfigurationApplyControllerSettings(self.letterboxController);
@@ -442,11 +445,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             return download.localMediaFileURL;
         };
         
+        SRGLetterboxPlaybackSettings *applicationSettingPlaybackSettings = ApplicationSettingPlaybackSettings();
+        applicationSettingPlaybackSettings.sourceUid = self.sourceUid;
         if (self.originalMedia) {
-            [self.letterboxController playMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            [self.letterboxController playMedia:self.originalMedia atPosition:self.originalPosition withPreferredSettings:applicationSettingPlaybackSettings];
         }
         else {
-            [self.letterboxController playURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            [self.letterboxController playURN:self.originalURN atPosition:self.originalPosition withPreferredSettings:applicationSettingPlaybackSettings];
         }
     }
     

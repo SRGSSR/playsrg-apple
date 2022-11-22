@@ -128,6 +128,7 @@ protocol SectionFiltering {
 
 protocol SectionProperties {
     /// Generic properties
+    var uid: String? { get }
     var title: String? { get }
     var summary: String? { get }
     var label: String? { get }
@@ -173,6 +174,10 @@ private extension Content {
         
         private var presentation: SRGContentPresentation {
             return contentSection.presentation
+        }
+        
+        var uid: String? {
+            contentSection.uid
         }
         
         var title: String? {
@@ -498,6 +503,10 @@ private extension Content {
 private extension Content {
     struct ConfiguredSectionProperties: SectionProperties {
         let configuredSection: ConfiguredSection
+        
+        var uid: String? {
+            return nil
+        }
         
         var title: String? {
             switch configuredSection {

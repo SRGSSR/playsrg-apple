@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
     UIGestureRecognizerDelegate, UITableViewDataSource, UITableViewDelegate, UIViewControllerTransitioningDelegate, NSUserActivityDelegate>
 
 // Use nil for starting at the default location (resumes if the media is already being played)
-- (instancetype)initWithURN:(NSString *)URN position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification;
-- (instancetype)initWithMedia:(SRGMedia *)media position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification;
+- (instancetype)initWithURN:(NSString *)URN position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification sourceUid:(nullable NSString *)sourceUid;
+- (instancetype)initWithMedia:(SRGMedia *)media position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification sourceUid:(nullable NSString *)sourceUid;
 - (instancetype)initWithController:(SRGLetterboxController *)controller position:(nullable SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification;
 
 @property (nonatomic, readonly) SRGLetterboxController *letterboxController;

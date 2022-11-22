@@ -290,7 +290,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSString *mediaURN = userInfo[@"media"];
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
-        [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
+        [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES sourceUid:@"notification" completionBlock:^{
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = userInfo[@"show"] ?: AnalyticsSourceNotificationPush;
             labels.type = userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;

@@ -65,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
                                 position:(nullable SRGPosition *)position
                       airPlaySuggestions:(BOOL)airPlaySuggestions
                     fromPushNotification:(BOOL)fromPushNotification
+                               sourceUid:(nullable NSString *)sourceUid
                                 animated:(BOOL)animated
                               completion:(nullable void (^)(PlayerType playerType))completion API_UNAVAILABLE(tvos);
 

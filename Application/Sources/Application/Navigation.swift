@@ -175,7 +175,7 @@ extension UIViewController {
                     }
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
-                    self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
+                    self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, sourceUid: nil, animated: animated) { _ in
                         let labels = SRGAnalyticsHiddenEventLabels()
                         labels.source = notification.showURN ?? AnalyticsSource.notification.rawValue
                         labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue
@@ -214,7 +214,7 @@ extension UIViewController {
     
     func navigateToDownload(_ download: Download, animated: Bool = true) {
         if let media = download.media {
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated, completion: nil)
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, sourceUid: nil, animated: animated, completion: nil)
         }
         else {
             let error = NSError(
@@ -228,10 +228,10 @@ extension UIViewController {
         }
     }
     
-    func navigateToItem(_ item: Content.Item, animated: Bool = true) {
+    func navigateToItem(_ item: Content.Item, section: Content.Section? = nil, animated: Bool = true) {
         switch item {
         case let .media(media):
-            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated, completion: nil)
+            play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, sourceUid: section?.properties.uid, animated: animated, completion: nil)
         case let .show(show):
             guard let navigationController else { return }
             let showViewController = SectionViewController.showViewController(for: show)

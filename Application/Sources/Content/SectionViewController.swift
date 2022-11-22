@@ -470,7 +470,7 @@ extension SectionViewController: UICollectionViewDelegate {
             updateNavigationBar()
         }
         else {
-            navigateToItem(item)
+            navigateToItem(item, section: model.configuration.wrappedValue)
         }
     }
     

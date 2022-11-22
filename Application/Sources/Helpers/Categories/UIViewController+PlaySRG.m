@@ -161,17 +161,17 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
 
 #pragma mark Media player presentation
 
-- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(PlayerType))completion
+- (void)play_presentMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid animated:(BOOL)animated completion:(void (^)(PlayerType))completion
 {
     if (! position) {
         position = HistoryResumePlaybackPositionForMedia(media);
     }
     GCKCastSession *castSession = [GCKCastContext sharedInstance].sessionManager.currentCastSession;
     if (castSession) {
-        [self play_presentGoogleCastPlayerWithMedia:media standalone:YES position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:completion];
+        [self play_presentGoogleCastPlayerWithMedia:media standalone:YES position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification sourceUid:sourceUid animated:animated completion:completion];
     }
     else {
-        [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
+        [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification sourceUid:sourceUid animated:animated completion:^{
             completion ? completion(PlayerTypeNative) : nil;
         }];
     }
@@ -192,7 +192,7 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
 
 #pragma mark Implementation helpers
 
-- (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(void))completion
+- (void)play_presentNativeMediaPlayerWithMedia:(SRGMedia *)media position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid animated:(BOOL)animated completion:(void (^)(void))completion
 {
     UIViewController *topViewController = UIApplication.sharedApplication.mainTopViewController;
     if ([topViewController isKindOfClass:MediaPlayerViewController.class]) {
@@ -210,13 +210,15 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
             }];
         }
         else {
-            [letterboxController playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            SRGLetterboxPlaybackSettings *applicationSettingPlaybackSettings = ApplicationSettingPlaybackSettings();
+            applicationSettingPlaybackSettings.sourceUid = sourceUid;
+            [letterboxController playMedia:media atPosition:position withPreferredSettings:applicationSettingPlaybackSettings];
         }
         completion ? completion() : nil;
     }
     else {
         void (^openPlayer)(void) = ^{
-            MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification];
+            MediaPlayerViewController *mediaPlayerViewController = [[MediaPlayerViewController alloc] initWithMedia:media position:position fromPushNotification:fromPushNotification sourceUid:sourceUid];
             SRGLetterboxController *letterboxController = mediaPlayerViewController.letterboxController;
             Playlist *playlist = PlaylistForURN(media.URN);
             letterboxController.playlistDataSource = playlist;
@@ -309,11 +311,11 @@ static void *s_isViewCurrentKey = &s_isViewCurrentKey;
     }
 }
 
-- (void)play_presentGoogleCastPlayerWithMedia:(SRGMedia *)media standalone:(BOOL)standalone position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification animated:(BOOL)animated completion:(void (^)(PlayerType))completion
+- (void)play_presentGoogleCastPlayerWithMedia:(SRGMedia *)media standalone:(BOOL)standalone position:(SRGPosition *)position airPlaySuggestions:(BOOL)airPlaySuggestions fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid animated:(BOOL)animated completion:(void (^)(PlayerType))completion
 {
     [[SRGDataProvider.currentDataProvider mediaCompositionForURN:media.URN standalone:standalone withCompletionBlock:^(SRGMediaComposition * _Nullable mediaComposition, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
         void (^presentNativePlayer)(NSString *) = ^(NSString *message) {
-            [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification animated:animated completion:^{
+            [self play_presentNativeMediaPlayerWithMedia:media position:position airPlaySuggestions:airPlaySuggestions fromPushNotification:fromPushNotification sourceUid:sourceUid animated:animated completion:^{
                 [Banner showWithStyle:BannerStyleInfo message:message image:nil sticky:NO];
                 completion ? completion(PlayerTypeNative) : nil;
             }];

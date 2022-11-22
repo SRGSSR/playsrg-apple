@@ -365,11 +365,13 @@
     
     SRGPosition *position = HistoryResumePlaybackPositionForMedia(media);
     SRGLetterboxController *controller = self.controller;
+    SRGLetterboxPlaybackSettings *applicationSettingPlaybackSettings = ApplicationSettingPlaybackSettings();
+    applicationSettingPlaybackSettings.sourceUid = @"miniPlayer";
     
     // If a controller is readily available, use it
     if (controller) {
         if (! [media isEqual:controller.media]) {
-            [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+            [controller playMedia:media atPosition:position withPreferredSettings:applicationSettingPlaybackSettings];
         }
         else {
             [controller togglePlayPause];
@@ -380,7 +382,7 @@
     else {
         controller = [[SRGLetterboxController alloc] init];
         ApplicationConfigurationApplyControllerSettings(controller);
-        [controller playMedia:media atPosition:position withPreferredSettings:ApplicationSettingPlaybackSettings()];
+        [controller playMedia:media atPosition:position withPreferredSettings:applicationSettingPlaybackSettings];
         [SRGLetterboxService.sharedService enableWithController:controller pictureInPictureDelegate:nil];
     }
     
@@ -425,7 +427,7 @@
         [self.play_nearestViewController play_presentMediaPlayerFromLetterboxController:controller withAirPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
     }
     else {
-        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO animated:YES completion:nil];
+        [self.play_nearestViewController play_presentMediaPlayerWithMedia:media position:nil airPlaySuggestions:YES fromPushNotification:NO sourceUid:@"miniPlayer" animated:YES completion:nil];
     }
 }
 

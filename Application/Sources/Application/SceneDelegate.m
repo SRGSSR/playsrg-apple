@@ -119,7 +119,7 @@ static void *s_kvoContext = &s_kvoContext;
     if ([action.type isEqualToString:DeepLinkTypeMedia]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         NSInteger startTime = [action parameterWithName:@"start_time"].integerValue;
-        [self openMediaWithURN:action.identifier startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
+        [self openMediaWithURN:action.identifier startTime:startTime channelUid:channelUid fromPushNotification:NO sourceUid:@"deepLink" completionBlock:^{
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
         }];
     }
@@ -207,7 +207,7 @@ static void *s_kvoContext = &s_kvoContext;
 
 #pragma mark User interface changes
 
-- (void)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification completionBlock:(void (^)(void))completionBlock
+- (void)openMediaWithURN:(NSString *)mediaURN startTime:(NSInteger)startTime channelUid:(NSString *)channelUid fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid completionBlock:(void (^)(void))completionBlock
 {
     NSParameterAssert(mediaURN);
     
@@ -216,7 +216,7 @@ static void *s_kvoContext = &s_kvoContext;
     
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:^{
         CMTime time = (startTime > 0) ? CMTimeMakeWithSeconds(startTime, NSEC_PER_SEC) : kCMTimeZero;
-        [self playURN:mediaURN media:nil atPosition:[SRGPosition positionAtTime:time] fromPushNotification:fromPushNotification completion:nil];
+        [self playURN:mediaURN media:nil atPosition:[SRGPosition positionAtTime:time] fromPushNotification:fromPushNotification sourceUid:sourceUid completion:nil];
         completionBlock ? completionBlock() : nil;
     }];
 }
@@ -330,7 +330,7 @@ static void *s_kvoContext = &s_kvoContext;
         if (mediaURN) {
             SRGMedia *media = [NSKeyedUnarchiver unarchivedObjectOfClass:SRGMedia.class fromData:userActivity.userInfo[@"SRGMediaData"] error:NULL];
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
-            [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
+            [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO sourceUid:@"userActivity" completion:nil];
             
             SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
             labels.source = AnalyticsSourceHandoff;
@@ -437,15 +437,15 @@ static void *s_kvoContext = &s_kvoContext;
     }
 }
 
-- (void)playURN:(NSString *)mediaURN media:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification completion:(void (^)(PlayerType))completion
+- (void)playURN:(NSString *)mediaURN media:(SRGMedia *)media atPosition:(SRGPosition *)position fromPushNotification:(BOOL)fromPushNotification sourceUid:(NSString *)sourceUid completion:(void (^)(PlayerType))completion
 {
     if (media) {
-        [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
+        [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification sourceUid:sourceUid animated:YES completion:completion];
     }
     else {
         [[SRGDataProvider.currentDataProvider mediaWithURN:mediaURN completionBlock:^(SRGMedia * _Nullable media, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
             if (media) {
-                [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification animated:YES completion:completion];
+                [self.rootTabBarController play_presentMediaPlayerWithMedia:media position:position airPlaySuggestions:YES fromPushNotification:fromPushNotification sourceUid:sourceUid animated:YES completion:completion];
             }
             else {
                 NSError *error = [NSError errorWithDomain:PlayErrorDomain
