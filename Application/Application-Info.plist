@@ -198,6 +198,10 @@
 	<string>The application uses the microphone for Google Cast receiver discovery.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>The application uses the calendar to add TV programs.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>The application should not use Bluetooth. Please don’t allow.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>The application should not use Bluetooth. Please don’t allow.</string>
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER).playing</string>
