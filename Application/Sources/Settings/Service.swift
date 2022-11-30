@@ -12,25 +12,25 @@ struct Service: Identifiable, Equatable {
     let name: String
     let url: URL
     
-    static var production = Service(
+    static var production = Self(
         id: "production",
         name: NSLocalizedString("Production", comment: "Server setting name"),
         url: SRGIntegrationLayerProductionServiceURL()
     )
     
-    static var stage = Service(
+    static var stage = Self(
         id: "stage",
         name: NSLocalizedString("Stage", comment: "Server setting name"),
         url: SRGIntegrationLayerStagingServiceURL()
     )
     
-    static var test = Service(
+    static var test = Self(
         id: "test",
         name: NSLocalizedString("Test", comment: "Server setting name"),
         url: SRGIntegrationLayerTestServiceURL()
     )
     
-    static var mmf = Service(
+    static var mmf = Self(
         id: "play mmf",
         name: "Play MMF",
         url: mmfUrl
@@ -44,19 +44,19 @@ struct Service: Identifiable, Equatable {
         return URL(string: mmfUrlString)!
     }()
     
-    static var samProduction = Service(
+    static var samProduction = Self(
         id: "sam production",
         name: "SAM \(NSLocalizedString("Production", comment: "Server setting name"))",
         url: SRGIntegrationLayerProductionServiceURL().appendingPathComponent("sam")
     )
     
-    static var samStage = Service(
+    static var samStage = Self(
         id: "sam stage",
         name: "SAM \(NSLocalizedString("Stage", comment: "Server setting name"))",
         url: SRGIntegrationLayerStagingServiceURL().appendingPathComponent("sam")
     )
     
-    static var samTest = Service(
+    static var samTest = Self(
         id: "sam test",
         name: "SAM \(NSLocalizedString("Test", comment: "Server setting name"))",
         url: SRGIntegrationLayerTestServiceURL().appendingPathComponent("sam")

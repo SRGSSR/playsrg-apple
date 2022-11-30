@@ -106,6 +106,6 @@ extension MediaDetailViewModel {
         let watchLaterAllowedAction: WatchLaterAction
         let relatedMedias: [SRGMedia]
         
-        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
+        static var empty = Self(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
     }
 }

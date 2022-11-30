@@ -462,7 +462,7 @@ extension ProgramViewModel {
         let watchLaterAllowedAction: WatchLaterAction
         let progress: Double?
         
-        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, progress: nil)
+        static var empty = Self(media: nil, watchLaterAllowedAction: .none, progress: nil)
     }
     
     /// Common button properties
