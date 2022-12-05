@@ -233,6 +233,13 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
+            
+            let clickEventLabels = analyticsClickEventLabels()
+            clickEventLabels.extraValue1 = "videosByDate"
+            clickEventLabels.extraValue2 = "List"
+            clickEventLabels.extraValue3 = program.title
+            clickEventLabels.extraValue4 = program.mediaURN
+            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuideOpenInfoBox", labels: clickEventLabels)
         }
     }
 }

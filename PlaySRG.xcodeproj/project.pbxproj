@@ -32,6 +32,16 @@
 		0451ECEA28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
 		0451ECEB28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
 		0451ECEC28742D8000E89975 /* UIWindowScene+PlaySRG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */; };
+		04C2DE782937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE792937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7A2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7B2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7C2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7D2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7E2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE7F2937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE802937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
+		04C2DE812937C67000E85A03 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C2DE772937C67000E85A03 /* Analytics.swift */; };
 		04D5477D27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477E27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
 		04D5477F27BFFE79003D1BC2 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */; };
@@ -2690,6 +2700,7 @@
 		0407308428635FE9002E8221 /* SearchSettingsBucketsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchSettingsBucketsView.swift; sourceTree = "<group>"; };
 		043CBF0B286512CF0063FD97 /* SearchBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		0451ECE228742D8000E89975 /* UIWindowScene+PlaySRG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+PlaySRG.swift"; sourceTree = "<group>"; };
+		04C2DE772937C67000E85A03 /* Analytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		04D5477C27BFFE79003D1BC2 /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		04D5F91E286C4542000A5A4E /* Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recommendation.swift; sourceTree = "<group>"; };
 		04E031CE28BD0EF000450D38 /* RemoteCommandCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteCommandCenter.swift; sourceTree = "<group>"; };
@@ -3831,6 +3842,7 @@
 			isa = PBXGroup;
 			children = (
 				6FF9EC4D2626C9CC00A2E11A /* Accessibility.swift */,
+				04C2DE772937C67000E85A03 /* Analytics.swift */,
 				6FE1B4951DCB84F00094D5BA /* AnalyticsConstants.h */,
 				6FE1B4961DCB84F00094D5BA /* AnalyticsConstants.m */,
 				087584C723A0008500FA7207 /* ApplicationSectionInfo.h */,
@@ -8463,6 +8475,7 @@
 				6FE38A27270CF860004DD296 /* CarPlayTemplateListController.swift in Sources */,
 				08C68F8A1D38DEA100BB8AAA /* AppDelegate.m in Sources */,
 				080981302622195900AA586B /* LiveMediaCell.swift in Sources */,
+				04C2DE782937C67000E85A03 /* Analytics.swift in Sources */,
 				E62459EE1D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
 				6FFA68332637E99C00BCDA06 /* Mock.swift in Sources */,
 				6F4760781EB37D60003021EA /* UIColor+PlaySRG.m in Sources */,
@@ -8726,6 +8739,7 @@
 				6F4760821EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6FC6A12B2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F023A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
+				04C2DE792937C67000E85A03 /* Analytics.swift in Sources */,
 				6F4760301EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F33E61A2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F4760811EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -8978,6 +8992,7 @@
 				6F4760891EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6FC6A12C2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F123A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
+				04C2DE7A2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F4760311EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F33E61B2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F4760881EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -9230,6 +9245,7 @@
 				6F4760901EB37DF1003021EA /* UIImageView+PlaySRG.m in Sources */,
 				6FC6A12D2795C1F000EEC8A6 /* DownloadCell.swift in Sources */,
 				087584F223A0008500FA7207 /* ApplicationSectionInfo.m in Sources */,
+				04C2DE7B2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F4760321EB37BD1003021EA /* PlayDurationFormatter.m in Sources */,
 				6F33E61C2860B5EF00724E76 /* SearchSettingsView.swift in Sources */,
 				6F47608F1EB37DF1003021EA /* UIImage+PlaySRG.m in Sources */,
@@ -9487,6 +9503,7 @@
 				6FF0C84B26B44F6A006B3C6A /* ShowCellViewModel.swift in Sources */,
 				6F0850F826256A7700B4E410 /* Reachability.m in Sources */,
 				6FB89E2B283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04C2DE7C2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F9D2747203AD99C00FDE899 /* Playlist.m in Sources */,
 				6F939F732090A1B200D3B0C6 /* NSArray+PlaySRG.m in Sources */,
 				E62459F21D488D0400482BE9 /* SwiftMessagesBridge.swift in Sources */,
@@ -9719,6 +9736,7 @@
 				6FE4F0CC257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB3250286DA000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FB89E2C283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04C2DE7D2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F9210ED26AEDDDA00291CA9 /* Environment.swift in Sources */,
 				6FDB2ABF24E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83A268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -9869,6 +9887,7 @@
 				6FE4F0CD257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB6250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FB89E2D283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04C2DE7E2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F9210EE26AEDDDA00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC024E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83B268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10019,6 +10038,7 @@
 				6FE4F0CE257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB5250286DB000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FB89E2E283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04C2DE7F2937C67000E85A03 /* Analytics.swift in Sources */,
 				6F9210EF26AEDDDB00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC124E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83C268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10169,6 +10189,7 @@
 				6FE4F0CF257A368B00223F22 /* ActivityIndicator.swift in Sources */,
 				6F3F1AB7250286DC000FF4DD /* UIColor+PlaySRG.m in Sources */,
 				6FB89E2F283DEA12006F9C6C /* HighlightCell.swift in Sources */,
+				04C2DE802937C67000E85A03 /* Analytics.swift in Sources */,
 				6F9210F026AEDDDB00291CA9 /* Environment.swift in Sources */,
 				6FDB2AC224E5916F00FF286E /* RedactingView.swift in Sources */,
 				6F1EE83D268A1B0E004A48CA /* ShowHeaderView.swift in Sources */,
@@ -10313,6 +10334,7 @@
 				6F426B2C2567FC7200DD22AB /* SRGProgramComposition+PlaySRG.m in Sources */,
 				6F5A7914256ED7E000E884F2 /* History.m in Sources */,
 				6FA14539254729DA006E8D3B /* FocusableRegion.swift in Sources */,
+				04C2DE812937C67000E85A03 /* Analytics.swift in Sources */,
 				6F14B113283CA4EF00F79447 /* SettingsView.swift in Sources */,
 				6FEF237B2732C2D40098C639 /* TimelineView.swift in Sources */,
 				6FFA683C2637E99C00BCDA06 /* Mock.swift in Sources */,

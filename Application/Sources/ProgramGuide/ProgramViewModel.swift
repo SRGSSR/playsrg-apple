@@ -189,7 +189,22 @@ final class ProgramViewModel: ObservableObject {
         if let media = currentMedia, media.blockingReason(at: Date()) == .none {
             return {
                 guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
-                tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
+                tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true) { [self] _ in
+                    let clickEventLabels = analyticsClickEventLabels()
+                    clickEventLabels.extraValue1 = "videosByDate"
+                    clickEventLabels.extraValue3 = "InfoBox"
+                    
+                    if (media.contentType == .livestream) {
+                        clickEventLabels.extraValue2 = data?.channel.title
+                        clickEventLabels.extraValue4 = data?.program.mediaURN
+                        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuidePlayLivestream", labels: clickEventLabels)
+                    }
+                    else {
+                        clickEventLabels.extraValue2 = media.urn
+                        clickEventLabels.extraValue4 = isLive ? data?.channel.title : nil
+                        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuidePlayMedia", labels: clickEventLabels)
+                    }
+                }
             }
         }
         else {
