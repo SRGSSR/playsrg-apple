@@ -282,6 +282,13 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             return
         }
         
+        let clickEventLabels = analyticsClickEventLabels()
+        clickEventLabels.extraValue1 = "videosByDate"
+        clickEventLabels.extraValue2 = "Grid"
+        clickEventLabels.extraValue3 = program.title
+        clickEventLabels.extraValue4 = program.mediaURN
+        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuideOpenInfoBox", labels: clickEventLabels)
+        
 #if os(tvOS)
         navigateToProgram(program, in: channel)
 #else
@@ -290,13 +297,6 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
-            
-            let clickEventLabels = analyticsClickEventLabels()
-            clickEventLabels.extraValue1 = "videosByDate"
-            clickEventLabels.extraValue2 = "Grid"
-            clickEventLabels.extraValue3 = program.title
-            clickEventLabels.extraValue4 = program.mediaURN
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuideOpenInfoBox", labels: clickEventLabels)
         }
 #endif
     }
