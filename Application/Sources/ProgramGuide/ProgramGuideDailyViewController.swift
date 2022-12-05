@@ -231,7 +231,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
         }
         
         let clickEventLabels = analyticsClickEventLabels()
-        clickEventLabels.extraValue1 = "videosByDate"
+        clickEventLabels.extraValue1 = "tvGuide"
         clickEventLabels.extraValue2 = "List"
         clickEventLabels.extraValue3 = program.title
         clickEventLabels.extraValue4 = program.mediaURN

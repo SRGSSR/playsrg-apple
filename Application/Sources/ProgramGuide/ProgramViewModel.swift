@@ -190,7 +190,7 @@ final class ProgramViewModel: ObservableObject {
            let tabBarController = UIApplication.shared.mainTabBarController {
             return { [self] in
                 let clickEventLabels = analyticsClickEventLabels()
-                clickEventLabels.extraValue1 = "videosByDate"
+                clickEventLabels.extraValue1 = "tvGuide"
                 clickEventLabels.extraValue3 = "InfoBox"
                 
                 if media.contentType == .livestream {

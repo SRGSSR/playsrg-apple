@@ -283,7 +283,7 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
         }
         
         let clickEventLabels = analyticsClickEventLabels()
-        clickEventLabels.extraValue1 = "videosByDate"
+        clickEventLabels.extraValue1 = "tvGuide"
         clickEventLabels.extraValue2 = "Grid"
         clickEventLabels.extraValue3 = program.title
         clickEventLabels.extraValue4 = program.mediaURN
