@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "logo_srf1.pdf",
+      "filename" : "srf1_logo_1_rgb22.pdf",
       "idiom" : "iphone"
     },
     {
-      "filename" : "logo_srf1-1.pdf",
+      "filename" : "srf1_logo_1_rgb22 1.pdf",
       "idiom" : "ipad"
     },
     {
-      "filename" : "logo_srf1-3.pdf",
+      "filename" : "srf1_logo_1_rgb22 2.pdf",
       "idiom" : "car"
     },
     {
-      "filename" : "logo_srf1-2.pdf",
+      "filename" : "srf1_logo_1_rgb22 3.pdf",
       "idiom" : "tv"
     }
   ],
