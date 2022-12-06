@@ -230,12 +230,8 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
             return
         }
         
-        let clickEventLabels = analyticsClickEventLabels()
-        clickEventLabels.extraValue1 = "tvGuide"
-        clickEventLabels.extraValue2 = "List"
-        clickEventLabels.extraValue3 = program.title
-        clickEventLabels.extraValue4 = program.mediaURN
-        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuideOpenInfoBox", labels: clickEventLabels)
+        let analyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .list)
+        analyticsClickEvent.send()
         
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {

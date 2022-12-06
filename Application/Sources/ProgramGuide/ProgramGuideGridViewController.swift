@@ -282,16 +282,12 @@ extension ProgramGuideGridViewController: UICollectionViewDelegate {
             return
         }
         
-        let clickEventLabels = analyticsClickEventLabels()
-        clickEventLabels.extraValue1 = "tvGuide"
-        clickEventLabels.extraValue2 = "Grid"
-        clickEventLabels.extraValue3 = program.title
-        clickEventLabels.extraValue4 = program.mediaURN
-        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: "TvGuideOpenInfoBox", labels: clickEventLabels)
-        
 #if os(tvOS)
         navigateToProgram(program, in: channel)
 #else
+        let analyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid)
+        analyticsClickEvent.send()
+        
         // Deselection is managed here rather than in view appearance methods, as those are not called with the
         // modal presentation we use.
         let programViewController = ProgramView.viewController(for: program, channel: channel)
