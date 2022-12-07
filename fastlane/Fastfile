@@ -1649,13 +1649,16 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
-def major_version(platform)
-  platform == 'iOS' ? 3 : 1
+def release_notes_minimum_version(platform)
+  platform == 'iOS' ? '3.0.0' : '1.0.0'
 end
 
 def release_notes_table_for_html(platform, business_unit)
-  table = get_appstore_release_notes_table(platform, business_unit).reverse
-  table.select { |row| row[0].start_with?(major_version(platform).to_s) }
+  minimum_version = Gem::Version.new(release_notes_minimum_version(platform))
+
+  table = get_appstore_release_notes_table(platform, business_unit)
+  table = table.sort_by { |row| Gem::Version.new(row[0]) }.reverse
+  table.select { |row| Gem::Version.new(row[0]) >= minimum_version }
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
