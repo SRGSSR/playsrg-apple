@@ -61,4 +61,18 @@ struct AnalyticsClickEvent {
             value4: programIsLive ? channel.title : nil
         )
     }
+    
+    static func TvGuideNow() -> AnalyticsClickEvent {
+        return Self(
+            name: "DateSelectionNowClick",
+            value1: "tvGuide"
+        )
+    }
+    
+    static func TvGuideTonight() -> AnalyticsClickEvent {
+        return Self(
+            name: "DateSelectionTonightClick",
+            value1: "tvGuide"
+        )
+    }
 }
