@@ -14,8 +14,11 @@ struct MediaDetailView: View {
     @Binding var media: SRGMedia?
     @StateObject private var model = MediaDetailViewModel()
     
-    init(media: SRGMedia?) {
+    private let playAnalyticsClickEvent: AnalyticsClickEvent?
+    
+    init(media: SRGMedia?, playAnalyticsClickEvent: AnalyticsClickEvent? = nil) {
         _media = .constant(media)
+        self.playAnalyticsClickEvent = playAnalyticsClickEvent
     }
     
     var body: some View {
@@ -34,6 +37,10 @@ struct MediaDetailView: View {
         .background(Color.srgGray16)
         .edgesIgnoringSafeArea(.all)
         .onAppear {
+            if model.media == nil {
+                model.playAnalyticsClickEvent = playAnalyticsClickEvent
+                model.playAnalyticsClickEventMediaUrn = media?.urn
+            }
             model.media = model.media ?? media
         }
         .onChange(of: media) { newValue in
@@ -188,7 +195,8 @@ struct MediaDetailView: View {
                 // TODO: 22 icon?
                 LabeledButton(icon: "play", label: playButtonLabel) {
                     if let media = model.media {
-                        navigateToMedia(media, play: true)
+                        let playAnalyticsClickEvent = media.urn == model.playAnalyticsClickEventMediaUrn ? model.playAnalyticsClickEvent : nil
+                        navigateToMedia(media, play: true, playAnalyticsClickEvent: playAnalyticsClickEvent)
                     }
                 }
                 if let action = model.watchLaterAllowedAction, let isRemoval = (action == .remove) {
