@@ -230,9 +230,7 @@ extension ProgramGuideDailyViewController: UICollectionViewDelegate {
             return
         }
         
-        let analyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .list)
-        analyticsClickEvent.send()
-        
+        AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .list).send()
         let programViewController = ProgramView.viewController(for: program, channel: channel)
         present(programViewController, animated: true) {
             self.deselectItems(in: collectionView, animated: true)
