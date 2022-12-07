@@ -75,4 +75,12 @@ struct AnalyticsClickEvent {
             value1: "tvGuide"
         )
     }
+    
+    static func TvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
+        return Self(
+            name: "TvGuideChangeLayout",
+            value1: "tvGuide",
+            value2: programGuideLayout == .grid ? "Grid" : "List"
+        )
+    }
 }
