@@ -51,5 +51,6 @@
   "1.6.5-50": "- Improved tvOS 16 compatibility.",
   "1.6.6-51": "- Add live label in TV guide program preview.\n- Add sport livestreams in livestreams tab. [RTS, SRF]",
   "1.6.6-52": "- BU or sport livestreams in livestreams tab. [RTR, RTS, SRF]\n- Reload page content after a while in background.",
-  "1.6.6-53": "- Update translations for BU or sport livestreams in livestreams tab. [RTR, RTS, SRF]\n- AppStore release."
+  "1.6.6-53": "- Update translations for BU or sport livestreams in livestreams tab. [RTR, RTS, SRF]\n- AppStore release.",
+  "1.6.7-54": "- Update Radio SRF 1 logo. [SRF]\n- Program guide metrics."
 }
