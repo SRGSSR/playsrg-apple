@@ -22,7 +22,7 @@ struct AnalyticsClickEvent {
         self.name = name
         
         let labels = SRGAnalyticsHiddenEventLabels()
-        labels.source = "2727"
+        labels.source = "2797"
         labels.type = "ClickEvent"
         labels.extraValue1 = value1
         labels.extraValue2 = value2
@@ -78,7 +78,7 @@ struct AnalyticsClickEvent {
     
     static func TvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
-            name: "TvGuideChangeLayout",
+            name: "TvGuideSwitchLayout",
             value1: "tvGuide",
             value2: programGuideLayout == .grid ? "Grid" : "List"
         )
