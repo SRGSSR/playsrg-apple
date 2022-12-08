@@ -793,7 +793,7 @@ platform :ios do
       clean_build_artifacts
     end
 
-    changelog = what_s_new_for_beta(platform, nil)
+    changelog = what_s_new_for_beta(platform, tag_version)
 
     schemes.each_index do |index|
       app_identifier = appstore_beta_identifiers[index]
@@ -802,6 +802,8 @@ platform :ios do
 
       UI.success "#{schemes[index]} (#{platform} Beta #{tag_version}) distributed. ✅"
     end
+
+    slack_beta_release(platform, tag_version)
 
     bump_build_number_beta_workflow(platform)
   end
@@ -1647,13 +1649,16 @@ def collect_appstore_release_notes(platform, business_unit, language_directory, 
   UI.important "Release notes for Play #{business_unit} #{platform} #{marketing_version}:\n#{release_notes}"
 end
 
-def major_version(platform)
-  platform == 'iOS' ? 3 : 1
+def release_notes_minimum_version(platform)
+  platform == 'iOS' ? '3.0.0' : '1.0.0'
 end
 
 def release_notes_table_for_html(platform, business_unit)
-  table = get_appstore_release_notes_table(platform, business_unit).reverse
-  table.select { |row| row[0].start_with?(major_version(platform).to_s) }
+  minimum_version = Gem::Version.new(release_notes_minimum_version(platform))
+
+  table = get_appstore_release_notes_table(platform, business_unit)
+  table = table.sort_by { |row| Gem::Version.new(row[0]) }.reverse
+  table.select { |row| Gem::Version.new(row[0]) >= minimum_version }
 end
 
 def get_appstore_release_notes(platform, business_unit, marketing_version)
@@ -1859,6 +1864,50 @@ def publish_on_github_pages(output_directory, releases_directory)
     sh "git checkout #{branch_name}"
     sh 'git branch -D gh-pages'
   end
+end
+
+def slack_beta_release(platform, tag_version)
+  tag_version ||= tag_version(platform)
+  return unless ENV['SLACK_URL'] && ENV['SLACK_CHANNEL']
+
+  slack(
+    message: "#{platform_emoji(platform)} Welcome to the latest Play #{platform} beta 🎯",
+    channel: ENV['SLACK_CHANNEL'],
+    default_payloads: [],
+    payload: slack_payload(platform, tag_version),
+    attachment_properties: {
+      'footer' => 'TestFlight review for external distribution could take up to 24 hours.'
+    }
+  )
+end
+
+def platform_emoji(platform)
+  platform ||= 'iOS'
+
+  if platform == 'iOS'
+    '📱'
+  else
+    '📺'
+  end
+end
+
+def slack_payload(platform, tag_version)
+  build_number = build_number_from_tag_version(tag_version)
+  marketing_version = marketing_version_from_tag_version(tag_version)
+
+  {
+    'Version' => "`Play #{platform} #{marketing_version} (#{build_number})`",
+    'Release notes' => what_s_new_for_beta(platform, tag_version),
+    'Jira issues' => jira_issues_url(platform, marketing_version),
+    'Distribution date' => Time.new.strftime('%d.%m.%Y %H:%M %z')
+  }
+end
+
+def jira_issues_url(platform, marketing_version)
+  return 'NaN' unless ENV['JIRA_URL']
+
+  jira_issues_query = "fixVersion%20%3D%20%22Play%20#{platform}%20#{marketing_version}%22"
+  "#{ENV['JIRA_URL']}/issues/?jql=#{jira_issues_query}"
 end
 
 # More information about multiple platforms in fastlane: https://github.com/fastlane/fastlane/blob/master/fastlane/docs/Platforms.md
