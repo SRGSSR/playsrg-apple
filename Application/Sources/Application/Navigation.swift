@@ -21,12 +21,16 @@ private var isPresenting = false
 private var cancellables = Set<AnyCancellable>()
 
 extension UIViewController {
-    func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true, completion: (() -> Void)? = nil) {
+    func navigateToMedia(_ media: SRGMedia, play: Bool = false, mediaAnalyticsClickEvent: AnalyticsClickEvent? = nil, playAnalyticsClickEvent: AnalyticsClickEvent? = nil, from program: SRGProgram? = nil, animated: Bool = true, completion: (() -> Void)? = nil) {
         if !play && media.contentType != .livestream {
-            let hostController = UIHostingController(rootView: MediaDetailView(media: media))
+            mediaAnalyticsClickEvent?.send()
+            
+            let hostController = UIHostingController(rootView: MediaDetailView(media: media, playAnalyticsClickEvent: playAnalyticsClickEvent))
             present(hostController, animated: animated, completion: completion)
         }
         else {
+            playAnalyticsClickEvent?.send()
+            
             let letterboxViewController = SRGLetterboxViewController()
             letterboxViewController.delegate = LetterboxDelegate.shared
             
@@ -83,7 +87,12 @@ extension UIViewController {
             .sink { _ in
                 // No error banners displayed on tvOS yet
             } receiveValue: { [weak self] media in
-                self?.navigateToMedia(media, animated: animated, completion: completion)
+                let playAnalyticsClickEvent = media.contentType == .livestream ?
+                AnalyticsClickEvent.TvGuidePlayLivestream(program: program, channel: channel) :
+                AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
+                let mediaAnalyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid)
+                
+                self?.navigateToMedia(media, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, from: program, animated: animated, completion: completion)
             }
     }
     
@@ -119,10 +128,10 @@ extension UIViewController {
     }
 }
 
-func navigateToMedia(_ media: SRGMedia, play: Bool = false, animated: Bool = true) {
+func navigateToMedia(_ media: SRGMedia, play: Bool = false, mediaAnalyticsClickEvent: AnalyticsClickEvent? = nil, playAnalyticsClickEvent: AnalyticsClickEvent? = nil, animated: Bool = true) {
     guard !isPresenting, let topViewController = UIApplication.shared.mainTopViewController else { return }
     isPresenting = true
-    topViewController.navigateToMedia(media, play: play, animated: animated) {
+    topViewController.navigateToMedia(media, play: play, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, animated: animated) {
         isPresenting = false
     }
 }

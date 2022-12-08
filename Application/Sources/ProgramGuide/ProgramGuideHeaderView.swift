@@ -94,9 +94,11 @@ struct ProgramGuideHeaderView: View {
                 }
 #endif
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
+                    AnalyticsClickEvent.TvGuideNow().send()
                     model.switchToNow()
                 }
                 ExpandingButton(label: NSLocalizedString("Tonight", comment: "Tonight button in program guide")) {
+                    AnalyticsClickEvent.TvGuideTonight().send()
                     model.switchToTonight()
                 }
             }

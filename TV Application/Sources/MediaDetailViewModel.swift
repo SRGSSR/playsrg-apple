@@ -12,6 +12,9 @@ import SRGUserData
 final class MediaDetailViewModel: ObservableObject {
     @Published var media: SRGMedia?
     
+    var playAnalyticsClickEvent: AnalyticsClickEvent?
+    var playAnalyticsClickEventMediaUrn: String?
+    
     @Published private var mediaData: MediaData = .empty
     
     init() {
