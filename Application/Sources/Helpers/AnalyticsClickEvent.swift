@@ -14,6 +14,10 @@ struct AnalyticsClickEvent {
     let name: String
     let labels: SRGAnalyticsHiddenEventLabels
     
+    private enum PageId: String {
+        case tvGuide
+    }
+    
     func send() {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
@@ -35,7 +39,7 @@ struct AnalyticsClickEvent {
     static func tvGuideOpenInfoBox(program: SRGProgram, programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuideOpenInfoBox",
-            value1: "tvGuide",
+            value1: PageId.tvGuide.rawValue,
             value2: programGuideLayout == .grid ? "Grid" : "List",
             value3: program.title,
             value4: program.mediaURN
@@ -45,7 +49,7 @@ struct AnalyticsClickEvent {
     static func TvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayLivestream",
-            value1: "tvGuide",
+            value1: PageId.tvGuide.rawValue,
             value2: channel.title,
             value3: "InfoBox",
             value4: program.mediaURN
@@ -55,7 +59,7 @@ struct AnalyticsClickEvent {
     static func TvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayMedia",
-            value1: "tvGuide",
+            value1: PageId.tvGuide.rawValue,
             value2: media.urn,
             value3: "InfoBox",
             value4: programIsLive ? channel.title : nil
@@ -65,28 +69,28 @@ struct AnalyticsClickEvent {
     static func TvGuideNow() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionNowClick",
-            value1: "tvGuide"
+            value1: PageId.tvGuide.rawValue
         )
     }
     
     static func TvGuideTonight() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionTonightClick",
-            value1: "tvGuide"
+            value1: PageId.tvGuide.rawValue
         )
     }
     
     static func TvGuidePreviousDay() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionPreviousDayClick",
-            value1: "tvGuide"
+            value1: PageId.tvGuide.rawValue
         )
     }
     
     static func TvGuideNextDay() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionNextDayClick",
-            value1: "tvGuide"
+            value1: PageId.tvGuide.rawValue
         )
     }
     
@@ -94,14 +98,14 @@ struct AnalyticsClickEvent {
         return Self(
             name: "DateSelectionCalendarClick",
             value1: DateFormatter.play_iso8601Calendar().string(from: selectedDate),
-            value2: "tvGuide"
+            value2: PageId.tvGuide.rawValue
         )
     }
     
     static func TvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuideSwitchLayout",
-            value1: "tvGuide",
+            value1: PageId.tvGuide.rawValue,
             value2: programGuideLayout == .grid ? "Grid" : "List"
         )
     }
