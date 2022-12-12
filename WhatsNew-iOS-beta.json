@@ -179,5 +179,6 @@
   "3.6.8-400": "- Add sport livestreams in livestreams tab. [RTS, SRF]",
   "3.6.8-401": "- Reload page content after a while in background.\n- Deeplink to open livestreams tab.",
   "3.6.8-402": "- Update translations for BU or sport livestreams in livestreams tab. [RTR, RTS, SRF]\n- AppStore release.",
-  "3.6.9-403": "- Update Radio SRF 1 logo. [SRF]\n- Program guide metrics."
+  "3.6.9-403": "- Update Radio SRF 1 logo. [SRF]\n- Program guide metrics.",
+  "3.6.9-404": "- Fix program guide list layout update.\n- AppStore release."
 }
