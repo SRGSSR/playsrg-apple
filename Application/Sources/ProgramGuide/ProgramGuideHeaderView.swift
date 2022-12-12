@@ -116,6 +116,7 @@ struct ProgramGuideHeaderView: View {
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
+                    AnalyticsClickEvent.TvGuidePreviousDay().send()
                     model.switchToPreviousDay()
                 }
                 .frame(width: Self.buttonWidth)
@@ -129,6 +130,7 @@ struct ProgramGuideHeaderView: View {
 #endif
                 
                 ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
+                    AnalyticsClickEvent.TvGuideNextDay().send()
                     model.switchToNextDay()
                 }
                 .frame(width: Self.buttonWidth)

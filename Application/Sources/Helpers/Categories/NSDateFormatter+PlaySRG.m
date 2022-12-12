@@ -119,7 +119,7 @@
     return s_dateFormatter;
 }
 
-+ (NSDateFormatter *)play_URLOptionDateFormatter
++ (NSDateFormatter *)play_iso8601CalendarDateFormatter
 {
     static NSDateFormatter *s_dateFormatter;
     static dispatch_once_t s_onceToken;
