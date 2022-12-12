@@ -78,8 +78,9 @@ final class ProgramGuideListViewController: UIViewController {
               currentViewController.day != day else { return }
         let direction: UIPageViewController.NavigationDirection = (day.date < currentViewController.day.date) ? .reverse : .forward
         let dailyViewController = ProgramGuideDailyViewController(day: day, programGuideModel: model)
-        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: nil)
-        play_setNeedsScrollableViewUpdate()
+        pageViewController.setViewControllers([dailyViewController], direction: direction, animated: true, completion: { [weak self] _ in
+            self?.play_setNeedsScrollableViewUpdate()
+        })
     }
 }
 
