@@ -149,7 +149,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
     else if ([action.type isEqualToString:DeepLinkTypeByDate]) {
         NSString *dateString = [action parameterWithName:@"date"];
-        NSDate *date = dateString ? [NSDateFormatter.play_URLOptionDateFormatter dateFromString:dateString] : nil;
+        NSDate *date = dateString ? [NSDateFormatter.play_iso8601CalendarDateFormatter dateFromString:dateString] : nil;
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:^{
             [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];

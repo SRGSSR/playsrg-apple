@@ -71,9 +71,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (class, nonatomic, readonly) NSDateFormatter *play_relativeShortDateAndTimeFormatter;
 
 /**
- *  Formatter for URL date options.
+ *  ISO 8601 calendar date formatter.
  */
-+ (NSDateFormatter *)play_URLOptionDateFormatter;
++ (NSDateFormatter *)play_iso8601CalendarDateFormatter;
 
 /**
  *  RFC 3339 date formatter.

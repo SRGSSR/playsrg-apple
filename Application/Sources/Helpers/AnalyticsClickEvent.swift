@@ -76,6 +76,28 @@ struct AnalyticsClickEvent {
         )
     }
     
+    static func TvGuidePreviousDay() -> AnalyticsClickEvent {
+        return Self(
+            name: "DateSelectionPreviousDayClick",
+            value1: "tvGuide"
+        )
+    }
+    
+    static func TvGuideNextDay() -> AnalyticsClickEvent {
+        return Self(
+            name: "DateSelectionNextDayClick",
+            value1: "tvGuide"
+        )
+    }
+    
+    static func TvGuideCalendar(to selectedDate: Date) -> AnalyticsClickEvent {
+        return Self(
+            name: "DateSelectionCalendarClick",
+            value1: DateFormatter.play_iso8601Calendar().string(from: selectedDate),
+            value2: "tvGuide"
+        )
+    }
+    
     static func TvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuideSwitchLayout",
