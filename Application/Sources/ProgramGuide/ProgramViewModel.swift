@@ -186,9 +186,18 @@ final class ProgramViewModel: ObservableObject {
     }
     
     var playAction: (() -> Void)? {
-        if let media = currentMedia, media.blockingReason(at: Date()) == .none {
-            return {
-                guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
+        if let media = currentMedia, media.blockingReason(at: Date()) == .none,
+           let tabBarController = UIApplication.shared.mainTabBarController {
+            return { [self] in
+                if let data {
+                    if media.contentType == .livestream {
+                        AnalyticsClickEvent.TvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                    }
+                    else {
+                        AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                    }
+                }
+                
                 tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
             }
         }
@@ -462,7 +471,7 @@ extension ProgramViewModel {
         let watchLaterAllowedAction: WatchLaterAction
         let progress: Double?
         
-        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, progress: nil)
+        static var empty = Self(media: nil, watchLaterAllowedAction: .none, progress: nil)
     }
     
     /// Common button properties

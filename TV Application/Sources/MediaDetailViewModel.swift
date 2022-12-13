@@ -12,6 +12,9 @@ import SRGUserData
 final class MediaDetailViewModel: ObservableObject {
     @Published var media: SRGMedia?
     
+    var playAnalyticsClickEvent: AnalyticsClickEvent?
+    var playAnalyticsClickEventMediaUrn: String?
+    
     @Published private var mediaData: MediaData = .empty
     
     init() {
@@ -106,6 +109,6 @@ extension MediaDetailViewModel {
         let watchLaterAllowedAction: WatchLaterAction
         let relatedMedias: [SRGMedia]
         
-        static var empty = MediaData(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
+        static var empty = Self(media: nil, watchLaterAllowedAction: .none, relatedMedias: [])
     }
 }

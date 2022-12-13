@@ -42,6 +42,7 @@ struct CalendarView: View {
             selectedDate = model.day.date
         }
         .onDisappear {
+            AnalyticsClickEvent.TvGuideCalendar(to: selectedDate).send()
             model.switchToDay(SRGDay(from: selectedDate))
         }
     }

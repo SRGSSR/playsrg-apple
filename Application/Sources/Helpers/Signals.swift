@@ -9,6 +9,8 @@ import SRGUserData
 
 import struct Foundation.Notification
 
+// MARK: Signals for throttled data updates
+
 /**
  * TODO: User data is currently stored in SRG User Data, but sadly update notifications do not convey information about
  *       what changed (we only know that an updated occurred, and which ids changed, but not what was inserted, deleted
@@ -32,8 +34,6 @@ import struct Foundation.Notification
  *         - Throttled update signals: Throttling avoids changes to be ineffficiently applied too many times in a row,
  *           especially during initial data sync.
  */
-
-// MARK: Signals for throttled data updates
 
 enum ThrottledSignal {
     /**
