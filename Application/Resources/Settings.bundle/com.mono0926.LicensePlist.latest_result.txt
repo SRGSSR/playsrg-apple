@@ -115,7 +115,7 @@ name: Comscore-Swift-Package-Manager, nameSpecified: Comscore-Swift-Package-Mana
 
 name: DZNEmptyDataSet, nameSpecified: DZNEmptyDataSet, owner: dzenbot, version: , source: https://github.com/dzenbot/DZNEmptyDataSet
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.2.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.3.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FSCalendar, nameSpecified: FSCalendar, owner: WenchaoD, version: 2.8.4, source: https://github.com/WenchaoD/FSCalendar
 
@@ -133,9 +133,9 @@ name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7
 
 name: grpc-ios, nameSpecified: gRPC, owner: grpc, version: 1.44.3-grpc, source: https://github.com/grpc/grpc-ios
 
-name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.0.0, source: https://github.com/google/gtm-session-fetcher
+name: gtm-session-fetcher, nameSpecified: gtm-session-fetcher, owner: google, version: 3.1.0, source: https://github.com/google/gtm-session-fetcher
 
-name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.10.5, source: https://github.com/urbanairship/ios-library
+name: ios-library, nameSpecified: Airship, owner: urbanairship, version: 16.10.6, source: https://github.com/urbanairship/ios-library
 
 name: leveldb, nameSpecified: leveldb, owner: firebase, version: 1.22.2, source: https://github.com/firebase/leveldb
 
@@ -179,7 +179,7 @@ name: srgnetwork-apple, nameSpecified: SRGNetwork, owner: SRGSSR, version: 3.1.0
 
 name: srguserdata-apple, nameSpecified: SRGUserData, owner: SRGSSR, version: 3.3.0, source: https://github.com/SRGSSR/srguserdata-apple
 
-name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.3, source: https://github.com/apple/swift-collections
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
 name: swift-protobuf, nameSpecified: SwiftProtobuf, owner: apple, version: 1.20.3, source: https://github.com/apple/swift-protobuf
 
