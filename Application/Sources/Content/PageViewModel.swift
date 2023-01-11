@@ -399,6 +399,8 @@ private extension PageViewModel {
                 return .heroStage
             case .highlight:
                 return (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
+            case .showPromotion:
+                return (Highlight(from: contentSection) != nil) ? .highlight : .showSwimlane
             case .mediaElement, .showElement:
                 return .element
             case .mediaElementSwimlane:

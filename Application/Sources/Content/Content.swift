@@ -328,7 +328,7 @@ private extension Content {
         }
         
         var rowHighlight: Highlight? {
-            guard presentation.type == .highlight else { return nil }
+            guard presentation.type == .highlight || presentation.type == .showPromotion else { return nil }
             return Highlight(from: contentSection)
         }
         
@@ -354,13 +354,15 @@ private extension Content {
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .highlight:
                 return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .showPromotion:
+                return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             default:
                 return []
             }
         }
         
         var displaysRowHeader: Bool {
-            return contentSection.presentation.type != .highlight
+            return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
