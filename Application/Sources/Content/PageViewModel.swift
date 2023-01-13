@@ -279,10 +279,12 @@ extension PageViewModel {
         
         let wrappedValue: WrappedValue
         let section: Section
+        let sectionUniqueItem: Content.Item?
         
-        init(_ wrappedValue: WrappedValue, in section: Section) {
+        init(_ wrappedValue: WrappedValue, in section: Section, uniqueItem: Content.Item? = nil) {
             self.wrappedValue = wrappedValue
             self.section = section
+            self.sectionUniqueItem = uniqueItem
         }
     }
     
@@ -321,9 +323,12 @@ private extension PageViewModel {
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
         if let highlight = section.properties.rowHighlight {
-            let item = Item(.item(.highlight(highlight)), in: section)
-            return Just(Row(section: section, items: [item]))
-                .setFailureType(to: Error.self)
+            return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                .map { items in
+                    guard let item = items.first else { return Row(section: section, items: []) }
+                    let highlightItem = Item(.item(.highlight(highlight)), in: section, uniqueItem: items.count > 1 ? nil : item)
+                    return Row(section: section, items: [highlightItem])
+                }
                 .eraseToAnyPublisher()
         }
         else {

@@ -341,8 +341,14 @@ extension PageViewController: UICollectionViewDelegate {
                 }
             case .highlight:
                 if let navigationController {
-                    let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
-                    navigationController.pushViewController(sectionViewController, animated: true)
+                    if case let .show(show) = item.sectionUniqueItem {
+                        let showViewController = SectionViewController.showViewController(for: show)
+                        navigationController.pushViewController(showViewController, animated: true)
+                    }
+                    else {
+                        let sectionViewController = SectionViewController(section: section.wrappedValue, filter: model.id)
+                        navigationController.pushViewController(sectionViewController, animated: true)
+                    }
                 }
             default:
                 ()
@@ -713,7 +719,7 @@ private extension PageViewController {
                     }
 #endif
                 case let .highlight(highlight):
-                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, filter: id)
+                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, sectionUniqueItem: item.sectionUniqueItem, filter: id)
                 case .transparent:
                     Color.clear
                 }
