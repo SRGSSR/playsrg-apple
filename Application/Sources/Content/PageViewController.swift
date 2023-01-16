@@ -339,9 +339,9 @@ extension PageViewController: UICollectionViewDelegate {
                     let pageViewController = PageViewController(id: .topic(topic))
                     navigationController.pushViewController(pageViewController, animated: true)
                 }
-            case .highlight:
+            case let .highlight(_, highlightedItem):
                 if let navigationController {
-                    if case let .show(show) = item.sectionUniqueItem {
+                    if case let .show(show) = highlightedItem {
                         let showViewController = SectionViewController.showViewController(for: show)
                         navigationController.pushViewController(showViewController, animated: true)
                     }
@@ -719,9 +719,9 @@ private extension PageViewController {
                     }
 #endif
                 case .highlightPlaceholder:
-                    HighlightCell(highlight: nil, section: item.section.wrappedValue, sectionUniqueItem: item.sectionUniqueItem, filter: id)
-                case let .highlight(highlight):
-                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, sectionUniqueItem: item.sectionUniqueItem, filter: id)
+                    HighlightCell(highlight: nil, section: item.section.wrappedValue, item: nil, filter: id)
+                case let .highlight(highlight, highlightedItem):
+                    HighlightCell(highlight: highlight, section: item.section.wrappedValue, item: highlightedItem, filter: id)
                 case .transparent:
                     Color.clear
                 }

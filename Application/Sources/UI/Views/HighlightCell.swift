@@ -11,7 +11,7 @@ import SwiftUI
 struct HighlightCell: View {
     let highlight: Highlight?
     let section: Content.Section
-    let sectionUniqueItem: Content.Item?
+    let item: Content.Item?
     let filter: SectionFiltering?
     
     @Environment(\.isSelected) private var isSelected
@@ -34,7 +34,7 @@ struct HighlightCell: View {
     
 #if os(tvOS)
     private func action() {
-        if case let .show(show) = sectionUniqueItem {
+        if case let .show(show) = item {
             navigateToShow(show)
         }
         else {
@@ -166,10 +166,10 @@ struct HighlightCell_Previews: PreviewProvider {
     static let highlight = Mock.highlight()
     
     static var previews: some View {
-        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), sectionUniqueItem: nil, filter: nil)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
             .previewLayout(layoutWidth: 1000, horizontalSizeClass: .regular)
 #if os(iOS)
-        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), sectionUniqueItem: nil, filter: nil)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
             .previewLayout(layoutWidth: 400, horizontalSizeClass: .compact)
 #endif
     }
