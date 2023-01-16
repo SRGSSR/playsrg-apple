@@ -42,6 +42,7 @@ enum Content {
         case showAccess(radioChannel: RadioChannel?)
 #endif
         
+        case highlightPlaceholder(index: Int)
         case highlight(_ highlight: Highlight)
         
         case transparent
@@ -353,9 +354,9 @@ private extension Content {
             case .livestreams:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .highlight:
-                return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .showPromotion:
-                return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             default:
                 return []
             }

@@ -718,6 +718,8 @@ private extension PageViewController {
                         ShowAccessCell(style: .calendar)
                     }
 #endif
+                case .highlightPlaceholder:
+                    HighlightCell(highlight: nil, section: item.section.wrappedValue, sectionUniqueItem: item.sectionUniqueItem, filter: id)
                 case let .highlight(highlight):
                     HighlightCell(highlight: highlight, section: item.section.wrappedValue, sectionUniqueItem: item.sectionUniqueItem, filter: id)
                 case .transparent:
