@@ -319,14 +319,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateSharingStatus];
         
         if (letterboxController.continuousPlaybackUpcomingMedia) {
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceAutomatic;
-            labels.type = AnalyticsTypeActionDisplay;
-            labels.value = letterboxController.continuousPlaybackUpcomingMedia.URN;
-            
             Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
-            labels.extraValue1 = playlist.recommendationUid;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+            
+            [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceAutomatic
+                                                            type:AnalyticsTypeActionDisplay
+                                                        mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
+                                               recommendationUid:playlist.recommendationUid] send];
         }
     }];
 }
@@ -555,14 +553,12 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [super viewDidDisappear:animated];
     
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceClose;
-        labels.type = AnalyticsTypeActionCancel;
-        labels.value = self.letterboxController.continuousPlaybackUpcomingMedia.URN;
-        
         Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
-        labels.extraValue1 = playlist.recommendationUid;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+        
+        [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceClose
+                                                        type:AnalyticsTypeActionCancel
+                                                    mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
+                                           recommendationUid:playlist.recommendationUid] send];
     }
     
     [self.letterboxController cancelContinuousPlayback];
@@ -1664,15 +1660,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didEngageInContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionPlayMedia;
-    labels.value = upcomingMedia.URN;
-    
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
-    labels.extraValue1 = playlist.recommendationUid;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+    
+    [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceButton
+                                                    type:AnalyticsTypeActionPlayMedia
+                                                mediaUrn:upcomingMedia.URN
+                                       recommendationUid:playlist.recommendationUid] send];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didCancelContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
@@ -1693,15 +1687,13 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self presentViewController:alertController animated:YES completion:nil];
     }, @"DisableAutoplayAsked");
     
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionCancel;
-    labels.value = upcomingMedia.URN;
-    
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
-    labels.extraValue1 = playlist.recommendationUid;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+    
+    [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceButton
+                                                    type:AnalyticsTypeActionCancel
+                                                mediaUrn:upcomingMedia.URN
+                                       recommendationUid:playlist.recommendationUid] send];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didLongPressSubdivision:(SRGSubdivision *)subdivision

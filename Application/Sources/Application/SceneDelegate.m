@@ -332,11 +332,7 @@ static void *s_kvoContext = &s_kvoContext;
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
             [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
             
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceHandoff;
-            labels.type = AnalyticsTypeActionPlayMedia;
-            labels.value = mediaURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleUserActivity labels:labels];
+            [[AnalyticsHiddenEvents userActivityWithType:AnalyticsTypeActionPlayMedia urn:mediaURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -357,11 +353,7 @@ static void *s_kvoContext = &s_kvoContext;
                 [self openShowURN:showURN show:show fromPushNotification:NO];
             }];
             
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceHandoff;
-            labels.type = AnalyticsTypeActionDisplayShow;
-            labels.value = showURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleUserActivity labels:labels];
+            [[AnalyticsHiddenEvents userActivityWithType:AnalyticsTypeActionDisplayShow urn:showURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -384,29 +376,29 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     ApplicationSectionInfo *applicationSectionInfo = nil;
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
+    AnalyticsType analyticsType = nil;
     
     if ([shortcutItem.type isEqualToString:@"favorites"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil];
-        labels.type = AnalyticsTypeActionFavorites;
+        analyticsType = AnalyticsTypeActionFavorites;
     }
     else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil];
-        labels.type = AnalyticsTypeActionDownloads;
+        analyticsType = AnalyticsTypeActionDownloads;
     }
     else if ([shortcutItem.type isEqualToString:@"history"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil];
-        labels.type = AnalyticsTypeActionHistory;
+        analyticsType = AnalyticsTypeActionHistory;
     }
     else if ([shortcutItem.type isEqualToString:@"search"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionSearch radioChannel:nil];
-        labels.type = AnalyticsTypeActionSearch;
+        analyticsType = AnalyticsTypeActionSearch;
     }
     else {
         return NO;
     }
     
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleQuickActions labels:labels];
+    [[AnalyticsHiddenEvents shortcutItemWithType:analyticsType] send];
     
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:nil];
     return YES;

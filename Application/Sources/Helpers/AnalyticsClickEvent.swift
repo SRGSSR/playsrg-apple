@@ -22,20 +22,6 @@ struct AnalyticsClickEvent {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
     
-    init(name: String, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
-        self.name = name
-        
-        let labels = SRGAnalyticsHiddenEventLabels()
-        labels.source = "2797"
-        labels.type = "ClickEvent"
-        labels.extraValue1 = value1
-        labels.extraValue2 = value2
-        labels.extraValue3 = value3
-        labels.extraValue4 = value4
-        labels.extraValue5 = value5
-        self.labels = labels
-    }
-    
     static func tvGuideOpenInfoBox(program: SRGProgram, programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuideOpenInfoBox",
@@ -108,5 +94,19 @@ struct AnalyticsClickEvent {
             value1: PageId.tvGuide.rawValue,
             value2: programGuideLayout == .grid ? "Grid" : "List"
         )
+    }
+    
+    private init(name: String, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
+        self.name = name
+        
+        let labels = SRGAnalyticsHiddenEventLabels()
+        labels.source = "2797"
+        labels.type = "ClickEvent"
+        labels.extraValue1 = value1
+        labels.extraValue2 = value2
+        labels.extraValue3 = value3
+        labels.extraValue4 = value4
+        labels.extraValue5 = value5
+        self.labels = labels
     }
 }

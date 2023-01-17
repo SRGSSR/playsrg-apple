@@ -74,16 +74,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 
 /**
- *  Title for events related to addition of a calendar event
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleCalendarAdd;
-
-/**
- *  Title for events related to continuous playback
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleContinuousPlayback;
-
-/**
  *  Title for events related to addition of a new download
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
@@ -129,11 +119,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleOpenURL;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitlePictureInPicture;
 
 /**
- *  Title for events related to 3D touch quick actions
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleQuickActions;
-
-/**
  *  Title for sharing-related events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
@@ -161,11 +146,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
 
 /**
- *  Title for events related to opening a user activity
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleUserActivity;
-
-/**
  *  Title for events related to later list
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
@@ -190,7 +170,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceContextMenu;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceHandoff;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification NS_SWIFT_NAME(AnalyticsSource.notification);
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
@@ -200,7 +179,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
 /**
  *  Actions
  */
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLive;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;

@@ -48,15 +48,11 @@ extension UIViewController {
                 .sink { upcomingMedia in
                     guard let upcomingMedia else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.automatic.rawValue
-                    labels.type = AnalyticsType.actionDisplay.rawValue
-                    labels.value = upcomingMedia.urn
-                    
-                    if let playlist = controller.playlistDataSource as? Playlist {
-                        labels.extraValue1 = playlist.recommendationUid
-                    }
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
+                    let playlist = controller.playlistDataSource as? Playlist
+                    AnalyticsHiddenEvents.continuousPlayback(source: AnalyticsSource.automatic,
+                                                             type: AnalyticsType.actionDisplay,
+                                                             mediaUrn: upcomingMedia.urn,
+                                                             recommendationUid: playlist?.recommendationUid).send()
                 }
                 .store(in: &cancellables)
             
