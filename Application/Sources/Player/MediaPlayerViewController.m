@@ -1966,11 +1966,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
-            AnalyticsTitle analyticsTitle = added ? AnalyticsTitleWatchLaterAdd : AnalyticsTitleWatchLaterRemove;
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceButton;
-            labels.value = mainChapterMedia.URN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+            AnalyticsHiddenEventActionType actionType = added ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
+            [[AnalyticsHiddenEvents watchLaterWithActionType:actionType source:AnalyticsSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1996,11 +1993,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self updateDownloadStatus];
         
-        AnalyticsTitle analyticsTitle = (download) ? AnalyticsTitleDownloadAdd : AnalyticsTitleDownloadRemove;
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceButton;
-        labels.value = media.URN;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+        AnalyticsHiddenEventActionType actionType = download ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
+        [[AnalyticsHiddenEvents downloadWithActionType:actionType source:AnalyticsSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2155,11 +2149,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     BOOL isFavorite = FavoritesContainsShow(show);
     
-    AnalyticsTitle analyticsTitle = isFavorite ? AnalyticsTitleFavoriteAdd : AnalyticsTitleFavoriteRemove;
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.value = show.URN;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:analyticsTitle labels:labels];
+    AnalyticsHiddenEventActionType actionType = isFavorite ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
+    [[AnalyticsHiddenEvents favoriteWithActionType:actionType source:AnalyticsSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }

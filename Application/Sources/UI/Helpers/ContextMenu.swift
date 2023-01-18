@@ -137,12 +137,8 @@ extension ContextMenu {
                 WatchLaterToggleMedia(media) { added, error in
                     guard error == nil else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.contextMenu.rawValue
-                    labels.value = media.urn
-                    
-                    let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                    let actionType = added ? .add : .remove as AnalyticsHiddenEventActionType
+                    AnalyticsHiddenEvent.watchLater(actionType: actionType, source: AnalyticsSource.contextMenu, urn: media.urn).send()
                     
                     Banner.showWatchLaterAdded(added, forItemWithName: media.title)
                 }
@@ -163,11 +159,7 @@ extension ContextMenu {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.contextMenu.rawValue
-                    labels.value = media.urn
-                    
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.history(actionType: .remove, source: AnalyticsSource.contextMenu, urn: media.urn).send()
                 }
             }
         }
@@ -201,12 +193,8 @@ extension ContextMenu {
                     Download.add(for: media)
                 }
                 
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.contextMenu.rawValue
-                labels.value = media.urn
-                
-                let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                let actionType = (download == nil) ? .add : .remove as AnalyticsHiddenEventActionType
+                AnalyticsHiddenEvent.download(actionType: actionType, source: AnalyticsSource.contextMenu, urn: media.urn).send()
                 
                 Banner.showDownload(download == nil, forItemWithName: media.title)
             }
@@ -279,12 +267,8 @@ extension ContextMenu {
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 FavoritesToggleShow(show)
                 
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.contextMenu.rawValue
-                labels.value = show.urn
-                
-                let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                let actionType = !isFavorite ? .add : .remove as AnalyticsHiddenEventActionType
+                AnalyticsHiddenEvent.favorite(actionType: actionType, source: AnalyticsSource.contextMenu, urn: show.urn).send()
                 
                 Banner.showFavorite(!isFavorite, forItemWithName: show.title)
             }

@@ -74,24 +74,9 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 
 /**
- *  Title for events related to addition of a new download
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadAdd;
-
-/**
- *  Title for events related to deletion of a download
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleDownloadRemove;
-
-/**
  *  Title for Google Cast events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
-
-/**
- *  Title for events related to deletion of an history entry
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleHistoryRemove;
 
 /**
  *  Title for events related to identity login / logout
@@ -124,36 +109,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitlePictureInPicture;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingSection;
-
-/**
- *  Title for events related to subscriptions
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionAdd;
-
-/**
- *  Title for events related to deletion of a subscription
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSubscriptionRemove;
-
-/**
- *  Title for events related to subscriptions
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteAdd;
-
-/**
- *  Title for events related to deletion of a favorite
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleFavoriteRemove;
-
-/**
- *  Title for events related to later list
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterAdd;
-
-/**
- *  Title for events related to deletion of a later list entry
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleWatchLaterRemove;
 
 /**
  *  @name Analytics values

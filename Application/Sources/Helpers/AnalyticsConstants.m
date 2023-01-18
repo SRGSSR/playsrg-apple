@@ -58,10 +58,7 @@ AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
-AnalyticsTitle const AnalyticsTitleDownloadAdd = @"download_add";
-AnalyticsTitle const AnalyticsTitleDownloadRemove = @"download_remove";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
-AnalyticsTitle const AnalyticsTitleHistoryRemove = @"history_remove";
 AnalyticsTitle const AnalyticsTitleIdentity = @"identity";
 AnalyticsTitle const AnalyticsTitleNotificationOpen = @"notification_open";
 AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"push_notification_open";
@@ -70,12 +67,6 @@ AnalyticsTitle const AnalyticsTitlePictureInPicture = @"picture_in_picture";
 AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
 AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
 AnalyticsTitle const AnalyticsTitleSharingSection = @"section_share";
-AnalyticsTitle const AnalyticsTitleSubscriptionAdd = @"subscription_add";
-AnalyticsTitle const AnalyticsTitleSubscriptionRemove = @"subscription_remove";
-AnalyticsTitle const AnalyticsTitleFavoriteAdd = @"favorite_add";
-AnalyticsTitle const AnalyticsTitleFavoriteRemove = @"favorite_remove";
-AnalyticsTitle const AnalyticsTitleWatchLaterAdd = @"watch_later_add";
-AnalyticsTitle const AnalyticsTitleWatchLaterRemove = @"watch_later_remove";
 
 AnalyticsSource const AnalyticsSourceAutomatic = @"automatic";
 AnalyticsSource const AnalyticsSourceButton = @"button";

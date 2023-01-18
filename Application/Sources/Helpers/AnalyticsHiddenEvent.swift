@@ -37,10 +37,42 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func download(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: actionType.downloadName,
+            source: source.rawValue,
+            value: urn
+        )
+    }
+    
+    static func favorite(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: actionType.favoriteName,
+            source: source.rawValue,
+            value: urn
+        )
+    }
+    
+    static func history(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: actionType.historyName,
+            source: source.rawValue,
+            value: urn
+        )
+    }
+    
     static func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvent {
         return Self(
             name: "quick_actions",
             type: type.rawValue
+        )
+    }
+    
+    static func subscription(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: actionType.subscriptionName,
+            source: source.rawValue,
+            value: urn
         )
     }
     
@@ -49,6 +81,14 @@ struct AnalyticsHiddenEvent {
             name: "user_activity_ios",
             source: "handoff",
             type: type.rawValue,
+            value: urn
+        )
+    }
+    
+    static func watchLater(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: actionType.watchLaterName,
+            source: source.rawValue,
             value: urn
         )
     }
@@ -83,6 +123,14 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.continuousPlayback(source: source, type: type, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
     }
     
+    @objc class func download(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.download(actionType: actionType, source: source, urn: urn))
+    }
+    
+    @objc class func favorite(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.favorite(actionType: actionType, source: source, urn: urn))
+    }
+    
     @objc class func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.shortcutItem(type: type))
     }
@@ -91,7 +139,61 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.userActivity(type: type, urn: urn))
     }
     
+    @objc class func watchLater(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.watchLater(actionType: actionType, source: source, urn: urn))
+    }
+    
     required init(event: AnalyticsHiddenEvent) {
         self.event = event
+    }
+}
+
+@objc enum AnalyticsHiddenEventActionType: UInt {
+    case add
+    case remove
+    
+    var downloadName: String {
+        switch self {
+        case .add:
+            return "download_add"
+        case .remove:
+            return "download_remove"
+        }
+    }
+    
+    var favoriteName: String {
+        switch self {
+        case .add:
+            return "favorite_add"
+        case .remove:
+            return "favorite_remove"
+        }
+    }
+    
+    var historyName: String {
+        switch self {
+        case .add:
+            return "history_add"
+        case .remove:
+            return "history_remove"
+        }
+    }
+    
+    var subscriptionName: String {
+        switch self {
+        case .add:
+            return "subscription_add"
+        case .remove:
+            return "subscription_remove"
+        }
+    }
+    
+    var watchLaterName: String {
+        switch self {
+        case .add:
+            return "watch_later_add"
+        case .remove:
+            return "watch_later_remove"
+        }
     }
 }
