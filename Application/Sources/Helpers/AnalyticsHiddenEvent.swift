@@ -61,6 +61,13 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func identity(action: AnalyticsHiddenEventIdentityAction) -> AnalyticsHiddenEvent {
+        return Self(
+            name: "identity",
+            labels: action.labels
+        )
+    }
+    
     static func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvent {
         return Self(
             name: "open_url",
@@ -150,6 +157,10 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.favorite(actionType: actionType, source: source, urn: urn))
     }
     
+    @objc class func identity(action: AnalyticsHiddenEventIdentityAction) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.identity(action: action))
+    }
+    
     @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.openUrl(labels: labels))
     }
@@ -222,5 +233,34 @@ struct AnalyticsHiddenEvent {
         case .remove:
             return "watch_later_remove"
         }
+    }
+}
+
+@objc enum AnalyticsHiddenEventIdentityAction: UInt {
+    case displayLogin
+    case cancelLogin
+    case login
+    case logout
+    case unexpectedLogout
+    
+    var labels: SRGAnalyticsHiddenEventLabels {
+        let labels = SRGAnalyticsHiddenEventLabels()
+        switch self {
+        case .displayLogin:
+            labels.type = AnalyticsType.actionDisplayLogin.rawValue
+        case .cancelLogin:
+            labels.source = AnalyticsSource.button.rawValue
+            labels.type = AnalyticsType.actionCancelLogin.rawValue
+        case .login:
+            labels.source = AnalyticsSource.button.rawValue
+            labels.type = AnalyticsType.actionLogin.rawValue
+        case .logout:
+            labels.source = AnalyticsSource.button.rawValue
+            labels.type = AnalyticsType.actionLogout.rawValue
+        case .unexpectedLogout:
+            labels.source = AnalyticsSource.automatic.rawValue
+            labels.type = AnalyticsType.actionLogout.rawValue
+        }
+        return labels
     }
 }

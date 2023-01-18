@@ -62,19 +62,13 @@ extension AppDelegate: UIApplicationDelegate {
             
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidCancelLogin, object: SRGIdentityService.current)
                 .sink { _ in
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.button.rawValue
-                    labels.type = AnalyticsType.actionCancelLogin.rawValue
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.identity(action: .cancelLogin).send()
                 }
                 .store(in: &cancellables)
             
             NotificationCenter.default.weakPublisher(for: .SRGIdentityServiceUserDidLogin, object: SRGIdentityService.current)
                 .sink { _ in
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.button.rawValue
-                    labels.type = AnalyticsType.actionLogin.rawValue
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.identity(action: .login).send()
                 }
                 .store(in: &cancellables)
             
@@ -82,10 +76,8 @@ extension AppDelegate: UIApplicationDelegate {
                 .sink { notification in
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = unexpectedLogout ? AnalyticsSource.automatic.rawValue : AnalyticsSource.button.rawValue
-                    labels.type = AnalyticsType.actionLogout.rawValue
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+                    let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsHiddenEventIdentityAction
+                    AnalyticsHiddenEvent.identity(action: .cancelLogin).send()
                 }
                 .store(in: &cancellables)
         }

@@ -373,18 +373,12 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionCancelLogin;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    [[AnalyticsHiddenEvents identityWithAction:AnalyticsHiddenEventIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionLogin;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    [[AnalyticsHiddenEvents identityWithAction:AnalyticsHiddenEventIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -409,10 +403,8 @@ static void *s_kvoContext = &s_kvoContext;
         });
     }
     
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = unexpectedLogout ? AnalyticsSourceAutomatic : AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionLogout;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    AnalyticsHiddenEventIdentityAction action = unexpectedLogout ? AnalyticsHiddenEventIdentityActionUnexpectedLogout : AnalyticsHiddenEventIdentityActionLogout;
+    [[AnalyticsHiddenEvents identityWithAction:action] send];
 }
 
 #pragma mark KVO

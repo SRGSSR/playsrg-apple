@@ -79,11 +79,6 @@ typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
 
 /**
- *  Title for events related to identity login / logout
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleIdentity;
-
-/**
  *  Title for events related to opening a notification
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationOpen;

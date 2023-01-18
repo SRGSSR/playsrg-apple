@@ -106,9 +106,7 @@ final class SettingsViewModel: ObservableObject {
         if let opened = SRGIdentityService.current?.login(withEmailAddress: nil), opened {
             SRGAnalyticsTracker.shared.trackPageView(withTitle: AnalyticsPageTitle.login.rawValue, levels: [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue])
             
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.type = AnalyticsType.actionDisplayLogin.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.identity.rawValue, labels: labels)
+            AnalyticsHiddenEvent.identity(action: .displayLogin).send()
         }
     }
     
