@@ -37,25 +37,25 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func download(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func download(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: actionType.downloadName,
+            name: action.downloadName,
             source: source.rawValue,
             value: urn
         )
     }
     
-    static func favorite(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func favorite(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: actionType.favoriteName,
+            name: action.favoriteName,
             source: source.rawValue,
             value: urn
         )
     }
     
-    static func history(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func history(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: actionType.historyName,
+            name: action.historyName,
             source: source.rawValue,
             value: urn
         )
@@ -89,9 +89,9 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func subscription(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func subscription(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: actionType.subscriptionName,
+            name: action.subscriptionName,
             source: source.rawValue,
             value: urn
         )
@@ -106,9 +106,9 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func watchLater(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func watchLater(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: actionType.watchLaterName,
+            name: action.watchLaterName,
             source: source.rawValue,
             value: urn
         )
@@ -149,12 +149,12 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.continuousPlayback(source: source, type: type, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
     }
     
-    @objc class func download(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.download(actionType: actionType, source: source, urn: urn))
+    @objc class func download(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.download(action: action, source: source, urn: urn))
     }
     
-    @objc class func favorite(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.favorite(actionType: actionType, source: source, urn: urn))
+    @objc class func favorite(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.favorite(action: action, source: source, urn: urn))
     }
     
     @objc class func identity(action: AnalyticsHiddenEventIdentityAction) -> AnalyticsHiddenEvents {
@@ -177,8 +177,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.userActivity(type: type, urn: urn))
     }
     
-    @objc class func watchLater(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.watchLater(actionType: actionType, source: source, urn: urn))
+    @objc class func watchLater(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.watchLater(action: action, source: source, urn: urn))
     }
     
     required init(event: AnalyticsHiddenEvent) {
@@ -186,7 +186,7 @@ struct AnalyticsHiddenEvent {
     }
 }
 
-@objc enum AnalyticsHiddenEventActionType: UInt {
+@objc enum AnalyticsHiddenEventListAction: UInt {
     case add
     case remove
     

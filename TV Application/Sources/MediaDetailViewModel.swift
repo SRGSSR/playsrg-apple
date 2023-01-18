@@ -70,8 +70,8 @@ final class MediaDetailViewModel: ObservableObject {
         WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
             
-            let actionType = added ? .add : .remove as AnalyticsHiddenEventActionType
-            AnalyticsHiddenEvent.watchLater(actionType: actionType, source: AnalyticsSource.button, urn: media.urn).send()
+            let action = added ? .add : .remove as AnalyticsHiddenEventListAction
+            AnalyticsHiddenEvent.watchLater(action: action, source: AnalyticsSource.button, urn: media.urn).send()
             
             self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, relatedMedias: self.mediaData.relatedMedias)
         }

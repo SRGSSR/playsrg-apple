@@ -323,11 +323,11 @@ private extension Content {
         func analyticsDeletionHiddenEvent(source: AnalyticsSource) -> AnalyticsHiddenEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsHiddenEvent.favorite(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsHiddenEvent.watchLater(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsHiddenEvent.history(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.history(action: .remove, source: source, urn: nil)
             default:
                 return nil
             }
@@ -721,14 +721,14 @@ private extension Content {
         func analyticsDeletionHiddenEvent(source: AnalyticsSource) -> AnalyticsHiddenEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsHiddenEvent.favorite(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .radioWatchLater, .watchLater:
-                return AnalyticsHiddenEvent.watchLater(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsHiddenEvent.history(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.history(action: .remove, source: source, urn: nil)
 #if os(iOS)
             case .downloads:
-                return AnalyticsHiddenEvent.download(actionType: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)
 #endif
             default:
                 return nil

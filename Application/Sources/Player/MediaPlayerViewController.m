@@ -1964,8 +1964,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
-            AnalyticsHiddenEventActionType actionType = added ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
-            [[AnalyticsHiddenEvents watchLaterWithActionType:actionType source:AnalyticsSourceButton urn:mainChapterMedia.URN] send];
+            AnalyticsHiddenEventListAction action = added ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+            [[AnalyticsHiddenEvents watchLaterWithAction:action source:AnalyticsSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1991,8 +1991,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self updateDownloadStatus];
         
-        AnalyticsHiddenEventActionType actionType = download ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
-        [[AnalyticsHiddenEvents downloadWithActionType:actionType source:AnalyticsSourceButton urn:media.URN] send];
+        AnalyticsHiddenEventListAction action = download ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+        [[AnalyticsHiddenEvents downloadWithAction:action source:AnalyticsSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2147,8 +2147,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     BOOL isFavorite = FavoritesContainsShow(show);
     
-    AnalyticsHiddenEventActionType actionType = isFavorite ? AnalyticsHiddenEventActionTypeAdd : AnalyticsHiddenEventActionTypeRemove;
-    [[AnalyticsHiddenEvents favoriteWithActionType:actionType source:AnalyticsSourceButton urn:show.URN] send];
+    AnalyticsHiddenEventListAction action = isFavorite ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+    [[AnalyticsHiddenEvents favoriteWithAction:action source:AnalyticsSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }
