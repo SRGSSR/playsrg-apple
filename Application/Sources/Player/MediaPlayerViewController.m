@@ -1735,9 +1735,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxDidStartPictureInPicture
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.value = self.letterboxController.fullLengthMedia.URN;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitlePictureInPicture labels:labels];
+    [[AnalyticsHiddenEvents pictureInPictureWithUrn:self.letterboxController.fullLengthMedia.URN] send];
 }
 
 - (void)letterboxDidStopPlaybackFromPictureInPicture

@@ -61,6 +61,20 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvent {
+        return Self(
+            name: "open_url",
+            labels: labels
+        )
+    }
+    
+    static func pictureInPicture(urn: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: "picture_in_picture",
+            value: urn
+        )
+    }
+    
     static func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvent {
         return Self(
             name: "quick_actions",
@@ -107,6 +121,11 @@ struct AnalyticsHiddenEvent {
         labels.extraValue5 = value5
         self.labels = labels
     }
+    
+    private init(name: String, labels: SRGAnalyticsHiddenEventLabels) {
+        self.name = name
+        self.labels = labels
+    }
 }
 
 /**
@@ -129,6 +148,14 @@ struct AnalyticsHiddenEvent {
     
     @objc class func favorite(actionType: AnalyticsHiddenEventActionType, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.favorite(actionType: actionType, source: source, urn: urn))
+    }
+    
+    @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.openUrl(labels: labels))
+    }
+    
+    @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
     }
     
     @objc class func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvents {

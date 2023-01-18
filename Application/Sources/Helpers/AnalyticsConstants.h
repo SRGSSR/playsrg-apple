@@ -94,16 +94,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationOpen;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationPushOpen;
 
 /**
- *  Title for events related to opening an URL
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleOpenURL;
-
-/**
- *  Title for picture-in-picture playback events
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitlePictureInPicture;
-
-/**
  *  Title for sharing-related events
  */
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
@@ -111,7 +101,7 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingSection;
 
 /**
- *  @name Analytics values
+ *  @name Analytics event values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
 typedef NSString * AnalyticsType NS_STRING_ENUM;

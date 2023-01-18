@@ -46,8 +46,6 @@ extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     }
     
     func letterboxViewControllerDidStartPicture(inPicture letterboxViewController: SRGLetterboxViewController) {
-        let labels = SRGAnalyticsHiddenEventLabels()
-        labels.value = letterboxViewController.controller.fullLengthMedia?.urn
-        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.pictureInPicture.rawValue, labels: labels)
+        AnalyticsHiddenEvent.pictureInPicture(urn: letterboxViewController.controller.fullLengthMedia?.urn).send()
     }
 }

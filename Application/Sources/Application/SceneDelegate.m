@@ -120,31 +120,31 @@ static void *s_kvoContext = &s_kvoContext;
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         NSInteger startTime = [action parameterWithName:@"start_time"].integerValue;
         [self openMediaWithURN:action.identifier startTime:startTime channelUid:channelUid fromPushNotification:NO completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeShow]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openShowWithURN:action.identifier channelUid:channelUid fromPushNotification:NO completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeTopic]) {
         [self openTopicWithURN:action.identifier completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeHome]) {
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openHomeWithChannelUid:channelUid completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeAZ]) {
         NSString *index = [action parameterWithName:@"index"];
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openShowListAtIndex:index withChannelUid:channelUid completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeByDate]) {
@@ -152,12 +152,12 @@ static void *s_kvoContext = &s_kvoContext;
         NSDate *date = dateString ? [NSDateFormatter.play_iso8601CalendarDateFormatter dateFromString:dateString] : nil;
         NSString *channelUid = [action parameterWithName:@"channel_id"];
         [self openCalendarAtDate:date withChannelUid:channelUid completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeSection]) {
         [self openSectionWithUid:action.identifier completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeSearch]) {
@@ -174,27 +174,27 @@ static void *s_kvoContext = &s_kvoContext;
         SRGMediaType mediaType = s_mediaTypes[mediaTypeName].integerValue;
         
         [self openSearchWithQuery:query mediaType:mediaType completionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeLivestreams]) {
         [self openLivestreamsWithCompletionBlock:^{
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }];
     }
     else if ([action.type isEqualToString:DeepLinkTypeLink]) {
         NSURL *URL = [NSURL URLWithString:action.identifier];
         if (URL) {
             [UIApplication.sharedApplication play_openURL:URL withCompletionHandler:^(BOOL success) {
-                [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+                [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
             }];
         }
         else {
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+            [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
         }
     }
     else {
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleOpenURL labels:action.analyticsLabels];
+        [[AnalyticsHiddenEvents openUrlWithLabels:action.analyticsLabels] send];
     }
 }
 
