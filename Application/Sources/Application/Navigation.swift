@@ -49,10 +49,10 @@ extension UIViewController {
                     guard let upcomingMedia else { return }
                     
                     let playlist = controller.playlistDataSource as? Playlist
-                    AnalyticsHiddenEvents.continuousPlayback(source: AnalyticsSource.automatic,
-                                                             type: AnalyticsType.actionDisplay,
-                                                             mediaUrn: upcomingMedia.urn,
-                                                             recommendationUid: playlist?.recommendationUid).send()
+                    AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.automatic,
+                                                            type: AnalyticsType.actionDisplay,
+                                                            mediaUrn: upcomingMedia.urn,
+                                                            recommendationUid: playlist?.recommendationUid).send()
                 }
                 .store(in: &cancellables)
             
@@ -108,7 +108,7 @@ extension UIViewController {
         textViewController.modalPresentationStyle = .overFullScreen
         present(textViewController, animated: animated, completion: completion)
     }
-
+    
     private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
         if program.play_contains(Date()) {
             return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
@@ -165,7 +165,7 @@ func navigateToText(_ text: String, animated: Bool = true) {
 }
 
 #endif
-    
+
 #if os(iOS)
 extension UIViewController {
     @objc func navigateToNotification(_ notification: UserNotification, animated: Bool = true) {
