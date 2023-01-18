@@ -22,7 +22,8 @@ class LetterboxDelegate: NSObject {
                 AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.automatic,
                                                         type: AnalyticsType.actionPlayMedia,
                                                         mediaUrn: media.urn,
-                                                        recommendationUid: playlist?.recommendationUid).send()
+                                                        recommendationUid: playlist?.recommendationUid)
+                .send()
             }
             .store(in: &cancellables)
     }
@@ -34,7 +35,8 @@ extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
         AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.button,
                                                 type: AnalyticsType.actionPlayMedia,
                                                 mediaUrn: upcomingMedia.urn,
-                                                recommendationUid: playlist?.recommendationUid).send()
+                                                recommendationUid: playlist?.recommendationUid)
+        .send()
     }
     
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didCancelContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
@@ -42,7 +44,8 @@ extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
         AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.button,
                                                 type: AnalyticsType.actionCancel,
                                                 mediaUrn: upcomingMedia.urn,
-                                                recommendationUid: playlist?.recommendationUid).send()
+                                                recommendationUid: playlist?.recommendationUid)
+        .send()
     }
     
     func letterboxViewControllerDidStartPicture(inPicture letterboxViewController: SRGLetterboxViewController) {

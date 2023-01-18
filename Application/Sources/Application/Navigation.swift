@@ -52,7 +52,8 @@ extension UIViewController {
                     AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.automatic,
                                                             type: AnalyticsType.actionDisplay,
                                                             mediaUrn: upcomingMedia.urn,
-                                                            recommendationUid: playlist?.recommendationUid).send()
+                                                            recommendationUid: playlist?.recommendationUid)
+                    .send()
                 }
                 .store(in: &cancellables)
             
