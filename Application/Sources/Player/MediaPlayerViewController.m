@@ -321,7 +321,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         if (letterboxController.continuousPlaybackUpcomingMedia) {
             Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
             
-            [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionDisplay
+            [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
                                                         mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
                                                recommendationUid:playlist.recommendationUid]
              send];
@@ -555,7 +555,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
         Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
         
-        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionCancel
+        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
                                                     mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
                                            recommendationUid:playlist.recommendationUid]
          send];
@@ -1663,7 +1663,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     
-    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionPlay
+    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
                                                 mediaUrn:upcomingMedia.URN
                                        recommendationUid:playlist.recommendationUid]
      send];
@@ -1690,7 +1690,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     
-    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionCancel
+    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
                                                 mediaUrn:upcomingMedia.URN
                                        recommendationUid:playlist.recommendationUid]
      send];
@@ -1964,7 +1964,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
-            AnalyticsHiddenEventListAction action = added ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+            AnalyticsListAction action = added ? AnalyticsListActionAdd : AnalyticsListActionRemove;
             [[AnalyticsHiddenEvents watchLaterWithAction:action source:AnalyticsSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
@@ -1991,7 +1991,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         
         [self updateDownloadStatus];
         
-        AnalyticsHiddenEventListAction action = download ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+        AnalyticsListAction action = download ? AnalyticsListActionAdd : AnalyticsListActionRemove;
         [[AnalyticsHiddenEvents downloadWithAction:action source:AnalyticsSourceButton urn:media.URN] send];
     };
     
@@ -2147,7 +2147,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     
     BOOL isFavorite = FavoritesContainsShow(show);
     
-    AnalyticsHiddenEventListAction action = isFavorite ? AnalyticsHiddenEventListActionAdd : AnalyticsHiddenEventListActionRemove;
+    AnalyticsListAction action = isFavorite ? AnalyticsListActionAdd : AnalyticsListActionRemove;
     [[AnalyticsHiddenEvents favoriteWithAction:action source:AnalyticsSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];

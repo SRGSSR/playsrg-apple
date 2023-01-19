@@ -163,7 +163,7 @@
         [identityService showAccountView];
     }
     else if ([identityService loginWithEmailAddress:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastLoggedInEmailAddress]]) {
-        [[AnalyticsHiddenEvents identityWithAction:AnalyticsHiddenEventIdentityActionDisplayLogin] send];
+        [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionDisplayLogin] send];
     }
 }
 

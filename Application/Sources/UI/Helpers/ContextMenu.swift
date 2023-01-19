@@ -137,7 +137,7 @@ extension ContextMenu {
                 WatchLaterToggleMedia(media) { added, error in
                     guard error == nil else { return }
                     
-                    let action = added ? .add : .remove as AnalyticsHiddenEventListAction
+                    let action = added ? .add : .remove as AnalyticsListAction
                     AnalyticsHiddenEvent.watchLater(action: action, source: AnalyticsSource.contextMenu, urn: media.urn).send()
                     
                     Banner.showWatchLaterAdded(added, forItemWithName: media.title)
@@ -193,7 +193,7 @@ extension ContextMenu {
                     Download.add(for: media)
                 }
                 
-                let action = (download == nil) ? .add : .remove as AnalyticsHiddenEventListAction
+                let action = (download == nil) ? .add : .remove as AnalyticsListAction
                 AnalyticsHiddenEvent.download(action: action, source: AnalyticsSource.contextMenu, urn: media.urn).send()
                 
                 Banner.showDownload(download == nil, forItemWithName: media.title)
@@ -267,7 +267,7 @@ extension ContextMenu {
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 FavoritesToggleShow(show)
                 
-                let action = !isFavorite ? .add : .remove as AnalyticsHiddenEventListAction
+                let action = !isFavorite ? .add : .remove as AnalyticsListAction
                 AnalyticsHiddenEvent.favorite(action: action, source: AnalyticsSource.contextMenu, urn: show.urn).send()
                 
                 Banner.showFavorite(!isFavorite, forItemWithName: show.title)

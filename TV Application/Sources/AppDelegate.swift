@@ -76,7 +76,7 @@ extension AppDelegate: UIApplicationDelegate {
                 .sink { notification in
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
-                    let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsHiddenEventIdentityAction
+                    let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsIdentityAction
                     AnalyticsHiddenEvent.identity(action: action).send()
                 }
                 .store(in: &cancellables)

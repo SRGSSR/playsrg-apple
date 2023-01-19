@@ -15,9 +15,9 @@
 
 @property (nonatomic) NSURL *URL;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic) AnalyticsHiddenEventSharingAction analyticsAction;
+@property (nonatomic) AnalyticsSharingAction analyticsAction;
 @property (nonatomic, copy) NSString *analyticsUid;
-@property (nonatomic) AnalyticsHiddenEventSharedMediaType sharedMediaType;
+@property (nonatomic) AnalyticsSharedMediaType sharedMediaType;
 
 @end
 
@@ -30,9 +30,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:time];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
-                     analyticsAction:AnalyticsHiddenEventSharingActionMedia
+                     analyticsAction:AnalyticsSharingActionMedia
                         analyticsUid:media.URN
-                     sharedMediaType:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsHiddenEventSharedMediaTypeContent : AnalyticsHiddenEventSharedMediaTypeContentAtTime];
+                     sharedMediaType:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsSharedMediaTypeContent : AnalyticsSharedMediaTypeContentAtTime];
 }
 
 + (instancetype)sharingItemForCurrentClip:(SRGMedia *)media
@@ -40,9 +40,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:kCMTimeZero];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
-                     analyticsAction:AnalyticsHiddenEventSharingActionMedia
+                     analyticsAction:AnalyticsSharingActionMedia
                         analyticsUid:media.URN
-                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeCurrentClip];
+                     sharedMediaType:AnalyticsSharedMediaTypeCurrentClip];
 }
 
 + (instancetype)sharingItemForShow:(SRGShow *)show
@@ -50,9 +50,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
     return [[self alloc] initWithURL:URL
                                title:show.title
-                     analyticsAction:AnalyticsHiddenEventSharingActionShow
+                     analyticsAction:AnalyticsSharingActionShow
                         analyticsUid:show.URN
-                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeNone];
+                     sharedMediaType:AnalyticsSharedMediaTypeNone];
 }
 
 + (instancetype)sharingItemForContentSection:(SRGContentSection *)contentSection
@@ -60,9 +60,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForContentSection:contentSection];
     return [[self alloc] initWithURL:URL
                                title:contentSection.presentation.title
-                     analyticsAction:AnalyticsHiddenEventSharingActionSection
+                     analyticsAction:AnalyticsSharingActionSection
                         analyticsUid:contentSection.uid
-                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeNone];
+                     sharedMediaType:AnalyticsSharedMediaTypeNone];
 }
 
 + (NSString *)titleForMedia:(SRGMedia *)media
@@ -79,9 +79,9 @@
 
 - (instancetype)initWithURL:(NSURL *)URL
                       title:(NSString *)title
-            analyticsAction:(AnalyticsHiddenEventSharingAction)analyticsAction
+            analyticsAction:(AnalyticsSharingAction)analyticsAction
                analyticsUid:(NSString *)analyticsUid
-            sharedMediaType:(AnalyticsHiddenEventSharedMediaType)sharedMediaType
+            sharedMediaType:(AnalyticsSharedMediaType)sharedMediaType
 {
     if (! URL || title.length == 0 || ! analyticsUid) {
         return nil;

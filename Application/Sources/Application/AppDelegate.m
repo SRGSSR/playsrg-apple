@@ -364,7 +364,7 @@ static void *s_kvoContext = &s_kvoContext;
         SRGLetterboxController *letterboxController = notification.object;
         Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         
-        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionPlayAutomatic
+        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
                                                     mediaUrn:media.URN
                                            recommendationUid:playlist.recommendationUid]
          send];
@@ -373,12 +373,12 @@ static void *s_kvoContext = &s_kvoContext;
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEvents identityWithAction:AnalyticsHiddenEventIdentityActionCancelLogin] send];
+    [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEvents identityWithAction:AnalyticsHiddenEventIdentityActionLogin] send];
+    [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -403,7 +403,7 @@ static void *s_kvoContext = &s_kvoContext;
         });
     }
     
-    AnalyticsHiddenEventIdentityAction action = unexpectedLogout ? AnalyticsHiddenEventIdentityActionUnexpectedLogout : AnalyticsHiddenEventIdentityActionLogout;
+    AnalyticsIdentityAction action = unexpectedLogout ? AnalyticsIdentityActionUnexpectedLogout : AnalyticsIdentityActionLogout;
     [[AnalyticsHiddenEvents identityWithAction:action] send];
 }
 

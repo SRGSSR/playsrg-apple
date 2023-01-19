@@ -291,7 +291,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEvents notificationFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+            [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
                                                  uid:mediaURN
                                               source:userInfo[@"show"] ?: AnalyticsSourceNotificationPush
                                                 type:userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia]
@@ -302,7 +302,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEvents notificationFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+            [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
                                                  uid:showURN
                                               source:AnalyticsSourceNotificationPush
                                                 type:userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow]
@@ -310,7 +310,7 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         }];
     }
     else {
-        [[AnalyticsHiddenEvents notificationFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+        [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
                                              uid:notificationContent.body
                                           source:AnalyticsSourceNotificationPush
                                             type:userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert]
