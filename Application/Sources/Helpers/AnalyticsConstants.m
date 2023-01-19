@@ -58,8 +58,6 @@ AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 
-AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
-
 AnalyticsSource const AnalyticsSourceAutomatic = @"automatic";
 AnalyticsSource const AnalyticsSourceButton = @"button";
 AnalyticsSource const AnalyticsSourceClose = @"close";

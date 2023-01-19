@@ -69,16 +69,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
 /**
- *  @name Analytics event titles
- */
-typedef NSString * AnalyticsTitle NS_STRING_ENUM;
-
-/**
- *  Title for Google Cast events
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
-
-/**
  *  @name Analytics event values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;

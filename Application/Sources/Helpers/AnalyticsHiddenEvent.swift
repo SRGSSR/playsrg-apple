@@ -53,6 +53,13 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func googleGast(urn: String) -> AnalyticsHiddenEvent {
+        return Self(
+            name: "google_cast",
+            value: urn
+        )
+    }
+    
     static func history(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.historyName,
@@ -174,6 +181,10 @@ struct AnalyticsHiddenEvent {
     
     @objc class func favorite(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.favorite(action: action, source: source, urn: urn))
+    }
+    
+    @objc class func googleGast(urn: String) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.googleGast(urn: urn))
     }
     
     @objc class func identity(action: AnalyticsHiddenEventIdentityAction) -> AnalyticsHiddenEvents {
