@@ -18,9 +18,9 @@ struct AnalyticsHiddenEvent {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
     
-    static func calendarAdd(channel: SRGChannel) -> AnalyticsHiddenEvent {
+    static func calendarEvent(action: AnalyticsHiddenEventListAction, channel: SRGChannel) -> AnalyticsHiddenEvent {
         return Self(
-            name: "calendar_add",
+            name: action.calendarEventName,
             source: AnalyticsSource.button.rawValue,
             value: channel.urn,
             value1: channel.title
@@ -75,7 +75,7 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func notificationOpened(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvent {
+    static func notification(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: from.name,
             source: source,
@@ -191,8 +191,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.identity(action: action))
     }
     
-    @objc class func notificationOpened(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.notificationOpened(from: from, uid: uid, source: source, type: type))
+    @objc class func notification(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.notification(from: from, uid: uid, source: source, type: type))
     }
     
     @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
@@ -227,6 +227,15 @@ struct AnalyticsHiddenEvent {
 @objc enum AnalyticsHiddenEventListAction: UInt {
     case add
     case remove
+    
+    var calendarEventName: String {
+        switch self {
+        case .add:
+            return "calendar_add"
+        case .remove:
+            return "calendar_remove"
+        }
+    }
     
     var downloadName: String {
         switch self {
