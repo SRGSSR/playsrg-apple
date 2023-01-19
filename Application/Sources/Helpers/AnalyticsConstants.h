@@ -89,13 +89,6 @@ OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationOpen;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationPushOpen;
 
 /**
- *  Title for sharing-related events
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingMedia;
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingShow;
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleSharingSection;
-
-/**
  *  @name Analytics event values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
@@ -135,12 +128,5 @@ OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancelLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogin;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogout;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
-
-/**
- *  Values
- */
-OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContent;
-OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingContentAtTime;
-OBJC_EXPORT AnalyticsValue const AnalyticsValueSharingCurrentClip;
 
 NS_ASSUME_NONNULL_END

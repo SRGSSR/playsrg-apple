@@ -82,6 +82,16 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func sharing(action: AnalyticsHiddenEventSharingAction, uid: String, sharedMediaType: AnalyticsHiddenEventSharedMediaType, source: String?, type: String?) -> AnalyticsHiddenEvent {
+            return Self(
+                name: action.name,
+                source: source,
+                type: type,
+                value: uid,
+                value1: sharedMediaType.value
+            )
+    }
+    
     static func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvent {
         return Self(
             name: "quick_actions",
@@ -167,6 +177,10 @@ struct AnalyticsHiddenEvent {
     
     @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
+    }
+    
+    @objc class func sharing(action: AnalyticsHiddenEventSharingAction, uid: String, sharedMediaType: AnalyticsHiddenEventSharedMediaType, source: String?, type: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, sharedMediaType: sharedMediaType, source: source, type: type))
     }
     
     @objc class func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvents {
@@ -262,5 +276,42 @@ struct AnalyticsHiddenEvent {
             labels.type = AnalyticsType.actionLogout.rawValue
         }
         return labels
+    }
+}
+
+@objc enum AnalyticsHiddenEventSharingAction: UInt {
+    case media
+    case show
+    case section
+    
+    var name: String {
+        switch self {
+        case .media:
+            return "media_share"
+        case .show:
+            return "show_share"
+        case .section:
+            return "section_share"
+        }
+    }
+}
+
+@objc enum AnalyticsHiddenEventSharedMediaType: UInt {
+    case none
+    case content
+    case contentAtTime
+    case currentClip
+    
+    var value: String? {
+        switch self {
+        case .content:
+            return "content"
+        case .contentAtTime:
+            return "content_at_time"
+        case .currentClip:
+            return "current_clip"
+        default:
+            return nil
+        }
     }
 }

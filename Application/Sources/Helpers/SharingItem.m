@@ -9,14 +9,15 @@
 #import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
+#import "PlaySRG-Swift.h"
 
 @interface SharingItem ()
 
 @property (nonatomic) NSURL *URL;
 @property (nonatomic, copy) NSString *title;
-@property (nonatomic, copy) NSString *analyticsName;
+@property (nonatomic) AnalyticsHiddenEventSharingAction analyticsAction;
 @property (nonatomic, copy) NSString *analyticsUid;
-@property (nonatomic, copy) AnalyticsValue analyticsExtraValue;
+@property (nonatomic) AnalyticsHiddenEventSharedMediaType sharedMediaType;
 
 @end
 
@@ -29,9 +30,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:time];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
-                       analyticsName:AnalyticsTitleSharingMedia
+                     analyticsAction:AnalyticsHiddenEventSharingActionMedia
                         analyticsUid:media.URN
-                 analyticsExtraValue:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsValueSharingContent : AnalyticsValueSharingContentAtTime];
+                     sharedMediaType:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsHiddenEventSharedMediaTypeContent : AnalyticsHiddenEventSharedMediaTypeContentAtTime];
 }
 
 + (instancetype)sharingItemForCurrentClip:(SRGMedia *)media
@@ -39,9 +40,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForMedia:media atTime:kCMTimeZero];
     return [[self alloc] initWithURL:URL
                                title:[self titleForMedia:media]
-                       analyticsName:AnalyticsTitleSharingMedia
+                     analyticsAction:AnalyticsHiddenEventSharingActionMedia
                         analyticsUid:media.URN
-                 analyticsExtraValue:AnalyticsValueSharingCurrentClip];
+                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeCurrentClip];
 }
 
 + (instancetype)sharingItemForShow:(SRGShow *)show
@@ -49,9 +50,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForShow:show];
     return [[self alloc] initWithURL:URL
                                title:show.title
-                       analyticsName:AnalyticsTitleSharingShow
+                     analyticsAction:AnalyticsHiddenEventSharingActionShow
                         analyticsUid:show.URN
-                 analyticsExtraValue:nil];
+                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeNone];
 }
 
 + (instancetype)sharingItemForContentSection:(SRGContentSection *)contentSection
@@ -59,9 +60,9 @@
     NSURL *URL = [ApplicationConfiguration.sharedApplicationConfiguration sharingURLForContentSection:contentSection];
     return [[self alloc] initWithURL:URL
                                title:contentSection.presentation.title
-                       analyticsName:AnalyticsTitleSharingSection
+                     analyticsAction:AnalyticsHiddenEventSharingActionSection
                         analyticsUid:contentSection.uid
-                 analyticsExtraValue:nil];
+                     sharedMediaType:AnalyticsHiddenEventSharedMediaTypeNone];
 }
 
 + (NSString *)titleForMedia:(SRGMedia *)media
@@ -78,20 +79,20 @@
 
 - (instancetype)initWithURL:(NSURL *)URL
                       title:(NSString *)title
-              analyticsName:(NSString *)analyticsName
+            analyticsAction:(AnalyticsHiddenEventSharingAction)analyticsAction
                analyticsUid:(NSString *)analyticsUid
-        analyticsExtraValue:(AnalyticsValue)analyticsExtraValue
+            sharedMediaType:(AnalyticsHiddenEventSharedMediaType)sharedMediaType
 {
-    if (! URL || title.length == 0 || ! analyticsName || ! analyticsUid) {
+    if (! URL || title.length == 0 || ! analyticsUid) {
         return nil;
     }
     
     if (self = [super init]) {
         self.URL = URL;
         self.title = title;
-        self.analyticsName = analyticsName;
+        self.analyticsAction = analyticsAction;
         self.analyticsUid = analyticsUid;
-        self.analyticsExtraValue = analyticsExtraValue;
+        self.sharedMediaType = sharedMediaType;
     }
     return self;
 }
@@ -106,11 +107,11 @@
 - (id)activityViewController:(UIActivityViewController *)activityViewController itemForActivityType:(UIActivityType)activityType
 {
     if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]
-            || [activityType isEqualToString:UIActivityTypeAddToReadingList]
-            || [activityType isEqualToString:UIActivityTypeAirDrop]
-            || [activityType isEqualToString:UIActivityTypeOpenInIBooks]
-            || [activityType isEqualToString:UIActivityTypeMail]
-            || [activityType isEqualToString:@"com.apple.reminders.RemindersEditorExtension"]) {
+        || [activityType isEqualToString:UIActivityTypeAddToReadingList]
+        || [activityType isEqualToString:UIActivityTypeAirDrop]
+        || [activityType isEqualToString:UIActivityTypeOpenInIBooks]
+        || [activityType isEqualToString:UIActivityTypeMail]
+        || [activityType isEqualToString:@"com.apple.reminders.RemindersEditorExtension"]) {
         return self.URL;
     }
     else {
@@ -149,12 +150,11 @@
                 return;
             }
             
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.type = activityType;
-            labels.source = source;
-            labels.value = sharingItem.analyticsUid;
-            labels.extraValue1 = sharingItem.analyticsExtraValue;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:sharingItem.analyticsName labels:labels];
+            [[AnalyticsHiddenEvents sharingWithAction:sharingItem.analyticsAction
+                                                  uid:sharingItem.analyticsUid
+                                      sharedMediaType:sharingItem.sharedMediaType
+                                               source:source
+                                                 type:activityType] send];
             
             if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
                 [Banner showWithStyle:BannerStyleInfo

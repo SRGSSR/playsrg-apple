@@ -61,9 +61,6 @@ AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
 AnalyticsTitle const AnalyticsTitleGoogleCast = @"google_cast";
 AnalyticsTitle const AnalyticsTitleNotificationOpen = @"notification_open";
 AnalyticsTitle const AnalyticsTitleNotificationPushOpen = @"push_notification_open";
-AnalyticsTitle const AnalyticsTitleSharingMedia = @"media_share";
-AnalyticsTitle const AnalyticsTitleSharingShow = @"show_share";
-AnalyticsTitle const AnalyticsTitleSharingSection = @"section_share";
 
 AnalyticsSource const AnalyticsSourceAutomatic = @"automatic";
 AnalyticsSource const AnalyticsSourceButton = @"button";
@@ -92,7 +89,3 @@ AnalyticsType const AnalyticsTypeActionCancelLogin = @"cancel_login";
 AnalyticsType const AnalyticsTypeActionLogin = @"login";
 AnalyticsType const AnalyticsTypeActionLogout = @"logout";
 AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";
-
-AnalyticsValue const AnalyticsValueSharingContent = @"content";
-AnalyticsValue const AnalyticsValueSharingContentAtTime = @"content_at_time";
-AnalyticsValue const AnalyticsValueSharingCurrentClip = @"current_clip";
