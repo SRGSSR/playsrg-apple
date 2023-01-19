@@ -49,8 +49,7 @@ extension UIViewController {
                     guard let upcomingMedia else { return }
                     
                     let playlist = controller.playlistDataSource as? Playlist
-                    AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.automatic,
-                                                            type: AnalyticsType.actionDisplay,
+                    AnalyticsHiddenEvent.continuousPlayback(action: .display,
                                                             mediaUrn: upcomingMedia.urn,
                                                             recommendationUid: playlist?.recommendationUid)
                     .send()

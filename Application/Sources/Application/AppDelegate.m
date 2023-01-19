@@ -364,8 +364,7 @@ static void *s_kvoContext = &s_kvoContext;
         SRGLetterboxController *letterboxController = notification.object;
         Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         
-        [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceAutomatic
-                                                        type:AnalyticsTypeActionPlayMedia
+        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsHiddenEventCPlaybackActionPlayAutomatic
                                                     mediaUrn:media.URN
                                            recommendationUid:playlist.recommendationUid]
          send];

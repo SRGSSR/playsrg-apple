@@ -27,11 +27,11 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func continuousPlayback(source: AnalyticsSource, type: AnalyticsType, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
+    static func continuousPlayback(action: AnalyticsHiddenEventCPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: "continuous_playback",
-            source: source.rawValue,
-            type: type.rawValue,
+            source: action.source,
+            type: action.type,
             value: mediaUrn,
             value1: recommendationUid
         )
@@ -171,8 +171,8 @@ struct AnalyticsHiddenEvent {
         self.event.send()
     }
     
-    @objc class func continuousPlayback(source: AnalyticsSource, type: AnalyticsType, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.continuousPlayback(source: source, type: type, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
+    @objc class func continuousPlayback(action: AnalyticsHiddenEventCPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
     }
     
     @objc class func download(action: AnalyticsHiddenEventListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
@@ -283,6 +283,33 @@ struct AnalyticsHiddenEvent {
     }
 }
 
+@objc enum AnalyticsHiddenEventCPlaybackAction: UInt {
+    case display
+    case playAutomatic
+    case play
+    case cancel
+    
+    var source: String {
+        switch self {
+        case .display, .playAutomatic:
+            return AnalyticsSource.automatic.rawValue
+        case .play, .cancel:
+            return AnalyticsSource.button.rawValue
+        }
+    }
+    
+    var type: String {
+        switch self {
+        case .display:
+            return AnalyticsType.actionDisplay.rawValue
+        case .playAutomatic, .play:
+            return AnalyticsType.actionPlayMedia.rawValue
+        case .cancel:
+            return AnalyticsType.actionCancel.rawValue
+        }
+    }
+}
+            
 @objc enum AnalyticsHiddenEventIdentityAction: UInt {
     case displayLogin
     case cancelLogin

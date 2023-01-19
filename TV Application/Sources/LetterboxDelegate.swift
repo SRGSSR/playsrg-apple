@@ -19,8 +19,7 @@ class LetterboxDelegate: NSObject {
                 
                 let controller = notification.object as? SRGLetterboxController,
                     playlist = controller?.playlistDataSource as? Playlist
-                AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.automatic,
-                                                        type: AnalyticsType.actionPlayMedia,
+                AnalyticsHiddenEvent.continuousPlayback(action: .playAutomatic,
                                                         mediaUrn: media.urn,
                                                         recommendationUid: playlist?.recommendationUid)
                 .send()
@@ -32,8 +31,7 @@ class LetterboxDelegate: NSObject {
 extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didEngageInContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
         let playlist = letterboxViewController.controller.playlistDataSource as? Playlist
-        AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.button,
-                                                type: AnalyticsType.actionPlayMedia,
+        AnalyticsHiddenEvent.continuousPlayback(action: .play,
                                                 mediaUrn: upcomingMedia.urn,
                                                 recommendationUid: playlist?.recommendationUid)
         .send()
@@ -41,8 +39,7 @@ extension LetterboxDelegate: SRGLetterboxViewControllerDelegate {
     
     func letterboxViewController(_ letterboxViewController: SRGLetterboxViewController, didCancelContinuousPlaybackWithUpcomingMedia upcomingMedia: SRGMedia) {
         let playlist = letterboxViewController.controller.playlistDataSource as? Playlist
-        AnalyticsHiddenEvent.continuousPlayback(source: AnalyticsSource.button,
-                                                type: AnalyticsType.actionCancel,
+        AnalyticsHiddenEvent.continuousPlayback(action: .cancel,
                                                 mediaUrn: upcomingMedia.urn,
                                                 recommendationUid: playlist?.recommendationUid)
         .send()
