@@ -324,7 +324,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
             [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceAutomatic
                                                             type:AnalyticsTypeActionDisplay
                                                         mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
-                                               recommendationUid:playlist.recommendationUid] send];
+                                               recommendationUid:playlist.recommendationUid]
+             send];
         }
     }];
 }
@@ -558,7 +559,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceClose
                                                         type:AnalyticsTypeActionCancel
                                                     mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
-                                           recommendationUid:playlist.recommendationUid] send];
+                                           recommendationUid:playlist.recommendationUid]
+         send];
     }
     
     [self.letterboxController cancelContinuousPlayback];
@@ -1666,7 +1668,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceButton
                                                     type:AnalyticsTypeActionPlayMedia
                                                 mediaUrn:upcomingMedia.URN
-                                       recommendationUid:playlist.recommendationUid] send];
+                                       recommendationUid:playlist.recommendationUid]
+     send];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didCancelContinuousPlaybackWithUpcomingMedia:(SRGMedia *)upcomingMedia
@@ -1693,7 +1696,8 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceButton
                                                     type:AnalyticsTypeActionCancel
                                                 mediaUrn:upcomingMedia.URN
-                                       recommendationUid:playlist.recommendationUid] send];
+                                       recommendationUid:playlist.recommendationUid]
+     send];
 }
 
 - (void)letterboxView:(SRGLetterboxView *)letterboxView didLongPressSubdivision:(SRGSubdivision *)subdivision

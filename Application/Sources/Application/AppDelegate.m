@@ -367,7 +367,8 @@ static void *s_kvoContext = &s_kvoContext;
         [[AnalyticsHiddenEvents continuousPlaybackWithSource:AnalyticsSourceAutomatic
                                                         type:AnalyticsTypeActionPlayMedia
                                                     mediaUrn:media.URN
-                                           recommendationUid:playlist.recommendationUid] send];
+                                           recommendationUid:playlist.recommendationUid]
+         send];
     }
 }
 
