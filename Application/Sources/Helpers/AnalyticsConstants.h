@@ -73,7 +73,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
 typedef NSString * AnalyticsType NS_STRING_ENUM;
-typedef NSString * AnalyticsValue NS_STRING_ENUM;
 
 /**
  *  Sources
