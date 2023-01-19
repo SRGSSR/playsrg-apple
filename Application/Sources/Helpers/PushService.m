@@ -291,30 +291,30 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = userInfo[@"show"] ?: AnalyticsSourceNotificationPush;
-            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;
-            labels.value = mediaURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+            [[AnalyticsHiddenEvents notificationOpenedFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+                                                       uid:mediaURN
+                                                    source:userInfo[@"show"] ?: AnalyticsSourceNotificationPush
+                                                      type:userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia]
+             send];
         }];
     }
     else if (userInfo[@"show"]) {
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceNotificationPush;
-            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow;
-            labels.value = showURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+            [[AnalyticsHiddenEvents notificationOpenedFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+                                                       uid:showURN
+                                                    source:AnalyticsSourceNotificationPush
+                                                      type:userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow]
+             send];
         }];
     }
     else {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceNotificationPush;
-        labels.type = userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert;
-        labels.value = notificationContent.body;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+        [[AnalyticsHiddenEvents notificationOpenedFrom:AnalyticsHiddenEventNotificationFromOperatingSystem
+                                                   uid:notificationContent.body
+                                                source:AnalyticsSourceNotificationPush
+                                                  type:userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert]
+         send];
     }
     completionHandler();
 }

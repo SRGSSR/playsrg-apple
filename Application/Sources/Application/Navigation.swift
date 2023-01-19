@@ -182,11 +182,11 @@ extension UIViewController {
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
                     self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
-                        let labels = SRGAnalyticsHiddenEventLabels()
-                        labels.source = notification.showURN ?? AnalyticsSource.notification.rawValue
-                        labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue
-                        labels.value = mediaUrn
-                        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+                        AnalyticsHiddenEvent.notificationOpened(from: .application,
+                                                                uid: mediaUrn,
+                                                                source: notification.showURN ?? AnalyticsSource.notification.rawValue,
+                                                                type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue)
+                        .send()
                     }
                 }
         }
@@ -202,19 +202,19 @@ extension UIViewController {
                     let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: animated)
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.notification.rawValue
-                    labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionDisplayShow.rawValue
-                    labels.value = showUrn
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.notificationOpened(from: .application,
+                                                            uid: showUrn,
+                                                            source: AnalyticsSource.notification.rawValue,
+                                                            type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionDisplayShow.rawValue)
+                    .send()
                 }
         }
         else {
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.notification.rawValue
-            labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionNotificationAlert.rawValue
-            labels.value = notification.body
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+            AnalyticsHiddenEvent.notificationOpened(from: .application,
+                                                    uid: notification.body,
+                                                    source: AnalyticsSource.notification.rawValue,
+                                                    type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionNotificationAlert.rawValue)
+            .send()
         }
     }
     

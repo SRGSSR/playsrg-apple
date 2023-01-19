@@ -68,6 +68,15 @@ struct AnalyticsHiddenEvent {
         )
     }
     
+    static func notificationOpened(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvent {
+        return Self(
+            name: from.name,
+            source: source,
+            type: type,
+            value: uid
+        )
+    }
+    
     static func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvent {
         return Self(
             name: "open_url",
@@ -169,6 +178,10 @@ struct AnalyticsHiddenEvent {
     
     @objc class func identity(action: AnalyticsHiddenEventIdentityAction) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.identity(action: action))
+    }
+    
+    @objc class func notificationOpened(from: AnalyticsHiddenEventNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.notificationOpened(from: from, uid: uid, source: source, type: type))
     }
     
     @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
@@ -312,6 +325,20 @@ struct AnalyticsHiddenEvent {
             return "current_clip"
         default:
             return nil
+        }
+    }
+}
+
+@objc enum AnalyticsHiddenEventNotificationFrom: UInt {
+    case application
+    case operatingSystem
+    
+    var name: String {
+        switch self {
+        case .application:
+            return "notification_open"
+        case .operatingSystem:
+            return "push_notification_open"
         }
     }
 }

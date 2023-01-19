@@ -79,16 +79,6 @@ typedef NSString * AnalyticsTitle NS_STRING_ENUM;
 OBJC_EXPORT AnalyticsTitle const AnalyticsTitleGoogleCast;
 
 /**
- *  Title for events related to opening a notification
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationOpen;
-
-/**
- *  Title for events related to opening a push notification
- */
-OBJC_EXPORT AnalyticsTitle const AnalyticsTitleNotificationPushOpen;
-
-/**
  *  @name Analytics event values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
