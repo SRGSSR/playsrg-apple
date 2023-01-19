@@ -77,7 +77,7 @@ extension AppDelegate: UIApplicationDelegate {
                     let unexpectedLogout = notification.userInfo?[SRGIdentityServiceUnauthorizedKey] as? Bool ?? false
 
                     let action = unexpectedLogout ? .unexpectedLogout : .logout as AnalyticsHiddenEventIdentityAction
-                    AnalyticsHiddenEvent.identity(action: .cancelLogin).send()
+                    AnalyticsHiddenEvent.identity(action: action).send()
                 }
                 .store(in: &cancellables)
         }
