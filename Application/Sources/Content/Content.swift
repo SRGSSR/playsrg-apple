@@ -327,7 +327,7 @@ private extension Content {
             case .watchLater:
                 return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsHiddenEvent.history(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
             default:
                 return nil
             }
@@ -725,7 +725,7 @@ private extension Content {
             case .radioWatchLater, .watchLater:
                 return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsHiddenEvent.history(action: .remove, source: source, urn: nil)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
 #if os(iOS)
             case .downloads:
                 return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)

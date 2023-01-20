@@ -497,7 +497,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                 Banner.calendarEventAdded(withTitle: title)
                 
                 if let channel = self.channel {
-                    AnalyticsHiddenEvent.calendarEvent(action: .add, channel: channel).send()
+                    AnalyticsHiddenEvent.calendarEventAdd(channel: channel).send()
                 }
             }
         }

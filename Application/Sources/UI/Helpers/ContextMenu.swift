@@ -159,7 +159,7 @@ extension ContextMenu {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
                     
-                    AnalyticsHiddenEvent.history(action: .remove, source: AnalyticsSource.contextMenu, urn: media.urn).send()
+                    AnalyticsHiddenEvent.historyRemove(source: AnalyticsSource.contextMenu, urn: media.urn).send()
                 }
             }
         }

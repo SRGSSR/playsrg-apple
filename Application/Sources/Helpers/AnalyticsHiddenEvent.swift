@@ -18,9 +18,9 @@ struct AnalyticsHiddenEvent {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
     
-    static func calendarEvent(action: AnalyticsListAction, channel: SRGChannel) -> AnalyticsHiddenEvent {
+    static func calendarEventAdd(channel: SRGChannel) -> AnalyticsHiddenEvent {
         return Self(
-            name: action.calendarEventName,
+            name: .calendarAdd,
             source: AnalyticsSource.button.rawValue,
             value: channel.urn,
             value1: channel.title
@@ -29,7 +29,7 @@ struct AnalyticsHiddenEvent {
     
     static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: "continuous_playback",
+            name: .continuousPlayback,
             source: action.source,
             type: action.type,
             value: mediaUrn,
@@ -55,14 +55,14 @@ struct AnalyticsHiddenEvent {
     
     static func googleGast(urn: String) -> AnalyticsHiddenEvent {
         return Self(
-            name: "google_cast",
+            name: .googleCast,
             value: urn
         )
     }
     
-    static func history(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func historyRemove(source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: action.historyName,
+            name: .historyRemove,
             source: source.rawValue,
             value: urn
         )
@@ -70,7 +70,7 @@ struct AnalyticsHiddenEvent {
     
     static func identity(action: AnalyticsIdentityAction) -> AnalyticsHiddenEvent {
         return Self(
-            name: "identity",
+            name: .identity,
             labels: action.labels
         )
     }
@@ -86,14 +86,14 @@ struct AnalyticsHiddenEvent {
     
     static func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvent {
         return Self(
-            name: "open_url",
+            name: .openUrl,
             labels: labels
         )
     }
     
     static func pictureInPicture(urn: String?) -> AnalyticsHiddenEvent {
         return Self(
-            name: "picture_in_picture",
+            name: .pictureInPicture,
             value: urn
         )
     }
@@ -110,7 +110,7 @@ struct AnalyticsHiddenEvent {
     
     static func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvent {
         return Self(
-            name: "quick_actions",
+            name: .quickActions,
             type: action.type
         )
     }
@@ -125,7 +125,7 @@ struct AnalyticsHiddenEvent {
     
     static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEvent {
         return Self(
-            name: "user_activity_ios",
+            name: .userActivityIos,
             source: "handoff",
             type: action.type,
             value: urn
@@ -140,8 +140,8 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    private init(name: String, source: String? = nil, type: String? = nil, value: String? = nil, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
-        self.name = name
+    private init(name: AnalyticsHiddenEventName, source: String? = nil, type: String? = nil, value: String? = nil, value1: String? = nil, value2: String? = nil, value3: String? = nil, value4: String? = nil, value5: String? = nil) {
+        self.name = name.rawValue
         
         let labels = SRGAnalyticsHiddenEventLabels()
         labels.source = source
@@ -155,8 +155,8 @@ struct AnalyticsHiddenEvent {
         self.labels = labels
     }
     
-    private init(name: String, labels: SRGAnalyticsHiddenEventLabels) {
-        self.name = name
+    private init(name: AnalyticsHiddenEventName, labels: SRGAnalyticsHiddenEventLabels) {
+        self.name = name.rawValue
         self.labels = labels
     }
 }
@@ -228,57 +228,39 @@ struct AnalyticsHiddenEvent {
     case add
     case remove
     
-    var calendarEventName: String {
+    fileprivate var downloadName: AnalyticsHiddenEventName {
         switch self {
         case .add:
-            return "calendar_add"
+            return .downloadAdd
         case .remove:
-            return "calendar_remove"
+            return .downloadRemove
         }
     }
     
-    var downloadName: String {
+    fileprivate var favoriteName: AnalyticsHiddenEventName {
         switch self {
         case .add:
-            return "download_add"
+            return .favoriteAdd
         case .remove:
-            return "download_remove"
+            return .favoriteRemove
         }
     }
     
-    var favoriteName: String {
+    fileprivate var subscriptionName: AnalyticsHiddenEventName {
         switch self {
         case .add:
-            return "favorite_add"
+            return .subscriptionAdd
         case .remove:
-            return "favorite_remove"
+            return .subscriptionRemove
         }
     }
     
-    var historyName: String {
+    fileprivate var watchLaterName: AnalyticsHiddenEventName {
         switch self {
         case .add:
-            return "history_add"
+            return .watchLaterAdd
         case .remove:
-            return "history_remove"
-        }
-    }
-    
-    var subscriptionName: String {
-        switch self {
-        case .add:
-            return "subscription_add"
-        case .remove:
-            return "subscription_remove"
-        }
-    }
-    
-    var watchLaterName: String {
-        switch self {
-        case .add:
-            return "watch_later_add"
-        case .remove:
-            return "watch_later_remove"
+            return .watchLaterRemove
         }
     }
 }
@@ -289,7 +271,7 @@ struct AnalyticsHiddenEvent {
     case play
     case cancel
     
-    var source: String {
+    fileprivate var source: String {
         switch self {
         case .display, .playAutomatic:
             return AnalyticsSource.automatic.rawValue
@@ -298,7 +280,7 @@ struct AnalyticsHiddenEvent {
         }
     }
     
-    var type: String {
+    fileprivate var type: String {
         switch self {
         case .display:
             return AnalyticsType.actionDisplay.rawValue
@@ -317,7 +299,7 @@ struct AnalyticsHiddenEvent {
     case logout
     case unexpectedLogout
     
-    var labels: SRGAnalyticsHiddenEventLabels {
+    fileprivate var labels: SRGAnalyticsHiddenEventLabels {
         let labels = SRGAnalyticsHiddenEventLabels()
         switch self {
         case .displayLogin:
@@ -343,12 +325,12 @@ struct AnalyticsHiddenEvent {
     case application
     case operatingSystem
     
-    var name: String {
+    fileprivate var name: AnalyticsHiddenEventName {
         switch self {
         case .application:
-            return "notification_open"
+            return .notificationOpen
         case .operatingSystem:
-            return "push_notification_open"
+            return .pushNotificationOpen
         }
     }
 }
@@ -358,14 +340,14 @@ struct AnalyticsHiddenEvent {
     case show
     case section
     
-    var name: String {
+    fileprivate var name: AnalyticsHiddenEventName {
         switch self {
         case .media:
-            return "media_share"
+            return .mediaShare
         case .show:
-            return "show_share"
+            return .showShare
         case .section:
-            return "section_share"
+            return .sectionShare
         }
     }
 }
@@ -376,7 +358,7 @@ struct AnalyticsHiddenEvent {
     case contentAtTime
     case currentClip
     
-    var value: String? {
+    fileprivate var value: String? {
         switch self {
         case .content:
             return "content"
@@ -396,7 +378,7 @@ struct AnalyticsHiddenEvent {
     case history
     case search
     
-    var type: String {
+    fileprivate var type: String {
         switch self {
         case .favorites:
             return "openfavorites"
@@ -414,7 +396,7 @@ struct AnalyticsHiddenEvent {
     case playMedia
     case displayShow
     
-    var type: String {
+    fileprivate var type: String {
         switch self {
         case .playMedia:
             return AnalyticsType.actionPlayMedia.rawValue
@@ -422,4 +404,43 @@ struct AnalyticsHiddenEvent {
             return AnalyticsType.actionDisplayShow.rawValue
         }
     }
+}
+
+private enum AnalyticsHiddenEventName: String {
+    case calendarAdd = "calendar_add"
+    
+    case continuousPlayback = "continuous_playback"
+    
+    case downloadAdd = "download_add"
+    case downloadRemove = "download_remove"
+    
+    case favoriteAdd = "favorite_add"
+    case favoriteRemove = "favorite_remove"
+    
+    case googleCast = "google_cast"
+    
+    case historyRemove = "history_remove"
+    
+    case identity = "identity"
+    
+    case mediaShare = "media_share"
+    case sectionShare = "section_share"
+    case showShare = "show_share"
+    
+    case notificationOpen = "notification_open"
+    case pushNotificationOpen = "push_notification_open"
+    
+    case openUrl = "open_url"
+    
+    case pictureInPicture = "picture_in_picture"
+    
+    case quickActions = "quick_actions"
+    
+    case subscriptionAdd = "subscription_add"
+    case subscriptionRemove = "subscription_remove"
+    
+    case userActivityIos = "user_activity_ios"
+    
+    case watchLaterAdd = "watch_later_add"
+    case watchLaterRemove = "watch_later_remove"
 }
