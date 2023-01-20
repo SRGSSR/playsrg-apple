@@ -123,11 +123,11 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func userActivity(type: AnalyticsType, urn: String) -> AnalyticsHiddenEvent {
+    static func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEvent {
         return Self(
             name: "user_activity_ios",
             source: "handoff",
-            type: type.rawValue,
+            type: action.type,
             value: urn
         )
     }
@@ -211,8 +211,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.shortcutItem(action: action))
     }
     
-    @objc class func userActivity(type: AnalyticsType, urn: String) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.userActivity(type: type, urn: urn))
+    @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.userActivity(action: action, urn: urn))
     }
     
     @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
@@ -339,6 +339,20 @@ struct AnalyticsHiddenEvent {
     }
 }
 
+@objc enum AnalyticsNotificationFrom: UInt {
+    case application
+    case operatingSystem
+    
+    var name: String {
+        switch self {
+        case .application:
+            return "notification_open"
+        case .operatingSystem:
+            return "push_notification_open"
+        }
+    }
+}
+
 @objc enum AnalyticsSharingAction: UInt {
     case media
     case show
@@ -396,16 +410,16 @@ struct AnalyticsHiddenEvent {
     }
 }
 
-@objc enum AnalyticsNotificationFrom: UInt {
-    case application
-    case operatingSystem
+@objc enum AnalyticsUserActivityAction: UInt {
+    case playMedia
+    case displayShow
     
-    var name: String {
+    var type: String {
         switch self {
-        case .application:
-            return "notification_open"
-        case .operatingSystem:
-            return "push_notification_open"
+        case .playMedia:
+            return AnalyticsType.actionPlayMedia.rawValue
+        case .displayShow:
+            return AnalyticsType.actionDisplayShow.rawValue
         }
     }
 }

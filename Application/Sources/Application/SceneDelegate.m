@@ -332,7 +332,7 @@ static void *s_kvoContext = &s_kvoContext;
             NSNumber *position = [userActivity.userInfo[@"position"] isKindOfClass:NSNumber.class] ? userActivity.userInfo[@"position"] : nil;
             [self playURN:mediaURN media:media atPosition:[SRGPosition positionAtTimeInSeconds:position.integerValue] fromPushNotification:NO completion:nil];
             
-            [[AnalyticsHiddenEvents userActivityWithType:AnalyticsTypeActionPlayMedia urn:mediaURN] send];
+            [[AnalyticsHiddenEvents userActivityWithAction:AnalyticsUserActivityActionPlayMedia urn:mediaURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
@@ -353,7 +353,7 @@ static void *s_kvoContext = &s_kvoContext;
                 [self openShowURN:showURN show:show fromPushNotification:NO];
             }];
             
-            [[AnalyticsHiddenEvents userActivityWithType:AnalyticsTypeActionDisplayShow urn:showURN] send];
+            [[AnalyticsHiddenEvents userActivityWithAction:AnalyticsUserActivityActionDisplayShow urn:showURN] send];
         }
         else {
             NSError *error = [NSError errorWithDomain:PlayErrorDomain
