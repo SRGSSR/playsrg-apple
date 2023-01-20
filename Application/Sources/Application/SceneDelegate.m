@@ -376,29 +376,25 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     ApplicationSectionInfo *applicationSectionInfo = nil;
-    AnalyticsType analyticsType = nil;
-    
     if ([shortcutItem.type isEqualToString:@"favorites"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionFavorites radioChannel:nil];
-        analyticsType = AnalyticsTypeActionFavorites;
+        [[AnalyticsHiddenEvents shortcutItemWithAction:AnalyticsShortcutItemActionFavorites] send];
     }
     else if ([shortcutItem.type isEqualToString:@"downloads"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionDownloads radioChannel:nil];
-        analyticsType = AnalyticsTypeActionDownloads;
+        [[AnalyticsHiddenEvents shortcutItemWithAction:AnalyticsShortcutItemActionDownloads] send];
     }
     else if ([shortcutItem.type isEqualToString:@"history"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionHistory radioChannel:nil];
-        analyticsType = AnalyticsTypeActionHistory;
+        [[AnalyticsHiddenEvents shortcutItemWithAction:AnalyticsShortcutItemActionHistory] send];
     }
     else if ([shortcutItem.type isEqualToString:@"search"]) {
         applicationSectionInfo = [ApplicationSectionInfo applicationSectionInfoWithApplicationSection:ApplicationSectionSearch radioChannel:nil];
-        analyticsType = AnalyticsTypeActionSearch;
+        [[AnalyticsHiddenEvents shortcutItemWithAction:AnalyticsShortcutItemActionSearch] send];
     }
     else {
         return NO;
     }
-    
-    [[AnalyticsHiddenEvents shortcutItemWithType:analyticsType] send];
     
     [self resetWithApplicationSectionInfo:applicationSectionInfo completionBlock:nil];
     return YES;

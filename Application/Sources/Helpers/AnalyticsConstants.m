@@ -69,10 +69,6 @@ AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 AnalyticsSource const AnalyticsSourceUniversalLink = @"deep_link";
 
-AnalyticsType const AnalyticsTypeActionFavorites = @"openfavorites";
-AnalyticsType const AnalyticsTypeActionDownloads = @"opendownloads";
-AnalyticsType const AnalyticsTypeActionHistory = @"openhistory";
-AnalyticsType const AnalyticsTypeActionSearch = @"opensearch";
 AnalyticsType const AnalyticsTypeActionPlayMedia = @"play_media";
 AnalyticsType const AnalyticsTypeActionDisplay = @"display";
 AnalyticsType const AnalyticsTypeActionDisplayShow = @"display_show";

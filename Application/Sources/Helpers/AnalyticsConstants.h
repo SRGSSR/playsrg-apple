@@ -91,10 +91,6 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
 /**
  *  Actions
  */
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionFavorites;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDownloads;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionHistory;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionSearch;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionPlayMedia;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplay;
 OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayShow;

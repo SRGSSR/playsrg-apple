@@ -108,10 +108,10 @@ struct AnalyticsHiddenEvent {
             )
     }
     
-    static func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvent {
+    static func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvent {
         return Self(
             name: "quick_actions",
-            type: type.rawValue
+            type: action.type
         )
     }
     
@@ -207,8 +207,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, sharedMediaType: sharedMediaType, source: source, type: type))
     }
     
-    @objc class func shortcutItem(type: AnalyticsType) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.shortcutItem(type: type))
+    @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.shortcutItem(action: action))
     }
     
     @objc class func userActivity(type: AnalyticsType, urn: String) -> AnalyticsHiddenEvents {
@@ -372,6 +372,26 @@ struct AnalyticsHiddenEvent {
             return "current_clip"
         default:
             return nil
+        }
+    }
+}
+
+@objc enum AnalyticsShortcutItemAction: UInt {
+    case favorites
+    case downloads
+    case history
+    case search
+    
+    var type: String {
+        switch self {
+        case .favorites:
+            return "openfavorites"
+        case .downloads:
+            return "opendownloads"
+        case .history:
+            return "openhistory"
+        case .search:
+            return "opensearch"
         }
     }
 }
