@@ -181,10 +181,11 @@ extension UIViewController {
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
                     self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
-                        AnalyticsHiddenEvent.notification(from: .application,
+                        AnalyticsHiddenEvent.notification(action: .playMedia,
+                                                          from: .application,
                                                           uid: mediaUrn,
-                                                          source: notification.showURN ?? AnalyticsSource.notification.rawValue,
-                                                          type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue)
+                                                          overrideSource: notification.showURN,
+                                                          overrideType: UserNotificationTypeString(notification.type))
                         .send()
                     }
                 }
@@ -201,18 +202,18 @@ extension UIViewController {
                     let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: animated)
                     
-                    AnalyticsHiddenEvent.notification(from: .application,
+                    AnalyticsHiddenEvent.notification(action: .displayShow,
+                                                      from: .application,
                                                       uid: showUrn,
-                                                      source: AnalyticsSource.notification.rawValue,
-                                                      type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionDisplayShow.rawValue)
+                                                      overrideType: UserNotificationTypeString(notification.type))
                     .send()
                 }
         }
         else {
-            AnalyticsHiddenEvent.notification(from: .application,
+            AnalyticsHiddenEvent.notification(action: .alert,
+                                              from: .application,
                                               uid: notification.body,
-                                              source: AnalyticsSource.notification.rawValue,
-                                              type: UserNotificationTypeString(notification.type) ?? AnalyticsType.actionNotificationAlert.rawValue)
+                                              overrideType: UserNotificationTypeString(notification.type))
             .send()
         }
     }

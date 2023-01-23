@@ -291,10 +291,11 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
-                                                 uid:mediaURN
-                                              source:userInfo[@"show"] ?: AnalyticsSourceNotificationPush
-                                                type:userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia]
+            [[AnalyticsHiddenEvents notificationWithAction:AnalyticsNotificationActionPlayMedia
+                                                      from:AnalyticsNotificationFromOperatingSystem
+                                                       uid:mediaURN
+                                            overrideSource:userInfo[@"show"]
+                                              overrideType:userInfo[@"type"]]
              send];
         }];
     }
@@ -302,18 +303,20 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
-                                                 uid:showURN
-                                              source:AnalyticsSourceNotificationPush
-                                                type:userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow]
+            [[AnalyticsHiddenEvents notificationWithAction:AnalyticsNotificationActionDisplayShow
+                                                      from:AnalyticsNotificationFromOperatingSystem
+                                                       uid:showURN
+                                            overrideSource:nil
+                                              overrideType:userInfo[@"type"]]
              send];
         }];
     }
     else {
-        [[AnalyticsHiddenEvents notificationFrom:AnalyticsNotificationFromOperatingSystem
-                                             uid:notificationContent.body
-                                          source:AnalyticsSourceNotificationPush
-                                            type:userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert]
+        [[AnalyticsHiddenEvents notificationWithAction:AnalyticsNotificationActionAlert
+                                                  from:AnalyticsNotificationFromOperatingSystem
+                                                   uid:notificationContent.body
+                                        overrideSource:nil
+                                          overrideType:userInfo[@"type"]]
          send];
     }
     completionHandler();

@@ -75,11 +75,11 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func notification(from: AnalyticsNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvent {
+    static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEvent {
         return Self(
             name: from.name,
-            source: source,
-            type: type,
+            source: overrideSource ?? from.source,
+            type: overrideType ?? action.type,
             value: uid
         )
     }
@@ -191,8 +191,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.identity(action: action))
     }
     
-    @objc class func notification(from: AnalyticsNotificationFrom, uid: String, source: String?, type: String?) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.notification(from: from, uid: uid, source: source, type: type))
+    @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
     @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
@@ -291,6 +291,23 @@ struct AnalyticsHiddenEvent {
         }
     }
 }
+
+@objc enum AnalyticsNotificationAction: UInt {
+    case playMedia
+    case displayShow
+    case alert
+    
+    fileprivate var type: String {
+        switch self {
+        case .playMedia:
+            return AnalyticsType.actionPlayMedia.rawValue
+        case .displayShow:
+            return AnalyticsType.actionDisplayShow.rawValue
+        case .alert:
+            return AnalyticsType.actionNotificationAlert.rawValue
+        }
+    }
+}
             
 @objc enum AnalyticsIdentityAction: UInt {
     case displayLogin
@@ -331,6 +348,15 @@ struct AnalyticsHiddenEvent {
             return .notificationOpen
         case .operatingSystem:
             return .pushNotificationOpen
+        }
+    }
+    
+    fileprivate var source: String {
+        switch self {
+        case .application:
+            return AnalyticsSource.notification.rawValue
+        case .operatingSystem:
+            return AnalyticsSource.notificationPush.rawValue
         }
     }
 }
