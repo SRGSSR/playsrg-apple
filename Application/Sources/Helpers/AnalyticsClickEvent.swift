@@ -32,7 +32,7 @@ struct AnalyticsClickEvent {
         )
     }
     
-    static func TvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel) -> AnalyticsClickEvent {
+    static func tvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayLivestream",
             value1: PageId.tvGuide.rawValue,
@@ -42,7 +42,7 @@ struct AnalyticsClickEvent {
         )
     }
     
-    static func TvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel) -> AnalyticsClickEvent {
+    static func tvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayMedia",
             value1: PageId.tvGuide.rawValue,
@@ -52,35 +52,35 @@ struct AnalyticsClickEvent {
         )
     }
     
-    static func TvGuideNow() -> AnalyticsClickEvent {
+    static func tvGuideNow() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionNowClick",
             value1: PageId.tvGuide.rawValue
         )
     }
     
-    static func TvGuideTonight() -> AnalyticsClickEvent {
+    static func tvGuideTonight() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionTonightClick",
             value1: PageId.tvGuide.rawValue
         )
     }
     
-    static func TvGuidePreviousDay() -> AnalyticsClickEvent {
+    static func tvGuidePreviousDay() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionPreviousDayClick",
             value1: PageId.tvGuide.rawValue
         )
     }
     
-    static func TvGuideNextDay() -> AnalyticsClickEvent {
+    static func tvGuideNextDay() -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionNextDayClick",
             value1: PageId.tvGuide.rawValue
         )
     }
     
-    static func TvGuideCalendar(to selectedDate: Date) -> AnalyticsClickEvent {
+    static func tvGuideCalendar(to selectedDate: Date) -> AnalyticsClickEvent {
         return Self(
             name: "DateSelectionCalendarClick",
             value1: DateFormatter.play_iso8601Calendar().string(from: selectedDate),
@@ -88,7 +88,7 @@ struct AnalyticsClickEvent {
         )
     }
     
-    static func TvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
+    static func tvGuideChangeLayout(to programGuideLayout: ProgramGuideLayout) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuideSwitchLayout",
             value1: PageId.tvGuide.rawValue,

@@ -84,8 +84,8 @@ extension UIViewController {
                 // No error banners displayed on tvOS yet
             } receiveValue: { [weak self] media in
                 let playAnalyticsClickEvent = media.contentType == .livestream ?
-                AnalyticsClickEvent.TvGuidePlayLivestream(program: program, channel: channel) :
-                AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
+                AnalyticsClickEvent.tvGuidePlayLivestream(program: program, channel: channel) :
+                AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
                 let mediaAnalyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid)
                 
                 self?.navigateToMedia(media, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, from: program, animated: animated, completion: completion)

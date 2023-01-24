@@ -191,10 +191,10 @@ final class ProgramViewModel: ObservableObject {
             return { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.TvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel).send()
                     }
                     else {
-                        AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
                     }
                 }
                 
