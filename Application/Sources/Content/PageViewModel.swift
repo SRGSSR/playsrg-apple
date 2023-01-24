@@ -324,6 +324,7 @@ private extension PageViewModel {
             return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
                 .map { items in
                     guard let firstItem = items.first else { return Row(section: section, items: []) }
+                    
                     let highlightedItem = section.properties.hasHighlightedItem ? firstItem : nil
                     let item = Item(.item(.highlight(highlight, item: highlightedItem)), in: section)
                     return Row(section: section, items: [item])
