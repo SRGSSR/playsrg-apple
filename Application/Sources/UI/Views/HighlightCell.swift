@@ -9,8 +9,9 @@ import SwiftUI
 // MARK: View
 
 struct HighlightCell: View {
-    let highlight: Highlight
+    let highlight: Highlight?
     let section: Content.Section
+    let item: Content.Item?
     let filter: SectionFiltering?
     
     @Environment(\.isSelected) private var isSelected
@@ -19,25 +20,32 @@ struct HighlightCell: View {
 #if os(tvOS)
         ExpandingCardButton(action: action) {
             MainView(highlight: highlight)
+                .redactable()
                 .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint, traits: .isButton)
         }
 #else
         MainView(highlight: highlight)
-            .selectionAppearance(when: isSelected)
+            .selectionAppearance(when: isSelected && highlight != nil)
             .cornerRadius(LayoutStandardViewCornerRadius)
+            .redactable()
             .accessibilityElement(label: accessibilityLabel, hint: accessibilityHint)
 #endif
     }
     
 #if os(tvOS)
     private func action() {
-        navigateToSection(section, filter: filter)
+        if case let .show(show) = item {
+            navigateToShow(show)
+        }
+        else {
+            navigateToSection(section, filter: filter)
+        }
     }
 #endif
     
     /// Behavior: h-exp, v-exp
     private struct MainView: View {
-        let highlight: Highlight
+        let highlight: Highlight?
         
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
@@ -50,11 +58,12 @@ struct HighlightCell: View {
         }
         
         private var imageUrl: URL? {
+            guard let highlight else { return nil }
             return SRGDataProvider.current!.url(for: highlight.image, size: .large)
         }
         
         private var contentMode: ImageView.ContentMode {
-            if let focalPoint = highlight.imageFocalPoint {
+            if let focalPoint = highlight?.imageFocalPoint {
                 return .aspectFillFocused(relativeWidth: focalPoint.relativeWidth, relativeHeight: focalPoint.relativeHeight)
             }
             else {
@@ -67,23 +76,27 @@ struct HighlightCell: View {
                 if isCompact {
                     ZStack(alignment: .bottom) {
                         ImageView(source: imageUrl, contentMode: contentMode)
-                        LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
-                        Text(highlight.title)
-                            .srgFont(.H2)
-                            .lineLimit(2)
-                            .foregroundColor(.white)
-                            .padding(16)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                        if let highlight {
+                            LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .bottom, endPoint: .center)
+                            Text(highlight.title)
+                                .srgFont(.H2)
+                                .lineLimit(2)
+                                .foregroundColor(.white)
+                                .padding(16)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
                     }
                 }
                 else {
                     ZStack(alignment: .leading) {
                         ImageView(source: imageUrl, contentMode: contentMode)
-                        LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
-                        DescriptionView(highlight: highlight)
-                            .padding(.horizontal, 60)
-                            .padding(.vertical, 40)
-                            .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                        if let highlight {
+                            LinearGradient(gradient: Gradient(colors: [.srgGray16.opacity(0.9), .clear]), startPoint: .leading, endPoint: .trailing)
+                            DescriptionView(highlight: highlight)
+                                .padding(.horizontal, 60)
+                                .padding(.vertical, 40)
+                                .frame(width: geometry.size.width * 2 / 3, height: geometry.size.height)
+                        }
                     }
                 }
             }
@@ -93,7 +106,7 @@ struct HighlightCell: View {
     /// Behavior: h-exp, v-hug
     private struct DescriptionView: View {
         let highlight: Highlight
-                
+        
         var body: some View {
             VStack(alignment: .leading, spacing: 15) {
                 Text(highlight.title)
@@ -116,7 +129,7 @@ struct HighlightCell: View {
 
 private extension HighlightCell {
     var accessibilityLabel: String? {
-        return highlight.title
+        return highlight?.title
     }
     
     var accessibilityHint: String? {
@@ -127,15 +140,12 @@ private extension HighlightCell {
 // MARK: Size
 
 enum HighlightCellSize {
-    fileprivate static let aspectRatio: CGFloat = 16 / 9
+    private static func aspectRatio(horizontalSizeClass: UIUserInterfaceSizeClass) -> CGFloat {
+        return horizontalSizeClass == .compact ? 16 / 9 : 4
+    }
     
     static func fullWidth(layoutWidth: CGFloat, horizontalSizeClass: UIUserInterfaceSizeClass) -> NSCollectionLayoutSize {
-        if horizontalSizeClass == .compact {
-            return LayoutSwimlaneCellSize(layoutWidth, aspectRatio, 0)
-        }
-        else {
-            return LayoutFractionedCellSize(layoutWidth, aspectRatio, 0.4)
-        }
+        return LayoutSwimlaneCellSize(layoutWidth, aspectRatio(horizontalSizeClass: horizontalSizeClass), 0)
     }
 }
 
@@ -153,10 +163,10 @@ struct HighlightCell_Previews: PreviewProvider {
     static let highlight = Mock.highlight()
     
     static var previews: some View {
-        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
             .previewLayout(layoutWidth: 1000, horizontalSizeClass: .regular)
 #if os(iOS)
-        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), filter: nil)
+        HighlightCell(highlight: highlight, section: .configured(.tvAllShows), item: nil, filter: nil)
             .previewLayout(layoutWidth: 400, horizontalSizeClass: .compact)
 #endif
     }

@@ -321,9 +321,14 @@ private extension PageViewModel {
     
     static func rowPublisher(id: Id, section: Section, pageSize: UInt, paginatedBy paginator: Trigger.Signal?) -> AnyPublisher<Row, Error> {
         if let highlight = section.properties.rowHighlight {
-            let item = Item(.item(.highlight(highlight)), in: section)
-            return Just(Row(section: section, items: [item]))
-                .setFailureType(to: Error.self)
+            return section.properties.publisher(pageSize: pageSize, paginatedBy: paginator, filter: id)
+                .map { items in
+                    guard let firstItem = items.first else { return Row(section: section, items: []) }
+                    
+                    let highlightedItem = section.properties.hasHighlightedItem ? firstItem : nil
+                    let item = Item(.item(.highlight(highlight, item: highlightedItem)), in: section)
+                    return Row(section: section, items: [item])
+                }
                 .eraseToAnyPublisher()
         }
         else {
@@ -399,6 +404,8 @@ private extension PageViewModel {
                 return .heroStage
             case .highlight:
                 return (Highlight(from: contentSection) != nil) ? .highlight : .mediaSwimlane
+            case .showPromotion:
+                return (Highlight(from: contentSection) != nil) ? .highlight : .showSwimlane
             case .mediaElement, .showElement:
                 return .element
             case .mediaElementSwimlane:

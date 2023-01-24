@@ -26,7 +26,7 @@ enum Content {
         }
     }
     
-    enum Item: Hashable {
+    indirect enum Item: Hashable {
         case mediaPlaceholder(index: Int)
         case media(_ media: SRGMedia)
         
@@ -42,7 +42,8 @@ enum Content {
         case showAccess(radioChannel: RadioChannel?)
 #endif
         
-        case highlight(_ highlight: Highlight)
+        case highlightPlaceholder(index: Int)
+        case highlight(_ highlight: Highlight, item: Item?)
         
         case transparent
         
@@ -60,7 +61,7 @@ enum Content {
             case let .notification(notification):
                 return notification.title
 #endif
-            case let .highlight(highlight):
+            case let .highlight(highlight, _):
                 return highlight.title
             default:
                 return nil
@@ -138,6 +139,7 @@ protocol SectionProperties {
     var displaysTitle: Bool { get }
     var supportsEdition: Bool { get }
     var emptyType: EmptyContentView.`Type` { get }
+    var hasHighlightedItem: Bool { get }
     
 #if os(iOS)
     var sharingItem: SharingItem? { get }
@@ -273,6 +275,10 @@ private extension Content {
             }
         }
         
+        var hasHighlightedItem: Bool {
+            return presentation.type == .showPromotion
+        }
+        
 #if os(iOS)
         var sharingItem: SharingItem? {
             return SharingItem(for: contentSection)
@@ -328,7 +334,7 @@ private extension Content {
         }
         
         var rowHighlight: Highlight? {
-            guard presentation.type == .highlight else { return nil }
+            guard presentation.type == .highlight || presentation.type == .showPromotion else { return nil }
             return Highlight(from: contentSection)
         }
         
@@ -353,14 +359,16 @@ private extension Content {
             case .livestreams:
                 return (0..<kDefaultNumberOfLivestreamPlaceholders).map { .mediaPlaceholder(index: $0) }
             case .highlight:
-                return (rowHighlight != nil) ? [] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .mediaPlaceholder(index: $0) }
+            case .showPromotion:
+                return (rowHighlight != nil) ? [.highlightPlaceholder(index: 0)] : (0..<kDefaultNumberOfPlaceholders).map { .showPlaceholder(index: $0) }
             default:
                 return []
             }
         }
         
         var displaysRowHeader: Bool {
-            return contentSection.presentation.type != .highlight
+            return contentSection.presentation.type != .highlight && contentSection.presentation.type != .showPromotion
         }
         
         func publisher(pageSize: UInt, paginatedBy paginator: Trigger.Signal?, filter: SectionFiltering?) -> AnyPublisher<[Content.Item], Error> {
@@ -617,6 +625,10 @@ private extension Content {
             }
         }
         
+        var hasHighlightedItem: Bool {
+            return false
+        }
+        
 #if os(iOS)
         var sharingItem: SharingItem? {
             switch configuredSection {
@@ -688,14 +700,14 @@ private extension Content {
                 let level1 = (show.transmission == .radio) ? AnalyticsPageLevel.audio.rawValue : AnalyticsPageLevel.video.rawValue
                 return [AnalyticsPageLevel.play.rawValue, level1, AnalyticsPageLevel.show.rawValue]
             case let .radioAllShows(channelUid),
-                 let .radioFavoriteShows(channelUid: channelUid),
-                 let .radioLatest(channelUid: channelUid),
-                 let .radioLatestEpisodes(channelUid: channelUid),
-                 let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
-                 let .radioLatestVideos(channelUid: channelUid),
-                 let .radioMostPopular(channelUid: channelUid),
-                 let .radioResumePlayback(channelUid: channelUid),
-                 let .radioWatchLater(channelUid: channelUid):
+                let .radioFavoriteShows(channelUid: channelUid),
+                let .radioLatest(channelUid: channelUid),
+                let .radioLatestEpisodes(channelUid: channelUid),
+                let .radioLatestEpisodesFromFavorites(channelUid: channelUid),
+                let .radioLatestVideos(channelUid: channelUid),
+                let .radioMostPopular(channelUid: channelUid),
+                let .radioResumePlayback(channelUid: channelUid),
+                let .radioWatchLater(channelUid: channelUid):
                 if let channel = ApplicationConfiguration.shared.radioChannel(forUid: channelUid) {
                     return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
                 }
