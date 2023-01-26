@@ -31,7 +31,7 @@ struct AnalyticsHiddenEvent {
         return Self(
             name: .continuousPlayback,
             source: action.source,
-            type: action.type,
+            type: action.type.rawValue,
             value: mediaUrn,
             value1: recommendationUid
         )
@@ -79,7 +79,7 @@ struct AnalyticsHiddenEvent {
         return Self(
             name: from.name,
             source: overrideSource ?? from.source,
-            type: overrideType ?? action.type,
+            type: overrideType ?? action.type.rawValue,
             value: uid
         )
     }
@@ -88,7 +88,7 @@ struct AnalyticsHiddenEvent {
         return Self(
             name: .openUrl,
             source: source,
-            type: action.type,
+            type: action.type.rawValue,
             value: urn,
             value1: sourceApplication
         )
@@ -130,7 +130,7 @@ struct AnalyticsHiddenEvent {
         return Self(
             name: .userActivityIos,
             source: "handoff",
-            type: action.type,
+            type: action.type.rawValue,
             value: urn
         )
     }
@@ -283,14 +283,14 @@ struct AnalyticsHiddenEvent {
         }
     }
     
-    fileprivate var type: String {
+    fileprivate var type: AnalyticsHiddenEventType {
         switch self {
         case .display:
-            return AnalyticsType.actionDisplay.rawValue
+            return .display
         case .playAutomatic, .play:
-            return AnalyticsType.actionPlayMedia.rawValue
+            return .playMedia
         case .cancel:
-            return AnalyticsType.actionCancel.rawValue
+            return .cancel
         }
     }
 }
@@ -300,37 +300,37 @@ struct AnalyticsHiddenEvent {
     case displayShow
     case alert
     
-    fileprivate var type: String {
+    fileprivate var type: AnalyticsHiddenEventType {
         switch self {
         case .playMedia:
-            return AnalyticsType.actionPlayMedia.rawValue
+            return .playMedia
         case .displayShow:
-            return AnalyticsType.actionDisplayShow.rawValue
+            return .displayShow
         case .alert:
-            return AnalyticsType.actionNotificationAlert.rawValue
+            return .notificationAlert
         }
     }
 }
 
 @objc enum AnalyticsOpenUrlAction: UInt {
-    case openApp
+    case openPlayApp
     case playMedia
     case displayShow
     case displayPage
     case displayUrl
     
-    fileprivate var type: String {
+    fileprivate var type: AnalyticsHiddenEventType {
         switch self {
-        case .openApp:
-            return AnalyticsType.actionOpenPlayApp.rawValue
+        case .openPlayApp:
+            return .openPlayApp
         case .playMedia:
-            return AnalyticsType.actionPlayMedia.rawValue
+            return .playMedia
         case .displayShow:
-            return AnalyticsType.actionDisplayShow.rawValue
+            return .displayShow
         case .displayPage:
-            return AnalyticsType.actionDisplayPage.rawValue
+            return .displayPage
         case .displayUrl:
-            return AnalyticsType.actionDisplayURL.rawValue
+            return .displayURL
         }
     }
 }
@@ -346,19 +346,19 @@ struct AnalyticsHiddenEvent {
         let labels = SRGAnalyticsHiddenEventLabels()
         switch self {
         case .displayLogin:
-            labels.type = AnalyticsType.actionDisplayLogin.rawValue
+            labels.type = AnalyticsHiddenEventType.displayLogin.rawValue
         case .cancelLogin:
             labels.source = AnalyticsSource.button.rawValue
-            labels.type = AnalyticsType.actionCancelLogin.rawValue
+            labels.type = AnalyticsHiddenEventType.cancelLogin.rawValue
         case .login:
             labels.source = AnalyticsSource.button.rawValue
-            labels.type = AnalyticsType.actionLogin.rawValue
+            labels.type = AnalyticsHiddenEventType.login.rawValue
         case .logout:
             labels.source = AnalyticsSource.button.rawValue
-            labels.type = AnalyticsType.actionLogout.rawValue
+            labels.type = AnalyticsHiddenEventType.logout.rawValue
         case .unexpectedLogout:
             labels.source = AnalyticsSource.automatic.rawValue
-            labels.type = AnalyticsType.actionLogout.rawValue
+            labels.type = AnalyticsHiddenEventType.logout.rawValue
         }
         return labels
     }
@@ -448,12 +448,12 @@ struct AnalyticsHiddenEvent {
     case playMedia
     case displayShow
     
-    fileprivate var type: String {
+    fileprivate var type: AnalyticsHiddenEventType {
         switch self {
         case .playMedia:
-            return AnalyticsType.actionPlayMedia.rawValue
+            return .playMedia
         case .displayShow:
-            return AnalyticsType.actionDisplayShow.rawValue
+            return .displayShow
         }
     }
 }
@@ -495,4 +495,24 @@ private enum AnalyticsHiddenEventName: String {
     
     case watchLaterAdd = "watch_later_add"
     case watchLaterRemove = "watch_later_remove"
+}
+
+private enum AnalyticsHiddenEventType: String {
+    case display = "display"
+    case cancel = "cancel"
+    
+    case playMedia = "play_media"
+
+    case displayShow = "display_show"
+    case displayPage = "display_page"
+    case displayURL = "display_url"
+    
+    case notificationAlert = "notification_alert"
+    
+    case displayLogin = "display_login"
+    case cancelLogin = "cancel_login"
+    case login = "login"
+    case logout = "logout"
+    
+    case openPlayApp = "open_play_app"
 }

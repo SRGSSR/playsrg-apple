@@ -72,7 +72,6 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
  *  @name Analytics event values
  */
 typedef NSString * AnalyticsSource NS_STRING_ENUM;
-typedef NSString * AnalyticsType NS_STRING_ENUM;
 
 /**
  *  Sources
@@ -87,21 +86,5 @@ OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
 OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
-
-/**
- *  Actions
- */
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionPlayMedia;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplay;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayShow;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayPage;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayURL;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancel;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionNotificationAlert;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionDisplayLogin;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionCancelLogin;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogin;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionLogout;
-OBJC_EXPORT AnalyticsType const AnalyticsTypeActionOpenPlayApp;
 
 NS_ASSUME_NONNULL_END

@@ -68,16 +68,3 @@ AnalyticsSource const AnalyticsSourceNotificationPush = @"push_notification";
 AnalyticsSource const AnalyticsSourceSelection = @"selection";
 AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
 AnalyticsSource const AnalyticsSourceUniversalLink = @"deep_link";
-
-AnalyticsType const AnalyticsTypeActionPlayMedia = @"play_media";
-AnalyticsType const AnalyticsTypeActionDisplay = @"display";
-AnalyticsType const AnalyticsTypeActionDisplayShow = @"display_show";
-AnalyticsType const AnalyticsTypeActionDisplayPage = @"display_page";
-AnalyticsType const AnalyticsTypeActionDisplayURL = @"display_url";
-AnalyticsType const AnalyticsTypeActionCancel = @"cancel";
-AnalyticsType const AnalyticsTypeActionNotificationAlert = @"notification_alert";
-AnalyticsType const AnalyticsTypeActionDisplayLogin = @"display_login";
-AnalyticsType const AnalyticsTypeActionCancelLogin = @"cancel_login";
-AnalyticsType const AnalyticsTypeActionLogin = @"login";
-AnalyticsType const AnalyticsTypeActionLogout = @"logout";
-AnalyticsType const AnalyticsTypeActionOpenPlayApp = @"open_play_app";

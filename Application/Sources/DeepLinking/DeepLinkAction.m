@@ -42,7 +42,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)unsupportedActionWithOptions:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source
 {
-    AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionOpenApp
+    AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionOpenPlayApp
                                                                             source:source
                                                                                urn:nil
                                                                     sourceApplication:options.sourceApplication];
