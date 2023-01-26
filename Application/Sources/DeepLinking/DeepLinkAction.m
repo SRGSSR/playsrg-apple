@@ -44,7 +44,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
     AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionOpenPlayApp
                                                                             source:source
                                                                                urn:nil
-                                                                    sourceApplication:options.sourceApplication];
+                                                                 sourceApplication:options.sourceApplication];
     
     return [[self alloc] initWithType:DeepLinkTypeUnsupported
                            identifier:@""
@@ -75,7 +75,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionPlayMedia
                                                                                 source:source
                                                                                    urn:mediaURN
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:mediaURN
@@ -91,7 +91,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayShow
                                                                                 source:source
                                                                                    urn:showURN
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:showURN
@@ -107,7 +107,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                 source:source
                                                                                    urn:topicURN
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:topicURN
@@ -118,7 +118,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                 source:source
                                                                                    urn:type
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:type
@@ -134,7 +134,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
                                                                                 source:source
                                                                                    urn:sectionUid
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:sectionUid
@@ -150,7 +150,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
         AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayUrl
                                                                                 source:source
                                                                                    urn:URLString
-                                                                        sourceApplication:options.sourceApplication];
+                                                                     sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:URLString
