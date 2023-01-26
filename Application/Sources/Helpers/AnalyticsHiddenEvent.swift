@@ -11,8 +11,8 @@ import SRGDataProvider
  *  Play analytics hidden event.
  */
 struct AnalyticsHiddenEvent {
-    let name: String
-    let labels: SRGAnalyticsHiddenEventLabels
+    private let name: String
+    private let labels: SRGAnalyticsHiddenEventLabels
     
     func send() {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
@@ -168,7 +168,7 @@ struct AnalyticsHiddenEvent {
  *  Objective-C Play analytics hidden events compatibility.
  */
 @objc class AnalyticsHiddenEvents: NSObject {
-    let event: AnalyticsHiddenEvent
+    private let event: AnalyticsHiddenEvent
     
     @objc func send() {
         self.event.send()
