@@ -6,7 +6,6 @@
 
 #import "SharingItem.h"
 
-#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "Banner.h"
 #import "PlaySRG-Swift.h"
@@ -22,6 +21,17 @@
 @end
 
 @implementation SharingItem
+
+AnalyticsEventSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
+    switch (sharingItemFrom) {
+        case SharingItemFromButton:
+            return AnalyticsEventSourceButton;
+            break;
+        case SharingItemFromContextMenu:
+            return AnalyticsEventSourceContextMenu;
+            break;
+    }
+}
 
 #pragma mark Class methods
 
@@ -130,7 +140,7 @@
 @implementation UIActivityViewController (SharingItem)
 
 - (instancetype)initWithSharingItem:(SharingItem *)sharingItem
-                             source:(AnalyticsSource)source
+                               from:(SharingItemFrom)sharingItemFrom
                 withCompletionBlock:(void (^)(UIActivityType))completionBlock
 {
     if (self = [self initWithActivityItems:@[ sharingItem ] applicationActivities:nil]) {
@@ -153,7 +163,7 @@
             [[AnalyticsHiddenEvents sharingWithAction:sharingItem.analyticsAction
                                                   uid:sharingItem.analyticsUid
                                       sharedMediaType:sharingItem.sharedMediaType
-                                               source:source
+                                               source:SharingItemSourceFrom(sharingItemFrom)
                                                  type:activityType] send];
             
             if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {

@@ -68,23 +68,4 @@ OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleTV;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWatchLater;
 OBJC_EXPORT AnalyticsPageTitle const AnalyticsPageTitleWhatsNew;
 
-/**
- *  @name Analytics event values
- */
-typedef NSString * AnalyticsSource NS_STRING_ENUM;
-
-/**
- *  Sources
- */
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceAutomatic;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceButton;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceClose;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceContextMenu;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceCustomURL;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotification NS_SWIFT_NAME(AnalyticsSource.notification);
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceNotificationPush;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceSelection;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceSwipe;
-OBJC_EXPORT AnalyticsSource const AnalyticsSourceUniversalLink;
-
 NS_ASSUME_NONNULL_END

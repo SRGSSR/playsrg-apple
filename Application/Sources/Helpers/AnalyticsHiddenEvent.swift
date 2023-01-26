@@ -21,7 +21,7 @@ struct AnalyticsHiddenEvent {
     static func calendarEventAdd(channel: SRGChannel) -> AnalyticsHiddenEvent {
         return Self(
             name: .calendarAdd,
-            source: AnalyticsSource.button.rawValue,
+            source: AnalyticsEventSource.button.value,
             value: channel.urn,
             value1: channel.title
         )
@@ -30,25 +30,25 @@ struct AnalyticsHiddenEvent {
     static func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: .continuousPlayback,
-            source: action.source,
+            source: action.source.value,
             type: action.type.rawValue,
             value: mediaUrn,
             value1: recommendationUid
         )
     }
     
-    static func download(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func download(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.downloadName,
-            source: source.rawValue,
+            source: source.value,
             value: urn
         )
     }
     
-    static func favorite(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func favorite(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.favoriteName,
-            source: source.rawValue,
+            source: source.value,
             value: urn
         )
     }
@@ -60,10 +60,10 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func historyRemove(source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func historyRemove(source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: .historyRemove,
-            source: source.rawValue,
+            source: source.value,
             value: urn
         )
     }
@@ -78,16 +78,16 @@ struct AnalyticsHiddenEvent {
     static func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEvent {
         return Self(
             name: from.name,
-            source: overrideSource ?? from.source,
+            source: overrideSource ?? from.source.value,
             type: overrideType ?? action.type.rawValue,
             value: uid
         )
     }
     
-    static func openUrl(action: AnalyticsOpenUrlAction, source: String?, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvent {
+    static func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsEventSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: .openUrl,
-            source: source,
+            source: source.value,
             type: action.type.rawValue,
             value: urn,
             value1: sourceApplication
@@ -101,10 +101,10 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: String?, type: String?) -> AnalyticsHiddenEvent {
+    static func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsEventSource, type: String?) -> AnalyticsHiddenEvent {
             return Self(
                 name: action.name,
-                source: source,
+                source: source.value,
                 type: type,
                 value: uid,
                 value1: sharedMediaType.value
@@ -118,10 +118,10 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func subscription(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func subscription(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.subscriptionName,
-            source: source.rawValue,
+            source: source.value,
             value: urn
         )
     }
@@ -135,10 +135,10 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func watchLater(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvent {
+    static func watchLater(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.watchLaterName,
-            source: source.rawValue,
+            source: source.value,
             value: urn
         )
     }
@@ -178,11 +178,11 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
     }
     
-    @objc class func download(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func download(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.download(action: action, source: source, urn: urn))
     }
     
-    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.favorite(action: action, source: source, urn: urn))
     }
     
@@ -198,7 +198,7 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
-    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: String?, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvents {
+    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsEventSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn, sourceApplication: sourceApplication))
     }
     
@@ -206,7 +206,7 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
     }
     
-    @objc class func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: String?, type: String?) -> AnalyticsHiddenEvents {
+    @objc class func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsEventSource, type: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, sharedMediaType: sharedMediaType, source: source, type: type))
     }
     
@@ -218,7 +218,7 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.userActivity(action: action, urn: urn))
     }
     
-    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
         return Self(event: AnalyticsHiddenEvent.watchLater(action: action, source: source, urn: urn))
     }
     
@@ -274,12 +274,12 @@ struct AnalyticsHiddenEvent {
     case play
     case cancel
     
-    fileprivate var source: String {
+    fileprivate var source: AnalyticsEventSource {
         switch self {
         case .display, .playAutomatic:
-            return AnalyticsSource.automatic.rawValue
+            return .automatic
         case .play, .cancel:
-            return AnalyticsSource.button.rawValue
+            return .button
         }
     }
     
@@ -348,16 +348,16 @@ struct AnalyticsHiddenEvent {
         case .displayLogin:
             labels.type = AnalyticsHiddenEventType.displayLogin.rawValue
         case .cancelLogin:
-            labels.source = AnalyticsSource.button.rawValue
+            labels.source = AnalyticsEventSource.button.value
             labels.type = AnalyticsHiddenEventType.cancelLogin.rawValue
         case .login:
-            labels.source = AnalyticsSource.button.rawValue
+            labels.source = AnalyticsEventSource.button.value
             labels.type = AnalyticsHiddenEventType.login.rawValue
         case .logout:
-            labels.source = AnalyticsSource.button.rawValue
+            labels.source = AnalyticsEventSource.button.value
             labels.type = AnalyticsHiddenEventType.logout.rawValue
         case .unexpectedLogout:
-            labels.source = AnalyticsSource.automatic.rawValue
+            labels.source = AnalyticsEventSource.automatic.value
             labels.type = AnalyticsHiddenEventType.logout.rawValue
         }
         return labels
@@ -377,12 +377,12 @@ struct AnalyticsHiddenEvent {
         }
     }
     
-    fileprivate var source: String {
+    fileprivate var source: AnalyticsEventSource {
         switch self {
         case .application:
-            return AnalyticsSource.notification.rawValue
+            return .notification
         case .operatingSystem:
-            return AnalyticsSource.notificationPush.rawValue
+            return .notificationPush
         }
     }
 }
@@ -454,6 +454,49 @@ struct AnalyticsHiddenEvent {
             return .playMedia
         case .displayShow:
             return .displayShow
+        }
+    }
+}
+
+@objc enum AnalyticsEventSource: UInt {
+    case button
+    
+    case contextMenu
+    
+    case automatic
+    case close
+        
+    case customURL
+    case universalLink
+    
+    case notification
+    case notificationPush
+    
+    case selection
+    case swipe
+    
+    fileprivate var value: String {
+        switch self {
+        case .button:
+            return "button"
+        case .contextMenu:
+            return "context_menu"
+        case .automatic:
+            return "automatic"
+        case .close:
+            return "close"
+        case .customURL:
+            return "scheme_url"
+        case .universalLink:
+            return "deep_link"
+        case .notification:
+            return "notification"
+        case .notificationPush:
+            return "push_notification"
+        case .selection:
+            return "selection"
+        case .swipe:
+            return "swipe"
         }
     }
 }

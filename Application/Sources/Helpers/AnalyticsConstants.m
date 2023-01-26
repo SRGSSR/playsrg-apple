@@ -57,14 +57,3 @@ AnalyticsPageTitle const AnalyticsPageTitleTopics = @"topics";
 AnalyticsPageTitle const AnalyticsPageTitleTV = @"tv";
 AnalyticsPageTitle const AnalyticsPageTitleWatchLater = @"watch later";
 AnalyticsPageTitle const AnalyticsPageTitleWhatsNew = @"what is new";
-
-AnalyticsSource const AnalyticsSourceAutomatic = @"automatic";
-AnalyticsSource const AnalyticsSourceButton = @"button";
-AnalyticsSource const AnalyticsSourceClose = @"close";
-AnalyticsSource const AnalyticsSourceContextMenu = @"context_menu";
-AnalyticsSource const AnalyticsSourceCustomURL = @"scheme_url";
-AnalyticsSource const AnalyticsSourceNotification = @"notification";
-AnalyticsSource const AnalyticsSourceNotificationPush = @"push_notification";
-AnalyticsSource const AnalyticsSourceSelection = @"selection";
-AnalyticsSource const AnalyticsSourceSwipe = @"swipe";
-AnalyticsSource const AnalyticsSourceUniversalLink = @"deep_link";

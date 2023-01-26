@@ -1965,7 +1965,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsListAction action = added ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-            [[AnalyticsHiddenEvents watchLaterWithAction:action source:AnalyticsSourceButton urn:mainChapterMedia.URN] send];
+            [[AnalyticsHiddenEvents watchLaterWithAction:action source:AnalyticsEventSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1992,7 +1992,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateDownloadStatus];
         
         AnalyticsListAction action = download ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-        [[AnalyticsHiddenEvents downloadWithAction:action source:AnalyticsSourceButton urn:media.URN] send];
+        [[AnalyticsHiddenEvents downloadWithAction:action source:AnalyticsEventSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2034,7 +2034,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     }
     
     void (^sharingCompletionBlock)(SharingItem *, NSString *) = ^(SharingItem *sharingItem, NSString *URN) {
-        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem source:AnalyticsSourceButton withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
+        UIActivityViewController *activityViewController = [[UIActivityViewController alloc] initWithSharingItem:sharingItem from:SharingItemFromButton withCompletionBlock:^(UIActivityType  _Nonnull activityType) {
             SRGSubdivision *subdivision = [self.letterboxController.mediaComposition play_subdivisionWithURN:URN];
             if (subdivision.event) {
                 [[SRGDataProvider.currentDataProvider play_increaseSocialCountForActivityType:activityType URN:subdivision.URN event:subdivision.event withCompletionBlock:^(SRGSocialCountOverview * _Nullable socialCountOverview, NSHTTPURLResponse * _Nullable HTTPResponse, NSError * _Nullable error) {
@@ -2148,7 +2148,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     BOOL isFavorite = FavoritesContainsShow(show);
     
     AnalyticsListAction action = isFavorite ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-    [[AnalyticsHiddenEvents favoriteWithAction:action source:AnalyticsSourceButton urn:show.URN] send];
+    [[AnalyticsHiddenEvents favoriteWithAction:action source:AnalyticsEventSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }

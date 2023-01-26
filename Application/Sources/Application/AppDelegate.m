@@ -6,7 +6,6 @@
 
 #import "AppDelegate.h"
 
-#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"

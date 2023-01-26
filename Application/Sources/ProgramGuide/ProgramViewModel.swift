@@ -249,7 +249,7 @@ final class ProgramViewModel: ObservableObject {
                 guard error == nil else { return }
                 
                 let action = added ? .add : .remove as AnalyticsListAction
-                AnalyticsHiddenEvent.watchLater(action: action, source: AnalyticsSource.button, urn: media.urn).send()
+                AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
                 
                 self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, progress: self.mediaData.progress)
             }

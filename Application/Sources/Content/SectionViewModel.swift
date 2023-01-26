@@ -92,7 +92,7 @@ final class SectionViewModel: ObservableObject {
         properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
-        if let analyticsDeletionHiddenEvent = properties.analyticsDeletionHiddenEvent(source: AnalyticsSource.selection) {
+        if let analyticsDeletionHiddenEvent = properties.analyticsDeletionHiddenEvent(source: .selection) {
             analyticsDeletionHiddenEvent.send()
         }
     }

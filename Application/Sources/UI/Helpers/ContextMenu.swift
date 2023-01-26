@@ -73,7 +73,7 @@ private extension ContextMenu {
     private static let popoverPresentationDelegate = ActivityPopoverPresentationDelegate()
     
     private static func shareItem(_ sharingItem: SharingItem, in viewController: UIViewController) {
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .contextMenu)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .contextMenu)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
@@ -138,7 +138,7 @@ extension ContextMenu {
                     guard error == nil else { return }
                     
                     let action = added ? .add : .remove as AnalyticsListAction
-                    AnalyticsHiddenEvent.watchLater(action: action, source: AnalyticsSource.contextMenu, urn: media.urn).send()
+                    AnalyticsHiddenEvent.watchLater(action: action, source: .contextMenu, urn: media.urn).send()
                     
                     Banner.showWatchLaterAdded(added, forItemWithName: media.title)
                 }
@@ -159,7 +159,7 @@ extension ContextMenu {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
                     
-                    AnalyticsHiddenEvent.historyRemove(source: AnalyticsSource.contextMenu, urn: media.urn).send()
+                    AnalyticsHiddenEvent.historyRemove(source: .contextMenu, urn: media.urn).send()
                 }
             }
         }
@@ -194,7 +194,7 @@ extension ContextMenu {
                 }
                 
                 let action = (download == nil) ? .add : .remove as AnalyticsListAction
-                AnalyticsHiddenEvent.download(action: action, source: AnalyticsSource.contextMenu, urn: media.urn).send()
+                AnalyticsHiddenEvent.download(action: action, source: .contextMenu, urn: media.urn).send()
                 
                 Banner.showDownload(download == nil, forItemWithName: media.title)
             }
@@ -268,7 +268,7 @@ extension ContextMenu {
                 FavoritesToggleShow(show)
                 
                 let action = !isFavorite ? .add : .remove as AnalyticsListAction
-                AnalyticsHiddenEvent.favorite(action: action, source: AnalyticsSource.contextMenu, urn: show.urn).send()
+                AnalyticsHiddenEvent.favorite(action: action, source: .contextMenu, urn: show.urn).send()
                 
                 Banner.showFavorite(!isFavorite, forItemWithName: show.title)
             }
