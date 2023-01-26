@@ -283,7 +283,7 @@ struct AnalyticsHiddenEvent {
         }
     }
     
-    fileprivate var type: AnalyticsHiddenEventType {
+    fileprivate var type: AnalyticsEventType {
         switch self {
         case .display:
             return .display
@@ -300,7 +300,7 @@ struct AnalyticsHiddenEvent {
     case displayShow
     case alert
     
-    fileprivate var type: AnalyticsHiddenEventType {
+    fileprivate var type: AnalyticsEventType {
         switch self {
         case .playMedia:
             return .playMedia
@@ -319,7 +319,7 @@ struct AnalyticsHiddenEvent {
     case displayPage
     case displayUrl
     
-    fileprivate var type: AnalyticsHiddenEventType {
+    fileprivate var type: AnalyticsEventType {
         switch self {
         case .openPlayApp:
             return .openPlayApp
@@ -346,19 +346,19 @@ struct AnalyticsHiddenEvent {
         let labels = SRGAnalyticsHiddenEventLabels()
         switch self {
         case .displayLogin:
-            labels.type = AnalyticsHiddenEventType.displayLogin.rawValue
+            labels.type = AnalyticsEventType.displayLogin.rawValue
         case .cancelLogin:
             labels.source = AnalyticsEventSource.button.value
-            labels.type = AnalyticsHiddenEventType.cancelLogin.rawValue
+            labels.type = AnalyticsEventType.cancelLogin.rawValue
         case .login:
             labels.source = AnalyticsEventSource.button.value
-            labels.type = AnalyticsHiddenEventType.login.rawValue
+            labels.type = AnalyticsEventType.login.rawValue
         case .logout:
             labels.source = AnalyticsEventSource.button.value
-            labels.type = AnalyticsHiddenEventType.logout.rawValue
+            labels.type = AnalyticsEventType.logout.rawValue
         case .unexpectedLogout:
             labels.source = AnalyticsEventSource.automatic.value
-            labels.type = AnalyticsHiddenEventType.logout.rawValue
+            labels.type = AnalyticsEventType.logout.rawValue
         }
         return labels
     }
@@ -448,7 +448,7 @@ struct AnalyticsHiddenEvent {
     case playMedia
     case displayShow
     
-    fileprivate var type: AnalyticsHiddenEventType {
+    fileprivate var type: AnalyticsEventType {
         switch self {
         case .playMedia:
             return .playMedia
@@ -540,7 +540,7 @@ private enum AnalyticsHiddenEventName: String {
     case watchLaterRemove = "watch_later_remove"
 }
 
-private enum AnalyticsHiddenEventType: String {
+private enum AnalyticsEventType: String {
     case display = "display"
     case cancel = "cancel"
     
