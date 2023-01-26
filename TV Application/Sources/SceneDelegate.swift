@@ -125,7 +125,7 @@ final class SceneDelegate: UIResponder {
                 .sink { _ in
                 } receiveValue: { media in
                     navigateToMedia(media)
-                    AnalyticsHiddenEvent.openUrl(labels: action.analyticsLabels).send()
+                    action.analyticsHiddenEvents.send()
                 }
                 .store(in: &cancellables)
         case .show:
@@ -134,7 +134,7 @@ final class SceneDelegate: UIResponder {
                 .sink { _ in
                 } receiveValue: { show in
                     navigateToShow(show)
-                    AnalyticsHiddenEvent.openUrl(labels: action.analyticsLabels).send()
+                    action.analyticsHiddenEvents.send()
                 }
                 .store(in: &cancellables)
         default:

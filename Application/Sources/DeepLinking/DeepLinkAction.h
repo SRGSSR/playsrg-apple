@@ -9,6 +9,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class AnalyticsHiddenEvents;
+
 typedef NSString * DeepLinkType NS_STRING_ENUM;
 
 /**
@@ -60,7 +62,7 @@ OBJC_EXPORT DeepLinkType const DeepLinkTypeUnsupported;
  */
 @property (nonatomic, readonly) DeepLinkType type;
 @property (nonatomic, readonly, copy) NSString *identifier;
-@property (nonatomic, readonly) SRGAnalyticsHiddenEventLabels *analyticsLabels;
+@property (nonatomic, readonly) AnalyticsHiddenEvents *analyticsHiddenEvents;
 
 /**
  *  Return the parameter matching the specified name, if any.

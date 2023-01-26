@@ -7,6 +7,7 @@
 #import "DeepLinkAction.h"
 
 #import "AnalyticsConstants.h"
+#import "PlaySRG-Swift.h"
 
 #if TARGET_OS_IOS
 #import "DeepLinkService.h"
@@ -30,7 +31,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 @property (nonatomic) DeepLinkType type;
 @property (nonatomic, copy) NSString *identifier;
-@property (nonatomic) SRGAnalyticsHiddenEventLabels *analyticsLabels;
+@property (nonatomic) AnalyticsHiddenEvents *analyticsHiddenEvents;
 @property (nonatomic) NSArray<NSURLQueryItem *> *queryItems;
 
 @end
@@ -41,14 +42,14 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)unsupportedActionWithOptions:(UISceneOpenURLOptions *)options source:(AnalyticsSource)source
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = source;
-    labels.type = AnalyticsTypeActionOpenPlayApp;
-    labels.extraValue1 = options.sourceApplication;
+    AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionOpenApp
+                                                                            source:source
+                                                                               urn:nil
+                                                                    sourceApplication:options.sourceApplication];
     
     return [[self alloc] initWithType:DeepLinkTypeUnsupported
                            identifier:@""
-                      analyticsLabels:labels
+                analyticsHiddenEvents:hiddenEvents
                            queryItems:nil];
 }
 
@@ -72,15 +73,14 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
         
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionPlayMedia;
-        labels.value = mediaURN;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionPlayMedia
+                                                                                source:source
+                                                                                   urn:mediaURN
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:mediaURN
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
     else if ([type isEqualToString:DeepLinkTypeShow]) {
@@ -89,15 +89,14 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
         
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionDisplayShow;
-        labels.value = showURN;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayShow
+                                                                                source:source
+                                                                                   urn:showURN
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:showURN
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
     else if ([type isEqualToString:DeepLinkTypeTopic]) {
@@ -106,27 +105,25 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
         
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionDisplayPage;
-        labels.value = topicURN;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
+                                                                                source:source
+                                                                                   urn:topicURN
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:topicURN
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
     else if ([@[ DeepLinkTypeHome, DeepLinkTypeAZ, DeepLinkTypeByDate, DeepLinkTypeSearch, DeepLinkTypeLivestreams ] containsObject:type]) {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionDisplayPage;
-        labels.value = type;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
+                                                                                source:source
+                                                                                   urn:type
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:type
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
     else if ([type isEqualToString:DeepLinkTypeSection]) {
@@ -135,15 +132,14 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
         
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionDisplayPage;
-        labels.value = sectionUid;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayPage
+                                                                                source:source
+                                                                                   urn:sectionUid
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:sectionUid
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
     else if ([type isEqualToString:DeepLinkTypeLink]) {
@@ -152,15 +148,14 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
             return [self unsupportedActionWithOptions:options source:source];
         }
         
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = source;
-        labels.type = AnalyticsTypeActionDisplayURL;
-        labels.value = URLString;
-        labels.extraValue1 = options.sourceApplication;
+        AnalyticsHiddenEvents *hiddenEvents = [AnalyticsHiddenEvents openUrlWithAction:AnalyticsOpenUrlActionDisplayUrl
+                                                                                source:source
+                                                                                   urn:URLString
+                                                                        sourceApplication:options.sourceApplication];
         
         return [[self alloc] initWithType:type
                                identifier:URLString
-                          analyticsLabels:labels
+                    analyticsHiddenEvents:hiddenEvents
                                queryItems:URLComponents.queryItems];
     }
 #if TARGET_OS_IOS
@@ -189,17 +184,17 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 - (instancetype)initWithType:(DeepLinkType)type
                   identifier:(NSString *)identifier
-             analyticsLabels:(SRGAnalyticsHiddenEventLabels *)analyticsLabels
+       analyticsHiddenEvents:(AnalyticsHiddenEvents *)analyticsHiddenEvents
                   queryItems:(NSArray<NSURLQueryItem *> *)queryItems
 
 {
     NSParameterAssert(identifier);
-    NSParameterAssert(analyticsLabels);
+    NSParameterAssert(analyticsHiddenEvents);
     
     if (self = [super init]) {
         self.type = type;
         self.identifier = identifier;
-        self.analyticsLabels = analyticsLabels;
+        self.analyticsHiddenEvents = analyticsHiddenEvents;
         self.queryItems = queryItems;
     }
     return self;

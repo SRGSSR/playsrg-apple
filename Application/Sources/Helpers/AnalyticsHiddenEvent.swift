@@ -84,10 +84,13 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvent {
+    static func openUrl(action: AnalyticsOpenUrlAction, source: String?, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: .openUrl,
-            labels: labels
+            source: source,
+            type: action.type,
+            value: urn,
+            value1: sourceApplication
         )
     }
     
@@ -195,8 +198,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
-    @objc class func openUrl(labels: SRGAnalyticsHiddenEventLabels) -> AnalyticsHiddenEvents {
-        return Self(event: AnalyticsHiddenEvent.openUrl(labels: labels))
+    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: String?, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvents {
+        return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn, sourceApplication: sourceApplication))
     }
     
     @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEvents {
@@ -305,6 +308,29 @@ struct AnalyticsHiddenEvent {
             return AnalyticsType.actionDisplayShow.rawValue
         case .alert:
             return AnalyticsType.actionNotificationAlert.rawValue
+        }
+    }
+}
+
+@objc enum AnalyticsOpenUrlAction: UInt {
+    case openApp
+    case playMedia
+    case displayShow
+    case displayPage
+    case displayUrl
+    
+    fileprivate var type: String {
+        switch self {
+        case .openApp:
+            return AnalyticsType.actionOpenPlayApp.rawValue
+        case .playMedia:
+            return AnalyticsType.actionPlayMedia.rawValue
+        case .displayShow:
+            return AnalyticsType.actionDisplayShow.rawValue
+        case .displayPage:
+            return AnalyticsType.actionDisplayPage.rawValue
+        case .displayUrl:
+            return AnalyticsType.actionDisplayURL.rawValue
         }
     }
 }
