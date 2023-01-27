@@ -323,11 +323,11 @@ private extension Content {
         func analyticsDeletionHiddenEvent(source: AnalyticsEventSource) -> AnalyticsHiddenEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsHiddenEvent.favorite(action: .remove, source: source)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsHiddenEvent.historyRemove(source: source)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
             default:
                 return nil
             }
@@ -721,14 +721,14 @@ private extension Content {
         func analyticsDeletionHiddenEvent(source: AnalyticsEventSource) -> AnalyticsHiddenEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsHiddenEvent.favorite(action: .remove, source: source)
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .radioWatchLater, .watchLater:
-                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source)
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .history, .radioResumePlayback:
-                return AnalyticsHiddenEvent.historyRemove(source: source)
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
 #if os(iOS)
             case .downloads:
-                return AnalyticsHiddenEvent.download(action: .remove, source: source)
+                return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)
 #endif
             default:
                 return nil
