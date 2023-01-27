@@ -106,13 +106,13 @@ struct AnalyticsHiddenEvent {
     }
     
     static func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsEventSource, type: String?) -> AnalyticsHiddenEvent {
-            return Self(
-                name: action.name,
-                source: source.value,
-                type: type,
-                value: uid,
-                value1: sharedMediaType.value
-            )
+        return Self(
+            name: action.name,
+            source: source.value,
+            type: type,
+            value: uid,
+            value1: sharedMediaType.value
+        )
     }
     
     static func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvent {
@@ -169,9 +169,9 @@ struct AnalyticsHiddenEvent {
 }
 
 /**
- *  Objective-C Play analytics hidden events compatibility.
+ *  Analytics hidden event compatibility for Objective-C, as a class.
  */
-@objc class AnalyticsHiddenEvents: NSObject {
+@objc class AnalyticsHiddenEventObjC: NSObject {
     private let event: AnalyticsHiddenEvent
     
     /**
@@ -182,51 +182,51 @@ struct AnalyticsHiddenEvent {
         self.event.send()
     }
     
-    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEvents {
+    @objc class func continuousPlayback(action: AnalyticsContiniousPlaybackAction, mediaUrn: String, recommendationUid: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.continuousPlayback(action: action, mediaUrn: mediaUrn, recommendationUid: recommendationUid))
     }
     
-    @objc class func download(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func download(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.download(action: action, source: source, urn: urn))
     }
     
-    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func favorite(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.favorite(action: action, source: source, urn: urn))
     }
     
-    @objc class func googleGast(urn: String) -> AnalyticsHiddenEvents {
+    @objc class func googleGast(urn: String) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.googleGast(urn: urn))
     }
     
-    @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsHiddenEvents {
+    @objc class func identity(action: AnalyticsIdentityAction) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.identity(action: action))
     }
     
-    @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEvents {
+    @objc class func notification(action: AnalyticsNotificationAction, from: AnalyticsNotificationFrom, uid: String, overrideSource: String? = nil, overrideType: String? = nil) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.notification(action: action, from: from, uid: uid, overrideSource: overrideSource, overrideType: overrideType))
     }
     
-    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsEventSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEvents {
+    @objc class func openUrl(action: AnalyticsOpenUrlAction, source: AnalyticsEventSource, urn: String?, sourceApplication: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.openUrl(action: action, source: source, urn: urn, sourceApplication: sourceApplication))
     }
     
-    @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func pictureInPicture(urn: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
     }
     
-    @objc class func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsEventSource, type: String?) -> AnalyticsHiddenEvents {
+    @objc class func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsEventSource, type: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, sharedMediaType: sharedMediaType, source: source, type: type))
     }
     
-    @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEvents {
+    @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.shortcutItem(action: action))
     }
     
-    @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEvents {
+    @objc class func userActivity(action: AnalyticsUserActivityAction, urn: String) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.userActivity(action: action, urn: urn))
     }
     
-    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEvents {
+    @objc class func watchLater(action: AnalyticsListAction, source: AnalyticsEventSource, urn: String?) -> AnalyticsHiddenEventObjC {
         return Self(event: AnalyticsHiddenEvent.watchLater(action: action, source: source, urn: urn))
     }
     
@@ -342,7 +342,7 @@ struct AnalyticsHiddenEvent {
         }
     }
 }
-            
+
 @objc enum AnalyticsIdentityAction: UInt {
     case displayLogin
     case cancelLogin
@@ -473,7 +473,7 @@ struct AnalyticsHiddenEvent {
     
     case automatic
     case close
-        
+    
     case customURL
     case universalLink
     
@@ -553,7 +553,7 @@ private enum AnalyticsEventType: String {
     case cancel = "cancel"
     
     case playMedia = "play_media"
-
+    
     case displayShow = "display_show"
     case displayPage = "display_page"
     case displayURL = "display_url"

@@ -363,21 +363,21 @@ static void *s_kvoContext = &s_kvoContext;
         SRGLetterboxController *letterboxController = notification.object;
         Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
         
-        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
-                                                    mediaUrn:media.URN
-                                           recommendationUid:playlist.recommendationUid]
+        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
+                                                       mediaUrn:media.URN
+                                              recommendationUid:playlist.recommendationUid]
          send];
     }
 }
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionCancelLogin] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionLogin] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -403,7 +403,7 @@ static void *s_kvoContext = &s_kvoContext;
     }
     
     AnalyticsIdentityAction action = unexpectedLogout ? AnalyticsIdentityActionUnexpectedLogout : AnalyticsIdentityActionLogout;
-    [[AnalyticsHiddenEvents identityWithAction:action] send];
+    [[AnalyticsHiddenEventObjC identityWithAction:action] send];
 }
 
 #pragma mark KVO

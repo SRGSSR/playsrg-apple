@@ -321,9 +321,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         if (letterboxController.continuousPlaybackUpcomingMedia) {
             Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
             
-            [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
-                                                        mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
-                                               recommendationUid:playlist.recommendationUid]
+            [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionDisplay
+                                                           mediaUrn:letterboxController.continuousPlaybackUpcomingMedia.URN
+                                                  recommendationUid:playlist.recommendationUid]
              send];
         }
     }];
@@ -371,7 +371,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // See https://stackoverflow.com/a/18938763/760435
     self.programsTableView.tableHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.programsTableView.bounds.size.width, 0.01f)];
     self.programsTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.f, 0.f, self.programsTableView.bounds.size.width, 0.01f)];
-            
+    
     NSString *programCellIdentifier = NSStringFromClass(ProgramTableViewCell.class);
     UINib *programCellNib = [UINib nibWithNibName:programCellIdentifier bundle:nil];
     [self.programsTableView registerNib:programCellNib forCellReuseIdentifier:programCellIdentifier];
@@ -555,9 +555,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.letterboxController.continuousPlaybackUpcomingMedia) {
         Playlist *playlist = [self.letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)self.letterboxController.playlistDataSource : nil;
         
-        [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                    mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
-                                           recommendationUid:playlist.recommendationUid]
+        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
+                                                       mediaUrn:self.letterboxController.continuousPlaybackUpcomingMedia.URN
+                                              recommendationUid:playlist.recommendationUid]
          send];
     }
     
@@ -567,9 +567,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self unregisterChannelUpdates];
         
         if (self.letterboxController.media.mediaType != SRGMediaTypeAudio
-                && ! self.letterboxController.pictureInPictureActive
-                && ! AVAudioSession.srg_isAirPlayActive
-                && ! ApplicationSettingBackgroundVideoPlaybackEnabled()) {
+            && ! self.letterboxController.pictureInPictureActive
+            && ! AVAudioSession.srg_isAirPlayActive
+            && ! ApplicationSettingBackgroundVideoPlaybackEnabled()) {
             [SRGLetterboxService.sharedService disableForController:self.letterboxController];
             [StoreReview requestReview];
         }
@@ -719,9 +719,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         NSNumber *position = nil;
         CMTime currentTime = self.letterboxController.currentTime;
         if (! isLiveStream && CMTIME_IS_VALID(currentTime)
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             position = @((NSInteger)CMTimeGetSeconds(currentTime));
         }
         else {
@@ -1087,9 +1087,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 - (void)hidePlayerUserInterfaceAnimated:(BOOL)animated
 {
     if (self.letterboxView.userInterfaceTogglable
-            && ! UIAccessibilityIsVoiceOverRunning()
-            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
-            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+        && ! UIAccessibilityIsVoiceOverRunning()
+        && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePaused
+        && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
         [self.letterboxView setUserInterfaceHidden:YES animated:animated];
     }
 }
@@ -1296,10 +1296,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 {
     SRGBlockingReason blockingReason = [self.letterboxController.media blockingReasonAtDate:NSDate.date];
     self.googleCastButton.hidden = self.letterboxController.playbackState == SRGMediaPlayerPlaybackStateIdle
-        || self.letterboxController.playbackState == SRGMediaPlayerPlaybackStateEnded
-        || self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePreparing
-        || blockingReason != SRGBlockingReasonNone
-        || [GCKCastContext sharedInstance].castState == GCKCastStateNoDevicesAvailable;
+    || self.letterboxController.playbackState == SRGMediaPlayerPlaybackStateEnded
+    || self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePreparing
+    || blockingReason != SRGBlockingReasonNone
+    || [GCKCastContext sharedInstance].castState == GCKCastStateNoDevicesAvailable;
 }
 
 - (void)updateTimelineVisibilityForFullScreen:(BOOL)fullScreen animated:(BOOL)animated
@@ -1663,9 +1663,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     
-    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
-                                                mediaUrn:upcomingMedia.URN
-                                       recommendationUid:playlist.recommendationUid]
+    [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlay
+                                                   mediaUrn:upcomingMedia.URN
+                                          recommendationUid:playlist.recommendationUid]
      send];
 }
 
@@ -1690,9 +1690,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     SRGLetterboxController *controller = letterboxView.controller;
     Playlist *playlist = [controller.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)controller.playlistDataSource : nil;
     
-    [[AnalyticsHiddenEvents continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
-                                                mediaUrn:upcomingMedia.URN
-                                       recommendationUid:playlist.recommendationUid]
+    [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionCancel
+                                                   mediaUrn:upcomingMedia.URN
+                                          recommendationUid:playlist.recommendationUid]
      send];
 }
 
@@ -1701,7 +1701,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (self.letterboxController.play_mainMedia.contentType == SRGContentTypeLivestream) {
         return;
     }
-        
+    
     SRGMedia *media = [self.letterboxController.mediaComposition mediaForSubdivision:subdivision];
     WatchLaterAddMedia(media, ^(NSError * _Nullable error) {
         if (! error) {
@@ -1735,7 +1735,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
 
 - (void)letterboxDidStartPictureInPicture
 {
-    [[AnalyticsHiddenEvents pictureInPictureWithUrn:self.letterboxController.fullLengthMedia.URN] send];
+    [[AnalyticsHiddenEventObjC pictureInPictureWithUrn:self.letterboxController.fullLengthMedia.URN] send];
 }
 
 - (void)letterboxDidStopPlaybackFromPictureInPicture
@@ -1880,7 +1880,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                modifierFlags:0
                                                                       action:@selector(skipForward:)];
         skipForwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ forward", @"Seek forward shortcut label"),
-                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
+                                                   [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
         if (@available(iOS 15, *)) {
             skipForwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
@@ -1892,7 +1892,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
                                                                 modifierFlags:0
                                                                        action:@selector(skipBackward:)];
         skipBackwardCommand.discoverabilityTitle = [NSString stringWithFormat:NSLocalizedString(@"%@ backward", @"Seek backward shortcut label"),
-                                                   [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
+                                                    [MediaPlayerViewControllerSkipIntervalAccessibilityFormatter() stringFromTimeInterval:SRGLetterboxSkipInterval]];
         if (@available(iOS 15, *)) {
             skipBackwardCommand.wantsPriorityOverSystemBehavior = YES;
         }
@@ -1965,7 +1965,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsListAction action = added ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-            [[AnalyticsHiddenEvents watchLaterWithAction:action source:AnalyticsEventSourceButton urn:mainChapterMedia.URN] send];
+            [[AnalyticsHiddenEventObjC watchLaterWithAction:action source:AnalyticsEventSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1992,7 +1992,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateDownloadStatus];
         
         AnalyticsListAction action = download ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-        [[AnalyticsHiddenEvents downloadWithAction:action source:AnalyticsEventSourceButton urn:media.URN] send];
+        [[AnalyticsHiddenEventObjC downloadWithAction:action source:AnalyticsEventSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2023,10 +2023,10 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     if (mainMedia.contentType != SRGContentTypeLivestream && mainMedia.contentType != SRGContentTypeScheduledLivestream) {
         CMTime time = self.letterboxController.currentTime;
         if (CMTIME_IS_VALID(time)
-                && CMTimeGetSeconds(time) >= 1.
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
-                && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
+            && CMTimeGetSeconds(time) >= 1.
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateIdle
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStatePreparing
+            && self.letterboxController.playbackState != SRGMediaPlayerPlaybackStateEnded) {
             currentPosition = CMTimeGetSeconds(time);
         }
         
@@ -2148,7 +2148,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     BOOL isFavorite = FavoritesContainsShow(show);
     
     AnalyticsListAction action = isFavorite ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-    [[AnalyticsHiddenEvents favoriteWithAction:action source:AnalyticsEventSourceButton urn:show.URN] send];
+    [[AnalyticsHiddenEventObjC favoriteWithAction:action source:AnalyticsEventSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }
@@ -2339,9 +2339,9 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     // user for background video playback (this guess might change depending on how the app has been found to be sent to the
     // background, see below)
     if (! ApplicationSettingBackgroundVideoPlaybackEnabled()
-            && ! self.letterboxController.pictureInPictureActive
-            && self.letterboxController.media.mediaType == SRGMediaTypeVideo
-            && self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
+        && ! self.letterboxController.pictureInPictureActive
+        && self.letterboxController.media.mediaType == SRGMediaTypeVideo
+        && self.letterboxController.playbackState == SRGMediaPlayerPlaybackStatePlaying) {
         self.shouldDisplayBackgroundVideoPlaybackPrompt = YES;
     }
 }

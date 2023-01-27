@@ -160,11 +160,11 @@ AnalyticsEventSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                 return;
             }
             
-            [[AnalyticsHiddenEvents sharingWithAction:sharingItem.analyticsAction
-                                                  uid:sharingItem.analyticsUid
-                                      sharedMediaType:sharingItem.sharedMediaType
-                                               source:SharingItemSourceFrom(sharingItemFrom)
-                                                 type:activityType] send];
+            [[AnalyticsHiddenEventObjC sharingWithAction:sharingItem.analyticsAction
+                                                     uid:sharingItem.analyticsUid
+                                         sharedMediaType:sharingItem.sharedMediaType
+                                                  source:SharingItemSourceFrom(sharingItemFrom)
+                                                    type:activityType] send];
             
             if ([activityType isEqualToString:UIActivityTypeCopyToPasteboard]) {
                 [Banner showWithStyle:BannerStyleInfo

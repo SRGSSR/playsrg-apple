@@ -45,7 +45,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-
+    
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manageAccount:)];
     [self addGestureRecognizer:gestureRecognizer];
 }
@@ -163,7 +163,7 @@
         [identityService showAccountView];
     }
     else if ([identityService loginWithEmailAddress:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastLoggedInEmailAddress]]) {
-        [[AnalyticsHiddenEvents identityWithAction:AnalyticsIdentityActionDisplayLogin] send];
+        [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionDisplayLogin] send];
     }
 }
 
