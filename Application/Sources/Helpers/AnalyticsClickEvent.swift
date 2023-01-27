@@ -8,7 +8,7 @@ import SRGAnalytics
 import SRGDataProvider
 
 /**
- *  Play analytics click event.
+ *  Play analytics click event. Defined for native and web Play applications.
  */
 struct AnalyticsClickEvent {
     let name: String
@@ -18,6 +18,10 @@ struct AnalyticsClickEvent {
         case tvGuide
     }
     
+    /**
+     *  Each struct created have expected values.
+     *  Use this method to send the event when needed.
+     */
     func send() {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }

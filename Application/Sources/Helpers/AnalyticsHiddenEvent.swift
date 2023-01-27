@@ -8,12 +8,16 @@ import SRGAnalytics
 import SRGDataProvider
 
 /**
- *  Play analytics hidden event.
+ *  Play analytics hidden event. Defined for native Play applications only.
  */
 struct AnalyticsHiddenEvent {
     private let name: String
     private let labels: SRGAnalyticsHiddenEventLabels
     
+    /**
+     *  Each struct created have expected values.
+     *  Use this method to send the event when needed.
+     */
     func send() {
         SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
     }
@@ -170,6 +174,10 @@ struct AnalyticsHiddenEvent {
 @objc class AnalyticsHiddenEvents: NSObject {
     private let event: AnalyticsHiddenEvent
     
+    /**
+     *  Each object created have expected values.
+     *  Use this method to send the event when needed.
+     */
     @objc func send() {
         self.event.send()
     }
