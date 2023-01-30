@@ -33,25 +33,28 @@ final class PageViewModel: Identifiable, ObservableObject {
         self.id = id
         
         Publishers.Publish(onOutputFrom: reloadSignal()) { [weak self] in
-            return Self.sectionsPublisher(id: id)
-                .map { sections in
-                    return Publishers.AccumulateLatestMany(sections.map { section in
+            return Self.pagePublisher(id: id)
+                .map { page in
+                    return Publishers.AccumulateLatestMany(page.sections.map { section in
                         return Publishers.PublishAndRepeat(onOutputFrom: Self.rowReloadSignal(for: section, trigger: self?.trigger)) {
                             return Self.rowPublisher(id: id,
                                                      section: section,
-                                                     pageSize: Self.pageSize(for: section, in: sections),
+                                                     pageSize: Self.pageSize(for: section, in: page.sections),
                                                      paginatedBy: self?.trigger.signal(activatedBy: TriggerId.loadMore(section: section))
                             )
                             .replaceError(with: Self.placeholderRow(for: section, state: self?.state))
                             .prepend(Self.placeholderRow(for: section, state: self?.state))
                         }
                     })
+                    .map { (page, $0) }
                     .eraseToAnyPublisher()
                 }
                 .switchToLatest()
-                .map { State.loaded(rows: $0.filter { !$0.isEmpty }) }
+                .map { page, rows in
+                    State.loaded(rows: rows.filter { !$0.isEmpty }, pageUid: page.uid)
+                }
                 .catch { error in
-                    return Just(State.failed(error: error))
+                    return Just(State.failed(error: error, pageUid: self?.state.pageUid))
                 }
         }
         .receive(on: DispatchQueue.main)
@@ -209,11 +212,11 @@ extension PageViewModel {
     
     enum State {
         case loading
-        case failed(error: Error)
-        case loaded(rows: [Row])
+        case failed(error: Error, pageUid: String?)
+        case loaded(rows: [Row], pageUid: String?)
         
         var rows: [Row] {
-            if case let .loaded(rows: rows) = self {
+            if case let .loaded(rows: rows, _) = self {
                 return rows
             }
             else {
@@ -227,6 +230,17 @@ extension PageViewModel {
         
         var isEmpty: Bool {
             return rows.isEmpty
+        }
+        
+        var pageUid: String? {
+            switch self {
+            case .loading:
+                return nil
+            case let .failed(_, pageUid: pageUid):
+                return pageUid
+            case let .loaded(_, pageUid: pageUid):
+                return pageUid
+            }
         }
     }
     
@@ -246,6 +260,11 @@ extension PageViewModel {
 #if os(iOS)
         case showAccess
 #endif
+    }
+    
+    fileprivate struct Page: Hashable {
+        let uid: String?
+        let sections: [Section]
     }
     
     struct Section: Hashable {
@@ -298,22 +317,22 @@ extension PageViewModel {
 // MARK: Publishers
 
 private extension PageViewModel {
-    static func sectionsPublisher(id: Id) -> AnyPublisher<[Section], Error> {
+    static func pagePublisher(id: Id) -> AnyPublisher<Page, Error> {
         switch id {
         case .video:
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, product: .playVideo)
-                .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .topic(topic):
             return SRGDataProvider.current!.contentPage(for: ApplicationConfiguration.shared.vendor, topicWithUrn: topic.urn)
-                .map { $0.sections.enumeratedMap { Section(.content($0), index: $1) } }
+                .map { Page(uid: $0.uid, sections: $0.sections.enumeratedMap { Section(.content($0), index: $1) }) }
                 .eraseToAnyPublisher()
         case let .audio(channel: channel):
-            return Just(channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) })
+            return Just(Page(uid: nil, sections: channel.configuredSections().enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         case .live:
-            return Just(ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) })
+            return Just(Page(uid: nil, sections: ApplicationConfiguration.shared.liveConfiguredSections.enumeratedMap { Section(.configured($0), index: $1) }))
                 .setFailureType(to: Error.self)
                 .eraseToAnyPublisher()
         }

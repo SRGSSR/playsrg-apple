@@ -46,7 +46,7 @@ final class PageViewController: UIViewController {
     
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item>()
-        if case let .loaded(rows: rows) = state {
+        if case let .loaded(rows: rows, _) = state {
             for row in rows {
                 snapshot.appendSections([row.section])
                 snapshot.appendItems(row.items, toSection: row.section)
@@ -163,6 +163,7 @@ final class PageViewController: UIViewController {
         
         model.$state
             .sink { [weak self] state in
+                self?.trackPageView(state: state)
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
@@ -198,9 +199,9 @@ final class PageViewController: UIViewController {
         switch state {
         case .loading:
             emptyContentView.content = EmptyContentView(state: .loading)
-        case let .failed(error: error):
+        case let .failed(error: error, _):
             emptyContentView.content = EmptyContentView(state: .failed(error: error))
-        case let .loaded(rows: rows):
+        case let .loaded(rows: rows, _):
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
         }
         
@@ -253,6 +254,23 @@ final class PageViewController: UIViewController {
         refreshTriggered = true
     }
 #endif
+    
+    private func trackPageView(state: PageViewModel.State) {
+        switch state {
+        case .loading:
+            break
+        case .failed, .loaded:
+            // View controller relies on latest model state, see `srg_pageViewLabels` variable.
+            DispatchQueue.main.async {
+                _ = self.trackPageView
+            }
+        }
+    }
+    
+    // "once-only" closure
+    private lazy var trackPageView: Void = {
+        self.srg_trackPageView()
+    }()
 }
 
 // MARK: Types
@@ -463,6 +481,10 @@ extension PageViewController: PlayApplicationNavigation {
 #endif
 
 extension PageViewController: SRGAnalyticsViewTracking {
+    var srg_isTrackedAutomatically: Bool {
+        return false
+    }
+    
     var srg_pageViewTitle: String {
         switch model.id {
         case .video, .audio, .live:
@@ -483,6 +505,14 @@ extension PageViewController: SRGAnalyticsViewTracking {
         case .topic:
             return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
         }
+    }
+    
+    var srg_pageViewLabels: SRGAnalyticsPageViewLabels? {
+        guard let pageUid = model.state.pageUid else { return nil }
+        
+        let pageViewLabels = SRGAnalyticsPageViewLabels()
+        pageViewLabels.customInfo = ["pac_page_id": pageUid]
+        return pageViewLabels
     }
 }
 
