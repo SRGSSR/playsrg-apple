@@ -148,7 +148,7 @@ protocol SectionProperties {
     /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
-    func analyticsDeletionHiddenEvent(source: AnalyticsEventSource) -> AnalyticsHiddenEvent?
+    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent?
     
     /// Properties for section displayed as a row
     var rowHighlight: Highlight? { get }
@@ -320,7 +320,7 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsEventSource) -> AnalyticsHiddenEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
             switch presentation.type {
             case .favoriteShows:
                 return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
@@ -718,7 +718,7 @@ private extension Content {
             }
         }
         
-        func analyticsDeletionHiddenEvent(source: AnalyticsEventSource) -> AnalyticsHiddenEvent? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
             switch configuredSection {
             case .favoriteShows, .radioFavoriteShows:
                 return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)

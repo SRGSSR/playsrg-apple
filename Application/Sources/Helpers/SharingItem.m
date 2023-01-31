@@ -22,13 +22,13 @@
 
 @implementation SharingItem
 
-AnalyticsEventSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
+AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
     switch (sharingItemFrom) {
         case SharingItemFromButton:
-            return AnalyticsEventSourceButton;
+            return AnalyticsSharingSourceButton;
             break;
         case SharingItemFromContextMenu:
-            return AnalyticsEventSourceContextMenu;
+            return AnalyticsSharingSourceContextMenu;
             break;
     }
 }

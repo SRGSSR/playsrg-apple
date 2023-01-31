@@ -39,7 +39,7 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 #pragma mark Class methods
 
-+ (instancetype)unsupportedActionWithOptions:(UISceneOpenURLOptions *)options source:(AnalyticsEventSource)source
++ (instancetype)unsupportedActionWithOptions:(UISceneOpenURLOptions *)options source:(AnalyticsOpenUrlSource)source
 {
     AnalyticsHiddenEventObjC *hiddenEvent = [AnalyticsHiddenEventObjC openUrlWithAction:AnalyticsOpenUrlActionOpenPlayApp
                                                                                  source:source
@@ -54,15 +54,15 @@ DeepLinkType const DeepLinkTypeUnsupported = @"unsupported";
 
 + (instancetype)actionFromURLContext:(UIOpenURLContext *)URLContext
 {
-    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsEventSourceCustomURL canConvertURL:YES];
+    return [self actionFromURL:URLContext.URL options:URLContext.options source:AnalyticsOpenUrlSourceCustomURL canConvertURL:YES];
 }
 
 + (instancetype)actionFromUniversalLinkURL:(NSURL *)URL
 {
-    return [self actionFromURL:URL options:nil source:AnalyticsEventSourceUniversalLink canConvertURL:YES];
+    return [self actionFromURL:URL options:nil source:AnalyticsOpenUrlSourceUniversalLink canConvertURL:YES];
 }
 
-+ (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsEventSource)source canConvertURL:(BOOL)canConvertURL
++ (instancetype)actionFromURL:(NSURL *)URL options:(UISceneOpenURLOptions *)options source:(AnalyticsOpenUrlSource)source canConvertURL:(BOOL)canConvertURL
 {
     NSURLComponents *URLComponents = [NSURLComponents componentsWithURL:URL resolvingAgainstBaseURL:YES];
     NSString *type = URLComponents.host.lowercaseString;

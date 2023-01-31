@@ -1965,7 +1965,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     WatchLaterToggleMedia(mainChapterMedia, ^(BOOL added, NSError * _Nullable error) {
         if (! error) {
             AnalyticsListAction action = added ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-            [[AnalyticsHiddenEventObjC watchLaterWithAction:action source:AnalyticsEventSourceButton urn:mainChapterMedia.URN] send];
+            [[AnalyticsHiddenEventObjC watchLaterWithAction:action source:AnalyticsListSourceButton urn:mainChapterMedia.URN] send];
             
             [Banner showWatchLaterAdded:added forItemWithName:mainChapterMedia.title];
         }
@@ -1992,7 +1992,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
         [self updateDownloadStatus];
         
         AnalyticsListAction action = download ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-        [[AnalyticsHiddenEventObjC downloadWithAction:action source:AnalyticsEventSourceButton urn:media.URN] send];
+        [[AnalyticsHiddenEventObjC downloadWithAction:action source:AnalyticsListSourceButton urn:media.URN] send];
     };
     
     if (! download) {
@@ -2148,7 +2148,7 @@ static NSDateComponentsFormatter *MediaPlayerViewControllerSkipIntervalAccessibi
     BOOL isFavorite = FavoritesContainsShow(show);
     
     AnalyticsListAction action = isFavorite ? AnalyticsListActionAdd : AnalyticsListActionRemove;
-    [[AnalyticsHiddenEventObjC favoriteWithAction:action source:AnalyticsEventSourceButton urn:show.URN] send];
+    [[AnalyticsHiddenEventObjC favoriteWithAction:action source:AnalyticsListSourceButton urn:show.URN] send];
     
     [Banner showFavorite:isFavorite forItemWithName:show.title];
 }
