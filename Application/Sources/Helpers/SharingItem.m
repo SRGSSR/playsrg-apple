@@ -16,7 +16,7 @@
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic) AnalyticsSharingAction analyticsAction;
 @property (nonatomic, copy) NSString *analyticsUid;
-@property (nonatomic) AnalyticsSharedMediaType sharedMediaType;
+@property (nonatomic) AnalyticsSharingMediaContentType mediaContentType;
 
 @end
 
@@ -42,7 +42,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                                title:[self titleForMedia:media]
                      analyticsAction:AnalyticsSharingActionMedia
                         analyticsUid:media.URN
-                     sharedMediaType:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsSharedMediaTypeContent : AnalyticsSharedMediaTypeContentAtTime];
+                    mediaContentType:CMTIME_COMPARE_INLINE(time, ==, kCMTimeZero) ? AnalyticsSharingMediaContentTypeContent : AnalyticsSharingMediaContentTypeContentAtTime];
 }
 
 + (instancetype)sharingItemForCurrentClip:(SRGMedia *)media
@@ -52,7 +52,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                                title:[self titleForMedia:media]
                      analyticsAction:AnalyticsSharingActionMedia
                         analyticsUid:media.URN
-                     sharedMediaType:AnalyticsSharedMediaTypeCurrentClip];
+                    mediaContentType:AnalyticsSharingMediaContentTypeCurrentClip];
 }
 
 + (instancetype)sharingItemForShow:(SRGShow *)show
@@ -62,7 +62,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                                title:show.title
                      analyticsAction:AnalyticsSharingActionShow
                         analyticsUid:show.URN
-                     sharedMediaType:AnalyticsSharedMediaTypeNone];
+                    mediaContentType:AnalyticsSharingMediaContentTypeNone];
 }
 
 + (instancetype)sharingItemForContentSection:(SRGContentSection *)contentSection
@@ -72,7 +72,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                                title:contentSection.presentation.title
                      analyticsAction:AnalyticsSharingActionSection
                         analyticsUid:contentSection.uid
-                     sharedMediaType:AnalyticsSharedMediaTypeNone];
+                    mediaContentType:AnalyticsSharingMediaContentTypeNone];
 }
 
 + (NSString *)titleForMedia:(SRGMedia *)media
@@ -91,7 +91,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
                       title:(NSString *)title
             analyticsAction:(AnalyticsSharingAction)analyticsAction
                analyticsUid:(NSString *)analyticsUid
-            sharedMediaType:(AnalyticsSharedMediaType)sharedMediaType
+           mediaContentType:(AnalyticsSharingMediaContentType)mediaContentType
 {
     if (! URL || title.length == 0 || ! analyticsUid) {
         return nil;
@@ -102,7 +102,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
         self.title = title;
         self.analyticsAction = analyticsAction;
         self.analyticsUid = analyticsUid;
-        self.sharedMediaType = sharedMediaType;
+        self.mediaContentType = mediaContentType;
     }
     return self;
 }
@@ -162,7 +162,7 @@ AnalyticsSharingSource SharingItemSourceFrom(SharingItemFrom sharingItemFrom) {
             
             [[AnalyticsHiddenEventObjC sharingWithAction:sharingItem.analyticsAction
                                                      uid:sharingItem.analyticsUid
-                                         sharedMediaType:sharingItem.sharedMediaType
+                                        mediaContentType:sharingItem.mediaContentType
                                                   source:SharingItemSourceFrom(sharingItemFrom)
                                                     type:activityType] send];
             

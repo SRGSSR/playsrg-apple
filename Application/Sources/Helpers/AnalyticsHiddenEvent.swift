@@ -105,13 +105,13 @@ struct AnalyticsHiddenEvent {
         )
     }
     
-    static func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEvent {
+    static func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEvent {
         return Self(
             name: action.name,
             source: source.source.rawValue,
             type: type,
             value: uid,
-            value1: sharedMediaType.value
+            value1: mediaContentType.value
         )
     }
     
@@ -214,8 +214,8 @@ struct AnalyticsHiddenEvent {
         return Self(event: AnalyticsHiddenEvent.pictureInPicture(urn: urn))
     }
     
-    @objc class func sharing(action: AnalyticsSharingAction, uid: String, sharedMediaType: AnalyticsSharedMediaType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEventObjC {
-        return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, sharedMediaType: sharedMediaType, source: source, type: type))
+    @objc class func sharing(action: AnalyticsSharingAction, uid: String, mediaContentType: AnalyticsSharingMediaContentType, source: AnalyticsSharingSource, type: String?) -> AnalyticsHiddenEventObjC {
+        return Self(event: AnalyticsHiddenEvent.sharing(action: action, uid: uid, mediaContentType: mediaContentType, source: source, type: type))
     }
     
     @objc class func shortcutItem(action: AnalyticsShortcutItemAction) -> AnalyticsHiddenEventObjC {
@@ -443,7 +443,7 @@ struct AnalyticsHiddenEvent {
     }
 }
 
-@objc enum AnalyticsSharedMediaType: UInt {
+@objc enum AnalyticsSharingMediaContentType: UInt {
     case none
     case content
     case contentAtTime
