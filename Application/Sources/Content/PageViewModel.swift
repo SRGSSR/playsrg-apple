@@ -27,6 +27,36 @@ final class PageViewModel: Identifiable, ObservableObject {
     @Published private(set) var state: State = .loading
     @Published private(set) var serviceMessage: ServiceMessage?
     
+    var analyticsPageViewTitle: String {
+        switch id {
+        case .video, .audio, .live:
+            return AnalyticsPageTitle.home.rawValue
+        case let .topic(topic):
+            return topic.title
+        }
+    }
+    
+    var analyticsPageViewLevels: [String]? {
+        switch id {
+        case .video:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
+        case let .audio(channel: channel):
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
+        case .live:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
+        case .topic:
+            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
+        }
+    }
+    
+    func analyticsPageViewLabels(pageUid: String?) -> SRGAnalyticsPageViewLabels? {
+        guard let pageUid else { return nil }
+        
+        let pageViewLabels = SRGAnalyticsPageViewLabels()
+        pageViewLabels.customInfo = ["pac_page_id": pageUid]
+        return pageViewLabels
+    }
+    
     private let trigger = Trigger()
     
     init(id: Id) {

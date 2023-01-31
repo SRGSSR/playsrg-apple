@@ -261,14 +261,14 @@ final class PageViewController: UIViewController {
         switch state {
         case .loading:
             break
-        case .failed, .loaded:
-            // View controller relies on latest model state, see `srg_pageViewLabels` variable.
-            DispatchQueue.main.async {
-                guard !self.analyticsPageViewTracked else { return }
-                self.analyticsPageViewTracked = true
-                
-                self.srg_trackPageView()
-            }
+        case let .failed(_, pageUid), let .loaded(_, pageUid):
+            guard !self.analyticsPageViewTracked else { return }
+            self.analyticsPageViewTracked = true
+            
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.analyticsPageViewTitle,
+                                                     levels: model.analyticsPageViewLevels,
+                                                     labels: model.analyticsPageViewLabels(pageUid: pageUid),
+                                                     fromPushNotification: false)
         }
     }
 }
@@ -477,46 +477,6 @@ extension PageViewController: PlayApplicationNavigation {
         }
     }
 }
-
-#endif
-
-extension PageViewController: SRGAnalyticsViewTracking {
-    var srg_isTrackedAutomatically: Bool {
-        return false
-    }
-    
-    var srg_pageViewTitle: String {
-        switch model.id {
-        case .video, .audio, .live:
-            return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic):
-            return topic.title
-        }
-    }
-    
-    var srg_pageViewLevels: [String]? {
-        switch model.id {
-        case .video:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-        case let .audio(channel: channel):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-        case .live:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-        case .topic:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
-        }
-    }
-    
-    var srg_pageViewLabels: SRGAnalyticsPageViewLabels? {
-        guard let pageUid = model.state.pageUid else { return nil }
-        
-        let pageViewLabels = SRGAnalyticsPageViewLabels()
-        pageViewLabels.customInfo = ["pac_page_id": pageUid]
-        return pageViewLabels
-    }
-}
-
-#if os(iOS)
 
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
