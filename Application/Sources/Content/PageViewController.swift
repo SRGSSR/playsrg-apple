@@ -44,6 +44,8 @@ final class PageViewController: UIViewController {
 #endif
     }
     
+    private var analyticsPageViewTracked = false
+    
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item>()
         if case let .loaded(rows: rows, _) = state {
@@ -262,15 +264,13 @@ final class PageViewController: UIViewController {
         case .failed, .loaded:
             // View controller relies on latest model state, see `srg_pageViewLabels` variable.
             DispatchQueue.main.async {
-                _ = self.trackPageView
+                guard !self.analyticsPageViewTracked else { return }
+                self.analyticsPageViewTracked = true
+                
+                self.srg_trackPageView()
             }
         }
     }
-    
-    // "once-only" closure
-    private lazy var trackPageView: Void = {
-        self.srg_trackPageView()
-    }()
 }
 
 // MARK: Types
