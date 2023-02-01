@@ -54,5 +54,6 @@
   "1.6.6-53": "- Update translations for BU or sport livestreams in livestreams tab. [RTR, RTS, SRF]\n- AppStore release.",
   "1.6.7-54": "- Update Radio SRF 1 logo. [SRF]\n- Program guide metrics.",
   "1.6.7-55": "- AppStore release.",
-  "1.6.8-56": "- Add show promotion representation and update highlight."
+  "1.6.8-56": "- Add show promotion representation and update highlight.",
+  "1.6.8-57": "- Fix program guide metrics.\n- Page metrics update."
 }
