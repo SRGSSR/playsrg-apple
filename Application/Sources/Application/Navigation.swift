@@ -77,6 +77,7 @@ extension UIViewController {
         present(pageViewController, animated: animated, completion: completion)
     }
     
+#if os(tvOS)
     func navigateToProgram(_ program: SRGProgram, in channel: SRGChannel, animated: Bool = true, completion: (() -> Void)? = nil) {
         cancellable = mediaPublisher(for: program, in: channel)?
             .receive(on: DispatchQueue.main)
@@ -84,13 +85,14 @@ extension UIViewController {
                 // No error banners displayed on tvOS yet
             } receiveValue: { [weak self] media in
                 let playAnalyticsClickEvent = media.contentType == .livestream ?
-                AnalyticsClickEvent.tvGuidePlayLivestream(program: program, channel: channel) :
+                AnalyticsClickEvent.tvGuidePlayLivestream(program: program, channel: channel, source: .grid) :
                 AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
                 let mediaAnalyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid)
                 
                 self?.navigateToMedia(media, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, from: program, animated: animated, completion: completion)
             }
     }
+#endif
     
     func navigateToSection(_ section: Content.Section, filter: SectionFiltering?, animated: Bool = true, completion: (() -> Void)? = nil) {
         let sectionViewController = SectionViewController(section: section, filter: filter)

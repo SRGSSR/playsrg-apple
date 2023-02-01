@@ -212,25 +212,34 @@ final class ProgramViewModel: ObservableObject {
     
     var watchFromStartButtonProperties: ButtonProperties? {
         guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
+        
+        let data = self.data
+        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel) : nil
         return ButtonProperties(
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
-                if HistoryCanResumePlaybackForMedia(media) {
+                if HistoryCanResumePlaybackForMedia(media) && HistoryPlaybackProgressForMedia(media) != 0 {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
                                                             message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
+                        analyticsClickEvent?.send()
+                        
                         tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
+                        analyticsClickEvent?.send()
+                        
                         tabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
                     tabBarController.play_top.present(alertController, animated: true, completion: nil)
                 }
                 else {
+                    analyticsClickEvent?.send()
+                    
                     tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                 }
             }

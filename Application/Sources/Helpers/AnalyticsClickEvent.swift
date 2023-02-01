@@ -36,22 +36,27 @@ struct AnalyticsClickEvent {
         )
     }
     
-    static func tvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel) -> AnalyticsClickEvent {
+    enum TvGuidePlaySource: String {
+        case infoBox = "InfoBox"
+        case grid = "Grid"
+    }
+    
+    static func tvGuidePlayLivestream(program: SRGProgram, channel: SRGChannel, source: TvGuidePlaySource = .infoBox) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayLivestream",
             value1: PageId.tvGuide.rawValue,
             value2: channel.title,
-            value3: "InfoBox",
+            value3: source.rawValue,
             value4: program.mediaURN
         )
     }
     
-    static func tvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel) -> AnalyticsClickEvent {
+    static func tvGuidePlayMedia(media: SRGMedia, programIsLive: Bool, channel: SRGChannel, source: TvGuidePlaySource = .infoBox) -> AnalyticsClickEvent {
         return Self(
             name: "TvGuidePlayMedia",
             value1: PageId.tvGuide.rawValue,
             value2: media.urn,
-            value3: "InfoBox",
+            value3: source.rawValue,
             value4: programIsLive ? channel.title : nil
         )
     }
