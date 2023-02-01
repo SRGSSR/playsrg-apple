@@ -148,7 +148,7 @@ protocol SectionProperties {
     /// Analytics information
     var analyticsTitle: String? { get }
     var analyticsLevels: [String]? { get }
-    var analyticsDeletionHiddenEventTitle: String? { get }
+    func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent?
     
     /// Properties for section displayed as a row
     var rowHighlight: Highlight? { get }
@@ -320,14 +320,14 @@ private extension Content {
             }
         }
         
-        var analyticsDeletionHiddenEventTitle: String? {
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
             switch presentation.type {
             case .favoriteShows:
-                return AnalyticsTitle.favoriteRemove.rawValue
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
             case .watchLater:
-                return AnalyticsTitle.watchLaterRemove.rawValue
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
             case .continueWatching:
-                return AnalyticsTitle.historyRemove.rawValue
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
             default:
                 return nil
             }
@@ -677,23 +677,6 @@ private extension Content {
             }
         }
         
-        var analyticsDeletionHiddenEventTitle: String? {
-            switch configuredSection {
-            case .favoriteShows, .radioFavoriteShows:
-                return AnalyticsTitle.favoriteRemove.rawValue
-            case .radioWatchLater, .watchLater:
-                return AnalyticsTitle.watchLaterRemove.rawValue
-            case .history, .radioResumePlayback:
-                return AnalyticsTitle.historyRemove.rawValue
-#if os(iOS)
-            case .downloads:
-                return AnalyticsTitle.downloadRemove.rawValue
-#endif
-            default:
-                return nil
-            }
-        }
-        
         var analyticsLevels: [String]? {
             switch configuredSection {
             case let .show(show):
@@ -729,6 +712,23 @@ private extension Content {
 #if os(iOS)
             case .downloads, .notifications:
                 return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.user.rawValue]
+#endif
+            default:
+                return nil
+            }
+        }
+        
+        func analyticsDeletionHiddenEvent(source: AnalyticsListSource) -> AnalyticsHiddenEvent? {
+            switch configuredSection {
+            case .favoriteShows, .radioFavoriteShows:
+                return AnalyticsHiddenEvent.favorite(action: .remove, source: source, urn: nil)
+            case .radioWatchLater, .watchLater:
+                return AnalyticsHiddenEvent.watchLater(action: .remove, source: source, urn: nil)
+            case .history, .radioResumePlayback:
+                return AnalyticsHiddenEvent.historyRemove(source: source, urn: nil)
+#if os(iOS)
+            case .downloads:
+                return AnalyticsHiddenEvent.download(action: .remove, source: source, urn: nil)
 #endif
             default:
                 return nil

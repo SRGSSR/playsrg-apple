@@ -191,10 +191,10 @@ final class ProgramViewModel: ObservableObject {
             return { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.TvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel).send()
                     }
                     else {
-                        AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
                     }
                 }
                 
@@ -248,11 +248,8 @@ final class ProgramViewModel: ObservableObject {
             WatchLaterToggleMedia(media) { added, error in
                 guard error == nil else { return }
                 
-                let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.button.rawValue
-                labels.value = media.urn
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+                let action = added ? .add : .remove as AnalyticsListAction
+                AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
                 
                 self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, progress: self.mediaData.progress)
             }
@@ -500,11 +497,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                 Banner.calendarEventAdded(withTitle: title)
                 
                 if let channel = self.channel {
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.button.rawValue
-                    labels.value = channel.urn
-                    labels.extraValue1 = channel.title
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.calendarAdd.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.calendarEventAdd(channel: channel).send()
                 }
             }
         }

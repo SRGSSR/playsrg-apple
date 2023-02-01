@@ -8,11 +8,11 @@
 
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
-#import "AnalyticsConstants.h"
 #import "History.h"
 #import "NavigationController.h"
 #import "NSBundle+PlaySRG.h"
 #import "NSString+PlaySRG.h"
+#import "PlaySRG-Swift.h"
 #import "UIColor+PlaySRG.h"
 #import "UIWindow+PlaySRG.h"
 #import "WebViewController.h"
@@ -45,7 +45,7 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
-
+    
     UITapGestureRecognizer *gestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(manageAccount:)];
     [self addGestureRecognizer:gestureRecognizer];
 }
@@ -163,9 +163,7 @@
         [identityService showAccountView];
     }
     else if ([identityService loginWithEmailAddress:[NSUserDefaults.standardUserDefaults stringForKey:PlaySRGSettingLastLoggedInEmailAddress]]) {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.type = AnalyticsTypeActionDisplayLogin;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+        [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionDisplayLogin] send];
     }
 }
 

@@ -323,7 +323,7 @@ final class SectionViewController: UIViewController {
     @objc private func shareContent(_ barButtonItem: UIBarButtonItem) {
         guard let sharingItem = model.configuration.properties.sharingItem else { return }
         
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .button)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .button)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController

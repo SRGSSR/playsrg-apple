@@ -7,7 +7,6 @@
 #import "PushService.h"
 #import "PushService+Private.h"
 
-#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "PlaySRG-Swift.h"
@@ -114,9 +113,9 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         }
     }
     if (hostSubDomains.count == 4
-            && [hostSubDomains.firstObject isEqualToString:@"intlayer"]
-            && [hostSubDomains[2] isEqualToString:@"srf"]
-            && [hostSubDomains.lastObject isEqualToString:@"ch"]) {
+        && [hostSubDomains.firstObject isEqualToString:@"intlayer"]
+        && [hostSubDomains[2] isEqualToString:@"srf"]
+        && [hostSubDomains.lastObject isEqualToString:@"ch"]) {
         if ([hostSubDomains[1] isEqualToString:@"production"]) {
             environmentIdentifier = @"prod";
         }
@@ -291,30 +290,33 @@ NSString * const PushServiceEnabledKey = @"PushServiceEnabled";
         NSInteger startTime = [userInfo[@"startTime"] integerValue];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openMediaWithURN:mediaURN startTime:startTime channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = userInfo[@"show"] ?: AnalyticsSourceNotificationPush;
-            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionPlayMedia;
-            labels.value = mediaURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+            [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionPlayMedia
+                                                         from:AnalyticsNotificationFromOperatingSystem
+                                                          uid:mediaURN
+                                               overrideSource:userInfo[@"show"]
+                                                 overrideType:userInfo[@"type"]]
+             send];
         }];
     }
     else if (userInfo[@"show"]) {
         NSString *showURN = userInfo[@"show"];
         SceneDelegate *sceneDelegate = UIApplication.sharedApplication.mainSceneDelegate;
         [sceneDelegate openShowWithURN:showURN channelUid:channelUid fromPushNotification:YES completionBlock:^{
-            SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-            labels.source = AnalyticsSourceNotificationPush;
-            labels.type = userInfo[@"type"] ?: AnalyticsTypeActionDisplayShow;
-            labels.value = showURN;
-            [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+            [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionDisplayShow
+                                                         from:AnalyticsNotificationFromOperatingSystem
+                                                          uid:showURN
+                                               overrideSource:nil
+                                                 overrideType:userInfo[@"type"]]
+             send];
         }];
     }
     else {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceNotificationPush;
-        labels.type = userInfo[@"type"] ?: AnalyticsTypeActionNotificationAlert;
-        labels.value = notificationContent.body;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleNotificationPushOpen labels:labels];
+        [[AnalyticsHiddenEventObjC notificationWithAction:AnalyticsNotificationActionAlert
+                                                     from:AnalyticsNotificationFromOperatingSystem
+                                                      uid:notificationContent.body
+                                           overrideSource:nil
+                                             overrideType:userInfo[@"type"]]
+         send];
     }
     completionHandler();
 }

@@ -110,7 +110,7 @@ final class ProgramGuideViewController: UIViewController {
     
     @objc private func toggleLayout(_ sender: AnyObject) {
         func toggle(to layout: ProgramGuideLayout) {
-            AnalyticsClickEvent.TvGuideChangeLayout(to: layout).send()
+            AnalyticsClickEvent.tvGuideChangeLayout(to: layout).send()
             setLayout(layout, animated: true)
             ApplicationSettingSetProgramGuideRecentlyUsedLayout(layout)
         }

@@ -48,15 +48,11 @@ extension UIViewController {
                 .sink { upcomingMedia in
                     guard let upcomingMedia else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.automatic.rawValue
-                    labels.type = AnalyticsType.actionDisplay.rawValue
-                    labels.value = upcomingMedia.urn
-                    
-                    if let playlist = controller.playlistDataSource as? Playlist {
-                        labels.extraValue1 = playlist.recommendationUid
-                    }
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.continuousPlayback.rawValue, labels: labels)
+                    let playlist = controller.playlistDataSource as? Playlist
+                    AnalyticsHiddenEvent.continuousPlayback(action: .display,
+                                                            mediaUrn: upcomingMedia.urn,
+                                                            recommendationUid: playlist?.recommendationUid)
+                    .send()
                 }
                 .store(in: &cancellables)
             
@@ -88,8 +84,8 @@ extension UIViewController {
                 // No error banners displayed on tvOS yet
             } receiveValue: { [weak self] media in
                 let playAnalyticsClickEvent = media.contentType == .livestream ?
-                AnalyticsClickEvent.TvGuidePlayLivestream(program: program, channel: channel) :
-                AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
+                AnalyticsClickEvent.tvGuidePlayLivestream(program: program, channel: channel) :
+                AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: (program.startDate...program.endDate).contains(Date()), channel: channel)
                 let mediaAnalyticsClickEvent = AnalyticsClickEvent.tvGuideOpenInfoBox(program: program, programGuideLayout: .grid)
                 
                 self?.navigateToMedia(media, mediaAnalyticsClickEvent: mediaAnalyticsClickEvent, playAnalyticsClickEvent: playAnalyticsClickEvent, from: program, animated: animated, completion: completion)
@@ -112,7 +108,7 @@ extension UIViewController {
         textViewController.modalPresentationStyle = .overFullScreen
         present(textViewController, animated: animated, completion: completion)
     }
-
+    
     private func mediaPublisher(for program: SRGProgram, in channel: SRGChannel) -> AnyPublisher<SRGMedia, Error>? {
         if program.play_contains(Date()) {
             return SRGDataProvider.current!.tvLivestreams(for: channel.vendor)
@@ -169,7 +165,7 @@ func navigateToText(_ text: String, animated: Bool = true) {
 }
 
 #endif
-    
+
 #if os(iOS)
 extension UIViewController {
     @objc func navigateToNotification(_ notification: UserNotification, animated: Bool = true) {
@@ -185,11 +181,12 @@ extension UIViewController {
                 } receiveValue: { [weak self] media in
                     guard let self else { return }
                     self.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: animated) { _ in
-                        let labels = SRGAnalyticsHiddenEventLabels()
-                        labels.source = notification.showURN ?? AnalyticsSource.notification.rawValue
-                        labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionPlayMedia.rawValue
-                        labels.value = mediaUrn
-                        SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+                        AnalyticsHiddenEvent.notification(action: .playMedia,
+                                                          from: .application,
+                                                          uid: mediaUrn,
+                                                          overrideSource: notification.showURN,
+                                                          overrideType: UserNotificationTypeString(notification.type))
+                        .send()
                     }
                 }
         }
@@ -205,19 +202,19 @@ extension UIViewController {
                     let showViewController = SectionViewController.showViewController(for: show)
                     navigationController.pushViewController(showViewController, animated: animated)
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.notification.rawValue
-                    labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionDisplayShow.rawValue
-                    labels.value = showUrn
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.notification(action: .displayShow,
+                                                      from: .application,
+                                                      uid: showUrn,
+                                                      overrideType: UserNotificationTypeString(notification.type))
+                    .send()
                 }
         }
         else {
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.notification.rawValue
-            labels.type = UserNotificationTypeString(notification.type) ?? AnalyticsType.actionNotificationAlert.rawValue
-            labels.value = notification.body
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.notificationOpen.rawValue, labels: labels)
+            AnalyticsHiddenEvent.notification(action: .alert,
+                                              from: .application,
+                                              uid: notification.body,
+                                              overrideType: UserNotificationTypeString(notification.type))
+            .send()
         }
     }
     

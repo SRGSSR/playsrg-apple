@@ -6,7 +6,6 @@
 
 #import "AppDelegate.h"
 
-#import "AnalyticsConstants.h"
 #import "ApplicationConfiguration.h"
 #import "ApplicationSettings.h"
 #import "ApplicationSettingsConstants.h"
@@ -361,32 +360,24 @@ static void *s_kvoContext = &s_kvoContext;
 {
     SRGMedia *media = notification.userInfo[SRGLetterboxMediaKey];
     if (media) {
-        SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-        labels.source = AnalyticsSourceAutomatic;
-        labels.type = AnalyticsTypeActionPlayMedia;
-        labels.value = media.URN;
-        
         SRGLetterboxController *letterboxController = notification.object;
         Playlist *playlist = [letterboxController.playlistDataSource isKindOfClass:Playlist.class] ? (Playlist *)letterboxController.playlistDataSource : nil;
-        labels.extraValue1 = playlist.recommendationUid;
-        [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleContinuousPlayback labels:labels];
+        
+        [[AnalyticsHiddenEventObjC continuousPlaybackWithAction:AnalyticsContiniousPlaybackActionPlayAutomatic
+                                                       mediaUrn:media.URN
+                                              recommendationUid:playlist.recommendationUid]
+         send];
     }
 }
 
 - (void)userDidCancelLogin:(NSNotification *)notification
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionCancelLogin;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionCancelLogin] send];
 }
 
 - (void)userDidLogin:(NSNotification *)notification
 {
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionLogin;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    [[AnalyticsHiddenEventObjC identityWithAction:AnalyticsIdentityActionLogin] send];
 }
 
 - (void)didUpdateAccount:(NSNotification *)notification
@@ -411,10 +402,8 @@ static void *s_kvoContext = &s_kvoContext;
         });
     }
     
-    SRGAnalyticsHiddenEventLabels *labels = [[SRGAnalyticsHiddenEventLabels alloc] init];
-    labels.source = unexpectedLogout ? AnalyticsSourceAutomatic : AnalyticsSourceButton;
-    labels.type = AnalyticsTypeActionLogout;
-    [SRGAnalyticsTracker.sharedTracker trackHiddenEventWithName:AnalyticsTitleIdentity labels:labels];
+    AnalyticsIdentityAction action = unexpectedLogout ? AnalyticsIdentityActionUnexpectedLogout : AnalyticsIdentityActionLogout;
+    [[AnalyticsHiddenEventObjC identityWithAction:action] send];
 }
 
 #pragma mark KVO
