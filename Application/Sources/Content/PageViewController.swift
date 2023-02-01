@@ -44,9 +44,11 @@ final class PageViewController: UIViewController {
 #endif
     }
     
+    private var analyticsPageViewTracked = false
+    
     private static func snapshot(from state: PageViewModel.State) -> NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item> {
         var snapshot = NSDiffableDataSourceSnapshot<PageViewModel.Section, PageViewModel.Item>()
-        if case let .loaded(rows: rows) = state {
+        if case let .loaded(rows: rows, _) = state {
             for row in rows {
                 snapshot.appendSections([row.section])
                 snapshot.appendItems(row.items, toSection: row.section)
@@ -163,6 +165,7 @@ final class PageViewController: UIViewController {
         
         model.$state
             .sink { [weak self] state in
+                self?.trackPageView(state: state)
                 self?.reloadData(for: state)
             }
             .store(in: &cancellables)
@@ -198,9 +201,9 @@ final class PageViewController: UIViewController {
         switch state {
         case .loading:
             emptyContentView.content = EmptyContentView(state: .loading)
-        case let .failed(error: error):
+        case let .failed(error: error, _):
             emptyContentView.content = EmptyContentView(state: .failed(error: error))
-        case let .loaded(rows: rows):
+        case let .loaded(rows: rows, _):
             emptyContentView.content = rows.isEmpty ? EmptyContentView(state: .empty(type: .generic)) : nil
         }
         
@@ -253,6 +256,21 @@ final class PageViewController: UIViewController {
         refreshTriggered = true
     }
 #endif
+    
+    private func trackPageView(state: PageViewModel.State) {
+        switch state {
+        case .loading:
+            break
+        case let .failed(_, pageUid), let .loaded(_, pageUid):
+            guard !self.analyticsPageViewTracked else { return }
+            self.analyticsPageViewTracked = true
+            
+            SRGAnalyticsTracker.shared.trackPageView(withTitle: model.analyticsPageViewTitle,
+                                                     levels: model.analyticsPageViewLevels,
+                                                     labels: model.analyticsPageViewLabels(pageUid: pageUid),
+                                                     fromPushNotification: false)
+        }
+    }
 }
 
 // MARK: Types
@@ -459,34 +477,6 @@ extension PageViewController: PlayApplicationNavigation {
         }
     }
 }
-
-#endif
-
-extension PageViewController: SRGAnalyticsViewTracking {
-    var srg_pageViewTitle: String {
-        switch model.id {
-        case .video, .audio, .live:
-            return AnalyticsPageTitle.home.rawValue
-        case let .topic(topic):
-            return topic.title
-        }
-    }
-    
-    var srg_pageViewLevels: [String]? {
-        switch model.id {
-        case .video:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue]
-        case let .audio(channel: channel):
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.audio.rawValue, channel.name]
-        case .live:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.live.rawValue]
-        case .topic:
-            return [AnalyticsPageLevel.play.rawValue, AnalyticsPageLevel.video.rawValue, AnalyticsPageLevel.topic.rawValue]
-        }
-    }
-}
-
-#if os(iOS)
 
 extension PageViewController: ShowAccessCellActions {
     func openShowAZ() {
