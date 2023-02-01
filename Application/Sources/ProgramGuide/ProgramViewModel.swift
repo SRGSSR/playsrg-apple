@@ -220,7 +220,7 @@ final class ProgramViewModel: ObservableObject {
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
-                if HistoryCanResumePlaybackForMedia(media) {
+                if HistoryCanResumePlaybackForMedia(media) && HistoryPlaybackProgressForMedia(media) != 0 {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
                                                             message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
                                                             preferredStyle: .alert)
