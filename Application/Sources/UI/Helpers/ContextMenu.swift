@@ -73,7 +73,7 @@ private extension ContextMenu {
     private static let popoverPresentationDelegate = ActivityPopoverPresentationDelegate()
     
     private static func shareItem(_ sharingItem: SharingItem, in viewController: UIViewController) {
-        let activityViewController = UIActivityViewController(sharingItem: sharingItem, source: .contextMenu)
+        let activityViewController = UIActivityViewController(sharingItem: sharingItem, from: .contextMenu)
         activityViewController.modalPresentationStyle = .popover
         
         let popoverPresentationController = activityViewController.popoverPresentationController
@@ -137,12 +137,8 @@ extension ContextMenu {
                 WatchLaterToggleMedia(media) { added, error in
                     guard error == nil else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.contextMenu.rawValue
-                    labels.value = media.urn
-                    
-                    let name = added ? AnalyticsTitle.watchLaterAdd.rawValue : AnalyticsTitle.watchLaterRemove.rawValue
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                    let action = added ? .add : .remove as AnalyticsListAction
+                    AnalyticsHiddenEvent.watchLater(action: action, source: .contextMenu, urn: media.urn).send()
                     
                     Banner.showWatchLaterAdded(added, forItemWithName: media.title)
                 }
@@ -163,11 +159,7 @@ extension ContextMenu {
                 HistoryRemoveMedias([media]) { error in
                     guard error == nil else { return }
                     
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.contextMenu.rawValue
-                    labels.value = media.urn
-                    
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.historyRemove.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.historyRemove(source: .contextMenu, urn: media.urn).send()
                 }
             }
         }
@@ -201,12 +193,8 @@ extension ContextMenu {
                     Download.add(for: media)
                 }
                 
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.contextMenu.rawValue
-                labels.value = media.urn
-                
-                let name = (download == nil) ? AnalyticsTitle.downloadAdd.rawValue : AnalyticsTitle.downloadRemove.rawValue
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                let action = (download == nil) ? .add : .remove as AnalyticsListAction
+                AnalyticsHiddenEvent.download(action: action, source: .contextMenu, urn: media.urn).send()
                 
                 Banner.showDownload(download == nil, forItemWithName: media.title)
             }
@@ -279,12 +267,8 @@ extension ContextMenu {
             DispatchQueue.main.asyncAfter(deadline: .now() + Self.actionDelay) {
                 FavoritesToggleShow(show)
                 
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.contextMenu.rawValue
-                labels.value = show.urn
-                
-                let name = !isFavorite ? AnalyticsTitle.favoriteAdd.rawValue : AnalyticsTitle.favoriteRemove.rawValue
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: name, labels: labels)
+                let action = !isFavorite ? .add : .remove as AnalyticsListAction
+                AnalyticsHiddenEvent.favorite(action: action, source: .contextMenu, urn: show.urn).send()
                 
                 Banner.showFavorite(!isFavorite, forItemWithName: show.title)
             }

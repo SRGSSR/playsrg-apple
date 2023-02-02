@@ -70,11 +70,8 @@ final class MediaDetailViewModel: ObservableObject {
         WatchLaterToggleMedia(media) { added, error in
             guard error == nil else { return }
             
-            let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.button.rawValue
-            labels.value = media.urn
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+            let action = added ? .add : .remove as AnalyticsListAction
+            AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
             
             self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, relatedMedias: self.mediaData.relatedMedias)
         }

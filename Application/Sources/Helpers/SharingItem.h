@@ -4,7 +4,6 @@
 //  License information is available from the LICENSE file.
 //
 
-#import "AnalyticsConstants.h"
 
 @import CoreMedia;
 @import SRGDataProviderModel;
@@ -24,6 +23,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+typedef NS_ENUM(NSInteger, SharingItemFrom) {
+    SharingItemFromButton,
+    SharingItemFromContextMenu
+};
+
 @interface UIActivityViewController (SharingItem)
 
 /**
@@ -32,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @param source The source of the action.
  */
 - (instancetype)initWithSharingItem:(SharingItem *)sharingItem
-                             source:(AnalyticsSource)source
+                               from:(SharingItemFrom)sharingItemFrom
                 withCompletionBlock:(nullable void (^)(UIActivityType activityType))completionBlock;
 
 @end

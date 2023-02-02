@@ -92,10 +92,8 @@ final class SectionViewModel: ObservableObject {
         properties.remove(Array(selectedItems))
         selectedItems.removeAll()
         
-        if let analyticsDeletionHiddenEventTitle = properties.analyticsDeletionHiddenEventTitle {
-            let labels = SRGAnalyticsHiddenEventLabels()
-            labels.source = AnalyticsSource.selection.rawValue
-            SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsDeletionHiddenEventTitle, labels: labels)
+        if let analyticsDeletionHiddenEvent = properties.analyticsDeletionHiddenEvent(source: .selection) {
+            analyticsDeletionHiddenEvent.send()
         }
     }
     

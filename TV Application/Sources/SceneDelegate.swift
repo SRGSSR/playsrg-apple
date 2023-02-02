@@ -125,8 +125,7 @@ final class SceneDelegate: UIResponder {
                 .sink { _ in
                 } receiveValue: { media in
                     navigateToMedia(media)
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.openURL.rawValue,
-                                                                labels: action.analyticsLabels)
+                    action.analyticsHiddenEvent.send()
                 }
                 .store(in: &cancellables)
         case .show:
@@ -135,8 +134,7 @@ final class SceneDelegate: UIResponder {
                 .sink { _ in
                 } receiveValue: { show in
                     navigateToShow(show)
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.openURL.rawValue,
-                                                                labels: action.analyticsLabels)
+                    action.analyticsHiddenEvent.send()
                 }
                 .store(in: &cancellables)
         default:

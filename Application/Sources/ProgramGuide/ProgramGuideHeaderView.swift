@@ -94,11 +94,11 @@ struct ProgramGuideHeaderView: View {
                 }
 #endif
                 ExpandingButton(label: NSLocalizedString("Now", comment: "Now button in program guide")) {
-                    AnalyticsClickEvent.TvGuideNow().send()
+                    AnalyticsClickEvent.tvGuideNow().send()
                     model.switchToNow()
                 }
                 ExpandingButton(label: NSLocalizedString("Tonight", comment: "Tonight button in program guide")) {
-                    AnalyticsClickEvent.TvGuideTonight().send()
+                    AnalyticsClickEvent.tvGuideTonight().send()
                     model.switchToTonight()
                 }
             }
@@ -116,7 +116,7 @@ struct ProgramGuideHeaderView: View {
         var body: some View {
             HStack(spacing: constant(iOS: 10, tvOS: 40)) {
                 ExpandingButton(icon: "chevron_previous", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Previous day", comment: "Previous day button label in program guide")) {
-                    AnalyticsClickEvent.TvGuidePreviousDay().send()
+                    AnalyticsClickEvent.tvGuidePreviousDay().send()
                     model.switchToPreviousDay()
                 }
                 .frame(width: Self.buttonWidth)
@@ -130,7 +130,7 @@ struct ProgramGuideHeaderView: View {
 #endif
                 
                 ExpandingButton(icon: "chevron_next", accessibilityLabel: PlaySRGAccessibilityLocalizedString("Next day", comment: "Next day button label in program guide")) {
-                    AnalyticsClickEvent.TvGuideNextDay().send()
+                    AnalyticsClickEvent.tvGuideNextDay().send()
                     model.switchToNextDay()
                 }
                 .frame(width: Self.buttonWidth)

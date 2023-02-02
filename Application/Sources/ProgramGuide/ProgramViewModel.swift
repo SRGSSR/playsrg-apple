@@ -191,10 +191,10 @@ final class ProgramViewModel: ObservableObject {
             return { [self] in
                 if let data {
                     if media.contentType == .livestream {
-                        AnalyticsClickEvent.TvGuidePlayLivestream(program: data.program, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayLivestream(program: data.program, channel: data.channel).send()
                     }
                     else {
-                        AnalyticsClickEvent.TvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
+                        AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: isLive, channel: data.channel).send()
                     }
                 }
                 
@@ -212,25 +212,34 @@ final class ProgramViewModel: ObservableObject {
     
     var watchFromStartButtonProperties: ButtonProperties? {
         guard isLive, let media, media.blockingReason(at: Date()) == .none else { return nil }
+        
+        let data = self.data
+        let analyticsClickEvent = data != nil ? AnalyticsClickEvent.tvGuidePlayMedia(media: media, programIsLive: true, channel: data!.channel) : nil
         return ButtonProperties(
             icon: "start_over",
             label: NSLocalizedString("Watch from start", comment: "Button to watch some program from the start"),
             action: {
                 guard let tabBarController = UIApplication.shared.mainTabBarController else { return }
-                if HistoryCanResumePlaybackForMedia(media) {
+                if HistoryCanResumePlaybackForMedia(media) && HistoryPlaybackProgressForMedia(media) != 0 {
                     let alertController = UIAlertController(title: NSLocalizedString("Watch from start?", comment: "Resume playback alert title"),
                                                             message: NSLocalizedString("You already played this content.", comment: "Resume playback alert explanation"),
                                                             preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Resume", comment: "Alert choice to resume playback"), style: .default, handler: { _ in
+                        analyticsClickEvent?.send()
+                        
                         tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Watch from start", comment: "Alert choice to watch content from start"), style: .default, handler: { _ in
+                        analyticsClickEvent?.send()
+                        
                         tabBarController.play_presentMediaPlayer(with: media, position: .default, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                     }))
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Title of a cancel button"), style: .cancel, handler: nil))
                     tabBarController.play_top.present(alertController, animated: true, completion: nil)
                 }
                 else {
+                    analyticsClickEvent?.send()
+                    
                     tabBarController.play_presentMediaPlayer(with: media, position: nil, airPlaySuggestions: true, fromPushNotification: false, animated: true, completion: nil)
                 }
             }
@@ -248,11 +257,8 @@ final class ProgramViewModel: ObservableObject {
             WatchLaterToggleMedia(media) { added, error in
                 guard error == nil else { return }
                 
-                let analyticsTitle = added ? AnalyticsTitle.watchLaterAdd : AnalyticsTitle.watchLaterRemove
-                let labels = SRGAnalyticsHiddenEventLabels()
-                labels.source = AnalyticsSource.button.rawValue
-                labels.value = media.urn
-                SRGAnalyticsTracker.shared.trackHiddenEvent(withName: analyticsTitle.rawValue, labels: labels)
+                let action = added ? .add : .remove as AnalyticsListAction
+                AnalyticsHiddenEvent.watchLater(action: action, source: .button, urn: media.urn).send()
                 
                 self.mediaData = MediaData(media: media, watchLaterAllowedAction: added ? .remove : .add, progress: self.mediaData.progress)
             }
@@ -500,11 +506,7 @@ private final class EventEditViewDelegateObject: NSObject, EKEventEditViewDelega
                 Banner.calendarEventAdded(withTitle: title)
                 
                 if let channel = self.channel {
-                    let labels = SRGAnalyticsHiddenEventLabels()
-                    labels.source = AnalyticsSource.button.rawValue
-                    labels.value = channel.urn
-                    labels.extraValue1 = channel.title
-                    SRGAnalyticsTracker.shared.trackHiddenEvent(withName: AnalyticsTitle.calendarAdd.rawValue, labels: labels)
+                    AnalyticsHiddenEvent.calendarEventAdd(channel: channel).send()
                 }
             }
         }
