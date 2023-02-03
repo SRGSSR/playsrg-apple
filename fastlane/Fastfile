@@ -1853,6 +1853,7 @@ def publish_on_github_pages(output_directory, releases_directory)
   branch_name = git_branch_name
 
   Dir.chdir('..') do
+    sh 'git branch -Dq gh-pages &>/dev/null || true'
     sh 'git checkout --orphan gh-pages'
     sh 'git reset --hard'
     sh "mv \"#{output_directory}/index.html\" ./"
