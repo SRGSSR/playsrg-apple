@@ -1184,7 +1184,7 @@ end
 
 def build_number_for_version(platform, version)
   json = what_s_new_for_beta_json(platform)
-  tag_version = json.keys.select { |key| key.start_with?(version) }.last
+  tag_version = json.keys.select { |key| marketing_version_from_tag_version(key) == version }.last
   tag_version ? build_number_from_tag_version(tag_version) : '999999'
 end
 
