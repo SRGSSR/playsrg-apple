@@ -14,7 +14,7 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 16, tvOS: 24)
+    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
     
     init(show: SRGShow) {
         _show = .constant(show)
@@ -43,6 +43,10 @@ struct ShowHeaderView: View {
             return (horizontalSizeClass == .compact) ? .center : .leading
         }
         
+        private var yOffset: CGFloat {
+            return (horizontalSizeClass == .compact) ? -30 : 0
+        }
+        
         var body: some View {
             Stack(direction: direction, alignment: alignment, spacing: 0) {
                 ImageView(source: model.imageUrl)
@@ -54,6 +58,7 @@ struct ShowHeaderView: View {
                     .padding(.horizontal, constant(iOS: 16, tvOS: 80))
                     .padding(.vertical)
                     .frame(maxWidth: .infinity)
+                    .offset(y: yOffset)
             }
             .padding(.bottom, constant(iOS: 20, tvOS: 50))
             .focusable()
@@ -67,6 +72,9 @@ struct ShowHeaderView: View {
         var body: some View {
             if horizontalSizeClass == .regular {
                 LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
+            }
+            else {
+                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.5, y: 0.85), endPoint: .bottom)
             }
         }
     }
@@ -88,7 +96,7 @@ struct ShowHeaderView: View {
                     // all lines it could.
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
-                    .foregroundColor(.srgGrayC7)
+                    .foregroundColor(.white)
                 HStack(spacing: 20) {
                     SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
 #if os(iOS)
