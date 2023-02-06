@@ -182,14 +182,17 @@ final class SettingsViewModel: ObservableObject {
     
     func removeHistory() {
         SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
+        AnalyticsHiddenEvent.historyRemove(source: .button, urn: nil).send()
     }
     
     func removeFavorites() {
         FavoritesRemoveShows(nil)
+        AnalyticsHiddenEvent.favorite(action: .remove, source: .button, urn: nil).send()
     }
     
     func removeWatchLaterItems() {
         SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
+        AnalyticsHiddenEvent.watchLater(action: .remove, source: .button, urn: nil).send()
     }
     
     func clearWebCache() {
