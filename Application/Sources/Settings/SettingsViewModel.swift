@@ -181,8 +181,10 @@ final class SettingsViewModel: ObservableObject {
 #endif
     
     func removeHistory() {
-        SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: nil)
-        AnalyticsHiddenEvent.historyRemove(source: .button, urn: nil).send()
+        SRGUserData.current?.history.discardHistoryEntries(withUids: nil, completionBlock: { error in
+            guard error == nil else { return }
+            AnalyticsHiddenEvent.historyRemove(source: .button, urn: nil).send()
+        })
     }
     
     func removeFavorites() {
@@ -191,8 +193,10 @@ final class SettingsViewModel: ObservableObject {
     }
     
     func removeWatchLaterItems() {
-        SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: nil)
-        AnalyticsHiddenEvent.watchLater(action: .remove, source: .button, urn: nil).send()
+        SRGUserData.current?.playlists.discardPlaylistEntries(withUids: nil, fromPlaylistWithUid: SRGPlaylistUid.watchLater.rawValue, completionBlock: { error in
+            guard error == nil else { return }
+            AnalyticsHiddenEvent.watchLater(action: .remove, source: .button, urn: nil).send()
+        })
     }
     
     func clearWebCache() {
