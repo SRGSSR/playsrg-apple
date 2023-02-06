@@ -14,7 +14,7 @@ struct ShowHeaderView: View {
     @Binding private(set) var show: SRGShow
     @StateObject private var model = ShowHeaderViewModel()
     
-    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 18, tvOS: 24)
+    fileprivate static let verticalSpacing: CGFloat = constant(iOS: 16, tvOS: 24)
     
     init(show: SRGShow) {
         _show = .constant(show)
@@ -80,9 +80,6 @@ struct ShowHeaderView: View {
         
         var body: some View {
             VStack(spacing: ShowHeaderView.verticalSpacing) {
-                if let broadcastInformation = model.broadcastInformation {
-                    Badge(text: broadcastInformation, color: Color(.play_green))
-                }
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
@@ -92,6 +89,18 @@ struct ShowHeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.srgGrayC7)
+                HStack(spacing: 20) {
+                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
+#if os(iOS)
+                    if model.isSubscriptionPossible {
+                        SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
+                    }
+#endif
+                }
+                .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                if let broadcastInformation = model.broadcastInformation {
+                    Badge(text: broadcastInformation, color: Color(.play_green))
+                }
                 if let lead = model.lead {
 #if os(iOS)
                     LeadView(lead)
@@ -109,15 +118,6 @@ struct ShowHeaderView: View {
                     .buttonStyle(TextButtonStyle(focused: isFocused))
 #endif
                 }
-                HStack(spacing: 20) {
-                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
-#if os(iOS)
-                    if model.isSubscriptionPossible {
-                        SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
-                    }
-#endif
-                }
-                .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
             }
         }
         
