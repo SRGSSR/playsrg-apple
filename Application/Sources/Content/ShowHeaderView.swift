@@ -35,33 +35,35 @@ struct ShowHeaderView: View {
         @ObservedObject var model: ShowHeaderViewModel
         @Environment(\.uiHorizontalSizeClass) private var horizontalSizeClass
         
-        private var direction: StackDirection {
-            return (horizontalSizeClass == .compact) ? .vertical : .horizontal
-        }
-        
-        private var alignment: StackAlignment {
-            return (horizontalSizeClass == .compact) ? .center : .leading
-        }
-        
-        private var yOffset: CGFloat {
-            return (horizontalSizeClass == .compact) ? -30 : 0
-        }
-        
         var body: some View {
-            Stack(direction: direction, alignment: alignment, spacing: 0) {
-                ImageView(source: model.imageUrl)
-                    .aspectRatio(16 / 9, contentMode: .fit)
-                    .overlay(ImageOverlay(horizontalSizeClass: horizontalSizeClass))
-                    .adaptiveMainFrame(for: horizontalSizeClass)
-                    .layoutPriority(1)
-                DescriptionView(model: model)
-                    .padding(.horizontal, constant(iOS: 16, tvOS: 80))
-                    .padding(.vertical)
-                    .frame(maxWidth: .infinity)
-                    .offset(y: yOffset)
+            if horizontalSizeClass == .compact {
+                VStack(alignment: .center, spacing: 0) {
+                    ImageView(source: model.imageUrl)
+                        .aspectRatio(16 / 9, contentMode: .fit)
+                        .overlay(ImageOverlay(horizontalSizeClass: .compact))
+                        .layoutPriority(1)
+                    DescriptionView(model: model, horizontalSizeClass: .compact)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                        .offset(y: -30)
+                }
+                .padding(.bottom, 20)
+                .focusable()
             }
-            .padding(.bottom, constant(iOS: 20, tvOS: 50))
-            .focusable()
+            else {
+                HStack(spacing: 0) {
+                    DescriptionView(model: model, horizontalSizeClass: .regular)
+                        .padding(.horizontal, 16)
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
+                    ImageView(source: model.imageUrl)
+                        .aspectRatio(16 / 9, contentMode: .fit)
+                        .overlay(ImageOverlay(horizontalSizeClass: .regular))
+                }
+                .padding(.bottom, constant(iOS: 20, tvOS: 50))
+                .focusable()
+            }
         }
     }
     
@@ -71,7 +73,7 @@ struct ShowHeaderView: View {
         
         var body: some View {
             if horizontalSizeClass == .regular {
-                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .trailing)
+                LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: .center, endPoint: .leading)
             }
             else {
                 LinearGradient(gradient: Gradient(colors: [.clear, .srgGray16]), startPoint: UnitPoint(x: 0.5, y: 0.85), endPoint: .bottom)
@@ -85,9 +87,14 @@ struct ShowHeaderView: View {
 #if os(tvOS)
         @State var isFocused = false
 #endif
+        let horizontalSizeClass: UIUserInterfaceSizeClass
+        
+        private var alignment: HorizontalAlignment {
+            return (horizontalSizeClass == .compact) ? .center : .leading
+        }
         
         var body: some View {
-            VStack(spacing: ShowHeaderView.verticalSpacing) {
+            VStack(alignment: alignment, spacing: ShowHeaderView.verticalSpacing) {
                 Text(model.title ?? "")
                     .srgFont(.H2)
                     .lineLimit(2)
@@ -169,21 +176,6 @@ struct ShowHeaderView: View {
             
             init(_ content: String) {
                 self.content = content
-            }
-        }
-    }
-}
-
-// MARK: Helpers
-
-private extension View {
-    func adaptiveMainFrame(for horizontalSizeClass: UIUserInterfaceSizeClass?) -> some View {
-        return Group {
-            if horizontalSizeClass == .compact {
-                self
-            }
-            else {
-                frame(height: constant(iOS: 200, tvOS: 400), alignment: .top)
             }
         }
     }
