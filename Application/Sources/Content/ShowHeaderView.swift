@@ -163,7 +163,7 @@ struct ShowHeaderView: View {
                 Text(content)
                     .srgFont(.body)
                     .lineLimit(6)
-                    .multilineTextAlignment(.center)
+                    .multilineTextAlignment(.leading)
                     .foregroundColor(.srgGray96)
             }
             
