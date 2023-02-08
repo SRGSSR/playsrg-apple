@@ -13,6 +13,9 @@ final class SectionViewModel: ObservableObject {
     let configuration: SectionViewModel.Configuration
     
     @Published private(set) var state: State = .loading
+#if os(iOS)
+    @Published private(set) var subscriptionStatus: UserDataPublishers.SubscriptionStatus = .unavailable
+#endif
     
     private let trigger = Trigger()
     private var selectedItems = Set<Content.Item>()
@@ -58,6 +61,14 @@ final class SectionViewModel: ObservableObject {
         }
         .receive(on: DispatchQueue.main)
         .assign(to: &$state)
+        
+#if os(iOS)
+        if let show = section.properties.subscriptionShow {
+            UserDataPublishers.subscriptionStatusPublisher(for: show)
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$subscriptionStatus)
+        }
+#endif
     }
     
     func loadMore() {
