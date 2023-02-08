@@ -112,7 +112,7 @@ final class ShowHeaderViewModel: ObservableObject {
         guard let show else { return }
         FavoritesToggleShow(show)
         
-        let action = isFavorite ? .add : .remove as AnalyticsListAction
+        let action = isFavorite ? .remove : .add as AnalyticsListAction
         AnalyticsHiddenEvent.favorite(action: action, source: .button, urn: show.urn).send()
         
 #if os(iOS)
@@ -125,7 +125,7 @@ final class ShowHeaderViewModel: ObservableObject {
         guard let show, FavoritesToggleSubscriptionForShow(show) else { return }
         
         let isSubscribed = (subscriptionStatus == .subscribed)
-        let action = isSubscribed ? .add : .remove as AnalyticsListAction
+        let action = isSubscribed ? .remove : .add as AnalyticsListAction
         AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
         
         Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
