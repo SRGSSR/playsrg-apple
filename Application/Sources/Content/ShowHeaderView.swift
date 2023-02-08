@@ -104,15 +104,8 @@ struct ShowHeaderView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
                     .foregroundColor(.white)
-                HStack(spacing: 20) {
-                    SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
-#if os(iOS)
-                    if model.isSubscriptionPossible {
-                        SimpleButton(icon: model.subscriptionIcon, label: model.subscriptionLabel, accessibilityLabel: model.subscriptionAccessibilityLabel, action: subscriptionAction)
-                    }
-#endif
-                }
-                .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
+                SimpleButton(icon: model.favoriteIcon, label: model.favoriteLabel, accessibilityLabel: model.favoriteAccessibilityLabel, action: favoriteAction)
+                    .alert(isPresented: $model.isFavoriteRemovalAlertDisplayed, content: favoriteRemovalAlert)
                 if let broadcastInformation = model.broadcastInformation {
                     Badge(text: broadcastInformation, color: Color(.play_green))
                 }
@@ -155,12 +148,6 @@ struct ShowHeaderView: View {
                          primaryButton: primaryButton,
                          secondaryButton: secondaryButton)
         }
-        
-#if os(iOS)
-        private func subscriptionAction() {
-            model.toggleSubscription()
-        }
-#endif
         
         /// Behavior: h-exp, v-hug
         private struct LeadView: View {

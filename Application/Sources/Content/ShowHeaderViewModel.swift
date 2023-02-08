@@ -14,7 +14,6 @@ final class ShowHeaderViewModel: ObservableObject {
     @Published var show: SRGShow?
     
     @Published private(set) var isFavorite = false
-    @Published private(set) var subscriptionStatus: UserDataPublishers.SubscriptionStatus = .unavailable
     
     @Published var isFavoriteRemovalAlertDisplayed = false
     
@@ -31,21 +30,6 @@ final class ShowHeaderViewModel: ObservableObject {
             .switchToLatest()
             .receive(on: DispatchQueue.main)
             .assign(to: &$isFavorite)
-        
-#if os(iOS)
-        // Drop initial values; relevant values are first assigned when the view appears
-        $show
-            .dropFirst()
-            .map { show in
-                guard let show else {
-                    return Just(UserDataPublishers.SubscriptionStatus.unavailable).eraseToAnyPublisher()
-                }
-                return UserDataPublishers.subscriptionStatusPublisher(for: show)
-            }
-            .switchToLatest()
-            .receive(on: DispatchQueue.main)
-            .assign(to: &$subscriptionStatus)
-#endif
     }
     
     var title: String? {
@@ -82,32 +66,6 @@ final class ShowHeaderViewModel: ObservableObject {
         return FavoritesIsSubscribedToShow(show)
     }
     
-#if os(iOS)
-    var isSubscriptionPossible: Bool {
-        return PushService.shared != nil && isFavorite
-    }
-    
-    var subscriptionIcon: String {
-        switch subscriptionStatus {
-        case .unavailable:
-            return "subscription_disabled"
-        case .unsubscribed:
-            return "subscription"
-        case .subscribed:
-            return "subscription_full"
-        }
-    }
-    
-    var subscriptionLabel: String {
-        switch subscriptionStatus {
-        case .unavailable, .unsubscribed:
-            return NSLocalizedString("Notify me", comment: "Subscription label to be notified in the show view")
-        case .subscribed:
-            return NSLocalizedString("Notified", comment: "Subscription label when notification enabled in the show view")
-        }
-    }
-#endif
-    
     func toggleFavorite() {
         guard let show else { return }
         FavoritesToggleShow(show)
@@ -119,18 +77,6 @@ final class ShowHeaderViewModel: ObservableObject {
         Banner.showFavorite(!isFavorite, forItemWithName: show.title)
 #endif
     }
-    
-#if os(iOS)
-    func toggleSubscription() {
-        guard let show, FavoritesToggleSubscriptionForShow(show) else { return }
-        
-        let isSubscribed = (subscriptionStatus == .subscribed)
-        let action = isSubscribed ? .remove : .add as AnalyticsListAction
-        AnalyticsHiddenEvent.subscription(action: action, source: .button, urn: show.urn).send()
-        
-        Banner.showSubscription(!isSubscribed, forItemWithName: show.title)
-    }
-#endif
 }
 
 // MARK: Accessibility
@@ -144,15 +90,4 @@ extension ShowHeaderViewModel {
             return PlaySRGAccessibilityLocalizedString("Add to favorites", comment: "Favorite label in the show view when a show can be favorited")
         }
     }
-    
-#if os(iOS)
-    var subscriptionAccessibilityLabel: String {
-        switch subscriptionStatus {
-        case .unavailable, .unsubscribed:
-            return PlaySRGAccessibilityLocalizedString("Enable notifications for show", comment: "Show subscription label")
-        case .subscribed:
-            return PlaySRGAccessibilityLocalizedString("Disable notifications for show", comment: "Show unsubscription label")
-        }
-    }
-#endif
 }
